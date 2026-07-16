@@ -1,664 +1,309 @@
 
-/* ==========================================================
-   JS-00
-   APPLICATION
-========================================================== */
+/* ==========================================================================
+   CTM PATH™ GUIDED JOURNEY™
+   JS-01
+   APPLICATION ENGINE
+   VERSION 1.0
+========================================================================== */
 
-/* ----------------------------------------------------------
-   JS-00.01
-   Application Object
------------------------------------------------------------ */
+"use strict";
+
+/* ==========================================================================
+   01. APPLICATION
+========================================================================== */
 
 const APP = {
 
     version : "1.0",
 
-    initialized : false,
+    currentScene : 1,
 
-    scrollPosition : 0,
+    totalScenes : 9,
 
-    currentSection : "",
-
-    animationDuration : 800
+    isTransitioning : false
 
 };
 
-/* ==========================================================
-   JS-01
-   CONSTANTS
-========================================================== */
+/* ==========================================================================
+   02. ENGINE
+========================================================================== */
 
-/* ----------------------------------------------------------
-   JS-01.01
-   Selectors
------------------------------------------------------------ */
+const ENGINE = {
 
-const SELECTORS = {
+    initialize(){
 
-    header :
+        SCENES.initialize();
 
-        document.querySelector(
+        EVENTS.initialize();
 
-            "#header"
-
-        ),
-
-    menuButton :
-
-        document.querySelector(
-
-            "#menuButton"
-
-        ),
-
-    navigation :
-
-        document.querySelector(
-
-            ".navigation"
-
-        ),
-
-    revealElements :
-
-        document.querySelectorAll(
-
-            ".reveal"
-
-        ),
-
-    hero :
-
-        document.querySelector(
-
-            "#hero"
-
-        )
+    }
 
 };
 
-/* ----------------------------------------------------------
-   JS-01.02
-   Classes
------------------------------------------------------------ */
+/* ==========================================================================
+   03. SCENE MANAGER
+========================================================================== */
 
-const CLASSES = {
+const SCENES = {
 
-    active :
+    list : [],
 
-        "active",
+    initialize(){
 
-    scrolled :
+        this.list = [
 
-        "scrolled"
+            ...document.querySelectorAll(
 
-};
+                ".scene"
 
-/* ==========================================================
-   JS-02
-   INITIALIZATION
-========================================================== */
+            )
 
-/* ----------------------------------------------------------
-   JS-02.01
-   Initialize Application
------------------------------------------------------------ */
+        ];
 
-function initializeApplication(){
+        this.show(
 
-    APP.initialized = true;
+            APP.currentScene
 
-    initializeNavigation();
+        );
 
-    initializeHero();
+    },
 
-    initializeRevealAnimations();
+    show(
 
-    registerEvents();
-
-}
-
-/* ----------------------------------------------------------
-   JS-02.02
-   DOM Ready
------------------------------------------------------------ */
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    initializeApplication
-
-);
-
-/* ==========================================================
-   JS-03
-   NAVIGATION
-========================================================== */
-
-/* ----------------------------------------------------------
-   JS-03.01
-   Initialize Navigation
------------------------------------------------------------ */
-
-function initializeNavigation(){
-
-    updateHeader();
-
-    highlightNavigation();
-
-}
-
-/* ----------------------------------------------------------
-   JS-03.02
-   Update Header
------------------------------------------------------------ */
-
-function updateHeader(){
-
-    if(
-
-        !SELECTORS.header
+        sceneNumber
 
     ){
 
-        return;
+        this.list.forEach(
 
-    }
+            scene =>{
 
-    if(
+                scene.classList.remove(
 
-        window.scrollY > 40
+                    "active"
 
-    ){
+                );
 
-        SELECTORS.header.classList.add(
-
-            CLASSES.scrolled
+            }
 
         );
 
-    }
+        const target = document.getElementById(
 
-    else{
+            "scene" +
 
-        SELECTORS.header.classList.remove(
+            String(sceneNumber)
 
-            CLASSES.scrolled
+            .padStart(
 
-        );
+                2,
 
-    }
+                "0"
 
-}
-
-/* ----------------------------------------------------------
-   JS-03.03
-   Highlight Navigation
------------------------------------------------------------ */
-
-function highlightNavigation(){
-
-    const links =
-
-        document.querySelectorAll(
-
-            '.navigation a'
+            )
 
         );
 
-    links.forEach(
+        if(
 
-        link=>{
+            target
 
-            link.addEventListener(
+        ){
 
-                'click',
+            target.classList.add(
 
-                ()=>{
-
-                    links.forEach(
-
-                        item=>item.classList.remove(
-
-                            CLASSES.active
-
-                        )
-
-                    );
-
-                    link.classList.add(
-
-                        CLASSES.active
-
-                    );
-
-                }
+                "active"
 
             );
 
         }
 
-    );
+    },
 
-}
+    next(){
 
-/* ==========================================================
-   JS-04
-   HERO
-========================================================== */
+        if(
 
-/* ----------------------------------------------------------
-   JS-04.01
-   Initialize Hero
------------------------------------------------------------ */
-
-function initializeHero(){
-
-    scrollIndicator();
-
-}
-
-/* ----------------------------------------------------------
-   JS-04.02
-   Scroll Indicator
------------------------------------------------------------ */
-
-function scrollIndicator(){
-
-    const button =
-
-        document.getElementById(
-
-            "beginJourney"
-
-        );
-
-    if(
-
-        !button
-
-    ){
-
-        return;
-
-    }
-
-    button.addEventListener(
-
-        "click",
-
-        function(
-
-            event
+            APP.isTransitioning
 
         ){
 
-            event.preventDefault();
-
-            const target =
-
-                document.querySelector(
-
-                    "#story"
-
-                );
-
-            if(
-
-                target
-
-            ){
-
-                target.scrollIntoView({
-
-                    behavior:"smooth"
-
-                });
-
-            }
+            return;
 
         }
 
-    );
+        if(
 
-}
+            APP.currentScene >=
 
-/* ==========================================================
-   JS-05
-   REVEAL ANIMATIONS
-========================================================== */
+            APP.totalScenes
 
-/* ----------------------------------------------------------
-   JS-05.01
-   Initialize
------------------------------------------------------------ */
+        ){
 
-function initializeRevealAnimations(){
-
-    revealOnScroll();
-
-}
-
-/* ----------------------------------------------------------
-   JS-05.02
-   Reveal
------------------------------------------------------------ */
-
-function revealOnScroll(){
-
-    const elements =
-
-        document.querySelectorAll(
-
-            ".reveal"
-
-        );
-
-    elements.forEach(
-
-        element=>{
-
-            const top =
-
-                element.getBoundingClientRect().top;
-
-            if(
-
-                top <
-
-                window.innerHeight - 120
-
-            ){
-
-                element.classList.add(
-
-                    "active"
-
-                );
-
-            }
+            return;
 
         }
 
-    );
+        APP.currentScene++;
 
-}
+        this.show(
 
-/* ==========================================================
-   JS-19
-   EVENT REGISTRATION
-========================================================== */
+            APP.currentScene
 
-/* ----------------------------------------------------------
-   JS-19.01
-   Register Events
------------------------------------------------------------ */
+        );
 
-function registerEvents(){
+    },
 
-    window.addEventListener(
+    previous(){
 
-        "scroll",
+        if(
 
-        function(){
+            APP.isTransitioning
 
-            updateHeader();
+        ){
 
-            revealOnScroll();
+            return;
 
         }
 
-    );
+        if(
 
-}
+            APP.currentScene <=1
 
-/* ==========================================================
-   JS-16
-   UTILITIES
-========================================================== */
+        ){
 
-/* ----------------------------------------------------------
-   JS-16.01
-   Scroll To Element
------------------------------------------------------------ */
+            return;
 
-function scrollToElement(
+        }
 
-    selector
+        APP.currentScene--;
 
-){
+        this.show(
 
-    const element =
-
-        document.querySelector(
-
-            selector
-
-        );
-
-    if(
-
-        !element
-
-    ){
-
-        return;
-
-    }
-
-    element.scrollIntoView({
-
-        behavior:"smooth",
-
-        block:"start"
-
-    });
-
-}
-
-/* ----------------------------------------------------------
-   JS-16.02
-   Add Class
------------------------------------------------------------ */
-
-function addClass(
-
-    element,
-
-    className
-
-){
-
-    if(
-
-        element
-
-    ){
-
-        element.classList.add(
-
-            className
+            APP.currentScene
 
         );
 
     }
 
-}
+};
 
-/* ----------------------------------------------------------
-   JS-16.03
-   Remove Class
------------------------------------------------------------ */
+/* ==========================================================================
+   04. TIMELINE
+========================================================================== */
 
-function removeClass(
+const TIMELINE = {
 
-    element,
+    play(){
 
-    className
+    },
 
-){
+    stop(){
 
-    if(
+    }
 
-        element
+};
+
+/* ==========================================================================
+   05. COMPONENTS
+========================================================================== */
+
+const COMPONENTS = {
+
+};
+
+/* ==========================================================================
+   06. EVENT BUS
+========================================================================== */
+
+const EVENTS = {
+
+    initialize(){
+
+        document.addEventListener(
+
+            "keydown",
+
+            this.keyboard
+
+        );
+
+    },
+
+    keyboard(
+
+        event
 
     ){
 
-        element.classList.remove(
+        switch(
 
-            className
+            event.key
+
+        ){
+
+            case "ArrowRight":
+
+                SCENES.next();
+
+                break;
+
+            case "ArrowLeft":
+
+                SCENES.previous();
+
+                break;
+
+        }
+
+    }
+
+};
+
+/* ==========================================================================
+   07. UTILITIES
+========================================================================== */
+
+const UTIL = {
+
+    delay(
+
+        milliseconds
+
+    ){
+
+        return new Promise(
+
+            resolve =>
+
+            setTimeout(
+
+                resolve,
+
+                milliseconds
+
+            )
 
         );
 
     }
 
-}
+};
 
-/* ----------------------------------------------------------
-   JS-16.04
-   Toggle Class
------------------------------------------------------------ */
+/* ==========================================================================
+   08. APPLICATION START
+========================================================================== */
 
-function toggleClass(
+document.addEventListener(
 
-    element,
+    "DOMContentLoaded",
 
-    className
+    ()=>{
 
-){
-
-    if(
-
-        element
-
-    ){
-
-        element.classList.toggle(
-
-            className
-
-        );
+        ENGINE.initialize();
 
     }
-
-}
-
-/* ==========================================================
-   JS-17
-   ANIMATIONS
-========================================================== */
-
-/* ----------------------------------------------------------
-   JS-17.01
-   Fade In
------------------------------------------------------------ */
-
-function fadeIn(
-
-    element
-
-){
-
-    if(
-
-        !element
-
-    ){
-
-        return;
-
-    }
-
-    element.classList.add(
-
-        "fade-in"
-
-    );
-
-}
-
-/* ----------------------------------------------------------
-   JS-17.02
-   Reveal All
------------------------------------------------------------ */
-
-function revealAll(){
-
-    document
-
-        .querySelectorAll(
-
-            ".reveal"
-
-        )
-
-        .forEach(
-
-            element=>{
-
-                element.classList.add(
-
-                    "active"
-
-                );
-
-            }
-
-        );
-
-}
-
-/* ==========================================================
-   JS-18
-   RESPONSIVE
-========================================================== */
-
-/* ----------------------------------------------------------
-   JS-18.01
-   Window Resize
------------------------------------------------------------ */
-
-function handleResize(){
-
-    APP.scrollPosition =
-
-        window.scrollY;
-
-}
-
-/* ----------------------------------------------------------
-   JS-18.02
-   Orientation Change
------------------------------------------------------------ */
-
-window.addEventListener(
-
-    "resize",
-
-    handleResize
 
 );
-
-/* ==========================================================
-   JS-20
-   APPLICATION START
-========================================================== */
-
-/* ----------------------------------------------------------
-   JS-20.01
-   Start
------------------------------------------------------------ */
-
-console.log(
-
-    "CTM PATH™ Landing Page v" +
-
-    APP.version +
-
-    " Loaded Successfully."
-
-);
-
 
 
