@@ -1,288 +1,157 @@
 
 /* ==========================================================================
    CTM PATH™ GUIDED JOURNEY™
-   JS-01
+
+   FOUNDATION
    APPLICATION ENGINE
-   VERSION 1.0
-========================================================================== */
 
-"use strict";
+   File      : app.js
+   Version   : 1.0
 
-/* ==========================================================================
-   01. APPLICATION
-========================================================================== */
+   ========================================================================== */
 
-const APP = {
-
-    version : "1.0",
-
-    currentScene : 1,
-
-    totalScenes : 9,
-
-    isTransitioning : false
-
-};
 
 /* ==========================================================================
-   02. ENGINE
-========================================================================== */
+   GLOBAL APPLICATION
+   ========================================================================== */
 
-const ENGINE = {
+const CTM = {
 
-    initialize(){
+    app : {
 
-        SCENES.initialize();
+        name : "CTM PATH™ Guided Journey™",
 
-        EVENTS.initialize();
+        version : "1.0"
+
+    },
+
+    config : {
+
+        debug : true
+
+    },
+
+    state : {
+
+        initialized : false
 
     }
 
 };
 
+
 /* ==========================================================================
-   03. SCENE MANAGER
-========================================================================== */
+   START APPLICATION
+   ========================================================================== */
 
-const SCENES = {
+CTM.start = function(){
 
-    list : [],
+    if(
 
-    initialize(){
-
-        this.list = [
-
-            ...document.querySelectorAll(
-
-                ".scene"
-
-            )
-
-        ];
-
-        this.show(
-
-            APP.currentScene
-
-        );
-
-    },
-
-    show(
-
-        sceneNumber
+        CTM.config.debug
 
     ){
 
-        this.list.forEach(
+        console.log(
 
-            scene =>{
-
-                scene.classList.remove(
-
-                    "active"
-
-                );
-
-            }
-
-        );
-
-        const target = document.getElementById(
-
-            "scene" +
-
-            String(sceneNumber)
-
-            .padStart(
-
-                2,
-
-                "0"
-
-            )
-
-        );
-
-        if(
-
-            target
-
-        ){
-
-            target.classList.add(
-
-                "active"
-
-            );
-
-        }
-
-    },
-
-    next(){
-
-        if(
-
-            APP.isTransitioning
-
-        ){
-
-            return;
-
-        }
-
-        if(
-
-            APP.currentScene >=
-
-            APP.totalScenes
-
-        ){
-
-            return;
-
-        }
-
-        APP.currentScene++;
-
-        this.show(
-
-            APP.currentScene
-
-        );
-
-    },
-
-    previous(){
-
-        if(
-
-            APP.isTransitioning
-
-        ){
-
-            return;
-
-        }
-
-        if(
-
-            APP.currentScene <=1
-
-        ){
-
-            return;
-
-        }
-
-        APP.currentScene--;
-
-        this.show(
-
-            APP.currentScene
+            CTM.app.name +
+            " v" +
+            CTM.app.version
 
         );
 
     }
 
-};
+    CTM.cache();
 
-/* ==========================================================================
-   04. TIMELINE
-========================================================================== */
+    CTM.verify();
 
-const TIMELINE = {
-
-    play(){
-
-    },
-
-    stop(){
-
-    }
+    CTM.initialize();
 
 };
 
-/* ==========================================================================
-   05. COMPONENTS
-========================================================================== */
 
-const COMPONENTS = {
+/* ==========================================================================
+   CACHE DOM
+   ========================================================================== */
+
+CTM.cache = function(){
+
+    CTM.app.element = document.getElementById(
+
+        "app"
+
+    );
+
+    CTM.app.journey = document.getElementById(
+
+        "journey"
+
+    );
 
 };
 
+
 /* ==========================================================================
-   06. EVENT BUS
-========================================================================== */
+   VERIFY FOUNDATION
+   ========================================================================== */
 
-const EVENTS = {
+CTM.verify = function(){
 
-    initialize(){
+    if(
 
-        document.addEventListener(
-
-            "keydown",
-
-            this.keyboard
-
-        );
-
-    },
-
-    keyboard(
-
-        event
+        !CTM.app.element
 
     ){
 
-        switch(
+        console.error(
 
-            event.key
+            "Application container (#app) not found."
 
-        ){
+        );
 
-            case "ArrowRight":
-
-                SCENES.next();
-
-                break;
-
-            case "ArrowLeft":
-
-                SCENES.previous();
-
-                break;
-
-        }
+        return false;
 
     }
 
-};
+    if(
 
-/* ==========================================================================
-   07. UTILITIES
-========================================================================== */
-
-const UTIL = {
-
-    delay(
-
-        milliseconds
+        !CTM.app.journey
 
     ){
 
-        return new Promise(
+        console.error(
 
-            resolve =>
+            "Journey container (#journey) not found."
 
-            setTimeout(
+        );
 
-                resolve,
+        return false;
 
-                milliseconds
+    }
 
-            )
+    return true;
+
+};
+
+
+/* ==========================================================================
+   INITIALIZE
+   ========================================================================== */
+
+CTM.initialize = function(){
+
+    CTM.state.initialized = true;
+
+    if(
+
+        CTM.config.debug
+
+    ){
+
+        console.log(
+
+            "Foundation initialized."
 
         );
 
@@ -290,20 +159,22 @@ const UTIL = {
 
 };
 
+
 /* ==========================================================================
-   08. APPLICATION START
-========================================================================== */
+   APPLICATION READY
+   ========================================================================== */
 
 document.addEventListener(
 
     "DOMContentLoaded",
 
-    ()=>{
+    function(){
 
-        ENGINE.initialize();
+        CTM.start();
 
     }
 
 );
+
 
 
