@@ -1,15 +1,14 @@
+
 <!DOCTYPE html>
 
-<html
-    lang="en"
->
+<html lang="en">
 
 <head>
 
     <!-- ==========================================================
          CTM PATH™
-         Module 01
-         HTML Foundation
+         Landing Page
+         Version 1.0
     =========================================================== -->
 
     <meta charset="UTF-8">
@@ -27,17 +26,7 @@
 
     <meta
         name="description"
-        content="Discover the path towards your dreams through the CTM PATH™ experience."
-    >
-
-    <meta
-        name="keywords"
-        content="CTM PATH, DREAM, Financial MRI, Roadmap, Tamil, Mentorship, Dream, Success"
-    >
-
-    <meta
-        name="author"
-        content="Raphael Raj"
+        content="Every DREAM has a PATH."
     >
 
     <meta
@@ -46,50 +35,7 @@
     >
 
     <!-- ==========================================================
-         Open Graph
-    =========================================================== -->
-
-    <meta
-        property="og:title"
-        content="CTM PATH™"
-    >
-
-    <meta
-        property="og:description"
-        content="Every DREAM has a PATH."
-    >
-
-    <meta
-        property="og:type"
-        content="website"
-    >
-
-    <meta
-        property="og:image"
-        content="images/og-image.jpg"
-    >
-
-    <!-- ==========================================================
-         Twitter
-    =========================================================== -->
-
-    <meta
-        name="twitter:card"
-        content="summary_large_image"
-    >
-
-    <meta
-        name="twitter:title"
-        content="CTM PATH™"
-    >
-
-    <meta
-        name="twitter:description"
-        content="Every DREAM has a PATH."
-    >
-
-    <!-- ==========================================================
-         Fonts
+         Google Fonts
     =========================================================== -->
 
     <link
@@ -121,43 +67,21 @@
 
 <body>
 
-    <!-- ==========================================================
-         CTM PATH™
-         Landing Page
-    =========================================================== -->
-
 
 
     <!-- ==========================================================
-         JavaScript
+         HTML-02
+         HEADER
     =========================================================== -->
 
-    <script
-        src="app.js"
-    ></script>
-
-</body>
-
-</html>
-
-    <!-- ==========================================================
-         CTM PATH™
-         Module 02
-         Premium Navigation
-    =========================================================== -->
-
-    <header
-        class="site-header"
-        id="top"
-    >
+    <header>
 
         <div
             class="container"
         >
 
-            <nav
-                class="navbar"
-                aria-label="Primary Navigation"
+            <div
+                class="flex-between"
             >
 
                 <!-- ==========================================
@@ -165,17 +89,12 @@
                 =========================================== -->
 
                 <a
-                    href="#hero"
-                    class="brand"
+                    href="#"
+                    class="heading-lg"
+                    aria-label="CTM PATH Home"
                 >
 
-                    <span
-                        class="brand-name"
-                    >
-
-                        CTM PATH™
-
-                    </span>
+                    CTM PATH™
 
                 </a>
 
@@ -183,90 +102,104 @@
                      Navigation
                 =========================================== -->
 
-                <ul
-                    class="nav-menu"
+                <nav
+                    aria-label="Primary Navigation"
                 >
 
-                    <li>
+                    <ul
+                        class="flex"
+                    >
 
-                        <a
-                            href="#story"
-                        >
+                        <li>
 
-                            Story
+                            <a
+                                href="#story"
+                                class="body"
+                            >
 
-                        </a>
+                                Story
 
-                    </li>
+                            </a>
 
-                    <li>
+                        </li>
 
-                        <a
-                            href="#discovery"
-                        >
+                        <li>
 
-                            Discovery
+                            <a
+                                href="#discovery"
+                                class="body"
+                            >
 
-                        </a>
+                                Discovery
 
-                    </li>
+                            </a>
 
-                    <li>
+                        </li>
 
-                        <a
-                            href="#guide"
-                        >
+                        <li>
 
-                            Guide
+                            <a
+                                href="#guide"
+                                class="body"
+                            >
 
-                        </a>
+                                Guide
 
-                    </li>
+                            </a>
 
-                </ul>
+                        </li>
+
+                    </ul>
+
+                </nav>
 
                 <!-- ==========================================
-                     Primary CTA
+                     Primary Button
                 =========================================== -->
 
                 <a
                     href="#cta"
-                    class="button-primary"
+                    class="btn btn-primary"
                 >
 
                     Begin
 
                 </a>
 
-            </nav>
+            </div>
 
         </div>
 
     </header>
 
-        <!-- ==========================================================
-         CTM PATH™
-         Module 03
-         Hero
+    <!-- ==========================================================
+         HTML-03
+         HERO
     =========================================================== -->
 
-    <main>
+    <!-- ==========================================================
+         HERO START
+    =========================================================== -->
 
-        <section
-            id="hero"
-            class="hero"
+    <section
+        id="hero"
+        class="section"
+    >
+
+        <div
+            class="container"
         >
 
             <div
-                class="container hero-content"
+                class="max-content mx-auto text-center stack stack-xl"
             >
 
                 <!-- ==========================================
-                     Brand Promise
+                     Brand
                 =========================================== -->
 
                 <p
-                    class="hero-tagline"
+                    class="caption text-accent"
                 >
 
                     CTM PATH™
@@ -278,7 +211,7 @@
                 =========================================== -->
 
                 <h1
-                    class="hero-title-ta"
+                    class="display-xl"
                 >
 
                     உங்கள் கனவுகள்...
@@ -294,7 +227,7 @@
                 =========================================== -->
 
                 <h2
-                    class="hero-title-en"
+                    class="heading-lg text-muted"
                 >
 
                     Are your dreams...
@@ -306,44 +239,54 @@
                 </h2>
 
                 <!-- ==========================================
-                     Brand Promise
+                     Tamil Message
                 =========================================== -->
 
                 <p
-                    class="hero-message-ta"
+                    class="body-lg"
                 >
 
-                    ஒவ்வொரு கனவிற்கும் ஒரு பாதை உண்டு.
+                    ஒவ்வொரு கனவிற்கும்
 
-                    <br>
+                    ஒரு பாதை உண்டு.
 
-                    அந்த பாதையை நீங்கள் தனியாகத் தேட வேண்டியதில்லை.
+                    <br><br>
+
+                    அந்த பாதையை
+
+                    நீங்கள்
+
+                    தனியாகத் தேட வேண்டியதில்லை.
 
                 </p>
 
+                <!-- ==========================================
+                     English Message
+                =========================================== -->
+
                 <p
-                    class="hero-message-en"
+                    class="body"
                 >
 
                     Every DREAM has a PATH.
 
-                    <br>
+                    <br><br>
 
                     You don't have to discover it alone.
 
                 </p>
 
                 <!-- ==========================================
-                     Primary CTA
+                     Primary Action
                 =========================================== -->
 
                 <div
-                    class="hero-actions"
+                    class="flex-center"
                 >
 
                     <a
-                        href="#discovery"
-                        class="button-primary"
+                        href="#story"
+                        class="btn btn-primary btn-lg"
                     >
 
                         Begin My Journey
@@ -353,490 +296,290 @@
                 </div>
 
                 <!-- ==========================================
-                     Trust Strip
+                     Trust Line
                 =========================================== -->
 
-                <div
-                    class="hero-trust"
+                <p
+                    class="body text-muted"
                 >
 
-                    <span>
+                    Free
 
-                        Free
+                    •
 
-                    </span>
+                    90 Seconds
 
-                    <span>
+                    •
 
-                        •
+                    Personal Guidance
 
-                    </span>
-
-                    <span>
-
-                        90 Seconds
-
-                    </span>
-
-                    <span>
-
-                        •
-
-                    </span>
-
-                    <span>
-
-                        Personal Guidance
-
-                    </span>
-
-                </div>
+                </p>
 
             </div>
 
-        </section>
+        </div>
 
-                <!-- ==========================================================
-             CTM PATH™
-             Module 04
-             Emotional Story
-        =========================================================== -->
+    </section>
 
-        <section
-            id="story"
-            class="story"
+    <!-- ==========================================================
+         HERO END
+    =========================================================== -->
+
+    <!-- ==========================================================
+         HTML-04
+         STORY
+    =========================================================== -->
+
+    <!-- ==========================================================
+         STORY START
+    =========================================================== -->
+
+    <section
+        id="story"
+        class="section"
+    >
+
+        <div
+            class="container"
         >
 
             <div
-                class="container"
+                class="max-content mx-auto text-center stack stack-xl"
             >
 
                 <!-- ==========================================
                      Story 01
                 =========================================== -->
 
-                <div
-                    class="story-block"
+                <h2
+                    class="heading-xl"
                 >
 
-                    <p
-                        class="story-ta"
-                    >
+                    ஒரு காலத்தில்...
 
-                        ஒரு காலத்தில்...
+                    <br>
 
-                        <br>
+                    நீங்கள்
 
-                        நீங்கள்
+                    <br>
 
-                        <br>
+                    ஒரு வாழ்க்கையை
 
-                        ஒரு வாழ்க்கையை
+                    <br>
 
-                        <br>
+                    கனவு கண்டீர்கள்.
 
-                        கனவு கண்டீர்கள்.
+                </h2>
 
-                    </p>
+                <p
+                    class="body"
+                >
 
-                    <p
-                        class="story-en"
-                    >
+                    Once...
 
-                        Once...
+                    <br>
 
-                        <br>
+                    you dreamed
 
-                        you dreamed
+                    <br>
 
-                        <br>
+                    of a different life.
 
-                        of a different life.
-
-                    </p>
-
-                </div>
+                </p>
 
                 <!-- ==========================================
                      Story 02
                 =========================================== -->
 
-                <div
-                    class="story-block"
+                <h2
+                    class="heading-xl"
                 >
 
-                    <p
-                        class="story-ta"
-                    >
+                    ஒரு நல்ல வீடு.
 
-                        ஒரு நல்ல வீடு.
+                    <br>
 
-                        <br>
+                    ஒரு பாதுகாப்பான குடும்பம்.
 
-                        ஒரு பாதுகாப்பான குடும்பம்.
+                    <br>
 
-                        <br>
+                    கடனில்லா வாழ்க்கை.
 
-                        கடனில்லா வாழ்க்கை.
+                    <br>
 
-                        <br>
+                    மன அமைதி.
 
-                        மன அமைதி.
+                </h2>
 
-                    </p>
+                <p
+                    class="body"
+                >
 
-                    <p
-                        class="story-en"
-                    >
+                    A better home.
 
-                        A better home.
+                    <br>
 
-                        <br>
+                    A secure family.
 
-                        A secure family.
+                    <br>
 
-                        <br>
+                    Freedom from debt.
 
-                        Freedom from debt.
+                    <br>
 
-                        <br>
+                    Peace of mind.
 
-                        Peace of mind.
-
-                    </p>
-
-                </div>
+                </p>
 
                 <!-- ==========================================
                      Story 03
                 =========================================== -->
 
-                <div
-                    class="story-block"
+                <h2
+                    class="heading-xl"
                 >
 
-                    <p
-                        class="story-ta"
-                    >
+                    ஆனால்...
 
-                        அந்த கனவு...
+                    <br>
 
-                        <br>
+                    வாழ்க்கை
 
-                        இன்றும்
+                    <br>
 
-                        <br>
+                    எப்போதும்
 
-                        உங்களுக்குள்
+                    <br>
 
-                        <br>
+                    நாம் திட்டமிட்டபடி
 
-                        இருக்கிறது.
+                    <br>
 
-                    </p>
+                    நடப்பதில்லை.
 
-                    <p
-                        class="story-en"
-                    >
+                </h2>
 
-                        That dream...
+                <p
+                    class="body"
+                >
 
-                        <br>
+                    But...
 
-                        is still
+                    <br>
 
-                        <br>
+                    life doesn't always
 
-                        alive
+                    <br>
 
-                        <br>
+                    go as planned.
 
-                        within you.
-
-                    </p>
-
-                </div>
+                </p>
 
                 <!-- ==========================================
                      Story 04
                 =========================================== -->
 
-                <div
-                    class="story-block"
+                <h2
+                    class="heading-xl text-accent"
                 >
 
-                    <p
-                        class="story-ta"
-                    >
+                    உங்கள் கனவு...
 
-                        ஆனால்...
+                    <br>
 
-                        <br>
+                    இன்னும்
 
-                        வாழ்க்கை
+                    <br>
 
-                        <br>
+                    உயிருடன்
 
-                        எப்போதும்
+                    <br>
 
-                        <br>
+                    இருக்கிறது.
 
-                        நாம் திட்டமிட்டபடி
+                </h2>
 
-                        <br>
-
-                        நடப்பதில்லை.
-
-                    </p>
-
-                    <p
-                        class="story-en"
-                    >
-
-                        But...
-
-                        <br>
-
-                        life
-
-                        <br>
-
-                        doesn't always
-
-                        <br>
-
-                        go as planned.
-
-                    </p>
-
-                </div>
-
-                <!-- ==========================================
-                     Story 05
-                =========================================== -->
-
-                <div
-                    class="story-block"
+                <p
+                    class="body"
                 >
 
-                    <p
-                        class="story-ta"
-                    >
+                    Your dream...
 
-                        செலவுகள்...
+                    <br>
 
-                        <br>
+                    is still alive.
 
-                        பொறுப்புகள்...
-
-                        <br>
-
-                        கடன்கள்...
-
-                        <br>
-
-                        கவலைகள்...
-
-                    </p>
-
-                    <p
-                        class="story-en"
-                    >
-
-                        Expenses.
-
-                        <br>
-
-                        Responsibilities.
-
-                        <br>
-
-                        Loans.
-
-                        <br>
-
-                        Worries.
-
-                    </p>
-
-                </div>
-
-                <!-- ==========================================
-                     Story 06
-                =========================================== -->
-
-                <div
-                    class="story-block"
-                >
-
-                    <p
-                        class="story-ta"
-                    >
-
-                        மெல்ல...
-
-                        <br>
-
-                        உங்கள் கனவு
-
-                        <br>
-
-                        காத்திருக்க
-
-                        <br>
-
-                        தொடங்கியது.
-
-                    </p>
-
-                    <p
-                        class="story-en"
-                    >
-
-                        Slowly...
-
-                        <br>
-
-                        your dream
-
-                        <br>
-
-                        began
-
-                        <br>
-
-                        to wait.
-
-                    </p>
-
-                </div>
-
-                <!-- ==========================================
-                     Emotional Transition
-                =========================================== -->
-
-                <div
-                    class="story-transition"
-                >
-
-                    <h2
-                        class="transition-ta"
-                    >
-
-                        ஒரு கேள்வி...
-
-                    </h2>
-
-                    <h3
-                        class="transition-en"
-                    >
-
-                        One question...
-
-                    </h3>
-
-                    <p
-                        class="transition-ta"
-                    >
-
-                        உங்கள் கனவு
-
-                        <br>
-
-                        இன்னும்
-
-                        <br>
-
-                        உயிருடன்
-
-                        <br>
-
-                        இருக்கிறதா?
-
-                    </p>
-
-                    <p
-                        class="transition-en"
-                    >
-
-                        Is your dream
-
-                        <br>
-
-                        still alive?
-
-                    </p>
-
-                </div>
+                </p>
 
             </div>
 
-        </section>
+        </div>
 
-                <!-- ==========================================================
-             CTM PATH™
-             Module 05
-             Discovery
-        =========================================================== -->
+    </section>
 
-        <section
-            id="discovery"
-            class="discovery"
+    <!-- ==========================================================
+         STORY END
+    =========================================================== -->
+
+    <!-- ==========================================================
+         HTML-05
+         DISCOVERY
+    =========================================================== -->
+
+    <!-- ==========================================================
+         DISCOVERY START
+    =========================================================== -->
+
+    <section
+        id="discovery"
+        class="section"
+    >
+
+        <div
+            class="container"
         >
 
             <div
-                class="container"
+                class="max-content mx-auto text-center stack stack-xl"
             >
 
                 <!-- ==========================================
-                     Section Header
+                     Section Label
                 =========================================== -->
 
                 <p
-                    class="section-tag"
+                    class="caption text-accent"
                 >
 
                     YOUR PATH
 
                 </p>
 
+                <!-- ==========================================
+                     Heading
+                =========================================== -->
+
                 <h2
-                    class="section-title-ta"
+                    class="heading-xl"
                 >
 
-                    உங்கள் பாதை...
+                    உங்கள் வாழ்க்கை...
+
+                    <br>
+
+                    இன்று எங்கே நிற்கிறது?
 
                 </h2>
 
-                <h3
-                    class="section-title-en"
-                >
-
-                    Your Path...
-
-                </h3>
-
-                <!-- ==========================================
-                     Introduction
-                =========================================== -->
-
                 <p
-                    class="section-message-ta"
+                    class="body"
                 >
 
-                    உங்கள் வாழ்க்கையை
-                    சிறப்பாகப் புரிந்துகொள்ள
-                    சில எளிய கேள்விகள்.
+                    Your future begins
 
-                </p>
+                    <br>
 
-                <p
-                    class="section-message-en"
-                >
-
-                    A few simple questions
-                    to understand
-                    your journey.
+                    with honest answers.
 
                 </p>
 
@@ -845,28 +588,38 @@
                 =========================================== -->
 
                 <div
-                    class="question-card"
+                    class="card card-large"
                 >
 
-                    <h4>
+                    <div
+                        class="card-body"
+                    >
 
-                        இன்று...
+                        <h3
+                            class="heading-lg"
+                        >
 
-                        <br>
+                            இன்று...
 
-                        உங்கள் மனதில்
+                            <br>
 
-                        <br>
+                            உங்கள் வாழ்க்கையின்
 
-                        அதிக சுமை எது?
+                            <br>
 
-                    </h4>
+                            மிகப்பெரிய சவால் என்ன?
 
-                    <p>
+                        </h3>
 
-                        What's weighing on your mind today?
+                        <p
+                            class="body"
+                        >
 
-                    </p>
+                            What is your biggest challenge today?
+
+                        </p>
+
+                    </div>
 
                 </div>
 
@@ -875,29 +628,38 @@
                 =========================================== -->
 
                 <div
-                    class="question-card"
+                    class="card card-large"
                 >
 
-                    <h4>
+                    <div
+                        class="card-body"
+                    >
 
-                        எந்த கனவு
+                        <h3
+                            class="heading-lg"
+                        >
 
-                        <br>
+                            எந்த கனவு...
 
-                        இன்னும்
+                            <br>
 
-                        <br>
+                            இன்னும்
 
-                        காத்திருக்கிறது?
+                            <br>
 
-                    </h4>
+                            காத்திருக்கிறது?
 
-                    <p>
+                        </h3>
 
-                        Which dream
-                        is still waiting?
+                        <p
+                            class="body"
+                        >
 
-                    </p>
+                            Which dream is still waiting?
+
+                        </p>
+
+                    </div>
 
                 </div>
 
@@ -906,47 +668,56 @@
                 =========================================== -->
 
                 <div
-                    class="question-card"
+                    class="card card-large"
                 >
 
-                    <h4>
+                    <div
+                        class="card-body"
+                    >
 
-                        இன்று...
+                        <h3
+                            class="heading-lg"
+                        >
 
-                        <br>
+                            மாற்றத்திற்கு
 
-                        உங்கள் வாழ்க்கையை
+                            <br>
 
-                        <br>
+                            நீங்கள்
 
-                        10-ல்
+                            <br>
 
-                        <br>
+                            தயாரா?
 
-                        எவ்வளவு மதிப்பிடுவீர்கள்?
+                        </h3>
 
-                    </h4>
+                        <p
+                            class="body"
+                        >
 
-                    <p>
+                            Are you ready
 
-                        How would you
-                        rate your life today?
+                            <br>
 
-                    </p>
+                            for change?
+
+                        </p>
+
+                    </div>
 
                 </div>
 
                 <!-- ==========================================
-                     Discovery CTA
+                     Action
                 =========================================== -->
 
                 <div
-                    class="discovery-action"
+                    class="flex-center"
                 >
 
                     <a
                         href="#results"
-                        class="button-primary"
+                        class="btn btn-primary btn-lg"
                     >
 
                         Continue
@@ -957,383 +728,115 @@
 
             </div>
 
-        </section>
+        </div>
 
-                <!-- ==========================================================
-             CTM PATH™
-             Module 06
-             Results
-        =========================================================== -->
+    </section>
 
-        <section
-            id="results"
-            class="results"
+    <!-- ==========================================================
+         DISCOVERY END
+    =========================================================== -->
+
+    <!-- ==========================================================
+         HTML-06
+         RESULTS
+    =========================================================== -->
+
+    <!-- ==========================================================
+         RESULTS START
+    =========================================================== -->
+
+    <section
+        id="results"
+        class="section"
+    >
+
+        <div
+            class="container"
         >
 
             <div
-                class="container"
+                class="max-content mx-auto text-center stack stack-xl"
             >
 
-                <!-- ==========================================
-                     Processing
-                =========================================== -->
-
-                <div
-                    class="results-processing"
+                <p
+                    class="caption text-accent"
                 >
 
-                    <p
-                        class="section-tag"
-                    >
+                    RESULTS
 
-                        ANALYSING
+                </p>
 
-                    </p>
+                <h2
+                    class="heading-xl"
+                >
 
-                    <h2
-                        class="results-title-ta"
-                    >
+                    Results Placeholder
 
-                        உங்கள் பதில்களை
-                        ஆய்வு செய்கிறோம்...
+                </h2>
 
-                    </h2>
+                <p
+                    class="body"
+                >
 
-                    <h3
-                        class="results-title-en"
-                    >
+                    This section will present the visitor's
+                    insights, opportunities and recommended path.
 
-                        Analysing
-                        your journey...
+                </p>
 
-                    </h3>
+                <div
+                    class="card card-large"
+                >
 
                     <div
-                        class="progress-dots"
+                        class="card-body"
                     >
 
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                        <p
+                            class="body"
+                        >
+
+                            Result Card Placeholder
+
+                        </p>
 
                     </div>
 
                 </div>
 
-                <!-- ==========================================
-                     Good News
-                =========================================== -->
-
-                <div
-                    class="results-message"
-                >
-
-                    <h2
-                        class="results-headline-ta"
-                    >
-
-                        ஒரு நல்ல செய்தி...
-
-                    </h2>
-
-                    <h3
-                        class="results-headline-en"
-                    >
-
-                        Here's the good news...
-
-                    </h3>
-
-                </div>
-
-                <!-- ==========================================
-                     Emotional Message
-                =========================================== -->
-
-                <div
-                    class="results-highlight"
-                >
-
-                    <p
-                        class="highlight-ta"
-                    >
-
-                        உங்கள் கனவு...
-
-                        <br>
-
-                        இன்னும்
-
-                        <br>
-
-                        உயிருடன்
-
-                        <br>
-
-                        இருக்கிறது.
-
-                    </p>
-
-                    <p
-                        class="highlight-en"
-                    >
-
-                        Your dream...
-
-                        <br>
-
-                        is still
-
-                        <br>
-
-                        alive.
-
-                    </p>
-
-                </div>
-
-                <div
-                    class="results-highlight"
-                >
-
-                    <p
-                        class="highlight-ta"
-                    >
-
-                        நீங்கள்
-
-                        <br>
-
-                        தோல்வியடையவில்லை.
-
-                    </p>
-
-                    <p
-                        class="highlight-en"
-                    >
-
-                        You haven't
-
-                        <br>
-
-                        failed.
-
-                    </p>
-
-                </div>
-
-                <div
-                    class="results-highlight"
-                >
-
-                    <p
-                        class="highlight-ta"
-                    >
-
-                        உங்களுக்கு
-
-                        <br>
-
-                        தேவையானது...
-
-                        <br>
-
-                        ஒரு தெளிவான
-
-                        <br>
-
-                        பாதை.
-
-                    </p>
-
-                    <p
-                        class="highlight-en"
-                    >
-
-                        You simply need
-
-                        <br>
-
-                        a clearer
-
-                        <br>
-
-                        PATH.
-
-                    </p>
-
-                </div>
-
-                <!-- ==========================================
-                     Summary Cards
-                =========================================== -->
-
-                <div
-                    class="results-grid"
-                >
-
-                    <article
-                        class="result-card"
-                    >
-
-                        <h4>
-
-                            YOUR DREAM
-
-                        </h4>
-
-                        <p>
-
-                            தெளிவாக உள்ளது
-
-                        </p>
-
-                        <span>
-
-                            Clear
-
-                        </span>
-
-                    </article>
-
-                    <article
-                        class="result-card"
-                    >
-
-                        <h4>
-
-                            YOUR TODAY
-
-                        </h4>
-
-                        <p>
-
-                            மேம்படுத்தலாம்
-
-                        </p>
-
-                        <span>
-
-                            Can Grow
-
-                        </span>
-
-                    </article>
-
-                    <article
-                        class="result-card"
-                    >
-
-                        <h4>
-
-                            YOUR PATH
-
-                        </h4>
-
-                        <p>
-
-                            தொடங்க தயாராக உள்ளது
-
-                        </p>
-
-                        <span>
-
-                            Ready to Begin
-
-                        </span>
-
-                    </article>
-
-                </div>
-
-                <!-- ==========================================
-                     Transition
-                =========================================== -->
-
-                <div
-                    class="results-transition"
-                >
-
-                    <p
-                        class="transition-ta"
-                    >
-
-                        ஒவ்வொரு பெரிய மாற்றமும்...
-
-                        <br>
-
-                        ஒரு சிறிய முடிவில்
-
-                        <br>
-
-                        தொடங்குகிறது.
-
-                    </p>
-
-                    <p
-                        class="transition-en"
-                    >
-
-                        Every great change
-
-                        <br>
-
-                        begins with
-
-                        <br>
-
-                        one small decision.
-
-                    </p>
-
-                </div>
-
-                <!-- ==========================================
-                     CTA
-                =========================================== -->
-
-                <div
-                    class="results-action"
-                >
-
-                    <a
-                        href="#guide"
-                        class="button-primary"
-                    >
-
-                        Begin My PATH
-
-                    </a>
-
-                </div>
-
             </div>
 
-        </section>
+        </div>
 
-                <!-- ==========================================================
-             CTM PATH™
-             Module 07
-             Your Guide
-        =========================================================== -->
+    </section>
 
-        <section
-            id="guide"
-            class="guide"
+    <!-- ==========================================================
+         RESULTS END
+    =========================================================== -->
+
+    <!-- ==========================================================
+         HTML-07
+         GUIDE
+    =========================================================== -->
+
+    <!-- ==========================================================
+         GUIDE START
+    =========================================================== -->
+
+    <section
+        id="guide"
+        class="section"
+    >
+
+        <div
+            class="container"
         >
 
             <div
-                class="container"
+                class="max-content mx-auto text-center stack stack-xl"
             >
 
-                <!-- ==========================================
-                     Section Header
-                =========================================== -->
-
                 <p
-                    class="section-tag"
+                    class="caption text-accent"
                 >
 
                     YOUR GUIDE
@@ -1341,62 +844,35 @@
                 </p>
 
                 <h2
-                    class="section-title-ta"
+                    class="heading-xl"
                 >
 
-                    இந்தப் பயணத்தில்...
-
-                    <br>
-
-                    நீங்கள் தனியாக இல்லை.
+                    Guide Placeholder
 
                 </h2>
 
-                <h3
-                    class="section-title-en"
+                <p
+                    class="body"
                 >
 
-                    On this journey...
+                    This section will introduce the mentor,
+                    the CTM PATH framework and why the process works.
 
-                    <br>
-
-                    you are not alone.
-
-                </h3>
-
-                <!-- ==========================================
-                     Guide Card
-                =========================================== -->
+                </p>
 
                 <div
-                    class="guide-card"
+                    class="card card-large"
                 >
 
                     <div
-                        class="guide-photo"
+                        class="card-body"
                     >
 
-                        <!-- Raphael Image -->
+                        <p
+                            class="body"
+                        >
 
-                    </div>
-
-                    <div
-                        class="guide-details"
-                    >
-
-                        <h3>
-
-                            Raphael Raj
-
-                        </h3>
-
-                        <p>
-
-                            Founder
-
-                            <br>
-
-                            CTM PATH™
+                            Guide Card Placeholder
 
                         </p>
 
@@ -1404,347 +880,89 @@
 
                 </div>
 
-                <!-- ==========================================
-                     Message
-                =========================================== -->
-
-                <div
-                    class="guide-message"
-                >
-
-                    <p
-                        class="guide-ta"
-                    >
-
-                        நான்...
-
-                        <br>
-
-                        உங்கள் கனவுகளை
-
-                        <br>
-
-                        மாற்ற வரவில்லை.
-
-                    </p>
-
-                    <p
-                        class="guide-en"
-                    >
-
-                        I'm not here
-
-                        <br>
-
-                        to change
-
-                        <br>
-
-                        your dream.
-
-                    </p>
-
-                </div>
-
-                <div
-                    class="guide-message"
-                >
-
-                    <p
-                        class="guide-ta"
-                    >
-
-                        உங்கள் கனவு
-
-                        <br>
-
-                        ஏற்கனவே
-
-                        <br>
-
-                        உங்களுடையது.
-
-                    </p>
-
-                    <p
-                        class="guide-en"
-                    >
-
-                        Your dream
-
-                        <br>
-
-                        already
-
-                        <br>
-
-                        belongs to you.
-
-                    </p>
-
-                </div>
-
-                <div
-                    class="guide-message"
-                >
-
-                    <p
-                        class="guide-ta"
-                    >
-
-                        அதற்கான
-
-                        <br>
-
-                        பாதையை
-
-                        <br>
-
-                        உங்களுடன் சேர்ந்து
-
-                        <br>
-
-                        கண்டறிவோம்.
-
-                    </p>
-
-                    <p
-                        class="guide-en"
-                    >
-
-                        Let's discover
-
-                        <br>
-
-                        your PATH
-
-                        <br>
-
-                        together.
-
-                    </p>
-
-                </div>
-
-                <!-- ==========================================
-                     CTA
-                =========================================== -->
-
-                <div
-                    class="guide-action"
-                >
-
-                    <a
-                        href="#cta"
-                        class="button-primary"
-                    >
-
-                        Continue
-
-                    </a>
-
-                </div>
-
             </div>
 
-        </section>
+        </div>
 
-                <!-- ==========================================================
-             CTM PATH™
-             Module 08
-             Final Call To Action
-        =========================================================== -->
+    </section>
 
-        <section
-            id="cta"
-            class="cta"
+    <!-- ==========================================================
+         GUIDE END
+    =========================================================== -->
+
+    <!-- ==========================================================
+         HTML-08
+         CALL TO ACTION
+    =========================================================== -->
+
+    <!-- ==========================================================
+         CTA START
+    =========================================================== -->
+
+    <section
+        id="cta"
+        class="section"
+    >
+
+        <div
+            class="container"
         >
 
             <div
-                class="container"
+                class="max-content mx-auto text-center stack stack-xl"
             >
 
                 <!-- ==========================================
-                     Final Message
+                     Section Label
                 =========================================== -->
 
                 <p
-                    class="section-tag"
+                    class="caption text-accent"
                 >
 
-                    YOUR NEXT STEP
+                    START TODAY
 
                 </p>
 
+                <!-- ==========================================
+                     Heading
+                =========================================== -->
+
                 <h2
-                    class="cta-title-ta"
+                    class="heading-xl"
                 >
 
-                    உங்கள் கனவுகள்...
-
-                    <br>
-
-                    இன்னும்
-
-                    <br>
-
-                    காத்திருக்க
-
-                    <br>
-
-                    வேண்டியதில்லை.
+                    CTA Placeholder
 
                 </h2>
 
-                <h3
-                    class="cta-title-en"
+                <!-- ==========================================
+                     Description
+                =========================================== -->
+
+                <p
+                    class="body"
                 >
 
-                    Your dreams...
+                    This section will invite the visitor
+                    to begin the CTM PATH journey.
 
-                    <br>
-
-                    don't have
-
-                    <br>
-
-                    to wait.
-
-                </h3>
+                </p>
 
                 <!-- ==========================================
-                     Brand Promise
+                     Primary Button
                 =========================================== -->
 
                 <div
-                    class="cta-promise"
-                >
-
-                    <p
-                        class="promise-ta"
-                    >
-
-                        ஒவ்வொரு கனவிற்கும்
-
-                        <br>
-
-                        ஒரு பாதை உண்டு.
-
-                    </p>
-
-                    <p
-                        class="promise-en"
-                    >
-
-                        Every DREAM
-
-                        <br>
-
-                        has a PATH.
-
-                    </p>
-
-                </div>
-
-                <div
-                    class="cta-promise"
-                >
-
-                    <p
-                        class="promise-ta"
-                    >
-
-                        அந்த பாதையை
-
-                        <br>
-
-                        நீங்கள்
-
-                        <br>
-
-                        தனியாக
-
-                        <br>
-
-                        தேட வேண்டியதில்லை.
-
-                    </p>
-
-                    <p
-                        class="promise-en"
-                    >
-
-                        You don't have to
-
-                        <br>
-
-                        discover it
-
-                        <br>
-
-                        alone.
-
-                    </p>
-
-                </div>
-
-                <!-- ==========================================
-                     Primary CTA
-                =========================================== -->
-
-                <div
-                    class="cta-buttons"
+                    class="flex-center"
                 >
 
                     <a
                         href="#"
-                        class="button-primary"
+                        class="btn btn-primary btn-lg"
                     >
 
-                        🟢
-
-                        <br>
-
-                        WhatsApp-ல்
-
-                        <br>
-
-                        என் பயணத்தை
-
-                        <br>
-
-                        தொடங்குங்கள்
-
-                    </a>
-
-                </div>
-
-                <!-- ==========================================
-                     Secondary CTA
-                =========================================== -->
-
-                <div
-                    class="cta-buttons"
-                >
-
-                    <a
-                        href="#"
-                        class="button-secondary"
-                    >
-
-                        📅
-
-                        <br>
-
-                        Zoom
-
-                        <br>
-
-                        சந்திப்பை
-
-                        <br>
-
-                        பதிவு செய்யுங்கள்
+                        Start My Journey
 
                     </a>
 
@@ -1752,129 +970,66 @@
 
             </div>
 
-        </section>
+        </div>
 
-                <!-- ==========================================================
-             CTM PATH™
-             Module 09
-             Premium Footer
-        =========================================================== -->
+    </section>
 
-        <footer
-            id="footer"
-            class="footer"
+    <!-- ==========================================================
+         CTA END
+    =========================================================== -->
+
+    <!-- ==========================================================
+         HTML-09
+         FOOTER
+    =========================================================== -->
+
+    <!-- ==========================================================
+         FOOTER START
+    =========================================================== -->
+
+    <footer
+        id="footer"
+        class="section"
+    >
+
+        <div
+            class="container"
         >
 
             <div
-                class="container"
+                class="max-content mx-auto text-center stack stack-lg"
             >
 
                 <!-- ==========================================
                      Brand
                 =========================================== -->
 
-                <div
-                    class="footer-brand"
+                <h3
+                    class="heading-lg"
                 >
 
-                    <h2>
+                    CTM PATH™
 
-                        CTM PATH™
-
-                    </h2>
-
-                </div>
+                </h3>
 
                 <!-- ==========================================
-                     Brand Promise
+                     Tagline
                 =========================================== -->
 
-                <div
-                    class="footer-promise"
+                <p
+                    class="body"
                 >
 
-                    <p
-                        class="footer-ta"
-                    >
+                    Every DREAM has a PATH.
 
-                        ஒவ்வொரு கனவிற்கும்
-
-                        <br>
-
-                        ஒரு பாதை உண்டு.
-
-                    </p>
-
-                    <p
-                        class="footer-en"
-                    >
-
-                        Every DREAM
-
-                        <br>
-
-                        has a PATH.
-
-                    </p>
-
-                </div>
-
-                <div
-                    class="footer-promise"
-                >
-
-                    <p
-                        class="footer-ta"
-                    >
-
-                        அந்த பாதையை
-
-                        <br>
-
-                        நீங்கள்
-
-                        <br>
-
-                        தனியாக
-
-                        <br>
-
-                        தேட வேண்டியதில்லை.
-
-                    </p>
-
-                    <p
-                        class="footer-en"
-                    >
-
-                        You don't have to
-
-                        <br>
-
-                        discover it
-
-                        <br>
-
-                        alone.
-
-                    </p>
-
-                </div>
-
-                <!-- ==========================================
-                     Divider
-                =========================================== -->
-
-                <hr
-                    class="footer-divider"
-                >
+                </p>
 
                 <!-- ==========================================
                      Copyright
                 =========================================== -->
 
                 <p
-                    class="footer-copy"
+                    class="body text-muted"
                 >
 
                     © 2026 CTM PATH™
@@ -1887,8 +1042,24 @@
 
             </div>
 
-        </footer>
+        </div>
 
-    </main>
+    </footer>
 
-    
+    <!-- ==========================================================
+         FOOTER END
+    =========================================================== -->
+
+    <!-- ==========================================================
+         JavaScript
+    =========================================================== -->
+
+    <script
+        src="app.js"
+    ></script>
+
+</body>
+
+</html>
+
+
