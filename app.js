@@ -2,18 +2,17 @@
 /* ==========================================================================
    CTM PATH™ GUIDED JOURNEY™
 
-   FOUNDATION
-   APPLICATION ENGINE
+   FOUNDATION ENGINE
 
-   File      : app.js
-   Version   : 1.0
+   Version : 1.1
+========================================================================== */
 
-   ========================================================================== */
+"use strict";
 
 
 /* ==========================================================================
-   GLOBAL APPLICATION
-   ========================================================================== */
+   APPLICATION
+========================================================================== */
 
 const CTM = {
 
@@ -21,7 +20,7 @@ const CTM = {
 
         name : "CTM PATH™ Guided Journey™",
 
-        version : "1.0"
+        version : "1.1"
 
     },
 
@@ -33,148 +32,214 @@ const CTM = {
 
     state : {
 
-        initialized : false
+        initialized : false,
+
+        currentScene : null
+
+    },
+
+    elements : {
+
+        app : null,
+
+        journey : null
 
     }
 
 };
+
 
 
 /* ==========================================================================
    START APPLICATION
-   ========================================================================== */
-
-CTM.start = function(){
-
-    if(
-
-        CTM.config.debug
-
-    ){
-
-        console.log(
-
-            CTM.app.name +
-            " v" +
-            CTM.app.version
-
-        );
-
-    }
-
-    CTM.cache();
-
-    CTM.verify();
-
-    CTM.initialize();
-
-};
-
-
-/* ==========================================================================
-   CACHE DOM
-   ========================================================================== */
-
-CTM.cache = function(){
-
-    CTM.app.element = document.getElementById(
-
-        "app"
-
-    );
-
-    CTM.app.journey = document.getElementById(
-
-        "journey"
-
-    );
-
-};
-
-
-/* ==========================================================================
-   VERIFY FOUNDATION
-   ========================================================================== */
-
-CTM.verify = function(){
-
-    if(
-
-        !CTM.app.element
-
-    ){
-
-        console.error(
-
-            "Application container (#app) not found."
-
-        );
-
-        return false;
-
-    }
-
-    if(
-
-        !CTM.app.journey
-
-    ){
-
-        console.error(
-
-            "Journey container (#journey) not found."
-
-        );
-
-        return false;
-
-    }
-
-    return true;
-
-};
-
-
-/* ==========================================================================
-   INITIALIZE
-   ========================================================================== */
-
-CTM.initialize = function(){
-
-    CTM.state.initialized = true;
-
-    if(
-
-        CTM.config.debug
-
-    ){
-
-        console.log(
-
-            "Foundation initialized."
-
-        );
-
-    }
-
-};
-
-
-/* ==========================================================================
-   APPLICATION READY
-   ========================================================================== */
+========================================================================== */
 
 document.addEventListener(
 
     "DOMContentLoaded",
 
-    function(){
-
-        CTM.start();
-
-    }
+    initializeApplication
 
 );
 
+
+
+/* ==========================================================================
+   INITIALIZE
+========================================================================== */
+
+async function initializeApplication(){
+
+    log(
+
+        CTM.app.name +
+
+        " v" +
+
+        CTM.app.version
+
+    );
+
+    cacheElements();
+
+    verifyFoundation();
+
+    await loadScene(
+
+        "scene01"
+
+    );
+
+    CTM.state.initialized = true;
+
+    log(
+
+        "Foundation initialized."
+
+    );
+
+}
+
+
+
+/* ==========================================================================
+   CACHE
+========================================================================== */
+
+function cacheElements(){
+
+    CTM.elements.app =
+
+        document.getElementById(
+
+            "app"
+
+        );
+
+    CTM.elements.journey =
+
+        document.getElementById(
+
+            "journey"
+
+        );
+
+}
+
+
+
+/* ==========================================================================
+   VERIFY
+========================================================================== */
+
+function verifyFoundation(){
+
+    if(
+
+        !CTM.elements.app
+
+    ){
+
+        throw new Error(
+
+            "#app not found."
+
+        );
+
+    }
+
+    if(
+
+        !CTM.elements.journey
+
+    ){
+
+        throw new Error(
+
+            "#journey not found."
+
+        );
+
+    }
+
+}
+
+
+
+/* ==========================================================================
+   LOAD SCENE
+========================================================================== */
+
+async function loadScene(
+
+    sceneName
+
+){
+
+    const response = await fetch(
+
+        `scenes/${sceneName}.html`
+
+    );
+
+    if(
+
+        !response.ok
+
+    ){
+
+        throw new Error(
+
+            "Unable to load " +
+
+            sceneName
+
+        );
+
+    }
+
+    const html = await response.text();
+
+    CTM.elements.journey.innerHTML = html;
+
+    CTM.state.currentScene = sceneName;
+
+    log(
+
+        sceneName +
+
+        " loaded."
+
+    );
+
+}
+
+
+
+/* ==========================================================================
+   LOGGER
+========================================================================== */
+
+function log(
+
+    message
+
+){
+
+    if(
+
+        CTM.config.debug
+
+    ){
+
+        console.log(
+
+            message
+
+        );
+
+    }
+
+}
 
 
