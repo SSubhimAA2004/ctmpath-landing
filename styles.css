@@ -1,14 +1,17 @@
 
 /* ==========================================================================
-   CTM PATH™ GUIDED JOURNEY™
-   CSS-01
-   DESIGN FOUNDATION
-   VERSION 1.0
-========================================================================== */
+   Project      : CTM PATH™ Guided Journey™
+   File         : styles.css
+   Version      : 1.0
+   Module       : 01 of 08
+   Status       : Continue
+   Architecture : Technical Specification v1.0
+   ========================================================================== */
+
 
 /* ==========================================================================
    01. RESET
-========================================================================== */
+   ========================================================================== */
 
 *,
 *::before,
@@ -22,113 +25,43 @@
 
 }
 
-/* ==========================================================================
-   02. DESIGN TOKENS
-========================================================================== */
-
-:root{
-
-    /* ---------- Brand ---------- */
-
-    --color-primary:#0F4C81;
-
-    --color-primary-light:#2C73C9;
-
-    --color-accent:#20C997;
-
-    --color-gold:#D4AF37;
-
-    /* ---------- Surfaces ---------- */
-
-    --color-background:#081C3A;
-
-    --color-background-dark:#041226;
-
-    --color-white:#FFFFFF;
-
-    /* ---------- Typography ---------- */
-
-    --color-text:#F7F9FC;
-
-    --color-text-soft:#CFD8E5;
-
-    --color-overlay:rgba(4,18,38,.72);
-
-    /* ---------- Fonts ---------- */
-
-    --font-ta:"Noto Sans Tamil",sans-serif;
-
-    --font-en:"Inter",sans-serif;
-
-    /* ---------- Layout ---------- */
-
-    --container-width:1200px;
-
-    --scene-width:100vw;
-
-    --scene-height:100vh;
-
-    /* ---------- Radius ---------- */
-
-    --radius-small:8px;
-
-    --radius-medium:16px;
-
-    --radius-large:32px;
-
-    --radius-pill:999px;
-
-    /* ---------- Shadow ---------- */
-
-    --shadow-soft:
-
-        0 20px 60px rgba(0,0,0,.18);
-
-    /* ---------- Motion ---------- */
-
-    --duration-fast:.25s;
-
-    --duration-normal:.45s;
-
-    --duration-slow:.80s;
-
-    --ease:cubic-bezier(.22,.61,.36,1);
-
-}
 
 /* ==========================================================================
-   03. DOCUMENT
-========================================================================== */
+   DOCUMENT
+   ========================================================================== */
 
 html{
 
     font-size:16px;
 
+    -webkit-text-size-adjust:100%;
+
+    scroll-behavior:smooth;
+
 }
 
 body{
 
-    width:100%;
-
-    height:100%;
+    min-height:100vh;
 
     overflow:hidden;
 
-    background:var(--color-background);
+    font-family:"Inter",sans-serif;
 
-    color:var(--color-text);
-
-    font-family:var(--font-en);
-
-    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
 
     text-rendering:optimizeLegibility;
 
+    -webkit-font-smoothing:antialiased;
+
+    -moz-osx-font-smoothing:grayscale;
+
 }
 
+
 /* ==========================================================================
-   04. MEDIA
-========================================================================== */
+   MEDIA
+   ========================================================================== */
 
 img{
 
@@ -139,6 +72,23 @@ img{
     height:auto;
 
 }
+
+picture{
+
+    display:block;
+
+}
+
+svg{
+
+    display:block;
+
+}
+
+
+/* ==========================================================================
+   FORMS
+   ========================================================================== */
 
 button{
 
@@ -152,6 +102,19 @@ button{
 
 }
 
+input,
+textarea,
+select{
+
+    font:inherit;
+
+}
+
+
+/* ==========================================================================
+   LINKS
+   ========================================================================== */
+
 a{
 
     color:inherit;
@@ -160,35 +123,562 @@ a{
 
 }
 
+
 /* ==========================================================================
-   05. APPLICATION
-========================================================================== */
+   LISTS
+   ========================================================================== */
 
-#app{
+ul,
+ol{
 
-    width:100vw;
-
-    height:100vh;
-
-    position:relative;
-
-    overflow:hidden;
+    list-style:none;
 
 }
 
-#journey{
+
+/* ==========================================================================
+   TABLES
+   ========================================================================== */
+
+table{
+
+    border-collapse:collapse;
+
+    border-spacing:0;
+
+}
+
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+:focus-visible{
+
+    outline:3px solid #20C997;
+
+    outline-offset:3px;
+
+}
+
+[hidden]{
+
+    display:none !important;
+
+}
+
+/* ==========================================================================
+   02. DESIGN TOKENS
+   ========================================================================== */
+
+:root{
+
+    /* ==========================================================
+       BRAND COLORS
+    ========================================================== */
+
+    --color-primary:#0F4C81;
+
+    --color-primary-light:#2C73C9;
+
+    --color-primary-dark:#081C3A;
+
+    --color-secondary:#20C997;
+
+    --color-accent:#D4AF37;
+
+    /* ==========================================================
+       SURFACE COLORS
+    ========================================================== */
+
+    --color-background:#041226;
+
+    --color-surface:#081C3A;
+
+    --color-surface-light:#12376E;
+
+    --color-card:#173F73;
+
+    --color-overlay:rgba(4,18,38,.74);
+
+    --color-overlay-strong:rgba(4,18,38,.88);
+
+    /* ==========================================================
+       TEXT COLORS
+    ========================================================== */
+
+    --color-white:#FFFFFF;
+
+    --color-text:#F8F9FB;
+
+    --color-text-soft:#D8E1EC;
+
+    --color-text-muted:#AEBFD4;
+
+    --color-success:#41D17D;
+
+    --color-warning:#F2B84B;
+
+    --color-danger:#E65A5A;
+
+    /* ==========================================================
+       TYPOGRAPHY
+    ========================================================== */
+
+    --font-tamil:"Noto Sans Tamil",sans-serif;
+
+    --font-english:"Inter",sans-serif;
+
+    /* ==========================================================
+       FONT WEIGHTS
+    ========================================================== */
+
+    --weight-light:300;
+
+    --weight-regular:400;
+
+    --weight-medium:500;
+
+    --weight-semibold:600;
+
+    --weight-bold:700;
+
+    --weight-extra-bold:800;
+
+    /* ==========================================================
+       FONT SIZES
+    ========================================================== */
+
+    --text-xs:.75rem;
+
+    --text-sm:.875rem;
+
+    --text-md:1rem;
+
+    --text-lg:1.125rem;
+
+    --text-xl:1.375rem;
+
+    --text-2xl:1.75rem;
+
+    --text-3xl:2.25rem;
+
+    --text-4xl:3rem;
+
+    --text-5xl:4rem;
+
+    /* ==========================================================
+       LINE HEIGHT
+    ========================================================== */
+
+    --line-tight:1.20;
+
+    --line-normal:1.50;
+
+    --line-relaxed:1.75;
+
+    /* ==========================================================
+       SPACING
+    ========================================================== */
+
+    --space-1:.25rem;
+
+    --space-2:.50rem;
+
+    --space-3:.75rem;
+
+    --space-4:1rem;
+
+    --space-5:1.50rem;
+
+    --space-6:2rem;
+
+    --space-7:3rem;
+
+    --space-8:4rem;
+
+    --space-9:5rem;
+
+    --space-10:6rem;
+
+    /* ==========================================================
+       CONTAINER
+    ========================================================== */
+
+    --container-width:1200px;
+
+    --container-narrow:900px;
+
+    --scene-width:100vw;
+
+    --scene-height:100vh;
+
+    /* ==========================================================
+       BORDER RADIUS
+    ========================================================== */
+
+    --radius-small:8px;
+
+    --radius-medium:16px;
+
+    --radius-large:28px;
+
+    --radius-xl:40px;
+
+    --radius-pill:999px;
+
+    /* ==========================================================
+       SHADOWS
+    ========================================================== */
+
+    --shadow-soft:
+
+        0 10px 35px rgba(0,0,0,.18);
+
+    --shadow-medium:
+
+        0 18px 50px rgba(0,0,0,.25);
+
+    --shadow-large:
+
+        0 30px 80px rgba(0,0,0,.35);
+
+    /* ==========================================================
+       TRANSITIONS
+    ========================================================== */
+
+    --duration-fast:.25s;
+
+    --duration-normal:.45s;
+
+    --duration-slow:.80s;
+
+    --duration-cinematic:1.20s;
+
+    --ease-standard:cubic-bezier(.22,.61,.36,1);
+
+    --ease-cinematic:cubic-bezier(.19,1,.22,1);
+
+    /* ==========================================================
+       Z INDEX
+    ========================================================== */
+
+    --z-background:1;
+
+    --z-overlay:5;
+
+    --z-content:20;
+
+    --z-footer:30;
+
+    --z-modal:100;
+
+}
+
+/* ==========================================================================
+   03. BASE DOCUMENT
+   ========================================================================== */
+
+html,
+body{
 
     width:100%;
 
     height:100%;
 
-    position:relative;
+}
+
+body{
+
+    background:var(--color-background);
+
+    color:var(--color-text);
+
+    font-family:var(--font-english);
+
+    font-size:var(--text-md);
+
+    font-weight:var(--weight-regular);
+
+    line-height:var(--line-normal);
+
+    overflow:hidden;
 
 }
 
 /* ==========================================================================
-   06. SCENE ENGINE
-========================================================================== */
+   SELECTION
+   ========================================================================== */
+
+::selection{
+
+    background:var(--color-secondary);
+
+    color:var(--color-white);
+
+}
+
+/* ==========================================================================
+   SCROLLBAR
+   ========================================================================== */
+
+::-webkit-scrollbar{
+
+    width:0;
+
+    height:0;
+
+}
+
+/* ==========================================================================
+   APPLICATION
+   ========================================================================== */
+
+#app{
+
+    position:relative;
+
+    width:100vw;
+
+    height:100vh;
+
+    overflow:hidden;
+
+    background:var(--color-background);
+
+}
+
+/* ==========================================================================
+   JOURNEY
+   ========================================================================== */
+
+#journey{
+
+    position:relative;
+
+    width:100%;
+
+    height:100%;
+
+    overflow:hidden;
+
+}
+
+/* ==========================================================================
+   CONTAINER
+   ========================================================================== */
+
+.container{
+
+    width:min(
+
+        var(--container-width),
+
+        92%
+
+    );
+
+    margin-inline:auto;
+
+}
+
+/* ==========================================================================
+   NARROW CONTAINER
+   ========================================================================== */
+
+.container-narrow{
+
+    width:min(
+
+        var(--container-narrow),
+
+        92%
+
+    );
+
+    margin-inline:auto;
+
+}
+
+/* ==========================================================================
+   IMAGE
+   ========================================================================== */
+
+img{
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+}
+
+/* ==========================================================================
+   TYPOGRAPHY ENGINE
+   ========================================================================== */
+
+.text-ta{
+
+    font-family:var(--font-tamil);
+
+}
+
+.text-en{
+
+    font-family:var(--font-english);
+
+}
+
+.heading-xl{
+
+    font-size:clamp(
+
+        2.8rem,
+
+        5vw,
+
+        4.8rem
+
+    );
+
+    font-weight:var(--weight-bold);
+
+    line-height:1.25;
+
+}
+
+.heading-lg{
+
+    font-size:clamp(
+
+        2rem,
+
+        4vw,
+
+        3.2rem
+
+    );
+
+    font-weight:var(--weight-bold);
+
+    line-height:1.30;
+
+}
+
+.heading-md{
+
+    font-size:clamp(
+
+        1.5rem,
+
+        3vw,
+
+        2.25rem
+
+    );
+
+    font-weight:var(--weight-semibold);
+
+}
+
+.body-lg{
+
+    font-size:var(--text-xl);
+
+    line-height:var(--line-relaxed);
+
+}
+
+.body-md{
+
+    font-size:var(--text-lg);
+
+    line-height:var(--line-relaxed);
+
+}
+
+.body-sm{
+
+    font-size:var(--text-md);
+
+    line-height:var(--line-normal);
+
+}
+
+/* ==========================================================================
+   TEXT HELPERS
+   ========================================================================== */
+
+.text-center{
+
+    text-align:center;
+
+}
+
+.text-left{
+
+    text-align:left;
+
+}
+
+.text-right{
+
+    text-align:right;
+
+}
+
+.text-white{
+
+    color:var(--color-white);
+
+}
+
+.text-muted{
+
+    color:var(--color-text-muted);
+
+}
+
+.text-soft{
+
+    color:var(--color-text-soft);
+
+}
+
+/* ==========================================================================
+   DISPLAY HELPERS
+   ========================================================================== */
+
+.hidden{
+
+    display:none !important;
+
+}
+
+.invisible{
+
+    visibility:hidden;
+
+}
+
+.flex{
+
+    display:flex;
+
+}
+
+.grid{
+
+    display:grid;
+
+}
+
+/* ==========================================================================
+   04. APPLICATION ENGINE
+   ========================================================================== */
+
+/* ==========================================================================
+   SCENE
+   ========================================================================== */
 
 .scene{
 
@@ -196,9 +686,9 @@ a{
 
     inset:0;
 
-    width:100%;
+    width:var(--scene-width);
 
-    height:100%;
+    height:var(--scene-height);
 
     display:flex;
 
@@ -216,11 +706,15 @@ a{
 
     transition:
 
-        opacity var(--duration-slow) var(--ease),
+        opacity var(--duration-cinematic) var(--ease-cinematic),
 
-        visibility var(--duration-slow) var(--ease);
+        visibility var(--duration-cinematic) var(--ease-cinematic);
 
 }
+
+/* ==========================================================================
+   ACTIVE SCENE
+   ========================================================================== */
 
 .scene.active{
 
@@ -233,60 +727,214 @@ a{
 }
 
 /* ==========================================================================
-   07. LAYOUT ENGINE
-========================================================================== */
+   SCENE BACKGROUND
+   ========================================================================== */
 
-.container{
+.scene-background{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:var(--z-background);
+
+    overflow:hidden;
+
+}
+
+/* ==========================================================================
+   BACKGROUND IMAGE
+   ========================================================================== */
+
+.scene-background-image{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    object-position:center center;
+
+    transform:scale(1.05);
+
+}
+
+/* ==========================================================================
+   OVERLAY
+   ========================================================================== */
+
+.scene-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            rgba(4,18,38,.18) 0%,
+
+            rgba(4,18,38,.45) 35%,
+
+            rgba(4,18,38,.75) 70%,
+
+            rgba(4,18,38,.90) 100%
+
+        );
+
+    z-index:var(--z-overlay);
+
+}
+
+/* ==========================================================================
+   SCENE CONTENT
+   ========================================================================== */
+
+.scene-content{
+
+    position:relative;
+
+    z-index:var(--z-content);
+
+    width:100%;
+
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+}
+
+/* ==========================================================================
+   SCENE FOOTER
+   ========================================================================== */
+
+.scene-footer{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:2.5rem;
+
+    transform:translateX(-50%);
+
+    z-index:var(--z-footer);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+/* ==========================================================================
+   SAFE CONTENT AREA
+   ========================================================================== */
+
+.safe-area{
 
     width:min(
 
-        var(--container-width),
+        900px,
 
         92%
 
     );
 
-    margin-inline:auto;
+}
+
+/* ==========================================================================
+   VIEWPORT HELPERS
+   ========================================================================== */
+
+.full-width{
+
+    width:100%;
+
+}
+
+.full-height{
+
+    height:100%;
+
+}
+
+.viewport{
+
+    width:100vw;
+
+    height:100vh;
 
 }
 
 /* ==========================================================================
-   08. TYPOGRAPHY ENGINE
-========================================================================== */
+   LAYER HELPERS
+   ========================================================================== */
 
-.text-ta{
+.layer-background{
 
-    font-family:var(--font-ta);
-
-}
-
-.text-en{
-
-    font-family:var(--font-en);
+    z-index:var(--z-background);
 
 }
 
-/* ==========================================================================
-   09. COMPONENT FOUNDATION
-========================================================================== */
+.layer-overlay{
 
-.hidden{
-
-    display:none !important;
+    z-index:var(--z-overlay);
 
 }
 
-.disabled{
+.layer-content{
 
-    pointer-events:none;
+    z-index:var(--z-content);
 
-    opacity:.45;
+}
+
+.layer-footer{
+
+    z-index:var(--z-footer);
 
 }
 
 /* ==========================================================================
-   10. ANIMATION FOUNDATION
-========================================================================== */
+   05. ANIMATION ENGINE
+   ========================================================================== */
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce){
+
+    *{
+
+        animation:none !important;
+
+        transition:none !important;
+
+        scroll-behavior:auto !important;
+
+    }
+
+}
+
+/* ==========================================================================
+   CINEMATIC FADE
+   ========================================================================== */
 
 .fade{
 
@@ -294,9 +942,9 @@ a{
 
     transition:
 
-        opacity var(--duration-slow)
+        opacity var(--duration-cinematic)
 
-        var(--ease);
+        var(--ease-cinematic);
 
 }
 
@@ -306,22 +954,1038 @@ a{
 
 }
 
-.blur{
+/* ==========================================================================
+   FADE + UP
+   ========================================================================== */
+
+.fade-up{
+
+    opacity:0;
+
+    transform:translateY(32px);
+
+    transition:
+
+        opacity var(--duration-cinematic)
+
+        var(--ease-cinematic),
+
+        transform var(--duration-cinematic)
+
+        var(--ease-cinematic);
+
+}
+
+.fade-up.visible{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+/* ==========================================================================
+   FADE + DOWN
+   ========================================================================== */
+
+.fade-down{
+
+    opacity:0;
+
+    transform:translateY(-32px);
+
+    transition:
+
+        opacity var(--duration-cinematic)
+
+        var(--ease-cinematic),
+
+        transform var(--duration-cinematic)
+
+        var(--ease-cinematic);
+
+}
+
+.fade-down.visible{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+/* ==========================================================================
+   FADE + SCALE
+   ========================================================================== */
+
+.fade-scale{
+
+    opacity:0;
+
+    transform:scale(.96);
+
+    transition:
+
+        opacity var(--duration-cinematic)
+
+        var(--ease-cinematic),
+
+        transform var(--duration-cinematic)
+
+        var(--ease-cinematic);
+
+}
+
+.fade-scale.visible{
+
+    opacity:1;
+
+    transform:scale(1);
+
+}
+
+/* ==========================================================================
+   FADE + BLUR
+   ========================================================================== */
+
+.fade-blur{
+
+    opacity:0;
 
     filter:blur(12px);
 
     transition:
 
-        filter var(--duration-slow)
+        opacity var(--duration-cinematic)
 
-        var(--ease);
+        var(--ease-cinematic),
+
+        filter var(--duration-cinematic)
+
+        var(--ease-cinematic);
 
 }
 
-.blur.visible{
+.fade-blur.visible{
+
+    opacity:1;
 
     filter:blur(0);
 
 }
+
+/* ==========================================================================
+   STAGGER DELAYS
+   ========================================================================== */
+
+.delay-01{
+
+    transition-delay:.50s;
+
+}
+
+.delay-02{
+
+    transition-delay:1.30s;
+
+}
+
+.delay-03{
+
+    transition-delay:2.10s;
+
+}
+
+.delay-04{
+
+    transition-delay:3.00s;
+
+}
+
+.delay-05{
+
+    transition-delay:4.00s;
+
+}
+
+.delay-06{
+
+    transition-delay:5.00s;
+
+}
+
+.delay-07{
+
+    transition-delay:6.00s;
+
+}
+
+.delay-08{
+
+    transition-delay:7.00s;
+
+}
+
+/* ==========================================================================
+   INITIAL STATE
+   ========================================================================== */
+
+.animate{
+
+    opacity:0;
+
+}
+
+/* ==========================================================================
+   FINAL STATE
+   ========================================================================== */
+
+.animate.visible{
+
+    opacity:1;
+
+}
+
+/* ==========================================================================
+   TIMELINE READY
+   ========================================================================== */
+
+.timeline{
+
+    will-change:
+
+        opacity,
+
+        transform,
+
+        filter;
+
+}
+
+/* ==========================================================================
+   06. COMPONENT LIBRARY
+   ========================================================================== */
+
+
+/* ==========================================================================
+   PRIMARY BUTTON
+   ========================================================================== */
+
+.button-primary{
+
+    display:inline-flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:var(--space-2);
+
+    min-width:320px;
+
+    min-height:72px;
+
+    padding:
+
+        var(--space-4)
+
+        var(--space-7);
+
+    border:none;
+
+    border-radius:var(--radius-pill);
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            var(--color-secondary),
+
+            var(--color-primary-light)
+
+        );
+
+    color:var(--color-white);
+
+    box-shadow:var(--shadow-large);
+
+    cursor:pointer;
+
+    transition:
+
+        transform var(--duration-normal)
+
+        var(--ease-standard),
+
+        box-shadow var(--duration-normal)
+
+        var(--ease-standard),
+
+        filter var(--duration-normal)
+
+        var(--ease-standard);
+
+}
+
+.button-primary:hover{
+
+    transform:
+
+        translateY(-4px);
+
+    box-shadow:
+
+        0 40px 90px rgba(0,0,0,.45);
+
+}
+
+.button-primary:active{
+
+    transform:
+
+        translateY(-1px);
+
+}
+
+.button-primary:focus-visible{
+
+    outline:3px solid var(--color-white);
+
+    outline-offset:4px;
+
+}
+
+
+/* ==========================================================================
+   BUTTON TEXT
+   ========================================================================== */
+
+.button-ta{
+
+    font-family:var(--font-tamil);
+
+    font-size:1.15rem;
+
+    font-weight:var(--weight-semibold);
+
+    line-height:1.45;
+
+    text-align:center;
+
+}
+
+.button-en{
+
+    font-family:var(--font-english);
+
+    font-size:.92rem;
+
+    font-weight:var(--weight-regular);
+
+    line-height:1.40;
+
+    text-align:center;
+
+    opacity:.92;
+
+}
+
+
+/* ==========================================================================
+   LOGO
+   ========================================================================== */
+
+.footer-logo{
+
+    width:64px;
+
+    height:auto;
+
+}
+
+
+/* ==========================================================================
+   BRAND
+   ========================================================================== */
+
+.footer-brand{
+
+    margin-top:var(--space-3);
+
+    font-family:var(--font-english);
+
+    font-size:var(--text-sm);
+
+    font-weight:var(--weight-bold);
+
+    letter-spacing:.35rem;
+
+    text-transform:uppercase;
+
+    color:var(--color-white);
+
+}
+
+.footer-tagline{
+
+    margin-top:var(--space-2);
+
+    font-family:var(--font-english);
+
+    font-size:var(--text-xs);
+
+    font-weight:var(--weight-regular);
+
+    color:var(--color-text-soft);
+
+    letter-spacing:.08rem;
+
+}
+
+
+/* ==========================================================================
+   DIVIDERS
+   ========================================================================== */
+
+.divider{
+
+    width:120px;
+
+    height:2px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            var(--color-secondary),
+
+            transparent
+
+        );
+
+}
+
+
+/* ==========================================================================
+   CARD
+   ========================================================================== */
+
+.card{
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:var(--radius-large);
+
+    backdrop-filter:blur(14px);
+
+    box-shadow:var(--shadow-soft);
+
+}
+
+
+/* ==========================================================================
+   SPACING HELPERS
+   ========================================================================== */
+
+.mt-1{
+
+    margin-top:var(--space-1);
+
+}
+
+.mt-2{
+
+    margin-top:var(--space-2);
+
+}
+
+.mt-3{
+
+    margin-top:var(--space-3);
+
+}
+
+.mt-4{
+
+    margin-top:var(--space-4);
+
+}
+
+.mt-5{
+
+    margin-top:var(--space-5);
+
+}
+
+.mt-6{
+
+    margin-top:var(--space-6);
+
+}
+
+.mb-1{
+
+    margin-bottom:var(--space-1);
+
+}
+
+.mb-2{
+
+    margin-bottom:var(--space-2);
+
+}
+
+.mb-3{
+
+    margin-bottom:var(--space-3);
+
+}
+
+.mb-4{
+
+    margin-bottom:var(--space-4);
+
+}
+
+.mb-5{
+
+    margin-bottom:var(--space-5);
+
+}
+
+.mb-6{
+
+    margin-bottom:var(--space-6);
+
+}
+
+
+/* ==========================================================================
+   RESPONSIVE FOUNDATION
+   ========================================================================== */
+
+@media (max-width:992px){
+
+    .button-primary{
+
+        min-width:280px;
+
+    }
+
+}
+
+@media (max-width:768px){
+
+    .button-primary{
+
+        width:100%;
+
+        min-width:unset;
+
+    }
+
+}
+
+@media (max-width:480px){
+
+    .button-ta{
+
+        font-size:1rem;
+
+    }
+
+    .button-en{
+
+        font-size:.85rem;
+
+    }
+
+}
+
+/* ==========================================================================
+   07. SCENE 01
+   THE QUESTION
+   ==========================================================================
+*/
+
+
+/* ==========================================================================
+   SCENE 01
+   ========================================================================== */
+
+#scene01{
+
+    background:var(--color-background);
+
+}
+
+
+/* ==========================================================================
+   HERO QUESTION
+   ========================================================================== */
+
+.hero-question{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:var(--space-8);
+
+    width:100%;
+
+    max-width:900px;
+
+    margin-inline:auto;
+
+}
+
+
+/* ==========================================================================
+   QUESTION GROUP
+   ========================================================================== */
+
+.question-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+.question-group-ta{
+
+    gap:var(--space-4);
+
+}
+
+
+.question-group-en{
+
+    margin-top:var(--space-7);
+
+    gap:var(--space-2);
+
+}
+
+
+/* ==========================================================================
+   QUESTION LINES
+   ========================================================================== */
+
+.question-line{
+
+    text-align:center;
+
+    opacity:0;
+
+}
+
+
+/* ==========================================================================
+   TAMIL
+   ========================================================================== */
+
+.question-group-ta .question-line{
+
+    font-family:var(--font-tamil);
+
+    font-weight:var(--weight-bold);
+
+    font-size:
+
+        clamp(
+
+            2.6rem,
+
+            5vw,
+
+            4.6rem
+
+        );
+
+    line-height:1.30;
+
+    color:var(--color-white);
+
+    letter-spacing:-.02em;
+
+}
+
+
+/* ==========================================================================
+   ENGLISH
+   ========================================================================== */
+
+.question-group-en .question-line{
+
+    font-family:var(--font-english);
+
+    font-weight:var(--weight-light);
+
+    font-size:
+
+        clamp(
+
+            1.25rem,
+
+            2vw,
+
+            2rem
+
+        );
+
+    line-height:1.70;
+
+    color:var(--color-text-soft);
+
+}
+
+
+/* ==========================================================================
+   ACTION
+   ========================================================================== */
+
+.hero-action{
+
+    margin-top:var(--space-9);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.scene-footer{
+
+    opacity:0;
+
+    text-align:center;
+
+}
+
+
+/* ==========================================================================
+   HERO BACKGROUND
+   ========================================================================== */
+
+.scene-background-image{
+
+    animation:
+
+        heroZoom
+
+        18s
+
+        ease-in-out
+
+        infinite
+
+        alternate;
+
+}
+
+
+/* ==========================================================================
+   HERO OVERLAY
+   ========================================================================== */
+
+.scene-overlay{
+
+    backdrop-filter:
+
+        blur(1px);
+
+}
+
+
+/* ==========================================================================
+   HERO BREATHING SPACE
+   ========================================================================== */
+
+.scene-content{
+
+    padding:
+
+        var(--space-9)
+
+        var(--space-5);
+
+}
+
+/* ==========================================================================
+   08. SCENE 01
+   CINEMATIC FINISH
+   VERSION 1.0
+   ========================================================================== */
+
+
+/* ==========================================================================
+   INITIAL INVISIBLE STATE
+   ========================================================================== */
+
+.question-line,
+
+.button-primary,
+
+.scene-footer{
+
+    opacity:0;
+
+}
+
+
+/* ==========================================================================
+   VISIBLE STATE
+   ========================================================================== */
+
+.question-line.visible{
+
+    opacity:1;
+
+    transition:
+
+        opacity var(--duration-cinematic)
+
+        var(--ease-cinematic);
+
+}
+
+
+.button-primary.visible{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+    transition:
+
+        opacity var(--duration-cinematic)
+
+        var(--ease-cinematic),
+
+        transform var(--duration-cinematic)
+
+        var(--ease-cinematic);
+
+}
+
+
+.scene-footer.visible{
+
+    opacity:1;
+
+    transition:
+
+        opacity 1.4s ease;
+
+}
+
+
+/* ==========================================================================
+   BUTTON INITIAL STATE
+   ========================================================================== */
+
+.button-primary{
+
+    transform:translateY(18px);
+
+}
+
+
+/* ==========================================================================
+   FOOTER INITIAL STATE
+   ========================================================================== */
+
+.scene-footer{
+
+    transform:
+
+        translateX(-50%)
+
+        translateY(12px);
+
+}
+
+
+.scene-footer.visible{
+
+    transform:
+
+        translateX(-50%)
+
+        translateY(0);
+
+}
+
+
+/* ==========================================================================
+   HERO BACKGROUND ANIMATION
+   ========================================================================== */
+
+@keyframes heroZoom{
+
+    0%{
+
+        transform:scale(1.03);
+
+    }
+
+    100%{
+
+        transform:scale(1.10);
+
+    }
+
+}
+
+
+/* ==========================================================================
+   MOBILE
+   ========================================================================== */
+
+@media (max-width:768px){
+
+    .scene-content{
+
+        padding:
+
+            var(--space-8)
+
+            var(--space-4);
+
+    }
+
+    .hero-question{
+
+        gap:var(--space-6);
+
+    }
+
+    .question-group-ta .question-line{
+
+        font-size:
+
+            clamp(
+
+                2rem,
+
+                8vw,
+
+                3rem
+
+            );
+
+    }
+
+    .question-group-en{
+
+        margin-top:var(--space-5);
+
+    }
+
+    .hero-action{
+
+        margin-top:var(--space-7);
+
+    }
+
+}
+
+
+/* ==========================================================================
+   SMALL MOBILE
+   ========================================================================== */
+
+@media (max-width:480px){
+
+    .scene-content{
+
+        padding:
+
+            var(--space-7)
+
+            var(--space-3);
+
+    }
+
+    .question-group-ta .question-line{
+
+        line-height:1.40;
+
+    }
+
+    .question-group-en .question-line{
+
+        font-size:1.05rem;
+
+    }
+
+    .footer-logo{
+
+        width:52px;
+
+    }
+
+}
+
+
+/* ==========================================================================
+   LARGE DESKTOP
+   ========================================================================== */
+
+@media (min-width:1440px){
+
+    .hero-question{
+
+        max-width:980px;
+
+    }
+
+}
+
+
+/* ==========================================================================
+   PRINT
+   ========================================================================== */
+
+@media print{
+
+    body{
+
+        background:#ffffff;
+
+        color:#000000;
+
+    }
+
+}
+
 
 
