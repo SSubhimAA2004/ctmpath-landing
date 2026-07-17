@@ -4,7 +4,7 @@
 
    FOUNDATION ENGINE
 
-   Version : 1.1
+   Version : 1.2
 ========================================================================== */
 
 "use strict";
@@ -20,7 +20,7 @@ const CTM = {
 
         name : "CTM PATH™ Guided Journey™",
 
-        version : "1.1"
+        version : "1.2"
 
     },
 
@@ -178,7 +178,7 @@ async function loadScene(
 
     const response = await fetch(
 
-        `scenes/${sceneName}.html`
+        `scenes/${sceneName}`
 
     );
 
