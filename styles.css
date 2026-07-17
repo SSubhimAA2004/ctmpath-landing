@@ -1553,9 +1553,9 @@ body{
 
     position:absolute;
 
-    top:40px;
+    top:36px;
 
-    left:48px;
+    left:36px;
 
     z-index:100;
 
@@ -1564,7 +1564,7 @@ body{
 
 .scene01-logo-image{
 
-    width:180px;
+    width:160px;
 
     height:auto;
 
@@ -1574,7 +1574,7 @@ body{
 
         drop-shadow(
 
-            0 12px 36px rgba(0,0,0,.35)
+            0 10px 30px rgba(0,0,0,.30)
 
         );
 
@@ -1600,7 +1600,9 @@ body{
 
     text-align:center;
 
-    gap:2.5rem;
+    gap:2.75rem;
+
+    padding-top:5vh;
 
 }
 
@@ -1616,23 +1618,25 @@ body{
 
     font-size:clamp(
 
-        2.8rem,
+        3rem,
 
         5vw,
 
-        5rem
+        5.25rem
 
     );
 
     font-weight:700;
 
-    line-height:1.35;
+    line-height:1.32;
 
     color:var(--color-white);
 
     text-shadow:
 
-        0 8px 24px rgba(0,0,0,.45);
+        0 8px 28px rgba(0,0,0,.45);
+
+    max-width:1100px;
 
 }
 
@@ -1644,23 +1648,25 @@ body{
 
 .scene01-title-en{
 
+    max-width:720px;
+
     font-family:var(--font-en);
 
     font-size:clamp(
 
-        1.25rem,
+        1.35rem,
 
         2vw,
 
-        2rem
+        2.05rem
 
     );
 
-    font-weight:400;
+    font-weight:500;
 
-    line-height:1.8;
+    line-height:1.75;
 
-    letter-spacing:.04em;
+    letter-spacing:.02em;
 
     color:var(--color-soft);
 
@@ -1669,26 +1675,26 @@ body{
 
 
 /* ==========================================================================
-   10.06 BACKGROUND IMAGE
+   10.06 BACKGROUND
 ========================================================================== */
 
 #scene01
 
-.scene-background
-
-img{
+.scene-background img{
 
     animation:
 
         backgroundZoom
 
-        18s
+        20s
 
         ease-in-out
 
         infinite
 
         alternate;
+
+    transform-origin:center center;
 
 }
 
@@ -1704,11 +1710,11 @@ img{
 
     position:absolute;
 
-    bottom:30px;
+    left:50%;
 
-    width:100%;
+    bottom:32px;
 
-    text-align:center;
+    transform:translateX(-50%);
 
     z-index:40;
 
@@ -1722,9 +1728,9 @@ img{
 
 @media (min-width:1200px){
 
-    .scene01-title-ta{
+    .scene01-hero{
 
-        max-width:1000px;
+        gap:3rem;
 
     }
 
@@ -1740,15 +1746,29 @@ img{
 
     .scene01-logo{
 
-        top:32px;
+        top:28px;
 
-        left:32px;
+        left:28px;
 
     }
 
     .scene01-logo-image{
 
-        width:150px;
+        width:140px;
+
+    }
+
+    .scene01-title-ta{
+
+        font-size:clamp(
+
+            2.6rem,
+
+            5vw,
+
+            4.2rem
+
+        );
 
     }
 
@@ -1764,23 +1784,33 @@ img{
 
     .scene01-logo{
 
-        top:24px;
+        top:20px;
 
-        left:24px;
+        left:20px;
 
     }
 
     .scene01-logo-image{
 
-        width:130px;
+        width:120px;
+
+    }
+
+    .scene01-hero{
+
+        padding-top:5rem;
+
+        gap:2rem;
+
+        padding-inline:1rem;
 
     }
 
     .scene01-title-ta{
 
-        font-size:2.25rem;
+        font-size:2.2rem;
 
-        line-height:1.45;
+        line-height:1.42;
 
     }
 
@@ -1788,19 +1818,10 @@ img{
 
         font-size:1.15rem;
 
-        line-height:1.7;
-
-    }
-
-    .scene01-hero{
-
-        padding-top:6rem;
-
-        padding-inline:1rem;
-
-        gap:2rem;
+        line-height:1.70;
 
     }
 
 }
+
 
