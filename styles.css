@@ -1600,12 +1600,17 @@ body{
 
     text-align:center;
 
-    gap:2.75rem;
+    gap:2.5rem;
 
-    padding-top:5vh;
+    padding-top:2vh;
+
+    padding-bottom:8rem;
+
+    max-width:1200px;
+
+    margin-inline:auto;
 
 }
-
 
 
 /* ==========================================================================
@@ -1648,30 +1653,39 @@ body{
 
 .scene01-title-en{
 
-    max-width:720px;
+    max-width:760px;
 
     font-family:var(--font-en);
 
     font-size:clamp(
 
-        1.35rem,
+        1.45rem,
 
         2vw,
 
-        2.05rem
+        2.10rem
 
     );
 
-    font-weight:500;
+    font-weight:400;
 
-    line-height:1.75;
+    line-height:1.70;
 
-    letter-spacing:.02em;
+    letter-spacing:.015em;
 
-    color:var(--color-soft);
+    color:rgba(
+
+        255,
+
+        255,
+
+        255,
+
+        .82
+
+    );
 
 }
-
 
 
 /* ==========================================================================
@@ -1712,7 +1726,7 @@ body{
 
     left:50%;
 
-    bottom:32px;
+    bottom:42px;
 
     transform:translateX(-50%);
 
@@ -1721,9 +1735,107 @@ body{
 }
 
 
+/* ==========================================================================
+   10.08 CTA BUTTON
+========================================================================== */
+
+.scene01-button{
+
+    display:inline-flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:.40rem;
+
+    padding:
+
+        18px
+
+        44px;
+
+    min-width:340px;
+
+    border:none;
+
+    border-radius:999px;
+
+    cursor:pointer;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #F1D77A,
+
+            #C7A64A
+
+        );
+
+    color:#071B3A;
+
+    box-shadow:
+
+        0 20px 50px rgba(
+
+            199,
+
+            166,
+
+            74,
+
+            .45
+
+        );
+
+    transition:
+
+        all .35s ease;
+
+}
+
+
+
+.scene01-button:hover{
+
+    transform:
+
+        translateY(-3px);
+
+}
+
+
+
+.scene01-button-ta{
+
+    font-family:var(--font-ta);
+
+    font-size:1.05rem;
+
+    font-weight:700;
+
+}
+
+
+
+.scene01-button-en{
+
+    font-family:var(--font-en);
+
+    font-size:.90rem;
+
+    font-weight:600;
+
+}
+
 
 /* ==========================================================================
-   10.08 DESKTOP
+   10.09 DESKTOP
 ========================================================================== */
 
 @media (min-width:1200px){
@@ -1737,91 +1849,94 @@ body{
 }
 
 
-
 /* ==========================================================================
-   10.09 TABLET
+   10.10 TABLET
 ========================================================================== */
 
 @media (max-width:992px){
 
     .scene01-logo{
 
-        top:28px;
+        top:24px;
 
-        left:28px;
+        left:24px;
 
     }
 
     .scene01-logo-image{
 
-        width:140px;
+        width:135px;
 
     }
 
     .scene01-title-ta{
 
-        font-size:clamp(
-
-            2.6rem,
-
-            5vw,
-
-            4.2rem
-
-        );
+        font-size:3.1rem;
 
     }
 
 }
 
 
-
 /* ==========================================================================
-   10.10 MOBILE
+   10.11 MOBILE
 ========================================================================== */
 
 @media (max-width:768px){
 
     .scene01-logo{
 
-        top:20px;
+        top:18px;
 
-        left:20px;
+        left:18px;
 
     }
 
     .scene01-logo-image{
 
-        width:120px;
+        width:105px;
 
     }
 
     .scene01-hero{
 
-        padding-top:5rem;
+        justify-content:flex-start;
 
-        gap:2rem;
+        padding-top:28vh;
 
-        padding-inline:1rem;
+        padding-bottom:9rem;
+
+        gap:1.8rem;
+
+        padding-inline:1.25rem;
 
     }
 
     .scene01-title-ta{
 
-        font-size:2.2rem;
+        font-size:2.35rem;
 
-        line-height:1.42;
+        line-height:1.36;
 
     }
 
     .scene01-title-en{
 
-        font-size:1.15rem;
+        font-size:1.25rem;
 
-        line-height:1.70;
+        line-height:1.65;
+
+    }
+
+    .scene01-button{
+
+        width:100%;
+
+        max-width:320px;
+
+        min-width:unset;
 
     }
 
 }
-
 
