@@ -1823,36 +1823,25 @@ body{
 
 
 
-/* ==========================================================================
-   10.07 FOOTER
-========================================================================== */
-
-#scene01
-
-.scene-footer{
+#scene01 .scene-footer{
 
     position:absolute;
 
     left:50%;
 
-    bottom:42px;
+    bottom:26px;
 
     transform:translateX(-50%);
 
     z-index:60;
 
+    width:100%;
+
     display:flex;
 
     justify-content:center;
 
-    align-items:center;
-
-    width:100%;
-
-    padding-inline:1.5rem;
-
 }
-
 
 
 /* ==========================================================================
@@ -2025,7 +2014,7 @@ body{
 
             10rem;
 
-        gap:2.4rem;
+        gap:1.5rem;
 
     }
 
@@ -2035,11 +2024,13 @@ body{
 
     }
 
-    .scene01-title-en{
+ .scene01-title-ta{
 
-        max-width:720px;
+    max-width:1080px;
 
-    }
+    font-size:4.7rem;
+
+}
 
 }
 
