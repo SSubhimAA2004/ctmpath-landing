@@ -1609,17 +1609,13 @@ body{
 
 .scene01-hero{
 
-    position:relative;
-
-    z-index:20;
-
-    min-height:100svh;
+    min-height:100vh;
 
     display:flex;
 
     flex-direction:column;
 
-    justify-content:flex-start;
+    justify-content:center;
 
     align-items:center;
 
@@ -1631,11 +1627,11 @@ body{
 
     margin-inline:auto;
 
-    padding:
+    padding-top:4.5rem;
 
-        6rem
-        2rem
-        3rem;
+    padding-bottom:2rem;
+
+    gap:1.8rem;
 
 }
 
@@ -1646,50 +1642,34 @@ body{
 
 .scene01-title-ta{
 
-    margin:0;
-
-    max-width:1120px;
-
-    font-family:var(
-
-        --font-ta
-
-    );
+    font-family:var(--font-ta);
 
     font-size:clamp(
 
-        3.2rem,
-        5.4vw,
-        5.4rem
+        3rem,
+
+        5vw,
+
+        5.2rem
 
     );
 
     font-weight:700;
 
-    line-height:1.28;
+    line-height:1.22;
 
-    letter-spacing:-0.02em;
-
-    color:var(
-
-        --color-white
-
-    );
-
-    text-wrap:balance;
+    color:var(--color-white);
 
     text-shadow:
 
-        0 10px 30px rgba(
+        0 8px 28px rgba(0,0,0,.45);
 
-            0,
-            0,
-            0,
-            .42
+    max-width:1100px;
 
-        );
+    margin-bottom:.35rem;
 
 }
+
 
 /* ==========================================================================
    10.05 ENGLISH TITLE
@@ -1697,43 +1677,29 @@ body{
 
 .scene01-title-en{
 
-    margin:0;
+    max-width:720px;
 
-    max-width:760px;
-
-    font-family:var(
-
-        --font-en
-
-    );
+    font-family:var(--font-en);
 
     font-size:clamp(
 
         1.35rem,
+
         2vw,
-        2.05rem
+
+        2rem
 
     );
 
     font-weight:400;
 
-    line-height:1.70;
+    line-height:1.55;
 
-    letter-spacing:.015em;
+    color:rgba(255,255,255,.82);
 
-    color:rgba(
-
-        255,
-        255,
-        255,
-        .82
-
-    );
-
-    text-wrap:balance;
+    margin-bottom:.75rem;
 
 }
-
 
 
 /* ==========================================================================
@@ -1823,14 +1789,13 @@ body{
 }
 
 
-
 /* ==========================================================================
    10.08 CTA BUTTON
 ========================================================================== */
 
 .scene01-cta{
 
-    margin-top:3rem;
+    margin-top:1rem;
 
 }
 
@@ -1848,12 +1813,9 @@ body{
 
     gap:.45rem;
 
-    min-width:520px;
+    min-width:500px;
 
-    padding:
-
-        20px
-        54px;
+    padding:18px 52px;
 
     border:none;
 
@@ -1875,22 +1837,21 @@ body{
 
     color:#082247;
 
-    text-align:center;
-
     box-shadow:
 
-        0 20px 60px rgba(
+        0 16px 42px rgba(
 
             210,
+
             178,
+
             79,
-            .42
+
+            .35
 
         );
 
-    transition:
-
-        all .35s ease;
+    transition:.35s;
 
 }
 
@@ -1898,12 +1859,9 @@ body{
 
 .scene01-button:hover{
 
-    transform:
-
-        translateY(-4px);
+    transform:translateY(-4px);
 
 }
-
 
 /* ==========================================================================
    10.09 DESKTOP
