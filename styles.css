@@ -2221,3 +2221,501 @@ body{
 }
 
 
+/* ==========================================================================
+   11. SCENE 02
+   THE REALITY™
+========================================================================== */
+
+
+/* ==========================================================================
+   11.01 SCENE LAYOUT
+========================================================================== */
+
+#scene02{
+
+    display:block;
+
+    position:relative;
+
+    width:100%;
+
+    height:100vh;
+
+    overflow:hidden;
+
+}
+
+
+
+/* ==========================================================================
+   11.02 BRAND LOGO
+========================================================================== */
+
+.scene02-logo{
+
+    position:absolute;
+
+    top:34px;
+
+    left:34px;
+
+    z-index:100;
+
+}
+
+
+
+.scene02-logo-image{
+
+    width:170px;
+
+    height:auto;
+
+    display:block;
+
+    filter:
+
+        drop-shadow(
+
+            0 12px 30px rgba(
+
+                0,
+
+                0,
+
+                0,
+
+                .30
+
+            )
+
+        );
+
+}
+
+
+
+/* ==========================================================================
+   11.03 HERO CONTENT
+========================================================================== */
+
+.scene02-hero{
+
+    position:relative;
+
+    z-index:20;
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-start;
+
+    align-items:center;
+
+    text-align:center;
+
+    width:100%;
+
+    max-width:1200px;
+
+    margin-inline:auto;
+
+    padding-top:9vh;
+
+    padding-bottom:10rem;
+
+    padding-inline:2rem;
+
+    gap:1.5rem;
+
+}
+
+/* ==========================================================================
+   11.04 TAMIL TITLE
+========================================================================== */
+
+.scene02-title-ta{
+
+    margin:0;
+
+    max-width:1080px;
+
+    font-family:var(
+
+        --font-ta
+
+    );
+
+    font-size:clamp(
+
+        3.4rem,
+
+        4.6vw,
+
+        4.8rem
+
+    );
+
+    font-weight:700;
+
+    line-height:1.22;
+
+    letter-spacing:-0.02em;
+
+    color:var(
+
+        --color-white
+
+    );
+
+    text-wrap:balance;
+
+    text-shadow:
+
+        0 10px 28px rgba(
+
+            0,
+
+            0,
+
+            0,
+
+            .42
+
+        );
+
+}
+
+
+
+/* ==========================================================================
+   11.05 ENGLISH TITLE
+========================================================================== */
+
+.scene02-title-en{
+
+    margin:0;
+
+    max-width:720px;
+
+    font-family:var(
+
+        --font-en
+
+    );
+
+    font-size:clamp(
+
+        1.20rem,
+
+        1.55vw,
+
+        1.65rem
+
+    );
+
+    font-weight:500;
+
+    line-height:1.60;
+
+    letter-spacing:.02em;
+
+    color:rgba(
+
+        255,
+
+        255,
+
+        255,
+
+        .82
+
+    );
+
+    text-wrap:balance;
+
+}
+
+
+
+/* ==========================================================================
+   11.06 SUPPORTING MESSAGE
+========================================================================== */
+
+.scene02-message{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:1.25rem;
+
+    margin-top:1.25rem;
+
+    max-width:760px;
+
+}
+
+
+
+.scene02-message-ta{
+
+    margin:0;
+
+    font-family:var(
+
+        --font-ta
+
+    );
+
+    font-size:1.55rem;
+
+    font-weight:600;
+
+    line-height:1.60;
+
+    color:var(
+
+        --color-soft
+
+    );
+
+}
+
+
+
+.scene02-message-en{
+
+    margin:0;
+
+    font-family:var(
+
+        --font-en
+
+    );
+
+    font-size:1.12rem;
+
+    font-weight:400;
+
+    line-height:1.75;
+
+    color:rgba(
+
+        255,
+
+        255,
+
+        255,
+
+        .74
+
+    );
+
+}
+
+/* ==========================================================================
+   11.07 BACKGROUND & OVERLAY
+========================================================================== */
+
+#scene02
+.scene-background{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    z-index:1;
+
+}
+
+
+
+#scene02
+.scene-background img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    object-position:center;
+
+    transform:scale(1);
+
+    animation:
+
+        backgroundZoom
+
+        24s
+
+        ease-in-out
+
+        infinite
+
+        alternate;
+
+}
+
+
+
+#scene02
+.scene-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:2;
+
+    background:
+
+        linear-gradient(
+
+            rgba(
+
+                7,
+                27,
+                58,
+                .76
+
+            ),
+
+            rgba(
+
+                7,
+                27,
+                58,
+                .82
+
+            )
+
+        );
+
+}
+
+
+
+/* ==========================================================================
+   11.08 CALL TO ACTION
+========================================================================== */
+
+.scene02-cta{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-top:2.25rem;
+
+}
+
+
+
+.scene02-button{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:.45rem;
+
+    width:440px;
+
+    height:82px;
+
+    border:none;
+
+    border-radius:999px;
+
+    cursor:pointer;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #F5E08A 0%,
+
+            #D6B34F 100%
+
+        );
+
+    color:#082247;
+
+    box-shadow:
+
+        0 16px 42px rgba(
+
+            214,
+            179,
+            79,
+            .35
+
+        );
+
+    transition:
+
+        all .35s ease;
+
+}
+
+
+
+.scene02-button:hover{
+
+    transform:
+
+        translateY(-3px);
+
+    filter:brightness(
+
+        1.03
+
+    );
+
+}
+
+
+
+.scene02-button-ta{
+
+    font-family:var(--font-ta);
+
+    font-size:1.05rem;
+
+    font-weight:700;
+
+    color:#082247;
+
+}
+
+
+
+.scene02-button-en{
+
+    font-family:var(--font-en);
+
+    font-size:.92rem;
+
+    font-weight:600;
+
+    color:#12376E;
+
+}
+
