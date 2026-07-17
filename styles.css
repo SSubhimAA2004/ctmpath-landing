@@ -1603,6 +1603,9 @@ body{
 }
 
 
+/* ==========================================================================
+   10.03 HERO CONTENT
+========================================================================== */
 
 .scene01-hero{
 
@@ -1616,13 +1619,11 @@ body{
 
     flex-direction:column;
 
-    justify-content:center;
+    justify-content:flex-start;
 
     align-items:center;
 
     text-align:center;
-
-    gap:2rem;
 
     width:100%;
 
@@ -1632,9 +1633,9 @@ body{
 
     padding:
 
-        5.5rem
+        6rem
         2rem
-        7rem;
+        3rem;
 
 }
 
@@ -1823,30 +1824,17 @@ body{
 
 
 
-#scene01 .scene-footer{
+/* ==========================================================================
+   10.08 CTA BUTTON
+========================================================================== */
 
-    position:absolute;
+.scene01-cta{
 
-    left:50%;
-
-    bottom:26px;
-
-    transform:translateX(-50%);
-
-    z-index:60;
-
-    width:100%;
-
-    display:flex;
-
-    justify-content:center;
+    margin-top:3rem;
 
 }
 
 
-/* ==========================================================================
-   10.08 CTA BUTTON
-========================================================================== */
 
 .scene01-button{
 
@@ -1865,7 +1853,6 @@ body{
     padding:
 
         20px
-
         54px;
 
     border:none;
@@ -1880,9 +1867,9 @@ body{
 
             180deg,
 
-            #F4DF87 0%,
+            #F4DF87,
 
-            #D2B24F 100%
+            #D2B24F
 
         );
 
@@ -1903,11 +1890,7 @@ body{
 
     transition:
 
-        transform .30s ease,
-
-        box-shadow .30s ease,
-
-        filter .30s ease;
+        all .35s ease;
 
 }
 
@@ -1919,70 +1902,8 @@ body{
 
         translateY(-4px);
 
-    filter:brightness(
-
-        1.04
-
-    );
-
-    box-shadow:
-
-        0 26px 70px rgba(
-
-            210,
-            178,
-            79,
-            .55
-
-        );
-
 }
 
-
-
-.scene01-button:active{
-
-    transform:
-
-        translateY(-1px);
-
-}
-
-
-
-.scene01-button-ta{
-
-    font-family:var(
-
-        --font-ta
-
-    );
-
-    font-size:1.15rem;
-
-    font-weight:700;
-
-    line-height:1.35;
-
-}
-
-
-
-.scene01-button-en{
-
-    font-family:var(
-
-        --font-en
-
-    );
-
-    font-size:1rem;
-
-    font-weight:700;
-
-    letter-spacing:.01em;
-
-}
 
 /* ==========================================================================
    10.09 DESKTOP
