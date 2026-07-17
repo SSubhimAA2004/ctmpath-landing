@@ -1531,10 +1531,7 @@ body{
 /* ==========================================================================
    10. SCENE 01
    THE QUESTION™
-
-   Version : 3.0
 ========================================================================== */
-
 
 
 /* ==========================================================================
@@ -1543,11 +1540,13 @@ body{
 
 #scene01{
 
+    display:block;
+
     position:relative;
 
     width:100%;
 
-    min-height:100svh;
+    height:100vh;
 
     overflow:hidden;
 
@@ -1563,9 +1562,9 @@ body{
 
     position:absolute;
 
-    top:32px;
+    top:34px;
 
-    left:32px;
+    left:34px;
 
     z-index:100;
 
@@ -1575,26 +1574,25 @@ body{
 
 .scene01-logo-image{
 
-    display:block;
-
     width:170px;
 
     height:auto;
 
-    user-select:none;
-
-    pointer-events:none;
+    display:block;
 
     filter:
 
         drop-shadow(
 
-            0 12px 32px rgba(
+            0 12px 30px rgba(
 
                 0,
+
                 0,
+
                 0,
-                .32
+
+                .30
 
             )
 
@@ -1603,11 +1601,16 @@ body{
 }
 
 
+
 /* ==========================================================================
    10.03 HERO CONTENT
 ========================================================================== */
 
 .scene01-hero{
+
+    position:relative;
+
+    z-index:20;
 
     min-height:100vh;
 
@@ -1615,7 +1618,7 @@ body{
 
     flex-direction:column;
 
-    justify-content:center;
+    justify-content:flex-start;
 
     align-items:center;
 
@@ -1627,14 +1630,15 @@ body{
 
     margin-inline:auto;
 
-    padding-top:4.5rem;
+    padding-top:9vh;
 
-    padding-bottom:2rem;
+    padding-bottom:10rem;
 
-    gap:1.8rem;
+    padding-inline:2rem;
+
+    gap:1.35rem;
 
 }
-
 
 /* ==========================================================================
    10.04 TAMIL TITLE
@@ -1642,33 +1646,53 @@ body{
 
 .scene01-title-ta{
 
-    font-family:var(--font-ta);
+    margin:0;
+
+    max-width:1080px;
+
+    font-family:var(
+
+        --font-ta
+
+    );
 
     font-size:clamp(
 
-        3rem,
+        3.4rem,
 
-        5vw,
+        4.6vw,
 
-        5.2rem
+        4.8rem
 
     );
 
     font-weight:700;
 
-    line-height:1.22;
+    line-height:1.20;
 
-    color:var(--color-white);
+    letter-spacing:-0.02em;
+
+    color:var(
+
+        --color-white
+
+    );
+
+    text-wrap:balance;
 
     text-shadow:
 
-        0 8px 28px rgba(0,0,0,.45);
+        0 10px 28px rgba(
 
-    max-width:1100px;
+            0,
+            0,
+            0,
+            .42
 
-    margin-bottom:.35rem;
+        );
 
 }
+
 
 
 /* ==========================================================================
@@ -1677,29 +1701,45 @@ body{
 
 .scene01-title-en{
 
+    margin:0;
+
     max-width:720px;
 
-    font-family:var(--font-en);
+    font-family:var(
 
-    font-size:clamp(
-
-        1.35rem,
-
-        2vw,
-
-        2rem
+        --font-en
 
     );
 
-    font-weight:400;
+    font-size:clamp(
+
+        1.20rem,
+
+        1.55vw,
+
+        1.65rem
+
+    );
+
+    font-weight:500;
 
     line-height:1.55;
 
-    color:rgba(255,255,255,.82);
+    letter-spacing:.02em;
 
-    margin-bottom:.75rem;
+    color:rgba(
+
+        255,
+        255,
+        255,
+        .82
+
+    );
+
+    text-wrap:balance;
 
 }
+
 
 
 /* ==========================================================================
@@ -1714,9 +1754,9 @@ body{
 
     inset:0;
 
-    z-index:1;
-
     overflow:hidden;
+
+    z-index:1;
 
 }
 
@@ -1734,19 +1774,19 @@ body{
 
     object-position:center;
 
+    transform:scale(1);
+
     animation:
 
         backgroundZoom
 
-        20s
+        24s
 
         ease-in-out
 
         infinite
 
         alternate;
-
-    transform-origin:center;
 
 }
 
@@ -1771,7 +1811,7 @@ body{
                 7,
                 27,
                 58,
-                .72
+                .76
 
             ),
 
@@ -1780,7 +1820,7 @@ body{
                 7,
                 27,
                 58,
-                .76
+                .82
 
             )
 
@@ -1788,18 +1828,27 @@ body{
 
 }
 
-
 /* ==========================================================================
-   10.08 CTA BUTTON
+   10.07 CALL TO ACTION
 ========================================================================== */
 
 .scene01-cta{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
 
     margin-top:1rem;
 
 }
 
 
+
+/* ==========================================================================
+   10.08 CTA BUTTON
+========================================================================== */
 
 .scene01-button{
 
@@ -1811,11 +1860,11 @@ body{
 
     align-items:center;
 
-    gap:.45rem;
+    gap:.40rem;
 
-    min-width:500px;
+    width:440px;
 
-    padding:18px 52px;
+    height:82px;
 
     border:none;
 
@@ -1829,9 +1878,9 @@ body{
 
             180deg,
 
-            #F4DF87,
+            #F5E08A 0%,
 
-            #D2B24F
+            #D6B34F 100%
 
         );
 
@@ -1839,19 +1888,25 @@ body{
 
     box-shadow:
 
-        0 16px 42px rgba(
+        0 14px 40px rgba(
 
-            210,
+            214,
 
-            178,
+            179,
 
             79,
 
-            .35
+            .32
 
         );
 
-    transition:.35s;
+    transition:
+
+        transform .30s ease,
+
+        box-shadow .30s ease,
+
+        filter .30s ease;
 
 }
 
@@ -1859,9 +1914,73 @@ body{
 
 .scene01-button:hover{
 
-    transform:translateY(-4px);
+    transform:
+
+        translateY(-3px);
+
+    filter:brightness(
+
+        1.03
+
+    );
+
+    box-shadow:
+
+        0 18px 50px rgba(
+
+            214,
+
+            179,
+
+            79,
+
+            .42
+
+        );
 
 }
+
+
+
+.scene01-button:active{
+
+    transform:
+
+        translateY(-1px);
+
+}
+
+
+
+.scene01-button-ta{
+
+    font-family:var(--font-ta);
+
+    font-size:1.05rem;
+
+    font-weight:700;
+
+    line-height:1.35;
+
+    color:#082247;
+
+}
+
+
+
+.scene01-button-en{
+
+    font-family:var(--font-en);
+
+    font-size:.92rem;
+
+    font-weight:600;
+
+    color:#12376E;
+
+}
+
+
 
 /* ==========================================================================
    10.09 DESKTOP
@@ -1879,41 +1998,39 @@ body{
 
     .scene01-logo-image{
 
-        width:145px;
+        width:150px;
 
     }
 
     .scene01-hero{
 
-        padding:
+        padding-top:8vh;
 
-            8rem
+        padding-bottom:4rem;
 
-            3rem
-
-            10rem;
-
-        gap:1.5rem;
+        gap:1.2rem;
 
     }
 
     .scene01-title-ta{
 
-        max-width:1080px;
+        max-width:1040px;
 
     }
 
- .scene01-title-ta{
+    .scene01-title-en{
 
-    max-width:1080px;
+        max-width:700px;
 
-    font-size:4.7rem;
+    }
+
+    .scene01-cta{
+
+        margin-top:1.2rem;
+
+    }
 
 }
-
-}
-
-
 
 /* ==========================================================================
    10.10 TABLET
@@ -1931,21 +2048,17 @@ body{
 
     .scene01-logo-image{
 
-        width:120px;
+        width:130px;
 
     }
 
     .scene01-hero{
 
-        padding:
+        padding-top:14vh;
 
-            7rem
+        padding-bottom:6rem;
 
-            2rem
-
-            8rem;
-
-        gap:2.2rem;
+        gap:1.6rem;
 
     }
 
@@ -1955,29 +2068,29 @@ body{
 
             2.8rem,
 
-            6vw,
+            5vw,
 
-            4.2rem
+            3.8rem
 
         );
+
+        line-height:1.24;
 
     }
 
     .scene01-title-en{
 
-        font-size:1.28rem;
+        font-size:1.22rem;
+
+        line-height:1.60;
 
     }
 
     .scene01-button{
 
-        min-width:380px;
+        width:380px;
 
-        padding:
-
-            18px
-
-            40px;
+        height:80px;
 
     }
 
@@ -2001,7 +2114,7 @@ body{
 
     .scene01-logo-image{
 
-        width:90px;
+        width:100px;
 
     }
 
@@ -2013,21 +2126,21 @@ body{
 
         padding:
 
-            18vh
+            20vh
 
             1.25rem
 
-            5rem;
+            4rem;
 
-        gap:1.8rem;
+        gap:1.45rem;
 
     }
 
     .scene01-title-ta{
 
-        font-size:2.25rem;
+        font-size:2.30rem;
 
-        line-height:1.35;
+        line-height:1.30;
 
     }
 
@@ -2037,7 +2150,13 @@ body{
 
         font-size:1.10rem;
 
-        line-height:1.65;
+        line-height:1.55;
+
+    }
+
+    .scene01-cta{
+
+        margin-top:1rem;
 
     }
 
@@ -2047,13 +2166,7 @@ body{
 
         max-width:320px;
 
-        min-width:unset;
-
-        padding:
-
-            18px
-
-            24px;
+        height:76px;
 
     }
 
@@ -2069,7 +2182,7 @@ body{
 
     .scene01-logo-image{
 
-        width:80px;
+        width:85px;
 
     }
 
@@ -2077,17 +2190,17 @@ body{
 
         padding:
 
-            16vh
+            18vh
 
             1rem
 
-            4rem;
+            3rem;
 
     }
 
     .scene01-title-ta{
 
-        font-size:1.95rem;
+        font-size:2rem;
 
     }
 
@@ -2101,25 +2214,10 @@ body{
 
         max-width:300px;
 
-        padding:
-
-            16px
-
-            20px;
-
-    }
-
-    .scene01-button-ta{
-
-        font-size:1rem;
-
-    }
-
-    .scene01-button-en{
-
-        font-size:.88rem;
+        height:72px;
 
     }
 
 }
+
 
