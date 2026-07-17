@@ -1561,10 +1561,9 @@ body{
 
 }
 
-
 .scene01-logo-image{
 
-    width:160px;
+    width:145px;
 
     height:auto;
 
@@ -1574,7 +1573,7 @@ body{
 
         drop-shadow(
 
-            0 10px 30px rgba(0,0,0,.30)
+            0 10px 28px rgba(0,0,0,.28)
 
         );
 
@@ -1600,9 +1599,9 @@ body{
 
     text-align:center;
 
-    gap:2.5rem;
+    gap:2.75rem;
 
-    padding-top:2vh;
+    transform:translateY(-35px);
 
     padding-bottom:8rem;
 
@@ -1613,11 +1612,14 @@ body{
 }
 
 
+
 /* ==========================================================================
    10.04 TAMIL TITLE
 ========================================================================== */
 
 .scene01-title-ta{
+
+    max-width:1100px;
 
     font-family:var(--font-ta);
 
@@ -1633,15 +1635,23 @@ body{
 
     font-weight:700;
 
-    line-height:1.32;
+    line-height:1.30;
 
     color:var(--color-white);
 
     text-shadow:
 
-        0 8px 28px rgba(0,0,0,.45);
+        0 10px 35px rgba(
 
-    max-width:1100px;
+            0,
+
+            0,
+
+            0,
+
+            .42
+
+        );
 
 }
 
@@ -1663,7 +1673,7 @@ body{
 
         2vw,
 
-        2.10rem
+        2rem
 
     );
 
@@ -1671,7 +1681,7 @@ body{
 
     line-height:1.70;
 
-    letter-spacing:.015em;
+    letter-spacing:.02em;
 
     color:rgba(
 
@@ -1681,20 +1691,19 @@ body{
 
         255,
 
-        .82
+        .75
 
     );
 
 }
 
 
+
 /* ==========================================================================
    10.06 BACKGROUND
 ========================================================================== */
 
-#scene01
-
-.scene-background img{
+#scene01 .scene-background img{
 
     animation:
 
@@ -1710,6 +1719,10 @@ body{
 
     transform-origin:center center;
 
+    filter:
+
+        brightness(.88);
+
 }
 
 
@@ -1718,9 +1731,7 @@ body{
    10.07 FOOTER
 ========================================================================== */
 
-#scene01
-
-.scene-footer{
+#scene01 .scene-footer{
 
     position:absolute;
 
@@ -1733,6 +1744,7 @@ body{
     z-index:40;
 
 }
+
 
 
 /* ==========================================================================
@@ -1749,15 +1761,15 @@ body{
 
     align-items:center;
 
-    gap:.40rem;
+    gap:.45rem;
+
+    min-width:360px;
 
     padding:
 
-        18px
+        20px
 
-        44px;
-
-    min-width:340px;
+        48px;
 
     border:none;
 
@@ -1771,9 +1783,9 @@ body{
 
             180deg,
 
-            #F1D77A,
+            #F4DD8A,
 
-            #C7A64A
+            #D2B04E
 
         );
 
@@ -1781,7 +1793,7 @@ body{
 
     box-shadow:
 
-        0 20px 50px rgba(
+        0 18px 45px rgba(
 
             199,
 
@@ -1789,13 +1801,13 @@ body{
 
             74,
 
-            .45
+            .28
 
         );
 
     transition:
 
-        all .35s ease;
+        all .35s var(--ease);
 
 }
 
@@ -1805,7 +1817,21 @@ body{
 
     transform:
 
-        translateY(-3px);
+        translateY(-4px);
+
+    box-shadow:
+
+        0 24px 55px rgba(
+
+            199,
+
+            166,
+
+            74,
+
+            .38
+
+        );
 
 }
 
@@ -1815,9 +1841,11 @@ body{
 
     font-family:var(--font-ta);
 
-    font-size:1.05rem;
+    font-size:1.08rem;
 
     font-weight:700;
+
+    color:#071B3A;
 
 }
 
@@ -1827,11 +1855,14 @@ body{
 
     font-family:var(--font-en);
 
-    font-size:.90rem;
+    font-size:.96rem;
 
     font-weight:600;
 
+    color:#12376E;
+
 }
+
 
 
 /* ==========================================================================
@@ -1847,6 +1878,7 @@ body{
     }
 
 }
+
 
 
 /* ==========================================================================
@@ -1865,17 +1897,30 @@ body{
 
     .scene01-logo-image{
 
-        width:135px;
+        width:120px;
+
+    }
+
+    .scene01-hero{
+
+        transform:translateY(-20px);
 
     }
 
     .scene01-title-ta{
 
-        font-size:3.1rem;
+        font-size:3.4rem;
+
+    }
+
+    .scene01-title-en{
+
+        font-size:1.35rem;
 
     }
 
 }
+
 
 
 /* ==========================================================================
@@ -1894,7 +1939,7 @@ body{
 
     .scene01-logo-image{
 
-        width:105px;
+        width:96px;
 
     }
 
@@ -1902,29 +1947,31 @@ body{
 
         justify-content:flex-start;
 
-        padding-top:28vh;
+        transform:none;
 
-        padding-bottom:9rem;
+        padding-top:22vh;
 
-        gap:1.8rem;
+        padding-bottom:8rem;
 
-        padding-inline:1.25rem;
+        gap:2rem;
+
+        padding-inline:1.35rem;
 
     }
 
     .scene01-title-ta{
 
-        font-size:2.35rem;
+        font-size:2.45rem;
 
-        line-height:1.36;
+        line-height:1.34;
 
     }
 
     .scene01-title-en{
 
-        font-size:1.25rem;
+        font-size:1.22rem;
 
-        line-height:1.65;
+        line-height:1.70;
 
     }
 
@@ -1932,9 +1979,15 @@ body{
 
         width:100%;
 
-        max-width:320px;
+        max-width:330px;
 
         min-width:unset;
+
+        padding:
+
+            18px
+
+            24px;
 
     }
 
