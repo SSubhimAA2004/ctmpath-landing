@@ -1,1544 +1,1428 @@
 
-<!-- ==========================================================
-     SCENE 02
-     FINANCIAL DISCOVERY™
-
-     Version : 3.0
-=========================================================== -->
+<!-- ========================================================= -->
+<!-- SCENE 02 : FINANCIAL DISCOVERY™                           -->
+<!-- One Question Guided Consultation                          -->
+<!-- CTM PATH™ Landing Page                                    -->
+<!-- Version : 2.0                                             -->
+<!-- ========================================================= -->
 
 <section
     id="scene02"
-    class="scene"
+    class="scene scene-financial-discovery"
 >
 
-    <!-- ======================================================
-         BACKGROUND
-    ======================================================= -->
+    <!-- ===================================================== -->
+    <!-- FD-01 MAIN CONTAINER                                 -->
+    <!-- ===================================================== -->
 
-    <div
-        class="scene-background"
-    >
+    <div class="fd-container">
 
-        <img
-            src="images/scene02.webp"
-            alt="Financial Discovery™"
+        <!-- ================================================= -->
+        <!-- FD-02 SECTION HEADER                              -->
+        <!-- ================================================= -->
+
+        <header class="fd-header">
+
+            <div class="fd-badge">
+
+                Financial Discovery™
+
+            </div>
+
+            <h2 class="fd-title">
+
+                உங்கள் நிதி வாழ்க்கையைப் புரிந்துகொள்வோம்
+
+            </h2>
+
+            <p class="fd-subtitle">
+
+                Let's understand your current financial reality.
+
+            </p>
+
+        </header>
+
+        <!-- ================================================= -->
+        <!-- FD-03 PROGRESS INDICATOR                          -->
+        <!-- ================================================= -->
+
+        <section
+            class="fd-progress-section"
+            aria-label="Question Progress"
         >
-
-    </div>
-
-    <!-- ======================================================
-         OVERLAY
-    ======================================================= -->
-
-    <div
-        class="scene-overlay"
-    ></div>
-
-    <!-- ======================================================
-         BRAND LOGO
-    ======================================================= -->
-
-    <div
-        class="scene02-logo"
-    >
-
-        <img
-            src="images/CTM_Logo.png"
-            alt="CTM PATH™"
-            class="scene02-logo-image"
-        >
-
-    </div>
-
-    <!-- ======================================================
-         CONTENT
-    ======================================================= -->
-
-    <div
-        class="scene-content"
-    >
-
-        <div
-            class="container scene-safe"
-        >
-
-            <!-- ==========================================
-                 HERO
-            =========================================== -->
 
             <div
-                class="scene02-hero"
+                id="fdProgressText"
+                class="fd-progress-text"
             >
 
+                Question 1 of 6
+
+            </div>
+
+            <div class="fd-progress-bar">
+
                 <div
-                    class="scene-step"
+                    id="fdProgressFill"
+                    class="fd-progress-fill"
+                    style="width:16.67%;"
                 >
-
-                    STEP 01 OF 04
-
-                    •
-
-                    FINANCIAL DISCOVERY™
 
                 </div>
 
-                <h1
-                    class="scene02-title-ta"
-                >
-
-                    உங்கள் கனவு வாழ்க்கைக்கும்...
-
-                    <br>
-
-                    உங்கள் இன்றைய வாழ்க்கைக்கும்...
-
-                    <br>
-
-                    இடையில் எவ்வளவு
-
-                    <br>
-
-                    நிதி இடைவெளி உள்ளது?
-
-                </h1>
-
-                <h2
-                    class="scene02-title-en"
-                >
-
-                    How big is the
-
-                    <br>
-
-                    Financial Gap™
-
-                    <br>
-
-                    between your dreams
-
-                    <br>
-
-                    and today's reality?
-
-                </h2>
-
-                <p
-                    class="scene02-intro-ta"
-                >
-
-                    அடுத்த 60 விநாடிகளில்
-
-                    <br>
-
-                    உங்கள் நிதி நிலையை
-
-                    <br>
-
-                    கண்டறியலாம்.
-
-                </p>
-
-                <p
-                    class="scene02-intro-en"
-                >
-
-                    Spend just one minute
-
-                    <br>
-
-                    to discover
-
-                    <br>
-
-                    your Financial Reality™.
-
-                </p>
-
             </div>
 
-            <!-- ==========================================
-                 DISCOVERY WRAPPER
-            =========================================== -->
+        </section>
 
-            <div
-                class="financial-discovery"
+        <!-- ================================================= -->
+        <!-- FD-04 QUESTION WRAPPER                            -->
+        <!-- Only one question is visible at a time            -->
+        <!-- ================================================= -->
+
+        <section
+            id="fdQuestionContainer"
+            class="fd-question-container"
+        >
+
+            <!-- ============================================= -->
+            <!-- FD-05 QUESTION 01                             -->
+            <!-- Dream Monthly Income™                         -->
+            <!-- ============================================= -->
+
+            <article
+                id="fdQuestion01"
+                class="fd-question-card active"
+                data-question="1"
             >
 
-                <!-- ======================================
-                     PANEL 01
-                ======================================= -->
+                <div class="fd-question-number">
 
-                <section
-                    class="financial-panel aspirations-panel"
-                >
+                    Question 01
 
-                    <div
-                        class="panel-header"
+                </div>
+
+                <h3 class="fd-question-title">
+
+                    நீங்கள் மாதம் எவ்வளவு வருமானம் பெற விரும்புகிறீர்கள்?
+
+                </h3>
+
+                <p class="fd-question-subtitle">
+
+                    What monthly income would you love to earn?
+
+                </p>
+
+                <!-- ========================================= -->
+                <!-- Currency Input                            -->
+                <!-- ========================================= -->
+
+                <div class="fd-input-group">
+
+                    <label
+                        for="dreamIncome"
+                        class="fd-input-label"
                     >
 
-                        <div
-                            class="panel-number"
+                        கனவு மாத வருமானம்
+
+                        <span>
+
+                            Dream Monthly Income
+
+                        </span>
+
+                    </label>
+
+                    <div class="fd-currency-input">
+
+                        <span class="fd-currency-symbol">
+
+                            ₹
+
+                        </span>
+
+                        <input
+                            id="dreamIncome"
+                            class="fd-input"
+                            type="number"
+                            placeholder="100000"
+                            min="0"
+                            step="1000"
+                            autocomplete="off"
                         >
-
-                            01
-
-                        </div>
-
-                        <div
-                            class="panel-title"
-                        >
-
-                            <h3>
-
-                                உங்கள் எதிர்கால கனவுகள்™
-
-                            </h3>
-
-                            <h4>
-
-                                YOUR ASPIRATIONS™
-
-                            </h4>
-
-                        </div>
 
                     </div>
 
-                    <p
-                        class="panel-description-ta"
-                    >
+                    <small class="fd-input-help">
 
-                        முதலில்...
-
-                        <br>
-
-                        நீங்கள் செல்ல விரும்பும்
+                        உதாரணம்:
+                        ₹1,00,000 / மாதம்
 
                         <br>
 
-                        இடத்தைப் பார்ப்போம்.
+                        Example:
+                        ₹100,000 per month
 
-                    </p>
+                    </small>
 
-                    <p
-                        class="panel-description-en"
-                    >
+                </div>
 
-                        Let's begin with
-
-                        <br>
-
-                        the life
-
-                        <br>
-
-                        you truly aspire to live.
-
-                    </p>
-
-                    <!-- PANEL 01 CONTENT
-                         STARTS IN BATCH 02 -->
-
-<!-- ======================================
-     DREAM MONTHLY INCOME
-====================================== -->
-
-<div
-    class="financial-card premium-card"
->
-
-    <div
-        class="card-header"
-    >
-
-        <div
-            class="card-icon"
-        >
-
-            💰
-
-        </div>
-
-        <div
-            class="card-heading"
-        >
-
-            <h5>
-
-                கனவு மாத வருமானம்™
-
-            </h5>
-
-            <small>
-
-                Dream Monthly Income™
-
-            </small>
-
-        </div>
-
-    </div>
-
-    <p
-        class="question-ta"
-    >
-
-        நீங்கள் மாதம் எவ்வளவு வருமானம் பெற விரும்புகிறீர்கள்?
-
-    </p>
-
-    <p
-        class="question-en"
-    >
-
-        What monthly income would you love to earn?
-
-    </p>
-
-    <div
-        class="currency-field"
-    >
-
-        <span>
-
-            ₹
-
-        </span>
-
-        <input
-
-            type="number"
-
-            id="desiredIncome"
-
-            placeholder="100000"
-
-        >
-
-    </div>
-
-</div>
-
-
-
-<!-- ======================================
-     DREAM LIFESTYLE
-====================================== -->
-
-<div
-    class="financial-card premium-card"
->
-
-    <div
-        class="card-header"
-    >
-
-        <div
-            class="card-icon"
-        >
-
-            🌟
-
-        </div>
-
-        <div
-            class="card-heading"
-        >
-
-            <h5>
-
-                உங்கள் கனவு வாழ்க்கை™
-
-            </h5>
-
-            <small>
-
-                Your Dream Lifestyle™
-
-            </small>
-
-        </div>
-
-    </div>
-
-    <p
-        class="question-ta"
-    >
-
-        பணம் ஒரு பிரச்சனையில்லை என்றால்...
-
-        <br>
-
-        நீங்கள் எந்த வாழ்க்கையை வாழ விரும்புகிறீர்கள்?
-
-    </p>
-
-    <p
-        class="question-en"
-    >
-
-        If money were not a problem,
-
-        what kind of life would you choose?
-
-    </p>
-
-    <div
-        class="dream-grid"
-    >
-
-        <button
-            class="dream-chip"
-            type="button"
-        >
-
-            🏠
-
-            <span>
-
-                சொந்த வீடு
-
-            </span>
-
-            <small>
-
-                Own Home
-
-            </small>
-
-        </button>
-
-        <button
-            class="dream-chip"
-            type="button"
-        >
-
-            ✈️
-
-            <span>
-
-                உலகச் சுற்றுலா
-
-            </span>
-
-            <small>
-
-                World Travel
-
-            </small>
-
-        </button>
-
-        <button
-            class="dream-chip"
-            type="button"
-        >
-
-            🚗
-
-            <span>
-
-                புதிய கார்
-
-            </span>
-
-            <small>
-
-                New Car
-
-            </small>
-
-        </button>
-
-        <button
-            class="dream-chip"
-            type="button"
-        >
-
-            🎓
-
-            <span>
-
-                உயர்கல்வி
-
-            </span>
-
-            <small>
-
-                Higher Education
-
-            </small>
-
-        </button>
-
-        <button
-            class="dream-chip"
-            type="button"
-        >
-
-            💼
-
-            <span>
-
-                சொந்த தொழில்
-
-            </span>
-
-            <small>
-
-                Own Business
-
-            </small>
-
-        </button>
-
-        <button
-            class="dream-chip"
-            type="button"
-        >
-
-            ❤️
-
-            <span>
-
-                மனநிம்மதி
-
-            </span>
-
-            <small>
-
-                Peace of Mind
-
-            </small>
-
-        </button>
-
-    </div>
-
-</div>
-
-
-
-<!-- ======================================
-     DREAMS POSTPONED
-====================================== -->
-
-<div
-    class="financial-card premium-card"
->
-
-    <div
-        class="card-header"
-    >
-
-        <div
-            class="card-icon"
-        >
-
-            ⏳
-
-        </div>
-
-        <div
-            class="card-heading"
-        >
-
-            <h5>
-
-                ஒத்திவைக்கப்பட்ட கனவுகள்™
-
-            </h5>
-
-            <small>
-
-                Dreams Delayed™
-
-            </small>
-
-        </div>
-
-    </div>
-
-    <p
-        class="question-ta"
-    >
-
-        பணத்திற்காக நீங்கள் தொடர்ந்து ஒத்திவைத்து வரும் விஷயங்கள் எவை?
-
-    </p>
-
-    <p
-        class="question-en"
-    >
-
-        Which important goals have you postponed because of money?
-
-    </p>
-
-    <div
-        class="delay-list"
-    >
-
-        <label>
-
-            <input
-                type="checkbox"
-            >
-
-            வீடு / Home
-
-        </label>
-
-        <label>
-
-            <input
-                type="checkbox"
-            >
-
-            குழந்தைகளின் கல்வி / Children's Education
-
-        </label>
-
-        <label>
-
-            <input
-                type="checkbox"
-            >
-
-            மருத்துவம் / Medical Care
-
-        </label>
-
-        <label>
-
-            <input
-                type="checkbox"
-            >
-
-            குடும்ப பாதுகாப்பு / Family Security
-
-        </label>
-
-        <label>
-
-            <input
-                type="checkbox"
-            >
-
-            ஓய்வூதியம் / Retirement
-
-        </label>
-
-        <label>
-
-            <input
-                type="checkbox"
-            >
-
-            முதலீடு / Investing
-
-        </label>
-
-    </div>
-
-</div>
-
-                </section>
-
-                <!-- ======================================
-                     PANEL 02
-                ======================================= -->
-
-<!-- ======================================
-     CURRENT MONTHLY INCOME
-====================================== -->
-
-<div
-    class="financial-card premium-card"
->
-
-    <div
-        class="card-header"
-    >
-
-        <div
-            class="card-icon"
-        >
-
-            💵
-
-        </div>
-
-        <div
-            class="card-heading"
-        >
-
-            <h5>
-
-                தற்போதைய மாத வருமானம்™
-
-            </h5>
-
-            <small>
-
-                Current Monthly Income™
-
-            </small>
-
-        </div>
-
-    </div>
-
-    <p
-        class="question-ta"
-    >
-
-        தற்போது நீங்கள் மாதம் எவ்வளவு வருமானம் பெறுகிறீர்கள்?
-
-    </p>
-
-    <p
-        class="question-en"
-    >
-
-        What is your current monthly income?
-
-    </p>
-
-    <div
-        class="currency-field"
-    >
-
-        <span>
-
-            ₹
-
-        </span>
-
-        <input
-
-            type="number"
-
-            id="currentIncome"
-
-            placeholder="45000"
-
-        >
-
-    </div>
-
-</div>
-
-
-
-<!-- ======================================
-     FINANCIAL BURDEN
-====================================== -->
-
-<div
-    class="financial-card premium-card"
->
-
-    <div
-        class="card-header"
-    >
-
-        <div
-            class="card-icon"
-        >
-
-            ⚖️
-
-        </div>
-
-        <div
-            class="card-heading"
-        >
-
-            <h5>
-
-                நிதிச் சுமை™
-
-            </h5>
-
-            <small>
-
-                Financial Burden™
-
-            </small>
-
-        </div>
-
-    </div>
-
-    <p
-        class="question-ta"
-    >
-
-        மாதந்தோறும் உங்கள் நிதிச் சுமை எவ்வளவு?
-
-    </p>
-
-    <p
-        class="question-en"
-    >
-
-        How financially burdened do you feel every month?
-
-    </p>
-
-    <div
-        class="rating-scale"
-    >
-
-        <div class="rating-label low">
-
-            அதிக சுமை
-
-            <br>
-
-            High Burden
-
-        </div>
-
-        <div
-            class="rating-bar"
-        >
-
-            <button class="rate red">1</button>
-            <button class="rate red">2</button>
-            <button class="rate red">3</button>
-
-            <button class="rate orange">4</button>
-            <button class="rate orange">5</button>
-            <button class="rate orange">6</button>
-
-            <button class="rate green">7</button>
-            <button class="rate green">8</button>
-            <button class="rate green">9</button>
-            <button class="rate green">10</button>
-
-        </div>
-
-        <div class="rating-label high">
-
-            குறைந்த சுமை
-
-            <br>
-
-            Low Burden
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- ======================================
-     EMERGENCY FUND
-====================================== -->
-
-<div
-    class="financial-card premium-card"
->
-
-    <div
-        class="card-header"
-    >
-
-        <div
-            class="card-icon"
-        >
-
-            🛡️
-
-        </div>
-
-        <div
-            class="card-heading"
-        >
-
-            <h5>
-
-                நிதி பாதுகாப்பு™
-
-            </h5>
-
-            <small>
-
-                Emergency Fund™
-
-            </small>
-
-        </div>
-
-    </div>
-
-    <p
-        class="question-ta"
-    >
-
-        இன்று உங்கள் வருமானம் நின்றுவிட்டால்,
-
-        உங்கள் குடும்பம் எவ்வளவு காலம் சமாளிக்க முடியும்?
-
-    </p>
-
-    <p
-        class="question-en"
-    >
-
-        If your income stopped today,
-
-        how long could your family comfortably survive?
-
-    </p>
-
-    <select
-        id="financialSafety"
-        class="premium-select"
-    >
-
-        <option>
-
-            தேர்வு செய்யுங்கள் / Select
-
-        </option>
-
-        <option>
-
-            1 மாதத்திற்கும் குறைவு / Less than 1 Month
-
-        </option>
-
-        <option>
-
-            1–3 மாதங்கள் / 1–3 Months
-
-        </option>
-
-        <option>
-
-            3–6 மாதங்கள் / 3–6 Months
-
-        </option>
-
-        <option>
-
-            6–12 மாதங்கள் / 6–12 Months
-
-        </option>
-
-        <option>
-
-            1 ஆண்டிற்கு மேல் / More than 1 Year
-
-        </option>
-
-    </select>
-
-</div>
-
-
-
-<!-- ======================================
-     FINANCIAL CONFIDENCE
-====================================== -->
-
-<div
-    class="financial-card premium-card"
->
-
-    <div
-        class="card-header"
-    >
-
-        <div
-            class="card-icon"
-        >
-
-            📈
-
-        </div>
-
-        <div
-            class="card-heading"
-        >
-
-            <h5>
-
-                நிதி நம்பிக்கை™
-
-            </h5>
-
-            <small>
-
-                Financial Confidence™
-
-            </small>
-
-        </div>
-
-    </div>
-
-    <p
-        class="question-ta"
-    >
-
-        உங்கள் நிதி எதிர்காலத்தின் மீது
-
-        உங்களுக்கு எவ்வளவு நம்பிக்கை இருக்கிறது?
-
-    </p>
-
-    <p
-        class="question-en"
-    >
-
-        How confident are you
-
-        about your financial future?
-
-    </p>
-
-    <div
-        class="rating-scale"
-    >
-
-        <div class="rating-label low">
-
-            நம்பிக்கை இல்லை
-
-            <br>
-
-            Low
-
-        </div>
-
-        <div
-            class="rating-bar"
-        >
-
-            <button class="rate red">1</button>
-            <button class="rate red">2</button>
-            <button class="rate red">3</button>
-
-            <button class="rate orange">4</button>
-            <button class="rate orange">5</button>
-            <button class="rate orange">6</button>
-
-            <button class="rate green">7</button>
-            <button class="rate green">8</button>
-            <button class="rate green">9</button>
-            <button class="rate green">10</button>
-
-        </div>
-
-        <div class="rating-label high">
-
-            மிகுந்த நம்பிக்கை
-
-            <br>
-
-            High
-
-        </div>
-
-    </div>
-
-</div>
-                 
-
-                <section
-                    class="financial-panel reality-panel"
-                >
-
-                    <div
-                        class="panel-header"
-                    >
-
-                        <div
-                            class="panel-number"
-                        >
-
-                            02
-
-                        </div>
-
-                        <div
-                            class="panel-title"
-                        >
-
-                            <h3>
-
-                                உங்கள் இன்றைய நிலை™
-
-                            </h3>
-
-                            <h4>
-
-                                YOUR PRESENT REALITY™
-
-                            </h4>
-
-                        </div>
-
-                    </div>
-
-                    <!-- PANEL 02
-                         STARTS IN BATCH 03 -->
-
-                </section>
-
-                <!-- ======================================
-                     PANEL 03
-                ======================================= -->
-
-                <section
-                    class="financial-panel gap-panel"
-                >
-
-                    <div
-                        class="panel-header"
-                    >
-
-                        <div
-                            class="panel-number"
-                        >
-
-                            03
-
-                        </div>
-
-                        <div
-                            class="panel-title"
-                        >
-
-                            <h3>
-
-                                உங்கள் நிதி இடைவெளி™
-
-                            </h3>
-
-                            <h4>
-
-                                YOUR FINANCIAL GAP™
-
-                            </h4>
-
-                        </div>
-
-                    </div>
-
-                    <!-- PANEL 03
-                         STARTS IN BATCH 04 -->
-
-<!-- ======================================
-     FINANCIAL GAP DASHBOARD
-====================================== -->
-
-<div
-    class="financial-gap-dashboard"
->
-
-    <!-- ==================================
-         HEADER
-    =================================== -->
-
-    <div
-        class="gap-header"
-    >
-
-        <h3>
-
-            உங்கள் நிதி இடைவெளி™
-
-        </h3>
-
-        <h4>
-
-            Your Financial Gap™
-
-        </h4>
-
-        <p>
-
-            உங்கள் பதில்களின் அடிப்படையில்
-
-            ஆரம்பகட்ட மதிப்பீடு
-
-        </p>
-
-        <small>
-
-            Preliminary assessment based on your answers
-
-        </small>
-
-    </div>
-
-
-
-    <!-- ==================================
-         SUMMARY GRID
-    =================================== -->
-
-    <div
-        class="gap-summary-grid"
-    >
-
-        <div
-            class="summary-card"
-        >
-
-            <label>
-
-                கனவு மாத வருமானம்
-
-            </label>
-
-            <small>
-
-                Desired Monthly Income
-
-            </small>
-
-            <strong
-                id="summaryDesiredIncome"
-            >
-
-                ₹100,000
-
-            </strong>
-
-        </div>
-
-
-
-        <div
-            class="summary-card"
-        >
-
-            <label>
-
-                தற்போதைய வருமானம்
-
-            </label>
-
-            <small>
-
-                Current Monthly Income
-
-            </small>
-
-            <strong
-                id="summaryCurrentIncome"
-            >
-
-                ₹42,000
-
-            </strong>
-
-        </div>
-
-
-
-        <div
-            class="summary-card highlight"
-        >
-
-            <label>
-
-                வருமான இடைவெளி
-
-            </label>
-
-            <small>
-
-                Income Gap™
-
-            </small>
-
-            <strong
-                id="summaryIncomeGap"
-            >
-
-                ₹58,000
-
-            </strong>
-
-        </div>
-
-
-
-        <div
-            class="summary-card"
-        >
-
-            <label>
-
-                ஒத்திவைக்கப்பட்ட கனவுகள்
-
-            </label>
-
-            <small>
-
-                Dreams Delayed
-
-            </small>
-
-            <strong
-                id="summaryDreamCount"
-            >
-
-                4
-
-            </strong>
-
-        </div>
-
-
-
-        <div
-            class="summary-card"
-        >
-
-            <label>
-
-                நிதி நம்பிக்கை
-
-            </label>
-
-            <small>
-
-                Financial Confidence
-
-            </small>
-
-            <strong
-                id="summaryConfidence"
-            >
-
-                5 / 10
-
-            </strong>
-
-        </div>
-
-
-
-        <div
-            class="summary-card"
-        >
-
-            <label>
-
-                அவசர நிதி பாதுகாப்பு
-
-            </label>
-
-            <small>
-
-                Emergency Security
-
-            </small>
-
-            <strong
-                id="summarySafety"
-            >
-
-                1–3 Months
-
-            </strong>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- ==================================
-         FINANCIAL REALITY SCORE
-    =================================== -->
-
-    <div
-        class="financial-score-panel"
-    >
-
-        <div
-            class="score-title"
-        >
-
-            <span>
-
-                ஒட்டுமொத்த நிதி நிலை™
-
-            </span>
-
-            <small>
-
-                Overall Financial Reality™
-
-            </small>
-
-        </div>
-
-
-
-        <div
-            class="score-value"
-            id="financialRealityScore"
-        >
-
-            43%
-
-        </div>
-
-
-
-        <div
-            class="score-meter"
-        >
-
-            <div
-                class="score-meter-track"
-            >
+                <!-- Validation -->
 
                 <div
-                    class="score-meter-fill"
-                    id="scoreMeterFill"
-                    style="width:43%;"
-                ></div>
+                    id="dreamIncomeError"
+                    class="fd-error-message"
+                >
 
-            </div>
+                </div>
 
-        </div>
+                <!-- Navigation -->
+
+                <footer class="fd-navigation">
+
+                    <button
+                        id="btnQ1Continue"
+                        class="fd-btn fd-btn-primary"
+                        disabled
+                    >
+
+                        <span>
+
+                            தொடருங்கள்
+
+                        </span>
+
+                        <small>
+
+                            Continue →
+
+                        </small>
+
+                    </button>
+
+                </footer>
+
+            </article>
+
+            <!-- END QUESTION 01 -->
+
+                         <!-- ============================================= -->
+            <!-- FD-06 QUESTION 02                             -->
+            <!-- Current Monthly Income™                       -->
+            <!-- ============================================= -->
+
+            <article
+                id="fdQuestion02"
+                class="fd-question-card"
+                data-question="2"
+                hidden
+            >
+
+                <!-- Question Number -->
+
+                <div class="fd-question-number">
+
+                    Question 02
+
+                </div>
+
+                <!-- Question -->
+
+                <h3 class="fd-question-title">
+
+                    தற்போது நீங்கள் மாதம் எவ்வளவு வருமானம் பெறுகிறீர்கள்?
+
+                </h3>
+
+                <!-- Subtitle -->
+
+                <p class="fd-question-subtitle">
+
+                    What is your current monthly income?
+
+                </p>
+
+                <!-- ========================================= -->
+                <!-- Currency Input                            -->
+                <!-- ========================================= -->
+
+                <div class="fd-input-group">
+
+                    <label
+                        for="currentIncome"
+                        class="fd-input-label"
+                    >
+
+                        தற்போதைய மாத வருமானம்
+
+                        <span>
+
+                            Current Monthly Income
+
+                        </span>
+
+                    </label>
+
+                    <div class="fd-currency-input">
+
+                        <span class="fd-currency-symbol">
+
+                            ₹
+
+                        </span>
+
+                        <input
+                            id="currentIncome"
+                            class="fd-input"
+                            type="number"
+                            placeholder="50000"
+                            min="0"
+                            step="1000"
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+                    <small class="fd-input-help">
+
+                        உங்கள் தற்போதைய சராசரி மாத வருமானத்தை உள்ளிடுங்கள்.
+
+                        <br>
+
+                        Enter your average monthly income before taxes or deductions.
+
+                    </small>
+
+                </div>
+
+                <!-- Validation -->
+
+                <div
+                    id="currentIncomeError"
+                    class="fd-error-message"
+                >
+
+                </div>
+
+                <!-- Navigation -->
+
+                <footer class="fd-navigation">
+
+                    <button
+                        id="btnQ2Previous"
+                        class="fd-btn fd-btn-secondary"
+                        type="button"
+                    >
+
+                        ←
+
+                        <span>
+
+                            முந்தையது
+
+                        </span>
+
+                        <small>
+
+                            Previous
+
+                        </small>
+
+                    </button>
+
+                    <button
+                        id="btnQ2Continue"
+                        class="fd-btn fd-btn-primary"
+                        type="button"
+                        disabled
+                    >
+
+                        <span>
+
+                            தொடருங்கள்
+
+                        </span>
+
+                        <small>
+
+                            Continue →
+
+                        </small>
+
+                    </button>
+
+                </footer>
+
+            </article>
+
+            <!-- END QUESTION 02 -->
+
+                         <!-- ============================================= -->
+            <!-- FD-07 QUESTION 03                             -->
+            <!-- Dreams Delayed™                               -->
+            <!-- ============================================= -->
+
+            <article
+                id="fdQuestion03"
+                class="fd-question-card"
+                data-question="3"
+                hidden
+            >
+
+                <!-- Question Number -->
+
+                <div class="fd-question-number">
+
+                    Question 03
+
+                </div>
+
+                <!-- Question -->
+
+                <h3 class="fd-question-title">
+
+                    தற்போது உங்கள் வாழ்க்கையில் எந்த கனவுகள் தாமதமாகிக் கொண்டிருக்கின்றன?
+
+                </h3>
+
+                <!-- Subtitle -->
+
+                <p class="fd-question-subtitle">
+
+                    Which dreams are waiting because of your present financial situation?
+
+                </p>
+
+                <!-- Helper -->
+
+                <p class="fd-question-helper">
+
+                    பொருந்தும் அனைத்தையும் தேர்வு செய்யுங்கள்.
+
+                    <br>
+
+                    Select all that apply.
+
+                </p>
+
+                <!-- ========================================= -->
+                <!-- FD CHIP GROUP™                             -->
+                <!-- Generated as Premium Selectable Chips      -->
+                <!-- ========================================= -->
+
+                <div
+                    id="dreamChipGroup"
+                    class="fd-chip-group"
+                >
+
+                    <button
+                        type="button"
+                        class="fd-chip"
+                        data-value="Own Home"
+                    >
+
+                        <span class="fd-chip-icon">🏡</span>
+
+                        <span class="fd-chip-title">
+
+                            சொந்த வீடு
+
+                        </span>
+
+                        <small>
+
+                            Own Home
+
+                        </small>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="fd-chip"
+                        data-value="Children Education"
+                    >
+
+                        <span class="fd-chip-icon">🎓</span>
+
+                        <span class="fd-chip-title">
+
+                            குழந்தைகளின் கல்வி
+
+                        </span>
+
+                        <small>
+
+                            Children's Education
+
+                        </small>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="fd-chip"
+                        data-value="Travel"
+                    >
+
+                        <span class="fd-chip-icon">✈️</span>
+
+                        <span class="fd-chip-title">
+
+                            பயணம்
+
+                        </span>
+
+                        <small>
+
+                            Travel
+
+                        </small>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="fd-chip"
+                        data-value="Medical"
+                    >
+
+                        <span class="fd-chip-icon">❤️</span>
+
+                        <span class="fd-chip-title">
+
+                            மருத்துவ பாதுகாப்பு
+
+                        </span>
+
+                        <small>
+
+                            Medical
+
+                        </small>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="fd-chip"
+                        data-value="Business"
+                    >
+
+                        <span class="fd-chip-icon">📈</span>
+
+                        <span class="fd-chip-title">
+
+                            தொழில்
+
+                        </span>
+
+                        <small>
+
+                            Business
+
+                        </small>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="fd-chip"
+                        data-value="Vehicle"
+                    >
+
+                        <span class="fd-chip-icon">🚗</span>
+
+                        <span class="fd-chip-title">
+
+                            வாகனம்
+
+                        </span>
+
+                        <small>
+
+                            Vehicle
+
+                        </small>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="fd-chip"
+                        data-value="Family Security"
+                    >
+
+                        <span class="fd-chip-icon">🛡️</span>
+
+                        <span class="fd-chip-title">
+
+                            குடும்ப பாதுகாப்பு
+
+                        </span>
+
+                        <small>
+
+                            Family Security
+
+                        </small>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="fd-chip"
+                        data-value="Peace of Mind"
+                    >
+
+                        <span class="fd-chip-icon">🌿</span>
+
+                        <span class="fd-chip-title">
+
+                            மன அமைதி
+
+                        </span>
+
+                        <small>
+
+                            Peace of Mind
+
+                        </small>
+
+                    </button>
+
+                </div>
+
+                <!-- Validation -->
+
+                <div
+                    id="dreamChipError"
+                    class="fd-error-message"
+                >
+
+                </div>
+
+                <!-- Navigation -->
+
+                <footer class="fd-navigation">
+
+                    <button
+                        id="btnQ3Previous"
+                        class="fd-btn fd-btn-secondary"
+                        type="button"
+                    >
+
+                        ←
+
+                        <span>
+
+                            முந்தையது
+
+                        </span>
+
+                        <small>
+
+                            Previous
+
+                        </small>
+
+                    </button>
+
+                    <button
+                        id="btnQ3Continue"
+                        class="fd-btn fd-btn-primary"
+                        type="button"
+                        disabled
+                    >
+
+                        <span>
+
+                            தொடருங்கள்
+
+                        </span>
+
+                        <small>
+
+                            Continue →
+
+                        </small>
+
+                    </button>
+
+                </footer>
+
+            </article>
+
+            <!-- END QUESTION 03 -->
+
+                         <!-- ============================================= -->
+            <!-- FD-08 QUESTION 04                             -->
+            <!-- Financial Burden™                             -->
+            <!-- Uses Reusable FD-FinancialScale™ Component    -->
+            <!-- ============================================= -->
+
+            <article
+                id="fdQuestion04"
+                class="fd-question-card"
+                data-question="4"
+                hidden
+            >
+
+                <!-- Question Number -->
+
+                <div class="fd-question-number">
+
+                    Question 04
+
+                </div>
+
+                <!-- Tamil Question -->
+
+                <h3 class="fd-question-title">
+
+                    உங்கள் தற்போதைய நிதிச் சுமை எவ்வளவு அதிகமாக உள்ளது?
+
+                </h3>
+
+                <!-- English Subtitle -->
+
+                <p class="fd-question-subtitle">
+
+                    How financially burdened do you feel today?
+
+                </p>
+
+                <!-- Helper -->
+
+                <p class="fd-question-helper">
+
+                    உங்கள் தற்போதைய கடன், செலவுகள் மற்றும்
+                    நிதி அழுத்தத்தை கருத்தில் கொண்டு
+                    உங்கள் நிலையை மதிப்பிடுங்கள்.
+
+                    <br><br>
+
+                    Rate your financial burden considering your
+                    debts, monthly commitments and financial pressure.
+
+                </p>
+
+                <!-- ========================================= -->
+                <!-- FD-FinancialScale™                         -->
+                <!-- Reusable Component                         -->
+                <!-- ========================================= -->
+
+                <div
+                    id="fdFinancialBurdenScale"
+                    class="fd-financial-scale"
+                    data-component="FinancialScale"
+                    data-type="burden"
+                    data-question="4"
+                    data-min="1"
+                    data-max="10"
+                    data-value="5"
+                    data-title-ta="நிதிச் சுமை"
+                    data-title-en="Financial Burden"
+                >
+
+                </div>
+
+                <!-- Validation -->
+
+                <div
+                    id="financialBurdenError"
+                    class="fd-error-message"
+                >
+
+                </div>
+
+                <!-- Navigation -->
+
+                <footer class="fd-navigation">
+
+                    <button
+                        id="btnQ4Previous"
+                        class="fd-btn fd-btn-secondary"
+                        type="button"
+                    >
+
+                        ←
+
+                        <span>
+
+                            முந்தையது
+
+                        </span>
+
+                        <small>
+
+                            Previous
+
+                        </small>
+
+                    </button>
+
+                    <button
+                        id="btnQ4Continue"
+                        class="fd-btn fd-btn-primary"
+                        type="button"
+                    >
+
+                        <span>
+
+                            தொடருங்கள்
+
+                        </span>
+
+                        <small>
+
+                            Continue →
+
+                        </small>
+
+                    </button>
+
+                </footer>
+
+            </article>
+
+            <!-- END QUESTION 04 -->
+
+                         <!-- ============================================= -->
+            <!-- FD-09 QUESTION 05                             -->
+            <!-- Emergency Fund™                               -->
+            <!-- Uses Reusable FD-OptionCard™ Components       -->
+            <!-- ============================================= -->
+
+            <article
+                id="fdQuestion05"
+                class="fd-question-card"
+                data-question="5"
+                hidden
+            >
+
+                <!-- Question Number -->
+
+                <div class="fd-question-number">
+
+                    Question 05
+
+                </div>
+
+                <!-- Tamil Question -->
+
+                <h3 class="fd-question-title">
+
+                    இன்று உங்கள் வருமானம் நிறுத்தப்பட்டால்,
+                    உங்கள் குடும்பம் எவ்வளவு காலம் நிம்மதியாக வாழ முடியும்?
+
+                </h3>
+
+                <!-- English Subtitle -->
+
+                <p class="fd-question-subtitle">
+
+                    If your income stopped today,
+                    how long could your family comfortably survive?
+
+                </p>
+
+                <!-- Helper -->
+
+                <p class="fd-question-helper">
+
+                    தற்போதைய சேமிப்பு மற்றும் அவசர நிதியை
+                    அடிப்படையாகக் கொண்டு பதிலளிக்கவும்.
+
+                    <br><br>
+
+                    Answer based on your present savings and emergency fund.
+
+                </p>
+
+                <!-- ========================================= -->
+                <!-- FD-OPTION GROUP™                           -->
+                <!-- Single Selection                           -->
+                <!-- ========================================= -->
+
+                <div
+                    id="fdEmergencyFundOptions"
+                    class="fd-option-group"
+                    data-selection="single"
+                >
+
+                    <!-- Option 1 -->
+
+                    <button
+                        type="button"
+                        class="fd-option-card"
+                        data-value="Less than 1 month"
+                    >
+
+                        <span class="fd-option-title">
+
+                            1 மாதத்திற்கும் குறைவாக
+
+                        </span>
+
+                        <small>
+
+                            Less than 1 month
+
+                        </small>
+
+                    </button>
+
+                    <!-- Option 2 -->
+
+                    <button
+                        type="button"
+                        class="fd-option-card"
+                        data-value="1-3 months"
+                    >
+
+                        <span class="fd-option-title">
+
+                            1–3 மாதங்கள்
+
+                        </span>
+
+                        <small>
+
+                            1–3 months
+
+                        </small>
+
+                    </button>
+
+                    <!-- Option 3 -->
+
+                    <button
+                        type="button"
+                        class="fd-option-card"
+                        data-value="3-6 months"
+                    >
+
+                        <span class="fd-option-title">
+
+                            3–6 மாதங்கள்
+
+                        </span>
+
+                        <small>
+
+                            3–6 months
+
+                        </small>
+
+                    </button>
+
+                    <!-- Option 4 -->
+
+                    <button
+                        type="button"
+                        class="fd-option-card"
+                        data-value="6-12 months"
+                    >
+
+                        <span class="fd-option-title">
+
+                            6–12 மாதங்கள்
+
+                        </span>
+
+                        <small>
+
+                            6–12 months
+
+                        </small>
+
+                    </button>
+
+                    <!-- Option 5 -->
+
+                    <button
+                        type="button"
+                        class="fd-option-card"
+                        data-value="More than 1 year"
+                    >
+
+                        <span class="fd-option-title">
+
+                            1 ஆண்டிற்கு மேல்
+
+                        </span>
+
+                        <small>
+
+                            More than 1 year
+
+                        </small>
+
+                    </button>
+
+                </div>
+
+                <!-- Validation -->
+
+                <div
+                    id="emergencyFundError"
+                    class="fd-error-message"
+                >
+
+                </div>
+
+                <!-- Navigation -->
+
+                <footer class="fd-navigation">
+
+                    <button
+                        id="btnQ5Previous"
+                        class="fd-btn fd-btn-secondary"
+                        type="button"
+                    >
+
+                        ←
+
+                        <span>
+
+                            முந்தையது
+
+                        </span>
+
+                        <small>
+
+                            Previous
+
+                        </small>
+
+                    </button>
+
+                    <button
+                        id="btnQ5Continue"
+                        class="fd-btn fd-btn-primary"
+                        type="button"
+                        disabled
+                    >
+
+                        <span>
+
+                            தொடருங்கள்
+
+                        </span>
+
+                        <small>
+
+                            Continue →
+
+                        </small>
+
+                    </button>
+
+                </footer>
+
+            </article>
+
+            <!-- END QUESTION 05 -->
+
+                         <!-- ============================================= -->
+            <!-- FD-10 QUESTION 06                             -->
+            <!-- Financial Confidence™                         -->
+            <!-- Uses Reusable FD-FinancialScale™ Component    -->
+            <!-- ============================================= -->
+
+            <article
+                id="fdQuestion06"
+                class="fd-question-card"
+                data-question="6"
+                hidden
+            >
+
+                <!-- Question Number -->
+
+                <div class="fd-question-number">
+
+                    Question 06
+
+                </div>
+
+                <!-- Question -->
+
+                <h3 class="fd-question-title">
+
+                    உங்கள் நிதி எதிர்காலத்தின் மீது உங்களுக்கு எவ்வளவு நம்பிக்கை உள்ளது?
+
+                </h3>
+
+                <!-- Subtitle -->
+
+                <p class="fd-question-subtitle">
+
+                    How confident are you about your financial future?
+
+                </p>
+
+                <!-- Helper -->
+
+                <p class="fd-question-helper">
+
+                    உங்கள் நிதி எதிர்காலத்தைப் பற்றி
+                    இன்று நீங்கள் உணரும் நம்பிக்கையை
+                    மதிப்பிடுங்கள்.
+
+                    <br><br>
+
+                    Rate how confident you feel about your
+                    financial future today.
+
+                </p>
+
+                <!-- ========================================= -->
+                <!-- FD-FinancialScale™                         -->
+                <!-- Reused Component                           -->
+                <!-- ========================================= -->
+
+                <div
+                    id="fdFinancialConfidenceScale"
+                    class="fd-financial-scale"
+                    data-component="FinancialScale"
+                    data-type="confidence"
+                    data-question="6"
+                    data-min="1"
+                    data-max="10"
+                    data-value="5"
+                    data-title-ta="நிதி நம்பிக்கை"
+                    data-title-en="Financial Confidence"
+                >
+
+                </div>
+
+                <!-- Validation -->
+
+                <div
+                    id="financialConfidenceError"
+                    class="fd-error-message"
+                >
+
+                </div>
+
+                <!-- Navigation -->
+
+                <footer class="fd-navigation">
+
+                    <button
+                        id="btnQ6Previous"
+                        class="fd-btn fd-btn-secondary"
+                        type="button"
+                    >
+
+                        ←
+
+                        <span>
+
+                            முந்தையது
+
+                        </span>
+
+                        <small>
+
+                            Previous
+
+                        </small>
+
+                    </button>
+
+                    <button
+                        id="btnAnalyse"
+                        class="fd-btn fd-btn-primary"
+                        type="button"
+                    >
+
+                        <span>
+
+                            பகுப்பாய்வு செய்யுங்கள்
+
+                        </span>
+
+                        <small>
+
+                            Analyse My Financial Reality →
+
+                        </small>
+
+                    </button>
+
+                </footer>
+
+            </article>
+
+            <!-- END QUESTION 06 -->
 
 
 
-        <div
-            class="score-labels"
-        >
+            <!-- ============================================= -->
+            <!-- FD-11 ANALYSIS SCREEN                         -->
+            <!-- ============================================= -->
 
-            <span>
+            <section
+                id="fdAnalysisScreen"
+                class="fd-analysis-screen"
+                hidden
+            >
 
-                Needs Immediate Attention
+                <div class="fd-analysis-content">
 
-            </span>
+                    <div class="fd-analysis-spinner"></div>
 
-            <span>
+                    <h2>
 
-                Improving
+                        உங்கள் நிதி நிலை பகுப்பாய்வு செய்யப்படுகிறது...
 
-            </span>
+                    </h2>
 
-            <span>
+                    <p>
 
-                Strong Foundation
+                        Analysing Your Financial Reality™
 
-            </span>
+                    </p>
 
-        </div>
+                </div>
 
-    </div>
-
-
-
-    <!-- ==================================
-         INSIGHT
-    =================================== -->
-
-    <div
-        class="financial-insight"
-    >
-
-        <h4>
-
-            உங்கள் நிதி உண்மை...
-
-        </h4>
-
-        <h5>
-
-            Your Financial Reality...
-
-        </h5>
-
-        <p
-            id="financialInsight"
-        >
-
-            உங்கள் கனவுகளுக்கும்
-
-            உங்கள் தற்போதைய வாழ்க்கைக்கும்
-
-            இடையில் குறிப்பிடத்தக்க
-
-            நிதி இடைவெளி உள்ளது.
-
-        </p>
-
-        <small>
-
-            There appears to be a meaningful
-
-            financial gap between
-
-            your aspirations
-
-            and your present reality.
-
-        </small>
-
-    </div>
-
-</div>
+            </section>
 
 
 
-<!-- ======================================
-     CTA
-====================================== -->
+            <!-- ============================================= -->
+            <!-- FD-12 FINANCIAL GAP DASHBOARD™                -->
+            <!-- ============================================= -->
 
-<div
-    class="scene02-cta"
->
+            <section
+                id="fdFinancialDashboard"
+                class="fd-dashboard"
+                hidden
+            >
 
-    <button
+                <!-- Header -->
 
-        class="scene02-button journey-next-button"
+                <header class="fd-dashboard-header">
 
-        type="button"
+                    <div class="fd-badge">
 
-    >
+                        Financial Discovery™
 
-        <span
-            class="scene02-button-ta"
-        >
+                    </div>
 
-            இந்த இடைவெளிக்கான
+                    <h2>
 
-            காரணத்தை கண்டறிவோம்
+                        YOUR FINANCIAL GAP™
 
-        </span>
+                    </h2>
 
-        <span
-            class="scene02-button-en"
-        >
+                    <p>
 
-            Discover Why This Gap Exists
+                        உங்கள் தற்போதைய நிதி நிலையின் சுருக்கம்
 
-        </span>
+                        <br>
 
-    </button>
+                        Your Financial Reality at a Glance
 
-</div>
-                     
+                    </p>
+
+                </header>
+
+                <!-- Summary Grid -->
+
+                <div class="fd-dashboard-grid">
+
+                    <div class="fd-dashboard-card">
+
+                        <span class="fd-card-title">
+
+                            கனவு வருமானம்
+
+                        </span>
+
+                        <small>
+
+                            Dream Income
+
+                        </small>
+
+                        <strong id="fdDreamIncome">
+
+                            ₹0
+
+                        </strong>
+
+                    </div>
+
+                    <div class="fd-dashboard-card">
+
+                        <span class="fd-card-title">
+
+                            தற்போதைய வருமானம்
+
+                        </span>
+
+                        <small>
+
+                            Current Income
+
+                        </small>
+
+                        <strong id="fdCurrentIncome">
+
+                            ₹0
+
+                        </strong>
+
+                    </div>
+
+                    <div class="fd-dashboard-card fd-highlight">
+
+                        <span class="fd-card-title">
+
+                            வருமான இடைவெளி
+
+                        </span>
+
+                        <small>
+
+                            Income Gap
+
+                        </small>
+
+                        <strong id="fdIncomeGap">
+
+                            ₹0
+
+                        </strong>
+
+                    </div>
+
+                    <div class="fd-dashboard-card">
+
+                        <span class="fd-card-title">
+
+                            தாமதமான கனவுகள்
+
+                        </span>
+
+                        <small>
+
+                            Dreams Delayed
+
+                        </small>
+
+                        <strong id="fdDreamSummary">
+
+                            —
+
+                        </strong>
+
+                    </div>
+
+                    <div class="fd-dashboard-card">
+
+                        <span class="fd-card-title">
+
+                            நிதி நம்பிக்கை
+
+                        </span>
+
+                        <small>
+
+                            Financial Confidence
+
+                        </small>
+
+                        <strong id="fdConfidenceSummary">
+
+                            —
+
+                        </strong>
+
+                    </div>
+
+                    <div class="fd-dashboard-card">
+
+                        <span class="fd-card-title">
+
+                            நிதி நிலை
+
+                        </span>
+
+                        <small>
+
+                            Financial Reality™
+
+                        </small>
+
+                        <strong id="fdRealitySummary">
+
+                            —
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <!-- Gauge Placeholder -->
+
+                <section class="fd-gauge-section">
+
+                    <h3>
+
+                        Financial Reality Gauge™
+
+                    </h3>
+
+                    <div
+                        id="fdRealityGauge"
+                        class="fd-gauge"
+                    >
+
+                    </div>
 
                 </section>
 
-            </div>
+                <!-- CTA -->
 
-             
+                <footer class="fd-dashboard-footer">
+
+                    <button
+                        id="btnScene03"
+                        class="fd-btn fd-btn-primary fd-btn-large"
+                        type="button"
+                    >
+
+                        <span>
+
+                            இந்த இடைவெளிக்கான காரணத்தை கண்டறிவோம்
+
+                        </span>
+
+                        <small>
+
+                            Discover Why This Gap Exists →
+
+                        </small>
+
+                    </button>
+
+                </footer>
+
+            </section>
+
+        </section>
+        <!-- END FD-04 QUESTION WRAPPER -->
+
+    </div>
+    <!-- END FD-01 MAIN CONTAINER -->
+
+</section>
+<!-- END SCENE 02 -->
+
