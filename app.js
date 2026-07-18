@@ -3331,21 +3331,367 @@ function cacheScene02Elements(){
 }
 
 
+    SCENE02.elements = {
 
-/* ==========================================================================
-   13.03.01 VERIFY CACHE
-========================================================================== */
+        /* ======================================================
+           Scene
+        ====================================================== */
 
-function scene02CacheReady(){
+        scene :
 
-    return (
+            document.getElementById(
 
-        SCENE02.elements.questions.length === 6
+                "scene02"
 
-    );
+            ),
 
-}
+        container :
 
+            document.getElementById(
+
+                "fdQuestionContainer"
+
+            ),
+
+
+
+        /* ======================================================
+           Questions
+        ====================================================== */
+
+        questions : [
+
+            document.getElementById(
+
+                "fdQuestion01"
+
+            ),
+
+            document.getElementById(
+
+                "fdQuestion02"
+
+            ),
+
+            document.getElementById(
+
+                "fdQuestion03"
+
+            ),
+
+            document.getElementById(
+
+                "fdQuestion04"
+
+            ),
+
+            document.getElementById(
+
+                "fdQuestion05"
+
+            ),
+
+            document.getElementById(
+
+                "fdQuestion06"
+
+            )
+
+        ],
+
+
+
+        /* ======================================================
+           Progress
+        ====================================================== */
+
+        progressText :
+
+            document.getElementById(
+
+                "fdProgressText"
+
+            ),
+
+        progressFill :
+
+            document.getElementById(
+
+                "fdProgressFill"
+
+            ),
+
+
+
+        /* ======================================================
+           Analysis
+        ====================================================== */
+
+        analysis :
+
+            document.getElementById(
+
+                "fdAnalysisScreen"
+
+            ),
+
+
+
+        /* ======================================================
+           Dashboard
+        ====================================================== */
+
+        dashboard :
+
+            document.getElementById(
+
+                "fdFinancialDashboard"
+
+            ),
+
+
+
+        /* ======================================================
+           Dashboard Values
+        ====================================================== */
+
+        dreamIncome :
+
+            document.getElementById(
+
+                "fdDreamIncome"
+
+            ),
+
+        currentIncome :
+
+            document.getElementById(
+
+                "fdCurrentIncome"
+
+            ),
+
+        incomeGap :
+
+            document.getElementById(
+
+                "fdIncomeGap"
+
+            ),
+
+        dreamSummary :
+
+            document.getElementById(
+
+                "fdDreamSummary"
+
+            ),
+
+        confidenceSummary :
+
+            document.getElementById(
+
+                "fdConfidenceSummary"
+
+            ),
+
+        realitySummary :
+
+            document.getElementById(
+
+                "fdRealitySummary"
+
+            ),
+
+        realityGauge :
+
+            document.getElementById(
+
+                "fdRealityGauge"
+
+            ),
+
+
+
+        /* ======================================================
+           Inputs
+        ====================================================== */
+
+        dreamIncomeInput :
+
+            document.getElementById(
+
+                "dreamIncome"
+
+            ),
+
+        currentIncomeInput :
+
+            document.getElementById(
+
+                "currentIncome"
+
+            ),
+
+
+
+        /* ======================================================
+           Question 3
+        ====================================================== */
+
+        dreamChipGroup :
+
+            document.getElementById(
+
+                "dreamChipGroup"
+
+            ),
+
+
+
+        /* ======================================================
+           Question 4
+        ====================================================== */
+
+        burdenScale :
+
+            document.getElementById(
+
+                "fdFinancialBurdenScale"
+
+            ),
+
+
+
+        /* ======================================================
+           Question 5
+        ====================================================== */
+
+        emergencyFund :
+
+            document.getElementById(
+
+                "fdEmergencyFundOptions"
+
+            ),
+
+
+
+        /* ======================================================
+           Question 6
+        ====================================================== */
+
+        confidenceScale :
+
+            document.getElementById(
+
+                "fdFinancialConfidenceScale"
+
+            ),
+
+
+
+        /* ======================================================
+           Navigation Buttons
+        ====================================================== */
+
+        btnQ1Continue :
+
+            document.getElementById(
+
+                "btnQ1Continue"
+
+            ),
+
+        btnQ2Previous :
+
+            document.getElementById(
+
+                "btnQ2Previous"
+
+            ),
+
+        btnQ2Continue :
+
+            document.getElementById(
+
+                "btnQ2Continue"
+
+            ),
+
+        btnQ3Previous :
+
+            document.getElementById(
+
+                "btnQ3Previous"
+
+            ),
+
+        btnQ3Continue :
+
+            document.getElementById(
+
+                "btnQ3Continue"
+
+            ),
+
+        btnQ4Previous :
+
+            document.getElementById(
+
+                "btnQ4Previous"
+
+            ),
+
+        btnQ4Continue :
+
+            document.getElementById(
+
+                "btnQ4Continue"
+
+            ),
+
+        btnQ5Previous :
+
+            document.getElementById(
+
+                "btnQ5Previous"
+
+            ),
+
+        btnQ5Continue :
+
+            document.getElementById(
+
+                "btnQ5Continue"
+
+            ),
+
+        btnQ6Previous :
+
+            document.getElementById(
+
+                "btnQ6Previous"
+
+            ),
+
+        btnAnalyse :
+
+            document.getElementById(
+
+                "btnAnalyse"
+
+            ),
+
+        btnScene03 :
+
+            document.getElementById(
+
+                "btnScene03"
+
+            )
+
+    };
 
 
 /* ==========================================================================
@@ -3555,6 +3901,588 @@ function handleScene02Next(){
 function handleScene02Previous(){
 
     // implemented in Section 13.05
+
+}
+
+/* ==========================================================================
+   13.05 NAVIGATION ENGINE
+========================================================================== */
+
+
+/* ==========================================================================
+   13.05.01 NEXT
+========================================================================== */
+
+function handleScene02Next(){
+
+    if(
+
+        scene02IsLastQuestion()
+
+    ){
+
+        showScene02Analysis();
+
+        return;
+
+    }
+
+    showScene02Question(
+
+        SCENE02.currentQuestion + 1
+
+    );
+
+    updateScene02Progress();
+
+}
+
+
+
+/* ==========================================================================
+   13.05.02 PREVIOUS
+========================================================================== */
+
+function handleScene02Previous(){
+
+    if(
+
+        scene02IsFirstQuestion()
+
+    ){
+
+        return;
+
+    }
+
+    showScene02Question(
+
+        SCENE02.currentQuestion - 1
+
+    );
+
+    updateScene02Progress();
+
+}
+
+
+
+/* ==========================================================================
+   13.05.03 SHOW ANALYSIS
+========================================================================== */
+
+function showScene02Analysis(){
+
+    hideScene02Sections();
+
+    if(
+
+        SCENE02.elements.analysis
+
+    ){
+
+        SCENE02.elements.analysis.hidden = false;
+
+    }
+
+    window.setTimeout(
+
+        showScene02Dashboard,
+
+        1800
+
+    );
+
+}
+
+
+
+/* ==========================================================================
+   13.05.04 SHOW DASHBOARD
+========================================================================== */
+
+function showScene02Dashboard(){
+
+    if(
+
+        SCENE02.elements.analysis
+
+    ){
+
+        SCENE02.elements.analysis.hidden = true;
+
+    }
+
+    if(
+
+        SCENE02.elements.dashboard
+
+    ){
+
+        SCENE02.elements.dashboard.hidden = false;
+
+    }
+
+}
+
+
+
+/* ==========================================================================
+   13.05.05 UPDATE PROGRESS
+========================================================================== */
+
+function updateScene02Progress(){
+
+    const current =
+
+        SCENE02.currentQuestion + 1;
+
+    const percent =
+
+        (
+
+            current /
+
+            SCENE02.totalQuestions
+
+        ) * 100;
+
+
+
+    if(
+
+        SCENE02.elements.progressText
+
+    ){
+
+        SCENE02.elements.progressText.textContent =
+
+            "Question " +
+
+            current +
+
+            " of " +
+
+            SCENE02.totalQuestions;
+
+    }
+
+
+
+    if(
+
+        SCENE02.elements.progressBar
+
+    ){
+
+        SCENE02.elements.progressBar.style.width =
+
+            percent + "%";
+
+    }
+
+}
+
+/* ==========================================================================
+   13.05.06 INITIAL PROGRESS
+========================================================================== */
+
+function initializeScene02Progress(){
+
+    SCENE02.currentQuestion = 0;
+
+    updateScene02Progress();
+
+}
+
+
+
+/* ==========================================================================
+   13.05.07 START SCENE
+========================================================================== */
+
+function startScene02(){
+
+    hideScene02Sections();
+
+    showScene02Question(
+
+        0
+
+    );
+
+    initializeScene02Progress();
+
+}
+
+
+
+/* ==========================================================================
+   13.05.08 SHOW QUESTION
+========================================================================== */
+
+function showScene02Question(
+
+    index
+
+){
+
+    if(
+
+        !scene02QuestionExists(
+
+            index
+
+        )
+
+    ){
+
+        return;
+
+    }
+
+
+
+    hideScene02Sections();
+
+
+
+    SCENE02.currentQuestion =
+
+        index;
+
+
+
+    const question =
+
+        SCENE02.elements.questions[
+
+            index
+
+        ];
+
+
+
+    if(
+
+        question
+
+    ){
+
+        question.hidden = false;
+
+    }
+
+
+
+    updateScene02Progress();
+
+}
+
+
+
+/* ==========================================================================
+   13.05.09 HIDE ANALYSIS
+========================================================================== */
+
+function hideScene02Analysis(){
+
+    if(
+
+        SCENE02.elements.analysis
+
+    ){
+
+        SCENE02.elements.analysis.hidden = true;
+
+    }
+
+}
+
+
+
+/* ==========================================================================
+   13.05.10 HIDE DASHBOARD
+========================================================================== */
+
+function hideScene02Dashboard(){
+
+    if(
+
+        SCENE02.elements.dashboard
+
+    ){
+
+        SCENE02.elements.dashboard.hidden = true;
+
+    }
+
+}
+
+
+/* ==========================================================================
+   13.04.03 REGISTER EVENTS
+========================================================================== */
+
+function registerScene02Events(){
+
+    /* ======================================================
+       Question 1
+    ====================================================== */
+
+    if(
+
+        SCENE02.elements.dreamIncomeInput
+
+    ){
+
+        SCENE02.elements.dreamIncomeInput.addEventListener(
+
+            "input",
+
+            handleDreamIncomeInput
+
+        );
+
+    }
+
+
+
+    if(
+
+        SCENE02.elements.btnQ1Continue
+
+    ){
+
+        SCENE02.elements.btnQ1Continue.addEventListener(
+
+            "click",
+
+            handleScene02Next
+
+        );
+
+    }
+
+
+
+    /* ======================================================
+       Question 2
+    ====================================================== */
+
+    if(
+
+        SCENE02.elements.currentIncomeInput
+
+    ){
+
+        SCENE02.elements.currentIncomeInput.addEventListener(
+
+            "input",
+
+            handleCurrentIncomeInput
+
+        );
+
+    }
+
+
+
+    if(
+
+        SCENE02.elements.btnQ2Previous
+
+    ){
+
+        SCENE02.elements.btnQ2Previous.addEventListener(
+
+            "click",
+
+            handleScene02Previous
+
+        );
+
+    }
+
+
+
+    if(
+
+        SCENE02.elements.btnQ2Continue
+
+    ){
+
+        SCENE02.elements.btnQ2Continue.addEventListener(
+
+            "click",
+
+            handleScene02Next
+
+        );
+
+    }
+
+
+
+    /* ======================================================
+       Question 3
+    ====================================================== */
+
+    document
+
+        .querySelectorAll(
+
+            "#dreamChipGroup .fd-chip"
+
+        )
+
+        .forEach(
+
+            chip =>{
+
+                chip.addEventListener(
+
+                    "click",
+
+                    handleDreamChipClick
+
+                );
+
+            }
+
+        );
+
+
+
+    SCENE02.elements.btnQ3Previous.addEventListener(
+
+        "click",
+
+        handleScene02Previous
+
+    );
+
+
+
+    SCENE02.elements.btnQ3Continue.addEventListener(
+
+        "click",
+
+        handleScene02Next
+
+    );
+
+
+
+    /* ======================================================
+       Question 4
+    ====================================================== */
+
+    SCENE02.elements.btnQ4Previous.addEventListener(
+
+        "click",
+
+        handleScene02Previous
+
+    );
+
+
+
+    SCENE02.elements.btnQ4Continue.addEventListener(
+
+        "click",
+
+        handleScene02Next
+
+    );
+
+
+
+    /* ======================================================
+       Question 5
+    ====================================================== */
+
+    document
+
+        .querySelectorAll(
+
+            "#fdEmergencyFundOptions .fd-option-card"
+
+        )
+
+        .forEach(
+
+            option =>{
+
+                option.addEventListener(
+
+                    "click",
+
+                    handleEmergencyFundSelection
+
+                );
+
+            }
+
+        );
+
+
+
+    SCENE02.elements.btnQ5Previous.addEventListener(
+
+        "click",
+
+        handleScene02Previous
+
+    );
+
+
+
+    SCENE02.elements.btnQ5Continue.addEventListener(
+
+        "click",
+
+        handleScene02Next
+
+    );
+
+
+
+    /* ======================================================
+       Question 6
+    ====================================================== */
+
+    SCENE02.elements.btnQ6Previous.addEventListener(
+
+        "click",
+
+        handleScene02Previous
+
+    );
+
+
+
+    SCENE02.elements.btnAnalyse.addEventListener(
+
+        "click",
+
+        handleScene02Next
+
+    );
+
+
+
+    /* ======================================================
+       Dashboard
+    ====================================================== */
+
+    SCENE02.elements.btnScene03.addEventListener(
+
+        "click",
+
+        handleScene03Transition
+
+    );
 
 }
 
