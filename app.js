@@ -2136,3 +2136,1111 @@ log(
 
 );
 
+/* ==========================================================================
+   13. SCENE 02 CONTROLLER
+========================================================================== */
+
+
+/* ==========================================================================
+   13.01 SCENE 02 STATE
+========================================================================== */
+
+const SCENE02 = {
+
+    /* ==========================================================
+       CURRENT FLOW
+    ========================================================== */
+
+    currentQuestion : 0,
+
+    totalQuestions : 6,
+
+    initialized : false,
+
+    completed : false,
+
+
+
+    /* ==========================================================
+       DOM CACHE
+    ========================================================== */
+
+    elements : {
+
+        container : null,
+
+        progress : null,
+
+        content : null,
+
+        footer : null,
+
+        nextButton : null,
+
+        previousButton : null
+
+    },
+
+
+
+    /* ==========================================================
+       USER ANSWERS
+    ========================================================== */
+
+    answers : {
+
+        dreamIncome : null,
+
+        currentIncome : null,
+
+        dreams : [],
+
+        financialBurden : null,
+
+        emergencyFund : null,
+
+        financialConfidence : null
+
+    },
+
+
+
+    /* ==========================================================
+       CALCULATED VALUES
+    ========================================================== */
+
+    results : {
+
+        incomeGap : 0,
+
+        confidenceScore : 0,
+
+        burdenScore : 0,
+
+        realityScore : 0
+
+    }
+
+};
+
+
+
+/* ==========================================================================
+   13.01.01 RESET STATE
+========================================================================== */
+
+function resetScene02(){
+
+    SCENE02.currentQuestion = 0;
+
+    SCENE02.initialized = false;
+
+    SCENE02.completed = false;
+
+
+
+    SCENE02.answers = {
+
+        dreamIncome : null,
+
+        currentIncome : null,
+
+        dreams : [],
+
+        financialBurden : null,
+
+        emergencyFund : null,
+
+        financialConfidence : null
+
+    };
+
+
+
+    SCENE02.results = {
+
+        incomeGap : 0,
+
+        confidenceScore : 0,
+
+        burdenScore : 0,
+
+        realityScore : 0
+
+    };
+
+}
+
+
+
+/* ==========================================================================
+   13.01.02 SAVE ANSWER
+========================================================================== */
+
+function saveScene02Answer(
+
+    key,
+
+    value
+
+){
+
+    if(
+
+        !(key in SCENE02.answers)
+
+    ){
+
+        warn(
+
+            "Unknown Scene02 answer key : " +
+
+            key
+
+        );
+
+        return;
+
+    }
+
+
+
+    SCENE02.answers[key] = value;
+
+
+
+    log(
+
+        "Scene02 Saved → " +
+
+        key
+
+    );
+
+}
+
+
+
+/* ==========================================================================
+   13.01.03 GET ANSWER
+========================================================================== */
+
+function getScene02Answer(
+
+    key
+
+){
+
+    if(
+
+        !(key in SCENE02.answers)
+
+    ){
+
+        return null;
+
+    }
+
+
+
+    return SCENE02.answers[key];
+
+}
+
+
+
+/* ==========================================================================
+   13.01.04 NEXT QUESTION
+========================================================================== */
+
+function nextScene02Question(){
+
+    if(
+
+        SCENE02.currentQuestion <
+
+        SCENE02.totalQuestions - 1
+
+    ){
+
+        SCENE02.currentQuestion++;
+
+    }
+
+}
+
+
+
+/* ==========================================================================
+   13.01.05 PREVIOUS QUESTION
+========================================================================== */
+
+function previousScene02Question(){
+
+    if(
+
+        SCENE02.currentQuestion > 0
+
+    ){
+
+        SCENE02.currentQuestion--;
+
+    }
+
+}
+
+
+
+/* ==========================================================================
+   13.01.06 CURRENT QUESTION
+========================================================================== */
+
+function currentScene02Question(){
+
+    return SCENE02.currentQuestion;
+
+}
+
+
+
+/* ==========================================================================
+   13.01.07 LAST QUESTION
+========================================================================== */
+
+function isLastScene02Question(){
+
+    return (
+
+        SCENE02.currentQuestion ===
+
+        SCENE02.totalQuestions - 1
+
+    );
+
+}
+
+
+
+/* ==========================================================================
+   13.01.08 FIRST QUESTION
+========================================================================== */
+
+function isFirstScene02Question(){
+
+    return (
+
+        SCENE02.currentQuestion === 0
+
+    );
+
+}
+
+/* ==========================================================================
+   13.02 QUESTION MASTER
+========================================================================== */
+
+
+/* ==========================================================================
+   13.02.01 QUESTIONS
+========================================================================== */
+
+const SCENE02_QUESTIONS = [
+
+    {
+
+        id : 1,
+
+        key : "dreamIncome",
+
+        type : "currency",
+
+        progress : 1,
+
+
+
+        title : {
+
+            ta : "கனவு மாத வருமானம்™",
+
+            en : "Dream Monthly Income™"
+
+        },
+
+
+
+        question : {
+
+            ta : "நீங்கள் மாதம் எவ்வளவு வருமானம் பெற விரும்புகிறீர்கள்?",
+
+            en : "What monthly income would you love to earn?"
+
+        },
+
+
+
+        placeholder : {
+
+            ta : "உங்கள் கனவு மாத வருமானம்",
+
+            en : "Enter your dream monthly income"
+
+        },
+
+
+
+        helper : {
+
+            ta : "உங்கள் வாழ்க்கை இலக்கை நினைத்து பதிலளிக்கவும்.",
+
+            en : "Answer based on the life you truly wish to live."
+
+        },
+
+
+
+        validation : {
+
+            required : true,
+
+            minimum : 1000
+
+        }
+
+    },
+
+
+
+    {
+
+        id : 2,
+
+        key : "currentIncome",
+
+        type : "currency",
+
+        progress : 2,
+
+
+
+        title : {
+
+            ta : "தற்போதைய மாத வருமானம்™",
+
+            en : "Current Monthly Income™"
+
+        },
+
+
+
+        question : {
+
+            ta : "தற்போது நீங்கள் மாதம் எவ்வளவு வருமானம் பெறுகிறீர்கள்?",
+
+            en : "What is your current monthly income?"
+
+        },
+
+
+
+        placeholder : {
+
+            ta : "தற்போதைய மாத வருமானம்",
+
+            en : "Enter your current monthly income"
+
+        },
+
+
+
+        helper : {
+
+            ta : "அண்மைய சராசரி மாத வருமானத்தை பதிவு செய்யுங்கள்.",
+
+            en : "Enter your average current monthly income."
+
+        },
+
+
+
+        validation : {
+
+            required : true,
+
+            minimum : 0
+
+        }
+
+    }
+
+];
+
+
+
+/* ==========================================================================
+   13.02.02 GET QUESTION
+========================================================================== */
+
+function getScene02Question(
+
+    index
+
+){
+
+    if(
+
+        index < 0 ||
+
+        index >= SCENE02_QUESTIONS.length
+
+    ){
+
+        return null;
+
+    }
+
+
+
+    return SCENE02_QUESTIONS[
+
+        index
+
+    ];
+
+}
+
+
+
+/* ==========================================================================
+   13.02.03 CURRENT QUESTION
+========================================================================== */
+
+function getCurrentScene02Question(){
+
+    return getScene02Question(
+
+        SCENE02.currentQuestion
+
+    );
+
+}
+
+/* ==========================================================================
+   13.02.04 QUESTION 3
+========================================================================== */
+
+SCENE02_QUESTIONS.push(
+
+    {
+
+        id : 3,
+
+        key : "dreams",
+
+        type : "chips",
+
+        progress : 3,
+
+
+
+        title : {
+
+            ta : "தள்ளிப்போன கனவுகள்™",
+
+            en : "Dreams Delayed™"
+
+        },
+
+
+
+        question : {
+
+            ta : "பணக் குறைபாடு காரணமாக எந்த கனவுகள் இன்னும் நிறைவேறவில்லை?",
+
+            en : "Which dreams are still waiting because of your financial situation?"
+
+        },
+
+
+
+        helper : {
+
+            ta : "உங்களுக்கு பொருந்தும் அனைத்தையும் தேர்ந்தெடுக்கலாம்.",
+
+            en : "Select every dream that applies to you."
+
+        },
+
+
+
+        validation : {
+
+            required : true,
+
+            minimumSelections : 1
+
+        },
+
+
+
+        multiple : true,
+
+
+
+        options : [
+
+            {
+
+                id : "home",
+
+                value : "Own Home",
+
+                ta : "சொந்த வீடு",
+
+                en : "Own Home"
+
+            },
+
+            {
+
+                id : "education",
+
+                value : "Children's Education",
+
+                ta : "குழந்தைகளின் கல்வி",
+
+                en : "Children's Education"
+
+            },
+
+            {
+
+                id : "travel",
+
+                value : "Travel",
+
+                ta : "சுற்றுலா",
+
+                en : "Travel"
+
+            },
+
+            {
+
+                id : "medical",
+
+                value : "Medical Security",
+
+                ta : "மருத்துவ பாதுகாப்பு",
+
+                en : "Medical Security"
+
+            },
+
+            {
+
+                id : "business",
+
+                value : "Business",
+
+                ta : "சொந்த தொழில்",
+
+                en : "Business"
+
+            },
+
+            {
+
+                id : "vehicle",
+
+                value : "Vehicle",
+
+                ta : "வாகனம்",
+
+                en : "Vehicle"
+
+            },
+
+            {
+
+                id : "family",
+
+                value : "Family Security",
+
+                ta : "குடும்ப பாதுகாப்பு",
+
+                en : "Family Security"
+
+            },
+
+            {
+
+                id : "peace",
+
+                value : "Peace of Mind",
+
+                ta : "மன அமைதி",
+
+                en : "Peace of Mind"
+
+            }
+
+        ]
+
+    }
+
+);
+
+
+
+/* ==========================================================================
+   13.02.05 CHIP HELPERS
+========================================================================== */
+
+function getScene02DreamOptions(){
+
+    return SCENE02_QUESTIONS[2].options;
+
+}
+
+
+
+/* ==========================================================================
+   13.02.06 TOGGLE DREAM
+========================================================================== */
+
+function toggleScene02Dream(
+
+    value
+
+){
+
+    const dreams =
+
+        SCENE02.answers.dreams;
+
+
+
+    const index =
+
+        dreams.indexOf(
+
+            value
+
+        );
+
+
+
+    if(
+
+        index === -1
+
+    ){
+
+        dreams.push(
+
+            value
+
+        );
+
+    }
+
+    else{
+
+        dreams.splice(
+
+            index,
+
+            1
+
+        );
+
+    }
+
+}
+
+
+
+/* ==========================================================================
+   13.02.07 DREAM SELECTED
+========================================================================== */
+
+function scene02DreamSelected(
+
+    value
+
+){
+
+    return SCENE02.answers.dreams.includes(
+
+        value
+
+    );
+
+}
+
+
+
+/* ==========================================================================
+   13.02.08 DREAM COUNT
+========================================================================== */
+
+function scene02DreamCount(){
+
+    return SCENE02.answers.dreams.length;
+
+}
+
+/* ==========================================================================
+   13.02.09 QUESTION 4
+========================================================================== */
+
+SCENE02_QUESTIONS.push(
+
+    {
+
+        id : 4,
+
+        key : "financialBurden",
+
+        type : "financialScale",
+
+        progress : 4,
+
+
+
+        title : {
+
+            ta : "நிதிச் சுமை™",
+
+            en : "Financial Burden™"
+
+        },
+
+
+
+        question : {
+
+            ta : "தற்போதைய நிதிச் சுமை எவ்வளவு உள்ளது?",
+
+            en : "How heavy is your current financial burden?"
+
+        },
+
+
+
+        helper : {
+
+            ta : "உங்கள் மனநிலையை பிரதிபலிக்கும் எண்ணை தேர்ந்தெடுக்கவும்.",
+
+            en : "Choose the number that best represents your situation."
+
+        },
+
+
+
+        validation : {
+
+            required : true
+
+        },
+
+
+
+        scale : {
+
+            minimum : 1,
+
+            maximum : 10,
+
+            defaultValue : 5,
+
+
+
+            left : {
+
+                ta : "மிகக் குறைவு",
+
+                en : "Very Low"
+
+            },
+
+
+
+            right : {
+
+                ta : "மிக அதிகம்",
+
+                en : "Very High"
+
+            }
+
+        }
+
+    }
+
+);
+
+
+
+/* ==========================================================================
+   13.02.10 QUESTION 5
+========================================================================== */
+
+SCENE02_QUESTIONS.push(
+
+    {
+
+        id : 5,
+
+        key : "emergencyFund",
+
+        type : "optionCard",
+
+        progress : 5,
+
+
+
+        title : {
+
+            ta : "அவசரகால நிதி™",
+
+            en : "Emergency Fund™"
+
+        },
+
+
+
+        question : {
+
+            ta : "உங்களிடம் அவசரகால சேமிப்பு உள்ளதா?",
+
+            en : "Do you currently have an emergency fund?"
+
+        },
+
+
+
+        helper : {
+
+            ta : "ஒரு விருப்பத்தை மட்டும் தேர்ந்தெடுக்கவும்.",
+
+            en : "Select one option."
+
+        },
+
+
+
+        validation : {
+
+            required : true
+
+        },
+
+
+
+        options : [
+
+            {
+
+                value : "none",
+
+                ta : "இல்லை",
+
+                en : "No Emergency Fund",
+
+                icon : "❌"
+
+            },
+
+
+
+            {
+
+                value : "partial",
+
+                ta : "சிறிதளவு உள்ளது",
+
+                en : "Partially Available",
+
+                icon : "⚠️"
+
+            },
+
+
+
+            {
+
+                value : "complete",
+
+                ta : "போதுமான சேமிப்பு உள்ளது",
+
+                en : "Fully Available",
+
+                icon : "✅"
+
+            }
+
+        ]
+
+    }
+
+);
+
+
+
+/* ==========================================================================
+   13.02.11 QUESTION 6
+========================================================================== */
+
+SCENE02_QUESTIONS.push(
+
+    {
+
+        id : 6,
+
+        key : "financialConfidence",
+
+        type : "financialScale",
+
+        progress : 6,
+
+
+
+        title : {
+
+            ta : "நிதி நம்பிக்கை™",
+
+            en : "Financial Confidence™"
+
+        },
+
+
+
+        question : {
+
+            ta : "உங்கள் நிதி எதிர்காலம் குறித்து எவ்வளவு நம்பிக்கை உள்ளது?",
+
+            en : "How confident are you about your financial future?"
+
+        },
+
+
+
+        helper : {
+
+            ta : "உங்கள் தற்போதைய உணர்வை பிரதிபலிக்கும் எண்ணை தேர்ந்தெடுக்கவும்.",
+
+            en : "Choose the number that best matches your confidence."
+
+        },
+
+
+
+        validation : {
+
+            required : true
+
+        },
+
+
+
+        scale : {
+
+            minimum : 1,
+
+            maximum : 10,
+
+            defaultValue : 5,
+
+
+
+            left : {
+
+                ta : "நம்பிக்கை இல்லை",
+
+                en : "Not Confident"
+
+            },
+
+
+
+            right : {
+
+                ta : "முழு நம்பிக்கை",
+
+                en : "Highly Confident"
+
+            }
+
+        }
+
+    }
+
+);
+
+
+
+/* ==========================================================================
+   13.02.12 TOTAL QUESTIONS
+========================================================================== */
+
+SCENE02.totalQuestions =
+
+    SCENE02_QUESTIONS.length;
+
+
+
+/* ==========================================================================
+   13.02.13 QUESTION EXISTS
+========================================================================== */
+
+function scene02QuestionExists(
+
+    index
+
+){
+
+    return (
+
+        index >= 0 &&
+
+        index < SCENE02.totalQuestions
+
+    );
+
+}
+
+
+
+/* ==========================================================================
+   13.02.14 LAST QUESTION
+========================================================================== */
+
+function scene02IsLastQuestion(){
+
+    return (
+
+        SCENE02.currentQuestion ===
+
+        SCENE02.totalQuestions - 1
+
+    );
+
+}
+
+
+
+/* ==========================================================================
+   13.02.15 FIRST QUESTION
+========================================================================== */
+
+function scene02IsFirstQuestion(){
+
+    return (
+
+        SCENE02.currentQuestion === 0
+
+    );
+
+}
+
