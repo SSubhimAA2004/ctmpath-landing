@@ -928,6 +928,1937 @@ body{
 }
 
 /* ==========================================================================
+   06.09 FDQUESTIONCARD™
+========================================================================== */
+
+/* ==========================================================================
+   06.09.01 CONTAINER
+========================================================================== */
+
+.fd-question-card{
+
+    width:min(760px,100%);
+
+    margin-inline:auto;
+
+    padding:3rem;
+
+    border-radius:var(--radius-lg);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.04)
+        );
+
+    border:1px solid rgba(255,255,255,.10);
+
+    backdrop-filter:blur(22px);
+
+    box-shadow:var(--shadow-large);
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:2rem;
+
+}
+
+
+
+/* ==========================================================================
+   06.09.02 QUESTION NUMBER
+========================================================================== */
+
+.fd-question-number{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:54px;
+
+    height:54px;
+
+    border-radius:50%;
+
+    background:rgba(31,199,201,.18);
+
+    border:1px solid rgba(31,199,201,.45);
+
+    color:var(--color-accent);
+
+    font-size:1rem;
+
+    font-weight:700;
+
+}
+
+
+
+/* ==========================================================================
+   06.09.03 TAMIL TITLE
+========================================================================== */
+
+.fd-question-title-ta{
+
+    font-family:var(--font-ta);
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    line-height:1.45;
+
+    color:var(--color-white);
+
+}
+
+
+
+/* ==========================================================================
+   06.09.04 ENGLISH TITLE
+========================================================================== */
+
+.fd-question-title-en{
+
+    font-family:var(--font-en);
+
+    font-size:1rem;
+
+    font-weight:500;
+
+    line-height:1.7;
+
+    color:var(--color-soft);
+
+}
+
+
+
+/* ==========================================================================
+   06.09.05 CONTENT
+========================================================================== */
+
+.fd-question-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:1.75rem;
+
+}
+
+
+
+/* ==========================================================================
+   06.09.06 FOOTER
+========================================================================== */
+
+.fd-question-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:1rem;
+
+    margin-top:.5rem;
+
+}
+
+
+
+/* ==========================================================================
+   06.09.07 RESPONSIVE
+========================================================================== */
+
+@media(max-width:768px){
+
+    .fd-question-card{
+
+        padding:2rem 1.4rem;
+
+        border-radius:20px;
+
+    }
+
+    .fd-question-title-ta{
+
+        font-size:1.55rem;
+
+    }
+
+}
+
+
+
+/* ==========================================================================
+   06.10 FDCURRENCYINPUT™
+========================================================================== */
+
+
+/* ==========================================================================
+   06.10.01 WRAPPER
+========================================================================== */
+
+.fd-currency{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:.85rem;
+
+}
+
+
+
+/* ==========================================================================
+   06.10.02 LABEL
+========================================================================== */
+
+.fd-currency-label{
+
+    font-family:var(--font-ta);
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    color:var(--color-soft);
+
+}
+
+
+
+/* ==========================================================================
+   06.10.03 INPUT WRAPPER
+========================================================================== */
+
+.fd-currency-field{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:1rem;
+
+    padding:1.1rem 1.4rem;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:
+
+        border-color var(--duration-normal) var(--ease),
+
+        box-shadow var(--duration-normal) var(--ease),
+
+        transform var(--duration-fast) var(--ease);
+
+}
+
+
+
+/* ==========================================================================
+   06.10.04 ACTIVE
+========================================================================== */
+
+.fd-currency-field:focus-within{
+
+    border-color:var(--color-accent);
+
+    box-shadow:
+
+        0 0 0 4px rgba(31,199,201,.12);
+
+    transform:translateY(-2px);
+
+}
+
+
+
+/* ==========================================================================
+   06.10.05 SYMBOL
+========================================================================== */
+
+.fd-currency-symbol{
+
+    font-size:1.6rem;
+
+    font-weight:700;
+
+    color:var(--color-gold);
+
+    flex-shrink:0;
+
+}
+
+
+
+/* ==========================================================================
+   06.10.06 INPUT
+========================================================================== */
+
+.fd-currency-input{
+
+    width:100%;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    color:var(--color-white);
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    font-family:var(--font-en);
+
+    letter-spacing:.02em;
+
+}
+
+
+
+.fd-currency-input::placeholder{
+
+    color:rgba(255,255,255,.35);
+
+}
+
+
+
+/* ==========================================================================
+   06.10.07 HELPER
+========================================================================== */
+
+.fd-currency-helper{
+
+    font-size:.9rem;
+
+    color:var(--color-muted);
+
+    line-height:1.6;
+
+}
+
+
+
+/* ==========================================================================
+   06.10.08 INVALID
+========================================================================== */
+
+.fd-currency-field.is-invalid{
+
+    border-color:#FF6B6B;
+
+    box-shadow:
+
+        0 0 0 4px rgba(255,107,107,.10);
+
+}
+
+
+
+/* ==========================================================================
+   06.10.09 RESPONSIVE
+========================================================================== */
+
+@media(max-width:768px){
+
+    .fd-currency-field{
+
+        padding:1rem;
+
+    }
+
+    .fd-currency-input{
+
+        font-size:1.5rem;
+
+    }
+
+}
+
+/* ==========================================================================
+   06.11 FDPROGRESS™
+========================================================================== */
+
+
+/* ==========================================================================
+   06.11.01 CONTAINER
+========================================================================== */
+
+.fd-progress{
+
+    width:min(760px,100%);
+
+    margin-inline:auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:.90rem;
+
+}
+
+
+
+/* ==========================================================================
+   06.11.02 HEADER
+========================================================================== */
+
+.fd-progress-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:1rem;
+
+}
+
+
+
+/* ==========================================================================
+   06.11.03 LABEL
+========================================================================== */
+
+.fd-progress-label{
+
+    font-family:var(--font-en);
+
+    font-size:.90rem;
+
+    font-weight:600;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+
+    color:var(--color-soft);
+
+}
+
+
+
+/* ==========================================================================
+   06.11.04 VALUE
+========================================================================== */
+
+.fd-progress-value{
+
+    font-family:var(--font-en);
+
+    font-size:.95rem;
+
+    font-weight:700;
+
+    color:var(--color-accent);
+
+}
+
+
+
+/* ==========================================================================
+   06.11.05 TRACK
+========================================================================== */
+
+.fd-progress-track{
+
+    position:relative;
+
+    width:100%;
+
+    height:10px;
+
+    overflow:hidden;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.08);
+
+}
+
+
+
+/* ==========================================================================
+   06.11.06 BAR
+========================================================================== */
+
+.fd-progress-bar{
+
+    position:absolute;
+
+    inset:0 auto 0 0;
+
+    width:0%;
+
+    border-radius:inherit;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            var(--color-primary-light),
+
+            var(--color-accent)
+
+        );
+
+    transition:
+
+        width .60s var(--ease);
+
+}
+
+
+
+/* ==========================================================================
+   06.11.07 STEP LABELS
+========================================================================== */
+
+.fd-progress-steps{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:.35rem;
+
+}
+
+
+
+.fd-progress-step{
+
+    font-size:.78rem;
+
+    font-weight:500;
+
+    color:var(--color-muted);
+
+    transition:
+
+        color var(--duration-normal) var(--ease);
+
+}
+
+
+
+.fd-progress-step.is-active{
+
+    color:var(--color-accent);
+
+}
+
+
+
+.fd-progress-step.is-complete{
+
+    color:var(--color-white);
+
+}
+
+
+
+/* ==========================================================================
+   06.11.08 RESPONSIVE
+========================================================================== */
+
+@media(max-width:768px){
+
+    .fd-progress{
+
+        gap:.75rem;
+
+    }
+
+}
+
+
+
+
+/* ==========================================================================
+   06.12 FDCHIP™
+========================================================================== */
+
+
+/* ==========================================================================
+   06.12.01 GROUP
+========================================================================== */
+
+.fd-chip-group{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+    gap:1rem;
+
+}
+
+
+
+/* ==========================================================================
+   06.12.02 CHIP
+========================================================================== */
+
+.fd-chip{
+
+    display:inline-flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:
+
+        .95rem
+
+        1.40rem;
+
+    min-height:58px;
+
+    border-radius:999px;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    background:rgba(255,255,255,.05);
+
+    backdrop-filter:blur(12px);
+
+    cursor:pointer;
+
+    transition:
+
+        background var(--duration-normal) var(--ease),
+
+        border-color var(--duration-normal) var(--ease),
+
+        color var(--duration-normal) var(--ease),
+
+        transform var(--duration-fast) var(--ease),
+
+        box-shadow var(--duration-fast) var(--ease);
+
+}
+
+
+
+/* ==========================================================================
+   06.12.03 HOVER
+========================================================================== */
+
+.fd-chip:hover{
+
+    transform:translateY(-2px);
+
+    border-color:rgba(31,199,201,.55);
+
+    background:rgba(31,199,201,.10);
+
+}
+
+
+
+/* ==========================================================================
+   06.12.04 ACTIVE
+========================================================================== */
+
+.fd-chip.is-selected{
+
+    color:var(--color-white);
+
+    border-color:var(--color-accent);
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            rgba(44,95,165,.95),
+
+            rgba(31,199,201,.90)
+
+        );
+
+    box-shadow:
+
+        0 12px 30px rgba(31,199,201,.25);
+
+}
+
+
+
+/* ==========================================================================
+   06.12.05 CONTENT
+========================================================================== */
+
+.fd-chip-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:.18rem;
+
+}
+
+
+
+/* ==========================================================================
+   06.12.06 TAMIL
+========================================================================== */
+
+.fd-chip-ta{
+
+    font-family:var(--font-ta);
+
+    font-size:.98rem;
+
+    font-weight:600;
+
+    line-height:1.35;
+
+    color:inherit;
+
+}
+
+
+
+/* ==========================================================================
+   06.12.07 ENGLISH
+========================================================================== */
+
+.fd-chip-en{
+
+    font-family:var(--font-en);
+
+    font-size:.78rem;
+
+    font-weight:500;
+
+    opacity:.88;
+
+    color:inherit;
+
+}
+
+
+
+/* ==========================================================================
+   06.12.08 DISABLED
+========================================================================== */
+
+.fd-chip.is-disabled{
+
+    opacity:.45;
+
+    cursor:not-allowed;
+
+    pointer-events:none;
+
+}
+
+
+
+/* ==========================================================================
+   06.12.09 FOCUS
+========================================================================== */
+
+.fd-chip:focus-visible{
+
+    outline:none;
+
+    border-color:var(--color-accent);
+
+    box-shadow:
+
+        0 0 0 4px rgba(31,199,201,.18);
+
+}
+
+
+
+/* ==========================================================================
+   06.12.10 RESPONSIVE
+========================================================================== */
+
+@media(max-width:768px){
+
+    .fd-chip-group{
+
+        gap:.75rem;
+
+    }
+
+    .fd-chip{
+
+        width:100%;
+
+        justify-content:flex-start;
+
+        border-radius:18px;
+
+        padding:1rem 1.20rem;
+
+    }
+
+    .fd-chip-content{
+
+        align-items:flex-start;
+
+    }
+
+}
+
+/* ==========================================================================
+   06.13 FDOPTIONCARD™
+========================================================================== */
+
+
+/* ==========================================================================
+   06.13.01 GROUP
+========================================================================== */
+
+.fd-option-group{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:1.5rem;
+
+    width:100%;
+
+}
+
+
+
+/* ==========================================================================
+   06.13.02 CARD
+========================================================================== */
+
+.fd-option-card{
+
+    position:relative;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:.45rem;
+
+    min-height:150px;
+
+    padding:2rem;
+
+    border-radius:var(--radius-lg);
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.06),
+            rgba(255,255,255,.03)
+        );
+
+    border:1px solid rgba(255,255,255,.10);
+
+    cursor:pointer;
+
+    transition:
+        transform var(--duration-normal) var(--ease),
+        border-color var(--duration-normal) var(--ease),
+        box-shadow var(--duration-normal) var(--ease),
+        background var(--duration-normal) var(--ease);
+
+}
+
+
+
+/* ==========================================================================
+   06.13.03 HOVER
+========================================================================== */
+
+.fd-option-card:hover{
+
+    transform:translateY(-4px);
+
+    border-color:rgba(31,199,201,.45);
+
+    box-shadow:0 18px 40px rgba(0,0,0,.30);
+
+}
+
+
+
+/* ==========================================================================
+   06.13.04 SELECTED
+========================================================================== */
+
+.fd-option-card.is-selected{
+
+    border-color:var(--color-accent);
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(18,55,110,.95),
+            rgba(31,199,201,.18)
+        );
+
+    box-shadow:
+        0 18px 45px rgba(31,199,201,.22);
+
+}
+
+
+
+/* ==========================================================================
+   06.13.05 ICON
+========================================================================== */
+
+.fd-option-icon{
+
+    font-size:2rem;
+
+    line-height:1;
+
+}
+
+
+
+/* ==========================================================================
+   06.13.06 TAMIL
+========================================================================== */
+
+.fd-option-title-ta{
+
+    font-family:var(--font-ta);
+
+    font-size:1.15rem;
+
+    font-weight:700;
+
+    color:var(--color-white);
+
+    text-align:center;
+
+}
+
+
+
+/* ==========================================================================
+   06.13.07 ENGLISH
+========================================================================== */
+
+.fd-option-title-en{
+
+    font-family:var(--font-en);
+
+    font-size:.90rem;
+
+    color:var(--color-soft);
+
+    text-align:center;
+
+}
+
+
+
+/* ==========================================================================
+   06.13.08 CHECKMARK
+========================================================================== */
+
+.fd-option-check{
+
+    position:absolute;
+
+    top:16px;
+
+    right:16px;
+
+    width:28px;
+
+    height:28px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:var(--color-accent);
+
+    color:#071B3A;
+
+    font-size:.80rem;
+
+    font-weight:700;
+
+    opacity:0;
+
+    transform:scale(.7);
+
+    transition:
+        opacity var(--duration-fast) var(--ease),
+        transform var(--duration-fast) var(--ease);
+
+}
+
+
+
+.fd-option-card.is-selected .fd-option-check{
+
+    opacity:1;
+
+    transform:scale(1);
+
+}
+
+
+
+/* ==========================================================================
+   06.13.09 RESPONSIVE
+========================================================================== */
+
+@media(max-width:768px){
+
+    .fd-option-group{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+
+/* ==========================================================================
+   06.14 FDFINANCIALSCALE™
+========================================================================== */
+
+
+/* ==========================================================================
+   06.14.01 CONTAINER
+========================================================================== */
+
+.fd-scale{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:2rem;
+
+    width:100%;
+
+}
+
+
+
+/* ==========================================================================
+   06.14.02 HEADER
+========================================================================== */
+
+.fd-scale-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+
+
+/* ==========================================================================
+   06.14.03 VALUE BADGE
+========================================================================== */
+
+.fd-scale-value{
+
+    min-width:90px;
+
+    padding:.55rem 1rem;
+
+    border-radius:999px;
+
+    text-align:center;
+
+    background:rgba(31,199,201,.15);
+
+    border:1px solid rgba(31,199,201,.35);
+
+    color:var(--color-accent);
+
+    font-size:1.10rem;
+
+    font-weight:700;
+
+}
+
+
+
+/* ==========================================================================
+   06.14.04 SCALE
+========================================================================== */
+
+.fd-scale-track{
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    height:72px;
+
+}
+
+
+
+/* ==========================================================================
+   06.14.05 LINE
+========================================================================== */
+
+.fd-scale-line{
+
+    position:absolute;
+
+    left:0;
+
+    right:0;
+
+    top:50%;
+
+    height:6px;
+
+    border-radius:999px;
+
+    transform:translateY(-50%);
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #D9534F,
+            #F0AD4E,
+            #5CB85C
+        );
+
+}
+
+
+
+/* ==========================================================================
+   06.14.06 STEP
+========================================================================== */
+
+.fd-scale-step{
+
+    position:relative;
+
+    z-index:2;
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#12376E;
+
+    border:2px solid rgba(255,255,255,.15);
+
+    color:var(--color-white);
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:
+        transform var(--duration-fast) var(--ease),
+        background var(--duration-fast) var(--ease),
+        border-color var(--duration-fast) var(--ease);
+
+}
+
+
+
+/* ==========================================================================
+   06.14.07 HOVER
+========================================================================== */
+
+.fd-scale-step:hover{
+
+    transform:scale(1.08);
+
+}
+
+
+
+/* ==========================================================================
+   06.14.08 ACTIVE
+========================================================================== */
+
+.fd-scale-step.is-active{
+
+    background:var(--color-accent);
+
+    border-color:var(--color-accent);
+
+    color:#071B3A;
+
+    transform:scale(1.15);
+
+}
+
+
+
+/* ==========================================================================
+   06.14.09 LABELS
+========================================================================== */
+
+.fd-scale-labels{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:1rem;
+
+}
+
+
+
+.fd-scale-label{
+
+    flex:1;
+
+    text-align:center;
+
+}
+
+
+
+.fd-scale-label-ta{
+
+    font-family:var(--font-ta);
+
+    font-size:.88rem;
+
+    font-weight:600;
+
+    color:var(--color-soft);
+
+}
+
+
+
+.fd-scale-label-en{
+
+    margin-top:.15rem;
+
+    font-family:var(--font-en);
+
+    font-size:.72rem;
+
+    color:var(--color-muted);
+
+}
+
+
+
+/* ==========================================================================
+   06.14.10 RESPONSIVE
+========================================================================== */
+
+@media(max-width:768px){
+
+    .fd-scale-track{
+
+        height:64px;
+
+    }
+
+    .fd-scale-step{
+
+        width:38px;
+
+        height:38px;
+
+        font-size:.85rem;
+
+    }
+
+    .fd-scale-label-ta{
+
+        font-size:.74rem;
+
+    }
+
+    .fd-scale-label-en{
+
+        display:none;
+
+    }
+
+}
+
+/* ==========================================================================
+   06.15 FDDASHBOARDCARD™
+========================================================================== */
+
+
+/* ==========================================================================
+   06.15.01 GRID
+========================================================================== */
+
+.fd-dashboard{
+
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:1.5rem;
+
+}
+
+
+
+/* ==========================================================================
+   06.15.02 CARD
+========================================================================== */
+
+.fd-dashboard-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:1.75rem;
+
+    border-radius:var(--radius-lg);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.04)
+        );
+
+    border:1px solid rgba(255,255,255,.10);
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:var(--shadow-soft);
+
+    transition:
+        transform var(--duration-normal) var(--ease),
+        box-shadow var(--duration-normal) var(--ease);
+
+}
+
+
+
+.fd-dashboard-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:var(--shadow-large);
+
+}
+
+
+
+/* ==========================================================================
+   06.15.03 TITLE
+========================================================================== */
+
+.fd-dashboard-title{
+
+    margin-bottom:.45rem;
+
+    font-family:var(--font-ta);
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    color:var(--color-soft);
+
+}
+
+
+
+/* ==========================================================================
+   06.15.04 SUBTITLE
+========================================================================== */
+
+.fd-dashboard-subtitle{
+
+    margin-bottom:1rem;
+
+    font-family:var(--font-en);
+
+    font-size:.82rem;
+
+    color:var(--color-muted);
+
+}
+
+
+
+/* ==========================================================================
+   06.15.05 VALUE
+========================================================================== */
+
+.fd-dashboard-value{
+
+    font-family:var(--font-en);
+
+    font-size:2rem;
+
+    font-weight:800;
+
+    color:var(--color-white);
+
+    letter-spacing:-.02em;
+
+}
+
+
+
+/* ==========================================================================
+   06.15.06 POSITIVE
+========================================================================== */
+
+.fd-dashboard-card.is-positive{
+
+    border-color:#27C281;
+
+}
+
+
+
+/* ==========================================================================
+   06.15.07 WARNING
+========================================================================== */
+
+.fd-dashboard-card.is-warning{
+
+    border-color:#E8B54A;
+
+}
+
+
+
+/* ==========================================================================
+   06.15.08 NEGATIVE
+========================================================================== */
+
+.fd-dashboard-card.is-negative{
+
+    border-color:#E35B5B;
+
+}
+
+
+
+/* ==========================================================================
+   06.15.09 RESPONSIVE
+========================================================================== */
+
+@media(max-width:768px){
+
+    .fd-dashboard{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+
+/* ==========================================================================
+   06.16 FDGAUGE™
+========================================================================== */
+
+
+/* ==========================================================================
+   06.16.01 CONTAINER
+========================================================================== */
+
+.fd-gauge{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:1.5rem;
+
+}
+
+
+
+/* ==========================================================================
+   06.16.02 RING
+========================================================================== */
+
+.fd-gauge-ring{
+
+    position:relative;
+
+    width:220px;
+
+    height:220px;
+
+    border-radius:50%;
+
+    background:
+        conic-gradient(
+            var(--color-accent) 0deg,
+            var(--color-accent) 180deg,
+            rgba(255,255,255,.08) 180deg
+        );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+/* ==========================================================================
+   06.16.03 INNER
+========================================================================== */
+
+.fd-gauge-inner{
+
+    width:170px;
+
+    height:170px;
+
+    border-radius:50%;
+
+    background:var(--color-background);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    box-shadow:inset 0 0 30px rgba(0,0,0,.35);
+
+}
+
+
+
+/* ==========================================================================
+   06.16.04 VALUE
+========================================================================== */
+
+.fd-gauge-value{
+
+    font-size:2.8rem;
+
+    font-weight:800;
+
+    color:var(--color-white);
+
+}
+
+
+
+/* ==========================================================================
+   06.16.05 LABEL
+========================================================================== */
+
+.fd-gauge-label{
+
+    font-family:var(--font-en);
+
+    font-size:.85rem;
+
+    color:var(--color-muted);
+
+}
+
+
+
+/* ==========================================================================
+   06.16.06 STATUS
+========================================================================== */
+
+.fd-gauge-status{
+
+    font-family:var(--font-ta);
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    color:var(--color-accent);
+
+}
+
+
+
+/* ==========================================================================
+   06.16.07 LEGEND
+========================================================================== */
+
+.fd-gauge-legend{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:1.25rem;
+
+    flex-wrap:wrap;
+
+}
+
+
+
+.fd-gauge-dot{
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    display:inline-block;
+
+}
+
+
+
+.fd-gauge-dot.red{
+
+    background:#D9534F;
+
+}
+
+
+
+.fd-gauge-dot.amber{
+
+    background:#F0AD4E;
+
+}
+
+
+
+.fd-gauge-dot.green{
+
+    background:#5CB85C;
+
+}
+
+
+
+/* ==========================================================================
+   06.16.08 RESPONSIVE
+========================================================================== */
+
+@media(max-width:768px){
+
+    .fd-gauge-ring{
+
+        width:180px;
+
+        height:180px;
+
+    }
+
+    .fd-gauge-inner{
+
+        width:138px;
+
+        height:138px;
+
+    }
+
+    .fd-gauge-value{
+
+        font-size:2.1rem;
+
+    }
+
+}
+
+
+
+/* ==========================================================================
+   06.17 FDLOADING™
+========================================================================== */
+
+
+/* ==========================================================================
+   06.17.01 CONTAINER
+========================================================================== */
+
+.fd-loading{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:2rem;
+
+    padding:4rem 2rem;
+
+}
+
+
+
+/* ==========================================================================
+   06.17.02 SPINNER
+========================================================================== */
+
+.fd-loading-spinner{
+
+    width:72px;
+
+    height:72px;
+
+    border-radius:50%;
+
+    border:6px solid rgba(255,255,255,.10);
+
+    border-top-color:var(--color-accent);
+
+    animation:fdSpinner 1s linear infinite;
+
+}
+
+
+
+/* ==========================================================================
+   06.17.03 TITLE
+========================================================================== */
+
+.fd-loading-title{
+
+    font-family:var(--font-ta);
+
+    font-size:1.6rem;
+
+    font-weight:700;
+
+    color:var(--color-white);
+
+    text-align:center;
+
+}
+
+
+
+/* ==========================================================================
+   06.17.04 SUBTITLE
+========================================================================== */
+
+.fd-loading-subtitle{
+
+    max-width:520px;
+
+    font-family:var(--font-en);
+
+    font-size:1rem;
+
+    line-height:1.7;
+
+    text-align:center;
+
+    color:var(--color-soft);
+
+}
+
+
+
+/* ==========================================================================
+   06.17.05 DOTS
+========================================================================== */
+
+.fd-loading-dots{
+
+    display:flex;
+
+    gap:.6rem;
+
+}
+
+
+
+.fd-loading-dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:var(--color-accent);
+
+    animation:fdPulse 1.2s infinite ease-in-out;
+
+}
+
+
+
+.fd-loading-dot:nth-child(2){
+
+    animation-delay:.2s;
+
+}
+
+
+
+.fd-loading-dot:nth-child(3){
+
+    animation-delay:.4s;
+
+}
+
+
+
+/* ==========================================================================
+   06.17.06 SPINNER ANIMATION
+========================================================================== */
+
+@keyframes fdSpinner{
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+
+
+/* ==========================================================================
+   06.17.07 DOT ANIMATION
+========================================================================== */
+
+@keyframes fdPulse{
+
+    0%,
+    80%,
+    100%{
+
+        transform:scale(.6);
+
+        opacity:.4;
+
+    }
+
+    40%{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
+
+
+
+/* ==========================================================================
+   06.17.08 RESPONSIVE
+========================================================================== */
+
+@media(max-width:768px){
+
+    .fd-loading{
+
+        padding:3rem 1rem;
+
+    }
+
+    .fd-loading-title{
+
+        font-size:1.3rem;
+
+    }
+
+    .fd-loading-subtitle{
+
+        font-size:.95rem;
+
+    }
+
+}
+
+
+
+/* ==========================================================================
    07. MOTION ENGINE
 ========================================================================== */
 
