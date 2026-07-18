@@ -2136,6 +2136,8 @@ log(
 
 );
 
+
+
 /* ==========================================================================
    13. SCENE 02 CONTROLLER
 ========================================================================== */
@@ -3241,6 +3243,318 @@ function scene02IsFirstQuestion(){
         SCENE02.currentQuestion === 0
 
     );
+
+}
+
+/* ==========================================================================
+   13.03 DOM CACHE
+========================================================================== */
+
+function cacheScene02Elements(){
+
+    SCENE02.elements = {
+
+        scene :
+
+            document.getElementById(
+
+                "scene02"
+
+            ),
+
+        questions : [
+
+            document.getElementById("fdQuestion01"),
+
+            document.getElementById("fdQuestion02"),
+
+            document.getElementById("fdQuestion03"),
+
+            document.getElementById("fdQuestion04"),
+
+            document.getElementById("fdQuestion05"),
+
+            document.getElementById("fdQuestion06")
+
+        ],
+
+        analysis :
+
+            document.getElementById(
+
+                "fdAnalysis"
+
+            ),
+
+        dashboard :
+
+            document.getElementById(
+
+                "fdDashboard"
+
+            ),
+
+        progressBar :
+
+            document.getElementById(
+
+                "fdProgressBar"
+
+            ),
+
+        progressText :
+
+            document.getElementById(
+
+                "fdProgressText"
+
+            ),
+
+        btnNext :
+
+            document.querySelectorAll(
+
+                "[data-next]"
+
+            ),
+
+        btnPrevious :
+
+            document.querySelectorAll(
+
+                "[data-previous]"
+
+            )
+
+    };
+
+}
+
+
+
+/* ==========================================================================
+   13.03.01 VERIFY CACHE
+========================================================================== */
+
+function scene02CacheReady(){
+
+    return (
+
+        SCENE02.elements.questions.length === 6
+
+    );
+
+}
+
+
+
+/* ==========================================================================
+   13.04 INITIALIZATION
+========================================================================== */
+
+function initializeScene02(){
+
+    if(
+
+        SCENE02.initialized
+
+    ){
+
+        return;
+
+    }
+
+
+
+    cacheScene02Elements();
+
+
+
+    hideScene02Sections();
+
+
+
+    showScene02Question(
+
+        0
+
+    );
+
+
+
+    registerScene02Events();
+
+
+
+    SCENE02.initialized = true;
+
+
+
+    log(
+
+        "Scene02 Ready."
+
+    );
+
+}
+
+
+
+/* ==========================================================================
+   13.04.01 HIDE ALL
+========================================================================== */
+
+function hideScene02Sections(){
+
+    SCENE02.elements.questions.forEach(
+
+        question =>{
+
+            if(
+
+                question
+
+            ){
+
+                question.hidden = true;
+
+            }
+
+        }
+
+    );
+
+
+
+    if(
+
+        SCENE02.elements.analysis
+
+    ){
+
+        SCENE02.elements.analysis.hidden = true;
+
+    }
+
+
+
+    if(
+
+        SCENE02.elements.dashboard
+
+    ){
+
+        SCENE02.elements.dashboard.hidden = true;
+
+    }
+
+}
+
+
+
+/* ==========================================================================
+   13.04.02 SHOW QUESTION
+========================================================================== */
+
+function showScene02Question(
+
+    index
+
+){
+
+    hideScene02Sections();
+
+
+
+    SCENE02.currentQuestion =
+
+        index;
+
+
+
+    const question =
+
+        SCENE02.elements.questions[
+
+            index
+
+        ];
+
+
+
+    if(
+
+        question
+
+    ){
+
+        question.hidden = false;
+
+    }
+
+}
+
+
+
+/* ==========================================================================
+   13.04.03 REGISTER EVENTS
+========================================================================== */
+
+function registerScene02Events(){
+
+    SCENE02.elements.btnNext.forEach(
+
+        button =>{
+
+            button.addEventListener(
+
+                "click",
+
+                handleScene02Next
+
+            );
+
+        }
+
+    );
+
+
+
+    SCENE02.elements.btnPrevious.forEach(
+
+        button =>{
+
+            button.addEventListener(
+
+                "click",
+
+                handleScene02Previous
+
+            );
+
+        }
+
+    );
+
+}
+
+
+
+/* ==========================================================================
+   13.04.04 PLACEHOLDERS
+========================================================================== */
+
+function handleScene02Next(){
+
+    // implemented in Section 13.05
+
+}
+
+
+
+function handleScene02Previous(){
+
+    // implemented in Section 13.05
 
 }
 
