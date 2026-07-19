@@ -1,1 +1,332 @@
 
+/*!
+==========================================================
+CTM PATH™ Guided Journey
+File        : css/typography.css
+Version     : 1.0.0
+Purpose     : Typography System
+Status      : Production
+==========================================================
+*/
+
+/* ======================================================
+   BODY
+====================================================== */
+
+body {
+
+    font-family: var(--font-primary);
+
+    font-size: var(--fs-md);
+
+    font-weight: var(--fw-regular);
+
+    line-height: var(--lh-normal);
+
+    color: var(--text-primary);
+
+    background: var(--bg-page);
+
+}
+
+/* ======================================================
+   HEADINGS
+====================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+    font-family: var(--font-heading);
+
+    font-weight: var(--fw-bold);
+
+    line-height: var(--lh-tight);
+
+    color: var(--text-primary);
+
+}
+
+h1 {
+
+    font-size: var(--fs-3xl);
+
+}
+
+h2 {
+
+    font-size: var(--fs-2xl);
+
+}
+
+h3 {
+
+    font-size: var(--fs-xl);
+
+}
+
+h4 {
+
+    font-size: var(--fs-lg);
+
+}
+
+h5 {
+
+    font-size: var(--fs-md);
+
+}
+
+h6 {
+
+    font-size: var(--fs-sm);
+
+}
+
+/* ======================================================
+   PARAGRAPHS
+====================================================== */
+
+p {
+
+    color: var(--text-secondary);
+
+    line-height: var(--lh-relaxed);
+
+}
+
+/* ======================================================
+   SMALL TEXT
+====================================================== */
+
+small {
+
+    font-size: var(--fs-sm);
+
+    color: var(--text-muted);
+
+}
+
+/* ======================================================
+   LINKS
+====================================================== */
+
+a {
+
+    color: var(--color-primary);
+
+    transition: color var(--duration-fast)
+                var(--ease-default);
+
+}
+
+a:hover {
+
+    color: var(--color-secondary);
+
+}
+
+/* ======================================================
+   STRONG
+====================================================== */
+
+strong {
+
+    font-weight: var(--fw-bold);
+
+}
+
+/* ======================================================
+   EMPHASIS
+====================================================== */
+
+em {
+
+    font-style: italic;
+
+}
+
+/* ======================================================
+   BILINGUAL TEXT
+====================================================== */
+
+.text-ta {
+
+    display: block;
+
+    color: var(--text-primary);
+
+    font-weight: var(--fw-medium);
+
+}
+
+.text-en {
+
+    display: block;
+
+    color: var(--text-secondary);
+
+    font-size: var(--fs-sm);
+
+}
+
+/* ======================================================
+   MENTOR NAME
+====================================================== */
+
+.mentor-name {
+
+    color: var(--color-secondary);
+
+    font-weight: var(--fw-bold);
+
+    letter-spacing: 0.04em;
+
+}
+
+/* ======================================================
+   SCREEN TITLE
+====================================================== */
+
+.screen-title {
+
+    color: var(--text-primary);
+
+    text-align: center;
+
+    margin-bottom: var(--space-5);
+
+}
+
+/* ======================================================
+   SCREEN SUBTITLE
+====================================================== */
+
+.screen-subtitle {
+
+    color: var(--text-secondary);
+
+    text-align: center;
+
+    max-width: 760px;
+
+    margin: 0 auto;
+
+}
+
+/* ======================================================
+   QUESTION TEXT
+====================================================== */
+
+.question-text {
+
+    font-size: var(--fs-xl);
+
+    font-weight: var(--fw-medium);
+
+    line-height: var(--lh-relaxed);
+
+    text-align: center;
+
+}
+
+/* ======================================================
+   REFLECTION TEXT
+====================================================== */
+
+.reflection-text {
+
+    font-size: var(--fs-lg);
+
+    color: var(--text-secondary);
+
+    line-height: var(--lh-relaxed);
+
+    text-align: center;
+
+}
+
+/* ======================================================
+   INSIGHT TEXT
+====================================================== */
+
+.insight-text {
+
+    font-size: var(--fs-xl);
+
+    font-weight: var(--fw-semibold);
+
+    color: var(--color-secondary);
+
+    line-height: var(--lh-relaxed);
+
+    text-align: center;
+
+}
+
+/* ======================================================
+   CAPTION
+====================================================== */
+
+.caption {
+
+    font-size: var(--fs-xs);
+
+    color: var(--text-muted);
+
+    text-align: center;
+
+}
+
+/* ======================================================
+   TEXT UTILITIES
+====================================================== */
+
+.text-center {
+
+    text-align: center;
+
+}
+
+.text-left {
+
+    text-align: left;
+
+}
+
+.text-right {
+
+    text-align: right;
+
+}
+
+.text-primary {
+
+    color: var(--text-primary);
+
+}
+
+.text-secondary {
+
+    color: var(--text-secondary);
+
+}
+
+.text-muted {
+
+    color: var(--text-muted);
+
+}
+
+.text-accent {
+
+    color: var(--color-secondary);
+
+}
+
+/* ======================================================
+   END
+====================================================== */
