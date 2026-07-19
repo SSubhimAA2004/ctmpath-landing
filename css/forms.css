@@ -1,1 +1,278 @@
 
+/*!
+==========================================================
+CTM PATH™ Guided Journey
+File        : css/forms.css
+Version     : 1.0.0
+Purpose     : Premium Form System
+Status      : Production
+==========================================================
+*/
+
+/* ======================================================
+   FORM
+====================================================== */
+
+.form {
+
+    width: 100%;
+
+}
+
+/* ======================================================
+   FORM GROUP
+====================================================== */
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--space-2);
+
+    margin-bottom: var(--space-5);
+
+}
+
+/* ======================================================
+   LABEL
+====================================================== */
+
+.form-label {
+
+    display: block;
+
+    font-weight: var(--fw-medium);
+
+    color: var(--text-primary);
+
+}
+
+/* ======================================================
+   TEXT INPUT
+====================================================== */
+
+.form-input {
+
+    width: 100%;
+
+    min-height: 56px;
+
+    padding:
+        0
+        var(--space-4);
+
+    background: var(--bg-card);
+
+    color: var(--text-primary);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: var(--radius-md);
+
+    transition:
+        border-color var(--duration-fast) var(--ease-default),
+        box-shadow var(--duration-fast) var(--ease-default);
+
+}
+
+.form-input::placeholder {
+
+    color: var(--text-muted);
+
+}
+
+.form-input:focus {
+
+    border-color: var(--color-primary);
+
+    box-shadow:
+        0 0 0 3px rgba(0,184,184,.18);
+
+}
+
+/* ======================================================
+   TEXTAREA
+====================================================== */
+
+.form-textarea {
+
+    width: 100%;
+
+    min-height: 140px;
+
+    padding: var(--space-4);
+
+    resize: vertical;
+
+    background: var(--bg-card);
+
+    color: var(--text-primary);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: var(--radius-md);
+
+}
+
+.form-textarea:focus {
+
+    border-color: var(--color-primary);
+
+}
+
+/* ======================================================
+   SELECT
+====================================================== */
+
+.form-select {
+
+    width: 100%;
+
+    min-height: 56px;
+
+    padding:
+        0
+        var(--space-4);
+
+    background: var(--bg-card);
+
+    color: var(--text-primary);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: var(--radius-md);
+
+    cursor: pointer;
+
+}
+
+.form-select:focus {
+
+    border-color: var(--color-primary);
+
+}
+
+/* ======================================================
+   OPTION CARD
+====================================================== */
+
+.option-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: var(--space-4);
+
+    width: 100%;
+
+    padding: var(--space-5);
+
+    background: var(--bg-card);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: var(--radius-lg);
+
+    cursor: pointer;
+
+    transition:
+        border-color var(--duration-fast) var(--ease-default),
+        background var(--duration-fast) var(--ease-default);
+
+}
+
+.option-card:hover {
+
+    border-color: var(--color-primary);
+
+}
+
+.option-card.selected {
+
+    border-color: var(--color-primary);
+
+    background: rgba(0,184,184,.12);
+
+}
+
+/* ======================================================
+   RADIO
+====================================================== */
+
+.form-radio {
+
+    width: 20px;
+
+    height: 20px;
+
+    accent-color: var(--color-primary);
+
+}
+
+/* ======================================================
+   CHECKBOX
+====================================================== */
+
+.form-checkbox {
+
+    width: 20px;
+
+    height: 20px;
+
+    accent-color: var(--color-primary);
+
+}
+
+/* ======================================================
+   HELPER TEXT
+====================================================== */
+
+.form-helper {
+
+    color: var(--text-muted);
+
+    font-size: var(--fs-sm);
+
+}
+
+/* ======================================================
+   ERROR
+====================================================== */
+
+.form-error {
+
+    color: var(--danger);
+
+    font-size: var(--fs-sm);
+
+}
+
+/* ======================================================
+   SUCCESS
+====================================================== */
+
+.form-success {
+
+    color: var(--success);
+
+    font-size: var(--fs-sm);
+
+}
+
+/* ======================================================
+   REQUIRED
+====================================================== */
+
+.required {
+
+    color: var(--danger);
+
+}
+
+/* ======================================================
+   END
+======================================================
+*/
