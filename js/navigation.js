@@ -4,8 +4,7 @@
  * CTM PATH™ Guided Journey
  * Navigation Engine
  * File        : js/navigation.js
- * Version     : 1.0.0
- * Batch       : 1 of 4
+ * Version     : 2.0.0
  * Status      : Production
  * ============================================================
  */
@@ -14,15 +13,34 @@
 
     "use strict";
 
-    if (!window.CTM) {
+    if (
 
-        throw new Error("CTM namespace not initialized.");
+        !window.CTM ||
+
+        !window.CTM.config ||
+
+        !window.CTM.store ||
+
+        !window.CTM.services ||
+
+        !window.CTM.sceneLoader ||
+
+        !window.CTM.components
+
+    ) {
+
+        throw new Error(
+
+            "CTM core modules not initialized."
+
+        );
 
     }
 
     const {
 
         Scroll,
+
         Logger
 
     } = window.CTM.services;
@@ -89,13 +107,7 @@
 
         canNext() {
 
-            return (
-
-                this.current() <
-
-                this.last()
-
-            );
+            return this.current() < this.last();
 
         },
 
@@ -107,19 +119,13 @@
 
         canPrevious() {
 
-            return (
-
-                this.current() >
-
-                this.first()
-
-            );
+            return this.current() > this.first();
 
         },
 
         /**
          * --------------------------------------------------------
-         * Go To Scene
+         * Navigate To Scene
          * --------------------------------------------------------
          */
 
@@ -137,7 +143,11 @@
 
             }
 
-            Components.Loading.show();
+            Components.Loading.show(
+
+                "Loading next step..."
+
+            );
 
             const success = await SceneLoader.load(
 
@@ -163,13 +173,7 @@
 
             return true;
 
-        }
-
-    };
-
-    window.CTM.navigation = Navigation;
-
-})();
+        },
 
         /**
          * --------------------------------------------------------
@@ -223,7 +227,7 @@
 
         async restart() {
 
-            window.CTM.store.reset();
+            Store.reset();
 
             return await this.go(
 
@@ -241,9 +245,21 @@
 
         async jump(sceneNumber) {
 
+            sceneNumber = Number(sceneNumber);
+
+            if (
+
+                Number.isNaN(sceneNumber)
+
+            ) {
+
+                return false;
+
+            }
+
             return await this.go(
 
-                Number(sceneNumber)
+                sceneNumber
 
             );
 
@@ -251,7 +267,7 @@
 
         /**
          * --------------------------------------------------------
-         * Current Progress
+         * Journey Progress
          * --------------------------------------------------------
          */
 
@@ -261,7 +277,7 @@
 
             const total = this.last();
 
-            return {
+            return Object.freeze({
 
                 current,
 
@@ -273,9 +289,9 @@
 
                 )
 
-            };
+            });
 
-        }
+        },
 
         /**
          * --------------------------------------------------------
@@ -285,15 +301,17 @@
 
         synchronizeProgress() {
 
-            const progress = this.progress();
+            const progress =
 
-            window.CTM.components.ProgressBar.update(
+                this.progress();
+
+            Components.ProgressBar.update(
 
                 progress.percent
 
             );
 
-            window.CTM.components.ProgressText.update(
+            Components.ProgressText.update(
 
                 progress.current,
 
@@ -333,41 +351,39 @@
          * --------------------------------------------------------
          */
 
-        restoreFromURL() {
+        async restoreFromURL() {
 
-            const hash = location.hash.replace(
+            const hash = window.location.hash;
 
-                "#scene",
+            if (!hash.startsWith("#scene")) {
 
-                ""
+                return false;
+
+            }
+
+            const sceneNumber = Number(
+
+                hash.replace("#scene", "")
 
             );
 
-            if (!hash) {
-
-                return;
-
-            }
-
-            const scene = Number(hash);
-
             if (
 
-                Number.isNaN(scene)
+                Number.isNaN(sceneNumber)
 
             ) {
 
-                return;
+                return false;
 
             }
 
-            this.jump(scene);
+            return await this.jump(sceneNumber);
 
         },
 
         /**
          * --------------------------------------------------------
-         * Register Internal Events
+         * Register Scene Events
          * --------------------------------------------------------
          */
 
@@ -379,23 +395,23 @@
 
                 event => {
 
+                    const scene =
+
+                        event.detail.scene;
+
                     this.synchronizeProgress();
 
-                    this.updateHistory(
-
-                        event.detail.scene
-
-                    );
+                    this.updateHistory(scene);
 
                 }
 
             );
 
-        }
+        },
 
         /**
          * --------------------------------------------------------
-         * Register Navigation Actions
+         * Register Button Actions
          * --------------------------------------------------------
          */
 
@@ -407,7 +423,9 @@
 
                 async event => {
 
-                    const button = event.target.closest("button");
+                    const button =
+
+                        event.target.closest("button");
 
                     if (!button) {
 
@@ -415,11 +433,11 @@
 
                     }
 
-                    /**
-                     * Next
-                     */
+                    if (
 
-                    if (button.dataset.next !== undefined) {
+                        "next" in button.dataset
+
+                    ) {
 
                         event.preventDefault();
 
@@ -429,11 +447,11 @@
 
                     }
 
-                    /**
-                     * Previous
-                     */
+                    if (
 
-                    if (button.dataset.prev !== undefined) {
+                        "prev" in button.dataset
+
+                    ) {
 
                         event.preventDefault();
 
@@ -443,25 +461,19 @@
 
                     }
 
-                    /**
-                     * Jump
-                     */
+                    if (
 
-                    if (button.dataset.jump) {
+                        button.dataset.jump
+
+                    ) {
 
                         event.preventDefault();
 
                         await this.jump(
 
-                            Number(
-
-                                button.dataset.jump
-
-                            )
+                            button.dataset.jump
 
                         );
-
-                        return;
 
                     }
 
@@ -473,7 +485,7 @@
 
         /**
          * --------------------------------------------------------
-         * Keyboard Navigation
+         * Register Keyboard Navigation
          * --------------------------------------------------------
          */
 
@@ -484,6 +496,20 @@
                 "keydown",
 
                 async event => {
+
+                    if (
+
+                        event.target.matches(
+
+                            "input, textarea, select"
+
+                        )
+
+                    ) {
+
+                        return;
+
+                    }
 
                     switch (event.key) {
 
@@ -509,7 +535,7 @@
 
         /**
          * --------------------------------------------------------
-         * Initialize Navigation
+         * Initialize
          * --------------------------------------------------------
          */
 
@@ -535,15 +561,93 @@
 
             return Object.freeze({
 
-                currentScene: this.current(),
+                currentScene:
 
-                progress: this.progress(),
+                    this.current(),
 
-                canNext: this.canNext(),
+                progress:
 
-                canPrevious: this.canPrevious()
+                    this.progress(),
+
+                canNext:
+
+                    this.canNext(),
+
+                canPrevious:
+
+                    this.canPrevious()
 
             });
 
         }
+
+    };
+
+    /**
+     * ============================================================
+     * Public API
+     * ============================================================
+     */
+
+    const NavigationAPI = Object.freeze({
+
+        initialize:
+            Navigation.initialize.bind(Navigation),
+
+        go:
+            Navigation.go.bind(Navigation),
+
+        next:
+            Navigation.next.bind(Navigation),
+
+        previous:
+            Navigation.previous.bind(Navigation),
+
+        jump:
+            Navigation.jump.bind(Navigation),
+
+        restart:
+            Navigation.restart.bind(Navigation),
+
+        restoreFromURL:
+            Navigation.restoreFromURL.bind(Navigation),
+
+        progress:
+            Navigation.progress.bind(Navigation),
+
+        synchronizeProgress:
+            Navigation.synchronizeProgress.bind(Navigation),
+
+        health:
+            Navigation.health.bind(Navigation)
+
+    });
+
+    /**
+     * ============================================================
+     * Register Navigation
+     * ============================================================
+     */
+
+    Object.defineProperty(
+
+        window.CTM,
+
+        "navigation",
+
+        {
+
+            value: NavigationAPI,
+
+            writable: false,
+
+            configurable: false,
+
+            enumerable: true
+
+        }
+
+    );
+
+})();
 
