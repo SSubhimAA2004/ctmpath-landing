@@ -1,208 +1,140 @@
 
 /*!
- * ============================================================
+ * ==========================================================
  * CTM PATH™ Guided Journey
- * Configuration Module
  * File        : js/config.js
  * Version     : 1.0.0
- * Status      : Production Freeze
- * Author      : OpenAI + Raphael Raj
- * ============================================================
+ * Purpose     : Global Configuration
+ * Status      : Production
+ * ==========================================================
  */
 
 (() => {
-    "use strict";
 
-    /**
-     * ------------------------------------------------------------
-     * Application Configuration
-     * ------------------------------------------------------------
-     */
+    "use strict";
 
     const CONFIG = Object.freeze({
 
-        APP: Object.freeze({
+        APP: {
 
             NAME: "CTM PATH™ Guided Journey",
 
-            VERSION: "1.0.0",
+            VERSION: "3.0.0",
 
-            BUILD: "Production",
+            AUTHOR: "Raphael Raj",
 
-            COPYRIGHT: "© CTM PATH™",
+            COMPANY: "CTM PATH™",
 
             DEBUG: false
 
-        }),
+        },
 
-        /**
-         * --------------------------------------------------------
-         * Scene Configuration
-         * --------------------------------------------------------
-         */
+        JOURNEY: {
 
-        SCENES: Object.freeze({
+            ACTS: 5,
 
-            TOTAL: 9,
+            MOMENTS: 35,
 
-            DEFAULT: 1,
+            FIRST_ACT: 1,
 
-            ROOT: "sceneRoot",
+            LAST_ACT: 5,
 
-            PATH: "scenes/",
+            FIRST_MOMENT: 1,
 
-            PREFIX: "scene",
+            LAST_MOMENT: 35
 
-            EXTENSION: ".html",
+        },
 
-            FILES: Object.freeze([
-                "scene01.html",
-                "scene02.html",
-                "scene03.html",
-                "scene04.html",
-                "scene05.html",
-                "scene06.html",
-                "scene07.html",
-                "scene08.html",
-                "scene09.html"
-            ])
-
-        }),
-
-        /**
-         * --------------------------------------------------------
-         * Language
-         * --------------------------------------------------------
-         */
-
-        LANGUAGE: Object.freeze({
+        LANGUAGE: {
 
             DEFAULT: "ta",
 
-            AVAILABLE: Object.freeze([
+            SUPPORTED: [
+
                 "ta",
+
                 "en"
-            ])
 
-        }),
+            ]
 
-        /**
-         * --------------------------------------------------------
-         * Browser Storage Keys
-         * --------------------------------------------------------
-         */
+        },
 
-        STORAGE: Object.freeze({
+        UI: {
 
-            STATE: "ctmPathState",
+            ROOT: "#app",
 
-            LANGUAGE: "ctmLanguage",
+            COMPONENT_FOLDER: "components/",
 
-            SESSION: "ctmSession",
+            DATA_FOLDER: "data/",
 
-            VERSION: "ctmVersion"
+            IMAGE_FOLDER: "images/"
 
-        }),
+        },
 
-        /**
-         * --------------------------------------------------------
-         * Timing
-         * --------------------------------------------------------
-         */
+        DATA: {
 
-        TIMING: Object.freeze({
+            SETTINGS: "data/settings.json",
 
-            SCENE_TRANSITION: 400,
+            CHOICES: "data/choices.json",
 
-            SCROLL_DURATION: 350,
+            ACTS: [
 
-            TOAST_DURATION: 3000,
+                "data/act01.json",
 
-            THINKING_DELAY: 1200,
+                "data/act02.json",
 
-            MODAL_FADE: 250
+                "data/act03.json",
 
-        }),
+                "data/act04.json",
 
-        /**
-         * --------------------------------------------------------
-         * CSS Classes
-         * --------------------------------------------------------
-         */
+                "data/act05.json"
 
-        CLASSES: Object.freeze({
+            ]
 
-            ACTIVE: "active",
+        },
 
-            HIDDEN: "hidden",
+        COMPONENTS: {
 
-            LOADING: "loading",
+            MESSAGE: "message.html",
 
-            DISABLED: "disabled"
+            QUESTION: "question.html",
 
-        }),
+            CHOICE: "choice.html",
 
-        /**
-         * --------------------------------------------------------
-         * DOM IDs
-         * --------------------------------------------------------
-         */
+            INPUT: "input.html",
 
-        DOM: Object.freeze({
+            REFLECTION: "reflection.html",
 
-            ROOT: "sceneRoot",
+            INSIGHT: "insight.html",
 
-            HEADER_PROGRESS: "progressBar",
+            LOADING: "loading.html",
 
-            PROGRESS_TEXT: "progressText",
+            BOOKING: "booking.html",
 
-            LOADING_OVERLAY: "loadingOverlay",
+            COMPLETE: "complete.html"
 
-            THINKING_OVERLAY: "thinkingOverlay",
+        },
 
-            TOAST_CONTAINER: "toastContainer",
+        STORAGE: {
 
-            MODAL_CONTAINER: "modalContainer",
+            PREFIX: "CTM_",
 
-            ERROR_BOUNDARY: "errorBoundary"
+            LANGUAGE: "CTM_LANGUAGE",
 
-        }),
+            SESSION: "CTM_SESSION"
 
-        /**
-         * --------------------------------------------------------
-         * Journey
-         * --------------------------------------------------------
-         */
+        },
 
-        JOURNEY: Object.freeze({
+        ANIMATION: {
 
-            FIRST_SCENE: 1,
+            DURATION: 350
 
-            LAST_SCENE: 9
-
-        })
+        }
 
     });
-
-    /**
-     * ------------------------------------------------------------
-     * Global Namespace
-     * ------------------------------------------------------------
-     */
 
     window.CTM = window.CTM || {};
 
-    Object.defineProperty(window.CTM, "config", {
-
-        value: CONFIG,
-
-        writable: false,
-
-        configurable: false,
-
-        enumerable: true
-
-    });
+    window.CTM.config = CONFIG;
 
 })();
-
