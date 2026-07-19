@@ -1,386 +1,389 @@
 
-/* ==========================================================================
-   CTM PATH™ GUIDED JOURNEY™
-   FOUNDATION DESIGN SYSTEM
+/*======================================================================
+    CTM PATH™ Guided Journey
+    --------------------------------------------------------------------
+    File        : styles.css
+    Version     : 1.0.0
+    Status      : PRODUCTION
+    Architecture: GitHub Pages + Vanilla JavaScript
 
-   File       : styles.css
-   Version    : 2.0
+    NOTE
 
-   Status     : FOUNDATION
+    This stylesheet contains ONLY reusable components.
 
-   Engineering Standard
+    Scene-specific styling is NOT permitted.
 
-   One Foundation
-   Nine Independent Scenes
-
-========================================================================== */
-
-
-
-/* ==========================================================================
-   01. RESET
-========================================================================== */
+======================================================================*/
 
 
-/* ==========================================================================
-   01.01 UNIVERSAL RESET
-========================================================================== */
+
+/*======================================================================
+    CSS RESET
+======================================================================*/
 
 *,
 *::before,
 *::after{
-
     margin:0;
-
     padding:0;
-
     box-sizing:border-box;
-
 }
-
-
-
-/* ==========================================================================
-   01.02 HTML
-========================================================================== */
 
 html{
-
-    font-size:16px;
-
     scroll-behavior:smooth;
-
     -webkit-text-size-adjust:100%;
-
 }
-
-
-
-/* ==========================================================================
-   01.03 BODY
-========================================================================== */
 
 body{
-
     min-height:100vh;
-
-    font-family:"Inter",sans-serif;
-
-    background:#071B3A;
-
-    color:#FFFFFF;
-
-    overflow:hidden;
-
-    line-height:1.5;
-
-    text-rendering:optimizeLegibility;
-
-    -webkit-font-smoothing:antialiased;
-
+    overflow-x:hidden;
 }
-
-
-
-/* ==========================================================================
-   01.04 MEDIA
-========================================================================== */
 
 img{
-
     display:block;
-
     max-width:100%;
-
     height:auto;
-
 }
 
-
-
-/* ==========================================================================
-   01.05 BUTTONS
-========================================================================== */
+button,
+input,
+textarea,
+select{
+    font:inherit;
+    color:inherit;
+}
 
 button{
-
-    font:inherit;
-
-    border:none;
-
-    background:none;
-
     cursor:pointer;
-
+    background:none;
+    border:none;
 }
-
-
-
-/* ==========================================================================
-   01.06 LINKS
-========================================================================== */
 
 a{
-
     color:inherit;
-
     text-decoration:none;
-
 }
 
-
-
-/* ==========================================================================
-   01.07 LISTS
-========================================================================== */
-
-ul{
-
+ul,
+ol{
     list-style:none;
-
 }
 
 
 
-
-/* ==========================================================================
-   02. DESIGN TOKENS
-========================================================================== */
-
-
-/* ==========================================================================
-   02.01 BRAND COLORS
-========================================================================== */
+/*======================================================================
+    DESIGN TOKENS
+======================================================================*/
 
 :root{
 
-    --color-primary:#12376E;
+    /*--------------------------------------------------------------
+        Brand Colors
+    --------------------------------------------------------------*/
 
-    --color-primary-dark:#071B3A;
+    --color-background:#081C3A;
 
-    --color-primary-light:#2C5FA5;
+    --color-surface:#10284F;
 
-    --color-accent:#1FC7C9;
+    --color-card:#143663;
 
-    --color-gold:#C7A64A;
+    --color-primary:#00C7B7;
 
+    --color-primary-hover:#16D9C8;
 
+    --color-primary-active:#00A99A;
 
-/* ==========================================================================
-   02.02 SURFACES
-========================================================================== */
+    --color-accent:#C6A35B;
 
-    --color-background:#071B3A;
+    --color-success:#36D48D;
 
-    --color-surface:#102A52;
+    --color-warning:#F5B041;
 
-    --color-overlay:rgba(7,27,58,.78);
+    --color-danger:#E85D5D;
 
+    --color-info:#5AA9FF;
 
+    --color-text:#F6F8FB;
 
-/* ==========================================================================
-   02.03 TEXT
-========================================================================== */
+    --color-text-secondary:#D6E2F2;
 
-    --color-white:#FFFFFF;
+    --color-text-muted:#A8BED9;
 
-    --color-soft:#D7E3F2;
+    --color-disabled:#6C89A8;
 
-    --color-muted:#A9BDD7;
+    --color-placeholder:rgba(255,255,255,.45);
 
+    --color-border:rgba(255,255,255,.08);
 
+    --color-border-hover:rgba(255,255,255,.16);
 
-/* ==========================================================================
-   02.04 TYPOGRAPHY
-========================================================================== */
-
-    --font-en:"Inter",sans-serif;
-
-    --font-ta:"Noto Sans Tamil",sans-serif;
-
-    --weight-light:300;
-
-    --weight-regular:400;
-
-    --weight-medium:500;
-
-    --weight-semibold:600;
-
-    --weight-bold:700;
-
-    --weight-extra-bold:800;
+    --color-overlay:rgba(4,12,25,.78);
 
 
 
-/* ==========================================================================
-   02.05 SPACING
-========================================================================== */
+    /*--------------------------------------------------------------
+        Typography
+    --------------------------------------------------------------*/
 
-    --space-1:.25rem;
+    --font-primary:"Inter",sans-serif;
 
-    --space-2:.50rem;
+    --font-tamil:"Noto Sans Tamil",sans-serif;
 
-    --space-3:.75rem;
+    --font-size-display:3.5rem;
 
-    --space-4:1rem;
+    --font-size-hero:3rem;
 
-    --space-5:1.5rem;
+    --font-size-title:2.25rem;
 
-    --space-6:2rem;
+    --font-size-punch:1.75rem;
 
-    --space-7:3rem;
+    --font-size-heading:1.5rem;
 
-    --space-8:4rem;
+    --font-size-body:1.125rem;
 
-    --space-9:5rem;
+    --font-size-small:1rem;
 
-    --space-10:6rem;
+    --font-size-caption:.875rem;
+
+    --font-weight-regular:400;
+
+    --font-weight-medium:500;
+
+    --font-weight-semibold:600;
+
+    --font-weight-bold:700;
 
 
 
-/* ==========================================================================
-   02.06 CONTAINER
-========================================================================== */
+    /*--------------------------------------------------------------
+        Spacing Scale
+    --------------------------------------------------------------*/
 
-    --container:1200px;
+    --space-1:.5rem;
+
+    --space-2:1rem;
+
+    --space-3:1.5rem;
+
+    --space-4:2rem;
+
+    --space-5:3rem;
+
+    --space-6:4rem;
+
+    --space-7:6rem;
+
+    --space-8:8rem;
 
 
 
-/* ==========================================================================
-   02.07 RADIUS
-========================================================================== */
+    /*--------------------------------------------------------------
+        Radius
+    --------------------------------------------------------------*/
 
-    --radius-sm:8px;
+    --radius-sm:.5rem;
 
-    --radius-md:16px;
+    --radius-md:1rem;
 
-    --radius-lg:24px;
+    --radius-lg:1.5rem;
+
+    --radius-xl:2rem;
 
     --radius-pill:999px;
 
 
 
-/* ==========================================================================
-   02.08 SHADOWS
-========================================================================== */
+    /*--------------------------------------------------------------
+        Shadows
+    --------------------------------------------------------------*/
 
-    --shadow-soft:
+    --shadow-sm:
+        0 2px 8px rgba(0,0,0,.18);
 
-        0 10px 35px rgba(0,0,0,.20);
+    --shadow-md:
+        0 8px 24px rgba(0,0,0,.24);
 
-    --shadow-large:
+    --shadow-lg:
+        0 18px 48px rgba(0,0,0,.30);
 
-        0 25px 70px rgba(0,0,0,.35);
-
-
-
-/* ==========================================================================
-   02.09 MOTION
-========================================================================== */
-
-    --duration-fast:.25s;
-
-    --duration-normal:.45s;
-
-    --duration-slow:1s;
-
-    --ease:cubic-bezier(.22,.61,.36,1);
-
-}
+    --shadow-glow:
+        0 0 28px rgba(0,199,183,.20);
 
 
 
+    /*--------------------------------------------------------------
+        Layout
+    --------------------------------------------------------------*/
 
-/* ==========================================================================
-   03. BASE DOCUMENT
-========================================================================== */
+    --container-width:1280px;
+
+    --reading-width:720px;
+
+    --content-width:640px;
+
+    --header-height:72px;
 
 
-/* ==========================================================================
-   03.01 DOCUMENT
-========================================================================== */
 
-body{
+    /*--------------------------------------------------------------
+        Motion
+    --------------------------------------------------------------*/
 
-    width:100%;
+    --transition-fast:150ms ease;
 
-    height:100vh;
+    --transition-normal:300ms ease;
+
+    --transition-slow:500ms ease;
 
 }
 
-/* ==========================================================================
-   04. LAYOUT ENGINE
-========================================================================== */
 
 
-/* ==========================================================================
-   04.01 APPLICATION
-========================================================================== */
+/*======================================================================
+    GLOBAL DOCUMENT
+======================================================================*/
 
-#app{
-
-    position:relative;
-
-    width:100%;
-
-    height:100vh;
-
-    overflow:hidden;
+html{
 
     background:var(--color-background);
 
+    color:var(--color-text);
+
+    font-family:var(--font-primary);
+
+}
+
+body{
+
+    background:var(--color-background);
+
+    color:var(--color-text);
+
+    font-family:var(--font-primary);
+
+    font-size:var(--font-size-body);
+
+    font-weight:var(--font-weight-regular);
+
+    line-height:1.65;
+
+    text-rendering:optimizeLegibility;
+
+    -webkit-font-smoothing:antialiased;
+
+    -moz-osx-font-smoothing:grayscale;
+
 }
 
 
 
-/* ==========================================================================
-   04.02 JOURNEY
-========================================================================== */
+/*======================================================================
+    ACCESSIBILITY
+======================================================================*/
 
-#journey{
+.sr-only{
 
-    position:relative;
+    position:absolute;
 
-    width:100%;
+    width:1px;
 
-    height:100%;
+    height:1px;
+
+    padding:0;
+
+    margin:-1px;
 
     overflow:hidden;
 
+    clip:rect(0,0,0,0);
+
+    white-space:nowrap;
+
+    border:0;
+
 }
 
+.skip-link{
 
+    position:absolute;
 
-/* ==========================================================================
-   04.03 CONTAINER
-========================================================================== */
+    top:-100px;
+
+    left:var(--space-2);
+
+    z-index:9999;
+
+}
+
+.skip-link:focus{
+
+    top:var(--space-2);
+
+}
+
+/*======================================================================
+    UTILITY CLASSES
+======================================================================*/
 
 .container{
 
-    width:min(
-
-        var(--container),
-
-        92%
-
-    );
+    width:min(100% - 3rem,var(--container-width));
 
     margin-inline:auto;
 
 }
 
+.content-width{
 
+    width:min(100%,var(--content-width));
 
-/* ==========================================================================
-   04.04 FLEX UTILITIES
-========================================================================== */
+    margin-inline:auto;
+
+}
+
+.reading-width{
+
+    width:min(100%,var(--reading-width));
+
+    margin-inline:auto;
+
+}
+
+.text-center{
+
+    text-align:center;
+
+}
+
+.text-left{
+
+    text-align:left;
+
+}
+
+.text-right{
+
+    text-align:right;
+
+}
+
+.hidden{
+
+    display:none !important;
+
+}
+
+.invisible{
+
+    visibility:hidden;
+
+}
 
 .flex{
 
     display:flex;
 
 }
-
 
 .flex-column{
 
@@ -390,22 +393,15 @@ body{
 
 }
 
-
 .flex-center{
 
     display:flex;
 
-    justify-content:center;
-
     align-items:center;
 
+    justify-content:center;
+
 }
-
-
-
-/* ==========================================================================
-   04.05 GRID UTILITIES
-========================================================================== */
 
 .grid{
 
@@ -413,128 +409,99 @@ body{
 
 }
 
-
-
-/* ==========================================================================
-   04.06 DISPLAY UTILITIES
-========================================================================== */
-
-.hidden{
-
-    display:none !important;
-
-}
-
-
-.invisible{
-
-    visibility:hidden;
-
-}
-
-
-
-/* ==========================================================================
-   04.07 TEXT ALIGNMENT
-========================================================================== */
-
-.text-left{
-
-    text-align:left;
-
-}
-
-
-.text-center{
-
-    text-align:center;
-
-}
-
-
-.text-right{
-
-    text-align:right;
-
-}
-
-
-
-/* ==========================================================================
-   04.08 FONT HELPERS
-========================================================================== */
-
-.font-ta{
-
-    font-family:var(--font-ta);
-
-}
-
-
-.font-en{
-
-    font-family:var(--font-en);
-
-}
-
-
-
-/* ==========================================================================
-   04.09 TEXT COLORS
-========================================================================== */
-
-.text-white{
-
-    color:var(--color-white);
-
-}
-
-
-.text-soft{
-
-    color:var(--color-soft);
-
-}
-
-
-.text-muted{
-
-    color:var(--color-muted);
-
-}
-
-/* ==========================================================================
-   05. SCENE ENGINE
-========================================================================== */
-
-
-/* ==========================================================================
-   05.01 SCENE
-========================================================================== */
-
-.scene{
-
-    position:absolute;
-
-    inset:0;
+.w-100{
 
     width:100%;
 
+}
+
+.h-100{
+
     height:100%;
-
-    display:none;
-
-    overflow:hidden;
 
 }
 
 
 
-/* ==========================================================================
-   05.02 ACTIVE SCENE
-========================================================================== */
+/*======================================================================
+    APPLICATION SHELL
+======================================================================*/
 
-.scene.active{
+.app-shell{
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    background:var(--color-background);
+
+    color:var(--color-text);
+
+}
+
+
+
+/*======================================================================
+    HEADER
+======================================================================*/
+
+.app-header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    width:100%;
+
+    background:rgba(8,28,58,.96);
+
+    backdrop-filter:blur(14px);
+
+    border-bottom:1px solid var(--color-border);
+
+}
+
+.header-container{
+
+    width:min(100% - 3rem,var(--container-width));
+
+    height:var(--header-height);
+
+    margin-inline:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+}
+
+
+
+/*======================================================================
+    BRAND
+======================================================================*/
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:var(--space-2);
+
+}
+
+.brand-logo{
+
+    height:52px;
+
+    width:auto;
 
     display:block;
 
@@ -542,342 +509,1629 @@ body{
 
 
 
-/* ==========================================================================
-   05.03 BACKGROUND
-========================================================================== */
+/*======================================================================
+    HEADER ACTIONS
+======================================================================*/
 
-.scene-background{
+.header-actions{
 
-    position:absolute;
+    display:flex;
 
-    inset:0;
+    align-items:center;
+
+    gap:var(--space-2);
+
+}
+
+
+
+/*======================================================================
+    ICON BUTTON
+======================================================================*/
+
+.icon-button{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:48px;
+
+    height:48px;
+
+    padding-inline:1rem;
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-pill);
+
+    background:transparent;
+
+    color:var(--color-text-secondary);
+
+    transition:
+
+        background var(--transition-fast),
+
+        border-color var(--transition-fast),
+
+        color var(--transition-fast),
+
+        transform var(--transition-fast);
+
+}
+
+.icon-button:hover{
+
+    background:rgba(255,255,255,.05);
+
+    border-color:var(--color-border-hover);
+
+    color:var(--color-text);
+
+}
+
+.icon-button:focus-visible{
+
+    outline:2px solid var(--color-primary);
+
+    outline-offset:3px;
+
+}
+
+.icon-button:active{
+
+    transform:scale(.98);
+
+}
+
+
+
+/*======================================================================
+    JOURNEY PROGRESS
+======================================================================*/
+
+.journey-progress{
+
+    width:min(100% - 3rem,var(--reading-width));
+
+    margin:
+
+        var(--space-5)
+
+        auto
+
+        var(--space-4);
+
+}
+
+.progress-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:.75rem;
+
+}
+
+.scene-indicator{
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+    color:var(--color-text-secondary);
+
+}
+
+.progress-percentage{
+
+    font-size:.95rem;
+
+    color:var(--color-text-muted);
+
+}
+
+
+
+/*======================================================================
+    PROGRESS BAR
+======================================================================*/
+
+.progress-track{
+
+    width:100%;
+
+    height:6px;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:999px;
 
     overflow:hidden;
 
-    z-index:1;
-
 }
 
+.progress-fill{
 
-
-.scene-background img{
-
-    width:100%;
+    width:0;
 
     height:100%;
 
-    object-fit:cover;
+    background:var(--color-primary);
 
-    object-position:center;
+    border-radius:999px;
 
-}
-
-
-
-/* ==========================================================================
-   05.04 OVERLAY
-========================================================================== */
-
-.scene-overlay{
-
-    position:absolute;
-
-    inset:0;
-
-    background:var(--color-overlay);
-
-    z-index:10;
+    transition:width .5s ease;
 
 }
 
 
 
-/* ==========================================================================
-   05.05 CONTENT
-========================================================================== */
+/*======================================================================
+    MAIN APPLICATION
+======================================================================*/
 
-.scene-content{
+.scene-root{
 
-    position:relative;
+    flex:1;
 
-    z-index:20;
+    width:min(100% - 3rem,var(--reading-width));
 
-    width:100%;
+    margin-inline:auto;
 
-    height:100%;
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-start;
+
+    padding-bottom:var(--space-7);
 
 }
 
+/*======================================================================
+    TYPOGRAPHY
+======================================================================*/
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
 
-/* ==========================================================================
-   05.06 SAFE CONTENT AREA
-========================================================================== */
+    font-family:var(--font-primary);
 
-.scene-safe{
+    font-weight:var(--font-weight-bold);
 
-    width:min(
+    color:var(--color-text);
 
-        1100px,
+    line-height:1.2;
 
-        92%
+    letter-spacing:-.02em;
 
-    );
+}
+
+.display{
+
+    font-size:var(--font-size-display);
+
+}
+
+.hero-title{
+
+    font-size:var(--font-size-hero);
+
+    max-width:16ch;
 
     margin-inline:auto;
 
 }
 
+.scene-title{
 
+    font-size:var(--font-size-title);
 
-/* ==========================================================================
-   05.07 FOOTER
-========================================================================== */
+    text-align:center;
 
-.scene-footer{
+    margin-bottom:var(--space-3);
 
-    position:absolute;
+}
 
-    left:50%;
+.punch-line{
 
-    bottom:2rem;
+    font-size:var(--font-size-punch);
 
-    transform:translateX(-50%);
+    font-weight:var(--font-weight-semibold);
 
-    z-index:30;
+    line-height:1.35;
+
+    text-align:center;
+
+    max-width:20ch;
+
+    margin:
+
+        0 auto
+
+        var(--space-5);
+
+}
+
+.section-title{
+
+    font-size:var(--font-size-heading);
+
+    margin-bottom:var(--space-3);
+
+}
+
+.body-text{
+
+    font-size:var(--font-size-body);
+
+    line-height:1.7;
+
+    color:var(--color-text-secondary);
+
+}
+
+.caption{
+
+    font-size:var(--font-size-caption);
+
+    color:var(--color-text-muted);
 
 }
 
 
 
-/* ==========================================================================
-   05.08 Z-INDEX LAYERS
-========================================================================== */
+/*======================================================================
+    LANGUAGE
+======================================================================*/
 
-.layer-background{
+.lang-ta{
 
-    z-index:1;
+    font-family:var(--font-tamil);
+
+}
+
+.lang-en{
+
+    font-family:var(--font-primary);
 
 }
 
 
-.layer-overlay{
 
-    z-index:10;
+/*======================================================================
+    CONVERSATION
+======================================================================*/
+
+.conversation{
+
+    width:100%;
+
+    max-width:var(--content-width);
+
+    margin:
+
+        0 auto
+
+        var(--space-5);
+
+}
+
+.conversation p{
+
+    margin-bottom:var(--space-3);
+
+    text-align:center;
+
+}
+
+.conversation p:last-child{
+
+    margin-bottom:0;
 
 }
 
 
-.layer-content{
 
-    z-index:20;
+/*======================================================================
+    QUESTION
+======================================================================*/
+
+.question{
+
+    width:100%;
+
+    max-width:var(--content-width);
+
+    margin:
+
+        0 auto
+
+        var(--space-5);
+
+}
+
+.question-title{
+
+    font-size:1.5rem;
+
+    font-weight:600;
+
+    text-align:center;
+
+    margin-bottom:var(--space-3);
+
+}
+
+.question-description{
+
+    text-align:center;
+
+    color:var(--color-text-secondary);
+
+    margin-bottom:var(--space-4);
 
 }
 
 
-.layer-footer{
 
-    z-index:30;
+/*======================================================================
+    BUTTONS
+======================================================================*/
 
-}
+.button-group{
 
-/* ==========================================================================
-   06. COMPONENT LIBRARY
-========================================================================== */
-
-
-/* ==========================================================================
-   06.01 PRIMARY BUTTON
-========================================================================== */
-
-.component-button{
-
-    display:inline-flex;
+    display:flex;
 
     flex-direction:column;
 
-    justify-content:center;
+    align-items:center;
+
+    gap:var(--space-2);
+
+    margin-top:var(--space-6);
+
+}
+
+.primary-button{
+
+    display:inline-flex;
 
     align-items:center;
 
-    gap:.35rem;
+    justify-content:center;
 
-    min-width:320px;
+    min-width:260px;
+
+    min-height:56px;
 
     padding:
 
-        1rem
+        0
 
-        2.5rem;
-
-    border:none;
+        2rem;
 
     border-radius:var(--radius-pill);
+
+    background:var(--color-primary);
+
+    color:#ffffff;
+
+    font-weight:600;
+
+    transition:
+
+        background var(--transition-fast),
+
+        transform var(--transition-fast),
+
+        box-shadow var(--transition-fast);
+
+}
+
+.primary-button:hover{
+
+    background:var(--color-primary-hover);
+
+    box-shadow:var(--shadow-glow);
+
+    transform:translateY(-2px);
+
+}
+
+.primary-button:focus-visible{
+
+    outline:2px solid #ffffff;
+
+    outline-offset:4px;
+
+}
+
+.primary-button:active{
+
+    background:var(--color-primary-active);
+
+    transform:translateY(0);
+
+}
+
+.primary-button:disabled{
+
+    opacity:.45;
+
+    cursor:not-allowed;
+
+    box-shadow:none;
+
+    transform:none;
+
+}
+
+.secondary-button{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:260px;
+
+    min-height:56px;
+
+    padding:
+
+        0
+
+        2rem;
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-pill);
+
+    background:transparent;
+
+    color:var(--color-text);
+
+    transition:
+
+        border-color var(--transition-fast),
+
+        background var(--transition-fast),
+
+        transform var(--transition-fast);
+
+}
+
+.secondary-button:hover{
+
+    background:rgba(255,255,255,.05);
+
+    border-color:var(--color-border-hover);
+
+    transform:translateY(-2px);
+
+}
+
+.secondary-button:focus-visible{
+
+    outline:2px solid var(--color-primary);
+
+    outline-offset:4px;
+
+}
+
+
+
+/*======================================================================
+    TEXT LINK
+======================================================================*/
+
+.text-link{
+
+    color:var(--color-primary);
+
+    transition:color var(--transition-fast);
+
+}
+
+.text-link:hover{
+
+    color:var(--color-primary-hover);
+
+}
+
+/*======================================================================
+    CARD SYSTEM
+======================================================================*/
+
+.card{
+
+    width:100%;
+
+    background:var(--color-card);
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-lg);
+
+    box-shadow:var(--shadow-md);
+
+    padding:var(--space-5);
+
+    transition:
+        border-color var(--transition-fast),
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+
+}
+
+.card:hover{
+
+    border-color:var(--color-border-hover);
+
+    transform:translateY(-2px);
+
+}
+
+.card-header{
+
+    margin-bottom:var(--space-4);
+
+}
+
+.card-body{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--space-3);
+
+}
+
+.card-footer{
+
+    margin-top:var(--space-5);
+
+}
+
+
+
+/*======================================================================
+    QUESTION CARD
+======================================================================*/
+
+.question-card{
+
+    width:100%;
+
+    max-width:720px;
+
+    margin:
+        0 auto
+        var(--space-6);
+
+}
+
+.question-card .card-header{
+
+    text-align:center;
+
+}
+
+
+
+/*======================================================================
+    REFLECTION CARD
+======================================================================*/
+
+.reflection-card{
+
+    width:100%;
+
+    max-width:720px;
+
+    margin:
+        var(--space-5)
+        auto;
+
+    background:linear-gradient(
+        180deg,
+        rgba(0,199,183,.08),
+        rgba(255,255,255,.02)
+    );
+
+    border-left:4px solid var(--color-primary);
+
+}
+
+.reflection-title{
+
+    color:var(--color-primary);
+
+    font-weight:var(--font-weight-semibold);
+
+    margin-bottom:var(--space-2);
+
+}
+
+.reflection-text{
+
+    color:var(--color-text-secondary);
+
+    line-height:1.8;
+
+}
+
+
+
+/*======================================================================
+    AI OBSERVATION CARD
+======================================================================*/
+
+.ai-card{
+
+    width:100%;
+
+    max-width:720px;
+
+    margin:
+        var(--space-5)
+        auto;
+
+    padding:var(--space-5);
+
+    border-radius:var(--radius-lg);
 
     background:
 
         linear-gradient(
-
             135deg,
-
-            var(--color-primary-light),
-
-            var(--color-accent)
-
+            rgba(0,199,183,.10),
+            rgba(255,255,255,.03)
         );
 
-    color:var(--color-white);
-
-    cursor:pointer;
-
-    box-shadow:var(--shadow-large);
-
-    transition:
-
-        transform var(--duration-normal) var(--ease),
-
-        box-shadow var(--duration-normal) var(--ease);
+    border:1px solid rgba(0,199,183,.22);
 
 }
 
+.ai-card-header{
 
-.component-button:hover{
+    display:flex;
 
-    transform:translateY(-4px);
+    align-items:center;
 
-}
+    gap:1rem;
 
-
-.component-button:active{
-
-    transform:translateY(-1px);
+    margin-bottom:var(--space-3);
 
 }
 
+.ai-avatar{
 
+    width:52px;
 
-/* ==========================================================================
-   06.02 BUTTON TYPOGRAPHY
-========================================================================== */
+    height:52px;
 
-.component-button-ta{
+    border-radius:50%;
 
-    font-family:var(--font-ta);
+    display:flex;
 
-    font-size:1.10rem;
+    align-items:center;
 
-    font-weight:var(--weight-semibold);
+    justify-content:center;
 
-    line-height:1.4;
+    background:rgba(0,199,183,.15);
 
-    text-align:center;
+    color:var(--color-primary);
 
-}
-
-
-.component-button-en{
-
-    font-family:var(--font-en);
-
-    font-size:.90rem;
-
-    font-weight:var(--weight-regular);
-
-    opacity:.90;
-
-    text-align:center;
-
-}
-
-
-
-/* ==========================================================================
-   06.03 LOGO
-========================================================================== */
-
-.component-logo{
-
-    display:block;
-
-    height:auto;
-
-}
-
-
-
-/* ==========================================================================
-   06.04 BRAND NAME
-========================================================================== */
-
-.component-brand{
-
-    margin-top:1rem;
-
-    font-family:var(--font-en);
-
-    font-size:.90rem;
+    font-size:1.3rem;
 
     font-weight:700;
 
-    letter-spacing:.25rem;
+}
 
-    text-transform:uppercase;
+.ai-title{
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    color:var(--color-primary);
+
+}
+
+.ai-message{
+
+    color:var(--color-text-secondary);
+
+    line-height:1.8;
 
 }
 
 
 
-/* ==========================================================================
-   06.05 TAGLINE
-========================================================================== */
+/*======================================================================
+    CONTENT PANEL
+======================================================================*/
 
-.component-tagline{
+.content-panel{
 
-    margin-top:.35rem;
+    width:100%;
 
-    font-family:var(--font-en);
+    background:var(--color-surface);
 
-    font-size:.75rem;
-
-    color:var(--color-soft);
-
-}
-
-
-
-/* ==========================================================================
-   06.06 CARD
-========================================================================== */
-
-.component-card{
-
-    background:
-
-        rgba(255,255,255,.05);
-
-    border:
-
-        1px solid rgba(255,255,255,.08);
+    border:1px solid var(--color-border);
 
     border-radius:var(--radius-lg);
 
-    backdrop-filter:blur(18px);
-
-    box-shadow:var(--shadow-soft);
+    padding:var(--space-5);
 
 }
 
 
 
-/* ==========================================================================
-   06.07 DIVIDER
-========================================================================== */
+/*======================================================================
+    LOADING OVERLAY
+======================================================================*/
 
-.component-divider{
+.loading-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:var(--color-overlay);
+
+    backdrop-filter:blur(12px);
+
+    z-index:5000;
+
+}
+
+.loading-card{
+
+    width:min(92%,420px);
+
+    padding:var(--space-6);
+
+    text-align:center;
+
+    background:var(--color-card);
+
+    border-radius:var(--radius-lg);
+
+    border:1px solid var(--color-border);
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+.loading-message{
+
+    margin-top:var(--space-3);
+
+    color:var(--color-text-secondary);
+
+}
+
+
+
+/*======================================================================
+    THINKING OVERLAY
+======================================================================*/
+
+.thinking-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:var(--color-overlay);
+
+    backdrop-filter:blur(14px);
+
+    z-index:5100;
+
+}
+
+.thinking-card{
+
+    width:min(92%,460px);
+
+    padding:var(--space-6);
+
+    text-align:center;
+
+    background:var(--color-card);
+
+    border:1px solid rgba(0,199,183,.25);
+
+    border-radius:var(--radius-lg);
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+
+
+/*======================================================================
+    THINKING ANIMATION
+======================================================================*/
+
+.thinking-animation{
+
+    width:72px;
+
+    height:72px;
+
+    margin:
+        0 auto
+        var(--space-4);
+
+    border-radius:50%;
+
+    border:4px solid rgba(255,255,255,.08);
+
+    border-top-color:var(--color-primary);
+
+    animation:ctm-spin 1s linear infinite;
+
+}
+
+
+
+/*======================================================================
+    TOAST
+======================================================================*/
+
+.toast-container{
+
+    position:fixed;
+
+    top:96px;
+
+    right:2rem;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:1rem;
+
+    z-index:6000;
+
+}
+
+.toast{
+
+    min-width:320px;
+
+    padding:1rem 1.25rem;
+
+    background:var(--color-card);
+
+    border-left:4px solid var(--color-primary);
+
+    border-radius:var(--radius-md);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+
+
+/*======================================================================
+    MODAL
+======================================================================*/
+
+.modal-container{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:var(--color-overlay);
+
+    backdrop-filter:blur(12px);
+
+    z-index:7000;
+
+}
+
+.modal{
+
+    width:min(92%,720px);
+
+    background:var(--color-card);
+
+    border-radius:var(--radius-lg);
+
+    border:1px solid var(--color-border);
+
+    box-shadow:var(--shadow-lg);
+
+    padding:var(--space-6);
+
+}
+
+/*======================================================================
+    FORM SYSTEM
+======================================================================*/
+
+.form-group{
+
+    width:100%;
+
+    max-width:640px;
+
+    margin:
+        0 auto
+        var(--space-5);
+
+}
+
+.form-label{
+
+    display:block;
+
+    margin-bottom:var(--space-2);
+
+    font-size:1rem;
+
+    font-weight:var(--font-weight-semibold);
+
+    color:var(--color-text);
+
+}
+
+.form-helper{
+
+    margin-top:.75rem;
+
+    color:var(--color-text-muted);
+
+    font-size:.95rem;
+
+}
+
+
+
+/*======================================================================
+    INPUTS
+======================================================================*/
+
+.input-field{
+
+    width:100%;
+
+    min-height:56px;
+
+    padding:
+
+        0
+
+        1.25rem;
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-md);
+
+    background:var(--color-surface);
+
+    color:var(--color-text);
+
+    transition:
+
+        border-color var(--transition-fast),
+
+        box-shadow var(--transition-fast),
+
+        background var(--transition-fast);
+
+}
+
+.input-field::placeholder{
+
+    color:var(--color-placeholder);
+
+}
+
+.input-field:hover{
+
+    border-color:var(--color-border-hover);
+
+}
+
+.input-field:focus{
+
+    outline:none;
+
+    border-color:var(--color-primary);
+
+    box-shadow:0 0 0 3px rgba(0,199,183,.18);
+
+}
+
+
+
+/*======================================================================
+    NUMBER INPUT
+======================================================================*/
+
+.number-input{
+
+    text-align:center;
+
+    font-size:1.4rem;
+
+    font-weight:600;
+
+    letter-spacing:.03em;
+
+}
+
+
+
+/*======================================================================
+    TEXTAREA
+======================================================================*/
+
+.textarea-field{
+
+    min-height:160px;
+
+    resize:vertical;
+
+    padding:1.25rem;
+
+}
+
+
+
+/*======================================================================
+    OPTION GRID
+======================================================================*/
+
+.option-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    gap:1rem;
+
+    width:100%;
+
+}
+
+
+
+/*======================================================================
+    OPTION CARD
+======================================================================*/
+
+.option-card{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:1rem;
+
+    padding:1.25rem;
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-lg);
+
+    background:var(--color-card);
+
+    transition:
+
+        transform var(--transition-fast),
+
+        border-color var(--transition-fast),
+
+        background var(--transition-fast),
+
+        box-shadow var(--transition-fast);
+
+}
+
+.option-card:hover{
+
+    transform:translateY(-2px);
+
+    border-color:var(--color-primary);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.option-card.selected{
+
+    border-color:var(--color-primary);
+
+    background:rgba(0,199,183,.08);
+
+}
+
+
+
+/*======================================================================
+    RADIO CARD
+======================================================================*/
+
+.radio-card{
+
+    cursor:pointer;
+
+}
+
+.radio-card input{
+
+    position:absolute;
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+
+
+
+/*======================================================================
+    CHECKBOX CARD
+======================================================================*/
+
+.checkbox-card{
+
+    cursor:pointer;
+
+}
+
+.checkbox-card input{
+
+    position:absolute;
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+
+
+
+/*======================================================================
+    OPTION ICON
+======================================================================*/
+
+.option-icon{
+
+    width:52px;
+
+    height:52px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.06);
+
+    font-size:1.4rem;
+
+    flex-shrink:0;
+
+}
+
+
+
+/*======================================================================
+    OPTION CONTENT
+======================================================================*/
+
+.option-content{
+
+    flex:1;
+
+}
+
+.option-title{
+
+    font-weight:600;
+
+    margin-bottom:.25rem;
+
+}
+
+.option-subtitle{
+
+    color:var(--color-text-muted);
+
+    font-size:.95rem;
+
+}
+
+
+
+/*======================================================================
+    RANGE SLIDER
+======================================================================*/
+
+.slider-group{
+
+    width:100%;
+
+    margin:
+        var(--space-5)
+        auto;
+
+}
+
+.slider{
+
+    width:100%;
+
+    appearance:none;
+
+    height:8px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.10);
+
+    outline:none;
+
+}
+
+.slider::-webkit-slider-thumb{
+
+    appearance:none;
+
+    width:24px;
+
+    height:24px;
+
+    border-radius:50%;
+
+    background:var(--color-primary);
+
+    cursor:pointer;
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+.slider::-moz-range-thumb{
+
+    width:24px;
+
+    height:24px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:var(--color-primary);
+
+    cursor:pointer;
+
+}
+
+
+
+/*======================================================================
+    SLIDER SCALE
+======================================================================*/
+
+.slider-scale{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:1rem;
+
+    color:var(--color-text-muted);
+
+    font-size:.9rem;
+
+}
+
+
+
+/*======================================================================
+    VALIDATION
+======================================================================*/
+
+.is-valid{
+
+    border-color:var(--color-success) !important;
+
+}
+
+.is-invalid{
+
+    border-color:var(--color-danger) !important;
+
+}
+
+.validation-message{
+
+    margin-top:.75rem;
+
+    font-size:.9rem;
+
+}
+
+.validation-success{
+
+    color:var(--color-success);
+
+}
+
+.validation-error{
+
+    color:var(--color-danger);
+
+}
+
+
+
+/*======================================================================
+    FOCUS STATES
+======================================================================*/
+
+button:focus-visible,
+
+input:focus-visible,
+
+textarea:focus-visible,
+
+select:focus-visible{
+
+    outline:2px solid var(--color-primary);
+
+    outline-offset:3px;
+
+}
+
+
+
+/*======================================================================
+    DISABLED STATES
+======================================================================*/
+
+:disabled{
+
+    opacity:.45;
+
+    cursor:not-allowed;
+
+}
+
+.option-card.disabled{
+
+    opacity:.45;
+
+    pointer-events:none;
+
+}
+
+/*======================================================================
+    UNIVERSAL SCENE SYSTEM
+======================================================================*/
+
+.scene{
+
+    width:100%;
+
+    min-height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:flex-start;
+
+    animation:sceneFade var(--transition-normal);
+
+}
+
+.scene-inner{
+
+    width:100%;
+
+    max-width:var(--reading-width);
+
+    margin-inline:auto;
+
+    padding:
+
+        var(--space-4)
+
+        0
+
+        var(--space-7);
+
+}
+
+
+
+/*======================================================================
+    SCENE HEADER
+======================================================================*/
+
+.scene-header{
+
+    width:100%;
+
+    text-align:center;
+
+    margin-bottom:var(--space-6);
+
+}
+
+.scene-number{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:
+
+        .4rem
+
+        1rem;
+
+    border-radius:var(--radius-pill);
+
+    background:rgba(255,255,255,.05);
+
+    color:var(--color-text-muted);
+
+    font-size:.85rem;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+
+    margin-bottom:var(--space-3);
+
+}
+
+
+
+/*======================================================================
+    SCENE CONTENT
+======================================================================*/
+
+.scene-content{
+
+    width:100%;
+
+}
+
+.scene-section{
+
+    width:100%;
+
+    margin-bottom:var(--space-6);
+
+}
+
+.scene-section:last-child{
+
+    margin-bottom:0;
+
+}
+
+
+
+/*======================================================================
+    AI REFLECTION SECTION
+======================================================================*/
+
+.ai-reflection{
+
+    width:100%;
+
+    margin:
+
+        var(--space-6)
+
+        auto;
+
+}
+
+.ai-reflection .reflection-card,
+
+.ai-reflection .ai-card{
+
+    margin-bottom:0;
+
+}
+
+
+
+/*======================================================================
+    CALL TO ACTION
+======================================================================*/
+
+.scene-cta{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-top:var(--space-7);
+
+}
+
+
+
+/*======================================================================
+    DIVIDERS
+======================================================================*/
+
+.section-divider{
 
     width:120px;
 
-    height:2px;
+    height:1px;
+
+    margin:
+
+        var(--space-5)
+
+        auto;
 
     background:
 
@@ -887,7 +2141,7 @@ body{
 
             transparent,
 
-            var(--color-accent),
+            rgba(255,255,255,.22),
 
             transparent
 
@@ -897,2179 +2151,65 @@ body{
 
 
 
-/* ==========================================================================
-   06.08 BADGE
-========================================================================== */
-
-.component-badge{
-
-    display:inline-flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:
-
-        .45rem
-
-        1rem;
-
-    border-radius:var(--radius-pill);
-
-    background:
-
-        rgba(255,255,255,.08);
-
-    color:var(--color-white);
-
-    font-size:.85rem;
-
-}
-
-/* ==========================================================================
-   06.09 FDQUESTIONCARD™
-========================================================================== */
-
-/* ==========================================================================
-   06.09.01 CONTAINER
-========================================================================== */
-
-.fd-question-card{
-
-    width:min(760px,100%);
-
-    margin-inline:auto;
-
-    padding:3rem;
-
-    border-radius:var(--radius-lg);
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255,255,255,.08),
-            rgba(255,255,255,.04)
-        );
-
-    border:1px solid rgba(255,255,255,.10);
-
-    backdrop-filter:blur(22px);
-
-    box-shadow:var(--shadow-large);
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:2rem;
-
-}
-
-
-
-/* ==========================================================================
-   06.09.02 QUESTION NUMBER
-========================================================================== */
-
-.fd-question-number{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    width:54px;
-
-    height:54px;
-
-    border-radius:50%;
-
-    background:rgba(31,199,201,.18);
-
-    border:1px solid rgba(31,199,201,.45);
-
-    color:var(--color-accent);
-
-    font-size:1rem;
-
-    font-weight:700;
-
-}
-
-
-
-/* ==========================================================================
-   06.09.03 TAMIL TITLE
-========================================================================== */
-
-.fd-question-title-ta{
-
-    font-family:var(--font-ta);
-
-    font-size:2rem;
-
-    font-weight:700;
-
-    line-height:1.45;
-
-    color:var(--color-white);
-
-}
-
-
-
-/* ==========================================================================
-   06.09.04 ENGLISH TITLE
-========================================================================== */
-
-.fd-question-title-en{
-
-    font-family:var(--font-en);
-
-    font-size:1rem;
-
-    font-weight:500;
-
-    line-height:1.7;
-
-    color:var(--color-soft);
-
-}
-
-
-
-/* ==========================================================================
-   06.09.05 CONTENT
-========================================================================== */
-
-.fd-question-content{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:1.75rem;
-
-}
-
-
-
-/* ==========================================================================
-   06.09.06 FOOTER
-========================================================================== */
-
-.fd-question-footer{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:1rem;
-
-    margin-top:.5rem;
-
-}
-
-
-
-/* ==========================================================================
-   06.09.07 RESPONSIVE
-========================================================================== */
-
-@media(max-width:768px){
-
-    .fd-question-card{
-
-        padding:2rem 1.4rem;
-
-        border-radius:20px;
-
-    }
-
-    .fd-question-title-ta{
-
-        font-size:1.55rem;
-
-    }
-
-}
-
-
-
-/* ==========================================================================
-   06.10 FDCURRENCYINPUT™
-========================================================================== */
-
-
-/* ==========================================================================
-   06.10.01 WRAPPER
-========================================================================== */
-
-.fd-currency{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:.85rem;
-
-}
-
-
-
-/* ==========================================================================
-   06.10.02 LABEL
-========================================================================== */
-
-.fd-currency-label{
-
-    font-family:var(--font-ta);
-
-    font-size:1rem;
-
-    font-weight:600;
-
-    color:var(--color-soft);
-
-}
-
-
-
-/* ==========================================================================
-   06.10.03 INPUT WRAPPER
-========================================================================== */
-
-.fd-currency-field{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:1rem;
-
-    padding:1.1rem 1.4rem;
-
-    border-radius:18px;
-
-    background:rgba(255,255,255,.05);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    transition:
-
-        border-color var(--duration-normal) var(--ease),
-
-        box-shadow var(--duration-normal) var(--ease),
-
-        transform var(--duration-fast) var(--ease);
-
-}
-
-
-
-/* ==========================================================================
-   06.10.04 ACTIVE
-========================================================================== */
-
-.fd-currency-field:focus-within{
-
-    border-color:var(--color-accent);
-
-    box-shadow:
-
-        0 0 0 4px rgba(31,199,201,.12);
-
-    transform:translateY(-2px);
-
-}
-
-
-
-/* ==========================================================================
-   06.10.05 SYMBOL
-========================================================================== */
-
-.fd-currency-symbol{
-
-    font-size:1.6rem;
-
-    font-weight:700;
-
-    color:var(--color-gold);
-
-    flex-shrink:0;
-
-}
-
-
-
-/* ==========================================================================
-   06.10.06 INPUT
-========================================================================== */
-
-.fd-currency-input{
-
-    width:100%;
-
-    border:none;
-
-    outline:none;
-
-    background:transparent;
-
-    color:var(--color-white);
-
-    font-size:2rem;
-
-    font-weight:700;
-
-    font-family:var(--font-en);
-
-    letter-spacing:.02em;
-
-}
-
-
-
-.fd-currency-input::placeholder{
-
-    color:rgba(255,255,255,.35);
-
-}
-
-
-
-/* ==========================================================================
-   06.10.07 HELPER
-========================================================================== */
-
-.fd-currency-helper{
-
-    font-size:.9rem;
-
-    color:var(--color-muted);
-
-    line-height:1.6;
-
-}
-
-
-
-/* ==========================================================================
-   06.10.08 INVALID
-========================================================================== */
-
-.fd-currency-field.is-invalid{
-
-    border-color:#FF6B6B;
-
-    box-shadow:
-
-        0 0 0 4px rgba(255,107,107,.10);
-
-}
-
-
-
-/* ==========================================================================
-   06.10.09 RESPONSIVE
-========================================================================== */
-
-@media(max-width:768px){
-
-    .fd-currency-field{
-
-        padding:1rem;
-
-    }
-
-    .fd-currency-input{
-
-        font-size:1.5rem;
-
-    }
-
-}
-
-/* ==========================================================================
-   06.11 FDPROGRESS™
-========================================================================== */
-
-
-/* ==========================================================================
-   06.11.01 CONTAINER
-========================================================================== */
-
-.fd-progress{
-
-    width:min(760px,100%);
-
-    margin-inline:auto;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:.90rem;
-
-}
-
-
-
-/* ==========================================================================
-   06.11.02 HEADER
-========================================================================== */
-
-.fd-progress-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:1rem;
-
-}
-
-
-
-/* ==========================================================================
-   06.11.03 LABEL
-========================================================================== */
-
-.fd-progress-label{
-
-    font-family:var(--font-en);
-
-    font-size:.90rem;
-
-    font-weight:600;
-
-    letter-spacing:.08em;
-
-    text-transform:uppercase;
-
-    color:var(--color-soft);
-
-}
-
-
-
-/* ==========================================================================
-   06.11.04 VALUE
-========================================================================== */
-
-.fd-progress-value{
-
-    font-family:var(--font-en);
-
-    font-size:.95rem;
-
-    font-weight:700;
-
-    color:var(--color-accent);
-
-}
-
-
-
-/* ==========================================================================
-   06.11.05 TRACK
-========================================================================== */
-
-.fd-progress-track{
-
-    position:relative;
-
-    width:100%;
-
-    height:10px;
-
-    overflow:hidden;
-
-    border-radius:999px;
-
-    background:rgba(255,255,255,.08);
-
-}
-
-
-
-/* ==========================================================================
-   06.11.06 BAR
-========================================================================== */
-
-.fd-progress-bar{
-
-    position:absolute;
-
-    inset:0 auto 0 0;
-
-    width:0%;
-
-    border-radius:inherit;
-
-    background:
-
-        linear-gradient(
-
-            90deg,
-
-            var(--color-primary-light),
-
-            var(--color-accent)
-
-        );
-
-    transition:
-
-        width .60s var(--ease);
-
-}
-
-
-
-/* ==========================================================================
-   06.11.07 STEP LABELS
-========================================================================== */
-
-.fd-progress-steps{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-top:.35rem;
-
-}
-
-
-
-.fd-progress-step{
-
-    font-size:.78rem;
-
-    font-weight:500;
-
-    color:var(--color-muted);
-
-    transition:
-
-        color var(--duration-normal) var(--ease);
-
-}
-
-
-
-.fd-progress-step.is-active{
-
-    color:var(--color-accent);
-
-}
-
-
-
-.fd-progress-step.is-complete{
-
-    color:var(--color-white);
-
-}
-
-
-
-/* ==========================================================================
-   06.11.08 RESPONSIVE
-========================================================================== */
-
-@media(max-width:768px){
-
-    .fd-progress{
-
-        gap:.75rem;
-
-    }
-
-}
-
-
-
-
-/* ==========================================================================
-   06.12 FDCHIP™
-========================================================================== */
-
-
-/* ==========================================================================
-   06.12.01 GROUP
-========================================================================== */
-
-.fd-chip-group{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    justify-content:center;
-
-    gap:1rem;
-
-}
-
-
-
-/* ==========================================================================
-   06.12.02 CHIP
-========================================================================== */
-
-.fd-chip{
-
-    display:inline-flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:
-
-        .95rem
-
-        1.40rem;
-
-    min-height:58px;
-
-    border-radius:999px;
-
-    border:1px solid rgba(255,255,255,.10);
-
-    background:rgba(255,255,255,.05);
-
-    backdrop-filter:blur(12px);
-
-    cursor:pointer;
-
-    transition:
-
-        background var(--duration-normal) var(--ease),
-
-        border-color var(--duration-normal) var(--ease),
-
-        color var(--duration-normal) var(--ease),
-
-        transform var(--duration-fast) var(--ease),
-
-        box-shadow var(--duration-fast) var(--ease);
-
-}
-
-
-
-/* ==========================================================================
-   06.12.03 HOVER
-========================================================================== */
-
-.fd-chip:hover{
-
-    transform:translateY(-2px);
-
-    border-color:rgba(31,199,201,.55);
-
-    background:rgba(31,199,201,.10);
-
-}
-
-
-
-/* ==========================================================================
-   06.12.04 ACTIVE
-========================================================================== */
-
-.fd-chip.is-selected{
-
-    color:var(--color-white);
-
-    border-color:var(--color-accent);
-
-    background:
-
-        linear-gradient(
-
-            135deg,
-
-            rgba(44,95,165,.95),
-
-            rgba(31,199,201,.90)
-
-        );
-
-    box-shadow:
-
-        0 12px 30px rgba(31,199,201,.25);
-
-}
-
-
-
-/* ==========================================================================
-   06.12.05 CONTENT
-========================================================================== */
-
-.fd-chip-content{
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    gap:.18rem;
-
-}
-
-
-
-/* ==========================================================================
-   06.12.06 TAMIL
-========================================================================== */
-
-.fd-chip-ta{
-
-    font-family:var(--font-ta);
-
-    font-size:.98rem;
-
-    font-weight:600;
-
-    line-height:1.35;
-
-    color:inherit;
-
-}
-
-
-
-/* ==========================================================================
-   06.12.07 ENGLISH
-========================================================================== */
-
-.fd-chip-en{
-
-    font-family:var(--font-en);
-
-    font-size:.78rem;
-
-    font-weight:500;
-
-    opacity:.88;
-
-    color:inherit;
-
-}
-
-
-
-/* ==========================================================================
-   06.12.08 DISABLED
-========================================================================== */
-
-.fd-chip.is-disabled{
-
-    opacity:.45;
-
-    cursor:not-allowed;
+/*======================================================================
+    LOADING STATES
+======================================================================*/
+
+.is-loading{
 
     pointer-events:none;
 
-}
-
-
-
-/* ==========================================================================
-   06.12.09 FOCUS
-========================================================================== */
-
-.fd-chip:focus-visible{
-
-    outline:none;
-
-    border-color:var(--color-accent);
-
-    box-shadow:
-
-        0 0 0 4px rgba(31,199,201,.18);
-
-}
-
-
-
-/* ==========================================================================
-   06.12.10 RESPONSIVE
-========================================================================== */
-
-@media(max-width:768px){
-
-    .fd-chip-group{
-
-        gap:.75rem;
-
-    }
-
-    .fd-chip{
-
-        width:100%;
-
-        justify-content:flex-start;
-
-        border-radius:18px;
-
-        padding:1rem 1.20rem;
-
-    }
-
-    .fd-chip-content{
-
-        align-items:flex-start;
-
-    }
-
-}
-
-/* ==========================================================================
-   06.13 FDOPTIONCARD™
-========================================================================== */
-
-
-/* ==========================================================================
-   06.13.01 GROUP
-========================================================================== */
-
-.fd-option-group{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:1.5rem;
-
-    width:100%;
-
-}
-
-
-
-/* ==========================================================================
-   06.13.02 CARD
-========================================================================== */
-
-.fd-option-card{
-
-    position:relative;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:.45rem;
-
-    min-height:150px;
-
-    padding:2rem;
-
-    border-radius:var(--radius-lg);
-
-    background:
-
-        linear-gradient(
-            180deg,
-            rgba(255,255,255,.06),
-            rgba(255,255,255,.03)
-        );
-
-    border:1px solid rgba(255,255,255,.10);
-
-    cursor:pointer;
-
-    transition:
-        transform var(--duration-normal) var(--ease),
-        border-color var(--duration-normal) var(--ease),
-        box-shadow var(--duration-normal) var(--ease),
-        background var(--duration-normal) var(--ease);
-
-}
-
-
-
-/* ==========================================================================
-   06.13.03 HOVER
-========================================================================== */
-
-.fd-option-card:hover{
-
-    transform:translateY(-4px);
-
-    border-color:rgba(31,199,201,.45);
-
-    box-shadow:0 18px 40px rgba(0,0,0,.30);
-
-}
-
-
-
-/* ==========================================================================
-   06.13.04 SELECTED
-========================================================================== */
-
-.fd-option-card.is-selected{
-
-    border-color:var(--color-accent);
-
-    background:
-
-        linear-gradient(
-            135deg,
-            rgba(18,55,110,.95),
-            rgba(31,199,201,.18)
-        );
-
-    box-shadow:
-        0 18px 45px rgba(31,199,201,.22);
-
-}
-
-
-
-/* ==========================================================================
-   06.13.05 ICON
-========================================================================== */
-
-.fd-option-icon{
-
-    font-size:2rem;
-
-    line-height:1;
-
-}
-
-
-
-/* ==========================================================================
-   06.13.06 TAMIL
-========================================================================== */
-
-.fd-option-title-ta{
-
-    font-family:var(--font-ta);
-
-    font-size:1.15rem;
-
-    font-weight:700;
-
-    color:var(--color-white);
-
-    text-align:center;
-
-}
-
-
-
-/* ==========================================================================
-   06.13.07 ENGLISH
-========================================================================== */
-
-.fd-option-title-en{
-
-    font-family:var(--font-en);
-
-    font-size:.90rem;
-
-    color:var(--color-soft);
-
-    text-align:center;
-
-}
-
-
-
-/* ==========================================================================
-   06.13.08 CHECKMARK
-========================================================================== */
-
-.fd-option-check{
-
-    position:absolute;
-
-    top:16px;
-
-    right:16px;
-
-    width:28px;
-
-    height:28px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    background:var(--color-accent);
-
-    color:#071B3A;
-
-    font-size:.80rem;
-
-    font-weight:700;
-
-    opacity:0;
-
-    transform:scale(.7);
-
-    transition:
-        opacity var(--duration-fast) var(--ease),
-        transform var(--duration-fast) var(--ease);
-
-}
-
-
-
-.fd-option-card.is-selected .fd-option-check{
-
-    opacity:1;
-
-    transform:scale(1);
-
-}
-
-
-
-/* ==========================================================================
-   06.13.09 RESPONSIVE
-========================================================================== */
-
-@media(max-width:768px){
-
-    .fd-option-group{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-
-
-
-/* ==========================================================================
-   06.14 FDFINANCIALSCALE™
-========================================================================== */
-
-
-/* ==========================================================================
-   06.14.01 CONTAINER
-========================================================================== */
-
-.fd-scale{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:2rem;
-
-    width:100%;
-
-}
-
-
-
-/* ==========================================================================
-   06.14.02 HEADER
-========================================================================== */
-
-.fd-scale-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-}
-
-
-
-/* ==========================================================================
-   06.14.03 VALUE BADGE
-========================================================================== */
-
-.fd-scale-value{
-
-    min-width:90px;
-
-    padding:.55rem 1rem;
-
-    border-radius:999px;
-
-    text-align:center;
-
-    background:rgba(31,199,201,.15);
-
-    border:1px solid rgba(31,199,201,.35);
-
-    color:var(--color-accent);
-
-    font-size:1.10rem;
-
-    font-weight:700;
-
-}
-
-
-
-/* ==========================================================================
-   06.14.04 SCALE
-========================================================================== */
-
-.fd-scale-track{
-
-    position:relative;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    height:72px;
-
-}
-
-
-
-/* ==========================================================================
-   06.14.05 LINE
-========================================================================== */
-
-.fd-scale-line{
-
-    position:absolute;
-
-    left:0;
-
-    right:0;
-
-    top:50%;
-
-    height:6px;
-
-    border-radius:999px;
-
-    transform:translateY(-50%);
-
-    background:
-
-        linear-gradient(
-            90deg,
-            #D9534F,
-            #F0AD4E,
-            #5CB85C
-        );
-
-}
-
-
-
-/* ==========================================================================
-   06.14.06 STEP
-========================================================================== */
-
-.fd-scale-step{
-
-    position:relative;
-
-    z-index:2;
-
-    width:46px;
-
-    height:46px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    background:#12376E;
-
-    border:2px solid rgba(255,255,255,.15);
-
-    color:var(--color-white);
-
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:
-        transform var(--duration-fast) var(--ease),
-        background var(--duration-fast) var(--ease),
-        border-color var(--duration-fast) var(--ease);
-
-}
-
-
-
-/* ==========================================================================
-   06.14.07 HOVER
-========================================================================== */
-
-.fd-scale-step:hover{
-
-    transform:scale(1.08);
-
-}
-
-
-
-/* ==========================================================================
-   06.14.08 ACTIVE
-========================================================================== */
-
-.fd-scale-step.is-active{
-
-    background:var(--color-accent);
-
-    border-color:var(--color-accent);
-
-    color:#071B3A;
-
-    transform:scale(1.15);
-
-}
-
-
-
-/* ==========================================================================
-   06.14.09 LABELS
-========================================================================== */
-
-.fd-scale-labels{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    gap:1rem;
-
-}
-
-
-
-.fd-scale-label{
-
-    flex:1;
-
-    text-align:center;
-
-}
-
-
-
-.fd-scale-label-ta{
-
-    font-family:var(--font-ta);
-
-    font-size:.88rem;
-
-    font-weight:600;
-
-    color:var(--color-soft);
-
-}
-
-
-
-.fd-scale-label-en{
-
-    margin-top:.15rem;
-
-    font-family:var(--font-en);
-
-    font-size:.72rem;
-
-    color:var(--color-muted);
-
-}
-
-
-
-/* ==========================================================================
-   06.14.10 RESPONSIVE
-========================================================================== */
-
-@media(max-width:768px){
-
-    .fd-scale-track{
-
-        height:64px;
-
-    }
-
-    .fd-scale-step{
-
-        width:38px;
-
-        height:38px;
-
-        font-size:.85rem;
-
-    }
-
-    .fd-scale-label-ta{
-
-        font-size:.74rem;
-
-    }
-
-    .fd-scale-label-en{
-
-        display:none;
-
-    }
-
-}
-
-/* ==========================================================================
-   06.15 FDDASHBOARDCARD™
-========================================================================== */
-
-
-/* ==========================================================================
-   06.15.01 GRID
-========================================================================== */
-
-.fd-dashboard{
-
-    width:100%;
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:1.5rem;
-
-}
-
-
-
-/* ==========================================================================
-   06.15.02 CARD
-========================================================================== */
-
-.fd-dashboard-card{
-
-    position:relative;
-
-    overflow:hidden;
-
-    padding:1.75rem;
-
-    border-radius:var(--radius-lg);
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255,255,255,.08),
-            rgba(255,255,255,.04)
-        );
-
-    border:1px solid rgba(255,255,255,.10);
-
-    backdrop-filter:blur(20px);
-
-    box-shadow:var(--shadow-soft);
-
-    transition:
-        transform var(--duration-normal) var(--ease),
-        box-shadow var(--duration-normal) var(--ease);
-
-}
-
-
-
-.fd-dashboard-card:hover{
-
-    transform:translateY(-4px);
-
-    box-shadow:var(--shadow-large);
-
-}
-
-
-
-/* ==========================================================================
-   06.15.03 TITLE
-========================================================================== */
-
-.fd-dashboard-title{
-
-    margin-bottom:.45rem;
-
-    font-family:var(--font-ta);
-
-    font-size:1rem;
-
-    font-weight:700;
-
-    color:var(--color-soft);
-
-}
-
-
-
-/* ==========================================================================
-   06.15.04 SUBTITLE
-========================================================================== */
-
-.fd-dashboard-subtitle{
-
-    margin-bottom:1rem;
-
-    font-family:var(--font-en);
-
-    font-size:.82rem;
-
-    color:var(--color-muted);
-
-}
-
-
-
-/* ==========================================================================
-   06.15.05 VALUE
-========================================================================== */
-
-.fd-dashboard-value{
-
-    font-family:var(--font-en);
-
-    font-size:2rem;
-
-    font-weight:800;
-
-    color:var(--color-white);
-
-    letter-spacing:-.02em;
-
-}
-
-
-
-/* ==========================================================================
-   06.15.06 POSITIVE
-========================================================================== */
-
-.fd-dashboard-card.is-positive{
-
-    border-color:#27C281;
-
-}
-
-
-
-/* ==========================================================================
-   06.15.07 WARNING
-========================================================================== */
-
-.fd-dashboard-card.is-warning{
-
-    border-color:#E8B54A;
-
-}
-
-
-
-/* ==========================================================================
-   06.15.08 NEGATIVE
-========================================================================== */
-
-.fd-dashboard-card.is-negative{
-
-    border-color:#E35B5B;
-
-}
-
-
-
-/* ==========================================================================
-   06.15.09 RESPONSIVE
-========================================================================== */
-
-@media(max-width:768px){
-
-    .fd-dashboard{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-
-
-
-/* ==========================================================================
-   06.16 FDGAUGE™
-========================================================================== */
-
-
-/* ==========================================================================
-   06.16.01 CONTAINER
-========================================================================== */
-
-.fd-gauge{
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    gap:1.5rem;
-
-}
-
-
-
-/* ==========================================================================
-   06.16.02 RING
-========================================================================== */
-
-.fd-gauge-ring{
-
-    position:relative;
-
-    width:220px;
-
-    height:220px;
-
-    border-radius:50%;
-
-    background:
-        conic-gradient(
-            var(--color-accent) 0deg,
-            var(--color-accent) 180deg,
-            rgba(255,255,255,.08) 180deg
-        );
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-
-
-
-/* ==========================================================================
-   06.16.03 INNER
-========================================================================== */
-
-.fd-gauge-inner{
-
-    width:170px;
-
-    height:170px;
-
-    border-radius:50%;
-
-    background:var(--color-background);
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    box-shadow:inset 0 0 30px rgba(0,0,0,.35);
-
-}
-
-
-
-/* ==========================================================================
-   06.16.04 VALUE
-========================================================================== */
-
-.fd-gauge-value{
-
-    font-size:2.8rem;
-
-    font-weight:800;
-
-    color:var(--color-white);
-
-}
-
-
-
-/* ==========================================================================
-   06.16.05 LABEL
-========================================================================== */
-
-.fd-gauge-label{
-
-    font-family:var(--font-en);
-
-    font-size:.85rem;
-
-    color:var(--color-muted);
-
-}
-
-
-
-/* ==========================================================================
-   06.16.06 STATUS
-========================================================================== */
-
-.fd-gauge-status{
-
-    font-family:var(--font-ta);
-
-    font-size:1rem;
-
-    font-weight:700;
-
-    color:var(--color-accent);
-
-}
-
-
-
-/* ==========================================================================
-   06.16.07 LEGEND
-========================================================================== */
-
-.fd-gauge-legend{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:1.25rem;
-
-    flex-wrap:wrap;
+    opacity:.65;
 
 }
 
+.is-hidden{
 
+    display:none !important;
 
-.fd-gauge-dot{
-
-    width:12px;
-
-    height:12px;
-
-    border-radius:50%;
-
-    display:inline-block;
-
-}
-
-
-
-.fd-gauge-dot.red{
-
-    background:#D9534F;
-
-}
-
-
-
-.fd-gauge-dot.amber{
-
-    background:#F0AD4E;
-
-}
-
-
-
-.fd-gauge-dot.green{
-
-    background:#5CB85C;
-
-}
-
-
-
-/* ==========================================================================
-   06.16.08 RESPONSIVE
-========================================================================== */
-
-@media(max-width:768px){
-
-    .fd-gauge-ring{
-
-        width:180px;
-
-        height:180px;
-
-    }
-
-    .fd-gauge-inner{
-
-        width:138px;
-
-        height:138px;
-
-    }
-
-    .fd-gauge-value{
-
-        font-size:2.1rem;
-
-    }
-
-}
-
-
-
-/* ==========================================================================
-   06.17 FDLOADING™
-========================================================================== */
-
-
-/* ==========================================================================
-   06.17.01 CONTAINER
-========================================================================== */
-
-.fd-loading{
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:2rem;
-
-    padding:4rem 2rem;
-
-}
-
-
-
-/* ==========================================================================
-   06.17.02 SPINNER
-========================================================================== */
-
-.fd-loading-spinner{
-
-    width:72px;
-
-    height:72px;
-
-    border-radius:50%;
-
-    border:6px solid rgba(255,255,255,.10);
-
-    border-top-color:var(--color-accent);
-
-    animation:fdSpinner 1s linear infinite;
-
-}
-
-
-
-/* ==========================================================================
-   06.17.03 TITLE
-========================================================================== */
-
-.fd-loading-title{
-
-    font-family:var(--font-ta);
-
-    font-size:1.6rem;
-
-    font-weight:700;
-
-    color:var(--color-white);
-
-    text-align:center;
-
-}
-
-
-
-/* ==========================================================================
-   06.17.04 SUBTITLE
-========================================================================== */
-
-.fd-loading-subtitle{
-
-    max-width:520px;
-
-    font-family:var(--font-en);
-
-    font-size:1rem;
-
-    line-height:1.7;
-
-    text-align:center;
-
-    color:var(--color-soft);
-
-}
-
-
-
-/* ==========================================================================
-   06.17.05 DOTS
-========================================================================== */
-
-.fd-loading-dots{
-
-    display:flex;
-
-    gap:.6rem;
-
-}
-
-
-
-.fd-loading-dot{
-
-    width:10px;
-
-    height:10px;
-
-    border-radius:50%;
-
-    background:var(--color-accent);
-
-    animation:fdPulse 1.2s infinite ease-in-out;
-
-}
-
-
-
-.fd-loading-dot:nth-child(2){
-
-    animation-delay:.2s;
-
-}
-
-
-
-.fd-loading-dot:nth-child(3){
-
-    animation-delay:.4s;
-
-}
-
-
-
-/* ==========================================================================
-   06.17.06 SPINNER ANIMATION
-========================================================================== */
-
-@keyframes fdSpinner{
-
-    to{
-
-        transform:rotate(360deg);
-
-    }
-
 }
 
+.is-visible{
 
+    display:block;
 
-/* ==========================================================================
-   06.17.07 DOT ANIMATION
-========================================================================== */
-
-@keyframes fdPulse{
-
-    0%,
-    80%,
-    100%{
-
-        transform:scale(.6);
-
-        opacity:.4;
-
-    }
-
-    40%{
-
-        transform:scale(1);
-
-        opacity:1;
-
-    }
-
-}
-
-
-
-/* ==========================================================================
-   06.17.08 RESPONSIVE
-========================================================================== */
-
-@media(max-width:768px){
-
-    .fd-loading{
-
-        padding:3rem 1rem;
-
-    }
-
-    .fd-loading-title{
-
-        font-size:1.3rem;
-
-    }
-
-    .fd-loading-subtitle{
-
-        font-size:.95rem;
-
-    }
-
-}
-
-
-
-/* ==========================================================================
-   07. MOTION ENGINE
-========================================================================== */
-
-
-/* ==========================================================================
-   07.01 FADE
-========================================================================== */
-
-.fade{
-
-    opacity:0;
-
-    transition:
-
-        opacity
-
-        var(--duration-normal)
-
-        var(--ease);
-
-}
-
-
-.fade.visible{
-
-    opacity:1;
-
-}
-
-
-
-/* ==========================================================================
-   07.02 FADE UP
-========================================================================== */
-
-.fade-up{
-
-    opacity:0;
-
-    transform:translateY(32px);
-
-    transition:
-
-        opacity var(--duration-slow) var(--ease),
-
-        transform var(--duration-slow) var(--ease);
-
-}
-
-
-.fade-up.visible{
-
-    opacity:1;
-
-    transform:translateY(0);
-
-}
-
-
-
-/* ==========================================================================
-   07.03 FADE DOWN
-========================================================================== */
-
-.fade-down{
-
-    opacity:0;
-
-    transform:translateY(-32px);
-
-    transition:
-
-        opacity var(--duration-slow) var(--ease),
-
-        transform var(--duration-slow) var(--ease);
-
-}
-
-
-.fade-down.visible{
-
-    opacity:1;
-
-    transform:translateY(0);
-
-}
-
-
-
-/* ==========================================================================
-   07.04 FADE SCALE
-========================================================================== */
-
-.fade-scale{
-
-    opacity:0;
-
-    transform:scale(.96);
-
-    transition:
-
-        opacity var(--duration-slow) var(--ease),
-
-        transform var(--duration-slow) var(--ease);
-
-}
-
-
-.fade-scale.visible{
-
-    opacity:1;
-
-    transform:scale(1);
-
-}
-
-
-
-/* ==========================================================================
-   07.05 STAGGER DELAYS
-========================================================================== */
-
-.delay-1{
-
-    transition-delay:.25s;
-
-}
-
-
-.delay-2{
-
-    transition-delay:.50s;
-
 }
-
-
-.delay-3{
 
-    transition-delay:.75s;
 
-}
 
+/*======================================================================
+    TRANSITIONS
+======================================================================*/
 
-.delay-4{
+.fade-in{
 
-    transition-delay:1s;
+    animation:fadeIn var(--transition-normal);
 
 }
-
 
-.delay-5{
+.fade-out{
 
-    transition-delay:1.25s;
+    animation:fadeOut var(--transition-normal);
 
 }
-
-
 
-/* ==========================================================================
-   07.06 BACKGROUND ZOOM
-========================================================================== */
+.slide-up{
 
-@keyframes backgroundZoom{
+    animation:slideUp var(--transition-normal);
 
-    from{
-
-        transform:scale(1);
-
-    }
-
-    to{
-
-        transform:scale(1.08);
-
-    }
-
 }
-
-
-
-/* ==========================================================================
-   07.07 GENTLE FLOAT
-========================================================================== */
-
-@keyframes float{
-
-    0%{
-
-        transform:translateY(0);
-
-    }
-
-    50%{
-
-        transform:translateY(-8px);
-
-    }
-
-    100%{
 
-        transform:translateY(0);
+.slide-down{
 
-    }
+    animation:slideDown var(--transition-normal);
 
 }
 
 
 
-/* ==========================================================================
-   07.08 FADE IN
-========================================================================== */
+/*======================================================================
+    KEYFRAMES
+======================================================================*/
 
 @keyframes fadeIn{
 
@@ -3087,124 +2227,93 @@ body{
 
 }
 
+@keyframes fadeOut{
 
+    from{
 
-/* ==========================================================================
-   07.09 ACCESSIBILITY
-========================================================================== */
+        opacity:1;
 
-@media (prefers-reduced-motion:reduce){
+    }
 
-    *{
+    to{
 
-        animation:none !important;
-
-        transition:none !important;
+        opacity:0;
 
     }
 
 }
 
-/* ==========================================================================
-   08. RESPONSIVE SYSTEM
-========================================================================== */
+@keyframes slideUp{
 
+    from{
 
-/* ==========================================================================
-   08.01 LARGE DESKTOP
-========================================================================== */
+        opacity:0;
 
-@media (min-width:1600px){
+        transform:translateY(24px);
 
-    .container{
+    }
 
-        max-width:1400px;
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
 
     }
 
 }
 
+@keyframes slideDown{
 
+    from{
 
-/* ==========================================================================
-   08.02 DESKTOP
-========================================================================== */
+        opacity:0;
 
-@media (max-width:1200px){
+        transform:translateY(-24px);
 
-    .container{
+    }
 
-        width:94%;
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
 
     }
 
 }
 
+@keyframes sceneFade{
 
+    from{
 
-/* ==========================================================================
-   08.03 TABLET
-========================================================================== */
+        opacity:0;
 
-@media (max-width:992px){
-
-    html{
-
-        font-size:15px;
+        transform:translateY(18px);
 
     }
 
-    .container{
+    to{
 
-        width:94%;
+        opacity:1;
 
-    }
-
-    .component-button{
-
-        min-width:280px;
+        transform:translateY(0);
 
     }
 
 }
 
+@keyframes ctm-spin{
 
+    from{
 
-/* ==========================================================================
-   08.04 MOBILE
-========================================================================== */
-
-@media (max-width:768px){
-
-    html{
-
-        font-size:15px;
+        transform:rotate(0deg);
 
     }
 
-    .container{
+    to{
 
-        width:92%;
-
-    }
-
-    .component-button{
-
-        width:100%;
-
-        min-width:unset;
-
-        padding:
-
-            1rem
-
-            1.5rem;
-
-    }
-
-    .component-logo{
-
-        width:60px;
+        transform:rotate(360deg);
 
     }
 
@@ -3212,220 +2321,9 @@ body{
 
 
 
-/* ==========================================================================
-   08.05 SMALL MOBILE
-========================================================================== */
-
-@media (max-width:480px){
-
-    html{
-
-        font-size:14px;
-
-    }
-
-    .container{
-
-        width:90%;
-
-    }
-
-    .component-button-ta{
-
-        font-size:1rem;
-
-    }
-
-    .component-button-en{
-
-        font-size:.82rem;
-
-    }
-
-    .component-logo{
-
-        width:52px;
-
-    }
-
-}
-
-/* ==========================================================================
-   09. UTILITY CLASSES
-========================================================================== */
-
-
-/* ==========================================================================
-   09.01 SPACING
-========================================================================== */
-
-.mt-1{margin-top:var(--space-1);}
-.mt-2{margin-top:var(--space-2);}
-.mt-3{margin-top:var(--space-3);}
-.mt-4{margin-top:var(--space-4);}
-.mt-5{margin-top:var(--space-5);}
-.mt-6{margin-top:var(--space-6);}
-.mt-7{margin-top:var(--space-7);}
-.mt-8{margin-top:var(--space-8);}
-
-.mb-1{margin-bottom:var(--space-1);}
-.mb-2{margin-bottom:var(--space-2);}
-.mb-3{margin-bottom:var(--space-3);}
-.mb-4{margin-bottom:var(--space-4);}
-.mb-5{margin-bottom:var(--space-5);}
-.mb-6{margin-bottom:var(--space-6);}
-.mb-7{margin-bottom:var(--space-7);}
-.mb-8{margin-bottom:var(--space-8);}
-
-
-
-/* ==========================================================================
-   09.02 DIMENSIONS
-========================================================================== */
-
-.w-100{
-
-    width:100%;
-
-}
-
-
-.h-100{
-
-    height:100%;
-
-}
-
-
-
-/* ==========================================================================
-   09.03 FLEX HELPERS
-========================================================================== */
-
-.justify-start{
-
-    justify-content:flex-start;
-
-}
-
-
-.justify-center{
-
-    justify-content:center;
-
-}
-
-
-.justify-end{
-
-    justify-content:flex-end;
-
-}
-
-
-.justify-between{
-
-    justify-content:space-between;
-
-}
-
-
-.align-start{
-
-    align-items:flex-start;
-
-}
-
-
-.align-center{
-
-    align-items:center;
-
-}
-
-
-.align-end{
-
-    align-items:flex-end;
-
-}
-
-
-
-/* ==========================================================================
-   09.04 POSITION
-========================================================================== */
-
-.relative{
-
-    position:relative;
-
-}
-
-
-.absolute{
-
-    position:absolute;
-
-}
-
-
-.fixed{
-
-    position:fixed;
-
-}
-
-
-
-/* ==========================================================================
-   09.05 OVERFLOW
-========================================================================== */
-
-.overflow-hidden{
-
-    overflow:hidden;
-
-}
-
-
-.overflow-auto{
-
-    overflow:auto;
-
-}
-
-
-
-/* ==========================================================================
-   09.06 CURSOR
-========================================================================== */
-
-.pointer{
-
-    cursor:pointer;
-
-}
-
-
-
-/* ==========================================================================
-   09.07 USER SELECTION
-========================================================================== */
-
-.no-select{
-
-    user-select:none;
-
-    -webkit-user-select:none;
-
-}
-
-
-
-/* ==========================================================================
-   09.08 VISIBILITY
-========================================================================== */
+/*======================================================================
+    STATE HELPERS
+======================================================================*/
 
 .opacity-0{
 
@@ -3433,1220 +2331,434 @@ body{
 
 }
 
-
 .opacity-100{
 
     opacity:1;
 
 }
 
+.pointer-none{
 
-
-/* ==========================================================================
-   09.09 TRANSITIONS
-========================================================================== */
-
-.transition{
-
-    transition:
-
-        all
-
-        var(--duration-normal)
-
-        var(--ease);
+    pointer-events:none;
 
 }
 
+.pointer-auto{
 
-/* ==========================================================================
-   10. SCENE 01
-   THE QUESTION™
-========================================================================== */
-
-
-/* ==========================================================================
-   10.01 SCENE LAYOUT
-========================================================================== */
-
-#scene01{
-
-    display:block;
-
-    position:relative;
-
-    width:100%;
-
-    height:100vh;
-
-    overflow:hidden;
+    pointer-events:auto;
 
 }
 
+.shadow-none{
 
-
-/* ==========================================================================
-   10.02 BRAND LOGO
-========================================================================== */
-
-.scene01-logo{
-
-    position:absolute;
-
-    top:34px;
-
-    left:34px;
-
-    z-index:100;
+    box-shadow:none !important;
 
 }
 
+.shadow-sm{
 
-
-.scene01-logo-image{
-
-    width:170px;
-
-    height:auto;
-
-    display:block;
-
-    filter:
-
-        drop-shadow(
-
-            0 12px 30px rgba(
-
-                0,
-
-                0,
-
-                0,
-
-                .30
-
-            )
-
-        );
+    box-shadow:var(--shadow-sm);
 
 }
 
+.shadow-md{
 
-
-/* ==========================================================================
-   10.03 HERO CONTENT
-========================================================================== */
-
-.scene01-hero{
-
-    position:relative;
-
-    z-index:20;
-
-    min-height:100vh;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:flex-start;
-
-    align-items:center;
-
-    text-align:center;
-
-    width:100%;
-
-    max-width:1200px;
-
-    margin-inline:auto;
-
-    padding-top:9vh;
-
-    padding-bottom:10rem;
-
-    padding-inline:2rem;
-
-    gap:1.35rem;
+    box-shadow:var(--shadow-md);
 
 }
 
-/* ==========================================================================
-   10.04 TAMIL TITLE
-========================================================================== */
+.shadow-lg{
 
-.scene01-title-ta{
-
-    margin:0;
-
-    max-width:1080px;
-
-    font-family:var(
-
-        --font-ta
-
-    );
-
-    font-size:clamp(
-
-        3.4rem,
-
-        4.6vw,
-
-        4.8rem
-
-    );
-
-    font-weight:700;
-
-    line-height:1.20;
-
-    letter-spacing:-0.02em;
-
-    color:var(
-
-        --color-white
-
-    );
-
-    text-wrap:balance;
-
-    text-shadow:
-
-        0 10px 28px rgba(
-
-            0,
-            0,
-            0,
-            .42
-
-        );
+    box-shadow:var(--shadow-lg);
 
 }
 
+/*======================================================================
+    RESPONSIVE DESIGN
+======================================================================*/
 
+/*----------------------------------------------------------------------
+    Large Desktop
+----------------------------------------------------------------------*/
 
-/* ==========================================================================
-   10.05 ENGLISH TITLE
-========================================================================== */
+@media (min-width:1600px){
 
-.scene01-title-en{
+    .container{
 
-    margin:0;
-
-    max-width:720px;
-
-    font-family:var(
-
-        --font-en
-
-    );
-
-    font-size:clamp(
-
-        1.20rem,
-
-        1.55vw,
-
-        1.65rem
-
-    );
-
-    font-weight:500;
-
-    line-height:1.55;
-
-    letter-spacing:.02em;
-
-    color:rgba(
-
-        255,
-        255,
-        255,
-        .82
-
-    );
-
-    text-wrap:balance;
-
-}
-
-
-
-/* ==========================================================================
-   10.06 BACKGROUND
-========================================================================== */
-
-#scene01
-
-.scene-background{
-
-    position:absolute;
-
-    inset:0;
-
-    overflow:hidden;
-
-    z-index:1;
-
-}
-
-
-
-#scene01
-
-.scene-background img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-    object-position:center;
-
-    transform:scale(1);
-
-    animation:
-
-        backgroundZoom
-
-        24s
-
-        ease-in-out
-
-        infinite
-
-        alternate;
-
-}
-
-
-
-#scene01
-
-.scene-overlay{
-
-    position:absolute;
-
-    inset:0;
-
-    z-index:2;
-
-    background:
-
-        linear-gradient(
-
-            rgba(
-
-                7,
-                27,
-                58,
-                .76
-
-            ),
-
-            rgba(
-
-                7,
-                27,
-                58,
-                .82
-
-            )
-
-        );
-
-}
-
-/* ==========================================================================
-   10.07 CALL TO ACTION
-========================================================================== */
-
-.scene01-cta{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    margin-top:1rem;
-
-}
-
-
-
-/* ==========================================================================
-   10.08 CTA BUTTON
-========================================================================== */
-
-.scene01-button{
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:.40rem;
-
-    width:440px;
-
-    height:82px;
-
-    border:none;
-
-    border-radius:999px;
-
-    cursor:pointer;
-
-    background:
-
-        linear-gradient(
-
-            180deg,
-
-            #F5E08A 0%,
-
-            #D6B34F 100%
-
-        );
-
-    color:#082247;
-
-    box-shadow:
-
-        0 14px 40px rgba(
-
-            214,
-
-            179,
-
-            79,
-
-            .32
-
-        );
-
-    transition:
-
-        transform .30s ease,
-
-        box-shadow .30s ease,
-
-        filter .30s ease;
-
-}
-
-
-
-.scene01-button:hover{
-
-    transform:
-
-        translateY(-3px);
-
-    filter:brightness(
-
-        1.03
-
-    );
-
-    box-shadow:
-
-        0 18px 50px rgba(
-
-            214,
-
-            179,
-
-            79,
-
-            .42
-
-        );
-
-}
-
-
-
-.scene01-button:active{
-
-    transform:
-
-        translateY(-1px);
-
-}
-
-
-
-.scene01-button-ta{
-
-    font-family:var(--font-ta);
-
-    font-size:1.05rem;
-
-    font-weight:700;
-
-    line-height:1.35;
-
-    color:#082247;
-
-}
-
-
-
-.scene01-button-en{
-
-    font-family:var(--font-en);
-
-    font-size:.92rem;
-
-    font-weight:600;
-
-    color:#12376E;
-
-}
-
-
-
-/* ==========================================================================
-   10.09 DESKTOP
-========================================================================== */
-
-@media (min-width:1200px){
-
-    .scene01-logo{
-
-        top:32px;
-
-        left:32px;
-
-    }
-
-    .scene01-logo-image{
-
-        width:150px;
-
-    }
-
-    .scene01-hero{
-
-        padding-top:8vh;
-
-        padding-bottom:4rem;
-
-        gap:1.2rem;
-
-    }
-
-    .scene01-title-ta{
-
-        max-width:1040px;
-
-    }
-
-    .scene01-title-en{
-
-        max-width:700px;
-
-    }
-
-    .scene01-cta{
-
-        margin-top:1.2rem;
+        max-width:1440px;
 
     }
 
 }
 
-/* ==========================================================================
-   10.10 TABLET
-========================================================================== */
+
+/*----------------------------------------------------------------------
+    Desktop
+----------------------------------------------------------------------*/
+
+@media (max-width:1200px){
+
+    :root{
+
+        --container-width:1140px;
+
+    }
+
+}
+
+
+/*----------------------------------------------------------------------
+    Tablet
+----------------------------------------------------------------------*/
 
 @media (max-width:992px){
 
-    .scene01-logo{
+    :root{
 
-        top:24px;
+        --header-height:68px;
 
-        left:24px;
+        --font-size-display:3rem;
 
-    }
+        --font-size-hero:2.6rem;
 
-    .scene01-logo-image{
+        --font-size-title:2rem;
 
-        width:130px;
-
-    }
-
-    .scene01-hero{
-
-        padding-top:14vh;
-
-        padding-bottom:6rem;
-
-        gap:1.6rem;
+        --font-size-punch:1.6rem;
 
     }
 
-    .scene01-title-ta{
+    .container{
 
-        font-size:clamp(
-
-            2.8rem,
-
-            5vw,
-
-            3.8rem
-
-        );
-
-        line-height:1.24;
+        width:min(100% - 2.5rem,var(--container-width));
 
     }
 
-    .scene01-title-en{
+    .scene-root{
 
-        font-size:1.22rem;
-
-        line-height:1.60;
+        width:min(100% - 2.5rem,100%);
 
     }
 
-    .scene01-button{
+    .reading-width,
 
-        width:380px;
+    .content-width{
 
-        height:80px;
+        max-width:100%;
+
+    }
+
+    .option-grid{
+
+        grid-template-columns:1fr;
 
     }
 
 }
 
 
-
-/* ==========================================================================
-   10.11 MOBILE
-========================================================================== */
+/*----------------------------------------------------------------------
+    Mobile
+----------------------------------------------------------------------*/
 
 @media (max-width:768px){
 
-    .scene01-logo{
+    :root{
 
-        top:18px;
+        --header-height:64px;
 
-        left:18px;
+        --font-size-display:2.4rem;
 
-    }
+        --font-size-hero:2.1rem;
 
-    .scene01-logo-image{
+        --font-size-title:1.8rem;
 
-        width:100px;
+        --font-size-punch:1.45rem;
 
-    }
+        --font-size-heading:1.3rem;
 
-    .scene01-hero{
-
-        justify-content:flex-start;
-
-        min-height:100svh;
-
-        padding:
-
-            20vh
-
-            1.25rem
-
-            4rem;
-
-        gap:1.45rem;
+        --font-size-body:1rem;
 
     }
 
-    .scene01-title-ta{
+    .container{
 
-        font-size:2.30rem;
-
-        line-height:1.30;
+        width:min(100% - 2rem,100%);
 
     }
 
-    .scene01-title-en{
+    .header-container{
 
-        max-width:95%;
-
-        font-size:1.10rem;
-
-        line-height:1.55;
+        width:min(100% - 2rem,100%);
 
     }
 
-    .scene01-cta{
+    .journey-progress{
 
-        margin-top:1rem;
+        width:min(100% - 2rem,100%);
 
     }
 
-    .scene01-button{
+    .scene-root{
+
+        width:min(100% - 2rem,100%);
+
+    }
+
+    .card,
+
+    .content-panel,
+
+    .question-card,
+
+    .reflection-card,
+
+    .ai-card{
+
+        padding:var(--space-4);
+
+    }
+
+    .button-group{
 
         width:100%;
 
-        max-width:320px;
+    }
 
-        height:76px;
+    .primary-button,
+
+    .secondary-button{
+
+        width:100%;
+
+        min-width:unset;
+
+    }
+
+    .toast-container{
+
+        left:1rem;
+
+        right:1rem;
+
+        top:80px;
+
+    }
+
+    .toast{
+
+        min-width:unset;
+
+        width:100%;
 
     }
 
 }
 
 
-
-/* ==========================================================================
-   10.12 SMALL MOBILE
-========================================================================== */
+/*----------------------------------------------------------------------
+    Small Mobile
+----------------------------------------------------------------------*/
 
 @media (max-width:480px){
 
-    .scene01-logo-image{
+    :root{
 
-        width:85px;
+        --space-4:1.5rem;
 
-    }
+        --space-5:2rem;
 
-    .scene01-hero{
-
-        padding:
-
-            18vh
-
-            1rem
-
-            3rem;
+        --space-6:3rem;
 
     }
 
-    .scene01-title-ta{
+    .brand-logo{
 
-        font-size:2rem;
-
-    }
-
-    .scene01-title-en{
-
-        font-size:1rem;
+        height:42px;
 
     }
 
-    .scene01-button{
+    .icon-button{
 
-        max-width:300px;
+        min-width:42px;
 
-        height:72px;
+        height:42px;
+
+        padding-inline:.8rem;
+
+    }
+
+    .thinking-card,
+
+    .loading-card,
+
+    .modal{
+
+        padding:var(--space-4);
 
     }
 
 }
 
 
-/* ==========================================================================
-   11. SCENE 02
-   THE REALITY™
-========================================================================== */
 
+/*======================================================================
+    ACCESSIBILITY
+======================================================================*/
 
-/* ==========================================================================
-   11.01 SCENE LAYOUT
-========================================================================== */
+:focus-visible{
 
-#scene02{
+    outline:2px solid var(--color-primary);
 
-    display:block;
-
-    position:relative;
-
-    width:100%;
-
-    height:100vh;
-
-    overflow:hidden;
+    outline-offset:3px;
 
 }
 
+::selection{
 
+    background:rgba(0,199,183,.35);
 
-/* ==========================================================================
-   11.02 BRAND LOGO
-========================================================================== */
-
-.scene02-logo{
-
-    position:absolute;
-
-    top:34px;
-
-    left:34px;
-
-    z-index:100;
+    color:#ffffff;
 
 }
 
+html{
 
+    scrollbar-color:
 
-.scene02-logo-image{
+        var(--color-primary)
 
-    width:170px;
-
-    height:auto;
-
-    display:block;
-
-    filter:
-
-        drop-shadow(
-
-            0 12px 30px rgba(
-
-                0,
-
-                0,
-
-                0,
-
-                .30
-
-            )
-
-        );
+        var(--color-background);
 
 }
 
+::-webkit-scrollbar{
 
-
-/* ==========================================================================
-   11.03 HERO CONTENT
-========================================================================== */
-
-.scene02-hero{
-
-    position:relative;
-
-    z-index:20;
-
-    min-height:100vh;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:flex-start;
-
-    align-items:center;
-
-    text-align:center;
-
-    width:100%;
-
-    max-width:1200px;
-
-    margin-inline:auto;
-
-    padding-top:9vh;
-
-    padding-bottom:10rem;
-
-    padding-inline:2rem;
-
-    gap:1.5rem;
+    width:10px;
 
 }
 
-/* ==========================================================================
-   11.04 TAMIL TITLE
-========================================================================== */
+::-webkit-scrollbar-track{
 
-.scene02-title-ta{
-
-    margin:0;
-
-    max-width:1080px;
-
-    font-family:var(
-
-        --font-ta
-
-    );
-
-    font-size:clamp(
-
-        3.4rem,
-
-        4.6vw,
-
-        4.8rem
-
-    );
-
-    font-weight:700;
-
-    line-height:1.22;
-
-    letter-spacing:-0.02em;
-
-    color:var(
-
-        --color-white
-
-    );
-
-    text-wrap:balance;
-
-    text-shadow:
-
-        0 10px 28px rgba(
-
-            0,
-
-            0,
-
-            0,
-
-            .42
-
-        );
+    background:var(--color-background);
 
 }
 
+::-webkit-scrollbar-thumb{
 
-
-/* ==========================================================================
-   11.05 ENGLISH TITLE
-========================================================================== */
-
-.scene02-title-en{
-
-    margin:0;
-
-    max-width:720px;
-
-    font-family:var(
-
-        --font-en
-
-    );
-
-    font-size:clamp(
-
-        1.20rem,
-
-        1.55vw,
-
-        1.65rem
-
-    );
-
-    font-weight:500;
-
-    line-height:1.60;
-
-    letter-spacing:.02em;
-
-    color:rgba(
-
-        255,
-
-        255,
-
-        255,
-
-        .82
-
-    );
-
-    text-wrap:balance;
-
-}
-
-
-
-/* ==========================================================================
-   11.06 SUPPORTING MESSAGE
-========================================================================== */
-
-.scene02-message{
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    gap:1.25rem;
-
-    margin-top:1.25rem;
-
-    max-width:760px;
-
-}
-
-
-
-.scene02-message-ta{
-
-    margin:0;
-
-    font-family:var(
-
-        --font-ta
-
-    );
-
-    font-size:1.55rem;
-
-    font-weight:600;
-
-    line-height:1.60;
-
-    color:var(
-
-        --color-soft
-
-    );
-
-}
-
-
-
-.scene02-message-en{
-
-    margin:0;
-
-    font-family:var(
-
-        --font-en
-
-    );
-
-    font-size:1.12rem;
-
-    font-weight:400;
-
-    line-height:1.75;
-
-    color:rgba(
-
-        255,
-
-        255,
-
-        255,
-
-        .74
-
-    );
-
-}
-
-/* ==========================================================================
-   11.07 BACKGROUND & OVERLAY
-========================================================================== */
-
-#scene02
-.scene-background{
-
-    position:absolute;
-
-    inset:0;
-
-    overflow:hidden;
-
-    z-index:1;
-
-}
-
-
-
-#scene02
-.scene-background img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-    object-position:center;
-
-    transform:scale(1);
-
-    animation:
-
-        backgroundZoom
-
-        24s
-
-        ease-in-out
-
-        infinite
-
-        alternate;
-
-}
-
-
-
-#scene02
-.scene-overlay{
-
-    position:absolute;
-
-    inset:0;
-
-    z-index:2;
-
-    background:
-
-        linear-gradient(
-
-            rgba(
-
-                7,
-                27,
-                58,
-                .76
-
-            ),
-
-            rgba(
-
-                7,
-                27,
-                58,
-                .82
-
-            )
-
-        );
-
-}
-
-
-
-/* ==========================================================================
-   11.08 CALL TO ACTION
-========================================================================== */
-
-.scene02-cta{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    margin-top:2.25rem;
-
-}
-
-
-
-.scene02-button{
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:.45rem;
-
-    width:440px;
-
-    height:82px;
-
-    border:none;
+    background:rgba(255,255,255,.18);
 
     border-radius:999px;
 
-    cursor:pointer;
+}
 
-    background:
+::-webkit-scrollbar-thumb:hover{
 
-        linear-gradient(
-
-            180deg,
-
-            #F5E08A 0%,
-
-            #D6B34F 100%
-
-        );
-
-    color:#082247;
-
-    box-shadow:
-
-        0 16px 42px rgba(
-
-            214,
-            179,
-            79,
-            .35
-
-        );
-
-    transition:
-
-        all .35s ease;
+    background:rgba(255,255,255,.32);
 
 }
 
 
 
-.scene02-button:hover{
+/*======================================================================
+    REDUCED MOTION
+======================================================================*/
 
-    transform:
+@media (prefers-reduced-motion:reduce){
 
-        translateY(-3px);
+    *,
 
-    filter:brightness(
+    *::before,
 
-        1.03
+    *::after{
 
-    );
+        animation:none !important;
 
-}
+        transition:none !important;
 
+        scroll-behavior:auto !important;
 
-
-.scene02-button-ta{
-
-    font-family:var(--font-ta);
-
-    font-size:1.05rem;
-
-    font-weight:700;
-
-    color:#082247;
+    }
 
 }
 
 
 
-.scene02-button-en{
+/*======================================================================
+    HIGH CONTRAST
+======================================================================*/
 
-    font-family:var(--font-en);
+@media (prefers-contrast:more){
 
-    font-size:.92rem;
+    :root{
 
-    font-weight:600;
+        --color-border:rgba(255,255,255,.35);
 
-    color:#12376E;
+    }
+
+    .card,
+
+    .content-panel,
+
+    .question-card,
+
+    .reflection-card,
+
+    .ai-card{
+
+        border-width:2px;
+
+    }
 
 }
+
+
+
+/*======================================================================
+    PRINT
+======================================================================*/
+
+@media print{
+
+    body{
+
+        background:#ffffff;
+
+        color:#000000;
+
+    }
+
+    .app-header,
+
+    .journey-progress,
+
+    .button-group,
+
+    .loading-overlay,
+
+    .thinking-overlay,
+
+    .toast-container,
+
+    .modal-container{
+
+        display:none !important;
+
+    }
+
+    .scene-root{
+
+        width:100%;
+
+        padding:0;
+
+    }
+
+}
+
+
+
+/*======================================================================
+    END OF STYLESHEET
+======================================================================*/
+
 
