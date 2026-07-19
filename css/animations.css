@@ -1,1 +1,346 @@
 
+/*!
+==========================================================
+CTM PATH™ Guided Journey
+File        : css/animations.css
+Version     : 1.0.0
+Purpose     : Motion System
+Status      : Production
+==========================================================
+*/
+
+/* ======================================================
+   GLOBAL TRANSITIONS
+====================================================== */
+
+.transition {
+
+    transition:
+        all var(--duration-normal)
+        var(--ease-smooth);
+
+}
+
+/* ======================================================
+   FADE IN
+====================================================== */
+
+.fade-in {
+
+    animation:
+        fadeIn
+        var(--duration-slow)
+        var(--ease-smooth)
+        forwards;
+
+}
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+
+    }
+
+    to {
+
+        opacity: 1;
+
+    }
+
+}
+
+/* ======================================================
+   FADE UP
+====================================================== */
+
+.fade-up {
+
+    animation:
+        fadeUp
+        var(--duration-slow)
+        var(--ease-smooth)
+        forwards;
+
+}
+
+@keyframes fadeUp {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(24px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+/* ======================================================
+   FADE DOWN
+====================================================== */
+
+.fade-down {
+
+    animation:
+        fadeDown
+        var(--duration-slow)
+        var(--ease-smooth)
+        forwards;
+
+}
+
+@keyframes fadeDown {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(-24px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+/* ======================================================
+   SCALE IN
+====================================================== */
+
+.scale-in {
+
+    animation:
+        scaleIn
+        var(--duration-normal)
+        var(--ease-smooth)
+        forwards;
+
+}
+
+@keyframes scaleIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: scale(.96);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: scale(1);
+
+    }
+
+}
+
+/* ======================================================
+   SLIDE LEFT
+====================================================== */
+
+.slide-left {
+
+    animation:
+        slideLeft
+        var(--duration-normal)
+        var(--ease-smooth)
+        forwards;
+
+}
+
+@keyframes slideLeft {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateX(48px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateX(0);
+
+    }
+
+}
+
+/* ======================================================
+   SLIDE RIGHT
+====================================================== */
+
+.slide-right {
+
+    animation:
+        slideRight
+        var(--duration-normal)
+        var(--ease-smooth)
+        forwards;
+
+}
+
+@keyframes slideRight {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateX(-48px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateX(0);
+
+    }
+
+}
+
+/* ======================================================
+   PULSE
+====================================================== */
+
+.pulse {
+
+    animation:
+        pulse
+        2s
+        infinite;
+
+}
+
+@keyframes pulse {
+
+    0% {
+
+        transform: scale(1);
+
+    }
+
+    50% {
+
+        transform: scale(1.03);
+
+    }
+
+    100% {
+
+        transform: scale(1);
+
+    }
+
+}
+
+/* ======================================================
+   FLOAT
+====================================================== */
+
+.float {
+
+    animation:
+        floating
+        5s
+        ease-in-out
+        infinite;
+
+}
+
+@keyframes floating {
+
+    0% {
+
+        transform: translateY(0);
+
+    }
+
+    50% {
+
+        transform: translateY(-8px);
+
+    }
+
+    100% {
+
+        transform: translateY(0);
+
+    }
+
+}
+
+/* ======================================================
+   SPINNER
+====================================================== */
+
+.spinner {
+
+    animation:
+        spin
+        1s
+        linear
+        infinite;
+
+}
+
+@keyframes spin {
+
+    from {
+
+        transform: rotate(0deg);
+
+    }
+
+    to {
+
+        transform: rotate(360deg);
+
+    }
+
+}
+
+/* ======================================================
+   REDUCED MOTION
+====================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation: none !important;
+
+        transition: none !important;
+
+    }
+
+}
+
+/* ======================================================
+   END
+======================================================
+*/
