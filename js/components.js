@@ -4,8 +4,7 @@
  * CTM PATH™ Guided Journey
  * Component Engine
  * File        : js/components.js
- * Version     : 1.0.0
- * Batch       : 1 of 5
+ * Version     : 2.0.0
  * Status      : Production
  * ============================================================
  */
@@ -14,20 +13,29 @@
 
     "use strict";
 
-    if (!window.CTM) {
-        throw new Error("CTM namespace not initialized.");
+    if (
+
+        !window.CTM ||
+
+        !window.CTM.config ||
+
+        !window.CTM.services
+
+    ) {
+
+        throw new Error(
+
+            "CTM services not initialized."
+
+        );
+
     }
 
-    const {
-
-        DOM,
-        Classes
-
-    } = window.CTM.services;
+    const { DOM } = window.CTM.services;
 
     /**
      * ============================================================
-     * Progress Bar Component
+     * Progress Bar
      * ============================================================
      */
 
@@ -45,9 +53,13 @@
 
         },
 
-        update(percent) {
+        update(percent = 0) {
 
-            if (!this.element) return;
+            if (!this.element) {
+
+                return;
+
+            }
 
             percent = Math.max(
 
@@ -57,7 +69,9 @@
 
             );
 
-            this.element.style.width = `${percent}%`;
+            this.element.style.width =
+
+                `${percent}%`;
 
         }
 
@@ -65,7 +79,7 @@
 
     /**
      * ============================================================
-     * Progress Text Component
+     * Progress Text
      * ============================================================
      */
 
@@ -85,7 +99,11 @@
 
         update(current, total) {
 
-            if (!this.element) return;
+            if (!this.element) {
+
+                return;
+
+            }
 
             this.element.textContent =
 
@@ -105,6 +123,8 @@
 
         element: null,
 
+        message: null,
+
         initialize() {
 
             this.element = DOM.get(
@@ -113,11 +133,27 @@
 
             );
 
+            this.message = DOM.get(
+
+                "loadingMessage"
+
+            );
+
         },
 
-        show() {
+        show(text = "Loading...") {
 
-            if (!this.element) return;
+            if (!this.element) {
+
+                return;
+
+            }
+
+            if (this.message) {
+
+                this.message.textContent = text;
+
+            }
 
             this.element.hidden = false;
 
@@ -125,7 +161,11 @@
 
         hide() {
 
-            if (!this.element) return;
+            if (!this.element) {
+
+                return;
+
+            }
 
             this.element.hidden = true;
 
@@ -143,6 +183,8 @@
 
         element: null,
 
+        message: null,
+
         initialize() {
 
             this.element = DOM.get(
@@ -151,11 +193,27 @@
 
             );
 
+            this.message = DOM.get(
+
+                "thinkingMessage"
+
+            );
+
         },
 
-        show() {
+        show(text = "Thinking...") {
 
-            if (!this.element) return;
+            if (!this.element) {
+
+                return;
+
+            }
+
+            if (this.message) {
+
+                this.message.textContent = text;
+
+            }
 
             this.element.hidden = false;
 
@@ -163,7 +221,11 @@
 
         hide() {
 
-            if (!this.element) return;
+            if (!this.element) {
+
+                return;
+
+            }
 
             this.element.hidden = true;
 
@@ -173,51 +235,7 @@
 
     /**
      * ============================================================
-     * Component Manager
-     * ============================================================
-     */
-
-    const Components = {
-
-        initialize() {
-
-            ProgressBar.initialize();
-
-            ProgressText.initialize();
-
-            Loading.initialize();
-
-            Thinking.initialize();
-
-        }
-
-    };
-
-    /**
-     * ============================================================
-     * Register
-     * ============================================================
-     */
-
-    window.CTM.components = {
-
-        ProgressBar,
-
-        ProgressText,
-
-        Loading,
-
-        Thinking,
-
-        initialize: Components.initialize
-
-    };
-
-})();
-
-    /**
-     * ============================================================
-     * Toast Component
+     * Toast
      * ============================================================
      */
 
@@ -235,17 +253,35 @@
 
         },
 
-        show(message, type = "info") {
+        show(
 
-            if (!this.container) return;
+            message,
 
-            const toast = document.createElement("div");
+            type = "info"
 
-            toast.className = `toast toast-${type}`;
+        ) {
+
+            if (!this.container) {
+
+                return;
+
+            }
+
+            const toast =
+
+                document.createElement("div");
+
+            toast.className =
+
+                `toast toast-${type}`;
 
             toast.textContent = message;
 
-            this.container.appendChild(toast);
+            this.container.appendChild(
+
+                toast
+
+            );
 
             setTimeout(() => {
 
@@ -261,7 +297,7 @@
 
     /**
      * ============================================================
-     * Modal Component
+     * Modal
      * ============================================================
      */
 
@@ -281,11 +317,19 @@
 
         open(content) {
 
-            if (!this.container) return;
+            if (!this.container) {
+
+                return;
+
+            }
 
             this.container.innerHTML = "";
 
-            this.container.appendChild(content);
+            this.container.appendChild(
+
+                content
+
+            );
 
             this.container.hidden = false;
 
@@ -293,7 +337,11 @@
 
         close() {
 
-            if (!this.container) return;
+            if (!this.container) {
+
+                return;
+
+            }
 
             this.container.hidden = true;
 
@@ -305,7 +353,7 @@
 
     /**
      * ============================================================
-     * Error Banner Component
+     * Error Boundary
      * ============================================================
      */
 
@@ -323,11 +371,25 @@
 
         },
 
-        show(message) {
+        show(message = "An unexpected error occurred.") {
 
-            if (!this.element) return;
+            if (!this.element) {
 
-            this.element.textContent = message;
+                return;
+
+            }
+
+            const text = this.element.querySelector(
+
+                "p"
+
+            );
+
+            if (text) {
+
+                text.textContent = message;
+
+            }
 
             this.element.hidden = false;
 
@@ -335,11 +397,13 @@
 
         hide() {
 
-            if (!this.element) return;
+            if (!this.element) {
+
+                return;
+
+            }
 
             this.element.hidden = true;
-
-            this.element.textContent = "";
 
         }
 
@@ -355,7 +419,11 @@
 
         async show(message) {
 
-            return window.confirm(message);
+            return Promise.resolve(
+
+                window.confirm(message)
+
+            );
 
         }
 
@@ -363,7 +431,7 @@
 
     /**
      * ============================================================
-     * Radio Card Component
+     * Radio Cards
      * ============================================================
      */
 
@@ -371,15 +439,13 @@
 
         initialize(scope = document) {
 
-            const groups = DOM.queryAll(
+            DOM.queryAll(
 
                 ".radio-card",
 
                 scope
 
-            );
-
-            groups.forEach(card => {
+            ).forEach(card => {
 
                 const input = card.querySelector(
 
@@ -387,7 +453,11 @@
 
                 );
 
-                if (!input) return;
+                if (!input) {
+
+                    return;
+
+                }
 
                 input.addEventListener(
 
@@ -395,11 +465,9 @@
 
                     () => {
 
-                        const name = input.name;
-
                         DOM.queryAll(
 
-                            `input[name="${name}"]`,
+                            `input[name="${input.name}"]`,
 
                             scope
 
@@ -435,7 +503,7 @@
 
     /**
      * ============================================================
-     * Option Card Component
+     * Option Cards
      * ============================================================
      */
 
@@ -457,13 +525,19 @@
 
                     () => {
 
-                        const input = card.querySelector(
+                        const input =
 
-                            "input"
+                            card.querySelector(
 
-                        );
+                                "input"
 
-                        if (!input) return;
+                            );
+
+                        if (!input) {
+
+                            return;
+
+                        }
 
                         input.click();
 
@@ -479,7 +553,7 @@
 
     /**
      * ============================================================
-     * Question Component
+     * Questions
      * ============================================================
      */
 
@@ -529,17 +603,21 @@
 
         enable(button) {
 
-            if (!button) return;
+            if (button) {
 
-            button.disabled = false;
+                button.disabled = false;
+
+            }
 
         },
 
         disable(button) {
 
-            if (!button) return;
+            if (button) {
 
-            button.disabled = true;
+                button.disabled = true;
+
+            }
 
         }
 
@@ -547,7 +625,7 @@
 
     /**
      * ============================================================
-     * AI Card Component
+     * AI Cards
      * ============================================================
      */
 
@@ -555,17 +633,7 @@
 
         show(rule, scope = document) {
 
-            DOM.queryAll(
-
-                ".ai-card",
-
-                scope
-
-            ).forEach(card => {
-
-                card.hidden = true;
-
-            });
+            this.hideAll(scope);
 
             const card = DOM.query(
 
@@ -578,6 +646,8 @@
             if (card) {
 
                 card.hidden = false;
+
+                card.classList.add("active");
 
             }
 
@@ -595,6 +665,8 @@
 
                 card.hidden = true;
 
+                card.classList.remove("active");
+
             });
 
         }
@@ -603,7 +675,7 @@
 
     /**
      * ============================================================
-     * Reflection Card Component
+     * Reflection Cards
      * ============================================================
      */
 
@@ -629,7 +701,7 @@
 
     /**
      * ============================================================
-     * Summary Card Component
+     * Summary Cards
      * ============================================================
      */
 
@@ -655,7 +727,7 @@
 
     /**
      * ============================================================
-     * Framework Card Component
+     * Framework Cards
      * ============================================================
      */
 
@@ -681,7 +753,7 @@
 
     /**
      * ============================================================
-     * Roadmap Component
+     * Roadmap
      * ============================================================
      */
 
@@ -707,7 +779,7 @@
 
     /**
      * ============================================================
-     * Offer Card Component
+     * Offer Cards
      * ============================================================
      */
 
@@ -733,7 +805,7 @@
 
     /**
      * ============================================================
-     * Financial Wheel Component
+     * Financial Wheel
      * ============================================================
      */
 
@@ -753,7 +825,7 @@
 
         },
 
-        render(data = {}) {
+        render(values = {}) {
 
             if (!this.element) {
 
@@ -763,7 +835,9 @@
 
             this.element.dataset.rendered = "true";
 
-            this.element.dataset.values = JSON.stringify(data);
+            this.element.dataset.values =
+
+                JSON.stringify(values);
 
         },
 
@@ -775,9 +849,17 @@
 
             }
 
-            this.element.removeAttribute("data-values");
+            this.element.removeAttribute(
 
-            this.element.removeAttribute("data-rendered");
+                "data-rendered"
+
+            );
+
+            this.element.removeAttribute(
+
+                "data-values"
+
+            );
 
         }
 
@@ -791,7 +873,7 @@
 
     const Lifecycle = {
 
-        refresh(scope = document) {
+        initializeScene(scope = document) {
 
             RadioCards.initialize(scope);
 
@@ -815,7 +897,7 @@
 
         },
 
-        destroy() {
+        destroyScene() {
 
             AICards.hideAll();
 
@@ -827,49 +909,140 @@
 
     /**
      * ============================================================
-     * Component Registry
+     * Component Manager
      * ============================================================
      */
 
-    const Registry = Object.freeze({
+    const Components = {
 
-        ProgressBar,
+        initialize() {
 
-        ProgressText,
+            ProgressBar.initialize();
 
-        Loading,
+            ProgressText.initialize();
 
-        Thinking,
+            Loading.initialize();
 
-        Toast,
+            Thinking.initialize();
 
-        Modal,
+            Toast.initialize();
 
-        ErrorBanner,
+            Modal.initialize();
 
-        Confirm,
+            ErrorBanner.initialize();
 
-        RadioCards,
+        },
 
-        OptionCards,
+        refresh(scope = document) {
 
-        Questions,
+            Lifecycle.initializeScene(scope);
 
-        CTAButtons,
+        },
 
-        AICards,
+        destroy() {
 
-        ReflectionCards,
+            Lifecycle.destroyScene();
 
-        SummaryCards,
+        }
 
-        FrameworkCards,
+    };
 
-        Roadmap,
+    /**
+     * ============================================================
+     * Register Component Engine
+     * ============================================================
+     */
 
-        OfferCards,
+    const ComponentAPI = Object.freeze({
 
-        FinancialWheel
+        initialize:
+            Components.initialize.bind(Components),
+
+        refresh:
+            Components.refresh.bind(Components),
+
+        destroy:
+            Components.destroy.bind(Components),
+
+        ProgressBar:
+            ProgressBar,
+
+        ProgressText:
+            ProgressText,
+
+        Loading:
+            Loading,
+
+        Thinking:
+            Thinking,
+
+        Toast:
+            Toast,
+
+        Modal:
+            Modal,
+
+        ErrorBanner:
+            ErrorBanner,
+
+        Confirm:
+            Confirm,
+
+        RadioCards:
+            RadioCards,
+
+        OptionCards:
+            OptionCards,
+
+        Questions:
+            Questions,
+
+        CTAButtons:
+            CTAButtons,
+
+        AICards:
+            AICards,
+
+        ReflectionCards:
+            ReflectionCards,
+
+        SummaryCards:
+            SummaryCards,
+
+        FrameworkCards:
+            FrameworkCards,
+
+        Roadmap:
+            Roadmap,
+
+        OfferCards:
+            OfferCards,
+
+        FinancialWheel:
+            FinancialWheel
 
     });
+
+    Object.defineProperty(
+
+        window.CTM,
+
+        "components",
+
+        {
+
+            value: ComponentAPI,
+
+            writable: false,
+
+            configurable: false,
+
+            enumerable: true
+
+        }
+
+    );
+
+})();
+
 
