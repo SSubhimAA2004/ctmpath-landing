@@ -4,8 +4,7 @@
  * CTM PATH™ Guided Journey
  * Journey Rules Engine
  * File        : js/rules.js
- * Version     : 1.0.0
- * Batch       : 1 of 5
+ * Version     : 2.0.0
  * Status      : Production
  * ============================================================
  */
@@ -14,9 +13,25 @@
 
     "use strict";
 
-    if (!window.CTM) {
+    if (
 
-        throw new Error("CTM namespace not initialized.");
+        !window.CTM ||
+
+        !window.CTM.config ||
+
+        !window.CTM.store ||
+
+        !window.CTM.services ||
+
+        !window.CTM.sceneLoader
+
+    ) {
+
+        throw new Error(
+
+            "CTM core modules not initialized."
+
+        );
 
     }
 
@@ -38,7 +53,7 @@
 
     /**
      * ============================================================
-     * Journey Rules
+     * Rules Engine
      * ============================================================
      */
 
@@ -56,11 +71,13 @@
 
                 !rule ||
 
+                typeof rule !== "object" ||
+
                 !rule.id
 
             ) {
 
-                return;
+                return false;
 
             }
 
@@ -71,6 +88,8 @@
                 Object.freeze(rule)
 
             );
+
+            return true;
 
         },
 
@@ -116,6 +135,30 @@
 
         /**
          * --------------------------------------------------------
+         * Remove Rule
+         * --------------------------------------------------------
+         */
+
+        remove(id) {
+
+            return registry.delete(id);
+
+        },
+
+        /**
+         * --------------------------------------------------------
+         * Clear Registry
+         * --------------------------------------------------------
+         */
+
+        clear() {
+
+            registry.clear();
+
+        },
+
+        /**
+         * --------------------------------------------------------
          * All Rules
          * --------------------------------------------------------
          */
@@ -136,13 +179,13 @@
          * --------------------------------------------------------
          */
 
-        byScene(scene) {
+        byScene(sceneNumber) {
 
-            return this.all().filter(rule => {
+            return this.all().filter(rule =>
 
-                return rule.scene === scene;
+                rule.scene === sceneNumber
 
-            });
+            );
 
         },
 
@@ -172,11 +215,13 @@
 
             }
 
-            const passed = rule.condition(
+            const snapshot =
 
-                Store.snapshot()
+                Store.snapshot();
 
-            );
+            const passed =
+
+                rule.condition(snapshot);
 
             if (
 
@@ -186,11 +231,7 @@
 
             ) {
 
-                rule.action(
-
-                    Store.snapshot()
-
-                );
+                rule.action(snapshot);
 
             }
 
@@ -204,19 +245,15 @@
          * --------------------------------------------------------
          */
 
-        executeScene(scene) {
+        executeScene(sceneNumber) {
 
-            return this.byScene(scene)
+            return this.byScene(sceneNumber)
 
-                .every(rule => {
+                .every(rule =>
 
-                    return this.execute(
+                    this.execute(rule.id)
 
-                        rule.id
-
-                    );
-
-                });
+                );
 
         },
 
@@ -226,35 +263,23 @@
          * --------------------------------------------------------
          */
 
-        validate(scene) {
+        validate(sceneNumber) {
 
-            const valid = this.executeScene(
+            const valid =
 
-                scene
-
-            );
+                this.executeScene(sceneNumber);
 
             Logger.info(
 
-                `Scene ${scene} validation: ${valid}`
+                `Scene ${sceneNumber} validation:`,
+
+                valid
 
             );
 
             return valid;
 
-        }
-
-    };
-
-    /**
-     * ============================================================
-     * Register
-     * ============================================================
-     */
-
-    window.CTM.rules = Rules;
-
-})();
+        },
 
         /**
          * --------------------------------------------------------
@@ -264,11 +289,19 @@
 
         validateRequired(scope = document) {
 
-            const requiredFields = scope.querySelectorAll(
+            if (!scope) {
 
-                "[data-required]"
+                return true;
 
-            );
+            }
+
+            const requiredFields =
+
+                scope.querySelectorAll(
+
+                    "[data-required]"
+
+                );
 
             let valid = true;
 
@@ -286,11 +319,13 @@
 
                 ) {
 
-                    answered = scope.querySelector(
+                    answered =
 
-                        `input[name="${field.name}"]:checked`
+                        scope.querySelector(
 
-                    ) !== null;
+                            `input[name="${field.name}"]:checked`
+
+                        ) !== null;
 
                 }
 
@@ -310,25 +345,17 @@
 
                 }
 
+                field.classList.toggle(
+
+                    "is-invalid",
+
+                    !answered
+
+                );
+
                 if (!answered) {
 
                     valid = false;
-
-                    field.classList.add(
-
-                        "is-invalid"
-
-                    );
-
-                }
-
-                else {
-
-                    field.classList.remove(
-
-                        "is-invalid"
-
-                    );
 
                 }
 
@@ -346,11 +373,7 @@
 
         canContinue(scope = document) {
 
-            return this.validateRequired(
-
-                scope
-
-            );
+            return this.validateRequired(scope);
 
         },
 
@@ -362,7 +385,7 @@
 
         validateCurrentScene() {
 
-            const scene =
+            const sceneNumber =
 
                 Store.get(
 
@@ -374,7 +397,13 @@
 
                 window.CTM.sceneLoader.currentScene();
 
-            const required =
+            if (!sceneElement) {
+
+                return false;
+
+            }
+
+            const inputsValid =
 
                 this.canContinue(
 
@@ -382,31 +411,45 @@
 
                 );
 
-            const rules =
+            const rulesValid =
 
                 this.validate(
 
-                    scene
+                    sceneNumber
 
                 );
 
-            return required && rules;
+            return (
+
+                inputsValid &&
+
+                rulesValid
+
+            );
 
         },
 
         /**
          * --------------------------------------------------------
-         * Enable / Disable CTA
+         * Update CTA State
          * --------------------------------------------------------
          */
 
         updateCTA(scope = document) {
 
-            const nextButton = scope.querySelector(
+            if (!scope) {
 
-                "[data-next]"
+                return;
 
-            );
+            }
+
+            const nextButton =
+
+                scope.querySelector(
+
+                    "[data-next]"
+
+                );
 
             if (!nextButton) {
 
@@ -416,11 +459,57 @@
 
             nextButton.disabled =
 
-                !this.canContinue(
+                !this.canContinue(scope);
 
-                    scope
+        },
 
-                );
+        /**
+         * --------------------------------------------------------
+         * Register Validation Events
+         * --------------------------------------------------------
+         */
+
+        registerValidation() {
+
+            document.addEventListener(
+
+                "input",
+
+                () => {
+
+                    const scene =
+
+                        window.CTM.sceneLoader.currentScene();
+
+                    if (scene) {
+
+                        this.updateCTA(scene);
+
+                    }
+
+                }
+
+            );
+
+            document.addEventListener(
+
+                "change",
+
+                () => {
+
+                    const scene =
+
+                        window.CTM.sceneLoader.currentScene();
+
+                    if (scene) {
+
+                        this.updateCTA(scene);
+
+                    }
+
+                }
+
+            );
 
         },
 
@@ -432,23 +521,27 @@
 
         applyVisibility(scope = document) {
 
-            const blocks = scope.querySelectorAll(
+            if (!scope) {
+
+                return;
+
+            }
+
+            scope.querySelectorAll(
 
                 "[data-condition]"
 
-            );
+            ).forEach(element => {
 
-            blocks.forEach(block => {
+                const key =
 
-                const condition =
+                    element.dataset.condition;
 
-                    block.dataset.condition;
+                const value =
 
-                const response =
+                    Store.getResponse(key);
 
-                    Store.getResponse(condition);
-
-                block.hidden = !Boolean(response);
+                element.hidden = !Boolean(value);
 
             });
 
@@ -462,11 +555,19 @@
 
         applyAICards(scope = document) {
 
-            const cards = scope.querySelectorAll(
+            if (!scope) {
 
-                ".ai-card[data-rule]"
+                return;
 
-            );
+            }
+
+            const cards =
+
+                scope.querySelectorAll(
+
+                    ".ai-card[data-rule]"
+
+                );
 
             if (!cards.length) {
 
@@ -480,11 +581,11 @@
 
             });
 
-            const visitor =
+            const scene =
 
-                Store.get("visitor");
+                Store.get("visitor")
 
-            const scene = visitor.currentScene;
+                    .currentScene;
 
             const selected =
 
@@ -494,15 +595,23 @@
 
                 );
 
-            const match = scope.querySelector(
+            if (!selected) {
 
-                `.ai-card[data-rule="${selected}"]`
+                return;
 
-            );
+            }
 
-            if (match) {
+            const active =
 
-                match.hidden = false;
+                scope.querySelector(
+
+                    `.ai-card[data-rule="${selected}"]`
+
+                );
+
+            if (active) {
+
+                active.hidden = false;
 
             }
 
@@ -516,11 +625,19 @@
 
         applyCTA(scope = document) {
 
-            const buttons = scope.querySelectorAll(
+            if (!scope) {
 
-                "[data-cta]"
+                return;
 
-            );
+            }
+
+            const buttons =
+
+                scope.querySelectorAll(
+
+                    "[data-cta]"
+
+                );
 
             if (!buttons.length) {
 
@@ -534,23 +651,23 @@
 
             });
 
-            const visitor =
+            const currentScene =
 
-                Store.get("visitor");
+                Store.get("visitor")
 
-            const current =
+                    .currentScene;
 
-                visitor.currentScene;
+            const active =
 
-            const target = scope.querySelector(
+                scope.querySelector(
 
-                `[data-cta="scene${current}"]`
+                    `[data-cta="scene${currentScene}"]`
 
-            );
+                );
 
-            if (target) {
+            if (active) {
 
-                target.hidden = false;
+                active.hidden = false;
 
             }
 
@@ -564,6 +681,12 @@
 
         refresh(scope = document) {
 
+            if (!scope) {
+
+                return;
+
+            }
+
             this.applyVisibility(scope);
 
             this.applyAICards(scope);
@@ -576,7 +699,7 @@
 
         /**
          * --------------------------------------------------------
-         * Is Journey Complete
+         * Journey Completion
          * --------------------------------------------------------
          */
 
@@ -584,7 +707,11 @@
 
             return (
 
-                Store.get("visitor").currentScene ===
+                Store.get(
+
+                    "visitor"
+
+                ).currentScene ===
 
                 window.CTM.config.JOURNEY.LAST_SCENE
 
@@ -599,6 +726,20 @@
          */
 
         completeJourney() {
+
+            if (
+
+                Store.get(
+
+                    "visitor"
+
+                ).completed
+
+            ) {
+
+                return;
+
+            }
 
             Store.update(
 
@@ -628,7 +769,9 @@
 
                     {
 
-                        detail: Store.snapshot()
+                        detail:
+
+                            Store.snapshot()
 
                     }
 
@@ -646,7 +789,7 @@
 
         /**
          * --------------------------------------------------------
-         * Evaluate Journey State
+         * Evaluate Journey
          * --------------------------------------------------------
          */
 
@@ -666,17 +809,29 @@
 
         /**
          * --------------------------------------------------------
-         * Register Journey Lifecycle
+         * Register Scene Lifecycle Events
          * --------------------------------------------------------
          */
 
-        registerJourneyEvents() {
+        registerEvents() {
 
             document.addEventListener(
 
                 "ctm:afterSceneLoad",
 
                 () => {
+
+                    const scene =
+
+                        window.CTM.sceneLoader.currentScene();
+
+                    if (!scene) {
+
+                        return;
+
+                    }
+
+                    this.refresh(scene);
 
                     this.evaluate();
 
@@ -688,37 +843,45 @@
 
         /**
          * --------------------------------------------------------
-         * Refresh Entire Rule Engine
+         * Register Journey Events
          * --------------------------------------------------------
          */
 
-        refreshAll() {
+        registerJourneyEvents() {
 
-            const scene =
+            document.addEventListener(
 
-                window.CTM.sceneLoader.currentScene();
+                "ctm:journeyCompleted",
 
-            if (!scene) {
+                event => {
 
-                return;
+                    Logger.info(
 
-            }
+                        "Journey Completed",
 
-            this.refresh(scene);
+                        event.detail
 
-            this.evaluate();
+                    );
+
+                }
+
+            );
 
         },
 
         /**
          * --------------------------------------------------------
-         * Reset Rule Engine
+         * Initialize
          * --------------------------------------------------------
          */
 
-        reset() {
+        initialize() {
 
-            registry.clear();
+            this.registerValidation();
+
+            this.registerEvents();
+
+            this.registerJourneyEvents();
 
         },
 
@@ -732,7 +895,9 @@
 
             return Object.freeze({
 
-                registeredRules: registry.size,
+                registeredRules:
+
+                    registry.size,
 
                 currentScene:
 
@@ -752,21 +917,93 @@
 
             });
 
-        },
+        }
 
-        /**
-         * --------------------------------------------------------
-         * Initialize
-         * --------------------------------------------------------
-         */
+    };
 
-        initialize() {
+    /**
+     * ============================================================
+     * Public API
+     * ============================================================
+     */
 
-            this.registerValidation();
+    const RulesAPI = Object.freeze({
 
-            this.registerEvents();
+        initialize:
+            Rules.initialize.bind(Rules),
 
-            this.registerJourneyEvents();
+        register:
+            Rules.register.bind(Rules),
+
+        registerMany:
+            Rules.registerMany.bind(Rules),
+
+        get:
+            Rules.get.bind(Rules),
+
+        has:
+            Rules.has.bind(Rules),
+
+        remove:
+            Rules.remove.bind(Rules),
+
+        clear:
+            Rules.clear.bind(Rules),
+
+        all:
+            Rules.all.bind(Rules),
+
+        byScene:
+            Rules.byScene.bind(Rules),
+
+        execute:
+            Rules.execute.bind(Rules),
+
+        executeScene:
+            Rules.executeScene.bind(Rules),
+
+        validate:
+            Rules.validate.bind(Rules),
+
+        validateCurrentScene:
+            Rules.validateCurrentScene.bind(Rules),
+
+        refresh:
+            Rules.refresh.bind(Rules),
+
+        evaluate:
+            Rules.evaluate.bind(Rules),
+
+        health:
+            Rules.health.bind(Rules)
+
+    });
+
+    /**
+     * ============================================================
+     * Register Rules Engine
+     * ============================================================
+     */
+
+    Object.defineProperty(
+
+        window.CTM,
+
+        "rules",
+
+        {
+
+            value: RulesAPI,
+
+            writable: false,
+
+            configurable: false,
+
+            enumerable: true
 
         }
+
+    );
+
+})();
 
