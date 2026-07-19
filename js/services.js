@@ -4,8 +4,7 @@
  * CTM PATH™ Guided Journey
  * Shared Services
  * File        : js/services.js
- * Version     : 1.0.0
- * Batch       : 1 of 4
+ * Version     : 2.0.0
  * Status      : Production
  * ============================================================
  */
@@ -14,16 +13,22 @@
 
     "use strict";
 
-    if (!window.CTM) {
-        throw new Error("CTM namespace not found.");
-    }
+    if (
 
-    if (!window.CTM.config) {
-        throw new Error("CTM configuration not initialized.");
-    }
+        !window.CTM ||
 
-    if (!window.CTM.store) {
-        throw new Error("CTM store not initialized.");
+        !window.CTM.config ||
+
+        !window.CTM.store
+
+    ) {
+
+        throw new Error(
+
+            "CTM core modules not initialized."
+
+        );
+
     }
 
     /**
@@ -48,7 +53,11 @@
 
         queryAll(selector, scope = document) {
 
-            return [...scope.querySelectorAll(selector)];
+            return Array.from(
+
+                scope.querySelectorAll(selector)
+
+            );
 
         }
 
@@ -68,7 +77,9 @@
 
                 top: 0,
 
-                behavior: smooth ? "smooth" : "auto"
+                behavior:
+
+                    smooth ? "smooth" : "auto"
 
             });
 
@@ -78,7 +89,7 @@
 
     /**
      * ============================================================
-     * Class Service
+     * CSS Class Service
      * ============================================================
      */
 
@@ -86,7 +97,11 @@
 
         add(element, className) {
 
-            if (!element) return;
+            if (!element) {
+
+                return;
+
+            }
 
             element.classList.add(className);
 
@@ -94,19 +109,45 @@
 
         remove(element, className) {
 
-            if (!element) return;
+            if (!element) {
+
+                return;
+
+            }
 
             element.classList.remove(className);
 
         },
 
-        toggle(element, className, force = null) {
+        toggle(
 
-            if (!element) return;
+            element,
 
-            if (force === null) {
+            className,
 
-                element.classList.toggle(className);
+            force
+
+        ) {
+
+            if (!element) {
+
+                return;
+
+            }
+
+            if (
+
+                typeof force === "boolean"
+
+            ) {
+
+                element.classList.toggle(
+
+                    className,
+
+                    force
+
+                );
 
                 return;
 
@@ -114,9 +155,7 @@
 
             element.classList.toggle(
 
-                className,
-
-                force
+                className
 
             );
 
@@ -124,9 +163,17 @@
 
         has(element, className) {
 
-            if (!element) return false;
+            if (!element) {
 
-            return element.classList.contains(className);
+                return false;
+
+            }
+
+            return element.classList.contains(
+
+                className
+
+            );
 
         }
 
@@ -142,15 +189,29 @@
 
         get(element, name) {
 
-            if (!element) return null;
+            return element
 
-            return element.getAttribute(name);
+                ? element.getAttribute(name)
+
+                : null;
 
         },
 
-        set(element, name, value) {
+        set(
 
-            if (!element) return;
+            element,
+
+            name,
+
+            value
+
+        ) {
+
+            if (!element) {
+
+                return;
+
+            }
 
             element.setAttribute(
 
@@ -164,7 +225,11 @@
 
         remove(element, name) {
 
-            if (!element) return;
+            if (!element) {
+
+                return;
+
+            }
 
             element.removeAttribute(name);
 
@@ -182,7 +247,11 @@
 
         show(element) {
 
-            if (!element) return;
+            if (!element) {
+
+                return;
+
+            }
 
             element.hidden = false;
 
@@ -190,9 +259,25 @@
 
         hide(element) {
 
-            if (!element) return;
+            if (!element) {
+
+                return;
+
+            }
 
             element.hidden = true;
+
+        },
+
+        toggle(element) {
+
+            if (!element) {
+
+                return;
+
+            }
+
+            element.hidden = !element.hidden;
 
         }
 
@@ -206,7 +291,7 @@
 
     const Utils = {
 
-        delay(ms) {
+        delay(milliseconds) {
 
             return new Promise(resolve => {
 
@@ -214,7 +299,7 @@
 
                     resolve,
 
-                    ms
+                    milliseconds
 
                 );
 
@@ -222,13 +307,21 @@
 
         },
 
-        clamp(value, min, max) {
+        clamp(
+
+            value,
+
+            minimum,
+
+            maximum
+
+        ) {
 
             return Math.min(
 
-                Math.max(value, min),
+                Math.max(value, minimum),
 
-                max
+                maximum
 
             );
 
@@ -247,30 +340,6 @@
         }
 
     };
-
-    /**
-     * ============================================================
-     * Register Services
-     * ============================================================
-     */
-
-    window.CTM.services = {
-
-        DOM,
-
-        Scroll,
-
-        Classes,
-
-        Attributes,
-
-        Visibility,
-
-        Utils
-
-    };
-
-})();
 
     /**
      * ============================================================
@@ -294,7 +363,9 @@
 
                 return true;
 
-            } catch (error) {
+            }
+
+            catch (error) {
 
                 console.error(error);
 
@@ -304,17 +375,29 @@
 
         },
 
-        load(key, fallback = null) {
+        load(
+
+            key,
+
+            fallback = null
+
+        ) {
 
             try {
 
-                const value = localStorage.getItem(key);
+                const value =
+
+                    localStorage.getItem(key);
 
                 return value === null
+
                     ? fallback
+
                     : JSON.parse(value);
 
-            } catch (error) {
+            }
+
+            catch (error) {
 
                 console.error(error);
 
@@ -348,7 +431,11 @@
 
         current() {
 
-            return window.CTM.store.get("visitor").language;
+            return window.CTM.store.get(
+
+                "visitor"
+
+            ).language;
 
         },
 
@@ -358,9 +445,13 @@
 
                 window.CTM.config.LANGUAGE.AVAILABLE;
 
-            if (!available.includes(language)) {
+            if (
 
-                return;
+                !available.includes(language)
+
+            ) {
+
+                return false;
 
             }
 
@@ -382,17 +473,21 @@
 
             );
 
+            return true;
+
         },
 
         restore() {
 
-            const language = Storage.load(
+            const language =
 
-                window.CTM.config.STORAGE.LANGUAGE,
+                Storage.load(
 
-                window.CTM.config.LANGUAGE.DEFAULT
+                    window.CTM.config.STORAGE.LANGUAGE,
 
-            );
+                    window.CTM.config.LANGUAGE.DEFAULT
+
+                );
 
             this.set(language);
 
@@ -408,9 +503,23 @@
 
     const Events = {
 
-        on(target, event, callback, options = false) {
+        on(
 
-            if (!target) return;
+            target,
+
+            event,
+
+            callback,
+
+            options = false
+
+        ) {
+
+            if (!target) {
+
+                return;
+
+            }
 
             target.addEventListener(
 
@@ -424,9 +533,21 @@
 
         },
 
-        off(target, event, callback) {
+        off(
 
-            if (!target) return;
+            target,
+
+            event,
+
+            callback
+
+        ) {
+
+            if (!target) {
+
+                return;
+
+            }
 
             target.removeEventListener(
 
@@ -438,17 +559,35 @@
 
         },
 
-        emit(target, name, detail = {}) {
+        emit(
 
-            if (!target) return;
+            target,
+
+            name,
+
+            detail = {}
+
+        ) {
+
+            if (!target) {
+
+                return;
+
+            }
 
             target.dispatchEvent(
 
-                new CustomEvent(name, {
+                new CustomEvent(
 
-                    detail
+                    name,
 
-                })
+                    {
+
+                        detail
+
+                    }
+
+                )
 
             );
 
@@ -464,7 +603,13 @@
 
     const Binding = {
 
-        find(key, scope = document) {
+        find(
+
+            key,
+
+            scope = document
+
+        ) {
 
             return DOM.queryAll(
 
@@ -476,7 +621,15 @@
 
         },
 
-        set(key, value, scope = document) {
+        set(
+
+            key,
+
+            value,
+
+            scope = document
+
+        ) {
 
             this.find(
 
@@ -486,7 +639,9 @@
 
             ).forEach(element => {
 
-                element.textContent = value;
+                element.textContent =
+
+                    value ?? "";
 
             });
 
@@ -502,17 +657,37 @@
 
     const Dataset = {
 
-        get(element, key) {
+        get(
 
-            if (!element) return null;
+            element,
 
-            return element.dataset[key];
+            key
+
+        ) {
+
+            return element
+
+                ? element.dataset[key]
+
+                : null;
 
         },
 
-        set(element, key, value) {
+        set(
 
-            if (!element) return;
+            element,
+
+            key,
+
+            value
+
+        ) {
+
+            if (!element) {
+
+                return;
+
+            }
 
             element.dataset[key] = value;
 
@@ -530,13 +705,23 @@
 
         required(value) {
 
-            if (value === null || value === undefined) {
+            if (
+
+                value === null ||
+
+                value === undefined
+
+            ) {
 
                 return false;
 
             }
 
-            if (typeof value === "string") {
+            if (
+
+                typeof value === "string"
+
+            ) {
 
                 return value.trim().length > 0;
 
@@ -548,15 +733,35 @@
 
         number(value) {
 
-            return !Number.isNaN(Number(value));
+            return !Number.isNaN(
+
+                Number(value)
+
+            );
 
         },
 
-        range(value, min, max) {
+        range(
 
-            const number = Number(value);
+            value,
 
-            return number >= min && number <= max;
+            minimum,
+
+            maximum
+
+        ) {
+
+            const number =
+
+                Number(value);
+
+            return (
+
+                number >= minimum &&
+
+                number <= maximum
+
+            );
 
         }
 
@@ -594,7 +799,11 @@
 
         reset(form) {
 
-            if (!form) return;
+            if (!form) {
+
+                return;
+
+            }
 
             form.reset();
 
@@ -628,6 +837,34 @@
 
             ).has(name);
 
+        },
+
+        set(name, value) {
+
+            const url = new URL(
+
+                window.location.href
+
+            );
+
+            url.searchParams.set(
+
+                name,
+
+                value
+
+            );
+
+            window.history.replaceState(
+
+                {},
+
+                "",
+
+                url
+
+            );
+
         }
 
     };
@@ -642,11 +879,29 @@
 
         mark(name) {
 
-            performance.mark(name);
+            if (
+
+                window.performance?.mark
+
+            ) {
+
+                performance.mark(name);
+
+            }
 
         },
 
         measure(name, start, end) {
+
+            if (
+
+                !window.performance?.measure
+
+            ) {
+
+                return;
+
+            }
 
             try {
 
@@ -662,7 +917,7 @@
 
             }
 
-            catch (error) {
+            catch {
 
                 /* Ignore */
 
@@ -702,6 +957,12 @@
 
             return window.innerWidth < 768;
 
+        },
+
+        desktop() {
+
+            return !this.mobile();
+
         }
 
     };
@@ -716,21 +977,47 @@
 
         info(...args) {
 
-            if (!window.CTM.config.APP.DEBUG) return;
+            if (
 
-            console.info("[CTM]", ...args);
+                !window.CTM.config.APP.DEBUG
+
+            ) {
+
+                return;
+
+            }
+
+            console.info(
+
+                "[CTM]",
+
+                ...args
+
+            );
 
         },
 
         warn(...args) {
 
-            console.warn("[CTM]", ...args);
+            console.warn(
+
+                "[CTM]",
+
+                ...args
+
+            );
 
         },
 
         error(...args) {
 
-            console.error("[CTM]", ...args);
+            console.error(
+
+                "[CTM]",
+
+                ...args
+
+            );
 
         }
 
@@ -744,9 +1031,21 @@
 
     const Errors = {
 
-        handle(error, context = "") {
+        handle(
 
-            Logger.error(context, error);
+            error,
+
+            context = ""
+
+        ) {
+
+            Logger.error(
+
+                context,
+
+                error
+
+            );
 
             return false;
 
@@ -756,51 +1055,151 @@
 
     /**
      * ============================================================
-     * Function Service
+     * Function Utilities
      * ============================================================
      */
 
     const Functions = {
 
-        debounce(callback, delay = 300) {
+        debounce(
 
-            let timer;
+            callback,
+
+            delay = 300
+
+        ) {
+
+            let timer = null;
 
             return (...args) => {
 
                 clearTimeout(timer);
 
-                timer = setTimeout(() => {
+                timer = setTimeout(
 
-                    callback(...args);
+                    () => callback(...args),
 
-                }, delay);
+                    delay
+
+                );
 
             };
 
         },
 
-        throttle(callback, delay = 300) {
+        throttle(
+
+            callback,
+
+            delay = 300
+
+        ) {
 
             let waiting = false;
 
             return (...args) => {
 
-                if (waiting) return;
+                if (waiting) {
+
+                    return;
+
+                }
 
                 waiting = true;
 
                 callback(...args);
 
-                setTimeout(() => {
+                setTimeout(
 
-                    waiting = false;
+                    () => {
 
-                }, delay);
+                        waiting = false;
+
+                    },
+
+                    delay
+
+                );
 
             };
 
         }
 
     };
+
+    /**
+     * ============================================================
+     * Services Registry
+     * ============================================================
+     */
+
+    const Services = Object.freeze({
+
+        DOM,
+
+        Scroll,
+
+        Classes,
+
+        Attributes,
+
+        Visibility,
+
+        Utils,
+
+        Storage,
+
+        Language,
+
+        Events,
+
+        Binding,
+
+        Dataset,
+
+        Validation,
+
+        Forms,
+
+        Query,
+
+        Performance,
+
+        Browser,
+
+        Logger,
+
+        Errors,
+
+        Functions
+
+    });
+
+    /**
+     * ============================================================
+     * Register Services
+     * ============================================================
+     */
+
+    Object.defineProperty(
+
+        window.CTM,
+
+        "services",
+
+        {
+
+            value: Services,
+
+            writable: false,
+
+            configurable: false,
+
+            enumerable: true
+
+        }
+
+    );
+
+})();
 
