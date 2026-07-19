@@ -4,8 +4,7 @@
  * CTM PATH™ Guided Journey
  * State Store
  * File        : js/store.js
- * Version     : 1.0.0
- * Batch       : 1 of 2
+ * Version     : 2.0.0
  * Status      : Production
  * ============================================================
  */
@@ -15,22 +14,20 @@
     "use strict";
 
     if (!window.CTM || !window.CTM.config) {
-        throw new Error("CTM configuration not initialized.");
+
+        throw new Error(
+            "CTM configuration not initialized."
+        );
+
     }
 
     /**
-     * ------------------------------------------------------------
-     * Application State
-     * ------------------------------------------------------------
+     * ============================================================
+     * Internal Application State
+     * ============================================================
      */
 
     const STATE = {
-
-        /**
-         * --------------------------------------------------------
-         * Session
-         * --------------------------------------------------------
-         */
 
         session: {
 
@@ -44,12 +41,6 @@
 
         },
 
-        /**
-         * --------------------------------------------------------
-         * Visitor
-         * --------------------------------------------------------
-         */
-
         visitor: {
 
             name: "",
@@ -62,53 +53,18 @@
 
         },
 
-        /**
-         * --------------------------------------------------------
-         * Journey
-         * --------------------------------------------------------
-         */
-
         journey: {
 
             progress: 0,
 
             completedScenes: [],
 
-            lastVisitedScene: 1
+            lastVisitedScene:
+                window.CTM.config.SCENES.DEFAULT
 
         },
 
-        /**
-         * --------------------------------------------------------
-         * Responses
-         * --------------------------------------------------------
-         */
-
-        responses: {
-
-        },
-
-        /**
-         * --------------------------------------------------------
-         * Personalization
-         * --------------------------------------------------------
-         */
-
-        personalization: {
-
-            personality: null,
-
-            recommendation: null,
-
-            observations: []
-
-        },
-
-        /**
-         * --------------------------------------------------------
-         * Financial Profile
-         * --------------------------------------------------------
-         */
+        responses: {},
 
         financial: {
 
@@ -126,19 +82,23 @@
 
         },
 
-        /**
-         * --------------------------------------------------------
-         * Runtime
-         * --------------------------------------------------------
-         */
+        personalization: {
+
+            personality: null,
+
+            recommendation: null,
+
+            observations: []
+
+        },
 
         runtime: {
+
+            initialized: false,
 
             loading: false,
 
             thinking: false,
-
-            initialized: false,
 
             currentSceneHTML: ""
 
@@ -147,15 +107,89 @@
     };
 
     /**
-     * ------------------------------------------------------------
+     * ============================================================
+     * Subscribers
+     * ============================================================
+     */
+
+    const subscribers = [];
+
+    /**
+     * ============================================================
+     * Clone Helper
+     * ============================================================
+     */
+
+    function clone(value) {
+
+        if (typeof structuredClone === "function") {
+
+            return structuredClone(value);
+
+        }
+
+        return JSON.parse(
+
+            JSON.stringify(value)
+
+        );
+
+    }
+
+    /**
+     * ============================================================
+     * Notify Subscribers
+     * ============================================================
+     */
+
+    function notify(section) {
+
+        const stateCopy = clone(STATE);
+
+        const sectionCopy = clone(
+
+            STATE[section]
+
+        );
+
+        subscribers.forEach(callback => {
+
+            try {
+
+                callback(
+
+                    section,
+
+                    sectionCopy,
+
+                    stateCopy
+
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+            }
+
+        });
+
+    }
+
+    /**
+     * ============================================================
      * Store API
-     * ------------------------------------------------------------
+     * ============================================================
      */
 
     const Store = {
 
         /**
-         * Return complete state
+         * --------------------------------------------------------
+         * Complete State
+         * --------------------------------------------------------
          */
 
         getState() {
@@ -165,130 +199,8 @@
         },
 
         /**
-         * Read value
-         */
-
-        get(section) {
-
-            return STATE[section];
-
-        },
-
-        /**
-         * Replace section
-         */
-
-        set(section, value) {
-
-            if (!(section in STATE)) {
-
-                console.warn(`Unknown state section: ${section}`);
-
-                return;
-
-            }
-
-            STATE[section] = value;
-
-        },
-
-        /**
-         * Update property
-         */
-
-        update(section, property, value) {
-
-            if (!(section in STATE)) return;
-
-            STATE[section][property] = value;
-
-        },
-
-        /**
-         * Merge object
-         */
-
-        merge(section, values = {}) {
-
-            if (!(section in STATE)) return;
-
-            Object.assign(
-
-                STATE[section],
-
-                values
-
-            );
-
-        }
-
-    };
-
-    /**
-     * ------------------------------------------------------------
-     * Register
-     * ------------------------------------------------------------
-     */
-
-    window.CTM.store = Store;
-
-})();
-
-    /**
-     * ------------------------------------------------------------
-     * Internal Subscribers
-     * ------------------------------------------------------------
-     */
-
-    const subscribers = [];
-
-    /**
-     * ------------------------------------------------------------
-     * Deep Clone Helper
-     * ------------------------------------------------------------
-     */
-
-    function clone(value) {
-
-        return structuredClone(value);
-
-    }
-
-    /**
-     * ------------------------------------------------------------
-     * Notify Subscribers
-     * ------------------------------------------------------------
-     */
-
-    function notify(section) {
-
-        subscribers.forEach(callback => {
-
-            callback(
-
-                section,
-
-                clone(STATE[section]),
-
-                clone(STATE)
-
-            );
-
-        });
-
-    }
-
-    /**
-     * ------------------------------------------------------------
-     * Extend Store API
-     * ------------------------------------------------------------
-     */
-
-    Object.assign(Store, {
-
-        /**
          * --------------------------------------------------------
-         * Safe Snapshot
+         * Snapshot
          * --------------------------------------------------------
          */
 
@@ -300,87 +212,99 @@
 
         /**
          * --------------------------------------------------------
-         * Reset State
+         * Read Section
          * --------------------------------------------------------
          */
 
-        reset() {
+        get(section) {
 
-            STATE.session = {
+            return STATE[section];
 
-                id: null,
+        },
 
-                startedAt: null,
+        /**
+         * --------------------------------------------------------
+         * Replace Section
+         * --------------------------------------------------------
+         */
 
-                completedAt: null,
+        set(section, value) {
 
-                version: window.CTM.config.APP.VERSION
+            if (!(section in STATE)) {
 
-            };
+                return false;
 
-            STATE.visitor = {
+            }
 
-                name: "",
+            STATE[section] = value;
 
-                language: window.CTM.config.LANGUAGE.DEFAULT,
+            notify(section);
 
-                currentScene: 1,
+            return true;
 
-                completed: false
+        },
 
-            };
+        /**
+         * --------------------------------------------------------
+         * Update Property
+         * --------------------------------------------------------
+         */
 
-            STATE.journey = {
+        update(
 
-                progress: 0,
+            section,
 
-                completedScenes: [],
+            property,
 
-                lastVisitedScene: 1
+            value
 
-            };
+        ) {
 
-            STATE.responses = {};
+            if (!(section in STATE)) {
 
-            STATE.personalization = {
+                return false;
 
-                personality: null,
+            }
 
-                recommendation: null,
+            STATE[section][property] = value;
 
-                observations: []
+            notify(section);
 
-            };
+            return true;
 
-            STATE.financial = {
+        },
 
-                currentIncome: null,
+        /**
+         * --------------------------------------------------------
+         * Merge Object
+         * --------------------------------------------------------
+         */
 
-                desiredIncome: null,
+        merge(
 
-                confidence: null,
+            section,
 
-                burden: null,
+            values = {}
 
-                dream: null,
+        ) {
 
-                gap: null
+            if (!(section in STATE)) {
 
-            };
+                return false;
 
-            STATE.runtime = {
+            }
 
-                loading: false,
+            Object.assign(
 
-                thinking: false,
+                STATE[section],
 
-                initialized: false,
+                values
 
-                currentSceneHTML: ""
+            );
 
-            };
+            notify(section);
 
-            notify("reset");
+            return true;
 
         },
 
@@ -392,7 +316,11 @@
 
         subscribe(callback) {
 
-            if (typeof callback !== "function") {
+            if (
+
+                typeof callback !== "function"
+
+            ) {
 
                 return;
 
@@ -410,11 +338,21 @@
 
         unsubscribe(callback) {
 
-            const index = subscribers.indexOf(callback);
+            const index = subscribers.indexOf(
+
+                callback
+
+            );
 
             if (index >= 0) {
 
-                subscribers.splice(index, 1);
+                subscribers.splice(
+
+                    index,
+
+                    1
+
+                );
 
             }
 
@@ -430,7 +368,9 @@
 
             STATE.session.id = crypto.randomUUID();
 
-            STATE.session.startedAt = new Date().toISOString();
+            STATE.session.startedAt =
+
+                new Date().toISOString();
 
             STATE.runtime.initialized = true;
 
@@ -446,7 +386,9 @@
 
         completeSession() {
 
-            STATE.session.completedAt = new Date().toISOString();
+            STATE.session.completedAt =
+
+                new Date().toISOString();
 
             STATE.visitor.completed = true;
 
@@ -456,7 +398,7 @@
 
         /**
          * --------------------------------------------------------
-         * Update Helpers
+         * Responses
          * --------------------------------------------------------
          */
 
@@ -474,6 +416,12 @@
 
         },
 
+        /**
+         * --------------------------------------------------------
+         * Financial
+         * --------------------------------------------------------
+         */
+
         setFinancial(key, value) {
 
             STATE.financial[key] = value;
@@ -490,33 +438,162 @@
 
         /**
          * --------------------------------------------------------
+         * Reset
+         * --------------------------------------------------------
+         */
+
+        reset() {
+
+            STATE.session = {
+
+                id: null,
+
+                startedAt: null,
+
+                completedAt: null,
+
+                version:
+
+                    window.CTM.config.APP.VERSION
+
+            };
+
+            STATE.visitor = {
+
+                name: "",
+
+                language:
+
+                    window.CTM.config.LANGUAGE.DEFAULT,
+
+                currentScene:
+
+                    window.CTM.config.SCENES.DEFAULT,
+
+                completed: false
+
+            };
+
+            STATE.journey = {
+
+                progress: 0,
+
+                completedScenes: [],
+
+                lastVisitedScene:
+
+                    window.CTM.config.SCENES.DEFAULT
+
+            };
+
+            STATE.responses = {};
+
+            STATE.financial = {
+
+                currentIncome: null,
+
+                desiredIncome: null,
+
+                confidence: null,
+
+                burden: null,
+
+                dream: null,
+
+                gap: null
+
+            };
+
+            STATE.personalization = {
+
+                personality: null,
+
+                recommendation: null,
+
+                observations: []
+
+            };
+
+            STATE.runtime = {
+
+                initialized: false,
+
+                loading: false,
+
+                thinking: false,
+
+                currentSceneHTML: ""
+
+            };
+
+            notify("reset");
+
+        },
+
+        /**
+         * --------------------------------------------------------
          * Debug
          * --------------------------------------------------------
          */
 
         debug() {
 
-            if (!window.CTM.config.APP.DEBUG) {
+            if (
+
+                !window.CTM.config.APP.DEBUG
+
+            ) {
 
                 return;
 
             }
 
-            console.group("CTM Store");
+            console.group(
 
-            console.table(clone(STATE));
+                "CTM Store"
+
+            );
+
+            console.log(
+
+                this.snapshot()
+
+            );
 
             console.groupEnd();
 
         }
 
-    });
+    };
 
     /**
-     * ------------------------------------------------------------
-     * Freeze Store API
-     * ------------------------------------------------------------
+     * ============================================================
+     * Freeze & Register
+     * ============================================================
      */
 
     Object.freeze(Store);
+
+    Object.defineProperty(
+
+        window.CTM,
+
+        "store",
+
+        {
+
+            value: Store,
+
+            writable: false,
+
+            configurable: false,
+
+            enumerable: true
+
+        }
+
+    );
+
+})();
+
 
