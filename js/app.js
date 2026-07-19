@@ -5,7 +5,6 @@
  * Application Entry Point
  * File        : js/app.js
  * Version     : 1.0.0
- * Batch       : 1 of 2
  * Status      : Production
  * ============================================================
  */
@@ -93,13 +92,7 @@
 
             }
 
-        }
-
-    };
-
-    window.CTM.app = App;
-
-})();
+        },
 
         /**
          * --------------------------------------------------------
@@ -141,45 +134,11 @@
 
             });
 
-        }
+        },
 
-    };
+};
 
-    /**
-     * ============================================================
-     * DOM Ready
-     * ============================================================
-     */
-
-    document.addEventListener(
-
-        "DOMContentLoaded",
-
-        async () => {
-
-            await App.initialize();
-
-        }
-
-    );
-
-    /**
-     * ============================================================
-     * Public API
-     * ============================================================
-     */
-
-    window.CTM.app = Object.freeze({
-
-        initialize:
-
-            App.initialize.bind(App),
-
-        health:
-
-            App.health.bind(App)
-
-    });
+window.CTM.app = App;
 
 })();
 
