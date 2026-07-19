@@ -1,1 +1,229 @@
 
+/*!
+==========================================================
+CTM PATH™ Guided Journey
+File        : css/buttons.css
+Version     : 1.0.0
+Purpose     : Premium Button System
+Status      : Production
+==========================================================
+*/
+
+/* ======================================================
+   BASE BUTTON
+====================================================== */
+
+.btn {
+
+    display: inline-flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: var(--space-2);
+
+    min-height: 56px;
+
+    padding:
+        0
+        var(--space-6);
+
+    border: 1px solid transparent;
+
+    border-radius: var(--radius-pill);
+
+    cursor: pointer;
+
+    user-select: none;
+
+    transition:
+        background var(--duration-fast) var(--ease-default),
+        color var(--duration-fast) var(--ease-default),
+        border-color var(--duration-fast) var(--ease-default),
+        transform var(--duration-fast) var(--ease-default),
+        box-shadow var(--duration-fast) var(--ease-default);
+
+}
+
+/* ======================================================
+   PRIMARY
+====================================================== */
+
+.btn-primary {
+
+    background: var(--color-primary);
+
+    color: var(--text-primary);
+
+    box-shadow: var(--shadow-sm);
+
+}
+
+.btn-primary:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: var(--shadow-md);
+
+}
+
+/* ======================================================
+   SECONDARY
+====================================================== */
+
+.btn-secondary {
+
+    background: transparent;
+
+    border-color: var(--color-secondary);
+
+    color: var(--color-secondary);
+
+}
+
+.btn-secondary:hover {
+
+    background: var(--color-secondary);
+
+    color: var(--bg-page);
+
+}
+
+/* ======================================================
+   OUTLINE
+====================================================== */
+
+.btn-outline {
+
+    background: transparent;
+
+    border-color: var(--border-color);
+
+    color: var(--text-primary);
+
+}
+
+.btn-outline:hover {
+
+    border-color: var(--color-primary);
+
+}
+
+/* ======================================================
+   GHOST
+====================================================== */
+
+.btn-ghost {
+
+    background: transparent;
+
+    color: var(--text-secondary);
+
+}
+
+.btn-ghost:hover {
+
+    color: var(--text-primary);
+
+}
+
+/* ======================================================
+   FULL WIDTH
+====================================================== */
+
+.btn-block {
+
+    width: 100%;
+
+}
+
+/* ======================================================
+   SMALL
+====================================================== */
+
+.btn-sm {
+
+    min-height: 42px;
+
+    padding:
+        0
+        var(--space-4);
+
+}
+
+/* ======================================================
+   LARGE
+====================================================== */
+
+.btn-lg {
+
+    min-height: 64px;
+
+    padding:
+        0
+        var(--space-7);
+
+}
+
+/* ======================================================
+   DISABLED
+====================================================== */
+
+.btn:disabled,
+.btn-disabled {
+
+    opacity: .45;
+
+    cursor: not-allowed;
+
+    pointer-events: none;
+
+}
+
+/* ======================================================
+   LOADING
+====================================================== */
+
+.btn-loading {
+
+    cursor: wait;
+
+    pointer-events: none;
+
+}
+
+/* ======================================================
+   BUTTON GROUP
+====================================================== */
+
+.btn-group {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: var(--space-4);
+
+}
+
+/* ======================================================
+   ICON
+====================================================== */
+
+.btn-icon {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+/* ======================================================
+   END
+======================================================
+*/
