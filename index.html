@@ -1,7 +1,4 @@
 
-<!DOCTYPE html>
-<html lang="ta">
-
 <head>
 
     <!-- ============================================================
@@ -9,9 +6,8 @@
          Premium AI-Powered Financial Discovery Experience
          ------------------------------------------------------------
          File        : index.html
-         Version     : 1.0.0
+         Version     : 2.0.0
          Status      : PRODUCTION
-         Architecture: GitHub Pages + Vanilla JavaScript
          ============================================================ -->
 
     <!-- ============================================================
@@ -41,11 +37,11 @@
         content="CTM PATH™">
 
     <meta
-        name="apple-mobile-web-app-capable"
+        name="mobile-web-app-capable"
         content="yes">
 
     <meta
-        name="mobile-web-app-capable"
+        name="apple-mobile-web-app-capable"
         content="yes">
 
     <meta
@@ -57,20 +53,22 @@
         content="strict-origin-when-cross-origin">
 
     <!-- ============================================================
-         Primary SEO
+         SEO
          ============================================================ -->
 
     <title>
-        CTM PATH™ | Guided Financial Discovery Journey
+
+        CTM PATH™ | Guided Journey™
+
     </title>
 
     <meta
         name="description"
-        content="Discover your financial future through a private six-minute AI-guided financial discovery journey.">
+        content="Discover your financial future through a premium AI-guided six-minute financial discovery journey.">
 
     <meta
         name="keywords"
-        content="CTM PATH, Financial Discovery, Financial MRI, Financial Planning, Personal Finance, Tamil, English">
+        content="CTM PATH, Guided Journey, Financial Discovery, Tamil, English">
 
     <meta
         name="author"
@@ -100,17 +98,13 @@
         property="og:description"
         content="A premium AI-guided financial discovery experience.">
 
-    <!--
-        Replace before production deployment.
-    -->
-
     <meta
         property="og:url"
-        content="YOUR_DOMAIN">
+        content="https://ctmpath-landing.pages.dev">
 
     <meta
         property="og:image"
-        content="images/og-image.jpg">
+        content="images/CTM_Logo.png">
 
     <!-- ============================================================
          Twitter
@@ -130,7 +124,7 @@
 
     <meta
         name="twitter:image"
-        content="images/og-image.jpg">
+        content="images/CTM_Logo.png">
 
     <!-- ============================================================
          Icons
@@ -138,36 +132,23 @@
 
     <link
         rel="icon"
-        type="image/png"
-        href="images/favicon.png">
+        href="images/CTM_Logo.png">
 
     <link
         rel="apple-touch-icon"
-        href="images/apple-touch-icon.png">
+        href="images/CTM_Logo.png">
 
     <!-- ============================================================
          Performance
          ============================================================ -->
 
     <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
+        rel="preload"
+        href="images/CTM_Logo.png"
+        as="image">
 
     <!-- ============================================================
-         Fonts
-         ============================================================ -->
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Tamil:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- ============================================================
-         Global Stylesheet
+         Stylesheet
          ============================================================ -->
 
     <link
@@ -180,7 +161,6 @@
 
     <!-- ============================================================
          Skip Navigation
-         Accessibility
          ============================================================ -->
 
     <a
@@ -192,7 +172,7 @@
     </a>
 
     <!-- ============================================================
-         CTM Application
+         Application Shell
          ============================================================ -->
 
     <div
@@ -200,7 +180,7 @@
         class="app-shell">
 
         <!-- ========================================================
-             Application Header
+             Header
              ======================================================== -->
 
         <header
@@ -209,25 +189,17 @@
 
             <div class="header-container">
 
-                <!-- ================================================
-                     Brand
-                     ================================================ -->
-
                 <a
                     href="#"
                     class="brand"
-                    aria-label="CTM PATH Home">
+                    aria-label="CTM PATH">
 
                     <img
                         src="images/CTM_Logo.png"
-                        alt="CTM PATH™"
-                        class="brand-logo">
+                        class="brand-logo"
+                        alt="CTM PATH™">
 
                 </a>
-
-                <!-- ================================================
-                     Header Actions
-                     ================================================ -->
 
                 <nav
                     class="header-actions"
@@ -236,8 +208,7 @@
                     <button
                         id="languageToggle"
                         class="icon-button"
-                        type="button"
-                        aria-label="Switch Language">
+                        type="button">
 
                         தமிழ் | EN
 
@@ -246,8 +217,7 @@
                     <button
                         id="helpButton"
                         class="icon-button"
-                        type="button"
-                        aria-label="Help">
+                        type="button">
 
                         ?
 
@@ -264,17 +234,16 @@
              ======================================================== -->
 
         <section
-            id="journeyProgress"
             class="journey-progress"
-            aria-labelledby="sceneIndicator">
+            aria-label="Journey Progress">
 
             <div class="progress-header">
 
                 <span
-                    id="sceneIndicator"
+                    id="progressText"
                     class="scene-indicator">
 
-                    Scene 1 of 9
+                    1 / 9
 
                 </span>
 
@@ -288,9 +257,7 @@
 
             </div>
 
-            <div
-                class="progress-track"
-                aria-hidden="true">
+            <div class="progress-track">
 
                 <div
                     id="progressBar"
@@ -303,7 +270,7 @@
         </section>
 
         <!-- ========================================================
-             Main Application
+             Scene Container
              ======================================================== -->
 
         <main
@@ -311,24 +278,6 @@
             class="scene-root"
             role="main"
             tabindex="-1">
-
-            <!-- ====================================================
-                 Dynamic Scene Injection Point
-
-                 app.js loads
-
-                 scene01.html
-                 scene02.html
-                 scene03.html
-                 scene04.html
-                 scene05.html
-                 scene06.html
-                 scene07.html
-                 scene08.html
-                 scene09.html
-
-                 into this container.
-                 ==================================================== -->
 
         </main>
 
@@ -339,22 +288,16 @@
         <div
             id="loadingOverlay"
             class="loading-overlay"
-            hidden
-            aria-hidden="true">
+            hidden>
 
             <div class="loading-card">
 
-                <div
-                    class="loading-spinner"
-                    aria-hidden="true">
-
-                </div>
+                <div class="loading-spinner"></div>
 
                 <p
-                    id="loadingMessage"
-                    class="loading-message">
+                    id="loadingMessage">
 
-                    Preparing Your Journey...
+                    Preparing your journey...
 
                 </p>
 
@@ -363,27 +306,22 @@
         </div>
 
         <!-- ========================================================
-             AI Thinking Overlay
+             Thinking Overlay
              ======================================================== -->
 
         <div
             id="thinkingOverlay"
             class="thinking-overlay"
-            hidden
-            aria-hidden="true">
+            hidden>
 
             <div class="thinking-card">
 
-                <div
-                    class="thinking-animation"
-                    aria-hidden="true">
-
-                </div>
+                <div class="thinking-animation"></div>
 
                 <p
                     id="thinkingMessage">
 
-                    Connecting The Dots...
+                    Connecting the dots...
 
                 </p>
 
@@ -392,7 +330,7 @@
         </div>
 
         <!-- ========================================================
-             Toast Notifications
+             Toast Container
              ======================================================== -->
 
         <div
@@ -415,7 +353,7 @@
         </div>
 
         <!-- ========================================================
-             Accessibility Live Region
+             Live Region
              ======================================================== -->
 
         <div
@@ -427,7 +365,7 @@
         </div>
 
         <!-- ========================================================
-             Global Error Boundary
+             Error Boundary
              ======================================================== -->
 
         <div
@@ -439,15 +377,13 @@
 
                 <h2>
 
-                    Something Interrupted Your Journey
+                    Something interrupted your journey
 
                 </h2>
 
                 <p>
 
-                    Don't worry.
-
-                    Your progress has been preserved.
+                    Please try again.
 
                 </p>
 
@@ -456,7 +392,7 @@
                     class="primary-button"
                     type="button">
 
-                    Continue My Journey
+                    Retry
 
                 </button>
 
@@ -474,21 +410,15 @@
 
         <div class="noscript-message">
 
-            <h1>
+            <h2>
 
                 JavaScript Required
 
-            </h1>
+            </h2>
 
             <p>
 
-                CTM PATH™ requires JavaScript to deliver the guided journey.
-
-            </p>
-
-            <p>
-
-                Please enable JavaScript and reload this page.
+                Please enable JavaScript to experience the CTM PATH™ Guided Journey.
 
             </p>
 
@@ -497,58 +427,39 @@
     </noscript>
 
     <!-- ============================================================
-         Global Configuration
+         JavaScript Engine
+         Load Order is IMPORTANT
          ============================================================ -->
 
-    <script>
+    <!-- Foundation -->
 
-        window.CTM_CONFIG = Object.freeze({
+    <script src="js/config.js" defer></script>
 
-            appName: "CTM PATH™ Guided Journey",
+    <script src="js/store.js" defer></script>
 
-            version: "1.0.0",
+    <script src="js/services.js" defer></script>
 
-            defaultLanguage: "ta",
+    <!-- UI -->
 
-            supportedLanguages: ["ta", "en"],
+    <script src="js/components.js" defer></script>
 
-            totalScenes: 9,
+    <!-- Core Engine -->
 
-            debug: false
+    <script src="js/scene-loader.js" defer></script>
 
-        });
+    <script src="js/navigation.js" defer></script>
 
-    </script>
+    <script src="js/rules.js" defer></script>
 
-    <!-- ============================================================
-         Application Engine
-         ============================================================ -->
+    <script src="js/personalization.js" defer></script>
 
-    <script
-        src="app.js"
-        defer>
-    </script>
+    <!-- Bootstrap -->
 
-    <!-- ============================================================
-         Application Bootstrap
-         ============================================================ -->
+    <script src="js/bootstrap.js" defer></script>
 
-    <script>
+    <!-- Application -->
 
-        document.addEventListener("DOMContentLoaded", () => {
-
-            if (
-                window.CTM &&
-                typeof window.CTM.boot === "function"
-            ) {
-
-                window.CTM.boot();
-
-            }
-
-        });
-
-    </script>
+    <script src="js/app.js" defer></script>
 
 </body>
 
