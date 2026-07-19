@@ -5,7 +5,6 @@
  * Bootstrap Engine
  * File        : js/bootstrap.js
  * Version     : 1.0.0
- * Batch       : 1 of 2
  * Status      : Production
  * ============================================================
  */
@@ -105,13 +104,7 @@
 
             window.CTM.personalization.initialize();
 
-        }
-
-    };
-
-    window.CTM.bootstrap = Bootstrap;
-
-})();
+        },
 
         /**
          * --------------------------------------------------------
@@ -205,5 +198,33 @@
 
         }
 
+    };
 
+    /**
+     * ============================================================
+     * Register Bootstrap
+     * ============================================================
+     */
+
+    Object.defineProperty(
+
+        window.CTM,
+
+        "bootstrap",
+
+        {
+
+            value: Bootstrap,
+
+            writable: false,
+
+            configurable: false,
+
+            enumerable: true
+
+        }
+
+    );
+
+})();
 
