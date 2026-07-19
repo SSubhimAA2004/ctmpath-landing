@@ -4,8 +4,7 @@
  * CTM PATH™ Guided Journey
  * Scene Loader Engine
  * File        : js/scene-loader.js
- * Version     : 1.0.0
- * Batch       : 1 of 5
+ * Version     : 2.0.0
  * Status      : Production
  * ============================================================
  */
@@ -14,9 +13,23 @@
 
     "use strict";
 
-    if (!window.CTM) {
+    if (
 
-        throw new Error("CTM namespace not initialized.");
+        !window.CTM ||
+
+        !window.CTM.config ||
+
+        !window.CTM.services ||
+
+        !window.CTM.store
+
+    ) {
+
+        throw new Error(
+
+            "CTM core modules not initialized."
+
+        );
 
     }
 
@@ -24,13 +37,19 @@
 
         DOM,
 
-        Utils,
+        Logger,
 
         Errors,
 
-        Logger
+        Events
 
     } = window.CTM.services;
+
+    /**
+     * ============================================================
+     * Scene Loader
+     * ============================================================
+     */
 
     const SceneLoader = {
 
@@ -52,6 +71,20 @@
 
         /**
          * --------------------------------------------------------
+         * Lifecycle Hooks
+         * --------------------------------------------------------
+         */
+
+        hooks: {
+
+            beforeLoad: [],
+
+            afterLoad: []
+
+        },
+
+        /**
+         * --------------------------------------------------------
          * Initialize
          * --------------------------------------------------------
          */
@@ -60,7 +93,7 @@
 
             this.root = DOM.get(
 
-                window.CTM.config.SCENES.ROOT
+                window.CTM.config.DOM.ROOT
 
             );
 
@@ -84,15 +117,17 @@
 
         file(sceneNumber) {
 
-            const number = String(sceneNumber)
+            const number =
 
-                .padStart(2, "0");
+                String(sceneNumber)
+
+                    .padStart(2, "0");
 
             return (
 
                 window.CTM.config.SCENES.PATH +
 
-                "scene" +
+                window.CTM.config.SCENES.PREFIX +
 
                 number +
 
@@ -146,7 +181,9 @@
 
             }
 
-            const html = await response.text();
+            const html =
+
+                await response.text();
 
             this.cache.set(
 
@@ -168,21 +205,19 @@
 
         clear() {
 
-            if (!this.root) return;
+            if (!this.root) {
+
+                return;
+
+            }
 
             this.root.innerHTML = "";
 
-        }
-
-    };
-
-    window.CTM.sceneLoader = SceneLoader;
-
-})();
+        },
 
         /**
          * --------------------------------------------------------
-         * Inject Scene HTML
+         * Inject Scene
          * --------------------------------------------------------
          */
 
@@ -202,123 +237,27 @@
 
             this.root.innerHTML = html;
 
-        },
+        }
 
         /**
          * --------------------------------------------------------
-         * Load Scene
+         * Execute Hooks
          * --------------------------------------------------------
          */
 
-        async load(sceneNumber) {
+        async executeHooks(event, sceneNumber) {
 
-            try {
-
-                const html = await this.fetch(
-
-                    sceneNumber
-
-                );
-
-                this.inject(html);
-
-                window.CTM.store.update(
-
-                    "visitor",
-
-                    "currentScene",
-
-                    sceneNumber
-
-                );
-
-                window.CTM.store.update(
-
-                    "journey",
-
-                    "lastVisitedScene",
-
-                    sceneNumber
-
-                );
-
-                this.initializeComponents();
-
-                Logger.info(
-
-                    `Scene ${sceneNumber} loaded.`
-
-                );
-
-                return true;
-
-            }
-
-            catch (error) {
-
-                Errors.handle(
-
-                    error,
-
-                    "Scene Loader"
-
-                );
-
-                return false;
-
-            }
-
-        },
-
-        /**
-         * --------------------------------------------------------
-         * Initialize Scene Components
-         * --------------------------------------------------------
-         */
-
-        initializeComponents() {
-
-            if (
-
-                !window.CTM.components
-
-            ) {
+            if (!this.hooks[event]) {
 
                 return;
 
             }
 
-            window.CTM.components.initialize(
+            for (const callback of this.hooks[event]) {
 
-                this.root
+                await callback(sceneNumber);
 
-            );
-
-        },
-
-        /**
-         * --------------------------------------------------------
-         * Get Current Scene Element
-         * --------------------------------------------------------
-         */
-
-        currentScene() {
-
-            return this.root.firstElementChild;
-
-        }
-
-        /**
-         * --------------------------------------------------------
-         * Lifecycle Hooks
-         * --------------------------------------------------------
-         */
-
-        hooks: {
-
-            beforeLoad: [],
-
-            afterLoad: []
+            }
 
         },
 
@@ -348,21 +287,137 @@
 
         /**
          * --------------------------------------------------------
-         * Execute Hook
+         * Dispatch Event
          * --------------------------------------------------------
          */
 
-        async execute(event, sceneNumber) {
+        dispatch(eventName, sceneNumber) {
 
-            if (!this.hooks[event]) {
+            Events.emit(
 
-                return;
+                document,
+
+                eventName,
+
+                {
+
+                    scene: sceneNumber
+
+                }
+
+            );
+
+        },
+
+        /**
+         * --------------------------------------------------------
+         * Load Scene
+         * --------------------------------------------------------
+         */
+
+        async load(sceneNumber) {
+
+            try {
+
+                await this.executeHooks(
+
+                    "beforeLoad",
+
+                    sceneNumber
+
+                );
+
+                this.dispatch(
+
+                    "ctm:beforeSceneLoad",
+
+                    sceneNumber
+
+                );
+
+                const html =
+
+                    await this.fetch(sceneNumber);
+
+                this.inject(html);
+
+                window.CTM.store.update(
+
+                    "visitor",
+
+                    "currentScene",
+
+                    sceneNumber
+
+                );
+
+                window.CTM.store.update(
+
+                    "journey",
+
+                    "lastVisitedScene",
+
+                    sceneNumber
+
+                );
+
+                if (
+
+                    window.CTM.components
+
+                ) {
+
+                    window.CTM.components.refresh(
+
+                        this.root
+
+                    );
+
+                }
+
+                await this.executeHooks(
+
+                    "afterLoad",
+
+                    sceneNumber
+
+                );
+
+                this.dispatch(
+
+                    "ctm:afterSceneLoad",
+
+                    sceneNumber
+
+                );
+
+                this.preloadAdjacent(
+
+                    sceneNumber
+
+                );
+
+                Logger.info(
+
+                    `Scene ${sceneNumber} loaded.`
+
+                );
+
+                return true;
 
             }
 
-            for (const callback of this.hooks[event]) {
+            catch (error) {
 
-                await callback(sceneNumber);
+                Errors.handle(
+
+                    error,
+
+                    "SceneLoader"
+
+                );
+
+                return false;
 
             }
 
@@ -370,33 +425,19 @@
 
         /**
          * --------------------------------------------------------
-         * Dispatch Scene Event
+         * Current Scene Element
          * --------------------------------------------------------
          */
 
-        dispatch(eventName, sceneNumber) {
+        currentScene() {
 
-            document.dispatchEvent(
+            return this.root
 
-                new CustomEvent(
+                ? this.root.firstElementChild
 
-                    eventName,
+                : null;
 
-                    {
-
-                        detail: {
-
-                            scene: sceneNumber
-
-                        }
-
-                    }
-
-                )
-
-            );
-
-        },
+        }
 
         /**
          * --------------------------------------------------------
@@ -408,9 +449,13 @@
 
             if (
 
-                sceneNumber < window.CTM.config.JOURNEY.FIRST_SCENE ||
+                sceneNumber <
 
-                sceneNumber > window.CTM.config.JOURNEY.LAST_SCENE
+                window.CTM.config.JOURNEY.FIRST_SCENE ||
+
+                sceneNumber >
+
+                window.CTM.config.JOURNEY.LAST_SCENE
 
             ) {
 
@@ -430,25 +475,7 @@
 
             try {
 
-                const html = await this.fetch(
-
-                    sceneNumber
-
-                );
-
-                this.cache.set(
-
-                    sceneNumber,
-
-                    html
-
-                );
-
-                Logger.info(
-
-                    `Scene ${sceneNumber} preloaded.`
-
-                );
+                await this.fetch(sceneNumber);
 
             }
 
@@ -498,11 +525,7 @@
 
         unload(sceneNumber) {
 
-            this.cache.delete(
-
-                sceneNumber
-
-            );
+            this.cache.delete(sceneNumber);
 
         },
 
@@ -526,7 +549,7 @@
 
         cacheInfo() {
 
-            return {
+            return Object.freeze({
 
                 size: this.cache.size,
 
@@ -536,13 +559,13 @@
 
                 ]
 
-            };
+            });
 
-        }
+        },
 
         /**
          * --------------------------------------------------------
-         * Reset Loader
+         * Reset
          * --------------------------------------------------------
          */
 
@@ -556,7 +579,7 @@
 
         /**
          * --------------------------------------------------------
-         * Destroy Loader
+         * Destroy
          * --------------------------------------------------------
          */
 
@@ -588,9 +611,13 @@
 
             return Object.freeze({
 
-                initialized: this.root !== null,
+                initialized:
 
-                cachedScenes: this.cache.size,
+                    this.root instanceof HTMLElement,
+
+                cachedScenes:
+
+                    this.cache.size,
 
                 currentScene:
 
@@ -602,9 +629,83 @@
 
                 rootAvailable:
 
-                    this.root instanceof HTMLElement
+                    this.root !== null
 
             });
 
         }
+
+    };
+
+    /**
+     * ============================================================
+     * Public API
+     * ============================================================
+     */
+
+    const SceneLoaderAPI = Object.freeze({
+
+        initialize:
+            SceneLoader.initialize.bind(SceneLoader),
+
+        load:
+            SceneLoader.load.bind(SceneLoader),
+
+        preload:
+            SceneLoader.preload.bind(SceneLoader),
+
+        preloadAdjacent:
+            SceneLoader.preloadAdjacent.bind(SceneLoader),
+
+        currentScene:
+            SceneLoader.currentScene.bind(SceneLoader),
+
+        on:
+            SceneLoader.on.bind(SceneLoader),
+
+        reset:
+            SceneLoader.reset.bind(SceneLoader),
+
+        destroy:
+            SceneLoader.destroy.bind(SceneLoader),
+
+        clearCache:
+            SceneLoader.clearCache.bind(SceneLoader),
+
+        cacheInfo:
+            SceneLoader.cacheInfo.bind(SceneLoader),
+
+        health:
+            SceneLoader.health.bind(SceneLoader)
+
+    });
+
+    /**
+     * ============================================================
+     * Register Scene Loader
+     * ============================================================
+     */
+
+    Object.defineProperty(
+
+        window.CTM,
+
+        "sceneLoader",
+
+        {
+
+            value: SceneLoaderAPI,
+
+            writable: false,
+
+            configurable: false,
+
+            enumerable: true
+
+        }
+
+    );
+
+})();
+
 
