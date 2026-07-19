@@ -1,147 +1,558 @@
 
 <!DOCTYPE html>
-
-<html
-    lang="en"
->
+<html lang="ta">
 
 <head>
 
-    <!-- ==========================================================
-         CTM PATH™ GUIDED JOURNEY™
-         FOUNDATION-01
-         APPLICATION SHELL
-         VERSION 1.0
-    =========================================================== -->
+    <!-- ============================================================
+         CTM PATH™ Guided Journey
+         Premium AI-Powered Financial Discovery Experience
+         ------------------------------------------------------------
+         File        : index.html
+         Version     : 1.0.0
+         Status      : PRODUCTION
+         Architecture: GitHub Pages + Vanilla JavaScript
+         ============================================================ -->
 
-    <!-- ==========================================================
-         DOCUMENT
-    =========================================================== -->
+    <!-- ============================================================
+         Character Encoding
+         ============================================================ -->
 
-    <meta
-        charset="UTF-8"
-    >
+    <meta charset="UTF-8">
 
     <meta
         http-equiv="X-UA-Compatible"
-        content="IE=edge"
-    >
+        content="IE=edge">
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    <!-- ==========================================================
-         SEO
-    =========================================================== -->
+    <meta
+        name="theme-color"
+        content="#081C3A">
+
+    <meta
+        name="color-scheme"
+        content="dark">
+
+    <meta
+        name="application-name"
+        content="CTM PATH™">
+
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes">
+
+    <meta
+        name="mobile-web-app-capable"
+        content="yes">
+
+    <meta
+        name="format-detection"
+        content="telephone=no">
+
+    <meta
+        name="referrer"
+        content="strict-origin-when-cross-origin">
+
+    <!-- ============================================================
+         Primary SEO
+         ============================================================ -->
 
     <title>
-
-        CTM PATH™ Guided Journey™
-
+        CTM PATH™ | Guided Financial Discovery Journey
     </title>
 
     <meta
         name="description"
-        content="Every Dream Has a Path™"
-    >
+        content="Discover your financial future through a private six-minute AI-guided financial discovery journey.">
+
+    <meta
+        name="keywords"
+        content="CTM PATH, Financial Discovery, Financial MRI, Financial Planning, Personal Finance, Tamil, English">
 
     <meta
         name="author"
-        content="Healer King Raphael Raj"
-    >
-
-    <!-- ==========================================================
-         SOCIAL SHARING
-    =========================================================== -->
+        content="CTM PATH™">
 
     <meta
-        property="og:title"
-        content="CTM PATH™ Guided Journey™"
-    >
+        name="robots"
+        content="index,follow">
 
-    <meta
-        property="og:description"
-        content="Every Dream Has a Path™"
-    >
+    <!-- ============================================================
+         Open Graph
+         ============================================================ -->
 
     <meta
         property="og:type"
-        content="website"
-    >
+        content="website">
 
-    <!-- ==========================================================
-         GOOGLE FONTS
-    =========================================================== -->
+    <meta
+        property="og:site_name"
+        content="CTM PATH™">
+
+    <meta
+        property="og:title"
+        content="CTM PATH™ Guided Journey">
+
+    <meta
+        property="og:description"
+        content="A premium AI-guided financial discovery experience.">
+
+    <!--
+        Replace before production deployment.
+    -->
+
+    <meta
+        property="og:url"
+        content="YOUR_DOMAIN">
+
+    <meta
+        property="og:image"
+        content="images/og-image.jpg">
+
+    <!-- ============================================================
+         Twitter
+         ============================================================ -->
+
+    <meta
+        name="twitter:card"
+        content="summary_large_image">
+
+    <meta
+        name="twitter:title"
+        content="CTM PATH™ Guided Journey">
+
+    <meta
+        name="twitter:description"
+        content="A premium AI-guided financial discovery experience.">
+
+    <meta
+        name="twitter:image"
+        content="images/og-image.jpg">
+
+    <!-- ============================================================
+         Icons
+         ============================================================ -->
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="images/favicon.png">
+
+    <link
+        rel="apple-touch-icon"
+        href="images/apple-touch-icon.png">
+
+    <!-- ============================================================
+         Performance
+         ============================================================ -->
 
     <link
         rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
+        href="https://fonts.googleapis.com">
 
     <link
         rel="preconnect"
         href="https://fonts.gstatic.com"
-        crossorigin
-    >
+        crossorigin>
+
+    <!-- ============================================================
+         Fonts
+         ============================================================ -->
 
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Tamil:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
+        rel="stylesheet">
 
-    <!-- ==========================================================
-         STYLESHEET
-    =========================================================== -->
+    <!-- ============================================================
+         Global Stylesheet
+         ============================================================ -->
 
     <link
         rel="stylesheet"
-        href="styles.css"
-    >
+        href="styles.css">
 
 </head>
 
 <body>
 
-    <!-- ==========================================================
-         APPLICATION
-    =========================================================== -->
+    <!-- ============================================================
+         Skip Navigation
+         Accessibility
+         ============================================================ -->
+
+    <a
+        href="#sceneRoot"
+        class="skip-link">
+
+        Skip to Main Content
+
+    </a>
+
+    <!-- ============================================================
+         CTM Application
+         ============================================================ -->
 
     <div
-        id="app"
-    >
+        id="ctm-app"
+        class="app-shell">
 
-        <!-- ======================================================
-             JOURNEY ENGINE
-        ======================================================= -->
+        <!-- ========================================================
+             Application Header
+             ======================================================== -->
+
+        <header
+            class="app-header"
+            role="banner">
+
+            <div class="header-container">
+
+                <!-- ================================================
+                     Brand
+                     ================================================ -->
+
+                <a
+                    href="#"
+                    class="brand"
+                    aria-label="CTM PATH Home">
+
+                    <img
+                        src="images/CTM_Logo.png"
+                        alt="CTM PATH™"
+                        class="brand-logo">
+
+                </a>
+
+                <!-- ================================================
+                     Header Actions
+                     ================================================ -->
+
+                <nav
+                    class="header-actions"
+                    aria-label="Application Controls">
+
+                    <button
+                        id="languageToggle"
+                        class="icon-button"
+                        type="button"
+                        aria-label="Switch Language">
+
+                        தமிழ் | EN
+
+                    </button>
+
+                    <button
+                        id="helpButton"
+                        class="icon-button"
+                        type="button"
+                        aria-label="Help">
+
+                        ?
+
+                    </button>
+
+                </nav>
+
+            </div>
+
+        </header>
+
+        <!-- ========================================================
+             Journey Progress
+             ======================================================== -->
+
+        <section
+            id="journeyProgress"
+            class="journey-progress"
+            aria-labelledby="sceneIndicator">
+
+            <div class="progress-header">
+
+                <span
+                    id="sceneIndicator"
+                    class="scene-indicator">
+
+                    Scene 1 of 9
+
+                </span>
+
+                <span
+                    id="progressPercentage"
+                    class="progress-percentage">
+
+                    11%
+
+                </span>
+
+            </div>
+
+            <div
+                class="progress-track"
+                aria-hidden="true">
+
+                <div
+                    id="progressBar"
+                    class="progress-fill">
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ========================================================
+             Main Application
+             ======================================================== -->
 
         <main
-            id="journey"
+            id="sceneRoot"
+            class="scene-root"
             role="main"
-            aria-label="CTM PATH Guided Journey"
-        >
+            tabindex="-1">
 
+            <!-- ====================================================
+                 Dynamic Scene Injection Point
 
-            <!-- ==============================================
-                 SCENES ARE ADDED HERE
-                 DURING SCENE DEVELOPMENT
-            =============================================== -->
+                 app.js loads
+
+                 scene01.html
+                 scene02.html
+                 scene03.html
+                 scene04.html
+                 scene05.html
+                 scene06.html
+                 scene07.html
+                 scene08.html
+                 scene09.html
+
+                 into this container.
+                 ==================================================== -->
 
         </main>
 
+        <!-- ========================================================
+             Loading Overlay
+             ======================================================== -->
+
+        <div
+            id="loadingOverlay"
+            class="loading-overlay"
+            hidden
+            aria-hidden="true">
+
+            <div class="loading-card">
+
+                <div
+                    class="loading-spinner"
+                    aria-hidden="true">
+
+                </div>
+
+                <p
+                    id="loadingMessage"
+                    class="loading-message">
+
+                    Preparing Your Journey...
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ========================================================
+             AI Thinking Overlay
+             ======================================================== -->
+
+        <div
+            id="thinkingOverlay"
+            class="thinking-overlay"
+            hidden
+            aria-hidden="true">
+
+            <div class="thinking-card">
+
+                <div
+                    class="thinking-animation"
+                    aria-hidden="true">
+
+                </div>
+
+                <p
+                    id="thinkingMessage">
+
+                    Connecting The Dots...
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ========================================================
+             Toast Notifications
+             ======================================================== -->
+
+        <div
+            id="toastContainer"
+            class="toast-container"
+            aria-live="polite"
+            aria-atomic="true">
+
+        </div>
+
+        <!-- ========================================================
+             Modal Container
+             ======================================================== -->
+
+        <div
+            id="modalContainer"
+            class="modal-container"
+            hidden>
+
+        </div>
+
+        <!-- ========================================================
+             Accessibility Live Region
+             ======================================================== -->
+
+        <div
+            id="liveRegion"
+            class="sr-only"
+            aria-live="assertive"
+            aria-atomic="true">
+
+        </div>
+
+        <!-- ========================================================
+             Global Error Boundary
+             ======================================================== -->
+
+        <div
+            id="errorBoundary"
+            class="error-boundary"
+            hidden>
+
+            <div class="error-card">
+
+                <h2>
+
+                    Something Interrupted Your Journey
+
+                </h2>
+
+                <p>
+
+                    Don't worry.
+
+                    Your progress has been preserved.
+
+                </p>
+
+                <button
+                    id="retryButton"
+                    class="primary-button"
+                    type="button">
+
+                    Continue My Journey
+
+                </button>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <!-- ==========================================================
-         APPLICATION SCRIPT
-    =========================================================== -->
+    <!-- ============================================================
+         JavaScript Required
+         ============================================================ -->
+
+    <noscript>
+
+        <div class="noscript-message">
+
+            <h1>
+
+                JavaScript Required
+
+            </h1>
+
+            <p>
+
+                CTM PATH™ requires JavaScript to deliver the guided journey.
+
+            </p>
+
+            <p>
+
+                Please enable JavaScript and reload this page.
+
+            </p>
+
+        </div>
+
+    </noscript>
+
+    <!-- ============================================================
+         Global Configuration
+         ============================================================ -->
+
+    <script>
+
+        window.CTM_CONFIG = Object.freeze({
+
+            appName: "CTM PATH™ Guided Journey",
+
+            version: "1.0.0",
+
+            defaultLanguage: "ta",
+
+            supportedLanguages: ["ta", "en"],
+
+            totalScenes: 9,
+
+            debug: false
+
+        });
+
+    </script>
+
+    <!-- ============================================================
+         Application Engine
+         ============================================================ -->
 
     <script
         src="app.js"
-    ></script>
+        defer>
+    </script>
+
+    <!-- ============================================================
+         Application Bootstrap
+         ============================================================ -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            if (
+                window.CTM &&
+                typeof window.CTM.boot === "function"
+            ) {
+
+                window.CTM.boot();
+
+            }
+
+        });
+
+    </script>
 
 </body>
 
 </html>
+
 
 
