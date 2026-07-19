@@ -1,469 +1,156 @@
 
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
 
-    <!-- ============================================================
+    <!-- ==========================================================
          CTM PATH™ Guided Journey
-         Premium AI-Powered Financial Discovery Experience
-         ------------------------------------------------------------
-         File        : index.html
-         Version     : 2.0.0
-         Status      : PRODUCTION
-         ============================================================ -->
-
-    <!-- ============================================================
-         Character Encoding
-         ============================================================ -->
+         Premium Cinematic Landing Experience
+         Version : 3.0.0
+         ========================================================== -->
 
     <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <meta
         http-equiv="X-UA-Compatible"
         content="IE=edge">
 
+    <title>
+        CTM PATH™ Guided Journey
+    </title>
+
     <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        name="description"
+        content="A premium guided discovery journey with Raphael Raj.">
 
     <meta
         name="theme-color"
         content="#081C3A">
 
-    <meta
-        name="color-scheme"
-        content="dark">
-
-    <meta
-        name="application-name"
-        content="CTM PATH™">
-
-    <meta
-        name="mobile-web-app-capable"
-        content="yes">
-
-    <meta
-        name="apple-mobile-web-app-capable"
-        content="yes">
-
-    <meta
-        name="format-detection"
-        content="telephone=no">
-
-    <meta
-        name="referrer"
-        content="strict-origin-when-cross-origin">
-
-    <!-- ============================================================
-         SEO
-         ============================================================ -->
-
-    <title>
-
-        CTM PATH™ | Guided Journey™
-
-    </title>
-
-    <meta
-        name="description"
-        content="Discover your financial future through a premium AI-guided six-minute financial discovery journey.">
-
-    <meta
-        name="keywords"
-        content="CTM PATH, Guided Journey, Financial Discovery, Tamil, English">
-
-    <meta
-        name="author"
-        content="CTM PATH™">
-
-    <meta
-        name="robots"
-        content="index,follow">
-
-    <!-- ============================================================
-         Open Graph
-         ============================================================ -->
-
-    <meta
-        property="og:type"
-        content="website">
-
-    <meta
-        property="og:site_name"
-        content="CTM PATH™">
-
-    <meta
-        property="og:title"
-        content="CTM PATH™ Guided Journey">
-
-    <meta
-        property="og:description"
-        content="A premium AI-guided financial discovery experience.">
-
-    <meta
-        property="og:url"
-        content="https://ctmpath-landing.pages.dev">
-
-    <meta
-        property="og:image"
-        content="images/CTM_Logo.png">
-
-    <!-- ============================================================
-         Twitter
-         ============================================================ -->
-
-    <meta
-        name="twitter:card"
-        content="summary_large_image">
-
-    <meta
-        name="twitter:title"
-        content="CTM PATH™ Guided Journey">
-
-    <meta
-        name="twitter:description"
-        content="A premium AI-guided financial discovery experience.">
-
-    <meta
-        name="twitter:image"
-        content="images/CTM_Logo.png">
-
-    <!-- ============================================================
-         Icons
-         ============================================================ -->
+    <!-- ==========================================================
+         Favicon
+         ========================================================== -->
 
     <link
         rel="icon"
+        type="image/png"
         href="images/CTM_Logo.png">
 
-    <link
-        rel="apple-touch-icon"
-        href="images/CTM_Logo.png">
-
-    <!-- ============================================================
-         Performance
-         ============================================================ -->
-
-    <link
-        rel="preload"
-        href="images/CTM_Logo.png"
-        as="image">
-
-    <!-- ============================================================
-         Stylesheet
-         ============================================================ -->
+    <!-- ==========================================================
+         CSS
+         Load Order is IMPORTANT
+         ========================================================== -->
 
     <link
         rel="stylesheet"
-        href="styles.css">
+        href="css/reset.css">
+
+    <link
+        rel="stylesheet"
+        href="css/tokens.css">
+
+    <link
+        rel="stylesheet"
+        href="css/typography.css">
+
+    <link
+        rel="stylesheet"
+        href="css/layout.css">
+
+    <link
+        rel="stylesheet"
+        href="css/cards.css">
+
+    <link
+        rel="stylesheet"
+        href="css/buttons.css">
+
+    <link
+        rel="stylesheet"
+        href="css/forms.css">
+
+    <link
+        rel="stylesheet"
+        href="css/progress.css">
+
+    <link
+        rel="stylesheet"
+        href="css/animations.css">
+
+    <link
+        rel="stylesheet"
+        href="css/responsive.css">
 
 </head>
 
 <body>
 
-    <!-- ============================================================
-         Skip Navigation
-         ============================================================ -->
+    <!-- ==========================================================
+         Application Root
+         Everything is rendered inside this container.
+         ========================================================== -->
 
-    <a
-        href="#sceneRoot"
-        class="skip-link">
+    <main
+        id="app"
+        class="app">
 
-        Skip to Main Content
+        <noscript>
 
-    </a>
+            JavaScript is required to run
+            CTM PATH™ Guided Journey.
 
-    <!-- ============================================================
-         Application Shell
-         ============================================================ -->
+        </noscript>
+
+    </main>
+
+    <!-- ==========================================================
+         Hidden Component Templates
+         Loaded by loader.js
+         ========================================================== -->
 
     <div
-        id="ctm-app"
-        class="app-shell">
-
-        <!-- ========================================================
-             Header
-             ======================================================== -->
-
-        <header
-            class="app-header"
-            role="banner">
-
-            <div class="header-container">
-
-                <a
-                    href="#"
-                    class="brand"
-                    aria-label="CTM PATH">
-
-                    <img
-                        src="images/CTM_Logo.png"
-                        class="brand-logo"
-                        alt="CTM PATH™">
-
-                </a>
-
-                <nav
-                    class="header-actions"
-                    aria-label="Application Controls">
-
-                    <button
-                        id="languageToggle"
-                        class="icon-button"
-                        type="button">
-
-                        தமிழ் | EN
-
-                    </button>
-
-                    <button
-                        id="helpButton"
-                        class="icon-button"
-                        type="button">
-
-                        ?
-
-                    </button>
-
-                </nav>
-
-            </div>
-
-        </header>
-
-        <!-- ========================================================
-             Journey Progress
-             ======================================================== -->
-
-        <section
-            class="journey-progress"
-            aria-label="Journey Progress">
-
-            <div class="progress-header">
-
-                <span
-                    id="progressText"
-                    class="scene-indicator">
-
-                    1 / 9
-
-                </span>
-
-                <span
-                    id="progressPercentage"
-                    class="progress-percentage">
-
-                    11%
-
-                </span>
-
-            </div>
-
-            <div class="progress-track">
-
-                <div
-                    id="progressBar"
-                    class="progress-fill">
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- ========================================================
-             Scene Container
-             ======================================================== -->
-
-        <main
-            id="sceneRoot"
-            class="scene-root"
-            role="main"
-            tabindex="-1">
-
-        </main>
-
-        <!-- ========================================================
-             Loading Overlay
-             ======================================================== -->
-
-        <div
-            id="loadingOverlay"
-            class="loading-overlay"
-            hidden>
-
-            <div class="loading-card">
-
-                <div class="loading-spinner"></div>
-
-                <p
-                    id="loadingMessage">
-
-                    Preparing your journey...
-
-                </p>
-
-            </div>
-
-        </div>
-
-        <!-- ========================================================
-             Thinking Overlay
-             ======================================================== -->
-
-        <div
-            id="thinkingOverlay"
-            class="thinking-overlay"
-            hidden>
-
-            <div class="thinking-card">
-
-                <div class="thinking-animation"></div>
-
-                <p
-                    id="thinkingMessage">
-
-                    Connecting the dots...
-
-                </p>
-
-            </div>
-
-        </div>
-
-        <!-- ========================================================
-             Toast Container
-             ======================================================== -->
-
-        <div
-            id="toastContainer"
-            class="toast-container"
-            aria-live="polite"
-            aria-atomic="true">
-
-        </div>
-
-        <!-- ========================================================
-             Modal Container
-             ======================================================== -->
-
-        <div
-            id="modalContainer"
-            class="modal-container"
-            hidden>
-
-        </div>
-
-        <!-- ========================================================
-             Live Region
-             ======================================================== -->
-
-        <div
-            id="liveRegion"
-            class="sr-only"
-            aria-live="assertive"
-            aria-atomic="true">
-
-        </div>
-
-        <!-- ========================================================
-             Error Boundary
-             ======================================================== -->
-
-        <div
-            id="errorBoundary"
-            class="error-boundary"
-            hidden>
-
-            <div class="error-card">
-
-                <h2>
-
-                    Something interrupted your journey
-
-                </h2>
-
-                <p>
-
-                    Please try again.
-
-                </p>
-
-                <button
-                    id="retryButton"
-                    class="primary-button"
-                    type="button">
-
-                    Retry
-
-                </button>
-
-            </div>
-
-        </div>
+        id="template-container"
+        hidden>
 
     </div>
 
-    <!-- ============================================================
-         JavaScript Required
-         ============================================================ -->
-
-    <noscript>
-
-        <div class="noscript-message">
-
-            <h2>
-
-                JavaScript Required
-
-            </h2>
-
-            <p>
-
-                Please enable JavaScript to experience the CTM PATH™ Guided Journey.
-
-            </p>
-
-        </div>
-
-    </noscript>
-
-    <!-- ============================================================
-         JavaScript Engine
+    <!-- ==========================================================
+         JavaScript
          Load Order is IMPORTANT
-         ============================================================ -->
+         ========================================================== -->
 
-    <!-- Foundation -->
+    <script src="js/config.js"></script>
 
-    <script src="js/config.js" defer></script>
+    <script src="js/state.js"></script>
 
-    <script src="js/store.js" defer></script>
+    <script src="js/utils.js"></script>
 
-    <script src="js/services.js" defer></script>
+    <script src="js/loader.js"></script>
 
-    <!-- UI -->
+    <script src="js/renderer.js"></script>
 
-    <script src="js/components.js" defer></script>
+    <script src="js/navigation.js"></script>
 
-    <!-- Core Engine -->
+    <script src="js/events.js"></script>
 
-    <script src="js/scene-loader.js" defer></script>
+    <script src="js/personalization.js"></script>
 
-    <script src="js/navigation.js" defer></script>
+    <script src="js/conversation.js"></script>
 
-    <script src="js/rules.js" defer></script>
+    <script src="js/progress.js"></script>
 
-    <script src="js/personalization.js" defer></script>
+    <script src="js/analytics.js"></script>
 
-    <!-- Bootstrap -->
+    <script src="js/booking.js"></script>
 
-    <script src="js/bootstrap.js" defer></script>
-
-    <!-- Application -->
-
-    <script src="js/app.js" defer></script>
+    <script src="js/app.js"></script>
 
 </body>
 
 </html>
-
-
 
