@@ -1,1 +1,197 @@
 
+/*!
+==========================================================
+CTM PATH™ Guided Journey
+File        : css/progress.css
+Version     : 1.0.0
+Purpose     : Progress System
+Status      : Production
+==========================================================
+*/
+
+/* ======================================================
+   PROGRESS CONTAINER
+====================================================== */
+
+.progress {
+
+    width: 100%;
+
+    max-width: 900px;
+
+    margin: 0 auto var(--space-6);
+
+}
+
+/* ======================================================
+   PROGRESS HEADER
+====================================================== */
+
+.progress-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: var(--space-3);
+
+}
+
+/* ======================================================
+   STEP LABEL
+====================================================== */
+
+.progress-step {
+
+    color: var(--text-secondary);
+
+    font-size: var(--fs-sm);
+
+    font-weight: var(--fw-medium);
+
+}
+
+/* ======================================================
+   PERCENTAGE
+====================================================== */
+
+.progress-percent {
+
+    color: var(--color-secondary);
+
+    font-size: var(--fs-sm);
+
+    font-weight: var(--fw-semibold);
+
+}
+
+/* ======================================================
+   TRACK
+====================================================== */
+
+.progress-track {
+
+    width: 100%;
+
+    height: var(--progress-height);
+
+    background: rgba(255,255,255,0.10);
+
+    border-radius: var(--radius-pill);
+
+    overflow: hidden;
+
+}
+
+/* ======================================================
+   BAR
+====================================================== */
+
+.progress-bar {
+
+    width: 0%;
+
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        var(--color-primary),
+        var(--color-secondary)
+    );
+
+    border-radius: inherit;
+
+    transition:
+        width var(--duration-normal)
+        var(--ease-smooth);
+
+}
+
+/* ======================================================
+   ACT LABEL
+====================================================== */
+
+.progress-act {
+
+    margin-top: var(--space-3);
+
+    text-align: center;
+
+    color: var(--text-muted);
+
+    font-size: var(--fs-xs);
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+
+}
+
+/* ======================================================
+   JOURNEY INDICATOR
+====================================================== */
+
+.progress-journey {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: var(--space-2);
+
+    margin-top: var(--space-5);
+
+}
+
+/* ======================================================
+   DOT
+====================================================== */
+
+.progress-dot {
+
+    width: 10px;
+
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.20);
+
+}
+
+/* ======================================================
+   ACTIVE DOT
+====================================================== */
+
+.progress-dot.active {
+
+    background: var(--color-primary);
+
+}
+
+/* ======================================================
+   COMPLETED DOT
+====================================================== */
+
+.progress-dot.completed {
+
+    background: var(--color-secondary);
+
+}
+
+/* ======================================================
+   HIDDEN
+====================================================== */
+
+.progress-hidden {
+
+    display: none;
+
+}
+
+/* ======================================================
+   END
+======================================================
+*/
