@@ -136,9 +136,78 @@
 
         },
 
-};
+        /**
+         * --------------------------------------------------------
+         * Start Application
+         * --------------------------------------------------------
+         */
 
-window.CTM.app = App;
+        async start() {
+
+            return await this.initialize();
+
+        }
+
+    };
+
+    /**
+     * ============================================================
+     * Auto Start Application
+     * ============================================================
+     */
+
+    document.addEventListener(
+
+        "DOMContentLoaded",
+
+        async () => {
+
+            await App.initialize();
+
+        }
+
+    );
+
+    /**
+     * ============================================================
+     * Public API
+     * ============================================================
+     */
+
+    Object.defineProperty(
+
+        window.CTM,
+
+        "app",
+
+        {
+
+            value: Object.freeze({
+
+                initialize:
+
+                    App.initialize.bind(App),
+
+                health:
+
+                    App.health.bind(App),
+
+                start:
+
+                    App.start.bind(App)
+
+            }),
+
+            writable: false,
+
+            configurable: false,
+
+            enumerable: true
+
+        }
+
+    );
 
 })();
+
 
