@@ -1,6 +1,6 @@
 
 /* ==========================================================
-   CTM PATH™ Guided Journey v3.1
+   CTM PATH™ Guided Journey v3.2
    WELCOME SCREEN (FROZEN)
 ========================================================== */
 
@@ -15,9 +15,11 @@
     align-items:center;
 
     background:
-        radial-gradient(circle at top,
-        rgba(18,55,110,.25),
-        transparent 45%),
+        radial-gradient(
+            circle at top,
+            rgba(18,55,110,.22),
+            transparent 45%
+        ),
         linear-gradient(
             180deg,
             #081C3A 0%,
@@ -34,9 +36,17 @@
 
     width:100%;
 
-    max-width:860px;
+    max-width:760px;
 
-    margin:auto;
+    margin:0 auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
 
     text-align:center;
 
@@ -46,14 +56,19 @@
 
 
 
-
 /* ==========================================================
-   LOGO
+   BRAND
 ========================================================== */
 
 .ctm-welcome__header{
 
-    margin-bottom:48px;
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-bottom:36px;
 
 }
 
@@ -61,11 +76,13 @@
 
     display:block;
 
-    width:180px;
+    width:120px !important;
 
-    max-width:80%;
+    max-width:120px !important;
 
-    margin:auto;
+    height:auto;
+
+    margin:0 auto;
 
 }
 
@@ -73,14 +90,17 @@
 
 
 
-
 /* ==========================================================
-   HEADINGS
+   TITLES
 ========================================================== */
 
 .ctm-welcome__hero{
 
-    margin-bottom:40px;
+    width:100%;
+
+    text-align:center;
+
+    margin-bottom:34px;
 
 }
 
@@ -88,32 +108,35 @@
 
     margin:0;
 
-    font-size:60px;
+    font-size:58px;
 
     font-weight:700;
 
     line-height:1.15;
 
+    color:#FFFFFF;
+
     letter-spacing:-0.02em;
 
-    color:#FFFFFF;
+    text-align:center;
 
 }
 
 .ctm-title-en{
 
-    margin-top:16px;
+    margin-top:12px;
 
-    font-size:38px;
+    font-size:40px;
 
-    font-weight:500;
-
-    color:#D7B15B;
+    font-weight:600;
 
     line-height:1.25;
 
-}
+    color:#E2C56B;
 
+    text-align:center;
+
+}
 
 
 
@@ -127,19 +150,21 @@
 
     display:flex;
 
-    align-items:center;
-
     justify-content:center;
 
-    gap:18px;
+    align-items:center;
 
-    margin:44px 0;
+    gap:20px;
+
+    width:100%;
+
+    margin:38px 0;
 
 }
 
 .ctm-divider-line{
 
-    width:170px;
+    width:140px;
 
     height:2px;
 
@@ -151,12 +176,13 @@
 
 .ctm-divider-lotus{
 
-    font-size:34px;
+    color:#D5B25B;
+
+    font-size:30px;
 
     line-height:1;
 
 }
-
 
 
 
@@ -168,22 +194,23 @@
 
 .ctm-namaste{
 
-    margin-bottom:42px;
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-bottom:34px;
 
 }
 
 .ctm-namaste-icon{
 
-    width:52px;
+    width:48px;
 
-    height:52px;
-
-    display:block;
-
-    margin:auto;
+    height:48px;
 
 }
-
 
 
 
@@ -195,19 +222,43 @@
 
 .ctm-message{
 
-    max-width:620px;
+    width:100%;
 
-    margin:auto;
+    max-width:680px;
+
+    margin:0 auto;
+
+    text-align:center !important;
+
+}
+
+.ctm-message__content{
+
+    width:100%;
 
     text-align:center;
 
 }
 
-.ctm-message .ctm-ta{
+.ctm-block{
 
-    margin-bottom:26px;
+    width:100%;
 
-    font-size:30px;
+    margin:0 auto 28px;
+
+    text-align:center;
+
+}
+
+.ctm-ta{
+
+    width:100%;
+
+    margin:0 auto 18px;
+
+    text-align:center !important;
+
+    font-size:30px !important;
 
     font-weight:500;
 
@@ -217,22 +268,21 @@
 
 }
 
-.ctm-message .ctm-en{
+.ctm-en{
 
-    font-size:24px;
+    width:100%;
+
+    margin:0 auto;
+
+    text-align:center !important;
+
+    font-size:24px !important;
 
     line-height:1.8;
 
-    color:rgba(255,255,255,.90);
+    color:rgba(255,255,255,.92);
 
 }
-
-.ctm-block{
-
-    margin-bottom:30px;
-
-}
-
 
 
 
@@ -244,60 +294,59 @@
 
 .ctm-footer{
 
-    margin-top:64px;
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-top:56px;
 
 }
 
 .ctm-button-green{
 
-    display:inline-flex;
+    display:flex;
 
     justify-content:center;
 
     align-items:center;
 
-    flex-direction:column;
+    width:320px;
 
-    gap:6px;
-
-    width:340px;
-
-    min-height:76px;
+    min-height:72px;
 
     border:none;
 
     border-radius:999px;
 
-    background:#1F7A4D;
+    background:#218B57;
 
     color:#FFFFFF;
 
-    cursor:pointer;
-
-    font-size:28px;
+    font-size:26px;
 
     font-weight:700;
 
-    line-height:1.25;
+    line-height:1.3;
+
+    cursor:pointer;
 
     transition:
-        transform .25s ease,
         background .25s ease,
+        transform .25s ease,
         box-shadow .25s ease;
 
     box-shadow:
-        0 16px 36px rgba(31,122,77,.35);
+        0 18px 40px rgba(33,139,87,.35);
 
 }
 
 .ctm-button-green:hover{
 
-    background:#289461;
+    background:#2CA466;
 
-    transform:translateY(-3px);
-
-    box-shadow:
-        0 22px 42px rgba(31,122,77,.45);
+    transform:translateY(-2px);
 
 }
 
@@ -311,9 +360,8 @@
 
 
 
-
 /* ==========================================================
-   RESPONSIVE
+   MOBILE
 ========================================================== */
 
 @media (max-width:768px){
@@ -326,7 +374,9 @@
 
     .ctm-logo{
 
-        width:140px;
+        width:90px !important;
+
+        max-width:90px !important;
 
     }
 
@@ -338,39 +388,33 @@
 
     .ctm-title-en{
 
-        font-size:28px;
+        font-size:30px;
 
     }
 
     .ctm-divider-line{
 
-        width:80px;
-
-    }
-
-    .ctm-divider-lotus{
-
-        font-size:28px;
+        width:70px;
 
     }
 
     .ctm-namaste-icon{
 
-        width:42px;
+        width:40px;
 
-        height:42px;
-
-    }
-
-    .ctm-message .ctm-ta{
-
-        font-size:24px;
+        height:40px;
 
     }
 
-    .ctm-message .ctm-en{
+    .ctm-ta{
 
-        font-size:20px;
+        font-size:24px !important;
+
+    }
+
+    .ctm-en{
+
+        font-size:20px !important;
 
     }
 
@@ -378,11 +422,10 @@
 
         width:100%;
 
-        max-width:340px;
+        max-width:320px;
 
         font-size:22px;
 
     }
 
 }
-
