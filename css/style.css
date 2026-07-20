@@ -1,10 +1,136 @@
 
 /* ==========================================================
-   CTM PATH™ Guided Journey v3.4
-   WELCOME + QUESTION EXPERIENCE (FROZEN)
+   CTM PATH™ Guided Journey v4.0
+   File: css/style.css
+
+   Premium Bilingual Design System
+
+   Engineering Status : FROZEN
+   Architecture       : Numbered Sections
+   Theme              : Premium Cinematic
 ========================================================== */
 
-.ctm-welcome{
+
+
+/* ==========================================================
+   01. DESIGN TOKENS
+========================================================== */
+
+:root{
+
+    /* ------------------------------------------------------
+       Backgrounds
+    ------------------------------------------------------ */
+
+    --ctm-bg-primary:#081C3A;
+
+    --ctm-bg-secondary:#0B2348;
+
+    --ctm-bg-accent:rgba(18,55,110,.22);
+
+
+
+    /* ------------------------------------------------------
+       Brand Colours
+    ------------------------------------------------------ */
+
+    --ctm-gold:#E2C56B;
+
+    --ctm-gold-soft:#C8A44D;
+
+    --ctm-green:#218B57;
+
+    --ctm-green-hover:#2CA466;
+
+
+
+    /* ------------------------------------------------------
+       Typography
+    ------------------------------------------------------ */
+
+    --ctm-white:#FFFFFF;
+
+    --ctm-text:#F8F7F4;
+
+    --ctm-text-soft:rgba(255,255,255,.92);
+
+
+
+    /* ------------------------------------------------------
+       Radius
+    ------------------------------------------------------ */
+
+    --ctm-radius-pill:999px;
+
+    --ctm-radius-card:24px;
+
+
+
+    /* ------------------------------------------------------
+       Shadows
+    ------------------------------------------------------ */
+
+    --ctm-shadow-button:
+
+        0 18px 40px rgba(33,139,87,.35);
+
+    --ctm-shadow-button-hover:
+
+        0 22px 46px rgba(33,139,87,.45);
+
+
+
+    /* ------------------------------------------------------
+       Layout
+    ------------------------------------------------------ */
+
+    --ctm-container-width:760px;
+
+    --ctm-content-width:680px;
+
+}
+
+
+
+/* ==========================================================
+   02. GLOBAL LAYOUT
+========================================================== */
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    margin:0;
+
+    padding:0;
+
+    background:var(--ctm-bg-primary);
+
+    color:var(--ctm-text);
+
+    overflow-x:hidden;
+
+}
+
+*{
+
+    box-sizing:border-box;
+
+}
+
+
+
+/* ==========================================================
+   03. SHARED CONTAINERS
+========================================================== */
+
+.ctm-welcome,
+
+.ctm-scene{
 
     min-height:100vh;
 
@@ -14,29 +140,41 @@
 
     align-items:center;
 
-    background:
-        radial-gradient(
-            circle at top,
-            rgba(18,55,110,.22),
-            transparent 45%
-        ),
-        linear-gradient(
-            180deg,
-            #081C3A 0%,
-            #0B2348 100%
-        );
-
     padding:72px 24px;
 
-    color:#F8F7F4;
+    background:
+
+        radial-gradient(
+
+            circle at top,
+
+            var(--ctm-bg-accent),
+
+            transparent 45%
+
+        ),
+
+        linear-gradient(
+
+            180deg,
+
+            var(--ctm-bg-primary) 0%,
+
+            var(--ctm-bg-secondary) 100%
+
+        );
+
+    color:var(--ctm-text);
 
 }
 
-.ctm-welcome__container{
+.ctm-welcome__container,
+
+.ctm-scene__container{
 
     width:100%;
 
-    max-width:760px;
+    max-width:var(--ctm-container-width);
 
     margin:0 auto;
 
@@ -44,18 +182,23 @@
 
     flex-direction:column;
 
-    align-items:center;
-
     justify-content:center;
+
+    align-items:center;
 
     text-align:center;
 
 }
 
-
 /* ==========================================================
-   BRAND
+   04. WELCOME EXPERIENCE
 ========================================================== */
+
+
+
+/* ----------------------------------------------------------
+   04.01 BRAND
+---------------------------------------------------------- */
 
 .ctm-welcome__header{
 
@@ -65,6 +208,8 @@
 
     justify-content:center;
 
+    align-items:center;
+
     margin-bottom:36px;
 
 }
@@ -73,9 +218,9 @@
 
     display:block;
 
-    width:120px !important;
+    width:120px;
 
-    max-width:120px !important;
+    max-width:120px;
 
     height:auto;
 
@@ -84,9 +229,10 @@
 }
 
 
-/* ==========================================================
-   TITLES
-========================================================== */
+
+/* ----------------------------------------------------------
+   04.02 HERO
+---------------------------------------------------------- */
 
 .ctm-welcome__hero{
 
@@ -102,23 +248,27 @@
 
     margin:0;
 
+    color:var(--ctm-white);
+
+    text-align:center;
+
     font-size:58px;
 
     font-weight:700;
 
     line-height:1.15;
 
-    color:#FFFFFF;
-
     letter-spacing:-0.02em;
-
-    text-align:center;
 
 }
 
 .ctm-title-en{
 
-    margin-top:12px;
+    margin:12px 0 0;
+
+    color:var(--ctm-gold);
+
+    text-align:center;
 
     font-size:40px;
 
@@ -126,18 +276,17 @@
 
     line-height:1.25;
 
-    color:#E2C56B;
-
-    text-align:center;
-
 }
 
 
-/* ==========================================================
-   DIVIDER
-========================================================== */
+
+/* ----------------------------------------------------------
+   04.03 DIVIDER
+---------------------------------------------------------- */
 
 .ctm-divider{
+
+    width:100%;
 
     display:flex;
 
@@ -146,8 +295,6 @@
     align-items:center;
 
     gap:20px;
-
-    width:100%;
 
     margin:38px 0;
 
@@ -159,7 +306,7 @@
 
     height:2px;
 
-    background:#C8A44D;
+    background:var(--ctm-gold-soft);
 
     opacity:.55;
 
@@ -167,7 +314,7 @@
 
 .ctm-divider-lotus{
 
-    color:#D5B25B;
+    color:var(--ctm-gold);
 
     font-size:30px;
 
@@ -176,9 +323,10 @@
 }
 
 
-/* ==========================================================
-   NAMASTE
-========================================================== */
+
+/* ----------------------------------------------------------
+   04.04 NAMASTE
+---------------------------------------------------------- */
 
 .ctm-namaste{
 
@@ -187,6 +335,8 @@
     display:flex;
 
     justify-content:center;
+
+    align-items:center;
 
     margin-bottom:34px;
 
@@ -201,25 +351,18 @@
 }
 
 
-/* ==========================================================
-   MESSAGE
-========================================================== */
+
+/* ----------------------------------------------------------
+   04.05 MESSAGE
+---------------------------------------------------------- */
 
 .ctm-message{
 
     width:100%;
 
-    max-width:680px;
+    max-width:var(--ctm-content-width);
 
     margin:0 auto;
-
-    text-align:center !important;
-
-}
-
-.ctm-message__content{
-
-    width:100%;
 
     text-align:center;
 
@@ -241,15 +384,15 @@
 
     margin:0 auto 18px;
 
-    text-align:center !important;
+    color:var(--ctm-white);
 
-    font-size:30px !important;
+    text-align:center;
+
+    font-size:30px;
 
     font-weight:500;
 
     line-height:1.8;
-
-    color:#FFFFFF;
 
 }
 
@@ -259,21 +402,27 @@
 
     margin:0 auto;
 
-    text-align:center !important;
+    color:var(--ctm-text-soft);
 
-    font-size:24px !important;
+    text-align:center;
+
+    font-size:24px;
 
     font-weight:400;
 
     line-height:1.8;
 
-    color:rgba(255,255,255,.92);
-
 }
 
 /* ==========================================================
-   QUESTION SCREEN
+   05. SHARED SCENE ENGINE
 ========================================================== */
+
+
+
+/* ----------------------------------------------------------
+   05.01 SCENE LAYOUT
+---------------------------------------------------------- */
 
 .ctm-scene{
 
@@ -288,24 +437,42 @@
     padding:72px 24px;
 
     background:
+
         radial-gradient(
+
             circle at top,
-            rgba(18,55,110,.22),
+
+            var(--ctm-bg-accent),
+
             transparent 45%
+
         ),
+
         linear-gradient(
+
             180deg,
-            #081C3A 0%,
-            #0B2348 100%
+
+            var(--ctm-bg-primary) 0%,
+
+            var(--ctm-bg-secondary) 100%
+
         );
 
+    color:var(--ctm-text);
+
 }
+
+
+
+/* ----------------------------------------------------------
+   05.02 SCENE CONTAINER
+---------------------------------------------------------- */
 
 .ctm-scene__container{
 
     width:100%;
 
-    max-width:760px;
+    max-width:var(--ctm-container-width);
 
     margin:0 auto;
 
@@ -313,21 +480,35 @@
 
     flex-direction:column;
 
-    align-items:center;
-
     justify-content:center;
+
+    align-items:center;
 
     text-align:center;
 
 }
 
+
+
+/* ----------------------------------------------------------
+   05.03 SCENE HEADER
+---------------------------------------------------------- */
+
 .ctm-scene__header{
 
     width:100%;
 
-    text-align:center;
+    margin:0 auto 48px;
 
-    margin-bottom:48px;
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
 
 }
 
@@ -337,11 +518,21 @@
 
 }
 
+
+
+/* ----------------------------------------------------------
+   05.04 SCENE TITLES
+---------------------------------------------------------- */
+
 .ctm-scene__title-ta{
+
+    width:100%;
 
     margin:0;
 
     text-align:center;
+
+    color:var(--ctm-white);
 
     font-size:58px;
 
@@ -349,15 +540,19 @@
 
     line-height:1.15;
 
-    color:#FFFFFF;
+    letter-spacing:-0.02em;
 
 }
 
 .ctm-scene__title-en{
 
+    width:100%;
+
     margin:14px 0 0;
 
     text-align:center;
+
+    color:var(--ctm-gold);
 
     font-size:38px;
 
@@ -365,9 +560,13 @@
 
     line-height:1.25;
 
-    color:#E2C56B;
-
 }
+
+
+
+/* ----------------------------------------------------------
+   05.05 SHARED CONTENT AREA
+---------------------------------------------------------- */
 
 .ctm-scene__content{
 
@@ -375,13 +574,23 @@
 
     display:flex;
 
+    flex-direction:column;
+
     justify-content:center;
 
     align-items:center;
 
-    margin-bottom:60px;
+    text-align:center;
+
+    margin:0 auto 56px;
 
 }
+
+
+
+/* ----------------------------------------------------------
+   05.06 SHARED QUESTION BODY
+---------------------------------------------------------- */
 
 .ctm-question__body{
 
@@ -403,45 +612,311 @@
 
 }
 
-.ctm-question__body .ctm-ta{
+.ctm-question-ta{
 
     width:100%;
 
-    margin:0 auto 18px;
+    margin:0;
 
-    text-align:center !important;
+    text-align:center;
 
-    font-size:34px !important;
+    color:var(--ctm-white);
+
+    font-size:34px;
 
     font-weight:500;
 
-    line-height:1.7;
-
-    color:#FFFFFF;
+    line-height:1.70;
 
 }
 
-.ctm-question__body .ctm-en{
+.ctm-question-en{
 
     width:100%;
 
-    margin:0 auto;
+    margin:18px 0 0;
 
-    text-align:center !important;
+    text-align:center;
 
-    font-size:24px !important;
+    color:var(--ctm-text-soft);
+
+    font-size:24px;
 
     font-weight:400;
 
-    line-height:1.8;
-
-    color:rgba(255,255,255,.92);
+    line-height:1.80;
 
 }
 
 /* ==========================================================
-   CTA
+   06. INPUT EXPERIENCE
 ========================================================== */
+
+
+
+/* ----------------------------------------------------------
+   06.01 INPUT QUESTION
+---------------------------------------------------------- */
+
+.ctm-input__question{
+
+    width:100%;
+
+    max-width:700px;
+
+    margin:0 auto 36px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+}
+
+
+
+/* ----------------------------------------------------------
+   06.02 INPUT FIELD
+---------------------------------------------------------- */
+
+.ctm-input__field{
+
+    width:100%;
+
+    max-width:560px;
+
+    margin:0 auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+}
+
+
+
+/* ----------------------------------------------------------
+   06.03 INPUT LABEL
+---------------------------------------------------------- */
+
+.ctm-input__label{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+    text-align:center;
+
+}
+
+.ctm-label-ta{
+
+    display:block;
+
+    width:100%;
+
+    margin:0;
+
+    color:var(--ctm-white);
+
+    font-size:26px;
+
+    font-weight:600;
+
+    line-height:1.30;
+
+    text-align:center;
+
+}
+
+.ctm-label-en{
+
+    display:block;
+
+    width:100%;
+
+    margin:8px 0 0;
+
+    color:var(--ctm-text-soft);
+
+    font-size:18px;
+
+    font-weight:400;
+
+    line-height:1.40;
+
+    text-align:center;
+
+}
+
+
+
+/* ----------------------------------------------------------
+   06.04 INPUT CONTROL
+---------------------------------------------------------- */
+
+.ctm-input__control{
+
+    width:100%;
+
+    height:72px;
+
+    padding:0 28px;
+
+    border:2px solid rgba(255,255,255,.18);
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.08);
+
+    color:var(--ctm-white);
+
+    text-align:center;
+
+    font-size:24px;
+
+    font-weight:500;
+
+    outline:none;
+
+    transition:
+
+        border-color .25s ease,
+
+        background .25s ease,
+
+        box-shadow .25s ease,
+
+        transform .25s ease;
+
+}
+
+.ctm-input__control::placeholder{
+
+    color:rgba(255,255,255,.45);
+
+    font-size:22px;
+
+    text-align:center;
+
+}
+
+
+
+/* ----------------------------------------------------------
+   06.05 INPUT STATES
+---------------------------------------------------------- */
+
+.ctm-input__control:hover{
+
+    border-color:rgba(226,197,107,.45);
+
+}
+
+.ctm-input__control:focus{
+
+    border-color:var(--ctm-gold);
+
+    background:rgba(255,255,255,.10);
+
+    box-shadow:
+
+        0 0 0 5px rgba(226,197,107,.15);
+
+    transform:translateY(-1px);
+
+}
+
+
+
+/* ----------------------------------------------------------
+   06.06 INPUT HELPER
+---------------------------------------------------------- */
+
+.ctm-input__helper{
+
+    width:100%;
+
+    max-width:560px;
+
+    margin:18px auto 0;
+
+    text-align:center;
+
+}
+
+.ctm-helper-ta{
+
+    color:var(--ctm-white);
+
+    font-size:18px;
+
+    font-weight:500;
+
+    line-height:1.60;
+
+}
+
+.ctm-helper-en{
+
+    margin-top:8px;
+
+    color:var(--ctm-text-soft);
+
+    font-size:15px;
+
+    font-weight:400;
+
+    line-height:1.60;
+
+}
+
+
+
+/* ----------------------------------------------------------
+   06.07 VALIDATION
+---------------------------------------------------------- */
+
+.ctm-input__control:invalid{
+
+    border-color:rgba(255,120,120,.35);
+
+}
+
+.ctm-input__control:valid{
+
+    border-color:rgba(44,164,102,.60);
+
+}
+
+/* ==========================================================
+   07. BUTTON SYSTEM
+========================================================== */
+
+
+
+/* ----------------------------------------------------------
+   07.01 FOOTERS
+---------------------------------------------------------- */
 
 .ctm-footer,
 .ctm-scene__footer{
@@ -458,6 +933,12 @@
 
 }
 
+
+
+/* ----------------------------------------------------------
+   07.02 PRIMARY BUTTON
+---------------------------------------------------------- */
+
 .ctm-button-green{
 
     display:flex;
@@ -467,8 +948,6 @@
     justify-content:center;
 
     align-items:center;
-
-    text-align:center;
 
     gap:4px;
 
@@ -480,42 +959,37 @@
 
     border:none;
 
-    border-radius:999px;
+    border-radius:var(--ctm-radius-pill);
 
-    background:#218B57;
+    background:var(--ctm-green);
 
-    color:#FFFFFF;
+    color:var(--ctm-white);
+
+    text-align:center;
 
     cursor:pointer;
 
-    box-sizing:border-box;
+    user-select:none;
 
     transition:
+
         background .25s ease,
+
         transform .25s ease,
-        box-shadow .25s ease;
 
-    box-shadow:
-        0 18px 40px rgba(33,139,87,.35);
+        box-shadow .25s ease,
 
-}
+        opacity .25s ease;
 
-.ctm-button-green:hover{
-
-    background:#2CA466;
-
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 22px 46px rgba(33,139,87,.45);
+    box-shadow:var(--ctm-shadow-button);
 
 }
 
-.ctm-button-green:active{
 
-    transform:translateY(0);
 
-}
+/* ----------------------------------------------------------
+   07.03 BUTTON TEXT
+---------------------------------------------------------- */
 
 .ctm-button-ta{
 
@@ -525,13 +999,15 @@
 
     margin:0;
 
+    color:var(--ctm-white);
+
     text-align:center;
 
     font-size:26px;
 
     font-weight:700;
 
-    line-height:1.1;
+    line-height:1.10;
 
     letter-spacing:-0.01em;
 
@@ -545,6 +1021,8 @@
 
     margin:0;
 
+    color:rgba(255,255,255,.94);
+
     text-align:center;
 
     font-size:17px;
@@ -553,15 +1031,87 @@
 
     line-height:1.15;
 
-    opacity:.92;
+}
+
+
+
+/* ----------------------------------------------------------
+   07.04 HOVER
+---------------------------------------------------------- */
+
+.ctm-button-green:hover:not(:disabled){
+
+    background:var(--ctm-green-hover);
+
+    transform:translateY(-2px);
+
+    box-shadow:var(--ctm-shadow-button-hover);
+
+}
+
+
+
+/* ----------------------------------------------------------
+   07.05 ACTIVE
+---------------------------------------------------------- */
+
+.ctm-button-green:active:not(:disabled){
+
+    transform:translateY(0);
+
+}
+
+
+
+/* ----------------------------------------------------------
+   07.06 DISABLED
+---------------------------------------------------------- */
+
+.ctm-button-green:disabled{
+
+    opacity:.45;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+    box-shadow:none;
+
+    background:#4A5B66;
+
+    color:rgba(255,255,255,.75);
+
+}
+
+
+
+/* ----------------------------------------------------------
+   07.07 KEYBOARD ACCESSIBILITY
+---------------------------------------------------------- */
+
+.ctm-button-green:focus-visible{
+
+    outline:3px solid rgba(226,197,107,.45);
+
+    outline-offset:4px;
 
 }
 
 /* ==========================================================
-   MOBILE
+   08. RESPONSIVE SYSTEM
 ========================================================== */
 
+
+
+/* ----------------------------------------------------------
+   08.01 TABLET & MOBILE
+---------------------------------------------------------- */
+
 @media (max-width:768px){
+
+    /* ------------------------------------------------------
+       08.01.01 LAYOUT
+    ------------------------------------------------------ */
 
     .ctm-welcome,
     .ctm-scene{
@@ -577,13 +1127,25 @@
 
     }
 
+
+
+    /* ------------------------------------------------------
+       08.01.02 BRAND
+    ------------------------------------------------------ */
+
     .ctm-logo{
 
-        width:88px !important;
+        width:88px;
 
-        max-width:88px !important;
+        max-width:88px;
 
     }
+
+
+
+    /* ------------------------------------------------------
+       08.01.03 TITLES
+    ------------------------------------------------------ */
 
     .ctm-title-ta,
     .ctm-scene__title-ta{
@@ -597,13 +1159,19 @@
     .ctm-title-en,
     .ctm-scene__title-en{
 
+        margin-top:10px;
+
         font-size:28px;
 
         line-height:1.35;
 
-        margin-top:10px;
-
     }
+
+
+
+    /* ------------------------------------------------------
+       08.01.04 DIVIDER
+    ------------------------------------------------------ */
 
     .ctm-divider{
 
@@ -625,6 +1193,12 @@
 
     }
 
+
+
+    /* ------------------------------------------------------
+       08.01.05 NAMASTE
+    ------------------------------------------------------ */
+
     .ctm-namaste{
 
         margin-bottom:28px;
@@ -639,43 +1213,103 @@
 
     }
 
+
+
+    /* ------------------------------------------------------
+       08.01.06 SHARED TYPOGRAPHY
+    ------------------------------------------------------ */
+
     .ctm-ta{
 
-        font-size:24px !important;
+        font-size:24px;
 
-        line-height:1.7;
+        line-height:1.70;
 
     }
 
     .ctm-en{
 
-        font-size:20px !important;
+        font-size:20px;
 
-        line-height:1.7;
+        line-height:1.70;
 
     }
 
-    .ctm-question__body{
+    .ctm-question-ta{
+
+        font-size:28px;
+
+        line-height:1.60;
+
+    }
+
+    .ctm-question-en{
+
+        margin-top:14px;
+
+        font-size:20px;
+
+        line-height:1.70;
+
+    }
+
+
+
+    /* ------------------------------------------------------
+       08.01.07 INPUT
+    ------------------------------------------------------ */
+
+    .ctm-input__field{
 
         max-width:100%;
 
     }
 
-    .ctm-question__body .ctm-ta{
+    .ctm-input__control{
 
-        font-size:28px !important;
+        height:64px;
 
-        line-height:1.6;
+        padding:0 20px;
+
+        font-size:20px;
+
+    }
+
+    .ctm-input__control::placeholder{
+
+        font-size:18px;
 
     }
 
-    .ctm-question__body .ctm-en{
+    .ctm-label-ta{
 
-        font-size:20px !important;
-
-        line-height:1.7;
+        font-size:22px;
 
     }
+
+    .ctm-label-en{
+
+        font-size:16px;
+
+    }
+
+    .ctm-helper-ta{
+
+        font-size:16px;
+
+    }
+
+    .ctm-helper-en{
+
+        font-size:14px;
+
+    }
+
+
+
+    /* ------------------------------------------------------
+       08.01.08 BUTTON
+    ------------------------------------------------------ */
 
     .ctm-footer,
     .ctm-scene__footer{
@@ -712,7 +1346,41 @@
 
 }
 
+
+
 /* ==========================================================
-   END OF FILE
+   09. UTILITY CLASSES
+========================================================== */
+
+.text-center{
+
+    text-align:center !important;
+
+}
+
+.hidden{
+
+    display:none !important;
+
+}
+
+.full-width{
+
+    width:100%;
+
+}
+
+.mx-auto{
+
+    margin-left:auto;
+
+    margin-right:auto;
+
+}
+
+
+
+/* ==========================================================
+   10. END OF FILE
 ========================================================== */
 
