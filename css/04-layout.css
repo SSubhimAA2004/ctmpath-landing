@@ -196,13 +196,15 @@ Screen
 
     position:relative;
 
+    width:100%;
+
+    min-height:100vh;
+
     display:flex;
 
     justify-content:center;
 
     align-items:flex-start;
-
-    min-height:100vh;
 
     padding:
 
@@ -226,6 +228,12 @@ Container
     max-width:1200px;
 
     margin:0 auto;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
 
 }
 
@@ -323,15 +331,15 @@ Welcome Block
 
     flex-direction:column;
 
+    justify-content:center;
+
     align-items:center;
 
-    justify-content:center;
+    gap:22px;
 
     margin-top:70px;
 
     margin-bottom:25px;
-
-    gap:22px;
 
 }
 
@@ -450,7 +458,6 @@ Column
 
 }
 
-
 /*==================================================
 Glass
 ==================================================*/
@@ -492,6 +499,18 @@ Desktop
 
     }
 
+    .container{
+
+        max-width:1100px;
+
+    }
+
+    .hero{
+
+        max-width:820px;
+
+    }
+
 }
 
 
@@ -525,7 +544,15 @@ Tablet
 
     }
 
+    .container{
+
+        max-width:100%;
+
+    }
+
     .hero{
+
+        max-width:760px;
 
         gap:34px;
 
@@ -570,7 +597,15 @@ Mobile
 
     }
 
+    .container{
+
+        width:100%;
+
+    }
+
     .hero{
+
+        width:100%;
 
         gap:28px;
 
@@ -581,6 +616,8 @@ Mobile
         margin-top:45px;
 
         margin-bottom:20px;
+
+        gap:18px;
 
     }
 
@@ -623,7 +660,15 @@ Small Mobile
 
     }
 
+    .container{
+
+        width:100%;
+
+    }
+
     .hero{
+
+        width:100%;
 
         gap:24px;
 
@@ -635,6 +680,8 @@ Small Mobile
 
         margin-bottom:18px;
 
+        gap:16px;
+
     }
 
     .gold-divider{
@@ -644,3 +691,4 @@ Small Mobile
     }
 
 }
+
