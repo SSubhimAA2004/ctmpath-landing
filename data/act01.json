@@ -1,74 +1,92 @@
 
 {
   "act": {
-{
-  "id": 1,
-  "sequence": 1,
-  "act": 1,
-  "component": "message",
-  "type": "welcome",
-
-  "payload": {
-
-    "title": {
-      "ta": "வாங்க! வாங்க!",
-      "en": "Welcome! Welcome!!"
+    "id": 1,
+    "sequence": 1,
+    "code": "ACT01",
+    "name": {
+      "ta": "வரவேற்பு",
+      "en": "Welcome"
     },
-
-    "subtitle": {
-      "ta": "",
-      "en": ""
+    "theme": {
+      "ta": "அறிமுகம்",
+      "en": "Introduction"
     },
-
-    "content": {
-      "ta": [
-        "வணக்கம்.",
-        "",
-        "நான்",
-        "ரஃபேல் ராஜ்.",
-        "",
-        "உங்களைச் சந்திப்பதில்",
-        "மிகுந்த மகிழ்ச்சி.",
-        "",
-        "இந்த ஆறு நிமிடங்கள்",
-        "உங்களுக்காக."
-      ],
-
-      "en": [
-        "Hello.",
-        "",
-        "I'm",
-        "Raphael Raj.",
-        "",
-        "It's a pleasure",
-        "to meet you.",
-        "",
-        "These six minutes",
-        "are for you."
-      ]
-    },
-
-    "button": {
-      "ta": "தொடங்கலாம்",
-      "en": "Let's Begin"
-    }
-
+    "startMoment": 1,
+    "endMoment": 10
   },
 
-  "personalization": {
-    "enabled": false,
-    "tokens": []
-  },
+  "moments": [
 
-  "navigation": {
-    "previous": null,
-    "next": 2
-  },
+    {
+      "id": 1,
+      "sequence": 1,
+      "act": 1,
+      "component": "message",
+      "type": "welcome",
 
-  "analytics": {
-    "event": "moment_01"
-  }
-}
+      "payload": {
+
+        "title": {
+          "ta": "வாங்க! வாங்க!",
+          "en": "Welcome! Welcome!!"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "content": {
+          "ta": [
+            "வணக்கம்.",
+            "",
+            "நான்",
+            "ரஃபேல் ராஜ்.",
+            "",
+            "உங்களைச் சந்திப்பதில்",
+            "மிகுந்த மகிழ்ச்சி.",
+            "",
+            "இந்த ஆறு நிமிடங்கள்",
+            "உங்களுக்காக."
+          ],
+
+          "en": [
+            "Hello.",
+            "",
+            "I'm",
+            "Raphael Raj.",
+            "",
+            "It's a pleasure",
+            "to meet you.",
+            "",
+            "These six minutes",
+            "are for you."
+          ]
+        },
+
+        "button": {
+          "ta": "தொடங்கலாம்",
+          "en": "Let's Begin"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": false,
+        "tokens": []
+      },
+
+      "navigation": {
+        "previous": null,
+        "next": 2
+      },
+
+      "analytics": {
+        "event": "moment_01"
+      }
+    },
+
     {
       "id": 2,
       "sequence": 2,
@@ -95,6 +113,7 @@
             "எனக்காக அல்ல.",
             "உங்களுக்காக."
           ],
+
           "en": [
             "These",
             "six minutes...",
@@ -154,6 +173,7 @@
             "மட்டுமே",
             "விரும்புகிறேன்."
           ],
+
           "en": [
             "I'm not here",
             "to change you.",
@@ -184,7 +204,7 @@
       }
     },
 
-    {
+        {
       "id": 4,
       "sequence": 4,
       "act": 1,
@@ -234,9 +254,8 @@
       "analytics": {
         "event": "moment_04"
       }
-    }
+    },
 
-    ,
     {
       "id": 5,
       "sequence": 5,
@@ -335,13 +354,16 @@
           "ta": [
             "நன்றி,",
             "{{Name}}.",
+            "",
             "இப்போது...",
             "இந்த உரையாடல்",
             "உங்களைப் பற்றியது."
           ],
+
           "en": [
             "Thank you,",
             "{{Name}}.",
+            "",
             "From this point...",
             "this conversation",
             "is about you."
@@ -372,7 +394,7 @@
       }
     },
 
-    {
+        {
       "id": 7,
       "sequence": 7,
       "act": 1,
@@ -469,6 +491,7 @@
             "வாழ்க்கைக்கான",
             "ஒரு கருவி."
           ],
+
           "en": [
             "I used",
             "to think",
@@ -506,10 +529,9 @@
       "analytics": {
         "event": "moment_08"
       }
-    }
+    },
 
-    ,
-    {
+        {
       "id": 9,
       "sequence": 9,
       "act": 1,
@@ -537,6 +559,7 @@
             "வாழ்க்கையை",
             "விரும்புகிறீர்கள்?"
           ],
+
           "en": [
             "Then...",
             "what kind",
@@ -594,6 +617,7 @@
           "ta": [
             "{{Name}}..."
           ],
+
           "en": [
             "{{Name}}..."
           ]
@@ -611,6 +635,7 @@
             "வாழ்க்கையை",
             "தேர்ந்தெடுத்தீர்கள்."
           ],
+
           "en": [
             "Notice...",
             "You didn't",
@@ -631,6 +656,7 @@
             "முக்கிய",
             "கண்டுபிடிப்பு."
           ],
+
           "en": [
             "This is",
             "our first",
