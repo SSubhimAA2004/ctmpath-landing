@@ -1,1 +1,379 @@
 
+/*======================================================================
+
+CTM PATH™ Guided Journey v6.0
+
+Purpose
+Journey Progress System
+
+Responsibility
+• Premium Progress Bar
+• Journey Status
+• Screen Counter
+• Percentage Display
+• Step Indicators
+• Animated Progress
+• Mobile Responsive
+
+======================================================================*/
+
+
+/*==================================================
+Progress Container
+==================================================*/
+
+.progress{
+
+    width:100%;
+
+    max-width:900px;
+
+    margin:0 auto 48px;
+
+}
+
+
+/*==================================================
+Progress Header
+==================================================*/
+
+.progress-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+
+/*==================================================
+Journey Label
+==================================================*/
+
+.progress-label{
+
+    color:var(--text-secondary);
+
+    font-size:.90rem;
+
+    font-weight:600;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+}
+
+
+/*==================================================
+Percentage
+==================================================*/
+
+.progress-percent{
+
+    color:var(--color-accent);
+
+    font-size:1rem;
+
+    font-weight:700;
+
+}
+
+
+/*==================================================
+Track
+==================================================*/
+
+.progress-track{
+
+    position:relative;
+
+    width:100%;
+
+    height:12px;
+
+    overflow:hidden;
+
+    border-radius:999px;
+
+    background:
+
+        rgba(255,255,255,.08);
+
+    border:
+
+        1px solid rgba(216,179,106,.18);
+
+    box-shadow:
+
+        inset 0 2px 8px rgba(0,0,0,.40);
+
+}
+
+
+/*==================================================
+Fill
+==================================================*/
+
+.progress-fill{
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    height:100%;
+
+    width:0%;
+
+    border-radius:999px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            #18A867 0%,
+
+            #27C779 45%,
+
+            #D8B36A 100%
+
+        );
+
+    transition:
+
+        width .60s ease;
+
+}
+
+
+/*==================================================
+Moving Highlight
+==================================================*/
+
+.progress-fill::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            rgba(255,255,255,.35),
+
+            transparent
+
+        );
+
+    animation:
+
+        progressShimmer 3s linear infinite;
+
+}
+
+
+/*==================================================
+Journey Footer
+==================================================*/
+
+.progress-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:14px;
+
+}
+
+
+/*==================================================
+Screen Counter
+==================================================*/
+
+.progress-screen{
+
+    color:var(--text-muted);
+
+    font-size:.90rem;
+
+}
+
+
+/*==================================================
+Journey Text
+==================================================*/
+
+.progress-message{
+
+    color:var(--text-secondary);
+
+    font-size:.90rem;
+
+}
+
+
+/*==================================================
+Step Dots
+==================================================*/
+
+.progress-dots{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-top:28px;
+
+}
+
+
+/*==================================================
+Dot
+==================================================*/
+
+.progress-dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:
+
+        rgba(255,255,255,.20);
+
+    transition:
+
+        transform .30s ease,
+
+        background .30s ease;
+
+}
+
+
+/*==================================================
+Completed
+==================================================*/
+
+.progress-dot.completed{
+
+    background:#18A867;
+
+}
+
+
+/*==================================================
+Current
+==================================================*/
+
+.progress-dot.current{
+
+    background:#D8B36A;
+
+    transform:scale(1.6);
+
+    box-shadow:
+
+        0 0 18px rgba(216,179,106,.50);
+
+}
+
+
+/*==================================================
+Animation
+==================================================*/
+
+@keyframes progressShimmer{
+
+    from{
+
+        transform:translateX(-140%);
+
+    }
+
+    to{
+
+        transform:translateX(140%);
+
+    }
+
+}
+
+
+/*==================================================
+Glow
+==================================================*/
+
+.progress-track:hover{
+
+    box-shadow:
+
+        inset 0 2px 10px rgba(0,0,0,.45),
+
+        0 0 18px rgba(24,168,103,.20);
+
+}
+
+
+/*==================================================
+Responsive
+==================================================*/
+
+@media (max-width:768px){
+
+    .progress{
+
+        margin-bottom:32px;
+
+    }
+
+    .progress-header{
+
+        flex-direction:column;
+
+        gap:10px;
+
+        align-items:flex-start;
+
+    }
+
+    .progress-footer{
+
+        flex-direction:column;
+
+        gap:10px;
+
+        align-items:flex-start;
+
+    }
+
+    .progress-dots{
+
+        gap:8px;
+
+    }
+
+}
