@@ -4,14 +4,21 @@
 
 CTM PATH™ Guided Journey v6.0
 
+File
+03-loader.js
+
 Purpose
-Screen Loader
+Screen Loading Engine
 
 Responsibility
 • Load HTML screens
-• Render into screen-root
-• Update current screen
-• Update progress
+• Inject screens into the application
+• Update application state
+• Restore screen state
+• Refresh personalization
+• Refresh calculations
+• Refresh progress
+• Track analytics
 
 ======================================================================
 */
@@ -23,17 +30,298 @@ Responsibility
     const CTM = window.CTM;
 
     if (!CTM) {
-        console.error('CTM core has not been initialized.');
+
+        console.error('CTM Core not initialized.');
+
         return;
+
     }
 
     /*==================================================
-    Screen Root
+    Configuration
     ==================================================*/
 
-    CTM.screenRoot = function () {
+    CTM.loader = {
 
-        return CTM.byId('screen-root');
+        screenFolder: 'screens/',
+
+        extension: '.html',
+
+        containerId: 'screen-container'
+
+    };
+
+    /*==================================================
+    Get Container
+    ==================================================*/
+
+    CTM.getScreenContainer = function () {
+
+        return document.getElementById(
+
+            CTM.loader.containerId
+
+        );
+
+    };
+
+    /*==================================================
+    Build Screen Path
+    ==================================================*/
+
+    CTM.getScreenPath = function (screenId) {
+
+        return (
+
+            CTM.loader.screenFolder +
+
+            screenId +
+
+            CTM.loader.extension
+
+        );
+
+    };
+
+    /*==================================================
+    Fetch Screen
+    ==================================================*/
+
+    CTM.fetchScreen = async function (screenId) {
+
+        const path =
+
+            CTM.getScreenPath(screenId);
+
+        const response = await fetch(path, {
+
+            cache: 'no-cache'
+
+        });
+
+        if (!response.ok) {
+
+            throw new Error(
+
+                'Unable to load ' + path
+
+            );
+
+        }
+
+        return await response.text();
+
+    };
+
+    /*==================================================
+    Inject Screen
+    ==================================================*/
+
+    CTM.injectScreen = function (html) {
+
+        const container =
+
+            CTM.getScreenContainer();
+
+        if (!container) {
+
+            throw new Error(
+
+                'Screen container not found.'
+
+            );
+
+        }
+
+        container.innerHTML = html;
+
+    };
+
+    /*==================================================
+    After Screen Loaded
+    ==================================================*/
+
+    CTM.afterScreenLoaded = function () {
+
+        /*
+        Restore Inputs
+        */
+
+        if (
+
+            typeof CTM.restoreInputs === 'function'
+
+        ) {
+
+            CTM.restoreInputs();
+
+        }
+
+        /*
+        Restore Choices
+        */
+
+        if (
+
+            typeof CTM.restoreChoices === 'function'
+
+        ) {
+
+            CTM.restoreChoices();
+
+        }
+
+        /*
+        Restore Booking
+        */
+
+        if (
+
+            typeof CTM.restoreBooking === 'function'
+
+        ) {
+
+            CTM.restoreBooking();
+
+        }
+
+        /*
+        Personalization
+        */
+
+        if (
+
+            typeof CTM.refreshPersonalization === 'function'
+
+        ) {
+
+            CTM.refreshPersonalization();
+
+        }
+
+        /*
+        Dynamic Text
+        */
+
+        if (
+
+            typeof CTM.refreshText === 'function'
+
+        ) {
+
+            CTM.refreshText();
+
+        }
+
+        /*
+        Score Engine
+        */
+
+        if (
+
+            typeof CTM.refreshScores === 'function'
+
+        ) {
+
+            CTM.refreshScores();
+
+        }
+
+        /*
+        Pattern Engine
+        */
+
+        if (
+
+            typeof CTM.refreshPatterns === 'function'
+
+        ) {
+
+            CTM.refreshPatterns();
+
+        }
+
+        /*
+        Insight Engine
+        */
+
+        if (
+
+            typeof CTM.refreshInsights === 'function'
+
+        ) {
+
+            CTM.refreshInsights();
+
+        }
+
+        /*
+        Booking Summary
+        */
+
+        if (
+
+            typeof CTM.updateBookingSummary === 'function'
+
+        ) {
+
+            CTM.updateBookingSummary();
+
+        }
+
+    };
+
+    /*==================================================
+    Update Progress
+    ==================================================*/
+
+    CTM.updateJourneyProgress = function (screenId) {
+
+        const number = parseInt(
+
+            screenId.replace('screen', ''),
+
+            10
+
+        );
+
+        if (
+
+            Number.isNaN(number)
+
+        ) {
+
+            return;
+
+        }
+
+        if (
+
+            typeof CTM.setProgress === 'function'
+
+        ) {
+
+            CTM.setProgress(number);
+
+        }
+
+    };
+
+    /*==================================================
+    Track Screen
+    ==================================================*/
+
+    CTM.trackLoadedScreen = function (screenId) {
+
+        if (
+
+            typeof CTM.trackScreen === 'function'
+
+        ) {
+
+            CTM.trackScreen(screenId);
+
+        }
 
     };
 
@@ -45,45 +333,55 @@ Responsibility
 
         try {
 
-            const root = CTM.screenRoot();
+            CTM.log(
 
-            if (!root) {
-                throw new Error('screen-root not found.');
-            }
+                'Loading',
 
-            CTM.log('Loading:', screenId);
-
-            const response = await fetch(`screens/${screenId}.html`);
-
-            if (!response.ok) {
-
-                throw new Error(
-                    `Unable to load ${screenId}.html`
-                );
-
-            }
-
-            const html = await response.text();
-
-            root.innerHTML = html;
-
-            CTM.setCurrentScreen(screenId);
-
-            const number = parseInt(
-
-                screenId.replace('screen', ''),
-
-                10
+                screenId
 
             );
 
-            if (!isNaN(number)) {
+            const html =
 
-                CTM.setProgress(number);
+                await CTM.fetchScreen(screenId);
+
+            CTM.injectScreen(html);
+
+            if (
+
+                typeof CTM.setCurrentScreen === 'function'
+
+            ) {
+
+                CTM.setCurrentScreen(screenId);
 
             }
 
-            CTM.log('Loaded:', screenId);
+            CTM.updateJourneyProgress(screenId);
+
+            CTM.afterScreenLoaded();
+
+            CTM.trackLoadedScreen(screenId);
+
+            if (
+
+                typeof CTM.saveState === 'function'
+
+            ) {
+
+                CTM.saveState();
+
+            }
+
+            CTM.log(
+
+                screenId,
+
+                'loaded successfully.'
+
+            );
+
+            return true;
 
         }
 
@@ -91,31 +389,77 @@ Responsibility
 
             console.error(error);
 
-            const root = CTM.screenRoot();
+            CTM.showLoaderError(
 
-            if (!root) return;
+                screenId,
 
-            root.innerHTML = `
+                error.message
 
-                <section class="screen">
+            );
 
-                    <div class="container">
-
-                        <div class="card">
-
-                            <h2>Screen Loading Error</h2>
-
-                            <p>${error.message}</p>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-            `;
+            return false;
 
         }
+
+    };
+
+    /*==================================================
+    Loader Error
+    ==================================================*/
+
+    CTM.showLoaderError = function (
+
+        screenId,
+
+        message
+
+    ) {
+
+        const container =
+
+            CTM.getScreenContainer();
+
+        if (!container) {
+
+            return;
+
+        }
+
+        container.innerHTML = `
+
+<section class="screen">
+
+    <div class="container">
+
+        <div class="card">
+
+            <h2>
+
+                Screen Loading Error
+
+            </h2>
+
+            <p>
+
+                Unable to load:
+
+                <strong>${screenId}</strong>
+
+            </p>
+
+            <p>
+
+                ${message}
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+`;
 
     };
 
@@ -123,13 +467,53 @@ Responsibility
     Reload Current Screen
     ==================================================*/
 
-    CTM.reloadCurrentScreen = function () {
+    CTM.reloadScreen = async function () {
 
-        return CTM.loadScreen(
+        return await CTM.loadScreen(
 
             CTM.getCurrentScreen()
 
         );
+
+    };
+
+    /*==================================================
+    Preload
+    ==================================================*/
+
+    CTM.preloadScreen = async function (
+
+        screenId
+
+    ) {
+
+        try {
+
+            await fetch(
+
+                CTM.getScreenPath(screenId),
+
+                {
+
+                    cache: 'force-cache'
+
+                }
+
+            );
+
+        }
+
+        catch (error) {
+
+            console.warn(
+
+                'Preload failed:',
+
+                screenId
+
+            );
+
+        }
 
     };
 
