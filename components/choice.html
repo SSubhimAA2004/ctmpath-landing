@@ -1,15 +1,16 @@
 
 <!--
 ==========================================================
-CTM PATH™ Guided Journey v3.0
+CTM PATH™ Guided Journey v4.0
 File: components/choice.html
 
 Responsibility:
-Presentation template for choice moments.
+Presentation template for Choice Moments.
+
+Bilingual Template Standard
 
 No JavaScript.
 No business logic.
-Rendered by renderer.js
 ==========================================================
 -->
 
@@ -17,56 +18,113 @@ Rendered by renderer.js
 
     <div class="ctm-scene__container">
 
-        <!-- Header -->
+        <!-- ======================================================
+             HEADER
+        ======================================================= -->
 
         <header class="ctm-scene__header">
 
             <div class="ctm-scene__step">
+
                 {{step}}
+
             </div>
 
-            <h1 class="ctm-scene__title">
-                {{title}}
+            <h1 class="ctm-scene__title-ta">
+
+                {{titleTa}}
+
             </h1>
 
-            <h2 class="ctm-scene__subtitle">
-                {{subtitle}}
+            <h2 class="ctm-scene__title-en">
+
+                {{titleEn}}
+
             </h2>
 
         </header>
 
-        <!-- Prompt -->
+        <!-- ======================================================
+             QUESTION
+        ======================================================= -->
 
         <main class="ctm-scene__content">
 
-            <div class="ctm-choice__question">
+            <div class="ctm-question__body">
 
-                {{question}}
+                <p class="ctm-question-ta">
+
+                    {{questionTa}}
+
+                </p>
+
+                <p class="ctm-question-en">
+
+                    {{questionEn}}
+
+                </p>
 
             </div>
 
+            <!-- ==================================================
+                 CHOICES
+            =================================================== -->
+
             <div
-                class="ctm-choice__options"
-                role="radiogroup"
-                aria-label="{{title}}">
+                class="ctm-choice__list"
+                id="ctm-choice-list">
 
                 {{choices}}
 
             </div>
 
+            <!-- ==================================================
+                 HELPER
+            =================================================== -->
+
+            <div
+                class="ctm-choice__helper"
+                aria-live="polite">
+
+                <div class="ctm-helper-ta">
+
+                    {{helperTa}}
+
+                </div>
+
+                <div class="ctm-helper-en">
+
+                    {{helperEn}}
+
+                </div>
+
+            </div>
+
         </main>
 
-        <!-- Navigation -->
+        <!-- ======================================================
+             CALL TO ACTION
+        ======================================================= -->
 
         <footer class="ctm-scene__footer">
 
             <button
                 type="button"
-                class="ctm-button ctm-button--primary"
+                class="ctm-button-green"
                 data-action="continue"
                 disabled>
 
-                {{button}}
+                <span class="ctm-button-ta">
+
+                    {{buttonTa}}
+
+                </span>
+
+                <span class="ctm-button-en">
+
+                    {{buttonEn}}
+
+                </span>
 
             </button>
 
