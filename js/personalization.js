@@ -1,176 +1,287 @@
 
 /**
  * ==========================================================
- * CTM PATH™ Guided Journey v3.0
+ * CTM PATH™ Guided Journey v4.0
  * File: js/personalization.js
- * Responsibility:
- * Visitor personalization and token replacement.
  *
- * Engineering Status:
- * Production Build
+ * PERSONALIZATION ENGINE
+ *
+ * Responsibility
+ * ----------------------------------------------------------
+ * • Visitor personalization
+ * • Template token replacement
+ * • Greeting generation
+ * • Future CRM token support
+ *
+ * Engineering Status
+ * ----------------------------------------------------------
+ * Production Ready
  * Architecture: FROZEN
  * ==========================================================
  */
 
 (() => {
-    "use strict";
 
-    /**
-     * --------------------------------------------------------
-     * Personalization Tokens
-     * --------------------------------------------------------
-     */
+"use strict";
 
-    const TOKENS = Object.freeze({
-        name: "Visitor",
-        firstName: "Friend",
-        city: "",
-        language: "ta"
+/* ==========================================================
+   01. DEFAULT TOKENS
+========================================================== */
+
+const DEFAULTS = Object.freeze({
+
+    Name: "Friend",
+
+    FullName: "Visitor",
+
+    City: "",
+
+    Email: "",
+
+    Phone: "",
+
+    Language: "ta"
+
+});
+
+
+/* ==========================================================
+   02. VISITOR PROFILE
+========================================================== */
+
+function profile() {
+
+    return {
+
+        Name:
+
+            CTMState.get("visitor.firstName") ||
+
+            CTMState.get("visitor.name") ||
+
+            DEFAULTS.Name,
+
+
+
+        FullName:
+
+            CTMState.get("visitor.name") ||
+
+            DEFAULTS.FullName,
+
+
+
+        City:
+
+            CTMState.get("visitor.city") ||
+
+            DEFAULTS.City,
+
+
+
+        Email:
+
+            CTMState.get("visitor.email") ||
+
+            DEFAULTS.Email,
+
+
+
+        Phone:
+
+            CTMState.get("visitor.phone") ||
+
+            DEFAULTS.Phone,
+
+
+
+        Language:
+
+            CTMState.get("visitor.language") ||
+
+            DEFAULTS.Language
+
+    };
+
+}
+
+
+/* ==========================================================
+   03. UPDATE PROFILE
+========================================================== */
+
+function update(values = {}) {
+
+    if (values.name !== undefined) {
+
+        CTMState.updateName(values.name);
+
+    }
+
+    if (values.city !== undefined) {
+
+        CTMState.set(
+
+            "visitor.city",
+
+            values.city
+
+        );
+
+    }
+
+    if (values.email !== undefined) {
+
+        CTMState.set(
+
+            "visitor.email",
+
+            values.email
+
+        );
+
+    }
+
+    if (values.phone !== undefined) {
+
+        CTMState.set(
+
+            "visitor.phone",
+
+            values.phone
+
+        );
+
+    }
+
+    if (values.language !== undefined) {
+
+        CTMState.set(
+
+            "visitor.language",
+
+            values.language
+
+        );
+
+    }
+
+    return profile();
+
+}
+
+
+/* ==========================================================
+   04. TOKEN REPLACEMENT
+========================================================== */
+
+function interpolate(text = "") {
+
+    let html = String(text);
+
+    const tokens = profile();
+
+    Object.entries(tokens).forEach(
+
+        ([key, value]) => {
+
+            const expression = new RegExp(
+
+                `\\{\\{\\s*${key}\\s*\\}\\}`,
+
+                "g"
+
+            );
+
+            html = html.replace(
+
+                expression,
+
+                value ?? ""
+
+            );
+
+        }
+
+    );
+
+    return html;
+
+}
+
+
+/* ==========================================================
+   05. HTML PERSONALIZATION
+========================================================== */
+
+function personalizeHTML(html = "") {
+
+    return interpolate(html);
+
+}
+
+
+/* ==========================================================
+   06. DOM PERSONALIZATION
+========================================================== */
+
+function personalize(root = document) {
+
+    const elements =
+
+        root.querySelectorAll(
+
+            "[data-personalize]"
+
+        );
+
+    elements.forEach(element => {
+
+        element.innerHTML =
+
+            interpolate(
+
+                element.innerHTML
+
+            );
+
     });
 
-    /**
-     * --------------------------------------------------------
-     * Read Visitor Profile
-     * --------------------------------------------------------
-     */
+    return elements.length;
 
-    function profile() {
+}
 
-        return {
-            name: CTMState.get("visitor.name") || TOKENS.name,
-            firstName:
-                CTMState.get("personalization.firstName") ||
-                TOKENS.firstName,
-            city: CTMState.get("visitor.city") || TOKENS.city,
-            language:
-                CTMState.get("visitor.language") ||
-                TOKENS.language
-        };
 
-    }
+/* ==========================================================
+   07. GREETING
+========================================================== */
 
-    /**
-     * --------------------------------------------------------
-     * Update Visitor Profile
-     * --------------------------------------------------------
-     */
+function greeting() {
 
-    function update(values = {}) {
+    return `Welcome, ${profile().Name}.`;
 
-        if (values.name !== undefined) {
-            CTMState.set("visitor.name", values.name);
-        }
+}
 
-        if (values.firstName !== undefined) {
-            CTMState.set(
-                "personalization.firstName",
-                values.firstName
-            );
-        }
 
-        if (values.city !== undefined) {
-            CTMState.set("visitor.city", values.city);
-        }
+/* ==========================================================
+   08. PUBLIC API
+========================================================== */
 
-        if (values.language !== undefined) {
-            CTMState.set(
-                "visitor.language",
-                values.language
-            );
-        }
+window.CTMPersonalization = Object.freeze({
 
-        return profile();
+    profile,
 
-    }
+    update,
 
-    /**
-     * --------------------------------------------------------
-     * Replace Template Tokens
-     *
-     * Supported Tokens:
-     * {{name}}
-     * {{firstName}}
-     * {{city}}
-     * {{language}}
-     * --------------------------------------------------------
-     */
+    interpolate,
 
-    function interpolate(text = "") {
+    personalizeHTML,
 
-        const data = profile();
+    personalize,
 
-        return String(text)
-            .replaceAll("{{name}}", data.name)
-            .replaceAll("{{firstName}}", data.firstName)
-            .replaceAll("{{city}}", data.city)
-            .replaceAll("{{language}}", data.language);
+    greeting
 
-    }
-
-    /**
-     * --------------------------------------------------------
-     * Personalize HTML Fragment
-     * --------------------------------------------------------
-     */
-
-    function personalizeHTML(html = "") {
-
-        return interpolate(html);
-
-    }
-
-    /**
-     * --------------------------------------------------------
-     * Personalize DOM Tree
-     * --------------------------------------------------------
-     */
-
-    function personalize(root = document) {
-
-        const elements = root.querySelectorAll("[data-personalize]");
-
-        elements.forEach(element => {
-            element.innerHTML = interpolate(element.innerHTML);
-        });
-
-        return elements.length;
-
-    }
-
-    /**
-     * --------------------------------------------------------
-     * Greeting
-     * --------------------------------------------------------
-     */
-
-    function greeting() {
-
-        const user = profile();
-
-        return `Welcome, ${user.firstName}.`;
-
-    }
-
-    /**
-     * --------------------------------------------------------
-     * Public API
-     * --------------------------------------------------------
-     */
-
-    window.CTMPersonalization = Object.freeze({
-
-        profile,
-
-        update,
-
-        interpolate,
-
-        personalizeHTML,
-
-        personalize,
-
-        greeting
-
-    });
+});
 
 })();
+
