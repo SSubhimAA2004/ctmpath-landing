@@ -1,1 +1,435 @@
 
+/*======================================================================
+
+CTM PATH™ Guided Journey v6.0
+
+Purpose
+Responsive Mobile System
+
+Responsibility
+• Desktop First
+• Laptop
+• Tablet
+• Mobile
+• Small Mobile
+• Landscape Support
+• Touch Optimization
+
+======================================================================*/
+
+
+/*==================================================
+Large Desktop
+==================================================*/
+
+@media (min-width:1600px){
+
+    .container{
+
+        max-width:1400px;
+
+    }
+
+    .hero{
+
+        max-width:1100px;
+
+    }
+
+    .tamil{
+
+        font-size:4.8rem;
+
+    }
+
+    .english{
+
+        font-size:1.6rem;
+
+    }
+
+}
+
+
+/*==================================================
+Desktop
+==================================================*/
+
+@media (max-width:1400px){
+
+    .container{
+
+        max-width:1100px;
+
+    }
+
+}
+
+
+/*==================================================
+Laptop
+==================================================*/
+
+@media (max-width:1200px){
+
+    .container{
+
+        max-width:960px;
+
+    }
+
+    .hero{
+
+        gap:36px;
+
+    }
+
+    .tamil{
+
+        font-size:3.6rem;
+
+    }
+
+}
+
+
+/*==================================================
+Tablet Landscape
+==================================================*/
+
+@media (max-width:1024px){
+
+    .screen{
+
+        padding:70px 36px;
+
+    }
+
+    .container{
+
+        max-width:860px;
+
+    }
+
+    .logo{
+
+        width:170px;
+
+    }
+
+    .tamil{
+
+        font-size:3.2rem;
+
+    }
+
+    .english{
+
+        font-size:1.25rem;
+
+    }
+
+    .btn{
+
+        min-width:300px;
+
+    }
+
+}
+
+
+/*==================================================
+Tablet Portrait
+==================================================*/
+
+@media (max-width:900px){
+
+    .screen{
+
+        padding:60px 28px;
+
+    }
+
+    .hero{
+
+        gap:32px;
+
+    }
+
+    .row{
+
+        flex-direction:column;
+
+    }
+
+    .grid-2,
+
+    .grid-3{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+/*==================================================
+Mobile
+==================================================*/
+
+@media (max-width:768px){
+
+    .screen{
+
+        padding:48px 20px;
+
+        min-height:100svh;
+
+    }
+
+    .container{
+
+        width:100%;
+
+    }
+
+    .hero{
+
+        gap:26px;
+
+    }
+
+    .logo{
+
+        width:140px;
+
+    }
+
+    .screen-caption{
+
+        font-size:.78rem;
+
+        letter-spacing:2px;
+
+    }
+
+    .tamil{
+
+        font-size:2.35rem;
+
+        line-height:1.45;
+
+    }
+
+    .english{
+
+        font-size:1rem;
+
+        line-height:1.75;
+
+        max-width:100%;
+
+    }
+
+    .btn{
+
+        width:100%;
+
+        min-width:100%;
+
+    }
+
+    h1{
+
+        font-size:2.2rem;
+
+    }
+
+    h2{
+
+        font-size:1.8rem;
+
+    }
+
+    h3{
+
+        font-size:1.5rem;
+
+    }
+
+}
+
+
+/*==================================================
+Small Mobile
+==================================================*/
+
+@media (max-width:480px){
+
+    .screen{
+
+        padding:40px 16px;
+
+    }
+
+    .logo{
+
+        width:120px;
+
+    }
+
+    .tamil{
+
+        font-size:2rem;
+
+    }
+
+    .english{
+
+        font-size:.95rem;
+
+    }
+
+    .screen-caption{
+
+        font-size:.72rem;
+
+    }
+
+    .card{
+
+        padding:22px;
+
+    }
+
+    .message{
+
+        padding:22px;
+
+    }
+
+}
+
+
+/*==================================================
+Very Small Mobile
+==================================================*/
+
+@media (max-width:360px){
+
+    .tamil{
+
+        font-size:1.8rem;
+
+    }
+
+    .english{
+
+        font-size:.90rem;
+
+    }
+
+    .btn{
+
+        min-height:66px;
+
+    }
+
+    .btn div{
+
+        font-size:1.05rem;
+
+    }
+
+    .btn small{
+
+        font-size:.75rem;
+
+    }
+
+}
+
+
+/*==================================================
+Landscape Phones
+==================================================*/
+
+@media (max-height:600px) and (orientation:landscape){
+
+    .screen{
+
+        padding:30px 24px;
+
+        min-height:auto;
+
+    }
+
+    .hero{
+
+        gap:18px;
+
+    }
+
+    .logo{
+
+        width:90px;
+
+    }
+
+    .tamil{
+
+        font-size:2rem;
+
+    }
+
+    .english{
+
+        font-size:.95rem;
+
+    }
+
+}
+
+
+/*==================================================
+Touch Devices
+==================================================*/
+
+@media (hover:none){
+
+    .btn:hover,
+
+    .card:hover,
+
+    .choice:hover,
+
+    .booking-date:hover,
+
+    .booking-slot:hover{
+
+        transform:none;
+
+    }
+
+}
+
+
+/*==================================================
+Safe Area Support
+==================================================*/
+
+@supports (padding:max(0px)){
+
+    .screen{
+
+        padding-left:max(20px,env(safe-area-inset-left));
+
+        padding-right:max(20px,env(safe-area-inset-right));
+
+        padding-top:max(40px,env(safe-area-inset-top));
+
+        padding-bottom:max(40px,env(safe-area-inset-bottom));
+
+    }
+
+}
