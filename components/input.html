@@ -1,1 +1,100 @@
 
+<!--
+==========================================================
+CTM PATH™ Guided Journey v3.0
+File: components/input.html
+
+Responsibility:
+Presentation template for visitor input moments.
+
+No JavaScript.
+No business logic.
+Rendered by renderer.js
+==========================================================
+-->
+
+<section class="ctm-scene ctm-input">
+
+    <div class="ctm-scene__container">
+
+        <!-- Header -->
+
+        <header class="ctm-scene__header">
+
+            <div class="ctm-scene__step">
+                {{step}}
+            </div>
+
+            <h1 class="ctm-scene__title">
+                {{title}}
+            </h1>
+
+            <h2 class="ctm-scene__subtitle">
+                {{subtitle}}
+            </h2>
+
+        </header>
+
+        <!-- Input -->
+
+        <main class="ctm-scene__content">
+
+            <div class="ctm-input__question">
+
+                {{question}}
+
+            </div>
+
+            <div class="ctm-input__field">
+
+                <label
+                    class="ctm-input__label"
+                    for="ctm-input">
+
+                    {{label}}
+
+                </label>
+
+                <input
+                    id="ctm-input"
+                    class="ctm-input__control"
+                    type="{{type}}"
+                    name="{{name}}"
+                    value="{{value}}"
+                    placeholder="{{placeholder}}"
+                    autocomplete="{{autocomplete}}"
+                    inputmode="{{inputmode}}"
+                    maxlength="{{maxlength}}"
+                    required>
+
+            </div>
+
+            <div
+                class="ctm-input__helper"
+                aria-live="polite">
+
+                {{helper}}
+
+            </div>
+
+        </main>
+
+        <!-- Navigation -->
+
+        <footer class="ctm-scene__footer">
+
+            <button
+                type="button"
+                class="ctm-button ctm-button--primary"
+                data-action="continue"
+                disabled>
+
+                {{button}}
+
+            </button>
+
+        </footer>
+
+    </div>
+
+</section>
