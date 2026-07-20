@@ -1,1 +1,73 @@
 
+<!--
+==========================================================
+CTM PATH™ Guided Journey v3.0
+File: components/reflection.html
+
+Responsibility:
+Presentation template for reflection moments.
+
+No JavaScript.
+No business logic.
+Rendered by renderer.js
+==========================================================
+-->
+
+<section class="ctm-scene ctm-reflection">
+
+    <div class="ctm-scene__container">
+
+        <!-- Header -->
+
+        <header class="ctm-scene__header">
+
+            <div class="ctm-scene__step">
+                {{step}}
+            </div>
+
+            <h1 class="ctm-scene__title">
+                {{title}}
+            </h1>
+
+            <h2 class="ctm-scene__subtitle">
+                {{subtitle}}
+            </h2>
+
+        </header>
+
+        <!-- Reflection -->
+
+        <main class="ctm-scene__content">
+
+            <div class="ctm-reflection__content">
+
+                {{reflection}}
+
+            </div>
+
+            <div class="ctm-reflection__pause">
+
+                {{pause}}
+
+            </div>
+
+        </main>
+
+        <!-- Continue -->
+
+        <footer class="ctm-scene__footer">
+
+            <button
+                type="button"
+                class="ctm-button ctm-button--primary"
+                data-action="continue">
+
+                {{button}}
+
+            </button>
+
+        </footer>
+
+    </div>
+
+</section>
