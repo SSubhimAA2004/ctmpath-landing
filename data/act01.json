@@ -1,1 +1,675 @@
 
+{
+  "act": {
+    "id": 1,
+    "sequence": 1,
+    "name": {
+      "ta": "முதல் உரையாடல்",
+      "en": "The First Conversation"
+    },
+    "theme": {
+      "ta": "நம்பிக்கை",
+      "en": "Trust"
+    },
+    "startMoment": 1,
+    "endMoment": 10
+  },
+
+  "moments": [
+
+    {
+      "id": 1,
+      "sequence": 1,
+      "act": 1,
+      "component": "message",
+      "type": "welcome",
+
+      "payload": {
+
+        "title": {
+          "ta": "வருக...",
+          "en": "Welcome"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "content": {
+          "ta": [
+            "வணக்கம்.",
+            "நான்",
+            "ரஃபேல் ராஜ்.",
+            "உங்களைச் சந்தித்ததில்",
+            "மகிழ்ச்சி."
+          ],
+          "en": [
+            "Hello.",
+            "I'm",
+            "Raphael Raj.",
+            "It's a pleasure",
+            "to meet you."
+          ]
+        },
+
+        "button": {
+          "ta": "தொடங்கலாம்",
+          "en": "Let's Begin"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": false,
+        "tokens": []
+      },
+
+      "navigation": {
+        "previous": null,
+        "next": 2
+      },
+
+      "analytics": {
+        "event": "moment_01"
+      }
+    },
+
+    {
+      "id": 2,
+      "sequence": 2,
+      "act": 1,
+      "component": "message",
+      "type": "gift",
+
+      "payload": {
+
+        "title": {
+          "ta": "ஒரு சிறிய பரிசு",
+          "en": "A Small Gift"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "content": {
+          "ta": [
+            "இந்த",
+            "ஆறு நிமிடங்கள்...",
+            "எனக்காக அல்ல.",
+            "உங்களுக்காக."
+          ],
+          "en": [
+            "These",
+            "six minutes...",
+            "aren't for me.",
+            "They're for you."
+          ]
+        },
+
+        "button": {
+          "ta": "தொடரலாம்",
+          "en": "Continue"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": false,
+        "tokens": []
+      },
+
+      "navigation": {
+        "previous": 1,
+        "next": 3
+      },
+
+      "analytics": {
+        "event": "moment_02"
+      }
+    },
+
+    {
+      "id": 3,
+      "sequence": 3,
+      "act": 1,
+      "component": "message",
+      "type": "promise",
+
+      "payload": {
+
+        "title": {
+          "ta": "என் வாக்குறுதி",
+          "en": "My Promise"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "content": {
+          "ta": [
+            "நான்",
+            "உங்களை",
+            "மாற்றப் போவதில்லை.",
+            "உங்களை",
+            "புரிந்துகொள்ள",
+            "மட்டுமே",
+            "விரும்புகிறேன்."
+          ],
+          "en": [
+            "I'm not here",
+            "to change you.",
+            "I'm here",
+            "to understand you."
+          ]
+        },
+
+        "button": {
+          "ta": "சரி",
+          "en": "Okay"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": false,
+        "tokens": []
+      },
+
+      "navigation": {
+        "previous": 2,
+        "next": 4
+      },
+
+      "analytics": {
+        "event": "moment_03"
+      }
+    },
+
+    {
+      "id": 4,
+      "sequence": 4,
+      "act": 1,
+      "component": "question",
+      "type": "permission",
+
+      "payload": {
+
+        "title": {
+          "ta": "உங்கள் அனுமதி",
+          "en": "Permission"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "question": {
+          "ta": [
+            "சில கேள்விகள்...",
+            "கேட்கலாமா?"
+          ],
+          "en": [
+            "May I ask you",
+            "a few questions?"
+          ]
+        },
+
+        "button": {
+          "ta": "ஆம்",
+          "en": "Yes"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": false,
+        "tokens": []
+      },
+
+      "navigation": {
+        "previous": 3,
+        "next": 5
+      },
+
+      "analytics": {
+        "event": "moment_04"
+      }
+    }
+
+    ,
+    {
+      "id": 5,
+      "sequence": 5,
+      "act": 1,
+      "component": "input",
+      "type": "visitor_name",
+
+      "payload": {
+
+        "title": {
+          "ta": "உங்கள் பெயர்",
+          "en": "Your Name"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "question": {
+          "ta": [
+            "நான் உங்களை...",
+            "எப்படி",
+            "அழைக்கலாம்?"
+          ],
+          "en": [
+            "What",
+            "should I",
+            "call you?"
+          ]
+        },
+
+        "input": {
+
+          "type": "text",
+
+          "name": "visitorName",
+
+          "placeholder": {
+            "ta": "உங்கள் பெயர்",
+            "en": "Your Name"
+          },
+
+          "required": true,
+
+          "autocomplete": "name",
+
+          "inputMode": "text",
+
+          "maxLength": 60
+
+        },
+
+        "button": {
+          "ta": "தொடரலாம்",
+          "en": "Continue"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": false,
+        "tokens": []
+      },
+
+      "navigation": {
+        "previous": 4,
+        "next": 6
+      },
+
+      "analytics": {
+        "event": "moment_05"
+      }
+    },
+
+    {
+      "id": 6,
+      "sequence": 6,
+      "act": 1,
+      "component": "message",
+      "type": "connection",
+
+      "payload": {
+
+        "title": {
+          "ta": "வணக்கம், {{Name}}",
+          "en": "Hello, {{Name}}"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "content": {
+          "ta": [
+            "நன்றி,",
+            "{{Name}}.",
+            "இப்போது...",
+            "இந்த உரையாடல்",
+            "உங்களைப் பற்றியது."
+          ],
+          "en": [
+            "Thank you,",
+            "{{Name}}.",
+            "From this point...",
+            "this conversation",
+            "is about you."
+          ]
+        },
+
+        "button": {
+          "ta": "தொடரலாம்",
+          "en": "Continue"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": true,
+        "tokens": [
+          "Name"
+        ]
+      },
+
+      "navigation": {
+        "previous": 5,
+        "next": 7
+      },
+
+      "analytics": {
+        "event": "moment_06"
+      }
+    },
+
+    {
+      "id": 7,
+      "sequence": 7,
+      "act": 1,
+      "component": "choice",
+      "type": "core_question",
+
+      "payload": {
+
+        "title": {
+          "ta": "ஒரு கேள்வி",
+          "en": "A Question"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "question": {
+          "ta": [
+            "{{Name}}...",
+            "நீங்கள்",
+            "உண்மையில்",
+            "தேடுவது...",
+            "பணமா?"
+          ],
+          "en": [
+            "{{Name}}...",
+            "Is money...",
+            "really",
+            "what you're",
+            "looking for?"
+          ]
+        },
+
+        "choiceSet": "yes_no",
+
+        "button": {
+          "ta": "தொடரலாம்",
+          "en": "Continue"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": true,
+        "tokens": [
+          "Name"
+        ]
+      },
+
+      "navigation": {
+        "previous": 6,
+        "next": 8
+      },
+
+      "analytics": {
+        "event": "moment_07"
+      }
+    },
+
+    {
+      "id": 8,
+      "sequence": 8,
+      "act": 1,
+      "component": "message",
+      "type": "first_discovery",
+
+      "payload": {
+
+        "title": {
+          "ta": "முதல் கண்டுபிடிப்பு",
+          "en": "The First Discovery"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "content": {
+          "ta": [
+            "நானும்...",
+            "அப்படித்தான்",
+            "நினைத்தேன்.",
+            "",
+            "ஆனால்...",
+            "பணம் என்பது",
+            "ஒரு இலக்கு அல்ல.",
+            "",
+            "அது...",
+            "நாம்",
+            "விரும்பும்",
+            "வாழ்க்கைக்கான",
+            "ஒரு கருவி."
+          ],
+          "en": [
+            "I used",
+            "to think",
+            "the same.",
+            "",
+            "Money",
+            "isn't",
+            "the destination.",
+            "",
+            "It's simply",
+            "a tool...",
+            "to build",
+            "the life",
+            "we really want."
+          ]
+        },
+
+        "button": {
+          "ta": "அது சரி...",
+          "en": "That's True..."
+        }
+
+      },
+
+      "personalization": {
+        "enabled": false,
+        "tokens": []
+      },
+
+      "navigation": {
+        "previous": 7,
+        "next": 9
+      },
+
+      "analytics": {
+        "event": "moment_08"
+      }
+    }
+
+    ,
+    {
+      "id": 9,
+      "sequence": 9,
+      "act": 1,
+      "component": "choice",
+      "type": "dream",
+
+      "payload": {
+
+        "title": {
+          "ta": "உங்கள் வாழ்க்கை",
+          "en": "Your Life"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "question": {
+          "ta": [
+            "அப்படியானால்...",
+            "நீங்கள்",
+            "உண்மையில்",
+            "எப்படிப்பட்ட",
+            "வாழ்க்கையை",
+            "விரும்புகிறீர்கள்?"
+          ],
+          "en": [
+            "Then...",
+            "what kind",
+            "of life",
+            "do you",
+            "really",
+            "want?"
+          ]
+        },
+
+        "choiceSet": "life_dream",
+
+        "button": {
+          "ta": "இதுதான்",
+          "en": "This One"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": false,
+        "tokens": []
+      },
+
+      "navigation": {
+        "previous": 8,
+        "next": 10
+      },
+
+      "analytics": {
+        "event": "moment_09"
+      }
+    },
+
+    {
+      "id": 10,
+      "sequence": 10,
+      "act": 1,
+      "component": "insight",
+      "type": "second_discovery",
+
+      "payload": {
+
+        "title": {
+          "ta": "அழகான பதில்",
+          "en": "Beautiful"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "intro": {
+          "ta": [
+            "{{Name}}..."
+          ],
+          "en": [
+            "{{Name}}..."
+          ]
+        },
+
+        "insight": {
+          "ta": [
+            "பாருங்கள்...",
+            "நீங்கள்",
+            "பணத்தை",
+            "தேர்ந்தெடுக்கவில்லை.",
+            "",
+            "நீங்கள்",
+            "ஒரு",
+            "வாழ்க்கையை",
+            "தேர்ந்தெடுத்தீர்கள்."
+          ],
+          "en": [
+            "Notice...",
+            "You didn't",
+            "choose",
+            "money.",
+            "",
+            "You chose",
+            "a way",
+            "of living."
+          ]
+        },
+
+        "summary": {
+          "ta": [
+            "இது நமது",
+            "பயணத்தின்",
+            "முதல்",
+            "முக்கிய",
+            "கண்டுபிடிப்பு."
+          ],
+          "en": [
+            "This is",
+            "our first",
+            "major",
+            "discovery",
+            "together."
+          ]
+        },
+
+        "button": {
+          "ta": "தொடரலாம்",
+          "en": "Continue"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": true,
+        "tokens": [
+          "Name"
+        ]
+      },
+
+      "navigation": {
+        "previous": 9,
+        "next": 11
+      },
+
+      "analytics": {
+        "event": "moment_10"
+      }
+    }
+
+  ]
+}
+
