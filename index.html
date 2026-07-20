@@ -1,165 +1,133 @@
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ta">
 <head>
+    <!--
+    ==========================================================
+    CTM PATH™ Guided Journey v6.0
+    Purpose:
+    Application Entry Point
 
-    <!-- ==========================================================
-         CTM PATH™ Guided Journey
-         Premium Cinematic Landing Experience
-         Version : 3.2.0
-    =========================================================== -->
+    Responsibility:
+    • Load design system
+    • Create application shell
+    • Load JavaScript modules
+    • Provide root container for screen loader
+
+    Google Apps Script Compatible
+    ==========================================================
+    -->
 
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>CTM PATH™ Guided Journey</title>
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-    <meta
-        http-equiv="X-UA-Compatible"
-        content="IE=edge">
-
-    <title>
-        CTM PATH™ Guided Journey
-    </title>
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
     <meta
         name="description"
-        content="A premium guided discovery journey with Raphael Raj.">
+        content="CTM PATH™ Guided Journey">
 
     <meta
         name="theme-color"
-        content="#081C3A">
+        content="#0B1020">
 
-    <!-- ==========================================================
-         Favicon
-    =========================================================== -->
+    <meta
+        name="color-scheme"
+        content="dark">
 
-    <link
-        rel="icon"
-        type="image/png"
-        href="images/CTM_Logo.png">
+    <link rel="icon" href="assets/CTMLogo.png">
 
-    <!-- ==========================================================
+    <!-- ======================================================
          CSS
-         Load Order is IMPORTANT
-    =========================================================== -->
+    ======================================================= -->
 
-    <link
-        rel="stylesheet"
-        href="css/reset.css">
-
-    <link
-        rel="stylesheet"
-        href="css/tokens.css">
-
-    <link
-        rel="stylesheet"
-        href="css/typography.css">
-
-    <link
-        rel="stylesheet"
-        href="css/layout.css">
-
-    <link
-        rel="stylesheet"
-        href="css/cards.css">
-
-    <link
-        rel="stylesheet"
-        href="css/buttons.css">
-
-    <link
-        rel="stylesheet"
-        href="css/forms.css">
-
-    <link
-        rel="stylesheet"
-        href="css/progress.css">
-
-    <link
-        rel="stylesheet"
-        href="css/animations.css">
-
-    <link
-        rel="stylesheet"
-        href="css/responsive.css">
-
-    <!-- ==========================================================
-         Welcome Screen Overrides
-         MUST BE LOADED LAST
-    =========================================================== -->
-
-    <link
-        rel="stylesheet"
-        href="css/style.css">
+    <link rel="stylesheet" href="css/01-reset.css">
+    <link rel="stylesheet" href="css/02-tokens.css">
+    <link rel="stylesheet" href="css/03-typography.css">
+    <link rel="stylesheet" href="css/04-layout.css">
+    <link rel="stylesheet" href="css/05-buttons.css">
+    <link rel="stylesheet" href="css/06-inputs.css">
+    <link rel="stylesheet" href="css/07-cards.css">
+    <link rel="stylesheet" href="css/08-progress.css">
+    <link rel="stylesheet" href="css/09-choice.css">
+    <link rel="stylesheet" href="css/10-message.css">
+    <link rel="stylesheet" href="css/11-booking.css">
+    <link rel="stylesheet" href="css/12-animations.css">
+    <link rel="stylesheet" href="css/13-mobile.css">
+    <link rel="stylesheet" href="css/14-utilities.css">
 
 </head>
 
 <body>
 
-    <!-- ==========================================================
-         Application Root
-         Everything is rendered inside this container.
-    =========================================================== -->
+    <!-- ======================================================
+         APPLICATION ROOT
+    ======================================================= -->
 
-    <main
-        id="app"
-        class="app">
+    <div id="app">
 
-        <noscript>
+        <!--
+        Screen Loader Target
 
-            JavaScript is required to run
-            CTM PATH™ Guided Journey.
+        Example:
 
-        </noscript>
+        screens/
+            screen01.html
+            screen02.html
+            ...
+            screen36.html
+        -->
 
-    </main>
+        <main
+            id="screen-root"
+            class="screen-root"
+            aria-live="polite"
+            aria-label="CTM PATH Guided Journey">
 
-    <!-- ==========================================================
-         Hidden Component Templates
-         Loaded by loader.js
-    =========================================================== -->
+            <noscript>
+                JavaScript is required to run the CTM PATH™ Guided Journey.
+            </noscript>
 
-    <div
-        id="template-container"
-        hidden>
+        </main>
 
     </div>
 
-    <!-- ==========================================================
-         JavaScript
-         Load Order is IMPORTANT
-    =========================================================== -->
+    <!-- ======================================================
+         JAVASCRIPT
+         Load Order is Mandatory
+    ======================================================= -->
 
-    <script src="js/config.js"></script>
+    <script src="js/04-state-core.js"></script>
+    <script src="js/05-state-visitor.js"></script>
+    <script src="js/06-state-progress.js"></script>
+    <script src="js/07-storage.js"></script>
 
-    <script src="js/state.js"></script>
+    <script src="js/19-utils.js"></script>
 
-    <script src="js/utils.js"></script>
+    <script src="js/03-loader.js"></script>
+    <script src="js/02-router.js"></script>
 
-    <script src="js/loader.js"></script>
+    <script src="js/09-events-inputs.js"></script>
+    <script src="js/10-events-choices.js"></script>
+    <script src="js/08-events-buttons.js"></script>
 
-    <script src="js/renderer.js"></script>
+    <script src="js/11-personalization-name.js"></script>
+    <script src="js/12-personalization-text.js"></script>
 
-    <script src="js/navigation.js"></script>
+    <script src="js/13-calculations-score.js"></script>
+    <script src="js/14-calculations-pattern.js"></script>
+    <script src="js/15-calculations-insights.js"></script>
 
-    <script src="js/events.js"></script>
+    <script src="js/16-analytics.js"></script>
+    <script src="js/17-booking.js"></script>
+    <script src="js/18-sheets.js"></script>
 
-    <script src="js/personalization.js"></script>
-
-    <script src="js/conversation.js"></script>
-
-    <script src="js/progress.js"></script>
-
-    <script src="js/analytics.js"></script>
-
-    <script src="js/booking.js"></script>
-
-    <script src="js/app.js"></script>
+    <!-- Application Bootstrap (Must Be Last) -->
+    <script src="js/01-app.js"></script>
 
 </body>
-
 </html>
-
