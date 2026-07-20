@@ -4,19 +4,40 @@
 CTM PATH™ Guided Journey v6.0
 
 Purpose
-Animation System
+Global Motion System
 
 Responsibility
-• Cinematic entrance animations
-• Premium hover effects
-• Fade transitions
-• Motion system
+• Screen Transitions
+• Hero Entrance
+• Text Reveal
+• Card Animation
+• Button Motion
+• Floating Elements
+• Ambient Glow
+• Loading Animation
 
 ======================================================================*/
 
 
 /*==================================================
-Screen Fade
+Animation Variables
+==================================================*/
+
+:root{
+
+    --motion-fast:.25s;
+
+    --motion-normal:.45s;
+
+    --motion-slow:.80s;
+
+    --motion-extra:1.20s;
+
+}
+
+
+/*==================================================
+Fade In
 ==================================================*/
 
 @keyframes fadeIn{
@@ -37,16 +58,18 @@ Screen Fade
 
 
 /*==================================================
-Rise
+Fade Up
 ==================================================*/
 
-@keyframes rise{
+@keyframes fadeUp{
 
     from{
 
         opacity:0;
 
-        transform:translateY(50px);
+        transform:
+
+            translateY(50px);
 
     }
 
@@ -54,7 +77,9 @@ Rise
 
         opacity:1;
 
-        transform:translateY(0);
+        transform:
+
+            translateY(0);
 
     }
 
@@ -62,29 +87,28 @@ Rise
 
 
 /*==================================================
-Glow
+Fade Down
 ==================================================*/
 
-@keyframes glow{
+@keyframes fadeDown{
 
-    0%{
+    from{
 
-        box-shadow:
-        0 0 18px rgba(216,179,106,.15);
+        opacity:0;
 
-    }
+        transform:
 
-    50%{
-
-        box-shadow:
-        0 0 35px rgba(216,179,106,.45);
+            translateY(-40px);
 
     }
 
-    100%{
+    to{
 
-        box-shadow:
-        0 0 18px rgba(216,179,106,.15);
+        opacity:1;
+
+        transform:
+
+            translateY(0);
 
     }
 
@@ -92,29 +116,28 @@ Glow
 
 
 /*==================================================
-Text Glow
+Fade Left
 ==================================================*/
 
-@keyframes textGlow{
+@keyframes fadeLeft{
 
-    0%{
+    from{
 
-        text-shadow:
-        0 0 8px rgba(216,179,106,.10);
+        opacity:0;
 
-    }
+        transform:
 
-    50%{
-
-        text-shadow:
-        0 0 22px rgba(216,179,106,.35);
+            translateX(-50px);
 
     }
 
-    100%{
+    to{
 
-        text-shadow:
-        0 0 8px rgba(216,179,106,.10);
+        opacity:1;
+
+        transform:
+
+            translateX(0);
 
     }
 
@@ -122,28 +145,196 @@ Text Glow
 
 
 /*==================================================
-Logo Float
+Fade Right
 ==================================================*/
 
-@keyframes float{
+@keyframes fadeRight{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateX(50px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateX(0);
+
+    }
+
+}
+
+
+/*==================================================
+Scale In
+==================================================*/
+
+@keyframes scaleIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            scale(.92);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            scale(1);
+
+    }
+
+}
+
+
+/*==================================================
+Hero Float
+==================================================*/
+
+@keyframes heroFloat{
 
     0%{
 
-        transform:translateY(0);
+        transform:
+
+            translateY(0);
 
     }
 
     50%{
 
-        transform:translateY(-8px);
+        transform:
+
+            translateY(-8px);
 
     }
 
     100%{
 
-        transform:translateY(0);
+        transform:
+
+            translateY(0);
 
     }
+
+}
+
+
+/*==================================================
+Glow Pulse
+==================================================*/
+
+@keyframes glowPulse{
+
+    0%{
+
+        box-shadow:
+
+            0 0 12px rgba(216,179,106,.18);
+
+    }
+
+    50%{
+
+        box-shadow:
+
+            0 0 38px rgba(216,179,106,.35);
+
+    }
+
+    100%{
+
+        box-shadow:
+
+            0 0 12px rgba(216,179,106,.18);
+
+    }
+
+}
+
+
+/*==================================================
+Ambient Pulse
+==================================================*/
+
+@keyframes ambientPulse{
+
+    0%{
+
+        opacity:.35;
+
+        transform:scale(.95);
+
+    }
+
+    50%{
+
+        opacity:.75;
+
+        transform:scale(1.08);
+
+    }
+
+    100%{
+
+        opacity:.35;
+
+        transform:scale(.95);
+
+    }
+
+}
+
+
+/*==================================================
+Shimmer
+==================================================*/
+
+@keyframes shimmer{
+
+    from{
+
+        transform:
+
+            translateX(-120%);
+
+    }
+
+    to{
+
+        transform:
+
+            translateX(120%);
+
+    }
+
+}
+
+
+/*==================================================
+Screen Animation
+==================================================*/
+
+.screen{
+
+    animation:
+
+        fadeIn var(--motion-normal) ease;
 
 }
 
@@ -154,89 +345,277 @@ Hero Animation
 
 .hero{
 
-    animation:fadeIn .9s ease;
+    animation:
+
+        fadeUp var(--motion-slow) ease;
 
 }
 
+
+/*==================================================
+Logo Animation
+==================================================*/
 
 .logo{
 
-    animation:float 5s ease-in-out infinite;
+    animation:
+
+        heroFloat 6s ease-in-out infinite;
 
 }
 
 
-.screen-caption{
-
-    animation:rise .8s ease;
-
-}
-
+/*==================================================
+Typography Animation
+==================================================*/
 
 .tamil{
 
-    animation:rise 1.0s ease;
+    animation:
+
+        fadeUp .9s ease;
 
 }
 
 
 .english{
 
-    animation:rise 1.2s ease;
+    animation:
+
+        fadeUp 1.15s ease;
 
 }
 
+
+.screen-caption{
+
+    animation:
+
+        fadeDown .8s ease;
+
+}
+
+
+/*==================================================
+Card Animation
+==================================================*/
+
+.card{
+
+    animation:
+
+        scaleIn .60s ease;
+
+}
+
+
+/*==================================================
+Message Animation
+==================================================*/
+
+.message{
+
+    animation:
+
+        fadeUp .70s ease;
+
+}
+
+
+/*==================================================
+Choice Animation
+==================================================*/
+
+.choice{
+
+    animation:
+
+        fadeUp .45s ease;
+
+}
+
+
+/*==================================================
+Progress Animation
+==================================================*/
+
+.progress-fill{
+
+    transition:
+
+        width .8s ease;
+
+}
+
+
+/*==================================================
+Button Animation
+==================================================*/
 
 .btn{
 
     animation:
 
-    rise 1.5s ease,
-
-    glow 3s infinite;
+        fadeUp 1.30s ease;
 
 }
 
 
 /*==================================================
-Hover
+Button Hover
 ==================================================*/
-
-.logo:hover{
-
-    transform:scale(1.05);
-
-    transition:.35s;
-
-}
-
-
-.tamil:hover{
-
-    animation:textGlow 2s infinite;
-
-}
-
 
 .btn:hover{
 
     transform:
-    translateY(-4px)
-    scale(1.02);
+
+        translateY(-4px)
+
+        scale(1.02);
 
 }
 
 
 /*==================================================
-Page Transition
+Card Hover
 ==================================================*/
 
-.screen{
+.card:hover{
+
+    transform:
+
+        translateY(-6px);
+
+}
+
+
+/*==================================================
+Choice Hover
+==================================================*/
+
+.choice:hover{
+
+    transform:
+
+        translateY(-5px);
+
+}
+
+
+/*==================================================
+Interactive Elements
+==================================================*/
+
+button,
+
+.choice,
+
+.card,
+
+.booking-date,
+
+.booking-slot{
 
     transition:
 
-    opacity .45s ease,
+        all .30s ease;
 
-    transform .45s ease;
+}
+
+
+/*==================================================
+Glow Utility
+==================================================*/
+
+.glow{
+
+    animation:
+
+        glowPulse 3.5s infinite;
+
+}
+
+
+/*==================================================
+Floating Utility
+==================================================*/
+
+.float{
+
+    animation:
+
+        heroFloat 5s ease-in-out infinite;
+
+}
+
+
+/*==================================================
+Fade Utilities
+==================================================*/
+
+.fade-up{
+
+    animation:
+
+        fadeUp .6s ease;
+
+}
+
+
+.fade-left{
+
+    animation:
+
+        fadeLeft .6s ease;
+
+}
+
+
+.fade-right{
+
+    animation:
+
+        fadeRight .6s ease;
+
+}
+
+
+.fade-down{
+
+    animation:
+
+        fadeDown .6s ease;
+
+}
+
+
+.scale-in{
+
+    animation:
+
+        scaleIn .6s ease;
+
+}
+
+
+/*==================================================
+Reduced Motion
+==================================================*/
+
+@media (prefers-reduced-motion:reduce){
+
+    *,
+
+    *::before,
+
+    *::after{
+
+        animation:none !important;
+
+        transition:none !important;
+
+        scroll-behavior:auto !important;
+
+    }
 
 }
