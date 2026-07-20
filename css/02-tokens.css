@@ -1,44 +1,210 @@
 
-/*==============================
-Brand
-==============================*/
+/*======================================================================
 
---color-primary:#0E8A54;
---color-primary-hover:#18A867;
+CTM PATH™ Guided Journey v6.0
 
---color-accent:#D8B36A;
---color-accent-light:#E8C67A;
+Purpose
+Design Tokens
+
+Responsibility
+• Color Palette
+• Typography Tokens
+• Layout Tokens
+• Border Radius
+• Shadows
+• Animation Timing
+• Z-Index
+
+======================================================================*/
+
+:root{
+
+    /*==================================================
+    Brand Colors
+    ==================================================*/
+
+    --color-primary:#16A56A;
+
+    --color-primary-hover:#1CC57C;
+
+    --color-accent:#D8B36A;
+
+    --color-accent-light:#F2D28A;
+
+    --color-accent-dark:#A88439;
+
+    --color-white:#FFFFFF;
+
+    --color-black:#000000;
 
 
-/*==============================
-Background
-==============================*/
+    /*==================================================
+    Backgrounds
+    ==================================================*/
 
---bg-page:
-radial-gradient(circle at top,
-#143764 0%,
-#0B2346 30%,
-#08162C 65%,
-#050B16 100%);
+    --bg-page:#090A0F;
 
---bg-card:
-rgba(17,29,49,.55);
+    --bg-surface:#10131B;
 
+    --bg-card:rgba(20,24,34,.88);
 
-/*==============================
-Text
-==============================*/
+    --bg-card-hover:rgba(26,31,44,.94);
 
---text-primary:#F6F2EA;
+    --bg-overlay:rgba(0,0,0,.72);
 
---text-secondary:#DDD5C7;
+    --bg-button:#0E5A3D;
 
---text-muted:#B6B0A3;
+    --bg-button-hover:#13714D;
 
 
-/*==============================
-Border
-==============================*/
+    /*==================================================
+    Text
+    ==================================================*/
 
---border-color:
-rgba(216,179,106,.25);
+    --text-primary:#F8F8F6;
+
+    --text-secondary:#D6D6D3;
+
+    --text-muted:#9FA7B3;
+
+    --text-gold:#D8B36A;
+
+    --text-green:#4DD08A;
+
+
+    /*==================================================
+    Borders
+    ==================================================*/
+
+    --border-light:rgba(255,255,255,.08);
+
+    --border-medium:rgba(255,255,255,.14);
+
+    --border-gold:rgba(216,179,106,.35);
+
+    --border-green:rgba(22,165,106,.35);
+
+
+    /*==================================================
+    Shadows
+    ==================================================*/
+
+    --shadow-sm:
+
+        0 8px 18px rgba(0,0,0,.25);
+
+    --shadow-md:
+
+        0 18px 40px rgba(0,0,0,.38);
+
+    --shadow-lg:
+
+        0 30px 70px rgba(0,0,0,.55);
+
+    --shadow-gold:
+
+        0 0 30px rgba(216,179,106,.18);
+
+    --shadow-green:
+
+        0 0 24px rgba(22,165,106,.22);
+
+
+    /*==================================================
+    Radius
+    ==================================================*/
+
+    --radius-xs:6px;
+
+    --radius-sm:12px;
+
+    --radius-md:18px;
+
+    --radius-lg:28px;
+
+    --radius-xl:40px;
+
+    --radius-round:999px;
+
+
+    /*==================================================
+    Typography
+    ==================================================*/
+
+    --font-primary:
+
+        "Segoe UI",
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    --font-size-xs:.75rem;
+
+    --font-size-sm:.90rem;
+
+    --font-size-md:1rem;
+
+    --font-size-lg:1.25rem;
+
+    --font-size-xl:2rem;
+
+    --font-size-hero:4rem;
+
+
+    /*==================================================
+    Spacing
+    ==================================================*/
+
+    --space-1:8px;
+
+    --space-2:16px;
+
+    --space-3:24px;
+
+    --space-4:32px;
+
+    --space-5:48px;
+
+    --space-6:64px;
+
+    --space-7:96px;
+
+
+    /*==================================================
+    Layout
+    ==================================================*/
+
+    --container-width:1200px;
+
+    --hero-width:860px;
+
+    --header-height:90px;
+
+
+    /*==================================================
+    Animation
+    ==================================================*/
+
+    --speed-fast:.25s;
+
+    --speed-normal:.40s;
+
+    --speed-slow:.70s;
+
+    --speed-extra:1.2s;
+
+    --ease:cubic-bezier(.22,.61,.36,1);
+
+
+    /*==================================================
+    Z Index
+    ==================================================*/
+
+    --z-header:100;
+
+    --z-overlay:500;
+
+    --z-modal:1000;
+
+}
