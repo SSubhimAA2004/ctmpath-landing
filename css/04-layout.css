@@ -1,56 +1,171 @@
 
 /*======================================================================
+
 CTM PATH™ Guided Journey v6.0
 
 Purpose
-Layout System
+Application Layout System
 
 Responsibility
-• Full-screen application shell
-• Screen container
-• Responsive content wrapper
-• Vertical centering
-• Flex & Grid utilities
+• Global Layout
+• Global Header
+• Hero Layout
+• Screen Layout
+• Container System
+• Logo Placement
+• Divider Styles
+• Responsive Layout
 
 ======================================================================*/
 
 
 /*==================================================
-Application
+Body
 ==================================================*/
 
-#app{
+body{
 
-    width:100%;
+    margin:0;
+
+    padding:0;
+
     min-height:100vh;
 
-    background:var(--bg-page);
+    background:
 
-    overflow:hidden;
+        radial-gradient(
+            circle at top,
+            #163D73 0%,
+            #0E2546 22%,
+            #08192F 45%,
+            #060D18 72%,
+            #040608 100%
+        );
+
+    color:var(--text-primary);
+
+    overflow-x:hidden;
 
 }
 
 
 /*==================================================
-Screen Root
+Application Shell
 ==================================================*/
 
-#screen-root{
+#app-shell{
+
+    position:relative;
 
     width:100%;
+
     min-height:100vh;
 
 }
 
 
 /*==================================================
-Every Screen
+Global Header
+==================================================*/
+
+#global-header{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:90px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-start;
+
+    padding:0 56px;
+
+    z-index:1000;
+
+    pointer-events:none;
+
+}
+
+
+/*==================================================
+Brand
+==================================================*/
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    pointer-events:auto;
+
+}
+
+
+/*==================================================
+Logo
+==================================================*/
+
+.brand-logo{
+
+    width:170px;
+
+    height:auto;
+
+    display:block;
+
+    filter:
+
+        drop-shadow(0 8px 24px rgba(0,0,0,.45))
+
+        drop-shadow(0 0 18px rgba(216,179,106,.18));
+
+}
+
+
+/*==================================================
+Journey Container
+==================================================*/
+
+#journey-container{
+
+    width:100%;
+
+    min-height:100vh;
+
+}
+
+
+/*==================================================
+Screen Container
+==================================================*/
+
+#screen-container{
+
+    width:100%;
+
+    min-height:100vh;
+
+}
+
+
+/*==================================================
+Screen
 ==================================================*/
 
 .screen{
 
-    width:100%;
-    min-height:100vh;
+    position:relative;
 
     display:flex;
 
@@ -58,64 +173,154 @@ Every Screen
 
     align-items:center;
 
-    padding:var(--screen-padding);
+    min-height:100vh;
+
+    padding:
+
+        120px
+
+        40px
+
+        80px;
 
 }
 
 
 /*==================================================
-Content Wrapper
+Container
 ==================================================*/
 
 .container{
 
     width:100%;
 
-    max-width:var(--content-width);
+    max-width:1200px;
 
-    margin:auto;
+    margin:0 auto;
 
 }
 
 
 /*==================================================
-Hero Layout
+Hero
 ==================================================*/
 
 .hero{
+
+    width:100%;
+
+    max-width:860px;
+
+    margin:0 auto;
 
     display:flex;
 
     flex-direction:column;
 
-    justify-content:center;
-
     align-items:center;
+
+    justify-content:center;
 
     text-align:center;
 
-    gap:32px;
+    gap:36px;
 
 }
 
 
 /*==================================================
-Card
+Hero Header
 ==================================================*/
 
-.card{
+.hero-header{
 
-    width:100%;
+    display:none;
 
-    background:var(--bg-card);
+}
 
-    border:1px solid var(--border-color);
 
-    border-radius:var(--card-radius);
+/*==================================================
+Gold Divider
+==================================================*/
 
-    padding:var(--card-padding);
+.gold-divider{
 
-    box-shadow:var(--shadow-lg);
+    width:240px;
+
+    height:1px;
+
+    position:relative;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            rgba(216,179,106,.85),
+
+            transparent
+
+        );
+
+}
+
+
+/*==================================================
+Divider Star
+==================================================*/
+
+.gold-divider::after{
+
+    content:"✦";
+
+    position:absolute;
+
+    top:50%;
+
+    left:50%;
+
+    transform:
+
+        translate(-50%,-50%);
+
+    background:
+
+        #08192F;
+
+    color:
+
+        var(--text-gold);
+
+    padding:
+
+        0 14px;
+
+    font-size:13px;
+
+}
+
+
+/*==================================================
+Small Divider
+==================================================*/
+
+.gold-divider.small{
+
+    width:170px;
+
+}
+
+
+/*==================================================
+Spacer
+==================================================*/
+
+.spacer{
+
+    height:40px;
 
 }
 
@@ -126,44 +331,9 @@ Section
 
 .section{
 
-    margin-bottom:48px;
+    width:100%;
 
-}
-
-
-.section:last-child{
-
-    margin-bottom:0;
-
-}
-
-
-/*==================================================
-Logo
-==================================================*/
-
-.logo{
-
-    width:96px;
-
-    height:auto;
-
-    margin-bottom:24px;
-
-}
-
-
-/*==================================================
-Stack
-==================================================*/
-
-.stack{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:24px;
+    margin:0 auto;
 
 }
 
@@ -176,9 +346,7 @@ Row
 
     display:flex;
 
-    gap:24px;
-
-    align-items:center;
+    gap:32px;
 
 }
 
@@ -195,126 +363,196 @@ Column
 
 
 /*==================================================
-Grid
+Glass Panel
 ==================================================*/
 
-.grid{
+.glass{
 
-    display:grid;
+    background:
 
-    gap:24px;
+        rgba(255,255,255,.04);
 
-}
+    border:
 
+        1px solid rgba(255,255,255,.06);
 
-.grid-2{
+    backdrop-filter:
 
-    grid-template-columns:repeat(2,1fr);
+        blur(18px);
 
-}
+    -webkit-backdrop-filter:
 
+        blur(18px);
 
-.grid-3{
-
-    grid-template-columns:repeat(3,1fr);
+    border-radius:24px;
 
 }
 
 
 /*==================================================
-Center
+Premium Glow
 ==================================================*/
 
-.center{
+.hero::before{
 
-    display:flex;
+    content:"";
 
-    justify-content:center;
+    position:absolute;
 
-    align-items:center;
+    width:620px;
+
+    height:620px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(216,179,106,.05),
+
+            rgba(22,165,106,.03),
+
+            transparent 72%
+
+        );
+
+    z-index:-1;
 
 }
 
 
 /*==================================================
-Spacing
+Desktop
 ==================================================*/
 
-.mt-16{margin-top:16px;}
-.mt-24{margin-top:24px;}
-.mt-32{margin-top:32px;}
-.mt-48{margin-top:48px;}
-.mt-64{margin-top:64px;}
+@media (max-width:1200px){
 
-.mb-16{margin-bottom:16px;}
-.mb-24{margin-bottom:24px;}
-.mb-32{margin-bottom:32px;}
-.mb-48{margin-bottom:48px;}
-.mb-64{margin-bottom:64px;}
+    #global-header{
 
+        padding:0 40px;
 
-/*==================================================
-Width Helpers
-==================================================*/
-
-.w-100{
-
-    width:100%;
-
-}
-
-
-.max-640{
-
-    max-width:640px;
-
-    margin:auto;
-
-}
-
-
-.max-720{
-
-    max-width:720px;
-
-    margin:auto;
-
-}
-
-
-.max-840{
-
-    max-width:840px;
-
-    margin:auto;
+    }
 
 }
 
 
 /*==================================================
-Visibility
+Tablet
 ==================================================*/
 
-.hidden{
+@media (max-width:992px){
 
-    display:none !important;
+    .screen{
 
-}
+        padding:
 
+            110px
 
-.visible{
+            32px
 
-    display:block;
+            60px;
+
+    }
+
+    #global-header{
+
+        padding:0 28px;
+
+    }
+
+    .brand-logo{
+
+        width:145px;
+
+    }
 
 }
 
 
 /*==================================================
-Fade-in Support
+Mobile
 ==================================================*/
 
-.screen{
+@media (max-width:768px){
 
-    animation:fadeIn .45s ease;
+    #global-header{
+
+        height:72px;
+
+        padding:0 20px;
+
+    }
+
+    .brand-logo{
+
+        width:120px;
+
+    }
+
+    .screen{
+
+        padding:
+
+            90px
+
+            20px
+
+            40px;
+
+    }
+
+    .hero{
+
+        gap:28px;
+
+    }
+
+    .gold-divider{
+
+        width:180px;
+
+    }
+
+}
+
+
+/*==================================================
+Small Mobile
+==================================================*/
+
+@media (max-width:480px){
+
+    #global-header{
+
+        padding:0 16px;
+
+    }
+
+    .brand-logo{
+
+        width:105px;
+
+    }
+
+    .screen{
+
+        padding:
+
+            80px
+
+            16px
+
+            32px;
+
+    }
+
+    .gold-divider{
+
+        width:150px;
+
+    }
 
 }
