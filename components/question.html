@@ -1,15 +1,16 @@
 
 <!--
 ==========================================================
-CTM PATH™ Guided Journey v3.0
+CTM PATH™ Guided Journey v3.3
 File: components/question.html
 
 Responsibility:
-Presentation template for question moments.
+Presentation template for Question Moments.
+
+Uses the standardized bilingual structure.
 
 No JavaScript.
 No business logic.
-Rendered by renderer.js
 ==========================================================
 -->
 
@@ -17,25 +18,35 @@ Rendered by renderer.js
 
     <div class="ctm-scene__container">
 
-        <!-- Header -->
+        <!-- ======================================================
+             HEADER
+        ======================================================= -->
 
         <header class="ctm-scene__header">
 
             <div class="ctm-scene__step">
+
                 {{step}}
+
             </div>
 
-            <h1 class="ctm-scene__title">
-                {{title}}
+            <h1 class="ctm-scene__title-ta">
+
+                {{titleTa}}
+
             </h1>
 
-            <h2 class="ctm-scene__subtitle">
-                {{subtitle}}
+            <h2 class="ctm-scene__title-en">
+
+                {{titleEn}}
+
             </h2>
 
         </header>
 
-        <!-- Question -->
+        <!-- ======================================================
+             QUESTION
+        ======================================================= -->
 
         <main class="ctm-scene__content">
 
@@ -47,13 +58,15 @@ Rendered by renderer.js
 
         </main>
 
-        <!-- Navigation -->
+        <!-- ======================================================
+             NAVIGATION
+        ======================================================= -->
 
         <footer class="ctm-scene__footer">
 
             <button
                 type="button"
-                class="ctm-button ctm-button--primary"
+                class="ctm-button-green"
                 data-action="continue">
 
                 {{button}}
@@ -65,3 +78,4 @@ Rendered by renderer.js
     </div>
 
 </section>
+
