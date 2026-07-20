@@ -1,1 +1,328 @@
 
+/*======================================================================
+
+CTM PATH™ Guided Journey v6.0
+
+Purpose
+Global Utility System
+
+Responsibility
+• Display Utilities
+• Flex Utilities
+• Grid Utilities
+• Width Utilities
+• Height Utilities
+• Spacing Utilities
+• Alignment Utilities
+• Typography Utilities
+• Color Utilities
+• Border Utilities
+• Shadow Utilities
+• Radius Utilities
+• Visibility Utilities
+• Overflow Utilities
+• Cursor Utilities
+• Position Utilities
+• Z-Index Utilities
+• Accessibility Helpers
+
+======================================================================*/
+
+
+/*==================================================
+Display
+==================================================*/
+
+.d-none{display:none !important;}
+.d-block{display:block !important;}
+.d-inline{display:inline !important;}
+.d-inline-block{display:inline-block !important;}
+.d-flex{display:flex !important;}
+.d-grid{display:grid !important;}
+
+
+/*==================================================
+Flex
+==================================================*/
+
+.flex-row{flex-direction:row !important;}
+.flex-column{flex-direction:column !important;}
+
+.flex-wrap{flex-wrap:wrap !important;}
+.flex-nowrap{flex-wrap:nowrap !important;}
+
+.justify-start{justify-content:flex-start !important;}
+.justify-center{justify-content:center !important;}
+.justify-end{justify-content:flex-end !important;}
+.justify-between{justify-content:space-between !important;}
+.justify-around{justify-content:space-around !important;}
+
+.align-start{align-items:flex-start !important;}
+.align-center{align-items:center !important;}
+.align-end{align-items:flex-end !important;}
+.align-stretch{align-items:stretch !important;}
+
+.flex-1{flex:1 1 auto !important;}
+.flex-auto{flex:auto !important;}
+.flex-none{flex:none !important;}
+
+.gap-8{gap:8px !important;}
+.gap-12{gap:12px !important;}
+.gap-16{gap:16px !important;}
+.gap-24{gap:24px !important;}
+.gap-32{gap:32px !important;}
+.gap-48{gap:48px !important;}
+
+
+/*==================================================
+Grid
+==================================================*/
+
+.grid-1{grid-template-columns:1fr !important;}
+.grid-2{grid-template-columns:repeat(2,1fr) !important;}
+.grid-3{grid-template-columns:repeat(3,1fr) !important;}
+.grid-4{grid-template-columns:repeat(4,1fr) !important;}
+
+
+/*==================================================
+Width
+==================================================*/
+
+.w-auto{width:auto !important;}
+.w-25{width:25% !important;}
+.w-50{width:50% !important;}
+.w-75{width:75% !important;}
+.w-100{width:100% !important;}
+
+.max-320{max-width:320px !important;}
+.max-480{max-width:480px !important;}
+.max-640{max-width:640px !important;}
+.max-720{max-width:720px !important;}
+.max-900{max-width:900px !important;}
+.max-1200{max-width:1200px !important;}
+
+.mx-auto{
+    margin-left:auto !important;
+    margin-right:auto !important;
+}
+
+
+/*==================================================
+Height
+==================================================*/
+
+.h-100{height:100% !important;}
+.min-vh{min-height:100vh !important;}
+
+
+/*==================================================
+Margins
+==================================================*/
+
+.m-0{margin:0 !important;}
+
+.mt-8{margin-top:8px !important;}
+.mt-16{margin-top:16px !important;}
+.mt-24{margin-top:24px !important;}
+.mt-32{margin-top:32px !important;}
+.mt-48{margin-top:48px !important;}
+.mt-64{margin-top:64px !important;}
+
+.mb-8{margin-bottom:8px !important;}
+.mb-16{margin-bottom:16px !important;}
+.mb-24{margin-bottom:24px !important;}
+.mb-32{margin-bottom:32px !important;}
+.mb-48{margin-bottom:48px !important;}
+.mb-64{margin-bottom:64px !important;}
+
+.ml-auto{margin-left:auto !important;}
+.mr-auto{margin-right:auto !important;}
+
+
+/*==================================================
+Padding
+==================================================*/
+
+.p-0{padding:0 !important;}
+.p-8{padding:8px !important;}
+.p-16{padding:16px !important;}
+.p-24{padding:24px !important;}
+.p-32{padding:32px !important;}
+.p-48{padding:48px !important;}
+.p-64{padding:64px !important;}
+
+
+/*==================================================
+Text Alignment
+==================================================*/
+
+.text-left{text-align:left !important;}
+.text-center{text-align:center !important;}
+.text-right{text-align:right !important;}
+
+
+/*==================================================
+Font Weight
+==================================================*/
+
+.fw-300{font-weight:300 !important;}
+.fw-400{font-weight:400 !important;}
+.fw-500{font-weight:500 !important;}
+.fw-600{font-weight:600 !important;}
+.fw-700{font-weight:700 !important;}
+
+
+/*==================================================
+Text Colors
+==================================================*/
+
+.text-primary{color:var(--text-primary) !important;}
+.text-secondary{color:var(--text-secondary) !important;}
+.text-muted{color:var(--text-muted) !important;}
+
+.text-success{color:#2ECC71 !important;}
+.text-warning{color:#F4B942 !important;}
+.text-danger{color:#E74C3C !important;}
+.text-accent{color:var(--color-accent) !important;}
+
+
+/*==================================================
+Background
+==================================================*/
+
+.bg-transparent{background:transparent !important;}
+.bg-card{background:var(--bg-card) !important;}
+.bg-page{background:var(--bg-page) !important;}
+
+
+/*==================================================
+Borders
+==================================================*/
+
+.border-none{border:none !important;}
+.border-gold{
+    border:1px solid rgba(216,179,106,.25) !important;
+}
+.border-radius{
+    border-radius:24px !important;
+}
+.round{
+    border-radius:999px !important;
+}
+
+
+/*==================================================
+Shadows
+==================================================*/
+
+.shadow-sm{
+    box-shadow:0 8px 20px rgba(0,0,0,.25) !important;
+}
+
+.shadow-md{
+    box-shadow:0 18px 40px rgba(0,0,0,.35) !important;
+}
+
+.shadow-lg{
+    box-shadow:0 30px 80px rgba(0,0,0,.45) !important;
+}
+
+
+/*==================================================
+Position
+==================================================*/
+
+.relative{position:relative !important;}
+.absolute{position:absolute !important;}
+.fixed{position:fixed !important;}
+
+.top-0{top:0 !important;}
+.right-0{right:0 !important;}
+.bottom-0{bottom:0 !important;}
+.left-0{left:0 !important;}
+
+
+/*==================================================
+Overflow
+==================================================*/
+
+.overflow-hidden{overflow:hidden !important;}
+.overflow-auto{overflow:auto !important;}
+
+
+/*==================================================
+Visibility
+==================================================*/
+
+.hidden{display:none !important;}
+.visible{visibility:visible !important;}
+.invisible{visibility:hidden !important;}
+
+
+/*==================================================
+Cursor
+==================================================*/
+
+.pointer{cursor:pointer !important;}
+.default{cursor:default !important;}
+
+
+/*==================================================
+Opacity
+==================================================*/
+
+.opacity-0{opacity:0 !important;}
+.opacity-25{opacity:.25 !important;}
+.opacity-50{opacity:.50 !important;}
+.opacity-75{opacity:.75 !important;}
+.opacity-100{opacity:1 !important;}
+
+
+/*==================================================
+Z-Index
+==================================================*/
+
+.z-1{z-index:1 !important;}
+.z-10{z-index:10 !important;}
+.z-100{z-index:100 !important;}
+.z-1000{z-index:1000 !important;}
+
+
+/*==================================================
+Accessibility
+==================================================*/
+
+.sr-only{
+
+    position:absolute !important;
+
+    width:1px !important;
+
+    height:1px !important;
+
+    padding:0 !important;
+
+    margin:-1px !important;
+
+    overflow:hidden !important;
+
+    clip:rect(0,0,0,0) !important;
+
+    white-space:nowrap !important;
+
+    border:0 !important;
+
+}
+
+
+/*==================================================
+Pointer Events
+==================================================*/
+
+.no-pointer{
+    pointer-events:none !important;
+}
+
+.pointer-events{
+    pointer-events:auto !important;
+}
