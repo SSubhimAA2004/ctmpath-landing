@@ -49,6 +49,31 @@
     },
 
     {
+      "id": "yes_no_partly",
+      "selection": "single",
+      "options": [
+        {
+          "id": "yes",
+          "label": "ஆம்",
+          "labelEnglish": "Yes",
+          "value": "yes"
+        },
+        {
+          "id": "partly",
+          "label": "ஓரளவு",
+          "labelEnglish": "Partly",
+          "value": "partly"
+        },
+        {
+          "id": "no",
+          "label": "இல்லை",
+          "labelEnglish": "No",
+          "value": "no"
+        }
+      ]
+    },
+
+    {
       "id": "agreement",
       "selection": "single",
       "options": [
@@ -157,8 +182,9 @@
           "value": "freedom"
         }
       ]
-    },
+    }
 
+    ,
     {
       "id": "commitment",
       "selection": "single",
@@ -171,8 +197,8 @@
         },
         {
           "id": "thinking",
-          "label": "நான் யோசித்து வருகிறேன்",
-          "labelEnglish": "I Am Thinking",
+          "label": "நான் இன்னும் யோசிக்கிறேன்",
+          "labelEnglish": "I'm Still Thinking",
           "value": "thinking"
         },
         {
@@ -182,7 +208,162 @@
           "value": "not_ready"
         }
       ]
+    },
+
+    {
+      "id": "life_dream",
+      "selection": "single",
+      "options": [
+        {
+          "id": "peace",
+          "label": "மன அமைதி",
+          "labelEnglish": "Peace",
+          "value": "peace"
+        },
+        {
+          "id": "family",
+          "label": "மகிழ்ச்சியான குடும்பம்",
+          "labelEnglish": "Happy Family",
+          "value": "family"
+        },
+        {
+          "id": "health",
+          "label": "நல்ல உடல்நலம்",
+          "labelEnglish": "Good Health",
+          "value": "health"
+        },
+        {
+          "id": "freedom",
+          "label": "நிதி சுதந்திரம்",
+          "labelEnglish": "Financial Freedom",
+          "value": "financial_freedom"
+        },
+        {
+          "id": "purpose",
+          "label": "நோக்கமுள்ள வாழ்க்கை",
+          "labelEnglish": "Purposeful Life",
+          "value": "purpose"
+        },
+        {
+          "id": "legacy",
+          "label": "நிலையான பாரம்பரியம்",
+          "labelEnglish": "Meaningful Legacy",
+          "value": "legacy"
+        }
+      ]
+    },
+
+    {
+      "id": "life_reason",
+      "selection": "single",
+      "options": [
+        {
+          "id": "security",
+          "label": "பாதுகாப்பாக வாழ",
+          "labelEnglish": "To Feel Secure",
+          "value": "security"
+        },
+        {
+          "id": "family",
+          "label": "என் குடும்பத்திற்காக",
+          "labelEnglish": "For My Family",
+          "value": "family"
+        },
+        {
+          "id": "freedom",
+          "label": "சுதந்திரமாக வாழ",
+          "labelEnglish": "To Live Freely",
+          "value": "freedom"
+        },
+        {
+          "id": "purpose",
+          "label": "என் நோக்கத்தை நிறைவேற்ற",
+          "labelEnglish": "To Fulfil My Purpose",
+          "value": "purpose"
+        },
+        {
+          "id": "service",
+          "label": "மற்றவர்களுக்கு சேவை செய்ய",
+          "labelEnglish": "To Serve Others",
+          "value": "service"
+        }
+      ]
+    },
+
+    {
+      "id": "life_gap_reason",
+      "selection": "single",
+      "options": [
+        {
+          "id": "fear",
+          "label": "பயம்",
+          "labelEnglish": "Fear",
+          "value": "fear"
+        },
+        {
+          "id": "clarity",
+          "label": "தெளிவின்மை",
+          "labelEnglish": "Lack of Clarity",
+          "value": "clarity"
+        },
+        {
+          "id": "discipline",
+          "label": "ஒழுக்கமின்மை",
+          "labelEnglish": "Lack of Discipline",
+          "value": "discipline"
+        },
+        {
+          "id": "guidance",
+          "label": "வழிகாட்டுதல் இல்லாமை",
+          "labelEnglish": "Lack of Guidance",
+          "value": "guidance"
+        },
+        {
+          "id": "belief",
+          "label": "என்னைப் பற்றிய வரையறுக்கப்பட்ட நம்பிக்கைகள்",
+          "labelEnglish": "Limiting Beliefs",
+          "value": "belief"
+        }
+      ]
+    },
+
+    {
+      "id": "hidden_barrier",
+      "selection": "single",
+      "options": [
+        {
+          "id": "money",
+          "label": "பண பற்றாக்குறை",
+          "labelEnglish": "Lack of Money",
+          "value": "money"
+        },
+        {
+          "id": "time",
+          "label": "நேரமின்மை",
+          "labelEnglish": "Lack of Time",
+          "value": "time"
+        },
+        {
+          "id": "confidence",
+          "label": "தன்னம்பிக்கை குறைவு",
+          "labelEnglish": "Lack of Confidence",
+          "value": "confidence"
+        },
+        {
+          "id": "knowledge",
+          "label": "அறிவு / திறன் குறைவு",
+          "labelEnglish": "Lack of Knowledge or Skills",
+          "value": "knowledge"
+        },
+        {
+          "id": "mindset",
+          "label": "மனப்பாங்கு",
+          "labelEnglish": "Mindset",
+          "value": "mindset"
+        }
+      ]
     }
 
   ]
 }
+
