@@ -1,7 +1,7 @@
 
 /**
  * ==========================================================
- * CTM PATH™ Guided Journey v3.2
+ * CTM PATH™ Guided Journey v3.3
  * File: js/events.js
  * Event Engine
  * ==========================================================
@@ -35,11 +35,29 @@ document.addEventListener(
 
         event.preventDefault();
 
+        if (button.disabled) {
+
+            return;
+
+        }
+
         button.disabled = true;
 
         try {
 
+            /* Move to next moment */
+
             await CTMConversation.next();
+
+            /* Render the new moment */
+
+            await CTMConversation.render();
+
+        }
+
+        catch (error) {
+
+            console.error(error);
 
         }
 
