@@ -6,7 +6,9 @@
  * Batch: 1 of 2
  * Responsibility:
  * Presentation Engine
- * Renders the cinematic Guided Journey.
+ * Responsible ONLY for rendering the Guided Journey.
+ *
+ * Business decisions remain inside conversation.js
  * ==========================================================
  */
 
@@ -15,12 +17,11 @@
 "use strict";
 
 /* ==========================================================
-   CONSTANTS
+   CONFIGURATION
 ========================================================== */
 
 const ROOT_SELECTOR = "#app";
-
-const TRANSITION_DURATION = 450;
+const TRANSITION_MS = 450;
 
 /* ==========================================================
    INTERNAL STATE
@@ -28,24 +29,24 @@ const TRANSITION_DURATION = 450;
 
 const state = {
 
-    root: null,
-
-    currentHTML: "",
-
-    currentMoment: null,
-
-    currentAct: null,
-
-    currentComponent: null,
+    initialized: false,
 
     rendering: false,
 
-    initialized: false
+    root: null,
+
+    currentAct: null,
+
+    currentMoment: null,
+
+    currentComponent: null,
+
+    currentHTML: ""
 
 };
 
 /* ==========================================================
-   COMPONENT CACHE
+   CACHE
 ========================================================== */
 
 const cache = {
@@ -55,19 +56,50 @@ const cache = {
 };
 
 /* ==========================================================
+   COMPONENT REGISTRY
+========================================================== */
+
+const registry = Object.freeze({
+
+    message: "message",
+
+    question: "question",
+
+    choice: "choice",
+
+    input: "input",
+
+    reflection: "reflection",
+
+    insight: "insight",
+
+    loading: "loading",
+
+    booking: "booking",
+
+    complete: "complete"
+
+});
+
+/* ==========================================================
    ROOT
 ========================================================== */
 
 function root() {
 
-    if (state.root) return state.root;
+    if (state.root) {
 
-    state.root = document.querySelector(ROOT_SELECTOR);
+        return state.root;
+
+    }
+
+    state.root =
+        document.querySelector(ROOT_SELECTOR);
 
     if (!state.root) {
 
         throw new Error(
-            `Renderer: ${ROOT_SELECTOR} not found.`
+            `Renderer root '${ROOT_SELECTOR}' not found.`
         );
 
     }
@@ -89,10 +121,44 @@ function initialize() {
 }
 
 /* ==========================================================
+   LIFECYCLE
+========================================================== */
+
+function beforeRender(moment) {
+
+    document.dispatchEvent(
+
+        new CustomEvent(
+            "ctm:before-render",
+            {
+                detail: moment
+            }
+        )
+
+    );
+
+}
+
+function afterRender(moment) {
+
+    document.dispatchEvent(
+
+        new CustomEvent(
+            "ctm:after-render",
+            {
+                detail: moment
+            }
+        )
+
+    );
+
+}
+
+/* ==========================================================
    RENDER LOCK
 ========================================================== */
 
-function beginRender() {
+function lock() {
 
     if (state.rendering) {
 
@@ -106,7 +172,7 @@ function beginRender() {
 
 }
 
-function endRender() {
+function unlock() {
 
     state.rendering = false;
 
@@ -134,14 +200,73 @@ async function component(name) {
 }
 
 /* ==========================================================
-   PERSONALIZATION
+   TEMPLATE ENGINE
 ========================================================== */
 
-function personalize(html) {
+function template(view, data = {}) {
 
-    return CTMPersonalization.personalizeHTML(
-        html
+    let html =
+        CTMPersonalization.personalizeHTML(view);
+
+    Object.entries(data).forEach(
+
+        ([key, value]) => {
+
+            html = html.replaceAll(
+
+                `{{${key}}}`,
+
+                value ?? ""
+
+            );
+
+        }
+
     );
+
+    return html;
+
+}
+
+/* ==========================================================
+   VALIDATION
+========================================================== */
+
+function validate(moment) {
+
+    if (!moment) {
+
+        throw new Error(
+            "Moment is undefined."
+        );
+
+    }
+
+    if (!moment.id) {
+
+        throw new Error(
+            "Moment id missing."
+        );
+
+    }
+
+    if (!moment.component) {
+
+        throw new Error(
+            "Moment component missing."
+        );
+
+    }
+
+    if (!(moment.component in registry)) {
+
+        throw new Error(
+
+            `Unknown component '${moment.component}'.`
+
+        );
+
+    }
 
 }
 
@@ -156,7 +281,7 @@ async function fadeOut() {
     app.classList.add("ctm-fade-out");
 
     await CTMUtils.wait(
-        TRANSITION_DURATION
+        TRANSITION_MS
     );
 
 }
@@ -170,313 +295,114 @@ async function fadeIn() {
     app.classList.add("ctm-fade-in");
 
     await CTMUtils.wait(
-        TRANSITION_DURATION
+        TRANSITION_MS
     );
 
-    app.classList.remove("ctm-fade-in");
+    app.classList.remove(
+        "ctm-fade-in"
+    );
 
 }
 
 /* ==========================================================
-   HTML
+   GENERIC COMPONENT RENDERER
 ========================================================== */
 
-function html(content) {
-
-    state.currentHTML = content;
-
-    root().innerHTML = content;
-
-}
-
-/* ==========================================================
-   LOADING SCREEN
-========================================================== */
-
-async function loading() {
+async function renderComponent(
+    componentName,
+    data = {}
+) {
 
     const view =
-        await component("loading");
+        await component(componentName);
 
-    html(view);
+    const html =
+        template(view, data);
 
-}
+    state.currentHTML = html;
 
-/* ==========================================================
-   MESSAGE
-========================================================== */
+    root().innerHTML = html;
 
-async function message(data) {
+    state.currentComponent =
+        componentName;
 
-    let view =
-        await component("message");
-
-    view = personalize(view);
-
-    Object.entries(data).forEach(
-        ([key, value]) => {
-
-            view = view.replaceAll(
-                `{{${key}}}`,
-                value ?? ""
-            );
-
-        }
-    );
-
-    html(view);
-
-}
-
-/* ==========================================================
-   QUESTION
-========================================================== */
-
-async function question(data) {
-
-    let view =
-        await component("question");
-
-    view = personalize(view);
-
-    Object.entries(data).forEach(
-        ([key, value]) => {
-
-            view = view.replaceAll(
-                `{{${key}}}`,
-                value ?? ""
-            );
-
-        }
-    );
-
-    html(view);
-
-}
-
-/* ==========================================================
-   CHOICE
-========================================================== */
-
-async function choice(data) {
-
-    let view =
-        await component("choice");
-
-    view = personalize(view);
-
-    Object.entries(data).forEach(
-        ([key, value]) => {
-
-            view = view.replaceAll(
-                `{{${key}}}`,
-                value ?? ""
-            );
-
-        }
-    );
-
-    html(view);
-
-}
-
-/* ==========================================================
-   INPUT
-========================================================== */
-
-async function input(data) {
-
-    let view =
-        await component("input");
-
-    view = personalize(view);
-
-    Object.entries(data).forEach(
-        ([key, value]) => {
-
-            view = view.replaceAll(
-                `{{${key}}}`,
-                value ?? ""
-            );
-
-        }
-    );
-
-    html(view);
-
-}
-
-/* ==========================================================
-   REFLECTION
-========================================================== */
-
-async function reflection(data) {
-
-    let view =
-        await component("reflection");
-
-    view = personalize(view);
-
-    Object.entries(data).forEach(
-        ([key, value]) => {
-
-            view = view.replaceAll(
-                `{{${key}}}`,
-                value ?? ""
-            );
-
-        }
-    );
-
-    html(view);
+    return html;
 
 }
 
  /* ==========================================================
-   INSIGHT
+   LOADING
 ========================================================== */
 
-async function insight(data) {
+async function loading(data = {}) {
 
-    let view =
-        await component("insight");
-
-    view = personalize(view);
-
-    Object.entries(data).forEach(
-        ([key, value]) => {
-
-            view = view.replaceAll(
-                `{{${key}}}`,
-                value ?? ""
-            );
-
-        }
+    return renderComponent(
+        registry.loading,
+        data
     );
-
-    html(view);
 
 }
 
 /* ==========================================================
-   BOOKING
+   ERROR
 ========================================================== */
 
-async function booking(data) {
+function error(message) {
 
-    let view =
-        await component("booking");
+    root().innerHTML = `
+        <section class="ctm-error">
 
-    view = personalize(view);
+            <h2>
+                Something went wrong
+            </h2>
 
-    Object.entries(data).forEach(
-        ([key, value]) => {
+            <p>
+                ${CTMUtils.escapeHTML(message)}
+            </p>
 
-            view = view.replaceAll(
-                `{{${key}}}`,
-                value ?? ""
-            );
-
-        }
-    );
-
-    html(view);
+        </section>
+    `;
 
 }
 
 /* ==========================================================
-   COMPLETE
+   RENDER MOMENT
 ========================================================== */
 
-async function complete(data) {
+async function renderMoment(moment) {
 
-    let view =
-        await component("complete");
+    validate(moment);
 
-    view = personalize(view);
+    if (!lock()) {
 
-    Object.entries(data).forEach(
-        ([key, value]) => {
-
-            view = view.replaceAll(
-                `{{${key}}}`,
-                value ?? ""
-            );
-
-        }
-    );
-
-    html(view);
-
-}
-
-/* ==========================================================
-   MOMENT RENDERER
-========================================================== */
-
-async function moment(moment) {
-
-    if (!beginRender()) {
-
-        return;
+        return false;
 
     }
 
+    beforeRender(moment);
+
     try {
 
-        state.currentMoment = moment.id;
-        state.currentAct = moment.act || CTMState.get("currentAct");
-        state.currentComponent = moment.component;
+        state.currentAct =
+            moment.act ??
+            CTMState.get("currentAct");
+
+        state.currentMoment =
+            moment.id;
 
         await fadeOut();
 
-        switch (moment.component) {
-
-            case "message":
-                await message(moment);
-                break;
-
-            case "question":
-                await question(moment);
-                break;
-
-            case "choice":
-                await choice(moment);
-                break;
-
-            case "input":
-                await input(moment);
-                break;
-
-            case "reflection":
-                await reflection(moment);
-                break;
-
-            case "insight":
-                await insight(moment);
-                break;
-
-            case "booking":
-                await booking(moment);
-                break;
-
-            case "complete":
-                await complete(moment);
-                break;
-
-            default:
-                throw new Error(
-                    `Unknown component: ${moment.component}`
-                );
-
-        }
+        await renderComponent(
+            moment.component,
+            moment
+        );
 
         CTMState.set(
             "navigation.currentScene",
             {
                 act: state.currentAct,
                 moment: state.currentMoment,
-                component: state.currentComponent
+                component: moment.component
             }
         );
 
@@ -484,39 +410,55 @@ async function moment(moment) {
 
         await fadeIn();
 
+        afterRender(moment);
+
+        return true;
+
+    }
+    catch (exception) {
+
+        console.error(exception);
+
+        error(exception.message);
+
+        return false;
+
     }
     finally {
 
-        endRender();
+        unlock();
 
     }
 
 }
 
 /* ==========================================================
-   ERROR SCREEN
+   CURRENT STATE
 ========================================================== */
 
-function error(messageText) {
+function current() {
 
-    root().innerHTML = `
-        <section class="ctm-error">
-            <h2>Something went wrong</h2>
-            <p>${CTMUtils.escapeHTML(messageText)}</p>
-        </section>
-    `;
+    return {
 
-}
+        initialized:
+            state.initialized,
 
-/* ==========================================================
-   CLEAR
-========================================================== */
+        rendering:
+            state.rendering,
 
-function clear() {
+        act:
+            state.currentAct,
 
-    root().innerHTML = "";
+        moment:
+            state.currentMoment,
 
-    state.currentHTML = "";
+        component:
+            state.currentComponent,
+
+        html:
+            state.currentHTML
+
+    };
 
 }
 
@@ -531,24 +473,38 @@ function clearCache() {
 }
 
 /* ==========================================================
-   STATE
+   CLEAR
 ========================================================== */
 
-function current() {
+function clear() {
 
-    return {
+    root().innerHTML = "";
 
-        act: state.currentAct,
+    state.currentHTML = "";
 
-        moment: state.currentMoment,
+    state.currentMoment = null;
 
-        component: state.currentComponent,
+    state.currentComponent = null;
 
-        rendering: state.rendering,
+}
 
-        initialized: state.initialized
+/* ==========================================================
+   DESTROY
+========================================================== */
 
-    };
+function destroy() {
+
+    clear();
+
+    clearCache();
+
+    state.initialized = false;
+
+    state.rendering = false;
+
+    state.currentAct = null;
+
+    state.root = null;
 
 }
 
@@ -564,29 +520,17 @@ window.CTMRenderer = Object.freeze({
 
     loading,
 
-    message,
+    renderMoment,
 
-    question,
+    renderComponent,
 
-    choice,
-
-    input,
-
-    reflection,
-
-    insight,
-
-    booking,
-
-    complete,
-
-    moment,
+    current,
 
     clear,
 
     clearCache,
 
-    current,
+    destroy,
 
     error
 
