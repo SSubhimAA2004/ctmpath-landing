@@ -3,206 +3,605 @@
  * ==========================================================
  * CTM PATH™ Guided Journey v3.0
  * File: js/conversation.js
+ * Batch: 1 of 2
  * Responsibility:
- * Conversation flow controller for the 5-Act / 35-Moment journey.
+ * Conversation Engine
  *
- * Engineering Status:
- * Production Build
- * Architecture: FROZEN
+ * Orchestrates the complete 35-Moment / 5-Act journey.
+ *
+ * Owns:
+ * - Journey
+ * - Acts
+ * - Moments
+ * - Responses
+ *
+ * Delegates:
+ * - Rendering
+ * - Navigation
+ * - Progress
+ * - Analytics
+ * - Booking
  * ==========================================================
  */
 
 (() => {
-    "use strict";
 
-    /**
-     * --------------------------------------------------------
-     * Active Conversation
-     * --------------------------------------------------------
-     */
+"use strict";
 
-    let activeAct = null;
-    let activeData = null;
+/* ==========================================================
+   CONFIGURATION
+========================================================== */
 
-    /**
-     * --------------------------------------------------------
-     * Build Act File Name
-     * --------------------------------------------------------
-     */
+const TOTAL_ACTS = 5;
 
-    function getActFile(actNumber) {
-        return `act${String(actNumber).padStart(2, "0")}`;
+const TOTAL_MOMENTS = 35;
+
+/* ==========================================================
+   INTERNAL STATE
+========================================================== */
+
+const state = {
+
+    journey: {
+
+        initialized: false,
+
+        loading: false,
+
+        completed: false
+
+    },
+
+    act: {
+
+        number: null,
+
+        data: null
+
+    },
+
+    moment: {
+
+        current: null
+
+    },
+
+    responses: {}
+
+};
+
+/* ==========================================================
+   JOURNEY MANAGER
+========================================================== */
+
+function initialize() {
+
+    state.journey.initialized = true;
+
+}
+
+function isInitialized() {
+
+    return state.journey.initialized;
+
+}
+
+function beginLoading() {
+
+    state.journey.loading = true;
+
+}
+
+function endLoading() {
+
+    state.journey.loading = false;
+
+}
+
+function isLoading() {
+
+    return state.journey.loading;
+
+}
+
+function completeJourney() {
+
+    state.journey.completed = true;
+
+}
+
+function isComplete() {
+
+    return state.journey.completed;
+
+}
+
+/* ==========================================================
+   ACT MANAGER
+========================================================== */
+
+function actFile(actNumber) {
+
+    return `act${String(actNumber).padStart(2, "0")}`;
+
+}
+
+async function loadAct(actNumber) {
+
+    beginLoading();
+
+    try {
+
+        const data =
+            await CTMLoader.loadData(
+                actFile(actNumber)
+            );
+
+        state.act.number = actNumber;
+
+        state.act.data = data;
+
+        return data;
+
+    }
+    finally {
+
+        endLoading();
+
     }
 
-    /**
-     * --------------------------------------------------------
-     * Load Current Act
-     * --------------------------------------------------------
-     */
+}
 
-    async function loadCurrentAct() {
+function currentAct() {
 
-        const act = CTMState.get("currentAct");
-        const file = getActFile(act);
+    return state.act.number;
 
-        activeData = await CTMLoader.loadData(file);
-        activeAct = act;
+}
 
-        return activeData;
+function currentActData() {
+
+    return state.act.data;
+
+}
+
+/* ==========================================================
+   MOMENT MANAGER
+========================================================== */
+
+function resolveMoment(momentId) {
+
+    const moments =
+        state.act.data?.moments;
+
+    if (!Array.isArray(moments)) {
+
+        return null;
 
     }
 
-    /**
-     * --------------------------------------------------------
-     * Get Current Moment
-     * --------------------------------------------------------
-     */
+    return moments.find(
 
-    function getCurrentMoment() {
+        moment => moment.id === momentId
 
-        if (!activeData) {
-            return null;
-        }
+    ) || null;
 
-        const moment = CTMState.get("currentMoment");
+}
 
-        if (!Array.isArray(activeData.moments)) {
-            return null;
-        }
+function setMoment(moment) {
 
-        return (
-            activeData.moments.find(item => item.id === moment) ||
-            null
+    if (!moment) {
+
+        throw new Error(
+            "Conversation: Invalid moment."
         );
 
     }
 
-    /**
-     * --------------------------------------------------------
-     * Start Conversation
-     * --------------------------------------------------------
-     */
+    state.moment.current = moment;
 
-    async function start() {
+    return moment;
 
-        await loadCurrentAct();
+}
 
-        return getCurrentMoment();
+function currentMoment() {
 
-    }
+    return state.moment.current;
 
-    /**
-     * --------------------------------------------------------
-     * Advance Conversation
-     * --------------------------------------------------------
-     */
+}
 
-    async function next() {
+async function loadMoment(momentId) {
 
-        CTMNavigation.next();
+    const moment =
+        resolveMoment(momentId);
 
-        const act = CTMState.get("currentAct");
+    if (!moment) {
 
-        if (act !== activeAct) {
-            await loadCurrentAct();
-        }
-
-        return getCurrentMoment();
+        throw new Error(
+            `Moment ${momentId} not found.`
+        );
 
     }
 
-    /**
-     * --------------------------------------------------------
-     * Previous Moment
-     * --------------------------------------------------------
-     */
+    return setMoment(moment);
 
-    async function previous() {
+}
 
-        CTMNavigation.previous();
+/* ==========================================================
+   RESPONSE MANAGER
+========================================================== */
 
-        const act = CTMState.get("currentAct");
+function loadResponses() {
 
-        if (act !== activeAct) {
-            await loadCurrentAct();
-        }
+    state.responses =
+        CTMState.get(
+            "visitor.responses"
+        ) || {};
 
-        return getCurrentMoment();
+    return state.responses;
 
-    }
+}
 
-    /**
-     * --------------------------------------------------------
-     * Restart Journey
-     * --------------------------------------------------------
-     */
+function saveResponse(value) {
 
-    async function restart() {
+    const moment =
+        currentMoment();
 
-        CTMState.resetJourney();
+    if (!moment) {
 
-        return start();
+        throw new Error(
+            "Conversation: No active moment."
+        );
 
     }
 
-    /**
-     * --------------------------------------------------------
-     * Save Visitor Response
-     * --------------------------------------------------------
-     */
+    state.responses[moment.id] = value;
 
-    function saveResponse(momentId, value) {
+    CTMState.set(
 
-        const responses =
-            CTMState.get("visitor.responses") || {};
+        "visitor.responses",
 
-        responses[momentId] = value;
+        state.responses
 
-        CTMState.set("visitor.responses", responses);
+    );
 
-        return responses;
+    return value;
+
+}
+
+function response(momentId) {
+
+    return state.responses[momentId];
+
+}
+
+/* ==========================================================
+   JOURNEY START
+========================================================== */
+
+async function start() {
+
+    const act =
+        CTMState.get("currentAct");
+
+    const moment =
+        CTMState.get("currentMoment");
+
+    loadResponses();
+
+    await loadAct(act);
+
+    await loadMoment(moment);
+
+    initialize();
+
+    return currentMoment();
+
+}
+
+/* ==========================================================
+   NAVIGATION FOUNDATION
+========================================================== */
+
+async function goTo(momentId) {
+
+    const act =
+        CTMState.get("currentAct");
+
+    if (act !== currentAct()) {
+
+        await loadAct(act);
 
     }
 
-    /**
-     * --------------------------------------------------------
-     * Read Visitor Response
-     * --------------------------------------------------------
-     */
+    return loadMoment(momentId);
 
-    function getResponse(momentId) {
+}
 
-        const responses =
-            CTMState.get("visitor.responses") || {};
+async function nextMoment() {
 
-        return responses[momentId];
+    CTMNavigation.next();
+
+    return goTo(
+
+        CTMState.get(
+            "currentMoment"
+        )
+
+    );
+
+}
+
+async function previousMoment() {
+
+    CTMNavigation.previous();
+
+    return goTo(
+
+        CTMState.get(
+            "currentMoment"
+        )
+
+    );
+
+}
+
+ /* ==========================================================
+   RENDER COORDINATOR
+========================================================== */
+
+async function render() {
+
+    const moment = currentMoment();
+
+    if (!moment) {
+
+        throw new Error(
+            "Conversation: No active moment."
+        );
 
     }
 
-    /**
-     * --------------------------------------------------------
-     * Public API
-     * --------------------------------------------------------
-     */
+    await CTMRenderer.renderMoment(
+        moment
+    );
 
-    window.CTMConversation = Object.freeze({
+    return moment;
 
-        start,
+}
 
-        next,
+async function refresh() {
 
-        previous,
+    return render();
 
-        restart,
+}
 
-        loadCurrentAct,
+/* ==========================================================
+   PIPELINE HOOKS
+========================================================== */
 
-        getCurrentMoment,
+function updateProgress() {
 
-        saveResponse,
+    if (
+        window.CTMProgress &&
+        typeof CTMProgress.update === "function"
+    ) {
 
-        getResponse
+        CTMProgress.update(
+            currentMoment()
+        );
 
-    });
+    }
+
+}
+
+function trackAnalytics(eventName) {
+
+    if (
+        window.CTMAnalytics &&
+        typeof CTMAnalytics.track === "function"
+    ) {
+
+        CTMAnalytics.track(
+            eventName,
+            currentMoment()
+        );
+
+    }
+
+}
+
+function bookingCheck() {
+
+    if (!isComplete()) {
+
+        return;
+
+    }
+
+    if (
+        window.CTMBooking &&
+        typeof CTMBooking.start === "function"
+    ) {
+
+        CTMBooking.start();
+
+    }
+
+}
+
+/* ==========================================================
+   JOURNEY PIPELINE
+========================================================== */
+
+async function continueJourney(value) {
+
+    if (value !== undefined) {
+
+        saveResponse(value);
+
+    }
+
+    trackAnalytics(
+        "moment_completed"
+    );
+
+    updateProgress();
+
+    const moment =
+        await nextMoment();
+
+    await render();
+
+    bookingCheck();
+
+    return moment;
+
+}
+
+async function back() {
+
+    const moment =
+        await previousMoment();
+
+    await render();
+
+    return moment;
+
+}
+
+/* ==========================================================
+   RESTART
+========================================================== */
+
+async function restart() {
+
+    CTMState.resetJourney();
+
+    state.journey = {
+
+        initialized: false,
+
+        loading: false,
+
+        completed: false
+
+    };
+
+    state.act = {
+
+        number: null,
+
+        data: null
+
+    };
+
+    state.moment = {
+
+        current: null
+
+    };
+
+    state.responses = {};
+
+    return start();
+
+}
+
+/* ==========================================================
+   SNAPSHOT
+========================================================== */
+
+function current() {
+
+    return {
+
+        journey: {
+
+            initialized:
+                state.journey.initialized,
+
+            loading:
+                state.journey.loading,
+
+            completed:
+                state.journey.completed
+
+        },
+
+        act: {
+
+            number:
+                state.act.number
+
+        },
+
+        moment:
+
+            state.moment.current,
+
+        responses:
+
+            structuredClone(
+                state.responses
+            )
+
+    };
+
+}
+
+/* ==========================================================
+   PUBLIC API
+========================================================== */
+
+window.CTMConversation = Object.freeze({
+
+    /* Journey */
+
+    start,
+
+    restart,
+
+    current,
+
+    isInitialized,
+
+    isLoading,
+
+    isComplete,
+
+    /* Navigation */
+
+    goTo,
+
+    next: nextMoment,
+
+    previous: previousMoment,
+
+    continueJourney,
+
+    back,
+
+    /* Moments */
+
+    currentMoment,
+
+    currentAct,
+
+    currentActData,
+
+    /* Responses */
+
+    saveResponse,
+
+    response,
+
+    /* Rendering */
+
+    render,
+
+    refresh
+
+});
 
 })();
+
