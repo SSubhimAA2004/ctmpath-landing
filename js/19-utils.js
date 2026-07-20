@@ -5,12 +5,12 @@
 CTM PATH™ Guided Journey v6.0
 
 Purpose
-Shared Utility Functions
+Utility Functions
 
 Responsibility
 • DOM helpers
 • Text helpers
-• Class helpers
+• CSS helpers
 • Validation helpers
 
 ======================================================================
@@ -18,170 +18,151 @@ Responsibility
 
 'use strict';
 
-const CTM = window.CTM || {};
+(() => {
 
-/*==================================================
-Element Selector
-==================================================*/
+    const CTM = window.CTM;
 
-CTM.$ = function (selector) {
-
-    return document.querySelector(selector);
-
-};
-
-CTM.$$ = function (selector) {
-
-    return document.querySelectorAll(selector);
-
-};
-
-
-/*==================================================
-Element By ID
-==================================================*/
-
-CTM.byId = function (id) {
-
-    return document.getElementById(id);
-
-};
-
-
-/*==================================================
-Safe Text
-==================================================*/
-
-CTM.setText = function (selector, value) {
-
-    const element = CTM.$(selector);
-
-    if (!element) return;
-
-    element.textContent = value;
-
-};
-
-
-/*==================================================
-Safe HTML
-==================================================*/
-
-CTM.setHTML = function (selector, value) {
-
-    const element = CTM.$(selector);
-
-    if (!element) return;
-
-    element.innerHTML = value;
-
-};
-
-
-/*==================================================
-Class Helpers
-==================================================*/
-
-CTM.addClass = function (selector, className) {
-
-    const element = CTM.$(selector);
-
-    if (!element) return;
-
-    element.classList.add(className);
-
-};
-
-
-CTM.removeClass = function (selector, className) {
-
-    const element = CTM.$(selector);
-
-    if (!element) return;
-
-    element.classList.remove(className);
-
-};
-
-
-CTM.toggleClass = function (selector, className) {
-
-    const element = CTM.$(selector);
-
-    if (!element) return;
-
-    element.classList.toggle(className);
-
-};
-
-
-/*==================================================
-Show / Hide
-==================================================*/
-
-CTM.show = function (selector) {
-
-    const element = CTM.$(selector);
-
-    if (!element) return;
-
-    element.classList.remove('hidden');
-
-};
-
-
-CTM.hide = function (selector) {
-
-    const element = CTM.$(selector);
-
-    if (!element) return;
-
-    element.classList.add('hidden');
-
-};
-
-
-/*==================================================
-Trim
-==================================================*/
-
-CTM.clean = function (value) {
-
-    if (value === null || value === undefined) {
-
-        return '';
-
+    if (!CTM) {
+        console.error('CTM core has not been initialized.');
+        return;
     }
 
-    return String(value).trim();
+    /*==================================================
+    Query Selector
+    ==================================================*/
 
-};
+    CTM.$ = function (selector) {
 
+        return document.querySelector(selector);
 
-/*==================================================
-Empty Check
-==================================================*/
+    };
 
-CTM.isEmpty = function (value) {
+    CTM.$$ = function (selector) {
 
-    return CTM.clean(value) === '';
+        return document.querySelectorAll(selector);
 
-};
+    };
 
+    /*==================================================
+    Get Element By ID
+    ==================================================*/
 
-/*==================================================
-Debug Log
-==================================================*/
+    CTM.byId = function (id) {
 
-CTM.log = function (...args) {
+        return document.getElementById(id);
 
-    console.log('[CTM]', ...args);
+    };
 
-};
+    /*==================================================
+    Safe Text
+    ==================================================*/
 
+    CTM.setText = function (selector, value) {
 
-/*==================================================
-Expose
-==================================================*/
+        const element = CTM.$(selector);
 
-window.CTM = CTM;
+        if (!element) return;
+
+        element.textContent = value;
+
+    };
+
+    /*==================================================
+    Safe HTML
+    ==================================================*/
+
+    CTM.setHTML = function (selector, value) {
+
+        const element = CTM.$(selector);
+
+        if (!element) return;
+
+        element.innerHTML = value;
+
+    };
+
+    /*==================================================
+    Class Helpers
+    ==================================================*/
+
+    CTM.addClass = function (selector, className) {
+
+        const element = CTM.$(selector);
+
+        if (!element) return;
+
+        element.classList.add(className);
+
+    };
+
+    CTM.removeClass = function (selector, className) {
+
+        const element = CTM.$(selector);
+
+        if (!element) return;
+
+        element.classList.remove(className);
+
+    };
+
+    CTM.toggleClass = function (selector, className) {
+
+        const element = CTM.$(selector);
+
+        if (!element) return;
+
+        element.classList.toggle(className);
+
+    };
+
+    /*==================================================
+    Visibility
+    ==================================================*/
+
+    CTM.show = function (selector) {
+
+        const element = CTM.$(selector);
+
+        if (!element) return;
+
+        element.classList.remove('hidden');
+
+    };
+
+    CTM.hide = function (selector) {
+
+        const element = CTM.$(selector);
+
+        if (!element) return;
+
+        element.classList.add('hidden');
+
+    };
+
+    /*==================================================
+    String Helpers
+    ==================================================*/
+
+    CTM.clean = function (value) {
+
+        return String(value ?? '').trim();
+
+    };
+
+    CTM.isEmpty = function (value) {
+
+        return CTM.clean(value) === '';
+
+    };
+
+    /*==================================================
+    Logger
+    ==================================================*/
+
+    CTM.log = function (...args) {
+
+        console.log('[CTM]', ...args);
+
+    };
+
+})();
