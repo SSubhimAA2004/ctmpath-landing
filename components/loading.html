@@ -1,50 +1,68 @@
 
 <!--
 ==========================================================
-CTM PATH™ Guided Journey v3.0
+CTM PATH™ Guided Journey v4.0
 File: components/loading.html
 
 Responsibility:
-Presentation template for transitional loading moments.
+Presentation template for Loading Moments.
 
-Used while:
-- Loading acts
-- Resolving personalized content
-- Rendering the next moment
+Bilingual Template Standard
 
 No JavaScript.
 No business logic.
-Rendered by renderer.js
 ==========================================================
 -->
 
-<section
-    class="ctm-scene ctm-loading"
-    aria-live="polite"
-    aria-busy="true">
+<section class="ctm-scene ctm-loading">
 
     <div class="ctm-scene__container">
 
+        <!-- ======================================================
+             HEADER
+        ======================================================= -->
+
+        <header class="ctm-scene__header">
+
+            <h1 class="ctm-scene__title-ta">
+
+                {{titleTa}}
+
+            </h1>
+
+            <h2 class="ctm-scene__title-en">
+
+                {{titleEn}}
+
+            </h2>
+
+        </header>
+
+        <!-- ======================================================
+             LOADING ANIMATION
+        ======================================================= -->
+
         <main class="ctm-scene__content">
 
-            <div class="ctm-loading__content">
+            <div class="ctm-loading__animation">
 
-                <div
-                    class="ctm-loading__spinner"
-                    aria-hidden="true">
+                <div class="ctm-spinner"></div>
+
+            </div>
+
+            <div class="ctm-loading__message">
+
+                <div class="ctm-ta">
+
+                    {{messageTa}}
+
                 </div>
 
-                <h1 class="ctm-loading__title">
+                <div class="ctm-en">
 
-                    {{title}}
+                    {{messageEn}}
 
-                </h1>
-
-                <p class="ctm-loading__message">
-
-                    {{message}}
-
-                </p>
+                </div>
 
             </div>
 
