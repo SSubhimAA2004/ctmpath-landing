@@ -1,1 +1,454 @@
 
+/*======================================================================
+
+CTM PATH™ Guided Journey v6.0
+
+Purpose
+Premium Card System
+
+Responsibility
+• Hero Cards
+• Message Cards
+• Insight Cards
+• Choice Cards
+• Information Cards
+• Card Hover Effects
+• Responsive Behaviour
+
+======================================================================*/
+
+
+/*==================================================
+Base Card
+==================================================*/
+
+.card{
+
+    position:relative;
+
+    width:100%;
+
+    background:rgba(16,25,40,.68);
+
+    backdrop-filter:blur(22px);
+
+    -webkit-backdrop-filter:blur(22px);
+
+    border:1px solid rgba(216,179,106,.18);
+
+    border-radius:28px;
+
+    padding:48px;
+
+    overflow:hidden;
+
+    box-shadow:
+
+        0 20px 60px rgba(0,0,0,.45),
+
+        inset 0 1px 0 rgba(255,255,255,.05);
+
+    transition:
+
+        transform .35s ease,
+
+        box-shadow .35s ease,
+
+        border-color .35s ease;
+
+}
+
+
+/*==================================================
+Top Accent
+==================================================*/
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:2px;
+
+    background:
+
+    linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(216,179,106,.90),
+
+        transparent
+
+    );
+
+}
+
+
+/*==================================================
+Glow
+==================================================*/
+
+.card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:380px;
+
+    height:380px;
+
+    right:-180px;
+
+    top:-180px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+        circle,
+
+        rgba(25,198,194,.08),
+
+        transparent 72%
+
+    );
+
+    pointer-events:none;
+
+}
+
+
+/*==================================================
+Hover
+==================================================*/
+
+.card:hover{
+
+    transform:
+
+        translateY(-6px);
+
+    border-color:
+
+        rgba(216,179,106,.38);
+
+    box-shadow:
+
+        0 30px 70px rgba(0,0,0,.50),
+
+        0 0 30px rgba(216,179,106,.12);
+
+}
+
+
+/*==================================================
+Hero Card
+==================================================*/
+
+.card-hero{
+
+    max-width:960px;
+
+    margin:auto;
+
+}
+
+
+/*==================================================
+Message Card
+==================================================*/
+
+.card-message{
+
+    max-width:760px;
+
+    margin:auto;
+
+}
+
+
+/*==================================================
+Insight Card
+==================================================*/
+
+.card-insight{
+
+    background:
+
+    linear-gradient(
+
+        180deg,
+
+        rgba(18,31,50,.92),
+
+        rgba(12,22,37,.94)
+
+    );
+
+}
+
+
+/*==================================================
+Choice Card
+==================================================*/
+
+.card-choice{
+
+    cursor:pointer;
+
+}
+
+
+.card-choice:hover{
+
+    transform:
+
+        translateY(-8px)
+
+        scale(1.01);
+
+}
+
+
+/*==================================================
+Selected
+==================================================*/
+
+.card-selected{
+
+    border:2px solid #D8B36A;
+
+    box-shadow:
+
+        0 0 30px rgba(216,179,106,.22);
+
+}
+
+
+/*==================================================
+Card Header
+==================================================*/
+
+.card-header{
+
+    margin-bottom:32px;
+
+}
+
+
+/*==================================================
+Card Body
+==================================================*/
+
+.card-body{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+}
+
+
+/*==================================================
+Card Footer
+==================================================*/
+
+.card-footer{
+
+    margin-top:40px;
+
+}
+
+
+/*==================================================
+Grid
+==================================================*/
+
+.card-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(auto-fit,minmax(280px,1fr));
+
+    gap:24px;
+
+}
+
+
+/*==================================================
+Information Card
+==================================================*/
+
+.info-card{
+
+    padding:32px;
+
+    border-radius:22px;
+
+    background:
+
+    rgba(255,255,255,.04);
+
+    border:
+
+    1px solid rgba(255,255,255,.05);
+
+}
+
+
+/*==================================================
+Icon Area
+==================================================*/
+
+.card-icon{
+
+    width:72px;
+
+    height:72px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:0 auto 24px;
+
+    border-radius:50%;
+
+    background:
+
+    linear-gradient(
+
+        180deg,
+
+        rgba(216,179,106,.18),
+
+        rgba(216,179,106,.05)
+
+    );
+
+}
+
+
+/*==================================================
+Divider
+==================================================*/
+
+.card-divider{
+
+    width:100%;
+
+    height:1px;
+
+    margin:28px 0;
+
+    background:
+
+    linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(216,179,106,.35),
+
+        transparent
+
+    );
+
+}
+
+
+/*==================================================
+Glass Modifier
+==================================================*/
+
+.card-glass{
+
+    background:
+
+    rgba(255,255,255,.05);
+
+    backdrop-filter:blur(28px);
+
+}
+
+
+/*==================================================
+Compact
+==================================================*/
+
+.card-compact{
+
+    padding:28px;
+
+}
+
+
+/*==================================================
+Large
+==================================================*/
+
+.card-large{
+
+    padding:64px;
+
+}
+
+
+/*==================================================
+Responsive
+==================================================*/
+
+@media (max-width:992px){
+
+    .card{
+
+        padding:36px;
+
+    }
+
+}
+
+
+@media (max-width:768px){
+
+    .card{
+
+        padding:28px;
+
+        border-radius:22px;
+
+    }
+
+    .card-large{
+
+        padding:32px;
+
+    }
+
+    .card-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
