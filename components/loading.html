@@ -1,1 +1,55 @@
 
+<!--
+==========================================================
+CTM PATH™ Guided Journey v3.0
+File: components/loading.html
+
+Responsibility:
+Presentation template for transitional loading moments.
+
+Used while:
+- Loading acts
+- Resolving personalized content
+- Rendering the next moment
+
+No JavaScript.
+No business logic.
+Rendered by renderer.js
+==========================================================
+-->
+
+<section
+    class="ctm-scene ctm-loading"
+    aria-live="polite"
+    aria-busy="true">
+
+    <div class="ctm-scene__container">
+
+        <main class="ctm-scene__content">
+
+            <div class="ctm-loading__content">
+
+                <div
+                    class="ctm-loading__spinner"
+                    aria-hidden="true">
+                </div>
+
+                <h1 class="ctm-loading__title">
+
+                    {{title}}
+
+                </h1>
+
+                <p class="ctm-loading__message">
+
+                    {{message}}
+
+                </p>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</section>
