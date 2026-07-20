@@ -1,1 +1,121 @@
 
+{
+  "application": {
+    "name": "CTM PATH™ Guided Journey",
+    "version": "3.0.0",
+    "environment": "production",
+    "language": "ta-IN",
+    "fallbackLanguage": "en-IN"
+  },
+
+  "journey": {
+    "acts": 5,
+    "moments": 35,
+    "startingAct": 1,
+    "startingMoment": 1,
+    "completionMoment": 35,
+    "allowRestart": true
+  },
+
+  "experience": {
+    "mode": "cinematic",
+    "transitionDuration": 450,
+    "autoScroll": true,
+    "showProgress": true,
+    "enablePersonalization": true,
+    "enableAnalytics": true,
+    "enableBooking": true
+  },
+
+  "mentor": {
+    "name": "Raphael Raj",
+    "title": "CTM PATH™ Mentor"
+  },
+
+  "booking": {
+    "enabled": true,
+    "triggerMoment": 35,
+    "allowSkip": false,
+    "sessionType": "Complimentary Discovery Session"
+  },
+
+  "personalization": {
+    "defaultVisitorName": "Friend",
+    "tokenPrefix": "{{",
+    "tokenSuffix": "}}"
+  },
+
+  "progress": {
+    "enabled": true,
+    "totalMoments": 35,
+    "roundPercentage": true
+  },
+
+  "analytics": {
+    "enabled": true,
+    "trackJourney": true,
+    "trackProgress": true,
+    "trackBooking": true
+  },
+
+  "renderer": {
+    "root": "#app",
+    "loadingComponent": "loading",
+    "errorComponent": null
+  },
+
+  "components": {
+    "message": "message",
+    "question": "question",
+    "choice": "choice",
+    "input": "input",
+    "reflection": "reflection",
+    "insight": "insight",
+    "loading": "loading",
+    "booking": "booking",
+    "complete": "complete"
+  },
+
+  "acts": [
+    {
+      "id": 1,
+      "file": "act01.json",
+      "momentRange": {
+        "start": 1,
+        "end": 10
+      }
+    },
+    {
+      "id": 2,
+      "file": "act02.json",
+      "momentRange": {
+        "start": 11,
+        "end": 17
+      }
+    },
+    {
+      "id": 3,
+      "file": "act03.json",
+      "momentRange": {
+        "start": 18,
+        "end": 24
+      }
+    },
+    {
+      "id": 4,
+      "file": "act04.json",
+      "momentRange": {
+        "start": 25,
+        "end": 29
+      }
+    },
+    {
+      "id": 5,
+      "file": "act05.json",
+      "momentRange": {
+        "start": 30,
+        "end": 35
+      }
+    }
+  ]
+}
