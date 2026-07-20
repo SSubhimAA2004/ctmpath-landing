@@ -8,147 +8,174 @@ Purpose
 Application State
 
 Responsibility
-• Maintain global application state
+• Create the global CTM object
+• Maintain application state
 • Track current screen
-• Store visitor journey data
-• Provide controlled state updates
+• Track journey state
 
 ======================================================================
 */
 
 'use strict';
 
-const CTM = window.CTM || {};
+(() => {
 
-CTM.version = '6.0';
+    /*
+    ==================================================
+    Create Global Namespace
+    ==================================================
+    */
 
-CTM.state = {
+    window.CTM = window.CTM || {};
 
-    initialized: false,
+    const CTM = window.CTM;
 
-    currentScreen: 'screen01',
+    /*
+    ==================================================
+    Version
+    ==================================================
+    */
 
-    previousScreen: null,
+    CTM.version = '6.0';
 
-    totalScreens: 36,
+    /*
+    ==================================================
+    Application State
+    ==================================================
+    */
 
-    visitor: {
+    CTM.state = {
 
-        id: null,
+        initialized: false,
 
-        name: '',
+        currentScreen: 'screen01',
 
-        firstName: '',
+        previousScreen: null,
 
-        city: ''
+        totalScreens: 36,
 
-    },
+        visitor: {
 
-    journey: {
+            id: '',
 
-        started: false,
+            name: '',
 
-        completed: false,
+            firstName: '',
 
-        progress: 0,
+            city: '',
 
-        completion: 0
+            mobile: '',
 
-    },
+            email: ''
 
-    responses: {},
+        },
 
-    insights: {},
+        journey: {
 
-    recommendations: {},
+            started: false,
 
-    scores: {
+            completed: false,
 
-        readiness: 0,
+            progress: 0,
 
-        pattern: null
+            completion: 0
 
-    }
+        },
 
-};
+        responses: {},
 
+        insights: {},
 
-/*==================================================
-Get State
-==================================================*/
+        recommendations: {},
 
-CTM.getState = function () {
+        scores: {
 
-    return CTM.state;
+            readiness: 0,
 
-};
+            pattern: null
 
+        }
 
-/*==================================================
-Current Screen
-==================================================*/
+    };
 
-CTM.getCurrentScreen = function () {
+    /*
+    ==================================================
+    State Access
+    ==================================================
+    */
 
-    return CTM.state.currentScreen;
+    CTM.getState = function () {
 
-};
+        return CTM.state;
 
+    };
 
-CTM.setCurrentScreen = function (screenId) {
+    /*
+    ==================================================
+    Current Screen
+    ==================================================
+    */
 
-    CTM.state.previousScreen = CTM.state.currentScreen;
+    CTM.getCurrentScreen = function () {
 
-    CTM.state.currentScreen = screenId;
+        return CTM.state.currentScreen;
 
-};
+    };
 
+    CTM.setCurrentScreen = function (screenId) {
 
-/*==================================================
-Journey Status
-==================================================*/
+        CTM.state.previousScreen = CTM.state.currentScreen;
 
-CTM.startJourney = function () {
+        CTM.state.currentScreen = screenId;
 
-    CTM.state.journey.started = true;
+    };
 
-};
+    /*
+    ==================================================
+    Journey
+    ==================================================
+    */
 
+    CTM.startJourney = function () {
 
-CTM.finishJourney = function () {
+        CTM.state.journey.started = true;
 
-    CTM.state.journey.completed = true;
+    };
 
-};
+    CTM.finishJourney = function () {
 
+        CTM.state.journey.completed = true;
 
-/*==================================================
-Progress
-==================================================*/
+    };
 
-CTM.setProgress = function (screenNumber) {
+    /*
+    ==================================================
+    Progress
+    ==================================================
+    */
 
-    CTM.state.journey.progress = screenNumber;
+    CTM.setProgress = function (screenNumber) {
 
-    CTM.state.journey.completion =
-        Math.round((screenNumber / CTM.state.totalScreens) * 100);
+        CTM.state.journey.progress = screenNumber;
 
-};
+        CTM.state.journey.completion = Math.round(
 
+            (screenNumber / CTM.state.totalScreens) * 100
 
-/*==================================================
-Initialization
-==================================================*/
+        );
 
-CTM.markInitialized = function () {
+    };
 
-    CTM.state.initialized = true;
+    /*
+    ==================================================
+    Initialization
+    ==================================================
+    */
 
-};
+    CTM.markInitialized = function () {
 
+        CTM.state.initialized = true;
 
-/*==================================================
-Expose
-==================================================*/
+    };
 
-window.CTM = CTM;
+})();
