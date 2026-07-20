@@ -1,1 +1,433 @@
 
+/*======================================================================
+
+CTM PATH™ Guided Journey v6.0
+
+Purpose
+Choice Selection System
+
+Responsibility
+• Choice Cards
+• Radio Options
+• Multi Choice
+• Single Choice
+• Selected State
+• Hover Effects
+• Keyboard Focus
+• Responsive Behaviour
+
+======================================================================*/
+
+
+/*==================================================
+Choice Group
+==================================================*/
+
+.choice-group{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+    margin:36px 0;
+
+}
+
+
+/*==================================================
+Horizontal Group
+==================================================*/
+
+.choice-group-horizontal{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:20px;
+
+}
+
+
+/*==================================================
+Choice Card
+==================================================*/
+
+.choice{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    width:100%;
+
+    padding:24px 28px;
+
+    border-radius:22px;
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+    background:
+
+        rgba(255,255,255,.04);
+
+    border:
+
+        1px solid rgba(216,179,106,.18);
+
+    transition:
+
+        transform .30s ease,
+
+        border-color .30s ease,
+
+        background .30s ease,
+
+        box-shadow .30s ease;
+
+}
+
+
+/*==================================================
+Hover
+==================================================*/
+
+.choice:hover{
+
+    transform:
+
+        translateY(-4px);
+
+    border-color:
+
+        rgba(216,179,106,.45);
+
+    background:
+
+        rgba(255,255,255,.06);
+
+    box-shadow:
+
+        0 14px 34px rgba(0,0,0,.35);
+
+}
+
+
+/*==================================================
+Selected
+==================================================*/
+
+.choice.selected{
+
+    border:
+
+        2px solid #D8B36A;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            rgba(27,170,102,.18),
+
+            rgba(16,33,52,.88)
+
+        );
+
+    box-shadow:
+
+        0 0 24px rgba(216,179,106,.18);
+
+}
+
+
+/*==================================================
+Focus
+==================================================*/
+
+.choice:focus-visible{
+
+    outline:none;
+
+    border-color:#D8B36A;
+
+}
+
+
+/*==================================================
+Choice Icon
+==================================================*/
+
+.choice-icon{
+
+    width:64px;
+
+    height:64px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:50%;
+
+    background:
+
+        rgba(216,179,106,.12);
+
+    font-size:1.8rem;
+
+}
+
+
+/*==================================================
+Choice Content
+==================================================*/
+
+.choice-content{
+
+    flex:1;
+
+}
+
+
+/*==================================================
+Tamil Title
+==================================================*/
+
+.choice-title{
+
+    color:var(--text-primary);
+
+    font-size:1.30rem;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+
+/*==================================================
+English Subtitle
+==================================================*/
+
+.choice-subtitle{
+
+    color:var(--text-secondary);
+
+    font-size:.95rem;
+
+    line-height:1.6;
+
+}
+
+
+/*==================================================
+Selection Indicator
+==================================================*/
+
+.choice-check{
+
+    width:28px;
+
+    height:28px;
+
+    flex-shrink:0;
+
+    border-radius:50%;
+
+    border:
+
+        2px solid rgba(216,179,106,.45);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    transition:.30s;
+
+}
+
+
+/*==================================================
+Selected Indicator
+==================================================*/
+
+.choice.selected .choice-check{
+
+    background:#18A867;
+
+    border-color:#18A867;
+
+}
+
+
+.choice.selected .choice-check::before{
+
+    content:"✓";
+
+    color:#FFFFFF;
+
+    font-size:14px;
+
+    font-weight:700;
+
+}
+
+
+/*==================================================
+Hide Native Inputs
+==================================================*/
+
+.choice input{
+
+    display:none;
+
+}
+
+
+/*==================================================
+Disabled
+==================================================*/
+
+.choice.disabled{
+
+    opacity:.45;
+
+    cursor:not-allowed;
+
+    pointer-events:none;
+
+}
+
+
+/*==================================================
+Small Choice
+==================================================*/
+
+.choice-sm{
+
+    padding:18px 22px;
+
+}
+
+
+.choice-sm .choice-title{
+
+    font-size:1.05rem;
+
+}
+
+
+/*==================================================
+Large Choice
+==================================================*/
+
+.choice-lg{
+
+    padding:34px;
+
+}
+
+
+.choice-lg .choice-title{
+
+    font-size:1.60rem;
+
+}
+
+
+/*==================================================
+Animation
+==================================================*/
+
+.choice{
+
+    animation:
+
+        choiceFade .45s ease;
+
+}
+
+
+@keyframes choiceFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/*==================================================
+Responsive
+==================================================*/
+
+@media (max-width:768px){
+
+    .choice{
+
+        padding:20px;
+
+        gap:16px;
+
+    }
+
+    .choice-group-horizontal{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .choice-icon{
+
+        width:52px;
+
+        height:52px;
+
+        font-size:1.5rem;
+
+    }
+
+    .choice-title{
+
+        font-size:1.1rem;
+
+    }
+
+    .choice-subtitle{
+
+        font-size:.90rem;
+
+    }
+
+}
