@@ -1,53 +1,82 @@
 
 <!--
 ==========================================================
-CTM PATH™ Guided Journey v3.0
+CTM PATH™ Guided Journey v3.1
 File: components/message.html
-
-Responsibility:
-Presentation template for informational moments.
-
-No JavaScript.
-No business logic.
-Rendered by renderer.js
+Welcome Component
 ==========================================================
 -->
 
-<section class="ctm-scene ctm-message">
+<section class="ctm-welcome">
 
-    <div class="ctm-scene__container">
+    <div class="ctm-welcome__container">
 
-        <header class="ctm-scene__header">
+        <!-- Brand -->
 
-            <div class="ctm-scene__step">
-                {{step}}
-            </div>
+        <header class="ctm-welcome__header">
 
-            <h1 class="ctm-scene__title">
-                {{title}}
-            </h1>
-
-            <h2 class="ctm-scene__subtitle">
-                {{subtitle}}
-            </h2>
+            <img
+                src="images/CTM_Logo.png"
+                alt="CTM PATH"
+                class="ctm-logo">
 
         </header>
 
-        <main class="ctm-scene__content">
+        <!-- Welcome -->
 
-            <div class="ctm-message__body">
+        <section class="ctm-welcome__hero">
 
-                {{message}}
+            <h1 class="ctm-title-ta">
+                {{title}}
+            </h1>
+
+            <h2 class="ctm-title-en">
+                {{subtitle}}
+            </h2>
+
+        </section>
+
+        <!-- Divider -->
+
+        <section class="ctm-divider">
+
+            <div class="ctm-divider-line"></div>
+
+            <div class="ctm-divider-lotus">
+
+                🪷
 
             </div>
 
-        </main>
+            <div class="ctm-divider-line"></div>
 
-        <footer class="ctm-scene__footer">
+        </section>
+
+        <!-- Namaste -->
+
+        <section class="ctm-namaste">
+
+            <img
+                src="images/namaste.svg"
+                alt="Welcome"
+                class="ctm-namaste-icon">
+
+        </section>
+
+        <!-- Greeting -->
+
+        <section class="ctm-message">
+
+            {{message}}
+
+        </section>
+
+        <!-- CTA -->
+
+        <footer class="ctm-footer">
 
             <button
-                type="button"
-                class="ctm-button ctm-button--primary"
+                class="ctm-button ctm-button-green"
                 data-action="continue">
 
                 {{button}}
