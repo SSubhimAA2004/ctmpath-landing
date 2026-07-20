@@ -1,31 +1,38 @@
 
 <!DOCTYPE html>
-<html lang="ta">
+<html lang="en">
+
 <head>
+
     <!--
-    ==========================================================
+    ======================================================================
+
     CTM PATH™ Guided Journey v6.0
-    Purpose:
-    Application Entry Point
 
-    Responsibility:
-    • Load design system
-    • Create application shell
-    • Load JavaScript modules
-    • Provide root container for screen loader
+    Purpose
+    Application Shell
 
-    Google Apps Script Compatible
-    ==========================================================
+    Responsibility
+    • Global Layout
+    • Global Header
+    • Load CSS
+    • Load JavaScript
+    • Host Screen Container
+
+    ======================================================================
     -->
 
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>CTM PATH™ Guided Journey</title>
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        content="width=device-width, initial-scale=1.0">
+
+    <meta
+        http-equiv="X-UA-Compatible"
+        content="IE=edge">
+
+    <title>CTM PATH™ Guided Journey</title>
 
     <meta
         name="description"
@@ -33,17 +40,11 @@
 
     <meta
         name="theme-color"
-        content="#0B1020">
+        content="#0B0B0D">
 
-    <meta
-        name="color-scheme"
-        content="dark">
-
-    <link rel="icon" href="assets/CTMLogo.png">
-
-    <!-- ======================================================
-         CSS
-    ======================================================= -->
+    <!--==================================================
+    CSS
+    ==================================================-->
 
     <link rel="stylesheet" href="css/01-reset.css">
     <link rel="stylesheet" href="css/02-tokens.css">
@@ -64,56 +65,65 @@
 
 <body>
 
-    <!-- ======================================================
-         APPLICATION ROOT
-    ======================================================= -->
+    <!--==================================================
+    Application
+    ==================================================-->
 
-    <div id="app">
+    <div id="app-shell">
 
-        <!--
-        Screen Loader Target
+        <!--==================================================
+        Global Header
+        ==================================================-->
 
-        Example:
+        <header id="global-header">
 
-        screens/
-            screen01.html
-            screen02.html
-            ...
-            screen36.html
-        -->
+            <a
+                href="#"
+                class="brand">
+
+                <img
+                    src="assets/CTM_Logo.png"
+                    alt="CTM PATH™"
+                    class="brand-logo">
+
+            </a>
+
+        </header>
+
+        <!--==================================================
+        Journey Container
+        ==================================================-->
 
         <main
-            id="screen-root"
-            class="screen-root"
-            aria-live="polite"
-            aria-label="CTM PATH Guided Journey">
+            id="journey-container"
+            role="main">
 
-            <noscript>
-                JavaScript is required to run the CTM PATH™ Guided Journey.
-            </noscript>
+            <div
+                id="screen-container">
+
+                <!-- Screen Loader injects screen01.html here -->
+
+            </div>
 
         </main>
 
     </div>
 
-    <!-- ======================================================
-         JAVASCRIPT
-         Load Order is Mandatory
-    ======================================================= -->
+    <!--==================================================
+    JavaScript
+    ==================================================-->
+
+    <script src="js/19-utils.js"></script>
 
     <script src="js/04-state-core.js"></script>
     <script src="js/05-state-visitor.js"></script>
     <script src="js/06-state-progress.js"></script>
+
     <script src="js/07-storage.js"></script>
 
-    <script src="js/19-utils.js"></script>
-
-    <script src="js/03-loader.js"></script>
-    <script src="js/02-router.js"></script>
-
+    <script src="js/08-events-buttons.js"></script>
     <script src="js/09-events-inputs.js"></script>
     <script src="js/10-events-choices.js"></script>
-    <script src="js/08-events-buttons.js"></script>
 
     <script src="js/11-personalization-name.js"></script>
     <script src="js/12-personalization-text.js"></script>
@@ -126,8 +136,10 @@
     <script src="js/17-booking.js"></script>
     <script src="js/18-sheets.js"></script>
 
-    <!-- Application Bootstrap (Must Be Last) -->
+    <script src="js/03-loader.js"></script>
+    <script src="js/02-router.js"></script>
     <script src="js/01-app.js"></script>
 
 </body>
+
 </html>
