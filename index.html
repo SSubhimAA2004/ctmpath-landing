@@ -4,36 +4,108 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-<title>CTM PATH™ Guided Journey</title>
+    <meta
+        http-equiv="X-UA-Compatible"
+        content="IE=edge">
 
-<link rel="stylesheet" href="style.css">
+    <title>CTM PATH™ Guided Journey</title>
+
+    <!-- ==================================================
+         CSS FOUNDATION
+    =================================================== -->
+
+    <link rel="stylesheet" href="css/01-reset.css">
+    <link rel="stylesheet" href="css/02-tokens.css">
+    <link rel="stylesheet" href="css/03-typography.css">
+    <link rel="stylesheet" href="css/04-layout.css">
+    <link rel="stylesheet" href="css/05-buttons.css">
+    <link rel="stylesheet" href="css/06-forms.css">
+    <link rel="stylesheet" href="css/07-cards.css">
+    <link rel="stylesheet" href="css/08-progress.css">
+    <link rel="stylesheet" href="css/09-booking.css">
+    <link rel="stylesheet" href="css/10-results.css">
+    <link rel="stylesheet" href="css/11-responsive.css">
+    <link rel="stylesheet" href="css/12-animations.css">
+    <link rel="stylesheet" href="css/13-print.css">
+    <link rel="stylesheet" href="css/14-utilities.css">
 
 </head>
 
 <body>
 
-<div id="app">
+    <!-- ==================================================
+         APPLICATION SHELL
+    =================================================== -->
 
-    <header class="header">
+    <div id="app-shell">
 
-        <img
-            src="assets/CTM_Logo.png"
-            class="logo"
-            alt="CTM PATH">
+        <!-- ==============================================
+             GLOBAL HEADER
+        =============================================== -->
 
-    </header>
+        <header id="global-header">
 
-    <main id="screen-container">
+            <div class="brand">
 
-    </main>
+                <img
+                    src="assets/CTM_Logo.png"
+                    alt="CTM PATH™"
+                    class="brand-logo">
 
-</div>
+            </div>
 
-<script src="app.js"></script>
+        </header>
+
+        <!-- ==============================================
+             JOURNEY CONTAINER
+        =============================================== -->
+
+        <main id="journey-container">
+
+            <div id="screen-container">
+
+                <!-- Screen Loader injects screen01.html here -->
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- ==================================================
+         JAVASCRIPT FOUNDATION
+    =================================================== -->
+
+    <script src="js/00-core.js"></script>
+
+    <script src="js/01-app.js"></script>
+    <script src="js/02-router.js"></script>
+    <script src="js/03-loader.js"></script>
+
+    <script src="js/04-store.js"></script>
+    <script src="js/05-services.js"></script>
+    <script src="js/06-components.js"></script>
+    <script src="js/07-rules.js"></script>
+    <script src="js/08-navigation.js"></script>
+    <script src="js/09-personalization.js"></script>
+
+    <script src="js/10-progress.js"></script>
+    <script src="js/11-scoring.js"></script>
+    <script src="js/12-insights.js"></script>
+    <script src="js/13-booking.js"></script>
+    <script src="js/14-results.js"></script>
+
+    <script src="js/15-storage.js"></script>
+    <script src="js/16-events.js"></script>
+    <script src="js/17-render.js"></script>
+    <script src="js/18-animation.js"></script>
+    <script src="js/19-utils.js"></script>
 
 </body>
 
