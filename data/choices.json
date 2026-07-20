@@ -1,1 +1,188 @@
 
+{
+  "version": "3.0.0",
+
+  "choiceSets": [
+
+    {
+      "id": "yes_no",
+      "selection": "single",
+      "options": [
+        {
+          "id": "yes",
+          "label": "ஆம்",
+          "labelEnglish": "Yes",
+          "value": "yes"
+        },
+        {
+          "id": "no",
+          "label": "இல்லை",
+          "labelEnglish": "No",
+          "value": "no"
+        }
+      ]
+    },
+
+    {
+      "id": "yes_no_not_sure",
+      "selection": "single",
+      "options": [
+        {
+          "id": "yes",
+          "label": "ஆம்",
+          "labelEnglish": "Yes",
+          "value": "yes"
+        },
+        {
+          "id": "not_sure",
+          "label": "உறுதியாக தெரியவில்லை",
+          "labelEnglish": "Not Sure",
+          "value": "not_sure"
+        },
+        {
+          "id": "no",
+          "label": "இல்லை",
+          "labelEnglish": "No",
+          "value": "no"
+        }
+      ]
+    },
+
+    {
+      "id": "agreement",
+      "selection": "single",
+      "options": [
+        {
+          "id": "strongly_agree",
+          "label": "முழுமையாக ஒப்புக்கொள்கிறேன்",
+          "labelEnglish": "Strongly Agree",
+          "value": "strongly_agree"
+        },
+        {
+          "id": "agree",
+          "label": "ஒப்புக்கொள்கிறேன்",
+          "labelEnglish": "Agree",
+          "value": "agree"
+        },
+        {
+          "id": "neutral",
+          "label": "நடுநிலை",
+          "labelEnglish": "Neutral",
+          "value": "neutral"
+        },
+        {
+          "id": "disagree",
+          "label": "ஒப்புக்கொள்ளவில்லை",
+          "labelEnglish": "Disagree",
+          "value": "disagree"
+        },
+        {
+          "id": "strongly_disagree",
+          "label": "முழுமையாக ஒப்புக்கொள்ளவில்லை",
+          "labelEnglish": "Strongly Disagree",
+          "value": "strongly_disagree"
+        }
+      ]
+    },
+
+    {
+      "id": "importance_scale",
+      "selection": "single",
+      "options": [
+        {
+          "id": "1",
+          "label": "1",
+          "labelEnglish": "Very Low",
+          "value": 1
+        },
+        {
+          "id": "2",
+          "label": "2",
+          "labelEnglish": "Low",
+          "value": 2
+        },
+        {
+          "id": "3",
+          "label": "3",
+          "labelEnglish": "Moderate",
+          "value": 3
+        },
+        {
+          "id": "4",
+          "label": "4",
+          "labelEnglish": "High",
+          "value": 4
+        },
+        {
+          "id": "5",
+          "label": "5",
+          "labelEnglish": "Very High",
+          "value": 5
+        }
+      ]
+    },
+
+    {
+      "id": "financial_priority",
+      "selection": "single",
+      "options": [
+        {
+          "id": "income",
+          "label": "வருமானம்",
+          "labelEnglish": "Income",
+          "value": "income"
+        },
+        {
+          "id": "debt",
+          "label": "கடன்",
+          "labelEnglish": "Debt",
+          "value": "debt"
+        },
+        {
+          "id": "savings",
+          "label": "சேமிப்பு",
+          "labelEnglish": "Savings",
+          "value": "savings"
+        },
+        {
+          "id": "investment",
+          "label": "முதலீடு",
+          "labelEnglish": "Investment",
+          "value": "investment"
+        },
+        {
+          "id": "freedom",
+          "label": "நிதி சுதந்திரம்",
+          "labelEnglish": "Financial Freedom",
+          "value": "freedom"
+        }
+      ]
+    },
+
+    {
+      "id": "commitment",
+      "selection": "single",
+      "options": [
+        {
+          "id": "ready",
+          "label": "நான் தயாராக இருக்கிறேன்",
+          "labelEnglish": "I Am Ready",
+          "value": "ready"
+        },
+        {
+          "id": "thinking",
+          "label": "நான் யோசித்து வருகிறேன்",
+          "labelEnglish": "I Am Thinking",
+          "value": "thinking"
+        },
+        {
+          "id": "not_ready",
+          "label": "இப்போது தயாரில்லை",
+          "labelEnglish": "Not Ready Yet",
+          "value": "not_ready"
+        }
+      ]
+    }
+
+  ]
+}
