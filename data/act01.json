@@ -1,80 +1,74 @@
 
 {
   "act": {
-    "id": 1,
-    "sequence": 1,
-    "name": {
-      "ta": "முதல் உரையாடல்",
-      "en": "The First Conversation"
+{
+  "id": 1,
+  "sequence": 1,
+  "act": 1,
+  "component": "message",
+  "type": "welcome",
+
+  "payload": {
+
+    "title": {
+      "ta": "வாங்க! வாங்க!",
+      "en": "Welcome! Welcome!!"
     },
-    "theme": {
-      "ta": "நம்பிக்கை",
-      "en": "Trust"
+
+    "subtitle": {
+      "ta": "",
+      "en": ""
     },
-    "startMoment": 1,
-    "endMoment": 10
+
+    "content": {
+      "ta": [
+        "வணக்கம்.",
+        "",
+        "நான்",
+        "ரஃபேல் ராஜ்.",
+        "",
+        "உங்களைச் சந்திப்பதில்",
+        "மிகுந்த மகிழ்ச்சி.",
+        "",
+        "இந்த ஆறு நிமிடங்கள்",
+        "உங்களுக்காக."
+      ],
+
+      "en": [
+        "Hello.",
+        "",
+        "I'm",
+        "Raphael Raj.",
+        "",
+        "It's a pleasure",
+        "to meet you.",
+        "",
+        "These six minutes",
+        "are for you."
+      ]
+    },
+
+    "button": {
+      "ta": "தொடங்கலாம்",
+      "en": "Let's Begin"
+    }
+
   },
 
-  "moments": [
+  "personalization": {
+    "enabled": false,
+    "tokens": []
+  },
 
-    {
-      "id": 1,
-      "sequence": 1,
-      "act": 1,
-      "component": "message",
-      "type": "welcome",
+  "navigation": {
+    "previous": null,
+    "next": 2
+  },
 
-      "payload": {
-
-        "title": {
-          "ta": "வருக...",
-          "en": "Welcome"
-        },
-
-        "subtitle": {
-          "ta": "",
-          "en": ""
-        },
-
-        "content": {
-          "ta": [
-            "வணக்கம்.",
-            "நான்",
-            "ரஃபேல் ராஜ்.",
-            "உங்களைச் சந்தித்ததில்",
-            "மகிழ்ச்சி."
-          ],
-          "en": [
-            "Hello.",
-            "I'm",
-            "Raphael Raj.",
-            "It's a pleasure",
-            "to meet you."
-          ]
-        },
-
-        "button": {
-          "ta": "தொடங்கலாம்",
-          "en": "Let's Begin"
-        }
-
-      },
-
-      "personalization": {
-        "enabled": false,
-        "tokens": []
-      },
-
-      "navigation": {
-        "previous": null,
-        "next": 2
-      },
-
-      "analytics": {
-        "event": "moment_01"
-      }
-    },
-
+  "analytics": {
+    "event": "moment_01"
+  }
+}
     {
       "id": 2,
       "sequence": 2,
