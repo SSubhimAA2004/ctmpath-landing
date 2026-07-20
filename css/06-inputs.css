@@ -1,1 +1,333 @@
 
+/*======================================================================
+
+CTM PATH™ Guided Journey v6.0
+
+Purpose
+Premium Input System
+
+Responsibility
+• Text Inputs
+• Email Inputs
+• Telephone Inputs
+• Textarea
+• Labels
+• Validation States
+• Input Groups
+
+======================================================================*/
+
+
+/*==================================================
+Field Group
+==================================================*/
+
+.field{
+
+    width:100%;
+
+    margin-bottom:32px;
+
+}
+
+
+/*==================================================
+Label
+==================================================*/
+
+.field-label{
+
+    display:block;
+
+    margin-bottom:12px;
+
+    color:var(--text-secondary);
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    letter-spacing:.3px;
+
+}
+
+
+/*==================================================
+Base Input
+==================================================*/
+
+.input{
+
+    width:100%;
+
+    height:68px;
+
+    padding:0 24px;
+
+    background:
+
+        rgba(255,255,255,.05);
+
+    border:
+
+        1px solid rgba(216,179,106,.20);
+
+    border-radius:18px;
+
+    color:var(--text-primary);
+
+    font-family:var(--font-family);
+
+    font-size:1.05rem;
+
+    transition:
+
+        border-color .30s ease,
+
+        box-shadow .30s ease,
+
+        background .30s ease,
+
+        transform .30s ease;
+
+}
+
+
+/*==================================================
+Input Hover
+==================================================*/
+
+.input:hover{
+
+    border-color:
+
+        rgba(216,179,106,.45);
+
+}
+
+
+/*==================================================
+Input Focus
+==================================================*/
+
+.input:focus{
+
+    background:
+
+        rgba(255,255,255,.07);
+
+    border-color:
+
+        var(--color-accent);
+
+    box-shadow:
+
+        0 0 0 3px rgba(216,179,106,.15),
+
+        0 0 28px rgba(216,179,106,.18);
+
+}
+
+
+/*==================================================
+Placeholder
+==================================================*/
+
+.input::placeholder{
+
+    color:rgba(255,255,255,.40);
+
+}
+
+
+/*==================================================
+Textarea
+==================================================*/
+
+.textarea{
+
+    width:100%;
+
+    min-height:180px;
+
+    padding:22px;
+
+    resize:vertical;
+
+    background:
+
+        rgba(255,255,255,.05);
+
+    border:
+
+        1px solid rgba(216,179,106,.20);
+
+    border-radius:18px;
+
+    color:var(--text-primary);
+
+    font-family:var(--font-family);
+
+    font-size:1rem;
+
+    transition:.30s;
+
+}
+
+
+.textarea:focus{
+
+    border-color:
+
+        var(--color-accent);
+
+    box-shadow:
+
+        0 0 0 3px rgba(216,179,106,.15),
+
+        0 0 28px rgba(216,179,106,.18);
+
+}
+
+
+/*==================================================
+Validation
+==================================================*/
+
+.input-success{
+
+    border-color:#2ECC71;
+
+}
+
+
+.input-error{
+
+    border-color:#E74C3C;
+
+}
+
+
+.input-warning{
+
+    border-color:#F4B942;
+
+}
+
+
+/*==================================================
+Helper Text
+==================================================*/
+
+.field-help{
+
+    margin-top:10px;
+
+    color:var(--text-muted);
+
+    font-size:.88rem;
+
+}
+
+
+.field-error{
+
+    margin-top:10px;
+
+    color:#E74C3C;
+
+    font-size:.88rem;
+
+}
+
+
+.field-success{
+
+    margin-top:10px;
+
+    color:#2ECC71;
+
+    font-size:.88rem;
+
+}
+
+
+/*==================================================
+Input Group
+==================================================*/
+
+.input-group{
+
+    display:flex;
+
+    gap:16px;
+
+    align-items:center;
+
+}
+
+
+.input-group .input{
+
+    flex:1;
+
+}
+
+
+/*==================================================
+Disabled
+==================================================*/
+
+.input:disabled,
+
+.textarea:disabled{
+
+    opacity:.50;
+
+    cursor:not-allowed;
+
+}
+
+
+/*==================================================
+Read Only
+==================================================*/
+
+.input[readonly]{
+
+    background:
+
+        rgba(255,255,255,.03);
+
+}
+
+
+/*==================================================
+Responsive
+==================================================*/
+
+@media (max-width:768px){
+
+    .input{
+
+        height:62px;
+
+        font-size:1rem;
+
+    }
+
+    .textarea{
+
+        min-height:150px;
+
+    }
+
+    .input-group{
+
+        flex-direction:column;
+
+        gap:14px;
+
+    }
+
+}
