@@ -1,213 +1,181 @@
 
-/*!
- * ============================================================
- * CTM PATH™ Guided Journey
- * Application Entry Point
- * File        : js/app.js
- * Version     : 1.0.0
- * Status      : Production
- * ============================================================
+/**
+ * ==========================================================
+ * CTM PATH™ Guided Journey v3.0
+ * File: js/app.js
+ * Responsibility:
+ * Application Bootstrap Engine
+ *
+ * Initializes the application and coordinates
+ * startup of all core engines.
+ *
+ * No business logic.
+ * No rendering logic.
+ * No journey logic.
+ * ==========================================================
  */
 
 (() => {
 
-    "use strict";
+"use strict";
 
-    if (!window.CTM) {
+/* ==========================================================
+   INTERNAL STATE
+========================================================== */
 
-        throw new Error(
+const state = {
 
-            "CTM namespace not initialized."
+    initialized: false,
 
-        );
+    started: false
+
+};
+
+/* ==========================================================
+   INITIALIZE ENGINES
+========================================================== */
+
+async function initialize() {
+
+    if (state.initialized) {
+
+        return;
 
     }
 
-    const {
+    CTMRenderer.initialize();
 
-        Logger,
-        Errors
+    CTMProgress.reset();
 
-    } = window.CTM.services;
+    CTMAnalytics.reset();
 
-    /**
-     * ============================================================
-     * Application
-     * ============================================================
-     */
+    CTMBooking.reset();
 
-    const App = {
+    await CTMConversation.start();
 
-        /**
-         * --------------------------------------------------------
-         * Initialize
-         * --------------------------------------------------------
-         */
+    state.initialized = true;
 
-        async initialize() {
+}
 
-            try {
+/* ==========================================================
+   START APPLICATION
+========================================================== */
 
-                Logger.info(
+async function start() {
 
-                    "Initializing application..."
+    await initialize();
 
-                );
+    await CTMConversation.render();
 
-                const started =
+    state.started = true;
 
-                    await window.CTM.bootstrap.start();
+    document.dispatchEvent(
 
-                if (!started) {
+        new CustomEvent(
 
-                    throw new Error(
+            "ctm:application-started"
 
-                        "Bootstrap failed."
+        )
 
-                    );
+    );
 
-                }
+}
 
-                Logger.info(
+/* ==========================================================
+   RESTART APPLICATION
+========================================================== */
 
-                    "Application initialized."
+async function restart() {
 
-                );
+    CTMProgress.reset();
 
-                return true;
+    CTMAnalytics.reset();
 
-            }
+    CTMBooking.reset();
 
-            catch (error) {
+    await CTMConversation.restart();
 
-                Errors.handle(
+    await CTMConversation.render();
 
-                    error,
+}
 
-                    "Application"
+/* ==========================================================
+   APPLICATION STATUS
+========================================================== */
 
-                );
+function current() {
 
-                return false;
+    return {
 
-            }
+        initialized:
+            state.initialized,
 
-        },
+        started:
+            state.started,
 
-        /**
-         * --------------------------------------------------------
-         * Health Check
-         * --------------------------------------------------------
-         */
+        conversation:
+            CTMConversation.current(),
 
-        health() {
+        progress:
+            CTMProgress.current(),
 
-            return Object.freeze({
+        booking:
+            CTMBooking.current(),
 
-                application: true,
+        analytics: {
 
-                version:
-
-                    window.CTM.config.APP.VERSION,
-
-                modules: {
-
-                    config: !!window.CTM.config,
-
-                    store: !!window.CTM.store,
-
-                    services: !!window.CTM.services,
-
-                    components: !!window.CTM.components,
-
-                    sceneLoader: !!window.CTM.sceneLoader,
-
-                    navigation: !!window.CTM.navigation,
-
-                    rules: !!window.CTM.rules,
-
-                    personalization: !!window.CTM.personalization,
-
-                    bootstrap: !!window.CTM.bootstrap
-
-                }
-
-            });
-
-        },
-
-        /**
-         * --------------------------------------------------------
-         * Start Application
-         * --------------------------------------------------------
-         */
-
-        async start() {
-
-            return await this.initialize();
+            events:
+                CTMAnalytics.count()
 
         }
 
     };
 
-    /**
-     * ============================================================
-     * Auto Start Application
-     * ============================================================
-     */
+}
 
-    document.addEventListener(
+/* ==========================================================
+   APPLICATION READY
+========================================================== */
 
-        "DOMContentLoaded",
+document.addEventListener(
 
-        async () => {
+    "DOMContentLoaded",
 
-            await App.initialize();
+    async () => {
+
+        try {
+
+            await start();
+
+        }
+        catch (exception) {
+
+            console.error(exception);
+
+            CTMRenderer.error(
+
+                exception.message
+
+            );
 
         }
 
-    );
+    }
 
-    /**
-     * ============================================================
-     * Public API
-     * ============================================================
-     */
+);
 
-    Object.defineProperty(
+/* ==========================================================
+   PUBLIC API
+========================================================== */
 
-        window.CTM,
+window.CTMApp = Object.freeze({
 
-        "app",
+    start,
 
-        {
+    restart,
 
-            value: Object.freeze({
+    current
 
-                initialize:
-
-                    App.initialize.bind(App),
-
-                health:
-
-                    App.health.bind(App),
-
-                start:
-
-                    App.start.bind(App)
-
-            }),
-
-            writable: false,
-
-            configurable: false,
-
-            enumerable: true
-
-        }
-
-    );
+});
 
 })();
-
-
