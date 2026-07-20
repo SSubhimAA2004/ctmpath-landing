@@ -4,17 +4,18 @@
 CTM PATH™ Guided Journey v6.0
 
 Purpose
-Global Motion System
+Premium Motion Engine
 
 Responsibility
 • Screen Transitions
-• Hero Entrance
+• Hero Animation
+• Logo Animation
+• Button Animation
 • Text Reveal
-• Card Animation
-• Button Motion
-• Floating Elements
+• Divider Animation
 • Ambient Glow
-• Loading Animation
+• Floating Effects
+• Accessibility
 
 ======================================================================*/
 
@@ -25,26 +26,32 @@ Animation Variables
 
 :root{
 
-    --motion-fast:.25s;
+    --ease-premium:cubic-bezier(.22,.61,.36,1);
 
-    --motion-normal:.45s;
+    --speed-fast:.25s;
 
-    --motion-slow:.80s;
+    --speed-normal:.45s;
 
-    --motion-extra:1.20s;
+    --speed-slow:.8s;
+
+    --speed-extra:1.4s;
 
 }
 
 
 /*==================================================
-Fade In
+Screen Fade
 ==================================================*/
 
-@keyframes fadeIn{
+@keyframes screenFade{
 
     from{
 
         opacity:0;
+
+        transform:
+
+            translateY(24px);
 
     }
 
@@ -52,16 +59,20 @@ Fade In
 
         opacity:1;
 
+        transform:
+
+            translateY(0);
+
     }
 
 }
 
 
 /*==================================================
-Fade Up
+Hero Reveal
 ==================================================*/
 
-@keyframes fadeUp{
+@keyframes heroReveal{
 
     from{
 
@@ -87,132 +98,16 @@ Fade Up
 
 
 /*==================================================
-Fade Down
+Logo Float
 ==================================================*/
 
-@keyframes fadeDown{
-
-    from{
-
-        opacity:0;
-
-        transform:
-
-            translateY(-40px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-
-            translateY(0);
-
-    }
-
-}
-
-
-/*==================================================
-Fade Left
-==================================================*/
-
-@keyframes fadeLeft{
-
-    from{
-
-        opacity:0;
-
-        transform:
-
-            translateX(-50px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-
-            translateX(0);
-
-    }
-
-}
-
-
-/*==================================================
-Fade Right
-==================================================*/
-
-@keyframes fadeRight{
-
-    from{
-
-        opacity:0;
-
-        transform:
-
-            translateX(50px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-
-            translateX(0);
-
-    }
-
-}
-
-
-/*==================================================
-Scale In
-==================================================*/
-
-@keyframes scaleIn{
-
-    from{
-
-        opacity:0;
-
-        transform:
-
-            scale(.92);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-
-            scale(1);
-
-    }
-
-}
-
-
-/*==================================================
-Hero Float
-==================================================*/
-
-@keyframes heroFloat{
+@keyframes logoFloat{
 
     0%{
 
         transform:
 
-            translateY(0);
+            translateY(0px);
 
     }
 
@@ -228,7 +123,7 @@ Hero Float
 
         transform:
 
-            translateY(0);
+            translateY(0px);
 
     }
 
@@ -236,32 +131,32 @@ Hero Float
 
 
 /*==================================================
-Glow Pulse
+Gold Glow
 ==================================================*/
 
-@keyframes glowPulse{
+@keyframes goldGlow{
 
     0%{
 
-        box-shadow:
+        filter:
 
-            0 0 12px rgba(216,179,106,.18);
+            drop-shadow(0 0 6px rgba(216,179,106,.15));
 
     }
 
     50%{
 
-        box-shadow:
+        filter:
 
-            0 0 38px rgba(216,179,106,.35);
+            drop-shadow(0 0 20px rgba(216,179,106,.40));
 
     }
 
     100%{
 
-        box-shadow:
+        filter:
 
-            0 0 12px rgba(216,179,106,.18);
+            drop-shadow(0 0 6px rgba(216,179,106,.15));
 
     }
 
@@ -269,32 +164,32 @@ Glow Pulse
 
 
 /*==================================================
-Ambient Pulse
+Button Pulse
 ==================================================*/
 
-@keyframes ambientPulse{
+@keyframes buttonPulse{
 
     0%{
 
-        opacity:.35;
+        box-shadow:
 
-        transform:scale(.95);
+            0 0 0 rgba(22,165,106,.18);
 
     }
 
     50%{
 
-        opacity:.75;
+        box-shadow:
 
-        transform:scale(1.08);
+            0 0 28px rgba(22,165,106,.28);
 
     }
 
     100%{
 
-        opacity:.35;
+        box-shadow:
 
-        transform:scale(.95);
+            0 0 0 rgba(22,165,106,.18);
 
     }
 
@@ -311,7 +206,7 @@ Shimmer
 
         transform:
 
-            translateX(-120%);
+            translateX(-150%);
 
     }
 
@@ -319,7 +214,7 @@ Shimmer
 
         transform:
 
-            translateX(120%);
+            translateX(220%);
 
     }
 
@@ -327,53 +222,132 @@ Shimmer
 
 
 /*==================================================
-Screen Animation
+Divider Glow
+==================================================*/
+
+@keyframes dividerGlow{
+
+    0%{
+
+        opacity:.4;
+
+    }
+
+    50%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:.4;
+
+    }
+
+}
+
+
+/*==================================================
+Background Pulse
+==================================================*/
+
+@keyframes backgroundPulse{
+
+    0%{
+
+        transform:scale(1);
+
+        opacity:.25;
+
+    }
+
+    50%{
+
+        transform:scale(1.08);
+
+        opacity:.5;
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+        opacity:.25;
+
+    }
+
+}
+
+
+/*==================================================
+Text Fade
+==================================================*/
+
+@keyframes textFade{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateY(18px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+
+/*==================================================
+Application
 ==================================================*/
 
 .screen{
 
     animation:
 
-        fadeIn var(--motion-normal) ease;
+        screenFade .7s var(--ease-premium);
 
 }
 
-
-/*==================================================
-Hero Animation
-==================================================*/
 
 .hero{
 
     animation:
 
-        fadeUp var(--motion-slow) ease;
+        heroReveal 1s var(--ease-premium);
 
 }
 
 
-/*==================================================
-Logo Animation
-==================================================*/
-
-.logo{
+.brand-logo{
 
     animation:
 
-        heroFloat 6s ease-in-out infinite;
+        logoFloat 5s ease-in-out infinite,
+
+        goldGlow 5s ease-in-out infinite;
 
 }
 
-
-/*==================================================
-Typography Animation
-==================================================*/
 
 .tamil{
 
     animation:
 
-        fadeUp .9s ease;
+        textFade .8s ease forwards;
 
 }
 
@@ -382,116 +356,75 @@ Typography Animation
 
     animation:
 
-        fadeUp 1.15s ease;
+        textFade 1.15s ease forwards;
 
 }
 
 
-.screen-caption{
+.gold-divider{
 
     animation:
 
-        fadeDown .8s ease;
+        dividerGlow 3.5s infinite;
+
+}
+
+
+.btn-primary{
+
+    animation:
+
+        buttonPulse 4s infinite;
 
 }
 
 
 /*==================================================
-Card Animation
+Hover Motion
 ==================================================*/
 
-.card{
+.card,
 
-    animation:
+.btn,
 
-        scaleIn .60s ease;
+.choice,
 
-}
+.booking-card,
 
+.booking-date,
 
-/*==================================================
-Message Animation
-==================================================*/
-
-.message{
-
-    animation:
-
-        fadeUp .70s ease;
-
-}
-
-
-/*==================================================
-Choice Animation
-==================================================*/
-
-.choice{
-
-    animation:
-
-        fadeUp .45s ease;
-
-}
-
-
-/*==================================================
-Progress Animation
-==================================================*/
-
-.progress-fill{
+.booking-slot{
 
     transition:
 
-        width .8s ease;
+        transform .35s var(--ease-premium),
+
+        box-shadow .35s var(--ease-premium),
+
+        border-color .35s var(--ease-premium),
+
+        background .35s var(--ease-premium);
 
 }
 
-
-/*==================================================
-Button Animation
-==================================================*/
-
-.btn{
-
-    animation:
-
-        fadeUp 1.30s ease;
-
-}
-
-
-/*==================================================
-Button Hover
-==================================================*/
-
-.btn:hover{
-
-    transform:
-
-        translateY(-4px)
-
-        scale(1.02);
-
-}
-
-
-/*==================================================
-Card Hover
-==================================================*/
 
 .card:hover{
 
     transform:
 
-        translateY(-6px);
+        translateY(-8px);
 
 }
 
 
-/*==================================================
-Choice Hover
-==================================================*/
+.btn:hover{
+
+    transform:
+
+        translateY(-5px);
+
+}
+
 
 .choice:hover{
 
@@ -502,23 +435,61 @@ Choice Hover
 }
 
 
+.booking-date:hover,
+
+.booking-slot:hover{
+
+    transform:
+
+        translateY(-4px);
+
+}
+
+
 /*==================================================
-Interactive Elements
+Shimmer Utility
 ==================================================*/
 
-button,
+.shimmer{
 
-.choice,
+    position:relative;
 
-.card,
+    overflow:hidden;
 
-.booking-date,
+}
 
-.booking-slot{
 
-    transition:
+.shimmer::after{
 
-        all .30s ease;
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:40%;
+
+    height:100%;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            rgba(255,255,255,.18),
+
+            transparent
+
+        );
+
+    animation:
+
+        shimmer 3.5s infinite;
 
 }
 
@@ -531,20 +502,20 @@ Glow Utility
 
     animation:
 
-        glowPulse 3.5s infinite;
+        goldGlow 4s infinite;
 
 }
 
 
 /*==================================================
-Floating Utility
+Float Utility
 ==================================================*/
 
 .float{
 
     animation:
 
-        heroFloat 5s ease-in-out infinite;
+        logoFloat 6s ease-in-out infinite;
 
 }
 
@@ -553,47 +524,29 @@ Floating Utility
 Fade Utilities
 ==================================================*/
 
+.fade-in{
+
+    animation:
+
+        screenFade .6s ease forwards;
+
+}
+
+
 .fade-up{
 
     animation:
 
-        fadeUp .6s ease;
+        heroReveal .7s ease forwards;
 
 }
 
 
-.fade-left{
+.fade-text{
 
     animation:
 
-        fadeLeft .6s ease;
-
-}
-
-
-.fade-right{
-
-    animation:
-
-        fadeRight .6s ease;
-
-}
-
-
-.fade-down{
-
-    animation:
-
-        fadeDown .6s ease;
-
-}
-
-
-.scale-in{
-
-    animation:
-
-        scaleIn .6s ease;
+        textFade .8s ease forwards;
 
 }
 
