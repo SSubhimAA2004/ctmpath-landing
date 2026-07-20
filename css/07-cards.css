@@ -7,19 +7,19 @@ Purpose
 Premium Card System
 
 Responsibility
-• Hero Cards
+• Glass Cards
+• Hero Panels
 • Message Cards
-• Insight Cards
-• Choice Cards
-• Information Cards
-• Card Hover Effects
+• Premium Dividers
+• Decorative Elements
+• Surface Effects
 • Responsive Behaviour
 
 ======================================================================*/
 
 
 /*==================================================
-Base Card
+Premium Card
 ==================================================*/
 
 .card{
@@ -28,33 +28,33 @@ Base Card
 
     width:100%;
 
-    background:rgba(16,25,40,.68);
-
-    backdrop-filter:blur(22px);
-
-    -webkit-backdrop-filter:blur(22px);
-
-    border:1px solid rgba(216,179,106,.18);
-
-    border-radius:28px;
-
     padding:48px;
 
     overflow:hidden;
 
+    border-radius:32px;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(22,27,40,.82),
+            rgba(12,16,26,.92)
+        );
+
+    border:
+
+        1px solid rgba(216,179,106,.16);
+
+    backdrop-filter:blur(24px);
+
+    -webkit-backdrop-filter:blur(24px);
+
     box-shadow:
 
-        0 20px 60px rgba(0,0,0,.45),
+        0 24px 60px rgba(0,0,0,.45),
 
-        inset 0 1px 0 rgba(255,255,255,.05);
-
-    transition:
-
-        transform .35s ease,
-
-        box-shadow .35s ease,
-
-        border-color .35s ease;
+        inset 0 1px 0 rgba(255,255,255,.04);
 
 }
 
@@ -79,23 +79,23 @@ Top Accent
 
     background:
 
-    linear-gradient(
+        linear-gradient(
 
-        90deg,
+            90deg,
 
-        transparent,
+            transparent,
 
-        rgba(216,179,106,.90),
+            rgba(216,179,106,.95),
 
-        transparent
+            transparent
 
-    );
+        );
 
 }
 
 
 /*==================================================
-Glow
+Ambient Glow
 ==================================================*/
 
 .card::after{
@@ -104,27 +104,27 @@ Glow
 
     position:absolute;
 
-    width:380px;
-
-    height:380px;
-
     right:-180px;
 
     top:-180px;
+
+    width:360px;
+
+    height:360px;
 
     border-radius:50%;
 
     background:
 
-    radial-gradient(
+        radial-gradient(
 
-        circle,
+            circle,
 
-        rgba(25,198,194,.08),
+            rgba(22,165,106,.10),
 
-        transparent 72%
+            transparent 72%
 
-    );
+        );
 
     pointer-events:none;
 
@@ -132,24 +132,20 @@ Glow
 
 
 /*==================================================
-Hover
+Card Hover
 ==================================================*/
 
 .card:hover{
 
-    transform:
-
-        translateY(-6px);
-
     border-color:
 
-        rgba(216,179,106,.38);
+        rgba(216,179,106,.30);
 
     box-shadow:
 
-        0 30px 70px rgba(0,0,0,.50),
+        0 34px 80px rgba(0,0,0,.55),
 
-        0 0 30px rgba(216,179,106,.12);
+        0 0 35px rgba(216,179,106,.10);
 
 }
 
@@ -158,9 +154,9 @@ Hover
 Hero Card
 ==================================================*/
 
-.card-hero{
+.hero-card{
 
-    max-width:960px;
+    max-width:900px;
 
     margin:auto;
 
@@ -171,7 +167,7 @@ Hero Card
 Message Card
 ==================================================*/
 
-.card-message{
+.message-card{
 
     max-width:760px;
 
@@ -181,235 +177,261 @@ Message Card
 
 
 /*==================================================
-Insight Card
+Premium Divider
 ==================================================*/
 
-.card-insight{
+.gold-divider{
+
+    position:relative;
+
+    width:260px;
+
+    height:1px;
+
+    margin:12px auto;
 
     background:
 
-    linear-gradient(
+        linear-gradient(
 
-        180deg,
+            90deg,
 
-        rgba(18,31,50,.92),
+            transparent,
 
-        rgba(12,22,37,.94)
+            rgba(216,179,106,.95),
 
-    );
+            transparent
 
-}
-
-
-/*==================================================
-Choice Card
-==================================================*/
-
-.card-choice{
-
-    cursor:pointer;
-
-}
-
-
-.card-choice:hover{
-
-    transform:
-
-        translateY(-8px)
-
-        scale(1.01);
+        );
 
 }
 
 
 /*==================================================
-Selected
+Divider Jewel
 ==================================================*/
 
-.card-selected{
+.gold-divider::before{
 
-    border:2px solid #D8B36A;
+    content:"";
 
-    box-shadow:
+    position:absolute;
 
-        0 0 30px rgba(216,179,106,.22);
+    left:50%;
 
-}
+    top:50%;
 
+    width:12px;
 
-/*==================================================
-Card Header
-==================================================*/
-
-.card-header{
-
-    margin-bottom:32px;
-
-}
-
-
-/*==================================================
-Card Body
-==================================================*/
-
-.card-body{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:24px;
-
-}
-
-
-/*==================================================
-Card Footer
-==================================================*/
-
-.card-footer{
-
-    margin-top:40px;
-
-}
-
-
-/*==================================================
-Grid
-==================================================*/
-
-.card-grid{
-
-    display:grid;
-
-    grid-template-columns:
-
-        repeat(auto-fit,minmax(280px,1fr));
-
-    gap:24px;
-
-}
-
-
-/*==================================================
-Information Card
-==================================================*/
-
-.info-card{
-
-    padding:32px;
-
-    border-radius:22px;
-
-    background:
-
-    rgba(255,255,255,.04);
-
-    border:
-
-    1px solid rgba(255,255,255,.05);
-
-}
-
-
-/*==================================================
-Icon Area
-==================================================*/
-
-.card-icon{
-
-    width:72px;
-
-    height:72px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    margin:0 auto 24px;
+    height:12px;
 
     border-radius:50%;
 
+    transform:
+
+        translate(-50%,-50%);
+
     background:
 
-    linear-gradient(
+        radial-gradient(
 
-        180deg,
+            circle,
 
-        rgba(216,179,106,.18),
+            #FFF9E8 0%,
 
-        rgba(216,179,106,.05)
+            #F3D58A 45%,
 
-    );
+            #D8B36A 100%
+
+        );
+
+    box-shadow:
+
+        0 0 12px rgba(216,179,106,.55);
 
 }
 
 
 /*==================================================
-Divider
+Small Divider
 ==================================================*/
 
-.card-divider{
+.gold-divider.small{
+
+    width:180px;
+
+}
+
+
+/*==================================================
+Large Divider
+==================================================*/
+
+.gold-divider.large{
+
+    width:340px;
+
+}
+
+
+/*==================================================
+Section Divider
+==================================================*/
+
+.section-divider{
 
     width:100%;
 
     height:1px;
 
-    margin:28px 0;
+    margin:40px 0;
 
     background:
 
-    linear-gradient(
+        linear-gradient(
 
-        90deg,
+            90deg,
 
-        transparent,
+            transparent,
 
-        rgba(216,179,106,.35),
+            rgba(255,255,255,.10),
 
-        transparent
+            transparent
 
-    );
+        );
 
 }
 
 
 /*==================================================
-Glass Modifier
+Glass Panel
 ==================================================*/
 
-.card-glass{
+.glass-panel{
+
+    position:relative;
+
+    padding:36px;
+
+    border-radius:28px;
 
     background:
 
-    rgba(255,255,255,.05);
+        rgba(255,255,255,.04);
 
-    backdrop-filter:blur(28px);
+    border:
 
-}
+        1px solid rgba(255,255,255,.08);
 
-
-/*==================================================
-Compact
-==================================================*/
-
-.card-compact{
-
-    padding:28px;
+    backdrop-filter:blur(18px);
 
 }
 
 
 /*==================================================
-Large
+Hero Panel
 ==================================================*/
 
-.card-large{
+.hero-panel{
 
-    padding:64px;
+    max-width:820px;
+
+    margin:auto;
+
+}
+
+
+/*==================================================
+Quote Panel
+==================================================*/
+
+.quote-panel{
+
+    border-left:
+
+        4px solid rgba(216,179,106,.70);
+
+}
+
+
+/*==================================================
+Highlight Panel
+==================================================*/
+
+.highlight-panel{
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            rgba(22,165,106,.10),
+
+            rgba(22,165,106,.03)
+
+        );
+
+}
+
+
+/*==================================================
+Gold Border
+==================================================*/
+
+.border-gold{
+
+    border:
+
+        1px solid rgba(216,179,106,.28);
+
+}
+
+
+/*==================================================
+Green Border
+==================================================*/
+
+.border-green{
+
+    border:
+
+        1px solid rgba(22,165,106,.28);
+
+}
+
+
+/*==================================================
+Premium Surface
+==================================================*/
+
+.surface{
+
+    background:
+
+        rgba(255,255,255,.03);
+
+}
+
+
+/*==================================================
+Soft Glow
+==================================================*/
+
+.glow-gold{
+
+    box-shadow:
+
+        0 0 28px rgba(216,179,106,.18);
+
+}
+
+
+.glow-green{
+
+    box-shadow:
+
+        0 0 28px rgba(22,165,106,.18);
 
 }
 
@@ -418,36 +440,54 @@ Large
 Responsive
 ==================================================*/
 
-@media (max-width:992px){
-
-    .card{
-
-        padding:36px;
-
-    }
-
-}
-
-
 @media (max-width:768px){
 
     .card{
 
         padding:28px;
 
-        border-radius:22px;
+        border-radius:24px;
 
     }
 
-    .card-large{
+    .glass-panel{
 
-        padding:32px;
+        padding:24px;
 
     }
 
-    .card-grid{
+    .gold-divider{
 
-        grid-template-columns:1fr;
+        width:180px;
+
+    }
+
+    .gold-divider.large{
+
+        width:240px;
+
+    }
+
+}
+
+
+@media (max-width:480px){
+
+    .card{
+
+        padding:22px;
+
+    }
+
+    .gold-divider{
+
+        width:140px;
+
+    }
+
+    .gold-divider.large{
+
+        width:180px;
 
     }
 
