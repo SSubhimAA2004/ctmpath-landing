@@ -1,9 +1,19 @@
 
 /**
  * ==========================================================
- * CTM PATH™ Guided Journey v3.3
+ * CTM PATH™ Guided Journey v4.0
  * File: js/events.js
- * Event Engine
+ *
+ * Responsibility:
+ * UI Event Engine
+ *
+ * Handles:
+ * 01. Continue Button
+ * 02. Input Validation
+ * 03. Enter Key Submission
+ *
+ * Engineering Status:
+ * Production Build
  * ==========================================================
  */
 
@@ -12,7 +22,7 @@
 "use strict";
 
 /* ==========================================================
-   CONTINUE BUTTON
+   01. CONTINUE BUTTON
 ========================================================== */
 
 document.addEventListener(
@@ -45,11 +55,21 @@ document.addEventListener(
 
         try {
 
-            /* Move to next moment */
+            const input = document.getElementById("ctm-input");
+
+            if (input) {
+
+                CTMState.set(
+
+                    "visitor.name",
+
+                    input.value.trim()
+
+                );
+
+            }
 
             await CTMConversation.next();
-
-            /* Render the new moment */
 
             await CTMConversation.render();
 
@@ -71,5 +91,86 @@ document.addEventListener(
 
 );
 
-})();
+/* ==========================================================
+   02. INPUT VALIDATION
+========================================================== */
 
+document.addEventListener(
+
+    "input",
+
+    (event) => {
+
+        const input = event.target;
+
+        if (!input.matches("#ctm-input")) {
+
+            return;
+
+        }
+
+        const button = document.querySelector(
+
+            "[data-action='continue']"
+
+        );
+
+        if (!button) {
+
+            return;
+
+        }
+
+        button.disabled =
+
+            input.value.trim().length === 0;
+
+    }
+
+);
+
+/* ==========================================================
+   03. ENTER KEY SUPPORT
+========================================================== */
+
+document.addEventListener(
+
+    "keydown",
+
+    async (event) => {
+
+        if (event.key !== "Enter") {
+
+            return;
+
+        }
+
+        const input = event.target;
+
+        if (!input.matches("#ctm-input")) {
+
+            return;
+
+        }
+
+        event.preventDefault();
+
+        const button = document.querySelector(
+
+            "[data-action='continue']"
+
+        );
+
+        if (!button || button.disabled) {
+
+            return;
+
+        }
+
+        button.click();
+
+    }
+
+);
+
+})();
