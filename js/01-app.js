@@ -8,8 +8,7 @@ Purpose
 Application Bootstrap
 
 Responsibility
-• Start the application
-• Initialize state
+• Initialize the application
 • Bind navigation
 • Load the first screen
 
@@ -18,59 +17,62 @@ Responsibility
 
 'use strict';
 
-const CTM = window.CTM || {};
+(() => {
 
-/*==================================================
-Initialize Application
-==================================================*/
+    const CTM = window.CTM;
 
-CTM.initialize = async function () {
-
-    try {
-
-        CTM.log('--------------------------------');
-        CTM.log('CTM PATH™ Guided Journey v6.0');
-        CTM.log('Initializing...');
-        CTM.log('--------------------------------');
-
-        CTM.markInitialized();
-
-        CTM.bindNavigation();
-
-        await CTM.loadScreen('screen01');
-
-        CTM.log('Application Ready');
-
+    if (!CTM) {
+        console.error('CTM core has not been initialized.');
+        return;
     }
 
-    catch (error) {
+    /*==================================================
+    Initialize
+    ==================================================*/
 
-        console.error(error);
+    CTM.initialize = async function () {
 
-    }
+        try {
 
-};
+            CTM.log('========================================');
+            CTM.log('CTM PATH™ Guided Journey v6.0');
+            CTM.log('Application Starting...');
+            CTM.log('========================================');
 
+            CTM.markInitialized();
 
-/*==================================================
-Application Start
-==================================================*/
+            CTM.bindNavigation();
 
-document.addEventListener(
+            await CTM.loadScreen('screen01');
 
-    'DOMContentLoaded',
+            CTM.log('Application Ready.');
 
-    function () {
+        }
 
-        CTM.initialize();
+        catch (error) {
 
-    }
+            console.error('Application Initialization Failed');
 
-);
+            console.error(error);
 
+        }
 
-/*==================================================
-Expose
-==================================================*/
+    };
 
-window.CTM = CTM;
+    /*==================================================
+    DOM Ready
+    ==================================================*/
+
+    document.addEventListener(
+
+        'DOMContentLoaded',
+
+        async function () {
+
+            await CTM.initialize();
+
+        }
+
+    );
+
+})();
