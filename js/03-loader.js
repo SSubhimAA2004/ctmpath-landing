@@ -10,91 +10,127 @@ Screen Loader
 Responsibility
 • Load HTML screens
 • Render into screen-root
-• Update application state
+• Update current screen
+• Update progress
 
 ======================================================================
 */
 
 'use strict';
 
-const CTM = window.CTM || {};
+(() => {
 
-/*==================================================
-Load Screen
-==================================================*/
+    const CTM = window.CTM;
 
-CTM.loadScreen = async function (screenId) {
+    if (!CTM) {
+        console.error('CTM core has not been initialized.');
+        return;
+    }
 
-    try {
+    /*==================================================
+    Screen Root
+    ==================================================*/
 
-        const container = CTM.byId('screen-root');
+    CTM.screenRoot = function () {
 
-        if (!container) {
-            throw new Error('screen-root not found.');
-        }
+        return CTM.byId('screen-root');
 
-        const response = await fetch(`screens/${screenId}.html`);
+    };
 
-        if (!response.ok) {
-            throw new Error(`Unable to load ${screenId}.html`);
-        }
+    /*==================================================
+    Load Screen
+    ==================================================*/
 
-        const html = await response.text();
+    CTM.loadScreen = async function (screenId) {
 
-        container.innerHTML = html;
+        try {
 
-        CTM.setCurrentScreen(screenId);
+            const root = CTM.screenRoot();
 
-        CTM.setProgress(
-            parseInt(
+            if (!root) {
+                throw new Error('screen-root not found.');
+            }
+
+            CTM.log('Loading:', screenId);
+
+            const response = await fetch(`screens/${screenId}.html`);
+
+            if (!response.ok) {
+
+                throw new Error(
+                    `Unable to load ${screenId}.html`
+                );
+
+            }
+
+            const html = await response.text();
+
+            root.innerHTML = html;
+
+            CTM.setCurrentScreen(screenId);
+
+            const number = parseInt(
+
                 screenId.replace('screen', ''),
+
                 10
-            )
-        );
 
-        CTM.log('Loaded:', screenId);
+            );
 
-    } catch (error) {
+            if (!isNaN(number)) {
 
-        console.error(error);
+                CTM.setProgress(number);
 
-        const container = CTM.byId('screen-root');
+            }
 
-        if (container) {
+            CTM.log('Loaded:', screenId);
 
-            container.innerHTML = `
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            const root = CTM.screenRoot();
+
+            if (!root) return;
+
+            root.innerHTML = `
+
                 <section class="screen">
+
                     <div class="container">
+
                         <div class="card">
-                            <h3>Unable to load screen.</h3>
+
+                            <h2>Screen Loading Error</h2>
+
                             <p>${error.message}</p>
+
                         </div>
+
                     </div>
+
                 </section>
+
             `;
 
         }
 
-    }
+    };
 
-};
+    /*==================================================
+    Reload Current Screen
+    ==================================================*/
 
+    CTM.reloadCurrentScreen = function () {
 
-/*==================================================
-Reload Current Screen
-==================================================*/
+        return CTM.loadScreen(
 
-CTM.reloadScreen = function () {
+            CTM.getCurrentScreen()
 
-    return CTM.loadScreen(
-        CTM.getCurrentScreen()
-    );
+        );
 
-};
+    };
 
-
-/*==================================================
-Expose
-==================================================*/
-
-window.CTM = CTM;
+})();
