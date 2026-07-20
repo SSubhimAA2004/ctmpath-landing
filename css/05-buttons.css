@@ -1,1 +1,450 @@
 
+/*======================================================================
+
+CTM PATH™ Guided Journey v6.0
+
+Purpose
+Premium Button System
+
+Responsibility
+• Primary CTA Buttons
+• Secondary Buttons
+• Ghost Buttons
+• Button States
+• Icon Support
+• Responsive Behaviour
+
+======================================================================*/
+
+
+/*==================================================
+Base Button
+==================================================*/
+
+.btn{
+
+    position:relative;
+
+    display:inline-flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:6px;
+
+    min-width:340px;
+
+    min-height:82px;
+
+    padding:18px 42px;
+
+    border:none;
+
+    border-radius:999px;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    overflow:hidden;
+
+    text-align:center;
+
+    font-family:var(--font-family);
+
+    transition:
+        transform .30s ease,
+        box-shadow .30s ease,
+        background .30s ease,
+        color .30s ease;
+
+}
+
+
+/*==================================================
+Primary Button
+==================================================*/
+
+.btn-primary{
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #1BAA66 0%,
+        #148A53 55%,
+        #106B42 100%
+    );
+
+    border:2px solid rgba(216,179,106,.70);
+
+    color:#FFFFFF;
+
+    box-shadow:
+
+        0 12px 40px rgba(0,0,0,.35),
+
+        0 0 28px rgba(27,170,102,.28);
+
+}
+
+
+/*==================================================
+Primary Ambient Glow
+==================================================*/
+
+.btn-primary::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    width:260px;
+
+    height:260px;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+        circle,
+
+        rgba(38,194,119,.45),
+
+        rgba(38,194,119,0)
+
+    );
+
+    opacity:.55;
+
+    z-index:0;
+
+    animation:buttonPulse 4s ease-in-out infinite;
+
+}
+
+
+/*==================================================
+Button Content
+==================================================*/
+
+.btn>*{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+/*==================================================
+Tamil Label
+==================================================*/
+
+.btn div{
+
+    font-size:1.45rem;
+
+    font-weight:700;
+
+    line-height:1.2;
+
+    letter-spacing:.3px;
+
+}
+
+
+/*==================================================
+English Label
+==================================================*/
+
+.btn small{
+
+    font-size:.90rem;
+
+    font-weight:500;
+
+    letter-spacing:.6px;
+
+    color:rgba(255,255,255,.92);
+
+}
+
+
+/*==================================================
+Hover
+==================================================*/
+
+.btn:hover{
+
+    transform:
+
+        translateY(-4px)
+
+        scale(1.015);
+
+}
+
+
+/*==================================================
+Primary Hover
+==================================================*/
+
+.btn-primary:hover{
+
+    box-shadow:
+
+        0 18px 55px rgba(0,0,0,.45),
+
+        0 0 40px rgba(27,170,102,.42);
+
+}
+
+
+/*==================================================
+Active
+==================================================*/
+
+.btn:active{
+
+    transform:
+
+        translateY(1px)
+
+        scale(.99);
+
+}
+
+
+/*==================================================
+Focus
+==================================================*/
+
+.btn:focus-visible{
+
+    outline:none;
+
+    box-shadow:
+
+        0 0 0 3px rgba(216,179,106,.35),
+
+        0 0 0 6px rgba(27,170,102,.22);
+
+}
+
+
+/*==================================================
+Secondary Button
+==================================================*/
+
+.btn-secondary{
+
+    background:transparent;
+
+    color:var(--text-primary);
+
+    border:2px solid rgba(216,179,106,.45);
+
+}
+
+
+.btn-secondary:hover{
+
+    background:rgba(255,255,255,.05);
+
+}
+
+
+/*==================================================
+Ghost Button
+==================================================*/
+
+.btn-ghost{
+
+    background:none;
+
+    border:none;
+
+    color:var(--text-secondary);
+
+}
+
+
+.btn-ghost:hover{
+
+    color:var(--text-primary);
+
+}
+
+
+/*==================================================
+Disabled
+==================================================*/
+
+.btn:disabled{
+
+    opacity:.45;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+    box-shadow:none;
+
+}
+
+
+/*==================================================
+Full Width
+==================================================*/
+
+.btn-block{
+
+    width:100%;
+
+}
+
+
+/*==================================================
+Small Button
+==================================================*/
+
+.btn-sm{
+
+    min-width:220px;
+
+    min-height:56px;
+
+    padding:14px 28px;
+
+}
+
+
+.btn-sm div{
+
+    font-size:1rem;
+
+}
+
+
+.btn-sm small{
+
+    font-size:.75rem;
+
+}
+
+
+/*==================================================
+Large Button
+==================================================*/
+
+.btn-lg{
+
+    min-width:420px;
+
+    min-height:92px;
+
+}
+
+
+.btn-lg div{
+
+    font-size:1.75rem;
+
+}
+
+
+.btn-lg small{
+
+    font-size:1rem;
+
+}
+
+
+/*==================================================
+Button Pulse
+==================================================*/
+
+@keyframes buttonPulse{
+
+    0%{
+
+        opacity:.30;
+
+        transform:
+
+            translate(-50%,-50%)
+
+            scale(.92);
+
+    }
+
+    50%{
+
+        opacity:.70;
+
+        transform:
+
+            translate(-50%,-50%)
+
+            scale(1.08);
+
+    }
+
+    100%{
+
+        opacity:.30;
+
+        transform:
+
+            translate(-50%,-50%)
+
+            scale(.92);
+
+    }
+
+}
+
+
+/*==================================================
+Responsive
+==================================================*/
+
+@media (max-width:768px){
+
+    .btn{
+
+        width:100%;
+
+        min-width:100%;
+
+        min-height:74px;
+
+        padding:18px 24px;
+
+    }
+
+    .btn div{
+
+        font-size:1.2rem;
+
+    }
+
+    .btn small{
+
+        font-size:.82rem;
+
+    }
+
+}
