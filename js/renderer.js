@@ -366,6 +366,89 @@ function error(message) {
 }
 
 /* ==========================================================
+   VIEW MODEL BUILDER
+========================================================== */
+
+function buildViewModel(moment) {
+
+    const language =
+        CTMState.get("visitor.language") || "ta";
+
+    const payload =
+        moment.payload || {};
+
+    function text(value) {
+
+        if (value == null) {
+            return "";
+        }
+
+        if (typeof value === "string") {
+            return value;
+        }
+
+        if (Array.isArray(value)) {
+            return value.join("<br>");
+        }
+
+        if (typeof value === "object") {
+
+            if (language in value) {
+                return text(value[language]);
+            }
+
+            return "";
+        }
+
+        return String(value);
+
+    }
+
+    const messageParts = [];
+
+    [
+        payload.message,
+        payload.intro,
+        payload.question,
+        payload.insight,
+        payload.reflection,
+        payload.summary,
+        payload.description,
+        payload.note
+    ].forEach(part => {
+
+        const value = text(part);
+
+        if (value) {
+            messageParts.push(value);
+        }
+
+    });
+
+    return {
+
+        step:
+            `Moment ${moment.id}`,
+
+        title:
+            text(payload.title),
+
+        subtitle:
+            text(payload.subtitle),
+
+        message:
+            messageParts.join("<br><br>"),
+
+        button:
+            text(payload.button) ||
+            text(payload.primaryButton) ||
+            "Continue"
+
+    };
+
+}
+   
+/* ==========================================================
    RENDER MOMENT
 ========================================================== */
 
