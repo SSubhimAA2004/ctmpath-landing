@@ -1,33 +1,51 @@
 
 /*======================================================================
+
 CTM PATH™ Guided Journey v6.0
 
 Purpose
 Typography System
 
 Responsibility
-• Global font styling
-• Tamil-first bilingual presentation
-• Heading hierarchy
-• Body text
-• Helper text
-• Alignment utilities
+• Global Typography
+• Hero Typography
+• Tamil Typography
+• English Typography
+• Headings
+• Paragraphs
+• Labels
+• Highlights
+• Responsive Typography
 
 ======================================================================*/
 
 
 /*==================================================
-Document
+Base Typography
 ==================================================*/
 
-body{
-    font-family:var(--font-family);
-    font-size:var(--font-size-md);
-    font-weight:var(--font-regular);
-    line-height:var(--line-normal);
+html{
 
-    background:var(--bg-page);
+    font-size:16px;
+
+}
+
+body{
+
+    font-family:var(--font-primary);
+
     color:var(--text-primary);
+
+    font-weight:400;
+
+    line-height:1.6;
+
+    -webkit-font-smoothing:antialiased;
+
+    -moz-osx-font-smoothing:grayscale;
+
+    text-rendering:optimizeLegibility;
+
 }
 
 
@@ -35,39 +53,57 @@ body{
 Headings
 ==================================================*/
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+
+    margin:0;
+
+    font-weight:700;
+
+    line-height:1.25;
+
+    color:var(--text-primary);
+
+}
+
 h1{
-    font-size:var(--font-size-4xl);
-    font-weight:var(--font-bold);
-    line-height:1.1;
-    letter-spacing:-1px;
+
+    font-size:3.8rem;
+
 }
 
 h2{
-    font-size:var(--font-size-3xl);
-    font-weight:var(--font-bold);
-    line-height:1.15;
+
+    font-size:3rem;
+
 }
 
 h3{
-    font-size:var(--font-size-2xl);
-    font-weight:var(--font-semibold);
-    line-height:1.2;
+
+    font-size:2.2rem;
+
 }
 
 h4{
-    font-size:var(--font-size-xl);
-    font-weight:var(--font-semibold);
-    line-height:1.3;
+
+    font-size:1.8rem;
+
 }
 
 h5{
-    font-size:var(--font-size-lg);
-    font-weight:var(--font-medium);
+
+    font-size:1.4rem;
+
 }
 
 h6{
-    font-size:var(--font-size-md);
-    font-weight:var(--font-medium);
+
+    font-size:1.15rem;
+
 }
 
 
@@ -76,47 +112,13 @@ Paragraph
 ==================================================*/
 
 p{
-    font-size:var(--font-size-md);
-    line-height:1.7;
-    color:var(--text-secondary);
-}
 
-
-/*==================================================
-Tamil
-==================================================*/
-
-.tamil{
-
-    display:block;
-
-    font-size:2rem;
-
-    font-weight:600;
-
-    line-height:1.55;
-
-    color:var(--text-primary);
-
-    margin-bottom:16px;
-}
-
-
-/*==================================================
-English
-==================================================*/
-
-.english{
-
-    display:block;
-
-    font-size:1rem;
-
-    line-height:1.8;
+    margin:0;
 
     color:var(--text-secondary);
 
-    margin-top:10px;
+    line-height:1.9;
+
 }
 
 
@@ -126,11 +128,16 @@ Hero Title
 
 .hero-title{
 
-    max-width:900px;
+    font-size:4rem;
 
-    margin:0 auto;
+    font-weight:700;
 
-    text-align:center;
+    line-height:1.30;
+
+    letter-spacing:-0.02em;
+
+    color:var(--text-primary);
+
 }
 
 
@@ -140,33 +147,110 @@ Hero Subtitle
 
 .hero-subtitle{
 
-    max-width:760px;
+    font-size:1.30rem;
 
-    margin:24px auto 0;
+    color:var(--text-secondary);
 
-    text-align:center;
+    line-height:1.9;
 
-    color:var(--text-muted);
-
-    font-size:1.2rem;
-
-    line-height:1.8;
 }
 
 
 /*==================================================
-Screen Title
+Tamil Hero
 ==================================================*/
 
-.screen-title{
+.tamil{
 
-    font-size:2.8rem;
+    max-width:900px;
 
-    font-weight:700;
+    margin:0 auto;
 
     text-align:center;
 
-    margin-bottom:18px;
+    font-size:4.2rem;
+
+    font-weight:700;
+
+    line-height:1.45;
+
+    letter-spacing:-0.02em;
+
+    color:var(--text-primary);
+
+}
+
+
+/*==================================================
+English Hero
+==================================================*/
+
+.english{
+
+    max-width:760px;
+
+    margin:0 auto;
+
+    text-align:center;
+
+    font-size:1.35rem;
+
+    font-weight:400;
+
+    line-height:2;
+
+    color:var(--text-secondary);
+
+}
+
+
+/*==================================================
+Hero Name
+==================================================*/
+
+.hero-name{
+
+    display:inline-block;
+
+    color:var(--color-white);
+
+    font-weight:700;
+
+}
+
+
+/*==================================================
+Gold Highlight
+==================================================*/
+
+.text-gold{
+
+    color:var(--text-gold);
+
+}
+
+
+/*==================================================
+Green Highlight
+==================================================*/
+
+.text-green{
+
+    color:var(--text-green);
+
+}
+
+
+/*==================================================
+Inline Highlight
+==================================================*/
+
+.highlight{
+
+    color:var(--text-gold);
+
+    font-weight:600;
+
 }
 
 
@@ -176,73 +260,65 @@ Screen Caption
 
 .screen-caption{
 
+    display:inline-block;
+
+    font-size:.90rem;
+
+    font-weight:700;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    color:var(--text-gold);
+
+}
+
+
+/*==================================================
+Section Title
+==================================================*/
+
+.section-title{
+
+    font-size:2.6rem;
+
+    font-weight:700;
+
+    color:var(--text-primary);
+
     text-align:center;
+
+}
+
+
+/*==================================================
+Section Subtitle
+==================================================*/
+
+.section-subtitle{
+
+    font-size:1.20rem;
+
+    color:var(--text-secondary);
+
+    text-align:center;
+
+    line-height:1.9;
+
+}
+
+
+/*==================================================
+Small Text
+==================================================*/
+
+small{
+
+    font-size:.85rem;
 
     color:var(--text-muted);
 
-    margin-bottom:42px;
-
-    font-size:1rem;
-
-    letter-spacing:.5px;
-
-    text-transform:uppercase;
-}
-
-
-/*==================================================
-Card Title
-==================================================*/
-
-.card-title{
-
-    font-size:2rem;
-
-    font-weight:600;
-
-    margin-bottom:18px;
-}
-
-
-/*==================================================
-Card Text
-==================================================*/
-
-.card-text{
-
-    font-size:1.1rem;
-
-    color:var(--text-secondary);
-
-    line-height:1.8;
-}
-
-
-/*==================================================
-Question
-==================================================*/
-
-.question{
-
-    font-size:2rem;
-
-    font-weight:600;
-
-    line-height:1.5;
-
-    text-align:center;
-}
-
-
-/*==================================================
-Answer
-==================================================*/
-
-.answer{
-
-    font-size:1.1rem;
-
-    color:var(--text-secondary);
 }
 
 
@@ -254,23 +330,14 @@ label{
 
     display:block;
 
-    margin-bottom:10px;
+    margin-bottom:8px;
 
     font-size:.95rem;
 
+    font-weight:600;
+
     color:var(--text-secondary);
-}
 
-
-/*==================================================
-Input Placeholder
-==================================================*/
-
-::placeholder{
-
-    color:var(--text-disabled);
-
-    opacity:1;
 }
 
 
@@ -280,77 +347,123 @@ Links
 
 a{
 
-    transition:color var(--transition-fast);
+    color:var(--text-gold);
+
+    text-decoration:none;
+
+    transition:color var(--speed-normal);
 
 }
 
 a:hover{
 
-    color:var(--color-accent);
+    color:var(--color-accent-light);
 
 }
 
 
 /*==================================================
-Text Utilities
+Strong
 ==================================================*/
 
-.text-center{
-    text-align:center;
-}
+strong{
 
-.text-left{
-    text-align:left;
-}
-
-.text-right{
-    text-align:right;
-}
-
-.text-primary{
-    color:var(--text-primary);
-}
-
-.text-secondary{
-    color:var(--text-secondary);
-}
-
-.text-muted{
-    color:var(--text-muted);
-}
-
-.text-accent{
-    color:var(--color-accent);
-}
-
-.text-success{
-    color:var(--color-success);
-}
-
-.text-warning{
-    color:var(--color-warning);
-}
-
-.text-danger{
-    color:var(--color-danger);
-}
-
-.font-light{
-    font-weight:300;
-}
-
-.font-regular{
-    font-weight:400;
-}
-
-.font-medium{
-    font-weight:500;
-}
-
-.font-semibold{
-    font-weight:600;
-}
-
-.font-bold{
     font-weight:700;
+
+    color:var(--text-primary);
+
+}
+
+
+/*==================================================
+Selection
+==================================================*/
+
+::selection{
+
+    background:var(--color-accent);
+
+    color:#111111;
+
+}
+
+
+/*==================================================
+Responsive
+==================================================*/
+
+@media (max-width:1200px){
+
+    .tamil{
+
+        font-size:3.6rem;
+
+    }
+
+}
+
+@media (max-width:992px){
+
+    .tamil{
+
+        font-size:3rem;
+
+    }
+
+    .english{
+
+        font-size:1.20rem;
+
+    }
+
+}
+
+@media (max-width:768px){
+
+    .tamil{
+
+        font-size:2.4rem;
+
+        line-height:1.55;
+
+    }
+
+    .english{
+
+        font-size:1rem;
+
+        line-height:1.8;
+
+    }
+
+    .hero-title{
+
+        font-size:2.5rem;
+
+    }
+
+}
+
+@media (max-width:480px){
+
+    .tamil{
+
+        font-size:2rem;
+
+    }
+
+    .english{
+
+        font-size:.95rem;
+
+    }
+
+    .screen-caption{
+
+        font-size:.75rem;
+
+        letter-spacing:2px;
+
+    }
+
 }
