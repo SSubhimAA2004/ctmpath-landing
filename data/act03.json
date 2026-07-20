@@ -1,1 +1,596 @@
 
+{
+  "act": {
+    "id": 3,
+    "sequence": 3,
+    "name": {
+      "ta": "உண்மையான தடையை கண்டறிதல்",
+      "en": "Discovering the Real Barrier"
+    },
+    "theme": {
+      "ta": "விழிப்புணர்வு",
+      "en": "Awareness"
+    },
+    "startMoment": 18,
+    "endMoment": 24
+  },
+
+  "moments": [
+
+    {
+      "id": 18,
+      "sequence": 1,
+      "act": 3,
+      "component": "choice",
+      "type": "hidden_barrier",
+
+      "payload": {
+
+        "title": {
+          "ta": "இன்னும் ஒரு கேள்வி",
+          "en": "One More Question"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "question": {
+          "ta": [
+            "{{Name}}...",
+            "இந்த",
+            "இடைவெளியை",
+            "கடக்க",
+            "உங்களை",
+            "தடுக்கிறது",
+            "எது?"
+          ],
+          "en": [
+            "{{Name}}...",
+            "What do you",
+            "believe",
+            "is stopping you",
+            "from crossing",
+            "that gap?"
+          ]
+        },
+
+        "choiceSet": "hidden_barrier",
+
+        "button": {
+          "ta": "இதுதான்",
+          "en": "This One"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": true,
+        "tokens": [
+          "Name"
+        ]
+      },
+
+      "navigation": {
+        "previous": 17,
+        "next": 19
+      },
+
+      "analytics": {
+        "event": "moment_18"
+      }
+    },
+
+    {
+      "id": 19,
+      "sequence": 2,
+      "act": 3,
+      "component": "insight",
+      "type": "belief",
+
+      "payload": {
+
+        "title": {
+          "ta": "ஒரு கவனிப்பு",
+          "en": "An Observation"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "intro": {
+          "ta": [
+            "{{Name}}..."
+          ],
+          "en": [
+            "{{Name}}..."
+          ]
+        },
+
+        "insight": {
+          "ta": [
+            "நம்மை",
+            "தடுப்பது...",
+            "எப்போதும்",
+            "சூழ்நிலை",
+            "இல்லை.",
+            "",
+            "பல நேரங்களில்...",
+            "நமது",
+            "நம்பிக்கைகளே."
+          ],
+          "en": [
+            "What holds us back",
+            "isn't always",
+            "our circumstances.",
+            "",
+            "Very often...",
+            "it's our",
+            "beliefs."
+          ]
+        },
+
+        "summary": {
+          "ta": [
+            "அதை",
+            "அறிவதே",
+            "விடுதலையின்",
+            "முதல் படி."
+          ],
+          "en": [
+            "Recognizing that",
+            "is the first step",
+            "toward freedom."
+          ]
+        },
+
+        "button": {
+          "ta": "தொடரலாம்",
+          "en": "Continue"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": true,
+        "tokens": [
+          "Name"
+        ]
+      },
+
+      "navigation": {
+        "previous": 18,
+        "next": 20
+      },
+
+      "analytics": {
+        "event": "moment_19"
+      }
+    },
+
+    {
+      "id": 20,
+      "sequence": 3,
+      "act": 3,
+      "component": "reflection",
+      "type": "self_reflection",
+
+      "payload": {
+
+        "title": {
+          "ta": "உங்களிடம் நீங்களே கேளுங்கள்",
+          "en": "Ask Yourself"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "reflection": {
+          "ta": [
+            "இந்த",
+            "பதில்...",
+            "உண்மையா?",
+            "",
+            "அல்லது...",
+            "பல ஆண்டுகளாக",
+            "நீங்கள்",
+            "நம்பி வந்த",
+            "ஒரு கதைதானா?"
+          ],
+          "en": [
+            "Is that answer",
+            "really true?",
+            "",
+            "Or is it",
+            "a story",
+            "you've been",
+            "telling yourself",
+            "for years?"
+          ]
+        },
+
+        "pause": {
+          "ta": "நேர்மையாக யோசியுங்கள்...",
+          "en": "Reflect honestly..."
+        },
+
+        "button": {
+          "ta": "தொடரலாம்",
+          "en": "Continue"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": false,
+        "tokens": []
+      },
+
+      "navigation": {
+        "previous": 19,
+        "next": 21
+      },
+
+      "analytics": {
+        "event": "moment_20"
+      }
+    },
+
+    {
+      "id": 21,
+      "sequence": 4,
+      "act": 3,
+      "component": "insight",
+      "type": "awakening",
+
+      "payload": {
+
+        "title": {
+          "ta": "ஒரு புதிய பார்வை",
+          "en": "A New Perspective"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "intro": {
+          "ta": [
+            "{{Name}}..."
+          ],
+          "en": [
+            "{{Name}}..."
+          ]
+        },
+
+        "insight": {
+          "ta": [
+            "உங்கள்",
+            "பிரச்சனை...",
+            "உங்கள்",
+            "வாழ்க்கை அல்ல.",
+            "",
+            "உங்கள்",
+            "வாழ்க்கையை",
+            "பார்க்கும்",
+            "பார்வையாக",
+            "இருக்கலாம்."
+          ],
+          "en": [
+            "Perhaps",
+            "the problem",
+            "isn't your life.",
+            "",
+            "Perhaps...",
+            "it's the way",
+            "you've been",
+            "seeing it."
+          ]
+        },
+
+        "summary": {
+          "ta": [
+            "பார்வை மாறும்போது...",
+            "வாழ்க்கையும்",
+            "மாறத் தொடங்கும்."
+          ],
+          "en": [
+            "When perspective changes...",
+            "life begins",
+            "to change."
+          ]
+        },
+
+        "button": {
+          "ta": "புரிகிறது",
+          "en": "I Understand"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": true,
+        "tokens": [
+          "Name"
+        ]
+      },
+
+      "navigation": {
+        "previous": 20,
+        "next": 22
+      },
+
+      "analytics": {
+        "event": "moment_21"
+      }
+    }
+
+    ,
+    {
+      "id": 22,
+      "sequence": 5,
+      "act": 3,
+      "component": "insight",
+      "type": "pattern",
+
+      "payload": {
+
+        "title": {
+          "ta": "ஒரு வடிவம்",
+          "en": "The Pattern"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "intro": {
+          "ta": [
+            "{{Name}}..."
+          ],
+          "en": [
+            "{{Name}}..."
+          ]
+        },
+
+        "insight": {
+          "ta": [
+            "உங்கள்",
+            "பதில்கள்...",
+            "ஒரு வடிவத்தை",
+            "காட்டுகின்றன.",
+            "",
+            "இது",
+            "பணத்தைப் பற்றிய",
+            "பயணம் அல்ல.",
+            "",
+            "இது",
+            "உங்கள்",
+            "வாழ்க்கையைப்",
+            "பற்றியது."
+          ],
+          "en": [
+            "Your answers",
+            "are revealing",
+            "a pattern.",
+            "",
+            "This isn't",
+            "a journey",
+            "about money.",
+            "",
+            "It's a journey",
+            "about",
+            "your life."
+          ]
+        },
+
+        "summary": {
+          "ta": [
+            "அந்த வடிவத்தை",
+            "பார்க்கத் தொடங்கியுள்ளீர்கள்."
+          ],
+          "en": [
+            "You're beginning",
+            "to recognize",
+            "the pattern."
+          ]
+        },
+
+        "button": {
+          "ta": "தொடரலாம்",
+          "en": "Continue"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": true,
+        "tokens": [
+          "Name"
+        ]
+      },
+
+      "navigation": {
+        "previous": 21,
+        "next": 23
+      },
+
+      "analytics": {
+        "event": "moment_22"
+      }
+    },
+
+    {
+      "id": 23,
+      "sequence": 6,
+      "act": 3,
+      "component": "choice",
+      "type": "decision",
+
+      "payload": {
+
+        "title": {
+          "ta": "உங்கள் முடிவு",
+          "en": "Your Decision"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "question": {
+          "ta": [
+            "{{Name}}...",
+            "இந்த",
+            "பயணத்தை",
+            "உண்மையாக",
+            "தொடர",
+            "நீங்கள்",
+            "தயாரா?"
+          ],
+          "en": [
+            "{{Name}}...",
+            "Are you",
+            "ready",
+            "to continue",
+            "this journey",
+            "seriously?"
+          ]
+        },
+
+        "choiceSet": "commitment",
+
+        "button": {
+          "ta": "என் முடிவு",
+          "en": "My Decision"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": true,
+        "tokens": [
+          "Name"
+        ]
+      },
+
+      "navigation": {
+        "previous": 22,
+        "next": 24
+      },
+
+      "analytics": {
+        "event": "moment_23"
+      }
+    },
+
+    {
+      "id": 24,
+      "sequence": 7,
+      "act": 3,
+      "component": "insight",
+      "type": "transition",
+
+      "payload": {
+
+        "title": {
+          "ta": "அடுத்த கட்டத்திற்கு தயாரா?",
+          "en": "Ready for the Next Step?"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "intro": {
+          "ta": [
+            "{{Name}}..."
+          ],
+          "en": [
+            "{{Name}}..."
+          ]
+        },
+
+        "insight": {
+          "ta": [
+            "நீங்கள்",
+            "இப்போது",
+            "உங்கள்",
+            "வாழ்க்கையை",
+            "வேறு",
+            "கண்ணோட்டத்தில்",
+            "பார்க்கத்",
+            "தொடங்கியுள்ளீர்கள்.",
+            "",
+            "அதுதான்",
+            "உண்மையான",
+            "மாற்றத்தின்",
+            "தொடக்கம்."
+          ],
+          "en": [
+            "You're beginning",
+            "to see",
+            "your life",
+            "through",
+            "a different",
+            "perspective.",
+            "",
+            "That",
+            "is where",
+            "real transformation",
+            "begins."
+          ]
+        },
+
+        "summary": {
+          "ta": [
+            "இப்போது...",
+            "அடுத்த",
+            "கட்டத்திற்கு",
+            "செல்வோம்."
+          ],
+          "en": [
+            "Now...",
+            "let's move",
+            "to the next",
+            "stage",
+            "of your journey."
+          ]
+        },
+
+        "button": {
+          "ta": "தொடரலாம்",
+          "en": "Continue"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": true,
+        "tokens": [
+          "Name"
+        ]
+      },
+
+      "navigation": {
+        "previous": 23,
+        "next": 25
+      },
+
+      "analytics": {
+        "event": "moment_24"
+      }
+    }
+
+  ]
+}
+
