@@ -1,19 +1,16 @@
 
 <!--
 ==========================================================
-CTM PATH™ Guided Journey v3.0
+CTM PATH™ Guided Journey v4.0
 File: components/booking.html
 
 Responsibility:
-Presentation template for Discovery Session booking.
+Presentation template for Booking Moments.
 
-This is the final conversion component that
-invites the visitor to schedule a complimentary
-Discovery Session with Raphael Raj.
+Bilingual Template Standard
 
 No JavaScript.
 No business logic.
-Rendered by renderer.js
 ==========================================================
 -->
 
@@ -21,83 +18,76 @@ Rendered by renderer.js
 
     <div class="ctm-scene__container">
 
-        <!-- Header -->
+        <!-- ======================================================
+             HEADER
+        ======================================================= -->
 
         <header class="ctm-scene__header">
 
-            <div class="ctm-scene__step">
+            <h1 class="ctm-scene__title-ta">
 
-                {{step}}
-
-            </div>
-
-            <h1 class="ctm-scene__title">
-
-                {{title}}
+                {{titleTa}}
 
             </h1>
 
-            <h2 class="ctm-scene__subtitle">
+            <h2 class="ctm-scene__title-en">
 
-                {{subtitle}}
+                {{titleEn}}
 
             </h2>
 
         </header>
 
-        <!-- Booking Content -->
+        <!-- ======================================================
+             BOOKING MESSAGE
+        ======================================================= -->
 
         <main class="ctm-scene__content">
 
-            <section class="ctm-booking__card">
+            <div class="ctm-booking__body">
 
-                <div class="ctm-booking__intro">
+                <div class="ctm-block">
 
-                    {{intro}}
+                    <div class="ctm-ta">
 
-                </div>
+                        {{messageTa}}
 
-                <div class="ctm-booking__description">
+                    </div>
 
-                    {{description}}
+                    <div class="ctm-en">
 
-                </div>
+                        {{messageEn}}
 
-                <ul class="ctm-booking__benefits">
-
-                    {{benefits}}
-
-                </ul>
-
-                <div class="ctm-booking__note">
-
-                    {{note}}
+                    </div>
 
                 </div>
 
-            </section>
+            </div>
 
         </main>
 
-        <!-- Call To Action -->
+        <!-- ======================================================
+             CALL TO ACTION
+        ======================================================= -->
 
         <footer class="ctm-scene__footer">
 
             <button
                 type="button"
-                class="ctm-button ctm-button--primary"
-                data-action="book-session">
+                class="ctm-button-green"
+                data-action="booking">
 
-                {{primaryButton}}
+                <span class="ctm-button-ta">
 
-            </button>
+                    {{buttonTa}}
 
-            <button
-                type="button"
-                class="ctm-button ctm-button--secondary"
-                data-action="continue">
+                </span>
 
-                {{secondaryButton}}
+                <span class="ctm-button-en">
+
+                    {{buttonEn}}
+
+                </span>
 
             </button>
 
