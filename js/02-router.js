@@ -5,57 +5,79 @@
 CTM PATH™ Guided Journey v6.0
 
 Purpose
-Screen Navigation
+Application Router
 
 Responsibility
-• Navigate between screens
-• Listen for navigation button clicks
+• Handle screen navigation
+• Route button requests
+• Delegate loading to the Screen Loader
 
 ======================================================================
 */
 
 'use strict';
 
-const CTM = window.CTM || {};
+(() => {
 
-/*==================================================
-Navigate
-==================================================*/
+    const CTM = window.CTM;
 
-CTM.navigate = function (screenId) {
+    if (!CTM) {
+        console.error('CTM core has not been initialized.');
+        return;
+    }
 
-    if (!screenId) return;
+    /*==================================================
+    Navigate
+    ==================================================*/
 
-    CTM.loadScreen(screenId);
+    CTM.navigate = async function (screenId) {
 
-};
+        if (!screenId) {
 
+            console.warn('No destination screen specified.');
 
-/*==================================================
-Button Events
-==================================================*/
+            return;
 
-CTM.bindNavigation = function () {
+        }
 
-    document.addEventListener('click', function (event) {
+        await CTM.loadScreen(screenId);
 
-        const button = event.target.closest('[data-next]');
+    };
 
-        if (!button) return;
+    /*==================================================
+    Previous Screen
+    ==================================================*/
 
-        event.preventDefault();
+    CTM.navigateBack = async function () {
 
-        const nextScreen = button.dataset.next;
+        const previous = CTM.state.previousScreen;
 
-        CTM.navigate(nextScreen);
+        if (!previous) return;
 
-    });
+        await CTM.loadScreen(previous);
 
-};
+    };
 
+    /*==================================================
+    Bind Navigation
+    ==================================================*/
 
-/*==================================================
-Expose
-==================================================*/
+    CTM.bindNavigation = function () {
 
-window.CTM = CTM;
+        document.addEventListener('click', async function (event) {
+
+            const button = event.target.closest('[data-next]');
+
+            if (!button) return;
+
+            event.preventDefault();
+
+            const nextScreen = button.dataset.next;
+
+            await CTM.navigate(nextScreen);
+
+        });
+
+    };
+
+})();
