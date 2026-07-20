@@ -1,1 +1,356 @@
 
+/*======================================================================
+CTM PATH™ Guided Journey v6.0
+
+Purpose
+Typography System
+
+Responsibility
+• Global font styling
+• Tamil-first bilingual presentation
+• Heading hierarchy
+• Body text
+• Helper text
+• Alignment utilities
+
+======================================================================*/
+
+
+/*==================================================
+Document
+==================================================*/
+
+body{
+    font-family:var(--font-family);
+    font-size:var(--font-size-md);
+    font-weight:var(--font-regular);
+    line-height:var(--line-normal);
+
+    background:var(--bg-page);
+    color:var(--text-primary);
+}
+
+
+/*==================================================
+Headings
+==================================================*/
+
+h1{
+    font-size:var(--font-size-4xl);
+    font-weight:var(--font-bold);
+    line-height:1.1;
+    letter-spacing:-1px;
+}
+
+h2{
+    font-size:var(--font-size-3xl);
+    font-weight:var(--font-bold);
+    line-height:1.15;
+}
+
+h3{
+    font-size:var(--font-size-2xl);
+    font-weight:var(--font-semibold);
+    line-height:1.2;
+}
+
+h4{
+    font-size:var(--font-size-xl);
+    font-weight:var(--font-semibold);
+    line-height:1.3;
+}
+
+h5{
+    font-size:var(--font-size-lg);
+    font-weight:var(--font-medium);
+}
+
+h6{
+    font-size:var(--font-size-md);
+    font-weight:var(--font-medium);
+}
+
+
+/*==================================================
+Paragraph
+==================================================*/
+
+p{
+    font-size:var(--font-size-md);
+    line-height:1.7;
+    color:var(--text-secondary);
+}
+
+
+/*==================================================
+Tamil
+==================================================*/
+
+.tamil{
+
+    display:block;
+
+    font-size:2rem;
+
+    font-weight:600;
+
+    line-height:1.55;
+
+    color:var(--text-primary);
+
+    margin-bottom:16px;
+}
+
+
+/*==================================================
+English
+==================================================*/
+
+.english{
+
+    display:block;
+
+    font-size:1rem;
+
+    line-height:1.8;
+
+    color:var(--text-secondary);
+
+    margin-top:10px;
+}
+
+
+/*==================================================
+Hero Title
+==================================================*/
+
+.hero-title{
+
+    max-width:900px;
+
+    margin:0 auto;
+
+    text-align:center;
+}
+
+
+/*==================================================
+Hero Subtitle
+==================================================*/
+
+.hero-subtitle{
+
+    max-width:760px;
+
+    margin:24px auto 0;
+
+    text-align:center;
+
+    color:var(--text-muted);
+
+    font-size:1.2rem;
+
+    line-height:1.8;
+}
+
+
+/*==================================================
+Screen Title
+==================================================*/
+
+.screen-title{
+
+    font-size:2.8rem;
+
+    font-weight:700;
+
+    text-align:center;
+
+    margin-bottom:18px;
+}
+
+
+/*==================================================
+Screen Caption
+==================================================*/
+
+.screen-caption{
+
+    text-align:center;
+
+    color:var(--text-muted);
+
+    margin-bottom:42px;
+
+    font-size:1rem;
+
+    letter-spacing:.5px;
+
+    text-transform:uppercase;
+}
+
+
+/*==================================================
+Card Title
+==================================================*/
+
+.card-title{
+
+    font-size:2rem;
+
+    font-weight:600;
+
+    margin-bottom:18px;
+}
+
+
+/*==================================================
+Card Text
+==================================================*/
+
+.card-text{
+
+    font-size:1.1rem;
+
+    color:var(--text-secondary);
+
+    line-height:1.8;
+}
+
+
+/*==================================================
+Question
+==================================================*/
+
+.question{
+
+    font-size:2rem;
+
+    font-weight:600;
+
+    line-height:1.5;
+
+    text-align:center;
+}
+
+
+/*==================================================
+Answer
+==================================================*/
+
+.answer{
+
+    font-size:1.1rem;
+
+    color:var(--text-secondary);
+}
+
+
+/*==================================================
+Labels
+==================================================*/
+
+label{
+
+    display:block;
+
+    margin-bottom:10px;
+
+    font-size:.95rem;
+
+    color:var(--text-secondary);
+}
+
+
+/*==================================================
+Input Placeholder
+==================================================*/
+
+::placeholder{
+
+    color:var(--text-disabled);
+
+    opacity:1;
+}
+
+
+/*==================================================
+Links
+==================================================*/
+
+a{
+
+    transition:color var(--transition-fast);
+
+}
+
+a:hover{
+
+    color:var(--color-accent);
+
+}
+
+
+/*==================================================
+Text Utilities
+==================================================*/
+
+.text-center{
+    text-align:center;
+}
+
+.text-left{
+    text-align:left;
+}
+
+.text-right{
+    text-align:right;
+}
+
+.text-primary{
+    color:var(--text-primary);
+}
+
+.text-secondary{
+    color:var(--text-secondary);
+}
+
+.text-muted{
+    color:var(--text-muted);
+}
+
+.text-accent{
+    color:var(--color-accent);
+}
+
+.text-success{
+    color:var(--color-success);
+}
+
+.text-warning{
+    color:var(--color-warning);
+}
+
+.text-danger{
+    color:var(--color-danger);
+}
+
+.font-light{
+    font-weight:300;
+}
+
+.font-regular{
+    font-weight:400;
+}
+
+.font-medium{
+    font-weight:500;
+}
+
+.font-semibold{
+    font-weight:600;
+}
+
+.font-bold{
+    font-weight:700;
+}
