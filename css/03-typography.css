@@ -193,13 +193,48 @@ English Hero
 
     text-align:center;
 
-    font-size:1.35rem;
+    font-family:
 
-    font-weight:400;
+        "Cormorant Garamond",
 
-    line-height:2;
+        Georgia,
+
+        "Times New Roman",
+
+        serif;
+
+    font-size:2rem;
+
+    font-weight:500;
+
+    line-height:1.8;
+
+    letter-spacing:.02em;
 
     color:var(--text-secondary);
+
+}
+
+
+/*==================================================
+English Welcome Highlight
+==================================================*/
+
+.english .highlight{
+
+    display:block;
+
+    margin-bottom:20px;
+
+    font-size:3.2rem;
+
+    font-weight:700;
+
+    line-height:1.25;
+
+    letter-spacing:-0.02em;
+
+    color:var(--text-primary);
 
 }
 
@@ -215,6 +250,10 @@ Hero Name
     color:var(--color-white);
 
     font-weight:700;
+
+    font-style:italic;
+
+    letter-spacing:.02em;
 
 }
 
@@ -249,7 +288,7 @@ Inline Highlight
 
     color:var(--text-gold);
 
-    font-weight:600;
+    font-weight:700;
 
 }
 
@@ -400,6 +439,18 @@ Responsive
 
     }
 
+    .english{
+
+        font-size:1.8rem;
+
+    }
+
+    .english .highlight{
+
+        font-size:2.8rem;
+
+    }
+
 }
 
 @media (max-width:992px){
@@ -412,7 +463,13 @@ Responsive
 
     .english{
 
-        font-size:1.20rem;
+        font-size:1.5rem;
+
+    }
+
+    .english .highlight{
+
+        font-size:2.4rem;
 
     }
 
@@ -430,9 +487,17 @@ Responsive
 
     .english{
 
-        font-size:1rem;
+        font-size:1.2rem;
 
-        line-height:1.8;
+        line-height:1.75;
+
+    }
+
+    .english .highlight{
+
+        font-size:2rem;
+
+        margin-bottom:16px;
 
     }
 
@@ -454,7 +519,13 @@ Responsive
 
     .english{
 
-        font-size:.95rem;
+        font-size:1.05rem;
+
+    }
+
+    .english .highlight{
+
+        font-size:1.6rem;
 
     }
 
