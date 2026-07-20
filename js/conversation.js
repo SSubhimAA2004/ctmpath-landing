@@ -3,7 +3,7 @@
  * ==========================================================
  * CTM PATH™ Guided Journey v3.0
  * File: js/conversation.js
- * Batch: 1 of 2
+ * Batch: 1 of 5
  * Responsibility:
  * Conversation Engine
  *
@@ -203,6 +203,10 @@ function setMoment(moment) {
 
 }
 
+ /* ==========================================================
+   CONTINUATION
+========================================================== */
+
 function currentMoment() {
 
     return state.moment.current;
@@ -281,10 +285,14 @@ function response(momentId) {
 async function start() {
 
     const act =
-        CTMState.get("currentAct");
+        CTMState.get(
+            "navigation.currentAct"
+        );
 
     const moment =
-        CTMState.get("currentMoment");
+        CTMState.get(
+            "navigation.currentMoment"
+        );
 
     loadResponses();
 
@@ -305,7 +313,9 @@ async function start() {
 async function goTo(momentId) {
 
     const act =
-        CTMState.get("currentAct");
+        CTMState.get(
+            "navigation.currentAct"
+        );
 
     if (act !== currentAct()) {
 
@@ -324,12 +334,16 @@ async function nextMoment() {
     return goTo(
 
         CTMState.get(
-            "currentMoment"
+            "navigation.currentMoment"
         )
 
     );
 
 }
+
+/* ==========================================================
+   CONTINUATION
+========================================================== */
 
 async function previousMoment() {
 
@@ -338,14 +352,14 @@ async function previousMoment() {
     return goTo(
 
         CTMState.get(
-            "currentMoment"
+            "navigation.currentMoment"
         )
 
     );
 
 }
 
- /* ==========================================================
+/* ==========================================================
    RENDER COORDINATOR
 ========================================================== */
 
