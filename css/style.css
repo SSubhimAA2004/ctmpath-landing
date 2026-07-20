@@ -1,7 +1,7 @@
 
 /* ==========================================================
    CTM PATH™ Guided Journey v3.1
-   WELCOME COMPONENT
+   WELCOME SCREEN (FROZEN)
 ========================================================== */
 
 .ctm-welcome{
@@ -16,13 +16,17 @@
 
     background:
         radial-gradient(circle at top,
-        rgba(18,54,110,.35),
+        rgba(18,55,110,.25),
         transparent 45%),
-        #081C3A;
+        linear-gradient(
+            180deg,
+            #081C3A 0%,
+            #0B2348 100%
+        );
+
+    padding:72px 24px;
 
     color:#F8F7F4;
-
-    padding:60px 24px;
 
 }
 
@@ -30,7 +34,7 @@
 
     width:100%;
 
-    max-width:820px;
+    max-width:860px;
 
     margin:auto;
 
@@ -38,27 +42,45 @@
 
 }
 
+
+
+
+
+
+/* ==========================================================
+   LOGO
+========================================================== */
+
 .ctm-welcome__header{
 
-    margin-bottom:42px;
+    margin-bottom:48px;
 
 }
 
 .ctm-logo{
 
-    width:170px;
-
-    height:auto;
-
     display:block;
+
+    width:180px;
+
+    max-width:80%;
 
     margin:auto;
 
 }
 
+
+
+
+
+
+/* ==========================================================
+   HEADINGS
+========================================================== */
+
 .ctm-welcome__hero{
 
-    margin-bottom:32px;
+    margin-bottom:40px;
 
 }
 
@@ -66,11 +88,13 @@
 
     margin:0;
 
-    font-size:64px;
+    font-size:60px;
 
     font-weight:700;
 
     line-height:1.15;
+
+    letter-spacing:-0.02em;
 
     color:#FFFFFF;
 
@@ -78,41 +102,50 @@
 
 .ctm-title-en{
 
-    margin-top:12px;
+    margin-top:16px;
 
-    font-size:44px;
+    font-size:38px;
 
-    font-weight:600;
+    font-weight:500;
 
-    color:#F2D27A;
+    color:#D7B15B;
 
     line-height:1.25;
 
 }
 
+
+
+
+
+
+/* ==========================================================
+   DIVIDER
+========================================================== */
+
 .ctm-divider{
 
     display:flex;
 
-    justify-content:center;
-
     align-items:center;
+
+    justify-content:center;
 
     gap:18px;
 
-    margin:42px 0;
+    margin:44px 0;
 
 }
 
 .ctm-divider-line{
 
-    width:180px;
+    width:170px;
 
     height:2px;
 
     background:#C8A44D;
 
-    opacity:.65;
+    opacity:.55;
 
 }
 
@@ -120,9 +153,18 @@
 
     font-size:34px;
 
-    color:#D8B45C;
+    line-height:1;
 
 }
+
+
+
+
+
+
+/* ==========================================================
+   NAMASTE
+========================================================== */
 
 .ctm-namaste{
 
@@ -132,94 +174,161 @@
 
 .ctm-namaste-icon{
 
-    width:42px;
+    width:52px;
 
-    height:42px;
+    height:52px;
 
-    opacity:.9;
+    display:block;
+
+    margin:auto;
 
 }
+
+
+
+
+
+
+/* ==========================================================
+   MESSAGE
+========================================================== */
 
 .ctm-message{
 
     max-width:620px;
 
-    margin:0 auto;
+    margin:auto;
 
     text-align:center;
-
-    font-size:28px;
-
-    line-height:1.7;
-
-    color:#F8F7F4;
 
 }
 
 .ctm-message .ctm-ta{
 
+    margin-bottom:26px;
+
     font-size:30px;
 
     font-weight:500;
 
-    margin-bottom:22px;
+    line-height:1.8;
+
+    color:#FFFFFF;
 
 }
 
 .ctm-message .ctm-en{
 
-    font-size:25px;
+    font-size:24px;
 
-    opacity:.93;
+    line-height:1.8;
 
-    margin-bottom:34px;
+    color:rgba(255,255,255,.90);
 
 }
 
+.ctm-block{
+
+    margin-bottom:30px;
+
+}
+
+
+
+
+
+
+/* ==========================================================
+   CTA
+========================================================== */
+
 .ctm-footer{
 
-    margin-top:56px;
+    margin-top:64px;
 
 }
 
 .ctm-button-green{
 
+    display:inline-flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    gap:6px;
+
     width:340px;
 
-    min-height:74px;
+    min-height:76px;
 
     border:none;
 
     border-radius:999px;
 
-    cursor:pointer;
-
     background:#1F7A4D;
 
     color:#FFFFFF;
 
-    font-size:30px;
+    cursor:pointer;
+
+    font-size:28px;
 
     font-weight:700;
 
-    line-height:1.35;
+    line-height:1.25;
 
-    transition:all .30s ease;
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
 
     box-shadow:
-        0 12px 30px rgba(31,122,77,.35);
+        0 16px 36px rgba(31,122,77,.35);
 
 }
 
 .ctm-button-green:hover{
 
-    transform:translateY(-2px);
+    background:#289461;
 
-    background:#2A9365;
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 22px 42px rgba(31,122,77,.45);
 
 }
 
-@media(max-width:768px){
+.ctm-button-green:active{
+
+    transform:translateY(0);
+
+}
+
+
+
+
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width:768px){
+
+    .ctm-welcome{
+
+        padding:48px 24px;
+
+    }
+
+    .ctm-logo{
+
+        width:140px;
+
+    }
 
     .ctm-title-ta{
 
@@ -229,19 +338,27 @@
 
     .ctm-title-en{
 
-        font-size:30px;
+        font-size:28px;
 
     }
 
     .ctm-divider-line{
 
-        width:90px;
+        width:80px;
 
     }
 
-    .ctm-message{
+    .ctm-divider-lotus{
 
-        font-size:21px;
+        font-size:28px;
+
+    }
+
+    .ctm-namaste-icon{
+
+        width:42px;
+
+        height:42px;
 
     }
 
@@ -261,8 +378,11 @@
 
         width:100%;
 
-        font-size:24px;
+        max-width:340px;
+
+        font-size:22px;
 
     }
 
 }
+
