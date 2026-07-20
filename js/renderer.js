@@ -92,7 +92,7 @@ const registry = Object.freeze({
 
 });
 
-/* ==========================================================
+ /* ==========================================================
    05. ROOT MANAGEMENT
 ========================================================== */
 
@@ -197,7 +197,7 @@ function unlock() {
 
 }
 
-/* ==========================================================
+ /* ==========================================================
    09. COMPONENT LOADER
 ========================================================== */
 
@@ -370,7 +370,7 @@ function bilingualBlock(value) {
 
 }
 
-/* ==========================================================
+ /* ==========================================================
    11.04 CONTENT COLLECTOR
 ========================================================== */
 
@@ -440,6 +440,56 @@ function buildViewModel(moment) {
     const payload =
         moment.payload || {};
 
+    /* ------------------------------------------------------
+       PERSONALIZATION
+    ------------------------------------------------------- */
+
+    const visitorName =
+        CTMState.get("visitor.name") || "";
+
+    const firstName =
+        CTMState.get(
+            "personalization.firstName"
+        ) || visitorName;
+
+    function personalize(value) {
+
+        if (!value) {
+
+            return value;
+
+        }
+
+        if (typeof value === "string") {
+
+            return CTMPersonalization.interpolate(
+                value
+            );
+
+        }
+
+        if (typeof value === "object") {
+
+            return {
+
+                ...value,
+
+                ta: CTMPersonalization.interpolate(
+                    value.ta || ""
+                ),
+
+                en: CTMPersonalization.interpolate(
+                    value.en || ""
+                )
+
+            };
+
+        }
+
+        return value;
+
+    }
+
     return {
 
         /* ------------------------------------------------------
@@ -455,13 +505,17 @@ function buildViewModel(moment) {
 
         titleTa:
             language(
-                payload.title,
+                personalize(
+                    payload.title
+                ),
                 "ta"
             ),
 
         titleEn:
             language(
-                payload.title,
+                personalize(
+                    payload.title
+                ),
                 "en"
             ),
 
@@ -471,13 +525,17 @@ function buildViewModel(moment) {
 
         subtitleTa:
             language(
-                payload.subtitle,
+                personalize(
+                    payload.subtitle
+                ),
                 "ta"
             ),
 
         subtitleEn:
             language(
-                payload.subtitle,
+                personalize(
+                    payload.subtitle
+                ),
                 "en"
             ),
 
@@ -486,21 +544,79 @@ function buildViewModel(moment) {
         ------------------------------------------------------- */
 
         message:
-            collect(payload),
+            collect({
 
-        /* ------------------------------------------------------
+                ...payload,
+
+                message:
+                    personalize(
+                        payload.message
+                    ),
+
+                intro:
+                    personalize(
+                        payload.intro
+                    ),
+
+                insight:
+                    personalize(
+                        payload.insight
+                    ),
+
+                reflection:
+                    personalize(
+                        payload.reflection
+                    ),
+
+                summary:
+                    personalize(
+                        payload.summary
+                    ),
+
+                description:
+                    personalize(
+                        payload.description
+                    ),
+
+                note:
+                    personalize(
+                        payload.note
+                    ),
+
+                content:
+                    personalize(
+                        payload.content
+                    ),
+
+                lines:
+                    personalize(
+                        payload.lines
+                    ),
+
+                text:
+                    personalize(
+                        payload.text
+                    )
+
+            }),
+
+           /* ------------------------------------------------------
            QUESTION COMPONENT
         ------------------------------------------------------- */
 
         questionTa:
             language(
-                payload.question,
+                personalize(
+                    payload.question
+                ),
                 "ta"
             ),
 
         questionEn:
             language(
-                payload.question,
+                personalize(
+                    payload.question
+                ),
                 "en"
             ),
 
@@ -510,42 +626,59 @@ function buildViewModel(moment) {
 
         labelTa:
             language(
-                payload.label,
+                personalize(
+                    payload.label
+                ),
                 "ta"
             ),
 
         labelEn:
             language(
-                payload.label,
+                personalize(
+                    payload.label
+                ),
                 "en"
             ),
 
         helperTa:
             language(
-                payload.helper,
+                personalize(
+                    payload.helper
+                ),
                 "ta"
             ),
 
         helperEn:
             language(
-                payload.helper,
+                personalize(
+                    payload.helper
+                ),
                 "en"
             ),
 
         placeholderTa:
             language(
-                payload.placeholder,
+                personalize(
+                    payload.placeholder
+                ),
                 "ta"
             ),
 
         placeholderEn:
             language(
-                payload.placeholder,
+                personalize(
+                    payload.placeholder
+                ),
                 "en"
             ),
 
         value:
-            payload.value ?? "",
+
+            payload.value ??
+
+            visitorName ??
+
+            "",
 
         /* ------------------------------------------------------
            CHOICE COMPONENT
@@ -561,15 +694,27 @@ function buildViewModel(moment) {
         button:
 
             bilingualBlock(
-                payload.button
+
+                personalize(
+                    payload.button
+                )
+
             ) ||
 
             bilingualBlock(
-                payload.primaryButton
+
+                personalize(
+                    payload.primaryButton
+                )
+
             ) ||
 
             bilingualBlock(
-                payload.secondaryButton
+
+                personalize(
+                    payload.secondaryButton
+                )
+
             ) ||
 
             `
@@ -589,13 +734,23 @@ function buildViewModel(moment) {
         buttonTa:
 
             language(
-                payload.button,
+
+                personalize(
+                    payload.button
+                ),
+
                 "ta"
+
             ) ||
 
             language(
-                payload.primaryButton,
+
+                personalize(
+                    payload.primaryButton
+                ),
+
                 "ta"
+
             ) ||
 
             "தொடரலாம்",
@@ -603,13 +758,23 @@ function buildViewModel(moment) {
         buttonEn:
 
             language(
-                payload.button,
+
+                personalize(
+                    payload.button
+                ),
+
                 "en"
+
             ) ||
 
             language(
-                payload.primaryButton,
+
+                personalize(
+                    payload.primaryButton
+                ),
+
                 "en"
+
             ) ||
 
             "Let's Continue"
@@ -844,7 +1009,7 @@ async function renderMoment(moment) {
 
             CTMState.get(
 
-                "currentAct"
+                "navigation.currentAct"
 
             );
 
@@ -1001,6 +1166,12 @@ function destroy() {
 
     state.currentAct = null;
 
+    state.currentMoment = null;
+
+    state.currentComponent = null;
+
+    state.currentHTML = "";
+
     state.root = null;
 
 }
@@ -1058,4 +1229,4 @@ window.CTMRenderer = Object.freeze({
 ========================================================== */
 
 })();
-   
+
