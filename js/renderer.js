@@ -371,13 +371,10 @@ function error(message) {
 
 function buildViewModel(moment) {
 
-    const language =
-        CTMState.get("visitor.language") || "ta";
-
     const payload =
         moment.payload || {};
 
-    function text(value) {
+    function bilingual(value) {
 
         if (value == null) {
             return "";
@@ -388,66 +385,126 @@ function buildViewModel(moment) {
         }
 
         if (Array.isArray(value)) {
-            return value.join("<br>");
+
+            return value
+                .filter(Boolean)
+                .join("<br>");
+
         }
 
         if (typeof value === "object") {
 
-            if (language in value) {
-                return text(value[language]);
+            const ta =
+                bilingual(value.ta);
+
+            const en =
+                bilingual(value.en);
+
+            if (ta && en) {
+
+                return `
+                    <div class="ctm-ta">
+                        ${ta}
+                    </div>
+
+                    <div class="ctm-en">
+                        ${en}
+                    </div>
+                `;
+
             }
 
-            return "";
+            return ta || en || "";
+
         }
 
         return String(value);
 
     }
 
-    const messageParts = [];
+    function collect() {
 
-    [
-        payload.message,
-        payload.intro,
-        payload.question,
-        payload.insight,
-        payload.reflection,
-        payload.summary,
-        payload.description,
-        payload.note
-    ].forEach(part => {
+        const blocks = [];
 
-        const value = text(part);
+        [
 
-        if (value) {
-            messageParts.push(value);
-        }
+            payload.message,
 
-    });
+            payload.intro,
+
+            payload.question,
+
+            payload.insight,
+
+            payload.reflection,
+
+            payload.summary,
+
+            payload.description,
+
+            payload.note,
+
+            payload.content,
+
+            payload.lines,
+
+            payload.text
+
+        ].forEach(value => {
+
+            const html =
+                bilingual(value);
+
+            if (html) {
+
+                blocks.push(
+
+                    `<div class="ctm-block">${html}</div>`
+
+                );
+
+            }
+
+        });
+
+        return blocks.join("");
+
+    }
 
     return {
 
-        step:
-            `Moment ${moment.id}`,
+        step: "",
 
         title:
-            text(payload.title),
+            bilingual(payload.title),
 
         subtitle:
-            text(payload.subtitle),
+            bilingual(payload.subtitle),
 
         message:
-            messageParts.join("<br><br>"),
+            collect(),
 
         button:
-            text(payload.button) ||
-            text(payload.primaryButton) ||
-            "Continue"
+            bilingual(payload.button) ||
+
+            bilingual(payload.primaryButton) ||
+
+            bilingual(payload.secondaryButton) ||
+
+            `
+            <div class="ctm-ta">
+                தொடரலாம்
+            </div>
+
+            <div class="ctm-en">
+                Continue
+            </div>
+            `
 
     };
 
 }
-
+   
 /* ==========================================================
    RENDER MOMENT
 ========================================================== */
