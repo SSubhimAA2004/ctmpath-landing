@@ -1,1 +1,242 @@
 
+/*======================================================================
+
+CTM PATH™ Guided Journey v6.0
+
+Purpose
+Animation System
+
+Responsibility
+• Cinematic entrance animations
+• Premium hover effects
+• Fade transitions
+• Motion system
+
+======================================================================*/
+
+
+/*==================================================
+Screen Fade
+==================================================*/
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+
+/*==================================================
+Rise
+==================================================*/
+
+@keyframes rise{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(50px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/*==================================================
+Glow
+==================================================*/
+
+@keyframes glow{
+
+    0%{
+
+        box-shadow:
+        0 0 18px rgba(216,179,106,.15);
+
+    }
+
+    50%{
+
+        box-shadow:
+        0 0 35px rgba(216,179,106,.45);
+
+    }
+
+    100%{
+
+        box-shadow:
+        0 0 18px rgba(216,179,106,.15);
+
+    }
+
+}
+
+
+/*==================================================
+Text Glow
+==================================================*/
+
+@keyframes textGlow{
+
+    0%{
+
+        text-shadow:
+        0 0 8px rgba(216,179,106,.10);
+
+    }
+
+    50%{
+
+        text-shadow:
+        0 0 22px rgba(216,179,106,.35);
+
+    }
+
+    100%{
+
+        text-shadow:
+        0 0 8px rgba(216,179,106,.10);
+
+    }
+
+}
+
+
+/*==================================================
+Logo Float
+==================================================*/
+
+@keyframes float{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/*==================================================
+Hero Animation
+==================================================*/
+
+.hero{
+
+    animation:fadeIn .9s ease;
+
+}
+
+
+.logo{
+
+    animation:float 5s ease-in-out infinite;
+
+}
+
+
+.screen-caption{
+
+    animation:rise .8s ease;
+
+}
+
+
+.tamil{
+
+    animation:rise 1.0s ease;
+
+}
+
+
+.english{
+
+    animation:rise 1.2s ease;
+
+}
+
+
+.btn{
+
+    animation:
+
+    rise 1.5s ease,
+
+    glow 3s infinite;
+
+}
+
+
+/*==================================================
+Hover
+==================================================*/
+
+.logo:hover{
+
+    transform:scale(1.05);
+
+    transition:.35s;
+
+}
+
+
+.tamil:hover{
+
+    animation:textGlow 2s infinite;
+
+}
+
+
+.btn:hover{
+
+    transform:
+    translateY(-4px)
+    scale(1.02);
+
+}
+
+
+/*==================================================
+Page Transition
+==================================================*/
+
+.screen{
+
+    transition:
+
+    opacity .45s ease,
+
+    transform .45s ease;
+
+}
