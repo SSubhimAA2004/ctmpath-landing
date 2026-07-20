@@ -447,7 +447,7 @@ function buildViewModel(moment) {
     };
 
 }
-   
+
 /* ==========================================================
    RENDER MOMENT
 ========================================================== */
@@ -473,11 +473,14 @@ async function renderMoment(moment) {
         state.currentMoment =
             moment.id;
 
+        const viewModel =
+            buildViewModel(moment);
+
         await fadeOut();
 
         await renderComponent(
             moment.component,
-            moment
+            viewModel
         );
 
         CTMState.set(
@@ -514,7 +517,7 @@ async function renderMoment(moment) {
     }
 
 }
-
+   
 /* ==========================================================
    CURRENT STATE
 ========================================================== */
