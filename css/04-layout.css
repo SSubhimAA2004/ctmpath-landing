@@ -250,7 +250,7 @@ Hero
 
     max-width:860px;
 
-    margin:0 auto;
+    margin:120px auto 0;
 
     display:flex;
 
@@ -265,7 +265,6 @@ Hero
     gap:38px;
 
 }
-
 
 /*==================================================
 Hero Ambient Glow
