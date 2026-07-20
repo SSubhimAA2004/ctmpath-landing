@@ -1,9 +1,9 @@
 
 <!--
 ==========================================================
-CTM PATH™ Guided Journey v3.1
+CTM PATH™ Guided Journey v3.2
 File: components/message.html
-Welcome Component
+Welcome Component (FROZEN)
 ==========================================================
 -->
 
@@ -11,72 +11,89 @@ Welcome Component
 
     <div class="ctm-welcome__container">
 
-        <!-- Brand -->
+        <!-- ======================================================
+             BRAND
+        ======================================================= -->
 
         <header class="ctm-welcome__header">
 
             <img
                 src="images/CTM_Logo.png"
-                alt="CTM PATH"
+                alt="CTM PATH™"
                 class="ctm-logo">
 
         </header>
 
-        <!-- Welcome -->
+        <!-- ======================================================
+             WELCOME TITLE
+        ======================================================= -->
 
         <section class="ctm-welcome__hero">
 
             <h1 class="ctm-title-ta">
-                {{title}}
+
+                {{titleTa}}
+
             </h1>
 
             <h2 class="ctm-title-en">
-                {{subtitle}}
+
+                {{titleEn}}
+
             </h2>
 
         </section>
 
-        <!-- Divider -->
+        <!-- ======================================================
+             DIVIDER
+        ======================================================= -->
 
         <section class="ctm-divider">
 
-            <div class="ctm-divider-line"></div>
+            <span class="ctm-divider-line"></span>
 
-            <div class="ctm-divider-lotus">
+            <span class="ctm-divider-lotus">
 
-                🪷
+                ✦
 
-            </div>
+            </span>
 
-            <div class="ctm-divider-line"></div>
+            <span class="ctm-divider-line"></span>
 
         </section>
 
-        <!-- Namaste -->
+        <!-- ======================================================
+             NAMASTE
+        ======================================================= -->
 
         <section class="ctm-namaste">
 
             <img
                 src="images/namaste.svg"
-                alt="Welcome"
+                alt="Namaste"
                 class="ctm-namaste-icon">
 
         </section>
 
-        <!-- Greeting -->
+        <!-- ======================================================
+             MESSAGE
+        ======================================================= -->
 
-        <section class="ctm-message">
+        <main class="ctm-message">
 
             {{message}}
 
-        </section>
+        </main>
 
-        <!-- CTA -->
+        <!-- ======================================================
+             CALL TO ACTION
+        ======================================================= -->
 
         <footer class="ctm-footer">
 
             <button
-                class="ctm-button ctm-button-green"
+                type="button"
+                class="ctm-button-green"
                 data-action="continue">
 
                 {{button}}
