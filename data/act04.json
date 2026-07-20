@@ -1,1 +1,487 @@
 
+{
+  "act": {
+    "id": 4,
+    "sequence": 4,
+    "name": {
+      "ta": "புதிய சாத்தியத்தை காணுதல்",
+      "en": "Seeing a New Possibility"
+    },
+    "theme": {
+      "ta": "நம்பிக்கை",
+      "en": "Hope"
+    },
+    "startMoment": 25,
+    "endMoment": 29
+  },
+
+  "moments": [
+
+    {
+      "id": 25,
+      "sequence": 1,
+      "act": 4,
+      "component": "insight",
+      "type": "possibility",
+
+      "payload": {
+
+        "title": {
+          "ta": "ஒரு புதிய சாத்தியம்",
+          "en": "A New Possibility"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "intro": {
+          "ta": [
+            "{{Name}}..."
+          ],
+          "en": [
+            "{{Name}}..."
+          ]
+        },
+
+        "insight": {
+          "ta": [
+            "இதுவரை...",
+            "நாம்",
+            "உங்கள்",
+            "வாழ்க்கையைப்",
+            "பார்த்தோம்.",
+            "",
+            "இப்போது...",
+            "ஒரு",
+            "புதிய",
+            "சாத்தியத்தை",
+            "பார்ப்போம்."
+          ],
+          "en": [
+            "Until now...",
+            "we've explored",
+            "your life.",
+            "",
+            "Now...",
+            "let's explore",
+            "a new",
+            "possibility."
+          ]
+        },
+
+        "summary": {
+          "ta": [
+            "ஒவ்வொரு",
+            "மாற்றமும்",
+            "ஒரு",
+            "புதிய",
+            "சாத்தியத்தில்தான்",
+            "தொடங்குகிறது."
+          ],
+          "en": [
+            "Every transformation",
+            "begins",
+            "with",
+            "a new",
+            "possibility."
+          ]
+        },
+
+        "button": {
+          "ta": "தொடரலாம்",
+          "en": "Continue"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": true,
+        "tokens": [
+          "Name"
+        ]
+      },
+
+      "navigation": {
+        "previous": 24,
+        "next": 26
+      },
+
+      "analytics": {
+        "event": "moment_25"
+      }
+    },
+
+    {
+      "id": 26,
+      "sequence": 2,
+      "act": 4,
+      "component": "insight",
+      "type": "mentor",
+
+      "payload": {
+
+        "title": {
+          "ta": "ஒரு வழிகாட்டி",
+          "en": "A Mentor"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "intro": {
+          "ta": [
+            "{{Name}}..."
+          ],
+          "en": [
+            "{{Name}}..."
+          ]
+        },
+
+        "insight": {
+          "ta": [
+            "வாழ்க்கையில்...",
+            "சில நேரங்களில்...",
+            "ஒரு நல்ல",
+            "வழிகாட்டி...",
+            "",
+            "பல ஆண்டுகளாக",
+            "நாம்",
+            "தேடிய",
+            "பதிலை",
+            "சில நிமிடங்களில்",
+            "காட்டிவிடுவார்."
+          ],
+          "en": [
+            "Sometimes...",
+            "the right",
+            "mentor...",
+            "",
+            "can help us",
+            "discover",
+            "in minutes...",
+            "",
+            "what we've",
+            "searched for",
+            "over years."
+          ]
+        },
+
+        "summary": {
+          "ta": [
+            "அதுதான்",
+            "வழிகாட்டலின்",
+            "மதிப்பு."
+          ],
+          "en": [
+            "That is",
+            "the value",
+            "of guidance."
+          ]
+        },
+
+        "button": {
+          "ta": "புரிகிறது",
+          "en": "I Understand"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": true,
+        "tokens": [
+          "Name"
+        ]
+      },
+
+      "navigation": {
+        "previous": 25,
+        "next": 27
+      },
+
+      "analytics": {
+        "event": "moment_26"
+      }
+    },
+
+    {
+      "id": 27,
+      "sequence": 3,
+      "act": 4,
+      "component": "reflection",
+      "type": "invitation",
+
+      "payload": {
+
+        "title": {
+          "ta": "ஒரு அழைப்பு",
+          "en": "An Invitation"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "reflection": {
+          "ta": [
+            "{{Name}}...",
+            "",
+            "உங்கள்",
+            "வாழ்க்கையை",
+            "மாற்றும்",
+            "அடுத்த",
+            "உரையாடல்...",
+            "",
+            "இன்று",
+            "தொடங்கலாமா?"
+          ],
+          "en": [
+            "{{Name}}...",
+            "",
+            "Could",
+            "your next",
+            "conversation...",
+            "",
+            "be the one",
+            "that changes",
+            "your life?"
+          ]
+        },
+
+        "pause": {
+          "ta": "ஒரு முடிவை யோசியுங்கள்...",
+          "en": "Think about your decision..."
+        },
+
+        "button": {
+          "ta": "தொடரலாம்",
+          "en": "Continue"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": true,
+        "tokens": [
+          "Name"
+        ]
+      },
+
+      "navigation": {
+        "previous": 26,
+        "next": 28
+      },
+
+      "analytics": {
+        "event": "moment_27"
+      }
+    }
+
+    ,
+    {
+      "id": 28,
+      "sequence": 4,
+      "act": 4,
+      "component": "booking",
+      "type": "discovery_invitation",
+
+      "payload": {
+
+        "title": {
+          "ta": "ஒரு அழைப்பு",
+          "en": "An Invitation"
+        },
+
+        "subtitle": {
+          "ta": "உங்களுக்காக ஒரு சிறப்பு வாய்ப்பு",
+          "en": "A Special Opportunity for You"
+        },
+
+        "intro": {
+          "ta": [
+            "{{Name}}...",
+            "நமது உரையாடல்",
+            "இங்கே",
+            "முடிவதில்லை."
+          ],
+          "en": [
+            "{{Name}}...",
+            "Our conversation",
+            "doesn't end",
+            "here."
+          ]
+        },
+
+        "description": {
+          "ta": [
+            "உங்களுடன்",
+            "நேரடியாக",
+            "பேசுவதற்கு",
+            "ஒரு",
+            "இலவச",
+            "Discovery Session",
+            "அழைக்கிறேன்."
+          ],
+          "en": [
+            "I'd like",
+            "to personally",
+            "invite you",
+            "to a complimentary",
+            "Discovery Session."
+          ]
+        },
+
+        "benefits": [
+          {
+            "ta": "உங்கள் தற்போதைய நிலையை தெளிவாகப் புரிந்துகொள்வோம்",
+            "en": "Understand your current situation clearly"
+          },
+          {
+            "ta": "உங்கள் மிகப்பெரிய தடைகளை கண்டறிவோம்",
+            "en": "Identify your biggest barriers"
+          },
+          {
+            "ta": "அடுத்த நடைமுறைக் கட்டத்தை உருவாக்குவோம்",
+            "en": "Create your practical next step"
+          }
+        ],
+
+        "note": {
+          "ta": [
+            "இந்த அமர்வு",
+            "முழுமையாக",
+            "இலவசம்."
+          ],
+          "en": [
+            "This session",
+            "is completely",
+            "complimentary."
+          ]
+        },
+
+        "primaryButton": {
+          "ta": "Discovery Session பதிவு செய்",
+          "en": "Book Discovery Session"
+        },
+
+        "secondaryButton": {
+          "ta": "இன்னும் தொடரலாம்",
+          "en": "Continue Journey"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": true,
+        "tokens": [
+          "Name"
+        ]
+      },
+
+      "navigation": {
+        "previous": 27,
+        "next": 29
+      },
+
+      "analytics": {
+        "event": "moment_28"
+      }
+    },
+
+    {
+      "id": 29,
+      "sequence": 5,
+      "act": 4,
+      "component": "insight",
+      "type": "decision_bridge",
+
+      "payload": {
+
+        "title": {
+          "ta": "ஒரு முடிவு",
+          "en": "One Decision"
+        },
+
+        "subtitle": {
+          "ta": "",
+          "en": ""
+        },
+
+        "intro": {
+          "ta": [
+            "{{Name}}..."
+          ],
+          "en": [
+            "{{Name}}..."
+          ]
+        },
+
+        "insight": {
+          "ta": [
+            "வாழ்க்கையில்...",
+            "சில நேரங்களில்...",
+            "",
+            "ஒரே ஒரு",
+            "முடிவு...",
+            "",
+            "பல ஆண்டுகளின்",
+            "திசையை",
+            "மாற்றிவிடும்."
+          ],
+          "en": [
+            "Sometimes...",
+            "one decision...",
+            "",
+            "can change",
+            "the direction",
+            "of many",
+            "years ahead."
+          ]
+        },
+
+        "summary": {
+          "ta": [
+            "அடுத்த கட்டம்...",
+            "உங்கள்",
+            "முடிவில்",
+            "இருக்கிறது."
+          ],
+          "en": [
+            "The next step",
+            "now rests",
+            "with",
+            "your decision."
+          ]
+        },
+
+        "button": {
+          "ta": "இறுதி கட்டம்",
+          "en": "Final Step"
+        }
+
+      },
+
+      "personalization": {
+        "enabled": true,
+        "tokens": [
+          "Name"
+        ]
+      },
+
+      "navigation": {
+        "previous": 28,
+        "next": 30
+      },
+
+      "analytics": {
+        "event": "moment_29"
+      }
+    }
+
+  ]
+}
+
