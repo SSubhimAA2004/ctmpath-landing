@@ -365,16 +365,12 @@ function error(message) {
 
 }
 
-/* ==========================================================
-   VIEW MODEL BUILDER
-========================================================== */
-
 function buildViewModel(moment) {
 
     const payload =
         moment.payload || {};
 
-    function bilingual(value) {
+    function render(value) {
 
         if (value == null) {
             return "";
@@ -392,33 +388,56 @@ function buildViewModel(moment) {
 
         }
 
-        if (typeof value === "object") {
+        return String(value);
 
-            const ta =
-                bilingual(value.ta);
+    }
 
-            const en =
-                bilingual(value.en);
+    function language(value, lang) {
 
-            if (ta && en) {
+        if (!value) {
+            return "";
+        }
 
-                return `
-                    <div class="ctm-ta">
-                        ${ta}
-                    </div>
+        if (typeof value === "string") {
+            return value;
+        }
 
-                    <div class="ctm-en">
-                        ${en}
-                    </div>
-                `;
+        return render(value[lang]);
 
-            }
+    }
 
-            return ta || en || "";
+    function bilingualBlock(value) {
+
+        if (!value) {
+            return "";
+        }
+
+        const ta = language(value, "ta");
+        const en = language(value, "en");
+
+        let html = "";
+
+        if (ta) {
+
+            html += `
+                <div class="ctm-ta">
+                    ${ta}
+                </div>
+            `;
 
         }
 
-        return String(value);
+        if (en) {
+
+            html += `
+                <div class="ctm-en">
+                    ${en}
+                </div>
+            `;
+
+        }
+
+        return html;
 
     }
 
@@ -450,10 +469,10 @@ function buildViewModel(moment) {
 
             payload.text
 
-        ].forEach(value => {
+        ].forEach(item => {
 
             const html =
-                bilingual(value);
+                bilingualBlock(item);
 
             if (html) {
 
@@ -475,21 +494,21 @@ function buildViewModel(moment) {
 
         step: "",
 
-        title:
-            bilingual(payload.title),
+        titleTa:
+            language(payload.title, "ta"),
 
-        subtitle:
-            bilingual(payload.subtitle),
+        titleEn:
+            language(payload.title, "en"),
 
         message:
             collect(),
 
         button:
-            bilingual(payload.button) ||
+            bilingualBlock(payload.button) ||
 
-            bilingual(payload.primaryButton) ||
+            bilingualBlock(payload.primaryButton) ||
 
-            bilingual(payload.secondaryButton) ||
+            bilingualBlock(payload.secondaryButton) ||
 
             `
             <div class="ctm-ta">
