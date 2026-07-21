@@ -17,6 +17,7 @@ Responsibility
 • Store responses
 • Store personalization data
 • Manage journey progress
+• Support all 36 screens
 
 ======================================================================
 */
@@ -37,6 +38,7 @@ Responsibility
 
 
     window.CTM = window.CTM || {};
+
 
 
     const CTM = window.CTM;
@@ -64,12 +66,32 @@ Responsibility
 
     /*
     ==================================================
-    Global Application State
+    Preserve Existing State
+
+    Prevent accidental overwrite
+    during reloads.
+
     ==================================================
     */
 
 
-    CTM.state = {
+    CTM.state = CTM.state || {};
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Default Application State
+    ==================================================
+    */
+
+
+    const defaultState = {
+
 
 
         /*
@@ -86,7 +108,6 @@ Responsibility
 
 
         previousScreen:null,
-
 
 
         totalScreens:36,
@@ -169,17 +190,16 @@ Responsibility
         ----------------------------------------------
         User Responses
 
-        Screens will add values here
+        All screen answers stored here.
 
         Example:
 
-        dream:
-        [
-            "home",
+        lifePriorities:[
+            "dream-home",
             "travel"
         ]
 
-        ----------------------------------------------
+        =================================================
         */
 
 
@@ -197,7 +217,7 @@ Responsibility
 
         /*
         ----------------------------------------------
-        Personalization Data
+        Personalization
         ----------------------------------------------
         */
 
@@ -208,7 +228,10 @@ Responsibility
             language:'ta',
 
 
-            tamilFirst:true
+            tamilFirst:true,
+
+
+            welcomeName:''
 
 
 
@@ -222,10 +245,7 @@ Responsibility
 
         /*
         ----------------------------------------------
-        Insights
-
-        Future screens populate this
-
+        Insights Engine
         ----------------------------------------------
         */
 
@@ -244,10 +264,7 @@ Responsibility
 
         /*
         ----------------------------------------------
-        Recommendations
-
-        Future screens populate this
-
+        Recommendations Engine
         ----------------------------------------------
         */
 
@@ -266,6 +283,79 @@ Responsibility
 
 
 
+
+
+    /*
+    ==================================================
+    Merge Default State
+
+    ==================================================
+    */
+
+
+    CTM.state = {
+
+
+
+        ...defaultState,
+
+
+
+        ...CTM.state,
+
+
+
+        visitor:{
+
+
+
+            ...defaultState.visitor,
+
+
+
+            ...(CTM.state.visitor || {})
+
+
+
+        },
+
+
+
+        journey:{
+
+
+
+            ...defaultState.journey,
+
+
+
+            ...(CTM.state.journey || {})
+
+
+
+        },
+
+
+
+        responses:{
+
+
+
+            ...defaultState.responses,
+
+
+
+            ...(CTM.state.responses || {})
+
+
+
+        }
+
+
+
+    };
+
+ 
 
 
     /*
@@ -293,7 +383,7 @@ Responsibility
 
     /*
     ==================================================
-    Update State
+    Update Complete State
     ==================================================
     */
 
@@ -305,17 +395,25 @@ Responsibility
         if(!data){
 
 
+
             return;
+
 
 
         }
 
 
 
+
+
+
+
         CTM.state = {
 
 
+
             ...CTM.state,
+
 
 
             ...data
@@ -336,7 +434,74 @@ Responsibility
 
     /*
     ==================================================
-    Current Screen Management
+    Visitor Management
+    ==================================================
+    */
+
+
+    CTM.setVisitor = function(data){
+
+
+
+        if(!data){
+
+
+
+            return;
+
+
+
+        }
+
+
+
+
+
+
+
+        CTM.state.visitor = {
+
+
+
+            ...CTM.state.visitor,
+
+
+
+            ...data
+
+
+
+        };
+
+
+
+    };
+
+
+
+
+
+
+
+    CTM.getVisitor = function(){
+
+
+
+        return CTM.state.visitor;
+
+
+
+    };
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Screen Management
     ==================================================
     */
 
@@ -364,22 +529,52 @@ Responsibility
         if(!screenId){
 
 
+
             return;
+
 
 
         }
 
 
 
+
+
+
+
         CTM.state.previousScreen =
+
+
 
             CTM.state.currentScreen;
 
 
 
+
+
+
+
         CTM.state.currentScreen =
 
+
+
             screenId;
+
+
+
+    };
+
+
+
+
+
+
+
+    CTM.getPreviousScreen = function(){
+
+
+
+        return CTM.state.previousScreen;
 
 
 
@@ -430,6 +625,22 @@ Responsibility
 
 
 
+    CTM.isJourneyStarted = function(){
+
+
+
+        return CTM.state.journey.started;
+
+
+
+    };
+
+
+
+
+
+
+
     /*
     ==================================================
     Progress Tracking
@@ -444,36 +655,72 @@ Responsibility
         if(!screenNumber){
 
 
+
             return;
+
 
 
         }
 
 
 
+
+
+
+
         CTM.state.journey.progress =
 
+
+
             screenNumber;
+
+
+
+
 
 
 
         CTM.state.journey.completion =
 
 
+
             Math.round(
+
 
 
                 (
 
+
+
                     screenNumber /
 
+
+
                     CTM.state.totalScreens
+
 
 
                 ) * 100
 
 
+
             );
+
+
+
+    };
+
+
+
+
+
+
+
+    CTM.getProgress = function(){
+
+
+
+        return CTM.state.journey;
 
 
 
@@ -499,10 +746,16 @@ Responsibility
         if(!key){
 
 
+
             return;
 
 
+
         }
+
+
+
+
 
 
 
@@ -522,7 +775,87 @@ Responsibility
 
 
 
+        if(!key){
+
+
+
+            return null;
+
+
+
+        }
+
+
+
+
+
+
+
         return CTM.state.responses[key];
+
+
+
+    };
+
+
+
+
+
+
+
+    CTM.hasResponse = function(key){
+
+
+
+        return Object.prototype.hasOwnProperty.call(
+
+
+
+            CTM.state.responses,
+
+
+
+            key
+
+
+
+        );
+
+
+
+    };
+
+ 
+
+
+    /*
+    ==================================================
+    Response Utilities
+    ==================================================
+    */
+
+
+    CTM.removeResponse = function(key){
+
+
+
+        if(!key){
+
+
+
+            return;
+
+
+
+        }
+
+
+
+
+
+
+
+        delete CTM.state.responses[key];
 
 
 
@@ -550,6 +883,203 @@ Responsibility
 
 
 
+    CTM.mergeResponses = function(data){
+
+
+
+        if(!data){
+
+
+
+            return;
+
+
+
+        }
+
+
+
+
+
+
+
+        CTM.state.responses = {
+
+
+
+            ...CTM.state.responses,
+
+
+
+            ...data
+
+
+
+        };
+
+
+
+    };
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Personalization Management
+    ==================================================
+    */
+
+
+    CTM.setPersonalization = function(data){
+
+
+
+        if(!data){
+
+
+
+            return;
+
+
+
+        }
+
+
+
+
+
+
+
+        CTM.state.personalization = {
+
+
+
+            ...CTM.state.personalization,
+
+
+
+            ...data
+
+
+
+        };
+
+
+
+    };
+
+
+
+
+
+
+
+    CTM.getPersonalization = function(){
+
+
+
+        return CTM.state.personalization;
+
+
+
+    };
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Journey Reset
+
+    Used for fresh visitor sessions
+
+    ==================================================
+    */
+
+
+    CTM.resetJourney = function(){
+
+
+
+        CTM.state.currentScreen =
+
+            'screen01';
+
+
+
+        CTM.state.previousScreen =
+
+            null;
+
+
+
+
+
+
+
+        CTM.state.journey = {
+
+
+
+            started:false,
+
+
+
+            completed:false,
+
+
+
+            progress:0,
+
+
+
+            completion:0
+
+
+
+        };
+
+
+
+
+
+
+
+        CTM.state.responses = {};
+
+
+
+
+
+
+
+        CTM.state.insights = {};
+
+
+
+
+
+
+
+        CTM.state.recommendations = {};
+
+
+
+    };
+
+
+
+
+
+
+
     /*
     ==================================================
     Initialization Marker
@@ -562,6 +1092,50 @@ Responsibility
 
 
         CTM.state.initialized = true;
+
+
+
+    };
+
+
+
+
+
+
+
+    CTM.isInitialized = function(){
+
+
+
+        return CTM.state.initialized;
+
+
+
+    };
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Debug State
+
+    ==================================================
+    */
+
+
+    CTM.debugState = function(){
+
+
+
+        console.table(
+
+            CTM.state
+
+        );
 
 
 
