@@ -612,3 +612,369 @@ Near Zone
 
 }
 
+/*==================================================
+Middle Zone
+
+4 - 7
+
+Journey / Progress Zone
+
+==================================================*/
+
+
+#screen09 .distance-option[data-value="4"].selected,
+
+#screen09 .distance-option[data-value="5"].selected,
+
+#screen09 .distance-option[data-value="6"].selected,
+
+#screen09 .distance-option[data-value="7"].selected,
+
+#screen09 .scale-group .choice[data-value="4"].selected,
+
+#screen09 .scale-group .choice[data-value="5"].selected,
+
+#screen09 .scale-group .choice[data-value="6"].selected,
+
+#screen09 .scale-group .choice[data-value="7"].selected{
+
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #F59E0B,
+
+            #B45309
+
+        );
+
+
+
+    border-color:
+
+        #FCD34D;
+
+
+
+    box-shadow:
+
+
+        0 0 25px rgba(245,158,11,.75),
+
+        0 0 55px rgba(245,158,11,.35);
+
+
+
+}
+
+
+
+
+
+/*==================================================
+Far Zone
+
+8 - 10
+
+Reality Gap Zone
+
+==================================================*/
+
+
+#screen09 .distance-option[data-value="8"].selected,
+
+#screen09 .distance-option[data-value="9"].selected,
+
+#screen09 .distance-option[data-value="10"].selected,
+
+#screen09 .scale-group .choice[data-value="8"].selected,
+
+#screen09 .scale-group .choice[data-value="9"].selected,
+
+#screen09 .scale-group .choice[data-value="10"].selected{
+
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #EF4444,
+
+            #991B1B
+
+        );
+
+
+
+    border-color:
+
+        #FCA5A5;
+
+
+
+    box-shadow:
+
+
+        0 0 25px rgba(239,68,68,.80),
+
+        0 0 55px rgba(239,68,68,.40);
+
+
+
+}
+
+
+
+
+
+/*==================================================
+Distance Labels
+==================================================*/
+
+
+#screen09 .distance-labels{
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    margin-top:20px;
+
+
+
+    color:
+
+        rgba(255,255,255,.70);
+
+
+
+}
+
+
+
+/*==================================================
+Scale Meaning Labels
+
+Near → Far
+
+==================================================*/
+
+
+#screen09 .scale-labels{
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    width:100%;
+
+
+    max-width:620px;
+
+
+    margin:20px auto 0;
+
+
+    font-size:.95rem;
+
+
+    letter-spacing:.05em;
+
+
+
+    color:
+
+        rgba(255,255,255,.75);
+
+
+
+}
+
+
+
+#screen09 .scale-label-near{
+
+
+    color:
+
+        #22C55E;
+
+
+
+}
+
+
+
+#screen09 .scale-label-far{
+
+
+    color:
+
+        #EF4444;
+
+
+
+}
+
+
+
+/*==================================================
+Selected Animation
+
+Premium Glow Pulse
+
+==================================================*/
+
+
+#screen09 .distance-option.selected,
+
+#screen09 .scale-group .choice.selected{
+
+
+    animation:
+
+        distancePulse 1.8s infinite;
+
+
+
+}
+
+
+
+@keyframes distancePulse{
+
+
+    0%{
+
+
+        transform:
+
+            scale(1);
+
+
+
+    }
+
+
+
+    50%{
+
+
+        transform:
+
+            scale(1.08);
+
+
+
+    }
+
+
+
+    100%{
+
+
+        transform:
+
+            scale(1);
+
+
+
+    }
+
+
+
+}
+
+
+
+/*==================================================
+Mobile
+==================================================*/
+
+@media(max-width:768px){
+
+
+    #screen09 .bridge-visual{
+
+
+        flex-direction:column;
+
+
+        gap:20px;
+
+
+
+    }
+
+
+
+    #screen09 .bridge-side{
+
+
+        width:90%;
+
+
+
+    }
+
+
+
+    #screen09 .bridge-path{
+
+
+        width:80%;
+
+
+        height:80px;
+
+
+
+    }
+
+
+
+    #screen09 .distance-scale,
+
+    #screen09 .scale-group{
+
+
+        gap:10px;
+
+
+
+    }
+
+
+
+    #screen09 .distance-option,
+
+    #screen09 .scale-group .choice{
+
+
+        width:46px;
+
+
+        height:46px;
+
+
+        font-size:1rem;
+
+
+
+    }
+
+
+
+}
+
