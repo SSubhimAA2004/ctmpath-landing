@@ -1,4 +1,3 @@
-
 /*
 ======================================================================
 
@@ -13,7 +12,7 @@ Screen 01 — The Invitation™ Controller
 Responsibility
 • Initialize Screen 01
 • Start visitor journey
-• Handle CTA interaction
+• Handle navigation interaction
 • Prepare personalization hooks
 • Maintain clean transition
 
@@ -49,9 +48,12 @@ Responsibility
 
 
 
+
+
     /*==================================================
     Screen Configuration
     ==================================================*/
+
 
 
     CTM.screen01 = {
@@ -60,6 +62,7 @@ Responsibility
         id:
 
             'screen01',
+
 
 
         nextScreen:
@@ -73,9 +76,13 @@ Responsibility
 
 
 
+
+
+
     /*==================================================
     Initialize Screen 01
     ==================================================*/
+
 
 
     CTM.initScreen01 = function(){
@@ -106,9 +113,12 @@ Responsibility
 
 
 
+
+
     /*==================================================
     Screen Refresh
     ==================================================*/
+
 
 
     CTM.refreshScreen01 = function(){
@@ -133,6 +143,7 @@ Responsibility
 
         ){
 
+
             CTM.refreshText();
 
 
@@ -148,9 +159,12 @@ Responsibility
 
 
 
+
+
     /*==================================================
-    Start Journey Button
+    Start Journey Navigation
     ==================================================*/
+
 
 
     CTM.startScreen01Journey = async function(){
@@ -158,6 +172,8 @@ Responsibility
 
 
         CTM.startJourney();
+
+
 
 
 
@@ -170,10 +186,15 @@ Responsibility
         ){
 
 
+
             CTM.saveState();
 
 
+
         }
+
+
+
 
 
 
@@ -193,9 +214,12 @@ Responsibility
 
 
 
+
+
     /*==================================================
     Click Handler
     ==================================================*/
+
 
 
     CTM.handleScreen01Click = function(event){
@@ -206,19 +230,28 @@ Responsibility
 
             event.target.closest(
 
-                '#screen01 [data-next]'
+
+                '#screen01 [data-next-screen]'
+
 
             );
+
+
 
 
 
         if (!button){
 
 
+
             return;
 
 
+
         }
+
+
+
 
 
 
@@ -226,11 +259,17 @@ Responsibility
 
 
 
+
+
         CTM.startScreen01Journey();
 
 
 
+
+
     };
+
+
 
 
 
@@ -246,25 +285,34 @@ Responsibility
     ==================================================*/
 
 
+
     CTM.bindScreen01 = function(){
 
 
 
         document.removeEventListener(
 
+
             'click',
 
+
             CTM.handleScreen01Click
+
 
         );
 
 
 
+
+
         document.addEventListener(
+
 
             'click',
 
+
             CTM.handleScreen01Click
+
 
         );
 
@@ -278,9 +326,12 @@ Responsibility
 
 
 
+
+
     /*==================================================
     Screen Loaded Hook
     ==================================================*/
+
 
 
     CTM.afterScreen01Loaded = function(){
@@ -289,11 +340,15 @@ Responsibility
 
         if (
 
+
             document.getElementById(
+
 
                 'screen01'
 
+
             )
+
 
         ){
 
@@ -315,14 +370,20 @@ Responsibility
 
 
 
+
+
     /*==================================================
     Initialize
+
     ==================================================*/
+
 
 
     document.addEventListener(
 
+
         'DOMContentLoaded',
+
 
         function(){
 
@@ -333,6 +394,7 @@ Responsibility
 
 
         }
+
 
     );
 
