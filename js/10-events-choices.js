@@ -32,11 +32,14 @@ Responsibility
 
     }
 
+
     /*==================================================
     Ensure Responses Object
     ==================================================*/
 
     CTM.state.responses = CTM.state.responses || {};
+
+
 
     /*==================================================
     Save Response
@@ -50,15 +53,20 @@ Responsibility
 
     ) {
 
+
         if (!questionId) {
 
             return;
 
         }
 
+
         CTM.state.responses[questionId] = value;
 
+
     };
+
+
 
     /*==================================================
     Get Response
@@ -70,9 +78,13 @@ Responsibility
 
     ) {
 
+
         return CTM.state.responses[questionId];
 
+
     };
+
+
 
     /*==================================================
     Clear Response
@@ -84,21 +96,28 @@ Responsibility
 
     ) {
 
+
         if (!questionId) {
 
             return;
 
         }
 
+
         delete CTM.state.responses[questionId];
+
 
     };
 
+
+
     /*==================================================
     Resolve Choice Group
-    Supports both:
+
+    Supports:
     • data-question
     • data-choice-group
+
     ==================================================*/
 
     CTM.getChoiceGroup = function (
@@ -107,11 +126,13 @@ Responsibility
 
     ) {
 
+
         if (!choice) {
 
             return null;
 
         }
+
 
         return (
 
@@ -123,13 +144,18 @@ Responsibility
 
         );
 
+
     };
+
+
 
     /*==================================================
     Resolve Selection Mode
+
     Supports:
     • data-mode="multiple"
     • data-multiple="true"
+
     ==================================================*/
 
     CTM.getChoiceMode = function (
@@ -138,11 +164,13 @@ Responsibility
 
     ) {
 
+
         if (!choice) {
 
             return 'single';
 
         }
+
 
         if (
 
@@ -153,6 +181,7 @@ Responsibility
             return 'multiple';
 
         }
+
 
         if (
 
@@ -168,6 +197,7 @@ Responsibility
 
         }
 
+
         if (
 
             choice.dataset.mode
@@ -178,9 +208,13 @@ Responsibility
 
         }
 
+
         return 'single';
 
+
     };
+
+
 
     /*==================================================
     Get Group Choices
@@ -192,11 +226,13 @@ Responsibility
 
     ) {
 
+
         if (!group) {
 
             return [];
 
         }
+
 
         return document.querySelectorAll(
 
@@ -206,10 +242,12 @@ Responsibility
 
         );
 
+
     };
 
 
-     /*==================================================
+
+    /*==================================================
     Single Choice
     ==================================================*/
 
@@ -219,19 +257,24 @@ Responsibility
 
     ) {
 
+
         if (!choice) {
 
             return;
 
         }
 
+
         const group =
 
             CTM.getChoiceGroup(choice);
 
+
         const value =
 
             choice.dataset.value;
+
+
 
         if (!group) {
 
@@ -239,9 +282,12 @@ Responsibility
 
         }
 
+
+
         CTM.getGroupChoices(group)
 
             .forEach(function (item) {
+
 
                 item.classList.remove(
 
@@ -249,13 +295,18 @@ Responsibility
 
                 );
 
+
             });
+
+
 
         choice.classList.add(
 
             'selected'
 
         );
+
+
 
         CTM.setResponse(
 
@@ -265,6 +316,8 @@ Responsibility
 
         );
 
+
+
         if (
 
             typeof CTM.saveState ===
@@ -273,11 +326,16 @@ Responsibility
 
         ) {
 
+
             CTM.saveState();
+
 
         }
 
+
     };
+
+
 
     /*==================================================
     Multiple Choice
@@ -289,19 +347,24 @@ Responsibility
 
     ) {
 
+
         if (!choice) {
 
             return;
 
         }
 
+
         const group =
 
             CTM.getChoiceGroup(choice);
 
+
         const value =
 
             choice.dataset.value;
+
+
 
         if (!group) {
 
@@ -309,9 +372,13 @@ Responsibility
 
         }
 
+
+
         let values =
 
             CTM.getResponse(group);
+
+
 
         if (
 
@@ -323,15 +390,20 @@ Responsibility
 
         }
 
+
+
         const index =
 
             values.indexOf(value);
+
+
 
         if (
 
             index >= 0
 
         ) {
+
 
             values.splice(
 
@@ -341,17 +413,21 @@ Responsibility
 
             );
 
+
             choice.classList.remove(
 
                 'selected'
 
             );
 
+
         }
 
         else {
 
+
             values.push(value);
+
 
             choice.classList.add(
 
@@ -359,7 +435,10 @@ Responsibility
 
             );
 
+
         }
+
+
 
         CTM.setResponse(
 
@@ -369,6 +448,8 @@ Responsibility
 
         );
 
+
+
         if (
 
             typeof CTM.saveState ===
@@ -377,11 +458,16 @@ Responsibility
 
         ) {
 
+
             CTM.saveState();
+
 
         }
 
+
     };
+
+
 
     /*==================================================
     Rating Choice
@@ -393,221 +479,318 @@ Responsibility
 
     ) {
 
+
         CTM.selectChoice(
 
             choice
 
         );
 
+
     };
 
-     /*==================================================
-    Restore Choices
-    ==================================================*/
 
-    CTM.restoreChoices = function () {
+ /*==================================================
+Restore Choices
+==================================================*/
 
-        document
+CTM.restoreChoices = function () {
 
-            .querySelectorAll('.choice')
 
-            .forEach(function (choice) {
+    document
 
-                const group =
+        .querySelectorAll('.choice')
 
-                    CTM.getChoiceGroup(choice);
+        .forEach(function (choice) {
 
-                if (!group) {
 
-                    return;
+            const group =
 
-                }
+                CTM.getChoiceGroup(choice);
 
-                const value =
 
-                    choice.dataset.value;
 
-                const mode =
+            if (!group) {
 
-                    CTM.getChoiceMode(choice);
+                return;
 
-                const response =
+            }
 
-                    CTM.getResponse(group);
 
-                choice.classList.remove(
 
-                    'selected'
+            const value =
 
-                );
+                choice.dataset.value;
+
+
+
+            const mode =
+
+                CTM.getChoiceMode(choice);
+
+
+
+            const response =
+
+                CTM.getResponse(group);
+
+
+
+            choice.classList.remove(
+
+                'selected'
+
+            );
+
+
+
+            if (
+
+                mode === 'multiple'
+
+            ) {
+
 
                 if (
 
-                    mode === 'multiple'
+                    Array.isArray(response) &&
+
+                    response.includes(value)
 
                 ) {
 
-                    if (
 
-                        Array.isArray(response) &&
+                    choice.classList.add(
 
-                        response.includes(value)
+                        'selected'
 
-                    ) {
+                    );
 
-                        choice.classList.add(
-
-                            'selected'
-
-                        );
-
-                    }
 
                 }
 
-                else {
 
-                    if (
+            }
 
-                        response === value
+            else {
 
-                    ) {
 
-                        choice.classList.add(
+                if (
 
-                            'selected'
+                    response === value
 
-                        );
+                ) {
 
-                    }
+
+                    choice.classList.add(
+
+                        'selected'
+
+                    );
+
 
                 }
 
-            });
 
-    };
+            }
 
-    /*==================================================
-    Click Handler
-    ==================================================*/
-
-    CTM.handleChoice = function (event) {
-
-        const choice =
-
-            event.target.closest('.choice');
-
-        if (!choice) {
-
-            return;
-
-        }
-
-        event.preventDefault();
-
-        const mode =
-
-            CTM.getChoiceMode(choice);
-
-        switch (mode) {
-
-            case 'multiple':
-
-                CTM.toggleChoice(
-
-                    choice
-
-                );
-
-                break;
-
-            case 'rating':
-
-                CTM.selectRating(
-
-                    choice
-
-                );
-
-                break;
-
-            default:
-
-                CTM.selectChoice(
-
-                    choice
-
-                );
-
-                break;
-
-        }
-
-    };
-
-     /*==================================================
-    Keyboard Support
-    ==================================================*/
-
-    CTM.handleChoiceKeyboard = function (event) {
-
-        if (
-
-            event.key !== 'Enter' &&
-
-            event.key !== ' '
-
-        ) {
-
-            return;
-
-        }
-
-        const choice =
-
-            event.target.closest('.choice');
-
-        if (!choice) {
-
-            return;
-
-        }
-
-        event.preventDefault();
-
-        CTM.handleChoice({
-
-            target: choice,
-
-            preventDefault() {}
 
         });
 
-    };
 
-    /*==================================================
-    Bind Events
-    ==================================================*/
+};
 
-    CTM.bindChoices = function () {
 
-        document.addEventListener(
 
-            'click',
+/*==================================================
+Click Handler
+==================================================*/
 
-            CTM.handleChoice
+CTM.handleChoice = function (event) {
 
-        );
 
-        document.addEventListener(
+    const choice =
 
-            'keydown',
+        event.target.closest('.choice');
 
-            CTM.handleChoiceKeyboard
 
-        );
 
-    };
+    if (!choice) {
+
+        return;
+
+    }
+
+
+
+    event.preventDefault();
+
+
+
+    const mode =
+
+        CTM.getChoiceMode(choice);
+
+
+
+    switch (mode) {
+
+
+        case 'multiple':
+
+
+            CTM.toggleChoice(
+
+                choice
+
+            );
+
+
+            break;
+
+
+
+        case 'rating':
+
+
+            CTM.selectRating(
+
+                choice
+
+            );
+
+
+            break;
+
+
+
+        default:
+
+
+            CTM.selectChoice(
+
+                choice
+
+            );
+
+
+            break;
+
+
+    }
+
+
+};
+
+
+
+/*==================================================
+Keyboard Support
+==================================================*/
+
+CTM.handleChoiceKeyboard = function (event) {
+
+
+    if (
+
+        event.key !== 'Enter' &&
+
+        event.key !== ' '
+
+    ) {
+
+        return;
+
+    }
+
+
+
+    const choice =
+
+        event.target.closest('.choice');
+
+
+
+    if (!choice) {
+
+        return;
+
+    }
+
+
+
+    event.preventDefault();
+
+
+
+    CTM.handleChoice({
+
+        target: choice,
+
+        preventDefault() {}
+
+    });
+
+
+};
+
+
+
+/*==================================================
+Bind Events
+
+Safe Dynamic Screen Binding
+
+Prevents duplicate listeners
+while supporting dynamically
+loaded screens.
+
+==================================================*/
+
+CTM.bindChoices = function () {
+
+
+    document.removeEventListener(
+
+        'click',
+
+        CTM.handleChoice
+
+    );
+
+
+
+    document.removeEventListener(
+
+        'keydown',
+
+        CTM.handleChoiceKeyboard
+
+    );
+
+
+
+    document.addEventListener(
+
+        'click',
+
+        CTM.handleChoice
+
+    );
+
+
+
+    document.addEventListener(
+
+        'keydown',
+
+        CTM.handleChoiceKeyboard
+
+    );
+
+
+};
+
+
 
 })();
-
