@@ -23,10 +23,34 @@ Responsibilities
 */
 
 
-(function(){
+'use strict';
 
 
-"use strict";
+
+(() => {
+
+
+
+const CTM = window.CTM;
+
+
+
+if(!CTM){
+
+
+    console.error(
+
+        "CTM core has not been initialized."
+
+    );
+
+
+    return;
+
+
+}
+
+
 
 
 
@@ -34,22 +58,31 @@ Responsibilities
 
 /*==================================================
 Screen 02 Initializer
+
+Called automatically by loader.js
+
+CTM.initScreen02()
+
 ==================================================*/
 
 
-function initScreen02(){
+CTM.initScreen02 = function(){
 
 
 
     const screen = document.getElementById(
+
         "screen02"
+
     );
 
 
 
     if(!screen){
 
+
         return;
+
 
     }
 
@@ -65,7 +98,8 @@ function initScreen02(){
 
 
 
-}
+};
+
 
 
 
@@ -87,25 +121,34 @@ function activateEntrance(){
     const elements = [
 
 
+
         ".moment-label",
+
 
 
         ".screen02-symbol",
 
 
+
         ".screen02-tamil",
+
 
 
         ".screen02-english",
 
 
+
         ".gold-divider",
+
 
 
         ".btn-primary"
 
 
+
     ];
+
+
 
 
 
@@ -116,8 +159,12 @@ function activateEntrance(){
 
 
         const element = document.querySelector(
+
             "#screen02 " + selector
+
         );
+
+
 
 
 
@@ -130,7 +177,10 @@ function activateEntrance(){
 
 
             element.style.transform =
+
                 "translateY(30px)";
+
+
 
 
 
@@ -139,16 +189,17 @@ function activateEntrance(){
 
 
                 element.style.transition =
+
                     "all .8s cubic-bezier(.22,1,.36,1)";
 
 
 
-                element.style.opacity =
-                    "1";
+                element.style.opacity = "1";
 
 
 
                 element.style.transform =
+
                     "translateY(0)";
 
 
@@ -174,6 +225,7 @@ function activateEntrance(){
 
 
 
+
 /*==================================================
 Continue Button
 
@@ -187,14 +239,22 @@ function bindContinueButton(){
 
 
     const button = document.getElementById(
+
         "screen02Continue"
+
     );
+
+
 
 
 
     if(!button){
 
+
+
         return;
+
+
 
     }
 
@@ -202,8 +262,12 @@ function bindContinueButton(){
 
 
 
+
+
     button.addEventListener(
+
         "click",
+
         function(){
 
 
@@ -213,6 +277,9 @@ function bindContinueButton(){
 
 
         }
+
+
+
     );
 
 
@@ -226,10 +293,11 @@ function bindContinueButton(){
 
 
 
+
 /*==================================================
 Navigation Handler
 
-Uses existing CTM PATH router
+Uses CTM Router
 
 ==================================================*/
 
@@ -238,24 +306,18 @@ function navigateToNextScreen(){
 
 
 
-    /*
-
-    Preferred:
-
-    Existing router system
-
-    */
-
-
-
     if(
-        typeof window.navigateToScreen === "function"
+
+        typeof CTM.navigate === "function"
+
     ){
 
 
 
-        window.navigateToScreen(
+        CTM.navigate(
+
             "screen03"
+
         );
 
 
@@ -271,18 +333,12 @@ function navigateToNextScreen(){
 
 
 
-    /*
 
-    Fallback:
+    console.warn(
 
-    Hash navigation
+        "CTM router unavailable."
 
-    */
-
-
-
-    window.location.hash =
-        "#screen03";
+    );
 
 
 
@@ -295,22 +351,5 @@ function navigateToNextScreen(){
 
 
 
-/*==================================================
-Auto Start
 
-==================================================*/
-
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    initScreen02
-
-);
-
-
-
-
-
-})();
+})(); 
