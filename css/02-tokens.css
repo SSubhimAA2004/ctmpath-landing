@@ -25,13 +25,19 @@ Responsibility
 
     --color-primary:#16A56A;
 
-    --color-primary-hover:#1CC57C;
+    --color-primary-hover:#20C77E;
+
+    --color-primary-dark:#0F7750;
+
+    --color-primary-soft:#39D892;
 
     --color-accent:#D8B36A;
 
-    --color-accent-light:#F2D28A;
+    --color-accent-light:#E9C98A;
 
     --color-accent-dark:#A88439;
+
+    --color-accent-soft:#F6E6C3;
 
     --color-white:#FFFFFF;
 
@@ -39,37 +45,80 @@ Responsibility
 
 
     /*==================================================
-    Backgrounds
+    Premium Background Palette
     ==================================================*/
 
-    --bg-page:#090A0F;
+    --bg-page:#071221;
 
-    --bg-surface:#10131B;
+    --bg-page-top:#0B2344;
 
-    --bg-card:rgba(20,24,34,.88);
+    --bg-page-bottom:#040A13;
 
-    --bg-card-hover:rgba(26,31,44,.94);
+    --bg-surface:#0F1B2E;
+
+    --bg-card:rgba(18,28,45,.88);
+
+    --bg-card-hover:rgba(24,37,59,.94);
 
     --bg-overlay:rgba(0,0,0,.72);
 
-    --bg-button:#0E5A3D;
+    --bg-button:#15734C;
 
-    --bg-button-hover:#13714D;
+    --bg-button-hover:#1A8D5D;
+
+    --bg-button-active:#0F6642;
+
+    --bg-divider:rgba(216,179,106,.18);
+
+
+    /*==================================================
+    Hero Background Lighting
+    ==================================================*/
+
+    --hero-glow:
+
+        radial-gradient(
+
+            circle at center,
+
+            rgba(34,71,122,.30) 0%,
+
+            rgba(13,32,60,.14) 38%,
+
+            rgba(7,18,33,0) 72%
+
+        );
+
+    --hero-overlay:
+
+        linear-gradient(
+
+            180deg,
+
+            rgba(255,255,255,.015) 0%,
+
+            rgba(255,255,255,0) 100%
+
+        );
 
 
     /*==================================================
     Text
     ==================================================*/
 
-    --text-primary:#F8F8F6;
+    --text-primary:#F7F6F2;
 
-    --text-secondary:#D6D6D3;
+    --text-secondary:#E2DFD7;
 
-    --text-muted:#9FA7B3;
+    --text-muted:#AEB7C5;
+
+    --text-subtle:#8994A6;
 
     --text-gold:#D8B36A;
 
-    --text-green:#4DD08A;
+    --text-gold-light:#E9D0A0;
+
+    --text-green:#59D894;
 
 
     /*==================================================
@@ -80,7 +129,11 @@ Responsibility
 
     --border-medium:rgba(255,255,255,.14);
 
+    --border-strong:rgba(255,255,255,.22);
+
     --border-gold:rgba(216,179,106,.35);
+
+    --border-gold-soft:rgba(216,179,106,.18);
 
     --border-green:rgba(22,165,106,.35);
 
@@ -88,6 +141,10 @@ Responsibility
     /*==================================================
     Shadows
     ==================================================*/
+
+    --shadow-xs:
+
+        0 4px 10px rgba(0,0,0,.18);
 
     --shadow-sm:
 
@@ -101,13 +158,25 @@ Responsibility
 
         0 30px 70px rgba(0,0,0,.55);
 
+    --shadow-xl:
+
+        0 50px 120px rgba(0,0,0,.70);
+
     --shadow-gold:
 
         0 0 30px rgba(216,179,106,.18);
 
+    --shadow-gold-lg:
+
+        0 0 60px rgba(216,179,106,.10);
+
     --shadow-green:
 
         0 0 24px rgba(22,165,106,.22);
+
+    --shadow-button:
+
+        0 14px 36px rgba(15,102,66,.32);
 
 
     /*==================================================
@@ -124,6 +193,8 @@ Responsibility
 
     --radius-xl:40px;
 
+    --radius-hero:52px;
+
     --radius-round:999px;
 
 
@@ -139,6 +210,26 @@ Responsibility
 
         sans-serif;
 
+    --font-display:
+
+        "Cormorant Garamond",
+
+        "Playfair Display",
+
+        Georgia,
+
+        serif;
+
+    --font-ui:
+
+        "Segoe UI",
+
+        "Inter",
+
+        Arial,
+
+        sans-serif;
+
     --font-size-xs:.75rem;
 
     --font-size-sm:.90rem;
@@ -149,12 +240,44 @@ Responsibility
 
     --font-size-xl:2rem;
 
-    --font-size-hero:4rem;
+    --font-size-2xl:2.75rem;
+
+    --font-size-3xl:3.5rem;
+
+    --font-size-hero:4.5rem;
+
+    --font-size-display:5rem;
+
+    --font-weight-light:300;
+
+    --font-weight-regular:400;
+
+    --font-weight-medium:500;
+
+    --font-weight-semibold:600;
+
+    --font-weight-bold:700;
+
+    --letter-tight:-0.02em;
+
+    --letter-normal:0;
+
+    --letter-wide:.04em;
+
+    --letter-display:.08em;
+
+    --line-tight:1.15;
+
+    --line-normal:1.45;
+
+    --line-relaxed:1.70;
 
 
     /*==================================================
     Spacing
     ==================================================*/
+
+    --space-0:0;
 
     --space-1:8px;
 
@@ -170,6 +293,31 @@ Responsibility
 
     --space-7:96px;
 
+    --space-8:120px;
+
+    --space-9:160px;
+
+
+    /*==================================================
+    Hero Layout
+    ==================================================*/
+
+    --logo-width:120px;
+
+    --hero-content-width:620px;
+
+    --hero-max-width:860px;
+
+    --hero-section-gap:72px;
+
+    --hero-logo-gap:70px;
+
+    --hero-title-gap:32px;
+
+    --hero-copy-gap:64px;
+
+    --hero-button-gap:80px;
+
 
     /*==================================================
     Layout
@@ -177,13 +325,19 @@ Responsibility
 
     --container-width:1200px;
 
+    --container-wide:1440px;
+
+    --content-width:960px;
+
     --hero-width:860px;
 
     --header-height:90px;
 
+    --screen-min-height:100vh;
+
 
     /*==================================================
-    Animation
+    Motion
     ==================================================*/
 
     --speed-fast:.25s;
@@ -194,17 +348,38 @@ Responsibility
 
     --speed-extra:1.2s;
 
+    --speed-cinematic:1.8s;
+
     --ease:cubic-bezier(.22,.61,.36,1);
+
+    --ease-soft:cubic-bezier(.19,1,.22,1);
+
+
+    /*==================================================
+    Opacity
+    ==================================================*/
+
+    --opacity-disabled:.45;
+
+    --opacity-muted:.70;
+
+    --opacity-soft:.90;
 
 
     /*==================================================
     Z Index
     ==================================================*/
 
+    --z-base:1;
+
+    --z-content:10;
+
     --z-header:100;
 
     --z-overlay:500;
 
     --z-modal:1000;
+
+    --z-toast:1100;
 
 }
