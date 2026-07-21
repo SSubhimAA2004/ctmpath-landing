@@ -8,14 +8,14 @@ File
 css/screens/screen02.css
 
 Screen
-02 — THE GIFT™
+02 — THE SIX MINUTES™
 
 Purpose
-Emotional introduction
+Path discovery introduction
 
 Responsibility
 • Screen 02 layout
-• Gift light symbol
+• Guiding light symbol
 • Tamil-first typography
 • Emotional pacing
 • Premium transitions
@@ -152,6 +152,7 @@ Aligned with Screen 01
 
 /*==================================================
 Container
+
 ==================================================*/
 
 
@@ -183,6 +184,7 @@ Container
 
 /*==================================================
 Hero Wrapper
+
 ==================================================*/
 
 
@@ -229,7 +231,7 @@ Hero Wrapper
 
 
 /*==================================================
-Gift Symbol
+Guiding Light Symbol
 
 Primary Emotional Anchor
 
@@ -249,7 +251,7 @@ Primary Emotional Anchor
     margin-bottom:
 
 
-        40px;
+        45px;
 
 
 
@@ -343,6 +345,13 @@ Primary Emotional Anchor
 
 }
 
+
+
+
+
+
+
+
 /*==================================================
 Tamil Heading
 
@@ -367,18 +376,17 @@ Primary Emotional Message
 
 
 
-
     font-size:
 
 
-        3.2rem;
+        2.8rem;
 
 
 
     line-height:
 
 
-        1.45;
+        1.5;
 
 
 
@@ -399,18 +407,11 @@ Primary Emotional Message
     margin-bottom:
 
 
-        35px;
+        45px;
 
 
 
 }
-
-
-
-
-
-
-
 
 /*==================================================
 Tamil Message
@@ -441,7 +442,7 @@ Tamil Message
     line-height:
 
 
-        2.15;
+        2.35;
 
 
 
@@ -514,14 +515,14 @@ Supporting Translation
     font-size:
 
 
-        1.35rem;
+        1.4rem;
 
 
 
     line-height:
 
 
-        1.9;
+        2;
 
 
 
@@ -542,7 +543,7 @@ Supporting Translation
     color:
 
 
-        rgba(245,244,238,.88);
+        rgba(245,244,238,.92);
 
 
 
@@ -620,8 +621,6 @@ Gold Divider
 Journey Continuation
 
 Premium Navigation Cue
-
-Replaces Standard Button
 
 ==================================================*/
 
@@ -938,9 +937,6 @@ Hover
 
 }
 
-
-
-
 /*==================================================
 Tablet Responsive
 
@@ -962,6 +958,8 @@ Tablet Responsive
 
 
     }
+
+
 
 
 
@@ -993,7 +991,7 @@ Tablet Responsive
         font-size:
 
 
-            2.7rem;
+            2.4rem;
 
 
 
@@ -1016,6 +1014,13 @@ Tablet Responsive
 
 
 
+        line-height:
+
+
+            2.2;
+
+
+
     }
 
 
@@ -1031,7 +1036,7 @@ Tablet Responsive
         font-size:
 
 
-            1.15rem;
+            1.2rem;
 
 
 
@@ -1117,7 +1122,7 @@ Mobile Responsive
         margin-bottom:
 
 
-            30px;
+            35px;
 
 
 
@@ -1136,7 +1141,7 @@ Mobile Responsive
         font-size:
 
 
-            2.1rem;
+            2rem;
 
 
 
@@ -1150,7 +1155,7 @@ Mobile Responsive
         margin-bottom:
 
 
-            25px;
+            35px;
 
 
 
@@ -1169,14 +1174,14 @@ Mobile Responsive
         font-size:
 
 
-            1.15rem;
+            1.12rem;
 
 
 
         line-height:
 
 
-            2;
+            2.1;
 
 
 
@@ -1221,7 +1226,7 @@ Mobile Responsive
         line-height:
 
 
-            1.8;
+            1.9;
 
 
 
@@ -1357,7 +1362,7 @@ Small Mobile Devices
         font-size:
 
 
-            1.85rem;
+            1.8rem;
 
 
 
@@ -1377,6 +1382,13 @@ Small Mobile Devices
 
 
             1.05rem;
+
+
+
+        line-height:
+
+
+            2;
 
 
 
