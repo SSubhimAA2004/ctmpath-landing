@@ -117,6 +117,7 @@ Responsibility
     Supports:
     • data-question
     • data-choice-group
+    • Parent choice containers
 
     ==================================================*/
 
@@ -139,6 +140,18 @@ Responsibility
             choice.dataset.choiceGroup ||
 
             choice.dataset.question ||
+
+            choice.closest(
+
+                '[data-choice-group]'
+
+            )?.dataset.choiceGroup ||
+
+            choice.closest(
+
+                '[data-question]'
+
+            )?.dataset.question ||
 
             null
 
@@ -238,7 +251,9 @@ Responsibility
 
             `[data-question="${group}"],
 
-             [data-choice-group="${group}"]`
+             [data-choice-group="${group}"]
+
+            `
 
         );
 
@@ -281,7 +296,6 @@ Responsibility
             return;
 
         }
-
 
 
         CTM.getGroupChoices(group)
@@ -373,7 +387,6 @@ Responsibility
         }
 
 
-
         let values =
 
             CTM.getResponse(group);
@@ -389,7 +402,6 @@ Responsibility
             values = [];
 
         }
-
 
 
         const index =
@@ -468,29 +480,29 @@ Responsibility
     };
 
 
+ /*==================================================
+Rating Choice
+==================================================*/
 
-    /*==================================================
-    Rating Choice
-    ==================================================*/
+CTM.selectRating = function (
 
-    CTM.selectRating = function (
+    choice
+
+) {
+
+
+    CTM.selectChoice(
 
         choice
 
-    ) {
+    );
 
 
-        CTM.selectChoice(
-
-            choice
-
-        );
+};
 
 
-    };
 
-
- /*==================================================
+/*==================================================
 Restore Choices
 ==================================================*/
 
