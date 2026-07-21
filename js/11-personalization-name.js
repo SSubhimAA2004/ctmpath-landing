@@ -8,6 +8,7 @@ Purpose
 Name Personalization Engine
 
 Responsibility
+• Capture Visitor Details
 • Replace {Name}
 • Replace {FirstName}
 • Replace {City}
@@ -46,14 +47,74 @@ Responsibility
     };
 
     /*==================================================
+    Get Visitor
+    ==================================================*/
+
+    CTM.getVisitor = CTM.getVisitor || function(field){
+
+        const visitor = CTM.state?.visitor || {};
+
+        return visitor[field] || '';
+
+    };
+
+    /*==================================================
+    Set Visitor
+    ==================================================*/
+
+    CTM.setVisitor = CTM.setVisitor || function(field,value){
+
+        CTM.state = CTM.state || {};
+
+        CTM.state.visitor = CTM.state.visitor || {};
+
+        CTM.state.visitor[field] = value;
+
+    };
+
+    /*==================================================
+    Capture Name
+    ==================================================*/
+
+    CTM.captureVisitorName = function(){
+
+        const input = document.getElementById('firstName');
+
+        if(!input){
+
+            return;
+
+        }
+
+        const value = input.value.trim();
+
+        if(!value){
+
+            return;
+
+        }
+
+        CTM.setVisitor('firstName',value);
+
+        CTM.setVisitor('name',value);
+
+        if(typeof CTM.saveState === 'function'){
+
+            CTM.saveState();
+
+        }
+
+    };
+
+    /*==================================================
     Get Token Value
     ==================================================*/
 
-    CTM.getTokenValue = function (token) {
+    CTM.getTokenValue = function(token){
 
         const field = CTM.nameTokens[token];
 
-        if (!field) {
+        if(!field){
 
             return '';
 
@@ -67,9 +128,9 @@ Responsibility
     Replace Tokens
     ==================================================*/
 
-    CTM.replaceTokens = function (text) {
+    CTM.replaceTokens = function(text){
 
-        if (!text) {
+        if(!text){
 
             return text;
 
@@ -77,15 +138,13 @@ Responsibility
 
         let output = text;
 
-        Object.keys(CTM.nameTokens).forEach(function (token) {
-
-            const value = CTM.getTokenValue(token);
+        Object.keys(CTM.nameTokens).forEach(function(token){
 
             output = output.replaceAll(
 
                 token,
 
-                value || ''
+                CTM.getTokenValue(token)
 
             );
 
@@ -99,15 +158,15 @@ Responsibility
     Personalize Element
     ==================================================*/
 
-    CTM.personalizeElement = function (element) {
+    CTM.personalizeElement = function(element){
 
-        if (!element) {
+        if(!element){
 
             return;
 
         }
 
-        if (!element.dataset.template) {
+        if(!element.dataset.template){
 
             element.dataset.template = element.innerHTML;
 
@@ -125,13 +184,13 @@ Responsibility
     Personalize Screen
     ==================================================*/
 
-    CTM.personalizeScreen = function () {
+    CTM.personalizeScreen = function(){
 
         document
 
             .querySelectorAll('[data-personalize]')
 
-            .forEach(function (element) {
+            .forEach(function(element){
 
                 CTM.personalizeElement(element);
 
@@ -143,26 +202,42 @@ Responsibility
     Refresh
     ==================================================*/
 
-    CTM.refreshPersonalization = function () {
+    CTM.refreshPersonalization = function(){
 
         CTM.personalizeScreen();
 
     };
 
     /*==================================================
-    Visitor Name Changed
+    Update
     ==================================================*/
 
-    CTM.updatePersonalization = function () {
+    CTM.updatePersonalization = function(){
+
+        CTM.captureVisitorName();
 
         CTM.refreshPersonalization();
 
-        if (typeof CTM.saveState === 'function') {
+    };
 
-            CTM.saveState();
+    /*==================================================
+    Auto Bind
+    ==================================================*/
+
+    document.addEventListener(
+
+        'input',
+
+        function(event){
+
+            if(event.target.id === 'firstName'){
+
+                CTM.captureVisitorName();
+
+            }
 
         }
 
-    };
+    );
 
 })();
