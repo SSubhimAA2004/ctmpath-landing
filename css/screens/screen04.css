@@ -16,7 +16,7 @@ Responsibility:
 • Permission Illustration
 • Typography hierarchy
 • Emotional spacing
-• Navigation cue
+• Premium navigation cue
 • Responsive behaviour
 
 ======================================================================*/
@@ -69,6 +69,7 @@ Progress Indicator
 }
 
 
+
 .screen04 .moment-label{
 
     font-size:0.75rem;
@@ -80,6 +81,8 @@ Progress Indicator
     font-weight:500;
 
 }
+
+
 
 
 
@@ -102,6 +105,8 @@ Main Content
     justify-content:center;
 
 }
+
+
 
 
 
@@ -139,6 +144,8 @@ Illustration
 
 
 
+
+
 /*==================================================
 Tamil Title
 ==================================================*/
@@ -161,6 +168,8 @@ Tamil Title
 
 
 
+
+
 /*==================================================
 Tamil Message
 ==================================================*/
@@ -180,11 +189,14 @@ Tamil Message
 }
 
 
+
 .screen04 .screen-message p{
 
     margin:0;
 
 }
+
+
 
 
 
@@ -207,6 +219,7 @@ English Subtitle
 }
 
 
+
 .screen04 .screen-subtitle p{
 
     margin:0;
@@ -215,9 +228,12 @@ English Subtitle
 
 
 
+
+
 /*==================================================
-Journey Navigation
+Premium Journey Navigation
 ==================================================*/
+
 
 .screen04 .journey-next{
 
@@ -235,101 +251,141 @@ Journey Navigation
 
     align-items:center;
 
-    gap:8px;
+    justify-content:center;
+
+    gap:14px;
 
     color:#D6B56C;
 
-    transition:all 0.3s ease;
+    transition:all 0.4s ease;
 
 }
 
 
 
-.screen04 .journey-next .tamil{
 
-    font-size:1.35rem;
+
+/*==================================================
+Golden Decorative Lines
+==================================================*/
+
+
+.screen04 .nav-decoration{
+
+    width:120px;
+
+    height:1px;
+
+    background:#D6B56C;
+
+    opacity:0.85;
+
+}
+
+
+
+
+
+/*==================================================
+Tamil Navigation Text
+==================================================*/
+
+
+.screen04 .nav-tamil{
+
+    font-size:1.45rem;
 
     font-weight:600;
 
     color:#D6B56C;
 
-}
-
-
-
-.screen04 .journey-next .english{
-
-    font-size:0.95rem;
-
-    color:#D6B56C;
-
-    letter-spacing:1px;
+    letter-spacing:0.5px;
 
 }
 
 
-
-.screen04 .journey-next .arrow{
-
-    font-size:1.4rem;
-
-    color:#D6B56C;
-
-    letter-spacing:6px;
-
-    animation:screen04Arrow 2s infinite;
-
-}
 
 
 
 /*==================================================
-Navigation Animation
+Three Right Arrows
 ==================================================*/
 
-@keyframes screen04Arrow{
 
+.screen04 .nav-arrows{
 
-    0%{
+    font-size:1.5rem;
 
-        transform:translateY(0);
+    letter-spacing:8px;
 
-        opacity:0.5;
+    color:#D6B56C;
 
-    }
-
-
-    50%{
-
-        transform:translateY(8px);
-
-        opacity:1;
-
-    }
-
-
-    100%{
-
-        transform:translateY(0);
-
-        opacity:0.5;
-
-    }
-
+    line-height:1;
 
 }
 
 
 
+
+
 /*==================================================
-Hover
+English Navigation Text
 ==================================================*/
+
+
+.screen04 .nav-english{
+
+    font-size:0.9rem;
+
+    font-weight:500;
+
+    letter-spacing:5px;
+
+    color:#D6B56C;
+
+    text-transform:uppercase;
+
+}
+
+
+
+
+
+/*==================================================
+Navigation Hover
+==================================================*/
+
 
 .screen04 .journey-next:hover{
 
-    transform:translateY(-3px);
+    transform:translateY(-4px);
 
 }
+
+
+
+.screen04 .journey-next:hover .nav-decoration{
+
+    opacity:1;
+
+}
+
+
+
+
+
+/*==================================================
+Navigation Focus
+==================================================*/
+
+
+.screen04 .journey-next:focus{
+
+    outline:none;
+
+}
+
+
 
 
 
@@ -340,6 +396,7 @@ Mobile Optimisation
 @media(max-width:600px){
 
 
+
     .screen04{
 
         padding:32px 20px;
@@ -347,11 +404,13 @@ Mobile Optimisation
     }
 
 
+
     .screen04 .screen-progress{
 
         top:32px;
 
     }
+
 
 
     .screen04 .screen-visual{
@@ -365,11 +424,13 @@ Mobile Optimisation
     }
 
 
+
     .screen04 .screen-title.tamil{
 
         margin-bottom:18px;
 
     }
+
 
 
     .screen04 .screen-message.tamil{
@@ -379,6 +440,7 @@ Mobile Optimisation
     }
 
 
+
     .screen04 .screen-subtitle.english{
 
         margin-bottom:34px;
@@ -386,7 +448,45 @@ Mobile Optimisation
     }
 
 
+
+    .screen04 .nav-decoration{
+
+        width:90px;
+
+    }
+
+
+
+    .screen04 .nav-tamil{
+
+        font-size:1.25rem;
+
+    }
+
+
+
+    .screen04 .nav-arrows{
+
+        font-size:1.3rem;
+
+        letter-spacing:6px;
+
+    }
+
+
+
+    .screen04 .nav-english{
+
+        font-size:0.8rem;
+
+        letter-spacing:4px;
+
+    }
+
+
 }
+
+
 
 
 
@@ -397,6 +497,7 @@ Large Screens
 @media(min-width:1200px){
 
 
+
     .screen04 .screen-visual{
 
         width:260px;
@@ -404,6 +505,7 @@ Large Screens
         height:260px;
 
     }
+
 
 
 }
