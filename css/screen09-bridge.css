@@ -46,6 +46,7 @@ Bridge Visual Container
 }
 
 
+
 /*==================================================
 Bridge Side Cards
 ==================================================*/
@@ -445,7 +446,6 @@ Distance Option
 }
 
 
-
 /*==================================================
 Hover
 ==================================================*/
@@ -465,10 +465,24 @@ Hover
 
 
 /*==================================================
-Selected
+Selected Distance Colour Meaning
+
+1-3   Near      Green
+4-7   Journey   Orange
+8-10  Far       Red
+
 ==================================================*/
 
-#screen09 .distance-option.selected{
+
+
+/*--------------------------------
+Near Zone
+--------------------------------*/
+
+#screen09 .distance-option[data-value="1"].selected,
+#screen09 .distance-option[data-value="2"].selected,
+#screen09 .distance-option[data-value="3"].selected{
+
 
     background:
 
@@ -476,19 +490,104 @@ Selected
 
             180deg,
 
-            #23AF72,
+            #22C55E,
 
-            #125D41
+            #15803D
 
         );
 
+
     border-color:
 
-        #D9B56A;
+        #86EFAC;
+
 
     box-shadow:
 
-        0 0 30px rgba(24,166,109,.35);
+
+        0 0 25px rgba(34,197,94,.75),
+
+        0 0 55px rgba(34,197,94,.35);
+
+
+}
+
+
+
+/*--------------------------------
+Middle Zone
+--------------------------------*/
+
+#screen09 .distance-option[data-value="4"].selected,
+#screen09 .distance-option[data-value="5"].selected,
+#screen09 .distance-option[data-value="6"].selected,
+#screen09 .distance-option[data-value="7"].selected{
+
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #F59E0B,
+
+            #B45309
+
+        );
+
+
+    border-color:
+
+        #FCD34D;
+
+
+    box-shadow:
+
+
+        0 0 25px rgba(245,158,11,.75),
+
+        0 0 55px rgba(245,158,11,.35);
+
+
+}
+
+
+
+/*--------------------------------
+Far Zone
+--------------------------------*/
+
+#screen09 .distance-option[data-value="8"].selected,
+#screen09 .distance-option[data-value="9"].selected,
+#screen09 .distance-option[data-value="10"].selected{
+
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #EF4444,
+
+            #991B1B
+
+        );
+
+
+    border-color:
+
+        #FCA5A5;
+
+
+    box-shadow:
+
+
+        0 0 25px rgba(239,68,68,.80),
+
+        0 0 55px rgba(239,68,68,.40);
+
 
 }
 
@@ -530,11 +629,13 @@ Mobile
     }
 
 
+
     #screen09 .bridge-side{
 
         width:90%;
 
     }
+
 
 
     #screen09 .bridge-path{
@@ -546,11 +647,13 @@ Mobile
     }
 
 
+
     #screen09 .distance-scale{
 
         gap:8px;
 
     }
+
 
 
     #screen09 .distance-option{
@@ -563,3 +666,4 @@ Mobile
 
 
 }
+
