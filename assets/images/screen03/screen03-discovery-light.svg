@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg
+    width="300"
+    height="300"
+    viewBox="0 0 300 300"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+
+
+<defs>
+
+
+<!-- ===================================
+GOLD DISCOVERY GRADIENT
+=================================== -->
+
+<linearGradient
+id="goldGradient"
+x1="0"
+y1="0"
+x2="1"
+y2="1">
+
+<stop
+offset="0%"
+stop-color="#FFF0A3"/>
+
+<stop
+offset="45%"
+stop-color="#D9B56A"/>
+
+<stop
+offset="100%"
+stop-color="#B47718"/>
+
+</linearGradient>
+
+
+
+<!-- ===================================
+TEAL INNER LIGHT
+=================================== -->
+
+<radialGradient
+id="innerLight">
+
+<stop
+offset="0%"
+stop-color="#FFFFFF"/>
+
+<stop
+offset="25%"
+stop-color="#D9B56A"/>
+
+<stop
+offset="70%"
+stop-color="#18A66D"
+stop-opacity=".35"/>
+
+<stop
+offset="100%"
+stop-color="#18A66D"
+stop-opacity="0"/>
+
+</radialGradient>
+
+
+
+
+
+<!-- ===================================
+GLOW FILTER
+=================================== -->
+
+<filter
+id="lightGlow"
+x="-100%"
+y="-100%"
+width="300%"
+height="300%">
+
+
+<feGaussianBlur
+stdDeviation="18"/>
+
+
+</filter>
+
+
+
+<filter
+id="softGlow"
+x="-100%"
+y="-100%"
+width="300%"
+height="300%">
+
+
+<feGaussianBlur
+stdDeviation="6"/>
+
+
+</filter>
+
+
+</defs>
+
+
+
+
+
+<!-- ===================================
+DISCOVERY ENERGY FIELD
+
+=================================== -->
+
+
+<circle
+
+cx="150"
+
+cy="150"
+
+r="70"
+
+fill="url(#innerLight)"
+
+opacity=".45"
+
+filter="url(#lightGlow)"/>
+
+
+
+
+
+
+<!-- ===================================
+INNER AWARENESS RING
+
+=================================== -->
+
+
+<circle
+
+cx="150"
+
+cy="150"
+
+r="48"
+
+stroke="url(#goldGradient)"
+
+stroke-width="2"
+
+opacity=".45"/>
+
+
+
+
+
+
+
+<!-- ===================================
+CLARITY POINT
+
+=================================== -->
+
+
+<circle
+
+cx="150"
+
+cy="150"
+
+r="22"
+
+fill="#D9B56A"
+
+opacity=".35"
+
+filter="url(#softGlow)"/>
+
+
+
+
+<circle
+
+cx="150"
+
+cy="150"
+
+r="12"
+
+fill="url(#goldGradient)"/>
+
+
+
+
+<circle
+
+cx="150"
+
+cy="150"
+
+r="4"
+
+fill="#FFFFFF"/>
+
+
+
+
+
+
+
+
+<!-- ===================================
+FOUR DISCOVERY DIRECTIONS
+
+=================================== -->
+
+
+<!-- Top -->
+
+<path
+
+d="M150 55V35"
+
+stroke="url(#goldGradient)"
+
+stroke-width="2"
+
+stroke-linecap="round"/>
+
+
+
+<!-- Bottom -->
+
+<path
+
+d="M150 245V265"
+
+stroke="url(#goldGradient)"
+
+stroke-width="2"
+
+stroke-linecap="round"/>
+
+
+
+<!-- Left -->
+
+<path
+
+d="M55 150H35"
+
+stroke="url(#goldGradient)"
+
+stroke-width="2"
+
+stroke-linecap="round"/>
+
+
+
+<!-- Right -->
+
+<path
+
+d="M245 150H265"
+
+stroke="url(#goldGradient)"
+
+stroke-width="2"
+
+stroke-linecap="round"/>
+
+
+
+
+
+
+
+<!-- ===================================
+SMALL DISCOVERY ANGLE
+
+Represents opening awareness
+
+=================================== -->
+
+
+<path
+
+d="M150 95
+
+L175 120"
+
+stroke="url(#goldGradient)"
+
+stroke-width="3"
+
+stroke-linecap="round"/>
+
+
+
+<path
+
+d="M150 95
+
+L125 120"
+
+stroke="url(#goldGradient)"
+
+stroke-width="3"
+
+stroke-linecap="round"/>
+
+
+
+
+</svg>
