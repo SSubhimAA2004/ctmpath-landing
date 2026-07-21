@@ -8,7 +8,8 @@ Purpose
 Screen 07
 
 Responsibility
-• Discover the visitor's biggest dream
+• Discover the visitor's biggest dreams
+• Allow multiple selections
 • Create emotional engagement
 • Begin Financial Discovery
 • Continue the guided journey
@@ -91,6 +92,7 @@ Responsibility
                 <span class="english-welcome">
 
                     {FirstName},
+
                 </span>
 
                 <br><br>
@@ -115,7 +117,7 @@ Responsibility
 
                 <br><br>
 
-                thing
+                things
 
                 <br><br>
 
@@ -127,71 +129,273 @@ Responsibility
 
             <div class="gold-divider"></div>
 
-            <!-- Choice Buttons -->
+            <!-- Instruction -->
 
-            <div class="choice-group">
+            <div class="message">
+
+                <div class="message-tamil">
+
+                    பொருந்தும் அனைத்தையும் தேர்வு செய்யுங்கள்.
+
+                </div>
+
+                <div class="message-divider"></div>
+
+                <div class="message-english">
+
+                    Choose all that apply.
+
+                </div>
+
+            </div>
+
+            <!-- Multi Choice Grid -->
+
+            <div
+
+                class="choice-grid"
+
+                data-choice-group="lifePriorities"
+
+                data-multiple="true">
 
                 <button
                     class="choice"
                     data-value="dream-home">
 
-                    🏡
+                    <div class="choice-icon">🏡</div>
 
-                    <br><br>
+                    <div class="choice-title">
 
-                    வீடு
+                        கனவு வீடு
 
-                    <br>
+                    </div>
 
-                    Home
+                    <div class="choice-subtitle">
 
-                </button>
+                        Dream Home
 
-                <button
-                    class="choice"
-                    data-value="travel">
-
-                    ✈️
-
-                    <br><br>
-
-                    பயணம்
-
-                    <br>
-
-                    Travel
+                    </div>
 
                 </button>
 
                 <button
                     class="choice"
-                    data-value="family">
+                    data-value="world-travel">
 
-                    ❤️
+                    <div class="choice-icon">✈️</div>
 
-                    <br><br>
+                    <div class="choice-title">
 
-                    குடும்பம்
+                        உலகப் பயணம்
 
-                    <br>
+                    </div>
 
-                    Family
+                    <div class="choice-subtitle">
+
+                        World Travel
+
+                    </div>
 
                 </button>
 
                 <button
                     class="choice"
-                    data-value="freedom">
+                    data-value="family-security">
 
-                    🌅
+                    <div class="choice-icon">👨‍👩‍👧</div>
 
-                    <br><br>
+                    <div class="choice-title">
 
-                    சுதந்திரம்
+                        குடும்ப பாதுகாப்பு
 
-                    <br>
+                    </div>
 
-                    Freedom
+                    <div class="choice-subtitle">
+
+                        Family Security
+
+                    </div>
+
+                </button>
+
+                <button
+                    class="choice"
+                    data-value="financial-freedom">
+
+                    <div class="choice-icon">🕊️</div>
+
+                    <div class="choice-title">
+
+                        நிதி சுதந்திரம்
+
+                    </div>
+
+                    <div class="choice-subtitle">
+
+                        Financial Freedom
+
+                    </div>
+
+                </button>
+
+                <button
+                    class="choice"
+                    data-value="business">
+
+                    <div class="choice-icon">💼</div>
+
+                    <div class="choice-title">
+
+                        சொந்த தொழில்
+
+                    </div>
+
+                    <div class="choice-subtitle">
+
+                        Own Business
+
+                    </div>
+
+                </button>
+
+                <button
+                    class="choice"
+                    data-value="retire">
+
+                    <div class="choice-icon">🌴</div>
+
+                    <div class="choice-title">
+
+                        முன்கூட்டியே ஓய்வு
+
+                    </div>
+
+                    <div class="choice-subtitle">
+
+                        Early Retirement
+
+                    </div>
+
+                </button>
+
+                <button
+                    class="choice"
+                    data-value="charity">
+
+                    <div class="choice-icon">🤝</div>
+
+                    <div class="choice-title">
+
+                        பிறருக்கு உதவுதல்
+
+                    </div>
+
+                    <div class="choice-subtitle">
+
+                        Charity
+
+                    </div>
+
+                </button>
+
+                <button
+                    class="choice"
+                    data-value="health">
+
+                    <div class="choice-icon">❤️‍🩹</div>
+
+                    <div class="choice-title">
+
+                        ஆரோக்கிய வாழ்க்கை
+
+                    </div>
+
+                    <div class="choice-subtitle">
+
+                        Better Health
+
+                    </div>
+
+                </button>
+
+                <button
+                    class="choice"
+                    data-value="education">
+
+                    <div class="choice-icon">🎓</div>
+
+                    <div class="choice-title">
+
+                        உயர்கல்வி
+
+                    </div>
+
+                    <div class="choice-subtitle">
+
+                        Education
+
+                    </div>
+
+                </button>
+
+                <button
+                    class="choice"
+                    data-value="car">
+
+                    <div class="choice-icon">🚗</div>
+
+                    <div class="choice-title">
+
+                        கனவு கார்
+
+                    </div>
+
+                    <div class="choice-subtitle">
+
+                        Dream Car
+
+                    </div>
+
+                </button>
+
+                <button
+                    class="choice"
+                    data-value="time">
+
+                    <div class="choice-icon">⏳</div>
+
+                    <div class="choice-title">
+
+                        அதிக நேரம்
+
+                    </div>
+
+                    <div class="choice-subtitle">
+
+                        More Free Time
+
+                    </div>
+
+                </button>
+
+                <button
+                    class="choice"
+                    data-value="legacy">
+
+                    <div class="choice-icon">🌳</div>
+
+                    <div class="choice-title">
+
+                        நிலையான மரபு
+
+                    </div>
+
+                    <div class="choice-subtitle">
+
+                        Leave a Legacy
+
+                    </div>
 
                 </button>
 
