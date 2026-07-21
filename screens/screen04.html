@@ -1,127 +1,143 @@
 
-<!--
-======================================================================
+/*======================================================================
 
 CTM PATH™ Guided Journey v6.0
 
 SCREEN 04 — YOUR PERMISSION™
 
 File:
-screen04.html
+screen04.js
 
 Purpose:
-Permission • Trust • Participation
+Screen 04 Interaction Logic
 
 Responsibility:
-• Screen 04 structure
-• Tamil-first emotional copy
-• Illustration placement
-• Journey indicator
-• Navigation trigger
+• Screen initialization
+• Permission interaction
+• Journey navigation
+• Screen transition handling
 
-======================================================================
--->
+======================================================================*/
 
 
-<section
-    id="screen04"
-    class="journey-screen screen04">
-
-
-    
-
-    <!--==================================================
-    Main Content
-    ==================================================-->
-
-    <div class="screen-content">
-
-
-        <!-- Illustration -->
-
-        <div class="screen-visual">
-
-            <img
-                src="assets/images/screen04/screen04-permission-light.svg"
-                alt="Permission and trust"
-                class="screen-image"
-            >
-
-        </div>
+'use strict';
 
 
 
-        <!-- Tamil Title -->
+/*==================================================
+Screen 04 Initialisation
 
-        <h1 class="screen-title tamil">
+Called by loader.js
 
-            உங்கள் அனுமதி
+CTM.initScreen04()
 
-        </h1>
-
-
-
-        <!-- Tamil Message -->
-
-        <div class="screen-message tamil">
-
-            <p>
-                சில கேள்விகள்...
-            </p>
+==================================================*/
 
 
-            <p>
-                கேட்கலாமா?
-            </p>
-
-        </div>
+CTM.initScreen04 = function(){
 
 
 
-        <!-- English Subtitle -->
+    const screen04 =
 
-        <div class="screen-subtitle english">
-
-            <p>
-                May I ask you
-            </p>
-
-            <p>
-                a few questions?
-            </p>
-
-        </div>
+        document.querySelector("#screen04");
 
 
 
-        <!--==================================================
-        Navigation Cue
-        ==================================================-->
-
-        <button
-            class="journey-next"
-            data-next-screen="screen05"
-            aria-label="Continue Journey">
-
-            <span class="tamil">
-                கேளுங்கள்
-            </span>
+    if(!screen04){
 
 
-            <span class="english">
-                Sure!
-            </span>
+        return;
 
 
-            <span class="arrow">
-                → → →
-            </span>
+    }
 
 
-        </button>
+
+    setupScreen04Navigation();
 
 
-    </div>
+
+};
 
 
-</section>
+
+
+
+
+/*==================================================
+Navigation Setup
+==================================================*/
+
+
+function setupScreen04Navigation(){
+
+
+
+    const nextButton =
+
+        document.querySelector(
+
+            "#screen04 .journey-next"
+
+        );
+
+
+
+    if(!nextButton){
+
+
+        return;
+
+
+    }
+
+
+
+
+
+    nextButton.addEventListener(
+
+        "click",
+
+        function(){
+
+
+
+            const nextScreen =
+
+                this.getAttribute(
+
+                    "data-next-screen"
+
+                );
+
+
+
+
+
+            if(nextScreen){
+
+
+
+                navigateToScreen(
+
+                    nextScreen
+
+                );
+
+
+
+            }
+
+
+
+        }
+
+
+
+    );
+
+
+
+}
