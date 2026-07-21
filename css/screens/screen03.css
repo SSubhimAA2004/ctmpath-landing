@@ -25,6 +25,9 @@ Responsibility
 */
 
 
+
+
+
 /*==================================================
 Screen 03 Base
 ==================================================*/
@@ -57,7 +60,6 @@ Screen 03 Base
 
 
 }
-
 
 
 
@@ -209,6 +211,10 @@ Hero Wrapper
 
 
 
+    justify-content:center;
+
+
+
     text-align:center;
 
 
@@ -236,8 +242,6 @@ Hero Wrapper
 /*==================================================
 Discovery Light Symbol
 
-Primary Emotional Anchor
-
 ==================================================*/
 
 
@@ -254,7 +258,7 @@ Primary Emotional Anchor
     margin-bottom:
 
 
-        45px;
+        35px;
 
 
 
@@ -357,15 +361,57 @@ Primary Emotional Anchor
 
 
 
+
+/*==================================================
+Tamil Section
+
+Centre Alignment Control
+
+==================================================*/
+
+
+.screen03-tamil{
+
+
+    width:100%;
+
+
+
+    display:flex;
+
+
+
+    flex-direction:column;
+
+
+
+    align-items:center;
+
+
+
+    text-align:center;
+
+
+
+}
+
+
+
+
+
+
+
+
 /*==================================================
 Tamil Heading
-
-Primary Question
 
 ==================================================*/
 
 
 .screen03-tamil h1{
+
+
+    width:100%;
 
 
     font-family:
@@ -384,14 +430,14 @@ Primary Question
     font-size:
 
 
-        2.8rem;
+        3rem;
 
 
 
     line-height:
 
 
-        1.5;
+        1.6;
 
 
 
@@ -412,7 +458,7 @@ Primary Question
     margin-bottom:
 
 
-        45px;
+        55px;
 
 
 
@@ -421,10 +467,24 @@ Primary Question
 /*==================================================
 Tamil Message
 
+Primary Emotional Copy
+
 ==================================================*/
 
 
 .screen03-tamil p{
+
+
+    width:100%;
+
+
+
+    max-width:700px;
+
+
+
+    margin:0 auto;
+
 
 
     font-family:
@@ -440,14 +500,14 @@ Tamil Message
     font-size:
 
 
-        1.55rem;
+        1.6rem;
 
 
 
     line-height:
 
 
-        2.35;
+        2.4;
 
 
 
@@ -455,6 +515,10 @@ Tamil Message
 
 
         500;
+
+
+
+    text-align:center;
 
 
 
@@ -486,10 +550,26 @@ Supporting Translation
 .screen03-english{
 
 
+    width:100%;
+
+
+
     margin-top:
 
 
-        40px;
+        55px;
+
+
+
+    display:flex;
+
+
+
+    justify-content:center;
+
+
+
+    text-align:center;
 
 
 
@@ -504,6 +584,18 @@ Supporting Translation
 
 
 .screen03-english p{
+
+
+    width:100%;
+
+
+
+    max-width:650px;
+
+
+
+    margin:0 auto;
+
 
 
     font-family:
@@ -522,21 +614,21 @@ Supporting Translation
     font-size:
 
 
-        1.4rem;
+        1.35rem;
 
 
 
     line-height:
 
 
-        2;
+        2.2;
 
 
 
     font-weight:
 
 
-        500;
+        400;
 
 
 
@@ -547,10 +639,14 @@ Supporting Translation
 
 
 
+    text-align:center;
+
+
+
     color:
 
 
-        rgba(245,244,238,.92);
+        rgba(245,244,238,.88);
 
 
 
@@ -590,7 +686,7 @@ Gold Divider
     margin:
 
 
-        40px auto;
+        55px auto 35px;
 
 
 
@@ -686,17 +782,17 @@ Premium Navigation Cue
 
 
 
-    color:
-
-
-        var(--color-gold);
-
-
-
     padding:
 
 
         12px 30px;
+
+
+
+    color:
+
+
+        var(--color-gold);
 
 
 
@@ -718,7 +814,7 @@ Premium Navigation Cue
 
 
 /*==================================================
-Continue Main Text
+Tamil Continue Label
 
 ==================================================*/
 
@@ -863,7 +959,7 @@ Arrow Indicator
 
 
 /*==================================================
-English Continue Text
+English Continue Subtitle
 
 ==================================================*/
 
@@ -920,7 +1016,7 @@ English Continue Text
 
 
 /*==================================================
-Hover
+Hover Interaction
 
 ==================================================*/
 
@@ -936,6 +1032,12 @@ Hover
 
 
 }
+
+
+
+
+
+
 
 
 
@@ -1005,7 +1107,14 @@ Tablet Responsive
         font-size:
 
 
-            2.4rem;
+            2.5rem;
+
+
+
+        margin-bottom:
+
+
+            45px;
 
 
 
@@ -1031,7 +1140,26 @@ Tablet Responsive
         line-height:
 
 
-            2.2;
+            2.25;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen03-english{
+
+
+        margin-top:
+
+
+            45px;
 
 
 
@@ -1091,7 +1219,7 @@ Mobile Responsive
         padding-top:
 
 
-            25px;
+            20px;
 
 
 
@@ -1136,7 +1264,7 @@ Mobile Responsive
         margin-bottom:
 
 
-            35px;
+            30px;
 
 
 
@@ -1185,10 +1313,17 @@ Mobile Responsive
     .screen03-tamil p{
 
 
+        max-width:
+
+
+            320px;
+
+
+
         font-size:
 
 
-            1.12rem;
+            1.15rem;
 
 
 
@@ -1214,7 +1349,7 @@ Mobile Responsive
         margin-top:
 
 
-            30px;
+            35px;
 
 
 
@@ -1230,6 +1365,13 @@ Mobile Responsive
     .screen03-english p{
 
 
+        max-width:
+
+
+            300px;
+
+
+
         font-size:
 
 
@@ -1240,7 +1382,7 @@ Mobile Responsive
         line-height:
 
 
-            1.9;
+            2;
 
 
 
@@ -1266,7 +1408,7 @@ Mobile Responsive
         margin:
 
 
-            35px auto;
+            40px auto 30px;
 
 
 
@@ -1396,13 +1538,6 @@ Small Mobile Devices
 
 
             1.05rem;
-
-
-
-        line-height:
-
-
-            2;
 
 
 
