@@ -17,35 +17,61 @@ Responsibility:
 • Name Input Design
 • Typography hierarchy
 • Emotional spacing
-• Navigation cue
+• Premium Navigation Cue
 • Responsive behaviour
 
 ======================================================================*/
+
+
+
 
 
 /*==================================================
 Screen 05 Container
 ==================================================*/
 
+
 .screen05{
+
 
     min-height:100vh;
 
+
+
     display:flex;
+
+
 
     justify-content:center;
 
+
+
     align-items:center;
+
+
 
     text-align:center;
 
+
+
     position:relative;
+
+
 
     overflow:hidden;
 
+
+
     padding:40px 24px;
 
+
+
 }
+
+
+
+
+
 
 
 
@@ -53,33 +79,64 @@ Screen 05 Container
 Journey Indicator
 ==================================================*/
 
+
 .screen05 .screen-progress{
+
 
     position:absolute;
 
+
+
     top:48px;
+
+
 
     left:50%;
 
+
+
     transform:translateX(-50%);
+
+
 
     width:100%;
 
+
+
 }
+
+
+
+
+
 
 
 
 .screen05 .moment-label{
 
+
     font-size:0.75rem;
+
+
 
     letter-spacing:3px;
 
+
+
     color:rgba(246,241,231,0.55);
+
+
 
     font-weight:500;
 
+
+
 }
+
+
+
+
+
 
 
 
@@ -87,19 +144,36 @@ Journey Indicator
 Main Content
 ==================================================*/
 
+
 .screen05 .screen-content{
+
 
     width:100%;
 
+
+
     max-width:520px;
+
+
 
     display:flex;
 
+
+
     flex-direction:column;
+
+
 
     align-items:center;
 
+
+
 }
+
+
+
+
+
 
 
 
@@ -107,27 +181,52 @@ Main Content
 Illustration
 ==================================================*/
 
+
 .screen05 .screen-visual{
+
 
     width:220px;
 
+
+
     height:220px;
+
+
 
     margin-bottom:32px;
 
+
+
 }
+
+
+
+
+
 
 
 
 .screen05 .screen-image{
 
+
     width:100%;
+
+
 
     height:auto;
 
+
+
     display:block;
 
+
+
 }
+
+
+
+
+
 
 
 
@@ -135,19 +234,36 @@ Illustration
 Tamil Title
 ==================================================*/
 
+
 .screen05 .screen-title.tamil{
+
 
     margin:0 0 22px;
 
+
+
     color:#F6F1E7;
+
+
 
     font-size:clamp(2rem,5vw,2.8rem);
 
+
+
     font-weight:600;
+
+
 
     line-height:1.4;
 
+
+
 }
+
+
+
+
+
 
 
 
@@ -155,27 +271,52 @@ Tamil Title
 Tamil Message
 ==================================================*/
 
+
 .screen05 .screen-message.tamil{
+
 
     color:#F6F1E7;
 
+
+
     font-size:clamp(1.3rem,4vw,1.7rem);
+
+
 
     line-height:1.7;
 
+
+
     font-weight:500;
+
+
 
     margin-bottom:20px;
 
+
+
 }
+
+
+
+
+
 
 
 
 .screen05 .screen-message p{
 
+
     margin:0;
 
+
+
 }
+
+
+
+
+
 
 
 
@@ -183,25 +324,48 @@ Tamil Message
 English Subtitle
 ==================================================*/
 
+
 .screen05 .screen-subtitle.english{
+
 
     color:rgba(246,241,231,0.72);
 
+
+
     font-size:clamp(1rem,3vw,1.2rem);
+
+
 
     line-height:1.7;
 
+
+
     margin-bottom:32px;
 
+
+
 }
+
+
+
+
+
 
 
 
 .screen05 .screen-subtitle p{
 
+
     margin:0;
 
+
+
 }
+
+
+
+
+
 
 
 
@@ -209,253 +373,668 @@ English Subtitle
 Name Input Area
 ==================================================*/
 
+
 .screen05 .name-input-wrapper{
+
 
     width:100%;
 
+
+
     max-width:360px;
+
+
 
     margin-bottom:36px;
 
+
+
     display:flex;
+
+
 
     flex-direction:column;
 
+
+
     align-items:center;
 
+
+
 }
+
+
+
+
+
 
 
 
 .screen05 .input-label{
 
+
     color:rgba(246,241,231,0.65);
+
+
 
     font-size:0.9rem;
 
+
+
     letter-spacing:1px;
+
+
 
     margin-bottom:12px;
 
+
+
 }
+
+
+
+
+
 
 
 
 .screen05 .visitor-name-input{
 
+
     width:100%;
+
+
 
     height:56px;
 
+
+
     border-radius:28px;
+
+
 
     border:1px solid rgba(214,181,108,0.55);
 
+
+
     background:rgba(255,255,255,0.05);
+
+
 
     color:#F6F1E7;
 
+
+
     text-align:center;
+
+
 
     font-size:1.1rem;
 
+
+
     outline:none;
+
+
 
     padding:0 24px;
 
+
+
     transition:all 0.3s ease;
 
+
+
 }
+
+
+
+
+
 
 
 
 .screen05 .visitor-name-input::placeholder{
 
+
     color:rgba(246,241,231,0.45);
 
+
+
 }
+
+
+
+
+
 
 
 
 .screen05 .visitor-name-input:focus{
 
+
     border-color:#D6B56C;
+
+
 
     background:rgba(255,255,255,0.08);
 
+
+
 }
+
+/*==================================================
+Premium Journey Navigator
+
+CTM PATH™ Standard Component
+
+==================================================*/
+
+
+.screen05 .journey-next{
+
+
+    background:none;
+
+
+
+    border:none;
+
+
+
+    padding:0;
+
+
+
+    cursor:pointer;
+
+
+
+    display:flex;
+
+
+
+    flex-direction:column;
+
+
+
+    align-items:center;
+
+
+
+    justify-content:center;
+
+
+
+    gap:14px;
+
+
+
+    color:#D6B56C;
+
+
+
+    transition:all .45s ease;
+
+
+
+}
+
+
+
+
+
 
 
 
 /*==================================================
-Navigation Cue
+Golden Decorative Lines
+
 ==================================================*/
 
-.screen05 .journey-next{
 
-    background:none;
+.screen05 .nav-decoration{
 
-    border:none;
 
-    padding:0;
+    width:120px;
 
-    cursor:pointer;
 
-    display:flex;
 
-    flex-direction:column;
+    height:1px;
 
-    align-items:center;
 
-    gap:8px;
 
-    color:#D6B56C;
+    background:#D6B56C;
 
-    transition:all 0.3s ease;
+
+
+    opacity:.85;
+
+
 
 }
 
 
 
-.screen05 .journey-next .tamil{
+
+
+
+
+
+/*==================================================
+Tamil Navigation Text
+
+==================================================*/
+
+
+.screen05 .nav-tamil{
+
+
+    font-family:
+
+
+        "Noto Sans Tamil",
+
+
+        sans-serif;
+
+
 
     font-size:1.35rem;
 
-    font-weight:600;
+
+
+    font-weight:700;
+
+
+
+    color:#D6B56C;
+
+
+
+    letter-spacing:.5px;
+
+
 
 }
 
 
 
-.screen05 .journey-next .english{
-
-    font-size:0.95rem;
-
-    color:rgba(246,241,231,0.7);
-
-    letter-spacing:1px;
-
-}
 
 
 
-.screen05 .journey-next .arrow{
 
-    font-size:1.4rem;
+
+/*==================================================
+Three Right Arrows
+
+==================================================*/
+
+
+.screen05 .nav-arrows{
+
+
+    font-size:1.45rem;
+
+
+
+    letter-spacing:8px;
+
+
+
+    color:#D6B56C;
+
+
+
+    line-height:1;
+
+
 
     animation:screen05Arrow 2s infinite;
 
+
+
 }
+
+
+
+
+
+
+
+
+/*==================================================
+English Navigation Text
+
+==================================================*/
+
+
+.screen05 .nav-english{
+
+
+    font-family:
+
+
+        "Inter",
+
+
+        sans-serif;
+
+
+
+    font-size:.9rem;
+
+
+
+    font-weight:500;
+
+
+
+    letter-spacing:5px;
+
+
+
+    text-transform:uppercase;
+
+
+
+    color:#D6B56C;
+
+
+
+}
+
+
+
+
+
 
 
 
 /*==================================================
 Arrow Animation
+
 ==================================================*/
+
 
 @keyframes screen05Arrow{
 
 
-    0%{
+    0%,100%{
+
 
         transform:translateY(0);
 
-        opacity:0.5;
+
+
+        opacity:.6;
+
+
 
     }
+
 
 
     50%{
 
+
         transform:translateY(8px);
+
+
 
         opacity:1;
 
+
+
     }
 
-
-    100%{
-
-        transform:translateY(0);
-
-        opacity:0.5;
-
-    }
 
 
 }
+
+
+
+
+
 
 
 
 /*==================================================
 Hover
+
 ==================================================*/
+
 
 .screen05 .journey-next:hover{
 
-    transform:translateY(-3px);
+
+    transform:translateY(-4px);
+
+
 
 }
+
+
+
+.screen05 .journey-next:hover .nav-decoration{
+
+
+    opacity:1;
+
+
+
+}
+
+
+
+
+
 
 
 
 /*==================================================
 Mobile Optimisation
+
 ==================================================*/
+
 
 @media(max-width:600px){
 
 
+
     .screen05{
+
 
         padding:32px 20px;
 
+
+
     }
+
+
+
 
 
     .screen05 .screen-progress{
 
+
         top:32px;
 
+
+
     }
+
+
+
 
 
     .screen05 .screen-visual{
 
+
         width:180px;
+
+
 
         height:180px;
 
+
+
         margin-bottom:24px;
 
+
+
     }
+
+
+
 
 
     .screen05 .name-input-wrapper{
 
+
         max-width:300px;
 
+
+
     }
+
+
+
+
+
+    .screen05 .nav-decoration{
+
+
+        width:85px;
+
+
+
+    }
+
+
+
+
+
+    .screen05 .nav-tamil{
+
+
+        font-size:1.2rem;
+
+
+
+    }
+
+
+
+
+
+    .screen05 .nav-arrows{
+
+
+        font-size:1.25rem;
+
+
+
+        letter-spacing:6px;
+
+
+
+    }
+
+
+
+
+
+    .screen05 .nav-english{
+
+
+        font-size:.75rem;
+
+
+
+        letter-spacing:4px;
+
+
+
+    }
+
 
 
 }
 
 
 
+
+
+
+
+
 /*==================================================
 Large Screens
+
 ==================================================*/
+
 
 @media(min-width:1200px){
 
 
+
     .screen05 .screen-visual{
+
 
         width:260px;
 
+
+
         height:260px;
 
+
+
     }
+
+
+
+}
+
+
+
+
+
+
+
+
+/*==================================================
+Reduced Motion Accessibility
+
+==================================================*/
+
+
+@media(prefers-reduced-motion:reduce){
+
+
+
+    .screen05 .nav-arrows{
+
+
+        animation:none;
+
+
+
+    }
+
+
+
+
+
+    .screen05 .journey-next{
+
+
+        transition:none;
+
+
+
+    }
+
 
 
 }
