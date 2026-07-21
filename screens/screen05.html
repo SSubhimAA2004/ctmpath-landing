@@ -4,166 +4,284 @@
 
 CTM PATH™ Guided Journey v6.0
 
-Purpose
-Screen 05
+SCREEN 05 — YOUR NAME™
 
-Responsibility
-• Ask the visitor's preferred name
-• Begin personalization
-• Keep interaction effortless
-• Continue the journey
+File:
+screen05.html
+
+Purpose:
+Identity • Recognition • Personal Connection
+
+Responsibility:
+• Screen 05 structure
+• Tamil-first emotional copy
+• Name input capture
+• Journey continuation
 
 ======================================================================
 -->
 
+
 <section
-    class="screen"
-    id="screen05">
 
-    <div class="container">
+    id="screen05"
 
-        <div class="hero">
+    class="journey-screen screen05">
 
-            <!-- Screen Caption -->
 
-            <div class="screen-caption">
 
-                MOMENT 05 OF 36
+    <!--==================================================
+    Journey Indicator
+    ==================================================-->
 
-            </div>
 
-            <!-- Divider -->
+    <div
 
-            <div class="gold-divider"></div>
+        class="screen-progress">
 
-            <!-- Tamil -->
 
-            <h1 class="tamil">
+        <span
 
-                <span class="text-gold">
+            class="moment-label">
 
-                    உங்கள் பெயர்
+            MOMENT 05 OF 36
 
-                </span>
+        </span>
 
-                <br><br>
 
-                நான் உங்களை...
+    </div>
 
-                <br><br>
 
-                எப்படி
 
-                <br>
 
-                அழைக்கலாம்?
 
-            </h1>
+    <!--==================================================
+    Main Content
+    ==================================================-->
 
-            <!-- Divider -->
 
-            <div class="gold-divider small"></div>
+    <div
 
-            <!-- English -->
+        class="screen-content">
 
-            <div class="english">
 
-                <span class="english-welcome">
 
-                    Your Name
 
-                </span>
 
-                <br><br>
+        <!-- Illustration -->
 
-                What
 
-                <br>
+        <div
 
-                should I
+            class="screen-visual">
 
-                <br>
 
-                call you?
+            <img
 
-            </div>
+                src="assets/images/screen05/screen05-name-light.svg"
 
-            <!-- Divider -->
+                alt="Your name"
 
-            <div class="gold-divider"></div>
+                class="screen-image">
 
-            <!-- Name Input -->
-
-            <div class="field">
-
-                <div class="input-group">
-
-                    <input
-
-                        type="text"
-
-                        id="firstName"
-
-                        name="firstName"
-
-                        data-field="firstName"
-
-                        class="input input-field"
-
-                        placeholder="உங்கள் பெயர் • Your First Name"
-
-                        autocomplete="given-name"
-
-                        spellcheck="false"
-
-                        maxlength="40"
-
-                        aria-label="Your First Name"
-
-                        required>
-
-                </div>
-
-                <div class="field-help">
-
-                    உங்கள் முதல் பெயரை மட்டும் உள்ளிடுங்கள்.
-
-                    <br>
-
-                    Please enter your first name only.
-
-                </div>
-
-            </div>
-
-            <!-- Continue -->
-
-            <button
-
-                id="btnContinue"
-
-                class="btn btn-primary"
-
-                data-action="continue"
-
-                data-next="screen06">
-
-                <span class="btn-title">
-
-                    தொடரலாம் →
-
-                </span>
-
-                <span class="btn-subtitle">
-
-                    Continue
-
-                </span>
-
-            </button>
 
         </div>
 
+
+
+
+
+        <!-- Tamil Title -->
+
+
+        <h1
+
+            class="screen-title tamil">
+
+
+            உங்கள் பெயர்
+
+
+        </h1>
+
+
+
+
+
+        <!-- Tamil Message -->
+
+
+        <div
+
+            class="screen-message tamil">
+
+
+            <p>
+
+                நான் உங்களை...
+
+            </p>
+
+
+            <p>
+
+                எப்படி
+
+            </p>
+
+
+            <p>
+
+                அழைக்கலாம்?
+
+            </p>
+
+
+        </div>
+
+
+
+
+
+        <!-- English Subtitle -->
+
+
+        <div
+
+            class="screen-subtitle english">
+
+
+            <p>
+
+                What
+
+            </p>
+
+
+            <p>
+
+                should I
+
+            </p>
+
+
+            <p>
+
+                call you?
+
+            </p>
+
+
+        </div>
+
+
+
+
+
+
+
+        <!--==================================================
+        Name Input
+        ==================================================-->
+
+
+        <div
+
+            class="name-input-wrapper">
+
+
+            <label
+
+                for="visitor-name"
+
+                class="input-label">
+
+
+                Your Name
+
+
+            </label>
+
+
+
+            <input
+
+                id="visitor-name"
+
+                type="text"
+
+                class="visitor-name-input"
+
+                placeholder="Enter your name"
+
+                autocomplete="name">
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+        <!--==================================================
+        Navigation Cue
+        ==================================================-->
+
+
+        <button
+
+            class="journey-next"
+
+            data-next-screen="screen06"
+
+            aria-label="Continue Journey">
+
+
+            <span
+
+                class="tamil">
+
+                தொடரலாம்
+
+
+            </span>
+
+
+
+            <span
+
+                class="english">
+
+                Continue
+
+
+            </span>
+
+
+
+            <span
+
+                class="arrow">
+
+                ↓
+
+
+            </span>
+
+
+
+        </button>
+
+
+
+
+
     </div>
+
+
 
 </section>
