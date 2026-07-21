@@ -96,14 +96,6 @@ Responsibility
 
             <div class="field">
 
-                <label
-                    class="field-label"
-                    for="firstName">
-
-                    உங்கள் பெயர் / Your Name
-
-                </label>
-
                 <div class="input-group">
 
                     <input
@@ -116,13 +108,15 @@ Responsibility
 
                         class="input input-field"
 
-                        placeholder="உங்கள் பெயரை இங்கே உள்ளிடுங்கள்..."
+                        placeholder="உங்கள் பெயர் • Your First Name"
 
                         autocomplete="given-name"
 
                         spellcheck="false"
 
                         maxlength="40"
+
+                        aria-label="Your First Name"
 
                         required>
 
@@ -143,6 +137,8 @@ Responsibility
             <!-- Continue -->
 
             <button
+
+                id="btnContinue"
 
                 class="btn btn-primary"
 
