@@ -35,6 +35,20 @@ Responsibility
     }
 
     /*==================================================
+    Safe Value
+    ==================================================*/
+
+    CTM.safeValue = function (value, fallback = '') {
+
+        return value === undefined || value === null
+
+            ? fallback
+
+            : value;
+
+    };
+
+    /*==================================================
     Dynamic Tokens
     ==================================================*/
 
@@ -42,37 +56,73 @@ Responsibility
 
         '{JourneyProgress}' : function () {
 
-            return CTM.state.journey.progress || 0;
+            return CTM.safeValue(
+
+                CTM.state?.journey?.progress,
+
+                0
+
+            );
 
         },
 
         '{Completion}' : function () {
 
-            return (CTM.state.journey.completion || 0) + '%';
+            return CTM.safeValue(
+
+                CTM.state?.journey?.completion,
+
+                0
+
+            ) + '%';
 
         },
 
         '{ReadinessScore}' : function () {
 
-            return CTM.state.scores.readiness || 0;
+            return CTM.safeValue(
+
+                CTM.state?.scores?.readiness,
+
+                0
+
+            );
 
         },
 
         '{Pattern}' : function () {
 
-            return CTM.state.scores.pattern || '';
+            return CTM.safeValue(
+
+                CTM.state?.scores?.pattern,
+
+                ''
+
+            );
 
         },
 
         '{Insight}' : function () {
 
-            return CTM.state.insights.summary || '';
+            return CTM.safeValue(
+
+                CTM.state?.insights?.summary,
+
+                ''
+
+            );
 
         },
 
         '{Recommendation}' : function () {
 
-            return CTM.state.recommendations.primary || '';
+            return CTM.safeValue(
+
+                CTM.state?.recommendations?.primary,
+
+                ''
+
+            );
 
         }
 
@@ -92,15 +142,21 @@ Responsibility
 
         let output = text;
 
-        Object.keys(CTM.dynamicTokens).forEach(function (token) {
+        Object.keys(
 
-            const value = CTM.dynamicTokens[token]();
+            CTM.dynamicTokens
+
+        ).forEach(function (token) {
 
             output = output.replaceAll(
 
                 token,
 
-                value
+                String(
+
+                    CTM.dynamicTokens[token]()
+
+                )
 
             );
 
@@ -122,7 +178,13 @@ Responsibility
 
         }
 
-        if (typeof CTM.replaceTokens === 'function') {
+        if (
+
+            typeof CTM.replaceTokens ===
+
+            'function'
+
+        ) {
 
             text = CTM.replaceTokens(text);
 
@@ -148,15 +210,19 @@ Responsibility
 
         if (!element.dataset.template) {
 
-            element.dataset.template = element.innerHTML;
+            element.dataset.template =
+
+                element.innerHTML;
 
         }
 
-        element.innerHTML = CTM.personalizeText(
+        element.innerHTML =
 
-            element.dataset.template
+            CTM.personalizeText(
 
-        );
+                element.dataset.template
+
+            );
 
     };
 
@@ -168,43 +234,69 @@ Responsibility
 
         document
 
-            .querySelectorAll('[data-personalize]')
+            .querySelectorAll(
+
+                '[data-personalize]'
+
+            )
 
             .forEach(function (element) {
 
-                CTM.personalizeTextElement(element);
+                CTM.personalizeTextElement(
+
+                    element
+
+                );
 
             });
 
     };
 
     /*==================================================
-    Update Progress Display
+    Progress Bar
     ==================================================*/
 
     CTM.refreshProgressDisplay = function () {
 
+        const completion =
+
+            CTM.safeValue(
+
+                CTM.state?.journey?.completion,
+
+                0
+
+            );
+
         const progressBar =
 
-            document.querySelector('.progress-fill');
+            document.querySelector(
+
+                '.progress-fill'
+
+            );
 
         if (progressBar) {
 
             progressBar.style.width =
 
-                (CTM.state.journey.completion || 0) + '%';
+                completion + '%';
 
         }
 
         const percent =
 
-            document.querySelector('.progress-percent');
+            document.querySelector(
+
+                '.progress-percent'
+
+            );
 
         if (percent) {
 
             percent.textContent =
 
-                (CTM.state.journey.completion || 0) + '%';
+                completion + '%';
 
         }
 
@@ -215,6 +307,18 @@ Responsibility
     ==================================================*/
 
     CTM.refreshText = function () {
+
+        if (
+
+            typeof CTM.refreshPersonalization ===
+
+            'function'
+
+        ) {
+
+            CTM.refreshPersonalization();
+
+        }
 
         CTM.refreshDynamicContent();
 
