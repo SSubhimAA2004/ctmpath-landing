@@ -51,6 +51,32 @@ Responsibility
     ];
 
     /*==================================================
+    Resolve Field Name
+    ==================================================*/
+
+    CTM.resolveField = function (element) {
+
+        if (!element) {
+
+            return '';
+
+        }
+
+        return (
+
+            element.dataset.field ||
+
+            element.name ||
+
+            element.id ||
+
+            ''
+
+        ).trim();
+
+    };
+
+    /*==================================================
     Read Input Value
     ==================================================*/
 
@@ -78,7 +104,7 @@ Responsibility
 
         }
 
-        const field = element.dataset.field;
+        const field = CTM.resolveField(element);
 
         if (!field) {
 
@@ -88,19 +114,67 @@ Responsibility
 
         if (!CTM.inputFields.includes(field)) {
 
-            console.warn('Unknown visitor field:', field);
+            console.warn(
+
+                'Unknown visitor field:',
+
+                field
+
+            );
 
             return;
 
         }
 
+        const value = CTM.readInput(element);
+
         CTM.setVisitor(
 
             field,
 
-            CTM.readInput(element)
+            value
 
         );
+
+        /*----------------------------------------------
+        Keep Name & First Name in Sync
+        ----------------------------------------------*/
+
+        if (field === 'firstName') {
+
+            CTM.setVisitor(
+
+                'name',
+
+                value
+
+            );
+
+        }
+
+        if (field === 'name') {
+
+            CTM.setVisitor(
+
+                'firstName',
+
+                value
+
+            );
+
+        }
+
+        if (
+
+            typeof CTM.updatePersonalization ===
+
+            'function'
+
+        ) {
+
+            CTM.updatePersonalization();
+
+        }
 
     };
 
@@ -112,11 +186,21 @@ Responsibility
 
         CTM.inputFields.forEach(function (field) {
 
-            const input = document.querySelector(
+            const input =
 
-                `[data-field="${field}"]`
+                document.querySelector(
 
-            );
+                    `[data-field="${field}"]`
+
+                ) ||
+
+                document.getElementById(field) ||
+
+                document.querySelector(
+
+                    `[name="${field}"]`
+
+                );
 
             if (!input) {
 
@@ -124,7 +208,9 @@ Responsibility
 
             }
 
-            input.value = CTM.getVisitor(field);
+            input.value =
+
+                CTM.getVisitor(field) || '';
 
         });
 
@@ -142,7 +228,11 @@ Responsibility
 
         }
 
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+
+            value
+
+        );
 
     };
 
@@ -158,7 +248,11 @@ Responsibility
 
         }
 
-        return /^[0-9]{10}$/.test(value);
+        return /^[0-9]{10}$/.test(
+
+            value
+
+        );
 
     };
 
@@ -174,7 +268,7 @@ Responsibility
 
         }
 
-        const field = element.dataset.field;
+        const field = CTM.resolveField(element);
 
         const value = CTM.readInput(element);
 
@@ -192,13 +286,17 @@ Responsibility
 
             case 'email':
 
-                valid = CTM.validateEmail(value);
+                valid =
+
+                    CTM.validateEmail(value);
 
                 break;
 
             case 'mobile':
 
-                valid = CTM.validateMobile(value);
+                valid =
+
+                    CTM.validateMobile(value);
 
                 break;
 
@@ -226,7 +324,25 @@ Responsibility
 
         const element = event.target;
 
-        if (!element.matches('[data-field]')) {
+        if (
+
+            !element.matches(
+
+                'input, textarea, select'
+
+            )
+
+        ) {
+
+            return;
+
+        }
+
+        const field =
+
+            CTM.resolveField(element);
+
+        if (!field) {
 
             return;
 
@@ -244,7 +360,25 @@ Responsibility
 
         const element = event.target;
 
-        if (!element.matches('[data-field]')) {
+        if (
+
+            !element.matches(
+
+                'input, textarea, select'
+
+            )
+
+        ) {
+
+            return;
+
+        }
+
+        const field =
+
+            CTM.resolveField(element);
+
+        if (!field) {
 
             return;
 
@@ -252,7 +386,13 @@ Responsibility
 
         CTM.validateInput(element);
 
-        if (typeof CTM.saveState === 'function') {
+        if (
+
+            typeof CTM.saveState ===
+
+            'function'
+
+        ) {
 
             CTM.saveState();
 
@@ -265,6 +405,24 @@ Responsibility
     ==================================================*/
 
     CTM.bindInputs = function () {
+
+        document.removeEventListener(
+
+            'input',
+
+            CTM.handleInput
+
+        );
+
+        document.removeEventListener(
+
+            'blur',
+
+            CTM.handleBlur,
+
+            true
+
+        );
 
         document.addEventListener(
 
@@ -285,5 +443,11 @@ Responsibility
         );
 
     };
+
+    /*==================================================
+    Initialize
+    ==================================================*/
+
+    CTM.bindInputs();
 
 })();
