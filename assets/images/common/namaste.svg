@@ -1,0 +1,98 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" fill="none">
+
+    <defs>
+
+        <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+
+            <stop offset="0%" stop-color="#F6D57A"></stop>
+
+            <stop offset="100%" stop-color="#C8A44D"></stop>
+
+        </linearGradient>
+
+    </defs>
+
+    <g stroke="url(#gold)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+
+        <!-- Left Hand -->
+
+        <path d="
+            M58 20
+            C48 28 42 42 42 58
+            L42 82
+            C42 92 48 100 58 108
+        "></path>
+
+        <path d="
+            M54 24
+            L50 60
+        "></path>
+
+        <path d="
+            M50 34
+            L44 56
+        "></path>
+
+        <path d="
+            M58 34
+            L62 60
+        "></path>
+
+        <!-- Right Hand -->
+
+        <path d="
+            M70 20
+            C80 28 86 42 86 58
+            L86 82
+            C86 92 80 100 70 108
+        "></path>
+
+        <path d="
+            M74 24
+            L78 60
+        "></path>
+
+        <path d="
+            M78 34
+            L84 56
+        "></path>
+
+        <path d="
+            M70 34
+            L66 60
+        "></path>
+
+        <!-- Joined Palms -->
+
+        <path d="
+            M64 16
+            L64 108
+        "></path>
+
+        <!-- Wrist Band -->
+
+        <path d="
+            M36 88
+            C44 94 54 98 64 98
+            C74 98 84 94 92 88
+        "></path>
+
+        <!-- Lotus Base -->
+
+        <path d="
+            M48 112
+            C54 106 60 104 64 104
+            C68 104 74 106 80 112
+        "></path>
+
+        <path d="
+            M56 118
+            C60 114 62 112 64 112
+            C66 112 68 114 72 118
+        "></path>
+
+    </g>
+
+</svg>
