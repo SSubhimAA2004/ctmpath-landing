@@ -8,7 +8,7 @@ File
 js/screens/screen02.js
 
 Screen
-02 — THE GIFT™
+02 — THE SIX MINUTES™
 
 Purpose
 Screen interaction controller
@@ -56,6 +56,8 @@ if(!CTM){
 
 
 
+
+
 /*==================================================
 Screen 02 Initializer
 
@@ -90,6 +92,8 @@ CTM.initScreen02 = function(){
 
 
 
+
+
     activateEntrance();
 
 
@@ -99,6 +103,9 @@ CTM.initScreen02 = function(){
 
 
 };
+
+
+
 
 
 
@@ -122,10 +129,6 @@ function activateEntrance(){
 
 
 
-        ".moment-label",
-
-
-
         ".screen02-symbol",
 
 
@@ -142,7 +145,7 @@ function activateEntrance(){
 
 
 
-        ".btn-primary"
+        ".screen02-next"
 
 
 
@@ -168,6 +171,8 @@ function activateEntrance(){
 
 
 
+
+
         if(element){
 
 
@@ -179,6 +184,9 @@ function activateEntrance(){
             element.style.transform =
 
                 "translateY(30px)";
+
+
+
 
 
 
@@ -226,8 +234,11 @@ function activateEntrance(){
 
 
 
+
+
+
 /*==================================================
-Continue Button
+Journey Continuation
 
 SCREEN 02 → SCREEN 03
 
@@ -243,6 +254,8 @@ function bindContinueButton(){
         "screen02Continue"
 
     );
+
+
 
 
 
@@ -266,13 +279,21 @@ function bindContinueButton(){
 
     button.addEventListener(
 
+
+
         "click",
+
+
 
         function(){
 
 
 
+
+
             navigateToNextScreen();
+
+
 
 
 
@@ -285,6 +306,9 @@ function bindContinueButton(){
 
 
 }
+
+
+
 
 
 
@@ -308,7 +332,11 @@ function navigateToNextScreen(){
 
     if(
 
+
+
         typeof CTM.navigate === "function"
+
+
 
     ){
 
@@ -316,7 +344,11 @@ function navigateToNextScreen(){
 
         CTM.navigate(
 
+
+
             "screen03"
+
+
 
         );
 
@@ -336,7 +368,11 @@ function navigateToNextScreen(){
 
     console.warn(
 
+
+
         "CTM router unavailable."
+
+
 
     );
 
@@ -352,4 +388,7 @@ function navigateToNextScreen(){
 
 
 
-})(); 
+
+
+
+})();
