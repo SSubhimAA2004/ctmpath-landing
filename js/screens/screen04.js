@@ -59,6 +59,7 @@ CTM.initScreen04 = function(){
 
 
 
+
 /*==================================================
 Navigation Setup
 ==================================================*/
@@ -90,7 +91,7 @@ function setupScreen04Navigation(){
 
         "click",
 
-        function(){
+        async function(){
 
 
             const nextScreen =
@@ -111,45 +112,25 @@ function setupScreen04Navigation(){
 
 
 
+
             /*
-            Use CTM router architecture
+            CTM PATH™ Universal Router
+
+            router.js
+
+            CTM.navigate(screenId)
+
             */
 
 
             if(
 
-                typeof CTM.navigateToScreen === "function"
+                typeof CTM.navigate === "function"
 
             ){
 
 
-                CTM.navigateToScreen(
-
-                    nextScreen
-
-                );
-
-
-                return;
-
-
-            }
-
-
-
-            /*
-            Fallback support
-            */
-
-
-            if(
-
-                typeof navigateToScreen === "function"
-
-            ){
-
-
-                navigateToScreen(
+                await CTM.navigate(
 
                     nextScreen
 
