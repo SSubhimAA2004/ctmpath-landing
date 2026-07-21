@@ -1,1 +1,996 @@
 
+/*
+======================================================================
+
+CTM PATH™ Guided Journey v6.0
+
+File
+css/screens/screen02.css
+
+Screen
+02 — THE GIFT™
+
+Purpose
+Emotional introduction
+
+Responsibility
+• Screen 02 layout
+• Gift light symbol
+• Tamil-first typography
+• Emotional pacing
+• Premium transitions
+
+======================================================================
+*/
+
+
+/*==================================================
+Screen 02 Base
+==================================================*/
+
+
+#screen02{
+
+
+    width:100%;
+
+    min-height:100vh;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    position:relative;
+
+
+    overflow:hidden;
+
+
+}
+
+
+
+
+
+
+/*==================================================
+Ambient Background Enhancement
+
+Matches Screen 01
+
+==================================================*/
+
+
+#screen02::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+
+    background:
+
+
+        radial-gradient(
+
+            circle at 50% 25%,
+
+            rgba(217,181,106,.14),
+
+            transparent 28%
+
+        ),
+
+
+
+        radial-gradient(
+
+            circle at 50% 60%,
+
+            rgba(24,166,109,.10),
+
+            transparent 40%
+
+        );
+
+
+
+    pointer-events:none;
+
+
+}
+
+
+
+
+
+
+
+
+/*==================================================
+Container
+==================================================*/
+
+
+#screen02 .container{
+
+
+    width:100%;
+
+
+    max-width:1200px;
+
+
+    padding:
+
+
+        50px 40px;
+
+
+
+}
+
+
+
+
+
+
+
+
+/*==================================================
+Hero Wrapper
+==================================================*/
+
+
+.screen02-hero{
+
+
+    width:100%;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
+
+
+    text-align:center;
+
+
+
+    position:relative;
+
+
+    z-index:2;
+
+
+
+}
+
+
+
+
+
+
+
+
+/*==================================================
+Moment Label
+==================================================*/
+
+
+.moment-label{
+
+
+    font-family:
+
+
+        Arial,
+        Helvetica,
+        sans-serif;
+
+
+
+    font-size:
+
+
+        .85rem;
+
+
+
+    letter-spacing:
+
+
+        8px;
+
+
+
+    text-transform:
+
+
+        uppercase;
+
+
+
+    color:
+
+
+        rgba(217,181,106,.75);
+
+
+
+    margin-bottom:
+
+
+        35px;
+
+
+
+}
+
+
+
+
+
+
+
+
+/*==================================================
+Gift Symbol
+
+==================================================*/
+
+
+.screen02-symbol{
+
+
+    width:
+
+
+        220px;
+
+
+
+    margin-bottom:
+
+
+        45px;
+
+
+
+    animation:
+
+
+        giftFloat 6s ease-in-out infinite;
+
+
+
+}
+
+
+
+
+.screen02-symbol img{
+
+
+    width:100%;
+
+
+    height:auto;
+
+
+    display:block;
+
+
+
+    filter:
+
+
+        drop-shadow(
+
+            0 20px 45px rgba(217,181,106,.25)
+
+        );
+
+
+
+}
+
+
+
+
+
+
+
+
+@keyframes giftFloat{
+
+
+    0%,100%{
+
+
+        transform:
+
+
+            translateY(0);
+
+
+
+    }
+
+
+
+    50%{
+
+
+        transform:
+
+
+            translateY(-12px);
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+/*==================================================
+Tamil Heading
+
+==================================================*/
+
+
+.screen02-tamil h1{
+
+
+    font-family:
+
+
+        "Noto Sans Tamil",
+        "Latha",
+        sans-serif;
+
+
+
+    font-size:
+
+
+        3rem;
+
+
+
+    line-height:
+
+
+        1.5;
+
+
+
+    font-weight:
+
+
+        700;
+
+
+
+    color:
+
+
+        var(--color-white);
+
+
+
+    margin-bottom:
+
+
+        45px;
+
+
+
+}
+
+
+
+
+
+
+
+
+/*==================================================
+Tamil Message
+
+==================================================*/
+
+
+.screen02-tamil p{
+
+
+    font-family:
+
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+
+
+    font-size:
+
+
+        1.55rem;
+
+
+
+    line-height:
+
+
+        2.2;
+
+
+
+    font-weight:
+
+
+        500;
+
+
+
+    color:
+
+
+        rgba(255,255,255,.92);
+
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+English Message
+
+==================================================*/
+
+
+.screen02-english{
+
+
+    margin-top:
+
+
+        45px;
+
+
+
+}
+
+
+
+.screen02-english p{
+
+
+    font-family:
+
+
+        Georgia,
+        serif;
+
+
+
+    font-size:
+
+
+        1.35rem;
+
+
+
+    line-height:
+
+
+        2;
+
+
+
+    color:
+
+
+        rgba(255,255,255,.75);
+
+
+
+}
+
+
+
+
+
+
+
+
+/*==================================================
+Gold Divider
+
+==================================================*/
+
+
+#screen02 .gold-divider{
+
+
+    width:
+
+
+        90px;
+
+
+
+    height:
+
+
+        2px;
+
+
+
+    margin:
+
+
+        45px auto;
+
+
+
+    background:
+
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            var(--color-gold),
+
+            transparent
+
+        );
+
+
+
+}
+
+
+
+
+
+
+
+
+/*==================================================
+Primary Button
+
+==================================================*/
+
+
+#screen02 .btn-primary{
+
+
+    min-width:
+
+
+        260px;
+
+
+
+    padding:
+
+
+        18px 40px;
+
+
+
+    border-radius:
+
+
+        var(--radius-button);
+
+
+
+    background:
+
+
+        linear-gradient(
+
+            135deg,
+
+            #D9B56A,
+
+            #B47718
+
+        );
+
+
+
+    color:
+
+
+        #06152F;
+
+
+
+    box-shadow:
+
+
+        0 15px 45px rgba(217,181,106,.25);
+
+
+
+    transition:
+
+
+        all .45s var(--ease-premium);
+
+
+
+}
+
+
+
+
+
+#screen02 .btn-primary:hover{
+
+
+    transform:
+
+
+        translateY(-5px);
+
+
+
+    box-shadow:
+
+
+        0 25px 60px rgba(217,181,106,.40);
+
+
+
+}
+
+
+
+
+
+
+
+.btn-title{
+
+
+    display:block;
+
+
+    font-size:
+
+
+        1.2rem;
+
+
+
+    font-weight:
+
+
+        700;
+
+
+
+}
+
+
+
+.btn-subtitle{
+
+
+    display:block;
+
+
+    margin-top:
+
+
+        5px;
+
+
+
+    font-size:
+
+
+        .85rem;
+
+
+
+    opacity:
+
+
+        .75;
+
+
+
+}
+
+
+
+
+
+
+
+
+/*==================================================
+Tablet
+
+==================================================*/
+
+
+@media(max-width:900px){
+
+
+
+    .screen02-symbol{
+
+
+        width:
+
+
+            190px;
+
+
+
+    }
+
+
+
+
+    .screen02-tamil h1{
+
+
+        font-size:
+
+
+            2.5rem;
+
+
+
+    }
+
+
+
+
+    .screen02-tamil p{
+
+
+        font-size:
+
+
+            1.35rem;
+
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+/*==================================================
+Mobile
+
+==================================================*/
+
+
+@media(max-width:600px){
+
+
+
+    #screen02 .container{
+
+
+        padding:
+
+
+            35px 22px;
+
+
+
+    }
+
+
+
+
+
+    .moment-label{
+
+
+        margin-bottom:
+
+
+            25px;
+
+
+
+    }
+
+
+
+
+
+    .screen02-symbol{
+
+
+        width:
+
+
+            160px;
+
+
+
+        margin-bottom:
+
+
+            30px;
+
+
+
+    }
+
+
+
+
+
+    .screen02-tamil h1{
+
+
+        font-size:
+
+
+            2rem;
+
+
+
+        margin-bottom:
+
+
+            30px;
+
+
+
+    }
+
+
+
+
+
+    .screen02-tamil p{
+
+
+        font-size:
+
+
+            1.15rem;
+
+
+
+        line-height:
+
+
+            2;
+
+
+
+    }
+
+
+
+
+
+    .screen02-english p{
+
+
+        font-size:
+
+
+            1rem;
+
+
+
+    }
+
+
+
+
+
+    #screen02 .btn-primary{
+
+
+        width:
+
+
+            90%;
+
+
+
+        max-width:
+
+
+            300px;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+/*==================================================
+Reduced Motion
+
+==================================================*/
+
+
+@media(prefers-reduced-motion:reduce){
+
+
+    .screen02-symbol{
+
+
+        animation:none;
+
+
+    }
+
+
+
+    #screen02 .btn-primary{
+
+
+        transition:none;
+
+
+    }
+
+
+
+}
