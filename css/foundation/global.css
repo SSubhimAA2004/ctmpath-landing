@@ -1,1 +1,552 @@
 
+/*
+======================================================================
+
+CTM PATH™ Guided Journey v1.0
+
+File
+css/foundation/global.css
+
+Purpose
+Global Design Foundation
+
+Responsibility
+• Premium colour system
+• Design tokens
+• Layout foundation
+• Reset styles
+• Base application behaviour
+• CTM PATH™ visual identity
+
+======================================================================
+*/
+
+
+/*==================================================
+Root Variables
+==================================================*/
+
+:root{
+
+
+    /*
+    -----------------------------------------------
+    Brand Colours
+    -----------------------------------------------
+    */
+
+
+    --color-background:
+
+        #061526;
+
+
+    --color-background-soft:
+
+        #0B2038;
+
+
+    --color-surface:
+
+        rgba(255,255,255,.06);
+
+
+    --color-surface-light:
+
+        rgba(255,255,255,.10);
+
+
+
+    --color-primary:
+
+        #18A66D;
+
+
+    --color-primary-dark:
+
+        #125D41;
+
+
+
+    --color-gold:
+
+        #D9B56A;
+
+
+    --color-gold-soft:
+
+        rgba(217,181,106,.45);
+
+
+
+    --color-white:
+
+        #FFFFFF;
+
+
+    --color-text:
+
+        rgba(255,255,255,.92);
+
+
+    --color-text-soft:
+
+        rgba(255,255,255,.72);
+
+
+
+    /*
+    -----------------------------------------------
+    Functional Colours
+    -----------------------------------------------
+    */
+
+
+    --color-success:
+
+        #22C55E;
+
+
+    --color-warning:
+
+        #F59E0B;
+
+
+    --color-danger:
+
+        #EF4444;
+
+
+
+    /*
+    -----------------------------------------------
+    Shadows
+    -----------------------------------------------
+    */
+
+
+    --shadow-soft:
+
+        0 20px 60px rgba(0,0,0,.35);
+
+
+
+    --shadow-premium:
+
+        0 30px 80px rgba(0,0,0,.55);
+
+
+
+    --shadow-glow:
+
+        0 0 40px rgba(24,166,109,.25);
+
+
+
+    --shadow-gold:
+
+        0 0 40px rgba(217,181,106,.20);
+
+
+
+    /*
+    -----------------------------------------------
+    Radius
+    -----------------------------------------------
+    */
+
+
+    --radius-card:
+
+        28px;
+
+
+
+    --radius-button:
+
+        999px;
+
+
+
+    --radius-soft:
+
+        16px;
+
+
+
+    /*
+    -----------------------------------------------
+    Spacing
+    -----------------------------------------------
+    */
+
+
+    --space-xs:
+
+        8px;
+
+
+    --space-sm:
+
+        16px;
+
+
+    --space-md:
+
+        32px;
+
+
+    --space-lg:
+
+        64px;
+
+
+    --space-xl:
+
+        96px;
+
+
+
+    /*
+    -----------------------------------------------
+    Animation
+    -----------------------------------------------
+    */
+
+
+    --speed-fast:
+
+        .25s;
+
+
+    --speed-normal:
+
+        .45s;
+
+
+    --speed-slow:
+
+        .90s;
+
+
+
+    --ease-premium:
+
+        cubic-bezier(.22,1,.36,1);
+
+
+
+}
+
+
+
+/*==================================================
+Global Reset
+==================================================*/
+
+
+*,
+*::before,
+*::after{
+
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+
+}
+
+
+
+/*==================================================
+HTML Base
+==================================================*/
+
+
+html{
+
+
+    width:100%;
+
+    min-height:100%;
+
+    scroll-behavior:smooth;
+
+
+}
+
+
+
+/*==================================================
+Body Foundation
+==================================================*/
+
+
+body{
+
+
+    width:100%;
+
+    min-height:100vh;
+
+
+    overflow-x:hidden;
+
+
+
+    background:
+
+
+        radial-gradient(
+
+            circle at top,
+
+            rgba(24,166,109,.12),
+
+            transparent 35%
+
+        ),
+
+
+        linear-gradient(
+
+            180deg,
+
+            #081C3A 0%,
+
+            #061526 100%
+
+        );
+
+
+
+    color:var(--color-text);
+
+
+
+    -webkit-font-smoothing:antialiased;
+
+    -moz-osx-font-smoothing:grayscale;
+
+
+
+}
+
+
+
+/*==================================================
+Application Root
+==================================================*/
+
+
+#app{
+
+
+    width:100%;
+
+    min-height:100vh;
+
+    position:relative;
+
+
+}
+
+
+
+/*==================================================
+Screen Container
+==================================================*/
+
+
+#screen-container{
+
+
+    width:100%;
+
+    min-height:100vh;
+
+
+}
+
+
+
+/*==================================================
+Screen Base
+==================================================*/
+
+
+.screen{
+
+
+    width:100%;
+
+    min-height:100vh;
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+
+    position:relative;
+
+
+}
+
+
+
+/*==================================================
+Container
+==================================================*/
+
+
+.container{
+
+
+    width:100%;
+
+    max-width:1200px;
+
+
+    margin:0 auto;
+
+
+    padding-left:
+
+        40px;
+
+
+    padding-right:
+
+        40px;
+
+
+
+}
+
+
+
+/*==================================================
+Images
+==================================================*/
+
+
+img{
+
+
+    max-width:100%;
+
+    height:auto;
+
+    display:block;
+
+
+}
+
+
+
+/*==================================================
+Buttons Remove Default
+==================================================*/
+
+
+button{
+
+
+    font:inherit;
+
+    border:none;
+
+    background:none;
+
+
+}
+
+
+
+/*==================================================
+Links
+==================================================*/
+
+
+a{
+
+
+    color:inherit;
+
+    text-decoration:none;
+
+
+}
+
+
+
+/*==================================================
+Selection
+==================================================*/
+
+
+::selection{
+
+
+    background:
+
+        rgba(217,181,106,.35);
+
+
+    color:white;
+
+
+}
+
+
+
+/*==================================================
+Scrollbar Premium
+==================================================*/
+
+
+::-webkit-scrollbar{
+
+
+    width:10px;
+
+
+}
+
+
+::-webkit-scrollbar-track{
+
+
+    background:#061526;
+
+
+}
+
+
+::-webkit-scrollbar-thumb{
+
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #D9B56A,
+
+            #18A66D
+
+        );
+
+
+    border-radius:20px;
+
+
+}
