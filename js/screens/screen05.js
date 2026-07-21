@@ -21,9 +21,11 @@ Responsibility:
 ======================================================================*/
 
 
+
 /*==================================================
 Screen 05 Initialisation
 ==================================================*/
+
 
 function initScreen05(){
 
@@ -51,9 +53,14 @@ function initScreen05(){
 
 
 
+
+
+
+
 /*==================================================
 Name Capture
 ==================================================*/
+
 
 function setupNameCapture(){
 
@@ -61,7 +68,9 @@ function setupNameCapture(){
     const nameInput =
 
         document.querySelector(
+
             "#visitor-name"
+
         );
 
 
@@ -100,9 +109,14 @@ function setupNameCapture(){
 
 
 
+
+
+
+
 /*==================================================
 Save Visitor Name
 ==================================================*/
+
 
 function saveVisitorName(name){
 
@@ -144,9 +158,14 @@ function saveVisitorName(name){
 
 
 
+
+
+
+
 /*==================================================
 Navigation Setup
 ==================================================*/
+
 
 function setupScreen05Navigation(){
 
@@ -210,6 +229,7 @@ function setupScreen05Navigation(){
 
 
 
+
             const nextScreen =
 
                 this.getAttribute(
@@ -223,7 +243,23 @@ function setupScreen05Navigation(){
             if(nextScreen){
 
 
-                navigateToScreen(nextScreen);
+                if(
+
+                    typeof CTM !== "undefined" &&
+
+                    typeof CTM.navigate === "function"
+
+                ){
+
+
+                    CTM.navigate(
+
+                        nextScreen
+
+                    );
+
+
+                }
 
 
             }
@@ -239,9 +275,14 @@ function setupScreen05Navigation(){
 
 
 
+
+
+
+
 /*==================================================
 Screen 05 Ready
 ==================================================*/
+
 
 document.addEventListener(
 
