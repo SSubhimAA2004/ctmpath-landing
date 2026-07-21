@@ -31,9 +31,9 @@ Choice Group
 
     flex-direction:column;
 
-    gap:20px;
+    gap:24px;
 
-    margin:36px 0;
+    margin:40px 0;
 
 }
 
@@ -48,7 +48,30 @@ Horizontal Group
 
     grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 
-    gap:20px;
+    gap:24px;
+
+}
+
+
+/*==================================================
+Premium Multi Choice Grid
+==================================================*/
+
+.choice-grid{
+
+    width:100%;
+
+    max-width:1180px;
+
+    margin:48px auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,minmax(0,1fr));
+
+    gap:22px;
+
+    align-items:stretch;
 
 }
 
@@ -63,75 +86,29 @@ Choice Card
 
     display:flex;
 
+    flex-direction:column;
+
+    justify-content:center;
+
     align-items:center;
 
-    gap:20px;
+    gap:18px;
+
+    min-height:210px;
 
     width:100%;
 
-    padding:24px 28px;
+    padding:30px 22px;
 
-    border-radius:22px;
+    border-radius:24px;
 
     cursor:pointer;
 
     overflow:hidden;
 
-    background:
+    text-align:center;
 
-        rgba(255,255,255,.04);
-
-    border:
-
-        1px solid rgba(216,179,106,.18);
-
-    transition:
-
-        transform .30s ease,
-
-        border-color .30s ease,
-
-        background .30s ease,
-
-        box-shadow .30s ease;
-
-}
-
-
-/*==================================================
-Hover
-==================================================*/
-
-.choice:hover{
-
-    transform:
-
-        translateY(-4px);
-
-    border-color:
-
-        rgba(216,179,106,.45);
-
-    background:
-
-        rgba(255,255,255,.06);
-
-    box-shadow:
-
-        0 14px 34px rgba(0,0,0,.35);
-
-}
-
-
-/*==================================================
-Selected
-==================================================*/
-
-.choice.selected{
-
-    border:
-
-        2px solid #D8B36A;
+    user-select:none;
 
     background:
 
@@ -139,28 +116,248 @@ Selected
 
             180deg,
 
-            rgba(27,170,102,.18),
+            rgba(255,255,255,.045) 0%,
 
-            rgba(16,33,52,.88)
+            rgba(255,255,255,.025) 100%
 
         );
 
-    box-shadow:
+    border:
 
-        0 0 24px rgba(216,179,106,.18);
+        1px solid rgba(216,179,106,.18);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    transition:
+
+        transform var(--speed-normal) var(--ease),
+
+        border-color var(--speed-normal) var(--ease),
+
+        background var(--speed-normal) var(--ease),
+
+        box-shadow var(--speed-normal) var(--ease);
 
 }
 
 
 /*==================================================
-Focus
+Premium Background Glow
+==================================================*/
+
+.choice::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        radial-gradient(
+
+            circle at top,
+
+            rgba(216,179,106,.08),
+
+            transparent 70%
+
+        );
+
+    opacity:0;
+
+    transition:
+
+        opacity var(--speed-normal) var(--ease);
+
+    pointer-events:none;
+
+}
+
+
+/*==================================================
+Premium Hover
+==================================================*/
+
+.choice:hover{
+
+    transform:
+
+        translateY(-6px)
+
+        scale(1.02);
+
+    border-color:
+
+        rgba(216,179,106,.48);
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            rgba(255,255,255,.075),
+
+            rgba(255,255,255,.045)
+
+        );
+
+    box-shadow:
+
+        var(--shadow-md),
+
+        var(--shadow-gold);
+
+}
+
+
+.choice:hover::before{
+
+    opacity:1;
+
+}
+
+
+/*==================================================
+Selected State
+==================================================*/
+
+.choice.selected{
+
+    border:
+
+        2px solid var(--color-accent);
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            rgba(22,165,106,.22) 0%,
+
+            rgba(15,27,46,.95) 100%
+
+        );
+
+    box-shadow:
+
+        var(--shadow-lg),
+
+        var(--shadow-gold),
+
+        var(--shadow-green);
+
+}
+
+/*==================================================
+Selected Glow Overlay
+==================================================*/
+
+.choice.selected::before{
+
+    opacity:1;
+
+    background:
+
+        radial-gradient(
+
+            circle at center,
+
+            rgba(216,179,106,.16),
+
+            transparent 72%
+
+        );
+
+}
+
+
+/*==================================================
+Keyboard Focus
 ==================================================*/
 
 .choice:focus-visible{
 
     outline:none;
 
-    border-color:#D8B36A;
+    border-color:var(--color-accent);
+
+    box-shadow:
+
+        0 0 0 3px rgba(216,179,106,.22),
+
+        var(--shadow-gold);
+
+}
+
+
+/*==================================================
+Selection Indicator
+==================================================*/
+
+.choice::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:16px;
+
+    right:16px;
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:50%;
+
+    border:
+
+        2px solid rgba(216,179,106,.28);
+
+    background:
+
+        rgba(255,255,255,.04);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    transition:
+
+        all var(--speed-normal) var(--ease);
+
+}
+
+
+/*==================================================
+Selected Indicator
+==================================================*/
+
+.choice.selected::after{
+
+    content:"✓";
+
+    color:var(--color-white);
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    border-color:var(--color-primary);
+
+    background:var(--color-primary);
+
+    box-shadow:
+
+        0 0 18px rgba(22,165,106,.35);
 
 }
 
@@ -171,11 +368,9 @@ Choice Icon
 
 .choice-icon{
 
-    width:64px;
+    width:72px;
 
-    height:64px;
-
-    flex-shrink:0;
+    height:72px;
 
     display:flex;
 
@@ -187,113 +382,153 @@ Choice Icon
 
     background:
 
-        rgba(216,179,106,.12);
+        linear-gradient(
 
-    font-size:1.8rem;
+            180deg,
+
+            rgba(216,179,106,.16),
+
+            rgba(216,179,106,.08)
+
+        );
+
+    border:
+
+        1px solid rgba(216,179,106,.20);
+
+    font-size:2.1rem;
+
+    transition:
+
+        transform var(--speed-normal) var(--ease),
+
+        background var(--speed-normal) var(--ease),
+
+        box-shadow var(--speed-normal) var(--ease);
+
+}
+
+
+.choice:hover .choice-icon{
+
+    transform:
+
+        scale(1.08);
+
+    box-shadow:
+
+        var(--shadow-gold);
+
+}
+
+
+.choice.selected .choice-icon{
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            rgba(22,165,106,.30),
+
+            rgba(216,179,106,.18)
+
+        );
+
+    box-shadow:
+
+        var(--shadow-green),
+
+        var(--shadow-gold);
 
 }
 
 
 /*==================================================
-Choice Content
-==================================================*/
-
-.choice-content{
-
-    flex:1;
-
-}
-
-
-/*==================================================
-Tamil Title
+Choice Title (Tamil)
 ==================================================*/
 
 .choice-title{
 
+    font-family:var(--font-primary);
+
+    font-size:1.20rem;
+
+    font-weight:var(--font-weight-semibold);
+
+    line-height:1.45;
+
     color:var(--text-primary);
 
-    font-size:1.30rem;
+    transition:
 
-    font-weight:700;
+        color var(--speed-normal) var(--ease);
 
-    margin-bottom:8px;
+}
+
+
+.choice.selected .choice-title{
+
+    color:var(--text-gold-light);
 
 }
 
 
 /*==================================================
-English Subtitle
+Choice Subtitle (English)
 ==================================================*/
 
 .choice-subtitle{
 
-    color:var(--text-secondary);
+    font-family:var(--font-display);
 
-    font-size:.95rem;
+    font-size:.92rem;
+
+    font-style:italic;
+
+    letter-spacing:.03em;
 
     line-height:1.6;
+
+    color:var(--text-secondary);
+
+    transition:
+
+        color var(--speed-normal) var(--ease);
 
 }
 
 
+.choice.selected .choice-subtitle{
+
+    color:var(--color-white);
+
+}
+
 /*==================================================
-Selection Indicator
+Choice Content Wrapper
 ==================================================*/
 
-.choice-check{
+.choice-content{
 
-    width:28px;
-
-    height:28px;
-
-    flex-shrink:0;
-
-    border-radius:50%;
-
-    border:
-
-        2px solid rgba(216,179,106,.45);
+    width:100%;
 
     display:flex;
+
+    flex-direction:column;
 
     justify-content:center;
 
     align-items:center;
 
-    transition:.30s;
+    gap:10px;
 
 }
 
 
 /*==================================================
-Selected Indicator
-==================================================*/
-
-.choice.selected .choice-check{
-
-    background:#18A867;
-
-    border-color:#18A867;
-
-}
-
-
-.choice.selected .choice-check::before{
-
-    content:"✓";
-
-    color:#FFFFFF;
-
-    font-size:14px;
-
-    font-weight:700;
-
-}
-
-
-/*==================================================
-Hide Native Inputs
+Hidden Native Input
 ==================================================*/
 
 .choice input{
@@ -304,7 +539,7 @@ Hide Native Inputs
 
 
 /*==================================================
-Disabled
+Disabled State
 ==================================================*/
 
 .choice.disabled{
@@ -315,6 +550,17 @@ Disabled
 
     pointer-events:none;
 
+    filter:grayscale(.25);
+
+}
+
+
+.choice.disabled:hover{
+
+    transform:none;
+
+    box-shadow:none;
+
 }
 
 
@@ -324,7 +570,20 @@ Small Choice
 
 .choice-sm{
 
-    padding:18px 22px;
+    min-height:160px;
+
+    padding:22px 18px;
+
+}
+
+
+.choice-sm .choice-icon{
+
+    width:58px;
+
+    height:58px;
+
+    font-size:1.6rem;
 
 }
 
@@ -336,35 +595,76 @@ Small Choice
 }
 
 
+.choice-sm .choice-subtitle{
+
+    font-size:.82rem;
+
+}
+
+
 /*==================================================
 Large Choice
 ==================================================*/
 
 .choice-lg{
 
-    padding:34px;
+    min-height:260px;
+
+    padding:40px 28px;
+
+}
+
+
+.choice-lg .choice-icon{
+
+    width:84px;
+
+    height:84px;
+
+    font-size:2.4rem;
 
 }
 
 
 .choice-lg .choice-title{
 
-    font-size:1.60rem;
+    font-size:1.45rem;
+
+}
+
+
+.choice-lg .choice-subtitle{
+
+    font-size:1rem;
 
 }
 
 
 /*==================================================
-Animation
+Entrance Animation
 ==================================================*/
 
 .choice{
 
     animation:
 
-        choiceFade .45s ease;
+        choiceFade .45s ease both;
 
 }
+
+
+.choice:nth-child(1){animation-delay:.02s;}
+.choice:nth-child(2){animation-delay:.04s;}
+.choice:nth-child(3){animation-delay:.06s;}
+.choice:nth-child(4){animation-delay:.08s;}
+.choice:nth-child(5){animation-delay:.10s;}
+.choice:nth-child(6){animation-delay:.12s;}
+.choice:nth-child(7){animation-delay:.14s;}
+.choice:nth-child(8){animation-delay:.16s;}
+.choice:nth-child(9){animation-delay:.18s;}
+.choice:nth-child(10){animation-delay:.20s;}
+.choice:nth-child(11){animation-delay:.22s;}
+.choice:nth-child(12){animation-delay:.24s;}
 
 
 @keyframes choiceFade{
@@ -373,7 +673,11 @@ Animation
 
         opacity:0;
 
-        transform:translateY(20px);
+        transform:
+
+            translateY(24px)
+
+            scale(.96);
 
     }
 
@@ -381,7 +685,11 @@ Animation
 
         opacity:1;
 
-        transform:translateY(0);
+        transform:
+
+            translateY(0)
+
+            scale(1);
 
     }
 
@@ -389,16 +697,100 @@ Animation
 
 
 /*==================================================
-Responsive
+Multi Select Active Pulse
+==================================================*/
+
+.choice.selected{
+
+    animation:
+
+        selectedPulse .35s ease;
+
+}
+
+
+@keyframes selectedPulse{
+
+    0%{
+
+        transform:scale(.96);
+
+    }
+
+    60%{
+
+        transform:scale(1.04);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+/*==================================================
+Tablet
+==================================================*/
+
+@media (max-width:1024px){
+
+    .choice-grid{
+
+        grid-template-columns:
+
+            repeat(2,minmax(0,1fr));
+
+        gap:20px;
+
+    }
+
+    .choice{
+
+        min-height:190px;
+
+        padding:26px 20px;
+
+    }
+
+    .choice-icon{
+
+        width:64px;
+
+        height:64px;
+
+        font-size:1.9rem;
+
+    }
+
+    .choice-title{
+
+        font-size:1.12rem;
+
+    }
+
+    .choice-subtitle{
+
+        font-size:.88rem;
+
+    }
+
+}
+
+
+/*==================================================
+Mobile
 ==================================================*/
 
 @media (max-width:768px){
 
-    .choice{
+    .choice-group{
 
-        padding:20px;
+        gap:18px;
 
-        gap:16px;
+        margin:32px 0;
 
     }
 
@@ -408,11 +800,96 @@ Responsive
 
     }
 
+    .choice-grid{
+
+        grid-template-columns:1fr;
+
+        gap:18px;
+
+        margin:36px auto;
+
+    }
+
+    .choice{
+
+        min-height:150px;
+
+        padding:22px 18px;
+
+        gap:14px;
+
+    }
+
     .choice-icon{
 
-        width:52px;
+        width:56px;
 
-        height:52px;
+        height:56px;
+
+        font-size:1.7rem;
+
+    }
+
+    .choice-title{
+
+        font-size:1.02rem;
+
+        line-height:1.35;
+
+    }
+
+    .choice-subtitle{
+
+        font-size:.82rem;
+
+        line-height:1.45;
+
+    }
+
+    .choice::after{
+
+        width:30px;
+
+        height:30px;
+
+        top:12px;
+
+        right:12px;
+
+        font-size:.90rem;
+
+    }
+
+}
+
+
+/*==================================================
+Small Mobile
+==================================================*/
+
+@media (max-width:480px){
+
+    .choice-grid{
+
+        gap:16px;
+
+    }
+
+    .choice{
+
+        min-height:138px;
+
+        padding:20px 16px;
+
+        border-radius:20px;
+
+    }
+
+    .choice-icon{
+
+        width:50px;
+
+        height:50px;
 
         font-size:1.5rem;
 
@@ -420,14 +897,15 @@ Responsive
 
     .choice-title{
 
-        font-size:1.1rem;
+        font-size:.96rem;
 
     }
 
     .choice-subtitle{
 
-        font-size:.90rem;
+        font-size:.76rem;
 
     }
 
 }
+
