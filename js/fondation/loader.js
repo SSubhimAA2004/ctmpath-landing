@@ -17,6 +17,7 @@ Responsibility
 • Refresh screen experience
 • Support future screen modules
 • Handle loading errors
+• Initialize screen modules safely
 
 ======================================================================
 */
@@ -135,11 +136,15 @@ Responsibility
 
         return (
 
+
             CTM.loader.folder +
+
 
             screenId +
 
+
             CTM.loader.extension
+
 
         );
 
@@ -179,22 +184,25 @@ Responsibility
 
 
 
-        const response =
+        const response = await fetch(
 
 
-            await fetch(
 
-                path,
-
-                {
+            path,
 
 
-                    cache:'no-cache'
+
+            {
 
 
-                }
+                cache:'no-cache'
 
-            );
+
+            }
+
+
+
+        );
 
 
 
@@ -300,7 +308,38 @@ Responsibility
 
     /*
     ==================================================
-    Screen Preparation
+    Clear Previous Screen State
+    ==================================================
+    */
+
+
+    CTM.clearScreenClasses = function(){
+
+
+
+        document.body.classList.remove(
+
+
+
+            'screen-loaded'
+
+
+
+        );
+
+
+
+    };
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Prepare Screen State
     ==================================================
     */
 
@@ -310,15 +349,19 @@ Responsibility
 
 
         /*
-        Update state
+        Update current screen
         */
 
 
-        if (
+        if(
+
+
 
             typeof CTM.setCurrentScreen ===
 
             'function'
+
+
 
         ){
 
@@ -341,38 +384,45 @@ Responsibility
 
 
         /*
-        Update progress
+        Update journey progress
         */
 
 
-        const number =
-
-
-            parseInt(
-
-                screenId.replace(
-
-                    'screen',
-
-                    ''
-
-                ),
-
-                10
-
-            );
+        const number = parseInt(
 
 
 
+            screenId.replace(
+
+                'screen',
+
+                ''
+
+            ),
+
+
+
+            10
+
+
+
+        );
 
 
 
 
-        if (
+
+
+
+        if(
+
+
 
             typeof CTM.setProgress ===
 
             'function'
+
+
 
         ){
 
@@ -395,18 +445,50 @@ Responsibility
 
 
         /*
-        Screen specific initialization
+        Screen module initialization
+
+        Example:
+
+        screen01
+
+        becomes:
+
+        initScreen01
+
         */
+
+
+        const formattedScreen =
+
+
+
+            screenId.replace(
+
+
+
+                /^screen/,
+
+
+
+                'Screen'
+
+
+
+            );
+
+
+
+
+
 
 
         const functionName =
 
 
+
             'init' +
 
-            screenId.charAt(0).toUpperCase() +
-
-            screenId.slice(1);
+            formattedScreen;
 
 
 
@@ -414,11 +496,15 @@ Responsibility
 
 
 
-        if (
+        if(
+
+
 
             typeof CTM[functionName] ===
 
             'function'
+
+
 
         ){
 
@@ -437,15 +523,19 @@ Responsibility
 
 
         /*
-        Save state
+        Save progress
         */
 
 
-        if (
+        if(
+
+
 
             typeof CTM.saveState ===
 
             'function'
+
+
 
         ){
 
@@ -461,6 +551,74 @@ Responsibility
 
     };
 
+     /*
+    ==================================================
+    Screen Transition Complete
+    ==================================================
+    */
+
+
+    CTM.completeScreenLoad = function(){
+
+
+
+        document.body.classList.add(
+
+
+
+            'screen-loaded'
+
+
+
+        );
+
+
+
+    };
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Scroll To Top
+
+    Every new screen starts
+    from the beginning.
+
+    ==================================================
+    */
+
+
+    CTM.scrollToScreenTop = function(){
+
+
+
+        window.scrollTo({
+
+
+
+            top:0,
+
+
+
+            left:0,
+
+
+
+            behavior:'instant'
+
+
+
+        });
+
+
+
+    };
+
 
 
 
@@ -470,6 +628,9 @@ Responsibility
     /*
     ==================================================
     Load Screen
+
+    Main Loader Function
+
     ==================================================
     */
 
@@ -486,51 +647,13 @@ Responsibility
 
 
 
-                'Loading:',
+                'Loading screen:',
+
+
 
                 screenId
 
 
-
-            );
-
-
-
-
-
-
-
-            const html =
-
-
-
-                await CTM.fetchScreen(
-
-                    screenId
-
-                );
-
-
-
-
-
-
-
-            CTM.injectScreen(
-
-                html
-
-            );
-
-
-
-
-
-
-
-            CTM.prepareScreen(
-
-                screenId
 
             );
 
@@ -541,25 +664,257 @@ Responsibility
 
 
             /*
-            Always return visitor to top
-            of newly loaded screen
+            Validate screen
+            */
+
+
+            if(
+
+
+
+                typeof CTM.isValidScreen ===
+
+                'function'
+
+
+
+                &&
+
+
+
+                !CTM.isValidScreen(
+
+                    screenId
+
+                )
+
+
+
+            ){
+
+
+
+                throw new Error(
+
+
+
+                    'Invalid screen request: ' +
+
+                    screenId
+
+
+
+                );
+
+
+
+            }
+
+
+
+
+
+
+
+            /*
+            Remove previous state
+            */
+
+
+            CTM.clearScreenClasses();
+
+
+
+
+
+
+
+            /*
+            Fetch HTML
+            */
+
+
+            const html = await CTM.fetchScreen(
+
+
+
+                screenId
+
+
+
+            );
+
+
+
+
+
+
+
+            /*
+            Inject HTML
+            */
+
+
+            CTM.injectScreen(
+
+
+
+                html
+
+
+
+            );
+
+
+
+
+
+
+
+            /*
+            Update application state
+            */
+
+
+            CTM.prepareScreen(
+
+
+
+                screenId
+
+
+
+            );
+
+
+
+
+
+
+
+            /*
+            Restore screen data
+
+            Example:
+            selected choices,
+            visitor name,
+            responses
 
             */
 
 
-            window.scrollTo({
+            if(
 
 
 
-                top:0,
+                typeof CTM.restoreChoices ===
+
+                'function'
 
 
 
-                behavior:'instant'
+            ){
 
 
 
-            });
+                CTM.restoreChoices();
+
+
+
+            }
+
+
+
+
+
+
+
+            /*
+            Screen specific loaded hook
+
+            Example:
+
+            afterScreen01Loaded()
+
+            */
+
+
+            const afterHook =
+
+
+
+                'after' +
+
+                screenId.replace(
+
+
+
+                    /^screen/,
+
+
+
+                    'Screen'
+
+
+
+                ) +
+
+                'Loaded';
+
+
+
+
+
+
+
+            if(
+
+
+
+                typeof CTM[afterHook] ===
+
+                'function'
+
+
+
+            ){
+
+
+
+                CTM[afterHook]();
+
+
+
+            }
+
+
+
+
+
+
+
+            /*
+            Always move user
+            to top of new screen
+
+            */
+
+
+            CTM.scrollToScreenTop();
+
+
+
+
+
+
+
+            /*
+            Complete transition
+
+            */
+
+
+            CTM.completeScreenLoad();
 
 
 
@@ -592,25 +947,48 @@ Responsibility
         }
 
 
+
         catch(error){
 
 
 
             console.error(
 
+
+
+                'Screen loading failed:',
+
+
+
                 error
 
+
+
             );
+
+
+
+
 
 
 
             CTM.showLoaderError(
 
+
+
                 screenId,
+
+
 
                 error.message
 
+
+
             );
+
+
+
+
 
 
 
@@ -632,7 +1010,105 @@ Responsibility
 
     /*
     ==================================================
-    Loading Error
+    Prefetch Screen
+
+    Future Performance Enhancement
+
+    ==================================================
+    */
+
+
+    CTM.prefetchScreen = async function(screenId){
+
+
+
+        try {
+
+
+
+            await fetch(
+
+
+
+                CTM.getScreenPath(
+
+                    screenId
+
+                ),
+
+
+
+                {
+
+
+
+                    cache:'force-cache'
+
+
+
+                }
+
+
+
+            );
+
+
+
+            CTM.log && CTM.log(
+
+
+
+                'Prefetched:',
+
+
+
+                screenId
+
+
+
+            );
+
+
+
+        }
+
+
+
+        catch(error){
+
+
+
+            console.warn(
+
+
+
+                'Prefetch failed:',
+
+
+
+                screenId
+
+
+
+            );
+
+
+
+        }
+
+
+
+    };
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Loading Error Screen
     ==================================================
     */
 
@@ -643,6 +1119,8 @@ Responsibility
 
         screenId,
 
+
+
         message
 
 
@@ -652,6 +1130,7 @@ Responsibility
 
 
         const container =
+
 
 
             CTM.getScreenContainer();
@@ -685,36 +1164,65 @@ Responsibility
 <section class="screen">
 
 
+
     <div class="container">
+
 
 
         <h2>
 
-            Screen Loading Error
+
+
+            CTM PATH™
+
+
+
+            Loading Error
+
+
 
         </h2>
 
 
+
         <p>
+
+
 
             Unable to load:
 
-            <strong>${screenId}</strong>
+
+
+            <strong>
+
+                ${screenId}
+
+            </strong>
+
+
 
         </p>
+
 
 
         <p>
 
+
+
             ${message}
 
+
+
         </p>
+
 
 
     </div>
 
 
+
 </section>
+
 
 
 `;
@@ -722,6 +1230,138 @@ Responsibility
 
 
     };
+
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Screen Reload Helper
+
+    Used when a screen needs
+    fresh rendering without
+    changing architecture.
+
+    ==================================================
+    */
+
+
+    CTM.reloadCurrentScreen = async function(){
+
+
+
+        const current =
+
+
+            CTM.getCurrentScreen();
+
+
+
+
+
+
+
+        if(!current){
+
+
+
+            return false;
+
+
+
+        }
+
+
+
+
+
+
+
+        return await CTM.loadScreen(
+
+
+
+            current
+
+
+
+        );
+
+
+
+    };
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Initialize Loader
+
+    ==================================================
+    */
+
+
+    CTM.initLoader = function(){
+
+
+
+        CTM.log && CTM.log(
+
+
+
+            'Screen loader initialized.'
+
+
+
+        );
+
+
+
+    };
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    DOM Ready
+
+    ==================================================
+    */
+
+
+    document.addEventListener(
+
+
+
+        'DOMContentLoaded',
+
+
+
+        function(){
+
+
+
+            CTM.initLoader();
+
+
+
+        }
+
+
+
+    );
 
 
 
