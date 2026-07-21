@@ -19,7 +19,7 @@ Responsibility
 • Tamil-first typography
 • Emotional pacing
 • Premium transitions
-• Guided navigation
+• Premium Journey Navigator
 
 ======================================================================
 */
@@ -30,6 +30,7 @@ Responsibility
 
 /*==================================================
 Screen 03 Base
+
 ==================================================*/
 
 
@@ -467,7 +468,7 @@ Tamil Heading
 /*==================================================
 Tamil Message
 
-Primary Emotional Copy
+Primary Emotional Content
 
 ==================================================*/
 
@@ -476,14 +477,6 @@ Primary Emotional Copy
 
 
     width:100%;
-
-
-
-    max-width:700px;
-
-
-
-    margin:0 auto;
 
 
 
@@ -507,7 +500,7 @@ Primary Emotional Copy
     line-height:
 
 
-        2.4;
+        2.35;
 
 
 
@@ -518,14 +511,10 @@ Primary Emotional Copy
 
 
 
-    text-align:center;
-
-
-
     color:
 
 
-        rgba(255,255,255,.94);
+        rgba(246,241,231,.96);
 
 
 
@@ -540,9 +529,9 @@ Primary Emotional Copy
 
 
 /*==================================================
-English Message
+English Translation
 
-Supporting Translation
+Supporting Message
 
 ==================================================*/
 
@@ -550,26 +539,10 @@ Supporting Translation
 .screen03-english{
 
 
-    width:100%;
-
-
-
     margin-top:
 
 
-        55px;
-
-
-
-    display:flex;
-
-
-
-    justify-content:center;
-
-
-
-    text-align:center;
+        45px;
 
 
 
@@ -586,25 +559,10 @@ Supporting Translation
 .screen03-english p{
 
 
-    width:100%;
-
-
-
-    max-width:650px;
-
-
-
-    margin:0 auto;
-
-
-
     font-family:
 
 
         "Inter",
-
-
-        Arial,
 
 
         sans-serif;
@@ -621,32 +579,21 @@ Supporting Translation
     line-height:
 
 
-        2.2;
+        2;
 
 
 
     font-weight:
 
 
-        400;
-
-
-
-    letter-spacing:
-
-
-        .03em;
-
-
-
-    text-align:center;
+        500;
 
 
 
     color:
 
 
-        rgba(245,244,238,.88);
+        rgba(246,241,231,.88);
 
 
 
@@ -686,7 +633,7 @@ Gold Divider
     margin:
 
 
-        55px auto 35px;
+        45px auto;
 
 
 
@@ -723,14 +670,14 @@ Gold Divider
 
 
 /*==================================================
-Journey Continuation
+Premium Journey Navigator
 
-Premium Navigation Cue
+CTM PATH™ Standard Component
 
 ==================================================*/
 
 
-.screen03-next{
+#screen03 .journey-next{
 
 
     background:
@@ -744,6 +691,20 @@ Premium Navigation Cue
 
 
         none;
+
+
+
+    padding:
+
+
+        0;
+
+
+
+    cursor:
+
+
+        pointer;
 
 
 
@@ -775,17 +736,10 @@ Premium Navigation Cue
 
 
 
-    cursor:
+    gap:
 
 
-        pointer;
-
-
-
-    padding:
-
-
-        12px 30px;
+        14px;
 
 
 
@@ -814,12 +768,59 @@ Premium Navigation Cue
 
 
 /*==================================================
-Tamil Continue Label
+Golden Decorative Lines
 
 ==================================================*/
 
 
-.screen03-next .next-label{
+#screen03 .nav-decoration{
+
+
+    width:
+
+
+        120px;
+
+
+
+    height:
+
+
+        1px;
+
+
+
+    background:
+
+
+        var(--color-gold);
+
+
+
+    opacity:
+
+
+        .85;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+Tamil Navigator Text
+
+==================================================*/
+
+
+#screen03 .nav-tamil{
 
 
     font-family:
@@ -835,21 +836,14 @@ Tamil Continue Label
     font-size:
 
 
-        1.15rem;
+        1.45rem;
 
 
 
     font-weight:
 
 
-        600;
-
-
-
-    letter-spacing:
-
-
-        .05em;
+        700;
 
 
 
@@ -857,6 +851,13 @@ Tamil Continue Label
 
 
         var(--color-gold);
+
+
+
+    letter-spacing:
+
+
+        .05em;
 
 
 
@@ -871,25 +872,25 @@ Tamil Continue Label
 
 
 /*==================================================
-Arrow Indicator
+Three Right Arrows
 
 ==================================================*/
 
 
-.screen03-next .next-arrow{
-
-
-    margin:
-
-
-        12px 0;
-
+#screen03 .nav-arrows{
 
 
     font-size:
 
 
         1.5rem;
+
+
+
+    letter-spacing:
+
+
+        8px;
 
 
 
@@ -900,10 +901,17 @@ Arrow Indicator
 
 
 
+    line-height:
+
+
+        1;
+
+
+
     animation:
 
 
-        arrowFloat 2s ease-in-out infinite;
+        screen03Arrow 2s ease-in-out infinite;
 
 
 
@@ -917,7 +925,7 @@ Arrow Indicator
 
 
 
-@keyframes arrowFloat{
+@keyframes screen03Arrow{
 
 
     0%,100%{
@@ -927,6 +935,13 @@ Arrow Indicator
 
 
             translateY(0);
+
+
+
+        opacity:
+
+
+            .7;
 
 
 
@@ -944,27 +959,26 @@ Arrow Indicator
 
 
 
+        opacity:
+
+
+            1;
+
+
+
     }
 
 
 
 }
 
-
-
-
-
-
-
-
-
 /*==================================================
-English Continue Subtitle
+English Navigator Text
 
 ==================================================*/
 
 
-.screen03-next .next-subtitle{
+#screen03 .nav-english{
 
 
     font-family:
@@ -980,14 +994,21 @@ English Continue Subtitle
     font-size:
 
 
-        .85rem;
+        .9rem;
+
+
+
+    font-weight:
+
+
+        500;
 
 
 
     letter-spacing:
 
 
-        .25em;
+        5px;
 
 
 
@@ -1001,7 +1022,7 @@ English Continue Subtitle
     color:
 
 
-        rgba(245,244,238,.65);
+        var(--color-gold);
 
 
 
@@ -1016,12 +1037,12 @@ English Continue Subtitle
 
 
 /*==================================================
-Hover Interaction
+Navigator Hover
 
 ==================================================*/
 
 
-.screen03-next:hover{
+#screen03 .journey-next:hover{
 
 
     transform:
@@ -1035,23 +1056,51 @@ Hover Interaction
 
 
 
+#screen03 .journey-next:hover .nav-decoration{
 
 
+    opacity:
 
 
-
-
-.screen03-next:hover .next-label{
-
-
-    color:
-
-
-        #FFF0A3;
+        1;
 
 
 
 }
+
+
+
+
+
+
+
+
+
+/*==================================================
+Focus Accessibility
+
+==================================================*/
+
+
+#screen03 .journey-next:focus{
+
+
+    outline:
+
+
+        none;
+
+
+
+}
+
+
+
+
+
+
+
+
 
 /*==================================================
 Tablet Responsive
@@ -1159,7 +1208,7 @@ Tablet Responsive
         margin-top:
 
 
-            45px;
+            40px;
 
 
 
@@ -1179,6 +1228,77 @@ Tablet Responsive
 
 
             1.2rem;
+
+
+
+    }
+
+
+
+
+
+    #screen03 .nav-decoration{
+
+
+        width:
+
+
+            100px;
+
+
+
+    }
+
+
+
+
+
+    #screen03 .nav-tamil{
+
+
+        font-size:
+
+
+            1.3rem;
+
+
+
+    }
+
+
+
+
+
+    #screen03 .nav-arrows{
+
+
+        font-size:
+
+
+            1.35rem;
+
+
+
+    }
+
+
+
+
+
+    #screen03 .nav-english{
+
+
+        font-size:
+
+
+            .85rem;
+
+
+
+        letter-spacing:
+
+
+            4px;
 
 
 
@@ -1421,13 +1541,13 @@ Mobile Responsive
 
 
 
-    .screen03-next{
+    #screen03 .journey-next{
 
 
-        padding:
+        gap:
 
 
-            10px 20px;
+            12px;
 
 
 
@@ -1440,13 +1560,32 @@ Mobile Responsive
 
 
 
-    .screen03-next .next-label{
+    #screen03 .nav-decoration{
+
+
+        width:
+
+
+            85px;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    #screen03 .nav-tamil{
 
 
         font-size:
 
 
-            1rem;
+            1.2rem;
 
 
 
@@ -1459,13 +1598,46 @@ Mobile Responsive
 
 
 
-    .screen03-next .next-arrow{
+    #screen03 .nav-arrows{
 
 
         font-size:
 
 
             1.25rem;
+
+
+
+        letter-spacing:
+
+
+            6px;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    #screen03 .nav-english{
+
+
+        font-size:
+
+
+            .75rem;
+
+
+
+        letter-spacing:
+
+
+            4px;
 
 
 
@@ -1587,7 +1759,7 @@ Reduced Motion Accessibility
     .screen03-symbol,
 
 
-    .screen03-next .next-arrow{
+    .screen03 .nav-arrows{
 
 
         animation:
@@ -1606,7 +1778,7 @@ Reduced Motion Accessibility
 
 
 
-    .screen03-next{
+    #screen03 .journey-next{
 
 
         transition:
