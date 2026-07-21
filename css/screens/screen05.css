@@ -24,8 +24,6 @@ Responsibility:
 
 
 
-
-
 /*==================================================
 Screen 05 Container
 ==================================================*/
@@ -73,8 +71,6 @@ Screen 05 Container
 
 
 
-
-
 /*==================================================
 Journey Indicator
 ==================================================*/
@@ -108,10 +104,6 @@ Journey Indicator
 
 
 
-
-
-
-
 .screen05 .moment-label{
 
 
@@ -132,7 +124,6 @@ Journey Indicator
 
 
 }
-
 
 
 
@@ -176,7 +167,6 @@ Main Content
 
 
 
-
 /*==================================================
 Illustration
 ==================================================*/
@@ -202,10 +192,6 @@ Illustration
 
 
 
-
-
-
-
 .screen05 .screen-image{
 
 
@@ -222,7 +208,6 @@ Illustration
 
 
 }
-
 
 
 
@@ -266,7 +251,6 @@ Tamil Title
 
 
 
-
 /*==================================================
 Tamil Message
 ==================================================*/
@@ -300,10 +284,6 @@ Tamil Message
 
 
 
-
-
-
-
 .screen05 .screen-message p{
 
 
@@ -312,7 +292,6 @@ Tamil Message
 
 
 }
-
 
 
 
@@ -349,10 +328,6 @@ English Subtitle
 
 
 
-
-
-
-
 .screen05 .screen-subtitle p{
 
 
@@ -361,7 +336,6 @@ English Subtitle
 
 
 }
-
 
 
 
@@ -385,7 +359,7 @@ Name Input Area
 
 
 
-    margin-bottom:36px;
+    margin-bottom:44px;
 
 
 
@@ -402,10 +376,6 @@ Name Input Area
 
 
 }
-
-
-
-
 
 
 
@@ -430,9 +400,6 @@ Name Input Area
 
 
 }
-
-
-
 
 
 
@@ -491,9 +458,6 @@ Name Input Area
 
 
 
-
-
-
 .screen05 .visitor-name-input::placeholder{
 
 
@@ -502,10 +466,6 @@ Name Input Area
 
 
 }
-
-
-
-
 
 
 
@@ -566,7 +526,7 @@ CTM PATH™ Standard Component
 
 
 
-    gap:14px;
+    gap:18px;
 
 
 
@@ -588,7 +548,9 @@ CTM PATH™ Standard Component
 
 
 /*==================================================
-Golden Decorative Lines
+Decorated Gold Line
+
+Premium Divider With Center Glow
 
 ==================================================*/
 
@@ -596,7 +558,7 @@ Golden Decorative Lines
 .screen05 .nav-decoration{
 
 
-    width:120px;
+    width:280px;
 
 
 
@@ -604,11 +566,81 @@ Golden Decorative Lines
 
 
 
+    position:relative;
+
+
+
+    background:linear-gradient(
+
+        to right,
+
+        transparent,
+
+        #D6B56C 25%,
+
+        #D6B56C 75%,
+
+        transparent
+
+    );
+
+
+
+    opacity:.9;
+
+
+
+}
+
+
+
+
+
+.screen05 .nav-decoration::after{
+
+
+    content:"";
+
+
+
+    position:absolute;
+
+
+
+    width:8px;
+
+
+
+    height:8px;
+
+
+
     background:#D6B56C;
 
 
 
-    opacity:.85;
+    border-radius:50%;
+
+
+
+    top:50%;
+
+
+
+    left:50%;
+
+
+
+    transform:
+
+        translate(-50%,-50%);
+
+
+
+    box-shadow:
+
+
+        0 0 18px rgba(214,181,108,.9);
 
 
 
@@ -640,7 +672,7 @@ Tamil Navigation Text
 
 
 
-    font-size:1.35rem;
+    font-size:1.65rem;
 
 
 
@@ -666,7 +698,7 @@ Tamil Navigation Text
 
 
 /*==================================================
-Three Right Arrows
+Three Golden Right Arrows
 
 ==================================================*/
 
@@ -674,11 +706,11 @@ Three Right Arrows
 .screen05 .nav-arrows{
 
 
-    font-size:1.45rem;
+    font-size:1.8rem;
 
 
 
-    letter-spacing:8px;
+    letter-spacing:14px;
 
 
 
@@ -690,7 +722,10 @@ Three Right Arrows
 
 
 
-    animation:screen05Arrow 2s infinite;
+    animation:
+
+
+        screen05Arrow 2s infinite;
 
 
 
@@ -722,7 +757,7 @@ English Navigation Text
 
 
 
-    font-size:.9rem;
+    font-size:1rem;
 
 
 
@@ -730,7 +765,7 @@ English Navigation Text
 
 
 
-    letter-spacing:5px;
+    letter-spacing:6px;
 
 
 
@@ -739,6 +774,39 @@ English Navigation Text
 
 
     color:#D6B56C;
+
+
+
+}
+
+
+
+
+
+
+
+
+/*==================================================
+Navigator Hover
+
+==================================================*/
+
+
+.screen05 .journey-next:hover{
+
+
+    transform:translateY(-5px);
+
+
+
+}
+
+
+
+.screen05 .journey-next:hover .nav-decoration{
+
+
+    opacity:1;
 
 
 
@@ -767,7 +835,7 @@ Arrow Animation
 
 
 
-        opacity:.6;
+        opacity:.65;
 
 
 
@@ -778,7 +846,7 @@ Arrow Animation
     50%{
 
 
-        transform:translateY(8px);
+        transform:translateY(6px);
 
 
 
@@ -787,39 +855,6 @@ Arrow Animation
 
 
     }
-
-
-
-}
-
-
-
-
-
-
-
-
-/*==================================================
-Hover
-
-==================================================*/
-
-
-.screen05 .journey-next:hover{
-
-
-    transform:translateY(-4px);
-
-
-
-}
-
-
-
-.screen05 .journey-next:hover .nav-decoration{
-
-
-    opacity:1;
 
 
 
@@ -855,6 +890,7 @@ Mobile Optimisation
 
 
 
+
     .screen05 .screen-progress{
 
 
@@ -863,6 +899,7 @@ Mobile Optimisation
 
 
     }
+
 
 
 
@@ -889,6 +926,7 @@ Mobile Optimisation
 
 
 
+
     .screen05 .name-input-wrapper{
 
 
@@ -902,14 +940,16 @@ Mobile Optimisation
 
 
 
+
     .screen05 .nav-decoration{
 
 
-        width:85px;
+        width:180px;
 
 
 
     }
+
 
 
 
@@ -918,11 +958,12 @@ Mobile Optimisation
     .screen05 .nav-tamil{
 
 
-        font-size:1.2rem;
+        font-size:1.35rem;
 
 
 
     }
+
 
 
 
@@ -931,11 +972,11 @@ Mobile Optimisation
     .screen05 .nav-arrows{
 
 
-        font-size:1.25rem;
+        font-size:1.45rem;
 
 
 
-        letter-spacing:6px;
+        letter-spacing:10px;
 
 
 
@@ -945,10 +986,11 @@ Mobile Optimisation
 
 
 
+
     .screen05 .nav-english{
 
 
-        font-size:.75rem;
+        font-size:.8rem;
 
 
 
@@ -1004,7 +1046,9 @@ Large Screens
 
 
 /*==================================================
-Reduced Motion Accessibility
+Accessibility
+
+Reduced Motion
 
 ==================================================*/
 
@@ -1026,6 +1070,7 @@ Reduced Motion Accessibility
 
 
 
+
     .screen05 .journey-next{
 
 
@@ -1038,3 +1083,4 @@ Reduced Motion Accessibility
 
 
 }
+
