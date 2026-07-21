@@ -19,6 +19,7 @@ Responsibility
 • Tamil-first typography
 • Emotional pacing
 • Premium transitions
+• Guided navigation
 
 ======================================================================
 */
@@ -34,20 +35,25 @@ Screen 02 Base
 
     width:100%;
 
+
     min-height:100vh;
 
 
     display:flex;
 
+
     align-items:center;
 
+
     justify-content:center;
+
 
 
     position:relative;
 
 
     overflow:hidden;
+
 
 
 }
@@ -57,10 +63,12 @@ Screen 02 Base
 
 
 
+
+
 /*==================================================
 Ambient Background Enhancement
 
-Matches Screen 01
+Aligned with Screen 01
 
 ==================================================*/
 
@@ -78,34 +86,59 @@ Matches Screen 01
 
 
 
+
+
     background:
+
+
 
 
         radial-gradient(
 
-            circle at 50% 25%,
+            circle at 50% 18%,
 
-            rgba(217,181,106,.14),
+            rgba(24,166,109,.18),
 
-            transparent 28%
+            transparent 34%
 
         ),
 
 
 
+
+
         radial-gradient(
 
-            circle at 50% 60%,
+            circle at 50% 35%,
 
-            rgba(24,166,109,.10),
+            rgba(217,181,106,.10),
 
-            transparent 40%
+            transparent 30%
+
+        ),
+
+
+
+
+
+        linear-gradient(
+
+            180deg,
+
+            #03152F 0%,
+
+            #061D38 48%,
+
+            #020D20 100%
 
         );
 
 
 
+
+
     pointer-events:none;
+
 
 
 }
@@ -129,6 +162,7 @@ Container
 
 
     max-width:1200px;
+
 
 
     padding:
@@ -158,20 +192,27 @@ Hero Wrapper
     width:100%;
 
 
+
     display:flex;
+
 
 
     flex-direction:column;
 
 
+
     align-items:center;
+
 
 
     text-align:center;
 
 
 
+
+
     position:relative;
+
 
 
     z-index:2;
@@ -188,68 +229,9 @@ Hero Wrapper
 
 
 /*==================================================
-Moment Label
-==================================================*/
-
-
-.moment-label{
-
-
-    font-family:
-
-
-        Arial,
-        Helvetica,
-        sans-serif;
-
-
-
-    font-size:
-
-
-        .85rem;
-
-
-
-    letter-spacing:
-
-
-        8px;
-
-
-
-    text-transform:
-
-
-        uppercase;
-
-
-
-    color:
-
-
-        rgba(217,181,106,.75);
-
-
-
-    margin-bottom:
-
-
-        35px;
-
-
-
-}
-
-
-
-
-
-
-
-
-/*==================================================
 Gift Symbol
+
+Primary Emotional Anchor
 
 ==================================================*/
 
@@ -260,14 +242,14 @@ Gift Symbol
     width:
 
 
-        220px;
+        250px;
 
 
 
     margin-bottom:
 
 
-        45px;
+        40px;
 
 
 
@@ -283,13 +265,19 @@ Gift Symbol
 
 
 
+
+
+
+
 .screen02-symbol img{
 
 
     width:100%;
 
 
+
     height:auto;
+
 
 
     display:block;
@@ -301,7 +289,13 @@ Gift Symbol
 
         drop-shadow(
 
-            0 20px 45px rgba(217,181,106,.25)
+            0 25px 55px rgba(217,181,106,.30)
+
+        )
+
+        drop-shadow(
+
+            0 0 40px rgba(24,166,109,.18)
 
         );
 
@@ -339,7 +333,7 @@ Gift Symbol
         transform:
 
 
-            translateY(-12px);
+            translateY(-10px);
 
 
 
@@ -349,15 +343,10 @@ Gift Symbol
 
 }
 
-
-
-
-
-
-
-
 /*==================================================
 Tamil Heading
+
+Primary Emotional Message
 
 ==================================================*/
 
@@ -369,22 +358,27 @@ Tamil Heading
 
 
         "Noto Sans Tamil",
+
+
         "Latha",
+
+
         sans-serif;
+
 
 
 
     font-size:
 
 
-        3rem;
+        3.2rem;
 
 
 
     line-height:
 
 
-        1.5;
+        1.45;
 
 
 
@@ -405,7 +399,7 @@ Tamil Heading
     margin-bottom:
 
 
-        45px;
+        35px;
 
 
 
@@ -431,6 +425,8 @@ Tamil Message
 
 
         "Noto Sans Tamil",
+
+
         sans-serif;
 
 
@@ -445,7 +441,7 @@ Tamil Message
     line-height:
 
 
-        2.2;
+        2.15;
 
 
 
@@ -459,11 +455,12 @@ Tamil Message
     color:
 
 
-        rgba(255,255,255,.92);
+        rgba(255,255,255,.94);
 
 
 
 }
+
 
 
 
@@ -474,6 +471,8 @@ Tamil Message
 /*==================================================
 English Message
 
+Supporting Translation
+
 ==================================================*/
 
 
@@ -483,11 +482,16 @@ English Message
     margin-top:
 
 
-        45px;
+        40px;
 
 
 
 }
+
+
+
+
+
 
 
 
@@ -497,8 +501,13 @@ English Message
     font-family:
 
 
-        Georgia,
-        serif;
+        "Inter",
+
+
+        Arial,
+
+
+        sans-serif;
 
 
 
@@ -512,14 +521,28 @@ English Message
     line-height:
 
 
-        2;
+        1.9;
+
+
+
+    font-weight:
+
+
+        500;
+
+
+
+    letter-spacing:
+
+
+        .03em;
 
 
 
     color:
 
 
-        rgba(255,255,255,.75);
+        rgba(245,244,238,.88);
 
 
 
@@ -558,7 +581,7 @@ Gold Divider
     margin:
 
 
-        45px auto;
+        40px auto;
 
 
 
@@ -567,13 +590,18 @@ Gold Divider
 
         linear-gradient(
 
+
             90deg,
+
 
             transparent,
 
+
             var(--color-gold),
 
+
             transparent
+
 
         );
 
@@ -589,61 +617,78 @@ Gold Divider
 
 
 /*==================================================
-Primary Button
+Journey Continuation
+
+Premium Navigation Cue
+
+Replaces Standard Button
 
 ==================================================*/
 
 
-#screen02 .btn-primary{
-
-
-    min-width:
-
-
-        260px;
-
-
-
-    padding:
-
-
-        18px 40px;
-
-
-
-    border-radius:
-
-
-        var(--radius-button);
-
+.screen02-next{
 
 
     background:
 
 
-        linear-gradient(
+        transparent;
 
-            135deg,
 
-            #D9B56A,
 
-            #B47718
+    border:
 
-        );
+
+        none;
+
+
+
+    display:
+
+
+        flex;
+
+
+
+    flex-direction:
+
+
+        column;
+
+
+
+    align-items:
+
+
+        center;
+
+
+
+    justify-content:
+
+
+        center;
+
+
+
+    cursor:
+
+
+        pointer;
 
 
 
     color:
 
 
-        #06152F;
+        var(--color-gold);
 
 
 
-    box-shadow:
+    padding:
 
 
-        0 15px 45px rgba(217,181,106,.25);
+        12px 30px;
 
 
 
@@ -660,79 +705,53 @@ Primary Button
 
 
 
-#screen02 .btn-primary:hover{
-
-
-    transform:
-
-
-        translateY(-5px);
 
 
 
-    box-shadow:
+/*==================================================
+Continue Main Text
+
+==================================================*/
 
 
-        0 25px 60px rgba(217,181,106,.40);
+.screen02-next .next-label{
 
 
-
-}
-
+    font-family:
 
 
+        "Noto Sans Tamil",
 
 
+        sans-serif;
 
-
-.btn-title{
-
-
-    display:block;
 
 
     font-size:
 
 
-        1.2rem;
+        1.15rem;
 
 
 
     font-weight:
 
 
-        700;
+        600;
 
 
 
-}
+    letter-spacing:
+
+
+        .05em;
 
 
 
-.btn-subtitle{
+    color:
 
 
-    display:block;
-
-
-    margin-top:
-
-
-        5px;
-
-
-
-    font-size:
-
-
-        .85rem;
-
-
-
-    opacity:
-
-
-        .75;
+        var(--color-gold);
 
 
 
@@ -746,12 +765,206 @@ Primary Button
 
 
 /*==================================================
-Tablet
+Arrow Indicator
+
+==================================================*/
+
+
+.screen02-next .next-arrow{
+
+
+    margin:
+
+
+        12px 0;
+
+
+
+    font-size:
+
+
+        1.5rem;
+
+
+
+    color:
+
+
+        var(--color-gold);
+
+
+
+    animation:
+
+
+        arrowFloat 2s ease-in-out infinite;
+
+
+
+}
+
+
+
+
+
+
+
+
+@keyframes arrowFloat{
+
+
+    0%,100%{
+
+
+        transform:
+
+
+            translateY(0);
+
+
+
+    }
+
+
+
+    50%{
+
+
+        transform:
+
+
+            translateY(8px);
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+/*==================================================
+English Continue Text
+
+==================================================*/
+
+
+.screen02-next .next-subtitle{
+
+
+    font-family:
+
+
+        "Inter",
+
+
+        sans-serif;
+
+
+
+    font-size:
+
+
+        .85rem;
+
+
+
+    letter-spacing:
+
+
+        .25em;
+
+
+
+    text-transform:
+
+
+        uppercase;
+
+
+
+    color:
+
+
+        rgba(245,244,238,.65);
+
+
+
+}
+
+
+
+
+
+
+
+
+/*==================================================
+Hover
+
+==================================================*/
+
+
+.screen02-next:hover{
+
+
+    transform:
+
+
+        translateY(-5px);
+
+
+
+}
+
+
+
+.screen02-next:hover .next-label{
+
+
+    color:
+
+
+        #FFF0A3;
+
+
+
+}
+
+
+
+
+/*==================================================
+Tablet Responsive
 
 ==================================================*/
 
 
 @media(max-width:900px){
+
+
+
+    #screen02 .container{
+
+
+        padding:
+
+
+            40px 30px;
+
+
+
+    }
+
+
+
 
 
 
@@ -761,11 +974,15 @@ Tablet
         width:
 
 
-            190px;
+            210px;
 
 
 
     }
+
+
+
+
 
 
 
@@ -776,11 +993,15 @@ Tablet
         font-size:
 
 
-            2.5rem;
+            2.7rem;
 
 
 
     }
+
+
+
+
 
 
 
@@ -798,6 +1019,26 @@ Tablet
     }
 
 
+
+
+
+
+
+
+    .screen02-english p{
+
+
+        font-size:
+
+
+            1.15rem;
+
+
+
+    }
+
+
+
 }
 
 
@@ -807,8 +1048,9 @@ Tablet
 
 
 
+
 /*==================================================
-Mobile
+Mobile Responsive
 
 ==================================================*/
 
@@ -817,13 +1059,20 @@ Mobile
 
 
 
-    #screen02 .container{
+    #screen02{
 
 
-        padding:
+        align-items:
 
 
-            35px 22px;
+            flex-start;
+
+
+
+        padding-top:
+
+
+            25px;
 
 
 
@@ -833,7 +1082,69 @@ Mobile
 
 
 
-    .moment-label{
+
+
+
+    #screen02 .container{
+
+
+        padding:
+
+
+            30px 22px 50px;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen02-symbol{
+
+
+        width:
+
+
+            165px;
+
+
+
+        margin-bottom:
+
+
+            30px;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen02-tamil h1{
+
+
+        font-size:
+
+
+            2.1rem;
+
+
+
+        line-height:
+
+
+            1.5;
+
 
 
         margin-bottom:
@@ -847,49 +1158,6 @@ Mobile
 
 
 
-
-
-    .screen02-symbol{
-
-
-        width:
-
-
-            160px;
-
-
-
-        margin-bottom:
-
-
-            30px;
-
-
-
-    }
-
-
-
-
-
-    .screen02-tamil h1{
-
-
-        font-size:
-
-
-            2rem;
-
-
-
-        margin-bottom:
-
-
-            30px;
-
-
-
-    }
 
 
 
@@ -918,7 +1186,100 @@ Mobile
 
 
 
+
+
+
+    .screen02-english{
+
+
+        margin-top:
+
+
+            30px;
+
+
+
+    }
+
+
+
+
+
+
+
+
     .screen02-english p{
+
+
+        font-size:
+
+
+            1rem;
+
+
+
+        line-height:
+
+
+            1.8;
+
+
+
+        letter-spacing:
+
+
+            .02em;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    #screen02 .gold-divider{
+
+
+        margin:
+
+
+            35px auto;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen02-next{
+
+
+        padding:
+
+
+            10px 20px;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen02-next .next-label{
 
 
         font-size:
@@ -934,20 +1295,16 @@ Mobile
 
 
 
-    #screen02 .btn-primary{
-
-
-        width:
-
-
-            90%;
 
 
 
-        max-width:
+    .screen02-next .next-arrow{
 
 
-            300px;
+        font-size:
+
+
+            1.25rem;
 
 
 
@@ -956,6 +1313,7 @@ Mobile
 
 
 }
+
 
 
 
@@ -965,28 +1323,80 @@ Mobile
 
 
 /*==================================================
-Reduced Motion
+Small Mobile Devices
 
 ==================================================*/
 
 
-@media(prefers-reduced-motion:reduce){
+@media(max-width:380px){
+
 
 
     .screen02-symbol{
 
 
-        animation:none;
+        width:
+
+
+            145px;
+
 
 
     }
 
 
 
-    #screen02 .btn-primary{
 
 
-        transition:none;
+
+
+
+    .screen02-tamil h1{
+
+
+        font-size:
+
+
+            1.85rem;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen02-tamil p{
+
+
+        font-size:
+
+
+            1.05rem;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen02-english p{
+
+
+        font-size:
+
+
+            .95rem;
+
 
 
     }
@@ -994,3 +1404,60 @@ Reduced Motion
 
 
 }
+
+
+
+
+
+
+
+
+
+/*==================================================
+Reduced Motion Accessibility
+
+==================================================*/
+
+
+@media(prefers-reduced-motion:reduce){
+
+
+
+    .screen02-symbol,
+
+
+    .screen02-next .next-arrow{
+
+
+        animation:
+
+
+            none;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen02-next{
+
+
+        transition:
+
+
+            none;
+
+
+
+    }
+
+
+
+}
+
