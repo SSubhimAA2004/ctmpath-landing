@@ -93,27 +93,15 @@ Base Input
 
     padding:0 32px;
 
-    background:
+    background:#112742;
 
-        linear-gradient(
-
-            180deg,
-
-            rgba(255,255,255,.05) 0%,
-
-            rgba(255,255,255,.035) 100%
-
-        );
-
-    border:
-
-        1px solid rgba(216,179,106,.24);
+    border:2px solid #D8B36A;
 
     border-radius:var(--radius-round);
 
     outline:none;
 
-    color:var(--text-primary);
+    color:#FFFFFF;
 
     font-family:var(--font-ui);
 
@@ -125,17 +113,19 @@ Base Input
 
     letter-spacing:.03em;
 
-    backdrop-filter:blur(16px);
+    box-shadow:
 
-    -webkit-backdrop-filter:blur(16px);
+        0 0 0 1px rgba(255,255,255,.05),
+
+        0 12px 28px rgba(0,0,0,.35);
 
     transition:
+
+        background var(--speed-normal) var(--ease),
 
         border-color var(--speed-normal) var(--ease),
 
         box-shadow var(--speed-normal) var(--ease),
-
-        background var(--speed-normal) var(--ease),
 
         transform var(--speed-normal) var(--ease);
 
@@ -143,49 +133,39 @@ Base Input
 
 
 /*==================================================
-Input Hover
+Hover
 ==================================================*/
 
 .input:hover,
 
 .input-field:hover{
 
-    border-color:
+    background:#163152;
 
-        rgba(216,179,106,.46);
-
-    background:
-
-        rgba(255,255,255,.06);
+    border-color:#F0CC86;
 
 }
 
 
 /*==================================================
-Input Focus
+Focus
 ==================================================*/
 
 .input:focus,
 
 .input-field:focus{
 
-    background:
+    background:#1B3B61;
 
-        rgba(255,255,255,.08);
+    border-color:#FFD78A;
 
-    border-color:
-
-        var(--text-gold);
+    transform:translateY(-1px);
 
     box-shadow:
 
-        0 0 0 3px rgba(216,179,106,.14),
+        0 0 0 4px rgba(216,179,106,.18),
 
-        0 0 34px rgba(216,179,106,.12);
-
-    transform:
-
-        translateY(-1px);
+        0 0 36px rgba(216,179,106,.20);
 
 }
 
@@ -198,9 +178,9 @@ Placeholder
 
 .input-field::placeholder{
 
-    color:var(--text-muted);
+    color:#CDD6E3;
 
-    opacity:.90;
+    opacity:1;
 
 }
 
@@ -217,13 +197,9 @@ Textarea
 
     padding:24px 28px;
 
-    background:
+    background:#112742;
 
-        rgba(255,255,255,.05);
-
-    border:
-
-        1px solid rgba(216,179,106,.24);
+    border:2px solid #D8B36A;
 
     border-radius:28px;
 
@@ -231,7 +207,7 @@ Textarea
 
     resize:vertical;
 
-    color:var(--text-primary);
+    color:#FFFFFF;
 
     font-family:var(--font-ui);
 
@@ -239,13 +215,19 @@ Textarea
 
     line-height:1.8;
 
+    box-shadow:
+
+        0 0 0 1px rgba(255,255,255,.05),
+
+        0 12px 28px rgba(0,0,0,.35);
+
     transition:
+
+        background var(--speed-normal) var(--ease),
 
         border-color var(--speed-normal) var(--ease),
 
-        box-shadow var(--speed-normal) var(--ease),
-
-        background var(--speed-normal) var(--ease);
+        box-shadow var(--speed-normal) var(--ease);
 
 }
 
@@ -256,19 +238,15 @@ Textarea Focus
 
 .textarea:focus{
 
-    background:
+    background:#1B3B61;
 
-        rgba(255,255,255,.08);
-
-    border-color:
-
-        var(--text-gold);
+    border-color:#FFD78A;
 
     box-shadow:
 
-        0 0 0 3px rgba(216,179,106,.14),
+        0 0 0 4px rgba(216,179,106,.18),
 
-        0 0 34px rgba(216,179,106,.12);
+        0 0 36px rgba(216,179,106,.20);
 
 }
 
@@ -283,13 +261,11 @@ Validation
 
 }
 
-
 .input-error{
 
     border-color:#E74C3C;
 
 }
-
 
 .input-warning{
 
@@ -316,7 +292,6 @@ Helper Text
 
 }
 
-
 .field-error{
 
     margin-top:12px;
@@ -328,7 +303,6 @@ Helper Text
     font-size:.90rem;
 
 }
-
 
 .field-success{
 
@@ -368,9 +342,9 @@ Read Only
 
 .input-field[readonly]{
 
-    background:
+    background:#0E1F36;
 
-        rgba(255,255,255,.03);
+    opacity:.80;
 
 }
 
