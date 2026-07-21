@@ -102,8 +102,6 @@ Responsibility
 
 
 
-
-
     /*==================================================
     Select Distance
     ==================================================*/
@@ -135,11 +133,14 @@ Responsibility
 
 
 
+
         document
 
             .querySelectorAll(
 
-                '#screen09 .distance-option'
+                '#screen09 .distance-option,' +
+
+                '#screen09 .scale-group .choice'
 
             )
 
@@ -189,225 +190,227 @@ Responsibility
     };
 
 
+ /*==================================================
+Restore Selection
+==================================================*/
 
 
+CTM.restoreDreamDistance = function(){
 
 
+    if (
 
-    /*==================================================
-    Restore Selection
-    ==================================================*/
+        !CTM.state ||
 
+        !CTM.state.responses
 
-    CTM.restoreDreamDistance = function(){
+    ){
 
+        return;
 
-        if (
+    }
 
-            !CTM.state ||
 
-            !CTM.state.responses
 
-        ){
+    const saved =
 
-            return;
+        CTM.state.responses.dreamDistance;
 
-        }
 
 
+    if (!saved){
 
-        const saved =
+        return;
 
-            CTM.state.responses.dreamDistance;
+    }
 
 
 
-        if (!saved){
 
-            return;
 
-        }
+    const button =
 
+        document.querySelector(
 
+            '#screen09 .distance-option[data-value="' +
 
+            saved +
 
+            '"],' +
 
-        const button =
+            '#screen09 .scale-group .choice[data-value="' +
 
-            document.querySelector(
+            saved +
 
-                '#screen09 .distance-option[data-value="' +
-
-                saved +
-
-                '"]'
-
-            );
-
-
-
-        if (button){
-
-
-            button.classList.add(
-
-                'selected'
-
-            );
-
-
-        }
-
-
-
-    };
-
-
-
-
-
-
-
-    /*==================================================
-    Click Handler
-    ==================================================*/
-
-
-    CTM.handleDreamDistance = function(event){
-
-
-
-        const button =
-
-            event.target.closest(
-
-                '#screen09 .distance-option'
-
-            );
-
-
-
-        if (!button){
-
-            return;
-
-        }
-
-
-
-        event.preventDefault();
-
-
-
-        CTM.selectDreamDistance(
-
-            button
+            '"]'
 
         );
 
 
 
-    };
+    if (button){
+
+
+        button.classList.add(
+
+            'selected'
+
+        );
+
+
+    }
+
+
+
+};
 
 
 
 
 
 
-
-    /*==================================================
-    Bind Events
-
-    Safe Dynamic Screen Binding
-
-    ==================================================*/
+/*==================================================
+Click Handler
+==================================================*/
 
 
-    CTM.bindScreen09 = function(){
+CTM.handleDreamDistance = function(event){
 
 
 
-        document.removeEventListener(
+    const button =
 
-            'click',
+        event.target.closest(
 
-            CTM.handleDreamDistance
+            '#screen09 .distance-option,' +
+
+            '#screen09 .scale-group .choice'
 
         );
 
 
 
-        document.addEventListener(
+    if (!button){
 
-            'click',
+        return;
 
-            CTM.handleDreamDistance
-
-        );
+    }
 
 
 
-    };
+    event.preventDefault();
 
 
 
+    CTM.selectDreamDistance(
 
-
-
-
-    /*==================================================
-    Screen Loaded Hook
-    ==================================================*/
-
-
-    CTM.afterScreen09Loaded = function(){
-
-
-
-        if (
-
-            document.getElementById(
-
-                'screen09'
-
-            )
-
-        ){
-
-
-            CTM.restoreDreamDistance();
-
-
-        }
-
-
-
-    };
-
-
-
-
-
-    /*==================================================
-    Initialize
-    ==================================================*/
-
-
-    document.addEventListener(
-
-        'DOMContentLoaded',
-
-        function(){
-
-
-            CTM.bindScreen09();
-
-
-
-        }
+        button
 
     );
 
 
 
+};
+
+
+
+
+
+
+/*==================================================
+Bind Events
+
+Safe Dynamic Screen Binding
+
+==================================================*/
+
+
+CTM.bindScreen09 = function(){
+
+
+
+    document.removeEventListener(
+
+        'click',
+
+        CTM.handleDreamDistance
+
+    );
+
+
+
+    document.addEventListener(
+
+        'click',
+
+        CTM.handleDreamDistance
+
+    );
+
+
+
+};
+
+
+
+
+
+
+/*==================================================
+Screen Loaded Hook
+==================================================*/
+
+
+CTM.afterScreen09Loaded = function(){
+
+
+
+    if (
+
+        document.getElementById(
+
+            'screen09'
+
+        )
+
+    ){
+
+
+        CTM.restoreDreamDistance();
+
+
+    }
+
+
+
+};
+
+
+
+
+
+
+/*==================================================
+Initialize
+==================================================*/
+
+
+document.addEventListener(
+
+    'DOMContentLoaded',
+
+    function(){
+
+
+        CTM.bindScreen09();
+
+
+
+    }
+
+);
+
+
+
 })();
+
