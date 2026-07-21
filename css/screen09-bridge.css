@@ -1,1 +1,565 @@
 
+/*
+======================================================================
+
+CTM PATH™ Guided Journey v6.0
+
+File
+screen09-bridge.css
+
+Purpose
+Screen 09 — The Bridge Between Two Worlds™
+
+Responsibility
+• Reality vs Dream visual
+• Emotional bridge illustration
+• Financial distance scale
+• Premium interaction states
+• Responsive behaviour
+
+======================================================================
+*/
+
+
+/*==================================================
+Bridge Visual Container
+==================================================*/
+
+#screen09 .bridge-visual{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:40px;
+
+    width:100%;
+
+    max-width:1000px;
+
+    margin:40px auto 60px;
+
+    position:relative;
+
+}
+
+
+/*==================================================
+Bridge Side Cards
+==================================================*/
+
+#screen09 .bridge-side{
+
+    width:260px;
+
+    min-height:300px;
+
+    padding:32px 24px;
+
+    border-radius:24px;
+
+    text-align:center;
+
+    position:relative;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            rgba(255,255,255,.08),
+
+            rgba(255,255,255,.025)
+
+        );
+
+    border:
+
+        1px solid rgba(217,181,106,.25);
+
+    backdrop-filter:blur(16px);
+
+}
+
+
+
+/*==================================================
+Reality Side
+==================================================*/
+
+#screen09 .reality-side{
+
+    box-shadow:
+
+        0 20px 50px rgba(0,0,0,.35);
+
+}
+
+
+
+/*==================================================
+Dream Side
+==================================================*/
+
+#screen09 .dream-side{
+
+    border-color:
+
+        rgba(217,181,106,.45);
+
+    box-shadow:
+
+        0 0 40px rgba(217,181,106,.12);
+
+}
+
+
+
+/*==================================================
+Bridge Labels
+==================================================*/
+
+#screen09 .bridge-label{
+
+    font-size:.9rem;
+
+    letter-spacing:.18em;
+
+    text-transform:uppercase;
+
+    color:
+
+        rgba(255,255,255,.65);
+
+    margin-bottom:18px;
+
+}
+
+
+
+/*==================================================
+Bridge Icons
+==================================================*/
+
+#screen09 .bridge-icon{
+
+    width:72px;
+
+    height:72px;
+
+    margin:0 auto 20px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:50%;
+
+    background:
+
+        rgba(255,255,255,.06);
+
+    font-size:2rem;
+
+}
+
+
+
+/*==================================================
+Bridge Text
+==================================================*/
+
+#screen09 .bridge-text{
+
+    font-size:1.35rem;
+
+    line-height:1.8;
+
+    font-weight:600;
+
+    color:
+
+        var(--color-white);
+
+}
+
+
+
+/*==================================================
+Bridge Sub Text
+==================================================*/
+
+#screen09 .bridge-subtext{
+
+    margin-top:15px;
+
+    font-size:.9rem;
+
+    line-height:1.5;
+
+    color:
+
+        rgba(255,255,255,.70);
+
+}
+
+
+
+/*==================================================
+Bridge Path
+==================================================*/
+
+#screen09 .bridge-path{
+
+    flex:1;
+
+    max-width:280px;
+
+    height:120px;
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+/*==================================================
+Bridge Glow
+==================================================*/
+
+#screen09 .bridge-glow{
+
+    position:absolute;
+
+    width:100%;
+
+    height:40px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            rgba(24,166,109,.05),
+
+            rgba(217,181,106,.45),
+
+            rgba(24,166,109,.05)
+
+        );
+
+    filter:blur(18px);
+
+}
+
+
+
+/*==================================================
+Bridge Line
+==================================================*/
+
+#screen09 .bridge-line{
+
+    width:100%;
+
+    height:4px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            #125D41,
+
+            #D9B56A,
+
+            #23AF72
+
+        );
+
+    border-radius:50px;
+
+}
+
+
+
+/*==================================================
+Bridge Points
+==================================================*/
+
+#screen09 .bridge-point{
+
+    position:absolute;
+
+    width:44px;
+
+    height:44px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+
+        rgba(8,28,58,.95);
+
+    border:
+
+        1px solid rgba(217,181,106,.45);
+
+    color:
+
+        var(--color-white);
+
+    font-size:.75rem;
+
+}
+
+
+
+#screen09 .point-one{
+
+    left:10%;
+
+}
+
+
+#screen09 .point-two{
+
+    left:45%;
+
+}
+
+
+#screen09 .point-three{
+
+    right:10%;
+
+}
+
+
+
+/*==================================================
+Distance Section
+==================================================*/
+
+#screen09 .distance-section{
+
+    width:100%;
+
+    max-width:900px;
+
+    margin:40px auto;
+
+    text-align:center;
+
+}
+
+
+
+/*==================================================
+Distance Titles
+==================================================*/
+
+#screen09 .distance-title{
+
+    font-size:1.25rem;
+
+    line-height:1.8;
+
+    margin-bottom:35px;
+
+}
+
+
+
+/*==================================================
+Distance Scale
+==================================================*/
+
+#screen09 .distance-scale{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+}
+
+
+
+/*==================================================
+Distance Option
+==================================================*/
+
+#screen09 .distance-option{
+
+    width:54px;
+
+    height:54px;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    background:
+
+        rgba(255,255,255,.04);
+
+    border:
+
+        1px solid rgba(217,181,106,.35);
+
+    color:
+
+        var(--color-white);
+
+    font-size:1rem;
+
+    transition:
+
+        all .3s ease;
+
+}
+
+
+
+/*==================================================
+Hover
+==================================================*/
+
+#screen09 .distance-option:hover{
+
+    transform:
+
+        translateY(-5px);
+
+    border-color:
+
+        rgba(217,181,106,.75);
+
+}
+
+
+
+/*==================================================
+Selected
+==================================================*/
+
+#screen09 .distance-option.selected{
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #23AF72,
+
+            #125D41
+
+        );
+
+    border-color:
+
+        #D9B56A;
+
+    box-shadow:
+
+        0 0 30px rgba(24,166,109,.35);
+
+}
+
+
+
+/*==================================================
+Distance Labels
+==================================================*/
+
+#screen09 .distance-labels{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:20px;
+
+    color:
+
+        rgba(255,255,255,.70);
+
+}
+
+
+
+/*==================================================
+Mobile
+==================================================*/
+
+@media(max-width:768px){
+
+
+    #screen09 .bridge-visual{
+
+        flex-direction:column;
+
+        gap:20px;
+
+    }
+
+
+    #screen09 .bridge-side{
+
+        width:90%;
+
+    }
+
+
+    #screen09 .bridge-path{
+
+        width:80%;
+
+        height:80px;
+
+    }
+
+
+    #screen09 .distance-scale{
+
+        gap:8px;
+
+    }
+
+
+    #screen09 .distance-option{
+
+        width:44px;
+
+        height:44px;
+
+    }
+
+
+}
