@@ -145,7 +145,7 @@ function activateEntrance(){
 
 
 
-        ".screen02-next"
+        ".journey-next"
 
 
 
@@ -192,6 +192,7 @@ function activateEntrance(){
 
 
 
+
             setTimeout(function(){
 
 
@@ -225,6 +226,9 @@ function activateEntrance(){
 
 
 }
+
+
+
 
 
 
@@ -318,6 +322,8 @@ function bindContinueButton(){
 
 
 
+
+
 /*==================================================
 Navigation Handler
 
@@ -379,6 +385,8 @@ function navigateToNextScreen(){
 
 
 }
+
+
 
 
 
