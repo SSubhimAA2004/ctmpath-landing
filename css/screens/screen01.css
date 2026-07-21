@@ -1,311 +1,978 @@
 
-<!--
+/*
 ======================================================================
 
-CTM PATH™ Guided Journey v1.0
+CTM PATH™ Guided Journey v6.0
 
 File
-screens/screen01.html
+css/screens/screen01.css
 
 Purpose
 Screen 01 — The Invitation™
 
 Responsibility
-• Create first emotional connection
-• Introduce CTM PATH™ journey
-• Establish trust
-• Invite visitor to begin
+• Premium opening experience
+• Logo positioning
+• Hero composition
+• Tamil-first typography
+• Emotional welcome card
+• CTA presentation
+• Responsive behaviour
 
 ======================================================================
--->
+*/
 
 
-<section
-    class="screen"
-    id="screen01">
+/*==================================================
+Screen 01 Container
+==================================================*/
 
 
-    <div class="container">
+#screen01{
 
+    min-height:100vh;
 
-        <div class="hero">
+    display:flex;
 
+    align-items:center;
 
+    justify-content:center;
 
-            <!--==================================================
-            Logo
-            ==================================================-->
+    overflow:hidden;
 
+    position:relative;
 
-            <img
+}
 
-                class="hero-logo fade-rise"
 
-                src="assets/images/common/CTM_Logo.png"
 
-                alt="CTM PATH Logo">
+/*==================================================
+Screen Background Atmosphere
+==================================================*/
 
 
+#screen01::before{
 
+    content:"";
 
-            <!--==================================================
-            Screen Caption
-            ==================================================-->
+    position:absolute;
 
+    inset:0;
 
-            <div
-                class="screen-caption">
+    background:
 
+        radial-gradient(
 
-                MOMENT 01 OF 36
+            circle at center,
 
+            rgba(35,175,114,.10),
 
-            </div>
+            transparent 45%
 
+        );
 
+    pointer-events:none;
 
+}
 
-            <!--==================================================
-            Divider
-            ==================================================-->
 
 
-            <div
-                class="gold-divider">
+/*==================================================
+Main Container
+==================================================*/
 
-            </div>
 
+#screen01 .container{
 
+    width:100%;
 
+    max-width:1200px;
 
-            <!--==================================================
-            Tamil Hero Message
-            ==================================================-->
+    margin:0 auto;
 
+    padding:
 
-            <h1
-                class="hero-message-tamil">
+        60px 40px;
 
+    position:relative;
 
-                உங்கள் வாழ்க்கையின்
+    z-index:2;
 
+}
 
-                <br><br>
 
 
-                அடுத்த அத்தியாயம்...
+/*==================================================
+Hero Layout
+==================================================*/
 
 
-                <br><br>
+#screen01 .hero{
 
+    width:100%;
 
-                இன்று
+    max-width:850px;
 
+    margin:0 auto;
 
-                <span
-                    class="hero-highlight">
+    display:flex;
 
-                    தொடங்குகிறது.
+    flex-direction:column;
 
-                </span>
+    align-items:center;
 
+    justify-content:center;
 
-            </h1>
+    text-align:center;
 
+}
 
 
 
-            <!--==================================================
-            English Message
-            ==================================================-->
+/*==================================================
+Logo
+==================================================*/
 
 
-            <div
-                class="hero-message-english">
+#screen01 .hero-logo{
 
+    width:180px;
 
-                The next chapter
+    height:auto;
 
+    margin:
 
-                <br>
+        0 auto 35px;
 
+    object-fit:contain;
 
-                of your life...
+    filter:
 
+        drop-shadow(
 
-                <br><br>
+            0 10px 25px rgba(0,0,0,.35)
 
+        );
 
-                begins today.
+}
 
 
-            </div>
 
+/*==================================================
+Screen Caption
+==================================================*/
 
 
+#screen01 .screen-caption{
 
-            <!--==================================================
-            Emotional Welcome Card
-            ==================================================-->
+    font-size:.85rem;
 
+    letter-spacing:.25em;
 
-            <div
-                class="welcome-card">
+    text-transform:uppercase;
 
+    color:
 
-                <p>
+        rgba(255,255,255,.55);
 
+    margin-bottom:25px;
 
-                    சில நேரங்களில்...
+}
 
 
-                    <br><br>
 
+/*==================================================
+Gold Divider
+==================================================*/
 
-                    வாழ்க்கையை மாற்றும்
 
+#screen01 .gold-divider{
 
-                    <br>
+    width:120px;
 
+    height:2px;
 
-                    மிகப்பெரிய முடிவுகள்
+    margin:
 
+        0 auto 45px;
 
-                    <br>
+    background:
 
+        linear-gradient(
 
-                    ஒரு நேர்மையான
+            90deg,
 
+            transparent,
 
-                    <br>
+            #D9B56A,
 
+            transparent
 
-                    உரையாடலில்
+        );
 
+}
 
-                    <br>
 
 
-                    தொடங்குகின்றன.
+#screen01 .gold-divider.small{
 
+    width:90px;
 
-                </p>
+    margin:
 
+        35px auto;
 
-                <br>
+}
 
+/*==================================================
+Tamil Hero Message
+==================================================*/
 
-                <p>
 
+#screen01 .hero-message-tamil{
 
-                    Sometimes...
+    max-width:850px;
 
+    margin:0 auto 35px;
 
-                    <br><br>
+    font-family:
 
+        var(--font-tamil),
 
-                    the biggest changes
+        sans-serif;
 
+    font-size:
 
-                    <br>
+        clamp(
 
+            2.2rem,
 
-                    in life begin
+            4vw,
 
+            3.8rem
 
-                    <br>
+        );
 
+    font-weight:600;
 
-                    with one honest
+    line-height:1.6;
 
+    letter-spacing:.02em;
 
-                    <br>
+    color:
 
+        var(--color-white);
 
-                    conversation.
+}
 
 
-                </p>
 
+/*==================================================
+Tamil Highlight
+==================================================*/
 
-            </div>
 
+#screen01 .hero-highlight{
 
+    color:
 
+        var(--color-gold);
 
+}
 
-            <!--==================================================
-            Hero Image
-            ==================================================-->
 
 
-            <img
+/*==================================================
+English Hero Message
+==================================================*/
 
 
-                class="hero-image"
+#screen01 .hero-message-english{
 
+    max-width:600px;
 
-                src="assets/images/screen01/screen01-hero.png"
+    margin:
 
+        0 auto 45px;
 
-                alt="Beginning of a new journey">
+    font-family:
 
+        var(--font-english),
 
+        sans-serif;
 
+    font-size:
 
+        clamp(
 
-            <!--==================================================
-            CTA
-            ==================================================-->
+            1.2rem,
 
+            2vw,
 
-            <div
-                class="cta-area">
+            1.7rem
 
+        );
 
-                <button
+    line-height:1.8;
 
+    font-weight:400;
 
-                    class="btn btn-primary"
+    color:
 
+        rgba(255,255,255,.82);
 
-                    data-next="screen02">
+}
 
 
 
-                    <span
-                        class="btn-title">
+/*==================================================
+Welcome Card
+==================================================*/
 
 
-                        என் பயணத்தை தொடங்குகிறேன் →
+#screen01 .welcome-card{
 
+    width:100%;
 
-                    </span>
+    max-width:620px;
 
+    margin:
 
+        0 auto 45px;
 
-                    <span
-                        class="btn-subtitle">
 
+    padding:
 
-                        Begin My Journey
+        35px 45px;
 
 
-                    </span>
+    border-radius:28px;
 
 
+    background:
 
-                </button>
+        linear-gradient(
 
+            180deg,
 
-            </div>
+            rgba(255,255,255,.08),
 
+            rgba(255,255,255,.025)
 
+        );
 
-        </div>
 
+    border:
 
-    </div>
+        1px solid rgba(217,181,106,.25);
 
 
-</section>
+    backdrop-filter:
+
+        blur(18px);
+
+
+    box-shadow:
+
+        0 25px 70px rgba(0,0,0,.35);
+
+
+
+}
+
+
+
+/*==================================================
+Welcome Card Text
+==================================================*/
+
+
+#screen01 .welcome-card p{
+
+    margin:0;
+
+
+    font-family:
+
+        var(--font-tamil),
+
+        sans-serif;
+
+
+    font-size:
+
+        1.25rem;
+
+
+    line-height:
+
+        2;
+
+
+    color:
+
+        rgba(255,255,255,.90);
+
+}
+
+
+
+#screen01 .welcome-card p + p{
+
+    margin-top:25px;
+
+
+    font-family:
+
+        var(--font-english),
+
+        sans-serif;
+
+
+    font-size:
+
+        1.05rem;
+
+
+    line-height:
+
+        1.8;
+
+
+    color:
+
+        rgba(255,255,255,.70);
+
+}
+
+
+
+/*==================================================
+Hero Image
+==================================================*/
+
+
+#screen01 .hero-image{
+
+    width:100%;
+
+
+    max-width:720px;
+
+
+    height:auto;
+
+
+    margin:
+
+        10px auto 45px;
+
+
+    border-radius:30px;
+
+
+    object-fit:cover;
+
+
+    box-shadow:
+
+        0 30px 80px rgba(0,0,0,.45);
+
+
+}
+
+
+
+/*==================================================
+CTA Area
+==================================================*/
+
+
+#screen01 .cta-area{
+
+    width:100%;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    margin-top:20px;
+
+
+}
+
+/*==================================================
+CTA Button Enhancement
+==================================================*/
+
+
+#screen01 .btn-primary{
+
+    min-width:280px;
+
+    padding:
+
+        18px 38px;
+
+
+    border-radius:60px;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    gap:6px;
+
+
+    cursor:pointer;
+
+
+    transition:
+
+        transform .35s ease,
+
+        box-shadow .35s ease;
+
+
+}
+
+
+
+/*==================================================
+CTA Title
+==================================================*/
+
+
+#screen01 .btn-title{
+
+
+    font-family:
+
+        var(--font-tamil),
+
+        sans-serif;
+
+
+    font-size:
+
+        1.25rem;
+
+
+    font-weight:600;
+
+
+    line-height:1.4;
+
+
+}
+
+
+
+/*==================================================
+CTA Subtitle
+==================================================*/
+
+
+#screen01 .btn-subtitle{
+
+
+    font-family:
+
+        var(--font-english),
+
+        sans-serif;
+
+
+    font-size:
+
+        .95rem;
+
+
+    opacity:.85;
+
+
+}
+
+
+
+/*==================================================
+CTA Hover
+==================================================*/
+
+
+#screen01 .btn-primary:hover{
+
+
+    transform:
+
+        translateY(-5px);
+
+
+    box-shadow:
+
+
+        0 20px 50px rgba(35,175,114,.35);
+
+
+
+}
+
+
+
+/*==================================================
+Focus Accessibility
+==================================================*/
+
+
+#screen01 .btn-primary:focus-visible{
+
+
+    outline:
+
+        3px solid rgba(217,181,106,.8);
+
+
+    outline-offset:
+
+        5px;
+
+
+
+}
+
+
+
+/*==================================================
+Animation Support
+==================================================*/
+
+
+#screen01 .fade-up{
+
+
+    animation:
+
+        ctmFadeUp .9s ease forwards;
+
+
+}
+
+
+
+/*==================================================
+Mobile Responsive
+==================================================*/
+
+
+@media(max-width:768px){
+
+
+
+    #screen01 .container{
+
+
+        padding:
+
+
+            40px 20px;
+
+
+    }
+
+
+
+
+
+    #screen01 .hero-logo{
+
+
+        width:
+
+
+            140px;
+
+
+        margin-bottom:
+
+
+            25px;
+
+
+    }
+
+
+
+
+
+    #screen01 .screen-caption{
+
+
+        font-size:
+
+
+            .72rem;
+
+
+        letter-spacing:
+
+
+            .18em;
+
+
+    }
+
+
+
+
+
+    #screen01 .gold-divider{
+
+
+        width:
+
+
+            90px;
+
+
+        margin-bottom:
+
+
+            30px;
+
+
+    }
+
+
+
+
+
+    #screen01 .hero-message-tamil{
+
+
+        font-size:
+
+
+            2rem;
+
+
+        line-height:
+
+
+            1.55;
+
+
+        margin-bottom:
+
+
+            25px;
+
+
+    }
+
+
+
+
+
+    #screen01 .hero-message-english{
+
+
+        font-size:
+
+
+            1.05rem;
+
+
+        line-height:
+
+
+            1.7;
+
+
+        margin-bottom:
+
+
+            30px;
+
+
+    }
+
+
+
+
+
+    #screen01 .welcome-card{
+
+
+        padding:
+
+
+            25px 20px;
+
+
+        border-radius:
+
+
+            22px;
+
+
+        margin-bottom:
+
+
+            35px;
+
+
+    }
+
+
+
+
+
+    #screen01 .welcome-card p{
+
+
+        font-size:
+
+
+            1.05rem;
+
+
+        line-height:
+
+
+            1.8;
+
+
+    }
+
+
+
+
+
+    #screen01 .hero-image{
+
+
+        border-radius:
+
+
+            22px;
+
+
+        margin-bottom:
+
+
+            30px;
+
+
+    }
+
+
+
+
+
+    #screen01 .btn-primary{
+
+
+        min-width:
+
+
+            240px;
+
+
+        padding:
+
+
+            16px 28px;
+
+
+    }
+
+
+
+
+
+    #screen01 .btn-title{
+
+
+        font-size:
+
+
+            1.1rem;
+
+
+    }
+
+
+
+}
+
+
+
+/*==================================================
+Small Mobile
+==================================================*/
+
+
+@media(max-width:420px){
+
+
+
+    #screen01 .hero-message-tamil{
+
+
+        font-size:
+
+
+            1.7rem;
+
+
+    }
+
+
+
+
+
+    #screen01 .welcome-card p{
+
+
+        font-size:
+
+
+            .95rem;
+
+
+    }
+
+
+
+
+
+    #screen01 .btn-primary{
+
+
+        width:
+
+
+            100%;
+
+
+    }
+
+
+
+}
+
