@@ -15,7 +15,7 @@ Responsibility
 • Logo positioning
 • Hero composition
 • Tamil-first typography
-• Emotional welcome card
+• Emotional connection
 • CTA presentation
 • Responsive behaviour
 
@@ -24,7 +24,7 @@ Responsibility
 
 
 /*==================================================
-Screen 01 Container
+Screen Container
 ==================================================*/
 
 
@@ -32,22 +32,24 @@ Screen 01 Container
 
     min-height:100vh;
 
+    width:100%;
+
     display:flex;
 
     align-items:center;
 
     justify-content:center;
 
-    overflow:hidden;
-
     position:relative;
+
+    overflow:hidden;
 
 }
 
 
 
 /*==================================================
-Screen Background Atmosphere
+Background Atmosphere
 ==================================================*/
 
 
@@ -59,17 +61,20 @@ Screen Background Atmosphere
 
     inset:0;
 
+
     background:
+
 
         radial-gradient(
 
             circle at center,
 
-            rgba(35,175,114,.10),
+            rgba(35,175,114,.12),
 
             transparent 45%
 
         );
+
 
     pointer-events:none;
 
@@ -86,15 +91,20 @@ Main Container
 
     width:100%;
 
+
     max-width:1200px;
+
 
     margin:0 auto;
 
+
     padding:
 
-        60px 40px;
+        50px 40px;
+
 
     position:relative;
+
 
     z-index:2;
 
@@ -111,17 +121,27 @@ Hero Layout
 
     width:100%;
 
+
     max-width:850px;
+
 
     margin:0 auto;
 
+
+    padding-top:40px;
+
+
     display:flex;
+
 
     flex-direction:column;
 
+
     align-items:center;
 
+
     justify-content:center;
+
 
     text-align:center;
 
@@ -136,23 +156,46 @@ Logo
 
 #screen01 .hero-logo{
 
-    width:180px;
+
+    width:220px;
+
 
     height:auto;
 
+
+    display:block;
+
+
     margin:
 
-        0 auto 35px;
+
+        0 auto 45px;
+
 
     object-fit:contain;
 
+
+    position:relative;
+
+
+    z-index:5;
+
+
+    opacity:1;
+
+
+    visibility:visible;
+
+
     filter:
+
 
         drop-shadow(
 
-            0 10px 25px rgba(0,0,0,.35)
+            0 12px 30px rgba(0,0,0,.45)
 
         );
+
 
 }
 
@@ -165,17 +208,24 @@ Screen Caption
 
 #screen01 .screen-caption{
 
+
     font-size:.85rem;
+
 
     letter-spacing:.25em;
 
+
     text-transform:uppercase;
+
 
     color:
 
+
         rgba(255,255,255,.55);
 
+
     margin-bottom:25px;
+
 
 }
 
@@ -188,15 +238,21 @@ Gold Divider
 
 #screen01 .gold-divider{
 
+
     width:120px;
+
 
     height:2px;
 
+
     margin:
+
 
         0 auto 45px;
 
+
     background:
+
 
         linear-gradient(
 
@@ -210,17 +266,27 @@ Gold Divider
 
         );
 
+
 }
 
 
 
+/*==================================================
+Small Divider
+==================================================*/
+
+
 #screen01 .gold-divider.small{
+
 
     width:90px;
 
+
     margin:
 
+
         35px auto;
+
 
 }
 
@@ -231,17 +297,26 @@ Tamil Hero Message
 
 #screen01 .hero-message-tamil{
 
+
     max-width:850px;
 
-    margin:0 auto 35px;
+
+    margin:
+
+
+        0 auto 35px;
+
 
     font-family:
+
 
         var(--font-tamil),
 
         sans-serif;
 
+
     font-size:
+
 
         clamp(
 
@@ -253,15 +328,22 @@ Tamil Hero Message
 
         );
 
+
     font-weight:600;
+
 
     line-height:1.6;
 
+
     letter-spacing:.02em;
+
 
     color:
 
+
         var(--color-white);
+
+
 
 }
 
@@ -274,9 +356,13 @@ Tamil Highlight
 
 #screen01 .hero-highlight{
 
+
     color:
 
+
         var(--color-gold);
+
+
 
 }
 
@@ -289,19 +375,26 @@ English Hero Message
 
 #screen01 .hero-message-english{
 
-    max-width:600px;
+
+    max-width:650px;
+
 
     margin:
 
+
         0 auto 45px;
 
+
     font-family:
+
 
         var(--font-english),
 
         sans-serif;
 
+
     font-size:
+
 
         clamp(
 
@@ -313,13 +406,19 @@ English Hero Message
 
         );
 
+
     line-height:1.8;
+
 
     font-weight:400;
 
+
     color:
 
+
         rgba(255,255,255,.82);
+
+
 
 }
 
@@ -332,24 +431,36 @@ Welcome Card
 
 #screen01 .welcome-card{
 
+
     width:100%;
+
 
     max-width:620px;
 
+
     margin:
+
 
         0 auto 45px;
 
 
+
     padding:
+
 
         35px 45px;
 
 
-    border-radius:28px;
+
+    border-radius:
+
+
+        28px;
+
 
 
     background:
+
 
         linear-gradient(
 
@@ -362,17 +473,23 @@ Welcome Card
         );
 
 
+
     border:
+
 
         1px solid rgba(217,181,106,.25);
 
 
+
     backdrop-filter:
+
 
         blur(18px);
 
 
+
     box-shadow:
+
 
         0 25px 70px rgba(0,0,0,.35);
 
@@ -383,65 +500,90 @@ Welcome Card
 
 
 /*==================================================
-Welcome Card Text
+Welcome Card Paragraph
 ==================================================*/
 
 
 #screen01 .welcome-card p{
+
 
     margin:0;
 
 
     font-family:
 
+
         var(--font-tamil),
 
         sans-serif;
 
 
+
     font-size:
+
 
         1.25rem;
 
 
+
     line-height:
+
 
         2;
 
 
+
     color:
 
+
         rgba(255,255,255,.90);
+
+
 
 }
 
 
 
+/*==================================================
+English Welcome Text
+==================================================*/
+
+
 #screen01 .welcome-card p + p{
+
 
     margin-top:25px;
 
 
     font-family:
 
+
         var(--font-english),
 
         sans-serif;
 
 
+
     font-size:
+
 
         1.05rem;
 
 
+
     line-height:
+
 
         1.8;
 
 
+
     color:
 
+
         rgba(255,255,255,.70);
+
+
 
 }
 
@@ -454,6 +596,7 @@ Hero Image
 
 #screen01 .hero-image{
 
+
     width:100%;
 
 
@@ -463,20 +606,34 @@ Hero Image
     height:auto;
 
 
+
     margin:
+
 
         10px auto 45px;
 
 
-    border-radius:30px;
+
+    border-radius:
+
+
+        30px;
+
 
 
     object-fit:cover;
 
 
+
+    display:block;
+
+
+
     box-shadow:
 
+
         0 30px 80px rgba(0,0,0,.45);
+
 
 
 }
@@ -490,19 +647,25 @@ CTA Area
 
 #screen01 .cta-area{
 
+
     width:100%;
+
 
 
     display:flex;
 
 
+
     justify-content:center;
+
 
 
     align-items:center;
 
 
+
     margin-top:20px;
+
 
 
 }
@@ -514,39 +677,76 @@ CTA Button Enhancement
 
 #screen01 .btn-primary{
 
-    min-width:280px;
+
+    min-width:
+
+        280px;
+
+
 
     padding:
+
 
         18px 38px;
 
 
-    border-radius:60px;
+
+    border-radius:
 
 
-    display:flex;
+        60px;
 
 
-    flex-direction:column;
+
+    display:
 
 
-    align-items:center;
+        flex;
 
 
-    justify-content:center;
+
+    flex-direction:
 
 
-    gap:6px;
+        column;
 
 
-    cursor:pointer;
+
+    align-items:
+
+
+        center;
+
+
+
+    justify-content:
+
+
+        center;
+
+
+
+    gap:
+
+
+        6px;
+
+
+
+    cursor:
+
+
+        pointer;
+
 
 
     transition:
 
+
         transform .35s ease,
 
         box-shadow .35s ease;
+
 
 
 }
@@ -563,20 +763,32 @@ CTA Title
 
     font-family:
 
+
         var(--font-tamil),
 
         sans-serif;
 
 
+
     font-size:
+
 
         1.25rem;
 
 
-    font-weight:600;
+
+    font-weight:
 
 
-    line-height:1.4;
+        600;
+
+
+
+    line-height:
+
+
+        1.4;
+
 
 
 }
@@ -593,17 +805,25 @@ CTA Subtitle
 
     font-family:
 
+
         var(--font-english),
 
         sans-serif;
 
 
+
     font-size:
+
 
         .95rem;
 
 
-    opacity:.85;
+
+    opacity:
+
+
+        .85;
+
 
 
 }
@@ -620,7 +840,9 @@ CTA Hover
 
     transform:
 
+
         translateY(-5px);
+
 
 
     box-shadow:
@@ -635,7 +857,7 @@ CTA Hover
 
 
 /*==================================================
-Focus Accessibility
+CTA Focus
 ==================================================*/
 
 
@@ -644,10 +866,13 @@ Focus Accessibility
 
     outline:
 
+
         3px solid rgba(217,181,106,.8);
 
 
+
     outline-offset:
+
 
         5px;
 
@@ -667,7 +892,81 @@ Animation Support
 
     animation:
 
+
         ctmFadeUp .9s ease forwards;
+
+
+
+}
+
+
+
+/*==================================================
+Desktop Vertical Balance
+==================================================*/
+
+
+@media(min-width:1200px){
+
+
+    #screen01 .hero{
+
+
+        transform:
+
+
+            translateY(-20px);
+
+
+
+    }
+
+
+}
+
+
+
+/*==================================================
+Tablet Responsive
+==================================================*/
+
+
+@media(max-width:900px){
+
+
+    #screen01 .container{
+
+
+        padding:
+
+
+            45px 25px;
+
+
+
+    }
+
+
+
+    #screen01 .hero-logo{
+
+
+        width:
+
+
+            180px;
+
+
+
+        margin-bottom:
+
+
+            35px;
+
+
+
+    }
+
 
 
 }
@@ -689,7 +988,24 @@ Mobile Responsive
         padding:
 
 
-            40px 20px;
+            35px 20px;
+
+
+
+    }
+
+
+
+
+
+    #screen01 .hero{
+
+
+        padding-top:
+
+
+            20px;
+
 
 
     }
@@ -704,13 +1020,15 @@ Mobile Responsive
         width:
 
 
-            140px;
+            150px;
+
 
 
         margin-bottom:
 
 
-            25px;
+            28px;
+
 
 
     }
@@ -728,10 +1046,12 @@ Mobile Responsive
             .72rem;
 
 
+
         letter-spacing:
 
 
             .18em;
+
 
 
     }
@@ -749,10 +1069,12 @@ Mobile Responsive
             90px;
 
 
+
         margin-bottom:
 
 
             30px;
+
 
 
     }
@@ -770,16 +1092,12 @@ Mobile Responsive
             2rem;
 
 
+
         line-height:
 
 
             1.55;
 
-
-        margin-bottom:
-
-
-            25px;
 
 
     }
@@ -797,16 +1115,12 @@ Mobile Responsive
             1.05rem;
 
 
+
         line-height:
 
 
             1.7;
 
-
-        margin-bottom:
-
-
-            30px;
 
 
     }
@@ -824,16 +1138,12 @@ Mobile Responsive
             25px 20px;
 
 
+
         border-radius:
 
 
             22px;
 
-
-        margin-bottom:
-
-
-            35px;
 
 
     }
@@ -851,11 +1161,6 @@ Mobile Responsive
             1.05rem;
 
 
-        line-height:
-
-
-            1.8;
-
 
     }
 
@@ -871,11 +1176,6 @@ Mobile Responsive
 
             22px;
 
-
-        margin-bottom:
-
-
-            30px;
 
 
     }
@@ -893,10 +1193,12 @@ Mobile Responsive
             240px;
 
 
+
         padding:
 
 
             16px 28px;
+
 
 
     }
@@ -912,6 +1214,7 @@ Mobile Responsive
 
 
             1.1rem;
+
 
 
     }
@@ -940,6 +1243,7 @@ Small Mobile
             1.7rem;
 
 
+
     }
 
 
@@ -955,6 +1259,7 @@ Small Mobile
             .95rem;
 
 
+
     }
 
 
@@ -968,6 +1273,7 @@ Small Mobile
 
 
             100%;
+
 
 
     }
