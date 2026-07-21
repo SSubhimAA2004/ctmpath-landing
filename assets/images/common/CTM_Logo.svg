@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 1200 1200"
+     width="1200"
+     height="1200">
+
+  <defs>
+    <linearGradient id="tealGold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#18AFA6"/>
+      <stop offset="55%" stop-color="#D9B56A"/>
+      <stop offset="100%" stop-color="#F3D98B"/>
+    </linearGradient>
+
+    <radialGradient id="glow">
+      <stop offset="0%" stop-color="#D9B56A" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#D9B56A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Transparent background -->
+
+  <!-- Outer journey arc -->
+  <path d="M260 430 A340 340 0 0 1 940 430"
+        fill="none"
+        stroke="#D9B56A"
+        stroke-width="8"
+        stroke-linecap="round"/>
+
+  <!-- Star glow -->
+  <circle cx="600" cy="270" r="130" fill="url(#glow)"/>
+
+  <!-- Star -->
+  <path d="M600 205 L620 250 L670 270 L620 290 L600 335 L580 290 L530 270 L580 250 Z"
+        fill="#D9B56A"/>
+
+  <!-- Human path symbol -->
+  <circle cx="420" cy="350" r="32" fill="#18AFA6"/>
+
+  <path d="M410 395
+           C350 470 350 600 410 690
+           C500 620 560 520 610 430
+           C530 520 470 550 420 570"
+        fill="none"
+        stroke="#18AFA6"
+        stroke-width="24"
+        stroke-linecap="round"/>
+
+  <!-- Golden path -->
+  <path d="M360 720
+           C520 650 650 620 760 430
+           C790 380 780 320 700 280"
+        fill="none"
+        stroke="url(#tealGold)"
+        stroke-width="45"
+        stroke-linecap="round"/>
+
+  <!-- Brand text -->
+  <text x="600" y="850"
+        text-anchor="middle"
+        font-family="Georgia, serif"
+        font-size="150"
+        font-weight="600">
+
+    <tspan fill="#18AFA6">CTM </tspan>
+    <tspan fill="#D9B56A">PATH</tspan>
+
+  </text>
+
+  <text x="600" y="950"
+        text-anchor="middle"
+        font-family="Arial, sans-serif"
+        font-size="45"
+        letter-spacing="18"
+        fill="#18AFA6">
+
+    GUIDED JOURNEY™
+
+  </text>
+
+  <text x="600" y="1040"
+        text-anchor="middle"
+        font-family="Georgia, serif"
+        font-size="38"
+        fill="#FFFFFF">
+
+    Every Dream Has a Path™
+
+  </text>
+
+</svg>
