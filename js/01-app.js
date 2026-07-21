@@ -45,6 +45,7 @@ Responsibility
 
     };
 
+
     /*==================================================
     Log
     ==================================================*/
@@ -67,6 +68,7 @@ Responsibility
 
     };
 
+
     /*==================================================
     Restore Session
     ==================================================*/
@@ -85,6 +87,7 @@ Responsibility
 
     };
 
+
     /*==================================================
     Bind Global Events
     ==================================================*/
@@ -101,6 +104,7 @@ Responsibility
 
         }
 
+
         if (
 
             typeof CTM.bindInputs === 'function'
@@ -110,6 +114,7 @@ Responsibility
             CTM.bindInputs();
 
         }
+
 
         if (
 
@@ -122,6 +127,7 @@ Responsibility
         }
 
     };
+
 
     /*==================================================
     Restore Screen State
@@ -139,6 +145,7 @@ Responsibility
 
         }
 
+
         if (
 
             typeof CTM.restoreChoices === 'function'
@@ -148,6 +155,7 @@ Responsibility
             CTM.restoreChoices();
 
         }
+
 
         if (
 
@@ -160,6 +168,7 @@ Responsibility
         }
 
     };
+
 
     /*==================================================
     Refresh UI
@@ -177,6 +186,7 @@ Responsibility
 
         }
 
+
         if (
 
             typeof CTM.refreshScores === 'function'
@@ -187,6 +197,7 @@ Responsibility
 
         }
 
+
         if (
 
             typeof CTM.refreshPatterns === 'function'
@@ -196,6 +207,7 @@ Responsibility
             CTM.refreshPatterns();
 
         }
+
 
         if (
 
@@ -209,19 +221,25 @@ Responsibility
 
     };
 
+
     /*==================================================
     Load Initial Screen
     ==================================================*/
 
     CTM.loadInitialScreen = async function () {
 
+
         /*
-        URL Hash takes highest priority
+        --------------------------------------------------
+        Development / Testing
+        URL Hash Priority
+        --------------------------------------------------
         */
 
         const hash =
 
             window.location.hash.replace('#', '');
+
 
         if (
 
@@ -237,32 +255,12 @@ Responsibility
 
         }
 
-        /*
-        Restore previous session
-        */
-
-        if (
-
-            CTM.state.currentScreen &&
-
-            typeof CTM.isValidScreen === 'function' &&
-
-            CTM.isValidScreen(CTM.state.currentScreen)
-
-        ) {
-
-            await CTM.navigate(
-
-                CTM.state.currentScreen
-
-            );
-
-            return;
-
-        }
 
         /*
-        Fresh visitor
+        --------------------------------------------------
+        Production Landing Page Start
+        Always Begin Journey From Screen 01
+        --------------------------------------------------
         */
 
         await CTM.navigate(
@@ -271,7 +269,9 @@ Responsibility
 
         );
 
+
     };
+
 
     /*==================================================
     Analytics
@@ -291,11 +291,13 @@ Responsibility
 
     };
 
+
     /*==================================================
     Application Start
     ==================================================*/
 
     CTM.initialize = async function () {
+
 
         CTM.log(
 
@@ -303,17 +305,24 @@ Responsibility
 
         );
 
+
         CTM.restoreSession();
+
 
         CTM.bindEvents();
 
+
         CTM.initializeAnalytics();
+
 
         await CTM.loadInitialScreen();
 
+
         CTM.restoreScreenState();
 
+
         CTM.refreshUI();
+
 
         if (
 
@@ -325,13 +334,16 @@ Responsibility
 
         }
 
+
         CTM.log(
 
             'Application Ready.'
 
         );
 
+
     };
+
 
     /*==================================================
     DOM Ready
@@ -348,5 +360,6 @@ Responsibility
         }
 
     );
+
 
 })();
