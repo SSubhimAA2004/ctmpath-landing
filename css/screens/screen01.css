@@ -1,6 +1,5 @@
 
-/*
-======================================================================
+/*======================================================================
 
 CTM PATH™ Guided Journey v6.0
 
@@ -16,7 +15,7 @@ Responsibility
 • Hero composition
 • Tamil-first typography
 • Emotional connection
-• CTA presentation
+• Premium Journey Navigator
 • Responsive behaviour
 
 ======================================================================
@@ -195,6 +194,13 @@ Hero Layout
 
 
 }
+
+
+
+
+
+
+
 
 /*==================================================
 SVG Logo
@@ -841,7 +847,9 @@ English Introduction
 
 
 /*==================================================
-CTA Block
+Premium Journey Navigator Area
+
+CTM PATH™ Standard Component
 
 ==================================================*/
 
@@ -894,63 +902,39 @@ CTA Block
 
 
 /*==================================================
-CTA Button
-
-CTM PATH™ Premium Journey Invitation
+Premium Journey Navigator
 
 ==================================================*/
 
 
-#screen01 .btn-primary{
+#screen01 .journey-next{
 
 
-    min-width:
+    background:
 
 
-        260px;
+        none;
+
+
+
+    border:
+
+
+        none;
 
 
 
     padding:
 
 
-        18px 42px;
+        0;
 
 
 
-    border-radius:
+    cursor:
 
 
-        var(--radius-button);
-
-
-
-    background:
-
-
-        linear-gradient(
-
-            135deg,
-
-            #18A66D,
-
-            #125D41
-
-        );
-
-
-
-    color:
-
-
-        white;
-
-
-
-    box-shadow:
-
-
-        0 20px 50px rgba(24,166,109,.30);
+        pointer;
 
 
 
@@ -985,21 +969,64 @@ CTM PATH™ Premium Journey Invitation
     gap:
 
 
-        6px;
+        14px;
 
 
 
-    cursor:
+    color:
 
 
-        pointer;
+        var(--color-gold);
 
 
 
     transition:
 
 
-        all .45s var(--ease-premium);
+        all .4s var(--ease-premium);
+
+
+
+}
+
+
+
+
+
+/*==================================================
+Golden Decorative Lines
+
+==================================================*/
+
+
+#screen01 .nav-decoration{
+
+
+    width:
+
+
+        120px;
+
+
+
+    height:
+
+
+        1px;
+
+
+
+    background:
+
+
+        var(--color-gold);
+
+
+
+    opacity:
+
+
+        .85;
 
 
 
@@ -1013,44 +1040,12 @@ CTM PATH™ Premium Journey Invitation
 
 
 /*==================================================
-CTA Hover
+Tamil Navigation Text
 
 ==================================================*/
 
 
-#screen01 .btn-primary:hover{
-
-
-    transform:
-
-
-        translateY(-6px);
-
-
-
-    box-shadow:
-
-
-        0 30px 70px rgba(24,166,109,.45);
-
-
-
-}
-
-
-
-
-
-
-
-
-/*==================================================
-CTA Tamil Title
-
-==================================================*/
-
-
-#screen01 .btn-title{
+#screen01 .nav-tamil{
 
 
     font-family:
@@ -1065,7 +1060,7 @@ CTA Tamil Title
     font-size:
 
 
-        1.35rem;
+        1.45rem;
 
 
 
@@ -1076,10 +1071,17 @@ CTA Tamil Title
 
 
 
-    line-height:
+    color:
 
 
-        1.4;
+        var(--color-gold);
+
+
+
+    letter-spacing:
+
+
+        .5px;
 
 
 
@@ -1093,12 +1095,58 @@ CTA Tamil Title
 
 
 /*==================================================
-CTA English Subtitle
+Three Right Arrows
 
 ==================================================*/
 
 
-#screen01 .btn-subtitle{
+#screen01 .nav-arrows{
+
+
+    font-size:
+
+
+        1.5rem;
+
+
+
+    letter-spacing:
+
+
+        8px;
+
+
+
+    color:
+
+
+        var(--color-gold);
+
+
+
+    line-height:
+
+
+        1;
+
+
+
+}
+
+
+
+
+
+
+
+
+/*==================================================
+English Navigation Text
+
+==================================================*/
+
+
+#screen01 .nav-english{
 
 
     font-family:
@@ -1113,125 +1161,74 @@ CTA English Subtitle
     font-size:
 
 
-        .95rem;
+        .9rem;
 
 
 
-    opacity:
+    font-weight:
 
 
-        .85;
+        500;
 
 
 
     letter-spacing:
 
 
-        .04em;
+        5px;
+
+
+
+    text-transform:
+
+
+        uppercase;
+
+
+
+    color:
+
+
+        var(--color-gold);
 
 
 
 }
 
+
+
+
+
+
+
+
 /*==================================================
-Shimmer Animation
+Navigator Hover
 
 ==================================================*/
 
 
-#screen01 .shimmer{
-
-
-    position:
-
-
-        relative;
-
-
-
-    overflow:
-
-
-        hidden;
-
-
-
-}
-
-
-
-
-
-#screen01 .shimmer::before{
-
-
-    content:"";
-
-
-
-    position:
-
-
-        absolute;
-
-
-
-    top:
-
-
-        0;
-
-
-
-    left:
-
-
-        -120%;
-
-
-
-    width:
-
-
-        60%;
-
-
-
-    height:
-
-
-        100%;
-
-
-
-    background:
-
-
-        linear-gradient(
-
-            120deg,
-
-            transparent,
-
-            rgba(255,255,255,.35),
-
-            transparent
-
-        );
-
+#screen01 .journey-next:hover{
 
 
     transform:
 
 
-        skewX(-20deg);
+        translateY(-4px);
 
 
 
-    animation:
+}
 
 
-        shimmerMove 4s infinite;
+
+#screen01 .journey-next:hover .nav-decoration{
+
+
+    opacity:
+
+
+        1;
 
 
 
@@ -1241,41 +1238,26 @@ Shimmer Animation
 
 
 
-@keyframes shimmerMove{
-
-
-    0%{
-
-
-        left:
-
-
-            -120%;
-
-
-    }
 
 
 
-    25%,100%{
+/*==================================================
+Focus Accessibility
+
+==================================================*/
 
 
-        left:
+#screen01 .journey-next:focus{
 
 
-            150%;
+    outline:
 
 
-    }
+        none;
+
 
 
 }
-
-
-
-
-
-
 
 /*==================================================
 Hero Animation
@@ -1488,24 +1470,66 @@ Tablet Responsive
 
 
 
-    #screen01 .btn-primary{
+    #screen01 .nav-decoration{
 
 
-        min-width:
+        width:
 
 
-            240px;
-
-
-
-        padding:
-
-
-            16px 34px;
+            100px;
 
 
 
     }
+
+
+
+
+
+    #screen01 .nav-tamil{
+
+
+        font-size:
+
+
+            1.3rem;
+
+
+
+    }
+
+
+
+
+
+    #screen01 .nav-arrows{
+
+
+        font-size:
+
+
+            1.35rem;
+
+
+
+    }
+
+
+
+
+
+    #screen01 .nav-english{
+
+
+        font-size:
+
+
+            .85rem;
+
+
+
+    }
+
 
 
 }
@@ -1746,27 +1770,29 @@ Mobile Responsive
 
 
 
-    #screen01 .btn-primary{
+    #screen01 .cta-block{
+
+
+        margin-top:
+
+
+            25px;
+
+
+
+    }
+
+
+
+
+
+    #screen01 .nav-decoration{
 
 
         width:
 
 
-            90%;
-
-
-
-        max-width:
-
-
-            300px;
-
-
-
-        padding:
-
-
-            15px 25px;
+            85px;
 
 
 
@@ -1776,13 +1802,13 @@ Mobile Responsive
 
 
 
-    #screen01 .btn-title{
+    #screen01 .nav-tamil{
 
 
         font-size:
 
 
-            1.15rem;
+            1.2rem;
 
 
 
@@ -1792,13 +1818,43 @@ Mobile Responsive
 
 
 
-    #screen01 .btn-subtitle{
+    #screen01 .nav-arrows{
 
 
         font-size:
 
 
-            .85rem;
+            1.25rem;
+
+
+
+        letter-spacing:
+
+
+            6px;
+
+
+
+    }
+
+
+
+
+
+    #screen01 .nav-english{
+
+
+        font-size:
+
+
+            .75rem;
+
+
+
+        letter-spacing:
+
+
+            4px;
 
 
 
@@ -1871,6 +1927,38 @@ Small Mobile Devices
 
 
 
+
+
+    #screen01 .nav-tamil{
+
+
+        font-size:
+
+
+            1.1rem;
+
+
+
+    }
+
+
+
+
+
+    #screen01 .nav-arrows{
+
+
+        font-size:
+
+
+            1.15rem;
+
+
+
+    }
+
+
+
 }
 
 
@@ -1890,10 +1978,7 @@ Reduced Motion Accessibility
 
 
 
-    #screen01 .fade-up,
-
-
-    #screen01 .shimmer::before{
+    #screen01 .fade-up{
 
 
         animation:
@@ -1909,7 +1994,7 @@ Reduced Motion Accessibility
 
 
 
-    #screen01 .btn-primary,
+    #screen01 .journey-next,
 
 
     #screen01 .hero-logo{
