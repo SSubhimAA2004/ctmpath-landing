@@ -1,1 +1,709 @@
 
+/*
+======================================================================
+
+CTM PATH™ Guided Journey v1.0
+
+File
+css/screens/screen01.css
+
+Purpose
+Screen 01 — The Invitation™
+
+Responsibility
+• Premium opening experience
+• Hero composition
+• CTM PATH™ introduction
+• Emotional first impression
+• CTA positioning
+• Responsive behaviour
+
+======================================================================
+*/
+
+
+/*==================================================
+Screen 01 Foundation
+==================================================*/
+
+
+#screen01{
+
+
+    position:relative;
+
+
+
+    overflow:hidden;
+
+
+
+    background:
+
+
+        radial-gradient(
+
+            circle at 50% 20%,
+
+            rgba(24,166,109,.18),
+
+            transparent 38%
+
+        ),
+
+
+        linear-gradient(
+
+            180deg,
+
+            #081C3A 0%,
+
+            #061526 100%
+
+        );
+
+
+
+}
+
+
+
+/*==================================================
+Ambient Background Glow
+==================================================*/
+
+
+#screen01::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+
+    width:600px;
+
+
+
+    height:600px;
+
+
+
+    top:-180px;
+
+
+
+    left:50%;
+
+
+
+    transform:
+
+        translateX(-50%);
+
+
+
+    background:
+
+
+        radial-gradient(
+
+            circle,
+
+            rgba(217,181,106,.16),
+
+            transparent 65%
+
+        );
+
+
+
+    filter:
+
+        blur(20px);
+
+
+
+    pointer-events:none;
+
+
+
+    animation:
+
+
+        heroGlow 5s ease-in-out infinite;
+
+
+
+}
+
+
+
+/*==================================================
+Hero Container
+==================================================*/
+
+
+#screen01 .hero{
+
+
+    position:relative;
+
+
+
+    z-index:2;
+
+
+
+    width:100%;
+
+
+
+    max-width:900px;
+
+
+
+    margin:
+
+        0 auto;
+
+
+
+    padding:
+
+
+        40px 0;
+
+
+
+    display:flex;
+
+
+
+    flex-direction:column;
+
+
+
+    align-items:center;
+
+
+
+    text-align:center;
+
+
+
+}
+
+
+
+/*==================================================
+Logo Area
+==================================================*/
+
+
+#screen01 .hero-logo{
+
+
+    width:120px;
+
+
+
+    margin-bottom:35px;
+
+
+
+    animation:
+
+
+        fade-rise .90s var(--ease-premium)
+        both;
+
+
+
+}
+
+
+
+/*==================================================
+Screen Caption
+==================================================*/
+
+
+#screen01 .screen-caption{
+
+
+    margin-bottom:30px;
+
+
+
+    animation:
+
+
+        fadeIn .80s var(--ease-premium)
+        both;
+
+
+
+}
+
+
+
+/*==================================================
+Gold Divider
+==================================================*/
+
+
+#screen01 .gold-divider{
+
+
+    width:90px;
+
+
+
+    height:2px;
+
+
+
+    margin:
+
+        20px auto 35px;
+
+
+
+    background:
+
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            var(--color-gold),
+
+            transparent
+
+        );
+
+
+
+}
+
+
+
+/*==================================================
+Hero Tamil Message
+==================================================*/
+
+
+#screen01 .hero-message-tamil{
+
+
+    max-width:760px;
+
+
+
+    font-family:
+
+        var(--font-tamil);
+
+
+
+    font-size:
+
+
+        clamp(
+
+            2rem,
+
+            4vw,
+
+            3.5rem
+
+        );
+
+
+
+    font-weight:700;
+
+
+
+    line-height:
+
+
+        2;
+
+
+
+    color:
+
+
+        var(--color-white);
+
+
+
+    animation:
+
+
+        fade-rise 1s var(--ease-premium)
+        .20s both;
+
+
+
+}
+
+
+
+/*==================================================
+Highlighted Text
+==================================================*/
+
+
+#screen01 .hero-highlight{
+
+
+    color:
+
+        var(--color-gold);
+
+
+
+}
+
+
+
+/*==================================================
+English Message
+==================================================*/
+
+
+#screen01 .hero-message-english{
+
+
+    max-width:650px;
+
+
+
+    margin-top:35px;
+
+
+
+    font-family:
+
+        var(--font-display);
+
+
+
+    font-size:
+
+
+        clamp(
+
+            1.15rem,
+
+            2vw,
+
+            1.7rem
+
+        );
+
+
+
+    line-height:
+
+        1.9;
+
+
+
+    color:
+
+
+        rgba(255,255,255,.82);
+
+
+
+    animation:
+
+
+        fade-rise 1s var(--ease-premium)
+        .45s both;
+
+
+
+}
+
+
+
+/*==================================================
+Emotional Card
+==================================================*/
+
+
+#screen01 .welcome-card{
+
+
+    width:100%;
+
+
+
+    max-width:650px;
+
+
+
+    margin-top:55px;
+
+
+
+    padding:
+
+        32px 40px;
+
+
+
+    border-radius:
+
+
+        var(--radius-card);
+
+
+
+    background:
+
+
+        rgba(255,255,255,.055);
+
+
+
+    border:
+
+
+        1px solid rgba(217,181,106,.25);
+
+
+
+    backdrop-filter:
+
+
+        blur(20px);
+
+
+
+    box-shadow:
+
+
+        var(--shadow-soft);
+
+
+
+    animation:
+
+
+        scale-reveal 1s var(--ease-premium)
+        .70s both;
+
+
+
+}
+
+
+
+/*==================================================
+Welcome Card Text
+==================================================*/
+
+
+#screen01 .welcome-card p{
+
+
+    font-family:
+
+        var(--font-tamil);
+
+
+
+    font-size:
+
+        1.15rem;
+
+
+
+    line-height:
+
+        2;
+
+
+
+    color:
+
+
+        rgba(255,255,255,.90);
+
+
+
+}
+
+
+
+/*==================================================
+CTA Area
+==================================================*/
+
+
+#screen01 .cta-area{
+
+
+    margin-top:
+
+        55px;
+
+
+
+    animation:
+
+
+        fade-rise 1s var(--ease-premium)
+        .90s both;
+
+
+
+}
+
+
+
+/*==================================================
+Hero Background Image
+==================================================*/
+
+
+#screen01 .hero-image{
+
+
+    width:100%;
+
+
+
+    max-width:700px;
+
+
+
+    margin:
+
+        20px auto 0;
+
+
+
+    border-radius:
+
+
+        32px;
+
+
+
+    overflow:hidden;
+
+
+
+    opacity:.92;
+
+
+
+    box-shadow:
+
+
+        var(--shadow-premium);
+
+
+
+}
+
+
+
+/*==================================================
+Mobile
+==================================================*/
+
+
+@media(max-width:768px){
+
+
+
+    #screen01 .hero{
+
+
+        padding:
+
+            20px 0;
+
+
+
+    }
+
+
+
+
+    #screen01 .welcome-card{
+
+
+        padding:
+
+            24px;
+
+
+
+    }
+
+
+
+
+    #screen01 .hero-message-tamil{
+
+
+        line-height:
+
+            1.85;
+
+
+
+    }
+
+
+
+}
+
+
+
+@media(max-width:480px){
+
+
+
+    #screen01 .screen-caption{
+
+
+        margin-bottom:
+
+            20px;
+
+
+
+    }
+
+
+
+
+    #screen01 .welcome-card p{
+
+
+        font-size:
+
+            1rem;
+
+
+
+    }
+
+
+
+
+}
