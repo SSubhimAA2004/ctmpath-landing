@@ -26,13 +26,29 @@ Large Desktop
 
     .container{
 
-        max-width:1400px;
+        max-width:1440px;
 
     }
 
     .hero{
 
-        max-width:1100px;
+        max-width:980px;
+
+        margin-top:120px;
+
+        gap:80px;
+
+    }
+
+    .brand-logo{
+
+        width:220px;
+
+    }
+
+    .welcome-block{
+
+        margin-top:90px;
 
     }
 
@@ -42,9 +58,27 @@ Large Desktop
 
     }
 
+    .tamil-welcome{
+
+        font-size:3.8rem;
+
+    }
+
+    .tamil-intro{
+
+        font-size:3.3rem;
+
+    }
+
     .english{
 
-        font-size:1.6rem;
+        font-size:2.15rem;
+
+    }
+
+    .english-welcome{
+
+        font-size:2.6rem;
 
     }
 
@@ -59,7 +93,7 @@ Desktop
 
     .container{
 
-        max-width:1100px;
+        max-width:1120px;
 
     }
 
@@ -74,26 +108,61 @@ Laptop
 
     .container{
 
-        max-width:960px;
+        max-width:980px;
 
     }
 
     .hero{
 
-        gap:36px;
+        margin-top:100px;
+
+        gap:64px;
+
+    }
+
+    .brand-logo{
+
+        width:190px;
+
+    }
+
+    .welcome-block{
+
+        margin-top:70px;
 
     }
 
     .tamil{
 
-        font-size:3.6rem;
+        font-size:3.8rem;
 
     }
 
-}
+    .tamil-welcome{
 
+        font-size:3rem;
 
-/*==================================================
+    }
+
+    .tamil-intro{
+
+        font-size:2.7rem;
+
+    }
+
+    .english{
+
+        font-size:1.8rem;
+
+    }
+
+    .english-welcome{
+
+        font-size:2rem;
+
+    }
+
+}/*==================================================
 Tablet Landscape
 ==================================================*/
 
@@ -101,7 +170,13 @@ Tablet Landscape
 
     .screen{
 
-        padding:70px 36px;
+        padding:
+
+            160px
+
+            36px
+
+            60px;
 
     }
 
@@ -111,9 +186,23 @@ Tablet Landscape
 
     }
 
-    .logo{
+    .hero{
+
+        margin-top:80px;
+
+        gap:54px;
+
+    }
+
+    .brand-logo{
 
         width:170px;
+
+    }
+
+    .welcome-block{
+
+        margin-top:58px;
 
     }
 
@@ -123,9 +212,27 @@ Tablet Landscape
 
     }
 
+    .tamil-welcome{
+
+        font-size:2.6rem;
+
+    }
+
+    .tamil-intro{
+
+        font-size:2.3rem;
+
+    }
+
     .english{
 
-        font-size:1.25rem;
+        font-size:1.55rem;
+
+    }
+
+    .english-welcome{
+
+        font-size:1.8rem;
 
     }
 
@@ -146,13 +253,25 @@ Tablet Portrait
 
     .screen{
 
-        padding:60px 28px;
+        padding:
+
+            150px
+
+            28px
+
+            56px;
 
     }
 
     .hero{
 
-        gap:32px;
+        gap:48px;
+
+    }
+
+    .welcome-block{
+
+        margin-top:46px;
 
     }
 
@@ -181,7 +300,13 @@ Mobile
 
     .screen{
 
-        padding:48px 20px;
+        padding:
+
+            138px
+
+            20px
+
+            42px;
 
         min-height:100svh;
 
@@ -195,13 +320,33 @@ Mobile
 
     .hero{
 
-        gap:26px;
+        width:100%;
+
+        margin-top:64px;
+
+        gap:40px;
 
     }
 
-    .logo{
+    .brand-logo{
 
-        width:140px;
+        width:145px;
+
+    }
+
+    .welcome-block{
+
+        margin-top:36px;
+
+        margin-bottom:18px;
+
+        gap:18px;
+
+    }
+
+    .introduction-block{
+
+        gap:22px;
 
     }
 
@@ -215,19 +360,37 @@ Mobile
 
     .tamil{
 
-        font-size:2.35rem;
+        font-size:2.45rem;
 
-        line-height:1.45;
+        line-height:1.42;
+
+    }
+
+    .tamil-welcome{
+
+        font-size:2.15rem;
+
+    }
+
+    .tamil-intro{
+
+        font-size:1.95rem;
 
     }
 
     .english{
 
-        font-size:1rem;
+        max-width:100%;
+
+        font-size:1.2rem;
 
         line-height:1.75;
 
-        max-width:100%;
+    }
+
+    .english-welcome{
+
+        font-size:1.5rem;
 
     }
 
@@ -241,24 +404,23 @@ Mobile
 
     h1{
 
-        font-size:2.2rem;
+        font-size:2.8rem;
 
     }
 
     h2{
 
-        font-size:1.8rem;
+        font-size:2.2rem;
 
     }
 
     h3{
 
-        font-size:1.5rem;
+        font-size:1.8rem;
 
     }
 
 }
-
 
 /*==================================================
 Small Mobile
@@ -268,13 +430,43 @@ Small Mobile
 
     .screen{
 
-        padding:40px 16px;
+        padding:
+
+            120px
+
+            16px
+
+            34px;
 
     }
 
-    .logo{
+    .brand-logo{
 
         width:120px;
+
+    }
+
+    .hero{
+
+        margin-top:52px;
+
+        gap:34px;
+
+    }
+
+    .welcome-block{
+
+        margin-top:30px;
+
+        margin-bottom:16px;
+
+        gap:16px;
+
+    }
+
+    .introduction-block{
+
+        gap:18px;
 
     }
 
@@ -284,9 +476,27 @@ Small Mobile
 
     }
 
+    .tamil-welcome{
+
+        font-size:1.8rem;
+
+    }
+
+    .tamil-intro{
+
+        font-size:1.65rem;
+
+    }
+
     .english{
 
-        font-size:.95rem;
+        font-size:1.05rem;
+
+    }
+
+    .english-welcome{
+
+        font-size:1.25rem;
 
     }
 
@@ -317,33 +527,63 @@ Very Small Mobile
 
 @media (max-width:360px){
 
+    .brand-logo{
+
+        width:104px;
+
+    }
+
+    .hero{
+
+        gap:28px;
+
+    }
+
     .tamil{
 
         font-size:1.8rem;
 
     }
 
+    .tamil-welcome{
+
+        font-size:1.6rem;
+
+    }
+
+    .tamil-intro{
+
+        font-size:1.45rem;
+
+    }
+
     .english{
 
-        font-size:.90rem;
+        font-size:.92rem;
+
+    }
+
+    .english-welcome{
+
+        font-size:1.08rem;
 
     }
 
     .btn{
 
-        min-height:66px;
+        min-height:56px;
 
     }
 
-    .btn div{
+    .btn-title{
 
-        font-size:1.05rem;
+        font-size:.95rem;
 
     }
 
-    .btn small{
+    .btn-subtitle{
 
-        font-size:.75rem;
+        font-size:.72rem;
 
     }
 
@@ -358,7 +598,13 @@ Landscape Phones
 
     .screen{
 
-        padding:30px 24px;
+        padding:
+
+            90px
+
+            24px
+
+            30px;
 
         min-height:auto;
 
@@ -366,13 +612,23 @@ Landscape Phones
 
     .hero{
 
-        gap:18px;
+        margin-top:20px;
+
+        gap:20px;
 
     }
 
-    .logo{
+    .brand-logo{
 
         width:90px;
+
+    }
+
+    .welcome-block{
+
+        margin-top:20px;
+
+        gap:12px;
 
     }
 
@@ -384,7 +640,7 @@ Landscape Phones
 
     .english{
 
-        font-size:.95rem;
+        font-size:1rem;
 
     }
 
@@ -426,10 +682,11 @@ Safe Area Support
 
         padding-right:max(20px,env(safe-area-inset-right));
 
-        padding-top:max(40px,env(safe-area-inset-top));
+        padding-top:max(120px,env(safe-area-inset-top));
 
         padding-bottom:max(40px,env(safe-area-inset-bottom));
 
     }
 
 }
+
