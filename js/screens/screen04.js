@@ -1,4 +1,5 @@
 
+
 /*======================================================================
 
 CTM PATH™ Guided Journey v6.0
@@ -20,20 +21,35 @@ Responsibility:
 ======================================================================*/
 
 
+'use strict';
+
+
+
 /*==================================================
 Screen 04 Initialisation
+
+Called by loader.js
+
+CTM.initScreen04()
+
 ==================================================*/
 
-function initScreen04(){
+
+CTM.initScreen04 = function(){
+
 
 
     const screen04 =
+
         document.querySelector("#screen04");
+
 
 
     if(!screen04){
 
+
         return;
+
 
     }
 
@@ -42,7 +58,11 @@ function initScreen04(){
     setupScreen04Navigation();
 
 
-}
+
+};
+
+
+
 
 
 
@@ -50,63 +70,75 @@ function initScreen04(){
 Navigation Setup
 ==================================================*/
 
+
 function setupScreen04Navigation(){
 
 
+
     const nextButton =
+
         document.querySelector(
+
             "#screen04 .journey-next"
+
         );
 
 
 
     if(!nextButton){
 
+
         return;
+
 
     }
 
 
 
+
+
     nextButton.addEventListener(
+
         "click",
+
         function(){
 
 
+
             const nextScreen =
+
                 this.getAttribute(
+
                     "data-next-screen"
+
                 );
+
+
 
 
 
             if(nextScreen){
 
-                navigateToScreen(nextScreen);
+
+
+                navigateToScreen(
+
+                    nextScreen
+
+                );
+
+
 
             }
 
 
+
         }
+
+
 
     );
 
 
+
 }
-
-
-
-/*==================================================
-Screen 04 Ready
-==================================================*/
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-
-        initScreen04();
-
-
-    }
-);
