@@ -1,1 +1,1488 @@
 
+/*
+======================================================================
+
+CTM PATH™ Guided Journey v6.0
+
+File
+css/screens/screen03.css
+
+Screen
+03 — THE DISCOVERY™
+
+Purpose
+Self discovery transition
+
+Responsibility
+• Screen 03 layout
+• Discovery light symbol
+• Tamil-first typography
+• Emotional pacing
+• Premium transitions
+• Guided navigation
+
+======================================================================
+*/
+
+
+/*==================================================
+Screen 03 Base
+==================================================*/
+
+
+#screen03{
+
+
+    width:100%;
+
+
+    min-height:100vh;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+
+    position:relative;
+
+
+    overflow:hidden;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+Ambient Background Enhancement
+
+Aligned with Screen 01 and Screen 02
+
+==================================================*/
+
+
+#screen03::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+
+
+
+    background:
+
+
+
+        radial-gradient(
+
+            circle at 50% 20%,
+
+            rgba(24,166,109,.18),
+
+            transparent 35%
+
+        ),
+
+
+
+
+
+        radial-gradient(
+
+            circle at 50% 35%,
+
+            rgba(217,181,106,.12),
+
+            transparent 30%
+
+        ),
+
+
+
+
+
+        linear-gradient(
+
+            180deg,
+
+            #03152F 0%,
+
+            #061D38 48%,
+
+            #020D20 100%
+
+        );
+
+
+
+
+
+    pointer-events:none;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+Container
+
+==================================================*/
+
+
+#screen03 .container{
+
+
+    width:100%;
+
+
+    max-width:1200px;
+
+
+
+    padding:
+
+
+        50px 40px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+Hero Wrapper
+
+==================================================*/
+
+
+.screen03-hero{
+
+
+    width:100%;
+
+
+
+    display:flex;
+
+
+
+    flex-direction:column;
+
+
+
+    align-items:center;
+
+
+
+    text-align:center;
+
+
+
+
+
+    position:relative;
+
+
+
+    z-index:2;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+Discovery Light Symbol
+
+Primary Emotional Anchor
+
+==================================================*/
+
+
+.screen03-symbol{
+
+
+    width:
+
+
+        250px;
+
+
+
+    margin-bottom:
+
+
+        45px;
+
+
+
+    animation:
+
+
+        discoveryFloat 6s ease-in-out infinite;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.screen03-symbol img{
+
+
+    width:100%;
+
+
+
+    height:auto;
+
+
+
+    display:block;
+
+
+
+    filter:
+
+
+        drop-shadow(
+
+            0 25px 55px rgba(217,181,106,.30)
+
+        )
+
+        drop-shadow(
+
+            0 0 40px rgba(24,166,109,.20)
+
+        );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+@keyframes discoveryFloat{
+
+
+    0%,100%{
+
+
+        transform:
+
+
+            translateY(0);
+
+
+
+    }
+
+
+
+    50%{
+
+
+        transform:
+
+
+            translateY(-10px);
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+/*==================================================
+Tamil Heading
+
+Primary Question
+
+==================================================*/
+
+
+.screen03-tamil h1{
+
+
+    font-family:
+
+
+        "Noto Sans Tamil",
+
+
+        "Latha",
+
+
+        sans-serif;
+
+
+
+    font-size:
+
+
+        2.8rem;
+
+
+
+    line-height:
+
+
+        1.5;
+
+
+
+    font-weight:
+
+
+        700;
+
+
+
+    color:
+
+
+        var(--color-white);
+
+
+
+    margin-bottom:
+
+
+        45px;
+
+
+
+}
+
+/*==================================================
+Tamil Message
+
+==================================================*/
+
+
+.screen03-tamil p{
+
+
+    font-family:
+
+
+        "Noto Sans Tamil",
+
+
+        sans-serif;
+
+
+
+    font-size:
+
+
+        1.55rem;
+
+
+
+    line-height:
+
+
+        2.35;
+
+
+
+    font-weight:
+
+
+        500;
+
+
+
+    color:
+
+
+        rgba(255,255,255,.94);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+English Message
+
+Supporting Translation
+
+==================================================*/
+
+
+.screen03-english{
+
+
+    margin-top:
+
+
+        40px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.screen03-english p{
+
+
+    font-family:
+
+
+        "Inter",
+
+
+        Arial,
+
+
+        sans-serif;
+
+
+
+    font-size:
+
+
+        1.4rem;
+
+
+
+    line-height:
+
+
+        2;
+
+
+
+    font-weight:
+
+
+        500;
+
+
+
+    letter-spacing:
+
+
+        .03em;
+
+
+
+    color:
+
+
+        rgba(245,244,238,.92);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+Gold Divider
+
+==================================================*/
+
+
+#screen03 .gold-divider{
+
+
+    width:
+
+
+        90px;
+
+
+
+    height:
+
+
+        2px;
+
+
+
+    margin:
+
+
+        40px auto;
+
+
+
+    background:
+
+
+        linear-gradient(
+
+
+            90deg,
+
+
+            transparent,
+
+
+            var(--color-gold),
+
+
+            transparent
+
+
+        );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+Journey Continuation
+
+Premium Navigation Cue
+
+==================================================*/
+
+
+.screen03-next{
+
+
+    background:
+
+
+        transparent;
+
+
+
+    border:
+
+
+        none;
+
+
+
+    display:
+
+
+        flex;
+
+
+
+    flex-direction:
+
+
+        column;
+
+
+
+    align-items:
+
+
+        center;
+
+
+
+    justify-content:
+
+
+        center;
+
+
+
+    cursor:
+
+
+        pointer;
+
+
+
+    color:
+
+
+        var(--color-gold);
+
+
+
+    padding:
+
+
+        12px 30px;
+
+
+
+    transition:
+
+
+        all .45s var(--ease-premium);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+Continue Main Text
+
+==================================================*/
+
+
+.screen03-next .next-label{
+
+
+    font-family:
+
+
+        "Noto Sans Tamil",
+
+
+        sans-serif;
+
+
+
+    font-size:
+
+
+        1.15rem;
+
+
+
+    font-weight:
+
+
+        600;
+
+
+
+    letter-spacing:
+
+
+        .05em;
+
+
+
+    color:
+
+
+        var(--color-gold);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+Arrow Indicator
+
+==================================================*/
+
+
+.screen03-next .next-arrow{
+
+
+    margin:
+
+
+        12px 0;
+
+
+
+    font-size:
+
+
+        1.5rem;
+
+
+
+    color:
+
+
+        var(--color-gold);
+
+
+
+    animation:
+
+
+        arrowFloat 2s ease-in-out infinite;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+@keyframes arrowFloat{
+
+
+    0%,100%{
+
+
+        transform:
+
+
+            translateY(0);
+
+
+
+    }
+
+
+
+    50%{
+
+
+        transform:
+
+
+            translateY(8px);
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+English Continue Text
+
+==================================================*/
+
+
+.screen03-next .next-subtitle{
+
+
+    font-family:
+
+
+        "Inter",
+
+
+        sans-serif;
+
+
+
+    font-size:
+
+
+        .85rem;
+
+
+
+    letter-spacing:
+
+
+        .25em;
+
+
+
+    text-transform:
+
+
+        uppercase;
+
+
+
+    color:
+
+
+        rgba(245,244,238,.65);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+Hover
+
+==================================================*/
+
+
+.screen03-next:hover{
+
+
+    transform:
+
+
+        translateY(-5px);
+
+
+
+}
+
+
+
+.screen03-next:hover .next-label{
+
+
+    color:
+
+
+        #FFF0A3;
+
+
+
+}
+
+/*==================================================
+Tablet Responsive
+
+==================================================*/
+
+
+@media(max-width:900px){
+
+
+
+    #screen03 .container{
+
+
+        padding:
+
+
+            40px 30px;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen03-symbol{
+
+
+        width:
+
+
+            210px;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen03-tamil h1{
+
+
+        font-size:
+
+
+            2.4rem;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen03-tamil p{
+
+
+        font-size:
+
+
+            1.35rem;
+
+
+
+        line-height:
+
+
+            2.2;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen03-english p{
+
+
+        font-size:
+
+
+            1.2rem;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+Mobile Responsive
+
+==================================================*/
+
+
+@media(max-width:600px){
+
+
+
+    #screen03{
+
+
+        align-items:
+
+
+            flex-start;
+
+
+
+        padding-top:
+
+
+            25px;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    #screen03 .container{
+
+
+        padding:
+
+
+            30px 22px 50px;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen03-symbol{
+
+
+        width:
+
+
+            165px;
+
+
+
+        margin-bottom:
+
+
+            35px;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen03-tamil h1{
+
+
+        font-size:
+
+
+            2rem;
+
+
+
+        line-height:
+
+
+            1.5;
+
+
+
+        margin-bottom:
+
+
+            35px;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen03-tamil p{
+
+
+        font-size:
+
+
+            1.12rem;
+
+
+
+        line-height:
+
+
+            2.1;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen03-english{
+
+
+        margin-top:
+
+
+            30px;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen03-english p{
+
+
+        font-size:
+
+
+            1rem;
+
+
+
+        line-height:
+
+
+            1.9;
+
+
+
+        letter-spacing:
+
+
+            .02em;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    #screen03 .gold-divider{
+
+
+        margin:
+
+
+            35px auto;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen03-next{
+
+
+        padding:
+
+
+            10px 20px;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen03-next .next-label{
+
+
+        font-size:
+
+
+            1rem;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen03-next .next-arrow{
+
+
+        font-size:
+
+
+            1.25rem;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+Small Mobile Devices
+
+==================================================*/
+
+
+@media(max-width:380px){
+
+
+
+    .screen03-symbol{
+
+
+        width:
+
+
+            145px;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen03-tamil h1{
+
+
+        font-size:
+
+
+            1.8rem;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen03-tamil p{
+
+
+        font-size:
+
+
+            1.05rem;
+
+
+
+        line-height:
+
+
+            2;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen03-english p{
+
+
+        font-size:
+
+
+            .95rem;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+Reduced Motion Accessibility
+
+==================================================*/
+
+
+@media(prefers-reduced-motion:reduce){
+
+
+
+    .screen03-symbol,
+
+
+    .screen03-next .next-arrow{
+
+
+        animation:
+
+
+            none;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    .screen03-next{
+
+
+        transition:
+
+
+            none;
+
+
+
+    }
+
+
+
+}
