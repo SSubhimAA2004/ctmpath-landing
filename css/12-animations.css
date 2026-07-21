@@ -28,6 +28,8 @@ Animation Variables
 
     --ease-premium:cubic-bezier(.22,.61,.36,1);
 
+    --ease-cinematic:cubic-bezier(.19,1,.22,1);
+
     --speed-fast:.25s;
 
     --speed-normal:.45s;
@@ -35,6 +37,8 @@ Animation Variables
     --speed-slow:.8s;
 
     --speed-extra:1.4s;
+
+    --speed-cinematic:2s;
 
 }
 
@@ -51,7 +55,7 @@ Screen Fade
 
         transform:
 
-            translateY(24px);
+            translateY(20px);
 
     }
 
@@ -80,7 +84,7 @@ Hero Reveal
 
         transform:
 
-            translateY(50px);
+            translateY(42px);
 
     }
 
@@ -98,6 +102,27 @@ Hero Reveal
 
 
 /*==================================================
+Soft Fade
+==================================================*/
+
+@keyframes softFade{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+
+/*==================================================
 Logo Float
 ==================================================*/
 
@@ -105,25 +130,19 @@ Logo Float
 
     0%{
 
-        transform:
-
-            translateY(0px);
+        transform:translateY(0);
 
     }
 
     50%{
 
-        transform:
-
-            translateY(-8px);
+        transform:translateY(-6px);
 
     }
 
     100%{
 
-        transform:
-
-            translateY(0px);
+        transform:translateY(0);
 
     }
 
@@ -140,7 +159,7 @@ Gold Glow
 
         filter:
 
-            drop-shadow(0 0 6px rgba(216,179,106,.15));
+            drop-shadow(0 0 8px rgba(216,179,106,.12));
 
     }
 
@@ -148,7 +167,7 @@ Gold Glow
 
         filter:
 
-            drop-shadow(0 0 20px rgba(216,179,106,.40));
+            drop-shadow(0 0 24px rgba(216,179,106,.26));
 
     }
 
@@ -156,12 +175,11 @@ Gold Glow
 
         filter:
 
-            drop-shadow(0 0 6px rgba(216,179,106,.15));
+            drop-shadow(0 0 8px rgba(216,179,106,.12));
 
     }
 
 }
-
 
 /*==================================================
 Button Pulse
@@ -173,7 +191,7 @@ Button Pulse
 
         box-shadow:
 
-            0 0 0 rgba(22,165,106,.18);
+            0 0 0 rgba(22,165,106,.14);
 
     }
 
@@ -181,7 +199,7 @@ Button Pulse
 
         box-shadow:
 
-            0 0 28px rgba(22,165,106,.28);
+            0 0 30px rgba(22,165,106,.24);
 
     }
 
@@ -189,7 +207,7 @@ Button Pulse
 
         box-shadow:
 
-            0 0 0 rgba(22,165,106,.18);
+            0 0 0 rgba(22,165,106,.14);
 
     }
 
@@ -204,17 +222,13 @@ Shimmer
 
     from{
 
-        transform:
-
-            translateX(-150%);
+        transform:translateX(-160%);
 
     }
 
     to{
 
-        transform:
-
-            translateX(220%);
+        transform:translateX(220%);
 
     }
 
@@ -229,7 +243,7 @@ Divider Glow
 
     0%{
 
-        opacity:.4;
+        opacity:.35;
 
     }
 
@@ -241,7 +255,7 @@ Divider Glow
 
     100%{
 
-        opacity:.4;
+        opacity:.35;
 
     }
 
@@ -258,15 +272,15 @@ Background Pulse
 
         transform:scale(1);
 
-        opacity:.25;
+        opacity:.22;
 
     }
 
     50%{
 
-        transform:scale(1.08);
+        transform:scale(1.06);
 
-        opacity:.5;
+        opacity:.42;
 
     }
 
@@ -274,7 +288,7 @@ Background Pulse
 
         transform:scale(1);
 
-        opacity:.25;
+        opacity:.22;
 
     }
 
@@ -311,6 +325,35 @@ Text Fade
 
 
 /*==================================================
+Sequential Reveal
+==================================================*/
+
+@keyframes sequenceReveal{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateY(24px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+
+/*==================================================
 Application
 ==================================================*/
 
@@ -318,7 +361,7 @@ Application
 
     animation:
 
-        screenFade .7s var(--ease-premium);
+        screenFade .8s var(--ease-cinematic);
 
 }
 
@@ -327,7 +370,7 @@ Application
 
     animation:
 
-        heroReveal 1s var(--ease-premium);
+        heroReveal 1.15s var(--ease-cinematic);
 
 }
 
@@ -336,9 +379,50 @@ Application
 
     animation:
 
-        logoFloat 5s ease-in-out infinite,
+        softFade .9s var(--ease-cinematic),
 
-        goldGlow 5s ease-in-out infinite;
+        logoFloat 7s ease-in-out infinite 1s,
+
+        goldGlow 7s ease-in-out infinite 1s;
+
+}
+
+
+.welcome-block{
+
+    animation:
+
+        sequenceReveal 1s var(--ease-cinematic);
+
+    animation-delay:.35s;
+
+    animation-fill-mode:both;
+
+}
+
+
+.introduction-block{
+
+    animation:
+
+        sequenceReveal 1s var(--ease-cinematic);
+
+    animation-delay:.8s;
+
+    animation-fill-mode:both;
+
+}
+
+
+.cta-block{
+
+    animation:
+
+        sequenceReveal 1s var(--ease-cinematic);
+
+    animation-delay:1.3s;
+
+    animation-fill-mode:both;
 
 }
 
@@ -347,7 +431,7 @@ Application
 
     animation:
 
-        textFade .8s ease forwards;
+        textFade .9s var(--ease-cinematic);
 
 }
 
@@ -356,7 +440,7 @@ Application
 
     animation:
 
-        textFade 1.15s ease forwards;
+        textFade 1.2s var(--ease-cinematic);
 
 }
 
@@ -365,7 +449,7 @@ Application
 
     animation:
 
-        dividerGlow 3.5s infinite;
+        dividerGlow 4.5s ease-in-out infinite;
 
 }
 
@@ -374,10 +458,9 @@ Application
 
     animation:
 
-        buttonPulse 4s infinite;
+        buttonPulse 5s ease-in-out infinite;
 
 }
-
 
 /*==================================================
 Hover Motion
@@ -403,7 +486,11 @@ Hover Motion
 
         border-color .35s var(--ease-premium),
 
-        background .35s var(--ease-premium);
+        background .35s var(--ease-premium),
+
+        opacity .35s var(--ease-premium),
+
+        filter .35s var(--ease-premium);
 
 }
 
@@ -421,7 +508,7 @@ Hover Motion
 
     transform:
 
-        translateY(-5px);
+        translateY(-3px);
 
 }
 
@@ -481,7 +568,7 @@ Shimmer Utility
 
             transparent,
 
-            rgba(255,255,255,.18),
+            rgba(255,255,255,.16),
 
             transparent
 
@@ -489,7 +576,7 @@ Shimmer Utility
 
     animation:
 
-        shimmer 3.5s infinite;
+        shimmer 4s linear infinite;
 
 }
 
@@ -502,7 +589,7 @@ Glow Utility
 
     animation:
 
-        goldGlow 4s infinite;
+        goldGlow 5s ease-in-out infinite;
 
 }
 
@@ -515,7 +602,7 @@ Float Utility
 
     animation:
 
-        logoFloat 6s ease-in-out infinite;
+        logoFloat 7s ease-in-out infinite;
 
 }
 
@@ -528,7 +615,7 @@ Fade Utilities
 
     animation:
 
-        screenFade .6s ease forwards;
+        screenFade .8s var(--ease-cinematic) forwards;
 
 }
 
@@ -537,7 +624,7 @@ Fade Utilities
 
     animation:
 
-        heroReveal .7s ease forwards;
+        heroReveal 1s var(--ease-cinematic) forwards;
 
 }
 
@@ -546,7 +633,42 @@ Fade Utilities
 
     animation:
 
-        textFade .8s ease forwards;
+        textFade .9s var(--ease-cinematic) forwards;
+
+}
+
+
+/*==================================================
+Stagger Utilities
+==================================================*/
+
+.delay-1{
+
+    animation-delay:.20s;
+
+}
+
+.delay-2{
+
+    animation-delay:.40s;
+
+}
+
+.delay-3{
+
+    animation-delay:.60s;
+
+}
+
+.delay-4{
+
+    animation-delay:.80s;
+
+}
+
+.delay-5{
+
+    animation-delay:1.00s;
 
 }
 
@@ -572,3 +694,4 @@ Reduced Motion
     }
 
 }
+
