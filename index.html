@@ -1,163 +1,179 @@
 
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="ta">
 
 <head>
 
+    <!--
+    ==============================================================
+    CTM PATH™ Guided Journey v1.0
+
+    File
+    index.html
+
+    Purpose
+    Application Entry Point
+
+    Responsibility
+    • Load application shell
+    • Load foundation styles
+    • Load Screen 01
+    • Initialize CTM PATH™ Journey
+
+    ==============================================================
+    -->
+
+
     <meta charset="UTF-8">
+
 
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
+
+    <title>
+        CTM PATH™ | Your Journey Begins
+    </title>
+
+
     <meta
-        http-equiv="X-UA-Compatible"
-        content="IE=edge">
+        name="description"
+        content="CTM PATH™ Guided Journey — Discover the next chapter of your financial life.">
 
-    <title>CTM PATH™ Guided Journey v6.0</title>
 
-    <!-- ==========================================================
-         CSS FOUNDATION
-    =========================================================== -->
+    <!--==================================================
+    Google Fonts
+    ==================================================-->
 
-    <link rel="stylesheet" href="css/01-reset.css">
-    <link rel="stylesheet" href="css/02-tokens.css">
-    <link rel="stylesheet" href="css/03-typography.css">
-    <link rel="stylesheet" href="css/04-layout.css">
-    <link rel="stylesheet" href="css/05-buttons.css">
-    <link rel="stylesheet" href="css/06-inputs.css">
-    <link rel="stylesheet" href="css/07-cards.css">
-    <link rel="stylesheet" href="css/08-progress.css">
-    <link rel="stylesheet" href="css/09-choice.css">
-    <link rel="stylesheet" href="css/10-message.css">
-    <link rel="stylesheet" href="css/11-booking.css">
-    <link rel="stylesheet" href="css/12-animations.css">
-    <link rel="stylesheet" href="css/13-mobile.css">
-    <link rel="stylesheet" href="css/14-utilities.css">
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+
+    <!--==================================================
+    Foundation CSS
+    ==================================================-->
+
+    <link
+        rel="stylesheet"
+        href="css/foundation/global.css">
+
+
+    <link
+        rel="stylesheet"
+        href="css/foundation/typography.css">
+
+
+    <link
+        rel="stylesheet"
+        href="css/foundation/buttons.css">
+
+
+    <link
+        rel="stylesheet"
+        href="css/foundation/animations.css">
+
+
+    <link
+        rel="stylesheet"
+        href="css/foundation/responsive.css">
+
+
+
+    <!--==================================================
+    Screen CSS
+    ==================================================-->
+
+    <link
+        rel="stylesheet"
+        href="css/screens/screen01.css">
+
 
 </head>
 
+
+
 <body>
 
-    <!-- ==========================================================
-         APPLICATION SHELL
-    =========================================================== -->
 
-    <div id="app-shell">
+    <!--==================================================
+    Application Container
+    ==================================================-->
 
-        <!-- ======================================================
-             GLOBAL HEADER
-        ======================================================= -->
 
-        <header id="global-header">
+    <main
+        id="app">
 
-            <div class="brand">
 
-                <img
+        <!-- Dynamic Screens Load Here -->
 
-                    src="assets/CTM_Logo.png"
+        <div
+            id="screen-container">
 
-                    alt="CTM PATH™"
+        </div>
 
-                    class="brand-logo">
 
-            </div>
+    </main>
 
-        </header>
 
-        <!-- ======================================================
-             GUIDED JOURNEY
-        ======================================================= -->
 
-        <main id="journey-container">
+    <!--==================================================
+    Foundation JavaScript
+    ==================================================-->
 
-            <div id="screen-container">
 
-                <!--
-                Screen Loader injects screens here.
-                -->
+    <script
+        src="js/foundation/state.js">
+    </script>
 
-            </div>
 
-        </main>
+    <script
+        src="js/foundation/storage.js">
+    </script>
 
-    </div>
 
-    <!-- ==========================================================
-         CORE
-    =========================================================== -->
+    <script
+        src="js/foundation/loader.js">
+    </script>
 
-    <script src="js/00-core.js"></script>
 
-    <!-- ==========================================================
-         APPLICATION
-    =========================================================== -->
+    <script
+        src="js/foundation/router.js">
+    </script>
 
-    <script src="js/01-app.js"></script>
-    <script src="js/02-router.js"></script>
-    <script src="js/03-loader.js"></script>
 
-    <!-- ==========================================================
-         APPLICATION STATE
-    =========================================================== -->
+    <script
+        src="js/foundation/app.js">
+    </script>
 
-    <script src="js/04-state-core.js"></script>
-    <script src="js/05-state-visitor.js"></script>
-    <script src="js/06-state-progress.js"></script>
 
-    <!-- ==========================================================
-         STORAGE
-    =========================================================== -->
 
-    <script src="js/07-storage.js"></script>
+    <!--==================================================
+    Screen JavaScript
+    ==================================================-->
 
-    <!-- ==========================================================
-         USER EVENTS
-    =========================================================== -->
 
-    <script src="js/08-events-buttons.js"></script>
-    <script src="js/09-events-inputs.js"></script>
-    <script src="js/10-events-choices.js"></script>
+    <script
+        src="js/screens/screen01.js">
+    </script>
 
-    <!-- ==========================================================
-         PERSONALIZATION
-    =========================================================== -->
 
-    <script src="js/11-personalization-name.js"></script>
-    <script src="js/12-personalization-text.js"></script>
-
-    <!-- ==========================================================
-         CALCULATION ENGINE
-    =========================================================== -->
-
-    <script src="js/13-calculations-score.js"></script>
-    <script src="js/14-calculations-pattern.js"></script>
-    <script src="js/15-calculations-insights.js"></script>
-
-    <!-- ==========================================================
-         ANALYTICS
-    =========================================================== -->
-
-    <script src="js/16-analytics.js"></script>
-
-    <!-- ==========================================================
-         BOOKING
-    =========================================================== -->
-
-    <script src="js/17-booking.js"></script>
-
-    <!-- ==========================================================
-         GOOGLE SHEETS
-    =========================================================== -->
-
-    <script src="js/18-sheets.js"></script>
-
-    <!-- ==========================================================
-         UTILITIES
-    =========================================================== -->
-
-    <script src="js/19-utils.js"></script>
 
 </body>
+
 
 </html>
