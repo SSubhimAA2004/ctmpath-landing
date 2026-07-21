@@ -23,21 +23,21 @@ Responsibility
     Brand Colors
     ==================================================*/
 
-    --color-primary:#16A56A;
+    --color-primary:#18A66D;
 
-    --color-primary-hover:#20C77E;
+    --color-primary-hover:#24C980;
 
-    --color-primary-dark:#0F7750;
+    --color-primary-dark:#10734E;
 
-    --color-primary-soft:#39D892;
+    --color-primary-soft:#4ADE97;
 
-    --color-accent:#D8B36A;
+    --color-accent:#D9B56A;
 
-    --color-accent-light:#E9C98A;
+    --color-accent-light:#EFD9A8;
 
-    --color-accent-dark:#A88439;
+    --color-accent-dark:#A57B2D;
 
-    --color-accent-soft:#F6E6C3;
+    --color-accent-soft:#F8ECD2;
 
     --color-white:#FFFFFF;
 
@@ -48,27 +48,31 @@ Responsibility
     Premium Background Palette
     ==================================================*/
 
-    --bg-page:#071221;
+    --bg-page:#06101C;
 
-    --bg-page-top:#0B2344;
+    --bg-page-top:#12315D;
 
-    --bg-page-bottom:#040A13;
+    --bg-page-middle:#0B1E39;
 
-    --bg-surface:#0F1B2E;
+    --bg-page-bottom:#03070E;
 
-    --bg-card:rgba(18,28,45,.88);
+    --bg-surface:#0D192A;
 
-    --bg-card-hover:rgba(24,37,59,.94);
+    --bg-surface-light:#142741;
+
+    --bg-card:rgba(18,29,48,.88);
+
+    --bg-card-hover:rgba(25,39,61,.94);
 
     --bg-overlay:rgba(0,0,0,.72);
 
-    --bg-button:#15734C;
+    --bg-button:#177B52;
 
-    --bg-button-hover:#1A8D5D;
+    --bg-button-hover:#1E9663;
 
-    --bg-button-active:#0F6642;
+    --bg-button-active:#126947;
 
-    --bg-divider:rgba(216,179,106,.18);
+    --bg-divider:rgba(217,181,106,.18);
 
 
     /*==================================================
@@ -79,13 +83,15 @@ Responsibility
 
         radial-gradient(
 
-            circle at center,
+            ellipse at center,
 
-            rgba(34,71,122,.30) 0%,
+            rgba(45,88,150,.24) 0%,
 
-            rgba(13,32,60,.14) 38%,
+            rgba(24,55,96,.14) 28%,
 
-            rgba(7,18,33,0) 72%
+            rgba(8,18,34,.05) 58%,
+
+            transparent 82%
 
         );
 
@@ -95,7 +101,7 @@ Responsibility
 
             180deg,
 
-            rgba(255,255,255,.015) 0%,
+            rgba(255,255,255,.02) 0%,
 
             rgba(255,255,255,0) 100%
 
@@ -106,19 +112,25 @@ Responsibility
     Text
     ==================================================*/
 
-    --text-primary:#F7F6F2;
+    --text-primary:#FAF8F2;
 
-    --text-secondary:#E2DFD7;
+    --text-secondary:#E8E3D9;
 
-    --text-muted:#AEB7C5;
+    --text-muted:#B8C0CB;
 
-    --text-subtle:#8994A6;
+    --text-subtle:#8D97A8;
 
-    --text-gold:#D8B36A;
+    --text-hero:#FFFDFC;
 
-    --text-gold-light:#E9D0A0;
+    --text-inverse:#09111B;
 
-    --text-green:#59D894;
+    --text-gold:#D9B56A;
+
+    --text-gold-light:#EFD9A8;
+
+    --text-gold-dark:#A57B2D;
+
+    --text-green:#5CDD98;
 
 
     /*==================================================
@@ -131,12 +143,11 @@ Responsibility
 
     --border-strong:rgba(255,255,255,.22);
 
-    --border-gold:rgba(216,179,106,.35);
+    --border-gold:rgba(217,181,106,.35);
 
-    --border-gold-soft:rgba(216,179,106,.18);
+    --border-gold-soft:rgba(217,181,106,.18);
 
-    --border-green:rgba(22,165,106,.35);
-
+    --border-green:rgba(24,166,109,.35);
 
     /*==================================================
     Shadows
@@ -148,35 +159,51 @@ Responsibility
 
     --shadow-sm:
 
-        0 8px 18px rgba(0,0,0,.25);
+        0 10px 24px rgba(0,0,0,.24);
 
     --shadow-md:
 
-        0 18px 40px rgba(0,0,0,.38);
+        0 22px 48px rgba(0,0,0,.38);
 
     --shadow-lg:
 
-        0 30px 70px rgba(0,0,0,.55);
+        0 36px 82px rgba(0,0,0,.56);
 
     --shadow-xl:
 
-        0 50px 120px rgba(0,0,0,.70);
+        0 60px 140px rgba(0,0,0,.72);
+
+    --shadow-soft:
+
+        0 8px 24px rgba(0,0,0,.18);
+
+    --shadow-floating:
+
+        0 30px 80px rgba(0,0,0,.42);
+
+    --shadow-hero:
+
+        0 60px 140px rgba(0,0,0,.62);
+
+    --shadow-logo:
+
+        0 24px 70px rgba(0,0,0,.55);
 
     --shadow-gold:
 
-        0 0 30px rgba(216,179,106,.18);
+        0 0 30px rgba(217,181,106,.18);
 
     --shadow-gold-lg:
 
-        0 0 60px rgba(216,179,106,.10);
+        0 0 60px rgba(217,181,106,.10);
 
     --shadow-green:
 
-        0 0 24px rgba(22,165,106,.22);
+        0 0 24px rgba(24,166,109,.22);
 
     --shadow-button:
 
-        0 14px 36px rgba(15,102,66,.32);
+        0 16px 40px rgba(18,104,70,.34);
 
 
     /*==================================================
@@ -193,7 +220,11 @@ Responsibility
 
     --radius-xl:40px;
 
+    --radius-card:30px;
+
     --radius-hero:52px;
+
+    --radius-button:999px;
 
     --radius-round:999px;
 
@@ -244,9 +275,13 @@ Responsibility
 
     --font-size-3xl:3.5rem;
 
-    --font-size-hero:4.5rem;
+    --font-size-hero:4.8rem;
 
-    --font-size-display:5rem;
+    --font-size-hero-large:5.4rem;
+
+    --font-size-display:5.75rem;
+
+    --font-size-display-large:6.5rem;
 
     --font-weight-light:300;
 
@@ -258,20 +293,33 @@ Responsibility
 
     --font-weight-bold:700;
 
+    --letter-ultra-tight:-0.04em;
+
+    --letter-heading:-0.03em;
+
     --letter-tight:-0.02em;
 
     --letter-normal:0;
 
     --letter-wide:.04em;
 
+    --letter-button:.06em;
+
     --letter-display:.08em;
+
+    --letter-caption:.12em;
+
+    --line-display:1.08;
+
+    --line-heading:1.18;
 
     --line-tight:1.15;
 
     --line-normal:1.45;
 
-    --line-relaxed:1.70;
+    --line-body:1.72;
 
+    --line-relaxed:1.70;
 
     /*==================================================
     Spacing
@@ -297,41 +345,55 @@ Responsibility
 
     --space-9:160px;
 
+    --space-10:200px;
+
+    --space-11:240px;
+
+    --space-12:300px;
+
 
     /*==================================================
     Hero Layout
     ==================================================*/
 
-    --logo-width:120px;
+    --logo-width:140px;
 
-    --hero-content-width:620px;
+    --logo-width-large:180px;
 
-    --hero-max-width:860px;
+    --hero-content-width:700px;
 
-    --hero-section-gap:72px;
+    --hero-max-width:940px;
 
-    --hero-logo-gap:70px;
+    --hero-width:940px;
 
-    --hero-title-gap:32px;
+    --hero-section-gap:84px;
 
-    --hero-copy-gap:64px;
+    --hero-logo-gap:84px;
 
-    --hero-button-gap:80px;
+    --hero-title-gap:40px;
+
+    --hero-copy-gap:72px;
+
+    --hero-button-gap:96px;
+
+    --hero-divider-width:260px;
 
 
     /*==================================================
     Layout
     ==================================================*/
 
-    --container-width:1200px;
+    --container-width:1280px;
 
-    --container-wide:1440px;
+    --container-wide:1480px;
 
-    --content-width:960px;
+    --content-width:980px;
 
-    --hero-width:860px;
+    --content-narrow:720px;
 
-    --header-height:90px;
+    --content-wide:1180px;
+
+    --header-height:96px;
 
     --screen-min-height:100vh;
 
@@ -350,10 +412,15 @@ Responsibility
 
     --speed-cinematic:1.8s;
 
+    --speed-ultra:2.4s;
+
     --ease:cubic-bezier(.22,.61,.36,1);
 
     --ease-soft:cubic-bezier(.19,1,.22,1);
 
+    --ease-premium:cubic-bezier(.16,1,.30,1);
+
+    --ease-cinematic:cubic-bezier(.19,1,.22,1);
 
     /*==================================================
     Opacity
@@ -365,6 +432,71 @@ Responsibility
 
     --opacity-soft:.90;
 
+    --opacity-overlay:.96;
+
+    --opacity-glass:.88;
+
+
+    /*==================================================
+    Blur
+    ==================================================*/
+
+    --blur-xs:4px;
+
+    --blur-sm:8px;
+
+    --blur-md:16px;
+
+    --blur-lg:24px;
+
+    --blur-xl:40px;
+
+
+    /*==================================================
+    Hero Depth
+    ==================================================*/
+
+    --hero-glow-size:900px;
+
+    --hero-spotlight-size:620px;
+
+    --hero-vignette-strength:.32;
+
+
+    /*==================================================
+    Dividers
+    ==================================================*/
+
+    --divider-width:260px;
+
+    --divider-width-small:180px;
+
+    --divider-height:1px;
+
+
+    /*==================================================
+    Button Tokens
+    ==================================================*/
+
+    --button-height:64px;
+
+    --button-height-mobile:56px;
+
+    --button-padding-x:48px;
+
+    --button-padding-y:20px;
+
+
+    /*==================================================
+    Card Tokens
+    ==================================================*/
+
+    --card-padding:32px;
+
+    --card-padding-mobile:24px;
+
+    --card-gap:24px;
+
 
     /*==================================================
     Z Index
@@ -372,14 +504,20 @@ Responsibility
 
     --z-base:1;
 
+    --z-background:2;
+
     --z-content:10;
 
     --z-header:100;
+
+    --z-floating:200;
 
     --z-overlay:500;
 
     --z-modal:1000;
 
     --z-toast:1100;
+
+    --z-tooltip:1200;
 
 }
