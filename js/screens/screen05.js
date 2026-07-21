@@ -21,6 +21,11 @@ Responsibility:
 ======================================================================*/
 
 
+'use strict';
+
+
+
+
 
 /*==================================================
 Screen 05 Initialisation
@@ -32,7 +37,11 @@ function initScreen05(){
 
     const screen05 =
 
-        document.querySelector("#screen05");
+        document.querySelector(
+
+            "#screen05"
+
+        );
 
 
 
@@ -50,6 +59,8 @@ function initScreen05(){
 
 
 }
+
+
 
 
 
@@ -96,8 +107,11 @@ function setupNameCapture(){
 
 
 
-            saveVisitorName(visitorName);
+            saveVisitorName(
 
+                visitorName
+
+            );
 
 
         }
@@ -106,6 +120,8 @@ function setupNameCapture(){
 
 
 }
+
+
 
 
 
@@ -138,7 +154,6 @@ function saveVisitorName(name){
     }
 
 
-
     else{
 
 
@@ -162,8 +177,13 @@ function saveVisitorName(name){
 
 
 
+
+
 /*==================================================
 Navigation Setup
+
+SCREEN 05 → SCREEN 06
+
 ==================================================*/
 
 
@@ -188,11 +208,13 @@ function setupScreen05Navigation(){
 
 
 
+
+
     nextButton.addEventListener(
 
         "click",
 
-        function(){
+        async function(){
 
 
 
@@ -206,9 +228,19 @@ function setupScreen05Navigation(){
 
 
 
+            if(!nameInput){
+
+                return;
+
+            }
+
+
+
             const visitorName =
 
                 nameInput.value.trim();
+
+
 
 
 
@@ -225,7 +257,15 @@ function setupScreen05Navigation(){
 
 
 
-            saveVisitorName(visitorName);
+
+
+            saveVisitorName(
+
+                visitorName
+
+            );
+
+
 
 
 
@@ -240,26 +280,35 @@ function setupScreen05Navigation(){
 
 
 
-            if(nextScreen){
 
 
-                if(
 
-                    typeof CTM !== "undefined" &&
+            if(!nextScreen){
 
-                    typeof CTM.navigate === "function"
+                return;
 
-                ){
-
-
-                    CTM.navigate(
-
-                        nextScreen
-
-                    );
+            }
 
 
-                }
+
+
+
+            if(
+
+                typeof CTM !== "undefined" &&
+
+                typeof CTM.navigate === "function"
+
+            ){
+
+
+
+                await CTM.navigate(
+
+                    nextScreen
+
+                );
+
 
 
             }
@@ -272,6 +321,8 @@ function setupScreen05Navigation(){
 
 
 }
+
+
 
 
 
