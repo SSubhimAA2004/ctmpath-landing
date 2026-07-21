@@ -18,7 +18,7 @@
     Responsibility
     • Load application shell
     • Load foundation styles
-    • Load Screen 01
+    • Load journey screens
     • Initialize CTM PATH™ Journey
 
     ==============================================================
@@ -34,33 +34,52 @@
 
 
     <title>
+
         CTM PATH™ | Your Journey Begins
+
     </title>
 
 
     <meta
+
         name="description"
+
         content="CTM PATH™ Guided Journey — Discover the next chapter of your financial life.">
+
+
+
 
 
     <!--==================================================
     Google Fonts
     ==================================================-->
 
+
     <link
+
         rel="preconnect"
+
         href="https://fonts.googleapis.com">
 
 
+
     <link
+
         rel="preconnect"
+
         href="https://fonts.gstatic.com"
+
         crossorigin>
 
 
+
     <link
+
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+
         rel="stylesheet">
+
+
 
 
 
@@ -68,42 +87,74 @@
     Foundation CSS
     ==================================================-->
 
+
     <link
+
         rel="stylesheet"
+
         href="css/foundation/global.css">
 
 
+
     <link
+
         rel="stylesheet"
+
         href="css/foundation/typography.css">
 
 
+
     <link
+
         rel="stylesheet"
+
         href="css/foundation/buttons.css">
 
 
+
     <link
+
         rel="stylesheet"
+
         href="css/foundation/animations.css">
 
 
+
     <link
+
         rel="stylesheet"
+
         href="css/foundation/responsive.css">
 
-
-
-    <!--==================================================
+        <!--==================================================
     Screen CSS
+
+    Individual Screen Styling
+
     ==================================================-->
 
+
     <link
+
         rel="stylesheet"
+
         href="css/screens/screen01.css">
 
 
+
+    <link
+
+        rel="stylesheet"
+
+        href="css/screens/screen02.css">
+
+
+
+
+
 </head>
+
+
 
 
 
@@ -116,18 +167,28 @@
 
 
     <main
+
         id="app">
+
 
 
         <!-- Dynamic Screens Load Here -->
 
+
         <div
+
             id="screen-container">
+
 
         </div>
 
 
+
     </main>
+
+
+
+
 
 
 
@@ -137,39 +198,74 @@
 
 
     <script
+
         src="js/foundation/state.js">
+
     </script>
 
 
+
     <script
+
         src="js/foundation/storage.js">
+
     </script>
 
 
+
     <script
+
         src="js/foundation/loader.js">
+
     </script>
 
 
+
     <script
+
         src="js/foundation/router.js">
+
     </script>
+
 
 
     <script
+
         src="js/foundation/app.js">
+
     </script>
+
+
+
+
 
 
 
     <!--==================================================
     Screen JavaScript
+
+    Screen Modules
+
     ==================================================-->
 
 
+
     <script
+
         src="js/screens/screen01.js">
+
     </script>
+
+
+
+    <script
+
+        src="js/screens/screen02.js">
+
+    </script>
+
+
+
 
 
 
@@ -177,3 +273,4 @@
 
 
 </html>
+
