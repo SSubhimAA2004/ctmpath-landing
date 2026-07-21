@@ -11,6 +11,7 @@ Responsibility
 • Store visitor profile
 • Update visitor information
 • Retrieve visitor information
+• Persist visitor information
 
 ======================================================================
 */
@@ -22,13 +23,18 @@ Responsibility
     const CTM = window.CTM;
 
     if (!CTM) {
+
         console.error('CTM core has not been initialized.');
+
         return;
+
     }
 
     /*==================================================
     Ensure Visitor Object Exists
     ==================================================*/
+
+    CTM.state = CTM.state || {};
 
     CTM.state.visitor = CTM.state.visitor || {
 
@@ -53,11 +59,32 @@ Responsibility
     CTM.setVisitor = function (field, value) {
 
         if (!(field in CTM.state.visitor)) {
-            console.warn(`Unknown visitor field: ${field}`);
+
+            console.warn(
+
+                `Unknown visitor field: ${field}`
+
+            );
+
             return;
+
         }
 
-        CTM.state.visitor[field] = String(value).trim();
+        CTM.state.visitor[field] =
+
+            String(value || '').trim();
+
+        if (
+
+            typeof CTM.saveState ===
+
+            'function'
+
+        ) {
+
+            CTM.saveState();
+
+        }
 
     };
 
@@ -66,6 +93,12 @@ Responsibility
     ==================================================*/
 
     CTM.getVisitor = function (field) {
+
+        if (!(field in CTM.state.visitor)) {
+
+            return '';
+
+        }
 
         return CTM.state.visitor[field] || '';
 
@@ -77,7 +110,11 @@ Responsibility
 
     CTM.getVisitorData = function () {
 
-        return { ...CTM.state.visitor };
+        return {
+
+            ...CTM.state.visitor
+
+        };
 
     };
 
@@ -102,6 +139,18 @@ Responsibility
             email: ''
 
         };
+
+        if (
+
+            typeof CTM.saveState ===
+
+            'function'
+
+        ) {
+
+            CTM.saveState();
+
+        }
 
     };
 
