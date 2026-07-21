@@ -38,17 +38,26 @@ Root Variables
 
     --color-background:
 
-        #03152F;
+        #020812;
+
 
 
     --color-background-soft:
 
-        #061D38;
+        #06152F;
+
 
 
     --color-background-deep:
 
-        #020D20;
+        #020B18;
+
+
+
+    --color-background-light:
+
+        #09294A;
+
 
 
     --color-surface:
@@ -56,9 +65,11 @@ Root Variables
         rgba(255,255,255,.06);
 
 
+
     --color-surface-light:
 
         rgba(255,255,255,.10);
+
 
 
 
@@ -74,9 +85,17 @@ Root Variables
         #18A66D;
 
 
+
+    --color-primary-bright:
+
+        #00C2B8;
+
+
+
     --color-primary-dark:
 
         #125D41;
+
 
 
 
@@ -92,9 +111,24 @@ Root Variables
         #D9B56A;
 
 
+
+    --color-gold-light:
+
+        #FFF0A3;
+
+
+
+    --color-gold-dark:
+
+        #B47718;
+
+
+
     --color-gold-soft:
 
         rgba(217,181,106,.45);
+
+
 
 
 
@@ -110,14 +144,23 @@ Root Variables
         #FFFFFF;
 
 
+
+    --color-ivory:
+
+        #F5F4EE;
+
+
+
     --color-text:
 
         rgba(255,255,255,.94);
 
 
+
     --color-text-soft:
 
         rgba(255,255,255,.72);
+
 
 
 
@@ -134,9 +177,11 @@ Root Variables
         #22C55E;
 
 
+
     --color-warning:
 
         #F59E0B;
+
 
 
     --color-danger:
@@ -161,6 +206,7 @@ Root Variables
 
 
 
+
     --shadow-premium:
 
 
@@ -168,17 +214,19 @@ Root Variables
 
 
 
+
     --shadow-glow:
 
 
-        0 0 50px rgba(24,166,109,.25);
+        0 0 50px rgba(0,194,184,.18);
+
 
 
 
     --shadow-gold:
 
 
-        0 0 45px rgba(217,181,106,.22);
+        0 0 45px rgba(217,181,106,.30);
 
 
 
@@ -197,9 +245,11 @@ Root Variables
 
 
 
+
     --radius-button:
 
         999px;
+
 
 
 
@@ -223,9 +273,11 @@ Root Variables
         8px;
 
 
+
     --space-sm:
 
         16px;
+
 
 
     --space-md:
@@ -233,9 +285,11 @@ Root Variables
         32px;
 
 
+
     --space-lg:
 
         64px;
+
 
 
     --space-xl:
@@ -258,9 +312,11 @@ Root Variables
         .25s;
 
 
+
     --speed-normal:
 
         .45s;
+
 
 
     --speed-slow:
@@ -277,8 +333,6 @@ Root Variables
 
 }
 
-
-
 /*==================================================
 Global Reset
 ==================================================*/
@@ -291,7 +345,9 @@ Global Reset
 
     margin:0;
 
+
     padding:0;
+
 
     box-sizing:border-box;
 
@@ -325,12 +381,17 @@ html{
 
 
 
+
+
 /*==================================================
 Body Foundation
 
 CTM PATH™ Premium Brand Atmosphere
 
-Merged with Logo Identity
+Aligned with:
+Infinity Mastery Logo
+Midnight Navy Identity
+Gold Transformation Light
 
 ==================================================*/
 
@@ -353,23 +414,19 @@ body{
 
 
 
-        radial-gradient(
-
-            circle at 50% 10%,
-
-            rgba(24,166,109,.16),
-
-            transparent 32%
-
-        ),
-
+        /*
+        -------------------------------------------
+        Transformation Light Glow
+        Gold centre illumination
+        -------------------------------------------
+        */
 
 
         radial-gradient(
 
-            circle at 80% 20%,
+            circle at 50% 18%,
 
-            rgba(217,181,106,.08),
+            rgba(217,181,106,.10),
 
             transparent 28%
 
@@ -377,35 +434,72 @@ body{
 
 
 
+
+        /*
+        -------------------------------------------
+        CTM Teal Energy Layer
+        -------------------------------------------
+        */
+
+
+        radial-gradient(
+
+            circle at 50% 35%,
+
+            rgba(0,194,184,.08),
+
+            transparent 38%
+
+        ),
+
+
+
+
+
+        /*
+        -------------------------------------------
+        Executive Midnight Foundation
+        -------------------------------------------
+        */
+
+
         linear-gradient(
 
             180deg,
 
-            #03152F 0%,
+            #020812 0%,
 
-            #041A32 45%,
 
-            #020D20 100%
+            #06152F 48%,
+
+
+            #020B18 100%
 
         );
 
 
 
 
+
     color:
+
 
         var(--color-text);
 
 
 
 
+
     -webkit-font-smoothing:
+
 
         antialiased;
 
 
 
+
     -moz-osx-font-smoothing:
+
 
         grayscale;
 
@@ -413,10 +507,17 @@ body{
 
 }
 
+
+
+
+
+
+
+
 /*==================================================
 Premium Background Glow
 
-Subtle CTM PATH™ Identity Layer
+CTM PATH™ Atmospheric Identity
 
 ==================================================*/
 
@@ -434,7 +535,10 @@ body::before{
 
 
 
+
+
     background:
+
 
 
 
@@ -442,7 +546,7 @@ body::before{
 
             circle at center,
 
-            rgba(11,107,104,.10),
+            rgba(0,194,184,.06),
 
             transparent 45%
 
@@ -450,7 +554,10 @@ body::before{
 
 
 
+
+
     pointer-events:none;
+
 
 
     z-index:-1;
@@ -458,6 +565,9 @@ body::before{
 
 
 }
+
+
+
 
 
 
@@ -487,6 +597,9 @@ Application Root
 
 
 
+
+
+
 /*==================================================
 Screen Container
 ==================================================*/
@@ -508,6 +621,9 @@ Screen Container
 
 
 
+
+
+
 /*==================================================
 Screen Base
 ==================================================*/
@@ -523,13 +639,18 @@ Screen Base
 
 
 
+
+
     display:flex;
+
 
 
     justify-content:center;
 
 
+
     align-items:center;
+
 
 
 
@@ -544,9 +665,12 @@ Screen Base
 
 
 
-/*==================================================
+
+
+
+/==================================================
 Container
-==================================================*/
+==================================================/
 
 
 .container{
@@ -559,7 +683,9 @@ Container
 
 
 
+
     margin:0 auto;
+
 
 
 
@@ -572,6 +698,7 @@ Container
 
 
 
+
     padding-right:
 
 
@@ -580,12 +707,6 @@ Container
 
 
 }
-
-
-
-
-
-
 
 /*==================================================
 Images
@@ -606,6 +727,62 @@ img{
 
 
 }
+
+
+
+
+
+
+
+
+/*==================================================
+Logo Image Foundation
+
+CTM PATH™ Transparent SVG Support
+
+==================================================*/
+
+
+.logo{
+
+
+    display:block;
+
+
+    width:auto;
+
+
+    height:auto;
+
+
+
+    background:transparent;
+
+
+
+}
+
+
+
+
+
+
+.logo img{
+
+
+    width:100%;
+
+
+    height:auto;
+
+
+
+    object-fit:contain;
+
+
+
+}
+
 
 
 
@@ -645,6 +822,7 @@ button{
 
 
 
+
 /*==================================================
 Links
 ==================================================*/
@@ -663,6 +841,13 @@ a{
 
 }
 
+
+
+
+
+
+
+
 /*==================================================
 Selection
 ==================================================*/
@@ -672,8 +857,6 @@ Selection
 
 
     background:
-
-
 
         rgba(
 
@@ -692,11 +875,12 @@ Selection
     color:
 
 
-        white;
+        #FFFFFF;
 
 
 
 }
+
 
 
 
@@ -734,7 +918,7 @@ CTM PATH™ Gold + Teal Identity
     background:
 
 
-        #020D20;
+        #020B18;
 
 
 
@@ -763,7 +947,7 @@ CTM PATH™ Gold + Teal Identity
 
 
 
-            #18A66D
+            #00C2B8
 
 
 
@@ -779,6 +963,40 @@ CTM PATH™ Gold + Teal Identity
 
 
 }
+
+
+
+
+
+::-webkit-scrollbar-thumb:hover{
+
+
+    background:
+
+
+
+        linear-gradient(
+
+
+
+            180deg,
+
+
+
+            #FFF0A3,
+
+
+
+            #18A66D
+
+
+
+        );
+
+
+
+}
+
 
 
 
@@ -801,15 +1019,21 @@ Accessibility
 
         3px solid rgba(
 
+
             217,
+
 
             181,
 
+
             106,
+
 
             .65
 
+
         );
+
 
 
 
@@ -822,4 +1046,122 @@ Accessibility
 
 }
 
+
+
+
+
+
+
+
+/*==================================================
+Premium Utility Classes
+
+CTM PATH™ Identity Helpers
+
+==================================================*/
+
+
+.text-gold{
+
+
+    color:
+
+
+        var(--color-gold);
+
+
+
+}
+
+
+
+
+
+.text-primary{
+
+
+    color:
+
+
+        var(--color-primary-bright);
+
+
+
+}
+
+
+
+
+
+.text-ivory{
+
+
+    color:
+
+
+        var(--color-ivory);
+
+
+
+}
+
+
+
+
+
+.glow-gold{
+
+
+    filter:
+
+
+        drop-shadow(
+
+            0 0 25px rgba(
+
+                217,
+
+                181,
+
+                106,
+
+                .35
+
+            )
+
+        );
+
+
+
+}
+
+
+
+
+
+.glow-teal{
+
+
+    filter:
+
+
+        drop-shadow(
+
+            0 0 30px rgba(
+
+                0,
+
+                194,
+
+                184,
+
+                .25
+
+            )
+
+        );
+
+
+
+}
 
