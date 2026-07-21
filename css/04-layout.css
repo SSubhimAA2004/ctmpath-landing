@@ -35,22 +35,18 @@ body{
     min-height:100vh;
 
     background:
-
+        var(--hero-overlay),
+        var(--hero-glow),
         radial-gradient(
-
-            circle at top,
-
-            #163D73 0%,
-
-            #0E2546 22%,
-
-            #08192F 45%,
-
-            #060D18 72%,
-
-            #040608 100%
-
+            ellipse at top,
+            var(--bg-page-top) 0%,
+            #0A1E39 18%,
+            #08172B 38%,
+            #06101D 62%,
+            var(--bg-page-bottom) 100%
         );
+
+    background-color:var(--bg-page);
 
     color:var(--text-primary);
 
@@ -77,6 +73,84 @@ Application Shell
 
 
 /*==================================================
+Application Ambient Light
+==================================================*/
+
+#app-shell::before{
+
+    content:"";
+
+    position:fixed;
+
+    top:-18vh;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:1200px;
+
+    height:1200px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(255,255,255,.025) 0%,
+
+            rgba(216,179,106,.05) 22%,
+
+            rgba(22,165,106,.025) 42%,
+
+            transparent 72%
+
+        );
+
+    pointer-events:none;
+
+    z-index:0;
+
+}
+
+
+/*==================================================
+Application Vignette
+==================================================*/
+
+#app-shell::after{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+
+        radial-gradient(
+
+            ellipse at center,
+
+            transparent 48%,
+
+            rgba(0,0,0,.16) 76%,
+
+            rgba(0,0,0,.34) 100%
+
+        );
+
+    pointer-events:none;
+
+    z-index:0;
+
+}
+
+
+/*==================================================
 Global Header
 ==================================================*/
 
@@ -84,7 +158,7 @@ Global Header
 
     position:absolute;
 
-    top:30px;
+    top:42px;
 
     left:0;
 
@@ -96,7 +170,7 @@ Global Header
 
     align-items:center;
 
-    z-index:1000;
+    z-index:var(--z-header);
 
     pointer-events:none;
 
@@ -128,7 +202,7 @@ Logo
 
     display:block;
 
-    width:170px;
+    width:205px;
 
     height:auto;
 
@@ -136,28 +210,28 @@ Logo
 
     filter:
 
-        drop-shadow(0 10px 26px rgba(0,0,0,.45))
+        drop-shadow(0 18px 42px rgba(0,0,0,.45))
 
-        drop-shadow(0 0 20px rgba(216,179,106,.22));
+        drop-shadow(0 0 30px rgba(216,179,106,.16));
 
     transition:
 
-        transform .35s ease,
+        transform var(--speed-normal) var(--ease),
 
-        filter .35s ease;
+        filter var(--speed-normal) var(--ease);
 
 }
 
 
 .brand-logo:hover{
 
-    transform:scale(1.03);
+    transform:translateY(-2px) scale(1.02);
 
     filter:
 
-        drop-shadow(0 12px 30px rgba(0,0,0,.55))
+        drop-shadow(0 22px 48px rgba(0,0,0,.55))
 
-        drop-shadow(0 0 30px rgba(216,179,106,.32));
+        drop-shadow(0 0 42px rgba(216,179,106,.24));
 
 }
 
@@ -168,9 +242,13 @@ Journey Container
 
 #journey-container{
 
+    position:relative;
+
     width:100%;
 
     min-height:100vh;
+
+    z-index:var(--z-content);
 
 }
 
@@ -181,9 +259,13 @@ Screen Container
 
 #screen-container{
 
+    position:relative;
+
     width:100%;
 
     min-height:100vh;
+
+    z-index:var(--z-content);
 
 }
 
@@ -208,11 +290,11 @@ Screen
 
     padding:
 
-        170px
+        190px
 
-        40px
+        48px
 
-        80px;
+        90px;
 
 }
 
@@ -225,7 +307,7 @@ Container
 
     width:100%;
 
-    max-width:1200px;
+    max-width:var(--container-width);
 
     margin:0 auto;
 
@@ -248,9 +330,9 @@ Hero
 
     width:100%;
 
-    max-width:860px;
+    max-width:var(--hero-max-width);
 
-    margin:120px auto 0;
+    margin:110px auto 0;
 
     display:flex;
 
@@ -262,7 +344,7 @@ Hero
 
     text-align:center;
 
-    gap:38px;
+    gap:var(--hero-section-gap);
 
 }
 
@@ -276,15 +358,15 @@ Hero Ambient Glow
 
     position:absolute;
 
-    top:50%;
+    top:44%;
 
     left:50%;
 
     transform:translate(-50%,-50%);
 
-    width:620px;
+    width:760px;
 
-    height:620px;
+    height:760px;
 
     border-radius:50%;
 
@@ -294,13 +376,64 @@ Hero Ambient Glow
 
             circle,
 
-            rgba(216,179,106,.05),
+            rgba(255,255,255,.025) 0%,
 
-            rgba(22,165,106,.03),
+            rgba(216,179,106,.08) 18%,
+
+            rgba(22,165,106,.035) 38%,
+
+            rgba(10,30,57,.015) 58%,
+
+            transparent 78%
+
+        );
+
+    pointer-events:none;
+
+    z-index:-2;
+
+}
+
+
+/*==================================================
+Hero Soft Spotlight
+==================================================*/
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:10px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:520px;
+
+    height:420px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            ellipse,
+
+            rgba(255,255,255,.035),
+
+            rgba(255,255,255,.012),
 
             transparent 72%
 
         );
+
+    filter:blur(40px);
+
+    pointer-events:none;
 
     z-index:-1;
 
@@ -326,6 +459,8 @@ Welcome Block
 
     width:100%;
 
+    max-width:720px;
+
     display:flex;
 
     flex-direction:column;
@@ -334,11 +469,53 @@ Welcome Block
 
     align-items:center;
 
-    gap:22px;
+    gap:28px;
 
-    margin-top:70px;
+    margin-top:78px;
 
-    margin-bottom:25px;
+    margin-bottom:36px;
+
+}
+
+
+/*==================================================
+Introduction Block
+==================================================*/
+
+.introduction-block{
+
+    width:100%;
+
+    max-width:700px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:34px;
+
+}
+
+
+/*==================================================
+CTA Block
+==================================================*/
+
+.cta-block{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-top:24px;
 
 }
 
@@ -349,11 +526,11 @@ Gold Divider
 
 .gold-divider{
 
-    width:240px;
+    position:relative;
+
+    width:260px;
 
     height:1px;
-
-    position:relative;
 
     background:
 
@@ -361,11 +538,15 @@ Gold Divider
 
             90deg,
 
-            transparent,
+            transparent 0%,
 
-            rgba(216,179,106,.90),
+            rgba(216,179,106,.20) 18%,
 
-            transparent
+            rgba(216,179,106,.95) 50%,
+
+            rgba(216,179,106,.20) 82%,
+
+            transparent 100%
 
         );
 
@@ -388,13 +569,15 @@ Divider Star
 
     transform:translate(-50%,-50%);
 
-    background:#08192F;
+    background:var(--bg-page);
 
     color:var(--text-gold);
 
-    padding:0 14px;
+    padding:0 16px;
 
     font-size:13px;
+
+    font-weight:600;
 
 }
 
@@ -405,7 +588,7 @@ Small Divider
 
 .gold-divider.small{
 
-    width:170px;
+    width:180px;
 
 }
 
@@ -416,7 +599,9 @@ Spacer
 
 .spacer{
 
-    height:40px;
+    width:100%;
+
+    height:48px;
 
 }
 
@@ -444,6 +629,8 @@ Row
 
     gap:32px;
 
+    align-items:flex-start;
+
 }
 
 
@@ -457,28 +644,30 @@ Column
 
 }
 
+
 /*==================================================
 Glass
 ==================================================*/
 
 .glass{
 
-    background:
+    background:rgba(255,255,255,.035);
 
-        rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.07);
 
-    border:
+    border-radius:var(--radius-lg);
 
-        1px solid rgba(255,255,255,.06);
+    backdrop-filter:blur(20px);
 
-    border-radius:24px;
+    -webkit-backdrop-filter:blur(20px);
 
-    backdrop-filter:blur(18px);
+    box-shadow:
 
-    -webkit-backdrop-filter:blur(18px);
+        var(--shadow-sm),
+
+        inset 0 1px 0 rgba(255,255,255,.04);
 
 }
-
 
 /*==================================================
 Desktop
@@ -490,11 +679,11 @@ Desktop
 
         padding:
 
-            160px
+            175px
 
-            36px
+            40px
 
-            72px;
+            80px;
 
     }
 
@@ -506,7 +695,23 @@ Desktop
 
     .hero{
 
-        max-width:820px;
+        max-width:800px;
+
+        margin-top:100px;
+
+        gap:64px;
+
+    }
+
+    .welcome-block{
+
+        margin-top:70px;
+
+    }
+
+    .gold-divider{
+
+        width:240px;
 
     }
 
@@ -521,13 +726,13 @@ Tablet
 
     #global-header{
 
-        top:26px;
+        top:34px;
 
     }
 
     .brand-logo{
 
-        width:145px;
+        width:175px;
 
     }
 
@@ -535,11 +740,11 @@ Tablet
 
         padding:
 
-            150px
+            165px
 
-            30px
+            34px
 
-            60px;
+            70px;
 
     }
 
@@ -551,15 +756,31 @@ Tablet
 
     .hero{
 
-        max-width:760px;
+        max-width:720px;
 
-        gap:34px;
+        margin-top:90px;
+
+        gap:56px;
 
     }
 
     .welcome-block{
 
-        margin-top:60px;
+        margin-top:58px;
+
+        gap:24px;
+
+    }
+
+    .introduction-block{
+
+        gap:30px;
+
+    }
+
+    .gold-divider{
+
+        width:220px;
 
     }
 
@@ -574,13 +795,13 @@ Mobile
 
     #global-header{
 
-        top:20px;
+        top:24px;
 
     }
 
     .brand-logo{
 
-        width:120px;
+        width:145px;
 
     }
 
@@ -588,11 +809,11 @@ Mobile
 
         padding:
 
-            130px
+            140px
 
-            20px
+            22px
 
-            40px;
+            48px;
 
     }
 
@@ -606,17 +827,25 @@ Mobile
 
         width:100%;
 
-        gap:28px;
+        margin-top:70px;
+
+        gap:44px;
 
     }
 
     .welcome-block{
 
-        margin-top:45px;
+        margin-top:42px;
 
-        margin-bottom:20px;
+        margin-bottom:22px;
 
-        gap:18px;
+        gap:20px;
+
+    }
+
+    .introduction-block{
+
+        gap:24px;
 
     }
 
@@ -643,7 +872,7 @@ Small Mobile
 
     .brand-logo{
 
-        width:100px;
+        width:120px;
 
     }
 
@@ -655,7 +884,7 @@ Small Mobile
 
             16px
 
-            32px;
+            36px;
 
     }
 
@@ -669,17 +898,25 @@ Small Mobile
 
         width:100%;
 
-        gap:24px;
+        margin-top:55px;
+
+        gap:36px;
 
     }
 
     .welcome-block{
 
-        margin-top:36px;
+        margin-top:34px;
 
         margin-bottom:18px;
 
         gap:16px;
+
+    }
+
+    .introduction-block{
+
+        gap:18px;
 
     }
 
