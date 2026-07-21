@@ -82,11 +82,44 @@ Responsibility
 
         },
 
-        responses: {},
+        /*
+        ==================================================
+        User Responses
+        ==================================================
+        */
+
+        responses: {
+
+            /*
+            Screen 07
+            Multiple Choice
+            */
+
+            lifePriorities: []
+
+        },
+
+        /*
+        ==================================================
+        Insights
+        ==================================================
+        */
 
         insights: {},
 
+        /*
+        ==================================================
+        Recommendations
+        ==================================================
+        */
+
         recommendations: {},
+
+        /*
+        ==================================================
+        Scores
+        ==================================================
+        */
 
         scores: {
 
@@ -124,9 +157,13 @@ Responsibility
 
     CTM.setCurrentScreen = function (screenId) {
 
-        CTM.state.previousScreen = CTM.state.currentScreen;
+        CTM.state.previousScreen =
 
-        CTM.state.currentScreen = screenId;
+            CTM.state.currentScreen;
+
+        CTM.state.currentScreen =
+
+            screenId;
 
     };
 
@@ -156,13 +193,63 @@ Responsibility
 
     CTM.setProgress = function (screenNumber) {
 
-        CTM.state.journey.progress = screenNumber;
+        CTM.state.journey.progress =
 
-        CTM.state.journey.completion = Math.round(
+            screenNumber;
 
-            (screenNumber / CTM.state.totalScreens) * 100
+        CTM.state.journey.completion =
 
-        );
+            Math.round(
+
+                (
+
+                    screenNumber /
+
+                    CTM.state.totalScreens
+
+                ) * 100
+
+            );
+
+    };
+
+    /*
+    ==================================================
+    Reset Responses
+    ==================================================
+    */
+
+    CTM.resetResponses = function () {
+
+        CTM.state.responses = {
+
+            lifePriorities: []
+
+        };
+
+    };
+
+    /*
+    ==================================================
+    Reset Journey
+    ==================================================
+    */
+
+    CTM.resetJourney = function () {
+
+        CTM.state.journey = {
+
+            started: false,
+
+            completed: false,
+
+            progress: 0,
+
+            completion: 0
+
+        };
+
+        CTM.resetResponses();
 
     };
 
