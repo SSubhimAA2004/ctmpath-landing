@@ -106,6 +106,8 @@ Responsibility
 
                         name="firstName"
 
+                        data-field="firstName"
+
                         class="input input-field"
 
                         placeholder="உங்கள் பெயர் • Your First Name"
@@ -165,59 +167,3 @@ Responsibility
     </div>
 
 </section>
-
-<script>
-
-document.addEventListener('DOMContentLoaded', function () {
-
-    const button = document.getElementById('btnContinue');
-
-    const input = document.getElementById('firstName');
-
-    if (!button || !input) {
-
-        return;
-
-    }
-
-    button.addEventListener('click', function () {
-
-        const firstName = input.value.trim();
-
-        if (!firstName) {
-
-            input.focus();
-
-            return;
-
-        }
-
-        if (window.CTM) {
-
-            if (typeof CTM.setVisitor === 'function') {
-
-                CTM.setVisitor('firstName', firstName);
-
-                CTM.setVisitor('name', firstName);
-
-            }
-
-            if (typeof CTM.updatePersonalization === 'function') {
-
-                CTM.updatePersonalization();
-
-            }
-
-            if (typeof CTM.refreshText === 'function') {
-
-                CTM.refreshText();
-
-            }
-
-        }
-
-    });
-
-});
-
-</script>
