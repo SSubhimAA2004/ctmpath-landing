@@ -42,7 +42,13 @@ Responsibility
     Save Response
     ==================================================*/
 
-    CTM.setResponse = function (questionId, value) {
+    CTM.setResponse = function (
+
+        questionId,
+
+        value
+
+    ) {
 
         if (!questionId) {
 
@@ -58,27 +64,25 @@ Responsibility
     Get Response
     ==================================================*/
 
-    CTM.getResponse = function (questionId) {
+    CTM.getResponse = function (
+
+        questionId
+
+    ) {
 
         return CTM.state.responses[questionId];
 
     };
 
     /*==================================================
-    Single Choice
+    Clear Response
     ==================================================*/
 
-    CTM.selectChoice = function (choice) {
+    CTM.clearResponse = function (
 
-        if (!choice) {
+        questionId
 
-            return;
-
-        }
-
-        const questionId = choice.dataset.question;
-
-        const value = choice.dataset.value;
+    ) {
 
         if (!questionId) {
 
@@ -86,27 +90,188 @@ Responsibility
 
         }
 
-        document
-            .querySelectorAll(
-                `[data-question="${questionId}"]`
+        delete CTM.state.responses[questionId];
+
+    };
+
+    /*==================================================
+    Resolve Choice Group
+    Supports both:
+    • data-question
+    • data-choice-group
+    ==================================================*/
+
+    CTM.getChoiceGroup = function (
+
+        choice
+
+    ) {
+
+        if (!choice) {
+
+            return null;
+
+        }
+
+        return (
+
+            choice.dataset.choiceGroup ||
+
+            choice.dataset.question ||
+
+            null
+
+        );
+
+    };
+
+    /*==================================================
+    Resolve Selection Mode
+    Supports:
+    • data-mode="multiple"
+    • data-multiple="true"
+    ==================================================*/
+
+    CTM.getChoiceMode = function (
+
+        choice
+
+    ) {
+
+        if (!choice) {
+
+            return 'single';
+
+        }
+
+        if (
+
+            choice.dataset.multiple === 'true'
+
+        ) {
+
+            return 'multiple';
+
+        }
+
+        if (
+
+            choice.closest(
+
+                '[data-multiple="true"]'
+
             )
+
+        ) {
+
+            return 'multiple';
+
+        }
+
+        if (
+
+            choice.dataset.mode
+
+        ) {
+
+            return choice.dataset.mode;
+
+        }
+
+        return 'single';
+
+    };
+
+    /*==================================================
+    Get Group Choices
+    ==================================================*/
+
+    CTM.getGroupChoices = function (
+
+        group
+
+    ) {
+
+        if (!group) {
+
+            return [];
+
+        }
+
+        return document.querySelectorAll(
+
+            `[data-question="${group}"],
+
+             [data-choice-group="${group}"]`
+
+        );
+
+    };
+
+
+     /*==================================================
+    Single Choice
+    ==================================================*/
+
+    CTM.selectChoice = function (
+
+        choice
+
+    ) {
+
+        if (!choice) {
+
+            return;
+
+        }
+
+        const group =
+
+            CTM.getChoiceGroup(choice);
+
+        const value =
+
+            choice.dataset.value;
+
+        if (!group) {
+
+            return;
+
+        }
+
+        CTM.getGroupChoices(group)
+
             .forEach(function (item) {
 
-                item.classList.remove('selected');
+                item.classList.remove(
+
+                    'selected'
+
+                );
 
             });
 
-        choice.classList.add('selected');
+        choice.classList.add(
+
+            'selected'
+
+        );
 
         CTM.setResponse(
 
-            questionId,
+            group,
 
             value
 
         );
 
-        if (typeof CTM.saveState === 'function') {
+        if (
+
+            typeof CTM.saveState ===
+
+            'function'
+
+        ) {
 
             CTM.saveState();
 
@@ -118,7 +283,11 @@ Responsibility
     Multiple Choice
     ==================================================*/
 
-    CTM.toggleChoice = function (choice) {
+    CTM.toggleChoice = function (
+
+        choice
+
+    ) {
 
         if (!choice) {
 
@@ -126,31 +295,57 @@ Responsibility
 
         }
 
-        const questionId = choice.dataset.question;
+        const group =
 
-        const value = choice.dataset.value;
+            CTM.getChoiceGroup(choice);
 
-        if (!questionId) {
+        const value =
+
+            choice.dataset.value;
+
+        if (!group) {
 
             return;
 
         }
 
-        let values = CTM.getResponse(questionId);
+        let values =
 
-        if (!Array.isArray(values)) {
+            CTM.getResponse(group);
+
+        if (
+
+            !Array.isArray(values)
+
+        ) {
 
             values = [];
 
         }
 
-        const index = values.indexOf(value);
+        const index =
 
-        if (index >= 0) {
+            values.indexOf(value);
 
-            values.splice(index, 1);
+        if (
 
-            choice.classList.remove('selected');
+            index >= 0
+
+        ) {
+
+            values.splice(
+
+                index,
+
+                1
+
+            );
+
+            choice.classList.remove(
+
+                'selected'
+
+            );
 
         }
 
@@ -158,19 +353,29 @@ Responsibility
 
             values.push(value);
 
-            choice.classList.add('selected');
+            choice.classList.add(
+
+                'selected'
+
+            );
 
         }
 
         CTM.setResponse(
 
-            questionId,
+            group,
 
             values
 
         );
 
-        if (typeof CTM.saveState === 'function') {
+        if (
+
+            typeof CTM.saveState ===
+
+            'function'
+
+        ) {
 
             CTM.saveState();
 
@@ -182,13 +387,21 @@ Responsibility
     Rating Choice
     ==================================================*/
 
-    CTM.selectRating = function (choice) {
+    CTM.selectRating = function (
 
-        CTM.selectChoice(choice);
+        choice
+
+    ) {
+
+        CTM.selectChoice(
+
+            choice
+
+        );
 
     };
 
-    /*==================================================
+     /*==================================================
     Restore Choices
     ==================================================*/
 
@@ -196,13 +409,19 @@ Responsibility
 
         document
 
-            .querySelectorAll('[data-question]')
+            .querySelectorAll('.choice')
 
             .forEach(function (choice) {
 
-                const questionId =
+                const group =
 
-                    choice.dataset.question;
+                    CTM.getChoiceGroup(choice);
+
+                if (!group) {
+
+                    return;
+
+                }
 
                 const value =
 
@@ -210,37 +429,57 @@ Responsibility
 
                 const mode =
 
-                    choice.dataset.mode || 'single';
+                    CTM.getChoiceMode(choice);
 
                 const response =
 
-                    CTM.getResponse(questionId);
+                    CTM.getResponse(group);
 
-                choice.classList.remove('selected');
+                choice.classList.remove(
+
+                    'selected'
+
+                );
 
                 if (
 
-                    mode === 'multiple' &&
-
-                    Array.isArray(response) &&
-
-                    response.includes(value)
+                    mode === 'multiple'
 
                 ) {
 
-                    choice.classList.add('selected');
+                    if (
+
+                        Array.isArray(response) &&
+
+                        response.includes(value)
+
+                    ) {
+
+                        choice.classList.add(
+
+                            'selected'
+
+                        );
+
+                    }
 
                 }
 
-                if (
+                else {
 
-                    mode !== 'multiple' &&
+                    if (
 
-                    response === value
+                        response === value
 
-                ) {
+                    ) {
 
-                    choice.classList.add('selected');
+                        choice.classList.add(
+
+                            'selected'
+
+                        );
+
+                    }
 
                 }
 
@@ -254,7 +493,9 @@ Responsibility
 
     CTM.handleChoice = function (event) {
 
-        const choice = event.target.closest('.choice');
+        const choice =
+
+            event.target.closest('.choice');
 
         if (!choice) {
 
@@ -266,25 +507,37 @@ Responsibility
 
         const mode =
 
-            choice.dataset.mode || 'single';
+            CTM.getChoiceMode(choice);
 
         switch (mode) {
 
             case 'multiple':
 
-                CTM.toggleChoice(choice);
+                CTM.toggleChoice(
+
+                    choice
+
+                );
 
                 break;
 
             case 'rating':
 
-                CTM.selectRating(choice);
+                CTM.selectRating(
+
+                    choice
+
+                );
 
                 break;
 
             default:
 
-                CTM.selectChoice(choice);
+                CTM.selectChoice(
+
+                    choice
+
+                );
 
                 break;
 
@@ -292,7 +545,7 @@ Responsibility
 
     };
 
-    /*==================================================
+     /*==================================================
     Keyboard Support
     ==================================================*/
 
@@ -310,7 +563,9 @@ Responsibility
 
         }
 
-        const choice = event.target.closest('.choice');
+        const choice =
+
+            event.target.closest('.choice');
 
         if (!choice) {
 
@@ -320,7 +575,13 @@ Responsibility
 
         event.preventDefault();
 
-        choice.click();
+        CTM.handleChoice({
+
+            target: choice,
+
+            preventDefault() {}
+
+        });
 
     };
 
@@ -349,3 +610,4 @@ Responsibility
     };
 
 })();
+
