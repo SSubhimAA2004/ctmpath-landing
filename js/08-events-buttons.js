@@ -26,8 +26,11 @@ Responsibility
     const CTM = window.CTM;
 
     if (!CTM) {
+
         console.error('CTM core has not been initialized.');
+
         return;
+
     }
 
     /*==================================================
@@ -42,17 +45,135 @@ Responsibility
 
     CTM.buttonActions.continue = async function (button) {
 
-        const nextScreen = button.dataset.next;
+        /*----------------------------------------------
+        Synchronize All Visible Inputs
+        ----------------------------------------------*/
+
+        document
+
+            .querySelectorAll('[data-field]')
+
+            .forEach(function (input) {
+
+                if (
+
+                    typeof CTM.updateVisitorField ===
+
+                    'function'
+
+                ) {
+
+                    CTM.updateVisitorField(input);
+
+                }
+
+            });
+
+        /*----------------------------------------------
+        Persist State
+        ----------------------------------------------*/
+
+        if (
+
+            typeof CTM.saveState ===
+
+            'function'
+
+        ) {
+
+            CTM.saveState();
+
+        }
+
+        /*----------------------------------------------
+        Refresh Personalization
+        ----------------------------------------------*/
+
+        if (
+
+            typeof CTM.updatePersonalization ===
+
+            'function'
+
+        ) {
+
+            CTM.updatePersonalization();
+
+        }
+
+        if (
+
+            typeof CTM.refreshText ===
+
+            'function'
+
+        ) {
+
+            CTM.refreshText();
+
+        }
+
+        /*----------------------------------------------
+        Navigate
+        ----------------------------------------------*/
+
+        const nextScreen =
+
+            button.dataset.next;
 
         if (!nextScreen) {
 
-            console.warn('Continue button missing data-next.');
+            console.warn(
+
+                'Continue button missing data-next.'
+
+            );
 
             return;
 
         }
 
         await CTM.navigate(nextScreen);
+
+        /*----------------------------------------------
+        Refresh After Navigation
+        ----------------------------------------------*/
+
+        if (
+
+            typeof CTM.restoreInputs ===
+
+            'function'
+
+        ) {
+
+            CTM.restoreInputs();
+
+        }
+
+        if (
+
+            typeof CTM.updatePersonalization ===
+
+            'function'
+
+        ) {
+
+            CTM.updatePersonalization();
+
+        }
+
+        if (
+
+            typeof CTM.refreshText ===
+
+            'function'
+
+        ) {
+
+            CTM.refreshText();
+
+        }
 
     };
 
@@ -64,6 +185,30 @@ Responsibility
 
         await CTM.navigateBack();
 
+        if (
+
+            typeof CTM.restoreInputs ===
+
+            'function'
+
+        ) {
+
+            CTM.restoreInputs();
+
+        }
+
+        if (
+
+            typeof CTM.refreshText ===
+
+            'function'
+
+        ) {
+
+            CTM.refreshText();
+
+        }
+
     };
 
     /*==================================================
@@ -72,17 +217,35 @@ Responsibility
 
     CTM.buttonActions.skip = async function (button) {
 
-        const nextScreen = button.dataset.next;
+        const nextScreen =
+
+            button.dataset.next;
 
         if (!nextScreen) {
 
-            console.warn('Skip button missing data-next.');
+            console.warn(
+
+                'Skip button missing data-next.'
+
+            );
 
             return;
 
         }
 
         await CTM.navigate(nextScreen);
+
+        if (
+
+            typeof CTM.refreshText ===
+
+            'function'
+
+        ) {
+
+            CTM.refreshText();
+
+        }
 
     };
 
@@ -92,25 +255,59 @@ Responsibility
 
     CTM.buttonActions.restart = async function () {
 
-        if (typeof CTM.resetJourney === 'function') {
+        if (
+
+            typeof CTM.resetJourney ===
+
+            'function'
+
+        ) {
 
             CTM.resetJourney();
 
         }
 
-        if (typeof CTM.resetVisitor === 'function') {
+        if (
+
+            typeof CTM.resetVisitor ===
+
+            'function'
+
+        ) {
 
             CTM.resetVisitor();
 
         }
 
-        if (typeof CTM.clearState === 'function') {
+        if (
+
+            typeof CTM.clearState ===
+
+            'function'
+
+        ) {
 
             CTM.clearState();
 
         }
 
-        await CTM.navigate('screen01');
+        await CTM.navigate(
+
+            'screen01'
+
+        );
+
+        if (
+
+            typeof CTM.refreshText ===
+
+            'function'
+
+        ) {
+
+            CTM.refreshText();
+
+        }
 
     };
 
@@ -120,13 +317,25 @@ Responsibility
 
     CTM.buttonActions.finish = function () {
 
-        if (typeof CTM.finishJourney === 'function') {
+        if (
+
+            typeof CTM.finishJourney ===
+
+            'function'
+
+        ) {
 
             CTM.finishJourney();
 
         }
 
-        if (typeof CTM.saveState === 'function') {
+        if (
+
+            typeof CTM.saveState ===
+
+            'function'
+
+        ) {
 
             CTM.saveState();
 
@@ -140,13 +349,23 @@ Responsibility
 
     CTM.buttonActions.booking = function () {
 
-        if (typeof CTM.saveState === 'function') {
+        if (
+
+            typeof CTM.saveState ===
+
+            'function'
+
+        ) {
 
             CTM.saveState();
 
         }
 
-        CTM.log('Booking action triggered.');
+        CTM.log(
+
+            'Booking action triggered.'
+
+        );
 
     };
 
@@ -156,7 +375,9 @@ Responsibility
 
     CTM.executeButtonAction = async function (button) {
 
-        const action = button.dataset.action;
+        const action =
+
+            button.dataset.action;
 
         if (!action) {
 
@@ -164,11 +385,23 @@ Responsibility
 
         }
 
-        const handler = CTM.buttonActions[action];
+        const handler =
 
-        if (typeof handler !== 'function') {
+            CTM.buttonActions[action];
 
-            console.warn(`Unknown button action: ${action}`);
+        if (
+
+            typeof handler !==
+
+            'function'
+
+        ) {
+
+            console.warn(
+
+                `Unknown button action: ${action}`
+
+            );
 
             return;
 
@@ -184,22 +417,44 @@ Responsibility
 
     CTM.bindButtons = function () {
 
-        document.addEventListener('click', async function (event) {
+        document.addEventListener(
 
-            const button = event.target.closest('[data-action]');
+            'click',
 
-            if (!button) {
+            async function (event) {
 
-                return;
+                const button =
+
+                    event.target.closest(
+
+                        '[data-action]'
+
+                    );
+
+                if (!button) {
+
+                    return;
+
+                }
+
+                event.preventDefault();
+
+                await CTM.executeButtonAction(
+
+                    button
+
+                );
 
             }
 
-            event.preventDefault();
-
-            await CTM.executeButtonAction(button);
-
-        });
+        );
 
     };
+
+    /*==================================================
+    Initialize
+    ==================================================*/
+
+    CTM.bindButtons();
 
 })();
