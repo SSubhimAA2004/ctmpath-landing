@@ -14,8 +14,9 @@ Responsibility
 • Save journey state
 • Restore visitor progress
 • Maintain browser persistence
-• Clear stored journey
-• Provide safe localStorage wrapper
+• Protect stored data
+• Handle storage errors
+• Support 36-screen journey memory
 
 ======================================================================
 */
@@ -63,9 +64,22 @@ Responsibility
     CTM.storage = {
 
 
+
         key:
 
-            'CTM_PATH_GUIDED_JOURNEY_V1'
+            'CTM_PATH_GUIDED_JOURNEY_V1',
+
+
+
+        version:
+
+            '1.0',
+
+
+
+        timestampKey:
+
+            'CTM_PATH_LAST_SAVE'
 
 
 
@@ -79,7 +93,7 @@ Responsibility
 
     /*
     ==================================================
-    Check Storage Availability
+    Storage Availability Check
     ==================================================
     */
 
@@ -99,22 +113,41 @@ Responsibility
 
 
 
+
+
+
             localStorage.setItem(
+
+
 
                 testKey,
 
-                testKey
+
+
+                'active'
+
+
 
             );
+
+
+
 
 
 
 
             localStorage.removeItem(
 
+
+
                 testKey
 
+
+
             );
+
+
+
 
 
 
@@ -126,13 +159,22 @@ Responsibility
         }
 
 
+
         catch(error){
 
 
 
             console.warn(
 
-                'Local storage unavailable.'
+
+
+                'CTM storage unavailable.',
+
+
+
+                error
+
+
 
             );
 
@@ -156,6 +198,170 @@ Responsibility
 
     /*
     ==================================================
+    Deep Merge Utility
+
+    Prevents nested state loss.
+
+    ==================================================
+    */
+
+
+    CTM.mergeState = function(target, source){
+
+
+
+        if(!source){
+
+
+
+            return target;
+
+
+
+        }
+
+
+
+
+
+
+
+        const output = {
+
+
+
+            ...target
+
+
+
+        };
+
+
+
+
+
+
+
+        Object.keys(source).forEach(function(key){
+
+
+
+            if(
+
+
+
+                source[key] &&
+
+
+
+                typeof source[key] === 'object' &&
+
+
+
+                !Array.isArray(source[key])
+
+
+
+            ){
+
+
+
+                output[key] = CTM.mergeState(
+
+
+
+                    target[key] || {},
+
+
+
+                    source[key]
+
+
+
+                );
+
+
+
+            }
+
+
+
+            else {
+
+
+
+                output[key] = source[key];
+
+
+
+            }
+
+
+
+        });
+
+
+
+
+
+
+
+        return output;
+
+
+
+    };
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Prepare Storage Payload
+    ==================================================
+    */
+
+
+    CTM.prepareStoragePayload = function(){
+
+
+
+        return {
+
+
+
+            version:
+
+                CTM.storage.version,
+
+
+
+            savedAt:
+
+                new Date().toISOString(),
+
+
+
+            state:
+
+                CTM.state
+
+
+
+        };
+
+
+
+    };
+
+ 
+
+
+    /*
+    ==================================================
     Save Application State
     ==================================================
     */
@@ -165,9 +371,13 @@ Responsibility
 
 
 
-        if (
+        if(
+
+
 
             !CTM.storageAvailable()
+
+
 
         ){
 
@@ -189,14 +399,11 @@ Responsibility
 
 
 
-            const state =
+            const payload =
 
 
-                JSON.stringify(
 
-                    CTM.state
-
-                );
+                CTM.prepareStoragePayload();
 
 
 
@@ -212,7 +419,7 @@ Responsibility
 
 
 
-                state
+                JSON.stringify(payload)
 
 
 
@@ -224,15 +431,53 @@ Responsibility
 
 
 
-            CTM.log && CTM.log(
+            localStorage.setItem(
 
 
 
-                'Journey state saved.'
+                CTM.storage.timestampKey,
+
+
+
+                payload.savedAt
 
 
 
             );
+
+
+
+
+
+
+
+            if(
+
+
+
+                typeof CTM.log ===
+
+                'function'
+
+
+
+            ){
+
+
+
+                CTM.log(
+
+
+
+                    'Journey state saved.'
+
+
+
+                );
+
+
+
+            }
 
 
 
@@ -247,17 +492,28 @@ Responsibility
         }
 
 
+
         catch(error){
 
 
 
             console.error(
 
-                'Save failed:',
+
+
+                'CTM save failed:',
+
+
 
                 error
 
+
+
             );
+
+
+
+
 
 
 
@@ -288,9 +544,13 @@ Responsibility
 
 
 
-        if (
+        if(
+
+
 
             !CTM.storageAvailable()
+
+
 
         ){
 
@@ -315,9 +575,14 @@ Responsibility
             const saved =
 
 
+
                 localStorage.getItem(
 
+
+
                     CTM.storage.key
+
+
 
                 );
 
@@ -343,34 +608,55 @@ Responsibility
 
 
 
-            const restored =
+            const payload =
 
 
-                JSON.parse(
 
-                    saved
+                JSON.parse(saved);
+
+
+
+
+
+
+
+            /*
+            Version check
+
+            Future versions can migrate
+
+            */
+
+
+            if(
+
+
+
+                !payload.version
+
+
+
+            ){
+
+
+
+                console.warn(
+
+
+
+                    'Invalid CTM storage version.'
+
+
 
                 );
 
 
 
+                return false;
 
 
 
-
-            CTM.state = {
-
-
-
-                ...CTM.state,
-
-
-
-                ...restored
-
-
-
-            };
+            }
 
 
 
@@ -378,15 +664,73 @@ Responsibility
 
 
 
-            CTM.log && CTM.log(
+            if(
 
 
 
-                'Journey state restored.'
+                payload.state
 
 
 
-            );
+            ){
+
+
+
+                CTM.state =
+
+
+
+                    CTM.mergeState(
+
+
+
+                        CTM.state,
+
+
+
+                        payload.state
+
+
+
+                    );
+
+
+
+            }
+
+
+
+
+
+
+
+            if(
+
+
+
+                typeof CTM.log ===
+
+                'function'
+
+
+
+            ){
+
+
+
+                CTM.log(
+
+
+
+                    'Journey state restored.'
+
+
+
+                );
+
+
+
+            }
 
 
 
@@ -401,17 +745,32 @@ Responsibility
         }
 
 
+
         catch(error){
 
 
 
             console.error(
 
-                'Restore failed:',
+
+
+                'CTM restore failed:',
+
+
 
                 error
 
+
+
             );
+
+
+
+
+
+
+
+            CTM.clearState();
 
 
 
@@ -433,7 +792,122 @@ Responsibility
 
     /*
     ==================================================
-    Clear Journey
+    Get Last Save Time
+    ==================================================
+    */
+
+
+    CTM.getLastSaveTime = function(){
+
+
+
+        if(
+
+
+
+            !CTM.storageAvailable()
+
+
+
+        ){
+
+
+
+            return null;
+
+
+
+        }
+
+
+
+
+
+
+
+        return localStorage.getItem(
+
+
+
+            CTM.storage.timestampKey
+
+
+
+        );
+
+
+
+    };
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Check Existing Journey
+    ==================================================
+    */
+
+
+    CTM.hasSavedJourney = function(){
+
+
+
+        if(
+
+
+
+            !CTM.storageAvailable()
+
+
+
+        ){
+
+
+
+            return false;
+
+
+
+        }
+
+
+
+
+
+
+
+        return Boolean(
+
+
+
+            localStorage.getItem(
+
+
+
+                CTM.storage.key
+
+
+
+            )
+
+
+
+        );
+
+
+
+    };
+
+ 
+
+
+    /*
+    ==================================================
+    Clear Stored Journey
     ==================================================
     */
 
@@ -442,9 +916,13 @@ Responsibility
 
 
 
-        if (
+        if(
+
+
 
             !CTM.storageAvailable()
+
+
 
         ){
 
@@ -464,8 +942,28 @@ Responsibility
 
         localStorage.removeItem(
 
+
+
             CTM.storage.key
 
+
+
+        );
+
+
+
+
+
+
+
+        localStorage.removeItem(
+
+
+
+            CTM.storage.timestampKey
+
+
+
         );
 
 
@@ -474,15 +972,123 @@ Responsibility
 
 
 
-        CTM.log && CTM.log(
+        if(
 
 
 
-            'Journey state cleared.'
+            typeof CTM.log ===
+
+            'function'
 
 
 
-        );
+        ){
+
+
+
+            CTM.log(
+
+
+
+                'Journey storage cleared.'
+
+
+
+            );
+
+
+
+        }
+
+
+
+    };
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Reset Application
+
+    Clears storage and memory
+
+    ==================================================
+    */
+
+
+    CTM.resetApplication = function(){
+
+
+
+        CTM.clearState();
+
+
+
+
+
+
+
+        if(
+
+
+
+            typeof CTM.resetJourney ===
+
+            'function'
+
+
+
+        ){
+
+
+
+            CTM.resetJourney();
+
+
+
+        }
+
+
+
+        else {
+
+
+
+            CTM.state = {};
+
+
+
+        }
+
+
+
+
+
+
+
+        if(
+
+
+
+            typeof CTM.saveState ===
+
+            'function'
+
+
+
+        ){
+
+
+
+            CTM.saveState();
+
+
+
+        }
 
 
 
@@ -519,7 +1125,10 @@ Responsibility
 
     /*
     ==================================================
-    Browser Close Protection
+    Automatic Protection
+
+    Save before leaving page
+
     ==================================================
     */
 
@@ -537,6 +1146,91 @@ Responsibility
 
 
             CTM.autoSave();
+
+
+
+        }
+
+
+
+    );
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Storage Ready Marker
+    ==================================================
+    */
+
+
+    CTM.initStorage = function(){
+
+
+
+        if(
+
+
+
+            typeof CTM.log ===
+
+            'function'
+
+
+
+        ){
+
+
+
+            CTM.log(
+
+
+
+                'Storage system initialized.'
+
+
+
+            );
+
+
+
+        }
+
+
+
+    };
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Initialize
+
+    ==================================================
+    */
+
+
+    document.addEventListener(
+
+
+
+        'DOMContentLoaded',
+
+
+
+        function(){
+
+
+
+            CTM.initStorage();
 
 
 
