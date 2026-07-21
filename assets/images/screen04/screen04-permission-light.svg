@@ -1,0 +1,209 @@
+
+<svg
+    width="320"
+    height="320"
+    viewBox="0 0 320 320"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+>
+
+<!--==================================================
+Definitions
+==================================================-->
+
+<defs>
+
+    <radialGradient id="tealGlow"
+        cx="50%"
+        cy="50%"
+        r="50%">
+
+        <stop offset="0%"
+            stop-color="#16B889"
+            stop-opacity="0.35"/>
+
+        <stop offset="70%"
+            stop-color="#16B889"
+            stop-opacity="0.08"/>
+
+        <stop offset="100%"
+            stop-color="#16B889"
+            stop-opacity="0"/>
+
+    </radialGradient>
+
+
+    <linearGradient id="goldLine"
+        x1="0"
+        y1="0"
+        x2="1"
+        y2="1">
+
+        <stop offset="0%"
+            stop-color="#D6B56C"/>
+
+        <stop offset="100%"
+            stop-color="#A57B35"/>
+
+    </linearGradient>
+
+
+    <linearGradient id="ivoryLight"
+        x1="0"
+        y1="0"
+        x2="0"
+        y2="1">
+
+        <stop offset="0%"
+            stop-color="#FFF9EA"/>
+
+        <stop offset="100%"
+            stop-color="#E9E2D3"/>
+
+    </linearGradient>
+
+
+    <filter id="softGlow"
+        x="-50%"
+        y="-50%"
+        width="200%"
+        height="200%">
+
+        <feGaussianBlur
+            stdDeviation="12"/>
+
+    </filter>
+
+
+</defs>
+
+
+<!--==================================================
+Ambient Glow
+==================================================-->
+
+<circle
+    cx="160"
+    cy="160"
+    r="120"
+    fill="url(#tealGlow)"
+/>
+
+
+<circle
+    cx="160"
+    cy="160"
+    r="70"
+    fill="#16B889"
+    opacity="0.12"
+    filter="url(#softGlow)"
+/>
+
+
+<!--==================================================
+Opening Portal / Permission Symbol
+==================================================-->
+
+<!-- Outer doorway -->
+
+<path
+    d="
+    M95 230
+    V125
+    C95 89 124 60 160 60
+    C196 60 225 89 225 125
+    V230
+    "
+    stroke="url(#goldLine)"
+    stroke-width="3"
+    stroke-linecap="round"
+/>
+
+
+<!-- Inner doorway -->
+
+<path
+    d="
+    M122 230
+    V132
+    C122 111 139 94 160 94
+    C181 94 198 111 198 132
+    V230
+    "
+    stroke="#F6F1E7"
+    stroke-opacity="0.8"
+    stroke-width="2"
+    stroke-linecap="round"
+/>
+
+
+<!-- Inner light -->
+
+<ellipse
+    cx="160"
+    cy="150"
+    rx="32"
+    ry="62"
+    fill="#16B889"
+    opacity="0.18"
+/>
+
+
+<!--==================================================
+Invitation Spark
+==================================================-->
+
+<circle
+    cx="160"
+    cy="116"
+    r="8"
+    fill="url(#goldLine)"
+/>
+
+
+<path
+    d="
+    M160 96
+    V86
+    M160 136
+    V146
+    M140 116
+    H130
+    M190 116
+    H180
+    "
+    stroke="#D6B56C"
+    stroke-width="2"
+    stroke-linecap="round"
+/>
+
+
+<!--==================================================
+Base Line
+==================================================-->
+
+<path
+    d="
+    M80 230
+    H240
+    "
+    stroke="#F6F1E7"
+    stroke-opacity="0.45"
+    stroke-width="2"
+    stroke-linecap="round"
+/>
+
+
+<!--==================================================
+Small Gold Accent
+==================================================-->
+
+<circle
+    cx="160"
+    cy="250"
+    r="4"
+    fill="#D6B56C"
+/>
+
+
+</svg>
