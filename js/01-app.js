@@ -215,15 +215,61 @@ Responsibility
 
     CTM.loadInitialScreen = async function () {
 
-        const screen =
+        /*
+        URL Hash takes highest priority
+        */
 
-            CTM.getCurrentScreen()
+        const hash =
 
-            ||
+            window.location.hash.replace('#', '');
 
-            CTM.config.firstScreen;
+        if (
 
-        await CTM.navigate(screen);
+            typeof CTM.isValidScreen === 'function' &&
+
+            CTM.isValidScreen(hash)
+
+        ) {
+
+            await CTM.navigate(hash);
+
+            return;
+
+        }
+
+        /*
+        Restore previous session
+        */
+
+        if (
+
+            CTM.state.currentScreen &&
+
+            typeof CTM.isValidScreen === 'function' &&
+
+            CTM.isValidScreen(CTM.state.currentScreen)
+
+        ) {
+
+            await CTM.navigate(
+
+                CTM.state.currentScreen
+
+            );
+
+            return;
+
+        }
+
+        /*
+        Fresh visitor
+        */
+
+        await CTM.navigate(
+
+            CTM.config.firstScreen
+
+        );
 
     };
 
