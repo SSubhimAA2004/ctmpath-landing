@@ -48,10 +48,14 @@ Screen Container
 
 
 
+
+
 /*==================================================
 Background Atmosphere
 
-CTM PATH™ Logo Inspired Navy + Teal + Gold Glow
+CTM PATH™ Infinity Mastery Identity
+
+Midnight Navy + Gold Light + Subtle Teal
 
 ==================================================*/
 
@@ -70,40 +74,45 @@ CTM PATH™ Logo Inspired Navy + Teal + Gold Glow
 
         radial-gradient(
 
-            circle at 50% 12%,
+            circle at 50% 18%,
 
-            rgba(24,166,109,.18),
+            rgba(217,181,106,.12),
 
-            transparent 32%
+            transparent 28%
 
         ),
+
 
 
         radial-gradient(
 
-            circle at 50% 20%,
+            circle at 50% 32%,
 
-            rgba(217,181,106,.12),
+            rgba(0,194,184,.08),
 
-            transparent 38%
+            transparent 40%
 
         ),
+
 
 
         radial-gradient(
 
             circle at center,
 
-            rgba(3,21,47,.40),
+            rgba(6,21,47,.45),
 
-            transparent 65%
+            transparent 70%
 
         );
+
 
 
     pointer-events:none;
 
 }
+
+
 
 
 
@@ -124,10 +133,12 @@ Main Container
     margin:0 auto;
 
 
+
     padding:
 
 
         50px 40px;
+
 
 
     position:relative;
@@ -136,7 +147,10 @@ Main Container
     z-index:2;
 
 
+
 }
+
+
 
 
 
@@ -157,7 +171,9 @@ Hero Layout
     margin:0 auto;
 
 
+
     padding-top:30px;
+
 
 
     display:flex;
@@ -166,23 +182,24 @@ Hero Layout
     flex-direction:column;
 
 
+
     align-items:center;
 
 
     justify-content:center;
 
 
+
     text-align:center;
+
 
 
 }
 
-
-
 /*==================================================
 SVG Logo
 
-CTM PATH™ Transparent Brand Mark
+CTM PATH™ Infinity Mastery Transparent Brand Mark
 
 ==================================================*/
 
@@ -193,34 +210,71 @@ CTM PATH™ Transparent Brand Mark
     width:
 
 
-        260px;
+        300px;
 
 
-    height:auto;
+
+    height:
 
 
-    display:block;
+        auto;
+
+
+
+    display:
+
+
+        block;
+
 
 
     margin:
 
 
-        0 auto 38px;
+        0 auto 42px;
 
 
-    object-fit:contain;
+
+    object-fit:
 
 
-    position:relative;
+        contain;
 
 
-    z-index:5;
+
+    position:
 
 
-    opacity:1;
+        relative;
 
 
-    visibility:visible;
+
+    z-index:
+
+
+        5;
+
+
+
+    opacity:
+
+
+        1;
+
+
+
+    visibility:
+
+
+        visible;
+
+
+
+    background:
+
+
+        transparent;
+
 
 
     filter:
@@ -228,18 +282,30 @@ CTM PATH™ Transparent Brand Mark
 
         drop-shadow(
 
-            0 20px 45px rgba(0,0,0,.55)
+            0 25px 55px rgba(0,0,0,.55)
 
         )
 
         drop-shadow(
 
-            0 0 35px rgba(24,166,109,.20)
+            0 0 45px rgba(217,181,106,.18)
 
         );
 
 
+
+    transition:
+
+
+        transform .45s var(--ease-premium);
+
+
+
 }
+
+
+
+
 
 
 
@@ -255,16 +321,17 @@ Logo Hover Micro Interaction
     transform:
 
 
-        translateY(-4px);
+        translateY(-5px);
 
-
-    transition:
-
-
-        transform .45s ease;
 
 
 }
+
+
+
+
+
+
 
 
 /*==================================================
@@ -314,6 +381,11 @@ Screen Caption
 
 
 
+
+
+
+
+
 /*==================================================
 Gold Divider
 
@@ -355,14 +427,20 @@ CTM PATH™ Signature Gold Line
 
             transparent,
 
-            #D9B56A,
+            var(--color-gold),
 
             transparent
 
         );
 
 
+
 }
+
+
+
+
+
 
 
 
@@ -393,6 +471,11 @@ Small Divider
 
 
 
+
+
+
+
+
 /*==================================================
 Welcome Block
 
@@ -417,6 +500,11 @@ Welcome Block
 
 
 }
+
+
+
+
+
 
 
 
@@ -478,6 +566,11 @@ Tamil Welcome Heading
 
 
 
+
+
+
+
+
 /*==================================================
 English Welcome Heading
 
@@ -534,8 +627,6 @@ English Welcome Heading
 
 }
 
-
-
 /*==================================================
 Introduction Block
 
@@ -581,6 +672,11 @@ Introduction Block
 
 
 }
+
+
+
+
+
 
 
 
@@ -634,6 +730,11 @@ Tamil Introduction
 
 
 
+
+
+
+
+
 /*==================================================
 Raphael Name Highlight
 
@@ -646,7 +747,7 @@ Raphael Name Highlight
     color:
 
 
-        var(--color-white);
+        var(--color-ivory);
 
 
 
@@ -658,6 +759,11 @@ Raphael Name Highlight
 
 
 }
+
+
+
+
+
 
 
 
@@ -678,6 +784,11 @@ Gold Text
 
 
 }
+
+
+
+
+
 
 
 
@@ -721,6 +832,11 @@ English Introduction
 
 
 }
+
+
+
+
+
 
 
 
@@ -769,6 +885,13 @@ CTA Block
 
 
 }
+
+
+
+
+
+
+
 
 /*==================================================
 CTA Button
@@ -886,6 +1009,9 @@ CTM PATH™ Premium Journey Invitation
 
 
 
+
+
+
 /*==================================================
 CTA Hover
 
@@ -910,6 +1036,11 @@ CTA Hover
 
 
 }
+
+
+
+
+
 
 
 
@@ -956,6 +1087,11 @@ CTA Tamil Title
 
 
 
+
+
+
+
+
 /*==================================================
 CTA English Subtitle
 
@@ -996,8 +1132,6 @@ CTA English Subtitle
 
 
 }
-
-
 
 /*==================================================
 Shimmer Animation
@@ -1113,7 +1247,11 @@ Shimmer Animation
     0%{
 
 
-        left:-120%;
+        left:
+
+
+            -120%;
+
 
     }
 
@@ -1122,12 +1260,20 @@ Shimmer Animation
     25%,100%{
 
 
-        left:150%;
+        left:
+
+
+            150%;
+
 
     }
 
 
 }
+
+
+
+
 
 
 
@@ -1151,13 +1297,18 @@ Hero Animation
 
 
 
+
+
 @keyframes screenFadeUp{
 
 
     from{
 
 
-        opacity:0;
+        opacity:
+
+
+            0;
 
 
 
@@ -1175,7 +1326,10 @@ Hero Animation
     to{
 
 
-        opacity:1;
+        opacity:
+
+
+            1;
 
 
 
@@ -1193,6 +1347,11 @@ Hero Animation
 
 
 
+
+
+
+
+
 /*==================================================
 Desktop Spacing
 
@@ -1200,6 +1359,7 @@ Desktop Spacing
 
 
 @media(min-width:1200px){
+
 
 
     #screen01 .hero{
@@ -1215,20 +1375,23 @@ Desktop Spacing
 
 
 
+
+
     #screen01 .hero-logo{
 
 
         width:
 
 
-            300px;
+            330px;
 
 
 
         margin-bottom:
 
 
-            45px;
+            50px;
+
 
 
     }
@@ -1238,6 +1401,12 @@ Desktop Spacing
 }
 
 
+
+
+
+
+
+
 /*==================================================
 Tablet Responsive
 
@@ -1245,6 +1414,7 @@ Tablet Responsive
 
 
 @media(max-width:900px){
+
 
 
     #screen01 .container{
@@ -1261,24 +1431,28 @@ Tablet Responsive
 
 
 
+
+
     #screen01 .hero-logo{
 
 
         width:
 
 
-            220px;
+            250px;
 
 
 
         margin-bottom:
 
 
-            32px;
+            35px;
 
 
 
     }
+
+
 
 
 
@@ -1296,6 +1470,8 @@ Tablet Responsive
 
 
 
+
+
     #screen01 .tamil-intro{
 
 
@@ -1307,6 +1483,8 @@ Tablet Responsive
 
 
     }
+
+
 
 
 
@@ -1334,6 +1512,11 @@ Tablet Responsive
 
 
 
+
+
+
+
+
 /*==================================================
 Mobile Responsive
 
@@ -1341,6 +1524,7 @@ Mobile Responsive
 
 
 @media(max-width:600px){
+
 
 
     #screen01{
@@ -1361,6 +1545,7 @@ Mobile Responsive
 
 
     }
+
 
 
 
@@ -1404,10 +1589,14 @@ Mobile Responsive
 
 
 
+
     /*
-    Mobile SVG Logo
+    Transparent SVG Logo
+
+    Mobile Optimization
 
     */
+
 
     #screen01 .hero-logo{
 
@@ -1415,14 +1604,14 @@ Mobile Responsive
         width:
 
 
-            190px;
+            210px;
 
 
 
         margin:
 
 
-            0 auto 28px;
+            0 auto 30px;
 
 
 
@@ -1431,20 +1620,19 @@ Mobile Responsive
 
             drop-shadow(
 
-                0 15px 30px rgba(0,0,0,.60)
+                0 18px 35px rgba(0,0,0,.65)
 
             )
 
             drop-shadow(
 
-                0 0 25px rgba(24,166,109,.25)
+                0 0 35px rgba(217,181,106,.20)
 
             );
 
 
 
     }
-
 
 
 
@@ -1625,6 +1813,8 @@ Mobile Responsive
 
 
 
+
+
 /*==================================================
 Small Mobile Devices
 
@@ -1634,17 +1824,20 @@ Small Mobile Devices
 @media(max-width:380px){
 
 
+
     #screen01 .hero-logo{
 
 
         width:
 
 
-            160px;
+            180px;
 
 
 
     }
+
+
 
 
 
@@ -1659,6 +1852,8 @@ Small Mobile Devices
 
 
     }
+
+
 
 
 
@@ -1680,6 +1875,11 @@ Small Mobile Devices
 
 
 
+
+
+
+
+
 /*==================================================
 Reduced Motion Accessibility
 
@@ -1687,6 +1887,7 @@ Reduced Motion Accessibility
 
 
 @media(prefers-reduced-motion:reduce){
+
 
 
     #screen01 .fade-up,
@@ -1703,6 +1904,8 @@ Reduced Motion Accessibility
 
 
     }
+
+
 
 
 
