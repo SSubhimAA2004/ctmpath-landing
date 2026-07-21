@@ -2,7 +2,7 @@
 /*
 ======================================================================
 
-CTM PATH™ Guided Journey v1.0
+CTM PATH™ Guided Journey v6.0
 
 File
 css/foundation/global.css
@@ -38,12 +38,17 @@ Root Variables
 
     --color-background:
 
-        #061526;
+        #03152F;
 
 
     --color-background-soft:
 
-        #0B2038;
+        #061D38;
+
+
+    --color-background-deep:
+
+        #020D20;
 
 
     --color-surface:
@@ -57,6 +62,13 @@ Root Variables
 
 
 
+    /*
+    -----------------------------------------------
+    Primary Brand
+    -----------------------------------------------
+    */
+
+
     --color-primary:
 
         #18A66D;
@@ -66,6 +78,13 @@ Root Variables
 
         #125D41;
 
+
+
+    /*
+    -----------------------------------------------
+    CTM Gold
+    -----------------------------------------------
+    */
 
 
     --color-gold:
@@ -79,6 +98,13 @@ Root Variables
 
 
 
+    /*
+    -----------------------------------------------
+    Typography Colours
+    -----------------------------------------------
+    */
+
+
     --color-white:
 
         #FFFFFF;
@@ -86,12 +112,13 @@ Root Variables
 
     --color-text:
 
-        rgba(255,255,255,.92);
+        rgba(255,255,255,.94);
 
 
     --color-text-soft:
 
         rgba(255,255,255,.72);
+
 
 
 
@@ -118,6 +145,8 @@ Root Variables
 
 
 
+
+
     /*
     -----------------------------------------------
     Shadows
@@ -127,25 +156,31 @@ Root Variables
 
     --shadow-soft:
 
+
         0 20px 60px rgba(0,0,0,.35);
 
 
 
     --shadow-premium:
 
-        0 30px 80px rgba(0,0,0,.55);
+
+        0 30px 80px rgba(0,0,0,.60);
 
 
 
     --shadow-glow:
 
-        0 0 40px rgba(24,166,109,.25);
+
+        0 0 50px rgba(24,166,109,.25);
 
 
 
     --shadow-gold:
 
-        0 0 40px rgba(217,181,106,.20);
+
+        0 0 45px rgba(217,181,106,.22);
+
+
 
 
 
@@ -171,6 +206,8 @@ Root Variables
     --radius-soft:
 
         16px;
+
+
 
 
 
@@ -207,6 +244,8 @@ Root Variables
 
 
 
+
+
     /*
     -----------------------------------------------
     Animation
@@ -238,8 +277,6 @@ Root Variables
 
 }
 
-
-
 /*==================================================
 Global Reset
 ==================================================*/
@@ -261,6 +298,8 @@ Global Reset
 
 
 
+
+
 /*==================================================
 HTML Base
 ==================================================*/
@@ -271,7 +310,9 @@ html{
 
     width:100%;
 
+
     min-height:100%;
+
 
     scroll-behavior:smooth;
 
@@ -280,8 +321,15 @@ html{
 
 
 
+
+
 /*==================================================
 Body Foundation
+
+CTM PATH™ Premium Brand Atmosphere
+
+Merged with Logo Identity
+
 ==================================================*/
 
 
@@ -290,7 +338,9 @@ body{
 
     width:100%;
 
+
     min-height:100vh;
+
 
 
     overflow-x:hidden;
@@ -300,40 +350,118 @@ body{
     background:
 
 
+
         radial-gradient(
 
-            circle at top,
+            circle at 50% 10%,
 
-            rgba(24,166,109,.12),
+            rgba(24,166,109,.16),
 
-            transparent 35%
+            transparent 32%
 
         ),
+
+
+
+        radial-gradient(
+
+            circle at 80% 20%,
+
+            rgba(217,181,106,.08),
+
+            transparent 28%
+
+        ),
+
 
 
         linear-gradient(
 
             180deg,
 
-            #081C3A 0%,
+            #03152F 0%,
 
-            #061526 100%
+            #041A32 45%,
+
+            #020D20 100%
 
         );
 
 
 
-    color:var(--color-text);
+
+    color:
+
+        var(--color-text);
 
 
 
-    -webkit-font-smoothing:antialiased;
 
-    -moz-osx-font-smoothing:grayscale;
+    -webkit-font-smoothing:
+
+        antialiased;
+
+
+
+    -moz-osx-font-smoothing:
+
+        grayscale;
 
 
 
 }
+
+
+
+
+
+/*==================================================
+Premium Background Glow
+
+Subtle CTM PATH™ Identity Layer
+
+==================================================*/
+
+
+body::before{
+
+
+    content:"";
+
+
+    position:fixed;
+
+
+    inset:0;
+
+
+
+    background:
+
+
+
+        radial-gradient(
+
+            circle at center,
+
+            rgba(11,107,104,.10),
+
+            transparent 45%
+
+        );
+
+
+
+    pointer-events:none;
+
+
+    z-index:-1;
+
+
+
+}
+
+
 
 
 
@@ -347,12 +475,17 @@ Application Root
 
     width:100%;
 
+
     min-height:100vh;
+
 
     position:relative;
 
 
+
 }
+
+
 
 
 
@@ -366,10 +499,14 @@ Screen Container
 
     width:100%;
 
+
     min-height:100vh;
 
 
+
 }
+
+
 
 
 
@@ -383,21 +520,29 @@ Screen Base
 
     width:100%;
 
+
     min-height:100vh;
+
 
 
     display:flex;
 
+
     justify-content:center;
 
+
     align-items:center;
+
 
 
 
     position:relative;
 
 
+
 }
+
+
 
 
 
@@ -411,26 +556,32 @@ Container
 
     width:100%;
 
+
     max-width:1200px;
+
 
 
     margin:0 auto;
 
 
+
+
     padding-left:
+
 
         40px;
 
 
+
+
     padding-right:
+
 
         40px;
 
 
 
 }
-
-
 
 /*==================================================
 Images
@@ -442,12 +593,19 @@ img{
 
     max-width:100%;
 
+
     height:auto;
+
 
     display:block;
 
 
+
 }
+
+
+
+
 
 
 
@@ -461,12 +619,25 @@ button{
 
     font:inherit;
 
+
+
     border:none;
+
+
 
     background:none;
 
 
+
+    cursor:pointer;
+
+
+
 }
+
+
+
+
 
 
 
@@ -480,10 +651,17 @@ a{
 
     color:inherit;
 
+
+
     text-decoration:none;
 
 
+
 }
+
+
+
+
 
 
 
@@ -497,37 +675,75 @@ Selection
 
     background:
 
-        rgba(217,181,106,.35);
 
 
-    color:white;
+        rgba(
+
+            217,
+
+            181,
+
+            106,
+
+            .35
+
+        );
+
+
+
+    color:
+
+
+        white;
+
 
 
 }
 
 
 
+
+
+
+
 /*==================================================
 Scrollbar Premium
+
+CTM PATH™ Gold + Teal Identity
+
 ==================================================*/
 
 
 ::-webkit-scrollbar{
 
 
-    width:10px;
+    width:
+
+
+        10px;
+
 
 
 }
+
+
+
 
 
 ::-webkit-scrollbar-track{
 
 
-    background:#061526;
+    background:
+
+
+        #020D20;
+
 
 
 }
+
+
+
 
 
 ::-webkit-scrollbar-thumb{
@@ -535,18 +751,76 @@ Scrollbar Premium
 
     background:
 
+
+
         linear-gradient(
+
+
 
             180deg,
 
+
+
             #D9B56A,
 
+
+
             #18A66D
+
+
 
         );
 
 
-    border-radius:20px;
+
+    border-radius:
+
+
+        20px;
+
 
 
 }
+
+
+
+
+
+
+
+/*==================================================
+Accessibility
+
+==================================================*/
+
+
+:focus-visible{
+
+
+    outline:
+
+
+
+        3px solid rgba(
+
+            217,
+
+            181,
+
+            106,
+
+            .65
+
+        );
+
+
+
+    outline-offset:
+
+
+        4px;
+
+
+
+}
+
