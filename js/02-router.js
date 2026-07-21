@@ -1,3 +1,4 @@
+
 /*
 ======================================================================
 
@@ -16,6 +17,7 @@ Responsibility
 • Prevent duplicate navigation
 • Maintain browser history
 • Update application state
+• Reset scroll position on navigation
 
 ======================================================================
 */
@@ -34,11 +36,14 @@ Responsibility
 
     }
 
+
     /*==================================================
     Navigation Lock
     ==================================================*/
 
     let isNavigating = false;
+
+
 
     /*==================================================
     Validate Screen
@@ -56,11 +61,14 @@ Responsibility
 
     };
 
+
+
     /*==================================================
     Navigate
     ==================================================*/
 
     CTM.navigate = async function (screenId) {
+
 
         if (!CTM.isValidScreen(screenId)) {
 
@@ -76,11 +84,15 @@ Responsibility
 
         }
 
+
+
         if (isNavigating) {
 
             return false;
 
         }
+
+
 
         /*
         --------------------------------------------------
@@ -94,6 +106,7 @@ Responsibility
             'screen-container'
 
         );
+
 
         if (
 
@@ -109,11 +122,38 @@ Responsibility
 
         }
 
+
+
         isNavigating = true;
+
+
 
         try {
 
+
             await CTM.loadScreen(screenId);
+
+
+
+            /*
+            --------------------------------------------------
+            Reset Scroll Position
+
+            Every new screen starts from the top.
+            Required for Guided Journey experience.
+            --------------------------------------------------
+            */
+
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: 'instant'
+
+            });
+
+
 
             history.replaceState(
 
@@ -129,25 +169,38 @@ Responsibility
 
             );
 
+
+
             return true;
 
+
         }
+
 
         catch (error) {
 
+
             console.error(error);
+
 
             return false;
 
+
         }
+
 
         finally {
 
+
             isNavigating = false;
+
 
         }
 
+
     };
+
+
 
     /*==================================================
     Previous Screen
@@ -155,9 +208,12 @@ Responsibility
 
     CTM.navigateBack = async function () {
 
+
         const previous =
 
             CTM.state.previousScreen;
+
+
 
         if (!previous) {
 
@@ -165,9 +221,14 @@ Responsibility
 
         }
 
+
+
         await CTM.navigate(previous);
 
+
     };
+
+
 
     /*==================================================
     Next Screen
@@ -175,9 +236,12 @@ Responsibility
 
     CTM.navigateNext = async function () {
 
+
         const current =
 
             CTM.getCurrentScreen();
+
+
 
         const number =
 
@@ -189,6 +253,8 @@ Responsibility
 
             );
 
+
+
         if (
 
             number >= CTM.state.totalScreens
@@ -199,15 +265,22 @@ Responsibility
 
         }
 
+
+
         const next =
 
             'screen' +
 
             String(number + 1).padStart(2, '0');
 
+
+
         await CTM.navigate(next);
 
+
     };
+
+
 
     /*==================================================
     Bind Navigation
@@ -215,11 +288,14 @@ Responsibility
 
     CTM.bindNavigation = function () {
 
+
         document.addEventListener(
 
             'click',
 
             async function (event) {
+
+
 
                 const button =
 
@@ -229,17 +305,25 @@ Responsibility
 
                     );
 
+
+
                 if (!button) {
 
                     return;
 
                 }
 
+
+
                 event.preventDefault();
+
+
 
                 const nextScreen =
 
                     button.dataset.next;
+
+
 
                 await CTM.navigate(
 
@@ -247,11 +331,16 @@ Responsibility
 
                 );
 
+
+
             }
 
         );
 
+
     };
+
+
 
     /*==================================================
     Browser History
@@ -263,6 +352,8 @@ Responsibility
 
         async function (event) {
 
+
+
             if (
 
                 event.state &&
@@ -271,17 +362,24 @@ Responsibility
 
             ) {
 
+
+
                 await CTM.navigate(
 
                     event.state.screen
 
                 );
 
+
             }
+
+
 
         }
 
     );
+
+
 
     /*==================================================
     Initialize Router
@@ -293,10 +391,13 @@ Responsibility
 
         function () {
 
+
             CTM.bindNavigation();
+
 
         }
 
     );
+
 
 })();
