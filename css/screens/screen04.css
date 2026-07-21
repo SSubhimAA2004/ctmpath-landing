@@ -1,1 +1,405 @@
 
+/*======================================================================
+
+CTM PATH™ Guided Journey v6.0
+
+SCREEN 04 — YOUR PERMISSION™
+
+File:
+screen04.css
+
+Purpose:
+Screen 04 Visual Styling
+
+Responsibility:
+• Screen 04 Layout
+• Permission Illustration
+• Typography hierarchy
+• Emotional spacing
+• Navigation cue
+• Responsive behaviour
+
+======================================================================*/
+
+
+/*==================================================
+Screen 04 Container
+==================================================*/
+
+.screen04{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:40px 24px;
+
+}
+
+
+
+/*==================================================
+Progress Indicator
+==================================================*/
+
+.screen04 .screen-progress{
+
+    position:absolute;
+
+    top:48px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:100%;
+
+    text-align:center;
+
+}
+
+
+.screen04 .moment-label{
+
+    font-size:0.75rem;
+
+    letter-spacing:3px;
+
+    color:rgba(246,241,231,0.55);
+
+    font-weight:500;
+
+}
+
+
+
+/*==================================================
+Main Content
+==================================================*/
+
+.screen04 .screen-content{
+
+    width:100%;
+
+    max-width:520px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+
+/*==================================================
+Illustration
+==================================================*/
+
+.screen04 .screen-visual{
+
+    width:220px;
+
+    height:220px;
+
+    margin-bottom:34px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+.screen04 .screen-image{
+
+    width:100%;
+
+    height:auto;
+
+    display:block;
+
+}
+
+
+
+/*==================================================
+Tamil Title
+==================================================*/
+
+.screen04 .screen-title.tamil{
+
+    margin:0 0 24px;
+
+    color:#F6F1E7;
+
+    font-size:clamp(2rem,5vw,2.8rem);
+
+    font-weight:600;
+
+    line-height:1.4;
+
+    letter-spacing:0.5px;
+
+}
+
+
+
+/*==================================================
+Tamil Message
+==================================================*/
+
+.screen04 .screen-message.tamil{
+
+    color:#F6F1E7;
+
+    font-size:clamp(1.35rem,4vw,1.75rem);
+
+    line-height:1.8;
+
+    font-weight:500;
+
+    margin-bottom:22px;
+
+}
+
+
+.screen04 .screen-message p{
+
+    margin:0;
+
+}
+
+
+
+/*==================================================
+English Subtitle
+==================================================*/
+
+.screen04 .screen-subtitle.english{
+
+    color:rgba(246,241,231,0.72);
+
+    font-size:clamp(1rem,3vw,1.2rem);
+
+    line-height:1.7;
+
+    font-weight:400;
+
+    margin-bottom:44px;
+
+}
+
+
+.screen04 .screen-subtitle p{
+
+    margin:0;
+
+}
+
+
+
+/*==================================================
+Journey Navigation
+==================================================*/
+
+.screen04 .journey-next{
+
+    background:none;
+
+    border:none;
+
+    padding:0;
+
+    cursor:pointer;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#D6B56C;
+
+    transition:all 0.3s ease;
+
+}
+
+
+
+.screen04 .journey-next .tamil{
+
+    font-size:1.35rem;
+
+    font-weight:600;
+
+}
+
+
+
+.screen04 .journey-next .english{
+
+    font-size:0.95rem;
+
+    color:rgba(246,241,231,0.7);
+
+    letter-spacing:1px;
+
+}
+
+
+
+.screen04 .journey-next .arrow{
+
+    font-size:1.4rem;
+
+    color:#D6B56C;
+
+    animation:screen04Arrow 2s infinite;
+
+}
+
+
+
+/*==================================================
+Navigation Animation
+==================================================*/
+
+@keyframes screen04Arrow{
+
+
+    0%{
+
+        transform:translateY(0);
+
+        opacity:0.5;
+
+    }
+
+
+    50%{
+
+        transform:translateY(8px);
+
+        opacity:1;
+
+    }
+
+
+    100%{
+
+        transform:translateY(0);
+
+        opacity:0.5;
+
+    }
+
+
+}
+
+
+
+/*==================================================
+Hover
+==================================================*/
+
+.screen04 .journey-next:hover{
+
+    transform:translateY(-3px);
+
+}
+
+
+
+/*==================================================
+Mobile Optimisation
+==================================================*/
+
+@media(max-width:600px){
+
+
+    .screen04{
+
+        padding:32px 20px;
+
+    }
+
+
+    .screen04 .screen-progress{
+
+        top:32px;
+
+    }
+
+
+    .screen04 .screen-visual{
+
+        width:180px;
+
+        height:180px;
+
+        margin-bottom:28px;
+
+    }
+
+
+    .screen04 .screen-title.tamil{
+
+        margin-bottom:18px;
+
+    }
+
+
+    .screen04 .screen-message.tamil{
+
+        line-height:1.7;
+
+    }
+
+
+    .screen04 .screen-subtitle.english{
+
+        margin-bottom:34px;
+
+    }
+
+
+}
+
+
+
+/*==================================================
+Large Screens
+==================================================*/
+
+@media(min-width:1200px){
+
+
+    .screen04 .screen-visual{
+
+        width:260px;
+
+        height:260px;
+
+    }
+
+
+}
