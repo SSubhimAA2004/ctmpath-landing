@@ -251,6 +251,8 @@ Journey Navigation
 
     font-weight:600;
 
+    color:#D6B56C;
+
 }
 
 
@@ -259,7 +261,7 @@ Journey Navigation
 
     font-size:0.95rem;
 
-    color:rgba(246,241,231,0.7);
+    color:#D6B56C;
 
     letter-spacing:1px;
 
@@ -272,6 +274,8 @@ Journey Navigation
     font-size:1.4rem;
 
     color:#D6B56C;
+
+    letter-spacing:6px;
 
     animation:screen04Arrow 2s infinite;
 
