@@ -1,4 +1,3 @@
-
 /*
 ======================================================================
 
@@ -83,9 +82,26 @@ Responsibility
 
         }
 
+        /*
+        --------------------------------------------------
+        Prevent duplicate navigation ONLY if a screen
+        has already been rendered.
+        --------------------------------------------------
+        */
+
+        const container = document.getElementById(
+
+            'screen-container'
+
+        );
+
         if (
 
-            CTM.getCurrentScreen() === screenId
+            CTM.getCurrentScreen() === screenId &&
+
+            container &&
+
+            container.children.length > 0
 
         ) {
 
@@ -119,11 +135,7 @@ Responsibility
 
         catch (error) {
 
-            console.error(
-
-                error
-
-            );
+            console.error(error);
 
             return false;
 
