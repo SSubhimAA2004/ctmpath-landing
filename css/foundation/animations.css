@@ -1,1 +1,696 @@
 
+/*
+======================================================================
+
+CTM PATH™ Guided Journey v1.0
+
+File
+css/foundation/animations.css
+
+Purpose
+Premium Motion System
+
+Responsibility
+• Screen entrance animations
+• Emotional transitions
+• Hero reveal effects
+• Button interactions
+• Floating effects
+• Smooth premium movement
+
+======================================================================
+*/
+
+
+/*==================================================
+Screen Entrance
+==================================================*/
+
+
+.screen{
+
+
+    animation:
+
+        screenReveal .90s var(--ease-premium)
+        both;
+
+
+
+}
+
+
+
+@keyframes screenReveal{
+
+
+    from{
+
+
+        opacity:0;
+
+
+        transform:
+
+            translateY(30px);
+
+
+
+    }
+
+
+
+    to{
+
+
+        opacity:1;
+
+
+        transform:
+
+            translateY(0);
+
+
+
+    }
+
+
+
+}
+
+
+
+/*==================================================
+Fade In
+==================================================*/
+
+
+.fade-in{
+
+
+    animation:
+
+        fadeIn .80s var(--ease-premium)
+        both;
+
+
+
+}
+
+
+
+@keyframes fadeIn{
+
+
+    from{
+
+
+        opacity:0;
+
+
+
+    }
+
+
+
+    to{
+
+
+        opacity:1;
+
+
+
+    }
+
+
+
+}
+
+
+
+/*==================================================
+Rise In
+==================================================*/
+
+
+.fade-rise{
+
+
+    animation:
+
+        fadeRise .90s var(--ease-premium)
+        both;
+
+
+
+}
+
+
+
+@keyframes fadeRise{
+
+
+    from{
+
+
+        opacity:0;
+
+
+
+        transform:
+
+
+            translateY(40px);
+
+
+
+    }
+
+
+
+    to{
+
+
+        opacity:1;
+
+
+
+        transform:
+
+
+            translateY(0);
+
+
+
+    }
+
+
+
+}
+
+
+
+/*==================================================
+Scale Reveal
+==================================================*/
+
+
+.scale-reveal{
+
+
+    animation:
+
+        scaleReveal .80s var(--ease-premium)
+        both;
+
+
+
+}
+
+
+
+@keyframes scaleReveal{
+
+
+    from{
+
+
+        opacity:0;
+
+
+
+        transform:
+
+
+            scale(.92);
+
+
+
+    }
+
+
+
+    to{
+
+
+        opacity:1;
+
+
+
+        transform:
+
+
+            scale(1);
+
+
+
+    }
+
+
+
+}
+
+
+
+/*==================================================
+Hero Glow
+==================================================*/
+
+
+.hero-glow{
+
+
+    animation:
+
+        heroGlow 4s ease-in-out infinite;
+
+
+
+}
+
+
+
+@keyframes heroGlow{
+
+
+    0%,100%{
+
+
+        opacity:.45;
+
+
+        transform:
+
+            scale(1);
+
+
+
+    }
+
+
+
+    50%{
+
+
+        opacity:.85;
+
+
+        transform:
+
+            scale(1.05);
+
+
+
+    }
+
+
+
+}
+
+
+
+/*==================================================
+Floating Element
+==================================================*/
+
+
+.float{
+
+
+    animation:
+
+        floatMotion 5s ease-in-out infinite;
+
+
+
+}
+
+
+
+@keyframes floatMotion{
+
+
+    0%,100%{
+
+
+        transform:
+
+            translateY(0);
+
+
+
+    }
+
+
+
+    50%{
+
+
+        transform:
+
+            translateY(-12px);
+
+
+
+    }
+
+
+
+}
+
+
+
+/*==================================================
+Gold Pulse
+==================================================*/
+
+
+.gold-pulse{
+
+
+    animation:
+
+        goldPulse 3s ease-in-out infinite;
+
+
+
+}
+
+
+
+@keyframes goldPulse{
+
+
+    0%,100%{
+
+
+        box-shadow:
+
+            0 0 0 rgba(217,181,106,0);
+
+
+
+    }
+
+
+
+    50%{
+
+
+        box-shadow:
+
+            0 0 40px rgba(217,181,106,.35);
+
+
+
+    }
+
+
+
+}
+
+
+
+/*==================================================
+Green Energy Pulse
+==================================================*/
+
+
+.green-pulse{
+
+
+    animation:
+
+        greenPulse 3s ease-in-out infinite;
+
+
+
+}
+
+
+
+@keyframes greenPulse{
+
+
+    0%,100%{
+
+
+        box-shadow:
+
+            0 0 0 rgba(24,166,109,0);
+
+
+
+    }
+
+
+
+    50%{
+
+
+        box-shadow:
+
+            0 0 45px rgba(24,166,109,.35);
+
+
+
+    }
+
+
+
+}
+
+
+
+/*==================================================
+Text Reveal
+==================================================*/
+
+
+.text-reveal{
+
+
+    animation:
+
+        textReveal 1s var(--ease-premium)
+        both;
+
+
+
+}
+
+
+
+@keyframes textReveal{
+
+
+    from{
+
+
+        opacity:0;
+
+
+
+        transform:
+
+
+            translateY(20px);
+
+
+
+    }
+
+
+
+    to{
+
+
+        opacity:1;
+
+
+
+        transform:
+
+
+            translateY(0);
+
+
+
+    }
+
+
+
+}
+
+
+
+/*==================================================
+Delayed Animation Helpers
+==================================================*/
+
+
+.delay-1{
+
+
+    animation-delay:
+
+        .15s;
+
+
+
+}
+
+
+
+.delay-2{
+
+
+    animation-delay:
+
+        .30s;
+
+
+
+}
+
+
+
+.delay-3{
+
+
+    animation-delay:
+
+        .45s;
+
+
+
+}
+
+
+
+.delay-4{
+
+
+    animation-delay:
+
+        .60s;
+
+
+
+}
+
+
+
+/*==================================================
+Button Hover Motion
+==================================================*/
+
+
+.btn{
+
+
+    transition:
+
+
+        transform .45s var(--ease-premium);
+
+
+
+}
+
+
+
+/*==================================================
+Smooth Loading
+==================================================*/
+
+
+.loading{
+
+
+    animation:
+
+        loadingPulse 1.5s ease-in-out infinite;
+
+
+
+}
+
+
+
+@keyframes loadingPulse{
+
+
+    0%,100%{
+
+
+        opacity:.5;
+
+
+
+    }
+
+
+
+    50%{
+
+
+        opacity:1;
+
+
+
+    }
+
+
+
+}
+
+
+
+/*==================================================
+Reduced Motion Accessibility
+==================================================*/
+
+
+@media(prefers-reduced-motion:reduce){
+
+
+
+    *,
+
+
+    *::before,
+
+
+    *::after{
+
+
+        animation-duration:
+
+            .01ms !important;
+
+
+
+        animation-iteration-count:
+
+            1 !important;
+
+
+
+        scroll-behavior:
+
+            auto !important;
+
+
+
+        transition-duration:
+
+            .01ms !important;
+
+
+
+    }
+
+
+
+}
