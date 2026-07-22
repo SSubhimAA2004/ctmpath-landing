@@ -1,5 +1,5 @@
 
-/*
+<!--
 ======================================================================
 
 CTM PATH™ Guided Journey v6.0
@@ -7,470 +7,362 @@ CTM PATH™ Guided Journey v6.0
 SCREEN 06 — YOUR JOURNEY™
 
 File:
-screen06.css
+screen06.html
 
 Purpose:
-Screen 06 Visual Styling
+Personal Journey Recognition
 
-Design:
-Premium CTM PATH™ Navigator Standard
+Emotional Role:
+Identity → Personal Connection → Journey Beginning
 
 ======================================================================
-*/
+-->
 
 
-/*==================================================
-Screen Base
-==================================================*/
+<section
 
+    id="screen06"
 
-.screen06 {
+    class="journey-screen screen06">
 
-    min-height:100vh;
 
-    display:flex;
 
-    align-items:center;
 
-    justify-content:center;
 
-    position:relative;
+    <div
 
-    overflow:hidden;
+        class="screen-content">
 
-    background:
 
-        radial-gradient(
-            circle at center,
-            rgba(32,213,199,0.08),
-            transparent 55%
-        ),
 
-        #081C3A;
 
-}
 
+        <!--==================================================
+        Illustration
+        ==================================================-->
 
 
+        <div
 
+            class="screen-visual">
 
-/*==================================================
-Content Container
-==================================================*/
 
+            <img
 
-.screen06 .screen-content {
+                src="assets/images/screen06/screen06-journey-light.svg"
 
-    position:relative;
+                alt="Your Journey"
 
-    z-index:2;
+                class="screen-image">
 
-    width:min(90%,650px);
 
-    text-align:center;
+        </div>
 
-    display:flex;
 
-    flex-direction:column;
 
-    align-items:center;
 
-}
 
 
 
 
+        <!--==================================================
+        Visitor Identity
 
-/*==================================================
-Illustration
-==================================================*/
+        Retrieved from Screen 05
 
+        ==================================================-->
 
-.screen06 .screen-image {
 
-    width:220px;
+        <div
 
-    height:auto;
+            class="personal-greeting tamil">
 
-    margin-bottom:25px;
 
-}
+            <span
 
+                id="visitor-display-name">
 
 
+            </span>
 
 
-/*==================================================
-Visitor Identity
+        </div>
 
-Personal Recognition Moment
 
-==================================================*/
 
 
-.screen06 .personal-greeting {
 
-    color:#E3C47A;
 
-    font-family:
 
-        "Playfair Display",
 
-        "Noto Sans Tamil",
 
-        serif;
+        <!--==================================================
+        Tamil Title
+        ==================================================-->
 
 
-    font-size:
+        <h1
 
-        clamp(2rem,4vw,2.8rem);
+            class="screen-title tamil">
 
 
-    font-weight:600;
+            உங்கள் பயணம்...<br>
 
+            உங்களுக்காக
 
-    letter-spacing:0.08em;
 
+        </h1>
 
-    margin-bottom:18px;
 
 
-    text-transform:capitalize;
 
 
-    text-shadow:
 
-        0 0 18px
 
-        rgba(214,181,108,0.35);
 
-}
+        <!--==================================================
+        English Subtitle
+        ==================================================-->
 
 
+        <div
 
+            class="screen-subtitle english">
 
 
+            YOUR JOURNEY... FOR YOU
 
 
-/*==================================================
-Title
-==================================================*/
+        </div>
 
 
-.screen06 .screen-title {
 
-    color:#FFF8E7;
 
-    font-family:
 
-        "Noto Sans Tamil",
 
-        sans-serif;
 
 
-    font-size:
+        <!--==================================================
+        Tamil Message
+        ==================================================-->
 
-        clamp(2rem,4vw,3rem);
 
+        <div
 
-    line-height:1.45;
+            class="screen-message tamil">
 
 
-    font-weight:700;
+            <p>
 
+                ஒவ்வொரு வாழ்க்கைக்கும்<br>
 
-    margin:0;
+                ஒரு மறைந்த பாதை உள்ளது.
 
-}
 
+            </p>
 
 
 
+            <p>
 
-/*==================================================
-English Subtitle
-==================================================*/
+                உங்கள் உள்ளத்தின் குரலை<br>
 
+                அறியும் இந்தப் பயணம்...
 
-.screen06 .screen-subtitle {
 
-    margin-top:15px;
+            </p>
 
 
-    color:#D6B56C;
 
+            <p>
 
-    font-family:
+                இப்போது தொடங்குகிறது.
 
-        "Inter",
 
-        sans-serif;
+            </p>
 
 
-    font-size:0.85rem;
 
+        </div>
 
-    letter-spacing:0.22em;
 
 
-    text-transform:uppercase;
 
-}
 
 
 
 
 
-/*==================================================
-Message Area
-==================================================*/
+        <!--==================================================
+        English Message
+        ==================================================-->
 
 
-.screen06 .screen-message {
+        <div
 
-    margin-top:35px;
+            class="screen-message english">
 
-}
 
+            <p>
 
+                Every life has a hidden path.
 
 
+            </p>
 
-.screen06 .screen-message.tamil {
 
-    color:#FFF8E7;
 
+            <p>
 
-    font-family:
+                This journey to understand<br>
 
-        "Noto Sans Tamil",
+                your inner voice...
 
-        sans-serif;
 
+            </p>
 
-    font-size:1.1rem;
 
 
-    line-height:2;
+            <p>
 
-}
+                begins now.
 
 
+            </p>
 
 
 
-.screen06 .screen-message.english {
+        </div>
 
-    color:
 
-        rgba(255,248,231,0.72);
 
 
-    font-family:
 
-        "Inter",
 
-        sans-serif;
 
 
-    font-size:0.9rem;
 
+        <!--==================================================
+        Premium Navigator
 
-    line-height:1.8;
+        SCREEN 06 → SCREEN 07
 
-}
+        ==================================================-->
 
 
+        <button
 
+            class="journey-next"
 
+            aria-label="Begin Journey">
 
-/*==================================================
-Premium Navigator
 
-──────────── ● ────────────
 
-Tamil Action
 
-→ → →
 
-ENGLISH JOURNEY
+            <span
 
-──────────── ● ────────────
+                class="nav-decoration top-line">
 
-==================================================*/
 
+            </span>
 
-.screen06 .journey-next {
 
-    margin-top:45px;
 
 
-    background:none;
 
 
-    border:none;
 
 
-    cursor:pointer;
+            <span
 
+                class="nav-tamil">
 
-    display:flex;
 
+                தொடங்கலாம்
 
-    flex-direction:column;
 
+            </span>
 
-    align-items:center;
 
-}
 
 
 
 
 
-.screen06 .nav-decoration {
 
-    width:240px;
+            <span
 
+                class="nav-arrows">
 
-    display:flex;
 
+                → → →
 
-    align-items:center;
 
-}
+            </span>
 
 
 
 
 
-.screen06 .nav-decoration::before,
 
-.screen06 .nav-decoration::after {
 
 
-    content:"";
+            <span
 
+                class="nav-english">
 
-    height:1px;
 
+                BEGIN JOURNEY
 
-    flex:1;
 
+            </span>
 
-    background:#D6B56C;
 
 
-    opacity:0.55;
 
-}
 
 
 
 
+            <span
 
-.screen06 .nav-tamil {
+                class="nav-decoration bottom-line">
 
 
-    margin-top:18px;
+            </span>
 
 
-    color:#D6B56C;
 
 
-    font-family:
 
-        "Noto Sans Tamil",
 
-        sans-serif;
+            <!-- Gold Luxury Border Accent -->
 
 
-    font-size:1.35rem;
+            <span
 
+                class="navigator-gold-line">
 
-    font-weight:700;
 
-}
+            </span>
 
 
 
 
 
-.screen06 .nav-arrows {
+        </button>
 
 
-    margin:12px 0;
 
 
-    color:#D6B56C;
 
 
-    font-size:1.15rem;
 
+    </div>
 
-    letter-spacing:0.4em;
 
-}
 
 
 
-
-
-.screen06 .nav-english {
-
-
-    color:#D6B56C;
-
-
-    font-family:
-
-        "Inter",
-
-        sans-serif;
-
-
-    font-size:0.85rem;
-
-
-    font-weight:600;
-
-
-    letter-spacing:0.25em;
-
-}
-
-
-
-
-
-/*==================================================
-Responsive
-==================================================*/
-
-
-@media(max-width:600px) {
-
-
-    .screen06 .screen-image {
-
-        width:170px;
-
-    }
-
-
-    .screen06 .personal-greeting {
-
-
-        font-size:1.8rem;
-
-    }
-
-
-    .screen06 .screen-message.tamil {
-
-        font-size:1rem;
-
-    }
-
-
-}
+</section>
