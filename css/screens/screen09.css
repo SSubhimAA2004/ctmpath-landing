@@ -9,8 +9,10 @@ SCREEN 09 — YOUR CHOICE™
 File:
 css/screens/screen09.css
 
-Purpose:
-Premium visual styling
+Purpose
+Premium Dynamic Experience
+
+Built entirely using CSS
 
 ======================================================================
 */
@@ -18,7 +20,7 @@ Premium visual styling
 
 
 /*==================================================
-Screen Base
+Screen
 ==================================================*/
 
 .screen09{
@@ -27,20 +29,24 @@ Screen Base
 
     display:flex;
 
-    align-items:center;
-
     justify-content:center;
 
-    position:relative;
+    align-items:center;
 
     overflow:hidden;
+
+    position:relative;
 
     background:
 
         radial-gradient(
+
             circle at center,
+
             rgba(32,213,199,.08),
-            transparent 58%
+
+            transparent 60%
+
         ),
 
         #081C3A;
@@ -58,11 +64,143 @@ Content
 
     width:min(92%,760px);
 
-    text-align:center;
-
     display:flex;
 
     flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
+
+}
+
+
+
+
+/*==================================================
+Life Visualisation
+==================================================*/
+
+.life-visualisation{
+
+    position:relative;
+
+    width:340px;
+
+    height:340px;
+
+    margin-bottom:36px;
+
+}
+
+
+
+
+/*==================================================
+Dream Orbit
+==================================================*/
+
+.dream-orbit{
+
+    position:absolute;
+
+    inset:0;
+
+}
+
+
+
+
+/*==================================================
+Dream Icon
+==================================================*/
+
+.dream-node{
+
+    position:absolute;
+
+    width:62px;
+
+    height:62px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:2rem;
+
+    background:
+
+        rgba(255,255,255,.05);
+
+    border:
+
+        1px solid
+
+        rgba(214,181,108,.25);
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:
+
+        0 10px 30px
+
+        rgba(0,0,0,.25);
+
+    transition:
+
+        all .30s ease;
+
+}
+
+
+
+.dream-node:hover{
+
+    transform:
+
+        scale(1.08);
+
+    border-color:#20D5C7;
+
+    box-shadow:
+
+        0 0 24px
+
+        rgba(32,213,199,.30);
+
+}
+
+
+
+
+/*==================================================
+Life Core
+==================================================*/
+
+.life-core{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+
+        translate(-50%,-50%);
+
+    width:170px;
+
+    height:170px;
+
+    display:flex;
+
+    justify-content:center;
 
     align-items:center;
 
@@ -72,14 +210,48 @@ Content
 
 
 /*==================================================
-Illustration
+Gold Rings
 ==================================================*/
 
-.screen09 .screen-image{
+.life-ring{
 
-    width:210px;
+    position:absolute;
 
-    margin-bottom:24px;
+    border-radius:50%;
+
+}
+
+.ring-01{
+
+    width:170px;
+
+    height:170px;
+
+    border:
+
+        4px solid
+
+        #D6B56C;
+
+    box-shadow:
+
+        0 0 24px
+
+        rgba(214,181,108,.35);
+
+}
+
+.ring-02{
+
+    width:136px;
+
+    height:136px;
+
+    border:
+
+        2px solid
+
+        rgba(32,213,199,.35);
 
 }
 
@@ -87,10 +259,33 @@ Illustration
 
 
 /*==================================================
-Visitor Greeting
+Heart
 ==================================================*/
 
-.screen09 .personal-greeting{
+.life-heart{
+
+    font-size:3.6rem;
+
+    animation:
+
+        heartbeat
+
+        2.8s infinite;
+
+}
+
+
+
+
+/*==================================================
+Visitor Name
+==================================================*/
+
+.visitor-name{
+
+    margin-top:12px;
+
+    margin-bottom:28px;
 
     color:#E3C47A;
 
@@ -108,87 +303,121 @@ Visitor Greeting
 
     letter-spacing:.08em;
 
-    margin-bottom:20px;
-
-    text-shadow:
-
-        0 0 18px
-
-        rgba(214,181,108,.35);
-
 }
-
-
-
 
 /*==================================================
-Dream Icons
+Animations
 ==================================================*/
 
-.dream-icons{
+@keyframes heartbeat{
 
-    display:flex;
+    0%{
 
-    flex-wrap:wrap;
+        transform:scale(1);
 
-    justify-content:center;
+    }
 
-    gap:18px;
+    15%{
 
-    margin-bottom:32px;
+        transform:scale(1.10);
 
-}
+    }
 
+    30%{
 
+        transform:scale(.96);
 
-.dream-icons span{
+    }
 
-    width:64px;
+    45%{
 
-    height:64px;
+        transform:scale(1.08);
 
-    display:flex;
+    }
 
-    align-items:center;
+    100%{
 
-    justify-content:center;
+        transform:scale(1);
 
-    border-radius:50%;
-
-    background:
-
-        rgba(255,255,255,.05);
-
-    border:
-
-        1px solid
-
-        rgba(214,181,108,.22);
-
-    font-size:2rem;
-
-    transition:.30s;
+    }
 
 }
 
 
 
-.dream-icons span:hover{
+@keyframes floating{
 
-    transform:
+    0%{
 
-        translateY(-4px);
+        transform:translateY(0);
 
-    border-color:#20D5C7;
+    }
 
-    box-shadow:
+    50%{
 
-        0 8px 24px
+        transform:translateY(-8px);
 
-        rgba(32,213,199,.25);
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
 
 }
 
+
+
+.dream-node{
+
+    animation:
+
+        floating 5s ease-in-out infinite;
+
+}
+
+.dream-node:nth-child(2){
+
+    animation-delay:.4s;
+
+}
+
+.dream-node:nth-child(3){
+
+    animation-delay:.8s;
+
+}
+
+.dream-node:nth-child(4){
+
+    animation-delay:1.2s;
+
+}
+
+.dream-node:nth-child(5){
+
+    animation-delay:1.6s;
+
+}
+
+.dream-node:nth-child(6){
+
+    animation-delay:2s;
+
+}
+
+.dream-node:nth-child(7){
+
+    animation-delay:2.4s;
+
+}
+
+.dream-node:nth-child(8){
+
+    animation-delay:2.8s;
+
+}
 
 
 
@@ -198,36 +427,33 @@ Title
 
 .screen09 .screen-title{
 
+    margin:0;
+
     color:#FFF8E7;
 
     font-size:
 
         clamp(2rem,4vw,3rem);
 
-    line-height:1.45;
-
     font-weight:700;
 
-    margin:0;
+    line-height:1.45;
 
 }
 
 
 
-
-/*==================================================
-Subtitle
-==================================================*/
-
 .screen09 .screen-subtitle{
 
-    margin-top:16px;
+    margin-top:14px;
+
+    margin-bottom:36px;
 
     color:#D6B56C;
 
-    font-size:.85rem;
+    font-size:.84rem;
 
-    letter-spacing:.24em;
+    letter-spacing:.30em;
 
     text-transform:uppercase;
 
@@ -235,26 +461,73 @@ Subtitle
 
 
 
-
 /*==================================================
-Messages
+Copy
 ==================================================*/
 
-.screen09 .screen-message{
+.screen-copy{
 
-    margin-top:34px;
+    width:100%;
 
-    max-width:640px;
+    max-width:620px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
 
 }
 
 
 
-.screen09 .screen-message.tamil{
+.screen-copy.tamil{
 
     color:#FFF8E7;
 
-    font-size:1.12rem;
+}
+
+
+
+.screen-copy.english{
+
+    margin-top:40px;
+
+    color:
+
+        rgba(255,248,231,.72);
+
+}
+
+
+
+/*==================================================
+Visitor Name Inside Copy
+==================================================*/
+
+.copy-name{
+
+    margin-bottom:26px;
+
+    color:#20D5C7;
+
+    font-size:1.35rem;
+
+    font-weight:700;
+
+}
+
+
+
+/*==================================================
+Paragraph
+==================================================*/
+
+.screen-copy p{
+
+    margin:10px 0;
+
+    font-size:1.08rem;
 
     line-height:2;
 
@@ -262,27 +535,88 @@ Messages
 
 
 
-.screen09 .screen-message.english{
+/*==================================================
+Divider
+==================================================*/
 
-    margin-top:28px;
+.copy-divider{
 
-    color:
+    width:170px;
 
-        rgba(255,248,231,.72);
+    height:2px;
 
-    font-size:.92rem;
+    margin:26px 0;
 
-    line-height:1.8;
+    background:
+
+        linear-gradient(
+
+            to right,
+
+            transparent,
+
+            #D6B56C,
+
+            transparent
+
+        );
+
+}
+
+
+
+/*==================================================
+Message Spacing
+==================================================*/
+
+.screen-copy p + p{
+
+    margin-top:4px;
+
+}
+
+
+
+/*==================================================
+Premium Emphasis
+==================================================*/
+
+.screen-copy strong{
+
+    color:#20D5C7;
+
+    font-weight:700;
+
+}
+
+
+
+/*==================================================
+Breathing Space
+==================================================*/
+
+.screen-copy.tamil{
+
+    margin-bottom:22px;
 
 }
 
 /*==================================================
-Premium Navigator
+CTM Journey Navigator
+
+Reusable Across All Screens
+
 ==================================================*/
 
-.screen09 .journey-next{
+.journey-next{
 
-    margin-top:50px;
+    width:100%;
+
+    max-width:520px;
+
+    margin:70px auto 0;
+
+    padding:0;
 
     background:none;
 
@@ -298,52 +632,67 @@ Premium Navigator
 
     transition:
 
-        transform .25s ease,
+        transform .30s ease,
 
-        opacity .25s ease;
+        opacity .30s ease;
 
 }
 
-.screen09 .journey-next:hover{
+
+
+.journey-next:hover{
 
     transform:
 
-        translateY(-3px);
+        translateY(-4px);
 
 }
-
 
 
 
 /*==================================================
-Gold Divider
+Top / Bottom Breaker
 ==================================================*/
 
-.screen09 .nav-decoration{
+.journey-breaker{
 
-    width:240px;
+    width:100%;
 
     display:flex;
 
     align-items:center;
 
+    justify-content:center;
+
 }
 
-.screen09 .nav-decoration::before,
 
-.screen09 .nav-decoration::after{
 
-    content:"";
+.breaker-line{
 
     flex:1;
 
     height:2px;
 
-    background:#D6B56C;
+    background:
+
+        linear-gradient(
+
+            to right,
+
+            transparent,
+
+            #D6B56C,
+
+            transparent
+
+        );
 
 }
 
-.screen09 .nav-dot{
+
+
+.breaker-dot{
 
     width:10px;
 
@@ -355,20 +704,25 @@ Gold Divider
 
     background:#D6B56C;
 
+    box-shadow:
+
+        0 0 14px
+
+        rgba(214,181,108,.45);
+
 }
 
 
 
-
 /*==================================================
-Navigator Text
+Tamil CTA
 ==================================================*/
 
-.screen09 .nav-tamil{
+.journey-tamil{
 
-    margin-top:18px;
+    margin-top:22px;
 
-    color:#D6B56C;
+    color:#FFF8E7;
 
     font-size:1.35rem;
 
@@ -378,83 +732,85 @@ Navigator Text
 
 }
 
-.screen09 .nav-arrows{
 
-    margin:12px 0;
 
-    color:#D6B56C;
+/*==================================================
+Forward Arrows
+==================================================*/
+
+.journey-arrows{
+
+    margin:18px 0;
+
+    color:#20D5C7;
 
     font-size:1.15rem;
 
-    letter-spacing:.45em;
+    letter-spacing:.60em;
+
+    font-weight:700;
 
 }
 
-.screen09 .nav-english{
+
+
+/*==================================================
+English CTA
+==================================================*/
+
+.journey-english{
 
     color:#D6B56C;
 
     font-size:.84rem;
 
-    font-weight:600;
-
-    letter-spacing:.24em;
+    letter-spacing:.30em;
 
     text-transform:uppercase;
 
-}
+    margin-bottom:22px;
 
+}
 
 
 
 /*==================================================
-Premium Fade Animation
+Navigator Glow
 ==================================================*/
 
-@keyframes dreamGlow{
+.journey-next:hover .journey-tamil{
 
-    0%{
-
-        transform:scale(1);
-
-        box-shadow:none;
-
-    }
-
-    50%{
-
-        transform:scale(1.08);
-
-        box-shadow:
-
-            0 0 22px
-
-            rgba(32,213,199,.30);
-
-    }
-
-    100%{
-
-        transform:scale(1);
-
-        box-shadow:none;
-
-    }
+    color:#20D5C7;
 
 }
 
-.dream-icons span{
 
-    animation:
 
-        dreamGlow
+.journey-next:hover .breaker-dot{
 
-        3.5s
-
-        infinite;
+    background:#20D5C7;
 
 }
 
+
+
+.journey-next:hover .breaker-line{
+
+    background:
+
+        linear-gradient(
+
+            to right,
+
+            transparent,
+
+            #20D5C7,
+
+            transparent
+
+        );
+
+}
 
 
 
@@ -462,61 +818,131 @@ Premium Fade Animation
 Responsive
 ==================================================*/
 
-@media(max-width:700px){
+@media(max-width:768px){
 
-    .screen09 .screen-image{
+    .life-visualisation{
 
-        width:170px;
+        width:300px;
 
-    }
-
-    .dream-icons{
-
-        gap:12px;
+        height:300px;
 
     }
 
-    .dream-icons span{
 
-        width:54px;
 
-        height:54px;
+    .life-core{
+
+        width:150px;
+
+        height:150px;
+
+    }
+
+
+
+    .ring-01{
+
+        width:150px;
+
+        height:150px;
+
+    }
+
+
+
+    .ring-02{
+
+        width:120px;
+
+        height:120px;
+
+    }
+
+
+
+    .dream-node{
+
+        width:56px;
+
+        height:56px;
 
         font-size:1.7rem;
 
     }
 
-    .screen09 .screen-message.tamil{
+
+
+    .visitor-name{
+
+        font-size:2.2rem;
+
+    }
+
+
+
+    .screen-copy p{
 
         font-size:1rem;
 
-        line-height:1.9;
-
-    }
-
-    .screen09 .screen-message.english{
-
-        font-size:.86rem;
-
-    }
-
-    .screen09 .nav-decoration{
-
-        width:200px;
+        line-height:1.85;
 
     }
 
 }
 
+
+
 @media(max-width:480px){
 
-    .dream-icons{
+    .life-visualisation{
 
-        gap:10px;
+        width:260px;
+
+        height:260px;
 
     }
 
-    .dream-icons span{
+
+
+    .life-core{
+
+        width:130px;
+
+        height:130px;
+
+    }
+
+
+
+    .ring-01{
+
+        width:130px;
+
+        height:130px;
+
+    }
+
+
+
+    .ring-02{
+
+        width:105px;
+
+        height:105px;
+
+    }
+
+
+
+    .life-heart{
+
+        font-size:2.8rem;
+
+    }
+
+
+
+    .dream-node{
 
         width:48px;
 
@@ -526,21 +952,37 @@ Responsive
 
     }
 
-    .screen09 .screen-title{
+
+
+    .screen-title{
 
         font-size:1.8rem;
 
     }
 
-    .screen09 .nav-tamil{
 
-        font-size:1.2rem;
+
+    .journey-tamil{
+
+        font-size:1.15rem;
 
     }
 
-    .screen09 .nav-english{
 
-        font-size:.76rem;
+
+    .journey-english{
+
+        font-size:.74rem;
+
+        letter-spacing:.18em;
+
+    }
+
+
+
+    .journey-arrows{
+
+        letter-spacing:.40em;
 
     }
 
