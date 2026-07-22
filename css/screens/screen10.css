@@ -1,1 +1,2133 @@
 
+/*======================================================================
+
+CTM PATH™ Guided Journey v6.2
+
+SCREEN 10 — YOUR WHY™
+
+File:
+css/screens/screen10.css
+
+Purpose:
+Purpose Discovery Experience
+
+Design:
+Premium CTM PATH™ Navigator Standard
+
+======================================================================*/
+
+
+
+
+
+/*==================================================
+Screen Base
+==================================================*/
+
+
+.screen10{
+
+
+    min-height:100vh;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    position:relative;
+
+
+    overflow:hidden;
+
+
+    background:
+
+
+        radial-gradient(
+
+            circle at center,
+
+            rgba(32,213,199,.08),
+
+            transparent 58%
+
+        ),
+
+
+        #081C3A;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Ambient Purpose Glow
+==================================================*/
+
+
+.screen10::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+    pointer-events:none;
+
+
+    background:
+
+
+        radial-gradient(
+
+            circle at 50% 25%,
+
+            rgba(214,181,108,.10),
+
+            transparent 22%
+
+        );
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Content Container
+==================================================*/
+
+
+.screen10 .container{
+
+
+    position:relative;
+
+
+    z-index:2;
+
+
+    width:min(94%,1100px);
+
+
+    padding:
+
+        60px
+
+        24px
+
+        80px;
+
+
+    text-align:center;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Hero
+==================================================*/
+
+
+.screen10 .hero{
+
+
+    width:100%;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Purpose Light Illustration
+==================================================*/
+
+
+.screen10 .screen-visual{
+
+
+    width:220px;
+
+
+    height:220px;
+
+
+    margin-bottom:30px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+}
+
+
+
+
+
+.screen10 .screen-image{
+
+
+    width:100%;
+
+
+    height:auto;
+
+
+    display:block;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Visitor Identity
+==================================================*/
+
+
+.screen10 .personal-greeting{
+
+
+    margin-bottom:24px;
+
+
+}
+
+
+
+
+
+.screen10 .visitor-name{
+
+
+    color:#E3C47A;
+
+
+    font-family:
+
+
+        "Noto Sans Tamil",
+
+
+        sans-serif;
+
+
+    font-size:
+
+
+        clamp(
+
+            2rem,
+
+            4vw,
+
+            2.8rem
+
+        );
+
+
+    font-weight:700;
+
+
+    line-height:1.4;
+
+
+    text-shadow:
+
+
+        0 0 18px rgba(214,181,108,.35);
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Welcome Block
+==================================================*/
+
+
+.screen10 .welcome-block{
+
+
+    width:100%;
+
+
+    max-width:760px;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Tamil Title
+==================================================*/
+
+
+.screen10 .screen-title{
+
+
+    margin:0;
+
+
+    color:#FFF8E7;
+
+
+    font-family:
+
+
+        "Noto Sans Tamil",
+
+
+        sans-serif;
+
+
+    font-size:
+
+
+        clamp(
+
+            2rem,
+
+            5vw,
+
+            3rem
+
+        );
+
+
+    font-weight:700;
+
+
+    line-height:1.5;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+English Subtitle
+==================================================*/
+
+
+.screen10 .screen-subtitle{
+
+
+    margin-top:18px;
+
+
+    color:#D6B56C;
+
+
+    font-family:
+
+
+        "Inter",
+
+
+        sans-serif;
+
+
+    font-size:.85rem;
+
+
+    letter-spacing:.30em;
+
+
+    text-transform:uppercase;
+
+
+    font-weight:600;
+
+
+}
+
+/*==================================================
+Core Question Message
+
+==================================================*/
+
+
+.screen10 .screen-message{
+
+
+    width:100%;
+
+
+    max-width:760px;
+
+
+    margin-top:38px;
+
+
+    text-align:center;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Tamil Core Message
+==================================================*/
+
+
+.screen10 .screen-message .tamil{
+
+
+    color:#FFF8E7;
+
+
+    font-family:
+
+
+        "Noto Sans Tamil",
+
+
+        sans-serif;
+
+
+    font-size:
+
+
+        clamp(
+
+            1.25rem,
+
+            3vw,
+
+            1.65rem
+
+        );
+
+
+    font-weight:500;
+
+
+    line-height:2;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+English Core Message
+==================================================*/
+
+
+.screen10 .screen-message .english{
+
+
+    margin-top:28px;
+
+
+    color:
+
+
+        rgba(255,248,231,.72);
+
+
+    font-family:
+
+
+        "Inter",
+
+
+        sans-serif;
+
+
+    font-size:
+
+
+        clamp(
+
+            .95rem,
+
+            2vw,
+
+            1.15rem
+
+        );
+
+
+    line-height:1.9;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+WHY Instruction
+
+==================================================*/
+
+
+.screen10 .why-instruction{
+
+
+    margin-top:48px;
+
+
+    margin-bottom:40px;
+
+
+    width:100%;
+
+
+    max-width:700px;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Instruction Tamil
+==================================================*/
+
+
+.screen10 .instruction-ta{
+
+
+    color:#FFF8E7;
+
+
+    font-family:
+
+
+        "Noto Sans Tamil",
+
+
+        sans-serif;
+
+
+    font-size:
+
+
+        clamp(
+
+            1.15rem,
+
+            3vw,
+
+            1.45rem
+
+        );
+
+
+    font-weight:600;
+
+
+    line-height:1.9;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Instruction English
+==================================================*/
+
+
+.screen10 .instruction-en{
+
+
+    margin-top:18px;
+
+
+    color:
+
+
+        rgba(255,248,231,.65);
+
+
+    font-family:
+
+
+        "Inter",
+
+
+        sans-serif;
+
+
+    font-size:.92rem;
+
+
+    letter-spacing:.08em;
+
+
+    line-height:1.8;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+WHY Selection Section
+
+==================================================*/
+
+
+.screen10 .why-selection{
+
+
+    width:100%;
+
+
+    max-width:1050px;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+WHY Grid
+
+==================================================*/
+
+
+.screen10 .why-grid{
+
+
+    width:100%;
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+
+        repeat(
+
+            2,
+
+            1fr
+
+        );
+
+
+    gap:24px;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+WHY Card Foundation
+
+==================================================*/
+
+
+.screen10 .why-card{
+
+
+    position:relative;
+
+
+    min-height:190px;
+
+
+    padding:
+
+
+        28px
+
+        22px;
+
+
+    border-radius:24px;
+
+
+    border:
+
+
+        1px solid rgba(214,181,108,.25);
+
+
+    background:
+
+
+        rgba(255,255,255,.035);
+
+
+    backdrop-filter:
+
+
+        blur(12px);
+
+
+    cursor:pointer;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    text-align:center;
+
+
+    transition:
+
+
+        transform .35s ease,
+
+
+        border-color .35s ease,
+
+
+        background .35s ease,
+
+
+        box-shadow .35s ease;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+WHY Icon
+
+==================================================*/
+
+
+.screen10 .why-icon{
+
+
+    font-size:3rem;
+
+
+    line-height:1;
+
+
+    margin-bottom:18px;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+WHY Tamil Title
+
+==================================================*/
+
+
+.screen10 .why-title-ta{
+
+
+    color:#FFF8E7;
+
+
+    font-family:
+
+
+        "Noto Sans Tamil",
+
+
+        sans-serif;
+
+
+    font-size:1.12rem;
+
+
+    font-weight:700;
+
+
+    line-height:1.6;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+WHY English Title
+
+==================================================*/
+
+
+.screen10 .why-title-en{
+
+
+    margin-top:12px;
+
+
+    color:
+
+
+        rgba(255,248,231,.70);
+
+
+    font-family:
+
+
+        "Inter",
+
+
+        sans-serif;
+
+
+    font-size:.86rem;
+
+
+    line-height:1.6;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+WHY Card Hover
+
+==================================================*/
+
+
+.screen10 .why-card:hover{
+
+
+    transform:
+
+
+        translateY(-6px);
+
+
+    border-color:#20D5C7;
+
+
+    box-shadow:
+
+
+        0 14px 35px rgba(32,213,199,.18);
+
+
+}
+
+/*==================================================
+WHY Card Selected State
+
+Single Choice Selection
+
+==================================================*/
+
+
+.screen10 .why-card.selected{
+
+
+    border:
+
+
+        2px solid #20D5C7;
+
+
+    background:
+
+
+        rgba(32,213,199,.10);
+
+
+    box-shadow:
+
+
+        0 0 30px
+
+        rgba(32,213,199,.30);
+
+
+    transform:
+
+
+        translateY(-4px);
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Selected Check Indicator
+
+==================================================*/
+
+
+.screen10 .why-card.selected::after{
+
+
+    content:"✓";
+
+
+    position:absolute;
+
+
+    top:16px;
+
+
+    right:18px;
+
+
+    width:30px;
+
+
+    height:30px;
+
+
+    border-radius:50%;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    background:#20D5C7;
+
+
+    color:#081C3A;
+
+
+    font-size:1rem;
+
+
+    font-weight:800;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Dim Non Selected Cards
+
+==================================================*/
+
+
+.screen10 .why-grid.has-selection .why-card:not(.selected){
+
+
+    opacity:.45;
+
+
+    transform:scale(.98);
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Selected Icon Animation
+
+==================================================*/
+
+
+.screen10 .why-card.selected .why-icon{
+
+
+    animation:
+
+
+        screen10WhyPulse
+
+        1.8s
+
+        ease-in-out
+
+        infinite;
+
+
+}
+
+
+
+@keyframes screen10WhyPulse{
+
+
+    0%,100%{
+
+
+        transform:scale(1);
+
+
+    }
+
+
+
+    50%{
+
+
+        transform:scale(1.12);
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Confirmation Block
+
+Hidden Initially
+
+==================================================*/
+
+
+.screen10 .why-confirmation{
+
+
+    width:100%;
+
+
+    max-width:760px;
+
+
+    margin:
+
+
+        50px
+
+        auto
+
+        20px;
+
+
+    padding:
+
+
+        30px
+
+        28px;
+
+
+    border-radius:24px;
+
+
+    border:
+
+
+        1px solid rgba(214,181,108,.25);
+
+
+    background:
+
+
+        rgba(255,255,255,.035);
+
+
+    text-align:center;
+
+
+    display:none;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Confirmation Active
+
+==================================================*/
+
+
+.screen10 .why-confirmation.active{
+
+
+    display:block;
+
+
+    animation:
+
+
+        screen10FadeIn
+
+        .6s
+
+        ease;
+
+
+}
+
+
+
+@keyframes screen10FadeIn{
+
+
+    from{
+
+
+        opacity:0;
+
+
+        transform:translateY(20px);
+
+
+    }
+
+
+
+    to{
+
+
+        opacity:1;
+
+
+        transform:translateY(0);
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Confirmation Tamil
+
+==================================================*/
+
+
+.screen10 .why-confirmation .tamil{
+
+
+    color:#FFF8E7;
+
+
+    font-family:
+
+
+        "Noto Sans Tamil",
+
+
+        sans-serif;
+
+
+    font-size:1.25rem;
+
+
+    line-height:2;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Confirmation English
+
+==================================================*/
+
+
+.screen10 .why-confirmation .english{
+
+
+    margin-top:22px;
+
+
+    color:
+
+
+        rgba(255,248,231,.72);
+
+
+    font-family:
+
+
+        "Inter",
+
+
+        sans-serif;
+
+
+    font-size:1rem;
+
+
+    line-height:1.8;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Journey Navigator
+
+==================================================*/
+
+
+.screen10 .journey-next{
+
+
+    margin-top:55px;
+
+
+    background:none;
+
+
+    border:none;
+
+
+    padding:0;
+
+
+    cursor:pointer;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
+
+
+    gap:18px;
+
+
+    transition:
+
+
+        all .35s ease;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Disabled Navigator
+
+==================================================*/
+
+
+.screen10 .journey-next:disabled{
+
+
+    opacity:.35;
+
+
+    cursor:not-allowed;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Enabled Navigator
+
+==================================================*/
+
+
+.screen10 .journey-next:not(:disabled):hover{
+
+
+    transform:
+
+
+        translateY(-5px);
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Navigator Gold Lines
+
+==================================================*/
+
+
+.screen10 .nav-decoration{
+
+
+    width:260px;
+
+
+    height:1px;
+
+
+    position:relative;
+
+
+    background:
+
+
+        linear-gradient(
+
+
+            to right,
+
+
+            transparent,
+
+
+            #D6B56C,
+
+
+            transparent
+
+
+        );
+
+
+}
+
+
+
+
+
+
+
+.screen10 .nav-decoration::after{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    width:8px;
+
+
+    height:8px;
+
+
+    border-radius:50%;
+
+
+    top:50%;
+
+
+    left:50%;
+
+
+    transform:
+
+
+        translate(-50%,-50%);
+
+
+    background:#D6B56C;
+
+
+    box-shadow:
+
+
+        0 0 16px rgba(214,181,108,.8);
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Navigator Tamil
+
+==================================================*/
+
+
+.screen10 .nav-tamil{
+
+
+    color:#D6B56C;
+
+
+    font-family:
+
+
+        "Noto Sans Tamil",
+
+
+        sans-serif;
+
+
+    font-size:1.45rem;
+
+
+    font-weight:700;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Navigator Arrows
+
+==================================================*/
+
+
+.screen10 .nav-arrows{
+
+
+    color:#D6B56C;
+
+
+    font-size:1.5rem;
+
+
+    letter-spacing:.45em;
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Navigator English
+
+==================================================*/
+
+
+.screen10 .nav-english{
+
+
+    color:#D6B56C;
+
+
+    font-family:
+
+
+        "Inter",
+
+
+        sans-serif;
+
+
+    font-size:.85rem;
+
+
+    font-weight:600;
+
+
+    letter-spacing:.28em;
+
+
+    text-transform:uppercase;
+
+
+}
+
+/*==================================================
+Desktop Refinement
+
+==================================================*/
+
+
+@media (min-width:1200px){
+
+
+
+    .screen10 .container{
+
+
+        max-width:1200px;
+
+
+    }
+
+
+
+
+    .screen10 .screen-visual{
+
+
+        width:260px;
+
+
+        height:260px;
+
+
+        margin-bottom:40px;
+
+
+    }
+
+
+
+
+    .screen10 .why-grid{
+
+
+        grid-template-columns:
+
+
+            repeat(
+
+                3,
+
+                1fr
+
+            );
+
+
+        gap:28px;
+
+
+    }
+
+
+
+
+    .screen10 .why-card{
+
+
+        min-height:210px;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Tablet Layout
+
+==================================================*/
+
+
+@media (max-width:992px){
+
+
+
+    .screen10 .container{
+
+
+        padding:
+
+
+            50px
+
+            28px
+
+            70px;
+
+
+    }
+
+
+
+
+    .screen10 .why-grid{
+
+
+        grid-template-columns:
+
+
+            repeat(
+
+                2,
+
+                1fr
+
+            );
+
+
+    }
+
+
+
+
+    .screen10 .why-card{
+
+
+        min-height:180px;
+
+
+    }
+
+
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Mobile Optimisation
+
+==================================================*/
+
+
+@media (max-width:600px){
+
+
+
+    .screen10 .container{
+
+
+        padding:
+
+
+            36px
+
+            20px
+
+            60px;
+
+
+    }
+
+
+
+
+    .screen10 .screen-visual{
+
+
+        width:170px;
+
+
+        height:170px;
+
+
+        margin-bottom:24px;
+
+
+    }
+
+
+
+
+    .screen10 .visitor-name{
+
+
+        font-size:1.8rem;
+
+
+    }
+
+
+
+
+    .screen10 .screen-message{
+
+
+        margin-top:28px;
+
+
+    }
+
+
+
+
+    .screen10 .screen-message .tamil{
+
+
+        font-size:1.15rem;
+
+
+        line-height:1.9;
+
+
+    }
+
+
+
+
+    .screen10 .screen-message .english{
+
+
+        font-size:.90rem;
+
+
+    }
+
+
+
+
+    .screen10 .why-instruction{
+
+
+        margin-top:36px;
+
+
+        margin-bottom:28px;
+
+
+    }
+
+
+
+
+    .screen10 .instruction-ta{
+
+
+        font-size:1.05rem;
+
+
+    }
+
+
+
+
+    .screen10 .why-grid{
+
+
+        grid-template-columns:
+
+
+            1fr;
+
+
+        gap:16px;
+
+
+    }
+
+
+
+
+    .screen10 .why-card{
+
+
+        min-height:150px;
+
+
+        padding:
+
+
+            22px
+
+            18px;
+
+
+    }
+
+
+
+
+    .screen10 .why-icon{
+
+
+        font-size:2.5rem;
+
+
+        margin-bottom:14px;
+
+
+    }
+
+
+
+
+    .screen10 .why-title-ta{
+
+
+        font-size:.98rem;
+
+
+    }
+
+
+
+
+    .screen10 .why-title-en{
+
+
+        font-size:.78rem;
+
+
+    }
+
+
+
+
+    .screen10 .why-confirmation{
+
+
+        padding:
+
+
+            24px
+
+            18px;
+
+
+    }
+
+
+
+
+    .screen10 .nav-decoration{
+
+
+        width:180px;
+
+
+    }
+
+
+
+
+    .screen10 .nav-tamil{
+
+
+        font-size:1.25rem;
+
+
+    }
+
+
+
+
+    .screen10 .nav-arrows{
+
+
+        font-size:1.2rem;
+
+
+        letter-spacing:.35em;
+
+
+    }
+
+
+
+
+    .screen10 .nav-english{
+
+
+        font-size:.72rem;
+
+
+        letter-spacing:.20em;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Small Mobile
+
+==================================================*/
+
+
+@media (max-width:380px){
+
+
+
+    .screen10 .why-card{
+
+
+        min-height:140px;
+
+
+    }
+
+
+
+
+    .screen10 .why-icon{
+
+
+        font-size:2.2rem;
+
+
+    }
+
+
+
+
+    .screen10 .nav-decoration{
+
+
+        width:140px;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+Accessibility
+
+Reduced Motion
+
+==================================================*/
+
+
+@media (prefers-reduced-motion:reduce){
+
+
+
+    .screen10 .why-card,
+
+
+    .screen10 .why-card.selected .why-icon,
+
+
+    .screen10 .why-confirmation.active,
+
+
+    .screen10 .journey-next{
+
+
+        animation:none;
+
+
+        transition:none;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+
+CTM PATH™ Guided Journey v6.2
+
+SCREEN 10 — YOUR WHY™
+
+STATUS
+
+✓ Premium Background
+✓ Purpose Light Hero
+✓ Visitor Identity
+✓ WHY Discovery Question
+✓ 10 Purpose Options
+✓ Single Selection Styling
+✓ Confirmation Moment
+✓ Navigator System
+✓ Responsive Layout
+
+READY FOR JAVASCRIPT
+
+==================================================*/
