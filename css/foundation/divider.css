@@ -1,1 +1,214 @@
 
+/*======================================================================
+
+CTM PATH™ Guided Journey v6.1
+
+FOUNDATION COMPONENT
+
+PREMIUM DIVIDER™
+
+File
+css/foundation/divider.css
+
+Purpose
+Provides the standard premium divider used throughout
+the CTM PATH™ Guided Journey.
+
+Rules
+
+• One divider style
+• One spacing system
+• One colour system
+• Shared by all 36 screens
+
+Status
+FOUNDATION — LOCKED
+
+======================================================================*/
+
+
+
+/*==================================================
+Premium Divider
+
+==================================================*/
+
+.gold-divider{
+
+    position:relative;
+
+    display:block;
+
+    width:160px;
+
+    height:1px;
+
+    margin:
+
+        56px auto;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent 0%,
+
+            rgba(214,181,108,.25) 20%,
+
+            rgba(214,181,108,1) 50%,
+
+            rgba(214,181,108,.25) 80%,
+
+            transparent 100%
+
+        );
+
+    opacity:.95;
+
+}
+
+
+
+/*==================================================
+Centre Jewel
+
+==================================================*/
+
+.gold-divider::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    width:6px;
+
+    height:6px;
+
+    transform:
+
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:#D6B56C;
+
+    box-shadow:
+
+        0 0 10px rgba(214,181,108,.35);
+
+}
+
+
+
+/*==================================================
+Compact Divider
+
+==================================================*/
+
+.gold-divider.small{
+
+    width:110px;
+
+    margin:
+
+        36px auto;
+
+}
+
+
+
+/*==================================================
+Large Divider
+
+==================================================*/
+
+.gold-divider.large{
+
+    width:220px;
+
+    margin:
+
+        72px auto;
+
+}
+
+
+
+/*==================================================
+Responsive
+
+==================================================*/
+
+@media (max-width:900px){
+
+    .gold-divider{
+
+        width:140px;
+
+        margin:
+
+            48px auto;
+
+    }
+
+}
+
+
+
+@media (max-width:600px){
+
+    .gold-divider{
+
+        width:110px;
+
+        margin:
+
+            38px auto;
+
+    }
+
+
+    .gold-divider.small{
+
+        width:80px;
+
+    }
+
+}
+
+
+
+@media (max-width:380px){
+
+    .gold-divider{
+
+        width:90px;
+
+        margin:
+
+            32px auto;
+
+    }
+
+}
+
+
+
+/*==================================================
+END OF FILE
+
+Premium Divider™
+
+CTM PATH™
+
+FOUNDATION COMPONENT
+
+LOCKED
+
+==================================================*/
