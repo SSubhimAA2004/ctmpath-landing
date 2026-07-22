@@ -1,33 +1,26 @@
 
-/*
-======================================================================
+/*======================================================================
 
-CTM PATH™ Guided Journey v6.1
+CTM PATH™ Guided Journey v6.2
 
 File
 css/screens/screen03.css
 
-Screen
-03 — THE DISCOVERY™
-
 Purpose
-Self Discovery Transition
+Screen 03 — THE DISCOVERY™
 
 Responsibility
-• Premium screen layout
-• Discovery Light presentation
-• Tamil-first storytelling
-• Emotional pacing
-• Premium transitions
-• Responsive experience
+• Premium self-discovery experience
+• Uniform Hero
+• Uniform Navigator
+• Responsive behaviour
 
-======================================================================
-*/
+======================================================================*/
+
 
 
 /*==================================================
-Screen 03 Base
-
+Screen Container
 ==================================================*/
 
 #screen03{
@@ -36,9 +29,9 @@ Screen 03 Base
 
     display:flex;
 
-    align-items:center;
-
     justify-content:center;
+
+    align-items:center;
 
     width:100%;
 
@@ -51,9 +44,9 @@ Screen 03 Base
 }
 
 
-/*==================================================
-Premium Background Atmosphere
 
+/*==================================================
+Premium Background
 ==================================================*/
 
 #screen03::before{
@@ -70,21 +63,21 @@ Premium Background Atmosphere
 
         radial-gradient(
 
-            circle at 50% 16%,
+            circle at 50% 12%,
 
-            rgba(24,166,109,.14),
+            rgba(24,166,109,.10),
 
-            transparent 32%
+            transparent 24%
 
         ),
 
         radial-gradient(
 
-            circle at 50% 34%,
+            circle at 50% 36%,
 
-            rgba(217,181,106,.08),
+            rgba(214,181,108,.08),
 
-            transparent 28%
+            transparent 42%
 
         ),
 
@@ -92,25 +85,14 @@ Premium Background Atmosphere
 
             circle at center,
 
-            rgba(5,18,42,.36),
+            rgba(5,18,42,.38),
 
             transparent 74%
-
-        ),
-
-        linear-gradient(
-
-            180deg,
-
-            #03152F 0%,
-
-            #061D38 52%,
-
-            #020D20 100%
 
         );
 
 }
+
 
 
 #screen03::after{
@@ -131,9 +113,9 @@ Premium Background Atmosphere
 
             rgba(255,255,255,.015),
 
-            transparent 18%,
+            transparent 20%,
 
-            transparent 82%,
+            transparent 80%,
 
             rgba(0,0,0,.18)
 
@@ -142,9 +124,9 @@ Premium Background Atmosphere
 }
 
 
+
 /*==================================================
 Container
-
 ==================================================*/
 
 #screen03 .container{
@@ -168,12 +150,16 @@ Container
 }
 
 
+
 /*==================================================
-Hero Wrapper
+Hero Layout
+
+Same Premium Layout
+as Screen 01
 
 ==================================================*/
 
-#screen03 .screen03-hero{
+#screen03 .hero{
 
     width:100%;
 
@@ -185,149 +171,152 @@ Hero Wrapper
 
     flex-direction:column;
 
-    align-items:center;
-
     justify-content:center;
+
+    align-items:center;
 
     text-align:center;
 
 }
 
 
-/*==================================================
-Discovery Light Symbol
 
-Primary Emotional Anchor
+/*==================================================
+Hero Illustration
+
+Only Illustration Changes
 
 ==================================================*/
 
-#screen03 .screen03-symbol{
+#screen03 .hero-icon{
 
-    position:relative;
+    display:flex;
 
-    width:260px;
+    justify-content:center;
+
+    align-items:center;
+
+    width:100%;
 
     margin:
 
         0
         auto
-        58px;
-
-    animation:
-
-        discoveryLightFloat
-        8s
-        ease-in-out
-        infinite;
+        56px;
 
 }
 
 
-#screen03 .screen03-symbol img{
+
+#screen03 .hero-logo{
 
     display:block;
 
-    width:100%;
+    width:260px;
 
     height:auto;
 
     object-fit:contain;
 
+    user-select:none;
+
+    pointer-events:none;
+
     filter:
 
         drop-shadow(
-
-            0 26px 62px rgba(0,0,0,.45)
-
+            0 28px 70px rgba(0,0,0,.48)
         )
 
         drop-shadow(
-
-            0 0 42px rgba(217,181,106,.16)
-
+            0 0 52px rgba(214,181,108,.14)
         )
 
         drop-shadow(
+            0 0 110px rgba(24,166,109,.08)
+        );
 
-            0 0 90px rgba(24,166,109,.08)
+    transition:
 
+        transform .4s ease,
+
+        filter .4s ease;
+
+}
+
+
+
+#screen03 .hero-logo:hover{
+
+    transform:
+
+        translateY(-3px)
+        scale(1.01);
+
+    filter:
+
+        drop-shadow(
+            0 32px 82px rgba(0,0,0,.50)
+        )
+
+        drop-shadow(
+            0 0 60px rgba(214,181,108,.18)
+        )
+
+        drop-shadow(
+            0 0 120px rgba(24,166,109,.10)
         );
 
 }
 
-
 /*==================================================
-Discovery Light Animation
+Welcome Block
+
+Same Premium Hero
+as Screen 01
 
 ==================================================*/
 
-@keyframes discoveryLightFloat{
-
-    0%{
-
-        transform:
-
-            translateY(0);
-
-    }
-
-    50%{
-
-        transform:
-
-            translateY(-8px);
-
-    }
-
-    100%{
-
-        transform:
-
-            translateY(0);
-
-    }
-
-}
-
-/*==================================================
-Tamil Section
-
-Primary Emotional Story
-
-==================================================*/
-
-#screen03 .screen03-tamil{
+#screen03 .welcome-block{
 
     width:100%;
 
-    max-width:680px;
+    max-width:620px;
 
-    margin:0 auto;
+    margin:
+
+        0
+        auto
+        40px;
 
 }
 
 
-#screen03 .screen03-tamil h1{
 
-    margin:0 0 52px;
+/*==================================================
+Tamil Welcome
+
+==================================================*/
+
+#screen03 .tamil-welcome{
+
+    margin:0;
 
     font-family:
 
-        "Noto Sans Tamil",
-        "Latha",
-        sans-serif;
+        var(--font-tamil);
 
     font-size:
 
         clamp(
-            2.5rem,
+            2.45rem,
             4vw,
-            3.8rem
+            3.90rem
         );
 
     font-weight:700;
 
-    line-height:1.45;
+    line-height:1.42;
 
     letter-spacing:-.01em;
 
@@ -338,96 +327,40 @@ Primary Emotional Story
 }
 
 
+
 /*==================================================
-Tamil Supporting Message
+English Welcome
 
 ==================================================*/
 
-#screen03 .screen03-tamil p{
+#screen03 .english-welcome{
 
-    margin:0;
+    margin-top:18px;
 
     font-family:
 
-        "Noto Sans Tamil",
-        sans-serif;
+        var(--font-english);
 
     font-size:
 
         clamp(
-            1.32rem,
-            2vw,
-            1.58rem
+            1rem,
+            1.6vw,
+            1.20rem
         );
 
     font-weight:500;
 
-    line-height:2.08;
+    letter-spacing:.34em;
 
-    letter-spacing:.01em;
-
-    color:
-
-        rgba(255,255,255,.95);
-
-    text-wrap:balance;
-
-}
-
-
-/*==================================================
-English Translation
-
-Supporting Reflection
-
-==================================================*/
-
-#screen03 .screen03-english{
-
-    width:100%;
-
-    max-width:620px;
-
-    margin:
-
-        52px
-        auto
-        0;
-
-}
-
-
-#screen03 .screen03-english p{
-
-    margin:0;
-
-    font-family:
-
-        "Inter",
-        Arial,
-        sans-serif;
-
-    font-size:
-
-        clamp(
-            1.02rem,
-            1.5vw,
-            1.18rem
-        );
-
-    font-weight:400;
-
-    line-height:1.95;
-
-    letter-spacing:.02em;
+    text-transform:uppercase;
 
     color:
 
-        rgba(245,244,238,.78);
-
-    text-wrap:balance;
+        rgba(255,255,255,.72);
 
 }
+
 
 
 /*==================================================
@@ -439,13 +372,13 @@ Premium Divider
 
     position:relative;
 
-    width:170px;
+    width:180px;
 
     height:1px;
 
     margin:
 
-        60px
+        0
         auto
         56px;
 
@@ -457,17 +390,18 @@ Premium Divider
 
             transparent,
 
-            rgba(212,175,55,.25),
+            rgba(214,181,108,.28),
 
             var(--color-gold),
 
-            rgba(212,175,55,.25),
+            rgba(214,181,108,.28),
 
             transparent
 
         );
 
 }
+
 
 
 #screen03 .gold-divider::before{
@@ -484,11 +418,11 @@ Premium Divider
 
     height:8px;
 
+    border-radius:50%;
+
     transform:
 
         translate(-50%,-50%);
-
-    border-radius:50%;
 
     background:
 
@@ -496,18 +430,37 @@ Premium Divider
 
     box-shadow:
 
-        0 0 14px rgba(212,175,55,.35);
+        0 0 12px rgba(214,181,108,.40);
 
 }
 
-/*==================================================
-Premium Journey Navigator
 
-CTM PATH™ Standard Navigator
+
+#screen03 .gold-divider.small{
+
+    width:130px;
+
+    margin:
+
+        48px
+        auto;
+
+}
+
+
+
+/*==================================================
+Introduction Block
 
 ==================================================*/
 
-#screen03 .journey-next{
+#screen03 .introduction-block{
+
+    width:100%;
+
+    max-width:660px;
+
+    margin:0 auto;
 
     display:flex;
 
@@ -517,36 +470,167 @@ CTM PATH™ Standard Navigator
 
     justify-content:center;
 
-    gap:16px;
-
-    padding:0;
-
-    margin:0;
-
-    border:none;
-
-    background:transparent;
-
-    cursor:pointer;
-
-    text-align:center;
-
-    color:var(--color-gold);
-
-    transition:
-
-        transform .40s var(--ease-premium),
-
-        opacity .40s var(--ease-premium),
-
-        filter .40s var(--ease-premium);
+    gap:36px;
 
 }
 
 
-/*==================================================
-Navigator Decorative Lines
 
+/*==================================================
+Tamil Introduction
+
+==================================================*/
+
+#screen03 .tamil-intro{
+
+    margin:0;
+
+    font-family:
+
+        var(--font-tamil);
+
+    font-size:
+
+        clamp(
+            1.35rem,
+            2vw,
+            1.55rem
+        );
+
+    font-weight:500;
+
+    line-height:2.05;
+
+    letter-spacing:-.01em;
+
+    color:
+
+        rgba(255,255,255,.96);
+
+}
+
+
+
+/*==================================================
+Gold Highlight
+
+==================================================*/
+
+#screen03 .text-gold{
+
+    color:
+
+        var(--color-gold);
+
+    font-weight:600;
+
+}
+
+
+
+/*==================================================
+English Introduction
+
+==================================================*/
+
+#screen03 .introduction-block .english{
+
+    max-width:540px;
+
+    margin:0;
+
+    font-family:
+
+        var(--font-english);
+
+    font-size:
+
+        clamp(
+            1.05rem,
+            1.5vw,
+            1.15rem
+        );
+
+    font-weight:400;
+
+    line-height:2;
+
+    letter-spacing:.02em;
+
+    color:
+
+        rgba(255,255,255,.78);
+
+}
+
+/*==================================================
+Premium Journey Navigator
+
+Uniform Across All 36 Screens
+
+Only these change:
+
+• Tamil CTA
+• English CTA
+• data-next-screen
+• aria-label
+
+==================================================*/
+
+#screen03 .cta-block{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-top:56px;
+
+}
+
+
+
+#screen03 .journey-next{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:16px;
+
+    padding:0;
+
+    margin:0 auto;
+
+    background:none;
+
+    border:none;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    text-align:center;
+
+    transition:
+
+        transform .35s ease,
+
+        filter .35s ease;
+
+}
+
+
+
+/*==================================================
+Navigator Divider
 ==================================================*/
 
 #screen03 .nav-decoration{
@@ -555,7 +639,7 @@ Navigator Decorative Lines
 
     display:block;
 
-    width:150px;
+    width:160px;
 
     height:1px;
 
@@ -567,25 +651,18 @@ Navigator Decorative Lines
 
             transparent,
 
-            rgba(212,175,55,.25),
+            rgba(214,181,108,.30),
 
             var(--color-gold),
 
-            rgba(212,175,55,.25),
+            rgba(214,181,108,.30),
 
             transparent
 
         );
 
-    opacity:.90;
-
-    transition:
-
-        width .35s var(--ease-premium),
-
-        opacity .35s var(--ease-premium);
-
 }
+
 
 
 #screen03 .nav-decoration::before{
@@ -608,174 +685,153 @@ Navigator Decorative Lines
 
         translate(-50%,-50%);
 
-    background:var(--color-gold);
+    background:
+
+        var(--color-gold);
 
     box-shadow:
 
-        0 0 10px rgba(212,175,55,.40);
+        0 0 10px rgba(214,181,108,.45);
 
 }
 
 
-/*==================================================
-Tamil Navigator
 
+/*==================================================
+Tamil CTA
 ==================================================*/
 
 #screen03 .nav-tamil{
 
     font-family:
 
-        "Noto Sans Tamil",
-        sans-serif;
+        var(--font-tamil);
 
-    font-size:
-
-        clamp(
-            1.30rem,
-            2vw,
-            1.50rem
-        );
+    font-size:1.42rem;
 
     font-weight:700;
 
-    line-height:1.4;
+    line-height:1.35;
 
     letter-spacing:.02em;
 
-    color:var(--color-gold);
+    color:
+
+        var(--color-gold);
 
 }
 
 
-/*==================================================
-Journey Arrows
 
+/*==================================================
+Navigator Arrows
 ==================================================*/
 
 #screen03 .nav-arrows{
 
-    font-size:1.45rem;
+    font-size:1.35rem;
 
     line-height:1;
 
     letter-spacing:10px;
 
-    color:var(--color-gold);
+    color:
 
-    transition:
-
-        transform .35s var(--ease-premium),
-
-        letter-spacing .35s var(--ease-premium);
+        var(--color-gold);
 
 }
 
 
-/*==================================================
-English Navigator
 
+/*==================================================
+English CTA
 ==================================================*/
 
 #screen03 .nav-english{
 
     font-family:
 
-        "Inter",
-        Arial,
-        sans-serif;
+        var(--font-english);
 
     font-size:.82rem;
 
-    font-weight:500;
+    font-weight:600;
 
-    letter-spacing:.40em;
+    letter-spacing:.38em;
 
     text-transform:uppercase;
 
     color:
 
-        rgba(255,255,255,.76);
+        var(--color-gold);
 
 }
 
 
-/*==================================================
-Premium Hover
 
+/*==================================================
+Navigator Hover
 ==================================================*/
 
 #screen03 .journey-next:hover{
 
     transform:
 
-        translateY(-2px);
+        translateY(-3px);
 
     filter:
 
         drop-shadow(
 
-            0 0 18px rgba(212,175,55,.18)
+            0 0 18px rgba(214,181,108,.20)
 
         );
 
 }
 
 
+
 #screen03 .journey-next:hover .nav-decoration{
 
-    width:170px;
-
-    opacity:1;
+    width:175px;
 
 }
+
 
 
 #screen03 .journey-next:hover .nav-arrows{
 
-    letter-spacing:13px;
+    letter-spacing:12px;
 
 }
 
 
-/*==================================================
-Keyboard Accessibility
-
-==================================================*/
 
 #screen03 .journey-next:focus-visible{
 
     outline:none;
 
-    filter:
-
-        drop-shadow(
-
-            0 0 16px rgba(212,175,55,.22)
-
-        );
-
 }
-
 
 /*==================================================
 Hero Entrance Animation
-
 ==================================================*/
 
-#screen03 .screen03-hero{
+#screen03 .fade-up{
 
     animation:
 
-        screen03Reveal
-        1s
-        var(--ease-premium)
-        both;
+        screen03FadeUp
+
+        .90s
+
+        ease-out;
 
 }
 
 
-@keyframes screen03Reveal{
+
+@keyframes screen03FadeUp{
 
     from{
 
@@ -783,7 +839,7 @@ Hero Entrance Animation
 
         transform:
 
-            translateY(30px);
+            translateY(24px);
 
     }
 
@@ -799,74 +855,49 @@ Hero Entrance Animation
 
 }
 
+
+
 /*==================================================
-Desktop Refinements
-
-Premium Large Screen Experience
-
+Desktop
 ==================================================*/
 
 @media (min-width:1200px){
 
     #screen03 .container{
 
-        padding:
-
-            80px
-            64px
-            90px;
+        max-width:1320px;
 
     }
 
 
-    #screen03 .screen03-hero{
 
-        max-width:720px;
+    #screen03 .hero{
 
-    }
-
-
-    #screen03 .screen03-symbol{
-
-        width:280px;
-
-        margin-bottom:68px;
+        max-width:760px;
 
     }
 
 
-    #screen03 .screen03-tamil h1{
 
-        margin-bottom:58px;
+    #screen03 .hero-logo{
 
-    }
-
-
-    #screen03 .screen03-tamil p{
-
-        max-width:680px;
-
-        margin:0 auto;
+        width:290px;
 
     }
 
 
-    #screen03 .screen03-english{
 
-        max-width:600px;
+    #screen03 .tamil-welcome{
 
-        margin-top:58px;
+        font-size:4rem;
 
     }
 
 
-    #screen03 .gold-divider{
 
-        margin:
+    #screen03 .tamil-intro{
 
-            64px
-            auto
-            60px;
+        font-size:1.65rem;
 
     }
 
@@ -875,312 +906,190 @@ Premium Large Screen Experience
 
 
 /*==================================================
-Tablet Responsive
-
+Tablet
 ==================================================*/
 
-@media (max-width:900px){
-
-    /*------------------------------------------
-    Container
-
-    ------------------------------------------*/
+@media (max-width:992px){
 
     #screen03 .container{
 
         padding:
 
             56px
+
             32px
+
             64px;
 
     }
 
 
-    /*------------------------------------------
-    Hero
 
-    ------------------------------------------*/
+    #screen03 .hero-logo{
 
-    #screen03 .screen03-hero{
-
-        max-width:680px;
+        width:230px;
 
     }
 
 
-    /*------------------------------------------
-    Discovery Symbol
 
-    ------------------------------------------*/
+    #screen03 .hero-icon{
 
-    #screen03 .screen03-symbol{
-
-        width:220px;
-
-        margin-bottom:48px;
+        margin-bottom:44px;
 
     }
 
 
-    /*------------------------------------------
-    Tamil Heading
 
-    ------------------------------------------*/
-
-    #screen03 .screen03-tamil h1{
-
-        font-size:
-
-            clamp(
-                2.2rem,
-                5vw,
-                3rem
-            );
-
-        margin-bottom:42px;
-
-    }
-
-
-    /*------------------------------------------
-    Tamil Copy
-
-    ------------------------------------------*/
-
-    #screen03 .screen03-tamil p{
-
-        font-size:1.35rem;
-
-        line-height:2;
-
-    }
-
-
-    /*------------------------------------------
-    English Copy
-
-    ------------------------------------------*/
-
-    #screen03 .screen03-english{
-
-        margin-top:44px;
-
-    }
-
-
-    #screen03 .screen03-english p{
-
-        font-size:1.05rem;
-
-        line-height:1.9;
-
-    }
-
-
-    /*------------------------------------------
-    Divider
-
-    ------------------------------------------*/
-
-    #screen03 .gold-divider{
-
-        width:145px;
-
-        margin:
-
-            52px
-            auto
-            48px;
-
-    }
-
-
-    /*------------------------------------------
-    Navigator
-
-    ------------------------------------------*/
-
-    #screen03 .nav-decoration{
-
-        width:125px;
-
-    }
-
-
-    #screen03 .journey-next:hover .nav-decoration{
-
-        width:140px;
-
-    }
-
-
-    #screen03 .nav-tamil{
-
-        font-size:1.28rem;
-
-    }
-
-
-    #screen03 .nav-arrows{
-
-        font-size:1.35rem;
-
-        letter-spacing:8px;
-
-    }
-
-
-    #screen03 .nav-english{
-
-        font-size:.80rem;
-
-        letter-spacing:.34em;
-
-    }
-
-}
-
-/*==================================================
-Mobile Responsive
-
-Premium Mobile Experience
-
-==================================================*/
-
-@media (max-width:600px){
-
-    /*------------------------------------------
-    Screen Layout
-    ------------------------------------------*/
-
-    #screen03{
-
-        align-items:flex-start;
-
-        min-height:100vh;
-
-        padding-top:24px;
-
-    }
-
-
-    /*------------------------------------------
-    Container
-    ------------------------------------------*/
-
-    #screen03 .container{
-
-        padding:
-
-            32px
-            22px
-            56px;
-
-    }
-
-
-    /*------------------------------------------
-    Hero
-    ------------------------------------------*/
-
-    #screen03 .screen03-hero{
-
-        max-width:100%;
-
-    }
-
-
-    /*------------------------------------------
-    Discovery Light
-    ------------------------------------------*/
-
-    #screen03 .screen03-symbol{
-
-        width:180px;
-
-        margin:
-
-            0
-            auto
-            42px;
-
-    }
-
-
-    #screen03 .screen03-symbol img{
-
-        filter:
-
-            drop-shadow(
-                0 20px 46px rgba(0,0,0,.55)
-            )
-
-            drop-shadow(
-                0 0 36px rgba(217,181,106,.15)
-            )
-
-            drop-shadow(
-                0 0 70px rgba(24,166,109,.06)
-            );
-
-    }
-
-
-    /*------------------------------------------
-    Tamil Heading
-    ------------------------------------------*/
-
-    #screen03 .screen03-tamil h1{
-
-        font-size:
-
-            clamp(
-                2rem,
-                8vw,
-                2.45rem
-            );
-
-        line-height:1.42;
+    #screen03 .welcome-block{
 
         margin-bottom:34px;
 
     }
 
 
-    /*------------------------------------------
-    Tamil Copy
-    ------------------------------------------*/
 
-    #screen03 .screen03-tamil p{
+    #screen03 .gold-divider{
 
-        max-width:330px;
-
-        margin:0 auto;
-
-        font-size:1.15rem;
-
-        line-height:1.95;
+        margin-bottom:44px;
 
     }
 
 
-    /*------------------------------------------
-    English Copy
-    ------------------------------------------*/
 
-    #screen03 .screen03-english{
+    #screen03 .gold-divider.small{
 
-        margin-top:34px;
+        margin-top:40px;
+
+        margin-bottom:40px;
 
     }
 
 
-    #screen03 .screen03-english p{
 
-        max-width:300px;
+    #screen03 .cta-block{
 
-        margin:0 auto;
+        margin-top:44px;
+
+    }
+
+}
+
+/*==================================================
+Mobile
+==================================================*/
+
+@media (max-width:600px){
+
+    #screen03 .container{
+
+        padding:
+
+            40px
+
+            24px
+
+            56px;
+
+    }
+
+
+
+    #screen03 .hero{
+
+        max-width:100%;
+
+    }
+
+
+
+    #screen03 .hero-icon{
+
+        margin-bottom:36px;
+
+    }
+
+
+
+    #screen03 .hero-logo{
+
+        width:190px;
+
+    }
+
+
+
+    #screen03 .welcome-block{
+
+        margin-bottom:28px;
+
+    }
+
+
+
+    #screen03 .tamil-welcome{
+
+        font-size:2.20rem;
+
+        line-height:1.40;
+
+    }
+
+
+
+    #screen03 .english-welcome{
+
+        margin-top:14px;
+
+        font-size:.92rem;
+
+        letter-spacing:.22em;
+
+    }
+
+
+
+    #screen03 .gold-divider{
+
+        width:150px;
+
+        margin-bottom:36px;
+
+    }
+
+
+
+    #screen03 .gold-divider.small{
+
+        width:110px;
+
+        margin-top:36px;
+
+        margin-bottom:36px;
+
+    }
+
+
+
+    #screen03 .introduction-block{
+
+        gap:24px;
+
+    }
+
+
+
+    #screen03 .tamil-intro{
+
+        font-size:1.18rem;
+
+        line-height:1.90;
+
+    }
+
+
+
+    #screen03 .introduction-block .english{
 
         font-size:.98rem;
 
@@ -1189,46 +1098,13 @@ Premium Mobile Experience
     }
 
 
-    /*------------------------------------------
-    Divider
-    ------------------------------------------*/
-
-    #screen03 .gold-divider{
-
-        width:120px;
-
-        margin:
-
-            42px
-            auto
-            40px;
-
-    }
-
-
-    /*------------------------------------------
-    Navigator
-    ------------------------------------------*/
-
-    #screen03 .journey-next{
-
-        gap:14px;
-
-    }
-
 
     #screen03 .nav-decoration{
 
-        width:95px;
+        width:120px;
 
     }
 
-
-    #screen03 .journey-next:hover .nav-decoration{
-
-        width:108px;
-
-    }
 
 
     #screen03 .nav-tamil{
@@ -1238,20 +1114,30 @@ Premium Mobile Experience
     }
 
 
+
     #screen03 .nav-arrows{
 
-        font-size:1.18rem;
+        font-size:1.10rem;
 
         letter-spacing:6px;
 
     }
 
 
+
     #screen03 .nav-english{
 
-        font-size:.72rem;
+        font-size:.70rem;
 
         letter-spacing:.28em;
+
+    }
+
+
+
+    #screen03 .cta-block{
+
+        margin-top:40px;
 
     }
 
@@ -1261,7 +1147,6 @@ Premium Mobile Experience
 
 /*==================================================
 Small Mobile
-
 ==================================================*/
 
 @media (max-width:380px){
@@ -1270,70 +1155,54 @@ Small Mobile
 
         padding:
 
-            28px
+            32px
+
             18px
+
             48px;
 
     }
 
 
-    #screen03 .screen03-symbol{
 
-        width:155px;
+    #screen03 .hero-logo{
 
-        margin-bottom:34px;
-
-    }
-
-
-    #screen03 .screen03-tamil h1{
-
-        font-size:1.72rem;
+        width:170px;
 
     }
 
 
-    #screen03 .screen03-tamil p{
 
-        max-width:280px;
+    #screen03 .tamil-welcome{
 
-        font-size:1.02rem;
-
-        line-height:1.85;
+        font-size:1.90rem;
 
     }
 
 
-    #screen03 .screen03-english p{
 
-        max-width:260px;
+    #screen03 .tamil-intro{
 
-        font-size:.92rem;
-
-        line-height:1.75;
+        font-size:1.05rem;
 
     }
 
 
-    #screen03 .gold-divider{
 
-        width:92px;
+    #screen03 .introduction-block .english{
+
+        font-size:.90rem;
 
     }
+
 
 
     #screen03 .nav-decoration{
 
-        width:80px;
+        width:100px;
 
     }
 
-
-    #screen03 .journey-next:hover .nav-decoration{
-
-        width:90px;
-
-    }
 
 
     #screen03 .nav-tamil{
@@ -1343,20 +1212,18 @@ Small Mobile
     }
 
 
-    #screen03 .nav-arrows{
 
-        font-size:1.08rem;
+    #screen03 .nav-arrows{
 
         letter-spacing:5px;
 
     }
 
 
+
     #screen03 .nav-english{
 
-        font-size:.66rem;
-
-        letter-spacing:.22em;
+        font-size:.65rem;
 
     }
 
@@ -1365,23 +1232,20 @@ Small Mobile
 
 
 /*==================================================
-Reduced Motion Accessibility
-
+Accessibility
 ==================================================*/
 
 @media (prefers-reduced-motion:reduce){
 
-    #screen03 .screen03-hero,
+    #screen03 .fade-up,
 
-    #screen03 .screen03-symbol,
+    #screen03 .journey-next,
 
-    #screen03 .journey-next{
+    #screen03 .hero-logo{
 
-        animation:none !important;
+        animation:none;
 
-        transition:none !important;
-
-        transform:none !important;
+        transition:none;
 
     }
 
@@ -1392,12 +1256,16 @@ Reduced Motion Accessibility
 /*==================================================
 END OF FILE
 
-CTM PATH™ Guided Journey v6.1
+CTM PATH™ Guided Journey v6.2
 
 Screen 03 — THE DISCOVERY™
 
-Premium Design Language v1.0
+Status
 
-Status: REFINED
+✓ Uniform Premium Hero
+✓ Uniform Premium Navigator
+✓ Responsive
+✓ Matches Screen 01 Design Language
+✓ Ready for Freeze
 
 ==================================================*/
