@@ -1,7 +1,7 @@
 
 /*======================================================================
 
-CTM PATH™ Guided Journey v7.0
+CTM PATH™ Guided Journey v8.0
 
 SCREEN 11 — YOUR FINANCIAL REALITY™
 
@@ -9,9 +9,46 @@ File:
 screen11.css
 
 Purpose:
-Financial Reality Index™
+Premium Assessment Experience
 
 ======================================================================*/
+
+
+
+/*==================================================
+Theme
+==================================================*/
+
+:root{
+
+    --bg:#181A1F;
+
+    --panel:#23262F;
+
+    --card:#2A2E38;
+
+    --gold:#C9A75C;
+
+    --gold-soft:#DFC894;
+
+    --ivory:#F6F2EA;
+
+    --text:#E7E3DB;
+
+    --muted:#AEB6C6;
+
+    --border:#343944;
+
+    --green:#3EBB71;
+
+    --orange:#F39C3D;
+
+    --red:#E0565B;
+
+    --shadow:0 20px 60px rgba(0,0,0,.35);
+
+}
+
 
 
 /*==================================================
@@ -20,120 +57,125 @@ Screen
 
 .screen11{
 
-    position:relative;
+    min-height:100vh;
+
+    background:var(--bg);
+
+    color:var(--text);
 
     animation:fadeScreen .8s ease;
 
 }
 
 
-/*==================================================
-Container
-==================================================*/
 
-.screen11 .container{
+.screen-container{
 
-    max-width:920px;
+    width:min(900px,92%);
 
     margin:0 auto;
 
+    padding:70px 0 120px;
+
 }
+
 
 
 /*==================================================
 Hero
 ==================================================*/
 
-.screen11 .hero{
+.hero-section{
 
     text-align:center;
 
 }
 
 
-/*==================================================
-Hero Icon
-==================================================*/
 
-.screen11 .hero-icon{
+.hero-icon{
 
-    margin-bottom:42px;
+    margin-bottom:28px;
 
 }
 
 
-/*==================================================
-Greeting
-==================================================*/
 
-.screen11 .personal-greeting{
+.hero-icon img{
 
-    margin-bottom:34px;
+    width:72px;
 
-}
-
-
-.screen11 .visitor-name{
-
-    display:inline-block;
-
-    font-size:30px;
-
-    font-weight:600;
-
-    letter-spacing:.04em;
+    height:72px;
 
 }
 
 
-/*==================================================
-Welcome
-==================================================*/
 
-.screen11 .welcome-block{
+.hero-name{
 
-    margin-bottom:50px;
+    font-size:22px;
+
+    color:var(--gold);
+
+    letter-spacing:.18em;
+
+    margin-bottom:22px;
 
 }
 
 
-.screen11 .tamil-welcome{
+
+.hero-title-ta{
 
     font-size:54px;
 
-    line-height:1.45;
-
     font-weight:300;
 
-    color:#F7F3EA;
+    line-height:1.55;
+
+    color:var(--ivory);
 
 }
 
 
-.screen11 .english-welcome{
 
-    margin-top:16px;
+.hero-title-en{
 
-    letter-spacing:.28em;
+    margin-top:18px;
 
-    font-size:14px;
+    font-size:15px;
 
-    color:#AEB6C6;
+    letter-spacing:.34em;
+
+    color:var(--gold);
+
+    text-transform:uppercase;
 
 }
+
 
 
 /*==================================================
-Divider
+Premium Divider
 ==================================================*/
 
 .premium-divider{
 
-    width:110px;
+    display:flex;
+
+    justify-content:center;
+
+    margin:40px 0;
+
+}
+
+
+
+.premium-divider span{
+
+    width:180px;
 
     height:1px;
-
-    margin:48px auto;
 
     background:linear-gradient(
 
@@ -141,7 +183,7 @@ Divider
 
         transparent,
 
-        rgba(201,167,92,.85),
+        var(--gold),
 
         transparent
 
@@ -149,18 +191,182 @@ Divider
 
 }
 
-
 /*==================================================
 Conversation
 ==================================================*/
 
-.question-block{
+.conversation{
+
+    max-width:760px;
+
+    margin:70px auto 60px;
 
     text-align:center;
 
-    margin-bottom:48px;
+}
+
+
+
+.conversation-ta{
+
+    font-size:34px;
+
+    line-height:1.85;
+
+    color:var(--ivory);
+
+    font-weight:300;
 
 }
+
+
+
+.conversation-en{
+
+    margin-top:36px;
+
+    font-size:20px;
+
+    line-height:2;
+
+    color:var(--muted);
+
+}
+
+
+
+.visitor-name,
+
+.visitor-name-inline{
+
+    color:var(--gold);
+
+    font-weight:500;
+
+}
+
+
+
+/*==================================================
+Reflection Progress
+==================================================*/
+
+.reflection-progress{
+
+    max-width:620px;
+
+    margin:80px auto 70px;
+
+    text-align:center;
+
+}
+
+
+
+.reflection-title{
+
+    font-size:18px;
+
+    color:var(--gold);
+
+    letter-spacing:.18em;
+
+    text-transform:uppercase;
+
+}
+
+
+
+.progress-bar{
+
+    margin-top:28px;
+
+    width:100%;
+
+    height:8px;
+
+    background:#2F3440;
+
+    border-radius:50px;
+
+    overflow:hidden;
+
+}
+
+
+
+.progress-fill{
+
+    width:10%;
+
+    height:100%;
+
+    background:linear-gradient(
+
+        90deg,
+
+        var(--gold),
+
+        var(--gold-soft)
+
+    );
+
+    border-radius:50px;
+
+    transition:width .5s ease;
+
+}
+
+
+
+/*==================================================
+Question Card
+==================================================*/
+
+.question-card{
+
+    background:var(--panel);
+
+    border:1px solid var(--border);
+
+    border-radius:28px;
+
+    padding:70px 60px;
+
+    box-shadow:var(--shadow);
+
+    text-align:center;
+
+    animation:fadeUp .6s ease;
+
+}
+
+
+
+.question-number{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:72px;
+
+    height:72px;
+
+    border-radius:50%;
+
+    border:1px solid var(--gold);
+
+    color:var(--gold);
+
+    font-size:24px;
+
+    margin-bottom:36px;
+
+}
+
 
 
 .question-ta{
@@ -169,253 +375,26 @@ Conversation
 
     line-height:1.7;
 
-    color:#F7F3EA;
+    color:var(--ivory);
 
     font-weight:300;
 
 }
 
 
+
 .question-en{
 
-    margin-top:30px;
+    margin-top:28px;
 
     font-size:20px;
 
     line-height:1.9;
 
-    color:#BAC3D2;
+    color:var(--muted);
 
 }
 
-
-/*==================================================
-Reflection
-==================================================*/
-
-.why-instruction{
-
-    text-align:center;
-
-    max-width:760px;
-
-    margin:0 auto 80px;
-
-}
-
-
-.instruction-ta{
-
-    font-size:32px;
-
-    line-height:1.8;
-
-    color:#F7F3EA;
-
-}
-
-
-.instruction-en{
-
-    margin-top:32px;
-
-    font-size:19px;
-
-    line-height:1.9;
-
-    color:#BAC3D2;
-
-}
-
-
-/*==================================================
-Transition
-==================================================*/
-
-.reflection-transition{
-
-    text-align:center;
-
-    margin:70px 0;
-
-}
-
-
-.transition-ta{
-
-    font-size:34px;
-
-    color:#C9A75C;
-
-    line-height:1.7;
-
-}
-
-
-.transition-en{
-
-    margin-top:18px;
-
-    font-size:18px;
-
-    color:#9FA8BA;
-
-    letter-spacing:.18em;
-
-}
-
-/*==================================================
-Financial Reality Section
-==================================================*/
-
-.financial-reality{
-
-    width:100%;
-
-    margin-top:30px;
-
-}
-
-
-.financial-grid{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:70px;
-
-}
-
-
-/*==================================================
-Question Card
-==================================================*/
-
-.fri-card{
-
-    position:relative;
-
-    background:rgba(255,255,255,.025);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    border-radius:26px;
-
-    padding:55px 50px;
-
-    transition:all .35s ease;
-
-    backdrop-filter:blur(14px);
-
-}
-
-
-.fri-card:hover{
-
-    border-color:rgba(201,167,92,.35);
-
-    transform:translateY(-3px);
-
-    box-shadow:
-
-        0 12px 35px
-
-        rgba(0,0,0,.18);
-
-}
-
-
-/*==================================================
-Hidden Cards
-
-Progressive Conversation
-
-==================================================*/
-
-.fri-card.hidden{
-
-    display:none;
-
-}
-
-
-/*==================================================
-Question Number
-==================================================*/
-
-.fri-number{
-
-    width:52px;
-
-    height:52px;
-
-    margin:0 auto 30px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:#12376E;
-
-    color:#ffffff;
-
-    font-size:18px;
-
-    font-weight:700;
-
-    letter-spacing:.08em;
-
-}
-
-
-/*==================================================
-Tamil Question
-==================================================*/
-
-.fri-question-ta{
-
-    text-align:center;
-
-    font-size:36px;
-
-    line-height:1.8;
-
-    font-weight:300;
-
-    color:#F7F3EA;
-
-}
-
-
-.fri-question-ta .text-gold{
-
-    color:#C9A75C;
-
-}
-
-
-/*==================================================
-English Question
-==================================================*/
-
-.fri-question-en{
-
-    margin-top:28px;
-
-    text-align:center;
-
-    font-size:18px;
-
-    line-height:1.9;
-
-    color:#AEB6C6;
-
-}
 
 
 /*==================================================
@@ -424,115 +403,92 @@ Rating Scale
 
 .rating-scale{
 
-    margin-top:45px;
-
     display:flex;
 
     justify-content:center;
 
-    align-items:center;
-
     flex-wrap:wrap;
 
-    gap:14px;
+    gap:16px;
+
+    margin-top:60px;
 
 }
 
 
-/*==================================================
-Premium Rating Circle
-==================================================*/
 
 .rating-btn{
 
-    width:52px;
+    width:58px;
 
-    height:52px;
+    height:58px;
 
     border-radius:50%;
 
-    border:1px solid
+    border:1px solid var(--border);
 
-        rgba(255,255,255,.12);
+    background:transparent;
 
-    background:
+    color:var(--ivory);
 
-        rgba(255,255,255,.03);
-
-    color:#E7EAF0;
-
-    font-size:16px;
-
-    font-weight:600;
+    font-size:20px;
 
     cursor:pointer;
 
-    transition:all .25s ease;
+    transition:all .30s ease;
 
 }
+
 
 
 .rating-btn:hover{
 
-    border-color:#2C5FA5;
-
     transform:translateY(-3px);
 
-    box-shadow:
+    border-color:var(--gold);
 
-        0 8px 20px
-
-        rgba(44,95,165,.18);
+    color:var(--gold);
 
 }
 
 
+
 /*==================================================
-Selected Circle
+Selected Rating
 ==================================================*/
 
 .rating-btn.selected{
 
-    transform:scale(1.08);
+    color:#FFFFFF;
+
+    border:none;
 
 }
 
 
-/*==================================================
-Score Colours
-==================================================*/
 
-.rating-red{
+.rating-btn.red{
 
-    background:#C44B4B;
-
-    border-color:#C44B4B;
-
-    color:#ffffff;
+    background:var(--red);
 
 }
 
 
-.rating-orange{
 
-    background:#D88D2E;
+.rating-btn.orange{
 
-    border-color:#D88D2E;
-
-    color:#ffffff;
+    background:var(--orange);
 
 }
 
 
-.rating-green{
 
-    background:#38A86A;
+.rating-btn.green{
 
-    border-color:#38A86A;
-
-    color:#ffffff;
+    background:var(--green);
 
 }
+
 
 
 /*==================================================
@@ -541,405 +497,461 @@ Rating Labels
 
 .rating-labels{
 
-    margin-top:24px;
-
     display:flex;
 
     justify-content:space-between;
 
-    align-items:center;
+    margin-top:28px;
 
-    font-size:14px;
+    color:var(--muted);
 
-    letter-spacing:.08em;
-
-    color:#8F99AA;
-
-}
-
-
-.rating-low{
-
-    text-align:left;
-
-}
-
-
-.rating-high{
-
-    text-align:right;
+    font-size:15px;
 
 }
 
 /*==================================================
-Financial Analysis
+Analysis Panel
 ==================================================*/
 
-.fri-analysis{
+.analysis-panel{
 
-    margin-top:100px;
-
-    text-align:center;
+    margin-top:90px;
 
     animation:fadeUp .8s ease;
 
 }
 
 
+
 .analysis-card{
 
-    max-width:760px;
+    background:var(--panel);
 
-    margin:0 auto;
-
-    padding:70px 60px;
-
-    background:rgba(255,255,255,.025);
-
-    border:1px solid rgba(255,255,255,.08);
+    border:1px solid var(--border);
 
     border-radius:28px;
 
-    backdrop-filter:blur(18px);
+    padding:70px 60px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
 
 }
 
 
-/*==================================================
-Analysis Icon
-==================================================*/
 
 .analysis-icon{
 
-    font-size:52px;
-
-    margin-bottom:35px;
+    margin-bottom:30px;
 
 }
 
 
-/*==================================================
-Analysis Title
-==================================================*/
 
-.analysis-title{
+.analysis-icon img{
 
-    font-size:34px;
+    width:64px;
+
+    height:64px;
+
+}
+
+
+
+.analysis-title-ta{
+
+    font-size:36px;
+
+    font-weight:300;
 
     line-height:1.8;
 
-    color:#F7F3EA;
+    color:var(--ivory);
 
 }
+
 
 
 .analysis-title-en{
 
-    margin-top:18px;
+    margin-top:20px;
 
-    font-size:18px;
+    font-size:15px;
 
-    letter-spacing:.15em;
+    letter-spacing:.30em;
 
-    color:#AEB6C6;
+    color:var(--gold);
+
+    text-transform:uppercase;
 
 }
 
 
-/*==================================================
-Analysis Progress
-==================================================*/
 
-.analysis-progress{
+.analysis-divider{
 
-    margin-top:55px;
+    display:flex;
+
+    justify-content:center;
+
+    margin:45px 0;
+
+}
+
+
+
+.analysis-divider span{
+
+    width:160px;
+
+    height:1px;
+
+    background:linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        var(--gold),
+
+        transparent
+
+    );
+
+}
+
+
+
+.analysis-items{
 
     display:flex;
 
     flex-direction:column;
 
-    gap:18px;
+    gap:26px;
 
 }
 
 
-/*==================================================
-Analysis Item
-==================================================*/
 
 .analysis-item{
 
-    display:flex;
+    font-size:22px;
 
-    align-items:center;
+    line-height:1.8;
 
-    justify-content:center;
-
-    gap:16px;
-
-    font-size:18px;
-
-    color:#7D8798;
+    color:var(--muted);
 
     opacity:.35;
 
-    transition:all .45s ease;
+    transition:all .5s ease;
 
 }
+
 
 
 .analysis-item.completed{
 
+    color:var(--green);
+
     opacity:1;
 
-    color:#F7F3EA;
+    transform:scale(1.02);
 
 }
+
 
 
 /*==================================================
-Checkmark
+Financial Reality Index™
 ==================================================*/
 
-.analysis-check{
+.result-panel{
 
-    width:30px;
+    margin-top:90px;
 
-    height:30px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:#2FA86A;
-
-    color:#ffffff;
-
-    font-size:15px;
-
-    font-weight:700;
+    animation:fadeUp .8s ease;
 
 }
 
 
-/*==================================================
-Financial Reality Result
-==================================================*/
 
-.fri-result{
+.result-card{
 
-    margin-top:110px;
+    background:var(--panel);
 
-    text-align:center;
+    border:1px solid var(--border);
 
-    animation:fadeUp .9s ease;
-
-}
-
-
-.fri-result-card{
-
-    max-width:760px;
-
-    margin:0 auto;
+    border-radius:30px;
 
     padding:80px 60px;
 
-    background:rgba(255,255,255,.03);
+    text-align:center;
 
-    border:1px solid rgba(255,255,255,.10);
-
-    border-radius:32px;
-
-    backdrop-filter:blur(18px);
+    box-shadow:var(--shadow);
 
 }
 
 
-/*==================================================
-Caption
-==================================================*/
 
-.fri-caption{
+.result-caption-ta{
 
     font-size:34px;
 
-    line-height:1.8;
+    color:var(--ivory);
 
-    color:#F7F3EA;
+    line-height:1.7;
+
+    font-weight:300;
 
 }
 
 
-.fri-caption-en{
+
+.result-caption-en{
 
     margin-top:18px;
 
-    font-size:18px;
+    font-size:15px;
 
-    letter-spacing:.18em;
+    color:var(--gold);
 
-    color:#AEB6C6;
+    letter-spacing:.30em;
+
+    text-transform:uppercase;
 
 }
 
 
+
 /*==================================================
-Score Circle
+Animated Score Circle
 ==================================================*/
 
-.fri-score-circle{
+.score-circle{
 
-    width:220px;
+    width:240px;
 
-    height:220px;
+    height:240px;
 
-    margin:55px auto;
+    margin:60px auto;
 
     border-radius:50%;
 
-    border:5px solid rgba(255,255,255,.12);
+    border:8px solid var(--gold);
 
     display:flex;
 
     flex-direction:column;
 
-    align-items:center;
-
     justify-content:center;
 
-    transition:.4s;
+    align-items:center;
+
+    transition:all .5s ease;
 
 }
 
 
-/*==================================================
-Score Value
-==================================================*/
 
-.fri-score-value{
+.score-circle.red{
 
-    font-size:76px;
+    border-color:var(--red);
 
-    font-weight:700;
+}
+
+
+
+.score-circle.orange{
+
+    border-color:var(--orange);
+
+}
+
+
+
+.score-circle.green{
+
+    border-color:var(--green);
+
+}
+
+
+
+.score-value{
+
+    font-size:82px;
+
+    font-weight:300;
+
+    color:var(--ivory);
 
     line-height:1;
 
 }
 
 
-.fri-score-label{
+
+.score-label{
 
     margin-top:8px;
 
+    font-size:20px;
+
+    color:var(--gold);
+
+}
+
+
+
+/*==================================================
+Score Interpretation
+==================================================*/
+
+.score-status{
+
+    margin-top:30px;
+
+    font-size:34px;
+
+    font-weight:400;
+
+    color:var(--gold);
+
+    line-height:1.6;
+
+}
+
+
+
+.score-message{
+
+    margin:40px auto 0;
+
+    max-width:620px;
+
     font-size:22px;
 
-    color:#B7C1CF;
+    line-height:2;
+
+    color:var(--muted);
 
 }
 
 
-/*==================================================
-Circle Colours
-==================================================*/
 
-.score-red{
+.score-message strong{
 
-    border-color:#C44B4B;
-
-    color:#C44B4B;
-
-}
-
-
-.score-orange{
-
-    border-color:#D88D2E;
-
-    color:#D88D2E;
-
-}
-
-
-.score-green{
-
-    border-color:#38A86A;
-
-    color:#38A86A;
-
-}
-
-
-/*==================================================
-Financial Status
-==================================================*/
-
-.fri-score-status{
-
-    margin-top:15px;
-
-    font-size:28px;
+    color:var(--gold);
 
     font-weight:500;
 
-    color:#F7F3EA;
+}
+
+/*==================================================
+Reflection Summary
+==================================================*/
+
+.reflection-summary{
+
+    margin-top:90px;
+
+    animation:fadeUp .8s ease;
 
 }
 
 
-/*==================================================
-Personal Insight
-==================================================*/
 
-.fri-score-message{
+.summary-card{
 
-    margin-top:28px;
+    background:var(--panel);
+
+    border:1px solid var(--border);
+
+    border-radius:30px;
+
+    padding:70px 60px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+}
+
+
+
+.summary-title-ta{
+
+    font-size:36px;
+
+    line-height:1.8;
+
+    font-weight:300;
+
+    color:var(--ivory);
+
+}
+
+
+
+.summary-title-en{
+
+    margin-top:26px;
 
     font-size:20px;
 
     line-height:1.9;
 
-    color:#AEB6C6;
-
-    max-width:620px;
-
-    margin-left:auto;
-
-    margin-right:auto;
+    color:var(--muted);
 
 }
 
 
-/*==================================================
-Hidden
-==================================================*/
 
-.hidden{
+.summary-message-ta{
 
-    display:none;
+    margin-top:50px;
+
+    font-size:30px;
+
+    line-height:1.9;
+
+    color:var(--ivory);
 
 }
+
+
+
+.summary-message-en{
+
+    margin-top:34px;
+
+    font-size:20px;
+
+    line-height:2;
+
+    color:var(--muted);
+
+}
+
+
 
 /*==================================================
 Premium Navigator
 ==================================================*/
 
-.cta-block{
+.journey-footer{
 
-    margin-top:120px;
+    margin-top:110px;
 
     text-align:center;
 
 }
 
 
-.journey-next{
 
-    position:relative;
+.journey-next{
 
     display:inline-flex;
 
@@ -949,11 +961,9 @@ Premium Navigator
 
     justify-content:center;
 
-    gap:14px;
+    gap:18px;
 
-    min-width:360px;
-
-    padding:36px 70px;
+    padding:34px 80px;
 
     background:transparent;
 
@@ -966,11 +976,13 @@ Premium Navigator
 }
 
 
+
 .journey-next:hover{
 
     transform:translateY(-4px);
 
 }
+
 
 
 .journey-next:disabled{
@@ -984,9 +996,20 @@ Premium Navigator
 }
 
 
-.nav-decoration{
 
-    width:140px;
+.nav-divider{
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+
+
+.nav-divider span{
+
+    width:160px;
 
     height:1px;
 
@@ -996,7 +1019,7 @@ Premium Navigator
 
         transparent,
 
-        rgba(201,167,92,.90),
+        var(--gold),
 
         transparent
 
@@ -1005,68 +1028,73 @@ Premium Navigator
 }
 
 
-.nav-tamil{
+
+.nav-title-ta{
 
     font-size:28px;
 
-    line-height:1.7;
+    line-height:1.8;
 
-    color:#F7F3EA;
+    color:var(--ivory);
 
 }
 
 
-.nav-arrows{
+
+.nav-arrow{
 
     font-size:22px;
 
-    letter-spacing:8px;
-
-    color:#C9A75C;
+    color:var(--gold);
 
 }
 
 
-.nav-english{
 
-    font-size:14px;
+.nav-title-en{
+
+    font-size:15px;
 
     letter-spacing:.30em;
 
-    color:#AEB6C6;
+    color:var(--muted);
+
+    text-transform:uppercase;
 
 }
 
 
+
 /*==================================================
-Navigator Pulse
-
-Activated After Score Reveal
-
+Utility Classes
 ==================================================*/
+
+.hidden{
+
+    display:none !important;
+
+}
+
+
+
+.fade-in{
+
+    animation:fadeUp .7s ease both;
+
+}
+
+
 
 .pulse{
 
-    animation:pulseNavigator 2s infinite;
+    animation:pulse 2s infinite;
 
 }
 
 
-/*==================================================
-Fade Up
-
-==================================================*/
-
-.fade-up{
-
-    animation:fadeUp .8s ease both;
-
-}
-
 
 /*==================================================
-Fade Screen
-
+Animations
 ==================================================*/
 
 @keyframes fadeScreen{
@@ -1083,17 +1111,13 @@ Fade Screen
 
         opacity:1;
 
-        transform:none;
+        transform:translateY(0);
 
     }
 
 }
 
 
-/*==================================================
-Fade Up Animation
-
-==================================================*/
 
 @keyframes fadeUp{
 
@@ -1101,7 +1125,7 @@ Fade Up Animation
 
         opacity:0;
 
-        transform:translateY(24px);
+        transform:translateY(28px);
 
     }
 
@@ -1116,12 +1140,8 @@ Fade Up Animation
 }
 
 
-/*==================================================
-Premium Pulse
 
-==================================================*/
-
-@keyframes pulseNavigator{
+@keyframes pulse{
 
     0%{
 
@@ -1131,7 +1151,7 @@ Premium Pulse
 
     50%{
 
-        transform:scale(1.025);
+        transform:scale(1.03);
 
     }
 
@@ -1144,18 +1164,28 @@ Premium Pulse
 }
 
 
+
 /*==================================================
 Responsive
-
-Tablet
-
 ==================================================*/
 
-@media(max-width:900px){
+@media (max-width:900px){
 
-    .tamil-welcome{
+    .hero-title-ta{
 
-        font-size:46px;
+        font-size:44px;
+
+    }
+
+    .conversation-ta{
+
+        font-size:30px;
+
+    }
+
+    .question-card{
+
+        padding:50px 40px;
 
     }
 
@@ -1165,53 +1195,71 @@ Tablet
 
     }
 
-    .instruction-ta{
+    .score-circle{
 
-        font-size:28px;
+        width:200px;
 
-    }
-
-    .fri-question-ta{
-
-        font-size:30px;
+        height:200px;
 
     }
 
-    .fri-score-circle{
+    .score-value{
 
-        width:190px;
-
-        height:190px;
-
-    }
-
-    .fri-score-value{
-
-        font-size:64px;
+        font-size:70px;
 
     }
 
 }
 
 
-/*==================================================
-Responsive
 
-Mobile
+@media (max-width:600px){
 
-==================================================*/
+    .screen-container{
 
-@media(max-width:600px){
+        width:94%;
 
-    .container{
-
-        padding:0 22px;
+        padding:50px 0 90px;
 
     }
 
-    .tamil-welcome{
+    .hero-title-ta{
 
-        font-size:36px;
+        font-size:34px;
+
+    }
+
+    .hero-title-en{
+
+        font-size:13px;
+
+    }
+
+    .conversation-ta{
+
+        font-size:24px;
+
+    }
+
+    .conversation-en{
+
+        font-size:17px;
+
+    }
+
+    .question-card{
+
+        padding:36px 24px;
+
+    }
+
+    .question-number{
+
+        width:56px;
+
+        height:56px;
+
+        font-size:20px;
 
     }
 
@@ -1227,107 +1275,118 @@ Mobile
 
     }
 
-    .instruction-ta{
-
-        font-size:23px;
-
-    }
-
-    .instruction-en{
-
-        font-size:17px;
-
-    }
-
-    .fri-card{
-
-        padding:36px 24px;
-
-    }
-
-    .fri-question-ta{
-
-        font-size:24px;
-
-        line-height:1.75;
-
-    }
-
-    .fri-question-en{
-
-        font-size:16px;
-
-    }
-
     .rating-scale{
 
-        gap:8px;
+        gap:10px;
 
     }
 
     .rating-btn{
 
-        width:38px;
+        width:44px;
 
-        height:38px;
+        height:44px;
 
-        font-size:14px;
+        font-size:16px;
 
     }
 
     .rating-labels{
 
-        font-size:12px;
+        font-size:13px;
 
     }
 
     .analysis-card,
 
-    .fri-result-card{
+    .result-card,
+
+    .summary-card{
 
         padding:45px 24px;
 
     }
 
-    .fri-score-circle{
+    .analysis-title-ta{
 
-        width:150px;
-
-        height:150px;
+        font-size:28px;
 
     }
 
-    .fri-score-value{
+    .result-caption-ta{
 
-        font-size:50px;
-
-    }
-
-    .fri-score-status{
-
-        font-size:22px;
+        font-size:28px;
 
     }
 
-    .fri-score-message{
+    .score-circle{
 
-        font-size:17px;
+        width:160px;
+
+        height:160px;
+
+        border-width:6px;
+
+    }
+
+    .score-value{
+
+        font-size:54px;
+
+    }
+
+    .score-status{
+
+        font-size:26px;
+
+    }
+
+    .score-message{
+
+        font-size:18px;
+
+    }
+
+    .summary-title-ta{
+
+        font-size:28px;
+
+    }
+
+    .summary-message-ta{
+
+        font-size:24px;
 
     }
 
     .journey-next{
 
-        min-width:100%;
+        width:100%;
 
         padding:28px 20px;
 
     }
 
-    .nav-tamil{
+    .nav-title-ta{
 
-        font-size:23px;
+        font-size:22px;
+
+    }
+
+    .nav-title-en{
+
+        font-size:13px;
+
+        letter-spacing:.20em;
 
     }
 
 }
 
+/*======================================================================
+
+END OF FILE
+
+screen11.css
+
+======================================================================*/
