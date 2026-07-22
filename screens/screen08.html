@@ -1,135 +1,566 @@
 
-<!--
-======================================================================
-
-CTM PATH™ Guided Journey v6.0
-
-Purpose
-Screen 08
-
-Responsibility
-• Help the visitor visualize their dream
-• Deepen emotional connection
-• Reinforce possibility
-• Continue the guided journey
-
-======================================================================
--->
+<!-- ==================================================
+SCREEN 08 — DREAM LIFE™
+================================================== -->
 
 <section
-    class="screen"
-    id="screen08">
+    id="screen08"
+    class="screen screen08">
 
-    <div class="container">
+    <div class="screen-content">
 
-        <div class="hero">
+        <!--==================================
+        Illustration
+        ===================================-->
 
-            <!-- Screen Caption -->
+        <img
 
-            <div class="screen-caption">
+            class="screen-image"
 
-                MOMENT 08 OF 36
+            src="assets/images/screen08/screen08-dream-life-light.svg"
+
+            alt="Dream Life">
+
+
+
+
+        <!--==================================
+        Visitor Greeting
+        ===================================-->
+
+        <div
+            id="visitor-display-name"
+            class="personal-greeting">
+
+            Raphael
+
+        </div>
+
+
+
+
+        <!--==================================
+        Title
+        ===================================-->
+
+        <h1 class="screen-title">
+
+            பணம் ஒரு தடையாக
+            இல்லையென்றால்...
+
+        </h1>
+
+        <div class="screen-subtitle">
+
+            IF MONEY WASN'T A LIMITATION...
+
+        </div>
+
+
+
+
+        <!--==================================
+        Instructions
+        ===================================-->
+
+        <div class="screen-message tamil">
+
+            உங்களிடம்
+            தேவையான பணம்
+            ஏற்கனவே
+            இருக்கிறது என்று
+            கற்பனை செய்யுங்கள்.
+
+            <br><br>
+
+            இப்போது...
+
+            <br>
+
+            நீங்கள்
+            எதை
+            தேர்ந்தெடுப்பீர்கள்?
+
+        </div>
+
+        <div class="screen-message english">
+
+            Imagine you already have
+            everything you need.
+
+            <br><br>
+
+            Which dreams
+            would you choose?
+
+        </div>
+
+
+
+
+        <!--==================================
+        Selection Hint
+        ===================================-->
+
+        <div class="selection-hint">
+
+            <div class="hint-ta">
+
+                உங்களுக்கு பொருந்தும்
+                அனைத்தையும் தேர்ந்தெடுங்கள்
 
             </div>
 
-            <!-- Divider -->
+            <div class="hint-en">
 
-            <div class="gold-divider"></div>
-
-            <!-- Tamil -->
-
-            <h1
-                class="tamil"
-                data-personalize>
-
-                <span class="text-gold">
-
-                    {FirstName},
-
-                </span>
-
-                <br><br>
-
-                அந்த நாள்...
-
-                <br><br>
-
-                நிஜமாகிவிட்டது
-
-                <br><br>
-
-                என்று
-
-                <br><br>
-
-                கற்பனை செய்யுங்கள்.
-
-            </h1>
-
-            <!-- Divider -->
-
-            <div class="gold-divider small"></div>
-
-            <!-- English -->
-
-            <div
-                class="english"
-                data-personalize>
-
-                <span class="english-welcome">
-
-                    Imagine...
-
-                </span>
-
-                <br><br>
-
-                {FirstName},
-
-                <br><br>
-
-                your dream
-
-                <br><br>
-
-                has finally
-
-                <br><br>
-
-                become reality.
+                Select all that apply
 
             </div>
 
-            <!-- Divider -->
+        </div>
 
-            <div class="gold-divider"></div>
 
-            <!-- CTA -->
+
+
+        <!--==================================
+        Dream Board
+        ===================================-->
+
+        <div
+            id="dream-board"
+            class="dream-board">
+
+
+
+            <!--==============================
+            CARD 01
+            ==============================-->
 
             <button
 
-                class="btn btn-primary"
+                class="dream-card"
 
-                data-action="continue"
+                data-id="home">
 
-                data-next="screen09">
+                <div class="dream-icon">
 
-                <span class="btn-title">
+                    🏡
 
-                    என்னால் கற்பனை செய்ய முடிகிறது
+                </div>
 
-                </span>
+                <div class="dream-title-ta">
 
-                <span class="btn-subtitle">
+                    என் சொந்த வீடு
 
-                    I Can Imagine It
+                </div>
 
-                </span>
+                <div class="dream-title-en">
+
+                    Own My Dream Home
+
+                </div>
+
+            </button>
+
+
+
+            <!--==============================
+            CARD 02
+            ==============================-->
+
+            <button
+
+                class="dream-card"
+
+                data-id="family">
+
+                <div class="dream-icon">
+
+                    👨‍👩‍👧
+
+                </div>
+
+                <div class="dream-title-ta">
+
+                    குடும்ப பாதுகாப்பு
+
+                </div>
+
+                <div class="dream-title-en">
+
+                    Secure My Family
+
+                </div>
+
+            </button>
+
+
+
+            <!--==============================
+            CARD 03
+            ==============================-->
+
+            <button
+
+                class="dream-card"
+
+                data-id="education">
+
+                <div class="dream-icon">
+
+                    🎓
+
+                </div>
+
+                <div class="dream-title-ta">
+
+                    குழந்தைகளின் கல்வி
+
+                </div>
+
+                <div class="dream-title-en">
+
+                    Children's Education
+
+                </div>
+
+            </button>
+
+
+
+            <!--==============================
+            CARD 04
+            ==============================-->
+
+            <button
+
+                class="dream-card"
+
+                data-id="travel">
+
+                <div class="dream-icon">
+
+                    ✈️
+
+                </div>
+
+                <div class="dream-title-ta">
+
+                    உலகம் சுற்றிப் பார்க்க
+
+                </div>
+
+                <div class="dream-title-en">
+
+                    Travel the World
+
+                </div>
+
+            </button>
+
+
+
+            <!--==============================
+            CARD 05
+            ==============================-->
+
+            <button
+
+                class="dream-card"
+
+                data-id="health">
+
+                <div class="dream-icon">
+
+                    ❤️
+
+                </div>
+
+                <div class="dream-title-ta">
+
+                    நல்ல உடல்நலம்
+
+                </div>
+
+                <div class="dream-title-en">
+
+                    Better Health
+
+                </div>
+
+            </button>
+
+
+
+            <!--==============================
+            CARD 06
+            ==============================-->
+
+            <button
+
+                class="dream-card"
+
+                data-id="peace">
+
+                <div class="dream-icon">
+
+                    😊
+
+                </div>
+
+                <div class="dream-title-ta">
+
+                    மன அமைதி
+
+                </div>
+
+                <div class="dream-title-en">
+
+                    Peace of Mind
+
+                </div>
+
+            </button>
+
+            <!--==============================
+            CARD 07
+            ==============================-->
+
+            <button
+
+                class="dream-card"
+
+                data-id="financial-freedom">
+
+                <div class="dream-icon">
+
+                    💰
+
+                </div>
+
+                <div class="dream-title-ta">
+
+                    நிதி சுதந்திரம்
+
+                </div>
+
+                <div class="dream-title-en">
+
+                    Financial Freedom
+
+                </div>
+
+            </button>
+
+
+
+            <!--==============================
+            CARD 08
+            ==============================-->
+
+            <button
+
+                class="dream-card"
+
+                data-id="business">
+
+                <div class="dream-icon">
+
+                    🚀
+
+                </div>
+
+                <div class="dream-title-ta">
+
+                    என் சொந்த தொழில்
+
+                </div>
+
+                <div class="dream-title-en">
+
+                    Start My Own Business
+
+                </div>
+
+            </button>
+
+
+
+            <!--==============================
+            CARD 09
+            ==============================-->
+
+            <button
+
+                class="dream-card"
+
+                data-id="time">
+
+                <div class="dream-icon">
+
+                    ⏰
+
+                </div>
+
+                <div class="dream-title-ta">
+
+                    எனக்கான நேரம்
+
+                </div>
+
+                <div class="dream-title-en">
+
+                    More Time for Myself
+
+                </div>
+
+            </button>
+
+
+
+            <!--==============================
+            CARD 10
+            ==============================-->
+
+            <button
+
+                class="dream-card"
+
+                data-id="passion">
+
+                <div class="dream-icon">
+
+                    🎨
+
+                </div>
+
+                <div class="dream-title-ta">
+
+                    என் கனவை வாழ
+
+                </div>
+
+                <div class="dream-title-en">
+
+                    Live My Passion
+
+                </div>
+
+            </button>
+
+
+
+            <!--==============================
+            CARD 11
+            ==============================-->
+
+            <button
+
+                class="dream-card"
+
+                data-id="service">
+
+                <div class="dream-icon">
+
+                    🤝
+
+                </div>
+
+                <div class="dream-title-ta">
+
+                    பிறருக்கு உதவ
+
+                </div>
+
+                <div class="dream-title-en">
+
+                    Help Other People
+
+                </div>
+
+            </button>
+
+
+
+            <!--==============================
+            CARD 12
+            ==============================-->
+
+            <button
+
+                class="dream-card"
+
+                data-id="freedom">
+
+                <div class="dream-icon">
+
+                    🌍
+
+                </div>
+
+                <div class="dream-title-ta">
+
+                    நான் விரும்பும் வாழ்க்கை
+
+                </div>
+
+                <div class="dream-title-en">
+
+                    Live Life on My Own Terms
+
+                </div>
 
             </button>
 
         </div>
 
+
+
+        <!--==================================
+        Premium Navigator
+        ===================================-->
+
+        <button
+
+            id="screen08-next"
+
+            class="journey-next"
+
+            disabled>
+
+            <div class="nav-decoration">
+
+                <span class="nav-dot"></span>
+
+            </div>
+
+
+
+            <div class="nav-tamil">
+
+                இதுதான் என் கனவு
+
+            </div>
+
+
+
+            <div class="nav-arrows">
+
+                → → →
+
+            </div>
+
+
+
+            <div class="nav-english">
+
+                THIS IS MY DREAM
+
+            </div>
+
+        </button>
+
     </div>
 
 </section>
+
