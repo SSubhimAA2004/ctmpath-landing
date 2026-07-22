@@ -14,10 +14,10 @@ Screen 06 Interaction Logic
 
 Responsibility:
 • Initialize Screen 06 dynamically
-• Maintain emotional journey progression
-• Handle navigator interaction
+• Display visitor identity
+• Maintain emotional continuity
+• Handle journey navigation
 • Continue journey to Screen 07
-• Support CTM Dynamic Loader Architecture
 
 ======================================================================
 */
@@ -29,18 +29,14 @@ Responsibility:
 (() => {
 
 
-
     const CTM = window.CTM;
-
 
 
     if (!CTM) {
 
 
         console.error(
-
             'CTM core has not been initialized.'
-
         );
 
 
@@ -48,10 +44,6 @@ Responsibility:
 
 
     }
-
-
-
-
 
 
 
@@ -72,7 +64,6 @@ Responsibility:
             'screen06',
 
 
-
         nextScreen:
 
             'screen07'
@@ -84,34 +75,25 @@ Responsibility:
 
 
 
-
-
-
-
     /*
     ==================================================
     Initialize Screen 06
-
-    Called by loader.js
-
     ==================================================
     */
 
 
-    CTM.initScreen06 = function(){
-
+    CTM.initScreen06 = function() {
 
 
         CTM.log(
-
             'Screen 06 initialized.'
-
         );
 
 
+        CTM.refreshScreen06();
+
 
         CTM.bindScreen06();
-
 
 
     };
@@ -119,6 +101,67 @@ Responsibility:
 
 
 
+
+    /*
+    ==================================================
+    Visitor Personalization
+
+    Retrieves name captured
+    in Screen 05
+
+    ==================================================
+    */
+
+
+    CTM.refreshScreen06 = function() {
+
+
+        const visitorName =
+
+
+            window.CTM_STATE?.visitorName ||
+
+
+            localStorage.getItem(
+                'ctmVisitorName'
+            ) ||
+
+
+            '';
+
+
+
+
+
+        const nameElement =
+
+
+            document.querySelector(
+                '#visitor-display-name'
+            );
+
+
+
+
+
+        if (
+
+            nameElement &&
+
+            visitorName
+
+        ) {
+
+
+            nameElement.textContent =
+
+                visitorName;
+
+
+        }
+
+
+    };
 
 
 
@@ -134,8 +177,7 @@ Responsibility:
     */
 
 
-    CTM.handleScreen06Click = async function(event){
-
+    CTM.handleScreen06Click = async function(event) {
 
 
         const button =
@@ -143,15 +185,15 @@ Responsibility:
 
             event.target.closest(
 
-
-                "#screen06 .journey-next"
-
+                '#screen06 .journey-next'
 
             );
 
 
 
-        if(!button){
+
+
+        if (!button) {
 
 
             return;
@@ -171,12 +213,9 @@ Responsibility:
 
         await CTM.navigate(
 
-
             CTM.screen06.nextScreen
 
-
         );
-
 
 
     };
@@ -185,32 +224,24 @@ Responsibility:
 
 
 
-
-
-
-
     /*
     ==================================================
-    Bind Events
+    Bind Screen Events
 
-    Safe Dynamic Loading Support
+    Dynamic Loading Compatible
 
     ==================================================
     */
 
 
-    CTM.bindScreen06 = function(){
-
+    CTM.bindScreen06 = function() {
 
 
         document.removeEventListener(
 
-
             'click',
 
-
             CTM.handleScreen06Click
-
 
         );
 
@@ -220,22 +251,14 @@ Responsibility:
 
         document.addEventListener(
 
-
             'click',
 
-
             CTM.handleScreen06Click
-
 
         );
 
 
-
     };
-
-
-
-
 
 
 
@@ -251,41 +274,25 @@ Responsibility:
     */
 
 
-    CTM.afterScreen06Loaded = function(){
+    CTM.afterScreen06Loaded = function() {
 
 
-
-        if(
-
+        if (
 
             document.getElementById(
-
-
                 'screen06'
-
-
             )
 
-
-        ){
-
+        ) {
 
 
             CTM.initScreen06();
 
 
-
         }
 
 
-
     };
-
-
-
-
-
-
 
 
 
