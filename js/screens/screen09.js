@@ -10,12 +10,20 @@ File:
 js/screens/screen09.js
 
 Purpose
-Dynamic Life Visualisation
+Dynamic Personalisation
+
+Responsibilities
+
+• Initialise Screen
+• Render Visitor Name
+• Render Dream Orbit
+• Sequential Dream Animation
+• Navigate to Screen 10
 
 ======================================================================
 */
 
-'use strict';
+"use strict";
 
 (() => {
 
@@ -31,9 +39,9 @@ Dynamic Life Visualisation
 
     CTM.screen09 = {
 
-        id: 'screen09',
+        id: "screen09",
 
-        nextScreen: 'screen10'
+        nextScreen: "screen10"
 
     };
 
@@ -45,49 +53,45 @@ Dynamic Life Visualisation
 
     const DOM = {
 
-        visitorName : null,
+        orbit: null,
 
-        visitorNameTa : null,
+        next: null,
 
-        visitorNameEn : null,
-
-        dreamOrbit : null,
-
-        nextButton : null
+        visitorNames: []
 
     };
 
 
 
     /*==================================================
-    Dream Icon Map
+    Dream Icons
     ==================================================*/
 
-    const DREAMS = {
+    const DREAM_ICONS = {
 
-        home                 : "🏡",
+        home: "🏡",
 
-        family               : "👨‍👩‍👧",
+        family: "👨‍👩‍👧",
 
-        education            : "🎓",
+        education: "🎓",
 
-        travel               : "✈️",
+        travel: "✈️",
 
-        health               : "❤️",
+        health: "❤️",
 
-        peace                : "😊",
+        peace: "😊",
 
-        "financial-freedom"  : "💰",
+        "financial-freedom": "💰",
 
-        business             : "🚀",
+        business: "🚀",
 
-        time                 : "⏰",
+        time: "⏰",
 
-        passion              : "🎨",
+        passion: "🎨",
 
-        service              : "🤝",
+        service: "🤝",
 
-        freedom              : "🌍"
+        freedom: "🌍"
 
     };
 
@@ -97,13 +101,13 @@ Dynamic Life Visualisation
     Initialise
     ==================================================*/
 
-    CTM.initScreen09 = function(){
+    CTM.initScreen09 = function () {
 
         cacheDOM();
 
-        loadVisitorName();
+        renderVisitorName();
 
-        buildDreamOrbit();
+        renderDreamOrbit();
 
         bindEvents();
 
@@ -115,213 +119,150 @@ Dynamic Life Visualisation
     Cache DOM
     ==================================================*/
 
-    function cacheDOM(){
+    function cacheDOM() {
 
-        DOM.visitorName =
+        DOM.orbit =
 
             document.getElementById(
 
-                'visitor-name'
+                "dream-orbit"
 
             );
 
 
 
-        DOM.visitorNameTa =
+        DOM.next =
 
             document.getElementById(
 
-                'visitor-name-ta'
+                "screen09-next"
 
             );
 
 
 
-        DOM.visitorNameEn =
+        DOM.visitorNames = [
 
-            document.getElementById(
+            ...document.querySelectorAll(
 
-                'visitor-name-en'
-
-            );
-
-
-
-        DOM.dreamOrbit =
-
-            document.getElementById(
-
-                'dream-orbit'
-
-            );
-
-
-
-        DOM.nextButton =
-
-            document.getElementById(
-
-                'screen09-next'
-
-            );
-
-    }
-
-
-
-    /*==================================================
-    Visitor Name
-    ==================================================*/
-
-    function loadVisitorName(){
-
-        let name = '';
-
-
-
-        if(
-
-            window.CTM_STATE &&
-
-            window.CTM_STATE.visitorName
-
-        ){
-
-            name =
-
-                window.CTM_STATE.visitorName;
-
-        }
-
-        else{
-
-            name =
-
-                localStorage.getItem(
-
-                    'ctmVisitorName'
-
-                ) || '';
-
-        }
-
-
-
-        if(DOM.visitorName){
-
-            DOM.visitorName.textContent =
-
-                name;
-
-        }
-
-
-
-        if(DOM.visitorNameTa){
-
-            DOM.visitorNameTa.textContent =
-
-                name + "...";
-
-        }
-
-
-
-        if(DOM.visitorNameEn){
-
-            DOM.visitorNameEn.textContent =
-
-                name + "...";
-
-        }
-
-    }
-
-
-
-    /*==================================================
-    Build Dream Orbit
-    ==================================================*/
-
-    function buildDreamOrbit(){
-
-        if(!DOM.dreamOrbit){
-
-            return;
-
-        }
-
-
-
-        DOM.dreamOrbit.innerHTML = '';
-
-
-
-        let dreams = [];
-
-
-
-        if(
-
-            window.CTM_STATE &&
-
-            Array.isArray(
-
-                window.CTM_STATE.dreamLife
+                "#screen09 .visitor-name"
 
             )
 
-        ){
+        ];
 
-            dreams =
-
-                window.CTM_STATE.dreamLife;
-
-        }
-
-        else{
-
-            const stored =
-
-                localStorage.getItem(
-
-                    'ctmDreamLife'
-
-                );
+    }
 
 
 
-            if(stored){
+    /*==================================================
+    Render Visitor Name
 
-                try{
+    One source of truth
 
-                    dreams =
+    ==================================================*/
 
-                        JSON.parse(
+    function renderVisitorName() {
 
-                            stored
+        const name =
 
-                        );
+            window.CTM_STATE?.visitorName ||
 
-                }
+            localStorage.getItem(
 
-                catch(e){
+                "ctmVisitorName"
 
-                    dreams = [];
+            ) ||
 
-                }
+            "";
+
+
+
+        DOM.visitorNames.forEach(
+
+            element => {
+
+                element.textContent = name;
 
             }
 
+        );
+
+    }
+
+
+
+    /*==================================================
+    Get Dreams
+
+    Preserve selection order
+
+    ==================================================*/
+
+    function getDreams() {
+
+        if (
+
+            Array.isArray(
+
+                window.CTM_STATE?.dreamLife
+
+            )
+
+        ) {
+
+            return [
+
+                ...window.CTM_STATE.dreamLife
+
+            ];
+
         }
 
-        /*==============================================
-        Build Orbit Nodes
-        ==============================================*/
 
-        const total = dreams.length;
 
-        if(total === 0){
+        try {
+
+            return JSON.parse(
+
+                localStorage.getItem(
+
+                    "ctmDreamLife"
+
+                )
+
+            ) || [];
+
+        }
+
+        catch {
+
+            return [];
+
+        }
+
+    }
+
+    /*==================================================
+    Render Dream Orbit
+
+    Preserves Selection Order
+
+    ==================================================*/
+
+    function renderDreamOrbit() {
+
+        if (!DOM.orbit) return;
+
+        DOM.orbit.innerHTML = "";
+
+
+
+        const dreams = getDreams();
+
+
+
+        if (dreams.length === 0) {
 
             return;
 
@@ -329,27 +270,27 @@ Dynamic Life Visualisation
 
 
 
-        const radius = 128;
+        /*
+        Orbit Geometry
+        */
 
-        const center = 170;
+        const orbitSize =
+
+            DOM.orbit.offsetWidth || 360;
+
+        const center = orbitSize / 2;
+
+        const radius = orbitSize * 0.36;
 
 
 
-        dreams.forEach(function(id,index){
+        dreams.forEach((dreamId, index) => {
 
             const angle =
 
-                (
+                (-90 + (360 / dreams.length) * index)
 
-                    (Math.PI * 2)
-
-                    / total
-
-                ) * index
-
-                -
-
-                (Math.PI / 2);
+                * Math.PI / 180;
 
 
 
@@ -357,9 +298,7 @@ Dynamic Life Visualisation
 
                 center +
 
-                Math.cos(angle)
-
-                * radius;
+                Math.cos(angle) * radius;
 
 
 
@@ -367,19 +306,13 @@ Dynamic Life Visualisation
 
                 center +
 
-                Math.sin(angle)
-
-                * radius;
+                Math.sin(angle) * radius;
 
 
 
             const node =
 
-                document.createElement(
-
-                    "div"
-
-                );
+                document.createElement("div");
 
 
 
@@ -389,31 +322,41 @@ Dynamic Life Visualisation
 
 
 
-            node.textContent =
+            node.dataset.dream =
 
-                DREAMS[id] || "✨";
+                dreamId;
+
+
+
+            node.innerHTML =
+
+                DREAM_ICONS[dreamId] || "✨";
 
 
 
             node.style.left =
 
-                (x - 31) + "px";
+                `${x - 32}px`;
 
 
 
             node.style.top =
 
-                (y - 31) + "px";
+                `${y - 32}px`;
 
 
+
+            /*
+            Floating animation offset
+            */
 
             node.style.animationDelay =
 
-                (index * .25) + "s";
+                `${index * 0.35}s`;
 
 
 
-            DOM.dreamOrbit.appendChild(
+            DOM.orbit.appendChild(
 
                 node
 
@@ -421,15 +364,128 @@ Dynamic Life Visualisation
 
         });
 
+
+
+        startSequentialPulse();
+
     }
 
 
 
-    /*==============================================
-    Continue Journey
-    ==============================================*/
+    /*==================================================
+    Sequential Pulse
 
-    function continueJourney(){
+    Draws attention to the
+    visitor's own dreams
+
+    ==================================================*/
+
+    function startSequentialPulse() {
+
+        const nodes =
+
+            DOM.orbit.querySelectorAll(
+
+                ".dream-node"
+
+            );
+
+
+
+        if (!nodes.length) {
+
+            return;
+
+        }
+
+
+
+        let index = 0;
+
+
+
+        function pulseNext() {
+
+            nodes.forEach(node =>
+
+                node.classList.remove(
+
+                    "pulse"
+
+                )
+
+            );
+
+
+
+            nodes[index]
+
+                .classList.add(
+
+                    "pulse"
+
+                );
+
+
+
+            index++;
+
+
+
+            if (
+
+                index >= nodes.length
+
+            ) {
+
+                index = 0;
+
+            }
+
+        }
+
+
+
+        pulseNext();
+
+
+
+        window.clearInterval(
+
+            CTM.screen09PulseTimer
+
+        );
+
+
+
+        CTM.screen09PulseTimer =
+
+            window.setInterval(
+
+                pulseNext,
+
+                900
+
+            );
+
+    }
+
+
+
+    /*==================================================
+    Continue Journey
+
+    ==================================================*/
+
+    function continueJourney() {
+
+        window.clearInterval(
+
+            CTM.screen09PulseTimer
+
+        );
+
+
 
         CTM.navigate(
 
@@ -439,15 +495,14 @@ Dynamic Life Visualisation
 
     }
 
-
-
-    /*==============================================
+     /*==================================================
     Click Handler
-    ==============================================*/
 
-    function handleClick(event){
+    ==================================================*/
 
-        const next =
+    function handleClick(event) {
+
+        const nextButton =
 
             event.target.closest(
 
@@ -457,7 +512,7 @@ Dynamic Life Visualisation
 
 
 
-        if(!next){
+        if (!nextButton) {
 
             return;
 
@@ -475,11 +530,12 @@ Dynamic Life Visualisation
 
 
 
-    /*==============================================
-    Event Binding
-    ==============================================*/
+    /*==================================================
+    Bind Events
 
-    function bindEvents(){
+    ==================================================*/
+
+    function bindEvents() {
 
         document.removeEventListener(
 
@@ -503,7 +559,12 @@ Dynamic Life Visualisation
 
 
 
-    function unbindEvents(){
+    /*==================================================
+    Unbind Events
+
+    ==================================================*/
+
+    function unbindEvents() {
 
         document.removeEventListener(
 
@@ -517,75 +578,65 @@ Dynamic Life Visualisation
 
 
 
-    /*==============================================
+    /*==================================================
+    Refresh Screen
+
+    Called whenever Screen 09
+    becomes active again
+
+    ==================================================*/
+
+    CTM.refreshScreen09 = function () {
+
+        cacheDOM();
+
+        renderVisitorName();
+
+        renderDreamOrbit();
+
+    };
+
+
+
+    /*==================================================
     Screen Loaded Hook
-    ==============================================*/
 
-    CTM.afterScreen09Loaded = function(){
+    Called by Screen Loader
 
-        if(
+    ==================================================*/
+
+    CTM.afterScreen09Loaded = function () {
+
+        const screen =
 
             document.getElementById(
 
                 "screen09"
 
-            )
+            );
 
-        ){
 
-            CTM.initScreen09();
+
+        if (!screen) {
+
+            return;
 
         }
 
-    };
 
 
-
-    /*==============================================
-    Refresh
-    ==============================================*/
-
-    CTM.refreshScreen09 = function(){
-
-        cacheDOM();
-
-        loadVisitorName();
-
-        buildDreamOrbit();
+        CTM.initScreen09();
 
     };
 
 
 
-    /*==============================================
-    Cleanup
-    ==============================================*/
-
-    CTM.destroyScreen09 = function(){
-
-        unbindEvents();
-
-
-
-        DOM.visitorName = null;
-
-        DOM.visitorNameTa = null;
-
-        DOM.visitorNameEn = null;
-
-        DOM.dreamOrbit = null;
-
-        DOM.nextButton = null;
-
-    };
-
-
-
-    /*==============================================
+    /*==================================================
     Validation
-    ==============================================*/
 
-    CTM.validateScreen09 = function(){
+    ==================================================*/
+
+    CTM.validateScreen09 = function () {
 
         return true;
 
@@ -593,16 +644,44 @@ Dynamic Life Visualisation
 
 
 
-    /*==============================================
+    /*==================================================
+    Cleanup
+
+    ==================================================*/
+
+    CTM.destroyScreen09 = function () {
+
+        unbindEvents();
+
+
+
+        window.clearInterval(
+
+            CTM.screen09PulseTimer
+
+        );
+
+
+
+        DOM.orbit = null;
+
+        DOM.next = null;
+
+        DOM.visitorNames = [];
+
+    };
+
+
+
+    /*==================================================
     Module Ready
-    ==============================================*/
+
+    ==================================================*/
 
     CTM.log(
 
         "Screen 09 module loaded."
 
     );
-
-
 
 })();
