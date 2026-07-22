@@ -1,7 +1,7 @@
 
 /*======================================================================
 
-CTM PATH™ Guided Journey v6.1
+CTM PATH™ Guided Journey v6.2
 
 FOUNDATION COMPONENT
 
@@ -14,13 +14,13 @@ Purpose
 Provides one premium navigation component shared by all
 36 journey screens.
 
-Rules
+Responsibilities
 
-• One visual language
-• One typography system
+• One premium visual language
+• One typography hierarchy
 • One spacing system
 • One animation system
-• Only navigator text changes per screen
+• Only the CTA text changes per screen
 
 Status
 FOUNDATION — LOCKED
@@ -43,7 +43,7 @@ Premium Journey Navigator
 
     justify-content:center;
 
-    gap:16px;
+    gap:18px;
 
     margin:0 auto;
 
@@ -57,26 +57,26 @@ Premium Journey Navigator
 
     user-select:none;
 
+    appearance:none;
+
     text-align:center;
 
     text-decoration:none;
-
-    appearance:none;
 
     color:var(--color-gold,#D6B56C);
 
     transition:
 
-        transform .40s ease,
+        transform .35s ease,
 
-        filter .40s ease;
+        filter .35s ease;
 
 }
 
 
 
 /*==================================================
-Divider
+Premium Divider Lines
 ==================================================*/
 
 .nav-decoration{
@@ -85,7 +85,7 @@ Divider
 
     display:block;
 
-    width:160px;
+    width:165px;
 
     height:1px;
 
@@ -97,17 +97,17 @@ Divider
 
             transparent 0%,
 
-            rgba(214,181,108,.35) 20%,
+            rgba(214,181,108,.28) 18%,
 
-            rgba(214,181,108,1) 50%,
+            rgba(214,181,108,.95) 50%,
 
-            rgba(214,181,108,.35) 80%,
+            rgba(214,181,108,.28) 82%,
 
             transparent 100%
 
         );
 
-    opacity:.92;
+    opacity:.95;
 
     transition:
 
@@ -133,11 +133,11 @@ Divider
 
     height:6px;
 
-    border-radius:50%;
-
     transform:translate(-50%,-50%);
 
-    background:#D6B56C;
+    border-radius:50%;
+
+    background:var(--color-gold,#D6B56C);
 
     box-shadow:
 
@@ -159,15 +159,15 @@ Tamil CTA
 
         sans-serif;
 
-    font-size:1.40rem;
+    font-size:1.42rem;
 
     font-weight:700;
 
-    line-height:1.4;
+    line-height:1.35;
 
     letter-spacing:.02em;
 
-    color:#D6B56C;
+    color:var(--color-gold,#D6B56C);
 
 }
 
@@ -185,7 +185,7 @@ Navigator Arrows
 
     letter-spacing:10px;
 
-    color:#D6B56C;
+    color:var(--color-gold,#D6B56C);
 
     transition:
 
@@ -209,17 +209,15 @@ English CTA
 
     font-size:.82rem;
 
-    font-weight:500;
+    font-weight:600;
 
-    letter-spacing:.40em;
+    letter-spacing:.38em;
 
     text-transform:uppercase;
 
-    color:rgba(255,255,255,.78);
+    color:var(--color-gold,#D6B56C);
 
 }
-
-
 
 /*==================================================
 Hover
@@ -227,13 +225,13 @@ Hover
 
 .journey-next:hover{
 
-    transform:translateY(-2px);
+    transform:translateY(-3px);
 
     filter:
 
         drop-shadow(
 
-            0 0 14px rgba(214,181,108,.18)
+            0 0 16px rgba(214,181,108,.20)
 
         );
 
@@ -243,7 +241,19 @@ Hover
 
 .journey-next:hover .nav-decoration{
 
-    width:175px;
+    width:180px;
+
+    opacity:1;
+
+}
+
+
+
+.journey-next:hover .nav-decoration::after{
+
+    box-shadow:
+
+        0 0 18px rgba(214,181,108,.45);
 
 }
 
@@ -252,26 +262,6 @@ Hover
 .journey-next:hover .nav-arrows{
 
     letter-spacing:12px;
-
-}
-
-
-
-/*==================================================
-Focus
-==================================================*/
-
-.journey-next:focus-visible{
-
-    outline:none;
-
-    filter:
-
-        drop-shadow(
-
-            0 0 18px rgba(214,181,108,.28)
-
-        );
 
 }
 
@@ -290,20 +280,92 @@ Active
 
 
 /*==================================================
+Keyboard Focus
+==================================================*/
+
+.journey-next:focus{
+
+    outline:none;
+
+}
+
+
+
+.journey-next:focus-visible{
+
+    outline:none;
+
+    filter:
+
+        drop-shadow(
+
+            0 0 20px rgba(214,181,108,.30)
+
+        );
+
+}
+
+
+
+/*==================================================
+Smooth State Transitions
+==================================================*/
+
+.nav-decoration,
+
+.nav-decoration::after,
+
+.nav-tamil,
+
+.nav-arrows,
+
+.nav-english{
+
+    transition:
+
+        all .35s ease;
+
+}
+
+
+
+/*==================================================
+Premium Cursor Feedback
+==================================================*/
+
+.journey-next:hover .nav-tamil,
+
+.journey-next:hover .nav-arrows,
+
+.journey-next:hover .nav-english{
+
+    color:var(--color-gold,#D6B56C);
+
+}
+
+
+
+/*==================================================
 Tablet
 ==================================================*/
 
 @media (max-width:900px){
 
+    .journey-next{
+
+        gap:16px;
+
+    }
+
     .nav-decoration{
 
-        width:140px;
+        width:145px;
 
     }
 
     .journey-next:hover .nav-decoration{
 
-        width:150px;
+        width:155px;
 
     }
 
@@ -315,7 +377,7 @@ Tablet
 
     .nav-arrows{
 
-        font-size:1.25rem;
+        font-size:1.22rem;
 
         letter-spacing:8px;
 
@@ -325,11 +387,11 @@ Tablet
 
         font-size:.78rem;
 
+        letter-spacing:.34em;
+
     }
 
 }
-
-
 
 /*==================================================
 Mobile
@@ -345,13 +407,21 @@ Mobile
 
     .nav-decoration{
 
-        width:110px;
+        width:115px;
 
     }
 
     .journey-next:hover .nav-decoration{
 
-        width:122px;
+        width:125px;
+
+    }
+
+    .nav-decoration::after{
+
+        width:5px;
+
+        height:5px;
 
     }
 
@@ -359,11 +429,13 @@ Mobile
 
         font-size:1.16rem;
 
+        line-height:1.35;
+
     }
 
     .nav-arrows{
 
-        font-size:1.12rem;
+        font-size:1.10rem;
 
         letter-spacing:6px;
 
@@ -373,7 +445,7 @@ Mobile
 
         font-size:.70rem;
 
-        letter-spacing:.30em;
+        letter-spacing:.28em;
 
     }
 
@@ -387,25 +459,33 @@ Small Mobile
 
 @media (max-width:380px){
 
+    .journey-next{
+
+        gap:12px;
+
+    }
+
     .nav-decoration{
 
-        width:90px;
+        width:95px;
 
     }
 
     .journey-next:hover .nav-decoration{
 
-        width:98px;
+        width:102px;
 
     }
 
     .nav-tamil{
 
-        font-size:1.05rem;
+        font-size:1.04rem;
 
     }
 
     .nav-arrows{
+
+        font-size:1rem;
 
         letter-spacing:5px;
 
@@ -413,16 +493,19 @@ Small Mobile
 
     .nav-english{
 
-        font-size:.65rem;
+        font-size:.64rem;
+
+        letter-spacing:.24em;
 
     }
 
 }
 
-
-
 /*==================================================
-Accessibility
+Reduced Motion Accessibility
+
+CTM Accessibility Standard
+
 ==================================================*/
 
 @media (prefers-reduced-motion:reduce){
@@ -431,9 +514,66 @@ Accessibility
 
     .nav-decoration,
 
-    .nav-arrows{
+    .nav-decoration::after,
 
-        transition:none;
+    .nav-tamil,
+
+    .nav-arrows,
+
+    .nav-english{
+
+        transition:none !important;
+
+    }
+
+
+    .journey-next:hover{
+
+        transform:none !important;
+
+        filter:none !important;
+
+    }
+
+
+    .journey-next:hover .nav-decoration{
+
+        width:inherit;
+
+    }
+
+
+    .journey-next:hover .nav-decoration::after{
+
+        box-shadow:
+
+            0 0 12px rgba(214,181,108,.35);
+
+    }
+
+
+    .journey-next:hover .nav-arrows{
+
+        letter-spacing:inherit;
+
+    }
+
+}
+
+
+
+/*==================================================
+Print
+
+==================================================*/
+
+@media print{
+
+    .journey-next{
+
+        break-inside:avoid;
+
+        page-break-inside:avoid;
 
     }
 
@@ -444,13 +584,25 @@ Accessibility
 /*==================================================
 END OF FILE
 
-CTM PATH™
+CTM PATH™ Guided Journey v6.2
+
+FOUNDATION COMPONENT
 
 Premium Journey Navigator™
 
-Version 1.0
+Shared by all 36 Screens
 
-STATUS: FOUNDATION COMPONENT (LOCKED)
+Only the following change per screen:
+
+• Tamil CTA
+• English CTA
+• data-next-screen
+• aria-label
+
+Everything else remains identical.
+
+STATUS
+FOUNDATION COMPONENT — LOCKED
 
 ==================================================*/
 
