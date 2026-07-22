@@ -2,7 +2,7 @@
 <!--
 ======================================================================
 
-CTM PATH™ Guided Journey v6.0
+CTM PATH™ Guided Journey v6.1
 
 SCREEN 09 — YOUR CHOICE™
 
@@ -18,6 +18,39 @@ screens/screen09.html
 
     <div class="screen-content">
 
+        <!--==================================================
+        Premium Section Navigator
+
+        Standard CTM PATH Component
+
+        ==================================================-->
+
+        <div class="section-navigator">
+
+            <div class="navigator-line"></div>
+
+            <div class="navigator-title">
+
+                அறியலாம்
+
+            </div>
+
+            <div class="navigator-arrows">
+
+                → → →
+
+            </div>
+
+            <div class="navigator-subtitle">
+
+                DISCOVER WITHIN
+
+            </div>
+
+            <div class="navigator-line"></div>
+
+        </div>
+
 
 
         <!--==================================================
@@ -29,7 +62,7 @@ screens/screen09.html
 
         <div class="life-visualisation">
 
-            <!-- Dream Icons -->
+            <!-- Dream Orbit -->
 
             <div
                 id="dream-orbit"
@@ -73,7 +106,7 @@ screens/screen09.html
 
 
         <!--==================================================
-        Title
+        Screen Title
 
         ==================================================-->
 
@@ -85,7 +118,108 @@ screens/screen09.html
 
         <div class="screen-subtitle">
 
-            YOUR CHOICE
+            YOUR CHOICES
+
+        </div>
+
+
+
+        <!--==================================================
+        Selected Dreams
+
+        Dynamically Rendered
+        Shows ONLY the dreams selected in Screen 08
+
+        ==================================================-->
+
+        <section class="selected-dreams-section">
+
+            <div class="selected-dreams-intro">
+
+                <p class="ta">
+
+                    இந்தக் கனவுகளையே
+                    நீங்கள்
+                    தேர்ந்தெடுத்துள்ளீர்கள்.
+
+                </p>
+
+                <p class="en">
+
+                    These are the dreams
+                    you selected.
+
+                </p>
+
+            </div>
+
+
+
+            <div
+                id="selected-dreams-grid"
+                class="selected-dreams-grid">
+
+                <!--
+                    Generated dynamically.
+
+                    Example:
+
+                    🏡 Dream Home
+                    ❤️ Better Health
+                    💰 Financial Freedom
+
+                    Only selected items
+                    are rendered here.
+                -->
+
+            </div>
+
+        </section>
+
+        <!--==================================================
+        Reflection
+
+        ==================================================-->
+
+        <div class="screen-reflection">
+
+            <div class="reflection-question">
+
+                <div class="question-ta">
+
+                    ஆனால்...
+
+                </div>
+
+                <div class="question-en">
+
+                    But...
+
+                </div>
+
+            </div>
+
+
+
+            <div class="reflection-highlight">
+
+                <div class="highlight-ta">
+
+                    "பணம்"
+                    என்பதை
+                    நீங்கள்
+                    தேர்ந்தெடுத்தீர்களா?
+
+                </div>
+
+                <div class="highlight-en">
+
+                    Did you choose
+                    "Money"?
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -106,50 +240,39 @@ screens/screen09.html
 
             <p>
 
-                நீங்கள் இப்போது
-
-                தேர்ந்தெடுத்த
-
-                கனவுகளை
-
-                மீண்டும்
-
-                ஒருமுறை
-
-                பாருங்கள்...
+                இந்தக் கனவுகளை
+                நீங்கள்
+                தேர்ந்தெடுத்தீர்கள்.
 
             </p>
 
             <p>
 
-                ஒரு விஷயத்தை
+                ஒரு நிமிடம்...
 
-                கவனித்தீர்களா?
+                மீண்டும்
+                ஒருமுறை
+                பாருங்கள்.
 
             </p>
 
             <div class="copy-divider"></div>
 
-            <p>
+            <p class="copy-emphasis">
 
                 நீங்கள்
-
                 பணத்தை
-
                 தேர்ந்தெடுக்கவில்லை.
 
             </p>
 
             <div class="copy-divider"></div>
 
-            <p>
+            <p class="copy-emphasis">
 
                 நீங்கள்
-
                 ஒரு
-
                 வாழ்க்கையை
-
                 தேர்ந்தெடுத்தீர்கள்.
 
             </p>
@@ -158,19 +281,24 @@ screens/screen09.html
 
             <p>
 
-                பணம்...
+                அந்த
+                வாழ்க்கையை
+                உருவாக்க
+                உதவும்
+
+                ஒரு
+                கருவிதான்
+
+                பணம்.
 
             </p>
 
             <p>
 
-                அந்த வாழ்க்கையை
-
-                உருவாக்கும்
-
-                ஒரு கருவி
-
-                மட்டுமே.
+                வாழ்க்கையே
+                உங்கள்
+                உண்மையான
+                இலக்கு.
 
             </p>
 
@@ -193,48 +321,35 @@ screens/screen09.html
 
             <p>
 
-                Take another
-
-                look at
-
+                These are
                 the dreams
-
-                you just
-
-                chose...
+                you selected.
 
             </p>
 
             <p>
 
-                Did you
-
-                notice
-
-                something?
+                Take one
+                more look.
 
             </p>
 
             <div class="copy-divider"></div>
 
-            <p>
+            <p class="copy-emphasis">
 
                 You didn't
-
                 choose
-
                 money.
 
             </p>
 
             <div class="copy-divider"></div>
 
-            <p>
+            <p class="copy-emphasis">
 
                 You chose
-
                 a way
-
                 of living.
 
             </p>
@@ -243,15 +358,21 @@ screens/screen09.html
 
             <p>
 
-                Money
-
-                is simply
-
+                Money is simply
                 a tool
-
-                to build
-
+                that helps
+                build
                 that life.
+
+            </p>
+
+            <p>
+
+                Your real goal
+                has always been
+                the life
+                you truly
+                want to live.
 
             </p>
 
@@ -262,7 +383,7 @@ screens/screen09.html
         <!--==================================================
         Journey Navigator
 
-        Standard CTM Component
+        Standard CTM PATH Component
 
         ==================================================-->
 
@@ -337,4 +458,833 @@ screens/screen09.html
     </div>
 
 </section>
+
+/*======================================================================
+CTM PATH™ Guided Journey v6.1
+
+SCREEN 09
+YOUR CHOICE™
+
+======================================================================*/
+
+const Screen09 = {
+
+    /*--------------------------------------------------------------
+    Initialise
+
+    --------------------------------------------------------------*/
+
+    init() {
+
+        this.populateVisitorName();
+
+        this.renderSelectedDreams();
+
+        this.renderDreamOrbit();
+
+        this.bindEvents();
+
+    },
+
+
+
+    /*--------------------------------------------------------------
+    Visitor Name
+
+    --------------------------------------------------------------*/
+
+    populateVisitorName() {
+
+        const visitorName =
+            JourneyState.visitor?.name ||
+            sessionStorage.getItem("visitorName") ||
+            "";
+
+        document
+            .querySelectorAll("#screen09 .visitor-name")
+            .forEach(element => {
+
+                element.textContent = visitorName;
+
+            });
+
+    },
+
+
+
+    /*--------------------------------------------------------------
+    Selected Dreams
+
+    --------------------------------------------------------------*/
+
+    getSelectedDreams() {
+
+        if (
+            JourneyState.selectedDreams &&
+            JourneyState.selectedDreams.length
+        ) {
+
+            return JourneyState.selectedDreams;
+
+        }
+
+        const stored =
+            sessionStorage.getItem("selectedDreams");
+
+        if (!stored) {
+
+            return [];
+
+        }
+
+        try {
+
+            return JSON.parse(stored);
+
+        }
+
+        catch {
+
+            return [];
+
+        }
+
+    },
+
+
+
+    /*--------------------------------------------------------------
+    Dream Grid
+
+    --------------------------------------------------------------*/
+
+    renderSelectedDreams() {
+
+        const container =
+            document.getElementById(
+                "selected-dreams-grid"
+            );
+
+        if (!container) {
+
+            return;
+
+        }
+
+        container.innerHTML = "";
+
+        const dreams =
+            this.getSelectedDreams();
+
+        dreams.forEach(dream => {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "dream-card readonly";
+
+            card.innerHTML = `
+
+                <div class="dream-card-inner">
+
+                    <div class="dream-icon">
+
+                        ${dream.icon}
+
+                    </div>
+
+                    <div class="dream-title-ta">
+
+                        ${dream.tamil}
+
+                    </div>
+
+                    <div class="dream-title-en">
+
+                        ${dream.english}
+
+                    </div>
+
+                </div>
+
+            `;
+
+            container.appendChild(card);
+
+        });
+
+    },
+
+
+
+    /*--------------------------------------------------------------
+    Animated Orbit
+
+    --------------------------------------------------------------*/
+
+    renderDreamOrbit() {
+
+        const orbit =
+            document.getElementById(
+                "dream-orbit"
+            );
+
+        if (!orbit) {
+
+            return;
+
+        }
+
+        orbit.innerHTML = "";
+
+        const dreams =
+            this.getSelectedDreams();
+
+        const total =
+            dreams.length;
+
+        if (!total) {
+
+            return;
+
+        }
+
+        const radius = 185;
+
+        dreams.forEach((dream, index) => {
+
+            const angle =
+                (360 / total) * index;
+
+            const radians =
+                angle * Math.PI / 180;
+
+            const x =
+                Math.cos(radians) * radius;
+
+            const y =
+                Math.sin(radians) * radius;
+
+            const icon =
+                document.createElement("div");
+
+            icon.className =
+                "orbit-dream";
+
+            icon.style.transform =
+                `translate(${x}px, ${y}px)`;
+
+            icon.innerHTML = `
+
+                <div class="orbit-icon">
+
+                    ${dream.icon}
+
+                </div>
+
+            `;
+
+            orbit.appendChild(icon);
+
+        });
+
+    },
+
+
+
+    /*--------------------------------------------------------------
+    Events
+
+    --------------------------------------------------------------*/
+
+    bindEvents() {
+
+        const button =
+            document.getElementById(
+                "screen09-next"
+            );
+
+        if (!button) {
+
+            return;
+
+        }
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                Journey.goto("screen10");
+
+            }
+        );
+
+    }
+
+};
+
+
+
+/*======================================================================
+Auto Initialise
+
+======================================================================*/
+
+document.addEventListener(
+    "screen09:enter",
+    () => {
+
+        Screen09.init();
+
+    }
+);
+
+/*======================================================================
+SCREEN 09
+YOUR CHOICE™
+
+======================================================================*/
+
+
+/*==================================================
+Section Navigator
+
+==================================================*/
+
+.screen09 .section-navigator{
+
+    margin:0 auto 48px;
+
+    max-width:900px;
+
+    text-align:center;
+
+}
+
+
+.screen09 .navigator-title{
+
+    font-size:1.05rem;
+
+    font-weight:700;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+
+    color:var(--ctm-gold);
+
+}
+
+
+.screen09 .navigator-subtitle{
+
+    margin-top:8px;
+
+    font-size:.82rem;
+
+    letter-spacing:.28em;
+
+    color:rgba(255,255,255,.70);
+
+}
+
+
+.screen09 .navigator-arrows{
+
+    margin:14px 0;
+
+    color:var(--ctm-teal);
+
+    letter-spacing:12px;
+
+    font-size:1.2rem;
+
+}
+
+
+.screen09 .navigator-line{
+
+    width:160px;
+
+    height:1px;
+
+    margin:0 auto;
+
+    background:rgba(255,255,255,.18);
+
+}
+
+
+
+/*==================================================
+Selected Dreams
+
+==================================================*/
+
+.selected-dreams-section{
+
+    margin:56px auto;
+
+    max-width:1180px;
+
+}
+
+
+.selected-dreams-intro{
+
+    text-align:center;
+
+    margin-bottom:36px;
+
+}
+
+
+.selected-dreams-intro .ta{
+
+    font-size:1.18rem;
+
+    font-weight:600;
+
+    color:#ffffff;
+
+    margin-bottom:10px;
+
+}
+
+
+.selected-dreams-intro .en{
+
+    font-size:.92rem;
+
+    letter-spacing:.18em;
+
+    color:rgba(255,255,255,.72);
+
+}
+
+
+.selected-dreams-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+
+    gap:24px;
+
+}
+
+
+
+/*==================================================
+Dream Cards
+
+==================================================*/
+
+.dream-card.readonly{
+
+    position:relative;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    border-radius:22px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            rgba(255,255,255,.08),
+
+            rgba(255,255,255,.03)
+
+        );
+
+    backdrop-filter:blur(12px);
+
+    transition:.45s;
+
+}
+
+
+.dream-card.readonly::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            rgba(255,255,255,.08),
+
+            transparent 65%
+
+        );
+
+    pointer-events:none;
+
+}
+
+
+.dream-card-inner{
+
+    padding:28px;
+
+    text-align:center;
+
+}
+
+
+.dream-icon{
+
+    font-size:2.8rem;
+
+    margin-bottom:18px;
+
+}
+
+
+.dream-title-ta{
+
+    font-size:1.08rem;
+
+    font-weight:700;
+
+    color:#ffffff;
+
+    line-height:1.55;
+
+}
+
+
+.dream-title-en{
+
+    margin-top:10px;
+
+    font-size:.84rem;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+
+    color:rgba(255,255,255,.72);
+
+}
+
+
+
+/*==================================================
+Reflection
+
+==================================================*/
+
+.screen-reflection{
+
+    margin:70px auto 40px;
+
+    text-align:center;
+
+}
+
+
+.reflection-question{
+
+    margin-bottom:28px;
+
+}
+
+
+.question-ta{
+
+    font-size:1.15rem;
+
+    font-weight:700;
+
+    color:#ffffff;
+
+}
+
+
+.question-en{
+
+    margin-top:8px;
+
+    font-size:.82rem;
+
+    letter-spacing:.18em;
+
+    color:rgba(255,255,255,.65);
+
+}
+
+
+.reflection-highlight{
+
+    max-width:720px;
+
+    margin:auto;
+
+    padding:28px 36px;
+
+    border-radius:22px;
+
+    border:1px solid rgba(255,215,140,.25);
+
+    background:
+
+        radial-gradient(
+
+            circle at top,
+
+            rgba(255,200,120,.10),
+
+            rgba(255,255,255,.02)
+
+        );
+
+}
+
+
+.highlight-ta{
+
+    font-size:1.55rem;
+
+    font-weight:800;
+
+    line-height:1.6;
+
+    color:#FFD57A;
+
+}
+
+
+.highlight-en{
+
+    margin-top:16px;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    letter-spacing:.08em;
+
+    color:#ffffff;
+
+}
+
+
+
+/*==================================================
+Copy
+
+==================================================*/
+
+.screen-copy{
+
+    max-width:760px;
+
+    margin:50px auto;
+
+    text-align:center;
+
+}
+
+
+.screen-copy p{
+
+    margin:18px 0;
+
+    line-height:1.9;
+
+}
+
+
+.copy-emphasis{
+
+    font-size:1.18rem;
+
+    font-weight:700;
+
+    color:#FFD57A;
+
+}
+
+
+.copy-divider{
+
+    width:90px;
+
+    height:1px;
+
+    margin:26px auto;
+
+    background:rgba(255,255,255,.18);
+
+}
+
+
+
+/*==================================================
+Dream Orbit
+
+==================================================*/
+
+.dream-orbit{
+
+    position:relative;
+
+    width:420px;
+
+    height:420px;
+
+    margin:0 auto 70px;
+
+}
+
+
+.orbit-dream{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    margin-left:-34px;
+
+    margin-top:-34px;
+
+    animation:
+
+        orbitFloat
+
+        4s
+
+        ease-in-out
+
+        infinite;
+
+}
+
+
+.orbit-icon{
+
+    width:68px;
+
+    height:68px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    font-size:2rem;
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    backdrop-filter:blur(10px);
+
+}
+
+
+
+/*==================================================
+Animations
+
+==================================================*/
+
+@keyframes orbitFloat{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-10px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+/*==================================================
+Responsive
+
+==================================================*/
+
+@media (max-width:992px){
+
+    .dream-orbit{
+
+        width:340px;
+
+        height:340px;
+
+    }
+
+    .selected-dreams-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+
+@media (max-width:640px){
+
+    .dream-orbit{
+
+        width:280px;
+
+        height:280px;
+
+    }
+
+    .selected-dreams-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .reflection-highlight{
+
+        padding:24px;
+
+    }
+
+    .highlight-ta{
+
+        font-size:1.3rem;
+
+    }
+
+}
 
