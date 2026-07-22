@@ -2,7 +2,7 @@
 /*
 ======================================================================
 
-CTM PATH™ Guided Journey v6.0
+CTM PATH™ Guided Journey v6.2
 
 SCREEN 09 — YOUR CHOICE™
 
@@ -17,6 +17,7 @@ Responsibilities
 • Initialise Screen
 • Render Visitor Name
 • Render Dream Orbit
+• Render Selected Dream Cards
 • Sequential Dream Animation
 • Navigate to Screen 10
 
@@ -25,11 +26,15 @@ Responsibilities
 
 "use strict";
 
+
 (() => {
+
 
     const CTM = window.CTM;
 
+
     if (!CTM) return;
+
 
 
 
@@ -37,13 +42,19 @@ Responsibilities
     Screen Configuration
     ==================================================*/
 
+
     CTM.screen09 = {
 
-        id: "screen09",
 
-        nextScreen: "screen10"
+        id:"screen09",
+
+
+        nextScreen:"screen10"
+
 
     };
+
+
 
 
 
@@ -51,15 +62,26 @@ Responsibilities
     Cached DOM
     ==================================================*/
 
+
     const DOM = {
 
-        orbit: null,
 
-        next: null,
+        orbit:null,
 
-        visitorNames: []
+
+        selectedDreamsGrid:null,
+
+
+        next:null,
+
+
+        visitorNames:[]
+
 
     };
+
+
+
 
 
 
@@ -67,33 +89,199 @@ Responsibilities
     Dream Icons
     ==================================================*/
 
+
     const DREAM_ICONS = {
 
-        home: "🏡",
 
-        family: "👨‍👩‍👧",
+        home:"🏡",
 
-        education: "🎓",
 
-        travel: "✈️",
+        family:"👨‍👩‍👧",
 
-        health: "❤️",
 
-        peace: "😊",
+        education:"🎓",
 
-        "financial-freedom": "💰",
 
-        business: "🚀",
+        travel:"✈️",
 
-        time: "⏰",
 
-        passion: "🎨",
+        health:"❤️",
 
-        service: "🤝",
 
-        freedom: "🌍"
+        peace:"😊",
+
+
+        "financial-freedom":"💰",
+
+
+        business:"🚀",
+
+
+        time:"⏰",
+
+
+        passion:"🎨",
+
+
+        service:"🤝",
+
+
+        freedom:"🌍"
+
 
     };
+
+
+
+
+
+
+    /*==================================================
+    Dream Names
+    ==================================================*/
+
+
+    const DREAM_NAMES = {
+
+
+        home:{
+
+            ta:"என் சொந்த வீடு",
+
+            en:"Own My Dream Home"
+
+        },
+
+
+        family:{
+
+            ta:"குடும்ப பாதுகாப்பு",
+
+            en:"Secure My Family"
+
+        },
+
+
+        education:{
+
+            ta:"குழந்தைகளின் கல்வி",
+
+            en:"Children's Education"
+
+        },
+
+
+        travel:{
+
+            ta:"உலகம் சுற்றிப் பார்க்க",
+
+            en:"Travel the World"
+
+        },
+
+
+        health:{
+
+            ta:"நல்ல உடல்நலம்",
+
+            en:"Better Health"
+
+        },
+
+
+        peace:{
+
+            ta:"மன அமைதி",
+
+            en:"Peace of Mind"
+
+        },
+
+
+        "financial-freedom":{
+
+            ta:"நிதி சுதந்திரம்",
+
+            en:"Financial Freedom"
+
+        },
+
+
+        business:{
+
+            ta:"என் சொந்த தொழில்",
+
+            en:"Start My Own Business"
+
+        },
+
+
+        time:{
+
+            ta:"எனக்கான நேரம்",
+
+            en:"More Time For Myself"
+
+        },
+
+
+        passion:{
+
+            ta:"என் கனவை வாழ",
+
+            en:"Live My Passion"
+
+        },
+
+
+        service:{
+
+            ta:"பிறருக்கு உதவ",
+
+            en:"Help Other People"
+
+        },
+
+
+        freedom:{
+
+            ta:"நான் விரும்பும் வாழ்க்கை",
+
+            en:"Live Life On My Own Terms"
+
+        }
+
+
+    };
+
+
+
+
+
+
+    function getDreamTamil(id){
+
+
+        return DREAM_NAMES[id]?.ta || "";
+
+
+    }
+
+
+
+
+
+    function getDreamEnglish(id){
+
+
+        return DREAM_NAMES[id]?.en || "";
+
+
+    }
+
+
+
+
 
 
 
@@ -101,17 +289,31 @@ Responsibilities
     Initialise
     ==================================================*/
 
-    CTM.initScreen09 = function () {
+
+    CTM.initScreen09 = function(){
+
 
         cacheDOM();
 
+
         renderVisitorName();
+
 
         renderDreamOrbit();
 
+
+        renderSelectedDreams();
+
+
         bindEvents();
 
+
     };
+
+
+
+
+
 
 
 
@@ -119,13 +321,25 @@ Responsibilities
     Cache DOM
     ==================================================*/
 
-    function cacheDOM() {
+
+    function cacheDOM(){
+
 
         DOM.orbit =
 
             document.getElementById(
 
                 "dream-orbit"
+
+            );
+
+
+
+        DOM.selectedDreamsGrid =
+
+            document.getElementById(
+
+                "selected-dreams-grid"
 
             );
 
@@ -151,28 +365,35 @@ Responsibilities
 
         ];
 
+
     }
+
+
+
+
 
 
 
     /*==================================================
     Render Visitor Name
-
-    One source of truth
-
     ==================================================*/
 
-    function renderVisitorName() {
+
+    function renderVisitorName(){
+
 
         const name =
 
+
             window.CTM_STATE?.visitorName ||
+
 
             localStorage.getItem(
 
                 "ctmVisitorName"
 
             ) ||
+
 
             "";
 
@@ -182,13 +403,20 @@ Responsibilities
 
             element => {
 
+
                 element.textContent = name;
+
 
             }
 
         );
 
+
     }
+
+
+
+
 
 
 
@@ -199,9 +427,12 @@ Responsibilities
 
     ==================================================*/
 
-    function getDreams() {
 
-        if (
+    function getDreams(){
+
+
+        if(
+
 
             Array.isArray(
 
@@ -209,7 +440,9 @@ Responsibilities
 
             )
 
-        ) {
+
+        ){
+
 
             return [
 
@@ -217,11 +450,15 @@ Responsibilities
 
             ];
 
+
         }
 
 
 
-        try {
+
+
+        try{
+
 
             return JSON.parse(
 
@@ -233,15 +470,145 @@ Responsibilities
 
             ) || [];
 
+
+
         }
 
-        catch {
+
+        catch{
+
 
             return [];
 
         }
 
+
     }
+
+
+
+
+
+
+
+    /*==================================================
+    Render Selected Dreams
+
+    Dynamic Card Rendering
+
+    ==================================================*/
+
+
+    function renderSelectedDreams(){
+
+
+        if(!DOM.selectedDreamsGrid){
+
+            return;
+
+        }
+
+
+
+        DOM.selectedDreamsGrid.innerHTML = "";
+
+
+
+        const dreams = getDreams();
+
+
+
+        if(!dreams.length){
+
+            return;
+
+        }
+
+
+
+
+
+        dreams.forEach(dreamId=>{
+
+
+
+            const card =
+
+                document.createElement(
+
+                    "div"
+
+                );
+
+
+
+            card.className =
+
+                "dream-card readonly";
+
+
+
+            card.innerHTML = `
+
+
+                <div class="dream-card-inner">
+
+
+                    <div class="dream-icon">
+
+                        ${
+
+                            DREAM_ICONS[dreamId] || "✨"
+
+                        }
+
+                    </div>
+
+
+                    <div class="dream-title-ta">
+
+                        ${
+
+                            getDreamTamil(dreamId)
+
+                        }
+
+                    </div>
+
+
+                    <div class="dream-title-en">
+
+                        ${
+
+                            getDreamEnglish(dreamId)
+
+                        }
+
+                    </div>
+
+
+                </div>
+
+
+            `;
+
+
+
+            DOM.selectedDreamsGrid.appendChild(card);
+
+
+
+        });
+
+
+    }
+
+
+
+
+
+
+
 
     /*==================================================
     Render Dream Orbit
@@ -250,9 +617,13 @@ Responsibilities
 
     ==================================================*/
 
-    function renderDreamOrbit() {
 
-        if (!DOM.orbit) return;
+    function renderDreamOrbit(){
+
+
+        if(!DOM.orbit) return;
+
+
 
         DOM.orbit.innerHTML = "";
 
@@ -262,35 +633,50 @@ Responsibilities
 
 
 
-        if (dreams.length === 0) {
+        if(dreams.length === 0){
+
 
             return;
+
 
         }
 
 
 
-        /*
-        Orbit Geometry
-        */
+
+
 
         const orbitSize =
 
             DOM.orbit.offsetWidth || 360;
 
+
+
         const center = orbitSize / 2;
 
-        const radius = orbitSize * 0.36;
+
+
+        const radius = orbitSize * .36;
 
 
 
-        dreams.forEach((dreamId, index) => {
+
+
+
+
+        dreams.forEach((dreamId,index)=>{
+
 
             const angle =
 
+
                 (-90 + (360 / dreams.length) * index)
 
-                * Math.PI / 180;
+                *
+
+                Math.PI / 180;
+
+
 
 
 
@@ -310,9 +696,18 @@ Responsibilities
 
 
 
+
+
+
             const node =
 
-                document.createElement("div");
+                document.createElement(
+
+                    "div"
+
+                );
+
+
 
 
 
@@ -322,9 +717,13 @@ Responsibilities
 
 
 
+
+
             node.dataset.dream =
 
                 dreamId;
+
+
 
 
 
@@ -334,9 +733,13 @@ Responsibilities
 
 
 
+
+
             node.style.left =
 
                 `${x - 32}px`;
+
+
 
 
 
@@ -346,43 +749,49 @@ Responsibilities
 
 
 
-            /*
-            Floating animation offset
-            */
+
 
             node.style.animationDelay =
 
-                `${index * 0.35}s`;
+                `${index*.35}s`;
 
 
 
-            DOM.orbit.appendChild(
 
-                node
 
-            );
+            DOM.orbit.appendChild(node);
+
+
 
         });
 
 
 
+
+
         startSequentialPulse();
 
+
+
     }
+
+
+
+
 
 
 
     /*==================================================
     Sequential Pulse
 
-    Draws attention to the
-    visitor's own dreams
-
     ==================================================*/
 
-    function startSequentialPulse() {
+
+    function startSequentialPulse(){
+
 
         const nodes =
+
 
             DOM.orbit.querySelectorAll(
 
@@ -392,7 +801,9 @@ Responsibilities
 
 
 
-        if (!nodes.length) {
+
+
+        if(!nodes.length){
 
             return;
 
@@ -400,13 +811,21 @@ Responsibilities
 
 
 
+
+
+
         let index = 0;
 
 
 
-        function pulseNext() {
 
-            nodes.forEach(node =>
+
+
+        function pulseNext(){
+
+
+            nodes.forEach(node=>
+
 
                 node.classList.remove(
 
@@ -418,13 +837,15 @@ Responsibilities
 
 
 
-            nodes[index]
 
-                .classList.add(
 
-                    "pulse"
+            nodes[index].classList.add(
 
-                );
+                "pulse"
+
+            );
+
+
 
 
 
@@ -432,21 +853,28 @@ Responsibilities
 
 
 
-            if (
 
-                index >= nodes.length
 
-            ) {
+            if(index >= nodes.length){
+
 
                 index = 0;
 
+
             }
+
 
         }
 
 
 
+
+
+
         pulseNext();
+
+
+
 
 
 
@@ -458,7 +886,10 @@ Responsibilities
 
 
 
+
+
         CTM.screen09PulseTimer =
+
 
             window.setInterval(
 
@@ -468,7 +899,13 @@ Responsibilities
 
             );
 
+
+
     }
+
+
+
+
 
 
 
@@ -477,7 +914,9 @@ Responsibilities
 
     ==================================================*/
 
-    function continueJourney() {
+
+    function continueJourney(){
+
 
         window.clearInterval(
 
@@ -493,16 +932,26 @@ Responsibilities
 
         );
 
+
     }
 
-     /*==================================================
+
+
+
+
+
+
+    /*==================================================
     Click Handler
 
     ==================================================*/
 
-    function handleClick(event) {
+
+    function handleClick(event){
+
 
         const nextButton =
+
 
             event.target.closest(
 
@@ -512,7 +961,7 @@ Responsibilities
 
 
 
-        if (!nextButton) {
+        if(!nextButton){
 
             return;
 
@@ -526,7 +975,13 @@ Responsibilities
 
         continueJourney();
 
+
+
     }
+
+
+
+
 
 
 
@@ -535,7 +990,9 @@ Responsibilities
 
     ==================================================*/
 
-    function bindEvents() {
+
+    function bindEvents(){
+
 
         document.removeEventListener(
 
@@ -555,7 +1012,12 @@ Responsibilities
 
         );
 
+
     }
+
+
+
+
 
 
 
@@ -564,7 +1026,9 @@ Responsibilities
 
     ==================================================*/
 
-    function unbindEvents() {
+
+    function unbindEvents(){
+
 
         document.removeEventListener(
 
@@ -574,38 +1038,53 @@ Responsibilities
 
         );
 
+
     }
+
+
+
+
 
 
 
     /*==================================================
     Refresh Screen
 
-    Called whenever Screen 09
-    becomes active again
-
     ==================================================*/
 
-    CTM.refreshScreen09 = function () {
+
+    CTM.refreshScreen09 = function(){
+
 
         cacheDOM();
 
+
         renderVisitorName();
+
 
         renderDreamOrbit();
 
+
+        renderSelectedDreams();
+
+
+
     };
+
+
+
+
 
 
 
     /*==================================================
     Screen Loaded Hook
 
-    Called by Screen Loader
-
     ==================================================*/
 
-    CTM.afterScreen09Loaded = function () {
+
+    CTM.afterScreen09Loaded = function(){
+
 
         const screen =
 
@@ -617,7 +1096,7 @@ Responsibilities
 
 
 
-        if (!screen) {
+        if(!screen){
 
             return;
 
@@ -627,7 +1106,13 @@ Responsibilities
 
         CTM.initScreen09();
 
+
+
     };
+
+
+
+
 
 
 
@@ -636,11 +1121,18 @@ Responsibilities
 
     ==================================================*/
 
-    CTM.validateScreen09 = function () {
+
+    CTM.validateScreen09 = function(){
+
 
         return true;
 
+
     };
+
+
+
+
 
 
 
@@ -649,7 +1141,9 @@ Responsibilities
 
     ==================================================*/
 
-    CTM.destroyScreen09 = function () {
+
+    CTM.destroyScreen09 = function(){
+
 
         unbindEvents();
 
@@ -665,11 +1159,22 @@ Responsibilities
 
         DOM.orbit = null;
 
+
+        DOM.selectedDreamsGrid = null;
+
+
         DOM.next = null;
+
 
         DOM.visitorNames = [];
 
+
+
     };
+
+
+
+
 
 
 
@@ -678,10 +1183,13 @@ Responsibilities
 
     ==================================================*/
 
+
     CTM.log(
 
         "Screen 09 module loaded."
 
     );
+
+
 
 })();
