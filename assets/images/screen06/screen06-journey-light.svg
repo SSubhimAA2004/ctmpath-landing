@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg width="600" height="600" viewBox="0 0 600 600" fill="none"
+xmlns="http://www.w3.org/2000/svg">
+
+<!-- CTM PATH™ Screen 06 Journey Illustration -->
+
+<defs>
+
+    <radialGradient id="glow" cx="50%" cy="45%" r="50%">
+        <stop offset="0%" stop-color="#20D5C7" stop-opacity="0.35"/>
+        <stop offset="70%" stop-color="#20D5C7" stop-opacity="0.08"/>
+        <stop offset="100%" stop-color="#20D5C7" stop-opacity="0"/>
+    </radialGradient>
+
+
+    <linearGradient id="goldPath" x1="300" y1="130" x2="300" y2="470">
+        <stop offset="0%" stop-color="#D6B56C"/>
+        <stop offset="100%" stop-color="#8F6B2E"/>
+    </linearGradient>
+
+
+    <linearGradient id="ivory" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FFF8E7"/>
+        <stop offset="100%" stop-color="#DCCFAE"/>
+    </linearGradient>
+
+</defs>
+
+
+<!-- Ambient Teal Glow -->
+
+<circle
+cx="300"
+cy="280"
+r="250"
+fill="url(#glow)"
+/>
+
+
+<!-- Journey Circle -->
+
+<circle
+cx="300"
+cy="300"
+r="145"
+stroke="#D6B56C"
+stroke-width="2"
+stroke-opacity="0.45"
+/>
+
+
+<circle
+cx="300"
+cy="300"
+r="120"
+stroke="#20D5C7"
+stroke-width="1"
+stroke-opacity="0.35"
+/>
+
+
+<!-- Inner Path Symbol -->
+
+<path
+d="
+M300 155
+C260 215 250 260 300 300
+C350 340 340 385 300 445
+"
+stroke="url(#goldPath)"
+stroke-width="8"
+stroke-linecap="round"
+/>
+
+
+<!-- Direction Point -->
+
+<circle
+cx="300"
+cy="300"
+r="16"
+fill="#D6B56C"
+/>
+
+
+<circle
+cx="300"
+cy="300"
+r="7"
+fill="#081C3A"
+/>
+
+
+<!-- Small Journey Stars -->
+
+<circle
+cx="210"
+cy="220"
+r="4"
+fill="#D6B56C"
+/>
+
+<circle
+cx="390"
+cy="220"
+r="4"
+fill="#D6B56C"
+/>
+
+<circle
+cx="230"
+cy="390"
+r="3"
+fill="#20D5C7"
+/>
+
+<circle
+cx="370"
+cy="390"
+r="3"
+fill="#20D5C7"
+/>
+
+
+<!-- Outer Ring -->
+
+<circle
+cx="300"
+cy="300"
+r="180"
+stroke="#D6B56C"
+stroke-width="1"
+stroke-dasharray="3 12"
+stroke-opacity="0.3"
+/>
+
+
+</svg>
