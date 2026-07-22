@@ -29,9 +29,16 @@ Identity → Personal Journey
 
 
 
+    <!--==================================================
+    Main Content
+    ==================================================-->
+
+
     <div
 
         class="screen-content">
+
+
 
 
 
@@ -73,7 +80,10 @@ Identity → Personal Journey
             class="personal-greeting tamil">
 
 
-            <span id="visitor-display-name">
+            <span
+
+                id="visitor-display-name">
+
 
             </span>
 
@@ -135,7 +145,7 @@ Identity → Personal Journey
 
 
 
-        <!-- Emotional Message -->
+        <!-- Tamil Emotional Message -->
 
 
         <div
@@ -184,7 +194,7 @@ Identity → Personal Journey
 
 
 
-        <!-- English Supporting Text -->
+        <!-- English Emotional Message -->
 
 
         <div
@@ -234,6 +244,8 @@ Identity → Personal Journey
 
         CTM PATH™ Standard
 
+        SCREEN 06 → SCREEN 07
+
         ==================================================-->
 
 
@@ -251,6 +263,8 @@ Identity → Personal Journey
             <span
 
                 class="nav-decoration top-line">
+
+
 
             </span>
 
@@ -312,6 +326,8 @@ Identity → Personal Journey
 
                 class="nav-decoration bottom-line">
 
+
+
             </span>
 
 
@@ -324,7 +340,13 @@ Identity → Personal Journey
 
 
 
+
+
+
+
     </div>
+
+
 
 
 
@@ -350,7 +372,6 @@ Premium CTM PATH™ Navigator Standard
 */
 
 
-
 /*==================================================
 Screen 06 Base
 ==================================================*/
@@ -358,7 +379,7 @@ Screen 06 Base
 
 .screen06 {
 
-    position: relative;
+    position:relative;
 
     min-height:100vh;
 
@@ -390,65 +411,37 @@ Screen 06 Base
 
 
 
-/*==================================================
-Ambient Glow
-==================================================*/
-
-
-.screen06-glow {
-
-    position:absolute;
-
-    width:520px;
-
-    height:520px;
-
-    border-radius:50%;
-
-
-    background:
-
-        radial-gradient(
-
-            circle,
-
-            rgba(32,213,199,0.16),
-
-            transparent 70%
-
-        );
-
-
-    filter:blur(30px);
-
-}
-
-
-
-
 
 /*==================================================
-Content Container
+Screen Content
 ==================================================*/
 
 
 .screen06 .screen-content {
 
+
     position:relative;
 
     z-index:2;
 
+
     width:min(90%,650px);
+
 
     text-align:center;
 
+
     display:flex;
+
 
     flex-direction:column;
 
+
     align-items:center;
 
+
 }
+
 
 
 
@@ -461,13 +454,18 @@ Illustration
 
 .screen06 .screen-image {
 
+
     width:220px;
+
 
     height:auto;
 
+
     margin-bottom:25px;
 
+
 }
+
 
 
 
@@ -476,7 +474,7 @@ Illustration
 /*==================================================
 Personal Greeting
 
-Dynamic Visitor Name
+Visitor Name from Screen 05
 
 ==================================================*/
 
@@ -514,9 +512,8 @@ Dynamic Visitor Name
 
 
 
-
 /*==================================================
-Title
+Tamil Title
 ==================================================*/
 
 
@@ -547,6 +544,7 @@ Title
 
 
 }
+
 
 
 
@@ -587,6 +585,7 @@ English Subtitle
 
 
 
+
 /*==================================================
 Message Area
 ==================================================*/
@@ -599,6 +598,8 @@ Message Area
 
 
 }
+
+
 
 
 
@@ -621,6 +622,8 @@ Message Area
 
 
 }
+
+
 
 
 
@@ -650,10 +653,21 @@ Message Area
 
 
 
+
 /*==================================================
 Premium Navigator
 
 CTM PATH™ Standard
+
+──────────── ● ────────────
+
+Tamil Action
+
+→ → →
+
+ENGLISH JOURNEY
+
+──────────── ● ────────────
 
 ==================================================*/
 
@@ -692,12 +706,13 @@ CTM PATH™ Standard
 /*==================================================
 Navigator Decoration
 
-──────────── ● ────────────
-
 ==================================================*/
 
 
 .screen06 .nav-decoration {
+
+
+    width:240px;
 
 
     display:flex;
@@ -707,9 +722,6 @@ Navigator Decoration
 
 
     justify-content:center;
-
-
-    width:240px;
 
 
 }
@@ -740,24 +752,11 @@ Navigator Decoration
 
 
 
-.screen06 .nav-decoration.top-line,
-
-.screen06 .nav-decoration.bottom-line {
-
-
-    position:relative;
-
-
-}
-
-
 
 
 
 /*==================================================
-Navigator Text
-
-Luxury Gold Standard
+Navigator Tamil
 
 ==================================================*/
 
@@ -789,6 +788,13 @@ Luxury Gold Standard
 
 
 
+
+/*==================================================
+Navigator Arrows
+
+==================================================*/
+
+
 .screen06 .nav-arrows {
 
 
@@ -808,6 +814,13 @@ Luxury Gold Standard
 
 
 
+
+
+
+/*==================================================
+Navigator English
+
+==================================================*/
 
 
 .screen06 .nav-english {
@@ -837,6 +850,7 @@ Luxury Gold Standard
 
 
 
+
 /*==================================================
 Responsive
 
@@ -853,6 +867,7 @@ Responsive
 
 
     }
+
 
 
     .screen06 .screen-message.tamil {
@@ -960,7 +975,7 @@ Responsibility:
     ==================================================
     Initialize Screen 06
 
-    Called by loader.js
+    Called after screen injection
 
     ==================================================
     */
@@ -1000,7 +1015,7 @@ Responsibility:
     ==================================================
     Personalization
 
-    Retrieve Visitor Name
+    Retrieve visitor name
 
     Source:
     Screen 05
@@ -1021,11 +1036,14 @@ Responsibility:
 
         if(
 
+
             window.CTM_STATE &&
 
             window.CTM_STATE.visitorName
 
+
         ){
+
 
 
             visitorName =
@@ -1033,10 +1051,12 @@ Responsibility:
                 window.CTM_STATE.visitorName;
 
 
+
         }
 
 
         else{
+
 
 
             visitorName =
@@ -1048,7 +1068,10 @@ Responsibility:
                 ) || "";
 
 
+
         }
+
+
 
 
 
@@ -1067,11 +1090,15 @@ Responsibility:
 
 
 
+
+
         if(
+
 
             nameElement &&
 
             visitorName
+
 
         ){
 
@@ -1117,18 +1144,20 @@ Responsibility:
 
             event.target.closest(
 
-
                 "#screen06 .journey-next"
 
-
             );
+
+
 
 
 
         if(!button){
 
 
+
             return;
+
 
 
         }
@@ -1137,7 +1166,11 @@ Responsibility:
 
 
 
+
+
         event.preventDefault();
+
+
 
 
 
@@ -1192,6 +1225,8 @@ Responsibility:
 
 
 
+
+
         document.addEventListener(
 
 
@@ -1219,7 +1254,7 @@ Responsibility:
     ==================================================
     Screen Loaded Hook
 
-    Called after HTML injection
+    Called by loader after injection
 
     ==================================================
     */
@@ -1237,6 +1272,7 @@ Responsibility:
                 "screen06"
 
             )
+
 
         ){
 
