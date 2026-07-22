@@ -23,29 +23,26 @@ Premium CTM PATH™ Navigator Standard
 Screen Base
 ==================================================*/
 
-
 .screen06 {
 
-    min-height:100vh;
+    min-height: 100vh;
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
+    align-items: center;
 
-    justify-content:center;
+    justify-content: center;
 
-    position:relative;
+    position: relative;
 
-    overflow:hidden;
+    overflow: hidden;
 
     background:
-
         radial-gradient(
             circle at center,
             rgba(32,213,199,0.08),
             transparent 55%
         ),
-
         #081C3A;
 
 }
@@ -58,22 +55,21 @@ Screen Base
 Content Container
 ==================================================*/
 
-
 .screen06 .screen-content {
 
-    position:relative;
+    position: relative;
 
-    z-index:2;
+    z-index: 2;
 
-    width:min(90%,650px);
+    width: min(90%,650px);
 
-    text-align:center;
+    text-align: center;
 
-    display:flex;
+    display: flex;
 
-    flex-direction:column;
+    flex-direction: column;
 
-    align-items:center;
+    align-items: center;
 
 }
 
@@ -85,14 +81,13 @@ Content Container
 Illustration
 ==================================================*/
 
-
 .screen06 .screen-image {
 
-    width:220px;
+    width: 220px;
 
-    height:auto;
+    height: auto;
 
-    margin-bottom:25px;
+    margin-bottom: 25px;
 
 }
 
@@ -102,47 +97,29 @@ Illustration
 
 /*==================================================
 Visitor Identity
-
-Personal Recognition Moment
-
 ==================================================*/
-
 
 .screen06 .personal-greeting {
 
-    color:#E3C47A;
+    color: #E3C47A;
 
     font-family:
-
         "Playfair Display",
-
         "Noto Sans Tamil",
-
         serif;
 
+    font-size: clamp(2rem,4vw,2.8rem);
 
-    font-size:
+    font-weight: 600;
 
-        clamp(2rem,4vw,2.8rem);
+    letter-spacing: 0.08em;
 
+    margin-bottom: 18px;
 
-    font-weight:600;
-
-
-    letter-spacing:0.08em;
-
-
-    margin-bottom:18px;
-
-
-    text-transform:capitalize;
-
+    text-transform: capitalize;
 
     text-shadow:
-
-        0 0 18px
-
-        rgba(214,181,108,0.35);
+        0 0 18px rgba(214,181,108,0.35);
 
 }
 
@@ -150,36 +127,25 @@ Personal Recognition Moment
 
 
 
-
-
 /*==================================================
-Title
+Tamil Title
 ==================================================*/
-
 
 .screen06 .screen-title {
 
-    color:#FFF8E7;
+    color: #FFF8E7;
 
     font-family:
-
         "Noto Sans Tamil",
-
         sans-serif;
 
+    font-size: clamp(2rem,4vw,3rem);
 
-    font-size:
+    line-height: 1.45;
 
-        clamp(2rem,4vw,3rem);
+    font-weight: 700;
 
-
-    line-height:1.45;
-
-
-    font-weight:700;
-
-
-    margin:0;
+    margin: 0;
 
 }
 
@@ -191,29 +157,21 @@ Title
 English Subtitle
 ==================================================*/
 
-
 .screen06 .screen-subtitle {
 
-    margin-top:15px;
+    margin-top: 15px;
 
-
-    color:#D6B56C;
-
+    color: #D6B56C;
 
     font-family:
-
         "Inter",
-
         sans-serif;
 
+    font-size: 0.85rem;
 
-    font-size:0.85rem;
+    letter-spacing: 0.22em;
 
-
-    letter-spacing:0.22em;
-
-
-    text-transform:uppercase;
+    text-transform: uppercase;
 
 }
 
@@ -222,61 +180,40 @@ English Subtitle
 
 
 /*==================================================
-Message Area
+Messages
 ==================================================*/
-
 
 .screen06 .screen-message {
 
-    margin-top:35px;
+    margin-top: 35px;
 
 }
-
-
-
-
 
 .screen06 .screen-message.tamil {
 
-    color:#FFF8E7;
-
+    color: #FFF8E7;
 
     font-family:
-
         "Noto Sans Tamil",
-
         sans-serif;
 
+    font-size: 1.1rem;
 
-    font-size:1.1rem;
-
-
-    line-height:2;
+    line-height: 2;
 
 }
 
-
-
-
-
 .screen06 .screen-message.english {
 
-    color:
-
-        rgba(255,248,231,0.72);
-
+    color: rgba(255,248,231,0.72);
 
     font-family:
-
         "Inter",
-
         sans-serif;
 
+    font-size: 0.9rem;
 
-    font-size:0.9rem;
-
-
-    line-height:1.8;
+    line-height: 1.8;
 
 }
 
@@ -286,129 +223,108 @@ Message Area
 
 /*==================================================
 Premium Navigator
-
-──────────── ● ────────────
-
-Tamil Action
-
-→ → →
-
-ENGLISH JOURNEY
-
-──────────── ● ────────────
-
 ==================================================*/
-
 
 .screen06 .journey-next {
 
-    margin-top:45px;
+    margin-top: 48px;
 
+    background: none;
 
-    background:none;
+    border: none;
 
+    cursor: pointer;
 
-    border:none;
+    display: flex;
 
+    flex-direction: column;
 
-    cursor:pointer;
+    align-items: center;
 
+    transition: all .30s ease;
 
-    display:flex;
+}
 
+.screen06 .journey-next:hover {
 
-    flex-direction:column;
-
-
-    align-items:center;
+    transform: translateY(-2px);
 
 }
 
 
 
 
+
+/*==================================================
+Navigator Decoration
+==================================================*/
 
 .screen06 .nav-decoration {
 
-    width:240px;
+    width: 240px;
 
+    display: flex;
 
-    display:flex;
-
-
-    align-items:center;
+    align-items: center;
 
 }
-
-
-
-
 
 .screen06 .nav-decoration::before,
-
 .screen06 .nav-decoration::after {
 
+    content: "";
 
-    content:"";
+    flex: 1;
 
+    height: 1px;
 
-    height:1px;
+    background: #D6B56C;
 
-
-    flex:1;
-
-
-    background:#D6B56C;
-
-
-    opacity:0.55;
+    opacity: .55;
 
 }
 
 
 
 
+
+/*==================================================
+Navigator Tamil
+==================================================*/
 
 .screen06 .nav-tamil {
 
+    margin-top: 18px;
 
-    margin-top:18px;
-
-
-    color:#D6B56C;
-
+    color: #D6B56C;
 
     font-family:
-
         "Noto Sans Tamil",
-
         sans-serif;
 
+    font-size: 1.35rem;
 
-    font-size:1.35rem;
-
-
-    font-weight:700;
+    font-weight: 700;
 
 }
 
 
 
 
+
+/*==================================================
+Navigator Arrows
+==================================================*/
 
 .screen06 .nav-arrows {
 
+    margin: 12px 0;
 
-    margin:12px 0;
+    color: #D6B56C;
 
+    font-size: 1.15rem;
 
-    color:#D6B56C;
-
-
-    font-size:1.15rem;
-
-
-    letter-spacing:0.4em;
+    letter-spacing: .40em;
 
 }
 
@@ -416,26 +332,53 @@ ENGLISH JOURNEY
 
 
 
+/*==================================================
+Navigator English
+==================================================*/
+
 .screen06 .nav-english {
 
-
-    color:#D6B56C;
-
+    color: #D6B56C;
 
     font-family:
-
         "Inter",
-
         sans-serif;
 
+    font-size: .85rem;
 
-    font-size:0.85rem;
+    font-weight: 600;
+
+    letter-spacing: .25em;
+
+    text-transform: uppercase;
+
+}
 
 
-    font-weight:600;
 
 
-    letter-spacing:0.25em;
+
+/*==================================================
+Bottom Gold Divider
+Below "BEGIN JOURNEY"
+==================================================*/
+
+.screen06 .navigator-gold-line {
+
+    display: block;
+
+    width: 240px;
+
+    height: 2px;
+
+    margin-top: 18px;
+
+    border-radius: 2px;
+
+    background: #D6B56C;
+
+    box-shadow:
+        0 0 10px rgba(214,181,108,.35);
 
 }
 
@@ -447,30 +390,31 @@ ENGLISH JOURNEY
 Responsive
 ==================================================*/
 
-
-@media(max-width:600px) {
-
+@media (max-width:600px) {
 
     .screen06 .screen-image {
 
-        width:170px;
+        width: 170px;
 
     }
-
 
     .screen06 .personal-greeting {
 
-
-        font-size:1.8rem;
+        font-size: 1.8rem;
 
     }
-
 
     .screen06 .screen-message.tamil {
 
-        font-size:1rem;
+        font-size: 1rem;
 
     }
 
+    .screen06 .nav-decoration,
+    .screen06 .navigator-gold-line {
+
+        width: 200px;
+
+    }
 
 }
