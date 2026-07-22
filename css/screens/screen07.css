@@ -7,12 +7,12 @@ CTM PATH™ Guided Journey v6.0
 SCREEN 07 — YOUR LIFE NEEDS™
 
 File:
-screen07.css
+css/screens/screen07.css
 
 Purpose:
 Premium Priority Mover™
 
-Part 1
+Responsibility
 • Screen Layout
 • Typography
 • Priority Board
@@ -78,6 +78,10 @@ Content Container
 
     text-align:center;
 
+    position:relative;
+
+    z-index:2;
+
 }
 
 
@@ -90,7 +94,7 @@ Illustration
 
 .screen07 .screen-visual{
 
-    margin-bottom:24px;
+    margin-bottom:26px;
 
 }
 
@@ -104,7 +108,11 @@ Illustration
 
     height:auto;
 
+    display:block;
+
     user-select:none;
+
+    pointer-events:none;
 
 }
 
@@ -136,9 +144,19 @@ Visitor Greeting
 
     text-shadow:
 
-        0 0 16px
+        0 0 18px
 
-        rgba(214,181,108,.35);
+        rgba(
+
+            214,
+
+            181,
+
+            108,
+
+            .35
+
+        );
 
 }
 
@@ -234,7 +252,9 @@ Instructions
 
     font-size:1.08rem;
 
-    line-height:1.9;
+    font-weight:500;
+
+    line-height:1.90;
 
 }
 
@@ -244,11 +264,21 @@ Instructions
 
 .screen07 .screen-message.english{
 
-    margin-bottom:36px;
+    margin-bottom:38px;
 
     color:
 
-        rgba(255,248,231,.72);
+        rgba(
+
+            255,
+
+            248,
+
+            231,
+
+            .72
+
+        );
 
     font-family:
 
@@ -267,7 +297,7 @@ Instructions
 
 
 /*==================================================
-Life Needs Board
+Priority Board
 ==================================================*/
 
 .life-needs-list{
@@ -280,7 +310,7 @@ Life Needs Board
 
     gap:18px;
 
-    margin-bottom:48px;
+    margin-bottom:52px;
 
 }
 
@@ -308,25 +338,45 @@ Premium Card
 
     background:
 
-        rgba(255,255,255,.045);
+        rgba(
+
+            255,
+
+            255,
+
+            255,
+
+            .045
+
+        );
 
     border:
 
         1px solid
 
-        rgba(214,181,108,.18);
+        rgba(
 
-    backdrop-filter:
+            214,
 
-        blur(16px);
+            181,
+
+            108,
+
+            .18
+
+        );
+
+    backdrop-filter:blur(16px);
 
     transition:
 
         transform .28s ease,
 
+        border-color .28s ease,
+
         box-shadow .28s ease,
 
-        border-color .28s ease;
+        background .28s ease;
 
 }
 
@@ -342,17 +392,61 @@ Premium Card
 
     border-color:
 
-        rgba(214,181,108,.55);
+        rgba(
+
+            214,
+
+            181,
+
+            108,
+
+            .55
+
+        );
 
     box-shadow:
 
-        0 16px 34px
+        0 16px 36px
 
-        rgba(0,0,0,.30),
+        rgba(
+
+            0,
+
+            0,
+
+            0,
+
+            .28
+
+        ),
 
         0 0 24px
 
-        rgba(45,212,191,.16);
+        rgba(
+
+            32,
+
+            213,
+
+            199,
+
+            .16
+
+        );
+
+}
+
+
+
+
+
+.need-card.updated{
+
+    animation:
+
+        cardPulse
+
+        .35s ease;
 
 }
 
@@ -373,18 +467,18 @@ Premium Card
 
 
 /*==================================================
-Rank Badge Container
+Rank Badge
 
-Badge colours are assigned
-by JavaScript.
+Colours assigned
+by JavaScript
 
 ==================================================*/
 
 .need-rank{
 
-    width:56px;
+    width:58px;
 
-    height:56px;
+    height:58px;
 
     flex-shrink:0;
 
@@ -424,6 +518,8 @@ Need Content
 
     flex:1;
 
+    min-width:0;
+
     text-align:left;
 
 }
@@ -433,6 +529,8 @@ Need Content
 
 
 .need-title{
+
+    margin-bottom:6px;
 
     color:#FFF8E7;
 
@@ -446,9 +544,7 @@ Need Content
 
     font-weight:600;
 
-    line-height:1.7;
-
-    margin-bottom:6px;
+    line-height:1.70;
 
 }
 
@@ -460,7 +556,17 @@ Need Content
 
     color:
 
-        rgba(255,255,255,.65);
+        rgba(
+
+            255,
+
+            255,
+
+            255,
+
+            .66
+
+        );
 
     font-family:
 
@@ -479,7 +585,7 @@ Need Content
 /*==================================================
 Rank Badges
 
-Assigned by JavaScript
+Assigned dynamically by JavaScript
 
 ==================================================*/
 
@@ -506,9 +612,19 @@ Rank 1
 
     box-shadow:
 
-        0 0 20px
+        0 0 22px
 
-        rgba(214,181,108,.45);
+        rgba(
+
+            214,
+
+            181,
+
+            108,
+
+            .45
+
+        );
 
 }
 
@@ -528,9 +644,9 @@ Rank 2
 
             135deg,
 
-            #ECECEC,
+            #F4F4F4,
 
-            #BDBDBD
+            #BFBFBF
 
         );
 
@@ -554,7 +670,7 @@ Rank 3
 
             135deg,
 
-            #D7A879,
+            #D9A46D,
 
             #A96A3C
 
@@ -616,16 +732,19 @@ Ranks 4–10
 Priority Controls
 ==================================================*/
 
-
 .need-actions{
 
     display:flex;
 
     flex-direction:column;
 
+    align-items:center;
+
+    justify-content:center;
+
     gap:10px;
 
-    margin-left:18px;
+    margin-left:16px;
 
 }
 
@@ -634,15 +753,23 @@ Priority Controls
 
 
 /*==================================================
-Move Buttons
+Priority Button
+
+Reusable CTM Component
+
 ==================================================*/
 
-
-.need-actions button{
+.priority-button{
 
     width:42px;
 
     height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
 
     border-radius:50%;
 
@@ -658,7 +785,7 @@ Move Buttons
 
             108,
 
-            .45
+            .42
 
         );
 
@@ -676,12 +803,6 @@ Move Buttons
 
         );
 
-    color:#D6B56C;
-
-    font-size:1rem;
-
-    font-weight:700;
-
     cursor:pointer;
 
     transition:
@@ -694,7 +815,7 @@ Move Buttons
 
 
 
-.need-actions button:hover{
+.priority-button:hover{
 
     background:
 
@@ -706,9 +827,11 @@ Move Buttons
 
             108,
 
-            .18
+            .16
 
         );
+
+    border-color:#D6B56C;
 
     transform:
 
@@ -726,7 +849,7 @@ Move Buttons
 
             108,
 
-            .28
+            .30
 
         );
 
@@ -736,11 +859,11 @@ Move Buttons
 
 
 
-.need-actions button:active{
+.priority-button:active{
 
     transform:
 
-        scale(.95);
+        scale(.94);
 
 }
 
@@ -748,11 +871,13 @@ Move Buttons
 
 
 
-.need-actions button:disabled{
+.priority-button:disabled{
 
     opacity:.28;
 
     cursor:default;
+
+    pointer-events:none;
 
     transform:none;
 
@@ -765,27 +890,64 @@ Move Buttons
 
 
 /*==================================================
-Card Transition
+Priority Icon
+
+SVG Ready
+
 ==================================================*/
 
+.priority-icon{
 
-.need-card{
+    display:flex;
 
-    transition:
+    align-items:center;
 
-        transform .28s ease,
+    justify-content:center;
 
-        background .28s ease,
+    color:#D6B56C;
 
-        border-color .28s ease,
+    font-size:1rem;
 
-        box-shadow .28s ease;
+    font-weight:700;
+
+    line-height:1;
 
 }
 
 
 
 
+
+/*==================================================
+Move Button Helpers
+
+Reserved for future SVG icons
+
+==================================================*/
+
+.move-up-btn{
+
+    order:1;
+
+}
+
+
+
+
+
+.move-down-btn{
+
+    order:2;
+
+}
+
+
+
+
+
+/*==================================================
+Card Animation
+==================================================*/
 
 .need-card.updated{
 
@@ -828,9 +990,8 @@ Card Transition
 
 
 /*==================================================
-Navigator
+Premium Navigator
 ==================================================*/
-
 
 .screen07 .journey-next{
 
@@ -850,9 +1011,9 @@ Navigator
 
     transition:
 
-        opacity .25s ease,
+        opacity .30s ease,
 
-        transform .25s ease;
+        transform .30s ease;
 
 }
 
@@ -934,6 +1095,8 @@ Navigator
 
     color:#D6B56C;
 
+    font-size:1.1rem;
+
     letter-spacing:.45em;
 
 }
@@ -952,7 +1115,9 @@ Navigator
 
         sans-serif;
 
-    font-size:.85rem;
+    font-size:.84rem;
+
+    font-weight:600;
 
     letter-spacing:.28em;
 
@@ -963,15 +1128,12 @@ Navigator
 
 
 /*==================================================
-Disabled Navigator
+Navigator States
 ==================================================*/
-
 
 .screen07 .journey-next.disabled{
 
     opacity:.35;
-
-    cursor:not-allowed;
 
     pointer-events:none;
 
@@ -993,23 +1155,6 @@ Disabled Navigator
 
 
 
-.screen07 .journey-next.enabled:hover{
-
-    transform:
-
-        translateY(-3px);
-
-}
-
-
-
-
-
-/*==================================================
-Navigator Glow
-==================================================*/
-
-
 .screen07 .journey-next.enabled .nav-tamil,
 
 .screen07 .journey-next.enabled .nav-arrows,
@@ -1028,15 +1173,27 @@ Navigator Glow
 
             108,
 
-            .30
+            .32
 
         );
 
 }
 
+
+
+
+
+.screen07 .journey-next.enabled:hover{
+
+    transform:
+
+        translateY(-3px);
+
+}
+
 /*==================================================
 Responsive
-Tablet
+Large Tablet
 ==================================================*/
 
 @media(max-width:992px){
@@ -1069,7 +1226,7 @@ Tablet
 
 /*==================================================
 Responsive
-Mobile
+Tablet
 ==================================================*/
 
 @media(max-width:768px){
@@ -1124,9 +1281,9 @@ Mobile
 
     .need-rank{
 
-        width:48px;
+        width:50px;
 
-        height:48px;
+        height:50px;
 
         font-size:.95rem;
 
@@ -1135,8 +1292,6 @@ Mobile
     .need-title{
 
         font-size:.96rem;
-
-        line-height:1.65;
 
     }
 
@@ -1148,19 +1303,17 @@ Mobile
 
     .need-actions{
 
-        gap:8px;
-
         margin-left:12px;
+
+        gap:8px;
 
     }
 
-    .need-actions button{
+    .priority-button{
 
         width:38px;
 
         height:38px;
-
-        font-size:.92rem;
 
     }
 
@@ -1171,7 +1324,8 @@ Mobile
 
 
 /*==================================================
-Small Mobile
+Responsive
+Mobile
 ==================================================*/
 
 @media(max-width:540px){
@@ -1200,19 +1354,27 @@ Small Mobile
 
     }
 
+    .screen07 .screen-message.tamil{
+
+        line-height:1.8;
+
+    }
+
     .need-card{
 
         padding:16px;
 
         border-radius:18px;
 
+        gap:14px;
+
     }
 
     .need-rank{
 
-        width:42px;
+        width:44px;
 
-        height:42px;
+        height:44px;
 
         font-size:.90rem;
 
@@ -1222,6 +1384,8 @@ Small Mobile
 
         font-size:.90rem;
 
+        line-height:1.60;
+
     }
 
     .need-subtitle{
@@ -1230,11 +1394,17 @@ Small Mobile
 
     }
 
-    .need-actions button{
+    .priority-button{
 
         width:34px;
 
         height:34px;
+
+    }
+
+    .priority-icon{
+
+        font-size:.90rem;
 
     }
 
@@ -1245,6 +1415,7 @@ Small Mobile
 
 
 /*==================================================
+Responsive
 Ultra Small Devices
 ==================================================*/
 
@@ -1264,13 +1435,13 @@ Ultra Small Devices
 
     .need-title{
 
-        font-size:.86rem;
+        font-size:.84rem;
 
     }
 
     .need-subtitle{
 
-        font-size:.74rem;
+        font-size:.72rem;
 
     }
 
@@ -1281,10 +1452,10 @@ Ultra Small Devices
 
 
 /*==================================================
-Accessibility
+Keyboard Accessibility
 ==================================================*/
 
-.need-actions button:focus-visible,
+.priority-button:focus-visible,
 
 .screen07 .journey-next:focus-visible{
 
@@ -1299,7 +1470,7 @@ Accessibility
 
 
 /*==================================================
-Selection
+Text Selection
 ==================================================*/
 
 .screen07 ::selection{
@@ -1327,28 +1498,6 @@ Selection
 
 
 /*==================================================
-Smooth Rendering
-==================================================*/
-
-.screen07,
-
-.need-card,
-
-.need-actions button,
-
-.need-rank{
-
-    -webkit-font-smoothing:antialiased;
-
-    -moz-osx-font-smoothing:grayscale;
-
-}
-
-
-
-
-
-/*==================================================
 Animation Utilities
 ==================================================*/
 
@@ -1356,7 +1505,9 @@ Animation Utilities
 
     animation:
 
-        fadeIn .40s ease;
+        fadeIn
+
+        .40s ease;
 
 }
 
@@ -1396,7 +1547,9 @@ Animation Utilities
 
     animation:
 
-        slideUp .35s ease;
+        slideUp
+
+        .35s ease;
 
 }
 
@@ -1408,21 +1561,21 @@ Animation Utilities
 
     from{
 
+        opacity:0;
+
         transform:
 
             translateY(18px);
-
-        opacity:0;
 
     }
 
     to{
 
+        opacity:1;
+
         transform:
 
             translateY(0);
-
-        opacity:1;
 
     }
 
@@ -1436,7 +1589,7 @@ Animation Utilities
 
     box-shadow:
 
-        0 0 18px
+        0 0 20px
 
         rgba(
 
@@ -1456,8 +1609,91 @@ Animation Utilities
 
 
 
+/*==================================================
+Rendering Quality
+==================================================*/
+
+.screen07,
+
+.need-card,
+
+.need-rank,
+
+.priority-button{
+
+    -webkit-font-smoothing:antialiased;
+
+    -moz-osx-font-smoothing:grayscale;
+
+}
+
+
+
+
+
+/*==================================================
+Utility Classes
+==================================================*/
+
 .hidden{
 
     display:none !important;
 
 }
+
+
+
+
+
+.invisible{
+
+    visibility:hidden;
+
+}
+
+
+
+
+
+.disabled{
+
+    pointer-events:none;
+
+}
+
+
+
+
+
+.enabled{
+
+    pointer-events:auto;
+
+}
+
+
+
+
+
+/*==================================================
+Reduced Motion Support
+==================================================*/
+
+@media(prefers-reduced-motion:reduce){
+
+    .need-card,
+
+    .priority-button,
+
+    .screen07 .journey-next,
+
+    .need-rank{
+
+        transition:none;
+
+        animation:none;
+
+    }
+
+}
+
