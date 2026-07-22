@@ -7,21 +7,22 @@ CTM PATH™ Guided Journey v6.0
 SCREEN 07 — YOUR LIFE NEEDS™
 
 File:
-screen07.html
+screens/screen07.html
 
 Purpose:
-Allow the visitor to prioritise their life's most
-important needs by moving each card up or down.
+Allow the visitor to prioritise the most important
+needs in life by arranging them from highest to
+lowest priority.
 
 Interaction:
-Premium Priority Mover™
+CTM Priority Mover™
 
-Responsibility:
+Responsibility
 • Personal Greeting
-• Life Needs Prioritisation
-• Premium Card Layout
-• Up / Down Priority Controls
-• Continue Journey
+• Life Needs Assessment
+• Premium Priority Cards
+• Accessible Markup
+• Screen 07 Navigator
 
 ======================================================================
 -->
@@ -60,6 +61,7 @@ Responsibility:
 
             <span
                 id="visitor-display-name">
+
             </span>
 
         </div>
@@ -75,7 +77,9 @@ Responsibility:
         <h1
             class="screen-title tamil">
 
-            உங்கள் வாழ்க்கையின்<br>
+            உங்கள் வாழ்க்கையின்
+
+            <br>
 
             முக்கிய தேவைகள்
 
@@ -115,7 +119,7 @@ Responsibility:
 
             <p>
 
-                பல தேவைகள் இருக்கின்றன.
+                பல முக்கிய தேவைகள் இருக்கின்றன.
 
             </p>
 
@@ -170,13 +174,13 @@ Responsibility:
 
             <p>
 
-                Arrange them from
+                Arrange these cards
 
             </p>
 
             <p>
 
-                the most important
+                from the most important
 
             </p>
 
@@ -199,27 +203,31 @@ Responsibility:
 
 
         <!--==================================================
-        Priority Board
+        Life Needs Priority Board
         ==================================================-->
 
         <div
             id="life-needs-list"
-            class="life-needs-list">
+            class="life-needs-list"
+            role="list">
 
 
 
 
 
             <!--==================================================
-            Card 01
+            CARD 01
             ==================================================-->
 
-            <div
+            <article
                 class="need-card"
+                role="listitem"
                 data-id="income">
 
                 <div
-                    class="need-rank">
+                    class="need-rank"
+                    aria-hidden="true">
+
                 </div>
 
                 <div
@@ -236,7 +244,8 @@ Responsibility:
                     <div
                         class="need-subtitle english">
 
-                        Increase my monthly income
+                        Increase my
+                        monthly income
 
                     </div>
 
@@ -247,40 +256,53 @@ Responsibility:
 
                     <button
                         type="button"
-                        class="move-up"
-                        aria-label="Move Up">
+                        class="priority-button move-up-btn"
+                        aria-label="Move priority up">
 
-                        ▲
+                        <span
+                            class="priority-icon">
+
+                            ▲
+
+                        </span>
 
                     </button>
 
                     <button
                         type="button"
-                        class="move-down"
-                        aria-label="Move Down">
+                        class="priority-button move-down-btn"
+                        aria-label="Move priority down">
 
-                        ▼
+                        <span
+                            class="priority-icon">
+
+                            ▼
+
+                        </span>
 
                     </button>
 
                 </div>
 
-            </div>
+            </article>
 
 
 
 
 
             <!--==================================================
-            Card 02
+            CARD 02
             ==================================================-->
 
-            <div
+            <article
                 class="need-card"
+                role="listitem"
                 data-id="saving">
 
                 <div
-                    class="need-rank">
+                    class="need-rank"
+                    aria-hidden="true">
+
                 </div>
 
                 <div
@@ -290,7 +312,8 @@ Responsibility:
                         class="need-title tamil">
 
                         தொடர்ந்து
-                        பணம் சேமிக்க வேண்டும்
+                        பணம் சேமிக்க
+                        வேண்டும்
 
                     </div>
 
@@ -309,40 +332,53 @@ Responsibility:
 
                     <button
                         type="button"
-                        class="move-up"
-                        aria-label="Move Up">
+                        class="priority-button move-up-btn"
+                        aria-label="Move priority up">
 
-                        ▲
+                        <span
+                            class="priority-icon">
+
+                            ▲
+
+                        </span>
 
                     </button>
 
                     <button
                         type="button"
-                        class="move-down"
-                        aria-label="Move Down">
+                        class="priority-button move-down-btn"
+                        aria-label="Move priority down">
 
-                        ▼
+                        <span
+                            class="priority-icon">
+
+                            ▼
+
+                        </span>
 
                     </button>
 
                 </div>
 
-            </div>
+            </article>
 
 
 
 
 
             <!--==================================================
-            Card 03
+            CARD 03
             ==================================================-->
 
-            <div
+            <article
                 class="need-card"
+                role="listitem"
                 data-id="debt">
 
                 <div
-                    class="need-rank">
+                    class="need-rank"
+                    aria-hidden="true">
+
                 </div>
 
                 <div
@@ -351,8 +387,8 @@ Responsibility:
                     <div
                         class="need-title tamil">
 
-                        கடன் மற்றும் EMI
-                        அழுத்தத்திலிருந்து
+                        கடன் மற்றும்
+                        EMI அழுத்தத்திலிருந்து
                         வெளியே வர வேண்டும்
 
                     </div>
@@ -360,8 +396,8 @@ Responsibility:
                     <div
                         class="need-subtitle english">
 
-                        Reduce loans and
-                        EMI burden
+                        Reduce loans
+                        and EMI burden
 
                     </div>
 
@@ -372,40 +408,53 @@ Responsibility:
 
                     <button
                         type="button"
-                        class="move-up"
-                        aria-label="Move Up">
+                        class="priority-button move-up-btn"
+                        aria-label="Move priority up">
 
-                        ▲
+                        <span
+                            class="priority-icon">
+
+                            ▲
+
+                        </span>
 
                     </button>
 
                     <button
                         type="button"
-                        class="move-down"
-                        aria-label="Move Down">
+                        class="priority-button move-down-btn"
+                        aria-label="Move priority down">
 
-                        ▼
+                        <span
+                            class="priority-icon">
+
+                            ▼
+
+                        </span>
 
                     </button>
 
                 </div>
 
-            </div>
+            </article>
 
 
 
 
 
             <!--==================================================
-            Card 04
+            CARD 04
             ==================================================-->
 
-            <div
+            <article
                 class="need-card"
+                role="listitem"
                 data-id="wealth">
 
                 <div
-                    class="need-rank">
+                    class="need-rank"
+                    aria-hidden="true">
+
                 </div>
 
                 <div
@@ -435,40 +484,49 @@ Responsibility:
 
                     <button
                         type="button"
-                        class="move-up"
-                        aria-label="Move Up">
+                        class="priority-button move-up-btn"
+                        aria-label="Move priority up">
 
-                        ▲
+                        <span
+                            class="priority-icon">
+
+                            ▲
+
+                        </span>
 
                     </button>
 
                     <button
                         type="button"
-                        class="move-down"
-                        aria-label="Move Down">
+                        class="priority-button move-down-btn"
+                        aria-label="Move priority down">
 
-                        ▼
+                        <span
+                            class="priority-icon">
+
+                            ▼
+
+                        </span>
 
                     </button>
 
                 </div>
 
-            </div>
-
-
-
-
+            </article>
 
             <!--==================================================
-            Card 05
+            CARD 05
             ==================================================-->
 
-            <div
+            <article
                 class="need-card"
+                role="listitem"
                 data-id="plan">
 
                 <div
-                    class="need-rank">
+                    class="need-rank"
+                    aria-hidden="true">
+
                 </div>
 
                 <div
@@ -498,40 +556,53 @@ Responsibility:
 
                     <button
                         type="button"
-                        class="move-up"
-                        aria-label="Move Up">
+                        class="priority-button move-up-btn"
+                        aria-label="Move priority up">
 
-                        ▲
+                        <span
+                            class="priority-icon">
+
+                            ▲
+
+                        </span>
 
                     </button>
 
                     <button
                         type="button"
-                        class="move-down"
-                        aria-label="Move Down">
+                        class="priority-button move-down-btn"
+                        aria-label="Move priority down">
 
-                        ▼
+                        <span
+                            class="priority-icon">
+
+                            ▼
+
+                        </span>
 
                     </button>
 
                 </div>
 
-            </div>
+            </article>
 
 
 
 
 
             <!--==================================================
-            Card 06
+            CARD 06
             ==================================================-->
 
-            <div
+            <article
                 class="need-card"
+                role="listitem"
                 data-id="family">
 
                 <div
-                    class="need-rank">
+                    class="need-rank"
+                    aria-hidden="true">
+
                 </div>
 
                 <div
@@ -549,8 +620,8 @@ Responsibility:
                     <div
                         class="need-subtitle english">
 
-                        Secure my family's
-                        future
+                        Secure my
+                        family's future
 
                     </div>
 
@@ -561,40 +632,53 @@ Responsibility:
 
                     <button
                         type="button"
-                        class="move-up"
-                        aria-label="Move Up">
+                        class="priority-button move-up-btn"
+                        aria-label="Move priority up">
 
-                        ▲
+                        <span
+                            class="priority-icon">
+
+                            ▲
+
+                        </span>
 
                     </button>
 
                     <button
                         type="button"
-                        class="move-down"
-                        aria-label="Move Down">
+                        class="priority-button move-down-btn"
+                        aria-label="Move priority down">
 
-                        ▼
+                        <span
+                            class="priority-icon">
+
+                            ▼
+
+                        </span>
 
                     </button>
 
                 </div>
 
-            </div>
+            </article>
 
 
 
 
 
             <!--==================================================
-            Card 07
+            CARD 07
             ==================================================-->
 
-            <div
+            <article
                 class="need-card"
+                role="listitem"
                 data-id="additional-income">
 
                 <div
-                    class="need-rank">
+                    class="need-rank"
+                    aria-hidden="true">
+
                 </div>
 
                 <div
@@ -603,7 +687,8 @@ Responsibility:
                     <div
                         class="need-title tamil">
 
-                        கூடுதல் வருமான
+                        கூடுதல்
+                        வருமான
                         வாய்ப்புகளை
                         உருவாக்க வேண்டும்
 
@@ -624,40 +709,53 @@ Responsibility:
 
                     <button
                         type="button"
-                        class="move-up"
-                        aria-label="Move Up">
+                        class="priority-button move-up-btn"
+                        aria-label="Move priority up">
 
-                        ▲
+                        <span
+                            class="priority-icon">
+
+                            ▲
+
+                        </span>
 
                     </button>
 
                     <button
                         type="button"
-                        class="move-down"
-                        aria-label="Move Down">
+                        class="priority-button move-down-btn"
+                        aria-label="Move priority down">
 
-                        ▼
+                        <span
+                            class="priority-icon">
+
+                            ▼
+
+                        </span>
 
                     </button>
 
                 </div>
 
-            </div>
+            </article>
 
 
 
 
 
             <!--==================================================
-            Card 08
+            CARD 08
             ==================================================-->
 
-            <div
+            <article
                 class="need-card"
+                role="listitem"
                 data-id="expenses">
 
                 <div
-                    class="need-rank">
+                    class="need-rank"
+                    aria-hidden="true">
+
                 </div>
 
                 <div
@@ -676,7 +774,8 @@ Responsibility:
                         class="need-subtitle english">
 
                         Manage my
-                        expenses better
+                        expenses
+                        better
 
                     </div>
 
@@ -687,40 +786,53 @@ Responsibility:
 
                     <button
                         type="button"
-                        class="move-up"
-                        aria-label="Move Up">
+                        class="priority-button move-up-btn"
+                        aria-label="Move priority up">
 
-                        ▲
+                        <span
+                            class="priority-icon">
+
+                            ▲
+
+                        </span>
 
                     </button>
 
                     <button
                         type="button"
-                        class="move-down"
-                        aria-label="Move Down">
+                        class="priority-button move-down-btn"
+                        aria-label="Move priority down">
 
-                        ▼
+                        <span
+                            class="priority-icon">
+
+                            ▼
+
+                        </span>
 
                     </button>
 
                 </div>
 
-            </div>
+            </article>
 
 
 
 
 
             <!--==================================================
-            Card 09
+            CARD 09
             ==================================================-->
 
-            <div
+            <article
                 class="need-card"
+                role="listitem"
                 data-id="freedom">
 
                 <div
-                    class="need-rank">
+                    class="need-rank"
+                    aria-hidden="true">
+
                 </div>
 
                 <div
@@ -729,7 +841,8 @@ Responsibility:
                     <div
                         class="need-title tamil">
 
-                        நிதி சுதந்திரத்தை
+                        நிதி
+                        சுதந்திரத்தை
                         அடைய வேண்டும்
 
                     </div>
@@ -738,7 +851,8 @@ Responsibility:
                         class="need-subtitle english">
 
                         Achieve
-                        financial freedom
+                        financial
+                        freedom
 
                     </div>
 
@@ -749,40 +863,53 @@ Responsibility:
 
                     <button
                         type="button"
-                        class="move-up"
-                        aria-label="Move Up">
+                        class="priority-button move-up-btn"
+                        aria-label="Move priority up">
 
-                        ▲
+                        <span
+                            class="priority-icon">
+
+                            ▲
+
+                        </span>
 
                     </button>
 
                     <button
                         type="button"
-                        class="move-down"
-                        aria-label="Move Down">
+                        class="priority-button move-down-btn"
+                        aria-label="Move priority down">
 
-                        ▼
+                        <span
+                            class="priority-icon">
+
+                            ▼
+
+                        </span>
 
                     </button>
 
                 </div>
 
-            </div>
+            </article>
 
 
 
 
 
             <!--==================================================
-            Card 10
+            CARD 10
             ==================================================-->
 
-            <div
+            <article
                 class="need-card"
+                role="listitem"
                 data-id="peace">
 
                 <div
-                    class="need-rank">
+                    class="need-rank"
+                    aria-hidden="true">
+
                 </div>
 
                 <div
@@ -792,7 +919,8 @@ Responsibility:
                         class="need-title tamil">
 
                         வாழ்க்கையில்
-                        நிதி நிம்மதியுடன்
+                        நிதி
+                        நிம்மதியுடன்
                         வாழ வேண்டும்
 
                     </div>
@@ -800,7 +928,8 @@ Responsibility:
                     <div
                         class="need-subtitle english">
 
-                        Live with financial
+                        Live with
+                        financial
                         peace of mind
 
                     </div>
@@ -812,27 +941,35 @@ Responsibility:
 
                     <button
                         type="button"
-                        class="move-up"
-                        aria-label="Move Up">
+                        class="priority-button move-up-btn"
+                        aria-label="Move priority up">
 
-                        ▲
+                        <span
+                            class="priority-icon">
+
+                            ▲
+
+                        </span>
 
                     </button>
 
                     <button
                         type="button"
-                        class="move-down"
-                        aria-label="Move Down">
+                        class="priority-button move-down-btn"
+                        aria-label="Move priority down">
 
-                        ▼
+                        <span
+                            class="priority-icon">
+
+                            ▼
+
+                        </span>
 
                     </button>
 
                 </div>
 
-            </div>
-
-
+            </article>
 
         </div>
 
@@ -841,49 +978,88 @@ Responsibility:
 
 
         <!--==================================================
-        Premium Navigator
+        Premium Journey Navigator
 
-        Disabled until
-        at least one priority changes.
+        Enabled only after the visitor
+        changes the priority order.
 
         ==================================================-->
 
         <button
-            class="journey-next disabled"
+
             id="screen07-next"
+
+            class="journey-next disabled"
+
+            type="button"
+
             disabled
+
+            aria-disabled="true"
+
             aria-label="Continue Journey">
 
-            <span
-                class="nav-decoration top-line">
-            </span>
+
 
             <span
+
+                class="nav-decoration top-line">
+
+            </span>
+
+
+
+
+
+            <span
+
                 class="nav-tamil">
 
                 தொடரலாம்
 
             </span>
 
+
+
+
+
             <span
+
                 class="nav-arrows">
 
                 → → →
 
             </span>
 
+
+
+
+
             <span
+
                 class="nav-english">
 
                 CONTINUE JOURNEY
 
             </span>
 
+
+
+
+
             <span
+
                 class="nav-decoration bottom-line">
+
             </span>
 
+
+
         </button>
+
+
+
+
 
     </div>
 
