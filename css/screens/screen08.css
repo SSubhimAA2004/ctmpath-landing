@@ -1,1 +1,683 @@
 
+/*
+======================================================================
+
+CTM PATH™ Guided Journey v6.0
+
+SCREEN 08 — DREAM LIFE™
+
+File:
+css/screens/screen08.css
+
+Purpose:
+Premium visual styling for
+"If Money Wasn't a Limitation"
+
+======================================================================
+*/
+
+
+
+/*==================================================
+Screen Base
+==================================================*/
+
+.screen08{
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            rgba(32,213,199,.08),
+            transparent 58%
+        ),
+
+        #081C3A;
+
+}
+
+
+
+
+/*==================================================
+Content
+==================================================*/
+
+.screen08 .screen-content{
+
+    width:min(94%,980px);
+
+    text-align:center;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+
+
+/*==================================================
+Illustration
+==================================================*/
+
+.screen08 .screen-image{
+
+    width:210px;
+
+    height:auto;
+
+    margin-bottom:22px;
+
+}
+
+
+
+
+/*==================================================
+Visitor Greeting
+==================================================*/
+
+.screen08 .personal-greeting{
+
+    color:#E3C47A;
+
+    font-family:
+
+        "Playfair Display",
+
+        serif;
+
+    font-size:
+
+        clamp(2rem,4vw,2.8rem);
+
+    font-weight:600;
+
+    letter-spacing:.08em;
+
+    margin-bottom:18px;
+
+    text-shadow:
+
+        0 0 18px
+
+        rgba(214,181,108,.35);
+
+}
+
+
+
+
+/*==================================================
+Title
+==================================================*/
+
+.screen08 .screen-title{
+
+    color:#FFF8E7;
+
+    font-size:
+
+        clamp(2rem,4vw,3rem);
+
+    line-height:1.45;
+
+    font-weight:700;
+
+    margin:0;
+
+}
+
+
+
+
+/*==================================================
+Subtitle
+==================================================*/
+
+.screen08 .screen-subtitle{
+
+    margin-top:16px;
+
+    color:#D6B56C;
+
+    font-size:.85rem;
+
+    letter-spacing:.25em;
+
+    text-transform:uppercase;
+
+}
+
+
+
+
+/*==================================================
+Messages
+==================================================*/
+
+.screen08 .screen-message{
+
+    margin-top:28px;
+
+    max-width:700px;
+
+}
+
+.screen08 .screen-message.tamil{
+
+    color:#FFF8E7;
+
+    font-size:1.1rem;
+
+    line-height:1.9;
+
+}
+
+.screen08 .screen-message.english{
+
+    color:rgba(255,248,231,.72);
+
+    margin-top:18px;
+
+    font-size:.92rem;
+
+    line-height:1.8;
+
+}
+
+
+
+
+/*==================================================
+Selection Hint
+==================================================*/
+
+.selection-hint{
+
+    margin-top:28px;
+
+    margin-bottom:28px;
+
+}
+
+.selection-hint .hint-ta{
+
+    color:#20D5C7;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+}
+
+.selection-hint .hint-en{
+
+    margin-top:8px;
+
+    color:#9EB7C8;
+
+    font-size:.82rem;
+
+    letter-spacing:.18em;
+
+    text-transform:uppercase;
+
+}
+
+
+
+
+/*==================================================
+Dream Board
+==================================================*/
+
+.dream-board{
+
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(3,1fr);
+
+    gap:22px;
+
+}
+
+/*==================================================
+Premium Dream Cards
+==================================================*/
+
+.dream-card{
+
+    position:relative;
+
+    width:100%;
+
+    min-height:180px;
+
+    background:
+
+        rgba(255,255,255,.035);
+
+    border:1px solid
+
+        rgba(214,181,108,.22);
+
+    border-radius:22px;
+
+    padding:24px 20px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    transition:
+
+        all .30s ease;
+
+    backdrop-filter:blur(10px);
+
+}
+
+
+
+
+/*==================================================
+Hover
+==================================================*/
+
+.dream-card:hover{
+
+    transform:
+
+        translateY(-6px);
+
+    border-color:
+
+        #20D5C7;
+
+    box-shadow:
+
+        0 12px 32px
+
+        rgba(32,213,199,.18);
+
+}
+
+
+
+
+/*==================================================
+Selected
+==================================================*/
+
+.dream-card.selected{
+
+    background:
+
+        rgba(32,213,199,.10);
+
+    border:
+
+        2px solid #20D5C7;
+
+    box-shadow:
+
+        0 0 26px
+
+        rgba(32,213,199,.30);
+
+}
+
+
+
+
+/*==================================================
+Selected Tick
+==================================================*/
+
+.dream-card.selected::after{
+
+    content:"✓";
+
+    position:absolute;
+
+    top:14px;
+
+    right:16px;
+
+    width:28px;
+
+    height:28px;
+
+    border-radius:50%;
+
+    background:#20D5C7;
+
+    color:#081C3A;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+
+
+/*==================================================
+Dream Icon
+==================================================*/
+
+.dream-icon{
+
+    font-size:3rem;
+
+    margin-bottom:18px;
+
+    transition:
+
+        transform .25s ease;
+
+}
+
+.dream-card:hover .dream-icon{
+
+    transform:
+
+        scale(1.12);
+
+}
+
+
+
+
+/*==================================================
+Tamil Title
+==================================================*/
+
+.dream-title-ta{
+
+    color:#FFF8E7;
+
+    font-size:1.02rem;
+
+    font-weight:700;
+
+    line-height:1.5;
+
+    margin-bottom:10px;
+
+}
+
+
+
+
+/*==================================================
+English Title
+==================================================*/
+
+.dream-title-en{
+
+    color:
+
+        rgba(255,248,231,.72);
+
+    font-size:.82rem;
+
+    line-height:1.55;
+
+    letter-spacing:.03em;
+
+}
+
+
+
+
+/*==================================================
+Navigator
+==================================================*/
+
+.screen08 .journey-next{
+
+    margin-top:50px;
+
+    background:none;
+
+    border:none;
+
+    cursor:pointer;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    transition:
+
+        opacity .25s ease,
+
+        transform .25s ease;
+
+}
+
+
+
+
+/*==================================================
+Disabled
+==================================================*/
+
+.screen08 .journey-next:disabled{
+
+    opacity:.35;
+
+    cursor:not-allowed;
+
+}
+
+
+
+
+/*==================================================
+Enabled
+==================================================*/
+
+.screen08 .journey-next:not(:disabled):hover{
+
+    transform:
+
+        translateY(-3px);
+
+}
+
+
+
+
+/*==================================================
+Gold Divider
+==================================================*/
+
+.screen08 .nav-decoration{
+
+    width:240px;
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+.screen08 .nav-decoration::before,
+
+.screen08 .nav-decoration::after{
+
+    content:"";
+
+    flex:1;
+
+    height:2px;
+
+    background:#D6B56C;
+
+}
+
+.screen08 .nav-dot{
+
+    width:10px;
+
+    height:10px;
+
+    margin:0 14px;
+
+    border-radius:50%;
+
+    background:#D6B56C;
+
+}
+
+
+
+
+/*==================================================
+Navigator Text
+==================================================*/
+
+.screen08 .nav-tamil{
+
+    margin-top:18px;
+
+    color:#D6B56C;
+
+    font-size:1.32rem;
+
+    font-weight:700;
+
+}
+
+.screen08 .nav-arrows{
+
+    margin:12px 0;
+
+    color:#D6B56C;
+
+    letter-spacing:.45em;
+
+}
+
+.screen08 .nav-english{
+
+    color:#D6B56C;
+
+    font-size:.82rem;
+
+    letter-spacing:.24em;
+
+    text-transform:uppercase;
+
+}
+
+
+
+
+/*==================================================
+Responsive
+==================================================*/
+
+@media(max-width:900px){
+
+    .dream-board{
+
+        grid-template-columns:
+
+            repeat(2,1fr);
+
+    }
+
+}
+
+
+
+
+@media(max-width:600px){
+
+    .screen08 .screen-image{
+
+        width:170px;
+
+    }
+
+    .dream-board{
+
+        grid-template-columns:1fr;
+
+        gap:18px;
+
+    }
+
+    .dream-card{
+
+        min-height:150px;
+
+        padding:20px;
+
+    }
+
+    .dream-icon{
+
+        font-size:2.6rem;
+
+    }
+
+    .dream-title-ta{
+
+        font-size:.95rem;
+
+    }
+
+    .dream-title-en{
+
+        font-size:.78rem;
+
+    }
+
+}
+
