@@ -12,122 +12,281 @@ screen06.js
 Purpose:
 Screen 06 Interaction Logic
 
-Responsibilities:
-• Screen initialization
-• Navigator interaction
-• Journey progression
-• Preserve visitor identity
+Responsibility:
+• Initialize Screen 06 dynamically
+• Maintain emotional journey progression
+• Handle navigator interaction
+• Continue journey to Screen 07
+• Support CTM Dynamic Loader Architecture
 
 ======================================================================
 */
 
 
-/*==================================================
-Screen 06 Initialisation
-==================================================*/
+'use strict';
 
 
-function initScreen06() {
-
-
-    console.log(
-        "CTM PATH™ Screen 06 — Your Journey Initialised"
-    );
+(() => {
 
 
 
-    setupScreen06Navigation();
-
-
-}
+    const CTM = window.CTM;
 
 
 
+    if (!CTM) {
 
 
-/*==================================================
-Screen 06 Navigation
-==================================================*/
+        console.error(
 
+            'CTM core has not been initialized.'
 
-function setupScreen06Navigation() {
-
-
-    const journeyButton = document.querySelector(
-        "#screen06 .journey-next"
-    );
-
-
-
-    if (!journeyButton) {
-
-        console.warn(
-            "Screen 06 navigator not found"
         );
 
+
         return;
+
 
     }
 
 
 
 
-    journeyButton.addEventListener(
-        "click",
-        function() {
 
 
-            console.log(
-                "Screen 06 → Screen 07"
+
+
+
+    /*
+    ==================================================
+    Screen Configuration
+    ==================================================
+    */
+
+
+    CTM.screen06 = {
+
+
+        id:
+
+            'screen06',
+
+
+
+        nextScreen:
+
+            'screen07'
+
+
+    };
+
+
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Initialize Screen 06
+
+    Called by loader.js
+
+    ==================================================
+    */
+
+
+    CTM.initScreen06 = function(){
+
+
+
+        CTM.log(
+
+            'Screen 06 initialized.'
+
+        );
+
+
+
+        CTM.bindScreen06();
+
+
+
+    };
+
+
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Navigation Handler
+
+    SCREEN 06 → SCREEN 07
+
+    ==================================================
+    */
+
+
+    CTM.handleScreen06Click = async function(event){
+
+
+
+        const button =
+
+
+            event.target.closest(
+
+
+                "#screen06 .journey-next"
+
+
             );
 
 
 
-            if (
-                typeof CTM !== "undefined" &&
-                typeof CTM.navigate === "function"
-            ) {
+        if(!button){
 
 
-                CTM.navigate(
-                    "screen07"
-                );
-
-
-            } else {
-
-
-                console.error(
-                    "CTM Universal Router unavailable"
-                );
-
-
-            }
+            return;
 
 
         }
 
-    );
-
-
-}
 
 
 
 
-
-/*==================================================
-Auto Initialisation
-==================================================*/
+        event.preventDefault();
 
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
 
 
-        initScreen06();
+
+        await CTM.navigate(
 
 
-    }
-);
+            CTM.screen06.nextScreen
+
+
+        );
+
+
+
+    };
+
+
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Bind Events
+
+    Safe Dynamic Loading Support
+
+    ==================================================
+    */
+
+
+    CTM.bindScreen06 = function(){
+
+
+
+        document.removeEventListener(
+
+
+            'click',
+
+
+            CTM.handleScreen06Click
+
+
+        );
+
+
+
+
+
+        document.addEventListener(
+
+
+            'click',
+
+
+            CTM.handleScreen06Click
+
+
+        );
+
+
+
+    };
+
+
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Screen Loaded Hook
+
+    Called after HTML injection
+
+    ==================================================
+    */
+
+
+    CTM.afterScreen06Loaded = function(){
+
+
+
+        if(
+
+
+            document.getElementById(
+
+
+                'screen06'
+
+
+            )
+
+
+        ){
+
+
+
+            CTM.initScreen06();
+
+
+
+        }
+
+
+
+    };
+
+
+
+
+
+
+
+
+
+})();
