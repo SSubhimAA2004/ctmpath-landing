@@ -1,5 +1,6 @@
 
-/*======================================================================
+/*
+======================================================================
 
 CTM PATH™ Guided Journey v6.0
 
@@ -12,263 +13,318 @@ Purpose:
 Screen 05 Interaction Logic
 
 Responsibility:
-• Screen initialization
+• Initialize Screen 05 dynamically
 • Capture visitor name
 • Store visitor identity
 • Validate input
 • Continue journey
+• Support CTM Dynamic Loader Architecture
 
-======================================================================*/
+======================================================================
+*/
 
 
 'use strict';
 
 
+(() => {
 
 
 
-
-/*==================================================
-Screen 05 Initialisation
-==================================================*/
+    const CTM = window.CTM;
 
 
-function initScreen05(){
+
+    if (!CTM) {
 
 
-    const screen05 =
+        console.error(
 
-        document.querySelector(
-
-            "#screen05"
+            'CTM core has not been initialized.'
 
         );
 
 
-
-    if(!screen05){
-
         return;
+
 
     }
 
 
 
-    setupNameCapture();
-
-    setupScreen05Navigation();
-
-
-}
 
 
 
 
 
 
+    /*
+    ==================================================
+    Screen Configuration
+    ==================================================
+    */
+
+
+    CTM.screen05 = {
+
+
+        id:
+
+            'screen05',
 
 
 
-/*==================================================
-Name Capture
-==================================================*/
+        nextScreen:
+
+            'screen06'
 
 
-function setupNameCapture(){
+    };
 
 
-    const nameInput =
 
-        document.querySelector(
 
-            "#visitor-name"
+
+
+
+
+
+    /*
+    ==================================================
+    Initialize Screen 05
+
+    Called by loader.js
+
+    ==================================================
+    */
+
+
+    CTM.initScreen05 = function(){
+
+
+
+        CTM.log(
+
+            'Screen 05 initialized.'
 
         );
 
 
 
-    if(!nameInput){
+        setupNameCapture();
 
-        return;
+
+
+        CTM.bindScreen05();
+
+
+
+    };
+
+
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Name Capture
+    ==================================================
+    */
+
+
+    function setupNameCapture(){
+
+
+        const nameInput =
+
+
+            document.querySelector(
+
+                "#visitor-name"
+
+            );
+
+
+
+        if(!nameInput){
+
+
+            return;
+
+
+        }
+
+
+
+
+
+        nameInput.addEventListener(
+
+
+            "input",
+
+
+            function(){
+
+
+
+                const visitorName =
+
+
+                    this.value.trim();
+
+
+
+
+
+                saveVisitorName(
+
+
+                    visitorName
+
+
+                );
+
+
+
+            }
+
+
+        );
+
+
 
     }
 
 
 
-    nameInput.addEventListener(
-
-        "input",
-
-        function(){
-
-
-            const visitorName =
-
-                this.value.trim();
 
 
 
-            saveVisitorName(
 
-                visitorName
+
+
+    /*
+    ==================================================
+    Save Visitor Name
+    ==================================================
+    */
+
+
+    function saveVisitorName(name){
+
+
+
+        if(!name){
+
+
+            return;
+
+
+        }
+
+
+
+
+
+        if(window.CTM_STATE){
+
+
+
+            window.CTM_STATE.visitorName = name;
+
+
+
+        }
+
+
+        else{
+
+
+
+            localStorage.setItem(
+
+
+                "ctmVisitorName",
+
+
+                name
+
 
             );
 
 
         }
 
-    );
-
-
-}
-
-
-
-
-
-
-
-
-
-/*==================================================
-Save Visitor Name
-==================================================*/
-
-
-function saveVisitorName(name){
-
-
-    if(!name){
-
-        return;
-
-    }
-
-
-
-    if(window.CTM_STATE){
-
-
-        window.CTM_STATE.visitorName = name;
 
 
     }
 
 
-    else{
 
 
-        localStorage.setItem(
 
-            "ctmVisitorName",
 
-            name
 
-        );
 
 
-    }
+    /*
+    ==================================================
+    Navigation Handler
 
+    SCREEN 05 → SCREEN 06
 
-}
+    ==================================================
+    */
 
 
+    CTM.handleScreen05Click = async function(event){
 
 
 
+        const button =
 
 
+            event.target.closest(
 
 
-/*==================================================
-Navigation Setup
+                "#screen05 .journey-next"
 
-SCREEN 05 → SCREEN 06
 
-==================================================*/
+            );
 
 
-function setupScreen05Navigation(){
 
+        if(!button){
 
-    const nextButton =
 
-        document.querySelector(
+            return;
 
-            "#screen05 .journey-next"
 
-        );
+        }
 
 
 
-    if(!nextButton){
 
-        return;
 
-    }
+        event.preventDefault();
 
 
 
 
 
+        const nameInput =
 
 
-    nextButton.addEventListener(
+            document.querySelector(
 
-        "click",
 
-        async function(){
+                "#visitor-name"
 
-
-
-            const nameInput =
-
-                document.querySelector(
-
-                    "#visitor-name"
-
-                );
-
-
-
-            if(!nameInput){
-
-                return;
-
-            }
-
-
-
-            const visitorName =
-
-                nameInput.value.trim();
-
-
-
-
-
-
-
-            if(visitorName === ""){
-
-
-                nameInput.focus();
-
-
-                return;
-
-
-            }
-
-
-
-
-
-
-
-            saveVisitorName(
-
-                visitorName
 
             );
 
@@ -276,67 +332,169 @@ function setupScreen05Navigation(){
 
 
 
+        if(!nameInput){
+
+
+            return;
+
+
+        }
 
 
 
 
-            /*
-            ==================================================
 
-            SCREEN 05 → SCREEN 06
+        const visitorName =
 
-            Fixed Journey Route
 
-            ==================================================
-            */
+            nameInput.value.trim();
 
 
 
-            if(
-
-                typeof CTM !== "undefined" &&
-
-                typeof CTM.navigate === "function"
-
-            ){
 
 
+        if(visitorName === ""){
 
-                await CTM.navigate(
 
-                    "screen06"
+            nameInput.focus();
 
-                );
+
+            return;
+
+
+        }
 
 
 
-            }
 
 
-            else{
+        saveVisitorName(
 
 
-                console.error(
-
-                    "CTM Universal Router unavailable"
-
-                );
+            visitorName
 
 
-            }
+        );
 
 
+
+
+
+
+
+
+
+        await CTM.navigate(
+
+
+            CTM.screen05.nextScreen
+
+
+        );
+
+
+
+    };
+
+
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Bind Events
+
+    Safe Dynamic Loading Support
+
+    ==================================================
+    */
+
+
+    CTM.bindScreen05 = function(){
+
+
+
+        document.removeEventListener(
+
+
+            'click',
+
+
+            CTM.handleScreen05Click
+
+
+        );
+
+
+
+
+
+        document.addEventListener(
+
+
+            'click',
+
+
+            CTM.handleScreen05Click
+
+
+        );
+
+
+
+    };
+
+
+
+
+
+
+
+
+
+    /*
+    ==================================================
+    Screen Loaded Hook
+
+    Called after HTML injection
+
+    ==================================================
+    */
+
+
+    CTM.afterScreen05Loaded = function(){
+
+
+
+        if(
+
+
+            document.getElementById(
+
+
+                'screen05'
+
+
+            )
+
+
+        ){
+
+
+
+            CTM.initScreen05();
 
 
 
         }
 
-    );
 
 
-}
-
-
+    };
 
 
 
@@ -344,21 +502,6 @@ function setupScreen05Navigation(){
 
 
 
-/*==================================================
-Screen 05 Ready
-==================================================*/
 
 
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    function(){
-
-
-        initScreen05();
-
-
-    }
-
-);
+})();
