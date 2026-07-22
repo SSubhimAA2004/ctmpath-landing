@@ -8,7 +8,7 @@
     <!--
     ==============================================================
 
-    CTM PATH™ Guided Journey v1.0
+    CTM PATH™ Guided Journey v6.0
 
     File
     index.html
@@ -19,10 +19,11 @@
     Responsibility
     • Load application shell
     • Load foundation styles
-    • Load journey screens
+    • Load all 36 journey screens
     • Initialize CTM PATH™ Journey
 
     ==============================================================
+
     -->
 
 
@@ -46,6 +47,7 @@
         name="description"
 
         content="CTM PATH™ Guided Journey — Discover the next chapter of your financial life.">
+
 
 
 
@@ -79,6 +81,7 @@
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
 
         rel="stylesheet">
+
 
 
 
@@ -131,62 +134,90 @@
 
 
 
+
+
     <!--==================================================
     Screen CSS
 
-    Individual Screen Styling
+    All Journey Screens
+
+    SCREEN 01 → SCREEN 36
 
     ==================================================-->
 
 
-    <link
 
-        rel="stylesheet"
+    <link rel="stylesheet" href="css/screens/screen01.css">
 
-        href="css/screens/screen01.css">
+    <link rel="stylesheet" href="css/screens/screen02.css">
 
+    <link rel="stylesheet" href="css/screens/screen03.css">
 
+    <link rel="stylesheet" href="css/screens/screen04.css">
 
-    <link
+    <link rel="stylesheet" href="css/screens/screen05.css">
 
-        rel="stylesheet"
+    <link rel="stylesheet" href="css/screens/screen06.css">
 
-        href="css/screens/screen02.css">
+    <link rel="stylesheet" href="css/screens/screen07.css">
 
+    <link rel="stylesheet" href="css/screens/screen08.css">
 
+    <link rel="stylesheet" href="css/screens/screen09.css">
 
-    <link
+    <link rel="stylesheet" href="css/screens/screen10.css">
 
-        rel="stylesheet"
+    <link rel="stylesheet" href="css/screens/screen11.css">
 
-        href="css/screens/screen03.css">
+    <link rel="stylesheet" href="css/screens/screen12.css">
 
+    <link rel="stylesheet" href="css/screens/screen13.css">
 
+    <link rel="stylesheet" href="css/screens/screen14.css">
 
-    <link
+    <link rel="stylesheet" href="css/screens/screen15.css">
 
-        rel="stylesheet"
+    <link rel="stylesheet" href="css/screens/screen16.css">
 
-        href="css/screens/screen04.css">
+    <link rel="stylesheet" href="css/screens/screen17.css">
 
+    <link rel="stylesheet" href="css/screens/screen18.css">
 
+    <link rel="stylesheet" href="css/screens/screen19.css">
 
-    <link
+    <link rel="stylesheet" href="css/screens/screen20.css">
 
-        rel="stylesheet"
+    <link rel="stylesheet" href="css/screens/screen21.css">
 
-        href="css/screens/screen05.css">
+    <link rel="stylesheet" href="css/screens/screen22.css">
 
+    <link rel="stylesheet" href="css/screens/screen23.css">
 
+    <link rel="stylesheet" href="css/screens/screen24.css">
 
+    <link rel="stylesheet" href="css/screens/screen25.css">
 
+    <link rel="stylesheet" href="css/screens/screen26.css">
 
-</head>
+    <link rel="stylesheet" href="css/screens/screen27.css">
 
+    <link rel="stylesheet" href="css/screens/screen28.css">
 
+    <link rel="stylesheet" href="css/screens/screen29.css">
 
+    <link rel="stylesheet" href="css/screens/screen30.css">
 
+    <link rel="stylesheet" href="css/screens/screen31.css">
 
+    <link rel="stylesheet" href="css/screens/screen32.css">
+
+    <link rel="stylesheet" href="css/screens/screen33.css">
+
+    <link rel="stylesheet" href="css/screens/screen34.css">
+
+    <link rel="stylesheet" href="css/screens/screen35.css">
+
+    <link rel="stylesheet" href="css/screens/screen36.css">
 
 
 <body>
@@ -206,7 +237,8 @@
 
 
 
-        <!-- Dynamic Screens Load Here -->
+
+        <!-- Dynamic Journey Screens Load Here -->
 
 
         <div
@@ -215,6 +247,7 @@
 
 
         </div>
+
 
 
 
@@ -230,7 +263,23 @@
 
     <!--==================================================
     Foundation JavaScript
+
+    Core Application Systems
+
+    Load Order:
+
+    state
+    ↓
+    storage
+    ↓
+    loader
+    ↓
+    router
+    ↓
+    app
+
     ==================================================-->
+
 
 
     <script
@@ -272,62 +321,88 @@
     </script>
 
 
-
-
-
-
-
-
-
     <!--==================================================
     Screen JavaScript
 
-    Screen Modules
+    Journey Screen Modules
+
+    SCREEN 01 → SCREEN 36
 
     ==================================================-->
 
 
 
-    <script
+    <script src="js/screens/screen01.js"></script>
 
-        src="js/screens/screen01.js">
+    <script src="js/screens/screen02.js"></script>
 
-    </script>
+    <script src="js/screens/screen03.js"></script>
 
+    <script src="js/screens/screen04.js"></script>
 
+    <script src="js/screens/screen05.js"></script>
 
-    <script
+    <script src="js/screens/screen06.js"></script>
 
-        src="js/screens/screen02.js">
+    <script src="js/screens/screen07.js"></script>
 
-    </script>
+    <script src="js/screens/screen08.js"></script>
 
+    <script src="js/screens/screen09.js"></script>
 
+    <script src="js/screens/screen10.js"></script>
 
-    <script
+    <script src="js/screens/screen11.js"></script>
 
-        src="js/screens/screen03.js">
+    <script src="js/screens/screen12.js"></script>
 
-    </script>
+    <script src="js/screens/screen13.js"></script>
 
+    <script src="js/screens/screen14.js"></script>
 
+    <script src="js/screens/screen15.js"></script>
 
-    <script
+    <script src="js/screens/screen16.js"></script>
 
-        src="js/screens/screen04.js">
+    <script src="js/screens/screen17.js"></script>
 
-    </script>
+    <script src="js/screens/screen18.js"></script>
 
+    <script src="js/screens/screen19.js"></script>
 
+    <script src="js/screens/screen20.js"></script>
 
-    <script
+    <script src="js/screens/screen21.js"></script>
 
-        src="js/screens/screen05.js">
+    <script src="js/screens/screen22.js"></script>
 
-    </script>
+    <script src="js/screens/screen23.js"></script>
 
+    <script src="js/screens/screen24.js"></script>
 
+    <script src="js/screens/screen25.js"></script>
 
+    <script src="js/screens/screen26.js"></script>
+
+    <script src="js/screens/screen27.js"></script>
+
+    <script src="js/screens/screen28.js"></script>
+
+    <script src="js/screens/screen29.js"></script>
+
+    <script src="js/screens/screen30.js"></script>
+
+    <script src="js/screens/screen31.js"></script>
+
+    <script src="js/screens/screen32.js"></script>
+
+    <script src="js/screens/screen33.js"></script>
+
+    <script src="js/screens/screen34.js"></script>
+
+    <script src="js/screens/screen35.js"></script>
+
+    <script src="js/screens/screen36.js"></script>
 
 
 
@@ -337,3 +412,6 @@
 
 
 </html>
+
+
+    
