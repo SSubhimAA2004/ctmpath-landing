@@ -14,7 +14,12 @@ Purpose Discovery Experience
 Design:
 Premium CTM PATH™ Navigator Standard
 
+Visual:
+CSS Generated Inner Purpose Light™
+
 ======================================================================*/
+
+
 
 
 
@@ -71,8 +76,11 @@ Screen Base
 
 
 
+
+
 /*==================================================
 Ambient Purpose Glow
+
 ==================================================*/
 
 
@@ -96,11 +104,11 @@ Ambient Purpose Glow
 
         radial-gradient(
 
-            circle at 50% 25%,
+            circle at 50% 22%,
 
-            rgba(214,181,108,.10),
+            rgba(214,181,108,.14),
 
-            transparent 22%
+            transparent 24%
 
         );
 
@@ -113,8 +121,11 @@ Ambient Purpose Glow
 
 
 
+
+
 /*==================================================
 Content Container
+
 ==================================================*/
 
 
@@ -131,6 +142,7 @@ Content Container
 
 
     padding:
+
 
         60px
 
@@ -159,8 +171,11 @@ Content Container
 
 
 
+
+
 /*==================================================
-Hero
+Hero Container
+
 ==================================================*/
 
 
@@ -187,12 +202,17 @@ Hero
 
 
 
+
+
 /*==================================================
-Purpose Light Illustration
+Inner Purpose Light™
+
+CSS Generated Hero Symbol
+
 ==================================================*/
 
 
-.screen10 .screen-visual{
+.screen10 .hero-icon{
 
 
     width:220px;
@@ -201,7 +221,10 @@ Purpose Light Illustration
     height:220px;
 
 
-    margin-bottom:30px;
+    position:relative;
+
+
+    margin-bottom:32px;
 
 
     display:flex;
@@ -219,16 +242,48 @@ Purpose Light Illustration
 
 
 
-.screen10 .screen-image{
 
 
-    width:100%;
 
 
-    height:auto;
+/*==================================================
+Purpose Orbit
+
+Outer Energy Field
+
+==================================================*/
 
 
-    display:block;
+.screen10 .purpose-orbit{
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+    border-radius:50%;
+
+
+    border:
+
+
+        1px solid
+
+        rgba(32,213,199,.25);
+
+
+    animation:
+
+
+        screen10Orbit
+
+        8s
+
+        linear
+
+        infinite;
 
 
 }
@@ -239,8 +294,315 @@ Purpose Light Illustration
 
 
 
+
+
+.screen10 .purpose-orbit::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:18px;
+
+
+    border-radius:50%;
+
+
+    border:
+
+
+        1px solid
+
+        rgba(214,181,108,.20);
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+Purpose Core
+
+==================================================*/
+
+
+.screen10 .purpose-core{
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+Purpose Rings
+
+==================================================*/
+
+
+.screen10 .purpose-ring{
+
+
+    position:absolute;
+
+
+    border-radius:50%;
+
+
+}
+
+
+
+
+
+
+
+
+
+.screen10 .purpose-ring.outer-ring{
+
+
+    width:140px;
+
+
+    height:140px;
+
+
+    border:
+
+
+        1px solid
+
+        rgba(214,181,108,.45);
+
+
+    box-shadow:
+
+
+        0 0 25px
+
+        rgba(214,181,108,.15);
+
+
+}
+
+
+
+
+
+
+
+
+
+.screen10 .purpose-ring.inner-ring{
+
+
+    width:95px;
+
+
+    height:95px;
+
+
+    border:
+
+
+        1px solid
+
+        rgba(32,213,199,.45);
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+Purpose Light
+
+Central WHY Energy
+
+==================================================*/
+
+
+.screen10 .purpose-light{
+
+
+    width:70px;
+
+
+    height:70px;
+
+
+    border-radius:50%;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    font-size:2.5rem;
+
+
+    background:
+
+
+        radial-gradient(
+
+            circle,
+
+            rgba(214,181,108,.95),
+
+            rgba(214,181,108,.15)
+
+        );
+
+
+    box-shadow:
+
+
+        0 0 35px
+
+        rgba(214,181,108,.65);
+
+
+    animation:
+
+
+        screen10Pulse
+
+        2.8s
+
+        ease-in-out
+
+        infinite;
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+Hero Animations
+
+==================================================*/
+
+
+@keyframes screen10Pulse{
+
+
+    0%,100%{
+
+
+        transform:scale(1);
+
+
+        opacity:.9;
+
+
+    }
+
+
+
+    50%{
+
+
+        transform:scale(1.08);
+
+
+        opacity:1;
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+@keyframes screen10Orbit{
+
+
+    from{
+
+
+        transform:rotate(0deg);
+
+
+    }
+
+
+
+    to{
+
+
+        transform:rotate(360deg);
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
 /*==================================================
 Visitor Identity
+
 ==================================================*/
 
 
@@ -251,6 +613,10 @@ Visitor Identity
 
 
 }
+
+
+
+
 
 
 
@@ -294,7 +660,9 @@ Visitor Identity
     text-shadow:
 
 
-        0 0 18px rgba(214,181,108,.35);
+        0 0 18px
+
+        rgba(214,181,108,.35);
 
 
 }
@@ -305,8 +673,11 @@ Visitor Identity
 
 
 
+
+
 /*==================================================
 Welcome Block
+
 ==================================================*/
 
 
@@ -327,12 +698,15 @@ Welcome Block
 
 
 
+
+
 /*==================================================
-Tamil Title
+Tamil Welcome Title
+
 ==================================================*/
 
 
-.screen10 .screen-title{
+.screen10 .tamil-welcome{
 
 
     margin:0;
@@ -378,12 +752,15 @@ Tamil Title
 
 
 
+
+
 /*==================================================
-English Subtitle
+English Welcome Subtitle
+
 ==================================================*/
 
 
-.screen10 .screen-subtitle{
+.screen10 .english-welcome{
 
 
     margin-top:18px;
@@ -404,24 +781,24 @@ English Subtitle
     font-size:.85rem;
 
 
+    font-weight:600;
+
+
     letter-spacing:.30em;
 
 
     text-transform:uppercase;
 
 
-    font-weight:600;
-
-
 }
 
 /*==================================================
-Core Question Message
+Core Question Block
 
 ==================================================*/
 
 
-.screen10 .screen-message{
+.screen10 .question-block{
 
 
     width:100%;
@@ -444,12 +821,15 @@ Core Question Message
 
 
 
+
+
 /*==================================================
-Tamil Core Message
+Tamil Question
+
 ==================================================*/
 
 
-.screen10 .screen-message .tamil{
+.screen10 .question-ta{
 
 
     color:#FFF8E7;
@@ -492,12 +872,15 @@ Tamil Core Message
 
 
 
+
+
 /*==================================================
-English Core Message
+English Question
+
 ==================================================*/
 
 
-.screen10 .screen-message .english{
+.screen10 .question-en{
 
 
     margin-top:28px;
@@ -543,6 +926,8 @@ English Core Message
 
 
 
+
+
 /*==================================================
 WHY Instruction
 
@@ -552,16 +937,16 @@ WHY Instruction
 .screen10 .why-instruction{
 
 
-    margin-top:48px;
-
-
-    margin-bottom:40px;
-
-
     width:100%;
 
 
     max-width:700px;
+
+
+    margin-top:48px;
+
+
+    margin-bottom:40px;
 
 
 }
@@ -572,8 +957,11 @@ WHY Instruction
 
 
 
+
+
 /*==================================================
 Instruction Tamil
+
 ==================================================*/
 
 
@@ -620,8 +1008,11 @@ Instruction Tamil
 
 
 
+
+
 /*==================================================
 Instruction English
+
 ==================================================*/
 
 
@@ -663,6 +1054,8 @@ Instruction English
 
 
 
+
+
 /*==================================================
 WHY Selection Section
 
@@ -679,6 +1072,8 @@ WHY Selection Section
 
 
 }
+
+
 
 
 
@@ -724,8 +1119,12 @@ WHY Grid
 
 
 
+
+
 /*==================================================
-WHY Card Foundation
+WHY Card
+
+Base State
 
 ==================================================*/
 
@@ -753,7 +1152,9 @@ WHY Card Foundation
     border:
 
 
-        1px solid rgba(214,181,108,.25);
+        1px solid
+
+        rgba(214,181,108,.25);
 
 
     background:
@@ -798,10 +1199,51 @@ WHY Card Foundation
         background .35s ease,
 
 
-        box-shadow .35s ease;
+        box-shadow .35s ease,
+
+
+        opacity .35s ease;
 
 
 }
+
+
+
+
+
+
+
+
+
+/*==================================================
+WHY Card Hover
+
+==================================================*/
+
+
+.screen10 .why-card:hover{
+
+
+    transform:
+
+
+        translateY(-6px);
+
+
+    border-color:#20D5C7;
+
+
+    box-shadow:
+
+
+        0 14px 35px
+
+        rgba(32,213,199,.18);
+
+
+}
+
+
 
 
 
@@ -828,6 +1270,8 @@ WHY Icon
 
 
 }
+
+
 
 
 
@@ -873,6 +1317,8 @@ WHY Tamil Title
 
 
 
+
+
 /*==================================================
 WHY English Title
 
@@ -904,38 +1350,6 @@ WHY English Title
 
 
     line-height:1.6;
-
-
-}
-
-
-
-
-
-
-
-/*==================================================
-WHY Card Hover
-
-==================================================*/
-
-
-.screen10 .why-card:hover{
-
-
-    transform:
-
-
-        translateY(-6px);
-
-
-    border-color:#20D5C7;
-
-
-    box-shadow:
-
-
-        0 14px 35px rgba(32,213,199,.18);
 
 
 }
@@ -974,10 +1388,12 @@ Single Choice Selection
     transform:
 
 
-        translateY(-4px);
+        translateY(-5px);
 
 
 }
+
+
 
 
 
@@ -1044,8 +1460,12 @@ Selected Check Indicator
 
 
 
+
+
 /*==================================================
-Dim Non Selected Cards
+Dim Other Choices
+
+After Selection
 
 ==================================================*/
 
@@ -1056,9 +1476,6 @@ Dim Non Selected Cards
     opacity:.45;
 
 
-    transform:scale(.98);
-
-
 }
 
 
@@ -1067,8 +1484,10 @@ Dim Non Selected Cards
 
 
 
+
+
 /*==================================================
-Selected Icon Animation
+Selected WHY Icon Animation
 
 ==================================================*/
 
@@ -1089,6 +1508,8 @@ Selected Icon Animation
 
 
 }
+
+
 
 
 
@@ -1115,6 +1536,8 @@ Selected Icon Animation
 
 
 }
+
+
 
 
 
@@ -1163,7 +1586,9 @@ Hidden Initially
     border:
 
 
-        1px solid rgba(214,181,108,.25);
+        1px solid
+
+        rgba(214,181,108,.25);
 
 
     background:
@@ -1186,8 +1611,10 @@ Hidden Initially
 
 
 
+
+
 /*==================================================
-Confirmation Active
+Confirmation Visible State
 
 ==================================================*/
 
@@ -1209,6 +1636,8 @@ Confirmation Active
 
 
 }
+
+
 
 
 
@@ -1248,13 +1677,15 @@ Confirmation Active
 
 
 
+
+
 /*==================================================
 Confirmation Tamil
 
 ==================================================*/
 
 
-.screen10 .why-confirmation .tamil{
+.screen10 .confirmation-ta{
 
 
     color:#FFF8E7;
@@ -1283,13 +1714,15 @@ Confirmation Tamil
 
 
 
+
+
 /*==================================================
 Confirmation English
 
 ==================================================*/
 
 
-.screen10 .why-confirmation .english{
+.screen10 .confirmation-en{
 
 
     margin-top:22px;
@@ -1324,8 +1757,10 @@ Confirmation English
 
 
 
+
+
 /*==================================================
-Journey Navigator
+Premium Navigator
 
 ==================================================*/
 
@@ -1374,6 +1809,8 @@ Journey Navigator
 
 
 
+
+
 /*==================================================
 Disabled Navigator
 
@@ -1397,8 +1834,10 @@ Disabled Navigator
 
 
 
+
+
 /*==================================================
-Enabled Navigator
+Active Navigator Hover
 
 ==================================================*/
 
@@ -1420,8 +1859,10 @@ Enabled Navigator
 
 
 
+
+
 /*==================================================
-Navigator Gold Lines
+Navigator Gold Divider
 
 ==================================================*/
 
@@ -1467,6 +1908,8 @@ Navigator Gold Lines
 
 
 
+
+
 .screen10 .nav-decoration::after{
 
 
@@ -1503,10 +1946,14 @@ Navigator Gold Lines
     box-shadow:
 
 
-        0 0 16px rgba(214,181,108,.8);
+        0 0 16px
+
+        rgba(214,181,108,.8);
 
 
 }
+
+
 
 
 
@@ -1549,6 +1996,8 @@ Navigator Tamil
 
 
 
+
+
 /*==================================================
 Navigator Arrows
 
@@ -1568,6 +2017,8 @@ Navigator Arrows
 
 
 }
+
+
 
 
 
@@ -1623,7 +2074,7 @@ Desktop Refinement
     .screen10 .container{
 
 
-        max-width:1200px;
+        width:min(92%,1200px);
 
 
     }
@@ -1631,7 +2082,7 @@ Desktop Refinement
 
 
 
-    .screen10 .screen-visual{
+    .screen10 .hero-icon{
 
 
         width:260px;
@@ -1641,6 +2092,51 @@ Desktop Refinement
 
 
         margin-bottom:40px;
+
+
+    }
+
+
+
+
+    .screen10 .purpose-ring.outer-ring{
+
+
+        width:170px;
+
+
+        height:170px;
+
+
+    }
+
+
+
+
+    .screen10 .purpose-ring.inner-ring{
+
+
+        width:115px;
+
+
+        height:115px;
+
+
+    }
+
+
+
+
+    .screen10 .purpose-light{
+
+
+        width:85px;
+
+
+        height:85px;
+
+
+        font-size:3rem;
 
 
     }
@@ -1689,13 +2185,15 @@ Desktop Refinement
 
 
 
+
+
 /*==================================================
 Tablet Layout
 
 ==================================================*/
 
 
-@media (max-width:992px){
+@media(max-width:992px){
 
 
 
@@ -1747,8 +2245,9 @@ Tablet Layout
 
 
 
-
 }
+
+
 
 
 
@@ -1762,7 +2261,7 @@ Mobile Optimisation
 ==================================================*/
 
 
-@media (max-width:600px){
+@media(max-width:600px){
 
 
 
@@ -1784,16 +2283,62 @@ Mobile Optimisation
 
 
 
-    .screen10 .screen-visual{
+
+    .screen10 .hero-icon{
 
 
-        width:170px;
+        width:180px;
 
 
-        height:170px;
+        height:180px;
 
 
-        margin-bottom:24px;
+        margin-bottom:28px;
+
+
+    }
+
+
+
+
+    .screen10 .purpose-ring.outer-ring{
+
+
+        width:125px;
+
+
+        height:125px;
+
+
+    }
+
+
+
+
+    .screen10 .purpose-ring.inner-ring{
+
+
+        width:85px;
+
+
+        height:85px;
+
+
+    }
+
+
+
+
+    .screen10 .purpose-light{
+
+
+        width:62px;
+
+
+        height:62px;
+
+
+        font-size:2.2rem;
 
 
     }
@@ -1812,21 +2357,10 @@ Mobile Optimisation
 
 
 
-    .screen10 .screen-message{
+    .screen10 .question-ta{
 
 
-        margin-top:28px;
-
-
-    }
-
-
-
-
-    .screen10 .screen-message .tamil{
-
-
-        font-size:1.15rem;
+        font-size:1.12rem;
 
 
         line-height:1.9;
@@ -1837,10 +2371,10 @@ Mobile Optimisation
 
 
 
-    .screen10 .screen-message .english{
+    .screen10 .question-en{
 
 
-        font-size:.90rem;
+        font-size:.9rem;
 
 
     }
@@ -1915,9 +2449,6 @@ Mobile Optimisation
         font-size:2.5rem;
 
 
-        margin-bottom:14px;
-
-
     }
 
 
@@ -1954,6 +2485,28 @@ Mobile Optimisation
             24px
 
             18px;
+
+
+    }
+
+
+
+
+    .screen10 .confirmation-ta{
+
+
+        font-size:1.05rem;
+
+
+    }
+
+
+
+
+    .screen10 .confirmation-en{
+
+
+        font-size:.88rem;
 
 
     }
@@ -2018,13 +2571,29 @@ Mobile Optimisation
 
 
 
+
+
 /*==================================================
 Small Mobile
 
 ==================================================*/
 
 
-@media (max-width:380px){
+@media(max-width:380px){
+
+
+
+    .screen10 .hero-icon{
+
+
+        width:160px;
+
+
+        height:160px;
+
+
+    }
+
 
 
 
@@ -2068,6 +2637,8 @@ Small Mobile
 
 
 
+
+
 /*==================================================
 Accessibility
 
@@ -2076,11 +2647,14 @@ Reduced Motion
 ==================================================*/
 
 
-@media (prefers-reduced-motion:reduce){
+@media(prefers-reduced-motion:reduce){
 
 
 
-    .screen10 .why-card,
+    .screen10 .purpose-orbit,
+
+
+    .screen10 .purpose-light,
 
 
     .screen10 .why-card.selected .why-icon,
@@ -2110,6 +2684,8 @@ Reduced Motion
 
 
 
+
+
 /*==================================================
 
 CTM PATH™ Guided Journey v6.2
@@ -2118,14 +2694,13 @@ SCREEN 10 — YOUR WHY™
 
 STATUS
 
-✓ Premium Background
-✓ Purpose Light Hero
+✓ CSS Generated Purpose Light
 ✓ Visitor Identity
 ✓ WHY Discovery Question
-✓ 10 Purpose Options
-✓ Single Selection Styling
+✓ Ten WHY Options
+✓ Single Choice Selection
 ✓ Confirmation Moment
-✓ Navigator System
+✓ Premium Navigator
 ✓ Responsive Layout
 
 READY FOR JAVASCRIPT
