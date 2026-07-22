@@ -27,6 +27,7 @@ Responsibility:
 
 
 
+
 /*==================================================
 Screen 05 Initialisation
 ==================================================*/
@@ -210,6 +211,8 @@ function setupScreen05Navigation(){
 
 
 
+
+
     nextButton.addEventListener(
 
         "click",
@@ -244,6 +247,8 @@ function setupScreen05Navigation(){
 
 
 
+
+
             if(visitorName === ""){
 
 
@@ -254,6 +259,8 @@ function setupScreen05Navigation(){
 
 
             }
+
+
 
 
 
@@ -270,26 +277,18 @@ function setupScreen05Navigation(){
 
 
 
-            const nextScreen =
-
-                this.getAttribute(
-
-                    "data-next-screen"
-
-                );
 
 
 
+            /*
+            ==================================================
 
+            SCREEN 05 → SCREEN 06
 
+            Fixed Journey Route
 
-            if(!nextScreen){
-
-                return;
-
-            }
-
-
+            ==================================================
+            */
 
 
 
@@ -305,13 +304,28 @@ function setupScreen05Navigation(){
 
                 await CTM.navigate(
 
-                    nextScreen
+                    "screen06"
 
                 );
 
 
 
             }
+
+
+            else{
+
+
+                console.error(
+
+                    "CTM Universal Router unavailable"
+
+                );
+
+
+            }
+
+
 
 
 
