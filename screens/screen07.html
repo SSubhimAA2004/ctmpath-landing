@@ -10,11 +10,18 @@ File:
 screen07.html
 
 Purpose:
-Allow the visitor to arrange their life's most important
-needs in order of importance.
+Allow the visitor to prioritise their life's most
+important needs by moving each card up or down.
 
 Interaction:
-Premium Sortable Life Cards
+Premium Priority Mover™
+
+Responsibility:
+• Personal Greeting
+• Life Needs Prioritisation
+• Premium Card Layout
+• Up / Down Priority Controls
+• Continue Journey
 
 ======================================================================
 -->
@@ -102,7 +109,19 @@ Premium Sortable Life Cards
 
             <p>
 
-                கீழே உள்ள தேவைகளை
+                ஒவ்வொருவருடைய வாழ்க்கையிலும்
+
+            </p>
+
+            <p>
+
+                பல தேவைகள் இருக்கின்றன.
+
+            </p>
+
+            <p>
+
+                கீழே உள்ள பட்டியலை
 
             </p>
 
@@ -139,13 +158,25 @@ Premium Sortable Life Cards
 
             <p>
 
-                Arrange these life needs
+                Everyone has
 
             </p>
 
             <p>
 
-                from the most important
+                many important needs.
+
+            </p>
+
+            <p>
+
+                Arrange them from
+
+            </p>
+
+            <p>
+
+                the most important
 
             </p>
 
@@ -168,7 +199,7 @@ Premium Sortable Life Cards
 
 
         <!--==================================================
-        Sortable Life Needs
+        Priority Board
         ==================================================-->
 
         <div
@@ -177,25 +208,33 @@ Premium Sortable Life Cards
 
 
 
-            <!-- Card 01 -->
+
+
+            <!--==================================================
+            Card 01
+            ==================================================-->
 
             <div
                 class="need-card"
-                draggable="true"
                 data-id="income">
 
-                <div class="need-rank"></div>
+                <div
+                    class="need-rank">
+                </div>
 
-                <div class="need-content">
+                <div
+                    class="need-content">
 
-                    <div class="need-title tamil">
+                    <div
+                        class="need-title tamil">
 
                         என் மாத வருமானத்தை
                         அதிகரிக்க வேண்டும்
 
                     </div>
 
-                    <div class="need-subtitle english">
+                    <div
+                        class="need-subtitle english">
 
                         Increase my monthly income
 
@@ -203,9 +242,26 @@ Premium Sortable Life Cards
 
                 </div>
 
-                <div class="drag-handle">
+                <div
+                    class="need-actions">
 
-                    ☰
+                    <button
+                        type="button"
+                        class="move-up"
+                        aria-label="Move Up">
+
+                        ▲
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="move-down"
+                        aria-label="Move Down">
+
+                        ▼
+
+                    </button>
 
                 </div>
 
@@ -213,35 +269,61 @@ Premium Sortable Life Cards
 
 
 
-            <!-- Card 02 -->
+
+
+            <!--==================================================
+            Card 02
+            ==================================================-->
 
             <div
                 class="need-card"
-                draggable="true"
                 data-id="saving">
 
-                <div class="need-rank"></div>
+                <div
+                    class="need-rank">
+                </div>
 
-                <div class="need-content">
+                <div
+                    class="need-content">
 
-                    <div class="need-title tamil">
+                    <div
+                        class="need-title tamil">
 
                         தொடர்ந்து
                         பணம் சேமிக்க வேண்டும்
 
                     </div>
 
-                    <div class="need-subtitle english">
+                    <div
+                        class="need-subtitle english">
 
-                        Build a regular savings habit
+                        Build a regular
+                        savings habit
 
                     </div>
 
                 </div>
 
-                <div class="drag-handle">
+                <div
+                    class="need-actions">
 
-                    ☰
+                    <button
+                        type="button"
+                        class="move-up"
+                        aria-label="Move Up">
+
+                        ▲
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="move-down"
+                        aria-label="Move Down">
+
+                        ▼
+
+                    </button>
 
                 </div>
 
@@ -249,18 +331,25 @@ Premium Sortable Life Cards
 
 
 
-            <!-- Card 03 -->
+
+
+            <!--==================================================
+            Card 03
+            ==================================================-->
 
             <div
                 class="need-card"
-                draggable="true"
                 data-id="debt">
 
-                <div class="need-rank"></div>
+                <div
+                    class="need-rank">
+                </div>
 
-                <div class="need-content">
+                <div
+                    class="need-content">
 
-                    <div class="need-title tamil">
+                    <div
+                        class="need-title tamil">
 
                         கடன் மற்றும் EMI
                         அழுத்தத்திலிருந்து
@@ -268,17 +357,36 @@ Premium Sortable Life Cards
 
                     </div>
 
-                    <div class="need-subtitle english">
+                    <div
+                        class="need-subtitle english">
 
-                        Reduce loans and EMI burden
+                        Reduce loans and
+                        EMI burden
 
                     </div>
 
                 </div>
 
-                <div class="drag-handle">
+                <div
+                    class="need-actions">
 
-                    ☰
+                    <button
+                        type="button"
+                        class="move-up"
+                        aria-label="Move Up">
+
+                        ▲
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="move-down"
+                        aria-label="Move Down">
+
+                        ▼
+
+                    </button>
 
                 </div>
 
@@ -286,35 +394,62 @@ Premium Sortable Life Cards
 
 
 
-            <!-- Card 04 -->
+
+
+            <!--==================================================
+            Card 04
+            ==================================================-->
 
             <div
                 class="need-card"
-                draggable="true"
                 data-id="wealth">
 
-                <div class="need-rank"></div>
+                <div
+                    class="need-rank">
+                </div>
 
-                <div class="need-content">
+                <div
+                    class="need-content">
 
-                    <div class="need-title tamil">
+                    <div
+                        class="need-title tamil">
 
                         என் செல்வத்தை
-                        உருவாக்கத் தொடங்க வேண்டும்
+                        உருவாக்கத்
+                        தொடங்க வேண்டும்
 
                     </div>
 
-                    <div class="need-subtitle english">
+                    <div
+                        class="need-subtitle english">
 
-                        Start building long-term wealth
+                        Start building
+                        long-term wealth
 
                     </div>
 
                 </div>
 
-                <div class="drag-handle">
+                <div
+                    class="need-actions">
 
-                    ☰
+                    <button
+                        type="button"
+                        class="move-up"
+                        aria-label="Move Up">
+
+                        ▲
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="move-down"
+                        aria-label="Move Down">
+
+                        ▼
+
+                    </button>
 
                 </div>
 
@@ -322,18 +457,25 @@ Premium Sortable Life Cards
 
 
 
-            <!-- Card 05 -->
+
+
+            <!--==================================================
+            Card 05
+            ==================================================-->
 
             <div
                 class="need-card"
-                draggable="true"
                 data-id="plan">
 
-                <div class="need-rank"></div>
+                <div
+                    class="need-rank">
+                </div>
 
-                <div class="need-content">
+                <div
+                    class="need-content">
 
-                    <div class="need-title tamil">
+                    <div
+                        class="need-title tamil">
 
                         எனக்கு ஒரு
                         தெளிவான
@@ -341,17 +483,36 @@ Premium Sortable Life Cards
 
                     </div>
 
-                    <div class="need-subtitle english">
+                    <div
+                        class="need-subtitle english">
 
-                        Create a clear financial plan
+                        Create a clear
+                        financial plan
 
                     </div>
 
                 </div>
 
-                <div class="drag-handle">
+                <div
+                    class="need-actions">
 
-                    ☰
+                    <button
+                        type="button"
+                        class="move-up"
+                        aria-label="Move Up">
+
+                        ▲
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="move-down"
+                        aria-label="Move Down">
+
+                        ▼
+
+                    </button>
 
                 </div>
 
@@ -359,18 +520,25 @@ Premium Sortable Life Cards
 
 
 
-            <!-- Card 06 -->
+
+
+            <!--==================================================
+            Card 06
+            ==================================================-->
 
             <div
                 class="need-card"
-                draggable="true"
                 data-id="family">
 
-                <div class="need-rank"></div>
+                <div
+                    class="need-rank">
+                </div>
 
-                <div class="need-content">
+                <div
+                    class="need-content">
 
-                    <div class="need-title tamil">
+                    <div
+                        class="need-title tamil">
 
                         என் குடும்பத்தின்
                         எதிர்காலத்தை
@@ -378,17 +546,36 @@ Premium Sortable Life Cards
 
                     </div>
 
-                    <div class="need-subtitle english">
+                    <div
+                        class="need-subtitle english">
 
-                        Secure my family's future
+                        Secure my family's
+                        future
 
                     </div>
 
                 </div>
 
-                <div class="drag-handle">
+                <div
+                    class="need-actions">
 
-                    ☰
+                    <button
+                        type="button"
+                        class="move-up"
+                        aria-label="Move Up">
+
+                        ▲
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="move-down"
+                        aria-label="Move Down">
+
+                        ▼
+
+                    </button>
 
                 </div>
 
@@ -396,18 +583,25 @@ Premium Sortable Life Cards
 
 
 
-            <!-- Card 07 -->
+
+
+            <!--==================================================
+            Card 07
+            ==================================================-->
 
             <div
                 class="need-card"
-                draggable="true"
-                data-id="income2">
+                data-id="additional-income">
 
-                <div class="need-rank"></div>
+                <div
+                    class="need-rank">
+                </div>
 
-                <div class="need-content">
+                <div
+                    class="need-content">
 
-                    <div class="need-title tamil">
+                    <div
+                        class="need-title tamil">
 
                         கூடுதல் வருமான
                         வாய்ப்புகளை
@@ -415,7 +609,8 @@ Premium Sortable Life Cards
 
                     </div>
 
-                    <div class="need-subtitle english">
+                    <div
+                        class="need-subtitle english">
 
                         Create additional
                         sources of income
@@ -424,9 +619,26 @@ Premium Sortable Life Cards
 
                 </div>
 
-                <div class="drag-handle">
+                <div
+                    class="need-actions">
 
-                    ☰
+                    <button
+                        type="button"
+                        class="move-up"
+                        aria-label="Move Up">
+
+                        ▲
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="move-down"
+                        aria-label="Move Down">
+
+                        ▼
+
+                    </button>
 
                 </div>
 
@@ -434,18 +646,25 @@ Premium Sortable Life Cards
 
 
 
-            <!-- Card 08 -->
+
+
+            <!--==================================================
+            Card 08
+            ==================================================-->
 
             <div
                 class="need-card"
-                draggable="true"
                 data-id="expenses">
 
-                <div class="need-rank"></div>
+                <div
+                    class="need-rank">
+                </div>
 
-                <div class="need-content">
+                <div
+                    class="need-content">
 
-                    <div class="need-title tamil">
+                    <div
+                        class="need-title tamil">
 
                         என் செலவுகளை
                         சிறப்பாக
@@ -453,17 +672,36 @@ Premium Sortable Life Cards
 
                     </div>
 
-                    <div class="need-subtitle english">
+                    <div
+                        class="need-subtitle english">
 
-                        Manage my expenses better
+                        Manage my
+                        expenses better
 
                     </div>
 
                 </div>
 
-                <div class="drag-handle">
+                <div
+                    class="need-actions">
 
-                    ☰
+                    <button
+                        type="button"
+                        class="move-up"
+                        aria-label="Move Up">
+
+                        ▲
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="move-down"
+                        aria-label="Move Down">
+
+                        ▼
+
+                    </button>
 
                 </div>
 
@@ -471,35 +709,61 @@ Premium Sortable Life Cards
 
 
 
-            <!-- Card 09 -->
+
+
+            <!--==================================================
+            Card 09
+            ==================================================-->
 
             <div
                 class="need-card"
-                draggable="true"
                 data-id="freedom">
 
-                <div class="need-rank"></div>
+                <div
+                    class="need-rank">
+                </div>
 
-                <div class="need-content">
+                <div
+                    class="need-content">
 
-                    <div class="need-title tamil">
+                    <div
+                        class="need-title tamil">
 
                         நிதி சுதந்திரத்தை
                         அடைய வேண்டும்
 
                     </div>
 
-                    <div class="need-subtitle english">
+                    <div
+                        class="need-subtitle english">
 
-                        Achieve financial freedom
+                        Achieve
+                        financial freedom
 
                     </div>
 
                 </div>
 
-                <div class="drag-handle">
+                <div
+                    class="need-actions">
 
-                    ☰
+                    <button
+                        type="button"
+                        class="move-up"
+                        aria-label="Move Up">
+
+                        ▲
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="move-down"
+                        aria-label="Move Down">
+
+                        ▼
+
+                    </button>
 
                 </div>
 
@@ -507,18 +771,25 @@ Premium Sortable Life Cards
 
 
 
-            <!-- Card 10 -->
+
+
+            <!--==================================================
+            Card 10
+            ==================================================-->
 
             <div
                 class="need-card"
-                draggable="true"
                 data-id="peace">
 
-                <div class="need-rank"></div>
+                <div
+                    class="need-rank">
+                </div>
 
-                <div class="need-content">
+                <div
+                    class="need-content">
 
-                    <div class="need-title tamil">
+                    <div
+                        class="need-title tamil">
 
                         வாழ்க்கையில்
                         நிதி நிம்மதியுடன்
@@ -526,7 +797,8 @@ Premium Sortable Life Cards
 
                     </div>
 
-                    <div class="need-subtitle english">
+                    <div
+                        class="need-subtitle english">
 
                         Live with financial
                         peace of mind
@@ -535,9 +807,26 @@ Premium Sortable Life Cards
 
                 </div>
 
-                <div class="drag-handle">
+                <div
+                    class="need-actions">
 
-                    ☰
+                    <button
+                        type="button"
+                        class="move-up"
+                        aria-label="Move Up">
+
+                        ▲
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="move-down"
+                        aria-label="Move Down">
+
+                        ▼
+
+                    </button>
 
                 </div>
 
@@ -553,10 +842,16 @@ Premium Sortable Life Cards
 
         <!--==================================================
         Premium Navigator
+
+        Disabled until
+        at least one priority changes.
+
         ==================================================-->
 
         <button
-            class="journey-next"
+            class="journey-next disabled"
+            id="screen07-next"
+            disabled
             aria-label="Continue Journey">
 
             <span
