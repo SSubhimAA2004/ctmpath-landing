@@ -20,20 +20,23 @@ Premium CTM PATH™ Navigator Standard
 
 
 /*==================================================
-Screen 06 Base
+Screen Base
 ==================================================*/
 
 
 .screen06 {
 
-    position: relative;
-    min-height: 100vh;
+    min-height:100vh;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display:flex;
 
-    overflow: hidden;
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+
+    overflow:hidden;
 
     background:
 
@@ -49,58 +52,28 @@ Screen 06 Base
 
 
 
-/*==================================================
-Ambient Glow
-==================================================*/
-
-
-.screen06-glow {
-
-    position: absolute;
-
-    width: 520px;
-    height: 520px;
-
-    border-radius: 50%;
-
-    background:
-
-        radial-gradient(
-            circle,
-            rgba(32,213,199,0.16),
-            transparent 70%
-        );
-
-    filter: blur(30px);
-
-    z-index: 0;
-
-}
-
-
-
 
 
 /*==================================================
-Container
+Content Container
 ==================================================*/
 
 
-.screen06-container {
+.screen06 .screen-content {
 
-    position: relative;
+    position:relative;
 
-    z-index: 2;
+    z-index:2;
 
-    width: min(90%, 650px);
+    width:min(90%,650px);
 
-    text-align: center;
+    text-align:center;
 
-    display: flex;
+    display:flex;
 
-    flex-direction: column;
+    flex-direction:column;
 
-    align-items: center;
+    align-items:center;
 
 }
 
@@ -113,22 +86,41 @@ Illustration
 ==================================================*/
 
 
-.screen06-image {
+.screen06 .screen-image {
 
-    width: 220px;
+    width:220px;
 
-    margin-bottom: 28px;
+    height:auto;
+
+    margin-bottom:25px;
 
 }
 
 
-.screen06-image img {
 
-    width: 100%;
 
-    height: auto;
 
-    display: block;
+/*==================================================
+Visitor Greeting
+==================================================*/
+
+
+.screen06 .personal-greeting {
+
+    color:#D6B56C;
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+    font-size:
+
+        clamp(1.2rem,3vw,1.6rem);
+
+    font-weight:600;
+
+    margin-bottom:12px;
 
 }
 
@@ -141,27 +133,24 @@ Title
 ==================================================*/
 
 
-.screen06 .journey-title {
+.screen06 .screen-title {
 
-
-    margin: 0;
-
-    color: #FFF8E7;
+    color:#FFF8E7;
 
     font-family:
 
-        "Noto Serif Tamil",
-        "Latha",
-        serif;
+        "Noto Sans Tamil",
+        sans-serif;
 
+    font-size:
 
-    font-size: clamp(2rem, 4vw, 3rem);
+        clamp(2rem,4vw,3rem);
 
-    line-height: 1.45;
+    line-height:1.45;
 
-    font-weight: 600;
+    font-weight:700;
 
-    letter-spacing: 0.02em;
+    margin:0;
 
 }
 
@@ -174,28 +163,22 @@ English Subtitle
 ==================================================*/
 
 
-.screen06 .journey-subtitle {
+.screen06 .screen-subtitle {
 
+    margin-top:15px;
 
-    margin-top: 12px;
-
-    color: #D6B56C;
-
+    color:#D6B56C;
 
     font-family:
 
         "Inter",
         sans-serif;
 
+    font-size:0.85rem;
 
-    font-size: 1rem;
+    letter-spacing:0.22em;
 
-    font-weight: 500;
-
-    letter-spacing: 0.18em;
-
-    text-transform: uppercase;
-
+    text-transform:uppercase;
 
 }
 
@@ -208,62 +191,47 @@ Message Area
 ==================================================*/
 
 
-.screen06 .journey-message {
+.screen06 .screen-message {
 
-
-    margin-top: 35px;
-
-    max-width: 520px;
-
+    margin-top:35px;
 
 }
 
 
-.screen06 .tamil-copy {
 
 
-    color: #FFF8E7;
 
+.screen06 .screen-message.tamil {
+
+    color:#FFF8E7;
 
     font-family:
 
-        "Noto Serif Tamil",
-        "Latha",
-        serif;
+        "Noto Sans Tamil",
+        sans-serif;
 
+    font-size:1.1rem;
 
-    font-size: 1.15rem;
-
-    line-height: 2;
-
-
-    opacity: 0.95;
-
+    line-height:2;
 
 }
 
 
 
-.screen06 .english-copy {
 
 
-    margin-top: 22px;
+.screen06 .screen-message.english {
 
-
-    color: rgba(255,248,231,0.72);
-
+    color:rgba(255,248,231,0.72);
 
     font-family:
 
         "Inter",
         sans-serif;
 
+    font-size:0.9rem;
 
-    font-size: 0.95rem;
-
-
-    line-height: 1.8;
-
+    line-height:1.8;
 
 }
 
@@ -273,38 +241,35 @@ Message Area
 
 /*==================================================
 Premium Navigator
+
+──────────── ● ────────────
+
+Tamil Action
+
+→ → →
+
+ENGLISH JOURNEY
+
+──────────── ● ────────────
+
 ==================================================*/
 
 
 .screen06 .journey-next {
 
+    margin-top:45px;
 
-    margin-top: 45px;
+    background:none;
 
+    border:none;
 
-    cursor: pointer;
+    cursor:pointer;
 
+    display:flex;
 
-    display: flex;
+    flex-direction:column;
 
-    flex-direction: column;
-
-    align-items: center;
-
-
-    transition:
-
-        transform .3s ease,
-        opacity .3s ease;
-
-
-}
-
-
-
-.screen06 .journey-next:hover {
-
-    transform: translateY(-4px);
+    align-items:center;
 
 }
 
@@ -319,46 +284,31 @@ Navigator Decoration
 
 .screen06 .nav-decoration {
 
+    width:240px;
 
-    display: flex;
+    display:flex;
 
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 12px;
-
-    width: 240px;
+    align-items:center;
 
 }
 
 
-.screen06 .nav-decoration span {
 
 
-    height: 1px;
 
-    flex: 1;
+.screen06 .nav-decoration::before,
 
-    background:
+.screen06 .nav-decoration::after {
 
-        rgba(214,181,108,0.55);
+    content:"";
 
-}
+    height:1px;
 
+    flex:1;
 
-.screen06 .nav-decoration .nav-dot {
+    background:#D6B56C;
 
-
-    flex: none;
-
-    width: 8px;
-
-    height: 8px;
-
-    border-radius: 50%;
-
-    background: #D6B56C;
+    opacity:0.55;
 
 }
 
@@ -367,73 +317,71 @@ Navigator Decoration
 
 
 /*==================================================
-Navigator Text
+Navigator Tamil
 ==================================================*/
 
 
 .screen06 .nav-tamil {
 
+    margin-top:18px;
 
-    margin-top: 18px;
-
-
-    color: #FFF8E7;
-
+    color:#D6B56C;
 
     font-family:
 
-        "Noto Serif Tamil",
-        "Latha",
-        serif;
+        "Noto Sans Tamil",
+        sans-serif;
 
+    font-size:1.35rem;
 
-    font-size: 1.35rem;
-
-    font-weight: 600;
-
+    font-weight:700;
 
 }
 
+
+
+
+
+/*==================================================
+Navigator Arrows
+==================================================*/
 
 
 .screen06 .nav-arrows {
 
+    margin:12px 0;
 
-    margin: 12px 0;
+    color:#D6B56C;
 
+    font-size:1.15rem;
 
-    color: #20D5C7;
-
-
-    font-size: 1.2rem;
-
-    letter-spacing: 0.4em;
-
+    letter-spacing:0.4em;
 
 }
 
 
 
+
+
+/*==================================================
+Navigator English
+==================================================*/
+
+
 .screen06 .nav-english {
 
-
-    color: #D6B56C;
-
+    color:#D6B56C;
 
     font-family:
 
         "Inter",
         sans-serif;
 
+    font-size:0.85rem;
 
-    font-size: 0.85rem;
+    font-weight:600;
 
-
-    font-weight: 600;
-
-
-    letter-spacing: 0.22em;
-
+    letter-spacing:0.25em;
 
 }
 
@@ -446,33 +394,19 @@ Responsive
 ==================================================*/
 
 
-@media (max-width: 600px) {
+@media(max-width:600px) {
 
 
-    .screen06-image {
+    .screen06 .screen-image {
 
-        width: 170px;
-
-    }
-
-
-    .screen06 .journey-message {
-
-        margin-top: 25px;
+        width:170px;
 
     }
 
 
-    .screen06 .tamil-copy {
+    .screen06 .screen-message.tamil {
 
-        font-size: 1rem;
-
-    }
-
-
-    .screen06 .journey-next {
-
-        margin-top: 35px;
+        font-size:1rem;
 
     }
 
