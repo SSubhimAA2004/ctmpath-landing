@@ -1,1 +1,482 @@
 
+/*======================================================================
+
+CTM PATH™ Guided Journey v6.2
+
+SCREEN 11 — YOUR FINANCIAL REALITY™
+
+File:
+screen11.css
+
+Purpose:
+Financial Reality Index™ Styling
+
+======================================================================*/
+
+
+/*==================================================
+Screen
+==================================================*/
+
+.screen11{
+
+    animation:fadeScreen .8s ease;
+
+}
+
+
+/*==================================================
+Financial Reality Section
+==================================================*/
+
+.financial-reality{
+
+    margin-top:60px;
+
+}
+
+
+.financial-grid{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:32px;
+
+}
+
+
+/*==================================================
+Question Card
+==================================================*/
+
+.fri-card{
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:22px;
+
+    padding:34px;
+
+    transition:.35s;
+
+    backdrop-filter:blur(12px);
+
+}
+
+
+.fri-card:hover{
+
+    transform:translateY(-2px);
+
+    border-color:rgba(255,255,255,.18);
+
+}
+
+
+/*==================================================
+Question Number
+==================================================*/
+
+.fri-question-no{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-bottom:22px;
+
+    background:#12376E;
+
+    color:#ffffff;
+
+    font-weight:700;
+
+    font-size:15px;
+
+}
+
+
+/*==================================================
+Tamil Question
+==================================================*/
+
+.fri-question-ta{
+
+    font-size:30px;
+
+    line-height:1.65;
+
+    text-align:center;
+
+    color:#F7F3EA;
+
+    margin-bottom:18px;
+
+}
+
+
+/*==================================================
+English Question
+==================================================*/
+
+.fri-question-en{
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    text-align:center;
+
+    color:#BFC7D5;
+
+    margin-bottom:28px;
+
+}
+
+
+/*==================================================
+Rating Scale
+==================================================*/
+
+.rating-scale{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+}
+
+
+/*==================================================
+Rating Button
+==================================================*/
+
+.rating-btn{
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,255,255,.18);
+
+    background:transparent;
+
+    color:#ffffff;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+
+.rating-btn:hover{
+
+    transform:translateY(-3px);
+
+    border-color:#2C5FA5;
+
+}
+
+
+/*==================================================
+Selected
+==================================================*/
+
+.rating-btn.selected{
+
+    transform:scale(1.08);
+
+    box-shadow:0 0 14px rgba(255,255,255,.18);
+
+}
+
+
+/*==================================================
+Red
+==================================================*/
+
+.rating-red{
+
+    background:#C94A4A;
+
+    border-color:#C94A4A;
+
+    color:#ffffff;
+
+}
+
+
+/*==================================================
+Orange
+==================================================*/
+
+.rating-orange{
+
+    background:#D98A29;
+
+    border-color:#D98A29;
+
+    color:#ffffff;
+
+}
+
+
+/*==================================================
+Green
+==================================================*/
+
+.rating-green{
+
+    background:#2FA86A;
+
+    border-color:#2FA86A;
+
+    color:#ffffff;
+
+}
+
+
+/*==================================================
+Result Card
+==================================================*/
+
+#fri-result{
+
+    display:none;
+
+    margin-top:70px;
+
+    text-align:center;
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(255,255,255,.10);
+
+    border-radius:26px;
+
+    padding:50px;
+
+    animation:fadeUp .7s ease;
+
+}
+
+
+/*==================================================
+Score
+==================================================*/
+
+.fri-score{
+
+    font-size:72px;
+
+    font-weight:700;
+
+    margin:26px 0;
+
+    transition:.35s;
+
+}
+
+
+/*==================================================
+Score Colours
+==================================================*/
+
+.score-red{
+
+    color:#E05252;
+
+}
+
+
+.score-orange{
+
+    color:#F0AA42;
+
+}
+
+
+.score-green{
+
+    color:#37C87A;
+
+}
+
+
+/*==================================================
+Status Text
+==================================================*/
+
+#fri-status-ta{
+
+    font-size:26px;
+
+    line-height:1.7;
+
+    margin-top:20px;
+
+}
+
+
+#fri-status-en{
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    color:#C7CEDB;
+
+    margin-top:18px;
+
+}
+
+
+/*==================================================
+CTA
+==================================================*/
+
+#screen11-next{
+
+    margin-top:70px;
+
+}
+
+
+/*==================================================
+Responsive
+==================================================*/
+
+@media(max-width:900px){
+
+.fri-card{
+
+padding:28px;
+
+}
+
+.fri-question-ta{
+
+font-size:25px;
+
+}
+
+.fri-question-en{
+
+font-size:17px;
+
+}
+
+.rating-btn{
+
+width:46px;
+
+height:46px;
+
+font-size:15px;
+
+}
+
+.fri-score{
+
+font-size:58px;
+
+}
+
+}
+
+
+@media(max-width:600px){
+
+.financial-grid{
+
+gap:24px;
+
+}
+
+.fri-card{
+
+padding:22px;
+
+}
+
+.fri-question-no{
+
+width:36px;
+
+height:36px;
+
+font-size:13px;
+
+}
+
+.fri-question-ta{
+
+font-size:22px;
+
+}
+
+.fri-question-en{
+
+font-size:15px;
+
+}
+
+.rating-scale{
+
+gap:8px;
+
+}
+
+.rating-btn{
+
+width:38px;
+
+height:38px;
+
+font-size:14px;
+
+}
+
+.fri-score{
+
+font-size:46px;
+
+}
+
+#fri-status-ta{
+
+font-size:21px;
+
+}
+
+#fri-status-en{
+
+font-size:15px;
+
+}
+
+}
+
