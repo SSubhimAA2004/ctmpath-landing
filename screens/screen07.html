@@ -4,17 +4,15 @@
 
 CTM PATH™ Guided Journey v6.2
 
-File
-screens/screen07.html
+SCREEN 07 — YOUR LIFE NEEDS™
 
 Purpose
-Your Life Needs™
+Life Priority Discovery
 
 Responsibility
-• Personal Greeting
-• Life Needs Assessment
-• Priority Ranking Interaction
-• Premium Journey Continuation
+• Identify visitor priorities
+• Rank life needs
+• Begin personal discovery journey
 
 ======================================================================
 -->
@@ -22,9 +20,9 @@ Responsibility
 
 <section
 
-    id="screen07"
+id="screen07"
 
-    class="screen">
+class="screen">
 
 
 
@@ -47,45 +45,20 @@ Hero Illustration
 
 <img
 
-    class="hero-logo"
+class="hero-logo"
 
-    src="assets/images/screen07/screen07-life-needs-light.svg"
+src="assets/images/screen07/screen07-life-needs-light.svg"
 
-    alt="Your Life Needs"
+alt="Your Life Needs"
 
-    loading="lazy"
+loading="lazy"
 
-    decoding="async"
+decoding="async"
 
-    draggable="false">
+draggable="false">
 
 
 </div>
-
-
-
-
-
-<!--==================================================
-Personal Greeting
-==================================================-->
-
-<section
-
-    class="personal-greeting">
-
-
-<span
-
-    id="visitor-display-name"
-
-    class="tamil text-gold">
-
-
-</span>
-
-
-</section>
 
 
 
@@ -99,16 +72,13 @@ Welcome Block
 
 <section
 
-    class="welcome-block"
+class="welcome-block">
 
-    aria-labelledby="screen07-title">
 
 
 <h1
 
-    id="screen07-title"
-
-    class="tamil tamil-welcome">
+class="tamil tamil-welcome">
 
 
 உங்கள் வாழ்க்கையின்
@@ -124,14 +94,13 @@ Welcome Block
 
 <div
 
-    class="english english-welcome">
+class="english english-welcome">
 
 
 YOUR LIFE NEEDS
 
 
 </div>
-
 
 
 </section>
@@ -143,15 +112,12 @@ YOUR LIFE NEEDS
 
 
 <!--==================================================
-Premium Divider
+Divider
 ==================================================-->
 
 <div
 
-    class="gold-divider"
-
-    aria-hidden="true">
-
+class="gold-divider">
 
 </div>
 
@@ -162,18 +128,17 @@ Premium Divider
 
 
 <!--==================================================
-Introduction Block
+Introduction
 ==================================================-->
 
 <section
 
-    class="introduction-block">
-
+class="introduction-block">
 
 
 <div
 
-    class="tamil tamil-intro">
+class="tamil tamil-intro">
 
 
 ஒவ்வொருவருடைய வாழ்க்கையிலும்
@@ -184,7 +149,7 @@ Introduction Block
 
 <br><br>
 
-கீழே உள்ள பட்டியலை
+கீழே உள்ள தேவைகளை
 
 <br>
 
@@ -203,11 +168,9 @@ Introduction Block
 
 
 
-
-
 <div
 
-    class="english">
+class="english">
 
 
 Everyone has
@@ -226,15 +189,10 @@ from the most important
 
 <br>
 
-to the least important
-
-<br>
-
-for your life today.
+to the least important.
 
 
 </div>
-
 
 
 </section>
@@ -246,15 +204,12 @@ for your life today.
 
 
 <!--==================================================
-Premium Divider
+Divider
 ==================================================-->
 
 <div
 
-    class="gold-divider small"
-
-    aria-hidden="true">
-
+class="gold-divider small">
 
 </div>
 
@@ -266,124 +221,77 @@ Premium Divider
 
 <!--==================================================
 Life Needs Priority Board
-
-New Component
-
 ==================================================-->
 
 <section
 
-    class="life-needs-board"
-
-    aria-label="Life Needs Priority Ranking">
-
-
+class="life-needs-board">
 
 
 
 <div
 
-    id="life-needs-list"
+id="life-needs-list"
 
-    class="life-needs-list"
-
-    role="list">
+class="life-needs-list">
 
 
 
 
 
-<!-- CARD TEMPLATE -->
+
+
+<!-- 01 -->
 
 <article
 
-    class="need-card"
+class="need-card"
 
-    role="listitem"
-
-    data-id="income">
+data-id="income">
 
 
-<div
+<div class="need-rank">
 
-    class="need-rank"
-
-    aria-hidden="true">
-
+1
 
 </div>
 
 
-
-<div
-
-    class="need-content">
+<div class="need-content">
 
 
-<div
-
-    class="need-title tamil">
-
+<div class="need-title tamil">
 
 என் மாத வருமானத்தை
 
 அதிகரிக்க வேண்டும்
 
-
 </div>
 
 
+<div class="need-subtitle english">
 
-<div
+Increase my monthly income
 
-    class="need-subtitle english">
-
-
-Increase my
-
-monthly income
+</div>
 
 
 </div>
 
 
-
-</div>
-
+<div class="need-actions">
 
 
-<div
-
-    class="need-actions">
-
-
-<button
-
-    type="button"
-
-    class="priority-button move-up-btn"
-
-    aria-label="Move priority up">
-
+<button class="priority-button move-up-btn">
 
 ▲
-
 
 </button>
 
 
-
-<button
-
-    type="button"
-
-    class="priority-button move-down-btn"
-
-    aria-label="Move priority down">
-
+<button class="priority-button move-down-btn">
 
 ▼
-
 
 </button>
 
@@ -397,39 +305,592 @@ monthly income
 
 
 
-<!--
-
-Repeat same need-card structure
-
-for:
-
-saving
-
-debt
-
-wealth
-
-plan
-
-family
-
-additional-income
-
-expenses
-
-freedom
-
-peace
 
 
--->
+<!-- 02 -->
+
+<article
+
+class="need-card"
+
+data-id="saving">
+
+
+<div class="need-rank">
+
+2
+
+</div>
+
+
+<div class="need-content">
+
+
+<div class="need-title tamil">
+
+சேமிப்பை
+
+உருவாக்க வேண்டும்
+
+</div>
+
+
+<div class="need-subtitle english">
+
+Build my savings
+
+</div>
+
+
+</div>
+
+
+<div class="need-actions">
+
+
+<button class="priority-button move-up-btn">
+
+▲
+
+</button>
+
+
+<button class="priority-button move-down-btn">
+
+▼
+
+</button>
+
+
+</div>
+
+
+</article>
+
+
+
+
+
+
+
+<!-- 03 -->
+
+<article
+
+class="need-card"
+
+data-id="debt">
+
+
+<div class="need-rank">
+
+3
+
+</div>
+
+
+<div class="need-content">
+
+
+<div class="need-title tamil">
+
+கடன்களை
+
+குறைக்க வேண்டும்
+
+</div>
+
+
+<div class="need-subtitle english">
+
+Reduce my debts
+
+</div>
+
+
+</div>
+
+
+<div class="need-actions">
+
+<button class="priority-button move-up-btn">
+
+▲
+
+</button>
+
+<button class="priority-button move-down-btn">
+
+▼
+
+</button>
+
+</div>
+
+
+</article>
+
+
+
+
+
+
+
+<!-- 04 -->
+
+<article
+
+class="need-card"
+
+data-id="wealth">
+
+
+<div class="need-rank">
+
+4
+
+</div>
+
+
+<div class="need-content">
+
+
+<div class="need-title tamil">
+
+செல்வத்தை
+
+உருவாக்க வேண்டும்
+
+</div>
+
+
+<div class="need-subtitle english">
+
+Create wealth
+
+</div>
+
+
+</div>
+
+
+<div class="need-actions">
+
+
+<button class="priority-button move-up-btn">
+
+▲
+
+</button>
+
+
+<button class="priority-button move-down-btn">
+
+▼
+
+</button>
+
+
+</div>
+
+
+</article>
+
+
+
+
+
+
+
+<!-- 05 -->
+
+<article
+
+class="need-card"
+
+data-id="planning">
+
+
+<div class="need-rank">
+
+5
+
+</div>
+
+
+<div class="need-content">
+
+
+<div class="need-title tamil">
+
+எதிர்காலத்தை
+
+திட்டமிட வேண்டும்
+
+</div>
+
+
+<div class="need-subtitle english">
+
+Plan my financial future
+
+</div>
+
+
+</div>
+
+
+<div class="need-actions">
+
+
+<button class="priority-button move-up-btn">
+
+▲
+
+</button>
+
+
+<button class="priority-button move-down-btn">
+
+▼
+
+</button>
+
+
+</div>
+
+
+</article>
+
+
+
+
+
+
+
+<!-- 06 -->
+
+<article
+
+class="need-card"
+
+data-id="family">
+
+
+<div class="need-rank">
+
+6
+
+</div>
+
+
+<div class="need-content">
+
+
+<div class="need-title tamil">
+
+என் குடும்பத்தை
+
+ஆதரிக்க வேண்டும்
+
+</div>
+
+
+<div class="need-subtitle english">
+
+Support my family
+
+</div>
+
+
+</div>
+
+
+<div class="need-actions">
+
+
+<button class="priority-button move-up-btn">
+
+▲
+
+</button>
+
+
+<button class="priority-button move-down-btn">
+
+▼
+
+</button>
+
+
+</div>
+
+
+</article>
+
+
+
+
+
+
+
+<!-- 07 -->
+
+<article
+
+class="need-card"
+
+data-id="additional-income">
+
+
+<div class="need-rank">
+
+7
+
+</div>
+
+
+<div class="need-content">
+
+
+<div class="need-title tamil">
+
+கூடுதல் வருமானத்தை
+
+உருவாக்க வேண்டும்
+
+</div>
+
+
+<div class="need-subtitle english">
+
+Create additional income
+
+</div>
+
+
+</div>
+
+
+<div class="need-actions">
+
+<button class="priority-button move-up-btn">
+
+▲
+
+</button>
+
+
+<button class="priority-button move-down-btn">
+
+▼
+
+</button>
+
+</div>
+
+
+</article>
+
+
+
+
+
+
+
+<!-- 08 -->
+
+<article
+
+class="need-card"
+
+data-id="expenses">
+
+
+<div class="need-rank">
+
+8
+
+</div>
+
+
+<div class="need-content">
+
+
+<div class="need-title tamil">
+
+செலவுகளை
+
+நிர்வகிக்க வேண்டும்
+
+</div>
+
+
+<div class="need-subtitle english">
+
+Manage my expenses
+
+</div>
+
+
+</div>
+
+
+<div class="need-actions">
+
+<button class="priority-button move-up-btn">
+
+▲
+
+</button>
+
+
+<button class="priority-button move-down-btn">
+
+▼
+
+</button>
+
+</div>
+
+
+</article>
+
+
+
+
+
+
+
+<!-- 09 -->
+
+<article
+
+class="need-card"
+
+data-id="freedom">
+
+
+<div class="need-rank">
+
+9
+
+</div>
+
+
+<div class="need-content">
+
+
+<div class="need-title tamil">
+
+நிதி சுதந்திரத்தை
+
+அடைய வேண்டும்
+
+</div>
+
+
+<div class="need-subtitle english">
+
+Achieve financial freedom
+
+</div>
+
+
+</div>
+
+
+<div class="need-actions">
+
+<button class="priority-button move-up-btn">
+
+▲
+
+</button>
+
+
+<button class="priority-button move-down-btn">
+
+▼
+
+</button>
+
+</div>
+
+
+</article>
+
+
+
+
+
+
+
+<!-- 10 -->
+
+<article
+
+class="need-card"
+
+data-id="peace">
+
+
+<div class="need-rank">
+
+10
+
+</div>
+
+
+<div class="need-content">
+
+
+<div class="need-title tamil">
+
+மன அமைதியுடன்
+
+வாழ வேண்டும்
+
+</div>
+
+
+<div class="need-subtitle english">
+
+Live with peace of mind
+
+</div>
+
+
+</div>
+
+
+<div class="need-actions">
+
+<button class="priority-button move-up-btn">
+
+▲
+
+</button>
+
+
+<button class="priority-button move-down-btn">
+
+▼
+
+</button>
+
+</div>
+
+
+</article>
+
+
 
 
 
 
 
 </div>
-
 
 
 </section>
@@ -441,74 +902,52 @@ peace
 
 
 <!--==================================================
-Journey Navigator
-
-Enabled after ranking changes
-
+Navigator
 ==================================================-->
 
 <section
 
-    class="cta-block">
+class="cta-block">
 
 
 <button
 
-    id="screen07-next"
+id="screen07-next"
 
-    class="journey-next disabled"
+class="journey-next disabled"
 
-    type="button"
+type="button"
 
-    data-next-screen="screen08"
+data-next-screen="screen08"
 
-    disabled
-
-    aria-disabled="true"
-
-    aria-label="Continue Journey">
+disabled>
 
 
 <span class="nav-decoration"></span>
 
 
-
-<span
-
-    class="nav-tamil tamil">
-
+<span class="nav-tamil tamil">
 
 தொடரலாம்
 
-
 </span>
-
 
 
 <span class="nav-arrows">
 
-
 → → →
-
 
 </span>
 
 
-
-<span
-
-    class="nav-english english">
-
+<span class="nav-english english">
 
 CONTINUE JOURNEY
 
-
 </span>
 
 
-
 <span class="nav-decoration"></span>
-
 
 
 </button>
@@ -521,7 +960,6 @@ CONTINUE JOURNEY
 
 
 </div>
-
 
 </div>
 
