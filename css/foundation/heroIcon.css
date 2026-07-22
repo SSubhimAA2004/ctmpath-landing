@@ -1,1 +1,288 @@
 
+/*======================================================================
+
+CTM PATH™ Guided Journey v6.1
+
+FOUNDATION COMPONENT
+
+PREMIUM HERO ICON™
+
+File
+css/foundation/heroIcon.css
+
+Purpose
+Provides the standard premium hero illustration used
+throughout the CTM PATH™ Guided Journey.
+
+Rules
+
+• One illustration system
+• One glow system
+• One animation
+• One responsive behaviour
+• Shared by all 36 screens
+
+Status
+FOUNDATION — LOCKED
+
+======================================================================*/
+
+
+
+/*==================================================
+Hero Icon Container
+
+==================================================*/
+
+.hero-icon{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:100%;
+
+    margin:
+
+        0
+        auto
+        56px;
+
+}
+
+
+
+/*==================================================
+Hero Image
+
+==================================================*/
+
+.hero-icon-image{
+
+    display:block;
+
+    width:240px;
+
+    height:auto;
+
+    object-fit:contain;
+
+    user-select:none;
+
+    pointer-events:none;
+
+    filter:
+
+        drop-shadow(
+            0 24px 60px rgba(0,0,0,.42)
+        )
+
+        drop-shadow(
+            0 0 36px rgba(214,181,108,.16)
+        )
+
+        drop-shadow(
+            0 0 90px rgba(24,166,109,.08)
+        );
+
+    animation:
+
+        heroFloat
+        8s
+        ease-in-out
+        infinite;
+
+}
+
+
+
+/*==================================================
+Premium Floating Animation
+
+==================================================*/
+
+@keyframes heroFloat{
+
+    0%{
+
+        transform:
+            translateY(0);
+
+    }
+
+    50%{
+
+        transform:
+            translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+
+/*==================================================
+Optional Sizes
+
+==================================================*/
+
+.hero-icon.small .hero-icon-image{
+
+    width:180px;
+
+}
+
+
+
+.hero-icon.medium .hero-icon-image{
+
+    width:220px;
+
+}
+
+
+
+.hero-icon.large .hero-icon-image{
+
+    width:280px;
+
+}
+
+
+
+/*==================================================
+Hover (Optional)
+
+==================================================*/
+
+.hero-icon:hover .hero-icon-image{
+
+    filter:
+
+        drop-shadow(
+            0 26px 64px rgba(0,0,0,.42)
+        )
+
+        drop-shadow(
+            0 0 44px rgba(214,181,108,.22)
+        )
+
+        drop-shadow(
+            0 0 100px rgba(24,166,109,.10)
+        );
+
+}
+
+
+
+/*==================================================
+Tablet
+
+==================================================*/
+
+@media (max-width:900px){
+
+    .hero-icon{
+
+        margin-bottom:48px;
+
+    }
+
+    .hero-icon-image{
+
+        width:210px;
+
+    }
+
+}
+
+
+
+/*==================================================
+Mobile
+
+==================================================*/
+
+@media (max-width:600px){
+
+    .hero-icon{
+
+        margin-bottom:40px;
+
+    }
+
+    .hero-icon-image{
+
+        width:180px;
+
+    }
+
+}
+
+
+
+/*==================================================
+Small Mobile
+
+==================================================*/
+
+@media (max-width:380px){
+
+    .hero-icon{
+
+        margin-bottom:34px;
+
+    }
+
+    .hero-icon-image{
+
+        width:155px;
+
+    }
+
+}
+
+
+
+/*==================================================
+Accessibility
+
+==================================================*/
+
+@media (prefers-reduced-motion:reduce){
+
+    .hero-icon-image{
+
+        animation:none;
+
+        transition:none;
+
+        transform:none;
+
+    }
+
+}
+
+
+
+/*==================================================
+END OF FILE
+
+CTM PATH™
+
+Premium Hero Icon™
+
+Version 1.0
+
+STATUS: FOUNDATION COMPONENT (LOCKED)
+
+==================================================*/
