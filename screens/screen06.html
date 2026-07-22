@@ -2,367 +2,227 @@
 <!--
 ======================================================================
 
-CTM PATH™ Guided Journey v6.0
+CTM PATH™ Guided Journey v6.2
 
-SCREEN 06 — YOUR JOURNEY™
+File
+screens/screen06.html
 
-File:
-screen06.html
-
-Purpose:
+Purpose
 Personal Journey Recognition
 
-Emotional Role:
-Identity → Personal Connection → Journey Beginning
+Responsibility
+• Personal greeting
+• Begin emotional journey
+• Continue premium experience
 
 ======================================================================
 -->
 
-
 <section
-
     id="screen06"
+    class="screen">
 
-    class="journey-screen screen06">
+    <div class="container">
 
+        <div class="hero fade-up">
 
+            <!--==================================================
+            Hero Illustration
+            ==================================================-->
 
+            <div class="hero-icon">
 
+                <img
+                    class="hero-logo"
+                    src="assets/images/screen06/screen06-journey-light.svg"
+                    alt="Your Journey"
+                    loading="lazy"
+                    decoding="async"
+                    draggable="false">
 
-    <div
-
-        class="screen-content">
-
-
-
-
-
-        <!--==================================================
-        Illustration
-        ==================================================-->
-
-
-        <div
-
-            class="screen-visual">
+            </div>
 
 
-            <img
 
-                src="assets/images/screen06/screen06-journey-light.svg"
+            <!--==================================================
+            Personal Greeting
+            ==================================================-->
 
-                alt="Your Journey"
+            <section
+                class="personal-greeting">
 
-                class="screen-image">
+                <span
+                    id="visitor-display-name"
+                    class="tamil text-gold">
 
+                </span>
+
+            </section>
+
+
+
+            <!--==================================================
+            Hero Message
+            ==================================================-->
+
+            <section
+                class="welcome-block"
+                aria-labelledby="screen06-title">
+
+                <h1
+                    id="screen06-title"
+                    class="tamil tamil-welcome">
+
+                    உங்கள் பயணம்...
+
+                    <br>
+
+                    உங்களுக்காக
+
+                </h1>
+
+                <div
+                    class="english english-welcome">
+
+                    YOUR JOURNEY... FOR YOU
+
+                </div>
+
+            </section>
+
+
+
+            <!--==================================================
+            Premium Divider
+            ==================================================-->
+
+            <div
+                class="gold-divider"
+                aria-hidden="true">
+
+            </div>
+
+
+
+            <!--==================================================
+            Screen Message
+            ==================================================-->
+
+            <section
+                class="introduction-block">
+
+                <div
+                    class="tamil tamil-intro">
+
+                    ஒவ்வொரு வாழ்க்கைக்கும்
+
+                    <br>
+
+                    ஒரு மறைந்த பாதை உள்ளது.
+
+                    <br><br>
+
+                    உங்கள் உள்ளத்தின் குரலை
+
+                    <br>
+
+                    <span class="text-gold">
+
+                        அறியும்
+
+                    </span>
+
+                    இந்தப் பயணம்...
+
+                    <br><br>
+
+                    இப்போது தொடங்குகிறது.
+
+                </div>
+
+
+
+                <div
+                    class="english">
+
+                    Every life has a hidden path.
+
+                    <br><br>
+
+                    This journey to understand
+
+                    <br>
+
+                    your inner voice...
+
+                    <br><br>
+
+                    begins now.
+
+                </div>
+
+            </section>
+
+
+
+            <!--==================================================
+            Premium Divider
+            ==================================================-->
+
+            <div
+                class="gold-divider small"
+                aria-hidden="true">
+
+            </div>
+
+
+
+            <!--==================================================
+            Journey Navigator
+            ==================================================-->
+
+            <section
+                class="cta-block">
+
+                <button
+                    id="screen06Continue"
+                    class="journey-next"
+                    type="button"
+                    data-next-screen="screen07"
+                    aria-label="Begin Journey">
+
+                    <span class="nav-decoration"></span>
+
+                    <span
+                        class="nav-tamil tamil">
+
+                        தொடங்கலாம்
+
+                    </span>
+
+                    <span
+                        class="nav-arrows">
+
+                        → → →
+
+                    </span>
+
+                    <span
+                        class="nav-english english">
+
+                        BEGIN JOURNEY
+
+                    </span>
+
+                    <span class="nav-decoration"></span>
+
+                </button>
+
+            </section>
 
         </div>
-
-
-
-
-
-
-
-
-        <!--==================================================
-        Visitor Identity
-
-        Retrieved from Screen 05
-
-        ==================================================-->
-
-
-        <div
-
-            class="personal-greeting tamil">
-
-
-            <span
-
-                id="visitor-display-name">
-
-
-            </span>
-
-
-        </div>
-
-
-
-
-
-
-
-
-
-        <!--==================================================
-        Tamil Title
-        ==================================================-->
-
-
-        <h1
-
-            class="screen-title tamil">
-
-
-            உங்கள் பயணம்...<br>
-
-            உங்களுக்காக
-
-
-        </h1>
-
-
-
-
-
-
-
-
-        <!--==================================================
-        English Subtitle
-        ==================================================-->
-
-
-        <div
-
-            class="screen-subtitle english">
-
-
-            YOUR JOURNEY... FOR YOU
-
-
-        </div>
-
-
-
-
-
-
-
-
-        <!--==================================================
-        Tamil Message
-        ==================================================-->
-
-
-        <div
-
-            class="screen-message tamil">
-
-
-            <p>
-
-                ஒவ்வொரு வாழ்க்கைக்கும்<br>
-
-                ஒரு மறைந்த பாதை உள்ளது.
-
-
-            </p>
-
-
-
-            <p>
-
-                உங்கள் உள்ளத்தின் குரலை<br>
-
-                அறியும் இந்தப் பயணம்...
-
-
-            </p>
-
-
-
-            <p>
-
-                இப்போது தொடங்குகிறது.
-
-
-            </p>
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-
-        <!--==================================================
-        English Message
-        ==================================================-->
-
-
-        <div
-
-            class="screen-message english">
-
-
-            <p>
-
-                Every life has a hidden path.
-
-
-            </p>
-
-
-
-            <p>
-
-                This journey to understand<br>
-
-                your inner voice...
-
-
-            </p>
-
-
-
-            <p>
-
-                begins now.
-
-
-            </p>
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-
-        <!--==================================================
-        Premium Navigator
-
-        SCREEN 06 → SCREEN 07
-
-        ==================================================-->
-
-
-        <button
-
-            class="journey-next"
-
-            aria-label="Begin Journey">
-
-
-
-
-
-            <span
-
-                class="nav-decoration top-line">
-
-
-            </span>
-
-
-
-
-
-
-
-
-            <span
-
-                class="nav-tamil">
-
-
-                தொடங்கலாம்
-
-
-            </span>
-
-
-
-
-
-
-
-
-            <span
-
-                class="nav-arrows">
-
-
-                → → →
-
-
-            </span>
-
-
-
-
-
-
-
-
-            <span
-
-                class="nav-english">
-
-
-                BEGIN JOURNEY
-
-
-            </span>
-
-
-
-
-
-
-
-
-            <span
-
-                class="nav-decoration bottom-line">
-
-
-            </span>
-
-
-
-
-
-
-            <!-- Gold Luxury Border Accent -->
-
-
-            <span
-
-                class="navigator-gold-line">
-
-
-            </span>
-
-
-
-
-
-        </button>
-
-
-
-
-
-
 
     </div>
 
-
-
-
-
 </section>
+
