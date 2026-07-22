@@ -2,343 +2,209 @@
 <!--
 ======================================================================
 
-CTM PATH™ Guided Journey v6.0
+CTM PATH™ Guided Journey v6.1
 
-Screen
-02 — THE SIX MINUTES™
+File
+screens/screen02.html
 
 Purpose
-Emotional transition
+Emotional Transition
 
-Core Message:
-
-These six minutes guide you
-from where you are today
-toward where you want to be.
+Responsibility
+• Create emotional connection
+• Introduce THE SIX MINUTES™
+• Prepare the visitor for self-discovery
+• Continue the guided journey
 
 ======================================================================
 -->
 
-
 <section
+    id="screen02"
+    class="screen">
 
-id="screen02"
+    <div class="container">
 
-class="screen screen02">
+        <div class="hero fade-up">
 
+            <!--==================================================
+            Hero Illustration
+            ==================================================-->
 
+            <div class="hero-icon">
 
-<div class="container">
+                <img
+                    class="hero-logo"
+                    src="assets/images/screen02/screen02-gift-light.svg"
+                    alt="A guiding light showing your path forward"
+                    loading="lazy"
+                    decoding="async"
+                    draggable="false">
 
+            </div>
 
 
 
+            <!--==================================================
+            Hero Message
+            ==================================================-->
 
-<!-- ===================================
-SCREEN 02 HERO
-=================================== -->
+            <section
+                class="welcome-block"
+                aria-labelledby="screen02-title">
 
+                <h1
+                    id="screen02-title"
+                    class="tamil tamil-welcome">
 
-<div class="screen02-hero">
+                    இந்த ஆறு நிமிடங்கள்...
 
+                </h1>
 
+                <div
+                    class="english english-welcome">
 
+                    THESE SIX MINUTES...
 
+                </div>
 
+            </section>
 
 
-<!-- ===================================
-Symbol
 
-Discovery Light SVG
+            <!--==================================================
+            Premium Divider
+            ==================================================-->
 
-=================================== -->
+            <div
+                class="gold-divider"
+                aria-hidden="true">
 
+            </div>
 
-<div class="screen02-symbol">
 
 
-<img
+            <!--==================================================
+            Screen Message
+            ==================================================-->
 
+            <section
+                class="introduction-block">
 
-src="assets/images/screen02/screen02-gift-light.svg"
+                <div
+                    class="tamil tamil-intro">
 
+                    நீங்கள் இன்று இருக்கும் இடத்திலிருந்து...
 
-alt="A guiding light showing your path forward"
+                    <br><br>
 
+                    நீங்கள் செல்ல விரும்பும் இடம் வரை...
 
-loading="lazy">
+                    <br><br>
 
+                    உங்கள் பாதையை
 
+                    <br>
 
-</div>
+                    <span class="text-gold">
 
+                        கண்டறிய
 
+                    </span>
 
+                    <br>
 
+                    வழிகாட்டும்.
 
+                </div>
 
 
 
+                <div
+                    class="english">
 
-<!-- ===================================
-Tamil Message
+                    These six minutes...
 
-=================================== -->
+                    <br><br>
 
+                    will guide you
 
-<div class="screen02-tamil">
+                    <br>
 
+                    to discover your path...
 
+                    <br><br>
 
-<h1>
+                    from where you are today...
 
+                    <br><br>
 
-இந்த ஆறு நிமிடங்கள்...
+                    to where you truly want to be.
 
+                </div>
 
-</h1>
+            </section>
 
 
 
+            <!--==================================================
+            Premium Divider
+            ==================================================-->
 
+            <div
+                class="gold-divider small"
+                aria-hidden="true">
 
+            </div>
 
 
 
-<p>
+            <!--==================================================
+            Journey Navigator
+            ==================================================-->
 
+            <section
+                class="cta-block">
 
-நீங்கள் இன்று இருக்கும் இடத்திலிருந்து...
+                <button
+                    id="screen02Continue"
+                    class="journey-next"
+                    type="button"
+                    data-next-screen="screen03"
+                    aria-label="Continue Journey">
 
+                    <span class="nav-decoration"></span>
 
+                    <span
+                        class="nav-tamil tamil">
 
-<br><br>
+                        தொடரலாம்
 
+                    </span>
 
-நீங்கள் செல்ல விரும்பும் இடம் வரை...
+                    <span
+                        class="nav-arrows">
 
+                        → → →
 
+                    </span>
 
-<br><br>
+                    <span
+                        class="nav-english english">
 
+                        CONTINUE JOURNEY
 
-உங்கள் பாதையை
+                    </span>
 
-<br>
+                    <span class="nav-decoration"></span>
 
-கண்டறிய வழிகாட்டும்.
+                </button>
 
+            </section>
 
+        </div>
 
-</p>
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- ===================================
-English Subtitle
-
-=================================== -->
-
-
-<div class="screen02-english">
-
-
-
-<p>
-
-
-These six minutes...
-
-
-
-<br><br>
-
-
-will guide you to discover
-
-<br>
-
-the path...
-
-
-
-<br><br>
-
-
-from where you are today...
-
-
-
-<br><br>
-
-
-to where you truly want to be.
-
-
-
-</p>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- ===================================
-Divider
-
-=================================== -->
-
-
-<div
-
-class="gold-divider">
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- ===================================
-Premium Journey Navigator
-
-CTM PATH™ Standard Component
-
-=================================== -->
-
-
-
-<button
-
-
-class="journey-next"
-
-
-id="screen02Continue"
-
-
-type="button"
-
-
-data-next-screen="screen03"
-
-
-
-aria-label="Continue Journey">
-
-
-
-
-
-<span
-
-class="nav-decoration top-line">
-
-
-</span>
-
-
-
-
-
-
-
-<span
-
-class="nav-tamil tamil">
-
-
-தொடரலாம்
-
-
-</span>
-
-
-
-
-
-
-
-<span
-
-class="nav-arrows">
-
-
-→ → →
-
-
-</span>
-
-
-
-
-
-
-
-<span
-
-class="nav-english english">
-
-
-CONTINUE JOURNEY
-
-
-</span>
-
-
-
-
-
-
-
-<span
-
-class="nav-decoration bottom-line">
-
-
-</span>
-
-
-
-
-
-
-</button>
-
-
-
-
-
-
-
-
-</div>
-
-
-</div>
-
+    </div>
 
 </section>
+
