@@ -11,14 +11,13 @@ screen11.html
 Purpose:
 Financial Reality Index™
 
-Responsibility
-
-• Premium Hero
-• Personalised Conversation
-• Financial Reality Assessment
-• Analysis
-• Financial Reality Index™
-• Premium Navigator
+Architecture:
+• One Hero
+• One Conversation
+• One Reusable Question Card
+• One Analysis Panel
+• One Financial Reality Index™
+• One Premium Navigator
 
 =======================================================================-->
 
@@ -44,9 +43,10 @@ Responsibility
 
             <div class="hero-name">
 
-                <span
-                    class="visitor-name">
+                <span class="visitor-name">
+
                     Friend
+
                 </span>
 
             </div>
@@ -91,13 +91,21 @@ Responsibility
 
                 <br><br>
 
+                கடந்த சில நிமிடங்களில்
+
+                நீங்கள் உங்கள் வாழ்க்கையை
+
+                ஆழமாக சிந்திக்கத் தொடங்கியுள்ளீர்கள்.
+
+                <br><br>
+
                 இப்போது
 
-                உங்கள் நிதி வாழ்க்கையை
+                உங்கள் நிதி வாழ்க்கையின்
 
-                நேர்மையாக
+                உண்மையான நிலையை
 
-                பார்த்துக்கொள்வோம்.
+                நேர்மையாக பார்க்கலாம்.
 
             </p>
 
@@ -111,1000 +119,276 @@ Responsibility
 
                 <br><br>
 
-                Let us honestly discover
+                During the last few minutes,
 
-                your financial reality
+                you have reflected deeply
 
-                as it exists today.
+                about your life.
+
+                <br><br>
+
+                Now,
+
+                let's honestly discover
+
+                your financial reality.
 
             </p>
 
-            <div class="premium-divider small">
+        </section>
 
-                <span></span>
+
+
+        <!--==================================================
+        Reflection Progress
+        ==================================================-->
+
+        <section class="reflection-progress">
+
+            <div class="reflection-title">
+
+                Reflection
+
+                <span id="reflection-number">
+
+                    1
+
+                </span>
+
+                of
+
+                10
 
             </div>
 
-            <p class="instruction-ta">
+            <div class="progress-bar">
 
-                சரியான பதில்களோ
+                <div
+                    id="progress-fill"
+                    class="progress-fill">
 
-                தவறான பதில்களோ
+                </div>
 
-                எதுவுமில்லை.
-
-                <br><br>
-
-                இன்று உங்கள் வாழ்க்கையை
-
-                உண்மையாக பிரதிபலிக்கும்
-
-                எண்ணை மட்டும்
-
-                தேர்ந்தெடுக்கவும்.
-
-            </p>
-
-            <p class="instruction-en">
-
-                There are
-
-                no right answers.
-
-                <br><br>
-
-                No wrong answers.
-
-                <br><br>
-
-                Simply choose
-
-                the number
-
-                that best reflects
-
-                your financial reality
-
-                today.
-
-            </p>
+            </div>
 
         </section>
 
 
 
         <!--==================================================
-        Assessment
+        Dynamic Question Card
+
+        Content populated entirely
+        by screen11.js
+
         ==================================================-->
 
         <section
-            id="financial-reality-assessment"
-            class="assessment-section">
+            id="question-card"
+            class="question-card">
 
+            <div
+                id="question-number"
+                class="question-number">
 
+                01
 
-            <!--==============================================
-            Question 01
-            ==============================================-->
+            </div>
 
-            <article
-                class="fri-card"
-                data-question="1">
+            <h2
+                id="question-ta"
+                class="question-ta">
 
-                <div class="question-number">
+            </h2>
 
-                    01
+            <p
+                id="question-en"
+                class="question-en">
 
-                </div>
+            </p>
 
-                <h2 class="question-ta">
+            <div
+                id="rating-scale"
+                class="rating-scale">
 
-                    உங்கள்
+                <button
+                    class="rating-btn"
+                    data-value="1">
 
-                    நிதி வாழ்க்கையின் மீது
+                    1
 
-                    உங்களுக்கு
+                </button>
 
-                    எவ்வளவு
+                <button
+                    class="rating-btn"
+                    data-value="2">
 
-                    கட்டுப்பாடு
+                    2
 
-                    உள்ளது?
+                </button>
 
-                </h2>
+                <button
+                    class="rating-btn"
+                    data-value="3">
 
-                <p class="question-en">
+                    3
 
-                    How much control
+                </button>
 
-                    do you have
+                <button
+                    class="rating-btn"
+                    data-value="4">
 
-                    over your
+                    4
 
-                    financial life?
+                </button>
 
-                </p>
+                <button
+                    class="rating-btn"
+                    data-value="5">
 
-                <div
-                    class="rating-scale"
-                    data-question="1">
+                    5
 
-                    <button
-                        class="rating-btn"
-                        data-value="1">
+                </button>
 
-                        1
+                <button
+                    class="rating-btn"
+                    data-value="6">
 
-                    </button>
+                    6
 
-                    <button
-                        class="rating-btn"
-                        data-value="2">
+                </button>
 
-                        2
+                <button
+                    class="rating-btn"
+                    data-value="7">
 
-                    </button>
+                    7
 
-                    <button
-                        class="rating-btn"
-                        data-value="3">
+                </button>
 
-                        3
+                <button
+                    class="rating-btn"
+                    data-value="8">
 
-                    </button>
+                    8
 
-                    <button
-                        class="rating-btn"
-                        data-value="4">
+                </button>
 
-                        4
+                <button
+                    class="rating-btn"
+                    data-value="9">
 
-                    </button>
+                    9
 
-                    <button
-                        class="rating-btn"
-                        data-value="5">
+                </button>
 
-                        5
-
-                    </button>
-
-                    <button
-                        class="rating-btn"
-                        data-value="6">
-
-                        6
-
-                    </button>
-
-                    <button
-                        class="rating-btn"
-                        data-value="7">
-
-                        7
-
-                    </button>
-
-                    <button
-                        class="rating-btn"
-                        data-value="8">
-
-                        8
-
-                    </button>
-
-                    <button
-                        class="rating-btn"
-                        data-value="9">
-
-                        9
-
-                    </button>
-
-                    <button
-                        class="rating-btn"
-                        data-value="10">
-
-                        10
-
-                    </button>
-
-                </div>
-
-                <div class="rating-labels">
-
-                    <span>
-
-                        No Control
-
-                    </span>
-
-                    <span>
-
-                        Complete Control
-
-                    </span>
-
-                </div>
-
-            </article>
-
-            <!--==============================================
-            Question 02
-            ==============================================-->
-
-            <article
-                class="fri-card hidden"
-                data-question="2">
-
-                <div class="question-number">
-
-                    02
-
-                </div>
-
-                <h2 class="question-ta">
-
-                    ஒவ்வொரு மாதமும்
-
-                    நீங்கள்
-
-                    சேமிக்க முடிகிறதா?
-
-                </h2>
-
-                <p class="question-en">
-
-                    How consistently
-
-                    are you able
-
-                    to save money
-
-                    every month?
-
-                </p>
-
-                <div
-                    class="rating-scale"
-                    data-question="2">
-
-                    <button class="rating-btn" data-value="1">1</button>
-                    <button class="rating-btn" data-value="2">2</button>
-                    <button class="rating-btn" data-value="3">3</button>
-                    <button class="rating-btn" data-value="4">4</button>
-                    <button class="rating-btn" data-value="5">5</button>
-                    <button class="rating-btn" data-value="6">6</button>
-                    <button class="rating-btn" data-value="7">7</button>
-                    <button class="rating-btn" data-value="8">8</button>
-                    <button class="rating-btn" data-value="9">9</button>
-                    <button class="rating-btn" data-value="10">10</button>
-
-                </div>
-
-                <div class="rating-labels">
-
-                    <span>
-
-                        Never Save
-
-                    </span>
-
-                    <span>
-
-                        Always Save
-
-                    </span>
-
-                </div>
-
-            </article>
-
-
-
-            <!--==============================================
-            Question 03
-            ==============================================-->
-
-            <article
-                class="fri-card hidden"
-                data-question="3">
-
-                <div class="question-number">
-
-                    03
-
-                </div>
-
-                <h2 class="question-ta">
-
-                    எதிர்பாராத
-
-                    அவசரச் செலவுகளை
-
-                    சமாளிக்க
-
-                    உங்களுக்கு
-
-                    நிதி வலிமை
-
-                    உள்ளதா?
-
-                </h2>
-
-                <p class="question-en">
-
-                    How prepared
-
-                    are you
-
-                    to handle
-
-                    unexpected
-
-                    financial emergencies?
-
-                </p>
-
-                <div
-                    class="rating-scale"
-                    data-question="3">
-
-                    <button class="rating-btn" data-value="1">1</button>
-                    <button class="rating-btn" data-value="2">2</button>
-                    <button class="rating-btn" data-value="3">3</button>
-                    <button class="rating-btn" data-value="4">4</button>
-                    <button class="rating-btn" data-value="5">5</button>
-                    <button class="rating-btn" data-value="6">6</button>
-                    <button class="rating-btn" data-value="7">7</button>
-                    <button class="rating-btn" data-value="8">8</button>
-                    <button class="rating-btn" data-value="9">9</button>
-                    <button class="rating-btn" data-value="10">10</button>
-
-                </div>
-
-                <div class="rating-labels">
-
-                    <span>
-
-                        Not Prepared
-
-                    </span>
-
-                    <span>
-
-                        Fully Prepared
-
-                    </span>
-
-                </div>
-
-            </article>
-
-            <!--==============================================
-            Question 04
-            ==============================================-->
-
-            <article
-                class="fri-card hidden"
-                data-question="4">
-
-                <div class="question-number">
-
-                    04
-
-                </div>
-
-                <h2 class="question-ta">
-
-                    உங்களுடைய
-
-                    கடன்கள்
-
-                    உங்கள் மனஅமைதியை
-
-                    எவ்வளவு
-
-                    பாதிக்கின்றன?
-
-                </h2>
-
-                <p class="question-en">
-
-                    To what extent
-
-                    do your debts
-
-                    affect
-
-                    your peace of mind?
-
-                </p>
-
-                <div
-                    class="rating-scale"
-                    data-question="4">
-
-                    <button class="rating-btn" data-value="1">1</button>
-                    <button class="rating-btn" data-value="2">2</button>
-                    <button class="rating-btn" data-value="3">3</button>
-                    <button class="rating-btn" data-value="4">4</button>
-                    <button class="rating-btn" data-value="5">5</button>
-                    <button class="rating-btn" data-value="6">6</button>
-                    <button class="rating-btn" data-value="7">7</button>
-                    <button class="rating-btn" data-value="8">8</button>
-                    <button class="rating-btn" data-value="9">9</button>
-                    <button class="rating-btn" data-value="10">10</button>
-
-                </div>
-
-                <div class="rating-labels">
-
-                    <span>
-
-                        Severe Stress
-
-                    </span>
-
-                    <span>
-
-                        No Debt Stress
-
-                    </span>
-
-                </div>
-
-            </article>
-
-
-
-            <!--==============================================
-            Question 05
-            ==============================================-->
-
-            <article
-                class="fri-card hidden"
-                data-question="5">
-
-                <div class="question-number">
-
-                    05
-
-                </div>
-
-                <h2 class="question-ta">
-
-                    உங்கள்
-
-                    வருமானம்
-
-                    உங்கள் குடும்பத்தின்
-
-                    தேவைகளை
-
-                    நம்பிக்கையுடன்
-
-                    பூர்த்தி செய்கிறதா?
-
-                </h2>
-
-                <p class="question-en">
-
-                    How confidently
-
-                    does your income
-
-                    meet your family's
-
-                    monthly needs?
-
-                </p>
-
-                <div
-                    class="rating-scale"
-                    data-question="5">
-
-                    <button class="rating-btn" data-value="1">1</button>
-                    <button class="rating-btn" data-value="2">2</button>
-                    <button class="rating-btn" data-value="3">3</button>
-                    <button class="rating-btn" data-value="4">4</button>
-                    <button class="rating-btn" data-value="5">5</button>
-                    <button class="rating-btn" data-value="6">6</button>
-                    <button class="rating-btn" data-value="7">7</button>
-                    <button class="rating-btn" data-value="8">8</button>
-                    <button class="rating-btn" data-value="9">9</button>
-                    <button class="rating-btn" data-value="10">10</button>
-
-                </div>
-
-                <div class="rating-labels">
-
-                    <span>
-
-                        Never Enough
-
-                    </span>
-
-                    <span>
-
-                        More Than Enough
-
-                    </span>
-
-                </div>
-
-            </article>
-
-
-
-            <!--==============================================
-            Question 06
-            ==============================================-->
-
-            <article
-                class="fri-card hidden"
-                data-question="6">
-
-                <div class="question-number">
-
-                    06
-
-                </div>
-
-                <h2 class="question-ta">
-
-                    உங்கள்
-
-                    எதிர்கால நிதி வாழ்க்கை
-
-                    குறித்து
-
-                    உங்களுக்கு
-
-                    எவ்வளவு
-
-                    நம்பிக்கை உள்ளது?
-
-                </h2>
-
-                <p class="question-en">
-
-                    How confident
-
-                    are you
-
-                    about your
-
-                    financial future?
-
-                </p>
-
-                <div
-                    class="rating-scale"
-                    data-question="6">
-
-                    <button class="rating-btn" data-value="1">1</button>
-                    <button class="rating-btn" data-value="2">2</button>
-                    <button class="rating-btn" data-value="3">3</button>
-                    <button class="rating-btn" data-value="4">4</button>
-                    <button class="rating-btn" data-value="5">5</button>
-                    <button class="rating-btn" data-value="6">6</button>
-                    <button class="rating-btn" data-value="7">7</button>
-                    <button class="rating-btn" data-value="8">8</button>
-                    <button class="rating-btn" data-value="9">9</button>
-                    <button class="rating-btn" data-value="10">10</button>
-
-                </div>
-
-                <div class="rating-labels">
-
-                    <span>
-
-                        Very Uncertain
-
-                    </span>
-
-                    <span>
-
-                        Very Confident
-
-                    </span>
-
-                </div>
-
-            </article>
-
-            <!--==============================================
-            Question 07
-            ==============================================-->
-
-            <article
-                class="fri-card hidden"
-                data-question="7">
-
-                <div class="question-number">
-
-                    07
-
-                </div>
-
-                <h2 class="question-ta">
-
-                    உங்கள்
-
-                    வருமானத்தை
-
-                    அதிகரிக்க
-
-                    உங்களிடம்
-
-                    தெளிவான
-
-                    திட்டம் உள்ளதா?
-
-                </h2>
-
-                <p class="question-en">
-
-                    How clear
-
-                    is your plan
-
-                    to increase
-
-                    your income
-
-                    over the next
-
-                    few years?
-
-                </p>
-
-                <div
-                    class="rating-scale"
-                    data-question="7">
-
-                    <button class="rating-btn" data-value="1">1</button>
-                    <button class="rating-btn" data-value="2">2</button>
-                    <button class="rating-btn" data-value="3">3</button>
-                    <button class="rating-btn" data-value="4">4</button>
-                    <button class="rating-btn" data-value="5">5</button>
-                    <button class="rating-btn" data-value="6">6</button>
-                    <button class="rating-btn" data-value="7">7</button>
-                    <button class="rating-btn" data-value="8">8</button>
-                    <button class="rating-btn" data-value="9">9</button>
-                    <button class="rating-btn" data-value="10">10</button>
-
-                </div>
-
-                <div class="rating-labels">
-
-                    <span>
-
-                        No Plan
-
-                    </span>
-
-                    <span>
-
-                        Crystal Clear Plan
-
-                    </span>
-
-                </div>
-
-            </article>
-
-
-
-            <!--==============================================
-            Question 08
-            ==============================================-->
-
-            <article
-                class="fri-card hidden"
-                data-question="8">
-
-                <div class="question-number">
-
-                    08
-
-                </div>
-
-                <h2 class="question-ta">
-
-                    உங்கள்
-
-                    பணத்தை
-
-                    புத்திசாலித்தனமாக
-
-                    முதலீடு செய்வதில்
-
-                    உங்களுக்கு
-
-                    எவ்வளவு நம்பிக்கை உள்ளது?
-
-                </h2>
-
-                <p class="question-en">
-
-                    How confident
-
-                    are you
-
-                    in making
-
-                    wise investment
-
-                    decisions?
-
-                </p>
-
-                <div
-                    class="rating-scale"
-                    data-question="8">
-
-                    <button class="rating-btn" data-value="1">1</button>
-                    <button class="rating-btn" data-value="2">2</button>
-                    <button class="rating-btn" data-value="3">3</button>
-                    <button class="rating-btn" data-value="4">4</button>
-                    <button class="rating-btn" data-value="5">5</button>
-                    <button class="rating-btn" data-value="6">6</button>
-                    <button class="rating-btn" data-value="7">7</button>
-                    <button class="rating-btn" data-value="8">8</button>
-                    <button class="rating-btn" data-value="9">9</button>
-                    <button class="rating-btn" data-value="10">10</button>
-
-                </div>
-
-                <div class="rating-labels">
-
-                    <span>
-
-                        Not Confident
-
-                    </span>
-
-                    <span>
-
-                        Highly Confident
-
-                    </span>
-
-                </div>
-
-            </article>
-
-
-
-            <!--==============================================
-            Question 09
-            ==============================================-->
-
-            <article
-                class="fri-card hidden"
-                data-question="9">
-
-                <div class="question-number">
-
-                    09
-
-                </div>
-
-                <h2 class="question-ta">
-
-                    இன்று
-
-                    உங்கள் வாழ்க்கை
-
-                    நீங்கள் விரும்பும்
-
-                    நிதி சுதந்திரத்தை
-
-                    நோக்கி
-
-                    நகர்கிறதா?
-
-                </h2>
-
-                <p class="question-en">
-
-                    Is your life
-
-                    moving towards
-
-                    the financial freedom
-
-                    you truly desire?
-
-                </p>
-
-                <div
-                    class="rating-scale"
-                    data-question="9">
-
-                    <button class="rating-btn" data-value="1">1</button>
-                    <button class="rating-btn" data-value="2">2</button>
-                    <button class="rating-btn" data-value="3">3</button>
-                    <button class="rating-btn" data-value="4">4</button>
-                    <button class="rating-btn" data-value="5">5</button>
-                    <button class="rating-btn" data-value="6">6</button>
-                    <button class="rating-btn" data-value="7">7</button>
-                    <button class="rating-btn" data-value="8">8</button>
-                    <button class="rating-btn" data-value="9">9</button>
-                    <button class="rating-btn" data-value="10">10</button>
-
-                </div>
-
-                <div class="rating-labels">
-
-                    <span>
-
-                        Moving Away
-
-                    </span>
-
-                    <span>
-
-                        Definitely Moving Forward
-
-                    </span>
-
-                </div>
-
-            </article>
-
-            <!--==============================================
-            Question 10
-            ==============================================-->
-
-            <article
-                class="fri-card hidden"
-                data-question="10">
-
-                <div class="question-number">
+                <button
+                    class="rating-btn"
+                    data-value="10">
 
                     10
 
-                </div>
+                </button>
 
-                <h2 class="question-ta">
+            </div>
 
-                    இன்று
+            <div class="rating-labels">
 
-                    உங்கள் நிதி வாழ்க்கைக்கு
+                <span>
 
-                    நீங்கள்
+                    Very Low
 
-                    மொத்தத்தில்
+                </span>
 
-                    என்ன மதிப்பெண்
+                <span>
 
-                    வழங்குவீர்கள்?
+                    Excellent
 
-                </h2>
+                </span>
 
-                <p class="question-en">
-
-                    Overall,
-
-                    how would you rate
-
-                    your financial reality
-
-                    today?
-
-                </p>
-
-                <div
-                    class="rating-scale"
-                    data-question="10">
-
-                    <button class="rating-btn" data-value="1">1</button>
-                    <button class="rating-btn" data-value="2">2</button>
-                    <button class="rating-btn" data-value="3">3</button>
-                    <button class="rating-btn" data-value="4">4</button>
-                    <button class="rating-btn" data-value="5">5</button>
-                    <button class="rating-btn" data-value="6">6</button>
-                    <button class="rating-btn" data-value="7">7</button>
-                    <button class="rating-btn" data-value="8">8</button>
-                    <button class="rating-btn" data-value="9">9</button>
-                    <button class="rating-btn" data-value="10">10</button>
-
-                </div>
-
-                <div class="rating-labels">
-
-                    <span>
-
-                        Extremely Poor
-
-                    </span>
-
-                    <span>
-
-                        Excellent
-
-                    </span>
-
-                </div>
-
-            </article>
+            </div>
 
         </section>
 
-
-
         <!--==================================================
-        Financial Analysis
+        Analysis Panel
+
+        Hidden until all
+        ten reflections
+        are completed.
+
         ==================================================-->
 
         <section
-            id="fri-analysis"
-            class="fri-analysis hidden">
+
+            id="analysis-panel"
+
+            class="analysis-panel hidden">
 
             <div class="analysis-card">
 
                 <div class="analysis-icon">
 
-                    🧠
+                    <img
+
+                        src="assets/icons/analysis.svg"
+
+                        alt="Analysis">
 
                 </div>
 
-                <h2 class="analysis-title">
+                <h2 class="analysis-title-ta">
 
-                    உங்கள் நிதி நிலையை
+                    உங்கள்
+
+                    நிதி வாழ்க்கையை
 
                     ஆய்வு செய்கிறோம்...
 
                 </h2>
 
-                <div class="analysis-title-en">
+                <p class="analysis-title-en">
 
-                    ANALYSING YOUR FINANCIAL REALITY
+                    ANALYSING YOUR
+
+                    FINANCIAL REALITY
+
+                </p>
+
+                <div class="analysis-divider">
+
+                    <span></span>
 
                 </div>
 
-                <div class="analysis-progress">
+                <div class="analysis-items">
 
-                    <div class="analysis-item">
+                    <div
+                        id="analysis-item-1"
+                        class="analysis-item">
 
-                        <span class="analysis-check">
-
-                            ✓
-
-                        </span>
-
-                        உங்கள் பதில்களை
+                        ✓ உங்கள் பதில்களை
                         மதிப்பிடுகிறோம்
 
                     </div>
 
-                    <div class="analysis-item">
+                    <div
+                        id="analysis-item-2"
+                        class="analysis-item">
 
-                        <span class="analysis-check">
-
-                            ✓
-
-                        </span>
-
-                        உங்கள் நிதி நிலையை
-                        கணக்கிடுகிறோம்
+                        ✓ உங்கள் நிதி
+                        பழக்கங்களை
+                        ஆய்வு செய்கிறோம்
 
                     </div>
 
-                    <div class="analysis-item">
+                    <div
+                        id="analysis-item-3"
+                        class="analysis-item">
 
-                        <span class="analysis-check">
-
-                            ✓
-
-                        </span>
-
-                        உங்கள் தனிப்பட்ட
-                        நிதி பார்வையை
-                        உருவாக்குகிறோம்
+                        ✓ Financial Reality Index™
+                        உருவாக்கப்படுகிறது
 
                     </div>
 
@@ -1118,15 +402,21 @@ Responsibility
 
         <!--==================================================
         Financial Reality Index™
+
+        Hidden until
+        analysis completes.
+
         ==================================================-->
 
         <section
-            id="fri-result"
-            class="fri-result hidden">
 
-            <div class="fri-result-card">
+            id="result-panel"
 
-                <div class="fri-caption">
+            class="result-panel hidden">
+
+            <div class="result-card">
+
+                <div class="result-caption-ta">
 
                     உங்கள்
 
@@ -1134,25 +424,39 @@ Responsibility
 
                 </div>
 
-                <div class="fri-caption-en">
+                <div class="result-caption-en">
 
-                    YOUR FINANCIAL REALITY INDEX™
+                    YOUR FINANCIAL
+
+                    REALITY INDEX™
 
                 </div>
 
+                <div class="premium-divider">
+
+                    <span></span>
+
+                </div>
+
+
+
+                <!--==========================================
+                Animated Score
+                ==========================================-->
+
                 <div
-                    id="fri-score-circle"
-                    class="fri-score-circle">
+                    id="score-circle"
+                    class="score-circle">
 
                     <div
-                        id="fri-score-value"
-                        class="fri-score-value">
+                        id="score-value"
+                        class="score-value">
 
                         0
 
                     </div>
 
-                    <div class="fri-score-label">
+                    <div class="score-label">
 
                         /100
 
@@ -1160,17 +464,139 @@ Responsibility
 
                 </div>
 
+
+
+                <!--==========================================
+                Score Status
+                ==========================================-->
+
                 <div
-                    id="fri-score-status"
-                    class="fri-score-status">
+
+                    id="score-status"
+
+                    class="score-status">
 
                 </div>
 
+
+
+                <!--==========================================
+                Personal Insight
+                ==========================================-->
+
                 <div
-                    id="fri-score-message"
-                    class="fri-score-message">
+
+                    id="score-message"
+
+                    class="score-message">
 
                 </div>
+
+            </div>
+
+        </section>
+
+        <!--==================================================
+        Reflection Summary
+
+        Displayed after
+        Financial Reality Index™
+
+        ==================================================-->
+
+        <section
+
+            id="reflection-summary"
+
+            class="reflection-summary hidden">
+
+            <div class="summary-card">
+
+                <h2 class="summary-title-ta">
+
+                    <span class="visitor-name">
+
+                        நண்பரே
+
+                    </span>,
+
+                    <br><br>
+
+                    இதுவே
+
+                    உங்கள் தற்போதைய
+
+                    நிதி நிலை.
+
+                </h2>
+
+                <p class="summary-title-en">
+
+                    <span class="visitor-name-inline">
+
+                        Friend
+
+                    </span>,
+
+                    <br><br>
+
+                    This is your
+
+                    Financial Reality
+
+                    today.
+
+                </p>
+
+                <div class="premium-divider">
+
+                    <span></span>
+
+                </div>
+
+                <p class="summary-message-ta">
+
+                    இந்த மதிப்பெண்
+
+                    உங்களை
+
+                    மதிப்பிடுவதற்காக அல்ல.
+
+                    <br><br>
+
+                    உங்கள்
+
+                    தற்போதைய நிலையை
+
+                    தெளிவாக
+
+                    புரிந்துகொள்ள
+
+                    உதவுவதற்காக.
+
+                </p>
+
+                <p class="summary-message-en">
+
+                    This score
+
+                    is not a judgement.
+
+                    <br><br>
+
+                    It is simply
+
+                    a clear picture
+
+                    of where you are today,
+
+                    so that together
+
+                    we can discover
+
+                    the next steps.
+
+                </p>
 
             </div>
 
@@ -1180,9 +606,10 @@ Responsibility
 
         <!--==================================================
         Premium Navigator
+
         ==================================================-->
 
-        <footer class="cta-block">
+        <footer class="journey-footer">
 
             <button
 
@@ -1196,25 +623,34 @@ Responsibility
 
                 disabled>
 
-                <div class="nav-decoration"></div>
+                <div class="nav-divider">
 
-                <div class="nav-tamil">
+                    <span></span>
 
-                    என் நிதி MRI™
+                </div>
+
+                <div class="nav-title-ta">
+
+                    என்
+
+                    Financial MRI™
+
                     அறிக்கையை
+
                     பார்க்கலாம்
 
                 </div>
 
-                <div class="nav-arrows">
+                <div class="nav-arrow">
 
                     ↓
 
                 </div>
 
-                <div class="nav-english">
+                <div class="nav-title-en">
 
                     VIEW MY
+
                     FINANCIAL MRI™
 
                 </div>
