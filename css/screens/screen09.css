@@ -1,1 +1,548 @@
 
+/*
+======================================================================
+
+CTM PATH™ Guided Journey v6.0
+
+SCREEN 09 — YOUR CHOICE™
+
+File:
+css/screens/screen09.css
+
+Purpose:
+Premium visual styling
+
+======================================================================
+*/
+
+
+
+/*==================================================
+Screen Base
+==================================================*/
+
+.screen09{
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            rgba(32,213,199,.08),
+            transparent 58%
+        ),
+
+        #081C3A;
+
+}
+
+
+
+
+/*==================================================
+Content
+==================================================*/
+
+.screen09 .screen-content{
+
+    width:min(92%,760px);
+
+    text-align:center;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+
+
+
+/*==================================================
+Illustration
+==================================================*/
+
+.screen09 .screen-image{
+
+    width:210px;
+
+    margin-bottom:24px;
+
+}
+
+
+
+
+/*==================================================
+Visitor Greeting
+==================================================*/
+
+.screen09 .personal-greeting{
+
+    color:#E3C47A;
+
+    font-family:
+
+        "Playfair Display",
+
+        serif;
+
+    font-size:
+
+        clamp(2rem,4vw,2.8rem);
+
+    font-weight:600;
+
+    letter-spacing:.08em;
+
+    margin-bottom:20px;
+
+    text-shadow:
+
+        0 0 18px
+
+        rgba(214,181,108,.35);
+
+}
+
+
+
+
+/*==================================================
+Dream Icons
+==================================================*/
+
+.dream-icons{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+    gap:18px;
+
+    margin-bottom:32px;
+
+}
+
+
+
+.dream-icons span{
+
+    width:64px;
+
+    height:64px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+
+        rgba(255,255,255,.05);
+
+    border:
+
+        1px solid
+
+        rgba(214,181,108,.22);
+
+    font-size:2rem;
+
+    transition:.30s;
+
+}
+
+
+
+.dream-icons span:hover{
+
+    transform:
+
+        translateY(-4px);
+
+    border-color:#20D5C7;
+
+    box-shadow:
+
+        0 8px 24px
+
+        rgba(32,213,199,.25);
+
+}
+
+
+
+
+/*==================================================
+Title
+==================================================*/
+
+.screen09 .screen-title{
+
+    color:#FFF8E7;
+
+    font-size:
+
+        clamp(2rem,4vw,3rem);
+
+    line-height:1.45;
+
+    font-weight:700;
+
+    margin:0;
+
+}
+
+
+
+
+/*==================================================
+Subtitle
+==================================================*/
+
+.screen09 .screen-subtitle{
+
+    margin-top:16px;
+
+    color:#D6B56C;
+
+    font-size:.85rem;
+
+    letter-spacing:.24em;
+
+    text-transform:uppercase;
+
+}
+
+
+
+
+/*==================================================
+Messages
+==================================================*/
+
+.screen09 .screen-message{
+
+    margin-top:34px;
+
+    max-width:640px;
+
+}
+
+
+
+.screen09 .screen-message.tamil{
+
+    color:#FFF8E7;
+
+    font-size:1.12rem;
+
+    line-height:2;
+
+}
+
+
+
+.screen09 .screen-message.english{
+
+    margin-top:28px;
+
+    color:
+
+        rgba(255,248,231,.72);
+
+    font-size:.92rem;
+
+    line-height:1.8;
+
+}
+
+/*==================================================
+Premium Navigator
+==================================================*/
+
+.screen09 .journey-next{
+
+    margin-top:50px;
+
+    background:none;
+
+    border:none;
+
+    cursor:pointer;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    transition:
+
+        transform .25s ease,
+
+        opacity .25s ease;
+
+}
+
+.screen09 .journey-next:hover{
+
+    transform:
+
+        translateY(-3px);
+
+}
+
+
+
+
+/*==================================================
+Gold Divider
+==================================================*/
+
+.screen09 .nav-decoration{
+
+    width:240px;
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+.screen09 .nav-decoration::before,
+
+.screen09 .nav-decoration::after{
+
+    content:"";
+
+    flex:1;
+
+    height:2px;
+
+    background:#D6B56C;
+
+}
+
+.screen09 .nav-dot{
+
+    width:10px;
+
+    height:10px;
+
+    margin:0 14px;
+
+    border-radius:50%;
+
+    background:#D6B56C;
+
+}
+
+
+
+
+/*==================================================
+Navigator Text
+==================================================*/
+
+.screen09 .nav-tamil{
+
+    margin-top:18px;
+
+    color:#D6B56C;
+
+    font-size:1.35rem;
+
+    font-weight:700;
+
+    letter-spacing:.02em;
+
+}
+
+.screen09 .nav-arrows{
+
+    margin:12px 0;
+
+    color:#D6B56C;
+
+    font-size:1.15rem;
+
+    letter-spacing:.45em;
+
+}
+
+.screen09 .nav-english{
+
+    color:#D6B56C;
+
+    font-size:.84rem;
+
+    font-weight:600;
+
+    letter-spacing:.24em;
+
+    text-transform:uppercase;
+
+}
+
+
+
+
+/*==================================================
+Premium Fade Animation
+==================================================*/
+
+@keyframes dreamGlow{
+
+    0%{
+
+        transform:scale(1);
+
+        box-shadow:none;
+
+    }
+
+    50%{
+
+        transform:scale(1.08);
+
+        box-shadow:
+
+            0 0 22px
+
+            rgba(32,213,199,.30);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+        box-shadow:none;
+
+    }
+
+}
+
+.dream-icons span{
+
+    animation:
+
+        dreamGlow
+
+        3.5s
+
+        infinite;
+
+}
+
+
+
+
+/*==================================================
+Responsive
+==================================================*/
+
+@media(max-width:700px){
+
+    .screen09 .screen-image{
+
+        width:170px;
+
+    }
+
+    .dream-icons{
+
+        gap:12px;
+
+    }
+
+    .dream-icons span{
+
+        width:54px;
+
+        height:54px;
+
+        font-size:1.7rem;
+
+    }
+
+    .screen09 .screen-message.tamil{
+
+        font-size:1rem;
+
+        line-height:1.9;
+
+    }
+
+    .screen09 .screen-message.english{
+
+        font-size:.86rem;
+
+    }
+
+    .screen09 .nav-decoration{
+
+        width:200px;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .dream-icons{
+
+        gap:10px;
+
+    }
+
+    .dream-icons span{
+
+        width:48px;
+
+        height:48px;
+
+        font-size:1.45rem;
+
+    }
+
+    .screen09 .screen-title{
+
+        font-size:1.8rem;
+
+    }
+
+    .screen09 .nav-tamil{
+
+        font-size:1.2rem;
+
+    }
+
+    .screen09 .nav-english{
+
+        font-size:.76rem;
+
+    }
+
+}
+
