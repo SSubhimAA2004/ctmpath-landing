@@ -1,7 +1,7 @@
 
 /*======================================================================
 
-CTM PATH™ Guided Journey v6.1
+CTM PATH™ Guided Journey v6.2
 
 File
 css/screens/screen01.css
@@ -11,15 +11,18 @@ Screen 01 — The Invitation™
 
 Responsibility
 • Premium opening experience
-• SVG Logo positioning
 • Hero composition
 • Tamil-first typography
 • Emotional connection
-• Premium Journey Navigator
 • Responsive behaviour
 
+Foundation Components Used
+• heroIcon.css
+• divider.css
+• journeyNavigator.css
+
 Design Language
-CTM PATH™ Premium Design System v1.0
+CTM PATH™ Premium Design System v1.1
 
 ======================================================================*/
 
@@ -54,10 +57,6 @@ Premium Hero Canvas
 
 /*==================================================
 Premium Background Atmosphere
-
-Deep Navy
-Soft Gold
-Premium Teal
 
 ==================================================*/
 
@@ -164,8 +163,6 @@ Main Container
 /*==================================================
 Hero Layout
 
-Premium Vertical Rhythm
-
 ==================================================*/
 
 #screen01 .hero{
@@ -186,15 +183,22 @@ Premium Vertical Rhythm
 
     text-align:center;
 
-    gap:0;
-
 }
 
 
 /*==================================================
-CTM PATH™ SVG Logo
+Hero Logo
 
-Premium Brand Presentation
+Foundation:
+heroIcon.css provides
+
+• Size
+• Glow
+• Float
+• Motion
+
+Only Screen 01 specific
+branding adjustments remain here.
 
 ==================================================*/
 
@@ -204,119 +208,7 @@ Premium Brand Presentation
 
     z-index:5;
 
-    display:block;
-
-    width:310px;
-
-    height:auto;
-
-    margin:
-
-        0
-        auto
-        56px;
-
-    object-fit:contain;
-
-    background:transparent;
-
-    opacity:1;
-
-    visibility:visible;
-
-    filter:
-
-        drop-shadow(
-            0 28px 70px rgba(0,0,0,.48)
-        )
-
-        drop-shadow(
-            0 0 52px rgba(217,181,106,.14)
-        )
-
-        drop-shadow(
-            0 0 110px rgba(0,194,184,.06)
-        );
-
-    transition:
-
-        transform .45s var(--ease-premium),
-
-        filter .45s var(--ease-premium);
-
 }
-
-
-/*==================================================
-Premium Logo Interaction
-
-==================================================*/
-
-#screen01 .hero-logo:hover{
-
-    transform:
-
-        translateY(-3px)
-        scale(1.01);
-
-    filter:
-
-        drop-shadow(
-            0 32px 82px rgba(0,0,0,.50)
-        )
-
-        drop-shadow(
-            0 0 60px rgba(217,181,106,.18)
-        )
-
-        drop-shadow(
-            0 0 120px rgba(0,194,184,.08)
-        );
-
-}
-
-/*==================================================
-Screen Caption
-
-Premium Identity Caption
-
-==================================================*/
-
-#screen01 .screen-caption{
-
-    margin:
-
-        0
-        auto
-        28px;
-
-    font-family:
-
-        var(--font-english),
-        sans-serif;
-
-    font-size:
-
-        .82rem;
-
-    font-weight:
-
-        500;
-
-    letter-spacing:
-
-        .42em;
-
-    text-transform:
-
-        uppercase;
-
-    color:
-
-        rgba(255,255,255,.58);
-
-}
-
 
 
 /*==================================================
@@ -339,11 +231,8 @@ Welcome Block
 }
 
 
-
 /*==================================================
 Tamil Welcome Heading
-
-Premium Hero Heading
 
 ==================================================*/
 
@@ -364,28 +253,17 @@ Premium Hero Heading
             3.9rem
         );
 
-    font-weight:
+    font-weight:700;
 
-        700;
+    line-height:1.42;
 
-    line-height:
+    letter-spacing:-.01em;
 
-        1.42;
+    color:var(--color-white);
 
-    letter-spacing:
-
-        -.01em;
-
-    color:
-
-        var(--color-white);
-
-    text-wrap:
-
-        balance;
+    text-wrap:balance;
 
 }
-
 
 
 /*==================================================
@@ -395,9 +273,7 @@ English Welcome
 
 #screen01 .english-welcome{
 
-    margin-top:
-
-        18px;
+    margin-top:18px;
 
     font-family:
 
@@ -412,105 +288,15 @@ English Welcome
             1.2rem
         );
 
-    font-weight:
+    font-weight:500;
 
-        500;
+    letter-spacing:.34em;
 
-    letter-spacing:
-
-        .34em;
-
-    text-transform:
-
-        uppercase;
+    text-transform:uppercase;
 
     color:
 
         rgba(255,255,255,.72);
-
-}
-
-
-
-/*==================================================
-CTM Signature Divider
-
-==================================================*/
-
-#screen01 .gold-divider{
-
-    position:relative;
-
-    width:180px;
-
-    height:1px;
-
-    margin:
-
-        0
-        auto
-        56px;
-
-    background:
-
-        linear-gradient(
-
-            90deg,
-
-            transparent,
-
-            rgba(212,175,55,.28),
-
-            var(--color-gold),
-
-            rgba(212,175,55,.28),
-
-            transparent
-
-        );
-
-}
-
-
-#screen01 .gold-divider::before{
-
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-
-    top:50%;
-
-    width:8px;
-
-    height:8px;
-
-    transform:
-
-        translate(-50%,-50%);
-
-    border-radius:50%;
-
-    background:
-
-        var(--color-gold);
-
-    box-shadow:
-
-        0 0 12px rgba(212,175,55,.40);
-
-}
-
-
-#screen01 .gold-divider.small{
-
-    width:130px;
-
-    margin:
-
-        48px
-        auto;
 
 }
 
@@ -564,33 +350,23 @@ Tamil Introduction
             1.55rem
         );
 
-    font-weight:
+    font-weight:500;
 
-        500;
+    line-height:2.05;
 
-    line-height:
-
-        2.05;
-
-    letter-spacing:
-
-        -.01em;
+    letter-spacing:-.01em;
 
     color:
 
         rgba(255,255,255,.96);
 
-    text-wrap:
-
-        balance;
+    text-wrap:balance;
 
 }
 
 
 /*==================================================
-Visitor Name
-
-Premium Identity Highlight
+Hero Name
 
 ==================================================*/
 
@@ -600,13 +376,9 @@ Premium Identity Highlight
 
         var(--color-ivory);
 
-    font-weight:
+    font-weight:700;
 
-        700;
-
-    letter-spacing:
-
-        .01em;
+    letter-spacing:.01em;
 
 }
 
@@ -622,9 +394,7 @@ Gold Accent
 
         var(--color-gold);
 
-    font-weight:
-
-        600;
+    font-weight:600;
 
 }
 
@@ -653,33 +423,29 @@ English Introduction
             1.15rem
         );
 
-    font-weight:
+    font-weight:400;
 
-        400;
+    line-height:2;
 
-    line-height:
-
-        2;
-
-    letter-spacing:
-
-        .02em;
+    letter-spacing:.02em;
 
     color:
 
         rgba(255,255,255,.78);
 
-    text-wrap:
-
-        balance;
+    text-wrap:balance;
 
 }
 
 
 /*==================================================
-Journey Navigator Area
+CTA Area
 
-CTM PATH™ Standard Component
+Navigator styling is now provided by:
+
+css/foundation/journeyNavigator.css
+
+Only screen-specific spacing remains here.
 
 ==================================================*/
 
@@ -697,260 +463,9 @@ CTM PATH™ Standard Component
 
 }
 
-/*==================================================
-Premium Journey Navigator
-
-CTM PATH™ Standard Navigation Component
-
-==================================================*/
-
-#screen01 .journey-next{
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:16px;
-
-    padding:0;
-
-    border:none;
-
-    background:transparent;
-
-    cursor:pointer;
-
-    color:var(--color-gold);
-
-    text-align:center;
-
-    transition:
-
-        transform .40s var(--ease-premium),
-
-        opacity .40s var(--ease-premium),
-
-        filter .40s var(--ease-premium);
-
-}
-
-
-/*==================================================
-Navigator Decorative Lines
-
-==================================================*/
-
-#screen01 .nav-decoration{
-
-    position:relative;
-
-    display:block;
-
-    width:150px;
-
-    height:1px;
-
-    background:
-
-        linear-gradient(
-
-            90deg,
-
-            transparent,
-
-            rgba(212,175,55,.25),
-
-            var(--color-gold),
-
-            rgba(212,175,55,.25),
-
-            transparent
-
-        );
-
-    opacity:.90;
-
-    transition:
-
-        width .35s var(--ease-premium),
-
-        opacity .35s var(--ease-premium);
-
-}
-
-
-#screen01 .nav-decoration::before{
-
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-
-    top:50%;
-
-    width:6px;
-
-    height:6px;
-
-    transform:translate(-50%,-50%);
-
-    border-radius:50%;
-
-    background:var(--color-gold);
-
-    box-shadow:
-
-        0 0 10px rgba(212,175,55,.40);
-
-}
-
-
-/*==================================================
-Tamil Navigation
-
-==================================================*/
-
-#screen01 .nav-tamil{
-
-    font-family:
-
-        var(--font-tamil),
-        sans-serif;
-
-    font-size:
-
-        clamp(
-            1.35rem,
-            2vw,
-            1.50rem
-        );
-
-    font-weight:700;
-
-    line-height:1.4;
-
-    color:var(--color-gold);
-
-    letter-spacing:.02em;
-
-}
-
-
-/*==================================================
-Journey Arrows
-
-==================================================*/
-
-#screen01 .nav-arrows{
-
-    font-size:1.45rem;
-
-    line-height:1;
-
-    letter-spacing:10px;
-
-    color:var(--color-gold);
-
-    transition:
-
-        letter-spacing .35s var(--ease-premium),
-
-        transform .35s var(--ease-premium);
-
-}
-
-
-/*==================================================
-English Navigation
-
-==================================================*/
-
-#screen01 .nav-english{
-
-    font-family:
-
-        var(--font-english),
-        sans-serif;
-
-    font-size:.82rem;
-
-    font-weight:500;
-
-    letter-spacing:.42em;
-
-    text-transform:uppercase;
-
-    color:rgba(255,255,255,.78);
-
-}
-
-
-/*==================================================
-Premium Hover State
-
-==================================================*/
-
-#screen01 .journey-next:hover{
-
-    transform:
-
-        translateY(-2px);
-
-    filter:
-
-        drop-shadow(
-
-            0 0 18px rgba(212,175,55,.18)
-
-        );
-
-}
-
-
-#screen01 .journey-next:hover .nav-decoration{
-
-    width:170px;
-
-    opacity:1;
-
-}
-
-
-#screen01 .journey-next:hover .nav-arrows{
-
-    letter-spacing:13px;
-
-}
-
-
-/*==================================================
-Keyboard Accessibility
-
-==================================================*/
-
-#screen01 .journey-next:focus-visible{
-
-    outline:none;
-
-    filter:
-
-        drop-shadow(
-
-            0 0 16px rgba(212,175,55,.22)
-
-        );
-
-}
 
 /*==================================================
 Hero Entrance Animation
-
-Premium Cinematic Motion
 
 ==================================================*/
 
@@ -968,7 +483,7 @@ Premium Cinematic Motion
 
 @keyframes screen01HeroReveal{
 
-    0%{
+    from{
 
         opacity:0;
 
@@ -979,7 +494,7 @@ Premium Cinematic Motion
 
     }
 
-    100%{
+    to{
 
         opacity:1;
 
@@ -994,13 +509,11 @@ Premium Cinematic Motion
 
 
 /*==================================================
-Progressive Reveal Timing
-
-Premium Storytelling Rhythm
+Progressive Reveal
 
 ==================================================*/
 
-#screen01 .hero-logo{
+#screen01 .hero-icon{
 
     animation:
 
@@ -1024,7 +537,7 @@ Premium Storytelling Rhythm
 }
 
 
-#screen01 .gold-divider:first-of-type{
+#screen01 .introduction-block{
 
     animation:
 
@@ -1036,37 +549,13 @@ Premium Storytelling Rhythm
 }
 
 
-#screen01 .introduction-block{
-
-    animation:
-
-        screen01Fade
-        .9s
-        .75s
-        both;
-
-}
-
-
-#screen01 .gold-divider.small{
-
-    animation:
-
-        screen01Fade
-        .9s
-        .95s
-        both;
-
-}
-
-
 #screen01 .cta-block{
 
     animation:
 
         screen01Fade
         .9s
-        1.15s
+        .75s
         both;
 
 }
@@ -1083,9 +572,7 @@ Premium Storytelling Rhythm
             translateY(-18px)
             scale(.96);
 
-        filter:
-
-            blur(2px);
+        filter:blur(2px);
 
     }
 
@@ -1098,9 +585,7 @@ Premium Storytelling Rhythm
             translateY(0)
             scale(1);
 
-        filter:
-
-            blur(0);
+        filter:blur(0);
 
     }
 
@@ -1131,9 +616,8 @@ Premium Storytelling Rhythm
 
 }
 
-
 /*==================================================
-Premium Desktop Optimisation
+Desktop Optimisation
 
 ==================================================*/
 
@@ -1149,19 +633,29 @@ Premium Desktop Optimisation
 
     }
 
+
     #screen01 .hero{
 
         max-width:720px;
 
     }
 
-    #screen01 .hero-logo{
 
-        width:330px;
+    /*------------------------------------------
+    Hero Icon
+
+    Size comes from heroIcon.css
+
+    Only desktop positioning here.
+
+    ------------------------------------------*/
+
+    #screen01 .hero-icon{
 
         margin-bottom:64px;
 
     }
+
 
     #screen01 .welcome-block{
 
@@ -1169,56 +663,32 @@ Premium Desktop Optimisation
 
     }
 
-    #screen01 .gold-divider{
 
-        margin-bottom:64px;
+    #screen01 .introduction-block{
+
+        max-width:680px;
+
+        gap:40px;
 
     }
 
-}
-
-
-/*==================================================
-Premium Motion Accessibility
-
-==================================================*/
-
-@media (prefers-reduced-motion:reduce){
-
-    #screen01 .fade-up,
-
-    #screen01 .hero-logo,
-
-    #screen01 .welcome-block,
-
-    #screen01 .gold-divider,
-
-    #screen01 .introduction-block,
 
     #screen01 .cta-block{
 
-        animation:none !important;
-
-        transition:none !important;
-
-        transform:none !important;
+        margin-top:64px;
 
     }
 
 }
+
+
 
 /*==================================================
 Tablet Responsive
 
-Premium Tablet Experience
-
 ==================================================*/
 
 @media (max-width:900px){
-
-    /*----------------------------------------------
-    Container
-    ----------------------------------------------*/
 
     #screen01 .container{
 
@@ -1231,33 +701,12 @@ Premium Tablet Experience
     }
 
 
-    /*----------------------------------------------
-    Hero Layout
-    ----------------------------------------------*/
-
     #screen01 .hero{
 
         max-width:680px;
 
     }
 
-
-    /*----------------------------------------------
-    Logo
-    ----------------------------------------------*/
-
-    #screen01 .hero-logo{
-
-        width:270px;
-
-        margin-bottom:48px;
-
-    }
-
-
-    /*----------------------------------------------
-    Welcome Block
-    ----------------------------------------------*/
 
     #screen01 .welcome-block{
 
@@ -1276,8 +725,6 @@ Premium Tablet Experience
                 3rem
             );
 
-        line-height:1.45;
-
     }
 
 
@@ -1291,35 +738,6 @@ Premium Tablet Experience
 
     }
 
-
-    /*----------------------------------------------
-    Divider
-    ----------------------------------------------*/
-
-    #screen01 .gold-divider{
-
-        width:150px;
-
-        margin-bottom:48px;
-
-    }
-
-
-    #screen01 .gold-divider.small{
-
-        width:110px;
-
-        margin:
-
-            40px
-            auto;
-
-    }
-
-
-    /*----------------------------------------------
-    Introduction
-    ----------------------------------------------*/
 
     #screen01 .introduction-block{
 
@@ -1346,56 +764,9 @@ Premium Tablet Experience
     }
 
 
-    /*----------------------------------------------
-    CTA
-    ----------------------------------------------*/
-
     #screen01 .cta-block{
 
         margin-top:48px;
-
-    }
-
-
-    /*----------------------------------------------
-    Navigator
-    ----------------------------------------------*/
-
-    #screen01 .nav-decoration{
-
-        width:125px;
-
-    }
-
-
-    #screen01 .journey-next:hover .nav-decoration{
-
-        width:140px;
-
-    }
-
-
-    #screen01 .nav-tamil{
-
-        font-size:1.30rem;
-
-    }
-
-
-    #screen01 .nav-arrows{
-
-        font-size:1.35rem;
-
-        letter-spacing:8px;
-
-    }
-
-
-    #screen01 .nav-english{
-
-        font-size:.80rem;
-
-        letter-spacing:.34em;
 
     }
 
@@ -1410,9 +781,9 @@ Premium Mobile Experience
 
 @media (max-width:600px){
 
-    /*----------------------------------------------
+    /*------------------------------------------
     Screen Layout
-    ----------------------------------------------*/
+    ------------------------------------------*/
 
     #screen01{
 
@@ -1425,9 +796,9 @@ Premium Mobile Experience
     }
 
 
-    /*----------------------------------------------
+    /*------------------------------------------
     Container
-    ----------------------------------------------*/
+    ------------------------------------------*/
 
     #screen01 .container{
 
@@ -1440,9 +811,9 @@ Premium Mobile Experience
     }
 
 
-    /*----------------------------------------------
-    Hero
-    ----------------------------------------------*/
+    /*------------------------------------------
+    Hero Layout
+    ------------------------------------------*/
 
     #screen01 .hero{
 
@@ -1453,44 +824,23 @@ Premium Mobile Experience
     }
 
 
-    /*----------------------------------------------
-    Premium Logo
+    /*------------------------------------------
+    Hero Icon
 
-    Optimised for Mobile
+    Size handled by heroIcon.css
 
-    ----------------------------------------------*/
+    ------------------------------------------*/
 
-    #screen01 .hero-logo{
+    #screen01 .hero-icon{
 
-        width:220px;
-
-        margin:
-
-            0
-            auto
-            42px;
-
-        filter:
-
-            drop-shadow(
-                0 22px 45px rgba(0,0,0,.58)
-            )
-
-            drop-shadow(
-                0 0 42px rgba(217,181,106,.16)
-            )
-
-            drop-shadow(
-                0 0 80px rgba(0,194,184,.05)
-            );
+        margin-bottom:42px;
 
     }
 
 
-    /*----------------------------------------------
-    Welcome
-
-    ----------------------------------------------*/
+    /*------------------------------------------
+    Welcome Block
+    ------------------------------------------*/
 
     #screen01 .welcome-block{
 
@@ -1504,9 +854,9 @@ Premium Mobile Experience
         font-size:
 
             clamp(
-                1.9rem,
+                1.90rem,
                 8vw,
-                2.4rem
+                2.45rem
             );
 
         line-height:1.42;
@@ -1525,36 +875,9 @@ Premium Mobile Experience
     }
 
 
-    /*----------------------------------------------
-    Divider
-
-    ----------------------------------------------*/
-
-    #screen01 .gold-divider{
-
-        width:120px;
-
-        margin-bottom:38px;
-
-    }
-
-
-    #screen01 .gold-divider.small{
-
-        width:92px;
-
-        margin:
-
-            34px
-            auto;
-
-    }
-
-
-    /*----------------------------------------------
+    /*------------------------------------------
     Introduction
-
-    ----------------------------------------------*/
+    ------------------------------------------*/
 
     #screen01 .introduction-block{
 
@@ -1578,70 +901,18 @@ Premium Mobile Experience
 
         font-size:.98rem;
 
-        line-height:1.8;
+        line-height:1.80;
 
     }
 
 
-    /*----------------------------------------------
+    /*------------------------------------------
     CTA
-
-    ----------------------------------------------*/
+    ------------------------------------------*/
 
     #screen01 .cta-block{
 
         margin-top:42px;
-
-    }
-
-
-    /*----------------------------------------------
-    Navigator
-
-    ----------------------------------------------*/
-
-    #screen01 .journey-next{
-
-        gap:14px;
-
-    }
-
-
-    #screen01 .nav-decoration{
-
-        width:96px;
-
-    }
-
-
-    #screen01 .journey-next:hover .nav-decoration{
-
-        width:108px;
-
-    }
-
-
-    #screen01 .nav-tamil{
-
-        font-size:1.18rem;
-
-    }
-
-
-    #screen01 .nav-arrows{
-
-        font-size:1.18rem;
-
-        letter-spacing:6px;
-
-    }
-
-
-    #screen01 .nav-english{
-
-        font-size:.72rem;
-
-        letter-spacing:.28em;
 
     }
 
@@ -1656,10 +927,6 @@ Premium Small Screen Experience
 
 @media (max-width:380px){
 
-    /*----------------------------------------------
-    Container
-    ----------------------------------------------*/
-
     #screen01 .container{
 
         padding:
@@ -1671,10 +938,6 @@ Premium Small Screen Experience
     }
 
 
-    /*----------------------------------------------
-    Hero
-    ----------------------------------------------*/
-
     #screen01 .hero{
 
         max-width:100%;
@@ -1682,32 +945,26 @@ Premium Small Screen Experience
     }
 
 
-    /*----------------------------------------------
-    Logo
-    ----------------------------------------------*/
+    /*------------------------------------------
+    Hero Icon
 
-    #screen01 .hero-logo{
+    ------------------------------------------*/
 
-        width:185px;
+    #screen01 .hero-icon{
 
-        margin:
-
-            0
-            auto
-            34px;
+        margin-bottom:34px;
 
     }
 
 
-    /*----------------------------------------------
+    /*------------------------------------------
     Welcome
-    ----------------------------------------------*/
+
+    ------------------------------------------*/
 
     #screen01 .tamil-welcome{
 
-        font-size:
-
-            1.72rem;
+        font-size:1.72rem;
 
         line-height:1.40;
 
@@ -1716,132 +973,44 @@ Premium Small Screen Experience
 
     #screen01 .english-welcome{
 
-        font-size:
+        font-size:.88rem;
 
-            .88rem;
-
-        letter-spacing:
-
-            .18em;
+        letter-spacing:.18em;
 
     }
 
 
-    /*----------------------------------------------
-    Divider
-    ----------------------------------------------*/
-
-    #screen01 .gold-divider{
-
-        width:96px;
-
-        margin-bottom:30px;
-
-    }
-
-
-    #screen01 .gold-divider.small{
-
-        width:72px;
-
-        margin:
-
-            28px
-            auto;
-
-    }
-
-
-    /*----------------------------------------------
+    /*------------------------------------------
     Introduction
-    ----------------------------------------------*/
+
+    ------------------------------------------*/
 
     #screen01 .tamil-intro{
 
-        font-size:
+        font-size:1.02rem;
 
-            1.02rem;
-
-        line-height:
-
-            1.85;
+        line-height:1.85;
 
     }
 
 
     #screen01 .introduction-block .english{
 
-        font-size:
+        font-size:.92rem;
 
-            .92rem;
-
-        line-height:
-
-            1.75;
+        line-height:1.75;
 
     }
 
 
-    /*----------------------------------------------
+    /*------------------------------------------
     CTA
-    ----------------------------------------------*/
+
+    ------------------------------------------*/
 
     #screen01 .cta-block{
 
         margin-top:34px;
-
-    }
-
-
-    /*----------------------------------------------
-    Navigator
-    ----------------------------------------------*/
-
-    #screen01 .nav-decoration{
-
-        width:80px;
-
-    }
-
-
-    #screen01 .journey-next:hover .nav-decoration{
-
-        width:90px;
-
-    }
-
-
-    #screen01 .nav-tamil{
-
-        font-size:
-
-            1.05rem;
-
-    }
-
-
-    #screen01 .nav-arrows{
-
-        font-size:
-
-            1.08rem;
-
-        letter-spacing:
-
-            5px;
-
-    }
-
-
-    #screen01 .nav-english{
-
-        font-size:
-
-            .66rem;
-
-        letter-spacing:
-
-            .22em;
 
     }
 
@@ -1860,11 +1029,9 @@ CTM Accessibility Standard
 
     #screen01 .fade-up,
 
-    #screen01 .hero-logo,
+    #screen01 .hero-icon,
 
     #screen01 .welcome-block,
-
-    #screen01 .gold-divider,
 
     #screen01 .introduction-block,
 
@@ -1876,19 +1043,6 @@ CTM Accessibility Standard
 
     }
 
-
-    #screen01 .hero-logo,
-
-    #screen01 .journey-next,
-
-    #screen01 .nav-decoration,
-
-    #screen01 .nav-arrows{
-
-        transition:none !important;
-
-    }
-
 }
 
 
@@ -1896,10 +1050,17 @@ CTM Accessibility Standard
 /*==================================================
 END OF FILE
 
-CTM PATH™ Guided Journey v6.1
+CTM PATH™ Guided Journey v6.2
+
 Screen 01 — The Invitation™
 
-Premium Design Language v1.0
-Status: REFINED
+Foundation Components
+
+✓ heroIcon.css
+✓ divider.css
+✓ journeyNavigator.css
+
+Status
+REFINED • FOUNDATION MAPPED • FROZEN
 
 ==================================================*/
