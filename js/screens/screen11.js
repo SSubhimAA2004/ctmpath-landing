@@ -1,7 +1,7 @@
 
 /*======================================================================
 
-CTM PATH™ Guided Journey v7.0
+CTM PATH™ Guided Journey v8.0
 
 SCREEN 11 — YOUR FINANCIAL REALITY™
 
@@ -15,529 +15,901 @@ Responsibility:
 
 • Initialise Screen 11
 • Personalise visitor
-• Register rating controls
-• Track Financial Reality answers
+• Capture Financial Reality responses
 • Calculate Financial Reality Index™
+• Display personalised insight
+• Save Screen 11 state
+• Navigate to Screen 12
+• Fully compatible with CTM Dynamic Loader
 
 ======================================================================*/
 
+'use strict';
 
-/*==================================================
-Global State
-==================================================*/
+(() => {
 
-const financialReality = {
+    const CTM = window.CTM;
 
-    answers : {},
+    if (!CTM) {
 
-    totalScore : 0,
+        console.error(
 
-    completed : false
-
-};
-
-
-/*==================================================
-Screen Initialisation
-==================================================*/
-
-function initialiseScreen11(){
-
-    loadVisitorName();
-
-    initialiseQuestions();
-
-    initialiseNavigator();
-
-}
-
-
-/*==================================================
-Visitor Personalisation
-
-Uses Screen 05 visitor name
-
-==================================================*/
-
-function loadVisitorName(){
-
-    const visitorName =
-
-        localStorage.getItem("visitorName") ||
-
-        "Friend";
-
-    document
-
-        .querySelectorAll(".visitor-name")
-
-        .forEach(el=>{
-
-            el.textContent = visitorName;
-
-        });
-
-    document
-
-        .querySelectorAll(".visitor-name-inline")
-
-        .forEach(el=>{
-
-            el.textContent = visitorName;
-
-        });
-
-    document
-
-        .querySelectorAll(".visitor-name-inline-en")
-
-        .forEach(el=>{
-
-            el.textContent = visitorName;
-
-        });
-
-}
-
-
-/*==================================================
-Register Questions
-==================================================*/
-
-function initialiseQuestions(){
-
-    const scales =
-
-        document.querySelectorAll(
-
-            ".rating-scale"
+            'CTM core has not been initialized.'
 
         );
-
-    scales.forEach(scale=>{
-
-        registerRatingScale(scale);
-
-    });
-
-}
-
-
-/*==================================================
-Register One Rating Scale
-==================================================*/
-
-function registerRatingScale(scale){
-
-    const questionId =
-
-        parseInt(
-
-            scale.dataset.question
-
-        );
-
-    const buttons =
-
-        scale.querySelectorAll(
-
-            ".rating-btn"
-
-        );
-
-    buttons.forEach(button=>{
-
-        button.addEventListener(
-
-            "click",
-
-            ()=>{
-
-                selectRating(
-
-                    questionId,
-
-                    scale,
-
-                    button
-
-                );
-
-            }
-
-        );
-
-    });
-
-}
-
-
-/*==================================================
-Navigator
-
-Disabled until completion
-
-==================================================*/
-
-function initialiseNavigator(){
-
-    document
-
-        .getElementById(
-
-            "screen11-next"
-
-        )
-
-        .disabled = true;
-
-}
-
-
-/*==================================================
-Auto Initialise
-
-==================================================*/
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    initialiseScreen11
-
-);
-
-/*==================================================
-Select Rating
-
-==================================================*/
-
-function selectRating(
-
-    questionId,
-
-    scale,
-
-    button
-
-){
-
-    const value =
-
-        parseInt(
-
-            button.dataset.value
-
-        );
-
-    financialReality.answers[
-
-        questionId
-
-    ] = value;
-
-    updateRatingColours(
-
-        scale,
-
-        value
-
-    );
-
-    revealNextQuestion(
-
-        questionId
-
-    );
-
-    checkCompletion();
-
-}
-
-
-/*==================================================
-Update Rating Colours
-
-==================================================*/
-
-function updateRatingColours(
-
-    scale,
-
-    value
-
-){
-
-    const buttons =
-
-        scale.querySelectorAll(
-
-            ".rating-btn"
-
-        );
-
-    buttons.forEach(btn=>{
-
-        btn.classList.remove(
-
-            "rating-red",
-
-            "rating-orange",
-
-            "rating-green",
-
-            "selected"
-
-        );
-
-    });
-
-    buttons.forEach(btn=>{
-
-        const number =
-
-            parseInt(
-
-                btn.dataset.value
-
-            );
-
-        if(number<=value){
-
-            if(value<=3){
-
-                btn.classList.add(
-
-                    "rating-red"
-
-                );
-
-            }
-
-            else if(value<=7){
-
-                btn.classList.add(
-
-                    "rating-orange"
-
-                );
-
-            }
-
-            else{
-
-                btn.classList.add(
-
-                    "rating-green"
-
-                );
-
-            }
-
-        }
-
-    });
-
-    buttons[value-1]
-
-        .classList
-
-        .add(
-
-            "selected"
-
-        );
-
-}
-
-
-/*==================================================
-Reveal Next Question
-
-==================================================*/
-
-function revealNextQuestion(
-
-    questionId
-
-){
-
-    const nextQuestion =
-
-        document.querySelector(
-
-            '[data-question="'+
-
-            (questionId+1)+
-
-            '"]'
-
-        );
-
-    if(!nextQuestion){
 
         return;
 
     }
 
-    nextQuestion
 
-        .classList
 
-        .remove(
+    /*
+    ==================================================
+    Screen Configuration
+    ==================================================
+    */
 
-            "hidden"
+    CTM.screen11 = {
+
+        id: 'screen11',
+
+        nextScreen: 'screen12',
+
+        totalQuestions: 10
+
+    };
+
+
+
+    /*
+    ==================================================
+    Financial Reality State
+    ==================================================
+    */
+
+    CTM.state.financialReality =
+
+        CTM.state.financialReality || {
+
+            answers: {},
+
+            totalScore: 0,
+
+            completed: false,
+
+            completedAt: null
+
+        };
+
+
+
+    /*
+    ==================================================
+    Initialise Screen 11
+
+    Called automatically by loader.js
+
+    ==================================================
+    */
+
+    CTM.initScreen11 = function () {
+
+        CTM.log(
+
+            'Screen 11 initialized.'
 
         );
 
-    setTimeout(()=>{
+        personaliseVisitor();
 
-        nextQuestion
+        prepareQuestions();
 
-            .scrollIntoView({
+        prepareNavigator();
 
-                behavior:"smooth",
+        restorePreviousAnswers();
 
-                block:"center"
+        CTM.bindScreen11();
+
+    };
+
+
+
+    /*
+    ==================================================
+    Visitor Personalisation
+
+    Uses Screen 05 storage.
+
+    Priority
+
+    1. CTM_STATE
+
+    2. localStorage
+
+    ==================================================
+    */
+
+    function personaliseVisitor() {
+
+        const visitorName =
+
+            window.CTM_STATE?.visitorName ||
+
+            localStorage.getItem(
+
+                'ctmVisitorName'
+
+            ) ||
+
+            'Friend';
+
+        document
+
+            .querySelectorAll(
+
+                '.visitor-name'
+
+            )
+
+            .forEach(function (element) {
+
+                element.textContent =
+
+                    visitorName;
 
             });
 
-    },250);
+        document
 
-}
+            .querySelectorAll(
+
+                '.visitor-name-inline'
+
+            )
+
+            .forEach(function (element) {
+
+                element.textContent =
+
+                    visitorName;
+
+            });
+
+        document
+
+            .querySelectorAll(
+
+                '.visitor-name-inline-en'
+
+            )
+
+            .forEach(function (element) {
+
+                element.textContent =
+
+                    visitorName;
+
+            });
+
+    }
 
 
-/*==================================================
-Check Completion
 
-==================================================*/
+    /*
+    ==================================================
+    Prepare Question Cards
 
-function checkCompletion(){
+    Hide Questions
 
-    const totalAnswered =
+    2–10
 
-        Object.keys(
+    ==================================================
+    */
 
-            financialReality.answers
+    function prepareQuestions() {
 
-        ).length;
+        const cards =
 
-    if(totalAnswered===10){
+            document.querySelectorAll(
 
-        financialReality.completed =
+                '.fri-card'
 
-            true;
+            );
+
+        cards.forEach(function (
+
+            card,
+
+            index
+
+        ) {
+
+            if (index > 0) {
+
+                card.classList.add(
+
+                    'hidden'
+
+                );
+
+            }
+
+        });
+
+    }
+
+
+
+    /*
+    ==================================================
+    Prepare Navigator
+
+    Disabled until
+
+    assessment completes.
+
+    ==================================================
+    */
+
+    function prepareNavigator() {
+
+        const nextButton =
+
+            document.getElementById(
+
+                'screen11-next'
+
+            );
+
+        if (!nextButton) {
+
+            return;
+
+        }
+
+        nextButton.disabled = true;
+
+    }
+
+
+
+    /*
+    ==================================================
+    Restore Previous Session
+
+    If visitor refreshes,
+
+    restore previous choices.
+
+    ==================================================
+    */
+
+    function restorePreviousAnswers() {
+
+        const state =
+
+            CTM.state
+
+            .financialReality;
+
+        if (
+
+            !state ||
+
+            !state.answers
+
+        ) {
+
+            return;
+
+        }
+
+        CTM.log(
+
+            'Financial Reality restored.'
+
+        );
+
+    }
+
+
+     /*
+    ==================================================
+    Bind Screen 11
+
+    Dynamic loader safe.
+
+    Removes previous listeners
+    before binding again.
+
+    ==================================================
+    */
+
+    CTM.bindScreen11 = function () {
+
+        document.removeEventListener(
+
+            'click',
+
+            CTM.handleScreen11Click
+
+        );
+
+        document.addEventListener(
+
+            'click',
+
+            CTM.handleScreen11Click
+
+        );
+
+    };
+
+
+
+    /*
+    ==================================================
+    Global Click Handler
+
+    Event Delegation
+
+    Handles
+
+    • Rating buttons
+    • Navigator
+
+    ==================================================
+    */
+
+    CTM.handleScreen11Click = async function (event) {
+
+        const ratingButton =
+
+            event.target.closest(
+
+                '.rating-btn'
+
+            );
+
+        if (ratingButton) {
+
+            event.preventDefault();
+
+            handleRatingSelection(
+
+                ratingButton
+
+            );
+
+            return;
+
+        }
+
+        const nextButton =
+
+            event.target.closest(
+
+                '#screen11-next'
+
+            );
+
+        if (
+
+            nextButton &&
+
+            !nextButton.disabled
+
+        ) {
+
+            event.preventDefault();
+
+            await navigateNext();
+
+        }
+
+    };
+
+
+
+    /*
+    ==================================================
+    Rating Selection
+
+    ==================================================
+    */
+
+    function handleRatingSelection(
+
+        button
+
+    ) {
+
+        const scale =
+
+            button.closest(
+
+                '.rating-scale'
+
+            );
+
+        if (!scale) {
+
+            return;
+
+        }
+
+        const questionId =
+
+            Number(
+
+                scale.dataset.question
+
+            );
+
+        const value =
+
+            Number(
+
+                button.dataset.value
+
+            );
+
+        saveAnswer(
+
+            questionId,
+
+            value
+
+        );
+
+        colourRatingScale(
+
+            scale,
+
+            value
+
+        );
+
+        revealNextQuestion(
+
+            questionId
+
+        );
+
+        evaluateCompletion();
+
+    }
+
+
+
+    /*
+    ==================================================
+    Save Answer
+
+    ==================================================
+    */
+
+    function saveAnswer(
+
+        questionId,
+
+        value
+
+    ) {
+
+        CTM.state
+
+            .financialReality
+
+            .answers[
+
+                questionId
+
+            ] = value;
+
+        CTM.saveState();
+
+    }
+
+
+
+    /*
+    ==================================================
+    Colour Rating Scale
+
+    ==================================================
+    */
+
+    function colourRatingScale(
+
+        scale,
+
+        value
+
+    ) {
+
+        const buttons =
+
+            scale.querySelectorAll(
+
+                '.rating-btn'
+
+            );
+
+        buttons.forEach(function (
+
+            btn
+
+        ) {
+
+            btn.classList.remove(
+
+                'selected',
+
+                'rating-red',
+
+                'rating-orange',
+
+                'rating-green'
+
+            );
+
+        });
+
+        buttons.forEach(function (
+
+            btn
+
+        ) {
+
+            const number =
+
+                Number(
+
+                    btn.dataset.value
+
+                );
+
+            if (
+
+                number >
+
+                value
+
+            ) {
+
+                return;
+
+            }
+
+            if (value <= 3) {
+
+                btn.classList.add(
+
+                    'rating-red'
+
+                );
+
+            }
+
+            else if (
+
+                value <= 7
+
+            ) {
+
+                btn.classList.add(
+
+                    'rating-orange'
+
+                );
+
+            }
+
+            else {
+
+                btn.classList.add(
+
+                    'rating-green'
+
+                );
+
+            }
+
+        });
+
+        button.classList.add(
+
+            'selected'
+
+        );
+
+    }
+
+
+
+    /*
+    ==================================================
+    Reveal Next Question
+
+    ==================================================
+    */
+
+    function revealNextQuestion(
+
+        currentQuestion
+
+    ) {
+
+        const nextCard =
+
+            document.querySelector(
+
+                '[data-question="' +
+
+                (
+
+                    currentQuestion + 1
+
+                ) +
+
+                '"]'
+
+            );
+
+        if (!nextCard) {
+
+            return;
+
+        }
+
+        if (
+
+            nextCard.classList.contains(
+
+                'hidden'
+
+            )
+
+        ) {
+
+            nextCard.classList.remove(
+
+                'hidden'
+
+            );
+
+            nextCard.scrollIntoView({
+
+                behavior: 'smooth',
+
+                block: 'center'
+
+            });
+
+        }
+
+    }
+
+
+     /*
+    ==================================================
+    Evaluate Completion
+
+    ==================================================
+    */
+
+    function evaluateCompletion() {
+
+        const answers =
+
+            CTM.state
+
+                .financialReality
+
+                .answers;
+
+        const answered =
+
+            Object.keys(
+
+                answers
+
+            ).length;
+
+        if (
+
+            answered <
+
+            CTM.screen11.totalQuestions
+
+        ) {
+
+            return;
+
+        }
+
+        if (
+
+            CTM.state
+
+                .financialReality
+
+                .completed
+
+        ) {
+
+            return;
+
+        }
+
+        CTM.state
+
+            .financialReality
+
+            .completed = true;
+
+        calculateFinancialRealityScore();
 
         beginAnalysis();
 
     }
 
-}
-
-/*==================================================
-Begin Financial Analysis
-
-==================================================*/
-
-function beginAnalysis(){
-
-    calculateFinancialRealityScore();
-
-    showAnalysisPanel();
-
-}
 
 
-/*==================================================
-Calculate Total Score
+    /*
+    ==================================================
+    Calculate Financial Reality Score
 
-==================================================*/
+    Score Range
 
-function calculateFinancialRealityScore(){
+    10 → 100
 
-    let total = 0;
+    ==================================================
+    */
 
-    Object.values(
+    function calculateFinancialRealityScore() {
 
-        financialReality.answers
+        const answers =
 
-    ).forEach(score=>{
+            CTM.state
 
-        total += score;
+                .financialReality
 
-    });
+                .answers;
 
-    financialReality.totalScore = total;
+        let total = 0;
 
-}
+        Object.values(
 
+            answers
 
-/*==================================================
-Show Analysis
+        ).forEach(function (
 
-==================================================*/
+            score
 
-function showAnalysisPanel(){
+        ) {
 
-    const analysis =
+            total += Number(score);
 
-        document.getElementById(
+        });
 
-            "fri-analysis"
+        CTM.state
 
-        );
+            .financialReality
 
-    analysis.classList.remove(
+            .totalScore = total;
 
-        "hidden"
+        CTM.state
 
-    );
+            .financialReality
 
-    analysis.scrollIntoView({
+            .completedAt =
 
-        behavior:"smooth",
+            new Date()
 
-        block:"center"
+            .toISOString();
 
-    });
+        CTM.saveState();
 
-    playAnalysisAnimation();
-
-}
+    }
 
 
-/*==================================================
-Premium Analysis Animation
 
-==================================================*/
+    /*
+    ==================================================
+    Begin Analysis
 
-function playAnalysisAnimation(){
+    ==================================================
+    */
 
-    const items =
+    function beginAnalysis() {
 
-        document.querySelectorAll(
+        const analysis =
 
-            ".analysis-item"
+            document.getElementById(
 
-        );
+                'fri-analysis'
 
-    items.forEach(item=>{
+            );
 
-        item.classList.remove(
+        if (!analysis) {
 
-            "completed"
+            revealFinancialReality();
+
+            return;
+
+        }
+
+        analysis.classList.remove(
+
+            'hidden'
 
         );
 
-    });
+        analysis.scrollIntoView({
 
-    let index = 0;
+            behavior: 'smooth',
 
-    const timer =
+            block: 'center'
 
-        setInterval(()=>{
+        });
 
-            if(index < items.length){
+        playAnalysisAnimation();
+
+    }
+
+
+
+    /*
+    ==================================================
+    Premium Analysis Animation
+
+    ==================================================
+    */
+
+    function playAnalysisAnimation() {
+
+        const items =
+
+            document.querySelectorAll(
+
+                '.analysis-item'
+
+            );
+
+        let index = 0;
+
+        const timer =
+
+            setInterval(function () {
+
+                if (
+
+                    index >=
+
+                    items.length
+
+                ) {
+
+                    clearInterval(
+
+                        timer
+
+                    );
+
+                    setTimeout(
+
+                        revealFinancialReality,
+
+                        700
+
+                    );
+
+                    return;
+
+                }
 
                 items[index]
 
@@ -545,827 +917,727 @@ function playAnalysisAnimation(){
 
                     .add(
 
-                        "completed"
+                        'completed'
 
                     );
 
                 index++;
 
+            }, 350);
+
+    }
+
+
+
+    /*
+    ==================================================
+    Reveal Financial Reality
+
+    ==================================================
+    */
+
+    function revealFinancialReality() {
+
+        const analysis =
+
+            document.getElementById(
+
+                'fri-analysis'
+
+            );
+
+        const result =
+
+            document.getElementById(
+
+                'fri-result'
+
+            );
+
+        if (analysis) {
+
+            analysis.classList.add(
+
+                'hidden'
+
+            );
+
+        }
+
+        if (result) {
+
+            result.classList.remove(
+
+                'hidden'
+
+            );
+
+            result.scrollIntoView({
+
+                behavior: 'smooth',
+
+                block: 'center'
+
+            });
+
+        }
+
+        animateScore();
+
+    }
+
+
+
+    /*
+    ==================================================
+    Animated Score Counter
+
+    ==================================================
+    */
+
+    function animateScore() {
+
+        const value =
+
+            document.getElementById(
+
+                'fri-score-value'
+
+            );
+
+        if (!value) {
+
+            updateFinancialInsight();
+
+            return;
+
+        }
+
+        let current = 0;
+
+        const target =
+
+            CTM.state
+
+                .financialReality
+
+                .totalScore;
+
+        const animation =
+
+            setInterval(function () {
+
+                current++;
+
+                value.textContent =
+
+                    current;
+
+                if (
+
+                    current >=
+
+                    target
+
+                ) {
+
+                    clearInterval(
+
+                        animation
+
+                    );
+
+                    updateFinancialInsight();
+
+                }
+
+            }, 20);
+
+    }
+
+
+     /*
+    ==================================================
+    Update Financial Insight
+
+    Personalised interpretation
+    based on Financial Reality Index™
+
+    ==================================================
+    */
+
+    function updateFinancialInsight() {
+
+        const score =
+
+            CTM.state
+                .financialReality
+                .totalScore;
+
+        const visitorName =
+
+            window.CTM_STATE?.visitorName ||
+
+            localStorage.getItem(
+
+                'ctmVisitorName'
+
+            ) ||
+
+            'Friend';
+
+        const circle =
+
+            document.getElementById(
+
+                'fri-score-circle'
+
+            );
+
+        const status =
+
+            document.getElementById(
+
+                'fri-score-status'
+
+            );
+
+        const message =
+
+            document.getElementById(
+
+                'fri-score-message'
+
+            );
+
+        if (
+
+            circle
+
+        ) {
+
+            circle.classList.remove(
+
+                'score-red',
+
+                'score-orange',
+
+                'score-green'
+
+            );
+
+        }
+
+        /*
+        ==========================================
+        RED
+        ==========================================
+        */
+
+        if (
+
+            score <= 30
+
+        ) {
+
+            circle &&
+
+            circle.classList.add(
+
+                'score-red'
+
+            );
+
+            status.textContent =
+
+                'Financial Reality Needs Immediate Attention';
+
+            message.innerHTML =
+
+                '<strong>' +
+
+                visitorName +
+
+                '</strong>,<br><br>' +
+
+                'Your current financial reality deserves immediate attention.' +
+
+                '<br><br>' +
+
+                'The good news is that awareness is always the first step towards transformation.';
+
+        }
+
+        /*
+        ==========================================
+        ORANGE
+        ==========================================
+        */
+
+        else if (
+
+            score <= 70
+
+        ) {
+
+            circle &&
+
+            circle.classList.add(
+
+                'score-orange'
+
+            );
+
+            status.textContent =
+
+                'A Good Foundation Is Emerging';
+
+            message.innerHTML =
+
+                '<strong>' +
+
+                visitorName +
+
+                '</strong>,<br><br>' +
+
+                'You have already developed several healthy financial habits.' +
+
+                '<br><br>' +
+
+                'Your Financial MRI™ will reveal the few changes that can create the biggest improvement.';
+
+        }
+
+        /*
+        ==========================================
+        GREEN
+        ==========================================
+        */
+
+        else {
+
+            circle &&
+
+            circle.classList.add(
+
+                'score-green'
+
+            );
+
+            status.textContent =
+
+                'Strong Financial Foundation';
+
+            message.innerHTML =
+
+                '<strong>' +
+
+                visitorName +
+
+                '</strong>,<br><br>' +
+
+                'You have built a strong financial foundation.' +
+
+                '<br><br>' +
+
+                'Let's now identify the next opportunities that can help you build lasting financial freedom.';
+
+        }
+
+        enableNavigator();
+
+    }
+
+
+
+    /*
+    ==================================================
+    Enable Premium Navigator
+
+    ==================================================
+    */
+
+    function enableNavigator() {
+
+        const button =
+
+            document.getElementById(
+
+                'screen11-next'
+
+            );
+
+        if (
+
+            !button
+
+        ) {
+
+            return;
+
+        }
+
+        button.disabled = false;
+
+        button.classList.add(
+
+            'pulse'
+
+        );
+
+        button.scrollIntoView({
+
+            behavior: 'smooth',
+
+            block: 'center'
+
+        });
+
+    }
+
+
+
+    /*
+    ==================================================
+    Navigate To Screen 12
+
+    Uses CTM Router
+
+    ==================================================
+    */
+
+    async function navigateNext() {
+
+        await CTM.navigate(
+
+            CTM.screen11.nextScreen
+
+        );
+
+    }
+
+
+
+    /*
+    ==================================================
+    Screen Loaded Hook
+
+    Called automatically
+    after loader injects HTML
+
+    ==================================================
+    */
+
+    CTM.afterScreen11Loaded = function () {
+
+        if (
+
+            document.getElementById(
+
+                'screen11'
+
+            )
+
+        ) {
+
+            CTM.initScreen11();
+
+        }
+
+    };
+
+
+    /*
+    ==================================================
+    Restore Previous Answers
+
+    Restore UI from CTM.state
+
+    ==================================================
+    */
+
+    function restorePreviousAnswers() {
+
+        const state =
+
+            CTM.state
+
+                .financialReality;
+
+        if (
+
+            !state ||
+
+            !state.answers
+
+        ) {
+
+            return;
+
+        }
+
+        Object.keys(
+
+            state.answers
+
+        ).forEach(function (
+
+            key
+
+        ) {
+
+            const questionId =
+
+                Number(key);
+
+            const value =
+
+                Number(
+
+                    state.answers[key]
+
+                );
+
+            const scale =
+
+                document.querySelector(
+
+                    '.rating-scale[data-question="' +
+
+                    questionId +
+
+                    '"]'
+
+                );
+
+            if (!scale) {
+
+                return;
+
             }
 
-            else{
+            colourRatingScale(
 
-                clearInterval(timer);
+                scale,
 
-                setTimeout(
+                value
 
-                    revealFinancialReality,
+            );
 
-                    700
+            if (
+
+                questionId <
+
+                CTM.screen11.totalQuestions
+
+            ) {
+
+                const nextCard =
+
+                    document.querySelector(
+
+                        '[data-question="' +
+
+                        (
+
+                            questionId + 1
+
+                        ) +
+
+                        '"]'
+
+                    );
+
+                if (nextCard) {
+
+                    nextCard.classList.remove(
+
+                        'hidden'
+
+                    );
+
+                }
+
+            }
+
+        });
+
+        /*
+        Restore completed result
+        */
+
+        if (
+
+            state.completed
+
+        ) {
+
+            const analysis =
+
+                document.getElementById(
+
+                    'fri-analysis'
+
+                );
+
+            if (analysis) {
+
+                analysis.classList.add(
+
+                    'hidden'
 
                 );
 
             }
 
-        },300);
+            const result =
 
-}
+                document.getElementById(
 
+                    'fri-result'
 
-/*==================================================
-Reveal Financial Reality
+                );
 
-==================================================*/
+            if (result) {
 
-function revealFinancialReality(){
+                result.classList.remove(
 
-    document
+                    'hidden'
 
-        .getElementById(
-
-            "fri-analysis"
-
-        )
-
-        .classList
-
-        .add(
-
-            "hidden"
-
-        );
-
-    const result =
-
-        document.getElementById(
-
-            "fri-result"
-
-        );
-
-    result.classList.remove(
-
-        "hidden"
-
-    );
-
-    animateFinancialScore();
-
-}
-
-/*==================================================
-Animate Financial Reality Score
-
-==================================================*/
-
-function animateFinancialScore(){
-
-    const scoreElement =
-
-        document.getElementById(
-
-            "fri-score-value"
-
-        );
-
-    const circle =
-
-        document.getElementById(
-
-            "fri-score-circle"
-
-        );
-
-    const status =
-
-        document.getElementById(
-
-            "fri-score-status"
-
-        );
-
-    const message =
-
-        document.getElementById(
-
-            "fri-score-message"
-
-        );
-
-    let current = 0;
-
-    const target =
-
-        financialReality.totalScore;
-
-    const animation =
-
-        setInterval(()=>{
-
-            current++;
-
-            scoreElement.textContent = current;
-
-            if(current>=target){
-
-                clearInterval(animation);
-
-                showFinancialInsight();
+                );
 
             }
 
-        },18);
+            const value =
 
-}
+                document.getElementById(
 
+                    'fri-score-value'
 
-/*==================================================
-Generate Personal Insight
+                );
 
-==================================================*/
+            if (value) {
 
-function showFinancialInsight(){
+                value.textContent =
 
-    const score =
+                    state.totalScore;
 
-        financialReality.totalScore;
+            }
 
-    const visitorName =
+            updateFinancialInsight();
 
-        localStorage.getItem(
-
-            "visitorName"
-
-        ) || "Friend";
-
-    const circle =
-
-        document.getElementById(
-
-            "fri-score-circle"
-
-        );
-
-    const status =
-
-        document.getElementById(
-
-            "fri-score-status"
-
-        );
-
-    const message =
-
-        document.getElementById(
-
-            "fri-score-message"
-
-        );
-
-    circle.classList.remove(
-
-        "score-red",
-
-        "score-orange",
-
-        "score-green"
-
-    );
-
-    if(score<=39){
-
-        circle.classList.add(
-
-            "score-red"
-
-        );
-
-        status.textContent =
-
-            "Financial Reality Needs Attention";
-
-        message.innerHTML =
-
-            visitorName +
-
-            ", every great transformation begins with awareness.<br><br>Your Financial MRI™ will help identify where your greatest opportunities lie.";
+        }
 
     }
 
-    else if(score<=79){
 
-        circle.classList.add(
 
-            "score-orange"
+    /*
+    ==================================================
+    Reset Assessment
 
-        );
+    If visitor changes
+    an earlier answer.
 
-        status.textContent =
+    ==================================================
+    */
 
-            "Building A Strong Foundation";
+    function resetAssessment() {
 
-        message.innerHTML =
+        CTM.state
 
-            visitorName +
+            .financialReality
 
-            ", you have already built several healthy financial habits.<br><br>Let's discover how to strengthen the foundations even further.";
+            .completed = false;
+
+        const analysis =
+
+            document.getElementById(
+
+                'fri-analysis'
+
+            );
+
+        const result =
+
+            document.getElementById(
+
+                'fri-result'
+
+            );
+
+        if (analysis) {
+
+            analysis.classList.add(
+
+                'hidden'
+
+            );
+
+        }
+
+        if (result) {
+
+            result.classList.add(
+
+                'hidden'
+
+            );
+
+        }
+
+        const nextButton =
+
+            document.getElementById(
+
+                'screen11-next'
+
+            );
+
+        if (nextButton) {
+
+            nextButton.disabled = true;
+
+            nextButton.classList.remove(
+
+                'pulse'
+
+            );
+
+        }
 
     }
 
-    else{
-
-        circle.classList.add(
-
-            "score-green"
-
-        );
-
-        status.textContent =
-
-            "Strong Financial Foundation";
-
-        message.innerHTML =
-
-            visitorName +
-
-            ", you have created an excellent financial foundation.<br><br>Your Financial MRI™ will now reveal your greatest growth opportunities.";
-
-    }
-
-    enableNavigator();
-
-}
 
 
-/*==================================================
-Enable Navigator
+    /*
+    ==================================================
+    Screen Exit Helper
 
-==================================================*/
+    Save latest state.
 
-function enableNavigator(){
+    ==================================================
+    */
 
-    const next =
+    CTM.beforeScreen11Exit = function () {
 
-        document.getElementById(
-
-            "screen11-next"
-
-        );
-
-    next.disabled = false;
-
-    next.classList.add(
-
-        "pulse"
-
-    );
-
-    next.scrollIntoView({
-
-        behavior:"smooth",
-
-        block:"center"
-
-    });
-
-}
-
-/*==================================================
-Save Financial Reality
-
-==================================================*/
-
-function saveFinancialReality(){
-
-    const data = {
-
-        answers : financialReality.answers,
-
-        totalScore : financialReality.totalScore,
-
-        completed : true,
-
-        completedAt : new Date().toISOString()
+        CTM.saveState();
 
     };
 
-    localStorage.setItem(
-
-        "financialReality",
-
-        JSON.stringify(data)
-
-    );
-
-}
 
 
-/*==================================================
-Get Financial Reality
+    /*
+    ==================================================
+    Screen Ready
 
-==================================================*/
+    ==================================================
+    */
 
-function getFinancialReality(){
+    CTM.log(
 
-    const saved =
-
-        localStorage.getItem(
-
-            "financialReality"
-
-        );
-
-    if(!saved){
-
-        return null;
-
-    }
-
-    return JSON.parse(saved);
-
-}
-
-
-/*==================================================
-Navigator Click
-
-==================================================*/
-
-function registerNavigator(){
-
-    const button =
-
-        document.getElementById(
-
-            "screen11-next"
-
-        );
-
-    if(!button){
-
-        return;
-
-    }
-
-    button.addEventListener(
-
-        "click",
-
-        continueJourney
+        'Screen 11 controller ready.'
 
     );
 
-}
-
-
-/*==================================================
-Continue Journey
-
-==================================================*/
-
-function continueJourney(){
-
-    saveFinancialReality();
-
-    transitionToScreen12();
-
-}
-
-
-/*==================================================
-Transition
-
-==================================================*/
-
-function transitionToScreen12(){
-
-    const current =
-
-        document.getElementById(
-
-            "screen11"
-
-        );
-
-    current.classList.add(
-
-        "screen-exit"
-
-    );
-
-    setTimeout(()=>{
-
-        if(typeof showScreen==="function"){
-
-            showScreen("screen12");
-
-        }
-
-        else if(typeof navigateToScreen==="function"){
-
-            navigateToScreen("screen12");
-
-        }
-
-        else{
-
-            location.hash="screen12";
-
-        }
-
-    },600);
-
-}
-
-
-/*==================================================
-Restore Previous Session
-
-==================================================*/
-
-function restoreFinancialReality(){
-
-    const saved =
-
-        getFinancialReality();
-
-    if(!saved){
-
-        return;
-
-    }
-
-    financialReality.answers =
-
-        saved.answers || {};
-
-    financialReality.totalScore =
-
-        saved.totalScore || 0;
-
-}
-
-
-/*==================================================
-Update Initialiser
-
-==================================================*/
-
-const originalInitialise =
-
-    initialiseScreen11;
-
-initialiseScreen11 = function(){
-
-    originalInitialise();
-
-    restoreFinancialReality();
-
-    registerNavigator();
-
-};
-
-/*==================================================
-Update Progress
-
-==================================================*/
-
-function updateProgress(){
-
-    const answered =
-
-        Object.keys(
-
-            financialReality.answers
-
-        ).length;
-
-    const progressText =
-
-        document.getElementById(
-
-            "question-progress"
-
-        );
-
-    const progressBar =
-
-        document.getElementById(
-
-            "question-progress-bar"
-
-        );
-
-    if(progressText){
-
-        progressText.innerHTML =
-
-            answered +
-
-            " / 10";
-
-    }
-
-    if(progressBar){
-
-        progressBar.style.width =
-
-            (answered*10)+"%";
-
-    }
-
-}
-
-
-/*==================================================
-Recalculate Total
-
-Always recalculates from answers
-
-==================================================*/
-
-function recalculateScore(){
-
-    financialReality.totalScore =
-
-        0;
-
-    Object.values(
-
-        financialReality.answers
-
-    ).forEach(value=>{
-
-        financialReality.totalScore += value;
-
-    });
-
-}
-
-
-/*==================================================
-Updated Completion Check
-
-==================================================*/
-
-function checkCompletion(){
-
-    updateProgress();
-
-    recalculateScore();
-
-    const answered =
-
-        Object.keys(
-
-            financialReality.answers
-
-        ).length;
-
-    if(answered!==10){
-
-        return;
-
-    }
-
-    if(financialReality.completed){
-
-        return;
-
-    }
-
-    financialReality.completed = true;
-
-    beginAnalysis();
-
-}
-
-
-/*==================================================
-Reset Analysis
-
-If Visitor Changes Answer
-
-==================================================*/
-
-function resetFinancialReality(){
-
-    financialReality.completed = false;
-
-    const analysis =
-
-        document.getElementById(
-
-            "fri-analysis"
-
-        );
-
-    const result =
-
-        document.getElementById(
-
-            "fri-result"
-
-        );
-
-    if(analysis){
-
-        analysis.classList.add(
-
-            "hidden"
-
-        );
-
-    }
-
-    if(result){
-
-        result.classList.add(
-
-            "hidden"
-
-        );
-
-    }
-
-    const next =
-
-        document.getElementById(
-
-            "screen11-next"
-
-        );
-
-    if(next){
-
-        next.disabled = true;
-
-        next.classList.remove(
-
-            "pulse"
-
-        );
-
-    }
-
-}
-
-
-/*==================================================
-Visitor Changes Rating
-
-==================================================*/
-
-document
-
-.querySelectorAll(
-
-".rating-btn"
-
-)
-
-.forEach(button=>{
-
-button.addEventListener(
-
-"click",
-
-()=>{
-
-resetFinancialReality();
-
-}
-
-);
-
-});
-
-
-/*==================================================
-Reveal Question
-
-==================================================*/
-
-function revealQuestion(
-
-number
-
-){
-
-const question =
-
-document.querySelector(
-
-'[data-question="'+
-
-number+
-
-'"]'
-
-);
-
-if(!question){
-
-return;
-
-}
-
-question.classList.remove(
-
-"hidden"
-
-);
-
-question.classList.add(
-
-"fade-up"
-
-);
-
-}
-
-
-/*==================================================
-Hide Questions
-
-==================================================*/
-
-function hideFutureQuestions(){
-
-for(
-
-let i=2;
-
-i<=10;
-
-i++
-
-){
-
-const card =
-
-document.querySelector(
-
-'[data-question="'+
-
-i+
-
-'"]'
-
-);
-
-if(card){
-
-card.classList.add(
-
-"hidden"
-
-);
-
-}
-
-}
-
-}
-
-
-/*==================================================
-Production Initialise
-
-==================================================*/
-
-function initialiseScreen11Production(){
-
-hideFutureQuestions();
-
-revealQuestion(1);
-
-updateProgress();
-
-}
-
-
-/*==================================================
-Merge Initialisation
-
-==================================================*/
-
-const previousInitialiser =
-
-initialiseScreen11;
-
-initialiseScreen11 = function(){
-
-previousInitialiser();
-
-initialiseScreen11Production();
-
-};
-
-
-/*==================================================
-End Of Screen 11
-
-Production Version
-
-==================================================*/
+})();
