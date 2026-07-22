@@ -2,167 +2,800 @@
 <!--
 ======================================================================
 
-CTM PATH™ Guided Journey v6.0
+CTM PATH™ Guided Journey v6.2
 
-Purpose
-Screen 11
+SCREEN 11 — YOUR FINANCIAL REALITY™
 
-Responsibility
-• Discover the visitor's current financial satisfaction
-• Establish the emotional baseline
-• Begin Financial Discovery™
-• Continue the guided journey
+File:
+screen11.html
+
+Purpose:
+Financial Reality Index™ (FRI)
+
+Emotional Role:
+Purpose → Awareness → Reality
+
+Responsibility:
+• Display visitor identity
+• Measure current financial reality
+• Capture 10 financial ratings
+• Calculate Financial Reality Index™
+• Continue to Financial MRI™
 
 ======================================================================
 -->
 
 <section
-    class="screen"
-    id="screen11">
+id="screen11"
+class="screen screen11">
 
-    <div class="container">
+<div class="container">
 
-        <div class="hero">
+<div class="hero fade-up">
 
-            <!-- Screen Caption -->
+<!--==================================================
+Hero Symbol
 
-            <div class="screen-caption">
+Financial Reality™
 
-                MOMENT 11 OF 36
+==================================================-->
 
-            </div>
+<div class="hero-icon">
 
-            <!-- Divider -->
+<div class="purpose-orbit"></div>
 
-            <div class="gold-divider"></div>
+<div class="purpose-core">
 
-            <!-- Tamil -->
+<div class="purpose-ring outer-ring"></div>
 
-            <h1
-                class="tamil"
-                data-personalize>
+<div class="purpose-ring inner-ring"></div>
 
-                <span class="text-gold">
+<div class="purpose-light">
 
-                    {FirstName},
+📊
 
-                </span>
+</div>
 
-                <br><br>
+</div>
 
-                உங்கள்
+</div>
 
-                <br><br>
+<!--==================================================
+Visitor Identity
 
-                தற்போதைய
+Retrieved from Screen 05
 
-                <br><br>
+==================================================-->
 
-                நிதி வாழ்க்கையில்...
+<section class="personal-greeting">
 
-                <br><br>
+<span
+class="visitor-name tamil text-gold">
+</span>
 
-                நீங்கள்
+</section>
 
-                <br><br>
+<!--==================================================
+Welcome Block
 
-                எவ்வளவு
+==================================================-->
 
-                <br><br>
+<section class="welcome-block">
 
-                திருப்தியாக
+<h1 class="tamil tamil-welcome">
 
-                <br><br>
+உங்கள் நிதி நிலை
 
-                இருக்கிறீர்கள்?
+</h1>
 
-            </h1>
+<div class="english english-welcome">
 
-            <!-- Divider -->
+YOUR FINANCIAL REALITY™
 
-            <div class="gold-divider small"></div>
+</div>
 
-            <!-- English -->
+</section>
 
-            <div
-                class="english"
-                data-personalize>
+<!--==================================================
+Introduction
 
-                <span class="english-welcome">
+==================================================-->
 
-                    {FirstName},
+<section class="question-block">
 
-                </span>
+<div class="question-ta tamil">
 
-                <br><br>
+நீங்கள் இன்று
 
-                How satisfied
+எந்த நிலையில்
 
-                <br><br>
+இருக்கிறீர்கள்
 
-                are you
+என்பதை
 
-                <br><br>
+நேர்மையாக
 
-                with your
+பார்ப்போம்.
 
-                <br><br>
+</div>
 
-                current
+<div class="question-en english">
 
-                <br><br>
+Let's honestly discover
 
-                financial life?
+where you stand
 
-            </div>
+today.
 
-            <!-- Divider -->
+There are
 
-            <div class="gold-divider"></div>
+no right or
 
-            <!-- Rating Scale -->
+wrong answers.
 
-            <div class="choice-group scale-group">
+</div>
 
-                <button class="choice" data-value="1">1</button>
-                <button class="choice" data-value="2">2</button>
-                <button class="choice" data-value="3">3</button>
-                <button class="choice" data-value="4">4</button>
-                <button class="choice" data-value="5">5</button>
-                <button class="choice" data-value="6">6</button>
-                <button class="choice" data-value="7">7</button>
-                <button class="choice" data-value="8">8</button>
-                <button class="choice" data-value="9">9</button>
-                <button class="choice" data-value="10">10</button>
+</section>
 
-            </div>
+<!--==================================================
+Instructions
 
-            <!-- Continue -->
+==================================================-->
 
-            <button
+<section class="why-instruction">
 
-                class="btn btn-primary"
+<div class="instruction-ta tamil">
 
-                data-action="continue"
+ஒவ்வொரு கேள்விக்கும்
 
-                data-next="screen12">
+1 முதல் 10 வரை
 
-                <span class="btn-title">
+உங்களுக்கு
 
-                    தொடரலாம் →
+மிகவும் பொருந்தும்
 
-                </span>
+எண்ணை
 
-                <span class="btn-subtitle">
+தேர்ந்தெடுக்கவும்.
 
-                    Continue
+</div>
 
-                </span>
+<div class="instruction-en english">
 
-            </button>
+For each question,
 
-        </div>
+choose a number
+
+from 1 to 10
+
+that best reflects
+
+your current reality.
+
+</div>
+
+</section>
+
+<!--==================================================
+Financial Reality Questions
+
+==================================================-->
+
+<section
+id="financial-reality"
+class="financial-reality">
+
+<div class="financial-grid">
+
+<!--==================================================
+QUESTION 01
+==================================================-->
+
+<div class="fri-card">
+
+<div class="fri-question-no">
+01
+</div>
+
+<div class="fri-question-ta tamil">
+
+உங்கள்
+
+நிதி வாழ்க்கையின்
+
+மீது
+
+உங்களுக்கு
+
+எவ்வளவு
+
+கட்டுப்பாடு உள்ளது?
+
+</div>
+
+<div class="fri-question-en english">
+
+How much control
+
+do you have over
+
+your financial life?
+
+</div>
+
+<div
+class="rating-scale"
+data-question="1">
+
+<button class="rating-btn" data-value="1">1</button>
+<button class="rating-btn" data-value="2">2</button>
+<button class="rating-btn" data-value="3">3</button>
+<button class="rating-btn" data-value="4">4</button>
+<button class="rating-btn" data-value="5">5</button>
+<button class="rating-btn" data-value="6">6</button>
+<button class="rating-btn" data-value="7">7</button>
+<button class="rating-btn" data-value="8">8</button>
+<button class="rating-btn" data-value="9">9</button>
+<button class="rating-btn" data-value="10">10</button>
+
+</div>
+
+</div>
+
+<!--==================================================
+QUESTION 02
+==================================================-->
+
+<div class="fri-card">
+
+<div class="fri-question-no">
+02
+</div>
+
+<div class="fri-question-ta tamil">
+
+உங்கள்
+
+மாத வருமானம்
+
+எவ்வளவு
+
+நிலையானது?
+
+</div>
+
+<div class="fri-question-en english">
+
+How stable
+
+is your
+
+monthly income?
+
+</div>
+
+<div
+class="rating-scale"
+data-question="2">
+
+<button class="rating-btn" data-value="1">1</button>
+<button class="rating-btn" data-value="2">2</button>
+<button class="rating-btn" data-value="3">3</button>
+<button class="rating-btn" data-value="4">4</button>
+<button class="rating-btn" data-value="5">5</button>
+<button class="rating-btn" data-value="6">6</button>
+<button class="rating-btn" data-value="7">7</button>
+<button class="rating-btn" data-value="8">8</button>
+<button class="rating-btn" data-value="9">9</button>
+<button class="rating-btn" data-value="10">10</button>
+
+</div>
+
+</div>
+
+<!--==================================================
+QUESTION 03
+==================================================-->
+
+<div class="fri-card">
+
+<div class="fri-question-no">
+03
+</div>
+
+<div class="fri-question-ta tamil">
+
+உங்கள்
+
+செலவுகளை
+
+நீங்கள்
+
+எவ்வளவு
+
+நன்றாக
+
+நிர்வகிக்கிறீர்கள்?
+
+</div>
+
+<div class="fri-question-en english">
+
+How well
+
+do you manage
+
+your expenses?
+
+</div>
+
+<div
+class="rating-scale"
+data-question="3">
+
+<button class="rating-btn" data-value="1">1</button>
+<button class="rating-btn" data-value="2">2</button>
+<button class="rating-btn" data-value="3">3</button>
+<button class="rating-btn" data-value="4">4</button>
+<button class="rating-btn" data-value="5">5</button>
+<button class="rating-btn" data-value="6">6</button>
+<button class="rating-btn" data-value="7">7</button>
+<button class="rating-btn" data-value="8">8</button>
+<button class="rating-btn" data-value="9">9</button>
+<button class="rating-btn" data-value="10">10</button>
+
+</div>
+
+</div>
+
+<!--==================================================
+QUESTION 04
+Emergency Savings
+==================================================-->
+
+<div class="fri-card">
+
+    <div class="fri-question-no">
+        04
+    </div>
+
+    <div class="fri-question-ta tamil">
+
+        எதிர்பாராத
+        செலவுகளை
+        சமாளிக்க
+        போதுமான
+        சேமிப்பு
+        உங்களிடம் உள்ளதா?
+
+    </div>
+
+    <div class="fri-question-en english">
+
+        Do you have
+        sufficient
+        emergency
+        savings?
+
+    </div>
+
+    <div
+        class="rating-scale"
+        data-question="4">
+
+        <button class="rating-btn" data-value="1">1</button>
+        <button class="rating-btn" data-value="2">2</button>
+        <button class="rating-btn" data-value="3">3</button>
+        <button class="rating-btn" data-value="4">4</button>
+        <button class="rating-btn" data-value="5">5</button>
+        <button class="rating-btn" data-value="6">6</button>
+        <button class="rating-btn" data-value="7">7</button>
+        <button class="rating-btn" data-value="8">8</button>
+        <button class="rating-btn" data-value="9">9</button>
+        <button class="rating-btn" data-value="10">10</button>
+
+    </div>
+
+</div>
+
+<!--==================================================
+QUESTION 05
+Debt Position
+==================================================-->
+
+<div class="fri-card">
+
+    <div class="fri-question-no">
+        05
+    </div>
+
+    <div class="fri-question-ta tamil">
+
+        கடன்
+        தொடர்பான
+        மனஅழுத்தம்
+        இல்லாமல்
+        நீங்கள்
+        இருக்கிறீர்களா?
+
+    </div>
+
+    <div class="fri-question-en english">
+
+        How free are
+        you from
+        debt-related
+        stress?
+
+    </div>
+
+    <div
+        class="rating-scale"
+        data-question="5">
+
+        <button class="rating-btn" data-value="1">1</button>
+        <button class="rating-btn" data-value="2">2</button>
+        <button class="rating-btn" data-value="3">3</button>
+        <button class="rating-btn" data-value="4">4</button>
+        <button class="rating-btn" data-value="5">5</button>
+        <button class="rating-btn" data-value="6">6</button>
+        <button class="rating-btn" data-value="7">7</button>
+        <button class="rating-btn" data-value="8">8</button>
+        <button class="rating-btn" data-value="9">9</button>
+        <button class="rating-btn" data-value="10">10</button>
+
+    </div>
+
+</div>
+
+<!--==================================================
+QUESTION 06
+Financial Planning
+==================================================-->
+
+<div class="fri-card">
+
+    <div class="fri-question-no">
+        06
+    </div>
+
+    <div class="fri-question-ta tamil">
+
+        உங்கள்
+        எதிர்கால
+        நிதி
+        திட்டம்
+        எவ்வளவு
+        தெளிவாக உள்ளது?
+
+    </div>
+
+    <div class="fri-question-en english">
+
+        How clear is
+        your financial
+        plan for
+        the future?
+
+    </div>
+
+    <div
+        class="rating-scale"
+        data-question="6">
+
+        <button class="rating-btn" data-value="1">1</button>
+        <button class="rating-btn" data-value="2">2</button>
+        <button class="rating-btn" data-value="3">3</button>
+        <button class="rating-btn" data-value="4">4</button>
+        <button class="rating-btn" data-value="5">5</button>
+        <button class="rating-btn" data-value="6">6</button>
+        <button class="rating-btn" data-value="7">7</button>
+        <button class="rating-btn" data-value="8">8</button>
+        <button class="rating-btn" data-value="9">9</button>
+        <button class="rating-btn" data-value="10">10</button>
+
+    </div>
+
+</div>
+
+<!--==================================================
+QUESTION 07
+Multiple Income
+==================================================-->
+
+<div class="fri-card">
+
+    <div class="fri-question-no">
+        07
+    </div>
+
+    <div class="fri-question-ta tamil">
+
+        ஒரே ஒரு
+        வருமானத்தை
+        மட்டுமே
+        சார்ந்திருக்காமல்
+        பல வருமான
+        வழிகள்
+        உங்களிடம் உள்ளதா?
+
+    </div>
+
+    <div class="fri-question-en english">
+
+        How diversified
+        are your
+        income sources?
+
+    </div>
+
+    <div
+        class="rating-scale"
+        data-question="7">
+
+        <button class="rating-btn" data-value="1">1</button>
+        <button class="rating-btn" data-value="2">2</button>
+        <button class="rating-btn" data-value="3">3</button>
+        <button class="rating-btn" data-value="4">4</button>
+        <button class="rating-btn" data-value="5">5</button>
+        <button class="rating-btn" data-value="6">6</button>
+        <button class="rating-btn" data-value="7">7</button>
+        <button class="rating-btn" data-value="8">8</button>
+        <button class="rating-btn" data-value="9">9</button>
+        <button class="rating-btn" data-value="10">10</button>
+
+    </div>
+
+</div>
+
+<!--==================================================
+QUESTION 08
+Investment Growth
+==================================================-->
+
+<div class="fri-card">
+
+    <div class="fri-question-no">
+        08
+    </div>
+
+    <div class="fri-question-ta tamil">
+
+        உங்கள்
+        பணம்
+        எதிர்காலத்திற்காக
+        வளரும்படி
+        முதலீடு
+        செய்யப்பட்டுள்ளதா?
+
+    </div>
+
+    <div class="fri-question-en english">
+
+        How effectively
+        is your money
+        invested to
+        build your
+        future?
+
+    </div>
+
+    <div
+        class="rating-scale"
+        data-question="8">
+
+        <button class="rating-btn" data-value="1">1</button>
+        <button class="rating-btn" data-value="2">2</button>
+        <button class="rating-btn" data-value="3">3</button>
+        <button class="rating-btn" data-value="4">4</button>
+        <button class="rating-btn" data-value="5">5</button>
+        <button class="rating-btn" data-value="6">6</button>
+        <button class="rating-btn" data-value="7">7</button>
+        <button class="rating-btn" data-value="8">8</button>
+        <button class="rating-btn" data-value="9">9</button>
+        <button class="rating-btn" data-value="10">10</button>
+
+    </div>
+
+</div>
+
+<!--==================================================
+QUESTION 09
+Financial Confidence
+==================================================-->
+
+<div class="fri-card">
+
+    <div class="fri-question-no">
+        09
+    </div>
+
+    <div class="fri-question-ta tamil">
+
+        உங்கள்
+        நிதி எதிர்காலம்
+        குறித்து
+        நீங்கள்
+        எவ்வளவு
+        நம்பிக்கையுடன்
+        இருக்கிறீர்கள்?
+
+    </div>
+
+    <div class="fri-question-en english">
+
+        How confident
+        are you about
+        your financial
+        future?
+
+    </div>
+
+    <div
+        class="rating-scale"
+        data-question="9">
+
+        <button class="rating-btn" data-value="1">1</button>
+        <button class="rating-btn" data-value="2">2</button>
+        <button class="rating-btn" data-value="3">3</button>
+        <button class="rating-btn" data-value="4">4</button>
+        <button class="rating-btn" data-value="5">5</button>
+        <button class="rating-btn" data-value="6">6</button>
+        <button class="rating-btn" data-value="7">7</button>
+        <button class="rating-btn" data-value="8">8</button>
+        <button class="rating-btn" data-value="9">9</button>
+        <button class="rating-btn" data-value="10">10</button>
+
+    </div>
+
+</div>
+
+<!--==================================================
+QUESTION 10
+Overall Financial Satisfaction
+==================================================-->
+
+<div class="fri-card">
+
+    <div class="fri-question-no">
+        10
+    </div>
+
+    <div class="fri-question-ta tamil">
+
+        ஒட்டுமொத்தமாக
+        உங்கள்
+        தற்போதைய
+        நிதி வாழ்க்கையால்
+        நீங்கள்
+        எவ்வளவு
+        திருப்தியாக
+        இருக்கிறீர்கள்?
+
+    </div>
+
+    <div class="fri-question-en english">
+
+        Overall,
+        how satisfied
+        are you with
+        your current
+        financial life?
+
+    </div>
+
+    <div
+        class="rating-scale"
+        data-question="10">
+
+        <button class="rating-btn" data-value="1">1</button>
+        <button class="rating-btn" data-value="2">2</button>
+        <button class="rating-btn" data-value="3">3</button>
+        <button class="rating-btn" data-value="4">4</button>
+        <button class="rating-btn" data-value="5">5</button>
+        <button class="rating-btn" data-value="6">6</button>
+        <button class="rating-btn" data-value="7">7</button>
+        <button class="rating-btn" data-value="8">8</button>
+        <button class="rating-btn" data-value="9">9</button>
+        <button class="rating-btn" data-value="10">10</button>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+<!--==================================================
+Financial Reality Index™ Result
+Hidden Until All Questions Answered
+==================================================-->
+
+<section
+id="fri-result"
+class="why-confirmation"
+style="display:none;">
+
+    <div class="confirmation-ta tamil">
+
+        உங்கள்
+        நிதி நிலை
+        மதிப்பெண்
+
+    </div>
+
+    <div
+        id="fri-score"
+        class="fri-score">
+
+        0 / 100
+
+    </div>
+
+    <div
+        id="fri-status-ta"
+        class="confirmation-ta tamil">
+
+    </div>
+
+    <div
+        id="fri-status-en"
+        class="confirmation-en english">
 
     </div>
 
 </section>
+
+<!--==================================================
+Premium Navigator
+SCREEN 11 → SCREEN 12
+==================================================-->
+
+<section class="cta-block">
+
+<button
+id="screen11-next"
+class="journey-next"
+type="button"
+data-next-screen="screen12"
+disabled>
+
+<span class="nav-decoration top-line"></span>
+
+<span class="nav-tamil tamil">
+
+தொடரலாம்...
+
+<br>
+
+நிதி MRI™
+
+</span>
+
+<span class="nav-arrows">
+
+→ → →
+
+</span>
+
+<span class="nav-english english">
+
+BEGIN MY
+
+FINANCIAL MRI™
+
+</span>
+
+<span class="nav-decoration bottom-line"></span>
+
+</button>
+
+</section>
+
+</div>
+
+</div>
+
+</section>
+
