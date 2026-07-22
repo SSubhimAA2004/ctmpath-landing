@@ -10,8 +10,11 @@ File:
 screen07.html
 
 Purpose:
-Help the visitor prioritise the most important needs
-in their life through a playful drag-and-drop experience.
+Allow the visitor to arrange their life's most important
+needs in order of importance.
+
+Interaction:
+Premium Sortable Life Cards
 
 ======================================================================
 -->
@@ -37,6 +40,10 @@ in their life through a playful drag-and-drop experience.
 
         </div>
 
+
+
+
+
         <!--==================================================
         Personal Greeting
         ==================================================-->
@@ -50,20 +57,29 @@ in their life through a playful drag-and-drop experience.
 
         </div>
 
+
+
+
+
         <!--==================================================
-        Title
+        Screen Title
         ==================================================-->
 
         <h1
             class="screen-title tamil">
 
             உங்கள் வாழ்க்கையின்<br>
+
             முக்கிய தேவைகள்
 
         </h1>
 
+
+
+
+
         <!--==================================================
-        Subtitle
+        English Subtitle
         ==================================================-->
 
         <div
@@ -73,8 +89,12 @@ in their life through a playful drag-and-drop experience.
 
         </div>
 
+
+
+
+
         <!--==================================================
-        Instructions
+        Tamil Instructions
         ==================================================-->
 
         <div
@@ -82,7 +102,7 @@ in their life through a playful drag-and-drop experience.
 
             <p>
 
-                கீழே உள்ள பட்டியலை
+                கீழே உள்ள தேவைகளை
 
             </p>
 
@@ -106,257 +126,433 @@ in their life through a playful drag-and-drop experience.
 
         </div>
 
+
+
+
+
+        <!--==================================================
+        English Instructions
+        ==================================================-->
+
         <div
             class="screen-message english">
 
             <p>
 
-                Drag the cards
+                Arrange these life needs
 
             </p>
 
             <p>
 
-                to arrange them
+                from the most important
 
             </p>
 
             <p>
 
-                from your highest
+                to the least important
 
             </p>
 
             <p>
 
-                life need to the lowest.
+                for your life today.
 
             </p>
 
         </div>
 
+
+
+
+
         <!--==================================================
-        Sortable List
+        Sortable Life Needs
         ==================================================-->
 
         <div
             id="life-needs-list"
             class="life-needs-list">
 
-            <div
-                class="need-card"
-                draggable="true"
-                data-id="1">
 
-                <span class="need-number">1</span>
 
-                <span class="need-text">
-
-                    💵 Increase my monthly income
-
-                </span>
-
-                <span class="drag-handle">
-
-                    ☰
-
-                </span>
-
-            </div>
+            <!-- Card 01 -->
 
             <div
                 class="need-card"
                 draggable="true"
-                data-id="2">
+                data-id="income">
 
-                <span class="need-number">2</span>
+                <div class="need-rank"></div>
 
-                <span class="need-text">
+                <div class="need-content">
 
-                    💰 Build a regular savings habit
+                    <div class="need-title tamil">
 
-                </span>
+                        என் மாத வருமானத்தை
+                        அதிகரிக்க வேண்டும்
 
-                <span class="drag-handle">
+                    </div>
+
+                    <div class="need-subtitle english">
+
+                        Increase my monthly income
+
+                    </div>
+
+                </div>
+
+                <div class="drag-handle">
 
                     ☰
 
-                </span>
+                </div>
 
             </div>
+
+
+
+            <!-- Card 02 -->
 
             <div
                 class="need-card"
                 draggable="true"
-                data-id="3">
+                data-id="saving">
 
-                <span class="need-number">3</span>
+                <div class="need-rank"></div>
 
-                <span class="need-text">
+                <div class="need-content">
 
-                    🏦 Reduce loans and EMI burden
+                    <div class="need-title tamil">
 
-                </span>
+                        தொடர்ந்து
+                        பணம் சேமிக்க வேண்டும்
 
-                <span class="drag-handle">
+                    </div>
+
+                    <div class="need-subtitle english">
+
+                        Build a regular savings habit
+
+                    </div>
+
+                </div>
+
+                <div class="drag-handle">
 
                     ☰
 
-                </span>
+                </div>
 
             </div>
+
+
+
+            <!-- Card 03 -->
 
             <div
                 class="need-card"
                 draggable="true"
-                data-id="4">
+                data-id="debt">
 
-                <span class="need-number">4</span>
+                <div class="need-rank"></div>
 
-                <span class="need-text">
+                <div class="need-content">
 
-                    📈 Start building long-term wealth
+                    <div class="need-title tamil">
 
-                </span>
+                        கடன் மற்றும் EMI
+                        அழுத்தத்திலிருந்து
+                        வெளியே வர வேண்டும்
 
-                <span class="drag-handle">
+                    </div>
+
+                    <div class="need-subtitle english">
+
+                        Reduce loans and EMI burden
+
+                    </div>
+
+                </div>
+
+                <div class="drag-handle">
 
                     ☰
 
-                </span>
+                </div>
 
             </div>
+
+
+
+            <!-- Card 04 -->
 
             <div
                 class="need-card"
                 draggable="true"
-                data-id="5">
+                data-id="wealth">
 
-                <span class="need-number">5</span>
+                <div class="need-rank"></div>
 
-                <span class="need-text">
+                <div class="need-content">
 
-                    🧭 Create a clear financial plan
+                    <div class="need-title tamil">
 
-                </span>
+                        என் செல்வத்தை
+                        உருவாக்கத் தொடங்க வேண்டும்
 
-                <span class="drag-handle">
+                    </div>
+
+                    <div class="need-subtitle english">
+
+                        Start building long-term wealth
+
+                    </div>
+
+                </div>
+
+                <div class="drag-handle">
 
                     ☰
 
-                </span>
+                </div>
 
             </div>
+
+
+
+            <!-- Card 05 -->
 
             <div
                 class="need-card"
                 draggable="true"
-                data-id="6">
+                data-id="plan">
 
-                <span class="need-number">6</span>
+                <div class="need-rank"></div>
 
-                <span class="need-text">
+                <div class="need-content">
 
-                    👨‍👩‍👧 Secure my family's future
+                    <div class="need-title tamil">
 
-                </span>
+                        எனக்கு ஒரு
+                        தெளிவான
+                        நிதி திட்டம் வேண்டும்
 
-                <span class="drag-handle">
+                    </div>
+
+                    <div class="need-subtitle english">
+
+                        Create a clear financial plan
+
+                    </div>
+
+                </div>
+
+                <div class="drag-handle">
 
                     ☰
 
-                </span>
+                </div>
 
             </div>
+
+
+
+            <!-- Card 06 -->
 
             <div
                 class="need-card"
                 draggable="true"
-                data-id="7">
+                data-id="family">
 
-                <span class="need-number">7</span>
+                <div class="need-rank"></div>
 
-                <span class="need-text">
+                <div class="need-content">
 
-                    💼 Create additional income
+                    <div class="need-title tamil">
 
-                </span>
+                        என் குடும்பத்தின்
+                        எதிர்காலத்தை
+                        பாதுகாக்க வேண்டும்
 
-                <span class="drag-handle">
+                    </div>
+
+                    <div class="need-subtitle english">
+
+                        Secure my family's future
+
+                    </div>
+
+                </div>
+
+                <div class="drag-handle">
 
                     ☰
 
-                </span>
+                </div>
 
             </div>
+
+
+
+            <!-- Card 07 -->
 
             <div
                 class="need-card"
                 draggable="true"
-                data-id="8">
+                data-id="income2">
 
-                <span class="need-number">8</span>
+                <div class="need-rank"></div>
 
-                <span class="need-text">
+                <div class="need-content">
 
-                    📊 Manage my expenses better
+                    <div class="need-title tamil">
 
-                </span>
+                        கூடுதல் வருமான
+                        வாய்ப்புகளை
+                        உருவாக்க வேண்டும்
 
-                <span class="drag-handle">
+                    </div>
+
+                    <div class="need-subtitle english">
+
+                        Create additional
+                        sources of income
+
+                    </div>
+
+                </div>
+
+                <div class="drag-handle">
 
                     ☰
 
-                </span>
+                </div>
 
             </div>
+
+
+
+            <!-- Card 08 -->
 
             <div
                 class="need-card"
                 draggable="true"
-                data-id="9">
+                data-id="expenses">
 
-                <span class="need-number">9</span>
+                <div class="need-rank"></div>
 
-                <span class="need-text">
+                <div class="need-content">
 
-                    🎯 Achieve financial freedom
+                    <div class="need-title tamil">
 
-                </span>
+                        என் செலவுகளை
+                        சிறப்பாக
+                        நிர்வகிக்க வேண்டும்
 
-                <span class="drag-handle">
+                    </div>
+
+                    <div class="need-subtitle english">
+
+                        Manage my expenses better
+
+                    </div>
+
+                </div>
+
+                <div class="drag-handle">
 
                     ☰
 
-                </span>
+                </div>
 
             </div>
+
+
+
+            <!-- Card 09 -->
 
             <div
                 class="need-card"
                 draggable="true"
-                data-id="10">
+                data-id="freedom">
 
-                <span class="need-number">10</span>
+                <div class="need-rank"></div>
 
-                <span class="need-text">
+                <div class="need-content">
 
-                    🌱 Live with financial peace of mind
+                    <div class="need-title tamil">
 
-                </span>
+                        நிதி சுதந்திரத்தை
+                        அடைய வேண்டும்
 
-                <span class="drag-handle">
+                    </div>
+
+                    <div class="need-subtitle english">
+
+                        Achieve financial freedom
+
+                    </div>
+
+                </div>
+
+                <div class="drag-handle">
 
                     ☰
 
-                </span>
+                </div>
 
             </div>
+
+
+
+            <!-- Card 10 -->
+
+            <div
+                class="need-card"
+                draggable="true"
+                data-id="peace">
+
+                <div class="need-rank"></div>
+
+                <div class="need-content">
+
+                    <div class="need-title tamil">
+
+                        வாழ்க்கையில்
+                        நிதி நிம்மதியுடன்
+                        வாழ வேண்டும்
+
+                    </div>
+
+                    <div class="need-subtitle english">
+
+                        Live with financial
+                        peace of mind
+
+                    </div>
+
+                </div>
+
+                <div class="drag-handle">
+
+                    ☰
+
+                </div>
+
+            </div>
+
+
 
         </div>
 
+
+
+
+
         <!--==================================================
-        Continue
+        Premium Navigator
         ==================================================-->
 
         <button
