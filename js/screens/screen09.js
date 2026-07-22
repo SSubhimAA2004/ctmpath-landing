@@ -9,15 +9,8 @@ SCREEN 09 — YOUR CHOICE™
 File:
 js/screens/screen09.js
 
-Purpose:
-Screen 09 Interaction Logic
-
-Responsibility
-• Initialize Screen 09
-• Display Visitor Name
-• Display Selected Dream Icons
-• Personalize Conversation
-• Continue to Screen 10
+Purpose
+Dynamic Life Visualisation
 
 ======================================================================
 */
@@ -28,23 +21,13 @@ Responsibility
 
     const CTM = window.CTM;
 
-    if (!CTM) {
-
-        console.error(
-            'CTM core has not been initialized.'
-        );
-
-        return;
-
-    }
+    if (!CTM) return;
 
 
 
-    /*
-    ==================================================
+    /*==================================================
     Screen Configuration
-    ==================================================
-    */
+    ==================================================*/
 
     CTM.screen09 = {
 
@@ -56,17 +39,19 @@ Responsibility
 
 
 
-    /*
-    ==================================================
+    /*==================================================
     Cached DOM
-    ==================================================
-    */
+    ==================================================*/
 
     const DOM = {
 
         visitorName : null,
 
-        dreamIcons : null,
+        visitorNameTa : null,
+
+        visitorNameEn : null,
+
+        dreamOrbit : null,
 
         nextButton : null
 
@@ -74,61 +59,51 @@ Responsibility
 
 
 
-    /*
-    ==================================================
+    /*==================================================
     Dream Icon Map
-    ==================================================
-    */
+    ==================================================*/
 
-    const DREAM_ICONS = {
+    const DREAMS = {
 
-        home : '🏡',
+        home                 : "🏡",
 
-        family : '👨‍👩‍👧',
+        family               : "👨‍👩‍👧",
 
-        education : '🎓',
+        education            : "🎓",
 
-        travel : '✈️',
+        travel               : "✈️",
 
-        health : '❤️',
+        health               : "❤️",
 
-        peace : '😊',
+        peace                : "😊",
 
-        "financial-freedom" : '💰',
+        "financial-freedom"  : "💰",
 
-        business : '🚀',
+        business             : "🚀",
 
-        time : '⏰',
+        time                 : "⏰",
 
-        passion : '🎨',
+        passion              : "🎨",
 
-        service : '🤝',
+        service              : "🤝",
 
-        freedom : '🌍'
+        freedom              : "🌍"
 
     };
 
 
 
-    /*
-    ==================================================
-    Initialize Screen
-    ==================================================
-    */
+    /*==================================================
+    Initialise
+    ==================================================*/
 
     CTM.initScreen09 = function(){
-
-        CTM.log(
-
-            'Screen 09 initialized.'
-
-        );
 
         cacheDOM();
 
         loadVisitorName();
 
-        renderDreamIcons();
+        buildDreamOrbit();
 
         bindEvents();
 
@@ -136,11 +111,9 @@ Responsibility
 
 
 
-    /*
-    ==================================================
+    /*==================================================
     Cache DOM
-    ==================================================
-    */
+    ==================================================*/
 
     function cacheDOM(){
 
@@ -148,17 +121,37 @@ Responsibility
 
             document.getElementById(
 
-                'visitor-display-name'
+                'visitor-name'
 
             );
 
 
 
-        DOM.dreamIcons =
+        DOM.visitorNameTa =
 
             document.getElementById(
 
-                'dream-icons'
+                'visitor-name-ta'
+
+            );
+
+
+
+        DOM.visitorNameEn =
+
+            document.getElementById(
+
+                'visitor-name-en'
+
+            );
+
+
+
+        DOM.dreamOrbit =
+
+            document.getElementById(
+
+                'dream-orbit'
 
             );
 
@@ -176,15 +169,13 @@ Responsibility
 
 
 
-    /*
-    ==================================================
-    Visitor Greeting
-    ==================================================
-    */
+    /*==================================================
+    Visitor Name
+    ==================================================*/
 
     function loadVisitorName(){
 
-        let visitorName = '';
+        let name = '';
 
 
 
@@ -196,7 +187,7 @@ Responsibility
 
         ){
 
-            visitorName =
+            name =
 
                 window.CTM_STATE.visitorName;
 
@@ -204,7 +195,7 @@ Responsibility
 
         else{
 
-            visitorName =
+            name =
 
                 localStorage.getItem(
 
@@ -216,15 +207,31 @@ Responsibility
 
 
 
-        if(
-
-            DOM.visitorName
-
-        ){
+        if(DOM.visitorName){
 
             DOM.visitorName.textContent =
 
-                visitorName;
+                name;
+
+        }
+
+
+
+        if(DOM.visitorNameTa){
+
+            DOM.visitorNameTa.textContent =
+
+                name + "...";
+
+        }
+
+
+
+        if(DOM.visitorNameEn){
+
+            DOM.visitorNameEn.textContent =
+
+                name + "...";
 
         }
 
@@ -232,25 +239,21 @@ Responsibility
 
 
 
-    /*
-    ==================================================
-    Render Dream Icons
-    ==================================================
-    */
+    /*==================================================
+    Build Dream Orbit
+    ==================================================*/
 
-    function renderDreamIcons(){
+    function buildDreamOrbit(){
 
-        if(
-
-            !DOM.dreamIcons
-
-        ){
+        if(!DOM.dreamOrbit){
 
             return;
 
         }
 
-        DOM.dreamIcons.innerHTML = '';
+
+
+        DOM.dreamOrbit.innerHTML = '';
 
 
 
@@ -286,6 +289,8 @@ Responsibility
 
                 );
 
+
+
             if(stored){
 
                 try{
@@ -300,7 +305,7 @@ Responsibility
 
                 }
 
-                catch(error){
+                catch(e){
 
                     dreams = [];
 
@@ -310,48 +315,119 @@ Responsibility
 
         }
 
+        /*==============================================
+        Build Orbit Nodes
+        ==============================================*/
+
+        const total = dreams.length;
+
+        if(total === 0){
+
+            return;
+
+        }
 
 
-        dreams
 
-            .slice(0,4)
+        const radius = 128;
 
-            .forEach(
+        const center = 170;
 
-                function(id){
 
-                    const icon =
 
-                        document.createElement(
+        dreams.forEach(function(id,index){
 
-                            'span'
+            const angle =
 
-                        );
+                (
 
-                    icon.textContent =
+                    (Math.PI * 2)
 
-                        DREAM_ICONS[id] || '✨';
+                    / total
 
-                    DOM.dreamIcons.appendChild(
+                ) * index
 
-                        icon
+                -
 
-                    );
+                (Math.PI / 2);
 
-                }
+
+
+            const x =
+
+                center +
+
+                Math.cos(angle)
+
+                * radius;
+
+
+
+            const y =
+
+                center +
+
+                Math.sin(angle)
+
+                * radius;
+
+
+
+            const node =
+
+                document.createElement(
+
+                    "div"
+
+                );
+
+
+
+            node.className =
+
+                "dream-node";
+
+
+
+            node.textContent =
+
+                DREAMS[id] || "✨";
+
+
+
+            node.style.left =
+
+                (x - 31) + "px";
+
+
+
+            node.style.top =
+
+                (y - 31) + "px";
+
+
+
+            node.style.animationDelay =
+
+                (index * .25) + "s";
+
+
+
+            DOM.dreamOrbit.appendChild(
+
+                node
 
             );
 
+        });
+
     }
 
-     /*
-    ==================================================
+
+
+    /*==============================================
     Continue Journey
-
-    SCREEN 09 → SCREEN 10
-
-    ==================================================
-    */
+    ==============================================*/
 
     function continueJourney(){
 
@@ -365,30 +441,23 @@ Responsibility
 
 
 
-    /*
-    ==================================================
-    Screen Click Handler
+    /*==============================================
+    Click Handler
+    ==============================================*/
 
-    ==================================================
-    */
+    function handleClick(event){
 
-    function handleScreenClick(event){
-
-        const nextButton =
+        const next =
 
             event.target.closest(
 
-                '#screen09-next'
+                "#screen09-next"
 
             );
 
 
 
-        if(
-
-            !nextButton
-
-        ){
+        if(!next){
 
             return;
 
@@ -406,22 +475,17 @@ Responsibility
 
 
 
-    /*
-    ==================================================
-    Bind Events
-
-    Safe Dynamic Loading
-
-    ==================================================
-    */
+    /*==============================================
+    Event Binding
+    ==============================================*/
 
     function bindEvents(){
 
         document.removeEventListener(
 
-            'click',
+            "click",
 
-            handleScreenClick
+            handleClick
 
         );
 
@@ -429,30 +493,23 @@ Responsibility
 
         document.addEventListener(
 
-            'click',
+            "click",
 
-            handleScreenClick
+            handleClick
 
         );
 
     }
 
 
-
-    /*
-    ==================================================
-    Unbind Events
-
-    ==================================================
-    */
 
     function unbindEvents(){
 
         document.removeEventListener(
 
-            'click',
+            "click",
 
-            handleScreenClick
+            handleClick
 
         );
 
@@ -460,14 +517,9 @@ Responsibility
 
 
 
-    /*
-    ==================================================
+    /*==============================================
     Screen Loaded Hook
-
-    Called after HTML Injection
-
-    ==================================================
-    */
+    ==============================================*/
 
     CTM.afterScreen09Loaded = function(){
 
@@ -475,7 +527,7 @@ Responsibility
 
             document.getElementById(
 
-                'screen09'
+                "screen09"
 
             )
 
@@ -489,12 +541,9 @@ Responsibility
 
 
 
-    /*
-    ==================================================
-    Refresh Screen
-
-    ==================================================
-    */
+    /*==============================================
+    Refresh
+    ==============================================*/
 
     CTM.refreshScreen09 = function(){
 
@@ -502,18 +551,39 @@ Responsibility
 
         loadVisitorName();
 
-        renderDreamIcons();
+        buildDreamOrbit();
 
     };
 
 
 
-    /*
-    ==================================================
-    Validation
+    /*==============================================
+    Cleanup
+    ==============================================*/
 
-    ==================================================
-    */
+    CTM.destroyScreen09 = function(){
+
+        unbindEvents();
+
+
+
+        DOM.visitorName = null;
+
+        DOM.visitorNameTa = null;
+
+        DOM.visitorNameEn = null;
+
+        DOM.dreamOrbit = null;
+
+        DOM.nextButton = null;
+
+    };
+
+
+
+    /*==============================================
+    Validation
+    ==============================================*/
 
     CTM.validateScreen09 = function(){
 
@@ -523,37 +593,13 @@ Responsibility
 
 
 
-    /*
-    ==================================================
-    Cleanup
-
-    ==================================================
-    */
-
-    CTM.destroyScreen09 = function(){
-
-        unbindEvents();
-
-        DOM.visitorName = null;
-
-        DOM.dreamIcons = null;
-
-        DOM.nextButton = null;
-
-    };
-
-
-
-    /*
-    ==================================================
+    /*==============================================
     Module Ready
-
-    ==================================================
-    */
+    ==============================================*/
 
     CTM.log(
 
-        'Screen 09 module loaded.'
+        "Screen 09 module loaded."
 
     );
 
