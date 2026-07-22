@@ -1,7 +1,7 @@
 
 /*======================================================================
 
-CTM PATH™ Guided Journey v6.2
+CTM PATH™ Guided Journey v7.0
 
 SCREEN 11 — YOUR FINANCIAL REALITY™
 
@@ -9,7 +9,7 @@ File:
 screen11.css
 
 Purpose:
-Financial Reality Index™ Styling
+Financial Reality Index™
 
 ======================================================================*/
 
@@ -20,10 +20,249 @@ Screen
 
 .screen11{
 
+    position:relative;
+
     animation:fadeScreen .8s ease;
 
 }
 
+
+/*==================================================
+Container
+==================================================*/
+
+.screen11 .container{
+
+    max-width:920px;
+
+    margin:0 auto;
+
+}
+
+
+/*==================================================
+Hero
+==================================================*/
+
+.screen11 .hero{
+
+    text-align:center;
+
+}
+
+
+/*==================================================
+Hero Icon
+==================================================*/
+
+.screen11 .hero-icon{
+
+    margin-bottom:42px;
+
+}
+
+
+/*==================================================
+Greeting
+==================================================*/
+
+.screen11 .personal-greeting{
+
+    margin-bottom:34px;
+
+}
+
+
+.screen11 .visitor-name{
+
+    display:inline-block;
+
+    font-size:30px;
+
+    font-weight:600;
+
+    letter-spacing:.04em;
+
+}
+
+
+/*==================================================
+Welcome
+==================================================*/
+
+.screen11 .welcome-block{
+
+    margin-bottom:50px;
+
+}
+
+
+.screen11 .tamil-welcome{
+
+    font-size:54px;
+
+    line-height:1.45;
+
+    font-weight:300;
+
+    color:#F7F3EA;
+
+}
+
+
+.screen11 .english-welcome{
+
+    margin-top:16px;
+
+    letter-spacing:.28em;
+
+    font-size:14px;
+
+    color:#AEB6C6;
+
+}
+
+
+/*==================================================
+Divider
+==================================================*/
+
+.premium-divider{
+
+    width:110px;
+
+    height:1px;
+
+    margin:48px auto;
+
+    background:linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(201,167,92,.85),
+
+        transparent
+
+    );
+
+}
+
+
+/*==================================================
+Conversation
+==================================================*/
+
+.question-block{
+
+    text-align:center;
+
+    margin-bottom:48px;
+
+}
+
+
+.question-ta{
+
+    font-size:38px;
+
+    line-height:1.7;
+
+    color:#F7F3EA;
+
+    font-weight:300;
+
+}
+
+
+.question-en{
+
+    margin-top:30px;
+
+    font-size:20px;
+
+    line-height:1.9;
+
+    color:#BAC3D2;
+
+}
+
+
+/*==================================================
+Reflection
+==================================================*/
+
+.why-instruction{
+
+    text-align:center;
+
+    max-width:760px;
+
+    margin:0 auto 80px;
+
+}
+
+
+.instruction-ta{
+
+    font-size:32px;
+
+    line-height:1.8;
+
+    color:#F7F3EA;
+
+}
+
+
+.instruction-en{
+
+    margin-top:32px;
+
+    font-size:19px;
+
+    line-height:1.9;
+
+    color:#BAC3D2;
+
+}
+
+
+/*==================================================
+Transition
+==================================================*/
+
+.reflection-transition{
+
+    text-align:center;
+
+    margin:70px 0;
+
+}
+
+
+.transition-ta{
+
+    font-size:34px;
+
+    color:#C9A75C;
+
+    line-height:1.7;
+
+}
+
+
+.transition-en{
+
+    margin-top:18px;
+
+    font-size:18px;
+
+    color:#9FA8BA;
+
+    letter-spacing:.18em;
+
+}
 
 /*==================================================
 Financial Reality Section
@@ -31,7 +270,9 @@ Financial Reality Section
 
 .financial-reality{
 
-    margin-top:60px;
+    width:100%;
+
+    margin-top:30px;
 
 }
 
@@ -42,7 +283,7 @@ Financial Reality Section
 
     flex-direction:column;
 
-    gap:32px;
+    gap:70px;
 
 }
 
@@ -53,26 +294,48 @@ Question Card
 
 .fri-card{
 
-    background:rgba(255,255,255,.03);
+    position:relative;
+
+    background:rgba(255,255,255,.025);
 
     border:1px solid rgba(255,255,255,.08);
 
-    border-radius:22px;
+    border-radius:26px;
 
-    padding:34px;
+    padding:55px 50px;
 
-    transition:.35s;
+    transition:all .35s ease;
 
-    backdrop-filter:blur(12px);
+    backdrop-filter:blur(14px);
 
 }
 
 
 .fri-card:hover{
 
-    transform:translateY(-2px);
+    border-color:rgba(201,167,92,.35);
 
-    border-color:rgba(255,255,255,.18);
+    transform:translateY(-3px);
+
+    box-shadow:
+
+        0 12px 35px
+
+        rgba(0,0,0,.18);
+
+}
+
+
+/*==================================================
+Hidden Cards
+
+Progressive Conversation
+
+==================================================*/
+
+.fri-card.hidden{
+
+    display:none;
 
 }
 
@@ -81,11 +344,13 @@ Question Card
 Question Number
 ==================================================*/
 
-.fri-question-no{
+.fri-number{
 
-    width:42px;
+    width:52px;
 
-    height:42px;
+    height:52px;
+
+    margin:0 auto 30px;
 
     border-radius:50%;
 
@@ -95,15 +360,15 @@ Question Number
 
     justify-content:center;
 
-    margin-bottom:22px;
-
     background:#12376E;
 
     color:#ffffff;
 
+    font-size:18px;
+
     font-weight:700;
 
-    font-size:15px;
+    letter-spacing:.08em;
 
 }
 
@@ -114,15 +379,22 @@ Tamil Question
 
 .fri-question-ta{
 
-    font-size:30px;
-
-    line-height:1.65;
-
     text-align:center;
+
+    font-size:36px;
+
+    line-height:1.8;
+
+    font-weight:300;
 
     color:#F7F3EA;
 
-    margin-bottom:18px;
+}
+
+
+.fri-question-ta .text-gold{
+
+    color:#C9A75C;
 
 }
 
@@ -133,15 +405,15 @@ English Question
 
 .fri-question-en{
 
-    font-size:18px;
-
-    line-height:1.8;
+    margin-top:28px;
 
     text-align:center;
 
-    color:#BFC7D5;
+    font-size:18px;
 
-    margin-bottom:28px;
+    line-height:1.9;
+
+    color:#AEB6C6;
 
 }
 
@@ -152,19 +424,23 @@ Rating Scale
 
 .rating-scale{
 
+    margin-top:45px;
+
     display:flex;
 
     justify-content:center;
 
-    gap:12px;
+    align-items:center;
 
     flex-wrap:wrap;
+
+    gap:14px;
 
 }
 
 
 /*==================================================
-Rating Button
+Premium Rating Circle
 ==================================================*/
 
 .rating-btn{
@@ -175,11 +451,15 @@ Rating Button
 
     border-radius:50%;
 
-    border:1px solid rgba(255,255,255,.18);
+    border:1px solid
 
-    background:transparent;
+        rgba(255,255,255,.12);
 
-    color:#ffffff;
+    background:
+
+        rgba(255,255,255,.03);
+
+    color:#E7EAF0;
 
     font-size:16px;
 
@@ -187,116 +467,33 @@ Rating Button
 
     cursor:pointer;
 
-    transition:.25s;
+    transition:all .25s ease;
 
 }
 
 
 .rating-btn:hover{
 
+    border-color:#2C5FA5;
+
     transform:translateY(-3px);
 
-    border-color:#2C5FA5;
+    box-shadow:
+
+        0 8px 20px
+
+        rgba(44,95,165,.18);
 
 }
 
 
 /*==================================================
-Selected
+Selected Circle
 ==================================================*/
 
 .rating-btn.selected{
 
     transform:scale(1.08);
-
-    box-shadow:0 0 14px rgba(255,255,255,.18);
-
-}
-
-
-/*==================================================
-Red
-==================================================*/
-
-.rating-red{
-
-    background:#C94A4A;
-
-    border-color:#C94A4A;
-
-    color:#ffffff;
-
-}
-
-
-/*==================================================
-Orange
-==================================================*/
-
-.rating-orange{
-
-    background:#D98A29;
-
-    border-color:#D98A29;
-
-    color:#ffffff;
-
-}
-
-
-/*==================================================
-Green
-==================================================*/
-
-.rating-green{
-
-    background:#2FA86A;
-
-    border-color:#2FA86A;
-
-    color:#ffffff;
-
-}
-
-
-/*==================================================
-Result Card
-==================================================*/
-
-#fri-result{
-
-    display:none;
-
-    margin-top:70px;
-
-    text-align:center;
-
-    background:rgba(255,255,255,.04);
-
-    border:1px solid rgba(255,255,255,.10);
-
-    border-radius:26px;
-
-    padding:50px;
-
-    animation:fadeUp .7s ease;
-
-}
-
-
-/*==================================================
-Score
-==================================================*/
-
-.fri-score{
-
-    font-size:72px;
-
-    font-weight:700;
-
-    margin:26px 0;
-
-    transition:.35s;
 
 }
 
@@ -305,178 +502,832 @@ Score
 Score Colours
 ==================================================*/
 
+.rating-red{
+
+    background:#C44B4B;
+
+    border-color:#C44B4B;
+
+    color:#ffffff;
+
+}
+
+
+.rating-orange{
+
+    background:#D88D2E;
+
+    border-color:#D88D2E;
+
+    color:#ffffff;
+
+}
+
+
+.rating-green{
+
+    background:#38A86A;
+
+    border-color:#38A86A;
+
+    color:#ffffff;
+
+}
+
+
+/*==================================================
+Rating Labels
+==================================================*/
+
+.rating-labels{
+
+    margin-top:24px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    font-size:14px;
+
+    letter-spacing:.08em;
+
+    color:#8F99AA;
+
+}
+
+
+.rating-low{
+
+    text-align:left;
+
+}
+
+
+.rating-high{
+
+    text-align:right;
+
+}
+
+/*==================================================
+Financial Analysis
+==================================================*/
+
+.fri-analysis{
+
+    margin-top:100px;
+
+    text-align:center;
+
+    animation:fadeUp .8s ease;
+
+}
+
+
+.analysis-card{
+
+    max-width:760px;
+
+    margin:0 auto;
+
+    padding:70px 60px;
+
+    background:rgba(255,255,255,.025);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:28px;
+
+    backdrop-filter:blur(18px);
+
+}
+
+
+/*==================================================
+Analysis Icon
+==================================================*/
+
+.analysis-icon{
+
+    font-size:52px;
+
+    margin-bottom:35px;
+
+}
+
+
+/*==================================================
+Analysis Title
+==================================================*/
+
+.analysis-title{
+
+    font-size:34px;
+
+    line-height:1.8;
+
+    color:#F7F3EA;
+
+}
+
+
+.analysis-title-en{
+
+    margin-top:18px;
+
+    font-size:18px;
+
+    letter-spacing:.15em;
+
+    color:#AEB6C6;
+
+}
+
+
+/*==================================================
+Analysis Progress
+==================================================*/
+
+.analysis-progress{
+
+    margin-top:55px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+
+/*==================================================
+Analysis Item
+==================================================*/
+
+.analysis-item{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:16px;
+
+    font-size:18px;
+
+    color:#7D8798;
+
+    opacity:.35;
+
+    transition:all .45s ease;
+
+}
+
+
+.analysis-item.completed{
+
+    opacity:1;
+
+    color:#F7F3EA;
+
+}
+
+
+/*==================================================
+Checkmark
+==================================================*/
+
+.analysis-check{
+
+    width:30px;
+
+    height:30px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#2FA86A;
+
+    color:#ffffff;
+
+    font-size:15px;
+
+    font-weight:700;
+
+}
+
+
+/*==================================================
+Financial Reality Result
+==================================================*/
+
+.fri-result{
+
+    margin-top:110px;
+
+    text-align:center;
+
+    animation:fadeUp .9s ease;
+
+}
+
+
+.fri-result-card{
+
+    max-width:760px;
+
+    margin:0 auto;
+
+    padding:80px 60px;
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid rgba(255,255,255,.10);
+
+    border-radius:32px;
+
+    backdrop-filter:blur(18px);
+
+}
+
+
+/*==================================================
+Caption
+==================================================*/
+
+.fri-caption{
+
+    font-size:34px;
+
+    line-height:1.8;
+
+    color:#F7F3EA;
+
+}
+
+
+.fri-caption-en{
+
+    margin-top:18px;
+
+    font-size:18px;
+
+    letter-spacing:.18em;
+
+    color:#AEB6C6;
+
+}
+
+
+/*==================================================
+Score Circle
+==================================================*/
+
+.fri-score-circle{
+
+    width:220px;
+
+    height:220px;
+
+    margin:55px auto;
+
+    border-radius:50%;
+
+    border:5px solid rgba(255,255,255,.12);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    transition:.4s;
+
+}
+
+
+/*==================================================
+Score Value
+==================================================*/
+
+.fri-score-value{
+
+    font-size:76px;
+
+    font-weight:700;
+
+    line-height:1;
+
+}
+
+
+.fri-score-label{
+
+    margin-top:8px;
+
+    font-size:22px;
+
+    color:#B7C1CF;
+
+}
+
+
+/*==================================================
+Circle Colours
+==================================================*/
+
 .score-red{
 
-    color:#E05252;
+    border-color:#C44B4B;
+
+    color:#C44B4B;
 
 }
 
 
 .score-orange{
 
-    color:#F0AA42;
+    border-color:#D88D2E;
+
+    color:#D88D2E;
 
 }
 
 
 .score-green{
 
-    color:#37C87A;
+    border-color:#38A86A;
+
+    color:#38A86A;
 
 }
 
 
 /*==================================================
-Status Text
+Financial Status
 ==================================================*/
 
-#fri-status-ta{
+.fri-score-status{
 
-    font-size:26px;
+    margin-top:15px;
+
+    font-size:28px;
+
+    font-weight:500;
+
+    color:#F7F3EA;
+
+}
+
+
+/*==================================================
+Personal Insight
+==================================================*/
+
+.fri-score-message{
+
+    margin-top:28px;
+
+    font-size:20px;
+
+    line-height:1.9;
+
+    color:#AEB6C6;
+
+    max-width:620px;
+
+    margin-left:auto;
+
+    margin-right:auto;
+
+}
+
+
+/*==================================================
+Hidden
+==================================================*/
+
+.hidden{
+
+    display:none;
+
+}
+
+/*==================================================
+Premium Navigator
+==================================================*/
+
+.cta-block{
+
+    margin-top:120px;
+
+    text-align:center;
+
+}
+
+
+.journey-next{
+
+    position:relative;
+
+    display:inline-flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:14px;
+
+    min-width:360px;
+
+    padding:36px 70px;
+
+    background:transparent;
+
+    border:none;
+
+    cursor:pointer;
+
+    transition:all .35s ease;
+
+}
+
+
+.journey-next:hover{
+
+    transform:translateY(-4px);
+
+}
+
+
+.journey-next:disabled{
+
+    opacity:.35;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+}
+
+
+.nav-decoration{
+
+    width:140px;
+
+    height:1px;
+
+    background:linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(201,167,92,.90),
+
+        transparent
+
+    );
+
+}
+
+
+.nav-tamil{
+
+    font-size:28px;
 
     line-height:1.7;
 
-    margin-top:20px;
+    color:#F7F3EA;
 
 }
 
 
-#fri-status-en{
+.nav-arrows{
 
-    font-size:18px;
+    font-size:22px;
 
-    line-height:1.8;
+    letter-spacing:8px;
 
-    color:#C7CEDB;
+    color:#C9A75C;
 
-    margin-top:18px;
+}
+
+
+.nav-english{
+
+    font-size:14px;
+
+    letter-spacing:.30em;
+
+    color:#AEB6C6;
 
 }
 
 
 /*==================================================
-CTA
+Navigator Pulse
+
+Activated After Score Reveal
+
 ==================================================*/
 
-#screen11-next{
+.pulse{
 
-    margin-top:70px;
+    animation:pulseNavigator 2s infinite;
+
+}
+
+
+/*==================================================
+Fade Up
+
+==================================================*/
+
+.fade-up{
+
+    animation:fadeUp .8s ease both;
+
+}
+
+
+/*==================================================
+Fade Screen
+
+==================================================*/
+
+@keyframes fadeScreen{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+
+/*==================================================
+Fade Up Animation
+
+==================================================*/
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(24px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/*==================================================
+Premium Pulse
+
+==================================================*/
+
+@keyframes pulseNavigator{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.025);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
 
 }
 
 
 /*==================================================
 Responsive
+
+Tablet
+
 ==================================================*/
 
 @media(max-width:900px){
 
-.fri-card{
+    .tamil-welcome{
 
-padding:28px;
+        font-size:46px;
+
+    }
+
+    .question-ta{
+
+        font-size:32px;
+
+    }
+
+    .instruction-ta{
+
+        font-size:28px;
+
+    }
+
+    .fri-question-ta{
+
+        font-size:30px;
+
+    }
+
+    .fri-score-circle{
+
+        width:190px;
+
+        height:190px;
+
+    }
+
+    .fri-score-value{
+
+        font-size:64px;
+
+    }
 
 }
 
-.fri-question-ta{
 
-font-size:25px;
+/*==================================================
+Responsive
 
-}
+Mobile
 
-.fri-question-en{
-
-font-size:17px;
-
-}
-
-.rating-btn{
-
-width:46px;
-
-height:46px;
-
-font-size:15px;
-
-}
-
-.fri-score{
-
-font-size:58px;
-
-}
-
-}
-
+==================================================*/
 
 @media(max-width:600px){
 
-.financial-grid{
+    .container{
 
-gap:24px;
+        padding:0 22px;
 
-}
+    }
 
-.fri-card{
+    .tamil-welcome{
 
-padding:22px;
+        font-size:36px;
 
-}
+    }
 
-.fri-question-no{
+    .question-ta{
 
-width:36px;
+        font-size:26px;
 
-height:36px;
+    }
 
-font-size:13px;
+    .question-en{
 
-}
+        font-size:17px;
 
-.fri-question-ta{
+    }
 
-font-size:22px;
+    .instruction-ta{
 
-}
+        font-size:23px;
 
-.fri-question-en{
+    }
 
-font-size:15px;
+    .instruction-en{
 
-}
+        font-size:17px;
 
-.rating-scale{
+    }
 
-gap:8px;
+    .fri-card{
 
-}
+        padding:36px 24px;
 
-.rating-btn{
+    }
 
-width:38px;
+    .fri-question-ta{
 
-height:38px;
+        font-size:24px;
 
-font-size:14px;
+        line-height:1.75;
 
-}
+    }
 
-.fri-score{
+    .fri-question-en{
 
-font-size:46px;
+        font-size:16px;
 
-}
+    }
 
-#fri-status-ta{
+    .rating-scale{
 
-font-size:21px;
+        gap:8px;
 
-}
+    }
 
-#fri-status-en{
+    .rating-btn{
 
-font-size:15px;
+        width:38px;
 
-}
+        height:38px;
+
+        font-size:14px;
+
+    }
+
+    .rating-labels{
+
+        font-size:12px;
+
+    }
+
+    .analysis-card,
+
+    .fri-result-card{
+
+        padding:45px 24px;
+
+    }
+
+    .fri-score-circle{
+
+        width:150px;
+
+        height:150px;
+
+    }
+
+    .fri-score-value{
+
+        font-size:50px;
+
+    }
+
+    .fri-score-status{
+
+        font-size:22px;
+
+    }
+
+    .fri-score-message{
+
+        font-size:17px;
+
+    }
+
+    .journey-next{
+
+        min-width:100%;
+
+        padding:28px 20px;
+
+    }
+
+    .nav-tamil{
+
+        font-size:23px;
+
+    }
 
 }
 
