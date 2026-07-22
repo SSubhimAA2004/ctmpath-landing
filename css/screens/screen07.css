@@ -1,1 +1,622 @@
 
+/*
+======================================================================
+
+CTM PATH™ Guided Journey v6.0
+
+SCREEN 07 — YOUR LIFE NEEDS™
+
+File:
+screen07.css
+
+Purpose:
+Premium Sortable Life Needs Board
+
+Responsibility
+• Screen Layout
+• Typography
+• Premium Life Cards
+• Drag & Drop Experience
+• Responsive Design
+
+======================================================================
+*/
+
+
+/*==================================================
+Screen Base
+==================================================*/
+
+.screen07{
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+
+        radial-gradient(
+
+            circle at center,
+
+            rgba(32,213,199,.08),
+
+            transparent 55%
+
+        ),
+
+        #081C3A;
+
+}
+
+
+
+
+
+/*==================================================
+Content
+==================================================*/
+
+.screen07 .screen-content{
+
+    width:min(94%,760px);
+
+    margin:auto;
+
+    text-align:center;
+
+}
+
+
+
+
+
+/*==================================================
+Illustration
+==================================================*/
+
+.screen07 .screen-image{
+
+    width:170px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+
+
+/*==================================================
+Visitor Name
+==================================================*/
+
+.screen07 .personal-greeting{
+
+    color:#E3C47A;
+
+    font-family:
+
+        "Playfair Display",
+
+        serif;
+
+    font-size:2rem;
+
+    margin-bottom:12px;
+
+    text-shadow:
+
+        0 0 16px
+
+        rgba(214,181,108,.35);
+
+}
+
+
+
+
+
+/*==================================================
+Title
+==================================================*/
+
+.screen07 .screen-title{
+
+    color:#FFF8E7;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size:2.4rem;
+
+    line-height:1.45;
+
+    margin-bottom:14px;
+
+}
+
+
+
+
+
+/*==================================================
+Subtitle
+==================================================*/
+
+.screen07 .screen-subtitle{
+
+    color:#D6B56C;
+
+    font-family:
+
+        "Inter",
+
+        sans-serif;
+
+    letter-spacing:.24em;
+
+    font-size:.82rem;
+
+    margin-bottom:32px;
+
+}
+
+
+
+
+
+/*==================================================
+Instructions
+==================================================*/
+
+.screen07 .screen-message{
+
+    margin-bottom:22px;
+
+}
+
+
+
+
+
+.screen07 .screen-message.tamil{
+
+    color:#FFF8E7;
+
+    font-size:1.08rem;
+
+    line-height:1.8;
+
+}
+
+
+
+
+
+.screen07 .screen-message.english{
+
+    color:
+
+        rgba(255,248,231,.72);
+
+    font-size:.92rem;
+
+    line-height:1.7;
+
+}
+
+
+
+
+
+/*==================================================
+Life Needs Board
+==================================================*/
+
+.life-needs-list{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+    margin-top:40px;
+
+    margin-bottom:50px;
+
+}
+
+
+
+
+
+/*==================================================
+Life Card
+==================================================*/
+
+.need-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    padding:20px 24px;
+
+    background:
+
+        rgba(255,255,255,.045);
+
+    border:
+
+        1px solid
+
+        rgba(214,181,108,.18);
+
+    border-radius:18px;
+
+    cursor:grab;
+
+    transition:
+
+        all .30s ease;
+
+    backdrop-filter:
+
+        blur(12px);
+
+}
+
+
+
+
+
+.need-card:hover{
+
+    transform:
+
+        translateY(-2px);
+
+    border-color:
+
+        #D6B56C;
+
+    box-shadow:
+
+        0 12px 28px
+
+        rgba(0,0,0,.28),
+
+        0 0 20px
+
+        rgba(45,212,191,.18);
+
+}
+
+
+
+
+
+.need-card.dragging{
+
+    opacity:.92;
+
+    transform:
+
+        scale(1.03);
+
+    cursor:grabbing;
+
+    box-shadow:
+
+        0 20px 40px
+
+        rgba(0,0,0,.35);
+
+}
+
+
+
+
+
+/*==================================================
+Rank Badge
+==================================================*/
+
+.need-rank{
+
+    width:52px;
+
+    height:52px;
+
+    flex-shrink:0;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #F4E1A6,
+
+            #D6B56C
+
+        );
+
+    color:#081C3A;
+
+    font-weight:700;
+
+    font-size:1.15rem;
+
+}
+
+
+
+
+
+/*==================================================
+Content
+==================================================*/
+
+.need-content{
+
+    flex:1;
+
+    text-align:left;
+
+}
+
+
+
+
+
+.need-title{
+
+    color:#FFF8E7;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size:1.05rem;
+
+    line-height:1.65;
+
+    margin-bottom:6px;
+
+}
+
+
+
+
+
+.need-subtitle{
+
+    color:
+
+        rgba(255,255,255,.65);
+
+    font-size:.88rem;
+
+    line-height:1.5;
+
+}
+
+
+
+
+
+/*==================================================
+Drag Handle
+==================================================*/
+
+.drag-handle{
+
+    color:#D6B56C;
+
+    font-size:1.35rem;
+
+    letter-spacing:2px;
+
+    user-select:none;
+
+}
+
+
+
+
+
+/*==================================================
+Navigator
+==================================================*/
+
+.screen07 .journey-next{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    background:none;
+
+    border:none;
+
+    cursor:pointer;
+
+    margin-top:10px;
+
+}
+
+
+
+
+
+.screen07 .nav-decoration{
+
+    width:240px;
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+
+
+
+
+.screen07 .nav-decoration::before,
+
+.screen07 .nav-decoration::after{
+
+    content:"";
+
+    flex:1;
+
+    height:1px;
+
+    background:#D6B56C;
+
+    opacity:.6;
+
+}
+
+
+
+
+
+.screen07 .nav-tamil{
+
+    margin-top:18px;
+
+    color:#D6B56C;
+
+    font-size:1.25rem;
+
+    font-weight:700;
+
+}
+
+
+
+
+
+.screen07 .nav-arrows{
+
+    margin:12px 0;
+
+    color:#D6B56C;
+
+    letter-spacing:.35em;
+
+}
+
+
+
+
+
+.screen07 .nav-english{
+
+    color:#D6B56C;
+
+    font-size:.84rem;
+
+    letter-spacing:.22em;
+
+}
+
+
+
+
+
+/*==================================================
+Responsive
+==================================================*/
+
+@media(max-width:768px){
+
+    .screen07 .screen-title{
+
+        font-size:2rem;
+
+    }
+
+    .need-card{
+
+        padding:16px;
+
+        gap:14px;
+
+    }
+
+    .need-rank{
+
+        width:44px;
+
+        height:44px;
+
+        font-size:1rem;
+
+    }
+
+}
+
+
+
+
+
+@media(max-width:600px){
+
+    .screen07 .screen-image{
+
+        width:135px;
+
+    }
+
+    .screen07 .personal-greeting{
+
+        font-size:1.7rem;
+
+    }
+
+    .need-title{
+
+        font-size:.95rem;
+
+    }
+
+    .need-subtitle{
+
+        font-size:.80rem;
+
+    }
+
+}
