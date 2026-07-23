@@ -1,1167 +1,421 @@
 
-/*
-======================================================================
+/*=====================================================================
 
-CTM PATH™ Guided Journey v6.0
+    CTM PATH™
+    FROM SURVIVAL TO LIVING™
 
-File
-css/foundation/global.css
+    File
+    global.css
 
-Purpose
-Global Design Foundation
+    Purpose
+    Global Design System
 
-Responsibility
-• Premium colour system
-• Design tokens
-• Layout foundation
-• Reset styles
-• Base application behaviour
-• CTM PATH™ visual identity
+    Responsibilities
 
-======================================================================
-*/
+    • CSS Reset
+    • Design Tokens
+    • Color Palette
+    • Layout Foundation
+    • Glass Effects
+    • Shadows
+    • Scrollbars
+
+======================================================================*/
 
 
 /*==================================================
-Root Variables
+CSS RESET
 ==================================================*/
-
-:root{
-
-
-    /*
-    -----------------------------------------------
-    Brand Colours
-    -----------------------------------------------
-    */
-
-
-    --color-background:
-
-        #020812;
-
-
-
-    --color-background-soft:
-
-        #06152F;
-
-
-
-    --color-background-deep:
-
-        #020B18;
-
-
-
-    --color-background-light:
-
-        #09294A;
-
-
-
-    --color-surface:
-
-        rgba(255,255,255,.06);
-
-
-
-    --color-surface-light:
-
-        rgba(255,255,255,.10);
-
-
-
-
-    /*
-    -----------------------------------------------
-    Primary Brand
-    -----------------------------------------------
-    */
-
-
-    --color-primary:
-
-        #18A66D;
-
-
-
-    --color-primary-bright:
-
-        #00C2B8;
-
-
-
-    --color-primary-dark:
-
-        #125D41;
-
-
-
-
-    /*
-    -----------------------------------------------
-    CTM Gold
-    -----------------------------------------------
-    */
-
-
-    --color-gold:
-
-        #D9B56A;
-
-
-
-    --color-gold-light:
-
-        #FFF0A3;
-
-
-
-    --color-gold-dark:
-
-        #B47718;
-
-
-
-    --color-gold-soft:
-
-        rgba(217,181,106,.45);
-
-
-
-
-
-    /*
-    -----------------------------------------------
-    Typography Colours
-    -----------------------------------------------
-    */
-
-
-    --color-white:
-
-        #FFFFFF;
-
-
-
-    --color-ivory:
-
-        #F5F4EE;
-
-
-
-    --color-text:
-
-        rgba(255,255,255,.94);
-
-
-
-    --color-text-soft:
-
-        rgba(255,255,255,.72);
-
-
-
-
-
-    /*
-    -----------------------------------------------
-    Functional Colours
-    -----------------------------------------------
-    */
-
-
-    --color-success:
-
-        #22C55E;
-
-
-
-    --color-warning:
-
-        #F59E0B;
-
-
-
-    --color-danger:
-
-        #EF4444;
-
-
-
-
-
-    /*
-    -----------------------------------------------
-    Shadows
-    -----------------------------------------------
-    */
-
-
-    --shadow-soft:
-
-
-        0 20px 60px rgba(0,0,0,.35);
-
-
-
-
-    --shadow-premium:
-
-
-        0 30px 80px rgba(0,0,0,.60);
-
-
-
-
-    --shadow-glow:
-
-
-        0 0 50px rgba(0,194,184,.18);
-
-
-
-
-    --shadow-gold:
-
-
-        0 0 45px rgba(217,181,106,.30);
-
-
-
-
-
-    /*
-    -----------------------------------------------
-    Radius
-    -----------------------------------------------
-    */
-
-
-    --radius-card:
-
-        28px;
-
-
-
-
-    --radius-button:
-
-        999px;
-
-
-
-
-    --radius-soft:
-
-        16px;
-
-
-
-
-
-    /*
-    -----------------------------------------------
-    Spacing
-    -----------------------------------------------
-    */
-
-
-    --space-xs:
-
-        8px;
-
-
-
-    --space-sm:
-
-        16px;
-
-
-
-    --space-md:
-
-        32px;
-
-
-
-    --space-lg:
-
-        64px;
-
-
-
-    --space-xl:
-
-        96px;
-
-
-
-
-
-    /*
-    -----------------------------------------------
-    Animation
-    -----------------------------------------------
-    */
-
-
-    --speed-fast:
-
-        .25s;
-
-
-
-    --speed-normal:
-
-        .45s;
-
-
-
-    --speed-slow:
-
-        .90s;
-
-
-
-    --ease-premium:
-
-        cubic-bezier(.22,1,.36,1);
-
-
-
-}
-
-/*==================================================
-Global Reset
-==================================================*/
-
 
 *,
 *::before,
 *::after{
 
-
     margin:0;
-
-
     padding:0;
-
 
     box-sizing:border-box;
 
+}
+
+
+/*==================================================
+ROOT VARIABLES
+==================================================*/
+
+:root{
+
+    /*--------------------------------------------------
+    Brand Colours
+    --------------------------------------------------*/
+
+    --ctm-teal:#00B3A4;
+
+    --ctm-gold:#C9A227;
+
+    --ctm-charcoal:#111315;
+
+    --ctm-card:#1A1D22;
+
+    --ctm-card-hover:#242830;
+
+    --ctm-border:#31353D;
+
+    --ctm-white:#F5F2EA;
+
+    --ctm-muted:#A8AFB7;
+
+    --ctm-success:#26C281;
+
+    --ctm-warning:#F5A623;
+
+    --ctm-danger:#E74C3C;
+
+
+
+    /*--------------------------------------------------
+    Typography
+    --------------------------------------------------*/
+
+    --font-tamil:'Noto Sans Tamil',sans-serif;
+
+    --font-body:'Inter',sans-serif;
+
+    --font-display:'Playfair Display',serif;
+
+
+
+    /*--------------------------------------------------
+    Font Sizes
+    --------------------------------------------------*/
+
+    --fs-hero:72px;
+
+    --fs-title:48px;
+
+    --fs-heading:34px;
+
+    --fs-subheading:26px;
+
+    --fs-body:18px;
+
+    --fs-small:15px;
+
+
+
+    /*--------------------------------------------------
+    Font Weights
+    --------------------------------------------------*/
+
+    --fw-light:300;
+
+    --fw-regular:400;
+
+    --fw-medium:500;
+
+    --fw-semibold:600;
+
+    --fw-bold:700;
+
+    --fw-black:800;
+
+
+
+    /*--------------------------------------------------
+    Border Radius
+    --------------------------------------------------*/
+
+    --radius-small:12px;
+
+    --radius-medium:20px;
+
+    --radius-large:30px;
+
+    --radius-xl:40px;
+
+
+
+    /*--------------------------------------------------
+    Shadows
+    --------------------------------------------------*/
+
+    --shadow-soft:
+
+        0 12px 40px rgba(0,0,0,.25);
+
+    --shadow-card:
+
+        0 20px 60px rgba(0,0,0,.35);
+
+    --shadow-glow:
+
+        0 0 40px rgba(0,179,164,.18);
+
+
+
+    /*--------------------------------------------------
+    Animation
+    --------------------------------------------------*/
+
+    --transition-fast:.20s;
+
+    --transition:.35s;
+
+    --transition-slow:.60s;
+
+
+
+    /*--------------------------------------------------
+    Layout
+    --------------------------------------------------*/
+
+    --container-width:1280px;
+
+    --screen-padding:60px;
 
 }
 
 
-
-
-
 /*==================================================
-HTML Base
+HTML
 ==================================================*/
-
 
 html{
 
-
-    width:100%;
-
-
-    min-height:100%;
-
-
     scroll-behavior:smooth;
-
 
 }
 
 
-
-
-
-
-
 /*==================================================
-Body Foundation
-
-CTM PATH™ Premium Brand Atmosphere
-
-Aligned with:
-Infinity Mastery Logo
-Midnight Navy Identity
-Gold Transformation Light
-
+BODY
 ==================================================*/
-
 
 body{
 
+    font-family:var(--font-body);
 
-    width:100%;
+    background:var(--ctm-charcoal);
 
+    color:var(--ctm-white);
+
+    overflow:hidden;
 
     min-height:100vh;
 
-
-
-    overflow-x:hidden;
-
-
-
-    background:
-
-
-
-        /*
-        -------------------------------------------
-        Transformation Light Glow
-        Gold centre illumination
-        -------------------------------------------
-        */
-
-
-        radial-gradient(
-
-            circle at 50% 18%,
-
-            rgba(217,181,106,.10),
-
-            transparent 28%
-
-        ),
-
-
-
-
-        /*
-        -------------------------------------------
-        CTM Teal Energy Layer
-        -------------------------------------------
-        */
-
-
-        radial-gradient(
-
-            circle at 50% 35%,
-
-            rgba(0,194,184,.08),
-
-            transparent 38%
-
-        ),
-
-
-
-
-
-        /*
-        -------------------------------------------
-        Executive Midnight Foundation
-        -------------------------------------------
-        */
-
-
-        linear-gradient(
-
-            180deg,
-
-            #020812 0%,
-
-
-            #06152F 48%,
-
-
-            #020B18 100%
-
-        );
-
-
-
-
-
-    color:
-
-
-        var(--color-text);
-
-
-
-
-
-    -webkit-font-smoothing:
-
-
-        antialiased;
-
-
-
-
-    -moz-osx-font-smoothing:
-
-
-        grayscale;
-
-
+    line-height:1.6;
 
 }
 
 
-
-
-
-
-
-
 /*==================================================
-Premium Background Glow
-
-CTM PATH™ Atmospheric Identity
-
+APPLICATION
 ==================================================*/
-
-
-body::before{
-
-
-    content:"";
-
-
-    position:fixed;
-
-
-    inset:0;
-
-
-
-
-
-    background:
-
-
-
-
-        radial-gradient(
-
-            circle at center,
-
-            rgba(0,194,184,.06),
-
-            transparent 45%
-
-        );
-
-
-
-
-
-    pointer-events:none;
-
-
-
-    z-index:-1;
-
-
-
-}
-
-
-
-
-
-
-
-
-/*==================================================
-Application Root
-==================================================*/
-
 
 #app{
 
-
     width:100%;
 
-
-    min-height:100vh;
-
+    height:100vh;
 
     position:relative;
 
-
+    overflow:hidden;
 
 }
 
 
+#app-background{
 
+    position:fixed;
 
+    inset:0;
 
+    background:
 
+        radial-gradient(circle at top,
 
+        rgba(0,179,164,.08),
 
-/*==================================================
-Screen Container
-==================================================*/
+        transparent 45%),
+
+        linear-gradient(
+
+        180deg,
+
+        #16191D,
+
+        #111315);
+
+    z-index:-1;
+
+}
 
 
 #screen-container{
 
-
     width:100%;
 
-
-    min-height:100vh;
-
-
+    height:100%;
 
 }
 
 
-
-
-
-
-
-
 /*==================================================
-Screen Base
+COMMON SCREEN
 ==================================================*/
-
 
 .screen{
 
-
     width:100%;
 
-
-    min-height:100vh;
-
-
-
-
+    height:100vh;
 
     display:flex;
 
-
-
     justify-content:center;
-
-
 
     align-items:center;
 
-
-
-
-
-    position:relative;
-
-
+    padding:var(--screen-padding);
 
 }
-
-
-
-
-
-
-
-
-/==================================================
-Container
-==================================================/
-
-
-.container{
-
-
-    width:100%;
-
-
-    max-width:1200px;
-
-
-
-
-    margin:0 auto;
-
-
-
-
-
-    padding-left:
-
-
-        40px;
-
-
-
-
-
-    padding-right:
-
-
-        40px;
-
-
-
-}
-
-/*==================================================
-Images
-==================================================*/
-
-
-img{
-
-
-    max-width:100%;
-
-
-    height:auto;
-
-
-    display:block;
-
-
-
-}
-
-
-
-
-
-
 
 
 /*==================================================
-Logo Image Foundation
-
-CTM PATH™ Transparent SVG Support
-
+GLASS CARD
 ==================================================*/
 
-
-.logo{
-
-
-    display:block;
-
-
-    width:auto;
-
-
-    height:auto;
-
-
-
-    background:transparent;
-
-
-
-}
-
-
-
-
-
-
-.logo img{
-
-
-    width:100%;
-
-
-    height:auto;
-
-
-
-    object-fit:contain;
-
-
-
-}
-
-
-
-
-
-
-
-
-/*==================================================
-Buttons Remove Default
-==================================================*/
-
-
-button{
-
-
-    font:inherit;
-
-
-
-    border:none;
-
-
-
-    background:none;
-
-
-
-    cursor:pointer;
-
-
-
-}
-
-
-
-
-
-
-
-
-/*==================================================
-Links
-==================================================*/
-
-
-a{
-
-
-    color:inherit;
-
-
-
-    text-decoration:none;
-
-
-
-}
-
-
-
-
-
-
-
-
-/*==================================================
-Selection
-==================================================*/
-
-
-::selection{
-
+.glass-card{
 
     background:
 
-        rgba(
+        rgba(255,255,255,.03);
 
-            217,
+    border:
 
-            181,
+        1px solid rgba(255,255,255,.08);
 
-            106,
+    backdrop-filter:
 
-            .35
+        blur(18px);
 
-        );
+    border-radius:
 
+        var(--radius-large);
 
+    box-shadow:
 
-    color:
-
-
-        #FFFFFF;
-
-
+        var(--shadow-card);
 
 }
-
-
-
-
-
-
 
 
 /*==================================================
-Scrollbar Premium
-
-CTM PATH™ Gold + Teal Identity
-
+LINKS
 ==================================================*/
 
+a{
 
-::-webkit-scrollbar{
+    color:inherit;
 
-
-    width:
-
-
-        10px;
-
-
+    text-decoration:none;
 
 }
 
 
+/*==================================================
+IMAGES
+==================================================*/
 
+img{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
+
+/*==================================================
+FORM ELEMENTS
+==================================================*/
+
+input,
+select,
+textarea,
+button{
+
+    font:inherit;
+
+}
+
+
+/*==================================================
+TEXT SELECTION
+==================================================*/
+
+::selection{
+
+    background:var(--ctm-teal);
+
+    color:white;
+
+}
+
+
+/*==================================================
+SCROLLBAR
+==================================================*/
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
 
 
 ::-webkit-scrollbar-track{
 
-
-    background:
-
-
-        #020B18;
-
-
+    background:#14171B;
 
 }
-
-
-
 
 
 ::-webkit-scrollbar-thumb{
 
+    background:var(--ctm-teal);
 
-    background:
-
-
-
-        linear-gradient(
-
-
-
-            180deg,
-
-
-
-            #D9B56A,
-
-
-
-            #00C2B8
-
-
-
-        );
-
-
-
-    border-radius:
-
-
-        20px;
-
-
+    border-radius:20px;
 
 }
-
-
-
 
 
 ::-webkit-scrollbar-thumb:hover{
 
-
-    background:
-
-
-
-        linear-gradient(
-
-
-
-            180deg,
-
-
-
-            #FFF0A3,
-
-
-
-            #18A66D
-
-
-
-        );
-
-
+    background:#02C7B7;
 
 }
-
-
-
-
-
-
 
 
 /*==================================================
-Accessibility
-
+UTILITY
 ==================================================*/
 
+.hidden{
 
-:focus-visible{
-
-
-    outline:
-
-
-
-        3px solid rgba(
-
-
-            217,
-
-
-            181,
-
-
-            106,
-
-
-            .65
-
-
-        );
-
-
-
-
-    outline-offset:
-
-
-        4px;
-
-
+    display:none !important;
 
 }
 
+.text-center{
 
-
-
-
-
-
-
-/*==================================================
-Premium Utility Classes
-
-CTM PATH™ Identity Helpers
-
-==================================================*/
-
-
-.text-gold{
-
-
-    color:
-
-
-        var(--color-gold);
-
-
+    text-align:center;
 
 }
 
+.w-100{
 
-
-
-
-.text-primary{
-
-
-    color:
-
-
-        var(--color-primary-bright);
-
-
+    width:100%;
 
 }
-
-
-
-
-
-.text-ivory{
-
-
-    color:
-
-
-        var(--color-ivory);
-
-
-
-}
-
-
-
-
-
-.glow-gold{
-
-
-    filter:
-
-
-        drop-shadow(
-
-            0 0 25px rgba(
-
-                217,
-
-                181,
-
-                106,
-
-                .35
-
-            )
-
-        );
-
-
-
-}
-
-
-
-
-
-.glow-teal{
-
-
-    filter:
-
-
-        drop-shadow(
-
-            0 0 30px rgba(
-
-                0,
-
-                194,
-
-                184,
-
-                .25
-
-            )
-
-        );
-
-
-
-}
-
