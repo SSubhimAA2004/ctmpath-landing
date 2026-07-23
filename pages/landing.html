@@ -1,875 +1,216 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ta">
 
 <head>
 
-<!--=============================================================================
+    <!--
+    =====================================================================
 
-    CTM PATH™
-    FROM SURVIVAL TO LIVING™
+        CTM PATH™
 
-    FILE
-    landing.html
+        FROM SURVIVAL TO LIVING™
 
-    PURPOSE
+        FILE
 
-    CTM PATH™ Landing Experience
+        landing.html
 
-    SECTIONS
+        PURPOSE
 
-    • Welcome
-    • Registration
+        Screen 01
 
-    VERSION
+        First Visitor Experience
 
-    1.0
+        RESPONSIBILITIES
 
-=============================================================================-->
+        • Present CTM PATH™ Journey
+        • Introduce Visitor
+        • Start Journey Navigation
 
-<meta charset="UTF-8">
+        NOTE
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
+        No business logic belongs here.
 
-<meta
-    name="description"
-    content="CTM PATH™ | From Survival To Living™">
+        Logic belongs to:
 
-<title>
+        landing.js
 
-CTM PATH™ | From Survival To Living™
+    =====================================================================
+    -->
 
-</title>
 
-<!--=============================================================================
-    GOOGLE FONTS
-=============================================================================-->
+    <meta charset="UTF-8">
 
-<link
-rel="preconnect"
-href="https://fonts.googleapis.com">
 
-<link
-rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-<link
-href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap"
-rel="stylesheet">
 
-<!--=============================================================================
-    STYLES
-=============================================================================-->
+    <title>
 
-<link
-rel="stylesheet"
-href="../css/reset.css">
+        CTM PATH™ | From Survival to Living™
 
-<link
-rel="stylesheet"
-href="../css/tokens.css">
+    </title>
 
-<link
-rel="stylesheet"
-href="../css/base.css">
 
-<link
-rel="stylesheet"
-href="../css/app.css">
+    <!--==================================================
+        CSS
+    ==================================================-->
+
+
+    <link
+        rel="stylesheet"
+        href="../css/reset.css">
+
+
+    <link
+        rel="stylesheet"
+        href="../css/tokens.css">
+
+
+    <link
+        rel="stylesheet"
+        href="../css/base.css">
+
+
+    <link
+        rel="stylesheet"
+        href="../css/app.css">
+
+
+    <link
+        rel="stylesheet"
+        href="../css/landing.css">
+
 
 </head>
 
+
 <body>
 
-<div class="app">
 
-<!--=============================================================================
-    WELCOME
-=============================================================================-->
+    <main
+        class="landing-page">
 
-<section
 
-id="welcome"
 
-class="page">
+        <!--==================================================
+            Hero Section
+        ==================================================-->
 
-<header
 
-class="app-header">
+        <section
+            class="landing-hero">
 
-<div
-class="header-left">
 
-<img
 
-src="../assets/logo/CTM_Logo_Transparent.svg"
+            <div
+                class="landing-container">
 
-alt="CTM PATH™"
 
-class="app-logo">
 
-</div>
+                <p
+                    class="brand-label">
 
-</header>
+                    CTM PATH™
 
-<main
+                </p>
 
-class="page-content">
 
-<div
 
-class="container">
 
-<div
+                <h1>
 
-class="hero fade-in">
+                    வாழ்க்கையை
 
-<div
+                    <br>
 
-class="hero-brand">
+                    வாழத் தொடங்குங்கள்
 
-<h1
-class="brand-title">
+                </h1>
 
-CTM PATH™
 
-</h1>
 
-<p
-class="brand-tagline">
 
-FROM SURVIVAL TO LIVING™
+                <p
+                    class="hero-subtitle">
 
-</p>
+                    From Survival to Living™
 
-</div>
+                </p>
 
-<div
 
-class="hero-divider"></div>
 
-<header
-class="hero-header">
 
-<h2
-class="hero-title">
+                <p
+                    class="hero-description">
 
-Are You Living...
+                    உங்கள் வாழ்க்கையின்
 
-<br>
+                    அடுத்த பாதையை
 
-or Merely Surviving?
+                    கண்டறிய ஒரு
 
-</h2>
+                    ஆறு நிமிடப் பயணம்.
 
-<p
-class="hero-subtitle">
+                </p>
 
-Discover how balanced
-your life really is.
 
-</p>
 
-</header>
+                <button
 
-<div
+                    id="beginJourney"
 
-class="hero-divider"></div>
+                    class="primary-button">
 
-<section
 
-class="hero-benefits">
+                    Begin Journey
 
-<div
-class="benefit-item">
 
-<span
-class="benefit-icon">
+                </button>
 
-✓
 
-</span>
 
-<span
-class="benefit-text">
+            </div>
 
-Your Personal Life Wheel™
 
-</span>
+        </section>
 
-</div>
 
-<div
-class="benefit-item">
 
-<span
-class="benefit-icon">
+    </main>
 
-✓
 
-</span>
 
-<span
-class="benefit-text">
 
-Your Overall Life Score
+    <!--==================================================
+        Core JavaScript
 
-</span>
+    ==================================================-->
 
-</div>
 
-<div
-class="benefit-item">
+    <script
+        src="../js/storage.js">
+    </script>
 
-<span
-class="benefit-icon">
 
-✓
+    <script
+        src="../js/router.js">
+    </script>
 
-</span>
 
-<span
-class="benefit-text">
+    <script
+        src="../js/app.js">
+    </script>
 
-A Clear Path Forward
 
-</span>
+    <script
+        src="../js/landing.js">
+    </script>
 
-</div>
-
-</section>
-
-<div
-
-class="hero-divider"></div>
-
-<footer
-
-class="hero-footer">
-
-<button
-
-id="btnBeginJourney"
-
-type="button"
-
-class="btn btn-primary">
-
-BEGIN JOURNEY
-
-</button>
-
-</footer>
-
-</div>
-
-</div>
-
-</main>
-
-</section>
-
-<!--=============================================================================
-    REGISTRATION
-=============================================================================-->
-
-<section
-
-id="registration"
-
-class="page">
-
-<header
-
-class="app-header">
-
-<div
-class="header-left">
-
-<img
-
-src="../assets/logo/CTM_Logo_Transparent.svg"
-
-alt="CTM PATH™"
-
-class="app-logo">
-
-</div>
-
-</header>
-
-<main
-
-class="page-content">
-
-<div
-
-class="container">
-
-<div
-
-class="registration-card slide-up">
-
-<!--=========================================================================
-    TITLE
-==========================================================================-->
-
-<header
-
-class="registration-header">
-
-<h1
-
-class="page-title">
-
-Welcome!
-
-</h1>
-
-<p
-
-class="page-subtitle">
-
-Let's begin by getting to know you.
-
-</p>
-
-</header>
-
-<div
-
-class="section-divider"></div>
-
-<!--=========================================================================
-    FORM
-==========================================================================-->
-
-<form
-
-id="registrationForm"
-
-class="registration-form"
-
-autocomplete="off"
-
-novalidate>
-
-<!--=====================================================================
-    NAME
-======================================================================-->
-
-<div
-
-class="form-group">
-
-<label
-
-for="visitorName"
-
-class="form-label">
-
-Full Name
-
-</label>
-
-<input
-
-type="text"
-
-id="visitorName"
-
-name="visitorName"
-
-class="form-control"
-
-placeholder="Enter your full name"
-
-maxlength="80"
-
-required>
-
-</div>
-
-<!--=====================================================================
-    EMAIL
-======================================================================-->
-
-<div
-
-class="form-group">
-
-<label
-
-for="visitorEmail"
-
-class="form-label">
-
-Email Address
-
-</label>
-
-<input
-
-type="email"
-
-id="visitorEmail"
-
-name="visitorEmail"
-
-class="form-control"
-
-placeholder="Enter your email address"
-
-maxlength="120"
-
-required>
-
-</div>
-
-<!--=====================================================================
-    MOBILE
-======================================================================-->
-
-<div
-
-class="form-group">
-
-<label
-
-for="visitorMobile"
-
-class="form-label">
-
-Mobile Number
-
-</label>
-
-<input
-
-type="tel"
-
-id="visitorMobile"
-
-name="visitorMobile"
-
-class="form-control"
-
-placeholder="Enter your mobile number"
-
-maxlength="15"
-
-required>
-
-</div>
-
-<!--=====================================================================
-    DISTRICT
-======================================================================-->
-
-<div
-
-class="form-group">
-
-<label
-
-for="visitorDistrict"
-
-class="form-label">
-
-District
-
-</label>
-
-<input
-
-type="text"
-
-id="visitorDistrict"
-
-name="visitorDistrict"
-
-class="form-control"
-
-placeholder="Enter your district"
-
-maxlength="60"
-
-required>
-
-</div>
-
-<!--=====================================================================
-    STATE
-======================================================================-->
-
-<div
-
-class="form-group">
-
-<label
-
-for="visitorState"
-
-class="form-label">
-
-State
-
-</label>
-
-<input
-
-type="text"
-
-id="visitorState"
-
-name="visitorState"
-
-class="form-control"
-
-placeholder="Enter your state"
-
-maxlength="60"
-
-required>
-
-</div>
-
-<!--=====================================================================
-    ACTION
-======================================================================-->
-
-<div
-
-class="form-actions">
-
-<button
-
-id="btnStartAssessment"
-
-type="submit"
-
-class="btn btn-primary">
-
-BEGIN MY LIFE ASSESSMENT
-
-</button>
-
-</div>
-
-</form>
-
-</div>
-
-</div>
-
-</main>
-
-</section>
-
-<!--=============================================================================
-    JAVASCRIPT
-=============================================================================-->
-
-<script
-src="../js/storage.js"></script>
-
-<script
-src="../js/router.js"></script>
-
-<script
-src="../js/app.js"></script>
-
-<!--=============================================================================
-    LANDING CONTROLLER
-=============================================================================-->
-
-<script>
-
-'use strict';
-
-/*=============================================================================
-
-    LANDING PAGE
-
-=============================================================================*/
-
-(function(){
-
-    /*=========================================================================
-
-        ELEMENTS
-
-    =========================================================================*/
-
-    const welcomeSection =
-
-        document.getElementById(
-
-            'welcome'
-
-        );
-
-
-
-    const registrationSection =
-
-        document.getElementById(
-
-            'registration'
-
-        );
-
-
-
-    const btnBeginJourney =
-
-        document.getElementById(
-
-            'btnBeginJourney'
-
-        );
-
-
-
-    const registrationForm =
-
-        document.getElementById(
-
-            'registrationForm'
-
-        );
-
-
-
-    /*=========================================================================
-
-        INITIAL STATE
-
-    =========================================================================*/
-
-    registrationSection.hidden = true;
-
-
-
-    /*=========================================================================
-
-        BEGIN JOURNEY
-
-    =========================================================================*/
-
-    btnBeginJourney.addEventListener(
-
-        'click',
-
-        function(){
-
-            welcomeSection.hidden = true;
-
-            registrationSection.hidden = false;
-
-            window.scrollTo({
-
-                top:0,
-
-                behavior:'smooth'
-
-            });
-
-        }
-
-    );
-
-
-
-    /*=========================================================================
-
-        REGISTRATION
-
-    =========================================================================*/
-
-    registrationForm.addEventListener(
-
-        'submit',
-
-        function(event){
-
-            event.preventDefault();
-
-
-
-            const visitor = {
-
-                name:
-
-                    document
-
-                    .getElementById(
-
-                        'visitorName'
-
-                    )
-
-                    .value
-
-                    .trim(),
-
-
-
-                email:
-
-                    document
-
-                    .getElementById(
-
-                        'visitorEmail'
-
-                    )
-
-                    .value
-
-                    .trim(),
-
-
-
-                mobile:
-
-                    document
-
-                    .getElementById(
-
-                        'visitorMobile'
-
-                    )
-
-                    .value
-
-                    .trim(),
-
-
-
-                district:
-
-                    document
-
-                    .getElementById(
-
-                        'visitorDistrict'
-
-                    )
-
-                    .value
-
-                    .trim(),
-
-
-
-                state:
-
-                    document
-
-                    .getElementById(
-
-                        'visitorState'
-
-                    )
-
-                    .value
-
-                    .trim()
-
-            };
-
-
-
-            /*--------------------------------------------------------------
-
-                SIMPLE VALIDATION
-
-            --------------------------------------------------------------*/
-
-            if(
-
-                visitor.name === '' ||
-
-                visitor.email === '' ||
-
-                visitor.mobile === '' ||
-
-                visitor.district === '' ||
-
-                visitor.state === ''
-
-            ){
-
-                alert(
-
-                    'Please complete all the required fields.'
-
-                );
-
-                return;
-
-            }
-
-
-
-            /*--------------------------------------------------------------
-
-                SAVE VISITOR
-
-            --------------------------------------------------------------*/
-
-            CTM.storage.updateVisitor(
-
-                visitor
-
-            );
-
-
-
-            CTM.storage.setCurrentPillar(
-
-                0
-
-            );
-
-
-
-            /*--------------------------------------------------------------
-
-                NAVIGATE
-
-            --------------------------------------------------------------*/
-
-            CTM.router.go(
-
-                'assessment'
-
-            );
-
-
-
-        }
-
-    );
-
-
-
-})();
-
-</script>
-
-</div>
 
 </body>
 
+
 </html>
-
-<!--=============================================================================
-
-    END OF FILE
-
-=============================================================================-->
