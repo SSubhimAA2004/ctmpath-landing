@@ -1,694 +1,188 @@
 
+/*=====================================================================
 
-/*
-======================================================================
+    CTM PATH™
+    FROM SURVIVAL TO LIVING™
 
-CTM PATH™ Guided Journey v1.0
+    File
+    router.js
 
-File
-js/foundation/router.js
+    Purpose
+    Application Navigation Engine
 
-Purpose
-Application Router
+    Responsibilities
 
-Responsibility
-• Handle screen navigation
-• Validate screen requests
-• Manage browser URL hash
-• Move between journey screens
-• Prevent duplicate navigation
-• Maintain clean transitions
+    • Navigate Between Screens
+    • Previous Screen
+    • Next Screen
+    • Jump To Screen
+    • Track Current Screen
+    • Save Progress
 
-======================================================================
-*/
-
+======================================================================*/
 
 'use strict';
 
+window.CTM = window.CTM || {};
 
-(() => {
+CTM.router = {
+
+    /*==================================================
+    INITIALIZE
+    ==================================================*/
+
+    init(){
+
+        CTM.loader.init();
+
+        this.goTo(1);
+
+    },
 
 
 
-    const CTM = window.CTM;
+    /*==================================================
+    GO TO SCREEN
+    ==================================================*/
 
+    async goTo(screenNumber){
 
+        if(screenNumber < 1){
 
-    if (!CTM) {
+            screenNumber = 1;
 
+        }
 
-        console.error(
+        if(screenNumber > CTM.state.app.totalScreens){
 
-            'CTM core has not been initialized.'
+            screenNumber = CTM.state.app.totalScreens;
+
+        }
+
+        CTM.state.app.currentScreen = screenNumber;
+
+        await CTM.loader.load(screenNumber);
+
+        CTM.storage.save();
+
+        console.log(
+
+            `Current Screen : ${screenNumber}`
 
         );
 
+    },
 
-        return;
 
+
+    /*==================================================
+    NEXT
+    ==================================================*/
+
+    next(){
+
+        this.goTo(
+
+            CTM.state.app.currentScreen + 1
+
+        );
+
+    },
+
+
+
+    /*==================================================
+    PREVIOUS
+    ==================================================*/
+
+    previous(){
+
+        this.goTo(
+
+            CTM.state.app.currentScreen - 1
+
+        );
+
+    },
+
+
+
+    /*==================================================
+    RESTART
+    ==================================================*/
+
+    restart(){
+
+        CTM.storage.clear();
+
+        location.reload();
+
+    },
+
+
+
+    /*==================================================
+    COMPLETION
+    ==================================================*/
+
+    finish(){
+
+        console.log(
+
+            'Assessment Completed'
+
+        );
+
+        CTM.storage.save();
+
+    },
+
+
+
+    /*==================================================
+    GET CURRENT SCREEN
+    ==================================================*/
+
+    current(){
+
+        return CTM.state.app.currentScreen;
+
+    },
+
+
+
+    /*==================================================
+    GET TOTAL SCREENS
+    ==================================================*/
+
+    total(){
+
+        return CTM.state.app.totalScreens;
+
+    },
+
+
+
+    /*==================================================
+    FIRST SCREEN
+    ==================================================*/
+
+    isFirst(){
+
+        return this.current()===1;
+
+    },
+
+
+
+    /*==================================================
+    LAST SCREEN
+    ==================================================*/
+
+    isLast(){
+
+        return this.current()===this.total();
 
     }
 
-
-
-
-
-
-
-    /*
-    ==================================================
-    Navigation Control
-    ==================================================
-    */
-
-
-    let navigating = false;
-
-
-
-
-
-
-
-    /*
-    ==================================================
-    Validate Screen
-    ==================================================
-    */
-
-
-    CTM.isValidScreen = function(screenId){
-
-
-
-        if(!screenId){
-
-
-            return false;
-
-
-        }
-
-
-
-
-
-        return /^screen\d{2}$/.test(
-
-            screenId
-
-        );
-
-
-
-    };
-
-
-
-
-
-
-
-    /*
-    ==================================================
-    Navigate To Screen
-    ==================================================
-    */
-
-
-    CTM.navigate = async function(screenId){
-
-
-
-        if (
-
-            !CTM.isValidScreen(screenId)
-
-        ){
-
-
-
-            console.warn(
-
-                'Invalid screen:',
-
-                screenId
-
-            );
-
-
-
-            return false;
-
-
-
-        }
-
-
-
-
-
-
-
-        if(navigating){
-
-
-
-            return false;
-
-
-
-        }
-
-
-
-
-
-
-
-        navigating = true;
-
-
-
-
-
-
-
-        try {
-
-
-
-            const success =
-
-
-                await CTM.loadScreen(
-
-                    screenId
-
-                );
-
-
-
-
-
-
-
-            if(!success){
-
-
-
-                return false;
-
-
-
-            }
-
-
-
-
-
-
-
-            /*
-            Update browser hash
-
-            Example:
-
-            #screen01
-
-            */
-
-
-            history.replaceState(
-
-
-
-                {
-
-
-                    screen:screenId
-
-
-                },
-
-
-
-                '',
-
-
-
-                '#' + screenId
-
-
-
-            );
-
-
-
-
-
-
-
-            return true;
-
-
-
-        }
-
-
-        catch(error){
-
-
-
-            console.error(
-
-                error
-
-            );
-
-
-
-            return false;
-
-
-
-        }
-
-
-        finally {
-
-
-
-            navigating = false;
-
-
-
-        }
-
-
-
-    };
-
-
-
-
-
-
-
-    /*
-    ==================================================
-    Navigate Next
-    ==================================================
-    */
-
-
-    CTM.navigateNext = async function(){
-
-
-
-        const current =
-
-
-            CTM.getCurrentScreen();
-
-
-
-
-
-
-
-        if(!current){
-
-
-
-            return;
-
-
-
-        }
-
-
-
-
-
-
-
-        const number =
-
-
-            parseInt(
-
-
-
-                current.replace(
-
-                    'screen',
-
-                    ''
-
-                ),
-
-
-
-                10
-
-
-
-            );
-
-
-
-
-
-
-
-        if (
-
-            number >= CTM.state.totalScreens
-
-        ){
-
-
-
-            return;
-
-
-
-        }
-
-
-
-
-
-
-
-        const nextScreen =
-
-
-            'screen' +
-
-
-
-            String(
-
-                number + 1
-
-            )
-
-            .padStart(
-
-                2,
-
-                '0'
-
-            );
-
-
-
-
-
-
-
-        await CTM.navigate(
-
-            nextScreen
-
-        );
-
-
-
-    };
-
-
-
-
-
-
-
-    /*
-    ==================================================
-    Navigate Back
-    ==================================================
-    */
-
-
-    CTM.navigateBack = async function(){
-
-
-
-        const previous =
-
-
-            CTM.state.previousScreen;
-
-
-
-
-
-
-
-        if(!previous){
-
-
-
-            return;
-
-
-
-        }
-
-
-
-
-
-
-
-        await CTM.navigate(
-
-            previous
-
-        );
-
-
-
-    };
-
-
-
-
-
-
-
-    /*
-    ==================================================
-    Browser Hash Navigation
-    ==================================================
-    */
-
-
-    window.addEventListener(
-
-
-
-        'hashchange',
-
-
-
-        async function(){
-
-
-
-            const screen =
-
-
-                window.location.hash.replace(
-
-                    '#',
-
-                    ''
-
-                );
-
-
-
-
-
-
-
-            if (
-
-                CTM.isValidScreen(
-
-                    screen
-
-                )
-
-            ){
-
-
-
-                await CTM.navigate(
-
-                    screen
-
-                );
-
-
-
-            }
-
-
-
-        }
-
-
-
-    );
-
-
-
-
-
-
-
-    /*
-    ==================================================
-    Navigation Button Binding
-    ==================================================
-    */
-
-
-    CTM.bindNavigation = function(){
-
-
-
-        document.addEventListener(
-
-
-
-            'click',
-
-
-
-            async function(event){
-
-
-
-                const button =
-
-
-                    event.target.closest(
-
-                        '[data-next]'
-
-                    );
-
-
-
-
-
-
-
-                if(!button){
-
-
-
-                    return;
-
-
-
-                }
-
-
-
-
-
-
-
-                event.preventDefault();
-
-
-
-
-
-
-
-                const nextScreen =
-
-
-                    button.dataset.next;
-
-
-
-
-
-
-
-                if(nextScreen){
-
-
-
-                    await CTM.navigate(
-
-                        nextScreen
-
-                    );
-
-
-
-                }
-
-
-
-            }
-
-
-
-        );
-
-
-
-    };
-
-
-
-
-
-
-
-    /*
-    ==================================================
-    Initialize Router
-    ==================================================
-    */
-
-
-    document.addEventListener(
-
-
-
-        'DOMContentLoaded',
-
-
-
-        function(){
-
-
-
-            CTM.bindNavigation();
-
-
-
-        }
-
-
-
-    );
-
-
-
-
-
-
-
-})();
+};
