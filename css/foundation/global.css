@@ -4,6 +4,10 @@
     CTM PATH™
     FROM SURVIVAL TO LIVING™
 
+    Interactive Life Assessment v1.0
+
+    --------------------------------------------------------------------
+
     File
     global.css
 
@@ -15,10 +19,12 @@
     • CSS Reset
     • Design Tokens
     • Color Palette
+    • Typography Variables
     • Layout Foundation
+    • Background System
     • Glass Effects
-    • Shadows
-    • Scrollbars
+    • Shadow System
+    • Utility Classes
 
 ======================================================================*/
 
@@ -32,11 +38,47 @@ CSS RESET
 *::after{
 
     margin:0;
+
     padding:0;
 
     box-sizing:border-box;
 
 }
+
+
+html{
+
+    scroll-behavior:smooth;
+
+    -webkit-text-size-adjust:100%;
+
+}
+
+
+body{
+
+    margin:0;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+    overflow-y:auto;
+
+    font-family:var(--font-body);
+
+    background:#111315;
+
+    color:#F5F2EA;
+
+    line-height:1.6;
+
+    -webkit-font-smoothing:antialiased;
+
+    -moz-osx-font-smoothing:grayscale;
+
+}
+
 
 
 /*==================================================
@@ -55,9 +97,9 @@ ROOT VARIABLES
 
     --ctm-charcoal:#111315;
 
-    --ctm-card:#1A1D22;
+    --ctm-charcoal-light:#1A1D22;
 
-    --ctm-card-hover:#242830;
+    --ctm-charcoal-hover:#242830;
 
     --ctm-border:#31353D;
 
@@ -77,11 +119,23 @@ ROOT VARIABLES
     Typography
     --------------------------------------------------*/
 
-    --font-tamil:'Noto Sans Tamil',sans-serif;
+    --font-tamil:
 
-    --font-body:'Inter',sans-serif;
+        "Noto Sans Tamil",
 
-    --font-display:'Playfair Display',serif;
+        sans-serif;
+
+    --font-body:
+
+        "Inter",
+
+        sans-serif;
+
+    --font-display:
+
+        "Playfair Display",
+
+        serif;
 
 
 
@@ -93,9 +147,9 @@ ROOT VARIABLES
 
     --fs-title:48px;
 
-    --fs-heading:34px;
+    --fs-heading:36px;
 
-    --fs-subheading:26px;
+    --fs-subheading:28px;
 
     --fs-body:18px;
 
@@ -118,6 +172,18 @@ ROOT VARIABLES
     --fw-bold:700;
 
     --fw-black:800;
+
+
+
+    /*--------------------------------------------------
+    Layout
+    --------------------------------------------------*/
+
+    --container-width:1280px;
+
+    --screen-padding:60px;
+
+    --content-width:960px;
 
 
 
@@ -163,64 +229,19 @@ ROOT VARIABLES
 
     --transition-slow:.60s;
 
-
-
-    /*--------------------------------------------------
-    Layout
-    --------------------------------------------------*/
-
-    --container-width:1280px;
-
-    --screen-padding:60px;
-
 }
 
-
 /*==================================================
-HTML
-==================================================*/
-
-html{
-
-    scroll-behavior:smooth;
-
-}
-
-
-/*==================================================
-BODY
-==================================================*/
-
-body{
-
-    font-family:var(--font-body);
-
-    background:var(--ctm-charcoal);
-
-    color:var(--ctm-white);
-
-    overflow:hidden;
-
-    min-height:100vh;
-
-    line-height:1.6;
-
-}
-
-
-/*==================================================
-APPLICATION
+APPLICATION SHELL
 ==================================================*/
 
 #app{
 
-    width:100%;
-
-    height:100vh;
-
     position:relative;
 
-    overflow:hidden;
+    width:100%;
+
+    min-height:100vh;
 
 }
 
@@ -231,32 +252,54 @@ APPLICATION
 
     inset:0;
 
+    z-index:-1;
+
     background:
 
-        radial-gradient(circle at top,
+        radial-gradient(
 
-        rgba(0,179,164,.08),
+            circle at top,
 
-        transparent 45%),
+            rgba(0,179,164,.08),
+
+            transparent 45%
+
+        ),
+
+        radial-gradient(
+
+            circle at bottom right,
+
+            rgba(201,162,39,.04),
+
+            transparent 40%
+
+        ),
 
         linear-gradient(
 
-        180deg,
+            180deg,
 
-        #16191D,
+            #16191D 0%,
 
-        #111315);
+            #111315 100%
 
-    z-index:-1;
+        );
 
 }
 
 
+/*==================================================
+SCREEN CONTAINER
+==================================================*/
+
 #screen-container{
+
+    position:relative;
 
     width:100%;
 
-    height:100%;
+    min-height:100vh;
 
 }
 
@@ -267,17 +310,45 @@ COMMON SCREEN
 
 .screen{
 
+    position:relative;
+
     width:100%;
 
-    height:100vh;
+    min-height:100vh;
 
     display:flex;
 
     justify-content:center;
 
-    align-items:center;
+    align-items:flex-start;
 
     padding:var(--screen-padding);
+
+}
+
+
+/*==================================================
+CONTENT CONTAINER
+==================================================*/
+
+.container{
+
+    width:100%;
+
+    max-width:var(--container-width);
+
+    margin:0 auto;
+
+}
+
+
+.content{
+
+    width:100%;
+
+    max-width:var(--content-width);
+
+    margin:0 auto;
 
 }
 
@@ -300,6 +371,10 @@ GLASS CARD
 
         blur(18px);
 
+    -webkit-backdrop-filter:
+
+        blur(18px);
+
     border-radius:
 
         var(--radius-large);
@@ -307,6 +382,43 @@ GLASS CARD
     box-shadow:
 
         var(--shadow-card);
+
+}
+
+
+/*==================================================
+CARDS
+==================================================*/
+
+.card{
+
+    background:var(--ctm-charcoal-light);
+
+    border:1px solid var(--ctm-border);
+
+    border-radius:var(--radius-large);
+
+    box-shadow:var(--shadow-soft);
+
+}
+
+
+.card-hover{
+
+    transition:all var(--transition);
+
+}
+
+
+.card-hover:hover{
+
+    transform:translateY(-4px);
+
+    border-color:var(--ctm-teal);
+
+    box-shadow:
+
+        0 18px 45px rgba(0,179,164,.18);
 
 }
 
@@ -325,14 +437,47 @@ a{
 
 
 /*==================================================
+LISTS
+==================================================*/
+
+ul,
+ol{
+
+    list-style:none;
+
+}
+
+
+/*==================================================
 IMAGES
 ==================================================*/
 
 img{
 
+    display:block;
+
     max-width:100%;
 
-    display:block;
+    height:auto;
+
+}
+
+
+/*==================================================
+BUTTONS
+==================================================*/
+
+button{
+
+    font:inherit;
+
+    cursor:pointer;
+
+    border:none;
+
+    outline:none;
+
+    background:none;
 
 }
 
@@ -342,11 +487,39 @@ FORM ELEMENTS
 ==================================================*/
 
 input,
-select,
 textarea,
-button{
+select{
 
     font:inherit;
+
+    outline:none;
+
+    border:none;
+
+    background:none;
+
+    color:inherit;
+
+}
+
+
+input::placeholder,
+textarea::placeholder{
+
+    color:var(--ctm-muted);
+
+}
+
+
+/*==================================================
+FOCUS
+==================================================*/
+
+:focus-visible{
+
+    outline:2px solid var(--ctm-teal);
+
+    outline-offset:3px;
 
 }
 
@@ -359,10 +532,9 @@ TEXT SELECTION
 
     background:var(--ctm-teal);
 
-    color:white;
+    color:#FFFFFF;
 
 }
-
 
 /*==================================================
 SCROLLBAR
@@ -371,6 +543,8 @@ SCROLLBAR
 ::-webkit-scrollbar{
 
     width:10px;
+
+    height:10px;
 
 }
 
@@ -388,6 +562,8 @@ SCROLLBAR
 
     border-radius:20px;
 
+    border:2px solid #14171B;
+
 }
 
 
@@ -398,8 +574,76 @@ SCROLLBAR
 }
 
 
+::-webkit-scrollbar-corner{
+
+    background:#14171B;
+
+}
+
+
 /*==================================================
-UTILITY
+LOADING OVERLAY
+==================================================*/
+
+#loading-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(17,19,21,.70);
+
+    backdrop-filter:blur(10px);
+
+    -webkit-backdrop-filter:blur(10px);
+
+    z-index:9999;
+
+}
+
+
+.loading-spinner{
+
+    width:64px;
+
+    height:64px;
+
+    border-radius:50%;
+
+    border:4px solid rgba(255,255,255,.08);
+
+    border-top:4px solid var(--ctm-teal);
+
+    animation:spin 1s linear infinite;
+
+}
+
+
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+
+/*==================================================
+DISPLAY UTILITIES
 ==================================================*/
 
 .hidden{
@@ -408,14 +652,399 @@ UTILITY
 
 }
 
+
+.block{
+
+    display:block;
+
+}
+
+
+.inline{
+
+    display:inline;
+
+}
+
+
+.inline-block{
+
+    display:inline-block;
+
+}
+
+
+.flex{
+
+    display:flex;
+
+}
+
+
+.grid{
+
+    display:grid;
+
+}
+
+
+/*==================================================
+FLEX UTILITIES
+==================================================*/
+
+.flex-row{
+
+    flex-direction:row;
+
+}
+
+
+.flex-column{
+
+    flex-direction:column;
+
+}
+
+
+.align-start{
+
+    align-items:flex-start;
+
+}
+
+
+.align-center{
+
+    align-items:center;
+
+}
+
+
+.align-end{
+
+    align-items:flex-end;
+
+}
+
+
+.justify-start{
+
+    justify-content:flex-start;
+
+}
+
+
+.justify-center{
+
+    justify-content:center;
+
+}
+
+
+.justify-end{
+
+    justify-content:flex-end;
+
+}
+
+
+.justify-between{
+
+    justify-content:space-between;
+
+}
+
+
+.justify-around{
+
+    justify-content:space-around;
+
+}
+
+
+.justify-evenly{
+
+    justify-content:space-evenly;
+
+}
+
+
+.flex-wrap{
+
+    flex-wrap:wrap;
+
+}
+
+
+.flex-nowrap{
+
+    flex-wrap:nowrap;
+
+}
+
+
+/*==================================================
+WIDTH UTILITIES
+==================================================*/
+
+.w-25{
+
+    width:25%;
+
+}
+
+
+.w-50{
+
+    width:50%;
+
+}
+
+
+.w-75{
+
+    width:75%;
+
+}
+
+
+.w-100{
+
+    width:100%;
+
+}
+
+
+.max-container{
+
+    max-width:var(--container-width);
+
+    margin-left:auto;
+
+    margin-right:auto;
+
+}
+
+
+/*==================================================
+HEIGHT UTILITIES
+==================================================*/
+
+.h-100{
+
+    height:100%;
+
+}
+
+
+.min-vh{
+
+    min-height:100vh;
+
+}
+
+
+/*==================================================
+SPACING UTILITIES
+==================================================*/
+
+.mt-auto{
+
+    margin-top:auto;
+
+}
+
+
+.mb-auto{
+
+    margin-bottom:auto;
+
+}
+
+
+.ml-auto{
+
+    margin-left:auto;
+
+}
+
+
+.mr-auto{
+
+    margin-right:auto;
+
+}
+
+
+.mx-auto{
+
+    margin-left:auto;
+
+    margin-right:auto;
+
+}
+
+
+.my-auto{
+
+    margin-top:auto;
+
+    margin-bottom:auto;
+
+}
+
+
+/*==================================================
+TEXT UTILITIES
+==================================================*/
+
+.text-left{
+
+    text-align:left;
+
+}
+
+
 .text-center{
 
     text-align:center;
 
 }
 
-.w-100{
 
-    width:100%;
+.text-right{
+
+    text-align:right;
+
+}
+
+
+.uppercase{
+
+    text-transform:uppercase;
+
+}
+
+
+.capitalize{
+
+    text-transform:capitalize;
+
+}
+
+
+.lowercase{
+
+    text-transform:lowercase;
+
+}
+
+
+/*==================================================
+VISIBILITY
+==================================================*/
+
+.visible{
+
+    visibility:visible;
+
+}
+
+
+.invisible{
+
+    visibility:hidden;
+
+}
+
+
+/*==================================================
+CURSOR
+==================================================*/
+
+.pointer{
+
+    cursor:pointer;
+
+}
+
+
+.not-allowed{
+
+    cursor:not-allowed;
+
+}
+
+
+/*==================================================
+TRANSITIONS
+==================================================*/
+
+.transition{
+
+    transition:all var(--transition);
+
+}
+
+
+.transition-fast{
+
+    transition:all var(--transition-fast);
+
+}
+
+
+.transition-slow{
+
+    transition:all var(--transition-slow);
+
+}
+
+
+/*==================================================
+Z-INDEX
+==================================================*/
+
+.z-1{
+
+    z-index:1;
+
+}
+
+
+.z-10{
+
+    z-index:10;
+
+}
+
+
+.z-100{
+
+    z-index:100;
+
+}
+
+
+.z-1000{
+
+    z-index:1000;
+
+}
+
+
+/*==================================================
+PRINT
+==================================================*/
+
+@media print{
+
+    body{
+
+        background:#FFFFFF;
+
+        color:#000000;
+
+    }
 
 }
