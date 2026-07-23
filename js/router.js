@@ -5,6 +5,7 @@
     FROM SURVIVAL TO LIVING™
 
     FILE
+
     router.js
 
     PURPOSE
@@ -13,107 +14,128 @@
 
     RESPONSIBILITIES
 
-    • Application Entry
-    • Route Navigation
-    • Current Route Detection
-    • Browser Navigation
-    • Route Validation
+    • Define Application Routes
+    • Navigate Between Pages
+    • Detect Current Page
+    • Redirect Entry Page
 
     NOTE
 
     This router controls ONLY page navigation.
 
-    Assessment navigation is handled by
+    Assessment navigation belongs to
 
     assessmentEngine.js
 
 =============================================================================*/
 
+
 'use strict';
 
+
 /*=============================================================================
-    GLOBAL
+    GLOBAL NAMESPACE
 =============================================================================*/
+
 
 window.CTM = window.CTM || {};
 
+
+
 /*=============================================================================
-    ROUTER
+    ROUTER MODULE
 =============================================================================*/
+
 
 CTM.router = (function(){
 
+
+
     /*=========================================================================
-        ROUTES
+        ROUTE DEFINITIONS
     =========================================================================*/
+
 
     const ROUTES = {
 
-        landing       : 'pages/landing.html',
 
-        registration  : 'pages/registration.html',
+        landing:
 
-        assessment    : 'pages/assessment.html',
+            'pages/landing.html',
 
-        kaalachakra   : 'pages/kaalachakra.html',
 
-        diagnosis     : 'pages/diagnosis.html',
+        registration:
 
-        prescription  : 'pages/prescription.html',
+            'pages/registration.html',
 
-        completion    : 'pages/completion.html'
+
+        assessment:
+
+            'pages/assessment.html',
+
+
+        kaalachakra:
+
+            'pages/kaalachakra.html',
+
+
+        diagnosis:
+
+            'pages/diagnosis.html',
+
+
+        prescription:
+
+            'pages/prescription.html',
+
+
+        completion:
+
+            'pages/completion.html'
+
 
     };
 
 
 
     /*=========================================================================
-        CURRENT PAGE
+        GET CURRENT PAGE
     =========================================================================*/
 
+
     function current(){
+
 
         const path =
 
             window.location.pathname;
 
-        return path
 
-            .split('/')
 
-            .pop()
+        const file =
 
-            .toLowerCase();
+            path
+
+                .split('/')
+
+                .pop();
+
+
+
+        return file || 'index.html';
+
 
     }
 
 
 
     /*=========================================================================
-        IS INDEX
+        CHECK ROUTE EXISTS
     =========================================================================*/
 
-    function isIndex(){
-
-        const page = current();
-
-        return(
-
-            page === '' ||
-
-            page === 'index.html'
-
-        );
-
-    }
-
-
-
-    /*=========================================================================
-        ROUTE EXISTS
-    =========================================================================*/
 
     function exists(route){
+
 
         return Object.prototype.hasOwnProperty.call(
 
@@ -123,69 +145,76 @@ CTM.router = (function(){
 
         );
 
+
     }
 
 
 
     /*=========================================================================
-        GO
+        NAVIGATE
     =========================================================================*/
+
 
     function go(route){
 
-        if(
 
-            !exists(route)
+        if(!exists(route)){
 
-        ){
 
             console.error(
 
-                'Unknown Route :',
+                'CTM Router: Unknown Route',
 
                 route
 
             );
 
+
             return false;
+
 
         }
 
-        window.location.assign(
 
-            ROUTES[route]
 
-        );
+        window.location.href =
+
+            ROUTES[route];
+
+
 
         return true;
+
 
     }
 
 
-
     /*=========================================================================
-        REPLACE
+        REPLACE NAVIGATION
     =========================================================================*/
+
 
     function replace(route){
 
-        if(
 
-            !exists(route)
+        if(!exists(route)){
 
-        ){
 
             console.error(
 
-                'Unknown Route :',
+                'CTM Router: Unknown Route',
 
                 route
 
             );
 
+
             return false;
 
+
         }
+
+
 
         window.location.replace(
 
@@ -193,17 +222,64 @@ CTM.router = (function(){
 
         );
 
+
+
         return true;
+
 
     }
 
 
 
+
+
     /*=========================================================================
-        START
+        ENTRY CHECK
+
+        Determines whether current page
+        is index.html
+
     =========================================================================*/
 
+
+    function isEntryPage(){
+
+
+        const page = current();
+
+
+
+        return(
+
+            page === '' ||
+
+            page === 'index.html'
+
+        );
+
+
+    }
+
+
+
+
+
+    /*=========================================================================
+        START ROUTER
+
+        First application action
+
+        index.html
+
+            ↓
+
+        landing.html
+
+    =========================================================================*/
+
+
     function start(){
+
 
         console.log(
 
@@ -211,20 +287,23 @@ CTM.router = (function(){
 
         );
 
+
         console.log(
 
-            'CTM PATH™ Router'
+            'CTM PATH™ Router Started'
 
         );
 
+
         console.log(
 
-            'Current Page :',
+            'Current Page:',
 
             current()
 
         );
 
+
         console.log(
 
             '========================================'
@@ -233,22 +312,12 @@ CTM.router = (function(){
 
 
 
-        /*--------------------------------------------------------------
-            APPLICATION ENTRY
-
-            index.html
-
-                ↓
-
-            landing.html
-
-        --------------------------------------------------------------*/
-
         if(
 
-            isIndex()
+            isEntryPage()
 
         ){
+
 
             replace(
 
@@ -256,55 +325,66 @@ CTM.router = (function(){
 
             );
 
-            return;
 
         }
 
+
     }
 
 
 
+
+
     /*=========================================================================
-        BACK
+        BROWSER HISTORY
+
     =========================================================================*/
+
 
     function back(){
 
+
         window.history.back();
+
 
     }
 
 
 
-    /*=========================================================================
-        FORWARD
-    =========================================================================*/
+
 
     function forward(){
 
+
         window.history.forward();
+
 
     }
 
 
 
-    /*=========================================================================
-        RELOAD
-    =========================================================================*/
+
 
     function reload(){
 
+
         window.location.reload();
+
 
     }
 
 
 
+
+
     /*=========================================================================
-        GET ROUTES
+        GET ALL ROUTES
+
     =========================================================================*/
 
+
     function routes(){
+
 
         return{
 
@@ -312,31 +392,43 @@ CTM.router = (function(){
 
         };
 
+
     }
+
+
 
 
 
     /*=========================================================================
-        INIT
+        INITIALIZE
+
     =========================================================================*/
+
 
     function init(){
 
+
         console.log(
 
-            'Router Ready'
+            'CTM PATH™ Router Ready'
 
         );
 
+
     }
+
+
 
 
 
     /*=========================================================================
         PUBLIC API
+
     =========================================================================*/
 
+
     return{
+
 
         init,
 
@@ -346,17 +438,18 @@ CTM.router = (function(){
 
         replace,
 
-        back,
-
-        forward,
-
-        reload,
-
         current,
 
         exists,
 
-        routes
+        routes,
+
+        back,
+
+        forward,
+
+        reload
+
 
     };
 
@@ -364,6 +457,13 @@ CTM.router = (function(){
 
 })();
 
+
+
 /*=============================================================================
+
     END OF FILE
+
 =============================================================================*/
+
+
+              
