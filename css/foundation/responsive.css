@@ -1,458 +1,297 @@
 
-/*
-======================================================================
+/*=====================================================================
 
-CTM PATH™ Guided Journey v1.0
+    CTM PATH™
+    FROM SURVIVAL TO LIVING™
 
-File
-css/foundation/responsive.css
+    File
+    responsive.css
 
-Purpose
-Responsive Design System
+    Purpose
+    Responsive Design System
 
-Responsibility
-• Desktop optimisation
-• Tablet adaptation
-• Mobile experience
-• Touch-friendly spacing
-• Elder-friendly readability
-• Screen consistency
+    Philosophy
 
-======================================================================
-*/
+    Desktop First
+    ↓
+    Laptop
+    ↓
+    Tablet
+    ↓
+    Mobile
+
+======================================================================*/
 
 
 /*==================================================
-Large Desktop
-1200px+
+LARGE DESKTOP
+1600px+
 ==================================================*/
 
+@media (min-width:1600px){
 
-@media (min-width:1200px){
+    :root{
 
+        --container-width:1440px;
 
-    .container{
-
-
-        max-width:
-
-            1200px;
-
+        --screen-padding:80px;
 
     }
 
+}
 
+
+/*==================================================
+DESKTOP
+1400px
+==================================================*/
+
+@media (max-width:1400px){
+
+    :root{
+
+        --container-width:1200px;
+
+        --screen-padding:60px;
+
+    }
+
+}
+
+
+/*==================================================
+LAPTOP
+1200px
+==================================================*/
+
+@media (max-width:1200px){
+
+    :root{
+
+        --container-width:1000px;
+
+        --screen-padding:50px;
+
+        --fs-hero:60px;
+
+        --fs-title:42px;
+
+        --fs-heading:32px;
+
+    }
+
+}
+
+
+/*==================================================
+TABLET
+992px
+==================================================*/
+
+@media (max-width:992px){
+
+    :root{
+
+        --screen-padding:40px;
+
+        --fs-hero:52px;
+
+        --fs-title:36px;
+
+        --fs-heading:30px;
+
+    }
 
     .screen{
 
-
-        padding-top:
-
-            40px;
-
-
-        padding-bottom:
-
-            40px;
-
+        padding:40px;
 
     }
-
-
 
 }
 
 
-
 /*==================================================
-Desktop
-992px - 1199px
+TABLET PORTRAIT
+768px
 ==================================================*/
-
-
-@media (max-width:1199px){
-
-
-
-    .container{
-
-
-        padding-left:
-
-            32px;
-
-
-
-        padding-right:
-
-            32px;
-
-
-
-    }
-
-
-
-}
-
-
-
-/*==================================================
-Tablet
-768px - 991px
-==================================================*/
-
-
-@media (max-width:991px){
-
-
-
-    .screen{
-
-
-        align-items:
-
-            flex-start;
-
-
-
-        padding-top:
-
-            50px;
-
-
-
-        padding-bottom:
-
-            50px;
-
-
-
-    }
-
-
-
-
-    .container{
-
-
-        padding-left:
-
-            24px;
-
-
-
-        padding-right:
-
-            24px;
-
-
-
-    }
-
-
-
-}
-
-
-
-/*==================================================
-Mobile
-481px - 767px
-==================================================*/
-
-
-@media (max-width:767px){
-
-
-
-    .screen{
-
-
-        min-height:
-
-            100vh;
-
-
-
-    }
-
-
-
-    .container{
-
-
-        padding-left:
-
-            20px;
-
-
-
-        padding-right:
-
-            20px;
-
-
-
-    }
-
-
-
-
-    .hero{
-
-
-        width:
-
-            100%;
-
-
-
-    }
-
-
-
-
-    .screen-caption{
-
-
-        font-size:
-
-            .68rem;
-
-
-
-        letter-spacing:
-
-            .24em;
-
-
-
-    }
-
-
-
-
-}
-
-
-
-/*==================================================
-Small Mobile
-320px - 480px
-==================================================*/
-
-
-@media (max-width:480px){
-
-
-
-    .container{
-
-
-        padding-left:
-
-            16px;
-
-
-
-        padding-right:
-
-            16px;
-
-
-
-    }
-
-
-
-    .screen{
-
-
-        padding-top:
-
-            30px;
-
-
-
-        padding-bottom:
-
-            30px;
-
-
-
-    }
-
-
-
-
-}
-
-
-
-/*==================================================
-Touch Optimisation
-==================================================*/
-
-
-@media (hover:none){
-
-
-
-    button,
-
-
-    .btn,
-
-
-    .choice{
-
-
-        min-height:
-
-            52px;
-
-
-
-        cursor:
-
-            pointer;
-
-
-
-    }
-
-
-
-}
-
-
-
-/*==================================================
-Large Text Accessibility
-==================================================*/
-
 
 @media (max-width:768px){
 
+    :root{
 
+        --screen-padding:32px;
 
-    body{
+        --fs-hero:44px;
 
+        --fs-title:32px;
 
-        font-size:
+        --fs-heading:28px;
 
-            16px;
+        --fs-subheading:22px;
 
-
+        --fs-body:17px;
 
     }
-
-
-
-}
-
-
-
-/*==================================================
-Landscape Mobile
-==================================================*/
-
-
-@media(max-height:600px)
-and (orientation:landscape){
-
-
 
     .screen{
 
-
-        padding-top:
-
-            20px;
-
-
-
-        padding-bottom:
-
-            20px;
-
-
+        padding:32px 24px;
 
     }
 
+    .btn-primary{
 
+        width:100%;
 
+        min-width:unset;
+
+    }
+
+    .btn-secondary{
+
+        width:100%;
+
+        min-width:unset;
+
+    }
 
 }
 
 
-
 /*==================================================
-Safe Area Support
+MOBILE
+576px
 ==================================================*/
 
+@media (max-width:576px){
 
-@supports(padding:env(safe-area-inset-bottom)){
+    :root{
 
+        --screen-padding:24px;
 
+        --fs-hero:36px;
+
+        --fs-title:28px;
+
+        --fs-heading:24px;
+
+        --fs-subheading:20px;
+
+        --fs-body:16px;
+
+        --fs-small:14px;
+
+    }
 
     .screen{
 
+        padding:24px 20px;
 
-        padding-bottom:
-
-            calc(
-
-                40px +
-
-                env(safe-area-inset-bottom)
-
-            );
-
-
+        align-items:flex-start;
 
     }
 
+    .hero-tamil{
 
+        font-size:40px;
+
+    }
+
+    .hero-english{
+
+        font-size:24px;
+
+    }
+
+    .section-title-tamil{
+
+        font-size:30px;
+
+    }
+
+    .section-title-english{
+
+        font-size:18px;
+
+    }
 
 }
 
 
-
 /*==================================================
-Print Safety
+SMALL MOBILE
+420px
 ==================================================*/
 
+@media (max-width:420px){
 
-@media print{
+    :root{
 
+        --screen-padding:18px;
 
+        --fs-hero:30px;
 
-    body{
+        --fs-title:24px;
 
-
-        background:white;
-
-
-
-        color:black;
-
-
+        --fs-heading:22px;
 
     }
 
+    .hero-tamil{
 
+        font-size:34px;
+
+    }
+
+    .hero-english{
+
+        font-size:20px;
+
+    }
 
     .btn{
 
-
-        display:none;
-
-
+        font-size:15px;
 
     }
 
+}
 
+
+/*==================================================
+LANDSCAPE MOBILE
+==================================================*/
+
+@media (max-height:600px){
+
+    .screen{
+
+        min-height:100vh;
+
+        padding-top:30px;
+
+        padding-bottom:30px;
+
+    }
+
+}
+
+
+/*==================================================
+REDUCED MOTION
+==================================================*/
+
+@media (prefers-reduced-motion:reduce){
+
+    *{
+
+        animation:none !important;
+
+        transition:none !important;
+
+        scroll-behavior:auto !important;
+
+    }
 
 }
