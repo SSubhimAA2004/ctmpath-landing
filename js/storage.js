@@ -5,138 +5,238 @@
     FROM SURVIVAL TO LIVING™
 
     FILE
+
     storage.js
 
     PURPOSE
 
-    Client Storage Manager
+    Client Session Storage Manager
 
     RESPONSIBILITIES
 
-    • Application State
-    • Visitor Registration
-    • Assessment Answers
-    • Scores
-    • Session Restore
-    • Clear Session
+    • Maintain Browser Session
+    • Save Visitor Session
+    • Restore Journey State
+    • Store Temporary Assessment Draft
 
     NOTE
 
-    This module manages browser storage only.
+    Google Sheet is the master database.
+
+    This module manages only
+    browser-side persistence.
 
 =============================================================================*/
 
+
 'use strict';
+
+
 
 /*=============================================================================
     GLOBAL NAMESPACE
 =============================================================================*/
 
+
 window.CTM = window.CTM || {};
+
+
+
+
 
 /*=============================================================================
     STORAGE MODULE
 =============================================================================*/
 
+
 CTM.storage = (function(){
+
+
+
+
 
     /*=========================================================================
         CONSTANTS
     =========================================================================*/
 
-    const STORAGE_KEY = 'CTM_PATH';
+
+    const STORAGE_KEY =
+
+        'CTM_PATH_SESSION_V1';
+
+
+
+
 
     /*=========================================================================
-        DEFAULT DATA
+        DEFAULT SESSION
+
+        Created for a new visitor
+
     =========================================================================*/
+
 
     function defaultState(){
 
+
         return{
+
 
             visitor:{
 
+
+                visitorId:'',
+
+
                 name:'',
+
+
                 email:'',
+
+
                 mobile:'',
+
+
                 district:'',
-                state:''
+
+
+                state:'',
+
+
+                language:'ta',
+
+
+                device:''
+
 
             },
+
+
+
+            journey:{
+
+
+                currentPage:'index.html',
+
+
+                startTime:'',
+
+
+                lastUpdated:''
+
+
+            },
+
+
 
             assessment:{
 
-                currentPillar:0,
-
-                currentQuestion:0,
 
                 answers:{},
 
-                pillarScores:{},
 
-                overallScore:0
+                currentQuestion:0,
 
-            },
 
-            results:{
+                completed:false
 
-                diagnosis:null,
 
-                prescription:null
 
             }
+
+
 
         };
 
+
     }
 
+
+
+
+
+
     /*=========================================================================
-        LOAD
+        LOAD SESSION
+
     =========================================================================*/
+
 
     function load(){
 
+
         try{
 
-            const data = localStorage.getItem(
 
-                STORAGE_KEY
+            const data =
 
-            );
+                localStorage.getItem(
+
+                    STORAGE_KEY
+
+                );
+
+
 
             if(!data){
 
+
                 return defaultState();
+
 
             }
 
+
+
             return JSON.parse(data);
+
+
 
         }
 
+
         catch(error){
+
 
             console.error(
 
-                'Storage Load Error',
+                'CTM Storage Load Error',
 
                 error
 
             );
 
+
+
             return defaultState();
+
+
 
         }
 
+
     }
 
+
     /*=========================================================================
-        SAVE
+        SAVE SESSION
+
+        Writes current browser state
+
     =========================================================================*/
+
 
     function save(state){
 
+
         try{
+
+
+            state.journey.lastUpdated =
+
+                new Date().toISOString();
+
+
 
             localStorage.setItem(
 
@@ -146,175 +246,363 @@ CTM.storage = (function(){
 
             );
 
+
+
             return true;
+
+
 
         }
 
+
         catch(error){
+
 
             console.error(
 
-                'Storage Save Error',
+                'CTM Storage Save Error',
 
                 error
 
             );
 
+
+
             return false;
+
+
 
         }
 
+
     }
+
+
+
+
 
     /*=========================================================================
         GET STATE
+
     =========================================================================*/
+
 
     function getState(){
 
+
         return load();
 
+
     }
+
+
+
+
 
     /*=========================================================================
         SET STATE
+
     =========================================================================*/
+
 
     function setState(state){
 
-        return save(state);
+
+        return save(
+
+            state
+
+        );
+
 
     }
 
+
+
+
+
     /*=========================================================================
-        UPDATE VISITOR
+        VISITOR SESSION
+
     =========================================================================*/
+
+
+    function getVisitor(){
+
+
+        return load()
+
+            .visitor;
+
+
+    }
+
+
+
+
 
     function updateVisitor(data){
 
+
         const state = load();
+
+
 
         state.visitor = {
 
+
             ...state.visitor,
+
 
             ...data
 
+
         };
 
-        save(state);
+
+
+        save(
+
+            state
+
+        );
+
 
     }
 
+
+
+
+
+    function clearVisitor(){
+
+
+        const state = load();
+
+
+
+        state.visitor =
+
+
+            defaultState()
+
+                .visitor;
+
+
+
+        save(
+
+            state
+
+        );
+
+
+    }
+
+
+
+
+
+    function hasVisitor(){
+
+
+        const visitor =
+
+            getVisitor();
+
+
+
+        return Boolean(
+
+            visitor.visitorId ||
+
+            visitor.name
+
+        );
+
+
+    }
+
+
+
+
+
     /*=========================================================================
-        SAVE ANSWER
+        JOURNEY STATE
+
     =========================================================================*/
+
+
+    function setCurrentPage(page){
+
+
+        const state = load();
+
+
+
+        state.journey.currentPage =
+
+            page;
+
+
+
+        save(
+
+            state
+
+        );
+
+
+    }
+
+
+
+
+
+    function getCurrentPage(){
+
+
+        return load()
+
+            .journey
+
+            .currentPage;
+
+
+    }
+
+
+
+
+
+    function setStartTime(time){
+
+
+        const state = load();
+
+
+
+        state.journey.startTime =
+
+            time;
+
+
+
+        save(
+
+            state
+
+        );
+
+
+    }
+
+
+
+
+
+    function getStartTime(){
+
+
+        return load()
+
+            .journey
+
+            .startTime;
+
+
+    }
+
+
+
+
+    /*=========================================================================
+        ASSESSMENT DRAFT
+
+        Temporary browser storage only.
+
+        Final values sync through api.js
+        to Google Sheet.
+
+    =========================================================================*/
+
 
     function saveAnswer(
 
-        pillar,
+        questionId,
 
-        question,
-
-        score
+        answer
 
     ){
 
-        const state = load();
-
-        if(
-
-            !state.assessment.answers[pillar]
-
-        ){
-
-            state.assessment.answers[pillar]={};
-
-        }
-
-        state.assessment.answers[pillar][question]=score;
-
-        save(state);
-
-    }
-
-    /*=========================================================================
-        SAVE PILLAR SCORE
-    =========================================================================*/
-
-    function savePillarScore(
-
-        pillar,
-
-        score
-
-    ){
 
         const state = load();
 
-        state.assessment.pillarScores[pillar]=score;
 
-        save(state);
 
-    }
+        state.assessment.answers[questionId] =
 
-    /*=========================================================================
-        UPDATE OVERALL SCORE
-    =========================================================================*/
+            answer;
 
-    function updateOverallScore(
 
-        score
 
-    ){
+        save(
 
-        const state = load();
+            state
 
-        state.assessment.overallScore = score;
+        );
 
-        save(state);
 
     }
 
-    /*=========================================================================
-        CURRENT PILLAR
-    =========================================================================*/
 
-    function setCurrentPillar(index){
 
-        const state = load();
 
-        state.assessment.currentPillar=index;
 
-        save(state);
+    function getAnswers(){
 
-    }
-
-    function getCurrentPillar(){
 
         return load()
 
             .assessment
 
-            .currentPillar;
+            .answers;
+
 
     }
 
-    /*=========================================================================
-        CURRENT QUESTION
-    =========================================================================*/
+
+
+
 
     function setCurrentQuestion(index){
 
+
         const state = load();
 
-        state.assessment.currentQuestion=index;
 
-        save(state);
+
+        state.assessment.currentQuestion =
+
+            index;
+
+
+
+        save(
+
+            state
+
+        );
+
 
     }
 
+
+
+
+
     function getCurrentQuestion(){
+
 
         return load()
 
@@ -322,13 +610,87 @@ CTM.storage = (function(){
 
             .currentQuestion;
 
+
     }
+
+
+
+
+
+    function markCompleted(){
+
+
+        const state = load();
+
+
+
+        state.assessment.completed =
+
+            true;
+
+
+
+        save(
+
+            state
+
+        );
+
+
+    }
+
+
+
+
+
+    function isCompleted(){
+
+
+        return load()
+
+            .assessment
+
+            .completed;
+
+
+    }
+
+
+
+
+
+    /*=========================================================================
+        SESSION CHECK
+
+    =========================================================================*/
+
+
+    function exists(){
+
+
+        return localStorage.getItem(
+
+            STORAGE_KEY
+
+        ) !== null;
+
+
+    }
+
+
+
+
 
     /*=========================================================================
         RESET
+
+        Development / New Visitor
+
     =========================================================================*/
 
+
     function reset(){
+
 
         localStorage.removeItem(
 
@@ -336,37 +698,113 @@ CTM.storage = (function(){
 
         );
 
+
     }
 
+
+
+
+
     /*=========================================================================
-        EXISTS
+        EXPORT
+
+        Useful for debugging
+
     =========================================================================*/
 
-    function exists(){
 
-        return(
+    function exportData(){
 
-            localStorage.getItem(
 
-                STORAGE_KEY
+        return JSON.stringify(
 
-            )!==null
+            load(),
+
+            null,
+
+            4
 
         );
 
+
     }
+
+
+
+
+
+    /*=========================================================================
+        IMPORT
+
+    =========================================================================*/
+
+
+    function importData(data){
+
+
+        try{
+
+
+            const state =
+
+                typeof data === 'string'
+
+                    ?
+
+                JSON.parse(data)
+
+                    :
+
+                data;
+
+
+
+            return save(
+
+                state
+
+            );
+
+
+        }
+
+
+        catch(error){
+
+
+            console.error(
+
+                'CTM Storage Import Error',
+
+                error
+
+            );
+
+
+
+            return false;
+
+
+        }
+
+
+    }
+
+
+
+
 
     /*=========================================================================
         INIT
+
     =========================================================================*/
+
 
     function init(){
 
-        if(
 
-            !exists()
+        if(!exists()){
 
-        ){
 
             save(
 
@@ -374,7 +812,10 @@ CTM.storage = (function(){
 
             );
 
+
         }
+
+
 
         console.log(
 
@@ -382,48 +823,101 @@ CTM.storage = (function(){
 
         );
 
+
     }
+
+
+
+
 
     /*=========================================================================
         PUBLIC API
+
     =========================================================================*/
+
 
     return{
 
+
         init,
+
 
         load,
 
+
         save,
+
 
         getState,
 
+
         setState,
+
+
+        getVisitor,
+
 
         updateVisitor,
 
+
+        clearVisitor,
+
+
+        hasVisitor,
+
+
+        setCurrentPage,
+
+
+        getCurrentPage,
+
+
+        setStartTime,
+
+
+        getStartTime,
+
+
         saveAnswer,
 
-        savePillarScore,
 
-        updateOverallScore,
+        getAnswers,
 
-        setCurrentPillar,
-
-        getCurrentPillar,
 
         setCurrentQuestion,
 
+
         getCurrentQuestion,
+
+
+        markCompleted,
+
+
+        isCompleted,
+
+
+        exists,
+
 
         reset,
 
-        exists
+
+        exportData,
+
+
+        importData
+
 
     };
 
+
+
 })();
 
+
+
 /*=============================================================================
+
     END OF FILE
-=============================================================================*/
+
+=============================================================================*/            
