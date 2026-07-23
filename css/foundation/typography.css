@@ -1,742 +1,415 @@
 
-/*
-======================================================================
+/*=====================================================================
 
-CTM PATH™ Guided Journey v1.0
+    CTM PATH™
+    FROM SURVIVAL TO LIVING™
 
-File
-css/foundation/typography.css
+    File
+    typography.css
 
-Purpose
-Premium Typography System
+    Purpose
+    Global Typography System
 
-Responsibility
-• Tamil-first typography
-• English supporting typography
-• Hero hierarchy
-• Emotional storytelling rhythm
-• Screen captions
-• Buttons and labels
+    Responsibilities
 
-======================================================================
-*/
+    • Tamil First Typography
+    • English Secondary Typography
+    • Heading Hierarchy
+    • Body Typography
+    • Labels
+    • Form Typography
 
-
-/*==================================================
-Typography Variables
-==================================================*/
-
-:root{
-
-
-    --font-tamil:
-
-        "Noto Sans Tamil",
-        sans-serif;
-
-
-
-    --font-display:
-
-        "Playfair Display",
-        serif;
-
-
-
-    --font-ui:
-
-        "Inter",
-        sans-serif;
-
-
-
-    --line-tight:
-
-        1.25;
-
-
-
-    --line-normal:
-
-        1.65;
-
-
-
-    --line-loose:
-
-        2;
-
-
-
-}
-
+======================================================================*/
 
 
 /*==================================================
-Base Typography
+BODY
 ==================================================*/
-
 
 body{
 
+    font-family:var(--font-body);
 
-    font-family:
+    color:var(--ctm-white);
 
-        var(--font-ui);
+    -webkit-font-smoothing:antialiased;
 
-
-    font-size:
-
-        16px;
-
-
-    line-height:
-
-        var(--line-normal);
-
-
-    letter-spacing:
-
-        .02em;
-
+    -moz-osx-font-smoothing:grayscale;
 
 }
 
 
 
 /*==================================================
-Tamil Typography Foundation
+DISPLAY
 ==================================================*/
 
+.display{
+
+    font-family:var(--font-display);
+
+    font-size:var(--fs-hero);
+
+    font-weight:var(--fw-semibold);
+
+    line-height:1.05;
+
+    letter-spacing:-2px;
+
+}
+
+
+
+/*==================================================
+TAMIL
+PRIMARY LANGUAGE
+==================================================*/
 
 .tamil{
 
+    font-family:var(--font-tamil);
 
-    font-family:
+    color:var(--ctm-white);
 
-        var(--font-tamil);
+    font-weight:var(--fw-semibold);
 
-
-
-    font-weight:
-
-        600;
-
-
-
-    line-height:
-
-        2.1;
-
-
-
-    letter-spacing:
-
-        .02em;
-
-
-
-    color:
-
-        var(--color-white);
-
-
+    line-height:1.65;
 
 }
 
 
 
 /*==================================================
-English Typography Foundation
+ENGLISH
+SECONDARY LANGUAGE
 ==================================================*/
-
 
 .english{
 
+    font-family:var(--font-body);
 
-    font-family:
+    color:var(--ctm-muted);
 
-        var(--font-display);
+    font-weight:var(--fw-regular);
 
-
-
-    font-weight:
-
-        400;
-
-
-
-    line-height:
-
-        1.9;
-
-
-
-    letter-spacing:
-
-        .04em;
-
-
-
-    color:
-
-        rgba(255,255,255,.86);
-
-
+    line-height:1.60;
 
 }
 
 
 
 /*==================================================
-Hero Heading
+MAIN HERO
 ==================================================*/
 
+.hero-tamil{
 
-.hero-title{
+    font-family:var(--font-tamil);
 
+    font-size:58px;
 
-    font-family:
+    font-weight:700;
 
-        var(--font-tamil);
+    color:var(--ctm-white);
 
-
-
-    font-size:
-
-        clamp(
-
-            2.4rem,
-
-            5vw,
-
-            4.8rem
-
-        );
-
-
-
-    font-weight:
-
-        700;
-
-
-
-    line-height:
-
-        1.8;
-
-
+    line-height:1.30;
 
     text-align:center;
 
-
+    margin-bottom:16px;
 
 }
 
 
 
-/*==================================================
-Hero English Subtitle
-==================================================*/
+.hero-english{
 
+    font-family:var(--font-display);
 
-.hero-subtitle{
+    font-size:32px;
 
+    font-weight:500;
 
-    font-family:
+    color:var(--ctm-muted);
 
-        var(--font-display);
-
-
-
-    font-size:
-
-        clamp(
-
-            1.2rem,
-
-            2vw,
-
-            2rem
-
-        );
-
-
-
-    font-weight:
-
-        400;
-
-
-
-    line-height:
-
-        1.8;
-
-
+    line-height:1.40;
 
     text-align:center;
 
+}
 
 
-    color:
 
-        rgba(255,255,255,.75);
+/*==================================================
+SECTION TITLES
+==================================================*/
+
+.section-title-tamil{
+
+    font-family:var(--font-tamil);
+
+    font-size:40px;
+
+    font-weight:700;
+
+    color:var(--ctm-white);
+
+    margin-bottom:10px;
+
+}
 
 
+
+.section-title-english{
+
+    font-family:var(--font-display);
+
+    font-size:22px;
+
+    font-weight:500;
+
+    color:var(--ctm-muted);
 
 }
 
 
 
 /*==================================================
-Screen Caption
+BODY TEXT
 ==================================================*/
 
+.body-tamil{
 
-.screen-caption{
+    font-family:var(--font-tamil);
 
+    font-size:22px;
 
-    font-family:
+    line-height:1.8;
 
-        var(--font-ui);
+    color:var(--ctm-white);
 
-
-
-    font-size:
-
-        .78rem;
+}
 
 
 
-    font-weight:
+.body-english{
 
-        600;
+    font-family:var(--font-body);
 
+    font-size:18px;
 
+    line-height:1.8;
 
-    letter-spacing:
+    color:var(--ctm-muted);
 
-        .30em;
-
-
-
-    text-transform:
-
-        uppercase;
+}
 
 
+
+/*==================================================
+FORM LABELS
+==================================================*/
+
+.label-tamil{
+
+    display:block;
+
+    font-family:var(--font-tamil);
+
+    font-size:18px;
+
+    font-weight:600;
+
+    color:var(--ctm-white);
+
+    margin-bottom:4px;
+
+}
+
+
+
+.label-english{
+
+    display:block;
+
+    font-size:14px;
+
+    color:var(--ctm-muted);
+
+    margin-bottom:12px;
+
+}
+
+
+
+/*==================================================
+FORM INPUT
+==================================================*/
+
+input,
+select,
+textarea{
+
+    font-family:var(--font-body);
+
+    font-size:18px;
+
+    color:var(--ctm-white);
+
+}
+
+
+
+/*==================================================
+HELP TEXT
+==================================================*/
+
+.help-text{
+
+    font-size:14px;
+
+    color:var(--ctm-muted);
+
+}
+
+
+
+/*==================================================
+SUCCESS
+==================================================*/
+
+.success-text{
+
+    color:var(--ctm-success);
+
+}
+
+
+
+/*==================================================
+WARNING
+==================================================*/
+
+.warning-text{
+
+    color:var(--ctm-warning);
+
+}
+
+
+
+/*==================================================
+ERROR
+==================================================*/
+
+.error-text{
+
+    color:var(--ctm-danger);
+
+}
+
+
+
+/*==================================================
+TEXT ALIGNMENT
+==================================================*/
+
+.text-left{
+
+    text-align:left;
+
+}
+
+
+
+.text-center{
 
     text-align:center;
 
+}
 
 
-    color:
 
-        rgba(217,181,106,.85);
+.text-right{
 
-
+    text-align:right;
 
 }
 
 
 
 /*==================================================
-Gold Highlight
+TEXT UTILITIES
 ==================================================*/
 
+.uppercase{
 
-.text-gold{
+    text-transform:uppercase;
 
-
-    color:
-
-        var(--color-gold);
+}
 
 
+
+.capitalize{
+
+    text-transform:capitalize;
+
+}
+
+
+
+.bold{
+
+    font-weight:700;
+
+}
+
+
+
+.semibold{
+
+    font-weight:600;
+
+}
+
+
+
+.light{
+
+    font-weight:300;
 
 }
 
 
 
 /*==================================================
-Welcome Text
+BRAND
 ==================================================*/
 
+.brand{
 
-.english-welcome{
+    font-family:var(--font-display);
 
+    font-size:30px;
 
-    color:
+    font-weight:700;
 
-        var(--color-gold);
+    color:var(--ctm-gold);
 
-
-
-    font-weight:
-
-        600;
-
-
+    letter-spacing:2px;
 
 }
 
 
 
-/*==================================================
-Body Message
-==================================================*/
+.tagline{
 
+    font-size:14px;
 
-.message{
+    letter-spacing:4px;
 
+    text-transform:uppercase;
 
-    text-align:center;
-
-
-
-    font-family:
-
-        var(--font-ui);
-
-
-
-}
-
-
-
-.message-tamil{
-
-
-    font-family:
-
-        var(--font-tamil);
-
-
-
-    font-size:
-
-        1.25rem;
-
-
-
-    line-height:
-
-        2;
-
-
-
-    color:
-
-        var(--color-white);
-
-
-
-}
-
-
-
-.message-english{
-
-
-    font-family:
-
-        var(--font-display);
-
-
-
-    font-size:
-
-        1rem;
-
-
-
-    color:
-
-        rgba(255,255,255,.70);
-
-
-
-}
-
-
-
-/*==================================================
-Card Typography
-==================================================*/
-
-
-.card-title{
-
-
-    font-family:
-
-        var(--font-tamil);
-
-
-
-    font-size:
-
-        1.25rem;
-
-
-
-    font-weight:
-
-        600;
-
-
-
-}
-
-
-
-.card-subtitle{
-
-
-    font-family:
-
-        var(--font-display);
-
-
-
-    font-size:
-
-        .95rem;
-
-
-
-    color:
-
-        rgba(255,255,255,.65);
-
-
-
-}
-
-
-
-/*==================================================
-Button Typography
-==================================================*/
-
-
-.btn-title{
-
-
-    font-family:
-
-        var(--font-tamil);
-
-
-
-    font-weight:
-
-        700;
-
-
-
-}
-
-
-
-.btn-subtitle{
-
-
-    font-family:
-
-        var(--font-display);
-
-
-
-    font-size:
-
-        .85rem;
-
-
-
-}
-
-
-
-/*==================================================
-Small Labels
-==================================================*/
-
-
-.label{
-
-
-    font-family:
-
-        var(--font-ui);
-
-
-
-    font-size:
-
-        .75rem;
-
-
-
-    letter-spacing:
-
-        .18em;
-
-
-
-    text-transform:
-
-        uppercase;
-
-
-
-    color:
-
-        rgba(255,255,255,.55);
-
-
-
-}
-
-
-
-/*==================================================
-Divider Text
-==================================================*/
-
-
-.quote{
-
-
-    font-family:
-
-        var(--font-display);
-
-
-
-    font-style:
-
-        italic;
-
-
-
-    font-size:
-
-        1.2rem;
-
-
-
-    line-height:
-
-        1.8;
-
-
-
-    color:
-
-        rgba(255,255,255,.82);
-
-
-
-}
-
-
-
-/*==================================================
-Responsive Typography
-==================================================*/
-
-
-@media(max-width:768px){
-
-
-
-    body{
-
-
-        font-size:
-
-            15px;
-
-
-
-    }
-
-
-
-    .hero-title{
-
-
-        font-size:
-
-            2.3rem;
-
-
-
-    }
-
-
-
-    .hero-subtitle{
-
-
-        font-size:
-
-            1.1rem;
-
-
-
-    }
-
-
-
-    .tamil{
-
-
-        line-height:
-
-            1.95;
-
-
-
-    }
-
-
-
-}
-
-
-
-@media(max-width:480px){
-
-
-
-    .hero-title{
-
-
-        font-size:
-
-            2rem;
-
-
-
-    }
-
-
-
-    .message-tamil{
-
-
-        font-size:
-
-            1.1rem;
-
-
-
-    }
-
-
+    color:var(--ctm-muted);
 
 }
