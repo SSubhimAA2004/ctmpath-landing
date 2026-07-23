@@ -12,21 +12,24 @@
 
         Interactive Life Assessment v1.0
 
-        ------------------------------------------------------------
+        --------------------------------------------------------------------
 
-        File:
+        File
         index.html
 
-        Purpose:
+        Purpose
         Main Application Shell
 
-        Responsibilities:
+        Responsibilities
+
         • Load application shell
         • Load foundation styles
         • Load all 16 assessment screens
         • Initialize CTM PATH™ Application
 
-        Assessment Flow
+        --------------------------------------------------------------------
+
+        Assessment Journey
 
         Screen 01  : Emotion
         Screen 02  : Registration
@@ -45,7 +48,7 @@
         Screen 15  : Your Life Wheel™
         Screen 16  : From Survival to Living™
 
-        =====================================================================
+    =====================================================================
     -->
 
     <meta charset="UTF-8">
@@ -55,7 +58,9 @@
         content="width=device-width, initial-scale=1.0">
 
     <title>
+
         CTM PATH™ | From Survival to Living™
+
     </title>
 
     <meta
@@ -144,16 +149,16 @@
     <main id="app">
 
         <!--==============================================
-            Background Layer
+            Premium Background Layer
         ==============================================-->
 
         <div id="app-background"></div>
 
         <!--==============================================
-            Screen Container
+            Dynamic Screen Container
 
-            Dynamic screen loader injects
-            Screen01 → Screen16 here.
+            Router loads Screen01 → Screen16
+            into this container.
 
         ==============================================-->
 
@@ -165,10 +170,6 @@
 
         <!--==============================================
             Global Loading Overlay
-
-            Used while loading screens
-            and communicating with backend.
-
         ==============================================-->
 
         <div
@@ -186,21 +187,25 @@
 
         Load Order
 
-        state
+        State
             ↓
-        storage
+        Storage
             ↓
-        loader
+        API
             ↓
-        router
+        Loader
             ↓
-        app
+        Router
+            ↓
+        App
 
     ==================================================-->
 
     <script src="js/foundation/state.js"></script>
 
     <script src="js/foundation/storage.js"></script>
+
+    <script src="js/foundation/api.js"></script>
 
     <script src="js/foundation/loader.js"></script>
 
