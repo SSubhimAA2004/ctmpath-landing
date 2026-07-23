@@ -1,417 +1,237 @@
 
 <!DOCTYPE html>
-
 <html lang="ta">
 
 <head>
 
     <!--
-    ==============================================================
+    =====================================================================
 
-    CTM PATH™ Guided Journey v6.0
+        CTM PATH™
+        FROM SURVIVAL TO LIVING™
 
-    File
-    index.html
+        Interactive Life Assessment v1.0
 
-    Purpose
-    Application Entry Point
+        ------------------------------------------------------------
 
-    Responsibility
-    • Load application shell
-    • Load foundation styles
-    • Load all 36 journey screens
-    • Initialize CTM PATH™ Journey
+        File:
+        index.html
 
-    ==============================================================
+        Purpose:
+        Main Application Shell
 
+        Responsibilities:
+        • Load application shell
+        • Load foundation styles
+        • Load all 16 assessment screens
+        • Initialize CTM PATH™ Application
+
+        Assessment Flow
+
+        Screen 01  : Emotion
+        Screen 02  : Registration
+        Screen 03  : Purpose
+        Screen 04  : Health
+        Screen 05  : Relationships
+        Screen 06  : Character
+        Screen 07  : Learning
+        Screen 08  : Career
+        Screen 09  : Cashflow
+        Screen 10  : Time Freedom
+        Screen 11  : Tribe
+        Screen 12  : Automation
+        Screen 13  : Contribution
+        Screen 14  : Vision
+        Screen 15  : Your Life Wheel™
+        Screen 16  : From Survival to Living™
+
+        =====================================================================
     -->
 
-
     <meta charset="UTF-8">
-
 
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-
     <title>
-
-        CTM PATH™ | Your Journey Begins
-
+        CTM PATH™ | From Survival to Living™
     </title>
 
+    <meta
+        name="description"
+        content="CTM PATH™ is a premium interactive life assessment that helps people move from Survival to Living through Cashflow, Tribe and Automation.">
 
     <meta
+        name="theme-color"
+        content="#111315">
 
-        name="description"
-
-        content="CTM PATH™ Guided Journey — Discover the next chapter of your financial life.">
-
-
-
-
-
+    <meta
+        name="color-scheme"
+        content="dark">
 
     <!--==================================================
-    Google Fonts
+        Google Fonts
     ==================================================-->
 
-
     <link
-
         rel="preconnect"
-
         href="https://fonts.googleapis.com">
 
-
-
     <link
-
         rel="preconnect"
-
         href="https://fonts.gstatic.com"
-
         crossorigin>
 
-
-
     <link
-
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
-
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
-
-
-
-
-
     <!--==================================================
-    Foundation CSS
+        Foundation CSS
     ==================================================-->
 
-
     <link
-
         rel="stylesheet"
-
         href="css/foundation/global.css">
 
-
-
     <link
-
         rel="stylesheet"
-
         href="css/foundation/typography.css">
 
-
-
     <link
-
         rel="stylesheet"
-
         href="css/foundation/buttons.css">
 
-
-
     <link
-
         rel="stylesheet"
-
         href="css/foundation/animations.css">
 
-
-
     <link
-
         rel="stylesheet"
-
         href="css/foundation/responsive.css">
 
-
-
-
-
-
-
     <!--==================================================
-    Screen CSS
-
-    All Journey Screens
-
-    SCREEN 01 → SCREEN 36
-
+        Assessment Screen CSS
+        Screen 01 → Screen 16
     ==================================================-->
 
-
-
     <link rel="stylesheet" href="css/screens/screen01.css">
-
     <link rel="stylesheet" href="css/screens/screen02.css">
-
     <link rel="stylesheet" href="css/screens/screen03.css">
-
     <link rel="stylesheet" href="css/screens/screen04.css">
-
     <link rel="stylesheet" href="css/screens/screen05.css">
-
     <link rel="stylesheet" href="css/screens/screen06.css">
-
     <link rel="stylesheet" href="css/screens/screen07.css">
-
     <link rel="stylesheet" href="css/screens/screen08.css">
-
     <link rel="stylesheet" href="css/screens/screen09.css">
-
     <link rel="stylesheet" href="css/screens/screen10.css">
-
     <link rel="stylesheet" href="css/screens/screen11.css">
-
     <link rel="stylesheet" href="css/screens/screen12.css">
-
     <link rel="stylesheet" href="css/screens/screen13.css">
-
     <link rel="stylesheet" href="css/screens/screen14.css">
-
     <link rel="stylesheet" href="css/screens/screen15.css">
-
     <link rel="stylesheet" href="css/screens/screen16.css">
 
-    <link rel="stylesheet" href="css/screens/screen17.css">
-
-    <link rel="stylesheet" href="css/screens/screen18.css">
-
-    <link rel="stylesheet" href="css/screens/screen19.css">
-
-    <link rel="stylesheet" href="css/screens/screen20.css">
-
-    <link rel="stylesheet" href="css/screens/screen21.css">
-
-    <link rel="stylesheet" href="css/screens/screen22.css">
-
-    <link rel="stylesheet" href="css/screens/screen23.css">
-
-    <link rel="stylesheet" href="css/screens/screen24.css">
-
-    <link rel="stylesheet" href="css/screens/screen25.css">
-
-    <link rel="stylesheet" href="css/screens/screen26.css">
-
-    <link rel="stylesheet" href="css/screens/screen27.css">
-
-    <link rel="stylesheet" href="css/screens/screen28.css">
-
-    <link rel="stylesheet" href="css/screens/screen29.css">
-
-    <link rel="stylesheet" href="css/screens/screen30.css">
-
-    <link rel="stylesheet" href="css/screens/screen31.css">
-
-    <link rel="stylesheet" href="css/screens/screen32.css">
-
-    <link rel="stylesheet" href="css/screens/screen33.css">
-
-    <link rel="stylesheet" href="css/screens/screen34.css">
-
-    <link rel="stylesheet" href="css/screens/screen35.css">
-
-    <link rel="stylesheet" href="css/screens/screen36.css">
-
+</head>
 
 <body>
 
-
-
     <!--==================================================
-    Application Container
+        Application Shell
     ==================================================-->
 
+    <main id="app">
 
-    <main
+        <!--==============================================
+            Background Layer
+        ==============================================-->
 
-        id="app">
+        <div id="app-background"></div>
 
+        <!--==============================================
+            Screen Container
 
+            Dynamic screen loader injects
+            Screen01 → Screen16 here.
 
+        ==============================================-->
 
+        <section id="screen-container">
 
+            <!-- Dynamic Screen Content -->
 
-        <!-- Dynamic Journey Screens Load Here -->
+        </section>
 
+        <!--==============================================
+            Global Loading Overlay
+
+            Used while loading screens
+            and communicating with backend.
+
+        ==============================================-->
 
         <div
+            id="loading-overlay"
+            class="hidden">
 
-            id="screen-container">
-
+            <div class="loading-spinner"></div>
 
         </div>
 
-
-
-
     </main>
 
-
-
-
-
-
-
-
-
     <!--==================================================
-    Foundation JavaScript
+        Foundation JavaScript
 
-    Core Application Systems
+        Load Order
 
-    Load Order:
-
-    state
-    ↓
-    storage
-    ↓
-    loader
-    ↓
-    router
-    ↓
-    app
+        state
+            ↓
+        storage
+            ↓
+        loader
+            ↓
+        router
+            ↓
+        app
 
     ==================================================-->
 
+    <script src="js/foundation/state.js"></script>
 
+    <script src="js/foundation/storage.js"></script>
 
-    <script
+    <script src="js/foundation/loader.js"></script>
 
-        src="js/foundation/state.js">
+    <script src="js/foundation/router.js"></script>
 
-    </script>
-
-
-
-    <script
-
-        src="js/foundation/storage.js">
-
-    </script>
-
-
-
-    <script
-
-        src="js/foundation/loader.js">
-
-    </script>
-
-
-
-    <script
-
-        src="js/foundation/router.js">
-
-    </script>
-
-
-
-    <script
-
-        src="js/foundation/app.js">
-
-    </script>
-
+    <script src="js/foundation/app.js"></script>
 
     <!--==================================================
-    Screen JavaScript
+        Assessment Screen Modules
 
-    Journey Screen Modules
-
-    SCREEN 01 → SCREEN 36
+        Screen 01 → Screen 16
 
     ==================================================-->
-
-
 
     <script src="js/screens/screen01.js"></script>
-
     <script src="js/screens/screen02.js"></script>
-
     <script src="js/screens/screen03.js"></script>
-
     <script src="js/screens/screen04.js"></script>
-
     <script src="js/screens/screen05.js"></script>
-
     <script src="js/screens/screen06.js"></script>
-
     <script src="js/screens/screen07.js"></script>
-
     <script src="js/screens/screen08.js"></script>
-
     <script src="js/screens/screen09.js"></script>
-
     <script src="js/screens/screen10.js"></script>
-
     <script src="js/screens/screen11.js"></script>
-
     <script src="js/screens/screen12.js"></script>
-
     <script src="js/screens/screen13.js"></script>
-
     <script src="js/screens/screen14.js"></script>
-
     <script src="js/screens/screen15.js"></script>
-
     <script src="js/screens/screen16.js"></script>
-
-    <script src="js/screens/screen17.js"></script>
-
-    <script src="js/screens/screen18.js"></script>
-
-    <script src="js/screens/screen19.js"></script>
-
-    <script src="js/screens/screen20.js"></script>
-
-    <script src="js/screens/screen21.js"></script>
-
-    <script src="js/screens/screen22.js"></script>
-
-    <script src="js/screens/screen23.js"></script>
-
-    <script src="js/screens/screen24.js"></script>
-
-    <script src="js/screens/screen25.js"></script>
-
-    <script src="js/screens/screen26.js"></script>
-
-    <script src="js/screens/screen27.js"></script>
-
-    <script src="js/screens/screen28.js"></script>
-
-    <script src="js/screens/screen29.js"></script>
-
-    <script src="js/screens/screen30.js"></script>
-
-    <script src="js/screens/screen31.js"></script>
-
-    <script src="js/screens/screen32.js"></script>
-
-    <script src="js/screens/screen33.js"></script>
-
-    <script src="js/screens/screen34.js"></script>
-
-    <script src="js/screens/screen35.js"></script>
-
-    <script src="js/screens/screen36.js"></script>
-
-
-
-
 
 </body>
 
-
 </html>
-
-
-    
