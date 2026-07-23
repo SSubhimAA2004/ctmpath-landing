@@ -1,1 +1,379 @@
 
+/*=============================================================================
+
+    CTM PATH™
+
+    FROM SURVIVAL TO LIVING™
+
+    FILE
+
+    landing.css
+
+    PURPOSE
+
+    Screen 01 Visual Design
+
+    RESPONSIBILITIES
+
+    • Landing Layout
+    • Hero Section
+    • Typography
+    • CTA Styling
+    • Responsive Design
+
+=============================================================================*/
+
+
+/*=============================================================================
+    LANDING PAGE
+=============================================================================*/
+
+
+.landing-page{
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #081C3A,
+
+            #111315
+
+        );
+
+    color:#FFFFFF;
+
+    overflow:hidden;
+
+}
+
+
+
+
+
+/*=============================================================================
+    HERO SECTION
+=============================================================================*/
+
+
+.landing-hero{
+
+    width:100%;
+
+    padding:
+
+        80px
+
+        24px;
+
+}
+
+
+
+
+
+.landing-container{
+
+    max-width:900px;
+
+    margin:0 auto;
+
+    text-align:center;
+
+}
+
+
+
+
+
+/*=============================================================================
+    BRAND LABEL
+=============================================================================*/
+
+
+.brand-label{
+
+    font-family:
+
+        'Inter',
+
+        sans-serif;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    letter-spacing:0.25em;
+
+    text-transform:uppercase;
+
+    color:#C8A951;
+
+    margin-bottom:32px;
+
+}
+
+
+
+
+
+/*=============================================================================
+    MAIN TITLE
+=============================================================================*/
+
+
+.landing-container h1{
+
+    font-family:
+
+        'Playfair Display',
+
+        serif;
+
+    font-size:
+
+        clamp(
+
+            2.5rem,
+
+            6vw,
+
+            5rem
+
+        );
+
+    line-height:1.2;
+
+    font-weight:700;
+
+    margin:0 0 24px;
+
+}
+
+
+
+
+
+/*=============================================================================
+    SUBTITLE
+=============================================================================*/
+
+
+.hero-subtitle{
+
+    font-family:
+
+        'Inter',
+
+        sans-serif;
+
+    font-size:1.5rem;
+
+    font-weight:500;
+
+    color:#E8E8E8;
+
+    margin-bottom:24px;
+
+}
+
+
+
+
+
+/*=============================================================================
+    DESCRIPTION
+=============================================================================*/
+
+
+.hero-description{
+
+    max-width:650px;
+
+    margin:
+
+        0 auto 48px;
+
+
+    font-family:
+
+        'Noto Sans Tamil',
+
+        sans-serif;
+
+
+    font-size:1.25rem;
+
+
+    line-height:1.8;
+
+
+    color:#D6D6D6;
+
+}
+
+
+
+
+
+/*=============================================================================
+    PRIMARY BUTTON
+=============================================================================*/
+
+
+.primary-button{
+
+
+    border:none;
+
+
+    cursor:pointer;
+
+
+    padding:
+
+        18px
+
+        48px;
+
+
+    border-radius:50px;
+
+
+    background:#C8A951;
+
+
+    color:#111315;
+
+
+    font-family:
+
+        'Inter',
+
+        sans-serif;
+
+
+    font-size:1.1rem;
+
+
+    font-weight:700;
+
+
+    transition:
+
+        transform .3s ease,
+
+        box-shadow .3s ease;
+
+
+}
+
+
+
+
+
+.primary-button:hover{
+
+
+    transform:translateY(-3px);
+
+
+    box-shadow:
+
+        0 15px 35px
+
+        rgba(
+
+            0,
+
+            0,
+
+            0,
+
+            .25
+
+        );
+
+
+}
+
+
+
+
+
+/*=============================================================================
+    MOBILE RESPONSIVE
+=============================================================================*/
+
+
+@media(max-width:768px){
+
+
+    .landing-hero{
+
+
+        padding:
+
+            50px
+
+            20px;
+
+
+    }
+
+
+
+
+    .hero-subtitle{
+
+
+        font-size:1.2rem;
+
+
+    }
+
+
+
+
+    .hero-description{
+
+
+        font-size:1.05rem;
+
+
+    }
+
+
+
+
+    .primary-button{
+
+
+        width:100%;
+
+
+        max-width:320px;
+
+
+    }
+
+
+}
+
+
+
+/*=============================================================================
+
+    END OF FILE
+
+=============================================================================*/
