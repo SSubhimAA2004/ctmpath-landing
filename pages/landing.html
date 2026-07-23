@@ -1,6 +1,5 @@
 
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -11,20 +10,20 @@
     FROM SURVIVAL TO LIVING™
 
     FILE
-
     landing.html
 
     PURPOSE
 
-    Landing Experience
+    CTM PATH™ Landing Experience
 
-    SCREENS
+    SECTIONS
 
-    Screen 01
-    Welcome
+    • Welcome
+    • Registration
 
-    Screen 02
-    Registration
+    VERSION
+
+    1.0
 
 =============================================================================-->
 
@@ -34,11 +33,13 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0">
 
+<meta
+    name="description"
+    content="CTM PATH™ | From Survival To Living™">
+
 <title>
 
-CTM PATH™
-|
-From Survival To Living™
+CTM PATH™ | From Survival To Living™
 
 </title>
 
@@ -60,7 +61,7 @@ href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;80
 rel="stylesheet">
 
 <!--=============================================================================
-    CSS
+    STYLES
 =============================================================================-->
 
 <link
@@ -86,56 +87,75 @@ href="../css/app.css">
 <div class="app">
 
 <!--=============================================================================
-    SCREEN 01
     WELCOME
 =============================================================================-->
 
 <section
 
-id="welcomeScreen"
+id="welcome"
 
 class="page">
 
 <header
+
 class="app-header">
+
+<div
+class="header-left">
 
 <img
 
 src="../assets/logo/CTM_Logo_Transparent.svg"
 
-alt="CTM PATH"
+alt="CTM PATH™"
 
 class="app-logo">
+
+</div>
 
 </header>
 
 <main
+
 class="page-content">
 
 <div
+
 class="container">
 
 <div
-class="text-center fade-in">
+
+class="hero fade-in">
+
+<div
+
+class="hero-brand">
 
 <h1
-class="page-title">
+class="brand-title">
 
 CTM PATH™
 
 </h1>
 
 <p
-class="page-subtitle">
+class="brand-tagline">
 
 FROM SURVIVAL TO LIVING™
 
 </p>
 
-<div
-style="height:48px;"></div>
+</div>
 
-<h2>
+<div
+
+class="hero-divider"></div>
+
+<header
+class="hero-header">
+
+<h2
+class="hero-title">
 
 Are You Living...
 
@@ -145,65 +165,104 @@ or Merely Surviving?
 
 </h2>
 
-<div
-style="height:24px;"></div>
-
-<p>
+<p
+class="hero-subtitle">
 
 Discover how balanced
 your life really is.
 
 </p>
 
-<div
-style="height:40px;"></div>
+</header>
 
 <div
-class="card">
 
-<h3>
+class="hero-divider"></div>
 
-In just a few minutes,
+<section
 
-you'll receive
-
-</h3>
+class="hero-benefits">
 
 <div
-style="height:24px;"></div>
+class="benefit-item">
 
-<p>
+<span
+class="benefit-icon">
 
-✓ Your Personal Life Wheel™
+✓
 
-</p>
+</span>
 
-<p>
+<span
+class="benefit-text">
 
-✓ Your Overall Life Score
+Your Personal Life Wheel™
 
-</p>
-
-<p>
-
-✓ A Clear Path Forward
-
-</p>
+</span>
 
 </div>
 
 <div
-style="height:56px;"></div>
+class="benefit-item">
+
+<span
+class="benefit-icon">
+
+✓
+
+</span>
+
+<span
+class="benefit-text">
+
+Your Overall Life Score
+
+</span>
+
+</div>
+
+<div
+class="benefit-item">
+
+<span
+class="benefit-icon">
+
+✓
+
+</span>
+
+<span
+class="benefit-text">
+
+A Clear Path Forward
+
+</span>
+
+</div>
+
+</section>
+
+<div
+
+class="hero-divider"></div>
+
+<footer
+
+class="hero-footer">
 
 <button
 
 id="btnBeginJourney"
 
+type="button"
+
 class="btn btn-primary">
 
-Begin Your Journey
+BEGIN JOURNEY
 
 </button>
+
+</footer>
 
 </div>
 
@@ -214,72 +273,103 @@ Begin Your Journey
 </section>
 
 <!--=============================================================================
-    SCREEN 02
     REGISTRATION
 =============================================================================-->
 
 <section
 
-id="registrationScreen"
+id="registration"
 
 class="page">
 
 <header
+
 class="app-header">
+
+<div
+class="header-left">
 
 <img
 
 src="../assets/logo/CTM_Logo_Transparent.svg"
 
-alt="CTM PATH"
+alt="CTM PATH™"
 
 class="app-logo">
+
+</div>
 
 </header>
 
 <main
+
 class="page-content">
 
 <div
+
 class="container">
 
 <div
-class="text-center slide-up">
 
-<h2
+class="registration-card slide-up">
+
+<!--=========================================================================
+    TITLE
+==========================================================================-->
+
+<header
+
+class="registration-header">
+
+<h1
+
 class="page-title">
 
 Welcome!
 
-</h2>
+</h1>
 
 <p
+
 class="page-subtitle">
 
 Let's begin by getting to know you.
 
 </p>
 
+</header>
+
 <div
-style="height:40px;"></div>
+
+class="section-divider"></div>
+
+<!--=========================================================================
+    FORM
+==========================================================================-->
 
 <form
 
 id="registrationForm"
 
-class="card"
+class="registration-form"
 
-autocomplete="off">
+autocomplete="off"
 
-<!--==============================================
-NAME
-===============================================-->
+novalidate>
+
+<!--=====================================================================
+    NAME
+======================================================================-->
 
 <div
+
 class="form-group">
 
 <label
-for="visitorName">
+
+for="visitorName"
+
+class="form-label">
 
 Full Name
 
@@ -293,24 +383,29 @@ id="visitorName"
 
 name="visitorName"
 
+class="form-control"
+
 placeholder="Enter your full name"
+
+maxlength="80"
 
 required>
 
 </div>
 
-<div
-style="height:20px;"></div>
-
-<!--==============================================
-EMAIL
-===============================================-->
+<!--=====================================================================
+    EMAIL
+======================================================================-->
 
 <div
+
 class="form-group">
 
 <label
-for="visitorEmail">
+
+for="visitorEmail"
+
+class="form-label">
 
 Email Address
 
@@ -324,24 +419,29 @@ id="visitorEmail"
 
 name="visitorEmail"
 
-placeholder="Enter your email"
+class="form-control"
+
+placeholder="Enter your email address"
+
+maxlength="120"
 
 required>
 
 </div>
 
-<div
-style="height:20px;"></div>
-
-<!--==============================================
-MOBILE
-===============================================-->
+<!--=====================================================================
+    MOBILE
+======================================================================-->
 
 <div
+
 class="form-group">
 
 <label
-for="visitorMobile">
+
+for="visitorMobile"
+
+class="form-label">
 
 Mobile Number
 
@@ -355,26 +455,29 @@ id="visitorMobile"
 
 name="visitorMobile"
 
+class="form-control"
+
 placeholder="Enter your mobile number"
 
-maxlength="10"
+maxlength="15"
 
 required>
 
 </div>
 
-<div
-style="height:20px;"></div>
-
-<!--==============================================
-DISTRICT
-===============================================-->
+<!--=====================================================================
+    DISTRICT
+======================================================================-->
 
 <div
+
 class="form-group">
 
 <label
-for="visitorDistrict">
+
+for="visitorDistrict"
+
+class="form-label">
 
 District
 
@@ -388,24 +491,29 @@ id="visitorDistrict"
 
 name="visitorDistrict"
 
+class="form-control"
+
 placeholder="Enter your district"
+
+maxlength="60"
 
 required>
 
 </div>
 
-<div
-style="height:20px;"></div>
-
-<!--==============================================
-STATE
-===============================================-->
+<!--=====================================================================
+    STATE
+======================================================================-->
 
 <div
+
 class="form-group">
 
 <label
-for="visitorState">
+
+for="visitorState"
+
+class="form-label">
 
 State
 
@@ -419,17 +527,23 @@ id="visitorState"
 
 name="visitorState"
 
+class="form-control"
+
 placeholder="Enter your state"
+
+maxlength="60"
 
 required>
 
 </div>
 
-<div
-style="height:40px;"></div>
+<!--=====================================================================
+    ACTION
+======================================================================-->
 
 <div
-class="text-center">
+
+class="form-actions">
 
 <button
 
@@ -439,7 +553,7 @@ type="submit"
 
 class="btn btn-primary">
 
-Begin My Life Assessment
+BEGIN MY LIFE ASSESSMENT
 
 </button>
 
@@ -469,7 +583,7 @@ src="../js/router.js"></script>
 src="../js/app.js"></script>
 
 <!--=============================================================================
-    LANDING PAGE
+    LANDING CONTROLLER
 =============================================================================-->
 
 <script>
@@ -477,30 +591,38 @@ src="../js/app.js"></script>
 'use strict';
 
 /*=============================================================================
-    CTM LANDING
+
+    LANDING PAGE
+
 =============================================================================*/
 
 (function(){
 
     /*=========================================================================
+
         ELEMENTS
+
     =========================================================================*/
 
-    const welcomeScreen =
+    const welcomeSection =
 
         document.getElementById(
 
-            'welcomeScreen'
+            'welcome'
 
         );
 
-    const registrationScreen =
+
+
+    const registrationSection =
 
         document.getElementById(
 
-            'registrationScreen'
+            'registration'
 
         );
+
+
 
     const btnBeginJourney =
 
@@ -510,6 +632,8 @@ src="../js/app.js"></script>
 
         );
 
+
+
     const registrationForm =
 
         document.getElementById(
@@ -518,16 +642,22 @@ src="../js/app.js"></script>
 
         );
 
+
+
     /*=========================================================================
+
         INITIAL STATE
+
     =========================================================================*/
 
-    registrationScreen.style.display =
+    registrationSection.hidden = true;
 
-        'none';
+
 
     /*=========================================================================
-        SHOW REGISTRATION
+
+        BEGIN JOURNEY
+
     =========================================================================*/
 
     btnBeginJourney.addEventListener(
@@ -536,13 +666,9 @@ src="../js/app.js"></script>
 
         function(){
 
-            welcomeScreen.style.display =
+            welcomeSection.hidden = true;
 
-                'none';
-
-            registrationScreen.style.display =
-
-                'flex';
+            registrationSection.hidden = false;
 
             window.scrollTo({
 
@@ -556,8 +682,12 @@ src="../js/app.js"></script>
 
     );
 
+
+
     /*=========================================================================
-        SUBMIT
+
+        REGISTRATION
+
     =========================================================================*/
 
     registrationForm.addEventListener(
@@ -568,49 +698,129 @@ src="../js/app.js"></script>
 
             event.preventDefault();
 
+
+
             const visitor = {
 
                 name:
 
-                    document.getElementById(
+                    document
+
+                    .getElementById(
 
                         'visitorName'
 
-                    ).value.trim(),
+                    )
+
+                    .value
+
+                    .trim(),
+
+
 
                 email:
 
-                    document.getElementById(
+                    document
+
+                    .getElementById(
 
                         'visitorEmail'
 
-                    ).value.trim(),
+                    )
+
+                    .value
+
+                    .trim(),
+
+
 
                 mobile:
 
-                    document.getElementById(
+                    document
+
+                    .getElementById(
 
                         'visitorMobile'
 
-                    ).value.trim(),
+                    )
+
+                    .value
+
+                    .trim(),
+
+
 
                 district:
 
-                    document.getElementById(
+                    document
+
+                    .getElementById(
 
                         'visitorDistrict'
 
-                    ).value.trim(),
+                    )
+
+                    .value
+
+                    .trim(),
+
+
 
                 state:
 
-                    document.getElementById(
+                    document
+
+                    .getElementById(
 
                         'visitorState'
 
-                    ).value.trim()
+                    )
+
+                    .value
+
+                    .trim()
 
             };
+
+
+
+            /*--------------------------------------------------------------
+
+                SIMPLE VALIDATION
+
+            --------------------------------------------------------------*/
+
+            if(
+
+                visitor.name === '' ||
+
+                visitor.email === '' ||
+
+                visitor.mobile === '' ||
+
+                visitor.district === '' ||
+
+                visitor.state === ''
+
+            ){
+
+                alert(
+
+                    'Please complete all the required fields.'
+
+                );
+
+                return;
+
+            }
+
+
+
+            /*--------------------------------------------------------------
+
+                SAVE VISITOR
+
+            --------------------------------------------------------------*/
 
             CTM.storage.updateVisitor(
 
@@ -618,19 +828,35 @@ src="../js/app.js"></script>
 
             );
 
+
+
             CTM.storage.setCurrentPillar(
 
                 0
 
             );
 
-            window.location.href =
 
-                'assessment.html';
+
+            /*--------------------------------------------------------------
+
+                NAVIGATE
+
+            --------------------------------------------------------------*/
+
+            CTM.router.go(
+
+                'assessment'
+
+            );
+
+
 
         }
 
     );
+
+
 
 })();
 
