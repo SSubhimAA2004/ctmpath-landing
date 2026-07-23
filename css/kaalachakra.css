@@ -1,1 +1,1089 @@
 
+/*=============================================================================
+
+    CTM PATH™
+    FROM SURVIVAL TO LIVING™
+
+    FILE
+
+    kaalachakra.css
+
+    PURPOSE
+
+    Kaalachakra™ Results Dashboard
+
+    RESPONSIBILITIES
+
+    • Page Layout
+    • Header
+    • Score Hero
+    • Life Balance Index
+    • Dashboard Grid
+
+    VERSION
+
+    1.0
+
+=============================================================================*/
+
+
+
+/*=============================================================================
+    PAGE
+=============================================================================*/
+
+.page-kaalachakra{
+
+    width:100%;
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+/*=============================================================================
+    CONTAINER
+=============================================================================*/
+
+.page-kaalachakra .container{
+
+    width:min(1400px,92%);
+
+    margin:0 auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+/*=============================================================================
+    HEADER
+=============================================================================*/
+
+.page-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:
+
+        var(--space-8)
+
+        0;
+
+    margin-bottom:
+
+        var(--space-10);
+
+}
+
+
+
+.header-left{
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+
+
+.header-center{
+
+    flex:1;
+
+    text-align:center;
+
+}
+
+
+
+.header-right{
+
+    text-align:right;
+
+}
+
+
+
+/*=============================================================================
+    VISITOR
+=============================================================================*/
+
+.visitor-label{
+
+    color:
+
+        var(--color-text-secondary);
+
+    font-size:
+
+        var(--font-sm);
+
+    letter-spacing:
+
+        .12rem;
+
+    text-transform:uppercase;
+
+}
+
+
+
+.visitor-name{
+
+    margin-top:
+
+        var(--space-2);
+
+    color:
+
+        var(--color-gold);
+
+    font-size:
+
+        var(--font-xl);
+
+    font-weight:
+
+        var(--weight-bold);
+
+    text-transform:uppercase;
+
+}
+
+
+
+/*=============================================================================
+    HERO
+=============================================================================*/
+
+.score-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    margin-bottom:
+
+        var(--space-10);
+
+}
+
+
+
+/*=============================================================================
+    LABEL
+=============================================================================*/
+
+.section-label{
+
+    color:
+
+        var(--color-text-secondary);
+
+    font-size:
+
+        var(--font-sm);
+
+    letter-spacing:
+
+        .15rem;
+
+    text-transform:uppercase;
+
+}
+
+
+
+/*=============================================================================
+    SCORE
+=============================================================================*/
+
+.overall-score{
+
+    margin-top:
+
+        var(--space-4);
+
+    color:
+
+        var(--color-gold);
+
+    font-size:6rem;
+
+    font-weight:
+
+        var(--weight-extrabold);
+
+    line-height:1;
+
+}
+
+
+
+/*=============================================================================
+    PERFORMANCE BAND
+=============================================================================*/
+
+.overall-band{
+
+    margin-top:
+
+        var(--space-3);
+
+    color:
+
+        var(--color-success);
+
+    font-size:
+
+        var(--font-xl);
+
+    font-weight:
+
+        var(--weight-bold);
+
+    letter-spacing:
+
+        .08rem;
+
+    text-transform:uppercase;
+
+}
+
+
+
+/*=============================================================================
+    LIFE BALANCE INDEX
+=============================================================================*/
+
+.balance-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+.balance-score{
+
+    margin-top:
+
+        var(--space-4);
+
+    color:
+
+        var(--color-gold);
+
+    font-size:4rem;
+
+    font-weight:
+
+        var(--weight-bold);
+
+}
+
+
+
+/*=============================================================================
+    DIVIDER
+=============================================================================*/
+
+.section-divider{
+
+    width:240px;
+
+    height:2px;
+
+    margin:
+
+        0 auto
+
+        var(--space-12);
+
+    background:
+
+        var(--color-gold);
+
+    opacity:.35;
+
+}
+
+
+
+/*=============================================================================
+    DASHBOARD
+=============================================================================*/
+
+.kaalachakra-section{
+
+    width:100%;
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+.kaalachakra-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        2fr 1fr;
+
+    gap:
+
+        var(--space-8);
+
+}
+
+
+
+/*=============================================================================
+    CARD
+=============================================================================*/
+
+.wheel-card,
+
+.pillar-card{
+
+    background:
+
+        var(--background-card);
+
+    border:
+
+        1px solid
+
+        var(--border-color);
+
+    border-radius:
+
+        var(--radius-xl);
+
+    padding:
+
+        var(--space-8);
+
+    box-shadow:
+
+        var(--shadow-lg);
+
+}
+
+
+
+/*=============================================================================
+    CARD TITLE
+=============================================================================*/
+
+.card-title{
+
+    color:
+
+        var(--color-gold);
+
+    font-size:
+
+        var(--font-xl);
+
+    font-weight:
+
+        var(--weight-bold);
+
+    text-align:center;
+
+}
+
+
+
+.card-subtitle{
+
+    margin-top:
+
+        var(--space-2);
+
+    color:
+
+        var(--color-text-secondary);
+
+    font-size:
+
+        var(--font-sm);
+
+    text-align:center;
+
+}
+
+/*=============================================================================
+    RADAR CHART
+=============================================================================*/
+
+.wheel-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-top:
+
+        var(--space-8);
+
+    padding:
+
+        var(--space-6);
+
+}
+
+
+
+#radarCanvas{
+
+    width:100%;
+
+    max-width:560px;
+
+    aspect-ratio:1;
+
+    display:block;
+
+}
+
+
+
+/*=============================================================================
+    PILLAR SCORE PANEL
+=============================================================================*/
+
+.pillar-score-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:
+
+        var(--space-2);
+
+    margin-top:
+
+        var(--space-8);
+
+}
+
+
+
+/*=============================================================================
+    PILLAR ROW
+=============================================================================*/
+
+.pillar-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:
+
+        var(--space-3)
+
+        var(--space-4);
+
+    border-bottom:
+
+        1px solid
+
+        rgba(255,255,255,.08);
+
+    transition:
+
+        all .25s ease;
+
+}
+
+
+
+.pillar-row:last-child{
+
+    border-bottom:none;
+
+}
+
+
+
+.pillar-row:hover{
+
+    background:
+
+        rgba(255,255,255,.04);
+
+    border-radius:
+
+        var(--radius-md);
+
+}
+
+
+
+/*=============================================================================
+    PILLAR NAME
+=============================================================================*/
+
+.pillar-name{
+
+    color:
+
+        var(--color-text);
+
+    font-size:
+
+        var(--font-md);
+
+    font-weight:
+
+        var(--weight-medium);
+
+}
+
+
+
+/*=============================================================================
+    PILLAR SCORE
+=============================================================================*/
+
+.pillar-score{
+
+    min-width:56px;
+
+    text-align:right;
+
+    color:
+
+        var(--color-gold);
+
+    font-size:
+
+        var(--font-lg);
+
+    font-weight:
+
+        var(--weight-bold);
+
+}
+
+
+
+/*=============================================================================
+    HIGHLIGHTS
+=============================================================================*/
+
+.highlights-section{
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+.highlight-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(2,1fr);
+
+    gap:
+
+        var(--space-8);
+
+}
+
+
+
+/*=============================================================================
+    HIGHLIGHT CARD
+=============================================================================*/
+
+.highlight-card{
+
+    background:
+
+        var(--background-card);
+
+    border:
+
+        1px solid
+
+        var(--border-color);
+
+    border-radius:
+
+        var(--radius-xl);
+
+    padding:
+
+        var(--space-8);
+
+    text-align:center;
+
+    transition:
+
+        all .30s ease;
+
+}
+
+
+
+.highlight-card:hover{
+
+    transform:
+
+        translateY(-4px);
+
+    box-shadow:
+
+        var(--shadow-xl);
+
+}
+
+
+
+/*=============================================================================
+    STRONGEST
+=============================================================================*/
+
+.highlight-card.strongest{
+
+    border-left:
+
+        5px solid
+
+        var(--color-success);
+
+}
+
+
+
+/*=============================================================================
+    GROWTH
+=============================================================================*/
+
+.highlight-card.growth{
+
+    border-left:
+
+        5px solid
+
+        var(--color-warning);
+
+}
+
+
+
+/*=============================================================================
+    LABEL
+=============================================================================*/
+
+.highlight-label{
+
+    color:
+
+        var(--color-text-secondary);
+
+    font-size:
+
+        var(--font-sm);
+
+    text-transform:uppercase;
+
+    letter-spacing:
+
+        .08rem;
+
+}
+
+
+
+/*=============================================================================
+    TITLE
+=============================================================================*/
+
+.highlight-title{
+
+    margin-top:
+
+        var(--space-5);
+
+    color:
+
+        var(--color-gold);
+
+    font-size:
+
+        var(--font-2xl);
+
+    font-weight:
+
+        var(--weight-bold);
+
+}
+
+
+
+/*=============================================================================
+    SCORE
+=============================================================================*/
+
+.highlight-score{
+
+    margin-top:
+
+        var(--space-3);
+
+    color:
+
+        var(--color-text);
+
+    font-size:3rem;
+
+    font-weight:
+
+        var(--weight-extrabold);
+
+}
+
+/*=============================================================================
+    PREMIUM KAALACHAKRA™ LAYOUT
+=============================================================================*/
+
+.kaalachakra-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    gap:
+
+        var(--space-10);
+
+}
+
+
+
+/*=============================================================================
+    HERO WHEEL
+=============================================================================*/
+
+.wheel-card{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+
+
+.wheel-container{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:
+
+        var(--space-10);
+
+}
+
+
+
+#radarCanvas{
+
+    width:100%;
+
+    max-width:650px;
+
+    aspect-ratio:1;
+
+}
+
+
+
+/*=============================================================================
+    HIGHLIGHTS
+=============================================================================*/
+
+.highlight-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(2,1fr);
+
+    gap:
+
+        var(--space-8);
+
+    margin-top:
+
+        var(--space-8);
+
+}
+
+
+
+/*=============================================================================
+    SCORE PANEL
+=============================================================================*/
+
+.pillar-card{
+
+    width:100%;
+
+}
+
+
+
+.pillar-score-list{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(2,1fr);
+
+    gap:
+
+        var(--space-3)
+
+        var(--space-8);
+
+}
+
+
+
+.pillar-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:
+
+        var(--space-3)
+
+        0;
+
+}
+
+
+
+/*=============================================================================
+    PERSONAL INSIGHT
+=============================================================================*/
+
+.insight-section{
+
+    margin-top:
+
+        var(--space-12);
+
+}
+
+
+
+.insight-card{
+
+    background:
+
+        var(--background-card);
+
+    border:
+
+        1px solid
+
+        var(--border-color);
+
+    border-radius:
+
+        var(--radius-xl);
+
+    padding:
+
+        var(--space-10);
+
+    text-align:center;
+
+}
+
+
+
+.insight-title{
+
+    color:
+
+        var(--color-gold);
+
+    font-size:
+
+        var(--font-2xl);
+
+    font-weight:
+
+        var(--weight-bold);
+
+}
+
+
+
+.insight-text{
+
+    max-width:900px;
+
+    margin:
+
+        var(--space-6)
+
+        auto
+
+        0;
+
+    color:
+
+        var(--color-text);
+
+    line-height:2;
+
+    font-size:
+
+        var(--font-lg);
+
+}
+
+
+
+/*=============================================================================
+    CTA
+=============================================================================*/
+
+.cta-section{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-top:
+
+        var(--space-12);
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+/*=============================================================================
+    RESPONSIVE
+=============================================================================*/
+
+@media (max-width:1024px){
+
+    .highlight-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .pillar-score-list{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+
+@media (max-width:768px){
+
+    #radarCanvas{
+
+        max-width:420px;
+
+    }
+
+}
+
+
+
+@media (max-width:480px){
+
+    #radarCanvas{
+
+        max-width:300px;
+
+    }
+
+}
+
+/*=============================================================================
+
+    END OF FILE
+
+=============================================================================*/
