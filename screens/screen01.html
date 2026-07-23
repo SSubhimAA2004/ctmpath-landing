@@ -2,207 +2,278 @@
 <!--
 ======================================================================
 
-CTM PATH™ Guided Journey v6.1
+    CTM PATH™
+    FROM SURVIVAL TO LIVING™
 
-File
-screens/screen01.html
+    Screen 01
+    Emotion
 
-Purpose
-Welcome the visitor.
+    Purpose
 
-Responsibility
-• Create an exceptional first impression
-• Display CTM PATH™ identity
-• Build trust
-• Introduce Raphael Raj
-• Invite the visitor to begin the journey
+    • Create emotional connection
+    • Ask one profound question
+    • Capture visitor's current perception
+    • Continue to Registration
 
 ======================================================================
 -->
 
 <section
     id="screen01"
-    class="screen">
+    class="screen screen01 fade-in">
 
-    <div class="container">
+    <div class="screen01-container">
 
-        <div class="hero fade-up">
+        <!--==================================================
+            Brand
+        ==================================================-->
 
-            <!--==================================================
-            CTM PATH Logo
-            ==================================================-->
+        <header class="screen01-header">
 
-            <div class="hero-icon">
+            <h1 class="brand">
 
-                <img
-                    class="hero-logo"
-                    src="assets/images/common/CTM_Logo_Transparent.svg"
-                    alt="CTM PATH Logo"
-                    loading="eager"
-                    decoding="async"
-                    draggable="false">
+                CTM PATH™
 
-            </div>
+            </h1>
 
+            <p class="tagline">
 
+                FROM SURVIVAL TO LIVING™
 
-            <!--==================================================
-            Welcome
-            ==================================================-->
+            </p>
 
-            <section
-                class="welcome-block"
-                aria-labelledby="welcome-title">
+        </header>
 
-                <h1
-                    id="welcome-title"
-                    class="tamil tamil-welcome">
+        <!--==================================================
+            Assessment Intro
+        ==================================================-->
 
-                    வாங்க! வாங்க!!
+        <section class="screen01-intro">
 
-                </h1>
+            <p class="intro-tamil">
 
-                <div
-                    class="english english-welcome">
+                வாழ்க்கை மதிப்பீடு • 7 நிமிடங்கள்
 
-                    Welcome! Welcome!!
+            </p>
+
+            <p class="intro-english">
+
+                Life Assessment • 7 Minutes
+
+            </p>
+
+        </section>
+
+        <!--==================================================
+            Hero Question
+        ==================================================-->
+
+        <section class="screen01-hero">
+
+            <h2 class="hero-tamil">
+
+                நீங்கள்...
+
+                <br><br>
+
+                பிழைக்கிறீர்களா?
+
+                <br><br>
+
+                அல்லது
+
+                <br><br>
+
+                வாழ்கிறீர்களா?
+
+            </h2>
+
+            <h3 class="hero-english">
+
+                Are You...
+
+                <br>
+
+                Surviving?
+
+                <br><br>
+
+                or
+
+                <br><br>
+
+                Living?
+
+            </h3>
+
+        </section>
+
+        <!--==================================================
+            Selection Prompt
+        ==================================================-->
+
+        <section class="screen01-prompt">
+
+            <p class="body-tamil">
+
+                எது உங்களை சிறப்பாக விவரிக்கிறது?
+
+            </p>
+
+            <p class="body-english">
+
+                Which statement best describes your life today?
+
+            </p>
+
+        </section>
+
+        <!--==================================================
+            Options
+        ==================================================-->
+
+        <section
+            id="emotionOptions"
+            class="emotion-options">
+
+            <button
+                class="emotion-card"
+                data-value="surviving">
+
+                <span class="emotion-indicator"></span>
+
+                <div class="emotion-text">
+
+                    <div class="emotion-tamil">
+
+                        நான் பிழைத்துக் கொண்டிருக்கிறேன்.
+
+                    </div>
+
+                    <div class="emotion-english">
+
+                        I am Surviving.
+
+                    </div>
 
                 </div>
 
-            </section>
+            </button>
 
+            <button
+                class="emotion-card"
+                data-value="progress">
 
+                <span class="emotion-indicator"></span>
 
-            <!--==================================================
-            Divider
-            ==================================================-->
+                <div class="emotion-text">
 
-            <div
-                class="gold-divider"
-                aria-hidden="true">
+                    <div class="emotion-tamil">
 
-            </div>
+                        நான் முன்னேறிக் கொண்டிருக்கிறேன்.
 
+                    </div>
 
+                    <div class="emotion-english">
 
-            <!--==================================================
-            Introduction
-            ==================================================-->
+                        I am Making Progress.
 
-            <section
-                class="introduction-block">
-
-                <div
-                    class="tamil tamil-intro">
-
-                    நான்
-
-                    <br><br>
-
-                    <span class="hero-name">
-
-                        ரஃபேல் ராஜ்.
-
-                    </span>
-
-                    <br><br>
-
-                    உங்களை
-
-                    <br>
-
-                    <span class="text-gold">
-
-                        சந்தித்ததில்
-
-                    </span>
-
-                    <br>
-
-                    மகிழ்ச்சி.
+                    </div>
 
                 </div>
 
+            </button>
 
+            <button
+                class="emotion-card"
+                data-value="living">
 
-                <div
-                    class="english">
+                <span class="emotion-indicator"></span>
 
-                    I'm
+                <div class="emotion-text">
 
-                    <span class="hero-name">
+                    <div class="emotion-tamil">
 
-                        Raphael Raj.
+                        நான் நன்றாக வாழ்கிறேன்.
 
-                    </span>
+                    </div>
 
-                    <br><br>
+                    <div class="emotion-english">
 
-                    It is truly a pleasure
+                        I am Living Well.
 
-                    <br>
-
-                    to welcome you.
+                    </div>
 
                 </div>
 
-            </section>
+            </button>
 
+            <button
+                class="emotion-card"
+                data-value="unsure">
 
+                <span class="emotion-indicator"></span>
 
-            <!--==================================================
-            Divider
-            ==================================================-->
+                <div class="emotion-text">
 
-            <div
-                class="gold-divider small"
-                aria-hidden="true">
+                    <div class="emotion-tamil">
 
-            </div>
+                        எனக்குத் தெரியவில்லை.
 
+                    </div>
 
+                    <div class="emotion-english">
 
-            <!--==================================================
-            Journey Navigator
-            ==================================================-->
+                        I'm Not Sure.
 
-            <section
-                class="cta-block">
+                    </div>
 
-                <button
-                    id="btnContinue"
-                    class="journey-next"
-                    type="button"
-                    data-next-screen="screen02"
-                    aria-label="Begin Your Journey">
+                </div>
 
-                    <span class="nav-decoration"></span>
+            </button>
 
-                    <span class="nav-tamil tamil">
+        </section>
 
-                        தொடங்கலாம்
+        <!--==================================================
+            Continue
+        ==================================================-->
 
-                    </span>
+        <section class="screen01-actions">
 
-                    <span class="nav-arrows">
+            <button
+                id="btnContinue"
+                class="btn btn-primary btn-large"
+                disabled>
 
-                        → → →
+                <span class="btn-tamil">
 
-                    </span>
+                    தொடரலாம்
 
-                    <span class="nav-english english">
+                </span>
 
-                        BEGIN YOUR JOURNEY
+                <span class="btn-english">
 
-                    </span>
+                    Continue →
 
-                    <span class="nav-decoration"></span>
+                </span>
 
-                </button>
+            </button>
 
-            </section>
+        </section>
 
-        </div>
+        <!--==================================================
+            Progress
+        ==================================================-->
+
+        <footer class="screen01-footer">
+
+            <p class="help-text">
+
+                Screen 1 of 16
+
+            </p>
+
+        </footer>
 
     </div>
 
