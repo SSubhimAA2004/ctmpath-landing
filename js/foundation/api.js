@@ -8,7 +8,7 @@
     api.js
 
     Version
-    2.0
+    2.1
 
     Purpose
 
@@ -49,7 +49,7 @@ CTM.api = {
 
         endpoint:
 
-            'https://script.google.com/macros/s/AKfycby1yF2m7cIXnHh0SqfegiDuxsjdMX6PVcTaSogQ5HFqx3z5CGB3jjN0vCFvQuPV5sBCIw/exec',
+            'https://snowy-lake-dd9f.healerking.workers.dev/',
 
         timeout:30000,
 
@@ -142,7 +142,6 @@ CTM.api = {
 
     /*==================================================
     REQUEST TIMEOUT
-
     ==================================================*/
 
     async timeoutPromise(){
@@ -230,14 +229,6 @@ CTM.api = {
                         {
 
                             method:'POST',
-
-                            headers:{
-
-                                'Content-Type':
-
-                                'application/json'
-
-                            },
 
                             body:JSON.stringify(
 
@@ -431,10 +422,13 @@ CTM.api = {
 
     },
 
+
+
     /*==================================================
     GENERATE LIFE WHEEL
 
     Future
+
     ==================================================*/
 
     async generateLifeWheel(payload){
@@ -455,6 +449,7 @@ CTM.api = {
     GENERATE PDF
 
     Future
+
     ==================================================*/
 
     async generatePdf(payload){
@@ -475,6 +470,7 @@ CTM.api = {
     SEND EMAIL
 
     Future
+
     ==================================================*/
 
     async sendEmail(payload){
@@ -566,7 +562,7 @@ CTM.api = {
 
                 'CTM PATH™',
 
-            api:'2.0',
+            api:'2.1',
 
             backend:
 
@@ -601,4 +597,3 @@ AUTO INITIALIZE
 ==================================================*/
 
 CTM.api.init();
-
