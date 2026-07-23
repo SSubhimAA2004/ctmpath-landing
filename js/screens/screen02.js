@@ -11,8 +11,8 @@
 
     • Capture Visitor Information
     • Validate Registration Form
-    • Save Visitor Data
-    • Submit to Google Sheets
+    • Register Visitor
+    • Save Visitor ID
     • Navigate to Screen 03
 
 ======================================================================*/
@@ -177,7 +177,7 @@ CTM.screen02 = {
 
             'click',
 
-            (event)=>{
+            event=>{
 
                 event.preventDefault();
 
@@ -188,6 +188,8 @@ CTM.screen02 = {
         );
 
     },
+
+
 
     /*==================================================
     VALIDATE FORM
@@ -233,13 +235,13 @@ CTM.screen02 = {
 
                 this.fullName.value.trim(),
 
-            mobile:
-
-                this.mobile.value.trim(),
-
             email:
 
                 this.email.value.trim(),
+
+            mobile:
+
+                this.mobile.value.trim(),
 
             district:
 
@@ -254,8 +256,6 @@ CTM.screen02 = {
         CTM.storage.save();
 
     },
-
-
 
     /*==================================================
     SUBMIT
@@ -285,17 +285,25 @@ CTM.screen02 = {
 
                 await this.registerVisitor();
 
-            if(
+            if(result.success){
 
-                result.success
-
-            ){
+                /*------------------------------------------
+                Store Visitor ID
+                ------------------------------------------*/
 
                 CTM.state.visitor.id =
 
                     result.visitorId;
 
+                CTM.state.visitor.currentPage =
+
+                    'Screen03';
+
                 CTM.storage.save();
+
+                /*------------------------------------------
+                Navigate
+                ------------------------------------------*/
 
                 CTM.router.next();
 
@@ -323,23 +331,29 @@ CTM.screen02 = {
 
             alert(
 
-                'Unable to connect to the server.'
+                'Unable to connect to CTM PATH™ server.'
 
             );
 
         }
 
-        this.button.disabled = false;
+        finally{
 
-        this.button.classList.remove(
+            this.button.disabled = false;
 
-            'loading'
+            this.button.classList.remove(
 
-        );
+                'loading'
+
+            );
+
+        }
 
     },
 
-      /*==================================================
+
+
+    /*==================================================
     REGISTER VISITOR
 
     Google Apps Script
@@ -349,44 +363,78 @@ CTM.screen02 = {
     async registerVisitor(){
 
         /*----------------------------------------------
-        DEVELOPMENT MODE
-
-        Replace this entire function with the
-        Google Apps Script endpoint during integration.
-
+        Build Payload
         ----------------------------------------------*/
 
-        return new Promise(
+        const payload = {
 
-            (resolve)=>{
+            emotion:
 
-                setTimeout(()=>{
+                CTM.state.visitor.emotion || '',
 
-                    resolve({
+            name:
 
-                        success:true,
+                this.fullName.value.trim(),
 
-                        visitorId:
+            email:
 
-                            'CTM-' +
+                this.email.value.trim(),
 
-                            Date.now(),
+            mobile:
 
-                        message:
+                this.mobile.value.trim(),
 
-                            'Registration Successful'
+            district:
 
-                    });
+                this.district.value.trim(),
 
-                },800);
+            state:
 
-            }
+                this.state.value.trim(),
 
-        );
+            referralSource:
+
+                'Website',
+
+            language:
+
+                document.documentElement.lang ||
+
+                'ta',
+
+            device:
+
+                window.innerWidth < 768
+
+                    ? 'Mobile'
+
+                    : window.innerWidth < 1024
+
+                        ? 'Tablet'
+
+                        : 'Desktop'
+
+        };
+
+
+
+        /*----------------------------------------------
+        Register Visitor
+        ----------------------------------------------*/
+
+        const response =
+
+            await CTM.api.registerVisitor(
+
+                payload
+
+            );
+
+
+
+        return response;
 
     },
-
-
 
     /*==================================================
     RESET FORM
@@ -394,9 +442,23 @@ CTM.screen02 = {
 
     reset(){
 
-        this.form.reset();
+        if(this.form){
 
-        this.button.disabled = true;
+            this.form.reset();
+
+        }
+
+        if(this.button){
+
+            this.button.disabled = true;
+
+            this.button.classList.remove(
+
+                'loading'
+
+            );
+
+        }
 
     },
 
@@ -425,4 +487,46 @@ CTM.screen02 = {
     }
 
 };
+
+
+
+/*==================================================
+AUTO INITIALIZE
+
+Screen modules are initialized when
+their HTML is loaded by the router.
+
+==================================================*/
+
+document.addEventListener(
+
+    'DOMContentLoaded',
+
+    ()=>{
+
+        const form =
+
+            document.getElementById(
+
+                'registrationForm'
+
+            );
+
+
+
+        if(
+
+            form &&
+
+            CTM.screen02
+
+        ){
+
+            CTM.screen02.init();
+
+        }
+
+    }
+
+);
 
