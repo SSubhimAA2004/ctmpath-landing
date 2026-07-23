@@ -1,1 +1,1097 @@
 
+/*=====================================================================
+
+    CTM PATH™
+    FROM SURVIVAL TO LIVING™
+
+    Screen 02
+    Registration
+
+======================================================================*/
+
+
+/*==================================================
+SCREEN
+==================================================*/
+
+.screen02{
+
+    position:relative;
+
+    width:100%;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
+
+    padding:70px 40px 80px;
+
+    overflow:hidden;
+
+}
+
+
+.screen02::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        radial-gradient(
+
+            circle at top,
+
+            rgba(201,162,39,.15),
+
+            transparent 30%
+
+        ),
+
+        radial-gradient(
+
+            circle at bottom right,
+
+            rgba(0,179,164,.08),
+
+            transparent 35%
+
+        );
+
+    pointer-events:none;
+
+}
+
+
+.screen02-container{
+
+    width:100%;
+
+    max-width:900px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+/*==================================================
+HEADER
+==================================================*/
+
+.screen02-header{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+
+.brand-mark{
+
+    font-size:28px;
+
+    color:var(--ctm-gold);
+
+    margin-bottom:16px;
+
+}
+
+
+.brand{
+
+    font-family:var(--font-display);
+
+    font-size:52px;
+
+    letter-spacing:8px;
+
+    color:var(--ctm-gold);
+
+    margin-bottom:14px;
+
+}
+
+
+.tagline{
+
+    color:var(--ctm-white);
+
+    letter-spacing:5px;
+
+    font-size:13px;
+
+    margin-bottom:28px;
+
+    opacity:.85;
+
+}
+
+
+.hero-divider{
+
+    width:240px;
+
+    height:2px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            var(--ctm-gold),
+
+            transparent
+
+        );
+
+}
+
+
+/*==================================================
+WELCOME
+==================================================*/
+
+.screen02-welcome{
+
+    width:100%;
+
+    max-width:760px;
+
+    margin-bottom:50px;
+
+}
+
+
+.assessment-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:14px 26px;
+
+    border-radius:999px;
+
+    background:
+
+        rgba(255,255,255,.03);
+
+    border:
+
+        1px solid rgba(201,162,39,.22);
+
+    margin-bottom:30px;
+
+}
+
+
+.badge-icon{
+
+    color:var(--ctm-gold);
+
+}
+
+
+.badge-text{
+
+    color:var(--ctm-gold);
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+    font-weight:600;
+
+}
+
+
+.hero-tamil{
+
+    font-family:var(--font-display);
+
+    font-size:54px;
+
+    line-height:1.35;
+
+    color:var(--ctm-white);
+
+    margin-bottom:20px;
+
+}
+
+
+.hero-english{
+
+    font-family:var(--font-display);
+
+    font-size:30px;
+
+    color:var(--ctm-muted);
+
+    margin-bottom:30px;
+
+}
+
+
+.welcome-tamil{
+
+    font-family:var(--font-tamil);
+
+    font-size:22px;
+
+    color:var(--ctm-white);
+
+    margin-bottom:10px;
+
+}
+
+
+.welcome-english{
+
+    color:var(--ctm-muted);
+
+    font-size:17px;
+
+}
+
+
+/*==================================================
+FORM
+==================================================*/
+
+.registration-form{
+
+    width:100%;
+
+    max-width:760px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:26px;
+
+    margin-bottom:45px;
+
+}
+
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    text-align:left;
+
+}
+
+
+.label-tamil{
+
+    font-family:var(--font-tamil);
+
+    font-size:18px;
+
+    color:var(--ctm-white);
+
+    margin-bottom:6px;
+
+}
+
+
+.label-english{
+
+    font-size:13px;
+
+    color:var(--ctm-muted);
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+    margin-bottom:12px;
+
+}
+
+
+.registration-form input{
+
+    width:100%;
+
+    padding:18px 22px;
+
+    border-radius:16px;
+
+    background:
+
+        rgba(255,255,255,.03);
+
+    border:
+
+        1px solid rgba(255,255,255,.08);
+
+    color:var(--ctm-white);
+
+    transition:all .30s ease;
+
+}
+
+
+.registration-form input::placeholder{
+
+    color:rgba(255,255,255,.35);
+
+}
+
+
+.registration-form input:focus{
+
+    border-color:var(--ctm-teal);
+
+    box-shadow:
+
+        0 0 25px rgba(0,179,164,.15);
+
+}
+
+/*==================================================
+PRIVACY PANEL
+==================================================*/
+
+.privacy-note{
+
+    width:100%;
+
+    max-width:760px;
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:18px;
+
+    padding:24px 28px;
+
+    margin-bottom:40px;
+
+    border-radius:20px;
+
+    background:
+
+        rgba(255,255,255,.025);
+
+    border:
+
+        1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:
+
+        blur(16px);
+
+}
+
+
+.privacy-icon{
+
+    width:56px;
+
+    height:56px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-shrink:0;
+
+    border-radius:16px;
+
+    background:
+
+        rgba(0,179,164,.10);
+
+    color:var(--ctm-teal);
+
+    font-size:26px;
+
+}
+
+
+.privacy-content{
+
+    flex:1;
+
+    text-align:left;
+
+}
+
+
+.privacy-tamil{
+
+    font-family:var(--font-tamil);
+
+    font-size:17px;
+
+    line-height:1.8;
+
+    color:var(--ctm-white);
+
+    margin-bottom:10px;
+
+}
+
+
+.privacy-english{
+
+    font-size:15px;
+
+    line-height:1.7;
+
+    color:var(--ctm-muted);
+
+}
+
+
+/*==================================================
+ACTION
+==================================================*/
+
+.screen02-actions{
+
+    width:100%;
+
+    max-width:460px;
+
+    margin-bottom:60px;
+
+}
+
+
+#btnRegister{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding:20px 28px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #C9A227 0%,
+
+            #E0B93B 35%,
+
+            #00B3A4 100%
+
+        );
+
+    color:#111315;
+
+    font-weight:700;
+
+    transition:all .35s ease;
+
+    box-shadow:
+
+        0 18px 40px rgba(0,179,164,.20);
+
+}
+
+
+#btnRegister:hover:not(:disabled){
+
+    transform:translateY(-4px);
+
+    box-shadow:
+
+        0 26px 55px rgba(0,179,164,.28);
+
+}
+
+
+#btnRegister:disabled{
+
+    opacity:.35;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+    box-shadow:none;
+
+}
+
+
+.btn-icon{
+
+    font-size:24px;
+
+}
+
+
+.btn-text{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+}
+
+
+.btn-tamil{
+
+    font-family:var(--font-tamil);
+
+    font-size:20px;
+
+    font-weight:700;
+
+}
+
+
+.btn-english{
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+}
+
+
+/*==================================================
+JOURNEY PROGRESS
+==================================================*/
+
+.screen02-footer{
+
+    width:100%;
+
+    max-width:720px;
+
+    margin-bottom:34px;
+
+}
+
+
+.journey-progress{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    padding:28px 34px;
+
+    border-radius:22px;
+
+    background:
+
+        rgba(255,255,255,.025);
+
+    border:
+
+        1px solid rgba(255,255,255,.06);
+
+    backdrop-filter:
+
+        blur(14px);
+
+}
+
+
+.journey-progress-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+
+.journey-label{
+
+    color:var(--ctm-gold);
+
+    font-size:13px;
+
+    letter-spacing:3px;
+
+    font-weight:700;
+
+}
+
+
+.journey-percent{
+
+    color:var(--ctm-teal);
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+
+.progress-track{
+
+    width:100%;
+
+    height:10px;
+
+    border-radius:999px;
+
+    background:
+
+        rgba(255,255,255,.06);
+
+    overflow:hidden;
+
+}
+
+
+.progress-fill{
+
+    width:12.5%;
+
+    height:100%;
+
+    border-radius:999px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            var(--ctm-gold),
+
+            var(--ctm-teal)
+
+        );
+
+    box-shadow:
+
+        0 0 18px rgba(0,179,164,.35);
+
+}
+
+
+.progress-markers{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+
+.marker{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:
+
+        rgba(255,255,255,.18);
+
+}
+
+
+.marker.completed{
+
+    background:var(--ctm-gold);
+
+}
+
+
+.marker.active{
+
+    background:var(--ctm-teal);
+
+    box-shadow:
+
+        0 0 12px rgba(0,179,164,.55);
+
+}
+
+
+.journey-step{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-top:4px;
+
+}
+
+
+.journey-step-tamil{
+
+    font-family:var(--font-tamil);
+
+    color:var(--ctm-white);
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+
+.journey-step-divider{
+
+    color:var(--ctm-gold);
+
+}
+
+
+.journey-step-english{
+
+    color:var(--ctm-muted);
+
+    font-size:14px;
+
+}
+
+/*==================================================
+CLOSING MESSAGE
+==================================================*/
+
+.screen02-closing{
+
+    width:100%;
+
+    max-width:760px;
+
+    text-align:center;
+
+    margin-bottom:40px;
+
+}
+
+
+.closing-tamil{
+
+    font-family:var(--font-tamil);
+
+    font-size:19px;
+
+    line-height:1.9;
+
+    color:var(--ctm-white);
+
+    margin-bottom:14px;
+
+}
+
+
+.closing-english{
+
+    max-width:620px;
+
+    margin:0 auto;
+
+    font-size:16px;
+
+    line-height:1.8;
+
+    color:var(--ctm-muted);
+
+}
+
+
+/*==================================================
+PREMIUM ANIMATIONS
+==================================================*/
+
+.screen02-header{
+
+    animation:fadeIn .8s ease;
+
+}
+
+
+.screen02-welcome{
+
+    animation:fadeIn 1s ease;
+
+}
+
+
+.registration-form{
+
+    animation:slideUp .9s ease;
+
+}
+
+
+.privacy-note{
+
+    animation:fadeIn 1.15s ease;
+
+}
+
+
+.screen02-actions{
+
+    animation:fadeIn 1.35s ease;
+
+}
+
+
+.screen02-footer{
+
+    animation:fadeIn 1.55s ease;
+
+}
+
+
+.screen02-closing{
+
+    animation:fadeIn 1.75s ease;
+
+}
+
+
+/*==================================================
+RESPONSIVE
+==================================================*/
+
+@media (max-width:992px){
+
+    .screen02{
+
+        padding:60px 30px;
+
+    }
+
+    .brand{
+
+        font-size:46px;
+
+    }
+
+    .hero-tamil{
+
+        font-size:46px;
+
+    }
+
+    .hero-english{
+
+        font-size:28px;
+
+    }
+
+}
+
+
+@media (max-width:768px){
+
+    .screen02{
+
+        padding:40px 20px;
+
+    }
+
+    .brand{
+
+        font-size:34px;
+
+        letter-spacing:4px;
+
+    }
+
+    .tagline{
+
+        letter-spacing:3px;
+
+    }
+
+    .assessment-badge{
+
+        padding:12px 18px;
+
+    }
+
+    .badge-text{
+
+        font-size:11px;
+
+        letter-spacing:2px;
+
+    }
+
+    .hero-tamil{
+
+        font-size:34px;
+
+    }
+
+    .hero-english{
+
+        font-size:24px;
+
+    }
+
+    .welcome-tamil{
+
+        font-size:20px;
+
+    }
+
+    .welcome-english{
+
+        font-size:16px;
+
+    }
+
+    .registration-form{
+
+        gap:22px;
+
+    }
+
+    .registration-form input{
+
+        padding:16px 18px;
+
+    }
+
+    .privacy-note{
+
+        flex-direction:column;
+
+        text-align:center;
+
+        align-items:center;
+
+    }
+
+    .privacy-content{
+
+        text-align:center;
+
+    }
+
+    .btn-tamil{
+
+        font-size:18px;
+
+    }
+
+    .btn-english{
+
+        font-size:12px;
+
+    }
+
+    .journey-progress{
+
+        padding:22px;
+
+    }
+
+    .closing-tamil{
+
+        font-size:17px;
+
+    }
+
+    .closing-english{
+
+        font-size:15px;
+
+    }
+
+}
+
+
+@media (max-width:480px){
+
+    .journey-progress-header{
+
+        flex-direction:column;
+
+        gap:8px;
+
+    }
+
+    .journey-step{
+
+        flex-direction:column;
+
+        gap:6px;
+
+    }
+
+    .btn-text{
+
+        align-items:center;
+
+    }
+
+}
+
