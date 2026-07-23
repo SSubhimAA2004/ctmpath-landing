@@ -1,1 +1,1152 @@
 
+/*=============================================================================
+
+    CTM PATH™
+    FROM SURVIVAL TO LIVING™
+
+    FILE
+
+    diagnosis.css
+
+    PURPOSE
+
+    Executive Diagnosis Report
+
+    RESPONSIBILITIES
+
+    • Executive Report Layout
+    • Summary Dashboard
+    • Premium Cards
+    • Report Sections
+
+    VERSION
+
+    1.0
+
+=============================================================================*/
+
+
+
+/*=============================================================================
+    PAGE
+=============================================================================*/
+
+.page-diagnosis{
+
+    width:100%;
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+/*=============================================================================
+    CONTAINER
+=============================================================================*/
+
+.page-diagnosis .container{
+
+    width:min(1400px,92%);
+
+    margin:0 auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+/*=============================================================================
+    HEADER
+=============================================================================*/
+
+.page-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:
+
+        var(--space-8)
+
+        0;
+
+    margin-bottom:
+
+        var(--space-10);
+
+}
+
+
+
+.header-center{
+
+    flex:1;
+
+    text-align:center;
+
+}
+
+
+
+.header-right{
+
+    text-align:right;
+
+}
+
+
+
+.visitor-label{
+
+    color:
+
+        var(--color-text-secondary);
+
+    font-size:
+
+        var(--font-sm);
+
+    letter-spacing:.12rem;
+
+    text-transform:uppercase;
+
+}
+
+
+
+.visitor-name{
+
+    margin-top:
+
+        var(--space-2);
+
+    color:
+
+        var(--color-gold);
+
+    font-size:
+
+        var(--font-xl);
+
+    font-weight:
+
+        var(--weight-bold);
+
+}
+
+
+
+/*=============================================================================
+    SUMMARY
+=============================================================================*/
+
+.diagnosis-summary{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(2,1fr);
+
+    gap:
+
+        var(--space-8);
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+/*=============================================================================
+    SUMMARY CARD
+=============================================================================*/
+
+.summary-card{
+
+    background:
+
+        var(--background-card);
+
+    border:
+
+        1px solid
+
+        var(--border-color);
+
+    border-radius:
+
+        var(--radius-xl);
+
+    padding:
+
+        var(--space-10);
+
+    text-align:center;
+
+    box-shadow:
+
+        var(--shadow-lg);
+
+}
+
+
+
+/*=============================================================================
+    LABEL
+=============================================================================*/
+
+.summary-label{
+
+    color:
+
+        var(--color-text-secondary);
+
+    font-size:
+
+        var(--font-sm);
+
+    text-transform:uppercase;
+
+    letter-spacing:.10rem;
+
+}
+
+
+
+/*=============================================================================
+    SCORE
+=============================================================================*/
+
+.summary-score{
+
+    margin-top:
+
+        var(--space-5);
+
+    color:
+
+        var(--color-gold);
+
+    font-size:4.5rem;
+
+    font-weight:
+
+        var(--weight-extrabold);
+
+    line-height:1;
+
+}
+
+
+
+/*=============================================================================
+    BAND
+=============================================================================*/
+
+.summary-band{
+
+    margin-top:
+
+        var(--space-3);
+
+    color:
+
+        var(--color-success);
+
+    font-size:
+
+        var(--font-lg);
+
+    font-weight:
+
+        var(--weight-bold);
+
+}
+
+
+
+/*=============================================================================
+    DIVIDER
+=============================================================================*/
+
+.section-divider{
+
+    width:220px;
+
+    height:2px;
+
+    margin:
+
+        0 auto
+
+        var(--space-12);
+
+    background:
+
+        var(--color-gold);
+
+    opacity:.35;
+
+}
+
+
+
+/*=============================================================================
+    CONTENT CARD
+=============================================================================*/
+
+.content-card{
+
+    background:
+
+        var(--background-card);
+
+    border:
+
+        1px solid
+
+        var(--border-color);
+
+    border-radius:
+
+        var(--radius-xl);
+
+    padding:
+
+        var(--space-10);
+
+    margin-bottom:
+
+        var(--space-10);
+
+    box-shadow:
+
+        var(--shadow-lg);
+
+}
+
+
+
+/*=============================================================================
+    SECTION TITLE
+=============================================================================*/
+
+.section-title{
+
+    color:
+
+        var(--color-gold);
+
+    font-size:
+
+        2rem;
+
+    font-weight:
+
+        var(--weight-bold);
+
+    text-align:center;
+
+}
+
+
+
+/*=============================================================================
+    SECTION SUBTITLE
+=============================================================================*/
+
+.section-subtitle{
+
+    margin-top:
+
+        var(--space-3);
+
+    color:
+
+        var(--color-text-secondary);
+
+    text-align:center;
+
+    font-size:
+
+        var(--font-md);
+
+    line-height:1.8;
+
+}
+
+/*=============================================================================
+    LIFE STORY
+=============================================================================*/
+
+.life-story-section{
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+.story-content{
+
+    max-width:960px;
+
+    margin:
+
+        var(--space-8)
+
+        auto
+
+        0;
+
+    color:
+
+        var(--color-text);
+
+    font-size:
+
+        var(--font-lg);
+
+    line-height:2;
+
+    text-align:left;
+
+}
+
+
+
+/*=============================================================================
+    STRENGTH / GROWTH GRID
+=============================================================================*/
+
+.strength-growth-section{
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+.strength-growth-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(2,1fr);
+
+    gap:
+
+        var(--space-8);
+
+}
+
+
+
+/*=============================================================================
+    INSIGHT LIST
+=============================================================================*/
+
+.insight-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:
+
+        var(--space-4);
+
+    margin-top:
+
+        var(--space-8);
+
+}
+
+
+
+/*=============================================================================
+    INSIGHT ITEM
+=============================================================================*/
+
+.insight-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:
+
+        var(--space-5)
+
+        var(--space-6);
+
+    background:
+
+        rgba(255,255,255,.03);
+
+    border:
+
+        1px solid
+
+        rgba(255,255,255,.08);
+
+    border-radius:
+
+        var(--radius-lg);
+
+    transition:
+
+        all .25s ease;
+
+}
+
+
+
+.insight-item:hover{
+
+    transform:
+
+        translateY(-2px);
+
+    border-color:
+
+        var(--color-gold);
+
+}
+
+
+
+/*=============================================================================
+    INSIGHT NAME
+=============================================================================*/
+
+.insight-name{
+
+    color:
+
+        var(--color-text);
+
+    font-size:
+
+        var(--font-lg);
+
+    font-weight:
+
+        var(--weight-semibold);
+
+}
+
+
+
+/*=============================================================================
+    INSIGHT SCORE
+=============================================================================*/
+
+.insight-score{
+
+    min-width:72px;
+
+    text-align:right;
+
+    color:
+
+        var(--color-gold);
+
+    font-size:
+
+        var(--font-xl);
+
+    font-weight:
+
+        var(--weight-bold);
+
+}
+
+
+
+/*=============================================================================
+    12-PILLAR DIAGNOSIS
+=============================================================================*/
+
+.pillar-diagnosis-section{
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+.pillar-diagnosis-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:
+
+        var(--space-8);
+
+    margin-top:
+
+        var(--space-8);
+
+}
+
+
+
+/*=============================================================================
+    DIAGNOSIS CARD
+=============================================================================*/
+
+.pillar-diagnosis-item{
+
+    background:
+
+        rgba(255,255,255,.02);
+
+    border:
+
+        1px solid
+
+        var(--border-color);
+
+    border-left:
+
+        5px solid
+
+        var(--color-gold);
+
+    border-radius:
+
+        var(--radius-lg);
+
+    padding:
+
+        var(--space-8);
+
+    transition:
+
+        all .30s ease;
+
+}
+
+
+
+.pillar-diagnosis-item:hover{
+
+    transform:
+
+        translateY(-3px);
+
+    box-shadow:
+
+        var(--shadow-lg);
+
+}
+
+
+
+/*=============================================================================
+    CARD HEADER
+=============================================================================*/
+
+.pillar-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:
+
+        var(--space-4);
+
+}
+
+
+
+/*=============================================================================
+    PILLAR TITLE
+=============================================================================*/
+
+.pillar-title{
+
+    color:
+
+        var(--color-gold);
+
+    font-size:
+
+        var(--font-xl);
+
+    font-weight:
+
+        var(--weight-bold);
+
+}
+
+
+
+/*=============================================================================
+    PILLAR SCORE
+=============================================================================*/
+
+.pillar-score{
+
+    color:
+
+        var(--color-gold);
+
+    font-size:
+
+        var(--font-2xl);
+
+    font-weight:
+
+        var(--weight-bold);
+
+}
+
+
+
+/*=============================================================================
+    PERFORMANCE BAND
+=============================================================================*/
+
+.pillar-band{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    margin-bottom:
+
+        var(--space-5);
+
+    padding:
+
+        .45rem
+
+        1rem;
+
+    border-radius:
+
+        999px;
+
+    background:
+
+        rgba(212,175,55,.10);
+
+    color:
+
+        var(--color-gold);
+
+    font-size:
+
+        var(--font-sm);
+
+    font-weight:
+
+        var(--weight-semibold);
+
+    letter-spacing:
+
+        .05rem;
+
+    text-transform:uppercase;
+
+}
+
+
+
+/*=============================================================================
+    DIAGNOSIS TEXT
+=============================================================================*/
+
+.pillar-diagnosis{
+
+    color:
+
+        var(--color-text);
+
+    font-size:
+
+        var(--font-md);
+
+    line-height:1.9;
+
+    text-align:justify;
+
+}
+
+/*=============================================================================
+    OVERALL DIAGNOSIS
+=============================================================================*/
+
+.overall-diagnosis-section{
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+.overall-diagnosis-content{
+
+    max-width:1000px;
+
+    margin:
+
+        var(--space-8)
+
+        auto
+
+        0;
+
+    color:
+
+        var(--color-text);
+
+    font-size:
+
+        var(--font-lg);
+
+    line-height:2;
+
+    text-align:justify;
+
+}
+
+
+
+/*=============================================================================
+    CTA
+=============================================================================*/
+
+.cta-section{
+
+    margin-top:
+
+        var(--space-12);
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+.cta-card{
+
+    text-align:center;
+
+}
+
+
+
+.cta-card .section-subtitle{
+
+    max-width:900px;
+
+    margin:
+
+        var(--space-5)
+
+        auto
+
+        var(--space-8);
+
+}
+
+
+
+#btnContinuePrescription{
+
+    min-width:320px;
+
+}
+
+
+
+/*=============================================================================
+    PREMIUM ANIMATIONS
+=============================================================================*/
+
+.content-card{
+
+    animation:
+
+        fadeUp .60s ease both;
+
+}
+
+
+
+.summary-card{
+
+    animation:
+
+        fadeUp .50s ease both;
+
+}
+
+
+
+.pillar-diagnosis-item{
+
+    animation:
+
+        fadeUp .45s ease both;
+
+}
+
+
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateY(24px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+
+
+/*=============================================================================
+    TABLET
+=============================================================================*/
+
+@media (max-width:1024px){
+
+    .diagnosis-summary{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+
+    .strength-growth-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+
+    .content-card{
+
+        padding:
+
+            var(--space-8);
+
+    }
+
+}
+
+
+
+/*=============================================================================
+    MOBILE
+=============================================================================*/
+
+@media (max-width:768px){
+
+    .page-header{
+
+        flex-direction:column;
+
+        gap:
+
+            var(--space-6);
+
+        text-align:center;
+
+    }
+
+
+
+    .header-right{
+
+        text-align:center;
+
+    }
+
+
+
+    .summary-score{
+
+        font-size:3.5rem;
+
+    }
+
+
+
+    .section-title{
+
+        font-size:1.75rem;
+
+    }
+
+
+
+    .pillar-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:
+
+            var(--space-3);
+
+    }
+
+
+
+    .pillar-score{
+
+        font-size:2rem;
+
+    }
+
+}
+
+
+
+/*=============================================================================
+    SMALL MOBILE
+=============================================================================*/
+
+@media (max-width:480px){
+
+    .content-card{
+
+        padding:
+
+            var(--space-6);
+
+    }
+
+
+
+    .story-content,
+
+    .overall-diagnosis-content,
+
+    .pillar-diagnosis{
+
+        font-size:
+
+            var(--font-md);
+
+        line-height:1.8;
+
+    }
+
+
+
+    #btnContinuePrescription{
+
+        width:100%;
+
+        min-width:0;
+
+    }
+
+}
+
+
+
+/*=============================================================================
+
+    PRINT SUPPORT
+
+=============================================================================*/
+
+@media print{
+
+    .cta-section{
+
+        display:none;
+
+    }
+
+
+
+    .content-card,
+
+    .summary-card,
+
+    .pillar-diagnosis-item{
+
+        box-shadow:none;
+
+        break-inside:avoid;
+
+        page-break-inside:avoid;
+
+    }
+
+
+
+    body{
+
+        background:#ffffff;
+
+        color:#000000;
+
+    }
+
+}
+
+
+
+/*=============================================================================
+
+    END OF FILE
+
+=============================================================================*/
