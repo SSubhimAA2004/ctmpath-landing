@@ -1,1 +1,1390 @@
 
+/*=============================================================================
+
+    CTM PATH™
+    FROM SURVIVAL TO LIVING™
+
+    FILE
+
+    assessment.css
+
+    PURPOSE
+
+    Master Assessment Stylesheet
+
+    RESPONSIBILITIES
+
+    • Assessment Layout
+    • Assessment Header
+    • Pillar Presentation
+    • Reflection
+    • Question Layout
+    • Rating Controls
+    • Progress
+    • Navigation
+    • Responsive Behaviour
+
+    VERSION
+
+    1.0
+
+=============================================================================*/
+
+
+
+/*=============================================================================
+    ASSESSMENT PAGE
+=============================================================================*/
+
+.page-assessment{
+
+    width:100%;
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+/*=============================================================================
+    CONTAINER
+=============================================================================*/
+
+.assessment-container{
+
+    width:min(1100px,92%);
+
+    margin:0 auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+/*=============================================================================
+    HEADER
+=============================================================================*/
+
+.assessment-header{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:
+
+        var(--space-6)
+
+        0;
+
+    margin-bottom:
+
+        var(--space-8);
+
+}
+
+
+
+.header-left{
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+
+
+.header-center{
+
+    text-align:center;
+
+}
+
+
+
+.header-right{
+
+    text-align:right;
+
+}
+
+
+
+/*=============================================================================
+    PAGE COUNTER
+=============================================================================*/
+
+.assessment-counter{
+
+    color:
+
+        var(--color-gold);
+
+    font-size:
+
+        var(--font-sm);
+
+    font-weight:
+
+        var(--weight-semibold);
+
+    letter-spacing:
+
+        .12rem;
+
+    text-transform:uppercase;
+
+}
+
+
+
+/*=============================================================================
+    VISITOR NAME
+=============================================================================*/
+
+.visitor-name{
+
+    color:
+
+        var(--color-gold);
+
+    font-size:
+
+        var(--font-lg);
+
+    font-weight:
+
+        var(--weight-bold);
+
+    text-transform:uppercase;
+
+}
+
+
+
+/*=============================================================================
+    PILLAR CARD
+=============================================================================*/
+
+.pillar-card{
+
+    background:
+
+        var(--background-card);
+
+    border:
+
+        1px solid
+
+        var(--border-color);
+
+    border-radius:
+
+        var(--radius-xl);
+
+    box-shadow:
+
+        var(--shadow-lg);
+
+    padding:
+
+        var(--space-10);
+
+}
+
+
+
+/*=============================================================================
+    PILLAR TITLE
+=============================================================================*/
+
+.pillar-title{
+
+    color:
+
+        var(--color-gold);
+
+    font-size:
+
+        var(--font-4xl);
+
+    font-weight:
+
+        var(--weight-extrabold);
+
+    text-align:center;
+
+    letter-spacing:
+
+        .05rem;
+
+}
+
+
+
+/*=============================================================================
+    TAMIL TITLE
+=============================================================================*/
+
+.pillar-title-ta{
+
+    margin-top:
+
+        var(--space-3);
+
+    color:
+
+        var(--color-text);
+
+    font-size:
+
+        var(--font-2xl);
+
+    font-weight:
+
+        var(--weight-semibold);
+
+    text-align:center;
+
+}
+
+
+
+/*=============================================================================
+    REFLECTION
+=============================================================================*/
+
+.pillar-reflection{
+
+    width:min(760px,100%);
+
+    margin:
+
+        var(--space-8)
+
+        auto
+
+        0;
+
+    color:
+
+        var(--color-text-secondary);
+
+    text-align:center;
+
+    font-size:
+
+        var(--font-lg);
+
+    line-height:1.8;
+
+}
+
+
+
+/*=============================================================================
+    DIVIDER
+=============================================================================*/
+
+.assessment-divider{
+
+    width:180px;
+
+    height:2px;
+
+    margin:
+
+        var(--space-8)
+
+        auto;
+
+    background:
+
+        var(--color-gold);
+
+    opacity:.35;
+
+}
+
+
+
+/*=============================================================================
+    LEGEND
+=============================================================================*/
+
+.rating-legend{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:
+
+        var(--space-8);
+
+    flex-wrap:wrap;
+
+}
+
+
+
+.legend-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:
+
+        var(--space-2);
+
+    color:
+
+        var(--color-text-secondary);
+
+    font-size:
+
+        var(--font-sm);
+
+    font-weight:
+
+        var(--weight-medium);
+
+}
+
+
+
+/*=============================================================================
+    LEGEND DOT
+=============================================================================*/
+
+.legend-dot{
+
+    width:14px;
+
+    height:14px;
+
+    border-radius:50%;
+
+}
+
+
+
+.legend-danger{
+
+    background:
+
+        var(--color-danger);
+
+}
+
+
+
+.legend-warning{
+
+    background:
+
+        var(--color-warning);
+
+}
+
+
+
+.legend-success{
+
+    background:
+
+        var(--color-success);
+
+}
+
+
+
+/*=============================================================================
+    QUESTION PANEL
+=============================================================================*/
+
+.question-panel{
+
+    margin-top:
+
+        var(--space-10);
+
+    background:
+
+        var(--background-surface);
+
+    border:
+
+        1px solid
+
+        var(--border-color);
+
+    border-radius:
+
+        var(--radius-lg);
+
+    padding:
+
+        var(--space-8);
+
+}
+
+
+
+/*=============================================================================
+    QUESTION COUNTER
+=============================================================================*/
+
+.question-counter{
+
+    color:
+
+        var(--color-gold);
+
+    text-align:center;
+
+    font-size:
+
+        var(--font-sm);
+
+    font-weight:
+
+        var(--weight-semibold);
+
+    letter-spacing:
+
+        .12rem;
+
+    text-transform:uppercase;
+
+}
+
+/*=============================================================================
+    QUESTION
+=============================================================================*/
+
+.question-title{
+
+    margin-top:
+
+        var(--space-4);
+
+    color:
+
+        var(--color-text);
+
+    text-align:center;
+
+    font-size:
+
+        var(--font-2xl);
+
+    font-weight:
+
+        var(--weight-semibold);
+
+    line-height:1.6;
+
+}
+
+
+
+.question-subtitle{
+
+    margin-top:
+
+        var(--space-3);
+
+    color:
+
+        var(--color-text-secondary);
+
+    text-align:center;
+
+    font-size:
+
+        var(--font-lg);
+
+    line-height:1.8;
+
+}
+
+
+
+/*=============================================================================
+    RATING CONTAINER
+=============================================================================*/
+
+.rating-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:
+
+        var(--space-3);
+
+    margin-top:
+
+        var(--space-10);
+
+}
+
+
+
+/*=============================================================================
+    RATING BUTTON
+=============================================================================*/
+
+.rating-button{
+
+    width:64px;
+
+    height:64px;
+
+    border-radius:50%;
+
+    border:
+
+        2px solid
+
+        var(--border-color);
+
+    background:
+
+        var(--background-card);
+
+    color:
+
+        var(--color-text);
+
+    font-size:
+
+        var(--font-xl);
+
+    font-weight:
+
+        var(--weight-bold);
+
+    cursor:pointer;
+
+    transition:
+
+        all .25s ease;
+
+}
+
+
+
+/*=============================================================================
+    HOVER
+=============================================================================*/
+
+.rating-button:hover{
+
+    transform:
+
+        translateY(-4px)
+        scale(1.06);
+
+    border-color:
+
+        var(--color-gold);
+
+    box-shadow:
+
+        0 0 20px rgba(212,175,55,.25);
+
+}
+
+
+
+/*=============================================================================
+    FOCUS
+=============================================================================*/
+
+.rating-button:focus{
+
+    outline:none;
+
+    border-color:
+
+        var(--color-gold);
+
+}
+
+
+
+/*=============================================================================
+    LOW SCORE
+
+    1 — 3
+
+=============================================================================*/
+
+.rating-danger{
+
+    background:
+
+        rgba(220,53,69,.18);
+
+    border-color:
+
+        var(--color-danger);
+
+    color:
+
+        var(--color-danger);
+
+    box-shadow:
+
+        0 0 24px rgba(220,53,69,.45);
+
+}
+
+
+
+/*=============================================================================
+    MEDIUM SCORE
+
+    4 — 7
+
+=============================================================================*/
+
+.rating-warning{
+
+    background:
+
+        rgba(255,193,7,.18);
+
+    border-color:
+
+        var(--color-warning);
+
+    color:
+
+        var(--color-warning);
+
+    box-shadow:
+
+        0 0 24px rgba(255,193,7,.45);
+
+}
+
+
+
+/*=============================================================================
+    HIGH SCORE
+
+    8 — 10
+
+=============================================================================*/
+
+.rating-success{
+
+    background:
+
+        rgba(40,167,69,.18);
+
+    border-color:
+
+        var(--color-success);
+
+    color:
+
+        var(--color-success);
+
+    box-shadow:
+
+        0 0 24px rgba(40,167,69,.45);
+
+}
+
+
+
+/*=============================================================================
+    ACTIVE SCALE
+
+=============================================================================*/
+
+.rating-button.active{
+
+    transform:
+
+        scale(1.12);
+
+}
+
+
+
+/*=============================================================================
+    DISABLED
+=============================================================================*/
+
+.rating-button:disabled{
+
+    opacity:.45;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+}
+
+
+
+/*=============================================================================
+    LIVE STATUS
+=============================================================================*/
+
+.assessment-status{
+
+    margin-top:
+
+        var(--space-10);
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(2,1fr);
+
+    gap:
+
+        var(--space-6);
+
+}
+
+
+
+/*=============================================================================
+    STATUS CARD
+=============================================================================*/
+
+.status-card{
+
+    background:
+
+        var(--background-card);
+
+    border:
+
+        1px solid
+
+        var(--border-color);
+
+    border-radius:
+
+        var(--radius-lg);
+
+    padding:
+
+        var(--space-6);
+
+    text-align:center;
+
+}
+
+
+
+/*=============================================================================
+    STATUS TITLE
+=============================================================================*/
+
+.status-title{
+
+    color:
+
+        var(--color-text-secondary);
+
+    font-size:
+
+        var(--font-sm);
+
+    text-transform:uppercase;
+
+    letter-spacing:.08rem;
+
+}
+
+
+
+/*=============================================================================
+    STATUS VALUE
+=============================================================================*/
+
+.status-value{
+
+    margin-top:
+
+        var(--space-3);
+
+    color:
+
+        var(--color-gold);
+
+    font-size:
+
+        var(--font-3xl);
+
+    font-weight:
+
+        var(--weight-bold);
+
+}
+
+
+
+/*=============================================================================
+    PROGRESS BAR
+=============================================================================*/
+
+.progress-wrapper{
+
+    margin-top:
+
+        var(--space-8);
+
+}
+
+
+
+.progress-track{
+
+    width:100%;
+
+    height:10px;
+
+    border-radius:999px;
+
+    background:
+
+        rgba(255,255,255,.08);
+
+    overflow:hidden;
+
+}
+
+
+
+.progress-fill{
+
+    width:0%;
+
+    height:100%;
+
+    border-radius:999px;
+
+    background:
+
+        var(--color-gold);
+
+    transition:
+
+        width .35s ease;
+
+}
+
+/*=============================================================================
+    NAVIGATION
+=============================================================================*/
+
+.assessment-navigation{
+
+    margin-top:
+
+        var(--space-10);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:
+
+        var(--space-6);
+
+}
+
+
+
+.navigation-left{
+
+    display:flex;
+
+}
+
+
+
+.navigation-center{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+
+
+.navigation-right{
+
+    display:flex;
+
+}
+
+
+
+/*=============================================================================
+    PREVIOUS BUTTON
+=============================================================================*/
+
+.btn-previous{
+
+    min-width:180px;
+
+}
+
+
+
+/*=============================================================================
+    NEXT BUTTON
+=============================================================================*/
+
+.btn-next{
+
+    min-width:220px;
+
+}
+
+
+
+/*=============================================================================
+    SAVE BUTTON
+=============================================================================*/
+
+.btn-save{
+
+    min-width:260px;
+
+}
+
+
+
+/*=============================================================================
+    PAGE INDICATOR
+=============================================================================*/
+
+.page-indicator{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:
+
+        var(--space-2);
+
+}
+
+
+
+/*=============================================================================
+    PAGE DOT
+=============================================================================*/
+
+.page-dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:
+
+        rgba(255,255,255,.20);
+
+    transition:
+
+        all .30s ease;
+
+}
+
+
+
+.page-dot.active{
+
+    background:
+
+        var(--color-gold);
+
+    transform:
+
+        scale(1.3);
+
+}
+
+
+
+/*=============================================================================
+    GLOW ANIMATIONS
+=============================================================================*/
+
+.glow-red{
+
+    animation:
+
+        glowRed
+
+        .35s ease;
+
+}
+
+
+
+.glow-orange{
+
+    animation:
+
+        glowOrange
+
+        .35s ease;
+
+}
+
+
+
+.glow-green{
+
+    animation:
+
+        glowGreen
+
+        .35s ease;
+
+}
+
+
+
+/*=============================================================================
+    FADE IN
+=============================================================================*/
+
+.assessment-fade{
+
+    animation:
+
+        assessmentFade
+
+        .40s ease;
+
+}
+
+
+
+/*=============================================================================
+    SLIDE UP
+=============================================================================*/
+
+.assessment-slide{
+
+    animation:
+
+        assessmentSlide
+
+        .45s ease;
+
+}
+
+
+
+/*=============================================================================
+    KEYFRAMES
+=============================================================================*/
+
+@keyframes assessmentFade{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+
+
+@keyframes assessmentSlide{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateY(24px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+
+
+@keyframes glowRed{
+
+    0%{
+
+        box-shadow:none;
+
+    }
+
+    100%{
+
+        box-shadow:
+
+            0 0 24px rgba(220,53,69,.50);
+
+    }
+
+}
+
+
+
+@keyframes glowOrange{
+
+    0%{
+
+        box-shadow:none;
+
+    }
+
+    100%{
+
+        box-shadow:
+
+            0 0 24px rgba(255,193,7,.50);
+
+    }
+
+}
+
+
+
+@keyframes glowGreen{
+
+    0%{
+
+        box-shadow:none;
+
+    }
+
+    100%{
+
+        box-shadow:
+
+            0 0 24px rgba(40,167,69,.50);
+
+    }
+
+}
+
+
+
+/*=============================================================================
+    RESPONSIVE
+=============================================================================*/
+
+@media (max-width:1024px){
+
+    .pillar-card{
+
+        padding:
+
+            var(--space-8);
+
+    }
+
+    .rating-button{
+
+        width:68px;
+
+        height:68px;
+
+    }
+
+}
+
+
+
+@media (max-width:768px){
+
+    .assessment-header{
+
+        flex-direction:column;
+
+        gap:
+
+            var(--space-4);
+
+        text-align:center;
+
+    }
+
+    .visitor-name{
+
+        text-align:center;
+
+    }
+
+    .rating-container{
+
+        gap:
+
+            var(--space-2);
+
+    }
+
+    .rating-button{
+
+        width:56px;
+
+        height:56px;
+
+        font-size:
+
+            var(--font-lg);
+
+    }
+
+    .assessment-status{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .assessment-navigation{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .btn-previous,
+
+    .btn-next,
+
+    .btn-save{
+
+        width:100%;
+
+        min-width:unset;
+
+    }
+
+}
+
+
+
+@media (max-width:480px){
+
+    .pillar-title{
+
+        font-size:
+
+            var(--font-3xl);
+
+    }
+
+    .pillar-title-ta{
+
+        font-size:
+
+            var(--font-xl);
+
+    }
+
+    .pillar-reflection{
+
+        font-size:
+
+            var(--font-md);
+
+    }
+
+    .question-title{
+
+        font-size:
+
+            var(--font-xl);
+
+    }
+
+    .question-subtitle{
+
+        font-size:
+
+            var(--font-md);
+
+    }
+
+    .rating-button{
+
+        width:48px;
+
+        height:48px;
+
+        font-size:
+
+            var(--font-md);
+
+    }
+
+}
+
+
+
+/*=============================================================================
+
+    END OF FILE
+
+=============================================================================*/
