@@ -1,1 +1,468 @@
 
+
+/*=====================================================================
+
+    CTM PATH™
+    FROM SURVIVAL TO LIVING™
+
+    Screen 01
+    Emotion
+
+======================================================================*/
+
+
+/*==================================================
+SCREEN
+==================================================*/
+
+.screen01{
+
+    width:100%;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:60px;
+
+}
+
+
+/*==================================================
+CONTAINER
+==================================================*/
+
+.screen01-container{
+
+    width:100%;
+
+    max-width:900px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
+
+}
+
+
+/*==================================================
+HEADER
+==================================================*/
+
+.screen01-header{
+
+    margin-bottom:40px;
+
+}
+
+
+.brand{
+
+    font-size:42px;
+
+    letter-spacing:6px;
+
+    color:var(--ctm-gold);
+
+    margin-bottom:12px;
+
+}
+
+
+.tagline{
+
+    font-size:13px;
+
+    letter-spacing:6px;
+
+    color:var(--ctm-muted);
+
+}
+
+
+/*==================================================
+INTRO
+==================================================*/
+
+.screen01-intro{
+
+    margin-bottom:60px;
+
+}
+
+
+.intro-tamil{
+
+    font-family:var(--font-tamil);
+
+    color:var(--ctm-gold);
+
+    font-size:18px;
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+}
+
+
+.intro-english{
+
+    color:var(--ctm-muted);
+
+    font-size:14px;
+
+    letter-spacing:2px;
+
+}
+
+
+/*==================================================
+HERO
+==================================================*/
+
+.screen01-hero{
+
+    margin-bottom:50px;
+
+}
+
+
+.screen01-hero .hero-tamil{
+
+    max-width:760px;
+
+    margin:auto;
+
+}
+
+
+.screen01-hero .hero-english{
+
+    margin-top:24px;
+
+}
+
+
+/*==================================================
+PROMPT
+==================================================*/
+
+.screen01-prompt{
+
+    margin-bottom:40px;
+
+}
+
+
+.screen01-prompt .body-tamil{
+
+    margin-bottom:10px;
+
+}
+
+
+.screen01-prompt .body-english{
+
+    color:var(--ctm-muted);
+
+}
+
+
+/*==================================================
+OPTIONS
+==================================================*/
+
+.emotion-options{
+
+    width:100%;
+
+    max-width:760px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:22px;
+
+    margin-bottom:50px;
+
+}
+
+
+/*==================================================
+CARD
+==================================================*/
+
+.emotion-card{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:24px;
+
+    padding:26px 30px;
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:22px;
+
+    cursor:pointer;
+
+    transition:all .35s ease;
+
+    text-align:left;
+
+}
+
+
+.emotion-card:hover{
+
+    transform:translateY(-4px);
+
+    border-color:var(--ctm-teal);
+
+    box-shadow:
+
+        0 18px 45px rgba(0,179,164,.18);
+
+}
+
+
+/*==================================================
+SELECTED
+==================================================*/
+
+.emotion-card.active{
+
+    border-color:var(--ctm-teal);
+
+    background:rgba(0,179,164,.08);
+
+    box-shadow:
+
+        0 0 35px rgba(0,179,164,.20);
+
+}
+
+
+/*==================================================
+INDICATOR
+==================================================*/
+
+.emotion-indicator{
+
+    width:24px;
+
+    height:24px;
+
+    border-radius:50%;
+
+    border:2px solid rgba(255,255,255,.35);
+
+    flex-shrink:0;
+
+    transition:.30s;
+
+}
+
+
+.emotion-card.active .emotion-indicator{
+
+    background:var(--ctm-teal);
+
+    border-color:var(--ctm-teal);
+
+}
+
+
+/*==================================================
+TEXT
+==================================================*/
+
+.emotion-text{
+
+    flex:1;
+
+}
+
+
+.emotion-tamil{
+
+    font-family:var(--font-tamil);
+
+    font-size:22px;
+
+    font-weight:600;
+
+    color:var(--ctm-white);
+
+    margin-bottom:8px;
+
+}
+
+
+.emotion-english{
+
+    font-size:16px;
+
+    color:var(--ctm-muted);
+
+}
+
+
+/*==================================================
+ACTION
+==================================================*/
+
+.screen01-actions{
+
+    width:100%;
+
+    max-width:420px;
+
+    margin-bottom:40px;
+
+}
+
+
+#btnContinue{
+
+    width:100%;
+
+}
+
+
+/*==================================================
+DISABLED
+==================================================*/
+
+#btnContinue:disabled{
+
+    opacity:.35;
+
+    cursor:not-allowed;
+
+    box-shadow:none;
+
+}
+
+
+/*==================================================
+FOOTER
+==================================================*/
+
+.screen01-footer{
+
+    margin-top:10px;
+
+}
+
+
+.screen01-footer .help-text{
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    color:var(--ctm-muted);
+
+    font-size:13px;
+
+}
+
+
+/*==================================================
+PREMIUM DIVIDER
+==================================================*/
+
+.screen01::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:220px;
+
+    height:2px;
+
+    background:linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        var(--ctm-gold),
+
+        transparent
+
+    );
+
+    opacity:.65;
+
+}
+
+
+/*==================================================
+ANIMATION
+==================================================*/
+
+.screen01-header{
+
+    animation:fadeIn .8s ease;
+
+}
+
+
+.screen01-intro{
+
+    animation:slideDown .8s ease;
+
+}
+
+
+.screen01-hero{
+
+    animation:slideUp .9s ease;
+
+}
+
+
+.screen01-prompt{
+
+    animation:fadeIn 1.2s ease;
+
+}
+
+
+.emotion-card{
+
+    animation:slideUp .8s ease;
+
+}
+
+
+.screen01-actions{
+
+    animation:fadeIn 1.4s ease;
+
+}
