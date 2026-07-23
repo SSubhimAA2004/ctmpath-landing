@@ -1,1 +1,1233 @@
 
+/*=============================================================================
+
+    CTM PATH™
+    FROM SURVIVAL TO LIVING™
+
+    FILE
+
+    completion.css
+
+    PURPOSE
+
+    Journey Completion &
+    Implementation Invitation
+
+    RESPONSIBILITIES
+
+    • Completion Page Layout
+    • Congratulations Hero
+    • Journey Summary
+    • Premium Executive Cards
+
+    VERSION
+
+    1.0
+
+=============================================================================*/
+
+
+
+/*=============================================================================
+    PAGE
+=============================================================================*/
+
+.page-completion{
+
+    width:100%;
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+/*=============================================================================
+    CONTAINER
+=============================================================================*/
+
+.page-completion .container{
+
+    width:min(1400px,92%);
+
+    margin:0 auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+/*=============================================================================
+    HEADER
+=============================================================================*/
+
+.page-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:
+
+        var(--space-8)
+
+        0;
+
+    margin-bottom:
+
+        var(--space-10);
+
+}
+
+
+
+.header-center{
+
+    flex:1;
+
+    text-align:center;
+
+}
+
+
+
+.header-right{
+
+    text-align:right;
+
+}
+
+
+
+.visitor-label,
+
+.visitor-label-en{
+
+    color:
+
+        var(--color-text-secondary);
+
+    font-size:
+
+        var(--font-sm);
+
+    letter-spacing:.08rem;
+
+    text-transform:uppercase;
+
+}
+
+
+
+.visitor-name{
+
+    margin-top:
+
+        var(--space-2);
+
+    color:
+
+        var(--color-gold);
+
+    font-size:
+
+        var(--font-xl);
+
+    font-weight:
+
+        var(--weight-bold);
+
+}
+
+
+
+/*=============================================================================
+    CONTENT CARD
+=============================================================================*/
+
+.content-card{
+
+    background:
+
+        var(--background-card);
+
+    border:
+
+        1px solid
+
+        var(--border-color);
+
+    border-radius:
+
+        var(--radius-xl);
+
+    padding:
+
+        var(--space-10);
+
+    margin-bottom:
+
+        var(--space-10);
+
+    box-shadow:
+
+        var(--shadow-lg);
+
+}
+
+
+
+/*=============================================================================
+    TITLES
+=============================================================================*/
+
+.section-title{
+
+    color:
+
+        var(--color-gold);
+
+    font-size:
+
+        2rem;
+
+    font-weight:
+
+        var(--weight-bold);
+
+    text-align:center;
+
+}
+
+
+
+.section-title-en{
+
+    margin-top:
+
+        var(--space-2);
+
+    color:
+
+        var(--color-text-secondary);
+
+    text-align:center;
+
+    letter-spacing:.08rem;
+
+    text-transform:uppercase;
+
+}
+
+
+
+/*=============================================================================
+    DESCRIPTION
+=============================================================================*/
+
+.section-description,
+
+.section-description-en{
+
+    max-width:900px;
+
+    margin:
+
+        var(--space-5)
+
+        auto
+
+        0;
+
+    color:
+
+        var(--color-text);
+
+    text-align:center;
+
+    line-height:1.9;
+
+}
+
+
+
+/*=============================================================================
+    HERO
+=============================================================================*/
+
+.completion-hero{
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+/*=============================================================================
+    JOURNEY SUMMARY
+=============================================================================*/
+
+.journey-summary{
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+.journey-list{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(2,1fr);
+
+    gap:
+
+        var(--space-6);
+
+    margin-top:
+
+        var(--space-8);
+
+}
+
+
+
+/*=============================================================================
+    JOURNEY ITEM
+=============================================================================*/
+
+.journey-item{
+
+    padding:
+
+        var(--space-6);
+
+    background:
+
+        rgba(255,255,255,.03);
+
+    border:
+
+        1px solid
+
+        var(--border-color);
+
+    border-left:
+
+        5px solid
+
+        var(--color-success);
+
+    border-radius:
+
+        var(--radius-lg);
+
+    color:
+
+        var(--color-text);
+
+    font-size:
+
+        var(--font-lg);
+
+    line-height:1.8;
+
+    transition:
+
+        all .30s ease;
+
+}
+
+
+
+.journey-item span{
+
+    display:block;
+
+    margin-top:
+
+        var(--space-2);
+
+    color:
+
+        var(--color-text-secondary);
+
+    font-size:
+
+        var(--font-sm);
+
+}
+
+
+
+.journey-item:hover{
+
+    transform:
+
+        translateY(-4px);
+
+    box-shadow:
+
+        var(--shadow-xl);
+
+}
+
+/*=============================================================================
+    MY COMMITMENT™
+=============================================================================*/
+
+.commitment-section{
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+.commitment-text{
+
+    max-width:950px;
+
+    margin:
+
+        var(--space-8)
+
+        auto
+
+        0;
+
+    padding:
+
+        var(--space-10);
+
+    background:
+
+        rgba(212,175,55,.05);
+
+    border:
+
+        1px solid
+
+        rgba(212,175,55,.20);
+
+    border-left:
+
+        6px solid
+
+        var(--color-gold);
+
+    border-radius:
+
+        var(--radius-xl);
+
+    color:
+
+        var(--color-text);
+
+    font-size:
+
+        var(--font-xl);
+
+    line-height:2;
+
+    text-align:center;
+
+    font-style:italic;
+
+}
+
+
+
+/*=============================================================================
+    180-DAY PROMISE™
+=============================================================================*/
+
+.promise-section{
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+.promise-text,
+
+.promise-text-en{
+
+    max-width:960px;
+
+    margin:
+
+        var(--space-6)
+
+        auto
+
+        0;
+
+    color:
+
+        var(--color-text);
+
+    text-align:center;
+
+    line-height:2;
+
+    font-size:
+
+        var(--font-lg);
+
+}
+
+
+
+/*=============================================================================
+    IMPLEMENTATION SESSION™
+=============================================================================*/
+
+.implementation-section{
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+.implementation-benefits{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(2,1fr);
+
+    gap:
+
+        var(--space-6);
+
+    margin-top:
+
+        var(--space-10);
+
+}
+
+
+
+/*=============================================================================
+    BENEFIT CARD
+=============================================================================*/
+
+.benefit-item{
+
+    padding:
+
+        var(--space-6);
+
+    background:
+
+        rgba(255,255,255,.03);
+
+    border:
+
+        1px solid
+
+        var(--border-color);
+
+    border-left:
+
+        5px solid
+
+        var(--color-success);
+
+    border-radius:
+
+        var(--radius-lg);
+
+    color:
+
+        var(--color-text);
+
+    line-height:1.8;
+
+    transition:
+
+        all .30s ease;
+
+}
+
+
+
+.benefit-item span{
+
+    display:block;
+
+    margin-top:
+
+        var(--space-2);
+
+    color:
+
+        var(--color-text-secondary);
+
+    font-size:
+
+        var(--font-sm);
+
+}
+
+
+
+.benefit-item:hover{
+
+    transform:
+
+        translateY(-4px);
+
+    box-shadow:
+
+        var(--shadow-xl);
+
+}
+
+
+
+/*=============================================================================
+    CONTACT SECTION
+=============================================================================*/
+
+.contact-section{
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+.contact-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(3,1fr);
+
+    gap:
+
+        var(--space-8);
+
+    margin-top:
+
+        var(--space-10);
+
+}
+
+
+
+/*=============================================================================
+    CONTACT CARD
+=============================================================================*/
+
+.contact-card,
+
+.quick-contact-card{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    padding:
+
+        var(--space-8);
+
+    background:
+
+        rgba(255,255,255,.03);
+
+    border:
+
+        1px solid
+
+        var(--border-color);
+
+    border-radius:
+
+        var(--radius-xl);
+
+    color:
+
+        inherit;
+
+    transition:
+
+        all .30s ease;
+
+}
+
+
+
+.contact-card:hover,
+
+.quick-contact-card:hover{
+
+    transform:
+
+        translateY(-6px);
+
+    border-color:
+
+        var(--color-gold);
+
+    box-shadow:
+
+        var(--shadow-xl);
+
+}
+
+
+
+/*=============================================================================
+    CONTACT ICON
+=============================================================================*/
+
+.contact-icon{
+
+    width:72px;
+
+    height:72px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+
+        rgba(212,175,55,.10);
+
+    font-size:2rem;
+
+    margin-bottom:
+
+        var(--space-5);
+
+}
+
+
+
+/*=============================================================================
+    CONTACT TITLE
+=============================================================================*/
+
+.contact-card h3,
+
+.quick-contact-card h3{
+
+    color:
+
+        var(--color-gold);
+
+    font-size:
+
+        var(--font-xl);
+
+    font-weight:
+
+        var(--weight-bold);
+
+}
+
+
+
+/*=============================================================================
+    CONTACT DETAILS
+=============================================================================*/
+
+.contact-card p,
+
+.quick-contact-card p{
+
+    margin-top:
+
+        var(--space-3);
+
+    color:
+
+        var(--color-text);
+
+    line-height:1.7;
+
+}
+
+
+
+.contact-value{
+
+    font-weight:
+
+        var(--weight-semibold);
+
+    word-break:
+
+        break-word;
+
+}
+
+/*=============================================================================
+    FINAL CTA
+=============================================================================*/
+
+.cta-section{
+
+    margin-top:
+
+        var(--space-12);
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+.cta-card{
+
+    text-align:center;
+
+}
+
+
+
+.cta-card .section-description,
+
+.cta-card .section-description-en{
+
+    max-width:900px;
+
+    margin:
+
+        var(--space-6)
+
+        auto
+
+        var(--space-8);
+
+}
+
+
+
+#btnBookSession{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:380px;
+
+    min-height:64px;
+
+    padding:
+
+        0
+
+        var(--space-10);
+
+    font-size:
+
+        var(--font-lg);
+
+    font-weight:
+
+        var(--weight-bold);
+
+    text-decoration:none;
+
+}
+
+
+
+/*=============================================================================
+    QUICK CONTACT
+=============================================================================*/
+
+.quick-contact-section{
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+.quick-contact-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(3,1fr);
+
+    gap:
+
+        var(--space-8);
+
+    margin-top:
+
+        var(--space-8);
+
+}
+
+
+
+/*=============================================================================
+    FOOTER
+=============================================================================*/
+
+.page-footer{
+
+    margin-top:
+
+        var(--space-12);
+
+    padding:
+
+        var(--space-10)
+
+        0;
+
+    border-top:
+
+        1px solid
+
+        rgba(255,255,255,.08);
+
+    text-align:center;
+
+}
+
+
+
+.page-footer p{
+
+    margin-top:
+
+        var(--space-3);
+
+    color:
+
+        var(--color-text-secondary);
+
+    line-height:1.8;
+
+}
+
+
+
+.page-footer p:first-child{
+
+    margin-top:0;
+
+}
+
+
+
+/*=============================================================================
+    PREMIUM ANIMATIONS
+=============================================================================*/
+
+.content-card,
+
+.journey-item,
+
+.benefit-item,
+
+.contact-card,
+
+.quick-contact-card{
+
+    animation:
+
+        fadeUp .60s ease both;
+
+}
+
+
+
+.contact-card:nth-child(2),
+
+.quick-contact-card:nth-child(2){
+
+    animation-delay:.08s;
+
+}
+
+
+
+.contact-card:nth-child(3),
+
+.quick-contact-card:nth-child(3){
+
+    animation-delay:.16s;
+
+}
+
+
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateY(24px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+
+
+/*=============================================================================
+    TABLET
+=============================================================================*/
+
+@media (max-width:1024px){
+
+    .journey-list,
+
+    .implementation-benefits{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+
+    .contact-grid,
+
+    .quick-contact-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+
+    .content-card{
+
+        padding:
+
+            var(--space-8);
+
+    }
+
+}
+
+
+
+/*=============================================================================
+    MOBILE
+=============================================================================*/
+
+@media (max-width:768px){
+
+    .page-header{
+
+        flex-direction:column;
+
+        gap:
+
+            var(--space-6);
+
+        text-align:center;
+
+    }
+
+
+
+    .header-right{
+
+        text-align:center;
+
+    }
+
+
+
+    .section-title{
+
+        font-size:1.75rem;
+
+    }
+
+
+
+    .commitment-text{
+
+        font-size:
+
+            var(--font-lg);
+
+    }
+
+
+
+    #btnBookSession{
+
+        width:100%;
+
+        min-width:0;
+
+    }
+
+}
+
+
+
+/*=============================================================================
+    SMALL MOBILE
+=============================================================================*/
+
+@media (max-width:480px){
+
+    .content-card{
+
+        padding:
+
+            var(--space-6);
+
+    }
+
+
+
+    .section-description,
+
+    .section-description-en,
+
+    .promise-text,
+
+    .promise-text-en,
+
+    .commitment-text{
+
+        font-size:
+
+            var(--font-md);
+
+        line-height:1.8;
+
+    }
+
+
+
+    .contact-icon{
+
+        width:60px;
+
+        height:60px;
+
+        font-size:1.6rem;
+
+    }
+
+}
+
+
+
+/*=============================================================================
+    PRINT SUPPORT
+=============================================================================*/
+
+@media print{
+
+    .cta-section,
+
+    .quick-contact-section{
+
+        display:none;
+
+    }
+
+
+
+    .content-card,
+
+    .journey-item,
+
+    .benefit-item{
+
+        box-shadow:none;
+
+        page-break-inside:avoid;
+
+        break-inside:avoid;
+
+    }
+
+
+
+    body{
+
+        background:#ffffff;
+
+        color:#000000;
+
+    }
+
+}
+
+
+
+/*=============================================================================
+
+    END OF FILE
+
+=============================================================================*/
