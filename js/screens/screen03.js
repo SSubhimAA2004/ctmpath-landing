@@ -4,18 +4,27 @@
     CTM PATH™
     FROM SURVIVAL TO LIVING™
 
+    File
+    screen03.js
+
+    Version
+    2.0
+
     Screen 03
 
     PURPOSE™
 
-    Master Assessment Screen
+    Purpose
+
+    Configuration file for the
+    Master Assessment Engine.
 
     Responsibilities
 
-    • Configure Assessment Engine
-    • Load Purpose™ Assessment
-    • Initialize Screen
-    • Destroy Screen
+    • Configure Purpose™ Assessment
+    • Initialize Assessment Engine
+    • Handle Screen Lifecycle
+    • Cleanup Resources
 
 ======================================================================*/
 
@@ -32,11 +41,38 @@ window.CTM = window.CTM || {};
 CTM.screen03 = {
 
     /*==================================================
-    INITIALIZE
+    CONFIGURATION
+    ==================================================*/
 
+    config:{
+
+        pillar:'purpose',
+
+        screen:'Screen03',
+
+        next:'Screen04'
+
+    },
+
+
+
+    /*==================================================
+    INITIALIZE
     ==================================================*/
 
     init(){
+
+        console.log(
+
+            '==================================='
+
+        );
+
+        console.log(
+
+            'CTM PATH™'
+
+        );
 
         console.log(
 
@@ -44,17 +80,164 @@ CTM.screen03 = {
 
         );
 
+        console.log(
+
+            'Purpose™ Assessment'
+
+        );
+
+        console.log(
+
+            '==================================='
+
+        );
 
 
-        CTM.assessmentEngine.init({
 
-            pillar:'purpose',
+        if(
 
-            screen:'Screen03',
+            !window.CTM
 
-            next:'Screen04'
+        ){
 
-        });
+            console.error(
+
+                'CTM namespace not found.'
+
+            );
+
+            return;
+
+        }
+
+
+
+        if(
+
+            !CTM.assessmentEngine
+
+        ){
+
+            console.error(
+
+                'Assessment Engine not loaded.'
+
+            );
+
+            return;
+
+        }
+
+
+
+        if(
+
+            !CTM.assessmentQuestions
+
+        ){
+
+            console.error(
+
+                'assessmentQuestions.js not loaded.'
+
+            );
+
+            return;
+
+        }
+
+
+
+        if(
+
+            !CTM.assessmentScoring
+
+        ){
+
+            console.error(
+
+                'assessmentScoring.js not loaded.'
+
+            );
+
+            return;
+
+        }
+
+
+
+        if(
+
+            !CTM.assessmentUI
+
+        ){
+
+            console.error(
+
+                'assessmentUI.js not loaded.'
+
+            );
+
+            return;
+
+        }
+
+
+
+        try{
+
+            CTM.assessmentEngine.init(
+
+                this.config
+
+            );
+
+        }
+
+        catch(error){
+
+            console.error(
+
+                'Unable to initialize Screen03.',
+
+                error
+
+            );
+
+            alert(
+
+                'Unable to load the assessment. Please refresh the page.'
+
+            );
+
+        }
+
+    },
+
+
+
+    /*==================================================
+    REFRESH
+
+    ==================================================*/
+
+    refresh(){
+
+        if(
+
+            CTM.assessmentEngine
+
+        ){
+
+            CTM.assessmentEngine.destroy();
+
+            CTM.assessmentEngine.init(
+
+                this.config
+
+            );
+
+        }
 
     },
 
@@ -66,6 +249,14 @@ CTM.screen03 = {
     ==================================================*/
 
     destroy(){
+
+        console.log(
+
+            'Destroying Screen03'
+
+        );
+
+
 
         if(
 
