@@ -14,39 +14,38 @@
 
         --------------------------------------------------------------------
 
-        File
+        FILE
+
         index.html
 
-        Purpose
-        Main Application Shell
+        PURPOSE
 
-        Responsibilities
+        Application Entry Point
 
-        • Load application shell
-        • Load foundation styles
-        • Load all 16 assessment screens
-        • Initialize CTM PATH™ Application
+        RESPONSIBILITIES
+
+        • Load Global Styles
+        • Load Core JavaScript
+        • Bootstrap Application
+        • Start Landing Experience
 
         --------------------------------------------------------------------
 
-        Assessment Journey
+        MASTER FLOW
 
-        Screen 01  : Emotion
-        Screen 02  : Registration
-        Screen 03  : Purpose
-        Screen 04  : Health
-        Screen 05  : Relationships
-        Screen 06  : Character
-        Screen 07  : Learning
-        Screen 08  : Career
-        Screen 09  : Cashflow
-        Screen 10  : Time Freedom
-        Screen 11  : Tribe
-        Screen 12  : Automation
-        Screen 13  : Contribution
-        Screen 14  : Vision
-        Screen 15  : Your Life Wheel™
-        Screen 16  : From Survival to Living™
+        Landing
+            ↓
+        Registration
+            ↓
+        Assessment
+            ↓
+        Kaala Chakra™
+            ↓
+        Diagnosis
+            ↓
+        Prescription
+            ↓
+        Completion
 
     =====================================================================
     -->
@@ -65,11 +64,11 @@
 
     <meta
         name="description"
-        content="CTM PATH™ is a premium interactive life assessment that helps people move from Survival to Living through Cashflow, Tribe and Automation.">
+        content="CTM PATH™ helps people move from Survival to Living through guided self-discovery, assessment and action.">
 
     <meta
         name="theme-color"
-        content="#111315">
+        content="#0B2149">
 
     <meta
         name="color-scheme"
@@ -93,50 +92,28 @@
         rel="stylesheet">
 
     <!--==================================================
-        Foundation CSS
+        Global Styles
     ==================================================-->
 
     <link
         rel="stylesheet"
-        href="css/foundation/global.css">
+        href="css/reset.css">
 
     <link
         rel="stylesheet"
-        href="css/foundation/typography.css">
+        href="css/tokens.css">
 
     <link
         rel="stylesheet"
-        href="css/foundation/buttons.css">
+        href="css/base.css">
 
     <link
         rel="stylesheet"
-        href="css/foundation/animations.css">
+        href="css/app.css">
 
     <link
         rel="stylesheet"
-        href="css/foundation/responsive.css">
-
-    <!--==================================================
-        Assessment Screen CSS
-        Screen 01 → Screen 16
-    ==================================================-->
-
-    <link rel="stylesheet" href="css/screens/screen01.css">
-    <link rel="stylesheet" href="css/screens/screen02.css">
-    <link rel="stylesheet" href="css/screens/screen03.css">
-    <link rel="stylesheet" href="css/screens/screen04.css">
-    <link rel="stylesheet" href="css/screens/screen05.css">
-    <link rel="stylesheet" href="css/screens/screen06.css">
-    <link rel="stylesheet" href="css/screens/screen07.css">
-    <link rel="stylesheet" href="css/screens/screen08.css">
-    <link rel="stylesheet" href="css/screens/screen09.css">
-    <link rel="stylesheet" href="css/screens/screen10.css">
-    <link rel="stylesheet" href="css/screens/screen11.css">
-    <link rel="stylesheet" href="css/screens/screen12.css">
-    <link rel="stylesheet" href="css/screens/screen13.css">
-    <link rel="stylesheet" href="css/screens/screen14.css">
-    <link rel="stylesheet" href="css/screens/screen15.css">
-    <link rel="stylesheet" href="css/screens/screen16.css">
+        href="css/assessment.css">
 
 </head>
 
@@ -149,22 +126,16 @@
     <main id="app">
 
         <!--==============================================
-            Premium Background Layer
-        ==============================================-->
+            Dynamic Content Container
 
-        <div id="app-background"></div>
-
-        <!--==============================================
-            Dynamic Screen Container
-
-            Router loads Screen01 → Screen16
-            into this container.
+            The router loads the appropriate page into
+            this container.
 
         ==============================================-->
 
-        <section id="screen-container">
+        <section id="page-container">
 
-            <!-- Dynamic Screen Content -->
+            <!-- Landing Page Loads Here -->
 
         </section>
 
@@ -183,60 +154,41 @@
     </main>
 
     <!--==================================================
-        Foundation JavaScript
+        Core JavaScript
 
         Load Order
 
-        State
-            ↓
-        Storage
-            ↓
-        API
-            ↓
-        Loader
-            ↓
-        Router
-            ↓
-        App
+            Storage
+                ↓
+            Router
+                ↓
+            Assessment Data
+                ↓
+            Assessment Engine
+                ↓
+            Assessment UI
+                ↓
+            Assessment Scoring
+                ↓
+            Application Bootstrap
 
     ==================================================-->
 
-    <script src="js/foundation/state.js"></script>
+    <script src="js/storage.js"></script>
 
-    <script src="js/foundation/storage.js"></script>
+    <script src="js/router.js"></script>
 
-    <script src="js/foundation/api.js"></script>
+    <script src="js/assessmentData.js"></script>
 
-    <script src="js/foundation/loader.js"></script>
+    <script src="js/assessmentEngine.js"></script>
 
-    <script src="js/foundation/router.js"></script>
+    <script src="js/assessmentUI.js"></script>
 
-    <script src="js/foundation/app.js"></script>
+    <script src="js/assessmentScoring.js"></script>
 
-    <!--==================================================
-        Assessment Screen Modules
-
-        Screen 01 → Screen 16
-
-    ==================================================-->
-
-    <script src="js/screens/screen01.js"></script>
-    <script src="js/screens/screen02.js"></script>
-    <script src="js/screens/screen03.js"></script>
-    <script src="js/screens/screen04.js"></script>
-    <script src="js/screens/screen05.js"></script>
-    <script src="js/screens/screen06.js"></script>
-    <script src="js/screens/screen07.js"></script>
-    <script src="js/screens/screen08.js"></script>
-    <script src="js/screens/screen09.js"></script>
-    <script src="js/screens/screen10.js"></script>
-    <script src="js/screens/screen11.js"></script>
-    <script src="js/screens/screen12.js"></script>
-    <script src="js/screens/screen13.js"></script>
-    <script src="js/screens/screen14.js"></script>
-    <script src="js/screens/screen15.js"></script>
-    <script src="js/screens/screen16.js"></script>
+    <script src="js/app.js"></script>
 
 </body>
 
 </html>
+
