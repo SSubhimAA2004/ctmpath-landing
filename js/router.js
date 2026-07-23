@@ -13,17 +13,17 @@
 
     RESPONSIBILITIES
 
-    • Navigate Between Pages
-    • Read Current Page
-    • Redirect
-    • Back Navigation
+    • Application Entry
+    • Route Navigation
+    • Current Route Detection
+    • Browser Navigation
+    • Route Validation
 
     NOTE
 
-    This router NEVER controls
-    assessment questions.
+    This router controls ONLY page navigation.
 
-    Assessment navigation belongs to
+    Assessment navigation is handled by
 
     assessmentEngine.js
 
@@ -49,19 +49,19 @@ CTM.router = (function(){
 
     const ROUTES = {
 
-        landing      : 'pages/landing.html',
+        landing       : 'pages/landing.html',
 
-        registration : 'pages/registration.html',
+        registration  : 'pages/registration.html',
 
-        assessment   : 'pages/assessment.html',
+        assessment    : 'pages/assessment.html',
 
-        lifewheel    : 'pages/lifewheel.html',
+        kaalachakra   : 'pages/kaalachakra.html',
 
-        diagnosis    : 'pages/diagnosis.html',
+        diagnosis     : 'pages/diagnosis.html',
 
-        prescription : 'pages/prescription.html',
+        prescription  : 'pages/prescription.html',
 
-        cta          : 'pages/cta.html'
+        completion    : 'pages/completion.html'
 
     };
 
@@ -73,27 +73,69 @@ CTM.router = (function(){
 
     function current(){
 
-        const file = window.location.pathname
+        const path =
+
+            window.location.pathname;
+
+        return path
 
             .split('/')
 
-            .pop();
+            .pop()
 
-        return file;
+            .toLowerCase();
 
     }
 
 
 
     /*=========================================================================
-        NAVIGATE
+        IS INDEX
+    =========================================================================*/
+
+    function isIndex(){
+
+        const page = current();
+
+        return(
+
+            page === '' ||
+
+            page === 'index.html'
+
+        );
+
+    }
+
+
+
+    /*=========================================================================
+        ROUTE EXISTS
+    =========================================================================*/
+
+    function exists(route){
+
+        return Object.prototype.hasOwnProperty.call(
+
+            ROUTES,
+
+            route
+
+        );
+
+    }
+
+
+
+    /*=========================================================================
+        GO
     =========================================================================*/
 
     function go(route){
 
         if(
 
-            !ROUTES[route]
+            !exists(route)
 
         ){
 
@@ -105,13 +147,17 @@ CTM.router = (function(){
 
             );
 
-            return;
+            return false;
 
         }
 
-        window.location.href =
+        window.location.assign(
 
-            ROUTES[route];
+            ROUTES[route]
+
+        );
+
+        return true;
 
     }
 
@@ -125,11 +171,19 @@ CTM.router = (function(){
 
         if(
 
-            !ROUTES[route]
+            !exists(route)
 
         ){
 
-            return;
+            console.error(
+
+                'Unknown Route :',
+
+                route
+
+            );
+
+            return false;
 
         }
 
@@ -138,6 +192,73 @@ CTM.router = (function(){
             ROUTES[route]
 
         );
+
+        return true;
+
+    }
+
+
+
+    /*=========================================================================
+        START
+    =========================================================================*/
+
+    function start(){
+
+        console.log(
+
+            '========================================'
+
+        );
+
+        console.log(
+
+            'CTM PATH™ Router'
+
+        );
+
+        console.log(
+
+            'Current Page :',
+
+            current()
+
+        );
+
+        console.log(
+
+            '========================================'
+
+        );
+
+
+
+        /*--------------------------------------------------------------
+            APPLICATION ENTRY
+
+            index.html
+
+                ↓
+
+            landing.html
+
+        --------------------------------------------------------------*/
+
+        if(
+
+            isIndex()
+
+        ){
+
+            replace(
+
+                'landing'
+
+            );
+
+            return;
+
+        }
 
     }
 
@@ -180,24 +301,16 @@ CTM.router = (function(){
 
 
     /*=========================================================================
-        START
+        GET ROUTES
     =========================================================================*/
 
-    function start(){
+    function routes(){
 
-        console.log(
+        return{
 
-            'Router Started'
+            ...ROUTES
 
-        );
-
-        console.log(
-
-            'Current Page :',
-
-            current()
-
-        );
+        };
 
     }
 
@@ -211,7 +324,7 @@ CTM.router = (function(){
 
         console.log(
 
-            'CTM Router Ready'
+            'Router Ready'
 
         );
 
@@ -241,7 +354,9 @@ CTM.router = (function(){
 
         current,
 
-        routes:ROUTES
+        exists,
+
+        routes
 
     };
 
