@@ -1,5 +1,4 @@
 
-
 /*=====================================================================
 
     CTM PATH™
@@ -17,6 +16,8 @@ SCREEN
 
 .screen01{
 
+    position:relative;
+
     width:100%;
 
     min-height:100vh;
@@ -25,9 +26,9 @@ SCREEN
 
     justify-content:center;
 
-    align-items:center;
+    align-items:flex-start;
 
-    padding:60px;
+    padding:60px 40px;
 
 }
 
@@ -369,6 +370,8 @@ FOOTER
 
     margin-top:10px;
 
+    margin-bottom:40px;
+
 }
 
 
@@ -464,5 +467,40 @@ ANIMATION
 .screen01-actions{
 
     animation:fadeIn 1.4s ease;
+
+}
+
+
+/*==================================================
+RESPONSIVE
+==================================================*/
+
+@media (max-width:768px){
+
+    .screen01{
+
+        padding:40px 20px;
+
+    }
+
+    .brand{
+
+        font-size:32px;
+
+        letter-spacing:4px;
+
+    }
+
+    .emotion-tamil{
+
+        font-size:18px;
+
+    }
+
+    .emotion-english{
+
+        font-size:15px;
+
+    }
 
 }
