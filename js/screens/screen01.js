@@ -1,403 +1,162 @@
-/*
-======================================================================
 
-CTM PATH™ Guided Journey v1.0
+/*=====================================================================
 
-File
-js/screens/screen01.js
+    CTM PATH™
+    FROM SURVIVAL TO LIVING™
 
-Purpose
-Screen 01 — The Invitation™ Controller
+    Screen 01
+    Emotion
 
-Responsibility
-• Initialize Screen 01
-• Start visitor journey
-• Handle navigation interaction
-• Prepare personalization hooks
-• Maintain clean transition
+    Purpose
 
-======================================================================
-*/
+    • Capture Visitor Emotion
+    • Enable Continue Button
+    • Save Selection
+    • Navigate to Registration
 
+======================================================================*/
 
 'use strict';
 
+window.CTM = window.CTM || {};
 
-(() => {
+CTM.screen01 = {
 
+    /*==================================================
+    INITIALIZE
+    ==================================================*/
 
-    const CTM = window.CTM;
+    init(){
 
+        this.bindEmotionCards();
 
+        this.bindContinueButton();
 
-    if (!CTM) {
-
-
-        console.error(
-
-            'CTM core has not been initialized.'
-
-        );
-
-
-        return;
-
-
-    }
-
-
-
+    },
 
 
 
     /*==================================================
-    Screen Configuration
+    BIND EMOTION CARDS
     ==================================================*/
 
+    bindEmotionCards(){
 
+        const cards = document.querySelectorAll('.emotion-card');
 
-    CTM.screen01 = {
+        cards.forEach(card=>{
 
+            card.addEventListener(
 
-        id:
+                'click',
 
-            'screen01',
+                ()=>{
 
+                    cards.forEach(c=>{
 
+                        c.classList.remove('active');
 
-        nextScreen:
+                    });
 
-            'screen02'
+                    card.classList.add('active');
 
+                    CTM.state.emotion.selected =
 
-    };
+                        card.dataset.value;
 
+                    CTM.storage.save();
 
+                    this.enableContinue();
 
-
-
-
-
-
-    /*==================================================
-    Initialize Screen 01
-    ==================================================*/
-
-
-
-    CTM.initScreen01 = function(){
-
-
-
-        CTM.log(
-
-            'Screen 01 initialized.'
-
-        );
-
-
-
-        CTM.startJourney();
-
-
-
-        CTM.refreshScreen01();
-
-
-
-    };
-
-
-
-
-
-
-
-
-
-    /*==================================================
-    Screen Refresh
-    ==================================================*/
-
-
-
-    CTM.refreshScreen01 = function(){
-
-
-
-        /*
-        Future hooks:
-
-        • Personalised name
-        • Visitor greeting
-        • Dynamic content
-
-        */
-
-
-        if (
-
-            typeof CTM.refreshText ===
-
-            'function'
-
-        ){
-
-
-            CTM.refreshText();
-
-
-        }
-
-
-
-    };
-
-
-
-
-
-
-
-
-
-    /*==================================================
-    Start Journey Navigation
-    ==================================================*/
-
-
-
-    CTM.startScreen01Journey = async function(){
-
-
-
-        CTM.startJourney();
-
-
-
-
-
-        if (
-
-            typeof CTM.saveState ===
-
-            'function'
-
-        ){
-
-
-
-            CTM.saveState();
-
-
-
-        }
-
-
-
-
-
-
-        await CTM.navigate(
-
-            CTM.screen01.nextScreen
-
-        );
-
-
-
-    };
-
-
-
-
-
-
-
-
-
-    /*==================================================
-    Click Handler
-    ==================================================*/
-
-
-
-    CTM.handleScreen01Click = function(event){
-
-
-
-        const button =
-
-            event.target.closest(
-
-
-                '#screen01 [data-next-screen]'
-
+                }
 
             );
 
+        });
+
+    },
 
 
 
+    /*==================================================
+    ENABLE CONTINUE
+    ==================================================*/
 
-        if (!button){
+    enableContinue(){
+
+        const button = document.getElementById(
+
+            'btnContinue'
+
+        );
+
+        if(button){
+
+            button.disabled = false;
+
+        }
+
+    },
 
 
+
+    /*==================================================
+    CONTINUE
+    ==================================================*/
+
+    bindContinueButton(){
+
+        const button = document.getElementById(
+
+            'btnContinue'
+
+        );
+
+        if(!button){
 
             return;
 
-
-
         }
 
-
-
-
-
-
-        event.preventDefault();
-
-
-
-
-
-        CTM.startScreen01Journey();
-
-
-
-
-
-    };
-
-
-
-
-
-
-
-
-
-    /*==================================================
-    Bind Events
-
-    Safe dynamic loading support
-
-    ==================================================*/
-
-
-
-    CTM.bindScreen01 = function(){
-
-
-
-        document.removeEventListener(
-
+        button.addEventListener(
 
             'click',
 
+            ()=>{
 
-            CTM.handleScreen01Click
+                CTM.router.next();
 
-
-        );
-
-
-
-
-
-        document.addEventListener(
-
-
-            'click',
-
-
-            CTM.handleScreen01Click
-
+            }
 
         );
 
+    }
 
-
-    };
-
-
-
+};
 
 
 
+/*==================================================
+AUTO INITIALIZE
 
+==================================================*/
 
+document.addEventListener(
 
-    /*==================================================
-    Screen Loaded Hook
-    ==================================================*/
+    'DOMContentLoaded',
 
+    ()=>{
 
+        if(
 
-    CTM.afterScreen01Loaded = function(){
-
-
-
-        if (
-
-
-            document.getElementById(
-
-
-                'screen01'
-
-
-            )
-
+            document.getElementById('screen01')
 
         ){
 
-
-
-            CTM.initScreen01();
-
-
+            CTM.screen01.init();
 
         }
 
+    }
 
-
-    };
-
-
-
-
-
-
-
-
-
-    /*==================================================
-    Initialize
-
-    ==================================================*/
-
-
-
-    document.addEventListener(
-
-
-        'DOMContentLoaded',
-
-
-        function(){
-
-
-
-            CTM.bindScreen01();
-
-
-
-        }
-
-
-    );
-
-
-
-})();
+);
