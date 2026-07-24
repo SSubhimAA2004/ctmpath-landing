@@ -70,44 +70,34 @@ CTM.storage = (function(){
 
     /*=========================================================================
         DEFAULT SESSION
-
-        Created for a new visitor
-
     =========================================================================*/
 
 
     function defaultState(){
 
-
         return{
-
 
             visitor:{
 
-
                 visitorId:'',
 
+                initialEmotion:'',
 
                 name:'',
 
-
                 email:'',
-
 
                 mobile:'',
 
-
                 district:'',
-
 
                 state:'',
 
+                referralSource:'Website',
 
                 language:'ta',
 
-
                 device:''
-
 
             },
 
@@ -115,15 +105,15 @@ CTM.storage = (function(){
 
             journey:{
 
+                currentPage:'landing.html',
 
-                currentPage:'index.html',
-
+                completionStatus:'Started',
 
                 startTime:'',
 
+                endTime:'',
 
                 lastUpdated:''
-
 
             },
 
@@ -131,23 +121,15 @@ CTM.storage = (function(){
 
             assessment:{
 
-
                 answers:{},
-
 
                 currentQuestion:0,
 
-
                 completed:false
-
-
 
             }
 
-
-
         };
-
 
     }
 
@@ -155,18 +137,14 @@ CTM.storage = (function(){
 
 
 
-
     /*=========================================================================
-        LOAD SESSION
-
+        LOAD
     =========================================================================*/
 
 
     function load(){
 
-
         try{
-
 
             const data =
 
@@ -176,27 +154,17 @@ CTM.storage = (function(){
 
                 );
 
-
-
             if(!data){
-
 
                 return defaultState();
 
-
             }
-
-
 
             return JSON.parse(data);
 
-
-
         }
 
-
         catch(error){
-
 
             console.error(
 
@@ -206,37 +174,28 @@ CTM.storage = (function(){
 
             );
 
-
-
             return defaultState();
 
-
-
         }
-
 
     }
 
 
+
+
+
     /*=========================================================================
-        SAVE SESSION
-
-        Writes current browser state
-
+        SAVE
     =========================================================================*/
 
 
     function save(state){
 
-
         try{
-
 
             state.journey.lastUpdated =
 
                 new Date().toISOString();
-
-
 
             localStorage.setItem(
 
@@ -246,17 +205,11 @@ CTM.storage = (function(){
 
             );
 
-
-
             return true;
-
-
 
         }
 
-
         catch(error){
-
 
             console.error(
 
@@ -266,15 +219,10 @@ CTM.storage = (function(){
 
             );
 
-
-
             return false;
-
-
 
         }
 
-
     }
 
 
@@ -282,39 +230,36 @@ CTM.storage = (function(){
 
 
     /*=========================================================================
-        GET STATE
-
+        INIT
     =========================================================================*/
 
 
-    function getState(){
+    function init(){
 
+        if(
 
-        return load();
+            !localStorage.getItem(
 
+                STORAGE_KEY
 
-    }
+            )
 
+        ){
 
+            save(
 
+                defaultState()
 
+            );
 
-    /*=========================================================================
-        SET STATE
+        }
 
-    =========================================================================*/
+        console.log(
 
-
-    function setState(state){
-
-
-        return save(
-
-            state
+            'CTM Storage Ready'
 
         );
 
-
     }
 
 
@@ -322,18 +267,13 @@ CTM.storage = (function(){
 
 
     /*=========================================================================
-        VISITOR SESSION
-
+        VISITOR
     =========================================================================*/
 
 
     function getVisitor(){
 
-
-        return load()
-
-            .visitor;
-
+        return load().visitor;
 
     }
 
@@ -343,59 +283,40 @@ CTM.storage = (function(){
 
     function updateVisitor(data){
 
-
         const state = load();
-
-
 
         state.visitor = {
 
-
             ...state.visitor,
-
 
             ...data
 
-
         };
 
-
-
-        save(
-
-            state
-
-        );
-
+        save(state);
 
     }
 
-
-
+    /*=========================================================================
+        CLEAR VISITOR
+    =========================================================================*/
 
 
     function clearVisitor(){
 
-
         const state = load();
 
-
-
         state.visitor =
-
 
             defaultState()
 
                 .visitor;
 
-
-
         save(
 
             state
 
         );
-
 
     }
 
@@ -405,12 +326,9 @@ CTM.storage = (function(){
 
     function hasVisitor(){
 
-
         const visitor =
 
             getVisitor();
-
-
 
         return Boolean(
 
@@ -420,6 +338,44 @@ CTM.storage = (function(){
 
         );
 
+    }
+
+
+
+
+
+    /*=========================================================================
+        INITIAL EMOTION
+    =========================================================================*/
+
+
+    function setInitialEmotion(emotion){
+
+        const state = load();
+
+        state.visitor.initialEmotion =
+
+            emotion;
+
+        save(
+
+            state
+
+        );
+
+    }
+
+
+
+
+
+    function getInitialEmotion(){
+
+        return load()
+
+            .visitor
+
+            .initialEmotion;
 
     }
 
@@ -428,23 +384,17 @@ CTM.storage = (function(){
 
 
     /*=========================================================================
-        JOURNEY STATE
-
+        VISITOR ID
     =========================================================================*/
 
 
-    function setCurrentPage(page){
-
+    function setVisitorId(visitorId){
 
         const state = load();
 
+        state.visitor.visitorId =
 
-
-        state.journey.currentPage =
-
-            page;
-
-
+            visitorId;
 
         save(
 
@@ -452,6 +402,44 @@ CTM.storage = (function(){
 
         );
 
+    }
+
+
+
+
+
+    function getVisitorId(){
+
+        return load()
+
+            .visitor
+
+            .visitorId;
+
+    }
+
+
+
+
+
+    /*=========================================================================
+        CURRENT PAGE
+    =========================================================================*/
+
+
+    function setCurrentPage(page){
+
+        const state = load();
+
+        state.journey.currentPage =
+
+            page;
+
+        save(
+
+            state
+
+        );
 
     }
 
@@ -461,13 +449,11 @@ CTM.storage = (function(){
 
     function getCurrentPage(){
 
-
         return load()
 
             .journey
 
             .currentPage;
-
 
     }
 
@@ -475,18 +461,18 @@ CTM.storage = (function(){
 
 
 
-    function setStartTime(time){
+    /*=========================================================================
+        COMPLETION STATUS
+    =========================================================================*/
 
+
+    function setCompletionStatus(status){
 
         const state = load();
 
+        state.journey.completionStatus =
 
-
-        state.journey.startTime =
-
-            time;
-
-
+            status;
 
         save(
 
@@ -494,6 +480,44 @@ CTM.storage = (function(){
 
         );
 
+    }
+
+
+
+
+
+    function getCompletionStatus(){
+
+        return load()
+
+            .journey
+
+            .completionStatus;
+
+    }
+
+
+
+
+
+    /*=========================================================================
+        START TIME
+    =========================================================================*/
+
+
+    function setStartTime(time){
+
+        const state = load();
+
+        state.journey.startTime =
+
+            time;
+
+        save(
+
+            state
+
+        );
 
     }
 
@@ -503,27 +527,55 @@ CTM.storage = (function(){
 
     function getStartTime(){
 
-
         return load()
 
             .journey
 
             .startTime;
 
+    }
+
+
+
+
+
+    /*=========================================================================
+        END TIME
+    =========================================================================*/
+
+
+    function setEndTime(time){
+
+        const state = load();
+
+        state.journey.endTime =
+
+            time;
+
+        save(
+
+            state
+
+        );
 
     }
 
 
 
 
+
+    function getEndTime(){
+
+        return load()
+
+            .journey
+
+            .endTime;
+
+    }
+
     /*=========================================================================
-        ASSESSMENT DRAFT
-
-        Temporary browser storage only.
-
-        Final values sync through api.js
-        to Google Sheet.
-
+        ASSESSMENT ANSWERS
     =========================================================================*/
 
 
@@ -535,16 +587,11 @@ CTM.storage = (function(){
 
     ){
 
-
         const state = load();
-
-
 
         state.assessment.answers[questionId] =
 
             answer;
-
-
 
         save(
 
@@ -552,6 +599,19 @@ CTM.storage = (function(){
 
         );
 
+    }
+
+
+
+
+
+    function getAnswer(questionId){
+
+        return load()
+
+            .assessment
+
+            .answers[questionId];
 
     }
 
@@ -561,13 +621,11 @@ CTM.storage = (function(){
 
     function getAnswers(){
 
-
         return load()
 
             .assessment
 
             .answers;
-
 
     }
 
@@ -575,18 +633,11 @@ CTM.storage = (function(){
 
 
 
-    function setCurrentQuestion(index){
-
+    function clearAnswers(){
 
         const state = load();
 
-
-
-        state.assessment.currentQuestion =
-
-            index;
-
-
+        state.assessment.answers = {};
 
         save(
 
@@ -594,6 +645,30 @@ CTM.storage = (function(){
 
         );
 
+    }
+
+
+
+
+
+    /*=========================================================================
+        CURRENT QUESTION
+    =========================================================================*/
+
+
+    function setCurrentQuestion(index){
+
+        const state = load();
+
+        state.assessment.currentQuestion =
+
+            index;
+
+        save(
+
+            state
+
+        );
 
     }
 
@@ -603,13 +678,11 @@ CTM.storage = (function(){
 
     function getCurrentQuestion(){
 
-
         return load()
 
             .assessment
 
             .currentQuestion;
-
 
     }
 
@@ -617,18 +690,18 @@ CTM.storage = (function(){
 
 
 
+    /*=========================================================================
+        ASSESSMENT STATUS
+    =========================================================================*/
+
+
     function markCompleted(){
 
-
         const state = load();
-
-
 
         state.assessment.completed =
 
             true;
-
-
 
         save(
 
@@ -636,6 +709,25 @@ CTM.storage = (function(){
 
         );
 
+    }
+
+
+
+
+
+    function markIncomplete(){
+
+        const state = load();
+
+        state.assessment.completed =
+
+            false;
+
+        save(
+
+            state
+
+        );
 
     }
 
@@ -645,14 +737,12 @@ CTM.storage = (function(){
 
     function isCompleted(){
 
-
         return load()
 
             .assessment
 
             .completed;
 
-
     }
 
 
@@ -660,37 +750,11 @@ CTM.storage = (function(){
 
 
     /*=========================================================================
-        SESSION CHECK
-
-    =========================================================================*/
-
-
-    function exists(){
-
-
-        return localStorage.getItem(
-
-            STORAGE_KEY
-
-        ) !== null;
-
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        RESET
-
-        Development / New Visitor
-
+        SESSION RESET
     =========================================================================*/
 
 
     function reset(){
-
 
         localStorage.removeItem(
 
@@ -699,6 +763,13 @@ CTM.storage = (function(){
         );
 
 
+
+        save(
+
+            defaultState()
+
+        );
+
     }
 
 
@@ -706,15 +777,30 @@ CTM.storage = (function(){
 
 
     /*=========================================================================
-        EXPORT
+        SESSION EXISTS
+    =========================================================================*/
 
-        Useful for debugging
 
+    function exists(){
+
+        return localStorage.getItem(
+
+            STORAGE_KEY
+
+        ) !== null;
+
+    }
+
+
+
+
+
+    /*=========================================================================
+        EXPORT SESSION
     =========================================================================*/
 
 
     function exportData(){
-
 
         return JSON.stringify(
 
@@ -726,7 +812,6 @@ CTM.storage = (function(){
 
         );
 
-
     }
 
 
@@ -734,16 +819,13 @@ CTM.storage = (function(){
 
 
     /*=========================================================================
-        IMPORT
-
+        IMPORT SESSION
     =========================================================================*/
 
 
     function importData(data){
 
-
         try{
-
 
             const state =
 
@@ -757,20 +839,15 @@ CTM.storage = (function(){
 
                 data;
 
-
-
             return save(
 
                 state
 
             );
 
-
         }
 
-
         catch(error){
-
 
             console.error(
 
@@ -780,133 +857,111 @@ CTM.storage = (function(){
 
             );
 
-
-
             return false;
 
-
         }
 
-
     }
-
-
-
-
-
-    /*=========================================================================
-        INIT
-
-    =========================================================================*/
-
-
-    function init(){
-
-
-        if(!exists()){
-
-
-            save(
-
-                defaultState()
-
-            );
-
-
-        }
-
-
-
-        console.log(
-
-            'CTM Storage Ready'
-
-        );
-
-
-    }
-
-
-
-
 
     /*=========================================================================
         PUBLIC API
-
     =========================================================================*/
 
 
     return{
 
+        /*--------------------------------------------------
+            Initialization
+        --------------------------------------------------*/
 
         init,
 
 
-        load,
+        /*--------------------------------------------------
+            State
+        --------------------------------------------------*/
 
+        load,
 
         save,
 
 
-        getState,
-
-
-        setState,
-
+        /*--------------------------------------------------
+            Visitor
+        --------------------------------------------------*/
 
         getVisitor,
 
-
         updateVisitor,
-
 
         clearVisitor,
 
-
         hasVisitor,
 
+        setVisitorId,
+
+        getVisitorId,
+
+        setInitialEmotion,
+
+        getInitialEmotion,
+
+
+        /*--------------------------------------------------
+            Journey
+        --------------------------------------------------*/
 
         setCurrentPage,
 
-
         getCurrentPage,
 
+        setCompletionStatus,
+
+        getCompletionStatus,
 
         setStartTime,
 
-
         getStartTime,
 
+        setEndTime,
+
+        getEndTime,
+
+
+        /*--------------------------------------------------
+            Assessment
+        --------------------------------------------------*/
 
         saveAnswer,
 
+        getAnswer,
 
         getAnswers,
 
+        clearAnswers,
 
         setCurrentQuestion,
 
-
         getCurrentQuestion,
-
 
         markCompleted,
 
+        markIncomplete,
 
         isCompleted,
 
 
-        exists,
+        /*--------------------------------------------------
+            Utilities
+        --------------------------------------------------*/
 
+        exists,
 
         reset,
 
-
         exportData,
 
-
         importData
-
 
     };
 
@@ -916,8 +971,10 @@ CTM.storage = (function(){
 
 
 
+
+
 /*=============================================================================
 
     END OF FILE
 
-=============================================================================*/            
+=============================================================================*/
