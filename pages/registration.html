@@ -1,1 +1,349 @@
 
+<!DOCTYPE html>
+<html lang="ta">
+
+<head>
+
+    <!--
+    =====================================================================
+
+        CTM PATH™
+
+        FROM SURVIVAL TO LIVING™
+
+        FILE
+
+        registration.html
+
+        PURPOSE
+
+        Screen 02
+
+        Visitor Registration
+
+        RESPONSIBILITIES
+
+        • Collect Visitor Information
+        • Prepare Registration Data
+        • Continue Journey
+
+        NOTE
+
+        No business logic belongs here.
+
+        Logic belongs to:
+
+        registration.js
+
+    =====================================================================
+    -->
+
+
+    <meta charset="UTF-8">
+
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+
+    <title>
+
+        CTM PATH™ | Registration
+
+    </title>
+
+
+    <!--==================================================
+        CSS
+    ==================================================-->
+
+    <link
+        rel="stylesheet"
+        href="../css/reset.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/tokens.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/base.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/app.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/registration.css">
+
+</head>
+
+
+<body>
+
+
+<main class="registration-page">
+
+
+    <section class="registration-hero">
+
+
+        <div class="registration-container">
+
+
+            <p class="brand-label">
+
+                CTM PATH™
+
+            </p>
+
+
+            <h1>
+
+                உங்களை அறிந்துகொள்வோம்
+
+                <br>
+
+                <span>
+
+                    Let's Get to Know You
+
+                </span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                உங்கள் பயணம் உங்களுக்கே உரியதாக அமைய,
+                சில அடிப்படை தகவல்கள் மட்டும் தேவை.
+
+                <br><br>
+
+                <span>
+
+                    To personalize your journey,
+                    we'd like to know a little about you.
+
+                </span>
+
+            </p>
+
+
+            <form
+                id="registrationForm"
+                class="registration-form"
+                autocomplete="off">
+
+
+                <div class="form-group">
+
+                    <label for="fullName">
+
+                        உங்கள் பெயர்
+
+                        <span>
+
+                            Your Name
+
+                        </span>
+
+                    </label>
+
+                    <input
+                        id="fullName"
+                        name="fullName"
+                        type="text"
+                        maxlength="100"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="mobile">
+
+                        வாட்ஸ்அப் எண்
+
+                        <span>
+
+                            WhatsApp Number
+
+                        </span>
+
+                    </label>
+
+                    <input
+                        id="mobile"
+                        name="mobile"
+                        type="tel"
+                        maxlength="15"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+
+                        மின்னஞ்சல் முகவரி
+
+                        <span>
+
+                            Email Address
+
+                        </span>
+
+                    </label>
+
+                    <input
+                        id="email"
+                        name="email"
+                        type="email">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="district">
+
+                        மாவட்டம்
+
+                        <span>
+
+                            District
+
+                        </span>
+
+                    </label>
+
+                    <input
+                        id="district"
+                        name="district"
+                        type="text"
+                        maxlength="100"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="state">
+
+                        மாநிலம்
+
+                        <span>
+
+                            State
+
+                        </span>
+
+                    </label>
+
+                    <input
+                        id="state"
+                        name="state"
+                        type="text"
+                        maxlength="100"
+                        required>
+
+                </div>
+
+
+                <button
+
+                    id="continueJourney"
+
+                    type="submit"
+
+                    class="primary-button">
+
+
+                    <span>
+
+                        என் பயணத்தை தொடர்கிறேன்
+
+                    </span>
+
+                    <small>
+
+                        CONTINUE MY JOURNEY
+
+                    </small>
+
+
+                </button>
+
+
+            </form>
+
+
+
+            <div class="privacy-footer">
+
+                <p>
+
+                    🔒 உங்கள் தனிப்பட்ட தகவல்கள் முழுமையாக பாதுகாக்கப்படும்.
+                    அவை உங்கள் பயணத்தை மேம்படுத்த மட்டுமே பயன்படுத்தப்படும்.
+
+                </p>
+
+                <p>
+
+                    Your personal information is kept secure and confidential.
+                    It will only be used to personalize your journey.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!--==================================================
+    Core JavaScript
+===================================================-->
+
+
+<script
+    src="../js/storage.js">
+</script>
+
+
+<script
+    src="../js/api.js">
+</script>
+
+
+<script
+    src="../js/router.js">
+</script>
+
+
+<script
+    src="../js/app.js">
+</script>
+
+
+<script
+    src="../js/registration.js">
+</script>
+
+
+</body>
+
+</html>
+
