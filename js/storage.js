@@ -1,980 +1,365 @@
 
-/*=============================================================================
+/* ==========================================================================
+   CTM PATH™ Guided Journey v2.0
+   File        : storage.js
+   Version     : 1.0
+   Status      : 🔒 LOCKED
+   Purpose     : Browser Storage Layer
+                  Owns:
+                  • Local Storage
+                  • Session Storage
+                  • Read
+                  • Write
+                  • Remove
+                  • Clear
+                  • Journey Persistence
 
-    CTM PATH™
-    FROM SURVIVAL TO LIVING™
-
-    FILE
-
-    storage.js
-
-    PURPOSE
-
-    Client Session Storage Manager
-
-    RESPONSIBILITIES
-
-    • Maintain Browser Session
-    • Save Visitor Session
-    • Restore Journey State
-    • Store Temporary Assessment Draft
-
-    NOTE
-
-    Google Sheet is the master database.
-
-    This module manages only
-    browser-side persistence.
-
-=============================================================================*/
-
+                  Owns NO:
+                  • UI Rendering
+                  • Business Logic
+                  • API Calls
+                  • Assessment Calculations
+   ========================================================================== */
 
 'use strict';
 
-
-
-/*=============================================================================
-    GLOBAL NAMESPACE
-=============================================================================*/
-
-
-window.CTM = window.CTM || {};
-
-
-
-
-
-/*=============================================================================
-    STORAGE MODULE
-=============================================================================*/
-
-
-CTM.storage = (function(){
-
-
-
-
-
-    /*=========================================================================
-        CONSTANTS
-    =========================================================================*/
-
-
-    const STORAGE_KEY =
-
-        'CTM_PATH_SESSION_V1';
-
-
-
-
-
-    /*=========================================================================
-        DEFAULT SESSION
-    =========================================================================*/
-
-
-    function defaultState(){
-
-        return{
-
-            visitor:{
-
-                visitorId:'',
-
-                initialEmotion:'',
-
-                name:'',
-
-                email:'',
-
-                mobile:'',
-
-                district:'',
-
-                state:'',
-
-                referralSource:'Website',
-
-                language:'ta',
-
-                device:''
-
-            },
-
-
-
-            journey:{
-
-                currentPage:'landing.html',
-
-                completionStatus:'Started',
-
-                startTime:'',
-
-                endTime:'',
-
-                lastUpdated:''
-
-            },
-
-
-
-            assessment:{
-
-                answers:{},
-
-                currentQuestion:0,
-
-                completed:false
-
-            }
-
-        };
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        LOAD
-    =========================================================================*/
-
-
-    function load(){
-
-        try{
-
-            const data =
-
-                localStorage.getItem(
-
-                    STORAGE_KEY
-
-                );
-
-            if(!data){
-
-                return defaultState();
-
-            }
-
-            return JSON.parse(data);
-
-        }
-
-        catch(error){
-
-            console.error(
-
-                'CTM Storage Load Error',
-
-                error
-
-            );
-
-            return defaultState();
-
-        }
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        SAVE
-    =========================================================================*/
-
-
-    function save(state){
-
-        try{
-
-            state.journey.lastUpdated =
-
-                new Date().toISOString();
-
-            localStorage.setItem(
-
-                STORAGE_KEY,
-
-                JSON.stringify(state)
-
-            );
-
-            return true;
-
-        }
-
-        catch(error){
-
-            console.error(
-
-                'CTM Storage Save Error',
-
-                error
-
-            );
-
-            return false;
-
-        }
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        INIT
-    =========================================================================*/
-
-
-    function init(){
-
-        if(
-
-            !localStorage.getItem(
-
-                STORAGE_KEY
-
-            )
-
-        ){
-
-            save(
-
-                defaultState()
-
-            );
-
-        }
-
-        console.log(
-
-            'CTM Storage Ready'
-
-        );
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        VISITOR
-    =========================================================================*/
-
-
-    function getVisitor(){
-
-        return load().visitor;
-
-    }
-
-
-
-
-
-    function updateVisitor(data){
-
-        const state = load();
-
-        state.visitor = {
-
-            ...state.visitor,
-
-            ...data
-
-        };
-
-        save(state);
-
-    }
-
-    /*=========================================================================
-        CLEAR VISITOR
-    =========================================================================*/
-
-
-    function clearVisitor(){
-
-        const state = load();
-
-        state.visitor =
-
-            defaultState()
-
-                .visitor;
-
-        save(
-
-            state
-
-        );
-
-    }
-
-
-
-
-
-    function hasVisitor(){
-
-        const visitor =
-
-            getVisitor();
-
-        return Boolean(
-
-            visitor.visitorId ||
-
-            visitor.name
-
-        );
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        INITIAL EMOTION
-    =========================================================================*/
-
-
-    function setInitialEmotion(emotion){
-
-        const state = load();
-
-        state.visitor.initialEmotion =
-
-            emotion;
-
-        save(
-
-            state
-
-        );
-
-    }
-
-
-
-
-
-    function getInitialEmotion(){
-
-        return load()
-
-            .visitor
-
-            .initialEmotion;
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        VISITOR ID
-    =========================================================================*/
-
-
-    function setVisitorId(visitorId){
-
-        const state = load();
-
-        state.visitor.visitorId =
-
-            visitorId;
-
-        save(
-
-            state
-
-        );
-
-    }
-
-
-
-
-
-    function getVisitorId(){
-
-        return load()
-
-            .visitor
-
-            .visitorId;
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        CURRENT PAGE
-    =========================================================================*/
-
-
-    function setCurrentPage(page){
-
-        const state = load();
-
-        state.journey.currentPage =
-
-            page;
-
-        save(
-
-            state
-
-        );
-
-    }
-
-
-
-
-
-    function getCurrentPage(){
-
-        return load()
-
-            .journey
-
-            .currentPage;
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        COMPLETION STATUS
-    =========================================================================*/
-
-
-    function setCompletionStatus(status){
-
-        const state = load();
-
-        state.journey.completionStatus =
-
-            status;
-
-        save(
-
-            state
-
-        );
-
-    }
-
-
-
-
-
-    function getCompletionStatus(){
-
-        return load()
-
-            .journey
-
-            .completionStatus;
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        START TIME
-    =========================================================================*/
-
-
-    function setStartTime(time){
-
-        const state = load();
-
-        state.journey.startTime =
-
-            time;
-
-        save(
-
-            state
-
-        );
-
-    }
-
-
-
-
-
-    function getStartTime(){
-
-        return load()
-
-            .journey
-
-            .startTime;
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        END TIME
-    =========================================================================*/
-
-
-    function setEndTime(time){
-
-        const state = load();
-
-        state.journey.endTime =
-
-            time;
-
-        save(
-
-            state
-
-        );
-
-    }
-
-
-
-
-
-    function getEndTime(){
-
-        return load()
-
-            .journey
-
-            .endTime;
-
-    }
-
-    /*=========================================================================
-        ASSESSMENT ANSWERS
-    =========================================================================*/
-
-
-    function saveAnswer(
-
-        questionId,
-
-        answer
-
-    ){
-
-        const state = load();
-
-        state.assessment.answers[questionId] =
-
-            answer;
-
-        save(
-
-            state
-
-        );
-
-    }
-
-
-
-
-
-    function getAnswer(questionId){
-
-        return load()
-
-            .assessment
-
-            .answers[questionId];
-
-    }
-
-
-
-
-
-    function getAnswers(){
-
-        return load()
-
-            .assessment
-
-            .answers;
-
-    }
-
-
-
-
-
-    function clearAnswers(){
-
-        const state = load();
-
-        state.assessment.answers = {};
-
-        save(
-
-            state
-
-        );
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        CURRENT QUESTION
-    =========================================================================*/
-
-
-    function setCurrentQuestion(index){
-
-        const state = load();
-
-        state.assessment.currentQuestion =
-
-            index;
-
-        save(
-
-            state
-
-        );
-
-    }
-
-
-
-
-
-    function getCurrentQuestion(){
-
-        return load()
-
-            .assessment
-
-            .currentQuestion;
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        ASSESSMENT STATUS
-    =========================================================================*/
-
-
-    function markCompleted(){
-
-        const state = load();
-
-        state.assessment.completed =
-
-            true;
-
-        save(
-
-            state
-
-        );
-
-    }
-
-
-
-
-
-    function markIncomplete(){
-
-        const state = load();
-
-        state.assessment.completed =
-
-            false;
-
-        save(
-
-            state
-
-        );
-
-    }
-
-
-
-
-
-    function isCompleted(){
-
-        return load()
-
-            .assessment
-
-            .completed;
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        SESSION RESET
-    =========================================================================*/
-
-
-    function reset(){
-
-        localStorage.removeItem(
-
-            STORAGE_KEY
-
-        );
-
-
-
-        save(
-
-            defaultState()
-
-        );
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        SESSION EXISTS
-    =========================================================================*/
-
-
-    function exists(){
-
-        return localStorage.getItem(
-
-            STORAGE_KEY
-
-        ) !== null;
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        EXPORT SESSION
-    =========================================================================*/
-
-
-    function exportData(){
-
-        return JSON.stringify(
-
-            load(),
-
-            null,
-
-            4
-
-        );
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        IMPORT SESSION
-    =========================================================================*/
-
-
-    function importData(data){
-
-        try{
-
-            const state =
-
-                typeof data === 'string'
-
-                    ?
-
-                JSON.parse(data)
-
-                    :
-
-                data;
-
-            return save(
-
-                state
-
-            );
-
-        }
-
-        catch(error){
-
-            console.error(
-
-                'CTM Storage Import Error',
-
-                error
-
-            );
-
-            return false;
-
-        }
-
-    }
-
-    /*=========================================================================
-        PUBLIC API
-    =========================================================================*/
-
-
-    return{
-
-        /*--------------------------------------------------
-            Initialization
-        --------------------------------------------------*/
-
-        init,
-
-
-        /*--------------------------------------------------
-            State
-        --------------------------------------------------*/
-
-        load,
-
-        save,
-
-
-        /*--------------------------------------------------
-            Visitor
-        --------------------------------------------------*/
-
-        getVisitor,
-
-        updateVisitor,
-
-        clearVisitor,
-
-        hasVisitor,
-
-        setVisitorId,
-
-        getVisitorId,
-
-        setInitialEmotion,
-
-        getInitialEmotion,
-
-
-        /*--------------------------------------------------
-            Journey
-        --------------------------------------------------*/
-
-        setCurrentPage,
-
-        getCurrentPage,
-
-        setCompletionStatus,
-
-        getCompletionStatus,
-
-        setStartTime,
-
-        getStartTime,
-
-        setEndTime,
-
-        getEndTime,
-
-
-        /*--------------------------------------------------
-            Assessment
-        --------------------------------------------------*/
-
-        saveAnswer,
-
-        getAnswer,
-
-        getAnswers,
-
-        clearAnswers,
-
-        setCurrentQuestion,
-
-        getCurrentQuestion,
-
-        markCompleted,
-
-        markIncomplete,
-
-        isCompleted,
-
-
-        /*--------------------------------------------------
-            Utilities
-        --------------------------------------------------*/
-
-        exists,
-
-        reset,
-
-        exportData,
-
-        importData
+/* ==========================================================================
+   STORAGE NAMESPACE
+   ========================================================================== */
+
+const StorageService = (() => {
+
+    /* ======================================================================
+       CONSTANTS
+       ====================================================================== */
+
+    const PREFIX = 'CTM_PATH_';
+
+    const KEYS = {
+
+        VISITOR           : `${PREFIX}VISITOR`,
+        SESSION           : `${PREFIX}SESSION`,
+        CURRENT_PAGE      : `${PREFIX}CURRENT_PAGE`,
+        CURRENT_SPOKE     : `${PREFIX}CURRENT_SPOKE`,
+        ASSESSMENT        : `${PREFIX}ASSESSMENT`,
+        SCORES            : `${PREFIX}SCORES`,
+        KALACHAKRA        : `${PREFIX}KALACHAKRA`,
+        DIAGNOSIS         : `${PREFIX}DIAGNOSIS`,
+        PRESCRIPTION      : `${PREFIX}PRESCRIPTION`,
+        JOURNEY_STATUS    : `${PREFIX}JOURNEY_STATUS`
 
     };
 
+    /* ======================================================================
+       PRIVATE FUNCTIONS
+       ====================================================================== */
 
+    function serialize(data) {
+        return JSON.stringify(data);
+    }
+
+    function deserialize(data) {
+
+        if (!data) return null;
+
+        try {
+
+            return JSON.parse(data);
+
+        } catch {
+
+            return null;
+
+        }
+
+    }
+
+    /* ======================================================================
+       LOCAL STORAGE
+       ====================================================================== */
+
+    function save(key, value) {
+
+        localStorage.setItem(key, serialize(value));
+
+    }
+
+    function load(key) {
+
+        return deserialize(localStorage.getItem(key));
+
+    }
+
+    function remove(key) {
+
+        localStorage.removeItem(key);
+
+    }
+
+    function exists(key) {
+
+        return localStorage.getItem(key) !== null;
+
+    }
+
+    function clearAll() {
+
+        Object.values(KEYS).forEach(remove);
+
+    }
+
+    /* ======================================================================
+       SESSION STORAGE
+       ====================================================================== */
+
+    function saveSession(key, value) {
+
+        sessionStorage.setItem(key, serialize(value));
+
+    }
+
+    function loadSession(key) {
+
+        return deserialize(sessionStorage.getItem(key));
+
+    }
+
+    function clearSession() {
+
+        sessionStorage.clear();
+
+    }
+
+    /* ======================================================================
+       VISITOR
+       ====================================================================== */
+
+    function saveVisitor(visitor) {
+
+        save(KEYS.VISITOR, visitor);
+
+    }
+
+    function getVisitor() {
+
+        return load(KEYS.VISITOR);
+
+    }
+
+    /* ======================================================================
+       SESSION
+       ====================================================================== */
+
+    function saveSessionState(session) {
+
+        save(KEYS.SESSION, session);
+
+    }
+
+    function getSessionState() {
+
+        return load(KEYS.SESSION);
+
+    }
+
+    /* ======================================================================
+       PAGE
+       ====================================================================== */
+
+    function saveCurrentPage(page) {
+
+        save(KEYS.CURRENT_PAGE, page);
+
+    }
+
+    function getCurrentPage() {
+
+        return load(KEYS.CURRENT_PAGE);
+
+    }
+
+    /* ======================================================================
+       SPOKE
+       ====================================================================== */
+
+    function saveCurrentSpoke(spoke) {
+
+        save(KEYS.CURRENT_SPOKE, spoke);
+
+    }
+
+    function getCurrentSpoke() {
+
+        return load(KEYS.CURRENT_SPOKE);
+
+    }
+
+    /* ======================================================================
+       ASSESSMENT
+       ====================================================================== */
+
+    function saveAssessment(data) {
+
+        save(KEYS.ASSESSMENT, data);
+
+    }
+
+    function getAssessment() {
+
+        return load(KEYS.ASSESSMENT) || {};
+
+    }
+
+    /* ======================================================================
+       SCORES
+       ====================================================================== */
+
+    function saveScores(scores) {
+
+        save(KEYS.SCORES, scores);
+
+    }
+
+    function getScores() {
+
+        return load(KEYS.SCORES) || {};
+
+    }
+
+    /* ======================================================================
+       KALA CHAKRA
+       ====================================================================== */
+
+    function saveKalaChakra(data) {
+
+        save(KEYS.KALACHAKRA, data);
+
+    }
+
+    function getKalaChakra() {
+
+        return load(KEYS.KALACHAKRA);
+
+    }
+
+    /* ======================================================================
+       DIAGNOSIS
+       ====================================================================== */
+
+    function saveDiagnosis(data) {
+
+        save(KEYS.DIAGNOSIS, data);
+
+    }
+
+    function getDiagnosis() {
+
+        return load(KEYS.DIAGNOSIS);
+
+    }
+
+    /* ======================================================================
+       PRESCRIPTION
+       ====================================================================== */
+
+    function savePrescription(data) {
+
+        save(KEYS.PRESCRIPTION, data);
+
+    }
+
+    function getPrescription() {
+
+        return load(KEYS.PRESCRIPTION);
+
+    }
+
+    /* ======================================================================
+       JOURNEY STATUS
+       ====================================================================== */
+
+    function saveJourneyStatus(status) {
+
+        save(KEYS.JOURNEY_STATUS, status);
+
+    }
+
+    function getJourneyStatus() {
+
+        return load(KEYS.JOURNEY_STATUS);
+
+    }
+
+    /* ======================================================================
+       RESET APPLICATION
+       ====================================================================== */
+
+    function resetJourney() {
+
+        clearAll();
+
+        clearSession();
+
+    }
+
+    /* ======================================================================
+       PUBLIC API
+       ====================================================================== */
+
+    return {
+
+        KEYS,
+
+        save,
+        load,
+        remove,
+        exists,
+        clearAll,
+
+        saveSession,
+        loadSession,
+        clearSession,
+
+        saveVisitor,
+        getVisitor,
+
+        saveSessionState,
+        getSessionState,
+
+        saveCurrentPage,
+        getCurrentPage,
+
+        saveCurrentSpoke,
+        getCurrentSpoke,
+
+        saveAssessment,
+        getAssessment,
+
+        saveScores,
+        getScores,
+
+        saveKalaChakra,
+        getKalaChakra,
+
+        saveDiagnosis,
+        getDiagnosis,
+
+        savePrescription,
+        getPrescription,
+
+        saveJourneyStatus,
+        getJourneyStatus,
+
+        resetJourney
+
+    };
 
 })();
 
+/* ==========================================================================
+   End of File
 
+   File : storage.js
 
-
-
-/*=============================================================================
-
-    END OF FILE
-
-=============================================================================*/
+   Status : 🔒 LOCKED
+   ========================================================================== */
