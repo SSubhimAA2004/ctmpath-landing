@@ -3,7 +3,7 @@
    CTM PATH™ Guided Journey v2.0
 
    File        : router.js
-   Version     : 1.0.1
+   Version     : 1.0.2
    Status      : 🔒 LOCKED
 
    Purpose     : Application Router
@@ -47,40 +47,41 @@ const Router = (() => {
 
         LANDING:
 
-            'landing.html',
+            'pages/landing.html',
 
 
         REGISTRATION:
 
-            'registration.html',
+            'pages/registration.html',
 
 
         ASSESSMENT:
 
-            'assessment.html',
+            'pages/assessment.html',
 
 
         KALACHAKRA:
 
-            'kaalachakra.html',
+            'pages/kaalachakra.html',
 
 
         DIAGNOSIS:
 
-            'diagnosis.html',
+            'pages/diagnosis.html',
 
 
         PRESCRIPTION:
 
-            'prescription.html',
+            'pages/prescription.html',
 
 
         COMPLETION:
 
-            'completion.html'
+            'pages/completion.html'
 
 
     };
+
 
 
 
@@ -119,6 +120,7 @@ const Router = (() => {
 
 
 
+
     /* ======================================================================
        CURRENT PAGE
        ====================================================================== */
@@ -130,13 +132,10 @@ const Router = (() => {
         const path = window.location.pathname;
 
 
-        const page =
+        const page = path
 
-            path.substring(
+            .replace(/^\/+/, '');
 
-                path.lastIndexOf('/') + 1
-
-            );
 
 
         return page || 'index.html';
@@ -399,7 +398,7 @@ const Router = (() => {
 
 
     /* ======================================================================
-       RESUME JOURNEY
+       RESUME
        ====================================================================== */
 
 
@@ -421,21 +420,18 @@ const Router = (() => {
         ){
 
 
-            go(saved);
+            window.location.href = saved;
 
 
             return;
-
 
         }
 
 
 
-        go(
+        window.location.href =
 
-            ROUTES.LANDING
-
-        );
+            ROUTES.LANDING;
 
 
     }
@@ -452,15 +448,7 @@ const Router = (() => {
     function isFirstPage(){
 
 
-        return (
-
-            currentPage()
-
-            ===
-
-            ROUTES.LANDING
-
-        );
+        return currentPage() === ROUTES.LANDING;
 
 
     }
@@ -477,15 +465,7 @@ const Router = (() => {
     function isLastPage(){
 
 
-        return (
-
-            currentPage()
-
-            ===
-
-            ROUTES.COMPLETION
-
-        );
+        return currentPage() === ROUTES.COMPLETION;
 
 
     }
@@ -502,17 +482,11 @@ const Router = (() => {
     function currentStep(){
 
 
-        return (
+        return pageIndex(
 
-            pageIndex(
+            currentPage()
 
-                currentPage()
-
-            )
-
-            + 1
-
-        );
+        ) + 1;
 
 
     }
@@ -556,11 +530,7 @@ const Router = (() => {
 
                 totalSteps()
 
-            )
-
-            *
-
-            100
+            ) * 100
 
         );
 
@@ -633,7 +603,7 @@ const Router = (() => {
 
         ){
 
-            go(saved);
+            window.location.href = saved;
 
         }
 
@@ -750,7 +720,6 @@ const Router = (() => {
     };
 
 
-
 })();
 
 
@@ -796,7 +765,7 @@ window.Router = Router;
 
    File : router.js
 
-   Version : 1.0.1
+   Version : 1.0.2
 
    Status : 🔒 LOCKED
 
