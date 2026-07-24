@@ -1,1278 +1,1327 @@
 
-/*=============================================================================
+/* ==========================================================================
+   CTM PATH™ Guided Journey v2.0
+   File        : prescription.js
+   Version     : 1.0
+   Status      : 🔒 LOCKED
 
-    CTM PATH™
-    FROM SURVIVAL TO LIVING™
+   PURPOSE
+   --------------------------------------------------------------------------
+   Prescription™ Behaviour Engine
 
-    FILE
+   Owns
 
-    prescription.js
+   ✓ Prescription Generation
+   ✓ Daily Practice Rendering
+   ✓ Weekly Practice Rendering
+   ✓ Monthly Plan Rendering
+   ✓ Priority Spoke Rendering
+   ✓ Commitment Rendering
+   ✓ Navigation
 
-    PURPOSE
+   Owns NO
 
-    Executive Transformation Engine
+   ✗ Assessment Logic
+   ✗ Diagnosis Logic
+   ✗ Storage Implementation
+   ✗ API Implementation
 
-    RESPONSIBILITIES
+   ========================================================================== */
 
-    • Load Assessment Results
-    • Build Transformation Summary
-    • Generate 90-Day Prescription
-    • Populate Executive Report
-
-    VERSION
-
-    1.0
-
-=============================================================================*/
-
-'use strict';
-
-/*=============================================================================
-    GLOBAL NAMESPACE
-=============================================================================*/
-
-window.CTM = window.CTM || {};
-
-/*=============================================================================
-    PRESCRIPTION
-=============================================================================*/
-
-CTM.prescription = (function(){
-
-    /*=========================================================================
-        STATE
-    =========================================================================*/
-
-    const state = {
-
-        result : null,
-
-        pillars : [],
-
-        priorities : []
-
-    };
+"use strict";
 
 
+/* ==========================================================================
+   PRESCRIPTION CONTROLLER
+   ========================================================================== */
 
-    /*=========================================================================
-        INITIALIZE
-    =========================================================================*/
+const PrescriptionPage = (() => {
+
+
+    /* ======================================================================
+       STATE
+       ====================================================================== */
+
+    let visitor = null;
+
+    let assessment = null;
+
+    let diagnosis = null;
+
+    let prescription = {};
+
+
+    /* ======================================================================
+       DOM REFERENCES
+       ====================================================================== */
+
+    let currentScore;
+
+    let focusArea;
+
+    let actionCount;
+
+    let journeyStatus;
+
+    let dailyPractices;
+
+    let weeklyPractices;
+
+    let monthlyPlan;
+
+    let prioritySpokes;
+
+    let commitmentText;
+
+    let continueButton;
+
+    let backButton;
+
+
+
+    /* ======================================================================
+       INITIALISE
+       ====================================================================== */
 
     function init(){
 
-        loadResults();
+        cacheDom();
 
-        initializeReport();
+        loadState();
 
-    }
+        generatePrescription();
 
-
-
-    /*=========================================================================
-        LOAD RESULTS
-    =========================================================================*/
-
-    function loadResults(){
-
-        state.result =
-
-            CTM.storage.getAssessmentResult();
-
-
-
-        if(
-
-            !state.result
-
-        ){
-
-            console.warn(
-
-                'Assessment results not found.'
-
-            );
-
-            return;
-
-        }
-
-
-
-        state.pillars =
-
-            CTM.assessment.pillars;
-
-    }
-
-
-
-    /*=========================================================================
-        INITIALIZATION PIPELINE
-    =========================================================================*/
-
-    function initializeReport(){
-
-        if(
-
-            !state.result
-
-        ){
-
-            return;
-
-        }
-
-
-
-        populateSummary();
-
-        generateTransformationSummary();
-
-    }
-
-
-
-    /*=========================================================================
-        POPULATE SUMMARY
-    =========================================================================*/
-
-    function populateSummary(){
-
-        document.getElementById(
-
-            'visitorName'
-
-        ).textContent =
-
-            state.result.visitor.name;
-
-
-
-        document.getElementById(
-
-            'overallScore'
-
-        ).textContent =
-
-            Math.round(
-
-                state.result.summary.overallScore
-
-            );
-
-
-
-        document.getElementById(
-
-            'overallBand'
-
-        ).textContent =
-
-            state.result.summary.performance.title;
-
-
-
-        document.getElementById(
-
-            'lifeBalanceIndex'
-
-        ).textContent =
-
-            calculateLifeBalanceIndex();
-
-    }
-
-
-
-    /*=========================================================================
-        LIFE BALANCE INDEX™
-
-    =========================================================================*/
-
-    function calculateLifeBalanceIndex(){
-
-        const values =
-
-            state.result.pillarScores.map(
-
-                score =>
-
-                (score / 50) * 100
-
-            );
-
-
-
-        const average =
-
-            values.reduce(
-
-                (sum,value)=>sum+value,
-
-                0
-
-            ) / values.length;
-
-
-
-        const variance =
-
-            values.reduce(
-
-                (sum,value)=>{
-
-                    return sum +
-
-                        Math.pow(
-
-                            value-average,
-
-                            2
-
-                        );
-
-                },
-
-                0
-
-            ) / values.length;
-
-
-
-        const deviation =
-
-            Math.sqrt(
-
-                variance
-
-            );
-
-
-
-        return Math.max(
-
-            0,
-
-            Math.round(
-
-                100 -
-
-                deviation
-
-            )
-
-        );
-
-    }
-
-
-
-    /*=========================================================================
-        TRANSFORMATION SUMMARY™
-
-    =========================================================================*/
-
-    function generateTransformationSummary(){
-
-        const visitor =
-
-            state.result.visitor.name;
-
-
-
-        const score =
-
-            Math.round(
-
-                state.result.summary.overallScore
-
-            );
-
-
-
-        const performance =
-
-            state.result.summary.performance.title;
-
-
-
-        const strongest =
-
-            state.pillars[
-
-                state.result.summary
-
-                .strongest
-
-                .pillarIndex
-
-            ].title;
-
-
-
-        const growth =
-
-            state.pillars[
-
-                state.result.summary
-
-                .growth
-
-                .pillarIndex
-
-            ].title;
-
-
-
-        const summary =
-
-`
-
-${visitor}, your CTM PATH™ Assessment has identified a clear starting point for your next stage of growth.
-
-With an overall score of ${score}, you currently fall within the "${performance}" performance category.
-
-Your assessment shows that ${strongest} is one of your greatest strengths and provides a strong foundation for future success.
-
-At the same time, ${growth} has emerged as your highest-priority opportunity for development. Strengthening this pillar during the next ninety days will create positive momentum across many other areas of your life.
-
-This prescription has been designed specifically to help you focus on the few actions that will produce the greatest long-term transformation.
-
-`;
-
-
-
-        document.getElementById(
-
-            'transformationSummary'
-
-        ).textContent =
-
-            summary.trim();
-
-    }
-
-    /*=========================================================================
-        TOP 3 PRIORITIES™
-
-    =========================================================================*/
-
-    function generatePriorities(){
-
-        const container =
-
-            document.getElementById(
-
-                'priorityList'
-
-            );
-
-
-
-        container.innerHTML = '';
-
-
-
-        state.priorities =
-
-            state.result.pillarScores
-
-            .map(
-
-                (score,index)=>({
-
-                    index,
-
-                    score
-
-                })
-
-            )
-
-            .sort(
-
-                (a,b)=>a.score-b.score
-
-            )
-
-            .slice(0,3);
-
-
-
-        state.priorities.forEach(
-
-            (
-
-                item,
-
-                position
-
-            )=>{
-
-                const pillar =
-
-                    state.pillars[
-
-                        item.index
-
-                    ];
-
-
-
-                const card =
-
-                    document.createElement(
-
-                        'div'
-
-                    );
-
-
-
-                card.className =
-
-                    'priority-card';
-
-
-
-                card.innerHTML =
-
-                `
-
-                <div class="priority-number">
-
-                    0${position+1}
-
-                </div>
-
-
-
-                <div class="priority-content">
-
-                    <h3 class="priority-title">
-
-                        ${pillar.title}
-
-                    </h3>
-
-                    <p class="priority-description">
-
-                        ${buildPriorityDescription(pillar)}
-
-                    </p>
-
-                </div>
-
-                `;
-
-
-
-                container.appendChild(
-
-                    card
-
-                );
-
-
-
-            }
-
-        );
-
-    }
-
-
-
-    /*=========================================================================
-        PRIORITY DESCRIPTION™
-
-    =========================================================================*/
-
-    function buildPriorityDescription(
-
-        pillar
-
-    ){
-
-        return `
-
-Priority
-
-Focus on strengthening ${pillar.title} during the next ninety days.
-
-Objective
-
-Build consistent progress through small daily actions.
-
-Action
-
-Complete the recommended activities for this pillar every day.
-
-Expected Outcome
-
-Create measurable improvement in this life pillar while increasing your overall Life Balance Index™.
-
-`.trim();
-
-    }
-
-
-
-    /*=========================================================================
-        90-DAY ROADMAP™
-
-    =========================================================================*/
-
-    function generateRoadmap(){
-
-        buildRoadmap(
-
-            'month1Actions',
-
-            [
-
-                'Understand your current patterns.',
-
-                'Build consistent daily habits.',
-
-                'Remove your biggest obstacles.',
-
-                'Complete your first monthly milestone.'
-
-            ]
-
-        );
-
-
-
-        buildRoadmap(
-
-            'month2Actions',
-
-            [
-
-                'Increase daily consistency.',
-
-                'Develop stronger routines.',
-
-                'Measure weekly progress.',
-
-                'Complete your second monthly milestone.'
-
-            ]
-
-        );
-
-
-
-        buildRoadmap(
-
-            'month3Actions',
-
-            [
-
-                'Maintain disciplined execution.',
-
-                'Strengthen weaker pillars.',
-
-                'Prepare for reassessment.',
-
-                'Complete your ninety-day transformation.'
-
-            ]
-
-        );
-
-    }
-
-
-
-    /*=========================================================================
-        BUILD ROADMAP™
-
-    =========================================================================*/
-
-    function buildRoadmap(
-
-        id,
-
-        actions
-
-    ){
-
-        const list =
-
-            document.getElementById(
-
-                id
-
-            );
-
-
-
-        list.innerHTML = '';
-
-
-
-        actions.forEach(
-
-            action=>{
-
-                const item =
-
-                    document.createElement(
-
-                        'li'
-
-                    );
-
-
-
-                item.textContent =
-
-                    action;
-
-
-
-                list.appendChild(
-
-                    item
-
-                );
-
-
-
-            }
-
-        );
-
-    }
-
-
-
-    /*=========================================================================
-        MONTHLY MILESTONES™
-
-    =========================================================================*/
-
-    function generateMonthlyMilestones(){
-
-        attachMilestone(
-
-            'roadmapMonth1',
-
-            'Milestone™',
-
-            'Complete your daily success habits consistently for the first 21 days.'
-
-        );
-
-
-
-        attachMilestone(
-
-            'roadmapMonth2',
-
-            'Milestone™',
-
-            'Demonstrate measurable improvement in your three priority pillars.'
-
-        );
-
-
-
-        attachMilestone(
-
-            'roadmapMonth3',
-
-            'Milestone™',
-
-            'Complete your first ninety-day CTM PATH™ transformation cycle and prepare for reassessment.'
-
-        );
-
-    }
-
-
-
-    /*=========================================================================
-        ATTACH MILESTONE™
-
-    =========================================================================*/
-
-    function attachMilestone(
-
-        cardId,
-
-        title,
-
-        text
-
-    ){
-
-        const card =
-
-            document.getElementById(
-
-                cardId
-
-            );
-
-
-
-        const block =
-
-            document.createElement(
-
-                'div'
-
-            );
-
-
-
-        block.className =
-
-            'roadmap-milestone';
-
-
-
-        block.innerHTML =
-
-        `
-
-        <div class="milestone-title">
-
-            ${title}
-
-        </div>
-
-        <div class="milestone-text">
-
-            ${text}
-
-        </div>
-
-        `;
-
-
-
-        card.appendChild(
-
-            block
-
-        );
-
-    }
-
-    /*=========================================================================
-        DAILY SUCCESS HABITS™
-
-    =========================================================================*/
-
-    function generateDailyHabits(){
-
-        const container =
-
-            document.getElementById(
-
-                'dailyHabits'
-
-            );
-
-
-
-        container.innerHTML = '';
-
-
-
-        const habits = [
-
-            {
-
-                title :
-
-                'Morning Planning™',
-
-                description :
-
-                'Begin each day by identifying your three highest-priority actions.'
-
-            },
-
-            {
-
-                title :
-
-                'Daily Learning™',
-
-                description :
-
-                'Invest at least thirty minutes in learning that strengthens your priority pillars.'
-
-            },
-
-            {
-
-                title :
-
-                'Focused Execution™',
-
-                description :
-
-                'Complete one meaningful activity that directly improves your highest-priority pillar.'
-
-            },
-
-            {
-
-                title :
-
-                'Relationship Building™',
-
-                description :
-
-                'Create one intentional interaction that strengthens your personal or professional relationships.'
-
-            },
-
-            {
-
-                title :
-
-                'Evening Reflection™',
-
-                description :
-
-                'Review your progress, celebrate small wins and prepare for tomorrow.'
-
-            }
-
-        ];
-
-
-
-        habits.forEach(
-
-            habit=>{
-
-                const card =
-
-                    document.createElement(
-
-                        'div'
-
-                    );
-
-
-
-                card.className =
-
-                    'habit-item';
-
-
-
-                card.innerHTML =
-
-                `
-
-                <div class="habit-icon">
-
-                    ✓
-
-                </div>
-
-
-
-                <div class="habit-content">
-
-                    <h3 class="habit-title">
-
-                        ${habit.title}
-
-                    </h3>
-
-
-
-                    <p class="habit-description">
-
-                        ${habit.description}
-
-                    </p>
-
-                </div>
-
-                `;
-
-
-
-                container.appendChild(
-
-                    card
-
-                );
-
-
-
-            }
-
-        );
-
-    }
-
-
-
-    /*=========================================================================
-        WEEKLY SUCCESS RHYTHM™
-
-    =========================================================================*/
-
-    function generateWeeklyRhythm(){
-
-        const container =
-
-            document.getElementById(
-
-                'weeklyRhythm'
-
-            );
-
-
-
-        container.innerHTML = '';
-
-
-
-        const schedule = [
-
-            {
-
-                day:'Monday',
-
-                icon:'🧭',
-
-                theme:'Planning™',
-
-                description:'Review goals and prepare your week.'
-
-            },
-
-            {
-
-                day:'Tuesday',
-
-                icon:'📚',
-
-                theme:'Learning™',
-
-                description:'Acquire knowledge and develop skills.'
-
-            },
-
-            {
-
-                day:'Wednesday',
-
-                icon:'⚙',
-
-                theme:'Execution™',
-
-                description:'Complete your highest-impact work.'
-
-            },
-
-            {
-
-                day:'Thursday',
-
-                icon:'🤝',
-
-                theme:'Relationships™',
-
-                description:'Strengthen meaningful connections.'
-
-            },
-
-            {
-
-                day:'Friday',
-
-                icon:'💰',
-
-                theme:'Cashflow™',
-
-                description:'Focus on income-generating activities.'
-
-            },
-
-            {
-
-                day:'Saturday',
-
-                icon:'🌱',
-
-                theme:'Contribution™',
-
-                description:'Serve, mentor and create positive impact.'
-
-            },
-
-            {
-
-                day:'Sunday',
-
-                icon:'🪞',
-
-                theme:'Reflection™',
-
-                description:'Evaluate progress and prepare for the next week.'
-
-            }
-
-        ];
-
-
-
-        schedule.forEach(
-
-            item=>{
-
-                const card =
-
-                    document.createElement(
-
-                        'article'
-
-                    );
-
-
-
-                card.className =
-
-                    'day-card';
-
-
-
-                card.innerHTML =
-
-                `
-
-                <div class="day-name">
-
-                    ${item.icon} ${item.day}
-
-                </div>
-
-
-
-                <div class="day-theme">
-
-                    ${item.theme}
-
-                </div>
-
-
-
-                <p class="day-description">
-
-                    ${item.description}
-
-                </p>
-
-                `;
-
-
-
-                container.appendChild(
-
-                    card
-
-                );
-
-
-
-            }
-
-        );
-
-    }
-
-    /*=========================================================================
-        SUCCESS DECLARATION™
-
-    =========================================================================*/
-
-    function generateSuccessDeclaration(){
-
-        const declaration =
-
-            document.getElementById(
-
-                'successDeclaration'
-
-            );
-
-
-
-        declaration.textContent =
-
-`
-
-I choose to become the architect of my future rather than a spectator of my circumstances.
-
-For the next ninety days, I will consistently follow my personalized CTM PATH™ Prescription™, strengthen my highest-priority life pillars, and take disciplined action every day.
-
-I understand that lasting transformation is created through small, consistent improvements rather than occasional extraordinary efforts.
-
-Today I commit myself to continuous growth, meaningful contribution, financial freedom, and a balanced life.
-
-My transformation begins now.
-
-`;
-
-    }
-
-
-
-    /*=========================================================================
-        EVENTS
-
-    =========================================================================*/
-
-    function bindEvents(){
-
-        const button =
-
-            document.getElementById(
-
-                'btnBeginJourney'
-
-            );
-
-
-
-        if(
-
-            !button
-
-        ){
-
-            return;
-
-        }
-
-
-
-        button.addEventListener(
-
-            'click',
-
-            function(){
-
-                CTM.router.go(
-
-                    'completion'
-
-                );
-
-            }
-
-        );
-
-    }
-
-
-
-    /*=========================================================================
-        BUILD REPORT
-
-    =========================================================================*/
-
-    function buildPrescription(){
-
-        generatePriorities();
-
-        generateRoadmap();
-
-        generateMonthlyMilestones();
-
-        generateDailyHabits();
-
-        generateWeeklyRhythm();
-
-        generateSuccessDeclaration();
-
-    }
-
-
-
-    /*=========================================================================
-        INITIALIZATION PIPELINE
-
-    =========================================================================*/
-
-    function initializeReport(){
-
-        populateSummary();
-
-        generateTransformationSummary();
-
-        buildPrescription();
+        renderPrescription();
 
         bindEvents();
 
+
+        console.info(
+
+            "Prescription Engine Ready."
+
+        );
+
     }
 
 
 
-    /*=========================================================================
-        INITIALIZE
+    /* ======================================================================
+       CACHE DOM
+       ====================================================================== */
 
-    =========================================================================*/
+    function cacheDom(){
 
-    function init(){
+        currentScore =
 
-        loadResults();
+            document.getElementById(
 
+                "currentScore"
+
+            );
+
+
+        focusArea =
+
+            document.getElementById(
+
+                "focusArea"
+
+            );
+
+
+        actionCount =
+
+            document.getElementById(
+
+                "actionCount"
+
+            );
+
+
+        journeyStatus =
+
+            document.getElementById(
+
+                "journeyStatus"
+
+            );
+
+
+        dailyPractices =
+
+            document.getElementById(
+
+                "dailyPractices"
+
+            );
+
+
+        weeklyPractices =
+
+            document.getElementById(
+
+                "weeklyPractices"
+
+            );
+
+
+        monthlyPlan =
+
+            document.getElementById(
+
+                "monthlyPlan"
+
+            );
+
+
+        prioritySpokes =
+
+            document.getElementById(
+
+                "prioritySpokes"
+
+            );
+
+
+        commitmentText =
+
+            document.getElementById(
+
+                "commitmentText"
+
+            );
+
+
+        continueButton =
+
+            document.getElementById(
+
+                "continueButton"
+
+            );
+
+
+        backButton =
+
+            document.getElementById(
+
+                "backButton"
+
+            );
+
+    }
+
+
+
+    /* ======================================================================
+       LOAD STATE
+       ====================================================================== */
+
+    function loadState(){
+
+        visitor =
+
+            App.getVisitor();
+
+
+        assessment =
+
+            App.getAssessment();
+
+
+        diagnosis =
+
+            assessment.diagnosis || {};
+
+    }
+
+
+
+    /* ======================================================================
+       Continue in Batch 2/n
+       ====================================================================== */
+
+})();
+
+
+/* ==========================================================================
+   PRESCRIPTION GENERATION ENGINE
+   ========================================================================== */
+
+function generatePrescription(){
+
+    const weakest =
+
+        diagnosis.weakest || [];
+
+
+    prescription = {
+
+        score :
+
+            assessment.overallPercentage || 0,
+
+
+        focus :
+
+            weakest.length
+
+                ? weakest[
+
+                    weakest.length - 1
+
+                  ]
+
+                : null,
+
+
+        daily :
+
+            generateDailyPractices(
+
+                weakest
+
+            ),
+
+
+        weekly :
+
+            generateWeeklyPractices(
+
+                weakest
+
+            ),
+
+
+        monthly :
+
+            generateMonthlyPlan(
+
+                weakest
+
+            ),
+
+
+        priorities :
+
+            weakest,
+
+
+        commitment :
+
+            generateCommitment()
+
+    };
+
+
+    assessment.prescription =
+
+        prescription;
+
+
+    App.setAssessment(
+
+        assessment
+
+    );
+
+}
+
+
+/* ==========================================================================
+   DAILY PRACTICES
+   ========================================================================== */
+
+function generateDailyPractices(
+
+    priorityAreas
+
+){
+
+    const practices = [];
+
+
+    priorityAreas.forEach(
+
+        ([pillar]) => {
+
+
+            practices.push({
+
+                title :
+
+                    "Daily Practice: " +
+
+                    prettifyKey(
+
+                        pillar
+
+                    ),
+
+
+                description :
+
+                    "Spend intentional time each day strengthening your " +
+
+                    prettifyKey(
+
+                        pillar
+
+                    ) +
+
+                    " through small consistent actions."
+
+            });
+
+
+        }
+
+    );
+
+
+    return practices.slice(
+
+        0,
+
+        3
+
+    );
+
+}
+
+
+/* ==========================================================================
+   WEEKLY PRACTICES
+   ========================================================================== */
+
+function generateWeeklyPractices(
+
+    priorityAreas
+
+){
+
+    const practices = [];
+
+
+    priorityAreas.forEach(
+
+        ([pillar]) => {
+
+
+            practices.push({
+
+                title :
+
+                    "Weekly Reflection: " +
+
+                    prettifyKey(
+
+                        pillar
+
+                    ),
+
+
+                description :
+
+                    "Review your progress and identify one improvement action for your " +
+
+                    prettifyKey(
+
+                        pillar
+
+                    ) +
+
+                    "."
+
+            });
+
+
+        }
+
+    );
+
+
+    return practices.slice(
+
+        0,
+
+        3
+
+    );
+
+}
+
+
+/* ==========================================================================
+   MONTHLY PLAN
+   ========================================================================== */
+
+function generateMonthlyPlan(
+
+    priorityAreas
+
+){
+
+    return priorityAreas.map(
+
+        ([pillar]) => ({
+
+
+            title :
+
+                "Monthly Growth Focus: " +
+
+                prettifyKey(
+
+                    pillar
+
+                ),
+
+
+            description :
+
+                "Create a measurable improvement goal and track your progress."
+
+        })
+
+    );
+
+}
+
+
+/* ==========================================================================
+   COMMITMENT
+   ========================================================================== */
+
+function generateCommitment(){
+
+    return `
+
+    I commit to becoming the best version of myself
+
+    by taking consistent action,
+
+    strengthening my Kala Chakra™
+
+    and creating a meaningful life.
+
+    `;
+
+}
+
+
+/* ==========================================================================
+   Continue in Batch 3/n
+   ========================================================================== */
+
+
+/* ==========================================================================
+   RENDER ENGINE
+   ========================================================================== */
+
+function renderPrescription(){
+
+    renderSummary();
+
+    renderDailyPractices();
+
+    renderWeeklyPractices();
+
+    renderMonthlyPlan();
+
+    renderPrioritySpokes();
+
+    renderCommitment();
+
+}
+
+
+/* ==========================================================================
+   SUMMARY RENDERER
+   ========================================================================== */
+
+function renderSummary(){
+
+    currentScore.textContent =
+
+        prescription.score +
+
+        "%";
+
+
+    if(
+
+        prescription.focus
+
+    ){
+
+        focusArea.textContent =
+
+            prettifyKey(
+
+                prescription.focus[0]
+
+            );
+
+    }
+
+
+    actionCount.textContent =
+
+        (
+
+            prescription.daily.length +
+
+            prescription.weekly.length +
+
+            prescription.monthly.length
+
+        );
+
+
+    journeyStatus.textContent =
+
+        "Transformation Ready";
+
+}
+
+
+/* ==========================================================================
+   DAILY PRACTICES RENDERER
+   ========================================================================== */
+
+function renderDailyPractices(){
+
+    dailyPractices.innerHTML = "";
+
+
+    prescription.daily.forEach(
+
+        practice => {
+
+
+            dailyPractices.appendChild(
+
+                createPracticeItem(
+
+                    practice
+
+                )
+
+            );
+
+
+        }
+
+    );
+
+}
+
+
+/* ==========================================================================
+   WEEKLY PRACTICES RENDERER
+   ========================================================================== */
+
+function renderWeeklyPractices(){
+
+    weeklyPractices.innerHTML = "";
+
+
+    prescription.weekly.forEach(
+
+        practice => {
+
+
+            weeklyPractices.appendChild(
+
+                createPracticeItem(
+
+                    practice
+
+                )
+
+            );
+
+
+        }
+
+    );
+
+}
+
+
+/* ==========================================================================
+   MONTHLY PLAN RENDERER
+   ========================================================================== */
+
+function renderMonthlyPlan(){
+
+    monthlyPlan.innerHTML = "";
+
+
+    prescription.monthly.forEach(
+
+        plan => {
+
+
+            monthlyPlan.appendChild(
+
+                createPracticeItem(
+
+                    plan
+
+                )
+
+            );
+
+
+        }
+
+    );
+
+}
+
+
+/* ==========================================================================
+   GENERIC PRACTICE CARD
+   ========================================================================== */
+
+function createPracticeItem(
+
+    item
+
+){
+
+    const card =
+
+        document.createElement(
+
+            "div"
+
+        );
+
+
+    card.className =
+
+        "practice-item";
+
+
+    card.innerHTML =
+
+    `
+
+        <h4>
+
+            ${item.title}
+
+        </h4>
+
+
+        <p>
+
+            ${item.description}
+
+        </p>
+
+    `;
+
+
+    return card;
+
+}
+
+
+/* ==========================================================================
+   Continue in Batch 4/n
+   ========================================================================== */
+
+
+/* ==========================================================================
+   PRIORITY SPOKES RENDERER
+   ========================================================================== */
+
+function renderPrioritySpokes(){
+
+    prioritySpokes.innerHTML = "";
+
+
+    prescription.priorities.forEach(
+
+        ([pillar,score]) => {
+
+
+            const card =
+
+                document.createElement(
+
+                    "div"
+
+                );
+
+
+            card.className =
+
+                "priority-item";
+
+
+            card.innerHTML =
+
+            `
+
+                <div class="priority-title">
+
+                    ${prettifyKey(pillar)}
+
+                </div>
+
+
+                <div>
+
+                    Current Score:
+
+                    ${score}%
+
+                </div>
+
+            `;
+
+
+            prioritySpokes.appendChild(
+
+                card
+
+            );
+
+
+        }
+
+    );
+
+}
+
+
+/* ==========================================================================
+   COMMITMENT RENDERER
+   ========================================================================== */
+
+function renderCommitment(){
+
+    commitmentText.textContent =
+
+        prescription.commitment;
+
+}
+
+
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
+
+function bindEvents(){
+
+    backButton.addEventListener(
+
+        "click",
+
+        goBack
+
+    );
+
+
+    continueButton.addEventListener(
+
+        "click",
+
+        completeJourney
+
+    );
+
+}
+
+
+/* ==========================================================================
+   BACK TO DIAGNOSIS
+   ========================================================================== */
+
+function goBack(){
+
+    Router.navigate(
+
+        "diagnosis"
+
+    );
+
+}
+
+
+/* ==========================================================================
+   COMPLETE JOURNEY
+   ========================================================================== */
+
+async function completeJourney(){
+
+    try{
+
+
+        await savePrescription();
+
+
+        Router.navigate(
+
+            "completion"
+
+        );
+
+
+    }
+
+    catch(error){
+
+
+        handlePrescriptionError(
+
+            error,
+
+            "Unable to complete journey."
+
+        );
+
+
+    }
+
+}
+
+
+/* ==========================================================================
+   SAVE PRESCRIPTION
+   ========================================================================== */
+
+async function savePrescription(){
+
+
+    assessment.prescriptionGenerated =
+
+        true;
+
+
+    assessment.prescriptionGeneratedAt =
+
+        new Date().toISOString();
+
+
+    App.setAssessment(
+
+        assessment
+
+    );
+
+
+    Storage.saveAssessment(
+
+        assessment
+
+    );
+
+
+    await ApiService.safeRequest(
+
+        () =>
+
+            ApiService.savePrescription(
+
+                visitor.visitorId,
+
+                prescription
+
+            )
+
+    );
+
+
+}
+
+
+/* ==========================================================================
+   Continue in Batch 5/n
+   ========================================================================== */
+
+
+/* ==========================================================================
+   VALIDATION ENGINE
+   ========================================================================== */
+
+function validateState(){
+
+    if(
+
+        !visitor
+
+    ){
+
+        Router.navigate(
+
+            "registration"
+
+        );
+
+        return false;
+
+    }
+
+
+    if(
+
+        !assessment
+
+    ){
+
+        Router.navigate(
+
+            "assessment"
+
+        );
+
+        return false;
+
+    }
+
+
+    if(
+
+        !diagnosis
+
+    ){
+
+        Router.navigate(
+
+            "diagnosis"
+
+        );
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+/* ==========================================================================
+   RECOVERY ENGINE
+   ========================================================================== */
+
+function recoverPrescription(){
+
+    try{
+
+
+        loadState();
+
+
+        generatePrescription();
+
+
+        renderPrescription();
+
+
+
+    }
+
+    catch(error){
+
+
+        handlePrescriptionError(
+
+            error,
+
+            "Unable to recover Prescription™."
+
+        );
+
+
+    }
+
+}
+
+
+/* ==========================================================================
+   ERROR HANDLER
+   ========================================================================== */
+
+function handlePrescriptionError(
+
+    error,
+
+    message
+
+){
+
+    console.error(
+
+        message,
+
+        error
+
+    );
+
+
+    alert(
+
+        message +
+
+        "\n\nPlease try again."
+
+    );
+
+}
+
+
+/* ==========================================================================
+   WINDOW STATE EVENTS
+   ========================================================================== */
+
+window.addEventListener(
+
+    "beforeunload",
+
+    () => {
+
+
+        Storage.saveAssessment(
+
+            assessment
+
+        );
+
+
+    }
+
+);
+
+
+document.addEventListener(
+
+    "visibilitychange",
+
+    () => {
 
 
         if(
 
-            !state.result
+            document.hidden
 
         ){
 
-            return;
+
+            Storage.saveAssessment(
+
+                assessment
+
+            );
+
 
         }
 
 
-
-        initializeReport();
-
     }
 
+);
 
 
-    /*=========================================================================
-        PUBLIC API
+/* ==========================================================================
+   PUBLIC CONTROLLER API
+   ========================================================================== */
 
-    =========================================================================*/
+return {
 
-    return{
+    init,
 
-        init
+    renderPrescription,
 
-    };
+    generatePrescription,
 
+    recoverPrescription
+
+};
 
 
 })();
 
 
 
-/*=============================================================================
+/* ==========================================================================
+   APPLICATION BOOTSTRAP
+   ========================================================================== */
 
-    END OF FILE
+document.addEventListener(
 
-=============================================================================*/
+    "DOMContentLoaded",
+
+    bootstrapPrescription
+
+);
+
+
+
+function bootstrapPrescription(){
+
+
+    try{
+
+
+        if(
+
+            !validateRepository()
+
+        ){
+
+
+            throw new Error(
+
+                "Assessment Repository unavailable."
+
+            );
+
+
+        }
+
+
+        PrescriptionPage.init();
+
+
+
+    }
+
+    catch(error){
+
+
+        console.error(
+
+            error
+
+        );
+
+
+        alert(
+
+            "Unable to initialise Prescription™."
+
+        );
+
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   DEVELOPMENT EXPORTS
+   ========================================================================== */
+
+window.PrescriptionPage =
+
+    PrescriptionPage;
+
+
+
+const PrescriptionDebug = Object.freeze({
+
+    visitor : () =>
+
+        visitor,
+
+
+    assessment : () =>
+
+        assessment,
+
+
+    diagnosis : () =>
+
+        diagnosis,
+
+
+    prescription : () =>
+
+        prescription
+
+
+});
+
+
+window.PrescriptionDebug =
+
+    PrescriptionDebug;
+
+
+/* ==========================================================================
+   ENGINE GUARANTEES
+
+   ✓ Converts Diagnosis™ into Action Plan
+
+   ✓ Generates Daily Practices™
+
+   ✓ Generates Weekly Practices™
+
+   ✓ Generates Monthly Plan™
+
+   ✓ Displays Priority Spokes™
+
+   ✓ Stores Prescription State
+
+   ✓ Preserves Visitor Journey
+
+   ✓ Supports Recovery
+
+   ✓ Hands off to Completion™
+
+   ✓ No Assessment Logic
+
+   ✓ No Diagnosis Logic
+
+   ✓ No API Ownership
+
+   ========================================================================== */
+
+
+/* ==========================================================================
+   FINAL LOCK
+
+   File
+
+       prescription.js
+
+
+   Version
+
+       1.0
+
+
+   Status
+
+       🔒 LOCKED
+
+
+   Module
+
+       Prescription™ Behaviour Engine
+
+
+   Dependencies
+
+       app.js
+
+       storage.js
+
+       api.js
+
+       router.js
+
+
+   ========================================================================== */
+
+
