@@ -24,14 +24,12 @@
         RESPONSIBILITIES
 
         • Collect Visitor Information
-        • Prepare Registration Data
+        • Register Visitor
         • Continue Journey
 
         NOTE
 
-        No business logic belongs here.
-
-        Logic belongs to:
+        Business logic belongs to:
 
         registration.js
 
@@ -55,28 +53,19 @@
 
 
     <!--==================================================
-        CSS
+        Stylesheets
     ==================================================-->
 
-    <link
-        rel="stylesheet"
-        href="../css/reset.css">
+    <link rel="stylesheet" href="../css/reset.css">
 
-    <link
-        rel="stylesheet"
-        href="../css/tokens.css">
+    <link rel="stylesheet" href="../css/tokens.css">
 
-    <link
-        rel="stylesheet"
-        href="../css/base.css">
+    <link rel="stylesheet" href="../css/base.css">
 
-    <link
-        rel="stylesheet"
-        href="../css/app.css">
+    <link rel="stylesheet" href="../css/app.css">
 
-    <link
-        rel="stylesheet"
-        href="../css/registration.css">
+    <link rel="stylesheet" href="../css/registration.css">
+
 
 </head>
 
@@ -87,29 +76,402 @@
 <main class="registration-page">
 
 
-    <section class="registration-hero">
+    <div class="registration-background"></div>
 
 
-        <div class="registration-background"></div>
+    <section class="registration-container">
 
 
-        <div class="registration-container">
+        <article class="registration-card">
 
 
-            <div class="registration-card">
+            <!--==========================================
+                Premium Brand Header
+            ===========================================-->
+
+
+            <header class="brand-header">
+
+
+                <div class="brand-label">
+
+
+                    <div class="brand-title">
+
+
+                        <span class="brand-icon">
+
+                            ✦
+
+                        </span>
+
+
+                        <span class="brand-name">
+
+                            CTM PATH™
+
+                        </span>
+
+
+                        <span class="brand-icon">
+
+                            ✦
+
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="brand-tagline">
+
+                        வாழ்வாங்கு வாழ்ந்திட வாரீர்!
+
+                    </div>
+
+
+                    <div class="brand-subtitle">
+
+                        JOURNEY TO LIVING™
+
+                    </div>
+
+
+                </div>
+
+
+            </header>
+
+
+            <!--==========================================
+                Hero Section
+            ===========================================-->
+
+
+            <header class="hero-header">
+
+
+                <h1 class="hero-title">
+
+                    உங்களை அறிந்துகொள்வோம்
+
+                </h1>
+
+
+                <h2 class="hero-title-en">
+
+                    Let's Get to Know You
+
+                </h2>
+
+
+                <p class="hero-description">
+
+                    உங்கள் பயணம் உங்களுக்கே உரியதாக அமைய,
+                    சில அடிப்படை தகவல்கள் மட்டும் தேவை.
+
+                </p>
+
+
+                <p class="hero-description-en">
+
+                    To personalize your journey,
+                    we'd like to know a little about you.
+
+                </p>
+
+
+            </header>
+
+
+            <!--==========================================
+                Registration Form
+            ===========================================-->
+
+
+            <form
+
+                id="registrationForm"
+
+                class="registration-form"
+
+                autocomplete="off"
+
+
+            >
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+
+                        <label for="fullName">
+
+                            <span class="label-ta">
+
+                                உங்கள் பெயர்
+
+                            </span>
+
+                            <span class="label-en">
+
+                                Your Name
+
+                            </span>
+
+                        </label>
+
+
+                        <input
+
+                            id="fullName"
+
+                            name="fullName"
+
+                            type="text"
+
+                            maxlength="100"
+
+                            placeholder="Enter your full name"
+
+                            autocomplete="name"
+
+                            required>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+
+                        <label for="mobile">
+
+                            <span class="label-ta">
+
+                                வாட்ஸ்அப் எண்
+
+                            </span>
+
+                            <span class="label-en">
+
+                                WhatsApp Number
+
+                            </span>
+
+                        </label>
+
+
+                        <input
+
+                            id="mobile"
+
+                            name="mobile"
+
+                            type="tel"
+
+                            maxlength="15"
+
+                            placeholder="+91 XXXXX XXXXX"
+
+                            autocomplete="tel"
+
+                            required>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+
+                        <label for="email">
+
+                            <span class="label-ta">
+
+                                மின்னஞ்சல் முகவரி
+
+                            </span>
+
+                            <span class="label-en">
+
+                                Email Address
+
+                            </span>
+
+                        </label>
+
+
+                        <input
+
+                            id="email"
+
+                            name="email"
+
+                            type="email"
+
+                            placeholder="your@email.com"
+
+                            autocomplete="email">
+
+                    </div>
+
+                                        <div class="form-group">
+
+
+                        <label for="district">
+
+                            <span class="label-ta">
+
+                                மாவட்டம்
+
+                            </span>
+
+                            <span class="label-en">
+
+                                District
+
+                            </span>
+
+                        </label>
+
+
+                        <input
+
+                            id="district"
+
+                            name="district"
+
+                            type="text"
+
+                            maxlength="100"
+
+                            placeholder="Your District"
+
+                            autocomplete="address-level2"
+
+                            required>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+
+                        <label for="state">
+
+                            <span class="label-ta">
+
+                                மாநிலம்
+
+                            </span>
+
+                            <span class="label-en">
+
+                                State
+
+                            </span>
+
+                        </label>
+
+
+                        <input
+
+                            id="state"
+
+                            name="state"
+
+                            type="text"
+
+                            maxlength="100"
+
+                            placeholder="Your State"
+
+                            autocomplete="address-level1"
+
+                            required>
+
+                    </div>
+
+
+                </div>
+
 
 
                 <!--==========================================
-                    Brand
+                    Primary Action
                 ===========================================-->
 
 
-                <div class="brand-header">
+                <div class="cta-section">
 
 
-                    <p class="brand-label">
+                    <button
 
-                        CTM PATH™
+                        id="continueJourney"
+
+                        type="submit"
+
+                        class="primary-button">
+
+
+                        <span class="button-ta">
+
+                            என் பயணத்தை தொடர்கிறேன்
+
+                        </span>
+
+
+                        <span class="button-en">
+
+                            CONTINUE MY JOURNEY
+
+                        </span>
+
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+
+            <!--==========================================
+                Privacy Panel
+            ===========================================-->
+
+
+            <aside class="privacy-card">
+
+
+                <div class="privacy-icon">
+
+                    🔒
+
+                </div>
+
+
+                <div class="privacy-content">
+
+
+                    <p class="privacy-ta">
+
+                        உங்கள் தனிப்பட்ட தகவல்கள் முழுமையாக பாதுகாக்கப்படும்.
+                        அவை உங்கள் வாழ்க்கைப் பயணத்தை தனிப்பயனாக்குவதற்காக மட்டுமே பயன்படுத்தப்படும்.
+
+                    </p>
+
+
+                    <p class="privacy-en">
+
+                        Your personal information is encrypted, secure and completely confidential.
+                        It is used only to personalise your CTM PATH™ journey.
 
                     </p>
 
@@ -117,339 +479,10 @@
                 </div>
 
 
-                <!--==========================================
-                    Hero
-                ===========================================-->
+            </aside>
 
 
-                <header class="hero-header">
-
-
-                    <h1 class="hero-title">
-
-                        உங்களை அறிந்துகொள்வோம்
-
-                    </h1>
-
-
-                    <h2 class="hero-title-en">
-
-                        Let's Get to Know You
-
-                    </h2>
-
-
-                    <p class="hero-description">
-
-                        உங்கள் பயணம் உங்களுக்கே உரியதாக அமைய,
-                        சில அடிப்படை தகவல்கள் மட்டும் தேவை.
-
-                    </p>
-
-
-                    <p class="hero-description-en">
-
-                        To personalize your journey,
-                        we'd like to know a little about you.
-
-                    </p>
-
-
-                </header>
-
-
-                <!--==========================================
-                    Registration Form
-                ===========================================-->
-
-
-                <form
-
-                    id="registrationForm"
-
-                    class="registration-form"
-
-                    autocomplete="off"
-
-
-                >
-
-
-                    <div class="form-grid">
-
-
-                        <div class="form-group">
-
-
-                            <label for="fullName">
-
-                                <span class="label-ta">
-
-                                    உங்கள் பெயர்
-
-                                </span>
-
-                                <span class="label-en">
-
-                                    Your Name
-
-                                </span>
-
-                            </label>
-
-
-                            <input
-
-                                id="fullName"
-
-                                name="fullName"
-
-                                type="text"
-
-                                maxlength="100"
-
-                                placeholder="Enter your full name"
-
-                                required>
-
-                        </div>
-
-
-
-                        <div class="form-group">
-
-
-                            <label for="mobile">
-
-                                <span class="label-ta">
-
-                                    வாட்ஸ்அப் எண்
-
-                                </span>
-
-                                <span class="label-en">
-
-                                    WhatsApp Number
-
-                                </span>
-
-                            </label>
-
-
-                            <input
-
-                                id="mobile"
-
-                                name="mobile"
-
-                                type="tel"
-
-                                maxlength="15"
-
-                                placeholder="+91 XXXXX XXXXX"
-
-                                required>
-
-                        </div>
-
-
-
-                        <div class="form-group">
-
-
-                            <label for="email">
-
-                                <span class="label-ta">
-
-                                    மின்னஞ்சல் முகவரி
-
-                                </span>
-
-                                <span class="label-en">
-
-                                    Email Address
-
-                                </span>
-
-                            </label>
-
-
-                            <input
-
-                                id="email"
-
-                                name="email"
-
-                                type="email"
-
-                                placeholder="your@email.com">
-
-                        </div>
-
-                                                <div class="form-group">
-
-
-                            <label for="district">
-
-                                <span class="label-ta">
-
-                                    மாவட்டம்
-
-                                </span>
-
-                                <span class="label-en">
-
-                                    District
-
-                                </span>
-
-                            </label>
-
-
-                            <input
-
-                                id="district"
-
-                                name="district"
-
-                                type="text"
-
-                                maxlength="100"
-
-                                placeholder="Your District"
-
-                                required>
-
-                        </div>
-
-
-
-                        <div class="form-group">
-
-
-                            <label for="state">
-
-                                <span class="label-ta">
-
-                                    மாநிலம்
-
-                                </span>
-
-                                <span class="label-en">
-
-                                    State
-
-                                </span>
-
-                            </label>
-
-
-                            <input
-
-                                id="state"
-
-                                name="state"
-
-                                type="text"
-
-                                maxlength="100"
-
-                                placeholder="Your State"
-
-                                required>
-
-                        </div>
-
-
-                    </div>
-
-
-
-                    <!--==========================================
-                        Primary Action
-                    ===========================================-->
-
-
-                    <div class="cta-section">
-
-
-                        <button
-
-                            id="continueJourney"
-
-                            type="submit"
-
-                            class="primary-button">
-
-
-                            <span class="button-ta">
-
-                                என் பயணத்தை தொடர்கிறேன்
-
-                            </span>
-
-
-                            <span class="button-en">
-
-                                CONTINUE MY JOURNEY
-
-                            </span>
-
-
-                        </button>
-
-
-                    </div>
-
-
-                </form>
-
-
-
-                <!--==========================================
-                    Privacy Notice
-                ===========================================-->
-
-
-                <aside class="privacy-card">
-
-
-                    <div class="privacy-icon">
-
-                        🔒
-
-                    </div>
-
-
-                    <div class="privacy-content">
-
-
-                        <p class="privacy-ta">
-
-                            உங்கள் தனிப்பட்ட தகவல்கள் முழுமையாக பாதுகாக்கப்படும்.
-                            அவை உங்கள் பயணத்தை மேம்படுத்த மட்டுமே பயன்படுத்தப்படும்.
-
-                        </p>
-
-
-                        <p class="privacy-en">
-
-                            Your personal information is kept secure and confidential.
-                            It will only be used to personalize your journey.
-
-                        </p>
-
-
-                    </div>
-
-
-                </aside>
-
-
-            </div>
-
-
-        </div>
+        </article>
 
 
     </section>
@@ -461,7 +494,7 @@
 
 <!--==================================================
     Core JavaScript
-==================================================-->
+===================================================-->
 
 
 <script src="../js/storage.js"></script>
@@ -478,4 +511,3 @@
 </body>
 
 </html>
-
