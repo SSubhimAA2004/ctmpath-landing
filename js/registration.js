@@ -1,1113 +1,323 @@
 
-/*=============================================================================
+/* ==========================================================================
+   CTM PATH™ Guided Journey v2.0
+   File        : registration.js
+   Version     : 2.0
+   Status      : 🔒 LOCKED
+   Purpose     : Registration Page Controller
 
-    CTM PATH™
+                  Owns
+                  • Registration Form
+                  • Client-side Validation
+                  • Visitor Object Creation
+                  • Storage
+                  • Registration API
+                  • Navigation
 
-    FROM SURVIVAL TO LIVING™
-
-    FILE
-
-    registration.js
-
-    PURPOSE
-
-    Screen 02 Controller
-
-    RESPONSIBILITIES
-
-    • Validate Registration Form
-    • Register Visitor
-    • Save Visitor Session
-    • Continue Journey
-
-=============================================================================*/
-
+                  Owns NO
+                  • Assessment Logic
+                  • Diagnosis
+                  • Prescription
+   ========================================================================== */
 
 'use strict';
 
+/* ==========================================================================
+   REGISTRATION CONTROLLER
+   ========================================================================== */
 
+const RegistrationPage = (() => {
 
+    /* ======================================================================
+       ELEMENTS
+       ====================================================================== */
 
-/*=============================================================================
-    GLOBAL NAMESPACE
-=============================================================================*/
+    let form;
 
+    let fullName;
 
-window.CTM = window.CTM || {};
+    let mobile;
 
+    let email;
 
+    let district;
 
+    let state;
 
-/*=============================================================================
-    REGISTRATION MODULE
-=============================================================================*/
+    let language;
 
+    let referralSource;
 
-CTM.registration = (function(){
+    let privacyConsent;
 
+    let backButton;
 
+    /* ======================================================================
+       INITIALIZE
+       ====================================================================== */
 
-    /*=========================================================================
-        MODULE VARIABLES
-    =========================================================================*/
+    function cacheDom() {
 
+        form = document.getElementById('registrationForm');
 
-    let registrationForm = null;
+        fullName = document.getElementById('fullName');
 
-    let submitButton = null;
+        mobile = document.getElementById('mobile');
 
-    let isSubmitting = false;
+        email = document.getElementById('email');
 
+        district = document.getElementById('district');
 
+        state = document.getElementById('state');
 
+        language = document.getElementById('language');
 
+        referralSource = document.getElementById('referralSource');
 
-    /*=========================================================================
-        INITIALIZE
-    =========================================================================*/
+        privacyConsent = document.getElementById('privacyConsent');
 
+        backButton = document.getElementById('backButton');
 
-    function init(){
+    }
 
+    /* ======================================================================
+       EVENTS
+       ====================================================================== */
 
-        registrationForm =
+    function bindEvents() {
 
-            document.getElementById(
-
-                'registrationForm'
-
-            );
-
-
-
-        submitButton =
-
-            document.getElementById(
-
-                'continueJourney'
-
-            );
-
-
-
-        if(
-
-            !registrationForm ||
-
-            !submitButton
-
-        ){
-
-            console.error(
-
-                'Registration form not found.'
-
-            );
-
-            return;
-
-        }
-
-
-
-        initializeValidation();
-
-
-
-        registrationForm.addEventListener(
+        form.addEventListener(
 
             'submit',
 
-            submitForm
+            submitRegistration
 
         );
 
+        backButton.addEventListener(
 
+            'click',
 
-        console.log(
-
-            'CTM Registration Ready'
-
-        );
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        INITIALIZE VALIDATION
-    =========================================================================*/
-
-
-    function initializeValidation(){
-
-
-        const fields =
-
-            registrationForm.querySelectorAll(
-
-                'input'
-
-            );
-
-
-
-        fields.forEach(
-
-            function(field){
-
-
-                field.addEventListener(
-
-                    'blur',
-
-                    function(){
-
-                        validateField(
-
-                            field
-
-                        );
-
-                    }
-
-                );
-
-
-
-                field.addEventListener(
-
-                    'input',
-
-                    function(){
-
-                        clearValidation(
-
-                            field
-
-                        );
-
-                    }
-
-                );
-
-
-            }
+            () => Router.previous()
 
         );
 
     }
 
-                        /*=========================================================================
-        SUBMIT FORM
-    =========================================================================*/
+    /* ======================================================================
+       VALIDATION
+       ====================================================================== */
 
+    function validate() {
 
-    async function submitForm(event){
+        if (fullName.value.trim() === '') {
 
-
-        event.preventDefault();
-
-
-
-        if(
-
-            isSubmitting
-
-        ){
-
-            return;
-
-        }
-
-
-
-        if(
-
-            !validateForm()
-
-        ){
-
-            return;
-
-        }
-
-
-
-        isSubmitting = true;
-
-
-
-        setLoadingState(
-
-            true
-
-        );
-
-
-
-        try{
-
-
-
-            const visitor =
-
-                collectFormData();
-
-
-
-
-            /*--------------------------------------------------
-                Register Visitor
-            --------------------------------------------------*/
-
-
-            const response =
-
-                await CTM.api.registerVisitor({
-
-                    emotion:
-
-                        visitor.initialEmotion,
-
-                    name:
-
-                        visitor.fullName,
-
-                    email:
-
-                        visitor.email,
-
-                    mobile:
-
-                        visitor.mobile,
-
-                    district:
-
-                        visitor.district,
-
-                    state:
-
-                        visitor.state,
-
-                    referralSource:
-
-                        'Website',
-
-                    language:
-
-                        'ta',
-
-                    device:
-
-                        visitor.device
-
-                });
-
-
-
-            if(
-
-                !response ||
-
-                !response.success
-
-            ){
-
-                throw new Error(
-
-                    response.message ||
-
-                    'Registration failed.'
-
-                );
-
-            }
-
-
-
-
-            /*--------------------------------------------------
-                Save Visitor Session
-            --------------------------------------------------*/
-
-
-            CTM.storage.setVisitorId(
-
-                response.visitorId
-
-            );
-
-
-
-            CTM.storage.updateVisitor({
-
-                visitorId:
-
-                    response.visitorId,
-
-                initialEmotion:
-
-                    visitor.initialEmotion,
-
-                name:
-
-                    visitor.fullName,
-
-                email:
-
-                    visitor.email,
-
-                mobile:
-
-                    visitor.mobile,
-
-                district:
-
-                    visitor.district,
-
-                state:
-
-                    visitor.state,
-
-                language:
-
-                    'ta',
-
-                device:
-
-                    visitor.device
-
-            });
-
-
-
-            CTM.storage.setCurrentPage(
-
-                'registration.html'
-
-            );
-
-
-
-            CTM.storage.setCompletionStatus(
-
-                'Registered'
-
-            );
-
-
-
-            if(
-
-                CTM.storage.getStartTime()
-
-            ){
-
-                CTM.storage.setStartTime(
-
-                    CTM.storage.getStartTime()
-
-                );
-
-            }
-
-
-
-            await new Promise(
-
-                function(resolve){
-
-                    setTimeout(
-
-                        resolve,
-
-                        600
-
-                    );
-
-                }
-
-            );
-
-
-
-            CTM.router.go(
-
-                'assessment'
-
-            );
-
-
-
-        }
-
-        catch(error){
-
-
-
-            console.error(
-
-                error
-
-            );
-
-
-
-            alert(
-
-                error.message ||
-
-                'Unable to continue your journey.'
-
-            );
-
-
-
-            setLoadingState(
-
-                false
-
-            );
-
-
-
-            isSubmitting = false;
-
-        }
-
-    }
-
-                        /*=========================================================================
-        COLLECT FORM DATA
-    =========================================================================*/
-
-
-    function collectFormData(){
-
-
-        return{
-
-            initialEmotion:
-
-                CTM.storage.getInitialEmotion(),
-
-
-            fullName:
-
-                document
-
-                    .getElementById(
-
-                        'fullName'
-
-                    )
-
-                    .value
-
-                    .trim(),
-
-
-            mobile:
-
-                document
-
-                    .getElementById(
-
-                        'mobile'
-
-                    )
-
-                    .value
-
-                    .trim(),
-
-
-            email:
-
-                document
-
-                    .getElementById(
-
-                        'email'
-
-                    )
-
-                    .value
-
-                    .trim(),
-
-
-            district:
-
-                document
-
-                    .getElementById(
-
-                        'district'
-
-                    )
-
-                    .value
-
-                    .trim(),
-
-
-            state:
-
-                document
-
-                    .getElementById(
-
-                        'state'
-
-                    )
-
-                    .value
-
-                    .trim(),
-
-
-            device:
-
-                detectDevice()
-
-        };
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        FORM VALIDATION
-    =========================================================================*/
-
-
-    function validateForm(){
-
-
-        const fields =
-
-            registrationForm.querySelectorAll(
-
-                'input[required]'
-
-            );
-
-
-
-        let valid = true;
-
-        let firstInvalid = null;
-
-
-
-        fields.forEach(
-
-            function(field){
-
-
-                if(
-
-                    !validateField(
-
-                        field
-
-                    )
-
-                ){
-
-                    valid = false;
-
-
-
-                    if(
-
-                        !firstInvalid
-
-                    ){
-
-                        firstInvalid =
-
-                            field;
-
-                    }
-
-                }
-
-
-            }
-
-        );
-
-
-
-        if(
-
-            firstInvalid
-
-        ){
-
-            firstInvalid.focus();
-
-            firstInvalid.scrollIntoView({
-
-                behavior:'smooth',
-
-                block:'center'
-
-            });
-
-        }
-
-
-
-        return valid;
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        VALIDATE FIELD
-    =========================================================================*/
-
-
-    function validateField(field){
-
-
-        const value =
-
-            field.value.trim();
-
-
-
-        if(
-
-            field.hasAttribute(
-
-                'required'
-
-            ) &&
-
-            value === ''
-
-        ){
-
-            showValidation(
-
-                field,
-
-                'This field is required.'
-
-            );
+            fullName.focus();
 
             return false;
 
         }
 
+        if (mobile.value.trim() === '') {
 
+            mobile.focus();
 
-        if(
-
-            field.type === 'email' &&
-
-            value !== ''
-
-        ){
-
-            const pattern =
-
-                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
-
-            if(
-
-                !pattern.test(
-
-                    value
-
-                )
-
-            ){
-
-                showValidation(
-
-                    field,
-
-                    'Please enter a valid email address.'
-
-                );
-
-                return false;
-
-            }
+            return false;
 
         }
 
+        if (email.value.trim() === '') {
 
+            email.focus();
 
-        if(
-
-            field.id === 'mobile'
-
-        ){
-
-            const digits =
-
-                value.replace(
-
-                    /\D/g,
-
-                    ''
-
-                );
-
-
-
-            if(
-
-                digits.length < 10
-
-            ){
-
-                showValidation(
-
-                    field,
-
-                    'Please enter a valid WhatsApp number.'
-
-                );
-
-                return false;
-
-            }
+            return false;
 
         }
 
+        if (district.value.trim() === '') {
 
+            district.focus();
 
-        clearValidation(
+            return false;
 
-            field
+        }
 
-        );
+        if (state.value.trim() === '') {
 
+            state.focus();
 
+            return false;
+
+        }
+
+        if (language.value === '') {
+
+            language.focus();
+
+            return false;
+
+        }
+
+        if (!privacyConsent.checked) {
+
+            privacyConsent.focus();
+
+            return false;
+
+        }
 
         return true;
 
     }
 
+    /* ======================================================================
+       VISITOR OBJECT
+       ====================================================================== */
 
+    function buildVisitor() {
 
+        return {
 
+            visitorId:
 
-    /*=========================================================================
-        SHOW VALIDATION
-    =========================================================================*/
+                crypto.randomUUID(),
 
+            registrationDate:
 
-    function showValidation(
+                new Date().toISOString(),
 
-        field,
+            fullName:
 
-        message
+                fullName.value.trim(),
 
-    ){
+            mobile:
 
+                mobile.value.trim(),
 
-        field.classList.add(
+            email:
 
-            'input-error'
+                email.value.trim(),
+
+            district:
+
+                district.value.trim(),
+
+            state:
+
+                state.value.trim(),
+
+            language:
+
+                language.value,
+
+            referralSource:
+
+                referralSource.value,
+
+            currentPage:
+
+                'registration',
+
+            completionStatus:
+
+                'REGISTERED'
+
+        };
+
+    }
+
+    /* ======================================================================
+       SUBMIT
+       ====================================================================== */
+
+    async function submitRegistration(event) {
+
+        event.preventDefault();
+
+        if (!validate()) {
+
+            return;
+
+        }
+
+        const visitor = buildVisitor();
+
+        App.setVisitor(visitor);
+
+        App.setJourneyStatus('REGISTERED');
+
+        const response = await ApiService.safeRequest(
+
+            () => ApiService.registerVisitor(visitor)
 
         );
 
+        if (!response.success) {
 
+            alert(
 
-        let feedback =
-
-            field.parentNode.querySelector(
-
-                '.validation-message'
+                'Unable to save your information.\nPlease try again.'
 
             );
 
-
-
-        if(
-
-            !feedback
-
-        ){
-
-            feedback =
-
-                document.createElement(
-
-                    'div'
-
-                );
-
-
-
-            feedback.className =
-
-                'validation-message';
-
-
-
-            field.parentNode.appendChild(
-
-                feedback
-
-            );
+            return;
 
         }
 
-
-
-        feedback.textContent =
-
-            message;
+        Router.next();
 
     }
 
-                        /*=========================================================================
-        CLEAR VALIDATION
-    =========================================================================*/
+    /* ======================================================================
+       INITIALIZE
+       ====================================================================== */
 
+    function init() {
 
-    function clearValidation(field){
+        cacheDom();
 
+        bindEvents();
 
-        field.classList.remove(
+        console.info(
 
-            'input-error'
+            'Registration Page Ready.'
 
         );
 
-
-
-        const feedback =
-
-            field.parentNode.querySelector(
-
-                '.validation-message'
-
-            );
-
-
-
-        if(
-
-            feedback
-
-        ){
-
-            feedback.remove();
-
-        }
-
     }
 
-
-
-
-
-    /*=========================================================================
-        LOADING STATE
-    =========================================================================*/
-
-
-    function setLoadingState(isLoading){
-
-
-        const fields =
-
-            registrationForm.querySelectorAll(
-
-                'input, button'
-
-            );
-
-
-
-        fields.forEach(
-
-            function(field){
-
-                field.disabled =
-
-                    isLoading;
-
-            }
-
-        );
-
-
-
-        if(
-
-            isLoading
-
-        ){
-
-            submitButton.dataset.original =
-
-                submitButton.innerHTML;
-
-
-
-            submitButton.innerHTML =
-
-                '<span class="button-ta">உங்கள் பயணம் தயார் செய்யப்படுகிறது...</span>' +
-
-                '<span class="button-en">PREPARING YOUR JOURNEY...</span>';
-
-
-
-            submitButton.classList.add(
-
-                'loading'
-
-            );
-
-        }
-
-        else{
-
-            if(
-
-                submitButton.dataset.original
-
-            ){
-
-                submitButton.innerHTML =
-
-                    submitButton.dataset.original;
-
-            }
-
-
-
-            submitButton.classList.remove(
-
-                'loading'
-
-            );
-
-        }
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        DEVICE DETECTION
-    =========================================================================*/
-
-
-    function detectDevice(){
-
-
-        const ua =
-
-            navigator.userAgent.toLowerCase();
-
-
-
-        if(
-
-            /mobile|android|iphone|ipad/.test(
-
-                ua
-
-            )
-
-        ){
-
-            return 'Mobile';
-
-        }
-
-
-
-        if(
-
-            /tablet/.test(
-
-                ua
-
-            )
-
-        ){
-
-            return 'Tablet';
-
-        }
-
-
-
-        return 'Desktop';
-
-    }
-
-
-
-
-
-    /*=========================================================================
-        PUBLIC API
-    =========================================================================*/
-
-
-    return{
+    /* ======================================================================
+       PUBLIC
+       ====================================================================== */
+
+    return {
 
         init
 
     };
 
-
-
 })();
 
-
-
-
-
-/*=============================================================================
-    APPLICATION START
-=============================================================================*/
-
+/* ==========================================================================
+   PAGE LOAD
+   ========================================================================== */
 
 document.addEventListener(
 
     'DOMContentLoaded',
 
-    function(){
+    () => {
 
-        CTM.registration.init();
+        RegistrationPage.init();
 
     }
 
 );
 
+/* ==========================================================================
+   End of File
 
+   File : registration.js
 
-
-
-/*=============================================================================
-
-    END OF FILE
-
-=============================================================================*/
+   Status : 🔒 LOCKED
+   ========================================================================== */
