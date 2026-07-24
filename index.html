@@ -1,39 +1,32 @@
 
 <!DOCTYPE html>
-<html lang="ta">
+<html lang="en">
 
 <head>
 
-    <!--
-    =====================================================================
+    <!-- ==========================================================
+         CTM PATH™ Guided Journey v2.0
 
-        CTM PATH™
-        FROM SURVIVAL TO LIVING™
+         File    : index.html
+         Version : 1.0
+         Status  : 🔒 LOCKED
 
-        FILE
+         Purpose:
+         Main Application Entry Point™
 
-        index.html
+         Responsibilities:
+         ✓ Load application shell
+         ✓ Load foundation styles
+         ✓ Mount journey container
+         ✓ Load core engines
+         ✓ Start CTM PATH™ application
 
-        PURPOSE
+         Does NOT:
+         ✗ Contain page-specific logic
+         ✗ Contain assessment logic
+         ✗ Contain diagnosis logic
 
-        Application Entry Point
-
-        RESPONSIBILITIES
-
-        • Load Global Styles
-        • Load Core JavaScript
-        • Start Application
-
-        NOTE
-
-        This file contains NO business logic.
-
-        Page navigation belongs to
-
-        router.js
-
-    =====================================================================
-    -->
+         ========================================================== -->
 
 
     <meta charset="UTF-8">
@@ -44,26 +37,29 @@
         content="width=device-width, initial-scale=1.0">
 
 
-    <title>
-
-        CTM PATH™ | From Survival to Living™
-
-    </title>
-
-
     <meta
         name="description"
-        content="CTM PATH™ guided journey from survival to living.">
+        content="CTM PATH™ Guided Journey">
 
 
     <meta
         name="theme-color"
-        content="#0B2149">
+        content="#081C3A">
 
 
-    <!--==================================================
-        Fonts
-    ==================================================-->
+
+    <title>
+
+        CTM PATH™ Guided Journey
+
+    </title>
+
+
+
+    <!-- ==========================================================
+         Typography
+         ========================================================== -->
+
 
     <link
         rel="preconnect"
@@ -77,13 +73,15 @@
 
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
 
-    <!--==================================================
-        Core CSS
-    ==================================================-->
+
+    <!-- ==========================================================
+         Foundation CSS
+         ========================================================== -->
+
 
     <link
         rel="stylesheet"
@@ -105,59 +103,113 @@
         href="css/app.css">
 
 
+
 </head>
+
 
 
 <body>
 
 
-    <!--==================================================
-        Application Bootstrap
 
-        No page rendering happens here.
-
-        Router controls page navigation.
-
-    ==================================================-->
+<!-- ==========================================================
+     Application Root
+     ========================================================== -->
 
 
-    <div
-        id="app">
+<div id="app">
+
+
+
+    <!-- ======================================================
+         Application Loading State
+
+         Replaced by router.js
+         ====================================================== -->
+
+
+    <div class="app-loader">
+
+
+        <div class="loader-symbol">
+
+
+            CTM PATH™
+
+
+        </div>
+
+
+
+        <p>
+
+
+            Loading Your Journey...
+
+
+        </p>
+
 
 
     </div>
 
-    <!--==================================================
-        Core JavaScript
-
-        Load Order
-
-        Storage
-            ↓
-        Router
-            ↓
-        Application Bootstrap
-
-    ==================================================-->
 
 
-    <script
-        src="js/storage.js">
-    </script>
+</div>
 
 
-    <script
-        src="js/router.js">
-    </script>
 
 
-    <script
-        src="js/app.js">
-    </script>
+<!-- ==========================================================
+     Core Application Scripts
+     ========================================================== -->
+
+
+<script src="js/storage.js"></script>
+
+
+<script src="js/api.js"></script>
+
+
+<script src="js/router.js"></script>
+
+
+<script src="js/app.js"></script>
+
+
+
+
+<!-- ==========================================================
+     Application Bootstrap
+     ========================================================== -->
+
+
+<script>
+
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    function(){
+
+
+        CTMApp.init();
+
+
+
+    }
+
+);
+
+
+</script>
+
 
 
 </body>
 
 
 </html>
+
 
