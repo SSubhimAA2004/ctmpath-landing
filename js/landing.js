@@ -17,20 +17,14 @@
 
     • Initialize Landing Page
     • Capture Life Outlook
+    • Enable Journey Button
     • Prepare Visitor Session
     • Navigate To Registration
-
-    NOTE
-
-    This file controls only
-
-    Screen 01 behaviour.
 
 =============================================================================*/
 
 
 'use strict';
-
 
 
 
@@ -45,13 +39,25 @@ window.CTM = window.CTM || {};
 
 
 
-
 /*=============================================================================
     LANDING MODULE
 =============================================================================*/
 
 
 CTM.landing = (function(){
+
+
+
+    /*=========================================================================
+        MODULE VARIABLES
+    =========================================================================*/
+
+
+    let beginButton = null;
+
+    let optionCards = [];
+
+    let selectedEmotion = null;
 
 
 
@@ -65,7 +71,7 @@ CTM.landing = (function(){
     function init(){
 
 
-        const button =
+        beginButton =
 
             document.getElementById(
 
@@ -75,97 +81,49 @@ CTM.landing = (function(){
 
 
 
-        const options =
+        optionCards =
 
-            document.querySelectorAll(
+            Array.from(
 
-                '.life-option'
+                document.querySelectorAll(
 
-            );
+                    '.life-option'
 
-
-
-        if(!button){
-
-
-            console.warn(
-
-                'Begin Journey button not found.'
+                )
 
             );
 
+
+
+        if(
+
+            !beginButton ||
+
+            optionCards.length === 0
+
+        ){
+
+            console.error(
+
+                'Landing page initialization failed.'
+
+            );
 
             return;
-
 
         }
 
 
 
-        options.forEach(function(option){
-
-
-            option.addEventListener(
-
-                'click',
-
-                function(){
-
-
-                    options.forEach(function(item){
-
-                        item.classList.remove(
-
-                            'selected'
-
-                        );
-
-                    });
+        initializeOptions();
 
 
 
-                    option.classList.add(
-
-                        'selected'
-
-                    );
+        beginButton.disabled = true;
 
 
 
-                    const emotion =
-
-                        option.dataset.emotion;
-
-
-
-                    if(
-
-                        CTM.storage &&
-
-                        CTM.storage.setInitialEmotion
-
-                    ){
-
-                        CTM.storage.setInitialEmotion(
-
-                            emotion
-
-                        );
-
-                    }
-
-
-                }
-
-            );
-
-
-        });
-
-
-
-
-        button.addEventListener(
+        beginButton.addEventListener(
 
             'click',
 
@@ -181,6 +139,145 @@ CTM.landing = (function(){
 
         );
 
+    }
+
+
+
+
+
+    /*=========================================================================
+        INITIALIZE OPTIONS
+    =========================================================================*/
+
+
+    function initializeOptions(){
+
+
+        optionCards.forEach(
+
+            function(card){
+
+
+                card.addEventListener(
+
+                    'click',
+
+                    function(){
+
+                        selectOption(
+
+                            card
+
+                        );
+
+                    }
+
+                );
+
+
+
+                card.addEventListener(
+
+                    'keypress',
+
+                    function(event){
+
+                        if(
+
+                            event.key === 'Enter' ||
+
+                            event.key === ' '
+
+                        ){
+
+                            event.preventDefault();
+
+                            selectOption(
+
+                                card
+
+                            );
+
+                        }
+
+                    }
+
+                );
+
+
+            }
+
+        );
+
+    }
+
+                   /*=========================================================================
+        SELECT OPTION
+    =========================================================================*/
+
+
+    function selectOption(card){
+
+
+        optionCards.forEach(
+
+            function(item){
+
+                item.classList.remove(
+
+                    'selected'
+
+                );
+
+            }
+
+        );
+
+
+
+        card.classList.add(
+
+            'selected'
+
+        );
+
+
+
+        selectedEmotion =
+
+            card.dataset.emotion;
+
+
+
+        /*--------------------------------------------------
+            Save Initial Emotion
+        --------------------------------------------------*/
+
+
+        if(
+
+            CTM.storage &&
+
+            CTM.storage.setInitialEmotion
+
+        ){
+
+            CTM.storage.setInitialEmotion(
+
+                selectedEmotion
+
+            );
+
+        }
+
+
+
+        /*--------------------------------------------------
+            Enable Begin Journey Button
+        --------------------------------------------------*/
+
+
+        beginButton.disabled = false;
 
     }
 
@@ -194,6 +291,17 @@ CTM.landing = (function(){
 
 
     function beginJourney(){
+
+
+        if(
+
+            !selectedEmotion
+
+        ){
+
+            return;
+
+        }
 
 
 
@@ -245,7 +353,7 @@ CTM.landing = (function(){
 
             CTM.storage.setCurrentPage(
 
-                'Screen01'
+                'landing.html'
 
             );
 
@@ -279,6 +387,39 @@ CTM.landing = (function(){
 
 
         /*--------------------------------------------------
+            Small Premium Delay
+        --------------------------------------------------*/
+
+
+        beginButton.disabled = true;
+
+        beginButton.innerHTML =
+
+            '<span class="button-ta">உங்கள் பயணம் தொடங்குகிறது...</span>' +
+
+            '<span class="button-en">STARTING YOUR JOURNEY...</span>';
+
+
+
+        setTimeout(
+
+            navigateToRegistration,
+
+            500
+
+        );
+
+    }
+
+                   /*=========================================================================
+        NAVIGATE TO REGISTRATION
+    =========================================================================*/
+
+
+    function navigateToRegistration(){
+
+
+        /*--------------------------------------------------
             Navigate
         --------------------------------------------------*/
 
@@ -298,7 +439,6 @@ CTM.landing = (function(){
             );
 
         }
-
 
     }
 
@@ -326,7 +466,7 @@ CTM.landing = (function(){
 
 
 /*=============================================================================
-    START
+    APPLICATION START
 =============================================================================*/
 
 
