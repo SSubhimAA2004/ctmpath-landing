@@ -25,6 +25,7 @@
 
         • Present CTM PATH™ Journey
         • Introduce Visitor
+        • Capture Visitor's Current Life Status
         • Start Journey Navigation
 
         NOTE
@@ -38,14 +39,11 @@
     =====================================================================
     -->
 
-
     <meta charset="UTF-8">
-
 
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0">
-
 
     <title>
 
@@ -53,164 +51,321 @@
 
     </title>
 
-
     <!--==================================================
         CSS
     ==================================================-->
-
 
     <link
         rel="stylesheet"
         href="../css/reset.css">
 
-
     <link
         rel="stylesheet"
         href="../css/tokens.css">
-
 
     <link
         rel="stylesheet"
         href="../css/base.css">
 
-
     <link
         rel="stylesheet"
         href="../css/app.css">
-
 
     <link
         rel="stylesheet"
         href="../css/landing.css">
 
-
 </head>
-
 
 <body>
 
-
-    <main
-        class="landing-page">
-
-
+    <main class="landing-page">
 
         <!--==================================================
             Hero Section
         ==================================================-->
 
+        <section class="landing-hero">
 
-        <section
-            class="landing-hero">
+            <div class="landing-container">
 
-
-
-            <div
-                class="landing-container">
-
-
-
-                <p
-                    class="brand-label">
+                <p class="brand-label">
 
                     CTM PATH™
 
                 </p>
 
+                <h1 class="hero-title">
 
-
-
-                <h1>
-
-                    வாழ்க்கையை
-
+                    வாழ்வாங்கு
                     <br>
-
-                    வாழத் தொடங்குங்கள்
+                    வாழ்ந்திட வாரீர்!
 
                 </h1>
 
+                <p class="hero-subtitle">
 
-
-
-                <p
-                    class="hero-subtitle">
-
-                    From Survival to Living™
+                    FROM SURVIVAL TO LIVING™
 
                 </p>
 
+                <div class="hero-introduction">
 
+                    <p class="intro-tamil">
 
+                        உங்கள் வாழ்க்கை
+                        தற்போது எந்த நிலையில் உள்ளது?
 
-                <p
-                    class="hero-description">
+                    </p>
 
-                    உங்கள் வாழ்க்கையின்
+                    <p class="intro-english">
 
-                    அடுத்த பாதையை
+                        Which statement best describes
+                        your life today?
 
-                    கண்டறிய ஒரு
+                    </p>
 
-                    ஆறு நிமிடப் பயணம்.
+                </div>
 
-                </p>
+                <!--==================================================
+                    Life Status Assessment
+                ==================================================-->
 
+                <div
+                    class="life-status-group"
+                    id="lifeStatusGroup">
 
+                    <button
+                        type="button"
+                        class="life-status-option"
+                        data-score="5">
+
+                        <span class="option-icon">🌟</span>
+
+                        <span class="option-copy">
+
+                            <span class="option-title-ta">
+
+                                நான் மிகவும் மகிழ்ச்சியாகவும்
+                                நிறைவாகவும் வாழ்கிறேன்.
+
+                            </span>
+
+                            <span class="option-title-en">
+
+                                I am truly thriving and
+                                living a deeply fulfilling life.
+
+                            </span>
+
+                        </span>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="life-status-option"
+                        data-score="4">
+
+                        <span class="option-icon">🙂</span>
+
+                        <span class="option-copy">
+
+                            <span class="option-title-ta">
+
+                                வாழ்க்கை நன்றாக இருக்கிறது.
+                                இன்னும் வளர விரும்புகிறேன்.
+
+                            </span>
+
+                            <span class="option-title-en">
+
+                                Life is good,
+                                but I know I can achieve more.
+
+                            </span>
+
+                        </span>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="life-status-option"
+                        data-score="3">
+
+                        <span class="option-icon">😐</span>
+
+                        <span class="option-copy">
+
+                            <span class="option-title-ta">
+
+                                வாழ்க்கை சராசரியாக உள்ளது.
+                                மாற்றம் தேவை என்று உணர்கிறேன்.
+
+                            </span>
+
+                            <span class="option-title-en">
+
+                                Life is average.
+                                I know something needs to change.
+
+                            </span>
+
+                        </span>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="life-status-option"
+                        data-score="2">
+
+                        <span class="option-icon">😟</span>
+
+                        <span class="option-copy">
+
+                            <span class="option-title-ta">
+
+                                வாழ்க்கையில் பல சவால்களை
+                                எதிர்கொண்டு வருகிறேன்.
+
+                            </span>
+
+                            <span class="option-title-en">
+
+                                Life feels difficult.
+                                I am struggling in several areas.
+
+                            </span>
+
+                        </span>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="life-status-option"
+                        data-score="1">
+
+                        <span class="option-icon">💔</span>
+
+                        <span class="option-copy">
+
+                            <span class="option-title-ta">
+
+                                என் வாழ்க்கையை மாற்ற
+                                உடனடியாக உதவி தேவை.
+
+                            </span>
+
+                            <span class="option-title-en">
+
+                                I urgently need clarity,
+                                direction and a fresh start.
+
+                            </span>
+
+                        </span>
+
+                    </button>
+
+                </div>
+
+                <!--==================================================
+                    Assessment Note
+                ==================================================-->
+
+                <div class="assessment-note">
+
+                    <p class="assessment-note-ta">
+
+                        சரியான பதில் என்று எதுவும் இல்லை.
+                        உங்கள் தற்போதைய வாழ்க்கையை
+                        மிகவும் நேர்மையாக பிரதிபலிக்கும்
+                        ஒரு பதிலைத் தேர்ந்தெடுக்கவும்.
+
+                    </p>
+
+                    <p class="assessment-note-en">
+
+                        There are no right or wrong answers.
+                        Simply choose the option that most
+                        honestly reflects your life today.
+
+                    </p>
+
+                </div>
+
+                <!--==================================================
+                    Primary Action
+                ==================================================-->
 
                 <button
 
                     id="beginJourney"
 
-                    class="primary-button">
+                    class="primary-button"
 
+                    disabled>
 
-                    Begin Journey
+                    என் பயணத்தை தொடங்குகிறேன்
 
+                    <span>
+
+                        BEGIN MY JOURNEY
+
+                    </span>
 
                 </button>
 
+                <!--==================================================
+                    Privacy
+                ==================================================-->
 
+                <p class="privacy-note">
+
+                    🔒 உங்கள் பதில்கள் பாதுகாப்பாகச்
+                    சேமிக்கப்படும்.
+                    இந்த மதிப்பீட்டை முடிக்க
+                    சுமார் 6–8 நிமிடங்கள் மட்டுமே ஆகும்.
+
+                </p>
+
+                <p class="privacy-note-en">
+
+                    Your responses remain completely confidential.
+                    The assessment takes approximately 6–8 minutes.
+
+                </p>
 
             </div>
 
-
         </section>
-
-
 
     </main>
 
-
-
-
     <!--==================================================
         Core JavaScript
-
     ==================================================-->
-
 
     <script
         src="../js/storage.js">
     </script>
 
-
     <script
         src="../js/router.js">
     </script>
-
 
     <script
         src="../js/app.js">
     </script>
 
-
     <script
         src="../js/landing.js">
     </script>
 
-
 </body>
 
-
 </html>
+
