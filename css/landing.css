@@ -11,18 +11,21 @@
 
     PURPOSE
 
-    Screen 01 Visual Design
+    Screen 01
+
+    Premium Landing Experience
 
     RESPONSIBILITIES
 
-    • Landing Layout
+    • Premium Layout
+    • Brand Identity
     • Hero Section
-    • Typography
     • Life Outlook Cards
-    • CTA Styling
-    • Responsive Design
+    • CTA
+    • Responsive Behaviour
 
 =============================================================================*/
+
 
 
 /*=============================================================================
@@ -32,29 +35,70 @@
 
 .landing-page{
 
+    position:relative;
+
     min-height:100vh;
 
     display:flex;
 
-    align-items:center;
-
     justify-content:center;
 
+    align-items:center;
+
+    overflow:hidden;
+
     background:
+
+        radial-gradient(
+
+            circle at top,
+
+            rgba(
+
+                37,
+                211,
+                102,
+                .08
+
+            ),
+
+            transparent 34%
+
+        ),
+
+        radial-gradient(
+
+            circle at bottom right,
+
+            rgba(
+
+                200,
+                169,
+                81,
+                .08
+
+            ),
+
+            transparent 42%
+
+        ),
 
         linear-gradient(
 
             135deg,
 
-            #081C3A,
+            #07172F 0%,
 
-            #111315
+            #0A2143 45%,
+
+            #111315 100%
 
         );
 
-    color:#FFFFFF;
+    padding:
 
-    overflow:hidden;
+        80px
+        40px;
 
 }
 
@@ -71,125 +115,102 @@
 
     width:100%;
 
-    padding:
+    display:flex;
 
-        80px
+    justify-content:center;
 
-        24px;
+    align-items:center;
 
 }
 
 
 
+
+
+/*=============================================================================
+    PREMIUM CONTAINER
+=============================================================================*/
 
 
 .landing-container{
 
-    max-width:1000px;
+    width:100%;
 
-    margin:0 auto;
+    max-width:900px;
 
-    text-align:center;
+    display:flex;
 
-}
+    flex-direction:column;
 
+    align-items:center;
 
+    padding:
 
+        64px
+        72px
+        56px;
 
+    border-radius:34px;
 
-/*=============================================================================
-    BRAND LABEL
-=============================================================================*/
+    background:
 
+        linear-gradient(
 
-.brand-label{
+            180deg,
 
-    font-family:
+            rgba(
 
-        'Inter',
+                22,
+                40,
+                73,
+                .88
 
-        sans-serif;
+            ),
 
-    font-size:1rem;
+            rgba(
 
-    font-weight:700;
+                14,
+                28,
+                54,
+                .94
 
-    letter-spacing:0.25em;
-
-    text-transform:uppercase;
-
-    color:#C8A951;
-
-    margin-bottom:32px;
-
-}
-
-
-
-
-
-/*=============================================================================
-    MAIN TITLE
-=============================================================================*/
-
-
-.landing-container h1{
-
-    font-family:
-
-        'Playfair Display',
-
-        serif;
-
-    font-size:
-
-        clamp(
-
-            2.4rem,
-
-            5vw,
-
-            4.8rem
+            )
 
         );
 
-    line-height:1.25;
+    border:
 
-    font-weight:700;
+        1px solid
 
-    margin:0 0 24px;
+        rgba(
 
-}
+            255,
+            255,
+            255,
+            .10
 
+        );
 
+    backdrop-filter:
 
+        blur(24px);
 
+    -webkit-backdrop-filter:
 
-.landing-container h1 span{
+        blur(24px);
 
-    display:block;
+    box-shadow:
 
-    margin-top:18px;
+        0 35px 90px
 
-    font-family:
+        rgba(
 
-        'Inter',
+            0,
+            0,
+            0,
+            .45
 
-        sans-serif;
-
-    font-size:clamp(
-
-        1.2rem,
-
-        2vw,
-
-        1.8rem
-
-    );
-
-    font-weight:500;
-
-    color:#E8E8E8;
+        );
 
 }
 
@@ -198,23 +219,75 @@
 
 
 /*=============================================================================
-    SUBTITLE
+    PREMIUM BRAND HEADER
 =============================================================================*/
 
 
-.hero-subtitle{
+.brand-header{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-bottom:44px;
+
+}
+
+
+
+
+
+.brand-logo{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+
+
+
+
+.ctm-logo{
+
+    width:74px;
+
+    height:auto;
+
+    display:block;
+
+}
+
+
+
+
+
+.brand-name{
+
+    margin:0;
 
     font-family:
 
-        'Noto Sans Tamil',
+        "Inter",
 
         sans-serif;
 
-    font-size:1.5rem;
+    font-size:2.2rem;
 
-    line-height:1.8;
+    font-weight:700;
 
-    margin-bottom:24px;
+    letter-spacing:.02em;
 
     color:#FFFFFF;
 
@@ -224,21 +297,48 @@
 
 
 
-.hero-subtitle span{
-
-    display:block;
+.brand-tagline{
 
     margin-top:10px;
 
     font-family:
 
-        'Inter',
+        "Inter",
 
         sans-serif;
 
-    font-size:1.2rem;
+    font-size:.92rem;
 
-    color:#DADADA;
+    font-weight:700;
+
+    letter-spacing:.30em;
+
+    text-transform:uppercase;
+
+    color:#C8A951;
+
+}
+
+/*=============================================================================
+    HERO SECTION
+=============================================================================*/
+
+
+.hero-section{
+
+    width:100%;
+
+    max-width:720px;
+
+    margin:0 auto 42px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
 
 }
 
@@ -246,28 +346,176 @@
 
 
 
-/*=============================================================================
-    DESCRIPTION
-=============================================================================*/
+.hero-title{
+
+    margin:0;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size:
+
+        clamp(
+
+            2.4rem,
+
+            3.2vw,
+
+            3.3rem
+
+        );
+
+    font-weight:700;
+
+    line-height:1.38;
+
+    letter-spacing:-0.02em;
+
+    color:#FFFFFF;
+
+}
+
+
+
+
+
+.hero-title-en{
+
+    margin:
+
+        18px
+        0
+        0;
+
+    font-family:
+
+        "Playfair Display",
+
+        serif;
+
+    font-size:
+
+        clamp(
+
+            1.45rem,
+
+            2vw,
+
+            2rem
+
+        );
+
+    font-weight:600;
+
+    color:#ECECEC;
+
+}
+
+
+
+
+
+.hero-divider{
+
+    width:160px;
+
+    height:2px;
+
+    margin:
+
+        32px
+        0;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            #C8A951,
+
+            transparent
+
+        );
+
+}
+
+
+
+
+
+.hero-question{
+
+    margin:0;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size:1.45rem;
+
+    font-weight:600;
+
+    line-height:1.8;
+
+    color:#FFFFFF;
+
+}
+
+
+
+
+
+.hero-question-en{
+
+    margin:
+
+        12px
+        0
+        28px;
+
+    font-family:
+
+        "Inter",
+
+        sans-serif;
+
+    font-size:1.05rem;
+
+    line-height:1.8;
+
+    color:#D7DCE4;
+
+}
+
+
+
 
 
 .hero-description{
 
-    max-width:700px;
-
-    margin:
-
-        0 auto 50px;
+    margin:0;
 
     font-family:
 
-        'Inter',
+        "Inter",
 
         sans-serif;
 
-    font-size:1.1rem;
+    font-size:1rem;
 
-    color:#CFCFCF;
+    font-weight:600;
+
+    letter-spacing:.04em;
+
+    color:#BFC8D8;
 
 }
 
@@ -278,21 +526,17 @@
 
 .life-options{
 
-    display:grid;
+    width:100%;
 
-    grid-template-columns:
+    max-width:760px;
 
-        1fr;
+    display:flex;
+
+    flex-direction:column;
 
     gap:20px;
 
-    max-width:850px;
-
-    margin:
-
-        0 auto
-
-        56px;
+    margin:0 auto 46px;
 
 }
 
@@ -300,19 +544,40 @@
 
 
 
+/*=============================================================================
+    LIFE OPTION CARD
+=============================================================================*/
+
+
 .life-option{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:24px;
+
+    padding:
+
+        26px
+        28px;
+
+    border-radius:22px;
+
+    cursor:pointer;
+
+    user-select:none;
 
     background:
 
         rgba(
 
             255,
-
             255,
-
             255,
-
-            .05
+            .045
 
         );
 
@@ -322,35 +587,22 @@
 
         rgba(
 
-            200,
-
-            169,
-
-            81,
-
-            .25
+            255,
+            255,
+            255,
+            .08
 
         );
 
-    border-radius:20px;
-
-    padding:
-
-        28px
-
-        30px;
-
-    text-align:left;
-
     transition:
 
-        transform .3s ease,
+        transform .30s ease,
 
-        border-color .3s ease,
+        border-color .30s ease,
 
-        background .3s ease,
+        background .30s ease,
 
-        box-shadow .3s ease;
+        box-shadow .30s ease;
 
 }
 
@@ -364,37 +616,38 @@
 
         translateY(-4px);
 
+    border-color:
+
+        rgba(
+
+            37,
+            211,
+            102,
+            .40
+
+        );
+
     background:
 
         rgba(
 
             255,
-
             255,
-
             255,
-
-            .08
+            .075
 
         );
 
-    border-color:
-
-        #C8A951;
-
     box-shadow:
 
-        0 20px 40px
+        0 18px 45px
 
         rgba(
 
             0,
-
             0,
-
             0,
-
-            .25
+            .28
 
         );
 
@@ -404,21 +657,37 @@
 
 
 
-.life-option h3{
+.life-option.selected{
 
-    margin:0 0 14px;
+    border:
 
-    font-family:
+        2px solid
 
-        'Inter',
+        #25D366;
 
-        sans-serif;
+    background:
 
-    font-size:1.2rem;
+        rgba(
 
-    font-weight:700;
+            37,
+            211,
+            102,
+            .12
 
-    color:#C8A951;
+        );
+
+    box-shadow:
+
+        0 0 0 4px
+
+        rgba(
+
+            37,
+            211,
+            102,
+            .12
+
+        );
 
 }
 
@@ -426,19 +695,141 @@
 
 
 
-.life-option p{
+/*=============================================================================
+    OPTION SELECTOR
+=============================================================================*/
 
-    margin:0 0 12px;
+
+.option-selector{
+
+    width:34px;
+
+    height:34px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-shrink:0;
+
+}
+
+
+
+
+
+.selector-circle{
+
+    width:22px;
+
+    height:22px;
+
+    border-radius:50%;
+
+    border:
+
+        2px solid
+
+        rgba(
+
+            255,
+            255,
+            255,
+            .55
+
+        );
+
+    transition:
+
+        all .30s ease;
+
+}
+
+
+
+
+
+.life-option.selected .selector-circle{
+
+    border-color:#25D366;
+
+    background:#25D366;
+
+    box-shadow:
+
+        0 0 0 4px
+
+        rgba(
+
+            37,
+            211,
+            102,
+            .18
+
+        );
+
+}
+
+/*=============================================================================
+    OPTION CONTENT
+=============================================================================*/
+
+
+.option-content{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+
+
+.option-number{
+
+    margin-bottom:12px;
 
     font-family:
 
-        'Noto Sans Tamil',
+        "Inter",
 
         sans-serif;
 
-    font-size:1.18rem;
+    font-size:1rem;
 
-    line-height:1.8;
+    font-weight:700;
+
+    letter-spacing:.04em;
+
+    color:#D8B86A;
+
+}
+
+
+
+
+
+.option-title{
+
+    margin:0;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size:1.22rem;
+
+    font-weight:600;
+
+    line-height:1.85;
 
     color:#FFFFFF;
 
@@ -448,21 +839,51 @@
 
 
 
-.life-option small{
+.option-subtitle{
 
-    display:block;
+    margin-top:14px;
 
     font-family:
 
-        'Inter',
+        "Inter",
 
         sans-serif;
 
     font-size:1rem;
 
-    line-height:1.7;
+    line-height:1.75;
 
-    color:#D6D6D6;
+    color:#C9D2DF;
+
+}
+
+
+
+
+
+.life-option.selected .option-number{
+
+    color:#25D366;
+
+}
+
+
+
+
+
+.life-option.selected .option-title{
+
+    color:#FFFFFF;
+
+}
+
+
+
+
+
+.life-option.selected .option-subtitle{
+
+    color:#E6F8EE;
 
 }
 
@@ -471,51 +892,133 @@
 
 
 /*=============================================================================
+    CARD ACTIVE INDICATOR
+=============================================================================*/
+
+
+.life-option::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:5px;
+
+    height:100%;
+
+    border-radius:
+
+        22px
+
+        0
+
+        0
+
+        22px;
+
+    background:transparent;
+
+    transition:
+
+        background .30s ease;
+
+}
+
+
+
+
+
+.life-option.selected::after{
+
+    background:#25D366;
+
+}
+
+
+
+
+
+/*=============================================================================
+    CTA SECTION
+=============================================================================*/
+
+
+.cta-section{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-top:18px;
+
+}
+
+/*=============================================================================
     PRIMARY BUTTON
 =============================================================================*/
 
 
 .primary-button{
 
-    display:inline-flex;
+    width:100%;
+
+    max-width:420px;
+
+    min-height:72px;
+
+    display:flex;
 
     flex-direction:column;
 
-    align-items:center;
-
     justify-content:center;
+
+    align-items:center;
 
     gap:8px;
 
     border:none;
 
+    border-radius:18px;
+
     cursor:pointer;
 
-    padding:
+    background:
 
-        22px
+        linear-gradient(
 
-        48px;
+            180deg,
 
-    border-radius:50px;
+            #2DD96F 0%,
 
-    background:#C8A951;
+            #25D366 50%,
 
-    color:#111315;
+            #1EBE5D 100%
+
+        );
+
+    color:#FFFFFF;
 
     font-family:
 
-        'Inter',
+        "Inter",
 
         sans-serif;
 
     font-weight:700;
 
+    letter-spacing:.02em;
+
     transition:
 
-        transform .3s ease,
-
-        box-shadow .3s ease;
+        all .30s ease;
 
 }
 
@@ -523,53 +1026,600 @@
 
 
 
-.primary-button span{
-
-    font-size:1.15rem;
-
-    font-weight:700;
-
-}
-
-
-
-
-
-.primary-button small{
-
-    font-size:.92rem;
-
-    letter-spacing:.12em;
-
-    font-weight:700;
-
-}
-
-
-
-
-
-.primary-button:hover{
+.primary-button:hover:not(:disabled){
 
     transform:
 
         translateY(-3px);
 
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #38E97C 0%,
+
+            #2DD96F 50%,
+
+            #25D366 100%
+
+        );
+
     box-shadow:
 
-        0 15px 35px
+        0 18px 48px
 
         rgba(
 
-            0,
+            37,
 
-            0,
+            211,
 
-            0,
+            102,
+
+            .38
+
+        );
+
+}
+
+
+
+
+
+.primary-button:active:not(:disabled){
+
+    transform:
+
+        translateY(-1px);
+
+}
+
+
+
+
+
+.primary-button:focus{
+
+    outline:none;
+
+}
+
+
+
+
+
+.primary-button:focus-visible{
+
+    box-shadow:
+
+        0 0 0 5px
+
+        rgba(
+
+            37,
+
+            211,
+
+            102,
+
+            .18
+
+        );
+
+}
+
+
+
+
+
+/*=============================================================================
+    DISABLED BUTTON
+=============================================================================*/
+
+
+.primary-button:disabled{
+
+    cursor:not-allowed;
+
+    opacity:.45;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #4A5568,
+
+            #364152
+
+        );
+
+    color:
+
+        rgba(
+
+            255,
+
+            255,
+
+            255,
+
+            .75
+
+        );
+
+    box-shadow:none;
+
+    transform:none;
+
+}
+
+
+
+
+
+.button-ta{
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size:1.15rem;
+
+    font-weight:700;
+
+    color:inherit;
+
+}
+
+
+
+
+
+.button-en{
+
+    font-family:
+
+        "Inter",
+
+        sans-serif;
+
+    font-size:.82rem;
+
+    font-weight:700;
+
+    letter-spacing:.18em;
+
+    text-transform:uppercase;
+
+    color:inherit;
+
+}
+
+/*=============================================================================
+    PREMIUM ANIMATIONS
+=============================================================================*/
+
+
+.brand-header{
+
+    animation:
+
+        fadeDown .80s ease both;
+
+}
+
+
+
+
+
+.hero-section{
+
+    animation:
+
+        fadeUp .90s ease both;
+
+}
+
+
+
+
+
+.life-option{
+
+    animation:
+
+        fadeUp .70s ease both;
+
+}
+
+
+
+
+
+.life-option:nth-child(1){
+
+    animation-delay:.08s;
+
+}
+
+
+
+
+
+.life-option:nth-child(2){
+
+    animation-delay:.14s;
+
+}
+
+
+
+
+
+.life-option:nth-child(3){
+
+    animation-delay:.20s;
+
+}
+
+
+
+
+
+.life-option:nth-child(4){
+
+    animation-delay:.26s;
+
+}
+
+
+
+
+
+.life-option:nth-child(5){
+
+    animation-delay:.32s;
+
+}
+
+
+
+
+
+.cta-section{
+
+    animation:
+
+        fadeUp 1s ease both;
+
+    animation-delay:.40s;
+
+}
+
+
+
+
+
+@keyframes fadeDown{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateY(-24px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+
+
+
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateY(28px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+
+
+
+
+/*=============================================================================
+    ACCESSIBILITY
+=============================================================================*/
+
+
+.life-option:focus{
+
+    outline:none;
+
+}
+
+
+
+
+
+.life-option:focus-visible{
+
+    border-color:#25D366;
+
+    box-shadow:
+
+        0 0 0 4px
+
+        rgba(
+
+            37,
+
+            211,
+
+            102,
+
+            .18
+
+        );
+
+}
+
+
+
+
+
+::selection{
+
+    background:
+
+        rgba(
+
+            37,
+
+            211,
+
+            102,
 
             .25
 
         );
+
+    color:#FFFFFF;
+
+}
+
+
+
+
+
+/*=============================================================================
+    PREMIUM SCROLLBAR
+=============================================================================*/
+
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+
+
+
+
+::-webkit-scrollbar-track{
+
+    background:#07172F;
+
+}
+
+
+
+
+
+::-webkit-scrollbar-thumb{
+
+    border-radius:20px;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #2DD96F,
+
+            #25D366
+
+        );
+
+}
+
+
+
+
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#31E874;
+
+}
+
+/*=============================================================================
+    TABLET RESPONSIVE
+=============================================================================*/
+
+
+@media (max-width:1024px){
+
+    .landing-page{
+
+        padding:
+
+            60px
+            28px;
+
+    }
+
+
+
+    .landing-container{
+
+        max-width:760px;
+
+        padding:
+
+            52px
+            42px
+            44px;
+
+    }
+
+
+
+    .ctm-logo{
+
+        width:64px;
+
+    }
+
+
+
+    .brand-name{
+
+        font-size:1.9rem;
+
+    }
+
+
+
+    .brand-tagline{
+
+        font-size:.82rem;
+
+        letter-spacing:.24em;
+
+    }
+
+
+
+    .hero-section{
+
+        max-width:620px;
+
+        margin-bottom:38px;
+
+    }
+
+
+
+    .hero-title{
+
+        font-size:2.7rem;
+
+    }
+
+
+
+    .hero-title-en{
+
+        font-size:1.6rem;
+
+    }
+
+
+
+    .hero-question{
+
+        font-size:1.28rem;
+
+    }
+
+
+
+    .hero-question-en{
+
+        font-size:1rem;
+
+    }
+
+
+
+    .life-options{
+
+        max-width:680px;
+
+    }
+
+
+
+    .life-option{
+
+        padding:
+
+            24px
+            24px;
+
+    }
+
+
+
+    .option-title{
+
+        font-size:1.12rem;
+
+    }
+
+
+
+    .option-subtitle{
+
+        font-size:.96rem;
+
+    }
+
+
+
+    .primary-button{
+
+        max-width:400px;
+
+    }
 
 }
 
@@ -582,32 +1632,132 @@
 =============================================================================*/
 
 
-@media(max-width:768px){
+@media (max-width:768px){
 
-
-    .landing-hero{
+    .landing-page{
 
         padding:
 
-            48px
+            40px
+            18px;
 
+        align-items:flex-start;
+
+    }
+
+
+
+    .landing-container{
+
+        padding:
+
+            36px
+            22px
+            32px;
+
+        border-radius:24px;
+
+    }
+
+
+
+    .brand-header{
+
+        margin-bottom:34px;
+
+    }
+
+
+
+    .ctm-logo{
+
+        width:54px;
+
+    }
+
+
+
+    .brand-name{
+
+        font-size:1.5rem;
+
+    }
+
+
+
+    .brand-tagline{
+
+        font-size:.72rem;
+
+        letter-spacing:.18em;
+
+    }
+
+
+
+    .hero-section{
+
+        margin-bottom:30px;
+
+    }
+
+
+
+    .hero-title{
+
+        font-size:2rem;
+
+        line-height:1.45;
+
+    }
+
+
+
+    .hero-title-en{
+
+        font-size:1.18rem;
+
+        margin:
+
+            12px
+            0;
+
+    }
+
+
+
+    .hero-divider{
+
+        width:120px;
+
+        margin:
+
+            22px
+            0;
+
+    }
+
+
+
+    .hero-question{
+
+        font-size:1.15rem;
+
+        line-height:1.7;
+
+    }
+
+
+
+    .hero-question-en{
+
+        margin:
+
+            10px
+            0
             20px;
 
-    }
-
-
-
-    .landing-container h1{
-
-        font-size:2.3rem;
-
-    }
-
-
-
-    .hero-subtitle{
-
-        font-size:1.25rem;
+        font-size:.95rem;
 
     }
 
@@ -615,7 +1765,17 @@
 
     .hero-description{
 
-        font-size:1rem;
+        font-size:.95rem;
+
+    }
+
+
+
+    .life-options{
+
+        gap:16px;
+
+        margin-bottom:34px;
 
     }
 
@@ -623,27 +1783,210 @@
 
     .life-option{
 
+        gap:16px;
+
         padding:
 
-            22px
+            20px
+            18px;
 
-            20px;
-
-    }
-
-
-
-    .life-option p{
-
-        font-size:1.05rem;
+        border-radius:18px;
 
     }
 
 
 
-    .life-option small{
+    .option-selector{
 
-        font-size:.95rem;
+        width:28px;
+
+        height:28px;
+
+    }
+
+
+
+    .selector-circle{
+
+        width:18px;
+
+        height:18px;
+
+    }
+
+}
+
+/*=============================================================================
+    SMALL MOBILE DEVICES
+=============================================================================*/
+
+
+@media (max-width:480px){
+
+    .landing-page{
+
+        padding:
+
+            24px
+            12px;
+
+    }
+
+
+
+    .landing-container{
+
+        padding:
+
+            28px
+            16px
+            26px;
+
+        border-radius:20px;
+
+    }
+
+
+
+    .ctm-logo{
+
+        width:46px;
+
+    }
+
+
+
+    .brand-name{
+
+        font-size:1.25rem;
+
+    }
+
+
+
+    .brand-tagline{
+
+        font-size:.66rem;
+
+        letter-spacing:.12em;
+
+    }
+
+
+
+    .hero-title{
+
+        font-size:1.65rem;
+
+        line-height:1.45;
+
+    }
+
+
+
+    .hero-title-en{
+
+        font-size:1rem;
+
+    }
+
+
+
+    .hero-divider{
+
+        width:96px;
+
+        margin:
+
+            18px
+            0;
+
+    }
+
+
+
+    .hero-question{
+
+        font-size:1.02rem;
+
+    }
+
+
+
+    .hero-question-en{
+
+        font-size:.88rem;
+
+    }
+
+
+
+    .hero-description{
+
+        font-size:.88rem;
+
+    }
+
+
+
+    .life-option{
+
+        gap:14px;
+
+        padding:
+
+            18px
+            16px;
+
+    }
+
+
+
+    .option-selector{
+
+        width:24px;
+
+        height:24px;
+
+    }
+
+
+
+    .selector-circle{
+
+        width:16px;
+
+        height:16px;
+
+    }
+
+
+
+    .option-number{
+
+        font-size:.90rem;
+
+    }
+
+
+
+    .option-title{
+
+        font-size:1rem;
+
+        line-height:1.7;
+
+    }
+
+
+
+    .option-subtitle{
+
+        margin-top:10px;
+
+        font-size:.88rem;
+
+        line-height:1.6;
 
     }
 
@@ -653,7 +1996,27 @@
 
         width:100%;
 
-        max-width:360px;
+        min-height:64px;
+
+        border-radius:16px;
+
+    }
+
+
+
+    .button-ta{
+
+        font-size:1rem;
+
+    }
+
+
+
+    .button-en{
+
+        font-size:.70rem;
+
+        letter-spacing:.10em;
 
     }
 
@@ -664,7 +2027,71 @@
 
 
 /*=============================================================================
+    ACCESSIBILITY
+=============================================================================*/
 
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+
+*{
+
+    box-sizing:border-box;
+
+}
+
+
+
+button,
+
+input{
+
+    -webkit-tap-highlight-color:transparent;
+
+}
+
+
+
+button:focus-visible,
+
+.life-option:focus-visible{
+
+    outline:none;
+
+}
+
+
+
+
+
+/*=============================================================================
+    PERFORMANCE
+=============================================================================*/
+
+
+.landing-container,
+
+.life-option,
+
+.primary-button{
+
+    will-change:
+
+        transform,
+
+        box-shadow;
+
+}
+
+
+
+
+
+/*=============================================================================
     END OF FILE
-
 =============================================================================*/
