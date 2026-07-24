@@ -1,573 +1,585 @@
 
 <!DOCTYPE html>
-<html lang="ta">
-
+<html lang="en">
 <head>
 
-    <!--
-    =====================================================================
-
-        CTM PATH™
-
-        FROM SURVIVAL TO LIVING™
-
-        FILE
-
-        landing.html
-
-        PURPOSE
-
-        Screen 01
-
-        Your Life Outlook™
-
-        RESPONSIBILITIES
-
-        • Welcome Visitor
-        • Capture Initial Emotion
-        • Start Journey
-
-        NOTE
-
-        No business logic belongs here.
-
-        Logic belongs to:
-
-        landing.js
-
-    =====================================================================
-    -->
-
+    <!-- ==========================================================
+         CTM PATH™ Guided Journey v2.0
+         File    : landing.html
+         Version : 2.0
+         Status  : 🔒 LOCKED
+         ========================================================== -->
 
     <meta charset="UTF-8">
-
 
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
+    <meta
+        name="description"
+        content="CTM PATH™ Guided Journey">
+
+    <meta
+        name="theme-color"
+        content="#081C3A">
 
     <title>
-
-        CTM PATH™ | Your Life Outlook™
-
+        CTM PATH™ | Guided Journey
     </title>
 
+    <!-- ==========================================================
+         Fonts
+         ========================================================== -->
 
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
 
-    <!--==================================================
-        CSS
-    ==================================================-->
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
 
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- ==========================================================
+         Foundation CSS
+         ========================================================== -->
 
     <link
         rel="stylesheet"
         href="../css/reset.css">
 
-
     <link
         rel="stylesheet"
         href="../css/tokens.css">
-
 
     <link
         rel="stylesheet"
         href="../css/base.css">
 
-
     <link
         rel="stylesheet"
         href="../css/app.css">
 
+    <!-- ==========================================================
+         Screen CSS
+         ========================================================== -->
 
     <link
         rel="stylesheet"
         href="../css/landing.css">
 
-
 </head>
-
 
 <body>
 
+<div class="app">
 
+<!-- ==========================================================
+     HEADER
+     ========================================================== -->
 
-<main class="landing-page">
+<header class="app-header">
 
+    <div class="container">
 
+        <div class="landing-header">
 
-    <section class="landing-hero">
+            <img
 
+                src="../assets/logo/ctm-path-logo.svg"
 
+                alt="CTM PATH Logo"
 
-        <div class="landing-container">
-
-
-
-            <!--==========================================
-                PREMIUM BRAND HEADER
-            ===========================================-->
-
-
-            <header class="brand-header">
-
-
-                <div class="brand-logo">
-
-
-                    <img
-
-                        src="../assets/logo/CTM_Logo_Transparent.svg"
-
-                        alt="CTM PATH™"
-
-                        class="ctm-logo">
-
-
-                </div>
-
-
-
-                <h1 class="brand-name">
-
-                    CTM PATH™
-
-                </h1>
-
-
-
-                <p class="brand-tagline">
-
-                    FROM SURVIVAL TO LIVING™
-
-                </p>
-
-
-            </header>
-
-
-
-            <!--==========================================
-                HERO
-            ===========================================-->
-
-
-            <section class="hero-section">
-
-
-
-                <h2 class="hero-title">
-
-                    வாழ்வாங்கு வாழ்ந்திட வாரீர்!
-
-                </h2>
-
-
-
-                <h3 class="hero-title-en">
-
-                    Welcome to a Life of Fulfillment!
-
-                </h3>
-
-
-
-                <div class="hero-divider"></div>
-
-
-
-                <p class="hero-question">
-
-                    இன்று உங்கள் வாழ்க்கை எந்த நிலையில் இருக்கிறது?
-
-                </p>
-
-
-
-                <p class="hero-question-en">
-
-                    Where would you honestly place your life today?
-
-                </p>
-
-
-
-                <p class="hero-description">
-
-                    Choose the statement that feels most true.
-
-                </p>
-
-
-
-            </section>
-
-
-
-            <!--==========================================
-                LIFE OUTLOOK OPTIONS
-            ===========================================-->
-
-
-            <section
-
-                class="life-options"
-
-                id="lifeOptions">
-
-                                <!--==========================================
-                    OPTION 01
-                ===========================================-->
-
-                <article
-
-                    class="life-option"
-
-                    data-emotion="Thriving"
-
-
-                    tabindex="0">
-
-
-                    <div class="option-selector">
-
-                        <span class="selector-circle"></span>
-
-                    </div>
-
-
-                    <div class="option-content">
-
-
-                        <div class="option-number">
-
-                            🌿 1
-
-                        </div>
-
-
-                        <p class="option-title">
-
-                            நான் வாழ விரும்பிய
-                            வாழ்க்கையையே வாழ்கிறேன்.
-
-                        </p>
-
-
-                        <p class="option-subtitle">
-
-                            I am living the life
-                            I always hoped for.
-
-                        </p>
-
-
-                    </div>
-
-
-                </article>
-
-
-
-                <!--==========================================
-                    OPTION 02
-                ===========================================-->
-
-                <article
-
-                    class="life-option"
-
-                    data-emotion="Growing"
-
-                    tabindex="0">
-
-
-                    <div class="option-selector">
-
-                        <span class="selector-circle"></span>
-
-                    </div>
-
-
-                    <div class="option-content">
-
-
-                        <div class="option-number">
-
-                            🌅 2
-
-                        </div>
-
-
-                        <p class="option-title">
-
-                            என் வாழ்க்கை நல்ல பாதையில் உள்ளது.
-                            இன்னும் உயரங்கள்
-                            என்னை எதிர்நோக்கி இருக்கின்றன.
-
-                        </p>
-
-
-                        <p class="option-subtitle">
-
-                            Life is going well,
-                            and I believe my best days
-                            are still ahead.
-
-                        </p>
-
-
-                    </div>
-
-
-                </article>
-
-
-
-                <!--==========================================
-                    OPTION 03
-                ===========================================-->
-
-                <article
-
-                    class="life-option"
-
-                    data-emotion="Transition"
-
-                    tabindex="0">
-
-
-                    <div class="option-selector">
-
-                        <span class="selector-circle"></span>
-
-                    </div>
-
-
-                    <div class="option-content">
-
-
-                        <div class="option-number">
-
-                            🌤 3
-
-                        </div>
-
-
-                        <p class="option-title">
-
-                            வாழ்க்கை நகர்கிறது...
-                            ஆனால் ஏதோ முக்கியமான ஒன்று
-                            இன்னும் குறைகிறது.
-
-                        </p>
-
-
-                        <p class="option-subtitle">
-
-                            Life is moving forward…
-                            but something important
-                            still feels missing.
-
-                        </p>
-
-
-                    </div>
-
-
-                </article>
-
-
-
-                <!--==========================================
-                    OPTION 04
-                ===========================================-->
-
-                <article
-
-                    class="life-option"
-
-                    data-emotion="Struggling"
-
-                    tabindex="0">
-
-
-                    <div class="option-selector">
-
-                        <span class="selector-circle"></span>
-
-                    </div>
-
-
-                    <div class="option-content">
-
-
-                        <div class="option-number">
-
-                            🌧 4
-
-                        </div>
-
-
-                        <p class="option-title">
-
-                            நான் தினமும்
-                            போராடிக் கொண்டிருக்கிறேன்.
-                            மாற்றம் எனக்கு தேவை.
-
-                        </p>
-
-
-                        <p class="option-subtitle">
-
-                            Every day feels like
-                            a struggle.
-                            I know something
-                            needs to change.
-
-                        </p>
-
-
-                    </div>
-
-
-                </article>
-
-                                <!--==========================================
-                    OPTION 05
-                ===========================================-->
-
-                <article
-
-                    class="life-option"
-
-                    data-emotion="NewBeginning"
-
-                    tabindex="0">
-
-
-                    <div class="option-selector">
-
-                        <span class="selector-circle"></span>
-
-                    </div>
-
-
-                    <div class="option-content">
-
-
-                        <div class="option-number">
-
-                            ❤️ 5
-
-                        </div>
-
-
-                        <p class="option-title">
-
-                            இது ஒரு புதிய
-                            தொடக்கத்திற்கான நேரம்
-                            என்று என் மனம் சொல்கிறது.
-
-                        </p>
-
-
-                        <p class="option-subtitle">
-
-                            My heart tells me
-                            it's time for
-                            a new beginning.
-
-                        </p>
-
-
-                    </div>
-
-
-                </article>
-
-
-            </section>
-
-
-
-            <!--==========================================
-                PRIMARY ACTION
-            ===========================================-->
-
-
-            <div class="cta-section">
-
-
-                <button
-
-                    id="beginJourney"
-
-                    class="primary-button"
-
-                    type="button"
-
-                    disabled>
-
-
-                    <span class="button-ta">
-
-                        என் பயணத்தை தொடங்குகிறேன்
-
-                    </span>
-
-
-                    <span class="button-en">
-
-                        BEGIN MY JOURNEY
-
-                    </span>
-
-
-                </button>
-
-
-            </div>
-
-
+                class="logo">
 
         </div>
 
+    </div>
 
+</header>
 
-    </section>
+<!-- ==========================================================
+     MAIN
+     ========================================================== -->
 
+<main class="app-main">
 
+<div class="container">
+
+<div class="content">
+
+<section class="glass-card landing-card">
+
+<!-- ==========================================================
+     Welcome
+     ========================================================== -->
+
+<div class="landing-intro">
+
+    <p class="tamil-greeting">
+
+        வாழ்வாங்கு வாழ்ந்திட வாரீர்!
+
+    </p>
+
+    <p class="english-greeting">
+
+        Welcome to a Guided Journey
+        Towards a Well-Lived Life
+
+    </p>
+
+</div>
+
+<!-- ==========================================================
+     Hero Title
+     ========================================================== -->
+
+<h1 class="landing-title">
+
+    FROM SURVIVAL
+
+    <span class="title-accent">
+
+        TO
+
+    </span>
+
+    LIVING™
+
+</h1>
+
+<!-- ==========================================================
+     Hero Subtitle
+     ========================================================== -->
+
+<p class="landing-subtitle">
+
+    A powerful six-minute self-discovery experience that helps
+    you understand where you are today, visualise your life
+    through the Kala Chakra™, and receive a personalised
+    roadmap towards a happier, healthier and more meaningful
+    life.
+
+</p>
+
+<!-- ==========================================================
+     Journey Navigator
+     ========================================================== -->
+
+<div class="journey-navigator">
+
+    <div class="navigator-line"></div>
+
+    <div class="navigator-content">
+
+        <span class="navigator-ta">
+
+            சுய விழிப்புணர்வு
+
+        </span>
+
+        <span class="navigator-arrow">
+
+            ➜
+
+        </span>
+
+        <span class="navigator-ta">
+
+            தெளிவு
+
+        </span>
+
+        <span class="navigator-arrow">
+
+            ➜
+
+        </span>
+
+        <span class="navigator-ta">
+
+            மாற்றம்
+
+        </span>
+
+    </div>
+
+    <div class="navigator-content english">
+
+        <span>
+
+            Awareness
+
+        </span>
+
+        <span class="navigator-arrow">
+
+            ➜
+
+        </span>
+
+        <span>
+
+            Clarity
+
+        </span>
+
+        <span class="navigator-arrow">
+
+            ➜
+
+        </span>
+
+        <span>
+
+            Transformation
+
+        </span>
+
+    </div>
+
+    <div class="navigator-line"></div>
+
+</div>
+
+<!-- ==========================================================
+     Promise
+     ========================================================== -->
+
+<div class="landing-promise">
+
+    <div class="promise-item">
+
+        ✓ Only 6 Minutes
+
+    </div>
+
+    <div class="promise-item">
+
+        ✓ 36 Thought-Provoking Questions
+
+    </div>
+
+    <div class="promise-item">
+
+        ✓ 12 Life Pillars
+
+    </div>
+
+    <div class="promise-item">
+
+        ✓ Personalised Kala Chakra™
+
+    </div>
+
+    <div class="promise-item">
+
+        ✓ Instant Diagnosis™
+
+    </div>
+
+    <div class="promise-item">
+
+        ✓ Practical Prescription™
+
+    </div>
+
+</div>
+
+<!-- ==========================================================
+     Continue in Batch 2
+     ========================================================== -->
+
+    <!-- ==========================================================
+     Benefits
+     ========================================================== -->
+
+<div class="benefits-section">
+
+    <div class="benefit-card">
+
+        <div class="benefit-icon">
+
+            🎯
+
+        </div>
+
+        <h3>
+
+            Discover Your Present Reality
+
+        </h3>
+
+        <p>
+
+            Understand your current position across the twelve
+            essential pillars of a well-lived life.
+
+        </p>
+
+    </div>
+
+    <div class="benefit-card">
+
+        <div class="benefit-icon">
+
+            🛞
+
+        </div>
+
+        <h3>
+
+            Visualise Your Kala Chakra™
+
+        </h3>
+
+        <p>
+
+            See your life represented as a powerful twelve-spoke
+            wheel that instantly reveals your strengths and growth
+            opportunities.
+
+        </p>
+
+    </div>
+
+    <div class="benefit-card">
+
+        <div class="benefit-icon">
+
+            💡
+
+        </div>
+
+        <h3>
+
+            Receive Personal Insights
+
+        </h3>
+
+        <p>
+
+            Discover the life areas that deserve your attention and
+            those that already support your well-being.
+
+        </p>
+
+    </div>
+
+    <div class="benefit-card">
+
+        <div class="benefit-icon">
+
+            🚀
+
+        </div>
+
+        <h3>
+
+            Begin Your Transformation
+
+        </h3>
+
+        <p>
+
+            Receive practical recommendations that can help you move
+            towards a more balanced, purposeful and fulfilling life.
+
+        </p>
+
+    </div>
+
+</div>
+
+<!-- ==========================================================
+     Journey Information
+     ========================================================== -->
+
+<div class="journey-information">
+
+    <div class="info-row">
+
+        <div class="info-label">
+
+            Duration
+
+        </div>
+
+        <div class="info-value">
+
+            Approximately 6 Minutes
+
+        </div>
+
+    </div>
+
+    <div class="info-row">
+
+        <div class="info-label">
+
+            Questions
+
+        </div>
+
+        <div class="info-value">
+
+            36 Guided Reflection Questions
+
+        </div>
+
+    </div>
+
+    <div class="info-row">
+
+        <div class="info-label">
+
+            Assessment
+
+        </div>
+
+        <div class="info-value">
+
+            12 Pillars of a Well-Lived Life™
+
+        </div>
+
+    </div>
+
+    <div class="info-row">
+
+        <div class="info-label">
+
+            Results
+
+        </div>
+
+        <div class="info-value">
+
+            Kala Chakra™ · Diagnosis™ · Prescription™
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================================================
+     Privacy Statement
+     ========================================================== -->
+
+<div class="privacy-box">
+
+    <h3>
+
+        Your Privacy Matters
+
+    </h3>
+
+    <p>
+
+        Your responses remain confidential and are used only to
+        generate your personalised assessment results.
+
+    </p>
+
+</div>
+
+<!-- ==========================================================
+     Call To Action
+     ========================================================== -->
+
+<div class="landing-cta">
+
+    <button
+
+        id="beginJourneyButton"
+
+        class="btn btn-primary">
+
+        Begin Your Guided Journey
+
+    </button>
+
+</div>
+
+<!-- ==========================================================
+     Continue in Batch 3
+     ========================================================== -->
+
+    <!-- ==========================================================
+     Footer Note
+     ========================================================== -->
+
+<div class="landing-footer-note">
+
+    <p class="footer-text">
+
+        Every meaningful transformation begins with one honest step.
+
+    </p>
+
+    <p class="footer-text">
+
+        Today could be the beginning of your journey towards a
+        happier, healthier and more purposeful life.
+
+    </p>
+
+</div>
+
+</section>
+
+</div>
+
+</div>
 
 </main>
 
+<!-- ==========================================================
+     FOOTER
+     ========================================================== -->
 
+<footer class="app-footer">
 
-<!--==================================================
-    Core JavaScript
-===================================================-->
+    <div class="container">
 
+        <p>
 
-<script
-    src="../js/storage.js">
-</script>
+            © 2026 CTM PATH™. All Rights Reserved.
 
+        </p>
 
-<script
-    src="../js/router.js">
-</script>
+    </div>
 
+</footer>
 
-<script
-    src="../js/app.js">
-</script>
+</div>
 
+<!-- ==========================================================
+     Core JavaScript
+     ========================================================== -->
 
-<script
-    src="../js/landing.js">
-</script>
+<script src="../js/storage.js"></script>
 
+<script src="../js/api.js"></script>
+
+<script src="../js/router.js"></script>
+
+<script src="../js/app.js"></script>
+
+<!-- ==========================================================
+     Page JavaScript
+     ========================================================== -->
+
+<script src="../js/landing.js"></script>
 
 </body>
 
 </html>
+
