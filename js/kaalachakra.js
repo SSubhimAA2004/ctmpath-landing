@@ -2,6 +2,7 @@
 /*=============================================================================
 
     CTM PATH™
+
     FROM SURVIVAL TO LIVING™
 
     FILE
@@ -10,1290 +11,1208 @@
 
     PURPOSE
 
-    Kaalachakra™ Visualization Engine
+    Screen 15 Controller
 
     RESPONSIBILITIES
 
-    • Draw Kaalachakra™
-    • Display Assessment Results
-    • Animate Life Wheel
-    • Calculate Geometry
-
-    VERSION
-
-    1.0
+    • Read Assessment Results
+    • Draw Kala Chakra™
+    • Display Overall Score
+    • Continue To Diagnosis™
 
 =============================================================================*/
 
+
 'use strict';
+
+
 
 /*=============================================================================
     GLOBAL NAMESPACE
 =============================================================================*/
 
+
 window.CTM = window.CTM || {};
 
+
+
 /*=============================================================================
-    KAALACHAKRA
+    KALA CHAKRA MODULE
 =============================================================================*/
 
-CTM.kaalachakra = (function(){
 
-    /*=========================================================================
-        CONSTANTS
-    =========================================================================*/
-
-    const TOTAL_PILLARS = 12;
-
-    const FULL_CIRCLE = Math.PI * 2;
-
-    const START_ANGLE = -Math.PI / 2;
+CTM.kaalachakra=(function(){
 
 
 
-    /*=========================================================================
-        STATE
-    =========================================================================*/
+/*=============================================================================
+    MODULE VARIABLES
+=============================================================================*/
 
-    const state = {
 
-        canvas : null,
+let svg=null;
 
-        context : null,
+let overallScore=null;
 
-        width : 0,
-
-        height : 0,
-
-        centerX : 0,
-
-        centerY : 0,
-
-        radius : 0,
-
-        scores : [],
-
-        labels : []
-
-    };
+let continueButton=null;
 
 
 
-    /*=========================================================================
-        INITIALIZE
-    =========================================================================*/
+const SIZE=800;
 
-    function init(){
+const CENTER=400;
 
-        state.canvas =
+const MAX_RADIUS=300;
 
-            document.getElementById(
 
-                'radarCanvas'
+
+const SPOKES=[
+
+"Purpose",
+
+"Health",
+
+"Relationships",
+
+"Character",
+
+"Financial",
+
+"Mind",
+
+"Growth",
+
+"Discipline",
+
+"Gratitude",
+
+"Contribution",
+
+"Meaning",
+
+"Legacy"
+
+];
+
+
+
+let scores=[];
+
+
+
+/*=============================================================================
+    INITIALIZE
+=============================================================================*/
+
+
+function init(){
+
+
+
+    svg=document.getElementById(
+
+        "wheelSvg"
+
+    );
+
+
+
+    overallScore=document.getElementById(
+
+        "overallScore"
+
+    );
+
+
+
+    continueButton=document.getElementById(
+
+        "continueDiagnosis"
+
+    );
+
+
+
+    loadScores();
+
+
+
+    drawWheel();
+
+
+
+    drawRadar();
+
+
+
+    displayOverall();
+
+
+
+    attachEvents();
+
+
+
+}
+
+
+
+/*=============================================================================
+    EVENTS
+=============================================================================*/
+
+
+function attachEvents(){
+
+
+
+    continueButton.addEventListener(
+
+        "click",
+
+        function(){
+
+            CTM.router.go(
+
+                "diagnosis"
 
             );
-
-
-
-        if(
-
-            !state.canvas
-
-        ){
-
-            return;
 
         }
 
+    );
 
 
-        state.context =
 
-            state.canvas.getContext(
+}
 
-                '2d'
 
-            );
 
+/*=============================================================================
+    LOAD SCORES
+=============================================================================*/
 
 
-        calculateGeometry();
+function loadScores(){
 
 
 
-        loadAssessment();
+    scores=[
 
+        CTM.storage.getPillarScore("purpose")||0,
 
+        CTM.storage.getPillarScore("health")||0,
 
-        draw();
+        CTM.storage.getPillarScore("relationships")||0,
 
-    }
+        CTM.storage.getPillarScore("character")||0,
 
+        CTM.storage.getPillarScore("financialStewardship")||0,
 
+        CTM.storage.getPillarScore("mind")||0,
 
-    /*=========================================================================
-        LOAD DATA
-    =========================================================================*/
+        CTM.storage.getPillarScore("growth")||0,
 
-    function loadAssessment(){
+        CTM.storage.getPillarScore("discipline")||0,
 
-        state.labels =
+        CTM.storage.getPillarScore("gratitude")||0,
 
-            CTM.assessment.pillars.map(
+        CTM.storage.getPillarScore("contribution")||0,
 
-                pillar =>
+        CTM.storage.getPillarScore("innerMeaning")||0,
 
-                pillar.title
+        CTM.storage.getPillarScore("legacy")||0
 
-            );
+    ];
 
 
 
-        const result =
+}
 
-            CTM.storage.getAssessmentResult?.();
 
 
+/*=============================================================================
+    DISPLAY OVERALL
+=============================================================================*/
 
-        if(
 
-            result &&
+function displayOverall(){
 
-            result.pillarScores
 
-        ){
 
-            state.scores =
+    const total=
 
-                result.pillarScores;
+        scores.reduce(
 
-        }
+            function(sum,value){
 
-        else{
+                return sum+value;
 
-            state.scores =
+            },
 
-                new Array(
-
-                    TOTAL_PILLARS
-
-                ).fill(
-
-                    25
-
-                );
-
-        }
-
-    }
-
-
-
-    /*=========================================================================
-        GEOMETRY
-    =========================================================================*/
-
-    function calculateGeometry(){
-
-        state.width =
-
-            state.canvas.width;
-
-
-
-        state.height =
-
-            state.canvas.height;
-
-
-
-        const size =
-
-            Math.min(
-
-                state.width,
-
-                state.height
-
-            );
-
-
-
-        state.radius =
-
-            size * 0.40;
-
-
-
-        state.centerX =
-
-            state.width / 2;
-
-
-
-        state.centerY =
-
-            state.height / 2;
-
-    }
-
-
-
-    /*=========================================================================
-        DRAW
-    =========================================================================*/
-
-    function draw(){
-
-        clear();
-
-        drawOuterCircle();
-
-        drawGrid();
-
-        drawSpokes();
-
-    }
-
-
-
-    /*=========================================================================
-        CLEAR
-    =========================================================================*/
-
-    function clear(){
-
-        state.context.clearRect(
-
-            0,
-
-            0,
-
-            state.width,
-
-            state.height
-
-        );
-
-    }
-
-
-
-    /*=========================================================================
-        OUTER CIRCLE
-    =========================================================================*/
-
-    function drawOuterCircle(){
-
-        const ctx =
-
-            state.context;
-
-
-
-        ctx.beginPath();
-
-
-
-        ctx.arc(
-
-            state.centerX,
-
-            state.centerY,
-
-            state.radius,
-
-            0,
-
-            FULL_CIRCLE
+            0
 
         );
 
 
 
-        ctx.lineWidth = 3;
+    const average=
 
+        Math.round(
 
+            total/
 
-        ctx.strokeStyle =
-
-            '#D4AF37';
-
-
-
-        ctx.stroke();
-
-    }
-
-
-
-    /*=========================================================================
-        GRID
-    =========================================================================*/
-
-    function drawGrid(){
-
-        const ctx =
-
-            state.context;
-
-
-
-        const rings = 5;
-
-
-
-        ctx.strokeStyle =
-
-            'rgba(255,255,255,.10)';
-
-
-
-        ctx.lineWidth = 1;
-
-
-
-        for(
-
-            let i = 1;
-
-            i <= rings;
-
-            i++
-
-        ){
-
-            ctx.beginPath();
-
-
-
-            ctx.arc(
-
-                state.centerX,
-
-                state.centerY,
-
-                state.radius *
-
-                (
-
-                    i /
-
-                    rings
-
-                ),
-
-                0,
-
-                FULL_CIRCLE
-
-            );
-
-
-
-            ctx.stroke();
-
-        }
-
-    }
-
-
-
-    /*=========================================================================
-        SPOKES
-    =========================================================================*/
-
-    function drawSpokes(){
-
-        const ctx =
-
-            state.context;
-
-
-
-        ctx.strokeStyle =
-
-            'rgba(212,175,55,.45)';
-
-
-
-        ctx.lineWidth = 1.5;
-
-
-
-        for(
-
-            let i = 0;
-
-            i < TOTAL_PILLARS;
-
-            i++
-
-        ){
-
-            const angle =
-
-                START_ANGLE +
-
-                (
-
-                    FULL_CIRCLE /
-
-                    TOTAL_PILLARS
-
-                ) * i;
-
-
-
-            const x =
-
-                state.centerX +
-
-                Math.cos(
-
-                    angle
-
-                ) *
-
-                state.radius;
-
-
-
-            const y =
-
-                state.centerY +
-
-                Math.sin(
-
-                    angle
-
-                ) *
-
-                state.radius;
-
-
-
-            ctx.beginPath();
-
-            ctx.moveTo(
-
-                state.centerX,
-
-                state.centerY
-
-            );
-
-            ctx.lineTo(
-
-                x,
-
-                y
-
-            );
-
-            ctx.stroke();
-
-        }
-
-    }
-
-    /*=========================================================================
-        DRAW KAALACHAKRA GRID
-
-        12 SIDED POLYGONS
-
-    =========================================================================*/
-
-    function drawGrid(){
-
-        const ctx = state.context;
-
-        const rings = 5;
-
-        ctx.strokeStyle = 'rgba(255,255,255,.08)';
-
-        ctx.lineWidth = 1;
-
-        for(let ring=1; ring<=rings; ring++){
-
-            const radius =
-
-                state.radius *
-
-                (ring / rings);
-
-            ctx.beginPath();
-
-            for(let i=0;i<TOTAL_PILLARS;i++){
-
-                const angle =
-
-                    START_ANGLE +
-
-                    (FULL_CIRCLE / TOTAL_PILLARS) * i;
-
-                const x =
-
-                    state.centerX +
-
-                    Math.cos(angle) * radius;
-
-                const y =
-
-                    state.centerY +
-
-                    Math.sin(angle) * radius;
-
-                if(i===0){
-
-                    ctx.moveTo(x,y);
-
-                }
-
-                else{
-
-                    ctx.lineTo(x,y);
-
-                }
-
-            }
-
-            ctx.closePath();
-
-            ctx.stroke();
-
-        }
-
-    }
-
-
-
-    /*=========================================================================
-        SCORE POLYGON
-
-    =========================================================================*/
-
-    function drawScorePolygon(){
-
-        const ctx = state.context;
-
-        ctx.beginPath();
-
-        for(let i=0;i<TOTAL_PILLARS;i++){
-
-            const value =
-
-                state.scores[i] / 50;
-
-            const radius =
-
-                state.radius * value;
-
-            const angle =
-
-                START_ANGLE +
-
-                (FULL_CIRCLE / TOTAL_PILLARS) * i;
-
-            const x =
-
-                state.centerX +
-
-                Math.cos(angle) * radius;
-
-            const y =
-
-                state.centerY +
-
-                Math.sin(angle) * radius;
-
-            if(i===0){
-
-                ctx.moveTo(x,y);
-
-            }
-
-            else{
-
-                ctx.lineTo(x,y);
-
-            }
-
-        }
-
-        ctx.closePath();
-
-        ctx.fillStyle =
-
-            'rgba(212,175,55,.18)';
-
-        ctx.strokeStyle =
-
-            '#D4AF37';
-
-        ctx.lineWidth = 3;
-
-        ctx.fill();
-
-        ctx.stroke();
-
-    }
-
-
-
-    /*=========================================================================
-        SCORE POINTS
-
-    =========================================================================*/
-
-    function drawPoints(){
-
-        const ctx = state.context;
-
-        ctx.fillStyle = '#D4AF37';
-
-        for(let i=0;i<TOTAL_PILLARS;i++){
-
-            const value =
-
-                state.scores[i] / 50;
-
-            const radius =
-
-                state.radius * value;
-
-            const angle =
-
-                START_ANGLE +
-
-                (FULL_CIRCLE / TOTAL_PILLARS) * i;
-
-            const x =
-
-                state.centerX +
-
-                Math.cos(angle) * radius;
-
-            const y =
-
-                state.centerY +
-
-                Math.sin(angle) * radius;
-
-            ctx.beginPath();
-
-            ctx.arc(
-
-                x,
-
-                y,
-
-                5,
-
-                0,
-
-                FULL_CIRCLE
-
-            );
-
-            ctx.fill();
-
-        }
-
-    }
-
-
-
-    /*=========================================================================
-        PILLAR LABELS
-
-    =========================================================================*/
-
-    function drawLabels(){
-
-        const ctx = state.context;
-
-        ctx.fillStyle = '#F8F6F0';
-
-        ctx.font = '600 16px Inter';
-
-        ctx.textAlign = 'center';
-
-        ctx.textBaseline = 'middle';
-
-        for(let i=0;i<TOTAL_PILLARS;i++){
-
-            const angle =
-
-                START_ANGLE +
-
-                (FULL_CIRCLE / TOTAL_PILLARS) * i;
-
-            const radius =
-
-                state.radius + 45;
-
-            const x =
-
-                state.centerX +
-
-                Math.cos(angle) * radius;
-
-            const y =
-
-                state.centerY +
-
-                Math.sin(angle) * radius;
-
-            ctx.fillText(
-
-                state.labels[i],
-
-                x,
-
-                y
-
-            );
-
-        }
-
-    }
-
-
-
-    /*=========================================================================
-        CENTER LOGO
-
-    =========================================================================*/
-
-    function drawCenter(){
-
-        const ctx = state.context;
-
-        ctx.beginPath();
-
-        ctx.arc(
-
-            state.centerX,
-
-            state.centerY,
-
-            26,
-
-            0,
-
-            FULL_CIRCLE
-
-        );
-
-        ctx.fillStyle = '#081C3A';
-
-        ctx.fill();
-
-        ctx.strokeStyle = '#D4AF37';
-
-        ctx.lineWidth = 2;
-
-        ctx.stroke();
-
-        ctx.fillStyle = '#D4AF37';
-
-        ctx.font = '700 18px Inter';
-
-        ctx.textAlign = 'center';
-
-        ctx.textBaseline = 'middle';
-
-        ctx.fillText(
-
-            'CTM',
-
-            state.centerX,
-
-            state.centerY
-
-        );
-
-    }
-
-
-
-    /*=========================================================================
-        DRAW
-
-    =========================================================================*/
-
-    function draw(){
-
-        clear();
-
-        drawOuterCircle();
-
-        drawGrid();
-
-        drawSpokes();
-
-        drawScorePolygon();
-
-        drawPoints();
-
-        drawLabels();
-
-        drawCenter();
-
-    }
-
-    /*=========================================================================
-        LIFE BALANCE INDEX™
-
-    =========================================================================*/
-
-    function calculateLifeBalanceIndex(){
-
-        if(
-
-            !state.scores ||
-
-            state.scores.length === 0
-
-        ){
-
-            return 0;
-
-        }
-
-        const values =
-
-            state.scores.map(
-
-                score =>
-
-                (score / 50) * 100
-
-            );
-
-
-
-        const average =
-
-            values.reduce(
-
-                (sum,value)=>sum+value,
-
-                0
-
-            ) / values.length;
-
-
-
-        const variance =
-
-            values.reduce(
-
-                (sum,value)=>{
-
-                    return sum +
-
-                        Math.pow(
-
-                            value-average,
-
-                            2
-
-                        );
-
-                },
-
-                0
-
-            ) / values.length;
-
-
-
-        const deviation =
-
-            Math.sqrt(
-
-                variance
-
-            );
-
-
-
-        return Math.max(
-
-            0,
-
-            Math.round(
-
-                100 -
-
-                deviation
-
-            )
-
-        );
-
-    }
-
-
-
-    /*=========================================================================
-        POPULATE DASHBOARD
-
-    =========================================================================*/
-
-    function populateDashboard(){
-
-        const result =
-
-            CTM.storage.getAssessmentResult();
-
-        if(
-
-            !result
-
-        ){
-
-            return;
-
-        }
-
-        document.getElementById(
-
-            'visitorName'
-
-        ).textContent =
-
-            result.visitor.name;
-
-
-
-        document.getElementById(
-
-            'overallScore'
-
-        ).textContent =
-
-            Math.round(
-
-                result.summary.overallScore
-
-            );
-
-
-
-        document.getElementById(
-
-            'overallBand'
-
-        ).textContent =
-
-            result.summary.performance.title;
-
-
-
-        document.getElementById(
-
-            'lifeBalanceIndex'
-
-        ).textContent =
-
-            calculateLifeBalanceIndex();
-
-
-
-        buildPillarTable(
-
-            result
+            scores.length
 
         );
 
 
 
-        populateHighlights(
+    overallScore.textContent=
 
-            result
+        average+"%";
+
+
+
+}
+
+
+
+/*=============================================================================
+    DRAW WHEEL
+=============================================================================*/
+
+
+function drawWheel(){
+
+
+
+    svg.innerHTML="";
+
+
+
+    drawRings();
+
+
+
+    drawAxes();
+
+
+
+    drawLabels();
+
+
+
+}
+
+                 /*=============================================================================
+    DRAW CONCENTRIC RINGS
+=============================================================================*/
+
+
+function drawRings(){
+
+
+
+    const levels=[
+
+        20,
+
+        40,
+
+        60,
+
+        80,
+
+        100
+
+    ];
+
+
+
+    levels.forEach(function(level){
+
+
+
+        const radius=
+
+            (level/100)
+
+            *
+
+            MAX_RADIUS;
+
+
+
+        const circle=
+
+            document.createElementNS(
+
+                "http://www.w3.org/2000/svg",
+
+                "circle"
+
+            );
+
+
+
+        circle.setAttribute(
+
+            "cx",
+
+            CENTER
 
         );
 
 
 
-        generateInsight(
+        circle.setAttribute(
 
-            result
+            "cy",
+
+            CENTER
 
         );
 
-    }
+
+
+        circle.setAttribute(
+
+            "r",
+
+            radius
+
+        );
 
 
 
-    /*=========================================================================
-        BUILD SCORE TABLE
+        circle.setAttribute(
 
-    =========================================================================*/
+            "class",
 
-    function buildPillarTable(
+            "ring"
 
-        result
+        );
+
+
+
+        svg.appendChild(
+
+            circle
+
+        );
+
+
+
+        /*---------------------------------------------
+            Percentage Label
+        ---------------------------------------------*/
+
+
+
+        const label=
+
+            document.createElementNS(
+
+                "http://www.w3.org/2000/svg",
+
+                "text"
+
+            );
+
+
+
+        label.setAttribute(
+
+            "x",
+
+            CENTER+radius+10
+
+        );
+
+
+
+        label.setAttribute(
+
+            "y",
+
+            CENTER-4
+
+        );
+
+
+
+        label.textContent=
+
+            level+"%";
+
+
+
+        svg.appendChild(
+
+            label
+
+        );
+
+
+
+    });
+
+
+
+}
+
+
+
+/*=============================================================================
+    DRAW AXES
+=============================================================================*/
+
+
+function drawAxes(){
+
+
+
+    const total=
+
+        SPOKES.length;
+
+
+
+    for(
+
+        let i=0;
+
+        i<total;
+
+        i++
 
     ){
 
-        const container =
-
-            document.getElementById(
-
-                'pillarScoreList'
-
-            );
 
 
-
-        container.innerHTML='';
-
-
-
-        CTM.assessment.pillars.forEach(
+        const angle=
 
             (
 
-                pillar,
+                Math.PI*2
 
-                index
+            )
 
-            )=>{
+            /
 
-                const row =
+            total
 
-                    document.createElement(
+            *
 
-                        'div'
+            i
 
-                    );
+            -
 
+            Math.PI/2;
 
 
-                row.className =
 
-                    'pillar-row';
+        const x=
 
+            CENTER+
 
+            Math.cos(angle)
 
-                row.innerHTML =
+            *
 
-                `
+            MAX_RADIUS;
 
-                <span class="pillar-name">
 
-                ${pillar.title}
 
-                </span>
+        const y=
 
-                <span class="pillar-score">
+            CENTER+
 
-                ${Math.round(
+            Math.sin(angle)
 
-                    (result.pillarScores[index]/50)*100
+            *
 
-                )}
+            MAX_RADIUS;
 
-                </span>
 
-                `;
 
+        const line=
 
+            document.createElementNS(
 
-                container.appendChild(
+                "http://www.w3.org/2000/svg",
 
-                    row
-
-                );
-
-
-
-            }
-
-        );
-
-    }
-
-
-
-    /*=========================================================================
-        HIGHLIGHTS
-
-    =========================================================================*/
-
-    function populateHighlights(
-
-        result
-
-    ){
-
-        const strongest =
-
-            CTM.assessment.pillars[
-
-                result.summary
-
-                .strongest
-
-                .pillarIndex
-
-            ];
-
-
-
-        const growth =
-
-            CTM.assessment.pillars[
-
-                result.summary
-
-                .growth
-
-                .pillarIndex
-
-            ];
-
-
-
-        document.getElementById(
-
-            'strongestPillar'
-
-        ).textContent =
-
-            strongest.title;
-
-
-
-        document.getElementById(
-
-            'strongestScore'
-
-        ).textContent =
-
-            Math.round(
-
-                result.summary
-
-                .strongest
-
-                .percentage
+                "line"
 
             );
 
 
 
-        document.getElementById(
+        line.setAttribute(
 
-            'growthPillar'
+            "x1",
 
-        ).textContent =
-
-            growth.title;
-
-
-
-        document.getElementById(
-
-            'growthScore'
-
-        ).textContent =
-
-            Math.round(
-
-                result.summary
-
-                .growth
-
-                .percentage
-
-            );
-
-    }
-
-
-
-    /*=========================================================================
-        PERSONAL INSIGHT
-
-    =========================================================================*/
-
-    function generateInsight(
-
-        result
-
-    ){
-
-        const insight =
-
-        document.getElementById(
-
-            'personalInsight'
+            CENTER
 
         );
 
 
 
-        insight.textContent =
+        line.setAttribute(
 
-        `
+            "y1",
 
-You have completed the CTM PATH™ Assessment.
+            CENTER
 
-Your overall score indicates a
+        );
 
-${result.summary.performance.title.toLowerCase()}
 
-foundation.
 
-Your greatest strength is
+        line.setAttribute(
 
-${document.getElementById('strongestPillar').textContent},
+            "x2",
 
-while your greatest opportunity for growth is
+            x
 
-${document.getElementById('growthPillar').textContent}.
+        );
 
-By strengthening your lower scoring pillars while continuing to build on your existing strengths, you can create a more balanced, resilient and fulfilling life journey.
 
-        `;
+
+        line.setAttribute(
+
+            "y2",
+
+            y
+
+        );
+
+
+
+        line.setAttribute(
+
+            "class",
+
+            "axis"
+
+        );
+
+
+
+        svg.appendChild(
+
+            line
+
+        );
+
+
 
     }
 
 
 
-    /*=========================================================================
-        EVENTS
+}
 
-    =========================================================================*/
 
-    function bindEvents(){
 
-        document
+/*=============================================================================
+    DRAW LABELS
+=============================================================================*/
 
-        .getElementById(
 
-            'btnContinueDiagnosis'
+function drawLabels(){
+
+
+
+    const total=
+
+        SPOKES.length;
+
+
+
+    for(
+
+        let i=0;
+
+        i<total;
+
+        i++
+
+    ){
+
+
+
+        const angle=
+
+            (
+
+                Math.PI*2
+
+            )
+
+            /
+
+            total
+
+            *
+
+            i
+
+            -
+
+            Math.PI/2;
+
+
+
+        const labelRadius=
+
+            MAX_RADIUS+42;
+
+
+
+        const x=
+
+            CENTER+
+
+            Math.cos(angle)
+
+            *
+
+            labelRadius;
+
+
+
+        const y=
+
+            CENTER+
+
+            Math.sin(angle)
+
+            *
+
+            labelRadius;
+
+
+
+        const label=
+
+            document.createElementNS(
+
+                "http://www.w3.org/2000/svg",
+
+                "text"
+
+            );
+
+
+
+        label.setAttribute(
+
+            "x",
+
+            x
+
+        );
+
+
+
+        label.setAttribute(
+
+            "y",
+
+            y
+
+        );
+
+
+
+        label.setAttribute(
+
+            "text-anchor",
+
+            "middle"
+
+        );
+
+
+
+        label.setAttribute(
+
+            "dominant-baseline",
+
+            "middle"
+
+        );
+
+
+
+        label.textContent=
+
+            SPOKES[i];
+
+
+
+        svg.appendChild(
+
+            label
+
+        );
+
+
+
+    }
+
+
+
+}
+
+
+
+/*=============================================================================
+    HELPER
+
+    POLAR → CARTESIAN
+=============================================================================*/
+
+
+function polarToCartesian(
+
+    angle,
+
+    percentage
+
+){
+
+
+
+    const radius=
+
+        (
+
+            percentage
+
+            /
+
+            100
 
         )
 
-        .addEventListener(
+        *
 
-            'click',
+        MAX_RADIUS;
 
-            function(){
 
-                CTM.router.go(
 
-                    'diagnosis'
+    return{
 
-                );
+        x:
+
+            CENTER+
+
+            Math.cos(angle)
+
+            *
+
+            radius,
+
+
+
+        y:
+
+            CENTER+
+
+            Math.sin(angle)
+
+            *
+
+            radius
+
+    };
+
+}
+
+                 /*=============================================================================
+    DRAW RADAR POLYGON
+=============================================================================*/
+
+
+function drawRadar(){
+
+
+
+    const total=
+
+        SPOKES.length;
+
+
+
+    let points=[];
+
+
+
+    for(
+
+        let i=0;
+
+        i<total;
+
+        i++
+
+    ){
+
+
+
+        const angle=
+
+            (
+
+                Math.PI*2
+
+            )
+
+            /
+
+            total
+
+            *
+
+            i
+
+            -
+
+            Math.PI/2;
+
+
+
+        const point=
+
+            polarToCartesian(
+
+                angle,
+
+                scores[i]
+
+            );
+
+
+
+        points.push(
+
+            point.x+
+
+            ","+
+
+            point.y
+
+        );
+
+
+
+        drawScorePoint(
+
+            point.x,
+
+            point.y,
+
+            scores[i]
+
+        );
+
+
+
+    }
+
+
+
+    const polygon=
+
+        document.createElementNS(
+
+            "http://www.w3.org/2000/svg",
+
+            "polygon"
+
+        );
+
+
+
+    polygon.setAttribute(
+
+        "points",
+
+        points.join(
+
+            " "
+
+        )
+
+    );
+
+
+
+    polygon.setAttribute(
+
+        "class",
+
+        "polygon"
+
+    );
+
+
+
+    svg.appendChild(
+
+        polygon
+
+    );
+
+
+
+}
+
+
+
+/*=============================================================================
+    DRAW SCORE POINT
+=============================================================================*/
+
+
+function drawScorePoint(
+
+    x,
+
+    y,
+
+    value
+
+){
+
+    const point=
+
+        document.createElementNS(
+
+            "http://www.w3.org/2000/svg",
+
+            "circle"
+
+        );
+
+
+
+    point.setAttribute(
+
+        "cx",
+
+        x
+
+    );
+
+
+
+    point.setAttribute(
+
+        "cy",
+
+        y
+
+    );
+
+
+
+    point.setAttribute(
+
+        "r",
+
+        5
+
+    );
+
+
+
+    point.setAttribute(
+
+        "fill",
+
+        getPointColour(
+
+            value
+
+        )
+
+    );
+
+
+
+    point.setAttribute(
+
+        "stroke",
+
+        "#FFFFFF"
+
+    );
+
+
+
+    point.setAttribute(
+
+        "stroke-width",
+
+        "2"
+
+    );
+
+
+
+    svg.appendChild(
+
+        point
+
+    );
+
+
+
+}
+
+
+
+/*=============================================================================
+    POINT COLOUR
+=============================================================================*/
+
+
+function getPointColour(
+
+    value
+
+){
+
+
+
+    if(
+
+        value<=30
+
+    ){
+
+        return "#C0392B";
+
+    }
+
+
+
+    if(
+
+        value<=70
+
+    ){
+
+        return "#D68910";
+
+    }
+
+
+
+    return "#1F7A45";
+
+
+
+}
+
+
+
+/*=============================================================================
+    ANIMATE POLYGON
+=============================================================================*/
+
+
+function animatePolygon(){
+
+
+
+    const polygon=
+
+        svg.querySelector(
+
+            ".polygon"
+
+        );
+
+
+
+    if(
+
+        !polygon
+
+    ){
+
+        return;
+
+    }
+
+
+
+    polygon.animate(
+
+        [
+
+            {
+
+                opacity:0,
+
+                transform:
+
+                    "scale(.82)"
+
+            },
+
+            {
+
+                opacity:1,
+
+                transform:
+
+                    "scale(1)"
 
             }
+
+        ],
+
+        {
+
+            duration:900,
+
+            easing:"ease-out",
+
+            fill:"forwards"
+
+        }
+
+    );
+
+
+
+}
+
+
+
+/*=============================================================================
+    SAVE CURRENT PAGE
+=============================================================================*/
+
+
+function savePage(){
+
+
+
+    if(
+
+        CTM.storage.setCurrentPage
+
+    ){
+
+        CTM.storage.setCurrentPage(
+
+            "kaalachakra.html"
 
         );
 
@@ -1301,72 +1220,110 @@ By strengthening your lower scoring pillars while continuing to build on your ex
 
 
 
-    /*=========================================================================
-        INITIALIZE
-
-    =========================================================================*/
-
-    function init(){
-
-        state.canvas =
-
-            document.getElementById(
-
-                'radarCanvas'
-
-            );
+}
 
 
 
-        if(
+/*=============================================================================
+    UPDATE STATUS
+=============================================================================*/
 
-            !state.canvas
 
-        ){
-
-            return;
-
-        }
+function updateStatus(){
 
 
 
-        state.context =
+    if(
 
-            state.canvas
+        CTM.storage.setCompletionStatus
 
-            .getContext(
+    ){
 
-                '2d'
+        CTM.storage.setCompletionStatus(
 
-            );
+            "Kala Chakra"
 
-
-
-        calculateGeometry();
-
-        loadAssessment();
-
-        draw();
-
-        populateDashboard();
-
-        bindEvents();
+        );
 
     }
 
 
 
-    /*=========================================================================
-        PUBLIC API
+}
 
-    =========================================================================*/
 
-    return{
 
-        init
+/*=============================================================================
+    START
+=============================================================================*/
 
-    };
+
+function start(){
+
+
+
+    savePage();
+
+
+
+    updateStatus();
+
+
+
+    init();
+
+
+
+    animatePolygon();
+
+
+
+}
+
+
+
+/*=============================================================================
+    PUBLIC API
+=============================================================================*/
+
+
+return{
+
+    init:start
+
+};
 
 
 
 })();
+
+
+
+/*=============================================================================
+    APPLICATION START
+=============================================================================*/
+
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    function(){
+
+
+
+        CTM.kaalachakra.init();
+
+
+
+    }
+
+);
+
+
+
+/*=============================================================================
+
+    END OF FILE
+
+=============================================================================*/
