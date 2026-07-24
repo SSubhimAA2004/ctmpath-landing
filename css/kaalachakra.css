@@ -1,585 +1,67 @@
 
-/*=============================================================================
-
-    CTM PATH™
-
-    FROM SURVIVAL TO LIVING™
-
-    FILE
-
-    kaalachakra.css
-
-    PURPOSE
-
-    Screen 15
-
-    Kala Chakra™
-
-    RESPONSIBILITIES
-
-    • Premium Layout
-    • Glass Card
-    • SVG Wheel
-    • Overall Score
-    • Reflection
-    • CTA
-    • Responsive Design
-
-=============================================================================*/
-
-
-
-/*=============================================================================
-    PAGE
-=============================================================================*/
-
-
-.kaalachakra-page{
-
-    position:relative;
-
-    min-height:100vh;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    overflow:hidden;
-
-    padding:
-
-        80px
-        40px;
-
-    background:
-
-        radial-gradient(
-
-            circle at top,
-
-            rgba(
-
-                31,
-                122,
-                69,
-                .08
-
-            ),
-
-            transparent 34%
-
-        ),
-
-        radial-gradient(
-
-            circle at bottom right,
-
-            rgba(
-
-                200,
-                169,
-                81,
-                .08
-
-            ),
-
-            transparent 44%
-
-        ),
-
-        linear-gradient(
-
-            135deg,
-
-            #07172F 0%,
-
-            #0A2143 48%,
-
-            #111315 100%
-
-        );
-
-}
-
-
-
-/*=============================================================================
-    BACKGROUND
-=============================================================================*/
-
-
-.kaalachakra-background{
-
-    position:absolute;
-
-    inset:0;
-
-    overflow:hidden;
-
-    pointer-events:none;
-
-}
-
-
-
-.kaalachakra-background::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:720px;
-
-    height:720px;
-
-    top:-260px;
-
-    left:-240px;
-
-    border-radius:50%;
-
-    background:
-
-        radial-gradient(
-
-            circle,
-
-            rgba(
-
-                31,
-                122,
-                69,
-                .10
-
-            ),
-
-            transparent 74%
-
-        );
-
-}
-
-
-
-.kaalachakra-background::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:820px;
-
-    height:820px;
-
-    right:-260px;
-
-    bottom:-300px;
-
-    border-radius:50%;
-
-    background:
-
-        radial-gradient(
-
-            circle,
-
-            rgba(
-
-                200,
-                169,
-                81,
-                .08
-
-            ),
-
-            transparent 74%
-
-        );
-
-}
-
-
-
-/*=============================================================================
-    CONTAINER
-=============================================================================*/
-
-
-.kaalachakra-container{
-
-    position:relative;
-
-    width:100%;
-
-    max-width:1080px;
-
-    z-index:10;
-
-}
-
-
-
-/*=============================================================================
-    PREMIUM CARD
-=============================================================================*/
-
+/* ==========================================================================
+   CTM PATH™ Guided Journey v2.0
+   File        : kaalachakra.css
+   Version     : 1.0
+   Status      : 🔒 LOCKED
+   Purpose     : Kala Chakra™ Screen Styling
+                 Owns ONLY the Kala Chakra™ page.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   Page Card
+   ========================================================================== */
 
 .kaalachakra-card{
 
-    padding:
+    max-width:1200px;
 
-        60px
-        70px;
-
-    border-radius:34px;
-
-    background:
-
-        linear-gradient(
-
-            180deg,
-
-            rgba(
-
-                22,
-                40,
-                73,
-                .90
-
-            ),
-
-            rgba(
-
-                14,
-                28,
-                54,
-                .95
-
-            )
-
-        );
-
-    border:
-
-        1px solid
-
-        rgba(
-
-            255,
-            255,
-            255,
-            .10
-
-        );
-
-    backdrop-filter:
-
-        blur(24px);
-
-    -webkit-backdrop-filter:
-
-        blur(24px);
-
-    box-shadow:
-
-        0 40px 120px
-
-        rgba(
-
-            0,
-            0,
-            0,
-            .45
-
-        );
+    margin-inline:auto;
 
 }
 
 
+/* ==========================================================================
+   Header
+   ========================================================================== */
 
-/*=============================================================================
-    BRAND
-=============================================================================*/
-
-
-.brand-header{
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    margin-bottom:42px;
-
-}
-
-
-
-.ctm-logo{
-
-    width:74px;
-
-    height:auto;
-
-    margin-bottom:18px;
-
-}
-
-
-
-.brand-name{
-
-    color:#FFFFFF;
-
-    font-family:
-
-        "Inter",
-
-        sans-serif;
-
-    font-size:2.2rem;
-
-    font-weight:700;
-
-}
-
-
-
-.brand-tagline{
-
-    margin-top:10px;
-
-    color:#C8A951;
-
-    font-family:
-
-        "Inter",
-
-        sans-serif;
-
-    letter-spacing:.30em;
-
-    font-size:.88rem;
-
-    font-weight:700;
-
-}
-
-
-
-/*=============================================================================
-    HERO
-=============================================================================*/
-
-
-.hero-section{
+.page-title{
 
     text-align:center;
 
-}
-
-
-
-.hero-title-ta{
-
-    margin:0;
-
-    color:#FFFFFF;
-
-    font-family:
-
-        "Noto Sans Tamil",
-
-        sans-serif;
-
-    font-size:2.5rem;
+    margin-bottom:var(--space-3);
 
 }
 
-
-
-.hero-title-en{
-
-    margin-top:16px;
-
-    color:#ECECEC;
-
-    font-family:
-
-        "Playfair Display",
-
-        serif;
-
-    font-size:1.55rem;
-
-}
-
-
-
-.hero-description-ta{
-
-    margin-top:34px;
-
-    color:#FFFFFF;
-
-    font-size:1.15rem;
-
-    line-height:1.9;
-
-}
-
-
-
-.hero-description-en{
-
-    margin-top:18px;
-
-    color:#CBD5E1;
-
-    font-size:1rem;
-
-    line-height:1.9;
-
-}
-
-
-
-.section-divider{
-
-    width:170px;
-
-    height:2px;
-
-    margin:
-
-        34px
-        auto;
-
-    background:
-
-        linear-gradient(
-
-            90deg,
-
-            transparent,
-
-            #C8A951,
-
-            transparent
-
-        );
-
-}
-
-
-
-/*=============================================================================
-    OVERALL SCORE
-=============================================================================*/
-
-
-.overall-score-card{
-
-    width:320px;
-
-    margin:
-
-        42px
-        auto;
+.page-subtitle{
 
     text-align:center;
 
-    padding:
+    margin-bottom:var(--space-6);
 
-        26px
-        32px;
+}
 
-    border-radius:24px;
+.page-description{
 
-    background:
+    max-width:820px;
 
-        linear-gradient(
+    margin-inline:auto;
 
-            180deg,
+    margin-bottom:var(--space-12);
 
-            rgba(
+    text-align:center;
 
-                31,
-                122,
-                69,
-                .14
+    color:var(--text-secondary);
 
-            ),
-
-            rgba(
-
-                31,
-                122,
-                69,
-                .08
-
-            )
-
-        );
-
-    border:
-
-        1px solid
-
-        rgba(
-
-            31,
-            122,
-            69,
-            .30
-
-        );
+    line-height:1.8;
 
 }
 
 
-
-.overall-label{
-
-    color:#CBD5E1;
-
-    font-size:.82rem;
-
-    font-weight:700;
-
-    letter-spacing:.18em;
-
-}
-
-
-
-.overall-score{
-
-    margin-top:14px;
-
-    color:#FFFFFF;
-
-    font-family:
-
-        "Inter",
-
-        sans-serif;
-
-    font-size:3rem;
-
-    font-weight:700;
-
-}
-
-
-
-/*=============================================================================
-    WHEEL
-=============================================================================*/
-
+/* ==========================================================================
+   Wheel Section
+   ========================================================================== */
 
 .wheel-section{
 
@@ -587,815 +69,332 @@
 
     justify-content:center;
 
-    margin:
+    align-items:center;
 
-        50px
-        0;
+    margin-bottom:var(--space-12);
 
 }
 
-
-
-.wheel-container{
+.wheel-wrapper{
 
     width:100%;
 
-    max-width:720px;
+    max-width:760px;
 
     aspect-ratio:1;
 
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:var(--space-8);
+
+    border-radius:var(--radius-xl);
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid var(--border-light);
+
 }
 
-
-
-.wheel-svg{
+#kaalachakraCanvas{
 
     width:100%;
 
-    height:100%;
+    height:auto;
 
     display:block;
 
 }
 
-/*=============================================================================
-    REFLECTION SECTION
-=============================================================================*/
 
+/* ==========================================================================
+   Summary
+   ========================================================================== */
 
-.reflection-section{
+.summary-section{
 
-    width:100%;
-
-    max-width:820px;
-
-    margin:
-
-        0 auto
-        56px;
+    margin-bottom:var(--space-12);
 
 }
 
+.summary-grid{
 
+    display:grid;
 
-.reflection-title{
+    grid-template-columns:
 
-    margin:0;
+        repeat(4,1fr);
+
+    gap:var(--space-6);
+
+}
+
+.summary-card{
+
+    padding:var(--space-6);
 
     text-align:center;
 
-    color:#C8A951;
+    border-radius:var(--radius-lg);
 
-    font-family:
+    background:rgba(255,255,255,.04);
 
-        "Inter",
+    border:1px solid var(--border-light);
 
-        sans-serif;
+}
 
-    font-size:.90rem;
+.summary-label{
 
-    font-weight:700;
+    display:block;
 
-    letter-spacing:.22em;
+    margin-bottom:var(--space-3);
+
+    color:var(--text-secondary);
+
+    font-size:var(--fs-sm);
 
     text-transform:uppercase;
 
+    letter-spacing:.05em;
+
 }
 
+.summary-value{
 
+    font-size:var(--fs-2xl);
 
-.reflection-title-ta{
+    font-weight:var(--fw-bold);
 
-    margin:
-
-        18px
-        0
-        42px;
-
-    text-align:center;
-
-    color:#FFFFFF;
-
-    font-family:
-
-        "Noto Sans Tamil",
-
-        sans-serif;
-
-    font-size:1.22rem;
-
-    line-height:1.8;
+    color:var(--color-secondary);
 
 }
 
 
+/* ==========================================================================
+   Continue in Batch 2/n
+   ========================================================================== */
 
-/*=============================================================================
-    REFLECTION CARD
-=============================================================================*/
+/* ==========================================================================
+   Reflection
+   ========================================================================== */
 
+.reflection-panel{
 
-.reflection-card{
+    margin-bottom:var(--space-10);
 
-    display:flex;
+    padding:var(--space-8);
 
-    align-items:flex-start;
+    border-left:5px solid var(--color-secondary);
 
-    gap:28px;
+    border-radius:var(--radius-xl);
 
-    margin-bottom:24px;
-
-    padding:
-
-        28px
-        32px;
-
-    border-radius:22px;
-
-    background:
-
-        rgba(
-
-            255,
-            255,
-            255,
-            .035
-
-        );
-
-    border:
-
-        1px solid
-
-        rgba(
-
-            255,
-            255,
-            255,
-            .08
-
-        );
-
-    transition:
-
-        all .30s ease;
+    background:rgba(198,164,91,.08);
 
 }
 
+.reflection-panel h3{
 
+    margin-bottom:var(--space-4);
 
-.reflection-card:hover{
-
-    transform:
-
-        translateY(-3px);
-
-    border-color:
-
-        rgba(
-
-            200,
-            169,
-            81,
-            .25
-
-        );
+    color:var(--color-secondary);
 
 }
 
-
-
-.reflection-number{
-
-    width:58px;
-
-    height:58px;
-
-    flex-shrink:0;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    border-radius:50%;
-
-    background:
-
-        linear-gradient(
-
-            180deg,
-
-            #C8A951,
-
-            #A98939
-
-        );
-
-    color:#07172F;
-
-    font-family:
-
-        "Inter",
-
-        sans-serif;
-
-    font-size:1.1rem;
-
-    font-weight:700;
-
-}
-
-
-
-.reflection-content{
-
-    flex:1;
-
-}
-
-
-
-.reflection-content h5{
-
-    margin:0;
-
-    color:#FFFFFF;
-
-    font-family:
-
-        "Inter",
-
-        sans-serif;
-
-    font-size:1.22rem;
-
-    font-weight:700;
-
-}
-
-
-
-.reflection-content p{
-
-    margin-top:14px;
-
-    color:#CBD5E1;
-
-    font-family:
-
-        "Inter",
-
-        sans-serif;
-
-    font-size:1rem;
-
-    line-height:1.85;
-
-}
-
-
-
-/*=============================================================================
-    INSIGHT CARD
-=============================================================================*/
-
-
-.insight-card{
-
-    display:flex;
-
-    align-items:flex-start;
-
-    gap:26px;
-
-    margin:
-
-        56px
-        auto;
-
-    padding:
-
-        34px
-        38px;
-
-    max-width:820px;
-
-    border-radius:24px;
-
-    background:
-
-        linear-gradient(
-
-            180deg,
-
-            rgba(
-
-                200,
-                169,
-                81,
-                .10
-
-            ),
-
-            rgba(
-
-                200,
-                169,
-                81,
-                .04
-
-            )
-
-        );
-
-    border:
-
-        1px solid
-
-        rgba(
-
-            200,
-            169,
-            81,
-            .20
-
-        );
-
-}
-
-
-
-.insight-icon{
-
-    width:64px;
-
-    height:64px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    border-radius:50%;
-
-    flex-shrink:0;
-
-    background:
-
-        linear-gradient(
-
-            180deg,
-
-            #C8A951,
-
-            #A98939
-
-        );
-
-    color:#07172F;
-
-    font-size:1.5rem;
-
-}
-
-
-
-.insight-body{
-
-    flex:1;
-
-}
-
-
-
-.insight-body h4{
-
-    margin:0;
-
-    color:#FFFFFF;
-
-    font-family:
-
-        "Playfair Display",
-
-        serif;
-
-    font-size:1.5rem;
-
-}
-
-
-
-.insight-body p{
-
-    margin-top:18px;
-
-    color:#CBD5E1;
+#reflectionText{
 
     line-height:1.9;
 
+    color:var(--text-primary);
+
 }
 
 
+/* ==========================================================================
+   Insights
+   ========================================================================== */
 
-/*=============================================================================
-    CTA
-=============================================================================*/
+.insights-section{
+
+    margin-bottom:var(--space-10);
+
+}
+
+.section-title{
+
+    text-align:center;
+
+    margin-bottom:var(--space-6);
+
+}
+
+.insights-panel{
+
+    padding:var(--space-8);
+
+    border-radius:var(--radius-xl);
+
+    border:1px solid var(--border-light);
+
+    background:rgba(255,255,255,.04);
+
+}
+
+.insights-panel p{
+
+    line-height:1.9;
+
+    color:var(--text-primary);
+
+}
 
 
-.cta-section{
+/* ==========================================================================
+   Wisdom
+   ========================================================================== */
+
+.wisdom-panel{
+
+    margin-bottom:var(--space-10);
+
+    padding:var(--space-8);
+
+    border-left:5px solid var(--color-primary);
+
+    border-radius:var(--radius-xl);
+
+    background:rgba(13,148,136,.08);
+
+}
+
+.wisdom-panel h3{
+
+    margin-bottom:var(--space-4);
+
+    color:var(--color-primary);
+
+}
+
+.wisdom-panel p{
+
+    line-height:1.9;
+
+    color:var(--text-primary);
+
+}
+
+
+/* ==========================================================================
+   Navigation
+   ========================================================================== */
+
+.navigation{
 
     display:flex;
 
-    justify-content:center;
+    justify-content:space-between;
 
-    margin-top:50px;
+    align-items:center;
 
-}
+    gap:var(--space-6);
 
-
-
-.primary-button{
-
-    width:100%;
-
-    max-width:420px;
-
-    min-height:74px;
-
-    border:none;
-
-    border-radius:18px;
-
-    cursor:pointer;
-
-    background:
-
-        linear-gradient(
-
-            180deg,
-
-            #1F7A45,
-
-            #17653A
-
-        );
-
-    color:#FFFFFF;
-
-    transition:
-
-        all .30s ease;
+    margin-top:var(--space-12);
 
 }
 
 
+/* ==========================================================================
+   Responsive — Tablet
+   ========================================================================== */
 
-.primary-button:hover{
+@media(max-width:992px){
 
-    transform:
+    .summary-grid{
 
-        translateY(-3px);
+        grid-template-columns:
 
-    box-shadow:
-
-        0 18px 42px
-
-        rgba(
-
-            31,
-            122,
-            69,
-            .40
-
-        );
-
-}
-
-
-
-.button-ta{
-
-    display:block;
-
-    font-family:
-
-        "Noto Sans Tamil",
-
-        sans-serif;
-
-    font-size:1.05rem;
-
-    font-weight:700;
-
-}
-
-
-
-.button-en{
-
-    display:block;
-
-    margin-top:8px;
-
-    font-family:
-
-        "Inter",
-
-        sans-serif;
-
-    font-size:.74rem;
-
-    font-weight:700;
-
-    letter-spacing:.18em;
-
-}
-
-
-
-/*=============================================================================
-    SVG STYLING
-=============================================================================*/
-
-
-.wheel-svg text{
-
-    fill:#CBD5E1;
-
-    font-family:
-
-        "Inter",
-
-        sans-serif;
-
-    font-size:14px;
-
-}
-
-
-
-.wheel-svg .axis{
-
-    stroke:
-
-        rgba(
-
-            255,
-            255,
-            255,
-            .18
-
-        );
-
-    stroke-width:1.2;
-
-}
-
-
-
-.wheel-svg .ring{
-
-    fill:none;
-
-    stroke:
-
-        rgba(
-
-            255,
-            255,
-            255,
-            .10
-
-        );
-
-}
-
-
-
-.wheel-svg .polygon{
-
-    fill:
-
-        rgba(
-
-            31,
-            122,
-            69,
-            .20
-
-        );
-
-    stroke:#1F7A45;
-
-    stroke-width:3;
-
-}
-
-
-
-/*=============================================================================
-    ANIMATIONS
-=============================================================================*/
-
-
-.kaalachakra-card{
-
-    animation:
-
-        fadeUp .8s ease both;
-
-}
-
-
-
-@keyframes fadeUp{
-
-    from{
-
-        opacity:0;
-
-        transform:
-
-            translateY(32px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-
-            translateY(0);
+            repeat(2,1fr);
 
     }
 
 }
 
 
+/* ==========================================================================
+   Responsive — Mobile
+   ========================================================================== */
 
-/*=============================================================================
-    TABLET
-=============================================================================*/
-
-
-@media (max-width:1024px){
+@media(max-width:768px){
 
     .kaalachakra-card{
 
-        padding:
-
-            48px
-            40px;
+        padding:var(--space-8);
 
     }
 
-}
+    .wheel-wrapper{
 
-
-
-/*=============================================================================
-    MOBILE
-=============================================================================*/
-
-
-@media (max-width:768px){
-
-    .kaalachakra-page{
-
-        padding:
-
-            32px
-            16px;
+        padding:var(--space-5);
 
     }
 
+    .summary-grid{
 
-
-    .kaalachakra-card{
-
-        padding:
-
-            28px
-            20px;
-
-        border-radius:24px;
+        grid-template-columns:1fr;
 
     }
 
+    .summary-card{
 
-
-    .hero-title-ta{
-
-        font-size:2rem;
+        padding:var(--space-5);
 
     }
 
-
-
-    .hero-title-en{
-
-        font-size:1.2rem;
-
-    }
-
-
-
-    .overall-score{
-
-        font-size:2.4rem;
-
-    }
-
-
-
-    .reflection-card,
-
-    .insight-card{
+    .navigation{
 
         flex-direction:column;
 
-        text-align:center;
-
-        align-items:center;
-
     }
 
-
-
-    .overall-score-card{
+    .navigation .btn{
 
         width:100%;
 
     }
 
+}
 
 
-    .primary-button{
+@media(max-width:480px){
 
-        max-width:none;
+    .kaalachakra-card{
+
+        padding:var(--space-6);
+
+    }
+
+    .page-description{
+
+        font-size:var(--fs-base);
+
+    }
+
+    .summary-value{
+
+        font-size:var(--fs-xl);
 
     }
 
 }
 
 
+/* ==========================================================================
+   End of File
 
-/*=============================================================================
-    SMALL MOBILE
-=============================================================================*/
+   File   : kaalachakra.css
 
+   Status : 🔒 LOCKED
+   ========================================================================== */
 
-@media (max-width:480px){
-
-    .hero-title-ta{
-
-        font-size:1.7rem;
-
-    }
-
-
-
-    .reflection-content h5{
-
-        font-size:1.05rem;
-
-    }
-
-
-
-    .reflection-content p,
-
-    .insight-body p{
-
-        font-size:.95rem;
-
-    }
-
-
-
-    .button-ta{
-
-        font-size:.95rem;
-
-    }
-
-
-
-    .button-en{
-
-        font-size:.68rem;
-
-    }
-
-}
-
-
-
-/*=============================================================================
-    END OF FILE
-=============================================================================*/
