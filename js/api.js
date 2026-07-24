@@ -70,7 +70,7 @@ CTM.api = (function(){
 
     const API_URL =
 
-        'YOUR_GOOGLE_APPS_SCRIPT_URL';
+        'https://script.google.com/macros/s/AKfycby1yF2m7cIXnHh0SqfegiDuxsjdMX6PVcTaSogQ5HFqx3z5CGB3jjN0vCFvQuPV5sBCIw/exec';
 
 
 
@@ -92,9 +92,7 @@ CTM.api = (function(){
 
     ){
 
-
         try{
-
 
             const response =
 
@@ -104,36 +102,39 @@ CTM.api = (function(){
 
                     {
 
-
                         method:'POST',
 
-
                         headers:{
-
 
                             'Content-Type':
 
                                 'text/plain;charset=utf-8'
 
-
                         },
-
 
                         body:JSON.stringify({
 
-
                             action,
-
 
                             data
 
-
                         })
-
 
                     }
 
                 );
+
+
+
+            if(!response.ok){
+
+                throw new Error(
+
+                    'HTTP ' + response.status
+
+                );
+
+            }
 
 
 
@@ -145,13 +146,9 @@ CTM.api = (function(){
 
             return result;
 
-
-
         }
 
-
         catch(error){
-
 
             console.error(
 
@@ -165,22 +162,17 @@ CTM.api = (function(){
 
             return{
 
-
                 success:false,
 
-
-                message:
-
-                    error.message
-
+                message:error.message
 
             };
 
-
         }
 
-
     }
+
+
 
 
 
@@ -194,13 +186,11 @@ CTM.api = (function(){
 
     async function ping(){
 
-
         return await request(
 
             'ping'
 
         );
-
 
     }
 
@@ -211,21 +201,10 @@ CTM.api = (function(){
     /*=========================================================================
         REGISTER VISITOR
 
-        Creates New Visitor Record
-
-        Google Sheet:
-
-        Visitors Sheet
-
-        Returns:
-
-        VisitorID
-
     =========================================================================*/
 
 
     async function registerVisitor(data){
-
 
         return await request(
 
@@ -234,7 +213,6 @@ CTM.api = (function(){
             data
 
         );
-
 
     }
 
@@ -245,13 +223,10 @@ CTM.api = (function(){
     /*=========================================================================
         UPDATE VISITOR
 
-        Updates Existing Visitor Journey
-
     =========================================================================*/
 
 
     async function updateVisitor(data){
-
 
         return await request(
 
@@ -260,7 +235,6 @@ CTM.api = (function(){
             data
 
         );
-
 
     }
 
@@ -271,13 +245,10 @@ CTM.api = (function(){
     /*=========================================================================
         GET VISITOR
 
-        Retrieve Visitor Record
-
     =========================================================================*/
 
 
     async function getVisitor(visitorId){
-
 
         return await request(
 
@@ -285,14 +256,11 @@ CTM.api = (function(){
 
             {
 
-
                 visitorId
-
 
             }
 
         );
-
 
     }
 
@@ -308,12 +276,9 @@ CTM.api = (function(){
 
     async function isOnline(){
 
-
         const result =
 
             await ping();
-
-
 
         return Boolean(
 
@@ -322,7 +287,6 @@ CTM.api = (function(){
             result.success
 
         );
-
 
     }
 
@@ -338,21 +302,15 @@ CTM.api = (function(){
 
     return{
 
-
         ping,
-
 
         registerVisitor,
 
-
         updateVisitor,
-
 
         getVisitor,
 
-
         isOnline
-
 
     };
 
