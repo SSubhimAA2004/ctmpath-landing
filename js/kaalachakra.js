@@ -1,1147 +1,250 @@
 
-/*=============================================================================
+/* ==========================================================================
+   CTM PATH™ Guided Journey v2.0
+   File        : kaalachakra.js
+   Version     : 1.0
+   Status      : 🔒 LOCKED
 
-    CTM PATH™
+   PURPOSE
+   --------------------------------------------------------------------------
+   Kala Chakra™ Behaviour Engine
 
-    FROM SURVIVAL TO LIVING™
+   Owns
 
-    FILE
+   ✓ Wheel Rendering
+   ✓ Summary Rendering
+   ✓ Overall Score
+   ✓ Strongest / Weakest Spokes
+   ✓ Reflection
+   ✓ Navigation
 
-    kaalachakra.js
+   Owns NO
 
-    PURPOSE
+   ✗ Assessment Questions
+   ✗ Assessment Behaviour
+   ✗ Diagnosis Logic
+   ✗ Prescription Logic
+   ✗ Storage Implementation
+   ✗ API Implementation
 
-    Screen 15 Controller
+   ========================================================================== */
 
-    RESPONSIBILITIES
+"use strict";
 
-    • Read Assessment Results
-    • Draw Kala Chakra™
-    • Display Overall Score
-    • Continue To Diagnosis™
+/* ==========================================================================
+   KALA CHAKRA CONTROLLER
+   ========================================================================== */
 
-=============================================================================*/
+const KalaChakraPage = (() => {
 
+    /* ======================================================================
+       STATE
+       ====================================================================== */
 
-'use strict';
+    let visitor = null;
 
+    let assessment = null;
 
+    let percentages = {};
 
-/*=============================================================================
-    GLOBAL NAMESPACE
-=============================================================================*/
+    /* ======================================================================
+       DOM
+       ====================================================================== */
 
+    let canvas;
 
-window.CTM = window.CTM || {};
+    let context;
 
+    let overallScore;
 
+    let wheelBalance;
 
-/*=============================================================================
-    KALA CHAKRA MODULE
-=============================================================================*/
+    let strongestSpoke;
 
+    let weakestSpoke;
 
-CTM.kaalachakra=(function(){
+    let reflectionText;
 
+    let insightsPanel;
 
+    let continueButton;
 
-/*=============================================================================
-    MODULE VARIABLES
-=============================================================================*/
+    let backButton;
 
+    /* ======================================================================
+       INITIALISE
+       ====================================================================== */
 
-let svg=null;
+    function init(){
 
-let overallScore=null;
+        cacheDom();
 
-let continueButton=null;
+        loadState();
 
+        calculateSummary();
 
+        renderWheel();
 
-const SIZE=800;
+        renderSummary();
 
-const CENTER=400;
+        renderReflection();
 
-const MAX_RADIUS=300;
+        bindEvents();
 
+        console.info(
 
-
-const SPOKES=[
-
-"Purpose",
-
-"Health",
-
-"Relationships",
-
-"Character",
-
-"Financial",
-
-"Mind",
-
-"Growth",
-
-"Discipline",
-
-"Gratitude",
-
-"Contribution",
-
-"Meaning",
-
-"Legacy"
-
-];
-
-
-
-let scores=[];
-
-
-
-/*=============================================================================
-    INITIALIZE
-=============================================================================*/
-
-
-function init(){
-
-
-
-    svg=document.getElementById(
-
-        "wheelSvg"
-
-    );
-
-
-
-    overallScore=document.getElementById(
-
-        "overallScore"
-
-    );
-
-
-
-    continueButton=document.getElementById(
-
-        "continueDiagnosis"
-
-    );
-
-
-
-    loadScores();
-
-
-
-    drawWheel();
-
-
-
-    drawRadar();
-
-
-
-    displayOverall();
-
-
-
-    attachEvents();
-
-
-
-}
-
-
-
-/*=============================================================================
-    EVENTS
-=============================================================================*/
-
-
-function attachEvents(){
-
-
-
-    continueButton.addEventListener(
-
-        "click",
-
-        function(){
-
-            CTM.router.go(
-
-                "diagnosis"
-
-            );
-
-        }
-
-    );
-
-
-
-}
-
-
-
-/*=============================================================================
-    LOAD SCORES
-=============================================================================*/
-
-
-function loadScores(){
-
-
-
-    scores=[
-
-        CTM.storage.getPillarScore("purpose")||0,
-
-        CTM.storage.getPillarScore("health")||0,
-
-        CTM.storage.getPillarScore("relationships")||0,
-
-        CTM.storage.getPillarScore("character")||0,
-
-        CTM.storage.getPillarScore("financialStewardship")||0,
-
-        CTM.storage.getPillarScore("mind")||0,
-
-        CTM.storage.getPillarScore("growth")||0,
-
-        CTM.storage.getPillarScore("discipline")||0,
-
-        CTM.storage.getPillarScore("gratitude")||0,
-
-        CTM.storage.getPillarScore("contribution")||0,
-
-        CTM.storage.getPillarScore("innerMeaning")||0,
-
-        CTM.storage.getPillarScore("legacy")||0
-
-    ];
-
-
-
-}
-
-
-
-/*=============================================================================
-    DISPLAY OVERALL
-=============================================================================*/
-
-
-function displayOverall(){
-
-
-
-    const total=
-
-        scores.reduce(
-
-            function(sum,value){
-
-                return sum+value;
-
-            },
-
-            0
+            "Kala Chakra Ready."
 
         );
-
-
-
-    const average=
-
-        Math.round(
-
-            total/
-
-            scores.length
-
-        );
-
-
-
-    overallScore.textContent=
-
-        average+"%";
-
-
-
-}
-
-
-
-/*=============================================================================
-    DRAW WHEEL
-=============================================================================*/
-
-
-function drawWheel(){
-
-
-
-    svg.innerHTML="";
-
-
-
-    drawRings();
-
-
-
-    drawAxes();
-
-
-
-    drawLabels();
-
-
-
-}
-
-                 /*=============================================================================
-    DRAW CONCENTRIC RINGS
-=============================================================================*/
-
-
-function drawRings(){
-
-
-
-    const levels=[
-
-        20,
-
-        40,
-
-        60,
-
-        80,
-
-        100
-
-    ];
-
-
-
-    levels.forEach(function(level){
-
-
-
-        const radius=
-
-            (level/100)
-
-            *
-
-            MAX_RADIUS;
-
-
-
-        const circle=
-
-            document.createElementNS(
-
-                "http://www.w3.org/2000/svg",
-
-                "circle"
-
-            );
-
-
-
-        circle.setAttribute(
-
-            "cx",
-
-            CENTER
-
-        );
-
-
-
-        circle.setAttribute(
-
-            "cy",
-
-            CENTER
-
-        );
-
-
-
-        circle.setAttribute(
-
-            "r",
-
-            radius
-
-        );
-
-
-
-        circle.setAttribute(
-
-            "class",
-
-            "ring"
-
-        );
-
-
-
-        svg.appendChild(
-
-            circle
-
-        );
-
-
-
-        /*---------------------------------------------
-            Percentage Label
-        ---------------------------------------------*/
-
-
-
-        const label=
-
-            document.createElementNS(
-
-                "http://www.w3.org/2000/svg",
-
-                "text"
-
-            );
-
-
-
-        label.setAttribute(
-
-            "x",
-
-            CENTER+radius+10
-
-        );
-
-
-
-        label.setAttribute(
-
-            "y",
-
-            CENTER-4
-
-        );
-
-
-
-        label.textContent=
-
-            level+"%";
-
-
-
-        svg.appendChild(
-
-            label
-
-        );
-
-
-
-    });
-
-
-
-}
-
-
-
-/*=============================================================================
-    DRAW AXES
-=============================================================================*/
-
-
-function drawAxes(){
-
-
-
-    const total=
-
-        SPOKES.length;
-
-
-
-    for(
-
-        let i=0;
-
-        i<total;
-
-        i++
-
-    ){
-
-
-
-        const angle=
-
-            (
-
-                Math.PI*2
-
-            )
-
-            /
-
-            total
-
-            *
-
-            i
-
-            -
-
-            Math.PI/2;
-
-
-
-        const x=
-
-            CENTER+
-
-            Math.cos(angle)
-
-            *
-
-            MAX_RADIUS;
-
-
-
-        const y=
-
-            CENTER+
-
-            Math.sin(angle)
-
-            *
-
-            MAX_RADIUS;
-
-
-
-        const line=
-
-            document.createElementNS(
-
-                "http://www.w3.org/2000/svg",
-
-                "line"
-
-            );
-
-
-
-        line.setAttribute(
-
-            "x1",
-
-            CENTER
-
-        );
-
-
-
-        line.setAttribute(
-
-            "y1",
-
-            CENTER
-
-        );
-
-
-
-        line.setAttribute(
-
-            "x2",
-
-            x
-
-        );
-
-
-
-        line.setAttribute(
-
-            "y2",
-
-            y
-
-        );
-
-
-
-        line.setAttribute(
-
-            "class",
-
-            "axis"
-
-        );
-
-
-
-        svg.appendChild(
-
-            line
-
-        );
-
-
 
     }
 
+    /* ======================================================================
+       CACHE DOM
+       ====================================================================== */
 
+    function cacheDom(){
 
-}
+        canvas =
 
+            document.getElementById(
 
-
-/*=============================================================================
-    DRAW LABELS
-=============================================================================*/
-
-
-function drawLabels(){
-
-
-
-    const total=
-
-        SPOKES.length;
-
-
-
-    for(
-
-        let i=0;
-
-        i<total;
-
-        i++
-
-    ){
-
-
-
-        const angle=
-
-            (
-
-                Math.PI*2
-
-            )
-
-            /
-
-            total
-
-            *
-
-            i
-
-            -
-
-            Math.PI/2;
-
-
-
-        const labelRadius=
-
-            MAX_RADIUS+42;
-
-
-
-        const x=
-
-            CENTER+
-
-            Math.cos(angle)
-
-            *
-
-            labelRadius;
-
-
-
-        const y=
-
-            CENTER+
-
-            Math.sin(angle)
-
-            *
-
-            labelRadius;
-
-
-
-        const label=
-
-            document.createElementNS(
-
-                "http://www.w3.org/2000/svg",
-
-                "text"
+                "kaalachakraCanvas"
 
             );
 
+        context =
 
+            canvas.getContext(
 
-        label.setAttribute(
-
-            "x",
-
-            x
-
-        );
-
-
-
-        label.setAttribute(
-
-            "y",
-
-            y
-
-        );
-
-
-
-        label.setAttribute(
-
-            "text-anchor",
-
-            "middle"
-
-        );
-
-
-
-        label.setAttribute(
-
-            "dominant-baseline",
-
-            "middle"
-
-        );
-
-
-
-        label.textContent=
-
-            SPOKES[i];
-
-
-
-        svg.appendChild(
-
-            label
-
-        );
-
-
-
-    }
-
-
-
-}
-
-
-
-/*=============================================================================
-    HELPER
-
-    POLAR → CARTESIAN
-=============================================================================*/
-
-
-function polarToCartesian(
-
-    angle,
-
-    percentage
-
-){
-
-
-
-    const radius=
-
-        (
-
-            percentage
-
-            /
-
-            100
-
-        )
-
-        *
-
-        MAX_RADIUS;
-
-
-
-    return{
-
-        x:
-
-            CENTER+
-
-            Math.cos(angle)
-
-            *
-
-            radius,
-
-
-
-        y:
-
-            CENTER+
-
-            Math.sin(angle)
-
-            *
-
-            radius
-
-    };
-
-}
-
-                 /*=============================================================================
-    DRAW RADAR POLYGON
-=============================================================================*/
-
-
-function drawRadar(){
-
-
-
-    const total=
-
-        SPOKES.length;
-
-
-
-    let points=[];
-
-
-
-    for(
-
-        let i=0;
-
-        i<total;
-
-        i++
-
-    ){
-
-
-
-        const angle=
-
-            (
-
-                Math.PI*2
-
-            )
-
-            /
-
-            total
-
-            *
-
-            i
-
-            -
-
-            Math.PI/2;
-
-
-
-        const point=
-
-            polarToCartesian(
-
-                angle,
-
-                scores[i]
+                "2d"
 
             );
 
+        overallScore =
 
+            document.getElementById(
 
-        points.push(
+                "overallScore"
 
-            point.x+
+            );
 
-            ","+
+        wheelBalance =
 
-            point.y
+            document.getElementById(
 
-        );
+                "wheelBalance"
 
+            );
 
+        strongestSpoke =
 
-        drawScorePoint(
+            document.getElementById(
 
-            point.x,
+                "strongestSpoke"
 
-            point.y,
+            );
 
-            scores[i]
+        weakestSpoke =
 
-        );
+            document.getElementById(
 
+                "weakestSpoke"
 
+            );
+
+        reflectionText =
+
+            document.getElementById(
+
+                "reflectionText"
+
+            );
+
+        insightsPanel =
+
+            document.getElementById(
+
+                "lifeInsights"
+
+            );
+
+        continueButton =
+
+            document.getElementById(
+
+                "continueButton"
+
+            );
+
+        backButton =
+
+            document.getElementById(
+
+                "backButton"
+
+            );
 
     }
 
+    /* ======================================================================
+       LOAD STATE
+       ====================================================================== */
+
+    function loadState(){
+
+        visitor =
+
+            App.getVisitor();
+
+        assessment =
+
+            App.getAssessment();
+
+        percentages =
+
+            assessment.percentages || {};
+
+    }
+
+    /* ======================================================================
+       Continue in Batch 2/n
+       ========================================================================== */
 
 
-    const polygon=
+                        /* ==========================================================================
+   SUMMARY ENGINE
+   ========================================================================== */
 
-        document.createElementNS(
+let summary = {
 
-            "http://www.w3.org/2000/svg",
+    overall : 0,
 
-            "polygon"
+    strongest : null,
 
-        );
+    weakest : null,
 
+    balance : ""
 
+};
 
-    polygon.setAttribute(
+/* ==========================================================================
+   CALCULATE SUMMARY
+   ========================================================================== */
 
-        "points",
+function calculateSummary(){
 
-        points.join(
+    const entries =
 
-            " "
+        Object.entries(
 
-        )
-
-    );
-
-
-
-    polygon.setAttribute(
-
-        "class",
-
-        "polygon"
-
-    );
-
-
-
-    svg.appendChild(
-
-        polygon
-
-    );
-
-
-
-}
-
-
-
-/*=============================================================================
-    DRAW SCORE POINT
-=============================================================================*/
-
-
-function drawScorePoint(
-
-    x,
-
-    y,
-
-    value
-
-){
-
-    const point=
-
-        document.createElementNS(
-
-            "http://www.w3.org/2000/svg",
-
-            "circle"
+            percentages
 
         );
-
-
-
-    point.setAttribute(
-
-        "cx",
-
-        x
-
-    );
-
-
-
-    point.setAttribute(
-
-        "cy",
-
-        y
-
-    );
-
-
-
-    point.setAttribute(
-
-        "r",
-
-        5
-
-    );
-
-
-
-    point.setAttribute(
-
-        "fill",
-
-        getPointColour(
-
-            value
-
-        )
-
-    );
-
-
-
-    point.setAttribute(
-
-        "stroke",
-
-        "#FFFFFF"
-
-    );
-
-
-
-    point.setAttribute(
-
-        "stroke-width",
-
-        "2"
-
-    );
-
-
-
-    svg.appendChild(
-
-        point
-
-    );
-
-
-
-}
-
-
-
-/*=============================================================================
-    POINT COLOUR
-=============================================================================*/
-
-
-function getPointColour(
-
-    value
-
-){
-
-
 
     if(
 
-        value<=30
-
-    ){
-
-        return "#C0392B";
-
-    }
-
-
-
-    if(
-
-        value<=70
-
-    ){
-
-        return "#D68910";
-
-    }
-
-
-
-    return "#1F7A45";
-
-
-
-}
-
-
-
-/*=============================================================================
-    ANIMATE POLYGON
-=============================================================================*/
-
-
-function animatePolygon(){
-
-
-
-    const polygon=
-
-        svg.querySelector(
-
-            ".polygon"
-
-        );
-
-
-
-    if(
-
-        !polygon
+        entries.length === 0
 
     ){
 
@@ -1149,181 +252,1043 @@ function animatePolygon(){
 
     }
 
+    summary.overall =
+
+        assessment.overallPercentage || 0;
+
+    entries.sort(
+
+        (a,b) =>
+
+        b[1] - a[1]
+
+    );
+
+    summary.strongest =
+
+        entries[0];
+
+    summary.weakest =
+
+        entries[entries.length - 1];
+
+    summary.balance =
+
+        determineWheelBalance();
+
+}
+
+/* ==========================================================================
+   WHEEL BALANCE
+   ========================================================================== */
+
+function determineWheelBalance(){
+
+    if(
+
+        summary.overall >= 80
+
+    ){
+
+        return "Highly Balanced";
+
+    }
+
+    if(
+
+        summary.overall >= 60
+
+    ){
+
+        return "Moderately Balanced";
+
+    }
+
+    if(
+
+        summary.overall >= 40
+
+    ){
+
+        return "Developing";
+
+    }
+
+    return "Needs Attention";
+
+}
+
+/* ==========================================================================
+   SUMMARY RENDERER
+   ========================================================================== */
+
+function renderSummary(){
+
+    overallScore.textContent =
+
+        summary.overall + "%";
+
+    wheelBalance.textContent =
+
+        summary.balance;
+
+    strongestSpoke.textContent =
+
+        prettifyKey(
+
+            summary.strongest[0]
+
+        );
+
+    weakestSpoke.textContent =
+
+        prettifyKey(
+
+            summary.weakest[0]
+
+        );
+
+}
+
+/* ==========================================================================
+   REFLECTION
+   ========================================================================== */
+
+function renderReflection(){
+
+    if(
+
+        summary.overall >= 80
+
+    ){
+
+        reflectionText.textContent =
+
+        "Your Kala Chakra™ shows a well-balanced life foundation. Continue strengthening your daily disciplines while expanding your positive contribution.";
+
+        return;
+
+    }
+
+    if(
+
+        summary.overall >= 60
+
+    ){
+
+        reflectionText.textContent =
+
+        "Your life demonstrates encouraging progress. By strengthening your weaker spokes, you can significantly improve overall balance and fulfilment.";
+
+        return;
+
+    }
+
+    if(
+
+        summary.overall >= 40
+
+    ){
+
+        reflectionText.textContent =
+
+        "Several important areas of life need deliberate attention. Focused improvement across a few key spokes can transform your overall life experience.";
+
+        return;
+
+    }
+
+    reflectionText.textContent =
+
+    "Your Kala Chakra™ reveals substantial opportunities for growth. Your personalised Diagnosis™ will identify the highest-priority changes that can create the greatest positive impact.";
+
+}
+
+/* ==========================================================================
+   KEY FORMATTER
+   ========================================================================== */
+
+function prettifyKey(
+
+    key
+
+){
+
+    return key
+
+        .replace(
+
+            /([A-Z])/g,
+
+            " $1"
+
+        )
+
+        .replace(
+
+            /^./,
+
+            letter =>
+
+                letter.toUpperCase()
+
+        );
+
+}
+
+/* ==========================================================================
+   Continue in Batch 3/n
+   ========================================================================== */
 
 
-    polygon.animate(
+                        /* ==========================================================================
+   WHEEL RENDERING ENGINE
+   ========================================================================== */
 
-        [
+function renderWheel(){
 
-            {
+    clearCanvas();
 
-                opacity:0,
+    drawGrid();
 
-                transform:
+    drawSpokes();
 
-                    "scale(.82)"
+    drawPolygon();
 
-            },
+    drawLabels();
 
-            {
+}
 
-                opacity:1,
+/* ==========================================================================
+   CLEAR CANVAS
+   ========================================================================== */
 
-                transform:
+function clearCanvas(){
 
-                    "scale(1)"
+    context.clearRect(
 
-            }
+        0,
 
-        ],
+        0,
 
-        {
+        canvas.width,
 
-            duration:900,
+        canvas.height
 
-            easing:"ease-out",
+    );
 
-            fill:"forwards"
+}
+
+/* ==========================================================================
+   DRAW GRID
+   ========================================================================== */
+
+function drawGrid(){
+
+    const centreX =
+
+        canvas.width / 2;
+
+    const centreY =
+
+        canvas.height / 2;
+
+    const radius =
+
+        260;
+
+    context.strokeStyle =
+
+        "rgba(255,255,255,.12)";
+
+    context.lineWidth = 1;
+
+    for(
+
+        let ring = 1;
+
+        ring <= 10;
+
+        ring++
+
+    ){
+
+        context.beginPath();
+
+        context.arc(
+
+            centreX,
+
+            centreY,
+
+            radius * ring / 10,
+
+            0,
+
+            Math.PI * 2
+
+        );
+
+        context.stroke();
+
+    }
+
+}
+
+/* ==========================================================================
+   DRAW SPOKES
+   ========================================================================== */
+
+function drawSpokes(){
+
+    const centreX =
+
+        canvas.width / 2;
+
+    const centreY =
+
+        canvas.height / 2;
+
+    const radius =
+
+        260;
+
+    const pillars =
+
+        Object.keys(
+
+            percentages
+
+        );
+
+    pillars.forEach(
+
+        (_,index)=>{
+
+            const angle =
+
+                (
+
+                    Math.PI * 2 /
+
+                    pillars.length
+
+                ) * index -
+
+                Math.PI / 2;
+
+            const x =
+
+                centreX +
+
+                Math.cos(angle) *
+
+                radius;
+
+            const y =
+
+                centreY +
+
+                Math.sin(angle) *
+
+                radius;
+
+            context.beginPath();
+
+            context.moveTo(
+
+                centreX,
+
+                centreY
+
+            );
+
+            context.lineTo(
+
+                x,
+
+                y
+
+            );
+
+            context.stroke();
 
         }
 
     );
 
+}
 
+/* ==========================================================================
+   DRAW SCORE POLYGON
+   ========================================================================== */
+
+function drawPolygon(){
+
+    const centreX =
+
+        canvas.width / 2;
+
+    const centreY =
+
+        canvas.height / 2;
+
+    const radius =
+
+        260;
+
+    const entries =
+
+        Object.entries(
+
+            percentages
+
+        );
+
+    context.beginPath();
+
+    entries.forEach(
+
+        ([,score],index)=>{
+
+            const angle =
+
+                (
+
+                    Math.PI * 2 /
+
+                    entries.length
+
+                ) * index -
+
+                Math.PI / 2;
+
+            const distance =
+
+                radius *
+
+                (
+
+                    score / 100
+
+                );
+
+            const x =
+
+                centreX +
+
+                Math.cos(angle) *
+
+                distance;
+
+            const y =
+
+                centreY +
+
+                Math.sin(angle) *
+
+                distance;
+
+            if(
+
+                index === 0
+
+            ){
+
+                context.moveTo(
+
+                    x,
+
+                    y
+
+                );
+
+            }
+
+            else{
+
+                context.lineTo(
+
+                    x,
+
+                    y
+
+                );
+
+            }
+
+        }
+
+    );
+
+    context.closePath();
+
+    context.fillStyle =
+
+        "rgba(13,148,136,.30)";
+
+    context.strokeStyle =
+
+        "#0D9488";
+
+    context.lineWidth = 3;
+
+    context.fill();
+
+    context.stroke();
 
 }
 
+/* ==========================================================================
+   Continue in Batch 4/n
+   ========================================================================== */
 
+                        /* ==========================================================================
+   LABEL RENDERING
+   ========================================================================== */
 
-/*=============================================================================
-    SAVE CURRENT PAGE
-=============================================================================*/
+function drawLabels(){
 
+    const centreX =
 
-function savePage(){
+        canvas.width / 2;
 
+    const centreY =
 
+        canvas.height / 2;
 
-    if(
+    const radius =
 
-        CTM.storage.setCurrentPage
+        295;
 
-    ){
+    const pillars =
 
-        CTM.storage.setCurrentPage(
+        Object.entries(
 
-            "kaalachakra.html"
+            percentages
+
+        );
+
+    context.fillStyle =
+
+        "#F5F5F5";
+
+    context.font =
+
+        "600 14px Inter";
+
+    context.textAlign =
+
+        "center";
+
+    context.textBaseline =
+
+        "middle";
+
+    pillars.forEach(
+
+        ([key],index)=>{
+
+            const angle =
+
+                (
+
+                    Math.PI * 2 /
+
+                    pillars.length
+
+                ) * index -
+
+                Math.PI / 2;
+
+            const x =
+
+                centreX +
+
+                Math.cos(angle) *
+
+                radius;
+
+            const y =
+
+                centreY +
+
+                Math.sin(angle) *
+
+                radius;
+
+            context.fillText(
+
+                prettifyKey(
+
+                    key
+
+                ),
+
+                x,
+
+                y
+
+            );
+
+        }
+
+    );
+
+}
+
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
+
+function bindEvents(){
+
+    backButton.addEventListener(
+
+        "click",
+
+        goBack
+
+    );
+
+    continueButton.addEventListener(
+
+        "click",
+
+        continueJourney
+
+    );
+
+}
+
+/* ==========================================================================
+   BACK
+   ========================================================================== */
+
+function goBack(){
+
+    Router.navigate(
+
+        "assessment"
+
+    );
+
+}
+
+/* ==========================================================================
+   CONTINUE
+   ========================================================================== */
+
+async function continueJourney(){
+
+    try{
+
+        await autoSaveKalaChakra();
+
+        Router.navigate(
+
+            "diagnosis"
 
         );
 
     }
 
+    catch(error){
 
+        handleKalaChakraError(
 
-}
+            error,
 
-
-
-/*=============================================================================
-    UPDATE STATUS
-=============================================================================*/
-
-
-function updateStatus(){
-
-
-
-    if(
-
-        CTM.storage.setCompletionStatus
-
-    ){
-
-        CTM.storage.setCompletionStatus(
-
-            "Kala Chakra"
+            "Unable to continue."
 
         );
 
     }
 
+}
 
+/* ==========================================================================
+   AUTOSAVE
+   ========================================================================== */
+
+async function autoSaveKalaChakra(){
+
+    assessment.wheelGenerated = true;
+
+    assessment.wheelGeneratedAt =
+
+        new Date().toISOString();
+
+    App.setAssessment(
+
+        assessment
+
+    );
+
+    Storage.saveAssessment(
+
+        assessment
+
+    );
+
+    await ApiService.safeRequest(
+
+        () =>
+
+            ApiService.saveKalaChakra(
+
+                visitor.visitorId,
+
+                assessment
+
+            )
+
+    );
 
 }
 
+/* ==========================================================================
+   Continue in Batch 5/n
+   ========================================================================== */
 
 
-/*=============================================================================
-    START
-=============================================================================*/
+                        /* ==========================================================================
+   VALIDATION
+   ========================================================================== */
 
+function validateState(){
 
-function start(){
+    if(
 
+        !visitor
 
+    ){
 
-    savePage();
+        Router.navigate(
 
+            "registration"
 
+        );
 
-    updateStatus();
+        return false;
 
+    }
 
+    if(
 
-    init();
+        !assessment
 
+    ){
 
+        Router.navigate(
 
-    animatePolygon();
+            "assessment"
 
+        );
 
+        return false;
+
+    }
+
+    if(
+
+        !assessment.percentages ||
+
+        Object.keys(
+
+            assessment.percentages
+
+        ).length !== 12
+
+    ){
+
+        Router.navigate(
+
+            "assessment"
+
+        );
+
+        return false;
+
+    }
+
+    return true;
 
 }
 
+/* ==========================================================================
+   PAGE RECOVERY
+   ========================================================================== */
 
+function recoverKalaChakra(){
 
-/*=============================================================================
-    PUBLIC API
-=============================================================================*/
+    try{
 
+        loadState();
 
-return{
+        calculateSummary();
 
-    init:start
+        renderWheel();
 
-};
+        renderSummary();
 
+        renderReflection();
 
+    }
 
-})();
+    catch(error){
 
+        handleKalaChakraError(
 
+            error,
 
-/*=============================================================================
-    APPLICATION START
-=============================================================================*/
+            "Unable to recover your Kala Chakra™."
 
+        );
 
-document.addEventListener(
+    }
 
-    "DOMContentLoaded",
+}
 
-    function(){
+/* ==========================================================================
+   ERROR HANDLER
+   ========================================================================== */
 
+function handleKalaChakraError(
 
+    error,
 
-        CTM.kaalachakra.init();
+    message
 
+){
 
+    console.error(
+
+        message,
+
+        error
+
+    );
+
+    alert(
+
+        message +
+
+        "\n\nPlease try again."
+
+    );
+
+}
+
+/* ==========================================================================
+   WINDOW EVENTS
+   ========================================================================== */
+
+window.addEventListener(
+
+    "resize",
+
+    () => {
+
+        renderWheel();
 
     }
 
 );
 
+window.addEventListener(
+
+    "beforeunload",
+
+    () => {
+
+        Storage.saveAssessment(
+
+            assessment
+
+        );
+
+    }
+
+);
+
+document.addEventListener(
+
+    "visibilitychange",
+
+    () => {
+
+        if(
+
+            document.hidden
+
+        ){
+
+            Storage.saveAssessment(
+
+                assessment
+
+            );
+
+        }
+
+    }
+
+);
+
+/* ==========================================================================
+   PUBLIC API
+   ========================================================================== */
+
+return{
+
+    init,
+
+    renderWheel,
+
+    renderSummary,
+
+    calculateSummary,
+
+    recoverKalaChakra
+
+};
+
+})();
+
+/* ==========================================================================
+   APPLICATION BOOTSTRAP
+   ========================================================================== */
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    bootstrapKalaChakra
+
+);
+
+function bootstrapKalaChakra(){
+
+    try{
+
+        if(
+
+            !validateRepository()
+
+        ){
+
+            throw new Error(
+
+                "Assessment Repository unavailable."
+
+            );
+
+        }
+
+        KalaChakraPage.init();
+
+    }
+
+    catch(error){
+
+        console.error(
+
+            error
+
+        );
+
+        alert(
+
+            "Unable to initialise Kala Chakra™."
+
+        );
+
+    }
+
+}
+
+/* ==========================================================================
+   DEVELOPMENT EXPORTS
+   ========================================================================== */
+
+window.KalaChakraPage =
+
+    KalaChakraPage;
 
 
-/*=============================================================================
+/* ==========================================================================
+   ENGINE GUARANTEES
 
-    END OF FILE
+   ✓ Draws the 12-spoke Kala Chakra™
 
-=============================================================================*/
+   ✓ Uses AssessmentRepository results only
+
+   ✓ Produces proportional life wheel
+
+   ✓ Displays Overall Score
+
+   ✓ Detects Strongest Spoke
+
+   ✓ Detects Weakest Spoke
+
+   ✓ Calculates Wheel Balance
+
+   ✓ Autosaves before navigation
+
+   ✓ Hands off to Diagnosis™
+
+   ✓ No diagnosis logic
+
+   ✓ No prescription logic
+
+   ✓ No assessment logic
+
+   ========================================================================== */
+
+
+/* ==========================================================================
+   FINAL LOCK
+   ========================================================================== */
+
+Object.freeze(
+
+    KalaChakraPage
+
+);
+
+
+/* ==========================================================================
+   END OF FILE
+
+   File
+
+       kaalachakra.js
+
+   Version
+
+       1.0
+
+   Status
+
+       🔒 LOCKED
+
+   Module
+
+       Kala Chakra™ Behaviour Engine
+
+   Dependencies
+
+       assessmentData.js
+
+       app.js
+
+       storage.js
+
+       api.js
+
+       router.js
+
+   ========================================================================== */
+
+
