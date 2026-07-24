@@ -1,659 +1,771 @@
 
 <!DOCTYPE html>
-
-<html lang="en">
+<html lang="ta">
 
 <head>
 
-<!--=============================================================================
+    <!--
+    =====================================================================
 
-    CTM PATH™
-    FROM SURVIVAL TO LIVING™
+        CTM PATH™
 
-    FILE
+        FROM SURVIVAL TO LIVING™
 
-    assessment.html
+        FILE
 
-    PURPOSE
+        assessment.html
 
-    Master Assessment Page
+        PURPOSE
 
-    PILLARS
+        Screens 03–14
 
-    01 Purpose™
+        Dynamic Assessment Experience
 
-    02 Health™
+        RESPONSIBILITIES
 
-    03 Relationships™
+        • Render 12 Assessment Pillars
+        • Display Dynamic Content
+        • Capture Visitor Ratings
+        • Calculate Pillar Percentage
+        • Auto Save Progress
+        • Route to Kala Chakra™
 
-    04 Character™
+        NOTE
 
-    05 Learning™
+        No assessment content belongs here.
 
-    06 Career™
+        All content is loaded dynamically from
 
-    07 Cashflow™
+            assessmentData.js
 
-    08 Time Freedom™
+        All business logic belongs to
 
-    09 Tribe™
+            assessment.js
 
-    10 Automation™
+    =====================================================================
+    -->
 
-    11 Contribution™
+    <meta charset="UTF-8">
 
-    12 Vision™
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-=============================================================================-->
+    <title>
 
-<meta charset="UTF-8">
+        CTM PATH™ | Life Assessment™
 
-<meta
+    </title>
 
-name="viewport"
 
-content="width=device-width, initial-scale=1.0">
 
-<title>
+    <!--==================================================
+        Stylesheets
+    ==================================================-->
 
-CTM PATH™
+    <link
+        rel="stylesheet"
+        href="../css/reset.css">
 
-Assessment
+    <link
+        rel="stylesheet"
+        href="../css/tokens.css">
 
-</title>
+    <link
+        rel="stylesheet"
+        href="../css/base.css">
 
-<!--=============================================================================
-    GOOGLE FONTS
-=============================================================================-->
+    <link
+        rel="stylesheet"
+        href="../css/app.css">
 
-<link
-rel="preconnect"
-href="https://fonts.googleapis.com">
-
-<link
-rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link
-href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap"
-rel="stylesheet">
-
-<!--=============================================================================
-    CSS
-=============================================================================-->
-
-<link
-rel="stylesheet"
-href="../css/reset.css">
-
-<link
-rel="stylesheet"
-href="../css/tokens.css">
-
-<link
-rel="stylesheet"
-href="../css/base.css">
-
-<link
-rel="stylesheet"
-href="../css/app.css">
-
-<link
-rel="stylesheet"
-href="../css/assessment.css">
+    <link
+        rel="stylesheet"
+        href="../css/assessment.css">
 
 </head>
 
 <body>
 
-<div class="app">
+<main class="assessment-page">
 
-<!--=============================================================================
-    HEADER
-=============================================================================-->
+    <!--==========================================
+        Ambient Background
+    ===========================================-->
 
-<header
-class="app-header">
+    <div class="assessment-background"></div>
 
-<img
+    <!--==========================================
+        Main Container
+    ===========================================-->
 
-src="../assets/logo/CTM_Logo_Transparent.svg"
+    <section class="assessment-container">
 
-alt="CTM PATH™"
+        <article class="assessment-card">
 
-class="app-logo">
+            <!--==========================================
+                Premium Brand Header
+            ===========================================-->
 
-<div
-class="text-right">
+            <header class="brand-header">
 
-<div
+                <div class="brand-logo">
 
-id="assessmentCounter"
+                    <img
 
-class="section-title">
+                        src="../assets/logo/CTM_Logo_Transparent.svg"
 
-Assessment 1 of 12
+                        alt="CTM PATH™"
 
-</div>
+                        class="ctm-logo">
 
-<div
+                </div>
 
-id="visitorName"
+                <h1 class="brand-name">
 
-class="page-subtitle">
+                    CTM PATH™
 
-Visitor Name
+                </h1>
 
-</div>
+                <p class="brand-tagline">
 
-</div>
+                    FROM SURVIVAL TO LIVING™
 
-</header>
+                </p>
 
-<!--=============================================================================
-    MAIN
-=============================================================================-->
+            </header>
 
-<main
-class="page-content">
 
-<div
-class="container">
 
-<!--=========================================================================
-    PILLAR
-==========================================================================-->
+            <!--==========================================
+                Assessment Progress
+            ===========================================-->
 
-<section
+            <section class="assessment-progress">
 
-id="assessmentContainer"
+                <div class="progress-top">
 
-class="card fade-in">
+                    <div
+                        class="progress-spoke"
+                        id="progressSpoke">
 
-<div
-class="text-center">
+                        SPOKE 1 OF 12
 
-<h1
+                    </div>
 
-id="pillarTitle"
+                    <div
+                        class="progress-percentage"
+                        id="progressPercentage">
 
-class="page-title">
+                        8%
 
-PURPOSE™
+                    </div>
 
-</h1>
+                </div>
 
-<h2
+                <div class="progress-track">
 
-id="pillarTitleTamil"
+                    <div
 
-class="section-title">
+                        id="progressFill"
 
-வாழ்க்கையின் நோக்கம்™
+                        class="progress-fill">
 
-</h2>
+                    </div>
 
-<div
-style="height:24px;"></div>
+                </div>
 
-<p
+            </section>
 
-id="pillarReflection"
 
-class="page-subtitle">
 
-Every meaningful life begins
-with a clear purpose.
+            <!--==========================================
+                Assessment Content
+            ===========================================-->
 
-</p>
+            <section
+                id="assessmentContent"
+                class="assessment-content">
 
-</div>
+                <!--======================================
+                    Pillar Number
+                =======================================-->
 
-<div
-class="divider"
+                <div
+                    class="pillar-number"
+                    id="pillarNumber">
 
-style="margin:40px 0;"></div>
+                    SPOKE 01 OF 12
 
-<!--=========================================================================
-    SCORE LEGEND
-==========================================================================-->
+                </div>
 
-<div
-class="card">
 
-<div
-class="space-between">
 
-<div>
+                <!--======================================
+                    Tamil Title
+                =======================================-->
 
-<span
-style="color:var(--color-danger);">
+                <h2
+                    class="pillar-title-ta"
+                    id="pillarTitleTa">
 
-●
+                    நோக்கம்™
 
-</span>
+                </h2>
 
-1–3
 
-Needs Attention
 
-</div>
+                <!--======================================
+                    English Title
+                =======================================-->
 
-<div>
+                <h3
+                    class="pillar-title-en"
+                    id="pillarTitleEn">
 
-<span
-style="color:var(--color-warning);">
+                    PURPOSE™
 
-●
+                </h3>
 
-</span>
 
-4–7
 
-Improving
+                <div class="section-divider"></div>
 
-</div>
 
-<div>
 
-<span
-style="color:var(--color-success);">
+                <!--======================================
+                    Introduction
+                =======================================-->
 
-●
+                <section class="introduction-section">
 
-</span>
+                    <h4 class="section-title">
 
-8–10
+                        Introduction
 
-Excellent
+                    </h4>
 
-</div>
+                    <p
+                        class="intro-ta"
+                        id="introTa">
 
-</div>
+                    </p>
 
-</div>
+                    <p
+                        class="intro-en"
+                        id="introEn">
 
-<div
-style="height:40px;"></div>
+                    </p>
 
-<!--=========================================================================
-    QUESTION PANEL
-==========================================================================-->
+                </section>
 
-<div
 
-id="questionPanel"
 
-class="card">
+                <div class="section-divider"></div>
 
-<div
-class="text-center">
+                                <!--======================================
+                    Rate Yourself
+                =======================================-->
 
-<div
+                <section class="rating-section">
 
-id="questionCounter"
+                    <h4 class="section-title">
 
-class="section-title">
+                        Rate Yourself
 
-QUESTION 1 OF 5
+                    </h4>
 
-</div>
 
-<div
-style="height:24px;"></div>
 
-<h2
+                    <!--==================================
+                        Question 01
+                    ==================================-->
 
-id="questionTamil"
+                    <article class="question-card">
 
-class="section-title">
+                        <div
+                            class="question-text"
 
-தமிழ் கேள்வி இங்கே தோன்றும்
+                            id="question1">
 
-</h2>
+                        </div>
 
-<div
-style="height:20px;"></div>
 
-<p
+                        <div
+                            class="rating-scale"
 
-id="questionEnglish"
+                            data-question="1"
 
-class="page-subtitle">
+                            id="ratingQuestion1">
 
-English question will appear here.
 
-</p>
+                            <button
+                                type="button"
+                                class="rating-button"
+                                data-question="1"
+                                data-value="1">
 
-</div>
+                                1
 
-<div
-style="height:48px;"></div>
+                            </button>
 
-<!--=========================================================================
-    RATING
-==========================================================================-->
 
-<div
+                            <button
+                                type="button"
+                                class="rating-button"
+                                data-question="1"
+                                data-value="2">
 
-id="ratingContainer"
+                                2
 
-class="rating-container">
+                            </button>
 
-<button
 
-class="rating-button"
+                            <button
+                                type="button"
+                                class="rating-button"
+                                data-question="1"
+                                data-value="3">
 
-data-score="1">
+                                3
 
-1
+                            </button>
 
-</button>
 
-<button
+                            <button
+                                type="button"
+                                class="rating-button"
+                                data-question="1"
+                                data-value="4">
 
-class="rating-button"
+                                4
 
-data-score="2">
+                            </button>
 
-2
 
-</button>
+                            <button
+                                type="button"
+                                class="rating-button"
+                                data-question="1"
+                                data-value="5">
 
-<button
+                                5
 
-class="rating-button"
+                            </button>
 
-data-score="3">
 
-3
+                            <button
+                                type="button"
+                                class="rating-button"
+                                data-question="1"
+                                data-value="6">
 
-</button>
+                                6
 
-<button
+                            </button>
 
-class="rating-button"
 
-data-score="4">
+                            <button
+                                type="button"
+                                class="rating-button"
+                                data-question="1"
+                                data-value="7">
 
-4
+                                7
 
-</button>
+                            </button>
 
-<button
 
-class="rating-button"
+                            <button
+                                type="button"
+                                class="rating-button"
+                                data-question="1"
+                                data-value="8">
 
-data-score="5">
+                                8
 
-5
+                            </button>
 
-</button>
 
-<button
+                            <button
+                                type="button"
+                                class="rating-button"
+                                data-question="1"
+                                data-value="9">
 
-class="rating-button"
+                                9
 
-data-score="6">
+                            </button>
 
-6
 
-</button>
+                            <button
+                                type="button"
+                                class="rating-button"
+                                data-question="1"
+                                data-value="10">
 
-<button
+                                10
 
-class="rating-button"
+                            </button>
 
-data-score="7">
 
-7
+                        </div>
 
-</button>
+                    </article>
 
-<button
 
-class="rating-button"
 
-data-score="8">
+                    <!--==================================
+                        Question 02
+                    ==================================-->
 
-8
+                    <article class="question-card">
 
-</button>
+                        <div
+                            class="question-text"
 
-<button
+                            id="question2">
 
-class="rating-button"
+                        </div>
 
-data-score="9">
 
-9
+                        <div
+                            class="rating-scale"
 
-</button>
+                            data-question="2"
 
-<button
+                            id="ratingQuestion2">
 
-class="rating-button"
 
-data-score="10">
+                            <button type="button" class="rating-button" data-question="2" data-value="1">1</button>
+                            <button type="button" class="rating-button" data-question="2" data-value="2">2</button>
+                            <button type="button" class="rating-button" data-question="2" data-value="3">3</button>
+                            <button type="button" class="rating-button" data-question="2" data-value="4">4</button>
+                            <button type="button" class="rating-button" data-question="2" data-value="5">5</button>
+                            <button type="button" class="rating-button" data-question="2" data-value="6">6</button>
+                            <button type="button" class="rating-button" data-question="2" data-value="7">7</button>
+                            <button type="button" class="rating-button" data-question="2" data-value="8">8</button>
+                            <button type="button" class="rating-button" data-question="2" data-value="9">9</button>
+                            <button type="button" class="rating-button" data-question="2" data-value="10">10</button>
 
-10
+                        </div>
 
-</button>
+                    </article>
 
-</div>
 
-<div
-style="height:48px;"></div>
 
-<!--=========================================================================
-    LIVE PROGRESS
-==========================================================================-->
+                    <!--==================================
+                        Question 03
+                    ==================================-->
 
-<div
-class="divider"></div>
+                    <article class="question-card">
 
-<div
-style="height:32px;"></div>
+                        <div
+                            class="question-text"
 
-<div
-class="space-between">
+                            id="question3">
 
-<div
-class="text-center">
+                        </div>
 
-<div
-class="section-title">
 
-Answered
+                        <div
+                            class="rating-scale"
 
-</div>
+                            data-question="3"
 
-<div
+                            id="ratingQuestion3">
 
-id="answeredCount"
 
-class="page-title">
+                            <button type="button" class="rating-button" data-question="3" data-value="1">1</button>
+                            <button type="button" class="rating-button" data-question="3" data-value="2">2</button>
+                            <button type="button" class="rating-button" data-question="3" data-value="3">3</button>
+                            <button type="button" class="rating-button" data-question="3" data-value="4">4</button>
+                            <button type="button" class="rating-button" data-question="3" data-value="5">5</button>
+                            <button type="button" class="rating-button" data-question="3" data-value="6">6</button>
+                            <button type="button" class="rating-button" data-question="3" data-value="7">7</button>
+                            <button type="button" class="rating-button" data-question="3" data-value="8">8</button>
+                            <button type="button" class="rating-button" data-question="3" data-value="9">9</button>
+                            <button type="button" class="rating-button" data-question="3" data-value="10">10</button>
 
-0 / 5
+                        </div>
 
-</div>
+                    </article>
 
-</div>
+                </section>
 
-<div
-class="text-center">
 
-<div
-class="section-title">
 
-Average
+                <div class="section-divider"></div>
 
-</div>
 
-<div
 
-id="averageScore"
+                <!--======================================
+                    Pillar Score
+                =======================================-->
 
-class="page-title">
+                <section class="pillar-score-card">
 
-0
+                    <div class="score-label">
 
-</div>
+                        Current Pillar Score
 
-</div>
+                    </div>
 
-</div>
+                    <div
+                        class="score-value"
 
-<div
-style="height:40px;"></div>
+                        id="pillarPercentage">
 
-<!--=========================================================================
-    NAVIGATION
-==========================================================================-->
+                        0%
 
-<div
-class="space-between">
+                    </div>
 
-<button
+                </section>
 
-id="btnPrevious"
 
-class="btn btn-secondary">
 
-Previous
+                <div class="section-divider"></div>
 
-</button>
 
-<button
 
-id="btnNext"
+                <!--======================================
+                    Reflection
+                =======================================-->
 
-class="btn btn-primary"
+                <section class="reflection-section">
 
-disabled>
+                    <h4 class="section-title">
 
-Next
+                        Reflection
 
-</button>
+                    </h4>
 
-</div>
+                    <p
+                        id="reflectionTa"
 
-<div
-style="height:24px;"></div>
+                        class="reflection-ta">
 
-<div
-class="text-center">
+                    </p>
 
-<button
+                    <p
+                        id="reflectionEn"
 
-id="btnSaveContinue"
+                        class="reflection-en">
 
-class="btn btn-primary"
+                    </p>
 
-style="display:none;">
+                </section>
 
-Save & Continue
 
-</button>
 
-</div>
+                <div class="section-divider"></div>
 
-</div>
+                                <!--======================================
+                    Wisdom
+                =======================================-->
 
-</section>
+                <section class="wisdom-section">
 
-</div>
+                    <h4 class="section-title">
+
+                        Wisdom
+
+                    </h4>
+
+                    <p
+                        id="wisdomTa"
+                        class="wisdom-ta">
+
+                    </p>
+
+                    <p
+                        id="wisdomEn"
+                        class="wisdom-en">
+
+                    </p>
+
+                </section>
+
+
+
+                <div class="section-divider"></div>
+
+
+
+                <!--======================================
+                    Navigation
+                =======================================-->
+
+                <section class="assessment-navigation">
+
+                    <!--==============================
+                        Previous
+                    ==============================-->
+
+                    <button
+
+                        id="previousButton"
+
+                        class="secondary-button"
+
+                        type="button">
+
+                        <span class="button-icon">
+
+                            ←
+
+                        </span>
+
+                        <span class="button-content">
+
+                            <span class="button-ta">
+
+                                முந்தைய பகுதி
+
+                            </span>
+
+                            <span class="button-en">
+
+                                PREVIOUS
+
+                            </span>
+
+                        </span>
+
+                    </button>
+
+
+
+                    <!--==============================
+                        Next
+                    ==============================-->
+
+                    <button
+
+                        id="nextButton"
+
+                        class="primary-button"
+
+                        type="button"
+
+                        disabled>
+
+                        <span class="button-content">
+
+                            <span class="button-ta">
+
+                                அடுத்த பகுதி
+
+                            </span>
+
+                            <span class="button-en">
+
+                                NEXT
+
+                            </span>
+
+                        </span>
+
+                        <span class="button-icon">
+
+                            →
+
+                        </span>
+
+                    </button>
+
+                </section>
+
+
+
+                <!--======================================
+                    Completion Message
+                =======================================-->
+
+                <section
+
+                    id="completionBanner"
+
+                    class="completion-banner"
+
+                    hidden>
+
+                    <div class="completion-icon">
+
+                        ✓
+
+                    </div>
+
+                    <div class="completion-content">
+
+                        <h4>
+
+                            Assessment Complete
+
+                        </h4>
+
+                        <p>
+
+                            All twelve life pillars have been assessed.
+                            Your Kala Chakra™ is now ready.
+
+                        </p>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+        </article>
+
+    </section>
 
 </main>
 
-<!--=============================================================================
-    JAVASCRIPT
-=============================================================================-->
+
+
+<!--==================================================
+    Core JavaScript
+===================================================-->
 
 <script
-src="../js/storage.js"></script>
-
-<script
-src="../js/router.js"></script>
-
-<script
-src="../js/app.js"></script>
-
-<script
-src="../js/assessmentData.js"></script>
-
-<script
-src="../js/assessmentScoring.js"></script>
-
-<script
-src="../js/assessmentUI.js"></script>
-
-<script
-src="../js/assessmentEngine.js"></script>
-
-<!--=============================================================================
-    INITIALIZE
-=============================================================================-->
-
-<script>
-
-'use strict';
-
-document.addEventListener(
-
-    'DOMContentLoaded',
-
-    function(){
-
-        /*----------------------------------------------------------
-            RESTORE VISITOR
-        ----------------------------------------------------------*/
-
-        const state =
-
-            CTM.storage.getState();
-
-        if(
-
-            state &&
-
-            state.visitor &&
-
-            state.visitor.name
-
-        ){
-
-            document.getElementById(
-
-                'visitorName'
-
-            ).textContent =
-
-                state.visitor.name.toUpperCase();
-
-        }
-
-        /*----------------------------------------------------------
-            START ASSESSMENT ENGINE
-        ----------------------------------------------------------*/
-
-        CTM.assessmentEngine.init();
-
-    }
-
-);
-
+    src="../js/storage.js">
 </script>
 
-</div>
+<script
+    src="../js/api.js">
+</script>
+
+<script
+    src="../js/router.js">
+</script>
+
+<script
+    src="../js/app.js">
+</script>
+
+
+
+<!--==================================================
+    Assessment Data
+===================================================-->
+
+<script
+    src="../js/assessmentData.js">
+</script>
+
+
+
+<!--==================================================
+    Assessment Controller
+===================================================-->
+
+<script
+    src="../js/assessment.js">
+</script>
 
 </body>
 
 </html>
 
-<!--=============================================================================
-
-    END OF FILE
-
-=============================================================================-->
