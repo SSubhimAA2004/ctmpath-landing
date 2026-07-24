@@ -8,11 +8,24 @@
          CTM PATH™ Guided Journey v2.0
 
          File    : index.html
-         Version : 1.0.1
+         Version : 1.0.2
          Status  : 🔒 LOCKED
 
          Purpose:
          Main Application Entry Point™
+
+         Responsibilities:
+         ✓ Load application shell
+         ✓ Load foundation CSS
+         ✓ Load core JavaScript
+         ✓ Provide root container
+
+         Does NOT:
+         ✗ Initialize application
+         ✗ Handle routing
+         ✗ Handle page logic
+
+         app.js owns startup lifecycle.
 
          ========================================================== -->
 
@@ -33,6 +46,7 @@
     <meta
         name="theme-color"
         content="#081C3A">
+
 
 
     <title>
@@ -94,16 +108,26 @@
 </head>
 
 
+
 <body>
 
 
 
 <!-- ==========================================================
-     Application Root
+     APPLICATION ROOT
      ========================================================== -->
 
 
 <div id="app">
+
+
+
+    <!-- ======================================================
+         Initial Loading State
+
+         Replaced by Router / Page Modules
+
+         ====================================================== -->
 
 
     <div class="app-loader">
@@ -111,19 +135,26 @@
 
         <div class="loader-symbol">
 
+
             CTM PATH™
+
 
         </div>
 
 
+
         <p>
 
+
             Loading Your Journey...
+
 
         </p>
 
 
+
     </div>
+
 
 
 </div>
@@ -133,7 +164,15 @@
 
 
 <!-- ==========================================================
-     Core Application Scripts
+     CORE APPLICATION LAYER
+
+     Dependency Order:
+
+     1. Storage
+     2. API
+     3. Router
+     4. Application Bootstrap
+
      ========================================================== -->
 
 
@@ -150,68 +189,8 @@
 
 
 
-
-<!-- ==========================================================
-     Application Bootstrap
-     ========================================================== -->
-
-
-<script>
-
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    function(){
-
-
-        if(window.CTMApp){
-
-
-            CTMApp.init();
-
-
-        }
-
-
-        else{
-
-
-            console.error(
-
-                "CTMApp is not available. Check app.js export."
-
-            );
-
-
-            document.querySelector(
-
-                ".app-loader p"
-
-            ).textContent =
-
-
-                "Application loading error. Please refresh.";
-
-
-        }
-
-
-    }
-
-);
-
-
-</script>
-
-
-
-
 </body>
 
 
 </html>
-
-
 
