@@ -16,20 +16,14 @@
 
     • Validate Registration Form
     • Register Visitor
+    • Prevent Duplicate Submission
     • Save Visitor Session
     • Navigate To Assessment
-
-    NOTE
-
-    This file controls only
-
-    Screen 02 behaviour.
 
 =============================================================================*/
 
 
 'use strict';
-
 
 
 
@@ -44,13 +38,25 @@ window.CTM = window.CTM || {};
 
 
 
-
 /*=============================================================================
     REGISTRATION MODULE
 =============================================================================*/
 
 
 CTM.registration = (function(){
+
+
+
+    /*=========================================================================
+        MODULE VARIABLES
+    =========================================================================*/
+
+
+    let isSubmitting = false;
+
+    let submitButton = null;
+
+    let registrationForm = null;
 
 
 
@@ -64,7 +70,7 @@ CTM.registration = (function(){
     function init(){
 
 
-        const form =
+        registrationForm =
 
             document.getElementById(
 
@@ -74,11 +80,27 @@ CTM.registration = (function(){
 
 
 
-        if(!form){
+        submitButton =
 
-            console.warn(
+            document.getElementById(
 
-                'Registration form not found.'
+                'continueJourney'
+
+            );
+
+
+
+        if(
+
+            !registrationForm ||
+
+            !submitButton
+
+        ){
+
+            console.error(
+
+                'Registration Form Not Found.'
 
             );
 
@@ -88,7 +110,7 @@ CTM.registration = (function(){
 
 
 
-        form.addEventListener(
+        registrationForm.addEventListener(
 
             'submit',
 
@@ -98,9 +120,81 @@ CTM.registration = (function(){
 
 
 
+        initializeValidation();
+
+
+
         console.log(
 
             'CTM Registration Ready'
+
+        );
+
+    }
+
+
+
+
+
+    /*=========================================================================
+        INITIALIZE VALIDATION
+    =========================================================================*/
+
+
+    function initializeValidation(){
+
+
+        const fields =
+
+            registrationForm.querySelectorAll(
+
+                'input'
+
+            );
+
+
+
+        fields.forEach(
+
+            function(field){
+
+
+                field.addEventListener(
+
+                    'blur',
+
+                    function(){
+
+                        validateField(
+
+                            field
+
+                        );
+
+                    }
+
+                );
+
+
+
+                field.addEventListener(
+
+                    'input',
+
+                    function(){
+
+                        clearValidation(
+
+                            field
+
+                        );
+
+                    }
+
+                );
+
+
+            }
 
         );
 
@@ -122,103 +216,11 @@ CTM.registration = (function(){
 
 
 
-        const fullName =
-
-            document
-
-                .getElementById(
-
-                    'fullName'
-
-                )
-
-                .value
-
-                .trim();
-
-
-
-        const mobile =
-
-            document
-
-                .getElementById(
-
-                    'mobile'
-
-                )
-
-                .value
-
-                .trim();
-
-
-
-        const email =
-
-            document
-
-                .getElementById(
-
-                    'email'
-
-                )
-
-                .value
-
-                .trim();
-
-
-
-        const district =
-
-            document
-
-                .getElementById(
-
-                    'district'
-
-                )
-
-                .value
-
-                .trim();
-
-
-
-        const state =
-
-            document
-
-                .getElementById(
-
-                    'state'
-
-                )
-
-                .value
-
-                .trim();
-
-
-
         if(
 
-            !fullName ||
-
-            !mobile ||
-
-            !district ||
-
-            !state
+            isSubmitting
 
         ){
-
-            alert(
-
-                'Please complete all required fields.'
-
-            );
 
             return;
 
@@ -226,62 +228,145 @@ CTM.registration = (function(){
 
 
 
-        const emotion =
+        if(
 
-            CTM.storage
+            !validateForm()
 
-                .getInitialEmotion();
+        ){
 
+            return;
 
-
-        const startTime =
-
-            CTM.storage
-
-                .getStartTime();
+        }
 
 
 
-        const device =
-
-            detectDevice();
-
-        /*--------------------------------------------------
-            Register Visitor
-        --------------------------------------------------*/
+        isSubmitting = true;
 
 
-        const response =
 
-            await CTM.api.registerVisitor({
+        setLoadingState(true);
 
-                emotion:
 
-                    emotion,
+
+        try{
+
+
+
+            const visitor =
+
+                collectFormData();
+
+                    /*--------------------------------------------------
+                Register Visitor
+            --------------------------------------------------*/
+
+
+            const response =
+
+                await CTM.api.registerVisitor({
+
+                    emotion:
+
+                        visitor.initialEmotion,
+
+                    name:
+
+                        visitor.fullName,
+
+                    email:
+
+                        visitor.email,
+
+                    mobile:
+
+                        visitor.mobile,
+
+                    district:
+
+                        visitor.district,
+
+                    state:
+
+                        visitor.state,
+
+                    referralSource:
+
+                        'Website',
+
+                    language:
+
+                        'ta',
+
+                    device:
+
+                        visitor.device
+
+                });
+
+
+
+            if(
+
+                !response ||
+
+                !response.success
+
+            ){
+
+                throw new Error(
+
+                    response.message ||
+
+                    'Registration failed.'
+
+                );
+
+            }
+
+
+
+            /*--------------------------------------------------
+                Save Visitor Session
+            --------------------------------------------------*/
+
+
+            CTM.storage.setVisitorId(
+
+                response.visitorId
+
+            );
+
+
+
+            CTM.storage.updateVisitor({
+
+                visitorId:
+
+                    response.visitorId,
+
+                initialEmotion:
+
+                    visitor.initialEmotion,
 
                 name:
 
-                    fullName,
+                    visitor.fullName,
 
                 email:
 
-                    email,
+                    visitor.email,
 
                 mobile:
 
-                    mobile,
+                    visitor.mobile,
 
                 district:
 
-                    district,
+                    visitor.district,
 
                 state:
 
-                    state,
-
-                referralSource:
-
-                    'Website',
+                    visitor.state,
 
                 language:
 
@@ -289,110 +374,516 @@ CTM.registration = (function(){
 
                 device:
 
-                    device
+                    visitor.device
 
             });
 
 
 
-        if(
+            CTM.storage.setCurrentPage(
 
-            !response ||
+                'registration.html'
 
-            !response.success
+            );
 
-        ){
+
+
+            CTM.storage.setCompletionStatus(
+
+                'Registered'
+
+            );
+
+
+
+            if(
+
+                CTM.storage.getStartTime()
+
+            ){
+
+                CTM.storage.setStartTime(
+
+                    CTM.storage.getStartTime()
+
+                );
+
+            }
+
+
+
+            /*--------------------------------------------------
+                Small Delay
+
+                Premium UX
+
+            --------------------------------------------------*/
+
+
+            await new Promise(
+
+                function(resolve){
+
+                    setTimeout(
+
+                        resolve,
+
+                        600
+
+                    );
+
+                }
+
+            );
+
+
+
+            /*--------------------------------------------------
+                Navigate
+
+            --------------------------------------------------*/
+
+
+            CTM.router.go(
+
+                'assessment'
+
+            );
+
+
+
+        }
+
+        catch(error){
+
+
+
+            console.error(
+
+                error
+
+            );
+
+
 
             alert(
 
-                response.message ||
+                error.message ||
 
-                'Unable to register your journey.'
+                'Unable to continue your journey.'
 
             );
+
+
+
+            setLoadingState(
+
+                false
+
+            );
+
+
+
+            isSubmitting =
+
+                false;
+
+
 
             return;
 
         }
 
-
-
-        /*--------------------------------------------------
-            Save Visitor Session
-        --------------------------------------------------*/
-
-
-        CTM.storage.setVisitorId(
-
-            response.visitorId
-
-        );
+    }
 
 
 
-        CTM.storage.updateVisitor({
 
-            visitorId:
 
-                response.visitorId,
+    /*=========================================================================
+        COLLECT FORM DATA
+    =========================================================================*/
+
+
+    function collectFormData(){
+
+
+
+        return{
 
             initialEmotion:
 
-                emotion,
+                CTM.storage.getInitialEmotion(),
 
-            name:
 
-                fullName,
+            fullName:
 
-            email:
+                document
 
-                email,
+                    .getElementById(
+
+                        'fullName'
+
+                    )
+
+                    .value
+
+                    .trim(),
+
 
             mobile:
 
-                mobile,
+                document
+
+                    .getElementById(
+
+                        'mobile'
+
+                    )
+
+                    .value
+
+                    .trim(),
+
+
+            email:
+
+                document
+
+                    .getElementById(
+
+                        'email'
+
+                    )
+
+                    .value
+
+                    .trim(),
+
 
             district:
 
-                district,
+                document
+
+                    .getElementById(
+
+                        'district'
+
+                    )
+
+                    .value
+
+                    .trim(),
+
 
             state:
 
-                state,
+                document
 
-            language:
+                    .getElementById(
 
-                'ta',
+                        'state'
+
+                    )
+
+                    .value
+
+                    .trim(),
+
 
             device:
 
-                device
+                detectDevice()
 
-        });
+        };
+
+    }
+
+                        /*=========================================================================
+        FORM VALIDATION
+    =========================================================================*/
+
+
+    function validateForm(){
+
+
+        const fields =
+
+            registrationForm.querySelectorAll(
+
+                'input[required]'
+
+            );
 
 
 
-        CTM.storage.setCurrentPage(
+        let valid = true;
 
-            'registration.html'
+        let firstInvalid = null;
+
+
+
+        fields.forEach(
+
+            function(field){
+
+
+                if(
+
+                    !validateField(
+
+                        field
+
+                    )
+
+                ){
+
+                    valid = false;
+
+
+
+                    if(
+
+                        !firstInvalid
+
+                    ){
+
+                        firstInvalid =
+
+                            field;
+
+                    }
+
+                }
+
+
+            }
 
         );
 
 
 
-        CTM.storage.setCompletionStatus(
+        if(
 
-            'Registered'
+            firstInvalid
+
+        ){
+
+            firstInvalid.focus();
+
+            firstInvalid.scrollIntoView({
+
+                behavior:'smooth',
+
+                block:'center'
+
+            });
+
+        }
+
+
+
+        return valid;
+
+    }
+
+
+
+
+
+    /*=========================================================================
+        VALIDATE FIELD
+    =========================================================================*/
+
+
+    function validateField(field){
+
+
+        const value =
+
+            field.value.trim();
+
+
+
+        if(
+
+            field.hasAttribute(
+
+                'required'
+
+            ) &&
+
+            value === ''
+
+        ){
+
+            showValidation(
+
+                field,
+
+                'This field is required.'
+
+            );
+
+            return false;
+
+        }
+
+
+
+        if(
+
+            field.type === 'email' &&
+
+            value !== ''
+
+        ){
+
+            const pattern =
+
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+
+            if(
+
+                !pattern.test(
+
+                    value
+
+                )
+
+            ){
+
+                showValidation(
+
+                    field,
+
+                    'Please enter a valid email address.'
+
+                );
+
+                return false;
+
+            }
+
+        }
+
+
+
+        if(
+
+            field.id === 'mobile'
+
+        ){
+
+            const digits =
+
+                value.replace(
+
+                    /\D/g,
+
+                    ''
+
+                );
+
+
+
+            if(
+
+                digits.length < 10
+
+            ){
+
+                showValidation(
+
+                    field,
+
+                    'Please enter a valid WhatsApp number.'
+
+                );
+
+                return false;
+
+            }
+
+        }
+
+
+
+        clearValidation(
+
+            field
 
         );
 
 
 
-        if(startTime){
+        return true;
 
-            CTM.storage.setStartTime(
+    }
 
-                startTime
+
+
+
+
+    /*=========================================================================
+        SHOW VALIDATION
+    =========================================================================*/
+
+
+    function showValidation(
+
+        field,
+
+        message
+
+    ){
+
+
+        field.classList.add(
+
+            'input-error'
+
+        );
+
+
+
+        let feedback =
+
+            field.parentNode.querySelector(
+
+                '.validation-message'
+
+            );
+
+
+
+        if(
+
+            !feedback
+
+        ){
+
+            feedback =
+
+                document.createElement(
+
+                    'div'
+
+                );
+
+
+
+            feedback.className =
+
+                'validation-message';
+
+
+
+            field.parentNode.appendChild(
+
+                feedback
 
             );
 
@@ -400,16 +891,137 @@ CTM.registration = (function(){
 
 
 
-        /*--------------------------------------------------
-            Navigate To Assessment
-        --------------------------------------------------*/
+        feedback.textContent =
+
+            message;
+
+    }
 
 
-        CTM.router.go(
 
-            'assessment'
+
+
+    /*=========================================================================
+        CLEAR VALIDATION
+    =========================================================================*/
+
+
+    function clearValidation(field){
+
+
+        field.classList.remove(
+
+            'input-error'
 
         );
+
+
+
+        const feedback =
+
+            field.parentNode.querySelector(
+
+                '.validation-message'
+
+            );
+
+
+
+        if(
+
+            feedback
+
+        ){
+
+            feedback.remove();
+
+        }
+
+    }
+
+                        /*=========================================================================
+        LOADING STATE
+    =========================================================================*/
+
+
+    function setLoadingState(isLoading){
+
+
+        const fields =
+
+            registrationForm.querySelectorAll(
+
+                'input, button'
+
+            );
+
+
+
+        fields.forEach(
+
+            function(field){
+
+                field.disabled =
+
+                    isLoading;
+
+            }
+
+        );
+
+
+
+        if(
+
+            isLoading
+
+        ){
+
+            submitButton.dataset.original =
+
+                submitButton.innerHTML;
+
+
+
+            submitButton.innerHTML =
+
+                '<span class="button-ta">உங்கள் பயணம் தயார் செய்யப்படுகிறது...</span>' +
+
+                '<span class="button-en">PREPARING YOUR JOURNEY...</span>';
+
+
+
+            submitButton.classList.add(
+
+                'loading'
+
+            );
+
+        }
+
+        else{
+
+            if(
+
+                submitButton.dataset.original
+
+            ){
+
+                submitButton.innerHTML =
+
+                    submitButton.dataset.original;
+
+            }
+
+
+
+            submitButton.classList.remove(
+
+                'loading'
+
+            );
+
+        }
 
     }
 
@@ -424,11 +1036,10 @@ CTM.registration = (function(){
 
     function detectDevice(){
 
-        const userAgent =
 
-            navigator.userAgent
+        const ua =
 
-                .toLowerCase();
+            navigator.userAgent.toLowerCase();
 
 
 
@@ -436,7 +1047,7 @@ CTM.registration = (function(){
 
             /mobile|android|iphone|ipad/.test(
 
-                userAgent
+                ua
 
             )
 
@@ -448,9 +1059,29 @@ CTM.registration = (function(){
 
 
 
+        if(
+
+            /tablet/.test(
+
+                ua
+
+            )
+
+        ){
+
+            return 'Tablet';
+
+        }
+
+
+
         return 'Desktop';
 
     }
+
+
+
+
 
     /*=========================================================================
         PUBLIC API
