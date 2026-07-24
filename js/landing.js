@@ -16,7 +16,7 @@
     RESPONSIBILITIES
 
     • Initialize Landing Page
-    • Handle Begin Journey Action
+    • Capture Life Outlook
     • Prepare Visitor Session
     • Navigate To Registration
 
@@ -59,12 +59,10 @@ CTM.landing = (function(){
 
     /*=========================================================================
         INITIALIZE
-
     =========================================================================*/
 
 
     function init(){
-
 
 
         const button =
@@ -72,6 +70,16 @@ CTM.landing = (function(){
             document.getElementById(
 
                 'beginJourney'
+
+            );
+
+
+
+        const options =
+
+            document.querySelectorAll(
+
+                '.life-option'
 
             );
 
@@ -94,6 +102,67 @@ CTM.landing = (function(){
 
 
 
+        options.forEach(function(option){
+
+
+            option.addEventListener(
+
+                'click',
+
+                function(){
+
+
+                    options.forEach(function(item){
+
+                        item.classList.remove(
+
+                            'selected'
+
+                        );
+
+                    });
+
+
+
+                    option.classList.add(
+
+                        'selected'
+
+                    );
+
+
+
+                    const emotion =
+
+                        option.dataset.emotion;
+
+
+
+                    if(
+
+                        CTM.storage &&
+
+                        CTM.storage.setInitialEmotion
+
+                    ){
+
+                        CTM.storage.setInitialEmotion(
+
+                            emotion
+
+                        );
+
+                    }
+
+
+                }
+
+            );
+
+
+        });
+
+
 
 
         button.addEventListener(
@@ -113,7 +182,6 @@ CTM.landing = (function(){
         );
 
 
-
     }
 
 
@@ -122,7 +190,6 @@ CTM.landing = (function(){
 
     /*=========================================================================
         BEGIN JOURNEY
-
     =========================================================================*/
 
 
@@ -139,10 +206,8 @@ CTM.landing = (function(){
 
 
 
-
         /*--------------------------------------------------
             Save Journey Start
-
         --------------------------------------------------*/
 
 
@@ -154,23 +219,19 @@ CTM.landing = (function(){
 
         ){
 
-
             CTM.storage.setStartTime(
 
                 now
 
             );
 
-
         }
-
 
 
 
 
         /*--------------------------------------------------
             Save Current Page
-
         --------------------------------------------------*/
 
 
@@ -182,23 +243,43 @@ CTM.landing = (function(){
 
         ){
 
-
             CTM.storage.setCurrentPage(
 
                 'Screen01'
 
             );
 
+        }
+
+
+
+
+        /*--------------------------------------------------
+            Save Completion Status
+        --------------------------------------------------*/
+
+
+        if(
+
+            CTM.storage &&
+
+            CTM.storage.setCompletionStatus
+
+        ){
+
+            CTM.storage.setCompletionStatus(
+
+                'Started'
+
+            );
 
         }
 
 
 
 
-
         /*--------------------------------------------------
             Navigate
-
         --------------------------------------------------*/
 
 
@@ -210,16 +291,13 @@ CTM.landing = (function(){
 
         ){
 
-
             CTM.router.go(
 
                 'registration'
 
             );
 
-
         }
-
 
 
     }
@@ -230,15 +308,12 @@ CTM.landing = (function(){
 
     /*=========================================================================
         PUBLIC API
-
     =========================================================================*/
 
 
     return{
 
-
         init
-
 
     };
 
@@ -252,7 +327,6 @@ CTM.landing = (function(){
 
 /*=============================================================================
     START
-
 =============================================================================*/
 
 
@@ -262,9 +336,7 @@ document.addEventListener(
 
     function(){
 
-
         CTM.landing.init();
-
 
     }
 
