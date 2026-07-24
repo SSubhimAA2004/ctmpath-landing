@@ -1,259 +1,396 @@
 
-/*=============================================================================
+/* ==========================================================================
+   CTM PATH™ Guided Journey v2.0
+   File        : app.js
+   Version     : 1.0
+   Status      : 🔒 LOCKED
+   Purpose     : Application Bootstrap
 
-    CTM PATH™
-    FROM SURVIVAL TO LIVING™
+                  Owns
+                  • Application Initialization
+                  • Global Configuration
+                  • Shared Application State
+                  • Startup Lifecycle
 
-    FILE
-
-    app.js
-
-    PURPOSE
-
-    Application Bootstrap
-
-    RESPONSIBILITIES
-
-    • Initialize Application
-    • Initialize Storage
-    • Initialize Router
-    • Start Application
-
-    NOTE
-
-    This file contains NO business logic.
-
-=============================================================================*/
-
+                  Owns NO
+                  • Page Rendering
+                  • Assessment Questions
+                  • Business Calculations
+                  • Page-specific Behaviour
+   ========================================================================== */
 
 'use strict';
 
+/* ==========================================================================
+   APPLICATION
+   ========================================================================== */
 
+const App = (() => {
 
+    /* ======================================================================
+       CONFIGURATION
+       ====================================================================== */
 
-/*=============================================================================
-    GLOBAL NAMESPACE
-=============================================================================*/
+    const CONFIG = {
 
+        NAME: 'CTM PATH™ Guided Journey',
 
-window.CTM = window.CTM || {};
+        VERSION: '2.0',
 
+        LANGUAGE: 'ta-IN',
 
+        AUTOSAVE: true,
 
-
-
-/*=============================================================================
-    APPLICATION MODULE
-=============================================================================*/
-
-
-CTM.app = (function(){
-
-
-
-
-
-    /*=========================================================================
-        INITIALIZE APPLICATION
-    =========================================================================*/
-
-
-    function init(){
-
-
-
-        console.log(
-
-            '========================================'
-
-        );
-
-
-
-        console.log(
-
-            'CTM PATH™'
-
-        );
-
-
-
-        console.log(
-
-            'FROM SURVIVAL TO LIVING™'
-
-        );
-
-
-
-        console.log(
-
-            'Application Starting...'
-
-        );
-
-
-
-        console.log(
-
-            '========================================'
-
-        );
-
-
-
-
-
-        /*--------------------------------------------------
-            STORAGE INITIALIZATION
-        --------------------------------------------------*/
-
-
-        if(
-
-            CTM.storage &&
-
-            typeof CTM.storage.init === 'function'
-
-        ){
-
-
-            CTM.storage.init();
-
-
-
-        }
-
-
-        else{
-
-
-            console.error(
-
-                'CTM Storage Module Missing'
-
-            );
-
-
-            return;
-
-
-
-        }
-
-
-
-
-
-        /*--------------------------------------------------
-            ROUTER INITIALIZATION
-        --------------------------------------------------*/
-
-
-        if(
-
-            CTM.router &&
-
-            typeof CTM.router.init === 'function'
-
-        ){
-
-
-            CTM.router.init();
-
-
-
-            CTM.router.start();
-
-
-
-        }
-
-
-        else{
-
-
-            console.error(
-
-                'CTM Router Module Missing'
-
-            );
-
-
-            return;
-
-
-
-        }
-
-
-
-
-
-        console.log(
-
-            'Application Ready.'
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-    /*=========================================================================
-        PUBLIC API
-    =========================================================================*/
-
-
-    return{
-
-
-        init
-
+        DEBUG: false
 
     };
 
+    /* ======================================================================
+       GLOBAL STATE
+       ====================================================================== */
 
+    const STATE = {
 
-})();
+        initialized: false,
 
+        visitor: null,
 
+        assessment: {},
 
+        scores: {},
 
+        journeyStatus: null,
 
-/*=============================================================================
-    APPLICATION START
-=============================================================================*/
+        currentPage: null,
 
+        currentSpoke: 0
 
-document.addEventListener(
+    };
 
+    /* ======================================================================
+       LOG
+       ====================================================================== */
 
-    'DOMContentLoaded',
+    function log(...args) {
 
+        if (!CONFIG.DEBUG) return;
 
-    function(){
-
-
-        CTM.app.init();
-
+        console.log('[CTM PATH]', ...args);
 
     }
 
+    /* ======================================================================
+       LOAD STATE
+       ====================================================================== */
+
+    function loadState() {
+
+        STATE.visitor =
+
+            StorageService.getVisitor();
+
+        STATE.assessment =
+
+            StorageService.getAssessment();
+
+        STATE.scores =
+
+            StorageService.getScores();
+
+        STATE.journeyStatus =
+
+            StorageService.getJourneyStatus();
+
+        STATE.currentPage =
+
+            StorageService.getCurrentPage();
+
+        STATE.currentSpoke =
+
+            StorageService.getCurrentSpoke() || 0;
+
+    }
+
+    /* ======================================================================
+       SAVE STATE
+       ====================================================================== */
+
+    function saveState() {
+
+        StorageService.saveVisitor(
+
+            STATE.visitor
+
+        );
+
+        StorageService.saveAssessment(
+
+            STATE.assessment
+
+        );
+
+        StorageService.saveScores(
+
+            STATE.scores
+
+        );
+
+        StorageService.saveJourneyStatus(
+
+            STATE.journeyStatus
+
+        );
+
+        StorageService.saveCurrentPage(
+
+            STATE.currentPage
+
+        );
+
+        StorageService.saveCurrentSpoke(
+
+            STATE.currentSpoke
+
+        );
+
+    }
+
+    /* ======================================================================
+       VISITOR
+       ====================================================================== */
+
+    function setVisitor(visitor) {
+
+        STATE.visitor = visitor;
+
+        StorageService.saveVisitor(visitor);
+
+    }
+
+    function getVisitor() {
+
+        return STATE.visitor;
+
+    }
+
+    /* ======================================================================
+       ASSESSMENT
+       ====================================================================== */
+
+    function setAssessment(data) {
+
+        STATE.assessment = data;
+
+        StorageService.saveAssessment(data);
+
+    }
+
+    function getAssessment() {
+
+        return STATE.assessment;
+
+    }
+
+    /* ======================================================================
+       SCORES
+       ====================================================================== */
+
+    function setScores(scores) {
+
+        STATE.scores = scores;
+
+        StorageService.saveScores(scores);
+
+    }
+
+    function getScores() {
+
+        return STATE.scores;
+
+    }
+
+    /* ======================================================================
+       JOURNEY
+       ====================================================================== */
+
+    function setJourneyStatus(status) {
+
+        STATE.journeyStatus = status;
+
+        StorageService.saveJourneyStatus(status);
+
+    }
+
+    function getJourneyStatus() {
+
+        return STATE.journeyStatus;
+
+    }
+
+    /* ======================================================================
+       PAGE
+       ====================================================================== */
+
+    function setCurrentPage(page) {
+
+        STATE.currentPage = page;
+
+        StorageService.saveCurrentPage(page);
+
+    }
+
+    function getCurrentPage() {
+
+        return STATE.currentPage;
+
+    }
+
+    /* ======================================================================
+       SPOKE
+       ====================================================================== */
+
+    function setCurrentSpoke(spoke) {
+
+        STATE.currentSpoke = spoke;
+
+        StorageService.saveCurrentSpoke(spoke);
+
+    }
+
+    function getCurrentSpoke() {
+
+        return STATE.currentSpoke;
+
+    }
+
+    /* ======================================================================
+       RESET
+       ====================================================================== */
+
+    function reset() {
+
+        STATE.visitor = null;
+
+        STATE.assessment = {};
+
+        STATE.scores = {};
+
+        STATE.journeyStatus = null;
+
+        STATE.currentPage = null;
+
+        STATE.currentSpoke = 0;
+
+        StorageService.resetJourney();
+
+    }
+
+    /* ======================================================================
+       STARTUP
+       ====================================================================== */
+
+    async function startup() {
+
+        log('Loading application...');
+
+        loadState();
+
+        if (CONFIG.DEBUG) {
+
+            const ping = await ApiService.safeRequest(
+
+                () => ApiService.ping()
+
+            );
+
+            log('API Status', ping);
+
+        }
+
+        STATE.initialized = true;
+
+        log('Application initialized.');
+
+    }
+
+    /* ======================================================================
+       INITIALIZE
+       ====================================================================== */
+
+    async function init() {
+
+        if (STATE.initialized) {
+
+            return;
+
+        }
+
+        await startup();
+
+    }
+
+    /* ======================================================================
+       PUBLIC API
+       ====================================================================== */
+
+    return {
+
+        CONFIG,
+
+        STATE,
+
+        init,
+
+        reset,
+
+        log,
+
+        loadState,
+
+        saveState,
+
+        setVisitor,
+        getVisitor,
+
+        setAssessment,
+        getAssessment,
+
+        setScores,
+        getScores,
+
+        setJourneyStatus,
+        getJourneyStatus,
+
+        setCurrentPage,
+        getCurrentPage,
+
+        setCurrentSpoke,
+        getCurrentSpoke
+
+    };
+
+})();
+
+/* ==========================================================================
+   APPLICATION BOOTSTRAP
+   ========================================================================== */
+
+document.addEventListener(
+
+    'DOMContentLoaded',
+
+    async () => {
+
+        await App.init();
+
+    }
 
 );
 
+/* ==========================================================================
+   End of File
 
+   File : app.js
 
-
-
-/*=============================================================================
-
-    END OF FILE
-
-=============================================================================*/
+   Status : 🔒 LOCKED
+   ========================================================================== */
