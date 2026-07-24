@@ -18,6 +18,7 @@
     • Landing Layout
     • Hero Section
     • Typography
+    • Life Outlook Cards
     • CTA Styling
     • Responsive Design
 
@@ -84,7 +85,7 @@
 
 .landing-container{
 
-    max-width:900px;
+    max-width:1000px;
 
     margin:0 auto;
 
@@ -144,19 +145,51 @@
 
         clamp(
 
-            2.5rem,
+            2.4rem,
 
-            6vw,
+            5vw,
 
-            5rem
+            4.8rem
 
         );
 
-    line-height:1.2;
+    line-height:1.25;
 
     font-weight:700;
 
     margin:0 0 24px;
+
+}
+
+
+
+
+
+.landing-container h1 span{
+
+    display:block;
+
+    margin-top:18px;
+
+    font-family:
+
+        'Inter',
+
+        sans-serif;
+
+    font-size:clamp(
+
+        1.2rem,
+
+        2vw,
+
+        1.8rem
+
+    );
+
+    font-weight:500;
+
+    color:#E8E8E8;
 
 }
 
@@ -173,17 +206,39 @@
 
     font-family:
 
-        'Inter',
+        'Noto Sans Tamil',
 
         sans-serif;
 
     font-size:1.5rem;
 
-    font-weight:500;
-
-    color:#E8E8E8;
+    line-height:1.8;
 
     margin-bottom:24px;
+
+    color:#FFFFFF;
+
+}
+
+
+
+
+
+.hero-subtitle span{
+
+    display:block;
+
+    margin-top:10px;
+
+    font-family:
+
+        'Inter',
+
+        sans-serif;
+
+    font-size:1.2rem;
+
+    color:#DADADA;
 
 }
 
@@ -198,12 +253,182 @@
 
 .hero-description{
 
-    max-width:650px;
+    max-width:700px;
 
     margin:
 
-        0 auto 48px;
+        0 auto 50px;
 
+    font-family:
+
+        'Inter',
+
+        sans-serif;
+
+    font-size:1.1rem;
+
+    color:#CFCFCF;
+
+}
+
+/*=============================================================================
+    LIFE OUTLOOK OPTIONS
+=============================================================================*/
+
+
+.life-options{
+
+    display:grid;
+
+    grid-template-columns:
+
+        1fr;
+
+    gap:20px;
+
+    max-width:850px;
+
+    margin:
+
+        0 auto
+
+        56px;
+
+}
+
+
+
+
+
+.life-option{
+
+    background:
+
+        rgba(
+
+            255,
+
+            255,
+
+            255,
+
+            .05
+
+        );
+
+    border:
+
+        1px solid
+
+        rgba(
+
+            200,
+
+            169,
+
+            81,
+
+            .25
+
+        );
+
+    border-radius:20px;
+
+    padding:
+
+        28px
+
+        30px;
+
+    text-align:left;
+
+    transition:
+
+        transform .3s ease,
+
+        border-color .3s ease,
+
+        background .3s ease,
+
+        box-shadow .3s ease;
+
+}
+
+
+
+
+
+.life-option:hover{
+
+    transform:
+
+        translateY(-4px);
+
+    background:
+
+        rgba(
+
+            255,
+
+            255,
+
+            255,
+
+            .08
+
+        );
+
+    border-color:
+
+        #C8A951;
+
+    box-shadow:
+
+        0 20px 40px
+
+        rgba(
+
+            0,
+
+            0,
+
+            0,
+
+            .25
+
+        );
+
+}
+
+
+
+
+
+.life-option h3{
+
+    margin:0 0 14px;
+
+    font-family:
+
+        'Inter',
+
+        sans-serif;
+
+    font-size:1.2rem;
+
+    font-weight:700;
+
+    color:#C8A951;
+
+}
+
+
+
+
+
+.life-option p{
+
+    margin:0 0 12px;
 
     font-family:
 
@@ -211,12 +436,31 @@
 
         sans-serif;
 
-
-    font-size:1.25rem;
-
+    font-size:1.18rem;
 
     line-height:1.8;
 
+    color:#FFFFFF;
+
+}
+
+
+
+
+
+.life-option small{
+
+    display:block;
+
+    font-family:
+
+        'Inter',
+
+        sans-serif;
+
+    font-size:1rem;
+
+    line-height:1.7;
 
     color:#D6D6D6;
 
@@ -233,28 +477,31 @@
 
 .primary-button{
 
+    display:inline-flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
 
     border:none;
 
-
     cursor:pointer;
-
 
     padding:
 
-        18px
+        22px
 
         48px;
 
-
     border-radius:50px;
-
 
     background:#C8A951;
 
-
     color:#111315;
-
 
     font-family:
 
@@ -262,12 +509,7 @@
 
         sans-serif;
 
-
-    font-size:1.1rem;
-
-
     font-weight:700;
-
 
     transition:
 
@@ -275,6 +517,31 @@
 
         box-shadow .3s ease;
 
+}
+
+
+
+
+
+.primary-button span{
+
+    font-size:1.15rem;
+
+    font-weight:700;
+
+}
+
+
+
+
+
+.primary-button small{
+
+    font-size:.92rem;
+
+    letter-spacing:.12em;
+
+    font-weight:700;
 
 }
 
@@ -284,9 +551,9 @@
 
 .primary-button:hover{
 
+    transform:
 
-    transform:translateY(-3px);
-
+        translateY(-3px);
 
     box-shadow:
 
@@ -304,7 +571,6 @@
 
         );
 
-
 }
 
 
@@ -321,54 +587,79 @@
 
     .landing-hero{
 
-
         padding:
 
-            50px
+            48px
 
             20px;
 
-
     }
 
+
+
+    .landing-container h1{
+
+        font-size:2.3rem;
+
+    }
 
 
 
     .hero-subtitle{
 
-
-        font-size:1.2rem;
-
+        font-size:1.25rem;
 
     }
-
 
 
 
     .hero-description{
 
-
-        font-size:1.05rem;
-
+        font-size:1rem;
 
     }
 
+
+
+    .life-option{
+
+        padding:
+
+            22px
+
+            20px;
+
+    }
+
+
+
+    .life-option p{
+
+        font-size:1.05rem;
+
+    }
+
+
+
+    .life-option small{
+
+        font-size:.95rem;
+
+    }
 
 
 
     .primary-button{
 
-
         width:100%;
 
-
-        max-width:320px;
-
+        max-width:360px;
 
     }
 
-
 }
+
+
 
 
 
