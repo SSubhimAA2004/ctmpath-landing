@@ -29,7 +29,9 @@
 
         NOTE
 
-        Business logic belongs to:
+        No business logic belongs here.
+
+        Logic belongs to:
 
         registration.js
 
@@ -52,25 +54,37 @@
     </title>
 
 
+
     <!--==================================================
         Stylesheets
     ==================================================-->
 
-    <link rel="stylesheet" href="../css/reset.css">
+    <link
+        rel="stylesheet"
+        href="../css/reset.css">
 
-    <link rel="stylesheet" href="../css/tokens.css">
+    <link
+        rel="stylesheet"
+        href="../css/tokens.css">
 
-    <link rel="stylesheet" href="../css/base.css">
+    <link
+        rel="stylesheet"
+        href="../css/base.css">
 
-    <link rel="stylesheet" href="../css/app.css">
+    <link
+        rel="stylesheet"
+        href="../css/app.css">
 
-    <link rel="stylesheet" href="../css/registration.css">
+    <link
+        rel="stylesheet"
+        href="../css/registration.css">
 
 
 </head>
 
 
 <body>
+
 
 
 <main class="registration-page">
@@ -86,85 +100,74 @@
 
 
             <!--==========================================
-                Premium Brand Header
+                PREMIUM BRAND HEADER
             ===========================================-->
 
 
             <header class="brand-header">
 
 
-                <div class="brand-label">
+                <div class="brand-logo">
 
+                    <img
 
-                    <div class="brand-title">
+                        src="../assets/logo/CTM_Logo_Transparent.svg"
 
+                        alt="CTM PATH™"
 
-                        <span class="brand-icon">
-
-                            ✦
-
-                        </span>
-
-
-                        <span class="brand-name">
-
-                            CTM PATH™
-
-                        </span>
-
-
-                        <span class="brand-icon">
-
-                            ✦
-
-                        </span>
-
-
-                    </div>
-
-
-                    <div class="brand-tagline">
-
-                        வாழ்வாங்கு வாழ்ந்திட வாரீர்!
-
-                    </div>
-
-
-                    <div class="brand-subtitle">
-
-                        JOURNEY TO LIVING™
-
-                    </div>
-
+                        class="ctm-logo">
 
                 </div>
+
+
+
+                <h1 class="brand-name">
+
+                    CTM PATH™
+
+                </h1>
+
+
+
+                <p class="brand-tagline">
+
+                    FROM SURVIVAL TO LIVING™
+
+                </p>
 
 
             </header>
 
 
+
             <!--==========================================
-                Hero Section
+                HERO
             ===========================================-->
 
 
-            <header class="hero-header">
+            <section class="hero-header">
 
 
-                <h1 class="hero-title">
+                <h2 class="hero-title">
 
                     உங்களை
                     <br>
-                    அறிமுகம் செய்யவும்
+                    அறிந்துகொள்வோம்
 
-                </h1>
+                </h2>
 
 
-                <h2 class="hero-title-en">
+
+                <h3 class="hero-title-en">
 
                     Let's Get to Know You
 
-                </h2>
+                </h3>
+
+
+
+                <div class="hero-divider"></div>
+
 
 
                 <p class="hero-description">
@@ -175,6 +178,7 @@
                 </p>
 
 
+
                 <p class="hero-description-en">
 
                     To personalize your journey,
@@ -183,11 +187,12 @@
                 </p>
 
 
-            </header>
+            </section>
+
 
 
             <!--==========================================
-                Registration Form
+                REGISTRATION FORM
             ===========================================-->
 
 
@@ -197,17 +202,13 @@
 
                 class="registration-form"
 
-                autocomplete="off"
-
-
-            >
+                autocomplete="off">
 
 
                 <div class="form-grid">
 
 
                     <div class="form-group">
-
 
                         <label for="fullName">
 
@@ -224,7 +225,6 @@
                             </span>
 
                         </label>
-
 
                         <input
 
@@ -248,7 +248,6 @@
 
                     <div class="form-group">
 
-
                         <label for="mobile">
 
                             <span class="label-ta">
@@ -264,7 +263,6 @@
                             </span>
 
                         </label>
-
 
                         <input
 
@@ -288,7 +286,6 @@
 
                     <div class="form-group">
 
-
                         <label for="email">
 
                             <span class="label-ta">
@@ -304,7 +301,6 @@
                             </span>
 
                         </label>
-
 
                         <input
 
@@ -322,7 +318,6 @@
 
                                         <div class="form-group">
 
-
                         <label for="district">
 
                             <span class="label-ta">
@@ -338,7 +333,6 @@
                             </span>
 
                         </label>
-
 
                         <input
 
@@ -362,7 +356,6 @@
 
                     <div class="form-group">
 
-
                         <label for="state">
 
                             <span class="label-ta">
@@ -378,7 +371,6 @@
                             </span>
 
                         </label>
-
 
                         <input
 
@@ -404,7 +396,7 @@
 
 
                 <!--==========================================
-                    Primary Action
+                    PRIMARY ACTION
                 ===========================================-->
 
 
@@ -415,9 +407,9 @@
 
                         id="continueJourney"
 
-                        type="submit"
+                        class="primary-button"
 
-                        class="primary-button">
+                        type="submit">
 
 
                         <span class="button-ta">
@@ -445,7 +437,7 @@
 
 
             <!--==========================================
-                Privacy Panel
+                PRIVACY PANEL
             ===========================================-->
 
 
@@ -464,16 +456,25 @@
 
                     <p class="privacy-ta">
 
-                        உங்கள் தனிப்பட்ட தகவல்கள் முழுமையாக பாதுகாக்கப்படும்.
-                        அவை உங்கள் வாழ்க்கைப் பயணத்தை தனிப்பயனாக்குவதற்காக மட்டுமே பயன்படுத்தப்படும்.
+                        உங்கள் தனிப்பட்ட தகவல்கள்
+                        முழுமையாக பாதுகாக்கப்படும்.
+
+                        அவை உங்கள் வாழ்க்கைப் பயணத்தை
+                        தனிப்பயனாக்குவதற்காக மட்டுமே
+                        பயன்படுத்தப்படும்.
 
                     </p>
 
 
+
                     <p class="privacy-en">
 
-                        Your personal information is encrypted, secure and completely confidential.
-                        It is used only to personalise your CTM PATH™ journey.
+                        Your personal information is
+                        encrypted, secure and completely
+                        confidential.
+
+                        It is used only to personalise
+                        your CTM PATH™ journey.
 
                     </p>
 
@@ -499,15 +500,29 @@
 ===================================================-->
 
 
-<script src="../js/storage.js"></script>
+<script
+    src="../js/storage.js">
+</script>
 
-<script src="../js/api.js"></script>
 
-<script src="../js/router.js"></script>
+<script
+    src="../js/api.js">
+</script>
 
-<script src="../js/app.js"></script>
 
-<script src="../js/registration.js"></script>
+<script
+    src="../js/router.js">
+</script>
+
+
+<script
+    src="../js/app.js">
+</script>
+
+
+<script
+    src="../js/registration.js">
+</script>
 
 
 </body>
