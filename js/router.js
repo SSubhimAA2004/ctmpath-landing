@@ -1,369 +1,384 @@
 
-/*=============================================================================
+/* ==========================================================================
+   CTM PATH™ Guided Journey v2.0
+   File        : router.js
+   Version     : 1.0
+   Status      : 🔒 LOCKED
+   Purpose     : Application Router
 
-    CTM PATH™
-    FROM SURVIVAL TO LIVING™
+                  Owns
+                  • Page Navigation
+                  • Route Validation
+                  • Journey Progression
+                  • Navigation Guards
 
-    FILE
-
-    router.js
-
-    PURPOSE
-
-    Application Router
-
-    RESPONSIBILITIES
-
-    • Define Application Routes
-    • Navigate Between Pages
-    • Detect Current Page
-    • Redirect Entry Page
-
-    NOTE
-
-    This router controls ONLY page navigation.
-
-    Assessment navigation belongs to
-
-    assessmentEngine.js
-
-=============================================================================*/
-
+                  Owns NO
+                  • UI Rendering
+                  • Business Logic
+                  • Storage
+                  • API Communication
+   ========================================================================== */
 
 'use strict';
 
+/* ==========================================================================
+   ROUTER
+   ========================================================================== */
 
-/*=============================================================================
-    GLOBAL NAMESPACE
-=============================================================================*/
+const Router = (() => {
 
-
-window.CTM = window.CTM || {};
-
-
-
-/*=============================================================================
-    ROUTER MODULE
-=============================================================================*/
-
-
-CTM.router = (function(){
-
-
-
-    /*=========================================================================
-        ROUTE DEFINITIONS
-    =========================================================================*/
-
-
-    const ROOT = window.location.origin;
-
-
+    /* ======================================================================
+       ROUTES
+       ====================================================================== */
 
     const ROUTES = {
 
-        landing:
-            ROOT + '/pages/landing.html',
+        LANDING: 'landing.html',
 
-        registration:
-            ROOT + '/pages/registration.html',
+        REGISTRATION: 'registration.html',
 
-        assessment:
-            ROOT + '/pages/assessment.html',
+        ASSESSMENT: 'assessment.html',
 
-        kaalachakra:
-            ROOT + '/pages/kaalachakra.html',
+        KALACHAKRA: 'kaalachakra.html',
 
-        diagnosis:
-            ROOT + '/pages/diagnosis.html',
+        DIAGNOSIS: 'diagnosis.html',
 
-        prescription:
-            ROOT + '/pages/prescription.html',
+        PRESCRIPTION: 'prescription.html',
 
-        completion:
-            ROOT + '/pages/completion.html'
+        COMPLETION: 'completion.html'
 
     };
 
+    /* ======================================================================
+       JOURNEY ORDER
+       ====================================================================== */
 
+    const JOURNEY = [
 
-    /*=========================================================================
-        GET CURRENT PAGE
-    =========================================================================*/
+        ROUTES.LANDING,
 
+        ROUTES.REGISTRATION,
 
-    function current(){
+        ROUTES.ASSESSMENT,
+
+        ROUTES.KALACHAKRA,
+
+        ROUTES.DIAGNOSIS,
+
+        ROUTES.PRESCRIPTION,
+
+        ROUTES.COMPLETION
+
+    ];
+
+    /* ======================================================================
+       CURRENT PAGE
+       ====================================================================== */
+
+    function currentPage() {
 
         const path = window.location.pathname;
 
-        const file = path.split('/').pop();
-
-        return file || 'index.html';
+        return path.substring(path.lastIndexOf('/') + 1);
 
     }
 
+    /* ======================================================================
+       VALID ROUTE
+       ====================================================================== */
 
+    function isValidRoute(page) {
 
-    /*=========================================================================
-        CHECK ROUTE EXISTS
-    =========================================================================*/
-
-
-    function exists(route){
-
-        return Object.prototype.hasOwnProperty.call(
-
-            ROUTES,
-
-            route
-
-        );
+        return JOURNEY.includes(page);
 
     }
 
+    /* ======================================================================
+       INDEX
+       ====================================================================== */
 
+    function pageIndex(page) {
 
-    /*=========================================================================
-        NAVIGATE
-    =========================================================================*/
+        return JOURNEY.indexOf(page);
 
+    }
 
-    function go(route){
+    /* ======================================================================
+       CAN NAVIGATE
+       ====================================================================== */
 
-        if(!exists(route)){
+    function canNavigate(target) {
 
-            console.error(
-
-                'CTM Router: Unknown Route',
-
-                route
-
-            );
+        if (!isValidRoute(target)) {
 
             return false;
 
         }
 
-        window.location.href = ROUTES[route];
+        const current = currentPage();
 
-        return true;
+        if (!isValidRoute(current)) {
 
-    }
-
-
-
-    /*=========================================================================
-        REPLACE NAVIGATION
-    =========================================================================*/
-
-
-    function replace(route){
-
-        if(!exists(route)){
-
-            console.error(
-
-                'CTM Router: Unknown Route',
-
-                route
-
-            );
-
-            return false;
+            return true;
 
         }
 
-        window.location.replace(
-
-            ROUTES[route]
-
-        );
-
-        return true;
+        return pageIndex(target) <= pageIndex(current) + 1;
 
     }
 
+    /* ======================================================================
+       GO
+       ====================================================================== */
 
+    function go(page) {
 
-    /*=========================================================================
-        ENTRY CHECK
+        if (!canNavigate(page)) {
 
-        Determines whether current page
-        is index.html
+            console.warn('Navigation blocked:', page);
 
-    =========================================================================*/
+            return;
 
+        }
 
-    function isEntryPage(){
+        StorageService.saveCurrentPage(page);
 
-        const page = current();
+        window.location.href = page;
 
-        return(
+    }
 
-            page === '' ||
+    /* ======================================================================
+       NEXT
+       ====================================================================== */
 
-            page === 'index.html'
+    function next() {
+
+        const current = currentPage();
+
+        const index = pageIndex(current);
+
+        if (index === -1) return;
+
+        if (index >= JOURNEY.length - 1) return;
+
+        go(JOURNEY[index + 1]);
+
+    }
+
+    /* ======================================================================
+       PREVIOUS
+       ====================================================================== */
+
+    function previous() {
+
+        const current = currentPage();
+
+        const index = pageIndex(current);
+
+        if (index <= 0) return;
+
+        go(JOURNEY[index - 1]);
+
+    }
+
+    /* ======================================================================
+       RESTART
+       ====================================================================== */
+
+    function restart() {
+
+        StorageService.resetJourney();
+
+        go(ROUTES.LANDING);
+
+    }
+
+    /* ======================================================================
+       RESUME
+       ====================================================================== */
+
+    function resume() {
+
+        const saved = StorageService.getCurrentPage();
+
+        if (!saved) {
+
+            go(ROUTES.LANDING);
+
+            return;
+
+        }
+
+        go(saved);
+
+    }
+
+    /* ======================================================================
+       FIRST PAGE
+       ====================================================================== */
+
+    function isFirstPage() {
+
+        return currentPage() === ROUTES.LANDING;
+
+    }
+
+    /* ======================================================================
+       LAST PAGE
+       ====================================================================== */
+
+    function isLastPage() {
+
+        return currentPage() === ROUTES.COMPLETION;
+
+    }
+
+    /* ======================================================================
+       CURRENT STEP
+       ====================================================================== */
+
+    function currentStep() {
+
+        return pageIndex(currentPage()) + 1;
+
+    }
+
+    /* ======================================================================
+       TOTAL STEPS
+       ====================================================================== */
+
+    function totalSteps() {
+
+        return JOURNEY.length;
+
+    }
+
+    /* ======================================================================
+       PROGRESS
+       ====================================================================== */
+
+    function progress() {
+
+        return Math.round(
+
+            (currentStep() / totalSteps()) * 100
 
         );
 
     }
 
+    /* ======================================================================
+       NAVIGATION GUARD
+       ====================================================================== */
 
+    function protect() {
 
-    /*=========================================================================
-        START ROUTER
+        const current = currentPage();
 
-        First application action
+        if (!isValidRoute(current)) {
 
-        index.html
+            return;
 
-            ↓
+        }
 
-        landing.html
+        const saved = StorageService.getCurrentPage();
 
-    =========================================================================*/
+        if (!saved) {
 
+            return;
 
-    function start(){
+        }
 
-        console.log(
+        const allowed = pageIndex(saved);
 
-            '========================================'
+        const currentIndex = pageIndex(current);
 
-        );
+        if (currentIndex > allowed + 1) {
 
-        console.log(
-
-            'CTM PATH™ Router Started'
-
-        );
-
-        console.log(
-
-            'Current Page:',
-
-            current()
-
-        );
-
-        console.log(
-
-            '========================================'
-
-        );
-
-
-
-        if(isEntryPage()){
-
-            replace('landing');
+            go(saved);
 
         }
 
     }
 
+    /* ======================================================================
+       INITIALIZE
+       ====================================================================== */
 
+    function init() {
 
-    /*=========================================================================
-        BROWSER HISTORY
-    =========================================================================*/
+        protect();
 
+        StorageService.saveCurrentPage(
 
-    function back(){
-
-        window.history.back();
-
-    }
-
-
-
-    function forward(){
-
-        window.history.forward();
-
-    }
-
-
-
-    function reload(){
-
-        window.location.reload();
-
-    }
-
-
-
-    /*=========================================================================
-        GET ALL ROUTES
-    =========================================================================*/
-
-
-    function routes(){
-
-        return {
-
-            ...ROUTES
-
-        };
-
-    }
-
-
-
-    /*=========================================================================
-        INITIALIZE
-    =========================================================================*/
-
-
-    function init(){
-
-        console.log(
-
-            'CTM PATH™ Router Ready'
+            currentPage()
 
         );
 
     }
 
+    /* ======================================================================
+       PUBLIC API
+       ====================================================================== */
 
+    return {
 
-    /*=========================================================================
-        PUBLIC API
-    =========================================================================*/
+        ROUTES,
 
-
-    return{
+        JOURNEY,
 
         init,
 
-        start,
-
         go,
 
-        replace,
+        next,
 
-        current,
+        previous,
 
-        exists,
+        resume,
 
-        routes,
+        restart,
 
-        back,
+        protect,
 
-        forward,
+        currentPage,
 
-        reload
+        currentStep,
+
+        totalSteps,
+
+        progress,
+
+        isValidRoute,
+
+        isFirstPage,
+
+        isLastPage
 
     };
 
-
-
 })();
 
+/* ==========================================================================
+   AUTO INITIALIZE
+   ========================================================================== */
 
+document.addEventListener(
 
-/*=============================================================================
+    'DOMContentLoaded',
 
-    END OF FILE
+    () => {
 
-=============================================================================*/
+        Router.init();
+
+    }
+
+);
+
+/* ==========================================================================
+   End of File
+
+   File : router.js
+
+   Status : 🔒 LOCKED
+   ========================================================================== */
