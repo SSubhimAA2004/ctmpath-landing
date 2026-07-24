@@ -1,43 +1,60 @@
 
 /* ==========================================================================
    CTM PATH™ Guided Journey v2.0
+
    File        : landing.js
-   Version     : 2.0
+   Version     : 2.1
+
    Status      : 🔒 LOCKED
+
    Purpose     : Landing Page Controller
 
                   Owns
                   • Landing Page Initialization
                   • Begin Journey Button
-                  • Journey Reset
-                  • Navigation
+                  • Journey Reset Trigger
+                  • Navigation Trigger
 
                   Owns NO
                   • Assessment Logic
                   • Storage Logic
                   • API Logic
                   • Business Rules
+
    ========================================================================== */
 
+
 'use strict';
+
+
 
 /* ==========================================================================
    LANDING CONTROLLER
    ========================================================================== */
 
+
 const LandingPage = (() => {
+
+
 
     /* ======================================================================
        ELEMENTS
        ====================================================================== */
 
+
     let beginButton = null;
+
+
+
+
 
     /* ======================================================================
        CACHE DOM
        ====================================================================== */
 
-    function cacheDom() {
+
+    function cacheDom(){
+
 
         beginButton = document.getElementById(
 
@@ -45,15 +62,27 @@ const LandingPage = (() => {
 
         );
 
+
     }
+
+
+
+
 
     /* ======================================================================
        EVENTS
        ====================================================================== */
 
-    function bindEvents() {
 
-        if (beginButton) {
+    function bindEvents(){
+
+
+        if(
+
+            beginButton
+
+        ){
+
 
             beginButton.addEventListener(
 
@@ -63,36 +92,90 @@ const LandingPage = (() => {
 
             );
 
+
         }
 
+
     }
+
+
+
+
 
     /* ======================================================================
        START JOURNEY
        ====================================================================== */
 
-    function startJourney() {
+
+    function startJourney(){
+
 
         /*
-            A completely new visitor always begins with
-            a clean session.
+            A new visitor begins with a clean journey state.
+
+            Application state ownership belongs to CTMApp.
         */
 
-        App.reset();
 
-        Router.go(
+        if(
 
-            Router.ROUTES.REGISTRATION
+            window.CTMApp
 
-        );
+        ){
+
+
+            CTMApp.reset();
+
+
+        }
+
+
+
+
+
+        if(
+
+            window.Router
+
+        ){
+
+
+            Router.go(
+
+                Router.ROUTES.REGISTRATION
+
+            );
+
+
+        }
+
+
+        else{
+
+
+            console.error(
+
+                'Router unavailable.'
+
+            );
+
+
+        }
+
 
     }
 
+
+
+
+
     /* ======================================================================
-       ANIMATION
+       LANDING ANIMATION
        ====================================================================== */
 
-    function animate() {
+
+    function animate(){
+
 
         document.body.classList.add(
 
@@ -100,19 +183,30 @@ const LandingPage = (() => {
 
         );
 
+
     }
+
+
+
+
 
     /* ======================================================================
        INITIALIZE
        ====================================================================== */
 
-    function init() {
+
+    function init(){
+
 
         cacheDom();
 
+
         bindEvents();
 
+
         animate();
+
+
 
         console.info(
 
@@ -120,23 +214,38 @@ const LandingPage = (() => {
 
         );
 
+
     }
 
+
+
+
+
     /* ======================================================================
-       PUBLIC
+       PUBLIC API
        ====================================================================== */
+
 
     return {
 
+
         init
+
 
     };
 
+
+
 })();
+
+
+
+
 
 /* ==========================================================================
    PAGE LOAD
    ========================================================================== */
+
 
 document.addEventListener(
 
@@ -144,17 +253,37 @@ document.addEventListener(
 
     () => {
 
+
         LandingPage.init();
+
 
     }
 
 );
+
+
+
+
+
+/* ==========================================================================
+   GLOBAL EXPORT
+   ========================================================================== */
+
+
+window.LandingPage = LandingPage;
+
+
+
+
 
 /* ==========================================================================
    End of File
 
    File   : landing.js
 
+   Version: 2.1
+
    Status : 🔒 LOCKED
+
    ========================================================================== */
 
