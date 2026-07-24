@@ -1,571 +1,525 @@
 
-/*=============================================================================
-
-    CTM PATH™
-    FROM SURVIVAL TO LIVING™
-
-    FILE
-    app.css
-
-    PURPOSE
-
-    Global Application Components
-
-    RESPONSIBILITIES
-
-    • Application Wrapper
-    • Header
-    • Logo
-    • Buttons
-    • Cards
-    • Progress
-    • Loading State
-    • Animations
-
-    NOTE
-
-    NO PAGE-SPECIFIC STYLES
-
-=============================================================================*/
+/* ==========================================================================
+   CTM PATH™ Guided Journey v2.0
+   File        : app.css
+   Version     : 1.0
+   Status      : 🔒 LOCKED
+   Purpose     : Shared application styles.
+                  This stylesheet owns ONLY:
+                  • Layout Containers
+                  • Shared Components
+                  • Glass Cards
+                  • Buttons
+                  • Forms
+                  • Navigation
+                  • Progress Components
+                  • Utility Classes
+                  No page-specific styling.
+   ========================================================================== */
 
 
-/*=============================================================================
-    APPLICATION
-=============================================================================*/
+/* ==========================================================================
+   APPLICATION CONTAINER
+   ========================================================================== */
 
-.app{
+.app {
 
-    width:100%;
+    min-height: 100vh;
 
-    min-height:100vh;
+    display: flex;
 
-    display:flex;
+    flex-direction: column;
 
-    flex-direction:column;
+    position: relative;
+
+}
+
+.container {
+
+    width: min(100% - 48px, var(--container-width));
+
+    margin-inline: auto;
+
+}
+
+.content {
+
+    width: min(100%, var(--content-width));
+
+    margin-inline: auto;
 
 }
 
 
-/*=============================================================================
-    PAGE
-=============================================================================*/
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
 
-.page{
+.app-header {
 
-    width:100%;
+    width: 100%;
 
-    min-height:100vh;
+    height: var(--header-height);
 
-    display:flex;
+    display: flex;
 
-    flex-direction:column;
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+}
+
+.logo {
+
+    height: 58px;
+
+    width: auto;
 
 }
 
 
-/*=============================================================================
-    HEADER
-=============================================================================*/
+/* ==========================================================================
+   MAIN
+   ========================================================================== */
 
-.app-header{
+.app-main {
 
-    width:100%;
+    flex: 1;
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
+    align-items: center;
 
-    justify-content:space-between;
+    justify-content: center;
 
-    padding:
-
-        var(--space-5)
-
-        var(--page-padding);
+    padding-block: var(--space-16);
 
 }
 
 
-.app-logo{
+/* ==========================================================================
+   GLASS CARD
+   ========================================================================== */
 
-    width:180px;
+.glass-card {
 
-    height:auto;
+    width: 100%;
+
+    background: var(--glass-bg);
+
+    backdrop-filter: blur(var(--glass-blur));
+
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+
+    border: 1px solid var(--glass-border);
+
+    border-radius: var(--card-radius);
+
+    box-shadow: var(--shadow-lg);
+
+    padding: var(--space-10);
+
+    transition: all var(--transition-normal);
+
+}
+
+.glass-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: var(--shadow-xl);
 
 }
 
 
-/*=============================================================================
-    PAGE CONTENT
-=============================================================================*/
+/* ==========================================================================
+   PAGE TITLES
+   ========================================================================== */
 
-.page-content{
+.page-title {
 
-    flex:1;
+    text-align: center;
 
-    width:100%;
+    margin-bottom: var(--space-5);
 
-    display:flex;
+}
 
-    flex-direction:column;
+.page-subtitle {
 
-    justify-content:center;
+    text-align: center;
+
+    max-width: 760px;
+
+    margin-inline: auto;
+
+    margin-bottom: var(--space-10);
 
 }
 
 
-/*=============================================================================
-    CARD
-=============================================================================*/
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
 
-.card{
+.btn {
 
-    background:
+    display: inline-flex;
 
-        var(--background-card);
+    align-items: center;
 
-    border:
+    justify-content: center;
 
-        1px solid
+    gap: var(--space-2);
 
-        var(--border-color);
+    height: var(--button-height);
 
-    border-radius:
+    padding-inline: var(--space-8);
 
-        var(--radius-lg);
+    border-radius: var(--button-radius);
 
-    padding:
+    font-weight: var(--fw-semibold);
 
-        var(--space-8);
+    transition: all var(--transition-normal);
 
-    box-shadow:
+    user-select: none;
 
-        var(--shadow-md);
+}
+
+.btn-primary {
+
+    background: var(--color-primary);
+
+    color: #ffffff;
+
+}
+
+.btn-primary:hover {
+
+    background: var(--color-primary-light);
+
+}
+
+.btn-secondary {
+
+    background: transparent;
+
+    border: 1px solid var(--border-medium);
+
+    color: var(--text-primary);
+
+}
+
+.btn-secondary:hover {
+
+    border-color: var(--color-primary);
+
+}
+
+.btn-gold {
+
+    background: var(--color-secondary);
+
+    color: #ffffff;
+
+}
+
+.btn-gold:hover {
+
+    background: var(--color-secondary-light);
 
 }
 
 
-/*=============================================================================
-    BUTTONS
-=============================================================================*/
+/* ==========================================================================
+   BUTTON GROUP
+   ========================================================================== */
 
-.btn{
+.button-group {
 
-    min-width:220px;
+    display: flex;
 
-    min-height:56px;
+    gap: var(--space-4);
 
-    padding:
+    justify-content: center;
 
-        0
-
-        var(--space-8);
-
-    border-radius:
-
-        var(--radius-round);
-
-    font-size:
-
-        var(--font-md);
-
-    font-weight:
-
-        var(--weight-bold);
-
-    transition:
-
-        var(--transition-normal);
+    flex-wrap: wrap;
 
 }
 
 
-/*=============================================================================
-    PRIMARY BUTTON
-=============================================================================*/
+/* ==========================================================================
+   FORM
+   ========================================================================== */
 
-.btn-primary{
+.form-group {
 
-    background:
+    margin-bottom: var(--space-6);
 
-        var(--color-gold);
+}
 
-    color:
+.form-label {
 
-        var(--color-primary);
+    margin-bottom: var(--space-2);
+
+}
+
+.form-control {
+
+    width: 100%;
+
+    height: var(--input-height);
+
+    padding-inline: var(--space-5);
+
+    background: rgba(255,255,255,.05);
+
+    border: 1px solid var(--border-light);
+
+    border-radius: var(--radius-lg);
+
+    color: var(--text-primary);
+
+    transition: all var(--transition-fast);
+
+}
+
+.form-control:focus {
+
+    border-color: var(--color-primary);
 
 }
 
 
-.btn-primary:hover{
+/* ==========================================================================
+   PROGRESS
+   ========================================================================== */
 
-    background:
+.progress {
 
-        var(--color-gold-light);
+    margin-bottom: var(--space-8);
 
-    transform:
+}
 
-        translateY(-2px);
+.progress-label {
 
-    box-shadow:
+    display: flex;
 
-        var(--shadow-gold);
+    justify-content: space-between;
+
+    margin-bottom: var(--space-2);
+
+}
+
+.progress-track {
+
+    width: 100%;
+
+    height: 10px;
+
+    border-radius: var(--radius-round);
+
+    background: rgba(255,255,255,.08);
+
+    overflow: hidden;
+
+}
+
+.progress-fill {
+
+    height: 100%;
+
+    width: 0;
+
+    background: var(--color-primary);
+
+    transition: width var(--transition-normal);
 
 }
 
 
-/*=============================================================================
-    SECONDARY BUTTON
-=============================================================================*/
+/* ==========================================================================
+   DIVIDERS
+   ========================================================================== */
 
-.btn-secondary{
+.divider {
 
-    background:transparent;
+    width: 100%;
 
-    color:
+    height: 1px;
 
-        var(--color-gold);
+    background: var(--border-light);
 
-    border:
-
-        1px solid
-
-        var(--color-gold);
+    margin-block: var(--space-8);
 
 }
 
 
-.btn-secondary:hover{
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
 
-    background:
+.navigation {
 
-        rgba(216,176,76,.10);
+    display: flex;
 
-}
+    justify-content: space-between;
 
+    align-items: center;
 
-/*=============================================================================
-    BUTTON DISABLED
-=============================================================================*/
+    gap: var(--space-4);
 
-.btn:disabled{
-
-    opacity:.45;
-
-    cursor:not-allowed;
-
-    transform:none;
-
-    box-shadow:none;
+    margin-top: var(--space-10);
 
 }
 
 
-/*=============================================================================
-    TITLE
-=============================================================================*/
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
 
-.page-title{
+.app-footer {
 
-    color:
+    padding-block: var(--space-6);
 
-        var(--color-gold);
+    text-align: center;
 
-    font-size:
+    color: var(--text-muted);
 
-        var(--font-4xl);
-
-    font-weight:
-
-        var(--weight-extrabold);
-
-    text-align:center;
+    font-size: var(--fs-sm);
 
 }
 
 
-.page-subtitle{
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
 
-    color:
+.text-center {
 
-        var(--color-text-secondary);
+    text-align: center;
 
-    font-size:
+}
 
-        var(--font-lg);
+.text-left {
 
-    text-align:center;
+    text-align: left;
+
+}
+
+.text-right {
+
+    text-align: right;
+
+}
+
+.hidden {
+
+    display: none !important;
+
+}
+
+.w-100 {
+
+    width: 100%;
+
+}
+
+.mt-4 {
+
+    margin-top: var(--space-4);
+
+}
+
+.mt-6 {
+
+    margin-top: var(--space-6);
+
+}
+
+.mt-8 {
+
+    margin-top: var(--space-8);
+
+}
+
+.mb-4 {
+
+    margin-bottom: var(--space-4);
+
+}
+
+.mb-6 {
+
+    margin-bottom: var(--space-6);
+
+}
+
+.mb-8 {
+
+    margin-bottom: var(--space-8);
 
 }
 
 
-/*=============================================================================
-    SECTION TITLE
-=============================================================================*/
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
 
-.section-title{
+@media (max-width: 992px) {
 
-    color:
+    .glass-card {
 
-        var(--color-gold);
-
-    font-size:
-
-        var(--font-2xl);
-
-    font-weight:
-
-        var(--weight-bold);
-
-}
-
-
-.section-subtitle{
-
-    color:
-
-        var(--color-text-secondary);
-
-}
-
-
-/*=============================================================================
-    PROGRESS
-=============================================================================*/
-
-.progress{
-
-    width:100%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:
-
-        var(--space-2);
-
-}
-
-
-.progress-dot{
-
-    width:12px;
-
-    height:12px;
-
-    border-radius:50%;
-
-    background:
-
-        rgba(255,255,255,.15);
-
-}
-
-
-.progress-dot.active{
-
-    background:
-
-        var(--color-gold);
-
-}
-
-
-/*=============================================================================
-    DIVIDER
-=============================================================================*/
-
-.divider{
-
-    width:100%;
-
-    height:1px;
-
-    background:
-
-        var(--border-color);
-
-}
-
-
-/*=============================================================================
-    LOADER
-=============================================================================*/
-
-.loader{
-
-    width:48px;
-
-    height:48px;
-
-    border-radius:50%;
-
-    border:
-
-        4px solid
-
-        rgba(255,255,255,.15);
-
-    border-top-color:
-
-        var(--color-gold);
-
-    animation:
-
-        spin
-
-        1s linear infinite;
-
-}
-
-
-/*=============================================================================
-    FADE IN
-=============================================================================*/
-
-.fade-in{
-
-    animation:
-
-        fadeIn
-
-        .40s ease;
-
-}
-
-
-/*=============================================================================
-    SLIDE UP
-=============================================================================*/
-
-.slide-up{
-
-    animation:
-
-        slideUp
-
-        .45s ease;
-
-}
-
-
-/*=============================================================================
-    KEYFRAMES
-=============================================================================*/
-
-@keyframes fadeIn{
-
-    from{
-
-        opacity:0;
-
-    }
-
-    to{
-
-        opacity:1;
-
-    }
-
-}
-
-
-@keyframes slideUp{
-
-    from{
-
-        opacity:0;
-
-        transform:
-
-            translateY(20px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-
-            translateY(0);
+        padding: var(--space-8);
 
     }
 
 }
 
+@media (max-width: 768px) {
 
-@keyframes spin{
+    .container {
 
-    from{
-
-        transform:
-
-            rotate(0deg);
+        width: calc(100% - 32px);
 
     }
 
-    to{
+    .navigation {
 
-        transform:
+        flex-direction: column;
 
-            rotate(360deg);
+    }
+
+    .btn {
+
+        width: 100%;
+
+    }
+
+    .button-group {
+
+        flex-direction: column;
+
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .glass-card {
+
+        padding: var(--space-6);
 
     }
 
 }
 
 
-/*=============================================================================
-    MOBILE
-=============================================================================*/
+/* ==========================================================================
+   End of File
 
-@media (max-width:768px){
+   File : app.css
 
-    .app-header{
-
-        padding:
-
-            var(--space-4);
-
-    }
-
-    .app-logo{
-
-        width:140px;
-
-    }
-
-    .card{
-
-        padding:
-
-            var(--space-6);
-
-    }
-
-    .btn{
-
-        width:100%;
-
-        min-width:unset;
-
-    }
-
-    .page-title{
-
-        font-size:
-
-            var(--font-3xl);
-
-    }
-
-}
-
-
-/*=============================================================================
-    END OF FILE
-=============================================================================*/
+   Status : 🔒 LOCKED
+   ========================================================================== */
