@@ -1,1 +1,1807 @@
 
+/*=============================================================================
+
+    CTM PATH™
+
+    FROM SURVIVAL TO LIVING™
+
+    FILE
+
+    registration.css
+
+    PURPOSE
+
+    Screen 02 Visual Design
+
+    RESPONSIBILITIES
+
+    • Registration Layout
+    • Premium Card
+    • Typography
+    • Form Design
+    • CTA
+    • Privacy Section
+    • Responsive Design
+
+=============================================================================*/
+
+
+
+/*=============================================================================
+    REGISTRATION PAGE
+=============================================================================*/
+
+
+.registration-page{
+
+    position:relative;
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(200,169,81,.10),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #07172F 0%,
+            #0B2245 40%,
+            #101317 100%
+        );
+
+    padding:
+
+        70px
+        24px;
+
+}
+
+
+
+
+
+/*=============================================================================
+    BACKGROUND GLOW
+=============================================================================*/
+
+
+.registration-background{
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+}
+
+
+
+
+
+.registration-background::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:650px;
+
+    height:650px;
+
+    border-radius:50%;
+
+    top:-220px;
+
+    left:-180px;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(200,169,81,.12),
+
+            transparent 70%
+
+        );
+
+}
+
+
+
+
+
+.registration-background::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:700px;
+
+    height:700px;
+
+    border-radius:50%;
+
+    right:-250px;
+
+    bottom:-250px;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(0,180,255,.08),
+
+            transparent 72%
+
+        );
+
+}
+
+
+
+
+
+/*=============================================================================
+    MAIN CONTAINER
+=============================================================================*/
+
+
+.registration-container{
+
+    position:relative;
+
+    width:100%;
+
+    max-width:760px;
+
+    z-index:10;
+
+}
+
+
+
+
+
+/*=============================================================================
+    PREMIUM CARD
+=============================================================================*/
+
+
+.registration-card{
+
+    position:relative;
+
+    padding:
+
+        56px
+        60px;
+
+    border-radius:32px;
+
+    background:
+
+        rgba(
+
+            255,
+            255,
+            255,
+            .055
+
+        );
+
+    backdrop-filter:
+
+        blur(18px);
+
+    -webkit-backdrop-filter:
+
+        blur(18px);
+
+    border:
+
+        1px solid
+
+        rgba(
+
+            255,
+            255,
+            255,
+            .10
+
+        );
+
+    box-shadow:
+
+        0 30px 80px
+
+        rgba(
+
+            0,
+            0,
+            0,
+            .45
+
+        );
+
+}
+
+/*=============================================================================
+    BRAND HEADER
+=============================================================================*/
+
+
+.brand-header{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+
+
+
+
+.brand-label{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:
+
+        8px
+        18px;
+
+    border-radius:999px;
+
+    background:
+
+        rgba(
+
+            200,
+            169,
+            81,
+            .12
+
+        );
+
+    border:
+
+        1px solid
+
+        rgba(
+
+            200,
+            169,
+            81,
+            .28
+
+        );
+
+    color:#D8B86A;
+
+    font-family:
+
+        "Inter",
+        sans-serif;
+
+    font-size:.90rem;
+
+    font-weight:700;
+
+    letter-spacing:.25em;
+
+    text-transform:uppercase;
+
+}
+
+
+
+
+
+/*=============================================================================
+    HERO HEADER
+=============================================================================*/
+
+
+.hero-header{
+
+    text-align:center;
+
+    margin-bottom:42px;
+
+}
+
+
+
+
+
+.hero-title{
+
+    margin:0;
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+    font-size:
+
+        clamp(
+
+            2.2rem,
+            4vw,
+            3.3rem
+
+        );
+
+    font-weight:700;
+
+    line-height:1.35;
+
+    color:#FFFFFF;
+
+}
+
+
+
+
+
+.hero-title-en{
+
+    margin:
+
+        16px
+        0
+        28px;
+
+    font-family:
+
+        "Playfair Display",
+        serif;
+
+    font-size:
+
+        clamp(
+
+            1.35rem,
+            2vw,
+            2rem
+
+        );
+
+    font-weight:600;
+
+    color:#E8E8E8;
+
+}
+
+
+
+
+
+.hero-description{
+
+    max-width:620px;
+
+    margin:
+
+        0 auto
+        16px;
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+    font-size:1.15rem;
+
+    line-height:1.9;
+
+    color:#F2F2F2;
+
+}
+
+
+
+
+
+.hero-description-en{
+
+    max-width:620px;
+
+    margin:0 auto;
+
+    font-family:
+
+        "Inter",
+        sans-serif;
+
+    font-size:1.02rem;
+
+    line-height:1.9;
+
+    color:#CFCFCF;
+
+}
+
+/*=============================================================================
+    REGISTRATION FORM
+=============================================================================*/
+
+
+.registration-form{
+
+    width:100%;
+
+}
+
+
+
+
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(
+
+            2,
+
+            minmax(
+
+                0,
+
+                1fr
+
+            )
+
+        );
+
+    gap:
+
+        24px
+        28px;
+
+    margin-bottom:48px;
+
+}
+
+
+
+
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+
+
+.form-group label{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+    margin-bottom:12px;
+
+}
+
+
+
+
+
+/*=============================================================================
+    LABELS
+=============================================================================*/
+
+
+.label-ta{
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    color:#FFFFFF;
+
+}
+
+
+
+
+
+.label-en{
+
+    font-family:
+
+        "Inter",
+        sans-serif;
+
+    font-size:.82rem;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+
+    color:#BDBDBD;
+
+}
+
+
+
+
+
+/*=============================================================================
+    INPUT FIELDS
+=============================================================================*/
+
+
+.form-group input{
+
+    width:100%;
+
+    height:60px;
+
+    padding:
+
+        0
+        22px;
+
+    border-radius:16px;
+
+    border:
+
+        1px solid
+
+        rgba(
+
+            255,
+            255,
+            255,
+            .12
+
+        );
+
+    background:
+
+        rgba(
+
+            255,
+            255,
+            255,
+            .06
+
+        );
+
+    color:#FFFFFF;
+
+    font-family:
+
+        "Inter",
+        sans-serif;
+
+    font-size:1rem;
+
+    transition:
+
+        border-color .30s ease,
+
+        box-shadow .30s ease,
+
+        background .30s ease,
+
+        transform .25s ease;
+
+}
+
+
+
+
+
+.form-group input::placeholder{
+
+    color:
+
+        rgba(
+
+            255,
+            255,
+            255,
+            .42
+
+        );
+
+}
+
+
+
+
+
+.form-group input:hover{
+
+    background:
+
+        rgba(
+
+            255,
+            255,
+            255,
+            .08
+
+        );
+
+}
+
+
+
+
+
+.form-group input:focus{
+
+    outline:none;
+
+    border-color:#C8A951;
+
+    background:
+
+        rgba(
+
+            255,
+            255,
+            255,
+            .10
+
+        );
+
+    box-shadow:
+
+        0 0 0 4px
+
+        rgba(
+
+            200,
+            169,
+            81,
+            .16
+
+        );
+
+    transform:
+
+        translateY(-1px);
+
+}
+
+/*=============================================================================
+    CTA SECTION
+=============================================================================*/
+
+
+.cta-section{
+
+    margin-top:12px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+
+
+/*=============================================================================
+    PRIMARY BUTTON
+=============================================================================*/
+
+
+.primary-button{
+
+    width:100%;
+
+    min-height:72px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:8px;
+
+    cursor:pointer;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #D8B86A 0%,
+
+            #C8A951 100%
+
+        );
+
+    color:#081C3A;
+
+    font-family:
+
+        "Inter",
+
+        sans-serif;
+
+    font-weight:700;
+
+    transition:
+
+        transform .30s ease,
+
+        box-shadow .30s ease,
+
+        filter .30s ease;
+
+}
+
+
+
+
+
+.primary-button:hover{
+
+    transform:
+
+        translateY(-3px);
+
+    filter:
+
+        brightness(1.03);
+
+    box-shadow:
+
+        0 20px 40px
+
+        rgba(
+
+            200,
+
+            169,
+
+            81,
+
+            .35
+
+        );
+
+}
+
+
+
+
+
+.primary-button:active{
+
+    transform:
+
+        translateY(-1px);
+
+}
+
+
+
+
+
+.primary-button:focus{
+
+    outline:none;
+
+    box-shadow:
+
+        0 0 0 5px
+
+        rgba(
+
+            200,
+
+            169,
+
+            81,
+
+            .22
+
+        );
+
+}
+
+
+
+
+
+.button-ta{
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size:1.15rem;
+
+    font-weight:700;
+
+    color:#081C3A;
+
+}
+
+
+
+
+
+.button-en{
+
+    font-family:
+
+        "Inter",
+
+        sans-serif;
+
+    font-size:.82rem;
+
+    font-weight:700;
+
+    letter-spacing:.18em;
+
+    text-transform:uppercase;
+
+    color:
+
+        rgba(
+
+            8,
+
+            28,
+
+            58,
+
+            .80
+
+        );
+
+}
+
+/*=============================================================================
+    PRIVACY CARD
+=============================================================================*/
+
+
+.privacy-card{
+
+    margin-top:42px;
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:18px;
+
+    padding:
+
+        22px
+        24px;
+
+    border-radius:20px;
+
+    background:
+
+        rgba(
+
+            255,
+            255,
+            255,
+            .045
+
+        );
+
+    border:
+
+        1px solid
+
+        rgba(
+
+            255,
+            255,
+            255,
+            .08
+
+        );
+
+}
+
+
+
+
+
+/*=============================================================================
+    PRIVACY ICON
+=============================================================================*/
+
+
+.privacy-icon{
+
+    flex-shrink:0;
+
+    width:54px;
+
+    height:54px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+
+        rgba(
+
+            200,
+            169,
+            81,
+            .12
+
+        );
+
+    border:
+
+        1px solid
+
+        rgba(
+
+            200,
+            169,
+            81,
+            .28
+
+        );
+
+    font-size:1.35rem;
+
+}
+
+
+
+
+
+/*=============================================================================
+    PRIVACY CONTENT
+=============================================================================*/
+
+
+.privacy-content{
+
+    flex:1;
+
+}
+
+
+
+
+
+.privacy-ta{
+
+    margin:0 0 12px;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size:1rem;
+
+    line-height:1.8;
+
+    color:#FFFFFF;
+
+}
+
+
+
+
+
+.privacy-en{
+
+    margin:0;
+
+    font-family:
+
+        "Inter",
+
+        sans-serif;
+
+    font-size:.92rem;
+
+    line-height:1.8;
+
+    color:#BFC6D2;
+
+}
+
+/*=============================================================================
+    PREMIUM MICRO INTERACTIONS
+=============================================================================*/
+
+
+.registration-card{
+
+    transition:
+
+        transform .40s ease,
+
+        box-shadow .40s ease,
+
+        border-color .40s ease;
+
+}
+
+
+
+
+
+.registration-card:hover{
+
+    transform:
+
+        translateY(-2px);
+
+    box-shadow:
+
+        0 36px 90px
+
+        rgba(
+
+            0,
+
+            0,
+
+            0,
+
+            .50
+
+        );
+
+}
+
+
+
+
+
+.form-group{
+
+    position:relative;
+
+}
+
+
+
+
+
+.form-group input:disabled{
+
+    opacity:.65;
+
+    cursor:not-allowed;
+
+}
+
+
+
+
+
+.primary-button:disabled{
+
+    cursor:not-allowed;
+
+    opacity:.75;
+
+    transform:none;
+
+    box-shadow:none;
+
+}
+
+
+
+
+
+/*=============================================================================
+    VALIDATION
+=============================================================================*/
+
+
+.form-group input:valid{
+
+    border-color:
+
+        rgba(
+
+            120,
+
+            220,
+
+            140,
+
+            .45
+
+        );
+
+}
+
+
+
+
+
+.form-group input:invalid:not(:placeholder-shown){
+
+    border-color:
+
+        rgba(
+
+            255,
+
+            110,
+
+            110,
+
+            .45
+
+        );
+
+}
+
+
+
+
+
+.form-group input:focus:valid{
+
+    box-shadow:
+
+        0 0 0 4px
+
+        rgba(
+
+            120,
+
+            220,
+
+            140,
+
+            .16
+
+        );
+
+}
+
+
+
+
+
+/*=============================================================================
+    SMOOTH ANIMATIONS
+=============================================================================*/
+
+
+.registration-card,
+
+.form-group,
+
+.primary-button,
+
+.privacy-card{
+
+    animation:
+
+        fadeUp .70s ease both;
+
+}
+
+
+
+
+
+.hero-header{
+
+    animation:
+
+        fadeDown .70s ease both;
+
+}
+
+
+
+
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateY(24px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+
+
+
+
+@keyframes fadeDown{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateY(-18px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+/*=============================================================================
+    TABLET RESPONSIVE
+=============================================================================*/
+
+
+@media (max-width:1024px){
+
+    .registration-page{
+
+        padding:
+
+            60px
+            24px;
+
+    }
+
+
+
+    .registration-container{
+
+        max-width:700px;
+
+    }
+
+
+
+    .registration-card{
+
+        padding:
+
+            48px
+            44px;
+
+    }
+
+
+
+    .hero-title{
+
+        font-size:
+
+            2.6rem;
+
+    }
+
+
+
+    .hero-title-en{
+
+        font-size:
+
+            1.55rem;
+
+    }
+
+
+
+    .form-grid{
+
+        gap:
+
+            22px;
+
+    }
+
+}
+
+
+
+
+
+/*=============================================================================
+    MOBILE RESPONSIVE
+=============================================================================*/
+
+
+@media (max-width:768px){
+
+    .registration-page{
+
+        padding:
+
+            40px
+            18px;
+
+        align-items:flex-start;
+
+    }
+
+
+
+    .registration-container{
+
+        max-width:100%;
+
+    }
+
+
+
+    .registration-card{
+
+        padding:
+
+            36px
+            24px;
+
+        border-radius:24px;
+
+    }
+
+
+
+    .hero-header{
+
+        margin-bottom:34px;
+
+    }
+
+
+
+    .hero-title{
+
+        font-size:
+
+            2rem;
+
+        line-height:1.4;
+
+    }
+
+
+
+    .hero-title-en{
+
+        margin:
+
+            12px
+            0
+            20px;
+
+        font-size:
+
+            1.2rem;
+
+    }
+
+
+
+    .hero-description,
+
+    .hero-description-en{
+
+        font-size:
+
+            1rem;
+
+        line-height:1.8;
+
+    }
+
+
+
+    .form-grid{
+
+        grid-template-columns:
+
+            1fr;
+
+        gap:
+
+            20px;
+
+        margin-bottom:36px;
+
+    }
+
+
+
+    .form-group label{
+
+        margin-bottom:10px;
+
+    }
+
+
+
+    .form-group input{
+
+        height:56px;
+
+        padding:
+
+            0
+            18px;
+
+        font-size:
+
+            .98rem;
+
+    }
+
+
+
+    .primary-button{
+
+        min-height:68px;
+
+    }
+
+
+
+    .button-ta{
+
+        font-size:
+
+            1.05rem;
+
+    }
+
+
+
+    .button-en{
+
+        font-size:
+
+            .78rem;
+
+        letter-spacing:
+
+            .14em;
+
+    }
+
+}
+
+/*=============================================================================
+    SMALL MOBILE DEVICES
+=============================================================================*/
+
+
+@media (max-width:480px){
+
+    .registration-page{
+
+        padding:
+
+            28px
+            14px;
+
+    }
+
+
+
+    .registration-card{
+
+        padding:
+
+            28px
+            18px;
+
+        border-radius:20px;
+
+    }
+
+
+
+    .brand-label{
+
+        font-size:.75rem;
+
+        letter-spacing:.18em;
+
+        padding:
+
+            7px
+            14px;
+
+    }
+
+
+
+    .hero-title{
+
+        font-size:1.65rem;
+
+    }
+
+
+
+    .hero-title-en{
+
+        font-size:1rem;
+
+    }
+
+
+
+    .hero-description,
+
+    .hero-description-en{
+
+        font-size:.95rem;
+
+    }
+
+
+
+    .label-ta{
+
+        font-size:.95rem;
+
+    }
+
+
+
+    .label-en{
+
+        font-size:.75rem;
+
+    }
+
+
+
+    .form-group input{
+
+        height:54px;
+
+        font-size:.95rem;
+
+        border-radius:14px;
+
+    }
+
+
+
+    .primary-button{
+
+        min-height:64px;
+
+        border-radius:16px;
+
+    }
+
+
+
+    .button-ta{
+
+        font-size:1rem;
+
+    }
+
+
+
+    .button-en{
+
+        font-size:.72rem;
+
+        letter-spacing:.12em;
+
+    }
+
+
+
+    .privacy-card{
+
+        flex-direction:column;
+
+        align-items:center;
+
+        text-align:center;
+
+        gap:16px;
+
+        padding:
+
+            20px
+            18px;
+
+    }
+
+
+
+    .privacy-icon{
+
+        width:48px;
+
+        height:48px;
+
+        font-size:1.2rem;
+
+    }
+
+
+
+    .privacy-ta{
+
+        font-size:.92rem;
+
+    }
+
+
+
+    .privacy-en{
+
+        font-size:.84rem;
+
+    }
+
+}
+
+
+
+
+
+/*=============================================================================
+    ACCESSIBILITY
+=============================================================================*/
+
+
+input,
+
+button{
+
+    -webkit-tap-highlight-color:
+
+        transparent;
+
+}
+
+
+
+
+
+::selection{
+
+    background:
+
+        rgba(
+
+            200,
+
+            169,
+
+            81,
+
+            .30
+
+        );
+
+}
+
+
+
+
+
+button:focus-visible,
+
+input:focus-visible{
+
+    outline:none;
+
+}
+
+
+
+
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+
+
+
+/*=============================================================================
+    END OF FILE
+=============================================================================*/
