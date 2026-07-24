@@ -56,43 +56,32 @@ CTM.router = (function(){
     =========================================================================*/
 
 
+    const ROOT = window.location.origin;
+
+
+
     const ROUTES = {
 
-
         landing:
-
-            'pages/landing.html',
-
+            ROOT + '/pages/landing.html',
 
         registration:
-
-            'pages/registration.html',
-
+            ROOT + '/pages/registration.html',
 
         assessment:
-
-            'pages/assessment.html',
-
+            ROOT + '/pages/assessment.html',
 
         kaalachakra:
-
-            'pages/kaalachakra.html',
-
+            ROOT + '/pages/kaalachakra.html',
 
         diagnosis:
-
-            'pages/diagnosis.html',
-
+            ROOT + '/pages/diagnosis.html',
 
         prescription:
-
-            'pages/prescription.html',
-
+            ROOT + '/pages/prescription.html',
 
         completion:
-
-            'pages/completion.html'
-
+            ROOT + '/pages/completion.html'
 
     };
 
@@ -105,25 +94,11 @@ CTM.router = (function(){
 
     function current(){
 
+        const path = window.location.pathname;
 
-        const path =
-
-            window.location.pathname;
-
-
-
-        const file =
-
-            path
-
-                .split('/')
-
-                .pop();
-
-
+        const file = path.split('/').pop();
 
         return file || 'index.html';
-
 
     }
 
@@ -136,7 +111,6 @@ CTM.router = (function(){
 
     function exists(route){
 
-
         return Object.prototype.hasOwnProperty.call(
 
             ROUTES,
@@ -144,7 +118,6 @@ CTM.router = (function(){
             route
 
         );
-
 
     }
 
@@ -157,9 +130,7 @@ CTM.router = (function(){
 
     function go(route){
 
-
         if(!exists(route)){
-
 
             console.error(
 
@@ -169,24 +140,16 @@ CTM.router = (function(){
 
             );
 
-
             return false;
-
 
         }
 
-
-
-        window.location.href =
-
-            ROUTES[route];
-
-
+        window.location.href = ROUTES[route];
 
         return true;
 
-
     }
+
 
 
     /*=========================================================================
@@ -196,9 +159,7 @@ CTM.router = (function(){
 
     function replace(route){
 
-
         if(!exists(route)){
-
 
             console.error(
 
@@ -208,13 +169,9 @@ CTM.router = (function(){
 
             );
 
-
             return false;
 
-
         }
-
-
 
         window.location.replace(
 
@@ -222,14 +179,9 @@ CTM.router = (function(){
 
         );
 
-
-
         return true;
 
-
     }
-
-
 
 
 
@@ -244,10 +196,7 @@ CTM.router = (function(){
 
     function isEntryPage(){
 
-
         const page = current();
-
-
 
         return(
 
@@ -257,10 +206,7 @@ CTM.router = (function(){
 
         );
 
-
     }
-
-
 
 
 
@@ -280,20 +226,17 @@ CTM.router = (function(){
 
     function start(){
 
-
         console.log(
 
             '========================================'
 
         );
 
-
         console.log(
 
             'CTM PATH™ Router Started'
 
         );
-
 
         console.log(
 
@@ -303,7 +246,6 @@ CTM.router = (function(){
 
         );
 
-
         console.log(
 
             '========================================'
@@ -312,101 +254,68 @@ CTM.router = (function(){
 
 
 
-        if(
+        if(isEntryPage()){
 
-            isEntryPage()
-
-        ){
-
-
-            replace(
-
-                'landing'
-
-            );
-
+            replace('landing');
 
         }
 
-
     }
-
-
 
 
 
     /*=========================================================================
         BROWSER HISTORY
-
     =========================================================================*/
 
 
     function back(){
 
-
         window.history.back();
 
-
     }
-
-
 
 
 
     function forward(){
 
-
         window.history.forward();
 
-
     }
-
-
 
 
 
     function reload(){
 
-
         window.location.reload();
 
-
     }
-
-
 
 
 
     /*=========================================================================
         GET ALL ROUTES
-
     =========================================================================*/
 
 
     function routes(){
 
-
-        return{
+        return {
 
             ...ROUTES
 
         };
 
-
     }
-
-
 
 
 
     /*=========================================================================
         INITIALIZE
-
     =========================================================================*/
 
 
     function init(){
-
 
         console.log(
 
@@ -414,21 +323,16 @@ CTM.router = (function(){
 
         );
 
-
     }
-
-
 
 
 
     /*=========================================================================
         PUBLIC API
-
     =========================================================================*/
 
 
     return{
-
 
         init,
 
@@ -450,7 +354,6 @@ CTM.router = (function(){
 
         reload
 
-
     };
 
 
@@ -464,6 +367,3 @@ CTM.router = (function(){
     END OF FILE
 
 =============================================================================*/
-
-
-              
