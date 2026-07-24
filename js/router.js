@@ -1,9 +1,11 @@
 
 /* ==========================================================================
    CTM PATH™ Guided Journey v2.0
+
    File        : router.js
-   Version     : 1.0
+   Version     : 1.0.1
    Status      : 🔒 LOCKED
+
    Purpose     : Application Router
 
                   Owns
@@ -11,357 +13,754 @@
                   • Route Validation
                   • Journey Progression
                   • Navigation Guards
+                  • Startup Route Resolution
 
                   Owns NO
                   • UI Rendering
                   • Business Logic
-                  • Storage
+                  • Storage Logic
                   • API Communication
+
    ========================================================================== */
 
+
 'use strict';
+
+
 
 /* ==========================================================================
    ROUTER
    ========================================================================== */
 
+
 const Router = (() => {
+
+
 
     /* ======================================================================
        ROUTES
        ====================================================================== */
 
+
     const ROUTES = {
 
-        LANDING: 'landing.html',
 
-        REGISTRATION: 'registration.html',
+        LANDING:
 
-        ASSESSMENT: 'assessment.html',
+            'landing.html',
 
-        KALACHAKRA: 'kaalachakra.html',
 
-        DIAGNOSIS: 'diagnosis.html',
+        REGISTRATION:
 
-        PRESCRIPTION: 'prescription.html',
+            'registration.html',
 
-        COMPLETION: 'completion.html'
+
+        ASSESSMENT:
+
+            'assessment.html',
+
+
+        KALACHAKRA:
+
+            'kaalachakra.html',
+
+
+        DIAGNOSIS:
+
+            'diagnosis.html',
+
+
+        PRESCRIPTION:
+
+            'prescription.html',
+
+
+        COMPLETION:
+
+            'completion.html'
+
 
     };
+
+
+
 
     /* ======================================================================
        JOURNEY ORDER
        ====================================================================== */
 
+
     const JOURNEY = [
+
 
         ROUTES.LANDING,
 
+
         ROUTES.REGISTRATION,
+
 
         ROUTES.ASSESSMENT,
 
+
         ROUTES.KALACHAKRA,
+
 
         ROUTES.DIAGNOSIS,
 
+
         ROUTES.PRESCRIPTION,
+
 
         ROUTES.COMPLETION
 
+
     ];
+
+
+
 
     /* ======================================================================
        CURRENT PAGE
        ====================================================================== */
 
-    function currentPage() {
+
+    function currentPage(){
+
 
         const path = window.location.pathname;
 
-        return path.substring(path.lastIndexOf('/') + 1);
+
+        const page =
+
+            path.substring(
+
+                path.lastIndexOf('/') + 1
+
+            );
+
+
+        return page || 'index.html';
+
 
     }
+
+
+
+
 
     /* ======================================================================
        VALID ROUTE
        ====================================================================== */
 
-    function isValidRoute(page) {
+
+    function isValidRoute(page){
+
 
         return JOURNEY.includes(page);
 
+
     }
 
+
+
+
+
     /* ======================================================================
-       INDEX
+       PAGE INDEX
        ====================================================================== */
 
-    function pageIndex(page) {
+
+    function pageIndex(page){
+
 
         return JOURNEY.indexOf(page);
 
+
     }
+
+
+
+
 
     /* ======================================================================
        CAN NAVIGATE
        ====================================================================== */
 
-    function canNavigate(target) {
 
-        if (!isValidRoute(target)) {
+    function canNavigate(target){
+
+
+        if(
+
+            !isValidRoute(target)
+
+        ){
 
             return false;
 
         }
 
+
+
         const current = currentPage();
 
-        if (!isValidRoute(current)) {
+
+
+        if(
+
+            !isValidRoute(current)
+
+        ){
 
             return true;
 
         }
 
-        return pageIndex(target) <= pageIndex(current) + 1;
+
+
+        return (
+
+            pageIndex(target)
+
+            <=
+
+            pageIndex(current) + 1
+
+        );
+
 
     }
+
+
+
+
 
     /* ======================================================================
        GO
        ====================================================================== */
 
-    function go(page) {
 
-        if (!canNavigate(page)) {
+    function go(page){
 
-            console.warn('Navigation blocked:', page);
+
+        if(
+
+            !canNavigate(page)
+
+        ){
+
+            console.warn(
+
+                'Navigation blocked:',
+
+                page
+
+            );
+
 
             return;
 
         }
 
-        StorageService.saveCurrentPage(page);
+
+
+        StorageService.saveCurrentPage(
+
+            page
+
+        );
+
+
 
         window.location.href = page;
 
+
     }
+
+
+
+
 
     /* ======================================================================
        NEXT
        ====================================================================== */
 
-    function next() {
+
+    function next(){
+
 
         const current = currentPage();
 
+
         const index = pageIndex(current);
 
-        if (index === -1) return;
 
-        if (index >= JOURNEY.length - 1) return;
 
-        go(JOURNEY[index + 1]);
+        if(
+
+            index === -1
+
+        ){
+
+            return;
+
+        }
+
+
+
+        if(
+
+            index >= JOURNEY.length - 1
+
+        ){
+
+            return;
+
+        }
+
+
+
+        go(
+
+            JOURNEY[index + 1]
+
+        );
+
 
     }
+
+
+
+
 
     /* ======================================================================
        PREVIOUS
        ====================================================================== */
 
-    function previous() {
+
+    function previous(){
+
 
         const current = currentPage();
 
+
         const index = pageIndex(current);
 
-        if (index <= 0) return;
 
-        go(JOURNEY[index - 1]);
+
+        if(
+
+            index <= 0
+
+        ){
+
+            return;
+
+        }
+
+
+
+        go(
+
+            JOURNEY[index - 1]
+
+        );
+
 
     }
+
+
+
+
 
     /* ======================================================================
        RESTART
        ====================================================================== */
 
-    function restart() {
+
+    function restart(){
+
 
         StorageService.resetJourney();
 
-        go(ROUTES.LANDING);
+
+
+        go(
+
+            ROUTES.LANDING
+
+        );
+
 
     }
 
+
+
+
+
     /* ======================================================================
-       RESUME
+       RESUME JOURNEY
        ====================================================================== */
 
-    function resume() {
 
-        const saved = StorageService.getCurrentPage();
+    function resume(){
 
-        if (!saved) {
 
-            go(ROUTES.LANDING);
+        const saved =
+
+            StorageService.getCurrentPage();
+
+
+
+        if(
+
+            saved &&
+
+            isValidRoute(saved)
+
+        ){
+
+
+            go(saved);
+
 
             return;
 
+
         }
 
-        go(saved);
+
+
+        go(
+
+            ROUTES.LANDING
+
+        );
+
 
     }
+
+
+
+
 
     /* ======================================================================
        FIRST PAGE
        ====================================================================== */
 
-    function isFirstPage() {
 
-        return currentPage() === ROUTES.LANDING;
+    function isFirstPage(){
+
+
+        return (
+
+            currentPage()
+
+            ===
+
+            ROUTES.LANDING
+
+        );
+
 
     }
+
+
+
+
 
     /* ======================================================================
        LAST PAGE
        ====================================================================== */
 
-    function isLastPage() {
 
-        return currentPage() === ROUTES.COMPLETION;
+    function isLastPage(){
+
+
+        return (
+
+            currentPage()
+
+            ===
+
+            ROUTES.COMPLETION
+
+        );
+
 
     }
+
+
+
+
 
     /* ======================================================================
        CURRENT STEP
        ====================================================================== */
 
-    function currentStep() {
 
-        return pageIndex(currentPage()) + 1;
+    function currentStep(){
+
+
+        return (
+
+            pageIndex(
+
+                currentPage()
+
+            )
+
+            + 1
+
+        );
+
 
     }
+
+
+
+
 
     /* ======================================================================
        TOTAL STEPS
        ====================================================================== */
 
-    function totalSteps() {
+
+    function totalSteps(){
+
 
         return JOURNEY.length;
 
+
     }
+
+
+
+
 
     /* ======================================================================
        PROGRESS
        ====================================================================== */
 
-    function progress() {
+
+    function progress(){
+
 
         return Math.round(
 
-            (currentStep() / totalSteps()) * 100
+            (
+
+                currentStep()
+
+                /
+
+                totalSteps()
+
+            )
+
+            *
+
+            100
 
         );
 
+
     }
+
+
+
+
 
     /* ======================================================================
        NAVIGATION GUARD
        ====================================================================== */
 
-    function protect() {
+
+    function protect(){
+
 
         const current = currentPage();
 
-        if (!isValidRoute(current)) {
+
+
+        if(
+
+            !isValidRoute(current)
+
+        ){
 
             return;
 
         }
 
-        const saved = StorageService.getCurrentPage();
 
-        if (!saved) {
+
+        const saved =
+
+            StorageService.getCurrentPage();
+
+
+
+        if(
+
+            !saved
+
+        ){
 
             return;
 
         }
 
-        const allowed = pageIndex(saved);
 
-        const currentIndex = pageIndex(current);
 
-        if (currentIndex > allowed + 1) {
+        const allowed =
+
+            pageIndex(saved);
+
+
+
+        const currentIndex =
+
+            pageIndex(current);
+
+
+
+        if(
+
+            currentIndex >
+
+            allowed + 1
+
+        ){
 
             go(saved);
 
         }
 
+
     }
+
+
+
+
 
     /* ======================================================================
        INITIALIZE
        ====================================================================== */
 
-    function init() {
+
+    function init(){
+
 
         protect();
 
+
+
+        const current = currentPage();
+
+
+
+        if(
+
+            current === 'index.html'
+
+            ||
+
+            current === ''
+
+        ){
+
+            resume();
+
+            return;
+
+        }
+
+
+
         StorageService.saveCurrentPage(
 
-            currentPage()
+            current
 
         );
 
+
     }
+
+
+
+
 
     /* ======================================================================
        PUBLIC API
        ====================================================================== */
 
+
     return {
+
 
         ROUTES,
 
+
         JOURNEY,
+
 
         init,
 
+
         go,
+
 
         next,
 
+
         previous,
+
 
         resume,
 
+
         restart,
+
 
         protect,
 
+
         currentPage,
+
 
         currentStep,
 
+
         totalSteps,
+
 
         progress,
 
+
         isValidRoute,
+
 
         isFirstPage,
 
+
         isLastPage
+
 
     };
 
+
+
 })();
+
+
+
+
 
 /* ==========================================================================
    AUTO INITIALIZE
    ========================================================================== */
+
 
 document.addEventListener(
 
@@ -369,16 +768,37 @@ document.addEventListener(
 
     () => {
 
+
         Router.init();
+
 
     }
 
 );
+
+
+
+
+
+/* ==========================================================================
+   GLOBAL EXPORT
+   ========================================================================== */
+
+
+window.Router = Router;
+
+
+
+
 
 /* ==========================================================================
    End of File
 
    File : router.js
 
+   Version : 1.0.1
+
    Status : 🔒 LOCKED
+
    ========================================================================== */
+
