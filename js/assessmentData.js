@@ -2,6 +2,7 @@
 /*=============================================================================
 
     CTM PATH™
+
     FROM SURVIVAL TO LIVING™
 
     FILE
@@ -14,1355 +15,1048 @@
 
     RESPONSIBILITIES
 
-    • Assessment Configuration
-    • Scoring Configuration
-    • Pillar Definitions
-    • Reflection Statements
-    • Assessment Statements
-
-    VERSION
-
-    1.0
+    • 12 Life Pillars
+    • Introduction
+    • Three Questions
+    • Reflection
+    • Wisdom
 
 =============================================================================*/
 
 'use strict';
 
-/*=============================================================================
-    GLOBAL NAMESPACE
-=============================================================================*/
+
 
 window.CTM = window.CTM || {};
 
-/*=============================================================================
-    MASTER ASSESSMENT
-=============================================================================*/
 
-CTM.assessment = {
 
-    /*=========================================================================
-        CONFIGURATION
-    =========================================================================*/
+CTM.assessmentData = [
 
-    version : "1.0",
+/*=========================================================================
+    SPOKE 01
+===========================================================================*/
 
-    totalPages : 18,
+{
 
-    totalPillars : 12,
+    id:1,
 
-    questionsPerPillar : 5,
+    key:"purpose",
 
-    totalQuestions : 60,
+    tamilTitle:"நோக்கம்™",
 
-    minimumScore : 1,
+    englishTitle:"PURPOSE™",
 
-    maximumScore : 10,
+    introductionTa:
 
-    rawMaximumScore : 600,
+`ஒவ்வொரு காலையும் நீங்கள் ஏன் விழித்தெழுகிறீர்கள்?
 
-    finalScore : 100,
+உங்கள் வாழ்க்கை ஒரு திசையை நோக்கி நகருகிறதா...
 
+அல்லது வெறும் நாட்களைக் கடக்கிறதா?`,
 
 
-    /*=========================================================================
-        PILLARS
-    =========================================================================*/
 
-    pillars : [
+    introductionEn:
 
-    /*=========================================================================
+`Why do you wake up every morning?
 
-        PILLAR 01
+Is your life moving toward a meaningful destination...
 
-        PURPOSE™
+or simply passing through another day?`,
 
-    =========================================================================*/
 
-    {
 
-        id : 1,
+    questions:[
 
-        key : "purpose",
+        "என் வாழ்க்கைக்கு திசைகாட்டும் தெளிவான நோக்கம் எனக்கு உள்ளது.",
 
-        page : 3,
+        "நான் தினமும் செய்யும் செயல்கள் என் வாழ்க்கை நோக்கத்துடன் ஒத்துப்போகின்றன.",
 
-        title : "PURPOSE™",
+        "நான் இன்று வாழும் வாழ்க்கை, நான் உண்மையில் வாழ விரும்பிய வாழ்க்கையை பிரதிபலிக்கிறது."
 
-        tamilTitle : "வாழ்க்கையின் நோக்கம்™",
+    ],
 
-        reflection :
 
-            "Your purpose is the compass that gives direction to every decision you make.",
 
-        tamilReflection :
+    questionsEn:[
 
-            "வாழ்க்கையின் தெளிவான நோக்கமே உங்கள் ஒவ்வொரு முடிவுக்கும் திசையைக் காட்டும் திசைகாட்டியாகும்.",
+        "I have a clear purpose that guides my life.",
 
+        "My daily actions are aligned with my life purpose.",
 
+        "The life I live today reflects the life I truly want."
 
-        questions : [
+    ],
 
-            {
 
-                id : 1,
 
-                tamil :
+    reflectionTa:
 
-                "என் வாழ்க்கைக்கு தெளிவான நோக்கம் உள்ளது; அது என் தினசரி முடிவுகளை வழிநடத்துகிறது.",
+"தெளிவான நோக்கம் வாழ்க்கைக்கு அர்த்தத்தையும் திசையையும் அளிக்கிறது.",
 
-                english :
 
-                "I have a clear purpose that guides my daily decisions."
 
-            },
+    reflectionEn:
 
+"Purpose gives direction. Direction gives life meaning.",
 
 
-            {
 
-                id : 2,
+    wisdomTa:
 
-                tamil :
+"உங்கள் நோக்கத்தை கண்டறியுங்கள்; உங்கள் வாழ்க்கை மாறத் தொடங்கும்.",
 
-                "நான் செய்யும் வேலை என் வாழ்க்கையின் நோக்கத்துடன் பொருந்துகிறது.",
 
-                english :
 
-                "My daily work is aligned with my life purpose."
+    wisdomEn:
 
-            },
+"Find your purpose. Your life will begin to transform."
 
+},
 
 
-            {
 
-                id : 3,
+/*=========================================================================
+    SPOKE 02
+===========================================================================*/
 
-                tamil :
+{
 
-                "என் வாழ்க்கையின் நீண்டகால இலக்குகள் எனக்கு தெளிவாக உள்ளன.",
+    id:2,
 
-                english :
+    key:"health",
 
-                "I have a clear long-term vision for my life."
+    tamilTitle:"ஆரோக்கியம்™",
 
-            },
+    englishTitle:"HEALTH™",
 
 
 
-            {
+    introductionTa:
 
-                id : 4,
+`உங்கள் உடல்தான் வாழ்நாள் முழுவதும் நீங்கள் வசிக்கும் ஒரே இல்லம்.
 
-                tamil :
+அதை நீங்கள் அன்புடன் பராமரிக்கிறீர்களா?`,
 
-                "என் வாழ்க்கைக்கு உண்மையாக முக்கியமானவற்றிற்கு நான் தொடர்ந்து நேரம் ஒதுக்குகிறேன்.",
 
-                english :
 
-                "I consistently invest my time in what matters most."
+    introductionEn:
 
-            },
+`Your body is the only home you will live in for your entire life.
 
+Are you taking good care of it?`,
 
 
-            {
 
-                id : 5,
+    questions:[
 
-                tamil :
+        "என் உடலும் மனமும் பெரும்பாலும் உற்சாகமாகவும் ஆரோக்கியமாகவும் உள்ளன.",
 
-                "ஒவ்வொரு நாளும் நான் அர்த்தமுள்ள வாழ்க்கையை வாழ்கிறேன் என்ற உணர்வு எனக்கு உள்ளது.",
+        "உடற்பயிற்சி, நல்ல உணவு மற்றும் போதுமான ஓய்வை தொடர்ந்து கடைப்பிடிக்கிறேன்.",
 
-                english :
+        "என் தற்போதைய வாழ்க்கை முறை என் நீண்டகால ஆரோக்கியத்தை பாதுகாக்கிறது."
 
-                "I feel that I live a meaningful life every day."
+    ],
 
-            }
 
-        ]
 
-    }
+    questionsEn:[
 
-    ]
+        "My body and mind are generally energetic and healthy.",
 
-};
+        "I consistently maintain healthy habits through exercise, nutrition and rest.",
 
-/*=============================================================================
+        "My current lifestyle supports my long-term health."
 
-    END OF BATCH 01
+    ],
 
-=============================================================================*/
 
-    /*=========================================================================
 
-        PILLAR 02
+    reflectionTa:
 
-        HEALTH™
+"நல்ல ஆரோக்கியம் இல்லாமல், மற்ற வெற்றிகள் முழுமையடையாது.",
 
-    =========================================================================*/
 
-    ,
 
-    {
+    reflectionEn:
 
-        id : 2,
+"Without health, every other success loses its value.",
 
-        key : "health",
 
-        page : 4,
 
-        title : "HEALTH™",
+    wisdomTa:
 
-        tamilTitle : "ஆரோக்கியம்™",
+"இன்று உடலுக்காக முதலீடு செய்யுங்கள்; நாளை அது உங்களுக்கு பலன் தரும்.",
 
-        reflection :
 
-            "Your health is the foundation that supports every dream, relationship, achievement and contribution in your life.",
 
-        tamilReflection :
+    wisdomEn:
 
-            "உங்கள் வாழ்க்கையின் ஒவ்வொரு கனவு, உறவு, சாதனை மற்றும் பங்களிப்பிற்கும் அடித்தளம் உங்கள் ஆரோக்கியமே.",
+"Invest in your health today; it will reward you tomorrow."
 
-        questions : [
+},
 
-            {
 
-                id : 1,
 
-                tamil :
+/*=========================================================================
+    SPOKE 03
+===========================================================================*/
 
-                "எனது உடல் ஆரோக்கியத்தை நான் தொடர்ந்து கவனித்து பராமரிக்கிறேன்.",
+{
 
-                english :
+    id:3,
 
-                "I consistently take care of my physical health."
+    key:"relationships",
 
-            },
+    tamilTitle:"உறவுகள்™",
 
-            {
+    englishTitle:"RELATIONSHIPS™",
 
-                id : 2,
 
-                tamil :
 
-                "எனக்கு தினசரி பணிகளை உற்சாகமாகச் செய்ய போதுமான ஆற்றல் உள்ளது.",
+    introductionTa:
 
-                english :
+`வாழ்க்கையின் உண்மையான செல்வம் பணத்தில் அல்ல;
 
-                "I have enough energy to perform my daily activities enthusiastically."
+நம்மை நேசிக்கும் மனிதர்களிடமே உள்ளது.`,
 
-            },
 
-            {
 
-                id : 3,
+    introductionEn:
 
-                tamil :
+`The greatest wealth in life is not money—
 
-                "எனது உணவு மற்றும் வாழ்க்கை முறையில் ஆரோக்கியமான பழக்கங்களை நான் பின்பற்றுகிறேன்.",
+it is the people who love and stand beside us.`,
 
-                english :
 
-                "I maintain healthy eating and lifestyle habits."
 
-            },
+    questions:[
 
-            {
+        "நான் முழுமையாக நம்பக்கூடிய உறவுகள் என் வாழ்க்கையில் உள்ளன.",
 
-                id : 4,
+        "என் உறவுகள் அன்பு, மரியாதை மற்றும் பரஸ்பர ஆதரவின் மீது அமைந்துள்ளன.",
 
-                tamil :
+        "என்னைச் சுற்றியுள்ளவர்கள் நான் சிறந்த மனிதராக வளர உதவுகிறார்கள்."
 
-                "எனது மனநிலையை அமைதியாகவும் சமநிலையுடனும் வைத்திருக்க முடிகிறது.",
+    ],
 
-                english :
 
-                "I am able to maintain emotional balance and inner calm."
 
-            },
+    questionsEn:[
 
-            {
+        "I have people in my life whom I completely trust.",
 
-                id : 5,
+        "My relationships are built on love, respect and mutual support.",
 
-                tamil :
+        "The people around me help me become a better person."
 
-                "நான் நீண்ட கால ஆரோக்கியமான வாழ்க்கையை உருவாக்கும் பழக்கங்களை வளர்த்துவருகிறேன்.",
+    ],
 
-                english :
 
-                "I am building habits that support lifelong health."
 
-            }
+    reflectionTa:
 
-        ]
+"வாழ்க்கையின் தரத்தை நிர்ணயிப்பது உறவுகளின் தரமே.",
 
-    },
 
+
+    reflectionEn:
+
+"The quality of your relationships shapes the quality of your life.",
+
+
+
+    wisdomTa:
+
+"உறவுகளை வளர்த்தால், வாழ்க்கை வளரும்.",
+
+
+
+    wisdomEn:
+
+"Nurture relationships, and life flourishes."
+
+},
 
 
     /*=========================================================================
+    SPOKE 04
+===========================================================================*/
 
-        PILLAR 03
+{
 
-        RELATIONSHIPS™
+    id:4,
 
-    =========================================================================*/
+    key:"character",
 
-    {
+    tamilTitle:"நற்பண்பு™",
 
-        id : 3,
+    englishTitle:"CHARACTER™",
 
-        key : "relationships",
 
-        page : 5,
 
-        title : "RELATIONSHIPS™",
+    introductionTa:
 
-        tamilTitle : "உறவுகள்™",
+`மற்றவர்கள் பார்க்கும் போது நீங்கள் யார் என்பது முக்கியமல்ல;
 
-        reflection :
+யாரும் பார்க்காதபோது நீங்கள் யார் என்பதே உங்கள் உண்மையான நற்பண்பு.`,
 
-            "The quality of your life is deeply influenced by the quality of your relationships.",
 
-        tamilReflection :
 
-            "உங்கள் வாழ்க்கையின் தரத்தை தீர்மானிப்பதில் உங்கள் உறவுகளின் தரம் மிக முக்கியமான பங்கு வகிக்கிறது.",
+    introductionEn:
 
-        questions : [
+`Your reputation is what others see.
 
-            {
+Your character is who you are when no one is watching.`,
 
-                id : 1,
 
-                tamil :
 
-                "எனது குடும்பத்தினருடன் அன்பும் நம்பிக்கையும் நிறைந்த உறவை நான் பேணுகிறேன்.",
+    questions:[
 
-                english :
+        "என் முடிவுகள் என் மதிப்புகள் மற்றும் நெறிமுறைகளுடன் ஒத்துப்போகின்றன.",
 
-                "I maintain loving and trusting relationships with my family."
+        "யாரும் பார்க்காதபோதும் நான் சரியானதைச் செய்யத் தேர்வு செய்கிறேன்.",
 
-            },
+        "நான் ஆகிக்கொண்டிருக்கும் மனிதரைப் பார்த்து பெருமைப்படுகிறேன்."
 
-            {
+    ],
 
-                id : 2,
 
-                tamil :
 
-                "மற்றவர்களின் கருத்துகளையும் உணர்வுகளையும் நான் மரியாதையுடன் கேட்கிறேன்.",
+    questionsEn:[
 
-                english :
+        "My decisions reflect my values and principles.",
 
-                "I listen to others with respect and empathy."
+        "I choose to do the right thing even when no one is watching.",
 
-            },
+        "I am proud of the person I am becoming."
 
-            {
+    ],
 
-                id : 3,
 
-                tamil :
 
-                "எனது உறவுகளில் நேர்மையும் வெளிப்படைத்தன்மையும் உள்ளது.",
+    reflectionTa:
 
-                english :
+"நற்பண்பு என்பது உங்கள் வாழ்க்கையின் அடித்தளம்.",
 
-                "My relationships are built on honesty and openness."
 
-            },
 
-            {
+    reflectionEn:
 
-                id : 4,
+"Character is the foundation on which every great life is built.",
 
-                tamil :
 
-                "மற்றவர்களுடன் ஏற்படும் கருத்து வேறுபாடுகளை நான் முதிர்ச்சியுடன் கையாள்கிறேன்.",
 
-                english :
+    wisdomTa:
 
-                "I handle disagreements with maturity and respect."
+"செல்வம் மதிப்பை வாங்கலாம்; நற்பண்பு மட்டுமே மரியாதையை வெல்லும்.",
 
-            },
 
-            {
 
-                id : 5,
+    wisdomEn:
 
-                tamil :
+"Wealth may buy comfort; character earns respect."
 
-                "என் வாழ்க்கைப் பயணத்தில் என்னை ஊக்குவிக்கும் நல்ல உறவுகள் எனக்கு உள்ளன.",
+},
 
-                english :
 
-                "I have positive relationships that encourage my personal growth."
 
-            }
+/*=========================================================================
+    SPOKE 05
+===========================================================================*/
 
-        ]
+{
 
-    }
+    id:5,
+
+    key:"financialStewardship",
+
+    tamilTitle:"நிதி வளம்™",
+
+    englishTitle:"FINANCIAL STEWARDSHIP™",
+
+
+
+    introductionTa:
+
+`பணம் வாழ்க்கையின் நோக்கம் அல்ல.
+
+ஆனால் அர்த்தமுள்ள வாழ்க்கையை உருவாக்கும் ஒரு முக்கிய கருவி.
+
+அதை நீங்கள் புத்திசாலித்தனமாக நிர்வகிக்கிறீர்களா?`,
+
+
+
+    introductionEn:
+
+`Money is not the purpose of life.
+
+It is a powerful tool to create the life you desire.
+
+Are you managing it wisely?`,
+
+
+
+    questions:[
+
+        "என் வருமானம், செலவுகள் மற்றும் பணப்புழக்கத்தை நான் தெளிவாக நிர்வகிக்கிறேன்.",
+
+        "எதிர்கால பாதுகாப்பிற்காக நான் தொடர்ந்து சேமித்து முதலீடு செய்கிறேன்.",
+
+        "என் பணம் என் மதிப்புகள், இலக்குகள் மற்றும் வாழ்க்கை நோக்கத்தை ஆதரிக்கிறது."
+
+    ],
+
+
+
+    questionsEn:[
+
+        "I manage my income, expenses and cash flow responsibly.",
+
+        "I consistently save and invest for my future.",
+
+        "My financial choices support my values, goals and life purpose."
+
+    ],
+
+
+
+    reflectionTa:
+
+`நிதி சுதந்திரம் என்பது அதிகம் சம்பாதிப்பதில் அல்ல;
+
+பொறுப்புடன் வாழ்வதில் உள்ளது.`,
+
+
+
+    reflectionEn:
+
+"Financial freedom begins with wise stewardship, not just higher income.",
+
+
+
+    wisdomTa:
+
+"பணத்தை நிர்வகியுங்கள்; அது உங்கள் வாழ்க்கையை நிர்வகிக்க விடாதீர்கள்.",
+
+
+
+    wisdomEn:
+
+"Master your money before it masters you."
+
+},
+
+
+
+/*=========================================================================
+    SPOKE 06
+===========================================================================*/
+
+{
+
+    id:6,
+
+    key:"mind",
+
+    tamilTitle:"மனம் & உணர்வு நலம்™",
+
+    englishTitle:"MIND & EMOTIONAL WELL-BEING™",
+
+
+
+    introductionTa:
+
+`உலகை வெல்வதற்கு முன்,
+
+உங்கள் மனதை வெல்ல வேண்டும்.
+
+உங்கள் உள்ளம் அமைதியாக இருக்கிறதா?`,
+
+
+
+    introductionEn:
+
+`Before you conquer the world,
+
+learn to master your own mind.
+
+How peaceful is your inner world?`,
+
+
+
+    questions:[
+
+        "என் மனம் பெரும்பாலும் அமைதியாகவும் தெளிவாகவும் இருக்கிறது.",
+
+        "என் உணர்ச்சிகளை நான் விழிப்புணர்வுடன் சமநிலையுடன் கையாளுகிறேன்.",
+
+        "நான் உள்ளார்ந்த மகிழ்ச்சியையும் மன அமைதியையும் அடிக்கடி அனுபவிக்கிறேன்."
+
+    ],
+
+
+
+    questionsEn:[
+
+        "My mind is generally calm, clear and focused.",
+
+        "I manage my emotions with awareness and balance.",
+
+        "I regularly experience inner peace and genuine happiness."
+
+    ],
+
+
+
+    reflectionTa:
+
+"வெளி உலகின் தரம், உங்கள் உள்ள உலகின் பிரதிபலிப்பாகும்.",
+
+
+
+    reflectionEn:
+
+"Your outer life often reflects the condition of your inner life.",
+
+
+
+    wisdomTa:
+
+"அமைதியான மனமே சிறந்த முடிவுகளை உருவாக்குகிறது.",
+
+
+
+    wisdomEn:
+
+"A peaceful mind creates a powerful life."
+
+},
 
     /*=========================================================================
+    SPOKE 07
+===========================================================================*/
 
-        PILLAR 04
+{
 
-        CHARACTER™
+    id:7,
 
-    =========================================================================*/
+    key:"growth",
 
-    ,
+    tamilTitle:"வளர்ச்சி™",
 
-    {
-
-        id : 4,
-
-        key : "character",
-
-        page : 6,
-
-        title : "CHARACTER™",
-
-        tamilTitle : "குணநலம்™",
-
-        reflection :
-
-            "Your character determines how you think, decide, act and influence the world around you.",
-
-        tamilReflection :
-
-            "உங்கள் குணநலமே உங்கள் சிந்தனை, முடிவுகள், செயல்கள் மற்றும் உலகின் மீது ஏற்படுத்தும் தாக்கத்தை நிர்ணயிக்கிறது.",
-
-        questions : [
-
-            {
-
-                id : 1,
-
-                tamil :
-
-                "என் வார்த்தைகளுக்கும் செயல்களுக்கும் நான் பொறுப்பேற்கிறேன்.",
-
-                english :
-
-                "I take responsibility for my words and actions."
-
-            },
-
-            {
-
-                id : 2,
-
-                tamil :
-
-                "சூழ்நிலை எப்படியிருந்தாலும் நான் நேர்மையுடன் நடந்து கொள்கிறேன்.",
-
-                english :
-
-                "I choose honesty even when it is difficult."
-
-            },
-
-            {
-
-                id : 3,
-
-                tamil :
-
-                "என் மதிப்புகளுக்கு ஏற்ப நான் தொடர்ந்து வாழ்கிறேன்.",
-
-                english :
-
-                "I consistently live according to my values."
-
-            },
-
-            {
-
-                id : 4,
-
-                tamil :
-
-                "என் தவறுகளை ஒப்புக்கொண்டு அதிலிருந்து கற்றுக்கொள்கிறேன்.",
-
-                english :
-
-                "I acknowledge my mistakes and learn from them."
-
-            },
-
-            {
-
-                id : 5,
-
-                tamil :
-
-                "மற்றவர்கள் என்னை நம்பகமான மனிதராக கருதுகிறார்கள்.",
-
-                english :
-
-                "Others see me as a trustworthy person."
-
-            }
-
-        ]
-
-    },
+    englishTitle:"GROWTH & LEARNING™",
 
 
+
+    introductionTa:
+
+`வாழ்க்கை நின்றுவிடுவதில்லை.
+
+நாமே வளர்வதை நிறுத்தும்போதுதான்
+
+நமது முன்னேற்றம் நின்றுவிடுகிறது.`,
+
+
+
+    introductionEn:
+
+`Life never stops moving.
+
+Growth ends only when we stop learning.`,
+
+
+
+    questions:[
+
+        "புதிய அறிவையும் அனுபவங்களையும் கற்றுக்கொள்ள நான் எப்போதும் தயாராக இருக்கிறேன்.",
+
+        "சவால்களை நான் வளர்ச்சிக்கான வாய்ப்பாக பார்க்கிறேன்.",
+
+        "ஒவ்வொரு ஆண்டும் நான் என்னை மேலும் மேம்படுத்திக் கொண்டிருக்கிறேன்."
+
+    ],
+
+
+
+    questionsEn:[
+
+        "I actively seek new knowledge and experiences.",
+
+        "I see challenges as opportunities to grow.",
+
+        "I continue becoming a better version of myself every year."
+
+    ],
+
+
+
+    reflectionTa:
+
+`வளர்ச்சி என்பது ஒரு இலக்கு அல்ல;
+
+அது வாழ்நாள் முழுவதும் தொடரும் பயணம்.`,
+
+
+
+    reflectionEn:
+
+"Growth is not a destination; it is a lifelong journey.",
+
+
+
+    wisdomTa:
+
+"தொடர்ந்து கற்றுக்கொள்பவரே, தொடர்ந்து வளர்கிறார்.",
+
+
+
+    wisdomEn:
+
+"Those who keep learning never stop growing."
+
+},
+
+
+
+/*=========================================================================
+    SPOKE 08
+===========================================================================*/
+
+{
+
+    id:8,
+
+    key:"discipline",
+
+    tamilTitle:"சுய ஒழுக்கம்™",
+
+    englishTitle:"SELF-DISCIPLINE™",
+
+
+
+    introductionTa:
+
+`உங்கள் எதிர்காலத்தை மாற்றுவது பெரிய முடிவுகள் அல்ல;
+
+தினமும் நீங்கள் மீண்டும் மீண்டும் செய்யும் சிறிய செயல்களே.`,
+
+
+
+    introductionEn:
+
+`Your future is shaped less by big decisions
+
+and more by the small actions you repeat every day.`,
+
+
+
+    questions:[
+
+        "என் வாழ்க்கையை முன்னேற்றும் நல்ல தினசரி பழக்கங்களை நான் தொடர்ந்து கடைப்பிடிக்கிறேன்.",
+
+        "முக்கியமான செயல்களை தாமதப்படுத்தாமல் உடனே தொடங்குகிறேன்.",
+
+        "என் தினசரி செயல்கள் என் நீண்டகால இலக்குகளை அடைய உதவுகின்றன."
+
+    ],
+
+
+
+    questionsEn:[
+
+        "I consistently practice daily habits that improve my life.",
+
+        "I take action without unnecessary procrastination.",
+
+        "My daily actions consistently move me toward my long-term goals."
+
+    ],
+
+
+
+    reflectionTa:
+
+`ஒழுக்கம் என்பது கட்டுப்பாடு அல்ல;
+
+நீங்கள் விரும்பும் வாழ்க்கைக்கான அர்ப்பணிப்பு.`,
+
+
+
+    reflectionEn:
+
+"Discipline is not restriction; it is commitment to the life you want.",
+
+
+
+    wisdomTa:
+
+"சிறந்த பழக்கங்கள், சிறந்த எதிர்காலத்தை உருவாக்குகின்றன.",
+
+
+
+    wisdomEn:
+
+"Great habits create extraordinary lives."
+
+},
+
+
+
+/*=========================================================================
+    SPOKE 09
+===========================================================================*/
+
+{
+
+    id:9,
+
+    key:"gratitude",
+
+    tamilTitle:"நன்றியுணர்வு™",
+
+    englishTitle:"GRATITUDE & AWARENESS™",
+
+
+
+    introductionTa:
+
+`மகிழ்ச்சியானவர்கள் நன்றியுள்ளவர்களாக இருப்பதில்லை.
+
+நன்றியுள்ளவர்களே உண்மையாக மகிழ்ச்சியாக வாழ்கிறார்கள்.
+
+இன்று உங்கள் கவனம் எதில் உள்ளது?`,
+
+
+
+    introductionEn:
+
+`Happy people are not grateful because life is perfect.
+
+They are grateful because they choose to see life's gifts.
+
+What are you choosing to focus on today?`,
+
+
+
+    questions:[
+
+        "என் வாழ்க்கையில் உள்ள நல்லவற்றை நான் தினமும் கவனித்து மதிக்கிறேன்.",
+
+        "மக்களுக்கும், அனுபவங்களுக்கும், கிடைத்த வாய்ப்புகளுக்கும் நான் நன்றியுடன் இருக்கிறேன்.",
+
+        "சவால்களிலும் கூட வாழ்க்கை எனக்கு கற்றுத் தரும் பாடங்களை நான் காண முயல்கிறேன்."
+
+    ],
+
+
+
+    questionsEn:[
+
+        "I consciously notice and appreciate the good in my life every day.",
+
+        "I regularly express gratitude for people, experiences and opportunities.",
+
+        "Even during difficulties, I look for lessons and opportunities to grow."
+
+    ],
+
+
+
+    reflectionTa:
+
+`நன்றியுணர்வு வாழ்க்கையை மாற்றுவதில்லை;
+
+வாழ்க்கையை நாம் காணும் பார்வையை மாற்றுகிறது.`,
+
+
+
+    reflectionEn:
+
+`Gratitude doesn't change life.
+
+It changes the way we experience life.`,
+
+
+
+    wisdomTa:
+
+"நன்றியுள்ள மனம், நிறைவான வாழ்க்கையின் தொடக்கம்.",
+
+
+
+    wisdomEn:
+
+"A grateful heart is the beginning of a fulfilled life."
+
+},
 
     /*=========================================================================
+    SPOKE 10
+===========================================================================*/
 
-        PILLAR 05
+{
 
-        LEARNING™
+    id:10,
 
-    =========================================================================*/
+    key:"contribution",
 
-    {
+    tamilTitle:"பங்களிப்பு™",
 
-        id : 5,
+    englishTitle:"CONTRIBUTION™",
 
-        key : "learning",
 
-        page : 7,
 
-        title : "LEARNING™",
+    introductionTa:
 
-        tamilTitle : "கற்றல்™",
+`வெற்றி என்பது நீங்கள் எவ்வளவு பெற்றீர்கள் என்பதல்ல.
 
-        reflection :
+நீங்கள் வாழ்ந்ததால் எத்தனை பேரின் வாழ்க்கை மேம்பட்டது என்பதே உண்மையான அளவுகோல்.`,
 
-            "Continuous learning is the foundation of continuous growth.",
 
-        tamilReflection :
 
-            "தொடர்ச்சியான கற்றலே தொடர்ச்சியான வளர்ச்சியின் அடித்தளமாகும்.",
+    introductionEn:
 
-        questions : [
+`Success is not measured by what you accumulate.
 
-            {
+It is measured by the lives you positively influence.`,
 
-                id : 1,
 
-                tamil :
 
-                "புதிய விஷயங்களை கற்றுக்கொள்ள நான் தொடர்ந்து நேரம் ஒதுக்குகிறேன்.",
+    questions:[
 
-                english :
+        "என் வாழ்க்கை பிறருக்கு அர்த்தமுள்ள மதிப்பையும் நன்மையையும் உருவாக்குகிறது.",
 
-                "I consistently invest time in learning new things."
+        "என் நேரம், திறமைகள் அல்லது வளங்களை மகிழ்ச்சியுடன் பகிர்கிறேன்.",
 
-            },
+        "நான் வாழ்ந்ததால் உலகம் சிறிதளவாவது சிறப்பாகிறது என்று நம்புகிறேன்."
 
-            {
+    ],
 
-                id : 2,
 
-                tamil :
 
-                "என் அறிவையும் திறமைகளையும் மேம்படுத்த நான் முனைப்புடன் செயல்படுகிறேன்.",
+    questionsEn:[
 
-                english :
+        "My life creates meaningful value for other people.",
 
-                "I actively improve my knowledge and skills."
+        "I willingly share my time, talents or resources to help others.",
 
-            },
+        "I believe the world is becoming better because I live."
 
-            {
+    ],
 
-                id : 3,
 
-                tamil :
 
-                "பின்னூட்டங்களை ஏற்றுக்கொண்டு என்னை மேம்படுத்த பயன்படுத்துகிறேன்.",
+    reflectionTa:
 
-                english :
+"பகிர்ந்து வாழும் வாழ்க்கைதான் உண்மையில் பெருகும் வாழ்க்கை.",
 
-                "I welcome feedback and use it to improve myself."
 
-            },
 
-            {
+    reflectionEn:
 
-                id : 4,
+"A life that serves others is a life that truly grows.",
 
-                tamil :
 
-                "என் அனுபவங்களிலிருந்து தொடர்ந்து பாடங்களை கற்றுக்கொள்கிறேன்.",
 
-                english :
+    wisdomTa:
 
-                "I regularly learn valuable lessons from my experiences."
+"நீங்கள் கொடுப்பதே உங்கள் உண்மையான செல்வம்.",
 
-            },
 
-            {
 
-                id : 5,
+    wisdomEn:
 
-                tamil :
+"Your greatest wealth is what you give."
 
-                "கற்றதை நடைமுறையில் செயல்படுத்துகிறேன்.",
+},
 
-                english :
 
-                "I apply what I learn in my daily life."
 
-            }
+/*=========================================================================
+    SPOKE 11
+===========================================================================*/
 
-        ]
+{
 
-    }
+    id:11,
 
-    /*=========================================================================
+    key:"innerMeaning",
 
-        PILLAR 06
+    tamilTitle:"உள்ளார்ந்த அர்த்தம்™",
 
-        CAREER™
+    englishTitle:"INNER MEANING™",
 
-    =========================================================================*/
 
-    ,
 
-    {
+    introductionTa:
 
-        id : 6,
+`வாழ்க்கையின் மிகப் பெரிய கேள்வி,
 
-        key : "career",
+'நான் எவ்வளவு வெற்றி பெற்றேன்?' என்பது அல்ல.
 
-        page : 8,
+'நான் ஏன் வாழ்கிறேன்?' என்பதே.`,
 
-        title : "CAREER™",
 
-        tamilTitle : "தொழில் வளர்ச்சி™",
 
-        reflection :
+    introductionEn:
 
-            "A fulfilling career is built through purpose, competence, continuous growth and meaningful contribution.",
+`The greatest question in life is not,
 
-        tamilReflection :
+'How successful am I?'
 
-            "நோக்கம், திறன், தொடர்ச்சியான வளர்ச்சி மற்றும் அர்த்தமுள்ள பங்களிப்பு ஆகியவற்றின் மீது ஒரு சிறந்த தொழில் உருவாகிறது.",
+It is,
 
-        questions : [
+'Why does my life matter?'`,
 
-            {
 
-                id : 1,
 
-                tamil :
+    questions:[
 
-                "எனது தொழில் அல்லது பணியின் திசை எனக்கு தெளிவாக உள்ளது.",
+        "என் வாழ்க்கை ஆழமான அர்த்தத்துடனும் நோக்கத்துடனும் இணைந்துள்ளது என்று உணர்கிறேன்.",
 
-                english :
+        "என் உயர்ந்த மதிப்புகளும் நம்பிக்கைகளும் என் முடிவுகளை வழிநடத்துகின்றன.",
 
-                "I have a clear direction for my career or profession."
+        "சூழ்நிலைகள் மாறினாலும் நான் உள்ளார்ந்த அமைதியை அனுபவிக்கிறேன்."
 
-            },
+    ],
 
-            {
 
-                id : 2,
 
-                tamil :
+    questionsEn:[
 
-                "எனது தொழிலில் முன்னேற தேவையான திறன்களை தொடர்ந்து வளர்த்துக் கொள்கிறேன்.",
+        "I experience a deep sense of meaning and purpose in my life.",
 
-                english :
+        "My highest values and beliefs guide my daily decisions.",
 
-                "I continuously develop the skills needed to advance in my career."
+        "I experience inner peace even when circumstances change."
 
-            },
+    ],
 
-            {
 
-                id : 3,
 
-                tamil :
+    reflectionTa:
 
-                "எனது பணிகளை தரமாகவும் பொறுப்புடனும் நிறைவேற்றுகிறேன்.",
+`அர்த்தமுள்ள வாழ்க்கை வெளியில் தேடப்படுவதில்லை;
 
-                english :
+அது உள்ளிருந்து வாழப்படுகிறது.`,
 
-                "I consistently perform my work with excellence and responsibility."
 
-            },
 
-            {
+    reflectionEn:
 
-                id : 4,
+`A meaningful life is not found outside us.
 
-                tamil :
+It is lived from within.`,
 
-                "புதிய வாய்ப்புகளை கண்டறிந்து பயன்படுத்துவதில் நான் முனைப்பாக இருக்கிறேன்.",
 
-                english :
 
-                "I proactively identify and pursue new career opportunities."
+    wisdomTa:
 
-            },
+"உள்ளார்ந்த அமைதியே நிலையான வெற்றியின் அடித்தளம்.",
 
-            {
 
-                id : 5,
 
-                tamil :
+    wisdomEn:
 
-                "எனது தொழில் மற்றவர்களுக்கு மதிப்பையும் எனக்கு நிறைவையும் அளிக்கிறது.",
+"Inner peace is the foundation of lasting success."
 
-                english :
+},
 
-                "My career creates value for others and fulfillment for me."
 
-            }
 
-        ]
+/*=========================================================================
+    SPOKE 12
+===========================================================================*/
 
-    },
+{
 
+    id:12,
 
+    key:"legacy",
 
-    /*=========================================================================
+    tamilTitle:"மரபு™",
 
-        PILLAR 07
+    englishTitle:"LEGACY™",
 
-        CASHFLOW™
 
-    =========================================================================*/
 
-    {
+    introductionTa:
 
-        id : 7,
+`ஒருநாள் உங்கள் வாழ்க்கைக் கதை சொல்லப்படும்.
 
-        key : "cashflow",
+அந்தக் கதை,
 
-        page : 9,
+உங்களை மட்டுமல்ல,
 
-        title : "CASHFLOW™",
+பிறரையும் ஊக்கப்படுத்துமா?`,
 
-        tamilTitle : "பணப்புழக்கம்™",
 
-        reflection :
 
-            "Financial freedom begins with disciplined cashflow management rather than income alone.",
+    introductionEn:
 
-        tamilReflection :
+`One day your life will become a story.
 
-            "நிதி சுதந்திரம் அதிக வருமானத்தால் அல்ல; ஒழுங்கான பணப்புழக்க மேலாண்மையால் தொடங்குகிறது.",
+Will it inspire only you...
 
-        questions : [
+or generations beyond you?`,
 
-            {
 
-                id : 1,
 
-                tamil :
+    questions:[
 
-                "எனது மாதாந்திர வருமானம் மற்றும் செலவுகளை நான் தெளிவாக கண்காணிக்கிறேன்.",
+        "நான் அர்த்தமுள்ள மற்றும் நினைவுகூரப்படும் வாழ்க்கையை உருவாக்கிக் கொண்டிருக்கிறேன்.",
 
-                english :
+        "என் குடும்பமும் சமூகமும் நான் வாழ்ந்ததால் மேலும் வளமாகின்றன.",
 
-                "I clearly monitor my monthly income and expenses."
+        "இன்றே என் வாழ்க்கை முடிந்தாலும், நான் வாழ்ந்த விதம் குறித்து மனநிறைவுடன் இருப்பேன்."
 
-            },
+    ],
 
-            {
 
-                id : 2,
 
-                tamil :
+    questionsEn:[
 
-                "எனது வருமானத்தை விட குறைவாகச் செலவழிக்கும் பழக்கம் எனக்கு உள்ளது.",
+        "I am building a life of lasting significance.",
 
-                english :
+        "My family and community are stronger because I live.",
 
-                "I consistently spend less than I earn."
+        "If my life ended today, I would feel that I have lived well."
 
-            },
+    ],
 
-            {
 
-                id : 3,
 
-                tamil :
+    reflectionTa:
 
-                "எனது வருமானத்தில் ஒரு பகுதியை தொடர்ந்து சேமித்து முதலீடு செய்கிறேன்.",
+"வாழ்க்கையின் நீளம் அல்ல, அதன் தாக்கம்தான் நிலைத்திருக்கும்.",
 
-                english :
 
-                "I consistently save and invest a portion of my income."
 
-            },
+    reflectionEn:
 
-            {
+"It is not the length of life, but the depth of its impact, that endures.",
 
-                id : 4,
 
-                tamil :
 
-                "ஒரே வருமானத்தை மட்டும் சார்ந்து இல்லாமல் பல்வேறு வருமான வாய்ப்புகளை உருவாக்குகிறேன்.",
+    wisdomTa:
 
-                english :
+"உங்கள் வாழ்க்கையே உங்கள் மிகப்பெரிய செய்தியாக இருக்கட்டும்.",
 
-                "I actively build multiple sources of income."
 
-            },
 
-            {
+    wisdomEn:
 
-                id : 5,
+"Let your life become your greatest message."
 
-                tamil :
+}
 
-                "எனது பணப்புழக்கம் என் நீண்டகால வாழ்க்கை இலக்குகளை ஆதரிக்கிறது.",
 
-                english :
 
-                "My cashflow supports my long-term life goals."
+];
 
-            }
 
-        ]
-
-    }
-
-    /*=========================================================================
-
-        PILLAR 08
-
-        TIME FREEDOM™
-
-    =========================================================================*/
-
-    ,
-
-    {
-
-        id : 8,
-
-        key : "timeFreedom",
-
-        page : 10,
-
-        title : "TIME FREEDOM™",
-
-        tamilTitle : "நேர சுதந்திரம்™",
-
-        reflection :
-
-            "Time is your most valuable asset. How you invest it determines the quality of your life.",
-
-        tamilReflection :
-
-            "நேரமே உங்கள் மிக மதிப்புமிக்க சொத்து. அதை நீங்கள் எவ்வாறு பயன்படுத்துகிறீர்கள் என்பதே உங்கள் வாழ்க்கையின் தரத்தை தீர்மானிக்கிறது.",
-
-        questions : [
-
-            {
-
-                id : 1,
-
-                tamil :
-
-                "எனது நேரத்தை தெளிவான முன்னுரிமைகளின் அடிப்படையில் திட்டமிடுகிறேன்.",
-
-                english :
-
-                "I plan my time according to clear priorities."
-
-            },
-
-            {
-
-                id : 2,
-
-                tamil :
-
-                "எனது முக்கியமான பணிகளை தாமதப்படுத்தாமல் தொடர்ந்து நிறைவேற்றுகிறேன்.",
-
-                english :
-
-                "I consistently complete my important tasks without unnecessary delay."
-
-            },
-
-            {
-
-                id : 3,
-
-                tamil :
-
-                "எனது குடும்பம், ஆரோக்கியம் மற்றும் வளர்ச்சிக்காக போதுமான நேரம் ஒதுக்குகிறேன்.",
-
-                english :
-
-                "I allocate sufficient time for my family, health and personal growth."
-
-            },
-
-            {
-
-                id : 4,
-
-                tamil :
-
-                "தேவையற்ற செயல்களில் நேரத்தை வீணாக்குவதை நான் கட்டுப்படுத்துகிறேன்.",
-
-                english :
-
-                "I effectively minimize time spent on unnecessary activities."
-
-            },
-
-            {
-
-                id : 5,
-
-                tamil :
-
-                "எனது நேரத்தை நான் கட்டுப்படுத்துகிறேன்; நேரம் என்னை கட்டுப்படுத்தவில்லை.",
-
-                english :
-
-                "I am in control of my time rather than being controlled by it."
-
-            }
-
-        ]
-
-    },
-
-
-
-    /*=========================================================================
-
-        PILLAR 09
-
-        TRIBE™
-
-    =========================================================================*/
-
-    {
-
-        id : 9,
-
-        key : "tribe",
-
-        page : 11,
-
-        title : "TRIBE™",
-
-        tamilTitle : "சமூக வட்டம்™",
-
-        reflection :
-
-            "The people around you influence your thinking, decisions, growth and future.",
-
-        tamilReflection :
-
-            "உங்களைச் சுற்றியுள்ள மனிதர்களே உங்கள் சிந்தனை, முடிவுகள், வளர்ச்சி மற்றும் எதிர்காலத்தை அதிகமாக பாதிக்கிறார்கள்.",
-
-        questions : [
-
-            {
-
-                id : 1,
-
-                tamil :
-
-                "எனது வாழ்க்கை இலக்குகளை ஆதரிக்கும் நல்ல மனிதர்களுடன் நான் தொடர்ந்து பழகுகிறேன்.",
-
-                english :
-
-                "I consistently associate with people who support my life goals."
-
-            },
-
-            {
-
-                id : 2,
-
-                tamil :
-
-                "மற்றவர்களின் வளர்ச்சிக்கும் வெற்றிக்கும் நான் மதிப்புள்ள பங்களிப்பு செய்கிறேன்.",
-
-                english :
-
-                "I make meaningful contributions to the growth and success of others."
-
-            },
-
-            {
-
-                id : 3,
-
-                tamil :
-
-                "எனது தொடர்புகள் நம்பிக்கை, மரியாதை மற்றும் ஒத்துழைப்பின் மீது அமைந்துள்ளன.",
-
-                english :
-
-                "My relationships are built on trust, respect and collaboration."
-
-            },
-
-            {
-
-                id : 4,
-
-                tamil :
-
-                "புதிய மற்றும் மதிப்புமிக்க தொடர்புகளை உருவாக்க நான் முனைப்புடன் செயல்படுகிறேன்.",
-
-                english :
-
-                "I actively build valuable new relationships and networks."
-
-            },
-
-            {
-
-                id : 5,
-
-                tamil :
-
-                "நான் சேர்ந்திருக்கும் சமூக வட்டம் என் வாழ்க்கை முன்னேற்றத்தை ஊக்குவிக்கிறது.",
-
-                english :
-
-                "The community around me inspires and accelerates my personal growth."
-
-            }
-
-        ]
-
-    }
-
-    /*=========================================================================
-
-        PILLAR 10
-
-        AUTOMATION™
-
-    =========================================================================*/
-
-    ,
-
-    {
-
-        id : 10,
-
-        key : "automation",
-
-        page : 12,
-
-        title : "AUTOMATION™",
-
-        tamilTitle : "தன்னியக்க அமைப்பு™",
-
-        reflection :
-
-            "Systems and automation free your time, increase consistency and multiply your results.",
-
-        tamilReflection :
-
-            "சரியான அமைப்புகளும் தன்னியக்க முறைகளும் உங்கள் நேரத்தை விடுவித்து, செயல்திறனை அதிகரித்து, பலமடங்கு விளைவுகளை உருவாக்குகின்றன.",
-
-        questions : [
-
-            {
-
-                id : 1,
-
-                tamil :
-
-                "எனது முக்கியமான பணிகளுக்கு நான் தெளிவான செயல்முறைகளை உருவாக்கியுள்ளேன்.",
-
-                english :
-
-                "I have clear systems for my important activities."
-
-            },
-
-            {
-
-                id : 2,
-
-                tamil :
-
-                "மீண்டும் மீண்டும் செய்யப்படும் பணிகளை எளிமைப்படுத்தும் பழக்கம் எனக்கு உள்ளது.",
-
-                english :
-
-                "I simplify repetitive tasks whenever possible."
-
-            },
-
-            {
-
-                id : 3,
-
-                tamil :
-
-                "தொழில்நுட்ப கருவிகளை பயன்படுத்தி எனது செயல்திறனை மேம்படுத்துகிறேன்.",
-
-                english :
-
-                "I use technology to improve my productivity."
-
-            },
-
-            {
-
-                id : 4,
-
-                tamil :
-
-                "எனது பணிகள் என்னை சார்ந்து இல்லாமல் தொடர்ந்து நடைபெறும் அமைப்புகளை உருவாக்குகிறேன்.",
-
-                english :
-
-                "I build systems that continue to work without depending entirely on me."
-
-            },
-
-            {
-
-                id : 5,
-
-                tamil :
-
-                "தன்னியக்க முறைகள் மூலம் எனது நேரத்தையும் ஆற்றலையும் மதிப்புள்ள செயல்களுக்கு பயன்படுத்துகிறேன்.",
-
-                english :
-
-                "Automation enables me to invest more time in high-value activities."
-
-            }
-
-        ]
-
-    },
-
-
-
-    /*=========================================================================
-
-        PILLAR 11
-
-        CONTRIBUTION™
-
-    =========================================================================*/
-
-    {
-
-        id : 11,
-
-        key : "contribution",
-
-        page : 13,
-
-        title : "CONTRIBUTION™",
-
-        tamilTitle : "பங்களிப்பு™",
-
-        reflection :
-
-            "A meaningful life is measured not only by what you achieve, but by the value you create for others.",
-
-        tamilReflection :
-
-            "ஒரு அர்த்தமுள்ள வாழ்க்கை என்பது நீங்கள் அடைந்த வெற்றியால் மட்டுமல்ல; மற்றவர்களுக்கு நீங்கள் உருவாக்கும் மதிப்பாலும் அளவிடப்படுகிறது.",
-
-        questions : [
-
-            {
-
-                id : 1,
-
-                tamil :
-
-                "எனது திறமைகளை மற்றவர்களின் நலனுக்காக பயன்படுத்துகிறேன்.",
-
-                english :
-
-                "I use my abilities to benefit other people."
-
-            },
-
-            {
-
-                id : 2,
-
-                tamil :
-
-                "எனது குடும்பம், சமூகம் அல்லது பணியிடத்திற்கு தொடர்ந்து மதிப்புள்ள பங்களிப்பு செய்கிறேன்.",
-
-                english :
-
-                "I consistently contribute value to my family, community or workplace."
-
-            },
-
-            {
-
-                id : 3,
-
-                tamil :
-
-                "மற்றவர்கள் வளரவும் வெற்றி பெறவும் நான் ஊக்குவிக்கிறேன்.",
-
-                english :
-
-                "I encourage others to grow and succeed."
-
-            },
-
-            {
-
-                id : 4,
-
-                tamil :
-
-                "நான் செய்யும் செயல்கள் என்னைத் தாண்டி நேர்மறையான தாக்கத்தை உருவாக்குகின்றன.",
-
-                english :
-
-                "My actions create a positive impact beyond myself."
-
-            },
-
-            {
-
-                id : 5,
-
-                tamil :
-
-                "என் வாழ்க்கை மற்றவர்களின் வாழ்க்கையில் அர்த்தமுள்ள மாற்றத்தை உருவாக்குகிறது.",
-
-                english :
-
-                "My life makes a meaningful difference in the lives of others."
-
-            }
-
-        ]
-
-    },
-
-
-
-    /*=========================================================================
-
-        PILLAR 12
-
-        VISION™
-
-    =========================================================================*/
-
-    {
-
-        id : 12,
-
-        key : "vision",
-
-        page : 14,
-
-        title : "VISION™",
-
-        tamilTitle : "எதிர்காலக் காட்சி™",
-
-        reflection :
-
-            "A compelling vision inspires purposeful action today and creates a better tomorrow.",
-
-        tamilReflection :
-
-            "தெளிவான எதிர்காலக் காட்சியே இன்றைய அர்த்தமுள்ள செயல்களுக்கு ஊக்கமளித்து சிறந்த நாளையை உருவாக்குகிறது.",
-
-        questions : [
-
-            {
-
-                id : 1,
-
-                tamil :
-
-                "எனது எதிர்கால வாழ்க்கையைப் பற்றிய தெளிவான காட்சி எனக்கு உள்ளது.",
-
-                english :
-
-                "I have a clear vision for my future."
-
-            },
-
-            {
-
-                id : 2,
-
-                tamil :
-
-                "எனது நீண்டகால கனவுகளுக்காக நான் தொடர்ந்து செயல்படுகிறேன்.",
-
-                english :
-
-                "I consistently work towards my long-term dreams."
-
-            },
-
-            {
-
-                id : 3,
-
-                tamil :
-
-                "சவால்கள் வந்தாலும் என் இலக்குகளில் உறுதியாக இருக்கிறேன்.",
-
-                english :
-
-                "I remain committed to my goals despite challenges."
-
-            },
-
-            {
-
-                id : 4,
-
-                tamil :
-
-                "என் வாழ்க்கையின் எதிர்காலத்தை நான் திட்டமிட்டு உருவாக்குகிறேன்.",
-
-                english :
-
-                "I intentionally design the future I want to create."
-
-            },
-
-            {
-
-                id : 5,
-
-                tamil :
-
-                "எனது எதிர்காலக் காட்சி தினமும் என்னை ஊக்குவிக்கிறது.",
-
-                english :
-
-                "My vision inspires me to take meaningful action every day."
-
-            }
-
-        ]
-
-    }
-
-    ]
-
-};
 
 /*=============================================================================
 
