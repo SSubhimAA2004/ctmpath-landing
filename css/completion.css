@@ -1,258 +1,111 @@
 
-/*=============================================================================
+/* ==========================================================================
+   CTM PATH™ Guided Journey v2.0
 
-    CTM PATH™
-    FROM SURVIVAL TO LIVING™
+   File        : completion.css
+   Version     : 1.0
+   Status      : 🔒 LOCKED
 
-    FILE
+   Purpose:
+   Completion™ Screen Styling
 
-    completion.css
+   Owns ONLY visual presentation.
 
-    PURPOSE
+   Does NOT contain:
+   ✗ Logic
+   ✗ Data
+   ✗ Calculations
 
-    Journey Completion &
-    Implementation Invitation
-
-    RESPONSIBILITIES
-
-    • Completion Page Layout
-    • Congratulations Hero
-    • Journey Summary
-    • Premium Executive Cards
-
-    VERSION
-
-    1.0
-
-=============================================================================*/
+   ========================================================================== */
 
 
+/* ==========================================================================
+   Completion Card
+   ========================================================================== */
 
-/*=============================================================================
-    PAGE
-=============================================================================*/
+.completion-card{
 
-.page-completion{
+    max-width:1100px;
 
-    width:100%;
+    margin-inline:auto;
 
-    min-height:100vh;
-
-    display:flex;
-
-    flex-direction:column;
+    text-align:center;
 
 }
 
 
 
-/*=============================================================================
-    CONTAINER
-=============================================================================*/
+/* ==========================================================================
+   Completion Symbol
+   ========================================================================== */
 
-.page-completion .container{
+.completion-symbol{
 
-    width:min(1400px,92%);
+    width:90px;
 
-    margin:0 auto;
+    height:90px;
 
-    display:flex;
-
-    flex-direction:column;
-
-}
-
-
-
-/*=============================================================================
-    HEADER
-=============================================================================*/
-
-.page-header{
+    margin:0 auto var(--space-8);
 
     display:flex;
-
-    justify-content:space-between;
 
     align-items:center;
 
-    padding:
-
-        var(--space-8)
-
-        0;
-
-    margin-bottom:
-
-        var(--space-10);
-
-}
+    justify-content:center;
 
 
-
-.header-center{
-
-    flex:1;
-
-    text-align:center;
-
-}
+    border-radius:50%;
 
 
+    background:rgba(13,148,136,.15);
 
-.header-right{
 
-    text-align:right;
+    border:2px solid var(--color-primary);
+
+
+    color:var(--color-primary);
+
+
+    font-size:3rem;
+
+
+    font-weight:700;
 
 }
 
 
 
-.visitor-label,
+/* ==========================================================================
+   Header
+   ========================================================================== */
 
-.visitor-label-en{
+.page-title{
 
-    color:
-
-        var(--color-text-secondary);
-
-    font-size:
-
-        var(--font-sm);
-
-    letter-spacing:.08rem;
-
-    text-transform:uppercase;
+    margin-bottom:var(--space-3);
 
 }
 
 
+.page-subtitle{
 
-.visitor-name{
+    margin-bottom:var(--space-6);
 
-    margin-top:
-
-        var(--space-2);
-
-    color:
-
-        var(--color-gold);
-
-    font-size:
-
-        var(--font-xl);
-
-    font-weight:
-
-        var(--weight-bold);
+    color:var(--color-secondary);
 
 }
 
 
+.page-description{
 
-/*=============================================================================
-    CONTENT CARD
-=============================================================================*/
+    max-width:850px;
 
-.content-card{
+    margin-inline:auto;
 
-    background:
-
-        var(--background-card);
-
-    border:
-
-        1px solid
-
-        var(--border-color);
-
-    border-radius:
-
-        var(--radius-xl);
-
-    padding:
-
-        var(--space-10);
-
-    margin-bottom:
-
-        var(--space-10);
-
-    box-shadow:
-
-        var(--shadow-lg);
-
-}
+    margin-bottom:var(--space-12);
 
 
+    color:var(--text-secondary);
 
-/*=============================================================================
-    TITLES
-=============================================================================*/
-
-.section-title{
-
-    color:
-
-        var(--color-gold);
-
-    font-size:
-
-        2rem;
-
-    font-weight:
-
-        var(--weight-bold);
-
-    text-align:center;
-
-}
-
-
-
-.section-title-en{
-
-    margin-top:
-
-        var(--space-2);
-
-    color:
-
-        var(--color-text-secondary);
-
-    text-align:center;
-
-    letter-spacing:.08rem;
-
-    text-transform:uppercase;
-
-}
-
-
-
-/*=============================================================================
-    DESCRIPTION
-=============================================================================*/
-
-.section-description,
-
-.section-description-en{
-
-    max-width:900px;
-
-    margin:
-
-        var(--space-5)
-
-        auto
-
-        0;
-
-    color:
-
-        var(--color-text);
-
-    text-align:center;
 
     line-height:1.9;
 
@@ -260,699 +113,251 @@
 
 
 
-/*=============================================================================
-    HERO
-=============================================================================*/
+/* ==========================================================================
+   Summary
+   ========================================================================== */
 
-.completion-hero{
+.completion-summary{
 
-    margin-bottom:
-
-        var(--space-12);
+    margin-bottom:var(--space-12);
 
 }
 
 
-
-/*=============================================================================
-    JOURNEY SUMMARY
-=============================================================================*/
-
-.journey-summary{
-
-    margin-bottom:
-
-        var(--space-12);
-
-}
-
-
-
-.journey-list{
+.summary-grid{
 
     display:grid;
 
+
     grid-template-columns:
 
-        repeat(2,1fr);
+        repeat(4,1fr);
 
-    gap:
 
-        var(--space-6);
-
-    margin-top:
-
-        var(--space-8);
+    gap:var(--space-6);
 
 }
 
 
 
-/*=============================================================================
-    JOURNEY ITEM
-=============================================================================*/
+.summary-card{
 
-.journey-item{
+    padding:var(--space-6);
 
-    padding:
 
-        var(--space-6);
+    border-radius:var(--radius-xl);
 
-    background:
 
-        rgba(255,255,255,.03);
+    background:rgba(255,255,255,.04);
 
-    border:
 
-        1px solid
-
-        var(--border-color);
-
-    border-left:
-
-        5px solid
-
-        var(--color-success);
-
-    border-radius:
-
-        var(--radius-lg);
-
-    color:
-
-        var(--color-text);
-
-    font-size:
-
-        var(--font-lg);
-
-    line-height:1.8;
-
-    transition:
-
-        all .30s ease;
+    border:1px solid var(--border-light);
 
 }
 
 
 
-.journey-item span{
+.summary-label{
 
     display:block;
 
-    margin-top:
 
-        var(--space-2);
-
-    color:
-
-        var(--color-text-secondary);
-
-    font-size:
-
-        var(--font-sm);
-
-}
+    margin-bottom:var(--space-3);
 
 
+    color:var(--text-secondary);
 
-.journey-item:hover{
 
-    transform:
+    font-size:var(--fs-sm);
 
-        translateY(-4px);
 
-    box-shadow:
+    text-transform:uppercase;
 
-        var(--shadow-xl);
 
-}
-
-/*=============================================================================
-    MY COMMITMENT™
-=============================================================================*/
-
-.commitment-section{
-
-    margin-bottom:
-
-        var(--space-12);
+    letter-spacing:.05em;
 
 }
 
 
 
-.commitment-text{
+.summary-value{
 
-    max-width:950px;
+    color:var(--color-secondary);
 
-    margin:
 
-        var(--space-8)
+    font-size:var(--fs-2xl);
 
-        auto
 
-        0;
-
-    padding:
-
-        var(--space-10);
-
-    background:
-
-        rgba(212,175,55,.05);
-
-    border:
-
-        1px solid
-
-        rgba(212,175,55,.20);
-
-    border-left:
-
-        6px solid
-
-        var(--color-gold);
-
-    border-radius:
-
-        var(--radius-xl);
-
-    color:
-
-        var(--color-text);
-
-    font-size:
-
-        var(--font-xl);
-
-    line-height:2;
-
-    text-align:center;
-
-    font-style:italic;
+    font-weight:var(--fw-bold);
 
 }
 
 
 
-/*=============================================================================
-    180-DAY PROMISE™
-=============================================================================*/
-
-.promise-section{
-
-    margin-bottom:
-
-        var(--space-12);
-
-}
+/* ==========================================================================
+   Continue in Batch 2/n
+   ========================================================================== */
 
 
+/* ==========================================================================
+   Gratitude Panel
+   ========================================================================== */
 
-.promise-text,
+.gratitude-panel,
 
-.promise-text-en{
+.wisdom-panel,
 
-    max-width:960px;
+.continuation-panel,
 
-    margin:
+.cta-panel{
 
-        var(--space-6)
+    margin-bottom:var(--space-10);
 
-        auto
 
-        0;
+    padding:var(--space-8);
 
-    color:
 
-        var(--color-text);
+    border-radius:var(--radius-xl);
 
-    text-align:center;
 
-    line-height:2;
+    border:1px solid var(--border-light);
 
-    font-size:
 
-        var(--font-lg);
+    background:rgba(255,255,255,.04);
 
 }
 
 
 
-/*=============================================================================
-    IMPLEMENTATION SESSION™
-=============================================================================*/
+/* ==========================================================================
+   Gratitude
+   ========================================================================== */
 
-.implementation-section{
+.gratitude-panel{
 
-    margin-bottom:
+    border-left:5px solid var(--color-secondary);
 
-        var(--space-12);
+}
+
+
+.gratitude-panel h3{
+
+    margin-bottom:var(--space-5);
+
+
+    color:var(--color-secondary);
+
+}
+
+
+#gratitudeMessage{
+
+    line-height:1.9;
+
+
+    color:var(--text-primary);
 
 }
 
 
 
-.implementation-benefits{
+/* ==========================================================================
+   Wisdom
+   ========================================================================== */
 
-    display:grid;
+.wisdom-panel{
 
-    grid-template-columns:
+    border-left:5px solid var(--color-primary);
 
-        repeat(2,1fr);
+}
 
-    gap:
 
-        var(--space-6);
+.wisdom-panel h3{
 
-    margin-top:
+    margin-bottom:var(--space-5);
 
-        var(--space-10);
+
+    color:var(--color-primary);
+
+}
+
+
+.wisdom-panel p{
+
+    line-height:1.9;
+
+
+    color:var(--text-primary);
 
 }
 
 
 
-/*=============================================================================
-    BENEFIT CARD
-=============================================================================*/
+/* ==========================================================================
+   Continuation
+   ========================================================================== */
 
-.benefit-item{
+.continuation-panel{
 
-    padding:
-
-        var(--space-6);
-
-    background:
-
-        rgba(255,255,255,.03);
-
-    border:
-
-        1px solid
-
-        var(--border-color);
-
-    border-left:
-
-        5px solid
-
-        var(--color-success);
-
-    border-radius:
-
-        var(--radius-lg);
-
-    color:
-
-        var(--color-text);
-
-    line-height:1.8;
-
-    transition:
-
-        all .30s ease;
+    border-left:5px solid var(--success);
 
 }
 
 
 
-.benefit-item span{
+.continuation-panel h3{
 
-    display:block;
+    margin-bottom:var(--space-5);
 
-    margin-top:
 
-        var(--space-2);
+    color:var(--success);
 
-    color:
+}
 
-        var(--color-text-secondary);
 
-    font-size:
+.continuation-panel p{
 
-        var(--font-sm);
+    line-height:1.9;
 
 }
 
 
 
-.benefit-item:hover{
-
-    transform:
-
-        translateY(-4px);
-
-    box-shadow:
-
-        var(--shadow-xl);
-
-}
-
-
-
-/*=============================================================================
-    CONTACT SECTION
-=============================================================================*/
-
-.contact-section{
-
-    margin-bottom:
-
-        var(--space-12);
-
-}
-
-
-
-.contact-grid{
-
-    display:grid;
-
-    grid-template-columns:
-
-        repeat(3,1fr);
-
-    gap:
-
-        var(--space-8);
-
-    margin-top:
-
-        var(--space-10);
-
-}
-
-
-
-/*=============================================================================
-    CONTACT CARD
-=============================================================================*/
-
-.contact-card,
-
-.quick-contact-card{
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
-
-    text-decoration:none;
-
-    padding:
-
-        var(--space-8);
-
-    background:
-
-        rgba(255,255,255,.03);
-
-    border:
-
-        1px solid
-
-        var(--border-color);
-
-    border-radius:
-
-        var(--radius-xl);
-
-    color:
-
-        inherit;
-
-    transition:
-
-        all .30s ease;
-
-}
-
-
-
-.contact-card:hover,
-
-.quick-contact-card:hover{
-
-    transform:
-
-        translateY(-6px);
-
-    border-color:
-
-        var(--color-gold);
-
-    box-shadow:
-
-        var(--shadow-xl);
-
-}
-
-
-
-/*=============================================================================
-    CONTACT ICON
-=============================================================================*/
-
-.contact-icon{
-
-    width:72px;
-
-    height:72px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:
-
-        rgba(212,175,55,.10);
-
-    font-size:2rem;
-
-    margin-bottom:
-
-        var(--space-5);
-
-}
-
-
-
-/*=============================================================================
-    CONTACT TITLE
-=============================================================================*/
-
-.contact-card h3,
-
-.quick-contact-card h3{
-
-    color:
-
-        var(--color-gold);
-
-    font-size:
-
-        var(--font-xl);
-
-    font-weight:
-
-        var(--weight-bold);
-
-}
-
-
-
-/*=============================================================================
-    CONTACT DETAILS
-=============================================================================*/
-
-.contact-card p,
-
-.quick-contact-card p{
-
-    margin-top:
-
-        var(--space-3);
-
-    color:
-
-        var(--color-text);
-
-    line-height:1.7;
-
-}
-
-
-
-.contact-value{
-
-    font-weight:
-
-        var(--weight-semibold);
-
-    word-break:
-
-        break-word;
-
-}
-
-/*=============================================================================
-    FINAL CTA
-=============================================================================*/
-
-.cta-section{
-
-    margin-top:
-
-        var(--space-12);
-
-    margin-bottom:
-
-        var(--space-12);
-
-}
-
-
-
-.cta-card{
-
-    text-align:center;
-
-}
-
-
-
-.cta-card .section-description,
-
-.cta-card .section-description-en{
-
-    max-width:900px;
-
-    margin:
-
-        var(--space-6)
-
-        auto
-
-        var(--space-8);
-
-}
-
-
-
-#btnBookSession{
+/* ==========================================================================
+   Journey Badge
+   ========================================================================== */
+
+.journey-badge{
 
     display:inline-flex;
 
+
     align-items:center;
+
 
     justify-content:center;
 
-    min-width:380px;
 
-    min-height:64px;
-
-    padding:
-
-        0
-
-        var(--space-10);
-
-    font-size:
-
-        var(--font-lg);
-
-    font-weight:
-
-        var(--weight-bold);
-
-    text-decoration:none;
-
-}
+    margin-top:var(--space-6);
 
 
-
-/*=============================================================================
-    QUICK CONTACT
-=============================================================================*/
-
-.quick-contact-section{
-
-    margin-bottom:
-
-        var(--space-12);
-
-}
+    padding:var(--space-5);
 
 
-
-.quick-contact-grid{
-
-    display:grid;
-
-    grid-template-columns:
-
-        repeat(3,1fr);
-
-    gap:
-
-        var(--space-8);
-
-    margin-top:
-
-        var(--space-8);
-
-}
+    border-radius:var(--radius-lg);
 
 
-
-/*=============================================================================
-    FOOTER
-=============================================================================*/
-
-.page-footer{
-
-    margin-top:
-
-        var(--space-12);
-
-    padding:
-
-        var(--space-10)
-
-        0;
-
-    border-top:
-
-        1px solid
-
-        rgba(255,255,255,.08);
-
-    text-align:center;
-
-}
+    background:rgba(198,164,91,.10);
 
 
+    border:1px solid rgba(198,164,91,.35);
 
-.page-footer p{
 
-    margin-top:
+    color:var(--color-secondary);
 
-        var(--space-3);
 
-    color:
+    font-weight:var(--fw-semibold);
 
-        var(--color-text-secondary);
 
     line-height:1.8;
 
@@ -960,91 +365,99 @@
 
 
 
-.page-footer p:first-child{
+/* ==========================================================================
+   CTA
+   ========================================================================== */
 
-    margin-top:0;
+.cta-panel{
 
-}
-
-
-
-/*=============================================================================
-    PREMIUM ANIMATIONS
-=============================================================================*/
-
-.content-card,
-
-.journey-item,
-
-.benefit-item,
-
-.contact-card,
-
-.quick-contact-card{
-
-    animation:
-
-        fadeUp .60s ease both;
+    border-left:5px solid var(--color-secondary);
 
 }
 
 
 
-.contact-card:nth-child(2),
+.cta-panel h3{
 
-.quick-contact-card:nth-child(2){
+    margin-bottom:var(--space-5);
 
-    animation-delay:.08s;
+
+    color:var(--color-secondary);
+
+}
+
+
+.cta-panel p{
+
+    margin-bottom:var(--space-8);
+
+
+    line-height:1.9;
 
 }
 
 
 
-.contact-card:nth-child(3),
+/* ==========================================================================
+   Actions
+   ========================================================================== */
 
-.quick-contact-card:nth-child(3){
+.completion-actions{
 
-    animation-delay:.16s;
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    gap:var(--space-6);
+
+
+    margin-top:var(--space-12);
 
 }
 
 
 
-@keyframes fadeUp{
+/* ==========================================================================
+   Responsive — Tablet
+   ========================================================================== */
 
-    from{
+@media(max-width:992px){
 
-        opacity:0;
 
-        transform:
+    .summary-grid{
 
-            translateY(24px);
+        grid-template-columns:
+
+            repeat(2,1fr);
 
     }
 
-    to{
-
-        opacity:1;
-
-        transform:
-
-            translateY(0);
-
-    }
 
 }
 
 
 
-/*=============================================================================
-    TABLET
-=============================================================================*/
+/* ==========================================================================
+   Responsive — Mobile
+   ========================================================================== */
 
-@media (max-width:1024px){
+@media(max-width:768px){
 
-    .journey-list,
 
-    .implementation-benefits{
+    .completion-card{
+
+        padding:var(--space-8);
+
+    }
+
+
+
+    .summary-grid{
 
         grid-template-columns:1fr;
 
@@ -1052,182 +465,84 @@
 
 
 
-    .contact-grid,
+    .gratitude-panel,
 
-    .quick-contact-grid{
+    .wisdom-panel,
 
-        grid-template-columns:1fr;
+    .continuation-panel,
 
-    }
+    .cta-panel{
 
-
-
-    .content-card{
-
-        padding:
-
-            var(--space-8);
+        padding:var(--space-6);
 
     }
 
-}
 
 
-
-/*=============================================================================
-    MOBILE
-=============================================================================*/
-
-@media (max-width:768px){
-
-    .page-header{
+    .completion-actions{
 
         flex-direction:column;
 
-        gap:
-
-            var(--space-6);
-
-        text-align:center;
-
     }
 
 
 
-    .header-right{
-
-        text-align:center;
-
-    }
-
-
-
-    .section-title{
-
-        font-size:1.75rem;
-
-    }
-
-
-
-    .commitment-text{
-
-        font-size:
-
-            var(--font-lg);
-
-    }
-
-
-
-    #btnBookSession{
+    .completion-actions .btn{
 
         width:100%;
 
-        min-width:0;
-
     }
+
 
 }
 
 
 
-/*=============================================================================
-    SMALL MOBILE
-=============================================================================*/
+/* ==========================================================================
+   Small Mobile
+   ========================================================================== */
 
-@media (max-width:480px){
-
-    .content-card{
-
-        padding:
-
-            var(--space-6);
-
-    }
+@media(max-width:480px){
 
 
+    .completion-card{
 
-    .section-description,
-
-    .section-description-en,
-
-    .promise-text,
-
-    .promise-text-en,
-
-    .commitment-text{
-
-        font-size:
-
-            var(--font-md);
-
-        line-height:1.8;
+        padding:var(--space-6);
 
     }
 
 
 
-    .contact-icon{
+    .completion-symbol{
 
-        width:60px;
+        width:70px;
 
-        height:60px;
+        height:70px;
 
-        font-size:1.6rem;
+        font-size:2.2rem;
 
     }
+
+
+
+    .summary-value{
+
+        font-size:var(--fs-xl);
+
+    }
+
 
 }
 
 
 
-/*=============================================================================
-    PRINT SUPPORT
-=============================================================================*/
+/* ==========================================================================
+   End of File
 
-@media print{
+   File   : completion.css
 
-    .cta-section,
+   Version: 1.0
 
-    .quick-contact-section{
+   Status : 🔒 LOCKED
 
-        display:none;
-
-    }
-
-
-
-    .content-card,
-
-    .journey-item,
-
-    .benefit-item{
-
-        box-shadow:none;
-
-        page-break-inside:avoid;
-
-        break-inside:avoid;
-
-    }
-
-
-
-    body{
-
-        background:#ffffff;
-
-        color:#000000;
-
-    }
-
-}
-
-
-
-/*=============================================================================
-
-    END OF FILE
-
-=============================================================================*/
+   ========================================================================== */
