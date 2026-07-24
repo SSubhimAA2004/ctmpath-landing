@@ -3,7 +3,7 @@
    CTM PATH™ Guided Journey v2.0
 
    File        : router.js
-   Version     : 1.0.2
+   Version     : 1.0.3
    Status      : 🔒 LOCKED
 
    Purpose     : Application Router
@@ -47,37 +47,37 @@ const Router = (() => {
 
         LANDING:
 
-            'pages/landing.html',
+            '/pages/landing.html',
 
 
         REGISTRATION:
 
-            'pages/registration.html',
+            '/pages/registration.html',
 
 
         ASSESSMENT:
 
-            'pages/assessment.html',
+            '/pages/assessment.html',
 
 
         KALACHAKRA:
 
-            'pages/kaalachakra.html',
+            '/pages/kaalachakra.html',
 
 
         DIAGNOSIS:
 
-            'pages/diagnosis.html',
+            '/pages/diagnosis.html',
 
 
         PRESCRIPTION:
 
-            'pages/prescription.html',
+            '/pages/prescription.html',
 
 
         COMPLETION:
 
-            'pages/completion.html'
+            '/pages/completion.html'
 
 
     };
@@ -129,16 +129,7 @@ const Router = (() => {
     function currentPage(){
 
 
-        const path = window.location.pathname;
-
-
-        const page = path
-
-            .replace(/^\/+/, '');
-
-
-
-        return page || 'index.html';
+        return window.location.pathname;
 
 
     }
@@ -398,7 +389,7 @@ const Router = (() => {
 
 
     /* ======================================================================
-       RESUME
+       RESUME JOURNEY
        ====================================================================== */
 
 
@@ -448,7 +439,15 @@ const Router = (() => {
     function isFirstPage(){
 
 
-        return currentPage() === ROUTES.LANDING;
+        return (
+
+            currentPage()
+
+            ===
+
+            ROUTES.LANDING
+
+        );
 
 
     }
@@ -465,7 +464,15 @@ const Router = (() => {
     function isLastPage(){
 
 
-        return currentPage() === ROUTES.COMPLETION;
+        return (
+
+            currentPage()
+
+            ===
+
+            ROUTES.COMPLETION
+
+        );
 
 
     }
@@ -482,11 +489,17 @@ const Router = (() => {
     function currentStep(){
 
 
-        return pageIndex(
+        return (
 
-            currentPage()
+            pageIndex(
 
-        ) + 1;
+                currentPage()
+
+            )
+
+            + 1
+
+        );
 
 
     }
@@ -530,7 +543,9 @@ const Router = (() => {
 
                 totalSteps()
 
-            ) * 100
+            )
+
+            * 100
 
         );
 
@@ -632,11 +647,11 @@ const Router = (() => {
 
         if(
 
-            current === 'index.html'
+            current === '/'
 
             ||
 
-            current === ''
+            current === '/index.html'
 
         ){
 
@@ -765,9 +780,8 @@ window.Router = Router;
 
    File : router.js
 
-   Version : 1.0.2
+   Version : 1.0.3
 
    Status : 🔒 LOCKED
 
    ========================================================================== */
-
