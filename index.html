@@ -8,23 +8,11 @@
          CTM PATH™ Guided Journey v2.0
 
          File    : index.html
-         Version : 1.0
+         Version : 1.0.1
          Status  : 🔒 LOCKED
 
          Purpose:
          Main Application Entry Point™
-
-         Responsibilities:
-         ✓ Load application shell
-         ✓ Load foundation styles
-         ✓ Mount journey container
-         ✓ Load core engines
-         ✓ Start CTM PATH™ application
-
-         Does NOT:
-         ✗ Contain page-specific logic
-         ✗ Contain assessment logic
-         ✗ Contain diagnosis logic
 
          ========================================================== -->
 
@@ -45,7 +33,6 @@
     <meta
         name="theme-color"
         content="#081C3A">
-
 
 
     <title>
@@ -107,7 +94,6 @@
 </head>
 
 
-
 <body>
 
 
@@ -120,42 +106,28 @@
 <div id="app">
 
 
-
-    <!-- ======================================================
-         Application Loading State
-
-         Replaced by router.js
-         ====================================================== -->
-
-
     <div class="app-loader">
 
 
         <div class="loader-symbol">
 
-
             CTM PATH™
-
 
         </div>
 
 
-
         <p>
-
 
             Loading Your Journey...
 
-
         </p>
-
 
 
     </div>
 
 
-
 </div>
+
 
 
 
@@ -194,8 +166,36 @@ document.addEventListener(
     function(){
 
 
-        CTMApp.init();
+        if(window.CTMApp){
 
+
+            CTMApp.init();
+
+
+        }
+
+
+        else{
+
+
+            console.error(
+
+                "CTMApp is not available. Check app.js export."
+
+            );
+
+
+            document.querySelector(
+
+                ".app-loader p"
+
+            ).textContent =
+
+
+                "Application loading error. Please refresh.";
+
+
+        }
 
 
     }
@@ -207,9 +207,11 @@ document.addEventListener(
 
 
 
+
 </body>
 
 
 </html>
+
 
 
