@@ -1,1065 +1,2071 @@
 
-/*=============================================================================
+/* ==========================================================================
+   CTM PATH™ Guided Journey v2.0
+   File        : assessmentData.js
+   Version     : 1.0
+   Status      : 🔒 LOCKED
 
-    CTM PATH™
+   MASTER ASSESSMENT REPOSITORY
 
-    FROM SURVIVAL TO LIVING™
+   This file contains ONLY assessment data.
 
-    FILE
+   ✓ Assessment Content
+   ✓ Pillar Metadata
+   ✓ Introductions
+   ✓ Questions
+   ✓ Reflections
+   ✓ Wisdom Statements
 
-    assessmentData.js
+   This file contains NO
 
-    PURPOSE
+   ✗ Rendering
+   ✗ DOM Manipulation
+   ✗ API Calls
+   ✗ Calculations
+   ✗ Business Logic
 
-    Master Assessment Data
-
-    RESPONSIBILITIES
-
-    • 12 Life Pillars
-    • Introduction
-    • Three Questions
-    • Reflection
-    • Wisdom
-
-=============================================================================*/
+   ========================================================================== */
 
 'use strict';
 
+/* ==========================================================================
+   MASTER REPOSITORY
+   ========================================================================== */
 
+const AssessmentRepository = {
 
-window.CTM = window.CTM || {};
+    version : '1.0',
 
+    status : 'LOCKED',
 
+    totalPillars : 12,
 
-CTM.assessmentData = [
+    questionsPerPillar : 3,
 
-/*=========================================================================
-    SPOKE 01
-===========================================================================*/
+    maximumScorePerPillar : 30,
 
-{
+    ratingScale : {
 
-    id:1,
+        minimum : 1,
 
-    key:"purpose",
+        maximum : 10
 
-    tamilTitle:"நோக்கம்™",
+    },
 
-    englishTitle:"PURPOSE™",
+    pillars : [
 
-    introductionTa:
-
-`ஒவ்வொரு காலையும் நீங்கள் ஏன் விழித்தெழுகிறீர்கள்?
-
-உங்கள் வாழ்க்கை ஒரு திசையை நோக்கி நகருகிறதா...
-
-அல்லது வெறும் நாட்களைக் கடக்கிறதா?`,
-
-
-
-    introductionEn:
-
-`Why do you wake up every morning?
-
-Is your life moving toward a meaningful destination...
-
-or simply passing through another day?`,
-
-
-
-    questions:[
-
-        "என் வாழ்க்கைக்கு திசைகாட்டும் தெளிவான நோக்கம் எனக்கு உள்ளது.",
-
-        "நான் தினமும் செய்யும் செயல்கள் என் வாழ்க்கை நோக்கத்துடன் ஒத்துப்போகின்றன.",
-
-        "நான் இன்று வாழும் வாழ்க்கை, நான் உண்மையில் வாழ விரும்பிய வாழ்க்கையை பிரதிபலிக்கிறது."
-
-    ],
-
-
-
-    questionsEn:[
-
-        "I have a clear purpose that guides my life.",
-
-        "My daily actions are aligned with my life purpose.",
-
-        "The life I live today reflects the life I truly want."
-
-    ],
-
-
-
-    reflectionTa:
-
-"தெளிவான நோக்கம் வாழ்க்கைக்கு அர்த்தத்தையும் திசையையும் அளிக்கிறது.",
-
-
-
-    reflectionEn:
-
-"Purpose gives direction. Direction gives life meaning.",
-
-
-
-    wisdomTa:
-
-"உங்கள் நோக்கத்தை கண்டறியுங்கள்; உங்கள் வாழ்க்கை மாறத் தொடங்கும்.",
-
-
-
-    wisdomEn:
-
-"Find your purpose. Your life will begin to transform."
-
-},
-
-
-
-/*=========================================================================
-    SPOKE 02
-===========================================================================*/
+/* ==========================================================================
+   SPOKE 01
+   PURPOSE™
+   ========================================================================== */
 
 {
 
-    id:2,
+    id : 1,
 
-    key:"health",
+    key : "purpose",
 
-    tamilTitle:"ஆரோக்கியம்™",
+    spoke : 1,
 
-    englishTitle:"HEALTH™",
+    tamilTitle : "நோக்கம்™",
 
+    englishTitle : "Purpose™",
 
+    corePrinciple :
 
-    introductionTa:
+        "A meaningful life begins with a meaningful purpose.",
 
-`உங்கள் உடல்தான் வாழ்நாள் முழுவதும் நீங்கள் வசிக்கும் ஒரே இல்லம்.
+    introductionTa :
 
-அதை நீங்கள் அன்புடன் பராமரிக்கிறீர்களா?`,
+`ஒவ்வொரு மனிதனும் ஒரு காரணத்திற்காகப் பிறக்கிறார்.
 
+உங்கள் வாழ்க்கைக்கு தெளிவான நோக்கம் இருக்கும்போது, உங்கள் முடிவுகள், உங்கள் முயற்சிகள் மற்றும் உங்கள் செயல்கள் அனைத்தும் அர்த்தமுள்ளதாக மாறுகின்றன.
 
+இந்தப் பகுதி உங்கள் வாழ்க்கை எந்த அளவிற்கு தெளிவான நோக்கத்தால் வழிநடத்தப்படுகிறது என்பதைப் பற்றிய சுய மதிப்பீடு.`,
 
-    introductionEn:
+    introductionEn :
 
-`Your body is the only home you will live in for your entire life.
+`Every person is born with the potential to live a meaningful life.
 
-Are you taking good care of it?`,
+When your purpose is clear, your decisions become clearer, your efforts become more focused and your life gains direction.
 
+This assessment invites you to reflect honestly on how clearly your life is guided by purpose.`,
 
+    questions : [
 
-    questions:[
+        {
 
-        "என் உடலும் மனமும் பெரும்பாலும் உற்சாகமாகவும் ஆரோக்கியமாகவும் உள்ளன.",
+            id : 1,
 
-        "உடற்பயிற்சி, நல்ல உணவு மற்றும் போதுமான ஓய்வை தொடர்ந்து கடைப்பிடிக்கிறேன்.",
+            tamil :
 
-        "என் தற்போதைய வாழ்க்கை முறை என் நீண்டகால ஆரோக்கியத்தை பாதுகாக்கிறது."
+            "என் வாழ்க்கையின் உயர்ந்த நோக்கம் என்ன என்பது எனக்கு தெளிவாக தெரியும்.",
+
+            english :
+
+            "I have a clear understanding of the higher purpose of my life."
+
+        },
+
+        {
+
+            id : 2,
+
+            tamil :
+
+            "எனது அன்றாட முடிவுகள் என் வாழ்க்கை நோக்கத்துடன் ஒத்திசைவாக உள்ளன.",
+
+            english :
+
+            "My daily decisions are aligned with my life's purpose."
+
+        },
+
+        {
+
+            id : 3,
+
+            tamil :
+
+            "நான் வாழும் வாழ்க்கை எனக்கு ஆழமான அர்த்தத்தையும் நிறைவையும் அளிக்கிறது.",
+
+            english :
+
+            "The life I am living gives me a deep sense of meaning and fulfilment."
+
+        }
 
     ],
 
+    reflectionTa :
 
+`நோக்கம் தெளிவாக இருக்கும் போது,
+முடிவுகள் எளிதாகின்றன.
 
-    questionsEn:[
+நோக்கம் இல்லாத வாழ்க்கை
+சூழ்நிலைகளால் இழுத்துச் செல்லப்படும்.`,
 
-        "My body and mind are generally energetic and healthy.",
+    reflectionEn :
 
-        "I consistently maintain healthy habits through exercise, nutrition and rest.",
+`When purpose is clear,
+decisions become easier.
 
-        "My current lifestyle supports my long-term health."
+Without purpose,
+life is often driven by circumstances rather than conscious choice.`,
 
-    ],
+    wisdomTa :
 
+`நோக்கம் வாழ்க்கைக்கு திசையைக் கொடுக்கிறது.
 
+திசை பெற்ற வாழ்க்கையே
+நிறைவான வாழ்க்கையாக மலர்கிறது.`,
 
-    reflectionTa:
+    wisdomEn :
 
-"நல்ல ஆரோக்கியம் இல்லாமல், மற்ற வெற்றிகள் முழுமையடையாது.",
+`Purpose gives direction.
 
+Direction gives meaning.
 
+Meaning transforms existence into a life well lived.`,
 
-    reflectionEn:
+    implementation : {
 
-"Without health, every other success loses its value.",
+        maximumScore : 30,
 
+        output : "Purpose Percentage",
 
+        storedValue : "Purpose %",
 
-    wisdomTa:
+        googleSheetColumn : "Purpose",
 
-"இன்று உடலுக்காக முதலீடு செய்யுங்கள்; நாளை அது உங்களுக்கு பலன் தரும்.",
+        kalaChakraSpoke : 1,
 
+        diagnosisInput : "Purpose %",
 
+        prescriptionInput : "Purpose %"
 
-    wisdomEn:
+    }
 
-"Invest in your health today; it will reward you tomorrow."
+}
 
-},
+/* ==========================================================================
+   SPOKE 02
+   Continues in Batch 2
+   ========================================================================== */
 
+    ]
 
+};
 
-/*=========================================================================
-    SPOKE 03
-===========================================================================*/
+/* ==========================================================================
+   End of Batch 1
+   assessmentData.js continues in Batch 2
+   ========================================================================== */
+
+/* ==========================================================================
+   SPOKE 02
+   HEALTH™
+   ========================================================================== */
+
+,
 
 {
 
-    id:3,
+    id : 2,
 
-    key:"relationships",
+    key : "health",
 
-    tamilTitle:"உறவுகள்™",
+    spoke : 2,
 
-    englishTitle:"RELATIONSHIPS™",
+    tamilTitle : "ஆரோக்கியம்™",
 
+    englishTitle : "Health™",
 
+    corePrinciple :
 
-    introductionTa:
+        "Health is the foundation upon which every other pillar of life is built.",
 
-`வாழ்க்கையின் உண்மையான செல்வம் பணத்தில் அல்ல;
+    introductionTa :
 
-நம்மை நேசிக்கும் மனிதர்களிடமே உள்ளது.`,
+`உங்கள் உடலும் மனமும் உங்கள் வாழ்க்கைப் பயணத்தின் வாகனமாகும்.
 
+ஆரோக்கியமான உடலும் அமைதியான மனமும் இணைந்தால் மட்டுமே முழுமையான வாழ்க்கையை அனுபவிக்க முடியும்.
 
+இந்தப் பகுதி உங்கள் தற்போதைய ஆரோக்கிய நிலையைப் பற்றி நேர்மையாக சிந்திக்க உதவுகிறது.`,
 
-    introductionEn:
+    introductionEn :
 
-`The greatest wealth in life is not money—
+`Your body and mind are the vehicle through which you experience life.
 
-it is the people who love and stand beside us.`,
+Good health provides the energy to pursue your purpose, nurture your relationships and contribute meaningfully to the world.
 
+This section invites you to reflect honestly on your present state of health.`,
 
+    questions : [
 
-    questions:[
+        {
 
-        "நான் முழுமையாக நம்பக்கூடிய உறவுகள் என் வாழ்க்கையில் உள்ளன.",
+            id : 1,
 
-        "என் உறவுகள் அன்பு, மரியாதை மற்றும் பரஸ்பர ஆதரவின் மீது அமைந்துள்ளன.",
+            tamil :
 
-        "என்னைச் சுற்றியுள்ளவர்கள் நான் சிறந்த மனிதராக வளர உதவுகிறார்கள்."
+            "எனது உடல்நலம் என் அன்றாட வாழ்க்கையை உற்சாகமாக வாழ உதவுகிறது.",
+
+            english :
+
+            "My physical health gives me the energy to live each day with vitality."
+
+        },
+
+        {
+
+            id : 2,
+
+            tamil :
+
+            "என் மனம் பெரும்பாலான நேரங்களில் அமைதியாகவும் தெளிவாகவும் உள்ளது.",
+
+            english :
+
+            "My mind remains calm, clear and emotionally balanced most of the time."
+
+        },
+
+        {
+
+            id : 3,
+
+            tamil :
+
+            "உடலையும் மனதையும் ஆரோக்கியமாக வைத்திருக்க நான் தொடர்ந்து நல்ல பழக்கங்களைப் பின்பற்றுகிறேன்.",
+
+            english :
+
+            "I consistently practise habits that protect and improve my physical and mental health."
+
+        }
 
     ],
 
+    reflectionTa :
 
+`ஆரோக்கியம் இல்லாமல் எந்த சாதனையும் நீண்ட காலம் நிலைக்காது.
 
-    questionsEn:[
+உங்கள் உடலே உங்கள் வாழ்க்கையின் முதல் செல்வம்.`,
 
-        "I have people in my life whom I completely trust.",
+    reflectionEn :
 
-        "My relationships are built on love, respect and mutual support.",
+`Without health,
+every other success becomes difficult to sustain.
 
-        "The people around me help me become a better person."
+Your greatest wealth is the body and mind through which you live your life.`,
 
-    ],
+    wisdomTa :
 
+`ஆரோக்கியத்தை பாதுகாப்பது
+வாழ்க்கையை பாதுகாப்பதற்குச் சமம்.`,
 
+    wisdomEn :
 
-    reflectionTa:
+`When health flourishes,
+life flourishes.
 
-"வாழ்க்கையின் தரத்தை நிர்ணயிப்பது உறவுகளின் தரமே.",
+Protect your health,
+and every other pillar gains strength.`,
 
+    implementation : {
 
+        maximumScore : 30,
 
-    reflectionEn:
+        output : "Health Percentage",
 
-"The quality of your relationships shapes the quality of your life.",
+        storedValue : "Health %",
 
+        googleSheetColumn : "Health",
 
+        kalaChakraSpoke : 2,
 
-    wisdomTa:
+        diagnosisInput : "Health %",
 
-"உறவுகளை வளர்த்தால், வாழ்க்கை வளரும்.",
+        prescriptionInput : "Health %"
 
+    }
 
+}
 
-    wisdomEn:
+/* ==========================================================================
+   SPOKE 03
+   RELATIONSHIPS™
+   ========================================================================== */
 
-"Nurture relationships, and life flourishes."
-
-},
-
-
-    /*=========================================================================
-    SPOKE 04
-===========================================================================*/
+,
 
 {
 
-    id:4,
+    id : 3,
 
-    key:"character",
+    key : "relationships",
 
-    tamilTitle:"நற்பண்பு™",
+    spoke : 3,
 
-    englishTitle:"CHARACTER™",
+    tamilTitle : "உறவுகள்™",
 
+    englishTitle : "Relationships™",
 
+    corePrinciple :
 
-    introductionTa:
+        "The quality of your life is deeply influenced by the quality of your relationships.",
 
-`மற்றவர்கள் பார்க்கும் போது நீங்கள் யார் என்பது முக்கியமல்ல;
+    introductionTa :
 
-யாரும் பார்க்காதபோது நீங்கள் யார் என்பதே உங்கள் உண்மையான நற்பண்பு.`,
+`வாழ்க்கையின் உண்மையான செல்வம் பணம் அல்ல;
 
+அன்பும் நம்பிக்கையும் நிறைந்த உறவுகளே.
 
+இந்தப் பகுதி உங்கள் குடும்பம், நண்பர்கள் மற்றும் முக்கியமான உறவுகளைப் பற்றி நேர்மையாக சிந்திக்க உதவுகிறது.`,
 
-    introductionEn:
+    introductionEn :
 
-`Your reputation is what others see.
+`Life is enriched not merely by achievements, but by meaningful relationships built on love, trust and mutual respect.
 
-Your character is who you are when no one is watching.`,
+This section invites you to reflect honestly on the health of your most important relationships.`,
 
+    questions : [
 
+        {
 
-    questions:[
+            id : 1,
 
-        "என் முடிவுகள் என் மதிப்புகள் மற்றும் நெறிமுறைகளுடன் ஒத்துப்போகின்றன.",
+            tamil :
 
-        "யாரும் பார்க்காதபோதும் நான் சரியானதைச் செய்யத் தேர்வு செய்கிறேன்.",
+            "என் குடும்பத்தினருடனும் நெருங்கியவர்களுடனும் ஆரோக்கியமான உறவை நான் பேணுகிறேன்.",
 
-        "நான் ஆகிக்கொண்டிருக்கும் மனிதரைப் பார்த்து பெருமைப்படுகிறேன்."
+            english :
+
+            "I maintain healthy and meaningful relationships with my family and those closest to me."
+
+        },
+
+        {
+
+            id : 2,
+
+            tamil :
+
+            "நான் மற்றவர்களுடன் திறந்த மனதுடன் பேசவும் கவனமாகக் கேட்கவும் முயற்சிக்கிறேன்.",
+
+            english :
+
+            "I communicate openly and listen with empathy and respect."
+
+        },
+
+        {
+
+            id : 3,
+
+            tamil :
+
+            "என் வாழ்க்கையில் என்னை ஊக்குவிக்கும் மற்றும் வளரச் செய்யும் நல்ல உறவுகள் உள்ளன.",
+
+            english :
+
+            "I am surrounded by relationships that encourage my growth and well-being."
+
+        }
 
     ],
 
+    reflectionTa :
 
+`உறவுகள் தானாக வளர்வதில்லை.
 
-    questionsEn:[
+அவற்றை அன்பு, நேரம் மற்றும் கவனத்தால் வளர்க்க வேண்டும்.`,
 
-        "My decisions reflect my values and principles.",
+    reflectionEn :
 
-        "I choose to do the right thing even when no one is watching.",
+`Relationships are not maintained by chance.
 
-        "I am proud of the person I am becoming."
+They flourish through intentional care, time and understanding.`,
 
-    ],
+    wisdomTa :
 
+`அன்பு பகிரப்படும் இடத்தில்
+வாழ்க்கை மலர்கிறது.`,
 
+    wisdomEn :
 
-    reflectionTa:
+`Strong relationships do not merely support life.
 
-"நற்பண்பு என்பது உங்கள் வாழ்க்கையின் அடித்தளம்.",
+They give life its deepest meaning.`,
 
+    implementation : {
 
+        maximumScore : 30,
 
-    reflectionEn:
+        output : "Relationships Percentage",
 
-"Character is the foundation on which every great life is built.",
+        storedValue : "Relationships %",
 
+        googleSheetColumn : "Relationships",
 
+        kalaChakraSpoke : 3,
 
-    wisdomTa:
+        diagnosisInput : "Relationships %",
 
-"செல்வம் மதிப்பை வாங்கலாம்; நற்பண்பு மட்டுமே மரியாதையை வெல்லும்.",
+        prescriptionInput : "Relationships %"
 
+    }
 
+}
 
-    wisdomEn:
+/* ==========================================================================
+   SPOKE 04
+   Continues in Batch 3
+   ========================================================================== */
 
-"Wealth may buy comfort; character earns respect."
+/* ==========================================================================
+   SPOKE 04
+   CHARACTER™
+   ========================================================================== */
 
-},
-
-
-
-/*=========================================================================
-    SPOKE 05
-===========================================================================*/
+,
 
 {
 
-    id:5,
+    id : 4,
 
-    key:"financialStewardship",
+    key : "character",
 
-    tamilTitle:"நிதி வளம்™",
+    spoke : 4,
 
-    englishTitle:"FINANCIAL STEWARDSHIP™",
+    tamilTitle : "நற்பண்பு™",
 
+    englishTitle : "Character™",
 
+    corePrinciple :
 
-    introductionTa:
+        "Character is revealed not by what we achieve, but by who we become.",
 
-`பணம் வாழ்க்கையின் நோக்கம் அல்ல.
+    introductionTa :
 
-ஆனால் அர்த்தமுள்ள வாழ்க்கையை உருவாக்கும் ஒரு முக்கிய கருவி.
+`உங்கள் வாழ்க்கையின் உண்மையான மதிப்பு,
 
-அதை நீங்கள் புத்திசாலித்தனமாக நிர்வகிக்கிறீர்களா?`,
+நீங்கள் என்ன பெற்றுள்ளீர்கள் என்பதில் அல்ல;
 
+நீங்கள் எப்படி வாழ்கிறீர்கள் என்பதில் உள்ளது.
 
+இந்தப் பகுதி உங்கள் நேர்மை, பொறுப்பு,
+ஒழுக்கம் மற்றும் நம்பகத்தன்மையைப் பற்றி
+நேர்மையாக சிந்திக்க உதவுகிறது.`,
 
-    introductionEn:
+    introductionEn :
 
-`Money is not the purpose of life.
+`Character is the invisible foundation upon which every meaningful life is built.
 
-It is a powerful tool to create the life you desire.
+Integrity, honesty and responsibility determine the quality of every relationship and every achievement.
 
-Are you managing it wisely?`,
+This section invites you to reflect honestly on the strength of your character.`,
 
+    questions : [
 
+        {
 
-    questions:[
+            id : 1,
 
-        "என் வருமானம், செலவுகள் மற்றும் பணப்புழக்கத்தை நான் தெளிவாக நிர்வகிக்கிறேன்.",
+            tamil :
 
-        "எதிர்கால பாதுகாப்பிற்காக நான் தொடர்ந்து சேமித்து முதலீடு செய்கிறேன்.",
+            "யாரும் பார்க்காத நேரங்களிலும் நான் சரியானதைச் செய்ய முயல்கிறேன்.",
 
-        "என் பணம் என் மதிப்புகள், இலக்குகள் மற்றும் வாழ்க்கை நோக்கத்தை ஆதரிக்கிறது."
+            english :
+
+            "I strive to do what is right even when no one is watching."
+
+        },
+
+        {
+
+            id : 2,
+
+            tamil :
+
+            "என் சொற்களுக்கும் செயல்களுக்கும் நான் முழுப் பொறுப்பேற்கிறேன்.",
+
+            english :
+
+            "I take responsibility for my words, actions and decisions."
+
+        },
+
+        {
+
+            id : 3,
+
+            tamil :
+
+            "மற்றவர்கள் என்னை நேர்மையான மற்றும் நம்பகமான மனிதராகக் கருதுகிறார்கள்.",
+
+            english :
+
+            "Others would describe me as an honest and trustworthy person."
+
+        }
 
     ],
 
+    reflectionTa :
 
+`நற்பண்பு என்பது நாம் சொல்லுவது அல்ல.
 
-    questionsEn:[
+நாம் தொடர்ந்து செய்வதே
+நமது நற்பண்பாகும்.`,
 
-        "I manage my income, expenses and cash flow responsibly.",
+    reflectionEn :
 
-        "I consistently save and invest for my future.",
+`Character is not built by words.
 
-        "My financial choices support my values, goals and life purpose."
+It is revealed through consistent choices made every day.`,
 
-    ],
+    wisdomTa :
 
+`நற்பண்பு உங்கள் மிகப்பெரிய செல்வம்.
 
+அதை பாதுகாத்தால்,
+வாழ்க்கை உங்களை உயர்த்தும்.`,
 
-    reflectionTa:
+    wisdomEn :
 
-`நிதி சுதந்திரம் என்பது அதிகம் சம்பாதிப்பதில் அல்ல;
+`Character earns trust.
 
-பொறுப்புடன் வாழ்வதில் உள்ளது.`,
+Trust opens doors.
 
+Strong character creates a life of lasting significance.`,
 
+    implementation : {
 
-    reflectionEn:
+        maximumScore : 30,
 
-"Financial freedom begins with wise stewardship, not just higher income.",
+        output : "Character Percentage",
 
+        storedValue : "Character %",
 
+        googleSheetColumn : "Character",
 
-    wisdomTa:
+        kalaChakraSpoke : 4,
 
-"பணத்தை நிர்வகியுங்கள்; அது உங்கள் வாழ்க்கையை நிர்வகிக்க விடாதீர்கள்.",
+        diagnosisInput : "Character %",
 
+        prescriptionInput : "Character %"
 
+    }
 
-    wisdomEn:
+}
 
-"Master your money before it masters you."
+/* ==========================================================================
+   SPOKE 05
+   FINANCIAL STEWARDSHIP™
+   ========================================================================== */
 
-},
-
-
-
-/*=========================================================================
-    SPOKE 06
-===========================================================================*/
+,
 
 {
 
-    id:6,
+    id : 5,
 
-    key:"mind",
+    key : "financial",
 
-    tamilTitle:"மனம் & உணர்வு நலம்™",
+    spoke : 5,
 
-    englishTitle:"MIND & EMOTIONAL WELL-BEING™",
+    tamilTitle : "நிதி வளம்™",
 
+    englishTitle : "Financial Stewardship™",
 
+    corePrinciple :
 
-    introductionTa:
+        "Money is not the purpose of life, but it is an essential tool for living a life of dignity, freedom and contribution.",
 
-`உலகை வெல்வதற்கு முன்,
+    introductionTa :
 
-உங்கள் மனதை வெல்ல வேண்டும்.
+`பணம் மகிழ்ச்சியை வாங்க முடியாது.
 
-உங்கள் உள்ளம் அமைதியாக இருக்கிறதா?`,
+ஆனால் நிதி ஒழுங்கு மன அமைதியையும்
+வாழ்க்கைத் தேர்வுகளுக்கான சுதந்திரத்தையும் வழங்குகிறது.
 
+இந்தப் பகுதி உங்கள் நிதி நிலையைப் பற்றி
+நேர்மையாக சிந்திக்க உதவுகிறது.`,
 
+    introductionEn :
 
-    introductionEn:
+`Financial well-being is not measured merely by income.
 
-`Before you conquer the world,
+It is reflected in how wisely you manage resources, plan for the future and create financial stability.
 
-learn to master your own mind.
+This section invites you to reflect honestly on your present financial health.`,
 
-How peaceful is your inner world?`,
+    questions : [
 
+        {
 
+            id : 1,
 
-    questions:[
+            tamil :
 
-        "என் மனம் பெரும்பாலும் அமைதியாகவும் தெளிவாகவும் இருக்கிறது.",
+            "என் தற்போதைய வருமானம் என் அடிப்படைத் தேவைகளை நிம்மதியாக பூர்த்தி செய்கிறது.",
 
-        "என் உணர்ச்சிகளை நான் விழிப்புணர்வுடன் சமநிலையுடன் கையாளுகிறேன்.",
+            english :
 
-        "நான் உள்ளார்ந்த மகிழ்ச்சியையும் மன அமைதியையும் அடிக்கடி அனுபவிக்கிறேன்."
+            "My current income comfortably supports my essential needs."
+
+        },
+
+        {
+
+            id : 2,
+
+            tamil :
+
+            "நான் திட்டமிட்டு சேமித்து, செலவுகளை பொறுப்புடன் நிர்வகிக்கிறேன்.",
+
+            english :
+
+            "I manage my money responsibly through planning, saving and disciplined spending."
+
+        },
+
+        {
+
+            id : 3,
+
+            tamil :
+
+            "எதிர்கால நிதி பாதுகாப்பிற்காக நான் தொடர்ந்து செயல்பட்டு வருகிறேன்.",
+
+            english :
+
+            "I am consistently building long-term financial security for myself and my family."
+
+        }
 
     ],
 
+    reflectionTa :
 
+`நிதி சுதந்திரம் என்பது
+அதிக பணம் வைத்திருப்பதல்ல.
 
-    questionsEn:[
+பணத்தை அறிவுடன் நிர்வகிப்பதே
+உண்மையான நிதி வளம்.`,
 
-        "My mind is generally calm, clear and focused.",
+    reflectionEn :
 
-        "I manage my emotions with awareness and balance.",
+`Financial freedom is not created by income alone.
 
-        "I regularly experience inner peace and genuine happiness."
+It is created by wise stewardship of resources.`,
 
-    ],
+    wisdomTa :
 
+`பணத்தை ஆளுங்கள்.
 
+பணம் உங்களை ஆள விடாதீர்கள்.`,
 
-    reflectionTa:
+    wisdomEn :
 
-"வெளி உலகின் தரம், உங்கள் உள்ள உலகின் பிரதிபலிப்பாகும்.",
+`Money is an excellent servant,
+but a poor master.
 
+Use it wisely to support a life of purpose and contribution.`,
 
+    implementation : {
 
-    reflectionEn:
+        maximumScore : 30,
 
-"Your outer life often reflects the condition of your inner life.",
+        output : "Financial Percentage",
 
+        storedValue : "Financial %",
 
+        googleSheetColumn : "Financial",
 
-    wisdomTa:
+        kalaChakraSpoke : 5,
 
-"அமைதியான மனமே சிறந்த முடிவுகளை உருவாக்குகிறது.",
+        diagnosisInput : "Financial %",
 
+        prescriptionInput : "Financial %"
 
+    }
 
-    wisdomEn:
+}
 
-"A peaceful mind creates a powerful life."
+/* ==========================================================================
+   SPOKE 06
+   Continues in Batch 4
+   ========================================================================== */
 
-},
+/* ==========================================================================
+   SPOKE 06
+   MIND & EMOTIONAL WELL-BEING™
+   ========================================================================== */
 
-    /*=========================================================================
-    SPOKE 07
-===========================================================================*/
+,
 
 {
 
-    id:7,
+    id : 6,
 
-    key:"growth",
+    key : "mind",
 
-    tamilTitle:"வளர்ச்சி™",
+    spoke : 6,
 
-    englishTitle:"GROWTH & LEARNING™",
+    tamilTitle : "மனம் & உணர்வு நலம்™",
 
+    englishTitle : "Mind & Emotional Well-Being™",
 
+    corePrinciple :
 
-    introductionTa:
+        "The quality of your life is determined not only by what happens to you, but by how you respond to it.",
 
-`வாழ்க்கை நின்றுவிடுவதில்லை.
+    introductionTa :
 
-நாமே வளர்வதை நிறுத்தும்போதுதான்
+`வெளிப்புற வெற்றி மட்டுமே மகிழ்ச்சியைத் தராது.
 
-நமது முன்னேற்றம் நின்றுவிடுகிறது.`,
+உள்ளார்ந்த அமைதியும் உணர்ச்சி சமநிலையும் தான்
+நிலையான நல்வாழ்வின் அடித்தளம்.
 
+இந்தப் பகுதி உங்கள் மன அமைதியையும் உணர்ச்சி நலனையும்
+நேர்மையாக மதிப்பிட உதவுகிறது.`,
 
+    introductionEn :
 
-    introductionEn:
+`True well-being begins within.
 
-`Life never stops moving.
+A calm mind and balanced emotions help us face life's challenges with wisdom, courage and hope.
 
-Growth ends only when we stop learning.`,
+This section invites you to reflect honestly on your mental and emotional well-being.`,
 
+    questions : [
 
+        {
 
-    questions:[
+            id : 1,
 
-        "புதிய அறிவையும் அனுபவங்களையும் கற்றுக்கொள்ள நான் எப்போதும் தயாராக இருக்கிறேன்.",
+            tamil :
 
-        "சவால்களை நான் வளர்ச்சிக்கான வாய்ப்பாக பார்க்கிறேன்.",
+            "பெரும்பாலான நாட்களில் நான் மன அமைதியுடனும் நம்பிக்கையுடனும் வாழ்கிறேன்.",
 
-        "ஒவ்வொரு ஆண்டும் நான் என்னை மேலும் மேம்படுத்திக் கொண்டிருக்கிறேன்."
+            english :
+
+            "Most days I experience inner peace, optimism and emotional stability."
+
+        },
+
+        {
+
+            id : 2,
+
+            tamil :
+
+            "சவால்களை சந்திக்கும் போது நான் அமைதியாக சிந்தித்து சரியான முடிவுகளை எடுக்கிறேன்.",
+
+            english :
+
+            "When facing challenges, I remain calm and respond thoughtfully rather than reacting impulsively."
+
+        },
+
+        {
+
+            id : 3,
+
+            tamil :
+
+            "என் மனநலனையும் உணர்ச்சி சமநிலையையும் பாதுகாக்க நான் தொடர்ந்து முயற்சி செய்கிறேன்.",
+
+            english :
+
+            "I intentionally practise habits that strengthen my mental and emotional well-being."
+
+        }
 
     ],
 
+    reflectionTa :
 
+`அமைதியான மனம்
+வாழ்க்கையின் மிகப் பெரிய பலமாகும்.`,
 
-    questionsEn:[
+    reflectionEn :
 
-        "I actively seek new knowledge and experiences.",
+`Peace within creates strength beyond.
 
-        "I see challenges as opportunities to grow.",
+A healthy mind transforms the way we experience every area of life.`,
 
-        "I continue becoming a better version of myself every year."
+    wisdomTa :
 
-    ],
+`உள்ளத்தில் அமைதி இருந்தால்,
 
+வாழ்க்கையில் தெளிவு பிறக்கும்.`,
 
+    wisdomEn :
 
-    reflectionTa:
+`A peaceful mind sees possibilities where an anxious mind sees only problems.`,
 
-`வளர்ச்சி என்பது ஒரு இலக்கு அல்ல;
+    implementation : {
 
-அது வாழ்நாள் முழுவதும் தொடரும் பயணம்.`,
+        maximumScore : 30,
 
+        output : "Mind Percentage",
 
+        storedValue : "Mind %",
 
-    reflectionEn:
+        googleSheetColumn : "Mind",
 
-"Growth is not a destination; it is a lifelong journey.",
+        kalaChakraSpoke : 6,
 
+        diagnosisInput : "Mind %",
 
+        prescriptionInput : "Mind %"
 
-    wisdomTa:
+    }
 
-"தொடர்ந்து கற்றுக்கொள்பவரே, தொடர்ந்து வளர்கிறார்.",
+}
 
+/* ==========================================================================
+   SPOKE 07
+   GROWTH & LEARNING™
+   ========================================================================== */
 
-
-    wisdomEn:
-
-"Those who keep learning never stop growing."
-
-},
-
-
-
-/*=========================================================================
-    SPOKE 08
-===========================================================================*/
+,
 
 {
 
-    id:8,
+    id : 7,
 
-    key:"discipline",
+    key : "learning",
 
-    tamilTitle:"சுய ஒழுக்கம்™",
+    spoke : 7,
 
-    englishTitle:"SELF-DISCIPLINE™",
+    tamilTitle : "வளர்ச்சி™",
 
+    englishTitle : "Growth & Learning™",
 
+    corePrinciple :
 
-    introductionTa:
+        "Life flourishes when learning never stops.",
 
-`உங்கள் எதிர்காலத்தை மாற்றுவது பெரிய முடிவுகள் அல்ல;
+    introductionTa :
 
-தினமும் நீங்கள் மீண்டும் மீண்டும் செய்யும் சிறிய செயல்களே.`,
+`கற்றல் என்பது பள்ளியுடன் முடிவதில்லை.
 
+வாழ்நாள் முழுவதும் வளர்ந்து கொண்டிருப்பவர்களே
+நிறைவான வாழ்க்கையை உருவாக்குகிறார்கள்.
 
+இந்தப் பகுதி உங்கள் வளர்ச்சி மனப்பான்மையை
+பற்றி சிந்திக்க உதவுகிறது.`,
 
-    introductionEn:
+    introductionEn :
 
-`Your future is shaped less by big decisions
+`Learning is a lifelong journey.
 
-and more by the small actions you repeat every day.`,
+Every meaningful improvement in life begins with a willingness to grow.
 
+This section invites you to reflect on your commitment to continuous learning and personal development.`,
 
+    questions : [
 
-    questions:[
+        {
 
-        "என் வாழ்க்கையை முன்னேற்றும் நல்ல தினசரி பழக்கங்களை நான் தொடர்ந்து கடைப்பிடிக்கிறேன்.",
+            id : 1,
 
-        "முக்கியமான செயல்களை தாமதப்படுத்தாமல் உடனே தொடங்குகிறேன்.",
+            tamil :
 
-        "என் தினசரி செயல்கள் என் நீண்டகால இலக்குகளை அடைய உதவுகின்றன."
+            "புதிய விஷயங்களை கற்றுக்கொள்வதில் எனக்கு உண்மையான ஆர்வம் உள்ளது.",
+
+            english :
+
+            "I actively seek opportunities to learn new knowledge and skills."
+
+        },
+
+        {
+
+            id : 2,
+
+            tamil :
+
+            "என் தவறுகளிலிருந்து நான் தொடர்ந்து கற்றுக்கொண்டு முன்னேறுகிறேன்.",
+
+            english :
+
+            "I learn from my mistakes and use them as opportunities to improve."
+
+        },
+
+        {
+
+            id : 3,
+
+            tamil :
+
+            "ஒவ்வொரு ஆண்டும் நான் ஒரு சிறந்த மனிதராக மாறிக் கொண்டிருக்கிறேன்.",
+
+            english :
+
+            "Each year I am becoming a wiser, more capable and better version of myself."
+
+        }
 
     ],
 
+    reflectionTa :
 
+`வளர்ச்சியை நிறுத்தும் தருணத்தில்
+வாழ்க்கையும் நின்றுவிடுகிறது.`,
 
-    questionsEn:[
+    reflectionEn :
 
-        "I consistently practice daily habits that improve my life.",
+`Growth is a lifelong choice.
 
-        "I take action without unnecessary procrastination.",
+The moment we stop learning,
+we stop expanding our potential.`,
 
-        "My daily actions consistently move me toward my long-term goals."
+    wisdomTa :
 
-    ],
+`தொடர்ந்து கற்றுக்கொள்வோர்
+தொடர்ந்து உயர்கிறார்கள்.`,
 
+    wisdomEn :
 
+`Every day is an opportunity to become a better version of yourself.
 
-    reflectionTa:
+Small improvements create extraordinary lives.`,
 
-`ஒழுக்கம் என்பது கட்டுப்பாடு அல்ல;
+    implementation : {
 
-நீங்கள் விரும்பும் வாழ்க்கைக்கான அர்ப்பணிப்பு.`,
+        maximumScore : 30,
 
+        output : "Learning Percentage",
 
+        storedValue : "Learning %",
 
-    reflectionEn:
+        googleSheetColumn : "Learning",
 
-"Discipline is not restriction; it is commitment to the life you want.",
+        kalaChakraSpoke : 7,
 
+        diagnosisInput : "Learning %",
 
+        prescriptionInput : "Learning %"
 
-    wisdomTa:
+    }
 
-"சிறந்த பழக்கங்கள், சிறந்த எதிர்காலத்தை உருவாக்குகின்றன.",
+}
 
+/* ==========================================================================
+   SPOKE 08
+   Continues in Batch 5
+   ========================================================================== */
 
+/* ==========================================================================
+   SPOKE 08
+   SELF-DISCIPLINE™
+   ========================================================================== */
 
-    wisdomEn:
-
-"Great habits create extraordinary lives."
-
-},
-
-
-
-/*=========================================================================
-    SPOKE 09
-===========================================================================*/
+,
 
 {
 
-    id:9,
+    id : 8,
 
-    key:"gratitude",
+    key : "discipline",
 
-    tamilTitle:"நன்றியுணர்வு™",
+    spoke : 8,
 
-    englishTitle:"GRATITUDE & AWARENESS™",
+    tamilTitle : "சுய ஒழுக்கம்™",
 
+    englishTitle : "Self-Discipline™",
 
+    corePrinciple :
 
-    introductionTa:
+        "Dreams become reality only through disciplined action.",
 
-`மகிழ்ச்சியானவர்கள் நன்றியுள்ளவர்களாக இருப்பதில்லை.
+    introductionTa :
 
-நன்றியுள்ளவர்களே உண்மையாக மகிழ்ச்சியாக வாழ்கிறார்கள்.
+`வெற்றி என்பது ஒரே நாளில் நிகழ்வதில்லை.
 
-இன்று உங்கள் கவனம் எதில் உள்ளது?`,
+சிறிய நல்ல பழக்கங்களை தொடர்ந்து கடைப்பிடிக்கும் வாழ்க்கை
+மிகப்பெரிய மாற்றத்தை உருவாக்குகிறது.
 
+இந்தப் பகுதி உங்கள் சுய ஒழுக்கத்தையும்
+அன்றாட பழக்கங்களையும் பற்றி சிந்திக்க உதவுகிறது.`,
 
+    introductionEn :
 
-    introductionEn:
+`Success is rarely the result of one extraordinary effort.
 
-`Happy people are not grateful because life is perfect.
+It is built through small, disciplined actions repeated consistently over time.
 
-They are grateful because they choose to see life's gifts.
+This section invites you to reflect honestly on your daily habits and self-discipline.`,
 
-What are you choosing to focus on today?`,
+    questions : [
 
+        {
 
+            id : 1,
 
-    questions:[
+            tamil :
 
-        "என் வாழ்க்கையில் உள்ள நல்லவற்றை நான் தினமும் கவனித்து மதிக்கிறேன்.",
+            "நான் திட்டமிட்ட செயல்களை தொடர்ந்து நிறைவேற்றுகிறேன்.",
 
-        "மக்களுக்கும், அனுபவங்களுக்கும், கிடைத்த வாய்ப்புகளுக்கும் நான் நன்றியுடன் இருக்கிறேன்.",
+            english :
 
-        "சவால்களிலும் கூட வாழ்க்கை எனக்கு கற்றுத் தரும் பாடங்களை நான் காண முயல்கிறேன்."
+            "I consistently follow through on the commitments I make to myself."
+
+        },
+
+        {
+
+            id : 2,
+
+            tamil :
+
+            "என் நீண்டகால இலக்குகளுக்கு உதவும் நல்ல தினசரி பழக்கங்களை நான் கடைப்பிடிக்கிறேன்.",
+
+            english :
+
+            "I practise daily habits that move me steadily toward my long-term goals."
+
+        },
+
+        {
+
+            id : 3,
+
+            tamil :
+
+            "சோம்பேறித்தனத்தையும் தள்ளிப்போடும் பழக்கத்தையும் நான் வெற்றிகரமாக கட்டுப்படுத்துகிறேன்.",
+
+            english :
+
+            "I successfully overcome procrastination and remain disciplined even when motivation is low."
+
+        }
 
     ],
 
+    reflectionTa :
 
+`ஒழுக்கம் என்பது
+சுதந்திரத்தை பறிப்பதல்ல.
 
-    questionsEn:[
+அது சிறந்த எதிர்காலத்தை உருவாக்கும் சக்தியாகும்.`,
 
-        "I consciously notice and appreciate the good in my life every day.",
+    reflectionEn :
 
-        "I regularly express gratitude for people, experiences and opportunities.",
+`Discipline is not restriction.
 
-        "Even during difficulties, I look for lessons and opportunities to grow."
+It is the freedom to become the person you aspire to be.`,
 
-    ],
+    wisdomTa :
 
+`சிறிய ஒழுக்கங்கள்,
 
+பெரிய சாதனைகளை உருவாக்குகின்றன.`,
 
-    reflectionTa:
+    wisdomEn :
 
-`நன்றியுணர்வு வாழ்க்கையை மாற்றுவதில்லை;
+`Consistency is more powerful than intensity.
 
-வாழ்க்கையை நாம் காணும் பார்வையை மாற்றுகிறது.`,
+Daily discipline creates extraordinary lives.`,
 
+    implementation : {
 
+        maximumScore : 30,
 
-    reflectionEn:
+        output : "Discipline Percentage",
 
-`Gratitude doesn't change life.
+        storedValue : "Discipline %",
 
-It changes the way we experience life.`,
+        googleSheetColumn : "Discipline",
 
+        kalaChakraSpoke : 8,
 
+        diagnosisInput : "Discipline %",
 
-    wisdomTa:
+        prescriptionInput : "Discipline %"
 
-"நன்றியுள்ள மனம், நிறைவான வாழ்க்கையின் தொடக்கம்.",
+    }
 
+}
 
+/* ==========================================================================
+   SPOKE 09
+   GRATITUDE & AWARENESS™
+   ========================================================================== */
 
-    wisdomEn:
-
-"A grateful heart is the beginning of a fulfilled life."
-
-},
-
-    /*=========================================================================
-    SPOKE 10
-===========================================================================*/
+,
 
 {
 
-    id:10,
+    id : 9,
 
-    key:"contribution",
+    key : "gratitude",
 
-    tamilTitle:"பங்களிப்பு™",
+    spoke : 9,
 
-    englishTitle:"CONTRIBUTION™",
+    tamilTitle : "நன்றியுணர்வு™",
 
+    englishTitle : "Gratitude & Awareness™",
 
+    corePrinciple :
 
-    introductionTa:
+        "Gratitude transforms the way we experience life.",
 
-`வெற்றி என்பது நீங்கள் எவ்வளவு பெற்றீர்கள் என்பதல்ல.
+    introductionTa :
 
-நீங்கள் வாழ்ந்ததால் எத்தனை பேரின் வாழ்க்கை மேம்பட்டது என்பதே உண்மையான அளவுகோல்.`,
+`நன்றியுணர்வு என்பது வாழ்க்கையை மாற்றும் மனப்பான்மை.
 
+ஏற்கனவே நமக்குள்ள அருள்களை உணரும்போது,
+வாழ்க்கையின் வளமும் மகிழ்ச்சியும் அதிகரிக்கின்றன.
 
+இந்தப் பகுதி உங்கள் நன்றியுணர்வையும்
+விழிப்புணர்வையும் பற்றி சிந்திக்க உதவுகிறது.`,
 
-    introductionEn:
+    introductionEn :
 
-`Success is not measured by what you accumulate.
+`Gratitude is one of the most powerful habits of a fulfilled life.
 
-It is measured by the lives you positively influence.`,
+When we appreciate what we already have, our outlook becomes more hopeful, more peaceful and more joyful.
 
+This section invites you to reflect on your practice of gratitude and awareness.`,
 
+    questions : [
 
-    questions:[
+        {
 
-        "என் வாழ்க்கை பிறருக்கு அர்த்தமுள்ள மதிப்பையும் நன்மையையும் உருவாக்குகிறது.",
+            id : 1,
 
-        "என் நேரம், திறமைகள் அல்லது வளங்களை மகிழ்ச்சியுடன் பகிர்கிறேன்.",
+            tamil :
 
-        "நான் வாழ்ந்ததால் உலகம் சிறிதளவாவது சிறப்பாகிறது என்று நம்புகிறேன்."
+            "என் வாழ்க்கையில் கிடைத்த நல்லவற்றிற்கு நான் தொடர்ந்து நன்றியுணர்வுடன் இருக்கிறேன்.",
+
+            english :
+
+            "I regularly express gratitude for the blessings already present in my life."
+
+        },
+
+        {
+
+            id : 2,
+
+            tamil :
+
+            "நிகழ்காலத்தில் விழிப்புணர்வுடன் வாழ நான் முயற்சி செய்கிறேன்.",
+
+            english :
+
+            "I consciously live in the present with awareness and appreciation."
+
+        },
+
+        {
+
+            id : 3,
+
+            tamil :
+
+            "சிறிய மகிழ்ச்சிகளையும் வாழ்க்கையின் அர்த்தமுள்ள தருணங்களையும் நான் கவனித்து ரசிக்கிறேன்.",
+
+            english :
+
+            "I notice and appreciate the small moments that make life meaningful."
+
+        }
 
     ],
 
+    reflectionTa :
 
+`நன்றியுணர்வு இல்லாத மனம்
 
-    questionsEn:[
+எப்போதும் குறைகளைத் தேடும்.`,
 
-        "My life creates meaningful value for other people.",
+    reflectionEn :
 
-        "I willingly share my time, talents or resources to help others.",
+`Gratitude does not change our circumstances.
 
-        "I believe the world is becoming better because I live."
+It changes the way we experience them.`,
 
-    ],
+    wisdomTa :
 
+`நன்றியுணர்வுடன் வாழும் மனம்
 
+எப்போதும் வளமாக இருக்கும்.`,
 
-    reflectionTa:
+    wisdomEn :
 
-"பகிர்ந்து வாழும் வாழ்க்கைதான் உண்மையில் பெருகும் வாழ்க்கை.",
+`Gratitude turns what we have into enough,
 
+and enough into abundance.`,
 
+    implementation : {
 
-    reflectionEn:
+        maximumScore : 30,
 
-"A life that serves others is a life that truly grows.",
+        output : "Gratitude Percentage",
 
+        storedValue : "Gratitude %",
 
+        googleSheetColumn : "Gratitude",
 
-    wisdomTa:
+        kalaChakraSpoke : 9,
 
-"நீங்கள் கொடுப்பதே உங்கள் உண்மையான செல்வம்.",
+        diagnosisInput : "Gratitude %",
 
+        prescriptionInput : "Gratitude %"
 
+    }
 
-    wisdomEn:
+}
 
-"Your greatest wealth is what you give."
+/* ==========================================================================
+   SPOKE 10
+   Continues in Batch 6
+   ========================================================================== */
 
-},
+/* ==========================================================================
+   SPOKE 10
+   CONTRIBUTION™
+   ========================================================================== */
 
-
-
-/*=========================================================================
-    SPOKE 11
-===========================================================================*/
+,
 
 {
 
-    id:11,
+    id : 10,
 
-    key:"innerMeaning",
+    key : "contribution",
 
-    tamilTitle:"உள்ளார்ந்த அர்த்தம்™",
+    spoke : 10,
 
-    englishTitle:"INNER MEANING™",
+    tamilTitle : "பங்களிப்பு™",
 
+    englishTitle : "Contribution™",
 
+    corePrinciple :
 
-    introductionTa:
+        "A truly successful life is measured not only by what we accumulate, but by what we contribute.",
 
-`வாழ்க்கையின் மிகப் பெரிய கேள்வி,
+    introductionTa :
 
-'நான் எவ்வளவு வெற்றி பெற்றேன்?' என்பது அல்ல.
+`உண்மையான நிறைவு,
 
-'நான் ஏன் வாழ்கிறேன்?' என்பதே.`,
+நாம் பெற்றதில் அல்ல;
 
+நாம் பகிர்ந்ததில் உள்ளது.
 
+இந்தப் பகுதி உங்கள் குடும்பம்,
+சமூகம்,
+மற்றும் உலகத்திற்கு நீங்கள் வழங்கும் பங்களிப்பைப் பற்றி
+நேர்மையாக சிந்திக்க உதவுகிறது.`,
 
-    introductionEn:
+    introductionEn :
 
-`The greatest question in life is not,
+`A meaningful life extends beyond personal success.
 
-'How successful am I?'
+It leaves a positive impact on people,
+communities
+and future generations.
 
-It is,
+This section invites you to reflect honestly on the contribution you are making through your life.`,
 
-'Why does my life matter?'`,
+    questions : [
 
+        {
 
+            id : 1,
 
-    questions:[
+            tamil :
 
-        "என் வாழ்க்கை ஆழமான அர்த்தத்துடனும் நோக்கத்துடனும் இணைந்துள்ளது என்று உணர்கிறேன்.",
+            "என் குடும்பம் அல்லது சமூகத்தின் வாழ்க்கையை மேம்படுத்த நான் தொடர்ந்து பங்களித்து வருகிறேன்.",
 
-        "என் உயர்ந்த மதிப்புகளும் நம்பிக்கைகளும் என் முடிவுகளை வழிநடத்துகின்றன.",
+            english :
 
-        "சூழ்நிலைகள் மாறினாலும் நான் உள்ளார்ந்த அமைதியை அனுபவிக்கிறேன்."
+            "I actively contribute to improving the lives of my family or community."
+
+        },
+
+        {
+
+            id : 2,
+
+            tamil :
+
+            "என் திறமைகளையும் அனுபவங்களையும் பிறருடன் பகிர்ந்து அவர்களின் வளர்ச்சிக்கு உதவுகிறேன்.",
+
+            english :
+
+            "I willingly share my knowledge, skills and experience to help others grow."
+
+        },
+
+        {
+
+            id : 3,
+
+            tamil :
+
+            "என் வாழ்க்கை மற்றவர்களுக்கு ஒரு நல்ல மாற்றத்தை ஏற்படுத்துகிறது என்று நான் உணர்கிறேன்.",
+
+            english :
+
+            "I believe my life is making a meaningful positive difference in the lives of others."
+
+        }
 
     ],
 
+    reflectionTa :
 
+`வாழ்க்கையின் மதிப்பு
 
-    questionsEn:[
+நாம் எவ்வளவு பெற்றோம் என்பதில் இல்லை.
 
-        "I experience a deep sense of meaning and purpose in my life.",
+நாம் எவ்வளவு பகிர்ந்தோம் என்பதில் உள்ளது.`,
 
-        "My highest values and beliefs guide my daily decisions.",
+    reflectionEn :
 
-        "I experience inner peace even when circumstances change."
+`Contribution gives deeper meaning to success.
 
-    ],
+A life that uplifts others becomes a life well lived.`,
 
+    wisdomTa :
 
+`பங்களிப்பே
 
-    reflectionTa:
+நிலைத்த நினைவுகளை உருவாக்குகிறது.`,
 
-`அர்த்தமுள்ள வாழ்க்கை வெளியில் தேடப்படுவதில்லை;
+    wisdomEn :
 
-அது உள்ளிருந்து வாழப்படுகிறது.`,
+`The greatest legacy is not what you own,
 
+but the lives you help transform.`,
 
+    implementation : {
 
-    reflectionEn:
+        maximumScore : 30,
 
-`A meaningful life is not found outside us.
+        output : "Contribution Percentage",
 
-It is lived from within.`,
+        storedValue : "Contribution %",
 
+        googleSheetColumn : "Contribution",
 
+        kalaChakraSpoke : 10,
 
-    wisdomTa:
+        diagnosisInput : "Contribution %",
 
-"உள்ளார்ந்த அமைதியே நிலையான வெற்றியின் அடித்தளம்.",
+        prescriptionInput : "Contribution %"
 
+    }
 
+}
 
-    wisdomEn:
+/* ==========================================================================
+   SPOKE 11
+   INNER MEANING™
+   ========================================================================== */
 
-"Inner peace is the foundation of lasting success."
-
-},
-
-
-
-/*=========================================================================
-    SPOKE 12
-===========================================================================*/
+,
 
 {
 
-    id:12,
+    id : 11,
 
-    key:"legacy",
+    key : "innerMeaning",
 
-    tamilTitle:"மரபு™",
+    spoke : 11,
 
-    englishTitle:"LEGACY™",
+    tamilTitle : "உள்ளார்ந்த அர்த்தம்™",
 
+    englishTitle : "Inner Meaning™",
 
+    corePrinciple :
 
-    introductionTa:
+        "A fulfilled life is rooted in inner alignment.",
 
-`ஒருநாள் உங்கள் வாழ்க்கைக் கதை சொல்லப்படும்.
+    introductionTa :
 
-அந்தக் கதை,
+`வெளிப்புற சாதனைகள் வாழ்க்கைக்கு மதிப்பைக் கொடுக்கலாம்.
 
-உங்களை மட்டுமல்ல,
+ஆனால் உள்ளார்ந்த அர்த்தம்தான் வாழ்க்கைக்கு ஆழத்தை அளிக்கிறது.
 
-பிறரையும் ஊக்கப்படுத்துமா?`,
+இந்தப் பகுதி உங்கள் வாழ்க்கை உங்கள் மதிப்புகளுடனும்
+உள்ளார்ந்த நம்பிக்கைகளுடனும் ஒத்திசைவாக உள்ளதா என்பதை
+சிந்திக்க உதவுகிறது.`,
 
+    introductionEn :
 
+`A meaningful life begins within.
 
-    introductionEn:
+When our daily choices reflect our deepest values,
+we experience greater peace,
+purpose
+and fulfilment.
 
-`One day your life will become a story.
+This section invites you to reflect on your sense of inner meaning.`,
 
-Will it inspire only you...
+    questions : [
 
-or generations beyond you?`,
+        {
 
+            id : 1,
 
+            tamil :
 
-    questions:[
+            "என் வாழ்க்கை என் முக்கியமான மதிப்புகளுடன் ஒத்திசைவாக உள்ளது.",
 
-        "நான் அர்த்தமுள்ள மற்றும் நினைவுகூரப்படும் வாழ்க்கையை உருவாக்கிக் கொண்டிருக்கிறேன்.",
+            english :
 
-        "என் குடும்பமும் சமூகமும் நான் வாழ்ந்ததால் மேலும் வளமாகின்றன.",
+            "My daily life is aligned with my deepest personal values."
 
-        "இன்றே என் வாழ்க்கை முடிந்தாலும், நான் வாழ்ந்த விதம் குறித்து மனநிறைவுடன் இருப்பேன்."
+        },
+
+        {
+
+            id : 2,
+
+            tamil :
+
+            "நான் வாழும் வாழ்க்கை எனக்கு உள்ளார்ந்த அமைதியையும் நிறைவையும் அளிக்கிறது.",
+
+            english :
+
+            "The way I live gives me a deep sense of inner peace and fulfilment."
+
+        },
+
+        {
+
+            id : 3,
+
+            tamil :
+
+            "சவால்கள் வந்தாலும் என் வாழ்க்கைக்கு அர்த்தம் உள்ளது என்று நான் நம்புகிறேன்.",
+
+            english :
+
+            "Even during difficult times, I continue to experience meaning and hope in my life."
+
+        }
 
     ],
 
+    reflectionTa :
+
+`வாழ்க்கையின் ஆழம்
+
+வெளிப்புற சாதனைகளால் அளவிடப்படுவதில்லை.`,
+
+    reflectionEn :
+
+`Meaning is discovered within,
+
+not accumulated from outside.`,
+
+    wisdomTa :
+
+`உள்ளார்ந்த அர்த்தம் கொண்ட வாழ்க்கை
+
+எந்த சூழலிலும் நிலைத்து நிற்கும்.`,
+
+    wisdomEn :
+
+`A meaningful life remains rich,
+
+even when circumstances change.`,
+
+    implementation : {
+
+        maximumScore : 30,
+
+        output : "Inner Meaning Percentage",
+
+        storedValue : "Inner Meaning %",
+
+        googleSheetColumn : "InnerMeaning",
+
+        kalaChakraSpoke : 11,
+
+        diagnosisInput : "Inner Meaning %",
+
+        prescriptionInput : "Inner Meaning %"
+
+    }
+
+}
+
+/* ==========================================================================
+   SPOKE 12
+   Continues in Batch 7
+   ========================================================================== */
 
 
-    questionsEn:[
+/* ==========================================================================
+   SPOKE 12
+   LEGACY™
+   ========================================================================== */
 
-        "I am building a life of lasting significance.",
+,
 
-        "My family and community are stronger because I live.",
+{
 
-        "If my life ended today, I would feel that I have lived well."
+    id : 12,
+
+    key : "legacy",
+
+    spoke : 12,
+
+    tamilTitle : "மரபு™",
+
+    englishTitle : "Legacy™",
+
+    corePrinciple :
+
+        "Every life leaves a legacy. The question is not whether we will leave one, but what kind of legacy we will leave.",
+
+    introductionTa :
+
+`நாம் வாழ்ந்த பிறகும்
+
+நம் வாழ்க்கையின் தாக்கம் தொடரலாம்.
+
+நாம் உலகிற்கு என்ன விட்டுச் செல்கிறோம் என்பதே
+நமது மரபாகும்.
+
+இந்தப் பகுதி நீங்கள் உருவாக்கிக் கொண்டிருக்கும்
+மரபைப் பற்றி சிந்திக்க உதவுகிறது.`,
+
+    introductionEn :
+
+`Legacy is the lasting influence of a life well lived.
+
+It is reflected in the people we inspire,
+the values we uphold,
+and the positive change we create.
+
+This section invites you to reflect on the legacy you are building.`,
+
+    questions : [
+
+        {
+
+            id : 1,
+
+            tamil :
+
+            "என் வாழ்க்கை அடுத்த தலைமுறைக்கு ஒரு நல்ல தாக்கத்தை ஏற்படுத்தும் என்று நான் நம்புகிறேன்.",
+
+            english :
+
+            "I believe my life will leave a positive impact on future generations."
+
+        },
+
+        {
+
+            id : 2,
+
+            tamil :
+
+            "நான் வாழும் விதம் மற்றவர்களுக்கு ஒரு நல்ல முன்மாதிரியாக உள்ளது.",
+
+            english :
+
+            "The way I live serves as a positive example for others."
+
+        },
+
+        {
+
+            id : 3,
+
+            tamil :
+
+            "என் வாழ்க்கை முடிவில் நான் அர்த்தமுள்ள வாழ்க்கையை வாழ்ந்தேன் என்று சொல்ல முடியும்.",
+
+            english :
+
+            "If my life ended today, I would feel that I have lived a meaningful and purposeful life."
+
+        }
 
     ],
 
+    reflectionTa :
+
+`மரபு என்பது
+
+நாம் விட்டுச் செல்லும் பொருளல்ல.
+
+நாம் விட்டுச் செல்லும் தாக்கம்.`,
+
+    reflectionEn :
+
+`Legacy is measured not by possessions,
+
+but by the positive influence we leave behind.`,
+
+    wisdomTa :
+
+`சிறந்த மரபு என்பது
+
+மற்றவர்களின் வாழ்க்கையை
+வளப்படுத்திய நினைவாகும்.`,
+
+    wisdomEn :
+
+`The greatest legacy is a life that continues to inspire long after it has ended.`,
+
+    implementation : {
+
+        maximumScore : 30,
+
+        output : "Legacy Percentage",
+
+        storedValue : "Legacy %",
+
+        googleSheetColumn : "Legacy",
+
+        kalaChakraSpoke : 12,
+
+        diagnosisInput : "Legacy %",
+
+        prescriptionInput : "Legacy %"
+
+    }
+
+}
+
+    ]
+
+};
+
+/* ==========================================================================
+   MASTER CONSTANTS
+   ========================================================================== */
+
+const AssessmentConstants = Object.freeze({
+
+    TOTAL_PILLARS : 12,
+
+    QUESTIONS_PER_PILLAR : 3,
+
+    TOTAL_QUESTIONS : 36,
+
+    MAX_RATING : 10,
+
+    MIN_RATING : 1,
+
+    MAXIMUM_SCORE_PER_PILLAR : 30,
+
+    MAXIMUM_TOTAL_SCORE : 360
+
+});
 
 
-    reflectionTa:
+/* ==========================================================================
+   RATING LEGEND
+   ========================================================================== */
 
-"வாழ்க்கையின் நீளம் அல்ல, அதன் தாக்கம்தான் நிலைத்திருக்கும்.",
+const RatingScale = Object.freeze([
+
+    { value : 1, label : "Strongly Disagree" },
+
+    { value : 2, label : "Very Low" },
+
+    { value : 3, label : "Low" },
+
+    { value : 4, label : "Below Average" },
+
+    { value : 5, label : "Average" },
+
+    { value : 6, label : "Fair" },
+
+    { value : 7, label : "Good" },
+
+    { value : 8, label : "Very Good" },
+
+    { value : 9, label : "Excellent" },
+
+    { value : 10, label : "Outstanding" }
+
+]);
 
 
+/* ==========================================================================
+   COLOUR LOGIC
+   ========================================================================== */
 
-    reflectionEn:
+const RatingColours = Object.freeze({
 
-"It is not the length of life, but the depth of its impact, that endures.",
+    LOW : {
+
+        minimum : 1,
+
+        maximum : 3,
+
+        cssClass : "active-low"
+
+    },
+
+    MEDIUM : {
+
+        minimum : 4,
+
+        maximum : 7,
+
+        cssClass : "active-medium"
+
+    },
+
+    HIGH : {
+
+        minimum : 8,
+
+        maximum : 10,
+
+        cssClass : "active-high"
+
+    }
+
+});
 
 
+/* ==========================================================================
+   Repository Helper Functions
+   Continues in Batch 8
+   ========================================================================== */
 
-    wisdomTa:
 
-"உங்கள் வாழ்க்கையே உங்கள் மிகப்பெரிய செய்தியாக இருக்கட்டும்.",
+/* ==========================================================================
+   REPOSITORY HELPERS
+   ========================================================================== */
 
+/**
+ * Returns the complete repository.
+ */
 
+function getAssessmentRepository() {
 
-    wisdomEn:
+    return AssessmentRepository;
 
-"Let your life become your greatest message."
+}
+
+/**
+ * Returns all twelve pillars.
+ */
+
+function getAllPillars() {
+
+    return AssessmentRepository.pillars;
+
+}
+
+/**
+ * Returns one pillar by spoke number.
+ */
+
+function getPillarBySpoke(spokeNumber) {
+
+    return AssessmentRepository.pillars.find(
+
+        pillar => pillar.spoke === spokeNumber
+
+    ) || null;
+
+}
+
+/**
+ * Returns one pillar by key.
+ */
+
+function getPillarByKey(key) {
+
+    return AssessmentRepository.pillars.find(
+
+        pillar => pillar.key === key
+
+    ) || null;
+
+}
+
+/**
+ * Returns total pillars.
+ */
+
+function getTotalPillars() {
+
+    return AssessmentRepository.totalPillars;
+
+}
+
+/**
+ * Returns total questions.
+ */
+
+function getTotalQuestions() {
+
+    return AssessmentConstants.TOTAL_QUESTIONS;
+
+}
+
+/**
+ * Returns maximum score per pillar.
+ */
+
+function getMaximumScorePerPillar() {
+
+    return AssessmentConstants.MAXIMUM_SCORE_PER_PILLAR;
+
+}
+
+/**
+ * Returns maximum assessment score.
+ */
+
+function getMaximumAssessmentScore() {
+
+    return AssessmentConstants.MAXIMUM_TOTAL_SCORE;
 
 }
 
 
+/* ==========================================================================
+   RATING HELPERS
+   ========================================================================== */
 
-];
+/**
+ * Returns rating label.
+ */
+
+function getRatingLabel(value) {
+
+    const rating = RatingScale.find(
+
+        item => item.value === value
+
+    );
+
+    return rating ? rating.label : "";
+
+}
+
+/**
+ * Returns colour class.
+ */
+
+function getRatingColour(value) {
+
+    if (
+
+        value >= RatingColours.LOW.minimum &&
+        value <= RatingColours.LOW.maximum
+
+    ) {
+
+        return RatingColours.LOW.cssClass;
+
+    }
+
+    if (
+
+        value >= RatingColours.MEDIUM.minimum &&
+        value <= RatingColours.MEDIUM.maximum
+
+    ) {
+
+        return RatingColours.MEDIUM.cssClass;
+
+    }
+
+    return RatingColours.HIGH.cssClass;
+
+}
 
 
+/* ==========================================================================
+   VALIDATION HELPERS
+   ========================================================================== */
 
-/*=============================================================================
+/**
+ * Validates rating.
+ */
 
-    END OF FILE
+function isValidRating(value) {
 
-=============================================================================*/
+    return (
+
+        Number.isInteger(value) &&
+
+        value >= AssessmentConstants.MIN_RATING &&
+
+        value <= AssessmentConstants.MAX_RATING
+
+    );
+
+}
+
+/**
+ * Validates spoke.
+ */
+
+function isValidSpoke(spoke) {
+
+    return (
+
+        Number.isInteger(spoke) &&
+
+        spoke >= 1 &&
+
+        spoke <= AssessmentConstants.TOTAL_PILLARS
+
+    );
+
+}
+
+/**
+ * Validates repository.
+ */
+
+function validateRepository() {
+
+    return (
+
+        AssessmentRepository.pillars.length ===
+        AssessmentConstants.TOTAL_PILLARS
+
+    );
+
+}
+
+
+/* ==========================================================================
+   EXPORTS
+   ========================================================================== */
+
+window.AssessmentRepository = AssessmentRepository;
+
+window.AssessmentConstants = AssessmentConstants;
+
+window.RatingScale = RatingScale;
+
+window.RatingColours = RatingColours;
+
+window.getAssessmentRepository = getAssessmentRepository;
+
+window.getAllPillars = getAllPillars;
+
+window.getPillarBySpoke = getPillarBySpoke;
+
+window.getPillarByKey = getPillarByKey;
+
+window.getTotalPillars = getTotalPillars;
+
+window.getTotalQuestions = getTotalQuestions;
+
+window.getMaximumScorePerPillar = getMaximumScorePerPillar;
+
+window.getMaximumAssessmentScore = getMaximumAssessmentScore;
+
+window.getRatingLabel = getRatingLabel;
+
+window.getRatingColour = getRatingColour;
+
+window.isValidRating = isValidRating;
+
+window.isValidSpoke = isValidSpoke;
+
+window.validateRepository = validateRepository;
+
+
+/* ==========================================================================
+   LOCK VERIFICATION
+   ========================================================================== */
+
+Object.freeze(AssessmentConstants);
+
+Object.freeze(RatingScale);
+
+Object.freeze(RatingColours);
+
+
+/* ==========================================================================
+   End of File
+
+   File   : assessmentData.js
+
+   Version: 1.0
+
+   Status : 🔒 LOCKED
+
+   Source of Truth:
+   CTM PATH™ Assessment Knowledge Base™ v1.0
+
+   This repository contains:
+
+   ✓ 12 Pillars
+   ✓ 36 Questions
+   ✓ 12 Introductions
+   ✓ 12 Reflections
+   ✓ 12 Wisdom Statements
+   ✓ Rating Scale
+   ✓ Colour Logic
+   ✓ Repository Helpers
+   ✓ Validation Helpers
+
+   No rendering logic.
+   No calculations.
+   No DOM manipulation.
+   No API calls.
+
+   ========================================================================== */
+
