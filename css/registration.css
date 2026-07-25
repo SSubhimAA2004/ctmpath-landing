@@ -5,8 +5,6 @@
    Version     : 4.0
    Status      : 🔒 LOCKED
    Purpose     : Premium Registration Experience
-                 Tamil-First
-                 Global Brand Design Language
    ========================================================================== */
 
 
@@ -236,11 +234,27 @@ body{
 }
 
 
+.progress-left{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+.progress-right{
+
+    text-align:right;
+
+}
+
+
 .step-ta{
 
     margin:0;
 
-    font-size:1.1rem;
+    font-size:1.08rem;
 
     font-weight:700;
 
@@ -257,16 +271,14 @@ body{
 
     letter-spacing:.05em;
 
-    color:
-
-        rgba(255,255,255,.68);
+    color:rgba(255,255,255,.68);
 
 }
 
 
-.module-name{
+.module-ta{
 
-    text-align:right;
+    margin:0;
 
     font-size:1.05rem;
 
@@ -277,19 +289,13 @@ body{
 }
 
 
-.module-name span{
-
-    display:block;
+.module-en{
 
     margin-top:8px;
 
     font-size:.90rem;
 
-    font-weight:400;
-
-    color:
-
-        rgba(255,255,255,.68);
+    color:rgba(255,255,255,.68);
 
 }
 
@@ -300,9 +306,9 @@ body{
 
     height:8px;
 
-    border-radius:999px;
-
     overflow:hidden;
+
+    border-radius:999px;
 
     background:
 
@@ -447,6 +453,19 @@ body{
 
     gap:14px;
 
+    transition:
+
+        transform .30s ease;
+
+}
+
+
+.form-group:focus-within{
+
+    transform:
+
+        translateY(-2px);
+
 }
 
 
@@ -473,7 +492,7 @@ body{
 
     font-weight:700;
 
-    line-height:1.5;
+    line-height:1.55;
 
     color:#FFFFFF;
 
@@ -531,15 +550,17 @@ body{
 
     font-family:inherit;
 
-    transition:
-
-        var(--transition);
+    outline:none;
 
     appearance:none;
 
     -webkit-appearance:none;
 
-    outline:none;
+    transition:
+
+        border-color .30s ease,
+        box-shadow .30s ease,
+        background .30s ease;
 
 }
 
@@ -548,7 +569,7 @@ body{
 
     color:
 
-        rgba(255,255,255,.40);
+        rgba(255,255,255,.42);
 
 }
 
@@ -559,7 +580,7 @@ body{
 
     border-color:
 
-        rgba(255,255,255,.22);
+        rgba(255,255,255,.24);
 
 }
 
@@ -568,18 +589,18 @@ body{
 
 .registration-form select:focus{
 
-    border-color:
-
-        #3B82F6;
-
     background:
 
         rgba(255,255,255,.07);
 
+    border-color:
+
+        #3B82F6;
+
     box-shadow:
 
         0 0 0 4px
-        rgba(59,130,246,.15);
+        rgba(59,130,246,.16);
 
 }
 
@@ -592,7 +613,7 @@ body{
 
     cursor:pointer;
 
-    padding-right:56px;
+    padding-right:58px;
 
     background-image:
 
@@ -635,7 +656,7 @@ body{
 
 
 /* ==========================================================================
-   FIELD VALIDATION
+   VALIDATION
    ========================================================================== */
 
 .registration-form input:invalid:focus,
@@ -662,41 +683,19 @@ body{
 
 }
 
-
 /* ==========================================================================
-   FIELD TRANSITIONS
-   ========================================================================== */
-
-.form-group{
-
-    transition:
-
-        transform .30s ease;
-
-}
-
-
-.form-group:focus-within{
-
-    transform:
-
-        translateY(-2px);
-
-}
-
-/* ==========================================================================
-   PRIVACY CARD
+   PRIVACY PROMISE
    ========================================================================== */
 
 .privacy-card{
-
-    margin-top:18px;
 
     display:flex;
 
     align-items:flex-start;
 
     gap:22px;
+
+    margin-top:10px;
 
     padding:
 
@@ -738,7 +737,7 @@ body{
     box-shadow:
 
         0 18px 42px
-        rgba(0,0,0,.25);
+        rgba(0,0,0,.24);
 
 }
 
@@ -759,7 +758,7 @@ body{
 
     border-radius:50%;
 
-    font-size:1.75rem;
+    font-size:1.8rem;
 
     background:
 
@@ -769,7 +768,7 @@ body{
 
             rgba(37,99,235,.25),
 
-            rgba(37,99,235,.12)
+            rgba(37,99,235,.10)
 
         );
 
@@ -805,9 +804,11 @@ body{
 
 .privacy-content p{
 
-    margin-top:12px;
+    margin:
 
-    margin-bottom:0;
+        12px
+        0
+        0;
 
     font-size:.96rem;
 
@@ -821,7 +822,7 @@ body{
 
 
 /* ==========================================================================
-   FORM ACTIONS
+   ACTION BUTTONS
    ========================================================================== */
 
 .form-actions{
@@ -832,9 +833,9 @@ body{
 
     align-items:center;
 
-    gap:20px;
+    gap:22px;
 
-    margin-top:18px;
+    margin-top:20px;
 
 }
 
@@ -845,12 +846,12 @@ body{
 
 .secondary-button{
 
-    min-width:180px;
+    min-width:190px;
 
     padding:
 
         18px
-        26px;
+        28px;
 
     border-radius:16px;
 
@@ -865,9 +866,9 @@ body{
 
     color:#FFFFFF;
 
-    cursor:pointer;
-
     font-family:inherit;
+
+    cursor:pointer;
 
     transition:
 
@@ -884,7 +885,7 @@ body{
 
     border-color:
 
-        rgba(255,255,255,.28);
+        rgba(255,255,255,.30);
 
 }
 
@@ -897,6 +898,8 @@ body{
 
     font-weight:600;
 
+    line-height:1.5;
+
 }
 
 
@@ -906,7 +909,7 @@ body{
 
     margin-top:6px;
 
-    font-size:.85rem;
+    font-size:.84rem;
 
     color:
 
@@ -923,11 +926,11 @@ body{
 
     flex:1;
 
-    min-height:68px;
+    min-height:70px;
 
     padding:
 
-        20px
+        22px
         36px;
 
     border:none;
@@ -946,7 +949,7 @@ body{
 
             #2563EB 0%,
 
-            #1D4ED8 50%,
+            #1D4ED8 45%,
 
             #1E40AF 100%
 
@@ -962,8 +965,8 @@ body{
 
     box-shadow:
 
-        0 18px 48px
-        rgba(37,99,235,.38);
+        0 20px 52px
+        rgba(37,99,235,.40);
 
 }
 
@@ -978,8 +981,8 @@ body{
 
     box-shadow:
 
-        0 26px 60px
-        rgba(37,99,235,.48);
+        0 28px 64px
+        rgba(37,99,235,.50);
 
 }
 
@@ -1059,7 +1062,7 @@ body{
 
 
 /* ==========================================================================
-   LARGE DESKTOP REFINEMENTS
+   LARGE DESKTOP
    ========================================================================== */
 
 @media (min-width:1600px){
@@ -1097,9 +1100,15 @@ body{
 
 @media (max-width:1024px){
 
+    .registration-header{
+
+        padding-top:20px;
+
+    }
+
     .logo{
 
-        width:190px;
+        width:195px;
 
     }
 
@@ -1125,7 +1134,7 @@ body{
 
     }
 
-    .module-name{
+    .progress-right{
 
         text-align:left;
 
@@ -1175,6 +1184,7 @@ body{
 
 }
 
+
 /* ==========================================================================
    MOBILE
    ========================================================================== */
@@ -1219,36 +1229,6 @@ body{
 
     }
 
-    .progress-header{
-
-        gap:14px;
-
-    }
-
-    .step-ta{
-
-        font-size:1rem;
-
-    }
-
-    .step-en{
-
-        font-size:.84rem;
-
-    }
-
-    .module-name{
-
-        font-size:.98rem;
-
-    }
-
-    .module-name span{
-
-        font-size:.82rem;
-
-    }
-
     .hero{
 
         margin-bottom:46px;
@@ -1264,8 +1244,6 @@ body{
     }
 
     .hero-title-en{
-
-        margin-top:14px;
 
         font-size:.90rem;
 
@@ -1299,39 +1277,6 @@ body{
 
     }
 
-    .form-group{
-
-        gap:10px;
-
-    }
-
-    .label-ta{
-
-        font-size:1rem;
-
-    }
-
-    .label-en{
-
-        font-size:.84rem;
-
-    }
-
-    .registration-form input,
-
-    .registration-form select{
-
-        height:54px;
-
-        padding:
-
-            0
-            18px;
-
-        font-size:.95rem;
-
-    }
-
     .privacy-card{
 
         flex-direction:column;
@@ -1343,64 +1288,25 @@ body{
         gap:18px;
 
         padding:
-
             24px
             20px;
 
     }
 
-    .privacy-icon{
-
-        width:56px;
-
-        height:56px;
-
-        font-size:1.55rem;
-
-    }
-
-    .privacy-content h3{
-
-        font-size:1.05rem;
-
-    }
-
-    .privacy-content p{
-
-        font-size:.90rem;
-
-    }
-
-    .secondary-button{
-
-        min-width:unset;
-
-        width:100%;
-
-    }
+    .secondary-button,
 
     .primary-button{
 
         width:100%;
 
-        min-height:62px;
-
-    }
-
-    .primary-button .button-title-ta{
-
-        font-size:1.08rem;
-
-    }
-
-    .primary-button .button-title-en{
-
-        font-size:.86rem;
-
     }
 
 }
 
+
+/* ==========================================================================
+   SMALL MOBILE
+   ========================================================================== */
 
 @media (max-width:480px){
 
@@ -1436,12 +1342,6 @@ body{
 
     }
 
-    .progress-section{
-
-        margin-bottom:40px;
-
-    }
-
     .hero-title-ta{
 
         font-size:1.65rem;
@@ -1468,12 +1368,6 @@ body{
 
     }
 
-    .registration-form{
-
-        gap:22px;
-
-    }
-
     .label-ta{
 
         font-size:.96rem;
@@ -1496,29 +1390,9 @@ body{
 
     }
 
-    .privacy-content h3{
+    .primary-button{
 
-        font-size:1rem;
-
-    }
-
-    .privacy-content p{
-
-        font-size:.86rem;
-
-        line-height:1.75;
-
-    }
-
-    .secondary-button .button-title-ta{
-
-        font-size:.95rem;
-
-    }
-
-    .secondary-button .button-title-en{
-
-        font-size:.78rem;
+        min-height:60px;
 
     }
 
