@@ -2,9 +2,10 @@
 /* ==========================================================================
    CTM PATH™ Guided Journey v5.0
 
-   File        : js/registration.js
-   Version     : 5.0
-   Status      : 🔒 PREMIUM FOUNDATION
+   File        : registration.js
+   Version     : 5.1
+
+   Status      : 🔒 FOUNDATION UPDATE
 
    Purpose     : Registration Controller
 
@@ -12,473 +13,735 @@
                   • Page Initialization
                   • Form Handling
                   • Validation
+                  • KYC Data Collection
                   • Local Storage
                   • API Registration
                   • Navigation
-                  • Entrance Animation
 
                   Owns NO
                   • UI Rendering
                   • Database Logic
-                  • Assessment Logic
+                  • Assessment Calculation
 
    ========================================================================== */
 
 
-(() => {
+'use strict';
 
 
-    "use strict";
 
 
 
-    const Registration = {
+/* ==========================================================================
+   REGISTRATION CONTROLLER
+   ========================================================================== */
 
 
+const Registration = {
 
-        /* ==========================================================
-           INITIALIZE
-           ========================================================== */
 
 
-        init(){
+    /* ======================================================================
+       INITIALIZE
+       ====================================================================== */
 
 
-            this.cacheDOM();
+    init(){
 
 
-            this.bindEvents();
+        this.cacheDOM();
 
 
-            this.restoreRegistration();
+        this.bindEvents();
 
 
-            this.animatePage();
+        this.restoreRegistration();
 
 
-        },
+        this.animatePage();
 
 
+    },
 
 
 
 
-        /* ==========================================================
-           CACHE DOM ELEMENTS
-           ========================================================== */
 
 
-        cacheDOM(){
 
 
-            this.form =
+    /* ======================================================================
+       CACHE DOM ELEMENTS
+       ====================================================================== */
 
-                document.getElementById(
 
-                    "registrationForm"
+    cacheDOM(){
 
-                );
 
 
+        this.form =
 
-            this.backButton =
+            document.getElementById(
 
-                document.getElementById(
+                'registrationForm'
 
-                    "backButton"
+            );
 
-                );
 
 
 
-            this.continueButton =
 
-                document.getElementById(
+        this.backButton =
 
-                    "continueButton"
+            document.getElementById(
 
-                );
+                'backButton'
 
+            );
 
-        },
 
 
 
 
+        this.continueButton =
 
+            document.getElementById(
 
-        /* ==========================================================
-           EVENT BINDING
-           ========================================================== */
+                'continueButton'
 
+            );
 
-        bindEvents(){
 
 
+    },
 
-            if(this.backButton){
+   /* ==========================================================
+   EVENT BINDING
+   ========================================================== */
 
 
-                this.backButton.addEventListener(
+    bindEvents(){
 
 
-                    "click",
 
+        if(this.backButton){
 
-                    this.goBack.bind(this)
 
 
-                );
+            this.backButton.addEventListener(
 
 
-            }
 
+                'click',
 
 
 
+                this.goBack.bind(this)
 
-            if(this.form){
 
 
-                this.form.addEventListener(
+            );
 
 
-                    "submit",
 
+        }
 
-                    this.submit.bind(this)
 
 
-                );
 
 
-            }
 
 
 
-        },
+        if(this.form){
 
 
-       /* ==========================================================
+
+            this.form.addEventListener(
+
+
+
+                'submit',
+
+
+
+                this.submit.bind(this)
+
+
+
+            );
+
+
+
+        }
+
+
+
+    },
+
+
+
+
+
+
+
+
+/* ==========================================================
    RESTORE SAVED REGISTRATION
    ========================================================== */
 
 
-        restoreRegistration(){
+    restoreRegistration(){
 
 
-            try{
 
-
-                const savedData = JSON.parse(
-
-
-                    localStorage.getItem(
-
-                        "ctmRegistration"
-
-                    )
-
-                    ||
-
-                    "{}"
-
-
-                );
+        try{
 
 
 
 
-                Object.keys(savedData).forEach(
 
-
-                    key => {
-
-
-
-                        const field =
-
-                            document.getElementById(
-
-                                key
-
-                            );
+            const savedData = JSON.parse(
 
 
 
-                        if(field){
+                localStorage.getItem(
 
 
-                            field.value =
 
-                                savedData[key];
+                    'ctmRegistration'
 
 
-                        }
+
+                )
+
+
+
+                ||
+
+                '{}'
+
+
+
+
+            );
+
+
+
+
+
+
+
+
+            Object.keys(savedData).forEach(
+
+
+
+                key => {
+
+
+
+                    const field =
+
+
+
+                        document.getElementById(
+
+
+
+                            key
+
+
+
+                        );
+
+
+
+
+
+
+
+                    if(field){
+
+
+
+                        field.value =
+
+
+
+                            savedData[key];
+
 
 
                     }
 
 
-                );
 
+                }
 
 
-            }
 
+            );
 
-            catch(error){
 
 
 
-                console.error(
 
+        }
 
-                    "Registration Restore Error",
 
 
-                    error
+        catch(error){
 
 
-                );
 
+            console.error(
 
-            }
 
 
+                'Registration Restore Error:',
 
-        },
 
 
+                error
 
 
 
+            );
 
-        /* ==========================================================
-           FORM VALIDATION
-           ========================================================== */
 
 
-        validate(){
+        }
 
 
 
-            if(!this.form){
+    },
 
 
-                return false;
 
 
-            }
 
 
 
 
+/* ==========================================================
+   VALIDATE FORM
+   ========================================================== */
 
-            if(!this.form.checkValidity()){
 
+    validate(){
 
 
-                this.form.reportValidity();
 
+        if(!this.form){
 
 
-                return false;
 
+            return false;
 
 
-            }
 
+        }
 
 
-            return true;
 
 
 
-        },
 
 
+        if(!this.form.checkValidity()){
 
 
 
+            this.form.reportValidity();
 
-        /* ==========================================================
-           COLLECT FORM DATA
-           ========================================================== */
 
 
-        collectData(){
+            return false;
 
 
 
-            return {
+        }
 
 
 
-                fullName:
 
-                    this.getValue(
 
-                        "fullName"
 
-                    ),
 
+        return true;
 
 
 
+    },
 
-                mobile:
+   /* ==========================================================
+   COLLECT REGISTRATION DATA
+   ========================================================== */
 
-                    this.getValue(
 
-                        "mobile"
+    collectData(){
 
-                    ),
 
 
+        return {
 
 
 
-                email:
+            fullName:
 
-                    this.getValue(
+                this.getValue(
 
-                        "email"
+                    'fullName'
 
-                    ),
+                ),
 
 
 
 
 
-                district:
 
-                    this.getValue(
+            mobile:
 
-                        "district"
+                this.getValue(
 
-                    ),
+                    'mobile'
 
+                ),
 
 
 
 
-                state:
 
-                    this.getValue(
 
-                        "state"
+            email:
 
-                    ),
+                this.getValue(
 
+                    'email'
 
+                ),
 
 
 
-                language:
 
-                    this.getValue(
 
-                        "language"
 
-                    ),
+            district:
 
+                this.getValue(
 
+                    'district'
 
+                ),
 
 
-                source:
 
-                    this.getValue(
 
-                        "source"
 
-                    ),
 
+            state:
 
+                this.getValue(
 
+                    'state'
 
+                ),
 
-                device:
 
-                    navigator.userAgent,
 
 
 
 
+            language:
 
-                timestamp:
+                this.getValue(
 
-                    new Date().toISOString()
+                    'language'
 
+                ),
 
 
-            };
 
 
 
-        },
 
+            referralSource:
 
+                this.getValue(
 
+                    'referralSource'
 
+                ),
 
 
-        /* ==========================================================
-           SAFE FIELD VALUE
-           ========================================================== */
 
 
-        getValue(id){
 
 
+            device:
 
-            const element =
+                this.getDevice(),
 
-                document.getElementById(
 
-                    id
 
-                );
 
 
 
-            return element
+            currentPage:
 
-                ?
+                'Registration',
 
-                element.value.trim()
 
-                :
 
-                "";
 
 
 
-        },
+            completionStatus:
 
-       /* ==========================================================
+                'Registered',
+
+
+
+
+
+
+            startTime:
+
+                new Date().toISOString()
+
+
+
+        };
+
+
+
+    },
+
+
+
+
+
+
+
+
+/* ==========================================================
+   SAFE FIELD VALUE
+   ========================================================== */
+
+
+    getValue(id){
+
+
+
+        const field =
+
+            document.getElementById(
+
+                id
+
+            );
+
+
+
+
+
+
+
+        return field
+
+            ?
+
+            field.value.trim()
+
+            :
+
+            '';
+
+
+
+    },
+
+
+
+
+
+
+
+
+/* ==========================================================
+   DEVICE INFORMATION
+   ========================================================== */
+
+
+    getDevice(){
+
+
+
+        return /Mobi/i.test(
+
+            navigator.userAgent
+
+        )
+
+            ?
+
+            'Mobile'
+
+            :
+
+            'Desktop';
+
+
+
+    },
+
+
+
+
+
+
+
+
+/* ==========================================================
    SAVE LOCAL REGISTRATION
    ========================================================== */
 
 
-        saveLocal(data){
+    saveLocal(data){
 
 
-            localStorage.setItem(
+
+        localStorage.setItem(
 
 
-                "ctmRegistration",
+
+            'ctmRegistration',
 
 
-                JSON.stringify(
 
-                    data
+            JSON.stringify(
 
-                )
+                data
+
+            )
 
 
-            );
+
+        );
+
+
+
+
+
+
+
+        if(
+
+
+
+            window.CTM
+
+            &&
+
+            typeof window.CTM.setState === 'function'
+
+
+
+        ){
+
+
+
+            window.CTM.setState({
+
+
+
+                registration:data
+
+
+
+            });
+
+
+
+        }
+
+
+
+    },
+
+   /* ==========================================================
+   SUBMIT REGISTRATION
+   ========================================================== */
+
+
+    async submit(event){
+
+
+
+        event.preventDefault();
+
+
+
+
+
+
+
+        if(!this.validate()){
+
+
+
+            return;
+
+
+
+        }
+
+
+
+
+
+
+
+        const registration =
+
+            this.collectData();
+
+
+
+
+
+
+
+
+        this.saveLocal(
+
+            registration
+
+        );
+
+
+
+
+
+
+
+
+        try{
+
+
+
+
+
+            /*
+               IMPORTANT:
+               api.js exports ApiService
+               NOT API
+
+               Correct object:
+               window.ApiService
+            */
+
 
 
 
@@ -487,34 +750,32 @@
             if(
 
 
-                window.CTMApp
+
+                window.ApiService
 
                 &&
 
-                typeof window.CTMApp.setState === "function"
+                typeof window.ApiService.registerVisitor === 'function'
+
 
 
             ){
 
 
 
-                window.CTMApp.setState({
+
+
+                const response =
+
+                    await window.ApiService.registerVisitor(
 
 
 
-                    registration:data
+                        registration
 
 
 
-                });
-
-
-
-            }
-
-
-
-        },
+                    );
 
 
 
@@ -522,58 +783,24 @@
 
 
 
-        /* ==========================================================
-           SUBMIT REGISTRATION
-           ========================================================== */
 
 
-        async submit(event){
+                console.log(
 
 
 
-            event.preventDefault();
+                    'Registration Response:',
 
 
 
-
-
-            if(!this.validate()){
-
-
-
-                return;
+                    response
 
 
 
-            }
+                );
 
 
 
-
-
-            const registration =
-
-                this.collectData();
-
-
-
-
-
-            this.saveLocal(
-
-
-                registration
-
-
-            );
-
-
-
-
-
-
-
-            try{
 
 
 
@@ -582,11 +809,13 @@
                 if(
 
 
-                    window.API
+
+                    response
 
                     &&
 
-                    typeof window.API.registerVisitor === "function"
+                    response.visitorId
+
 
 
                 ){
@@ -595,15 +824,9 @@
 
 
 
-                    const response =
+                    registration.visitorId =
 
-                        await window.API.registerVisitor(
-
-
-                            registration
-
-
-                        );
+                        response.visitorId;
 
 
 
@@ -611,47 +834,15 @@
 
 
 
-                    if(
-
-
-                        response
-
-                        &&
-
-                        response.data
-
-                        &&
-
-                        response.data.visitorId
-
-
-                    ){
+                    this.saveLocal(
 
 
 
-
-
-                        registration.visitorId =
-
-                            response.data.visitorId;
+                        registration
 
 
 
-
-
-                        this.saveLocal(
-
-
-                            registration
-
-
-                        );
-
-
-
-                    }
-
-
+                    );
 
 
 
@@ -663,31 +854,33 @@
 
 
 
-            }
 
 
-            catch(error){
+                else if(
 
 
 
+                    response
 
+                    &&
 
-                console.error(
+                    response.data
 
+                    &&
 
-                    "Registration API Error",
+                    response.data.visitorId
 
 
-                    error
 
+                ){
 
-                );
 
 
 
 
+                    registration.visitorId =
 
-            }
+                        response.data.visitorId;
 
 
 
@@ -695,327 +888,78 @@
 
 
 
-            this.goNext();
+                    this.saveLocal(
 
 
 
+                        registration
 
 
-        },
 
-
-
-
-
-
-
-
-        /* ==========================================================
-           NAVIGATE NEXT
-           ========================================================== */
-
-
-        goNext(){
-
-
-
-
-
-            if(
-
-
-
-                window.Router
-
-                &&
-
-                window.Router.ROUTES
-
-
-
-            ){
-
-
-
-
-
-                window.Router.go(
-
-
-
-                    window.Router.ROUTES.ASSESSMENT
-
-
-
-                );
-
-
-
-
-
-            }
-
-
-
-
-
-            else{
-
-
-
-
-
-                window.location.href =
-
-                    "assessment.html";
-
-
-
-
-
-            }
-
-
-
-
-
-        },
-
-
-
-
-
-
-
-
-        /* ==========================================================
-           NAVIGATE BACK
-           ========================================================== */
-
-
-        goBack(){
-
-
-
-
-
-            if(
-
-
-
-                window.Router
-
-                &&
-
-                window.Router.ROUTES
-
-
-
-            ){
-
-
-
-
-
-                window.Router.go(
-
-
-
-                    window.Router.ROUTES.LANDING
-
-
-
-                );
-
-
-
-
-
-            }
-
-
-
-
-
-            else{
-
-
-
-
-
-                window.location.href =
-
-                    "landing.html";
-
-
-
-
-
-            }
-
-
-
-
-
-        },
-
-       /* ==========================================================
-   PAGE ENTRANCE ANIMATION
-   ========================================================== */
-
-
-        animatePage(){
-
-
-
-            if(
-
-
-                window.matchMedia(
-
-                    "(prefers-reduced-motion: reduce)"
-
-                ).matches
-
-
-
-            ){
-
-
-
-                return;
-
-
-
-            }
-
-
-
-
-
-
-
-            const sections = [
-
-
-
-                ".progress-section",
-
-
-
-                ".hero",
-
-
-
-                ".registration-form"
-
-
-
-            ];
-
-
-
-
-
-
-
-
-            sections.forEach(
-
-
-
-                (selector,index)=>{
-
-
-
-
-
-                    const element =
-
-                        document.querySelector(
-
-                            selector
-
-                        );
-
-
-
-
-
-                    if(!element){
-
-
-
-                        return;
-
-
-
-                    }
-
-
-
-
-
-
-
-
-                    element.style.opacity = "0";
-
-
-
-
-
-                    element.style.transform =
-
-                        "translateY(30px)";
-
-
-
-
-
-
-
-
-                    element.style.transition =
-
-                        "opacity .70s ease, transform .70s ease";
-
-
-
-
-
-
-
-
-
-                    setTimeout(()=>{
-
-
-
-
-
-                        element.style.opacity = "1";
-
-
-
-
-
-                        element.style.transform =
-
-                            "translateY(0)";
-
-
-
-
-
-                    },180 * index);
-
+                    );
 
 
 
 
 
                 }
+
+
+
+
+
+
+            }
+
+
+
+            else{
+
+
+
+
+
+                console.warn(
+
+
+
+                    'ApiService.registerVisitor not available'
+
+
+
+                );
+
+
+
+
+
+            }
+
+
+
+
+
+        }
+
+
+
+
+
+        catch(error){
+
+
+
+
+
+            console.error(
+
+
+
+                'Registration API Error:',
+
+
+
+                error
 
 
 
@@ -1032,38 +976,54 @@
 
 
 
-    };
+
+
+        this.goNext();
 
 
 
 
 
+    },
+
+   /* ==========================================================
+   NAVIGATE TO NEXT PAGE
+   ========================================================== */
+
+
+    goNext(){
+
+
+
+        if(
+
+
+
+            window.Router
+
+            &&
+
+            window.Router.ROUTES
+
+
+
+        ){
 
 
 
 
-    /* ==========================================================
-       START APPLICATION
-       ========================================================== */
+
+            window.Router.go(
 
 
 
+                window.Router.ROUTES.ASSESSMENT
 
 
 
-    document.addEventListener(
+            );
 
 
-
-        "DOMContentLoaded",
-
-
-
-        ()=>{
-
-
-
-            Registration.init();
 
 
 
@@ -1071,7 +1031,31 @@
 
 
 
-    );
+
+
+        else{
+
+
+
+
+
+            window.location.href =
+
+
+
+                '/pages/assessment.html';
+
+
+
+
+
+        }
+
+
+
+
+
+    },
 
 
 
@@ -1079,4 +1063,326 @@
 
 
 
-})();
+
+/* ==========================================================
+   NAVIGATE BACK
+   ========================================================== */
+
+
+    goBack(){
+
+
+
+
+
+        if(
+
+
+
+            window.Router
+
+            &&
+
+            window.Router.ROUTES
+
+
+
+        ){
+
+
+
+
+
+            window.Router.go(
+
+
+
+                window.Router.ROUTES.LANDING
+
+
+
+            );
+
+
+
+
+
+        }
+
+
+
+
+
+        else{
+
+
+
+
+
+            window.location.href =
+
+
+
+                '/pages/landing.html';
+
+
+
+
+
+        }
+
+
+
+
+
+    },
+
+   /* ==========================================================
+   PAGE ENTRANCE ANIMATION
+   ========================================================== */
+
+
+    animatePage(){
+
+
+
+        if(
+
+
+
+            window.matchMedia(
+
+
+
+                '(prefers-reduced-motion: reduce)'
+
+
+
+            ).matches
+
+
+
+        ){
+
+
+
+            return;
+
+
+
+        }
+
+
+
+
+
+
+
+
+        const sections = [
+
+
+
+            '.progress-section',
+
+
+
+            '.hero',
+
+
+
+            '.registration-form'
+
+
+
+        ];
+
+
+
+
+
+
+
+
+        sections.forEach(
+
+
+
+            (selector,index)=>{
+
+
+
+
+
+                const element =
+
+                    document.querySelector(
+
+                        selector
+
+                    );
+
+
+
+
+
+
+
+
+                if(!element){
+
+
+
+                    return;
+
+
+
+                }
+
+
+
+
+
+
+
+
+                element.style.opacity = '0';
+
+
+
+
+
+                element.style.transform =
+
+                    'translateY(30px)';
+
+
+
+
+
+
+
+
+                element.style.transition =
+
+                    'opacity .70s ease, transform .70s ease';
+
+
+
+
+
+
+
+
+                setTimeout(()=>{
+
+
+
+
+
+                    element.style.opacity = '1';
+
+
+
+
+
+                    element.style.transform =
+
+                        'translateY(0)';
+
+
+
+
+
+                },180 * index);
+
+
+
+
+
+
+            }
+
+
+
+        );
+
+
+
+    }
+
+
+
+
+
+};
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   INITIALIZE
+   ========================================================================== */
+
+
+document.addEventListener(
+
+
+
+    'DOMContentLoaded',
+
+
+
+    ()=>{
+
+
+
+        Registration.init();
+
+
+
+    }
+
+
+
+);
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   GLOBAL EXPORT
+   ========================================================================== */
+
+
+window.Registration = Registration;
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   End of File
+
+
+   File        : registration.js
+
+
+   Version     : 5.1
+
+
+   Status      : 🔒 FOUNDATION UPDATE
+
+
+   ========================================================================== */
