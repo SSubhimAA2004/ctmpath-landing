@@ -3,144 +3,263 @@
    CTM PATH™ Guided Journey
    FROM SURVIVAL TO LIVING™
 
-   File        : registration.js
-   Version     : 6.0
+   File        : js/registration.js
+   Version     : 8.0
    Status      : PRODUCTION
+   Architecture: LOCKED
 
-   Purpose
-
-   Owns
+   Responsibility
    --------------------------------------------------------------------------
-   ✓ Registration Page
-   ✓ Form Validation
-   ✓ KYC Collection
-   ✓ API Submission
-   ✓ Visitor ID Capture
-   ✓ Local Storage
-   ✓ Journey Navigation
+   • Collect Registration (KYC)
+   • Validate User Input
+   • Build Registration Payload
+   • Call CTM.API.registerVisitor()
+   • Store Visitor ID
+   • Navigate to Screen 02
 
-   Owns NO
-   --------------------------------------------------------------------------
-   ✗ Assessment
-   ✗ Google Sheets
-   ✗ Business Logic
-   ✗ Scoring
+   This file SHALL NOT
+
+   ✗ Communicate directly with Google Apps Script
+   ✗ Call fetch()
+   ✗ Know the Web App URL
+   ✗ Save directly to Google Sheets
+   ✗ Contain Assessment Logic
+   ✗ Generate Diagnosis
+   ✗ Generate Prescription
 
 ========================================================================== */
 
-'use strict';
+"use strict";
 
 /* ==========================================================================
-   REGISTRATION CONTROLLER
+   GLOBAL NAMESPACE
 ========================================================================== */
 
-const Registration = {
+window.CTM = window.CTM || {};
 
-    form: null,
+window.CTM.Registration = (function () {
 
-    backButton: null,
+    /* ======================================================================
+       MODULE STATE
+    ====================================================================== */
 
-    continueButton: null,
+    let isSubmitting = false;
+
+    /* ======================================================================
+       CACHED ELEMENTS
+    ====================================================================== */
+
+    const elements = {
+
+        form: null,
+
+        continueButton: null,
+
+        fullName: null,
+
+        email: null,
+
+        mobile: null,
+
+        district: null,
+
+        state: null,
+
+        source: null,
+
+        emotion: null,
+
+        errorBox: null
+
+    };
 
     /* ======================================================================
        INITIALIZE
     ====================================================================== */
 
-    init() {
+    function initialize() {
 
-        this.cacheDOM();
+        elements.form =
+            document.getElementById("registrationForm");
 
-        this.bindEvents();
+        elements.continueButton =
+            document.getElementById("btnContinue");
 
-        this.restoreRegistration();
+        elements.fullName =
+            document.getElementById("fullName");
 
-        this.animatePage();
+        elements.email =
+            document.getElementById("email");
 
-    },
+        elements.mobile =
+            document.getElementById("mobile");
 
-    /* ======================================================================
-       CACHE DOM
+        elements.district =
+            document.getElementById("district");
+
+        elements.state =
+            document.getElementById("state");
+
+        elements.source =
+            document.getElementById("source");
+
+        elements.emotion =
+            document.getElementById("emotion");
+
+        elements.errorBox =
+            document.getElementById("registrationError");
+
+        bindEvents();
+
+    }
+
+                               /* ======================================================================
+       BIND EVENTS
     ====================================================================== */
 
-    cacheDOM() {
+    function bindEvents() {
 
-        this.form =
+        if (elements.form) {
 
-            document.getElementById(
+            elements.form.addEventListener(
 
-                'registrationForm'
+                "submit",
 
-            );
+                function (event) {
 
-        this.backButton =
+                    event.preventDefault();
 
-            document.getElementById(
+                    submitRegistration();
 
-                'backButton'
-
-            );
-
-        this.continueButton =
-
-            document.getElementById(
-
-                'continueButton'
-
-            );
-
-    },
-
-    /* ======================================================================
-       EVENTS
-    ====================================================================== */
-
-    bindEvents() {
-
-        if (this.backButton) {
-
-            this.backButton.addEventListener(
-
-                'click',
-
-                this.goBack.bind(this)
+                }
 
             );
 
         }
 
-        if (this.form) {
-
-            this.form.addEventListener(
-
-                'submit',
-
-                this.submit.bind(this)
-
-            );
-
-        }
-
-    },
+    }
 
     /* ======================================================================
        VALIDATE
     ====================================================================== */
 
-    validate() {
+    function validate() {
 
-        if (!this.form) {
+        clearError();
+
+        if (!elements.fullName.value.trim()) {
+
+            showError(
+
+                "Please enter your full name."
+
+            );
+
+            elements.fullName.focus();
 
             return false;
 
         }
 
+        if (!elements.email.value.trim()) {
+
+            showError(
+
+                "Please enter your email address."
+
+            );
+
+            elements.email.focus();
+
+            return false;
+
+        }
+
+        const emailPattern =
+
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
         if (
 
-            !this.form.checkValidity()
+            !emailPattern.test(
+
+                elements.email.value.trim()
+
+            )
 
         ) {
 
-            this.form.reportValidity();
+            showError(
+
+                "Please enter a valid email address."
+
+            );
+
+            elements.email.focus();
+
+            return false;
+
+        }
+
+        if (!elements.mobile.value.trim()) {
+
+            showError(
+
+                "Please enter your mobile number."
+
+            );
+
+            elements.mobile.focus();
+
+            return false;
+
+        }
+
+        const mobile =
+
+            elements.mobile.value.replace(/\D/g, "");
+
+        if (
+
+            mobile.length < 10
+
+        ) {
+
+            showError(
+
+                "Please enter a valid mobile number."
+
+            );
+
+            elements.mobile.focus();
+
+            return false;
+
+        }
+
+        if (!elements.district.value.trim()) {
+
+            showError(
+
+                "Please select your district."
+
+            );
+
+            elements.district.focus();
+
+            return false;
+
+        }
+
+        if (!elements.state.value.trim()) {
+
+            showError(
+
+                "Please select your state."
+
+            );
+
+            elements.state.focus();
 
             return false;
 
@@ -148,666 +267,300 @@ const Registration = {
 
         return true;
 
-    },
+    }
 
     /* ======================================================================
-       SAFE VALUE
+       SHOW ERROR
     ====================================================================== */
 
-    value(id) {
+    function showError(message) {
 
-        const field =
+        if (!elements.errorBox) {
 
-            document.getElementById(id);
+            alert(message);
 
-        if (!field) {
-
-            return '';
+            return;
 
         }
 
-        return field.value.trim();
+        elements.errorBox.textContent =
 
-    },
+            message;
+
+        elements.errorBox.style.display =
+
+            "block";
+
+    }
 
     /* ======================================================================
-       DEVICE
+       CLEAR ERROR
     ====================================================================== */
 
-    getDevice() {
+    function clearError() {
 
-        return /Mobi/i.test(
+        if (!elements.errorBox) {
 
-            navigator.userAgent
+            return;
 
-        )
+        }
 
-        ? 'Mobile'
+        elements.errorBox.textContent = "";
 
-        : 'Desktop';
+        elements.errorBox.style.display = "none";
 
-    },
+    }
 
-       /* ======================================================================
-       COLLECT REGISTRATION DATA
-
-       Backend Contract
-       ----------------------------------------------------------------------
-       Matches 08_Service.gs
-
-       {
-           fullName,
-           email,
-           mobile,
-           district,
-           state,
-           source,
-           language,
-           device,
-           emotion
-       }
-
+                               /* ======================================================================
+       BUILD PAYLOAD
     ====================================================================== */
 
-    collectData() {
+    function buildPayload() {
 
         return {
 
             fullName:
 
-                this.value(
-
-                    'fullName'
-
-                ),
+                elements.fullName.value.trim(),
 
             email:
 
-                this.value(
-
-                    'email'
-
-                ),
+                elements.email.value.trim(),
 
             mobile:
 
-                this.value(
-
-                    'mobile'
-
-                ),
+                elements.mobile.value.trim(),
 
             district:
 
-                this.value(
-
-                    'district'
-
-                ),
+                elements.district.value.trim(),
 
             state:
 
-                this.value(
-
-                    'state'
-
-                ),
+                elements.state.value.trim(),
 
             source:
 
-                this.value(
-
-                    'source'
-
-                ),
+                elements.source
+                    ? elements.source.value.trim()
+                    : "",
 
             language:
 
-                this.value(
-
-                    'language'
-
-                ) ||
-
-                'Tamil',
+                document.documentElement.lang || "en",
 
             device:
 
-                this.getDevice(),
+                /Mobi|Android|iPhone|iPad/i.test(
+
+                    navigator.userAgent
+
+                )
+
+                    ? "Mobile"
+
+                    : "Desktop",
 
             emotion:
 
-                localStorage.getItem(
-
-                    'ctmInitialEmotion'
-
-                ) ||
-
-                ''
+                elements.emotion
+                    ? elements.emotion.value.trim()
+                    : ""
 
         };
 
-    },
+    }
 
     /* ======================================================================
-       SAVE LOCAL REGISTRATION
-
-       Stores only the information required by the frontend.
-
+       LOADING STATE
     ====================================================================== */
 
-    saveLocal(data) {
+    function setLoading(isLoading) {
 
-        try {
+        isSubmitting = isLoading;
 
-            localStorage.setItem(
-
-                'ctmRegistration',
-
-                JSON.stringify(data)
-
-            );
-
-        }
-
-        catch (error) {
-
-            console.error(
-
-                'Registration Storage Error',
-
-                error
-
-            );
-
-        }
-
-    },
-
-    /* ======================================================================
-       RESTORE REGISTRATION
-    ====================================================================== */
-
-    restoreRegistration() {
-
-        try {
-
-            const saved =
-
-                localStorage.getItem(
-
-                    'ctmRegistration'
-
-                );
-
-            if (!saved) {
-
-                return;
-
-            }
-
-            const data =
-
-                JSON.parse(saved);
-
-            [
-
-                'fullName',
-
-                'email',
-
-                'mobile',
-
-                'district',
-
-                'state',
-
-                'source',
-
-                'language'
-
-            ].forEach(
-
-                function (id) {
-
-                    const field =
-
-                        document.getElementById(id);
-
-                    if (
-
-                        field &&
-
-                        data[id] !== undefined
-
-                    ) {
-
-                        field.value =
-
-                            data[id];
-
-                    }
-
-                }
-
-            );
-
-        }
-
-        catch (error) {
-
-            console.error(
-
-                'Registration Restore Error',
-
-                error
-
-            );
-
-        }
-
-    },
-
-       /* ======================================================================
-       SUBMIT REGISTRATION
-       ====================================================================== */
-
-    async submit(event) {
-
-        event.preventDefault();
-
-        if (!this.validate()) {
+        if (!elements.continueButton) {
 
             return;
 
         }
 
-        const registration =
-
-            this.collectData();
-
-        this.saveLocal(
-
-            registration
-
-        );
-
-        this.setLoading(true);
-
-        try {
-
-            const response =
-
-                await ApiService.registerVisitor(
-
-                    registration
-
-                );
-
-            console.log(
-
-                'Registration Response',
-
-                response
-
-            );
-
-            if (
-
-                !response ||
-
-                response.success !== true
-
-            ) {
-
-                throw new Error(
-
-                    response?.message ||
-
-                    'Registration failed.'
-
-                );
-
-            }
-
-            /* ----------------------------------------------------------
-               Visitor ID returned by GAS
-            ---------------------------------------------------------- */
-
-            const visitorId =
-
-                response.data?.visitorId ||
-
-                response.visitorId ||
-
-                '';
-
-            if (!visitorId) {
-
-                throw new Error(
-
-                    'Visitor ID not returned.'
-
-                );
-
-            }
-
-            registration.visitorId =
-
-                visitorId;
-
-            this.saveLocal(
-
-                registration
-
-            );
-
-            /* ----------------------------------------------------------
-               Update Application State
-            ---------------------------------------------------------- */
-
-            if (
-
-                window.CTMApp &&
-
-                typeof CTMApp.setVisitor === 'function'
-
-            ) {
-
-                CTMApp.setVisitor(
-
-                    registration
-
-                );
-
-            }
-
-            /* ----------------------------------------------------------
-               Navigate
-            ---------------------------------------------------------- */
-
-            this.goNext();
-
-        }
-
-        catch (error) {
-
-            console.error(
-
-                'Registration Error',
-
-                error
-
-            );
-
-            alert(
-
-                error.message ||
-
-                'Unable to complete registration.'
-
-            );
-
-        }
-
-        finally {
-
-            this.setLoading(false);
-
-        }
-
-    },
-
-    /* ======================================================================
-       BUTTON STATE
-       ====================================================================== */
-
-    setLoading(isLoading) {
-
-        if (!this.continueButton) {
-
-            return;
-
-        }
-
-        this.continueButton.disabled =
+        elements.continueButton.disabled =
 
             isLoading;
 
-        if (isLoading) {
+        elements.continueButton.classList.toggle(
 
-            this.continueButton.innerHTML =
+            "loading",
 
-                'Please Wait...';
+            isLoading
 
-        }
+        );
 
-        else {
+        elements.continueButton.textContent =
 
-            this.continueButton.innerHTML =
+            isLoading
 
-                'Continue';
+                ? "Please Wait..."
 
-        }
+                : "Continue";
 
-    },
+    }
 
-       /* ======================================================================
-       NAVIGATE TO ASSESSMENT
+    /* ======================================================================
+       SUBMIT REGISTRATION
     ====================================================================== */
 
-    goNext() {
+    async function submitRegistration() {
 
-        if (
+        if (isSubmitting) {
 
-            window.Router &&
+            return;
 
-            window.Router.ROUTES
+        }
 
-        ) {
+        if (!validate()) {
 
-            Router.go(
+            return;
 
-                Router.ROUTES.ASSESSMENT
+        }
+
+        const payload =
+
+            buildPayload();
+
+        setLoading(true);
+
+        clearError();
+
+        const response =
+
+            await CTM.API.safeRequest(
+
+                () =>
+
+                    CTM.API.registerVisitor(
+
+                        payload
+
+                    )
 
             );
 
-            return;
+           if (
 
-        }
+            response.success &&
 
-        window.location.href =
+            response.data &&
 
-            '/pages/assessment.html';
-
-    },
-
-    /* ======================================================================
-       BACK TO LANDING
-    ====================================================================== */
-
-    goBack() {
-
-        if (
-
-            window.Router &&
-
-            window.Router.ROUTES
+            response.data.visitorId
 
         ) {
 
-            Router.go(
+            CTM.state = CTM.state || {};
 
-                Router.ROUTES.LANDING
+            CTM.state.visitorId =
 
-            );
+                response.data.visitorId;
 
-            return;
+            CTM.state.registration =
 
-        }
+                payload;
 
-        window.location.href =
+            setLoading(false);
 
-            '/pages/landing.html';
+            if (
 
-    },
+                window.CTM.Router &&
 
-    /* ======================================================================
-       PAGE ANIMATION
-    ====================================================================== */
-
-    animatePage() {
-
-        if (
-
-            window.matchMedia(
-
-                '(prefers-reduced-motion: reduce)'
-
-            ).matches
-
-        ) {
-
-            return;
-
-        }
-
-        const sections = [
-
-            '.progress-section',
-
-            '.hero',
-
-            '.registration-form'
-
-        ];
-
-        sections.forEach(
-
-            function (
-
-                selector,
-
-                index
+                typeof window.CTM.Router.go === "function"
 
             ) {
 
-                const element =
+                window.CTM.Router.go(
 
-                    document.querySelector(
-
-                        selector
-
-                    );
-
-                if (!element) {
-
-                    return;
-
-                }
-
-                element.style.opacity = '0';
-
-                element.style.transform =
-
-                    'translateY(25px)';
-
-                element.style.transition =
-
-                    'all .6s ease';
-
-                setTimeout(
-
-                    function () {
-
-                        element.style.opacity = '1';
-
-                        element.style.transform =
-
-                            'translateY(0)';
-
-                    },
-
-                    index * 180
+                    "screen02"
 
                 );
 
             }
+
+            return;
+
+        }
+
+        setLoading(false);
+
+        showError(
+
+            response.message ||
+
+            "Unable to complete registration."
 
         );
 
     }
 
-};
+    /* ======================================================================
+       RESET FORM
+    ====================================================================== */
+
+    function resetForm() {
+
+        if (
+
+            elements.form &&
+
+            typeof elements.form.reset === "function"
+
+        ) {
+
+            elements.form.reset();
+
+        }
+
+        clearError();
+
+        setLoading(false);
+
+    }
+
+    /* ======================================================================
+       PUBLIC API
+    ====================================================================== */
+
+    return {
+
+        initialize,
+
+        validate,
+
+        buildPayload,
+
+        submitRegistration,
+
+        resetForm
+
+    };
+
+})();
 
 /* ==========================================================================
-   INITIALIZE
+   AUTO INITIALIZATION
 ========================================================================== */
 
 document.addEventListener(
 
-    'DOMContentLoaded',
+    "DOMContentLoaded",
 
     function () {
 
-        Registration.init();
+        window.CTM.Registration.initialize();
 
     }
 
 );
 
 /* ==========================================================================
-   GLOBAL EXPORT
-========================================================================== */
-
-window.Registration = Registration;
-
-/* ==========================================================================
    END OF FILE
-
-   CTM PATH™ Guided Journey
-
-   File        : registration.js
-   Version     : 6.0
-   Status      : PRODUCTION
-
-   VERIFIED AGAINST
-
-   ✓ api.js
-   ✓ app.js
-   ✓ router.js
-   ✓ 07_Router.gs
-   ✓ 08_Service.gs
-   ✓ 03_Database.gs
-
-   Registration Flow
-
-   Landing
-        ↓
-   Registration Form
-        ↓
-   collectData()
-        ↓
-   {
-       fullName,
-       email,
-       mobile,
-       district,
-       state,
-       source,
-       language,
-       device,
-       emotion
-   }
-        ↓
-   ApiService.registerVisitor()
-        ↓
-   Google Apps Script
-        ↓
-   Visitor ID Returned
-        ↓
-   Local Storage
-        ↓
-   Assessment Page
-
 ========================================================================== */
