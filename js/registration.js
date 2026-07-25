@@ -1,43 +1,39 @@
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey
-   FROM SURVIVAL TO LIVING™
+   CTM PATH™ Guided Journey™
 
    File        : js/registration.js
-   Version     : 8.0
-   Status      : PRODUCTION
-   Architecture: LOCKED
+   Version     : 4.0
+   Status      : 🔒 LOCKED
+   Architecture: Multi-Page Application (MPA)
 
-   Responsibility
+   Purpose
    --------------------------------------------------------------------------
-   • Collect Registration (KYC)
-   • Validate User Input
-   • Build Registration Payload
-   • Call CTM.API.registerVisitor()
-   • Store Visitor ID
-   • Navigate to Screen 02
+   Registration Page Controller
 
-   This file SHALL NOT
+   Responsibilities
 
-   ✗ Communicate directly with Google Apps Script
-   ✗ Call fetch()
-   ✗ Know the Web App URL
-   ✗ Save directly to Google Sheets
-   ✗ Contain Assessment Logic
-   ✗ Generate Diagnosis
-   ✗ Generate Prescription
+   ✓ Initialize Registration Page
+   ✓ Validate Registration Form
+   ✓ Build Registration Payload
+   ✓ Submit Visitor Registration
+   ✓ Save Visitor Session
+   ✓ Navigate to Assessment Page
+
+   Does NOT
+
+   ✗ Perform Assessment
+   ✗ Generate Reports
+   ✗ Access Google Sheets Directly
+   ✗ Contain Business Logic
 
 ========================================================================== */
 
 "use strict";
 
-/* ==========================================================================
-   GLOBAL NAMESPACE
-========================================================================== */
-
 window.CTM = window.CTM || {};
 
-window.CTM.Registration = (function () {
+window.CTM.Registration = (() => {
 
     /* ======================================================================
        MODULE STATE
@@ -46,7 +42,7 @@ window.CTM.Registration = (function () {
     let isSubmitting = false;
 
     /* ======================================================================
-       CACHED ELEMENTS
+       DOM ELEMENTS
     ====================================================================== */
 
     const elements = {
@@ -55,21 +51,21 @@ window.CTM.Registration = (function () {
 
         continueButton: null,
 
+        backButton: null,
+
         fullName: null,
 
-        email: null,
-
         mobile: null,
+
+        email: null,
 
         district: null,
 
         state: null,
 
-        source: null,
+        language: null,
 
-        emotion: null,
-
-        errorBox: null
+        source: null
 
     };
 
@@ -79,20 +75,35 @@ window.CTM.Registration = (function () {
 
     function initialize() {
 
+        cacheElements();
+
+        bindEvents();
+
+    }
+
+    /* ======================================================================
+       CACHE DOM
+    ====================================================================== */
+
+    function cacheElements() {
+
         elements.form =
             document.getElementById("registrationForm");
 
         elements.continueButton =
-            document.getElementById("btnContinue");
+            document.getElementById("continueButton");
+
+        elements.backButton =
+            document.getElementById("backButton");
 
         elements.fullName =
             document.getElementById("fullName");
 
-        elements.email =
-            document.getElementById("email");
-
         elements.mobile =
             document.getElementById("mobile");
+
+        elements.email =
+            document.getElementById("email");
 
         elements.district =
             document.getElementById("district");
@@ -100,20 +111,15 @@ window.CTM.Registration = (function () {
         elements.state =
             document.getElementById("state");
 
+        elements.language =
+            document.getElementById("language");
+
         elements.source =
             document.getElementById("source");
 
-        elements.emotion =
-            document.getElementById("emotion");
-
-        elements.errorBox =
-            document.getElementById("registrationError");
-
-        bindEvents();
-
     }
 
-                               /* ======================================================================
+    /* ======================================================================
        BIND EVENTS
     ====================================================================== */
 
@@ -125,13 +131,19 @@ window.CTM.Registration = (function () {
 
                 "submit",
 
-                function (event) {
+                handleSubmit
 
-                    event.preventDefault();
+            );
 
-                    submitRegistration();
+        }
 
-                }
+        if (elements.backButton) {
+
+            elements.backButton.addEventListener(
+
+                "click",
+
+                goBack
 
             );
 
@@ -139,21 +151,15 @@ window.CTM.Registration = (function () {
 
     }
 
-    /* ======================================================================
-       VALIDATE
+                               /* ======================================================================
+       VALIDATE FORM
     ====================================================================== */
 
-    function validate() {
-
-        clearError();
+    function validateForm() {
 
         if (!elements.fullName.value.trim()) {
 
-            showError(
-
-                "Please enter your full name."
-
-            );
+            alert("Please enter your full name.");
 
             elements.fullName.focus();
 
@@ -161,13 +167,29 @@ window.CTM.Registration = (function () {
 
         }
 
+        if (!elements.mobile.value.trim()) {
+
+            alert("Please enter your mobile number.");
+
+            elements.mobile.focus();
+
+            return false;
+
+        }
+
+        if (!/^[0-9]{10}$/.test(elements.mobile.value.trim())) {
+
+            alert("Please enter a valid 10-digit mobile number.");
+
+            elements.mobile.focus();
+
+            return false;
+
+        }
+
         if (!elements.email.value.trim()) {
 
-            showError(
-
-                "Please enter your email address."
-
-            );
+            alert("Please enter your email address.");
 
             elements.email.focus();
 
@@ -189,11 +211,7 @@ window.CTM.Registration = (function () {
 
         ) {
 
-            showError(
-
-                "Please enter a valid email address."
-
-            );
+            alert("Please enter a valid email address.");
 
             elements.email.focus();
 
@@ -201,49 +219,9 @@ window.CTM.Registration = (function () {
 
         }
 
-        if (!elements.mobile.value.trim()) {
-
-            showError(
-
-                "Please enter your mobile number."
-
-            );
-
-            elements.mobile.focus();
-
-            return false;
-
-        }
-
-        const mobile =
-
-            elements.mobile.value.replace(/\D/g, "");
-
-        if (
-
-            mobile.length < 10
-
-        ) {
-
-            showError(
-
-                "Please enter a valid mobile number."
-
-            );
-
-            elements.mobile.focus();
-
-            return false;
-
-        }
-
         if (!elements.district.value.trim()) {
 
-            showError(
-
-                "Please select your district."
-
-            );
+            alert("Please select your district.");
 
             elements.district.focus();
 
@@ -253,11 +231,7 @@ window.CTM.Registration = (function () {
 
         if (!elements.state.value.trim()) {
 
-            showError(
-
-                "Please select your state."
-
-            );
+            alert("Please select your state.");
 
             elements.state.focus();
 
@@ -270,48 +244,6 @@ window.CTM.Registration = (function () {
     }
 
     /* ======================================================================
-       SHOW ERROR
-    ====================================================================== */
-
-    function showError(message) {
-
-        if (!elements.errorBox) {
-
-            alert(message);
-
-            return;
-
-        }
-
-        elements.errorBox.textContent =
-
-            message;
-
-        elements.errorBox.style.display =
-
-            "block";
-
-    }
-
-    /* ======================================================================
-       CLEAR ERROR
-    ====================================================================== */
-
-    function clearError() {
-
-        if (!elements.errorBox) {
-
-            return;
-
-        }
-
-        elements.errorBox.textContent = "";
-
-        elements.errorBox.style.display = "none";
-
-    }
-
-                               /* ======================================================================
        BUILD PAYLOAD
     ====================================================================== */
 
@@ -323,13 +255,13 @@ window.CTM.Registration = (function () {
 
                 elements.fullName.value.trim(),
 
-            email:
-
-                elements.email.value.trim(),
-
             mobile:
 
                 elements.mobile.value.trim(),
+
+            email:
+
+                elements.email.value.trim(),
 
             district:
 
@@ -339,19 +271,21 @@ window.CTM.Registration = (function () {
 
                 elements.state.value.trim(),
 
+            language:
+
+                elements.language
+                    ? elements.language.value
+                    : "ta",
+
             source:
 
                 elements.source
                     ? elements.source.value.trim()
                     : "",
 
-            language:
-
-                document.documentElement.lang || "en",
-
             device:
 
-                /Mobi|Android|iPhone|iPad/i.test(
+                /Android|iPhone|iPad|Mobile/i.test(
 
                     navigator.userAgent
 
@@ -359,13 +293,7 @@ window.CTM.Registration = (function () {
 
                     ? "Mobile"
 
-                    : "Desktop",
-
-            emotion:
-
-                elements.emotion
-                    ? elements.emotion.value.trim()
-                    : ""
+                    : "Desktop"
 
         };
 
@@ -397,21 +325,15 @@ window.CTM.Registration = (function () {
 
         );
 
-        elements.continueButton.textContent =
-
-            isLoading
-
-                ? "Please Wait..."
-
-                : "Continue";
-
     }
 
-    /* ======================================================================
-       SUBMIT REGISTRATION
+                               /* ======================================================================
+       HANDLE SUBMIT
     ====================================================================== */
 
-    async function submitRegistration() {
+    async function handleSubmit(event) {
+
+        event.preventDefault();
 
         if (isSubmitting) {
 
@@ -419,89 +341,145 @@ window.CTM.Registration = (function () {
 
         }
 
-        if (!validate()) {
+        if (!validateForm()) {
 
             return;
 
         }
 
-        const payload =
-
-            buildPayload();
-
         setLoading(true);
 
-        clearError();
+        try {
 
-        const response =
+            const payload = buildPayload();
 
-            await CTM.API.safeRequest(
+            const response = await CTM.API.safeRequest(
 
-                () =>
-
-                    CTM.API.registerVisitor(
-
-                        payload
-
-                    )
+                () => CTM.API.registerVisitor(payload)
 
             );
 
-           if (
+            if (!response.success) {
 
-            response.success &&
+                throw new Error(
 
-            response.data &&
+                    response.message ||
 
-            response.data.visitorId
-
-        ) {
-
-            CTM.state = CTM.state || {};
-
-            CTM.state.visitorId =
-
-                response.data.visitorId;
-
-            CTM.state.registration =
-
-                payload;
-
-            setLoading(false);
-
-            if (
-
-                window.CTM.Router &&
-
-                typeof window.CTM.Router.go === "function"
-
-            ) {
-
-                window.CTM.Router.go(
-
-                    "screen02"
+                    "Registration failed."
 
                 );
 
             }
 
-            return;
+            const visitor = response.data || {};
+
+            /* ==========================================================
+               UPDATE APPLICATION STATE
+               ========================================================== */
+
+            if (
+
+                window.CTM.App &&
+
+                typeof window.CTM.App.setVisitor === "function"
+
+            ) {
+
+                window.CTM.App.setVisitor(visitor);
+
+            }
+
+            /* ==========================================================
+               SAVE LOCAL SESSION
+               ========================================================== */
+
+            if (
+
+                window.StorageService &&
+
+                typeof window.StorageService.saveVisitor === "function"
+
+            ) {
+
+                window.StorageService.saveVisitor(visitor);
+
+            }
+
+            if (
+
+                window.StorageService &&
+
+                typeof window.StorageService.saveSessionState === "function"
+
+            ) {
+
+                window.StorageService.saveSessionState({
+
+                    visitorId:
+
+                        visitor.visitorId,
+
+                    registered: true,
+
+                    registeredAt:
+
+                        new Date().toISOString()
+
+                });
+
+            }
+
+            /* ==========================================================
+               NEXT PAGE
+               ========================================================== */
+
+            window.location.href =
+
+                "assessment.html";
 
         }
 
-        setLoading(false);
+        catch (error) {
 
-        showError(
+            console.error(
 
-            response.message ||
+                "[Registration]",
 
-            "Unable to complete registration."
+                error
 
-        );
+            );
+
+            alert(
+
+                error.message ||
+
+                "Unable to complete registration."
+
+            );
+
+        }
+
+        finally {
+
+            setLoading(false);
+
+        }
 
     }
 
     /* ======================================================================
+       BACK
+    ====================================================================== */
+
+    function goBack() {
+
+        window.location.href =
+
+            "landing.html";
+
+    }
+
+                               /* ======================================================================
        RESET FORM
     ====================================================================== */
 
@@ -519,8 +497,6 @@ window.CTM.Registration = (function () {
 
         }
 
-        clearError();
-
         setLoading(false);
 
     }
@@ -533,11 +509,11 @@ window.CTM.Registration = (function () {
 
         initialize,
 
-        validate,
+        validateForm,
 
         buildPayload,
 
-        submitRegistration,
+        handleSubmit,
 
         resetForm
 
@@ -555,7 +531,17 @@ document.addEventListener(
 
     function () {
 
-        window.CTM.Registration.initialize();
+        if (
+
+            window.CTM.Registration &&
+
+            typeof window.CTM.Registration.initialize === "function"
+
+        ) {
+
+            window.CTM.Registration.initialize();
+
+        }
 
     }
 
