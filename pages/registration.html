@@ -6,9 +6,10 @@
 
     <!-- ==========================================================
          CTM PATH™ Guided Journey v4.0
-         File    : pages/registration.html
-         Purpose : Visitor Registration
-         Status  : 🔒 LOCKED
+         File        : pages/registration.html
+         Version     : 4.0
+         Status      : 🔒 LOCKED
+         Purpose     : Visitor Registration
          ========================================================== -->
 
     <meta charset="UTF-8">
@@ -32,7 +33,7 @@
     </title>
 
     <!-- ==========================================================
-         Google Fonts
+         GOOGLE FONTS
          ========================================================== -->
 
     <link rel="preconnect"
@@ -47,13 +48,17 @@
         rel="stylesheet">
 
     <!-- ==========================================================
-         Styles
+         STYLESHEETS
          ========================================================== -->
 
     <link rel="stylesheet" href="../css/reset.css">
+
     <link rel="stylesheet" href="../css/tokens.css">
+
     <link rel="stylesheet" href="../css/base.css">
+
     <link rel="stylesheet" href="../css/app.css">
+
     <link rel="stylesheet" href="../css/registration.css">
 
 </head>
@@ -71,9 +76,9 @@
         <div class="container">
 
             <a
-                href="#"
+                href="landing.html"
                 class="brand-logo"
-                aria-label="CTM PATH">
+                aria-label="CTM PATH™">
 
                 <img
                     src="../assets/logo/CTM_Logo_Transparent.svg"
@@ -104,7 +109,7 @@
 
                     <div class="progress-header">
 
-                        <div>
+                        <div class="progress-left">
 
                             <p class="step-ta">
 
@@ -120,15 +125,19 @@
 
                         </div>
 
-                        <div class="module-name">
+                        <div class="progress-right">
 
-                            பதிவு
+                            <p class="module-ta">
 
-                            <span>
+                                பதிவு
+
+                            </p>
+
+                            <p class="module-en">
 
                                 Registration
 
-                            </span>
+                            </p>
 
                         </div>
 
@@ -156,7 +165,7 @@
 
                     <p class="hero-title-en">
 
-                        Before We Begin
+                        BEFORE WE BEGIN
 
                     </p>
 
@@ -173,15 +182,15 @@
 
                         Share a few details so we can
                         personalise your Guided Journey,
-                        Kala Chakra™, Diagnosis™ and
-                        Prescription™.
+                        Kala Chakra™, Diagnosis™
+                        and Prescription™.
 
                     </p>
 
                 </section>
 
                 <!-- ==========================================
-                     FORM
+                     REGISTRATION FORM
                      ========================================== -->
 
                 <form
@@ -189,9 +198,9 @@
                     class="registration-form"
                     autocomplete="on">
 
-                    <!-- ==============================
-                         NAME
-                         ============================== -->
+                    <!-- ==================================
+                         FULL NAME
+                         ================================== -->
 
                     <div class="form-group">
 
@@ -215,13 +224,14 @@
                             id="fullName"
                             name="fullName"
                             type="text"
+                            autocomplete="name"
                             required>
 
                     </div>
 
-                    <!-- ==============================
+                    <!-- ==================================
                          MOBILE
-                         ============================== -->
+                         ================================== -->
 
                     <div class="form-group">
 
@@ -245,13 +255,14 @@
                             id="mobile"
                             name="mobile"
                             type="tel"
+                            autocomplete="tel"
                             required>
 
                     </div>
 
-                    <!-- ==============================
+                    <!-- ==================================
                          EMAIL
-                         ============================== -->
+                         ================================== -->
 
                     <div class="form-group">
 
@@ -274,249 +285,21 @@
                         <input
                             id="email"
                             name="email"
-                            type="email">
+                            type="email"
+                            autocomplete="email">
 
                     </div>
 
-                                        <!-- ==============================
-                         DISTRICT
-                         ============================== -->
-
-                    <div class="form-group">
-
-                        <label for="district">
-
-                            <span class="label-ta">
-
-                                📍 மாவட்டம்
-
-                            </span>
-
-                            <span class="label-en">
-
-                                District
-
-                            </span>
-
-                        </label>
-
-                        <input
-                            id="district"
-                            name="district"
-                            type="text"
-                            required>
-
-                    </div>
-
-                    <!-- ==============================
-                         STATE
-                         ============================== -->
-
-                    <div class="form-group">
-
-                        <label for="state">
-
-                            <span class="label-ta">
-
-                                🗺️ மாநிலம்
-
-                            </span>
-
-                            <span class="label-en">
-
-                                State
-
-                            </span>
-
-                        </label>
-
-                        <input
-                            id="state"
-                            name="state"
-                            type="text"
-                            required>
-
-                    </div>
-
-                    <!-- ==============================
-                         LANGUAGE
-                         ============================== -->
-
-                    <div class="form-group">
-
-                        <label for="language">
-
-                            <span class="label-ta">
-
-                                🌐 மொழி விருப்பம்
-
-                            </span>
-
-                            <span class="label-en">
-
-                                Preferred Language
-
-                            </span>
-
-                        </label>
-
-                        <select
-                            id="language"
-                            name="language"
-                            required>
-
-                            <option value="">
-
-                                மொழியை தேர்வு செய்யுங்கள்
-                                • Select Language
-
-                            </option>
-
-                            <option value="ta">
-
-                                தமிழ் • Tamil
-
-                            </option>
-
-                            <option value="en">
-
-                                English
-
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                    <!-- ==============================
-                         REFERRAL SOURCE
-                         ============================== -->
-
-                    <div class="form-group">
-
-                        <label for="source">
-
-                            <span class="label-ta">
-
-                                📣 எங்களைப் பற்றி எவ்வாறு அறிந்தீர்கள்?
-
-                            </span>
-
-                            <span class="label-en">
-
-                                How did you hear about CTM PATH™?
-
-                            </span>
-
-                        </label>
-
-                        <select
-                            id="source"
-                            name="source">
-
-                            <option value="">
-
-                                ஒரு விருப்பத்தை தேர்வு செய்யுங்கள்
-                                • Select One
-
-                            </option>
-
-                            <option value="friend">
-
-                                நண்பர் • Friend
-
-                            </option>
-
-                            <option value="whatsapp">
-
-                                WhatsApp
-
-                            </option>
-
-                            <option value="facebook">
-
-                                Facebook
-
-                            </option>
-
-                            <option value="instagram">
-
-                                Instagram
-
-                            </option>
-
-                            <option value="youtube">
-
-                                YouTube
-
-                            </option>
-
-                            <option value="google">
-
-                                Google Search
-
-                            </option>
-
-                            <option value="event">
-
-                                நிகழ்ச்சி • Event
-
-                            </option>
-
-                            <option value="other">
-
-                                மற்றவை • Other
-
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                    <!-- ==============================
-                         PRIVACY PROMISE
-                         ============================== -->
-
-                    <section class="privacy-card">
-
-                        <div class="privacy-icon">
-
-                            🔒
-
-                        </div>
-
-                        <div class="privacy-content">
-
-                            <h3>
-
-                                உங்கள் தகவல்கள்
-                                முழுமையாக பாதுகாக்கப்படும்.
-
-                            </h3>
-
-                            <p>
-
-                                Your responses remain completely
-                                confidential and will only be used
-                                to prepare your personalised
-                                assessment.
-
-                            </p>
-
-                        </div>
-
-                    </section>
-
-                                        <!-- ==============================
-                         ACTIONS
-                         ============================== -->
+                                        <!-- ==================================
+                         ACTION BUTTONS
+                         ================================== -->
 
                     <div class="form-actions">
 
                         <button
                             type="button"
-                            class="secondary-button"
-                            id="backButton">
+                            id="backButton"
+                            class="secondary-button">
 
                             <span class="button-title-ta">
 
@@ -534,8 +317,8 @@
 
                         <button
                             type="submit"
-                            class="primary-button"
-                            id="continueButton">
+                            id="continueButton"
+                            class="primary-button">
 
                             <span class="button-title-ta">
 
@@ -582,7 +365,7 @@
 </div>
 
 <!-- ==========================================================
-     JavaScript
+     CORE SCRIPTS
      ========================================================== -->
 
 <script src="../js/storage.js"></script>
