@@ -1,1212 +1,855 @@
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey v5.0
+   CTM PATH™ Guided Journey v2.0
+   File        : js/api.js
+   Version     : 2.0
+   Status      : Production
+   Purpose     : Google Apps Script API Layer
 
-   File        : api.js
-   Version     : 1.1
+   Responsibilities
+   ----------------
+   • Backend Communication
+   • HTTP Requests
+   • Request Validation
+   • Response Validation
+   • Error Handling
 
-   Status      : 🔒 FOUNDATION UPDATE
+   Does NOT
+   --------
+   • Manipulate UI
+   • Navigate Pages
+   • Calculate Scores
+   • Modify Application State
 
-   Purpose     : API Service Layer
-
-                  Owns
-                  • Google Apps Script Communication
-                  • HTTP Requests
-                  • Response Processing
-                  • Error Handling
-                  • Request Validation
-
-                  Owns NO
-                  • UI Rendering
-                  • DOM Manipulation
-                  • Assessment Logic
-                  • Business Rules
-
-   ========================================================================== */
-
+========================================================================== */
 
 'use strict';
 
+/* ==========================================================================
+   CTM Namespace
+========================================================================== */
 
-
-
-
+window.CTM = window.CTM || {};
 
 /* ==========================================================================
-   API SERVICE
-   ========================================================================== */
+   API Module
+========================================================================== */
 
-
-const ApiService = (() => {
-
-
-
-
-
-
+CTM.API = (() => {
 
     /* ======================================================================
-       CONFIGURATION
-       ====================================================================== */
-
+       Configuration
+    ====================================================================== */
 
     const CONFIG = {
 
-
-
-        WEB_APP_URL:
-
+        WEBAPP_URL:
             'https://script.google.com/macros/s/AKfycby1yF2m7cIXnHh0SqfegiDuxsjdMX6PVcTaSogQ5HFqx3z5CGB3jjN0vCFvQuPV5sBCIw/exec',
 
+        TIMEOUT: 30000,
 
-
-
-
-
-        TIMEOUT:
-
-            30000,
-
-
-
-
-
-
-        HEADERS:{
-
-
-
-            'Content-Type':
-
-                'application/json'
-
-
-
-        }
-
-
-
+        CONTENT_TYPE: 'text/plain;charset=utf-8'
     };
 
+    /* ======================================================================
+       Utility
+    ====================================================================== */
 
+    function buildEnvelope(action, payload = {}) {
 
+        return {
 
+            action,
 
+            timestamp: new Date().toISOString(),
 
+            payload
 
+        };
 
+    }
 
     /* ======================================================================
-       SET WEB APP URL
-       ====================================================================== */
+       Timeout Wrapper
+    ====================================================================== */
 
+    async function fetchWithTimeout(resource, options = {}) {
 
-    function setWebAppUrl(url){
+        const controller = new AbortController();
 
+        const id = setTimeout(() => {
 
+            controller.abort();
 
-        if(!url || typeof url !== 'string'){
+        }, CONFIG.TIMEOUT);
 
+        try {
 
+            const response = await fetch(resource, {
 
-            throw new Error(
+                ...options,
 
-                'Invalid Web App URL.'
+                signal: controller.signal
 
-            );
+            });
 
-
-
-        }
-
-
-
-
-
-
-
-        CONFIG.WEB_APP_URL = url;
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ======================================================================
-       GET WEB APP URL
-       ====================================================================== */
-
-
-    function getWebAppUrl(){
-
-
-
-        return CONFIG.WEB_APP_URL;
-
-
-
-    }
-
-                    /* ======================================================================
-   REQUEST VALIDATION
-   ====================================================================== */
-
-
-    function validateEndpoint(endpoint){
-
-
-
-        if(
-
-
-
-            !endpoint
-
-            ||
-
-            typeof endpoint !== 'string'
-
-
-
-        ){
-
-
-
-            throw new Error(
-
-
-
-                'Invalid API endpoint.'
-
-
-
-            );
-
-
-
-        }
-
-
-
-
-
-    }
-
-
-
-
-
-
-
-
-    function validatePayload(payload){
-
-
-
-        if(
-
-
-
-            payload === undefined
-
-            ||
-
-            payload === null
-
-
-
-        ){
-
-
-
-            return {};
-
-
-
-        }
-
-
-
-
-
-
-
-        return payload;
-
-
-
-    }
-
-
-
-
-
-
-
-
-/* ======================================================================
-   BUILD REQUEST URL
-   ====================================================================== */
-
-
-    function buildUrl(endpoint){
-
-
-
-        validateEndpoint(
-
-            endpoint
-
-        );
-
-
-
-
-
-
-
-        return (
-
-            CONFIG.WEB_APP_URL
-
-            +
-
-            '?action='
-
-            +
-
-            encodeURIComponent(
-
-                endpoint
-
-            )
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-/* ======================================================================
-   FETCH WITH TIMEOUT
-   ====================================================================== */
-
-
-    async function fetchWithTimeout(
-
-
-
-        url,
-
-        options = {}
-
-
-
-    ){
-
-
-
-
-
-        const controller =
-
-            new AbortController();
-
-
-
-
-
-
-
-        const timeout =
-
-            setTimeout(
-
-
-
-                ()=>{
-
-
-
-                    controller.abort();
-
-
-
-                },
-
-
-
-                CONFIG.TIMEOUT
-
-
-
-            );
-
-
-
-
-
-
-
-
-        try{
-
-
-
-
-
-            const response =
-
-                await fetch(
-
-
-
-                    url,
-
-
-
-                    {
-
-
-
-                        ...options,
-
-
-
-                        signal:
-
-                            controller.signal
-
-
-
-                    }
-
-
-
-                );
-
-
-
-
-
-
-
-            clearTimeout(
-
-                timeout
-
-            );
-
-
-
-
-
-
+            clearTimeout(id);
 
             return response;
 
-
-
-
-
         }
 
+        catch (error) {
 
-
-
-
-        catch(error){
-
-
-
-
-
-            clearTimeout(
-
-                timeout
-
-            );
-
-
-
-
-
-
+            clearTimeout(id);
 
             throw error;
 
-
-
-
-
         }
-
-
 
     }
 
-                    /* ======================================================================
-   RESPONSE HANDLING
-   ====================================================================== */
+    /* ======================================================================
+       Core POST Request
+    ====================================================================== */
 
+    async function post(action, payload = {}) {
 
-    async function parseResponse(response){
+        try {
 
+            const requestBody = buildEnvelope(action, payload);
 
-
-        if(!response.ok){
-
-
-
-            throw new Error(
-
-
-
-                `HTTP Error: ${response.status}`
-
-
-
+            console.groupCollapsed(
+                `[CTM API] ${action}`
             );
 
-
-
-        }
-
-
-
-
-
-
-
-        return await response.json();
-
-
-
-    }
-
-
-
-
-
-
-
-
-/* ======================================================================
-   POST REQUEST
-   ====================================================================== */
-
-
-    async function post(
-
-
-
-        endpoint,
-
-        payload = {}
-
-
-
-    ){
-
-
-
-
-
-        validateEndpoint(
-
-            endpoint
-
-        );
-
-
-
-
-
-
-
-        payload =
-
-            validatePayload(
-
-                payload
-
+            console.log(
+                'Request',
+                requestBody
             );
 
+            const response = await fetchWithTimeout(
 
-
-
-
-
-
-
-        const response =
-
-            await fetchWithTimeout(
-
-
-
-                buildUrl(
-
-                    endpoint
-
-                ),
-
-
+                CONFIG.WEBAPP_URL,
 
                 {
 
+                    method: 'POST',
 
+                    headers: {
 
-                    method:
+                        'Content-Type': CONFIG.CONTENT_TYPE
 
-                        'POST',
+                    },
 
-
-
-
-
-
-                    headers:
-
-                        CONFIG.HEADERS,
-
-
-
-
-
-
-
-                    body:
-
-                        JSON.stringify(
-
-                            payload
-
-                        )
-
-
+                    body: JSON.stringify(requestBody)
 
                 }
 
+            );
 
+            if (!response.ok) {
+
+                throw new Error(
+
+                    `HTTP ${response.status}`
+
+                );
+
+            }
+
+            const result = await response.json();
+
+            console.log(
+
+                'Response',
+
+                result
 
             );
 
+            console.groupEnd();
 
+            validateResponse(result);
 
-
-
-
-
-
-        return parseResponse(
-
-            response
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-/* ======================================================================
-   GET REQUEST
-   ====================================================================== */
-
-
-    async function get(endpoint){
-
-
-
-        validateEndpoint(
-
-            endpoint
-
-        );
-
-
-
-
-
-
-
-
-        const response =
-
-            await fetchWithTimeout(
-
-
-
-                buildUrl(
-
-                    endpoint
-
-                ),
-
-
-
-                {
-
-
-
-                    method:
-
-                        'GET',
-
-
-
-
-
-
-                    headers:
-
-                        CONFIG.HEADERS
-
-
-
-                }
-
-
-
-            );
-
-
-
-
-
-
-
-
-        return parseResponse(
-
-            response
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-/* ======================================================================
-   REGISTER VISITOR
-   ====================================================================== */
-
-
-    async function registerVisitor(visitor){
-
-
-
-        return await post(
-
-
-
-            'registerVisitor',
-
-
-
-            visitor
-
-
-
-        );
-
-
-
-    }
-
-                    /* ======================================================================
-   SAVE ASSESSMENT
-   ====================================================================== */
-
-
-    async function saveAssessment(data){
-
-
-
-        return await post(
-
-
-
-            'saveAssessment',
-
-
-
-            data
-
-
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-/* ======================================================================
-   SAVE KALA CHAKRA
-   ====================================================================== */
-
-
-    async function saveKalaChakra(data){
-
-
-
-        return await post(
-
-
-
-            'saveKalaChakra',
-
-
-
-            data
-
-
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-/* ======================================================================
-   SAVE DIAGNOSIS
-   ====================================================================== */
-
-
-    async function saveDiagnosis(data){
-
-
-
-        return await post(
-
-
-
-            'saveDiagnosis',
-
-
-
-            data
-
-
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-/* ======================================================================
-   SAVE PRESCRIPTION
-   ====================================================================== */
-
-
-    async function savePrescription(data){
-
-
-
-        return await post(
-
-
-
-            'savePrescription',
-
-
-
-            data
-
-
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-/* ======================================================================
-   COMPLETE JOURNEY
-   ====================================================================== */
-
-
-    async function completeJourney(data){
-
-
-
-        return await post(
-
-
-
-            'completeJourney',
-
-
-
-            data
-
-
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-/* ======================================================================
-   LOAD VISITOR
-   ====================================================================== */
-
-
-    async function getVisitor(visitorId){
-
-
-
-        return await get(
-
-
-
-            'getVisitor&visitorId='
-
-            +
-
-            encodeURIComponent(
-
-                visitorId
-
-            )
-
-
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-/* ======================================================================
-   HEALTH CHECK
-   ====================================================================== */
-
-
-    async function ping(){
-
-
-
-        return await get(
-
-
-
-            'ping'
-
-
-
-        );
-
-
-
-    }
-
-                    /* ======================================================================
-   SAFE REQUEST WRAPPER
-   ====================================================================== */
-
-
-    async function safeRequest(callback){
-
-
-
-        try{
-
-
-
-
-
-            const result =
-
-                await callback();
-
-
-
-
-
-
-
-            return {
-
-
-
-                success:
-
-                    true,
-
-
-
-                data:
-
-                    result
-
-
-
-            };
-
-
-
-
+            return result;
 
         }
 
-
-
-
-
-        catch(error){
-
-
-
-
+        catch (error) {
 
             console.error(
 
-
-
-                'API Request Error:',
-
-
+                '[CTM API ERROR]',
 
                 error
 
-
-
             );
-
-
-
-
-
-
 
             return {
 
+                success: false,
 
+                message: error.message,
 
-                success:
-
-                    false,
-
-
-
-                error:
-
-                    error.message
-
-
+                data: null
 
             };
 
-
-
-
-
         }
-
-
 
     }
 
+    /* ======================================================================
+       Response Validator
+    ====================================================================== */
 
+    function validateResponse(result) {
 
+        if (!result) {
 
+            throw new Error(
 
+                'Empty server response.'
 
+            );
 
+        }
 
-/* ======================================================================
-   PUBLIC API
-   ====================================================================== */
+        if (typeof result !== 'object') {
 
+            throw new Error(
+
+                'Invalid response format.'
+
+            );
+
+        }
+
+        return true;
+
+    }
+
+               /* ======================================================================
+       Visitor Registration
+    ====================================================================== */
+
+    async function registerVisitor(visitor) {
+
+        if (!visitor) {
+
+            return {
+
+                success: false,
+
+                message: 'Visitor object is missing.'
+
+            };
+
+        }
+
+        return await post(
+
+            'registerVisitor',
+
+            visitor
+
+        );
+
+    }
+
+    /* ======================================================================
+       Update Visitor Profile
+    ====================================================================== */
+
+    async function updateVisitor(visitor) {
+
+        if (!visitor || !visitor.visitorId) {
+
+            return {
+
+                success: false,
+
+                message: 'Visitor ID missing.'
+
+            };
+
+        }
+
+        return await post(
+
+            'updateVisitor',
+
+            visitor
+
+        );
+
+    }
+
+    /* ======================================================================
+       Save Registration Progress
+    ====================================================================== */
+
+    async function saveRegistration(data) {
+
+        return await post(
+
+            'saveRegistration',
+
+            data
+
+        );
+
+    }
+
+    /* ======================================================================
+       Save Current Journey State
+    ====================================================================== */
+
+    async function saveJourneyState(state) {
+
+        return await post(
+
+            'saveJourneyState',
+
+            state
+
+        );
+
+    }
+
+    /* ======================================================================
+       Save Assessment Response
+    ====================================================================== */
+
+    async function saveAssessment(data) {
+
+        return await post(
+
+            'saveAssessment',
+
+            data
+
+        );
+
+    }
+
+    /* ======================================================================
+       Autosave
+    ====================================================================== */
+
+    async function autosave(data) {
+
+        return await post(
+
+            'autosave',
+
+            data
+
+        );
+
+    }
+
+    /* ======================================================================
+       Save Kala Chakra
+    ====================================================================== */
+
+    async function saveKalaChakra(data) {
+
+        return await post(
+
+            'saveKalaChakra',
+
+            data
+
+        );
+
+    }
+
+    /* ======================================================================
+       Generate Diagnosis
+    ====================================================================== */
+
+    async function generateDiagnosis(data) {
+
+        return await post(
+
+            'generateDiagnosis',
+
+            data
+
+        );
+
+    }
+
+    /* ======================================================================
+       Generate Prescription
+    ====================================================================== */
+
+    async function generatePrescription(data) {
+
+        return await post(
+
+            'generatePrescription',
+
+            data
+
+        );
+
+    }
+
+    /* ======================================================================
+       Mark Journey Complete
+    ====================================================================== */
+
+    async function completeJourney(data) {
+
+        return await post(
+
+            'completeJourney',
+
+            data
+
+        );
+
+    }
+
+    /* ======================================================================
+       Load Visitor
+    ====================================================================== */
+
+    async function getVisitor(visitorId) {
+
+        return await post(
+
+            'getVisitor',
+
+            {
+
+                visitorId
+
+            }
+
+        );
+
+    }
+
+    /* ======================================================================
+       Resume Journey
+    ====================================================================== */
+
+    async function resumeJourney(visitorId) {
+
+        return await post(
+
+            'resumeJourney',
+
+            {
+
+                visitorId
+
+            }
+
+        );
+
+    }
+
+    /* ======================================================================
+       Health Check
+    ====================================================================== */
+
+    async function ping() {
+
+        return await post(
+
+            'ping',
+
+            {}
+
+        );
+
+    }
+
+               /* ======================================================================
+       Response Helpers
+    ====================================================================== */
+
+    function isSuccess(response) {
+
+        return !!(
+            response &&
+            response.success === true
+        );
+
+    }
+
+    function getMessage(response) {
+
+        if (!response) {
+
+            return '';
+
+        }
+
+        return response.message || '';
+
+    }
+
+    function getData(response) {
+
+        if (!response) {
+
+            return null;
+
+        }
+
+        return response.data || null;
+
+    }
+
+    /* ======================================================================
+       Retry Helper
+    ====================================================================== */
+
+    async function retry(action, payload = {}, attempts = 3) {
+
+        let lastError = null;
+
+        for (let i = 1; i <= attempts; i++) {
+
+            try {
+
+                const result = await post(action, payload);
+
+                if (isSuccess(result)) {
+
+                    return result;
+
+                }
+
+                lastError = result;
+
+            }
+
+            catch (error) {
+
+                lastError = error;
+
+            }
+
+            console.warn(
+
+                `[CTM API] Retry ${i}/${attempts} for ${action}`
+
+            );
+
+            await delay(1000);
+
+        }
+
+        return {
+
+            success: false,
+
+            message:
+
+                lastError?.message ||
+
+                'Request failed after multiple attempts.',
+
+            data: null
+
+        };
+
+    }
+
+    /* ======================================================================
+       Delay Utility
+    ====================================================================== */
+
+    function delay(milliseconds) {
+
+        return new Promise(resolve => {
+
+            setTimeout(
+
+                resolve,
+
+                milliseconds
+
+            );
+
+        });
+
+    }
+
+    /* ======================================================================
+       Logging
+    ====================================================================== */
+
+    function logRequest(action, payload) {
+
+        console.groupCollapsed(
+
+            `[CTM API Request] ${action}`
+
+        );
+
+        console.log(
+
+            'Payload',
+
+            payload
+
+        );
+
+        console.groupEnd();
+
+    }
+
+    function logResponse(action, response) {
+
+        console.groupCollapsed(
+
+            `[CTM API Response] ${action}`
+
+        );
+
+        console.log(response);
+
+        console.groupEnd();
+
+    }
+
+    function logError(action, error) {
+
+        console.groupCollapsed(
+
+            `[CTM API Error] ${action}`
+
+        );
+
+        console.error(error);
+
+        console.groupEnd();
+
+    }
+
+    /* ======================================================================
+       Public Interface
+    ====================================================================== */
 
     return {
 
-
-
-        CONFIG,
-
-
-
-
-
-        setWebAppUrl,
-
-        getWebAppUrl,
-
-
-
-
-
-        get,
-
-        post,
-
-
-
-
-
         registerVisitor,
 
+        updateVisitor,
 
+        saveRegistration,
 
-
+        saveJourneyState,
 
         saveAssessment,
 
+        autosave,
+
         saveKalaChakra,
 
-        saveDiagnosis,
+        generateDiagnosis,
 
-        savePrescription,
-
-
-
-
+        generatePrescription,
 
         completeJourney,
 
-
-
-
-
         getVisitor,
 
-
-
-
+        resumeJourney,
 
         ping,
 
+        retry,
 
+        isSuccess,
 
+        getMessage,
 
-
-        safeRequest
-
-
+        getData
 
     };
 
+})();
 
+/* ==========================================================================
+   Production Bootstrap
+========================================================================== */
 
+/**
+ * Initialise API module.
+ * Safe to call multiple times.
+ */
+(function initialiseAPI() {
 
-
+    console.info(
+        '========================================='
+    );
+    console.info(
+        'CTM PATH™ API Layer Initialised'
+    );
+    console.info(
+        'Version : 2.0'
+    );
+    console.info(
+        'Backend : Google Apps Script'
+    );
+    console.info(
+        'Status  : Ready'
+    );
+    console.info(
+        '========================================='
+    );
 
 })();
 
+/* ==========================================================================
+   Development Utilities
+   (Safe to remove in production if desired)
+========================================================================== */
 
+CTM.API.testConnection = async function () {
 
+    console.group('CTM API Test');
 
+    try {
 
+        const result = await CTM.API.ping();
 
+        if (CTM.API.isSuccess(result)) {
 
+            console.info(
+                '✓ Backend connection successful.'
+            );
+
+            console.table(result);
+
+        } else {
+
+            console.warn(
+                '⚠ Backend responded with an error.'
+            );
+
+            console.table(result);
+
+        }
+
+        return result;
+
+    } catch (error) {
+
+        console.error(
+            '✗ Backend connection failed.'
+        );
+
+        console.error(error);
+
+        return {
+
+            success: false,
+
+            message: error.message
+
+        };
+
+    } finally {
+
+        console.groupEnd();
+
+    }
+
+};
 
 /* ==========================================================================
-   GLOBAL EXPORT
+   Version Information
+========================================================================== */
 
-   IMPORTANT:
-   registration.js accesses:
+Object.freeze(
 
-       window.ApiService.registerVisitor()
+    CTM.API
 
-   Therefore ApiService must be globally available.
+);
 
-   ========================================================================== */
+Object.defineProperty(
 
+    CTM.API,
 
-window.ApiService = ApiService;
+    'VERSION',
 
+    {
 
+        value: '2.0',
 
+        writable: false,
 
+        enumerable: true,
 
+        configurable: false
 
+    }
 
+);
+
+Object.defineProperty(
+
+    CTM.API,
+
+    'BUILD',
+
+    {
+
+        value: '2026.07.25',
+
+        writable: false,
+
+        enumerable: true,
+
+        configurable: false
+
+    }
+
+);
 
 /* ==========================================================================
-   END OF FILE
+   End of File
+========================================================================== */
 
+/*
 
-   File        : api.js
+CTM PATH™ Guided Journey
 
+File:
+js/api.js
 
-   Version     : 1.1
+Responsibilities
+----------------
+✓ Google Apps Script Communication
+✓ Request Validation
+✓ Response Validation
+✓ Retry Logic
+✓ Error Handling
+✓ JSON Transport
 
+Does NOT
+---------
+✗ Manipulate HTML
+✗ Manipulate CSS
+✗ Calculate Scores
+✗ Navigate Screens
+✗ Update UI
 
-   Status      : 🔒 FOUNDATION UPDATE
+Single Responsibility:
+API Communication Only
 
+Status:
+READY FOR PRODUCTION
 
-   ========================================================================== */
+*/
+
