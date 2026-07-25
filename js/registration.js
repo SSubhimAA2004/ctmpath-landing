@@ -4,93 +4,65 @@
    FROM SURVIVAL TO LIVING™
 
    File        : registration.js
-   Version     : 5.4
+   Version     : 6.0
+   Status      : PRODUCTION
 
-   Status      : 🔒 CLEAN MASTER
+   Purpose
 
-   Purpose     : Registration Controller
+   Owns
+   --------------------------------------------------------------------------
+   ✓ Registration Page
+   ✓ Form Validation
+   ✓ KYC Collection
+   ✓ API Submission
+   ✓ Visitor ID Capture
+   ✓ Local Storage
+   ✓ Journey Navigation
 
-                  Owns
-                  • Registration Initialization
-                  • KYC Form Handling
-                  • Data Collection
-                  • API Submission
-                  • Visitor ID Capture
-                  • Journey Navigation
+   Owns NO
+   --------------------------------------------------------------------------
+   ✗ Assessment
+   ✗ Google Sheets
+   ✗ Business Logic
+   ✗ Scoring
 
-                  Data Flow
-
-                  registration.html
-                         ↓
-                  registration.js
-                         ↓
-                  api.js
-                         ↓
-                  Google Apps Script API
-                         ↓
-                  Visitors Sheet
-
-   ========================================================================== */
-
+========================================================================== */
 
 'use strict';
 
-
-
-
-
-
 /* ==========================================================================
    REGISTRATION CONTROLLER
-   ========================================================================== */
-
+========================================================================== */
 
 const Registration = {
 
+    form: null,
 
+    backButton: null,
+
+    continueButton: null,
 
     /* ======================================================================
        INITIALIZE
-       ====================================================================== */
+    ====================================================================== */
 
-
-    init: function(){
-
-
+    init() {
 
         this.cacheDOM();
 
-
-
         this.bindEvents();
-
-
 
         this.restoreRegistration();
 
-
-
         this.animatePage();
-
-
 
     },
 
-
-
-
-
-
-
-
     /* ======================================================================
-       CACHE DOM ELEMENTS
-       ====================================================================== */
+       CACHE DOM
+    ====================================================================== */
 
-
-    cacheDOM: function(){
-
-
+    cacheDOM() {
 
         this.form =
 
@@ -100,12 +72,6 @@ const Registration = {
 
             );
 
-
-
-
-
-
-
         this.backButton =
 
             document.getElementById(
@@ -113,12 +79,6 @@ const Registration = {
                 'backButton'
 
             );
-
-
-
-
-
-
 
         this.continueButton =
 
@@ -128,579 +88,93 @@ const Registration = {
 
             );
 
-
-
     },
 
-   
-/* ==========================================================================
-   EVENT BINDING
-   ========================================================================== */
+    /* ======================================================================
+       EVENTS
+    ====================================================================== */
 
+    bindEvents() {
 
-    bindEvents: function(){
-
-
-
-        if(this.backButton){
-
-
+        if (this.backButton) {
 
             this.backButton.addEventListener(
 
-
-
                 'click',
-
-
 
                 this.goBack.bind(this)
 
-
-
             );
-
-
 
         }
 
-
-
-
-
-
-
-
-        if(this.form){
-
-
+        if (this.form) {
 
             this.form.addEventListener(
 
-
-
                 'submit',
-
-
 
                 this.submit.bind(this)
 
-
-
             );
 
-
-
         }
-
-
 
     },
 
+    /* ======================================================================
+       VALIDATE
+    ====================================================================== */
 
+    validate() {
 
-
-
-
-
-
-/* ==========================================================================
-   RESTORE SAVED REGISTRATION DATA
-   ========================================================================== */
-
-
-    restoreRegistration: function(){
-
-
-
-        try{
-
-
-
-
-
-            const savedData =
-
-                localStorage.getItem(
-
-                    'ctmRegistration'
-
-                );
-
-
-
-
-
-
-
-            if(!savedData){
-
-
-
-                return;
-
-
-
-            }
-
-
-
-
-
-
-
-
-            const data =
-
-                JSON.parse(
-
-                    savedData
-
-                );
-
-
-
-
-
-
-
-
-            Object.keys(data).forEach(
-
-
-
-                function(key){
-
-
-
-
-
-                    const field =
-
-                        document.getElementById(
-
-                            key
-
-                        );
-
-
-
-
-
-
-
-                    if(field){
-
-
-
-                        field.value =
-
-                            data[key];
-
-
-
-                    }
-
-
-
-
-
-                }
-
-
-
-            );
-
-
-
-
-
-        }
-
-
-
-        catch(error){
-
-
-
-
-
-            console.error(
-
-
-
-                'CTM Registration Restore Error:',
-
-
-
-                error
-
-
-
-            );
-
-
-
-
-
-        }
-
-
-
-    },
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   FORM VALIDATION
-   ========================================================================== */
-
-
-    validate: function(){
-
-
-
-        if(!this.form){
-
-
+        if (!this.form) {
 
             return false;
 
-
-
         }
 
+        if (
 
+            !this.form.checkValidity()
 
-
-
-
-
-
-        if(!this.form.checkValidity()){
-
-
+        ) {
 
             this.form.reportValidity();
 
-
-
             return false;
 
-
-
         }
-
-
-
-
-
-
-
 
         return true;
 
-
-
     },
 
-   
-/* ==========================================================================
-   COLLECT REGISTRATION DATA
+    /* ======================================================================
+       SAFE VALUE
+    ====================================================================== */
 
-   Purpose:
-   Convert HTML form values into Google Sheet compatible payload.
+    value(id) {
 
-   Sheet Mapping:
+        const field =
 
-   Timestamp
-   VisitorID
-   AssessmentDate
-   InitialEmotion
-   FullName
-   Email
-   Mobile
-   District
-   State
-   ReferralSource
-   Language
-   Device
-   CurrentPage
-   CompletionStatus
-   PDFSent
-   EmailSent
-   WheelStatus
+            document.getElementById(id);
 
-   ========================================================================== */
-
-
-    collectData: function(){
-
-
-
-        return {
-
-
-
-            Timestamp:
-
-                new Date().toISOString(),
-
-
-
-
-
-
-            VisitorID:
-
-                '',
-
-
-
-
-
-
-            AssessmentDate:
-
-                new Date().toISOString(),
-
-
-
-
-
-
-            InitialEmotion:
-
-                '',
-
-
-
-
-
-
-            FullName:
-
-                this.getValue(
-
-                    'fullName'
-
-                ),
-
-
-
-
-
-
-            Email:
-
-                this.getValue(
-
-                    'email'
-
-                ),
-
-
-
-
-
-
-            Mobile:
-
-                this.getValue(
-
-                    'mobile'
-
-                ),
-
-
-
-
-
-
-            District:
-
-                this.getValue(
-
-                    'district'
-
-                ),
-
-
-
-
-
-
-            State:
-
-                this.getValue(
-
-                    'state'
-
-                ),
-
-
-
-
-
-
-            ReferralSource:
-
-                this.getValue(
-
-                    'source'
-
-                ),
-
-
-
-
-
-
-            Language:
-
-                this.getValue(
-
-                    'language'
-
-                ) || 'Tamil',
-
-
-
-
-
-
-            Device:
-
-                this.getDevice(),
-
-
-
-
-
-
-            CurrentPage:
-
-                'Registration',
-
-
-
-
-
-
-            CompletionStatus:
-
-                'Registered',
-
-
-
-
-
-
-            PDFSent:
-
-                'No',
-
-
-
-
-
-
-            EmailSent:
-
-                'No',
-
-
-
-
-
-
-            WheelStatus:
-
-                'Pending'
-
-
-
-
-
-        };
-
-
-
-    },
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   SAFE FIELD VALUE READER
-   ========================================================================== */
-
-
-    getValue: function(id){
-
-
-
-        const element =
-
-            document.getElementById(
-
-                id
-
-            );
-
-
-
-
-
-
-
-        if(!element){
-
-
+        if (!field) {
 
             return '';
 
-
-
         }
 
-
-
-
-
-
-
-
-        return element.value.trim();
-
-
+        return field.value.trim();
 
     },
 
+    /* ======================================================================
+       DEVICE
+    ====================================================================== */
 
-
-
-
-
-
-
-/* ==========================================================================
-   DEVICE DETECTION
-   ========================================================================== */
-
-
-    getDevice: function(){
-
-
+    getDevice() {
 
         return /Mobi/i.test(
 
@@ -708,677 +182,515 @@ const Registration = {
 
         )
 
-        ?
+        ? 'Mobile'
 
-
-
-            'Mobile'
-
-
-
-        :
-
-
-
-            'Desktop';
-
-
+        : 'Desktop';
 
     },
 
-   
-/* ==========================================================================
-   SAVE REGISTRATION LOCALLY
-   ========================================================================== */
+       /* ======================================================================
+       COLLECT REGISTRATION DATA
 
+       Backend Contract
+       ----------------------------------------------------------------------
+       Matches 08_Service.gs
 
-    saveLocal: function(data){
+       {
+           fullName,
+           email,
+           mobile,
+           district,
+           state,
+           source,
+           language,
+           device,
+           emotion
+       }
 
+    ====================================================================== */
 
+    collectData() {
 
-        try{
+        return {
 
+            fullName:
 
+                this.value(
 
+                    'fullName'
 
+                ),
+
+            email:
+
+                this.value(
+
+                    'email'
+
+                ),
+
+            mobile:
+
+                this.value(
+
+                    'mobile'
+
+                ),
+
+            district:
+
+                this.value(
+
+                    'district'
+
+                ),
+
+            state:
+
+                this.value(
+
+                    'state'
+
+                ),
+
+            source:
+
+                this.value(
+
+                    'source'
+
+                ),
+
+            language:
+
+                this.value(
+
+                    'language'
+
+                ) ||
+
+                'Tamil',
+
+            device:
+
+                this.getDevice(),
+
+            emotion:
+
+                localStorage.getItem(
+
+                    'ctmInitialEmotion'
+
+                ) ||
+
+                ''
+
+        };
+
+    },
+
+    /* ======================================================================
+       SAVE LOCAL REGISTRATION
+
+       Stores only the information required by the frontend.
+
+    ====================================================================== */
+
+    saveLocal(data) {
+
+        try {
 
             localStorage.setItem(
 
-
-
                 'ctmRegistration',
 
-
-
-                JSON.stringify(
-
-                    data
-
-                )
-
-
+                JSON.stringify(data)
 
             );
 
-
-
-
-
-
-
         }
 
-
-
-        catch(error){
-
-
-
-
+        catch (error) {
 
             console.error(
 
-
-
-                'CTM Local Storage Error:',
-
-
+                'Registration Storage Error',
 
                 error
 
-
-
             );
-
-
-
-
 
         }
 
+    },
 
+    /* ======================================================================
+       RESTORE REGISTRATION
+    ====================================================================== */
+
+    restoreRegistration() {
+
+        try {
+
+            const saved =
+
+                localStorage.getItem(
+
+                    'ctmRegistration'
+
+                );
+
+            if (!saved) {
+
+                return;
+
+            }
+
+            const data =
+
+                JSON.parse(saved);
+
+            [
+
+                'fullName',
+
+                'email',
+
+                'mobile',
+
+                'district',
+
+                'state',
+
+                'source',
+
+                'language'
+
+            ].forEach(
+
+                function (id) {
+
+                    const field =
+
+                        document.getElementById(id);
+
+                    if (
+
+                        field &&
+
+                        data[id] !== undefined
+
+                    ) {
+
+                        field.value =
+
+                            data[id];
+
+                    }
+
+                }
+
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+
+                'Registration Restore Error',
+
+                error
+
+            );
+
+        }
 
     },
 
+       /* ======================================================================
+       SUBMIT REGISTRATION
+       ====================================================================== */
 
-
-
-
-
-
-
-/* ==========================================================================
-   SUBMIT REGISTRATION
-
-   Flow:
-
-   Form Submit
-        ↓
-   Validate
-        ↓
-   Collect KYC Data
-        ↓
-   Save Local
-        ↓
-   Send ApiService.registerVisitor()
-        ↓
-   Receive VisitorID
-        ↓
-   Update Local Data
-        ↓
-   Navigate Assessment
-
-   ========================================================================== */
-
-
-    submit: async function(event){
-
-
+    async submit(event) {
 
         event.preventDefault();
 
-
-
-
-
-
-
-        if(!this.validate()){
-
-
+        if (!this.validate()) {
 
             return;
 
-
-
         }
 
-
-
-
-
-
-
-
-        const registrationData =
+        const registration =
 
             this.collectData();
 
-
-
-
-
-
-
-
-        console.log(
-
-
-
-            'CTM Registration Payload:',
-
-
-
-            registrationData
-
-
-
-        );
-
-
-
-
-
-
-
-
         this.saveLocal(
 
-            registrationData
+            registration
 
         );
 
+        this.setLoading(true);
 
-
-
-
-
-
-
-        try{
-
-
-
-
-
-            if(
-
-
-
-                !window.ApiService
-
-                ||
-
-                typeof window.ApiService.registerVisitor !== 'function'
-
-
-
-            ){
-
-
-
-
-
-                throw new Error(
-
-
-
-                    'ApiService.registerVisitor() unavailable'
-
-
-
-                );
-
-
-
-
-
-            }
-
-
-
-
-
-
-
+        try {
 
             const response =
 
-                await window.ApiService.registerVisitor(
+                await ApiService.registerVisitor(
 
-
-
-                    registrationData
-
-
+                    registration
 
                 );
 
-
-
-
-
-
-
-
             console.log(
 
-
-
-                'CTM Registration Response:',
-
-
+                'Registration Response',
 
                 response
-
-
 
             );
 
+            if (
 
+                !response ||
 
+                response.success !== true
 
+            ) {
 
+                throw new Error(
 
+                    response?.message ||
 
+                    'Registration failed.'
 
-            if(
-
-
-
-                response
-
-                &&
-
-                response.data
-
-                &&
-
-                response.data.visitorId
-
-
-
-            ){
-
-
-
-
-
-                registrationData.VisitorID =
-
-                    response.data.visitorId;
-
-
-
-
-
-
+                );
 
             }
 
+            /* ----------------------------------------------------------
+               Visitor ID returned by GAS
+            ---------------------------------------------------------- */
 
+            const visitorId =
 
+                response.data?.visitorId ||
 
+                response.visitorId ||
 
+                '';
 
+            if (!visitorId) {
 
+                throw new Error(
 
-            else if(
+                    'Visitor ID not returned.'
 
-
-
-                response
-
-                &&
-
-                response.visitorId
-
-
-
-            ){
-
-
-
-
-
-                registrationData.VisitorID =
-
-                    response.visitorId;
-
-
-
-
-
-
+                );
 
             }
 
+            registration.visitorId =
 
-
-
-
-
-
+                visitorId;
 
             this.saveLocal(
 
-
-
-                registrationData
-
-
+                registration
 
             );
 
+            /* ----------------------------------------------------------
+               Update Application State
+            ---------------------------------------------------------- */
 
+            if (
 
+                window.CTMApp &&
 
+                typeof CTMApp.setVisitor === 'function'
 
+            ) {
 
+                CTMApp.setVisitor(
+
+                    registration
+
+                );
+
+            }
+
+            /* ----------------------------------------------------------
+               Navigate
+            ---------------------------------------------------------- */
+
+            this.goNext();
 
         }
 
-
-
-        catch(error){
-
-
-
-
+        catch (error) {
 
             console.error(
 
-
-
-                'CTM Registration Failed:',
-
-
+                'Registration Error',
 
                 error
 
-
-
             );
-
-
-
-
-
-
 
             alert(
 
+                error.message ||
 
-
-                'Registration could not be completed. Please try again.'
-
-
+                'Unable to complete registration.'
 
             );
 
-
-
-
-
-
-
-            return;
-
-
-
         }
 
+        finally {
 
+            this.setLoading(false);
 
-
-
-
-
-
-        this.goNext();
-
-
+        }
 
     },
 
-   
-/* ==========================================================================
-   NAVIGATE TO ASSESSMENT
+    /* ======================================================================
+       BUTTON STATE
+       ====================================================================== */
 
-   Preferred:
-   CTM PATH™ Router
+    setLoading(isLoading) {
 
-   Fallback:
-   Direct page navigation
-
-   ========================================================================== */
-
-
-    goNext: function(){
-
-
-
-        if(
-
-
-
-            window.Router
-
-            &&
-
-            window.Router.ROUTES
-
-
-
-        ){
-
-
-
-
-
-            window.Router.go(
-
-
-
-                window.Router.ROUTES.ASSESSMENT
-
-
-
-            );
-
-
-
-
-
-
+        if (!this.continueButton) {
 
             return;
 
+        }
 
+        this.continueButton.disabled =
+
+            isLoading;
+
+        if (isLoading) {
+
+            this.continueButton.innerHTML =
+
+                'Please Wait...';
 
         }
 
+        else {
 
+            this.continueButton.innerHTML =
 
+                'Continue';
 
+        }
 
+    },
 
+       /* ======================================================================
+       NAVIGATE TO ASSESSMENT
+    ====================================================================== */
 
+    goNext() {
+
+        if (
+
+            window.Router &&
+
+            window.Router.ROUTES
+
+        ) {
+
+            Router.go(
+
+                Router.ROUTES.ASSESSMENT
+
+            );
+
+            return;
+
+        }
 
         window.location.href =
-
-
 
             '/pages/assessment.html';
 
-
-
-
-
     },
 
+    /* ======================================================================
+       BACK TO LANDING
+    ====================================================================== */
 
+    goBack() {
 
+        if (
 
-
-
-
-
-/* ==========================================================================
-   NAVIGATE BACK TO LANDING PAGE
-   ========================================================================== */
-
-
-    goBack: function(){
-
-
-
-        if(
-
-
-
-            window.Router
-
-            &&
+            window.Router &&
 
             window.Router.ROUTES
 
+        ) {
 
+            Router.go(
 
-        ){
-
-
-
-
-
-            window.Router.go(
-
-
-
-                window.Router.ROUTES.LANDING
-
-
+                Router.ROUTES.LANDING
 
             );
 
-
-
-
-
-
-
             return;
 
-
-
         }
-
-
-
-
-
-
-
 
         window.location.href =
 
-
-
             '/pages/landing.html';
-
-
-
-
 
     },
 
-   
-/* ==========================================================================
-   PAGE ENTRANCE ANIMATION
-   ========================================================================== */
+    /* ======================================================================
+       PAGE ANIMATION
+    ====================================================================== */
 
+    animatePage() {
 
-    animatePage: function(){
-
-
-
-        if(
-
-
+        if (
 
             window.matchMedia(
 
-
-
                 '(prefers-reduced-motion: reduce)'
-
-
 
             ).matches
 
-
-
-        ){
-
-
+        ) {
 
             return;
 
-
-
         }
-
-
-
-
-
-
-
 
         const sections = [
 
-
-
             '.progress-section',
-
-
 
             '.hero',
 
-
-
             '.registration-form'
-
-
 
         ];
 
-
-
-
-
-
-
-
         sections.forEach(
 
+            function (
 
+                selector,
 
-            function(selector,index){
+                index
 
-
-
-
+            ) {
 
                 const element =
 
@@ -1388,185 +700,114 @@ const Registration = {
 
                     );
 
-
-
-
-
-
-
-
-                if(!element){
-
-
+                if (!element) {
 
                     return;
 
-
-
                 }
 
-
-
-
-
-
-
-
-                element.style.opacity =
-
-                    '0';
-
-
-
-
-
-
+                element.style.opacity = '0';
 
                 element.style.transform =
 
-                    'translateY(30px)';
-
-
-
-
-
-
-
+                    'translateY(25px)';
 
                 element.style.transition =
 
-                    'opacity .7s ease, transform .7s ease';
-
-
-
-
-
-
-
+                    'all .6s ease';
 
                 setTimeout(
 
+                    function () {
 
-
-                    function(){
-
-
-
-
-
-                        element.style.opacity =
-
-                            '1';
-
-
-
-
-
-
+                        element.style.opacity = '1';
 
                         element.style.transform =
 
                             'translateY(0)';
 
-
-
-
-
                     },
 
-
-
-                    180 * index
-
-
+                    index * 180
 
                 );
 
-
-
-
-
-
             }
-
-
 
         );
 
-
-
     }
-
-
 
 };
 
-
-
-
-
-
-
-
 /* ==========================================================================
-   DOM READY INITIALIZATION
-   ========================================================================== */
-
+   INITIALIZE
+========================================================================== */
 
 document.addEventListener(
 
-
-
     'DOMContentLoaded',
 
-
-
-    function(){
-
-
+    function () {
 
         Registration.init();
 
-
-
     }
-
-
 
 );
 
-
-
-
-
-
-
-
 /* ==========================================================================
    GLOBAL EXPORT
-   ========================================================================== */
-
+========================================================================== */
 
 window.Registration = Registration;
-
-
-
-
-
-
-
 
 /* ==========================================================================
    END OF FILE
 
+   CTM PATH™ Guided Journey
 
    File        : registration.js
+   Version     : 6.0
+   Status      : PRODUCTION
 
+   VERIFIED AGAINST
 
-   Version     : 5.4
+   ✓ api.js
+   ✓ app.js
+   ✓ router.js
+   ✓ 07_Router.gs
+   ✓ 08_Service.gs
+   ✓ 03_Database.gs
 
+   Registration Flow
 
-   Status      : 🔒 CLEAN MASTER
+   Landing
+        ↓
+   Registration Form
+        ↓
+   collectData()
+        ↓
+   {
+       fullName,
+       email,
+       mobile,
+       district,
+       state,
+       source,
+       language,
+       device,
+       emotion
+   }
+        ↓
+   ApiService.registerVisitor()
+        ↓
+   Google Apps Script
+        ↓
+   Visitor ID Returned
+        ↓
+   Local Storage
+        ↓
+   Assessment Page
 
-
-   ========================================================================== */
+========================================================================== */
