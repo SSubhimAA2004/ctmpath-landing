@@ -10,25 +10,9 @@
          FROM SURVIVAL TO LIVING™
 
          File        : pages/registration.html
-         Version     : 6.0
+         Version     : 7.0
          Status      : 🔒 LOCKED
          Architecture: Multi-Page Application (MPA)
-
-         Purpose
-         ----------------------------------------------------------
-         Visitor Registration Experience
-
-         Responsibilities
-
-         ✓ Capture Visitor Details
-         ✓ Validate Registration
-         ✓ Begin Guided Journey
-
-         Does NOT
-
-         ✗ Perform Assessment
-         ✗ Generate Diagnosis
-         ✗ Call Google Sheets Directly
 
          ========================================================== -->
 
@@ -40,7 +24,7 @@
 
     <meta
         name="description"
-        content="CTM PATH™ Guided Journey Registration">
+        content="CTM PATH™ Visitor Registration">
 
     <meta
         name="theme-color"
@@ -48,7 +32,7 @@
 
     <title>
 
-        CTM PATH™ | Registration
+        CTM PATH™ | பதிவு
 
     </title>
 
@@ -56,70 +40,59 @@
          GOOGLE FONTS
          ========================================================== -->
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com">
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Tamil:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Tamil:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
 
     <!-- ==========================================================
          FOUNDATION CSS
          ========================================================== -->
 
-    <link
-        rel="stylesheet"
-        href="../css/reset.css">
+    <link rel="stylesheet"
+          href="../css/reset.css">
 
-    <link
-        rel="stylesheet"
-        href="../css/tokens.css">
+    <link rel="stylesheet"
+          href="../css/tokens.css">
 
-    <link
-        rel="stylesheet"
-        href="../css/base.css">
+    <link rel="stylesheet"
+          href="../css/base.css">
 
-    <link
-        rel="stylesheet"
-        href="../css/app.css">
+    <link rel="stylesheet"
+          href="../css/app.css">
 
     <!-- ==========================================================
          PAGE CSS
          ========================================================== -->
 
-    <link
-        rel="stylesheet"
-        href="../css/registration.css">
+    <link rel="stylesheet"
+          href="../css/registration.css">
 
 </head>
 
 <body>
 
-<div class="app">
+<div class="page registration-page">
 
     <!-- ======================================================
          HEADER
          ====================================================== -->
 
-    <header class="registration-header">
+    <header class="page-header">
 
-        <a
-            href="landing.html"
-            class="brand-logo"
-            aria-label="CTM PATH™">
+        <div class="container">
 
             <img
                 src="../assets/logo/CTM_Logo_Transparent.svg"
-                alt="CTM PATH™ Logo"
+                alt="CTM PATH™"
                 class="logo">
 
-        </a>
+        </div>
 
     </header>
 
@@ -127,273 +100,522 @@
          MAIN
          ====================================================== -->
 
-    <main class="registration-main">
+    <main class="page-content">
 
-        <section class="registration-card">
+        <div class="container">
 
-            <!-- ==========================================
-                 PROGRESS
-                 ========================================== -->
+            <section class="registration-card">
 
-            <section class="progress-section">
+                <!-- ==========================================
+                     PAGE TITLE
+                     ========================================== -->
 
-                <div class="progress-header">
+                <header class="page-title">
 
-                    <div class="progress-left">
+                    <p class="screen-number">
 
-                        <p class="step-ta">
-
-                            படி 1 / 7
-
-                        </p>
-
-                        <p class="step-en">
-
-                            Step 1 of 7
-
-                        </p>
-
-                    </div>
-
-                    <div class="progress-right">
-
-                        <p class="module-ta">
-
-                            பதிவு
-
-                        </p>
-
-                        <p class="module-en">
-
-                            Registration
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div class="progress-track">
-
-                    <div class="progress-fill"></div>
-
-                </div>
-
-            </section>
-
-            <!-- ==========================================
-                 HERO
-                 ========================================== -->
-
-            <section class="hero">
-
-                <h1 class="hero-title-ta">
-
-                    தொடங்குவதற்கு முன்...
-
-                </h1>
-
-                <p class="hero-title-en">
-
-                    BEFORE WE BEGIN
-
-                </p>
-
-                <p class="hero-subtitle-ta">
-
-                    உங்கள் வாழ்க்கைப் பயணத்தை
-                    உங்களுக்கே உரியதாக மாற்ற
-                    சில விவரங்களை மட்டும்
-                    பகிருங்கள்.
-
-                </p>
-
-                <p class="hero-subtitle-en">
-
-                    Share a few details so we can
-                    personalise your Guided Journey,
-                    Kala Chakra™,
-                    Diagnosis™
-                    and Prescription™.
-
-                </p>
-
-            </section>
-
-            <!-- ==========================================
-                 REGISTRATION FORM
-                 ========================================== -->
-
-            <form
-
-                id="registrationForm"
-
-                class="registration-form"
-
-                autocomplete="on">
-
-                <!-- ==================================
-                     FULL NAME
-                     ================================== -->
-
-                <div class="form-group">
-
-                    <label for="fullName">
-
-                        <span class="label-ta">
-
-                            👤 முழுப் பெயர்
-
-                        </span>
-
-                        <span class="label-en">
-
-                            Full Name
-
-                        </span>
-
-                    </label>
-
-                    <input
-
-                        id="fullName"
-
-                        name="fullName"
-
-                        type="text"
-
-                        placeholder="உங்கள் பெயரை உள்ளிடவும்"
-
-                        autocomplete="name"
-
-                        required>
-
-                </div>
-
-                <!-- ==================================
-                     MOBILE
-                     ================================== -->
-
-                <div class="form-group">
-
-                                    <!-- ==================================
-                     CONSENT
-                     ================================== -->
-
-                <div class="form-group consent-group">
-
-                    <label class="checkbox-label">
-
-                        <input
-
-                            id="consent"
-
-                            name="consent"
-
-                            type="checkbox"
-
-                            required>
-
-                        <span>
-
-                            நான் வழங்கும் தகவல்கள்
-                            CTM PATH™ Guided Journey™
-                            நோக்கத்திற்காக பயன்படுத்தப்பட
-                            ஒப்புக்கொள்கிறேன்.
-
-                        </span>
-
-                    </label>
-
-                    <p class="consent-en">
-
-                        I consent to the use of my information
-                        for the CTM PATH™ Guided Journey™ and
-                        personalised reports.
+                        படி 1 / 7
 
                     </p>
 
-                </div>
+                    <h1>
 
-                <!-- ==================================
-                     PRIVACY
-                     ================================== -->
+                        உங்கள் பயணத்தை தொடங்குவோம்
 
-                <section class="privacy-panel">
+                    </h1>
 
-                    <h3>
+                    <p class="english">
 
-                        🔒 Privacy Commitment
+                        Let's Begin Your Guided Journey
 
-                    </h3>
+                    </p>
 
-                    <p>
+                </header>
 
-                        உங்கள் தகவல்கள் பாதுகாப்பாக
-                        வைக்கப்படும்.
+                <!-- ==========================================
+                     INTRODUCTION
+                     ========================================== -->
 
-                        <br><br>
+                <section class="intro">
 
-                        Your information will never be sold,
-                        shared or misused. It is used only to
-                        personalise your Guided Journey™ and
-                        generate your assessment reports.
+                    <p class="tamil">
+
+                        உங்களைப் பற்றிய சில அடிப்படை
+                        தகவல்களை பகிருங்கள்.
+                        இதன் மூலம் உங்கள்
+                        தனிப்பட்ட CTM PATH™
+                        மதிப்பீடு, காலச்சக்கரம்™,
+                        நோயறிதல்™ மற்றும்
+                        வழிக்காட்டல்™
+                        துல்லியமாக உருவாக்கப்படும்.
+
+                    </p>
+
+                    <p class="english">
+
+                        Please share a few basic details.
+                        These help us personalise your
+                        CTM PATH™ Assessment,
+                        Kala Chakra™,
+                        Diagnosis™
+                        and Prescription™.
 
                     </p>
 
                 </section>
 
-                <!-- ==================================
-                     ACTIONS
-                     ================================== -->
+                <!-- ==========================================
+                     REGISTRATION FORM
+                     ========================================== -->
 
-                <div class="form-actions">
+                <form
 
-                    <button
+                    id="registrationForm"
 
-                        type="button"
+                    autocomplete="on"
 
-                        id="backButton"
+                    novalidate>
 
-                        class="secondary-button">
+                    <!-- ======================================
+                         KYC
+                         ====================================== -->
 
-                        ←
+                    <section class="section-card">
 
-                        <span>
+                        <h2>
 
-                            மீண்டும்
+                            உங்கள் அடிப்படை விவரங்கள்
 
-                        </span>
+                        </h2>
 
-                    </button>
+                        <p class="english">
 
-                    <button
+                            Know Your Client (KYC)
 
-                        type="submit"
+                        </p>
 
-                        id="continueButton"
+                        <!-- =============================== -->
 
-                        class="primary-button">
+                        <div class="form-group">
 
-                        <span class="button-title">
+                            <label for="fullName">
 
-                            தொடர்கிறேன்
+                                முழுப் பெயர்
 
-                        </span>
+                                <span>
 
-                        <span class="button-subtitle">
+                                    Full Name
 
-                            Continue to Assessment
+                                </span>
 
-                        </span>
+                            </label>
 
-                    </button>
+                            <input
 
-                </div>
+                                id="fullName"
 
-            </form>
+                                name="fullName"
 
-        </section>
+                                type="text"
+
+                                autocomplete="name"
+
+                                required>
+
+                        </div>
+
+                        <!-- =============================== -->
+
+                        <div class="form-group">
+
+                            <label for="mobile">
+
+                                கைபேசி எண்
+
+                                <span>
+
+                                    Mobile Number
+
+                                </span>
+
+                            </label>
+
+                            <input
+
+                                id="mobile"
+
+                                name="mobile"
+
+                                type="tel"
+
+                                autocomplete="tel"
+
+                                required>
+
+                        </div>
+
+                        <!-- =============================== -->
+
+                        <div class="form-group">
+
+                            <label for="email">
+
+                                மின்னஞ்சல் முகவரி
+
+                                <span>
+
+                                    Email Address
+
+                                </span>
+
+                            </label>
+
+                            <input
+
+                                id="email"
+
+                                name="email"
+
+                                type="email"
+
+                                autocomplete="email"
+
+                                required>
+
+                        </div>
+
+                                                <!-- =============================== -->
+
+                        <div class="form-group">
+
+                            <label for="district">
+
+                                மாவட்டம்
+
+                                <span>
+
+                                    District
+
+                                </span>
+
+                            </label>
+
+                            <input
+
+                                id="district"
+
+                                name="district"
+
+                                type="text"
+
+                                autocomplete="address-level2"
+
+                                required>
+
+                        </div>
+
+                        <!-- =============================== -->
+
+                        <div class="form-group">
+
+                            <label for="state">
+
+                                மாநிலம்
+
+                                <span>
+
+                                    State
+
+                                </span>
+
+                            </label>
+
+                            <input
+
+                                id="state"
+
+                                name="state"
+
+                                type="text"
+
+                                autocomplete="address-level1"
+
+                                required>
+
+                        </div>
+
+                        <!-- =============================== -->
+
+                        <div class="form-group">
+
+                            <label for="language">
+
+                                விருப்ப மொழி
+
+                                <span>
+
+                                    Preferred Language
+
+                                </span>
+
+                            </label>
+
+                            <select
+
+                                id="language"
+
+                                name="language">
+
+                                <option value="ta">
+
+                                    தமிழ்
+
+                                </option>
+
+                                <option value="en">
+
+                                    English
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <!-- =============================== -->
+
+                        <div class="form-group">
+
+                            <label for="source">
+
+                                உங்களைப் பற்றி
+                                எவ்வாறு அறிந்தீர்கள்?
+
+                                <span>
+
+                                    Referral Source
+
+                                </span>
+
+                            </label>
+
+                            <select
+
+                                id="source"
+
+                                name="source">
+
+                                <option value="">
+
+                                    தேர்வு செய்யுங்கள்
+                                    / Select One
+
+                                </option>
+
+                                <option value="WhatsApp">
+
+                                    WhatsApp
+
+                                </option>
+
+                                <option value="Facebook">
+
+                                    Facebook
+
+                                </option>
+
+                                <option value="Instagram">
+
+                                    Instagram
+
+                                </option>
+
+                                <option value="YouTube">
+
+                                    YouTube
+
+                                </option>
+
+                                <option value="Friend">
+
+                                    நண்பர்
+                                    / Friend
+
+                                </option>
+
+                                <option value="Website">
+
+                                    இணையதளம்
+                                    / Website
+
+                                </option>
+
+                                <option value="Other">
+
+                                    மற்றவை
+                                    / Other
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </section>
+
+                    <!-- ======================================
+                         CONSENT
+                         ====================================== -->
+
+                    <section class="section-card consent-card">
+
+                        <h2>
+
+                            உங்கள் ஒப்புதல்
+
+                        </h2>
+
+                        <p class="english">
+
+                            Your Consent
+
+                        </p>
+
+                        <label class="checkbox-container">
+
+                            <input
+
+                                id="consent"
+
+                                name="consent"
+
+                                type="checkbox"
+
+                                required>
+
+                            <span class="checkbox-mark"></span>
+
+                            <span class="checkbox-text">
+
+                                நான் வழங்கும் தகவல்கள்
+                                CTM PATH™
+                                வழிகாட்டப்பட்ட பயணத்திற்காக
+                                பாதுகாப்பாக பயன்படுத்தப்பட
+                                ஒப்புக்கொள்கிறேன்.
+
+                            </span>
+
+                        </label>
+
+                        <p class="english consent-text">
+
+                            I consent to the use of my
+                            information for the
+                            CTM PATH™ Guided Journey™
+                            and personalised reports.
+
+                        </p>
+
+                    </section>
+
+                    <!-- ======================================
+                         PRIVACY
+                         ====================================== -->
+
+                    <section class="section-card privacy-card">
+
+                        <h2>
+
+                            🔒
+                            தனியுரிமை உறுதி
+
+                        </h2>
+
+                        <p class="english">
+
+                            Privacy Commitment
+
+                        </p>
+
+                        <p class="tamil">
+
+                            உங்கள் தகவல்கள்
+                            பாதுகாப்பாக சேமிக்கப்படும்.
+                            எந்த மூன்றாம் தரப்பிற்கும்
+                            பகிரப்படாது.
+
+                        </p>
+
+                        <p class="english">
+
+                            Your information is securely
+                            stored and will never be sold,
+                            shared or misused. It is used
+                            only for generating your
+                            personalised CTM PATH™
+                            reports.
+
+                        </p>
+
+                    </section>
+
+                                        <!-- ======================================
+                         ACTIONS
+                         ====================================== -->
+
+                    <section class="action-panel">
+
+                        <button
+
+                            type="button"
+
+                            id="backButton"
+
+                            class="secondary-button">
+
+                            <span class="button-title">
+
+                                ← முந்தைய பக்கம்
+
+                            </span>
+
+                            <span class="button-subtitle">
+
+                                Back
+
+                            </span>
+
+                        </button>
+
+                        <button
+
+                            type="submit"
+
+                            id="continueButton"
+
+                            class="primary-button">
+
+                            <span class="button-title">
+
+                                மதிப்பீட்டை தொடங்குகிறேன்
+
+                            </span>
+
+                            <span class="button-subtitle">
+
+                                Continue to Assessment
+
+                            </span>
+
+                        </button>
+
+                    </section>
+
+                </form>
+
+            </section>
+
+        </div>
 
     </main>
 
@@ -401,14 +623,32 @@
          FOOTER
          ====================================================== -->
 
-    <footer class="registration-footer">
+    <footer class="page-footer">
 
         <div class="container">
 
-            <p class="footer-text">
+            <p class="footer-title">
 
-                © 2026 CTM PATH™
+                CTM PATH™
+
+            </p>
+
+            <p class="footer-tagline">
+
+                வாழ்வாங்கு வாழ்ந்திட வாரீர்!
+
+            </p>
+
+            <p class="footer-tagline-en">
+
                 From Survival To Living™
+
+            </p>
+
+            <p class="footer-copyright">
+
+                © 2026 CTM PATH™.
+                All Rights Reserved.
 
             </p>
 
@@ -424,11 +664,9 @@
      Load Order
 
      1. Browser Storage
-     2. API Layer
+     2. API Communication
      3. Shared Application Core
      4. Registration Controller
-
-     router.js has been permanently removed.
 
      ========================================================== -->
 
@@ -447,4 +685,3 @@
 </body>
 
 </html>
-
