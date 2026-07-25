@@ -1,27 +1,31 @@
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey
-   FROM SURVIVAL TO LIVING™
+   CTM PATH™ Guided Journey™
 
    File        : js/app.js
-   Version     : 8.0
-   Status      : PRODUCTION
-   Architecture: LOCKED
+   Version     : 3.0
+   Status      : 🔒 LOCKED
+   Architecture: Multi-Page Application (MPA)
 
-   Responsibility
+   Purpose
    --------------------------------------------------------------------------
-   • Bootstrap Application
-   • Create Global State
-   • Initialize Core Modules
-   • Coordinate Startup
+   Shared Application Core
 
-   This file SHALL NOT
+   Responsibilities
 
-   ✗ Perform Registration
-   ✗ Call Google Apps Script
-   ✗ Validate Forms
-   ✗ Navigate Business Logic
-   ✗ Calculate Assessment
+   ✓ Create CTM Namespace
+   ✓ Create Global State
+   ✓ Store Application Metadata
+   ✓ Journey Reset
+   ✓ Shared Utility Methods
+
+   Does NOT
+
+   ✗ Perform Routing
+   ✗ Initialize Page Controllers
+   ✗ Handle Registration
+   ✗ Handle Assessment
+   ✗ Communicate with Google Apps Script
 
 ========================================================================== */
 
@@ -34,142 +38,148 @@
 window.CTM = window.CTM || {};
 
 /* ==========================================================================
-   APPLICATION MODULE
+   APPLICATION CORE
 ========================================================================== */
 
-window.CTM.App = (function () {
+window.CTM.App = (() => {
 
     /* ======================================================================
-       APPLICATION STATE
+       APPLICATION CONSTANTS
     ====================================================================== */
 
-    function createInitialState() {
+    const VERSION = "3.0";
 
-        return {
-
-            visitorId: "",
-
-            visitor: {},
-
-            registration: {},
-
-            assessment: {},
-
-            scores: {},
-
-            diagnosis: {},
-
-            prescription: {},
-
-            currentScreen: "screen01",
-
-            language: "en",
-
-            startedAt: new Date().toISOString()
-
-        };
-
-    }
+    const APPLICATION_NAME = "CTM PATH™";
 
     /* ======================================================================
-       INITIALIZE APPLICATION
+       GLOBAL STATE
+    ====================================================================== */
+
+    const state = {
+
+        visitorId: null,
+
+        visitor: null,
+
+        registration: null,
+
+        assessment: null,
+
+        kalaChakra: null,
+
+        diagnosis: null,
+
+        prescription: null,
+
+        language: "ta",
+
+        startedAt: null
+
+    };
+
+    /* ======================================================================
+       INITIALIZE
     ====================================================================== */
 
     function initialize() {
 
-        window.CTM.state = createInitialState();
-
-        initializeModules();
+        state.startedAt = new Date().toISOString();
 
     }
 
                       /* ======================================================================
-       INITIALIZE MODULES
+       GET STATE
     ====================================================================== */
 
-    function initializeModules() {
+    function getState() {
 
-        if (
+        return state;
 
-            window.CTM.Router &&
+    }
 
-            typeof window.CTM.Router.initialize === "function"
+    /* ======================================================================
+       SET VISITOR
+    ====================================================================== */
 
-        ) {
+    function setVisitor(visitor) {
 
-            window.CTM.Router.initialize();
+        state.visitor = visitor || null;
 
-        }
+        if (visitor && visitor.visitorId) {
 
-        if (
-
-            window.CTM.Registration &&
-
-            typeof window.CTM.Registration.initialize === "function"
-
-        ) {
-
-            window.CTM.Registration.initialize();
+            state.visitorId = visitor.visitorId;
 
         }
 
     }
 
     /* ======================================================================
-       START APPLICATION
+       SET LANGUAGE
     ====================================================================== */
 
-    function startApplication() {
+    function setLanguage(language) {
+
+        state.language = language || "ta";
+
+    }
+
+    /* ======================================================================
+       RESET JOURNEY
+    ====================================================================== */
+
+    function reset() {
+
+        state.visitorId = null;
+
+        state.visitor = null;
+
+        state.registration = null;
+
+        state.assessment = null;
+
+        state.kalaChakra = null;
+
+        state.diagnosis = null;
+
+        state.prescription = null;
+
+        state.language = "ta";
+
+        state.startedAt = new Date().toISOString();
 
         if (
 
-            window.CTM.Router &&
+            window.StorageService &&
 
-            typeof window.CTM.Router.go === "function"
+            typeof window.StorageService.resetJourney === "function"
 
         ) {
 
-            window.CTM.Router.go("screen01");
+            window.StorageService.resetJourney();
 
         }
 
     }
 
     /* ======================================================================
-       RESET APPLICATION
-    ====================================================================== */
-
-    function resetApplication() {
-
-        window.CTM.state = createInitialState();
-
-        if (
-
-            window.CTM.Registration &&
-
-            typeof window.CTM.Registration.resetForm === "function"
-
-        ) {
-
-            window.CTM.Registration.resetForm();
-
-        }
-
-        startApplication();
-
-    }
-
-                      /* ======================================================================
        PUBLIC API
     ====================================================================== */
 
     return {
 
+        VERSION,
+
+        APPLICATION_NAME,
+
         initialize,
 
-        startApplication,
+        getState,
 
-        resetApplication
+        setVisitor,
+
+        setLanguage,
+
+        reset
 
     };
 
@@ -185,17 +195,7 @@ document.addEventListener(
 
     function () {
 
-        if (
-
-            window.CTM.App &&
-
-            typeof window.CTM.App.initialize === "function"
-
-        ) {
-
-            window.CTM.App.initialize();
-
-        }
+        window.CTM.App.initialize();
 
     }
 
