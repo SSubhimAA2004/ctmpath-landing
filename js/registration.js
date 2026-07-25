@@ -1,395 +1,875 @@
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey v4.0
+   CTM PATH™ Guided Journey v5.0
+
    File        : js/registration.js
-   Version     : 4.0
-   Status      : 🔒 LOCKED
+   Version     : 5.0
+   Status      : 🔒 PREMIUM FOUNDATION
+
    Purpose     : Registration Controller
 
                   Owns
                   • Page Initialization
-                  • Restore Saved Registration
-                  • Form Validation
-                  • Save Registration
+                  • Form Handling
+                  • Validation
+                  • Local Storage
                   • API Registration
                   • Navigation
                   • Entrance Animation
 
+                  Owns NO
+                  • UI Rendering
+                  • Database Logic
+                  • Assessment Logic
+
    ========================================================================== */
+
 
 (() => {
 
+
     "use strict";
 
+
+
     const Registration = {
+
+
 
         /* ==========================================================
            INITIALIZE
            ========================================================== */
 
-        init() {
+
+        init(){
+
 
             this.cacheDOM();
 
+
             this.bindEvents();
+
 
             this.restoreRegistration();
 
+
             this.animatePage();
 
+
         },
 
+
+
+
+
+
         /* ==========================================================
-           CACHE DOM
+           CACHE DOM ELEMENTS
            ========================================================== */
 
-        cacheDOM() {
+
+        cacheDOM(){
+
 
             this.form =
-                document.getElementById("registrationForm");
+
+                document.getElementById(
+
+                    "registrationForm"
+
+                );
+
+
 
             this.backButton =
-                document.getElementById("backButton");
+
+                document.getElementById(
+
+                    "backButton"
+
+                );
+
+
 
             this.continueButton =
-                document.getElementById("continueButton");
+
+                document.getElementById(
+
+                    "continueButton"
+
+                );
+
 
         },
 
+
+
+
+
+
         /* ==========================================================
-           EVENTS
+           EVENT BINDING
            ========================================================== */
 
-        bindEvents() {
 
-            if (this.backButton) {
+        bindEvents(){
+
+
+
+            if(this.backButton){
+
 
                 this.backButton.addEventListener(
 
+
                     "click",
+
 
                     this.goBack.bind(this)
 
+
                 );
+
 
             }
 
-            if (this.form) {
+
+
+
+
+            if(this.form){
+
 
                 this.form.addEventListener(
 
+
                     "submit",
+
 
                     this.submit.bind(this)
 
+
                 );
+
 
             }
 
+
+
         },
 
-        /* ==========================================================
-           RESTORE LOCAL DATA
-           ========================================================== */
 
-        restoreRegistration() {
+       /* ==========================================================
+   RESTORE SAVED REGISTRATION
+   ========================================================== */
 
-            try {
 
-                const data = JSON.parse(
+        restoreRegistration(){
+
+
+            try{
+
+
+                const savedData = JSON.parse(
+
 
                     localStorage.getItem(
 
                         "ctmRegistration"
 
-                    ) || "{}"
+                    )
+
+                    ||
+
+                    "{}"
+
 
                 );
 
-                Object.keys(data).forEach(key => {
 
-                    const field =
 
-                        document.getElementById(key);
 
-                    if (field) {
+                Object.keys(savedData).forEach(
 
-                        field.value = data[key];
+
+                    key => {
+
+
+
+                        const field =
+
+                            document.getElementById(
+
+                                key
+
+                            );
+
+
+
+                        if(field){
+
+
+                            field.value =
+
+                                savedData[key];
+
+
+                        }
+
 
                     }
 
-                });
-
-            }
-
-            catch(error){
-
-                console.error(
-
-                    "Registration Restore Error",
-
-                    error
 
                 );
 
+
+
             }
+
+
+            catch(error){
+
+
+
+                console.error(
+
+
+                    "Registration Restore Error",
+
+
+                    error
+
+
+                );
+
+
+            }
+
+
 
         },
 
+
+
+
+
+
         /* ==========================================================
-           VALIDATE
+           FORM VALIDATION
            ========================================================== */
 
-        validate() {
 
-            if (!this.form.checkValidity()) {
+        validate(){
 
-                this.form.reportValidity();
+
+
+            if(!this.form){
+
 
                 return false;
 
+
             }
+
+
+
+
+
+            if(!this.form.checkValidity()){
+
+
+
+                this.form.reportValidity();
+
+
+
+                return false;
+
+
+
+            }
+
+
 
             return true;
 
+
+
         },
 
+
+
+
+
+
         /* ==========================================================
-           COLLECT FORM
+           COLLECT FORM DATA
            ========================================================== */
 
-        collectData() {
+
+        collectData(){
+
+
 
             return {
 
+
+
                 fullName:
 
-                    document
-                        .getElementById("fullName")
-                        .value
-                        .trim(),
+                    this.getValue(
+
+                        "fullName"
+
+                    ),
+
+
+
+
 
                 mobile:
 
-                    document
-                        .getElementById("mobile")
-                        .value
-                        .trim(),
+                    this.getValue(
+
+                        "mobile"
+
+                    ),
+
+
+
+
 
                 email:
 
-                    document
-                        .getElementById("email")
-                        .value
-                        .trim(),
+                    this.getValue(
+
+                        "email"
+
+                    ),
+
+
+
+
 
                 district:
 
-                    document
-                        .getElementById("district")
-                        .value
-                        .trim(),
+                    this.getValue(
+
+                        "district"
+
+                    ),
+
+
+
+
 
                 state:
 
-                    document
-                        .getElementById("state")
-                        .value
-                        .trim(),
+                    this.getValue(
+
+                        "state"
+
+                    ),
+
+
+
+
 
                 language:
 
-                    document
-                        .getElementById("language")
-                        .value,
+                    this.getValue(
+
+                        "language"
+
+                    ),
+
+
+
+
 
                 source:
 
-                    document
-                        .getElementById("source")
-                        .value,
+                    this.getValue(
+
+                        "source"
+
+                    ),
+
+
+
+
 
                 device:
 
                     navigator.userAgent,
 
+
+
+
+
                 timestamp:
 
                     new Date().toISOString()
 
+
+
             };
+
+
 
         },
 
+
+
+
+
+
         /* ==========================================================
-           SAVE LOCAL
+           SAFE FIELD VALUE
            ========================================================== */
 
-        saveLocal(data) {
+
+        getValue(id){
+
+
+
+            const element =
+
+                document.getElementById(
+
+                    id
+
+                );
+
+
+
+            return element
+
+                ?
+
+                element.value.trim()
+
+                :
+
+                "";
+
+
+
+        },
+
+       /* ==========================================================
+   SAVE LOCAL REGISTRATION
+   ========================================================== */
+
+
+        saveLocal(data){
+
 
             localStorage.setItem(
 
+
                 "ctmRegistration",
 
-                JSON.stringify(data)
+
+                JSON.stringify(
+
+                    data
+
+                )
+
 
             );
 
-            if (
 
-                window.CTMApp &&
+
+
+
+            if(
+
+
+                window.CTMApp
+
+                &&
 
                 typeof window.CTMApp.setState === "function"
 
+
             ){
+
+
 
                 window.CTMApp.setState({
 
+
+
                     registration:data
+
+
 
                 });
 
+
+
             }
+
+
 
         },
 
+
+
+
+
+
+
         /* ==========================================================
-           SUBMIT
+           SUBMIT REGISTRATION
            ========================================================== */
 
-        async submit(event) {
+
+        async submit(event){
+
+
 
             event.preventDefault();
 
-            if (!this.validate()) {
+
+
+
+
+            if(!this.validate()){
+
+
 
                 return;
 
+
+
             }
+
+
+
+
 
             const registration =
 
                 this.collectData();
 
+
+
+
+
             this.saveLocal(
+
 
                 registration
 
+
             );
 
-            try {
 
-                if (
 
-                    window.API &&
 
-                    typeof window.API.register === "function"
+
+
+
+            try{
+
+
+
+
+
+                if(
+
+
+                    window.API
+
+                    &&
+
+                    typeof window.API.registerVisitor === "function"
+
 
                 ){
 
+
+
+
+
                     const response =
 
-                        await window.API.register(
+                        await window.API.registerVisitor(
+
 
                             registration
 
+
                         );
 
-                    if (
 
-                        response &&
 
-                        response.visitorId
+
+
+
+
+                    if(
+
+
+                        response
+
+                        &&
+
+                        response.data
+
+                        &&
+
+                        response.data.visitorId
+
 
                     ){
 
+
+
+
+
                         registration.visitorId =
 
-                            response.visitorId;
+                            response.data.visitorId;
+
+
+
+
 
                         this.saveLocal(
 
+
                             registration
+
 
                         );
 
+
+
                     }
+
+
+
+
+
+
 
                 }
 
+
+
+
+
             }
+
 
             catch(error){
 
+
+
+
+
                 console.error(
 
-                    "Registration Error",
+
+                    "Registration API Error",
+
 
                     error
 
+
                 );
 
+
+
+
+
             }
+
+
+
+
+
+
 
             this.goNext();
 
+
+
+
+
         },
 
+
+
+
+
+
+
+
         /* ==========================================================
-           NEXT
+           NAVIGATE NEXT
            ========================================================== */
 
-        goNext() {
 
-            if (
+        goNext(){
 
-                window.Router &&
+
+
+
+
+            if(
+
+
+
+                window.Router
+
+                &&
 
                 window.Router.ROUTES
 
+
+
             ){
 
+
+
+
+
                 window.Router.go(
+
+
 
                     window.Router.ROUTES.ASSESSMENT
 
+
+
                 );
+
+
+
+
 
             }
 
+
+
+
+
+            else{
+
+
+
+
+
+                window.location.href =
+
+                    "assessment.html";
+
+
+
+
+
+            }
+
+
+
+
+
         },
 
+
+
+
+
+
+
+
         /* ==========================================================
-           BACK
+           NAVIGATE BACK
            ========================================================== */
 
-        goBack() {
 
-            if (
+        goBack(){
 
-                window.Router &&
+
+
+
+
+            if(
+
+
+
+                window.Router
+
+                &&
 
                 window.Router.ROUTES
 
+
+
             ){
+
+
+
+
 
                 window.Router.go(
 
+
+
                     window.Router.ROUTES.LANDING
+
+
 
                 );
 
+
+
+
+
             }
+
+
+
+
+
+            else{
+
+
+
+
+
+                window.location.href =
+
+                    "landing.html";
+
+
+
+
+
+            }
+
+
+
+
 
         },
 
-        /* ==========================================================
-           PAGE ANIMATION
-           ========================================================== */
+       /* ==========================================================
+   PAGE ENTRANCE ANIMATION
+   ========================================================== */
 
-        animatePage() {
 
-            if (
+        animatePage(){
+
+
+
+            if(
+
 
                 window.matchMedia(
 
@@ -397,25 +877,58 @@
 
                 ).matches
 
+
+
             ){
+
+
 
                 return;
 
+
+
             }
+
+
+
+
+
+
 
             const sections = [
 
+
+
                 ".progress-section",
+
+
 
                 ".hero",
 
+
+
                 ".registration-form"
+
+
 
             ];
 
+
+
+
+
+
+
+
             sections.forEach(
 
+
+
                 (selector,index)=>{
+
+
+
+
 
                     const element =
 
@@ -425,47 +938,145 @@
 
                         );
 
-                    if(!element) return;
 
-                    element.style.opacity="0";
 
-                    element.style.transform=
+
+
+                    if(!element){
+
+
+
+                        return;
+
+
+
+                    }
+
+
+
+
+
+
+
+
+                    element.style.opacity = "0";
+
+
+
+
+
+                    element.style.transform =
 
                         "translateY(30px)";
 
-                    element.style.transition=
+
+
+
+
+
+
+
+                    element.style.transition =
 
                         "opacity .70s ease, transform .70s ease";
 
+
+
+
+
+
+
+
+
                     setTimeout(()=>{
 
-                        element.style.opacity="1";
 
-                        element.style.transform=
+
+
+
+                        element.style.opacity = "1";
+
+
+
+
+
+                        element.style.transform =
 
                             "translateY(0)";
 
-                    },180*index);
+
+
+
+
+                    },180 * index);
+
+
+
+
+
 
                 }
 
+
+
             );
+
+
+
+
 
         }
 
+
+
+
+
+
     };
 
+
+
+
+
+
+
+
+
     /* ==========================================================
-       START
+       START APPLICATION
        ========================================================== */
+
+
+
+
+
 
     document.addEventListener(
 
+
+
         "DOMContentLoaded",
 
-        () => Registration.init()
+
+
+        ()=>{
+
+
+
+            Registration.init();
+
+
+
+        }
+
+
 
     );
 
-})();
 
+
+
+
+
+
+})();
