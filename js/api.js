@@ -1,9 +1,11 @@
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey v2.0
+   CTM PATH™ Guided Journey v2.1
+
    File        : api.js
-   Version     : 1.0
+   Version     : 1.1
    Status      : 🔒 LOCKED
+
    Purpose     : API Service Layer
 
                   Owns
@@ -18,153 +20,307 @@
                   • DOM Manipulation
                   • Assessment Logic
                   • Business Rules
+
    ========================================================================== */
 
+
 'use strict';
+
+
 
 /* ==========================================================================
    API SERVICE
    ========================================================================== */
 
+
 const ApiService = (() => {
+
+
 
     /* ======================================================================
        CONFIGURATION
        ====================================================================== */
+
 
     const CONFIG = {
 
-        WEB_APP_URL: '',
 
-        TIMEOUT: 30000,
+        WEB_APP_URL:
 
-        HEADERS: {
+            'https://script.google.com/macros/s/AKfycby1yF2m7cIXnHh0SqfegiDuxsjdMX6PVcTaSogQ5HFqx3z5CGB3jjN0vCFvQuPV5sBCIw/exec',
 
-            'Content-Type': 'application/json'
+
+
+        TIMEOUT:
+
+            30000,
+
+
+
+        HEADERS:{
+
+
+            'Content-Type':
+
+                'application/json'
+
 
         }
 
+
     };
 
+
+
+
+
     /* ======================================================================
-       CONFIGURATION
+       CONFIGURATION HELPERS
        ====================================================================== */
 
-    function setWebAppUrl(url) {
+
+    function setWebAppUrl(url){
+
 
         CONFIG.WEB_APP_URL = url;
 
+
     }
 
-    function getWebAppUrl() {
+
+
+
+
+    function getWebAppUrl(){
+
 
         return CONFIG.WEB_APP_URL;
 
+
     }
+
+
+
+
 
     /* ======================================================================
        REQUEST VALIDATION
        ====================================================================== */
 
-    function validateEndpoint(endpoint) {
 
-        if (!endpoint || typeof endpoint !== 'string') {
+    function validateEndpoint(endpoint){
 
-            throw new Error('Invalid API endpoint.');
+
+        if(
+
+            !endpoint
+
+            ||
+
+            typeof endpoint !== 'string'
+
+        ){
+
+            throw new Error(
+
+                'Invalid API endpoint.'
+
+            );
+
 
         }
 
+
     }
 
-    function validatePayload(payload) {
 
-        if (payload === undefined || payload === null) {
+
+
+
+    function validatePayload(payload){
+
+
+        if(
+
+            payload === undefined
+
+            ||
+
+            payload === null
+
+        ){
 
             return {};
 
         }
 
+
         return payload;
 
+
     }
+
+
+
+
 
     /* ======================================================================
        BUILD URL
        ====================================================================== */
 
-    function buildUrl(endpoint) {
+
+    function buildUrl(endpoint){
+
 
         validateEndpoint(endpoint);
 
-        return `${CONFIG.WEB_APP_URL}?action=${encodeURIComponent(endpoint)}`;
+
+
+        return (
+
+            `${CONFIG.WEB_APP_URL}?action=${encodeURIComponent(endpoint)}`
+
+        );
+
 
     }
+
+
+
+
 
     /* ======================================================================
        FETCH WITH TIMEOUT
        ====================================================================== */
 
-    async function fetchWithTimeout(url, options) {
 
-        const controller = new AbortController();
+    async function fetchWithTimeout(
 
-        const timeout = setTimeout(() => {
+        url,
+
+        options
+
+    ){
+
+
+        const controller =
+
+            new AbortController();
+
+
+
+        const timeout = setTimeout(()=>{
+
 
             controller.abort();
 
+
         }, CONFIG.TIMEOUT);
 
-        try {
 
-            const response = await fetch(url, {
 
-                ...options,
 
-                signal: controller.signal
+        try{
 
-            });
+
+            const response = await fetch(
+
+                url,
+
+                {
+
+                    ...options,
+
+                    signal:
+
+                        controller.signal
+
+                }
+
+            );
+
+
 
             clearTimeout(timeout);
+
+
 
             return response;
 
+
+
         }
 
-        catch (error) {
+        catch(error){
+
 
             clearTimeout(timeout);
 
+
+
             throw error;
 
+
         }
+
 
     }
 
-    /* ======================================================================
-       HANDLE RESPONSE
-       ====================================================================== */
+                    /* ==========================================================================
+   HANDLE RESPONSE
+   ========================================================================== */
 
-    async function parseResponse(response) {
 
-        if (!response.ok) {
+    async function parseResponse(response){
 
-            throw new Error(`HTTP ${response.status}`);
+
+        if(!response.ok){
+
+
+            throw new Error(
+
+                `HTTP ${response.status}`
+
+            );
+
 
         }
+
 
         return await response.json();
 
+
     }
 
+
+
+
+
     /* ======================================================================
-       POST
+       POST REQUEST
        ====================================================================== */
 
-    async function post(endpoint, payload = {}) {
+
+    async function post(
+
+        endpoint,
+
+        payload = {}
+
+    ){
+
 
         validateEndpoint(endpoint);
 
-        payload = validatePayload(payload);
+
+
+        payload = validatePayload(
+
+            payload
+
+        );
+
+
 
         const response = await fetchWithTimeout(
 
@@ -172,27 +328,51 @@ const ApiService = (() => {
 
             {
 
-                method: 'POST',
 
-                headers: CONFIG.HEADERS,
+                method:'POST',
 
-                body: JSON.stringify(payload)
+
+                headers:CONFIG.HEADERS,
+
+
+                body:JSON.stringify(
+
+                    payload
+
+                )
+
 
             }
 
+
         );
 
-        return parseResponse(response);
+
+
+        return parseResponse(
+
+            response
+
+        );
+
 
     }
 
+
+
+
+
     /* ======================================================================
-       GET
+       GET REQUEST
        ====================================================================== */
 
-    async function get(endpoint) {
+
+    async function get(endpoint){
+
 
         validateEndpoint(endpoint);
+
+
 
         const response = await fetchWithTimeout(
 
@@ -200,23 +380,44 @@ const ApiService = (() => {
 
             {
 
-                method: 'GET',
 
-                headers: CONFIG.HEADERS
+                method:'GET',
+
+
+                headers:CONFIG.HEADERS
+
 
             }
 
+
         );
 
-        return parseResponse(response);
+
+
+        return parseResponse(
+
+            response
+
+        );
+
 
     }
+
+
+
+
 
     /* ======================================================================
        REGISTER VISITOR
        ====================================================================== */
 
-    async function registerVisitor(visitor) {
+
+    async function registerVisitor(
+
+        visitor
+
+    ){
+
 
         return await post(
 
@@ -226,13 +427,55 @@ const ApiService = (() => {
 
         );
 
+
     }
+
+
+
+
+
+    /* ======================================================================
+       REGISTER COMPATIBILITY ALIAS
+       
+       Used by:
+       registration.js
+
+       API.register(visitor)
+
+       ====================================================================== */
+
+
+    async function register(
+
+        visitor
+
+    ){
+
+
+        return await registerVisitor(
+
+            visitor
+
+        );
+
+
+    }
+
+
+
+
 
     /* ======================================================================
        SAVE ASSESSMENT
        ====================================================================== */
 
-    async function saveAssessment(data) {
+
+    async function saveAssessment(
+
+        data
+
+    ){
+
 
         return await post(
 
@@ -242,13 +485,24 @@ const ApiService = (() => {
 
         );
 
+
     }
+
+
+
+
 
     /* ======================================================================
        SAVE KALA CHAKRA
        ====================================================================== */
 
-    async function saveKalaChakra(data) {
+
+    async function saveKalaChakra(
+
+        data
+
+    ){
+
 
         return await post(
 
@@ -258,13 +512,24 @@ const ApiService = (() => {
 
         );
 
+
     }
+
+
+
+
 
     /* ======================================================================
        SAVE DIAGNOSIS
        ====================================================================== */
 
-    async function saveDiagnosis(data) {
+
+    async function saveDiagnosis(
+
+        data
+
+    ){
+
 
         return await post(
 
@@ -274,13 +539,24 @@ const ApiService = (() => {
 
         );
 
+
     }
+
+
+
+
 
     /* ======================================================================
        SAVE PRESCRIPTION
        ====================================================================== */
 
-    async function savePrescription(data) {
+
+    async function savePrescription(
+
+        data
+
+    ){
+
 
         return await post(
 
@@ -290,13 +566,20 @@ const ApiService = (() => {
 
         );
 
+
     }
 
-    /* ======================================================================
+                    /* ==========================================================================
        COMPLETE JOURNEY
        ====================================================================== */
 
-    async function completeJourney(data) {
+
+    async function completeJourney(
+
+        data
+
+    ){
+
 
         return await post(
 
@@ -306,13 +589,24 @@ const ApiService = (() => {
 
         );
 
+
     }
+
+
+
+
 
     /* ======================================================================
        LOAD VISITOR
        ====================================================================== */
 
-    async function getVisitor(visitorId) {
+
+    async function getVisitor(
+
+        visitorId
+
+    ){
+
 
         return await get(
 
@@ -320,67 +614,127 @@ const ApiService = (() => {
 
         );
 
+
     }
+
+
+
+
 
     /* ======================================================================
        HEALTH CHECK
        ====================================================================== */
 
-    async function ping() {
 
-        return await get('ping');
+    async function ping(){
+
+
+        return await get(
+
+            'ping'
+
+        );
+
 
     }
+
+
+
+
 
     /* ======================================================================
        SAFE REQUEST
        ====================================================================== */
 
-    async function safeRequest(callback) {
 
-        try {
+    async function safeRequest(
 
-            return {
+        callback
 
-                success: true,
+    ){
 
-                data: await callback()
 
-            };
+        try{
 
-        }
-
-        catch (error) {
-
-            console.error(error);
 
             return {
 
-                success: false,
 
-                error: error.message
+                success:true,
+
+
+                data:
+
+                    await callback()
+
 
             };
 
+
         }
+
+        catch(error){
+
+
+            console.error(
+
+                error
+
+            );
+
+
+
+            return {
+
+
+                success:false,
+
+
+                error:
+
+                    error.message
+
+
+            };
+
+
+        }
+
 
     }
+
+
+
+
 
     /* ======================================================================
        PUBLIC API
        ====================================================================== */
 
+
     return {
+
 
         CONFIG,
 
+
         setWebAppUrl,
+
         getWebAppUrl,
 
+
+
         get,
+
         post,
 
+
+
+        register,
+
         registerVisitor,
+
+
 
         saveAssessment,
 
@@ -390,22 +744,47 @@ const ApiService = (() => {
 
         savePrescription,
 
+
+
         completeJourney,
+
 
         getVisitor,
 
+
         ping,
+
 
         safeRequest
 
+
     };
+
 
 })();
 
+
+
+
+
 /* ==========================================================================
-   End of File
+   GLOBAL EXPORT
+   ========================================================================== */
+
+
+window.API = ApiService;
+
+
+
+
+
+/* ==========================================================================
+   END OF FILE
 
    File : api.js
 
+   Version : 1.1
+
    Status : 🔒 LOCKED
+
    ========================================================================== */
