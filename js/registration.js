@@ -7,12 +7,12 @@
    Purpose     : Registration Controller
 
                   Owns
-                  • Registration Initialization
-                  • Journey State
+                  • Page Initialization
+                  • Restore Saved Registration
                   • Form Validation
                   • Save Registration
-                  • Continue Navigation
-                  • Back Navigation
+                  • API Registration
+                  • Navigation
                   • Entrance Animation
 
    ========================================================================== */
@@ -33,7 +33,7 @@
 
             this.bindEvents();
 
-            this.loadSavedData();
+            this.restoreRegistration();
 
             this.animatePage();
 
@@ -89,27 +89,32 @@
         },
 
         /* ==========================================================
-           LOAD SAVED DATA
+           RESTORE LOCAL DATA
            ========================================================== */
 
-        loadSavedData() {
+        restoreRegistration() {
 
             try {
 
                 const data = JSON.parse(
 
-                    localStorage.getItem("ctmRegistration") || "{}"
+                    localStorage.getItem(
+
+                        "ctmRegistration"
+
+                    ) || "{}"
 
                 );
 
-                Object.keys(data).forEach(id => {
+                Object.keys(data).forEach(key => {
 
                     const field =
-                        document.getElementById(id);
+
+                        document.getElementById(key);
 
                     if (field) {
 
-                        field.value = data[id];
+                        field.value = data[key];
 
                     }
 
@@ -119,49 +124,108 @@
 
             catch(error){
 
-                console.error(error);
+                console.error(
+
+                    "Registration Restore Error",
+
+                    error
+
+                );
 
             }
 
         },
 
         /* ==========================================================
-           SAVE DATA
+           VALIDATE
            ========================================================== */
 
-        saveData() {
+        validate() {
 
-            const data = {
+            if (!this.form.checkValidity()) {
+
+                this.form.reportValidity();
+
+                return false;
+
+            }
+
+            return true;
+
+        },
+
+        /* ==========================================================
+           COLLECT FORM
+           ========================================================== */
+
+        collectData() {
+
+            return {
 
                 fullName:
 
-                    document.getElementById("fullName").value.trim(),
+                    document
+                        .getElementById("fullName")
+                        .value
+                        .trim(),
 
                 mobile:
 
-                    document.getElementById("mobile").value.trim(),
+                    document
+                        .getElementById("mobile")
+                        .value
+                        .trim(),
 
                 email:
 
-                    document.getElementById("email").value.trim(),
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim(),
 
                 district:
 
-                    document.getElementById("district").value.trim(),
+                    document
+                        .getElementById("district")
+                        .value
+                        .trim(),
 
                 state:
 
-                    document.getElementById("state").value.trim(),
+                    document
+                        .getElementById("state")
+                        .value
+                        .trim(),
 
                 language:
 
-                    document.getElementById("language").value,
+                    document
+                        .getElementById("language")
+                        .value,
 
                 source:
 
-                    document.getElementById("source").value
+                    document
+                        .getElementById("source")
+                        .value,
+
+                device:
+
+                    navigator.userAgent,
+
+                timestamp:
+
+                    new Date().toISOString()
 
             };
+
+        },
+
+        /* ==========================================================
+           SAVE LOCAL
+           ========================================================== */
+
+        saveLocal(data) {
 
             localStorage.setItem(
 
@@ -187,26 +251,6 @@
 
             }
 
-            return data;
-
-        },
-
-        /* ==========================================================
-           VALIDATION
-           ========================================================== */
-
-        validate() {
-
-            if (!this.form.checkValidity()) {
-
-                this.form.reportValidity();
-
-                return false;
-
-            }
-
-            return true;
-
         },
 
         /* ==========================================================
@@ -223,7 +267,15 @@
 
             }
 
-            const data = this.saveData();
+            const registration =
+
+                this.collectData();
+
+            this.saveLocal(
+
+                registration
+
+            );
 
             try {
 
@@ -235,7 +287,33 @@
 
                 ){
 
-                    await window.API.register(data);
+                    const response =
+
+                        await window.API.register(
+
+                            registration
+
+                        );
+
+                    if (
+
+                        response &&
+
+                        response.visitorId
+
+                    ){
+
+                        registration.visitorId =
+
+                            response.visitorId;
+
+                        this.saveLocal(
+
+                            registration
+
+                        );
+
+                    }
 
                 }
 
@@ -243,9 +321,25 @@
 
             catch(error){
 
-                console.error(error);
+                console.error(
+
+                    "Registration Error",
+
+                    error
+
+                );
 
             }
+
+            this.goNext();
+
+        },
+
+        /* ==========================================================
+           NEXT
+           ========================================================== */
+
+        goNext() {
 
             if (
 
@@ -290,7 +384,7 @@
         },
 
         /* ==========================================================
-           ANIMATION
+           PAGE ANIMATION
            ========================================================== */
 
         animatePage() {
@@ -309,7 +403,7 @@
 
             }
 
-            const elements = [
+            const sections = [
 
                 ".progress-section",
 
@@ -319,31 +413,43 @@
 
             ];
 
-            elements.forEach((selector,index)=>{
+            sections.forEach(
 
-                const element =
+                (selector,index)=>{
 
-                    document.querySelector(selector);
+                    const element =
 
-                if(!element) return;
+                        document.querySelector(
 
-                element.style.opacity="0";
+                            selector
 
-                element.style.transform="translateY(28px)";
+                        );
 
-                element.style.transition=
+                    if(!element) return;
 
-                    "all .70s ease";
+                    element.style.opacity="0";
 
-                setTimeout(()=>{
+                    element.style.transform=
 
-                    element.style.opacity="1";
+                        "translateY(30px)";
 
-                    element.style.transform="translateY(0)";
+                    element.style.transition=
 
-                },180*index);
+                        "opacity .70s ease, transform .70s ease";
 
-            });
+                    setTimeout(()=>{
+
+                        element.style.opacity="1";
+
+                        element.style.transform=
+
+                            "translateY(0)";
+
+                    },180*index);
+
+                }
+
+            );
 
         }
 
