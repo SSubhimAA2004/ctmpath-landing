@@ -1,10 +1,10 @@
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey v2.0
+   CTM PATH™ Guided Journey v5.0
 
    File        : router.js
-   Version     : 1.0.3
-   Status      : 🔒 LOCKED
+   Version     : 1.1
+   Status      : 🔒 PREMIUM FOUNDATION
 
    Purpose     : Application Router
 
@@ -14,6 +14,7 @@
                   • Journey Progression
                   • Navigation Guards
                   • Startup Route Resolution
+                  • Scroll Position Reset
 
                   Owns NO
                   • UI Rendering
@@ -28,12 +29,16 @@
 
 
 
+
+
 /* ==========================================================================
    ROUTER
    ========================================================================== */
 
 
 const Router = (() => {
+
+
 
 
 
@@ -45,9 +50,13 @@ const Router = (() => {
     const ROUTES = {
 
 
+
         LANDING:
 
             '/pages/landing.html',
+
+
+
 
 
         REGISTRATION:
@@ -55,9 +64,15 @@ const Router = (() => {
             '/pages/registration.html',
 
 
+
+
+
         ASSESSMENT:
 
             '/pages/assessment.html',
+
+
+
 
 
         KALACHAKRA:
@@ -65,9 +80,15 @@ const Router = (() => {
             '/pages/kaalachakra.html',
 
 
+
+
+
         DIAGNOSIS:
 
             '/pages/diagnosis.html',
+
+
+
 
 
         PRESCRIPTION:
@@ -75,12 +96,19 @@ const Router = (() => {
             '/pages/prescription.html',
 
 
+
+
+
         COMPLETION:
 
             '/pages/completion.html'
 
 
+
     };
+
+
+
 
 
 
@@ -94,28 +122,39 @@ const Router = (() => {
     const JOURNEY = [
 
 
+
         ROUTES.LANDING,
+
 
 
         ROUTES.REGISTRATION,
 
 
+
         ROUTES.ASSESSMENT,
+
 
 
         ROUTES.KALACHAKRA,
 
 
+
         ROUTES.DIAGNOSIS,
+
 
 
         ROUTES.PRESCRIPTION,
 
 
+
         ROUTES.COMPLETION
 
 
+
     ];
+
+
+
 
 
 
@@ -134,6 +173,14 @@ const Router = (() => {
 
     }
 
+                /* ==========================================================================
+   CTM PATH™ Guided Journey v5.0
+
+   File        : router.js
+   Version     : 1.1
+
+   ========================================================================== */
+
 
 
 
@@ -146,10 +193,19 @@ const Router = (() => {
     function isValidRoute(page){
 
 
-        return JOURNEY.includes(page);
+
+        return JOURNEY.includes(
+
+            page
+
+        );
+
 
 
     }
+
+
+
 
 
 
@@ -163,10 +219,19 @@ const Router = (() => {
     function pageIndex(page){
 
 
-        return JOURNEY.indexOf(page);
+
+        return JOURNEY.indexOf(
+
+            page
+
+        );
+
 
 
     }
+
+
+
 
 
 
@@ -180,43 +245,101 @@ const Router = (() => {
     function canNavigate(target){
 
 
+
+
+
         if(
 
-            !isValidRoute(target)
+
+
+            !isValidRoute(
+
+                target
+
+            )
+
+
 
         ){
+
+
 
             return false;
 
+
+
         }
 
 
 
-        const current = currentPage();
+
+
+
+
+        const current =
+
+            currentPage();
+
+
+
+
 
 
 
         if(
 
-            !isValidRoute(current)
+
+
+            !isValidRoute(
+
+                current
+
+            )
+
+
 
         ){
 
+
+
             return true;
 
+
+
         }
+
+
+
+
 
 
 
         return (
 
-            pageIndex(target)
+
+
+            pageIndex(
+
+                target
+
+            )
 
             <=
 
-            pageIndex(current) + 1
+            pageIndex(
+
+                current
+
+            )
+
+            + 1
+
+
 
         );
+
+
+
 
 
     }
@@ -225,44 +348,197 @@ const Router = (() => {
 
 
 
+
+
+
     /* ======================================================================
-       GO
+       NORMALIZE PATH
+       
+       Ensures consistent navigation paths
+
+       ====================================================================== */
+
+
+    function normalizePath(path){
+
+
+
+        if(!path){
+
+
+
+            return ROUTES.LANDING;
+
+
+
+        }
+
+
+
+
+
+
+
+        return path.startsWith("/")
+
+            ? path
+
+            : "/" + path;
+
+
+
+    }
+
+                /* ==========================================================================
+   CTM PATH™ Guided Journey v5.0
+
+   File        : router.js
+   Version     : 1.1
+
+   ========================================================================== */
+
+
+
+
+
+
+    /* ======================================================================
+       GO TO PAGE
        ====================================================================== */
 
 
     function go(page){
 
 
-        if(
 
-            !canNavigate(page)
 
-        ){
 
-            console.warn(
+        const target =
 
-                'Navigation blocked:',
+            normalizePath(
 
                 page
 
             );
 
 
+
+
+
+
+
+
+        if(
+
+
+
+            !canNavigate(
+
+                target
+
+            )
+
+
+
+        ){
+
+
+
+            console.warn(
+
+
+
+                "Navigation blocked:",
+
+
+
+                target
+
+
+
+            );
+
+
+
             return;
+
+
 
         }
 
 
 
-        StorageService.saveCurrentPage(
 
-            page
+
+
+
+
+        if(
+
+
+
+            window.StorageService
+
+            &&
+
+            typeof window.StorageService.saveCurrentPage === "function"
+
+
+
+        ){
+
+
+
+            StorageService.saveCurrentPage(
+
+                target
+
+            );
+
+
+
+        }
+
+
+
+
+
+
+
+
+        /*
+           Reset scroll position
+           Prevents next page opening at old scroll location
+        */
+
+
+        window.scrollTo(
+
+
+
+            {
+
+                top:0,
+
+                behavior:"instant"
+
+            }
+
+
 
         );
 
 
 
-        window.location.href = page;
+
+
+
+
+
+        window.location.href = target;
+
+
+
 
 
     }
@@ -271,50 +547,84 @@ const Router = (() => {
 
 
 
+
+
+
     /* ======================================================================
-       NEXT
+       NEXT PAGE
        ====================================================================== */
 
 
     function next(){
 
 
-        const current = currentPage();
 
 
-        const index = pageIndex(current);
+
+        const current =
+
+            currentPage();
+
+
+
+
+
+
+
+        const index =
+
+            pageIndex(
+
+                current
+
+            );
+
+
+
+
 
 
 
         if(
+
+
 
             index === -1
 
-        ){
-
-            return;
-
-        }
-
-
-
-        if(
+            ||
 
             index >= JOURNEY.length - 1
 
+
+
         ){
+
+
 
             return;
 
+
+
         }
+
+
+
+
 
 
 
         go(
 
+
+
             JOURNEY[index + 1]
 
+
+
         );
+
+
+
 
 
     }
@@ -323,66 +633,153 @@ const Router = (() => {
 
 
 
+
+
+
     /* ======================================================================
-       PREVIOUS
+       PREVIOUS PAGE
        ====================================================================== */
 
 
     function previous(){
 
 
-        const current = currentPage();
 
 
-        const index = pageIndex(current);
+
+        const current =
+
+            currentPage();
+
+
+
+
+
+
+
+        const index =
+
+            pageIndex(
+
+                current
+
+            );
+
+
+
+
 
 
 
         if(
 
+
+
             index <= 0
+
+
 
         ){
 
+
+
             return;
+
+
 
         }
 
 
 
+
+
+
+
         go(
 
+
+
             JOURNEY[index - 1]
+
+
 
         );
 
 
+
+
+
     }
+
+
+
 
 
 
 
 
     /* ======================================================================
-       RESTART
+       RESTART JOURNEY
        ====================================================================== */
 
 
     function restart(){
 
 
-        StorageService.resetJourney();
+
+
+
+        if(
+
+
+
+            window.StorageService
+
+            &&
+
+            typeof window.StorageService.resetJourney === "function"
+
+
+
+        ){
+
+
+
+            StorageService.resetJourney();
+
+
+
+        }
+
+
+
+
 
 
 
         go(
 
+
+
             ROUTES.LANDING
+
+
 
         );
 
 
+
+
+
     }
+
+                /* ==========================================================================
+   CTM PATH™ Guided Journey v5.0
+
+   File        : router.js
+   Version     : 1.1
+
+   ========================================================================== */
 
 
 
@@ -396,27 +793,91 @@ const Router = (() => {
     function resume(){
 
 
-        const saved =
 
-            StorageService.getCurrentPage();
+
+
+        let saved = null;
+
+
+
+
 
 
 
         if(
 
-            saved &&
 
-            isValidRoute(saved)
+
+            window.StorageService
+
+            &&
+
+            typeof window.StorageService.getCurrentPage === "function"
+
+
 
         ){
+
+
+
+            saved =
+
+                StorageService.getCurrentPage();
+
+
+
+        }
+
+
+
+
+
+
+
+
+        if(
+
+
+
+            saved
+
+            &&
+
+            isValidRoute(
+
+                saved
+
+            )
+
+
+
+        ){
+
+
+
+            window.scrollTo(
+
+                0,
+
+                0
+
+            );
+
 
 
             window.location.href = saved;
 
 
+
             return;
 
+
+
         }
+
+
+
+
 
 
 
@@ -425,18 +886,25 @@ const Router = (() => {
             ROUTES.LANDING;
 
 
+
+
+
     }
 
 
 
 
 
+
+
+
     /* ======================================================================
-       FIRST PAGE
+       FIRST PAGE CHECK
        ====================================================================== */
 
 
     function isFirstPage(){
+
 
 
         return (
@@ -450,18 +918,23 @@ const Router = (() => {
         );
 
 
+
     }
 
 
 
 
 
+
+
+
     /* ======================================================================
-       LAST PAGE
+       LAST PAGE CHECK
        ====================================================================== */
 
 
     function isLastPage(){
+
 
 
         return (
@@ -475,7 +948,11 @@ const Router = (() => {
         );
 
 
+
     }
+
+
+
 
 
 
@@ -489,6 +966,7 @@ const Router = (() => {
     function currentStep(){
 
 
+
         return (
 
             pageIndex(
@@ -499,10 +977,16 @@ const Router = (() => {
 
             + 1
 
+
+
         );
 
 
+
     }
+
+
+
 
 
 
@@ -516,7 +1000,9 @@ const Router = (() => {
     function totalSteps(){
 
 
+
         return JOURNEY.length;
+
 
 
     }
@@ -525,15 +1011,21 @@ const Router = (() => {
 
 
 
+
+
+
     /* ======================================================================
-       PROGRESS
+       PROGRESS PERCENTAGE
        ====================================================================== */
 
 
     function progress(){
 
 
+
         return Math.round(
+
+
 
             (
 
@@ -543,14 +1035,24 @@ const Router = (() => {
 
                 totalSteps()
 
+
+
             )
 
-            * 100
+            *
+
+            100
+
+
 
         );
 
 
+
     }
+
+
+
 
 
 
@@ -564,113 +1066,272 @@ const Router = (() => {
     function protect(){
 
 
-        const current = currentPage();
 
 
 
-        if(
+        const current =
 
-            !isValidRoute(current)
-
-        ){
-
-            return;
-
-        }
+            currentPage();
 
 
 
-        const saved =
 
-            StorageService.getCurrentPage();
 
 
 
         if(
 
-            !saved
+
+
+            !isValidRoute(
+
+                current
+
+            )
+
+
 
         ){
 
+
+
             return;
+
+
 
         }
 
 
 
-        const allowed =
 
-            pageIndex(saved);
+
+
+
+        let saved = null;
+
+
+
+
+
+
+
+        if(
+
+
+
+            window.StorageService
+
+            &&
+
+            typeof window.StorageService.getCurrentPage === "function"
+
+
+
+        ){
+
+
+
+            saved =
+
+                StorageService.getCurrentPage();
+
+
+
+        }
+
+
+
+
+
+
+
+
+        if(!saved){
+
+
+
+            return;
+
+
+
+        }
+
+
+
+
+
+
+
+        const allowedIndex =
+
+            pageIndex(
+
+                saved
+
+            );
+
+
+
+
 
 
 
         const currentIndex =
 
-            pageIndex(current);
+            pageIndex(
+
+                current
+
+            );
+
+
+
+
 
 
 
         if(
 
+
+
             currentIndex >
 
-            allowed + 1
+            allowedIndex + 1
+
+
 
         ){
 
+
+
+            window.scrollTo(
+
+                0,
+
+                0
+
+            );
+
+
+
             window.location.href = saved;
+
+
 
         }
 
 
+
     }
+
+                /* ==========================================================================
+   CTM PATH™ Guided Journey v5.0
+
+   File        : router.js
+   Version     : 1.1
+
+   ========================================================================== */
 
 
 
 
 
     /* ======================================================================
-       INITIALIZE
+       INITIALIZE ROUTER
        ====================================================================== */
 
 
     function init(){
 
 
+
+
+
         protect();
 
 
 
-        const current = currentPage();
+
+
+
+
+        const current =
+
+            currentPage();
+
+
+
+
+
 
 
 
         if(
 
-            current === '/'
+
+
+            current === "/"
 
             ||
 
-            current === '/index.html'
+            current === "/index.html"
+
+
 
         ){
 
+
+
             resume();
 
+
+
             return;
+
+
 
         }
 
 
 
-        StorageService.saveCurrentPage(
 
-            current
 
-        );
+
+
+        if(
+
+
+
+            window.StorageService
+
+            &&
+
+            typeof window.StorageService.saveCurrentPage === "function"
+
+
+
+        ){
+
+
+
+            StorageService.saveCurrentPage(
+
+                current
+
+            );
+
+
+
+        }
+
+
+
 
 
     }
+
+
+
 
 
 
@@ -684,58 +1345,87 @@ const Router = (() => {
     return {
 
 
+
         ROUTES,
+
 
 
         JOURNEY,
 
 
+
+
+
         init,
+
 
 
         go,
 
 
+
         next,
+
 
 
         previous,
 
 
+
         resume,
+
 
 
         restart,
 
 
+
         protect,
+
+
+
 
 
         currentPage,
 
 
+
         currentStep,
+
 
 
         totalSteps,
 
 
+
         progress,
+
+
+
 
 
         isValidRoute,
 
 
+
         isFirstPage,
+
 
 
         isLastPage
 
 
+
     };
 
 
+
+
+
 })();
+
+
+
 
 
 
@@ -748,17 +1438,28 @@ const Router = (() => {
 
 document.addEventListener(
 
-    'DOMContentLoaded',
 
-    () => {
+
+    "DOMContentLoaded",
+
+
+
+    ()=>{
+
 
 
         Router.init();
 
 
+
     }
 
+
+
 );
+
+
+
 
 
 
@@ -775,13 +1476,26 @@ window.Router = Router;
 
 
 
+
+
+
 /* ==========================================================================
    End of File
 
-   File : router.js
 
-   Version : 1.0.3
+   File :
 
-   Status : 🔒 LOCKED
+   router.js
+
+
+   Version :
+
+   1.1
+
+
+   Status :
+
+   🔒 PREMIUM FOUNDATION
+
 
    ========================================================================== */
