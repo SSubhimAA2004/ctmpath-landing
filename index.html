@@ -1,196 +1,148 @@
 
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
     <!-- ==========================================================
-         CTM PATH™ Guided Journey v2.0
+         CTM PATH™ Guided Journey™
 
-         File    : index.html
-         Version : 1.0.2
-         Status  : 🔒 LOCKED
+         File        : index.html
+         Version     : 2.0
+         Status      : 🔒 LOCKED
+         Architecture: Multi-Page Application (MPA)
 
-         Purpose:
-         Main Application Entry Point™
+         Purpose
+         ----------------------------------------------------------
+         Shared Application Shell
 
-         Responsibilities:
-         ✓ Load application shell
-         ✓ Load foundation CSS
-         ✓ Load core JavaScript
-         ✓ Provide root container
+         Responsibilities
 
-         Does NOT:
-         ✗ Initialize application
-         ✗ Handle routing
-         ✗ Handle page logic
+         ✓ Load global typography
+         ✓ Load shared CSS
+         ✓ Load shared JavaScript
+         ✓ Create CTM namespace
 
-         app.js owns startup lifecycle.
+         Does NOT
+
+         ✗ Load page-specific CSS
+         ✗ Load page-specific JavaScript
+         ✗ Perform routing
+         ✗ Initialize page controllers
 
          ========================================================== -->
 
-
     <meta charset="UTF-8">
-
 
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-
     <meta
         name="description"
         content="CTM PATH™ Guided Journey">
-
 
     <meta
         name="theme-color"
         content="#081C3A">
 
-
-
     <title>
 
-        CTM PATH™ Guided Journey
+        CTM PATH™ Guided Journey™
 
     </title>
-
-
 
     <!-- ==========================================================
          Typography
          ========================================================== -->
 
-
     <link
         rel="preconnect"
         href="https://fonts.googleapis.com">
-
 
     <link
         rel="preconnect"
         href="https://fonts.gstatic.com"
         crossorigin>
 
-
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
-
-
     <!-- ==========================================================
-         Foundation CSS
+         Shared Foundation CSS
          ========================================================== -->
-
 
     <link
         rel="stylesheet"
         href="css/reset.css">
 
-
     <link
         rel="stylesheet"
         href="css/tokens.css">
-
 
     <link
         rel="stylesheet"
         href="css/base.css">
 
-
     <link
         rel="stylesheet"
         href="css/app.css">
 
-
-
 </head>
-
-
 
 <body>
 
+    <!-- ==========================================================
+         APPLICATION ROOT
+         ========================================================== -->
 
+    <div id="app">
 
-<!-- ==========================================================
-     APPLICATION ROOT
-     ========================================================== -->
+        <div class="app-loader">
 
+            <div class="loader-symbol">
 
-<div id="app">
+                CTM PATH™
 
+            </div>
 
+            <p>
 
-    <!-- ======================================================
-         Initial Loading State
+                Loading...
 
-         Replaced by Router / Page Modules
-
-         ====================================================== -->
-
-
-    <div class="app-loader">
-
-
-        <div class="loader-symbol">
-
-
-            CTM PATH™
-
+            </p>
 
         </div>
 
-
-
-        <p>
-
-
-            Loading Your Journey...
-
-
-        </p>
-
-
-
     </div>
 
+        <!-- ==========================================================
+         SHARED APPLICATION LAYER
 
+         Dependency Order
 
-</div>
+         1. Browser Storage
+         2. API Communication
+         3. Application Core
 
+         NOTE
+         ----------------------------------------------------------
+         Page-specific JavaScript is NOT loaded here.
 
+         Each page (landing.html, registration.html,
+         assessment.html, etc.) loads its own controller.
 
+         ========================================================== -->
 
+    <script src="js/storage.js"></script>
 
-<!-- ==========================================================
-     CORE APPLICATION LAYER
+    <script src="js/api.js"></script>
 
-     Dependency Order:
-
-     1. Storage
-     2. API
-     3. Router
-     4. Application Bootstrap
-
-     ========================================================== -->
-
-
-<script src="js/storage.js"></script>
-
-
-<script src="js/api.js"></script>
-
-
-<script src="js/router.js"></script>
-
-
-<script src="js/app.js"></script>
-
-
+    <script src="js/app.js"></script>
 
 </body>
-
 
 </html>
 
