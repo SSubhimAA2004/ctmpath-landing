@@ -2,21 +2,22 @@
 /* ==========================================================================
    CTM PATH™ Guided Journey v2.0
    File        : landing.js
-   Version     : 3.0
+   Version     : 4.0
    Status      : 🔒 LOCKED
    Purpose     : Landing Page Controller
 
                   Owns
                   • Landing Page Initialization
-                  • Begin Journey Button
                   • Journey Reset
-                  • Entrance Animation
+                  • CTA Navigation
+                  • Premium Entrance Animation
+                  • Interactive Card Effects
 
    ========================================================================== */
 
 (() => {
 
-    'use strict';
+    "use strict";
 
     const Landing = {
 
@@ -28,16 +29,18 @@
 
             this.resetJourney();
 
-            this.cacheElements();
+            this.cacheDOM();
 
             this.bindEvents();
 
-            this.animate();
+            this.animateEntrance();
+
+            this.enableCardEffects();
 
         },
 
         /* ==========================================================
-           RESET
+           RESET APPLICATION
            ========================================================== */
 
         resetJourney() {
@@ -46,18 +49,29 @@
                 window.CTMApp &&
                 typeof window.CTMApp.reset === "function"
             ) {
+
                 window.CTMApp.reset();
+
             }
 
         },
 
         /* ==========================================================
-           CACHE DOM
+           CACHE ELEMENTS
            ========================================================== */
 
-        cacheElements() {
+        cacheDOM() {
 
-            this.startButton =
+            this.hero =
+                document.querySelector(".hero");
+
+            this.discoverCards =
+                document.querySelectorAll(".discover-card");
+
+            this.areaCards =
+                document.querySelectorAll(".area-card");
+
+            this.ctaButton =
                 document.querySelector(".primary-button");
 
         },
@@ -68,9 +82,9 @@
 
         bindEvents() {
 
-            if (this.startButton) {
+            if (this.ctaButton) {
 
-                this.startButton.addEventListener(
+                this.ctaButton.addEventListener(
                     "click",
                     this.beginJourney.bind(this)
                 );
@@ -80,7 +94,7 @@
         },
 
         /* ==========================================================
-           BEGIN JOURNEY
+           START JOURNEY
            ========================================================== */
 
         beginJourney() {
@@ -99,26 +113,73 @@
         },
 
         /* ==========================================================
-           SIMPLE ENTRANCE ANIMATION
+           PAGE ENTRANCE
            ========================================================== */
 
-        animate() {
+        animateEntrance() {
 
-            const card =
-                document.querySelector(".landing-card");
+            const sections = document.querySelectorAll(
 
-            if (!card) return;
+                ".hero,\
+                 .discover,\
+                 .life-areas,\
+                 .closing-message,\
+                 .landing-cta"
 
-            card.style.opacity = "0";
-            card.style.transform = "translateY(24px)";
+            );
 
-            requestAnimationFrame(() => {
+            sections.forEach((section, index) => {
 
-                card.style.transition =
-                    "opacity .6s ease, transform .6s ease";
+                section.style.opacity = "0";
 
-                card.style.opacity = "1";
-                card.style.transform = "translateY(0)";
+                section.style.transform =
+                    "translateY(30px)";
+
+                section.style.transition =
+                    "opacity .7s ease, transform .7s ease";
+
+                setTimeout(() => {
+
+                    section.style.opacity = "1";
+
+                    section.style.transform =
+                        "translateY(0)";
+
+                }, 180 * index);
+
+            });
+
+        },
+
+        /* ==========================================================
+           CARD INTERACTION
+           ========================================================== */
+
+        enableCardEffects() {
+
+            const cards = [
+
+                ...this.discoverCards,
+
+                ...this.areaCards
+
+            ];
+
+            cards.forEach(card => {
+
+                card.addEventListener("mouseenter", () => {
+
+                    card.style.transform =
+                        "translateY(-8px) scale(1.02)";
+
+                });
+
+                card.addEventListener("mouseleave", () => {
+
+                    card.style.transform =
+                        "translateY(0) scale(1)";
+
+                });
 
             });
 
@@ -127,12 +188,15 @@
     };
 
     /* ==============================================================
-       AUTO START
+       DOM READY
        ============================================================== */
 
     document.addEventListener(
+
         "DOMContentLoaded",
+
         () => Landing.init()
+
     );
 
 })();
