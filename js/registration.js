@@ -4,9 +4,9 @@
    FROM SURVIVAL TO LIVING™
 
    File        : registration.js
-   Version     : 5.3
+   Version     : 5.4
 
-   Status      : 🔒 FOUNDATION FIX
+   Status      : 🔒 CLEAN MASTER
 
    Purpose     : Registration Controller
 
@@ -34,7 +34,6 @@
 
 
 'use strict';
-
 
 
 
@@ -76,6 +75,7 @@ const Registration = {
 
 
     },
+
 
 
 
@@ -132,8 +132,7 @@ const Registration = {
 
     },
 
-   id="registration-js-v53-batch-1b"
-
+   
 /* ==========================================================================
    EVENT BINDING
    ========================================================================== */
@@ -164,6 +163,7 @@ const Registration = {
 
 
         }
+
 
 
 
@@ -205,7 +205,7 @@ const Registration = {
 
 
 /* ==========================================================================
-   RESTORE SAVED REGISTRATION
+   RESTORE SAVED REGISTRATION DATA
    ========================================================================== */
 
 
@@ -329,7 +329,7 @@ const Registration = {
 
 
 
-                'Restore Registration Error:',
+                'CTM Registration Restore Error:',
 
 
 
@@ -381,6 +381,7 @@ const Registration = {
 
 
 
+
         if(!this.form.checkValidity()){
 
 
@@ -401,20 +402,21 @@ const Registration = {
 
 
 
+
         return true;
 
 
 
     },
 
+   
 /* ==========================================================================
    COLLECT REGISTRATION DATA
 
-   IMPORTANT:
+   Purpose:
+   Convert HTML form values into Google Sheet compatible payload.
 
-   These keys MUST match Google Sheet headers exactly.
-
-   Visitors Sheet:
+   Sheet Mapping:
 
    Timestamp
    VisitorID
@@ -445,6 +447,42 @@ const Registration = {
 
 
 
+            Timestamp:
+
+                new Date().toISOString(),
+
+
+
+
+
+
+            VisitorID:
+
+                '',
+
+
+
+
+
+
+            AssessmentDate:
+
+                new Date().toISOString(),
+
+
+
+
+
+
+            InitialEmotion:
+
+                '',
+
+
+
+
+
+
             FullName:
 
                 this.getValue(
@@ -452,7 +490,6 @@ const Registration = {
                     'fullName'
 
                 ),
-
 
 
 
@@ -472,7 +509,6 @@ const Registration = {
 
 
 
-
             Mobile:
 
                 this.getValue(
@@ -480,7 +516,6 @@ const Registration = {
                     'mobile'
 
                 ),
-
 
 
 
@@ -500,7 +535,6 @@ const Registration = {
 
 
 
-
             State:
 
                 this.getValue(
@@ -508,7 +542,6 @@ const Registration = {
                     'state'
 
                 ),
-
 
 
 
@@ -528,7 +561,6 @@ const Registration = {
 
 
 
-
             Language:
 
                 this.getValue(
@@ -536,7 +568,6 @@ const Registration = {
                     'language'
 
                 ) || 'Tamil',
-
 
 
 
@@ -552,11 +583,9 @@ const Registration = {
 
 
 
-
             CurrentPage:
 
                 'Registration',
-
 
 
 
@@ -572,11 +601,9 @@ const Registration = {
 
 
 
-
             PDFSent:
 
                 'No',
-
 
 
 
@@ -592,20 +619,11 @@ const Registration = {
 
 
 
-
             WheelStatus:
 
-                'Pending',
+                'Pending'
 
 
-
-
-
-
-
-            StartTime:
-
-                new Date().toISOString()
 
 
 
@@ -623,7 +641,7 @@ const Registration = {
 
 
 /* ==========================================================================
-   SAFE VALUE READER
+   SAFE FIELD VALUE READER
    ========================================================================== */
 
 
@@ -654,6 +672,7 @@ const Registration = {
 
 
         }
+
 
 
 
@@ -707,307 +726,7 @@ const Registration = {
 
     },
 
-/* ==========================================================================
-   COLLECT REGISTRATION DATA
-
-   IMPORTANT:
-
-   These keys MUST match Google Sheet headers exactly.
-
-   Visitors Sheet:
-
-   Timestamp
-   VisitorID
-   AssessmentDate
-   InitialEmotion
-   FullName
-   Email
-   Mobile
-   District
-   State
-   ReferralSource
-   Language
-   Device
-   CurrentPage
-   CompletionStatus
-   PDFSent
-   EmailSent
-   WheelStatus
-
-   ========================================================================== */
-
-
-    collectData: function(){
-
-
-
-        return {
-
-
-
-            FullName:
-
-                this.getValue(
-
-                    'fullName'
-
-                ),
-
-
-
-
-
-
-
-            Email:
-
-                this.getValue(
-
-                    'email'
-
-                ),
-
-
-
-
-
-
-
-            Mobile:
-
-                this.getValue(
-
-                    'mobile'
-
-                ),
-
-
-
-
-
-
-
-            District:
-
-                this.getValue(
-
-                    'district'
-
-                ),
-
-
-
-
-
-
-
-            State:
-
-                this.getValue(
-
-                    'state'
-
-                ),
-
-
-
-
-
-
-
-            ReferralSource:
-
-                this.getValue(
-
-                    'source'
-
-                ),
-
-
-
-
-
-
-
-            Language:
-
-                this.getValue(
-
-                    'language'
-
-                ) || 'Tamil',
-
-
-
-
-
-
-
-            Device:
-
-                this.getDevice(),
-
-
-
-
-
-
-
-            CurrentPage:
-
-                'Registration',
-
-
-
-
-
-
-
-            CompletionStatus:
-
-                'Registered',
-
-
-
-
-
-
-
-            PDFSent:
-
-                'No',
-
-
-
-
-
-
-
-            EmailSent:
-
-                'No',
-
-
-
-
-
-
-
-            WheelStatus:
-
-                'Pending',
-
-
-
-
-
-
-
-            StartTime:
-
-                new Date().toISOString()
-
-
-
-        };
-
-
-
-    },
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   SAFE VALUE READER
-   ========================================================================== */
-
-
-    getValue: function(id){
-
-
-
-        const element =
-
-            document.getElementById(
-
-                id
-
-            );
-
-
-
-
-
-
-
-        if(!element){
-
-
-
-            return '';
-
-
-
-        }
-
-
-
-
-
-
-
-        return element.value.trim();
-
-
-
-    },
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   DEVICE DETECTION
-   ========================================================================== */
-
-
-    getDevice: function(){
-
-
-
-        return /Mobi/i.test(
-
-            navigator.userAgent
-
-        )
-
-        ?
-
-
-
-            'Mobile'
-
-
-
-        :
-
-
-
-            'Desktop';
-
-
-
-    },
-
-
+   
 /* ==========================================================================
    SAVE REGISTRATION LOCALLY
    ========================================================================== */
@@ -1045,6 +764,8 @@ const Registration = {
 
 
 
+
+
         }
 
 
@@ -1059,7 +780,7 @@ const Registration = {
 
 
 
-                'Local Storage Save Error:',
+                'CTM Local Storage Error:',
 
 
 
@@ -1077,8 +798,6 @@ const Registration = {
 
 
 
-
-
     },
 
 
@@ -1093,21 +812,21 @@ const Registration = {
 
    Flow:
 
-   Submit Form
+   Form Submit
         ↓
    Validate
         ↓
-   Collect KYC
+   Collect KYC Data
         ↓
    Save Local
         ↓
-   Send API Request
+   Send ApiService.registerVisitor()
         ↓
-   Receive Visitor ID
+   Receive VisitorID
         ↓
-   Save Visitor ID
+   Update Local Data
         ↓
-   Move To Assessment
+   Navigate Assessment
 
    ========================================================================== */
 
@@ -1152,6 +871,27 @@ const Registration = {
 
 
 
+        console.log(
+
+
+
+            'CTM Registration Payload:',
+
+
+
+            registrationData
+
+
+
+        );
+
+
+
+
+
+
+
+
         this.saveLocal(
 
             registrationData
@@ -1171,15 +911,75 @@ const Registration = {
 
 
 
+            if(
+
+
+
+                !window.ApiService
+
+                ||
+
+                typeof window.ApiService.registerVisitor !== 'function'
+
+
+
+            ){
+
+
+
+
+
+                throw new Error(
+
+
+
+                    'ApiService.registerVisitor() unavailable'
+
+
+
+                );
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+            const response =
+
+                await window.ApiService.registerVisitor(
+
+
+
+                    registrationData
+
+
+
+                );
+
+
+
+
+
+
+
+
             console.log(
 
 
 
-                'CTM Registration Payload:',
+                'CTM Registration Response:',
 
 
 
-                registrationData
+                response
 
 
 
@@ -1196,11 +996,15 @@ const Registration = {
 
 
 
-                window.ApiService
+                response
 
                 &&
 
-                typeof window.ApiService.registerVisitor === 'function'
+                response.data
+
+                &&
+
+                response.data.visitorId
 
 
 
@@ -1210,144 +1014,11 @@ const Registration = {
 
 
 
-                const response =
+                registrationData.VisitorID =
 
-                    await window.ApiService.registerVisitor(
+                    response.data.visitorId;
 
 
-
-                        registrationData
-
-
-
-                    );
-
-
-
-
-
-
-
-
-                console.log(
-
-
-
-                    'CTM Registration Response:',
-
-
-
-                    response
-
-
-
-                );
-
-
-
-
-
-
-
-
-                if(
-
-
-
-                    response
-
-                    &&
-
-                    response.data
-
-                    &&
-
-                    response.data.visitorId
-
-
-
-                ){
-
-
-
-
-
-                    registrationData.VisitorID =
-
-                        response.data.visitorId;
-
-
-
-
-
-
-
-                    this.saveLocal(
-
-
-
-                        registrationData
-
-
-
-                    );
-
-
-
-
-
-                }
-
-
-
-
-
-
-
-
-                else if(
-
-
-
-                    response
-
-                    &&
-
-                    response.visitorId
-
-
-
-                ){
-
-
-
-
-
-                    registrationData.VisitorID =
-
-                        response.visitorId;
-
-
-
-
-
-
-
-                    this.saveLocal(
-
-
-
-                        registrationData
-
-
-
-                    );
-
-
-
-
-
-                }
 
 
 
@@ -1357,27 +1028,59 @@ const Registration = {
 
 
 
-            else{
 
 
 
 
 
-                console.error(
+            else if(
 
 
 
-                    'ApiService.registerVisitor() not found'
+                response
+
+                &&
+
+                response.visitorId
 
 
 
-                );
+            ){
+
+
+
+
+
+                registrationData.VisitorID =
+
+                    response.visitorId;
+
+
 
 
 
 
 
             }
+
+
+
+
+
+
+
+
+            this.saveLocal(
+
+
+
+                registrationData
+
+
+
+            );
+
+
 
 
 
@@ -1397,7 +1100,7 @@ const Registration = {
 
 
 
-                'Registration API Error:',
+                'CTM Registration Failed:',
 
 
 
@@ -1408,6 +1111,28 @@ const Registration = {
             );
 
 
+
+
+
+
+
+            alert(
+
+
+
+                'Registration could not be completed. Please try again.'
+
+
+
+            );
+
+
+
+
+
+
+
+            return;
 
 
 
@@ -1426,22 +1151,20 @@ const Registration = {
 
     },
 
-
+   
 /* ==========================================================================
    NAVIGATE TO ASSESSMENT
+
+   Preferred:
+   CTM PATH™ Router
+
+   Fallback:
+   Direct page navigation
+
    ========================================================================== */
 
 
     goNext: function(){
-
-
-
-        /*
-           Use CTM PATH™ Router
-           if available
-        */
-
-
 
 
 
@@ -1477,6 +1200,8 @@ const Registration = {
 
 
 
+
+
             return;
 
 
@@ -1485,14 +1210,6 @@ const Registration = {
 
 
 
-
-
-
-
-
-        /*
-           Fallback navigation
-        */
 
 
 
@@ -1518,7 +1235,7 @@ const Registration = {
 
 
 /* ==========================================================================
-   NAVIGATE BACK TO LANDING
+   NAVIGATE BACK TO LANDING PAGE
    ========================================================================== */
 
 
@@ -1558,6 +1275,8 @@ const Registration = {
 
 
 
+
+
             return;
 
 
@@ -1583,7 +1302,7 @@ const Registration = {
 
     },
 
-
+   
 /* ==========================================================================
    PAGE ENTRANCE ANIMATION
    ========================================================================== */
@@ -1844,10 +1563,10 @@ window.Registration = Registration;
    File        : registration.js
 
 
-   Version     : 5.3
+   Version     : 5.4
 
 
-   Status      : 🔒 CLEAN FINAL
+   Status      : 🔒 CLEAN MASTER
 
 
    ========================================================================== */
