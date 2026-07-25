@@ -2,713 +2,621 @@
 /* ==========================================================================
    CTM PATH™ Guided Journey v2.0
    File        : landing.css
-   Version     : 2.0
+   Version     : 3.0
    Status      : 🔒 LOCKED
-   Purpose     : Landing Page Presentation
-                  Owns ONLY the Landing Screen UI.
-                  No shared application styles.
+   Purpose     : Landing Page Styles
+                  • Welcome Screen
+                  • Hero Section
+                  • Discover Cards
+                  • 12 Life Areas
+                  • Promise Section
+                  • Closing Message
+                  • CTA
    ========================================================================== */
-
 
 /* ==========================================================================
-   LANDING PAGE
+   PAGE LAYOUT
    ========================================================================== */
 
-.landing-card {
-
-    position: relative;
-
-    overflow: hidden;
-
-    max-width: 960px;
-
-    margin-inline: auto;
-
-    text-align: center;
-
+body{
+    background:var(--color-page-bg);
+    color:var(--color-text-primary);
 }
 
+.app{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+.app-main{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:72px 24px;
+}
+
+.container{
+    width:100%;
+    max-width:1100px;
+    margin:0 auto;
+}
 
 /* ==========================================================================
-   Decorative Background
+   HEADER
    ========================================================================== */
 
-.landing-card::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        radial-gradient(
-            circle at top center,
-            rgba(13,148,136,.12),
-            transparent 60%
-        );
-
-    pointer-events: none;
-
+.app-header{
+    padding:32px 0 12px;
 }
-
-.landing-card>*{
-
-    position: relative;
-
-    z-index: 2;
-
-}
-
-
-/* ==========================================================================
-   Header
-   ========================================================================== */
 
 .landing-header{
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
 }
 
+.logo{
+    width:140px;
+    max-width:100%;
+    height:auto;
+    display:block;
+}
 
 /* ==========================================================================
-   Welcome
-   ========================================================================== */
-
-.landing-intro{
-
-    margin-bottom:var(--space-10);
-
-}
-
-.tamil-greeting{
-
-    font-family:var(--font-heading);
-
-    font-size:var(--fs-2xl);
-
-    font-weight:var(--fw-semibold);
-
-    color:var(--color-secondary);
-
-    margin-bottom:var(--space-3);
-
-}
-
-.english-greeting{
-
-    font-size:var(--fs-lg);
-
-    color:var(--text-secondary);
-
-}
-
-
-/* ==========================================================================
-   Hero Title
-   ========================================================================== */
-
-.landing-title{
-
-    margin-bottom:var(--space-6);
-
-    font-size:clamp(2.8rem,5vw,4.6rem);
-
-    line-height:1.1;
-
-    text-transform:uppercase;
-
-    letter-spacing:.05em;
-
-}
-
-.title-accent{
-
-    display:inline-block;
-
-    color:var(--color-secondary);
-
-    margin-inline:.35rem;
-
-}
-
-
-/* ==========================================================================
-   Subtitle
-   ========================================================================== */
-
-.landing-subtitle{
-
-    max-width:760px;
-
-    margin-inline:auto;
-
-    margin-bottom:var(--space-12);
-
-    font-size:var(--fs-lg);
-
-    color:var(--text-secondary);
-
-    line-height:1.8;
-
-}
-
-
-/* ==========================================================================
-   Journey Navigator
-   ========================================================================== */
-
-.journey-navigator{
-
-    margin-bottom:var(--space-12);
-
-}
-
-.navigator-line{
-
-    width:160px;
-
-    height:2px;
-
-    margin-inline:auto;
-
-    background:linear-gradient(
-        90deg,
-        transparent,
-        var(--color-secondary),
-        transparent
-    );
-
-}
-
-.navigator-content{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:var(--space-3);
-
-    margin-block:var(--space-5);
-
-    flex-wrap:wrap;
-
-}
-
-.navigator-content.english{
-
-    color:var(--text-muted);
-
-    font-size:var(--fs-sm);
-
-    letter-spacing:.08em;
-
-    text-transform:uppercase;
-
-}
-
-.navigator-ta{
-
-    font-weight:var(--fw-semibold);
-
-    color:var(--text-primary);
-
-}
-
-.navigator-arrow{
-
-    color:var(--color-secondary);
-
-    font-weight:700;
-
-}
-
-
-/* ==========================================================================
-   Journey Promise
-   ========================================================================== */
-
-.landing-promise{
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:var(--space-5);
-
-    margin-bottom:var(--space-12);
-
-}
-
-.promise-item{
-
-    padding:var(--space-5);
-
-    background:rgba(255,255,255,.05);
-
-    border:1px solid var(--border-light);
-
-    border-radius:var(--radius-lg);
-
-    font-weight:var(--fw-medium);
-
-    transition:all var(--transition-normal);
-
-}
-
-.promise-item:hover{
-
-    transform:translateY(-4px);
-
-    border-color:var(--color-primary);
-
-    background:rgba(255,255,255,.08);
-
-}
-
-
-/* ==========================================================================
-   Continue in Batch 2/n
-   ========================================================================== */
-
-/* ==========================================================================
-   Benefits Section
-   ========================================================================== */
-
-.benefits-section{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:var(--space-6);
-
-    margin-bottom:var(--space-12);
-
-}
-
-.benefit-card{
-
-    background:rgba(255,255,255,.05);
-
-    border:1px solid var(--border-light);
-
-    border-radius:var(--radius-xl);
-
-    padding:var(--space-8);
-
-    text-align:center;
-
-    transition:
-        transform var(--transition-normal),
-        border-color var(--transition-normal),
-        box-shadow var(--transition-normal);
-
-}
-
-.benefit-card:hover{
-
-    transform:translateY(-6px);
-
-    border-color:var(--color-primary);
-
-    box-shadow:var(--shadow-md);
-
-}
-
-.benefit-icon{
-
-    width:72px;
-
-    height:72px;
-
-    margin-inline:auto;
-
-    margin-bottom:var(--space-5);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:2rem;
-
-    border-radius:50%;
-
-    background:rgba(13,148,136,.12);
-
-}
-
-.benefit-card h3{
-
-    margin-bottom:var(--space-4);
-
-    font-size:var(--fs-lg);
-
-}
-
-.benefit-card p{
-
-    color:var(--text-secondary);
-
-    line-height:1.75;
-
-}
-
-
-/* ==========================================================================
-   Journey Information
-   ========================================================================== */
-
-.journey-information{
-
-    max-width:720px;
-
-    margin-inline:auto;
-
-    margin-bottom:var(--space-12);
-
-    border-radius:var(--radius-xl);
-
-    border:1px solid var(--border-light);
-
-    overflow:hidden;
-
-}
-
-.info-row{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:var(--space-4);
-
-    padding:var(--space-5) var(--space-6);
-
-    background:rgba(255,255,255,.04);
-
-    border-bottom:1px solid var(--border-light);
-
-}
-
-.info-row:last-child{
-
-    border-bottom:none;
-
-}
-
-.info-label{
-
-    font-weight:var(--fw-semibold);
-
-    color:var(--text-primary);
-
-}
-
-.info-value{
-
-    color:var(--text-secondary);
-
-    text-align:right;
-
-}
-
-
-/* ==========================================================================
-   Privacy Box
-   ========================================================================== */
-
-.privacy-box{
-
-    max-width:760px;
-
-    margin-inline:auto;
-
-    margin-bottom:var(--space-12);
-
-    padding:var(--space-8);
-
-    border-radius:var(--radius-xl);
-
-    border:1px solid rgba(16,185,129,.25);
-
-    background:rgba(16,185,129,.08);
-
-}
-
-.privacy-box h3{
-
-    margin-bottom:var(--space-4);
-
-    color:var(--success);
-
-}
-
-.privacy-box p{
-
-    color:var(--text-secondary);
-
-    line-height:1.8;
-
-}
-
-
-/* ==========================================================================
-   Call To Action
-   ========================================================================== */
-
-.landing-cta{
-
-    display:flex;
-
-    justify-content:center;
-
-    margin-bottom:var(--space-10);
-
-}
-
-#beginJourneyButton{
-
-    min-width:320px;
-
-    height:64px;
-
-    font-size:var(--fs-lg);
-
-    font-weight:var(--fw-bold);
-
-    box-shadow:var(--shadow-lg);
-
-}
-
-#beginJourneyButton:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:var(--shadow-xl);
-
-}
-
-
-/* ==========================================================================
-   Continue in Batch 3/n
-   ========================================================================== */
-
-/* ==========================================================================
-   Footer Note
-   ========================================================================== */
-
-.landing-footer-note{
-
-    max-width:760px;
-
-    margin-inline:auto;
-
-    padding-top:var(--space-8);
-
-    border-top:1px solid var(--border-light);
-
-}
-
-.footer-text{
-
-    color:var(--text-muted);
-
-    font-size:var(--fs-md);
-
-    line-height:1.9;
-
-}
-
-.footer-text + .footer-text{
-
-    margin-top:var(--space-3);
-
-}
-
-
-/* ==========================================================================
-   Entrance Animation
+   MAIN CARD
    ========================================================================== */
 
 .landing-card{
-
-    animation:fadeInUp .8s ease forwards;
-
+    width:100%;
+    padding:64px;
+    border-radius:28px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(18px);
+    box-shadow:
+        0 18px 50px rgba(0,0,0,.35);
 }
-
-@keyframes fadeInUp{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(30px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
 
 /* ==========================================================================
-   Responsive — Tablet
+   HERO
    ========================================================================== */
 
-@media (max-width:992px){
-
-    .landing-title{
-
-        font-size:3rem;
-
-    }
-
-    .landing-promise{
-
-        grid-template-columns:repeat(2,1fr);
-
-    }
-
-    .benefits-section{
-
-        grid-template-columns:1fr;
-
-    }
-
+.landing-intro{
+    text-align:center;
+    margin-bottom:72px;
 }
 
+.tamil-greeting{
+    margin:0;
+    font-size:2.9rem;
+    font-weight:700;
+    line-height:1.25;
+    color:var(--color-text-primary);
+    letter-spacing:-0.02em;
+}
+
+.english-hero{
+    margin:20px 0 0;
+    font-size:1.1rem;
+    font-weight:700;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:var(--color-accent);
+}
+
+.landing-subtitle{
+    margin:42px auto 0;
+    max-width:760px;
+    font-size:2rem;
+    font-weight:500;
+    line-height:1.5;
+    color:var(--color-text-primary);
+}
+
+.english-subtitle{
+    margin:16px auto 0;
+    max-width:760px;
+    font-size:1.15rem;
+    font-weight:400;
+    line-height:1.8;
+    color:var(--color-text-secondary);
+}
 
 /* ==========================================================================
-   Responsive — Mobile
+   COMMON SECTION STYLES
    ========================================================================== */
 
-@media (max-width:768px){
+section{
+    margin-top:72px;
+}
+
+.section-title{
+    margin:0;
+    text-align:center;
+    font-size:2rem;
+    font-weight:700;
+    color:var(--color-text-primary);
+}
+
+.section-subtitle{
+    margin:14px 0 48px;
+    text-align:center;
+    font-size:1rem;
+    font-weight:500;
+    color:var(--color-text-secondary);
+    letter-spacing:.05em;
+}
+
+/* ==========================================================================
+   DISCOVER SECTION
+   ========================================================================== */
+
+.discover-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:28px;
+}
+
+.discover-card{
+    display:flex;
+    align-items:flex-start;
+    gap:18px;
+    padding:28px;
+    border-radius:20px;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.07);
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+}
+
+.discover-card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(255,255,255,.18);
+    background:rgba(255,255,255,.05);
+}
+
+.discover-icon{
+    flex:0 0 auto;
+    font-size:1.4rem;
+    line-height:1;
+}
+
+.discover-content{
+    flex:1;
+}
+
+.discover-content h3{
+    margin:0;
+    font-size:1.18rem;
+    font-weight:600;
+    line-height:1.6;
+    color:var(--color-text-primary);
+}
+
+.discover-content p{
+    margin:10px 0 0;
+    font-size:.98rem;
+    line-height:1.7;
+    color:var(--color-text-secondary);
+}
+
+/* ==========================================================================
+   12 LIFE AREAS
+   ========================================================================== */
+
+.life-areas-section{
+    margin-top:80px;
+}
+
+.life-areas{
+    max-width:900px;
+    margin:0 auto;
+    text-align:center;
+}
+
+.tamil-areas{
+    margin:0 0 18px;
+    font-size:1.22rem;
+    font-weight:500;
+    line-height:2;
+    color:var(--color-text-primary);
+}
+
+.english-areas{
+    margin:0 0 14px;
+    font-size:1rem;
+    font-weight:400;
+    line-height:1.9;
+    color:var(--color-text-secondary);
+}
+
+/* ==========================================================================
+   OUR PROMISE
+   ========================================================================== */
+
+.promise-section{
+    margin-top:88px;
+}
+
+.promise-list{
+    max-width:760px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+}
+
+.promise-item{
+    display:flex;
+    align-items:flex-start;
+    gap:20px;
+    padding:26px 30px;
+    border-radius:18px;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.07);
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+}
+
+.promise-item:hover{
+    transform:translateY(-3px);
+    border-color:rgba(255,255,255,.16);
+    background:rgba(255,255,255,.05);
+}
+
+.checkmark{
+    flex:0 0 auto;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1rem;
+    font-weight:700;
+    background:var(--color-accent);
+    color:#081C3A;
+}
+
+.promise-item strong{
+    display:block;
+    margin:0;
+    font-size:1.15rem;
+    font-weight:600;
+    line-height:1.6;
+    color:var(--color-text-primary);
+}
+
+.promise-item p{
+    margin:8px 0 0;
+    font-size:.98rem;
+    line-height:1.8;
+    color:var(--color-text-secondary);
+}
+
+/* ==========================================================================
+   CLOSING MESSAGE
+   ========================================================================== */
+
+.closing-section{
+    margin-top:88px;
+    text-align:center;
+}
+
+.closing-tamil{
+    max-width:860px;
+    margin:0 auto;
+    font-size:2rem;
+    font-weight:600;
+    line-height:1.6;
+    color:var(--color-text-primary);
+}
+
+.closing-english{
+    max-width:760px;
+    margin:22px auto 0;
+    font-size:1.08rem;
+    line-height:1.9;
+    color:var(--color-text-secondary);
+}
+
+/* ==========================================================================
+   CALL TO ACTION
+   ========================================================================== */
+
+.landing-cta{
+    margin-top:72px;
+    display:flex;
+    justify-content:center;
+}
+
+.primary-button{
+    min-width:380px;
+    padding:22px 40px;
+    border:none;
+    border-radius:18px;
+    cursor:pointer;
+    background:linear-gradient(
+        135deg,
+        var(--color-accent),
+        #d8b24d
+    );
+    color:#081C3A;
+    box-shadow:
+        0 12px 36px rgba(0,0,0,.28);
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.primary-button:hover{
+    transform:translateY(-4px);
+    box-shadow:
+        0 18px 40px rgba(0,0,0,.35);
+}
+
+.button-tamil{
+    display:block;
+    font-size:1.28rem;
+    font-weight:700;
+    line-height:1.5;
+}
+
+.english-button{
+    display:block;
+    margin-top:8px;
+    font-size:.96rem;
+    font-weight:500;
+    letter-spacing:.03em;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.app-footer{
+    padding:40px 24px 60px;
+    text-align:center;
+}
+
+.app-footer p{
+    margin:0;
+    font-size:.9rem;
+    line-height:1.8;
+    color:var(--color-text-secondary);
+}
+
+.app-footer .english-text{
+    margin-top:8px;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width:1024px){
 
     .landing-card{
-
-        padding:var(--space-8);
-
+        padding:56px 48px;
     }
 
-    .landing-title{
-
-        font-size:2.35rem;
-
+    .tamil-greeting{
+        font-size:2.5rem;
     }
 
     .landing-subtitle{
-
-        font-size:var(--fs-base);
-
+        font-size:1.8rem;
     }
 
-    .navigator-content{
-
-        flex-direction:column;
-
-        gap:var(--space-2);
-
-    }
-
-    .navigator-arrow{
-
-        transform:rotate(90deg);
-
-    }
-
-    .landing-promise{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .info-row{
-
-        flex-direction:column;
-
-        align-items:flex-start;
-
-    }
-
-    .info-value{
-
-        text-align:left;
-
-    }
-
-    #beginJourneyButton{
-
-        width:100%;
-
-        min-width:0;
-
+    .discover-grid{
+        gap:22px;
     }
 
 }
 
+@media (max-width:768px){
 
-/* ==========================================================================
-   Responsive — Small Mobile
-   ========================================================================== */
+    .app-main{
+        padding:40px 18px;
+    }
+
+    .landing-card{
+        padding:40px 26px;
+        border-radius:22px;
+    }
+
+    .logo{
+        width:110px;
+    }
+
+    .landing-intro{
+        margin-bottom:56px;
+    }
+
+    .tamil-greeting{
+        font-size:2rem;
+        line-height:1.4;
+    }
+
+    .english-hero{
+        font-size:.92rem;
+        letter-spacing:.18em;
+    }
+
+    .landing-subtitle{
+        margin-top:30px;
+        font-size:1.45rem;
+    }
+
+    .english-subtitle{
+        font-size:1rem;
+        line-height:1.7;
+    }
+
+    section{
+        margin-top:56px;
+    }
+
+    .section-title{
+        font-size:1.55rem;
+        line-height:1.5;
+    }
+
+    .section-subtitle{
+        margin-bottom:34px;
+        font-size:.95rem;
+    }
+
+    .discover-grid{
+        grid-template-columns:1fr;
+        gap:18px;
+    }
+
+    .discover-card{
+        padding:22px;
+    }
+
+    .discover-content h3{
+        font-size:1.05rem;
+    }
+
+    .discover-content p{
+        font-size:.95rem;
+    }
+
+    .life-areas-section{
+        margin-top:64px;
+    }
+
+    .tamil-areas{
+        font-size:1.08rem;
+        line-height:1.9;
+    }
+
+    .english-areas{
+        font-size:.94rem;
+        line-height:1.8;
+    }
+
+    .promise-section{
+        margin-top:64px;
+    }
+
+    .promise-item{
+        padding:22px;
+        gap:16px;
+    }
+
+    .checkmark{
+        width:30px;
+        height:30px;
+        font-size:.9rem;
+    }
+
+    .promise-item strong{
+        font-size:1.05rem;
+    }
+
+    .promise-item p{
+        font-size:.94rem;
+    }
+
+    .closing-section{
+        margin-top:64px;
+    }
+
+    .closing-tamil{
+        font-size:1.55rem;
+        line-height:1.6;
+    }
+
+    .closing-english{
+        font-size:.98rem;
+    }
+
+    .landing-cta{
+        margin-top:56px;
+    }
+
+    .primary-button{
+        width:100%;
+        min-width:unset;
+        padding:20px 24px;
+    }
+
+    .button-tamil{
+        font-size:1.12rem;
+    }
+
+    .english-button{
+        font-size:.9rem;
+    }
+
+}
 
 @media (max-width:480px){
 
+    .app-header{
+        padding-top:22px;
+    }
+
+    .landing-card{
+        padding:30px 18px;
+    }
+
     .tamil-greeting{
-
-        font-size:1.5rem;
-
+        font-size:1.65rem;
     }
 
-    .english-greeting{
+    .english-hero{
+        font-size:.82rem;
+        letter-spacing:.14em;
+    }
 
+    .landing-subtitle{
+        font-size:1.2rem;
+    }
+
+    .english-subtitle{
+        font-size:.92rem;
+    }
+
+    .section-title{
+        font-size:1.3rem;
+    }
+
+    .tamil-areas{
         font-size:1rem;
-
     }
 
-    .landing-title{
-
-        font-size:2rem;
-
+    .english-areas{
+        font-size:.88rem;
     }
 
-    .benefit-card{
-
-        padding:var(--space-6);
-
+    .closing-tamil{
+        font-size:1.3rem;
     }
 
-    .privacy-box{
+    .closing-english{
+        font-size:.9rem;
+    }
 
-        padding:var(--space-6);
+    .button-tamil{
+        font-size:1rem;
+    }
 
+    .english-button{
+        font-size:.85rem;
     }
 
 }
 
-
 /* ==========================================================================
-   End of File
-
-   File   : landing.css
-
-   Status : 🔒 LOCKED
+   END OF FILE
    ========================================================================== */
-
