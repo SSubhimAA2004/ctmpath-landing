@@ -1,289 +1,139 @@
 
 /* ==========================================================================
    CTM PATH™ Guided Journey v2.0
-
    File        : landing.js
-   Version     : 2.1
-
+   Version     : 3.0
    Status      : 🔒 LOCKED
-
    Purpose     : Landing Page Controller
 
                   Owns
                   • Landing Page Initialization
                   • Begin Journey Button
-                  • Journey Reset Trigger
-                  • Navigation Trigger
-
-                  Owns NO
-                  • Assessment Logic
-                  • Storage Logic
-                  • API Logic
-                  • Business Rules
+                  • Journey Reset
+                  • Entrance Animation
 
    ========================================================================== */
 
+(() => {
 
-'use strict';
+    'use strict';
 
+    const Landing = {
 
+        /* ==========================================================
+           INITIALIZE
+           ========================================================== */
 
-/* ==========================================================================
-   LANDING CONTROLLER
-   ========================================================================== */
+        init() {
 
+            this.resetJourney();
 
-const LandingPage = (() => {
+            this.cacheElements();
 
+            this.bindEvents();
 
+            this.animate();
 
-    /* ======================================================================
-       ELEMENTS
-       ====================================================================== */
+        },
 
+        /* ==========================================================
+           RESET
+           ========================================================== */
 
-    let beginButton = null;
+        resetJourney() {
 
+            if (
+                window.CTMApp &&
+                typeof window.CTMApp.reset === "function"
+            ) {
+                window.CTMApp.reset();
+            }
 
+        },
 
+        /* ==========================================================
+           CACHE DOM
+           ========================================================== */
 
+        cacheElements() {
 
-    /* ======================================================================
-       CACHE DOM
-       ====================================================================== */
+            this.startButton =
+                document.querySelector(".primary-button");
 
+        },
 
-    function cacheDom(){
+        /* ==========================================================
+           EVENTS
+           ========================================================== */
 
+        bindEvents() {
 
-        beginButton = document.getElementById(
+            if (this.startButton) {
 
-            'beginJourneyButton'
+                this.startButton.addEventListener(
+                    "click",
+                    this.beginJourney.bind(this)
+                );
 
-        );
+            }
 
+        },
 
-    }
+        /* ==========================================================
+           BEGIN JOURNEY
+           ========================================================== */
 
+        beginJourney() {
 
+            if (
+                window.Router &&
+                window.Router.ROUTES
+            ) {
 
+                window.Router.go(
+                    window.Router.ROUTES.REGISTRATION
+                );
 
+            }
 
-    /* ======================================================================
-       EVENTS
-       ====================================================================== */
+        },
 
+        /* ==========================================================
+           SIMPLE ENTRANCE ANIMATION
+           ========================================================== */
 
-    function bindEvents(){
+        animate() {
 
+            const card =
+                document.querySelector(".landing-card");
 
-        if(
+            if (!card) return;
 
-            beginButton
+            card.style.opacity = "0";
+            card.style.transform = "translateY(24px)";
 
-        ){
+            requestAnimationFrame(() => {
 
+                card.style.transition =
+                    "opacity .6s ease, transform .6s ease";
 
-            beginButton.addEventListener(
+                card.style.opacity = "1";
+                card.style.transform = "translateY(0)";
 
-                'click',
-
-                startJourney
-
-            );
-
+            });
 
         }
-
-
-    }
-
-
-
-
-
-    /* ======================================================================
-       START JOURNEY
-       ====================================================================== */
-
-
-    function startJourney(){
-
-
-        /*
-            A new visitor begins with a clean journey state.
-
-            Application state ownership belongs to CTMApp.
-        */
-
-
-        if(
-
-            window.CTMApp
-
-        ){
-
-
-            CTMApp.reset();
-
-
-        }
-
-
-
-
-
-        if(
-
-            window.Router
-
-        ){
-
-
-            Router.go(
-
-                Router.ROUTES.REGISTRATION
-
-            );
-
-
-        }
-
-
-        else{
-
-
-            console.error(
-
-                'Router unavailable.'
-
-            );
-
-
-        }
-
-
-    }
-
-
-
-
-
-    /* ======================================================================
-       LANDING ANIMATION
-       ====================================================================== */
-
-
-    function animate(){
-
-
-        document.body.classList.add(
-
-            'landing-loaded'
-
-        );
-
-
-    }
-
-
-
-
-
-    /* ======================================================================
-       INITIALIZE
-       ====================================================================== */
-
-
-    function init(){
-
-
-        cacheDom();
-
-
-        bindEvents();
-
-
-        animate();
-
-
-
-        console.info(
-
-            'CTM PATH™ Landing Page Ready.'
-
-        );
-
-
-    }
-
-
-
-
-
-    /* ======================================================================
-       PUBLIC API
-       ====================================================================== */
-
-
-    return {
-
-
-        init
-
 
     };
 
+    /* ==============================================================
+       AUTO START
+       ============================================================== */
 
+    document.addEventListener(
+        "DOMContentLoaded",
+        () => Landing.init()
+    );
 
 })();
-
-
-
-
-
-/* ==========================================================================
-   PAGE LOAD
-   ========================================================================== */
-
-
-document.addEventListener(
-
-    'DOMContentLoaded',
-
-    () => {
-
-
-        LandingPage.init();
-
-
-    }
-
-);
-
-
-
-
-
-/* ==========================================================================
-   GLOBAL EXPORT
-   ========================================================================== */
-
-
-window.LandingPage = LandingPage;
-
-
-
-
-
-/* ==========================================================================
-   End of File
-
-   File   : landing.js
-
-   Version: 2.1
-
-   Status : 🔒 LOCKED
-
-   ========================================================================== */
 
