@@ -1,1501 +1,275 @@
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey v5.0
+   CTM PATH™ Guided Journey
+   FROM SURVIVAL TO LIVING™
 
-   File        : router.js
-   Version     : 1.1
-   Status      : 🔒 PREMIUM FOUNDATION
+   File        : js/router.js
+   Version     : 8.0
+   Status      : PRODUCTION
+   Architecture: LOCKED
 
-   Purpose     : Application Router
+   Responsibility
+   --------------------------------------------------------------------------
+   • Screen Navigation
+   • Route Management
+   • Screen Visibility
 
-                  Owns
-                  • Page Navigation
-                  • Route Validation
-                  • Journey Progression
-                  • Navigation Guards
-                  • Startup Route Resolution
-                  • Scroll Position Reset
+   This file SHALL NOT
 
-                  Owns NO
-                  • UI Rendering
-                  • Business Logic
-                  • Storage Logic
-                  • API Communication
+   ✗ Call Google Apps Script
+   ✗ Access Google Sheets
+   ✗ Perform Validation
+   ✗ Manipulate Assessment Data
+   ✗ Generate Reports
 
-   ========================================================================== */
+========================================================================== */
 
-
-'use strict';
-
-
-
-
+"use strict";
 
 /* ==========================================================================
-   ROUTER
-   ========================================================================== */
+   GLOBAL NAMESPACE
+========================================================================== */
 
+window.CTM = window.CTM || {};
 
-const Router = (() => {
-
-
-
-
+window.CTM.Router = (function () {
 
     /* ======================================================================
        ROUTES
-       ====================================================================== */
-
+    ====================================================================== */
 
     const ROUTES = {
 
+        landing: "screen01",
 
+        registration: "screen02",
 
-        LANDING:
+        assessment: "screen03",
 
-            '/pages/landing.html',
+        kalaChakra: "screen04",
 
+        diagnosis: "screen05",
 
+        prescription: "screen06",
 
-
-
-        REGISTRATION:
-
-            '/pages/registration.html',
-
-
-
-
-
-        ASSESSMENT:
-
-            '/pages/assessment.html',
-
-
-
-
-
-        KALACHAKRA:
-
-            '/pages/kaalachakra.html',
-
-
-
-
-
-        DIAGNOSIS:
-
-            '/pages/diagnosis.html',
-
-
-
-
-
-        PRESCRIPTION:
-
-            '/pages/prescription.html',
-
-
-
-
-
-        COMPLETION:
-
-            '/pages/completion.html'
-
-
+        completion: "screen07"
 
     };
 
+    /* ======================================================================
+       MODULE STATE
+    ====================================================================== */
 
+    let currentScreen = null;
 
-
-
-
-
+    let screenElements = [];
 
     /* ======================================================================
-       JOURNEY ORDER
-       ====================================================================== */
+       INITIALIZE
+    ====================================================================== */
 
+    function initialize() {
 
-    const JOURNEY = [
+        screenElements = Array.from(
 
+            document.querySelectorAll(
 
-
-        ROUTES.LANDING,
-
-
-
-        ROUTES.REGISTRATION,
-
-
-
-        ROUTES.ASSESSMENT,
-
-
-
-        ROUTES.KALACHAKRA,
-
-
-
-        ROUTES.DIAGNOSIS,
-
-
-
-        ROUTES.PRESCRIPTION,
-
-
-
-        ROUTES.COMPLETION
-
-
-
-    ];
-
-
-
-
-
-
-
-
-    /* ======================================================================
-       CURRENT PAGE
-       ====================================================================== */
-
-
-    function currentPage(){
-
-
-        return window.location.pathname;
-
-
-    }
-
-                /* ==========================================================================
-   CTM PATH™ Guided Journey v5.0
-
-   File        : router.js
-   Version     : 1.1
-
-   ========================================================================== */
-
-
-
-
-
-    /* ======================================================================
-       VALID ROUTE
-       ====================================================================== */
-
-
-    function isValidRoute(page){
-
-
-
-        return JOURNEY.includes(
-
-            page
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-    /* ======================================================================
-       PAGE INDEX
-       ====================================================================== */
-
-
-    function pageIndex(page){
-
-
-
-        return JOURNEY.indexOf(
-
-            page
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-    /* ======================================================================
-       CAN NAVIGATE
-       ====================================================================== */
-
-
-    function canNavigate(target){
-
-
-
-
-
-        if(
-
-
-
-            !isValidRoute(
-
-                target
+                ".screen"
 
             )
 
+        );
 
+        go(
 
-        ){
+            ROUTES.landing
 
+        );
 
+    }
+
+                         /* ======================================================================
+       HIDE ALL SCREENS
+    ====================================================================== */
+
+    function hideAllScreens() {
+
+        screenElements.forEach(function (screen) {
+
+            screen.classList.remove(
+
+                "active"
+
+            );
+
+            screen.setAttribute(
+
+                "aria-hidden",
+
+                "true"
+
+            );
+
+        });
+
+    }
+
+    /* ======================================================================
+       SHOW SCREEN
+    ====================================================================== */
+
+    function showScreen(screenId) {
+
+        const screen =
+
+            document.getElementById(
+
+                screenId
+
+            );
+
+        if (!screen) {
+
+            console.error(
+
+                "Screen not found:",
+
+                screenId
+
+            );
 
             return false;
 
-
-
         }
 
+        screen.classList.add(
 
-
-
-
-
-
-        const current =
-
-            currentPage();
-
-
-
-
-
-
-
-        if(
-
-
-
-            !isValidRoute(
-
-                current
-
-            )
-
-
-
-        ){
-
-
-
-            return true;
-
-
-
-        }
-
-
-
-
-
-
-
-        return (
-
-
-
-            pageIndex(
-
-                target
-
-            )
-
-            <=
-
-            pageIndex(
-
-                current
-
-            )
-
-            + 1
-
-
+            "active"
 
         );
 
+        screen.setAttribute(
 
+            "aria-hidden",
 
+            "false"
 
+        );
 
-    }
+        currentScreen = screenId;
 
-
-
-
-
-
-
-
-    /* ======================================================================
-       NORMALIZE PATH
-       
-       Ensures consistent navigation paths
-
-       ====================================================================== */
-
-
-    function normalizePath(path){
-
-
-
-        if(!path){
-
-
-
-            return ROUTES.LANDING;
-
-
-
-        }
-
-
-
-
-
-
-
-        return path.startsWith("/")
-
-            ? path
-
-            : "/" + path;
-
-
+        return true;
 
     }
 
-                /* ==========================================================================
-   CTM PATH™ Guided Journey v5.0
+    /* ======================================================================
+       SCROLL TO TOP
+    ====================================================================== */
 
-   File        : router.js
-   Version     : 1.1
+    function scrollToTop() {
 
-   ========================================================================== */
+        window.scrollTo({
 
+            top: 0,
 
+            left: 0,
 
+            behavior: "instant"
 
+        });
 
+    }
 
     /* ======================================================================
-       GO TO PAGE
-       ====================================================================== */
+       GO TO SCREEN
+    ====================================================================== */
 
+    function go(screenId) {
 
-    function go(page){
+        hideAllScreens();
 
+        if (
 
+            !showScreen(
 
-
-
-        const target =
-
-            normalizePath(
-
-                page
-
-            );
-
-
-
-
-
-
-
-
-        if(
-
-
-
-            !canNavigate(
-
-                target
+                screenId
 
             )
 
+        ) {
 
+            return false;
 
-        ){
+        }
 
+        scrollToTop();
 
+        return true;
 
-            console.warn(
+    }
 
+                         /* ======================================================================
+       CURRENT SCREEN
+    ====================================================================== */
 
+    function current() {
 
-                "Navigation blocked:",
+        return currentScreen;
 
+    }
 
+    /* ======================================================================
+       REFRESH CURRENT SCREEN
+    ====================================================================== */
 
-                target
+    function refresh() {
 
-
-
-            );
-
-
+        if (!currentScreen) {
 
             return;
 
-
-
         }
 
-
-
-
-
-
-
-
-        if(
-
-
-
-            window.StorageService
-
-            &&
-
-            typeof window.StorageService.saveCurrentPage === "function"
-
-
-
-        ){
-
-
-
-            StorageService.saveCurrentPage(
-
-                target
-
-            );
-
-
-
-        }
-
-
-
-
-
-
-
-
-        /*
-           Reset scroll position
-           Prevents next page opening at old scroll location
-        */
-
-
-        window.scrollTo(
-
-
-
-            {
-
-                top:0,
-
-                behavior:"instant"
-
-            }
-
-
-
-        );
-
-
-
-
-
-
-
-
-        window.location.href = target;
-
-
-
-
+        go(currentScreen);
 
     }
-
-
-
-
-
-
-
-
-    /* ======================================================================
-       NEXT PAGE
-       ====================================================================== */
-
-
-    function next(){
-
-
-
-
-
-        const current =
-
-            currentPage();
-
-
-
-
-
-
-
-        const index =
-
-            pageIndex(
-
-                current
-
-            );
-
-
-
-
-
-
-
-        if(
-
-
-
-            index === -1
-
-            ||
-
-            index >= JOURNEY.length - 1
-
-
-
-        ){
-
-
-
-            return;
-
-
-
-        }
-
-
-
-
-
-
-
-        go(
-
-
-
-            JOURNEY[index + 1]
-
-
-
-        );
-
-
-
-
-
-    }
-
-
-
-
-
-
-
-
-    /* ======================================================================
-       PREVIOUS PAGE
-       ====================================================================== */
-
-
-    function previous(){
-
-
-
-
-
-        const current =
-
-            currentPage();
-
-
-
-
-
-
-
-        const index =
-
-            pageIndex(
-
-                current
-
-            );
-
-
-
-
-
-
-
-        if(
-
-
-
-            index <= 0
-
-
-
-        ){
-
-
-
-            return;
-
-
-
-        }
-
-
-
-
-
-
-
-        go(
-
-
-
-            JOURNEY[index - 1]
-
-
-
-        );
-
-
-
-
-
-    }
-
-
-
-
-
-
-
-
-    /* ======================================================================
-       RESTART JOURNEY
-       ====================================================================== */
-
-
-    function restart(){
-
-
-
-
-
-        if(
-
-
-
-            window.StorageService
-
-            &&
-
-            typeof window.StorageService.resetJourney === "function"
-
-
-
-        ){
-
-
-
-            StorageService.resetJourney();
-
-
-
-        }
-
-
-
-
-
-
-
-        go(
-
-
-
-            ROUTES.LANDING
-
-
-
-        );
-
-
-
-
-
-    }
-
-                /* ==========================================================================
-   CTM PATH™ Guided Journey v5.0
-
-   File        : router.js
-   Version     : 1.1
-
-   ========================================================================== */
-
-
-
-
-
-    /* ======================================================================
-       RESUME JOURNEY
-       ====================================================================== */
-
-
-    function resume(){
-
-
-
-
-
-        let saved = null;
-
-
-
-
-
-
-
-        if(
-
-
-
-            window.StorageService
-
-            &&
-
-            typeof window.StorageService.getCurrentPage === "function"
-
-
-
-        ){
-
-
-
-            saved =
-
-                StorageService.getCurrentPage();
-
-
-
-        }
-
-
-
-
-
-
-
-
-        if(
-
-
-
-            saved
-
-            &&
-
-            isValidRoute(
-
-                saved
-
-            )
-
-
-
-        ){
-
-
-
-            window.scrollTo(
-
-                0,
-
-                0
-
-            );
-
-
-
-            window.location.href = saved;
-
-
-
-            return;
-
-
-
-        }
-
-
-
-
-
-
-
-        window.location.href =
-
-            ROUTES.LANDING;
-
-
-
-
-
-    }
-
-
-
-
-
-
-
-
-    /* ======================================================================
-       FIRST PAGE CHECK
-       ====================================================================== */
-
-
-    function isFirstPage(){
-
-
-
-        return (
-
-            currentPage()
-
-            ===
-
-            ROUTES.LANDING
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-    /* ======================================================================
-       LAST PAGE CHECK
-       ====================================================================== */
-
-
-    function isLastPage(){
-
-
-
-        return (
-
-            currentPage()
-
-            ===
-
-            ROUTES.COMPLETION
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-    /* ======================================================================
-       CURRENT STEP
-       ====================================================================== */
-
-
-    function currentStep(){
-
-
-
-        return (
-
-            pageIndex(
-
-                currentPage()
-
-            )
-
-            + 1
-
-
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-    /* ======================================================================
-       TOTAL STEPS
-       ====================================================================== */
-
-
-    function totalSteps(){
-
-
-
-        return JOURNEY.length;
-
-
-
-    }
-
-
-
-
-
-
-
-
-    /* ======================================================================
-       PROGRESS PERCENTAGE
-       ====================================================================== */
-
-
-    function progress(){
-
-
-
-        return Math.round(
-
-
-
-            (
-
-                currentStep()
-
-                /
-
-                totalSteps()
-
-
-
-            )
-
-            *
-
-            100
-
-
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-    /* ======================================================================
-       NAVIGATION GUARD
-       ====================================================================== */
-
-
-    function protect(){
-
-
-
-
-
-        const current =
-
-            currentPage();
-
-
-
-
-
-
-
-        if(
-
-
-
-            !isValidRoute(
-
-                current
-
-            )
-
-
-
-        ){
-
-
-
-            return;
-
-
-
-        }
-
-
-
-
-
-
-
-        let saved = null;
-
-
-
-
-
-
-
-        if(
-
-
-
-            window.StorageService
-
-            &&
-
-            typeof window.StorageService.getCurrentPage === "function"
-
-
-
-        ){
-
-
-
-            saved =
-
-                StorageService.getCurrentPage();
-
-
-
-        }
-
-
-
-
-
-
-
-
-        if(!saved){
-
-
-
-            return;
-
-
-
-        }
-
-
-
-
-
-
-
-        const allowedIndex =
-
-            pageIndex(
-
-                saved
-
-            );
-
-
-
-
-
-
-
-        const currentIndex =
-
-            pageIndex(
-
-                current
-
-            );
-
-
-
-
-
-
-
-        if(
-
-
-
-            currentIndex >
-
-            allowedIndex + 1
-
-
-
-        ){
-
-
-
-            window.scrollTo(
-
-                0,
-
-                0
-
-            );
-
-
-
-            window.location.href = saved;
-
-
-
-        }
-
-
-
-    }
-
-                /* ==========================================================================
-   CTM PATH™ Guided Journey v5.0
-
-   File        : router.js
-   Version     : 1.1
-
-   ========================================================================== */
-
-
-
-
-
-    /* ======================================================================
-       INITIALIZE ROUTER
-       ====================================================================== */
-
-
-    function init(){
-
-
-
-
-
-        protect();
-
-
-
-
-
-
-
-        const current =
-
-            currentPage();
-
-
-
-
-
-
-
-
-        if(
-
-
-
-            current === "/"
-
-            ||
-
-            current === "/index.html"
-
-
-
-        ){
-
-
-
-            resume();
-
-
-
-            return;
-
-
-
-        }
-
-
-
-
-
-
-
-        if(
-
-
-
-            window.StorageService
-
-            &&
-
-            typeof window.StorageService.saveCurrentPage === "function"
-
-
-
-        ){
-
-
-
-            StorageService.saveCurrentPage(
-
-                current
-
-            );
-
-
-
-        }
-
-
-
-
-
-    }
-
-
-
-
-
-
-
 
     /* ======================================================================
        PUBLIC API
-       ====================================================================== */
-
+    ====================================================================== */
 
     return {
 
-
-
-        ROUTES,
-
-
-
-        JOURNEY,
-
-
-
-
-
-        init,
-
-
+        initialize,
 
         go,
 
+        current,
 
+        refresh,
 
-        next,
-
-
-
-        previous,
-
-
-
-        resume,
-
-
-
-        restart,
-
-
-
-        protect,
-
-
-
-
-
-        currentPage,
-
-
-
-        currentStep,
-
-
-
-        totalSteps,
-
-
-
-        progress,
-
-
-
-
-
-        isValidRoute,
-
-
-
-        isFirstPage,
-
-
-
-        isLastPage
-
-
+        routes: ROUTES
 
     };
 
-
-
-
-
 })();
 
-
-
-
-
-
-
-
 /* ==========================================================================
-   AUTO INITIALIZE
-   ========================================================================== */
-
+   AUTO INITIALIZATION
+========================================================================== */
 
 document.addEventListener(
 
-
-
     "DOMContentLoaded",
 
+    function () {
 
-
-    ()=>{
-
-
-
-        Router.init();
-
-
+        window.CTM.Router.initialize();
 
     }
 
-
-
 );
 
-
-
-
-
-
-
-
 /* ==========================================================================
-   GLOBAL EXPORT
-   ========================================================================== */
-
-
-window.Router = Router;
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   End of File
-
-
-   File :
-
-   router.js
-
-
-   Version :
-
-   1.1
-
-
-   Status :
-
-   🔒 PREMIUM FOUNDATION
-
-
-   ========================================================================== */
+   END OF FILE
+========================================================================== */
