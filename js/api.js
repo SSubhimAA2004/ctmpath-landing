@@ -3,32 +3,38 @@
    CTM PATH™ Guided Journey
    FROM SURVIVAL TO LIVING™
 
-   File        : api.js
-   Version     : 7.0
+   File        : js/api.js
+   Version     : 7.1
    Status      : PRODUCTION
-   Purpose     : Google Apps Script API Layer
+   Author      : CTM PATH Engineering
 
+   Purpose
    --------------------------------------------------------------------------
-   RESPONSIBILITIES
+   Central communication layer between the Frontend and
+   Google Apps Script backend.
 
-   ✓ Google Apps Script Communication
-   ✓ HTTP GET / POST
-   ✓ Registration
+   Responsibilities
+
+   ✓ HTTP GET
+   ✓ HTTP POST
+   ✓ Visitor Registration
+   ✓ Visitor Retrieval
    ✓ Assessment Save
    ✓ Kala Chakra Save
-   ✓ Diagnosis Save
-   ✓ Prescription Save
    ✓ Journey Completion
-   ✓ Visitor Retrieval
-   ✓ Error Handling
+   ✓ Diagnosis
+   ✓ Prescription
+   ✓ Response Validation
+   ✓ Retry
    ✓ Logging
 
-   DOES NOT
+   Does NOT
 
-   ✗ UI Rendering
-   ✗ DOM Manipulation
+   ✗ Manipulate DOM
+   ✗ Navigate Pages
    ✗ Business Logic
-   ✗ Navigation
+   ✗ Local Storage
+   ✗ Rendering
 
 ========================================================================== */
 
@@ -49,12 +55,19 @@ window.CTM = window.CTM || {};
     const CONFIG = {
 
         WEBAPP_URL:
-            'https://script.google.com/macros/s/AKfycby1yF2m7cIXnHh0SqfegiDuxsjdMX6PV5sBCIw/exec',
-
-        TIMEOUT: 30000,
+            'https://script.google.com/macros/s/AKfycby1yF2m7cIXnHh0SqfegiDuxsjdMX6PVcTaSogQ5HFqx3z5CGB3jjN0vCFvQuPV5sBCIw/exec',
 
         CONTENT_TYPE:
-            'application/json'
+            'application/json',
+
+        TIMEOUT:
+            30000,
+
+        RETRIES:
+            2,
+
+        RETRY_DELAY:
+            1000
 
     };
 
@@ -65,7 +78,8 @@ window.CTM = window.CTM || {};
 
        CONFIG.ACTIONS
 
-       IN 01_Config.gs
+       INSIDE 01_Config.gs
+
     ====================================================================== */
 
     const ACTION = {
@@ -104,7 +118,7 @@ window.CTM = window.CTM || {};
 
        Example
 
-       https://.../exec?action=registerVisitor
+       https://xxxxx/exec?action=registerVisitor
 
     ====================================================================== */
 
@@ -124,15 +138,22 @@ window.CTM = window.CTM || {};
 
     /* ======================================================================
        FETCH WITH TIMEOUT
+
     ====================================================================== */
 
-    async function fetchWithTimeout(url, options) {
+    async function fetchWithTimeout(
+
+        url,
+
+        options = {}
+
+    ) {
 
         const controller =
 
             new AbortController();
 
-        const timeout =
+        const timer =
 
             setTimeout(
 
@@ -146,7 +167,7 @@ window.CTM = window.CTM || {};
 
             );
 
-        try {
+           try {
 
             const response =
 
@@ -166,7 +187,11 @@ window.CTM = window.CTM || {};
 
                 );
 
-            clearTimeout(timeout);
+            clearTimeout(
+
+                timer
+
+            );
 
             return response;
 
@@ -174,7 +199,11 @@ window.CTM = window.CTM || {};
 
         catch (error) {
 
-            clearTimeout(timeout);
+            clearTimeout(
+
+                timer
+
+            );
 
             throw error;
 
@@ -185,21 +214,43 @@ window.CTM = window.CTM || {};
     /* ======================================================================
        HTTP POST
 
-       IMPORTANT
+       Google Apps Script expects
 
-       Router.gs expects
+       POST
 
-       ?action=xxxx
+       /exec?action=registerVisitor
 
-       JSON BODY ONLY
+       BODY
+
+       {
+           fullName,
+           email,
+           mobile,
+           district,
+           state,
+           source,
+           language,
+           device,
+           emotion
+       }
 
     ====================================================================== */
 
-    async function post(action, payload) {
+    async function post(
+
+        action,
+
+        payload = {}
+
+    ) {
 
         const url =
 
-            buildUrl(action);
+            buildUrl(
+
+                action
+
+            );
 
         try {
 
@@ -213,7 +264,15 @@ window.CTM = window.CTM || {};
 
             console.log(
 
-                'Request',
+                'POST',
+
+                url
+
+            );
+
+            console.log(
+
+                'Payload',
 
                 payload
 
@@ -227,7 +286,9 @@ window.CTM = window.CTM || {};
 
                     {
 
-                        method: 'POST',
+                        method:
+
+                            'POST',
 
                         headers: {
 
@@ -241,7 +302,7 @@ window.CTM = window.CTM || {};
 
                             JSON.stringify(
 
-                                payload || {}
+                                payload
 
                             )
 
@@ -249,7 +310,11 @@ window.CTM = window.CTM || {};
 
                 );
 
-            if (!response.ok) {
+            if (
+
+                !response.ok
+
+            ) {
 
                 throw new Error(
 
@@ -264,6 +329,12 @@ window.CTM = window.CTM || {};
             const result =
 
                 await response.json();
+
+                   validateResponse(
+
+                result
+
+            );
 
             console.log(
 
@@ -281,6 +352,8 @@ window.CTM = window.CTM || {};
 
         catch (error) {
 
+            console.groupEnd();
+
             console.error(
 
                 '[CTM API]',
@@ -295,7 +368,9 @@ window.CTM = window.CTM || {};
 
                 message:
 
-                    error.message,
+                    error.message ||
+
+                    'Unknown API error.',
 
                 data: null
 
@@ -305,17 +380,23 @@ window.CTM = window.CTM || {};
 
     }
 
-     /* ======================================================================
+    /* ======================================================================
        HTTP GET
 
-       Used for
+       Used For
 
-       • ping
-       • getVisitor
+       • ping()
+       • getVisitor()
 
     ====================================================================== */
 
-    async function get(action, parameters = {}) {
+    async function get(
+
+        action,
+
+        parameters = {}
+
+    ) {
 
         const query =
 
@@ -327,13 +408,33 @@ window.CTM = window.CTM || {};
 
         const url =
 
-            buildUrl(action) +
+            buildUrl(
+
+                action
+
+            ) +
 
             '&' +
 
             query.toString();
 
         try {
+
+            console.groupCollapsed(
+
+                '[CTM API] ' +
+
+                action
+
+            );
+
+            console.log(
+
+                'GET',
+
+                url
+
+            );
 
             const response =
 
@@ -343,13 +444,19 @@ window.CTM = window.CTM || {};
 
                     {
 
-                        method: 'GET'
+                        method:
+
+                            'GET'
 
                     }
 
                 );
 
-            if (!response.ok) {
+            if (
+
+                !response.ok
+
+            ) {
 
                 throw new Error(
 
@@ -361,11 +468,33 @@ window.CTM = window.CTM || {};
 
             }
 
-            return await response.json();
+            const result =
+
+                await response.json();
+
+            validateResponse(
+
+                result
+
+            );
+
+            console.log(
+
+                'Response',
+
+                result
+
+            );
+
+            console.groupEnd();
+
+            return result;
 
         }
 
         catch (error) {
+
+            console.groupEnd();
 
             console.error(
 
@@ -381,7 +510,11 @@ window.CTM = window.CTM || {};
 
                 message:
 
-                    error.message
+                    error.message ||
+
+                    'Unknown API error.',
+
+                data: null
 
             };
 
@@ -390,22 +523,54 @@ window.CTM = window.CTM || {};
     }
 
     /* ======================================================================
+       RESPONSE VALIDATION
+
+    ====================================================================== */
+
+    function validateResponse(
+
+        response
+
+    ) {
+
+        if (
+
+            response === null ||
+
+            response === undefined
+
+        ) {
+
+            throw new Error(
+
+                'Empty server response.'
+
+            );
+
+        }
+
+        if (
+
+            typeof response !== 'object'
+
+        ) {
+
+            throw new Error(
+
+                'Invalid JSON response.'
+
+            );
+
+        }
+
+        return true;
+
+    }
+
+     /* ======================================================================
        REGISTER VISITOR
 
-       registration.js currently sends
-
-       {
-           FullName,
-           Email,
-           Mobile,
-           District,
-           State,
-           ReferralSource,
-           Language,
-           Device
-       }
-
-       Backend expects
+       Payload
 
        {
            fullName,
@@ -415,10 +580,9 @@ window.CTM = window.CTM || {};
            state,
            source,
            language,
-           device
+           device,
+           emotion
        }
-
-       Therefore we translate here.
 
     ====================================================================== */
 
@@ -438,87 +602,11 @@ window.CTM = window.CTM || {};
 
         }
 
-        const payload = {
-
-            fullName:
-
-                data.FullName ||
-
-                data.fullName ||
-
-                '',
-
-            email:
-
-                data.Email ||
-
-                data.email ||
-
-                '',
-
-            mobile:
-
-                data.Mobile ||
-
-                data.mobile ||
-
-                '',
-
-            district:
-
-                data.District ||
-
-                data.district ||
-
-                '',
-
-            state:
-
-                data.State ||
-
-                data.state ||
-
-                '',
-
-            source:
-
-                data.ReferralSource ||
-
-                data.source ||
-
-                '',
-
-            language:
-
-                data.Language ||
-
-                data.language ||
-
-                'Tamil',
-
-            device:
-
-                data.Device ||
-
-                data.device ||
-
-                'Desktop',
-
-            emotion:
-
-                data.InitialEmotion ||
-
-                data.emotion ||
-
-                ''
-
-        };
-
         return await post(
 
             ACTION.REGISTER_VISITOR,
 
-            payload
+            data
 
         );
 
@@ -526,9 +614,30 @@ window.CTM = window.CTM || {};
 
     /* ======================================================================
        UPDATE VISITOR
+
     ====================================================================== */
 
     async function updateVisitor(data) {
+
+        if (
+
+            !data ||
+
+            !data.visitorId
+
+        ) {
+
+            return {
+
+                success: false,
+
+                message:
+
+                    'Visitor ID missing.'
+
+            };
+
+        }
 
         return await post(
 
@@ -542,9 +651,32 @@ window.CTM = window.CTM || {};
 
     /* ======================================================================
        GET VISITOR
+
     ====================================================================== */
 
-    async function getVisitor(visitorId) {
+    async function getVisitor(
+
+        visitorId
+
+    ) {
+
+        if (
+
+            !visitorId
+
+        ) {
+
+            return {
+
+                success: false,
+
+                message:
+
+                    'Visitor ID missing.'
+
+            };
+
+        }
 
         return await get(
 
@@ -564,6 +696,7 @@ window.CTM = window.CTM || {};
 
     /* ======================================================================
        SAVE ASSESSMENT
+
     ====================================================================== */
 
     async function saveAssessment(data) {
@@ -572,7 +705,7 @@ window.CTM = window.CTM || {};
 
             ACTION.SAVE_ASSESSMENT,
 
-            data
+            data || {}
 
         );
 
@@ -580,6 +713,7 @@ window.CTM = window.CTM || {};
 
     /* ======================================================================
        SAVE KALA CHAKRA
+
     ====================================================================== */
 
     async function saveKalaChakra(data) {
@@ -588,7 +722,7 @@ window.CTM = window.CTM || {};
 
             ACTION.SAVE_KALA_CHAKRA,
 
-            data
+            data || {}
 
         );
 
@@ -596,7 +730,7 @@ window.CTM = window.CTM || {};
 
      /* ======================================================================
        SAVE DIAGNOSIS
-       ====================================================================== */
+    ====================================================================== */
 
     async function saveDiagnosis(data) {
 
@@ -612,7 +746,7 @@ window.CTM = window.CTM || {};
 
     /* ======================================================================
        SAVE PRESCRIPTION
-       ====================================================================== */
+    ====================================================================== */
 
     async function savePrescription(data) {
 
@@ -628,7 +762,7 @@ window.CTM = window.CTM || {};
 
     /* ======================================================================
        COMPLETE JOURNEY
-       ====================================================================== */
+    ====================================================================== */
 
     async function completeJourney(data) {
 
@@ -643,14 +777,19 @@ window.CTM = window.CTM || {};
     }
 
     /* ======================================================================
-       HEALTH CHECK
-       ====================================================================== */
+       PING
+
+       Used during startup to verify backend connectivity.
+
+    ====================================================================== */
 
     async function ping() {
 
         return await get(
 
-            ACTION.PING
+            ACTION.PING,
+
+            {}
 
         );
 
@@ -659,15 +798,10 @@ window.CTM = window.CTM || {};
     /* ======================================================================
        SAFE REQUEST
 
-       Used by app.js
+       Executes an async API callback safely and always returns
+       a standardized response object.
 
-       App.startup()
-
-       ApiService.safeRequest(
-           () => ApiService.ping()
-       );
-
-       ====================================================================== */
+    ====================================================================== */
 
     async function safeRequest(callback) {
 
@@ -681,7 +815,7 @@ window.CTM = window.CTM || {};
 
             console.error(
 
-                '[CTM API]',
+                '[CTM API] Safe Request',
 
                 error
 
@@ -693,7 +827,9 @@ window.CTM = window.CTM || {};
 
                 message:
 
-                    error.message,
+                    error.message ||
+
+                    'Unexpected API error.',
 
                 data: null
 
@@ -705,7 +841,7 @@ window.CTM = window.CTM || {};
 
     /* ======================================================================
        RESPONSE HELPERS
-       ====================================================================== */
+    ====================================================================== */
 
     function isSuccess(response) {
 
@@ -721,105 +857,106 @@ window.CTM = window.CTM || {};
 
     function getData(response) {
 
-        if (
+        return (
 
-            !response
+            response &&
 
-        ) {
+            response.data
 
-            return null;
+        )
 
-        }
+        ? response.data
 
-        return response.data || null;
+        : null;
 
     }
 
     function getMessage(response) {
 
-        if (
+        return (
 
-            !response
+            response &&
 
-        ) {
+            response.message
 
-            return '';
+        )
 
-        }
+        ? response.message
 
-        return response.message || '';
-
-    }
-
-    /* ======================================================================
-       RETRY
-
-       Simple retry helper
-
-       ====================================================================== */
-
-    async function retry(action, payload, retries = 2) {
-
-        let result = null;
-
-        for (
-
-            let i = 0;
-
-            i <= retries;
-
-            i++
-
-        ) {
-
-            result =
-
-                await post(
-
-                    action,
-
-                    payload
-
-                );
-
-            if (
-
-                isSuccess(result)
-
-            ) {
-
-                return result;
-
-            }
-
-            await new Promise(
-
-                resolve =>
-
-                    setTimeout(
-
-                        resolve,
-
-                        1000
-
-                    )
-
-            );
-
-        }
-
-        return result;
+        : '';
 
     }
 
      /* ======================================================================
+       RETRY
+
+       Retries a POST request on transient failures.
+
+    ====================================================================== */
+
+    async function retry(action, payload, maxRetries = CONFIG.RETRIES) {
+
+        let attempt = 0;
+
+        let response = null;
+
+        while (attempt <= maxRetries) {
+
+            response = await post(
+
+                action,
+
+                payload
+
+            );
+
+            if (
+
+                response &&
+
+                response.success === true
+
+            ) {
+
+                return response;
+
+            }
+
+            attempt++;
+
+            if (attempt <= maxRetries) {
+
+                await new Promise(
+
+                    resolve =>
+
+                        setTimeout(
+
+                            resolve,
+
+                            CONFIG.RETRY_DELAY
+
+                        )
+
+                );
+
+            }
+
+        }
+
+        return response;
+
+    }
+
+    /* ======================================================================
        PUBLIC API
-       ====================================================================== */
+
+    ====================================================================== */
 
     const API = {
 
         /* --------------------------------------------------------------
-           Registration
+           Visitor
         -------------------------------------------------------------- */
 
         registerVisitor,
@@ -860,29 +997,79 @@ window.CTM = window.CTM || {};
 
     };
 
+    /* ======================================================================
+       DIAGNOSTICS
+
+    ====================================================================== */
+
+    API.info = function () {
+
+        console.group(
+
+            'CTM PATH™ API'
+
+        );
+
+        console.table({
+
+            Version: '7.1',
+
+            Backend:
+
+                'Google Apps Script',
+
+            Status:
+
+                'Production',
+
+            Ready:
+
+                API.ready()
+
+        });
+
+        console.groupEnd();
+
+    };
+
+    API.ready = function () {
+
+        return (
+
+            typeof API.registerVisitor === 'function'
+
+        );
+
+    };
+
+    API.testConnection = async function () {
+
+        return await safeRequest(
+
+            function () {
+
+                return ping();
+
+            }
+
+        );
+
+    };
+
     return API;
 
 })();
 
 /* ==========================================================================
-   BACKWARD COMPATIBILITY
-
-   Existing project files use
-
-       ApiService.registerVisitor()
-
-   New code may use
-
-       CTM.API.registerVisitor()
-
-   Both point to the same object.
-
+   GLOBAL EXPORTS
    ========================================================================== */
+
+window.CTM.API = API;
 
 window.ApiService = window.CTM.API;
 
 /* ==========================================================================
-   VERSION
+   VERSION INFORMATION
    ========================================================================== */
 
 Object.defineProperty(
@@ -893,11 +1080,13 @@ Object.defineProperty(
 
     {
 
-        value: '7.0',
+        value: '7.1',
 
         enumerable: true,
 
-        writable: false
+        writable: false,
+
+        configurable: false
 
     }
 
@@ -915,87 +1104,20 @@ Object.defineProperty(
 
         enumerable: true,
 
-        writable: false
+        writable: false,
+
+        configurable: false
 
     }
 
 );
 
 /* ==========================================================================
-   DIAGNOSTICS
-
-   These functions are intentionally defined BEFORE Object.freeze()
-   so they remain part of the public API.
-
-   ========================================================================== */
-
-window.CTM.API.info = function () {
-
-    console.group(
-
-        'CTM PATH API'
-
-    );
-
-    console.table({
-
-        Version:
-
-            window.CTM.API.VERSION,
-
-        Build:
-
-            window.CTM.API.BUILD,
-
-        Backend:
-
-            'Google Apps Script',
-
-        Status:
-
-            'Production'
-
-    });
-
-    console.groupEnd();
-
-};
-
-window.CTM.API.ready = function () {
-
-    return (
-
-        typeof window.ApiService !== 'undefined'
-
-        &&
-
-        typeof window.ApiService.registerVisitor === 'function'
-
-    );
-
-};
-
-window.CTM.API.testConnection = async function () {
-
-    return await
-
-        window.ApiService.safeRequest(
-
-            () =>
-
-                window.ApiService.ping()
-
-        );
-
-};
-
-/* ==========================================================================
    PRODUCTION HARDENING
-   ========================================================================== */
 
-/*
-   Freeze the public API after all methods have been attached.
-*/
+   Freeze AFTER all properties and helper methods have been attached.
+
+   ========================================================================== */
 
 Object.freeze(
 
@@ -1005,6 +1127,7 @@ Object.freeze(
 
 /* ==========================================================================
    GLOBAL ERROR LOGGING
+
    ========================================================================== */
 
 window.addEventListener(
@@ -1044,20 +1167,21 @@ window.addEventListener(
 );
 
 /* ==========================================================================
-   STARTUP MESSAGE
+   STARTUP
+
    ========================================================================== */
 
 (function () {
 
     console.info(
 
-        '======================================================'
+        '========================================================'
 
     );
 
     console.info(
 
-        'CTM PATH™ API Layer Initialised'
+        'CTM PATH™ API INITIALIZED'
 
     );
 
@@ -1091,7 +1215,7 @@ window.addEventListener(
 
     console.info(
 
-        '======================================================'
+        '========================================================'
 
     );
 
@@ -1103,7 +1227,7 @@ window.addEventListener(
 
         console.info(
 
-            '✓ ApiService compatibility enabled.'
+            '✓ ApiService Ready'
 
         );
 
@@ -1113,7 +1237,7 @@ window.addEventListener(
 
         console.warn(
 
-            '⚠ ApiService compatibility unavailable.'
+            '⚠ ApiService Not Ready'
 
         );
 
@@ -1121,85 +1245,3 @@ window.addEventListener(
 
 })();
 
-/* ==========================================================================
-   GLOBAL EXPORTS
-
-   Modern
-
-       CTM.API.registerVisitor()
-
-   Legacy
-
-       ApiService.registerVisitor()
-
-   ========================================================================== */
-
-window.ApiService = window.CTM.API;
-
-/* ==========================================================================
-   END OF FILE
-
-   ==========================================================================
-   CTM PATH™ Guided Journey
-   FROM SURVIVAL TO LIVING™
-
-   File        : api.js
-   Version     : 7.0
-   Status      : PRODUCTION
-
-   VERIFIED AGAINST
-
-   ✓ 01_Config.gs
-   ✓ 02_Utils.gs
-   ✓ 03_Database.gs
-   ✓ 07_Router.gs
-   ✓ 08_Service.gs
-   ✓ app.js
-   ✓ registration.js
-
-   Registration Flow
-
-   Landing
-      ↓
-   registration.js
-      ↓
-   ApiService.registerVisitor()
-      ↓
-   api.js
-      ↓
-   POST
-
-      /exec?action=registerVisitor
-
-      {
-          fullName,
-          email,
-          mobile,
-          district,
-          state,
-          source,
-          language,
-          device,
-          emotion
-      }
-
-      ↓
-
-   Router.gs
-
-      doPost()
-
-      ↓
-
-   registerVisitor()
-
-      ↓
-
-   saveVisitorRegistration()
-
-      ↓
-
-   Visitors Sheet
-
-   ==========================================================================
-*/
