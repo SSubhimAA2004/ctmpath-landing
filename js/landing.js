@@ -1,224 +1,173 @@
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey v3.1
+   CTM PATH™ Guided Journey™
+
    File        : js/landing.js
-   Version     : 3.1
+   Version     : 4.0
    Status      : 🔒 LOCKED
-   Purpose     : Landing Page Controller
+   Architecture: Multi-Page Application (MPA)
 
-                  Owns
-                  • Landing Page Initialization
-                  • Journey Reset
-                  • CTA Navigation
-                  • Premium Entrance Animation
-                  • Card Hover Enhancement
-                  • Accessibility (Reduced Motion)
+   Purpose
+   --------------------------------------------------------------------------
+   Landing Page Controller
 
-   ========================================================================== */
+   Responsibilities
 
-(() => {
+   ✓ Initialize Landing Page
+   ✓ Reset Previous Journey
+   ✓ Handle Begin Journey CTA
+   ✓ Navigate to Registration Page
 
-    "use strict";
+   Does NOT
 
-    const Landing = {
+   ✗ Call Google Apps Script
+   ✗ Perform Registration
+   ✗ Handle Assessment
+   ✗ Perform Routing
+   ✗ Contain Business Logic
 
-        /* ==========================================================
-           INITIALIZE
-           ========================================================== */
+========================================================================== */
 
-        init() {
+"use strict";
 
-            this.resetJourney();
+window.CTM = window.CTM || {};
 
-            this.cacheDOM();
+window.CTM.Landing = (() => {
 
-            this.bindEvents();
+    /* ======================================================================
+       MODULE STATE
+    ====================================================================== */
 
-            this.initializeAnimations();
+    const elements = {
 
-            this.initializeCardEffects();
-
-        },
-
-        /* ==========================================================
-           RESET APPLICATION
-           ========================================================== */
-
-        resetJourney() {
-
-            if (
-                window.CTMApp &&
-                typeof window.CTMApp.reset === "function"
-            ) {
-
-                window.CTMApp.reset();
-
-            }
-
-        },
-
-        /* ==========================================================
-           CACHE DOM
-           ========================================================== */
-
-        cacheDOM() {
-
-            this.sections = [
-
-                document.querySelector(".hero"),
-
-                document.querySelector(".discover"),
-
-                document.querySelector(".life-areas"),
-
-                document.querySelector(".closing-message"),
-
-                document.querySelector(".landing-cta")
-
-            ].filter(Boolean);
-
-            this.cards = [
-
-                ...document.querySelectorAll(".discover-card"),
-
-                ...document.querySelectorAll(".area-card")
-
-            ];
-
-            this.ctaButton =
-                document.querySelector(".primary-button");
-
-        },
-
-        /* ==========================================================
-           EVENTS
-           ========================================================== */
-
-        bindEvents() {
-
-            if (this.ctaButton) {
-
-                this.ctaButton.addEventListener(
-
-                    "click",
-
-                    this.beginJourney.bind(this)
-
-                );
-
-            }
-
-        },
-
-        /* ==========================================================
-           BEGIN JOURNEY
-           ========================================================== */
-
-        beginJourney() {
-
-            if (
-                window.Router &&
-                window.Router.ROUTES
-            ) {
-
-                window.Router.go(
-
-                    window.Router.ROUTES.REGISTRATION
-
-                );
-
-            }
-
-        },
-
-        /* ==========================================================
-           PAGE ANIMATION
-           ========================================================== */
-
-        initializeAnimations() {
-
-            if (
-                window.matchMedia(
-                    "(prefers-reduced-motion: reduce)"
-                ).matches
-            ) {
-
-                return;
-
-            }
-
-            this.sections.forEach((section, index) => {
-
-                section.style.opacity = "0";
-
-                section.style.transform =
-                    "translateY(30px)";
-
-                section.style.transition =
-                    "opacity .75s ease, transform .75s ease";
-
-                setTimeout(() => {
-
-                    section.style.opacity = "1";
-
-                    section.style.transform =
-                        "translateY(0)";
-
-                }, 180 * index);
-
-            });
-
-        },
-
-        /* ==========================================================
-           CARD EFFECTS
-           ========================================================== */
-
-        initializeCardEffects() {
-
-            if (
-                window.matchMedia(
-                    "(hover: none)"
-                ).matches
-            ) {
-
-                return;
-
-            }
-
-            this.cards.forEach(card => {
-
-                card.addEventListener("mouseenter", () => {
-
-                    card.style.transform =
-                        "translateY(-8px)";
-
-                });
-
-                card.addEventListener("mouseleave", () => {
-
-                    card.style.transform =
-                        "translateY(0)";
-
-                });
-
-            });
-
-        }
+        beginButton: null
 
     };
 
-    /* ==========================================================
-       START
-       ========================================================== */
+    /* ======================================================================
+       INITIALIZE
+    ====================================================================== */
 
-    document.addEventListener(
+    function initialize() {
 
-        "DOMContentLoaded",
+        cacheElements();
 
-        () => Landing.init()
+        resetJourney();
 
-    );
+        bindEvents();
+
+    }
+
+    /* ======================================================================
+       CACHE DOM
+    ====================================================================== */
+
+    function cacheElements() {
+
+        elements.beginButton =
+
+            document.querySelector(
+
+                ".primary-button"
+
+            );
+
+    }
+
+    /* ======================================================================
+       RESET JOURNEY
+    ====================================================================== */
+
+    function resetJourney() {
+
+        if (
+
+            window.CTM.App &&
+
+            typeof window.CTM.App.reset === "function"
+
+        ) {
+
+            window.CTM.App.reset();
+
+        }
+
+    }
+
+    /* ======================================================================
+       BIND EVENTS
+    ====================================================================== */
+
+    function bindEvents() {
+
+        if (!elements.beginButton) {
+
+            return;
+
+        }
+
+        elements.beginButton.addEventListener(
+
+            "click",
+
+            beginJourney
+
+        );
+
+    }
+
+                          /* ======================================================================
+       BEGIN JOURNEY
+    ====================================================================== */
+
+    function beginJourney() {
+
+        window.location.href =
+
+            "registration.html";
+
+    }
+
+    /* ======================================================================
+       PUBLIC API
+    ====================================================================== */
+
+    return {
+
+        initialize,
+
+        beginJourney
+
+    };
 
 })();
 
+/* ==========================================================================
+   AUTO INITIALIZATION
+========================================================================== */
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    function () {
+
+        if (
+
+            window.CTM.Landing &&
+
+            typeof window.CTM.Landing.initialize === "function"
+
+        ) {
+
+            window.CTM.Landing.initialize();
+
+        }
+
+    }
+
+);
+
+/* ==========================================================================
+   END OF FILE
+========================================================================== */
