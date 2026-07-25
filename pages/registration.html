@@ -9,10 +9,14 @@
          CTM PATH™ Guided Journey™
          FROM SURVIVAL TO LIVING™
 
-         File        : pages/registration.html
-         Version     : 7.0
-         Status      : 🔒 LOCKED
-         Architecture: Multi-Page Application (MPA)
+         File         : pages/registration.html
+         Version      : 8.0
+         Status       : 🔒 LOCKED
+         Architecture : Multi-Page Application (MPA)
+
+         Purpose
+         ----------------------------------------------------------
+         Visitor Registration (KYC)
 
          ========================================================== -->
 
@@ -88,8 +92,11 @@
         <div class="container">
 
             <img
+
                 src="../assets/logo/CTM_Logo_Transparent.svg"
+
                 alt="CTM PATH™"
+
                 class="logo">
 
         </div>
@@ -107,16 +114,26 @@
             <section class="registration-card">
 
                 <!-- ==========================================
-                     PAGE TITLE
+                     PAGE HEADER
                      ========================================== -->
 
                 <header class="page-title">
 
-                    <p class="screen-number">
+                    <div class="step-indicator">
 
-                        படி 1 / 7
+                        <span>
 
-                    </p>
+                            படி 1 / 7
+
+                        </span>
+
+                        <span class="english">
+
+                            Step 1 of 7
+
+                        </span>
+
+                    </div>
 
                     <h1>
 
@@ -124,7 +141,7 @@
 
                     </h1>
 
-                    <p class="english">
+                    <p class="english heading">
 
                         Let's Begin Your Guided Journey
 
@@ -140,32 +157,27 @@
 
                     <p class="tamil">
 
-                        உங்களைப் பற்றிய சில அடிப்படை
-                        தகவல்களை பகிருங்கள்.
-                        இதன் மூலம் உங்கள்
-                        தனிப்பட்ட CTM PATH™
-                        மதிப்பீடு, காலச்சக்கரம்™,
-                        நோயறிதல்™ மற்றும்
-                        வழிக்காட்டல்™
-                        துல்லியமாக உருவாக்கப்படும்.
+                        உங்கள் தனிப்பட்ட
+                        CTM PATH™ மதிப்பீட்டை
+                        துல்லியமாக உருவாக்க,
+                        கீழே உள்ள அடிப்படை
+                        விவரங்களை மட்டும்
+                        பதிவு செய்யுங்கள்.
 
                     </p>
 
                     <p class="english">
 
-                        Please share a few basic details.
-                        These help us personalise your
-                        CTM PATH™ Assessment,
-                        Kala Chakra™,
-                        Diagnosis™
-                        and Prescription™.
+                        Please provide a few basic details
+                        so we can personalise your
+                        CTM PATH™ Guided Journey™.
 
                     </p>
 
                 </section>
 
                 <!-- ==========================================
-                     REGISTRATION FORM
+                     KYC DETAILS
                      ========================================== -->
 
                 <form
@@ -175,10 +187,6 @@
                     autocomplete="on"
 
                     novalidate>
-
-                    <!-- ======================================
-                         KYC
-                         ====================================== -->
 
                     <section class="section-card">
 
@@ -194,7 +202,7 @@
 
                         </p>
 
-                        <!-- =============================== -->
+                        <!-- ============================== -->
 
                         <div class="form-group">
 
@@ -218,13 +226,15 @@
 
                                 type="text"
 
+                                placeholder="உங்கள் முழுப் பெயர்"
+
                                 autocomplete="name"
 
                                 required>
 
                         </div>
 
-                        <!-- =============================== -->
+                        <!-- ============================== -->
 
                         <div class="form-group">
 
@@ -248,13 +258,15 @@
 
                                 type="tel"
 
+                                placeholder="+91 XXXXX XXXXX"
+
                                 autocomplete="tel"
 
                                 required>
 
                         </div>
 
-                        <!-- =============================== -->
+                        <!-- ============================== -->
 
                         <div class="form-group">
 
@@ -278,13 +290,15 @@
 
                                 type="email"
 
+                                placeholder="name@email.com"
+
                                 autocomplete="email"
 
                                 required>
 
                         </div>
 
-                                                <!-- =============================== -->
+                                                <!-- ============================== -->
 
                         <div class="form-group">
 
@@ -308,13 +322,15 @@
 
                                 type="text"
 
+                                placeholder="உங்கள் மாவட்டம்"
+
                                 autocomplete="address-level2"
 
                                 required>
 
                         </div>
 
-                        <!-- =============================== -->
+                        <!-- ============================== -->
 
                         <div class="form-group">
 
@@ -338,13 +354,15 @@
 
                                 type="text"
 
+                                placeholder="உங்கள் மாநிலம்"
+
                                 autocomplete="address-level1"
 
                                 required>
 
                         </div>
 
-                        <!-- =============================== -->
+                        <!-- ============================== -->
 
                         <div class="form-group">
 
@@ -364,7 +382,16 @@
 
                                 id="language"
 
-                                name="language">
+                                name="language"
+
+                                required>
+
+                                <option value="">
+
+                                    மொழியைத் தேர்ந்தெடுக்கவும்
+                                    / Select Language
+
+                                </option>
 
                                 <option value="ta">
 
@@ -382,11 +409,11 @@
 
                         </div>
 
-                        <!-- =============================== -->
+                        <!-- ============================== -->
 
                         <div class="form-group">
 
-                            <label for="source">
+                            <label for="referralSource">
 
                                 உங்களைப் பற்றி
                                 எவ்வாறு அறிந்தீர்கள்?
@@ -401,9 +428,11 @@
 
                             <select
 
-                                id="source"
+                                id="referralSource"
 
-                                name="source">
+                                name="referralSource"
+
+                                required>
 
                                 <option value="">
 
@@ -463,11 +492,11 @@
 
                     </section>
 
-                    <!-- ======================================
+                    <!-- ==========================================
                          CONSENT
-                         ====================================== -->
+                         ========================================== -->
 
-                    <section class="section-card consent-card">
+                    <section class="section-card">
 
                         <h2>
 
@@ -481,7 +510,7 @@
 
                         </p>
 
-                        <label class="checkbox-container">
+                        <label class="consent-box">
 
                             <input
 
@@ -493,75 +522,33 @@
 
                                 required>
 
-                            <span class="checkbox-mark"></span>
+                            <span class="checkmark"></span>
 
-                            <span class="checkbox-text">
+                            <span class="consent-text">
 
                                 நான் வழங்கும் தகவல்கள்
                                 CTM PATH™
                                 வழிகாட்டப்பட்ட பயணத்திற்காக
-                                பாதுகாப்பாக பயன்படுத்தப்பட
+                                பயன்படுத்தப்படுவதற்கு
                                 ஒப்புக்கொள்கிறேன்.
 
                             </span>
 
                         </label>
 
-                        <p class="english consent-text">
+                        <p class="english">
 
                             I consent to the use of my
                             information for the
-                            CTM PATH™ Guided Journey™
-                            and personalised reports.
+                            CTM PATH™ Guided Journey™.
 
                         </p>
 
                     </section>
 
-                    <!-- ======================================
-                         PRIVACY
-                         ====================================== -->
-
-                    <section class="section-card privacy-card">
-
-                        <h2>
-
-                            🔒
-                            தனியுரிமை உறுதி
-
-                        </h2>
-
-                        <p class="english">
-
-                            Privacy Commitment
-
-                        </p>
-
-                        <p class="tamil">
-
-                            உங்கள் தகவல்கள்
-                            பாதுகாப்பாக சேமிக்கப்படும்.
-                            எந்த மூன்றாம் தரப்பிற்கும்
-                            பகிரப்படாது.
-
-                        </p>
-
-                        <p class="english">
-
-                            Your information is securely
-                            stored and will never be sold,
-                            shared or misused. It is used
-                            only for generating your
-                            personalised CTM PATH™
-                            reports.
-
-                        </p>
-
-                    </section>
-
-                                        <!-- ======================================
-                         ACTIONS
-                         ====================================== -->
+                    <!-- ==========================================
+                         ACTION BUTTONS
+                         ========================================== -->
 
                     <section class="action-panel">
 
@@ -573,13 +560,13 @@
 
                             class="secondary-button">
 
-                            <span class="button-title">
+                            <span>
 
                                 ← முந்தைய பக்கம்
 
                             </span>
 
-                            <span class="button-subtitle">
+                            <span class="english">
 
                                 Back
 
@@ -595,13 +582,13 @@
 
                             class="primary-button">
 
-                            <span class="button-title">
+                            <span>
 
                                 மதிப்பீட்டை தொடங்குகிறேன்
 
                             </span>
 
-                            <span class="button-subtitle">
+                            <span class="english">
 
                                 Continue to Assessment
 
@@ -613,7 +600,7 @@
 
                 </form>
 
-            </section>
+                            </section>
 
         </div>
 
@@ -627,28 +614,27 @@
 
         <div class="container">
 
-            <p class="footer-title">
+            <p class="footer-brand">
 
                 CTM PATH™
 
             </p>
 
-            <p class="footer-tagline">
+            <p class="footer-ta">
 
                 வாழ்வாங்கு வாழ்ந்திட வாரீர்!
 
             </p>
 
-            <p class="footer-tagline-en">
+            <p class="footer-en">
 
                 From Survival To Living™
 
             </p>
 
-            <p class="footer-copyright">
+            <p class="footer-copy">
 
-                © 2026 CTM PATH™.
-                All Rights Reserved.
+                © 2026 CTM PATH™. All Rights Reserved.
 
             </p>
 
@@ -664,7 +650,7 @@
      Load Order
 
      1. Browser Storage
-     2. API Communication
+     2. API Layer
      3. Shared Application Core
      4. Registration Controller
 
