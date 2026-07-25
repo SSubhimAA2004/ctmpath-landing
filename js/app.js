@@ -1,403 +1,206 @@
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey v2.0
-   File        : app.js
-   Version     : 1.0
-   Status      : 🔒 LOCKED
-   Purpose     : Application Bootstrap
+   CTM PATH™ Guided Journey
+   FROM SURVIVAL TO LIVING™
 
-                  Owns
-                  • Application Initialization
-                  • Global Configuration
-                  • Shared Application State
-                  • Startup Lifecycle
+   File        : js/app.js
+   Version     : 8.0
+   Status      : PRODUCTION
+   Architecture: LOCKED
 
-                  Owns NO
-                  • Page Rendering
-                  • Assessment Questions
-                  • Business Calculations
-                  • Page-specific Behaviour
-   ========================================================================== */
+   Responsibility
+   --------------------------------------------------------------------------
+   • Bootstrap Application
+   • Create Global State
+   • Initialize Core Modules
+   • Coordinate Startup
 
-'use strict';
+   This file SHALL NOT
+
+   ✗ Perform Registration
+   ✗ Call Google Apps Script
+   ✗ Validate Forms
+   ✗ Navigate Business Logic
+   ✗ Calculate Assessment
+
+========================================================================== */
+
+"use strict";
 
 /* ==========================================================================
-   APPLICATION
-   ========================================================================== */
+   GLOBAL NAMESPACE
+========================================================================== */
 
-const App = (() => {
+window.CTM = window.CTM || {};
 
-    /* ======================================================================
-       CONFIGURATION
-       ====================================================================== */
+/* ==========================================================================
+   APPLICATION MODULE
+========================================================================== */
 
-    const CONFIG = {
-
-        NAME: 'CTM PATH™ Guided Journey',
-
-        VERSION: '2.0',
-
-        LANGUAGE: 'ta-IN',
-
-        AUTOSAVE: true,
-
-        DEBUG: false
-
-    };
+window.CTM.App = (function () {
 
     /* ======================================================================
-       GLOBAL STATE
-       ====================================================================== */
+       APPLICATION STATE
+    ====================================================================== */
 
-    const STATE = {
+    function createInitialState() {
 
-        initialized: false,
+        return {
 
-        visitor: null,
+            visitorId: "",
 
-        assessment: {},
+            visitor: {},
 
-        scores: {},
+            registration: {},
 
-        journeyStatus: null,
+            assessment: {},
 
-        currentPage: null,
+            scores: {},
 
-        currentSpoke: 0
+            diagnosis: {},
 
-    };
+            prescription: {},
 
-    /* ======================================================================
-       LOG
-       ====================================================================== */
+            currentScreen: "screen01",
 
-    function log(...args) {
+            language: "en",
 
-        if (!CONFIG.DEBUG) return;
+            startedAt: new Date().toISOString()
 
-        console.log('[CTM PATH]', ...args);
+        };
 
     }
 
     /* ======================================================================
-       LOAD STATE
-       ====================================================================== */
+       INITIALIZE APPLICATION
+    ====================================================================== */
 
-    function loadState() {
+    function initialize() {
 
-        STATE.visitor =
+        window.CTM.state = createInitialState();
 
-            StorageService.getVisitor();
-
-        STATE.assessment =
-
-            StorageService.getAssessment();
-
-        STATE.scores =
-
-            StorageService.getScores();
-
-        STATE.journeyStatus =
-
-            StorageService.getJourneyStatus();
-
-        STATE.currentPage =
-
-            StorageService.getCurrentPage();
-
-        STATE.currentSpoke =
-
-            StorageService.getCurrentSpoke() || 0;
+        initializeModules();
 
     }
 
-    /* ======================================================================
-       SAVE STATE
-       ====================================================================== */
+                      /* ======================================================================
+       INITIALIZE MODULES
+    ====================================================================== */
 
-    function saveState() {
+    function initializeModules() {
 
-        StorageService.saveVisitor(
+        if (
 
-            STATE.visitor
+            window.CTM.Router &&
 
-        );
+            typeof window.CTM.Router.initialize === "function"
 
-        StorageService.saveAssessment(
+        ) {
 
-            STATE.assessment
-
-        );
-
-        StorageService.saveScores(
-
-            STATE.scores
-
-        );
-
-        StorageService.saveJourneyStatus(
-
-            STATE.journeyStatus
-
-        );
-
-        StorageService.saveCurrentPage(
-
-            STATE.currentPage
-
-        );
-
-        StorageService.saveCurrentSpoke(
-
-            STATE.currentSpoke
-
-        );
-
-    }
-
-    /* ======================================================================
-       VISITOR
-       ====================================================================== */
-
-    function setVisitor(visitor) {
-
-        STATE.visitor = visitor;
-
-        StorageService.saveVisitor(visitor);
-
-    }
-
-    function getVisitor() {
-
-        return STATE.visitor;
-
-    }
-
-    /* ======================================================================
-       ASSESSMENT
-       ====================================================================== */
-
-    function setAssessment(data) {
-
-        STATE.assessment = data;
-
-        StorageService.saveAssessment(data);
-
-    }
-
-    function getAssessment() {
-
-        return STATE.assessment;
-
-    }
-
-    /* ======================================================================
-       SCORES
-       ====================================================================== */
-
-    function setScores(scores) {
-
-        STATE.scores = scores;
-
-        StorageService.saveScores(scores);
-
-    }
-
-    function getScores() {
-
-        return STATE.scores;
-
-    }
-
-    /* ======================================================================
-       JOURNEY
-       ====================================================================== */
-
-    function setJourneyStatus(status) {
-
-        STATE.journeyStatus = status;
-
-        StorageService.saveJourneyStatus(status);
-
-    }
-
-    function getJourneyStatus() {
-
-        return STATE.journeyStatus;
-
-    }
-
-    /* ======================================================================
-       PAGE
-       ====================================================================== */
-
-    function setCurrentPage(page) {
-
-        STATE.currentPage = page;
-
-        StorageService.saveCurrentPage(page);
-
-    }
-
-    function getCurrentPage() {
-
-        return STATE.currentPage;
-
-    }
-
-    /* ======================================================================
-       SPOKE
-       ====================================================================== */
-
-    function setCurrentSpoke(spoke) {
-
-        STATE.currentSpoke = spoke;
-
-        StorageService.saveCurrentSpoke(spoke);
-
-    }
-
-    function getCurrentSpoke() {
-
-        return STATE.currentSpoke;
-
-    }
-
-    /* ======================================================================
-       RESET
-       ====================================================================== */
-
-    function reset() {
-
-        STATE.visitor = null;
-
-        STATE.assessment = {};
-
-        STATE.scores = {};
-
-        STATE.journeyStatus = null;
-
-        STATE.currentPage = null;
-
-        STATE.currentSpoke = 0;
-
-        StorageService.resetJourney();
-
-    }
-
-    /* ======================================================================
-       STARTUP
-       ====================================================================== */
-
-    async function startup() {
-
-        log('Loading application...');
-
-        loadState();
-
-        if (CONFIG.DEBUG) {
-
-            const ping = await ApiService.safeRequest(
-
-                () => ApiService.ping()
-
-            );
-
-            log('API Status', ping);
+            window.CTM.Router.initialize();
 
         }
 
-        STATE.initialized = true;
+        if (
 
-        log('Application initialized.');
+            window.CTM.Registration &&
 
-    }
+            typeof window.CTM.Registration.initialize === "function"
 
-    /* ======================================================================
-       INITIALIZE
-       ====================================================================== */
+        ) {
 
-    async function init() {
-
-        if (STATE.initialized) {
-
-            return;
+            window.CTM.Registration.initialize();
 
         }
 
-        await startup();
+    }
+
+    /* ======================================================================
+       START APPLICATION
+    ====================================================================== */
+
+    function startApplication() {
+
+        if (
+
+            window.CTM.Router &&
+
+            typeof window.CTM.Router.go === "function"
+
+        ) {
+
+            window.CTM.Router.go("screen01");
+
+        }
 
     }
 
     /* ======================================================================
+       RESET APPLICATION
+    ====================================================================== */
+
+    function resetApplication() {
+
+        window.CTM.state = createInitialState();
+
+        if (
+
+            window.CTM.Registration &&
+
+            typeof window.CTM.Registration.resetForm === "function"
+
+        ) {
+
+            window.CTM.Registration.resetForm();
+
+        }
+
+        startApplication();
+
+    }
+
+                      /* ======================================================================
        PUBLIC API
-       ====================================================================== */
+    ====================================================================== */
 
     return {
 
-        CONFIG,
+        initialize,
 
-        STATE,
+        startApplication,
 
-        init,
-
-        reset,
-
-        log,
-
-        loadState,
-
-        saveState,
-
-        setVisitor,
-        getVisitor,
-
-        setAssessment,
-        getAssessment,
-
-        setScores,
-        getScores,
-
-        setJourneyStatus,
-        getJourneyStatus,
-
-        setCurrentPage,
-        getCurrentPage,
-
-        setCurrentSpoke,
-        getCurrentSpoke
+        resetApplication
 
     };
 
 })();
 
 /* ==========================================================================
-   APPLICATION BOOTSTRAP
-   ========================================================================== */
+   AUTO INITIALIZATION
+========================================================================== */
 
 document.addEventListener(
 
-    'DOMContentLoaded',
+    "DOMContentLoaded",
 
-    async () => {
+    function () {
 
-        await App.init();
+        if (
+
+            window.CTM.App &&
+
+            typeof window.CTM.App.initialize === "function"
+
+        ) {
+
+            window.CTM.App.initialize();
+
+        }
 
     }
 
 );
 
-
 /* ==========================================================================
-   GLOBAL EXPORT
-   ========================================================================== */
-
-window.CTMApp = App;
-
-/* ==========================================================================
-   End of File
-
-   File : app.js
-
-   Status : 🔒 LOCKED
-   ========================================================================== */
+   END OF FILE
+========================================================================== */
