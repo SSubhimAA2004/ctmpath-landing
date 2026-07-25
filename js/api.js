@@ -4,102 +4,109 @@
    FROM SURVIVAL TO LIVING™
 
    File        : api.js
-   Version     : 6.0
+   Version     : 7.0
    Status      : PRODUCTION
-   Purpose     : Google Apps Script Communication Layer
+   Purpose     : Google Apps Script API Layer
 
-   Owns
    --------------------------------------------------------------------------
-   • Google Apps Script Communication
-   • HTTP Requests
-   • JSON Serialization
-   • Request Validation
-   • Response Validation
-   • Error Handling
-   • Retry Support
-   • API Logging
+   RESPONSIBILITIES
 
-   Owns NO
-   --------------------------------------------------------------------------
-   • DOM Manipulation
-   • Business Logic
-   • Navigation
-   • Rendering
-   • Calculations
+   ✓ Google Apps Script Communication
+   ✓ HTTP GET / POST
+   ✓ Registration
+   ✓ Assessment Save
+   ✓ Kala Chakra Save
+   ✓ Diagnosis Save
+   ✓ Prescription Save
+   ✓ Journey Completion
+   ✓ Visitor Retrieval
+   ✓ Error Handling
+   ✓ Logging
 
-   ========================================================================== */
+   DOES NOT
+
+   ✗ UI Rendering
+   ✗ DOM Manipulation
+   ✗ Business Logic
+   ✗ Navigation
+
+========================================================================== */
 
 'use strict';
 
 /* ==========================================================================
    GLOBAL NAMESPACE
-   ========================================================================== */
+========================================================================== */
 
 window.CTM = window.CTM || {};
 
 /* ==========================================================================
-   API SERVICE
-   ========================================================================== */
+   API MODULE
+========================================================================== */
 
-CTM.API = (function () {
-
-    /* ======================================================================
-       CONFIGURATION
-       ====================================================================== */
+(function () {
 
     const CONFIG = {
 
         WEBAPP_URL:
-            'https://script.google.com/macros/s/AKfycby1yF2m7cIXnHh0SqfegiDuxsjdMX6PVcTaSogQ5HFqx3z5CGB3jjN0vCFvQuPV5sBCIw/exec',
+            'https://script.google.com/macros/s/AKfycby1yF2m7cIXnHh0SqfegiDuxsjdMX6PV5sBCIw/exec',
 
         TIMEOUT: 30000,
 
-        RETRIES: 2,
-
-        RETRY_DELAY: 1000,
-
-        CONTENT_TYPE: 'application/json'
+        CONTENT_TYPE:
+            'application/json'
 
     };
 
     /* ======================================================================
-       ACTIONS
+       ACTION CONSTANTS
 
-       MUST MATCH CONFIG.ACTIONS
-       INSIDE GOOGLE APPS SCRIPT
+       MUST MATCH
 
-       ====================================================================== */
+       CONFIG.ACTIONS
 
-    const ACTIONS = {
+       IN 01_Config.gs
+    ====================================================================== */
 
-        REGISTER_VISITOR: 'registerVisitor',
+    const ACTION = {
 
-        UPDATE_VISITOR: 'updateVisitor',
+        REGISTER_VISITOR:
+            'registerVisitor',
 
-        GET_VISITOR: 'getVisitor',
+        UPDATE_VISITOR:
+            'updateVisitor',
 
-        SAVE_ASSESSMENT: 'saveAssessment',
+        GET_VISITOR:
+            'getVisitor',
 
-        SAVE_KALA_CHAKRA: 'saveKalaChakra',
+        SAVE_ASSESSMENT:
+            'saveAssessment',
 
-        SAVE_DIAGNOSIS: 'saveDiagnosis',
+        SAVE_KALA_CHAKRA:
+            'saveKalaChakra',
 
-        SAVE_PRESCRIPTION: 'savePrescription',
+        SAVE_DIAGNOSIS:
+            'saveDiagnosis',
 
-        COMPLETE_JOURNEY: 'completeJourney',
+        SAVE_PRESCRIPTION:
+            'savePrescription',
 
-        PING: 'ping'
+        COMPLETE_JOURNEY:
+            'completeJourney',
+
+        PING:
+            'ping'
 
     };
 
     /* ======================================================================
        BUILD URL
 
-       Router.gs expects
+       Example
 
-       ?action=registerVisitor
+       https://.../exec?action=registerVisitor
 
-       ====================================================================== */
+    ====================================================================== */
 
     function buildUrl(action) {
 
@@ -117,33 +124,47 @@ CTM.API = (function () {
 
     /* ======================================================================
        FETCH WITH TIMEOUT
-       ====================================================================== */
+    ====================================================================== */
 
     async function fetchWithTimeout(url, options) {
 
-        const controller = new AbortController();
+        const controller =
 
-        const timeout = setTimeout(function () {
+            new AbortController();
 
-            controller.abort();
+        const timeout =
 
-        }, CONFIG.TIMEOUT);
+            setTimeout(
+
+                function () {
+
+                    controller.abort();
+
+                },
+
+                CONFIG.TIMEOUT
+
+            );
 
         try {
 
-            const response = await fetch(
+            const response =
 
-                url,
+                await fetch(
 
-                {
+                    url,
 
-                    ...options,
+                    {
 
-                    signal: controller.signal
+                        ...options,
 
-                }
+                        signal:
 
-            );
+                            controller.signal
+
+                    }
+
+                );
 
             clearTimeout(timeout);
 
@@ -162,54 +183,71 @@ CTM.API = (function () {
     }
 
     /* ======================================================================
-       CORE HTTP POST
+       HTTP POST
+
+       IMPORTANT
 
        Router.gs expects
 
-       POST
        ?action=xxxx
 
-       BODY
+       JSON BODY ONLY
 
-       {
-          fullName:"",
-          email:"",
-          ...
-       }
-
-       NO WRAPPER OBJECT
-
-       ====================================================================== */
+    ====================================================================== */
 
     async function post(action, payload) {
 
-        const url = buildUrl(action);
+        const url =
 
-        logRequest(action, payload);
+            buildUrl(action);
 
         try {
 
-            const response = await fetchWithTimeout(
+            console.groupCollapsed(
 
-                url,
+                '[CTM API] ' +
 
-                {
-
-                    method: 'POST',
-
-                    headers: {
-
-                        'Content-Type':
-
-                            CONFIG.CONTENT_TYPE
-
-                    },
-
-                    body: JSON.stringify(payload || {})
-
-                }
+                action
 
             );
+
+            console.log(
+
+                'Request',
+
+                payload
+
+            );
+
+            const response =
+
+                await fetchWithTimeout(
+
+                    url,
+
+                    {
+
+                        method: 'POST',
+
+                        headers: {
+
+                            'Content-Type':
+
+                                CONFIG.CONTENT_TYPE
+
+                        },
+
+                        body:
+
+                            JSON.stringify(
+
+                                payload || {}
+
+                            )
+
+                    }
+
+                );
 
             if (!response.ok) {
 
@@ -227,15 +265,15 @@ CTM.API = (function () {
 
                 await response.json();
 
-            validateResponse(result);
+            console.log(
 
-            logResponse(
-
-                action,
+                'Response',
 
                 result
 
             );
+
+            console.groupEnd();
 
             return result;
 
@@ -243,9 +281,9 @@ CTM.API = (function () {
 
         catch (error) {
 
-            logError(
+            console.error(
 
-                action,
+                '[CTM API]',
 
                 error
 
@@ -267,17 +305,23 @@ CTM.API = (function () {
 
     }
 
-    /* ======================================================================
-       CORE HTTP GET
-       ====================================================================== */
+     /* ======================================================================
+       HTTP GET
 
-    async function get(action, parameters) {
+       Used for
+
+       • ping
+       • getVisitor
+
+    ====================================================================== */
+
+    async function get(action, parameters = {}) {
 
         const query =
 
             new URLSearchParams(
 
-                parameters || {}
+                parameters
 
             );
 
@@ -317,21 +361,327 @@ CTM.API = (function () {
 
             }
 
-            const result =
-
-                await response.json();
-
-            validateResponse(result);
-
-            return result;
+            return await response.json();
 
         }
 
         catch (error) {
 
-            logError(
+            console.error(
 
-                action,
+                '[CTM API]',
+
+                error
+
+            );
+
+            return {
+
+                success: false,
+
+                message:
+
+                    error.message
+
+            };
+
+        }
+
+    }
+
+    /* ======================================================================
+       REGISTER VISITOR
+
+       registration.js currently sends
+
+       {
+           FullName,
+           Email,
+           Mobile,
+           District,
+           State,
+           ReferralSource,
+           Language,
+           Device
+       }
+
+       Backend expects
+
+       {
+           fullName,
+           email,
+           mobile,
+           district,
+           state,
+           source,
+           language,
+           device
+       }
+
+       Therefore we translate here.
+
+    ====================================================================== */
+
+    async function registerVisitor(data) {
+
+        if (!data) {
+
+            return {
+
+                success: false,
+
+                message:
+
+                    'Registration data missing.'
+
+            };
+
+        }
+
+        const payload = {
+
+            fullName:
+
+                data.FullName ||
+
+                data.fullName ||
+
+                '',
+
+            email:
+
+                data.Email ||
+
+                data.email ||
+
+                '',
+
+            mobile:
+
+                data.Mobile ||
+
+                data.mobile ||
+
+                '',
+
+            district:
+
+                data.District ||
+
+                data.district ||
+
+                '',
+
+            state:
+
+                data.State ||
+
+                data.state ||
+
+                '',
+
+            source:
+
+                data.ReferralSource ||
+
+                data.source ||
+
+                '',
+
+            language:
+
+                data.Language ||
+
+                data.language ||
+
+                'Tamil',
+
+            device:
+
+                data.Device ||
+
+                data.device ||
+
+                'Desktop',
+
+            emotion:
+
+                data.InitialEmotion ||
+
+                data.emotion ||
+
+                ''
+
+        };
+
+        return await post(
+
+            ACTION.REGISTER_VISITOR,
+
+            payload
+
+        );
+
+    }
+
+    /* ======================================================================
+       UPDATE VISITOR
+    ====================================================================== */
+
+    async function updateVisitor(data) {
+
+        return await post(
+
+            ACTION.UPDATE_VISITOR,
+
+            data
+
+        );
+
+    }
+
+    /* ======================================================================
+       GET VISITOR
+    ====================================================================== */
+
+    async function getVisitor(visitorId) {
+
+        return await get(
+
+            ACTION.GET_VISITOR,
+
+            {
+
+                visitorId:
+
+                    visitorId
+
+            }
+
+        );
+
+    }
+
+    /* ======================================================================
+       SAVE ASSESSMENT
+    ====================================================================== */
+
+    async function saveAssessment(data) {
+
+        return await post(
+
+            ACTION.SAVE_ASSESSMENT,
+
+            data
+
+        );
+
+    }
+
+    /* ======================================================================
+       SAVE KALA CHAKRA
+    ====================================================================== */
+
+    async function saveKalaChakra(data) {
+
+        return await post(
+
+            ACTION.SAVE_KALA_CHAKRA,
+
+            data
+
+        );
+
+    }
+
+     /* ======================================================================
+       SAVE DIAGNOSIS
+       ====================================================================== */
+
+    async function saveDiagnosis(data) {
+
+        return await post(
+
+            ACTION.SAVE_DIAGNOSIS,
+
+            data || {}
+
+        );
+
+    }
+
+    /* ======================================================================
+       SAVE PRESCRIPTION
+       ====================================================================== */
+
+    async function savePrescription(data) {
+
+        return await post(
+
+            ACTION.SAVE_PRESCRIPTION,
+
+            data || {}
+
+        );
+
+    }
+
+    /* ======================================================================
+       COMPLETE JOURNEY
+       ====================================================================== */
+
+    async function completeJourney(data) {
+
+        return await post(
+
+            ACTION.COMPLETE_JOURNEY,
+
+            data || {}
+
+        );
+
+    }
+
+    /* ======================================================================
+       HEALTH CHECK
+       ====================================================================== */
+
+    async function ping() {
+
+        return await get(
+
+            ACTION.PING
+
+        );
+
+    }
+
+    /* ======================================================================
+       SAFE REQUEST
+
+       Used by app.js
+
+       App.startup()
+
+       ApiService.safeRequest(
+           () => ApiService.ping()
+       );
+
+       ====================================================================== */
+
+    async function safeRequest(callback) {
+
+        try {
+
+            return await callback();
+
+        }
+
+        catch (error) {
+
+            console.error(
+
+                '[CTM API]',
 
                 error
 
@@ -354,288 +704,12 @@ CTM.API = (function () {
     }
 
     /* ======================================================================
-       RESPONSE VALIDATION
-       ====================================================================== */
-
-    function validateResponse(result) {
-
-        if (!result) {
-
-            throw new Error(
-
-                'Empty response.'
-
-            );
-
-        }
-
-        if (
-
-            typeof result !== 'object'
-
-        ) {
-
-            throw new Error(
-
-                'Invalid JSON response.'
-
-            );
-
-        }
-
-        return true;
-
-    }
-
-    /* ======================================================================
-       LOGGING
-       ====================================================================== */
-
-    function logRequest(action, payload) {
-
-        console.groupCollapsed(
-
-            '[CTM API] ' + action
-
-        );
-
-        console.log(
-
-            'Request',
-
-            payload
-
-        );
-
-        console.groupEnd();
-
-    }
-
-    function logResponse(action, response) {
-
-        console.groupCollapsed(
-
-            '[CTM API Response] ' + action
-
-        );
-
-        console.log(response);
-
-        console.groupEnd();
-
-    }
-
-    function logError(action, error) {
-
-        console.groupCollapsed(
-
-            '[CTM API Error] ' + action
-
-        );
-
-        console.error(error);
-
-        console.groupEnd();
-
-    }
-
-               /* ======================================================================
-       VISITOR REGISTRATION
-       ====================================================================== */
-
-    async function registerVisitor(visitor) {
-
-        if (!visitor) {
-
-            return {
-
-                success: false,
-
-                message: 'Visitor payload missing.'
-
-            };
-
-        }
-
-        return await post(
-
-            ACTIONS.REGISTER_VISITOR,
-
-            visitor
-
-        );
-
-    }
-
-    /* ======================================================================
-       UPDATE VISITOR
-       ====================================================================== */
-
-    async function updateVisitor(visitor) {
-
-        if (
-
-            !visitor ||
-
-            !visitor.visitorId
-
-        ) {
-
-            return {
-
-                success: false,
-
-                message: 'Visitor ID required.'
-
-            };
-
-        }
-
-        return await post(
-
-            ACTIONS.UPDATE_VISITOR,
-
-            visitor
-
-        );
-
-    }
-
-    /* ======================================================================
-       GET VISITOR
-       ====================================================================== */
-
-    async function getVisitor(visitorId) {
-
-        if (!visitorId) {
-
-            return {
-
-                success: false,
-
-                message: 'Visitor ID required.'
-
-            };
-
-        }
-
-        return await get(
-
-            ACTIONS.GET_VISITOR,
-
-            {
-
-                visitorId: visitorId
-
-            }
-
-        );
-
-    }
-
-    /* ======================================================================
-       SAVE ASSESSMENT
-       ====================================================================== */
-
-    async function saveAssessment(data) {
-
-        return await post(
-
-            ACTIONS.SAVE_ASSESSMENT,
-
-            data || {}
-
-        );
-
-    }
-
-    /* ======================================================================
-       SAVE KALA CHAKRA
-       ====================================================================== */
-
-    async function saveKalaChakra(data) {
-
-        return await post(
-
-            ACTIONS.SAVE_KALA_CHAKRA,
-
-            data || {}
-
-        );
-
-    }
-
-    /* ======================================================================
-       SAVE DIAGNOSIS
-       ====================================================================== */
-
-    async function saveDiagnosis(data) {
-
-        return await post(
-
-            ACTIONS.SAVE_DIAGNOSIS,
-
-            data || {}
-
-        );
-
-    }
-
-    /* ======================================================================
-       SAVE PRESCRIPTION
-       ====================================================================== */
-
-    async function savePrescription(data) {
-
-        return await post(
-
-            ACTIONS.SAVE_PRESCRIPTION,
-
-            data || {}
-
-        );
-
-    }
-
-    /* ======================================================================
-       COMPLETE JOURNEY
-       ====================================================================== */
-
-    async function completeJourney(data) {
-
-        return await post(
-
-            ACTIONS.COMPLETE_JOURNEY,
-
-            data || {}
-
-        );
-
-    }
-
-    /* ======================================================================
-       HEALTH CHECK
-       ====================================================================== */
-
-    async function ping() {
-
-        return await get(
-
-            ACTIONS.PING,
-
-            {}
-
-        );
-
-    }
-
-    /* ======================================================================
        RESPONSE HELPERS
        ====================================================================== */
 
     function isSuccess(response) {
 
-        return !!(
+        return (
 
             response &&
 
@@ -645,21 +719,13 @@ CTM.API = (function () {
 
     }
 
-    function getMessage(response) {
-
-        if (!response) {
-
-            return '';
-
-        }
-
-        return response.message || '';
-
-    }
-
     function getData(response) {
 
-        if (!response) {
+        if (
+
+            !response
+
+        ) {
 
             return null;
 
@@ -669,23 +735,44 @@ CTM.API = (function () {
 
     }
 
-    /* ======================================================================
-       SIMPLE RETRY WRAPPER
-       ====================================================================== */
+    function getMessage(response) {
 
-    async function retry(action, payload) {
+        if (
 
-        let attempt = 0;
-
-        let lastResult = null;
-
-        while (
-
-            attempt <= CONFIG.RETRIES
+            !response
 
         ) {
 
-            lastResult =
+            return '';
+
+        }
+
+        return response.message || '';
+
+    }
+
+    /* ======================================================================
+       RETRY
+
+       Simple retry helper
+
+       ====================================================================== */
+
+    async function retry(action, payload, retries = 2) {
+
+        let result = null;
+
+        for (
+
+            let i = 0;
+
+            i <= retries;
+
+            i++
+
+        ) {
+
+            result =
 
                 await post(
 
@@ -697,45 +784,53 @@ CTM.API = (function () {
 
             if (
 
-                isSuccess(lastResult)
+                isSuccess(result)
 
             ) {
 
-                return lastResult;
+                return result;
 
             }
 
-            attempt++;
+            await new Promise(
 
-            await new Promise(function(resolve){
+                resolve =>
 
-                setTimeout(
+                    setTimeout(
 
-                    resolve,
+                        resolve,
 
-                    CONFIG.RETRY_DELAY
+                        1000
 
-                );
+                    )
 
-            });
+            );
 
         }
 
-        return lastResult;
+        return result;
 
     }
 
-               /* ======================================================================
-       PUBLIC INTERFACE
+     /* ======================================================================
+       PUBLIC API
        ====================================================================== */
 
     const API = {
+
+        /* --------------------------------------------------------------
+           Registration
+        -------------------------------------------------------------- */
 
         registerVisitor,
 
         updateVisitor,
 
         getVisitor,
+
+        /* --------------------------------------------------------------
+           Assessment
+        -------------------------------------------------------------- */
 
         saveAssessment,
 
@@ -747,15 +842,21 @@ CTM.API = (function () {
 
         completeJourney,
 
+        /* --------------------------------------------------------------
+           Utilities
+        -------------------------------------------------------------- */
+
         ping,
+
+        safeRequest,
 
         retry,
 
         isSuccess,
 
-        getMessage,
+        getData,
 
-        getData
+        getMessage
 
     };
 
@@ -766,123 +867,37 @@ CTM.API = (function () {
 /* ==========================================================================
    BACKWARD COMPATIBILITY
 
-   Existing frontend modules (registration.js, assessment.js, etc.)
-   currently call:
+   Existing project files use
 
-       window.ApiService.registerVisitor(...)
+       ApiService.registerVisitor()
 
-   Expose the new API through the legacy namespace without requiring
-   changes to existing screens.
+   New code may use
+
+       CTM.API.registerVisitor()
+
+   Both point to the same object.
 
    ========================================================================== */
 
-window.ApiService = CTM.API;
+window.ApiService = window.CTM.API;
 
 /* ==========================================================================
-   INITIALIZATION
-   ========================================================================== */
-
-(function initializeAPI() {
-
-    console.info(
-        '=================================================='
-    );
-
-    console.info(
-        'CTM PATH™ API Layer Initialised'
-    );
-
-    console.info(
-        'Version : 6.0'
-    );
-
-    console.info(
-        'Status  : READY'
-    );
-
-    console.info(
-        'Backend : Google Apps Script'
-    );
-
-    console.info(
-        '=================================================='
-    );
-
-})();
-
-/* ==========================================================================
-   CONNECTION TEST
-   ========================================================================== */
-
-CTM.API.testConnection = async function () {
-
-    console.group(
-
-        'CTM API Connection Test'
-
-    );
-
-    try {
-
-        const response =
-
-            await CTM.API.ping();
-
-        console.log(
-
-            response
-
-        );
-
-        return response;
-
-    }
-
-    catch (error) {
-
-        console.error(
-
-            error
-
-        );
-
-        return {
-
-            success: false,
-
-            message: error.message
-
-        };
-
-    }
-
-    finally {
-
-        console.groupEnd();
-
-    }
-
-};
-
-/* ==========================================================================
-   VERSION INFORMATION
+   VERSION
    ========================================================================== */
 
 Object.defineProperty(
 
-    CTM.API,
+    window.CTM.API,
 
     'VERSION',
 
     {
 
-        value: '6.0',
+        value: '7.0',
 
         enumerable: true,
 
-        writable: false,
-
-        configurable: false
+        writable: false
 
     }
 
@@ -890,7 +905,7 @@ Object.defineProperty(
 
 Object.defineProperty(
 
-    CTM.API,
+    window.CTM.API,
 
     'BUILD',
 
@@ -900,48 +915,45 @@ Object.defineProperty(
 
         enumerable: true,
 
-        writable: false,
-
-        configurable: false
+        writable: false
 
     }
 
 );
 
 /* ==========================================================================
-   PRODUCTION HARDENING
+   DIAGNOSTICS
+
+   These functions are intentionally defined BEFORE Object.freeze()
+   so they remain part of the public API.
+
    ========================================================================== */
 
-/*
-   Freeze the public API surface so that application modules cannot
-   accidentally overwrite API methods at runtime.
-*/
+window.CTM.API.info = function () {
 
-Object.freeze(CTM.API);
+    console.group(
 
-/* ==========================================================================
-   DEVELOPMENT HELPERS
-   ========================================================================== */
+        'CTM PATH API'
 
-/**
- * Print API information.
- */
-
-CTM.API.info = function () {
-
-    console.group('CTM PATH™ API');
+    );
 
     console.table({
 
-        Version: CTM.API.VERSION,
+        Version:
 
-        Build: CTM.API.BUILD,
+            window.CTM.API.VERSION,
 
-        Backend: 'Google Apps Script',
+        Build:
 
-        Status: 'Production',
+            window.CTM.API.BUILD,
 
-        Compatibility: 'ApiService + CTM.API'
+        Backend:
+
+            'Google Apps Script',
+
+        Status:
+
+            'Production'
 
     });
 
@@ -949,31 +961,13 @@ CTM.API.info = function () {
 
 };
 
-/**
- * Display configured endpoint.
- */
-
-CTM.API.endpoint = function () {
-
-    console.log(
-
-        'Web App URL:',
-
-        CONFIG.WEBAPP_URL
-
-    );
-
-};
-
-/**
- * Verify API availability.
- */
-
-CTM.API.ready = function () {
+window.CTM.API.ready = function () {
 
     return (
 
-        typeof window.ApiService !== 'undefined' &&
+        typeof window.ApiService !== 'undefined'
+
+        &&
 
         typeof window.ApiService.registerVisitor === 'function'
 
@@ -981,8 +975,36 @@ CTM.API.ready = function () {
 
 };
 
+window.CTM.API.testConnection = async function () {
+
+    return await
+
+        window.ApiService.safeRequest(
+
+            () =>
+
+                window.ApiService.ping()
+
+        );
+
+};
+
 /* ==========================================================================
-   GLOBAL ERROR HANDLER
+   PRODUCTION HARDENING
+   ========================================================================== */
+
+/*
+   Freeze the public API after all methods have been attached.
+*/
+
+Object.freeze(
+
+    window.CTM.API
+
+);
+
+/* ==========================================================================
+   GLOBAL ERROR LOGGING
    ========================================================================== */
 
 window.addEventListener(
@@ -1022,12 +1044,62 @@ window.addEventListener(
 );
 
 /* ==========================================================================
-   STARTUP VERIFICATION
+   STARTUP MESSAGE
    ========================================================================== */
 
-(function verifyStartup() {
+(function () {
 
-    if (CTM.API.ready()) {
+    console.info(
+
+        '======================================================'
+
+    );
+
+    console.info(
+
+        'CTM PATH™ API Layer Initialised'
+
+    );
+
+    console.info(
+
+        'Version :',
+
+        window.CTM.API.VERSION
+
+    );
+
+    console.info(
+
+        'Build   :',
+
+        window.CTM.API.BUILD
+
+    );
+
+    console.info(
+
+        'Backend : Google Apps Script'
+
+    );
+
+    console.info(
+
+        'Status  : READY'
+
+    );
+
+    console.info(
+
+        '======================================================'
+
+    );
+
+    if (
+
+        window.CTM.API.ready()
+
+    ) {
 
         console.info(
 
@@ -1035,11 +1107,13 @@ window.addEventListener(
 
         );
 
-    } else {
+    }
+
+    else {
 
         console.warn(
 
-            '⚠ ApiService compatibility not available.'
+            '⚠ ApiService compatibility unavailable.'
 
         );
 
@@ -1048,41 +1122,84 @@ window.addEventListener(
 })();
 
 /* ==========================================================================
-   END OF FILE
+   GLOBAL EXPORTS
 
-   CTM PATH™ Guided Journey
-   FROM SURVIVAL TO LIVING™
-
-   File        : js/api.js
-   Version     : 6.0
-   Status      : PRODUCTION
-
-   Responsibilities
-   --------------------------------------------------------------------------
-   ✓ Google Apps Script Communication
-   ✓ GET / POST Requests
-   ✓ Registration API
-   ✓ Visitor Retrieval
-   ✓ Assessment Saving
-   ✓ Kala Chakra Saving
-   ✓ Diagnosis Saving
-   ✓ Prescription Saving
-   ✓ Journey Completion
-   ✓ Logging
-   ✓ Retry Support
-   ✓ Response Validation
-   ✓ Backward Compatibility
-
-   Compatibility
-   --------------------------------------------------------------------------
-   Legacy Code
-
-       window.ApiService.registerVisitor()
-
-   Modern Code
+   Modern
 
        CTM.API.registerVisitor()
 
-   Both interfaces point to the same implementation.
+   Legacy
+
+       ApiService.registerVisitor()
 
    ========================================================================== */
+
+window.ApiService = window.CTM.API;
+
+/* ==========================================================================
+   END OF FILE
+
+   ==========================================================================
+   CTM PATH™ Guided Journey
+   FROM SURVIVAL TO LIVING™
+
+   File        : api.js
+   Version     : 7.0
+   Status      : PRODUCTION
+
+   VERIFIED AGAINST
+
+   ✓ 01_Config.gs
+   ✓ 02_Utils.gs
+   ✓ 03_Database.gs
+   ✓ 07_Router.gs
+   ✓ 08_Service.gs
+   ✓ app.js
+   ✓ registration.js
+
+   Registration Flow
+
+   Landing
+      ↓
+   registration.js
+      ↓
+   ApiService.registerVisitor()
+      ↓
+   api.js
+      ↓
+   POST
+
+      /exec?action=registerVisitor
+
+      {
+          fullName,
+          email,
+          mobile,
+          district,
+          state,
+          source,
+          language,
+          device,
+          emotion
+      }
+
+      ↓
+
+   Router.gs
+
+      doPost()
+
+      ↓
+
+   registerVisitor()
+
+      ↓
+
+   saveVisitorRegistration()
+
+      ↓
+
+   Visitors Sheet
+
+   ==========================================================================
+*/
