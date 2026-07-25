@@ -3,30 +3,37 @@
    CTM PATH™ Guided Journey v5.0
 
    File        : registration.js
-   Version     : 5.1
+   Version     : 5.2
 
    Status      : 🔒 FOUNDATION UPDATE
 
    Purpose     : Registration Controller
 
                   Owns
-                  • Page Initialization
-                  • Form Handling
-                  • Validation
-                  • KYC Data Collection
-                  • Local Storage
-                  • API Registration
-                  • Navigation
+                  • Registration Initialization
+                  • KYC Form Handling
+                  • Data Validation
+                  • API Submission
+                  • Visitor ID Capture
+                  • Journey Navigation
 
-                  Owns NO
-                  • UI Rendering
-                  • Database Logic
-                  • Assessment Calculation
+                  Sheet Mapping:
+                  HTML Fields
+                       ↓
+                  Registration Object
+                       ↓
+                  ApiService
+                       ↓
+                  Google Apps Script Backend
+                       ↓
+                  Visitors Sheet
 
    ========================================================================== */
 
 
 'use strict';
+
+
 
 
 
@@ -42,23 +49,28 @@ const Registration = {
 
 
     /* ======================================================================
-       INITIALIZE
+       INITIALIZE MODULE
        ====================================================================== */
 
 
     init(){
 
 
+
         this.cacheDOM();
+
 
 
         this.bindEvents();
 
 
+
         this.restoreRegistration();
 
 
+
         this.animatePage();
+
 
 
     },
@@ -71,7 +83,7 @@ const Registration = {
 
 
     /* ======================================================================
-       CACHE DOM ELEMENTS
+       DOM CACHE
        ====================================================================== */
 
 
@@ -91,6 +103,7 @@ const Registration = {
 
 
 
+
         this.backButton =
 
             document.getElementById(
@@ -98,6 +111,7 @@ const Registration = {
                 'backButton'
 
             );
+
 
 
 
@@ -115,9 +129,10 @@ const Registration = {
 
     },
 
-   /* ==========================================================
+   id="registration-js-v52-batch-1b"
+/* ======================================================================
    EVENT BINDING
-   ========================================================== */
+   ====================================================================== */
 
 
     bindEvents(){
@@ -186,9 +201,9 @@ const Registration = {
 
 
 
-/* ==========================================================
-   RESTORE SAVED REGISTRATION
-   ========================================================== */
+/* ======================================================================
+   RESTORE SAVED REGISTRATION DATA
+   ====================================================================== */
 
 
     restoreRegistration(){
@@ -201,30 +216,13 @@ const Registration = {
 
 
 
-            const savedData = JSON.parse(
-
-
+            const saved =
 
                 localStorage.getItem(
 
-
-
                     'ctmRegistration'
 
-
-
-                )
-
-
-
-                ||
-
-                '{}'
-
-
-
-
-            );
+                );
 
 
 
@@ -232,8 +230,38 @@ const Registration = {
 
 
 
+            if(!saved){
 
-            Object.keys(savedData).forEach(
+
+
+                return;
+
+
+
+            }
+
+
+
+
+
+
+
+            const data =
+
+                JSON.parse(
+
+                    saved
+
+                );
+
+
+
+
+
+
+
+
+            Object.keys(data).forEach(
 
 
 
@@ -243,15 +271,9 @@ const Registration = {
 
                     const field =
 
-
-
                         document.getElementById(
 
-
-
                             key
-
-
 
                         );
 
@@ -267,9 +289,7 @@ const Registration = {
 
                         field.value =
 
-
-
-                            savedData[key];
+                            data[key];
 
 
 
@@ -295,11 +315,13 @@ const Registration = {
 
 
 
+
+
             console.error(
 
 
 
-                'Registration Restore Error:',
+                'Restore Registration Error:',
 
 
 
@@ -308,6 +330,8 @@ const Registration = {
 
 
             );
+
+
 
 
 
@@ -324,9 +348,9 @@ const Registration = {
 
 
 
-/* ==========================================================
+/* ======================================================================
    VALIDATE FORM
-   ========================================================== */
+   ====================================================================== */
 
 
     validate(){
@@ -342,6 +366,7 @@ const Registration = {
 
 
         }
+
 
 
 
@@ -369,15 +394,33 @@ const Registration = {
 
 
 
+
         return true;
 
 
 
     },
 
-   /* ==========================================================
+/* ======================================================================
    COLLECT REGISTRATION DATA
-   ========================================================== */
+
+   IMPORTANT:
+   Keys match Google Sheet headers exactly.
+
+   Sheet:
+
+   FullName
+   Email
+   Mobile
+   District
+   State
+   ReferralSource
+   Language
+   Device
+   CurrentPage
+   CompletionStatus
+
+   ====================================================================== */
 
 
     collectData(){
@@ -388,7 +431,7 @@ const Registration = {
 
 
 
-            fullName:
+            FullName:
 
                 this.getValue(
 
@@ -401,20 +444,7 @@ const Registration = {
 
 
 
-            mobile:
-
-                this.getValue(
-
-                    'mobile'
-
-                ),
-
-
-
-
-
-
-            email:
+            Email:
 
                 this.getValue(
 
@@ -427,7 +457,20 @@ const Registration = {
 
 
 
-            district:
+            Mobile:
+
+                this.getValue(
+
+                    'mobile'
+
+                ),
+
+
+
+
+
+
+            District:
 
                 this.getValue(
 
@@ -440,7 +483,7 @@ const Registration = {
 
 
 
-            state:
+            State:
 
                 this.getValue(
 
@@ -453,7 +496,20 @@ const Registration = {
 
 
 
-            language:
+            ReferralSource:
+
+                this.getValue(
+
+                    'source'
+
+                ),
+
+
+
+
+
+
+            Language:
 
                 this.getValue(
 
@@ -466,20 +522,7 @@ const Registration = {
 
 
 
-            referralSource:
-
-                this.getValue(
-
-                    'referralSource'
-
-                ),
-
-
-
-
-
-
-            device:
+            Device:
 
                 this.getDevice(),
 
@@ -488,7 +531,7 @@ const Registration = {
 
 
 
-            currentPage:
+            CurrentPage:
 
                 'Registration',
 
@@ -497,7 +540,7 @@ const Registration = {
 
 
 
-            completionStatus:
+            CompletionStatus:
 
                 'Registered',
 
@@ -506,7 +549,7 @@ const Registration = {
 
 
 
-            startTime:
+            StartTime:
 
                 new Date().toISOString()
 
@@ -525,16 +568,16 @@ const Registration = {
 
 
 
-/* ==========================================================
-   SAFE FIELD VALUE
-   ========================================================== */
+/* ======================================================================
+   SAFE FIELD READER
+   ====================================================================== */
 
 
     getValue(id){
 
 
 
-        const field =
+        const element =
 
             document.getElementById(
 
@@ -548,15 +591,24 @@ const Registration = {
 
 
 
-        return field
+        if(!element){
 
-            ?
 
-            field.value.trim()
 
-            :
+            return '';
 
-            '';
+
+
+        }
+
+
+
+
+
+
+
+
+        return element.value.trim();
 
 
 
@@ -569,9 +621,9 @@ const Registration = {
 
 
 
-/* ==========================================================
-   DEVICE INFORMATION
-   ========================================================== */
+/* ======================================================================
+   DEVICE DETECTION
+   ====================================================================== */
 
 
     getDevice(){
@@ -584,28 +636,21 @@ const Registration = {
 
         )
 
-            ?
+        ?
 
-            'Mobile'
+        'Mobile'
 
-            :
+        :
 
-            'Desktop';
+        'Desktop';
 
 
 
     },
 
-
-
-
-
-
-
-
-/* ==========================================================
-   SAVE LOCAL REGISTRATION
-   ========================================================== */
+/* ======================================================================
+   SAVE LOCAL REGISTRATION DATA
+   ====================================================================== */
 
 
     saveLocal(data){
@@ -652,6 +697,8 @@ const Registration = {
 
 
 
+
+
             window.CTM.setState({
 
 
@@ -670,9 +717,33 @@ const Registration = {
 
     },
 
-   /* ==========================================================
+
+
+
+
+
+
+
+/* ======================================================================
    SUBMIT REGISTRATION
-   ========================================================== */
+
+   Flow:
+
+   Form Submit
+        ↓
+   Collect KYC
+        ↓
+   Save Local
+        ↓
+   ApiService.registerVisitor()
+        ↓
+   Receive VisitorID
+        ↓
+   Save VisitorID
+        ↓
+   Navigate Assessment
+
+   ====================================================================== */
 
 
     async submit(event){
@@ -696,6 +767,7 @@ const Registration = {
 
 
         }
+
 
 
 
@@ -728,20 +800,6 @@ const Registration = {
 
 
         try{
-
-
-
-
-
-            /*
-               IMPORTANT:
-               api.js exports ApiService
-               NOT API
-
-               Correct object:
-               window.ApiService
-            */
-
 
 
 
@@ -784,12 +842,11 @@ const Registration = {
 
 
 
-
                 console.log(
 
 
 
-                    'Registration Response:',
+                    'CTM Registration Response:',
 
 
 
@@ -814,7 +871,11 @@ const Registration = {
 
                     &&
 
-                    response.visitorId
+                    response.data
+
+                    &&
+
+                    response.data.visitorId
 
 
 
@@ -824,9 +885,9 @@ const Registration = {
 
 
 
-                    registration.visitorId =
+                    registration.VisitorID =
 
-                        response.visitorId;
+                        response.data.visitorId;
 
 
 
@@ -864,11 +925,7 @@ const Registration = {
 
                     &&
 
-                    response.data
-
-                    &&
-
-                    response.data.visitorId
+                    response.visitorId
 
 
 
@@ -878,9 +935,9 @@ const Registration = {
 
 
 
-                    registration.visitorId =
+                    registration.VisitorID =
 
-                        response.data.visitorId;
+                        response.visitorId;
 
 
 
@@ -908,7 +965,6 @@ const Registration = {
 
 
 
-
             }
 
 
@@ -919,11 +975,11 @@ const Registration = {
 
 
 
-                console.warn(
+                console.error(
 
 
 
-                    'ApiService.registerVisitor not available'
+                    'ApiService.registerVisitor unavailable'
 
 
 
@@ -955,7 +1011,7 @@ const Registration = {
 
 
 
-                'Registration API Error:',
+                'CTM Registration API Error:',
 
 
 
@@ -982,16 +1038,24 @@ const Registration = {
 
 
 
-
-
     },
 
-   /* ==========================================================
-   NAVIGATE TO NEXT PAGE
-   ========================================================== */
+/* ======================================================================
+   NAVIGATE TO ASSESSMENT PAGE
+   ====================================================================== */
 
 
     goNext(){
+
+
+
+        /*
+           Preferred route:
+           Router controls journey flow
+        */
+
+
+
 
 
 
@@ -1027,29 +1091,33 @@ const Registration = {
 
 
 
-        }
-
-
-
-
-
-        else{
-
-
-
-
-
-            window.location.href =
-
-
-
-                '/pages/assessment.html';
-
-
+            return;
 
 
 
         }
+
+
+
+
+
+
+
+
+        /*
+           Fallback:
+           Direct navigation
+        */
+
+
+
+
+
+        window.location.href =
+
+
+
+            '/pages/assessment.html';
 
 
 
@@ -1064,14 +1132,12 @@ const Registration = {
 
 
 
-/* ==========================================================
-   NAVIGATE BACK
-   ========================================================== */
+/* ======================================================================
+   NAVIGATE BACK TO LANDING
+   ====================================================================== */
 
 
     goBack(){
-
-
 
 
 
@@ -1107,29 +1173,24 @@ const Registration = {
 
 
 
-        }
-
-
-
-
-
-        else{
-
-
-
-
-
-            window.location.href =
-
-
-
-                '/pages/landing.html';
-
-
+            return;
 
 
 
         }
+
+
+
+
+
+
+
+
+        window.location.href =
+
+
+
+            '/pages/landing.html';
 
 
 
@@ -1137,9 +1198,9 @@ const Registration = {
 
     },
 
-   /* ==========================================================
+/* ======================================================================
    PAGE ENTRANCE ANIMATION
-   ========================================================== */
+   ====================================================================== */
 
 
     animatePage(){
@@ -1221,7 +1282,6 @@ const Registration = {
                         selector
 
                     );
-
 
 
 
@@ -1325,7 +1385,7 @@ const Registration = {
 
 
 /* ==========================================================================
-   INITIALIZE
+   INITIALIZE APPLICATION
    ========================================================================== */
 
 
@@ -1373,13 +1433,13 @@ window.Registration = Registration;
 
 
 /* ==========================================================================
-   End of File
+   END OF FILE
 
 
    File        : registration.js
 
 
-   Version     : 5.1
+   Version     : 5.2
 
 
    Status      : 🔒 FOUNDATION UPDATE
