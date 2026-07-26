@@ -654,7 +654,7 @@ window.CTM.Registration = (() => {
 
             window.location.href =
 
-                "assessment.html";
+                "assessment-01.html";
 
         }
 
