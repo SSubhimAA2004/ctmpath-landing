@@ -1,123 +1,232 @@
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey v2.0
+   CTM PATH™ Guided Journey
+
    File        : assessment.css
-   Version     : 2.0
-   Status      : 🔒 LOCKED
+   Version     : 3.0
+   Status      : 🔒 ASSESSMENT UI SYSTEM
+
    Purpose     : Assessment Screen Styling
-                  Owns ONLY the Assessment UI.
-                  No assessment logic.
+
+   Owns ONLY:
+
+        • Assessment Layout
+        • Question Cards
+        • Rating UI
+        • Reflection UI
+        • Wisdom UI
+
    ========================================================================== */
+
 
 
 /* ==========================================================================
-   Assessment Card
+   Assessment Container
    ========================================================================== */
+
 
 .assessment-card{
 
-    max-width:980px;
+    max-width:1100px;
 
     margin-inline:auto;
 
+    padding:40px;
+
 }
+
+
+
+
+
+/* ==========================================================================
+   Progress
+   ========================================================================== */
+
+
+.progress{
+
+    margin-bottom:40px;
+
+}
+
+
+
+.progress-label{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:12px;
+
+    color:var(--text-secondary);
+
+    font-size:14px;
+
+}
+
+
+
+.progress-track{
+
+    height:10px;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    background:rgba(255,255,255,.12);
+
+}
+
+
+
+.progress-fill{
+
+    height:100%;
+
+    border-radius:20px;
+
+    background:var(--color-primary);
+
+    transition:
+
+        width .4s ease;
+
+}
+
+
+
 
 
 /* ==========================================================================
    Pillar Header
    ========================================================================== */
 
+
 .pillar-header{
 
     text-align:center;
 
-    margin-bottom:var(--space-10);
+    margin-bottom:50px;
 
 }
+
+
 
 .pillar-number{
 
     display:inline-flex;
 
-    align-items:center;
+    padding:10px 24px;
 
-    justify-content:center;
+    border-radius:999px;
 
-    padding:10px 22px;
+    background:
 
-    margin-bottom:var(--space-4);
+        rgba(198,164,91,.15);
 
-    border-radius:var(--radius-round);
+    border:
 
-    background:rgba(198,164,91,.15);
+        1px solid rgba(198,164,91,.35);
 
-    border:1px solid rgba(198,164,91,.35);
+    color:
 
-    color:var(--color-secondary);
+        var(--color-secondary);
 
-    font-size:var(--fs-sm);
-
-    font-weight:var(--fw-bold);
+    font-weight:700;
 
     letter-spacing:.08em;
 
-    text-transform:uppercase;
-
 }
+
+
 
 .pillar-title-ta{
 
-    color:var(--color-secondary);
+    margin-top:24px;
 
-    margin-bottom:var(--space-3);
+    margin-bottom:12px;
+
+    color:
+
+        var(--color-secondary);
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+    font-size:
+
+        38px;
 
 }
+
+
 
 .pillar-title-en{
 
-    color:var(--text-primary);
+    color:
+
+        var(--text-primary);
+
+    font-size:
+
+        28px;
 
 }
 
 
-/* ==========================================================================
-   Introduction
-   ========================================================================== */
-
-.assessment-introduction{
-
-    max-width:820px;
-
-    margin-inline:auto;
-
-    margin-bottom:var(--space-12);
-
-    text-align:center;
-
-}
 
 .intro-ta{
 
-    margin-bottom:var(--space-5);
+    margin-top:25px;
 
-    font-size:var(--fs-lg);
+    font-family:
 
-    line-height:1.9;
+        "Noto Sans Tamil",
+        sans-serif;
+
+    font-size:
+
+        20px;
+
+    line-height:
+
+        1.9;
 
 }
+
+
 
 .intro-en{
 
-    color:var(--text-secondary);
+    margin-top:16px;
 
-    line-height:1.9;
+    color:
+
+        var(--text-secondary);
+
+    font-size:
+
+        18px;
+
+    line-height:
+
+        1.8;
 
 }
+
 
 
 /* ==========================================================================
    Questions
    ========================================================================== */
+
 
 .questions-container{
 
@@ -125,52 +234,96 @@
 
     flex-direction:column;
 
-    gap:var(--space-8);
+    gap:30px;
 
 }
+
+
 
 .question-card{
 
-    padding:var(--space-8);
+    padding:32px;
 
-    border-radius:var(--radius-xl);
+    border-radius:24px;
 
-    border:1px solid var(--border-light);
+    border:
 
-    background:rgba(255,255,255,.04);
+        1px solid rgba(255,255,255,.12);
+
+    background:
+
+        rgba(255,255,255,.05);
 
 }
+
+
 
 .question-number{
 
-    display:inline-block;
+    color:
 
-    margin-bottom:var(--space-3);
+        var(--color-primary);
 
-    color:var(--color-primary);
+    font-size:
 
-    font-size:var(--fs-sm);
+        14px;
 
-    font-weight:var(--fw-semibold);
+    font-weight:
 
-    letter-spacing:.05em;
+        700;
 
-    text-transform:uppercase;
+    letter-spacing:.1em;
 
-}
-
-.question-text{
-
-    margin-bottom:var(--space-6);
-
-    line-height:1.6;
+    margin-bottom:18px;
 
 }
 
+
+
+.question-text-ta{
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+    font-size:
+
+        22px;
+
+    line-height:
+
+        1.8;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.question-text-en{
+
+    color:
+
+        var(--text-secondary);
+
+    font-size:
+
+        18px;
+
+    line-height:
+
+        1.7;
+
+}
+
+
+/* Continue in Batch 1B */
 
 /* ==========================================================================
-   Rating Group
+   Rating Scale
    ========================================================================== */
+
 
 .rating-group{
 
@@ -178,16 +331,17 @@
 
     justify-content:center;
 
-    gap:12px;
+    align-items:center;
+
+    gap:14px;
 
     flex-wrap:wrap;
+
+    margin-top:30px;
 
 }
 
 
-/* ==========================================================================
-   Rating Button
-   ========================================================================== */
 
 .rating-button{
 
@@ -197,249 +351,587 @@
 
     border-radius:50%;
 
-    border:1px solid var(--border-medium);
+    border:
 
-    background:#102A52;
+        1px solid rgba(255,255,255,.25);
 
-    color:var(--text-primary);
+    background:
 
-    font-weight:var(--fw-bold);
+        rgba(16,42,82,.9);
 
-    transition:
-        all var(--transition-fast);
+    color:
+
+        var(--text-primary);
+
+    font-size:
+
+        17px;
+
+    font-weight:
+
+        700;
 
     cursor:pointer;
 
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    transition:
+
+        all .25s ease;
+
 }
+
+
 
 .rating-button:hover{
 
-    transform:translateY(-2px);
+    transform:
 
-    border-color:var(--color-primary);
+        translateY(-3px);
 
-}
+    border-color:
 
-.rating-button.active-low{
-
-    background:var(--rating-low);
-
-    border-color:var(--rating-low);
+        var(--color-primary);
 
 }
 
-.rating-button.active-medium{
 
-    background:var(--rating-medium);
 
-    border-color:var(--rating-medium);
+.rating-button.active{
+
+    background:
+
+        var(--color-primary);
+
+    color:
+
+        #ffffff;
+
+    border-color:
+
+        var(--color-primary);
+
+    transform:
+
+        scale(1.08);
 
 }
 
-.rating-button.active-high{
 
-    background:var(--rating-high);
 
-    border-color:var(--rating-high);
-
-}
 
 
 /* ==========================================================================
-   Continue in Batch 2/n
+   Rating Guide
    ========================================================================== */
+
+
+.rating-guide{
+
+    margin-top:35px;
+
+    padding:20px 30px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:30px;
+
+    border-radius:20px;
+
+    background:
+
+        rgba(255,255,255,.04);
+
+}
+
+
+
+.rating-guide-item{
+
+    text-align:center;
+
+}
+
+
+
+.rating-guide-item span{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:40px;
+
+    height:40px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:
+
+        rgba(198,164,91,.15);
+
+    border:
+
+        1px solid rgba(198,164,91,.35);
+
+    color:
+
+        var(--color-secondary);
+
+    font-weight:700;
+
+}
+
+
+
+.rating-guide-item p{
+
+    margin-top:8px;
+
+    color:
+
+        var(--text-secondary);
+
+    font-size:14px;
+
+}
+
+
+
+.rating-guide-line{
+
+    width:120px;
+
+    height:1px;
+
+    background:
+
+        rgba(255,255,255,.25);
+
+}
+
+
+
+
 
 /* ==========================================================================
    Reflection Panel
    ========================================================================== */
 
+
 .reflection-panel{
 
-    margin-top:var(--space-12);
+    margin-top:45px;
 
-    padding:var(--space-8);
+    padding:32px;
 
-    border-radius:var(--radius-xl);
+    border-radius:24px;
 
-    border-left:5px solid var(--color-secondary);
+    border-left:
 
-    background:rgba(198,164,91,.08);
+        5px solid var(--color-secondary);
+
+    background:
+
+        rgba(198,164,91,.08);
 
 }
+
+
 
 .reflection-panel h3{
 
-    margin-bottom:var(--space-4);
+    margin-bottom:18px;
 
-    color:var(--color-secondary);
+    color:
+
+        var(--color-secondary);
+
+    font-size:22px;
 
 }
+
+
 
 .reflection-ta{
 
-    margin-bottom:var(--space-4);
+    font-family:
 
-    font-size:var(--fs-lg);
+        "Noto Sans Tamil",
+        sans-serif;
 
-    line-height:1.8;
+    font-size:19px;
+
+    line-height:1.9;
+
+    margin-bottom:16px;
 
 }
+
+
 
 .reflection-en{
 
-    color:var(--text-secondary);
+    color:
+
+        var(--text-secondary);
+
+    font-size:17px;
 
     line-height:1.8;
 
 }
+
+
+
 
 
 /* ==========================================================================
    Wisdom Panel
    ========================================================================== */
 
+
 .wisdom-panel{
 
-    margin-top:var(--space-8);
+    margin-top:30px;
 
-    margin-bottom:var(--space-10);
+    padding:32px;
 
-    padding:var(--space-8);
+    border-radius:24px;
 
-    border-radius:var(--radius-xl);
+    border-left:
 
-    border-left:5px solid var(--color-primary);
+        5px solid var(--color-primary);
 
-    background:rgba(13,148,136,.08);
+    background:
+
+        rgba(13,148,136,.08);
 
 }
+
+
 
 .wisdom-panel h3{
 
-    margin-bottom:var(--space-4);
+    margin-bottom:18px;
 
-    color:var(--color-primary);
+    color:
+
+        var(--color-primary);
+
+    font-size:22px;
 
 }
+
+
 
 .wisdom-ta{
 
-    margin-bottom:var(--space-4);
+    font-family:
 
-    font-size:var(--fs-lg);
+        "Noto Sans Tamil",
+        sans-serif;
 
-    line-height:1.8;
+    font-size:19px;
+
+    line-height:1.9;
+
+    margin-bottom:16px;
 
 }
+
+
 
 .wisdom-en{
 
-    color:var(--text-secondary);
+    color:
+
+        var(--text-secondary);
+
+    font-size:17px;
 
     line-height:1.8;
 
 }
 
 
-/* ==========================================================================
-   Progress
-   ========================================================================== */
-
-.progress{
-
-    margin-bottom:var(--space-10);
-
-}
-
+/* Continue in Batch 1C */
 
 /* ==========================================================================
    Navigation
    ========================================================================== */
 
+
 .navigation{
 
-    margin-top:var(--space-10);
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:45px;
+
+    gap:20px;
 
 }
 
 
+
+.btn{
+
+    min-width:180px;
+
+    padding:16px 28px;
+
+    border-radius:14px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:
+
+        all .25s ease;
+
+}
+
+
+
+.btn-primary{
+
+    background:
+
+        var(--color-primary);
+
+    color:
+
+        #ffffff;
+
+    border:
+
+        1px solid var(--color-primary);
+
+}
+
+
+
+.btn-primary:hover{
+
+    transform:
+
+        translateY(-2px);
+
+    opacity:.9;
+
+}
+
+
+
+.btn-secondary{
+
+    background:
+
+        rgba(255,255,255,.05);
+
+    color:
+
+        var(--text-primary);
+
+    border:
+
+        1px solid rgba(255,255,255,.2);
+
+}
+
+
+
+.btn-secondary:hover{
+
+    border-color:
+
+        var(--color-secondary);
+
+}
+
+
+
+
+
 /* ==========================================================================
-   Disabled State
+   Disabled States
    ========================================================================== */
 
-.rating-button:disabled{
 
-    cursor:not-allowed;
+.rating-button:disabled,
+
+.btn:disabled{
 
     opacity:.5;
 
+    cursor:not-allowed;
+
+    transform:none;
+
 }
 
 
+
+
+
 /* ==========================================================================
-   Responsive — Tablet
+   Tablet
    ========================================================================== */
+
 
 @media(max-width:768px){
 
+
     .assessment-card{
 
-        padding:var(--space-8);
+        padding:28px;
 
     }
 
-    .rating-group{
 
-        gap:10px;
+
+    .pillar-title-ta{
+
+        font-size:32px;
 
     }
+
+
+
+    .pillar-title-en{
+
+        font-size:24px;
+
+    }
+
+
+
+    .question-card{
+
+        padding:24px;
+
+    }
+
+
+
+    .question-text-ta{
+
+        font-size:19px;
+
+    }
+
+
 
     .rating-button{
 
-        width:48px;
+        width:46px;
 
-        height:48px;
+        height:46px;
+
+        font-size:16px;
 
     }
+
+
 
 }
 
 
+
+
+
 /* ==========================================================================
-   Responsive — Mobile
+   Mobile
    ========================================================================== */
+
 
 @media(max-width:480px){
 
+
     .assessment-card{
 
-        padding:var(--space-6);
+        padding:20px;
 
     }
+
+
 
     .pillar-title-ta{
 
-        font-size:var(--fs-xl);
+        font-size:28px;
 
     }
+
+
 
     .pillar-title-en{
 
-        font-size:var(--fs-lg);
+        font-size:22px;
 
     }
+
+
+
+    .intro-ta{
+
+        font-size:17px;
+
+    }
+
+
+
+    .intro-en{
+
+        font-size:16px;
+
+    }
+
+
 
     .question-card{
 
-        padding:var(--space-6);
+        padding:20px;
+
+        border-radius:18px;
 
     }
 
-    .question-text{
 
-        font-size:var(--fs-base);
+
+    .question-text-ta{
+
+        font-size:18px;
 
     }
+
+
+
+    .question-text-en{
+
+        font-size:15px;
+
+    }
+
+
 
     .rating-group{
 
@@ -447,32 +939,65 @@
 
     }
 
+
+
     .rating-button{
 
-        width:42px;
+        width:40px;
 
-        height:42px;
+        height:40px;
 
-        font-size:.9rem;
+        font-size:14px;
+
+    }
+
+
+
+    .rating-guide{
+
+        flex-direction:column;
 
     }
 
-    .reflection-panel,
 
-    .wisdom-panel{
 
-        padding:var(--space-6);
+    .rating-guide-line{
+
+        width:80px;
 
     }
+
+
+
+    .navigation{
+
+        flex-direction:column-reverse;
+
+    }
+
+
+
+    .btn{
+
+        width:100%;
+
+    }
+
+
 
 }
+
+
+
 
 
 /* ==========================================================================
    End of File
 
-   File   : assessment.css
+   File    : assessment.css
 
-   Status : 🔒 LOCKED
+   Version : 3.0
+
+   Status  : 🔒 ASSESSMENT UI SYSTEM
+
    ========================================================================== */
-
