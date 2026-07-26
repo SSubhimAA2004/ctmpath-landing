@@ -1,46 +1,38 @@
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey v2.0
+   CTM PATH™ Guided Journey
 
    File        : assessmentCommon.js
-   Version     : 2.0
-   Status      : 🔒 FOUNDATION
+   Version     : 3.0
+   Status      : 🔒 ASSESSMENT ENGINE
 
-   Purpose     : Shared Assessment Engine™
+   Purpose:
 
-   Used By
+       Shared Assessment Rendering Engine
 
-      • assessment01.js
-      • assessment02.js
-      • assessment03.js
-      • assessment04.js
-      • assessment05.js
-      • assessment06.js
-      • assessment07.js
-      • assessment08.js
-      • assessment09.js
-      • assessment10.js
-      • assessment11.js
-      • assessment12.js
+   Supports:
+
+       assessment01.js
+       assessment02.js
+       ...
+       assessment12.js
 
 
-   Owns
+   Owns:
 
-      • Assessment Rendering
-      • Question Rendering
-      • Rating UI
-      • Progress Display
-      • Reflection Display
-      • Wisdom Display
+       • Pillar Rendering
+       • Question Rendering
+       • Rating Generation
+       • Reflection Rendering
+       • Wisdom Rendering
 
 
-   Owns NO
+   Owns NO:
 
-      • Navigation
-      • API
-      • Storage Implementation
-      • Assessment Content
-
+       • API
+       • Storage
+       • Navigation
+       • Scoring
 
    ========================================================================== */
 
@@ -50,11 +42,11 @@
 
 
 /* ==========================================================================
-   ASSESSMENT STATE
+   STATE
    ========================================================================== */
 
 
-const AssessmentCommonState = {
+const AssessmentState = {
 
 
     currentSpoke:
@@ -67,14 +59,7 @@ const AssessmentCommonState = {
         null,
 
 
-    responses:
-
-        {},
-
-
-    initialized:
-
-        false
+    answers:{}
 
 
 };
@@ -84,42 +69,15 @@ const AssessmentCommonState = {
 
 
 /* ==========================================================================
-   DATA ACCESS
+   LOAD PILLAR DATA
    ========================================================================== */
 
 
-/**
- * Load pillar from repository
- *
- */
-
-
-function loadAssessmentPillar(
-
-    spokeNumber
-
-){
-
-
-    if(
-
-        !AssessmentRepository
-
-        ||
-
-        !AssessmentRepository.pillars
-
-    ){
-
-
-        return null;
-
-
-    }
-
+function getAssessmentPillar(spokeNumber){
 
 
     return AssessmentRepository.pillars.find(
+
 
         function(pillar){
 
@@ -135,6 +93,7 @@ function loadAssessmentPillar(
 
         }
 
+
     );
 
 
@@ -144,22 +103,17 @@ function loadAssessmentPillar(
 
 
 
-/**
- * Initialize assessment page data
- *
- */
+/* ==========================================================================
+   INITIALIZE ASSESSMENT
+   ========================================================================== */
 
 
-function initializeAssessmentCommon(
-
-    spokeNumber
-
-){
+function initializeAssessment(spokeNumber){
 
 
     const pillar =
 
-        loadAssessmentPillar(
+        getAssessmentPillar(
 
             spokeNumber
 
@@ -170,6 +124,15 @@ function initializeAssessmentCommon(
     if(!pillar){
 
 
+        console.error(
+
+            "Assessment pillar missing:",
+
+            spokeNumber
+
+        );
+
+
         return false;
 
 
@@ -177,25 +140,27 @@ function initializeAssessmentCommon(
 
 
 
-    AssessmentCommonState.currentSpoke =
+    AssessmentState.currentSpoke =
 
-        Number(spokeNumber);
+        spokeNumber;
 
 
 
-    AssessmentCommonState.currentPillar =
+    AssessmentState.currentPillar =
 
         pillar;
 
 
 
-    AssessmentCommonState.initialized =
+    renderAssessment(
 
-        true;
+        pillar
+
+    );
 
 
 
-    return pillar;
+    return true;
 
 
 }
@@ -205,22 +170,40 @@ function initializeAssessmentCommon(
 
 
 /* ==========================================================================
-   DOM HELPERS
+   MAIN RENDER FUNCTION
    ========================================================================== */
 
 
-/**
- * Safe element lookup
- *
- */
+function renderAssessment(pillar){
 
 
-function getElement(id){
+    renderPillarHeader(
+
+        pillar
+
+    );
 
 
-    return document.getElementById(
 
-        id
+    renderQuestions(
+
+        pillar.questions
+
+    );
+
+
+
+    renderReflection(
+
+        pillar
+
+    );
+
+
+
+    renderWisdom(
+
+        pillar
 
     );
 
@@ -231,94 +214,12 @@ function getElement(id){
 
 
 
-/**
- * Set text content safely
- *
- */
-
-
-function setText(
-
-    id,
-
-    value
-
-){
-
-
-    const element =
-
-        getElement(id);
-
-
-
-    if(element){
-
-
-        element.textContent =
-
-            value || "";
-
-
-    }
-
-
-}
-
-
-
-
-
-/* ==========================================================
-   Continue in Batch 1B
-   ========================================================== */
-
 /* ==========================================================================
-   PILLAR RENDERING
+   PILLAR HEADER
    ========================================================================== */
 
 
-/**
- * Render pillar header
- *
- */
-
-
-function renderPillarHeader(
-
-    pillar
-
-){
-
-
-    if(!pillar){
-
-        return;
-
-    }
-
-
-
-    setText(
-
-        "pillarNumber",
-
-        "SPOKE " +
-
-        String(
-
-            pillar.spoke
-
-        ).padStart(
-
-            2,
-
-            "0"
-
-        )
-
-    );
-
+function renderPillarHeader(pillar){
 
 
     setText(
@@ -330,7 +231,6 @@ function renderPillarHeader(
     );
 
 
-
     setText(
 
         "pillarTitleEn",
@@ -340,33 +240,6 @@ function renderPillarHeader(
     );
 
 
-}
-
-
-
-
-
-/**
- * Render introduction
- *
- */
-
-
-function renderIntroduction(
-
-    pillar
-
-){
-
-
-    if(!pillar){
-
-        return;
-
-    }
-
-
-
     setText(
 
         "introductionTa",
@@ -374,7 +247,6 @@ function renderIntroduction(
         pillar.introductionTa
 
     );
-
 
 
     setText(
@@ -392,55 +264,42 @@ function renderIntroduction(
 
 
 
+/* Continue in Batch 1B */
+
 /* ==========================================================================
    QUESTION RENDERING
    ========================================================================== */
 
 
 /**
- * Render questions
+ * Render all questions
  *
  */
 
 
-function renderQuestions(
-
-    pillar
-
-){
+function renderQuestions(questions){
 
 
     if(
 
-        !pillar
+        !questions
 
         ||
 
-        !Array.isArray(
-
-            pillar.questions
-
-        )
+        !Array.isArray(questions)
 
     ){
 
-
         return;
-
 
     }
 
 
 
-    pillar.questions.forEach(
+    questions.forEach(
 
-        function(
 
-            question,
-
-            index
-
-        ){
+        function(question,index){
 
 
 
@@ -450,35 +309,9 @@ function renderQuestions(
 
 
 
-            setText(
+            renderQuestion(
 
-                "questionText" + number,
-
-                question.text
-
-            );
-
-
-
-            setText(
-
-                "questionNumber" + number,
-
-                "Question " +
-
-                String(
-
-                    number
-
-                )
-
-            );
-
-
-
-            renderRatingButtons(
-
-                "ratingGroup" + String(number).padStart(2,"0"),
+                question,
 
                 number
 
@@ -487,6 +320,57 @@ function renderQuestions(
 
 
         }
+
+
+    );
+
+
+}
+
+
+
+
+
+/**
+ * Render individual question
+ *
+ */
+
+
+function renderQuestion(
+
+    question,
+
+    number
+
+){
+
+
+    setText(
+
+        "questionTextTa" + number,
+
+        question.textTa
+
+    );
+
+
+
+    setText(
+
+        "questionTextEn" + number,
+
+        question.textEn
+
+    );
+
+
+
+    createRatingButtons(
+
+        "ratingGroup" + number,
+
+        number
 
     );
 
@@ -498,17 +382,17 @@ function renderQuestions(
 
 
 /* ==========================================================================
-   RATING BUTTON RENDERING
+   RATING BUTTON GENERATOR
    ========================================================================== */
 
 
 /**
- * Create rating buttons
+ * Create 1-10 rating buttons
  *
  */
 
 
-function renderRatingButtons(
+function createRatingButtons(
 
     containerId,
 
@@ -519,7 +403,7 @@ function renderRatingButtons(
 
     const container =
 
-        getElement(
+        document.getElementById(
 
             containerId
 
@@ -541,19 +425,14 @@ function renderRatingButtons(
 
     for(
 
-        let rating =
+        let score = 1;
 
-            CTM_CONSTANTS.ASSESSMENT.MIN_RATING;
+        score <= 10;
 
-
-        rating <=
-
-            CTM_CONSTANTS.ASSESSMENT.MAX_RATING;
-
-
-        rating++
+        score++
 
     ){
+
 
 
         const button =
@@ -578,21 +457,15 @@ function renderRatingButtons(
 
 
 
-        button.dataset.rating =
+        button.dataset.score =
 
-            rating;
-
-
-
-        button.dataset.question =
-
-            questionNumber;
+            score;
 
 
 
-        button.textContent =
+        button.innerText =
 
-            rating;
+            score;
 
 
 
@@ -607,9 +480,9 @@ function renderRatingButtons(
 
                     questionNumber,
 
-                    rating,
+                    score,
 
-                    button
+                    container
 
                 );
 
@@ -636,17 +509,13 @@ function renderRatingButtons(
 
 
 
-/* ==========================================================
-   Continue in Batch 1C
-   ========================================================== */
-
 /* ==========================================================================
    RATING SELECTION
    ========================================================================== */
 
 
 /**
- * Select rating
+ * Handle rating selection
  *
  */
 
@@ -655,38 +524,18 @@ function selectRating(
 
     questionNumber,
 
-    rating,
+    score,
 
-    button
+    container
 
 ){
 
 
-    const groupSelector =
-
-        "#ratingGroup" +
-
-        String(
-
-            questionNumber
-
-        ).padStart(
-
-            2,
-
-            "0"
-
-        );
-
-
-
     const buttons =
 
-        document.querySelectorAll(
+        container.querySelectorAll(
 
-            groupSelector +
-
-            " .rating-button"
+            ".rating-button"
 
         );
 
@@ -694,10 +543,11 @@ function selectRating(
 
     buttons.forEach(
 
-        function(item){
+
+        function(button){
 
 
-            item.classList.remove(
+            button.classList.remove(
 
                 "active"
 
@@ -706,148 +556,45 @@ function selectRating(
 
         }
 
-    );
-
-
-
-    button.classList.add(
-
-        "active"
 
     );
 
 
 
-    AssessmentCommonState.responses[
+    const selected =
 
-        questionNumber
+        container.querySelector(
 
-    ] = rating;
+            "[data-score='" +
 
+            score +
 
+            "']"
 
-}
-
-
-
-
-
-/**
- * Get current responses
- *
- */
-
-
-function getAssessmentResponses(){
-
-
-    return AssessmentCommonState.responses;
-
-
-}
+        );
 
 
 
+    if(selected){
 
 
-/**
- * Restore previous responses
- *
- */
+        selected.classList.add(
 
+            "active"
 
-function restoreAssessmentResponses(
+        );
 
-    savedResponses
-
-){
-
-
-    if(
-
-        !savedResponses
-
-    ){
-
-        return;
 
     }
 
 
 
-    AssessmentCommonState.responses =
+    AssessmentState.answers[
 
-        savedResponses;
+        questionNumber
 
+    ] = score;
 
-
-    Object.keys(
-
-        savedResponses
-
-    ).forEach(
-
-        function(questionNumber){
-
-
-            const rating =
-
-                savedResponses[questionNumber];
-
-
-
-            const selector =
-
-                "#ratingGroup" +
-
-                String(
-
-                    questionNumber
-
-                ).padStart(
-
-                    2,
-
-                    "0"
-
-                )
-
-                +
-
-                " .rating-button[data-rating='" +
-
-                rating +
-
-                "']";
-
-
-
-            const button =
-
-                document.querySelector(
-
-                    selector
-
-                );
-
-
-
-            if(button){
-
-
-                button.classList.add(
-
-                    "active"
-
-                );
-
-
-            }
-
-
-        }
-
-    );
 
 
 }
@@ -856,30 +603,20 @@ function restoreAssessmentResponses(
 
 
 
+/* Continue in Batch 1C */
+
 /* ==========================================================================
-   REFLECTION AND WISDOM
+   REFLECTION RENDERING
    ========================================================================== */
 
 
 /**
- * Render reflection
+ * Render Reflection™ section
  *
  */
 
 
-function renderReflection(
-
-    pillar
-
-){
-
-
-    if(!pillar){
-
-        return;
-
-    }
-
+function renderReflection(pillar){
 
 
     setText(
@@ -907,25 +644,18 @@ function renderReflection(
 
 
 
+/* ==========================================================================
+   WISDOM RENDERING
+   ========================================================================== */
+
+
 /**
- * Render wisdom
+ * Render Wisdom™ section
  *
  */
 
 
-function renderWisdom(
-
-    pillar
-
-){
-
-
-    if(!pillar){
-
-        return;
-
-    }
-
+function renderWisdom(pillar){
 
 
     setText(
@@ -954,26 +684,22 @@ function renderWisdom(
 
 
 /* ==========================================================================
-   PROGRESS DISPLAY
+   PROGRESS
    ========================================================================== */
 
 
 /**
- * Update progress bar
+ * Update progress indicator
  *
  */
 
 
-function updateAssessmentProgress(
-
-    spoke
-
-){
+function updateProgress(spoke){
 
 
     const total =
 
-        CTM_CONSTANTS.ASSESSMENT.TOTAL_SPOKES;
+        12;
 
 
 
@@ -1005,9 +731,13 @@ function updateAssessmentProgress(
 
         "Spoke " +
 
-        spoke +
+        String(spoke).padStart(2,"0")
 
-        " of " +
+        +
+
+        " of "
+
+        +
 
         total
 
@@ -1027,9 +757,9 @@ function updateAssessmentProgress(
 
 
 
-    const progressBar =
+    const bar =
 
-        getElement(
+        document.getElementById(
 
             "progressBar"
 
@@ -1037,10 +767,10 @@ function updateAssessmentProgress(
 
 
 
-    if(progressBar){
+    if(bar){
 
 
-        progressBar.style.width =
+        bar.style.width =
 
             percentage +
 
@@ -1056,22 +786,131 @@ function updateAssessmentProgress(
 
 
 
-/* ==========================================================
-   Continue in Batch 1D
-   ========================================================== */
-
 /* ==========================================================================
-   ASSESSMENT SAVE PREPARATION
+   RESTORE ANSWERS
    ========================================================================== */
 
 
 /**
- * Prepare assessment payload
+ * Restore previously selected ratings
  *
  */
 
 
-function prepareAssessmentPayload(){
+function restoreAnswers(savedAnswers){
+
+
+    if(
+
+        !savedAnswers
+
+    ){
+
+        return;
+
+    }
+
+
+
+    Object.keys(
+
+        savedAnswers
+
+    ).forEach(
+
+
+        function(questionNumber){
+
+
+
+            const score =
+
+                savedAnswers[questionNumber];
+
+
+
+            const container =
+
+                document.getElementById(
+
+                    "ratingGroup"
+
+                    +
+
+                    questionNumber
+
+                );
+
+
+
+            if(!container){
+
+                return;
+
+            }
+
+
+
+            const button =
+
+                container.querySelector(
+
+                    "[data-score='" +
+
+                    score +
+
+                    "']"
+
+                );
+
+
+
+            if(button){
+
+
+                button.classList.add(
+
+                    "active"
+
+                );
+
+
+            }
+
+
+
+            AssessmentState.answers[
+
+                questionNumber
+
+            ] = score;
+
+
+
+        }
+
+
+    );
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   PAYLOAD
+   ========================================================================== */
+
+
+/**
+ * Prepare assessment save object
+ *
+ */
+
+
+function getAssessmentPayload(){
 
 
     return {
@@ -1079,17 +918,19 @@ function prepareAssessmentPayload(){
 
         spoke:
 
-            AssessmentCommonState.currentSpoke,
+            AssessmentState.currentSpoke,
 
 
         responses:
 
-            AssessmentCommonState.responses,
+            AssessmentState.answers,
 
 
         timestamp:
 
-            new Date().toISOString()
+            new Date()
+
+                .toISOString()
 
 
     };
@@ -1101,208 +942,39 @@ function prepareAssessmentPayload(){
 
 
 
-/**
- * Check if all questions answered
- *
- */
-
-
-function isSpokeComplete(){
-
-
-    const requiredQuestions =
-
-        CTM_CONSTANTS.ASSESSMENT.QUESTIONS_PER_SPOKE;
-
-
-
-    const responses =
-
-        AssessmentCommonState.responses;
-
-
-
-    return (
-
-        Object.keys(
-
-            responses
-
-        ).length === requiredQuestions
-
-    );
-
-
-}
-
-
-
-
-
-/**
- * Reset current responses
- *
- */
-
-
-function resetAssessmentResponses(){
-
-
-    AssessmentCommonState.responses = {};
-
-}
-
-
-
-
-
 /* ==========================================================================
-   COMPLETE PAGE RENDER
+   DOM HELPER
    ========================================================================== */
 
 
-/**
- * Render complete assessment page
- *
- */
+function setText(
 
+    id,
 
-function renderAssessmentPage(
-
-    spokeNumber
+    value
 
 ){
 
 
-    const pillar =
+    const element =
 
-        initializeAssessmentCommon(
+        document.getElementById(
 
-            spokeNumber
-
-        );
-
-
-
-    if(!pillar){
-
-
-        console.error(
-
-            "Assessment pillar not found"
+            id
 
         );
 
 
-        return false;
+
+    if(element){
+
+
+        element.textContent =
+
+            value || "";
 
 
     }
-
-
-
-    renderPillarHeader(
-
-        pillar
-
-    );
-
-
-
-    renderIntroduction(
-
-        pillar
-
-    );
-
-
-
-    renderQuestions(
-
-        pillar
-
-    );
-
-
-
-    renderReflection(
-
-        pillar
-
-    );
-
-
-
-    renderWisdom(
-
-        pillar
-
-    );
-
-
-
-    updateAssessmentProgress(
-
-        spokeNumber
-
-    );
-
-
-
-    return true;
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   INITIALIZATION HELPER
-   ========================================================================== */
-
-
-/**
- * Initialize common assessment behaviour
- *
- */
-
-
-function setupAssessmentPage(
-
-    spokeNumber
-
-){
-
-
-    const loaded =
-
-        renderAssessmentPage(
-
-            spokeNumber
-
-        );
-
-
-
-    if(!loaded){
-
-
-        return false;
-
-
-    }
-
-
-
-    AssessmentCommonState.initialized =
-
-        true;
-
-
-
-    return true;
 
 
 }
@@ -1316,47 +988,41 @@ function setupAssessmentPage(
    ========================================================================== */
 
 
-const CTMAssessmentCommon = {
+const CTMAssessmentEngine = {
 
 
     init:
 
-        setupAssessmentPage,
+        initializeAssessment,
 
 
     render:
 
-        renderAssessmentPage,
-
-
-    pillar:
-
-        loadAssessmentPillar,
+        renderAssessment,
 
 
     responses:
 
-        getAssessmentResponses,
+        function(){
+
+            return AssessmentState.answers;
+
+        },
+
+
+    payload:
+
+        getAssessmentPayload,
 
 
     restore:
 
-        restoreAssessmentResponses,
+        restoreAnswers,
 
 
-    savePayload:
+    progress:
 
-        prepareAssessmentPayload,
-
-
-    complete:
-
-        isSpokeComplete,
-
-
-    reset:
-
-        resetAssessmentResponses
+        updateProgress
 
 
 };
@@ -1367,7 +1033,7 @@ const CTMAssessmentCommon = {
 
 Object.freeze(
 
-    CTMAssessmentCommon
+    CTMAssessmentEngine
 
 );
 
@@ -1380,6 +1046,8 @@ Object.freeze(
 
    File    : assessmentCommon.js
 
-   Status  : 🔒 FOUNDATION
+   Version : 3.0
+
+   Status  : 🔒 ASSESSMENT ENGINE
 
    ========================================================================== */
