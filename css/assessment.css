@@ -5,15 +5,97 @@
    FROM SURVIVAL TO LIVING™
 
    File        : assessment.css
-   Version     : 5.0
+   Version     : 5.1
 
-   Status      : 🔒 PREMIUM ASSESSMENT EXPERIENCE
+   Status      : 🔒 PREMIUM EXPERIENCE REFINEMENT
+
+   Update:
+
+       Premium Colour Hierarchy
+       Assessment Experience Upgrade
 
    ========================================================================== */
 
 
+
+
+
+/* ==========================================================================
+   PREMIUM COLOUR SYSTEM
+
+   ========================================================================== */
+
+
+:root{
+
+
+    --ctm-navy:
+
+        #081C3A;
+
+
+    --ctm-deep:
+
+        #061426;
+
+
+    --ctm-teal:
+
+        #16C7C2;
+
+
+    --ctm-teal-soft:
+
+        rgba(22,199,194,.15);
+
+
+    --ctm-gold:
+
+        #C8A45D;
+
+
+    --ctm-ivory:
+
+        #F8F5EF;
+
+
+    --ctm-soft-white:
+
+        rgba(248,245,239,.82);
+
+
+    --ctm-muted:
+
+        rgba(248,245,239,.60);
+
+
+    --ctm-red:
+
+        #E05252;
+
+
+    --ctm-orange:
+
+        #F59E0B;
+
+
+    --ctm-green:
+
+        #22C55E;
+
+
+}
+
+
+
+
+
+
+
+
 /* ==========================================================================
    ASSESSMENT ROOT
+
    ========================================================================== */
 
 
@@ -25,23 +107,38 @@
 
     background:
 
+
         radial-gradient(
 
             circle at top,
 
-            rgba(22,199,194,.15),
+            rgba(22,199,194,.16),
 
             transparent 35%
 
         ),
 
-        #081C3A;
+
+        linear-gradient(
+
+            180deg,
+
+            #081C3A,
+
+            #061426
+
+        );
 
 
-    color:#FFFFFF;
+    color:
+
+        var(--ctm-ivory);
 
 
 }
+
+
+
 
 
 
@@ -56,10 +153,12 @@
     max-width:1200px;
 
 
-    margin:0 auto;
+    margin:auto;
 
 
-    padding:40px 24px;
+    padding:
+
+        40px 24px;
 
 
 }
@@ -70,8 +169,10 @@
 
 
 
+
 /* ==========================================================================
-   PREMIUM ASSESSMENT CARD
+   PREMIUM CARD FOUNDATION
+
    ========================================================================== */
 
 
@@ -80,12 +181,13 @@
 
     background:
 
-        rgba(255,255,255,.06);
+
+        rgba(255,255,255,.045);
 
 
     backdrop-filter:
 
-        blur(20px);
+        blur(22px);
 
 
     border:
@@ -98,17 +200,14 @@
         32px;
 
 
-    padding:
-
-        50px;
-
-
     box-shadow:
 
-        0 30px 80px rgba(0,0,0,.35);
+
+        0 40px 100px rgba(0,0,0,.45);
 
 
 }
+
 
 
 
@@ -118,6 +217,7 @@
 
 /* ==========================================================================
    HEADER
+
    ========================================================================== */
 
 
@@ -127,10 +227,14 @@
     text-align:center;
 
 
-    margin-bottom:40px;
+    padding-bottom:
+
+        30px;
 
 
 }
+
+
 
 
 
@@ -160,7 +264,14 @@
         .08em;
 
 
+    color:
+
+        var(--ctm-ivory);
+
+
 }
+
+
 
 
 
@@ -169,58 +280,19 @@
 .journey-title{
 
 
-    margin-top:10px;
+    margin-top:
+
+        10px;
 
 
     color:
 
-        #C8A45D;
+        var(--ctm-gold);
 
 
     font-size:
 
-        14px;
-
-
-    letter-spacing:
-
-        .2em;
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   LIFE MAP™
-   ========================================================================== */
-
-
-.life-map{
-
-
-    text-align:center;
-
-
-    margin-bottom:50px;
-
-
-}
-
-
-
-
-
-.life-map-title{
-
-
-    font-size:
-
-        18px;
+        13px;
 
 
     font-weight:
@@ -230,34 +302,7 @@
 
     letter-spacing:
 
-        .12em;
-
-
-    color:
-
-        #16C7C2;
-
-
-}
-
-
-
-
-
-.life-map-progress{
-
-
-    margin-top:12px;
-
-
-    font-size:
-
-        16px;
-
-
-    color:
-
-        #FFFFFF;
+        .25em;
 
 
 }
@@ -269,7 +314,88 @@
 
 
 /* ==========================================================================
-   KALA CHAKRA™ WHEEL
+   YOUR LIFE MAP™
+
+   Enhanced Visibility
+
+   ========================================================================== */
+
+
+.life-map-title{
+
+
+    font-family:
+
+        "Poppins",
+        sans-serif;
+
+
+    font-size:
+
+        22px;
+
+
+    font-weight:
+
+        700;
+
+
+    letter-spacing:
+
+        .16em;
+
+
+    color:
+
+        var(--ctm-teal);
+
+
+    text-shadow:
+
+
+        0 0 18px rgba(22,199,194,.65);
+
+
+}
+
+
+
+
+
+
+
+.life-map-progress{
+
+
+    margin-top:
+
+        12px;
+
+
+    color:
+
+        var(--ctm-gold);
+
+
+    font-size:
+
+        15px;
+
+
+    font-weight:
+
+        600;
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   KALA CHAKRA™ SPOKES
+
    ========================================================================== */
 
 
@@ -279,11 +405,6 @@
     margin:
 
         40px auto;
-
-
-    max-width:
-
-        650px;
 
 
     display:flex;
@@ -306,6 +427,8 @@
 
 
 
+
+
 .wheel-spoke{
 
 
@@ -321,17 +444,23 @@
 
     background:
 
-        rgba(255,255,255,.08);
+
+        rgba(255,255,255,.05);
 
 
     border:
 
-        1px solid rgba(255,255,255,.15);
+        1px solid rgba(255,255,255,.12);
+
+
+    color:
+
+        var(--ctm-soft-white);
 
 
     font-size:
 
-        14px;
+        13px;
 
 
     transition:
@@ -350,166 +479,23 @@
 
     background:
 
-        #16C7C2;
+        var(--ctm-teal);
 
 
     color:
 
-        #081C3A;
+        var(--ctm-navy);
 
 
     border-color:
 
-        #16C7C2;
+        var(--ctm-teal);
 
 
-    transform:
+    box-shadow:
 
-        scale(1.05);
 
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   PILLAR INTRODUCTION
-   ========================================================================== */
-
-
-.pillar-section{
-
-
-    text-align:center;
-
-
-    margin-bottom:45px;
-
-
-}
-
-
-
-
-
-.spoke-number{
-
-
-    color:
-
-        #C8A45D;
-
-
-    font-size:
-
-        14px;
-
-
-    letter-spacing:
-
-        .15em;
-
-
-}
-
-
-
-
-
-.pillar-title-ta{
-
-
-    font-family:
-
-        "Noto Sans Tamil",
-        sans-serif;
-
-
-    font-size:
-
-        42px;
-
-
-    margin:
-
-        15px 0 5px;
-
-
-}
-
-
-
-
-
-.pillar-title-en{
-
-
-    font-size:
-
-        32px;
-
-
-    font-weight:
-
-        600;
-
-
-}
-
-
-
-
-
-.core-question-ta{
-
-
-    margin-top:
-
-        30px;
-
-
-    font-family:
-
-        "Noto Sans Tamil",
-        sans-serif;
-
-
-    font-size:
-
-        28px;
-
-
-    line-height:
-
-        1.8;
-
-
-}
-
-
-
-
-
-.core-question-en{
-
-
-    margin-top:
-
-        10px;
-
-
-    font-size:
-
-        20px;
-
-
-    color:
-
-        rgba(255,255,255,.75);
+        0 0 25px rgba(22,199,194,.45);
 
 
 }
@@ -523,70 +509,20 @@
 /* Continue in Batch 1B */
 
 /* ==========================================================================
-   LIFE EVOLUTION JOURNEY™
-
-   Learner → Leader → Legend™
+   PILLAR IDENTITY
 
    ========================================================================== */
 
 
-.life-evolution-level{
-
-
-    margin:
-
-        45px auto;
-
-
-    padding:
-
-        35px;
-
-
-    max-width:
-
-        850px;
-
-
-    background:
-
-        rgba(255,255,255,.05);
-
-
-    border:
-
-        1px solid rgba(255,255,255,.12);
-
-
-    border-radius:
-
-        28px;
+.pillar-section{
 
 
     text-align:center;
 
 
-}
+    margin-bottom:
 
-
-
-
-
-.life-level-header{
-
-
-    display:flex;
-
-
-    justify-content:space-between;
-
-
-    align-items:center;
-
-
-    gap:
-
-        20px;
+        45px;
 
 
 }
@@ -595,30 +531,19 @@
 
 
 
-.level-item{
 
 
-    flex:1;
+.spoke-number{
 
 
-    padding:
+    color:
 
-        18px 10px;
-
-
-    border-radius:
-
-        20px;
+        var(--ctm-gold);
 
 
-    background:
+    font-size:
 
-        rgba(255,255,255,.06);
-
-
-    border:
-
-        1px solid rgba(255,255,255,.15);
+        13px;
 
 
     font-weight:
@@ -626,188 +551,9 @@
         600;
 
 
-    transition:
-
-        all .3s ease;
-
-
-}
-
-
-
-
-
-.level-item.active{
-
-
-    transform:
-
-        translateY(-8px);
-
-
-    background:
-
-        rgba(200,164,93,.18);
-
-
-    border:
-
-        2px solid #C8A45D;
-
-
-    box-shadow:
-
-        0 15px 35px rgba(200,164,93,.25);
-
-
-}
-
-
-
-
-
-.level-scale{
-
-
-    display:flex;
-
-
-    justify-content:space-between;
-
-
-    margin-top:
-
-        20px;
-
-
-    color:
-
-        rgba(255,255,255,.6);
-
-
-    font-size:
-
-        13px;
-
-
-}
-
-
-
-
-
-.current-level-message{
-
-
-    margin-top:
-
-        25px;
-
-
-    color:
-
-        #16C7C2;
-
-
-    font-size:
-
-        18px;
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   INNER JOURNEY™
-
-   Awareness → Alignment → Embodiment
-
-   ========================================================================== */
-
-
-.inner-journey{
-
-
-    display:flex;
-
-
-    justify-content:center;
-
-
-    align-items:center;
-
-
-    gap:
-
-        18px;
-
-
-    margin:
-
-        45px auto;
-
-
-}
-
-
-
-
-
-.journey-step{
-
-
-    padding:
-
-        20px;
-
-
-    min-width:
-
-        180px;
-
-
-    border-radius:
-
-        24px;
-
-
-    background:
-
-        rgba(255,255,255,.05);
-
-
-    border:
-
-        1px solid rgba(255,255,255,.12);
-
-
-}
-
-
-
-
-
-.journey-step-number{
-
-
-    color:
-
-        #C8A45D;
-
-
-    font-size:
-
-        13px;
-
-
     letter-spacing:
 
-        .15em;
+        .18em;
 
 
 }
@@ -816,22 +562,30 @@
 
 
 
-.journey-step-title{
+
+
+.pillar-title-ta{
 
 
     margin-top:
 
-        10px;
+        18px;
 
 
-    color:
+    font-family:
 
-        #16C7C2;
+        "Noto Sans Tamil",
+        sans-serif;
 
 
     font-size:
 
-        18px;
+        42px;
+
+
+    line-height:
+
+        1.5;
 
 
     font-weight:
@@ -839,31 +593,201 @@
         700;
 
 
+    color:
+
+        var(--ctm-gold);
+
+
 }
 
 
 
 
 
-.journey-step-subtitle{
+
+
+.pillar-title-en{
 
 
     margin-top:
 
-        8px;
+        5px;
+
+
+    font-family:
+
+        "Poppins",
+        sans-serif;
 
 
     font-size:
 
-        14px;
+        32px;
+
+
+    font-weight:
+
+        600;
 
 
     color:
 
-        rgba(255,255,255,.7);
+        var(--ctm-ivory);
 
 
 }
+
+
+
+
+
+
+
+.core-question-ta{
+
+
+    margin-top:
+
+        28px;
+
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+
+    font-size:
+
+        25px;
+
+
+    line-height:
+
+        1.8;
+
+
+    color:
+
+        var(--ctm-ivory);
+
+
+}
+
+
+
+
+
+
+
+.core-question-en{
+
+
+    margin-top:
+
+        12px;
+
+
+    font-size:
+
+        18px;
+
+
+    color:
+
+        var(--ctm-muted);
+
+
+}
+
+
+
+
+
+
+
+.pillar-introduction{
+
+
+    margin-top:
+
+        25px;
+
+
+    padding:
+
+        25px;
+
+
+    border-radius:
+
+        22px;
+
+
+    background:
+
+
+        rgba(200,164,93,.08);
+
+
+    border:
+
+        1px solid rgba(200,164,93,.18);
+
+
+}
+
+
+
+
+
+.pillar-introduction p{
+
+
+    margin:
+
+        8px 0;
+
+
+}
+
+
+
+
+
+.pillar-introduction p:first-child{
+
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+
+    color:
+
+        var(--ctm-soft-white);
+
+
+}
+
+
+
+
+
+
+
+.pillar-introduction p:last-child{
+
+
+    color:
+
+        var(--ctm-muted);
+
+
+}
+
+
 
 
 
@@ -872,8 +796,25 @@
 
 
 /* ==========================================================================
-   QUESTION CARDS
+   QUESTION EXPERIENCE
+
    ========================================================================== */
+
+
+.questions-section{
+
+
+    margin-top:
+
+        40px;
+
+
+}
+
+
+
+
+
 
 
 .question-card{
@@ -896,15 +837,60 @@
 
     background:
 
-        rgba(255,255,255,.06);
+
+        rgba(255,255,255,.045);
 
 
     border:
 
-        1px solid rgba(255,255,255,.12);
+        1px solid rgba(255,255,255,.10);
+
+
+    transition:
+
+        all .35s ease;
 
 
 }
+
+
+
+
+
+
+
+.question-card:hover{
+
+
+    border-color:
+
+        rgba(22,199,194,.35);
+
+
+    transform:
+
+        translateY(-3px);
+
+
+}
+
+
+
+
+
+
+
+.question-card.answered{
+
+
+    border-color:
+
+        rgba(22,199,194,.45);
+
+
+}
+
+
 
 
 
@@ -928,25 +914,33 @@
 
     background:
 
+
         rgba(22,199,194,.12);
 
 
     color:
 
-        #16C7C2;
+        var(--ctm-teal);
 
 
     font-size:
 
-        14px;
+        13px;
+
+
+    font-weight:
+
+        700;
 
 
     letter-spacing:
 
-        .08em;
+        .12em;
 
 
 }
+
+
 
 
 
@@ -957,15 +951,12 @@
 
     color:
 
-        #C8A45D;
-
-
-    font-weight:
-
-        700;
+        var(--ctm-gold);
 
 
 }
+
+
 
 
 
@@ -976,7 +967,7 @@
 
     margin-top:
 
-        22px;
+        25px;
 
 
     font-family:
@@ -987,7 +978,7 @@
 
     font-size:
 
-        26px;
+        25px;
 
 
     line-height:
@@ -995,7 +986,14 @@
         1.9;
 
 
+    color:
+
+        var(--ctm-ivory);
+
+
 }
+
+
 
 
 
@@ -1006,22 +1004,22 @@
 
     margin-top:
 
-        12px;
+        14px;
 
 
     font-size:
 
-        18px;
+        17px;
 
 
     line-height:
 
-        1.7;
+        1.8;
 
 
     color:
 
-        rgba(255,255,255,.75);
+        var(--ctm-muted);
 
 
 }
@@ -1032,8 +1030,41 @@
 
 
 
+.rating-question-label{
+
+
+    margin-top:
+
+        25px;
+
+
+    text-align:center;
+
+
+    font-size:
+
+        14px;
+
+
+    color:
+
+        var(--ctm-muted);
+
+
+}
+
+
+
+
+
+
+
+
+
 /* ==========================================================================
    RATING SCALE
+
+   Base
 
    ========================================================================== */
 
@@ -1057,10 +1088,12 @@
 
     margin-top:
 
-        35px;
+        28px;
 
 
 }
+
+
 
 
 
@@ -1071,12 +1104,12 @@
 
     width:
 
-        52px;
+        48px;
 
 
     height:
 
-        52px;
+        48px;
 
 
     border-radius:
@@ -1084,24 +1117,25 @@
         50%;
 
 
-    border:
-
-        1px solid rgba(255,255,255,.25);
-
-
     background:
 
-        rgba(255,255,255,.08);
+
+        rgba(255,255,255,.06);
+
+
+    border:
+
+        1px solid rgba(255,255,255,.18);
 
 
     color:
 
-        white;
+        var(--ctm-soft-white);
 
 
-    font-size:
+    font-weight:
 
-        17px;
+        600;
 
 
     cursor:pointer;
@@ -1121,89 +1155,150 @@
 .rating-button:hover{
 
 
-    border-color:
-
-        #16C7C2;
-
-
     transform:
 
         translateY(-4px);
 
 
-}
-
-
-
-
-
-.rating-button.active{
-
-
-    background:
-
-        #16C7C2;
-
-
-    color:
-
-        #081C3A;
-
-
     border-color:
 
-        #16C7C2;
-
-
-    transform:
-
-        scale(1.12);
-
-
-    font-weight:
-
-        700;
+        var(--ctm-teal);
 
 
 }
-
-
 
 
 
 
 
 /* ==========================================================================
-   RATING GUIDANCE
+   RATING INTELLIGENCE
+
+   1-3  Red
+   4-6  Orange
+   7-8  Gold
+   9-10 Green
 
    ========================================================================== */
 
 
-.rating-guide{
+.rating-button.rating-low.active{
 
 
-    display:flex;
+    background:
+
+        var(--ctm-red);
 
 
-    justify-content:space-between;
+    color:white;
 
 
-    margin-top:
+    border-color:
 
-        18px;
+        var(--ctm-red);
 
 
-    font-size:
+    box-shadow:
 
-        13px;
+
+        0 0 20px rgba(224,82,82,.45);
+
+
+}
+
+
+
+
+
+
+
+.rating-button.rating-growth.active{
+
+
+    background:
+
+        var(--ctm-orange);
+
+
+    color:white;
+
+
+    border-color:
+
+        var(--ctm-orange);
+
+
+    box-shadow:
+
+
+        0 0 20px rgba(245,158,11,.45);
+
+
+}
+
+
+
+
+
+
+
+.rating-button.rating-strong.active{
+
+
+    background:
+
+        var(--ctm-gold);
 
 
     color:
 
-        rgba(255,255,255,.55);
+        var(--ctm-navy);
+
+
+    border-color:
+
+        var(--ctm-gold);
+
+
+    box-shadow:
+
+
+        0 0 20px rgba(200,164,93,.45);
 
 
 }
+
+
+
+
+
+
+
+.rating-button.rating-master.active{
+
+
+    background:
+
+        var(--ctm-green);
+
+
+    color:white;
+
+
+    border-color:
+
+        var(--ctm-green);
+
+
+    box-shadow:
+
+
+        0 0 20px rgba(34,197,94,.45);
+
+
+}
+
+
 
 
 
@@ -1222,46 +1317,55 @@
 
     margin:
 
-        45px auto;
+        50px auto 25px;
 
 
     padding:
 
-        40px;
+        45px;
 
 
     max-width:
 
-        700px;
+        720px;
+
+
+    text-align:center;
 
 
     border-radius:
 
-        30px;
+        32px;
 
 
     background:
+
 
         linear-gradient(
 
             145deg,
 
-            rgba(22,199,194,.12),
+            rgba(22,199,194,.14),
 
-            rgba(200,164,93,.08)
+            rgba(255,255,255,.04)
 
         );
 
 
     border:
 
-        1px solid rgba(255,255,255,.15);
+        1px solid rgba(22,199,194,.25);
 
 
-    text-align:center;
+    box-shadow:
+
+
+        0 25px 60px rgba(0,0,0,.35);
 
 
 }
+
+
 
 
 
@@ -1270,9 +1374,19 @@
 .score-title{
 
 
+    color:
+
+        var(--ctm-teal);
+
+
     font-size:
 
         14px;
+
+
+    font-weight:
+
+        700;
 
 
     letter-spacing:
@@ -1280,12 +1394,9 @@
         .18em;
 
 
-    color:
-
-        #C8A45D;
-
-
 }
+
+
 
 
 
@@ -1296,12 +1407,12 @@
 
     margin-top:
 
-        20px;
+        22px;
 
 
     font-size:
 
-        42px;
+        52px;
 
 
     font-weight:
@@ -1311,7 +1422,7 @@
 
     color:
 
-        #16C7C2;
+        var(--ctm-ivory);
 
 
 }
@@ -1325,7 +1436,293 @@
 
     margin-top:
 
-        10px;
+        12px;
+
+
+    font-size:
+
+        22px;
+
+
+    font-weight:
+
+        600;
+
+
+    color:
+
+        var(--ctm-gold);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   LIFE EVOLUTION LEVEL™
+
+   Moved BELOW SCORE CARD
+
+   Learner → Leader → Legend™
+
+   ========================================================================== */
+
+
+.life-evolution-level{
+
+
+    margin:
+
+        30px auto 50px;
+
+
+    max-width:
+
+        800px;
+
+
+    padding:
+
+        35px;
+
+
+    border-radius:
+
+        30px;
+
+
+    background:
+
+
+        rgba(255,255,255,.045);
+
+
+    border:
+
+        1px solid rgba(255,255,255,.12);
+
+
+    text-align:center;
+
+
+}
+
+
+
+
+
+
+
+.life-level-header{
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    gap:
+
+        18px;
+
+
+}
+
+
+
+
+
+.level-item{
+
+
+    flex:1;
+
+
+    padding:
+
+        22px 15px;
+
+
+    border-radius:
+
+        22px;
+
+
+    background:
+
+
+        rgba(255,255,255,.05);
+
+
+    border:
+
+        1px solid rgba(255,255,255,.12);
+
+
+    color:
+
+        var(--ctm-muted);
+
+
+    font-weight:
+
+        700;
+
+
+    transition:
+
+        all .35s ease;
+
+
+}
+
+
+
+
+
+
+
+.level-item.active{
+
+
+    color:
+
+        var(--ctm-ivory);
+
+
+    transform:
+
+        translateY(-8px);
+
+
+}
+
+
+
+
+
+.level-item.learner.active{
+
+
+    background:
+
+        rgba(245,158,11,.15);
+
+
+    border-color:
+
+        var(--ctm-orange);
+
+
+    box-shadow:
+
+        0 15px 35px rgba(245,158,11,.25);
+
+
+}
+
+
+
+
+
+.level-item.leader.active{
+
+
+    background:
+
+        rgba(22,199,194,.18);
+
+
+    border-color:
+
+        var(--ctm-teal);
+
+
+    box-shadow:
+
+        0 15px 35px rgba(22,199,194,.25);
+
+
+}
+
+
+
+
+
+.level-item.legend.active{
+
+
+    background:
+
+        rgba(200,164,93,.18);
+
+
+    border-color:
+
+        var(--ctm-gold);
+
+
+    box-shadow:
+
+        0 15px 35px rgba(200,164,93,.25);
+
+
+}
+
+
+
+
+
+
+
+.level-scale{
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    margin-top:
+
+        20px;
+
+
+    color:
+
+        var(--ctm-muted);
+
+
+    font-size:
+
+        13px;
+
+
+}
+
+
+
+
+
+
+
+.current-level-message{
+
+
+    margin-top:
+
+        25px;
+
+
+    color:
+
+        var(--ctm-teal);
 
 
     font-size:
@@ -1333,12 +1730,25 @@
         18px;
 
 
+}
+
+
+
+
+
+
+
+.current-level-message strong{
+
+
     color:
 
-        rgba(255,255,255,.8);
+        var(--ctm-gold);
 
 
 }
+
+
 
 
 
@@ -1362,22 +1772,23 @@
 
     padding:
 
-        40px;
+        45px;
 
 
     border-radius:
 
-        30px;
+        32px;
 
 
     background:
 
-        rgba(200,164,93,.08);
+
+        rgba(200,164,93,.10);
 
 
     border:
 
-        1px solid rgba(200,164,93,.25);
+        1px solid rgba(200,164,93,.28);
 
 
     text-align:center;
@@ -1389,12 +1800,14 @@
 
 
 
+
+
 .panel-heading{
 
 
     color:
 
-        #C8A45D;
+        var(--ctm-gold);
 
 
     font-size:
@@ -1402,17 +1815,19 @@
         14px;
 
 
-    letter-spacing:
-
-        .18em;
-
-
     font-weight:
 
         700;
 
 
+    letter-spacing:
+
+        .18em;
+
+
 }
+
+
 
 
 
@@ -1434,7 +1849,7 @@
 
     font-size:
 
-        26px;
+        25px;
 
 
     line-height:
@@ -1442,7 +1857,14 @@
         1.9;
 
 
+    color:
+
+        var(--ctm-ivory);
+
+
 }
+
+
 
 
 
@@ -1456,22 +1878,19 @@
         15px;
 
 
+    color:
+
+        var(--ctm-muted);
+
+
     font-size:
 
         18px;
 
 
-    line-height:
-
-        1.8;
-
-
-    color:
-
-        rgba(255,255,255,.75);
-
-
 }
+
+
 
 
 
@@ -1495,17 +1914,18 @@
 
     padding:
 
-        40px;
+        45px;
 
 
     border-radius:
 
-        30px;
+        32px;
 
 
     background:
 
-        rgba(22,199,194,.08);
+
+        rgba(22,199,194,.10);
 
 
     border:
@@ -1517,6 +1937,8 @@
 
 
 }
+
+
 
 
 
@@ -1538,7 +1960,7 @@
 
     font-size:
 
-        26px;
+        25px;
 
 
     line-height:
@@ -1546,7 +1968,14 @@
         1.9;
 
 
+    color:
+
+        var(--ctm-ivory);
+
+
 }
+
+
 
 
 
@@ -1560,19 +1989,14 @@
         15px;
 
 
+    color:
+
+        var(--ctm-muted);
+
+
     font-size:
 
         18px;
-
-
-    line-height:
-
-        1.8;
-
-
-    color:
-
-        rgba(255,255,255,.75);
 
 
 }
@@ -1583,8 +2007,10 @@
 
 
 
+/* Continue in Batch 1D */
+
 /* ==========================================================================
-   NAVIGATION
+   NAVIGATION AREA
 
    ========================================================================== */
 
@@ -1599,6 +2025,11 @@
 
 
     align-items:center;
+
+
+    gap:
+
+        20px;
 
 
     margin-top:
@@ -1622,12 +2053,19 @@
 
 
 
+
+
 .assessment-button{
+
+
+    min-width:
+
+        180px;
 
 
     padding:
 
-        18px 40px;
+        18px 35px;
 
 
     border-radius:
@@ -1635,9 +2073,15 @@
         999px;
 
 
+    font-family:
+
+        "Poppins",
+        sans-serif;
+
+
     font-size:
 
-        17px;
+        16px;
 
 
     font-weight:
@@ -1659,22 +2103,120 @@
 
 
 
+
+
+.assessment-button:disabled{
+
+
+    opacity:
+
+        .45;
+
+
+    cursor:
+
+        not-allowed;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   SECONDARY BUTTON
+
+   ========================================================================== */
+
+
+.button-secondary{
+
+
+    background:
+
+
+        rgba(255,255,255,.05);
+
+
+    border:
+
+        1px solid rgba(255,255,255,.18);
+
+
+    color:
+
+        var(--ctm-soft-white);
+
+
+}
+
+
+
+
+
+.button-secondary:hover{
+
+
+    border-color:
+
+        var(--ctm-gold);
+
+
+    color:
+
+        var(--ctm-gold);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   PRIMARY CTA
+
+   SAVE & CONTINUE
+
+   ========================================================================== */
+
+
 .button-primary{
 
 
     background:
 
-        #16C7C2;
 
+        linear-gradient(
 
-    color:
+            135deg,
 
-        #081C3A;
+            var(--ctm-teal),
+
+            #0FA9A5
+
+        );
 
 
     border:
 
-        1px solid #16C7C2;
+        1px solid var(--ctm-teal);
+
+
+    color:
+
+        var(--ctm-navy);
+
+
+    box-shadow:
+
+
+        0 15px 35px rgba(22,199,194,.25);
 
 
 }
@@ -1693,45 +2235,8 @@
 
     box-shadow:
 
-        0 15px 35px rgba(22,199,194,.25);
 
-
-}
-
-
-
-
-
-.button-secondary{
-
-
-    background:
-
-        rgba(255,255,255,.06);
-
-
-    color:
-
-        white;
-
-
-    border:
-
-        1px solid rgba(255,255,255,.2);
-
-
-}
-
-
-
-
-
-.button-secondary:hover{
-
-
-    border-color:
-
-        #C8A45D;
+        0 20px 45px rgba(22,199,194,.45);
 
 
 }
@@ -1751,7 +2256,9 @@
 .assessment-footer{
 
 
-    text-align:center;
+    margin-top:
+
+        45px;
 
 
     padding:
@@ -1759,14 +2266,22 @@
         35px 0;
 
 
+    text-align:center;
+
+
     color:
 
-        rgba(255,255,255,.55);
+        var(--ctm-muted);
 
 
     font-size:
 
         14px;
+
+
+    line-height:
+
+        1.8;
 
 
 }
@@ -1780,10 +2295,205 @@
 
     color:
 
-        #C8A45D;
+        var(--ctm-gold);
+
+
+    font-weight:
+
+        700;
 
 
 }
+
+
+
+
+
+
+
+/* ==========================================================================
+   INNER JOURNEY RESPONSIVE SUPPORT
+
+   ========================================================================== */
+
+
+.inner-journey{
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    gap:
+
+        15px;
+
+
+    margin:
+
+        45px 0;
+
+
+}
+
+
+
+
+
+.journey-arrow{
+
+
+    color:
+
+        var(--ctm-gold);
+
+
+    font-size:
+
+        28px;
+
+
+}
+
+
+
+
+
+
+
+.journey-step{
+
+
+    flex:
+
+        1;
+
+
+    max-width:
+
+        220px;
+
+
+    padding:
+
+        25px;
+
+
+    text-align:center;
+
+
+    border-radius:
+
+        24px;
+
+
+    background:
+
+
+        rgba(255,255,255,.045);
+
+
+    border:
+
+        1px solid rgba(255,255,255,.12);
+
+
+}
+
+
+
+
+
+
+
+.journey-step-number{
+
+
+    color:
+
+        var(--ctm-gold);
+
+
+    font-size:
+
+        13px;
+
+
+    font-weight:
+
+        700;
+
+
+}
+
+
+
+
+
+
+
+.journey-step-title{
+
+
+    margin-top:
+
+        10px;
+
+
+    color:
+
+        var(--ctm-teal);
+
+
+    font-size:
+
+        18px;
+
+
+    font-weight:
+
+        700;
+
+
+}
+
+
+
+
+
+
+
+.journey-step-subtitle{
+
+
+    margin-top:
+
+        10px;
+
+
+    color:
+
+        var(--ctm-muted);
+
+
+    font-size:
+
+        14px;
+
+
+    line-height:
+
+        1.6;
+
+
+}
+
+
 
 
 
@@ -1801,15 +2511,31 @@
 
 
 
-    .premium-assessment-card{
+    .assessment-container{
 
 
         padding:
 
-            35px 25px;
+            25px 18px;
 
 
     }
+
+
+
+
+
+    .premium-assessment-card{
+
+
+        border-radius:
+
+            24px;
+
+
+    }
+
+
 
 
 
@@ -1828,15 +2554,41 @@
 
 
 
-    .question-text-ta{
 
 
-        font-size:
+    .level-item,
 
-            22px;
+
+    .journey-step{
+
+
+        width:
+
+            100%;
+
+
+        max-width:
+
+            none;
 
 
     }
+
+
+
+
+
+    .journey-arrow{
+
+
+        transform:
+
+            rotate(90deg);
+
+
+    }
+
+
 
 
 
@@ -1851,7 +2603,25 @@
     }
 
 
+
+
+
+    .core-question-ta,
+
+
+    .question-text-ta{
+
+
+        font-size:
+
+            22px;
+
+
+    }
+
+
 }
+
 
 
 
@@ -1868,19 +2638,44 @@
 
         padding:
 
-            20px 12px;
+            15px 10px;
 
 
     }
 
 
 
+
+
     .premium-assessment-card{
 
 
-        border-radius:
+        padding:
 
-            22px;
+            20px 15px;
+
+
+    }
+
+
+
+
+
+    .life-map-title{
+
+
+        font-size:
+
+            18px;
+
+
+    }
+
+
+
+
+
+    .question-card{
 
 
         padding:
@@ -1892,25 +2687,57 @@
 
 
 
+
+
+    .rating-group{
+
+
+        gap:
+
+            8px;
+
+
+    }
+
+
+
+
+
     .rating-button{
 
 
         width:
 
-            44px;
+            42px;
 
 
         height:
 
-            44px;
+            42px;
 
 
         font-size:
 
-            15px;
+            14px;
 
 
     }
+
+
+
+
+
+    .score-value{
+
+
+        font-size:
+
+            42px;
+
+
+    }
+
+
 
 
 
@@ -1929,6 +2756,8 @@
 
 
 
+
+
     .assessment-navigation{
 
 
@@ -1937,12 +2766,9 @@
             column;
 
 
-        gap:
-
-            18px;
-
-
     }
+
+
 
 
 
@@ -1966,15 +2792,46 @@
 
 
 /* ==========================================================================
+   ACCESSIBILITY
+
+   ========================================================================== */
+
+
+.rating-button:focus,
+
+
+.assessment-button:focus{
+
+
+    outline:
+
+        3px solid var(--ctm-gold);
+
+
+    outline-offset:
+
+        3px;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
    END OF FILE
 
 
    File        : assessment.css
 
-   Version     : 5.0
+   Version     : 5.1
 
 
-   Status      : 🔒 CTM PATH™ PREMIUM ASSESSMENT EXPERIENCE
+   Status      : 🔒 CTM PATH™ PREMIUM EXPERIENCE REFINEMENT
 
 
    ========================================================================== */
+
