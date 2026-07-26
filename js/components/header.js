@@ -2,27 +2,25 @@
 /* ==========================================================================
 
    CTM PATH™ Guided Journey™
-   FROM SURVIVAL TO LIVING™
 
    File        : js/components/header.js
-   Version     : 2.0
-   Status      : 🔒 PREMIUM FOUNDATION
+   Version     : 2.1
+   Status      : 🔒 PREMIUM BRAND IDENTITY
 
    Purpose
    --------------------------------------------------------------------------
-   Global Premium Header Component Controller
+   Global Brand Header Controller
 
    Responsibilities
-   --------------------------------------------------------------------------
+
    ✓ Initialize Header Component
-   ✓ Prepare Header DOM behaviour
+   ✓ Validate brand logo presence
    ✓ Support future header enhancements
-   ✓ Maintain component isolation
 
    Does NOT
-   --------------------------------------------------------------------------
-   ✗ Control page navigation
-   ✗ Handle registration
+
+   ✗ Control navigation
+   ✗ Handle page transitions
    ✗ Perform API calls
    ✗ Contain business logic
 
@@ -35,7 +33,9 @@
 window.CTM = window.CTM || {};
 
 
+
 window.CTM.Header = (() => {
+
 
 
     /* ======================================================================
@@ -43,11 +43,33 @@ window.CTM.Header = (() => {
        ====================================================================== */
 
 
-    const elements = {
+    const state = {
 
-        header: null
+
+        initialized:false,
+
+
+        logoFound:false
+
 
     };
+
+
+
+
+
+    const elements = {
+
+
+        header:null,
+
+
+        logo:null
+
+
+    };
+
+
 
 
 
@@ -59,18 +81,33 @@ window.CTM.Header = (() => {
     function initialize(){
 
 
+        if(state.initialized){
+
+            return;
+
+        }
+
+
         cacheElements();
 
 
+        validateLogo();
+
+
         bindEvents();
+
+
+        state.initialized = true;
 
 
     }
 
 
 
+
+
     /* ======================================================================
-       CACHE DOM ELEMENTS
+       CACHE ELEMENTS
        ====================================================================== */
 
 
@@ -86,7 +123,44 @@ window.CTM.Header = (() => {
             );
 
 
+
+        elements.logo =
+
+            document.querySelector(
+
+                ".brand-logo"
+
+            );
+
+
     }
+
+
+
+
+
+    /* ======================================================================
+       LOGO VALIDATION
+       ====================================================================== */
+
+
+    function validateLogo(){
+
+
+        if(!elements.logo){
+
+            return;
+
+        }
+
+
+
+        state.logoFound = true;
+
+
+    }
+
+
 
 
 
@@ -105,17 +179,20 @@ window.CTM.Header = (() => {
         }
 
 
-        /*
-            Reserved for future enhancements:
 
-            • Header animation
-            • Scroll state
-            • Accessibility behaviour
+        /*
+            Reserved for future premium behaviour:
+
+            • Scroll-aware header state
+            • Brand animation
+            • Accessibility enhancements
 
         */
 
 
     }
+
+
 
 
 
@@ -127,13 +204,25 @@ window.CTM.Header = (() => {
     return {
 
 
-        initialize
+        initialize,
+
+
+        logoAvailable:function(){
+
+
+            return state.logoFound;
+
+
+        }
 
 
     };
 
 
+
 })();
+
+
 
 
 
@@ -149,6 +238,7 @@ document.addEventListener(
     function(){
 
 
+
         if(
 
             window.CTM.Header &&
@@ -157,9 +247,12 @@ document.addEventListener(
 
         ){
 
+
             window.CTM.Header.initialize();
 
+
         }
+
 
 
     }
@@ -168,13 +261,15 @@ document.addEventListener(
 
 
 
+
+
 /* ==========================================================================
 
    END OF FILE
 
    File        : js/components/header.js
-   Version     : 2.0
-   Status      : 🔒 PREMIUM FOUNDATION
+   Version     : 2.1
+   Status      : 🔒 PREMIUM BRAND IDENTITY
 
    ========================================================================== */
 
