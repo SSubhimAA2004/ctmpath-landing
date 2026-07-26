@@ -3,143 +3,374 @@
    CTM PATH™ Guided Journey
 
    File        : assessment.css
-   Version     : 3.0
-   Status      : 🔒 ASSESSMENT UI SYSTEM
+   Version     : 4.0
 
-   Purpose     : Assessment Screen Styling
+   Status      : 🔒 PREMIUM ASSESSMENT EXPERIENCE
 
-   Owns ONLY:
+   Purpose:
 
-        • Assessment Layout
-        • Question Cards
-        • Rating UI
-        • Reflection UI
-        • Wisdom UI
+       Premium Assessment Interface
+
+   Owns:
+
+       • Life Map
+       • Pillar Experience
+       • Question Cards
+       • Rating Interface
+       • Reflection Moments
+       • Wisdom Moments
+       • Navigation
+
+   Owns NO:
+
+       • Assessment Logic
+       • Data
+       • API
 
    ========================================================================== */
+
+
 
 
 
 /* ==========================================================================
-   Assessment Container
+   Premium Assessment Container
    ========================================================================== */
 
 
-.assessment-card{
+.premium-assessment-card{
 
-    max-width:1100px;
+
+    width:100%;
+
+
+    max-width:1200px;
+
 
     margin-inline:auto;
 
-    padding:40px;
 
-}
-
+    padding:60px;
 
 
+    border-radius:40px;
 
-
-/* ==========================================================================
-   Progress
-   ========================================================================== */
-
-
-.progress{
-
-    margin-bottom:40px;
-
-}
-
-
-
-.progress-label{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:12px;
-
-    color:var(--text-secondary);
-
-    font-size:14px;
-
-}
-
-
-
-.progress-track{
-
-    height:10px;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    background:rgba(255,255,255,.12);
-
-}
-
-
-
-.progress-fill{
-
-    height:100%;
-
-    border-radius:20px;
-
-    background:var(--color-primary);
-
-    transition:
-
-        width .4s ease;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   Pillar Header
-   ========================================================================== */
-
-
-.pillar-header{
-
-    text-align:center;
-
-    margin-bottom:50px;
-
-}
-
-
-
-.pillar-number{
-
-    display:inline-flex;
-
-    padding:10px 24px;
-
-    border-radius:999px;
 
     background:
 
-        rgba(198,164,91,.15);
+        rgba(255,255,255,0.06);
+
+
+    backdrop-filter:
+
+        blur(24px);
+
 
     border:
 
-        1px solid rgba(198,164,91,.35);
+        1px solid rgba(255,255,255,0.12);
+
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   Header Branding
+   ========================================================================== */
+
+
+.premium-header{
+
+
+    padding:24px 0;
+
+
+}
+
+
+
+.brand-lockup{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:20px;
+
+
+}
+
+
+
+.logo{
+
+
+    width:110px;
+
+
+}
+
+
+
+.journey-label{
+
 
     color:
 
         var(--color-secondary);
 
-    font-weight:700;
 
-    letter-spacing:.08em;
+    font-size:
+
+        14px;
+
+
+    letter-spacing:
+
+        .12em;
+
+
+    font-weight:
+
+        600;
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   Life Map™ Header
+   ========================================================================== */
+
+
+.life-map-header{
+
+
+    text-align:center;
+
+
+    margin-bottom:60px;
+
+
+}
+
+
+
+.life-map-title{
+
+
+    font-size:
+
+        18px;
+
+
+    letter-spacing:
+
+        .15em;
+
+
+    color:
+
+        var(--color-secondary);
+
+
+    font-weight:
+
+        700;
+
+
+}
+
+
+
+.life-map-progress{
+
+
+    margin-top:20px;
+
+
+    font-size:
+
+        32px;
+
+
+    font-weight:
+
+        700;
+
+
+    color:
+
+        var(--text-primary);
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   Life Map Wheel
+   ========================================================================== */
+
+
+.life-map-wheel{
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    flex-wrap:wrap;
+
+
+    gap:14px;
+
+
+    margin-top:35px;
+
+
+}
+
+
+
+.wheel-spoke{
+
+
+    padding:10px 22px;
+
+
+    border-radius:
+
+        999px;
+
+
+    background:
+
+        rgba(255,255,255,.05);
+
+
+    border:
+
+        1px solid rgba(255,255,255,.15);
+
+
+    color:
+
+        var(--text-secondary);
+
+
+    font-size:
+
+        14px;
+
+
+}
+
+
+
+.wheel-spoke.active{
+
+
+    background:
+
+        rgba(13,148,136,.18);
+
+
+    border-color:
+
+        var(--color-primary);
+
+
+    color:
+
+        var(--color-primary);
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   Pillar Introduction
+   ========================================================================== */
+
+
+.pillar-introduction{
+
+
+    text-align:center;
+
+
+    max-width:900px;
+
+
+    margin:
+
+        0 auto 60px;
+
+
+}
+
+
+
+.pillar-badge{
+
+
+    display:inline-flex;
+
+
+    padding:
+
+        12px 28px;
+
+
+    border-radius:
+
+        999px;
+
+
+    background:
+
+        rgba(198,164,91,.15);
+
+
+    border:
+
+        1px solid rgba(198,164,91,.35);
+
+
+    color:
+
+        var(--color-secondary);
+
+
+    font-weight:
+
+        700;
+
+
+    letter-spacing:
+
+        .1em;
+
 
 }
 
@@ -147,22 +378,25 @@
 
 .pillar-title-ta{
 
-    margin-top:24px;
 
-    margin-bottom:12px;
+    margin-top:30px;
 
-    color:
-
-        var(--color-secondary);
 
     font-family:
 
         "Noto Sans Tamil",
         sans-serif;
 
+
     font-size:
 
-        38px;
+        42px;
+
+
+    color:
+
+        var(--color-secondary);
+
 
 }
 
@@ -170,254 +404,93 @@
 
 .pillar-title-en{
 
+
+    margin-top:12px;
+
+
+    font-size:
+
+        30px;
+
+
     color:
 
         var(--text-primary);
 
-    font-size:
-
-        28px;
 
 }
 
 
 
-.intro-ta{
-
-    margin-top:25px;
-
-    font-family:
-
-        "Noto Sans Tamil",
-        sans-serif;
-
-    font-size:
-
-        20px;
-
-    line-height:
-
-        1.9;
-
-}
-
-
-
-.intro-en{
-
-    margin-top:16px;
-
-    color:
-
-        var(--text-secondary);
-
-    font-size:
-
-        18px;
-
-    line-height:
-
-        1.8;
-
-}
-
-
-
-/* ==========================================================================
-   Questions
-   ========================================================================== */
-
-
-.questions-container{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:30px;
-
-}
-
-
-
-.question-card{
-
-    padding:32px;
-
-    border-radius:24px;
-
-    border:
-
-        1px solid rgba(255,255,255,.12);
-
-    background:
-
-        rgba(255,255,255,.05);
-
-}
-
-
-
-.question-number{
-
-    color:
-
-        var(--color-primary);
-
-    font-size:
-
-        14px;
-
-    font-weight:
-
-        700;
-
-    letter-spacing:.1em;
-
-    margin-bottom:18px;
-
-}
-
-
-
-.question-text-ta{
-
-    font-family:
-
-        "Noto Sans Tamil",
-        sans-serif;
-
-    font-size:
-
-        22px;
-
-    line-height:
-
-        1.8;
-
-    margin-bottom:10px;
-
-}
-
-
-
-.question-text-en{
-
-    color:
-
-        var(--text-secondary);
-
-    font-size:
-
-        18px;
-
-    line-height:
-
-        1.7;
-
-}
 
 
 /* Continue in Batch 1B */
 
 /* ==========================================================================
-   Rating Scale
+   Premium Question Cards
    ========================================================================== */
 
 
-.rating-group{
+.questions-container{
+
 
     display:flex;
 
-    justify-content:center;
 
-    align-items:center;
+    flex-direction:column;
 
-    gap:14px;
 
-    flex-wrap:wrap;
+    gap:36px;
 
-    margin-top:30px;
 
 }
 
 
 
-.rating-button{
 
-    width:52px;
 
-    height:52px;
+.premium-question-card{
 
-    border-radius:50%;
 
-    border:
+    padding:45px;
 
-        1px solid rgba(255,255,255,.25);
+
+    border-radius:32px;
+
 
     background:
 
-        rgba(16,42,82,.9);
+        rgba(255,255,255,.045);
 
-    color:
 
-        var(--text-primary);
+    border:
 
-    font-size:
+        1px solid rgba(255,255,255,.12);
 
-        17px;
-
-    font-weight:
-
-        700;
-
-    cursor:pointer;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
 
     transition:
 
-        all .25s ease;
+        all .3s ease;
+
 
 }
 
 
 
-.rating-button:hover{
+
+
+.premium-question-card:hover{
+
 
     transform:
 
         translateY(-3px);
 
-    border-color:
-
-        var(--color-primary);
-
-}
-
-
-
-.rating-button.active{
-
-    background:
-
-        var(--color-primary);
-
-    color:
-
-        #ffffff;
 
     border-color:
 
-        var(--color-primary);
+        rgba(13,148,136,.45);
 
-    transform:
-
-        scale(1.08);
 
 }
 
@@ -425,367 +498,782 @@
 
 
 
-/* ==========================================================================
-   Rating Guide
-   ========================================================================== */
+.question-number{
 
 
-.rating-guide{
+    display:inline-flex;
 
-    margin-top:35px;
-
-    padding:20px 30px;
-
-    display:flex;
 
     align-items:center;
 
-    justify-content:center;
-
-    gap:30px;
-
-    border-radius:20px;
-
-    background:
-
-        rgba(255,255,255,.04);
-
-}
-
-
-
-.rating-guide-item{
-
-    text-align:center;
-
-}
-
-
-
-.rating-guide-item span{
-
-    display:flex;
-
-    align-items:center;
 
     justify-content:center;
 
-    width:40px;
 
-    height:40px;
+    width:48px;
 
-    margin:auto;
+
+    height:48px;
+
 
     border-radius:50%;
+
 
     background:
 
         rgba(198,164,91,.15);
 
+
     border:
 
         1px solid rgba(198,164,91,.35);
 
+
     color:
 
         var(--color-secondary);
 
-    font-weight:700;
+
+    font-size:
+
+        14px;
+
+
+    font-weight:
+
+        700;
+
+
+    letter-spacing:
+
+        .08em;
+
+
+    margin-bottom:25px;
+
 
 }
 
 
-
-.rating-guide-item p{
-
-    margin-top:8px;
-
-    color:
-
-        var(--text-secondary);
-
-    font-size:14px;
-
-}
-
-
-
-.rating-guide-line{
-
-    width:120px;
-
-    height:1px;
-
-    background:
-
-        rgba(255,255,255,.25);
-
-}
 
 
 
 
 
 /* ==========================================================================
-   Reflection Panel
+   Question Typography
    ========================================================================== */
 
 
-.reflection-panel{
+.question-text-ta{
 
-    margin-top:45px;
-
-    padding:32px;
-
-    border-radius:24px;
-
-    border-left:
-
-        5px solid var(--color-secondary);
-
-    background:
-
-        rgba(198,164,91,.08);
-
-}
-
-
-
-.reflection-panel h3{
-
-    margin-bottom:18px;
-
-    color:
-
-        var(--color-secondary);
-
-    font-size:22px;
-
-}
-
-
-
-.reflection-ta{
 
     font-family:
 
         "Noto Sans Tamil",
         sans-serif;
 
-    font-size:19px;
 
-    line-height:1.9;
+    font-size:
 
-    margin-bottom:16px;
+        30px;
 
-}
 
+    line-height:
 
+        2;
 
-.reflection-en{
 
-    color:
+    font-weight:
 
-        var(--text-secondary);
+        600;
 
-    font-size:17px;
-
-    line-height:1.8;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   Wisdom Panel
-   ========================================================================== */
-
-
-.wisdom-panel{
-
-    margin-top:30px;
-
-    padding:32px;
-
-    border-radius:24px;
-
-    border-left:
-
-        5px solid var(--color-primary);
-
-    background:
-
-        rgba(13,148,136,.08);
-
-}
-
-
-
-.wisdom-panel h3{
-
-    margin-bottom:18px;
-
-    color:
-
-        var(--color-primary);
-
-    font-size:22px;
-
-}
-
-
-
-.wisdom-ta{
-
-    font-family:
-
-        "Noto Sans Tamil",
-        sans-serif;
-
-    font-size:19px;
-
-    line-height:1.9;
-
-    margin-bottom:16px;
-
-}
-
-
-
-.wisdom-en{
-
-    color:
-
-        var(--text-secondary);
-
-    font-size:17px;
-
-    line-height:1.8;
-
-}
-
-
-/* Continue in Batch 1C */
-
-/* ==========================================================================
-   Navigation
-   ========================================================================== */
-
-
-.navigation{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-top:45px;
-
-    gap:20px;
-
-}
-
-
-
-.btn{
-
-    min-width:180px;
-
-    padding:16px 28px;
-
-    border-radius:14px;
-
-    font-size:16px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:
-
-        all .25s ease;
-
-}
-
-
-
-.btn-primary{
-
-    background:
-
-        var(--color-primary);
-
-    color:
-
-        #ffffff;
-
-    border:
-
-        1px solid var(--color-primary);
-
-}
-
-
-
-.btn-primary:hover{
-
-    transform:
-
-        translateY(-2px);
-
-    opacity:.9;
-
-}
-
-
-
-.btn-secondary{
-
-    background:
-
-        rgba(255,255,255,.05);
 
     color:
 
         var(--text-primary);
 
+
+    margin-bottom:18px;
+
+
+}
+
+
+
+
+
+.question-text-en{
+
+
+    font-size:
+
+        20px;
+
+
+    line-height:
+
+        1.8;
+
+
+    color:
+
+        var(--text-secondary);
+
+
+    max-width:850px;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   Alignment Prompt
+   ========================================================================== */
+
+
+.alignment-label{
+
+
+    text-align:center;
+
+
+    margin-top:35px;
+
+
+    margin-bottom:25px;
+
+
+    color:
+
+        var(--color-secondary);
+
+
+    font-size:
+
+        18px;
+
+
+    font-weight:
+
+        600;
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   Rating Scale Description
+   ========================================================================== */
+
+
+.rating-scale-description{
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    max-width:600px;
+
+
+    margin:
+
+        0 auto 25px;
+
+
+    color:
+
+        var(--text-secondary);
+
+
+    font-size:
+
+        14px;
+
+
+    text-align:center;
+
+
+}
+
+
+
+
+
+.rating-scale-description span:first-child{
+
+
+    color:
+
+        #EF4444;
+
+
+}
+
+
+
+
+
+.rating-scale-description span:last-child{
+
+
+    color:
+
+        var(--color-primary);
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   Rating Buttons
+   ========================================================================== */
+
+
+.rating-group{
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    gap:14px;
+
+
+    flex-wrap:wrap;
+
+
+}
+
+
+
+
+
+.rating-button{
+
+
+    width:56px;
+
+
+    height:56px;
+
+
+    border-radius:50%;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    cursor:pointer;
+
+
+    background:
+
+        rgba(255,255,255,.06);
+
+
     border:
 
         1px solid rgba(255,255,255,.2);
 
+
+    color:
+
+        var(--text-primary);
+
+
+    font-size:
+
+        18px;
+
+
+    font-weight:
+
+        700;
+
+
+    transition:
+
+        all .25s ease;
+
+
 }
+
+
+
+
+
+.rating-button:hover{
+
+
+    transform:
+
+        translateY(-5px);
+
+
+    border-color:
+
+        var(--color-primary);
+
+
+}
+
+
+
+
+
+.rating-button.active{
+
+
+    background:
+
+        var(--color-primary);
+
+
+    border-color:
+
+        var(--color-primary);
+
+
+    color:
+
+        white;
+
+
+    transform:
+
+        scale(1.12);
+
+
+    box-shadow:
+
+        0 0 25px rgba(13,148,136,.35);
+
+
+}
+
+
+
+
+
+/* Continue in Batch 1C */
+
+/* ==========================================================================
+   Reflection Moment™
+   ========================================================================== */
+
+
+.reflection-panel{
+
+
+    margin-top:
+
+        55px;
+
+
+    padding:
+
+        40px;
+
+
+    border-radius:
+
+        32px;
+
+
+    background:
+
+        rgba(198,164,91,.08);
+
+
+    border:
+
+        1px solid rgba(198,164,91,.25);
+
+
+    text-align:center;
+
+
+}
+
+
+
+
+
+.moment-label{
+
+
+    font-size:
+
+        13px;
+
+
+    letter-spacing:
+
+        .18em;
+
+
+    font-weight:
+
+        700;
+
+
+    color:
+
+        var(--color-secondary);
+
+
+    margin-bottom:
+
+        20px;
+
+
+}
+
+
+
+
+
+.reflection-panel h3{
+
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+
+    font-size:
+
+        28px;
+
+
+    line-height:
+
+        1.8;
+
+
+    color:
+
+        var(--text-primary);
+
+
+    margin-bottom:
+
+        18px;
+
+
+}
+
+
+
+
+
+.reflection-panel p{
+
+
+    font-size:
+
+        18px;
+
+
+    line-height:
+
+        1.8;
+
+
+    color:
+
+        var(--text-secondary);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   Wisdom Moment™
+   ========================================================================== */
+
+
+.wisdom-panel{
+
+
+    margin-top:
+
+        35px;
+
+
+    padding:
+
+        40px;
+
+
+    border-radius:
+
+        32px;
+
+
+    background:
+
+        rgba(13,148,136,.08);
+
+
+    border:
+
+        1px solid rgba(13,148,136,.25);
+
+
+    text-align:center;
+
+
+}
+
+
+
+
+
+.wisdom-panel h3{
+
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+
+    font-size:
+
+        28px;
+
+
+    line-height:
+
+        1.8;
+
+
+    color:
+
+        var(--text-primary);
+
+
+    margin-bottom:
+
+        18px;
+
+
+}
+
+
+
+
+
+.wisdom-panel p{
+
+
+    font-size:
+
+        18px;
+
+
+    line-height:
+
+        1.8;
+
+
+    color:
+
+        var(--text-secondary);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   Premium Navigation
+   ========================================================================== */
+
+
+.premium-navigation{
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    align-items:center;
+
+
+    margin-top:
+
+        60px;
+
+
+    padding-top:
+
+        35px;
+
+
+    border-top:
+
+        1px solid rgba(255,255,255,.1);
+
+
+}
+
+
+
+
+
+.btn{
+
+
+    min-width:
+
+        220px;
+
+
+    padding:
+
+        18px 36px;
+
+
+    border-radius:
+
+        999px;
+
+
+    font-size:
+
+        17px;
+
+
+    font-weight:
+
+        600;
+
+
+    cursor:pointer;
+
+
+    transition:
+
+        all .25s ease;
+
+
+}
+
+
+
+
+
+.btn-primary{
+
+
+    background:
+
+        var(--color-primary);
+
+
+    color:
+
+        white;
+
+
+    border:
+
+        1px solid var(--color-primary);
+
+
+}
+
+
+
+
+
+.btn-primary:hover{
+
+
+    transform:
+
+        translateY(-3px);
+
+
+    box-shadow:
+
+        0 15px 35px rgba(13,148,136,.25);
+
+
+}
+
+
+
+
+
+.btn-secondary{
+
+
+    background:
+
+        rgba(255,255,255,.05);
+
+
+    color:
+
+        var(--text-primary);
+
+
+    border:
+
+        1px solid rgba(255,255,255,.2);
+
+
+}
+
+
 
 
 
 .btn-secondary:hover{
 
+
     border-color:
 
         var(--color-secondary);
 
-}
-
-
-
-
-
-/* ==========================================================================
-   Disabled States
-   ========================================================================== */
-
-
-.rating-button:disabled,
-
-.btn:disabled{
-
-    opacity:.5;
-
-    cursor:not-allowed;
-
-    transform:none;
 
 }
 
@@ -793,17 +1281,57 @@
 
 
 
+
+
 /* ==========================================================================
-   Tablet
+   Footer
    ========================================================================== */
 
 
-@media(max-width:768px){
+.app-footer{
 
 
-    .assessment-card{
+    padding:
 
-        padding:28px;
+        35px 0;
+
+
+    text-align:center;
+
+
+    color:
+
+        var(--text-secondary);
+
+
+    font-size:
+
+        14px;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   Responsive Tablet
+   ========================================================================== */
+
+
+@media(max-width:900px){
+
+
+    .premium-assessment-card{
+
+
+        padding:
+
+            40px 30px;
+
 
     }
 
@@ -811,23 +1339,11 @@
 
     .pillar-title-ta{
 
-        font-size:32px;
 
-    }
+        font-size:
 
+            36px;
 
-
-    .pillar-title-en{
-
-        font-size:24px;
-
-    }
-
-
-
-    .question-card{
-
-        padding:24px;
 
     }
 
@@ -835,19 +1351,11 @@
 
     .question-text-ta{
 
-        font-size:19px;
 
-    }
+        font-size:
 
+            25px;
 
-
-    .rating-button{
-
-        width:46px;
-
-        height:46px;
-
-        font-size:16px;
 
     }
 
@@ -859,17 +1367,74 @@
 
 
 
+
+
 /* ==========================================================================
-   Mobile
+   Responsive Mobile
    ========================================================================== */
 
 
-@media(max-width:480px){
+@media(max-width:600px){
 
 
-    .assessment-card{
+    .premium-assessment-card{
 
-        padding:20px;
+
+        padding:
+
+            25px 18px;
+
+
+        border-radius:
+
+            24px;
+
+
+    }
+
+
+
+    .brand-lockup{
+
+
+        flex-direction:
+
+            column;
+
+
+        gap:
+
+            12px;
+
+
+    }
+
+
+
+    .life-map-wheel{
+
+
+        gap:
+
+            8px;
+
+
+    }
+
+
+
+    .wheel-spoke{
+
+
+        font-size:
+
+            12px;
+
+
+        padding:
+
+            8px 14px;
+
 
     }
 
@@ -877,7 +1442,11 @@
 
     .pillar-title-ta{
 
-        font-size:28px;
+
+        font-size:
+
+            30px;
+
 
     }
 
@@ -885,33 +1454,23 @@
 
     .pillar-title-en{
 
-        font-size:22px;
+
+        font-size:
+
+            24px;
+
 
     }
 
 
 
-    .intro-ta{
-
-        font-size:17px;
-
-    }
+    .premium-question-card{
 
 
+        padding:
 
-    .intro-en{
+            25px 20px;
 
-        font-size:16px;
-
-    }
-
-
-
-    .question-card{
-
-        padding:20px;
-
-        border-radius:18px;
 
     }
 
@@ -919,7 +1478,16 @@
 
     .question-text-ta{
 
-        font-size:18px;
+
+        font-size:
+
+            21px;
+
+
+        line-height:
+
+            1.8;
+
 
     }
 
@@ -927,15 +1495,11 @@
 
     .question-text-en{
 
-        font-size:15px;
 
-    }
+        font-size:
 
+            16px;
 
-
-    .rating-group{
-
-        gap:8px;
 
     }
 
@@ -943,35 +1507,38 @@
 
     .rating-button{
 
-        width:40px;
 
-        height:40px;
+        width:
 
-        font-size:14px;
+            44px;
+
+
+        height:
+
+            44px;
+
+
+        font-size:
+
+            15px;
+
 
     }
 
 
 
-    .rating-guide{
-
-        flex-direction:column;
-
-    }
+    .premium-navigation{
 
 
+        flex-direction:
 
-    .rating-guide-line{
-
-        width:80px;
-
-    }
+            column-reverse;
 
 
+        gap:
 
-    .navigation{
+            18px;
 
-        flex-direction:column-reverse;
 
     }
 
@@ -979,7 +1546,11 @@
 
     .btn{
 
-        width:100%;
+
+        width:
+
+            100%;
+
 
     }
 
@@ -991,13 +1562,15 @@
 
 
 
+
+
 /* ==========================================================================
-   End of File
+   END OF FILE
 
    File    : assessment.css
 
-   Version : 3.0
+   Version : 4.0
 
-   Status  : 🔒 ASSESSMENT UI SYSTEM
+   Status  : 🔒 PREMIUM ASSESSMENT EXPERIENCE
 
    ========================================================================== */
