@@ -1,344 +1,257 @@
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey v5.0
+   CTM PATH™ Guided Journey™
+   FROM SURVIVAL TO LIVING™
 
    File        : css/registration.css
-   Version     : 5.0
-   Status      : 🔒 PREMIUM FOUNDATION
+   Version     : 6.0
+   Status      : 🔒 PRODUCTION
+   Architecture: LOCKED MPA
 
-   Purpose     : Premium Registration Experience
+   Purpose
+   --------------------------------------------------------------------------
+   Premium Visitor Registration Experience
 
-                  Owns
-                  • Page Layout
-                  • Brand Styling
-                  • Registration Card
-                  • Responsive Foundation
+   Responsibilities
 
-   ========================================================================== */
+   ✓ Page Layout
+   ✓ Premium Visual Design
+   ✓ Registration Card
+   ✓ Responsive Behaviour
+   ✓ Form Components
+   ✓ Validation States
+   ✓ Loading States
+
+   Does NOT
+
+   ✗ Business Logic
+   ✗ API Calls
+   ✗ Navigation
+   ✗ Assessment Logic
+
+========================================================================== */
 
 
 /* ==========================================================================
-   ROOT VARIABLES
-   ========================================================================== */
-
+   DESIGN TOKENS
+========================================================================== */
 
 :root{
 
+    --ctm-bg:#081C3A;
 
-    --ctm-background:
+    --ctm-bg-dark:#06142C;
 
-        #081C3A;
+    --ctm-primary:#2563EB;
 
+    --ctm-primary-light:#3B82F6;
 
-    --ctm-background-deep:
+    --ctm-primary-dark:#1E40AF;
 
-        #06142C;
+    --ctm-gold:#D9B760;
 
+    --ctm-white:#FFFFFF;
 
-    --ctm-blue:
+    --ctm-text-soft:rgba(255,255,255,.78);
 
-        #2563EB;
+    --ctm-text-muted:rgba(255,255,255,.58);
 
+    --ctm-border:rgba(255,255,255,.12);
 
-    --ctm-blue-light:
+    --ctm-success:#22C55E;
 
-        #3B82F6;
+    --ctm-error:#EF4444;
 
+    --radius-xl:30px;
 
-    --ctm-gold:
+    --radius-lg:20px;
 
-        #D9B760;
+    --radius-md:16px;
 
-
-    --ctm-white:
-
-        #FFFFFF;
-
-
-    --ctm-muted:
-
-        rgba(255,255,255,.72);
-
-
-    --ctm-border:
-
-        rgba(255,255,255,.10);
-
-
-
-    --registration-max-width:
-
-        900px;
-
-
-
-    --registration-radius:
-
-        30px;
-
-
-
-    --field-radius:
-
-        16px;
-
-
+    --radius-sm:12px;
 
     --transition:
 
-        .35s cubic-bezier(.2,.8,.2,1);
-
+        .30s cubic-bezier(.2,.8,.2,1);
 
 }
 
 
-
-
-
 /* ==========================================================================
-   GLOBAL PAGE
-   ========================================================================== */
+   RESET
+========================================================================== */
+
+*,
+*::before,
+*::after{
+
+    box-sizing:border-box;
+
+}
 
 
 html{
 
-
     scroll-behavior:smooth;
-
 
 }
 
 
-
-
-
 body{
-
 
     margin:0;
 
-
-    padding:0;
-
-
     min-height:100vh;
 
-
     overflow-x:hidden;
-
-
 
     font-family:
 
         "Inter",
+
         "Noto Sans Tamil",
+
         sans-serif;
-
-
 
     color:var(--ctm-white);
 
-
-
     background:
-
 
         radial-gradient(
 
             circle at top,
 
-            #163E79 0%,
+            #1A4D91 0%,
 
-            #12356A 20%,
+            #12376E 25%,
 
-            #0C2A57 45%,
+            #0D2A58 50%,
 
-            var(--ctm-background) 75%,
+            #081C3A 78%,
 
-            var(--ctm-background-deep) 100%
+            #06142C 100%
 
         );
 
-
 }
-
-
-
 
 
 /* ==========================================================================
-   APPLICATION WRAPPER
-   ========================================================================== */
-
+   PAGE LAYOUT
+========================================================================== */
 
 .app{
 
-
-    min-height:100vh;
-
-
     display:flex;
-
 
     flex-direction:column;
 
+    min-height:100vh;
 
 }
 
 
+.registration-page{
 
+    width:100%;
+
+}
 
 
 /* ==========================================================================
    HEADER
-   ========================================================================== */
-
+========================================================================== */
 
 .registration-header{
 
-
-    width:100%;
-
-
-    padding-top:24px;
-
-
-    padding-bottom:10px;
-
-
     display:flex;
-
 
     justify-content:center;
 
-
     align-items:center;
 
+    padding:
+
+        28px
+
+        24px
+
+        12px;
 
 }
-
-
-
 
 
 .brand-logo{
 
-
-    display:flex;
-
+    display:inline-flex;
 
     justify-content:center;
 
-
     align-items:center;
-
 
     text-decoration:none;
 
-
 }
-
-
-
 
 
 .logo{
 
-
     width:220px;
-
 
     height:auto;
 
-
-    display:block;
-
-
     transition:
-
 
         transform .35s ease;
 
-
 }
-
-
-
 
 
 .logo:hover{
 
-
-    transform:
-
-        scale(1.03);
-
+    transform:scale(1.03);
 
 }
 
 
-
-
-
-
-
 /* ==========================================================================
-   MAIN CONTAINER
-   ========================================================================== */
-
+   MAIN
+========================================================================== */
 
 .registration-main{
 
-
     flex:1;
-
-
-    width:100%;
-
 
     display:flex;
 
-
     justify-content:center;
-
 
     align-items:flex-start;
 
-
-
     padding:
 
-
-        20px
+        18px
 
         24px
 
         70px;
 
-
 }
 
 
-
-
-
 /* ==========================================================================
-   REGISTRATION CARD
-   ========================================================================== */
-
+   CARD
+========================================================================== */
 
 .registration-card{
 
-
     width:100%;
 
+    max-width:920px;
 
-    max-width:var(--registration-max-width);
-
-
+    border-radius:30px;
 
     padding:
-
 
         56px
 
@@ -346,16 +259,7 @@ body{
 
         72px;
 
-
-
-    border-radius:
-
-        var(--registration-radius);
-
-
-
     background:
-
 
         linear-gradient(
 
@@ -363,880 +267,423 @@ body{
 
             rgba(255,255,255,.055),
 
-            rgba(255,255,255,.030)
+            rgba(255,255,255,.03)
 
         );
 
-
-
     border:
-
 
         1px solid
 
         var(--ctm-border);
 
-
-
-    backdrop-filter:
-
-        blur(22px);
-
-
+    backdrop-filter:blur(22px);
 
     box-shadow:
 
-
-        0 34px 90px
+        0 35px 90px
 
         rgba(0,0,0,.42);
 
-
-
     animation:
 
-        cardEntrance .7s ease forwards;
-
+        fadeCard .65s ease;
 
 }
 
 
-
-
-
-@keyframes cardEntrance{
-
+@keyframes fadeCard{
 
     from{
 
-
         opacity:0;
-
 
         transform:
 
-            translateY(30px);
-
+            translateY(24px);
 
     }
 
-
     to{
 
-
         opacity:1;
-
 
         transform:
 
             translateY(0);
 
-
     }
-
 
 }
 
-/* ==========================================================================
-   PROGRESS SECTION
-   ========================================================================== */
 
+/* ==========================================================================
+   PROGRESS
+========================================================================== */
 
 .progress-section{
 
-
-    margin-bottom:
-
-        64px;
-
+    margin-bottom:60px;
 
 }
-
-
-
 
 
 .progress-header{
 
-
     display:flex;
-
 
     justify-content:space-between;
 
-
     align-items:flex-end;
 
-
-    gap:30px;
-
-
-
-    margin-bottom:
-
-        22px;
-
+    margin-bottom:22px;
 
 }
-
-
-
 
 
 .progress-left,
 
-
 .progress-right{
-
 
     display:flex;
 
-
     flex-direction:column;
 
-
 }
-
-
-
 
 
 .progress-right{
 
-
     text-align:right;
 
-
 }
 
 
-
-
-
-.step-ta{
-
-
-    margin:0;
-
-
-    font-size:
-
-        1.08rem;
-
-
-
-    font-weight:
-
-        700;
-
-
-
-    line-height:
-
-        1.5;
-
-
-
-    color:
-
-        var(--ctm-white);
-
-
-}
-
-
-
-
-
-.step-en{
-
-
-    margin:
-
-
-        8px
-
-        0
-
-        0;
-
-
-
-    font-size:
-
-        .90rem;
-
-
-
-    letter-spacing:
-
-        .05em;
-
-
-
-    color:
-
-        rgba(255,255,255,.68);
-
-
-}
-
-
-
-
+.step-ta,
 
 .module-ta{
 
-
     margin:0;
 
+    font-size:1.05rem;
 
-    font-size:
+    font-weight:700;
 
-        1.05rem;
-
-
-
-    font-weight:
-
-        600;
-
-
-
-    color:
-
-        var(--ctm-white);
-
+    color:var(--ctm-white);
 
 }
 
 
-
-
+.step-en,
 
 .module-en{
 
+    margin-top:6px;
 
-    margin:
+    font-size:.88rem;
 
+    letter-spacing:.08em;
 
-        8px
-
-        0
-
-        0;
-
-
-
-    font-size:
-
-        .90rem;
-
-
-
-    color:
-
-        rgba(255,255,255,.68);
-
+    color:var(--ctm-text-muted);
 
 }
-
-
-
 
 
 .progress-track{
 
-
     width:100%;
-
 
     height:8px;
 
+    border-radius:999px;
 
     overflow:hidden;
 
-
-    border-radius:999px;
-
-
-
     background:
 
-        rgba(255,255,255,.10);
-
+        rgba(255,255,255,.08);
 
 }
 
 
-
-
-
 .progress-fill{
 
-
-    width:
-
-        14.28%;
-
+    width:14.285%;
 
     height:100%;
 
-
     border-radius:999px;
 
-
-
     background:
-
 
         linear-gradient(
 
             90deg,
 
-            var(--ctm-blue),
+            var(--ctm-primary),
 
-            var(--ctm-blue-light)
+            var(--ctm-primary-light)
 
         );
 
-
 }
 
-
-
-
-
 /* ==========================================================================
-   HERO SECTION
-   ========================================================================== */
-
+   HERO
+========================================================================== */
 
 .hero{
 
-
     text-align:center;
 
-
-    margin-bottom:
-
-        58px;
-
+    margin-bottom:58px;
 
 }
-
-
-
-
 
 .hero-title-ta{
 
-
     margin:0;
 
+    font-size:2.85rem;
 
+    font-weight:700;
 
-    font-size:
+    line-height:1.35;
 
-        2.9rem;
-
-
-
-    font-weight:
-
-        700;
-
-
-
-    line-height:
-
-        1.35;
-
-
-
-    color:
-
-        var(--ctm-white);
-
+    color:var(--ctm-white);
 
 }
-
-
-
-
 
 .hero-title-en{
 
+    margin-top:18px;
 
-    margin:
+    font-size:1.02rem;
 
+    font-weight:700;
 
-        18px
+    letter-spacing:.22em;
 
-        0
+    text-transform:uppercase;
 
-        0;
-
-
-
-    font-size:
-
-        1.05rem;
-
-
-
-    font-weight:
-
-        700;
-
-
-
-    letter-spacing:
-
-        .25em;
-
-
-
-    text-transform:
-
-        uppercase;
-
-
-
-    color:
-
-        var(--ctm-gold);
-
+    color:var(--ctm-gold);
 
 }
-
-
-
-
 
 .hero-subtitle-ta{
 
-
-    max-width:
-
-        700px;
-
-
+    max-width:700px;
 
     margin:
 
+        38px auto 0;
 
-        40px
+    font-size:1.48rem;
 
-        auto
+    line-height:1.85;
 
-        0;
+    font-weight:500;
 
-
-
-    font-size:
-
-        1.55rem;
-
-
-
-    line-height:
-
-        1.8;
-
-
-
-    font-weight:
-
-        500;
-
-
-
-    color:
-
-        var(--ctm-white);
-
+    color:var(--ctm-white);
 
 }
-
-
-
-
 
 .hero-subtitle-en{
 
-
-    max-width:
-
-        650px;
-
-
+    max-width:650px;
 
     margin:
 
+        18px auto 0;
 
-        18px
+    font-size:1rem;
 
-        auto
+    line-height:1.9;
 
-        0;
-
-
-
-    font-size:
-
-        1rem;
-
-
-
-    line-height:
-
-        1.9;
-
-
-
-    color:
-
-        rgba(255,255,255,.76);
-
+    color:var(--ctm-text-soft);
 
 }
-
-
-
 
 
 /* ==========================================================================
-   FORM FOUNDATION
-   ========================================================================== */
-
+   REGISTRATION FORM
+========================================================================== */
 
 .registration-form{
 
-
     display:flex;
-
 
     flex-direction:column;
 
-
-    gap:
-
-        30px;
-
+    gap:28px;
 
 }
 
 
-
-
+/* ==========================================================================
+   FORM GROUP
+========================================================================== */
 
 .form-group{
 
-
     display:flex;
-
 
     flex-direction:column;
 
-
-    gap:
-
-        14px;
-
-
+    gap:12px;
 
     transition:
 
-        transform .30s ease;
-
+        var(--transition);
 
 }
 
-
-
-
-
 .form-group:focus-within{
-
 
     transform:
 
         translateY(-2px);
 
-
 }
 
-/* ==========================================================================
-   FORM LABELS
-   ========================================================================== */
 
+/* ==========================================================================
+   LABELS
+========================================================================== */
 
 .form-group label{
 
-
     display:flex;
-
 
     flex-direction:column;
 
-
-    gap:
-
-        6px;
-
-
-
-    cursor:pointer;
-
+    gap:6px;
 
 }
-
-
-
-
 
 .label-ta{
 
+    font-size:1.05rem;
 
-    font-size:
+    font-weight:700;
 
-        1.08rem;
-
-
-
-    font-weight:
-
-        700;
-
-
-
-    line-height:
-
-        1.55;
-
-
-
-    color:
-
-        var(--ctm-white);
-
+    color:var(--ctm-white);
 
 }
-
-
-
-
 
 .label-en{
 
+    font-size:.90rem;
 
-    font-size:
-
-        .92rem;
-
-
-
-    font-weight:
-
-        400;
-
-
-
-    letter-spacing:
-
-        .02em;
-
-
-
-    color:
-
-        rgba(255,255,255,.68);
-
+    color:var(--ctm-text-muted);
 
 }
 
 
-
-
-
 /* ==========================================================================
-   INPUTS AND SELECTS
-   ========================================================================== */
-
+   INPUTS
+========================================================================== */
 
 .registration-form input,
 
 .registration-form select{
 
-
     width:100%;
 
-
-    height:58px;
-
-
+    height:60px;
 
     padding:
 
-
-        0
-
-        20px;
-
-
+        0 20px;
 
     border-radius:
 
-        var(--field-radius);
-
-
+        var(--radius-md);
 
     border:
 
-
         1px solid
 
-        rgba(255,255,255,.12);
-
-
+        rgba(255,255,255,.14);
 
     background:
 
-
         rgba(255,255,255,.05);
-
-
 
     color:
 
         var(--ctm-white);
 
-
-
     font-family:inherit;
 
-
-
-    font-size:
-
-        1rem;
-
-
+    font-size:1rem;
 
     outline:none;
 
-
-
     transition:
 
+        border-color .30s,
 
-        border-color .30s ease,
+        box-shadow .30s,
 
-        box-shadow .30s ease,
-
-        background .30s ease;
-
+        background .30s;
 
 }
-
-
-
-
 
 .registration-form input::placeholder{
 
-
     color:
-
 
         rgba(255,255,255,.42);
 
-
 }
-
-
-
-
 
 .registration-form input:hover,
 
 .registration-form select:hover{
 
-
     border-color:
 
-
-        rgba(255,255,255,.24);
-
+        rgba(255,255,255,.25);
 
 }
-
-
-
-
 
 .registration-form input:focus,
 
 .registration-form select:focus{
 
-
     background:
 
-
-        rgba(255,255,255,.07);
-
-
+        rgba(255,255,255,.08);
 
     border-color:
 
-
-        var(--ctm-blue-light);
-
-
+        var(--ctm-primary-light);
 
     box-shadow:
 
-
         0 0 0 4px
 
-        rgba(59,130,246,.16);
-
+        rgba(59,130,246,.18);
 
 }
 
 
-
-
-
 /* ==========================================================================
-   SELECT DROPDOWN
-   ========================================================================== */
-
+   SELECT
+========================================================================== */
 
 .registration-form select{
 
-
     cursor:pointer;
-
-
-
-    padding-right:
-
-        56px;
-
-
 
     appearance:none;
 
-
-
     -webkit-appearance:none;
 
-
+    padding-right:58px;
 
     background-image:
-
 
         linear-gradient(
 
@@ -1248,7 +695,6 @@ body{
 
         ),
 
-
         linear-gradient(
 
             135deg,
@@ -1259,153 +705,102 @@ body{
 
         );
 
-
-
     background-position:
 
+        calc(100% - 24px) 26px,
 
-        calc(100% - 24px) 24px,
-
-        calc(100% - 18px) 24px;
-
-
+        calc(100% - 18px) 26px;
 
     background-size:
 
-
-        7px 7px,
-
         7px 7px;
-
-
 
     background-repeat:no-repeat;
 
-
 }
-
-
-
-
 
 .registration-form option{
 
-
     color:#111827;
 
-
     background:#FFFFFF;
-
 
 }
 
 
-
-
-
 /* ==========================================================================
-   VALIDATION STATES
-   ========================================================================== */
+   VALIDATION
+========================================================================== */
 
+.registration-form input.error,
 
-.registration-form input:invalid:focus,
+.registration-form select.error{
 
-.registration-form select:invalid:focus{
+    border-color:
 
-
-    border-color:#EF4444;
-
-
+        var(--ctm-error);
 
     box-shadow:
-
 
         0 0 0 4px
 
         rgba(239,68,68,.15);
 
-
 }
 
+.registration-form input.success,
 
-
-
-
-.registration-form input:valid,
-
-.registration-form select:valid{
-
+.registration-form select.success{
 
     border-color:
 
-
-        rgba(34,197,94,.35);
-
+        var(--ctm-success);
 
 }
 
 
-
-
-
 /* ==========================================================================
-   FORM SPACING BALANCE
-   ========================================================================== */
+   INLINE MESSAGE
+========================================================================== */
 
+.field-message{
 
-.registration-form .form-group + .form-group{
+    min-height:18px;
 
+    margin-top:4px;
 
-    margin-top:
+    font-size:.84rem;
 
-        4px;
+    color:
 
+        var(--ctm-error);
 
 }
 
 /* ==========================================================================
-   PRIVACY PROMISE CARD
-   ========================================================================== */
-
+   PRIVACY CARD
+========================================================================== */
 
 .privacy-card{
 
-
     display:flex;
-
 
     align-items:flex-start;
 
+    gap:22px;
 
-    gap:
-
-        22px;
-
-
-
-    margin-top:
-
-        12px;
-
-
+    margin-top:8px;
 
     padding:
 
-
         28px
-
         30px;
-
-
 
     border-radius:
 
-        22px;
-
-
+        var(--radius-lg);
 
     background:
-
 
         linear-gradient(
 
@@ -1417,805 +812,450 @@ body{
 
         );
 
-
-
     border:
-
 
         1px solid
 
-        rgba(59,130,246,.22);
-
-
+        rgba(59,130,246,.20);
 
     transition:
 
         var(--transition);
 
-
 }
-
-
-
-
 
 .privacy-card:hover{
 
-
     border-color:
 
-
-        rgba(59,130,246,.40);
-
-
+        rgba(59,130,246,.42);
 
     box-shadow:
 
-
         0 18px 42px
 
-        rgba(0,0,0,.24);
-
+        rgba(0,0,0,.22);
 
 }
 
-
-
-
-
 .privacy-icon{
 
+    width:64px;
 
-    flex:
-
-        0 0 auto;
-
-
-
-    width:
-
-        64px;
-
-
-
-    height:
-
-        64px;
-
-
+    height:64px;
 
     display:flex;
 
-
-
     align-items:center;
-
-
 
     justify-content:center;
 
+    flex-shrink:0;
 
+    border-radius:50%;
 
-    border-radius:
-
-        50%;
-
-
-
-    font-size:
-
-        1.8rem;
-
-
+    font-size:1.7rem;
 
     background:
 
-
         rgba(37,99,235,.18);
 
-
-
     border:
-
 
         1px solid
 
         rgba(59,130,246,.30);
 
-
 }
-
-
-
-
 
 .privacy-content{
 
-
     flex:1;
 
-
 }
-
-
-
-
 
 .privacy-content h3{
 
-
     margin:0;
 
+    font-size:1.15rem;
 
+    font-weight:700;
 
-    font-size:
-
-        1.18rem;
-
-
-
-    font-weight:
-
-        700;
-
-
-
-    line-height:
-
-        1.65;
-
-
-
-    color:
-
-        var(--ctm-white);
-
+    line-height:1.6;
 
 }
-
-
-
-
 
 .privacy-content p{
 
+    margin-top:12px;
 
-    margin:
+    font-size:.95rem;
 
-
-        12px
-
-        0
-
-        0;
-
-
-
-    font-size:
-
-        .96rem;
-
-
-
-    line-height:
-
-        1.9;
-
-
+    line-height:1.9;
 
     color:
 
-        rgba(255,255,255,.74);
-
+        var(--ctm-text-soft);
 
 }
-
-
-
 
 
 /* ==========================================================================
    ACTION BUTTONS
-   ========================================================================== */
-
+========================================================================== */
 
 .form-actions{
 
-
     display:flex;
-
-
 
     justify-content:space-between;
 
-
-
     align-items:center;
 
+    gap:20px;
 
-
-    gap:
-
-        22px;
-
-
-
-    margin-top:
-
-        20px;
-
+    margin-top:20px;
 
 }
 
-
-
-
-
-/* ==========================================================================
-   SECONDARY BUTTON
-   ========================================================================== */
-
-
 .secondary-button{
 
+    min-width:200px;
 
-    min-width:
-
-        190px;
-
-
-
-    padding:
-
-
-        18px
-
-        28px;
-
-
+    min-height:68px;
 
     border-radius:
 
-        16px;
-
-
+        var(--radius-md);
 
     border:
 
-
         1px solid
 
-        rgba(255,255,255,.16);
-
-
+        rgba(255,255,255,.18);
 
     background:
 
-
         rgba(255,255,255,.05);
-
-
 
     color:
 
         var(--ctm-white);
 
-
-
-    font-family:inherit;
-
-
-
     cursor:pointer;
-
-
 
     transition:
 
         var(--transition);
 
-
 }
-
-
-
-
 
 .secondary-button:hover{
 
-
     background:
-
 
         rgba(255,255,255,.10);
 
-
-
-    border-color:
-
-
-        rgba(255,255,255,.30);
-
-
 }
-
-
-
-
-
-.button-title-ta{
-
-
-    display:block;
-
-
-
-    font-size:
-
-        1rem;
-
-
-
-    font-weight:
-
-        600;
-
-
-
-    line-height:
-
-        1.5;
-
-
-}
-
-
-
-
-
-.button-title-en{
-
-
-    display:block;
-
-
-
-    margin-top:
-
-        6px;
-
-
-
-    font-size:
-
-        .84rem;
-
-
-
-    color:
-
-        rgba(255,255,255,.68);
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   PRIMARY BUTTON
-   ========================================================================== */
-
 
 .primary-button{
 
-
     flex:1;
 
-
-
-    min-height:
-
-        70px;
-
-
-
-    padding:
-
-
-        22px
-
-        36px;
-
-
+    min-height:70px;
 
     border:none;
 
-
-
-    border-radius:
-
-        18px;
-
-
+    border-radius:18px;
 
     cursor:pointer;
 
-
-
-    font-family:inherit;
-
-
+    color:#FFFFFF;
 
     background:
-
 
         linear-gradient(
 
             135deg,
 
-            #2563EB,
+            var(--ctm-primary),
 
-            #1D4ED8,
+            var(--ctm-primary-light),
 
-            #1E40AF
+            var(--ctm-primary-dark)
 
         );
 
-
-
-    color:
-
-        var(--ctm-white);
-
-
-
     box-shadow:
 
+        0 18px 48px
 
-        0 20px 52px
-
-        rgba(37,99,235,.40);
-
-
+        rgba(37,99,235,.38);
 
     transition:
 
+        transform .30s,
 
-        transform .35s ease,
-
-        box-shadow .35s ease;
-
+        box-shadow .30s;
 
 }
-
-
-
-
 
 .primary-button:hover{
 
-
     transform:
 
-        translateY(-4px);
-
-
+        translateY(-3px);
 
     box-shadow:
 
+        0 26px 60px
 
-        0 28px 64px
-
-        rgba(37,99,235,.50);
-
+        rgba(37,99,235,.48);
 
 }
 
+.primary-button:disabled{
 
+    opacity:.75;
 
+    cursor:not-allowed;
 
-
-.primary-button .button-title-ta{
-
-
-    display:block;
-
-
-
-    font-size:
-
-        1.22rem;
-
-
-
-    font-weight:
-
-        700;
-
-
+    transform:none;
 
 }
 
-
-
-
-
-.primary-button .button-title-en{
-
+.button-title-ta{
 
     display:block;
 
+    font-size:1.15rem;
 
+    font-weight:700;
 
-    margin-top:
+}
 
-        6px;
+.button-title-en{
 
+    display:block;
 
+    margin-top:6px;
 
-    font-size:
+    font-size:.88rem;
 
-        .92rem;
-
-
+    letter-spacing:.06em;
 
     color:
 
-
         rgba(255,255,255,.90);
-
 
 }
 
 
+/* ==========================================================================
+   LOADING STATE
+========================================================================== */
 
+.primary-button.loading{
+
+    position:relative;
+
+    color:transparent;
+
+    pointer-events:none;
+
+}
+
+.primary-button.loading::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:22px;
+
+    height:22px;
+
+    top:50%;
+
+    left:50%;
+
+    margin-top:-11px;
+
+    margin-left:-11px;
+
+    border-radius:50%;
+
+    border:
+
+        3px solid
+
+        rgba(255,255,255,.35);
+
+    border-top-color:#FFFFFF;
+
+    animation:
+
+        ctmSpin .8s linear infinite;
+
+}
+
+@keyframes ctmSpin{
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
 
 
 /* ==========================================================================
    FOOTER
-   ========================================================================== */
-
+========================================================================== */
 
 .registration-footer{
 
-
     padding:
 
-
-        42px
-
+        40px
         24px
-
-        60px;
-
-
+        56px;
 
     text-align:center;
 
-
 }
-
-
-
-
 
 .footer-text{
 
-
     margin:0;
 
+    font-size:.90rem;
 
-
-    font-size:
-
-        .92rem;
-
-
-
-    letter-spacing:
-
-        .05em;
-
-
+    letter-spacing:.05em;
 
     color:
 
-
-        rgba(255,255,255,.52);
-
+        rgba(255,255,255,.55);
 
 }
-
-
-
 
 
 /* ==========================================================================
    TABLET
-   ========================================================================== */
+========================================================================== */
 
-
-@media(max-width:1024px){
-
-
+@media (max-width:1024px){
 
     .registration-card{
 
-
         padding:
 
-
             48px
-
             42px
-
             60px;
 
-
     }
-
-
 
     .hero-title-ta{
 
-
-        font-size:
-
-            2.5rem;
-
+        font-size:2.4rem;
 
     }
-
-
 
     .form-actions{
 
-
-        flex-direction:
-
-            column-reverse;
-
-
-        align-items:
-
-            stretch;
-
+        flex-direction:column-reverse;
 
     }
-
-
 
     .secondary-button,
 
     .primary-button{
 
-
         width:100%;
-
 
     }
 
-
 }
-
-
-
 
 
 /* ==========================================================================
    MOBILE
-   ========================================================================== */
+========================================================================== */
 
-
-@media(max-width:768px){
-
-
+@media (max-width:768px){
 
     .logo{
 
-
-        width:
-
-            165px;
-
+        width:170px;
 
     }
-
-
 
     .registration-main{
 
-
         padding:
 
-
-            0
-
+            12px
             18px
-
-            48px;
-
+            40px;
 
     }
-
-
 
     .registration-card{
 
-
         padding:
 
+            34px
+            22px
+            44px;
 
-            36px
-
-            24px
-
-            48px;
-
-
-
-        border-radius:
-
-            22px;
-
+        border-radius:22px;
 
     }
-
-
 
     .hero-title-ta{
 
-
-        font-size:
-
-            2rem;
-
+        font-size:1.95rem;
 
     }
-
-
 
     .hero-subtitle-ta{
 
-
-        font-size:
-
-            1.28rem;
-
+        font-size:1.25rem;
 
     }
-
-
 
     .privacy-card{
 
+        flex-direction:column;
 
-        flex-direction:
+        align-items:center;
 
-            column;
-
-
-        align-items:
-
-            center;
-
-
-        text-align:
-
-            center;
-
+        text-align:center;
 
     }
 
+    .progress-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:14px;
+
+    }
+
+    .progress-right{
+
+        text-align:left;
+
+    }
 
 }
 
 
-
-
-
 /* ==========================================================================
    END OF FILE
-   ========================================================================== */
+========================================================================== */
