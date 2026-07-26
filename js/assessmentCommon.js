@@ -5,37 +5,13 @@
    FROM SURVIVAL TO LIVING™
 
    File        : assessmentCommon.js
-   Version     : 4.0
+   Version     : 5.0
 
    Status      : 🔒 PREMIUM ASSESSMENT ENGINE
 
    Purpose:
 
-       Universal Assessment Experience Engine
-
-   Supports:
-
-       assessment01.js
-       assessment02.js
-       ...
-       assessment12.js
-
-
-   Owns:
-
-       • Premium Rendering
-       • Question Display
-       • Rating Interaction
-       • Reflection Display
-       • Wisdom Display
-
-
-   Owns NO:
-
-       • Data Storage
-       • API
-       • Navigation
-       • Scoring
+       Universal Engine for KALA CHAKRA™ Assessments
 
    ========================================================================== */
 
@@ -54,20 +30,27 @@
 const CTMAssessmentState = {
 
 
-    spoke:
-
-        null,
+    currentSpoke:1,
 
 
-    pillar:
-
-        null,
+    currentPillar:null,
 
 
-    responses:{}
+    responses:{},
+
+
+    spokeScore:0,
+
+
+    spokePercentage:0,
+
+
+    lifeLevel:null
 
 
 };
+
+
 
 
 
@@ -79,12 +62,13 @@ const CTMAssessmentState = {
    ========================================================================== */
 
 
-function initializePremiumAssessment(spokeNumber){
+function initializeAssessment(spokeNumber){
+
 
 
     const pillar =
 
-        getAssessmentPillar(
+        getPillarData(
 
             spokeNumber
 
@@ -97,49 +81,38 @@ function initializePremiumAssessment(spokeNumber){
 
         console.error(
 
-            "Missing assessment pillar:",
+            "Assessment pillar not found:",
 
             spokeNumber
 
         );
 
 
-        return false;
+        return;
 
 
     }
 
 
 
-    CTMAssessmentState.spoke =
+    CTMAssessmentState.currentSpoke =
 
         spokeNumber;
 
 
 
-    CTMAssessmentState.pillar =
+    CTMAssessmentState.currentPillar =
 
         pillar;
 
 
 
-    renderPremiumAssessment(
+    renderAssessmentPage(
 
         pillar
 
     );
 
-
-
-    updateLifeMap(
-
-        spokeNumber
-
-    );
-
-
-
-    return true;
 
 
 }
@@ -155,10 +128,12 @@ function initializePremiumAssessment(spokeNumber){
    ========================================================================== */
 
 
-function getAssessmentPillar(spokeNumber){
+function getPillarData(spokeNumber){
+
 
 
     return AssessmentRepository.pillars.find(
+
 
         function(pillar){
 
@@ -174,6 +149,7 @@ function getAssessmentPillar(spokeNumber){
 
         }
 
+
     );
 
 
@@ -186,11 +162,20 @@ function getAssessmentPillar(spokeNumber){
 
 
 /* ==========================================================================
-   MAIN PREMIUM RENDER
+   MASTER PAGE RENDER
    ========================================================================== */
 
 
-function renderPremiumAssessment(pillar){
+function renderAssessmentPage(pillar){
+
+
+
+    renderLifeMap(
+
+        pillar.spoke
+
+    );
+
 
 
     renderPillarIdentity(
@@ -198,6 +183,10 @@ function renderPremiumAssessment(pillar){
         pillar
 
     );
+
+
+
+    renderLifeEvolution();
 
 
 
@@ -233,6 +222,81 @@ function renderPremiumAssessment(pillar){
 
 
 /* ==========================================================================
+   LIFE MAP™
+   ========================================================================== */
+
+
+function renderLifeMap(spokeNumber){
+
+
+
+    const progress =
+
+        document.getElementById(
+
+            "lifeMapProgress"
+
+        );
+
+
+
+    if(progress){
+
+
+        progress.textContent =
+
+
+            String(spokeNumber)
+
+                .padStart(2,"0")
+
+            +
+
+            " / 12";
+
+
+    }
+
+
+
+    const spokeIndicator =
+
+        document.querySelector(
+
+            ".active-spoke"
+
+        );
+
+
+
+    if(spokeIndicator){
+
+
+        spokeIndicator.textContent =
+
+
+            AssessmentSpokeMap[
+
+                spokeNumber - 1
+
+            ]
+
+            .title;
+
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
    PILLAR IDENTITY
    ========================================================================== */
 
@@ -240,7 +304,8 @@ function renderPremiumAssessment(pillar){
 function renderPillarIdentity(pillar){
 
 
-    setText(
+
+    setElementText(
 
         "pillarTitleTa",
 
@@ -250,7 +315,7 @@ function renderPillarIdentity(pillar){
 
 
 
-    setText(
+    setElementText(
 
         "pillarTitleEn",
 
@@ -260,9 +325,29 @@ function renderPillarIdentity(pillar){
 
 
 
-    setText(
+    setElementText(
 
-        "introductionTa",
+        "coreQuestionTa",
+
+        pillar.coreQuestionTa
+
+    );
+
+
+
+    setElementText(
+
+        "coreQuestionEn",
+
+        pillar.coreQuestionEn
+
+    );
+
+
+
+    setElementText(
+
+        "pillarIntroTa",
 
         pillar.introductionTa
 
@@ -270,9 +355,9 @@ function renderPillarIdentity(pillar){
 
 
 
-    setText(
+    setElementText(
 
-        "introductionEn",
+        "pillarIntroEn",
 
         pillar.introductionEn
 
@@ -288,17 +373,283 @@ function renderPillarIdentity(pillar){
 /* Continue in Batch 1B */
 
 /* ==========================================================================
+   LIFE EVOLUTION JOURNEY™
+
+   Learner → Leader → Legend™
+
+   ========================================================================== */
+
+
+function renderLifeEvolution(){
+
+
+
+    const container =
+
+        document.getElementById(
+
+            "lifeEvolutionLevel"
+
+        );
+
+
+
+    if(!container){
+
+        return;
+
+    }
+
+
+
+    container.innerHTML = `
+
+
+        <div class="life-level-header">
+
+            <div class="level-item learner">
+
+                🌱 LEARNER™
+
+            </div>
+
+
+            <div class="level-item leader">
+
+                🚀 LEADER™
+
+            </div>
+
+
+            <div class="level-item legend">
+
+                👑 LEGEND™
+
+            </div>
+
+
+        </div>
+
+
+        <div class="level-scale">
+
+
+            <span>0</span>
+
+            <span>60</span>
+
+            <span>85</span>
+
+            <span>100</span>
+
+
+        </div>
+
+
+        <div class="current-level-message">
+
+            Complete your reflection to discover your current level.
+
+        </div>
+
+
+    `;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   UPDATE LIFE EVOLUTION LEVEL
+
+   ========================================================================== */
+
+
+function updateLifeEvolution(score){
+
+
+
+    const level =
+
+        getLifeEvolutionLevel(
+
+            score
+
+        );
+
+
+
+    CTMAssessmentState.lifeLevel =
+
+        level;
+
+
+
+    const items =
+
+        document.querySelectorAll(
+
+            ".level-item"
+
+        );
+
+
+
+    items.forEach(
+
+        function(item){
+
+
+
+            item.classList.remove(
+
+                "active"
+
+            );
+
+
+        }
+
+    );
+
+
+
+
+
+    if(
+
+        level.key === "LEARNER"
+
+    ){
+
+
+        document
+
+            .querySelector(
+
+                ".learner"
+
+            )
+
+            ?.classList.add(
+
+                "active"
+
+            );
+
+
+    }
+
+
+
+    else if(
+
+        level.key === "LEADER"
+
+    ){
+
+
+        document
+
+            .querySelector(
+
+                ".leader"
+
+            )
+
+            ?.classList.add(
+
+                "active"
+
+            );
+
+
+    }
+
+
+
+    else{
+
+
+        document
+
+            .querySelector(
+
+                ".legend"
+
+            )
+
+            ?.classList.add(
+
+                "active"
+
+            );
+
+
+    }
+
+
+
+
+
+    const message =
+
+        document.querySelector(
+
+            ".current-level-message"
+
+        );
+
+
+
+    if(message){
+
+
+
+        message.innerHTML = `
+
+
+            Current Level:
+
+            <strong>
+
+            ${level.english}
+
+            </strong>
+
+
+            <br>
+
+
+            ${level.tamil}
+
+
+        `;
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
    QUESTION RENDERING
    ========================================================================== */
 
 
-/**
- * Render all assessment questions
- *
- */
-
-
 function renderQuestions(questions){
+
 
 
     if(
@@ -317,13 +668,16 @@ function renderQuestions(questions){
 
 
 
+
+
     questions.forEach(
+
 
         function(question,index){
 
 
 
-            const questionNumber =
+            const number =
 
                 index + 1;
 
@@ -333,12 +687,14 @@ function renderQuestions(questions){
 
                 question,
 
-                questionNumber
+                number
 
             );
 
 
+
         }
+
 
     );
 
@@ -350,11 +706,6 @@ function renderQuestions(questions){
 
 
 
-/**
- * Render individual question
- *
- */
-
 
 function renderQuestion(
 
@@ -365,7 +716,28 @@ function renderQuestion(
 ){
 
 
-    setText(
+
+    setElementText(
+
+        "questionTypeTa" + number,
+
+        question.typeTa
+
+    );
+
+
+
+    setElementText(
+
+        "questionTypeEn" + number,
+
+        question.type
+
+    );
+
+
+
+    setElementText(
 
         "questionTextTa" + number,
 
@@ -375,7 +747,7 @@ function renderQuestion(
 
 
 
-    setText(
+    setElementText(
 
         "questionTextEn" + number,
 
@@ -385,7 +757,7 @@ function renderQuestion(
 
 
 
-    createPremiumRatingScale(
+    createRatingScale(
 
         "ratingGroup" + number,
 
@@ -404,23 +776,20 @@ function renderQuestion(
 
 /* ==========================================================================
    PREMIUM RATING SCALE
+
+   1 - 10
+
    ========================================================================== */
 
 
-/**
- *
- * Creates 1 - 10 Life Alignment Scale
- *
- */
-
-
-function createPremiumRatingScale(
+function createRatingScale(
 
     containerId,
 
     questionNumber
 
 ){
+
 
 
     const container =
@@ -469,15 +838,15 @@ function createPremiumRatingScale(
 
 
 
-        button.type =
-
-            "button";
-
-
-
         button.className =
 
             "rating-button";
+
+
+
+        button.type =
+
+            "button";
 
 
 
@@ -487,19 +856,11 @@ function createPremiumRatingScale(
 
 
 
-        button.setAttribute(
-
-            "aria-label",
-
-            "Rating " + score
-
-        );
-
-
-
-        button.innerHTML =
+        button.textContent =
 
             score;
+
+
 
 
 
@@ -510,7 +871,8 @@ function createPremiumRatingScale(
             function(){
 
 
-                selectPremiumRating(
+
+                selectRating(
 
                     questionNumber,
 
@@ -521,7 +883,9 @@ function createPremiumRatingScale(
                 );
 
 
+
             }
+
 
         );
 
@@ -537,6 +901,7 @@ function createPremiumRatingScale(
     }
 
 
+
 }
 
 
@@ -544,20 +909,15 @@ function createPremiumRatingScale(
 
 
 
+/* Continue in Batch 1C */
 
 /* ==========================================================================
    RATING SELECTION
+
    ========================================================================== */
 
 
-/**
- *
- * Stores selected response
- *
- */
-
-
-function selectPremiumRating(
+function selectRating(
 
     questionNumber,
 
@@ -566,6 +926,7 @@ function selectPremiumRating(
     container
 
 ){
+
 
 
     const buttons =
@@ -636,6 +997,9 @@ function selectPremiumRating(
 
 
 
+    calculateCurrentSpokeScore();
+
+
 }
 
 
@@ -643,17 +1007,90 @@ function selectPremiumRating(
 
 
 
+
+
 /* ==========================================================================
-   RESPONSE ACCESS
+   SCORE CALCULATION
+
    ========================================================================== */
 
 
-function getAssessmentResponses(){
+function calculateCurrentSpokeScore(){
 
 
-    return (
 
-        CTMAssessmentState.responses
+    const responses =
+
+        Object.values(
+
+            CTMAssessmentState.responses
+
+        );
+
+
+
+    if(
+
+        responses.length === 0
+
+    ){
+
+        return;
+
+    }
+
+
+
+
+
+    const total =
+
+        responses.reduce(
+
+            function(sum,value){
+
+
+                return sum + Number(value);
+
+
+            },
+
+            0
+
+        );
+
+
+
+
+
+    CTMAssessmentState.spokeScore =
+
+        total;
+
+
+
+
+
+    CTMAssessmentState.spokePercentage =
+
+
+        calculateSpokePercentage(
+
+            total
+
+        );
+
+
+
+
+
+    updateScoreDisplay();
+
+
+
+    updateLifeEvolution(
+
+        CTMAssessmentState.spokePercentage
 
     );
 
@@ -664,104 +1101,43 @@ function getAssessmentResponses(){
 
 
 
-/* Continue in Batch 1C */
+
 
 /* ==========================================================================
-   LIFE MAP™ PROGRESS
+   SCORE DISPLAY
+
    ========================================================================== */
 
 
-/**
- * Update Life Map progress indicator
- *
- */
-
-
-function updateLifeMap(spokeNumber){
-
-
-    const progressElement =
-
-        document.querySelector(
-
-            ".life-map-progress span"
-
-        );
+function updateScoreDisplay(){
 
 
 
-    if(progressElement){
+    setElementText(
 
+        "spokeRawScore",
 
-        progressElement.textContent =
+        CTMAssessmentState.spokeScore
 
+        +
 
-            String(spokeNumber)
+        " / 30"
 
-                .padStart(2,"0")
-
-            +
-
-            " / 12";
-
-
-    }
+    );
 
 
 
-    const activeSpoke =
+    setElementText(
 
-        document.querySelector(
+        "spokePercentage",
 
-            ".wheel-spoke.active"
+        CTMAssessmentState.spokePercentage
 
-        );
+        +
 
+        " /100"
 
-
-    if(activeSpoke){
-
-
-        activeSpoke.classList.remove(
-
-            "active"
-
-        );
-
-
-    }
-
-
-
-    const spokes =
-
-        document.querySelectorAll(
-
-            ".wheel-spoke"
-
-        );
-
-
-
-    if(
-
-        spokes[spokeNumber - 1]
-
-    ){
-
-
-        spokes[
-
-            spokeNumber - 1
-
-        ].classList.add(
-
-            "active"
-
-        );
-
-
-    }
+    );
 
 
 }
@@ -774,53 +1150,31 @@ function updateLifeMap(spokeNumber){
 
 /* ==========================================================================
    REFLECTION MOMENT™
+
    ========================================================================== */
 
 
 function renderReflection(pillar){
 
 
-    const reflectionTitle =
 
-        document.querySelector(
+    setElementText(
 
-            ".reflection-panel h3"
+        "reflectionTextTa",
 
-        );
+        pillar.reflectionTa
 
-
-
-    const reflectionText =
-
-        document.querySelector(
-
-            ".reflection-panel p"
-
-        );
+    );
 
 
 
-    if(reflectionTitle){
+    setElementText(
 
+        "reflectionTextEn",
 
-        reflectionTitle.textContent =
+        pillar.reflectionEn
 
-            pillar.reflectionTa;
-
-
-    }
-
-
-
-    if(reflectionText){
-
-
-        reflectionText.textContent =
-
-            pillar.reflectionEn;
-
-
-    }
+    );
 
 
 }
@@ -833,53 +1187,31 @@ function renderReflection(pillar){
 
 /* ==========================================================================
    WISDOM MOMENT™
+
    ========================================================================== */
 
 
 function renderWisdom(pillar){
 
 
-    const wisdomTitle =
 
-        document.querySelector(
+    setElementText(
 
-            ".wisdom-panel h3"
+        "wisdomTextTa",
 
-        );
+        pillar.wisdomTa
 
-
-
-    const wisdomText =
-
-        document.querySelector(
-
-            ".wisdom-panel p"
-
-        );
+    );
 
 
 
-    if(wisdomTitle){
+    setElementText(
 
+        "wisdomTextEn",
 
-        wisdomTitle.textContent =
+        pillar.wisdomEn
 
-            pillar.wisdomTa;
-
-
-    }
-
-
-
-    if(wisdomText){
-
-
-        wisdomText.textContent =
-
-            pillar.wisdomEn;
-
-
-    }
+    );
 
 
 }
@@ -891,40 +1223,61 @@ function renderWisdom(pillar){
 
 
 /* ==========================================================================
-   SAVE RESPONSES
+   SAVE CURRENT ASSESSMENT STATE
+
    ========================================================================== */
 
 
-function saveAssessmentResponses(){
+function getAssessmentPayload(){
 
 
-    const payload = {
+
+    return {
 
 
         spoke:
 
-            CTMAssessmentState.spoke,
+            CTMAssessmentState.currentSpoke,
+
+
+        pillar:
+
+
+            CTMAssessmentState.currentPillar.key,
+
 
 
         responses:
 
+
             CTMAssessmentState.responses,
 
 
-        updatedAt:
 
-            new Date()
+        score:
 
-                .toISOString()
+
+            CTMAssessmentState.spokeScore,
+
+
+
+        percentage:
+
+
+            CTMAssessmentState.spokePercentage,
+
+
+
+        level:
+
+
+            CTMAssessmentState.lifeLevel.key
+
 
 
     };
 
 
-
-    return payload;
-
-
 }
 
 
@@ -933,27 +1286,37 @@ function saveAssessmentResponses(){
 
 
 
+/* Continue in Batch 1D */
+
 /* ==========================================================================
-   RESTORE RESPONSES
+   RESTORE SAVED RESPONSES
+
    ========================================================================== */
 
 
-function restoreAssessmentResponses(savedResponses){
+function restoreResponses(savedData){
 
 
-    if(!savedResponses){
 
+    if(!savedData){
 
         return;
-
 
     }
 
 
 
+    CTMAssessmentState.responses =
+
+        savedData.responses || {};
+
+
+
+
+
     Object.keys(
 
-        savedResponses
+        CTMAssessmentState.responses
 
     )
 
@@ -965,7 +1328,7 @@ function restoreAssessmentResponses(savedResponses){
 
             const score =
 
-                savedResponses[
+                CTMAssessmentState.responses[
 
                     questionNumber
 
@@ -989,9 +1352,7 @@ function restoreAssessmentResponses(savedResponses){
 
             if(!container){
 
-
                 return;
-
 
             }
 
@@ -1025,17 +1386,15 @@ function restoreAssessmentResponses(savedResponses){
 
 
 
-            CTMAssessmentState.responses[
-
-                questionNumber
-
-            ] = score;
-
-
-
         }
 
+
     );
+
+
+
+    calculateCurrentSpokeScore();
+
 
 
 }
@@ -1047,17 +1406,19 @@ function restoreAssessmentResponses(savedResponses){
 
 
 /* ==========================================================================
-   DOM HELPER
+   DOM HELPER FUNCTIONS
+
    ========================================================================== */
 
 
-function setText(
+function setElementText(
 
     id,
 
     value
 
 ){
+
 
 
     const element =
@@ -1089,40 +1450,171 @@ function setText(
 
 
 
+function getElement(id){
+
+
+    return document.getElementById(
+
+        id
+
+    );
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   ASSESSMENT COMPLETION CHECK
+
+   ========================================================================== */
+
+
+function isAssessmentComplete(){
+
+
+
+    return Object.keys(
+
+        CTMAssessmentState.responses
+
+    ).length === 3;
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   RESET CURRENT ASSESSMENT
+
+   ========================================================================== */
+
+
+function resetAssessment(){
+
+
+
+    CTMAssessmentState.responses = {};
+
+
+
+    CTMAssessmentState.spokeScore = 0;
+
+
+
+    CTMAssessmentState.spokePercentage = 0;
+
+
+
+    CTMAssessmentState.lifeLevel = null;
+
+
+
+    document
+
+        .querySelectorAll(
+
+            ".rating-button"
+
+        )
+
+        .forEach(
+
+            function(button){
+
+
+                button.classList.remove(
+
+                    "active"
+
+                );
+
+
+            }
+
+        );
+
+
+
+}
+
+
+
+
+
+
+
 /* ==========================================================================
    PUBLIC ENGINE API
+
    ========================================================================== */
 
 
 const CTMAssessmentEngine = {
 
 
+
     init:
 
-        initializePremiumAssessment,
+        initializeAssessment,
+
 
 
     render:
 
-        renderPremiumAssessment,
+        renderAssessmentPage,
 
 
-    responses:
 
-        getAssessmentResponses,
+    getPillar:
+
+        getPillarData,
 
 
-    save:
 
-        saveAssessmentResponses,
+    calculateScore:
+
+        calculateCurrentSpokeScore,
+
+
+
+    getPayload:
+
+        getAssessmentPayload,
+
 
 
     restore:
 
-        restoreAssessmentResponses
+        restoreResponses,
+
+
+
+    reset:
+
+        resetAssessment,
+
+
+
+    completed:
+
+        isAssessmentComplete
+
 
 
 };
+
+
 
 
 
@@ -1143,10 +1635,13 @@ Object.freeze(
 /* ==========================================================================
    END OF FILE
 
+
    File        : assessmentCommon.js
 
-   Version     : 4.0
+   Version     : 5.0
 
-   Status      : 🔒 PREMIUM ASSESSMENT ENGINE
+
+   Status      : 🔒 CTM PATH™ PREMIUM ASSESSMENT ENGINE
+
 
    ========================================================================== */
