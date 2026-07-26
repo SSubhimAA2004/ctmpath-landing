@@ -2,43 +2,52 @@
 /* ==========================================================================
    CTM PATH™ Guided Journey
 
+   FROM SURVIVAL TO LIVING™
+
    File        : assessment.css
-   Version     : 4.0
+   Version     : 5.0
 
    Status      : 🔒 PREMIUM ASSESSMENT EXPERIENCE
 
-   Purpose:
-
-       Premium Assessment Interface
-
-   Owns:
-
-       • Life Map
-       • Pillar Experience
-       • Question Cards
-       • Rating Interface
-       • Reflection Moments
-       • Wisdom Moments
-       • Navigation
-
-   Owns NO:
-
-       • Assessment Logic
-       • Data
-       • API
-
    ========================================================================== */
-
-
-
 
 
 /* ==========================================================================
-   Premium Assessment Container
+   ASSESSMENT ROOT
    ========================================================================== */
 
 
-.premium-assessment-card{
+.assessment-page{
+
+
+    min-height:100vh;
+
+
+    background:
+
+        radial-gradient(
+
+            circle at top,
+
+            rgba(22,199,194,.15),
+
+            transparent 35%
+
+        ),
+
+        #081C3A;
+
+
+    color:#FFFFFF;
+
+
+}
+
+
+
+
+
+.assessment-container{
 
 
     width:100%;
@@ -47,32 +56,14 @@
     max-width:1200px;
 
 
-    margin-inline:auto;
+    margin:0 auto;
 
 
-    padding:60px;
-
-
-    border-radius:40px;
-
-
-    background:
-
-        rgba(255,255,255,0.06);
-
-
-    backdrop-filter:
-
-        blur(24px);
-
-
-    border:
-
-        1px solid rgba(255,255,255,0.12);
-
+    padding:40px 24px;
 
 
 }
+
 
 
 
@@ -80,52 +71,110 @@
 
 
 /* ==========================================================================
-   Header Branding
+   PREMIUM ASSESSMENT CARD
    ========================================================================== */
 
 
-.premium-header{
+.premium-assessment-card{
 
 
-    padding:24px 0;
+    background:
+
+        rgba(255,255,255,.06);
+
+
+    backdrop-filter:
+
+        blur(20px);
+
+
+    border:
+
+        1px solid rgba(255,255,255,.12);
+
+
+    border-radius:
+
+        32px;
+
+
+    padding:
+
+        50px;
+
+
+    box-shadow:
+
+        0 30px 80px rgba(0,0,0,.35);
 
 
 }
 
 
 
-.brand-lockup{
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-    gap:20px;
-
-
-}
 
 
 
-.logo{
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
 
 
-    width:110px;
+.assessment-header{
+
+
+    text-align:center;
+
+
+    margin-bottom:40px;
 
 
 }
 
 
 
-.journey-label{
+
+
+.brand-title{
+
+
+    font-family:
+
+        "Poppins",
+        sans-serif;
+
+
+    font-size:
+
+        28px;
+
+
+    font-weight:
+
+        700;
+
+
+    letter-spacing:
+
+        .08em;
+
+
+}
+
+
+
+
+
+.journey-title{
+
+
+    margin-top:10px;
 
 
     color:
 
-        var(--color-secondary);
+        #C8A45D;
 
 
     font-size:
@@ -135,35 +184,34 @@
 
     letter-spacing:
 
-        .12em;
-
-
-    font-weight:
-
-        600;
+        .2em;
 
 
 }
+
+
 
 
 
 
 
 /* ==========================================================================
-   Life Map™ Header
+   LIFE MAP™
    ========================================================================== */
 
 
-.life-map-header{
+.life-map{
 
 
     text-align:center;
 
 
-    margin-bottom:60px;
+    margin-bottom:50px;
 
 
 }
+
+
 
 
 
@@ -175,47 +223,45 @@
         18px;
 
 
+    font-weight:
+
+        600;
+
+
     letter-spacing:
 
-        .15em;
+        .12em;
 
 
     color:
 
-        var(--color-secondary);
-
-
-    font-weight:
-
-        700;
+        #16C7C2;
 
 
 }
+
+
 
 
 
 .life-map-progress{
 
 
-    margin-top:20px;
+    margin-top:12px;
 
 
     font-size:
 
-        32px;
-
-
-    font-weight:
-
-        700;
+        16px;
 
 
     color:
 
-        var(--text-primary);
+        #FFFFFF;
 
 
 }
+
 
 
 
@@ -223,46 +269,59 @@
 
 
 /* ==========================================================================
-   Life Map Wheel
+   KALA CHAKRA™ WHEEL
    ========================================================================== */
 
 
-.life-map-wheel{
+.kala-wheel{
+
+
+    margin:
+
+        40px auto;
+
+
+    max-width:
+
+        650px;
 
 
     display:flex;
 
 
-    justify-content:center;
-
-
     flex-wrap:wrap;
 
 
-    gap:14px;
+    justify-content:center;
 
 
-    margin-top:35px;
+    gap:
+
+        12px;
 
 
 }
 
 
 
+
+
 .wheel-spoke{
 
 
-    padding:10px 22px;
+    padding:
+
+        12px 18px;
 
 
     border-radius:
 
-        999px;
+        50px;
 
 
     background:
 
-        rgba(255,255,255,.05);
+        rgba(255,255,255,.08);
 
 
     border:
@@ -270,17 +329,19 @@
         1px solid rgba(255,255,255,.15);
 
 
-    color:
-
-        var(--text-secondary);
-
-
     font-size:
 
         14px;
 
 
+    transition:
+
+        .3s ease;
+
+
 }
+
+
 
 
 
@@ -289,97 +350,77 @@
 
     background:
 
-        rgba(13,148,136,.18);
-
-
-    border-color:
-
-        var(--color-primary);
+        #16C7C2;
 
 
     color:
 
-        var(--color-primary);
+        #081C3A;
+
+
+    border-color:
+
+        #16C7C2;
+
+
+    transform:
+
+        scale(1.05);
 
 
 }
+
+
 
 
 
 
 
 /* ==========================================================================
-   Pillar Introduction
+   PILLAR INTRODUCTION
    ========================================================================== */
 
 
-.pillar-introduction{
+.pillar-section{
 
 
     text-align:center;
 
 
-    max-width:900px;
-
-
-    margin:
-
-        0 auto 60px;
+    margin-bottom:45px;
 
 
 }
 
 
 
-.pillar-badge{
 
 
-    display:inline-flex;
-
-
-    padding:
-
-        12px 28px;
-
-
-    border-radius:
-
-        999px;
-
-
-    background:
-
-        rgba(198,164,91,.15);
-
-
-    border:
-
-        1px solid rgba(198,164,91,.35);
+.spoke-number{
 
 
     color:
 
-        var(--color-secondary);
+        #C8A45D;
 
 
-    font-weight:
+    font-size:
 
-        700;
+        14px;
 
 
     letter-spacing:
 
-        .1em;
+        .15em;
 
 
 }
 
 
 
+
+
 .pillar-title-ta{
-
-
-    margin-top:30px;
 
 
     font-family:
@@ -393,32 +434,87 @@
         42px;
 
 
-    color:
+    margin:
 
-        var(--color-secondary);
+        15px 0 5px;
 
 
 }
+
+
 
 
 
 .pillar-title-en{
 
 
-    margin-top:12px;
-
-
     font-size:
+
+        32px;
+
+
+    font-weight:
+
+        600;
+
+
+}
+
+
+
+
+
+.core-question-ta{
+
+
+    margin-top:
 
         30px;
 
 
-    color:
+    font-family:
 
-        var(--text-primary);
+        "Noto Sans Tamil",
+        sans-serif;
+
+
+    font-size:
+
+        28px;
+
+
+    line-height:
+
+        1.8;
 
 
 }
+
+
+
+
+
+.core-question-en{
+
+
+    margin-top:
+
+        10px;
+
+
+    font-size:
+
+        20px;
+
+
+    color:
+
+        rgba(255,255,255,.75);
+
+
+}
+
+
 
 
 
@@ -427,20 +523,47 @@
 /* Continue in Batch 1B */
 
 /* ==========================================================================
-   Premium Question Cards
+   LIFE EVOLUTION JOURNEY™
+
+   Learner → Leader → Legend™
+
    ========================================================================== */
 
 
-.questions-container{
+.life-evolution-level{
 
 
-    display:flex;
+    margin:
+
+        45px auto;
 
 
-    flex-direction:column;
+    padding:
+
+        35px;
 
 
-    gap:36px;
+    max-width:
+
+        850px;
+
+
+    background:
+
+        rgba(255,255,255,.05);
+
+
+    border:
+
+        1px solid rgba(255,255,255,.12);
+
+
+    border-radius:
+
+        28px;
+
+
+    text-align:center;
 
 
 }
@@ -449,23 +572,58 @@
 
 
 
-.premium-question-card{
+.life-level-header{
 
 
-    padding:45px;
+    display:flex;
 
 
-    border-radius:32px;
+    justify-content:space-between;
+
+
+    align-items:center;
+
+
+    gap:
+
+        20px;
+
+
+}
+
+
+
+
+
+.level-item{
+
+
+    flex:1;
+
+
+    padding:
+
+        18px 10px;
+
+
+    border-radius:
+
+        20px;
 
 
     background:
 
-        rgba(255,255,255,.045);
+        rgba(255,255,255,.06);
 
 
     border:
 
-        1px solid rgba(255,255,255,.12);
+        1px solid rgba(255,255,255,.15);
+
+
+    font-weight:
+
+        600;
 
 
     transition:
@@ -479,17 +637,313 @@
 
 
 
-.premium-question-card:hover{
+.level-item.active{
 
 
     transform:
 
-        translateY(-3px);
+        translateY(-8px);
 
 
-    border-color:
+    background:
 
-        rgba(13,148,136,.45);
+        rgba(200,164,93,.18);
+
+
+    border:
+
+        2px solid #C8A45D;
+
+
+    box-shadow:
+
+        0 15px 35px rgba(200,164,93,.25);
+
+
+}
+
+
+
+
+
+.level-scale{
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    margin-top:
+
+        20px;
+
+
+    color:
+
+        rgba(255,255,255,.6);
+
+
+    font-size:
+
+        13px;
+
+
+}
+
+
+
+
+
+.current-level-message{
+
+
+    margin-top:
+
+        25px;
+
+
+    color:
+
+        #16C7C2;
+
+
+    font-size:
+
+        18px;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   INNER JOURNEY™
+
+   Awareness → Alignment → Embodiment
+
+   ========================================================================== */
+
+
+.inner-journey{
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    gap:
+
+        18px;
+
+
+    margin:
+
+        45px auto;
+
+
+}
+
+
+
+
+
+.journey-step{
+
+
+    padding:
+
+        20px;
+
+
+    min-width:
+
+        180px;
+
+
+    border-radius:
+
+        24px;
+
+
+    background:
+
+        rgba(255,255,255,.05);
+
+
+    border:
+
+        1px solid rgba(255,255,255,.12);
+
+
+}
+
+
+
+
+
+.journey-step-number{
+
+
+    color:
+
+        #C8A45D;
+
+
+    font-size:
+
+        13px;
+
+
+    letter-spacing:
+
+        .15em;
+
+
+}
+
+
+
+
+
+.journey-step-title{
+
+
+    margin-top:
+
+        10px;
+
+
+    color:
+
+        #16C7C2;
+
+
+    font-size:
+
+        18px;
+
+
+    font-weight:
+
+        700;
+
+
+}
+
+
+
+
+
+.journey-step-subtitle{
+
+
+    margin-top:
+
+        8px;
+
+
+    font-size:
+
+        14px;
+
+
+    color:
+
+        rgba(255,255,255,.7);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   QUESTION CARDS
+   ========================================================================== */
+
+
+.question-card{
+
+
+    margin:
+
+        35px 0;
+
+
+    padding:
+
+        35px;
+
+
+    border-radius:
+
+        28px;
+
+
+    background:
+
+        rgba(255,255,255,.06);
+
+
+    border:
+
+        1px solid rgba(255,255,255,.12);
+
+
+}
+
+
+
+
+
+.question-type{
+
+
+    display:inline-block;
+
+
+    padding:
+
+        8px 18px;
+
+
+    border-radius:
+
+        50px;
+
+
+    background:
+
+        rgba(22,199,194,.12);
+
+
+    color:
+
+        #16C7C2;
+
+
+    font-size:
+
+        14px;
+
+
+    letter-spacing:
+
+        .08em;
 
 
 }
@@ -501,55 +955,14 @@
 .question-number{
 
 
-    display:inline-flex;
-
-
-    align-items:center;
-
-
-    justify-content:center;
-
-
-    width:48px;
-
-
-    height:48px;
-
-
-    border-radius:50%;
-
-
-    background:
-
-        rgba(198,164,91,.15);
-
-
-    border:
-
-        1px solid rgba(198,164,91,.35);
-
-
     color:
 
-        var(--color-secondary);
-
-
-    font-size:
-
-        14px;
+        #C8A45D;
 
 
     font-weight:
 
         700;
-
-
-    letter-spacing:
-
-        .08em;
-
-
-    margin-bottom:25px;
 
 
 }
@@ -558,14 +971,12 @@
 
 
 
-
-
-/* ==========================================================================
-   Question Typography
-   ========================================================================== */
-
-
 .question-text-ta{
+
+
+    margin-top:
+
+        22px;
 
 
     font-family:
@@ -576,25 +987,12 @@
 
     font-size:
 
-        30px;
+        26px;
 
 
     line-height:
 
-        2;
-
-
-    font-weight:
-
-        600;
-
-
-    color:
-
-        var(--text-primary);
-
-
-    margin-bottom:18px;
+        1.9;
 
 
 }
@@ -606,52 +1004,9 @@
 .question-text-en{
 
 
-    font-size:
+    margin-top:
 
-        20px;
-
-
-    line-height:
-
-        1.8;
-
-
-    color:
-
-        var(--text-secondary);
-
-
-    max-width:850px;
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   Alignment Prompt
-   ========================================================================== */
-
-
-.alignment-label{
-
-
-    text-align:center;
-
-
-    margin-top:35px;
-
-
-    margin-bottom:25px;
-
-
-    color:
-
-        var(--color-secondary);
+        12px;
 
 
     font-size:
@@ -659,88 +1014,27 @@
         18px;
 
 
-    font-weight:
+    line-height:
 
-        600;
+        1.7;
+
+
+    color:
+
+        rgba(255,255,255,.75);
 
 
 }
+
+
 
 
 
 
 
 /* ==========================================================================
-   Rating Scale Description
-   ========================================================================== */
+   RATING SCALE
 
-
-.rating-scale-description{
-
-
-    display:flex;
-
-
-    justify-content:space-between;
-
-
-    max-width:600px;
-
-
-    margin:
-
-        0 auto 25px;
-
-
-    color:
-
-        var(--text-secondary);
-
-
-    font-size:
-
-        14px;
-
-
-    text-align:center;
-
-
-}
-
-
-
-
-
-.rating-scale-description span:first-child{
-
-
-    color:
-
-        #EF4444;
-
-
-}
-
-
-
-
-
-.rating-scale-description span:last-child{
-
-
-    color:
-
-        var(--color-primary);
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   Rating Buttons
    ========================================================================== */
 
 
@@ -753,10 +1047,17 @@
     justify-content:center;
 
 
-    gap:14px;
-
-
     flex-wrap:wrap;
+
+
+    gap:
+
+        12px;
+
+
+    margin-top:
+
+        35px;
 
 
 }
@@ -768,50 +1069,42 @@
 .rating-button{
 
 
-    width:56px;
+    width:
+
+        52px;
 
 
-    height:56px;
+    height:
+
+        52px;
 
 
-    border-radius:50%;
+    border-radius:
 
-
-    display:flex;
-
-
-    align-items:center;
-
-
-    justify-content:center;
-
-
-    cursor:pointer;
-
-
-    background:
-
-        rgba(255,255,255,.06);
+        50%;
 
 
     border:
 
-        1px solid rgba(255,255,255,.2);
+        1px solid rgba(255,255,255,.25);
+
+
+    background:
+
+        rgba(255,255,255,.08);
 
 
     color:
 
-        var(--text-primary);
+        white;
 
 
     font-size:
 
-        18px;
+        17px;
 
 
-    font-weight:
-
-        700;
+    cursor:pointer;
 
 
     transition:
@@ -828,14 +1121,14 @@
 .rating-button:hover{
 
 
-    transform:
-
-        translateY(-5px);
-
-
     border-color:
 
-        var(--color-primary);
+        #16C7C2;
+
+
+    transform:
+
+        translateY(-4px);
 
 
 }
@@ -849,17 +1142,17 @@
 
     background:
 
-        var(--color-primary);
-
-
-    border-color:
-
-        var(--color-primary);
+        #16C7C2;
 
 
     color:
 
-        white;
+        #081C3A;
+
+
+    border-color:
+
+        #16C7C2;
 
 
     transform:
@@ -867,9 +1160,47 @@
         scale(1.12);
 
 
-    box-shadow:
+    font-weight:
 
-        0 0 25px rgba(13,148,136,.35);
+        700;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   RATING GUIDANCE
+
+   ========================================================================== */
+
+
+.rating-guide{
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    margin-top:
+
+        18px;
+
+
+    font-size:
+
+        13px;
+
+
+    color:
+
+        rgba(255,255,255,.55);
 
 
 }
@@ -881,16 +1212,17 @@
 /* Continue in Batch 1C */
 
 /* ==========================================================================
-   Reflection Moment™
+   SCORE PREVIEW CARD™
+
    ========================================================================== */
 
 
-.reflection-panel{
+.score-preview{
 
 
-    margin-top:
+    margin:
 
-        55px;
+        45px auto;
 
 
     padding:
@@ -898,19 +1230,32 @@
         40px;
 
 
+    max-width:
+
+        700px;
+
+
     border-radius:
 
-        32px;
+        30px;
 
 
     background:
 
-        rgba(198,164,91,.08);
+        linear-gradient(
+
+            145deg,
+
+            rgba(22,199,194,.12),
+
+            rgba(200,164,93,.08)
+
+        );
 
 
     border:
 
-        1px solid rgba(198,164,91,.25);
+        1px solid rgba(255,255,255,.15);
 
 
     text-align:center;
@@ -922,12 +1267,139 @@
 
 
 
-.moment-label{
+.score-title{
 
 
     font-size:
 
-        13px;
+        14px;
+
+
+    letter-spacing:
+
+        .18em;
+
+
+    color:
+
+        #C8A45D;
+
+
+}
+
+
+
+
+
+.score-value{
+
+
+    margin-top:
+
+        20px;
+
+
+    font-size:
+
+        42px;
+
+
+    font-weight:
+
+        700;
+
+
+    color:
+
+        #16C7C2;
+
+
+}
+
+
+
+
+
+.score-label{
+
+
+    margin-top:
+
+        10px;
+
+
+    font-size:
+
+        18px;
+
+
+    color:
+
+        rgba(255,255,255,.8);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   REFLECTION MOMENT™
+
+   ========================================================================== */
+
+
+.reflection-panel{
+
+
+    margin:
+
+        45px 0;
+
+
+    padding:
+
+        40px;
+
+
+    border-radius:
+
+        30px;
+
+
+    background:
+
+        rgba(200,164,93,.08);
+
+
+    border:
+
+        1px solid rgba(200,164,93,.25);
+
+
+    text-align:center;
+
+
+}
+
+
+
+
+
+.panel-heading{
+
+
+    color:
+
+        #C8A45D;
+
+
+    font-size:
+
+        14px;
 
 
     letter-spacing:
@@ -940,23 +1412,18 @@
         700;
 
 
-    color:
-
-        var(--color-secondary);
-
-
-    margin-bottom:
-
-        20px;
-
-
 }
 
 
 
 
 
-.reflection-panel h3{
+.reflection-text-ta{
+
+
+    margin-top:
+
+        25px;
 
 
     font-family:
@@ -967,22 +1434,12 @@
 
     font-size:
 
-        28px;
+        26px;
 
 
     line-height:
 
-        1.8;
-
-
-    color:
-
-        var(--text-primary);
-
-
-    margin-bottom:
-
-        18px;
+        1.9;
 
 
 }
@@ -991,7 +1448,12 @@
 
 
 
-.reflection-panel p{
+.reflection-text-en{
+
+
+    margin-top:
+
+        15px;
 
 
     font-size:
@@ -1006,7 +1468,7 @@
 
     color:
 
-        var(--text-secondary);
+        rgba(255,255,255,.75);
 
 
 }
@@ -1018,16 +1480,17 @@
 
 
 /* ==========================================================================
-   Wisdom Moment™
+   WISDOM MOMENT™
+
    ========================================================================== */
 
 
 .wisdom-panel{
 
 
-    margin-top:
+    margin:
 
-        35px;
+        35px 0;
 
 
     padding:
@@ -1037,17 +1500,17 @@
 
     border-radius:
 
-        32px;
+        30px;
 
 
     background:
 
-        rgba(13,148,136,.08);
+        rgba(22,199,194,.08);
 
 
     border:
 
-        1px solid rgba(13,148,136,.25);
+        1px solid rgba(22,199,194,.25);
 
 
     text-align:center;
@@ -1059,7 +1522,12 @@
 
 
 
-.wisdom-panel h3{
+.wisdom-text-ta{
+
+
+    margin-top:
+
+        25px;
 
 
     font-family:
@@ -1070,22 +1538,12 @@
 
     font-size:
 
-        28px;
+        26px;
 
 
     line-height:
 
-        1.8;
-
-
-    color:
-
-        var(--text-primary);
-
-
-    margin-bottom:
-
-        18px;
+        1.9;
 
 
 }
@@ -1094,7 +1552,12 @@
 
 
 
-.wisdom-panel p{
+.wisdom-text-en{
+
+
+    margin-top:
+
+        15px;
 
 
     font-size:
@@ -1109,7 +1572,7 @@
 
     color:
 
-        var(--text-secondary);
+        rgba(255,255,255,.75);
 
 
 }
@@ -1121,11 +1584,12 @@
 
 
 /* ==========================================================================
-   Premium Navigation
+   NAVIGATION
+
    ========================================================================== */
 
 
-.premium-navigation{
+.assessment-navigation{
 
 
     display:flex;
@@ -1139,7 +1603,7 @@
 
     margin-top:
 
-        60px;
+        55px;
 
 
     padding-top:
@@ -1149,7 +1613,7 @@
 
     border-top:
 
-        1px solid rgba(255,255,255,.1);
+        1px solid rgba(255,255,255,.12);
 
 
 }
@@ -1158,17 +1622,12 @@
 
 
 
-.btn{
-
-
-    min-width:
-
-        220px;
+.assessment-button{
 
 
     padding:
 
-        18px 36px;
+        18px 40px;
 
 
     border-radius:
@@ -1191,7 +1650,7 @@
 
     transition:
 
-        all .25s ease;
+        all .3s ease;
 
 
 }
@@ -1200,60 +1659,60 @@
 
 
 
-.btn-primary{
+.button-primary{
 
 
     background:
 
-        var(--color-primary);
+        #16C7C2;
+
+
+    color:
+
+        #081C3A;
+
+
+    border:
+
+        1px solid #16C7C2;
+
+
+}
+
+
+
+
+
+.button-primary:hover{
+
+
+    transform:
+
+        translateY(-4px);
+
+
+    box-shadow:
+
+        0 15px 35px rgba(22,199,194,.25);
+
+
+}
+
+
+
+
+
+.button-secondary{
+
+
+    background:
+
+        rgba(255,255,255,.06);
 
 
     color:
 
         white;
-
-
-    border:
-
-        1px solid var(--color-primary);
-
-
-}
-
-
-
-
-
-.btn-primary:hover{
-
-
-    transform:
-
-        translateY(-3px);
-
-
-    box-shadow:
-
-        0 15px 35px rgba(13,148,136,.25);
-
-
-}
-
-
-
-
-
-.btn-secondary{
-
-
-    background:
-
-        rgba(255,255,255,.05);
-
-
-    color:
-
-        var(--text-primary);
 
 
     border:
@@ -1267,12 +1726,12 @@
 
 
 
-.btn-secondary:hover{
+.button-secondary:hover{
 
 
     border-color:
 
-        var(--color-secondary);
+        #C8A45D;
 
 
 }
@@ -1284,11 +1743,15 @@
 
 
 /* ==========================================================================
-   Footer
+   FOOTER
+
    ========================================================================== */
 
 
-.app-footer{
+.assessment-footer{
+
+
+    text-align:center;
 
 
     padding:
@@ -1296,12 +1759,9 @@
         35px 0;
 
 
-    text-align:center;
-
-
     color:
 
-        var(--text-secondary);
+        rgba(255,255,255,.55);
 
 
     font-size:
@@ -1315,50 +1775,12 @@
 
 
 
+.assessment-footer strong{
 
 
-/* ==========================================================================
-   Responsive Tablet
-   ========================================================================== */
+    color:
 
-
-@media(max-width:900px){
-
-
-    .premium-assessment-card{
-
-
-        padding:
-
-            40px 30px;
-
-
-    }
-
-
-
-    .pillar-title-ta{
-
-
-        font-size:
-
-            36px;
-
-
-    }
-
-
-
-    .question-text-ta{
-
-
-        font-size:
-
-            25px;
-
-
-    }
-
+        #C8A45D;
 
 
 }
@@ -1370,11 +1792,13 @@
 
 
 /* ==========================================================================
-   Responsive Mobile
+   RESPONSIVE DESIGN
+
    ========================================================================== */
 
 
-@media(max-width:600px){
+@media(max-width:900px){
+
 
 
     .premium-assessment-card{
@@ -1382,94 +1806,22 @@
 
         padding:
 
-            25px 18px;
-
-
-        border-radius:
-
-            24px;
+            35px 25px;
 
 
     }
 
 
 
-    .brand-lockup{
+    .life-level-header,
+
+
+    .inner-journey{
 
 
         flex-direction:
 
             column;
-
-
-        gap:
-
-            12px;
-
-
-    }
-
-
-
-    .life-map-wheel{
-
-
-        gap:
-
-            8px;
-
-
-    }
-
-
-
-    .wheel-spoke{
-
-
-        font-size:
-
-            12px;
-
-
-        padding:
-
-            8px 14px;
-
-
-    }
-
-
-
-    .pillar-title-ta{
-
-
-        font-size:
-
-            30px;
-
-
-    }
-
-
-
-    .pillar-title-en{
-
-
-        font-size:
-
-            24px;
-
-
-    }
-
-
-
-    .premium-question-card{
-
-
-        padding:
-
-            25px 20px;
 
 
     }
@@ -1481,24 +1833,59 @@
 
         font-size:
 
-            21px;
-
-
-        line-height:
-
-            1.8;
+            22px;
 
 
     }
 
 
 
-    .question-text-en{
+    .pillar-title-ta{
 
 
         font-size:
 
-            16px;
+            34px;
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+@media(max-width:600px){
+
+
+
+    .assessment-container{
+
+
+        padding:
+
+            20px 12px;
+
+
+    }
+
+
+
+    .premium-assessment-card{
+
+
+        border-radius:
+
+            22px;
+
+
+        padding:
+
+            25px 18px;
 
 
     }
@@ -1527,12 +1914,27 @@
 
 
 
-    .premium-navigation{
+    .reflection-text-ta,
+
+
+    .wisdom-text-ta{
+
+
+        font-size:
+
+            21px;
+
+
+    }
+
+
+
+    .assessment-navigation{
 
 
         flex-direction:
 
-            column-reverse;
+            column;
 
 
         gap:
@@ -1544,7 +1946,7 @@
 
 
 
-    .btn{
+    .assessment-button{
 
 
         width:
@@ -1553,7 +1955,6 @@
 
 
     }
-
 
 
 }
@@ -1567,10 +1968,13 @@
 /* ==========================================================================
    END OF FILE
 
-   File    : assessment.css
 
-   Version : 4.0
+   File        : assessment.css
 
-   Status  : 🔒 PREMIUM ASSESSMENT EXPERIENCE
+   Version     : 5.0
+
+
+   Status      : 🔒 CTM PATH™ PREMIUM ASSESSMENT EXPERIENCE
+
 
    ========================================================================== */
