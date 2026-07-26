@@ -2,13 +2,16 @@
 /* ==========================================================================
    CTM PATH™ Guided Journey
 
+   FROM SURVIVAL TO LIVING™
+
    File        : assessmentCommon.js
-   Version     : 3.0
-   Status      : 🔒 ASSESSMENT ENGINE
+   Version     : 4.0
+
+   Status      : 🔒 PREMIUM ASSESSMENT ENGINE
 
    Purpose:
 
-       Shared Assessment Rendering Engine
+       Universal Assessment Experience Engine
 
    Supports:
 
@@ -20,17 +23,17 @@
 
    Owns:
 
-       • Pillar Rendering
-       • Question Rendering
-       • Rating Generation
-       • Reflection Rendering
-       • Wisdom Rendering
+       • Premium Rendering
+       • Question Display
+       • Rating Interaction
+       • Reflection Display
+       • Wisdom Display
 
 
    Owns NO:
 
+       • Data Storage
        • API
-       • Storage
        • Navigation
        • Scoring
 
@@ -41,63 +44,31 @@
 
 
 
+
+
 /* ==========================================================================
-   STATE
+   ENGINE STATE
    ========================================================================== */
 
 
-const AssessmentState = {
+const CTMAssessmentState = {
 
 
-    currentSpoke:
-
-        null,
-
-
-    currentPillar:
+    spoke:
 
         null,
 
 
-    answers:{}
+    pillar:
+
+        null,
+
+
+    responses:{}
 
 
 };
 
-
-
-
-
-/* ==========================================================================
-   LOAD PILLAR DATA
-   ========================================================================== */
-
-
-function getAssessmentPillar(spokeNumber){
-
-
-    return AssessmentRepository.pillars.find(
-
-
-        function(pillar){
-
-
-            return (
-
-                pillar.spoke ===
-
-                Number(spokeNumber)
-
-            );
-
-
-        }
-
-
-    );
-
-
-}
 
 
 
@@ -108,7 +79,7 @@ function getAssessmentPillar(spokeNumber){
    ========================================================================== */
 
 
-function initializeAssessment(spokeNumber){
+function initializePremiumAssessment(spokeNumber){
 
 
     const pillar =
@@ -126,7 +97,7 @@ function initializeAssessment(spokeNumber){
 
         console.error(
 
-            "Assessment pillar missing:",
+            "Missing assessment pillar:",
 
             spokeNumber
 
@@ -140,21 +111,29 @@ function initializeAssessment(spokeNumber){
 
 
 
-    AssessmentState.currentSpoke =
+    CTMAssessmentState.spoke =
 
         spokeNumber;
 
 
 
-    AssessmentState.currentPillar =
+    CTMAssessmentState.pillar =
 
         pillar;
 
 
 
-    renderAssessment(
+    renderPremiumAssessment(
 
         pillar
+
+    );
+
+
+
+    updateLifeMap(
+
+        spokeNumber
 
     );
 
@@ -169,15 +148,52 @@ function initializeAssessment(spokeNumber){
 
 
 
+
+
 /* ==========================================================================
-   MAIN RENDER FUNCTION
+   GET PILLAR DATA
    ========================================================================== */
 
 
-function renderAssessment(pillar){
+function getAssessmentPillar(spokeNumber){
 
 
-    renderPillarHeader(
+    return AssessmentRepository.pillars.find(
+
+        function(pillar){
+
+
+            return (
+
+                pillar.spoke ===
+
+                Number(spokeNumber)
+
+            );
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   MAIN PREMIUM RENDER
+   ========================================================================== */
+
+
+function renderPremiumAssessment(pillar){
+
+
+    renderPillarIdentity(
 
         pillar
 
@@ -214,12 +230,14 @@ function renderAssessment(pillar){
 
 
 
+
+
 /* ==========================================================================
-   PILLAR HEADER
+   PILLAR IDENTITY
    ========================================================================== */
 
 
-function renderPillarHeader(pillar){
+function renderPillarIdentity(pillar){
 
 
     setText(
@@ -231,6 +249,7 @@ function renderPillarHeader(pillar){
     );
 
 
+
     setText(
 
         "pillarTitleEn",
@@ -240,6 +259,7 @@ function renderPillarHeader(pillar){
     );
 
 
+
     setText(
 
         "introductionTa",
@@ -247,6 +267,7 @@ function renderPillarHeader(pillar){
         pillar.introductionTa
 
     );
+
 
 
     setText(
@@ -272,7 +293,7 @@ function renderPillarHeader(pillar){
 
 
 /**
- * Render all questions
+ * Render all assessment questions
  *
  */
 
@@ -298,12 +319,11 @@ function renderQuestions(questions){
 
     questions.forEach(
 
-
         function(question,index){
 
 
 
-            const number =
+            const questionNumber =
 
                 index + 1;
 
@@ -313,19 +333,18 @@ function renderQuestions(questions){
 
                 question,
 
-                number
+                questionNumber
 
             );
 
 
-
         }
-
 
     );
 
 
 }
+
 
 
 
@@ -366,7 +385,7 @@ function renderQuestion(
 
 
 
-    createRatingButtons(
+    createPremiumRatingScale(
 
         "ratingGroup" + number,
 
@@ -381,18 +400,21 @@ function renderQuestion(
 
 
 
+
+
 /* ==========================================================================
-   RATING BUTTON GENERATOR
+   PREMIUM RATING SCALE
    ========================================================================== */
 
 
 /**
- * Create 1-10 rating buttons
+ *
+ * Creates 1 - 10 Life Alignment Scale
  *
  */
 
 
-function createRatingButtons(
+function createPremiumRatingScale(
 
     containerId,
 
@@ -420,6 +442,8 @@ function createRatingButtons(
 
 
     container.innerHTML = "";
+
+
 
 
 
@@ -463,7 +487,17 @@ function createRatingButtons(
 
 
 
-        button.innerText =
+        button.setAttribute(
+
+            "aria-label",
+
+            "Rating " + score
+
+        );
+
+
+
+        button.innerHTML =
 
             score;
 
@@ -476,7 +510,7 @@ function createRatingButtons(
             function(){
 
 
-                selectRating(
+                selectPremiumRating(
 
                     questionNumber,
 
@@ -509,18 +543,21 @@ function createRatingButtons(
 
 
 
+
+
 /* ==========================================================================
    RATING SELECTION
    ========================================================================== */
 
 
 /**
- * Handle rating selection
+ *
+ * Stores selected response
  *
  */
 
 
-function selectRating(
+function selectPremiumRating(
 
     questionNumber,
 
@@ -543,7 +580,6 @@ function selectRating(
 
     buttons.forEach(
 
-
         function(button){
 
 
@@ -556,12 +592,13 @@ function selectRating(
 
         }
 
-
     );
 
 
 
-    const selected =
+
+
+    const selectedButton =
 
         container.querySelector(
 
@@ -575,10 +612,10 @@ function selectRating(
 
 
 
-    if(selected){
+    if(selectedButton){
 
 
-        selected.classList.add(
+        selectedButton.classList.add(
 
             "active"
 
@@ -589,7 +626,9 @@ function selectRating(
 
 
 
-    AssessmentState.answers[
+
+
+    CTMAssessmentState.responses[
 
         questionNumber
 
@@ -603,178 +642,123 @@ function selectRating(
 
 
 
+
+/* ==========================================================================
+   RESPONSE ACCESS
+   ========================================================================== */
+
+
+function getAssessmentResponses(){
+
+
+    return (
+
+        CTMAssessmentState.responses
+
+    );
+
+
+}
+
+
+
+
+
 /* Continue in Batch 1C */
 
 /* ==========================================================================
-   REFLECTION RENDERING
+   LIFE MAP™ PROGRESS
    ========================================================================== */
 
 
 /**
- * Render Reflection™ section
+ * Update Life Map progress indicator
  *
  */
 
 
-function renderReflection(pillar){
+function updateLifeMap(spokeNumber){
 
 
-    setText(
+    const progressElement =
 
-        "reflectionTa",
+        document.querySelector(
 
-        pillar.reflectionTa
-
-    );
-
-
-
-    setText(
-
-        "reflectionEn",
-
-        pillar.reflectionEn
-
-    );
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   WISDOM RENDERING
-   ========================================================================== */
-
-
-/**
- * Render Wisdom™ section
- *
- */
-
-
-function renderWisdom(pillar){
-
-
-    setText(
-
-        "wisdomTa",
-
-        pillar.wisdomTa
-
-    );
-
-
-
-    setText(
-
-        "wisdomEn",
-
-        pillar.wisdomEn
-
-    );
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   PROGRESS
-   ========================================================================== */
-
-
-/**
- * Update progress indicator
- *
- */
-
-
-function updateProgress(spoke){
-
-
-    const total =
-
-        12;
-
-
-
-    const percentage =
-
-        Math.round(
-
-            (
-
-                Number(spoke)
-
-                /
-
-                total
-
-            )
-
-            *
-
-            100
+            ".life-map-progress span"
 
         );
 
 
 
-    setText(
-
-        "progressStep",
-
-        "Spoke " +
-
-        String(spoke).padStart(2,"0")
-
-        +
-
-        " of "
-
-        +
-
-        total
-
-    );
+    if(progressElement){
 
 
+        progressElement.textContent =
 
-    setText(
 
-        "progressPercent",
+            String(spokeNumber)
 
-        percentage +
+                .padStart(2,"0")
 
-        "%"
+            +
 
-    );
+            " / 12";
+
+
+    }
 
 
 
-    const bar =
+    const activeSpoke =
 
-        document.getElementById(
+        document.querySelector(
 
-            "progressBar"
+            ".wheel-spoke.active"
 
         );
 
 
 
-    if(bar){
+    if(activeSpoke){
 
 
-        bar.style.width =
+        activeSpoke.classList.remove(
 
-            percentage +
+            "active"
 
-            "%";
+        );
+
+
+    }
+
+
+
+    const spokes =
+
+        document.querySelectorAll(
+
+            ".wheel-spoke"
+
+        );
+
+
+
+    if(
+
+        spokes[spokeNumber - 1]
+
+    ){
+
+
+        spokes[
+
+            spokeNumber - 1
+
+        ].classList.add(
+
+            "active"
+
+        );
 
 
     }
@@ -786,27 +770,182 @@ function updateProgress(spoke){
 
 
 
+
+
 /* ==========================================================================
-   RESTORE ANSWERS
+   REFLECTION MOMENT™
    ========================================================================== */
 
 
-/**
- * Restore previously selected ratings
- *
- */
+function renderReflection(pillar){
 
 
-function restoreAnswers(savedAnswers){
+    const reflectionTitle =
+
+        document.querySelector(
+
+            ".reflection-panel h3"
+
+        );
 
 
-    if(
 
-        !savedAnswers
+    const reflectionText =
 
-    ){
+        document.querySelector(
+
+            ".reflection-panel p"
+
+        );
+
+
+
+    if(reflectionTitle){
+
+
+        reflectionTitle.textContent =
+
+            pillar.reflectionTa;
+
+
+    }
+
+
+
+    if(reflectionText){
+
+
+        reflectionText.textContent =
+
+            pillar.reflectionEn;
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   WISDOM MOMENT™
+   ========================================================================== */
+
+
+function renderWisdom(pillar){
+
+
+    const wisdomTitle =
+
+        document.querySelector(
+
+            ".wisdom-panel h3"
+
+        );
+
+
+
+    const wisdomText =
+
+        document.querySelector(
+
+            ".wisdom-panel p"
+
+        );
+
+
+
+    if(wisdomTitle){
+
+
+        wisdomTitle.textContent =
+
+            pillar.wisdomTa;
+
+
+    }
+
+
+
+    if(wisdomText){
+
+
+        wisdomText.textContent =
+
+            pillar.wisdomEn;
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   SAVE RESPONSES
+   ========================================================================== */
+
+
+function saveAssessmentResponses(){
+
+
+    const payload = {
+
+
+        spoke:
+
+            CTMAssessmentState.spoke,
+
+
+        responses:
+
+            CTMAssessmentState.responses,
+
+
+        updatedAt:
+
+            new Date()
+
+                .toISOString()
+
+
+    };
+
+
+
+    return payload;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   RESTORE RESPONSES
+   ========================================================================== */
+
+
+function restoreAssessmentResponses(savedResponses){
+
+
+    if(!savedResponses){
+
 
         return;
+
 
     }
 
@@ -814,10 +953,11 @@ function restoreAnswers(savedAnswers){
 
     Object.keys(
 
-        savedAnswers
+        savedResponses
 
-    ).forEach(
+    )
 
+    .forEach(
 
         function(questionNumber){
 
@@ -825,7 +965,11 @@ function restoreAnswers(savedAnswers){
 
             const score =
 
-                savedAnswers[questionNumber];
+                savedResponses[
+
+                    questionNumber
+
+                ];
 
 
 
@@ -845,7 +989,9 @@ function restoreAnswers(savedAnswers){
 
             if(!container){
 
+
                 return;
+
 
             }
 
@@ -879,7 +1025,7 @@ function restoreAnswers(savedAnswers){
 
 
 
-            AssessmentState.answers[
+            CTMAssessmentState.responses[
 
                 questionNumber
 
@@ -889,54 +1035,12 @@ function restoreAnswers(savedAnswers){
 
         }
 
-
     );
 
 
 }
 
 
-
-
-
-/* ==========================================================================
-   PAYLOAD
-   ========================================================================== */
-
-
-/**
- * Prepare assessment save object
- *
- */
-
-
-function getAssessmentPayload(){
-
-
-    return {
-
-
-        spoke:
-
-            AssessmentState.currentSpoke,
-
-
-        responses:
-
-            AssessmentState.answers,
-
-
-        timestamp:
-
-            new Date()
-
-                .toISOString()
-
-
-    };
-
-
-}
 
 
 
@@ -983,8 +1087,10 @@ function setText(
 
 
 
+
+
 /* ==========================================================================
-   PUBLIC API
+   PUBLIC ENGINE API
    ========================================================================== */
 
 
@@ -993,36 +1099,27 @@ const CTMAssessmentEngine = {
 
     init:
 
-        initializeAssessment,
+        initializePremiumAssessment,
 
 
     render:
 
-        renderAssessment,
+        renderPremiumAssessment,
 
 
     responses:
 
-        function(){
-
-            return AssessmentState.answers;
-
-        },
+        getAssessmentResponses,
 
 
-    payload:
+    save:
 
-        getAssessmentPayload,
+        saveAssessmentResponses,
 
 
     restore:
 
-        restoreAnswers,
-
-
-    progress:
-
-        updateProgress
+        restoreAssessmentResponses
 
 
 };
@@ -1041,13 +1138,15 @@ Object.freeze(
 
 
 
+
+
 /* ==========================================================================
    END OF FILE
 
-   File    : assessmentCommon.js
+   File        : assessmentCommon.js
 
-   Version : 3.0
+   Version     : 4.0
 
-   Status  : 🔒 ASSESSMENT ENGINE
+   Status      : 🔒 PREMIUM ASSESSMENT ENGINE
 
    ========================================================================== */
