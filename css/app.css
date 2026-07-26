@@ -2,514 +2,2500 @@
 /* ==========================================================================
    CTM PATH™ Guided Journey v2.0
    File        : app.css
-   Version     : 1.0
-   Status      : 🔒 LOCKED
-   Purpose     : Shared application styles.
-                  This stylesheet owns ONLY:
-                  • Layout Containers
-                  • Shared Components
-                  • Glass Cards
-                  • Buttons
-                  • Forms
-                  • Navigation
-                  • Progress Components
-                  • Utility Classes
-                  No page-specific styling.
-   ========================================================================== */
+   Version     : 2.0
+   Status      : PREMIUM FOUNDATION
+   Architecture: LOCKED
+
+   PURPOSE
+   --------------------------------------------------------------------------
+   Premium Component Library™
+
+   This stylesheet owns ONLY:
+
+   • Application Layout
+   • Global Page Frame™
+   • Premium Header™
+   • Hero System™
+   • Premium Glass™
+   • Discovery Card™
+   • Reflection Card™
+   • Wisdom Card™
+   • CTA System™
+   • Progress System™
+   • Navigation System™
+   • Journey Moment™
+   • Section Divider™
+   • Premium Footer™
+   • Motion System™
+   • Utility Classes
+   • Responsive Rules
+
+   NO PAGE SPECIFIC STYLING
+
+   ==========================================================================
+*/
 
 
 /* ==========================================================================
-   APPLICATION CONTAINER
+   01 APPLICATION LAYOUT
    ========================================================================== */
 
-.app {
+.app{
 
-    min-height: 100vh;
+    position:relative;
 
-    display: flex;
+    min-height:100vh;
 
-    flex-direction: column;
+    display:flex;
 
-    position: relative;
+    flex-direction:column;
 
-}
+    overflow:hidden;
 
-.container {
-
-    width: min(100% - 48px, var(--container-width));
-
-    margin-inline: auto;
-
-}
-
-.content {
-
-    width: min(100%, var(--content-width));
-
-    margin-inline: auto;
-
-}
-
-
-/* ==========================================================================
-   HEADER
-   ========================================================================== */
-
-.app-header {
-
-    width: 100%;
-
-    height: var(--header-height);
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    position: relative;
-
-}
-
-.logo {
-
-    height: 58px;
-
-    width: auto;
+    isolation:isolate;
 
 }
 
 
 /* ==========================================================================
-   MAIN
+   GLOBAL PAGE FRAME™
    ========================================================================== */
 
-.app-main {
+.page{
 
-    flex: 1;
+    position:relative;
 
-    display: flex;
+    flex:1;
 
-    align-items: center;
+    display:flex;
 
-    justify-content: center;
+    flex-direction:column;
 
-    padding-block: var(--space-16);
+    justify-content:flex-start;
+
+    min-height:100vh;
+
+}
+
+.page-wrapper{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
 
 }
 
 
 /* ==========================================================================
-   GLASS CARD
+   CONTAINER SYSTEM
    ========================================================================== */
 
-.glass-card {
+.container{
 
-    width: 100%;
+    width:min(
+        calc(100% - (2 * var(--page-padding-inline))),
+        var(--container-width)
+    );
 
-    background: var(--glass-bg);
-
-    backdrop-filter: blur(var(--glass-blur));
-
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-
-    border: 1px solid var(--glass-border);
-
-    border-radius: var(--card-radius);
-
-    box-shadow: var(--shadow-lg);
-
-    padding: var(--space-10);
-
-    transition: all var(--transition-normal);
+    margin-inline:auto;
 
 }
 
-.glass-card:hover {
+.container-wide{
 
-    transform: translateY(-2px);
+    width:min(
+        calc(100% - (2 * var(--page-padding-inline))),
+        var(--container-2xl)
+    );
 
-    box-shadow: var(--shadow-xl);
+    margin-inline:auto;
+
+}
+
+.content{
+
+    width:min(
+        100%,
+        var(--content-width)
+    );
+
+    margin-inline:auto;
+
+}
+
+.reading-width{
+
+    width:min(
+        100%,
+        var(--reading-width)
+    );
+
+    margin-inline:auto;
 
 }
 
 
 /* ==========================================================================
-   PAGE TITLES
+   SECTION WRAPPER
    ========================================================================== */
 
-.page-title {
+.section{
 
-    text-align: center;
+    position:relative;
 
-    margin-bottom: var(--space-5);
+    width:100%;
+
+    padding-block:
+        var(--section-padding-top)
+        var(--section-padding-bottom);
 
 }
 
-.page-subtitle {
+.section:first-child{
 
-    text-align: center;
+    padding-top:0;
 
-    max-width: 760px;
+}
 
-    margin-inline: auto;
+.section:last-child{
 
-    margin-bottom: var(--space-10);
+    padding-bottom:0;
+
+}
+
+.section-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--gap-section);
 
 }
 
 
 /* ==========================================================================
-   BUTTONS
+   CONTENT GROUPS
    ========================================================================== */
 
-.btn {
+.content-group{
 
-    display: inline-flex;
+    display:flex;
 
-    align-items: center;
+    flex-direction:column;
 
-    justify-content: center;
-
-    gap: var(--space-2);
-
-    height: var(--button-height);
-
-    padding-inline: var(--space-8);
-
-    border-radius: var(--button-radius);
-
-    font-weight: var(--fw-semibold);
-
-    transition: all var(--transition-normal);
-
-    user-select: none;
+    gap:var(--gap-card-content);
 
 }
 
-.btn-primary {
+.content-stack{
 
-    background: var(--color-primary);
+    display:flex;
 
-    color: #ffffff;
+    flex-direction:column;
 
-}
-
-.btn-primary:hover {
-
-    background: var(--color-primary-light);
+    gap:var(--space-8);
 
 }
 
-.btn-secondary {
+.content-row{
 
-    background: transparent;
+    display:flex;
 
-    border: 1px solid var(--border-medium);
+    align-items:center;
 
-    color: var(--text-primary);
-
-}
-
-.btn-secondary:hover {
-
-    border-color: var(--color-primary);
-
-}
-
-.btn-gold {
-
-    background: var(--color-secondary);
-
-    color: #ffffff;
-
-}
-
-.btn-gold:hover {
-
-    background: var(--color-secondary-light);
+    gap:var(--space-6);
 
 }
 
 
 /* ==========================================================================
-   BUTTON GROUP
+   GLOBAL VERTICAL RHYTHM
    ========================================================================== */
 
-.button-group {
+.flow-xs{
 
-    display: flex;
+    display:flex;
 
-    gap: var(--space-4);
+    flex-direction:column;
 
-    justify-content: center;
+    gap:var(--space-2);
 
-    flex-wrap: wrap;
+}
+
+.flow-sm{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--space-4);
+
+}
+
+.flow-md{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--space-6);
+
+}
+
+.flow-lg{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--space-10);
+
+}
+
+.flow-xl{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--space-16);
+
+}
+
+.flow-2xl{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--space-24);
 
 }
 
 
 /* ==========================================================================
-   FORM
+   PREMIUM CONTENT RHYTHM
    ========================================================================== */
 
-.form-group {
+.page-content{
 
-    margin-bottom: var(--space-6);
+    display:flex;
 
-}
+    flex-direction:column;
 
-.form-label {
-
-    margin-bottom: var(--space-2);
+    gap:var(--gap-section);
 
 }
 
-.form-control {
+.hero-content{
 
-    width: 100%;
+    display:flex;
 
-    height: var(--input-height);
+    flex-direction:column;
 
-    padding-inline: var(--space-5);
-
-    background: rgba(255,255,255,.05);
-
-    border: 1px solid var(--border-light);
-
-    border-radius: var(--radius-lg);
-
-    color: var(--text-primary);
-
-    transition: all var(--transition-fast);
+    gap:var(--hero-content-gap);
 
 }
 
-.form-control:focus {
+.primary-content{
 
-    border-color: var(--color-primary);
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--space-16);
+
+}
+
+.secondary-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--space-12);
+
+}
+
+/* ==========================================================================
+   02 PREMIUM HEADER™
+   ========================================================================== */
+
+.app-header{
+
+    position:relative;
+
+    z-index:var(--z-header);
+
+    width:100%;
+
+    padding-top:var(--header-padding-top);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.header-inner{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:var(--header-gap);
+
+}
+
+.header-brand{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:var(--space-4);
 
 }
 
 
 /* ==========================================================================
-   PROGRESS
+   LOGO SYSTEM
    ========================================================================== */
 
-.progress {
+.logo{
 
-    margin-bottom: var(--space-8);
+    display:block;
 
-}
+    width:auto;
 
-.progress-label {
+    height:var(--header-logo-height);
 
-    display: flex;
+    object-fit:contain;
 
-    justify-content: space-between;
+    user-select:none;
 
-    margin-bottom: var(--space-2);
+    -webkit-user-drag:none;
 
-}
-
-.progress-track {
-
-    width: 100%;
-
-    height: 10px;
-
-    border-radius: var(--radius-round);
-
-    background: rgba(255,255,255,.08);
-
-    overflow: hidden;
+    transition:var(--transition-normal);
 
 }
 
-.progress-fill {
+.logo:hover{
 
-    height: 100%;
-
-    width: 0;
-
-    background: var(--color-primary);
-
-    transition: width var(--transition-normal);
+    transform:translateY(-1px);
 
 }
 
 
 /* ==========================================================================
-   DIVIDERS
+   BRAND TAGLINE
    ========================================================================== */
 
-.divider {
+.brand-tagline{
 
-    width: 100%;
+    font-family:var(--font-heading);
 
-    height: 1px;
+    font-size:var(--fs-xs);
 
-    background: var(--border-light);
+    font-weight:var(--fw-semibold);
 
-    margin-block: var(--space-8);
+    letter-spacing:var(--tracking-brand);
+
+    text-transform:uppercase;
+
+    color:var(--text-brand);
+
+    text-align:center;
+
+    user-select:none;
 
 }
 
 
 /* ==========================================================================
-   NAVIGATION
+   03 HERO SYSTEM™
    ========================================================================== */
 
-.navigation {
+.hero{
 
-    display: flex;
+    position:relative;
 
-    justify-content: space-between;
+    width:100%;
 
-    align-items: center;
+    display:flex;
 
-    gap: var(--space-4);
+    flex-direction:column;
 
-    margin-top: var(--space-10);
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    gap:var(--hero-content-gap);
+
+}
+
+.hero-header{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:var(--space-6);
+
+}
+
+.hero-copy{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:var(--gap-heading);
+
+    max-width:var(--reading-width);
 
 }
 
 
 /* ==========================================================================
-   FOOTER
+   HERO EYEBROW
    ========================================================================== */
 
-.app-footer {
+.hero-eyebrow{
 
-    padding-block: var(--space-6);
+    font-size:var(--fs-sm);
 
-    text-align: center;
+    font-weight:var(--fw-semibold);
 
-    color: var(--text-muted);
+    letter-spacing:var(--tracking-widest);
 
-    font-size: var(--fs-sm);
+    text-transform:uppercase;
+
+    color:var(--color-secondary);
 
 }
 
 
 /* ==========================================================================
-   UTILITIES
+   HERO TITLE
    ========================================================================== */
 
-.text-center {
+.hero-title{
 
-    text-align: center;
+    font-family:var(--font-heading);
 
-}
+    font-size:var(--fs-hero);
 
-.text-left {
+    font-weight:var(--fw-bold);
 
-    text-align: left;
+    line-height:var(--lh-heading);
 
-}
+    letter-spacing:var(--tracking-tight);
 
-.text-right {
+    color:var(--text-primary);
 
-    text-align: right;
+    max-width:14ch;
 
-}
-
-.hidden {
-
-    display: none !important;
-
-}
-
-.w-100 {
-
-    width: 100%;
-
-}
-
-.mt-4 {
-
-    margin-top: var(--space-4);
-
-}
-
-.mt-6 {
-
-    margin-top: var(--space-6);
-
-}
-
-.mt-8 {
-
-    margin-top: var(--space-8);
-
-}
-
-.mb-4 {
-
-    margin-bottom: var(--space-4);
-
-}
-
-.mb-6 {
-
-    margin-bottom: var(--space-6);
-
-}
-
-.mb-8 {
-
-    margin-bottom: var(--space-8);
+    text-wrap:balance;
 
 }
 
 
 /* ==========================================================================
-   RESPONSIVE
+   HERO SUBTITLE
    ========================================================================== */
 
-@media (max-width: 992px) {
+.hero-subtitle{
 
-    .glass-card {
+    font-size:var(--fs-xl);
 
-        padding: var(--space-8);
+    font-weight:var(--fw-regular);
+
+    line-height:var(--lh-relaxed);
+
+    color:var(--text-secondary);
+
+    max-width:42rem;
+
+    text-wrap:pretty;
+
+}
+
+
+/* ==========================================================================
+   HERO INTRODUCTION
+   ========================================================================== */
+
+.hero-introduction{
+
+    font-size:var(--fs-md);
+
+    line-height:var(--lh-relaxed);
+
+    color:var(--text-muted);
+
+    max-width:40rem;
+
+    text-wrap:pretty;
+
+}
+
+
+/* ==========================================================================
+   HERO ACTIONS
+   ========================================================================== */
+
+.hero-actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:var(--space-5);
+
+}
+
+
+/* ==========================================================================
+   HERO META
+   ========================================================================== */
+
+.hero-meta{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:var(--space-6);
+
+    flex-wrap:wrap;
+
+    color:var(--text-muted);
+
+    font-size:var(--fs-sm);
+
+}
+
+
+/* ==========================================================================
+   HERO DIVIDER
+   ========================================================================== */
+
+.hero-divider{
+
+    width:72px;
+
+    height:2px;
+
+    border-radius:var(--radius-round);
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        var(--color-secondary),
+        transparent
+    );
+
+}
+
+/* ==========================================================================
+   04 PREMIUM GLASS™
+   ========================================================================== */
+
+.glass{
+
+    position:relative;
+
+    background:var(--glass-bg);
+
+    border:1px solid var(--glass-border);
+
+    backdrop-filter:blur(var(--glass-blur-md));
+
+    -webkit-backdrop-filter:blur(var(--glass-blur-md));
+
+    border-radius:var(--card-radius);
+
+    box-shadow:var(--shadow-lg);
+
+    transition:var(--transition-normal);
+
+    overflow:hidden;
+
+}
+
+.glass::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+        180deg,
+        rgba(255,255,255,.08) 0%,
+        rgba(255,255,255,.02) 100%
+    );
+
+    pointer-events:none;
+
+}
+
+
+/* ==========================================================================
+   GLASS STANDARD™
+   ========================================================================== */
+
+.glass-standard{
+
+    padding:var(--card-padding-md);
+
+}
+
+
+/* ==========================================================================
+   GLASS HERO™
+   ========================================================================== */
+
+.glass-hero{
+
+    padding:var(--card-padding-lg);
+
+    border-color:var(--glass-border-strong);
+
+    box-shadow:var(--shadow-xl);
+
+}
+
+
+/* ==========================================================================
+   GLASS ELEVATED™
+   ========================================================================== */
+
+.glass-elevated{
+
+    padding:var(--card-padding-lg);
+
+    box-shadow:var(--shadow-2xl);
+
+}
+
+
+/* ==========================================================================
+   GLASS REFLECTION™
+   ========================================================================== */
+
+.glass-reflection{
+
+    padding:var(--card-padding-lg);
+
+    border-left:4px solid var(--color-primary);
+
+}
+
+
+/* ==========================================================================
+   GLASS WISDOM™
+   ========================================================================== */
+
+.glass-wisdom{
+
+    padding:var(--card-padding-lg);
+
+    border-left:4px solid var(--color-secondary);
+
+}
+
+
+/* ==========================================================================
+   PREMIUM CARD HOVER
+   ========================================================================== */
+
+.glass:hover{
+
+    transform:translateY(-3px);
+
+    border-color:var(--glass-border-strong);
+
+    box-shadow:
+        var(--shadow-xl),
+        var(--glow-card);
+
+}
+
+.glass-primary:hover{
+
+    box-shadow:
+        var(--shadow-xl),
+        var(--glow-primary);
+
+}
+
+.glass-secondary:hover{
+
+    box-shadow:
+        var(--shadow-xl),
+        var(--glow-secondary);
+
+}
+
+
+/* ==========================================================================
+   SHARED CARD LAYOUT
+   ========================================================================== */
+
+.card{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--card-gap);
+
+}
+
+.card-header{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--space-4);
+
+}
+
+.card-body{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--space-6);
+
+}
+
+.card-footer{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    gap:var(--space-4);
+
+    margin-top:var(--space-4);
+
+}
+
+
+/* ==========================================================================
+   CARD TYPOGRAPHY
+   ========================================================================== */
+
+.card-title{
+
+    font-family:var(--font-heading);
+
+    font-size:var(--fs-h3);
+
+    font-weight:var(--fw-semibold);
+
+    line-height:var(--lh-heading);
+
+    color:var(--text-primary);
+
+    text-wrap:balance;
+
+}
+
+.card-subtitle{
+
+    font-size:var(--fs-lg);
+
+    color:var(--text-secondary);
+
+    line-height:var(--lh-relaxed);
+
+}
+
+.card-description{
+
+    font-size:var(--fs-base);
+
+    color:var(--text-muted);
+
+    line-height:var(--lh-relaxed);
+
+}
+
+
+/* ==========================================================================
+   05 DISCOVERY CARD™
+   ========================================================================== */
+
+.discovery-card{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
+
+    gap:var(--gap-card-content);
+
+}
+
+.discovery-icon{
+
+    width:var(--discovery-icon-size);
+
+    height:var(--discovery-icon-size);
+
+    display:grid;
+
+    place-items:center;
+
+    border-radius:50%;
+
+    background:
+        rgba(20,184,166,.08);
+
+    color:var(--color-primary);
+
+    transition:var(--transition-normal);
+
+}
+
+.discovery-card:hover .discovery-icon{
+
+    transform:scale(1.05);
+
+    background:
+        rgba(20,184,166,.16);
+
+    box-shadow:var(--glow-primary);
+
+}
+
+.discovery-title{
+
+    font-family:var(--font-heading);
+
+    font-size:var(--fs-h4);
+
+    font-weight:var(--fw-semibold);
+
+    color:var(--text-primary);
+
+}
+
+.discovery-description{
+
+    color:var(--text-secondary);
+
+    line-height:var(--lh-relaxed);
+
+    max-width:34ch;
+
+}
+
+/* ==========================================================================
+   06 REFLECTION CARD™
+   ========================================================================== */
+
+.reflection-card{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--space-8);
+
+    padding:var(--card-padding-lg);
+
+}
+
+.reflection-header{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--space-4);
+
+}
+
+.reflection-title{
+
+    font-family:var(--font-heading);
+
+    font-size:var(--fs-h3);
+
+    font-weight:var(--fw-semibold);
+
+    color:var(--text-primary);
+
+    line-height:var(--lh-heading);
+
+}
+
+.reflection-description{
+
+    color:var(--text-secondary);
+
+    line-height:var(--lh-relaxed);
+
+}
+
+
+/* ==========================================================================
+   REFLECTION WRITING AREA
+   ========================================================================== */
+
+.reflection-input{
+
+    width:100%;
+
+    min-height:var(--reflection-min-height);
+
+    padding:var(--space-6);
+
+    border-radius:var(--radius-xl);
+
+    border:1px solid var(--border-light);
+
+    background:
+
+        rgba(255,255,255,.04);
+
+    color:var(--text-primary);
+
+    font-size:var(--fs-md);
+
+    line-height:var(--lh-relaxed);
+
+    transition:var(--transition-normal);
+
+    resize:vertical;
+
+}
+
+.reflection-input::placeholder{
+
+    color:var(--text-muted);
+
+}
+
+.reflection-input:hover{
+
+    border-color:var(--border-medium);
+
+}
+
+.reflection-input:focus{
+
+    outline:none;
+
+    border-color:var(--color-primary);
+
+    background:
+
+        rgba(255,255,255,.07);
+
+    box-shadow:
+
+        0 0 0 3px
+
+        rgba(20,184,166,.12);
+
+}
+
+
+/* ==========================================================================
+   REFLECTION PROMPT
+   ========================================================================== */
+
+.reflection-prompt{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:var(--space-3);
+
+    padding:
+
+        var(--space-4)
+        var(--space-5);
+
+    border-radius:var(--radius-lg);
+
+    background:
+
+        rgba(255,255,255,.04);
+
+    color:var(--text-muted);
+
+    font-size:var(--fs-sm);
+
+    line-height:var(--lh-relaxed);
+
+}
+
+
+/* ==========================================================================
+   07 WISDOM CARD™
+   ========================================================================== */
+
+.wisdom-card{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
+
+    gap:var(--space-8);
+
+    padding:var(--wisdom-card-padding);
+
+}
+
+
+.wisdom-icon{
+
+    width:56px;
+
+    height:56px;
+
+    display:grid;
+
+    place-items:center;
+
+    border-radius:50%;
+
+    background:
+
+        rgba(198,164,91,.12);
+
+    color:var(--color-secondary);
+
+    font-size:var(--fs-xl);
+
+    transition:var(--transition-normal);
+
+}
+
+
+.wisdom-card:hover .wisdom-icon{
+
+    transform:scale(1.05);
+
+    box-shadow:
+
+        var(--glow-secondary);
+
+}
+
+
+/* ==========================================================================
+   WISDOM LABEL
+   ========================================================================== */
+
+.wisdom-label{
+
+    font-size:var(--fs-xs);
+
+    font-weight:var(--fw-semibold);
+
+    letter-spacing:var(--tracking-widest);
+
+    text-transform:uppercase;
+
+    color:var(--color-secondary);
+
+}
+
+
+/* ==========================================================================
+   WISDOM QUOTE
+   ========================================================================== */
+
+.wisdom-quote{
+
+    font-family:var(--font-heading);
+
+    font-size:var(--fs-xl);
+
+    font-weight:var(--fw-medium);
+
+    line-height:var(--lh-relaxed);
+
+    color:var(--text-primary);
+
+    max-width:38rem;
+
+    text-wrap:balance;
+
+}
+
+
+.wisdom-quote::before{
+
+    content:"“";
+
+    color:var(--color-secondary);
+
+    font-size:1.5em;
+
+}
+
+
+.wisdom-quote::after{
+
+    content:"”";
+
+    color:var(--color-secondary);
+
+    font-size:1.5em;
+
+}
+
+
+/* ==========================================================================
+   WISDOM REFLECTION
+   ========================================================================== */
+
+.wisdom-reflection{
+
+    max-width:36rem;
+
+    color:var(--text-secondary);
+
+    font-size:var(--fs-base);
+
+    line-height:var(--lh-relaxed);
+
+}
+
+
+/* ==========================================================================
+   WISDOM FOOTER
+   ========================================================================== */
+
+.wisdom-footer{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:var(--space-4);
+
+    padding-top:var(--space-4);
+
+    border-top:
+
+        1px solid
+
+        var(--divider-light);
+
+    width:100%;
+
+}
+
+.wisdom-source{
+
+    font-size:var(--fs-sm);
+
+    color:var(--text-muted);
+
+    font-style:italic;
+
+}
+
+/* ==========================================================================
+   08 PROGRESS SYSTEM™
+   ========================================================================== */
+
+.progress-system{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--space-4);
+
+}
+
+
+/* ==========================================================================
+   PROGRESS HEADER
+   ========================================================================== */
+
+.progress-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:var(--space-4);
+
+}
+
+
+.progress-label{
+
+    font-size:var(--fs-sm);
+
+    font-weight:var(--fw-medium);
+
+    color:var(--text-secondary);
+
+}
+
+
+.progress-count{
+
+    font-size:var(--fs-sm);
+
+    font-weight:var(--fw-semibold);
+
+    color:var(--color-secondary);
+
+}
+
+
+/* ==========================================================================
+   JOURNEY PROGRESS BAR
+   ========================================================================== */
+
+.progress-track{
+
+    position:relative;
+
+    width:100%;
+
+    height:var(--journey-progress-height);
+
+    overflow:hidden;
+
+    border-radius:var(--journey-progress-radius);
+
+    background:
+
+        rgba(255,255,255,.08);
+
+}
+
+
+.progress-fill{
+
+    height:100%;
+
+    width:0;
+
+    border-radius:inherit;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            var(--color-primary),
+            var(--color-primary-light)
+        );
+
+    transition:
+
+        width
+
+        var(--motion-duration-page)
+
+        var(--ease-premium);
+
+}
+
+
+/* ==========================================================================
+   JOURNEY STEP INDICATOR
+   ========================================================================== */
+
+.journey-steps{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:var(--journey-step-gap);
+
+    flex-wrap:wrap;
+
+}
+
+
+.journey-step{
+
+    width:var(--journey-step-size);
+
+    height:var(--journey-step-size);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    border:
+
+        1px solid
+
+        var(--border-medium);
+
+    color:var(--text-muted);
+
+    font-size:var(--fs-sm);
+
+    font-weight:var(--fw-semibold);
+
+    transition:var(--transition-normal);
+
+}
+
+
+.journey-step.active{
+
+    background:
+
+        var(--color-primary);
+
+    border-color:
+
+        var(--color-primary);
+
+    color:#FFFFFF;
+
+    box-shadow:
+
+        var(--glow-primary);
+
+}
+
+
+.journey-step.completed{
+
+    background:
+
+        rgba(20,184,166,.18);
+
+    border-color:
+
+        var(--color-primary);
+
+    color:
+
+        var(--color-primary-light);
+
+}
+
+
+/* ==========================================================================
+   CURRENT JOURNEY MOMENT
+   ========================================================================== */
+
+.progress-moment{
+
+    text-align:center;
+
+    font-family:var(--font-heading);
+
+    font-size:var(--fs-lg);
+
+    font-weight:var(--fw-medium);
+
+    color:var(--text-primary);
+
+}
+
+
+/* ==========================================================================
+   COMPLETION STATE
+   ========================================================================== */
+
+.progress-complete{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:var(--space-4);
+
+    text-align:center;
+
+}
+
+
+.progress-complete-icon{
+
+    width:64px;
+
+    height:64px;
+
+    display:grid;
+
+    place-items:center;
+
+    border-radius:50%;
+
+    background:
+
+        rgba(16,185,129,.15);
+
+    color:
+
+        var(--color-success);
+
+    font-size:var(--fs-2xl);
+
+}
+
+
+/* ==========================================================================
+   09 CTA SYSTEM™
+   ========================================================================== */
+
+.cta-group{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:var(--space-5);
+
+    flex-wrap:wrap;
+
+}
+
+
+/* ==========================================================================
+   BASE BUTTON
+   ========================================================================== */
+
+.btn{
+
+    min-height:
+
+        var(--button-height-md);
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:var(--space-3);
+
+    padding:
+
+        var(--button-padding-y-md)
+
+        var(--button-padding-x-md);
+
+    border-radius:
+
+        var(--button-radius);
+
+    font-size:
+
+        var(--button-font-size-md);
+
+    font-weight:
+
+        var(--button-font-weight);
+
+    letter-spacing:
+
+        var(--button-letter-spacing);
+
+    text-decoration:none;
+
+    user-select:none;
+
+    transition:
+
+        var(--button-transition);
+
+    cursor:pointer;
+
+}
+
+
+.btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+
+.btn:active{
+
+    transform:translateY(0);
+
+}
+
+
+/* ==========================================================================
+   PRIMARY CTA™
+   ========================================================================== */
+
+.btn-primary{
+
+    background:
+
+        var(--color-primary);
+
+    color:#FFFFFF;
+
+    box-shadow:
+
+        var(--button-shadow);
+
+}
+
+
+.btn-primary:hover{
+
+    background:
+
+        var(--color-primary-light);
+
+    box-shadow:
+
+        var(--button-shadow-hover),
+
+        var(--glow-primary);
+
+}
+
+
+/* ==========================================================================
+   GOLD CTA™
+   ========================================================================== */
+
+.btn-gold{
+
+    background:
+
+        var(--color-secondary);
+
+    color:#FFFFFF;
+
+    box-shadow:
+
+        var(--button-shadow);
+
+}
+
+
+.btn-gold:hover{
+
+    background:
+
+        var(--color-secondary-light);
+
+    box-shadow:
+
+        var(--button-shadow-hover),
+
+        var(--glow-secondary);
+
+}
+
+/* ==========================================================================
+   CTA SYSTEM™ — CONTINUED
+   ========================================================================== */
+
+
+/* ==========================================================================
+   SECONDARY CTA™
+   ========================================================================== */
+
+.btn-secondary{
+
+    background:transparent;
+
+    border:
+
+        1px solid
+
+        var(--border-medium);
+
+    color:
+
+        var(--text-primary);
+
+}
+
+
+.btn-secondary:hover{
+
+    border-color:
+
+        var(--color-primary);
+
+    color:
+
+        var(--color-primary-light);
+
+    background:
+
+        rgba(20,184,166,.06);
+
+}
+
+
+/* ==========================================================================
+   OUTLINE CTA™
+   ========================================================================== */
+
+.btn-outline{
+
+    background:transparent;
+
+    border:
+
+        1px solid
+
+        var(--color-secondary);
+
+    color:
+
+        var(--color-secondary);
+
+}
+
+
+.btn-outline:hover{
+
+    background:
+
+        rgba(198,164,91,.12);
+
+    border-color:
+
+        var(--color-secondary-light);
+
+    color:
+
+        var(--color-secondary-light);
+
+}
+
+
+/* ==========================================================================
+   GHOST CTA™
+   ========================================================================== */
+
+.btn-ghost{
+
+    background:transparent;
+
+    color:
+
+        var(--text-secondary);
+
+}
+
+
+.btn-ghost:hover{
+
+    background:
+
+        rgba(255,255,255,.06);
+
+    color:
+
+        var(--text-primary);
+
+}
+
+
+/* ==========================================================================
+   BUTTON SIZE VARIANTS
+   ========================================================================== */
+
+.btn-sm{
+
+    min-height:
+
+        var(--button-height-sm);
+
+    padding-inline:
+
+        var(--button-padding-x-sm);
+
+    font-size:
+
+        var(--button-font-size-sm);
+
+}
+
+
+.btn-lg{
+
+    min-height:
+
+        var(--button-height-lg);
+
+    padding-inline:
+
+        var(--button-padding-x-lg);
+
+    font-size:
+
+        var(--button-font-size-lg);
+
+}
+
+
+/* ==========================================================================
+   BUTTON ICON
+   ========================================================================== */
+
+.btn-icon{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:1.25em;
+
+    height:1.25em;
+
+}
+
+
+.btn-icon svg{
+
+    width:100%;
+
+    height:100%;
+
+}
+
+
+/* ==========================================================================
+   BUTTON LOADING STATE
+   ========================================================================== */
+
+.btn-loading{
+
+    position:relative;
+
+    pointer-events:none;
+
+    color:transparent;
+
+}
+
+
+.btn-loading::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:18px;
+
+    height:18px;
+
+    border-radius:50%;
+
+    border:
+
+        2px solid
+
+        rgba(255,255,255,.35);
+
+    border-top-color:
+
+        #FFFFFF;
+
+    animation:
+
+        ctm-spin
+
+        .8s
+
+        linear
+
+        infinite;
+
+}
+
+
+@keyframes ctm-spin{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
 
     }
 
 }
 
-@media (max-width: 768px) {
 
-    .container {
+/* ==========================================================================
+   BUTTON SUCCESS STATE
+   ========================================================================== */
 
-        width: calc(100% - 32px);
+.btn-success{
 
-    }
+    background:
 
-    .navigation {
+        var(--color-success);
 
-        flex-direction: column;
-
-    }
-
-    .btn {
-
-        width: 100%;
-
-    }
-
-    .button-group {
-
-        flex-direction: column;
-
-    }
+    color:#FFFFFF;
 
 }
 
-@media (max-width: 480px) {
 
-    .glass-card {
+.btn-success:hover{
 
-        padding: var(--space-6);
+    filter:
+
+        brightness(1.08);
+
+}
+
+
+/* ==========================================================================
+   BUTTON DISABLED STATE
+   ========================================================================== */
+
+.btn:disabled,
+.btn.disabled{
+
+    opacity:
+
+        var(--disabled-opacity);
+
+    pointer-events:none;
+
+    transform:none;
+
+}
+
+
+/* ==========================================================================
+   10 NAVIGATION SYSTEM™
+   ========================================================================== */
+
+.navigation{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:
+
+        var(--space-6);
+
+    margin-top:
+
+        var(--space-10);
+
+}
+
+
+.navigation-group{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:
+
+        var(--space-4);
+
+}
+
+
+/* ==========================================================================
+   PREVIOUS / NEXT NAVIGATION
+   ========================================================================== */
+
+.nav-button{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:
+
+        var(--space-3);
+
+    min-height:
+
+        var(--button-height-md);
+
+    padding-inline:
+
+        var(--space-6);
+
+    border-radius:
+
+        var(--button-radius);
+
+    font-weight:
+
+        var(--fw-semibold);
+
+    color:
+
+        var(--text-secondary);
+
+    border:
+
+        1px solid
+
+        var(--border-medium);
+
+    transition:
+
+        var(--transition-normal);
+
+}
+
+
+.nav-button:hover{
+
+    color:
+
+        var(--text-primary);
+
+    border-color:
+
+        var(--color-primary);
+
+    transform:
+
+        translateY(-2px);
+
+}
+
+
+.nav-button-primary{
+
+    background:
+
+        var(--color-primary);
+
+    border-color:
+
+        var(--color-primary);
+
+    color:#FFFFFF;
+
+}
+
+
+.nav-button-primary:hover{
+
+    background:
+
+        var(--color-primary-light);
+
+    color:#FFFFFF;
+
+    box-shadow:
+
+        var(--glow-primary);
+
+}
+
+
+/* ==========================================================================
+   NAVIGATION LABEL
+   ========================================================================== */
+
+.nav-label{
+
+    font-size:
+
+        var(--fs-sm);
+
+    letter-spacing:
+
+        var(--tracking-wide);
+
+    color:
+
+        var(--text-muted);
+
+}
+
+
+/* ==========================================================================
+   12 JOURNEY MOMENT™
+   ========================================================================== */
+
+.journey-moment{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    gap:
+
+        var(--space-6);
+
+    padding:
+
+        var(--space-10);
+
+}
+
+
+.journey-moment::before,
+.journey-moment::after{
+
+    content:"";
+
+    width:
+
+        72px;
+
+    height:
+
+        1px;
+
+    background:
+
+        var(--divider-medium);
+
+}
+
+
+.journey-moment-title{
+
+    font-family:
+
+        var(--font-heading);
+
+    font-size:
+
+        var(--fs-h3);
+
+    font-weight:
+
+        var(--fw-semibold);
+
+    color:
+
+        var(--text-primary);
+
+    max-width:
+
+        28rem;
+
+}
+
+
+.journey-moment-text{
+
+    max-width:
+
+        36rem;
+
+    color:
+
+        var(--text-secondary);
+
+    font-size:
+
+        var(--fs-md);
+
+    line-height:
+
+        var(--lh-relaxed);
+
+}
+
+/* ==========================================================================
+   13 SECTION DIVIDER™
+   ========================================================================== */
+
+.section-divider{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:var(--space-5);
+
+    padding-block:
+
+        var(--space-8);
+
+}
+
+
+.section-divider::before,
+.section-divider::after{
+
+    content:"";
+
+    flex:1;
+
+    height:1px;
+
+    background:
+
+        var(--divider-medium);
+
+}
+
+
+.section-divider-mark{
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:
+
+        var(--radius-round);
+
+    background:
+
+        var(--color-secondary);
+
+    box-shadow:
+
+        var(--glow-secondary);
+
+}
+
+
+/* ==========================================================================
+   PREMIUM FOOTER™
+   ========================================================================== */
+
+.app-footer{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:
+
+        var(--space-6);
+
+    padding-top:
+
+        var(--footer-padding-top);
+
+    padding-bottom:
+
+        var(--footer-padding-bottom);
+
+    text-align:center;
+
+}
+
+
+/* ==========================================================================
+   FOOTER BRAND
+   ========================================================================== */
+
+.footer-brand{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:
+
+        var(--space-4);
+
+}
+
+
+.footer-title{
+
+    font-family:
+
+        var(--font-heading);
+
+    font-size:
+
+        var(--footer-title-size);
+
+    font-weight:
+
+        var(--fw-semibold);
+
+    letter-spacing:
+
+        var(--footer-title-spacing);
+
+    text-transform:
+
+        uppercase;
+
+    color:
+
+        var(--text-brand);
+
+}
+
+
+/* ==========================================================================
+   FOOTER MESSAGE
+   ========================================================================== */
+
+.footer-message{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:
+
+        var(--space-2);
+
+}
+
+
+.footer-message-line{
+
+    font-size:
+
+        var(--footer-text-size);
+
+    line-height:
+
+        var(--footer-line-height);
+
+    color:
+
+        var(--text-secondary);
+
+}
+
+
+.footer-message-primary{
+
+    font-family:
+
+        var(--font-heading);
+
+    font-weight:
+
+        var(--fw-medium);
+
+    color:
+
+        var(--text-primary);
+
+}
+
+
+/* ==========================================================================
+   FOOTER COPYRIGHT
+   ========================================================================== */
+
+.footer-copyright{
+
+    padding-top:
+
+        var(--space-6);
+
+    border-top:
+
+        1px solid
+
+        var(--divider-light);
+
+    width:
+
+        min(100%, 420px);
+
+    font-size:
+
+        var(--footer-copyright-size);
+
+    color:
+
+        var(--text-muted);
+
+}
+
+
+/* ==========================================================================
+   FOOTER LINKS
+   ========================================================================== */
+
+.footer-links{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:
+
+        var(--space-5);
+
+}
+
+
+.footer-link{
+
+    font-size:
+
+        var(--fs-sm);
+
+    color:
+
+        var(--text-muted);
+
+    transition:
+
+        var(--transition-fast);
+
+}
+
+
+.footer-link:hover{
+
+    color:
+
+        var(--text-primary);
+
+}
+
+
+/* ==========================================================================
+   15 MOTION SYSTEM™
+   ========================================================================== */
+
+
+/* ==========================================================================
+   FADE
+   ========================================================================== */
+
+.animate-fade{
+
+    animation:
+
+        ctm-fade
+
+        var(--motion-duration-page)
+
+        var(--ease-premium)
+
+        both;
+
+}
+
+
+@keyframes ctm-fade{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
 
     }
 
@@ -517,9 +2503,1019 @@
 
 
 /* ==========================================================================
-   End of File
-
-   File : app.css
-
-   Status : 🔒 LOCKED
+   FADE UP
    ========================================================================== */
+
+.animate-fade-up{
+
+    animation:
+
+        ctm-fade-up
+
+        var(--motion-duration-page)
+
+        var(--ease-premium)
+
+        both;
+
+}
+
+
+@keyframes ctm-fade-up{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateY(24px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+
+/* ==========================================================================
+   SCALE REVEAL
+   ========================================================================== */
+
+.animate-scale{
+
+    animation:
+
+        ctm-scale
+
+        var(--motion-duration-page)
+
+        var(--ease-premium)
+
+        both;
+
+}
+
+
+@keyframes ctm-scale{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            scale(.96);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            scale(1);
+
+    }
+
+}
+
+
+/* ==========================================================================
+   SLIDE LEFT
+   ========================================================================== */
+
+.animate-slide-left{
+
+    animation:
+
+        ctm-slide-left
+
+        var(--motion-duration-page)
+
+        var(--ease-premium)
+
+        both;
+
+}
+
+
+@keyframes ctm-slide-left{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateX(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateX(0);
+
+    }
+
+}
+
+
+/* ==========================================================================
+   STAGGER SYSTEM
+   ========================================================================== */
+
+.stagger-1{
+
+    animation-delay:.1s;
+
+}
+
+.stagger-2{
+
+    animation-delay:.2s;
+
+}
+
+.stagger-3{
+
+    animation-delay:.3s;
+
+}
+
+.stagger-4{
+
+    animation-delay:.4s;
+
+}
+
+.stagger-5{
+
+    animation-delay:.5s;
+
+}
+
+/* ==========================================================================
+   MOTION SYSTEM™ — CONTINUED
+   ========================================================================== */
+
+
+/* ==========================================================================
+   HOVER LIFT SYSTEM
+   ========================================================================== */
+
+.hover-lift{
+
+    transition:
+
+        transform
+
+        var(--motion-duration-normal)
+
+        var(--ease-premium),
+
+        box-shadow
+
+        var(--motion-duration-normal)
+
+        var(--ease-premium);
+
+}
+
+
+.hover-lift:hover{
+
+    transform:
+
+        translateY(-4px);
+
+    box-shadow:
+
+        var(--shadow-xl);
+
+}
+
+
+/* ==========================================================================
+   HOVER GLOW SYSTEM
+   ========================================================================== */
+
+.hover-glow{
+
+    transition:
+
+        box-shadow
+
+        var(--motion-duration-normal)
+
+        var(--ease-premium);
+
+}
+
+
+.hover-glow:hover{
+
+    box-shadow:
+
+        var(--glow-primary);
+
+}
+
+
+/* ==========================================================================
+   HOVER SCALE SYSTEM
+   ========================================================================== */
+
+.hover-scale{
+
+    transition:
+
+        transform
+
+        var(--motion-duration-normal)
+
+        var(--ease-premium);
+
+}
+
+
+.hover-scale:hover{
+
+    transform:
+
+        scale(1.03);
+
+}
+
+
+/* ==========================================================================
+   16 UTILITY CLASSES
+   ========================================================================== */
+
+
+/* ==========================================================================
+   DISPLAY
+   ========================================================================== */
+
+.d-none{
+
+    display:none !important;
+
+}
+
+
+.d-block{
+
+    display:block !important;
+
+}
+
+
+.d-flex{
+
+    display:flex !important;
+
+}
+
+
+.d-grid{
+
+    display:grid !important;
+
+}
+
+
+/* ==========================================================================
+   FLEX UTILITIES
+   ========================================================================== */
+
+.flex-column{
+
+    flex-direction:column !important;
+
+}
+
+
+.flex-row{
+
+    flex-direction:row !important;
+
+}
+
+
+.flex-wrap{
+
+    flex-wrap:wrap !important;
+
+}
+
+
+.items-center{
+
+    align-items:center !important;
+
+}
+
+
+.items-start{
+
+    align-items:flex-start !important;
+
+}
+
+
+.items-end{
+
+    align-items:flex-end !important;
+
+}
+
+
+.justify-center{
+
+    justify-content:center !important;
+
+}
+
+
+.justify-between{
+
+    justify-content:space-between !important;
+
+}
+
+
+/* ==========================================================================
+   TEXT UTILITIES
+   ========================================================================== */
+
+.text-center{
+
+    text-align:center !important;
+
+}
+
+
+.text-left{
+
+    text-align:left !important;
+
+}
+
+
+.text-right{
+
+    text-align:right !important;
+
+}
+
+
+.text-primary{
+
+    color:var(--text-primary) !important;
+
+}
+
+
+.text-secondary{
+
+    color:var(--text-secondary) !important;
+
+}
+
+
+.text-muted{
+
+    color:var(--text-muted) !important;
+
+}
+
+
+.text-gold{
+
+    color:var(--color-secondary) !important;
+
+}
+
+
+/* ==========================================================================
+   WIDTH UTILITIES
+   ========================================================================== */
+
+.w-full{
+
+    width:100% !important;
+
+}
+
+
+.max-content{
+
+    width:max-content !important;
+
+}
+
+
+/* ==========================================================================
+   SPACING UTILITIES
+   ========================================================================== */
+
+.mt-1{
+
+    margin-top:var(--space-1) !important;
+
+}
+
+
+.mt-2{
+
+    margin-top:var(--space-2) !important;
+
+}
+
+
+.mt-4{
+
+    margin-top:var(--space-4) !important;
+
+}
+
+
+.mt-6{
+
+    margin-top:var(--space-6) !important;
+
+}
+
+
+.mt-8{
+
+    margin-top:var(--space-8) !important;
+
+}
+
+
+.mt-12{
+
+    margin-top:var(--space-12) !important;
+
+}
+
+
+.mb-1{
+
+    margin-bottom:var(--space-1) !important;
+
+}
+
+
+.mb-2{
+
+    margin-bottom:var(--space-2) !important;
+
+}
+
+
+.mb-4{
+
+    margin-bottom:var(--space-4) !important;
+
+}
+
+
+.mb-6{
+
+    margin-bottom:var(--space-6) !important;
+
+}
+
+
+.mb-8{
+
+    margin-bottom:var(--space-8) !important;
+
+}
+
+
+.mb-12{
+
+    margin-bottom:var(--space-12) !important;
+
+}
+
+
+/* ==========================================================================
+   GAP UTILITIES
+   ========================================================================== */
+
+.gap-2{
+
+    gap:var(--space-2) !important;
+
+}
+
+
+.gap-4{
+
+    gap:var(--space-4) !important;
+
+}
+
+
+.gap-6{
+
+    gap:var(--space-6) !important;
+
+}
+
+
+.gap-8{
+
+    gap:var(--space-8) !important;
+
+}
+
+
+.gap-12{
+
+    gap:var(--space-12) !important;
+
+}
+
+
+/* ==========================================================================
+   VISIBILITY
+   ========================================================================== */
+
+.visible{
+
+    visibility:visible;
+
+}
+
+
+.invisible{
+
+    visibility:hidden;
+
+}
+
+
+/* ==========================================================================
+   OVERFLOW
+   ========================================================================== */
+
+.overflow-hidden{
+
+    overflow:hidden;
+
+}
+
+
+.overflow-auto{
+
+    overflow:auto;
+
+}
+
+
+/* ==========================================================================
+   POSITION
+   ========================================================================== */
+
+.relative{
+
+    position:relative;
+
+}
+
+
+.absolute{
+
+    position:absolute;
+
+}
+
+
+/* ==========================================================================
+   CURSOR
+   ========================================================================== */
+
+.cursor-pointer{
+
+    cursor:pointer;
+
+}
+
+/* ==========================================================================
+   RESPONSIVE SYSTEM
+   ========================================================================== */
+
+
+/* ==========================================================================
+   LARGE TABLET / SMALL DESKTOP
+   ========================================================================== */
+
+@media (max-width:1024px){
+
+    .container,
+    .container-wide{
+
+        width:min(
+            calc(100% - 48px),
+            var(--container-width)
+        );
+
+    }
+
+
+    .glass-hero{
+
+        padding:
+
+            var(--space-10);
+
+    }
+
+
+    .hero-title{
+
+        max-width:
+
+            18ch;
+
+    }
+
+
+    .hero-content{
+
+        gap:
+
+            var(--space-12);
+
+    }
+
+
+    .section{
+
+        padding-block:
+
+            var(--space-16);
+
+    }
+
+}
+
+
+/* ==========================================================================
+   TABLET
+   ========================================================================== */
+
+@media (max-width:768px){
+
+    .container,
+    .container-wide{
+
+        width:
+
+            calc(100% - 32px);
+
+    }
+
+
+    .app-header{
+
+        padding-top:
+
+            var(--space-8);
+
+    }
+
+
+    .logo{
+
+        height:
+
+            68px;
+
+    }
+
+
+    .hero-title{
+
+        font-size:
+
+            var(--fs-3xl);
+
+    }
+
+
+    .hero-subtitle{
+
+        font-size:
+
+            var(--fs-lg);
+
+    }
+
+
+    .hero-actions{
+
+        width:100%;
+
+        flex-direction:column;
+
+    }
+
+
+    .hero-actions .btn{
+
+        width:100%;
+
+    }
+
+
+    .content-row{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+
+    .navigation{
+
+        flex-direction:column;
+
+    }
+
+
+    .navigation-group{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+
+    .nav-button{
+
+        width:100%;
+
+    }
+
+
+    .cta-group{
+
+        flex-direction:column;
+
+        width:100%;
+
+    }
+
+
+    .cta-group .btn{
+
+        width:100%;
+
+    }
+
+
+    .journey-steps{
+
+        gap:
+
+            var(--space-3);
+
+    }
+
+
+    .journey-step{
+
+        width:36px;
+
+        height:36px;
+
+    }
+
+
+    .glass-standard,
+    .glass-hero,
+    .glass-elevated,
+    .glass-reflection,
+    .glass-wisdom{
+
+        padding:
+
+            var(--space-8);
+
+    }
+
+}
+
+
+/* ==========================================================================
+   MOBILE
+   ========================================================================== */
+
+@media (max-width:480px){
+
+    .container,
+    .container-wide{
+
+        width:
+
+            calc(100% - 24px);
+
+    }
+
+
+    .brand-tagline{
+
+        font-size:
+
+            10px;
+
+        letter-spacing:
+
+            .22em;
+
+    }
+
+
+    .hero-title{
+
+        font-size:
+
+            var(--fs-2xl);
+
+    }
+
+
+    .hero-subtitle{
+
+        font-size:
+
+            var(--fs-base);
+
+    }
+
+
+    .hero-introduction{
+
+        font-size:
+
+            var(--fs-sm);
+
+    }
+
+
+    .glass-standard,
+    .glass-hero,
+    .glass-elevated,
+    .glass-reflection,
+    .glass-wisdom{
+
+        padding:
+
+            var(--space-6);
+
+    }
+
+
+    .card-title{
+
+        font-size:
+
+            var(--fs-h4);
+
+    }
+
+
+    .wisdom-quote{
+
+        font-size:
+
+            var(--fs-lg);
+
+    }
+
+
+    .reflection-input{
+
+        min-height:
+
+            120px;
+
+    }
+
+
+    .journey-moment{
+
+        padding:
+
+            var(--space-6);
+
+    }
+
+
+    .footer-message-line{
+
+        font-size:
+
+            var(--fs-xs);
+
+    }
+
+}
+
+
+/* ==========================================================================
+   ACCESSIBILITY SAFEGUARDS
+   ========================================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    .hover-lift:hover,
+    .hover-scale:hover,
+    .glass:hover,
+    .btn:hover{
+
+        transform:none;
+
+    }
+
+}
+
+
+/* ==========================================================================
+   COMPONENT SAFETY RULES
+   ========================================================================== */
+
+/*
+   Components should remain self-contained.
+
+   Pages may compose components.
+
+   Pages may NOT override:
+
+   • Core spacing rhythm
+   • Component behaviour
+   • Motion language
+   • Button interaction
+   • Footer identity
+
+*/
+
+
+/* ==========================================================================
+   END OF FILE
+
+   File        : app.css
+   Version     : 2.0
+   Status      : PREMIUM FOUNDATION
+   Architecture: LOCKED
+
+   CTM PATH™ Premium Component Library™
+
+   Implemented:
+
+   ✓ Global Page Frame™
+   ✓ Premium Header™
+   ✓ Hero System™
+   ✓ Premium Glass™
+   ✓ Discovery Card™
+   ✓ Reflection Card™
+   ✓ Wisdom Card™
+   ✓ Progress System™
+   ✓ CTA System™
+   ✓ Navigation System™
+   ✓ Journey Moment™
+   ✓ Section Divider™
+   ✓ Premium Footer™
+   ✓ Motion System™
+   ✓ Utility System™
+   ✓ Responsive System™
+
+   This file defines the shared visual language
+   for all 18 CTM PATH™ Guided Journey screens.
+
+   NO PAGE-SPECIFIC STYLING.
+
+   ========================================================================== */
+
