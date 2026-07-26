@@ -1,11 +1,12 @@
 
 /* ==========================================================================
    CTM PATH™ Guided Journey™
+   FROM SURVIVAL TO LIVING™
 
    File        : js/registration.js
-   Version     : 4.0
-   Status      : 🔒 LOCKED
-   Architecture: Multi-Page Application (MPA)
+   Version     : 5.0
+   Status      : 🔒 PRODUCTION
+   Architecture: LOCKED MPA
 
    Purpose
    --------------------------------------------------------------------------
@@ -13,25 +14,33 @@
 
    Responsibilities
 
-   ✓ Initialize Registration Page
-   ✓ Validate Registration Form
+   ✓ Initialize Registration
+   ✓ Validate KYC
    ✓ Build Registration Payload
-   ✓ Submit Visitor Registration
-   ✓ Save Visitor Session
-   ✓ Navigate to Assessment Page
+   ✓ Register Visitor
+   ✓ Persist Visitor Session
+   ✓ Navigate to Assessment
 
    Does NOT
 
    ✗ Perform Assessment
-   ✗ Generate Reports
    ✗ Access Google Sheets Directly
-   ✗ Contain Business Logic
+   ✗ Perform Business Logic
+   ✗ Generate Reports
 
 ========================================================================== */
 
 "use strict";
 
+/* ==========================================================================
+   GLOBAL NAMESPACE
+========================================================================== */
+
 window.CTM = window.CTM || {};
+
+/* ==========================================================================
+   REGISTRATION MODULE
+========================================================================== */
 
 window.CTM.Registration = (() => {
 
@@ -42,7 +51,7 @@ window.CTM.Registration = (() => {
     let isSubmitting = false;
 
     /* ======================================================================
-       DOM ELEMENTS
+       DOM CACHE
     ====================================================================== */
 
     const elements = {
@@ -65,7 +74,7 @@ window.CTM.Registration = (() => {
 
         language: null,
 
-        source: null
+        referralSource: null
 
     };
 
@@ -82,7 +91,7 @@ window.CTM.Registration = (() => {
     }
 
     /* ======================================================================
-       CACHE DOM
+       CACHE ELEMENTS
     ====================================================================== */
 
     function cacheElements() {
@@ -114,13 +123,13 @@ window.CTM.Registration = (() => {
         elements.language =
             document.getElementById("language");
 
-        elements.source =
-            document.getElementById("source");
+        elements.referralSource =
+            document.getElementById("referralSource");
 
     }
 
     /* ======================================================================
-       BIND EVENTS
+       EVENT BINDING
     ====================================================================== */
 
     function bindEvents() {
@@ -151,25 +160,51 @@ window.CTM.Registration = (() => {
 
     }
 
-                               /* ======================================================================
-       VALIDATE FORM
+    /* ======================================================================
+       FIELD VALIDATION
     ====================================================================== */
 
-    function validateForm() {
+    function validateRequired(element, message) {
 
-        if (!elements.fullName.value.trim()) {
-
-            alert("Please enter your full name.");
-
-            elements.fullName.focus();
+        if (!element) {
 
             return false;
 
         }
 
-        if (!elements.mobile.value.trim()) {
+        const value = element.value.trim();
 
-            alert("Please enter your mobile number.");
+        if (!value) {
+
+            showError(message);
+
+            element.focus();
+
+            return false;
+
+        }
+
+        return true;
+
+    }
+
+    /* ======================================================================
+       MOBILE VALIDATION
+    ====================================================================== */
+
+    function validateMobile() {
+
+        const mobile =
+
+            elements.mobile.value.trim();
+
+        if (!/^[0-9]{10}$/.test(mobile)) {
+
+            showError(
+
+                "Please enter a valid 10-digit mobile number."
+
+            );
 
             elements.mobile.focus();
 
@@ -177,19 +212,31 @@ window.CTM.Registration = (() => {
 
         }
 
-        if (!/^[0-9]{10}$/.test(elements.mobile.value.trim())) {
+        return true;
 
-            alert("Please enter a valid 10-digit mobile number.");
+    }
 
-            elements.mobile.focus();
+    /* ======================================================================
+       EMAIL VALIDATION
+    ====================================================================== */
 
-            return false;
+    function validateEmail() {
 
-        }
+        const email =
 
-        if (!elements.email.value.trim()) {
+            elements.email.value.trim();
 
-            alert("Please enter your email address.");
+        const pattern =
+
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!pattern.test(email)) {
+
+            showError(
+
+                "Please enter a valid email address."
+
+            );
 
             elements.email.focus();
 
@@ -197,43 +244,135 @@ window.CTM.Registration = (() => {
 
         }
 
-        const emailPattern =
+        return true;
 
-            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    }
+
+                               /* ======================================================================
+       COMPLETE FORM VALIDATION
+    ====================================================================== */
+
+    function validateForm() {
 
         if (
 
-            !emailPattern.test(
+            !validateRequired(
 
-                elements.email.value.trim()
+                elements.fullName,
+
+                "Please enter your full name."
 
             )
 
         ) {
 
-            alert("Please enter a valid email address.");
+            return false;
 
-            elements.email.focus();
+        }
+
+        if (
+
+            !validateRequired(
+
+                elements.mobile,
+
+                "Please enter your mobile number."
+
+            )
+
+        ) {
 
             return false;
 
         }
 
-        if (!elements.district.value.trim()) {
-
-            alert("Please select your district.");
-
-            elements.district.focus();
+        if (!validateMobile()) {
 
             return false;
 
         }
 
-        if (!elements.state.value.trim()) {
+        if (
 
-            alert("Please select your state.");
+            !validateRequired(
 
-            elements.state.focus();
+                elements.email,
+
+                "Please enter your email address."
+
+            )
+
+        ) {
+
+            return false;
+
+        }
+
+        if (!validateEmail()) {
+
+            return false;
+
+        }
+
+        if (
+
+            !validateRequired(
+
+                elements.district,
+
+                "Please enter your district."
+
+            )
+
+        ) {
+
+            return false;
+
+        }
+
+        if (
+
+            !validateRequired(
+
+                elements.state,
+
+                "Please enter your state."
+
+            )
+
+        ) {
+
+            return false;
+
+        }
+
+        if (
+
+            !validateRequired(
+
+                elements.language,
+
+                "Please select your preferred language."
+
+            )
+
+        ) {
+
+            return false;
+
+        }
+
+        if (
+
+            !validateRequired(
+
+                elements.referralSource,
+
+                "Please select your referral source."
+
+            )
+
+        ) {
 
             return false;
 
@@ -273,15 +412,11 @@ window.CTM.Registration = (() => {
 
             language:
 
-                elements.language
-                    ? elements.language.value
-                    : "ta",
+                elements.language.value,
 
-            source:
+            referralSource:
 
-                elements.source
-                    ? elements.source.value.trim()
-                    : "",
+                elements.referralSource.value,
 
             device:
 
@@ -327,7 +462,27 @@ window.CTM.Registration = (() => {
 
     }
 
-                               /* ======================================================================
+    /* ======================================================================
+       SHOW ERROR
+    ====================================================================== */
+
+    function showError(message) {
+
+        alert(message);
+
+    }
+
+    /* ======================================================================
+       SHOW SUCCESS
+    ====================================================================== */
+
+    function showSuccess(message) {
+
+        console.log(message);
+
+    }
+
+    /* ======================================================================
        HANDLE SUBMIT
     ====================================================================== */
 
@@ -349,17 +504,31 @@ window.CTM.Registration = (() => {
 
         setLoading(true);
 
+        const payload = buildPayload();
+
         try {
 
-            const payload = buildPayload();
+            const response =
 
-            const response = await CTM.API.safeRequest(
+                await CTM.API.safeRequest(
 
-                () => CTM.API.registerVisitor(payload)
+                    () =>
 
-            );
+                        CTM.API.registerVisitor(
 
-            if (!response.success) {
+                            payload
+
+                        )
+
+                );
+
+            if (
+
+                !response ||
+
+                !response.success
+
+            ) {
 
                 throw new Error(
 
@@ -371,11 +540,13 @@ window.CTM.Registration = (() => {
 
             }
 
-            const visitor = response.data || {};
+            const visitor =
 
-            /* ==========================================================
+                response.data || {};
+
+                   /* ==========================================================
                UPDATE APPLICATION STATE
-               ========================================================== */
+            ========================================================== */
 
             if (
 
@@ -385,13 +556,17 @@ window.CTM.Registration = (() => {
 
             ) {
 
-                window.CTM.App.setVisitor(visitor);
+                window.CTM.App.setVisitor(
+
+                    visitor
+
+                );
 
             }
 
             /* ==========================================================
-               SAVE LOCAL SESSION
-               ========================================================== */
+               SAVE VISITOR
+            ========================================================== */
 
             if (
 
@@ -401,9 +576,17 @@ window.CTM.Registration = (() => {
 
             ) {
 
-                window.StorageService.saveVisitor(visitor);
+                window.StorageService.saveVisitor(
+
+                    visitor
+
+                );
 
             }
+
+            /* ==========================================================
+               SAVE SESSION
+            ========================================================== */
 
             if (
 
@@ -417,7 +600,13 @@ window.CTM.Registration = (() => {
 
                     visitorId:
 
-                        visitor.visitorId,
+                        visitor.visitorId ||
+
+                        null,
+
+                    fullName:
+
+                        payload.fullName,
 
                     registered: true,
 
@@ -430,8 +619,38 @@ window.CTM.Registration = (() => {
             }
 
             /* ==========================================================
-               NEXT PAGE
-               ========================================================== */
+               SAVE CURRENT PAGE
+            ========================================================== */
+
+            if (
+
+                window.StorageService &&
+
+                typeof window.StorageService.saveCurrentPage === "function"
+
+            ) {
+
+                window.StorageService.saveCurrentPage(
+
+                    "assessment"
+
+                );
+
+            }
+
+            /* ==========================================================
+               SUCCESS
+            ========================================================== */
+
+            showSuccess(
+
+                "Registration completed successfully."
+
+            );
+
+            /* ==========================================================
+               NAVIGATE
+            ========================================================== */
 
             window.location.href =
 
@@ -443,13 +662,13 @@ window.CTM.Registration = (() => {
 
             console.error(
 
-                "[Registration]",
+                "[CTM Registration]",
 
                 error
 
             );
 
-            alert(
+            showError(
 
                 error.message ||
 
@@ -468,7 +687,7 @@ window.CTM.Registration = (() => {
     }
 
     /* ======================================================================
-       BACK
+       GO BACK
     ====================================================================== */
 
     function goBack() {
@@ -479,7 +698,7 @@ window.CTM.Registration = (() => {
 
     }
 
-                               /* ======================================================================
+    /* ======================================================================
        RESET FORM
     ====================================================================== */
 
