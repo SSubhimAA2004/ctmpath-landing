@@ -5,13 +5,9 @@
    FROM SURVIVAL TO LIVING™
 
    File        : assessmentCommon.js
-   Version     : 5.0
+   Version     : 5.1
 
-   Status      : 🔒 PREMIUM ASSESSMENT ENGINE
-
-   Purpose:
-
-       Universal Engine for KALA CHAKRA™ Assessments
+   Status      : 🔒 PREMIUM ASSESSMENT ENGINE REFINEMENT
 
    ========================================================================== */
 
@@ -24,6 +20,7 @@
 
 /* ==========================================================================
    ENGINE STATE
+
    ========================================================================== */
 
 
@@ -45,7 +42,10 @@ const CTMAssessmentState = {
     spokePercentage:0,
 
 
-    lifeLevel:null
+    lifeLevel:null,
+
+
+    completed:false
 
 
 };
@@ -56,9 +56,9 @@ const CTMAssessmentState = {
 
 
 
-
 /* ==========================================================================
    INITIALIZE ASSESSMENT
+
    ========================================================================== */
 
 
@@ -95,15 +95,21 @@ function initializeAssessment(spokeNumber){
 
 
 
+
+
     CTMAssessmentState.currentSpoke =
 
         spokeNumber;
 
 
 
+
+
     CTMAssessmentState.currentPillar =
 
         pillar;
+
+
 
 
 
@@ -125,6 +131,7 @@ function initializeAssessment(spokeNumber){
 
 /* ==========================================================================
    GET PILLAR DATA
+
    ========================================================================== */
 
 
@@ -136,6 +143,7 @@ function getPillarData(spokeNumber){
 
 
         function(pillar){
+
 
 
             return (
@@ -163,6 +171,7 @@ function getPillarData(spokeNumber){
 
 /* ==========================================================================
    MASTER PAGE RENDER
+
    ========================================================================== */
 
 
@@ -183,10 +192,6 @@ function renderAssessmentPage(pillar){
         pillar
 
     );
-
-
-
-    renderLifeEvolution();
 
 
 
@@ -213,6 +218,11 @@ function renderAssessmentPage(pillar){
     );
 
 
+
+    renderLifeEvolution();
+
+
+
 }
 
 
@@ -223,6 +233,7 @@ function renderAssessmentPage(pillar){
 
 /* ==========================================================================
    LIFE MAP™
+
    ========================================================================== */
 
 
@@ -243,6 +254,7 @@ function renderLifeMap(spokeNumber){
     if(progress){
 
 
+
         progress.textContent =
 
 
@@ -259,112 +271,53 @@ function renderLifeMap(spokeNumber){
 
 
 
-    const spokeIndicator =
+    const spokes =
 
-        document.querySelector(
+        document.querySelectorAll(
 
-            ".active-spoke"
+            ".wheel-spoke"
 
         );
 
 
 
-    if(spokeIndicator){
+    spokes.forEach(
 
-
-        spokeIndicator.textContent =
-
-
-            AssessmentSpokeMap[
-
-                spokeNumber - 1
-
-            ]
-
-            .title;
+        function(spoke,index){
 
 
 
-    }
+            spoke.classList.remove(
 
+                "active"
 
-}
-
-
-
-
+            );
 
 
 
-/* ==========================================================================
-   PILLAR IDENTITY
-   ========================================================================== */
-
-
-function renderPillarIdentity(pillar){
+            if(index === spokeNumber - 1){
 
 
 
-    setElementText(
+                spoke.classList.add(
 
-        "pillarTitleTa",
+                    "active"
 
-        pillar.titleTa
-
-    );
+                );
 
 
-
-    setElementText(
-
-        "pillarTitleEn",
-
-        pillar.titleEn
-
-    );
+            }
 
 
 
-    setElementText(
-
-        "coreQuestionTa",
-
-        pillar.coreQuestionTa
-
-    );
-
-
-
-    setElementText(
-
-        "coreQuestionEn",
-
-        pillar.coreQuestionEn
-
-    );
-
-
-
-    setElementText(
-
-        "pillarIntroTa",
-
-        pillar.introductionTa
-
-    );
-
-
-
-    setElementText(
-
-        "pillarIntroEn",
-
-        pillar.introductionEn
+        }
 
     );
 
 
 }
+
+
 
 
 
@@ -373,90 +326,73 @@ function renderPillarIdentity(pillar){
 /* Continue in Batch 1B */
 
 /* ==========================================================================
-   LIFE EVOLUTION JOURNEY™
+   LIFE EVOLUTION RATING INTELLIGENCE™
 
-   Learner → Leader → Legend™
+   Score Meaning:
+
+   1 - 3  : Awareness Needed
+   4 - 6  : Growth Stage
+   7 - 8  : Strong Alignment
+   9 -10  : Mastery Level
 
    ========================================================================== */
 
 
-function renderLifeEvolution(){
+function getRatingClass(score){
 
 
 
-    const container =
-
-        document.getElementById(
-
-            "lifeEvolutionLevel"
-
-        );
+    score = Number(score);
 
 
 
-    if(!container){
 
-        return;
+
+    if(score <= 3){
+
+
+        return "rating-low";
+
 
     }
 
 
 
-    container.innerHTML = `
 
 
-        <div class="life-level-header">
 
-            <div class="level-item learner">
-
-                🌱 LEARNER™
-
-            </div>
+    if(score <= 6){
 
 
-            <div class="level-item leader">
-
-                🚀 LEADER™
-
-            </div>
+        return "rating-growth";
 
 
-            <div class="level-item legend">
-
-                👑 LEGEND™
-
-            </div>
+    }
 
 
-        </div>
 
 
-        <div class="level-scale">
 
 
-            <span>0</span>
-
-            <span>60</span>
-
-            <span>85</span>
-
-            <span>100</span>
+    if(score <= 8){
 
 
-        </div>
+        return "rating-strong";
 
 
-        <div class="current-level-message">
-
-            Complete your reflection to discover your current level.
-
-        </div>
+    }
 
 
-    `;
+
+
+
+
+    return "rating-master";
+
 
 
 }
+
 
 
 
@@ -465,130 +401,57 @@ function renderLifeEvolution(){
 
 
 /* ==========================================================================
-   UPDATE LIFE EVOLUTION LEVEL
+   RATING LABEL
 
    ========================================================================== */
 
 
-function updateLifeEvolution(score){
+function getRatingMeaning(score){
 
 
 
-    const level =
-
-        getLifeEvolutionLevel(
-
-            score
-
-        );
-
-
-
-    CTMAssessmentState.lifeLevel =
-
-        level;
-
-
-
-    const items =
-
-        document.querySelectorAll(
-
-            ".level-item"
-
-        );
-
-
-
-    items.forEach(
-
-        function(item){
-
-
-
-            item.classList.remove(
-
-                "active"
-
-            );
-
-
-        }
-
-    );
+    score = Number(score);
 
 
 
 
 
-    if(
-
-        level.key === "LEARNER"
-
-    ){
+    if(score <= 3){
 
 
-        document
+        return {
 
-            .querySelector(
 
-                ".learner"
+            title:"Awareness Needed",
 
-            )
 
-            ?.classList.add(
+            tamil:"விழிப்புணர்வு தேவை"
 
-                "active"
 
-            );
+        };
 
 
     }
 
 
 
-    else if(
-
-        level.key === "LEADER"
-
-    ){
-
-
-        document
-
-            .querySelector(
-
-                ".leader"
-
-            )
-
-            ?.classList.add(
-
-                "active"
-
-            );
-
-
-    }
 
 
 
-    else{
+
+    if(score <= 6){
 
 
-        document
+        return {
 
-            .querySelector(
 
-                ".legend"
+            title:"Growth Stage",
 
-            )
 
-            ?.classList.add(
+            tamil:"வளர்ச்சி நிலை"
 
-                "active"
 
-            );
+        };
 
 
     }
@@ -597,45 +460,47 @@ function updateLifeEvolution(score){
 
 
 
-    const message =
-
-        document.querySelector(
-
-            ".current-level-message"
-
-        );
 
 
-
-    if(message){
-
+    if(score <= 8){
 
 
-        message.innerHTML = `
+        return {
 
 
-            Current Level:
-
-            <strong>
-
-            ${level.english}
-
-            </strong>
+            title:"Strong Alignment",
 
 
-            <br>
+            tamil:"வலுவான இணக்கம்"
 
 
-            ${level.tamil}
-
-
-        `;
+        };
 
 
     }
+
+
+
+
+
+
+
+    return {
+
+
+        title:"Mastery Level",
+
+
+        tamil:"மேன்மை நிலை"
+
+
+    };
+
 
 
 }
+
+
 
 
 
@@ -644,275 +509,7 @@ function updateLifeEvolution(score){
 
 
 /* ==========================================================================
-   QUESTION RENDERING
-   ========================================================================== */
-
-
-function renderQuestions(questions){
-
-
-
-    if(
-
-        !questions
-
-        ||
-
-        !Array.isArray(questions)
-
-    ){
-
-        return;
-
-    }
-
-
-
-
-
-    questions.forEach(
-
-
-        function(question,index){
-
-
-
-            const number =
-
-                index + 1;
-
-
-
-            renderQuestion(
-
-                question,
-
-                number
-
-            );
-
-
-
-        }
-
-
-    );
-
-
-}
-
-
-
-
-
-
-
-function renderQuestion(
-
-    question,
-
-    number
-
-){
-
-
-
-    setElementText(
-
-        "questionTypeTa" + number,
-
-        question.typeTa
-
-    );
-
-
-
-    setElementText(
-
-        "questionTypeEn" + number,
-
-        question.type
-
-    );
-
-
-
-    setElementText(
-
-        "questionTextTa" + number,
-
-        question.textTa
-
-    );
-
-
-
-    setElementText(
-
-        "questionTextEn" + number,
-
-        question.textEn
-
-    );
-
-
-
-    createRatingScale(
-
-        "ratingGroup" + number,
-
-        number
-
-    );
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   PREMIUM RATING SCALE
-
-   1 - 10
-
-   ========================================================================== */
-
-
-function createRatingScale(
-
-    containerId,
-
-    questionNumber
-
-){
-
-
-
-    const container =
-
-        document.getElementById(
-
-            containerId
-
-        );
-
-
-
-    if(!container){
-
-        return;
-
-    }
-
-
-
-    container.innerHTML = "";
-
-
-
-
-
-    for(
-
-        let score = 1;
-
-        score <= 10;
-
-        score++
-
-    ){
-
-
-
-        const button =
-
-            document.createElement(
-
-                "button"
-
-            );
-
-
-
-        button.className =
-
-            "rating-button";
-
-
-
-        button.type =
-
-            "button";
-
-
-
-        button.dataset.score =
-
-            score;
-
-
-
-        button.textContent =
-
-            score;
-
-
-
-
-
-        button.addEventListener(
-
-            "click",
-
-            function(){
-
-
-
-                selectRating(
-
-                    questionNumber,
-
-                    score,
-
-                    container
-
-                );
-
-
-
-            }
-
-
-        );
-
-
-
-        container.appendChild(
-
-            button
-
-        );
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-/* Continue in Batch 1C */
-
-/* ==========================================================================
-   RATING SELECTION
+   PREMIUM RATING SELECTION
 
    ========================================================================== */
 
@@ -939,14 +536,25 @@ function selectRating(
 
 
 
+
+
     buttons.forEach(
 
         function(button){
 
 
+
             button.classList.remove(
 
-                "active"
+                "active",
+
+                "rating-low",
+
+                "rating-growth",
+
+                "rating-strong",
+
+                "rating-master"
 
             );
 
@@ -954,6 +562,8 @@ function selectRating(
         }
 
     );
+
+
 
 
 
@@ -973,12 +583,19 @@ function selectRating(
 
 
 
+
+
+
+
     if(selectedButton){
+
 
 
         selectedButton.classList.add(
 
-            "active"
+            "active",
+
+            getRatingClass(score)
 
         );
 
@@ -989,19 +606,148 @@ function selectRating(
 
 
 
+
+
     CTMAssessmentState.responses[
 
         questionNumber
 
-    ] = score;
+    ] = Number(score);
+
+
+
+
+
+
+
+    updateQuestionFeedback(
+
+        container,
+
+        score
+
+    );
+
+
+
+
 
 
 
     calculateCurrentSpokeScore();
 
 
+
 }
 
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   QUESTION FEEDBACK
+
+   ========================================================================== */
+
+
+function updateQuestionFeedback(
+
+    container,
+
+    score
+
+){
+
+
+
+    let feedback =
+
+        container.parentElement.querySelector(
+
+            ".rating-feedback"
+
+        );
+
+
+
+
+
+    if(!feedback){
+
+
+
+        feedback =
+
+            document.createElement(
+
+                "div"
+
+            );
+
+
+
+        feedback.className =
+
+            "rating-feedback";
+
+
+
+        container.parentElement.appendChild(
+
+            feedback
+
+        );
+
+
+    }
+
+
+
+
+
+
+
+    const meaning =
+
+        getRatingMeaning(score);
+
+
+
+
+
+
+
+    feedback.innerHTML = `
+
+
+
+        <span>
+
+        ${meaning.title}
+
+        </span>
+
+
+        <br>
+
+
+        <small>
+
+        ${meaning.tamil}
+
+        </small>
+
+
+
+    `;
+
+
+
+}
 
 
 
@@ -1029,6 +775,8 @@ function calculateCurrentSpokeScore(){
 
 
 
+
+
     if(
 
         responses.length === 0
@@ -1043,6 +791,8 @@ function calculateCurrentSpokeScore(){
 
 
 
+
+
     const total =
 
         responses.reduce(
@@ -1050,7 +800,9 @@ function calculateCurrentSpokeScore(){
             function(sum,value){
 
 
+
                 return sum + Number(value);
+
 
 
             },
@@ -1058,6 +810,8 @@ function calculateCurrentSpokeScore(){
             0
 
         );
+
+
 
 
 
@@ -1071,14 +825,18 @@ function calculateCurrentSpokeScore(){
 
 
 
+
+
     CTMAssessmentState.spokePercentage =
 
 
-        calculateSpokePercentage(
+        Math.round(
 
-            total
+            (total / 30) * 100
 
         );
+
+
 
 
 
@@ -1088,11 +846,156 @@ function calculateCurrentSpokeScore(){
 
 
 
-    updateLifeEvolution(
 
-        CTMAssessmentState.spokePercentage
 
-    );
+
+
+    if(
+
+        responses.length === 3
+
+    ){
+
+
+
+        CTMAssessmentState.completed = true;
+
+
+
+        updateLifeEvolution(
+
+            CTMAssessmentState.spokePercentage
+
+        );
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+/* Continue in Batch 1C */
+
+/* ==========================================================================
+   LIFE EVOLUTION JOURNEY™
+
+   Learner → Leader → Legend™
+
+   Revealed after completion only
+
+   ========================================================================== */
+
+
+function renderLifeEvolution(){
+
+
+
+    const container =
+
+        document.getElementById(
+
+            "lifeEvolutionLevel"
+
+        );
+
+
+
+    if(!container){
+
+        return;
+
+    }
+
+
+
+
+
+    container.innerHTML = `
+
+
+        <div class="life-level-header">
+
+
+            <div class="level-item learner">
+
+
+                🌱
+
+                <br>
+
+                LEARNER™
+
+            </div>
+
+
+
+            <div class="level-item leader">
+
+
+                🚀
+
+                <br>
+
+                LEADER™
+
+            </div>
+
+
+
+            <div class="level-item legend">
+
+
+                👑
+
+                <br>
+
+                LEGEND™
+
+            </div>
+
+
+
+        </div>
+
+
+
+        <div class="level-scale">
+
+
+            <span>0</span>
+
+
+            <span>60</span>
+
+
+            <span>85</span>
+
+
+            <span>100</span>
+
+
+
+        </div>
+
+
+
+        <div class="current-level-message">
+
+
+            Complete all reflections to discover your current level.
+
+
+        </div>
+
+
+
+    `;
 
 
 }
@@ -1103,8 +1006,220 @@ function calculateCurrentSpokeScore(){
 
 
 
+
+
 /* ==========================================================================
-   SCORE DISPLAY
+   UPDATE LIFE EVOLUTION
+
+   ========================================================================== */
+
+
+function updateLifeEvolution(score){
+
+
+
+    const level =
+
+        getLifeEvolutionLevel(
+
+            score
+
+        );
+
+
+
+
+
+    CTMAssessmentState.lifeLevel =
+
+        level;
+
+
+
+
+
+    const levels =
+
+        document.querySelectorAll(
+
+            ".level-item"
+
+        );
+
+
+
+
+
+    levels.forEach(
+
+        function(item){
+
+
+
+            item.classList.remove(
+
+                "active"
+
+            );
+
+
+
+        }
+
+    );
+
+
+
+
+
+
+
+    if(
+
+        level.key === "LEARNER"
+
+    ){
+
+
+
+        document
+
+        .querySelector(
+
+            ".learner"
+
+        )
+
+        ?.classList.add(
+
+            "active"
+
+        );
+
+
+    }
+
+
+
+
+
+
+    else if(
+
+        level.key === "LEADER"
+
+    ){
+
+
+
+        document
+
+        .querySelector(
+
+            ".leader"
+
+        )
+
+        ?.classList.add(
+
+            "active"
+
+        );
+
+
+    }
+
+
+
+
+
+
+
+    else{
+
+
+
+        document
+
+        .querySelector(
+
+            ".legend"
+
+        )
+
+        ?.classList.add(
+
+            "active"
+
+        );
+
+
+    }
+
+
+
+
+
+
+
+    const message =
+
+        document.querySelector(
+
+            ".current-level-message"
+
+        );
+
+
+
+
+
+    if(message){
+
+
+
+        message.innerHTML = `
+
+
+
+            Your Current Life Level™
+
+            <br>
+
+
+            <strong>
+
+            ${level.english}
+
+            </strong>
+
+
+            <br>
+
+
+            ${level.tamil}
+
+
+
+        `;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   SCORE CARD UPDATE
 
    ========================================================================== */
 
@@ -1113,31 +1228,70 @@ function updateScoreDisplay(){
 
 
 
-    setElementText(
+    const rawScore =
 
-        "spokeRawScore",
+        document.getElementById(
 
-        CTMAssessmentState.spokeScore
+            "spokeRawScore"
 
-        +
-
-        " / 30"
-
-    );
+        );
 
 
 
-    setElementText(
 
-        "spokePercentage",
 
-        CTMAssessmentState.spokePercentage
+    const percentage =
 
-        +
+        document.getElementById(
 
-        " /100"
+            "spokePercentage"
 
-    );
+        );
+
+
+
+
+
+
+
+    if(rawScore){
+
+
+
+        rawScore.textContent =
+
+
+            CTMAssessmentState.spokeScore
+
+            +
+
+            " / 30";
+
+
+    }
+
+
+
+
+
+
+
+    if(percentage){
+
+
+
+        percentage.textContent =
+
+
+            CTMAssessmentState.spokePercentage
+
+            +
+
+            " /100";
+
+
+    }
+
 
 
 }
@@ -1148,82 +1302,10 @@ function updateScoreDisplay(){
 
 
 
-/* ==========================================================================
-   REFLECTION MOMENT™
-
-   ========================================================================== */
-
-
-function renderReflection(pillar){
-
-
-
-    setElementText(
-
-        "reflectionTextTa",
-
-        pillar.reflectionTa
-
-    );
-
-
-
-    setElementText(
-
-        "reflectionTextEn",
-
-        pillar.reflectionEn
-
-    );
-
-
-}
-
-
-
-
-
 
 
 /* ==========================================================================
-   WISDOM MOMENT™
-
-   ========================================================================== */
-
-
-function renderWisdom(pillar){
-
-
-
-    setElementText(
-
-        "wisdomTextTa",
-
-        pillar.wisdomTa
-
-    );
-
-
-
-    setElementText(
-
-        "wisdomTextEn",
-
-        pillar.wisdomEn
-
-    );
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   SAVE CURRENT ASSESSMENT STATE
+   COMPLETE ASSESSMENT PAYLOAD
 
    ========================================================================== */
 
@@ -1235,9 +1317,11 @@ function getAssessmentPayload(){
     return {
 
 
+
         spoke:
 
             CTMAssessmentState.currentSpoke,
+
 
 
         pillar:
@@ -1271,14 +1355,53 @@ function getAssessmentPayload(){
         level:
 
 
+            CTMAssessmentState.lifeLevel
+
+            ?
+
             CTMAssessmentState.lifeLevel.key
+
+            :
+
+            null
 
 
 
     };
 
 
+
 }
+
+
+
+
+
+
+
+/* ==========================================================================
+   VALIDATION
+
+   ========================================================================== */
+
+
+function isAssessmentComplete(){
+
+
+
+    return (
+
+        Object.keys(
+
+            CTMAssessmentState.responses
+
+        ).length === 3
+
+    );
+
+
+}
+
 
 
 
@@ -1306,9 +1429,14 @@ function restoreResponses(savedData){
 
 
 
+
+
+
     CTMAssessmentState.responses =
 
         savedData.responses || {};
+
+
 
 
 
@@ -1336,6 +1464,8 @@ function restoreResponses(savedData){
 
 
 
+
+
             const container =
 
                 document.getElementById(
@@ -1350,11 +1480,16 @@ function restoreResponses(savedData){
 
 
 
+
+
             if(!container){
 
                 return;
 
             }
+
+
+
 
 
 
@@ -1372,12 +1507,19 @@ function restoreResponses(savedData){
 
 
 
+
+
+
+
             if(button){
+
 
 
                 button.classList.add(
 
-                    "active"
+                    "active",
+
+                    getRatingClass(score)
 
                 );
 
@@ -1386,10 +1528,16 @@ function restoreResponses(savedData){
 
 
 
+
+
         }
 
 
     );
+
+
+
+
 
 
 
@@ -1405,97 +1553,10 @@ function restoreResponses(savedData){
 
 
 
-/* ==========================================================================
-   DOM HELPER FUNCTIONS
-
-   ========================================================================== */
-
-
-function setElementText(
-
-    id,
-
-    value
-
-){
-
-
-
-    const element =
-
-        document.getElementById(
-
-            id
-
-        );
-
-
-
-    if(element){
-
-
-        element.textContent =
-
-            value || "";
-
-
-    }
-
-
-}
-
-
-
-
-
-
-
-function getElement(id){
-
-
-    return document.getElementById(
-
-        id
-
-    );
-
-
-}
-
-
-
-
-
 
 
 /* ==========================================================================
-   ASSESSMENT COMPLETION CHECK
-
-   ========================================================================== */
-
-
-function isAssessmentComplete(){
-
-
-
-    return Object.keys(
-
-        CTMAssessmentState.responses
-
-    ).length === 3;
-
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   RESET CURRENT ASSESSMENT
+   RESET ASSESSMENT
 
    ========================================================================== */
 
@@ -1520,29 +1581,59 @@ function resetAssessment(){
 
 
 
+    CTMAssessmentState.completed = false;
+
+
+
+
+
+
+
     document
 
-        .querySelectorAll(
+    .querySelectorAll(
 
-            ".rating-button"
+        ".rating-button"
 
-        )
+    )
 
-        .forEach(
+    .forEach(
 
-            function(button){
-
-
-                button.classList.remove(
-
-                    "active"
-
-                );
+        function(button){
 
 
-            }
 
-        );
+            button.classList.remove(
+
+                "active",
+
+                "rating-low",
+
+                "rating-growth",
+
+                "rating-strong",
+
+                "rating-master"
+
+            );
+
+
+
+        }
+
+    );
+
+
+
+
+
+
+
+    updateScoreDisplay();
+
+
+
+    renderLifeEvolution();
 
 
 
@@ -1554,8 +1645,116 @@ function resetAssessment(){
 
 
 
+
+
 /* ==========================================================================
-   PUBLIC ENGINE API
+   DOM HELPERS
+
+   ========================================================================== */
+
+
+function setElementText(
+
+    id,
+
+    value
+
+){
+
+
+
+    const element =
+
+        document.getElementById(
+
+            id
+
+        );
+
+
+
+
+
+    if(element){
+
+
+
+        element.textContent =
+
+            value || "";
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+function getElement(id){
+
+
+
+    return document.getElementById(
+
+        id
+
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   SCROLL HELPER
+
+   ========================================================================== */
+
+
+function scrollToTop(){
+
+
+
+    window.scrollTo({
+
+
+        top:0,
+
+
+        behavior:"smooth"
+
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   PUBLIC ASSESSMENT ENGINE API
 
    ========================================================================== */
 
@@ -1582,13 +1781,19 @@ const CTMAssessmentEngine = {
 
 
 
-    calculateScore:
+    calculate:
 
         calculateCurrentSpokeScore,
 
 
 
-    getPayload:
+    score:
+
+        calculateCurrentSpokeScore,
+
+
+
+    payload:
 
         getAssessmentPayload,
 
@@ -1632,16 +1837,19 @@ Object.freeze(
 
 
 
+
+
 /* ==========================================================================
    END OF FILE
 
 
    File        : assessmentCommon.js
 
-   Version     : 5.0
+   Version     : 5.1
 
 
    Status      : 🔒 CTM PATH™ PREMIUM ASSESSMENT ENGINE
 
 
    ========================================================================== */
+
