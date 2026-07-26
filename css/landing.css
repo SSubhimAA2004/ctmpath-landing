@@ -4,28 +4,27 @@
    CTM PATH™ Guided Journey™
 
    File        : landing.css
-   Version     : 5.0
-   Status      : 🔒 PREMIUM FOUNDATION
+   Version     : 5.1
+   Status      : 🔒 PREMIUM PAGE COMPOSITION
 
    Purpose
    --------------------------------------------------------------------------
-   Page 01 — Welcome Experience Styles
+   Page 01 — Welcome Experience
 
    Owns ONLY:
-   ✓ Landing page composition
-   ✓ Hero atmosphere
+
+   ✓ Hero composition
+   ✓ Landing sections
    ✓ Discovery layout
-   ✓ Life Areas grid
-   ✓ Closing section arrangement
-   ✓ CTA section composition
+   ✓ Life area arrangement
+   ✓ CTA composition
 
    Does NOT own:
+
    ✗ Global components
-   ✗ Buttons
-   ✗ Cards
+   ✗ Design tokens
    ✗ Header
    ✗ Footer
-   ✗ Typography system
 
    ========================================================================== */
 
@@ -36,7 +35,7 @@
    ========================================================================== */
 
 
-.landing-page{
+.landing-page {
 
     position:relative;
 
@@ -47,11 +46,11 @@
 
 
 /* ==========================================================================
-   HERO SECTION
+   HERO EXPERIENCE
    ========================================================================== */
 
 
-.landing-hero{
+.landing-hero {
 
     min-height:
 
@@ -63,34 +62,114 @@
 
     justify-content:center;
 
+    text-align:center;
+
+    padding-block:
+
+        var(--space-20);
+
 }
 
 
 
-.landing-hero .hero-copy{
+.landing-hero .hero-copy {
 
     max-width:
 
-        900px;
+        1000px;
+
+    margin-inline:auto;
+
+}
+
+
+
+.hero-eyebrow {
+
+    color:
+
+        var(--color-gold);
+
+    letter-spacing:
+
+        .12em;
+
+    text-transform:
+
+        uppercase;
+
+    margin-bottom:
+
+        var(--space-6);
+
+}
+
+
+
+.hero-title {
+
+    max-width:
+
+        1000px;
+
+    margin-inline:auto;
+
+    margin-bottom:
+
+        var(--space-8);
+
+}
+
+
+
+.hero-subtitle {
+
+    max-width:
+
+        760px;
+
+    margin-inline:auto;
+
+    color:
+
+        var(--text-secondary);
+
+}
+
+
+
+.hero-introduction {
+
+    max-width:
+
+        760px;
+
+    margin-inline:auto;
+
+    margin-top:
+
+        var(--space-6);
+
+    color:
+
+        var(--text-muted);
 
 }
 
 
 
 /* ==========================================================================
-   HERO ATMOSPHERE
+   PREMIUM ATMOSPHERE
    ========================================================================== */
 
 
-.landing-hero::before{
+.landing-page::before {
 
     content:"";
 
     position:absolute;
 
-    inset:
-
-        0;
+    inset:0;
 
     background:
 
@@ -100,7 +179,7 @@
 
             rgba(20,184,166,.12),
 
-            transparent 45%
+            transparent 40%
 
         );
 
@@ -113,25 +192,37 @@
 
 
 /* ==========================================================================
-   JOURNEY INVITATION
+   SECTION SYSTEM
    ========================================================================== */
 
 
-.landing-invitation{
+.section {
 
-    padding-top:
+    padding-block:
 
-        var(--space-24);
+        var(--section-gap-md);
 
 }
 
 
 
-.invitation-card{
+.section-heading {
+
+    text-align:center;
+
+    margin-bottom:
+
+        var(--space-12);
+
+}
+
+
+
+.section-title {
 
     max-width:
 
-        760px;
+        900px;
 
     margin-inline:auto;
 
@@ -139,30 +230,61 @@
 
 
 
-/* ==========================================================================
-   DISCOVERY SECTION
-   ========================================================================== */
+.section-description {
 
+    max-width:
 
-.discovery-section{
+        820px;
 
-    padding-top:
+    margin-inline:auto;
 
-        var(--space-24);
+    text-align:center;
+
+    color:
+
+        var(--text-secondary);
+
+    line-height:
+
+        var(--lh-relaxed);
 
 }
 
 
 
-.discovery-grid{
+/* ==========================================================================
+   JOURNEY INVITATION
+   ========================================================================== */
 
-    width:100%;
+
+.landing-invitation .glass-standard {
+
+    max-width:
+
+        900px;
+
+    margin-inline:auto;
+
+    padding:
+
+        var(--space-12);
+
+}
+
+
+
+/* ==========================================================================
+   DISCOVERY MILESTONES
+   ========================================================================== */
+
+
+.discovery-grid {
 
     display:grid;
 
     grid-template-columns:
 
-        repeat(4,1fr);
+        repeat(2,1fr);
 
     gap:
 
@@ -172,32 +294,60 @@
 
 
 
-.journey-card{
+.discovery-card {
 
-    height:100%;
+    min-height:
+
+        360px;
+
+    text-align:center;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:flex-start;
+
+}
+
+
+
+.discovery-card .card-title {
+
+    margin-top:
+
+        var(--space-5);
+
+}
+
+
+
+.discovery-card .card-description {
+
+    margin-top:
+
+        var(--space-4);
+
+    color:
+
+        var(--text-secondary);
+
+    line-height:
+
+        var(--lh-relaxed);
 
 }
 
 
 
 /* ==========================================================================
-   LIFE AREAS SECTION
+   LIFE AREAS GRID
    ========================================================================== */
 
 
-.life-areas-section{
-
-    padding-top:
-
-        var(--space-24);
-
-}
-
-
-
-.life-areas-grid{
-
-    width:100%;
+.life-areas-grid {
 
     display:grid;
 
@@ -213,19 +363,31 @@
 
 
 
-.life-area-card{
+.life-area-card {
 
     min-height:
 
-        150px;
+        220px;
 
-    display:flex;
+}
 
-    align-items:center;
 
-    justify-content:center;
 
-    text-align:center;
+.life-area-card .discovery-number {
+
+    margin-bottom:
+
+        var(--space-4);
+
+}
+
+
+
+.life-area-card .card-title {
+
+    line-height:
+
+        var(--lh-normal);
 
 }
 
@@ -236,66 +398,242 @@
    ========================================================================== */
 
 
-.closing-section{
-
-    padding-top:
-
-        var(--space-24);
-
-}
-
-
-
-.closing-section .glass-wisdom{
+.closing-section .glass-standard {
 
     max-width:
 
-        860px;
+        900px;
 
     margin-inline:auto;
 
+    padding:
+
+        var(--space-12);
+
+    text-align:center;
+
 }
 
 
 
 /* ==========================================================================
-   CTA SECTION
+
+   END OF BATCH 1A
+
+   ========================================================================== */
+
+/* ==========================================================================
+   CTA PANEL
    ========================================================================== */
 
 
-.journey-cta-section{
+.cta-panel {
 
-    padding-top:
+    max-width:
 
-        var(--space-24);
+        900px;
 
-    padding-bottom:
+    margin-inline:auto;
 
-        var(--space-24);
+    padding:
+
+        var(--space-12);
+
+    text-align:center;
 
 }
 
 
 
-.journey-cta-section .hero-copy{
+.cta-panel .button-group {
 
-    max-width:
+    margin-top:
 
-        820px;
+        var(--space-10);
+
+}
+
+
+
+.journey-cta-section {
+
+    padding-bottom:
+
+        var(--section-gap-lg);
+
+}
+
+
+
+
+
+/* ==========================================================================
+   PREMIUM CARD ALIGNMENT
+   ========================================================================== */
+
+
+.discovery-card,
+
+.life-area-card {
+
+    overflow:hidden;
+
+}
+
+
+
+.discovery-card::after,
+
+.life-area-card::after {
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            rgba(198,164,91,.08),
+
+            transparent 40%
+
+        );
+
+    opacity:0;
+
+    transition:
+
+        opacity var(--transition-normal);
+
+}
+
+
+
+.discovery-card:hover::after,
+
+.life-area-card:hover::after {
+
+    opacity:1;
+
+}
+
+
+
+
+
+/* ==========================================================================
+   ICON REFINEMENT
+   ========================================================================== */
+
+
+.discovery-card .icon-container,
+
+.life-area-card .icon-container {
+
+    flex-shrink:0;
+
+}
+
+
+
+.discovery-card .icon-container img,
+
+.life-area-card .icon-container img {
+
+    object-fit:contain;
 
 }
 
 
 
 /* ==========================================================================
-   RESPONSIVE
+   PREMIUM VERTICAL RHYTHM
+   ========================================================================== */
+
+
+.landing-page > section:first-of-type {
+
+    padding-top:
+
+        var(--space-12);
+
+}
+
+
+
+.landing-page > section:last-of-type {
+
+    padding-bottom:
+
+        var(--space-20);
+
+}
+
+
+
+
+
+/* ==========================================================================
+   DESKTOP LARGE SCREENS
+   ========================================================================== */
+
+
+@media (min-width:1400px){
+
+
+    .landing-hero {
+
+        padding-block:
+
+            var(--space-24);
+
+    }
+
+
+
+    .discovery-grid {
+
+        gap:
+
+            var(--space-10);
+
+    }
+
+
+
+    .life-areas-grid {
+
+        gap:
+
+            var(--space-8);
+
+    }
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   TABLET RESPONSIVE
    ========================================================================== */
 
 
 @media(max-width:1100px){
 
 
-    .discovery-grid{
+
+    .discovery-grid {
 
         grid-template-columns:
 
@@ -304,30 +642,80 @@
     }
 
 
-    .life-areas-grid{
+
+    .life-areas-grid {
 
         grid-template-columns:
 
             repeat(2,1fr);
 
     }
+
 
 
 }
 
+
+
+
+
+
+/* ==========================================================================
+   MOBILE RESPONSIVE
+   ========================================================================== */
 
 
 @media(max-width:768px){
 
 
-    .landing-hero{
+
+    .landing-hero {
 
         min-height:auto;
 
+        padding-block:
+
+            var(--space-12);
+
     }
 
 
-    .discovery-grid{
+
+    .hero-title {
+
+        line-height:
+
+            var(--lh-tight);
+
+    }
+
+
+
+    .section {
+
+        padding-block:
+
+            var(--space-16);
+
+    }
+
+
+
+    .landing-invitation .glass-standard,
+
+    .closing-section .glass-standard,
+
+    .cta-panel {
+
+        padding:
+
+            var(--space-8);
+
+    }
+
+
+
+    .discovery-grid {
 
         grid-template-columns:
 
@@ -336,16 +724,59 @@
     }
 
 
-    .life-areas-grid{
+
+    .life-areas-grid {
 
         grid-template-columns:
 
             1fr;
 
     }
+
 
 
 }
+
+
+
+
+
+
+/* ==========================================================================
+   SMALL MOBILE
+   ========================================================================== */
+
+
+@media(max-width:480px){
+
+
+
+    .landing-invitation .glass-standard,
+
+    .closing-section .glass-standard,
+
+    .cta-panel {
+
+        padding:
+
+            var(--space-6);
+
+    }
+
+
+
+    .discovery-card {
+
+        min-height:
+
+            auto;
+
+    }
+
+
+
+}
+
 
 
 /* ==========================================================================
@@ -353,8 +784,10 @@
    END OF FILE
 
    File        : landing.css
-   Version     : 5.0
-   Status      : 🔒 PREMIUM FOUNDATION
+
+   Version     : 5.1
+
+   Status      : 🔒 PREMIUM PAGE COMPOSITION
 
    ========================================================================== */
 
