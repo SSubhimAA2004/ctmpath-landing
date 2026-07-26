@@ -1,112 +1,171 @@
 
 /* ==========================================================================
+
    CTM PATH™ Guided Journey™
 
-   File        : js/landing.js
-   Version     : 4.0
-   Status      : 🔒 LOCKED
-   Architecture: Multi-Page Application (MPA)
+   File        : landing.js
+   Version     : 5.0
+   Status      : 🔒 PREMIUM FOUNDATION
 
    Purpose
    --------------------------------------------------------------------------
-   Landing Page Controller
+   Page 01 — Landing Experience Controller
 
    Responsibilities
-
-   ✓ Initialize Landing Page
-   ✓ Reset Previous Journey
-   ✓ Handle Begin Journey CTA
-   ✓ Navigate to Registration Page
+   --------------------------------------------------------------------------
+   ✓ Initialize landing page
+   ✓ Bind Begin Journey action
+   ✓ Start guided journey flow
+   ✓ Coordinate shared components
 
    Does NOT
+   --------------------------------------------------------------------------
+   ✗ Create UI elements
+   ✗ Control global components
+   ✗ Handle API calls
+   ✗ Manage assessment logic
 
-   ✗ Call Google Apps Script
-   ✗ Perform Registration
-   ✗ Handle Assessment
-   ✗ Perform Routing
-   ✗ Contain Business Logic
+   ========================================================================== */
 
-========================================================================== */
 
 "use strict";
 
+
 window.CTM = window.CTM || {};
+
+
 
 window.CTM.Landing = (() => {
 
+
+
     /* ======================================================================
        MODULE STATE
-    ====================================================================== */
+       ====================================================================== */
 
-    const elements = {
 
-        beginButton: null
+    const state = {
+
+
+        initialized:false
+
 
     };
 
+
+
+
     /* ======================================================================
        INITIALIZE
-    ====================================================================== */
+       ====================================================================== */
 
-    function initialize() {
 
-        cacheElements();
+    function initialize(){
 
-        resetJourney();
 
-        bindEvents();
-
-    }
-
-    /* ======================================================================
-       CACHE DOM
-    ====================================================================== */
-
-    function cacheElements() {
-
-        elements.beginButton =
-
-            document.querySelector(
-
-                ".primary-button"
-
-            );
-
-    }
-
-    /* ======================================================================
-       RESET JOURNEY
-    ====================================================================== */
-
-    function resetJourney() {
-
-        if (
-
-            window.CTM.App &&
-
-            typeof window.CTM.App.reset === "function"
-
-        ) {
-
-            window.CTM.App.reset();
-
-        }
-
-    }
-
-    /* ======================================================================
-       BIND EVENTS
-    ====================================================================== */
-
-    function bindEvents() {
-
-        if (!elements.beginButton) {
+        if(state.initialized){
 
             return;
 
         }
 
-        elements.beginButton.addEventListener(
+
+        bindEvents();
+
+
+        initializeComponents();
+
+
+        state.initialized = true;
+
+
+    }
+
+
+
+
+    /* ======================================================================
+       COMPONENT INITIALIZATION
+       ====================================================================== */
+
+
+    function initializeComponents(){
+
+
+
+        if(
+
+            window.CTM.Header &&
+
+            typeof window.CTM.Header.initialize === "function"
+
+        ){
+
+            window.CTM.Header.initialize();
+
+        }
+
+
+
+        if(
+
+            window.CTM.Footer &&
+
+            typeof window.CTM.Footer.initialize === "function"
+
+        ){
+
+            window.CTM.Footer.initialize();
+
+        }
+
+
+
+        if(
+
+            window.CTM.Journey &&
+
+            typeof window.CTM.Journey.initialize === "function"
+
+        ){
+
+            window.CTM.Journey.initialize();
+
+        }
+
+
+    }
+
+
+
+
+    /* ======================================================================
+       EVENT BINDING
+       ====================================================================== */
+
+
+    function bindEvents(){
+
+
+        const button =
+
+            document.querySelector(
+
+                "[data-action='begin-journey']"
+
+            );
+
+
+
+        if(!button){
+
+            return;
+
+        }
+
+
+
+        button.addEventListener(
 
             "click",
 
@@ -114,60 +173,118 @@ window.CTM.Landing = (() => {
 
         );
 
+
     }
 
-                          /* ======================================================================
+
+
+
+    /* ======================================================================
        BEGIN JOURNEY
-    ====================================================================== */
+       ====================================================================== */
 
-    function beginJourney() {
 
-        window.location.href =
+    function beginJourney(){
 
-            "registration.html";
+
+
+        if(
+
+            window.CTM.Journey &&
+
+            typeof window.CTM.Journey.continueJourney === "function"
+
+        ){
+
+            window.CTM.Journey.continueJourney();
+
+        }
+
+
+
+        setTimeout(
+
+            function(){
+
+
+                window.location.href =
+
+                    "registration.html";
+
+
+            },
+
+            300
+
+        );
+
 
     }
+
+
+
 
     /* ======================================================================
        PUBLIC API
-    ====================================================================== */
+       ====================================================================== */
+
 
     return {
 
-        initialize,
 
-        beginJourney
+        initialize
+
 
     };
 
+
+
 })();
+
+
+
+
 
 /* ==========================================================================
    AUTO INITIALIZATION
-========================================================================== */
+   ========================================================================== */
+
 
 document.addEventListener(
 
     "DOMContentLoaded",
 
-    function () {
+    function(){
 
-        if (
+
+        if(
 
             window.CTM.Landing &&
 
             typeof window.CTM.Landing.initialize === "function"
 
-        ) {
+        ){
 
             window.CTM.Landing.initialize();
 
         }
 
+
     }
 
 );
 
+
+
+
+
 /* ==========================================================================
+
    END OF FILE
-========================================================================== */
+
+   File        : landing.js
+   Version     : 5.0
+   Status      : 🔒 PREMIUM FOUNDATION
+
+   ========================================================================== */
+
