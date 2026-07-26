@@ -5,14 +5,17 @@
    FROM SURVIVAL TO LIVING™
 
    File        : assessment.css
-   Version     : 5.1
+   Version     : 5.2
 
    Status      : 🔒 PREMIUM EXPERIENCE REFINEMENT
 
    Update:
 
-       Premium Colour Hierarchy
-       Assessment Experience Upgrade
+   CTM PATH™ Assessment Scale v1.0
+
+   🔴 Awareness
+   🟠 Growth
+   🟢 Alignment
 
    ========================================================================== */
 
@@ -20,8 +23,9 @@
 
 
 
+
 /* ==========================================================================
-   PREMIUM COLOUR SYSTEM
+   CTM PATH™ PREMIUM COLOUR SYSTEM
 
    ========================================================================== */
 
@@ -44,11 +48,6 @@
         #16C7C2;
 
 
-    --ctm-teal-soft:
-
-        rgba(22,199,194,.15);
-
-
     --ctm-gold:
 
         #C8A45D;
@@ -69,6 +68,11 @@
         rgba(248,245,239,.60);
 
 
+
+
+    /* Assessment Scale */
+
+
     --ctm-red:
 
         #E05252;
@@ -84,7 +88,9 @@
         #22C55E;
 
 
+
 }
+
 
 
 
@@ -94,236 +100,36 @@
 
 
 /* ==========================================================================
-   ASSESSMENT ROOT
+   LIFE MAP™
 
    ========================================================================== */
 
 
-.assessment-page{
-
-
-    min-height:100vh;
-
-
-    background:
-
-
-        radial-gradient(
-
-            circle at top,
-
-            rgba(22,199,194,.16),
-
-            transparent 35%
-
-        ),
-
-
-        linear-gradient(
-
-            180deg,
-
-            #081C3A,
-
-            #061426
-
-        );
-
-
-    color:
-
-        var(--ctm-ivory);
-
-
-}
-
-
-
-
-
-
-
-
-.assessment-container{
-
-
-    width:100%;
-
-
-    max-width:1200px;
-
-
-    margin:auto;
-
-
-    padding:
-
-        40px 24px;
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   PREMIUM CARD FOUNDATION
-
-   ========================================================================== */
-
-
-.premium-assessment-card{
-
-
-    background:
-
-
-        rgba(255,255,255,.045);
-
-
-    backdrop-filter:
-
-        blur(22px);
-
-
-    border:
-
-        1px solid rgba(255,255,255,.12);
-
-
-    border-radius:
-
-        32px;
-
-
-    box-shadow:
-
-
-        0 40px 100px rgba(0,0,0,.45);
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   HEADER
-
-   ========================================================================== */
-
-
-.assessment-header{
+.life-map{
 
 
     text-align:center;
 
 
-    padding-bottom:
-
-        30px;
-
-
 }
 
 
 
 
 
-
-
-.brand-title{
-
-
-    font-family:
-
-        "Poppins",
-        sans-serif;
-
-
-    font-size:
-
-        28px;
-
-
-    font-weight:
-
-        700;
-
-
-    letter-spacing:
-
-        .08em;
-
-
-    color:
-
-        var(--ctm-ivory);
-
-
-}
-
-
-
-
-
-
-
-.journey-title{
-
-
-    margin-top:
-
-        10px;
-
-
-    color:
-
-        var(--ctm-gold);
-
-
-    font-size:
-
-        13px;
-
-
-    font-weight:
-
-        600;
-
-
-    letter-spacing:
-
-        .25em;
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   YOUR LIFE MAP™
-
-   Enhanced Visibility
-
-   ========================================================================== */
 
 
 .life-map-title{
 
 
+    text-align:center;
+
+
+    color:
+
+        var(--ctm-teal);
+
+
     font-family:
 
         "Poppins",
@@ -332,7 +138,7 @@
 
     font-size:
 
-        22px;
+        24px;
 
 
     font-weight:
@@ -345,15 +151,10 @@
         .16em;
 
 
-    color:
-
-        var(--ctm-teal);
-
-
     text-shadow:
 
 
-        0 0 18px rgba(22,199,194,.65);
+        0 0 20px rgba(22,199,194,.45);
 
 
 }
@@ -370,6 +171,9 @@
     margin-top:
 
         12px;
+
+
+    text-align:center;
 
 
     color:
@@ -393,8 +197,14 @@
 
 
 
+
+
+
+
 /* ==========================================================================
-   KALA CHAKRA™ SPOKES
+   KALA CHAKRA™ 12 SPOKES
+
+   Premium 4 × 3 Layout
 
    ========================================================================== */
 
@@ -402,23 +212,27 @@
 .kala-wheel{
 
 
-    margin:
-
-        40px auto;
+    display:grid;
 
 
-    display:flex;
+    grid-template-columns:
 
-
-    flex-wrap:wrap;
-
-
-    justify-content:center;
+        repeat(4,1fr);
 
 
     gap:
 
-        12px;
+        14px;
+
+
+    max-width:
+
+        900px;
+
+
+    margin:
+
+        35px auto;
 
 
 }
@@ -432,14 +246,31 @@
 .wheel-spoke{
 
 
+    min-height:
+
+        65px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    text-align:center;
+
+
     padding:
 
-        12px 18px;
+        12px;
 
 
     border-radius:
 
-        50px;
+        18px;
 
 
     background:
@@ -463,12 +294,19 @@
         13px;
 
 
+    line-height:
+
+        1.5;
+
+
     transition:
 
         .3s ease;
 
 
 }
+
+
 
 
 
@@ -506,567 +344,18 @@
 
 
 
+
 /* Continue in Batch 1B */
 
 /* ==========================================================================
-   PILLAR IDENTITY
+   CTM PATH™ ASSESSMENT SCALE v1.0
+
+   1 - 3   🔴 Awareness Needed
+   4 - 7   🟠 Growth Zone
+   8 - 10  🟢 Alignment Zone
 
    ========================================================================== */
 
-
-.pillar-section{
-
-
-    text-align:center;
-
-
-    margin-bottom:
-
-        45px;
-
-
-}
-
-
-
-
-
-
-
-.spoke-number{
-
-
-    color:
-
-        var(--ctm-gold);
-
-
-    font-size:
-
-        13px;
-
-
-    font-weight:
-
-        600;
-
-
-    letter-spacing:
-
-        .18em;
-
-
-}
-
-
-
-
-
-
-
-.pillar-title-ta{
-
-
-    margin-top:
-
-        18px;
-
-
-    font-family:
-
-        "Noto Sans Tamil",
-        sans-serif;
-
-
-    font-size:
-
-        42px;
-
-
-    line-height:
-
-        1.5;
-
-
-    font-weight:
-
-        700;
-
-
-    color:
-
-        var(--ctm-gold);
-
-
-}
-
-
-
-
-
-
-
-.pillar-title-en{
-
-
-    margin-top:
-
-        5px;
-
-
-    font-family:
-
-        "Poppins",
-        sans-serif;
-
-
-    font-size:
-
-        32px;
-
-
-    font-weight:
-
-        600;
-
-
-    color:
-
-        var(--ctm-ivory);
-
-
-}
-
-
-
-
-
-
-
-.core-question-ta{
-
-
-    margin-top:
-
-        28px;
-
-
-    font-family:
-
-        "Noto Sans Tamil",
-        sans-serif;
-
-
-    font-size:
-
-        25px;
-
-
-    line-height:
-
-        1.8;
-
-
-    color:
-
-        var(--ctm-ivory);
-
-
-}
-
-
-
-
-
-
-
-.core-question-en{
-
-
-    margin-top:
-
-        12px;
-
-
-    font-size:
-
-        18px;
-
-
-    color:
-
-        var(--ctm-muted);
-
-
-}
-
-
-
-
-
-
-
-.pillar-introduction{
-
-
-    margin-top:
-
-        25px;
-
-
-    padding:
-
-        25px;
-
-
-    border-radius:
-
-        22px;
-
-
-    background:
-
-
-        rgba(200,164,93,.08);
-
-
-    border:
-
-        1px solid rgba(200,164,93,.18);
-
-
-}
-
-
-
-
-
-.pillar-introduction p{
-
-
-    margin:
-
-        8px 0;
-
-
-}
-
-
-
-
-
-.pillar-introduction p:first-child{
-
-
-    font-family:
-
-        "Noto Sans Tamil",
-        sans-serif;
-
-
-    color:
-
-        var(--ctm-soft-white);
-
-
-}
-
-
-
-
-
-
-
-.pillar-introduction p:last-child{
-
-
-    color:
-
-        var(--ctm-muted);
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   QUESTION EXPERIENCE
-
-   ========================================================================== */
-
-
-.questions-section{
-
-
-    margin-top:
-
-        40px;
-
-
-}
-
-
-
-
-
-
-
-.question-card{
-
-
-    margin:
-
-        35px 0;
-
-
-    padding:
-
-        35px;
-
-
-    border-radius:
-
-        28px;
-
-
-    background:
-
-
-        rgba(255,255,255,.045);
-
-
-    border:
-
-        1px solid rgba(255,255,255,.10);
-
-
-    transition:
-
-        all .35s ease;
-
-
-}
-
-
-
-
-
-
-
-.question-card:hover{
-
-
-    border-color:
-
-        rgba(22,199,194,.35);
-
-
-    transform:
-
-        translateY(-3px);
-
-
-}
-
-
-
-
-
-
-
-.question-card.answered{
-
-
-    border-color:
-
-        rgba(22,199,194,.45);
-
-
-}
-
-
-
-
-
-
-
-.question-type{
-
-
-    display:inline-block;
-
-
-    padding:
-
-        8px 18px;
-
-
-    border-radius:
-
-        50px;
-
-
-    background:
-
-
-        rgba(22,199,194,.12);
-
-
-    color:
-
-        var(--ctm-teal);
-
-
-    font-size:
-
-        13px;
-
-
-    font-weight:
-
-        700;
-
-
-    letter-spacing:
-
-        .12em;
-
-
-}
-
-
-
-
-
-
-
-.question-number{
-
-
-    color:
-
-        var(--ctm-gold);
-
-
-}
-
-
-
-
-
-
-
-.question-text-ta{
-
-
-    margin-top:
-
-        25px;
-
-
-    font-family:
-
-        "Noto Sans Tamil",
-        sans-serif;
-
-
-    font-size:
-
-        25px;
-
-
-    line-height:
-
-        1.9;
-
-
-    color:
-
-        var(--ctm-ivory);
-
-
-}
-
-
-
-
-
-
-
-.question-text-en{
-
-
-    margin-top:
-
-        14px;
-
-
-    font-size:
-
-        17px;
-
-
-    line-height:
-
-        1.8;
-
-
-    color:
-
-        var(--ctm-muted);
-
-
-}
-
-
-
-
-
-
-
-.rating-question-label{
-
-
-    margin-top:
-
-        25px;
-
-
-    text-align:center;
-
-
-    font-size:
-
-        14px;
-
-
-    color:
-
-        var(--ctm-muted);
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   RATING SCALE
-
-   Base
-
-   ========================================================================== */
 
 
 .rating-group{
@@ -1076,6 +365,9 @@
 
 
     justify-content:center;
+
+
+    align-items:center;
 
 
     flex-wrap:wrap;
@@ -1088,7 +380,7 @@
 
     margin-top:
 
-        28px;
+        30px;
 
 
 }
@@ -1104,17 +396,26 @@
 
     width:
 
-        48px;
+        46px;
 
 
     height:
 
-        48px;
+        46px;
 
 
     border-radius:
 
         50%;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
 
 
     background:
@@ -1135,7 +436,7 @@
 
     font-weight:
 
-        600;
+        700;
 
 
     cursor:pointer;
@@ -1143,7 +444,7 @@
 
     transition:
 
-        all .25s ease;
+        all .3s ease;
 
 
 }
@@ -1152,17 +453,27 @@
 
 
 
-.rating-button:hover{
 
 
-    transform:
+/* --------------------------------------------------------------------------
+   BASE SCALE COLOURS
 
-        translateY(-4px);
+   -------------------------------------------------------------------------- */
+
+
+.rating-button:nth-child(1),
+.rating-button:nth-child(2),
+.rating-button:nth-child(3){
+
+
+    background:
+
+        rgba(224,82,82,.12);
 
 
     border-color:
 
-        var(--ctm-teal);
+        rgba(224,82,82,.35);
 
 
 }
@@ -1171,15 +482,61 @@
 
 
 
-/* ==========================================================================
-   RATING INTELLIGENCE
 
-   1-3  Red
-   4-6  Orange
-   7-8  Gold
-   9-10 Green
 
-   ========================================================================== */
+.rating-button:nth-child(4),
+.rating-button:nth-child(5),
+.rating-button:nth-child(6),
+.rating-button:nth-child(7){
+
+
+    background:
+
+        rgba(245,158,11,.12);
+
+
+    border-color:
+
+        rgba(245,158,11,.35);
+
+
+}
+
+
+
+
+
+
+
+.rating-button:nth-child(8),
+.rating-button:nth-child(9),
+.rating-button:nth-child(10){
+
+
+    background:
+
+        rgba(34,197,94,.12);
+
+
+    border-color:
+
+        rgba(34,197,94,.35);
+
+
+}
+
+
+
+
+
+
+
+
+
+/* --------------------------------------------------------------------------
+   ACTIVE STATES
+
+   -------------------------------------------------------------------------- */
 
 
 .rating-button.rating-low.active{
@@ -1190,7 +547,9 @@
         var(--ctm-red);
 
 
-    color:white;
+    color:
+
+        white;
 
 
     border-color:
@@ -1201,7 +560,7 @@
     box-shadow:
 
 
-        0 0 20px rgba(224,82,82,.45);
+        0 0 25px rgba(224,82,82,.5);
 
 
 }
@@ -1220,7 +579,9 @@
         var(--ctm-orange);
 
 
-    color:white;
+    color:
+
+        white;
 
 
     border-color:
@@ -1231,7 +592,7 @@
     box-shadow:
 
 
-        0 0 20px rgba(245,158,11,.45);
+        0 0 25px rgba(245,158,11,.5);
 
 
 }
@@ -1242,58 +603,110 @@
 
 
 
-.rating-button.rating-strong.active{
+.rating-button.rating-aligned.active{
 
 
     background:
 
-        var(--ctm-gold);
+        var(--ctm-green);
 
 
     color:
 
-        var(--ctm-navy);
+        white;
 
 
     border-color:
+
+        var(--ctm-green);
+
+
+    box-shadow:
+
+
+        0 0 25px rgba(34,197,94,.5);
+
+
+}
+
+
+
+
+
+
+
+.rating-button:hover{
+
+
+    transform:
+
+        translateY(-4px);
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   RATING FEEDBACK
+
+   ========================================================================== */
+
+
+.rating-feedback{
+
+
+    margin-top:
+
+        18px;
+
+
+    text-align:center;
+
+
+    color:
+
+        var(--ctm-teal);
+
+
+    font-size:
+
+        15px;
+
+
+    font-weight:
+
+        600;
+
+
+    animation:
+
+        fadeIn .35s ease;
+
+
+}
+
+
+
+
+
+.rating-feedback small{
+
+
+    color:
 
         var(--ctm-gold);
 
 
-    box-shadow:
+    font-size:
 
-
-        0 0 20px rgba(200,164,93,.45);
-
-
-}
-
-
-
-
-
-
-
-.rating-button.rating-master.active{
-
-
-    background:
-
-        var(--ctm-green);
-
-
-    color:white;
-
-
-    border-color:
-
-        var(--ctm-green);
-
-
-    box-shadow:
-
-
-        0 0 20px rgba(34,197,94,.45);
+        13px;
 
 
 }
@@ -1304,7 +717,6 @@
 
 
 
-/* Continue in Batch 1C */
 
 /* ==========================================================================
    SCORE PREVIEW CARD™
@@ -1345,22 +757,22 @@
 
             145deg,
 
-            rgba(22,199,194,.14),
+            rgba(22,199,194,.20),
 
-            rgba(255,255,255,.04)
+            rgba(8,28,58,.85)
 
         );
 
 
     border:
 
-        1px solid rgba(22,199,194,.25);
+        1px solid rgba(22,199,194,.30);
 
 
     box-shadow:
 
 
-        0 25px 60px rgba(0,0,0,.35);
+        0 30px 70px rgba(0,0,0,.4);
 
 
 }
@@ -1407,7 +819,12 @@
 
     margin-top:
 
-        22px;
+        20px;
+
+
+    color:
+
+        var(--ctm-ivory);
 
 
     font-size:
@@ -1420,12 +837,9 @@
         700;
 
 
-    color:
-
-        var(--ctm-ivory);
-
-
 }
+
+
 
 
 
@@ -1436,7 +850,12 @@
 
     margin-top:
 
-        12px;
+        10px;
+
+
+    color:
+
+        var(--ctm-gold);
 
 
     font-size:
@@ -1449,9 +868,82 @@
         600;
 
 
+}
+
+
+
+
+
+
+
+.score-description{
+
+
+    margin-top:
+
+        20px;
+
+
+    color:
+
+        var(--ctm-muted);
+
+
+    font-size:
+
+        16px;
+
+
+    line-height:
+
+        1.7;
+
+
+}
+
+
+
+
+
+/* Continue in Batch 1C */
+
+/* ==========================================================================
+   CURRENT STATUS™
+
+   Learner → Leader → Legend™
+
+   ========================================================================== */
+
+
+.current-status-title{
+
+
+    margin-top:
+
+        35px;
+
+
     color:
 
         var(--ctm-gold);
+
+
+    font-size:
+
+        14px;
+
+
+    font-weight:
+
+        700;
+
+
+    letter-spacing:
+
+        .18em;
+
+
+    text-align:center;
 
 
 }
@@ -1462,22 +954,12 @@
 
 
 
-/* ==========================================================================
-   LIFE EVOLUTION LEVEL™
-
-   Moved BELOW SCORE CARD
-
-   Learner → Leader → Legend™
-
-   ========================================================================== */
-
-
 .life-evolution-level{
 
 
     margin:
 
-        30px auto 50px;
+        30px auto 45px;
 
 
     max-width:
@@ -1506,9 +988,6 @@
         1px solid rgba(255,255,255,.12);
 
 
-    text-align:center;
-
-
 }
 
 
@@ -1528,10 +1007,12 @@
 
     gap:
 
-        18px;
+        15px;
 
 
 }
+
+
 
 
 
@@ -1545,12 +1026,15 @@
 
     padding:
 
-        22px 15px;
+        25px 15px;
 
 
     border-radius:
 
         22px;
+
+
+    text-align:center;
 
 
     background:
@@ -1567,6 +1051,11 @@
     color:
 
         var(--ctm-muted);
+
+
+    font-size:
+
+        15px;
 
 
     font-weight:
@@ -1590,17 +1079,19 @@
 .level-item.active{
 
 
-    color:
-
-        var(--ctm-ivory);
-
-
     transform:
 
         translateY(-8px);
 
 
+    color:
+
+        var(--ctm-ivory);
+
+
 }
+
+
 
 
 
@@ -1621,10 +1112,13 @@
 
     box-shadow:
 
+
         0 15px 35px rgba(245,158,11,.25);
 
 
 }
+
+
 
 
 
@@ -1645,10 +1139,13 @@
 
     box-shadow:
 
-        0 15px 35px rgba(22,199,194,.25);
+
+        0 15px 35px rgba(22,199,194,.30);
 
 
 }
+
+
 
 
 
@@ -1659,17 +1156,18 @@
 
     background:
 
-        rgba(200,164,93,.18);
+        rgba(34,197,94,.18);
 
 
     border-color:
 
-        var(--ctm-gold);
+        var(--ctm-green);
 
 
     box-shadow:
 
-        0 15px 35px rgba(200,164,93,.25);
+
+        0 15px 35px rgba(34,197,94,.30);
 
 
 }
@@ -1720,6 +1218,9 @@
         25px;
 
 
+    text-align:center;
+
+
     color:
 
         var(--ctm-teal);
@@ -1727,12 +1228,15 @@
 
     font-size:
 
-        18px;
+        17px;
+
+
+    line-height:
+
+        1.7;
 
 
 }
-
-
 
 
 
@@ -1744,6 +1248,11 @@
     color:
 
         var(--ctm-gold);
+
+
+    font-size:
+
+        22px;
 
 
 }
@@ -1775,6 +1284,9 @@
         45px;
 
 
+    text-align:center;
+
+
     border-radius:
 
         32px;
@@ -1788,10 +1300,7 @@
 
     border:
 
-        1px solid rgba(200,164,93,.28);
-
-
-    text-align:center;
+        1px solid rgba(200,164,93,.30);
 
 
 }
@@ -1847,6 +1356,11 @@
         sans-serif;
 
 
+    color:
+
+        var(--ctm-ivory);
+
+
     font-size:
 
         25px;
@@ -1855,11 +1369,6 @@
     line-height:
 
         1.9;
-
-
-    color:
-
-        var(--ctm-ivory);
 
 
 }
@@ -1885,7 +1394,7 @@
 
     font-size:
 
-        18px;
+        17px;
 
 
 }
@@ -1917,6 +1426,9 @@
         45px;
 
 
+    text-align:center;
+
+
     border-radius:
 
         32px;
@@ -1930,10 +1442,7 @@
 
     border:
 
-        1px solid rgba(22,199,194,.25);
-
-
-    text-align:center;
+        1px solid rgba(22,199,194,.30);
 
 
 }
@@ -1958,6 +1467,11 @@
         sans-serif;
 
 
+    color:
+
+        var(--ctm-ivory);
+
+
     font-size:
 
         25px;
@@ -1966,11 +1480,6 @@
     line-height:
 
         1.9;
-
-
-    color:
-
-        var(--ctm-ivory);
 
 
 }
@@ -1996,12 +1505,55 @@
 
     font-size:
 
-        18px;
+        17px;
 
 
 }
 
 
+
+
+
+
+
+
+@keyframes fadeIn{
+
+
+    from{
+
+
+        opacity:
+
+            0;
+
+
+        transform:
+
+            translateY(8px);
+
+
+    }
+
+
+
+    to{
+
+
+        opacity:
+
+            1;
+
+
+        transform:
+
+            translateY(0);
+
+
+    }
+
+
+}
 
 
 
@@ -2126,6 +1678,8 @@
 
 
 
+
+
 /* ==========================================================================
    SECONDARY BUTTON
 
@@ -2160,12 +1714,12 @@
 .button-secondary:hover{
 
 
-    border-color:
+    color:
 
         var(--ctm-gold);
 
 
-    color:
+    border-color:
 
         var(--ctm-gold);
 
@@ -2178,10 +1732,10 @@
 
 
 
+
+
 /* ==========================================================================
    PRIMARY CTA
-
-   SAVE & CONTINUE
 
    ========================================================================== */
 
@@ -2247,6 +1801,8 @@
 
 
 
+
+
 /* ==========================================================================
    FOOTER
 
@@ -2298,11 +1854,6 @@
         var(--ctm-gold);
 
 
-    font-weight:
-
-        700;
-
-
 }
 
 
@@ -2311,8 +1862,10 @@
 
 
 
+
+
 /* ==========================================================================
-   INNER JOURNEY RESPONSIVE SUPPORT
+   INNER JOURNEY
 
    ========================================================================== */
 
@@ -2340,6 +1893,8 @@
 
 
 }
+
+
 
 
 
@@ -2511,29 +2066,16 @@
 
 
 
-    .assessment-container{
+    .kala-wheel{
 
 
-        padding:
+        grid-template-columns:
 
-            25px 18px;
-
-
-    }
-
-
-
-
-
-    .premium-assessment-card{
-
-
-        border-radius:
-
-            24px;
+            repeat(2,1fr);
 
 
     }
+
 
 
 
@@ -2606,9 +2148,6 @@
 
 
 
-    .core-question-ta,
-
-
     .question-text-ta{
 
 
@@ -2633,6 +2172,20 @@
 
 
 
+    .kala-wheel{
+
+
+        grid-template-columns:
+
+            1fr;
+
+
+    }
+
+
+
+
+
     .assessment-container{
 
 
@@ -2650,23 +2203,9 @@
     .premium-assessment-card{
 
 
-        padding:
+        border-radius:
 
-            20px 15px;
-
-
-    }
-
-
-
-
-
-    .life-map-title{
-
-
-        font-size:
-
-            18px;
+            22px;
 
 
     }
@@ -2689,20 +2228,6 @@
 
 
 
-    .rating-group{
-
-
-        gap:
-
-            8px;
-
-
-    }
-
-
-
-
-
     .rating-button{
 
 
@@ -2714,11 +2239,6 @@
         height:
 
             42px;
-
-
-        font-size:
-
-            14px;
 
 
     }
@@ -2791,6 +2311,8 @@
 
 
 
+
+
 /* ==========================================================================
    ACCESSIBILITY
 
@@ -2821,17 +2343,25 @@
 
 
 
+
+
 /* ==========================================================================
    END OF FILE
 
 
    File        : assessment.css
 
-   Version     : 5.1
+   Version     : 5.2
 
 
-   Status      : 🔒 CTM PATH™ PREMIUM EXPERIENCE REFINEMENT
+   Status      : 🔒 CTM PATH™ PREMIUM EXPERIENCE
+
+
+   Assessment Scale:
+
+   🔴 1-3 Awareness
+   🟠 4-7 Growth
+   🟢 8-10 Alignment
 
 
    ========================================================================== */
-
