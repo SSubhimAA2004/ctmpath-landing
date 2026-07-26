@@ -2,35 +2,14 @@
 /* ==========================================================================
    CTM PATH™ Guided Journey
 
+   FROM SURVIVAL TO LIVING™
+
    File        : assessment01.js
-   Version     : 3.0
-   Status      : 🔒 SPOKE 01 CONTROLLER
+   Version     : 5.0
+
+   Status      : 🔒 PURPOSE™ SCREEN CONTROLLER
 
    Assessment  : Spoke 01
-   Pillar      : Purpose™
-
-   Owns:
-
-      • Page Initialization
-      • Button Events
-      • Save Action
-      • Navigation Trigger
-
-
-   Uses:
-
-      • CTMAssessmentEngine
-      • CTMValidator
-      • CTMStorage
-      • CTMNavigation
-
-
-   Owns NO:
-
-      • Question Data
-      • Rendering
-      • Styling
-      • API Logic
 
    ========================================================================== */
 
@@ -41,22 +20,28 @@
 
 
 
+
+
 /* ==========================================================================
-   CONFIGURATION
+   PAGE CONFIGURATION
    ========================================================================== */
 
 
-const ASSESSMENT_01_CONFIG = {
+const Assessment01Config = {
 
 
-    spoke:
-
-        1,
+    spoke:1,
 
 
     nextPage:
 
-        "assessment-02.html"
+        "assessment-02.html",
+
+
+    storageKey:
+
+        "ctm_path_assessment_01"
+
 
 
 };
@@ -65,418 +50,11 @@ const ASSESSMENT_01_CONFIG = {
 
 
 
-/* ==========================================================================
-   INITIALIZATION
-   ========================================================================== */
-
-
-function initAssessment01(){
-
-
-    CTMAssessmentEngine.init(
-
-        ASSESSMENT_01_CONFIG.spoke
-
-    );
-
-
-
-    bindAssessment01Events();
-
-
-
-    restoreAssessment01();
-
-
-}
-
-
 
 
 
 /* ==========================================================================
-   RESTORE
-   ========================================================================== */
-
-
-function restoreAssessment01(){
-
-
-    const saved =
-
-        CTMStorage.get(
-
-            CTM_CONSTANTS.STORAGE.ASSESSMENT_RESPONSES
-
-        );
-
-
-
-    if(
-
-        saved
-
-        &&
-
-        saved[ASSESSMENT_01_CONFIG.spoke]
-
-    ){
-
-
-        CTMAssessmentEngine.restore(
-
-            saved[ASSESSMENT_01_CONFIG.spoke]
-
-        );
-
-
-    }
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   EVENT BINDING
-   ========================================================================== */
-
-
-function bindAssessment01Events(){
-
-
-    const nextButton =
-
-        document.getElementById(
-
-            "nextButton"
-
-        );
-
-
-
-    const previousButton =
-
-        document.getElementById(
-
-            "previousButton"
-
-        );
-
-
-
-    if(nextButton){
-
-
-        nextButton.addEventListener(
-
-            "click",
-
-            saveAndContinueAssessment01
-
-        );
-
-
-    }
-
-
-
-    if(previousButton){
-
-
-        previousButton.addEventListener(
-
-            "click",
-
-            function(){
-
-
-                CTMNavigation.previous(
-
-                    ASSESSMENT_01_CONFIG.spoke
-
-                );
-
-
-            }
-
-        );
-
-
-    }
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   SAVE & CONTINUE
-   ========================================================================== */
-
-
-function saveAndContinueAssessment01(){
-
-
-    const responses =
-
-        CTMAssessmentEngine.responses();
-
-
-
-    if(
-
-        !CTMValidator.spoke(
-
-            Object.values(
-
-                responses
-
-            )
-
-        )
-
-    ){
-
-
-        alert(
-
-            CTM_CONSTANTS.VALIDATION.SELECT_RATING
-
-        );
-
-
-        return;
-
-
-    }
-
-
-
-    saveAssessment01();
-
-
-
-    CTMNavigation.next(
-
-        ASSESSMENT_01_CONFIG.spoke
-
-    );
-
-
-}
-
-
-
-
-
-/* Continue in Batch 1B */
-
-/* ==========================================================================
-   SAVE ASSESSMENT 01
-   ========================================================================== */
-
-
-/**
- * Save Spoke 01 responses locally
- *
- */
-
-
-function saveAssessment01(){
-
-
-    const responses =
-
-        CTMAssessmentEngine.responses();
-
-
-
-    let assessmentData =
-
-        CTMStorage.get(
-
-            CTM_CONSTANTS.STORAGE.ASSESSMENT_RESPONSES
-
-        );
-
-
-
-    if(!assessmentData){
-
-
-        assessmentData = {};
-
-
-    }
-
-
-
-    assessmentData[
-
-        ASSESSMENT_01_CONFIG.spoke
-
-    ] = responses;
-
-
-
-    CTMStorage.set(
-
-        CTM_CONSTANTS.STORAGE.ASSESSMENT_RESPONSES,
-
-        assessmentData
-
-    );
-
-
-
-    updateAssessmentProgress01();
-
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   UPDATE PROGRESS
-   ========================================================================== */
-
-
-/**
- * Store journey progress
- *
- */
-
-
-function updateAssessmentProgress01(){
-
-
-    const progress = {
-
-
-        currentSpoke:
-
-            ASSESSMENT_01_CONFIG.spoke,
-
-
-        completed:
-
-            true,
-
-
-        updatedAt:
-
-            new Date()
-
-                .toISOString()
-
-
-    };
-
-
-
-    CTMStorage.set(
-
-        CTM_CONSTANTS.STORAGE.JOURNEY_PROGRESS,
-
-        progress
-
-    );
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   BACKEND SYNC
-   ========================================================================== */
-
-
-/**
- * Send assessment response to backend
- *
- */
-
-
-function syncAssessment01(){
-
-
-    const visitor =
-
-        CTMStorage.get(
-
-            CTM_CONSTANTS.STORAGE.VISITOR
-
-        );
-
-
-
-    if(!visitor){
-
-
-        return false;
-
-
-    }
-
-
-
-    const payload = {
-
-
-        visitorId:
-
-            visitor.visitorId,
-
-
-        spoke:
-
-            ASSESSMENT_01_CONFIG.spoke,
-
-
-        responses:
-
-            CTMAssessmentEngine.responses(),
-
-
-        timestamp:
-
-            new Date()
-
-                .toISOString()
-
-
-    };
-
-
-
-    return CTMApi.post(
-
-        CTM_CONSTANTS.API.SAVE_ASSESSMENT,
-
-        payload
-
-    );
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   PAGE INITIALIZATION
+   INITIALIZE PAGE
    ========================================================================== */
 
 
@@ -487,7 +65,21 @@ document.addEventListener(
     function(){
 
 
-        initAssessment01();
+
+        initializeAssessment(
+
+            Assessment01Config.spoke
+
+        );
+
+
+
+        setupContinueButton();
+
+
+
+        restoreSavedAssessment();
+
 
 
     }
@@ -498,27 +90,486 @@ document.addEventListener(
 
 
 
+
+
+
 /* ==========================================================================
-   PUBLIC CONTROLLER
+   RESTORE SAVED DATA
    ========================================================================== */
 
 
-const CTMAssessment01 = {
+function restoreSavedAssessment(){
 
 
-    init:
 
-        initAssessment01,
+    const saved =
+
+        localStorage.getItem(
+
+            Assessment01Config.storageKey
+
+        );
 
 
-    save:
 
-        saveAssessment01,
+    if(!saved){
+
+        return;
+
+    }
 
 
-    sync:
 
-        syncAssessment01
+    try{
+
+
+        const data =
+
+            JSON.parse(
+
+                saved
+
+            );
+
+
+
+        restoreResponses(
+
+            data
+
+        );
+
+
+    }
+
+
+    catch(error){
+
+
+
+        console.error(
+
+            "Unable to restore assessment data",
+
+            error
+
+        );
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   CONTINUE BUTTON
+   ========================================================================== */
+
+
+function setupContinueButton(){
+
+
+
+    const button =
+
+        document.getElementById(
+
+            "continueButton"
+
+        );
+
+
+
+    if(!button){
+
+        return;
+
+    }
+
+
+
+
+
+    button.addEventListener(
+
+        "click",
+
+        function(){
+
+
+
+            handleContinue();
+
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   HANDLE CONTINUE
+
+   ========================================================================== */
+
+
+function handleContinue(){
+
+
+
+    if(
+
+        !isAssessmentComplete()
+
+    ){
+
+
+        showIncompleteMessage();
+
+
+        return;
+
+
+    }
+
+
+
+
+
+    const payload =
+
+        getAssessmentPayload();
+
+
+
+
+
+    saveAssessmentProgress(
+
+        payload
+
+    );
+
+
+
+
+
+    window.location.href =
+
+        Assessment01Config.nextPage;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   SAVE PROGRESS
+   ========================================================================== */
+
+
+function saveAssessmentProgress(payload){
+
+
+
+    localStorage.setItem(
+
+        Assessment01Config.storageKey,
+
+        JSON.stringify(
+
+            payload
+
+        )
+
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   VALIDATION MESSAGE
+   ========================================================================== */
+
+
+function showIncompleteMessage(){
+
+
+
+    const message =
+
+        document.querySelector(
+
+            ".current-level-message"
+
+        );
+
+
+
+    if(message){
+
+
+
+        message.innerHTML =
+
+
+            "Please complete all 3 reflections before continuing."
+
+            +
+
+            "<br>"
+
+            +
+
+            "தொடர்வதற்கு முன் மூன்று கேள்விகளுக்கும் பதிலளிக்கவும்.";
+
+
+
+        message.classList.add(
+
+            "warning"
+
+        );
+
+
+    }
+
+
+
+}
+
+
+/* ==========================================================================
+   SMOOTH SCROLL SUPPORT
+
+   ========================================================================== */
+
+
+function scrollToTop(){
+
+
+
+    window.scrollTo({
+
+
+        top:0,
+
+
+        behavior:"smooth"
+
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   RATING INTERACTION FEEDBACK
+
+   ========================================================================== */
+
+
+document.addEventListener(
+
+    "click",
+
+    function(event){
+
+
+
+        if(
+
+            event.target.classList.contains(
+
+                "rating-button"
+
+            )
+
+        ){
+
+
+
+            const questionCard =
+
+                event.target.closest(
+
+                    ".question-card"
+
+                );
+
+
+
+            if(questionCard){
+
+
+
+                questionCard.classList.add(
+
+                    "answered"
+
+                );
+
+
+            }
+
+
+
+        }
+
+
+
+    }
+
+
+);
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   CONTINUE BUTTON STATE
+
+   ========================================================================== */
+
+
+function updateContinueButtonState(){
+
+
+
+    const button =
+
+        document.getElementById(
+
+            "continueButton"
+
+        );
+
+
+
+    if(!button){
+
+        return;
+
+    }
+
+
+
+
+
+    if(
+
+        isAssessmentComplete()
+
+    ){
+
+
+
+        button.disabled = false;
+
+
+
+        button.innerHTML = `
+
+
+            SAVE & CONTINUE →
+
+            <br>
+
+            தொடருங்கள்
+
+
+        `;
+
+
+
+    }
+
+    else{
+
+
+        button.disabled = true;
+
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   WATCH RESPONSE CHANGES
+
+   ========================================================================== */
+
+
+const originalCalculateScore =
+
+    calculateCurrentSpokeScore;
+
+
+
+
+
+calculateCurrentSpokeScore = function(){
+
+
+
+    originalCalculateScore();
+
+
+
+    updateContinueButtonState();
+
 
 
 };
@@ -527,11 +578,130 @@ const CTMAssessment01 = {
 
 
 
-Object.freeze(
 
-    CTMAssessment01
+
+
+/* ==========================================================================
+   COMPLETION MESSAGE
+
+   ========================================================================== */
+
+
+function showCompletionMessage(){
+
+
+
+    const message =
+
+        document.querySelector(
+
+            ".current-level-message"
+
+        );
+
+
+
+    if(!message){
+
+        return;
+
+    }
+
+
+
+
+
+    const payload =
+
+        getAssessmentPayload();
+
+
+
+
+
+    message.innerHTML = `
+
+
+
+        Your Purpose™ Alignment:
+
+        <strong>
+
+        ${payload.percentage}/100
+
+        </strong>
+
+
+        <br>
+
+
+        ${payload.level}
+
+
+
+    `;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   PAGE TRANSITION HANDLER
+
+   ========================================================================== */
+
+
+function goToNextAssessment(){
+
+
+
+    window.location.href =
+
+        Assessment01Config.nextPage;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   INITIAL BUTTON STATE
+
+   ========================================================================== */
+
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    function(){
+
+
+        updateContinueButtonState();
+
+
+        scrollToTop();
+
+
+    }
 
 );
+
+
+
 
 
 
@@ -540,10 +710,15 @@ Object.freeze(
 /* ==========================================================================
    END OF FILE
 
+
    File        : assessment01.js
 
-   Version     : 3.0
+   Version     : 5.0
 
-   Status      : 🔒 SPOKE 01 CONTROLLER
+
+   Status      : 🔒 CTM PATH™ PURPOSE™ SCREEN CONTROLLER
+
 
    ========================================================================== */
+
+
