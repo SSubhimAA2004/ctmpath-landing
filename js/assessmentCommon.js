@@ -5,9 +5,17 @@
    FROM SURVIVAL TO LIVING™
 
    File        : assessmentCommon.js
-   Version     : 5.1
+   Version     : 5.2
 
-   Status      : 🔒 PREMIUM ASSESSMENT ENGINE REFINEMENT
+   Status      : 🔒 PREMIUM ASSESSMENT ENGINE
+
+   Update:
+
+   CTM PATH™ Assessment Scale v1.0
+
+   🔴 Awareness
+   🟠 Growth
+   🟢 Alignment
 
    ========================================================================== */
 
@@ -18,8 +26,10 @@
 
 
 
+
+
 /* ==========================================================================
-   ENGINE STATE
+   ASSESSMENT ENGINE STATE
 
    ========================================================================== */
 
@@ -48,7 +58,10 @@ const CTMAssessmentState = {
     completed:false
 
 
+
 };
+
+
 
 
 
@@ -76,7 +89,10 @@ function initializeAssessment(spokeNumber){
 
 
 
+
+
     if(!pillar){
+
 
 
         console.error(
@@ -88,10 +104,13 @@ function initializeAssessment(spokeNumber){
         );
 
 
+
         return;
 
 
     }
+
+
 
 
 
@@ -113,6 +132,8 @@ function initializeAssessment(spokeNumber){
 
 
 
+
+
     renderAssessmentPage(
 
         pillar
@@ -122,6 +143,8 @@ function initializeAssessment(spokeNumber){
 
 
 }
+
+
 
 
 
@@ -155,10 +178,12 @@ function getPillarData(spokeNumber){
             );
 
 
+
         }
 
 
     );
+
 
 
 }
@@ -169,8 +194,10 @@ function getPillarData(spokeNumber){
 
 
 
+
+
 /* ==========================================================================
-   MASTER PAGE RENDER
+   PAGE RENDER CONTROLLER
 
    ========================================================================== */
 
@@ -187,11 +214,15 @@ function renderAssessmentPage(pillar){
 
 
 
+
+
     renderPillarIdentity(
 
         pillar
 
     );
+
+
 
 
 
@@ -203,11 +234,15 @@ function renderAssessmentPage(pillar){
 
 
 
+
+
     renderReflection(
 
         pillar
 
     );
+
+
 
 
 
@@ -219,11 +254,15 @@ function renderAssessmentPage(pillar){
 
 
 
+
+
     renderLifeEvolution();
 
 
 
 }
+
+
 
 
 
@@ -251,6 +290,8 @@ function renderLifeMap(spokeNumber){
 
 
 
+
+
     if(progress){
 
 
@@ -258,30 +299,34 @@ function renderLifeMap(spokeNumber){
         progress.textContent =
 
 
+
             String(spokeNumber)
 
-                .padStart(2,"0")
+            .padStart(2,"0")
 
             +
 
             " / 12";
 
 
+
     }
 
 
 
-    const spokes =
-
-        document.querySelectorAll(
-
-            ".wheel-spoke"
-
-        );
 
 
 
-    spokes.forEach(
+
+    document
+
+    .querySelectorAll(
+
+        ".wheel-spoke"
+
+    )
+
+    .forEach(
 
         function(spoke,index){
 
@@ -292,6 +337,8 @@ function renderLifeMap(spokeNumber){
                 "active"
 
             );
+
+
 
 
 
@@ -312,7 +359,9 @@ function renderLifeMap(spokeNumber){
 
         }
 
+
     );
+
 
 
 }
@@ -323,19 +372,30 @@ function renderLifeMap(spokeNumber){
 
 
 
+
 /* Continue in Batch 1B */
 
 /* ==========================================================================
-   LIFE EVOLUTION RATING INTELLIGENCE™
+   CTM PATH™ 3-ZONE RATING INTELLIGENCE™
 
-   Score Meaning:
+   Score:
 
-   1 - 3  : Awareness Needed
-   4 - 6  : Growth Stage
-   7 - 8  : Strong Alignment
-   9 -10  : Mastery Level
+   1 - 3
+   🔴 Awareness Needed
+
+
+   4 - 7
+   🟠 Growth Zone
+
+
+   8 - 10
+   🟢 Alignment Zone
+
 
    ========================================================================== */
+
+
+
 
 
 function getRatingClass(score){
@@ -351,7 +411,9 @@ function getRatingClass(score){
     if(score <= 3){
 
 
+
         return "rating-low";
+
 
 
     }
@@ -361,24 +423,14 @@ function getRatingClass(score){
 
 
 
-    if(score <= 6){
+
+    if(score <= 7){
+
 
 
         return "rating-growth";
 
 
-    }
-
-
-
-
-
-
-    if(score <= 8){
-
-
-        return "rating-strong";
-
 
     }
 
@@ -387,7 +439,8 @@ function getRatingClass(score){
 
 
 
-    return "rating-master";
+
+    return "rating-aligned";
 
 
 
@@ -400,8 +453,9 @@ function getRatingClass(score){
 
 
 
+
 /* ==========================================================================
-   RATING LABEL
+   RATING MEANING
 
    ========================================================================== */
 
@@ -419,16 +473,25 @@ function getRatingMeaning(score){
     if(score <= 3){
 
 
+
         return {
 
 
-            title:"Awareness Needed",
+
+            english:
+
+                "Awareness Needed",
 
 
-            tamil:"விழிப்புணர்வு தேவை"
+
+            tamil:
+
+                "விழிப்புணர்வு தேவை"
+
 
 
         };
+
 
 
     }
@@ -439,42 +502,28 @@ function getRatingMeaning(score){
 
 
 
-    if(score <= 6){
+    if(score <= 7){
+
 
 
         return {
 
 
-            title:"Growth Stage",
+
+            english:
+
+                "Growth Zone",
 
 
-            tamil:"வளர்ச்சி நிலை"
+
+            tamil:
+
+                "வளர்ச்சி நிலை"
+
 
 
         };
 
-
-    }
-
-
-
-
-
-
-
-    if(score <= 8){
-
-
-        return {
-
-
-            title:"Strong Alignment",
-
-
-            tamil:"வலுவான இணக்கம்"
-
-
-        };
 
 
     }
@@ -488,10 +537,17 @@ function getRatingMeaning(score){
     return {
 
 
-        title:"Mastery Level",
+
+        english:
+
+            "Alignment Zone",
 
 
-        tamil:"மேன்மை நிலை"
+
+        tamil:
+
+            "இணக்க நிலை"
+
 
 
     };
@@ -509,7 +565,7 @@ function getRatingMeaning(score){
 
 
 /* ==========================================================================
-   PREMIUM RATING SELECTION
+   SELECT RATING
 
    ========================================================================== */
 
@@ -538,6 +594,8 @@ function selectRating(
 
 
 
+
+
     buttons.forEach(
 
         function(button){
@@ -552,11 +610,10 @@ function selectRating(
 
                 "rating-growth",
 
-                "rating-strong",
-
-                "rating-master"
+                "rating-aligned"
 
             );
+
 
 
         }
@@ -620,7 +677,7 @@ function selectRating(
 
 
 
-    updateQuestionFeedback(
+    updateRatingFeedback(
 
         container,
 
@@ -649,12 +706,12 @@ function selectRating(
 
 
 /* ==========================================================================
-   QUESTION FEEDBACK
+   RATING FEEDBACK DISPLAY
 
    ========================================================================== */
 
 
-function updateQuestionFeedback(
+function updateRatingFeedback(
 
     container,
 
@@ -671,6 +728,8 @@ function updateQuestionFeedback(
             ".rating-feedback"
 
         );
+
+
 
 
 
@@ -703,6 +762,7 @@ function updateQuestionFeedback(
         );
 
 
+
     }
 
 
@@ -727,7 +787,7 @@ function updateQuestionFeedback(
 
         <span>
 
-        ${meaning.title}
+        ${meaning.english}
 
         </span>
 
@@ -755,8 +815,12 @@ function updateQuestionFeedback(
 
 
 
+
+
+/* Continue in Batch 1C */
+
 /* ==========================================================================
-   SCORE CALCULATION
+   SCORE CALCULATION ENGINE™
 
    ========================================================================== */
 
@@ -830,9 +894,18 @@ function calculateCurrentSpokeScore(){
     CTMAssessmentState.spokePercentage =
 
 
+
         Math.round(
 
-            (total / 30) * 100
+            (
+
+                total / 30
+
+            )
+
+            *
+
+            100
 
         );
 
@@ -869,6 +942,7 @@ function calculateCurrentSpokeScore(){
         );
 
 
+
     }
 
 
@@ -880,35 +954,58 @@ function calculateCurrentSpokeScore(){
 
 
 
-/* Continue in Batch 1C */
+
+
 
 /* ==========================================================================
-   LIFE EVOLUTION JOURNEY™
+   LIFE LEVEL MAPPING™
 
    Learner → Leader → Legend™
-
-   Revealed after completion only
 
    ========================================================================== */
 
 
-function renderLifeEvolution(){
+function getLifeEvolutionLevel(score){
 
 
 
-    const container =
-
-        document.getElementById(
-
-            "lifeEvolutionLevel"
-
-        );
+    score = Number(score);
 
 
 
-    if(!container){
 
-        return;
+
+
+
+    if(score < 60){
+
+
+
+        return {
+
+
+
+            key:
+
+                "LEARNER",
+
+
+
+            english:
+
+                "LEARNER™",
+
+
+
+            tamil:
+
+                "கற்றல் நிலை"
+
+
+
+        };
+
+
 
     }
 
@@ -916,86 +1013,72 @@ function renderLifeEvolution(){
 
 
 
-    container.innerHTML = `
-
-
-        <div class="life-level-header">
-
-
-            <div class="level-item learner">
-
-
-                🌱
-
-                <br>
-
-                LEARNER™
-
-            </div>
 
 
 
-            <div class="level-item leader">
-
-
-                🚀
-
-                <br>
-
-                LEADER™
-
-            </div>
+    if(score < 85){
 
 
 
-            <div class="level-item legend">
-
-
-                👑
-
-                <br>
-
-                LEGEND™
-
-            </div>
+        return {
 
 
 
-        </div>
+            key:
+
+                "LEADER",
 
 
 
-        <div class="level-scale">
+            english:
 
-
-            <span>0</span>
-
-
-            <span>60</span>
-
-
-            <span>85</span>
-
-
-            <span>100</span>
+                "LEADER™",
 
 
 
-        </div>
+            tamil:
+
+                "வழிநடத்தும் நிலை"
 
 
 
-        <div class="current-level-message">
-
-
-            Complete all reflections to discover your current level.
-
-
-        </div>
+        };
 
 
 
-    `;
+    }
+
+
+
+
+
+
+
+
+    return {
+
+
+
+        key:
+
+            "LEGEND",
+
+
+
+        english:
+
+            "LEGEND™",
+
+
+
+        tamil:
+
+            "முன்னுதாரண நிலை"
+
+
+
+    };
+
 
 
 }
@@ -1009,7 +1092,7 @@ function renderLifeEvolution(){
 
 
 /* ==========================================================================
-   UPDATE LIFE EVOLUTION
+   UPDATE LIFE EVOLUTION™
 
    ========================================================================== */
 
@@ -1030,6 +1113,8 @@ function updateLifeEvolution(score){
 
 
 
+
+
     CTMAssessmentState.lifeLevel =
 
         level;
@@ -1038,7 +1123,9 @@ function updateLifeEvolution(score){
 
 
 
-    const levels =
+
+
+    const levelCards =
 
         document.querySelectorAll(
 
@@ -1050,13 +1137,15 @@ function updateLifeEvolution(score){
 
 
 
-    levels.forEach(
-
-        function(item){
 
 
+    levelCards.forEach(
 
-            item.classList.remove(
+        function(card){
+
+
+
+            card.classList.remove(
 
                 "active"
 
@@ -1074,84 +1163,34 @@ function updateLifeEvolution(score){
 
 
 
-    if(
-
-        level.key === "LEARNER"
-
-    ){
+    const activeCard =
 
 
 
-        document
+        document.querySelector(
 
-        .querySelector(
+            "." +
 
-            ".learner"
+            level.key.toLowerCase()
 
-        )
+        );
 
-        ?.classList.add(
+
+
+
+
+
+
+    if(activeCard){
+
+
+
+        activeCard.classList.add(
 
             "active"
 
         );
 
-
-    }
-
-
-
-
-
-
-    else if(
-
-        level.key === "LEADER"
-
-    ){
-
-
-
-        document
-
-        .querySelector(
-
-            ".leader"
-
-        )
-
-        ?.classList.add(
-
-            "active"
-
-        );
-
-
-    }
-
-
-
-
-
-
-
-    else{
-
-
-
-        document
-
-        .querySelector(
-
-            ".legend"
-
-        )
-
-        ?.classList.add(
-
-            "active"
-
-        );
 
 
     }
@@ -1174,6 +1213,8 @@ function updateLifeEvolution(score){
 
 
 
+
+
     if(message){
 
 
@@ -1182,7 +1223,7 @@ function updateLifeEvolution(score){
 
 
 
-            Your Current Life Level™
+            Your Current Status™
 
             <br>
 
@@ -1204,6 +1245,7 @@ function updateLifeEvolution(score){
         `;
 
 
+
     }
 
 
@@ -1219,7 +1261,7 @@ function updateLifeEvolution(score){
 
 
 /* ==========================================================================
-   SCORE CARD UPDATE
+   SCORE DISPLAY UPDATE
 
    ========================================================================== */
 
@@ -1235,6 +1277,8 @@ function updateScoreDisplay(){
             "spokeRawScore"
 
         );
+
+
 
 
 
@@ -1261,11 +1305,13 @@ function updateScoreDisplay(){
         rawScore.textContent =
 
 
+
             CTMAssessmentState.spokeScore
 
             +
 
             " / 30";
+
 
 
     }
@@ -1283,11 +1329,13 @@ function updateScoreDisplay(){
         percentage.textContent =
 
 
+
             CTMAssessmentState.spokePercentage
 
             +
 
             " /100";
+
 
 
     }
@@ -1305,7 +1353,7 @@ function updateScoreDisplay(){
 
 
 /* ==========================================================================
-   COMPLETE ASSESSMENT PAYLOAD
+   ASSESSMENT PAYLOAD
 
    ========================================================================== */
 
@@ -1326,13 +1374,11 @@ function getAssessmentPayload(){
 
         pillar:
 
-
             CTMAssessmentState.currentPillar.key,
 
 
 
         responses:
-
 
             CTMAssessmentState.responses,
 
@@ -1340,20 +1386,17 @@ function getAssessmentPayload(){
 
         score:
 
-
             CTMAssessmentState.spokeScore,
 
 
 
         percentage:
 
-
             CTMAssessmentState.spokePercentage,
 
 
 
-        level:
-
+        currentStatus:
 
             CTMAssessmentState.lifeLevel
 
@@ -1372,36 +1415,6 @@ function getAssessmentPayload(){
 
 
 }
-
-
-
-
-
-
-
-/* ==========================================================================
-   VALIDATION
-
-   ========================================================================== */
-
-
-function isAssessmentComplete(){
-
-
-
-    return (
-
-        Object.keys(
-
-            CTMAssessmentState.responses
-
-        ).length === 3
-
-    );
-
-
-}
-
 
 
 
@@ -1432,9 +1445,11 @@ function restoreResponses(savedData){
 
 
 
+
     CTMAssessmentState.responses =
 
         savedData.responses || {};
+
 
 
 
@@ -1466,6 +1481,8 @@ function restoreResponses(savedData){
 
 
 
+
+
             const container =
 
                 document.getElementById(
@@ -1482,11 +1499,14 @@ function restoreResponses(savedData){
 
 
 
+
+
             if(!container){
 
                 return;
 
             }
+
 
 
 
@@ -1524,9 +1544,8 @@ function restoreResponses(savedData){
                 );
 
 
+
             }
-
-
 
 
 
@@ -1534,6 +1553,7 @@ function restoreResponses(savedData){
 
 
     );
+
 
 
 
@@ -1556,7 +1576,7 @@ function restoreResponses(savedData){
 
 
 /* ==========================================================================
-   RESET ASSESSMENT
+   RESET ASSESSMENT ENGINE
 
    ========================================================================== */
 
@@ -1611,9 +1631,7 @@ function resetAssessment(){
 
                 "rating-growth",
 
-                "rating-strong",
-
-                "rating-master"
+                "rating-aligned"
 
             );
 
@@ -1648,9 +1666,64 @@ function resetAssessment(){
 
 
 /* ==========================================================================
+   VALIDATION
+
+   ========================================================================== */
+
+
+function isAssessmentComplete(){
+
+
+
+    return (
+
+
+        Object.keys(
+
+            CTMAssessmentState.responses
+
+        ).length === 3
+
+
+
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
    DOM HELPERS
 
    ========================================================================== */
+
+
+function getElement(id){
+
+
+
+    return document.getElementById(
+
+        id
+
+    );
+
+
+
+}
+
+
+
+
+
 
 
 function setElementText(
@@ -1665,11 +1738,7 @@ function setElementText(
 
     const element =
 
-        document.getElementById(
-
-            id
-
-        );
+        getElement(id);
 
 
 
@@ -1697,30 +1766,10 @@ function setElementText(
 
 
 
-function getElement(id){
-
-
-
-    return document.getElementById(
-
-        id
-
-    );
-
-
-
-}
-
-
-
-
-
-
-
 
 
 /* ==========================================================================
-   SCROLL HELPER
+   SCROLL SUPPORT
 
    ========================================================================== */
 
@@ -1732,7 +1781,9 @@ function scrollToTop(){
     window.scrollTo({
 
 
+
         top:0,
+
 
 
         behavior:"smooth"
@@ -1754,7 +1805,7 @@ function scrollToTop(){
 
 
 /* ==========================================================================
-   PUBLIC ASSESSMENT ENGINE API
+   PUBLIC ENGINE API
 
    ========================================================================== */
 
@@ -1782,12 +1833,6 @@ const CTMAssessmentEngine = {
 
 
     calculate:
-
-        calculateCurrentSpokeScore,
-
-
-
-    score:
 
         calculateCurrentSpokeScore,
 
@@ -1845,11 +1890,19 @@ Object.freeze(
 
    File        : assessmentCommon.js
 
-   Version     : 5.1
+   Version     : 5.2
 
 
    Status      : 🔒 CTM PATH™ PREMIUM ASSESSMENT ENGINE
 
 
-   ========================================================================== */
+   CTM PATH™ Assessment Scale:
 
+   🔴 1-3  Awareness Needed
+
+   🟠 4-7  Growth Zone
+
+   🟢 8-10 Alignment Zone
+
+
+   ========================================================================== */
