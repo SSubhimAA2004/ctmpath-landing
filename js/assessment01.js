@@ -5,11 +5,12 @@
    FROM SURVIVAL TO LIVING™
 
    File        : assessment01.js
-   Version     : 5.0
+   Version     : 6.0
 
-   Status      : 🔒 PURPOSE™ SCREEN CONTROLLER
+   Status      : 🔒 ASSESSMENT-01 CONTROLLER
 
-   Assessment  : Spoke 01
+   Purpose:
+   Controls Purpose™ assessment screen
 
    ========================================================================== */
 
@@ -23,38 +24,8 @@
 
 
 /* ==========================================================================
-   PAGE CONFIGURATION
-   ========================================================================== */
+   PAGE INITIALIZATION
 
-
-const Assessment01Config = {
-
-
-    spoke:1,
-
-
-    nextPage:
-
-        "assessment-02.html",
-
-
-    storageKey:
-
-        "ctm_path_assessment_01"
-
-
-
-};
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   INITIALIZE PAGE
    ========================================================================== */
 
 
@@ -66,19 +37,7 @@ document.addEventListener(
 
 
 
-        initializeAssessment(
-
-            Assessment01Config.spoke
-
-        );
-
-
-
-        setupContinueButton();
-
-
-
-        restoreSavedAssessment();
+        initializePurposeAssessment();
 
 
 
@@ -93,67 +52,230 @@ document.addEventListener(
 
 
 
+
 /* ==========================================================================
-   RESTORE SAVED DATA
+   INITIALIZE PURPOSE™
+
    ========================================================================== */
 
 
-function restoreSavedAssessment(){
+function initializePurposeAssessment(){
 
 
 
-    const saved =
+    CTMAssessmentEngine.init(
 
-        localStorage.getItem(
+        1
 
-            Assessment01Config.storageKey
+    );
+
+
+
+
+
+
+
+    generateRatingScale(
+
+        1
+
+    );
+
+
+
+    generateRatingScale(
+
+        2
+
+    );
+
+
+
+    generateRatingScale(
+
+        3
+
+    );
+
+
+
+
+
+
+
+    setupContinueButton();
+
+
+
+    setupBackButton();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   GENERATE RATING SCALE™
+
+   Creates:
+
+   🔴 1 2 3
+   🟠 4 5 6 7
+   🟢 8 9 10
+
+   ========================================================================== */
+
+
+function generateRatingScale(questionNumber){
+
+
+
+    const container =
+
+        document.getElementById(
+
+            "ratingGroup"
+
+            +
+
+            questionNumber
 
         );
 
 
 
-    if(!saved){
+
+
+
+
+    if(!container){
+
+
 
         return;
+
 
     }
 
 
 
-    try{
 
 
-        const data =
 
-            JSON.parse(
 
-                saved
+    for(
+
+        let score = 1;
+
+        score <= 10;
+
+        score++
+
+    ){
+
+
+
+        const button =
+
+            document.createElement(
+
+                "button"
 
             );
 
 
 
-        restoreResponses(
 
-            data
+
+
+
+        button.type =
+
+            "button";
+
+
+
+
+
+
+
+        button.className =
+
+            "rating-button";
+
+
+
+
+
+
+
+        button.dataset.score =
+
+            score;
+
+
+
+
+
+
+
+        button.textContent =
+
+            score;
+
+
+
+
+
+
+
+        button.addEventListener(
+
+            "click",
+
+            function(){
+
+
+
+                CTMAssessmentEngine.selectRating(
+
+                    questionNumber,
+
+                    score,
+
+                    container
+
+                );
+
+
+
+                updateContinueState();
+
+
+
+            }
 
         );
 
 
-    }
-
-
-    catch(error){
 
 
 
-        console.error(
 
-            "Unable to restore assessment data",
 
-            error
+        container.appendChild(
+
+            button
 
         );
+
 
 
     }
@@ -169,8 +291,10 @@ function restoreSavedAssessment(){
 
 
 
-/* ==========================================================================
-   CONTINUE BUTTON
+
+/* Continue in Batch 1B *//* ==========================================================================
+   CONTINUE BUTTON SETUP™
+
    ========================================================================== */
 
 
@@ -188,11 +312,28 @@ function setupContinueButton(){
 
 
 
+
+
+
+
     if(!button){
+
+
 
         return;
 
+
     }
+
+
+
+
+
+
+
+    button.disabled = true;
+
+
 
 
 
@@ -206,261 +347,49 @@ function setupContinueButton(){
 
 
 
-            handleContinue();
+            if(
 
+                !CTMAssessmentEngine.completed()
 
+            ){
 
-        }
 
-    );
 
+                showCompletionMessage();
 
-}
 
 
-
-
-
-
-
-/* ==========================================================================
-   HANDLE CONTINUE
-
-   ========================================================================== */
-
-
-function handleContinue(){
-
-
-
-    if(
-
-        !isAssessmentComplete()
-
-    ){
-
-
-        showIncompleteMessage();
-
-
-        return;
-
-
-    }
-
-
-
-
-
-    const payload =
-
-        getAssessmentPayload();
-
-
-
-
-
-    saveAssessmentProgress(
-
-        payload
-
-    );
-
-
-
-
-
-    window.location.href =
-
-        Assessment01Config.nextPage;
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   SAVE PROGRESS
-   ========================================================================== */
-
-
-function saveAssessmentProgress(payload){
-
-
-
-    localStorage.setItem(
-
-        Assessment01Config.storageKey,
-
-        JSON.stringify(
-
-            payload
-
-        )
-
-    );
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   VALIDATION MESSAGE
-   ========================================================================== */
-
-
-function showIncompleteMessage(){
-
-
-
-    const message =
-
-        document.querySelector(
-
-            ".current-level-message"
-
-        );
-
-
-
-    if(message){
-
-
-
-        message.innerHTML =
-
-
-            "Please complete all 3 reflections before continuing."
-
-            +
-
-            "<br>"
-
-            +
-
-            "தொடர்வதற்கு முன் மூன்று கேள்விகளுக்கும் பதிலளிக்கவும்.";
-
-
-
-        message.classList.add(
-
-            "warning"
-
-        );
-
-
-    }
-
-
-
-}
-
-
-/* ==========================================================================
-   SMOOTH SCROLL SUPPORT
-
-   ========================================================================== */
-
-
-function scrollToTop(){
-
-
-
-    window.scrollTo({
-
-
-        top:0,
-
-
-        behavior:"smooth"
-
-
-
-    });
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   RATING INTERACTION FEEDBACK
-
-   ========================================================================== */
-
-
-document.addEventListener(
-
-    "click",
-
-    function(event){
-
-
-
-        if(
-
-            event.target.classList.contains(
-
-                "rating-button"
-
-            )
-
-        ){
-
-
-
-            const questionCard =
-
-                event.target.closest(
-
-                    ".question-card"
-
-                );
-
-
-
-            if(questionCard){
-
-
-
-                questionCard.classList.add(
-
-                    "answered"
-
-                );
+                return;
 
 
             }
 
 
 
+
+
+
+
+            savePurposeAssessment();
+
+
+
+
+
+
+
+            moveToNextJourneyStep();
+
+
+
         }
 
+    );
 
 
-    }
 
+}
 
-);
 
 
 
@@ -470,12 +399,12 @@ document.addEventListener(
 
 
 /* ==========================================================================
-   CONTINUE BUTTON STATE
+   UPDATE CONTINUE STATE™
 
    ========================================================================== */
 
 
-function updateContinueButtonState(){
+function updateContinueState(){
 
 
 
@@ -489,52 +418,63 @@ function updateContinueButtonState(){
 
 
 
+
+
+
+
     if(!button){
+
+
 
         return;
 
+
+    }
+
+
+
+
+
+
+
+    const completed =
+
+        CTMAssessmentEngine.completed();
+
+
+
+
+
+
+
+    button.disabled =
+
+        !completed;
+
+
+
+
+
+
+
+    if(completed){
+
+
+
+        button.classList.add(
+
+            "ready"
+
+        );
+
+
+
     }
 
 
 
 
 
-    if(
-
-        isAssessmentComplete()
-
-    ){
-
-
-
-        button.disabled = false;
-
-
-
-        button.innerHTML = `
-
-
-            SAVE & CONTINUE →
-
-            <br>
-
-            தொடருங்கள்
-
-
-        `;
-
-
-
-    }
-
-    else{
-
-
-        button.disabled = true;
-
-
-
-    }
 
 
 }
@@ -546,43 +486,9 @@ function updateContinueButtonState(){
 
 
 
-/* ==========================================================================
-   WATCH RESPONSE CHANGES
-
-   ========================================================================== */
-
-
-const originalCalculateScore =
-
-    calculateCurrentSpokeScore;
-
-
-
-
-
-calculateCurrentSpokeScore = function(){
-
-
-
-    originalCalculateScore();
-
-
-
-    updateContinueButtonState();
-
-
-
-};
-
-
-
-
-
-
-
 
 /* ==========================================================================
-   COMPLETION MESSAGE
+   COMPLETION MESSAGE™
 
    ========================================================================== */
 
@@ -591,29 +497,63 @@ function showCompletionMessage(){
 
 
 
-    const message =
+    let message =
 
         document.querySelector(
 
-            ".current-level-message"
+            ".completion-message"
 
         );
 
 
 
+
+
+
+
     if(!message){
 
-        return;
+
+
+        message =
+
+            document.createElement(
+
+                "div"
+
+            );
+
+
+
+        message.className =
+
+            "completion-message";
+
+
+
+
+
+
+
+        document
+
+        .querySelector(
+
+            ".score-preview"
+
+        )
+
+        .prepend(
+
+            message
+
+        );
+
+
 
     }
 
 
-
-
-
-    const payload =
-
-        getAssessmentPayload();
 
 
 
@@ -623,11 +563,9 @@ function showCompletionMessage(){
 
 
 
-        Your Purpose™ Alignment:
-
         <strong>
 
-        ${payload.percentage}/100
+        Complete your three reflections
 
         </strong>
 
@@ -635,7 +573,11 @@ function showCompletionMessage(){
         <br>
 
 
-        ${payload.level}
+        <small>
+
+        உங்கள் மூன்று சிந்தனை கேள்விகளையும் முடிக்கவும்
+
+        </small>
 
 
 
@@ -652,19 +594,52 @@ function showCompletionMessage(){
 
 
 
+
 /* ==========================================================================
-   PAGE TRANSITION HANDLER
+   SAVE PURPOSE ASSESSMENT™
 
    ========================================================================== */
 
 
-function goToNextAssessment(){
+function savePurposeAssessment(){
 
 
 
-    window.location.href =
+    const payload =
 
-        Assessment01Config.nextPage;
+        CTMAssessmentEngine.payload();
+
+
+
+
+
+
+
+    sessionStorage.setItem(
+
+        "ctm_path_assessment_01",
+
+        JSON.stringify(
+
+            payload
+
+        )
+
+    );
+
+
+
+
+
+
+
+    console.log(
+
+        "Purpose Assessment Saved:",
+
+        payload
+
+    );
 
 
 
@@ -677,8 +652,475 @@ function goToNextAssessment(){
 
 
 
+
 /* ==========================================================================
-   INITIAL BUTTON STATE
+   NEXT JOURNEY STEP™
+
+   ========================================================================== */
+
+
+function moveToNextJourneyStep(){
+
+
+
+    window.scrollTo({
+
+
+
+        top:
+
+            0,
+
+
+
+        behavior:
+
+            "smooth"
+
+
+
+    });
+
+
+
+
+
+
+
+    setTimeout(
+
+        function(){
+
+
+
+            console.log(
+
+                "Assessment-01 Complete"
+
+            );
+
+
+
+            console.log(
+
+                "Ready for Spoke-02"
+
+            );
+
+
+
+        },
+
+        700
+
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   BACK BUTTON
+
+   ========================================================================== */
+
+
+function setupBackButton(){
+
+
+
+    const button =
+
+        document.querySelector(
+
+            ".button-secondary"
+
+        );
+
+
+
+
+
+
+
+    if(!button){
+
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+
+    button.addEventListener(
+
+        "click",
+
+        function(){
+
+
+
+            window.scrollTo({
+
+
+
+                top:
+
+                    0,
+
+
+
+                behavior:
+
+                    "smooth"
+
+
+
+            });
+
+
+
+        }
+
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* Continue in Batch 1C */
+
+/* ==========================================================================
+   RESTORE PREVIOUS SESSION™
+
+   ========================================================================== */
+
+
+function restorePurposeAssessment(){
+
+
+
+    const saved =
+
+        sessionStorage.getItem(
+
+            "ctm_path_assessment_01"
+
+        );
+
+
+
+
+
+
+
+    if(!saved){
+
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+
+    try{
+
+
+
+        const data =
+
+            JSON.parse(
+
+                saved
+
+            );
+
+
+
+
+
+
+
+        CTMAssessmentEngine.restore(
+
+            data
+
+        );
+
+
+
+
+
+
+
+        updateContinueState();
+
+
+
+
+
+
+
+    }
+
+    catch(error){
+
+
+
+        console.error(
+
+            "Unable to restore assessment:",
+
+            error
+
+        );
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   KEYBOARD ACCESSIBILITY™
+
+   ========================================================================== */
+
+
+function enableKeyboardNavigation(){
+
+
+
+    const buttons =
+
+        document.querySelectorAll(
+
+            ".rating-button"
+
+        );
+
+
+
+
+
+
+
+    buttons.forEach(
+
+        function(button){
+
+
+
+            button.setAttribute(
+
+                "aria-label",
+
+                "Select rating "
+
+                +
+
+                button.dataset.score
+
+            );
+
+
+
+
+
+
+
+            button.addEventListener(
+
+                "keydown",
+
+                function(event){
+
+
+
+                    if(
+
+                        event.key === "Enter"
+
+                    ){
+
+
+
+                        button.click();
+
+
+
+                    }
+
+
+
+                }
+
+            );
+
+
+
+        }
+
+
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   ERROR HANDLING™
+
+   ========================================================================== */
+
+
+window.addEventListener(
+
+    "error",
+
+    function(event){
+
+
+
+        console.error(
+
+            "CTM PATH Assessment Error:",
+
+            event.message
+
+        );
+
+
+
+    }
+
+);
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   PREMIUM EXPERIENCE READY™
+
+   ========================================================================== */
+
+
+function activatePremiumExperience(){
+
+
+
+    restorePurposeAssessment();
+
+
+
+    enableKeyboardNavigation();
+
+
+
+
+
+
+
+    document
+
+    .querySelectorAll(
+
+        ".question-card"
+
+    )
+
+    .forEach(
+
+        function(card,index){
+
+
+
+            card.style.animationDelay =
+
+
+
+                (
+
+                    index * 0.15
+
+                )
+
+                +
+
+                "s";
+
+
+
+        }
+
+
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   FINAL BOOTSTRAP
 
    ========================================================================== */
 
@@ -690,15 +1132,15 @@ document.addEventListener(
     function(){
 
 
-        updateContinueButtonState();
 
+        activatePremiumExperience();
 
-        scrollToTop();
 
 
     }
 
 );
+
 
 
 
@@ -713,12 +1155,32 @@ document.addEventListener(
 
    File        : assessment01.js
 
-   Version     : 5.0
+   Version     : 6.0
 
 
-   Status      : 🔒 CTM PATH™ PURPOSE™ SCREEN CONTROLLER
+   Status      : 🔒 CTM PATH™ ASSESSMENT-01 CONTROLLER MASTER
+
+
+   Experience:
+
+   Life Map™
+
+        ↓
+
+   Purpose™
+
+        ↓
+
+   Reflection
+
+        ↓
+
+   Score Reveal
+
+        ↓
+
+   Learner → Leader → Legend™
+
 
 
    ========================================================================== */
-
-
