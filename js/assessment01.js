@@ -1,40 +1,36 @@
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey v2.0
+   CTM PATH™ Guided Journey
 
    File        : assessment01.js
-   Version     : 2.0
-   Status      : 🔒 PAGE CONTROLLER
+   Version     : 3.0
+   Status      : 🔒 SPOKE 01 CONTROLLER
 
-   Purpose     : Assessment Spoke 01 Controller™
+   Assessment  : Spoke 01
+   Pillar      : Purpose™
 
-                Purpose™
-
-   Owns
+   Owns:
 
       • Page Initialization
-      • Spoke 01 Behaviour
-      • Save & Continue
-      • Page Events
+      • Button Events
+      • Save Action
+      • Navigation Trigger
 
 
-   Uses
+   Uses:
 
-      • assessmentCommon.js
-      • assessmentData.js
-      • storage.js
-      • api.js
-      • validator.js
-      • navigation.js
+      • CTMAssessmentEngine
+      • CTMValidator
+      • CTMStorage
+      • CTMNavigation
 
 
-   Owns NO
+   Owns NO:
 
-      • Assessment Content
-      • UI Rendering Engine
-      • Storage Logic
+      • Question Data
+      • Rendering
+      • Styling
       • API Logic
-
 
    ========================================================================== */
 
@@ -46,11 +42,11 @@
 
 
 /* ==========================================================================
-   PAGE CONFIGURATION
+   CONFIGURATION
    ========================================================================== */
 
 
-const Assessment01Config = {
+const ASSESSMENT_01_CONFIG = {
 
 
     spoke:
@@ -60,31 +56,7 @@ const Assessment01Config = {
 
     nextPage:
 
-        CTM_CONSTANTS.PAGES.ASSESSMENT_02
-
-
-};
-
-
-
-
-
-/* ==========================================================================
-   PAGE STATE
-   ========================================================================== */
-
-
-const Assessment01State = {
-
-
-    initialized:
-
-        false,
-
-
-    saved:
-
-        false
+        "assessment-02.html"
 
 
 };
@@ -98,43 +70,14 @@ const Assessment01State = {
    ========================================================================== */
 
 
-/**
- * Initialize Assessment 01
- *
- */
+function initAssessment01(){
 
 
-function initializeAssessment01(){
+    CTMAssessmentEngine.init(
 
+        ASSESSMENT_01_CONFIG.spoke
 
-    const loaded =
-
-        CTMAssessmentCommon.init(
-
-            Assessment01Config.spoke
-
-        );
-
-
-
-    if(!loaded){
-
-
-        console.error(
-
-            "Unable to initialize Assessment 01"
-
-        );
-
-
-        return false;
-
-
-    }
-
-
-
-    restoreAssessment01();
+    );
 
 
 
@@ -142,13 +85,7 @@ function initializeAssessment01(){
 
 
 
-    Assessment01State.initialized =
-
-        true;
-
-
-
-    return true;
+    restoreAssessment01();
 
 
 }
@@ -158,14 +95,8 @@ function initializeAssessment01(){
 
 
 /* ==========================================================================
-   RESTORE DATA
+   RESTORE
    ========================================================================== */
-
-
-/**
- * Restore saved answers
- *
- */
 
 
 function restoreAssessment01(){
@@ -187,14 +118,14 @@ function restoreAssessment01(){
 
         &&
 
-        saved[Assessment01Config.spoke]
+        saved[ASSESSMENT_01_CONFIG.spoke]
 
     ){
 
 
-        CTMAssessmentCommon.restore(
+        CTMAssessmentEngine.restore(
 
-            saved[Assessment01Config.spoke]
+            saved[ASSESSMENT_01_CONFIG.spoke]
 
         );
 
@@ -208,19 +139,9 @@ function restoreAssessment01(){
 
 
 
-/* ==========================================================
-   Continue in Batch 1B
-   ========================================================== */
-
 /* ==========================================================================
    EVENT BINDING
    ========================================================================== */
-
-
-/**
- * Bind Assessment 01 events
- *
- */
 
 
 function bindAssessment01Events(){
@@ -253,7 +174,7 @@ function bindAssessment01Events(){
 
             "click",
 
-            handleAssessment01Next
+            saveAndContinueAssessment01
 
         );
 
@@ -269,7 +190,17 @@ function bindAssessment01Events(){
 
             "click",
 
-            handleAssessment01Previous
+            function(){
+
+
+                CTMNavigation.previous(
+
+                    ASSESSMENT_01_CONFIG.spoke
+
+                );
+
+
+            }
 
         );
 
@@ -284,27 +215,39 @@ function bindAssessment01Events(){
 
 
 /* ==========================================================================
-   NEXT ACTION
+   SAVE & CONTINUE
    ========================================================================== */
 
 
-/**
- * Handle Save & Continue
- *
- */
+function saveAndContinueAssessment01(){
 
 
-function handleAssessment01Next(){
+    const responses =
+
+        CTMAssessmentEngine.responses();
+
 
 
     if(
 
-        !validateAssessment01()
+        !CTMValidator.spoke(
+
+            Object.values(
+
+                responses
+
+            )
+
+        )
 
     ){
 
 
-        showAssessment01Error();
+        alert(
+
+            CTM_CONSTANTS.VALIDATION.SELECT_RATING
+
+        );
 
 
         return;
@@ -318,9 +261,9 @@ function handleAssessment01Next(){
 
 
 
-    navigateNextSpoke(
+    CTMNavigation.next(
 
-        Assessment01Config.spoke
+        ASSESSMENT_01_CONFIG.spoke
 
     );
 
@@ -331,99 +274,15 @@ function handleAssessment01Next(){
 
 
 
+/* Continue in Batch 1B */
+
 /* ==========================================================================
-   PREVIOUS ACTION
+   SAVE ASSESSMENT 01
    ========================================================================== */
 
 
 /**
- * Handle previous button
- *
- */
-
-
-function handleAssessment01Previous(){
-
-
-    navigatePreviousSpoke(
-
-        Assessment01Config.spoke
-
-    );
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   VALIDATION
-   ========================================================================== */
-
-
-/**
- * Validate Spoke 01 completion
- *
- */
-
-
-function validateAssessment01(){
-
-
-    const responses =
-
-        CTMAssessmentCommon.responses();
-
-
-
-    return CTMValidator.spoke(
-
-        Object.values(
-
-            responses
-
-        )
-
-    );
-
-
-}
-
-
-
-
-
-/**
- * Display validation message
- *
- */
-
-
-function showAssessment01Error(){
-
-
-    alert(
-
-        CTM_CONSTANTS.VALIDATION.SELECT_RATING
-
-    );
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   SAVE
-   ========================================================================== */
-
-
-/**
- * Save Assessment 01 response
+ * Save Spoke 01 responses locally
  *
  */
 
@@ -431,13 +290,13 @@ function showAssessment01Error(){
 function saveAssessment01(){
 
 
-    const payload =
+    const responses =
 
-        CTMAssessmentCommon.savePayload();
+        CTMAssessmentEngine.responses();
 
 
 
-    let existing =
+    let assessmentData =
 
         CTMStorage.get(
 
@@ -447,18 +306,21 @@ function saveAssessment01(){
 
 
 
-    if(!existing){
+    if(!assessmentData){
 
 
-        existing = {};
+        assessmentData = {};
+
 
     }
 
 
 
-    existing[Assessment01Config.spoke] =
+    assessmentData[
 
-        payload.responses;
+        ASSESSMENT_01_CONFIG.spoke
+
+    ] = responses;
 
 
 
@@ -466,15 +328,14 @@ function saveAssessment01(){
 
         CTM_CONSTANTS.STORAGE.ASSESSMENT_RESPONSES,
 
-        existing
+        assessmentData
 
     );
 
 
 
-    Assessment01State.saved =
+    updateAssessmentProgress01();
 
-        true;
 
 
 }
@@ -483,22 +344,71 @@ function saveAssessment01(){
 
 
 
-/* ==========================================================
-   Continue in Batch 1C
-   ========================================================== */
-
 /* ==========================================================================
-   API SAVE
+   UPDATE PROGRESS
    ========================================================================== */
 
 
 /**
- * Send Assessment 01 data to backend
+ * Store journey progress
  *
  */
 
 
-function syncAssessment01WithAPI(){
+function updateAssessmentProgress01(){
+
+
+    const progress = {
+
+
+        currentSpoke:
+
+            ASSESSMENT_01_CONFIG.spoke,
+
+
+        completed:
+
+            true,
+
+
+        updatedAt:
+
+            new Date()
+
+                .toISOString()
+
+
+    };
+
+
+
+    CTMStorage.set(
+
+        CTM_CONSTANTS.STORAGE.JOURNEY_PROGRESS,
+
+        progress
+
+    );
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   BACKEND SYNC
+   ========================================================================== */
+
+
+/**
+ * Send assessment response to backend
+ *
+ */
+
+
+function syncAssessment01(){
 
 
     const visitor =
@@ -531,17 +441,19 @@ function syncAssessment01WithAPI(){
 
         spoke:
 
-            Assessment01Config.spoke,
+            ASSESSMENT_01_CONFIG.spoke,
 
 
         responses:
 
-            CTMAssessmentCommon.responses(),
+            CTMAssessmentEngine.responses(),
 
 
         timestamp:
 
-            new Date().toISOString()
+            new Date()
+
+                .toISOString()
 
 
     };
@@ -564,96 +476,8 @@ function syncAssessment01WithAPI(){
 
 
 /* ==========================================================================
-   PROGRESS UPDATE
+   PAGE INITIALIZATION
    ========================================================================== */
-
-
-/**
- * Save journey progress
- *
- */
-
-
-function updateAssessment01Progress(){
-
-
-    const progress = {
-
-
-        currentSpoke:
-
-            Assessment01Config.spoke,
-
-
-        completed:
-
-            true,
-
-
-        updatedAt:
-
-            new Date().toISOString()
-
-
-    };
-
-
-
-    CTMStorage.set(
-
-        CTM_CONSTANTS.STORAGE.JOURNEY_PROGRESS,
-
-        progress
-
-    );
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   COMPLETION HANDLER
-   ========================================================================== */
-
-
-/**
- * Complete current page actions
- *
- */
-
-
-function completeAssessment01(){
-
-
-    saveAssessment01();
-
-
-
-    updateAssessment01Progress();
-
-
-
-    syncAssessment01WithAPI();
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   PAGE STARTUP
-   ========================================================================== */
-
-
-/**
- * DOM Ready
- *
- */
 
 
 document.addEventListener(
@@ -663,7 +487,7 @@ document.addEventListener(
     function(){
 
 
-        initializeAssessment01();
+        initAssessment01();
 
 
     }
@@ -675,7 +499,7 @@ document.addEventListener(
 
 
 /* ==========================================================================
-   PUBLIC API
+   PUBLIC CONTROLLER
    ========================================================================== */
 
 
@@ -684,7 +508,7 @@ const CTMAssessment01 = {
 
     init:
 
-        initializeAssessment01,
+        initAssessment01,
 
 
     save:
@@ -692,14 +516,9 @@ const CTMAssessment01 = {
         saveAssessment01,
 
 
-    validate:
+    sync:
 
-        validateAssessment01,
-
-
-    complete:
-
-        completeAssessment01
+        syncAssessment01
 
 
 };
@@ -721,8 +540,10 @@ Object.freeze(
 /* ==========================================================================
    END OF FILE
 
-   File    : assessment01.js
+   File        : assessment01.js
 
-   Status  : 🔒 PAGE CONTROLLER
+   Version     : 3.0
+
+   Status      : 🔒 SPOKE 01 CONTROLLER
 
    ========================================================================== */
