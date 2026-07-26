@@ -4,26 +4,26 @@
    CTM PATH™ Guided Journey™
 
    File        : landing.js
-   Version     : 5.0
-   Status      : 🔒 PREMIUM FOUNDATION
+   Version     : 5.1
+   Status      : 🔒 PREMIUM JOURNEY CONTROLLER
 
    Purpose
    --------------------------------------------------------------------------
-   Page 01 — Landing Experience Controller
+   Page 01 — Welcome Experience Controller
 
    Responsibilities
-   --------------------------------------------------------------------------
-   ✓ Initialize landing page
-   ✓ Bind Begin Journey action
-   ✓ Start guided journey flow
+
+   ✓ Initialize landing experience
    ✓ Coordinate shared components
+   ✓ Handle Begin Journey action
+   ✓ Provide smooth journey transition
 
    Does NOT
-   --------------------------------------------------------------------------
-   ✗ Create UI elements
-   ✗ Control global components
-   ✗ Handle API calls
-   ✗ Manage assessment logic
+
+   ✗ Render HTML
+   ✗ Control styles
+   ✗ Handle assessment logic
+   ✗ Communicate with APIs
 
    ========================================================================== */
 
@@ -40,17 +40,21 @@ window.CTM.Landing = (() => {
 
 
     /* ======================================================================
-       MODULE STATE
+       STATE
        ====================================================================== */
 
 
     const state = {
 
 
-        initialized:false
+        initialized:false,
+
+
+        journeyStarted:false
 
 
     };
+
 
 
 
@@ -70,10 +74,15 @@ window.CTM.Landing = (() => {
         }
 
 
+
+        initializeComponents();
+
+
         bindEvents();
 
 
-        initializeComponents();
+        initializeAnimations();
+
 
 
         state.initialized = true;
@@ -84,8 +93,9 @@ window.CTM.Landing = (() => {
 
 
 
+
     /* ======================================================================
-       COMPONENT INITIALIZATION
+       SHARED COMPONENT INITIALIZATION
        ====================================================================== */
 
 
@@ -93,48 +103,50 @@ window.CTM.Landing = (() => {
 
 
 
-        if(
-
-            window.CTM.Header &&
-
-            typeof window.CTM.Header.initialize === "function"
-
-        ){
-
-            window.CTM.Header.initialize();
-
-        }
+        const components = [
 
 
+            window.CTM.Header,
 
-        if(
 
-            window.CTM.Footer &&
+            window.CTM.Footer,
 
-            typeof window.CTM.Footer.initialize === "function"
 
-        ){
+            window.CTM.Journey,
 
-            window.CTM.Footer.initialize();
 
-        }
+            window.CTM.Progress
+
+
+        ];
 
 
 
-        if(
+        components.forEach(component => {
 
-            window.CTM.Journey &&
 
-            typeof window.CTM.Journey.initialize === "function"
 
-        ){
+            if(
 
-            window.CTM.Journey.initialize();
+                component &&
 
-        }
+                typeof component.initialize === "function"
+
+            ){
+
+
+                component.initialize();
+
+
+            }
+
+
+
+        });
 
 
     }
+
 
 
 
@@ -147,7 +159,8 @@ window.CTM.Landing = (() => {
     function bindEvents(){
 
 
-        const button =
+
+        const beginButton =
 
             document.querySelector(
 
@@ -157,7 +170,7 @@ window.CTM.Landing = (() => {
 
 
 
-        if(!button){
+        if(!beginButton){
 
             return;
 
@@ -165,16 +178,19 @@ window.CTM.Landing = (() => {
 
 
 
-        button.addEventListener(
+
+        beginButton.addEventListener(
 
             "click",
 
-            beginJourney
+            startJourney
 
         );
 
 
+
     }
+
 
 
 
@@ -184,25 +200,34 @@ window.CTM.Landing = (() => {
        ====================================================================== */
 
 
-    function beginJourney(){
+    function startJourney(){
 
 
 
-        if(
+        if(state.journeyStarted){
 
-            window.CTM.Journey &&
-
-            typeof window.CTM.Journey.continueJourney === "function"
-
-        ){
-
-            window.CTM.Journey.continueJourney();
+            return;
 
         }
 
 
 
+        state.journeyStarted = true;
+
+
+
+        document.body.classList.add(
+
+            "journey-transition"
+
+        );
+
+
+
+
+
         setTimeout(
+
 
             function(){
 
@@ -214,12 +239,54 @@ window.CTM.Landing = (() => {
 
             },
 
-            300
+
+            450
+
 
         );
 
 
+
     }
+
+
+
+
+
+    /* ======================================================================
+       PREMIUM PAGE BEHAVIOUR
+       ====================================================================== */
+
+
+    function initializeAnimations(){
+
+
+
+        const cards =
+
+            document.querySelectorAll(
+
+                ".discovery-card, .life-area-card"
+
+            );
+
+
+
+        cards.forEach((card,index)=>{
+
+
+            card.style.animationDelay =
+
+                `${index * 80}ms`;
+
+
+
+        });
+
+
+
+    }
+
 
 
 
@@ -232,7 +299,12 @@ window.CTM.Landing = (() => {
     return {
 
 
-        initialize
+
+        initialize,
+
+
+        startJourney
+
 
 
     };
@@ -245,8 +317,9 @@ window.CTM.Landing = (() => {
 
 
 
+
 /* ==========================================================================
-   AUTO INITIALIZATION
+   AUTO START
    ========================================================================== */
 
 
@@ -257,6 +330,7 @@ document.addEventListener(
     function(){
 
 
+
         if(
 
             window.CTM.Landing &&
@@ -265,9 +339,14 @@ document.addEventListener(
 
         ){
 
+
+
             window.CTM.Landing.initialize();
 
+
+
         }
+
 
 
     }
@@ -282,9 +361,11 @@ document.addEventListener(
 
    END OF FILE
 
-   File        : landing.js
-   Version     : 5.0
-   Status      : 🔒 PREMIUM FOUNDATION
+   File        : js/landing.js
+
+   Version     : 5.1
+
+   Status      : 🔒 PREMIUM JOURNEY CONTROLLER
 
    ========================================================================== */
 
