@@ -10,7 +10,7 @@
          FROM SURVIVAL TO LIVING™
 
          File         : pages/registration.html
-         Version      : 9.0
+         Version      : 10.0
          Status       : 🔒 PRODUCTION
          Architecture : Multi-Page Application (MPA)
 
@@ -22,16 +22,15 @@
 
          ✓ Welcome Visitor
          ✓ Capture KYC
-         ✓ Validate Input
          ✓ Submit Registration
          ✓ Continue to Assessment
 
          Does NOT
 
          ✗ Perform Assessment
-         ✗ Generate Diagnosis
-         ✗ Calculate Scores
-         ✗ Call Google Sheets Directly
+         ✗ Perform Diagnosis
+         ✗ Perform API Logic
+         ✗ Contain Business Logic
 
     ========================================================== -->
 
@@ -56,7 +55,7 @@
     </title>
 
     <!-- ==========================================================
-         Google Fonts
+         GOOGLE FONTS
     ========================================================== -->
 
     <link rel="preconnect"
@@ -71,16 +70,23 @@
         rel="stylesheet">
 
     <!-- ==========================================================
-         Foundation CSS
+         FOUNDATION CSS
     ========================================================== -->
 
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/tokens.css">
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet"
+          href="../css/reset.css">
+
+    <link rel="stylesheet"
+          href="../css/tokens.css">
+
+    <link rel="stylesheet"
+          href="../css/base.css">
+
+    <link rel="stylesheet"
+          href="../css/app.css">
 
     <!-- ==========================================================
-         Page CSS
+         PAGE CSS
     ========================================================== -->
 
     <link rel="stylesheet"
@@ -99,9 +105,12 @@
     <header class="registration-header">
 
         <a
+
             href="landing.html"
+
             class="brand-logo"
-            aria-label="CTM PATH">
+
+            aria-label="CTM PATH™">
 
             <img
 
@@ -124,7 +133,7 @@
         <section class="registration-card">
 
             <!-- ==================================================
-                 PROGRESS
+                 JOURNEY PROGRESS
             =================================================== -->
 
             <section class="progress-section">
@@ -174,7 +183,7 @@
             </section>
 
             <!-- ==================================================
-                 HERO
+                 WELCOME
             =================================================== -->
 
             <section class="hero">
@@ -194,9 +203,9 @@
                 <p class="hero-subtitle-ta">
 
                     உங்கள் தனிப்பட்ட CTM PATH™
-                    மதிப்பீட்டை உருவாக்க சில
-                    அடிப்படை விவரங்களை மட்டும்
-                    பதிவு செய்யுங்கள்.
+                    வழிகாட்டப்பட்ட பயணத்தை
+                    தொடங்க சில அடிப்படை
+                    விவரங்களை மட்டும் பதிவு செய்யுங்கள்.
 
                 </p>
 
@@ -211,7 +220,7 @@
             </section>
 
             <!-- ==================================================
-                 REGISTRATION FORM
+                 KYC FORM
             =================================================== -->
 
             <form
@@ -221,6 +230,10 @@
                 class="registration-form"
 
                 novalidate>
+
+                <!-- ==================================================
+                     FULL NAME
+                =================================================== -->
 
                 <div class="form-group">
 
@@ -256,6 +269,10 @@
 
                 </div>
 
+                <!-- ==================================================
+                     MOBILE
+                =================================================== -->
+
                 <div class="form-group">
 
                     <label for="mobile">
@@ -282,15 +299,21 @@
 
                         type="tel"
 
+                        maxlength="10"
+
                         autocomplete="tel"
 
-                        maxlength="10"
+                        placeholder="9876543210"
 
                         required>
 
                 </div>
 
-                                <div class="form-group">
+                                <!-- ==================================================
+                     EMAIL
+                =================================================== -->
+
+                <div class="form-group">
 
                     <label for="email">
 
@@ -323,6 +346,10 @@
                         required>
 
                 </div>
+
+                <!-- ==================================================
+                     DISTRICT
+                =================================================== -->
 
                 <div class="form-group">
 
@@ -358,6 +385,10 @@
 
                 </div>
 
+                <!-- ==================================================
+                     STATE
+                =================================================== -->
+
                 <div class="form-group">
 
                     <label for="state">
@@ -391,6 +422,10 @@
                         required>
 
                 </div>
+
+                <!-- ==================================================
+                     LANGUAGE
+                =================================================== -->
 
                 <div class="form-group">
 
@@ -440,6 +475,10 @@
                     </select>
 
                 </div>
+
+                <!-- ==================================================
+                     REFERRAL SOURCE
+                =================================================== -->
 
                 <div class="form-group">
 
@@ -521,41 +560,6 @@
                 </div>
 
                 <!-- ==================================================
-                     PRIVACY PROMISE
-                     (Replaces Consent Section)
-                =================================================== -->
-
-                <section class="privacy-card">
-
-                    <div class="privacy-icon">
-
-                        🔒
-
-                    </div>
-
-                    <div class="privacy-content">
-
-                        <h3>
-
-                            உங்கள் தகவல் பாதுகாப்பாக இருக்கும்
-
-                        </h3>
-
-                        <p>
-
-                            உங்கள் தகவல் CTM PATH™
-                            வழிகாட்டப்பட்ட பயணத்திற்காக
-                            மட்டுமே பயன்படுத்தப்படும்.
-                            எந்த மூன்றாம் தரப்பினருடனும்
-                            பகிரப்படாது.
-
-                        </p>
-
-                    </div>
-
-                </section>
-
-                <!-- ==================================================
                      ACTION BUTTONS
                 =================================================== -->
 
@@ -609,19 +613,26 @@
 
             </form>
 
-                        <!-- ======================================================
-                 FOOTER
-            ======================================================= -->
-
-        </section>
+                    </section>
 
     </main>
+
+    <!-- ======================================================
+         FOOTER
+    ======================================================= -->
 
     <footer class="registration-footer">
 
         <p class="footer-text">
 
-            © 2026 CTM PATH™ • From Survival To Living™
+            வாழ்வாங்கு வாழ்ந்திட வாரீர்! •
+            From Survival To Living™
+
+        </p>
+
+        <p class="footer-text">
+
+            © 2026 CTM PATH™. All Rights Reserved.
 
         </p>
 
@@ -632,7 +643,7 @@
 <!-- ==========================================================
      FOUNDATION SCRIPTS
 
-     Load Order
+     Load Order (LOCKED)
 
      1. Browser Storage
      2. API Layer
@@ -647,8 +658,13 @@
 
 <script src="../js/app.js"></script>
 
+<!-- ==========================================================
+     PAGE CONTROLLER
+========================================================== -->
+
 <script src="../js/registration.js"></script>
 
 </body>
 
 </html>
+
