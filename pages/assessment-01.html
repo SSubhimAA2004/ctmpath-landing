@@ -5,13 +5,21 @@
      FROM SURVIVAL TO LIVING™
 
      File        : assessment-01.html
-     Version     : 6.1
+     Version     : 6.2
 
      Status      : 🔒 PREMIUM EXPERIENCE MASTER
 
      Assessment  : Spoke 01
 
      Pillar      : Purpose™
+
+     Change Log
+
+     v6.2
+     ✓ Component mount points added
+     ✓ Header injection enabled
+     ✓ Footer injection enabled
+     ✓ Dashboard component injection enabled
 
      ========================================================================== -->
 
@@ -87,8 +95,6 @@ crossorigin>
 href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@300;400;500;600;700&display=swap"
 
 rel="stylesheet">
-
-
 
 
 
@@ -172,41 +178,21 @@ href="../css/assessment.css">
 
 <main class="premium-assessment-card">
 
-     <!-- ==========================================================================
-     PREMIUM BRAND HEADER
+
+
+<!-- ==========================================================================
+     HEADER COMPONENT MOUNT
+
+     Loaded by:
+
+     js/assessment01.js
+
+     CTM.Common.loadComponent()
 
      ========================================================================== -->
 
 
-<header class="assessment-header">
-
-
-
-<div class="brand-title">
-
-
-CTM PATH™
-
-
-</div>
-
-
-
-
-
-<div class="journey-title">
-
-
-FROM SURVIVAL TO LIVING™
-
-
-</div>
-
-
-
-
-
-</header>
+<div id="header"></div>
 
 
 
@@ -258,8 +244,6 @@ class="life-map-progress">
 
 
 
-
-
 <div class="life-map-subtitle">
 
 
@@ -278,173 +262,29 @@ class="life-map-progress">
 
 
 
+</section>
 
+     <!-- ==========================================================================
+     KALA CHAKRA™ COMPONENT MOUNT
 
-<!-- ==========================================================================
-     KALA CHAKRA™
+     Loaded by:
 
-     4 × 3 GRID
+     js/assessment01.js
 
      ========================================================================== -->
 
 
-<div class="kala-wheel">
+<div id="kaalachakra"></div>
 
 
 
-<div class="wheel-spoke active">
 
-நோக்கம்™
 
-<br>
 
-Purpose™
 
-</div>
 
 
-
-<div class="wheel-spoke">
-
-உயிர்ச்சக்தி™
-
-<br>
-
-Vitality™
-
-</div>
-
-
-
-<div class="wheel-spoke">
-
-அன்பும் உறவுகளும்™
-
-<br>
-
-Love & Relationships™
-
-</div>
-
-
-
-<div class="wheel-spoke">
-
-நற்பண்பும் நேர்மையும்™
-
-<br>
-
-Character™
-
-</div>
-
-
-
-<div class="wheel-spoke">
-
-நிதி சுதந்திரம்™
-
-<br>
-
-Financial Freedom™
-
-</div>
-
-
-
-<div class="wheel-spoke">
-
-உள்ளமைதி™
-
-<br>
-
-Inner Peace™
-
-</div>
-
-
-
-<div class="wheel-spoke">
-
-வளர்ச்சியும் மேன்மையும்™
-
-<br>
-
-Growth & Mastery™
-
-</div>
-
-
-
-<div class="wheel-spoke">
-
-ஒழுக்கமும் பழக்கங்களும்™
-
-<br>
-
-Discipline™
-
-</div>
-
-
-
-<div class="wheel-spoke">
-
-நன்றியுணர்வும் விழிப்புணர்வும்™
-
-<br>
-
-Gratitude™
-
-</div>
-
-
-
-<div class="wheel-spoke">
-
-பங்களிப்பும் சேவையும்™
-
-<br>
-
-Contribution™
-
-</div>
-
-
-
-<div class="wheel-spoke">
-
-ஆன்ம இணக்கமும் அர்த்தமும்™
-
-<br>
-
-Spirit™
-
-</div>
-
-
-
-<div class="wheel-spoke">
-
-பாரம்பரியமும் பார்வையும்™
-
-<br>
-
-Legacy™
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-</section>
-
-     <!-- ==========================================================================
+<!-- ==========================================================================
      OPENING RITUAL™
 
      ========================================================================== -->
@@ -634,15 +474,7 @@ and meaning of your life.
 
 </section>
 
-
-
-
-
-
-
-
-
-<!-- ==========================================================================
+     <!-- ==========================================================================
      INNER JOURNEY™
 
      ========================================================================== -->
@@ -650,7 +482,9 @@ and meaning of your life.
 
 <section class="inner-journey">
 
-     <div class="journey-step">
+
+
+<div class="journey-step">
 
 
 
@@ -855,14 +689,14 @@ I Become It
 
 
 <!-- ==========================================================================
-     QUESTION 01
-
-     AWARENESS™
+     QUESTIONS SECTION
 
      ========================================================================== -->
 
 
 <section class="questions-section">
+
+
 
 
 
@@ -951,6 +785,17 @@ How true is this for me?
 
 
 
+<!-- Rating component mount -->
+
+
+<div id="ratingScale"></div>
+
+
+
+
+
+
+
 <div
 
 id="ratingGroup1"
@@ -960,7 +805,13 @@ class="rating-group">
 
 </div>
 
-     <div class="rating-guide">
+
+
+
+
+
+
+<div class="rating-guide">
 
 
 <span>
@@ -994,23 +845,7 @@ class="rating-group">
 
 </article>
 
-
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- ==========================================================================
+     <!-- ==========================================================================
      QUESTION 02
 
      ALIGNMENT™
@@ -1151,7 +986,15 @@ class="rating-group">
 
 </article>
 
-     <!-- ==========================================================================
+
+
+
+
+
+
+
+
+<!-- ==========================================================================
      QUESTION 03
 
      EMBODIMENT™
@@ -1397,6 +1240,28 @@ Your current Purpose™ alignment
      <!-- ==========================================================================
      CURRENT STATUS™
 
+     COMPONENT MOUNT
+
+     Loaded by:
+
+     js/assessment01.js
+
+     ========================================================================== -->
+
+
+<div id="statusCard"></div>
+
+
+
+
+
+
+
+
+
+<!-- ==========================================================================
+     CURRENT STATUS DISPLAY
+
      ========================================================================== -->
 
 
@@ -1462,6 +1327,7 @@ class="life-evolution-level">
 
 
 REFLECTION MOMENT™
+
 
 <br>
 
@@ -1533,6 +1399,7 @@ I truly desire?
 
 
 WISDOM MOMENT™
+
 
 <br>
 
@@ -1645,58 +1512,16 @@ CONTINUE JOURNEY →
 
 
 <!-- ==========================================================================
-     PREMIUM FOOTER
+     FOOTER COMPONENT MOUNT
+
+     Loaded by:
+
+     js/assessment01.js
 
      ========================================================================== -->
 
 
-<footer class="assessment-footer">
-
-
-
-<p>
-
-
-<strong>
-
-CTM PATH™ KALA CHAKRA™
-
-</strong>
-
-
-<br>
-
-
-12 Pillars of Human Flourishing™
-
-
-</p>
-
-
-
-
-
-
-
-<p>
-
-
-Every Learner can become a Leader.
-
-
-<br>
-
-
-Every Leader can become a Legend.
-
-
-</p>
-
-
-
-
-
-</footer>
+<div id="footer"></div>
 
 
 
@@ -1725,8 +1550,6 @@ Every Leader can become a Legend.
 <!-- ==========================================================================
      JAVASCRIPT ENGINE
 
-     Updated Version 6.1
-     
      Correct dependency loading order
 
      ========================================================================== -->
