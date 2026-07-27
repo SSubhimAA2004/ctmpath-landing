@@ -1,718 +1,170 @@
 
-/*=============================================================================
+/* ==========================================================================
 
-    CTM PATH™
-    FROM SURVIVAL TO LIVING™
+   CTM PATH™ Guided Journey™
 
-    FILE
+   File        : assessmentEngine.js
+   Version     : 1.0
+   Status      : 🔒 LOCKED
 
-    assessmentEngine.js
+   ==========================================================================
+   PURPOSE
 
-    PURPOSE
+   Central Business Rules Engine
 
-    Master Assessment Engine
+   Owns
 
-    RESPONSIBILITIES
+   ✓ Question Scores
+   ✓ Pillar Scores
+   ✓ Overall 360 Score
+   ✓ Learner™ / Leader™ / Legend™
+   ✓ Dashboard Model
+   ✓ Kala Chakra Model
+   ✓ Reflection Selection
 
-    • Initialize Assessment
-    • Load Pillars
-    • Manage Questions
-    • Coordinate UI
-    • Coordinate Scoring
-    • Save Progress
-    • Navigate Assessment
+   Does NOT
 
-    VERSION
+   ✗ Render UI
+   ✗ Manipulate DOM
+   ✗ Handle Navigation
 
-    1.0
+   ========================================================================== */
 
-=============================================================================*/
-
-'use strict';
-
-/*=============================================================================
-    GLOBAL NAMESPACE
-=============================================================================*/
+"use strict";
 
 window.CTM = window.CTM || {};
 
-/*=============================================================================
-    ASSESSMENT ENGINE
-=============================================================================*/
+window.CTM.AssessmentEngine = (() => {
 
-CTM.assessmentEngine = (function(){
+    /* ======================================================================
+       CONSTANTS
+       ====================================================================== */
 
-    /*=========================================================================
-        STATE
-    =========================================================================*/
+    const TOTAL_PILLARS = 12;
 
-    const state = {
+    const QUESTIONS_PER_PILLAR = 3;
 
-        pillarIndex : 0,
+    const MAX_QUESTION_SCORE = 10;
 
-        questionIndex : 0,
+    const MAX_PILLAR_SCORE = 30;
 
-        answers : [],
+    const MAX_TOTAL_SCORE = 360;
 
-        pillarScores : [],
 
-        visitor : null
+
+    /* ======================================================================
+       STATUS LEVELS
+       ====================================================================== */
+
+    const STATUS = {
+
+        LEARNER : {
+
+            key : "learner",
+
+            title : "LEARNER™",
+
+            badge : "Emerging",
+
+            subtitle :
+
+                "Beginning Your Journey"
+
+        },
+
+
+
+        LEADER : {
+
+            key : "leader",
+
+            title : "LEADER™",
+
+            badge : "Growing",
+
+            subtitle :
+
+                "Living With Intention"
+
+        },
+
+
+
+        LEGEND : {
+
+            key : "legend",
+
+            title : "LEGEND™",
+
+            badge : "Inspiring",
+
+            subtitle :
+
+                "Living Your Highest Potential"
+
+        }
 
     };
 
 
 
-    /*=========================================================================
-        INITIALIZE
-    =========================================================================*/
+    /* ======================================================================
+       LIFE PILLARS
+       ====================================================================== */
 
-    function init(){
+    const PILLARS = [
 
-        loadVisitor();
+        "Purpose™",
 
-        initializeAnswers();
+        "Health™",
 
-        bindEvents();
+        "Relationships™",
 
-        renderCurrentQuestion();
+        "Mind & Emotional Well-Being™",
 
-    }
+        "Character™",
 
+        "Growth & Learning™",
 
+        "Career & Contribution™",
 
-    /*=========================================================================
-        LOAD VISITOR
-    =========================================================================*/
+        "Financial Stability™",
 
-    function loadVisitor(){
+        "Self-Discipline™",
 
-        const appState =
+        "Community™",
 
-            CTM.storage.getState();
+        "Systems & Balance™",
 
-        state.visitor =
+        "Legacy™"
 
-            appState.visitor || {};
+    ];
 
-        CTM.assessmentUI.renderVisitor(
 
-            state.visitor.name || ''
 
-        );
+    /* ======================================================================
+       INTERNAL STATE
+       ====================================================================== */
 
-    }
+    const state = {
 
+        currentPillar : 1,
 
+        responses : {},
 
-    /*=========================================================================
-        INITIALIZE ANSWERS
-    =========================================================================*/
+        pillarScores : new Array(TOTAL_PILLARS).fill(0),
 
-    function initializeAnswers(){
+        overallScore : 0
 
-        state.answers =
+    };
 
-            CTM.assessment.pillars.map(
 
-                function(){
 
-                    return new Array(5).fill(0);
+    /* ======================================================================
+       INITIALIZE
+       ====================================================================== */
 
-                }
-
-            );
-
-
-
-        state.pillarScores =
-
-            new Array(
-
-                CTM.assessment.totalPillars
-
-            ).fill(0);
-
-    }
-
-
-
-    /*=========================================================================
-        CURRENT PILLAR
-    =========================================================================*/
-
-    function getCurrentPillar(){
-
-        return CTM.assessment.pillars[
-
-            state.pillarIndex
-
-        ];
-
-    }
-
-
-
-    /*=========================================================================
-        CURRENT QUESTION
-    =========================================================================*/
-
-    function getCurrentQuestion(){
-
-        return getCurrentPillar()
-
-            .questions[
-
-                state.questionIndex
-
-            ];
-
-    }
-
-
-
-    /*=========================================================================
-        RENDER
-    =========================================================================*/
-
-    function renderCurrentQuestion(){
-
-        const pillar =
-
-            getCurrentPillar();
-
-        const question =
-
-            getCurrentQuestion();
-
-
-
-        CTM.assessmentUI.renderCounter(
-
-            state.pillarIndex + 1,
-
-            CTM.assessment.totalPillars
-
-        );
-
-
-
-        CTM.assessmentUI.renderPillar(
-
-            pillar
-
-        );
-
-
-
-        CTM.assessmentUI.renderQuestion(
-
-            question,
-
-            state.questionIndex + 1,
-
-            CTM.assessment.questionsPerPillar
-
-        );
-
-
-
-        CTM.assessmentUI.renderRatings(
-
-            state.answers[
-
-                state.pillarIndex
-
-            ][
-
-                state.questionIndex
-
-            ],
-
-            onScoreSelected
-
-        );
-
-
-
-        updateProgress();
-
-    }
-
-    /*=========================================================================
-        SCORE SELECTED
-    =========================================================================*/
-
-    function onScoreSelected(
-
-        score
-
-    ){
-
-        score =
-
-            CTM.assessmentScoring.validateScore(
-
-                score
-
-            );
-
-
-
-        state.answers[
-
-            state.pillarIndex
-
-        ][
-
-            state.questionIndex
-
-        ] =
-
-            score;
-
-
-
-        CTM.assessmentUI.renderRatings(
-
-            score,
-
-            onScoreSelected
-
-        );
-
-
-
-        CTM.assessmentUI.enableNext();
-
-
-
-        updateProgress();
-
-
-
-        saveProgress();
-
-    }
-
-
-
-    /*=========================================================================
-        UPDATE PROGRESS
-    =========================================================================*/
-
-    function updateProgress(){
-
-        const answers =
-
-            state.answers[
-
-                state.pillarIndex
-
-            ];
-
-
-
-        const completion =
-
-            CTM.assessmentScoring
-
-            .calculateCompletion(
-
-                answers
-
-            );
-
-
-
-        CTM.assessmentUI.updateAnswered(
-
-            completion.answered,
-
-            CTM.assessment.questionsPerPillar
-
-        );
-
-
-
-        CTM.assessmentUI.updateAverage(
-
-            CTM.assessmentScoring
-
-            .calculatePillarAverage(
-
-                answers
-
-            )
-
-        );
-
-
-
-        CTM.assessmentUI.updateNavigation(
-
-            state.questionIndex + 1,
-
-            CTM.assessment.questionsPerPillar
-
-        );
-
-    }
-
-
-
-    /*=========================================================================
-        NEXT QUESTION
-    =========================================================================*/
-
-    function nextQuestion(){
-
-        if(
-
-            state.questionIndex
-
-            <
-
-            CTM.assessment.questionsPerPillar - 1
-
-        ){
-
-            state.questionIndex++;
-
-            renderCurrentQuestion();
-
-            CTM.assessmentUI.scrollTop();
-
-            return;
-
-        }
-
-
-
-        finishCurrentPillar();
-
-    }
-
-
-
-    /*=========================================================================
-        PREVIOUS QUESTION
-    =========================================================================*/
-
-    function previousQuestion(){
-
-        if(
-
-            state.questionIndex === 0
-
-        ){
-
-            return;
-
-        }
-
-
-
-        state.questionIndex--;
-
-        renderCurrentQuestion();
-
-        CTM.assessmentUI.scrollTop();
-
-    }
-
-
-
-    /*=========================================================================
-        FINISH CURRENT PILLAR
-    =========================================================================*/
-
-    function finishCurrentPillar(){
-
-        const answers =
-
-            state.answers[
-
-                state.pillarIndex
-
-            ];
-
-
-
-        state.pillarScores[
-
-            state.pillarIndex
-
-        ] =
-
-            CTM.assessmentScoring
-
-            .calculatePillarScore(
-
-                answers
-
-            );
-
-
-
-        if(
-
-            state.pillarIndex
-
-            <
-
-            CTM.assessment.totalPillars - 1
-
-        ){
-
-            state.pillarIndex++;
-
-            state.questionIndex = 0;
-
-            renderCurrentQuestion();
-
-            CTM.assessmentUI.scrollTop();
-
-            saveProgress();
-
-            return;
-
-        }
-
-
-
-        finishAssessment();
-
-    }
-
-
-
-    /*=========================================================================
-        SAVE PROGRESS
-    =========================================================================*/
-
-    function saveProgress(){
-
-        CTM.storage.saveAssessment({
-
-            pillarIndex :
-
-                state.pillarIndex,
-
-
-
-            questionIndex :
-
-                state.questionIndex,
-
-
-
-            answers :
-
-                state.answers,
-
-
-
-            pillarScores :
-
-                state.pillarScores
-
-        });
-
-    }
-
-
-
-    /*=========================================================================
-        BIND EVENTS
-    =========================================================================*/
-
-    function bindEvents(){
-
-        const ui =
-
-            CTM.assessmentUI
-
-            .getElements();
-
-
-
-        ui.previousButton
-
-            .addEventListener(
-
-                'click',
-
-                previousQuestion
-
-            );
-
-
-
-        ui.nextButton
-
-            .addEventListener(
-
-                'click',
-
-                nextQuestion
-
-            );
-
-
-
-        ui.saveButton
-
-            .addEventListener(
-
-                'click',
-
-                finishCurrentPillar
-
-            );
-
-    }
-
-    /*=========================================================================
-        FINISH ASSESSMENT
-    =========================================================================*/
-
-    function finishAssessment(){
-
-        const summary =
-
-            CTM.assessmentScoring.calculateSummary(
-
-                state.pillarScores
-
-            );
-
-
-
-        const result = {
-
-            completed : true,
-
-
-
-            completedOn :
-
-                new Date().toISOString(),
-
-
-
-            visitor :
-
-                state.visitor,
-
-
-
-            answers :
-
-                state.answers,
-
-
-
-            pillarScores :
-
-                state.pillarScores,
-
-
-
-            summary :
-
-                summary
-
-        };
-
-
-
-        CTM.storage.saveAssessmentResult(
-
-            result
-
-        );
-
-
-
-        CTM.router.go(
-
-            'lifewheel'
-
-        );
-
-    }
-
-
-
-    /*=========================================================================
-        GET CURRENT STATE
-    =========================================================================*/
-
-    function getState(){
-
-        return{
-
-            pillarIndex :
-
-                state.pillarIndex,
-
-
-
-            questionIndex :
-
-                state.questionIndex,
-
-
-
-            answers :
-
-                state.answers,
-
-
-
-            pillarScores :
-
-                state.pillarScores,
-
-
-
-            visitor :
-
-                state.visitor
-
-        };
-
-    }
-
-
-
-    /*=========================================================================
-        RESET ENGINE
-    =========================================================================*/
-
-    function reset(){
-
-        state.pillarIndex = 0;
-
-        state.questionIndex = 0;
-
-
-
-        initializeAnswers();
-
-
-
-        CTM.assessmentUI.reset();
-
-    }
-
-
-
-    /*=========================================================================
-        DESTROY
-    =========================================================================*/
-
-    function destroy(){
+    function initialize(){
 
         reset();
 
@@ -720,68 +172,115 @@ CTM.assessmentEngine = (function(){
 
 
 
-    /*=========================================================================
-        PUBLIC API
-    =========================================================================*/
+    /* ======================================================================
+       RESET
+       ====================================================================== */
 
-    return{
+    function reset(){
 
-        init,
+        state.currentPillar = 1;
 
+        state.responses = {};
 
+        state.pillarScores.fill(0);
 
-        destroy,
-
-
-
-        reset,
-
-
-
-        getState,
-
-
-
-        getCurrentPillar,
-
-
-
-        getCurrentQuestion,
-
-
-
-        nextQuestion,
-
-
-
-        previousQuestion
-
-    };
-
-
-
-})();
-
-/*=============================================================================
-
-    AUTO INITIALIZE
-
-=============================================================================*/
-
-document.addEventListener(
-
-    'DOMContentLoaded',
-
-    function(){
-
-        CTM.assessmentEngine.init();
+        state.overallScore = 0;
 
     }
 
-);
 
-/*=============================================================================
 
-    END OF FILE
+    /* ======================================================================
+       GET CURRENT PILLAR
+       ====================================================================== */
 
-=============================================================================*/
+    function getCurrentPillar(){
+
+        return state.currentPillar;
+
+    }
+
+
+
+    /* ======================================================================
+       SET CURRENT PILLAR
+       ====================================================================== */
+
+    function setCurrentPillar(index){
+
+        state.currentPillar =
+
+            Math.max(
+
+                1,
+
+                Math.min(
+
+                    TOTAL_PILLARS,
+
+                    index
+
+                )
+
+            );
+
+    }
+
+
+
+    /* ======================================================================
+       SAVE RESPONSE
+
+       response format
+
+       {
+
+           q1 : 8,
+
+           q2 : 7,
+
+           q3 : 9
+
+       }
+
+       ====================================================================== */
+
+    function saveResponses(
+
+        pillar,
+
+        response
+
+    ){
+
+        state.responses[pillar] = {
+
+            q1 :
+
+                normalize(response.q1),
+
+            q2 :
+
+                normalize(response.q2),
+
+            q3 :
+
+                normalize(response.q3)
+
+        };
+
+
+
+        calculatePillarScore(
+
+            pillar
+
+        );
+
+
+
+        calculateOverallScore();
+
+    }
+
+                               
