@@ -4,10 +4,12 @@
    KALA CHAKRA™ v3.0
 
    File        : js/assessmentCommon.js
-   Version     : 1.0
-   Status      : LOCKED
+   Version     : 1.1
+
+   Status      : 🔒 PRODUCTION FIX
 
    ==========================================================================
+
    PURPOSE
 
    Shared Utility Library™
@@ -19,6 +21,7 @@
    ✓ Formatting
    ✓ Animation
    ✓ Scroll Helpers
+   ✓ Component Loading
 
    Does NOT
 
@@ -28,15 +31,22 @@
 
    ========================================================================== */
 
+
 "use strict";
+
 
 window.CTM = window.CTM || {};
 
-CTM.Common = (function () {
+
+
+CTM.Common = (function(){
+
+
 
     /* ==============================================================
        DOM
        ============================================================== */
+
 
     function $(selector){
 
@@ -44,11 +54,15 @@ CTM.Common = (function () {
 
     }
 
+
+
     function $all(selector){
 
         return document.querySelectorAll(selector);
 
     }
+
+
 
     function exists(selector){
 
@@ -56,15 +70,22 @@ CTM.Common = (function () {
 
     }
 
+
+
+
     /* ==============================================================
        PUBLIC API
        ============================================================== */
 
+
     return {
+
+
 
         /* ----------------------------------------------------------
            Query
            ---------------------------------------------------------- */
+
 
         query : function(selector){
 
@@ -72,11 +93,15 @@ CTM.Common = (function () {
 
         },
 
+
+
         queryAll : function(selector){
 
             return $all(selector);
 
         },
+
+
 
         exists : function(selector){
 
@@ -84,11 +109,15 @@ CTM.Common = (function () {
 
         },
 
+
+
         /* ----------------------------------------------------------
            Text
            ---------------------------------------------------------- */
 
+
         text : function(selector,value){
+
 
             if(!exists(selector)){
 
@@ -96,15 +125,21 @@ CTM.Common = (function () {
 
             }
 
+
             $(selector).textContent = value;
 
+
         },
+
+
 
         /* ----------------------------------------------------------
            HTML
            ---------------------------------------------------------- */
 
+
         html : function(selector,value){
+
 
             if(!exists(selector)){
 
@@ -112,23 +147,21 @@ CTM.Common = (function () {
 
             }
 
+
             $(selector).innerHTML = value;
 
+
         },
+
+
 
         /* ----------------------------------------------------------
            Style
            ---------------------------------------------------------- */
 
-        style : function(
 
-            selector,
+        style : function(selector,property,value){
 
-            property,
-
-            value
-
-        ){
 
             if(!exists(selector)){
 
@@ -136,21 +169,21 @@ CTM.Common = (function () {
 
             }
 
+
             $(selector).style[property] = value;
 
+
         },
+
+
 
         /* ----------------------------------------------------------
            Add Class
            ---------------------------------------------------------- */
 
-        addClass : function(
 
-            selector,
+        addClass : function(selector,className){
 
-            className
-
-        ){
 
             if(!exists(selector)){
 
@@ -158,25 +191,21 @@ CTM.Common = (function () {
 
             }
 
-            $(selector).classList.add(
 
-                className
+            $(selector).classList.add(className);
 
-            );
 
         },
+
+
 
         /* ----------------------------------------------------------
            Remove Class
            ---------------------------------------------------------- */
 
-        removeClass : function(
 
-            selector,
+        removeClass : function(selector,className){
 
-            className
-
-        ){
 
             if(!exists(selector)){
 
@@ -184,25 +213,21 @@ CTM.Common = (function () {
 
             }
 
-            $(selector).classList.remove(
 
-                className
+            $(selector).classList.remove(className);
 
-            );
 
         },
+
+
 
         /* ----------------------------------------------------------
            Toggle Class
            ---------------------------------------------------------- */
 
-        toggleClass : function(
 
-            selector,
+        toggleClass : function(selector,className){
 
-            className
-
-        ){
 
             if(!exists(selector)){
 
@@ -210,37 +235,42 @@ CTM.Common = (function () {
 
             }
 
-            $(selector).classList.toggle(
 
-                className
+            $(selector).classList.toggle(className);
 
-            );
-
-        }
-
-               /* ----------------------------------------------------------
-           Scroll To Top
-           ---------------------------------------------------------- */
-
-        scrollTop : function(){
-
-            window.scrollTo({
-
-                top : 0,
-
-                behavior : "smooth"
-
-            });
 
         },
 
 
 
         /* ----------------------------------------------------------
+           Scroll To Top
+           ---------------------------------------------------------- */
+
+
+        scrollTop : function(){
+
+
+            window.scrollTo({
+
+                top:0,
+
+                behavior:"smooth"
+
+            });
+
+
+        },
+
+
+
+               /* ----------------------------------------------------------
            Scroll Into View
            ---------------------------------------------------------- */
 
+
         scrollIntoView : function(selector){
+
 
             if(!exists(selector)){
 
@@ -248,13 +278,19 @@ CTM.Common = (function () {
 
             }
 
+
+
             $(selector).scrollIntoView({
 
-                behavior : "smooth",
 
-                block : "start"
+                behavior:"smooth",
+
+
+                block:"start"
+
 
             });
+
 
         },
 
@@ -264,7 +300,9 @@ CTM.Common = (function () {
            Fade In
            ---------------------------------------------------------- */
 
+
         fadeIn : function(selector){
+
 
             if(!exists(selector)){
 
@@ -272,21 +310,33 @@ CTM.Common = (function () {
 
             }
 
+
+
             const element = $(selector);
+
+
 
             element.style.opacity = "0";
 
+
             element.style.display = "";
 
+
+
             requestAnimationFrame(function(){
+
 
                 element.style.transition =
 
                     "opacity .30s ease";
 
+
+
                 element.style.opacity = "1";
 
+
             });
+
 
         },
 
@@ -296,7 +346,9 @@ CTM.Common = (function () {
            Fade Out
            ---------------------------------------------------------- */
 
+
         fadeOut : function(selector){
+
 
             if(!exists(selector)){
 
@@ -304,19 +356,31 @@ CTM.Common = (function () {
 
             }
 
+
+
             const element = $(selector);
+
+
 
             element.style.transition =
 
                 "opacity .30s ease";
 
+
+
             element.style.opacity = "0";
+
+
 
             setTimeout(function(){
 
+
                 element.style.display = "none";
 
+
             },300);
+
+
 
         },
 
@@ -326,7 +390,9 @@ CTM.Common = (function () {
            Save Local
            ---------------------------------------------------------- */
 
+
         saveLocal : function(key,value){
+
 
             localStorage.setItem(
 
@@ -336,6 +402,7 @@ CTM.Common = (function () {
 
             );
 
+
         },
 
 
@@ -344,11 +411,15 @@ CTM.Common = (function () {
            Load Local
            ---------------------------------------------------------- */
 
+
         loadLocal : function(key){
+
 
             const value =
 
                 localStorage.getItem(key);
+
+
 
             if(!value){
 
@@ -356,7 +427,10 @@ CTM.Common = (function () {
 
             }
 
+
+
             return JSON.parse(value);
+
 
         },
 
@@ -366,9 +440,12 @@ CTM.Common = (function () {
            Remove Local
            ---------------------------------------------------------- */
 
+
         removeLocal : function(key){
 
+
             localStorage.removeItem(key);
+
 
         },
 
@@ -378,9 +455,12 @@ CTM.Common = (function () {
            Format Percentage
            ---------------------------------------------------------- */
 
+
         formatPercentage : function(value){
 
+
             return Number(value) + "%";
+
 
         },
 
@@ -390,15 +470,12 @@ CTM.Common = (function () {
            Format Score
            ---------------------------------------------------------- */
 
-        formatScore : function(
 
-            score,
+        formatScore : function(score,maximum){
 
-            maximum
-
-        ){
 
             return score + "/" + maximum;
+
 
         },
 
@@ -408,9 +485,12 @@ CTM.Common = (function () {
            Delay
            ---------------------------------------------------------- */
 
+
         delay : function(milliseconds){
 
+
             return new Promise(function(resolve){
+
 
                 setTimeout(
 
@@ -420,25 +500,35 @@ CTM.Common = (function () {
 
                 );
 
+
             });
+
 
         },
 
 
-
+       
         /* ----------------------------------------------------------
            Debounce
            ---------------------------------------------------------- */
 
+
         debounce : function(callback,wait){
+
 
             let timeout;
 
+
+
             return function(){
+
 
                 clearTimeout(timeout);
 
+
+
                 timeout = setTimeout(
+
 
                     callback.bind(
 
@@ -448,11 +538,15 @@ CTM.Common = (function () {
 
                     ),
 
+
                     wait
+
 
                 );
 
+
             };
+
 
         },
 
@@ -462,17 +556,25 @@ CTM.Common = (function () {
            Throttle
            ---------------------------------------------------------- */
 
+
         throttle : function(callback,wait){
+
 
             let waiting = false;
 
+
+
             return function(){
+
+
 
                 if(waiting){
 
                     return;
 
                 }
+
+
 
                 callback.apply(
 
@@ -482,39 +584,65 @@ CTM.Common = (function () {
 
                 );
 
+
+
                 waiting = true;
+
+
 
                 setTimeout(function(){
 
+
                     waiting = false;
+
 
                 },wait);
 
+
+
             };
+
 
         },
 
-                      /* ----------------------------------------------------------
+
+
+        /* ----------------------------------------------------------
            Load HTML Component
            ---------------------------------------------------------- */
 
+
         loadComponent : async function(options){
+
+
 
             const config = Object.assign({
 
-                target : null,
 
-                source : null,
+                target:null,
 
-                replace : true,
 
-                cache : false,
+                source:null,
 
-                callback : null
 
-            }, options);
+                replace:true,
+
+
+                cache:false,
+
+
+                callback:null
+
+
+
+            },options);
+
+
+
+
 
             if(!config.target){
+
 
                 throw new Error(
 
@@ -522,9 +650,15 @@ CTM.Common = (function () {
 
                 );
 
+
             }
 
+
+
+
+
             if(!config.source){
+
 
                 throw new Error(
 
@@ -532,7 +666,12 @@ CTM.Common = (function () {
 
                 );
 
+
             }
+
+
+
+
 
             const container =
 
@@ -542,7 +681,12 @@ CTM.Common = (function () {
 
                 );
 
+
+
+
+
             if(!container){
+
 
                 throw new Error(
 
@@ -552,7 +696,12 @@ CTM.Common = (function () {
 
                 );
 
+
             }
+
+
+
+
 
             const response =
 
@@ -562,7 +711,8 @@ CTM.Common = (function () {
 
                     {
 
-                        cache :
+
+                        cache:
 
                         config.cache
 
@@ -570,11 +720,17 @@ CTM.Common = (function () {
 
                         : "no-store"
 
+
                     }
 
                 );
 
+
+
+
+
             if(!response.ok){
+
 
                 throw new Error(
 
@@ -584,19 +740,31 @@ CTM.Common = (function () {
 
                 );
 
+
             }
+
+
+
+
 
             const html =
 
                 await response.text();
 
+
+
+
+
             if(config.replace){
 
+
                 container.innerHTML = html;
+
 
             }
 
             else{
+
 
                 container.insertAdjacentHTML(
 
@@ -606,7 +774,12 @@ CTM.Common = (function () {
 
                 );
 
+
             }
+
+
+
+
 
             if(
 
@@ -616,17 +789,27 @@ CTM.Common = (function () {
 
             ){
 
+
                 config.callback(
 
                     container
 
                 );
 
+
             }
+
+
+
+
 
             return container;
 
+
+
         },
+
+
 
 
 
@@ -634,11 +817,16 @@ CTM.Common = (function () {
            Generate UUID
            ---------------------------------------------------------- */
 
+
         uuid : function(){
+
 
             return crypto.randomUUID();
 
+
         },
+
+
 
 
 
@@ -646,11 +834,16 @@ CTM.Common = (function () {
            Timestamp
            ---------------------------------------------------------- */
 
+
         timestamp : function(){
+
 
             return new Date().toISOString();
 
+
         },
+
+
 
 
 
@@ -658,11 +851,16 @@ CTM.Common = (function () {
            Clone Object
            ---------------------------------------------------------- */
 
+
         clone : function(object){
+
 
             return structuredClone(object);
 
+
         },
+
+
 
 
 
@@ -670,21 +868,31 @@ CTM.Common = (function () {
            Freeze Object
            ---------------------------------------------------------- */
 
+
         freeze : function(object){
+
 
             return Object.freeze(object);
 
+
         }
+
+
 
     };
 
+
+
 })();
+
+
 
 
 
 /* ==========================================================================
    LOCK COMMON
    ========================================================================== */
+
 
 Object.freeze(
 
@@ -694,17 +902,20 @@ Object.freeze(
 
 
 
+
+
 /* ==========================================================================
    END OF FILE
 
    assessmentCommon.js
 
-   Version : 1.0
+   Version : 1.1
 
    Status
 
    ✓ COMPLETE
-   ✓ LOCKED
+   ✓ SYNTAX FIXED
+   ✓ COMPONENT LOADER ACTIVE
 
    ==========================================================================
 */
