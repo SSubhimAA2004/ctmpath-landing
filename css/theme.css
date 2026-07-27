@@ -1,1 +1,464 @@
 
+/*
+==============================================================================
+ CTM PATH™ Guided Journey™
+
+ File        : css/theme.css
+ Version     : 1.1
+
+ Purpose:
+ Global CTM PATH™ Premium Design Theme
+
+ Includes:
+ - Brand colours
+ - Typography tokens
+ - CTA system
+ - Global footer styling
+
+ Status:
+ 🔒 Footer Language Frozen
+
+==============================================================================
+*/
+
+
+
+/* ==========================================================================
+   CTM PATH™ BRAND TOKENS
+========================================================================== */
+
+
+:root {
+
+
+    /*
+    Premium Backgrounds
+    */
+
+    --ctm-navy:
+
+        #081C3A;
+
+
+    --ctm-charcoal:
+
+        #181A1F;
+
+
+
+    /*
+    Brand Colours
+    */
+
+
+    --ctm-teal:
+
+        #0F766E;
+
+
+
+    --ctm-teal-light:
+
+        #14B8A6;
+
+
+
+    --ctm-gold:
+
+        #C8A96A;
+
+
+
+    --ctm-ivory:
+
+        #F5F1E8;
+
+
+
+    --ctm-muted:
+
+        rgba(245,241,232,0.72);
+
+
+
+    --ctm-border:
+
+        rgba(200,169,106,0.35);
+
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   GLOBAL CTA SYSTEM
+========================================================================== */
+
+
+.ctm-button,
+
+
+.welcome-button,
+
+
+.registration-button {
+
+
+    background:
+
+        var(--ctm-teal);
+
+
+    color:
+
+        #FFFFFF;
+
+
+    border:
+
+        none;
+
+
+    transition:
+
+        all .3s ease;
+
+
+}
+
+
+
+
+
+.ctm-button:hover,
+
+
+.welcome-button:hover,
+
+
+.registration-button:hover {
+
+
+    background:
+
+        var(--ctm-teal-light);
+
+
+    transform:
+
+        translateY(-3px);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   GLOBAL PREMIUM FOOTER
+========================================================================== */
+
+
+
+.ctm-footer {
+
+
+    width:
+
+        100%;
+
+
+    margin-top:
+
+        80px;
+
+
+    padding:
+
+        35px 20px;
+
+
+    text-align:
+
+        center;
+
+
+    color:
+
+        var(--ctm-ivory);
+
+
+    background:
+
+        rgba(0,0,0,0.15);
+
+
+
+}
+
+
+
+
+
+
+
+.footer-divider {
+
+
+    color:
+
+        var(--ctm-gold);
+
+
+    opacity:
+
+        .65;
+
+
+    font-size:
+
+        13px;
+
+
+    letter-spacing:
+
+        2px;
+
+
+}
+
+
+
+
+
+
+
+.footer-content {
+
+
+    max-width:
+
+        700px;
+
+
+    margin:
+
+        25px auto;
+
+
+}
+
+
+
+
+
+
+
+.footer-brand {
+
+
+    margin-bottom:
+
+        22px;
+
+
+}
+
+
+
+
+
+
+
+.footer-copyright {
+
+
+    font-size:
+
+        18px;
+
+
+    font-weight:
+
+        600;
+
+
+}
+
+
+
+
+
+
+
+.footer-system {
+
+
+    font-size:
+
+        16px;
+
+
+    color:
+
+        var(--ctm-gold);
+
+
+    margin-top:
+
+        8px;
+
+
+}
+
+
+
+
+
+
+
+.footer-message {
+
+
+    font-size:
+
+        18px;
+
+
+    margin:
+
+        25px 0;
+
+
+    letter-spacing:
+
+        .5px;
+
+
+}
+
+
+
+
+
+
+
+.footer-founder {
+
+
+    margin:
+
+        25px 0;
+
+
+    line-height:
+
+        1.7;
+
+
+}
+
+
+
+
+
+
+
+.founder-name {
+
+
+    color:
+
+        var(--ctm-teal-light);
+
+
+    font-size:
+
+        18px;
+
+
+    font-weight:
+
+        600;
+
+
+}
+
+
+
+
+
+
+
+.footer-contact {
+
+
+    margin-top:
+
+        25px;
+
+
+    line-height:
+
+        1.8;
+
+
+    color:
+
+        var(--ctm-muted);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   MOBILE FOOTER
+========================================================================== */
+
+
+@media(max-width:768px){
+
+
+
+    .ctm-footer {
+
+
+        padding:
+
+            30px 15px;
+
+
+    }
+
+
+
+
+    .footer-system,
+
+
+    .footer-message {
+
+
+        font-size:
+
+            15px;
+
+
+    }
+
+
+
+}
+
