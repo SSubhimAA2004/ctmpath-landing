@@ -1,355 +1,486 @@
 
 <!-- ==========================================================================
-     CTM PATH™ Guided Journey™
+     CTM PATH™
+     KALA CHAKRA™ v3.0
 
-     File        : components/kaalachakra-dashboard.html
+     Component   : kaalachakra-dashboard.html
      Version     : 2.0
-     Status      : 🔒 LOCKED
 
-     Architecture
-     --------------------------------------------------------------------------
-     HTML Partial (MPA)
+     Status      : PREMIUM EXPERIENCE LAYER
 
-     Purpose
-     --------------------------------------------------------------------------
-     CTM PATH™ 360™
-     Kala Chakra™ Dashboard
 
-     Responsibilities
+     PURPOSE
 
-     ✓ Display Overall Life Alignment™ Score
-     ✓ Display Interactive Kala Chakra™
-     ✓ Display Current Pillar
-     ✓ Display Current Status
-     ✓ Display Assessment Progress
-     ✓ Display Coaching Insight
+     KALA CHAKRA™ Life Alignment Dashboard™
 
-     Does NOT
+     Owns:
+
+     ✓ Wheel Presentation
+     ✓ Pillar Identity
+     ✓ Score Display
+     ✓ Progress Visualization
+     ✓ Transformation Feedback
+
+
+     Does NOT:
 
      ✗ Calculate Scores
-     ✗ Determine Status
-     ✗ Perform Business Logic
+     ✗ Store State
+     ✗ Control Assessment Logic
+
 
      ========================================================================== -->
 
 
-<section class="kaalachakra-dashboard">
+<section class="ctm-kalachakra-dashboard"
+
+         id="kaalachakraDashboard">
 
 
 
-    <!-- ==========================================================
+
+
+
+
+    <!-- ==============================================================
          HEADER
-         ========================================================== -->
+         ============================================================== -->
 
 
-    <header class="kd-header">
-
-
-        <div class="kd-brand">
-
-
-            <span class="kd-eyebrow">
-
-                CTM PATH™
-
-            </span>
+    <div class="chakra-header">
 
 
 
-            <h2 class="kd-title">
-
-                Life Alignment™ 360
-
-            </h2>
+        <div class="chakra-label">
 
 
-
-            <p class="kd-subtitle">
-
-                From Survival To Living™
-
-            </p>
+            KALA CHAKRA™
 
 
         </div>
 
 
 
-        <div class="kd-overall-score">
+        <h2 class="chakra-title">
 
 
-            <span class="kd-score-label">
+            Your Life Alignment Wheel
 
-                Overall Score
 
-            </span>
+        </h2>
 
 
 
-            <div class="kd-score-display">
+        <p class="chakra-subtitle">
 
 
-                <span
-                    class="kd-score-value"
-                    data-overall-score>
+            Discover the dimension of life you are exploring today.
 
-                    0
-
-                </span>
-
-
-
-                <span
-                    class="kd-score-total">
-
-                    /360
-
-                </span>
-
-
-            </div>
-
-
-        </div>
-
-
-    </header>
-
-
-
-
-
-    <!-- ==========================================================
-         KALA CHAKRA™
-         ========================================================== -->
-
-
-    <section class="kd-wheel-section">
-
-
-        <div
-            id="kaalachakra-container"
-
-            class="kd-wheel-container">
-
-            <!--
-                Rendered by
-
-                js/components/
-                kaalachakra-dashboard.js
-            -->
-
-        </div>
-
-
-    </section>
-
-
-
-
-
-    <!-- ==========================================================
-         SUMMARY GRID
-         ========================================================== -->
-
-
-    <section class="kd-summary-grid">
-
-
-
-        <!-- ======================================================
-             CURRENT PILLAR
-             ====================================================== -->
-
-
-        <article class="kd-card">
-
-
-            <span class="kd-card-title">
-
-                Current Pillar™
-
-            </span>
-
-
-
-            <h3
-                class="kd-pillar-name"
-
-                data-current-pillar>
-
-                PURPOSE™
-
-            </h3>
-
-
-
-            <div class="kd-pillar-score">
-
-
-                <span
-                    data-pillar-score>
-
-                    0
-
-                </span>
-
-
-                <span>
-
-                    /30
-
-                </span>
-
-
-            </div>
-
-
-        </article>
-
-
-
-
-
-        <!-- ======================================================
-             CURRENT STATUS
-             ====================================================== -->
-
-
-        <article class="kd-card">
-
-
-            <span class="kd-card-title">
-
-                Current Status™
-
-            </span>
-
-
-
-            <div
-                class="kd-status kd-status-learner"
-
-                data-status>
-
-                LEARNER™
-
-            </div>
-
-
-
-            <p
-                class="kd-status-message"
-
-                data-status-message>
-
-                Your journey has just begun.
-
-            </p>
-
-
-        </article>
-
-
-
-
-
-        <!-- ======================================================
-             PROGRESS
-             ====================================================== -->
-
-
-        <article class="kd-card">
-
-
-            <span class="kd-card-title">
-
-                Assessment Progress™
-
-            </span>
-
-
-
-            <div class="kd-progress">
-
-
-                <div class="kd-progress-track">
-
-
-                    <div
-                        class="kd-progress-fill"
-
-                        data-progress-fill>
-
-                    </div>
-
-
-                </div>
-
-
-
-                <div class="kd-progress-meta">
-
-
-                    <span>
-
-                        Progress
-
-                    </span>
-
-
-
-                    <span
-                        data-progress>
-
-                        1 / 12
-
-                    </span>
-
-
-                </div>
-
-
-            </div>
-
-
-        </article>
-
-
-    </section>
-
-
-
-
-
-    <!-- ==========================================================
-         DAILY INSIGHT
-         ========================================================== -->
-
-
-    <section class="kd-insight-card">
-
-
-        <span class="kd-card-title">
-
-            Today's Insight™
-
-        </span>
-
-
-
-        <p
-            class="kd-insight"
-
-            data-insight>
-
-            Every meaningful transformation
-            begins with one honest answer.
 
         </p>
 
 
-    </section>
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- ==============================================================
+         WHEEL AREA
+         ============================================================== -->
+
+
+    <div class="chakra-wheel-container">
+
+
+
+        <div class="chakra-wheel"
+
+             id="chakraWheel">
+
+
+
+            <div class="chakra-center">
+
+
+
+                <span class="chakra-symbol"
+
+                      id="dashboardSymbol">
+
+
+                    ◉
+
+
+                </span>
+
+
+
+                <span class="chakra-score"
+
+                      id="dashboardPercentage">
+
+
+                    --%
+
+
+                </span>
+
+
+
+                <span class="chakra-score-label">
+
+
+                    Alignment
+
+
+                </span>
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+            <!-- ======================================================
+                 12 SPOKES
+
+                 ============================================================== -->
+
+
+            <div class="wheel-spoke spoke-01"
+
+                 data-spoke="01">
+
+
+                Purpose™
+
+
+            </div>
+
+
+
+            <div class="wheel-spoke spoke-02"
+
+                 data-spoke="02">
+
+
+                Health™
+
+
+            </div>
+
+
+
+            <div class="wheel-spoke spoke-03"
+
+                 data-spoke="03">
+
+
+                Relationships™
+
+
+            </div>
+
+
+
+            <div class="wheel-spoke spoke-04"
+
+                 data-spoke="04">
+
+
+                Character™
+
+
+            </div>
+
+
+
+            <div class="wheel-spoke spoke-05"
+
+                 data-spoke="05">
+
+
+                Wealth™
+
+
+            </div>
+
+
+
+            <div class="wheel-spoke spoke-06"
+
+                 data-spoke="06">
+
+
+                Mind™
+
+
+            </div>
+
+
+
+            <div class="wheel-spoke spoke-07"
+
+                 data-spoke="07">
+
+
+                Growth™
+
+
+            </div>
+
+
+
+            <div class="wheel-spoke spoke-08"
+
+                 data-spoke="08">
+
+
+                Discipline™
+
+
+            </div>
+
+
+
+            <div class="wheel-spoke spoke-09"
+
+                 data-spoke="09">
+
+
+                Service™
+
+
+            </div>
+
+
+
+            <div class="wheel-spoke spoke-10"
+
+                 data-spoke="10">
+
+
+                Leadership™
+
+
+            </div>
+
+
+
+            <div class="wheel-spoke spoke-11"
+
+                 data-spoke="11">
+
+
+                Creativity™
+
+
+            </div>
+
+
+
+            <div class="wheel-spoke spoke-12"
+
+                 data-spoke="12">
+
+
+                Legacy™
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- ==============================================================
+         CURRENT PILLAR
+         ============================================================== -->
+
+
+    <div class="chakra-current"
+
+
+
+         id="currentPillarCard">
+
+
+
+        <div class="pillar-symbol"
+
+             id="dashboardSymbol">
+
+
+            ✦
+
+
+        </div>
+
+
+
+
+
+        <h3
+
+            id="dashboardTamil">
+
+
+            --
+
+
+        </h3>
+
+
+
+
+
+        <p
+
+            id="dashboardEnglish">
+
+
+            --
+
+
+        </p>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- ==============================================================
+         SCORE PANEL
+         ============================================================== -->
+
+
+    <div class="chakra-score-panel">
+
+
+
+        <div class="chakra-score-item">
+
+
+
+            <span>
+
+
+                Current Score
+
+
+            </span>
+
+
+
+            <strong
+
+                id="dashboardRawScore">
+
+
+                -- / 30
+
+
+            </strong>
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <div class="chakra-score-item">
+
+
+
+            <span>
+
+
+                Current State
+
+
+            </span>
+
+
+
+            <strong
+
+                id="dashboardLevel">
+
+
+                --
+
+
+            </strong>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- ==============================================================
+         READY MARKER
+         ============================================================== -->
+
+
+    <div
+
+        id="chakraDashboardReady"
+
+        data-component="kaalachakra-dashboard"
+
+        data-version="2.0"
+
+        hidden>
+
+
+    </div>
 
 
 
@@ -358,13 +489,484 @@
 
 
 <!-- ==========================================================================
+     END COMPONENT
 
-   END OF FILE
+     kaalachakra-dashboard.html
 
-   File        : components/kaalachakra-dashboard.html
-   Version     : 2.0
-   Status      : 🔒 LOCKED
+     Version : 2.0
 
-   ========================================================================== -->
+     Status
 
-   
+     ✓ PREMIUM WHEEL READY
+     ✓ 12 SPOKE SYSTEM READY
+     ✓ DASHBOARD API COMPATIBLE
+     ✓ THEME READY
+
+     ========================================================================== -->
+
+     <!-- ==========================================================================
+     KALA CHAKRA™ INTERACTION LAYER
+
+     Controlled by:
+
+     js/assessmentUI.js
+     js/dashboard.js
+
+
+     ========================================================================== -->
+
+
+<script>
+
+
+(function(){
+
+
+
+    const dashboard =
+
+        document.querySelector(
+
+            "#kaalachakraDashboard"
+
+        );
+
+
+
+
+
+    if(!dashboard){
+
+        return;
+
+    }
+
+
+
+
+
+    const wheel =
+
+        dashboard.querySelector(
+
+            "#chakraWheel"
+
+        );
+
+
+
+
+
+    if(wheel){
+
+
+
+        wheel.classList.add(
+
+            "chakra-wheel-ready"
+
+        );
+
+
+
+    }
+
+
+
+
+
+
+
+    /*
+       Theme Synchronization
+
+       Uses CSS variables only.
+
+    */
+
+
+    function syncTheme(){
+
+
+
+        const root =
+
+            document.documentElement;
+
+
+
+
+
+
+
+        const accent =
+
+            getComputedStyle(root)
+
+            .getPropertyValue(
+
+                "--pillar-primary"
+
+            );
+
+
+
+
+
+
+
+        if(accent){
+
+
+
+            dashboard.style.setProperty(
+
+                "--chakra-accent",
+
+                accent.trim()
+
+            );
+
+
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+    syncTheme();
+
+
+
+
+
+
+
+
+
+    /*
+       Spoke Interaction
+
+    */
+
+
+    const spokes =
+
+        dashboard.querySelectorAll(
+
+            ".wheel-spoke"
+
+        );
+
+
+
+
+
+
+
+    spokes.forEach(function(spoke){
+
+
+
+        spoke.addEventListener(
+
+            "click",
+
+            function(){
+
+
+
+                spokes.forEach(
+
+                    function(item){
+
+
+
+                        item.classList.remove(
+
+                            "active"
+
+                        );
+
+
+
+                    }
+
+                );
+
+
+
+
+
+
+
+                this.classList.add(
+
+                    "active"
+
+                );
+
+
+
+            }
+
+        );
+
+
+
+    });
+
+
+
+
+
+
+
+
+
+    /*
+       Dashboard Update Event
+
+       Future compatible.
+
+    */
+
+
+    document.addEventListener(
+
+        "ctmDashboardUpdated",
+
+        function(){
+
+
+
+            dashboard.classList.remove(
+
+                "dashboard-refresh"
+
+            );
+
+
+
+
+
+
+
+            void dashboard.offsetWidth;
+
+
+
+
+
+
+
+            dashboard.classList.add(
+
+                "dashboard-refresh"
+
+            );
+
+
+
+        }
+
+    );
+
+
+
+
+
+
+
+
+
+})();
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+<!-- ==========================================================================
+     PREMIUM DASHBOARD MESSAGE
+
+     ========================================================================== -->
+
+
+<div class="chakra-reflection"
+
+     aria-live="polite">
+
+
+
+    <p>
+
+
+        Your life is a wheel of interconnected dimensions.
+
+
+    </p>
+
+
+
+    <p>
+
+
+        Growth in one area creates harmony across the whole.
+
+
+    </p>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ==========================================================================
+     DASHBOARD ACCESSIBILITY REGION
+
+     ========================================================================== -->
+
+
+<div
+
+    class="chakra-live-region"
+
+    aria-live="polite"
+
+    aria-atomic="true">
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ==========================================================================
+     INTERACTION READY MARKER
+
+     ========================================================================== -->
+
+
+<div
+
+    id="chakraDashboardInteractionReady"
+
+    data-component="kaalachakra-dashboard-interaction"
+
+    data-version="2.0"
+
+    hidden>
+
+
+</div>
+
+
+<!-- ==========================================================================
+     NO SCRIPT FALLBACK
+
+     ========================================================================== -->
+
+
+<noscript>
+
+
+    <div class="chakra-noscript-message">
+
+
+        CTM PATH™ KALA CHAKRA™ dashboard
+
+        requires JavaScript enabled
+
+        for the guided experience.
+
+
+    </div>
+
+
+</noscript>
+
+
+
+
+
+
+
+
+
+<!-- ==========================================================================
+     FINAL DASHBOARD READY MARKER
+
+     ========================================================================== -->
+
+
+<div
+
+    id="chakraDashboardReadyFinal"
+
+    data-component="kaalachakra-dashboard"
+
+    data-version="2.0"
+
+    data-status="ready"
+
+    hidden>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ==========================================================================
+     END COMPONENT
+
+     kaalachakra-dashboard.html
+
+     Version : 2.0
+
+
+     Status
+
+     ✓ PREMIUM WHEEL READY
+     ✓ 12 SPOKE SYSTEM READY
+     ✓ INTERACTION READY
+     ✓ THEME READY
+     ✓ ACCESSIBILITY READY
+     ✓ DASHBOARD INTEGRATION READY
+
+
+     ========================================================================== -->
+
+     
