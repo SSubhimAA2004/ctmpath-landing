@@ -4,21 +4,21 @@
  CTM PATH™ Guided Journey™
 
  File        : js/app.js
- Version     : 1.0
+ Version     : 1.1
 
  Purpose:
- Global application controller.
+ Global application controller and page loader.
 
  Responsibilities:
  - Initialize application
- - Confirm runtime readiness
- - Manage global startup events
+ - Load first journey page
+ - Inject page HTML
+ - Load page-specific JavaScript
 
  Rules:
- - No page-specific business logic
- - No backend calls
+ - No business logic
  - No assessment logic
- - No duplicate controllers
+ - No backend communication
 
 ==============================================================================
 */
@@ -33,7 +33,7 @@
 
     /*
     ==========================================================================
-       APPLICATION OBJECT
+       APPLICATION CONFIGURATION
     ==========================================================================
     */
 
@@ -41,10 +41,9 @@
     const CTM_APP = {
 
 
-
         version:
 
-            "1.0",
+            "1.1",
 
 
 
@@ -54,11 +53,24 @@
 
 
 
+        currentPage:
+
+            null,
+
+
+
+
+
+        /*
+        ----------------------------------------------------------------------
+            INITIALIZE APPLICATION
+        ----------------------------------------------------------------------
+        */
 
 
         init:
 
-            function(){
+            async function(){
 
 
                 console.log(
@@ -69,7 +81,11 @@
 
 
 
-                this.bindGlobalEvents();
+                await this.loadPage(
+
+                    "pages/welcome.html"
+
+                );
 
 
 
@@ -81,24 +97,307 @@
 
 
 
-        bindGlobalEvents:
+        /*
+        ----------------------------------------------------------------------
+            LOAD PAGE
+        ----------------------------------------------------------------------
+        */
 
-            function(){
+
+        loadPage:
+
+            async function(pagePath){
 
 
-                /*
-                Future global events:
 
-                - language switch
-                - accessibility controls
-                - journey progress
-                - global notifications
+                const container =
 
-                */
+                    document.getElementById(
+
+                        "pageContainer"
+
+                    );
+
+
+
+
+
+                if(!container){
+
+
+                    console.error(
+
+                        "CTM PATH™: Page container missing."
+
+                    );
+
+
+                    return;
+
+
+                }
+
+
+
+
+
+
+
+                try {
+
+
+
+                    const response =
+
+                        await fetch(
+
+                            pagePath
+
+                        );
+
+
+
+
+
+                    if(!response.ok){
+
+
+                        throw new Error(
+
+                            "Unable to load page: " +
+
+                            pagePath
+
+                        );
+
+
+                    }
+
+
+
+
+
+
+
+                    const html =
+
+                        await response.text();
+
+
+
+
+
+
+
+                    container.innerHTML = html;
+
+
+
+
+
+                    this.currentPage = pagePath;
+
+
+
+
+
+                    this.initializePageScripts(
+
+                        pagePath
+
+                    );
+
+
+
+
+
+                }
+
+
+
+                catch(error){
+
+
+
+                    console.error(
+
+                        "CTM PATH™ Page Loading Error:",
+
+                        error
+
+                    );
+
+
+
+                    container.innerHTML =
+
+
+                        `
+
+                        <div class="error-message">
+
+                            Unable to load journey page.
+
+                        </div>
+
+                        `;
+
+
+
+                }
+
+
+
+
+            },
+
+
+
+
+
+
+
+
+
+        /*
+        ----------------------------------------------------------------------
+            LOAD PAGE CONTROLLER
+        ----------------------------------------------------------------------
+        */
+
+
+        initializePageScripts:
+
+            function(pagePath){
+
+
+
+                if(
+
+                    pagePath.includes(
+
+                        "welcome.html"
+
+                    )
+
+                ){
+
+
+                    this.loadScript(
+
+                        "js/welcome.js"
+
+                    );
+
+
+                }
+
+
+
+
+
+
+
+                if(
+
+                    pagePath.includes(
+
+                        "registration.html"
+
+                    )
+
+                ){
+
+
+                    this.loadScript(
+
+                        "js/registration.js"
+
+                    );
+
+
+                }
+
+
+
+            },
+
+
+
+
+
+
+
+
+
+        /*
+        ----------------------------------------------------------------------
+            DYNAMIC SCRIPT LOADER
+        ----------------------------------------------------------------------
+        */
+
+
+        loadScript:
+
+            function(src){
+
+
+
+                const existing =
+
+                    document.querySelector(
+
+                        `script[src="${src}"]`
+
+                    );
+
+
+
+
+
+                if(existing){
+
+
+                    return;
+
+
+                }
+
+
+
+
+
+
+
+                const script =
+
+                    document.createElement(
+
+                        "script"
+
+                    );
+
+
+
+
+
+                script.src = src;
+
+
+
+                script.defer = true;
+
+
+
+                document.body.appendChild(
+
+                    script
+
+                );
+
 
 
             }
-
 
 
 
@@ -113,9 +412,10 @@
 
 
 
+
     /*
     ==========================================================================
-       EXPOSE APPLICATION
+       GLOBAL ACCESS
     ==========================================================================
     */
 
