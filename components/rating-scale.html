@@ -418,3 +418,376 @@
      ========================================================================== -->
 
      
+<!-- ==========================================================================
+     INTERACTION HOOKS
+
+     CTM PATH™ Rating Scale Interaction Layer™
+
+     Controlled by:
+
+     js/assessmentUI.js
+
+
+     ========================================================================== -->
+
+
+<script>
+
+
+(function(){
+
+
+
+    const container =
+
+        document.querySelector(
+
+            "#ratingScale"
+
+        );
+
+
+
+    if(!container){
+
+        return;
+
+    }
+
+
+
+
+
+    const buttons =
+
+        container.querySelectorAll(
+
+            ".rating-button"
+
+        );
+
+
+
+
+
+    buttons.forEach(function(button){
+
+
+
+        button.setAttribute(
+
+            "aria-checked",
+
+            "false"
+
+        );
+
+
+
+
+
+        button.addEventListener(
+
+            "click",
+
+            function(){
+
+
+
+                const value =
+
+                    this.dataset.rating;
+
+
+
+
+
+                buttons.forEach(
+
+                    function(item){
+
+
+
+                        item.classList.remove(
+
+                            "selected"
+
+                        );
+
+
+
+                        item.setAttribute(
+
+                            "aria-checked",
+
+                            "false"
+
+                        );
+
+
+
+                    }
+
+                );
+
+
+
+
+
+                this.classList.add(
+
+                    "selected"
+
+                );
+
+
+
+
+
+                this.setAttribute(
+
+                    "aria-checked",
+
+                    "true"
+
+                );
+
+
+
+
+
+                const display =
+
+                    container.querySelector(
+
+                        "#currentRatingValue"
+
+                    );
+
+
+
+
+
+                if(display){
+
+
+
+                    display.textContent =
+
+                        value;
+
+
+
+                }
+
+
+
+
+
+                container.classList.add(
+
+                    "rating-selected-animation"
+
+                );
+
+
+
+
+
+                setTimeout(
+
+                    function(){
+
+
+
+                        container.classList.remove(
+
+                            "rating-selected-animation"
+
+                        );
+
+
+
+                    },
+
+                    400
+
+                );
+
+
+
+
+
+                /*
+
+                   EVENT BRIDGE
+
+                   ----------------
+
+                   assessmentUI.js
+
+                   can listen here.
+
+                */
+
+
+
+                container.dispatchEvent(
+
+                    new CustomEvent(
+
+                        "ctmRatingSelected",
+
+                        {
+
+
+                            detail : {
+
+
+                                rating :
+
+                                    Number(value)
+
+
+
+                            },
+
+
+                            bubbles:true
+
+
+                        }
+
+                    )
+
+                );
+
+
+
+            }
+
+        );
+
+
+
+    });
+
+
+
+})();
+
+
+
+</script>
+
+<!-- ==========================================================================
+     PREMIUM MICROCOPY LAYER
+
+     Provides emotional guidance without controlling logic.
+
+     ========================================================================== -->
+
+
+<div class="rating-guidance"
+
+     aria-live="polite">
+
+
+    <p class="guidance-primary">
+
+
+        Every honest reflection creates a meaningful transformation.
+
+
+    </p>
+
+
+
+    <p class="guidance-secondary">
+
+
+        There are no right or wrong answers.
+
+        Only your present reality.
+
+
+    </p>
+
+
+
+</div>
+
+
+
+
+
+<!-- ==========================================================================
+     FALLBACK MESSAGE
+
+     Visible only when JavaScript is unavailable.
+
+     ========================================================================== -->
+
+
+<noscript>
+
+
+    <div class="rating-noscript">
+
+
+        CTM PATH™ requires JavaScript enabled
+
+        to provide your guided assessment experience.
+
+
+    </div>
+
+
+</noscript>
+
+
+
+
+
+<!-- ==========================================================================
+     COMPONENT READY MARKER
+
+     Allows assessmentUI.js to verify loading.
+
+     ========================================================================== -->
+
+
+<div
+
+    id="ratingScaleReady"
+
+    data-component="rating-scale"
+
+    data-version="2.0"
+
+    hidden>
+
+
+</div>
+
+
+
+
+
+<!-- ==========================================================================
+     END COMPONENT
+
+     rating-scale.html
+
+     Version : 2.0
+
+     Status
+
+     ✓ PREMIUM UI READY
+     ✓ EVENT BRIDGE READY
+     ✓ ACCESSIBILITY READY
+     ✓ ASSESSMENT UI COMPATIBLE
+
+     ========================================================================== -->
+
+     
