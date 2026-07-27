@@ -2,54 +2,78 @@
 /*
 ==============================================================================
  CTM PATH™ Guided Journey™
+
  File        : css/welcome.css
  Version     : 1.1
- Page        : PAGE 01 — WELCOME™
+
+ Page:
+ PAGE 01 — WELCOME™
 
  Purpose:
  Premium Welcome Screen Styling
 
- Design Language:
- - Deep premium background
- - Soft Ivory typography
- - CTM Teal highlights
- - Muted Gold accents
- - Calm transformation experience
+ Updates:
+ - CTM Teal CTA system
+ - Premium interaction states
+ - Footer compatible
+
+ Status:
+ 🔒 PAGE 01 VISUAL REFINEMENT
 
 ==============================================================================
 */
 
 
 /* ==========================================================================
-   WELCOME PAGE FOUNDATION
+   WELCOME PAGE
 ========================================================================== */
 
 
 .welcome-page {
 
-    min-height: 100vh;
 
-    position: relative;
+    min-height:
 
-    overflow: hidden;
+        100vh;
+
+
+    display:
+
+        flex;
+
+
+    justify-content:
+
+        center;
+
+
+    align-items:
+
+        center;
+
+
+    padding:
+
+        40px 20px;
+
 
     background:
+
         linear-gradient(
+
             135deg,
+
             #081C3A,
-            #101820,
+
             #181A1F
+
         );
 
-    color: #F5F1E8;
 
-    display: flex;
+    color:
 
-    justify-content: center;
+        #F5F1E8;
 
-    align-items: center;
-
-    padding: 40px 24px;
 
 }
 
@@ -57,46 +81,28 @@
 
 
 
-.welcome-background {
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        radial-gradient(
-            circle at top,
-            rgba(44,95,165,0.18),
-            transparent 45%
-        );
-
-    pointer-events: none;
-
-}
-
-
-
-
-
-
-/* ==========================================================================
-   MAIN CONTAINER
-========================================================================== */
 
 
 .welcome-container {
 
-    width: 100%;
 
-    max-width: 1100px;
+    max-width:
 
-    position: relative;
+        900px;
 
-    z-index: 2;
 
-    text-align: center;
+    width:
+
+        100%;
+
+
+    text-align:
+
+        center;
+
 
 }
+
 
 
 
@@ -104,59 +110,32 @@
 
 
 /* ==========================================================================
-   HEADER
+   BRAND HEADER
 ========================================================================== */
 
 
-.welcome-header {
-
-    margin-bottom: 45px;
-
-}
+.welcome-brand {
 
 
+    font-size:
 
-.welcome-logo {
-
-    width: 170px;
-
-    height: auto;
-
-}
+        14px;
 
 
+    letter-spacing:
+
+        5px;
 
 
+    color:
+
+        #C8A96A;
 
 
-/* ==========================================================================
-   BRAND AREA
-========================================================================== */
+    margin-bottom:
 
+        20px;
 
-.journey-label {
-
-    font-size: 14px;
-
-    letter-spacing: 4px;
-
-    text-transform: uppercase;
-
-    color: #C8A96A;
-
-    margin-bottom: 14px;
-
-}
-
-
-
-.journey-tagline {
-
-    font-size: 20px;
-
-    color: #F5F1E8;
-
-    font-weight: 500;
 
 }
 
@@ -164,225 +143,59 @@
 
 
 
-
-/* ==========================================================================
-   TITLES
-========================================================================== */
 
 
 .welcome-title {
 
-    font-size: clamp(32px, 5vw, 52px);
-
-    line-height: 1.35;
-
-    margin: 30px 0 15px;
-
-    font-weight: 700;
-
-}
-
-
-
-.welcome-main-title {
 
     font-size:
 
-        clamp(22px, 3vw, 32px);
-
-    letter-spacing: 3px;
-
-    color: #2C9C9C;
-
-    margin-bottom: 45px;
-
-}
+        clamp(38px,6vw,64px);
 
 
+    line-height:
 
+        1.2;
 
-
-
-/* ==========================================================================
-   TEXT CONTENT
-========================================================================== */
-
-
-.welcome-introduction,
-
-.reflection-section,
-
-.trust-section {
-
-    max-width: 850px;
 
     margin:
 
-        0 auto 55px;
+        20px 0;
 
-}
-
-
-
-.welcome-introduction h3,
-
-.reflection-section h3,
-
-.trust-section p {
-
-    line-height: 1.8;
-
-}
-
-
-
-.welcome-introduction h3 {
-
-    font-size: 28px;
-
-    margin-bottom: 18px;
-
-}
-
-
-
-.welcome-introduction p {
-
-    font-size: 21px;
-
-    line-height: 1.9;
-
-}
-
-
-
-
-
-
-.english {
-
-    margin-top: 12px;
-
-    opacity: 0.92;
-
-}
-
-
-
-.tamil {
-
-    font-weight: 500;
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   DISCOVERY CARDS
-========================================================================== */
-
-
-.discovery-preview {
-
-    margin:
-
-        70px auto;
-
-}
-
-
-
-.section-title {
-
-    font-size: 28px;
-
-    margin-bottom: 40px;
-
-}
-
-
-
-.discovery-card {
-
-    background:
-
-        rgba(255,255,255,0.04);
-
-    border:
-
-        1px solid rgba(200,169,106,0.35);
-
-    border-radius: 18px;
-
-    padding: 28px;
-
-    margin: 18px auto;
-
-    max-width: 600px;
-
-    transition: transform .3s ease;
-
-}
-
-
-
-.discovery-card:hover {
-
-    transform: translateY(-4px);
-
-}
-
-
-
-.discovery-card .number {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: 44px;
-
-    height: 44px;
-
-    border-radius: 50%;
-
-    border:
-
-        1px solid #C8A96A;
 
     color:
 
-        #C8A96A;
+        #F5F1E8;
 
-    margin-bottom: 15px;
 
 }
 
 
 
-.discovery-card h4 {
 
-    font-size: 22px;
 
-    margin-bottom: 10px;
+
+
+.welcome-subtitle {
+
+
+    font-size:
+
+        24px;
+
+
+    color:
+
+        #14B8A6;
+
+
+    letter-spacing:
+
+        2px;
+
 
 }
 
-
-
-.discovery-card p {
-
-    font-size: 18px;
-
-    color: #B9E4E4;
-
-}
 
 
 
@@ -390,85 +203,88 @@
 
 
 /* ==========================================================================
-   CTA
+   CTA BUTTON
 ========================================================================== */
-
-
-.welcome-cta {
-
-    margin-top: 70px;
-
-}
-
-
-
-.welcome-cta h3 {
-
-    font-size:
-
-        clamp(26px,4vw,36px);
-
-    margin-bottom: 25px;
-
-}
-
-
-
-.welcome-cta p {
-
-    font-size: 20px;
-
-    line-height: 1.8;
-
-    max-width: 800px;
-
-    margin:
-
-        0 auto 35px;
-
-}
-
-
-
 
 
 .welcome-button {
 
-    border: none;
 
-    cursor: pointer;
+    margin-top:
+
+        45px;
+
 
     padding:
 
-        18px 45px;
+        18px 50px;
 
-    border-radius: 50px;
+
+    border-radius:
+
+        50px;
+
 
     background:
 
-        #C8A96A;
+        #0F766E;
+
 
     color:
 
-        #081C3A;
+        #FFFFFF;
 
-    font-size: 20px;
 
-    font-weight: 700;
+    font-size:
+
+        20px;
+
+
+    font-weight:
+
+        700;
+
+
+    border:
+
+        none;
+
+
+    cursor:
+
+        pointer;
+
 
     transition:
 
-        all .3s ease;
+        all .35s ease;
+
+
+    box-shadow:
+
+        0 10px 30px rgba(0,0,0,.25);
+
 
 }
+
+
+
+
 
 
 
 .welcome-button:hover {
 
-    transform: translateY(-3px);
 
-    opacity: .9;
+    background:
+
+        #14B8A6;
+
+
+    transform:
+
+        translateY(-4px);
+
 
 }
 
@@ -477,34 +293,26 @@
 
 
 
-/* ==========================================================================
-   FOOTER
-========================================================================== */
+
+/*
+Journey transition state
+*/
+
+.welcome-button.journey-starting {
 
 
-.welcome-footer {
+    opacity:
 
-    margin-top: 80px;
+        .75;
 
-    padding-top: 30px;
 
-    border-top:
+    transform:
 
-        1px solid rgba(255,255,255,.15);
+        scale(.97);
 
-    color:
-
-        rgba(245,241,232,.7);
 
 }
 
-
-
-.welcome-footer p {
-
-    margin: 8px;
-
-}
 
 
 
@@ -519,63 +327,47 @@
 @media(max-width:768px){
 
 
-    .welcome-page {
-
-        padding:
-
-            30px 18px;
-
-    }
-
-
-
-    .welcome-logo {
-
-        width:
-
-            130px;
-
-    }
-
-
 
     .welcome-title {
 
-        font-size:
-
-            34px;
-
-    }
-
-
-
-    .welcome-introduction p,
-
-    .welcome-cta p {
 
         font-size:
 
-            17px;
+            38px;
+
 
     }
 
 
 
-    .discovery-card {
 
-        padding:
 
-            22px;
+    .welcome-subtitle {
+
+
+        font-size:
+
+            18px;
+
 
     }
+
+
 
 
 
     .welcome-button {
 
+
         width:
 
             100%;
+
+
+        padding:
+
+            18px;
+
 
     }
 
