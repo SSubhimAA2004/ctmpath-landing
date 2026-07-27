@@ -4,9 +4,10 @@
    KALA CHAKRA™ v3.0
 
    File        : js/assessmentUI.js
-   Version     : 1.1
+   Version     : 1.2
 
    Status      : 🔒 PRODUCTION REPAIR
+
 
    PURPOSE
 
@@ -22,6 +23,8 @@
    ✓ Render Progress
    ✓ Render Status
    ✓ Bind UI Events
+   ✓ Master Render Pipeline
+
 
    Does NOT
 
@@ -137,71 +140,97 @@ CTM.UI = (function(){
     return {
 
 
+
         /* ==============================================================
            MASTER RENDER PIPELINE
+           
+           Restored in Version 1.2
+
            ============================================================== */
 
 
         render : function(){
 
 
+
             this.renderHeader();
+
 
 
             this.renderTheme();
 
 
+
             this.renderSymbol();
+
 
 
             this.renderQuestions();
 
 
+
             this.renderRatingScale();
 
 
+
             this.renderProgress();
+
 
 
             this.renderStatus();
 
 
+
             this.renderDashboard();
+
 
 
         },
 
+
+
+
+
+
+
+
+
+        /* ==============================================================
+           INIT
+           ============================================================== */
+
+
         init : function(){
+
 
 
             this.render();
 
 
+
             this.renderRatingScale();
+
 
 
             this.renderProgress();
 
 
+
             this.bindRatingEvents();
+
 
 
             this.animateCards();
 
 
+
             this.scrollTop();
+
 
 
         },
 
-
-
-
-
-
-
-
-
+       
         /* ==============================================================
            Render Pillar Header
            ============================================================== */
@@ -218,6 +247,7 @@ CTM.UI = (function(){
 
 
 
+
             if(!state.data){
 
 
@@ -225,6 +255,7 @@ CTM.UI = (function(){
 
 
             }
+
 
 
 
@@ -240,6 +271,7 @@ CTM.UI = (function(){
 
 
 
+
             safeText(
 
                 "#pillarEnglish",
@@ -251,6 +283,7 @@ CTM.UI = (function(){
 
 
 
+
             safeText(
 
                 "#coreQuestionTamil",
@@ -258,6 +291,7 @@ CTM.UI = (function(){
                 state.data.coreQuestion.tamil
 
             );
+
 
 
 
@@ -297,6 +331,7 @@ CTM.UI = (function(){
 
 
 
+
             if(!state.data){
 
 
@@ -308,9 +343,13 @@ CTM.UI = (function(){
 
 
 
+
             const colour =
 
                 state.data.presentation.colour;
+
+
+
 
 
 
@@ -326,6 +365,9 @@ CTM.UI = (function(){
 
 
 
+
+
+
             document.documentElement.style.setProperty(
 
                 "--pillar-secondary",
@@ -337,6 +379,9 @@ CTM.UI = (function(){
 
 
 
+
+
+
             document.documentElement.style.setProperty(
 
                 "--pillar-accent",
@@ -344,6 +389,9 @@ CTM.UI = (function(){
                 colour.accent
 
             );
+
+
+
 
 
 
@@ -383,6 +431,7 @@ CTM.UI = (function(){
 
 
 
+
             if(!state.data){
 
 
@@ -390,6 +439,7 @@ CTM.UI = (function(){
 
 
             }
+
 
 
 
@@ -405,7 +455,14 @@ CTM.UI = (function(){
 
         },
 
-       
+
+
+
+
+
+
+
+
         /* ==============================================================
            Render Questions
            ============================================================== */
@@ -422,6 +479,7 @@ CTM.UI = (function(){
 
 
 
+
             if(!state.data){
 
 
@@ -433,9 +491,11 @@ CTM.UI = (function(){
 
 
 
+
             const container =
 
                 $("#questionContainer");
+
 
 
 
@@ -451,7 +511,10 @@ CTM.UI = (function(){
 
 
 
+
             container.innerHTML = "";
+
+
 
 
 
@@ -464,6 +527,8 @@ CTM.UI = (function(){
                 const card =
 
                     document.createElement("div");
+
+
 
 
 
@@ -530,6 +595,8 @@ CTM.UI = (function(){
 
 
 
+
+
                 container.appendChild(card);
 
 
@@ -540,15 +607,7 @@ CTM.UI = (function(){
 
         },
 
-
-
-
-
-
-
-
-
-        /* ==============================================================
+               /* ==============================================================
            Render Rating Scale
            ============================================================== */
 
@@ -575,6 +634,8 @@ CTM.UI = (function(){
 
 
 
+
+
                 for(let score = 1; score <= 10; score++){
 
 
@@ -582,6 +643,8 @@ CTM.UI = (function(){
                     const button =
 
                         document.createElement("button");
+
+
 
 
 
@@ -595,9 +658,13 @@ CTM.UI = (function(){
 
 
 
+
+
                     button.className =
 
                         "rating-button";
+
+
 
 
 
@@ -611,6 +678,8 @@ CTM.UI = (function(){
 
 
 
+
+
                     button.dataset.question =
 
                         container.dataset.question;
@@ -619,9 +688,13 @@ CTM.UI = (function(){
 
 
 
+
+
                     button.textContent =
 
                         score;
+
+
 
 
 
@@ -676,6 +749,8 @@ CTM.UI = (function(){
 
 
 
+
+
             buttons.forEach(function(button){
 
 
@@ -685,6 +760,10 @@ CTM.UI = (function(){
                     "selected"
 
                 );
+
+
+
+
 
 
 
@@ -743,6 +822,8 @@ CTM.UI = (function(){
 
 
 
+
+
             if(!state){
 
 
@@ -755,9 +836,13 @@ CTM.UI = (function(){
 
 
 
+
+
             const current =
 
                 state.currentQuestion || 1;
+
+
 
 
 
@@ -775,6 +860,8 @@ CTM.UI = (function(){
 
 
 
+
+
             safeText(
 
                 "#progressTotal",
@@ -782,6 +869,8 @@ CTM.UI = (function(){
                 12
 
             );
+
+
 
 
 
@@ -809,7 +898,14 @@ CTM.UI = (function(){
 
         },
 
-       
+
+
+
+
+
+
+
+
         /* ==============================================================
            Render Status Card
            ============================================================== */
@@ -830,6 +926,8 @@ CTM.UI = (function(){
 
 
             }
+
+
 
 
 
@@ -902,16 +1000,10 @@ CTM.UI = (function(){
             );
 
 
+
         },
 
-
-
-
-
-
-
-
-
+       
         /* ==============================================================
            Render KALA CHAKRA™ Dashboard
            ============================================================== */
@@ -932,6 +1024,8 @@ CTM.UI = (function(){
 
 
             }
+
+
 
 
 
@@ -1058,25 +1152,33 @@ CTM.UI = (function(){
             this.renderHeader();
 
 
+
             this.renderTheme();
+
 
 
             this.renderSymbol();
 
 
+
             this.renderQuestions();
+
 
 
             this.renderRatingScale();
 
 
+
             this.renderProgress();
+
 
 
             this.renderStatus();
 
 
+
             this.renderDashboard();
+
 
 
         },
@@ -1098,7 +1200,11 @@ CTM.UI = (function(){
 
 
 
-            const self = this;
+            const self =
+
+                this;
+
+
 
 
 
@@ -1281,14 +1387,7 @@ CTM.UI = (function(){
 
         },
 
-
-
-
-
-
-
-
-
+       
         /* ==============================================================
            Scroll To Top
            ============================================================== */
@@ -1314,7 +1413,14 @@ CTM.UI = (function(){
 
         },
 
-       
+
+
+
+
+
+
+
+
         /* ==============================================================
            Destroy
 
@@ -1326,17 +1432,19 @@ CTM.UI = (function(){
         destroy : function(){
 
 
-            /*
-            
-            Future dynamic cleanup can be added here.
 
-            Example:
+            /*
+
+
+            Future cleanup:
 
             - remove event listeners
             - clear timers
             - release observers
 
+
             */
+
 
 
         }
@@ -1344,6 +1452,7 @@ CTM.UI = (function(){
 
 
     };
+
 
 
 })();
@@ -1381,14 +1490,14 @@ Object.freeze(
 
    assessmentUI.js
 
-   Version : 1.1
+   Version : 1.2
 
    Status
 
    ✓ SYNTAX REPAIRED
-   ✓ CTM.UI RESTORED
-   ✓ INIT AVAILABLE
-   ✓ RENDER PIPELINE ACTIVE
+   ✓ MASTER RENDER PIPELINE RESTORED
+   ✓ CTM.UI INIT ACTIVE
+   ✓ UI MODULES CONNECTED
 
    ==========================================================================
 */
