@@ -1,1 +1,304 @@
 
+<!-- ==========================================================================
+     CTM PATH™ Guided Journey™
+
+     File        : components/score-dashboard.html
+     Version     : 1.0
+     Status      : 🔒 LOCKED
+
+     Purpose
+     --------------------------------------------------------------------------
+     Premium Assessment Dashboard™
+
+     Responsibilities
+
+     ✓ Display Life Alignment™ 360
+     ✓ Display Current Pillar Score
+     ✓ Display Current Status
+     ✓ Display Assessment Progress
+     ✓ Host Kala Chakra™ Preview
+
+     Does NOT
+
+     ✗ Calculate Scores
+     ✗ Calculate Status
+     ✗ Contain Business Rules
+
+     ========================================================================== -->
+
+
+<template id="score-dashboard-template">
+
+
+<section class="assessment-dashboard">
+
+
+
+    <!-- ==========================================================
+         LIFE ALIGNMENT™ 360
+         ========================================================== -->
+
+
+    <section class="dashboard-panel dashboard-overall">
+
+
+        <span class="dashboard-label">
+
+            LIFE ALIGNMENT™ 360
+
+        </span>
+
+
+
+        <div class="dashboard-score">
+
+
+            <span
+                data-overall-score>
+
+                0
+
+            </span>
+
+            <span>
+
+                /360
+
+            </span>
+
+
+        </div>
+
+
+
+        <p
+            class="dashboard-caption">
+
+            Your Overall Life Alignment™
+
+        </p>
+
+
+    </section>
+
+
+
+
+
+    <!-- ==========================================================
+         CURRENT PILLAR
+         ========================================================== -->
+
+
+    <section class="dashboard-panel dashboard-pillar">
+
+
+        <span class="dashboard-label">
+
+            CURRENT PILLAR™
+
+        </span>
+
+
+
+        <h3
+            data-pillar-name>
+
+            PURPOSE™
+
+        </h3>
+
+
+
+        <div class="pillar-score">
+
+
+            <span
+                data-pillar-score>
+
+                0
+
+            </span>
+
+            <span>
+
+                /30
+
+            </span>
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- ==========================================================
+         STATUS
+         ========================================================== -->
+
+
+    <section
+        class="dashboard-panel dashboard-status"
+
+
+        data-status-panel>
+
+
+
+        <span class="dashboard-label">
+
+            CURRENT STATUS™
+
+        </span>
+
+
+
+        <h2
+            data-status-name>
+
+            LEARNER™
+
+        </h2>
+
+
+
+        <p
+            data-status-subtitle>
+
+            Your journey has just begun.
+
+        </p>
+
+
+
+        <div
+            class="status-badge"
+
+            data-status-badge>
+
+
+
+            Emerging
+
+
+
+        </div>
+
+
+
+    </section>
+
+
+
+
+
+    <!-- ==========================================================
+         PROGRESS
+         ========================================================== -->
+
+
+    <section class="dashboard-panel dashboard-progress">
+
+
+        <span class="dashboard-label">
+
+            PROGRESS
+
+        </span>
+
+
+
+        <div class="progress-track">
+
+
+            <div
+                class="progress-fill"
+
+                data-progress-fill>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="progress-meta">
+
+
+            <span
+                data-progress-step>
+
+                1
+
+            </span>
+
+
+            <span>
+
+                /12 Pillars
+
+            </span>
+
+
+        </div>
+
+
+
+    </section>
+
+
+
+
+
+    <!-- ==========================================================
+         KALA CHAKRA™
+         ========================================================== -->
+
+
+    <section class="dashboard-panel dashboard-wheel">
+
+
+        <span class="dashboard-label">
+
+            KALA CHAKRA™
+
+        </span>
+
+
+
+        <div
+            data-kaalachakra>
+
+            <!-- injected by kaalachakra.js -->
+
+        </div>
+
+
+
+    </section>
+
+
+
+</section>
+
+
+</template>
+
+
+
+<!-- ==========================================================================
+
+   END OF FILE
+
+   File        : score-dashboard.html
+   Version     : 1.0
+   Status      : 🔒 LOCKED
+
+   ========================================================================== -->
+
+   
