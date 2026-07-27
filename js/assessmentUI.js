@@ -137,11 +137,39 @@ CTM.UI = (function(){
     return {
 
 
-
         /* ==============================================================
-           INIT
+           MASTER RENDER PIPELINE
            ============================================================== */
 
+
+        render : function(){
+
+
+            this.renderHeader();
+
+
+            this.renderTheme();
+
+
+            this.renderSymbol();
+
+
+            this.renderQuestions();
+
+
+            this.renderRatingScale();
+
+
+            this.renderProgress();
+
+
+            this.renderStatus();
+
+
+            this.renderDashboard();
+
+
+        },
 
         init : function(){
 
