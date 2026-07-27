@@ -1,1 +1,463 @@
 
+/* ==========================================================================
+
+   CTM PATH™ Guided Journey™
+
+   File        : kaalachakra-dashboard.css
+   Version     : 1.0
+   Status      : 🔒 LOCKED
+
+   Purpose
+   --------------------------------------------------------------------------
+   CTM PATH™ 360™
+   Kala Chakra™ Dashboard
+
+   Owns
+
+   ✓ Dashboard Container
+   ✓ Score Panel
+   ✓ Status Panel
+   ✓ Progress Panel
+   ✓ Kala Chakra Container
+   ✓ Premium Layout
+
+   Does NOT
+
+   ✗ Question Cards
+   ✗ Rating Scale
+   ✗ Assessment Logic
+
+   ========================================================================== */
+
+
+
+/* ==========================================================================
+   ROOT
+   ========================================================================== */
+
+.kaalachakra-dashboard{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:32px;
+
+    padding:40px;
+
+    border-radius:32px;
+
+    background:var(--glass-bg);
+
+    border:1px solid var(--glass-border);
+
+    backdrop-filter:blur(24px);
+
+    box-shadow:
+
+        0 20px 60px rgba(0,0,0,.30);
+
+}
+
+
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+
+.kd-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:32px;
+
+}
+
+
+
+.kd-brand{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+
+
+.kd-eyebrow{
+
+    font-size:.78rem;
+
+    letter-spacing:.18em;
+
+    text-transform:uppercase;
+
+    color:var(--color-gold);
+
+}
+
+
+
+.kd-title{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    color:var(--text-primary);
+
+}
+
+
+
+.kd-subtitle{
+
+    color:var(--text-secondary);
+
+}
+
+
+
+/* ==========================================================================
+   OVERALL SCORE
+   ========================================================================== */
+
+.kd-score{
+
+    text-align:right;
+
+}
+
+
+
+.kd-score-label{
+
+    display:block;
+
+    font-size:.80rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:.16em;
+
+    color:var(--text-muted);
+
+    margin-bottom:10px;
+
+}
+
+
+
+.kd-score-value{
+
+    font-size:4rem;
+
+    font-weight:800;
+
+    line-height:1;
+
+    color:var(--color-primary);
+
+}
+
+
+
+.kd-score-total{
+
+    font-size:1.4rem;
+
+    color:var(--text-secondary);
+
+}
+
+
+
+/* ==========================================================================
+   BODY
+   ========================================================================== */
+
+.kd-body{
+
+    display:grid;
+
+    grid-template-columns:
+
+        360px 1fr;
+
+    gap:40px;
+
+}
+
+
+
+/* ==========================================================================
+   WHEEL PANEL
+   ========================================================================== */
+
+.kd-wheel-panel{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+/* ==========================================================================
+   INFORMATION PANEL
+   ========================================================================== */
+
+.kd-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+}
+
+
+
+/* ==========================================================================
+   CARD
+   ========================================================================== */
+
+.kd-card{
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    padding:24px;
+
+}
+
+
+
+.kd-card-title{
+
+    font-size:.80rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:.14em;
+
+    color:var(--text-muted);
+
+    margin-bottom:12px;
+
+}
+
+
+
+/* ==========================================================================
+   PILLAR SCORE
+   ========================================================================== */
+
+.kd-pillar-score{
+
+    font-size:2.75rem;
+
+    font-weight:700;
+
+    color:var(--color-gold);
+
+}
+
+
+
+/* ==========================================================================
+   STATUS
+   ========================================================================== */
+
+.kd-status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px 24px;
+
+    border-radius:999px;
+
+    font-weight:700;
+
+}
+
+
+
+.kd-status-learner{
+
+    color:#D64545;
+
+    border:1px solid #D64545;
+
+}
+
+
+
+.kd-status-leader{
+
+    color:#E8A23A;
+
+    border:1px solid #E8A23A;
+
+}
+
+
+
+.kd-status-legend{
+
+    color:#20B26B;
+
+    border:1px solid #20B26B;
+
+}
+
+
+
+/* ==========================================================================
+   PROGRESS
+   ========================================================================== */
+
+.kd-progress{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+}
+
+
+
+.kd-progress-track{
+
+    width:100%;
+
+    height:14px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.08);
+
+    overflow:hidden;
+
+}
+
+
+
+.kd-progress-fill{
+
+    width:0;
+
+    height:100%;
+
+    border-radius:999px;
+
+    background:linear-gradient(
+
+        90deg,
+
+        var(--color-primary),
+
+        var(--color-gold)
+
+    );
+
+    transition:
+
+        width .50s ease;
+
+}
+
+
+
+.kd-progress-meta{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    color:var(--text-secondary);
+
+}
+
+
+
+/* ==========================================================================
+   ENCOURAGEMENT
+   ========================================================================== */
+
+.kd-message{
+
+    line-height:1.9;
+
+    color:var(--text-secondary);
+
+}
+
+
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media(max-width:1200px){
+
+    .kd-body{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+
+@media(max-width:768px){
+
+    .kaalachakra-dashboard{
+
+        padding:28px;
+
+    }
+
+    .kd-header{
+
+        flex-direction:column;
+
+    }
+
+    .kd-score{
+
+        text-align:left;
+
+    }
+
+    .kd-score-value{
+
+        font-size:3rem;
+
+    }
+
+}
+
