@@ -4,8 +4,8 @@
 
      FROM SURVIVAL TO LIVING™
 
-     File        : assessment-01.html
-     Version     : 6.3
+     File        : pages/assessment-01.html
+     Version     : 6.4
 
      Status      : 🔒 PREMIUM EXPERIENCE MASTER
 
@@ -26,7 +26,9 @@
 <head>
 
 
+
 <meta charset="UTF-8">
+
 
 
 <meta
@@ -34,6 +36,7 @@
 name="viewport"
 
 content="width=device-width, initial-scale=1.0">
+
 
 
 <meta
@@ -44,11 +47,17 @@ content="#061426">
 
 
 
+
+
 <title>
 
 CTM PATH™ | Purpose™
 
 </title>
+
+
+
+
 
 
 
@@ -77,6 +86,8 @@ crossorigin>
 
 
 
+
+
 <link
 
 href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@300;400;500;600;700&display=swap"
@@ -92,8 +103,23 @@ rel="stylesheet">
 
 
 <!-- ==========================================================================
-     CSS
+     CSS LOADING ORDER
+
+     Foundation
+          ↓
+     Application
+          ↓
+     Components
+          ↓
+     Page Premium Skin
+
      ========================================================================== -->
+
+
+
+
+
+<!-- FOUNDATION -->
 
 
 <link
@@ -120,6 +146,13 @@ href="../css/base.css">
 
 
 
+
+
+
+
+<!-- APPLICATION -->
+
+
 <link
 
 rel="stylesheet"
@@ -133,6 +166,58 @@ href="../css/app.css">
 rel="stylesheet"
 
 href="../css/assessment.css">
+
+
+
+
+
+
+
+<!-- PREMIUM COMPONENTS -->
+
+
+<link
+
+rel="stylesheet"
+
+href="../css/rating-scale.css">
+
+
+
+<link
+
+rel="stylesheet"
+
+href="../css/status-card.css">
+
+
+
+<link
+
+rel="stylesheet"
+
+href="../css/kaalachakra-dashboard.css">
+
+
+
+
+
+
+
+<!-- PAGE MASTER -->
+
+
+<link
+
+rel="stylesheet"
+
+href="../css/assessment01.css">
+
+
+
+
+
+
 
 
 
@@ -150,15 +235,26 @@ href="../css/assessment.css">
 
 
 
-<div class="assessment-page">
+<div
+
+class="assessment-page">
 
 
 
-<div class="assessment-container">
+
+
+<div
+
+class="assessment-container">
 
 
 
-<main class="premium-assessment-card">
+
+
+<main
+
+class="premium-assessment-card">
+
 
 
 
@@ -178,7 +274,12 @@ href="../css/assessment.css">
      ========================================================================== -->
 
 
-<div id="header"></div>
+<div
+
+id="header">
+
+
+</div>
 
 
 
@@ -194,17 +295,25 @@ href="../css/assessment.css">
      ========================================================================== -->
 
 
-<section class="life-map">
+<section
+
+class="life-map">
 
 
 
-<div class="life-map-title">
+
+
+<div
+
+class="life-map-title">
 
 
 YOUR LIFE MAP™
 
 
 </div>
+
+
 
 
 
@@ -226,7 +335,11 @@ class="life-map-progress">
 
 
 
-<div class="life-map-subtitle">
+
+
+<div
+
+class="life-map-subtitle">
 
 
 12 Dimensions.
@@ -242,20 +355,24 @@ class="life-map-progress">
 
 
 
+
+
 </section>
 
-
-
-
-
-
-
-
-
+     
 <!-- ==========================================================================
-     KALA CHAKRA™ DASHBOARD COMPONENT
+     KALA CHAKRA™ DASHBOARD COMPONENT MOUNT
 
-     Premium Experience Layer v2.0
+     Premium Experience Layer
+
+     Loaded by:
+
+     js/assessment01.js
+
+     Component:
+
+     kaalachakra-dashboard.html
+
 
      ========================================================================== -->
 
@@ -281,11 +398,17 @@ id="kaalachakraDashboard">
      ========================================================================== -->
 
 
-<section class="opening-ritual">
+<section
+
+class="opening-ritual">
 
 
 
-<div class="ritual-label">
+
+
+<div
+
+class="ritual-label">
 
 
 YOUR JOURNEY BEGINS HERE™
@@ -297,7 +420,11 @@ YOUR JOURNEY BEGINS HERE™
 
 
 
-<p class="ritual-text-ta">
+
+
+<p
+
+class="ritual-text-ta">
 
 
 சரியான பதில்கள் தேவையில்லை.
@@ -315,7 +442,11 @@ YOUR JOURNEY BEGINS HERE™
 
 
 
-<p class="ritual-text-en">
+
+
+<p
+
+class="ritual-text-en">
 
 
 There are no right answers.
@@ -328,6 +459,8 @@ Only honest reflection.
 
 
 </p>
+
+
 
 
 
@@ -347,11 +480,17 @@ Only honest reflection.
      ========================================================================== -->
 
 
-<section class="pillar-section">
+<section
+
+class="pillar-section">
 
 
 
-<div class="spoke-number">
+
+
+<div
+
+class="spoke-number">
 
 
 SPOKE 01 OF 12
@@ -363,7 +502,11 @@ SPOKE 01 OF 12
 
 
 
-<h1 class="pillar-title-ta">
+
+
+<h1
+
+class="pillar-title-ta">
 
 
 நோக்கம்™
@@ -375,7 +518,11 @@ SPOKE 01 OF 12
 
 
 
-<h2 class="pillar-title-en">
+
+
+<h2
+
+class="pillar-title-en">
 
 
 PURPOSE™
@@ -387,7 +534,11 @@ PURPOSE™
 
 
 
-<div class="core-question-ta">
+
+
+<div
+
+class="core-question-ta">
 
 
 நான் ஏன் இங்கு இருக்கிறேன்?
@@ -399,7 +550,11 @@ PURPOSE™
 
 
 
-<div class="core-question-en">
+
+
+<div
+
+class="core-question-en">
 
 
 Why do I exist?
@@ -411,7 +566,14 @@ Why do I exist?
 
 
 
-<div class="pillar-introduction">
+
+
+<div
+
+class="pillar-introduction">
+
+
+
 
 
 <p>
@@ -422,6 +584,8 @@ Why do I exist?
 
 
 </p>
+
+
 
 
 
@@ -438,43 +602,83 @@ and meaning of your life.
 
 
 
+
+
 </div>
+
+
+
+
 
 
 
 </section>
 
-     <!-- ==========================================================================
+
+
+
+
+
+
+
+
+<!-- ==========================================================================
      INNER JOURNEY™
 
      ========================================================================== -->
 
 
-<section class="inner-journey">
+<section
+
+class="inner-journey">
 
 
 
-<div class="journey-step">
+
+
+<div
+
+class="journey-step">
 
 
 
-<div class="journey-step-number">
+
+
+<div
+
+class="journey-step-number">
+
 
 01
 
+
 </div>
 
 
 
-<div class="journey-step-title">
+
+
+
+
+<div
+
+class="journey-step-title">
+
 
 AWARENESS™
 
+
 </div>
 
 
 
-<div class="journey-step-subtitle">
+
+
+
+
+<div
+
+class="journey-step-subtitle">
 
 
 நான் என்னை அறிகிறேன்
@@ -490,6 +694,8 @@ I See Myself
 
 
 
+
+
 </div>
 
 
@@ -498,10 +704,16 @@ I See Myself
 
 
 
-<div class="journey-arrow">
+
+
+<div
+
+class="journey-arrow">
+
 
 →
 
+
 </div>
 
 
@@ -510,27 +722,51 @@ I See Myself
 
 
 
-<div class="journey-step">
+
+
+<div
+
+class="journey-step">
 
 
 
-<div class="journey-step-number">
+
+
+<div
+
+class="journey-step-number">
+
 
 02
 
+
 </div>
 
 
 
-<div class="journey-step-title">
+
+
+
+
+<div
+
+class="journey-step-title">
+
 
 ALIGNMENT™
 
+
 </div>
 
 
 
-<div class="journey-step-subtitle">
+
+
+
+
+<div
+
+class="journey-step-subtitle">
 
 
 நான் என்னை இணைக்கிறேன்
@@ -546,6 +782,8 @@ I Align Myself
 
 
 
+
+
 </div>
 
 
@@ -554,10 +792,16 @@ I Align Myself
 
 
 
-<div class="journey-arrow">
+
+
+<div
+
+class="journey-arrow">
+
 
 →
 
+
 </div>
 
 
@@ -566,27 +810,51 @@ I Align Myself
 
 
 
-<div class="journey-step">
+
+
+<div
+
+class="journey-step">
 
 
 
-<div class="journey-step-number">
+
+
+<div
+
+class="journey-step-number">
+
 
 03
 
+
 </div>
 
 
 
-<div class="journey-step-title">
+
+
+
+
+<div
+
+class="journey-step-title">
+
 
 EMBODIMENT™
 
+
 </div>
 
 
 
-<div class="journey-step-subtitle">
+
+
+
+
+<div
+
+class="journey-step-subtitle">
 
 
 நான் அதை வாழ்கிறேன்
@@ -602,26 +870,30 @@ I Become It
 
 
 
+
+
 </div>
+
+
+
+
+
+
 
 
 
 </section>
 
-
-
-
-
-
-
-
-
+     
 <!-- ==========================================================================
      PREMIUM QUESTION EXPERIENCE™
 
      Controlled by:
 
-     js/assessmentUI.js Version 2.0
+     js/assessmentUI.js
+
+     Version : 2.0
+
 
      ========================================================================== -->
 
@@ -647,8 +919,6 @@ class="question-number">
 
 
 </div>
-
-
 
 
 
@@ -716,7 +986,9 @@ and meaning of my life.
 
 
 
-<div class="rating-question-label">
+<div
+
+class="rating-question-label">
 
 
 How true is this for me?
@@ -738,7 +1010,20 @@ How true is this for me?
 
 
 
-<!-- PREMIUM RATING COMPONENT MOUNT -->
+<!-- ==========================================================================
+     PREMIUM RATING COMPONENT MOUNT
+
+     Loaded by:
+
+     js/assessment01.js
+
+
+     Component:
+
+     rating-scale.html
+
+
+     ========================================================================== -->
 
 
 <div
@@ -756,7 +1041,10 @@ id="ratingScale">
 
 
 
-<div class="rating-guide">
+<div
+
+class="rating-guide">
+
 
 
 <span>
@@ -771,6 +1059,8 @@ id="ratingScale">
 
 
 
+
+
 <span>
 
 
@@ -780,7 +1070,12 @@ id="ratingScale">
 </span>
 
 
+
 </div>
+
+
+
+
 
 
 
@@ -802,11 +1097,17 @@ id="ratingScale">
      ========================================================================== -->
 
 
-<section class="score-preview">
+<section
+
+class="score-preview">
 
 
 
-<div class="score-title">
+
+
+<div
+
+class="score-title">
 
 
 PURPOSE™ ALIGNMENT SCORE
@@ -819,6 +1120,8 @@ PURPOSE™ ALIGNMENT SCORE
 
 
 </div>
+
+
 
 
 
@@ -844,6 +1147,8 @@ class="score-value">
 
 
 
+
+
 <div
 
 id="spokePercentage"
@@ -862,7 +1167,11 @@ class="score-label">
 
 
 
-<div class="score-description">
+
+
+<div
+
+class="score-description">
 
 
 Your current Purpose™ alignment
@@ -875,6 +1184,10 @@ Your current Purpose™ alignment
 
 
 </div>
+
+
+
+
 
 
 
@@ -895,6 +1208,12 @@ Your current Purpose™ alignment
 
      js/assessment01.js
 
+
+     Component:
+
+     status-card.html
+
+
      ========================================================================== -->
 
 
@@ -912,11 +1231,17 @@ id="statusCard">
      ========================================================================== -->
 
 
-<section class="current-status-section">
+<section
+
+class="current-status-section">
 
 
 
-<div class="current-status-title">
+
+
+<div
+
+class="current-status-title">
 
 
 YOUR CURRENT STATUS™
@@ -936,6 +1261,8 @@ YOUR CURRENT STATUS™
 
 
 
+
+
 <div
 
 id="lifeEvolutionLevel"
@@ -944,6 +1271,8 @@ class="life-evolution-level">
 
 
 </div>
+
+
 
 
 
@@ -965,11 +1294,17 @@ class="life-evolution-level">
      ========================================================================== -->
 
 
-<section class="reflection-panel">
+<section
+
+class="reflection-panel">
 
 
 
-<div class="panel-heading">
+
+
+<div
+
+class="panel-heading">
 
 
 REFLECTION MOMENT™
@@ -989,7 +1324,11 @@ REFLECTION MOMENT™
 
 
 
-<p class="reflection-text-ta">
+
+
+<p
+
+class="reflection-text-ta">
 
 
 என் வாழ்க்கை நான் உண்மையாக
@@ -1004,7 +1343,11 @@ REFLECTION MOMENT™
 
 
 
-<p class="reflection-text-en">
+
+
+<p
+
+class="reflection-text-en">
 
 
 Is my life expressing the purpose
@@ -1012,6 +1355,8 @@ I truly desire?
 
 
 </p>
+
+
 
 
 
@@ -1033,11 +1378,17 @@ I truly desire?
      ========================================================================== -->
 
 
-<section class="wisdom-panel">
+<section
+
+class="wisdom-panel">
 
 
 
-<div class="panel-heading">
+
+
+<div
+
+class="panel-heading">
 
 
 WISDOM MOMENT™
@@ -1057,7 +1408,11 @@ WISDOM MOMENT™
 
 
 
-<p class="wisdom-text-ta">
+
+
+<p
+
+class="wisdom-text-ta">
 
 
 தெளிவான நோக்கம் கொண்ட வாழ்க்கை,
@@ -1072,7 +1427,11 @@ WISDOM MOMENT™
 
 
 
-<p class="wisdom-text-en">
+
+
+<p
+
+class="wisdom-text-en">
 
 
 A life guided by clear purpose
@@ -1080,6 +1439,8 @@ creates a clear path.
 
 
 </p>
+
+
 
 
 
@@ -1101,7 +1462,11 @@ creates a clear path.
      ========================================================================== -->
 
 
-<section class="assessment-navigation">
+<section
+
+class="assessment-navigation">
+
+
 
 
 
@@ -1116,6 +1481,8 @@ class="assessment-button button-secondary">
 
 
 </button>
+
+
 
 
 
@@ -1147,16 +1514,11 @@ CONTINUE JOURNEY →
 
 
 
+
+
 </section>
 
-
-
-
-
-
-
-
-
+     
 <!-- ==========================================================================
      FOOTER COMPONENT MOUNT
 
@@ -1164,10 +1526,22 @@ CONTINUE JOURNEY →
 
      js/assessment01.js
 
+
      ========================================================================== -->
 
 
-<div id="footer"></div>
+<div
+
+id="footer">
+
+
+</div>
+
+
+
+
+
+
 
 
 
@@ -1194,7 +1568,22 @@ CONTINUE JOURNEY →
 
      Correct dependency loading order
 
+
+     Foundation
+          ↓
+     Data
+          ↓
+     Engine
+          ↓
+     UI
+          ↓
+     Page Controller
+
+
      ========================================================================== -->
+
+
+
 
 
 <script src="../js/framework.js"></script>
@@ -1229,8 +1618,38 @@ CONTINUE JOURNEY →
 
 
 
+
+
 </body>
 
 
 </html>
 
+
+
+
+
+
+
+
+
+<!-- ==========================================================================
+     END OF FILE
+
+     assessment-01.html
+
+     Version : 6.4
+
+
+     Status
+
+     ✓ PREMIUM CSS PIPELINE CONNECTED
+     ✓ COMPONENT MOUNTS READY
+     ✓ UI RENDERING READY
+     ✓ ENGINE COMPATIBLE
+     ✓ PAGE STRUCTURE COMPLETE
+
+
+     ========================================================================== -->
+
+     
