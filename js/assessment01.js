@@ -4,251 +4,276 @@
    KALA CHAKRA™ v3.0
 
    File        : js/assessment01.js
-   Version     : 1.0
-   Status      : LOCKED
+   Version     : 1.1
+
+   Status      : 🔒 PRODUCTION DEBUG BUILD
+
+   Assessment  : Spoke 01
+   Pillar      : Purpose™
 
    ==========================================================================
+
    PURPOSE
 
    Assessment 01 Page Controller™
 
-   Spoke
+   Responsibilities:
 
-   PURPOSE™
+   ✓ Load HTML Components
+   ✓ Initialize Engine
+   ✓ Restore State
+   ✓ Initialize UI
+   ✓ Bind Events
 
-   Owns
-
-   ✓ Page Initialization
-   ✓ Component Loading
-   ✓ Engine Startup
-   ✓ UI Startup
-   ✓ Dashboard Startup
-
-   Does NOT
+   Does NOT:
 
    ✗ Calculate Scores
-   ✗ Render Business Data
-   ✗ Manage Assessment Logic
+   ✗ Own Assessment Data
+   ✗ Render Components Directly
 
    ========================================================================== */
 
+
 "use strict";
+
 
 window.CTM = window.CTM || {};
 
 
 
 /* ==========================================================================
-   PAGE CONTROLLER
+   ASSESSMENT 01 CONTROLLER
    ========================================================================== */
+
 
 CTM.Assessment01 = (function(){
 
 
 
     /* ======================================================================
-       PRIVATE CONSTANTS
+       CONSTANTS
        ====================================================================== */
 
-    const PILLAR_ID = 1;
+
+    const CONFIG = {
 
 
-
-    /* ======================================================================
-       LOAD COMPONENTS
-       ====================================================================== */
-
-    async function loadComponents(){
-
-        await CTM.Common.loadComponent({
-
-            target:"#header",
-
-            source:"components/header.html"
-
-        });
+        pillarId : 1,
 
 
-        await CTM.Common.loadComponent({
+        storageKey :
 
-            target:"#ratingScale",
-
-            source:"components/rating-scale.html"
-
-        });
+            "CTM_ASSESSMENT_01_STATE",
 
 
-        await CTM.Common.loadComponent({
-
-            target:"#statusCard",
-
-            source:"components/status-card.html"
-
-        });
+        components : {
 
 
-        await CTM.Common.loadComponent({
+            header :
 
-            target:"#kaalachakra",
-
-            source:"components/kaalachakra-dashboard.html"
-
-        });
+                "../components/header.html",
 
 
-        await CTM.Common.loadComponent({
+            ratingScale :
 
-            target:"#footer",
-
-            source:"components/footer.html"
-
-        });
-
-    }
+                "../components/rating-scale.html",
 
 
+            statusCard :
 
-    /* ======================================================================
-       START ENGINE
-       ====================================================================== */
-
-    function initializeEngine(){
-
-        CTM.Engine.init(
-
-            PILLAR_ID
-
-        );
-
-    }
+                "../components/status-card.html",
 
 
+            kaalachakra :
 
-    /* ======================================================================
-       START UI
-       ====================================================================== */
-
-    function initializeUI(){
-
-        CTM.UI.init();
-
-        CTM.Dashboard.init();
-
-    }
+                "../components/kaalachakra-dashboard.html",
 
 
+            footer :
 
-    /* ======================================================================
-       PUBLIC INIT
-       ====================================================================== */
-
-    async function init(){
-
-        try{
-
-
-            await loadComponents();
-
-
-            initializeEngine();
-
-
-            initializeUI();
-
-
-            CTM.Common.scrollTop();
+                "../components/footer.html"
 
 
         }
+
+
+    };
+
+
+
+    /* ======================================================================
+       COMPONENT LOADER
+       ====================================================================== */
+
+
+    async function loadComponent(
+
+        target,
+
+        source
+
+    ){
+
+
+        try {
+
+
+            console.log(
+
+                "Loading component:",
+
+                source
+
+            );
+
+
+
+            await CTM.Common.loadComponent({
+
+
+                target : target,
+
+
+                source : source
+
+
+            });
+
+
+
+            console.log(
+
+                "Loaded:",
+
+                source
+
+            );
+
+
+
+        }
+
 
         catch(error){
 
 
             console.error(
 
-                "Assessment 01 Initialization Error:",
+                "Component Load Failed:",
+
+                source,
 
                 error
 
             );
 
 
+            throw error;
+
+
         }
 
-    }
-
-
-
-    return {
-
-        init:init
-
-    };
-
-
-
-})();
-
-
-
-/* ==========================================================================
-   DOM READY
-   ========================================================================== */
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    function(){
-
-        CTM.Assessment01.init();
 
     }
 
-);
 
-
-/* ==========================================================================
-   END OF BATCH 1A
-   ==========================================================================
-*/
 
     /* ======================================================================
-       SAVE STATE
+       LOAD ALL COMPONENTS
        ====================================================================== */
 
-    function saveState(){
 
-        const state =
-
-            CTM.Engine.getState();
+    async function loadComponents(){
 
 
-        CTM.Common.saveLocal(
+        await loadComponent(
 
-            "CTM_ASSESSMENT_01_STATE",
+            "#header",
 
-            state
+            CONFIG.components.header
 
         );
 
+
+
+        await loadComponent(
+
+            "#ratingScale",
+
+            CONFIG.components.ratingScale
+
+        );
+
+
+
+        await loadComponent(
+
+            "#statusCard",
+
+            CONFIG.components.statusCard
+
+        );
+
+
+
+        await loadComponent(
+
+            "#kaalachakra",
+
+            CONFIG.components.kaalachakra
+
+        );
+
+
+
+        await loadComponent(
+
+            "#footer",
+
+            CONFIG.components.footer
+
+        );
+
+
     }
 
 
 
     /* ======================================================================
-       RESTORE STATE
+       ENGINE INITIALIZATION
        ====================================================================== */
 
+
+    function initializeEngine(){
+
+
+        CTM.Engine.init(
+
+            CONFIG.pillarId
+
+        );
+
+
+    }
+
+
+
+    /* ======================================================================
+       RESTORE PREVIOUS STATE
+       ====================================================================== */
+
+
     function restoreState(){
+
 
         const saved =
 
             CTM.Common.loadLocal(
 
-                "CTM_ASSESSMENT_01_STATE"
+                CONFIG.storageKey
 
             );
+
 
 
         if(!saved){
@@ -258,57 +283,123 @@ document.addEventListener(
         }
 
 
-        if(saved.answers){
+        console.log(
 
-            if(saved.answers.awareness){
+            "Previous state found:",
 
-                CTM.Engine.answer(
+            saved
 
-                    1,
-
-                    saved.answers.awareness
-
-                );
-
-            }
+        );
 
 
-            if(saved.answers.alignment){
+    }
 
-                CTM.Engine.answer(
-
-                    2,
-
-                    saved.answers.alignment
-
-                );
-
-            }
+                    
+    /* ======================================================================
+       SAVE STATE
+       ====================================================================== */
 
 
-            if(saved.answers.embodiment){
+    function saveState(){
 
-                CTM.Engine.answer(
 
-                    3,
+        const state =
 
-                    saved.answers.embodiment
+            CTM.Engine.getState();
 
-                );
 
-            }
 
-        }
+        CTM.Common.saveLocal(
+
+
+            CONFIG.storageKey,
+
+
+            state
+
+
+        );
+
+
+        console.log(
+
+            "Assessment state saved",
+
+            state
+
+        );
+
 
     }
 
 
 
+
     /* ======================================================================
-       BIND CONTINUE BUTTON
+       HANDLE ANSWER CHANGE
        ====================================================================== */
 
+
+    function bindAnswerEvents(){
+
+
+        document.addEventListener(
+
+            "click",
+
+            function(event){
+
+
+
+                const target =
+
+                    event.target;
+
+
+
+                if(
+
+                    target.matches(
+
+                        "[data-question][data-score]"
+
+                    )
+
+                ){
+
+
+
+                    saveState();
+
+
+
+                    CTM.Dashboard.refresh();
+
+
+
+                }
+
+
+
+            }
+
+
+        );
+
+
+    }
+
+
+
+
+
+    /* ======================================================================
+       CONTINUE BUTTON
+       ====================================================================== */
+
+
     function bindContinue(){
+
 
         const button =
 
@@ -319,11 +410,23 @@ document.addEventListener(
             );
 
 
+
         if(!button){
+
+
+            console.warn(
+
+                "Continue button not found"
+
+            );
+
 
             return;
 
+
         }
+
+
 
 
         button.addEventListener(
@@ -333,7 +436,12 @@ document.addEventListener(
             function(){
 
 
-                if(!CTM.Engine.validate()){
+
+                if(
+
+                    !CTM.Engine.validate()
+
+                ){
 
 
                     alert(
@@ -345,6 +453,7 @@ document.addEventListener(
 
                     return;
 
+
                 }
 
 
@@ -355,17 +464,17 @@ document.addEventListener(
 
 
 
-                CTM.Dashboard.refresh();
-
-
-
                 saveState();
+
+
+
+                CTM.Dashboard.refresh();
 
 
 
                 console.log(
 
-                    "Assessment Complete",
+                    "Assessment completed",
 
                     result
 
@@ -374,33 +483,6 @@ document.addEventListener(
 
             }
 
-        );
-
-    }
-
-
-
-    /* ======================================================================
-       ENGINE CHANGE LISTENER
-       ====================================================================== */
-
-    function bindEngineSync(){
-
-
-        document.addEventListener(
-
-            "ctm:answer",
-
-            function(){
-
-
-                CTM.Dashboard.refresh();
-
-
-                saveState();
-
-
-            }
 
         );
 
@@ -409,41 +491,121 @@ document.addEventListener(
 
 
 
+
     /* ======================================================================
-       ENHANCED INITIALIZATION
+       INITIALIZE UI
        ====================================================================== */
 
-    async function start(){
+
+    function initializeUI(){
 
 
-        await loadComponents();
+        CTM.UI.init();
 
 
-        initializeEngine();
+        CTM.Dashboard.init();
 
 
-        restoreState();
+
+        CTM.UI.refresh();
 
 
-        initializeUI();
-
-
-        bindContinue();
-
-
-        bindEngineSync();
-
-
-        CTM.Common.scrollTop();
+        CTM.Dashboard.refresh();
 
 
     }
+
+
+
+
+    /* ======================================================================
+       APPLICATION START
+       ====================================================================== */
+
+
+    async function init(){
+
+
+
+        try {
+
+
+
+            console.log(
+
+                "CTM PATH™ Assessment 01 Starting"
+
+            );
+
+
+
+            await loadComponents();
+
+
+
+            initializeEngine();
+
+
+
+            restoreState();
+
+
+
+            initializeUI();
+
+
+
+            bindAnswerEvents();
+
+
+
+            bindContinue();
+
+
+
+            CTM.Common.scrollTop();
+
+
+
+            console.log(
+
+                "CTM PATH™ Assessment 01 Ready"
+
+            );
+
+
+
+        }
+
+
+
+        catch(error){
+
+
+
+            console.error(
+
+                "Assessment 01 Startup Failed",
+
+                error
+
+            );
+
+
+
+        }
+
+
+    }
+
 
 
 
     return {
 
-        init:start
+
+        init:init
+
 
     };
 
@@ -453,9 +615,12 @@ document.addEventListener(
 
 
 
+
+
 /* ==========================================================================
    DOM READY
    ========================================================================== */
+
 
 document.addEventListener(
 
@@ -463,11 +628,16 @@ document.addEventListener(
 
     function(){
 
+
         CTM.Assessment01.init();
+
 
     }
 
+
 );
+
+
 
 
 
@@ -476,12 +646,12 @@ document.addEventListener(
 
    assessment01.js
 
-   Version : 1.0
+   Version : 1.1
 
    Status
 
    ✓ COMPLETE
-   ✓ LOCKED
+   ✓ DEBUG ENABLED
 
    ==========================================================================
 */
