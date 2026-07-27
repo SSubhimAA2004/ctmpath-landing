@@ -4,79 +4,625 @@
    KALA CHAKRA™ v3.0
 
    File        : js/assessmentEngine.js
-   Version     : 1.0
-   Status      : LOCKED
+   Version     : 1.1
 
-   ==========================================================================
+   Status      : 🔒 PRODUCTION FIX
+
    PURPOSE
 
-   Assessment Business Engine™
+   Assessment State Engine™
 
-   Owns
+   Owns:
 
-   ✓ Load Pillar Data
-   ✓ Engine State
-   ✓ User Responses
-   ✓ Business Logic
-   ✓ Score Calculation
-   ✓ Assessment Completion
+   ✓ Assessment lifecycle
+   ✓ Current pillar state
+   ✓ Answer storage
+   ✓ Progress tracking
+   ✓ State retrieval
 
-   Does NOT
+   Does NOT:
 
-   ✗ Read HTML
-   ✗ Manipulate DOM
    ✗ Render UI
-   ✗ Update Dashboard
+   ✗ Calculate final scores
+   ✗ Load components
+   ✗ Own question content
 
    ========================================================================== */
+
 
 "use strict";
 
-/* ==========================================================================
-   GLOBAL NAMESPACE
-   ========================================================================== */
 
 window.CTM = window.CTM || {};
 
+
+
 /* ==========================================================================
-   ASSESSMENT ENGINE
+   ENGINE NAMESPACE
    ========================================================================== */
 
-CTM.Engine = (function () {
+
+CTM.Engine = (function(){
+
+
 
     /* ======================================================================
        PRIVATE STATE
        ====================================================================== */
 
+
     let state = {
 
-        pillar : null,
 
-        data : null,
+        assessmentId : null,
 
-        answers : {
 
-            awareness : null,
+        pillarId : null,
 
-            alignment : null,
 
-            embodiment : null
+        answers : {},
 
-        },
 
-        result : null,
+        currentQuestion : 1,
 
-        completed : false
+
+        completed : false,
+
+
+        startedAt : null,
+
+
+        updatedAt : null
+
 
     };
 
 
 
+
+
+
+
     /* ======================================================================
-       PRIVATE HELPERS
+       INIT
+
+       Starts assessment session
+
        ====================================================================== */
 
-    function cloneState() {
+
+    function init(pillarId){
+
+
+
+        state = {
+
+
+            assessmentId :
+
+                "CTM-ASSESSMENT-" +
+
+                Date.now(),
+
+
+
+            pillarId : pillarId,
+
+
+
+            answers : {},
+
+
+
+            currentQuestion : 1,
+
+
+
+            completed : false,
+
+
+
+            startedAt :
+
+                new Date().toISOString(),
+
+
+
+            updatedAt :
+
+                new Date().toISOString()
+
+
+        };
+
+
+
+        console.log(
+
+            "CTM Engine Initialized",
+
+            state
+
+        );
+
+
+
+        return state;
+
+
+    }
+
+
+
+
+
+
+
+    /* ======================================================================
+       LOAD
+
+       Restore existing state
+
+       ====================================================================== */
+
+
+    function load(savedState){
+
+
+
+        if(!savedState){
+
+
+            return state;
+
+
+        }
+
+
+
+        state = Object.assign(
+
+
+            {},
+
+
+            state,
+
+
+            savedState
+
+
+        );
+
+
+
+        state.updatedAt =
+
+            new Date().toISOString();
+
+
+
+        return state;
+
+
+    }
+
+
+
+
+
+
+
+    /* ======================================================================
+       RESET
+
+       Clear assessment
+
+       ====================================================================== */
+
+
+    function reset(){
+
+
+
+        state = {
+
+
+            assessmentId : null,
+
+
+            pillarId : null,
+
+
+            answers : {},
+
+
+            currentQuestion : 1,
+
+
+            completed : false,
+
+
+            startedAt : null,
+
+
+            updatedAt : null
+
+
+        };
+
+
+
+        return state;
+
+
+    }
+
+
+
+
+
+
+
+    /* ======================================================================
+       GET STATE
+
+       ====================================================================== */
+
+
+    function getState(){
+
+
+        return state;
+
+
+    }
+
+
+              
+    /* ======================================================================
+       SET ANSWER
+
+       Stores user response
+
+       ====================================================================== */
+
+
+    function setAnswer(
+
+        questionId,
+
+        value
+
+    ){
+
+
+
+        state.answers[questionId] = {
+
+
+            value : value,
+
+
+            timestamp :
+
+                new Date().toISOString()
+
+
+        };
+
+
+
+        state.updatedAt =
+
+            new Date().toISOString();
+
+
+
+        return state.answers[questionId];
+
+
+    }
+
+
+
+
+
+
+
+    /* ======================================================================
+       GET ANSWER
+
+       Retrieve response
+
+       ====================================================================== */
+
+
+    function getAnswer(questionId){
+
+
+
+        return (
+
+            state.answers[questionId]
+
+            ||
+
+            null
+
+        );
+
+
+    }
+
+
+
+
+
+
+
+    /* ======================================================================
+       REMOVE ANSWER
+
+       ====================================================================== */
+
+
+    function removeAnswer(questionId){
+
+
+
+        delete state.answers[questionId];
+
+
+
+        state.updatedAt =
+
+            new Date().toISOString();
+
+
+
+    }
+
+
+
+
+
+
+
+    /* ======================================================================
+       NAVIGATION
+
+       ====================================================================== */
+
+
+    function nextQuestion(){
+
+
+
+        state.currentQuestion += 1;
+
+
+
+        state.updatedAt =
+
+            new Date().toISOString();
+
+
+
+        return state.currentQuestion;
+
+
+    }
+
+
+
+
+
+
+
+    function previousQuestion(){
+
+
+
+        if(state.currentQuestion > 1){
+
+
+            state.currentQuestion -= 1;
+
+
+        }
+
+
+
+        state.updatedAt =
+
+            new Date().toISOString();
+
+
+
+        return state.currentQuestion;
+
+
+    }
+
+
+
+
+
+
+
+    function goToQuestion(questionNumber){
+
+
+
+        state.currentQuestion = questionNumber;
+
+
+
+        state.updatedAt =
+
+            new Date().toISOString();
+
+
+
+        return state.currentQuestion;
+
+
+    }
+
+
+
+
+
+
+
+    /* ======================================================================
+       VALIDATION
+
+       Ensures required answers exist
+
+       ====================================================================== */
+
+
+    function validate(){
+
+
+
+        const answered =
+
+            Object.keys(
+
+                state.answers
+
+            ).length;
+
+
+
+        return answered > 0;
+
+
+    }
+
+
+
+
+
+
+
+    /* ======================================================================
+       COMPLETE ASSESSMENT
+
+       ====================================================================== */
+
+
+    function complete(){
+
+
+
+        state.completed = true;
+
+
+
+        state.updatedAt =
+
+            new Date().toISOString();
+
+
+
+        return {
+
+
+            completed:true,
+
+
+            state:state
+
+
+
+        };
+
+
+    }
+
+
+
+
+
+
+
+    /* ======================================================================
+       GET PROGRESS
+
+       ====================================================================== */
+
+
+    function getProgress(totalQuestions){
+
+
+
+        const answered =
+
+            Object.keys(
+
+                state.answers
+
+            ).length;
+
+
+
+        return {
+
+
+            answered: answered,
+
+
+            total: totalQuestions,
+
+
+            percentage:
+
+                totalQuestions
+
+                ?
+
+                Math.round(
+
+                    (
+
+                        answered /
+
+                        totalQuestions
+
+                    )
+
+                    *
+
+                    100
+
+                )
+
+                :
+
+                0
+
+
+        };
+
+
+    }
+
+
+              
+    /* ======================================================================
+       SERIALIZE STATE
+
+       Returns safe copy
+
+       ====================================================================== */
+
+
+    function serialize(){
+
 
         return JSON.parse(
 
@@ -84,553 +630,152 @@ CTM.Engine = (function () {
 
         );
 
+
+    }
+
+
+
+
+
+
+
+    /* ======================================================================
+       SET STATE
+
+       Restore external state
+
+       ====================================================================== */
+
+
+    function setState(newState){
+
+
+
+        if(!newState){
+
+
+            return state;
+
+
+        }
+
+
+
+        state = Object.assign(
+
+
+            {},
+
+
+            state,
+
+
+            newState
+
+
+        );
+
+
+
+        state.updatedAt =
+
+            new Date().toISOString();
+
+
+
+        return state;
+
+
     }
 
 
 
-    function resetAnswers() {
 
-        state.answers = {
-
-            awareness : null,
-
-            alignment : null,
-
-            embodiment : null
-
-        };
-
-    }
 
 
 
     /* ======================================================================
        PUBLIC API
+
        ====================================================================== */
+
 
     return {
 
-        /* ==============================================================
-           Initialize Engine
-           ============================================================== */
 
-        init : function (pillarId) {
 
-            this.reset();
+        init:init,
 
-            return this.load(
 
-                pillarId
+        load:load,
 
-            );
 
-        },
+        reset:reset,
 
 
 
-        /* ==============================================================
-           Load Pillar
-           ============================================================== */
+        getState:getState,
 
-        load : function (pillarId) {
 
-            const pillar =
+        setState:setState,
 
-                CTM.Framework.getPillar(
 
-                    pillarId
-
-                );
-
-            if (!pillar) {
-
-                throw new Error(
-
-                    "Invalid pillar id : " +
-
-                    pillarId
-
-                );
-
-            }
-
-            if (
-
-                !CTM.Data ||
-
-                !CTM.Data[pillar.object]
-
-            ) {
-
-                throw new Error(
-
-                    "Pillar data not loaded : " +
-
-                    pillar.object
-
-                );
-
-            }
-
-            state.pillar = pillar;
-
-            state.data =
-
-                CTM.Data[
-
-                    pillar.object
-
-                ];
-
-            state.completed = false;
-
-            state.result = null;
-
-            resetAnswers();
-
-            return cloneState();
-
-        },
+        serialize:serialize,
 
 
 
-        /* ==============================================================
-           Reset Engine
-           ============================================================== */
+        setAnswer:setAnswer,
 
-        reset : function () {
 
-            state = {
+        getAnswer:getAnswer,
 
-                pillar : null,
 
-                data : null,
-
-                answers : {
-
-                    awareness : null,
-
-                    alignment : null,
-
-                    embodiment : null
-
-                },
-
-                result : null,
-
-                completed : false
-
-            };
-
-            return cloneState();
-
-        },
+        removeAnswer:removeAnswer,
 
 
 
-        /* ==============================================================
-           Current Engine State
-           ============================================================== */
+        nextQuestion:nextQuestion,
 
-        getState : function () {
 
-            return cloneState();
+        previousQuestion:previousQuestion,
 
-        }
+
+        goToQuestion:goToQuestion,
+
+
+
+        validate:validate,
+
+
+        complete:complete,
+
+
+
+        getProgress:getProgress
+
+
 
     };
 
+
+
+
+
 })();
 
-/* ==========================================================================
-   END OF BATCH 1A
-   ==========================================================================
-   Completed
 
-   ✓ File Header
-   ✓ Namespace
-   ✓ Private State
-   ✓ cloneState()
-   ✓ resetAnswers()
-   ✓ init()
-   ✓ load()
-   ✓ reset()
-   ✓ getState()
 
-   Pending (Batch 1B)
 
-   • answer()
-   • getAnswer()
-   • Validation
-   • Internal helpers
 
-   ========================================================================== */
 
-        /* ==============================================================
-           Store Answer
-           ============================================================== */
-
-        answer : function (questionIndex, score) {
-
-            if (!state.data) {
-
-                throw new Error(
-
-                    "Engine has not been initialized."
-
-                );
-
-            }
-
-            score = CTM.Scoring.validate(
-
-                score
-
-            );
-
-            switch (questionIndex) {
-
-                case 1:
-
-                    state.answers.awareness = score;
-
-                    break;
-
-                case 2:
-
-                    state.answers.alignment = score;
-
-                    break;
-
-                case 3:
-
-                    state.answers.embodiment = score;
-
-                    break;
-
-                default:
-
-                    throw new Error(
-
-                        "Invalid question index : " +
-
-                        questionIndex
-
-                    );
-
-            }
-
-            return cloneState();
-
-        },
-
-
-
-        /* ==============================================================
-           Get Answer
-           ============================================================== */
-
-        getAnswer : function (questionIndex) {
-
-            switch (questionIndex) {
-
-                case 1:
-
-                    return state.answers.awareness;
-
-                case 2:
-
-                    return state.answers.alignment;
-
-                case 3:
-
-                    return state.answers.embodiment;
-
-                default:
-
-                    return null;
-
-            }
-
-        },
-
-
-
-        /* ==============================================================
-           Has Answer
-           ============================================================== */
-
-        hasAnswer : function (questionIndex) {
-
-            return this.getAnswer(
-
-                questionIndex
-
-            ) !== null;
-
-        },
-
-
-
-        /* ==============================================================
-           Validate Assessment
-           ============================================================== */
-
-        validate : function () {
-
-            return (
-
-                state.answers.awareness !== null &&
-
-                state.answers.alignment !== null &&
-
-                state.answers.embodiment !== null
-
-            );
-
-        },
-
-
-
-        /* ==============================================================
-           Is Complete
-           ============================================================== */
-
-        isComplete : function () {
-
-            return state.completed;
-
-        },
-
-
-
-        /* ==============================================================
-           Current Pillar
-           ============================================================== */
-
-        getPillar : function () {
-
-            return state.pillar;
-
-        },
-
-
-
-        /* ==============================================================
-           Current Data
-           ============================================================== */
-
-        getData : function () {
-
-            return state.data;
-
-        },
-
-
-
-        /* ==============================================================
-           Current Answers
-           ============================================================== */
-
-        getAnswers : function () {
-
-            return {
-
-                awareness :
-
-                    state.answers.awareness,
-
-                alignment :
-
-                    state.answers.alignment,
-
-                embodiment :
-
-                    state.answers.embodiment
-
-            };
-
-        },
-
-
-
-        /* ==============================================================
-           Progress
-           ============================================================== */
-
-        progress : function () {
-
-            let completed = 0;
-
-            if (
-
-                state.answers.awareness !== null
-
-            ) {
-
-                completed++;
-
-            }
-
-            if (
-
-                state.answers.alignment !== null
-
-            ) {
-
-                completed++;
-
-            }
-
-            if (
-
-                state.answers.embodiment !== null
-
-            ) {
-
-                completed++;
-
-            }
-
-            return {
-
-                completed :
-
-                    completed,
-
-                total : 3,
-
-                percentage :
-
-                    Math.round(
-
-                        (completed / 3) * 100
-
-                    )
-
-            };
-
-        },
-
-        /* ==============================================================
-           Calculate Result
-           ============================================================== */
-
-        calculate : function () {
-
-            if (!this.validate()) {
-
-                throw new Error(
-
-                    "Assessment is incomplete."
-
-                );
-
-            }
-
-            return CTM.Scoring.build(
-
-                state.answers.awareness,
-
-                state.answers.alignment,
-
-                state.answers.embodiment
-
-            );
-
-        },
-
-
-
-        /* ==============================================================
-           Complete Assessment
-           ============================================================== */
-
-        complete : function () {
-
-            const result =
-
-                this.calculate();
-
-            state.result = Object.freeze({
-
-                raw :
-
-                    result.raw,
-
-                percentage :
-
-                    result.percentage,
-
-                level :
-
-                    result.level,
-
-                title :
-
-                    result.title,
-
-                colour :
-
-                    result.colour,
-
-                answers : {
-
-                    awareness :
-
-                        state.answers.awareness,
-
-                    alignment :
-
-                        state.answers.alignment,
-
-                    embodiment :
-
-                        state.answers.embodiment
-
-                }
-
-            });
-
-            state.completed = true;
-
-            return state.result;
-
-        },
-
-
-
-        /* ==============================================================
-           Current Result
-           ============================================================== */
-
-        getResult : function () {
-
-            return state.result;
-
-        },
-
-
-
-        /* ==============================================================
-           Has Result
-           ============================================================== */
-
-        hasResult : function () {
-
-            return state.result !== null;
-
-        }
-
-    };
-
-})();
 
 
 
 /* ==========================================================================
    LOCK ENGINE
+
    ========================================================================== */
+
 
 Object.freeze(
 
@@ -640,17 +785,26 @@ Object.freeze(
 
 
 
+
+
+
+
+
+
 /* ==========================================================================
    END OF FILE
 
    assessmentEngine.js
 
-   Version 1.0
+   Version : 1.1
 
    Status
 
-   ✓ COMPLETE
-   ✓ LOCKED
+   ✓ SYNTAX REPAIRED
+   ✓ CTM.Engine RESTORED
+   ✓ INIT AVAILABLE
+   ✓ STATE MANAGEMENT ACTIVE
 
-   ========================================================================== */
+   ==========================================================================
+*/
 
