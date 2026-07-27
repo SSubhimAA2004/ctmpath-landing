@@ -4,13 +4,15 @@
    KALA CHAKRA™ v3.0
 
    File        : js/assessmentEngine.js
-   Version     : 1.1
+   Version     : 1.2
 
-   Status      : 🔒 PRODUCTION FIX
+   Status      : 🔒 PRODUCTION REPAIR
+
 
    PURPOSE
 
    Assessment State Engine™
+
 
    Owns:
 
@@ -18,7 +20,9 @@
    ✓ Current pillar state
    ✓ Answer storage
    ✓ Progress tracking
+   ✓ Result availability state
    ✓ State retrieval
+
 
    Does NOT:
 
@@ -26,6 +30,7 @@
    ✗ Calculate final scores
    ✗ Load components
    ✗ Own question content
+
 
    ========================================================================== */
 
@@ -54,28 +59,42 @@ CTM.Engine = (function(){
     let state = {
 
 
+
         assessmentId : null,
+
 
 
         pillarId : null,
 
 
+
         answers : {},
+
+
+
+        result : null,
+
 
 
         currentQuestion : 1,
 
 
+
         completed : false,
+
 
 
         startedAt : null,
 
 
+
         updatedAt : null
 
 
+
     };
+
+
 
 
 
@@ -98,7 +117,9 @@ CTM.Engine = (function(){
         state = {
 
 
+
             assessmentId :
+
 
                 "CTM-ASSESSMENT-" +
 
@@ -106,7 +127,11 @@ CTM.Engine = (function(){
 
 
 
+
+
             pillarId : pillarId,
+
+
 
 
 
@@ -114,7 +139,17 @@ CTM.Engine = (function(){
 
 
 
+
+
+            result : null,
+
+
+
+
+
             currentQuestion : 1,
+
+
 
 
 
@@ -122,28 +157,46 @@ CTM.Engine = (function(){
 
 
 
+
+
             startedAt :
+
 
                 new Date().toISOString(),
 
 
 
+
+
             updatedAt :
 
+
                 new Date().toISOString()
+
 
 
         };
 
 
 
+
+
+
+
         console.log(
+
 
             "CTM Engine Initialized",
 
+
             state
 
+
         );
+
+
+
+
 
 
 
@@ -151,6 +204,8 @@ CTM.Engine = (function(){
 
 
     }
+
+
 
 
 
@@ -173,39 +228,61 @@ CTM.Engine = (function(){
         if(!savedState){
 
 
+
             return state;
+
 
 
         }
 
 
 
+
+
+
+
         state = Object.assign(
+
 
 
             {},
 
 
+
             state,
 
 
+
             savedState
+
 
 
         );
 
 
 
+
+
+
+
         state.updatedAt =
 
+
             new Date().toISOString();
+
+
+
+
 
 
 
         return state;
 
 
+
     }
+
+
 
 
 
@@ -228,44 +305,57 @@ CTM.Engine = (function(){
         state = {
 
 
+
             assessmentId : null,
+
 
 
             pillarId : null,
 
 
+
             answers : {},
+
+
+
+            result : null,
+
 
 
             currentQuestion : 1,
 
 
+
             completed : false,
+
 
 
             startedAt : null,
 
 
+
             updatedAt : null
+
 
 
         };
 
 
 
+
+
+
+
         return state;
 
 
-    }
 
+    },
 
-
-
-
-
-
-    /* ======================================================================
+                  /* ======================================================================
        GET STATE
+
+       Returns current engine state
 
        ====================================================================== */
 
@@ -279,7 +369,13 @@ CTM.Engine = (function(){
     }
 
 
-              
+
+
+
+
+
+
+
     /* ======================================================================
        SET ANSWER
 
@@ -301,28 +397,44 @@ CTM.Engine = (function(){
         state.answers[questionId] = {
 
 
+
             value : value,
+
 
 
             timestamp :
 
+
                 new Date().toISOString()
+
 
 
         };
 
 
 
+
+
+
+
         state.updatedAt =
 
+
             new Date().toISOString();
+
+
+
+
 
 
 
         return state.answers[questionId];
 
 
+
     }
+
+
 
 
 
@@ -344,16 +456,27 @@ CTM.Engine = (function(){
 
         return (
 
+
+
             state.answers[questionId]
+
+
 
             ||
 
+
+
             null
+
+
 
         );
 
 
+
     }
+
+
 
 
 
@@ -375,7 +498,12 @@ CTM.Engine = (function(){
 
 
 
+
+
+
+
         state.updatedAt =
+
 
             new Date().toISOString();
 
@@ -387,6 +515,87 @@ CTM.Engine = (function(){
 
 
 
+
+
+
+
+    /* ======================================================================
+       RESULT AVAILABILITY
+
+       Compatibility Layer
+
+       Does NOT calculate results.
+
+       Stores and retrieves result generated
+       by assessment calculation layer.
+
+       ====================================================================== */
+
+
+    function hasResult(){
+
+
+
+        return state.result !== null;
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    function getResult(){
+
+
+
+        return state.result;
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    function setResult(result){
+
+
+
+        state.result = result;
+
+
+
+
+
+
+
+        state.updatedAt =
+
+
+            new Date().toISOString();
+
+
+
+
+
+
+
+        return state.result;
+
+
+
+    }
 
 
     /* ======================================================================
@@ -403,16 +612,28 @@ CTM.Engine = (function(){
 
 
 
+
+
+
+
         state.updatedAt =
 
+
             new Date().toISOString();
+
+
+
+
 
 
 
         return state.currentQuestion;
 
 
+
     }
+
+
 
 
 
@@ -424,26 +645,44 @@ CTM.Engine = (function(){
 
 
 
-        if(state.currentQuestion > 1){
+        if(
+
+            state.currentQuestion > 1
+
+        ){
+
 
 
             state.currentQuestion -= 1;
+
 
 
         }
 
 
 
+
+
+
+
         state.updatedAt =
 
+
             new Date().toISOString();
+
+
+
+
 
 
 
         return state.currentQuestion;
 
 
+
     }
+
+
 
 
 
@@ -459,16 +698,28 @@ CTM.Engine = (function(){
 
 
 
+
+
+
+
         state.updatedAt =
 
+
             new Date().toISOString();
+
+
+
+
 
 
 
         return state.currentQuestion;
 
 
+
     }
+
+
 
 
 
@@ -490,18 +741,28 @@ CTM.Engine = (function(){
 
         const answered =
 
+
             Object.keys(
+
 
                 state.answers
 
+
             ).length;
+
+
+
+
 
 
 
         return answered > 0;
 
 
+
     }
+
+
 
 
 
@@ -523,16 +784,27 @@ CTM.Engine = (function(){
 
 
 
+
+
+
+
         state.updatedAt =
 
+
             new Date().toISOString();
+
+
+
+
 
 
 
         return {
 
 
+
             completed:true,
+
 
 
             state:state
@@ -542,7 +814,10 @@ CTM.Engine = (function(){
         };
 
 
+
     }
+
+
 
 
 
@@ -562,21 +837,39 @@ CTM.Engine = (function(){
 
         const answered =
 
+
             Object.keys(
+
 
                 state.answers
 
+
             ).length;
+
+
+
+
 
 
 
         return {
 
 
+
             answered: answered,
 
 
+
+
+
+
+
             total: totalQuestions,
+
+
+
+
+
 
 
             percentage:
@@ -606,13 +899,14 @@ CTM.Engine = (function(){
                 0
 
 
+
         };
+
 
 
     }
 
 
-              
     /* ======================================================================
        SERIALIZE STATE
 
@@ -624,14 +918,28 @@ CTM.Engine = (function(){
     function serialize(){
 
 
+
         return JSON.parse(
 
-            JSON.stringify(state)
+
+
+            JSON.stringify(
+
+
+                state
+
+
+            )
+
+
 
         );
 
 
+
     }
+
+
 
 
 
@@ -654,39 +962,61 @@ CTM.Engine = (function(){
         if(!newState){
 
 
+
             return state;
+
 
 
         }
 
 
 
+
+
+
+
         state = Object.assign(
+
 
 
             {},
 
 
+
             state,
 
 
+
             newState
+
 
 
         );
 
 
 
+
+
+
+
         state.updatedAt =
 
+
             new Date().toISOString();
+
+
+
+
 
 
 
         return state;
 
 
+
     }
+
+
 
 
 
@@ -707,47 +1037,92 @@ CTM.Engine = (function(){
         init:init,
 
 
+
         load:load,
+
 
 
         reset:reset,
 
 
 
+
+
+
+
         getState:getState,
 
 
+
         setState:setState,
+
 
 
         serialize:serialize,
 
 
 
+
+
+
+
         setAnswer:setAnswer,
 
 
+
         getAnswer:getAnswer,
+
 
 
         removeAnswer:removeAnswer,
 
 
 
+
+
+
+
+        hasResult:hasResult,
+
+
+
+        getResult:getResult,
+
+
+
+        setResult:setResult,
+
+
+
+
+
+
+
         nextQuestion:nextQuestion,
 
 
+
         previousQuestion:previousQuestion,
+
 
 
         goToQuestion:goToQuestion,
 
 
 
+
+
+
+
         validate:validate,
 
 
+
         complete:complete,
+
+
+
+
 
 
 
@@ -796,13 +1171,13 @@ Object.freeze(
 
    assessmentEngine.js
 
-   Version : 1.1
+   Version : 1.2
 
    Status
 
    ✓ SYNTAX REPAIRED
    ✓ CTM.Engine RESTORED
-   ✓ INIT AVAILABLE
+   ✓ RESULT API RESTORED
    ✓ STATE MANAGEMENT ACTIVE
 
    ==========================================================================
