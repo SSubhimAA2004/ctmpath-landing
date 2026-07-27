@@ -4,21 +4,21 @@
  CTM PATH™ Guided Journey™
 
  File        : js/app.js
- Version     : 1.1
+ Version     : 1.2
 
  Purpose:
- Global application controller and page loader.
+ Lightweight application router.
 
  Responsibilities:
- - Initialize application
- - Load first journey page
- - Inject page HTML
- - Load page-specific JavaScript
+ - Application initialization
+ - Dynamic page loading
+ - Dependency loading
+ - Page controller initialization
 
  Rules:
  - No business logic
- - No assessment logic
- - No backend communication
+ - No backend logic
+ - No scoring logic
 
 ==============================================================================
 */
@@ -33,7 +33,7 @@
 
     /*
     ==========================================================================
-       APPLICATION CONFIGURATION
+       APPLICATION OBJECT
     ==========================================================================
     */
 
@@ -41,15 +41,10 @@
     const CTM_APP = {
 
 
+
         version:
 
-            "1.1",
-
-
-
-        name:
-
-            "CTM PATH™ Guided Journey™",
+            "1.2",
 
 
 
@@ -63,7 +58,7 @@
 
         /*
         ----------------------------------------------------------------------
-            INITIALIZE APPLICATION
+           INIT
         ----------------------------------------------------------------------
         */
 
@@ -88,8 +83,8 @@
                 );
 
 
-
             },
+
 
 
 
@@ -99,7 +94,7 @@
 
         /*
         ----------------------------------------------------------------------
-            LOAD PAGE
+           LOAD PAGE
         ----------------------------------------------------------------------
         */
 
@@ -127,7 +122,7 @@
 
                     console.error(
 
-                        "CTM PATH™: Page container missing."
+                        "CTM PATH™: pageContainer missing."
 
                     );
 
@@ -136,7 +131,6 @@
 
 
                 }
-
 
 
 
@@ -164,7 +158,7 @@
 
                         throw new Error(
 
-                            "Unable to load page: " +
+                            "Page not found: " +
 
                             pagePath
 
@@ -172,7 +166,6 @@
 
 
                     }
-
 
 
 
@@ -187,11 +180,7 @@
 
 
 
-
-
                     container.innerHTML = html;
-
-
 
 
 
@@ -201,7 +190,8 @@
 
 
 
-                    this.initializePageScripts(
+
+                    await this.initializePage(
 
                         pagePath
 
@@ -221,7 +211,7 @@
 
                     console.error(
 
-                        "CTM PATH™ Page Loading Error:",
+                        "CTM PATH™ Router Error:",
 
                         error
 
@@ -229,23 +219,7 @@
 
 
 
-                    container.innerHTML =
-
-
-                        `
-
-                        <div class="error-message">
-
-                            Unable to load journey page.
-
-                        </div>
-
-                        `;
-
-
-
                 }
-
 
 
 
@@ -261,14 +235,14 @@
 
         /*
         ----------------------------------------------------------------------
-            LOAD PAGE CONTROLLER
+           PAGE INITIALIZATION
         ----------------------------------------------------------------------
         */
 
 
-        initializePageScripts:
+        initializePage:
 
-            function(pagePath){
+            async function(pagePath){
 
 
 
@@ -283,7 +257,7 @@
                 ){
 
 
-                    this.loadScript(
+                    await this.loadScript(
 
                         "js/welcome.js"
 
@@ -291,6 +265,7 @@
 
 
                 }
+
 
 
 
@@ -309,7 +284,24 @@
                 ){
 
 
-                    this.loadScript(
+
+                    await this.loadScript(
+
+                        "js/api.js"
+
+                    );
+
+
+
+                    await this.loadScript(
+
+                        "js/storage.js"
+
+                    );
+
+
+
+                    await this.loadScript(
 
                         "js/registration.js"
 
@@ -332,7 +324,7 @@
 
         /*
         ----------------------------------------------------------------------
-            DYNAMIC SCRIPT LOADER
+           SCRIPT LOADER
         ----------------------------------------------------------------------
         */
 
@@ -343,61 +335,87 @@
 
 
 
-                const existing =
+                return new Promise(
 
-                    document.querySelector(
-
-                        `script[src="${src}"]`
-
-                    );
+                    function(resolve, reject){
 
 
 
 
 
-                if(existing){
+                        const existing =
 
+                            document.querySelector(
 
-                    return;
+                                `script[src="${src}"]`
 
-
-                }
-
-
-
-
-
-
-
-                const script =
-
-                    document.createElement(
-
-                        "script"
-
-                    );
+                            );
 
 
 
 
 
-                script.src = src;
+                        if(existing){
+
+
+                            resolve();
+
+
+                            return;
+
+
+                        }
 
 
 
-                script.defer = true;
 
 
 
-                document.body.appendChild(
 
-                    script
+
+                        const script =
+
+                            document.createElement(
+
+                                "script"
+
+                            );
+
+
+
+
+
+
+                        script.src = src;
+
+
+
+                        script.onload = resolve;
+
+
+
+                        script.onerror = reject;
+
+
+
+                        document.body.appendChild(
+
+                            script
+
+                        );
+
+
+
+
+
+                    }
 
                 );
 
 
 
             }
+
 
 
 
@@ -430,7 +448,7 @@
 
     /*
     ==========================================================================
-       START APPLICATION
+       APPLICATION START
     ==========================================================================
     */
 
