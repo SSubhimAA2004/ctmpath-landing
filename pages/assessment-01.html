@@ -5,21 +5,14 @@
      FROM SURVIVAL TO LIVING™
 
      File        : assessment-01.html
-     Version     : 6.2
+     Version     : 6.3
 
      Status      : 🔒 PREMIUM EXPERIENCE MASTER
+
 
      Assessment  : Spoke 01
 
      Pillar      : Purpose™
-
-     Change Log
-
-     v6.2
-     ✓ Component mount points added
-     ✓ Header injection enabled
-     ✓ Footer injection enabled
-     ✓ Dashboard component injection enabled
 
      ========================================================================== -->
 
@@ -33,9 +26,7 @@
 <head>
 
 
-
 <meta charset="UTF-8">
-
 
 
 <meta
@@ -43,7 +34,6 @@
 name="viewport"
 
 content="width=device-width, initial-scale=1.0">
-
 
 
 <meta
@@ -66,7 +56,6 @@ CTM PATH™ | Purpose™
 
 <!-- ==========================================================================
      PREMIUM FONTS
-
      ========================================================================== -->
 
 
@@ -88,8 +77,6 @@ crossorigin>
 
 
 
-
-
 <link
 
 href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@300;400;500;600;700&display=swap"
@@ -102,9 +89,10 @@ rel="stylesheet">
 
 
 
+
+
 <!-- ==========================================================================
      CSS
-
      ========================================================================== -->
 
 
@@ -148,8 +136,6 @@ href="../css/assessment.css">
 
 
 
-
-
 </head>
 
 
@@ -168,15 +154,17 @@ href="../css/assessment.css">
 
 
 
-
-
 <div class="assessment-container">
 
 
 
-
-
 <main class="premium-assessment-card">
+
+
+
+
+
+
 
 
 
@@ -186,8 +174,6 @@ href="../css/assessment.css">
      Loaded by:
 
      js/assessment01.js
-
-     CTM.Common.loadComponent()
 
      ========================================================================== -->
 
@@ -224,8 +210,6 @@ YOUR LIFE MAP™
 
 
 
-
-
 <div
 
 id="lifeMapProgress"
@@ -237,8 +221,6 @@ class="life-map-progress">
 
 
 </div>
-
-
 
 
 
@@ -260,21 +242,30 @@ class="life-map-progress">
 
 
 
-
-
 </section>
 
-     <!-- ==========================================================================
-     KALA CHAKRA™ COMPONENT MOUNT
 
-     Loaded by:
 
-     js/assessment01.js
+
+
+
+
+
+
+<!-- ==========================================================================
+     KALA CHAKRA™ DASHBOARD COMPONENT
+
+     Premium Experience Layer v2.0
 
      ========================================================================== -->
 
 
-<div id="kaalachakra"></div>
+<div
+
+id="kaalachakraDashboard">
+
+
+</div>
 
 
 
@@ -306,8 +297,6 @@ YOUR JOURNEY BEGINS HERE™
 
 
 
-
-
 <p class="ritual-text-ta">
 
 
@@ -326,8 +315,6 @@ YOUR JOURNEY BEGINS HERE™
 
 
 
-
-
 <p class="ritual-text-en">
 
 
@@ -341,8 +328,6 @@ Only honest reflection.
 
 
 </p>
-
-
 
 
 
@@ -378,8 +363,6 @@ SPOKE 01 OF 12
 
 
 
-
-
 <h1 class="pillar-title-ta">
 
 
@@ -387,8 +370,6 @@ SPOKE 01 OF 12
 
 
 </h1>
-
-
 
 
 
@@ -406,8 +387,6 @@ PURPOSE™
 
 
 
-
-
 <div class="core-question-ta">
 
 
@@ -415,8 +394,6 @@ PURPOSE™
 
 
 </div>
-
-
 
 
 
@@ -434,10 +411,7 @@ Why do I exist?
 
 
 
-
-
 <div class="pillar-introduction">
-
 
 
 <p>
@@ -448,8 +422,6 @@ Why do I exist?
 
 
 </p>
-
-
 
 
 
@@ -467,8 +439,6 @@ and meaning of your life.
 
 
 </div>
-
-
 
 
 
@@ -490,29 +460,17 @@ and meaning of your life.
 
 <div class="journey-step-number">
 
-
 01
 
-
 </div>
-
-
-
-
 
 
 
 <div class="journey-step-title">
 
-
 AWARENESS™
 
-
 </div>
-
-
-
-
 
 
 
@@ -542,9 +500,7 @@ I See Myself
 
 <div class="journey-arrow">
 
-
 →
-
 
 </div>
 
@@ -560,29 +516,17 @@ I See Myself
 
 <div class="journey-step-number">
 
-
 02
 
-
 </div>
-
-
-
-
 
 
 
 <div class="journey-step-title">
 
-
 ALIGNMENT™
 
-
 </div>
-
-
-
-
 
 
 
@@ -612,9 +556,7 @@ I Align Myself
 
 <div class="journey-arrow">
 
-
 →
-
 
 </div>
 
@@ -630,29 +572,17 @@ I Align Myself
 
 <div class="journey-step-number">
 
-
 03
 
-
 </div>
-
-
-
-
 
 
 
 <div class="journey-step-title">
 
-
 EMBODIMENT™
 
-
 </div>
-
-
-
-
 
 
 
@@ -676,8 +606,6 @@ I Become It
 
 
 
-
-
 </section>
 
 
@@ -689,42 +617,33 @@ I Become It
 
 
 <!-- ==========================================================================
-     QUESTIONS SECTION
+     PREMIUM QUESTION EXPERIENCE™
+
+     Controlled by:
+
+     js/assessmentUI.js Version 2.0
 
      ========================================================================== -->
 
 
-<section class="questions-section">
+<section
+
+id="questionCard"
+
+class="question-card premium-question-card">
 
 
 
 
 
+<div
 
+id="questionNumber"
 
-<article class="question-card">
-
-
-
-<div class="question-type">
-
-
-<span class="question-number">
+class="question-number">
 
 
 01
-
-
-</span>
-
-
-
-
-
-&nbsp;
-
-
-AWARENESS™
 
 
 </div>
@@ -735,14 +654,38 @@ AWARENESS™
 
 
 
-<p class="question-text-ta">
+
+
+<div
+
+class="question-type">
+
+
+PURPOSE™
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2
+
+id="questionTamil"
+
+class="question-text-ta">
 
 
 என் வாழ்க்கையின் ஆழமான நோக்கமும்
 அர்த்தமும் என்ன என்பது எனக்கு தெளிவாக உள்ளது.
 
 
-</p>
+</h2>
 
 
 
@@ -750,7 +693,13 @@ AWARENESS™
 
 
 
-<p class="question-text-en">
+
+
+<p
+
+id="questionEnglish"
+
+class="question-text-en">
 
 
 I have clarity about the deeper purpose
@@ -765,156 +714,6 @@ and meaning of my life.
 
 
 
-<div class="rating-question-label">
-
-
-How true is this for me?
-
-
-<br>
-
-
-இது எனக்கு எவ்வளவு உண்மை?
-
-
-</div>
-
-
-
-
-
-
-
-<!-- Rating component mount -->
-
-
-<div id="ratingScale"></div>
-
-
-
-
-
-
-
-<div
-
-id="ratingGroup1"
-
-class="rating-group">
-
-
-</div>
-
-
-
-
-
-
-
-<div class="rating-guide">
-
-
-<span>
-
-
-1 - Awareness Needed
-
-
-</span>
-
-
-
-
-
-
-
-<span>
-
-
-10 - Alignment Zone
-
-
-</span>
-
-
-</div>
-
-
-
-
-
-</article>
-
-     <!-- ==========================================================================
-     QUESTION 02
-
-     ALIGNMENT™
-
-     ========================================================================== -->
-
-
-<article class="question-card">
-
-
-
-<div class="question-type">
-
-
-<span class="question-number">
-
-
-02
-
-
-</span>
-
-
-
-
-
-&nbsp;
-
-
-ALIGNMENT™
-
-
-</div>
-
-
-
-
-
-
-
-<p class="question-text-ta">
-
-
-என் வாழ்க்கை வெளிப்படுத்த விரும்பும்
-நோக்கத்துடன் என் தினசரி தேர்வுகள்
-இணைந்துள்ளன.
-
-
-</p>
-
-
-
-
-
-
-
-<p class="question-text-en">
-
-
-My daily choices reflect the purpose
-I want my life to express.
-
-
-</p>
-
-
-
-
-
 
 
 <div class="rating-question-label">
@@ -937,14 +736,19 @@ How true is this for me?
 
 
 
+
+
+<!-- PREMIUM RATING COMPONENT MOUNT -->
+
+
 <div
 
-id="ratingGroup2"
-
-class="rating-group">
+id="ratingScale">
 
 
 </div>
+
+
 
 
 
@@ -967,8 +771,6 @@ class="rating-group">
 
 
 
-
-
 <span>
 
 
@@ -979,163 +781,6 @@ class="rating-group">
 
 
 </div>
-
-
-
-
-
-</article>
-
-
-
-
-
-
-
-
-
-<!-- ==========================================================================
-     QUESTION 03
-
-     EMBODIMENT™
-
-     ========================================================================== -->
-
-
-<article class="question-card">
-
-
-
-<div class="question-type">
-
-
-<span class="question-number">
-
-
-03
-
-
-</span>
-
-
-
-
-
-&nbsp;
-
-
-EMBODIMENT™
-
-
-</div>
-
-
-
-
-
-
-
-<p class="question-text-ta">
-
-
-நான் வாழும் விதம் அர்த்தமுள்ள
-மற்றும் நிறைவான வாழ்க்கையை
-உருவாக்குகிறது.
-
-
-</p>
-
-
-
-
-
-
-
-<p class="question-text-en">
-
-
-The way I live creates a meaningful
-and fulfilling life.
-
-
-</p>
-
-
-
-
-
-
-
-<div class="rating-question-label">
-
-
-How true is this for me?
-
-
-<br>
-
-
-இது எனக்கு எவ்வளவு உண்மை?
-
-
-</div>
-
-
-
-
-
-
-
-<div
-
-id="ratingGroup3"
-
-class="rating-group">
-
-
-</div>
-
-
-
-
-
-
-
-<div class="rating-guide">
-
-
-<span>
-
-
-1 - Awareness Needed
-
-
-</span>
-
-
-
-
-
-
-
-<span>
-
-
-10 - Alignment Zone
-
-
-</span>
-
-
-</div>
-
-
-
-
-
-</article>
-
-
 
 
 
@@ -1233,23 +878,7 @@ Your current Purpose™ alignment
 
 
 
-
-
 </section>
-
-     <!-- ==========================================================================
-     CURRENT STATUS™
-
-     COMPONENT MOUNT
-
-     Loaded by:
-
-     js/assessment01.js
-
-     ========================================================================== -->
-
-
-<div id="statusCard"></div>
 
 
 
@@ -1260,7 +889,25 @@ Your current Purpose™ alignment
 
 
 <!-- ==========================================================================
-     CURRENT STATUS DISPLAY
+     CURRENT STATUS™ COMPONENT MOUNT
+
+     Loaded by:
+
+     js/assessment01.js
+
+     ========================================================================== -->
+
+
+<div
+
+id="statusCard">
+
+
+</div>
+
+     
+<!-- ==========================================================================
+     CURRENT STATUS™ DISPLAY
 
      ========================================================================== -->
 
@@ -1294,7 +941,6 @@ YOUR CURRENT STATUS™
 id="lifeEvolutionLevel"
 
 class="life-evolution-level">
-
 
 
 </div>
@@ -1343,9 +989,7 @@ REFLECTION MOMENT™
 
 
 
-<p
-
-class="reflection-text-ta">
+<p class="reflection-text-ta">
 
 
 என் வாழ்க்கை நான் உண்மையாக
@@ -1360,9 +1004,7 @@ class="reflection-text-ta">
 
 
 
-<p
-
-class="reflection-text-en">
+<p class="reflection-text-en">
 
 
 Is my life expressing the purpose
@@ -1415,9 +1057,7 @@ WISDOM MOMENT™
 
 
 
-<p
-
-class="wisdom-text-ta">
+<p class="wisdom-text-ta">
 
 
 தெளிவான நோக்கம் கொண்ட வாழ்க்கை,
@@ -1432,9 +1072,7 @@ class="wisdom-text-ta">
 
 
 
-<p
-
-class="wisdom-text-en">
+<p class="wisdom-text-en">
 
 
 A life guided by clear purpose
@@ -1449,7 +1087,15 @@ creates a clear path.
 
 </section>
 
-     <!-- ==========================================================================
+
+
+
+
+
+
+
+
+<!-- ==========================================================================
      JOURNEY CONTINUATION CTA
 
      ========================================================================== -->
@@ -1525,16 +1171,12 @@ CONTINUE JOURNEY →
 
 
 
-
-
-
-
-
-
 </main>
 
 
+
 </div>
+
 
 
 </div>
