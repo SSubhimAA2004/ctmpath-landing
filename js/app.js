@@ -4,7 +4,7 @@
  CTM PATH™ Guided Journey™
 
  File        : js/app.js
- Version     : 1.3
+ Version     : 1.4
 
  Purpose:
  Lightweight application router.
@@ -13,16 +13,12 @@
  - Application initialization
  - Dynamic page loading
  - Global footer injection
- - Dependency loading
  - Page controller loading
-
- Rules:
- - No business logic
- - No backend logic
- - No assessment logic
+ - Scroll management
+ - Page transition effect
 
  Status:
- 🔒 Global Footer Integration
+ 🔒 Runtime Experience Upgrade
 
 ==============================================================================
 */
@@ -43,7 +39,7 @@
 
         version:
 
-            "1.3",
+            "1.4",
 
 
 
@@ -59,7 +55,7 @@
 
         /*
         ----------------------------------------------------------------------
-           INITIALIZE
+            INITIALIZE APPLICATION
         ----------------------------------------------------------------------
         */
 
@@ -98,7 +94,7 @@
 
         /*
         ----------------------------------------------------------------------
-           LOAD PAGE
+            LOAD PAGE
         ----------------------------------------------------------------------
         */
 
@@ -121,7 +117,10 @@
 
 
 
+
+
                 if(!container){
+
 
 
                     console.error(
@@ -131,7 +130,9 @@
                     );
 
 
+
                     return;
+
 
 
                 }
@@ -142,7 +143,29 @@
 
 
 
+
                 try {
+
+
+
+
+
+                    /*
+                    Start transition
+                    */
+
+
+                    container.classList.add(
+
+                        "page-loading"
+
+                    );
+
+
+
+
+
+
 
 
 
@@ -158,6 +181,31 @@
 
 
 
+
+
+
+                    if(!response.ok){
+
+
+
+                        throw new Error(
+
+                            "Unable to load page: " +
+
+                            pagePath
+
+                        );
+
+
+
+                    }
+
+
+
+
+
+
+
                     const html =
 
                         await response.text();
@@ -166,10 +214,26 @@
 
 
 
+
+
+                    /*
+                    Replace content
+                    */
+
+
                     container.innerHTML = html;
 
 
 
+
+
+
+
+
+
+                    /*
+                    Load global footer
+                    */
 
 
                     await this.loadFooter();
@@ -178,10 +242,28 @@
 
 
 
+
+
+
+
+                    /*
+                    Update current page
+                    */
+
+
                     this.currentPage = pagePath;
 
 
 
+
+
+
+
+
+
+                    /*
+                    Initialise page controller
+                    */
 
 
                     await this.initializePage(
@@ -192,11 +274,72 @@
 
 
 
+
+
+
+
+
+
+                    /*
+                    Return visitor to top
+                    */
+
+
+                    window.scrollTo({
+
+
+                        top:
+
+                            0,
+
+
+                        behavior:
+
+                            "smooth"
+
+
+                    });
+
+
+
+
+
+
+
+
+
+                    /*
+                    End transition
+                    */
+
+
+                    setTimeout(
+
+                        function(){
+
+
+
+                            container.classList.remove(
+
+                                "page-loading"
+
+                            );
+
+
+
+                        },
+
+                        300
+
+                    );
+
+
+
+
+
+
+
                 }
-
-
-
-
 
                 catch(error){
 
@@ -212,7 +355,24 @@
 
 
 
+                    container.innerHTML =
+
+
+
+                        `
+
+                        <div class="error-message">
+
+                        Unable to load journey page.
+
+                        </div>
+
+                        `;
+
+
+
                 }
+
 
 
 
@@ -228,7 +388,7 @@
 
         /*
         ----------------------------------------------------------------------
-           FOOTER LOADER
+            FOOTER LOADER
         ----------------------------------------------------------------------
         */
 
@@ -246,6 +406,8 @@
                         "components/footer.html"
 
                     );
+
+
 
 
 
@@ -285,6 +447,7 @@
 
 
 
+
                 const footerContainer =
 
                     document.createElement(
@@ -292,6 +455,8 @@
                         "div"
 
                     );
+
+
 
 
 
@@ -335,7 +500,7 @@
 
         /*
         ----------------------------------------------------------------------
-           PAGE INITIALIZATION
+            PAGE CONTROLLER LOADER
         ----------------------------------------------------------------------
         */
 
@@ -343,6 +508,8 @@
         initializePage:
 
             async function(pagePath){
+
+
 
 
 
@@ -357,6 +524,7 @@
                 ){
 
 
+
                     await this.loadScript(
 
                         "js/welcome.js"
@@ -366,6 +534,7 @@
 
 
                 }
+
 
 
 
@@ -425,7 +594,7 @@
 
         /*
         ----------------------------------------------------------------------
-           SCRIPT LOADER
+            SCRIPT LOADER
         ----------------------------------------------------------------------
         */
 
@@ -442,6 +611,8 @@
 
 
 
+
+
                         const existing =
 
                             document.querySelector(
@@ -449,6 +620,8 @@
                                 `script[src="${src}"]`
 
                             );
+
+
 
 
 
@@ -472,6 +645,7 @@
 
 
 
+
                         const script =
 
                             document.createElement(
@@ -479,6 +653,8 @@
                                 "script"
 
                             );
+
+
 
 
 
@@ -504,6 +680,8 @@
 
 
 
+
+
                     }
 
                 );
@@ -511,6 +689,8 @@
 
 
             }
+
+
 
 
 
@@ -525,12 +705,28 @@
 
 
 
+    /*
+    ==========================================================================
+       GLOBAL ACCESS
+    ==========================================================================
+    */
+
+
     window.CTM_APP = CTM_APP;
 
 
 
 
 
+
+
+
+
+    /*
+    ==========================================================================
+       APPLICATION START
+    ==========================================================================
+    */
 
 
     document.addEventListener(
