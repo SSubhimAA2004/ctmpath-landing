@@ -4,26 +4,28 @@
  CTM PATH™ Guided Journey™
 
  File        : js/welcome.js
- Version     : 1.2
+ Version     : 1.3
 
  Page        : PAGE 01 — WELCOME™
 
  Purpose:
- Welcome page controller.
+ Production Welcome page controller.
 
  Responsibilities:
- - Initialize Welcome page
- - Handle Begin Journey CTA
- - Load Registration page through app router
+ - Initialize Welcome CTA
+ - Handle journey start
+ - Navigate through application router
 
  Rules:
  - No backend calls
  - No registration logic
  - No assessment logic
- - Uses CTM_APP router
 
  Dependencies:
  - js/app.js
+
+ Status:
+ 🔒 PAGE 01 Controller Candidate
 
 ==============================================================================
 */
@@ -40,16 +42,16 @@
 
     /*
     ==========================================================================
-       INITIALIZATION
+       INITIALIZE
     ==========================================================================
     */
 
 
-    function initWelcomePage() {
+    function initWelcomePage(){
 
 
 
-        const beginButton =
+        const button =
 
             document.getElementById(
 
@@ -61,13 +63,13 @@
 
 
 
-        if(!beginButton){
+        if(!button){
 
 
 
             console.warn(
 
-                "CTM PATH™: Begin Journey button not found."
+                "CTM PATH™: Welcome CTA not found."
 
             );
 
@@ -83,11 +85,40 @@
 
 
 
-        beginButton.addEventListener(
+
+        /*
+        Prevent duplicate listeners
+        */
+
+
+        if(
+
+            button.dataset.initialized === "true"
+
+        ){
+
+
+            return;
+
+
+        }
+
+
+
+
+
+        button.dataset.initialized = "true";
+
+
+
+
+
+
+        button.addEventListener(
 
             "click",
 
-            beginJourney
+            handleBeginJourney
 
         );
 
@@ -105,48 +136,93 @@
 
     /*
     ==========================================================================
-       START JOURNEY
+       BEGIN JOURNEY
     ==========================================================================
     */
 
 
-    function beginJourney(){
+    function handleBeginJourney(event){
 
 
 
-        if(
-
-            window.CTM_APP &&
-
-            typeof window.CTM_APP.loadPage === "function"
-
-        ){
+        event.preventDefault();
 
 
 
-            window.CTM_APP.loadPage(
 
-                "pages/registration.html"
 
-            );
+        const button = event.currentTarget;
 
 
 
-        }
-
-        else {
 
 
-
-            console.error(
-
-                "CTM PATH™: Application router unavailable."
-
-            );
+        /*
+        Premium interaction feedback
+        */
 
 
+        button.classList.add(
 
-        }
+            "journey-starting"
+
+        );
+
+
+
+
+
+
+
+
+        setTimeout(
+
+            function(){
+
+
+
+                if(
+
+                    window.CTM_APP &&
+
+                    typeof window.CTM_APP.loadPage === "function"
+
+                ){
+
+
+
+                    window.CTM_APP.loadPage(
+
+                        "pages/registration.html"
+
+                    );
+
+
+
+                }
+
+                else {
+
+
+
+                    console.error(
+
+                        "CTM PATH™ Router unavailable."
+
+                    );
+
+
+                }
+
+
+
+
+
+            },
+
+            250
+
+        );
 
 
 
@@ -162,18 +238,16 @@
 
     /*
     ==========================================================================
-       PAGE READY
+       AUTO INITIALIZE
+       
+       Important:
+       This file loads dynamically after welcome.html exists.
+       Therefore initialize immediately.
     ==========================================================================
     */
 
 
-    document.addEventListener(
-
-        "DOMContentLoaded",
-
-        initWelcomePage
-
-    );
+    initWelcomePage();
 
 
 
