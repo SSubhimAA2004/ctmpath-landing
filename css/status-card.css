@@ -1,1 +1,250 @@
 
+/* ==========================================================================
+
+   CTM PATH™ Guided Journey™
+
+   File        : status-card.css
+   Version     : 1.0
+   Status      : 🔒 LOCKED
+
+   Purpose
+   --------------------------------------------------------------------------
+   Premium Status Card™
+
+   Owns
+
+   ✓ Status Card
+   ✓ Status Badge
+   ✓ Status Colours
+   ✓ Encouragement Area
+
+   ========================================================================== */
+
+
+
+/* ==========================================================================
+   CARD
+   ========================================================================== */
+
+.status-card-component{
+
+    background:var(--glass-bg);
+
+    border:1px solid var(--glass-border);
+
+    border-radius:28px;
+
+    padding:40px;
+
+    text-align:center;
+
+    backdrop-filter:blur(20px);
+
+}
+
+
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+
+.status-header{
+
+    margin-bottom:32px;
+
+}
+
+
+
+.status-label{
+
+    display:block;
+
+    color:var(--text-muted);
+
+    font-size:.80rem;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+
+    margin-bottom:12px;
+
+}
+
+
+
+.status-name{
+
+    margin-bottom:8px;
+
+}
+
+
+
+.status-subtitle{
+
+    color:var(--text-secondary);
+
+}
+
+
+
+/* ==========================================================================
+   SCORE
+   ========================================================================== */
+
+.status-score{
+
+    margin-bottom:32px;
+
+}
+
+
+
+.score-caption{
+
+    display:block;
+
+    color:var(--text-muted);
+
+    margin-bottom:8px;
+
+}
+
+
+
+.score-value{
+
+    font-size:3rem;
+
+    font-weight:700;
+
+}
+
+
+
+/* ==========================================================================
+   BADGE
+   ========================================================================== */
+
+.status-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:
+
+        12px 24px;
+
+    border-radius:999px;
+
+    border:1px solid;
+
+    margin-bottom:28px;
+
+}
+
+
+
+/* ==========================================================================
+   STATUS COLOURS
+   ========================================================================== */
+
+.status-card-component.status-learner{
+
+    border-color:#C73B3B;
+
+}
+
+
+
+.status-card-component.status-learner
+
+.status-badge{
+
+    color:#E05252;
+
+    border-color:#E05252;
+
+}
+
+
+
+.status-card-component.status-leader{
+
+    border-color:#E49A28;
+
+}
+
+
+
+.status-card-component.status-leader
+
+.status-badge{
+
+    color:#E49A28;
+
+    border-color:#E49A28;
+
+}
+
+
+
+.status-card-component.status-legend{
+
+    border-color:#1FAE66;
+
+}
+
+
+
+.status-card-component.status-legend
+
+.status-badge{
+
+    color:#1FAE66;
+
+    border-color:#1FAE66;
+
+}
+
+
+
+/* ==========================================================================
+   MESSAGE
+   ========================================================================== */
+
+.status-message{
+
+    color:var(--text-secondary);
+
+    line-height:1.8;
+
+}
+
+
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media(max-width:768px){
+
+    .status-card-component{
+
+        padding:28px;
+
+    }
+
+    .score-value{
+
+        font-size:2.5rem;
+
+    }
+
+}
+
