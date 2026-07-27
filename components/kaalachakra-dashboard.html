@@ -1,1 +1,366 @@
 
+<!-- ==========================================================================
+     CTM PATH™ Guided Journey™
+
+     File        : components/kaalachakra-dashboard.html
+     Version     : 1.0
+     Status      : 🔒 LOCKED
+
+     Purpose
+     --------------------------------------------------------------------------
+     CTM PATH™ 360™
+     Kala Chakra™ Dashboard
+
+     Responsibilities
+
+     ✓ Display CTM PATH™ 360™
+     ✓ Display Kala Chakra™
+     ✓ Display Overall Score
+     ✓ Display Current Pillar
+     ✓ Display Current Status
+     ✓ Display Progress
+     ✓ Display Encouragement
+
+     Does NOT
+
+     ✗ Calculate Scores
+     ✗ Determine Status
+     ✗ Determine Colours
+
+     ========================================================================== -->
+
+
+<template id="kaalachakra-dashboard-template">
+
+
+<section class="kaalachakra-dashboard">
+
+
+
+    <!-- ==========================================================
+         BRAND
+         ========================================================== -->
+
+
+    <header class="kd-header">
+
+
+        <div class="kd-brand">
+
+
+            <span class="kd-eyebrow">
+
+                CTM PATH™
+
+            </span>
+
+
+
+            <h2 class="kd-title">
+
+                Life Alignment™ 360
+
+            </h2>
+
+
+
+            <p class="kd-subtitle">
+
+                From Survival To Living™
+
+            </p>
+
+
+        </div>
+
+
+    </header>
+
+
+
+
+
+    <!-- ==========================================================
+         KALA CHAKRA™
+         ========================================================== -->
+
+
+    <section class="kd-wheel-panel">
+
+
+        <div
+            id="kaalachakra-container">
+
+            <!--
+                Injected by
+                kaalachakra-dashboard.js
+            -->
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- ==========================================================
+         OVERALL SCORE
+         ========================================================== -->
+
+
+    <section class="kd-card">
+
+
+        <div class="kd-card-title">
+
+            LIFE ALIGNMENT™
+
+        </div>
+
+
+
+        <div class="kd-score-value">
+
+
+            <span
+                data-overall-score>
+
+                0
+
+            </span>
+
+
+            <span class="kd-score-total">
+
+                /360
+
+            </span>
+
+
+        </div>
+
+
+
+    </section>
+
+
+
+
+
+    <!-- ==========================================================
+         CURRENT PILLAR
+         ========================================================== -->
+
+
+    <section class="kd-card">
+
+
+        <div class="kd-card-title">
+
+            CURRENT PILLAR™
+
+        </div>
+
+
+
+        <h3
+            data-current-pillar>
+
+            PURPOSE™
+
+        </h3>
+
+
+
+        <div class="kd-pillar-score">
+
+
+            <span
+                data-pillar-score>
+
+                0
+
+            </span>
+
+
+            <span>
+
+                /30
+
+            </span>
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- ==========================================================
+         CURRENT STATUS
+         ========================================================== -->
+
+
+    <section class="kd-card">
+
+
+        <div class="kd-card-title">
+
+            CURRENT STATUS™
+
+        </div>
+
+
+
+        <div
+            class="kd-status kd-status-learner"
+
+            data-status>
+
+
+            LEARNER™
+
+
+        </div>
+
+
+
+        <p
+            class="kd-message"
+
+            data-status-message>
+
+
+            Your journey has just begun.
+
+
+        </p>
+
+
+    </section>
+
+
+
+
+
+    <!-- ==========================================================
+         PROGRESS
+         ========================================================== -->
+
+
+    <section class="kd-card">
+
+
+        <div class="kd-card-title">
+
+            ASSESSMENT PROGRESS™
+
+        </div>
+
+
+
+        <div class="kd-progress">
+
+
+            <div class="kd-progress-track">
+
+
+                <div
+                    class="kd-progress-fill"
+
+                    data-progress-fill>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="kd-progress-meta">
+
+
+                <span>
+
+                    Pillar
+
+                </span>
+
+
+
+                <span
+                    data-progress>
+
+                    1 / 12
+
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- ==========================================================
+         ENCOURAGEMENT
+         ========================================================== -->
+
+
+    <section class="kd-card">
+
+
+        <div class="kd-card-title">
+
+            TODAY'S INSIGHT™
+
+        </div>
+
+
+
+        <p
+            class="kd-message"
+
+            data-insight>
+
+
+            Every meaningful transformation begins
+            with one honest answer.
+
+
+        </p>
+
+
+    </section>
+
+
+
+</section>
+
+
+</template>
+
+
+
+<!-- ==========================================================================
+
+   END OF FILE
+
+   File        : kaalachakra-dashboard.html
+   Version     : 1.0
+   Status      : 🔒 LOCKED
+
+   ========================================================================== -->
+
+   
