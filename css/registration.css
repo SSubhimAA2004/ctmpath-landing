@@ -5,51 +5,52 @@
 
  File        : css/registration.css
  Version     : 1.0
- Page        : PAGE 02 — REGISTRATION™
+
+ Page:
+ PAGE 02 — REGISTRATION™
 
  Purpose:
- Premium Registration Screen Styling
+ Premium visitor registration experience.
 
- Design Language:
- - Deep premium background
- - Soft Ivory typography
- - CTM Teal highlights
- - Muted Gold accents
- - Minimal luxury interface
+ Status:
+ 🔒 PAGE 02 FOUNDATION STYLE
 
 ==============================================================================
 */
 
 
+
 /* ==========================================================================
-   REGISTRATION FOUNDATION
+   PAGE FOUNDATION
 ========================================================================== */
 
 
 .registration-page {
 
-    min-height: 100vh;
 
-    position: relative;
+    min-height:
+
+        100vh;
+
 
     background:
 
-        linear-gradient(
-            135deg,
-            #081C3A,
-            #101820,
-            #181A1F
-        );
+        var(--ctm-background);
 
-    color: #F5F1E8;
 
-    padding: 40px 24px;
+    color:
 
-    display: flex;
+        var(--ctm-ivory);
 
-    justify-content: center;
+
+    padding:
+
+        70px 20px 90px;
+
 
 }
+
+
 
 
 
@@ -57,13 +58,20 @@
 
 .registration-container {
 
-    width: 100%;
 
-    max-width: 850px;
+    max-width:
 
-    position: relative;
+        760px;
+
+
+    margin:
+
+        auto;
+
 
 }
+
+
 
 
 
@@ -76,200 +84,16 @@
 
 .registration-header {
 
-    text-align: center;
-
-    margin-bottom: 45px;
-
-}
-
-
-
-.journey-brand {
-
-    font-size: 14px;
-
-    letter-spacing: 4px;
-
-    color:
-
-        #C8A96A;
-
-    text-transform: uppercase;
-
-    margin-bottom: 12px;
-
-}
-
-
-
-.journey-tagline {
-
-    font-size: 20px;
-
-    color:
-
-        #F5F1E8;
-
-    margin-bottom: 35px;
-
-}
-
-
-
-
-
-.step-indicator {
-
-    display: flex;
-
-    justify-content: center;
-
-    gap: 15px;
-
-    font-size: 14px;
-
-    color:
-
-        #B9E4E4;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   TITLES
-========================================================================== */
-
-
-.registration-content {
-
-    text-align: center;
-
-}
-
-
-
-.registration-title {
-
-    margin: 0;
-
-}
-
-
-
-.registration-title.tamil {
-
-    font-size:
-
-        clamp(36px,5vw,50px);
-
-    color:
-
-        #F5F1E8;
-
-}
-
-
-
-.registration-title.english {
-
-    font-size:
-
-        26px;
-
-    letter-spacing:
-
-        3px;
-
-    color:
-
-        #2C9C9C;
-
-    margin-top:
-
-        10px;
-
-}
-
-
-
-
-
-.registration-heading {
-
-    font-size:
-
-        28px;
-
-    margin-top:
-
-        40px;
-
-}
-
-
-
-
-
-.registration-description {
-
-    max-width:
-
-        700px;
-
-    margin:
-
-        25px auto 45px;
-
-}
-
-
-
-.registration-description p {
-
-    font-size:
-
-        19px;
-
-    line-height:
-
-        1.8;
-
-}
-
-
-
-
-
-
-/* ==========================================================================
-   FORM
-========================================================================== */
-
-
-.registration-form {
-
-    background:
-
-        rgba(255,255,255,0.04);
-
-    border:
-
-        1px solid rgba(200,169,106,0.25);
-
-    border-radius:
-
-        24px;
-
-    padding:
-
-        45px;
 
     text-align:
 
-        left;
+        center;
+
+
+    margin-bottom:
+
+        50px;
+
 
 }
 
@@ -278,55 +102,217 @@
 
 
 
-.form-group {
 
-    margin-bottom:
+.registration-eyebrow {
 
-        28px;
-
-}
-
-
-
-.form-group label {
-
-    display:
-
-        flex;
-
-    flex-direction:
-
-        column;
-
-    gap:
-
-        8px;
-
-    margin-bottom:
-
-        10px;
 
     color:
 
-        #F5F1E8;
+        var(--ctm-gold);
+
+
+    font-size:
+
+        13px;
+
+
+    letter-spacing:
+
+        5px;
+
+
+    text-transform:
+
+        uppercase;
+
+
+    margin-bottom:
+
+        25px;
+
+
+}
+
+
+
+
+
+
+
+.registration-header h1 {
+
+
+    color:
+
+        var(--ctm-ivory);
+
+
+    font-size:
+
+        clamp(
+
+            34px,
+
+            5vw,
+
+            52px
+
+        );
+
+
+    line-height:
+
+        1.35;
+
+
+    margin:
+
+        0 0 25px;
+
+
+}
+
+
+
+
+
+
+
+.registration-header p {
+
+
+    color:
+
+        var(--ctm-text);
+
 
     font-size:
 
         17px;
 
+
+    line-height:
+
+        1.9;
+
+
+    margin:
+
+        12px 0;
+
+
 }
 
 
 
-.form-group label .english {
+
+
+
+
+/* ==========================================================================
+   REGISTRATION CARD
+========================================================================== */
+
+
+.registration-card {
+
+
+    background:
+
+        var(--ctm-card);
+
+
+    border:
+
+        1px solid var(--ctm-border);
+
+
+    border-radius:
+
+        24px;
+
+
+    padding:
+
+        45px;
+
+
+    box-shadow:
+
+        0 25px 60px rgba(
+
+            0,
+
+            0,
+
+            0,
+
+            .35
+
+        );
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   FORM GROUPS
+========================================================================== */
+
+
+.form-group {
+
+
+    margin-bottom:
+
+        28px;
+
+
+}
+
+
+
+
+
+
+
+.form-group label {
+
+
+    display:
+
+        block;
+
+
+    color:
+
+        var(--ctm-ivory);
+
 
     font-size:
 
         15px;
 
-    color:
 
-        #B9E4E4;
+    font-weight:
+
+        600;
+
+
+    line-height:
+
+        1.8;
+
+
+    margin-bottom:
+
+        10px;
+
 
 }
 
@@ -334,7 +320,46 @@
 
 
 
+
+
+.form-group label span {
+
+
+    display:
+
+        block;
+
+
+    color:
+
+        var(--ctm-text);
+
+
+    font-size:
+
+        13px;
+
+
+    font-weight:
+
+        400;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   INPUTS
+========================================================================== */
+
+
 .form-group input,
+
 
 .form-group select {
 
@@ -344,34 +369,39 @@
         100%;
 
 
+    box-sizing:
+
+        border-box;
+
+
+    background:
+
+        var(--ctm-surface);
+
+
+    color:
+
+        var(--ctm-ivory);
+
+
+    border:
+
+        1px solid var(--ctm-border);
+
+
+    border-radius:
+
+        14px;
+
+
     padding:
 
         16px 18px;
 
 
-    border-radius:
-
-        12px;
-
-
-    border:
-
-        1px solid rgba(255,255,255,0.25);
-
-
-    background:
-
-        rgba(0,0,0,0.25);
-
-
-    color:
-
-        #F5F1E8;
-
-
     font-size:
 
-        17px;
+        16px;
 
 
     outline:
@@ -381,10 +411,38 @@
 
     transition:
 
-        border .3s ease;
+        all .3s ease;
 
 
 }
+
+
+
+
+
+
+
+.form-group input::placeholder {
+
+
+    color:
+
+        rgba(
+
+            184,
+
+            194,
+
+            209,
+
+            .55
+
+        );
+
+
+}
+
+
 
 
 
@@ -392,12 +450,28 @@
 
 .form-group input:focus,
 
+
 .form-group select:focus {
 
 
     border-color:
 
-        #2C9C9C;
+        var(--ctm-teal-light);
+
+
+    box-shadow:
+
+        0 0 0 4px rgba(
+
+            20,
+
+            184,
+
+            166,
+
+            .15
+
+        );
 
 
 }
@@ -406,11 +480,20 @@
 
 
 
+
+
 .form-group select option {
+
+
+    background:
+
+        var(--ctm-surface);
+
 
     color:
 
-        #081C3A;
+        var(--ctm-ivory);
+
 
 }
 
@@ -421,7 +504,7 @@
 
 
 /* ==========================================================================
-   SUBMIT BUTTON
+   CTA BUTTON
 ========================================================================== */
 
 
@@ -433,9 +516,24 @@
         100%;
 
 
+    margin-top:
+
+        20px;
+
+
     padding:
 
-        18px;
+        20px;
+
+
+    background:
+
+        var(--ctm-teal);
+
+
+    color:
+
+        #FFFFFF;
 
 
     border:
@@ -448,19 +546,9 @@
         50px;
 
 
-    background:
-
-        #C8A96A;
-
-
-    color:
-
-        #081C3A;
-
-
     font-size:
 
-        20px;
+        18px;
 
 
     font-weight:
@@ -473,15 +561,24 @@
         pointer;
 
 
-    margin-top:
-
-        25px;
-
-
     transition:
 
-        transform .3s ease,
-        opacity .3s ease;
+        all .35s ease;
+
+
+    box-shadow:
+
+        0 15px 40px rgba(
+
+            20,
+
+            184,
+
+            166,
+
+            .25
+
+        );
 
 
 }
@@ -489,17 +586,36 @@
 
 
 
+
+
+
 .registration-button:hover {
+
+
+    background:
+
+        var(--ctm-teal-light);
 
 
     transform:
 
-        translateY(-3px);
+        translateY(-4px);
 
 
-    opacity:
+}
 
-        .9;
+
+
+
+
+
+
+.registration-button:active {
+
+
+    transform:
+
+        scale(.98);
 
 
 }
@@ -511,11 +627,11 @@
 
 
 /* ==========================================================================
-   FOOTER
+   SECURITY NOTE
 ========================================================================== */
 
 
-.registration-footer {
+.registration-note {
 
 
     text-align:
@@ -525,37 +641,26 @@
 
     margin-top:
 
-        55px;
-
-
-    padding-top:
-
-        25px;
-
-
-    border-top:
-
-        1px solid rgba(255,255,255,.15);
+        35px;
 
 
     color:
 
-        rgba(245,241,232,.75);
+        var(--ctm-text);
+
+
+    font-size:
+
+        14px;
+
+
+    line-height:
+
+        1.8;
 
 
 }
 
-
-
-.registration-footer p {
-
-
-    margin:
-
-        8px;
-
-
-}
 
 
 
@@ -563,11 +668,12 @@
 
 
 /* ==========================================================================
-   RESPONSIVE
+   MOBILE
 ========================================================================== */
 
 
 @media(max-width:768px){
+
 
 
     .registration-page {
@@ -575,63 +681,45 @@
 
         padding:
 
-            25px 16px;
+            45px 15px 60px;
 
 
     }
 
 
 
-    .registration-form {
+
+
+    .registration-card {
 
 
         padding:
 
-            25px;
+            25px 20px;
+
+
+        border-radius:
+
+            18px;
 
 
     }
 
 
 
-    .registration-heading {
+
+
+    .registration-header h1 {
 
 
         font-size:
 
-            22px;
+            34px;
 
 
     }
 
 
-
-    .registration-description p {
-
-
-        font-size:
-
-            17px;
-
-
-    }
-
-
-
-    .step-indicator {
-
-
-        flex-direction:
-
-            column;
-
-
-        gap:
-
-            5px;
-
-
-    }
 
 
 
