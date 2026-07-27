@@ -1,1 +1,639 @@
 
+/*
+==============================================================================
+ CTM PATH™ Guided Journey™
+
+ File        : css/registration.css
+ Version     : 1.0
+ Page        : PAGE 02 — REGISTRATION™
+
+ Purpose:
+ Premium Registration Screen Styling
+
+ Design Language:
+ - Deep premium background
+ - Soft Ivory typography
+ - CTM Teal highlights
+ - Muted Gold accents
+ - Minimal luxury interface
+
+==============================================================================
+*/
+
+
+/* ==========================================================================
+   REGISTRATION FOUNDATION
+========================================================================== */
+
+
+.registration-page {
+
+    min-height: 100vh;
+
+    position: relative;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #081C3A,
+            #101820,
+            #181A1F
+        );
+
+    color: #F5F1E8;
+
+    padding: 40px 24px;
+
+    display: flex;
+
+    justify-content: center;
+
+}
+
+
+
+
+
+.registration-container {
+
+    width: 100%;
+
+    max-width: 850px;
+
+    position: relative;
+
+}
+
+
+
+
+
+/* ==========================================================================
+   HEADER
+========================================================================== */
+
+
+.registration-header {
+
+    text-align: center;
+
+    margin-bottom: 45px;
+
+}
+
+
+
+.journey-brand {
+
+    font-size: 14px;
+
+    letter-spacing: 4px;
+
+    color:
+
+        #C8A96A;
+
+    text-transform: uppercase;
+
+    margin-bottom: 12px;
+
+}
+
+
+
+.journey-tagline {
+
+    font-size: 20px;
+
+    color:
+
+        #F5F1E8;
+
+    margin-bottom: 35px;
+
+}
+
+
+
+
+
+.step-indicator {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    font-size: 14px;
+
+    color:
+
+        #B9E4E4;
+
+}
+
+
+
+
+
+/* ==========================================================================
+   TITLES
+========================================================================== */
+
+
+.registration-content {
+
+    text-align: center;
+
+}
+
+
+
+.registration-title {
+
+    margin: 0;
+
+}
+
+
+
+.registration-title.tamil {
+
+    font-size:
+
+        clamp(36px,5vw,50px);
+
+    color:
+
+        #F5F1E8;
+
+}
+
+
+
+.registration-title.english {
+
+    font-size:
+
+        26px;
+
+    letter-spacing:
+
+        3px;
+
+    color:
+
+        #2C9C9C;
+
+    margin-top:
+
+        10px;
+
+}
+
+
+
+
+
+.registration-heading {
+
+    font-size:
+
+        28px;
+
+    margin-top:
+
+        40px;
+
+}
+
+
+
+
+
+.registration-description {
+
+    max-width:
+
+        700px;
+
+    margin:
+
+        25px auto 45px;
+
+}
+
+
+
+.registration-description p {
+
+    font-size:
+
+        19px;
+
+    line-height:
+
+        1.8;
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   FORM
+========================================================================== */
+
+
+.registration-form {
+
+    background:
+
+        rgba(255,255,255,0.04);
+
+    border:
+
+        1px solid rgba(200,169,106,0.25);
+
+    border-radius:
+
+        24px;
+
+    padding:
+
+        45px;
+
+    text-align:
+
+        left;
+
+}
+
+
+
+
+
+
+.form-group {
+
+    margin-bottom:
+
+        28px;
+
+}
+
+
+
+.form-group label {
+
+    display:
+
+        flex;
+
+    flex-direction:
+
+        column;
+
+    gap:
+
+        8px;
+
+    margin-bottom:
+
+        10px;
+
+    color:
+
+        #F5F1E8;
+
+    font-size:
+
+        17px;
+
+}
+
+
+
+.form-group label .english {
+
+    font-size:
+
+        15px;
+
+    color:
+
+        #B9E4E4;
+
+}
+
+
+
+
+
+.form-group input,
+
+.form-group select {
+
+
+    width:
+
+        100%;
+
+
+    padding:
+
+        16px 18px;
+
+
+    border-radius:
+
+        12px;
+
+
+    border:
+
+        1px solid rgba(255,255,255,0.25);
+
+
+    background:
+
+        rgba(0,0,0,0.25);
+
+
+    color:
+
+        #F5F1E8;
+
+
+    font-size:
+
+        17px;
+
+
+    outline:
+
+        none;
+
+
+    transition:
+
+        border .3s ease;
+
+
+}
+
+
+
+
+
+.form-group input:focus,
+
+.form-group select:focus {
+
+
+    border-color:
+
+        #2C9C9C;
+
+
+}
+
+
+
+
+
+.form-group select option {
+
+    color:
+
+        #081C3A;
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   SUBMIT BUTTON
+========================================================================== */
+
+
+.registration-button {
+
+
+    width:
+
+        100%;
+
+
+    padding:
+
+        18px;
+
+
+    border:
+
+        none;
+
+
+    border-radius:
+
+        50px;
+
+
+    background:
+
+        #C8A96A;
+
+
+    color:
+
+        #081C3A;
+
+
+    font-size:
+
+        20px;
+
+
+    font-weight:
+
+        700;
+
+
+    cursor:
+
+        pointer;
+
+
+    margin-top:
+
+        25px;
+
+
+    transition:
+
+        transform .3s ease,
+        opacity .3s ease;
+
+
+}
+
+
+
+
+.registration-button:hover {
+
+
+    transform:
+
+        translateY(-3px);
+
+
+    opacity:
+
+        .9;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   FOOTER
+========================================================================== */
+
+
+.registration-footer {
+
+
+    text-align:
+
+        center;
+
+
+    margin-top:
+
+        55px;
+
+
+    padding-top:
+
+        25px;
+
+
+    border-top:
+
+        1px solid rgba(255,255,255,.15);
+
+
+    color:
+
+        rgba(245,241,232,.75);
+
+
+}
+
+
+
+.registration-footer p {
+
+
+    margin:
+
+        8px;
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   RESPONSIVE
+========================================================================== */
+
+
+@media(max-width:768px){
+
+
+    .registration-page {
+
+
+        padding:
+
+            25px 16px;
+
+
+    }
+
+
+
+    .registration-form {
+
+
+        padding:
+
+            25px;
+
+
+    }
+
+
+
+    .registration-heading {
+
+
+        font-size:
+
+            22px;
+
+
+    }
+
+
+
+    .registration-description p {
+
+
+        font-size:
+
+            17px;
+
+
+    }
+
+
+
+    .step-indicator {
+
+
+        flex-direction:
+
+            column;
+
+
+        gap:
+
+            5px;
+
+
+    }
+
+
+
+}
+
