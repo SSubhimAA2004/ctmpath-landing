@@ -4,129 +4,34 @@
  CTM PATH™ Guided Journey™
 
  File        : pages/registration.html
- Version     : 1.1
+ Version     : 1.0
 
  Page:
  PAGE 02 — REGISTRATION™
 
  Purpose:
- Visitor registration before assessment.
+ Visitor identity creation before assessment.
 
- Runtime:
- - Loads Registration CSS
- - Loads Shared API layer
- - Loads Storage layer
- - Loads Registration controller
+ Backend Mapping:
 
- Backend Link:
+ FullName
+ Email
+ Mobile
+ District
+ State
+ Language
+ Source
+ Device
 
- registration.js
-        ↓
- api.js
-        ↓
- WebApp
-        ↓
- VisitorService.gs
+ Status:
+ 🔒 PAGE 02 FOUNDATION
 
 ==============================================================================
 -->
 
 
-<!DOCTYPE html>
 
-<html lang="en">
-
-
-<head>
-
-
-    <meta charset="UTF-8">
-
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-
-
-    <title>
-
-        CTM PATH™ | Registration
-
-    </title>
-
-
-
-
-    <!-- Global CSS -->
-
-
-    <link
-
-        rel="stylesheet"
-
-        href="../css/foundation.css"
-
-    >
-
-
-
-    <link
-
-        rel="stylesheet"
-
-        href="../css/theme.css"
-
-    >
-
-
-
-    <link
-
-        rel="stylesheet"
-
-        href="../css/responsive.css"
-
-    >
-
-
-
-
-
-
-    <!-- Page CSS -->
-
-
-    <link
-
-        rel="stylesheet"
-
-        href="../css/registration.css"
-
-    >
-
-
-
-</head>
-
-
-
-
-
-
-
-<body>
-
-
-
-<section
-
-    class="registration-page"
-
-    id="registrationPage"
-
->
+<section class="registration-page">
 
 
 
@@ -136,130 +41,69 @@
 
 
 
-    <!-- Header -->
+    <!-- ============================================================
+         HEADER
+    ============================================================= -->
 
 
-    <header class="registration-header">
+    <div class="registration-header">
 
 
-        <p class="journey-brand">
+
+        <div class="registration-eyebrow">
 
             CTM PATH™ GUIDED JOURNEY™
-
-        </p>
-
-
-        <p class="journey-tagline">
-
-            Every Dream Has A Path
-
-        </p>
-
-
-
-
-        <div class="step-indicator">
-
-
-            <span class="step-tamil">
-
-                படி 1 / 7
-
-            </span>
-
-
-            <span class="step-english">
-
-                STEP 1 OF 7
-
-            </span>
-
-
 
         </div>
 
 
 
-    </header>
 
 
+        <h1>
 
 
+            உங்கள் பயணம் இங்கே தொடங்குகிறது
 
 
-
-    <!-- Main Content -->
-
-
-    <main class="registration-content">
+            <br>
 
 
+            Your Journey Begins Here™
 
-
-
-        <h1 class="registration-title tamil">
-
-            பதிவு
 
         </h1>
 
 
 
-        <h2 class="registration-title english">
-
-            REGISTRATION
-
-        </h2>
 
 
 
 
+        <p>
 
 
-        <h3 class="registration-heading tamil">
-
-            உங்கள் பயணத்தை தொடங்குவோம்
-
-        </h3>
+            உங்கள் தனிப்பட்ட பயணத்தை உருவாக்க
+            சில அடிப்படை விவரங்களை பகிருங்கள்.
 
 
-
-        <h3 class="registration-heading english">
-
-            LET'S BEGIN YOUR GUIDED JOURNEY
-
-        </h3>
+        </p>
 
 
 
+        <p>
+
+
+            Share a few details to personalise
+            your CTM PATH™ transformation journey.
+
+
+        </p>
 
 
 
 
-        <div class="registration-description">
-
-
-            <p class="tamil">
-
-                உங்கள் தனிப்பட்ட CTM PATH™
-                வழிகாட்டப்பட்ட பயணத்தை தொடங்க
-                சில அடிப்படை விவரங்களை மட்டும்
-                பதிவு செய்யுங்கள்.
-
-            </p>
-
-
-
-            <p class="english">
-
-                Please provide a few basic details
-                to personalise your CTM PATH™
-                Guided Journey™.
-
-            </p>
-
-
-        </div>
+    </div>
 
 
 
@@ -268,14 +112,23 @@
 
 
 
-        <!-- Registration Form -->
+
+    <!-- ============================================================
+         REGISTRATION CARD
+    ============================================================= -->
+
+
+    <div class="registration-card">
+
+
+
+
+
 
 
         <form
 
             id="registrationForm"
-
-            class="registration-form"
 
         >
 
@@ -283,6 +136,7 @@
 
 
 
+            <!-- NAME -->
 
 
             <div class="form-group">
@@ -290,14 +144,10 @@
 
                 <label>
 
-                    <span class="tamil">
 
-                        முழுப் பெயர்
+                    முழுப் பெயர்
 
-                    </span>
-
-
-                    <span class="english">
+                    <span>
 
                         Full Name
 
@@ -307,19 +157,27 @@
                 </label>
 
 
+
                 <input
 
-                    id="fullName"
-
-                    name="fullName"
 
                     type="text"
 
-                    placeholder="உங்கள் முழுப் பெயர்"
+
+                    id="fullName"
+
+
+                    name="fullName"
+
+
+                    placeholder="Enter your name"
+
 
                     required
 
+
                 >
+
 
 
             </div>
@@ -332,53 +190,7 @@
 
 
 
-            <div class="form-group">
-
-
-                <label>
-
-
-                    <span class="tamil">
-
-                        கைபேசி எண்
-
-                    </span>
-
-
-                    <span class="english">
-
-                        Mobile Number
-
-                    </span>
-
-
-                </label>
-
-
-
-                <input
-
-                    id="mobile"
-
-                    name="mobile"
-
-                    type="tel"
-
-                    placeholder="9876543210"
-
-                    required
-
-                >
-
-
-            </div>
-
-
-
-
-
-
-
+            <!-- EMAIL -->
 
 
             <div class="form-group">
@@ -387,14 +199,9 @@
                 <label>
 
 
-                    <span class="tamil">
+                    மின்னஞ்சல்
 
-                        மின்னஞ்சல் முகவரி
-
-                    </span>
-
-
-                    <span class="english">
+                    <span>
 
                         Email Address
 
@@ -407,17 +214,24 @@
 
                 <input
 
-                    id="email"
-
-                    name="email"
 
                     type="email"
 
-                    placeholder="name@example.com"
+
+                    id="email"
+
+
+                    name="email"
+
+
+                    placeholder="your@email.com"
+
 
                     required
 
+
                 >
+
 
 
             </div>
@@ -430,20 +244,72 @@
 
 
 
+            <!-- MOBILE -->
+
+
             <div class="form-group">
 
 
                 <label>
 
 
-                    <span class="tamil">
+                    WhatsApp எண்
 
-                        மாவட்டம்
+                    <span>
+
+                        WhatsApp Number
 
                     </span>
 
 
-                    <span class="english">
+                </label>
+
+
+
+                <input
+
+
+                    type="tel"
+
+
+                    id="mobile"
+
+
+                    name="mobile"
+
+
+                    placeholder="9876543210"
+
+
+                    required
+
+
+                >
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+            <!-- DISTRICT -->
+
+
+            <div class="form-group">
+
+
+                <label>
+
+
+                    மாவட்டம்
+
+                    <span>
 
                         District
 
@@ -456,17 +322,24 @@
 
                 <input
 
-                    id="district"
-
-                    name="district"
 
                     type="text"
 
-                    placeholder="உங்கள் மாவட்டம்"
+
+                    id="district"
+
+
+                    name="district"
+
+
+                    placeholder="Your district"
+
 
                     required
 
+
                 >
+
 
 
             </div>
@@ -479,20 +352,18 @@
 
 
 
+            <!-- STATE -->
+
+
             <div class="form-group">
 
 
                 <label>
 
 
-                    <span class="tamil">
+                    மாநிலம்
 
-                        மாநிலம்
-
-                    </span>
-
-
-                    <span class="english">
+                    <span>
 
                         State
 
@@ -505,17 +376,24 @@
 
                 <input
 
-                    id="state"
-
-                    name="state"
 
                     type="text"
 
-                    placeholder="உங்கள் மாநிலம்"
+
+                    id="state"
+
+
+                    name="state"
+
+
+                    placeholder="Your state"
+
 
                     required
 
+
                 >
+
 
 
             </div>
@@ -528,22 +406,20 @@
 
 
 
+            <!-- LANGUAGE -->
+
+
             <div class="form-group">
 
 
                 <label>
 
 
-                    <span class="tamil">
+                    மொழி விருப்பம்
 
-                        விருப்ப மொழி
+                    <span>
 
-                    </span>
-
-
-                    <span class="english">
-
-                        Preferred Language
+                        Language Preference
 
                     </span>
 
@@ -552,40 +428,46 @@
 
 
 
+
                 <select
+
 
                     id="language"
 
+
                     name="language"
+
 
                     required
 
+
                 >
 
-
-                    <option value="">
-
-                        மொழியை தேர்ந்தெடுக்கவும் /
-                        Select Language
-
-                    </option>
 
 
                     <option value="Tamil">
 
+
                         தமிழ் / Tamil
 
+
                     </option>
+
 
 
                     <option value="English">
 
+
                         English
+
 
                     </option>
 
 
+
+
                 </select>
+
 
 
             </div>
@@ -596,6 +478,9 @@
 
 
 
+
+
+            <!-- SOURCE -->
 
 
             <div class="form-group">
@@ -604,16 +489,12 @@
                 <label>
 
 
-                    <span class="tamil">
-
-                        CTM PATH பற்றி எவ்வாறு அறிந்தீர்கள்?
-
-                    </span>
+                    இந்த பயணத்தைப் பற்றி நீங்கள் எப்படி அறிந்தீர்கள்?
 
 
-                    <span class="english">
+                    <span>
 
-                        Referral Source
+                        How did you hear about CTM PATH™?
 
                     </span>
 
@@ -622,55 +503,108 @@
 
 
 
+
+
                 <select
+
 
                     id="source"
 
+
                     name="source"
 
+
                     required
+
 
                 >
 
 
+
                     <option value="">
 
-                        தேர்வு செய்யுங்கள் /
+
                         Select One
 
+
                     </option>
+
 
 
                     <option value="WhatsApp">
 
+
                         WhatsApp
 
+
+                    </option>
+
+
+
+                    <option value="Friend Referral">
+
+
+                        Friend / Family Recommendation
+
+
                     </option>
 
 
-                    <option value="Friend">
 
-                        Friend
+                    <option value="YouTube">
+
+
+                        YouTube
+
 
                     </option>
+
 
 
                     <option value="Social Media">
 
-                        Social Media
+
+                        Instagram / Facebook
+
 
                     </option>
+
+
+
+                    <option value="Website">
+
+
+                        Website Search
+
+
+                    </option>
+
+
+
+                    <option value="Event">
+
+
+                        Event / Workshop
+
+
+                    </option>
+
 
 
                     <option value="Other">
 
+
                         Other
+
 
                     </option>
 
 
 
+
                 </select>
+
+
 
 
             </div>
@@ -682,34 +616,39 @@
 
 
 
+
+            <!-- CTA -->
+
+
             <button
+
 
                 type="submit"
 
+
+                id="continueJourneyButton"
+
+
                 class="registration-button"
 
-                id="startAssessmentButton"
+
 
             >
 
 
-                <span class="tamil">
 
-                    மதிப்பீட்டை தொடங்குகிறேன்
-
-                </span>
+                தொடருங்கள்
 
 
+                <br>
 
-                <span class="english">
 
-                    START MY ASSESSMENT
-
-                </span>
+                Continue My Journey
 
 
 
             </button>
+
 
 
 
@@ -722,7 +661,7 @@
 
 
 
-    </main>
+    </div>
 
 
 
@@ -730,31 +669,24 @@
 
 
 
-    <footer class="registration-footer">
 
 
-        <p>
-
-            வாழ்வாங்கு வாழ்ந்திட வாரீர்!
-
-        </p>
+    <!-- SECURITY MESSAGE -->
 
 
-        <p>
-
-            From Survival To Living™
-
-        </p>
+    <div class="registration-note">
 
 
-        <p>
+        🔒 Your information is secure.
 
-            © 2026 CTM PATH™. All Rights Reserved.
+        <br>
 
-        </p>
+        It is used only to create your personalised
+        CTM PATH™ journey.
 
 
-    </footer>
+    </div>
+
 
 
 
@@ -766,31 +698,4 @@
 
 
 </section>
-
-
-
-
-
-
-
-<!-- Shared Runtime -->
-
-
-<script src="../js/api.js"></script>
-
-
-<script src="../js/storage.js"></script>
-
-
-<!-- Page Controller -->
-
-
-<script src="../js/registration.js"></script>
-
-
-
-</body>
-
-
-</html>
 
