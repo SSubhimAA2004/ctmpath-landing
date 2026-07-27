@@ -4,28 +4,26 @@
  CTM PATH™ Guided Journey™
 
  File        : js/welcome.js
- Version     : 1.1
+ Version     : 1.2
+
  Page        : PAGE 01 — WELCOME™
 
  Purpose:
  Welcome page controller.
 
  Responsibilities:
- - Initialize welcome page
- - Handle Begin Journey button
- - Navigate to Registration page
+ - Initialize Welcome page
+ - Handle Begin Journey CTA
+ - Load Registration page through app router
 
  Rules:
- - No API calls
- - No database interaction
+ - No backend calls
+ - No registration logic
  - No assessment logic
+ - Uses CTM_APP router
 
- Flow:
-
- welcome.html
-        |
-        ↓
- registration.html
+ Dependencies:
+ - js/app.js
 
 ==============================================================================
 */
@@ -35,6 +33,8 @@
 
 
     "use strict";
+
+
 
 
 
@@ -48,22 +48,33 @@
     function initWelcomePage() {
 
 
+
         const beginButton =
+
             document.getElementById(
+
                 "beginJourneyButton"
+
             );
 
 
 
-        if (!beginButton) {
+
+
+        if(!beginButton){
+
 
 
             console.warn(
+
                 "CTM PATH™: Begin Journey button not found."
+
             );
 
 
+
             return;
+
 
         }
 
@@ -71,13 +82,22 @@
 
 
 
+
         beginButton.addEventListener(
+
             "click",
-            handleBeginJourney
+
+            beginJourney
+
         );
 
 
+
     }
+
+
+
+
 
 
 
@@ -85,26 +105,49 @@
 
     /*
     ==========================================================================
-       JOURNEY START
+       START JOURNEY
     ==========================================================================
     */
 
 
-    function handleBeginJourney() {
+    function beginJourney(){
 
 
-        /*
-        Future enhancement:
-        Add transition animation here.
 
-        Example:
-        Fade out welcome screen
-        Then navigate.
+        if(
 
-        */
+            window.CTM_APP &&
+
+            typeof window.CTM_APP.loadPage === "function"
+
+        ){
 
 
-        navigateToRegistration();
+
+            window.CTM_APP.loadPage(
+
+                "pages/registration.html"
+
+            );
+
+
+
+        }
+
+        else {
+
+
+
+            console.error(
+
+                "CTM PATH™: Application router unavailable."
+
+            );
+
+
+
+        }
+
 
 
     }
@@ -112,22 +155,6 @@
 
 
 
-
-    /*
-    ==========================================================================
-       NAVIGATION
-    ==========================================================================
-    */
-
-
-    function navigateToRegistration() {
-
-
-        window.location.href =
-            "registration.html";
-
-
-    }
 
 
 
@@ -141,8 +168,11 @@
 
 
     document.addEventListener(
+
         "DOMContentLoaded",
+
         initWelcomePage
+
     );
 
 
