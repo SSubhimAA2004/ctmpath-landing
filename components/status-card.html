@@ -3,8 +3,12 @@
      CTM PATH™ Guided Journey™
 
      File        : components/status-card.html
-     Version     : 1.0
+     Version     : 2.0
      Status      : 🔒 LOCKED
+
+     Architecture
+     --------------------------------------------------------------------------
+     HTML Partial (MPA)
 
      Purpose
      --------------------------------------------------------------------------
@@ -14,121 +18,129 @@
 
      ✓ Display Current Status
      ✓ Display Pillar Score
-     ✓ Display Encouragement
-     ✓ Display Badge
+     ✓ Display Status Badge
+     ✓ Display Status Message
+     ✓ Provide JavaScript Hooks
 
      Does NOT
 
-     ✗ Calculate Status
      ✗ Calculate Scores
+     ✗ Determine Status
      ✗ Perform Business Logic
 
      ========================================================================== -->
 
 
-<template id="status-card-template">
-
-
-    <section class="status-card-component">
+<section
+    class="status-card-component">
 
 
 
-        <!-- ==========================================================
-             HEADER
-             ========================================================== -->
+    <!-- ==========================================================
+         HEADER
+         ========================================================== -->
 
 
-        <header class="status-header">
+    <header
+        class="status-header">
 
 
-            <span class="status-label">
+        <span
+            class="status-label">
 
-                CURRENT STATUS™
+            CURRENT STATUS™
+
+        </span>
+
+
+
+        <h2
+            class="status-name"
+            data-status-name>
+
+            LEARNER™
+
+        </h2>
+
+
+
+        <p
+            class="status-subtitle"
+            data-status-subtitle>
+
+            Beginning Your Journey
+
+        </p>
+
+
+    </header>
+
+
+
+
+
+    <!-- ==========================================================
+         SCORE
+         ========================================================== -->
+
+
+    <section
+        class="status-score-panel">
+
+
+        <span
+            class="score-caption">
+
+            Current Pillar Score
+
+        </span>
+
+
+
+        <div
+            class="score-display">
+
+
+            <span
+                class="score-value"
+                data-pillar-score>
+
+                0
 
             </span>
 
 
 
-            <h2
-                class="status-name"
-                data-status-name>
+            <span
+                class="score-total">
 
-                LEARNER™
-
-            </h2>
-
-
-
-            <p
-                class="status-subtitle"
-                data-status-subtitle>
-
-                Your journey has just begun.
-
-            </p>
-
-
-
-        </header>
-
-
-
-
-
-        <!-- ==========================================================
-             SCORE
-             ========================================================== -->
-
-
-        <div class="status-score">
-
-
-
-            <span class="score-caption">
-
-                Pillar Score
+                /30
 
             </span>
-
-
-
-            <div class="score-value">
-
-
-                <span data-pillar-score>
-
-                    0
-
-                </span>
-
-
-                <span>
-
-                    /30
-
-                </span>
-
-
-            </div>
-
 
 
         </div>
 
 
+    </section>
 
 
 
-        <!-- ==========================================================
-             BADGE
-             ========================================================== -->
+
+
+    <!-- ==========================================================
+         STATUS BADGE
+         ========================================================== -->
+
+
+    <section
+        class="status-badge-panel">
 
 
         <div
             class="status-badge"
 
             data-status-badge>
-
 
 
             <span
@@ -148,47 +160,93 @@
             </span>
 
 
-
         </div>
-
-
-
-
-
-        <!-- ==========================================================
-             ENCOURAGEMENT
-             ========================================================== -->
-
-
-        <div
-            class="status-message"
-
-            data-status-message>
-
-
-
-            Complete all three questions
-            to discover your current
-            Purpose™ alignment.
-
-
-
-        </div>
-
 
 
     </section>
 
 
-</template>
+
+
+
+    <!-- ==========================================================
+         STATUS MESSAGE
+         ========================================================== -->
+
+
+    <section
+        class="status-message-panel">
+
+
+        <p
+            class="status-message"
+
+            data-status-message>
+
+            Complete all three questions to
+            discover your present level of
+            Purpose™ Alignment.
+
+        </p>
+
+
+    </section>
+
+
+
+
+
+    <!-- ==========================================================
+         JOURNEY REMINDER
+         ========================================================== -->
+
+
+    <section
+        class="status-journey-panel">
+
+
+        <div
+            class="journey-reminder">
+
+
+            <span
+                class="journey-title">
+
+                Remember
+
+            </span>
+
+
+
+            <p
+                class="journey-description">
+
+                There are no right or wrong
+                answers.
+
+                Honest self-reflection creates
+                meaningful transformation.
+
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+
+
+</section>
+
 
 
 <!-- ==========================================================================
 
    END OF FILE
 
-   File        : status-card.html
-   Version     : 1.0
+   File        : components/status-card.html
+   Version     : 2.0
    Status      : 🔒 LOCKED
 
    ========================================================================== -->
