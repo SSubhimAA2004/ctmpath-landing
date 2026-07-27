@@ -4,20 +4,13 @@
  CTM PATH™ Guided Journey™
 
  File        : js/registration.js
- Version     : 1.0
+ Version     : 1.1
 
  Page:
  PAGE 02 — REGISTRATION™
 
  Purpose:
- Capture visitor details and create CTM VisitorID.
-
- Responsibilities:
- - Form validation
- - Payload creation
- - API submission
- - Save VisitorID
- - Move visitor forward
+ Create visitor profile and start journey.
 
  Dependencies:
  - api.js
@@ -25,7 +18,7 @@
  - app.js
 
  Status:
- 🔒 PAGE 02 Runtime Foundation
+ 🔒 Runtime Connected
 
 ==============================================================================
 */
@@ -34,26 +27,195 @@
 (function () {
 
 
-    "use strict";
+"use strict";
 
 
 
 
 
-    /*
-    ==========================================================================
-       INITIALIZE
-    ==========================================================================
-    */
+/*
+==============================================================================
+ INITIALIZATION
+==============================================================================
+*/
 
 
-    function initRegistrationPage(){
+function initRegistrationPage(){
+
+
+
+    console.log(
+
+        "CTM PATH™ Registration Controller Ready."
+
+    );
+
+
+
+    const form =
+
+        document.getElementById(
+
+            "registrationForm"
+
+        );
+
+
+
+
+
+    if(!form){
+
+
+
+        console.error(
+
+            "Registration form not found."
+
+        );
+
+
+        return;
+
+
+    }
+
+
+
+
+
+    form.addEventListener(
+
+        "submit",
+
+        submitRegistration
+
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+==============================================================================
+ SUBMIT REGISTRATION
+==============================================================================
+*/
+
+
+async function submitRegistration(event){
+
+
+
+    event.preventDefault();
+
+
+
+
+
+    const button =
+
+        document.getElementById(
+
+            "continueJourneyButton"
+
+        );
+
+
+
+
+
+    setButtonLoading(
+
+        button,
+
+        true
+
+    );
+
+
+
+
+
+
+
+    try {
+
+
+
+        const visitorData = {
+
+
+
+            fullName:
+
+                getField("fullName"),
+
+
+
+            email:
+
+                getField("email"),
+
+
+
+            mobile:
+
+                getField("mobile"),
+
+
+
+            district:
+
+                getField("district"),
+
+
+
+            state:
+
+                getField("state"),
+
+
+
+            language:
+
+                getField("language"),
+
+
+
+            source:
+
+                getField("source"),
+
+
+
+            device:
+
+                detectDevice()
+
+
+
+        };
+
+
+
+
 
 
 
         console.log(
 
-            "CTM PATH™ Registration Controller Ready."
+            "CTM PATH™ Visitor Data:",
+
+            visitorData
 
         );
 
@@ -61,84 +223,14 @@
 
 
 
-        const form =
-
-            document.getElementById(
-
-                "registrationForm"
-
-            );
 
 
 
+        const response =
 
+            await CTM_API.createVisitor(
 
-        if(!form){
-
-
-
-            console.error(
-
-                "CTM PATH™ Registration form missing."
-
-            );
-
-
-
-            return;
-
-
-
-        }
-
-
-
-
-
-
-
-        form.addEventListener(
-
-            "submit",
-
-            handleRegistrationSubmit
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /*
-    ==========================================================================
-       SUBMIT REGISTRATION
-    ==========================================================================
-    */
-
-
-    async function handleRegistrationSubmit(event){
-
-
-
-        event.preventDefault();
-
-
-
-
-
-        const button =
-
-            document.getElementById(
-
-                "continueJourneyButton"
+                visitorData
 
             );
 
@@ -147,364 +239,52 @@
 
 
 
-
-        setLoadingState(
-
-            button,
-
-            true
-
-        );
-
-
-
-
-
-
-
-
-
-        try {
-
-
-
-            const payload = {
-
-
-                fullName:
-
-                    getValue("fullName"),
-
-
-
-                email:
-
-                    getValue("email"),
-
-
-
-                mobile:
-
-                    getValue("mobile"),
-
-
-
-                district:
-
-                    getValue("district"),
-
-
-
-                state:
-
-                    getValue("state"),
-
-
-
-                language:
-
-                    getValue("language"),
-
-
-
-                source:
-
-                    getValue("source"),
-
-
-
-                device:
-
-                    detectDevice()
-
-
-
-            };
-
-
-
-
-
-
-
-
-
-            console.log(
-
-                "CTM PATH™ Registration Payload:",
-
-                payload
-
-            );
-
-
-
-
-
-
-
-
-
-            const response =
-
-                await createVisitor(
-
-                    payload
-
-                );
-
-
-
-
-
-
-
-
-
-            if(
-
-                response &&
-
-                response.visitorId
-
-            ){
-
-
-
-
-
-                saveVisitorData(
-
-                    response
-
-                );
-
-
-
-
-
-
-
-
-
-                showSuccess();
-
-
-
-
-
-
-
-
-
-                setTimeout(
-
-                    function(){
-
-
-
-                        CTM_APP.loadPage(
-
-                            "pages/assessment-01.html"
-
-                        );
-
-
-
-                    },
-
-                    1000
-
-                );
-
-
-
-            }
-
-            else {
-
-
-
-                throw new Error(
-
-                    "Visitor creation failed."
-
-                );
-
-
-            }
-
-
-
-
-
-        }
-
-        catch(error){
-
-
-
-            console.error(
-
-                "CTM PATH™ Registration Error:",
-
-                error
-
-            );
-
-
-
-            showError();
-
-
-
-        }
-
-        finally {
-
-
-
-            setLoadingState(
-
-                button,
-
-                false
-
-            );
-
-
-        }
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /*
-    ==========================================================================
-       GET VALUE
-    ==========================================================================
-    */
-
-
-    function getValue(id){
-
-
-
-        const element =
-
-            document.getElementById(id);
-
-
-
-
-
-        return element ?
-
-            element.value.trim()
-
-            :
-
-            "";
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /*
-    ==========================================================================
-       DEVICE DETECTION
-    ==========================================================================
-    */
-
-
-    function detectDevice(){
 
 
 
         if(
 
-            window.innerWidth <= 768
+            response &&
+
+            response.visitorId
 
         ){
 
 
 
-            return "Mobile";
+            saveVisitorSession(
 
+                response,
 
-        }
+                visitorData
 
-
-
-        return "Desktop";
-
-
-
-    }
+            );
 
 
 
+            showSuccess();
 
 
 
+            setTimeout(
+
+                function(){
 
 
 
-    /*
-    ==========================================================================
-       BUTTON STATE
-    ==========================================================================
-    */
+                    CTM_APP.loadPage(
 
+                        "pages/assessment-01.html"
 
-    function setLoadingState(
-
-        button,
-
-        loading
-
-    ){
+                    );
 
 
 
-        if(!button){
+                },
 
-            return;
+                1200
 
-        }
-
-
-
-
-
-
-
-        if(loading){
-
-
-
-            button.disabled = true;
-
-
-            button.innerHTML =
-
-                "Creating Your Journey...";
+            );
 
 
 
@@ -514,51 +294,213 @@
 
 
 
-            button.disabled = false;
+            throw new Error(
 
+                "Visitor ID not received."
 
-            button.innerHTML =
-
-                `
-
-                தொடருங்கள்
-
-                <br>
-
-                Continue My Journey
-
-                `;
-
+            );
 
 
         }
 
 
 
+
+
+
+    }
+
+    catch(error){
+
+
+
+        console.error(
+
+            "CTM PATH™ Registration Failed:",
+
+            error
+
+        );
+
+
+
+        showError();
+
+
+
+    }
+
+    finally {
+
+
+
+        setButtonLoading(
+
+            button,
+
+            false
+
+        );
+
+
     }
 
 
 
+}
 
 
 
 
 
 
-    /*
-    ==========================================================================
-       SUCCESS
-    ==========================================================================
-    */
-
-
-    function showSuccess(){
 
 
 
-        console.log(
+/*
+==============================================================================
+ FIELD HELPER
+==============================================================================
+*/
 
-            "CTM PATH™ Visitor Created Successfully."
+
+function getField(id){
+
+
+
+    const field =
+
+        document.getElementById(id);
+
+
+
+
+
+    return field ?
+
+        field.value.trim()
+
+        :
+
+        "";
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+==============================================================================
+ DEVICE
+==============================================================================
+*/
+
+
+function detectDevice(){
+
+
+
+    return window.innerWidth <= 768
+
+        ? "Mobile"
+
+        : "Desktop";
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+==============================================================================
+ SESSION STORAGE
+==============================================================================
+*/
+
+
+function saveVisitorSession(
+
+    response,
+
+    visitorData
+
+){
+
+
+
+    const session = {
+
+
+
+        visitorId:
+
+            response.visitorId,
+
+
+
+        ...visitorData,
+
+
+
+        createdAt:
+
+            new Date().toISOString()
+
+
+
+    };
+
+
+
+
+
+
+
+    if(
+
+        window.CTM_STORAGE &&
+
+        typeof window.CTM_STORAGE.save === "function"
+
+    ){
+
+
+
+        window.CTM_STORAGE.save(
+
+            "visitor",
+
+            session
+
+        );
+
+
+
+    }
+
+    else {
+
+
+
+        localStorage.setItem(
+
+            "ctmVisitor",
+
+            JSON.stringify(session)
 
         );
 
@@ -572,26 +514,46 @@
 
 
 
+    console.log(
 
+        "CTM PATH™ Visitor Session Saved:",
 
-    /*
-    ==========================================================================
-       ERROR
-    ==========================================================================
-    */
+        session
 
-
-    function showError(){
+    );
 
 
 
-        alert(
-
-            "Unable to create your journey. Please try again."
-
-        );
+}
 
 
+
+
+
+
+
+
+
+/*
+==============================================================================
+ BUTTON STATE
+==============================================================================
+*/
+
+
+function setButtonLoading(
+
+    button,
+
+    loading
+
+){
+
+
+
+    if(!button){
+
+        return;
 
     }
 
@@ -601,16 +563,126 @@
 
 
 
+    if(loading){
 
 
-    /*
-    ==========================================================================
-       START
-    ==========================================================================
-    */
+
+        button.disabled = true;
 
 
-    initRegistrationPage();
+        button.innerHTML =
+
+        `
+
+        Creating Your Journey...
+
+        `;
+
+
+
+    }
+
+    else {
+
+
+
+        button.disabled = false;
+
+
+        button.innerHTML =
+
+        `
+
+        தொடருங்கள்
+
+        <br>
+
+        Continue My Journey
+
+        `;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+==============================================================================
+ SUCCESS
+==============================================================================
+*/
+
+
+function showSuccess(){
+
+
+
+    console.log(
+
+        "CTM PATH™ Journey Created Successfully."
+
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+==============================================================================
+ ERROR
+==============================================================================
+*/
+
+
+function showError(){
+
+
+
+    alert(
+
+        "Unable to start your journey. Please try again."
+
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+==============================================================================
+ START
+==============================================================================
+*/
+
+
+initRegistrationPage();
 
 
 
