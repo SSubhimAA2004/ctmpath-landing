@@ -4,7 +4,7 @@
  CTM PATH™ Guided Journey™
 
  File        : css/welcome.css
- Version     : 1.2
+ Version     : 1.3
 
  Page:
  PAGE 01 — WELCOME™
@@ -12,16 +12,21 @@
  Purpose:
  Premium Welcome Experience Styling
 
+ Updates:
+ - Hero refinement
+ - Premium discovery cards
+ - CTA elevation
+ - Luxury spacing system
+
  Status:
- 🔒 PAGE 01 Visual Refinement
+ 🔒 PAGE 01 FINAL VISUAL REFINEMENT
 
 ==============================================================================
 */
 
 
-
 /* ==========================================================================
-   WELCOME CONTAINER
+   PAGE FOUNDATION
 ========================================================================== */
 
 
@@ -45,7 +50,7 @@
 
     padding:
 
-        50px 20px;
+        70px 20px 90px;
 
 
 }
@@ -61,12 +66,12 @@
 
     max-width:
 
-        900px;
+        980px;
 
 
     margin:
 
-        auto;
+        0 auto;
 
 
     text-align:
@@ -83,7 +88,7 @@
 
 
 /* ==========================================================================
-   LOGO
+   PREMIUM LOGO
 ========================================================================== */
 
 
@@ -92,17 +97,17 @@
 
     width:
 
-        160px;
+        180px;
 
 
     max-width:
 
-        35%;
+        40%;
 
 
     margin:
 
-        20px auto 35px;
+        10px auto 40px;
 
 
     display:
@@ -133,7 +138,7 @@
 
     font-size:
 
-        12px;
+        13px;
 
 
     letter-spacing:
@@ -148,7 +153,7 @@
 
     margin-bottom:
 
-        25px;
+        30px;
 
 
 }
@@ -160,7 +165,7 @@
 
 
 /* ==========================================================================
-   MAIN TITLE
+   HERO TITLE
 ========================================================================== */
 
 
@@ -176,11 +181,11 @@
 
         clamp(
 
-            38px,
+            42px,
 
-            5vw,
+            6vw,
 
-            58px
+            64px
 
         );
 
@@ -195,9 +200,14 @@
         700;
 
 
+    letter-spacing:
+
+        .5px;
+
+
     margin:
 
-        20px auto;
+        25px auto;
 
 
 }
@@ -218,17 +228,25 @@
 
     font-size:
 
-        22px;
+        clamp(
+
+            18px,
+
+            3vw,
+
+            24px
+
+        );
 
 
     letter-spacing:
 
-        2px;
+        3px;
 
 
     margin-bottom:
 
-        35px;
+        40px;
 
 
 }
@@ -240,7 +258,7 @@
 
 
 /* ==========================================================================
-   INTRODUCTION TEXT
+   HERO DESCRIPTION
 ========================================================================== */
 
 
@@ -249,12 +267,12 @@
 
     max-width:
 
-        700px;
+        760px;
 
 
     margin:
 
-        auto;
+        0 auto;
 
 
     color:
@@ -262,14 +280,66 @@
         var(--ctm-text);
 
 
+    font-size:
+
+        18px;
+
+
     line-height:
 
-        1.9;
+        2;
+
+
+}
+
+
+
+
+
+
+
+.welcome-description p {
+
+
+    margin:
+
+        18px 0;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   PREMIUM SECTION DIVIDER
+========================================================================== */
+
+
+.welcome-divider {
+
+
+    color:
+
+        var(--ctm-gold);
+
+
+    margin:
+
+        55px auto;
 
 
     font-size:
 
-        17px;
+        20px;
+
+
+    letter-spacing:
+
+        5px;
 
 
 }
@@ -290,7 +360,7 @@
 
     margin-top:
 
-        70px;
+        60px;
 
 
 }
@@ -311,12 +381,17 @@
 
     font-size:
 
-        22px;
+        26px;
+
+
+    line-height:
+
+        1.5;
 
 
     margin-bottom:
 
-        35px;
+        45px;
 
 
 }
@@ -348,7 +423,7 @@
 
     gap:
 
-        25px;
+        30px;
 
 
 }
@@ -357,6 +432,11 @@
 
 
 
+
+
+/* ==========================================================================
+   DISCOVERY CARDS
+========================================================================== */
 
 
 .discovery-card {
@@ -374,12 +454,27 @@
 
     border-radius:
 
-        20px;
+        22px;
 
 
     padding:
 
-        30px 20px;
+        38px 28px;
+
+
+    box-shadow:
+
+        0 20px 50px rgba(
+
+            0,
+
+            0,
+
+            0,
+
+            .25
+
+        );
 
 
     transition:
@@ -400,12 +495,27 @@
 
     transform:
 
-        translateY(-6px);
+        translateY(-8px);
 
 
     border-color:
 
         var(--ctm-gold);
+
+
+    box-shadow:
+
+        0 25px 60px rgba(
+
+            0,
+
+            0,
+
+            0,
+
+            .35
+
+        );
 
 
 }
@@ -426,12 +536,12 @@
 
     font-size:
 
-        34px;
+        42px;
 
 
     margin-bottom:
 
-        15px;
+        20px;
 
 
 }
@@ -452,12 +562,17 @@
 
     font-size:
 
-        18px;
+        20px;
 
 
-    margin-bottom:
+    line-height:
 
-        10px;
+        1.6;
+
+
+    margin:
+
+        0 0 15px;
 
 
 }
@@ -476,9 +591,14 @@
         var(--ctm-text);
 
 
+    font-size:
+
+        16px;
+
+
     line-height:
 
-        1.7;
+        1.8;
 
 
 }
@@ -490,7 +610,7 @@
 
 
 /* ==========================================================================
-   CTA AREA
+   CTA SECTION
 ========================================================================== */
 
 
@@ -499,7 +619,54 @@
 
     margin-top:
 
-        70px;
+        80px;
+
+
+}
+
+
+
+
+
+
+
+.welcome-action h2 {
+
+
+    color:
+
+        var(--ctm-ivory);
+
+
+    font-size:
+
+        28px;
+
+
+    line-height:
+
+        1.5;
+
+
+}
+
+
+
+
+
+
+
+.welcome-action p {
+
+
+    color:
+
+        var(--ctm-text);
+
+
+    margin:
+
+        20px 0 35px;
 
 
 }
@@ -515,7 +682,94 @@
 
     min-width:
 
-        280px;
+        320px;
+
+
+    padding:
+
+        20px 55px;
+
+
+    background:
+
+        var(--ctm-teal);
+
+
+    color:
+
+        #FFFFFF;
+
+
+    border-radius:
+
+        50px;
+
+
+    font-size:
+
+        18px;
+
+
+    box-shadow:
+
+        0 15px 40px rgba(
+
+            20,
+
+            184,
+
+            166,
+
+            .25
+
+        );
+
+
+}
+
+
+
+
+
+
+
+.welcome-button:hover {
+
+
+    background:
+
+        var(--ctm-teal-light);
+
+
+    transform:
+
+        translateY(-5px);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   CTA TRANSITION STATE
+========================================================================== */
+
+
+.welcome-button.journey-starting {
+
+
+    transform:
+
+        scale(.96);
+
+
+    opacity:
+
+        .8;
 
 
 }
@@ -535,12 +789,40 @@
 
 
 
+    .welcome-page {
+
+
+        padding:
+
+            45px 15px 60px;
+
+
+    }
+
+
+
+
+
     .welcome-logo {
 
 
         width:
 
             120px;
+
+
+    }
+
+
+
+
+
+    .welcome-title {
+
+
+        font-size:
+
+            38px;
 
 
     }
@@ -563,12 +845,31 @@
 
 
 
+    .discovery-card {
+
+
+        padding:
+
+            30px 20px;
+
+
+    }
+
+
+
+
+
     .welcome-button {
 
 
         width:
 
             100%;
+
+
+        min-width:
+
+            auto;
 
 
     }
