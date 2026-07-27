@@ -3,8 +3,12 @@
      CTM PATH™ Guided Journey™
 
      File        : components/kaalachakra-dashboard.html
-     Version     : 1.0
+     Version     : 2.0
      Status      : 🔒 LOCKED
+
+     Architecture
+     --------------------------------------------------------------------------
+     HTML Partial (MPA)
 
      Purpose
      --------------------------------------------------------------------------
@@ -13,24 +17,20 @@
 
      Responsibilities
 
-     ✓ Display CTM PATH™ 360™
-     ✓ Display Kala Chakra™
-     ✓ Display Overall Score
+     ✓ Display Overall Life Alignment™ Score
+     ✓ Display Interactive Kala Chakra™
      ✓ Display Current Pillar
      ✓ Display Current Status
-     ✓ Display Progress
-     ✓ Display Encouragement
+     ✓ Display Assessment Progress
+     ✓ Display Coaching Insight
 
      Does NOT
 
      ✗ Calculate Scores
      ✗ Determine Status
-     ✗ Determine Colours
+     ✗ Perform Business Logic
 
      ========================================================================== -->
-
-
-<template id="kaalachakra-dashboard-template">
 
 
 <section class="kaalachakra-dashboard">
@@ -38,7 +38,7 @@
 
 
     <!-- ==========================================================
-         BRAND
+         HEADER
          ========================================================== -->
 
 
@@ -74,6 +74,45 @@
         </div>
 
 
+
+        <div class="kd-overall-score">
+
+
+            <span class="kd-score-label">
+
+                Overall Score
+
+            </span>
+
+
+
+            <div class="kd-score-display">
+
+
+                <span
+                    class="kd-score-value"
+                    data-overall-score>
+
+                    0
+
+                </span>
+
+
+
+                <span
+                    class="kd-score-total">
+
+                    /360
+
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+
     </header>
 
 
@@ -85,14 +124,18 @@
          ========================================================== -->
 
 
-    <section class="kd-wheel-panel">
+    <section class="kd-wheel-section">
 
 
         <div
-            id="kaalachakra-container">
+            id="kaalachakra-container"
+
+            class="kd-wheel-container">
 
             <!--
-                Injected by
+                Rendered by
+
+                js/components/
                 kaalachakra-dashboard.js
             -->
 
@@ -106,174 +149,163 @@
 
 
     <!-- ==========================================================
-         OVERALL SCORE
+         SUMMARY GRID
          ========================================================== -->
 
 
-    <section class="kd-card">
-
-
-        <div class="kd-card-title">
-
-            LIFE ALIGNMENT™
-
-        </div>
+    <section class="kd-summary-grid">
 
 
 
-        <div class="kd-score-value">
+        <!-- ======================================================
+             CURRENT PILLAR
+             ====================================================== -->
 
 
-            <span
-                data-overall-score>
+        <article class="kd-card">
 
-                0
+
+            <span class="kd-card-title">
+
+                Current Pillar™
 
             </span>
 
 
-            <span class="kd-score-total">
 
-                /360
+            <h3
+                class="kd-pillar-name"
 
-            </span>
+                data-current-pillar>
 
+                PURPOSE™
 
-        </div>
-
-
-
-    </section>
+            </h3>
 
 
 
+            <div class="kd-pillar-score">
 
 
-    <!-- ==========================================================
-         CURRENT PILLAR
-         ========================================================== -->
+                <span
+                    data-pillar-score>
+
+                    0
+
+                </span>
 
 
-    <section class="kd-card">
+                <span>
+
+                    /30
+
+                </span>
 
 
-        <div class="kd-card-title">
-
-            CURRENT PILLAR™
-
-        </div>
+            </div>
 
 
-
-        <h3
-            data-current-pillar>
-
-            PURPOSE™
-
-        </h3>
+        </article>
 
 
 
-        <div class="kd-pillar-score">
 
 
-            <span
-                data-pillar-score>
-
-                0
-
-            </span>
+        <!-- ======================================================
+             CURRENT STATUS
+             ====================================================== -->
 
 
-            <span>
+        <article class="kd-card">
 
-                /30
+
+            <span class="kd-card-title">
+
+                Current Status™
 
             </span>
 
 
-        </div>
 
+            <div
+                class="kd-status kd-status-learner"
 
-    </section>
+                data-status>
 
+                LEARNER™
 
-
-
-
-    <!-- ==========================================================
-         CURRENT STATUS
-         ========================================================== -->
-
-
-    <section class="kd-card">
-
-
-        <div class="kd-card-title">
-
-            CURRENT STATUS™
-
-        </div>
+            </div>
 
 
 
-        <div
-            class="kd-status kd-status-learner"
+            <p
+                class="kd-status-message"
 
-            data-status>
+                data-status-message>
 
+                Your journey has just begun.
 
-            LEARNER™
-
-
-        </div>
+            </p>
 
 
-
-        <p
-            class="kd-message"
-
-            data-status-message>
-
-
-            Your journey has just begun.
-
-
-        </p>
-
-
-    </section>
+        </article>
 
 
 
 
 
-    <!-- ==========================================================
-         PROGRESS
-         ========================================================== -->
+        <!-- ======================================================
+             PROGRESS
+             ====================================================== -->
 
 
-    <section class="kd-card">
+        <article class="kd-card">
 
 
-        <div class="kd-card-title">
+            <span class="kd-card-title">
 
-            ASSESSMENT PROGRESS™
+                Assessment Progress™
 
-        </div>
-
-
-
-        <div class="kd-progress">
+            </span>
 
 
-            <div class="kd-progress-track">
+
+            <div class="kd-progress">
 
 
-                <div
-                    class="kd-progress-fill"
+                <div class="kd-progress-track">
 
-                    data-progress-fill>
+
+                    <div
+                        class="kd-progress-fill"
+
+                        data-progress-fill>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="kd-progress-meta">
+
+
+                    <span>
+
+                        Progress
+
+                    </span>
+
+
+
+                    <span
+                        data-progress>
+
+                        1 / 12
+
+                    </span>
+
 
                 </div>
 
@@ -281,30 +313,7 @@
             </div>
 
 
-
-            <div class="kd-progress-meta">
-
-
-                <span>
-
-                    Pillar
-
-                </span>
-
-
-
-                <span
-                    data-progress>
-
-                    1 / 12
-
-                </span>
-
-
-            </div>
-
-
-        </div>
+        </article>
 
 
     </section>
@@ -314,30 +323,28 @@
 
 
     <!-- ==========================================================
-         ENCOURAGEMENT
+         DAILY INSIGHT
          ========================================================== -->
 
 
-    <section class="kd-card">
+    <section class="kd-insight-card">
 
 
-        <div class="kd-card-title">
+        <span class="kd-card-title">
 
-            TODAY'S INSIGHT™
+            Today's Insight™
 
-        </div>
+        </span>
 
 
 
         <p
-            class="kd-message"
+            class="kd-insight"
 
             data-insight>
 
-
-            Every meaningful transformation begins
-            with one honest answer.
-
+            Every meaningful transformation
+            begins with one honest answer.
 
         </p>
 
@@ -349,16 +356,13 @@
 </section>
 
 
-</template>
-
-
 
 <!-- ==========================================================================
 
    END OF FILE
 
-   File        : kaalachakra-dashboard.html
-   Version     : 1.0
+   File        : components/kaalachakra-dashboard.html
+   Version     : 2.0
    Status      : 🔒 LOCKED
 
    ========================================================================== -->
