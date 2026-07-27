@@ -1,387 +1,1199 @@
 
 /* ==========================================================================
+   CTM PATH™
+   KALA CHAKRA™ v3.0
 
-   CTM PATH™ Guided Journey™
+   File        : css/rating-scale.css
+   Version     : 2.0
 
-   File        : rating-scale.css
-   Version     : 1.0
-   Status      : 🔒 LOCKED
+   Status      : PREMIUM COMPONENT SKIN
 
-   Purpose
-   --------------------------------------------------------------------------
-   Premium Rating Scale™
 
-   Owns
+   PURPOSE
+
+   Premium Rating Scale Experience™
+
+   Owns:
 
    ✓ Rating Layout
-   ✓ Rating Chips
-   ✓ Rating Zones
-   ✓ Selected State
-   ✓ Hover Effects
-   ✓ Accessibility States
+   ✓ Score Buttons
+   ✓ Selection Visuals
+   ✓ Interaction Feedback
+
+
+   Does NOT:
+
+   ✗ Calculate Scores
+   ✗ Store Answers
+   ✗ Control Assessment Flow
+
 
    ========================================================================== */
+
+
+
+
 
 
 
 /* ==========================================================================
-   ROOT
+   RATING CONTAINER
    ========================================================================== */
 
-.rating-scale-component{
+
+.ctm-rating-scale {
+
 
     width:100%;
 
-    margin-top:var(--space-8);
+
+    max-width:850px;
+
+
+    margin:0 auto;
+
+
+    padding:35px;
+
+
+
+    border-radius:28px;
+
+
+
+    background:
+
+        linear-gradient(
+
+            145deg,
+
+            rgba(255,255,255,0.08),
+
+            rgba(255,255,255,0.025)
+
+        );
+
+
+
+    border:
+
+        1px solid
+
+        rgba(255,255,255,.14);
+
+
+
+    box-shadow:
+
+        0 20px 60px
+
+        rgba(0,0,0,.25);
+
+
 
 }
 
 
 
+
+
+
+
+
+
 /* ==========================================================================
-   HEADER
+   RATING HEADER
    ========================================================================== */
 
-.rating-header{
+
+.rating-header {
+
 
     text-align:center;
 
-    margin-bottom:var(--space-6);
+
+    margin-bottom:30px;
+
 
 }
 
 
 
-.rating-title{
+.rating-title {
 
-    margin-bottom:var(--space-2);
+
+    color:#E7C56A;
+
+
+    font-size:1.35rem;
+
+
+    font-weight:700;
+
+
+    letter-spacing:1px;
+
 
 }
 
 
 
-.rating-subtitle{
+.rating-subtitle {
 
-    color:var(--text-secondary);
+
+    margin-top:12px;
+
+
+    color:
+
+        rgba(247,244,234,.75);
+
+
+
+    line-height:1.7;
+
 
 }
+
+
+
+
+
+
 
 
 
 /* ==========================================================================
-   SCALE
+   RATING ZONES
    ========================================================================== */
 
-.rating-scale{
 
-    display:flex;
+.rating-zones {
 
-    flex-direction:column;
 
-    gap:var(--space-6);
+    display:grid;
+
+
+    grid-template-columns:
+
+        repeat(3,1fr);
+
+
+
+    gap:18px;
+
+
+
+    margin-bottom:35px;
+
+
 
 }
 
 
 
-/* ==========================================================================
-   ZONES
-   ========================================================================== */
 
-.rating-zone{
 
-    display:flex;
 
-    flex-direction:column;
 
-    gap:var(--space-3);
+.rating-zone {
+
+
+    padding:18px;
+
+
+
+    border-radius:20px;
+
+
+
+    text-align:center;
+
+
+
+    background:
+
+        rgba(255,255,255,.04);
+
+
+
+    border:
+
+        1px solid
+
+        rgba(255,255,255,.10);
+
+
+
+    transition:
+
+        transform .3s ease,
+
+        border-color .3s ease;
+
+
 
 }
 
 
 
-.zone-label{
+.rating-zone:hover {
 
-    font-size:var(--fs-sm);
+
+    transform:
+
+        translateY(-4px);
+
+
+
+}
+
+
+
+
+
+
+
+.zone-icon {
+
+
+    display:block;
+
+
+    font-size:1.8rem;
+
+
+    margin-bottom:10px;
+
+
+}
+
+
+
+
+
+
+
+.zone-label {
+
+
+    display:block;
+
 
     font-weight:600;
 
-    letter-spacing:.08em;
-
-    text-transform:uppercase;
-
-}
-
-
-
-.rating-zone-red .zone-label{
-
-    color:#E05252;
-
-}
-
-
-
-.rating-zone-orange .zone-label{
-
-    color:#F0A640;
-
-}
-
-
-
-.rating-zone-green .zone-label{
-
-    color:#34C779;
-
-}
-
-
-
-/* ==========================================================================
-   BUTTON GROUP
-   ========================================================================== */
-
-.rating-buttons{
-
-    display:flex;
-
-    gap:var(--space-3);
-
-    flex-wrap:wrap;
-
-}
-
-
-
-/* ==========================================================================
-   CHIP
-   ========================================================================== */
-
-.rating-chip{
-
-    width:56px;
-
-    height:56px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(255,255,255,.15);
-
-    background:rgba(255,255,255,.05);
-
-    color:var(--text-primary);
-
-    font-size:1rem;
-
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:all .28s ease;
-
-    backdrop-filter:blur(10px);
-
-}
-
-
-
-.rating-chip:hover{
-
-    transform:translateY(-4px);
-
-    border-color:var(--color-gold);
-
-    box-shadow:
-
-        0 10px 24px rgba(0,0,0,.35);
-
-}
-
-
-
-/* ==========================================================================
-   RED
-   ========================================================================== */
-
-.rating-red:hover{
-
-    background:#C73B3B;
-
-}
-
-
-
-/* ==========================================================================
-   ORANGE
-   ========================================================================== */
-
-.rating-orange:hover{
-
-    background:#E49A28;
-
-}
-
-
-
-/* ==========================================================================
-   GREEN
-   ========================================================================== */
-
-.rating-green:hover{
-
-    background:#1FAE66;
-
-}
-
-
-
-/* ==========================================================================
-   SELECTED
-   ========================================================================== */
-
-.rating-chip.selected{
 
     color:#FFFFFF;
 
-    border-color:var(--color-gold);
-
-    transform:scale(1.08);
-
-    box-shadow:
-
-        0 0 0 2px rgba(198,164,91,.35),
-
-        0 12px 30px rgba(0,0,0,.45);
 
 }
+
+
+
+.zone-range {
+
+
+    display:block;
+
+
+    margin-top:8px;
+
+
+    color:#E7C56A;
+
+
+    font-size:.9rem;
+
+
+}
+
 
 
 
 /* ==========================================================================
-   SELECTED COLOURS
+   RATING BUTTON GRID
    ========================================================================== */
 
-.rating-red.selected{
 
-    background:#C73B3B;
-
-}
+.rating-buttons {
 
 
-
-.rating-orange.selected{
-
-    background:#E49A28;
-
-}
+    display:grid;
 
 
 
-.rating-green.selected{
+    grid-template-columns:
 
-    background:#1FAE66;
-
-}
+        repeat(5,1fr);
 
 
 
-/* ==========================================================================
-   SCORE
-   ========================================================================== */
+    gap:16px;
 
-.rating-selection{
 
-    display:flex;
 
     justify-content:center;
 
+
+
+    margin:
+
+        25px auto;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   RATING BUTTON
+
+   ========================================================================== */
+
+
+.rating-button {
+
+
+    aspect-ratio:1;
+
+
+
+    min-width:60px;
+
+
+
+    border-radius:18px;
+
+
+
+    border:
+
+        1px solid
+
+        rgba(255,255,255,.18);
+
+
+
+    background:
+
+        rgba(255,255,255,.06);
+
+
+
+    color:#FFFFFF;
+
+
+
+    font-size:1.25rem;
+
+
+
+    font-weight:600;
+
+
+
+    cursor:pointer;
+
+
+
+    display:flex;
+
+
+
     align-items:center;
 
-    gap:8px;
 
-    margin-top:var(--space-8);
+
+    justify-content:center;
+
+
+
+    transition:
+
+        all .35s ease;
+
+
+
+    backdrop-filter:
+
+        blur(8px);
+
+
 
 }
 
 
 
-.selection-label{
 
-    color:var(--text-secondary);
+
+
+
+
+
+.rating-button:hover {
+
+
+    transform:
+
+        translateY(-6px);
+
+
+
+    border-color:
+
+        #E7C56A;
+
+
+
+    background:
+
+        rgba(231,197,106,.15);
+
+
+
+    box-shadow:
+
+        0 12px 30px
+
+        rgba(231,197,106,.18);
+
+
 
 }
 
 
 
-.selection-value{
 
-    font-size:2rem;
+
+
+
+
+
+.rating-button:active {
+
+
+    transform:
+
+        scale(.95);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   SELECTED RATING
+
+   Applied by:
+
+   assessmentUI.js
+
+   ========================================================================== */
+
+
+.rating-button.selected {
+
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #E7C56A,
+
+            #C89B3C
+
+        );
+
+
+
+    color:#081C3A;
+
+
+
+    border-color:
+
+        #E7C56A;
+
+
+
+    transform:
+
+        translateY(-8px)
+
+        scale(1.08);
+
+
+
+    box-shadow:
+
+        0 18px 40px
+
+        rgba(231,197,106,.35);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   FINAL SCORE BUTTON
+
+   Rating 10
+
+   ========================================================================== */
+
+
+.rating-final {
+
 
     font-weight:700;
 
-    color:var(--color-primary);
+
 
 }
 
 
 
-.selection-max{
 
-    color:var(--text-muted);
 
-}
+
 
 
 
 /* ==========================================================================
-   FEEDBACK
+   SELECTED ANIMATION
+
+   Triggered by:
+
+   .rating-confirmed
+
    ========================================================================== */
 
-.rating-feedback{
 
-    margin-top:var(--space-5);
+.ctm-rating-scale.rating-confirmed {
+
+
+    animation:
+
+        ratingPulse .5s ease;
+
+
+
+}
+
+
+
+
+
+
+
+@keyframes ratingPulse {
+
+
+    0% {
+
+
+        transform:
+
+            scale(1);
+
+
+
+    }
+
+
+
+    50% {
+
+
+        transform:
+
+            scale(1.02);
+
+
+
+    }
+
+
+
+    100% {
+
+
+        transform:
+
+            scale(1);
+
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   CURRENT RATING DISPLAY
+   ========================================================================== */
+
+
+.rating-selected {
+
+
+    margin:
+
+        35px auto 10px;
+
+
 
     text-align:center;
 
-    color:var(--text-secondary);
 
-    min-height:24px;
+
+    padding:
+
+        20px;
+
+
+
+    border-radius:20px;
+
+
+
+    background:
+
+        rgba(255,255,255,.05);
+
+
+
+    border:
+
+        1px solid
+
+        rgba(255,255,255,.10);
+
+
 
 }
 
 
 
+
+
+
+
+.selected-label {
+
+
+    display:block;
+
+
+
+    color:
+
+        rgba(247,244,234,.75);
+
+
+
+    font-size:.95rem;
+
+
+
+}
+
+
+
+
+
+
+
+.selected-value {
+
+
+    display:inline-block;
+
+
+
+    margin-top:10px;
+
+
+
+    font-size:2.5rem;
+
+
+
+    font-weight:700;
+
+
+
+    color:#E7C56A;
+
+
+
+}
+
+
+
+
+
+
+
+.selected-total {
+
+
+    font-size:1.2rem;
+
+
+
+    color:#FFFFFF;
+
+
+
+}
+
+
+
+
+
+
+
+
+
 /* ==========================================================================
-   RESPONSIVE
+   GUIDANCE MESSAGE
    ========================================================================== */
 
-@media(max-width:768px){
 
-    .rating-buttons{
+.rating-guidance {
 
-        justify-content:center;
 
-    }
+    margin-top:25px;
 
-    .rating-chip{
 
-        width:52px;
 
-        height:52px;
+    text-align:center;
 
-    }
+
 
 }
 
 
 
-/* ==========================================================================
+.guidance-primary {
 
+
+    color:#FFFFFF;
+
+
+
+    font-size:1.05rem;
+
+
+
+    line-height:1.7;
+
+
+
+}
+
+
+
+.guidance-secondary {
+
+
+    margin-top:10px;
+
+
+
+    color:
+
+        rgba(247,244,234,.65);
+
+
+
+    font-size:.95rem;
+
+
+
+    line-height:1.7;
+
+
+
+}
+
+
+/* ==========================================================================
+   RESPONSIVE TABLET
+
+   ========================================================================== */
+
+
+@media(max-width:900px){
+
+
+
+    .rating-buttons {
+
+
+        grid-template-columns:
+
+            repeat(5,1fr);
+
+
+
+        gap:12px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .rating-button {
+
+
+        min-width:52px;
+
+
+
+        border-radius:16px;
+
+
+
+        font-size:1.1rem;
+
+
+
+    }
+
+
+
+
+
+
+
+    .rating-zones {
+
+
+        grid-template-columns:
+
+            1fr;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   RESPONSIVE MOBILE
+
+   ========================================================================== */
+
+
+@media(max-width:600px){
+
+
+
+    .ctm-rating-scale {
+
+
+        padding:
+
+            22px;
+
+
+
+        border-radius:22px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .rating-buttons {
+
+
+        grid-template-columns:
+
+            repeat(2,1fr);
+
+
+
+        gap:14px;
+
+
+
+        max-width:280px;
+
+
+
+        margin-left:auto;
+
+
+
+        margin-right:auto;
+
+
+
+    }
+
+
+
+
+
+
+
+    .rating-button {
+
+
+        width:100%;
+
+
+
+        min-height:65px;
+
+
+
+        aspect-ratio:auto;
+
+
+
+        font-size:1.25rem;
+
+
+
+        border-radius:20px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .rating-button.selected {
+
+
+        transform:
+
+            scale(1.04);
+
+
+
+    }
+
+
+
+
+
+
+
+    .rating-title {
+
+
+        font-size:1.15rem;
+
+
+
+    }
+
+
+
+
+
+
+
+    .rating-subtitle {
+
+
+        font-size:.95rem;
+
+
+
+    }
+
+
+
+
+
+
+
+    .selected-value {
+
+
+        font-size:2rem;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   ACCESSIBILITY
+
+   ========================================================================== */
+
+
+.rating-button:focus-visible {
+
+
+    outline:
+
+        3px solid
+
+        #E7C56A;
+
+
+
+    outline-offset:
+
+        4px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   TOUCH OPTIMIZATION
+
+   ========================================================================== */
+
+
+@media(pointer:coarse){
+
+
+
+    .rating-button {
+
+
+        min-height:64px;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   COMPONENT READY MARKER
+
+   ========================================================================== */
+
+
+.ctm-rating-scale[data-ready="true"] {
+
+
+    opacity:1;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
    END OF FILE
 
-   File : rating-scale.css
-   Version : 1.0
+   rating-scale.css
+
+   Version : 2.0
+
+
+   Status
+
+   ✓ PREMIUM RATING EXPERIENCE READY
+   ✓ RESPONSIVE READY
+   ✓ TOUCH OPTIMIZED
+   ✓ ACCESSIBILITY READY
+
 
    ========================================================================== */
+
 
