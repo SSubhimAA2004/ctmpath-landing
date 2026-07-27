@@ -4,19 +4,22 @@
  CTM PATH™ Guided Journey™
 
  File        : js/app.js
- Version     : 1.7
+ Version     : 1.8
 
  Purpose:
  Application Shell Controller
 
- Updates:
- - Global header enabled for all pages
- - Unified brand experience
- - Dynamic asset loading
- - Page transition management
+ Responsibilities:
+ - Page loading
+ - Global header lifecycle
+ - Global footer lifecycle
+ - Dynamic CSS loading
+ - Dynamic JS loading
+ - Page transitions
+ - Scroll management
 
  Status:
- 🔒 GLOBAL BRAND ARCHITECTURE
+ 🔒 GLOBAL APPLICATION SHELL
 
 ==============================================================================
 */
@@ -29,17 +32,29 @@
 
 
 
+
+
 const CTM_APP = {
+
+
+
 
 
     version:
 
-        "1.7",
+        "1.8",
+
+
+
 
 
     currentPage:
 
         null,
+
+
+
+
 
 
 
@@ -57,6 +72,7 @@ init:
 async function(){
 
 
+
     console.log(
 
         "CTM PATH™ Guided Journey™ initialized."
@@ -64,11 +80,15 @@ async function(){
     );
 
 
+
+
+
     await this.loadPage(
 
         "pages/welcome.html"
 
     );
+
 
 
 },
@@ -91,6 +111,7 @@ loadPage:
 async function(pagePath){
 
 
+
     const container =
 
         document.getElementById(
@@ -101,7 +122,10 @@ async function(pagePath){
 
 
 
+
+
     if(!container){
+
 
 
         console.error(
@@ -111,10 +135,13 @@ async function(pagePath){
         );
 
 
+
         return;
 
 
     }
+
+
 
 
 
@@ -129,6 +156,10 @@ async function(pagePath){
             "page-loading"
 
         );
+
+
+
+
 
 
 
@@ -149,6 +180,31 @@ async function(pagePath){
 
 
 
+
+        /*
+        --------------------------------------------------------------
+        CLEAN PREVIOUS COMPONENTS
+        --------------------------------------------------------------
+        */
+
+
+        this.removeGlobalComponents();
+
+
+
+
+
+
+
+
+
+        /*
+        --------------------------------------------------------------
+        LOAD PAGE CSS
+        --------------------------------------------------------------
+        */
+
+
         await this.loadCSS(
 
             "css/" + pageName + ".css"
@@ -163,6 +219,13 @@ async function(pagePath){
 
 
 
+        /*
+        --------------------------------------------------------------
+        LOAD PAGE HTML
+        --------------------------------------------------------------
+        */
+
+
         const response =
 
             await fetch(
@@ -175,14 +238,22 @@ async function(pagePath){
 
 
 
+
+
         if(!response.ok){
+
 
 
             throw new Error(
 
-                "Unable to load " + pagePath
+                "Unable to load page: "
+
+                +
+
+                pagePath
 
             );
+
 
 
         }
@@ -192,9 +263,11 @@ async function(pagePath){
 
 
 
+
         const html =
 
             await response.text();
+
 
 
 
@@ -214,25 +287,12 @@ async function(pagePath){
 
         /*
         --------------------------------------------------------------
-        GLOBAL BRAND HEADER
+        LOAD GLOBAL BRAND SYSTEM
         --------------------------------------------------------------
         */
 
 
         await this.loadHeader();
-
-
-
-
-
-
-
-
-        /*
-        --------------------------------------------------------------
-        GLOBAL FOOTER
-        --------------------------------------------------------------
-        */
 
 
         await this.loadFooter();
@@ -256,6 +316,14 @@ async function(pagePath){
 
 
 
+
+        /*
+        --------------------------------------------------------------
+        LOAD PAGE CONTROLLER
+        --------------------------------------------------------------
+        */
+
+
         await this.loadPageScript(
 
             pageName
@@ -269,16 +337,32 @@ async function(pagePath){
 
 
 
+
+        /*
+        --------------------------------------------------------------
+        RESET VIEWPORT
+        --------------------------------------------------------------
+        */
+
+
         window.scrollTo({
 
 
-            top:0,
+
+            top:
+
+                0,
 
 
-            behavior:"smooth"
+
+            behavior:
+
+                "smooth"
+
 
 
         });
+
 
 
 
@@ -297,7 +381,9 @@ async function(pagePath){
             );
 
 
+
         },300);
+
 
 
 
@@ -311,6 +397,7 @@ async function(pagePath){
     catch(error){
 
 
+
         console.error(
 
             "CTM PATH™ Application Error:",
@@ -318,6 +405,80 @@ async function(pagePath){
             error
 
         );
+
+
+
+    }
+
+
+
+},
+
+
+
+
+
+
+
+/*
+==============================================================================
+ REMOVE GLOBAL COMPONENTS
+==============================================================================
+*/
+
+
+removeGlobalComponents:
+
+function(){
+
+
+
+    const header =
+
+        document.querySelector(
+
+            ".ctm-header"
+
+        );
+
+
+
+
+
+    if(header){
+
+
+
+        header.remove();
+
+
+
+    }
+
+
+
+
+
+
+
+    const footer =
+
+        document.querySelector(
+
+            ".ctm-footer"
+
+        );
+
+
+
+
+
+    if(footer){
+
+
+
+        footer.remove();
+
 
 
     }
@@ -344,6 +505,7 @@ getPageName:
 function(path){
 
 
+
     return path
 
         .split("/")
@@ -359,6 +521,7 @@ function(path){
         );
 
 
+
 },
 
 
@@ -369,7 +532,7 @@ function(path){
 
 /*
 ==============================================================================
- HEADER LOADER
+ LOAD HEADER
 ==============================================================================
 */
 
@@ -377,30 +540,6 @@ function(path){
 loadHeader:
 
 async function(){
-
-
-    const existing =
-
-        document.querySelector(
-
-            ".ctm-header"
-
-        );
-
-
-
-
-
-    if(existing){
-
-
-        existing.remove();
-
-
-    }
-
-
-
 
 
 
@@ -417,14 +556,17 @@ async function(){
 
 
 
+
     if(!response.ok){
+
 
 
         console.warn(
 
-            "Header component missing."
+            "CTM PATH™ Header unavailable."
 
         );
+
 
 
         return;
@@ -437,9 +579,11 @@ async function(){
 
 
 
+
     const html =
 
         await response.text();
+
 
 
 
@@ -466,7 +610,7 @@ async function(){
 
 /*
 ==============================================================================
- FOOTER LOADER
+ LOAD FOOTER
 ==============================================================================
 */
 
@@ -474,30 +618,6 @@ async function(){
 loadFooter:
 
 async function(){
-
-
-    const existing =
-
-        document.querySelector(
-
-            ".ctm-footer"
-
-        );
-
-
-
-
-
-    if(existing){
-
-
-        existing.remove();
-
-
-    }
-
-
-
 
 
 
@@ -514,20 +634,24 @@ async function(){
 
 
 
+
     if(!response.ok){
+
 
 
         console.warn(
 
-            "Footer component missing."
+            "CTM PATH™ Footer unavailable."
 
         );
+
 
 
         return;
 
 
     }
+
 
 
 
@@ -543,6 +667,7 @@ async function(){
 
 
 
+
     document.body.insertAdjacentHTML(
 
         "beforeend",
@@ -550,6 +675,7 @@ async function(){
         html
 
     );
+
 
 
 },
@@ -572,7 +698,10 @@ loadCSS:
 function(file){
 
 
+
     return new Promise(resolve=>{
+
+
 
 
 
@@ -588,7 +717,10 @@ function(file){
 
 
 
+
+
         if(exists){
+
 
 
             resolve();
@@ -597,7 +729,9 @@ function(file){
             return;
 
 
+
         }
+
 
 
 
@@ -616,9 +750,15 @@ function(file){
 
 
 
+
+
         link.rel =
 
             "stylesheet";
+
+
+
+
 
 
 
@@ -630,15 +770,25 @@ function(file){
 
 
 
+
+
         link.onload =
 
             resolve;
 
 
 
+
+
+
+
         link.onerror =
 
             resolve;
+
+
+
+
 
 
 
@@ -674,7 +824,10 @@ loadPageScript:
 function(pageName){
 
 
+
     return new Promise(resolve=>{
+
+
 
 
 
@@ -685,6 +838,8 @@ function(pageName){
             pageName +
 
             ".js";
+
+
 
 
 
@@ -703,13 +858,17 @@ function(pageName){
 
 
 
+
+
         if(existing){
+
 
 
             resolve();
 
 
             return;
+
 
 
         }
@@ -733,13 +892,34 @@ function(pageName){
 
 
 
-        script.src = file;
+
+        script.src =
+
+            file;
 
 
-        script.onload = resolve;
 
 
-        script.onerror = resolve;
+
+
+
+        script.onload =
+
+            resolve;
+
+
+
+
+
+
+
+        script.onerror =
+
+            resolve;
+
+
+
+
 
 
 
@@ -784,7 +964,9 @@ document.addEventListener(
     ()=>{
 
 
+
         CTM_APP.init();
+
 
 
     }
