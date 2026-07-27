@@ -1,65 +1,111 @@
 
 /* ==========================================================================
+   CTM PATH™
+   KALA CHAKRA™ v3.0
 
-   CTM PATH™ Guided Journey™
+   File        : css/kaalachakra-dashboard.css
+   Version     : 2.0
 
-   File        : kaalachakra-dashboard.css
-   Version     : 1.0
-   Status      : 🔒 LOCKED
+   Status      : PREMIUM COMPONENT SKIN
 
-   Purpose
-   --------------------------------------------------------------------------
-   CTM PATH™ 360™
-   Kala Chakra™ Dashboard
 
-   Owns
+   PURPOSE
 
-   ✓ Dashboard Container
-   ✓ Score Panel
-   ✓ Status Panel
-   ✓ Progress Panel
-   ✓ Kala Chakra Container
-   ✓ Premium Layout
+   KALA CHAKRA™ Life Alignment Dashboard™
 
-   Does NOT
+   Owns:
 
-   ✗ Question Cards
-   ✗ Rating Scale
-   ✗ Assessment Logic
+   ✓ Wheel Presentation
+   ✓ Pillar Visualisation
+   ✓ Score Centre
+   ✓ Premium Dashboard Identity
+
+
+   Does NOT:
+
+   ✗ Calculate Scores
+   ✗ Modify Engine State
+
 
    ========================================================================== */
+
+
+
+
 
 
 
 /* ==========================================================================
-   ROOT
+   DASHBOARD CONTAINER
    ========================================================================== */
 
-.kaalachakra-dashboard{
+
+.ctm-kalachakra-dashboard {
+
 
     width:100%;
 
-    display:flex;
 
-    flex-direction:column;
+    max-width:950px;
 
-    gap:32px;
 
-    padding:40px;
+    margin:
 
-    border-radius:32px;
+        0 auto;
 
-    background:var(--glass-bg);
 
-    border:1px solid var(--glass-border);
 
-    backdrop-filter:blur(24px);
+    padding:
+
+        45px;
+
+
+
+    border-radius:36px;
+
+
+
+    background:
+
+        linear-gradient(
+
+            145deg,
+
+            rgba(255,255,255,.08),
+
+            rgba(255,255,255,.025)
+
+        );
+
+
+
+    border:
+
+        1px solid
+
+        rgba(255,255,255,.14);
+
+
 
     box-shadow:
 
-        0 20px 60px rgba(0,0,0,.30);
+        0 30px 80px
+
+        rgba(0,0,0,.35);
+
+
+
+    color:#FFFFFF;
+
+
 
 }
+
+
+
+
+
+
 
 
 
@@ -67,397 +113,1552 @@
    HEADER
    ========================================================================== */
 
-.kd-header{
 
-    display:flex;
+.chakra-header {
 
-    justify-content:space-between;
 
-    align-items:flex-start;
+    text-align:center;
 
-    gap:32px;
+
+    margin-bottom:45px;
+
+
 
 }
 
 
 
-.kd-brand{
 
-    display:flex;
 
-    flex-direction:column;
 
-    gap:10px;
+
+.chakra-label {
+
+
+    color:#E7C56A;
+
+
+
+    font-size:.9rem;
+
+
+
+    letter-spacing:3px;
+
+
+
+    font-weight:700;
+
+
 
 }
 
 
 
-.kd-eyebrow{
-
-    font-size:.78rem;
-
-    letter-spacing:.18em;
-
-    text-transform:uppercase;
-
-    color:var(--color-gold);
-
-}
 
 
 
-.kd-title{
+
+.chakra-title {
+
+
+    margin-top:15px;
+
+
 
     font-size:2rem;
 
+
+
     font-weight:700;
 
-    color:var(--text-primary);
+
 
 }
 
 
 
-.kd-subtitle{
 
-    color:var(--text-secondary);
+
+
+
+.chakra-subtitle {
+
+
+    margin-top:12px;
+
+
+
+    color:
+
+        rgba(247,244,234,.75);
+
+
+
+    line-height:1.7;
+
+
 
 }
+
+
+
+
+
+
 
 
 
 /* ==========================================================================
-   OVERALL SCORE
+   WHEEL CONTAINER
    ========================================================================== */
 
-.kd-score{
 
-    text-align:right;
+.chakra-wheel-container {
 
-}
-
-
-
-.kd-score-label{
-
-    display:block;
-
-    font-size:.80rem;
-
-    text-transform:uppercase;
-
-    letter-spacing:.16em;
-
-    color:var(--text-muted);
-
-    margin-bottom:10px;
-
-}
-
-
-
-.kd-score-value{
-
-    font-size:4rem;
-
-    font-weight:800;
-
-    line-height:1;
-
-    color:var(--color-primary);
-
-}
-
-
-
-.kd-score-total{
-
-    font-size:1.4rem;
-
-    color:var(--text-secondary);
-
-}
-
-
-
-/* ==========================================================================
-   BODY
-   ========================================================================== */
-
-.kd-body{
-
-    display:grid;
-
-    grid-template-columns:
-
-        360px 1fr;
-
-    gap:40px;
-
-}
-
-
-
-/* ==========================================================================
-   WHEEL PANEL
-   ========================================================================== */
-
-.kd-wheel-panel{
 
     display:flex;
+
+
 
     justify-content:center;
 
-    align-items:center;
 
-}
-
-
-
-/* ==========================================================================
-   INFORMATION PANEL
-   ========================================================================== */
-
-.kd-info{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:24px;
-
-}
-
-
-
-/* ==========================================================================
-   CARD
-   ========================================================================== */
-
-.kd-card{
-
-    background:rgba(255,255,255,.04);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    border-radius:20px;
-
-    padding:24px;
-
-}
-
-
-
-.kd-card-title{
-
-    font-size:.80rem;
-
-    text-transform:uppercase;
-
-    letter-spacing:.14em;
-
-    color:var(--text-muted);
-
-    margin-bottom:12px;
-
-}
-
-
-
-/* ==========================================================================
-   PILLAR SCORE
-   ========================================================================== */
-
-.kd-pillar-score{
-
-    font-size:2.75rem;
-
-    font-weight:700;
-
-    color:var(--color-gold);
-
-}
-
-
-
-/* ==========================================================================
-   STATUS
-   ========================================================================== */
-
-.kd-status{
-
-    display:inline-flex;
 
     align-items:center;
 
-    gap:12px;
 
-    padding:12px 24px;
 
-    border-radius:999px;
+    margin:
 
-    font-weight:700;
+        40px auto;
+
+
 
 }
 
 
 
-.kd-status-learner{
-
-    color:#D64545;
-
-    border:1px solid #D64545;
-
-}
 
 
 
-.kd-status-leader{
-
-    color:#E8A23A;
-
-    border:1px solid #E8A23A;
-
-}
-
-
-
-.kd-status-legend{
-
-    color:#20B26B;
-
-    border:1px solid #20B26B;
-
-}
 
 
 
 /* ==========================================================================
-   PROGRESS
+   KALA CHAKRA WHEEL
    ========================================================================== */
 
-.kd-progress{
+
+.chakra-wheel {
+
+
+    position:relative;
+
+
+
+    width:420px;
+
+
+
+    height:420px;
+
+
+
+    border-radius:50%;
+
+
+
+    background:
+
+
+        radial-gradient(
+
+            circle,
+
+            rgba(231,197,106,.12),
+
+            transparent 60%
+
+        );
+
+
+
+    border:
+
+        2px solid
+
+        rgba(231,197,106,.25);
+
+
+
+    box-shadow:
+
+
+        0 0 50px
+
+        rgba(231,197,106,.15);
+
+
+
+    animation:
+
+        wheelAppear .8s ease;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+@keyframes wheelAppear {
+
+
+    from {
+
+
+        opacity:0;
+
+
+        transform:
+
+            scale(.85);
+
+
+
+    }
+
+
+
+    to {
+
+
+        opacity:1;
+
+
+        transform:
+
+            scale(1);
+
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   WHEEL CENTRE
+   ========================================================================== */
+
+
+.chakra-center {
+
+
+    position:absolute;
+
+
+
+    top:50%;
+
+
+    left:50%;
+
+
+
+    transform:
+
+        translate(-50%,-50%);
+
+
+
+    width:150px;
+
+
+
+    height:150px;
+
+
+
+    border-radius:50%;
+
+
 
     display:flex;
 
+
+
     flex-direction:column;
 
-    gap:14px;
+
+
+    justify-content:center;
+
+
+
+    align-items:center;
+
+
+
+    background:
+
+
+        linear-gradient(
+
+            145deg,
+
+            #081C3A,
+
+            #12376E
+
+        );
+
+
+
+    border:
+
+        2px solid
+
+        rgba(231,197,106,.5);
+
+
+
+    box-shadow:
+
+
+        0 0 35px
+
+        rgba(231,197,106,.25);
+
+
 
 }
 
 
 
-.kd-progress-track{
 
-    width:100%;
 
-    height:14px;
 
-    border-radius:999px;
 
-    background:rgba(255,255,255,.08);
+.chakra-symbol {
 
-    overflow:hidden;
+
+    font-size:2rem;
+
+
+
+    color:#E7C56A;
+
+
 
 }
 
 
 
-.kd-progress-fill{
 
-    width:0;
 
-    height:100%;
 
-    border-radius:999px;
 
-    background:linear-gradient(
+.chakra-score {
 
-        90deg,
 
-        var(--color-primary),
+    font-size:2rem;
 
-        var(--color-gold)
 
-    );
+
+    font-weight:700;
+
+
+
+    margin-top:8px;
+
+
+
+}
+
+
+
+
+
+
+
+.chakra-score-label {
+
+
+    font-size:.8rem;
+
+
+
+    color:
+
+        rgba(255,255,255,.7);
+
+
+
+}
+
+
+
+
+/* ==========================================================================
+   12 LIFE SPOKES
+
+   ========================================================================== */
+
+
+.wheel-spoke {
+
+
+    position:absolute;
+
+
+
+    width:90px;
+
+
+
+    height:90px;
+
+
+
+    border-radius:50%;
+
+
+
+    display:flex;
+
+
+
+    align-items:center;
+
+
+
+    justify-content:center;
+
+
+
+    text-align:center;
+
+
+
+    padding:10px;
+
+
+
+    background:
+
+        rgba(255,255,255,.06);
+
+
+
+    border:
+
+        1px solid
+
+        rgba(255,255,255,.15);
+
+
+
+    color:#FFFFFF;
+
+
+
+    font-size:.75rem;
+
+
+
+    font-weight:600;
+
+
+
+    cursor:pointer;
+
+
 
     transition:
 
-        width .50s ease;
+        all .35s ease;
+
+
 
 }
 
 
 
-.kd-progress-meta{
 
-    display:flex;
 
-    justify-content:space-between;
 
-    color:var(--text-secondary);
+
+.wheel-spoke:hover {
+
+
+    transform:
+
+        scale(1.12);
+
+
+
+    background:
+
+        rgba(231,197,106,.15);
+
+
+
+    border-color:
+
+        #E7C56A;
+
+
 
 }
+
+
+
+
+
+
 
 
 
 /* ==========================================================================
-   ENCOURAGEMENT
+   SPOKE POSITIONS
+
    ========================================================================== */
 
-.kd-message{
 
-    line-height:1.9;
+.spoke-01 {
 
-    color:var(--text-secondary);
+
+    top:-35px;
+
+
+    left:50%;
+
+
+    transform:
+
+        translateX(-50%);
+
+
 
 }
+
+
+
+
+
+
+
+.spoke-02 {
+
+
+    top:35px;
+
+
+    right:10px;
+
+
+
+}
+
+
+
+
+
+
+
+.spoke-03 {
+
+
+    top:140px;
+
+
+    right:-25px;
+
+
+
+}
+
+
+
+
+
+
+
+.spoke-04 {
+
+
+    bottom:55px;
+
+
+    right:20px;
+
+
+
+}
+
+
+
+
+
+
+
+.spoke-05 {
+
+
+    bottom:-25px;
+
+
+    right:150px;
+
+
+
+}
+
+
+
+
+
+
+
+.spoke-06 {
+
+
+    bottom:-25px;
+
+
+    left:150px;
+
+
+
+}
+
+
+
+
+
+
+
+.spoke-07 {
+
+
+    bottom:55px;
+
+
+    left:20px;
+
+
+
+}
+
+
+
+
+
+
+
+.spoke-08 {
+
+
+    top:140px;
+
+
+    left:-25px;
+
+
+
+}
+
+
+
+
+
+
+
+.spoke-09 {
+
+
+    top:35px;
+
+
+    left:10px;
+
+
+
+}
+
+
+
+
+
+
+
+.spoke-10 {
+
+
+    top:-35px;
+
+
+    left:30%;
+
+
+
+}
+
+
+
+
+
+
+
+.spoke-11 {
+
+
+    top:-35px;
+
+
+    right:30%;
+
+
+
+}
+
+
+
+
+
+
+
+.spoke-12 {
+
+
+    bottom:140px;
+
+
+    left:50%;
+
+
+
+    transform:
+
+        translateX(-50%);
+
+
+
+}
+
+
+
+
+
+
 
 
 
 /* ==========================================================================
-   RESPONSIVE
+   ACTIVE SPOKE
+
+   Applied by dashboard.js
+
    ========================================================================== */
 
-@media(max-width:1200px){
 
-    .kd-body{
+.wheel-spoke.active {
 
-        grid-template-columns:1fr;
 
-    }
+    background:
+
+
+        linear-gradient(
+
+            135deg,
+
+            #E7C56A,
+
+            #C89B3C
+
+        );
+
+
+
+    color:#081C3A;
+
+
+
+    border-color:
+
+        #E7C56A;
+
+
+
+    transform:
+
+        scale(1.18);
+
+
+
+    box-shadow:
+
+
+        0 0 35px
+
+        rgba(231,197,106,.45);
+
+
 
 }
 
 
 
-@media(max-width:768px){
 
-    .kaalachakra-dashboard{
 
-        padding:28px;
 
-    }
 
-    .kd-header{
 
-        flex-direction:column;
 
-    }
+/* ==========================================================================
+   CURRENT PILLAR CARD
+   ========================================================================== */
 
-    .kd-score{
 
-        text-align:left;
+.chakra-current {
 
-    }
 
-    .kd-score-value{
+    max-width:600px;
 
-        font-size:3rem;
 
-    }
+
+    margin:
+
+        45px auto;
+
+
+
+    padding:
+
+        30px;
+
+
+
+    text-align:center;
+
+
+
+    border-radius:28px;
+
+
+
+    background:
+
+
+        rgba(255,255,255,.05);
+
+
+
+    border:
+
+        1px solid
+
+        rgba(255,255,255,.12);
+
+
 
 }
+
+
+
+
+
+
+
+.pillar-symbol {
+
+
+    font-size:2.5rem;
+
+
+
+    color:#E7C56A;
+
+
+
+    margin-bottom:15px;
+
+
+
+}
+
+
+
+
+
+
+
+.chakra-current h3 {
+
+
+    font-size:1.7rem;
+
+
+
+    margin-bottom:10px;
+
+
+
+}
+
+
+
+
+
+
+
+.chakra-current p {
+
+
+    color:
+
+        rgba(247,244,234,.75);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   SCORE PANEL
+   ========================================================================== */
+
+
+.chakra-score-panel {
+
+
+    display:grid;
+
+
+
+    grid-template-columns:
+
+        repeat(2,1fr);
+
+
+
+    gap:25px;
+
+
+
+    margin-top:40px;
+
+
+
+}
+
+
+
+
+
+
+
+.chakra-score-item {
+
+
+    padding:
+
+        25px;
+
+
+
+    border-radius:24px;
+
+
+
+    text-align:center;
+
+
+
+    background:
+
+
+        rgba(255,255,255,.05);
+
+
+
+    border:
+
+        1px solid
+
+        rgba(255,255,255,.12);
+
+
+
+}
+
+
+
+
+
+
+
+.chakra-score-item span {
+
+
+    display:block;
+
+
+
+    color:
+
+        rgba(247,244,234,.65);
+
+
+
+    margin-bottom:12px;
+
+
+
+}
+
+
+
+
+
+
+
+.chakra-score-item strong {
+
+
+    font-size:1.8rem;
+
+
+
+    color:#E7C56A;
+
+
+
+}
+
+/* ==========================================================================
+   RESPONSIVE TABLET
+
+   ========================================================================== */
+
+
+@media(max-width:900px){
+
+
+
+    .chakra-wheel {
+
+
+        width:360px;
+
+
+        height:360px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .wheel-spoke {
+
+
+        width:75px;
+
+
+        height:75px;
+
+
+
+        font-size:.7rem;
+
+
+
+    }
+
+
+
+
+
+
+
+    .chakra-center {
+
+
+        width:130px;
+
+
+        height:130px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .chakra-score-panel {
+
+
+        grid-template-columns:
+
+
+            1fr;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   RESPONSIVE MOBILE
+
+   ========================================================================== */
+
+
+@media(max-width:600px){
+
+
+
+    .ctm-kalachakra-dashboard {
+
+
+        padding:
+
+            25px;
+
+
+
+        border-radius:
+
+            24px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .chakra-title {
+
+
+        font-size:
+
+            1.5rem;
+
+
+
+    }
+
+
+
+
+
+
+
+    .chakra-wheel {
+
+
+        width:
+
+            290px;
+
+
+
+        height:
+
+            290px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .chakra-center {
+
+
+        width:
+
+            110px;
+
+
+
+        height:
+
+            110px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .chakra-symbol {
+
+
+        font-size:
+
+            1.5rem;
+
+
+
+    }
+
+
+
+
+
+
+
+    .chakra-score {
+
+
+        font-size:
+
+            1.5rem;
+
+
+
+    }
+
+
+
+
+
+
+
+    .wheel-spoke {
+
+
+        width:
+
+            55px;
+
+
+
+        height:
+
+            55px;
+
+
+
+        font-size:
+
+            .55rem;
+
+
+
+        padding:
+
+            5px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .chakra-current {
+
+
+        padding:
+
+            22px;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   TOUCH OPTIMISATION
+
+   ========================================================================== */
+
+
+@media(pointer:coarse){
+
+
+
+    .wheel-spoke {
+
+
+        min-width:
+
+            60px;
+
+
+
+        min-height:
+
+            60px;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   ACCESSIBILITY
+
+   ========================================================================== */
+
+
+.wheel-spoke:focus-visible {
+
+
+    outline:
+
+        3px solid
+
+        #E7C56A;
+
+
+
+    outline-offset:
+
+        5px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   REDUCED MOTION
+
+   ========================================================================== */
+
+
+@media(prefers-reduced-motion:reduce){
+
+
+
+    .chakra-wheel,
+
+
+    .wheel-spoke {
+
+
+        animation:none;
+
+
+
+        transition:none;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   DASHBOARD REFRESH ANIMATION
+
+   Triggered by:
+
+   ctmDashboardUpdated event
+
+
+   ========================================================================== */
+
+
+.dashboard-refresh {
+
+
+    animation:
+
+        dashboardPulse .5s ease;
+
+
+
+}
+
+
+
+
+
+
+
+@keyframes dashboardPulse {
+
+
+    0% {
+
+
+        opacity:.6;
+
+
+        transform:
+
+            scale(.98);
+
+
+
+    }
+
+
+
+    100% {
+
+
+        opacity:1;
+
+
+        transform:
+
+            scale(1);
+
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   COMPONENT READY MARKER
+
+   ========================================================================== */
+
+
+.ctm-kalachakra-dashboard[data-ready="true"] {
+
+
+    opacity:1;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   END OF FILE
+
+   kaalachakra-dashboard.css
+
+   Version : 2.0
+
+
+   Status
+
+   ✓ PREMIUM WHEEL EXPERIENCE READY
+   ✓ RESPONSIVE READY
+   ✓ TOUCH OPTIMIZED
+   ✓ ACCESSIBILITY READY
+   ✓ DASHBOARD READY
+
+
+   ========================================================================== */
 
