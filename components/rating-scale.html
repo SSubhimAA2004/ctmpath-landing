@@ -3,287 +3,374 @@
      CTM PATH™ Guided Journey™
 
      File        : components/rating-scale.html
-     Version     : 1.0
+     Version     : 2.0
      Status      : 🔒 LOCKED
+
+     Architecture
+     --------------------------------------------------------------------------
+     HTML Partial (MPA)
 
      Purpose
      --------------------------------------------------------------------------
-     Premium 10-Point Rating Scale Component
+     Premium 10-Point Rating Scale™
 
      Responsibilities
 
-     ✓ Display Question Rating Scale
+     ✓ Display Premium Rating Scale
      ✓ Display Colour Zones
      ✓ Display Selected Rating
-     ✓ Expose Hooks For JavaScript
+     ✓ Display Dynamic Feedback Placeholder
+     ✓ Provide JavaScript Hooks
 
      Does NOT
 
      ✗ Calculate Scores
      ✗ Update Dashboard
      ✗ Determine Status
-     ✗ Navigate Between Pages
+     ✗ Perform Business Logic
 
      ========================================================================== -->
 
 
-<template id="rating-scale-template">
-
-
-    <section class="rating-scale-component">
+<section
+    class="rating-scale-component">
 
 
 
-        <!-- ==============================================================
-             HEADER
-             ============================================================== -->
+    <!-- ==============================================================
+         HEADER
+         ============================================================== -->
 
 
-        <div class="rating-header">
+    <header
+        class="rating-header">
 
 
-            <h3 class="rating-title">
+        <h3
+            class="rating-title">
 
-                Rate Yourself
+            Rate Yourself™
 
-            </h3>
+        </h3>
 
 
-            <p class="rating-subtitle">
 
-                உங்களுக்கு மிகவும் பொருந்தும்
-                மதிப்பெண்ணைத் தேர்ந்தெடுக்கவும்.
+        <p
+            class="rating-subtitle">
 
-            </p>
+            உங்களுக்கு மிகவும் பொருந்தும்
+            மதிப்பெண்ணைத் தேர்ந்தெடுக்கவும்.
+
+            <br>
+
+            Choose the score that best
+            reflects your present reality.
+
+        </p>
+
+
+    </header>
+
+
+
+
+
+    <!-- ==============================================================
+         SCALE
+         ============================================================== -->
+
+
+    <section
+        class="rating-scale">
+
+
+
+        <!-- ==========================================================
+             RED ZONE
+             ========================================================== -->
+
+
+        <div
+            class="rating-zone rating-zone-red">
+
+
+            <div
+                class="zone-header">
+
+
+                <span
+                    class="zone-label">
+
+                    Emerging
+
+                </span>
+
+
+                <span
+                    class="zone-description">
+
+                    Beginning the Journey
+
+                </span>
+
+
+            </div>
+
+
+
+            <div
+                class="rating-buttons">
+
+
+
+                <button
+                    type="button"
+                    class="rating-chip rating-red"
+                    data-score="1"
+                    aria-label="Score 1">
+
+                    1
+
+                </button>
+
+
+
+                <button
+                    type="button"
+                    class="rating-chip rating-red"
+                    data-score="2"
+                    aria-label="Score 2">
+
+                    2
+
+                </button>
+
+
+
+                <button
+                    type="button"
+                    class="rating-chip rating-red"
+                    data-score="3"
+                    aria-label="Score 3">
+
+                    3
+
+                </button>
+
+
+
+            </div>
 
 
         </div>
 
 
 
-        <!-- ==============================================================
-             SCALE
-             ============================================================== -->
 
 
-        <div class="rating-scale">
+        <!-- ==========================================================
+             ORANGE ZONE
+             ========================================================== -->
 
 
-
-            <!-- =======================
-                 RED ZONE
-                 ======================= -->
+        <div
+            class="rating-zone rating-zone-orange">
 
 
-            <div class="rating-zone rating-zone-red">
+            <div
+                class="zone-header">
 
 
-                <span class="zone-label">
+                <span
+                    class="zone-label">
 
-                    Needs Attention
+                    Developing
 
                 </span>
 
 
+                <span
+                    class="zone-description">
 
-                <div class="rating-buttons">
+                    Building Momentum
 
-
-
-                    <button
-                        type="button"
-                        class="rating-chip rating-red"
-                        data-score="1">
-
-                        1
-
-                    </button>
-
-
-
-                    <button
-                        type="button"
-                        class="rating-chip rating-red"
-                        data-score="2">
-
-                        2
-
-                    </button>
-
-
-
-                    <button
-                        type="button"
-                        class="rating-chip rating-red"
-                        data-score="3">
-
-                        3
-
-                    </button>
-
-
-
-                </div>
+                </span>
 
 
             </div>
 
 
 
-
-
-            <!-- =======================
-                 ORANGE ZONE
-                 ======================= -->
-
-
-            <div class="rating-zone rating-zone-orange">
-
-
-                <span class="zone-label">
-
-                    Growing
-
-                </span>
+            <div
+                class="rating-buttons">
 
 
 
-                <div class="rating-buttons">
+                <button
+                    type="button"
+                    class="rating-chip rating-orange"
+                    data-score="4"
+                    aria-label="Score 4">
+
+                    4
+
+                </button>
 
 
 
-                    <button
-                        type="button"
-                        class="rating-chip rating-orange"
-                        data-score="4">
+                <button
+                    type="button"
+                    class="rating-chip rating-orange"
+                    data-score="5"
+                    aria-label="Score 5">
 
-                        4
+                    5
 
-                    </button>
-
-
-
-                    <button
-                        type="button"
-                        class="rating-chip rating-orange"
-                        data-score="5">
-
-                        5
-
-                    </button>
+                </button>
 
 
 
-                    <button
-                        type="button"
-                        class="rating-chip rating-orange"
-                        data-score="6">
+                <button
+                    type="button"
+                    class="rating-chip rating-orange"
+                    data-score="6"
+                    aria-label="Score 6">
 
-                        6
+                    6
 
-                    </button>
-
-
-
-                    <button
-                        type="button"
-                        class="rating-chip rating-orange"
-                        data-score="7">
-
-                        7
-
-                    </button>
+                </button>
 
 
 
-                </div>
+                <button
+                    type="button"
+                    class="rating-chip rating-orange"
+                    data-score="7"
+                    aria-label="Score 7">
+
+                    7
+
+                </button>
+
 
 
             </div>
-
-
-
-
-
-            <!-- =======================
-                 GREEN ZONE
-                 ======================= -->
-
-
-            <div class="rating-zone rating-zone-green">
-
-
-                <span class="zone-label">
-
-                    Strength
-
-                </span>
-
-
-
-                <div class="rating-buttons">
-
-
-
-                    <button
-                        type="button"
-                        class="rating-chip rating-green"
-                        data-score="8">
-
-                        8
-
-                    </button>
-
-
-
-                    <button
-                        type="button"
-                        class="rating-chip rating-green"
-                        data-score="9">
-
-                        9
-
-                    </button>
-
-
-
-                    <button
-                        type="button"
-                        class="rating-chip rating-green"
-                        data-score="10">
-
-                        10
-
-                    </button>
-
-
-
-                </div>
-
-
-            </div>
-
 
 
         </div>
 
 
 
-        <!-- ==============================================================
-             CURRENT SELECTION
-             ============================================================== -->
 
 
-        <div class="rating-selection">
+        <!-- ==========================================================
+             GREEN ZONE
+             ========================================================== -->
+
+
+        <div
+            class="rating-zone rating-zone-green">
+
+
+            <div
+                class="zone-header">
+
+
+                <span
+                    class="zone-label">
+
+                    Flourishing
+
+                </span>
+
+
+                <span
+                    class="zone-description">
+
+                    Living Your Potential
+
+                </span>
+
+
+            </div>
 
 
 
-            <span class="selection-label">
+            <div
+                class="rating-buttons">
 
-                Your Rating
 
-            </span>
 
+                <button
+                    type="button"
+                    class="rating-chip rating-green"
+                    data-score="8"
+                    aria-label="Score 8">
+
+                    8
+
+                </button>
+
+
+
+                <button
+                    type="button"
+                    class="rating-chip rating-green"
+                    data-score="9"
+                    aria-label="Score 9">
+
+                    9
+
+                </button>
+
+
+
+                <button
+                    type="button"
+                    class="rating-chip rating-green"
+                    data-score="10"
+                    aria-label="Score 10">
+
+                    10
+
+                </button>
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </section>
+
+
+
+
+
+    <!-- ==============================================================
+         CURRENT SELECTION
+         ============================================================== -->
+
+
+    <section
+        class="rating-selection">
+
+
+
+        <span
+            class="selection-label">
+
+            Your Current Rating
+
+        </span>
+
+
+
+        <div
+            class="selection-score">
 
 
             <span
@@ -296,31 +383,12 @@
 
 
 
-            <span class="selection-max">
+            <span
+                class="selection-max">
 
                 /10
 
             </span>
-
-
-
-        </div>
-
-
-
-        <!-- ==============================================================
-             STATUS MESSAGE
-             ============================================================== -->
-
-
-        <div
-            class="rating-feedback"
-            data-rating-feedback>
-
-
-
-            Please select a score to continue.
-
 
 
         </div>
@@ -330,7 +398,35 @@
     </section>
 
 
-</template>
+
+
+
+    <!-- ==============================================================
+         FEEDBACK
+         ============================================================== -->
+
+
+    <section
+        class="rating-feedback-card">
+
+
+        <div
+            class="rating-feedback"
+
+            data-rating-feedback>
+
+            Select a score to continue your
+            CTM PATH™ journey.
+
+        </div>
+
+
+    </section>
+
+
+
+</section>
+
 
 
 <!-- ==========================================================================
@@ -338,7 +434,9 @@
    END OF FILE
 
    File        : components/rating-scale.html
-   Version     : 1.0
+   Version     : 2.0
    Status      : 🔒 LOCKED
 
    ========================================================================== -->
+
+   
