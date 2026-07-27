@@ -4,28 +4,24 @@
  CTM PATH™ Guided Journey™
 
  File        : css/welcome.css
- Version     : 1.1
+ Version     : 1.2
 
  Page:
  PAGE 01 — WELCOME™
 
  Purpose:
- Premium Welcome Screen Styling
-
- Updates:
- - CTM Teal CTA system
- - Premium interaction states
- - Footer compatible
+ Premium Welcome Experience Styling
 
  Status:
- 🔒 PAGE 01 VISUAL REFINEMENT
+ 🔒 PAGE 01 Visual Refinement
 
 ==============================================================================
 */
 
 
+
 /* ==========================================================================
-   WELCOME PAGE
+   WELCOME CONTAINER
 ========================================================================== */
 
 
@@ -37,42 +33,19 @@
         100vh;
 
 
-    display:
-
-        flex;
-
-
-    justify-content:
-
-        center;
-
-
-    align-items:
-
-        center;
-
-
-    padding:
-
-        40px 20px;
-
-
     background:
 
-        linear-gradient(
-
-            135deg,
-
-            #081C3A,
-
-            #181A1F
-
-        );
+        var(--ctm-background);
 
 
     color:
 
-        #F5F1E8;
+        var(--ctm-ivory);
+
+
+    padding:
+
+        50px 20px;
 
 
 }
@@ -91,9 +64,9 @@
         900px;
 
 
-    width:
+    margin:
 
-        100%;
+        auto;
 
 
     text-align:
@@ -110,31 +83,31 @@
 
 
 /* ==========================================================================
-   BRAND HEADER
+   LOGO
 ========================================================================== */
 
 
-.welcome-brand {
+.welcome-logo {
 
 
-    font-size:
+    width:
 
-        14px;
-
-
-    letter-spacing:
-
-        5px;
+        160px;
 
 
-    color:
+    max-width:
 
-        #C8A96A;
+        35%;
 
 
-    margin-bottom:
+    margin:
 
-        20px;
+        20px auto 35px;
+
+
+    display:
+
+        block;
 
 
 }
@@ -145,27 +118,86 @@
 
 
 
-.welcome-title {
+/* ==========================================================================
+   BRAND EYEBROW
+========================================================================== */
 
 
-    font-size:
-
-        clamp(38px,6vw,64px);
-
-
-    line-height:
-
-        1.2;
-
-
-    margin:
-
-        20px 0;
+.welcome-eyebrow {
 
 
     color:
 
-        #F5F1E8;
+        var(--ctm-gold);
+
+
+    font-size:
+
+        12px;
+
+
+    letter-spacing:
+
+        5px;
+
+
+    text-transform:
+
+        uppercase;
+
+
+    margin-bottom:
+
+        25px;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   MAIN TITLE
+========================================================================== */
+
+
+.welcome-title {
+
+
+    color:
+
+        var(--ctm-ivory);
+
+
+    font-size:
+
+        clamp(
+
+            38px,
+
+            5vw,
+
+            58px
+
+        );
+
+
+    line-height:
+
+        1.25;
+
+
+    font-weight:
+
+        700;
+
+
+    margin:
+
+        20px auto;
 
 
 }
@@ -179,19 +211,24 @@
 .welcome-subtitle {
 
 
-    font-size:
-
-        24px;
-
-
     color:
 
-        #14B8A6;
+        var(--ctm-teal-light);
+
+
+    font-size:
+
+        22px;
 
 
     letter-spacing:
 
         2px;
+
+
+    margin-bottom:
+
+        35px;
 
 
 }
@@ -203,56 +240,146 @@
 
 
 /* ==========================================================================
-   CTA BUTTON
+   INTRODUCTION TEXT
 ========================================================================== */
 
 
-.welcome-button {
+.welcome-description {
 
 
-    margin-top:
+    max-width:
 
-        45px;
-
-
-    padding:
-
-        18px 50px;
+        700px;
 
 
-    border-radius:
+    margin:
 
-        50px;
-
-
-    background:
-
-        #0F766E;
+        auto;
 
 
     color:
 
-        #FFFFFF;
+        var(--ctm-text);
+
+
+    line-height:
+
+        1.9;
 
 
     font-size:
 
-        20px;
+        17px;
 
 
-    font-weight:
+}
 
-        700;
+
+
+
+
+
+
+/* ==========================================================================
+   DISCOVERY SECTION
+========================================================================== */
+
+
+.discovery-section {
+
+
+    margin-top:
+
+        70px;
+
+
+}
+
+
+
+
+
+
+
+.discovery-title {
+
+
+    color:
+
+        var(--ctm-gold);
+
+
+    font-size:
+
+        22px;
+
+
+    margin-bottom:
+
+        35px;
+
+
+}
+
+
+
+
+
+
+
+.discovery-grid {
+
+
+    display:
+
+        grid;
+
+
+    grid-template-columns:
+
+        repeat(
+
+            2,
+
+            1fr
+
+        );
+
+
+    gap:
+
+        25px;
+
+
+}
+
+
+
+
+
+
+
+.discovery-card {
+
+
+    background:
+
+        var(--ctm-card);
 
 
     border:
 
-        none;
+        1px solid var(--ctm-border);
 
 
-    cursor:
+    border-radius:
 
-        pointer;
+        20px;
+
+
+    padding:
+
+        30px 20px;
 
 
     transition:
@@ -260,9 +387,25 @@
         all .35s ease;
 
 
-    box-shadow:
+}
 
-        0 10px 30px rgba(0,0,0,.25);
+
+
+
+
+
+
+.discovery-card:hover {
+
+
+    transform:
+
+        translateY(-6px);
+
+
+    border-color:
+
+        var(--ctm-gold);
 
 
 }
@@ -273,17 +416,22 @@
 
 
 
-.welcome-button:hover {
+.discovery-symbol {
 
 
-    background:
+    color:
 
-        #14B8A6;
+        var(--ctm-teal-light);
 
 
-    transform:
+    font-size:
 
-        translateY(-4px);
+        34px;
+
+
+    margin-bottom:
+
+        15px;
 
 
 }
@@ -294,21 +442,80 @@
 
 
 
-/*
-Journey transition state
-*/
-
-.welcome-button.journey-starting {
+.discovery-card h3 {
 
 
-    opacity:
+    color:
 
-        .75;
+        var(--ctm-ivory);
 
 
-    transform:
+    font-size:
 
-        scale(.97);
+        18px;
+
+
+    margin-bottom:
+
+        10px;
+
+
+}
+
+
+
+
+
+
+
+.discovery-card p {
+
+
+    color:
+
+        var(--ctm-text);
+
+
+    line-height:
+
+        1.7;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   CTA AREA
+========================================================================== */
+
+
+.welcome-action {
+
+
+    margin-top:
+
+        70px;
+
+
+}
+
+
+
+
+
+
+
+.welcome-button {
+
+
+    min-width:
+
+        280px;
 
 
 }
@@ -328,12 +535,12 @@ Journey transition state
 
 
 
-    .welcome-title {
+    .welcome-logo {
 
 
-        font-size:
+        width:
 
-            38px;
+            120px;
 
 
     }
@@ -342,12 +549,12 @@ Journey transition state
 
 
 
-    .welcome-subtitle {
+    .discovery-grid {
 
 
-        font-size:
+        grid-template-columns:
 
-            18px;
+            1fr;
 
 
     }
@@ -364,12 +571,8 @@ Journey transition state
             100%;
 
 
-        padding:
-
-            18px;
-
-
     }
+
 
 
 }
