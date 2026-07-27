@@ -1,15 +1,36 @@
 
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
     <!-- ==========================================================
-         CTM PATH™ Guided Journey v2.0
-         File    : assessment.html
-         Version : 2.1
-         Status  : 🔒 LOCKED
-         Purpose : Assessment Page
+         CTM PATH™ Guided Journey™
+
+         File        : pages/assessment.html
+         Version     : 2.0
+         Status      : 🔒 LOCKED
+
+         Architecture
+
+         Multi-Page Application (MPA)
+
+         Purpose
+
+         Premium Assessment Page
+
+         Responsibilities
+
+         ✓ Compose Assessment Components
+         ✓ Load Assessment Assets
+         ✓ Provide Page Layout
+
+         Does NOT
+
+         ✗ Calculate Scores
+         ✗ Perform Business Logic
+
          ========================================================== -->
 
     <meta charset="UTF-8">
@@ -19,43 +40,21 @@
         content="width=device-width, initial-scale=1.0">
 
     <meta
-        name="description"
-        content="CTM PATH™ Assessment">
-
-    <meta
         name="theme-color"
         content="#081C3A">
 
     <title>
 
-        CTM PATH™ | Assessment
+        CTM PATH™ Assessment™
 
     </title>
 
-    <!-- ==========================================================
-         Google Fonts
-         ========================================================== -->
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
 
     <!-- ==========================================================
-         Foundation CSS
+         CSS
          ========================================================== -->
 
-    <link
-        rel="stylesheet"
-        href="../css/reset.css">
 
     <link
         rel="stylesheet"
@@ -69,429 +68,342 @@
         rel="stylesheet"
         href="../css/app.css">
 
-    <!-- ==========================================================
-         Assessment CSS
-         ========================================================== -->
-
     <link
         rel="stylesheet"
         href="../css/assessment.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/rating-scale.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/status-card.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/kaalachakra-dashboard.css">
 
 </head>
 
 <body>
 
-<div class="app">
+
 
     <!-- ==========================================================
-         Header
+         HEADER
          ========================================================== -->
 
-    <header class="app-header">
 
-        <div class="container">
+    <?!= include("components/header"); ?>
 
-            <img
 
-                src="../assets/logo/ctm-path-logo.svg"
-
-                alt="CTM PATH"
-
-                class="logo">
-
-        </div>
-
-    </header>
 
     <!-- ==========================================================
-         Main
+         NAVIGATION
          ========================================================== -->
 
-    <main class="app-main">
 
-        <div class="container">
+    <?!= include("components/navigation"); ?>
 
-            <div class="content">
 
-                <section class="glass-card assessment-card">
 
-                    <!-- ==========================================================
-                         Progress
-                         ========================================================== -->
+    <!-- ==========================================================
+         PAGE
+         ========================================================== -->
 
-                    <div class="progress">
 
-                        <div class="progress-label">
+    <main
+        class="assessment-page">
 
-                            <span id="progressStep">
 
-                                Spoke 1 of 12
 
-                            </span>
+        <!-- ======================================================
+             PROGRESS
+             ====================================================== -->
 
-                            <span id="progressPercent">
 
-                                8%
+        <?!= include("components/progress"); ?>
 
-                            </span>
 
-                        </div>
 
-                        <div class="progress-track">
+        <!-- ======================================================
+             DASHBOARD
+             ====================================================== -->
 
-                            <div
 
-                                id="progressBar"
+        <?!= include("components/kaalachakra-dashboard"); ?>
 
-                                class="progress-fill"
 
-                                style="width:8%;">
 
-                            </div>
+        <!-- ======================================================
+             JOURNEY CARD
+             ====================================================== -->
 
-                        </div>
 
-                    </div>
+        <?!= include("components/journey-card"); ?>
 
-                    <!-- ==========================================================
-                         Pillar Header
-                         ========================================================== -->
 
-                    <div class="pillar-header">
 
-                        <div
+        <!-- ======================================================
+             QUESTION
+             ====================================================== -->
 
-                            id="pillarNumber"
 
-                            class="pillar-number">
+        <section
+            class="assessment-question">
 
-                            SPOKE 01
 
-                        </div>
 
-                        <h1
+            <header
+                class="question-header">
 
-                            id="pillarTitleTa"
 
-                            class="pillar-title-ta">
 
-                            நோக்கம்™
+                <span
+                    class="question-number"
+                    data-question-number>
 
-                        </h1>
+                    Question 1 of 3
 
-                        <h2
+                </span>
 
-                            id="pillarTitleEn"
 
-                            class="pillar-title-en">
 
-                            Purpose™
+                <h2
+                    class="question-title"
+                    data-question-title>
 
-                        </h2>
+                    Purpose™
 
-                    </div>
+                </h2>
 
-                    <!-- ==========================================================
-                         Introduction
-                         ========================================================== -->
 
-                    <div class="assessment-introduction">
 
-                        <p
+                <p
+                    class="question-tamil"
+                    data-question-tamil>
 
-                            id="introductionTa"
+                    நான் ஏன் இந்த உலகில் வாழ்கிறேன்?
 
-                            class="intro-ta">
+                </p>
 
-                        </p>
 
-                        <p
 
-                            id="introductionEn"
+                <p
+                    class="question-english"
+                    data-question-english>
 
-                            class="intro-en">
+                    Why do I exist?
 
-                        </p>
+                </p>
 
-                    </div>
 
-                    <!-- ==========================================================
-                         Continue in Batch 1B
-                         ========================================================== -->
 
-                                        <!-- ==========================================================
-                         Questions
-                         ========================================================== -->
+            </header>
 
-                    <form
 
-                        id="assessmentForm"
 
-                        novalidate>
+        </section>
 
-                        <div
+                <!-- ======================================================
+             RATING SCALE
+             ====================================================== -->
 
-                            id="questionsContainer"
 
-                            class="questions-container">
+        <?!= include("components/rating-scale"); ?>
 
-                            <!-- ==================================================
-                                 Question 1
-                                 ================================================== -->
 
-                            <article class="question-card">
 
-                                <div
+        <!-- ======================================================
+             REFLECTION
+             ====================================================== -->
 
-                                    id="questionNumber1"
 
-                                    class="question-number">
+        <section
+            class="assessment-reflection">
 
-                                    Question 1
 
-                                </div>
 
-                                <h3
+            <header
+                class="reflection-header">
 
-                                    id="questionText1"
 
-                                    class="question-text">
+                <h3>
 
-                                </h3>
+                    Reflection Moment™
 
-                                <div
+                </h3>
 
-                                    id="ratingGroup1"
 
-                                    class="rating-group">
+            </header>
 
-                                    <!-- Generated dynamically -->
 
-                                </div>
 
-                            </article>
+            <div
+                class="reflection-card">
 
-                            <!-- ==================================================
-                                 Question 2
-                                 ================================================== -->
 
-                            <article class="question-card">
+                <p
+                    data-reflection>
 
-                                <div
+                    Honest reflection is the
+                    first step towards meaningful
+                    transformation.
 
-                                    id="questionNumber2"
+                </p>
 
-                                    class="question-number">
-
-                                    Question 2
-
-                                </div>
-
-                                <h3
-
-                                    id="questionText2"
-
-                                    class="question-text">
-
-                                </h3>
-
-                                <div
-
-                                    id="ratingGroup2"
-
-                                    class="rating-group">
-
-                                    <!-- Generated dynamically -->
-
-                                </div>
-
-                            </article>
-
-                            <!-- ==================================================
-                                 Question 3
-                                 ================================================== -->
-
-                            <article class="question-card">
-
-                                <div
-
-                                    id="questionNumber3"
-
-                                    class="question-number">
-
-                                    Question 3
-
-                                </div>
-
-                                <h3
-
-                                    id="questionText3"
-
-                                    class="question-text">
-
-                                </h3>
-
-                                <div
-
-                                    id="ratingGroup3"
-
-                                    class="rating-group">
-
-                                    <!-- Generated dynamically -->
-
-                                </div>
-
-                            </article>
-
-                        </div>
-
-                        <!-- ======================================================
-                             Reflection™
-                             ====================================================== -->
-
-                        <section class="reflection-panel">
-
-                            <h3>
-
-                                Reflection™
-
-                            </h3>
-
-                            <p
-
-                                id="reflectionTa"
-
-                                class="reflection-ta">
-
-                            </p>
-
-                            <p
-
-                                id="reflectionEn"
-
-                                class="reflection-en">
-
-                            </p>
-
-                        </section>
-
-                        <!-- ======================================================
-                             Wisdom™
-                             ====================================================== -->
-
-                        <section class="wisdom-panel">
-
-                            <h3>
-
-                                Wisdom™
-
-                            </h3>
-
-                            <p
-
-                                id="wisdomTa"
-
-                                class="wisdom-ta">
-
-                            </p>
-
-                            <p
-
-                                id="wisdomEn"
-
-                                class="wisdom-en">
-
-                            </p>
-
-                        </section>
-
-                        <!-- ======================================================
-                             Continue in Batch 1C
-                             ====================================================== -->
-
-                                                <!-- ======================================================
-                             Navigation
-                             ====================================================== -->
-
-                        <div class="navigation">
-
-                            <button
-
-                                type="button"
-
-                                id="previousButton"
-
-                                class="btn btn-secondary">
-
-                                ← Previous
-
-                            </button>
-
-                            <button
-
-                                type="button"
-
-                                id="nextButton"
-
-                                class="btn btn-primary">
-
-                                Save & Continue →
-
-                            </button>
-
-                        </div>
-
-                    </form>
-
-                </section>
 
             </div>
 
-        </div>
+
+
+        </section>
+
+
+
+
+
+        <!-- ======================================================
+             WISDOM MOMENT
+             ====================================================== -->
+
+
+        <section
+            class="assessment-wisdom">
+
+
+
+            <header
+                class="wisdom-header">
+
+
+                <h3>
+
+                    Wisdom Moment™
+
+                </h3>
+
+
+            </header>
+
+
+
+            <blockquote
+                class="wisdom-card"
+
+                data-wisdom>
+
+
+                "The quality of your life
+                depends upon the quality of
+                the questions you ask yourself."
+
+
+
+            </blockquote>
+
+
+
+        </section>
+
+
+
+
+
+        <!-- ======================================================
+             NAVIGATION
+             ====================================================== -->
+
+
+        <section
+            class="assessment-actions">
+
+
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+
+                id="btnPreviousQuestion">
+
+
+                ← Previous
+
+
+            </button>
+
+
+
+            <button
+                type="button"
+                class="btn btn-primary"
+
+                id="btnNextQuestion"
+
+
+                disabled>
+
+
+                Continue Journey →
+
+            </button>
+
+
+
+        </section>
+
+
 
     </main>
 
+
+
+
+
     <!-- ==========================================================
-         Footer
+         FOOTER
          ========================================================== -->
 
-    <footer class="app-footer">
 
-        <div class="container">
+    <?!= include("components/footer"); ?>
 
-            <p>
 
-                CTM PATH™ Guided Journey v2.0
 
-            </p>
 
-        </div>
 
-    </footer>
+    <!-- ==========================================================
+         JAVASCRIPT
+         ========================================================== -->
 
-</div>
 
-<!-- ==========================================================
-     Core JavaScript
-     ========================================================== -->
+    <script
+        src="../js/components/rating-scale.js">
 
-<script src="../js/storage.js"></script>
+    </script>
 
-<script src="../js/api.js"></script>
 
-<script src="../js/app.js"></script>
 
-<!-- ==========================================================
-     Assessment Data
-     ========================================================== -->
+    <script
+        src="../js/components/kaalachakra-dashboard.js">
 
-<script src="../js/assessmentData.js"></script>
+    </script>
 
-<!-- ==========================================================
-     Assessment Controller
-     ========================================================== -->
 
-<script src="../js/assessment.js"></script>
+
+    <script
+        src="../js/assessmentEngine.js">
+
+    </script>
+
+
+
+    <script
+        src="../js/assessment.js">
+
+    </script>
+
+
 
 </body>
 
