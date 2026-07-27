@@ -1,239 +1,294 @@
 
 <!-- ==========================================================================
-     CTM PATH™ Guided Journey™
+     CTM PATH™
+     KALA CHAKRA™ v3.0
 
-     File        : components/status-card.html
+     Component   : status-card.html
      Version     : 2.0
-     Status      : 🔒 LOCKED
 
-     Architecture
-     --------------------------------------------------------------------------
-     HTML Partial (MPA)
+     Status      : PREMIUM EXPERIENCE LAYER
 
-     Purpose
-     --------------------------------------------------------------------------
-     Premium Status Card™
 
-     Responsibilities
+     PURPOSE
 
-     ✓ Display Current Status
-     ✓ Display Pillar Score
-     ✓ Display Status Badge
-     ✓ Display Status Message
-     ✓ Provide JavaScript Hooks
+     Journey Identity Card™
 
-     Does NOT
+     Owns:
 
-     ✗ Calculate Scores
-     ✗ Determine Status
-     ✗ Perform Business Logic
+     ✓ Current State Display
+     ✓ Transformation Identity
+     ✓ Progress Presentation
+     ✓ Emotional Feedback
+
+
+     Does NOT:
+
+     ✗ Calculate scores
+     ✗ Store state
+     ✗ Control journey logic
+
 
      ========================================================================== -->
 
 
-<section
-    class="status-card-component">
+<section class="ctm-status-card"
+
+         id="statusCard">
 
 
 
-    <!-- ==========================================================
-         HEADER
-         ========================================================== -->
+    <!-- ==============================================================
+         CARD HEADER
+         ============================================================== -->
 
 
-    <header
-        class="status-header">
-
-
-        <span
-            class="status-label">
-
-            CURRENT STATUS™
-
-        </span>
+    <div class="status-header">
 
 
 
-        <h2
-            class="status-name"
-            data-status-name>
+        <div class="status-label">
+
+
+            YOUR CURRENT STATE™
+
+
+        </div>
+
+
+
+        <div class="status-symbol"
+
+             id="statusSymbol">
+
+
+            🌱
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- ==============================================================
+         IDENTITY SECTION
+         ============================================================== -->
+
+
+    <div class="status-identity">
+
+
+
+        <h2 class="status-title"
+
+            id="currentStatus">
+
 
             LEARNER™
+
 
         </h2>
 
 
 
-        <p
-            class="status-subtitle"
-            data-status-subtitle>
+        <p class="status-description"
 
-            Beginning Your Journey
+           id="statusDescription">
+
+
+            Your journey of awareness has begun.
+
 
         </p>
 
 
-    </header>
+
+    </div>
 
 
 
 
 
-    <!-- ==========================================================
-         SCORE
-         ========================================================== -->
-
-
-    <section
-        class="status-score-panel">
-
-
-        <span
-            class="score-caption">
-
-            Current Pillar Score
-
-        </span>
 
 
 
-        <div
-            class="score-display">
+
+    <!-- ==============================================================
+         SCORE DISPLAY
+         ============================================================== -->
 
 
-            <span
-                class="score-value"
-                data-pillar-score>
+    <div class="status-score-panel">
 
-                0
+
+
+        <div class="score-item">
+
+
+
+            <span class="score-label">
+
+
+                CURRENT SCORE
+
 
             </span>
 
 
 
-            <span
-                class="score-total">
+            <span class="score-value"
 
-                /30
+                  id="overallScore">
+
+
+                —
+
 
             </span>
+
 
 
         </div>
 
 
-    </section>
+
+
+
+        <div class="score-divider"></div>
 
 
 
 
 
-    <!-- ==========================================================
-         STATUS BADGE
-         ========================================================== -->
+        <div class="score-item">
 
 
-    <section
-        class="status-badge-panel">
+
+            <span class="score-label">
 
 
-        <div
-            class="status-badge"
+                JOURNEY
 
-            data-status-badge>
-
-
-            <span
-                class="status-indicator">
-
-                ●
 
             </span>
 
 
 
-            <span
-                class="status-text">
+            <span class="score-value"
 
-                Emerging
+                  id="journeyProgress">
+
+
+                1 / 12
+
 
             </span>
+
 
 
         </div>
 
 
-    </section>
+
+    </div>
 
 
 
 
 
-    <!-- ==========================================================
-         STATUS MESSAGE
-         ========================================================== -->
-
-
-    <section
-        class="status-message-panel">
-
-
-        <p
-            class="status-message"
-
-            data-status-message>
-
-            Complete all three questions to
-            discover your present level of
-            Purpose™ Alignment.
-
-        </p>
-
-
-    </section>
 
 
 
 
-
-    <!-- ==========================================================
-         JOURNEY REMINDER
-         ========================================================== -->
-
-
-    <section
-        class="status-journey-panel">
+    <!-- ==============================================================
+         PROGRESS BAR
+         ============================================================== -->
 
 
-        <div
-            class="journey-reminder">
-
-
-            <span
-                class="journey-title">
-
-                Remember
-
-            </span>
+    <div class="status-progress">
 
 
 
-            <p
-                class="journey-description">
+        <div class="progress-track">
 
-                There are no right or wrong
-                answers.
 
-                Honest self-reflection creates
-                meaningful transformation.
 
-            </p>
+            <div class="progress-fill"
+
+                 id="statusProgressBar">
+
+
+
+            </div>
+
 
 
         </div>
 
 
-    </section>
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- ==============================================================
+         MESSAGE
+         ============================================================== -->
+
+
+    <div class="status-message"
+
+         id="statusMessage">
+
+
+
+        Every honest reflection moves you closer
+
+        to your highest potential.
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- ==============================================================
+         PREMIUM MARKER
+         ============================================================== -->
+
+
+    <div
+
+        id="statusCardReady"
+
+        data-component="status-card"
+
+        data-version="2.0"
+
+        hidden>
+
+
+    </div>
 
 
 
@@ -242,13 +297,395 @@
 
 
 <!-- ==========================================================================
+     END COMPONENT
 
-   END OF FILE
+     status-card.html
 
-   File        : components/status-card.html
-   Version     : 2.0
-   Status      : 🔒 LOCKED
+     Version : 2.0
 
-   ========================================================================== -->
+     Status
 
-   
+     ✓ PREMIUM UI READY
+     ✓ ENGINE COMPATIBLE
+     ✓ DASHBOARD COMPATIBLE
+     ✓ FUTURE THEME READY
+
+     ========================================================================== -->
+
+     
+<!-- ==========================================================================
+     STATUS CARD DYNAMIC HOOKS
+
+     Controlled by:
+
+     js/assessmentUI.js
+     js/dashboard.js
+
+
+     ========================================================================== -->
+
+
+<script>
+
+
+(function(){
+
+
+
+    const card =
+
+        document.querySelector(
+
+            "#statusCard"
+
+        );
+
+
+
+
+
+    if(!card){
+
+        return;
+
+    }
+
+
+
+
+
+    /*
+       READY SIGNAL
+
+       Allows UI layer to confirm
+       premium component availability.
+
+    */
+
+
+    card.classList.add(
+
+        "status-card-ready"
+
+    );
+
+
+
+
+
+
+
+    /*
+       OBSERVE THEME UPDATES
+
+       Uses CSS variables only.
+
+       No business logic.
+
+    */
+
+
+    function syncTheme(){
+
+
+
+        const primary =
+
+            getComputedStyle(
+
+                document.documentElement
+
+            )
+
+            .getPropertyValue(
+
+                "--pillar-primary"
+
+            );
+
+
+
+
+
+        if(primary){
+
+
+
+            card.style.setProperty(
+
+                "--status-accent",
+
+                primary.trim()
+
+            );
+
+
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+    syncTheme();
+
+
+
+
+
+
+
+    /*
+       LISTEN FOR JOURNEY UPDATES
+
+       Future compatible.
+
+    */
+
+
+    document.addEventListener(
+
+        "ctmStatusUpdated",
+
+        function(event){
+
+
+
+            if(!event.detail){
+
+                return;
+
+            }
+
+
+
+
+
+            card.classList.remove(
+
+                "status-changing"
+
+            );
+
+
+
+
+
+
+
+            void card.offsetWidth;
+
+
+
+
+
+
+
+            card.classList.add(
+
+                "status-changing"
+
+            );
+
+
+
+
+
+        }
+
+    );
+
+
+
+
+
+
+
+})();
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+<!-- ==========================================================================
+     PREMIUM STATUS MICROCOPY
+
+     ========================================================================== -->
+
+
+<div class="status-reflection"
+
+
+
+     aria-live="polite">
+
+
+
+    <p>
+
+
+        Your current state is not your destination.
+
+
+    </p>
+
+
+
+    <p>
+
+
+        Every conscious choice creates your next level.
+
+
+    </p>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ==========================================================================
+     ACCESSIBILITY SUPPORT
+
+     ========================================================================== -->
+
+
+<div
+
+    class="status-live-region"
+
+    aria-live="polite"
+
+    aria-atomic="true">
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ==========================================================================
+     COMPONENT VALIDATION MARKER
+
+     ========================================================================== -->
+
+
+<div
+
+    id="statusCardInteractionReady"
+
+    data-component="status-card-interaction"
+
+    data-version="2.0"
+
+    hidden>
+
+
+</div>
+
+
+<!-- ==========================================================================
+     NO SCRIPT FALLBACK
+
+     ========================================================================== -->
+
+
+<noscript>
+
+
+    <div class="status-noscript-message">
+
+
+        CTM PATH™ guided experience requires
+
+        JavaScript enabled.
+
+
+    </div>
+
+
+</noscript>
+
+
+
+
+
+
+
+
+
+<!-- ==========================================================================
+     FINAL COMPONENT READY MARKER
+
+     ========================================================================== -->
+
+
+<div
+
+    id="statusCardReadyFinal"
+
+    data-component="status-card"
+
+    data-version="2.0"
+
+    data-status="ready"
+
+    hidden>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ==========================================================================
+     END COMPONENT
+
+     status-card.html
+
+     Version : 2.0
+
+
+     Status
+
+     ✓ PREMIUM IDENTITY CARD READY
+     ✓ DYNAMIC HOOKS READY
+     ✓ ACCESSIBILITY READY
+     ✓ THEME READY
+     ✓ UI INTEGRATION READY
+
+
+     ========================================================================== -->
+
+     
