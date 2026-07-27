@@ -4,10 +4,11 @@
    KALA CHAKRA™ v3.0
 
    File        : js/dashboard.js
-   Version     : 1.0
-   Status      : LOCKED
+   Version     : 1.1
 
-   ==========================================================================
+   Status      : 🔒 PRODUCTION REPAIR
+
+
    PURPOSE
 
    Dashboard Presentation Engine™
@@ -19,6 +20,8 @@
    ✓ KALA CHAKRA™ Score
    ✓ Progress Indicators
    ✓ Theme Synchronization
+   ✓ Spoke Highlighting
+
 
    Does NOT
 
@@ -28,59 +31,117 @@
 
    ========================================================================== */
 
+
 "use strict";
+
 
 window.CTM = window.CTM || {};
 
-CTM.Dashboard = (function () {
+
+
+/* ==========================================================================
+   CTM.Dashboard NAMESPACE
+   ========================================================================== */
+
+
+CTM.Dashboard = (function(){
+
+
 
     /* ======================================================================
        PRIVATE HELPERS
        ====================================================================== */
 
+
     function $(selector){
+
 
         return document.querySelector(selector);
 
+
     }
+
+
+
+
+
+
 
     function exists(selector){
 
+
         return $(selector) !== null;
 
+
     }
+
+
+
+
+
+
 
     function setText(selector,value){
 
+
+
         if(exists(selector)){
+
 
             $(selector).textContent = value;
 
+
         }
 
+
     }
+
+
+
+
+
+
 
     function setStyle(selector,property,value){
 
+
+
         if(exists(selector)){
+
 
             $(selector).style[property] = value;
 
+
         }
 
+
     }
+
+
+
+
+
+
+
+
 
     /* ======================================================================
        PUBLIC API
        ====================================================================== */
 
+
     return {
+
+
 
         /* ==============================================================
            Render Dashboard
            ============================================================== */
 
+
         render : function(){
+
+
 
             if(
 
@@ -88,21 +149,38 @@ CTM.Dashboard = (function () {
 
             ){
 
+
                 return;
 
+
             }
+
+
+
+
 
             const result =
 
                 CTM.Engine.getResult();
 
+
+
+
+
             const state =
 
                 CTM.Engine.getState();
 
+
+
+
+
+
+
             /* ----------------------------------------------------------
                Score
                ---------------------------------------------------------- */
+
 
             setText(
 
@@ -112,6 +190,12 @@ CTM.Dashboard = (function () {
 
             );
 
+
+
+
+
+
+
             setText(
 
                 "#dashboardPercentage",
@@ -120,9 +204,16 @@ CTM.Dashboard = (function () {
 
             );
 
+
+
+
+
+
+
             /* ----------------------------------------------------------
                Level
                ---------------------------------------------------------- */
+
 
             setText(
 
@@ -132,9 +223,16 @@ CTM.Dashboard = (function () {
 
             );
 
+
+
+
+
+
+
             /* ----------------------------------------------------------
                Theme
                ---------------------------------------------------------- */
+
 
             setStyle(
 
@@ -145,6 +243,12 @@ CTM.Dashboard = (function () {
                 result.colour
 
             );
+
+
+
+
+
+
 
             setStyle(
 
@@ -158,39 +262,89 @@ CTM.Dashboard = (function () {
 
             );
 
+
+
+
+
+
+
             /* ----------------------------------------------------------
                Symbol
                ---------------------------------------------------------- */
 
-            setText(
 
-                "#dashboardSymbol",
+            if(
 
-                state.data.presentation.symbol.emoji
+                state.data
 
-            );
+                &&
+
+                state.data.presentation
+
+            ){
+
+
+
+                setText(
+
+                    "#dashboardSymbol",
+
+                    state.data.presentation.symbol.emoji
+
+                );
+
+
+            }
+
+
+
+
+
+
 
             /* ----------------------------------------------------------
                Pillar
                ---------------------------------------------------------- */
 
-            setText(
 
-                "#dashboardTamil",
+            if(state.data){
 
-                state.data.title.tamil
 
-            );
 
-            setText(
+                setText(
 
-                "#dashboardEnglish",
+                    "#dashboardTamil",
 
-                state.data.title.english
+                    state.data.title.tamil
 
-            );
+                );
+
+
+
+
+
+
+
+                setText(
+
+                    "#dashboardEnglish",
+
+                    state.data.title.english
+
+                );
+
+
+            }
+
+
 
         },
+
+
+
+
+
+
 
 
 
@@ -198,7 +352,10 @@ CTM.Dashboard = (function () {
            Clear Dashboard
            ============================================================== */
 
+
         clear : function(){
+
+
 
             setText(
 
@@ -208,6 +365,12 @@ CTM.Dashboard = (function () {
 
             );
 
+
+
+
+
+
+
             setText(
 
                 "#dashboardPercentage",
@@ -215,6 +378,12 @@ CTM.Dashboard = (function () {
                 "--"
 
             );
+
+
+
+
+
+
 
             setText(
 
@@ -224,31 +393,58 @@ CTM.Dashboard = (function () {
 
             );
 
-        }
 
-    };
 
-})();
+        },
 
+       
         /* ==============================================================
-           Highlight Active Spoke
+           Highlight Active Spoke™
+
            ============================================================== */
 
+
         highlightSpoke : function(){
+
+
 
             const state =
 
                 CTM.Engine.getState();
 
-            if(!state.data){
+
+
+
+
+
+
+            if(
+
+                !state.data
+
+            ){
+
 
                 return;
 
+
             }
+
+
+
+
+
+
 
             const spoke =
 
                 state.data.identity.spoke;
+
+
+
+
+
+
 
             document
 
@@ -260,13 +456,23 @@ CTM.Dashboard = (function () {
 
                 .forEach(function(item){
 
+
+
                     item.classList.remove(
 
                         "active"
 
                     );
 
+
+
                 });
+
+
+
+
+
+
 
             const active =
 
@@ -280,7 +486,15 @@ CTM.Dashboard = (function () {
 
                 );
 
+
+
+
+
+
+
             if(active){
+
+
 
                 active.classList.add(
 
@@ -288,17 +502,31 @@ CTM.Dashboard = (function () {
 
                 );
 
+
+
             }
+
+
 
         },
 
 
 
+
+
+
+
+
+
         /* ==============================================================
-           Paint Spoke
+           Paint Spoke™
+
            ============================================================== */
 
+
         paintSpoke : function(){
+
+
 
             if(
 
@@ -306,17 +534,55 @@ CTM.Dashboard = (function () {
 
             ){
 
+
                 return;
 
+
             }
+
+
+
+
+
+
 
             const state =
 
                 CTM.Engine.getState();
 
+
+
+
+
+
+
             const result =
 
                 CTM.Engine.getResult();
+
+
+
+
+
+
+
+            if(
+
+                !state.data
+
+            ){
+
+
+                return;
+
+
+            }
+
+
+
+
+
+
 
             const spoke =
 
@@ -330,15 +596,35 @@ CTM.Dashboard = (function () {
 
                 );
 
+
+
+
+
+
+
             if(!spoke){
+
 
                 return;
 
+
             }
+
+
+
+
+
+
 
             spoke.style.background =
 
                 result.colour;
+
+
+
+
+
+
 
             spoke.style.boxShadow =
 
@@ -346,15 +632,27 @@ CTM.Dashboard = (function () {
 
                 result.colour;
 
+
+
         },
 
 
 
+
+
+
+
+
+
         /* ==============================================================
-           Animate Score
+           Animate Score™
+
            ============================================================== */
 
+
         animateScore : function(){
+
+
 
             if(
 
@@ -362,13 +660,17 @@ CTM.Dashboard = (function () {
 
             ){
 
+
                 return;
+
 
             }
 
-            const result =
 
-                CTM.Engine.getResult();
+
+
+
+
 
             const score =
 
@@ -378,65 +680,108 @@ CTM.Dashboard = (function () {
 
                 );
 
+
+
+
+
+
+
             if(!score){
+
 
                 return;
 
+
             }
+
+
+
+
+
+
 
             score.animate(
 
                 [
 
+
+
                     {
+
 
                         transform:
 
                         "scale(.8)",
 
+
                         opacity:.4
+
 
                     },
 
+
+
                     {
+
 
                         transform:
 
                         "scale(1.15)",
 
+
                         opacity:1
+
 
                     },
 
+
+
                     {
+
 
                         transform:
 
                         "scale(1)"
 
+
                     }
+
+
 
                 ],
 
+
+
                 {
+
 
                     duration:400,
 
+
                     easing:"ease-out"
+
+
 
                 }
 
+
+
             );
+
+
 
         },
 
-
-
+       
         /* ==============================================================
-           Highest Pillar
+           Highest Pillar™
+
            ============================================================== */
 
+
         renderHighest : function(){
+
+
 
             setText(
 
@@ -446,15 +791,27 @@ CTM.Dashboard = (function () {
 
             );
 
+
+
         },
 
 
 
+
+
+
+
+
+
         /* ==============================================================
-           Lowest Pillar
+           Lowest Pillar™
+
            ============================================================== */
 
+
         renderLowest : function(){
+
+
 
             setText(
 
@@ -464,53 +821,103 @@ CTM.Dashboard = (function () {
 
             );
 
+
+
         },
 
 
 
+
+
+
+
+
+
         /* ==============================================================
-           Refresh Dashboard
+           Refresh Dashboard™
+
            ============================================================== */
+
 
         refresh : function(){
 
+
+
             this.render();
+
+
 
             this.highlightSpoke();
 
+
+
             this.paintSpoke();
+
+
 
             this.animateScore();
 
+
+
             this.renderHighest();
 
+
+
             this.renderLowest();
+
+
 
         },
 
 
 
+
+
+
+
+
+
         /* ==============================================================
-           Initialize Dashboard
+           Initialize Dashboard™
+
            ============================================================== */
+
 
         init : function(){
 
+
+
             this.clear();
+
+
 
             this.highlightSpoke();
 
+
+
         }
 
+
+
     };
+
+
 
 })();
 
 
 
+
+
+
+
+
+
 /* ==========================================================================
    LOCK DASHBOARD
+
    ========================================================================== */
+
 
 Object.freeze(
 
@@ -520,17 +927,25 @@ Object.freeze(
 
 
 
+
+
+
+
+
+
 /* ==========================================================================
    END OF FILE
 
    dashboard.js
 
-   Version : 1.0
+   Version : 1.1
 
    Status
 
-   ✓ COMPLETE
-   ✓ LOCKED
+   ✓ SYNTAX REPAIRED
+   ✓ SINGLE NAMESPACE RESTORED
+   ✓ REFRESH PIPELINE ACTIVE
+   ✓ DASHBOARD INITIALIZATION ACTIVE
 
    ==========================================================================
 */
