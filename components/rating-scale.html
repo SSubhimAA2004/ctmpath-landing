@@ -1,1 +1,346 @@
 
+<!-- ==========================================================================
+     CTM PATH™ Guided Journey™
+
+     File        : components/rating-scale.html
+     Version     : 1.0
+     Status      : 🔒 LOCKED
+
+     Purpose
+     --------------------------------------------------------------------------
+     Premium 10-Point Rating Scale Component
+
+     Responsibilities
+
+     ✓ Display Question Rating Scale
+     ✓ Display Colour Zones
+     ✓ Display Selected Rating
+     ✓ Expose Hooks For JavaScript
+
+     Does NOT
+
+     ✗ Calculate Scores
+     ✗ Update Dashboard
+     ✗ Determine Status
+     ✗ Navigate Between Pages
+
+     ========================================================================== -->
+
+
+<template id="rating-scale-template">
+
+
+    <section class="rating-scale-component">
+
+
+
+        <!-- ==============================================================
+             HEADER
+             ============================================================== -->
+
+
+        <div class="rating-header">
+
+
+            <h3 class="rating-title">
+
+                Rate Yourself
+
+            </h3>
+
+
+            <p class="rating-subtitle">
+
+                உங்களுக்கு மிகவும் பொருந்தும்
+                மதிப்பெண்ணைத் தேர்ந்தெடுக்கவும்.
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- ==============================================================
+             SCALE
+             ============================================================== -->
+
+
+        <div class="rating-scale">
+
+
+
+            <!-- =======================
+                 RED ZONE
+                 ======================= -->
+
+
+            <div class="rating-zone rating-zone-red">
+
+
+                <span class="zone-label">
+
+                    Needs Attention
+
+                </span>
+
+
+
+                <div class="rating-buttons">
+
+
+
+                    <button
+                        type="button"
+                        class="rating-chip rating-red"
+                        data-score="1">
+
+                        1
+
+                    </button>
+
+
+
+                    <button
+                        type="button"
+                        class="rating-chip rating-red"
+                        data-score="2">
+
+                        2
+
+                    </button>
+
+
+
+                    <button
+                        type="button"
+                        class="rating-chip rating-red"
+                        data-score="3">
+
+                        3
+
+                    </button>
+
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+            <!-- =======================
+                 ORANGE ZONE
+                 ======================= -->
+
+
+            <div class="rating-zone rating-zone-orange">
+
+
+                <span class="zone-label">
+
+                    Growing
+
+                </span>
+
+
+
+                <div class="rating-buttons">
+
+
+
+                    <button
+                        type="button"
+                        class="rating-chip rating-orange"
+                        data-score="4">
+
+                        4
+
+                    </button>
+
+
+
+                    <button
+                        type="button"
+                        class="rating-chip rating-orange"
+                        data-score="5">
+
+                        5
+
+                    </button>
+
+
+
+                    <button
+                        type="button"
+                        class="rating-chip rating-orange"
+                        data-score="6">
+
+                        6
+
+                    </button>
+
+
+
+                    <button
+                        type="button"
+                        class="rating-chip rating-orange"
+                        data-score="7">
+
+                        7
+
+                    </button>
+
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+            <!-- =======================
+                 GREEN ZONE
+                 ======================= -->
+
+
+            <div class="rating-zone rating-zone-green">
+
+
+                <span class="zone-label">
+
+                    Strength
+
+                </span>
+
+
+
+                <div class="rating-buttons">
+
+
+
+                    <button
+                        type="button"
+                        class="rating-chip rating-green"
+                        data-score="8">
+
+                        8
+
+                    </button>
+
+
+
+                    <button
+                        type="button"
+                        class="rating-chip rating-green"
+                        data-score="9">
+
+                        9
+
+                    </button>
+
+
+
+                    <button
+                        type="button"
+                        class="rating-chip rating-green"
+                        data-score="10">
+
+                        10
+
+                    </button>
+
+
+
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+        <!-- ==============================================================
+             CURRENT SELECTION
+             ============================================================== -->
+
+
+        <div class="rating-selection">
+
+
+
+            <span class="selection-label">
+
+                Your Rating
+
+            </span>
+
+
+
+            <span
+                class="selection-value"
+                data-selected-score>
+
+                —
+
+            </span>
+
+
+
+            <span class="selection-max">
+
+                /10
+
+            </span>
+
+
+
+        </div>
+
+
+
+        <!-- ==============================================================
+             STATUS MESSAGE
+             ============================================================== -->
+
+
+        <div
+            class="rating-feedback"
+            data-rating-feedback>
+
+
+
+            Please select a score to continue.
+
+
+
+        </div>
+
+
+
+    </section>
+
+
+</template>
+
+
+<!-- ==========================================================================
+
+   END OF FILE
+
+   File        : components/rating-scale.html
+   Version     : 1.0
+   Status      : 🔒 LOCKED
+
+   ========================================================================== -->
+
+   
