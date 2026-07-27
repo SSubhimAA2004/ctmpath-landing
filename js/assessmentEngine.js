@@ -284,3 +284,387 @@ window.CTM.AssessmentEngine = (() => {
     }
 
                                
+    /* ======================================================================
+       NORMALIZE SCORE
+       ====================================================================== */
+
+    function normalize(score){
+
+        const value = Number(score) || 0;
+
+        return Math.max(
+
+            1,
+
+            Math.min(
+
+                MAX_QUESTION_SCORE,
+
+                value
+
+            )
+
+        );
+
+    }
+
+
+
+    /* ======================================================================
+       CALCULATE PILLAR SCORE
+       ====================================================================== */
+
+    function calculatePillarScore(pillar){
+
+        const response = state.responses[pillar];
+
+        if(!response){
+
+            return 0;
+
+        }
+
+
+
+        const score =
+
+            response.q1 +
+
+            response.q2 +
+
+            response.q3;
+
+
+
+        state.pillarScores[pillar - 1] = score;
+
+        return score;
+
+    }
+
+
+
+    /* ======================================================================
+       CALCULATE OVERALL SCORE
+       ====================================================================== */
+
+    function calculateOverallScore(){
+
+        state.overallScore =
+
+            state.pillarScores.reduce(
+
+                (total, score) => total + score,
+
+                0
+
+            );
+
+
+
+        return state.overallScore;
+
+    }
+
+
+
+    /* ======================================================================
+       DETERMINE PILLAR STATUS
+       ====================================================================== */
+
+    function determinePillarStatus(score){
+
+        if(score <= 10){
+
+            return STATUS.LEARNER;
+
+        }
+
+
+
+        if(score <= 20){
+
+            return STATUS.LEADER;
+
+        }
+
+
+
+        return STATUS.LEGEND;
+
+    }
+
+
+
+    /* ======================================================================
+       DETERMINE OVERALL STATUS
+       ====================================================================== */
+
+    function determineOverallStatus(score){
+
+        if(score <= 120){
+
+            return STATUS.LEARNER;
+
+        }
+
+
+
+        if(score <= 240){
+
+            return STATUS.LEADER;
+
+        }
+
+
+
+        return STATUS.LEGEND;
+
+    }
+
+
+
+    /* ======================================================================
+       PROGRESS
+       ====================================================================== */
+
+    function getProgressPercent(){
+
+        return (
+
+            state.currentPillar /
+
+            TOTAL_PILLARS
+
+        ) * 100;
+
+    }
+
+
+
+    /* ======================================================================
+       DASHBOARD MODEL
+       ====================================================================== */
+
+    function getDashboardModel(){
+
+        const pillarScore =
+
+            state.pillarScores[
+
+                state.currentPillar - 1
+
+            ];
+
+
+
+        const status =
+
+            determinePillarStatus(
+
+                pillarScore
+
+            );
+
+
+
+        return{
+
+            overallScore :
+
+                state.overallScore,
+
+
+
+            pillarName :
+
+                PILLARS[
+
+                    state.currentPillar - 1
+
+                ],
+
+
+
+            pillarScore :
+
+                pillarScore,
+
+
+
+            currentPillar :
+
+                state.currentPillar,
+
+
+
+            progressPercent :
+
+                getProgressPercent(),
+
+
+
+            status :
+
+                status.key,
+
+
+
+            statusTitle :
+
+                status.title,
+
+
+
+            statusBadge :
+
+                status.badge,
+
+
+
+            statusSubtitle :
+
+                status.subtitle,
+
+
+
+            insight :
+
+                getInsight(status.key)
+
+        };
+
+    }
+
+
+
+    /* ======================================================================
+       KALA CHAKRA MODEL
+       ====================================================================== */
+
+    function getKalaChakraModel(){
+
+        return{
+
+            segments :
+
+                [...state.pillarScores],
+
+
+
+            overallScore :
+
+                state.overallScore,
+
+
+
+            overallStatus :
+
+                determineOverallStatus(
+
+                    state.overallScore
+
+                )
+
+        };
+
+    }
+
+
+
+    /* ======================================================================
+       INSIGHT
+       ====================================================================== */
+
+    function getInsight(level){
+
+        switch(level){
+
+            case "learner":
+
+                return
+
+                    "Every meaningful transformation begins with awareness.";
+
+
+
+            case "leader":
+
+                return
+
+                    "You are steadily aligning your daily choices with your vision.";
+
+
+
+            default:
+
+                return
+
+                    "You are living many of your highest values. Continue inspiring others.";
+
+        }
+
+    }
+
+
+
+    /* ======================================================================
+       PUBLIC API
+       ====================================================================== */
+
+    return{
+
+        initialize,
+
+
+
+        reset,
+
+
+
+        saveResponses,
+
+
+
+        getCurrentPillar,
+
+
+
+        setCurrentPillar,
+
+
+
+        getDashboardModel,
+
+
+
+        getKalaChakraModel,
+
+
+
+        determinePillarStatus,
+
+
+
+        determineOverallStatus
+
+    };
+
+
+
+})();
+
+
+
+/* ==========================================================================
+
+   END OF FILE
+
+   File        : assessmentEngine.js
+
+   Version     : 1.0
+
+   Status      : 🔒 LOCKED
+
+   ========================================================================== */
+
