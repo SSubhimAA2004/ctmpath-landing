@@ -1,308 +1,86 @@
 
 /* ==========================================================================
+   CTM PATH™
+   KALA CHAKRA™ v3.0
 
-   CTM PATH™ Guided Journey™
-
-   File        : assessmentEngine.js
+   File        : js/assessmentEngine.js
    Version     : 1.0
-   Status      : 🔒 LOCKED
+   Status      : LOCKED
 
    ==========================================================================
    PURPOSE
 
-   Central Business Rules Engine
+   Assessment Business Engine™
 
    Owns
 
-   ✓ Question Scores
-   ✓ Pillar Scores
-   ✓ Overall 360 Score
-   ✓ Learner™ / Leader™ / Legend™
-   ✓ Dashboard Model
-   ✓ Kala Chakra Model
-   ✓ Reflection Selection
+   ✓ Load Pillar Data
+   ✓ Engine State
+   ✓ User Responses
+   ✓ Business Logic
+   ✓ Score Calculation
+   ✓ Assessment Completion
 
    Does NOT
 
-   ✗ Render UI
+   ✗ Read HTML
    ✗ Manipulate DOM
-   ✗ Handle Navigation
+   ✗ Render UI
+   ✗ Update Dashboard
 
    ========================================================================== */
 
 "use strict";
 
+/* ==========================================================================
+   GLOBAL NAMESPACE
+   ========================================================================== */
+
 window.CTM = window.CTM || {};
 
-window.CTM.AssessmentEngine = (() => {
+/* ==========================================================================
+   ASSESSMENT ENGINE
+   ========================================================================== */
+
+CTM.Engine = (function () {
 
     /* ======================================================================
-       CONSTANTS
+       PRIVATE STATE
        ====================================================================== */
 
-    const TOTAL_PILLARS = 12;
+    let state = {
 
-    const QUESTIONS_PER_PILLAR = 3;
+        pillar : null,
 
-    const MAX_QUESTION_SCORE = 10;
+        data : null,
 
-    const MAX_PILLAR_SCORE = 30;
+        answers : {
 
-    const MAX_TOTAL_SCORE = 360;
+            awareness : null,
 
+            alignment : null,
 
-
-    /* ======================================================================
-       STATUS LEVELS
-       ====================================================================== */
-
-    const STATUS = {
-
-        LEARNER : {
-
-            key : "learner",
-
-            title : "LEARNER™",
-
-            badge : "Emerging",
-
-            subtitle :
-
-                "Beginning Your Journey"
+            embodiment : null
 
         },
 
+        result : null,
 
-
-        LEADER : {
-
-            key : "leader",
-
-            title : "LEADER™",
-
-            badge : "Growing",
-
-            subtitle :
-
-                "Living With Intention"
-
-        },
-
-
-
-        LEGEND : {
-
-            key : "legend",
-
-            title : "LEGEND™",
-
-            badge : "Inspiring",
-
-            subtitle :
-
-                "Living Your Highest Potential"
-
-        }
+        completed : false
 
     };
 
 
 
     /* ======================================================================
-       LIFE PILLARS
+       PRIVATE HELPERS
        ====================================================================== */
 
-    const PILLARS = [
+    function cloneState() {
 
-        "Purpose™",
+        return JSON.parse(
 
-        "Health™",
-
-        "Relationships™",
-
-        "Mind & Emotional Well-Being™",
-
-        "Character™",
-
-        "Growth & Learning™",
-
-        "Career & Contribution™",
-
-        "Financial Stability™",
-
-        "Self-Discipline™",
-
-        "Community™",
-
-        "Systems & Balance™",
-
-        "Legacy™"
-
-    ];
-
-
-
-    /* ======================================================================
-       INTERNAL STATE
-       ====================================================================== */
-
-    const state = {
-
-        currentPillar : 1,
-
-        responses : {},
-
-        pillarScores : new Array(TOTAL_PILLARS).fill(0),
-
-        overallScore : 0
-
-    };
-
-
-
-    /* ======================================================================
-       INITIALIZE
-       ====================================================================== */
-
-    function initialize(){
-
-        reset();
-
-    }
-
-
-
-    /* ======================================================================
-       RESET
-       ====================================================================== */
-
-    function reset(){
-
-        state.currentPillar = 1;
-
-        state.responses = {};
-
-        state.pillarScores.fill(0);
-
-        state.overallScore = 0;
-
-    }
-
-
-
-    /* ======================================================================
-       GET CURRENT PILLAR
-       ====================================================================== */
-
-    function getCurrentPillar(){
-
-        return state.currentPillar;
-
-    }
-
-
-
-    /* ======================================================================
-       SET CURRENT PILLAR
-       ====================================================================== */
-
-    function setCurrentPillar(index){
-
-        state.currentPillar =
-
-            Math.max(
-
-                1,
-
-                Math.min(
-
-                    TOTAL_PILLARS,
-
-                    index
-
-                )
-
-            );
-
-    }
-
-
-
-    /* ======================================================================
-       SAVE RESPONSE
-
-       response format
-
-       {
-
-           q1 : 8,
-
-           q2 : 7,
-
-           q3 : 9
-
-       }
-
-       ====================================================================== */
-
-    function saveResponses(
-
-        pillar,
-
-        response
-
-    ){
-
-        state.responses[pillar] = {
-
-            q1 :
-
-                normalize(response.q1),
-
-            q2 :
-
-                normalize(response.q2),
-
-            q3 :
-
-                normalize(response.q3)
-
-        };
-
-
-
-        calculatePillarScore(
-
-            pillar
-
-        );
-
-
-
-        calculateOverallScore();
-
-    }
-
-                               
-    /* ======================================================================
-       NORMALIZE SCORE
-       ====================================================================== */
-
-    function normalize(score){
-
-        const value = Number(score) || 0;
-
-        return Math.max(
-
-            1,
-
-            Math.min(
-
-                MAX_QUESTION_SCORE,
-
-                value
-
-            )
+            JSON.stringify(state)
 
         );
 
@@ -310,299 +88,17 @@ window.CTM.AssessmentEngine = (() => {
 
 
 
-    /* ======================================================================
-       CALCULATE PILLAR SCORE
-       ====================================================================== */
+    function resetAnswers() {
 
-    function calculatePillarScore(pillar){
+        state.answers = {
 
-        const response = state.responses[pillar];
+            awareness : null,
 
-        if(!response){
+            alignment : null,
 
-            return 0;
-
-        }
-
-
-
-        const score =
-
-            response.q1 +
-
-            response.q2 +
-
-            response.q3;
-
-
-
-        state.pillarScores[pillar - 1] = score;
-
-        return score;
-
-    }
-
-
-
-    /* ======================================================================
-       CALCULATE OVERALL SCORE
-       ====================================================================== */
-
-    function calculateOverallScore(){
-
-        state.overallScore =
-
-            state.pillarScores.reduce(
-
-                (total, score) => total + score,
-
-                0
-
-            );
-
-
-
-        return state.overallScore;
-
-    }
-
-
-
-    /* ======================================================================
-       DETERMINE PILLAR STATUS
-       ====================================================================== */
-
-    function determinePillarStatus(score){
-
-        if(score <= 10){
-
-            return STATUS.LEARNER;
-
-        }
-
-
-
-        if(score <= 20){
-
-            return STATUS.LEADER;
-
-        }
-
-
-
-        return STATUS.LEGEND;
-
-    }
-
-
-
-    /* ======================================================================
-       DETERMINE OVERALL STATUS
-       ====================================================================== */
-
-    function determineOverallStatus(score){
-
-        if(score <= 120){
-
-            return STATUS.LEARNER;
-
-        }
-
-
-
-        if(score <= 240){
-
-            return STATUS.LEADER;
-
-        }
-
-
-
-        return STATUS.LEGEND;
-
-    }
-
-
-
-    /* ======================================================================
-       PROGRESS
-       ====================================================================== */
-
-    function getProgressPercent(){
-
-        return (
-
-            state.currentPillar /
-
-            TOTAL_PILLARS
-
-        ) * 100;
-
-    }
-
-
-
-    /* ======================================================================
-       DASHBOARD MODEL
-       ====================================================================== */
-
-    function getDashboardModel(){
-
-        const pillarScore =
-
-            state.pillarScores[
-
-                state.currentPillar - 1
-
-            ];
-
-
-
-        const status =
-
-            determinePillarStatus(
-
-                pillarScore
-
-            );
-
-
-
-        return{
-
-            overallScore :
-
-                state.overallScore,
-
-
-
-            pillarName :
-
-                PILLARS[
-
-                    state.currentPillar - 1
-
-                ],
-
-
-
-            pillarScore :
-
-                pillarScore,
-
-
-
-            currentPillar :
-
-                state.currentPillar,
-
-
-
-            progressPercent :
-
-                getProgressPercent(),
-
-
-
-            status :
-
-                status.key,
-
-
-
-            statusTitle :
-
-                status.title,
-
-
-
-            statusBadge :
-
-                status.badge,
-
-
-
-            statusSubtitle :
-
-                status.subtitle,
-
-
-
-            insight :
-
-                getInsight(status.key)
+            embodiment : null
 
         };
-
-    }
-
-
-
-    /* ======================================================================
-       KALA CHAKRA MODEL
-       ====================================================================== */
-
-    function getKalaChakraModel(){
-
-        return{
-
-            segments :
-
-                [...state.pillarScores],
-
-
-
-            overallScore :
-
-                state.overallScore,
-
-
-
-            overallStatus :
-
-                determineOverallStatus(
-
-                    state.overallScore
-
-                )
-
-        };
-
-    }
-
-
-
-    /* ======================================================================
-       INSIGHT
-       ====================================================================== */
-
-    function getInsight(level){
-
-        switch(level){
-
-            case "learner":
-
-                return
-
-                    "Every meaningful transformation begins with awareness.";
-
-
-
-            case "leader":
-
-                return
-
-                    "You are steadily aligning your daily choices with your vision.";
-
-
-
-            default:
-
-                return
-
-                    "You are living many of your highest values. Continue inspiring others.";
-
-        }
 
     }
 
@@ -612,59 +108,549 @@ window.CTM.AssessmentEngine = (() => {
        PUBLIC API
        ====================================================================== */
 
-    return{
+    return {
 
-        initialize,
+        /* ==============================================================
+           Initialize Engine
+           ============================================================== */
 
+        init : function (pillarId) {
 
+            this.reset();
 
-        reset,
+            return this.load(
 
+                pillarId
 
+            );
 
-        saveResponses,
-
-
-
-        getCurrentPillar,
-
-
-
-        setCurrentPillar,
+        },
 
 
 
-        getDashboardModel,
+        /* ==============================================================
+           Load Pillar
+           ============================================================== */
+
+        load : function (pillarId) {
+
+            const pillar =
+
+                CTM.Framework.getPillar(
+
+                    pillarId
+
+                );
+
+            if (!pillar) {
+
+                throw new Error(
+
+                    "Invalid pillar id : " +
+
+                    pillarId
+
+                );
+
+            }
+
+            if (
+
+                !CTM.Data ||
+
+                !CTM.Data[pillar.object]
+
+            ) {
+
+                throw new Error(
+
+                    "Pillar data not loaded : " +
+
+                    pillar.object
+
+                );
+
+            }
+
+            state.pillar = pillar;
+
+            state.data =
+
+                CTM.Data[
+
+                    pillar.object
+
+                ];
+
+            state.completed = false;
+
+            state.result = null;
+
+            resetAnswers();
+
+            return cloneState();
+
+        },
 
 
 
-        getKalaChakraModel,
+        /* ==============================================================
+           Reset Engine
+           ============================================================== */
+
+        reset : function () {
+
+            state = {
+
+                pillar : null,
+
+                data : null,
+
+                answers : {
+
+                    awareness : null,
+
+                    alignment : null,
+
+                    embodiment : null
+
+                },
+
+                result : null,
+
+                completed : false
+
+            };
+
+            return cloneState();
+
+        },
 
 
 
-        determinePillarStatus,
+        /* ==============================================================
+           Current Engine State
+           ============================================================== */
 
+        getState : function () {
 
+            return cloneState();
 
-        determineOverallStatus
+        }
 
     };
 
+})();
 
+/* ==========================================================================
+   END OF BATCH 1A
+   ==========================================================================
+   Completed
+
+   ✓ File Header
+   ✓ Namespace
+   ✓ Private State
+   ✓ cloneState()
+   ✓ resetAnswers()
+   ✓ init()
+   ✓ load()
+   ✓ reset()
+   ✓ getState()
+
+   Pending (Batch 1B)
+
+   • answer()
+   • getAnswer()
+   • Validation
+   • Internal helpers
+
+   ========================================================================== */
+
+        /* ==============================================================
+           Store Answer
+           ============================================================== */
+
+        answer : function (questionIndex, score) {
+
+            if (!state.data) {
+
+                throw new Error(
+
+                    "Engine has not been initialized."
+
+                );
+
+            }
+
+            score = CTM.Scoring.validate(
+
+                score
+
+            );
+
+            switch (questionIndex) {
+
+                case 1:
+
+                    state.answers.awareness = score;
+
+                    break;
+
+                case 2:
+
+                    state.answers.alignment = score;
+
+                    break;
+
+                case 3:
+
+                    state.answers.embodiment = score;
+
+                    break;
+
+                default:
+
+                    throw new Error(
+
+                        "Invalid question index : " +
+
+                        questionIndex
+
+                    );
+
+            }
+
+            return cloneState();
+
+        },
+
+
+
+        /* ==============================================================
+           Get Answer
+           ============================================================== */
+
+        getAnswer : function (questionIndex) {
+
+            switch (questionIndex) {
+
+                case 1:
+
+                    return state.answers.awareness;
+
+                case 2:
+
+                    return state.answers.alignment;
+
+                case 3:
+
+                    return state.answers.embodiment;
+
+                default:
+
+                    return null;
+
+            }
+
+        },
+
+
+
+        /* ==============================================================
+           Has Answer
+           ============================================================== */
+
+        hasAnswer : function (questionIndex) {
+
+            return this.getAnswer(
+
+                questionIndex
+
+            ) !== null;
+
+        },
+
+
+
+        /* ==============================================================
+           Validate Assessment
+           ============================================================== */
+
+        validate : function () {
+
+            return (
+
+                state.answers.awareness !== null &&
+
+                state.answers.alignment !== null &&
+
+                state.answers.embodiment !== null
+
+            );
+
+        },
+
+
+
+        /* ==============================================================
+           Is Complete
+           ============================================================== */
+
+        isComplete : function () {
+
+            return state.completed;
+
+        },
+
+
+
+        /* ==============================================================
+           Current Pillar
+           ============================================================== */
+
+        getPillar : function () {
+
+            return state.pillar;
+
+        },
+
+
+
+        /* ==============================================================
+           Current Data
+           ============================================================== */
+
+        getData : function () {
+
+            return state.data;
+
+        },
+
+
+
+        /* ==============================================================
+           Current Answers
+           ============================================================== */
+
+        getAnswers : function () {
+
+            return {
+
+                awareness :
+
+                    state.answers.awareness,
+
+                alignment :
+
+                    state.answers.alignment,
+
+                embodiment :
+
+                    state.answers.embodiment
+
+            };
+
+        },
+
+
+
+        /* ==============================================================
+           Progress
+           ============================================================== */
+
+        progress : function () {
+
+            let completed = 0;
+
+            if (
+
+                state.answers.awareness !== null
+
+            ) {
+
+                completed++;
+
+            }
+
+            if (
+
+                state.answers.alignment !== null
+
+            ) {
+
+                completed++;
+
+            }
+
+            if (
+
+                state.answers.embodiment !== null
+
+            ) {
+
+                completed++;
+
+            }
+
+            return {
+
+                completed :
+
+                    completed,
+
+                total : 3,
+
+                percentage :
+
+                    Math.round(
+
+                        (completed / 3) * 100
+
+                    )
+
+            };
+
+        },
+
+        /* ==============================================================
+           Calculate Result
+           ============================================================== */
+
+        calculate : function () {
+
+            if (!this.validate()) {
+
+                throw new Error(
+
+                    "Assessment is incomplete."
+
+                );
+
+            }
+
+            return CTM.Scoring.build(
+
+                state.answers.awareness,
+
+                state.answers.alignment,
+
+                state.answers.embodiment
+
+            );
+
+        },
+
+
+
+        /* ==============================================================
+           Complete Assessment
+           ============================================================== */
+
+        complete : function () {
+
+            const result =
+
+                this.calculate();
+
+            state.result = Object.freeze({
+
+                raw :
+
+                    result.raw,
+
+                percentage :
+
+                    result.percentage,
+
+                level :
+
+                    result.level,
+
+                title :
+
+                    result.title,
+
+                colour :
+
+                    result.colour,
+
+                answers : {
+
+                    awareness :
+
+                        state.answers.awareness,
+
+                    alignment :
+
+                        state.answers.alignment,
+
+                    embodiment :
+
+                        state.answers.embodiment
+
+                }
+
+            });
+
+            state.completed = true;
+
+            return state.result;
+
+        },
+
+
+
+        /* ==============================================================
+           Current Result
+           ============================================================== */
+
+        getResult : function () {
+
+            return state.result;
+
+        },
+
+
+
+        /* ==============================================================
+           Has Result
+           ============================================================== */
+
+        hasResult : function () {
+
+            return state.result !== null;
+
+        }
+
+    };
 
 })();
 
 
 
 /* ==========================================================================
+   LOCK ENGINE
+   ========================================================================== */
 
+Object.freeze(
+
+    CTM.Engine
+
+);
+
+
+
+/* ==========================================================================
    END OF FILE
 
-   File        : assessmentEngine.js
+   assessmentEngine.js
 
-   Version     : 1.0
+   Version 1.0
 
-   Status      : 🔒 LOCKED
+   Status
+
+   ✓ COMPLETE
+   ✓ LOCKED
 
    ========================================================================== */
 
