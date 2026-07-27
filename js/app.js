@@ -4,21 +4,19 @@
  CTM PATH™ Guided Journey™
 
  File        : js/app.js
- Version     : 1.5
+ Version     : 1.7
 
  Purpose:
  Application Shell Controller
 
- Responsibilities:
- - Load global components
- - Load page HTML
- - Load page CSS
- - Load page JS
- - Manage transitions
- - Manage navigation
+ Updates:
+ - Global header enabled for all pages
+ - Unified brand experience
+ - Dynamic asset loading
+ - Page transition management
 
  Status:
- 🔒 APPLICATION FOUNDATION
+ 🔒 GLOBAL BRAND ARCHITECTURE
 
 ==============================================================================
 */
@@ -31,25 +29,17 @@
 
 
 
-
-
 const CTM_APP = {
-
 
 
     version:
 
-        "1.5",
-
-
-
+        "1.7",
 
 
     currentPage:
 
         null,
-
-
 
 
 
@@ -67,7 +57,6 @@ init:
 async function(){
 
 
-
     console.log(
 
         "CTM PATH™ Guided Journey™ initialized."
@@ -75,13 +64,11 @@ async function(){
     );
 
 
-
     await this.loadPage(
 
         "pages/welcome.html"
 
     );
-
 
 
 },
@@ -104,7 +91,6 @@ loadPage:
 async function(pagePath){
 
 
-
     const container =
 
         document.getElementById(
@@ -115,15 +101,12 @@ async function(pagePath){
 
 
 
-
-
     if(!container){
-
 
 
         console.error(
 
-            "pageContainer missing"
+            "CTM PATH™ pageContainer missing."
 
         );
 
@@ -131,12 +114,7 @@ async function(pagePath){
         return;
 
 
-
     }
-
-
-
-
 
 
 
@@ -184,6 +162,7 @@ async function(pagePath){
 
 
 
+
         const response =
 
             await fetch(
@@ -192,6 +171,21 @@ async function(pagePath){
 
             );
 
+
+
+
+
+        if(!response.ok){
+
+
+            throw new Error(
+
+                "Unable to load " + pagePath
+
+            );
+
+
+        }
 
 
 
@@ -217,13 +211,32 @@ async function(pagePath){
 
 
 
+
+        /*
+        --------------------------------------------------------------
+        GLOBAL BRAND HEADER
+        --------------------------------------------------------------
+        */
+
+
         await this.loadHeader();
 
 
 
 
 
+
+
+
+        /*
+        --------------------------------------------------------------
+        GLOBAL FOOTER
+        --------------------------------------------------------------
+        */
+
+
         await this.loadFooter();
+
 
 
 
@@ -258,12 +271,14 @@ async function(pagePath){
 
         window.scrollTo({
 
+
             top:0,
+
 
             behavior:"smooth"
 
-        });
 
+        });
 
 
 
@@ -288,22 +303,21 @@ async function(pagePath){
 
 
 
-    }
 
+
+    }
 
 
     catch(error){
 
 
-
         console.error(
 
-            "CTM PATH™ Loading Error",
+            "CTM PATH™ Application Error:",
 
             error
 
         );
-
 
 
     }
@@ -320,7 +334,7 @@ async function(pagePath){
 
 /*
 ==============================================================================
- PAGE NAME DETECTOR
+ PAGE NAME
 ==============================================================================
 */
 
@@ -330,15 +344,19 @@ getPageName:
 function(path){
 
 
-
     return path
 
         .split("/")
 
         .pop()
 
-        .replace(".html","");
+        .replace(
 
+            ".html",
+
+            ""
+
+        );
 
 
 },
@@ -351,103 +369,7 @@ function(path){
 
 /*
 ==============================================================================
- LOAD CSS
-==============================================================================
-*/
-
-
-loadCSS:
-
-function(file){
-
-
-
-    return new Promise(
-
-        resolve=>{
-
-
-
-            const exists =
-
-                document.querySelector(
-
-                    `link[href="${file}"]`
-
-                );
-
-
-
-
-
-            if(exists){
-
-
-
-                resolve();
-
-                return;
-
-
-            }
-
-
-
-
-
-
-
-            const link =
-
-                document.createElement(
-
-                    "link"
-
-                );
-
-
-
-
-
-            link.rel="stylesheet";
-
-            link.href=file;
-
-
-
-
-
-            link.onload=resolve;
-
-
-
-
-
-            document.head.appendChild(
-
-                link
-
-            );
-
-
-
-        }
-
-    );
-
-
-
-},
-
-
-
-
-
-
-
-/*
-==============================================================================
- LOAD HEADER
+ HEADER LOADER
 ==============================================================================
 */
 
@@ -455,7 +377,6 @@ function(file){
 loadHeader:
 
 async function(){
-
 
 
     const existing =
@@ -472,10 +393,11 @@ async function(){
 
     if(existing){
 
-        return;
+
+        existing.remove();
+
 
     }
-
 
 
 
@@ -495,11 +417,29 @@ async function(){
 
 
 
+    if(!response.ok){
+
+
+        console.warn(
+
+            "Header component missing."
+
+        );
+
+
+        return;
+
+
+    }
+
+
+
+
+
 
     const html =
 
         await response.text();
-
 
 
 
@@ -526,7 +466,7 @@ async function(){
 
 /*
 ==============================================================================
- LOAD FOOTER
+ FOOTER LOADER
 ==============================================================================
 */
 
@@ -534,7 +474,6 @@ async function(){
 loadFooter:
 
 async function(){
-
 
 
     const existing =
@@ -551,10 +490,11 @@ async function(){
 
     if(existing){
 
-        return;
+
+        existing.remove();
+
 
     }
-
 
 
 
@@ -574,11 +514,29 @@ async function(){
 
 
 
+    if(!response.ok){
+
+
+        console.warn(
+
+            "Footer component missing."
+
+        );
+
+
+        return;
+
+
+    }
+
+
+
+
+
 
     const html =
 
         await response.text();
-
 
 
 
@@ -594,6 +552,107 @@ async function(){
     );
 
 
+},
+
+
+
+
+
+
+
+/*
+==============================================================================
+ CSS LOADER
+==============================================================================
+*/
+
+
+loadCSS:
+
+function(file){
+
+
+    return new Promise(resolve=>{
+
+
+
+        const exists =
+
+            document.querySelector(
+
+                `link[href="${file}"]`
+
+            );
+
+
+
+
+
+        if(exists){
+
+
+            resolve();
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+        const link =
+
+            document.createElement(
+
+                "link"
+
+            );
+
+
+
+
+
+        link.rel =
+
+            "stylesheet";
+
+
+
+        link.href =
+
+            file;
+
+
+
+
+
+        link.onload =
+
+            resolve;
+
+
+
+        link.onerror =
+
+            resolve;
+
+
+
+        document.head.appendChild(
+
+            link
+
+        );
+
+
+
+    });
+
+
 
 },
 
@@ -605,7 +664,7 @@ async function(){
 
 /*
 ==============================================================================
- LOAD PAGE SCRIPT
+ PAGE SCRIPT LOADER
 ==============================================================================
 */
 
@@ -615,101 +674,84 @@ loadPageScript:
 function(pageName){
 
 
+    return new Promise(resolve=>{
 
-    return new Promise(
 
-        resolve=>{
 
+        const file =
 
+            "js/" +
 
+            pageName +
 
+            ".js";
 
-            const file =
 
-                "js/" +
 
-                pageName +
 
-                ".js";
 
 
+        const existing =
 
+            document.querySelector(
 
-
-
-
-
-
-            const exists =
-
-                document.querySelector(
-
-                    `script[src="${file}"]`
-
-                );
-
-
-
-
-
-            if(exists){
-
-
-
-                resolve();
-
-                return;
-
-
-            }
-
-
-
-
-
-
-
-            const script =
-
-                document.createElement(
-
-                    "script"
-
-                );
-
-
-
-
-
-            script.src=file;
-
-
-
-
-
-            script.onload=resolve;
-
-
-
-
-
-            script.onerror=resolve;
-
-
-
-
-
-            document.body.appendChild(
-
-                script
+                `script[src="${file}"]`
 
             );
 
 
 
+
+
+        if(existing){
+
+
+            resolve();
+
+
+            return;
+
+
         }
 
-    );
+
+
+
+
+
+
+        const script =
+
+            document.createElement(
+
+                "script"
+
+            );
+
+
+
+
+
+
+        script.src = file;
+
+
+        script.onload = resolve;
+
+
+        script.onerror = resolve;
+
+
+
+        document.body.appendChild(
+
+            script
+
+        );
+
+
+
+    });
 
 
 
