@@ -4,9 +4,9 @@
    KALA CHAKRA™ v3.0
 
    File        : js/assessmentEngine.js
-   Version     : 1.2
+   Version     : 1.3
 
-   Status      : 🔒 PRODUCTION REPAIR
+   Status      : 🔒 SYNTAX STABILIZATION
 
 
    PURPOSE
@@ -63,29 +63,22 @@ CTM.Engine = (function(){
         assessmentId : null,
 
 
-
         pillarId : null,
-
 
 
         answers : {},
 
 
-
         result : null,
-
 
 
         currentQuestion : 1,
 
 
-
         completed : false,
 
 
-
         startedAt : null,
-
 
 
         updatedAt : null
@@ -120,12 +113,9 @@ CTM.Engine = (function(){
 
             assessmentId :
 
-
                 "CTM-ASSESSMENT-" +
 
                 Date.now(),
-
-
 
 
 
@@ -133,11 +123,7 @@ CTM.Engine = (function(){
 
 
 
-
-
             answers : {},
-
-
 
 
 
@@ -145,11 +131,7 @@ CTM.Engine = (function(){
 
 
 
-
-
             currentQuestion : 1,
-
-
 
 
 
@@ -157,19 +139,13 @@ CTM.Engine = (function(){
 
 
 
-
-
             startedAt :
-
 
                 new Date().toISOString(),
 
 
 
-
-
             updatedAt :
-
 
                 new Date().toISOString()
 
@@ -279,7 +255,6 @@ CTM.Engine = (function(){
         return state;
 
 
-
     }
 
 
@@ -309,29 +284,22 @@ CTM.Engine = (function(){
             assessmentId : null,
 
 
-
             pillarId : null,
-
 
 
             answers : {},
 
 
-
             result : null,
-
 
 
             currentQuestion : 1,
 
 
-
             completed : false,
 
 
-
             startedAt : null,
-
 
 
             updatedAt : null
@@ -349,8 +317,7 @@ CTM.Engine = (function(){
         return state;
 
 
-
-    },
+    }
 
                   /* ======================================================================
        GET STATE
@@ -404,7 +371,6 @@ CTM.Engine = (function(){
 
             timestamp :
 
-
                 new Date().toISOString()
 
 
@@ -429,7 +395,6 @@ CTM.Engine = (function(){
 
 
         return state.answers[questionId];
-
 
 
     }
@@ -471,7 +436,6 @@ CTM.Engine = (function(){
 
 
         );
-
 
 
     }
@@ -524,10 +488,10 @@ CTM.Engine = (function(){
 
        Compatibility Layer
 
-       Does NOT calculate results.
+       Does NOT calculate scores.
 
        Stores and retrieves result generated
-       by assessment calculation layer.
+       by calculation layer.
 
        ====================================================================== */
 
@@ -597,7 +561,7 @@ CTM.Engine = (function(){
 
     }
 
-
+              
     /* ======================================================================
        NAVIGATION
 
@@ -803,11 +767,11 @@ CTM.Engine = (function(){
 
 
 
-            completed:true,
+            completed : true,
 
 
 
-            state:state
+            state : state
 
 
 
@@ -856,7 +820,7 @@ CTM.Engine = (function(){
 
 
 
-            answered: answered,
+            answered : answered,
 
 
 
@@ -864,7 +828,7 @@ CTM.Engine = (function(){
 
 
 
-            total: totalQuestions,
+            total : totalQuestions,
 
 
 
@@ -872,29 +836,53 @@ CTM.Engine = (function(){
 
 
 
-            percentage:
+            percentage :
+
+
 
                 totalQuestions
 
+
+
                 ?
+
+
 
                 Math.round(
 
+
+
                     (
+
+
 
                         answered /
 
+
+
                         totalQuestions
+
+
 
                     )
 
+
+
                     *
+
+
 
                     100
 
+
+
                 )
 
+
+
                 :
+
+
 
                 0
 
@@ -906,7 +894,7 @@ CTM.Engine = (function(){
 
     }
 
-
+              
     /* ======================================================================
        SERIALIZE STATE
 
@@ -1034,15 +1022,15 @@ CTM.Engine = (function(){
 
 
 
-        init:init,
+        init : init,
 
 
 
-        load:load,
+        load : load,
 
 
 
-        reset:reset,
+        reset : reset,
 
 
 
@@ -1050,15 +1038,15 @@ CTM.Engine = (function(){
 
 
 
-        getState:getState,
+        getState : getState,
 
 
 
-        setState:setState,
+        setState : setState,
 
 
 
-        serialize:serialize,
+        serialize : serialize,
 
 
 
@@ -1066,15 +1054,15 @@ CTM.Engine = (function(){
 
 
 
-        setAnswer:setAnswer,
+        setAnswer : setAnswer,
 
 
 
-        getAnswer:getAnswer,
+        getAnswer : getAnswer,
 
 
 
-        removeAnswer:removeAnswer,
+        removeAnswer : removeAnswer,
 
 
 
@@ -1082,15 +1070,15 @@ CTM.Engine = (function(){
 
 
 
-        hasResult:hasResult,
+        hasResult : hasResult,
 
 
 
-        getResult:getResult,
+        getResult : getResult,
 
 
 
-        setResult:setResult,
+        setResult : setResult,
 
 
 
@@ -1098,15 +1086,15 @@ CTM.Engine = (function(){
 
 
 
-        nextQuestion:nextQuestion,
+        nextQuestion : nextQuestion,
 
 
 
-        previousQuestion:previousQuestion,
+        previousQuestion : previousQuestion,
 
 
 
-        goToQuestion:goToQuestion,
+        goToQuestion : goToQuestion,
 
 
 
@@ -1114,11 +1102,11 @@ CTM.Engine = (function(){
 
 
 
-        validate:validate,
+        validate : validate,
 
 
 
-        complete:complete,
+        complete : complete,
 
 
 
@@ -1126,7 +1114,7 @@ CTM.Engine = (function(){
 
 
 
-        getProgress:getProgress
+        getProgress : getProgress
 
 
 
@@ -1171,11 +1159,11 @@ Object.freeze(
 
    assessmentEngine.js
 
-   Version : 1.2
+   Version : 1.3
 
    Status
 
-   ✓ SYNTAX REPAIRED
+   ✓ SYNTAX VALIDATED
    ✓ CTM.Engine RESTORED
    ✓ RESULT API RESTORED
    ✓ STATE MANAGEMENT ACTIVE
