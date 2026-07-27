@@ -1,1 +1,387 @@
 
+/* ==========================================================================
+
+   CTM PATH™ Guided Journey™
+
+   File        : rating-scale.css
+   Version     : 1.0
+   Status      : 🔒 LOCKED
+
+   Purpose
+   --------------------------------------------------------------------------
+   Premium Rating Scale™
+
+   Owns
+
+   ✓ Rating Layout
+   ✓ Rating Chips
+   ✓ Rating Zones
+   ✓ Selected State
+   ✓ Hover Effects
+   ✓ Accessibility States
+
+   ========================================================================== */
+
+
+
+/* ==========================================================================
+   ROOT
+   ========================================================================== */
+
+.rating-scale-component{
+
+    width:100%;
+
+    margin-top:var(--space-8);
+
+}
+
+
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+
+.rating-header{
+
+    text-align:center;
+
+    margin-bottom:var(--space-6);
+
+}
+
+
+
+.rating-title{
+
+    margin-bottom:var(--space-2);
+
+}
+
+
+
+.rating-subtitle{
+
+    color:var(--text-secondary);
+
+}
+
+
+
+/* ==========================================================================
+   SCALE
+   ========================================================================== */
+
+.rating-scale{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--space-6);
+
+}
+
+
+
+/* ==========================================================================
+   ZONES
+   ========================================================================== */
+
+.rating-zone{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--space-3);
+
+}
+
+
+
+.zone-label{
+
+    font-size:var(--fs-sm);
+
+    font-weight:600;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+
+}
+
+
+
+.rating-zone-red .zone-label{
+
+    color:#E05252;
+
+}
+
+
+
+.rating-zone-orange .zone-label{
+
+    color:#F0A640;
+
+}
+
+
+
+.rating-zone-green .zone-label{
+
+    color:#34C779;
+
+}
+
+
+
+/* ==========================================================================
+   BUTTON GROUP
+   ========================================================================== */
+
+.rating-buttons{
+
+    display:flex;
+
+    gap:var(--space-3);
+
+    flex-wrap:wrap;
+
+}
+
+
+
+/* ==========================================================================
+   CHIP
+   ========================================================================== */
+
+.rating-chip{
+
+    width:56px;
+
+    height:56px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    background:rgba(255,255,255,.05);
+
+    color:var(--text-primary);
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:all .28s ease;
+
+    backdrop-filter:blur(10px);
+
+}
+
+
+
+.rating-chip:hover{
+
+    transform:translateY(-4px);
+
+    border-color:var(--color-gold);
+
+    box-shadow:
+
+        0 10px 24px rgba(0,0,0,.35);
+
+}
+
+
+
+/* ==========================================================================
+   RED
+   ========================================================================== */
+
+.rating-red:hover{
+
+    background:#C73B3B;
+
+}
+
+
+
+/* ==========================================================================
+   ORANGE
+   ========================================================================== */
+
+.rating-orange:hover{
+
+    background:#E49A28;
+
+}
+
+
+
+/* ==========================================================================
+   GREEN
+   ========================================================================== */
+
+.rating-green:hover{
+
+    background:#1FAE66;
+
+}
+
+
+
+/* ==========================================================================
+   SELECTED
+   ========================================================================== */
+
+.rating-chip.selected{
+
+    color:#FFFFFF;
+
+    border-color:var(--color-gold);
+
+    transform:scale(1.08);
+
+    box-shadow:
+
+        0 0 0 2px rgba(198,164,91,.35),
+
+        0 12px 30px rgba(0,0,0,.45);
+
+}
+
+
+
+/* ==========================================================================
+   SELECTED COLOURS
+   ========================================================================== */
+
+.rating-red.selected{
+
+    background:#C73B3B;
+
+}
+
+
+
+.rating-orange.selected{
+
+    background:#E49A28;
+
+}
+
+
+
+.rating-green.selected{
+
+    background:#1FAE66;
+
+}
+
+
+
+/* ==========================================================================
+   SCORE
+   ========================================================================== */
+
+.rating-selection{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:var(--space-8);
+
+}
+
+
+
+.selection-label{
+
+    color:var(--text-secondary);
+
+}
+
+
+
+.selection-value{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    color:var(--color-primary);
+
+}
+
+
+
+.selection-max{
+
+    color:var(--text-muted);
+
+}
+
+
+
+/* ==========================================================================
+   FEEDBACK
+   ========================================================================== */
+
+.rating-feedback{
+
+    margin-top:var(--space-5);
+
+    text-align:center;
+
+    color:var(--text-secondary);
+
+    min-height:24px;
+
+}
+
+
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media(max-width:768px){
+
+    .rating-buttons{
+
+        justify-content:center;
+
+    }
+
+    .rating-chip{
+
+        width:52px;
+
+        height:52px;
+
+    }
+
+}
+
+
+
+/* ==========================================================================
+
+   END OF FILE
+
+   File : rating-scale.css
+   Version : 1.0
+
+   ========================================================================== */
+
