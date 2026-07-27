@@ -1,356 +1,13 @@
 
 /*
 ==============================================================================
- CTM PATH™ Guided Journey™
+ CTM PATH™ GLOBAL PREMIUM HEADER
+ Version: 1.2
 
- File        : css/theme.css
- Version     : 1.1
+ Brand:
+ CTM PATH™
+ KAALACHAKRA™
 
- Purpose:
- Global premium design system.
-
- Status:
- 🔒 CORE DESIGN FOUNDATION
-
-==============================================================================
-*/
-
-
-
-
-
-/*
-==============================================================================
- GLOBAL COLOUR TOKENS
-==============================================================================
-*/
-
-
-:root {
-
-
-    /*
-    Brand Background
-    */
-
-
-    --ctm-background:
-
-        #081C3A;
-
-
-
-    /*
-    Premium Surfaces
-    */
-
-
-    --ctm-surface:
-
-        #0D223F;
-
-
-
-    --ctm-card:
-
-        #122B4A;
-
-
-
-    /*
-    Borders
-    */
-
-
-    --ctm-border:
-
-        rgba(
-
-            200,
-
-            169,
-
-            106,
-
-            .25
-
-        );
-
-
-
-
-
-    /*
-    Brand Colours
-    */
-
-
-    --ctm-gold:
-
-        #C8A96A;
-
-
-
-    --ctm-teal:
-
-        #0F766E;
-
-
-
-    --ctm-teal-light:
-
-        #14B8A6;
-
-
-
-
-
-    /*
-    Typography
-    */
-
-
-    --ctm-ivory:
-
-        #F5F1E8;
-
-
-
-    --ctm-text:
-
-        #B8C2D1;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/*
-==============================================================================
- GLOBAL RESET
-==============================================================================
-*/
-
-
-* {
-
-
-    box-sizing:
-
-        border-box;
-
-
-}
-
-
-
-
-
-
-
-html {
-
-
-    scroll-behavior:
-
-        smooth;
-
-
-}
-
-
-
-
-
-
-
-body {
-
-
-    margin:
-
-        0;
-
-
-    padding:
-
-        0;
-
-
-    background:
-
-        var(--ctm-background);
-
-
-    color:
-
-        var(--ctm-ivory);
-
-
-    font-family:
-
-
-        "Inter",
-
-        "Noto Sans",
-
-        Arial,
-
-        sans-serif;
-
-
-    line-height:
-
-        1.6;
-
-
-}
-
-
-
-
-
-
-
-
-
-img {
-
-
-    max-width:
-
-        100%;
-
-
-    display:
-
-        block;
-
-
-}
-
-
-
-
-
-
-
-
-
-/*
-==============================================================================
- TYPOGRAPHY SYSTEM
-==============================================================================
-*/
-
-
-h1,
-
-
-h2,
-
-
-h3 {
-
-
-    color:
-
-        var(--ctm-ivory);
-
-
-    font-weight:
-
-        700;
-
-
-    letter-spacing:
-
-        .02em;
-
-
-}
-
-
-
-
-
-
-
-p {
-
-
-    color:
-
-        var(--ctm-text);
-
-
-}
-
-
-
-
-
-
-
-
-
-/*
-==============================================================================
- GLOBAL PAGE CONTAINER
-==============================================================================
-*/
-
-
-#pageContainer {
-
-
-    min-height:
-
-        100vh;
-
-
-    transition:
-
-
-        opacity .35s ease;
-
-
-}
-
-
-
-
-
-
-
-#pageContainer.page-loading {
-
-
-    opacity:
-
-        .35;
-
-
-}
-
-
-
-
-
-
-
-
-
-/*
-==============================================================================
- GLOBAL HEADER
 ==============================================================================
 */
 
@@ -363,19 +20,42 @@ p {
         100%;
 
 
-    padding:
-
-        28px 20px;
-
-
     background:
 
-        var(--ctm-background);
+        linear-gradient(
+
+            180deg,
+
+            #061A35 0%,
+
+            #081C3A 100%
+
+        );
+
+
+    padding:
+
+        32px 20px 28px;
 
 
     text-align:
 
         center;
+
+
+    border-bottom:
+
+        1px solid rgba(
+
+            200,
+
+            169,
+
+            106,
+
+            .35
+
+        );
 
 
 }
@@ -404,6 +84,11 @@ p {
         center;
 
 
+    justify-content:
+
+        center;
+
+
 }
 
 
@@ -412,12 +97,19 @@ p {
 
 
 
+/*
+==============================================================================
+ LOGO
+==============================================================================
+*/
+
+
 .ctm-header-logo {
 
 
     width:
 
-        72px;
+        68px;
 
 
     height:
@@ -427,105 +119,10 @@ p {
 
     margin-bottom:
 
-        10px;
+        18px;
 
 
 }
-
-
-
-
-
-
-
-.ctm-header-title {
-
-
-    color:
-
-        var(--ctm-ivory);
-
-
-    font-size:
-
-        22px;
-
-
-    font-weight:
-
-        700;
-
-
-    letter-spacing:
-
-        5px;
-
-
-}
-
-
-
-
-
-
-
-.ctm-header-subtitle {
-
-
-    color:
-
-        var(--ctm-teal-light);
-
-
-    font-size:
-
-        11px;
-
-
-    letter-spacing:
-
-        6px;
-
-
-    margin-top:
-
-        4px;
-
-
-}
-
-
-
-
-
-
-
-.ctm-header-tagline {
-
-
-    color:
-
-        var(--ctm-gold);
-
-
-    font-size:
-
-        13px;
-
-
-    font-style:
-
-        italic;
-
-
-    margin-top:
-
-        8px;
-
-
-}
-
-
 
 
 
@@ -535,179 +132,12 @@ p {
 
 /*
 ==============================================================================
- GLOBAL CARD
+ BRAND IDENTITY
 ==============================================================================
 */
 
 
-.ctm-card {
-
-
-    background:
-
-        var(--ctm-card);
-
-
-    border:
-
-        1px solid var(--ctm-border);
-
-
-    border-radius:
-
-        24px;
-
-
-    box-shadow:
-
-
-        0 25px 60px rgba(
-
-            0,
-
-            0,
-
-            0,
-
-            .35
-
-        );
-
-
-}
-
-
-
-
-
-
-
-
-
-/*
-==============================================================================
- GLOBAL BUTTON
-==============================================================================
-*/
-
-
-.ctm-button {
-
-
-    display:
-
-        inline-flex;
-
-
-    align-items:
-
-        center;
-
-
-    justify-content:
-
-        center;
-
-
-    background:
-
-        var(--ctm-teal);
-
-
-    color:
-
-        #FFFFFF;
-
-
-    border:
-
-        none;
-
-
-    border-radius:
-
-        50px;
-
-
-    padding:
-
-        18px 40px;
-
-
-    font-size:
-
-        16px;
-
-
-    font-weight:
-
-        700;
-
-
-    cursor:
-
-        pointer;
-
-
-    transition:
-
-        all .3s ease;
-
-
-}
-
-
-
-
-
-
-
-.ctm-button:hover {
-
-
-    background:
-
-        var(--ctm-teal-light);
-
-
-    transform:
-
-        translateY(-3px);
-
-
-}
-
-
-
-
-
-
-
-
-
-/*
-==============================================================================
- GLOBAL FOOTER
-==============================================================================
-*/
-
-
-.ctm-footer {
-
-
-    background:
-
-        #061529;
-
-
-    border-top:
-
-        1px solid var(--ctm-border);
-
-
-    padding:
-
-        45px 20px;
+.ctm-header-brand {
 
 
     text-align:
@@ -723,12 +153,37 @@ p {
 
 
 
-.ctm-footer p {
+/*
+ MASTER BRAND
+*/
 
 
-    margin:
+.ctm-header-primary {
 
-        8px 0;
+
+    color:
+
+        var(--ctm-ivory);
+
+
+    font-size:
+
+        26px;
+
+
+    font-weight:
+
+        700;
+
+
+    letter-spacing:
+
+        5px;
+
+
+    line-height:
+
+        1.2;
 
 
 }
@@ -739,7 +194,12 @@ p {
 
 
 
-.ctm-footer-brand {
+/*
+ PROPRIETARY FRAMEWORK
+*/
+
+
+.ctm-header-framework {
 
 
     color:
@@ -747,9 +207,101 @@ p {
         var(--ctm-gold);
 
 
+    font-size:
+
+        20px;
+
+
     font-weight:
 
         600;
+
+
+    letter-spacing:
+
+        4px;
+
+
+    margin-top:
+
+        8px;
+
+
+}
+
+
+
+
+
+
+
+/*
+ POSITIONING STATEMENT
+*/
+
+
+.ctm-header-system {
+
+
+    color:
+
+        #D8DDE5;
+
+
+    font-size:
+
+        15px;
+
+
+    letter-spacing:
+
+        1.5px;
+
+
+    margin-top:
+
+        16px;
+
+
+}
+
+
+
+
+
+
+
+/*
+ TRANSFORMATION PHILOSOPHY
+*/
+
+
+.ctm-header-tagline {
+
+
+    color:
+
+        var(--ctm-teal-light);
+
+
+    font-size:
+
+        16px;
+
+
+    font-style:
+
+        italic;
+
+
+    margin-top:
+
+        10px;
+
+
+    letter-spacing:
+
+        1px;
 
 
 }
@@ -764,7 +316,7 @@ p {
 
 /*
 ==============================================================================
- RESPONSIVE
+ MOBILE HEADER
 ==============================================================================
 */
 
@@ -773,12 +325,12 @@ p {
 
 
 
-    .ctm-header-logo {
+    .ctm-header {
 
 
-        width:
+        padding:
 
-            60px;
+            25px 15px;
 
 
     }
@@ -788,17 +340,82 @@ p {
 
 
 
-    .ctm-header-title {
+    .ctm-header-logo {
+
+
+        width:
+
+            55px;
+
+
+    }
+
+
+
+
+
+
+    .ctm-header-primary {
 
 
         font-size:
 
-            18px;
+            21px;
 
 
         letter-spacing:
 
             3px;
+
+
+    }
+
+
+
+
+
+
+    .ctm-header-framework {
+
+
+        font-size:
+
+            17px;
+
+
+        letter-spacing:
+
+            2px;
+
+
+    }
+
+
+
+
+
+
+    .ctm-header-system {
+
+
+        font-size:
+
+            13px;
+
+
+    }
+
+
+
+
+
+
+    .ctm-header-tagline {
+
+
+        font-size:
+
+            14px;
 
 
     }
