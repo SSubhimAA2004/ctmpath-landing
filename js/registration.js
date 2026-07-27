@@ -4,23 +4,31 @@
  CTM PATH™ Guided Journey™
 
  File        : js/registration.js
- Version     : 1.0
- Page        : PAGE 02 — REGISTRATION™
+ Version     : 1.1
+
+ Page:
+ PAGE 02 — REGISTRATION™
 
  Purpose:
  Visitor registration controller.
 
  Responsibilities:
- - Validate registration form
- - Create visitor payload
- - Call CTM PATH™ API
+ - Capture visitor details
+ - Validate form
+ - Call shared API layer
  - Store VisitorID
- - Navigate to Assessment
+ - Move to Assessment 01™
 
  Rules:
+ - No direct fetch()
+ - No backend URLs
  - No scoring logic
  - No assessment logic
- - No duplicate registration engine
+
+ Dependencies:
+
+ js/api.js
+ js/storage.js
 
 ==============================================================================
 */
@@ -33,20 +41,6 @@
 
 
 
-    /*
-    ==========================================================================
-       CONFIGURATION
-    ==========================================================================
-    */
-
-
-    const CTM_API_URL =
-
-        "https://script.google.com/macros/s/AKfycbxyteSs7pXpvWGLT0uR0tWU-zcl5zuqIVOOBdQ_YdS1HJcjrGWFO9MN7yiSLqNUZ66RoA/exec";
-
-
-
-
 
 
     /*
@@ -56,7 +50,7 @@
     */
 
 
-    function initRegistrationPage() {
+    function initRegistration(){
 
 
         const form =
@@ -67,23 +61,29 @@
 
 
 
-        if (!form) {
+        if(!form){
 
 
             console.warn(
-                "CTM PATH™: Registration form not found."
+
+                "CTM PATH™ Registration form not found."
+
             );
 
 
             return;
+
 
         }
 
 
 
         form.addEventListener(
+
             "submit",
+
             handleRegistration
+
         );
 
 
@@ -95,25 +95,27 @@
 
 
 
+
     /*
     ==========================================================================
-       FORM SUBMISSION
+       REGISTRATION PROCESS
     ==========================================================================
     */
 
 
-    async function handleRegistration(event) {
+    async function handleRegistration(event){
 
 
         event.preventDefault();
 
 
 
-
         const button =
 
             document.getElementById(
+
                 "startAssessmentButton"
+
             );
 
 
@@ -130,48 +132,83 @@
         try {
 
 
-            const payload =
-                buildVisitorPayload();
+
+            const visitorData =
+
+                collectVisitorData();
+
+
+
+
+
+            if(!validateVisitorData(visitorData)){
+
+
+                throw new Error(
+
+                    "Please complete all required fields."
+
+                );
+
+
+            }
+
+
 
 
 
 
             const response =
-                await createVisitor(
-                    payload
+
+                await CTM_API.createVisitor(
+
+                    visitorData
+
                 );
 
 
 
 
 
-            if (
+
+
+            if(
+
                 response &&
+
                 response.success
-            ) {
+
+            ){
 
 
 
-                saveVisitorSession(
-                    response
-                );
+                saveVisitor(response);
 
 
 
-                navigateToAssessment();
+                moveToAssessment();
 
 
 
-            } else {
+
+            }
+
+            else {
+
 
 
                 throw new Error(
+
                     response.message ||
-                    "Registration failed"
+
+                    "Registration failed."
+
                 );
 
 
             }
+
+
 
 
 
@@ -183,31 +220,42 @@
 
 
             console.error(
+
                 "CTM PATH™ Registration Error:",
+
                 error
+
             );
 
 
 
-            showError(
-                "Unable to complete registration. Please try again."
+            showMessage(
+
+                error.message
+
             );
 
 
 
         }
+
 
 
         finally{
 
 
+
             setLoading(
+
                 button,
+
                 false
+
             );
 
 
         }
+
 
 
     }
@@ -218,23 +266,20 @@
 
 
 
+
+
     /*
     ==========================================================================
-       BUILD PAYLOAD
+       COLLECT FORM DATA
     ==========================================================================
     */
 
 
-    function buildVisitorPayload(){
+    function collectVisitorData(){
 
 
 
         return {
-
-
-            action:
-                "createVisitor",
-
 
 
             fullName:
@@ -311,48 +356,35 @@
 
 
 
+
     /*
     ==========================================================================
-       API CALL
+       VALIDATION
     ==========================================================================
     */
 
 
-    async function createVisitor(payload){
+    function validateVisitorData(data){
 
 
 
-        const response =
+        return (
 
-            await fetch(
-                CTM_API_URL,
-                {
+            data.fullName &&
 
-                    method:
-                        "POST",
+            data.mobile &&
 
+            data.email &&
 
-                    headers:
-                    {
+            data.district &&
 
-                        "Content-Type":
-                            "application/json"
+            data.state &&
 
-                    },
+            data.language &&
 
+            data.source
 
-                    body:
-                        JSON.stringify(
-                            payload
-                        )
-
-
-                }
-            );
-
-
-
-        return await response.json();
+        );
 
 
     }
@@ -367,24 +399,43 @@
 
     /*
     ==========================================================================
-       SESSION STORAGE
+       SAVE VISITOR SESSION
     ==========================================================================
     */
 
 
-    function saveVisitorSession(response){
+    function saveVisitor(response){
 
 
 
-        localStorage.setItem(
+        CTM_STORAGE.saveVisitor(
 
-            "ctmVisitor",
-
-            JSON.stringify(
-                response
-            )
+            response
 
         );
+
+
+
+        CTM_STORAGE.saveJourney(
+
+            {
+
+
+                currentPage:
+
+                    "REGISTRATION",
+
+
+                visitorID:
+
+                    response.visitorID
+
+
+
+            }
+
+        );
+
 
 
     }
@@ -404,13 +455,14 @@
     */
 
 
-    function navigateToAssessment(){
+    function moveToAssessment(){
 
 
 
         window.location.href =
 
             "assessment-01.html";
+
 
 
     }
@@ -434,17 +486,26 @@
 
 
 
-        return document
+        const element =
 
-            .getElementById(id)
+            document.getElementById(id);
 
-            .value
 
-            .trim();
+
+        return element
+
+            ?
+
+            element.value.trim()
+
+            :
+
+            "";
 
 
 
     }
+
 
 
 
@@ -456,18 +517,20 @@
 
 
 
-        if(
-            /Mobi|Android/i.test(
-                navigator.userAgent
-            )
-        ){
+        return /Mobi|Android/i.test(
 
-            return "Mobile";
+            navigator.userAgent
 
-        }
+        )
 
+            ?
 
-        return "Desktop";
+            "Mobile"
+
+            :
+
+            "Desktop";
+
 
 
     }
@@ -478,10 +541,8 @@
 
 
 
-    function setLoading(
-        button,
-        loading
-    ){
+
+    function setLoading(button, loading){
 
 
 
@@ -490,15 +551,19 @@
 
 
 
-        button.disabled =
-            loading;
+
+
+        button.disabled = loading;
+
+
 
 
 
         if(loading){
 
 
-            button.dataset.text =
+            button.dataset.originalText =
+
                 button.innerHTML;
 
 
@@ -508,6 +573,7 @@
                 "Processing...";
 
 
+
         }
 
         else{
@@ -515,11 +581,11 @@
 
             button.innerHTML =
 
-                button.dataset.text;
+                button.dataset.originalText;
+
 
 
         }
-
 
 
     }
@@ -530,7 +596,8 @@
 
 
 
-    function showError(message){
+
+    function showMessage(message){
 
 
 
@@ -539,6 +606,7 @@
 
 
     }
+
 
 
 
@@ -557,7 +625,7 @@
 
         "DOMContentLoaded",
 
-        initRegistrationPage
+        initRegistration
 
     );
 
