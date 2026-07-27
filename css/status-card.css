@@ -1,250 +1,1254 @@
 
 /* ==========================================================================
+   CTM PATH™
+   KALA CHAKRA™ v3.0
 
-   CTM PATH™ Guided Journey™
+   File        : css/status-card.css
+   Version     : 2.0
 
-   File        : status-card.css
-   Version     : 1.0
-   Status      : 🔒 LOCKED
+   Status      : PREMIUM COMPONENT SKIN
 
-   Purpose
-   --------------------------------------------------------------------------
-   Premium Status Card™
 
-   Owns
+   PURPOSE
 
-   ✓ Status Card
-   ✓ Status Badge
-   ✓ Status Colours
-   ✓ Encouragement Area
+   Current Status Identity Card™
+
+   Owns:
+
+   ✓ Identity Presentation
+   ✓ Status Visuals
+   ✓ Premium Card Layout
+
+
+   Does NOT:
+
+   ✗ Calculate Results
+   ✗ Modify Engine State
+
 
    ========================================================================== */
+
+
+
+
 
 
 
 /* ==========================================================================
-   CARD
+   STATUS CARD CONTAINER
    ========================================================================== */
 
-.status-card-component{
 
-    background:var(--glass-bg);
-
-    border:1px solid var(--glass-border);
-
-    border-radius:28px;
-
-    padding:40px;
-
-    text-align:center;
-
-    backdrop-filter:blur(20px);
-
-}
+.status-card {
 
 
-
-/* ==========================================================================
-   HEADER
-   ========================================================================== */
-
-.status-header{
-
-    margin-bottom:32px;
-
-}
+    width:100%;
 
 
-
-.status-label{
-
-    display:block;
-
-    color:var(--text-muted);
-
-    font-size:.80rem;
-
-    letter-spacing:.15em;
-
-    text-transform:uppercase;
-
-    margin-bottom:12px;
-
-}
+    max-width:600px;
 
 
+    margin:
 
-.status-name{
-
-    margin-bottom:8px;
-
-}
+        35px auto;
 
 
-
-.status-subtitle{
-
-    color:var(--text-secondary);
-
-}
-
-
-
-/* ==========================================================================
-   SCORE
-   ========================================================================== */
-
-.status-score{
-
-    margin-bottom:32px;
-
-}
-
-
-
-.score-caption{
-
-    display:block;
-
-    color:var(--text-muted);
-
-    margin-bottom:8px;
-
-}
-
-
-
-.score-value{
-
-    font-size:3rem;
-
-    font-weight:700;
-
-}
-
-
-
-/* ==========================================================================
-   BADGE
-   ========================================================================== */
-
-.status-badge{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:12px;
 
     padding:
 
-        12px 24px;
+        40px;
 
-    border-radius:999px;
 
-    border:1px solid;
 
-    margin-bottom:28px;
+    text-align:center;
+
+
+
+    border-radius:32px;
+
+
+
+    background:
+
+        linear-gradient(
+
+            145deg,
+
+            rgba(255,255,255,.09),
+
+            rgba(255,255,255,.025)
+
+        );
+
+
+
+    border:
+
+        1px solid
+
+        rgba(255,255,255,.15);
+
+
+
+    box-shadow:
+
+        0 25px 70px
+
+        rgba(0,0,0,.35);
+
+
+
+    backdrop-filter:
+
+        blur(15px);
+
+
+
+    position:relative;
+
+
+
+    overflow:hidden;
+
+
 
 }
+
+
+
+
+
+
 
 
 
 /* ==========================================================================
-   STATUS COLOURS
+   STATUS GLOW
    ========================================================================== */
 
-.status-card-component.status-learner{
 
-    border-color:#C73B3B;
-
-}
+.status-card::before {
 
 
+    content:"";
 
-.status-card-component.status-learner
 
-.status-badge{
-
-    color:#E05252;
-
-    border-color:#E05252;
-
-}
+    position:absolute;
 
 
 
-.status-card-component.status-leader{
-
-    border-color:#E49A28;
-
-}
+    width:250px;
 
 
-
-.status-card-component.status-leader
-
-.status-badge{
-
-    color:#E49A28;
-
-    border-color:#E49A28;
-
-}
+    height:250px;
 
 
 
-.status-card-component.status-legend{
-
-    border-color:#1FAE66;
-
-}
+    top:-120px;
 
 
+    left:50%;
 
-.status-card-component.status-legend
 
-.status-badge{
 
-    color:#1FAE66;
+    transform:
 
-    border-color:#1FAE66;
+        translateX(-50%);
+
+
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(231,197,106,.25),
+
+            transparent 70%
+
+        );
+
+
+
+    pointer-events:none;
+
+
 
 }
+
+
+
+
+
+
 
 
 
 /* ==========================================================================
-   MESSAGE
+   STATUS SYMBOL
    ========================================================================== */
 
-.status-message{
 
-    color:var(--text-secondary);
+.status-symbol {
+
+
+    width:90px;
+
+
+    height:90px;
+
+
+
+    margin:
+
+        0 auto 25px;
+
+
+
+    display:flex;
+
+
+
+    align-items:center;
+
+
+
+    justify-content:center;
+
+
+
+    border-radius:50%;
+
+
+
+    background:
+
+        rgba(231,197,106,.12);
+
+
+
+    border:
+
+        1px solid
+
+        rgba(231,197,106,.35);
+
+
+
+    font-size:3rem;
+
+
+
+    position:relative;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   STATUS LABEL
+   ========================================================================== */
+
+
+.status-label {
+
+
+    color:#E7C56A;
+
+
+
+    font-size:.85rem;
+
+
+
+    font-weight:700;
+
+
+
+    letter-spacing:2px;
+
+
+
+    text-transform:uppercase;
+
+
+
+    margin-bottom:15px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   STATUS TITLE
+
+   LEARNER™
+
+   LEADER™
+
+   LEGEND™
+
+   ========================================================================== */
+
+
+.status-title {
+
+
+    font-size:2.2rem;
+
+
+
+    font-weight:700;
+
+
+
+    color:#FFFFFF;
+
+
+
+    letter-spacing:1px;
+
+
+
+    margin-bottom:15px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   STATUS DESCRIPTION
+   ========================================================================== */
+
+
+.status-description {
+
+
+    color:
+
+        rgba(247,244,234,.78);
+
+
+
+    font-size:1.05rem;
+
+
 
     line-height:1.8;
 
+
+
+    margin-bottom:30px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   SCORE DISPLAY
+   ========================================================================== */
+
+
+.status-score {
+
+
+    display:flex;
+
+
+
+    justify-content:center;
+
+
+
+    align-items:center;
+
+
+
+    gap:15px;
+
+
+
+    margin-top:25px;
+
+
+
+}
+
+
+
+
+
+
+
+.status-score-value {
+
+
+    font-size:2.5rem;
+
+
+
+    font-weight:700;
+
+
+
+    color:#E7C56A;
+
+
+
+}
+
+
+
+
+
+
+
+.status-score-label {
+
+
+    color:
+
+        rgba(255,255,255,.7);
+
+
+
+    font-size:1rem;
+
+
+
 }
 
 
 
 /* ==========================================================================
-   RESPONSIVE
+   STATUS BADGE
+
    ========================================================================== */
 
-@media(max-width:768px){
 
-    .status-card-component{
+.status-badge {
 
-        padding:28px;
 
-    }
+    display:inline-flex;
 
-    .score-value{
 
-        font-size:2.5rem;
 
-    }
+    align-items:center;
+
+
+
+    justify-content:center;
+
+
+
+    padding:
+
+        8px 22px;
+
+
+
+    border-radius:50px;
+
+
+
+    background:
+
+        rgba(231,197,106,.12);
+
+
+
+    border:
+
+        1px solid
+
+        rgba(231,197,106,.35);
+
+
+
+    color:#E7C56A;
+
+
+
+    font-size:.9rem;
+
+
+
+    font-weight:600;
+
+
+
+    letter-spacing:1px;
+
+
+
+    margin-bottom:25px;
+
+
 
 }
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   STATUS LEVEL VARIATIONS
+
+   ========================================================================== */
+
+
+.status-card.learner {
+
+
+    border-color:
+
+        rgba(76,175,80,.35);
+
+
+
+}
+
+
+
+
+
+
+
+.status-card.leader {
+
+
+    border-color:
+
+        rgba(33,150,243,.35);
+
+
+
+}
+
+
+
+
+
+
+
+.status-card.legend {
+
+
+    border-color:
+
+        rgba(231,197,106,.55);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   JOURNEY PROGRESS
+
+   ========================================================================== */
+
+
+.status-progress {
+
+
+    margin-top:30px;
+
+
+
+    padding-top:25px;
+
+
+
+    border-top:
+
+        1px solid
+
+        rgba(255,255,255,.12);
+
+
+
+}
+
+
+
+
+
+
+
+.status-progress-label {
+
+
+    color:
+
+        rgba(247,244,234,.65);
+
+
+
+    font-size:.9rem;
+
+
+
+    margin-bottom:12px;
+
+
+
+}
+
+
+
+
+
+
+
+.status-progress-bar {
+
+
+    width:100%;
+
+
+
+    height:8px;
+
+
+
+    border-radius:20px;
+
+
+
+    background:
+
+        rgba(255,255,255,.1);
+
+
+
+    overflow:hidden;
+
+
+
+}
+
+
+
+
+
+
+
+.status-progress-fill {
+
+
+    height:100%;
+
+
+
+    width:0;
+
+
+
+    border-radius:20px;
+
+
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            #E7C56A,
+
+            #C89B3C
+
+        );
+
+
+
+    transition:
+
+        width .8s ease;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   REFLECTION MESSAGE
+
+   ========================================================================== */
+
+
+.status-reflection {
+
+
+    margin-top:30px;
+
+
+
+    padding:25px;
+
+
+
+    border-radius:22px;
+
+
+
+    background:
+
+        rgba(255,255,255,.04);
+
+
+
+    border:
+
+        1px solid
+
+        rgba(255,255,255,.1);
+
+
+
+}
+
+
+
+
+
+
+
+.status-reflection-title {
+
+
+    color:#E7C56A;
+
+
+
+    font-weight:700;
+
+
+
+    margin-bottom:12px;
+
+
+
+}
+
+
+
+
+
+
+
+.status-reflection-text {
+
+
+    color:
+
+        rgba(247,244,234,.8);
+
+
+
+    line-height:1.8;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   STATUS ACTIVE STATE
+
+   ========================================================================== */
+
+
+.status-card.active {
+
+
+    animation:
+
+        statusReveal .7s ease;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+@keyframes statusReveal {
+
+
+    from {
+
+
+        opacity:0;
+
+
+        transform:
+
+            translateY(25px)
+
+            scale(.97);
+
+
+
+    }
+
+
+
+    to {
+
+
+        opacity:1;
+
+
+        transform:
+
+            translateY(0)
+
+            scale(1);
+
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   HIGHLIGHT STATE
+
+   ========================================================================== */
+
+
+.status-card.highlight {
+
+
+    box-shadow:
+
+
+        0 0 40px
+
+        rgba(231,197,106,.25);
+
+
+
+}
+
+
+
+/* ==========================================================================
+   RESPONSIVE TABLET
+
+   ========================================================================== */
+
+
+@media(max-width:900px){
+
+
+
+    .status-card {
+
+
+        padding:
+
+            32px;
+
+
+
+        border-radius:
+
+            26px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .status-title {
+
+
+        font-size:
+
+            1.9rem;
+
+
+
+    }
+
+
+
+
+
+
+
+    .status-symbol {
+
+
+        width:
+
+            80px;
+
+
+
+        height:
+
+            80px;
+
+
+
+        font-size:
+
+            2.5rem;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   RESPONSIVE MOBILE
+
+   ========================================================================== */
+
+
+@media(max-width:600px){
+
+
+
+    .status-card {
+
+
+        padding:
+
+            25px;
+
+
+
+        border-radius:
+
+            22px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .status-symbol {
+
+
+        width:
+
+            70px;
+
+
+
+        height:
+
+            70px;
+
+
+
+        font-size:
+
+            2.2rem;
+
+
+
+    }
+
+
+
+
+
+
+
+    .status-title {
+
+
+        font-size:
+
+            1.6rem;
+
+
+
+    }
+
+
+
+
+
+
+
+    .status-description {
+
+
+        font-size:
+
+            .95rem;
+
+
+
+        line-height:
+
+            1.7;
+
+
+
+    }
+
+
+
+
+
+
+
+    .status-score {
+
+
+        flex-direction:
+
+            column;
+
+
+
+        gap:
+
+            8px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .status-score-value {
+
+
+        font-size:
+
+            2rem;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   ACCESSIBILITY STATES
+
+   ========================================================================== */
+
+
+.status-card:focus-within {
+
+
+    outline:
+
+        3px solid
+
+        #E7C56A;
+
+
+
+    outline-offset:
+
+        6px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   REDUCED MOTION SUPPORT
+
+   ========================================================================== */
+
+
+@media(prefers-reduced-motion:reduce){
+
+
+
+    .status-card,
+
+
+    .status-progress-fill {
+
+
+        animation:none;
+
+
+
+        transition:none;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   COMPONENT READY MARKER
+
+   ========================================================================== */
+
+
+.status-card[data-ready="true"] {
+
+
+    opacity:1;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   END OF FILE
+
+   status-card.css
+
+   Version : 2.0
+
+
+   Status
+
+   ✓ PREMIUM STATUS EXPERIENCE READY
+   ✓ RESPONSIVE READY
+   ✓ ACCESSIBILITY READY
+   ✓ TOUCH OPTIMIZED
+
+
+   ========================================================================== */
 
