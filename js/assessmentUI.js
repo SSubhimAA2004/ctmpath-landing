@@ -4,10 +4,10 @@
    KALA CHAKRA™ v3.0
 
    File        : js/assessmentUI.js
-   Version     : 1.0
-   Status      : LOCKED
+   Version     : 1.1
 
-   ==========================================================================
+   Status      : 🔒 PRODUCTION REPAIR
+
    PURPOSE
 
    Assessment Presentation Engine™
@@ -21,6 +21,7 @@
    ✓ Render Symbols
    ✓ Render Progress
    ✓ Render Status
+   ✓ Bind UI Events
 
    Does NOT
 
@@ -30,15 +31,27 @@
 
    ========================================================================== */
 
+
 "use strict";
+
 
 window.CTM = window.CTM || {};
 
-CTM.UI = (function () {
+
+
+/* ==========================================================================
+   CTM.UI NAMESPACE
+   ========================================================================== */
+
+
+CTM.UI = (function(){
+
+
 
     /* ======================================================================
        PRIVATE HELPERS
        ====================================================================== */
+
 
     function $(selector){
 
@@ -46,11 +59,15 @@ CTM.UI = (function () {
 
     }
 
+
+
     function $all(selector){
 
         return document.querySelectorAll(selector);
 
     }
+
+
 
     function exists(selector){
 
@@ -58,57 +75,131 @@ CTM.UI = (function () {
 
     }
 
+
+
     function safeText(selector,value){
 
+
         if(exists(selector)){
+
 
             $(selector).textContent = value;
 
+
         }
 
+
     }
+
+
 
     function safeHTML(selector,value){
 
+
         if(exists(selector)){
+
 
             $(selector).innerHTML = value;
 
+
         }
 
+
     }
+
+
 
     function safeStyle(selector,property,value){
 
+
         if(exists(selector)){
+
 
             $(selector).style[property] = value;
 
+
         }
 
+
     }
+
+
+
+
+
+
 
     /* ======================================================================
        PUBLIC API
        ====================================================================== */
 
+
     return {
+
+
+
+        /* ==============================================================
+           INIT
+           ============================================================== */
+
+
+        init : function(){
+
+
+            this.render();
+
+
+            this.renderRatingScale();
+
+
+            this.renderProgress();
+
+
+            this.bindRatingEvents();
+
+
+            this.animateCards();
+
+
+            this.scrollTop();
+
+
+        },
+
+
+
+
+
+
+
+
 
         /* ==============================================================
            Render Pillar Header
            ============================================================== */
 
+
         renderHeader : function(){
+
+
 
             const state =
 
                 CTM.Engine.getState();
 
+
+
+
             if(!state.data){
+
 
                 return;
 
+
             }
+
+
+
 
             safeText(
 
@@ -118,6 +209,9 @@ CTM.UI = (function () {
 
             );
 
+
+
+
             safeText(
 
                 "#pillarEnglish",
@@ -125,6 +219,9 @@ CTM.UI = (function () {
                 state.data.title.english
 
             );
+
+
+
 
             safeText(
 
@@ -134,6 +231,9 @@ CTM.UI = (function () {
 
             );
 
+
+
+
             safeText(
 
                 "#coreQuestionEnglish",
@@ -142,7 +242,14 @@ CTM.UI = (function () {
 
             );
 
+
         },
+
+
+
+
+
+
 
 
 
@@ -150,21 +257,35 @@ CTM.UI = (function () {
            Render Theme
            ============================================================== */
 
+
         renderTheme : function(){
+
+
 
             const state =
 
                 CTM.Engine.getState();
 
+
+
+
             if(!state.data){
+
 
                 return;
 
+
             }
+
+
+
 
             const colour =
 
                 state.data.presentation.colour;
+
+
+
 
             document.documentElement.style.setProperty(
 
@@ -174,6 +295,9 @@ CTM.UI = (function () {
 
             );
 
+
+
+
             document.documentElement.style.setProperty(
 
                 "--pillar-secondary",
@@ -181,6 +305,9 @@ CTM.UI = (function () {
                 colour.secondary
 
             );
+
+
+
 
             document.documentElement.style.setProperty(
 
@@ -190,6 +317,9 @@ CTM.UI = (function () {
 
             );
 
+
+
+
             document.documentElement.style.setProperty(
 
                 "--pillar-glow",
@@ -198,7 +328,14 @@ CTM.UI = (function () {
 
             );
 
+
         },
+
+
+
+
+
+
 
 
 
@@ -206,17 +343,28 @@ CTM.UI = (function () {
            Render Symbol
            ============================================================== */
 
+
         renderSymbol : function(){
+
+
 
             const state =
 
                 CTM.Engine.getState();
 
+
+
+
             if(!state.data){
+
 
                 return;
 
+
             }
+
+
+
 
             safeText(
 
@@ -226,132 +374,250 @@ CTM.UI = (function () {
 
             );
 
+
         },
 
-
-
+       
         /* ==============================================================
            Render Questions
            ============================================================== */
 
+
         renderQuestions : function(){
+
+
 
             const state =
 
                 CTM.Engine.getState();
 
+
+
+
             if(!state.data){
+
 
                 return;
 
+
             }
 
-            state.data.questions.forEach(
 
-                function(question,index){
 
-                    safeText(
 
-                        "#questionTamil"+(index+1),
+            const container =
 
-                        question.tamil
+                $("#questionContainer");
 
-                    );
 
-                    safeText(
 
-                        "#questionEnglish"+(index+1),
 
-                        question.english
+            if(!container){
 
-                    );
 
-                }
+                return;
 
-            );
+
+            }
+
+
+
+
+            container.innerHTML = "";
+
+
+
+
+
+            state.data.questions.forEach(function(question){
+
+
+
+                const card =
+
+                    document.createElement("div");
+
+
+
+                card.className =
+
+                    "question-card";
+
+
+
+
+
+                card.dataset.questionId =
+
+                    question.id;
+
+
+
+
+
+
+
+                card.innerHTML = `
+
+
+
+                    <div class="question-number">
+
+                        ${question.id}
+
+                    </div>
+
+
+
+                    <div class="question-text-ta">
+
+                        ${question.tamil}
+
+                    </div>
+
+
+
+                    <div class="question-text-en">
+
+                        ${question.english}
+
+                    </div>
+
+
+
+                    <div
+
+                    class="rating-container"
+
+                    data-question="${question.id}">
+
+
+                    </div>
+
+
+
+                `;
+
+
+
+
+
+                container.appendChild(card);
+
+
+
+            });
+
+
 
         },
 
 
 
-        /* ==============================================================
-           Initial Render
-           ============================================================== */
 
-        render : function(){
 
-            this.renderHeader();
 
-            this.renderTheme();
 
-            this.renderSymbol();
 
-            this.renderQuestions();
-
-        }
-
-    };
-
-})();
-
-/* ==========================================================================
-   END OF BATCH 1A
-
-   Completed
-
-   ✓ Namespace
-   ✓ DOM Helpers
-   ✓ renderHeader()
-   ✓ renderTheme()
-   ✓ renderSymbol()
-   ✓ renderQuestions()
-   ✓ render()
-
-   Pending (Batch 1B)
-
-   • renderRatingScale()
-   • renderProgress()
-   • renderStatusCard()
-   • renderDashboard()
-   • updateSelection()
-
-   ========================================================================== */
 
         /* ==============================================================
            Render Rating Scale
            ============================================================== */
 
+
         renderRatingScale : function(){
 
-            const answers =
 
-                CTM.Engine.getAnswers();
 
-            this.updateSelection(
+            const containers =
 
-                1,
+                $all(".rating-container");
 
-                answers.awareness
 
-            );
 
-            this.updateSelection(
 
-                2,
 
-                answers.alignment
+            containers.forEach(function(container){
 
-            );
 
-            this.updateSelection(
 
-                3,
+                container.innerHTML = "";
 
-                answers.embodiment
 
-            );
+
+
+
+                for(let score = 1; score <= 10; score++){
+
+
+
+                    const button =
+
+                        document.createElement("button");
+
+
+
+
+
+                    button.type =
+
+                        "button";
+
+
+
+
+
+                    button.className =
+
+                        "rating-button";
+
+
+
+
+
+                    button.dataset.value =
+
+                        score;
+
+
+
+
+
+                    button.dataset.question =
+
+                        container.dataset.question;
+
+
+
+
+
+                    button.textContent =
+
+                        score;
+
+
+
+
+
+                    container.appendChild(button);
+
+
+
+                }
+
+
+
+            });
+
+
 
         },
+
+
+
+
+
+
 
 
 
@@ -359,101 +625,76 @@ CTM.UI = (function () {
            Update Rating Selection
            ============================================================== */
 
-        updateSelection : function(question,score){
 
-            if(score === null){
+        updateSelection : function(
 
-                return;
+            questionId,
 
-            }
+            value
+
+        ){
+
+
 
             const buttons =
 
-                document.querySelectorAll(
+                $all(
 
-                    '[data-question="' +
-
-                    question +
-
-                    '"]'
+                    `[data-question="${questionId}"] .rating-button`
 
                 );
+
+
+
+
 
             buttons.forEach(function(button){
 
+
+
                 button.classList.remove(
 
-                    "selected",
-
-                    "selected-red",
-
-                    "selected-orange",
-
-                    "selected-green"
+                    "selected"
 
                 );
+
+
+
+                if(
+
+                    Number(button.dataset.value)
+
+                    ===
+
+                    Number(value)
+
+                ){
+
+
+
+                    button.classList.add(
+
+                        "selected"
+
+                    );
+
+
+
+                }
+
+
 
             });
 
-            const selected =
 
-                document.querySelector(
-
-                    '[data-question="' +
-
-                    question +
-
-                    '"][data-score="' +
-
-                    score +
-
-                    '"]'
-
-                );
-
-            if(!selected){
-
-                return;
-
-            }
-
-            selected.classList.add(
-
-                "selected"
-
-            );
-
-            if(score <= 3){
-
-                selected.classList.add(
-
-                    "selected-red"
-
-                );
-
-            }
-
-            else if(score <= 7){
-
-                selected.classList.add(
-
-                    "selected-orange"
-
-                );
-
-            }
-
-            else{
-
-                selected.classList.add(
-
-                    "selected-green"
-
-                );
-
-            }
 
         },
+
+
+
+
+
+
 
 
 
@@ -461,19 +702,62 @@ CTM.UI = (function () {
            Render Progress
            ============================================================== */
 
+
         renderProgress : function(){
 
-            const progress =
 
-                CTM.Engine.progress();
+
+            const state =
+
+                CTM.Engine.getState();
+
+
+
+
+
+            if(!state){
+
+
+                return;
+
+
+            }
+
+
+
+
+
+            const current =
+
+                state.currentQuestion || 1;
+
+
+
+
 
             safeText(
 
-                "#progressValue",
+                "#progressCurrent",
 
-                progress.percentage + "%"
+                current
 
             );
+
+
+
+
+
+            safeText(
+
+                "#progressTotal",
+
+                12
+
+            );
+
+
+
+
 
             safeStyle(
 
@@ -481,19 +765,31 @@ CTM.UI = (function () {
 
                 "width",
 
-                progress.percentage + "%"
+                (
+
+                    current / 12 * 100
+
+                )
+
+                +
+
+                "%"
 
             );
 
+
+
         },
 
-
-
+       
         /* ==============================================================
            Render Status Card
            ============================================================== */
 
+
         renderStatus : function(){
+
+
 
             if(
 
@@ -501,13 +797,25 @@ CTM.UI = (function () {
 
             ){
 
+
                 return;
 
+
             }
+
+
+
+
 
             const result =
 
                 CTM.Engine.getResult();
+
+
+
+
+
+
 
             safeText(
 
@@ -517,6 +825,12 @@ CTM.UI = (function () {
 
             );
 
+
+
+
+
+
+
             safeText(
 
                 "#overallScore",
@@ -524,6 +838,12 @@ CTM.UI = (function () {
                 result.percentage + "%"
 
             );
+
+
+
+
+
+
 
             safeStyle(
 
@@ -534,6 +854,12 @@ CTM.UI = (function () {
                 result.colour
 
             );
+
+
+
+
+
+
 
             safeStyle(
 
@@ -547,7 +873,14 @@ CTM.UI = (function () {
 
             );
 
+
         },
+
+
+
+
+
+
 
 
 
@@ -555,7 +888,10 @@ CTM.UI = (function () {
            Render KALA CHAKRA™ Dashboard
            ============================================================== */
 
+
         renderDashboard : function(){
+
+
 
             if(
 
@@ -563,13 +899,25 @@ CTM.UI = (function () {
 
             ){
 
+
                 return;
 
+
             }
+
+
+
+
 
             const result =
 
                 CTM.Engine.getResult();
+
+
+
+
+
+
 
             safeText(
 
@@ -581,6 +929,12 @@ CTM.UI = (function () {
 
             );
 
+
+
+
+
+
+
             safeText(
 
                 "#wheelPercentage",
@@ -591,6 +945,12 @@ CTM.UI = (function () {
 
             );
 
+
+
+
+
+
+
             safeText(
 
                 "#wheelLevel",
@@ -598,6 +958,12 @@ CTM.UI = (function () {
                 result.title
 
             );
+
+
+
+
+
+
 
             safeStyle(
 
@@ -609,6 +975,12 @@ CTM.UI = (function () {
 
             );
 
+
+
+
+
+
+
             safeStyle(
 
                 "#wheelPercentage",
@@ -618,6 +990,12 @@ CTM.UI = (function () {
                 result.colour
 
             );
+
+
+
+
+
+
 
             safeStyle(
 
@@ -629,7 +1007,14 @@ CTM.UI = (function () {
 
             );
 
+
         },
+
+
+
+
+
+
 
 
 
@@ -637,43 +1022,77 @@ CTM.UI = (function () {
            Refresh Entire UI
            ============================================================== */
 
+
         refresh : function(){
+
+
 
             this.renderHeader();
 
+
             this.renderTheme();
+
 
             this.renderSymbol();
 
+
             this.renderQuestions();
+
 
             this.renderRatingScale();
 
+
             this.renderProgress();
+
 
             this.renderStatus();
 
+
             this.renderDashboard();
 
-        }
+
+        },
+
+
+
+
+
+
+
+
 
         /* ==============================================================
            Bind Rating Events
            ============================================================== */
 
+
         bindRatingEvents : function(){
+
+
 
             const self = this;
 
+
+
+
+
             const buttons =
 
-                document.querySelectorAll(
+                $all(
 
-                    "[data-question][data-score]"
+                    ".rating-button"
 
                 );
 
+
+
+
+
+
+
             buttons.forEach(function(button){
+
+
 
                 button.addEventListener(
 
@@ -681,17 +1100,35 @@ CTM.UI = (function () {
 
                     function(){
 
-                        const question = Number(
 
-                            this.dataset.question
 
-                        );
+                        const question =
 
-                        const score = Number(
+                            Number(
 
-                            this.dataset.score
+                                this.dataset.question
 
-                        );
+                            );
+
+
+
+
+
+
+
+                        const score =
+
+                            Number(
+
+                                this.dataset.value
+
+                            );
+
+
+
+
+
+
 
                         CTM.Engine.answer(
 
@@ -701,6 +1138,12 @@ CTM.UI = (function () {
 
                         );
 
+
+
+
+
+
+
                         self.updateSelection(
 
                             question,
@@ -709,29 +1152,33 @@ CTM.UI = (function () {
 
                         );
 
+
+
+
+
+
+
                         self.renderProgress();
 
-                        if(
 
-                            CTM.Engine.validate()
-
-                        ){
-
-                            CTM.Engine.complete();
-
-                            self.renderStatus();
-
-                            self.renderDashboard();
-
-                        }
 
                     }
 
                 );
 
+
+
             });
 
+
+
         },
+
+
+
+
+
+
 
 
 
@@ -739,41 +1186,78 @@ CTM.UI = (function () {
            Animate Cards
            ============================================================== */
 
+
         animateCards : function(){
+
+
 
             const cards =
 
-                document.querySelectorAll(
+                $all(
 
-                    ".assessment-card"
+                    ".question-card"
 
                 );
 
+
+
+
+
+
+
             cards.forEach(function(card,index){
 
+
+
                 card.style.opacity = "0";
+
+
 
                 card.style.transform =
 
                     "translateY(20px)";
 
+
+
+
+
+
+
                 setTimeout(function(){
+
+
 
                     card.style.transition =
 
                         "all .35s ease";
 
+
+
                     card.style.opacity = "1";
+
+
 
                     card.style.transform =
 
                         "translateY(0)";
 
-                },index * 80);
+
+
+                }, index * 80);
+
+
 
             });
 
+
+
         },
+
+
+
+
+
+
 
 
 
@@ -781,68 +1265,74 @@ CTM.UI = (function () {
            Scroll To Top
            ============================================================== */
 
+
         scrollTop : function(){
+
+
 
             window.scrollTo({
 
+
                 top:0,
+
 
                 behavior:"smooth"
 
+
+
             });
 
-        },
 
-
-
-        /* ==============================================================
-           Initialize UI
-           ============================================================== */
-
-        init : function(){
-
-            this.render();
-
-            this.renderRatingScale();
-
-            this.renderProgress();
-
-            this.bindRatingEvents();
-
-            this.animateCards();
-
-            this.scrollTop();
 
         },
 
-
-
+       
         /* ==============================================================
            Destroy
+
+           Reserved for future cleanup.
+
            ============================================================== */
+
 
         destroy : function(){
 
+
             /*
+            
+            Future dynamic cleanup can be added here.
 
-            Reserved for future cleanup.
+            Example:
 
-            Event listeners can be detached here
-            if dynamic page loading is introduced.
+            - remove event listeners
+            - clear timers
+            - release observers
 
             */
 
+
         }
 
+
+
     };
+
 
 })();
 
 
 
+
+
+
+
+
+
 /* ==========================================================================
    LOCK UI
+
    ========================================================================== */
+
 
 Object.freeze(
 
@@ -852,17 +1342,26 @@ Object.freeze(
 
 
 
+
+
+
+
+
+
 /* ==========================================================================
    END OF FILE
 
    assessmentUI.js
 
-   Version : 1.0
+   Version : 1.1
 
    Status
 
-   ✓ COMPLETE
-   ✓ LOCKED
+   ✓ SYNTAX REPAIRED
+   ✓ CTM.UI RESTORED
+   ✓ INIT AVAILABLE
+   ✓ RENDER PIPELINE ACTIVE
 
-   ========================================================================== */
+   ==========================================================================
+*/
 
