@@ -4,7 +4,7 @@
  CTM PATH™ Guided Journey™
 
  File        : js/app.js
- Version     : 1.2
+ Version     : 1.3
 
  Purpose:
  Lightweight application router.
@@ -12,13 +12,17 @@
  Responsibilities:
  - Application initialization
  - Dynamic page loading
+ - Global footer injection
  - Dependency loading
- - Page controller initialization
+ - Page controller loading
 
  Rules:
  - No business logic
  - No backend logic
- - No scoring logic
+ - No assessment logic
+
+ Status:
+ 🔒 Global Footer Integration
 
 ==============================================================================
 */
@@ -31,11 +35,6 @@
 
 
 
-    /*
-    ==========================================================================
-       APPLICATION OBJECT
-    ==========================================================================
-    */
 
 
     const CTM_APP = {
@@ -44,7 +43,7 @@
 
         version:
 
-            "1.2",
+            "1.3",
 
 
 
@@ -56,9 +55,11 @@
 
 
 
+
+
         /*
         ----------------------------------------------------------------------
-           INIT
+           INITIALIZE
         ----------------------------------------------------------------------
         */
 
@@ -66,6 +67,7 @@
         init:
 
             async function(){
+
 
 
                 console.log(
@@ -83,7 +85,9 @@
                 );
 
 
+
             },
+
 
 
 
@@ -137,6 +141,7 @@
 
 
 
+
                 try {
 
 
@@ -148,25 +153,6 @@
                             pagePath
 
                         );
-
-
-
-
-
-                    if(!response.ok){
-
-
-                        throw new Error(
-
-                            "Page not found: " +
-
-                            pagePath
-
-                        );
-
-
-                    }
-
 
 
 
@@ -184,8 +170,15 @@
 
 
 
-                    this.currentPage = pagePath;
 
+
+                    await this.loadFooter();
+
+
+
+
+
+                    this.currentPage = pagePath;
 
 
 
@@ -199,9 +192,9 @@
 
 
 
-
-
                 }
+
+
 
 
 
@@ -220,6 +213,113 @@
 
 
                 }
+
+
+
+            },
+
+
+
+
+
+
+
+
+
+        /*
+        ----------------------------------------------------------------------
+           FOOTER LOADER
+        ----------------------------------------------------------------------
+        */
+
+
+        loadFooter:
+
+            async function(){
+
+
+
+                const footerResponse =
+
+                    await fetch(
+
+                        "components/footer.html"
+
+                    );
+
+
+
+
+
+                if(!footerResponse.ok){
+
+
+
+                    console.warn(
+
+                        "CTM PATH™ Footer unavailable."
+
+                    );
+
+
+
+                    return;
+
+
+
+                }
+
+
+
+
+
+
+
+                const footerHTML =
+
+                    await footerResponse.text();
+
+
+
+
+
+
+
+                const footerContainer =
+
+                    document.createElement(
+
+                        "div"
+
+                    );
+
+
+
+
+
+                footerContainer.innerHTML =
+
+                    footerHTML;
+
+
+
+
+
+
+
+                document
+
+                    .getElementById(
+
+                        "pageContainer"
+
+                    )
+
+                    .appendChild(
+
+                        footerContainer
+
+                    );
 
 
 
@@ -264,8 +364,8 @@
                     );
 
 
-                }
 
+                }
 
 
 
@@ -308,6 +408,7 @@
                     );
 
 
+
                 }
 
 
@@ -337,9 +438,7 @@
 
                 return new Promise(
 
-                    function(resolve, reject){
-
-
+                    function(resolve,reject){
 
 
 
@@ -358,14 +457,14 @@
                         if(existing){
 
 
-                            resolve();
 
+                            resolve();
 
                             return;
 
 
-                        }
 
+                        }
 
 
 
@@ -380,7 +479,6 @@
                                 "script"
 
                             );
-
 
 
 
@@ -406,8 +504,6 @@
 
 
 
-
-
                     }
 
                 );
@@ -415,8 +511,6 @@
 
 
             }
-
-
 
 
 
@@ -431,13 +525,6 @@
 
 
 
-    /*
-    ==========================================================================
-       GLOBAL ACCESS
-    ==========================================================================
-    */
-
-
     window.CTM_APP = CTM_APP;
 
 
@@ -446,18 +533,12 @@
 
 
 
-    /*
-    ==========================================================================
-       APPLICATION START
-    ==========================================================================
-    */
-
-
     document.addEventListener(
 
         "DOMContentLoaded",
 
         function(){
+
 
 
             CTM_APP.init();
