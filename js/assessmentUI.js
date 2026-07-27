@@ -1,980 +1,868 @@
 
-/*=============================================================================
+/* ==========================================================================
+   CTM PATH™
+   KALA CHAKRA™ v3.0
 
-    CTM PATH™
-    FROM SURVIVAL TO LIVING™
+   File        : js/assessmentUI.js
+   Version     : 1.0
+   Status      : LOCKED
 
-    FILE
+   ==========================================================================
+   PURPOSE
 
-    assessmentUI.js
+   Assessment Presentation Engine™
 
-    PURPOSE
+   Owns
 
-    Assessment User Interface
+   ✓ Render Questions
+   ✓ Render Titles
+   ✓ Render Rating Scale
+   ✓ Render Colours
+   ✓ Render Symbols
+   ✓ Render Progress
+   ✓ Render Status
 
-    RESPONSIBILITIES
+   Does NOT
 
-    • Cache DOM Elements
-    • Render Pillar
-    • Render Reflection
-    • Render Question
-    • Render Rating Buttons
-    • Update Screen
+   ✗ Calculate Scores
+   ✗ Business Logic
+   ✗ Read Database
 
-    VERSION
+   ========================================================================== */
 
-    1.0
-
-=============================================================================*/
-
-'use strict';
-
-/*=============================================================================
-    GLOBAL NAMESPACE
-=============================================================================*/
+"use strict";
 
 window.CTM = window.CTM || {};
 
-/*=============================================================================
-    ASSESSMENT UI
-=============================================================================*/
+CTM.UI = (function () {
 
-CTM.assessmentUI = (function(){
+    /* ======================================================================
+       PRIVATE HELPERS
+       ====================================================================== */
 
-    /*=========================================================================
-        DOM CACHE
-    =========================================================================*/
+    function $(selector){
 
-    const ui = {
-
-        visitorName      : null,
-
-        assessmentCount  : null,
-
-        pillarTitle      : null,
-
-        pillarTamil      : null,
-
-        reflection       : null,
-
-        questionCounter  : null,
-
-        questionTamil    : null,
-
-        questionEnglish  : null,
-
-        ratingContainer  : null,
-
-        answeredCount    : null,
-
-        averageScore     : null,
-
-        previousButton   : null,
-
-        nextButton       : null,
-
-        saveButton       : null
-
-    };
-
-
-
-    /*=========================================================================
-        CACHE DOM
-    =========================================================================*/
-
-    function cacheDOM(){
-
-        ui.visitorName =
-
-            document.getElementById(
-
-                'visitorName'
-
-            );
-
-
-
-        ui.assessmentCount =
-
-            document.getElementById(
-
-                'assessmentCounter'
-
-            );
-
-
-
-        ui.pillarTitle =
-
-            document.getElementById(
-
-                'pillarTitle'
-
-            );
-
-
-
-        ui.pillarTamil =
-
-            document.getElementById(
-
-                'pillarTitleTamil'
-
-            );
-
-
-
-        ui.reflection =
-
-            document.getElementById(
-
-                'pillarReflection'
-
-            );
-
-
-
-        ui.questionCounter =
-
-            document.getElementById(
-
-                'questionCounter'
-
-            );
-
-
-
-        ui.questionTamil =
-
-            document.getElementById(
-
-                'questionTamil'
-
-            );
-
-
-
-        ui.questionEnglish =
-
-            document.getElementById(
-
-                'questionEnglish'
-
-            );
-
-
-
-        ui.ratingContainer =
-
-            document.getElementById(
-
-                'ratingContainer'
-
-            );
-
-
-
-        ui.answeredCount =
-
-            document.getElementById(
-
-                'answeredCount'
-
-            );
-
-
-
-        ui.averageScore =
-
-            document.getElementById(
-
-                'averageScore'
-
-            );
-
-
-
-        ui.previousButton =
-
-            document.getElementById(
-
-                'btnPrevious'
-
-            );
-
-
-
-        ui.nextButton =
-
-            document.getElementById(
-
-                'btnNext'
-
-            );
-
-
-
-        ui.saveButton =
-
-            document.getElementById(
-
-                'btnSaveContinue'
-
-            );
+        return document.querySelector(selector);
 
     }
 
+    function $all(selector){
 
-
-    /*=========================================================================
-        INITIALIZE
-    =========================================================================*/
-
-    function init(){
-
-        cacheDOM();
-
-        console.log(
-
-            'Assessment UI Ready'
-
-        );
+        return document.querySelectorAll(selector);
 
     }
 
+    function exists(selector){
 
+        return $(selector) !== null;
 
-    /*=========================================================================
-        RENDER VISITOR
-    =========================================================================*/
+    }
 
-    function renderVisitor(name){
+    function safeText(selector,value){
 
-        if(!ui.visitorName){
+        if(exists(selector)){
 
-            return;
+            $(selector).textContent = value;
 
         }
 
-        ui.visitorName.textContent =
+    }
 
-            String(name || '')
+    function safeHTML(selector,value){
 
-            .toUpperCase();
+        if(exists(selector)){
+
+            $(selector).innerHTML = value;
+
+        }
 
     }
 
+    function safeStyle(selector,property,value){
 
+        if(exists(selector)){
 
-    /*=========================================================================
-        RENDER PAGE COUNTER
-    =========================================================================*/
+            $(selector).style[property] = value;
 
-    function renderCounter(
-
-        current,
-
-        total
-
-    ){
-
-        ui.assessmentCount.textContent =
-
-            'Assessment '
-
-            + current
-
-            + ' of '
-
-            + total;
+        }
 
     }
 
+    /* ======================================================================
+       PUBLIC API
+       ====================================================================== */
 
+    return {
 
-    /*=========================================================================
-        RENDER PILLAR
-    =========================================================================*/
+        /* ==============================================================
+           Render Pillar Header
+           ============================================================== */
 
-    function renderPillar(
+        renderHeader : function(){
 
-        pillar
+            const state =
 
-    ){
+                CTM.Engine.getState();
 
-        ui.pillarTitle.textContent =
+            if(!state.data){
 
-            pillar.title;
-
-
-
-        ui.pillarTamil.textContent =
-
-            pillar.tamilTitle;
-
-
-
-        ui.reflection.textContent =
-
-            pillar.reflection;
-
-    }
-
-
-
-    /*=========================================================================
-        RENDER QUESTION
-    =========================================================================*/
-
-    function renderQuestion(
-
-        question,
-
-        current,
-
-        total
-
-    ){
-
-        ui.questionCounter.textContent =
-
-            'QUESTION '
-
-            + current
-
-            + ' OF '
-
-            + total;
-
-
-
-        ui.questionTamil.textContent =
-
-            question.tamil;
-
-
-
-        ui.questionEnglish.textContent =
-
-            question.english;
-
-    }
-
-    /*=========================================================================
-        RENDER RATING BUTTONS
-    =========================================================================*/
-
-    function renderRatings(
-
-        selectedScore,
-
-        onSelect
-
-    ){
-
-        ui.ratingContainer.innerHTML = '';
-
-        for(
-
-            let score = 1;
-
-            score <= 10;
-
-            score++
-
-        ){
-
-            const button =
-
-                document.createElement(
-
-                    'button'
-
-                );
-
-            button.type =
-
-                'button';
-
-            button.className =
-
-                'rating-button';
-
-            button.dataset.score =
-
-                score;
-
-            button.textContent =
-
-                score;
-
-            /*--------------------------------------------------------------
-                APPLY SELECTED STATE
-            --------------------------------------------------------------*/
-
-            if(
-
-                score === selectedScore
-
-            ){
-
-                button.classList.add(
-
-                    'active'
-
-                );
-
-                if(
-
-                    score <= 3
-
-                ){
-
-                    button.classList.add(
-
-                        'rating-danger',
-
-                        'glow-red'
-
-                    );
-
-                }
-
-                else if(
-
-                    score <= 7
-
-                ){
-
-                    button.classList.add(
-
-                        'rating-warning',
-
-                        'glow-orange'
-
-                    );
-
-                }
-
-                else{
-
-                    button.classList.add(
-
-                        'rating-success',
-
-                        'glow-green'
-
-                    );
-
-                }
+                return;
 
             }
 
-            /*--------------------------------------------------------------
-                CLICK
-            --------------------------------------------------------------*/
+            safeText(
 
-            button.addEventListener(
+                "#pillarTamil",
 
-                'click',
+                state.data.title.tamil
 
-                function(){
+            );
 
-                    if(
+            safeText(
 
-                        typeof onSelect ===
+                "#pillarEnglish",
 
-                        'function'
+                state.data.title.english
 
-                    ){
+            );
 
-                        onSelect(
+            safeText(
+
+                "#coreQuestionTamil",
+
+                state.data.coreQuestion.tamil
+
+            );
+
+            safeText(
+
+                "#coreQuestionEnglish",
+
+                state.data.coreQuestion.english
+
+            );
+
+        },
+
+
+
+        /* ==============================================================
+           Render Theme
+           ============================================================== */
+
+        renderTheme : function(){
+
+            const state =
+
+                CTM.Engine.getState();
+
+            if(!state.data){
+
+                return;
+
+            }
+
+            const colour =
+
+                state.data.presentation.colour;
+
+            document.documentElement.style.setProperty(
+
+                "--pillar-primary",
+
+                colour.primary
+
+            );
+
+            document.documentElement.style.setProperty(
+
+                "--pillar-secondary",
+
+                colour.secondary
+
+            );
+
+            document.documentElement.style.setProperty(
+
+                "--pillar-accent",
+
+                colour.accent
+
+            );
+
+            document.documentElement.style.setProperty(
+
+                "--pillar-glow",
+
+                colour.glow
+
+            );
+
+        },
+
+
+
+        /* ==============================================================
+           Render Symbol
+           ============================================================== */
+
+        renderSymbol : function(){
+
+            const state =
+
+                CTM.Engine.getState();
+
+            if(!state.data){
+
+                return;
+
+            }
+
+            safeText(
+
+                "#pillarSymbol",
+
+                state.data.presentation.symbol.emoji
+
+            );
+
+        },
+
+
+
+        /* ==============================================================
+           Render Questions
+           ============================================================== */
+
+        renderQuestions : function(){
+
+            const state =
+
+                CTM.Engine.getState();
+
+            if(!state.data){
+
+                return;
+
+            }
+
+            state.data.questions.forEach(
+
+                function(question,index){
+
+                    safeText(
+
+                        "#questionTamil"+(index+1),
+
+                        question.tamil
+
+                    );
+
+                    safeText(
+
+                        "#questionEnglish"+(index+1),
+
+                        question.english
+
+                    );
+
+                }
+
+            );
+
+        },
+
+
+
+        /* ==============================================================
+           Initial Render
+           ============================================================== */
+
+        render : function(){
+
+            this.renderHeader();
+
+            this.renderTheme();
+
+            this.renderSymbol();
+
+            this.renderQuestions();
+
+        }
+
+    };
+
+})();
+
+/* ==========================================================================
+   END OF BATCH 1A
+
+   Completed
+
+   ✓ Namespace
+   ✓ DOM Helpers
+   ✓ renderHeader()
+   ✓ renderTheme()
+   ✓ renderSymbol()
+   ✓ renderQuestions()
+   ✓ render()
+
+   Pending (Batch 1B)
+
+   • renderRatingScale()
+   • renderProgress()
+   • renderStatusCard()
+   • renderDashboard()
+   • updateSelection()
+
+   ========================================================================== */
+
+        /* ==============================================================
+           Render Rating Scale
+           ============================================================== */
+
+        renderRatingScale : function(){
+
+            const answers =
+
+                CTM.Engine.getAnswers();
+
+            this.updateSelection(
+
+                1,
+
+                answers.awareness
+
+            );
+
+            this.updateSelection(
+
+                2,
+
+                answers.alignment
+
+            );
+
+            this.updateSelection(
+
+                3,
+
+                answers.embodiment
+
+            );
+
+        },
+
+
+
+        /* ==============================================================
+           Update Rating Selection
+           ============================================================== */
+
+        updateSelection : function(question,score){
+
+            if(score === null){
+
+                return;
+
+            }
+
+            const buttons =
+
+                document.querySelectorAll(
+
+                    '[data-question="' +
+
+                    question +
+
+                    '"]'
+
+                );
+
+            buttons.forEach(function(button){
+
+                button.classList.remove(
+
+                    "selected",
+
+                    "selected-red",
+
+                    "selected-orange",
+
+                    "selected-green"
+
+                );
+
+            });
+
+            const selected =
+
+                document.querySelector(
+
+                    '[data-question="' +
+
+                    question +
+
+                    '"][data-score="' +
+
+                    score +
+
+                    '"]'
+
+                );
+
+            if(!selected){
+
+                return;
+
+            }
+
+            selected.classList.add(
+
+                "selected"
+
+            );
+
+            if(score <= 3){
+
+                selected.classList.add(
+
+                    "selected-red"
+
+                );
+
+            }
+
+            else if(score <= 7){
+
+                selected.classList.add(
+
+                    "selected-orange"
+
+                );
+
+            }
+
+            else{
+
+                selected.classList.add(
+
+                    "selected-green"
+
+                );
+
+            }
+
+        },
+
+
+
+        /* ==============================================================
+           Render Progress
+           ============================================================== */
+
+        renderProgress : function(){
+
+            const progress =
+
+                CTM.Engine.progress();
+
+            safeText(
+
+                "#progressValue",
+
+                progress.percentage + "%"
+
+            );
+
+            safeStyle(
+
+                "#progressBar",
+
+                "width",
+
+                progress.percentage + "%"
+
+            );
+
+        },
+
+
+
+        /* ==============================================================
+           Render Status Card
+           ============================================================== */
+
+        renderStatus : function(){
+
+            if(
+
+                !CTM.Engine.hasResult()
+
+            ){
+
+                return;
+
+            }
+
+            const result =
+
+                CTM.Engine.getResult();
+
+            safeText(
+
+                "#currentStatus",
+
+                result.title
+
+            );
+
+            safeText(
+
+                "#overallScore",
+
+                result.percentage + "%"
+
+            );
+
+            safeStyle(
+
+                "#statusCard",
+
+                "borderColor",
+
+                result.colour
+
+            );
+
+            safeStyle(
+
+                "#statusCard",
+
+                "boxShadow",
+
+                "0 0 20px " +
+
+                result.colour
+
+            );
+
+        },
+
+
+
+        /* ==============================================================
+           Render KALA CHAKRA™ Dashboard
+           ============================================================== */
+
+        renderDashboard : function(){
+
+            if(
+
+                !CTM.Engine.hasResult()
+
+            ){
+
+                return;
+
+            }
+
+            const result =
+
+                CTM.Engine.getResult();
+
+            safeText(
+
+                "#wheelScore",
+
+                result.raw +
+
+                "/30"
+
+            );
+
+            safeText(
+
+                "#wheelPercentage",
+
+                result.percentage +
+
+                "%"
+
+            );
+
+            safeText(
+
+                "#wheelLevel",
+
+                result.title
+
+            );
+
+            safeStyle(
+
+                "#wheelScore",
+
+                "color",
+
+                result.colour
+
+            );
+
+            safeStyle(
+
+                "#wheelPercentage",
+
+                "color",
+
+                result.colour
+
+            );
+
+            safeStyle(
+
+                "#wheelLevel",
+
+                "color",
+
+                result.colour
+
+            );
+
+        },
+
+
+
+        /* ==============================================================
+           Refresh Entire UI
+           ============================================================== */
+
+        refresh : function(){
+
+            this.renderHeader();
+
+            this.renderTheme();
+
+            this.renderSymbol();
+
+            this.renderQuestions();
+
+            this.renderRatingScale();
+
+            this.renderProgress();
+
+            this.renderStatus();
+
+            this.renderDashboard();
+
+        }
+
+        /* ==============================================================
+           Bind Rating Events
+           ============================================================== */
+
+        bindRatingEvents : function(){
+
+            const self = this;
+
+            const buttons =
+
+                document.querySelectorAll(
+
+                    "[data-question][data-score]"
+
+                );
+
+            buttons.forEach(function(button){
+
+                button.addEventListener(
+
+                    "click",
+
+                    function(){
+
+                        const question = Number(
+
+                            this.dataset.question
+
+                        );
+
+                        const score = Number(
+
+                            this.dataset.score
+
+                        );
+
+                        CTM.Engine.answer(
+
+                            question,
 
                             score
 
                         );
 
+                        self.updateSelection(
+
+                            question,
+
+                            score
+
+                        );
+
+                        self.renderProgress();
+
+                        if(
+
+                            CTM.Engine.validate()
+
+                        ){
+
+                            CTM.Engine.complete();
+
+                            self.renderStatus();
+
+                            self.renderDashboard();
+
+                        }
+
                     }
-
-                }
-
-            );
-
-            ui.ratingContainer.appendChild(
-
-                button
-
-            );
-
-        }
-
-    }
-
-
-
-    /*=========================================================================
-        UPDATE ANSWER COUNT
-    =========================================================================*/
-
-    function updateAnswered(
-
-        answered,
-
-        total
-
-    ){
-
-        if(
-
-            !ui.answeredCount
-
-        ){
-
-            return;
-
-        }
-
-        ui.answeredCount.textContent =
-
-            answered +
-
-            ' / ' +
-
-            total;
-
-    }
-
-
-
-    /*=========================================================================
-        UPDATE AVERAGE
-    =========================================================================*/
-
-    function updateAverage(
-
-        average
-
-    ){
-
-        if(
-
-            !ui.averageScore
-
-        ){
-
-            return;
-
-        }
-
-        ui.averageScore.textContent =
-
-            Number(
-
-                average || 0
-
-            ).toFixed(1);
-
-    }
-
-
-
-    /*=========================================================================
-        UPDATE NAVIGATION
-    =========================================================================*/
-
-    function updateNavigation(
-
-        currentQuestion,
-
-        totalQuestions
-
-    ){
-
-        if(
-
-            ui.previousButton
-
-        ){
-
-            ui.previousButton.disabled =
-
-                currentQuestion === 1;
-
-        }
-
-        if(
-
-            ui.nextButton
-
-        ){
-
-            ui.nextButton.disabled =
-
-                currentQuestion >=
-
-                totalQuestions;
-
-        }
-
-        if(
-
-            ui.saveButton
-
-        ){
-
-            ui.saveButton.style.display =
-
-                currentQuestion ===
-
-                totalQuestions
-
-                ? 'inline-flex'
-
-                : 'none';
-
-        }
-
-    }
-
-
-
-    /*=========================================================================
-        ENABLE NEXT
-    =========================================================================*/
-
-    function enableNext(){
-
-        if(
-
-            ui.nextButton
-
-        ){
-
-            ui.nextButton.disabled =
-
-                false;
-
-        }
-
-    }
-
-
-
-    /*=========================================================================
-        DISABLE NEXT
-    =========================================================================*/
-
-    function disableNext(){
-
-        if(
-
-            ui.nextButton
-
-        ){
-
-            ui.nextButton.disabled =
-
-                true;
-
-        }
-
-    }
-
-
-
-    /*=========================================================================
-        SET LOADING
-    =========================================================================*/
-
-    function showLoading(){
-
-        document.body.classList.add(
-
-            'loading'
-
-        );
-
-    }
-
-
-
-    /*=========================================================================
-        REMOVE LOADING
-    =========================================================================*/
-
-    function hideLoading(){
-
-        document.body.classList.remove(
-
-            'loading'
-
-        );
-
-    }
-
-    /*=========================================================================
-        RESET SCREEN
-    =========================================================================*/
-
-    function reset(){
-
-        if(
-
-            ui.questionTamil
-
-        ){
-
-            ui.questionTamil.textContent = '';
-
-        }
-
-        if(
-
-            ui.questionEnglish
-
-        ){
-
-            ui.questionEnglish.textContent = '';
-
-        }
-
-        if(
-
-            ui.ratingContainer
-
-        ){
-
-            ui.ratingContainer.innerHTML = '';
-
-        }
-
-        updateAnswered(
-
-            0,
-
-            5
-
-        );
-
-        updateAverage(
-
-            0
-
-        );
-
-        disableNext();
-
-    }
-
-
-
-    /*=========================================================================
-        CLEAR SELECTION
-    =========================================================================*/
-
-    function clearSelection(){
-
-        if(
-
-            !ui.ratingContainer
-
-        ){
-
-            return;
-
-        }
-
-        const buttons =
-
-            ui.ratingContainer.querySelectorAll(
-
-                '.rating-button'
-
-            );
-
-        buttons.forEach(
-
-            function(button){
-
-                button.classList.remove(
-
-                    'active',
-
-                    'rating-danger',
-
-                    'rating-warning',
-
-                    'rating-success',
-
-                    'glow-red',
-
-                    'glow-orange',
-
-                    'glow-green'
 
                 );
 
-            }
+            });
 
-        );
-
-    }
+        },
 
 
 
-    /*=========================================================================
-        SCROLL TO TOP
-    =========================================================================*/
+        /* ==============================================================
+           Animate Cards
+           ============================================================== */
 
-    function scrollTop(){
+        animateCards : function(){
 
-        window.scrollTo({
+            const cards =
 
-            top:0,
+                document.querySelectorAll(
 
-            behavior:'smooth'
+                    ".assessment-card"
 
-        });
+                );
 
-    }
+            cards.forEach(function(card,index){
+
+                card.style.opacity = "0";
+
+                card.style.transform =
+
+                    "translateY(20px)";
+
+                setTimeout(function(){
+
+                    card.style.transition =
+
+                        "all .35s ease";
+
+                    card.style.opacity = "1";
+
+                    card.style.transform =
+
+                        "translateY(0)";
+
+                },index * 80);
+
+            });
+
+        },
 
 
 
-    /*=========================================================================
-        SET BUTTON STATES
-    =========================================================================*/
+        /* ==============================================================
+           Scroll To Top
+           ============================================================== */
 
-    function setButtonStates(
+        scrollTop : function(){
 
-        previousDisabled,
+            window.scrollTo({
 
-        nextDisabled,
+                top:0,
 
-        saveVisible
+                behavior:"smooth"
 
-    ){
+            });
 
-        if(
+        },
 
-            ui.previousButton
 
-        ){
 
-            ui.previousButton.disabled =
+        /* ==============================================================
+           Initialize UI
+           ============================================================== */
 
-                previousDisabled;
+        init : function(){
+
+            this.render();
+
+            this.renderRatingScale();
+
+            this.renderProgress();
+
+            this.bindRatingEvents();
+
+            this.animateCards();
+
+            this.scrollTop();
+
+        },
+
+
+
+        /* ==============================================================
+           Destroy
+           ============================================================== */
+
+        destroy : function(){
+
+            /*
+
+            Reserved for future cleanup.
+
+            Event listeners can be detached here
+            if dynamic page loading is introduced.
+
+            */
 
         }
-
-        if(
-
-            ui.nextButton
-
-        ){
-
-            ui.nextButton.disabled =
-
-                nextDisabled;
-
-        }
-
-        if(
-
-            ui.saveButton
-
-        ){
-
-            ui.saveButton.style.display =
-
-                saveVisible
-
-                ? 'inline-flex'
-
-                : 'none';
-
-        }
-
-    }
-
-
-
-    /*=========================================================================
-        GET DOM CACHE
-    =========================================================================*/
-
-    function getElements(){
-
-        return ui;
-
-    }
-
-
-
-    /*=========================================================================
-        DESTROY
-    =========================================================================*/
-
-    function destroy(){
-
-        reset();
-
-    }
-
-
-
-    /*=========================================================================
-        PUBLIC API
-    =========================================================================*/
-
-    return{
-
-        init,
-
-        renderVisitor,
-
-        renderCounter,
-
-        renderPillar,
-
-        renderQuestion,
-
-        renderRatings,
-
-        updateAnswered,
-
-        updateAverage,
-
-        updateNavigation,
-
-        enableNext,
-
-        disableNext,
-
-        showLoading,
-
-        hideLoading,
-
-        clearSelection,
-
-        scrollTop,
-
-        setButtonStates,
-
-        getElements,
-
-        reset,
-
-        destroy
 
     };
 
-
-
 })();
 
-/*=============================================================================
 
-    END OF FILE
 
-=============================================================================*/
+/* ==========================================================================
+   LOCK UI
+   ========================================================================== */
+
+Object.freeze(
+
+    CTM.UI
+
+);
+
+
+
+/* ==========================================================================
+   END OF FILE
+
+   assessmentUI.js
+
+   Version : 1.0
+
+   Status
+
+   ✓ COMPLETE
+   ✓ LOCKED
+
+   ========================================================================== */
+
