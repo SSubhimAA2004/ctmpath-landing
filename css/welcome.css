@@ -1,9 +1,10 @@
 
 /* ==========================================================================
+   
    CTM PATH™ Guided Journey™
 
    File        : css/welcome.css
-   Version     : 2.1
+   Version     : 2.2
 
    Page        : PAGE 01 — WELCOME™
 
@@ -11,10 +12,10 @@
    Premium Welcome Experience Styling
 
    Dependencies:
-   theme.css
-   foundation.css
+   • theme.css
+   • foundation.css
 
-   ========================================================================== */
+========================================================================== */
 
 
 /* ==========================================================================
@@ -24,14 +25,17 @@
 
 .welcome-page {
 
-    min-height:100vh;
+    min-height:
+    100vh;
 
     background:
-    var(--ctm-bg-primary);
+    var(--ctm-navy);
 
-    display:flex;
+    display:
+    flex;
 
-    flex-direction:column;
+    flex-direction:
+    column;
 
 }
 
@@ -39,9 +43,11 @@
 
 .welcome-main {
 
-    flex:1;
+    flex:
+    1;
 
 }
+
 
 
 
@@ -52,13 +58,13 @@
 
 .welcome-hero {
 
-    min-height:auto;
-
     padding:
 
-    55px 0 40px;
+    45px 0 35px;
 
-    text-align:center;
+    text-align:
+
+    center;
 
 }
 
@@ -66,38 +72,54 @@
 
 .welcome-hero-content {
 
-    max-width:900px;
+    max-width:
 
-    margin:0 auto;
+    900px;
+
+    margin:
+
+    0 auto;
 
 }
 
 
 
-/* Small premium eyebrow */
 
+
+/* Premium eyebrow */
 
 .welcome-eyebrow {
+
 
     color:
 
     var(--ctm-teal);
 
+
     font-size:
 
     13px;
 
-    letter-spacing:
-
-    3px;
 
     font-weight:
 
     600;
 
+
+    letter-spacing:
+
+    3px;
+
+
+    text-transform:
+
+    uppercase;
+
+
     margin-bottom:
 
-    20px;
+    22px;
+
 
 }
 
@@ -105,32 +127,44 @@
 
 
 
-/* Tamil Primary Message */
-
+/* Tamil Hero Heading */
 
 .welcome-title {
 
-    margin:0;
 
     color:
 
-    var(--ctm-text-primary);
+    var(--ctm-ivory);
+
 
     font-family:
 
     var(--font-tamil);
 
+
     font-size:
 
-    clamp(38px,5vw,60px);
+    clamp(
+        2.4rem,
+        5vw,
+        4.5rem
+    );
+
+
+    font-weight:
+
+    700;
+
 
     line-height:
 
     1.35;
 
-    font-weight:
 
-    700;
+    margin:
+
+    0;
+
 
 }
 
@@ -138,89 +172,110 @@
 
 
 
-/* English Meaning */
-
+/* English Positioning Line */
 
 .welcome-subtitle {
 
+
     margin-top:
 
-    14px;
+    18px;
+
 
     color:
 
     var(--ctm-gold);
 
+
     font-size:
 
-    clamp(22px,3vw,32px);
+    clamp(
+        1.4rem,
+        3vw,
+        2rem
+    );
+
 
     font-weight:
 
     700;
 
+
 }
 
 
 
 
+
+/* Supporting Explanation */
 
 .welcome-description {
 
+
     max-width:
 
-    720px;
+    760px;
+
 
     margin:
 
-    22px auto 0;
+    24px auto 0;
+
 
     color:
 
-    var(--ctm-text-secondary);
+    var(--ctm-body);
+
 
     font-size:
 
-    17px;
+    1.05rem;
+
 
     line-height:
 
-    1.8;
+    1.85;
+
 
 }
+
+
 
 
 
 /* ==========================================================================
-   JOURNEY PROMISE CARD
+   JOURNEY PROMISE
 ========================================================================== */
 
 
 .welcome-promise {
 
+
     max-width:
 
     850px;
 
+
     margin:
 
-    25px auto 0;
+    25px auto;
+
 
     padding:
 
-    30px 40px;
+    32px 45px;
 
 
     background:
 
-    var(--ctm-bg-secondary);
+    var(--ctm-surface);
 
 
     border:
 
     1px solid
 
-    var(--ctm-border-soft);
+    var(--ctm-gold-border);
 
 
     border-radius:
@@ -231,6 +286,11 @@
     text-align:
 
     center;
+
+
+    box-shadow:
+
+    var(--shadow-soft);
 
 
 }
@@ -241,21 +301,26 @@
 
 .promise-title {
 
+
     color:
 
     var(--ctm-gold);
 
+
     font-size:
 
-    15px;
+    14px;
+
 
     letter-spacing:
 
-    2px;
+    3px;
+
 
     font-weight:
 
     700;
+
 
 }
 
@@ -265,23 +330,30 @@
 
 .promise-text {
 
+
     margin-top:
 
-    10px;
+    12px;
+
 
     color:
 
-    var(--ctm-text-primary);
+    var(--ctm-ivory);
+
 
     font-size:
 
-    24px;
+    1.6rem;
+
 
     font-weight:
 
     600;
 
+
 }
+
+
 
 
 
@@ -292,11 +364,16 @@
 
 .discovery-section {
 
+
     padding:
 
-    45px 0;
+    40px 0;
 
-    text-align:center;
+
+    text-align:
+
+    center;
+
 
 }
 
@@ -304,21 +381,26 @@
 
 .discovery-title {
 
+
     color:
 
     var(--ctm-gold);
 
+
     font-size:
 
-    32px;
+    2rem;
+
 
     font-weight:
 
     700;
 
+
     margin-bottom:
 
-    30px;
+    35px;
+
 
 }
 
@@ -328,15 +410,24 @@
 
 .discovery-grid {
 
-    display:grid;
+
+    display:
+
+    grid;
+
 
     grid-template-columns:
 
-    repeat(4,1fr);
+    repeat(
+        4,
+        1fr
+    );
+
 
     gap:
 
     22px;
+
 
 }
 
@@ -346,21 +437,27 @@
 
 .discovery-card {
 
+
     min-height:
 
-    220px;
+    240px;
+
+
+    padding:
+
+    30px 22px;
 
 
     background:
 
-    var(--ctm-bg-card);
+    var(--ctm-card);
 
 
     border:
 
     1px solid
 
-    var(--ctm-border-soft);
+    var(--ctm-gold-border);
 
 
     border-radius:
@@ -368,23 +465,35 @@
     var(--radius-lg);
 
 
-    padding:
+    display:
 
-    28px 20px;
+    flex;
 
 
-    display:flex;
+    flex-direction:
 
-    flex-direction:column;
+    column;
 
-    align-items:center;
 
-    justify-content:center;
+    align-items:
+
+    center;
+
+
+    justify-content:
+
+    center;
+
+
+    text-align:
+
+    center;
 
 
     transition:
 
     var(--transition-normal);
+
 
 }
 
@@ -394,41 +503,42 @@
 
 .discovery-card:hover {
 
+
     transform:
 
-    translateY(-6px);
+    translateY(-8px);
+
 
     border-color:
 
     var(--ctm-gold);
 
+
     box-shadow:
 
-    var(--ctm-shadow-gold);
+    var(--shadow-gold);
+
 
 }
 
 
 
-/* Icon circles */
+
+
+/* Icon Circle */
 
 
 .discovery-icon {
 
+
     width:
 
-    58px;
+    64px;
+
 
     height:
 
-    58px;
-
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
+    64px;
 
 
     border-radius:
@@ -436,16 +546,31 @@
     50%;
 
 
+    display:
+
+    flex;
+
+
+    align-items:
+
+    center;
+
+
+    justify-content:
+
+    center;
+
+
     background:
 
-    rgba(212,175,55,0.12);
+    var(--icon-circle-bg);
 
 
     border:
 
     1px solid
 
-    rgba(212,175,55,0.35);
+    var(--icon-circle-border);
 
 
     color:
@@ -455,12 +580,13 @@
 
     font-size:
 
-    24px;
+    28px;
 
 
     margin-bottom:
 
-    16px;
+    18px;
+
 
 }
 
@@ -470,19 +596,21 @@
 
 .discovery-card-title {
 
+
     color:
 
-    var(--ctm-text-primary);
+    var(--ctm-ivory);
 
 
     font-size:
 
-    19px;
+    var(--font-card);
 
 
     font-weight:
 
     700;
+
 
 }
 
@@ -492,9 +620,10 @@
 
 .discovery-card-subtitle {
 
+
     margin-top:
 
-    5px;
+    6px;
 
 
     color:
@@ -504,12 +633,13 @@
 
     font-size:
 
-    15px;
+    0.95rem;
 
 
     font-weight:
 
     600;
+
 
 }
 
@@ -519,21 +649,30 @@
 
 .discovery-card-text {
 
+
     margin-top:
 
-    10px;
+    12px;
 
 
     color:
 
-    var(--ctm-text-muted);
+    var(--ctm-body);
 
 
     font-size:
 
-    14px;
+    0.9rem;
+
+
+    line-height:
+
+    1.7;
+
 
 }
+
+
 
 
 
@@ -544,13 +683,16 @@
 
 .welcome-cta-section {
 
+
     padding:
 
-    45px 0 65px;
+    35px 0 65px;
+
 
     text-align:
 
     center;
+
 
 }
 
@@ -559,6 +701,7 @@
 
 
 .begin-button {
+
 
     display:
 
@@ -577,12 +720,22 @@
 
     min-width:
 
-    280px;
+    300px;
 
 
     padding:
 
-    18px 46px;
+    18px 50px;
+
+
+    background:
+
+    var(--button-primary-bg);
+
+
+    color:
+
+    var(--button-primary-text);
 
 
     border-radius:
@@ -590,27 +743,9 @@
     var(--radius-pill);
 
 
-    background:
-
-    linear-gradient(
-
-        135deg,
-
-        var(--ctm-gold-light),
-
-        var(--ctm-gold)
-
-    );
-
-
-    color:
-
-    var(--ctm-bg-primary);
-
-
     font-size:
 
-    17px;
+    1rem;
 
 
     font-weight:
@@ -620,17 +755,18 @@
 
     letter-spacing:
 
-    .5px;
+    1px;
 
 
     box-shadow:
 
-    var(--ctm-shadow-gold);
+    var(--shadow-gold);
 
 
     transition:
 
     var(--transition-normal);
+
 
 }
 
@@ -640,6 +776,7 @@
 
 .begin-button:hover {
 
+
     transform:
 
     translateY(-4px);
@@ -647,11 +784,19 @@
 
     box-shadow:
 
-    0 20px 55px
+    0 22px 55px
 
-    rgba(212,175,55,.45);
+    rgba(
+        200,
+        169,
+        106,
+        0.45
+    );
+
 
 }
+
+
 
 
 
@@ -662,16 +807,20 @@
 
 .welcome-footer-space {
 
+
     padding-bottom:
 
-    50px;
+    40px;
+
 
 }
 
 
 
+
+
 /* ==========================================================================
-   RESPONSIVE
+   RESPONSIVE DESIGN
 ========================================================================== */
 
 
@@ -680,14 +829,21 @@
 
     .discovery-grid {
 
+
         grid-template-columns:
 
-        repeat(2,1fr);
+        repeat(
+            2,
+            1fr
+        );
+
 
     }
 
 
 }
+
+
 
 
 
@@ -696,19 +852,23 @@
 
     .welcome-hero {
 
+
         padding:
 
-        35px 0;
+        30px 0;
+
 
     }
 
 
 
-    .welcome-title {
+    .welcome-description {
+
 
         font-size:
 
-        36px;
+        1rem;
+
 
     }
 
@@ -716,9 +876,11 @@
 
     .welcome-promise {
 
+
         padding:
 
         25px;
+
 
     }
 
@@ -726,9 +888,11 @@
 
     .promise-text {
 
+
         font-size:
 
-        20px;
+        1.25rem;
+
 
     }
 
@@ -736,9 +900,11 @@
 
     .discovery-grid {
 
+
         grid-template-columns:
 
         1fr;
+
 
     }
 
@@ -746,9 +912,16 @@
 
     .begin-button {
 
+
         width:
 
         90%;
+
+
+        min-width:
+
+        unset;
+
 
     }
 
@@ -756,10 +929,12 @@
 }
 
 
+
 /* ==========================================================================
    END OF FILE
 
-   CTM PATH™ Welcome Styling v2.1
+   CTM PATH™ Guided Journey™
+   Welcome Styling System v2.2
 
 ========================================================================== */
 
