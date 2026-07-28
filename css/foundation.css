@@ -4,35 +4,22 @@
 
    File        : foundation.css
    Version     : 1.0
-   Status      : DEVELOPMENT
-   Stage       : STAGE 0 — FOUNDATION
 
-   Purpose     :
-   Establish the global CSS foundation for the CTM PATH™ Guided Journey™
-   application.
+   Purpose:
+
+   Global CSS foundation.
 
    Responsibilities:
 
-   • CSS reset
-   • Global box model
-   • Base typography
-   • Layout primitives
-   • Container system
-   • Utility classes
-   • Accessibility foundations
+   • Browser normalization.
+   • Base typography.
+   • Global spacing.
+   • Accessibility foundation.
+   • Common HTML behaviour.
 
-   Does NOT contain:
+   Used by:
 
-   • Brand theme variables
-   • Page-specific styles
-   • Component-specific styles
-   • Responsive breakpoints
-
-   Those responsibilities belong to:
-
-   theme.css
-   responsive.css
-   component/page stylesheets
+   All 18 journey pages.
 
    ========================================================================== */
 
@@ -46,56 +33,111 @@
 *::before,
 *::after {
 
-    box-sizing: border-box;
 
-    margin: 0;
+    box-sizing:
 
-    padding: 0;
+        border-box;
+
 
 }
+
 
 
 
 html {
 
-    font-size: 16px;
 
-    scroll-behavior: smooth;
+    scroll-behavior:
 
-    -webkit-font-smoothing: antialiased;
+        smooth;
 
-    -moz-osx-font-smoothing: grayscale;
 
 }
+
 
 
 
 body {
 
-    min-height: 100vh;
+
+    margin:
+
+        0;
+
+
+    padding:
+
+        0;
+
+
+    min-height:
+
+        100vh;
+
+
+    background:
+
+        var(--ctm-background);
+
+
+    color:
+
+        var(--ctm-text-primary);
+
 
     font-family:
-        "Inter",
-        "Segoe UI",
+
+        "Noto Sans Tamil",
+        "Noto Sans",
         Arial,
         sans-serif;
 
-    line-height: 1.6;
 
-    overflow-x: hidden;
+    font-size:
+
+        16px;
+
+
+    line-height:
+
+        1.7;
+
+
+    -webkit-font-smoothing:
+
+        antialiased;
+
+
+    text-rendering:
+
+        optimizeLegibility;
+
 
 }
 
 
 
-img,
-svg {
 
-    display: block;
+img {
 
-    max-width: 100%;
+
+    max-width:
+
+        100%;
+
+
+    height:
+
+        auto;
+
+
+    display:
+
+        block;
+
 
 }
+
 
 
 
@@ -104,1005 +146,1060 @@ input,
 textarea,
 select {
 
-    font: inherit;
+
+    font:
+
+        inherit;
+
 
 }
+
 
 
 
 button {
 
-    cursor: pointer;
 
-    border: none;
+    cursor:
 
-    background: none;
+        pointer;
+
 
 }
+
 
 
 
 a {
 
-    text-decoration: none;
+
+    color:
+
+        inherit;
+
+
+    text-decoration:
+
+        none;
+
+
+}
+
+/* ==========================================================================
+   TYPOGRAPHY FOUNDATION
+
+   CTM PATH™ Language Priority:
+
+   Tamil First
+   English Supporting Translation
+
+   ========================================================================== */
+
+
+/* ==========================================================================
+   GLOBAL HEADINGS
+   ========================================================================== */
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+
+    margin:
+
+        0;
+
+
+    color:
+
+        var(--ctm-text-primary);
+
+
+    font-weight:
+
+        600;
+
+
+    line-height:
+
+        1.25;
+
+
+    letter-spacing:
+
+        -0.01em;
+
 
 }
 
 
 
-ul,
-ol {
 
-    list-style: none;
+h1 {
+
+
+    font-size:
+
+        clamp(
+            36px,
+            5vw,
+            64px
+        );
+
 
 }
+
+
+
+
+h2 {
+
+
+    font-size:
+
+        clamp(
+            28px,
+            4vw,
+            42px
+        );
+
+
+}
+
+
+
+
+h3 {
+
+
+    font-size:
+
+        clamp(
+            22px,
+            3vw,
+            32px
+        );
+
+
+}
+
+
+
+
+h4 {
+
+
+    font-size:
+
+        22px;
+
+
+}
+
+
+
+
+h5 {
+
+
+    font-size:
+
+        18px;
+
+
+}
+
+
+
+
+h6 {
+
+
+    font-size:
+
+        16px;
+
+
+}
+
 
 
 
 /* ==========================================================================
-   ROOT APPLICATION STRUCTURE
+   PARAGRAPH SYSTEM
+
    ========================================================================== */
 
 
-#app-shell {
+p {
 
-    min-height: 100vh;
 
-    display: flex;
+    margin:
 
-    flex-direction: column;
+        0;
+
+
+    color:
+
+        var(--ctm-text-secondary);
+
+
+    font-size:
+
+        17px;
+
+
+    line-height:
+
+        1.8;
+
 
 }
 
 
 
-#app-content {
 
-    flex: 1;
+.lead-text {
 
-    width: 100%;
+
+    font-size:
+
+        clamp(
+            18px,
+            2vw,
+            22px
+        );
+
+
+    line-height:
+
+        1.9;
+
+
+    color:
+
+        var(--ctm-text-primary);
+
 
 }
+
+
+
+
+.small-text {
+
+
+    font-size:
+
+        14px;
+
+
+    line-height:
+
+        1.6;
+
+
+    color:
+
+        var(--ctm-text-muted);
+
+
+}
+
+
+
+
+/* ==========================================================================
+   BILINGUAL TYPOGRAPHY SYSTEM
+
+   Tamil content receives primary visual emphasis.
+
+   ========================================================================== */
+
+
+.tamil {
+
+
+    font-family:
+
+        "Noto Sans Tamil",
+        "Nirmala UI",
+        sans-serif;
+
+
+    font-weight:
+
+        600;
+
+
+    line-height:
+
+        1.9;
+
+
+}
+
+
+
+
+.english {
+
+
+    font-family:
+
+        "Inter",
+        "Noto Sans",
+        Arial,
+        sans-serif;
+
+
+    font-weight:
+
+        400;
+
+
+    line-height:
+
+        1.7;
+
+
+    color:
+
+        var(--ctm-text-secondary);
+
+
+}
+
+
+
+
+/* ==========================================================================
+   PREMIUM TITLE SYSTEM
+
+   ========================================================================== */
+
+
+.page-title {
+
+
+    text-align:
+
+        center;
+
+
+    margin-bottom:
+
+        24px;
+
+
+}
+
+
+
+
+.page-title .tamil {
+
+
+    display:
+
+        block;
+
+
+    font-size:
+
+        clamp(
+            32px,
+            4vw,
+            52px
+        );
+
+
+    color:
+
+        var(--ctm-text-primary);
+
+
+}
+
+
+
+
+.page-title .english {
+
+
+    display:
+
+        block;
+
+
+    margin-top:
+
+        12px;
+
+
+    font-size:
+
+        clamp(
+            18px,
+            2vw,
+            24px
+        );
+
+
+    color:
+
+        var(--ctm-teal-soft);
+
+
+}
+
+/* ==========================================================================
+   GLOBAL PAGE STRUCTURE
+
+   Shared by all 18 CTM PATH™ pages.
+
+   ========================================================================== */
+
+
+.app-shell {
+
+
+    width:
+
+        100%;
+
+
+    min-height:
+
+        100vh;
+
+
+    display:
+
+        flex;
+
+
+    flex-direction:
+
+        column;
+
+
+}
+
+
+
+
+.app-content {
+
+
+    flex:
+
+        1;
+
+
+    width:
+
+        100%;
+
+
+}
+
 
 
 
 .app-container {
 
-    width: 100%;
 
-    max-width: 1280px;
+    width:
 
-    margin-left: auto;
+        min(100% - 48px, 1200px);
 
-    margin-right: auto;
 
-    padding-left: 2rem;
+    margin:
 
-    padding-right: 2rem;
+        0 auto;
+
 
 }
 
 
 
-/* ==========================================================================
-   GLOBAL LAYOUT UTILITIES
-   ========================================================================== */
+
+.page {
 
 
-.flex {
+    width:
 
-    display: flex;
+        100%;
+
+
+    min-height:
+
+        100vh;
+
+
+    padding:
+
+        80px 0;
+
 
 }
 
-
-
-.flex-column {
-
-    display: flex;
-
-    flex-direction: column;
-
-}
-
-
-
-.flex-center {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-}
-
-
-
-.flex-between {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-}
-
-
-
-.grid {
-
-    display: grid;
-
-}
-
-
-
-.hidden {
-
-    display: none !important;
-
-}
-
-
-
-.visible {
-
-    display: block;
-
-}
-
-
-
-.relative {
-
-    position: relative;
-
-}
-
-
-
-.absolute {
-
-    position: absolute;
-
-}
-
-
-
-/* ==========================================================================
-   SPACING UTILITIES
-   ========================================================================== */
-
-
-.mt-1 {
-
-    margin-top: 0.5rem;
-
-}
-
-
-
-.mt-2 {
-
-    margin-top: 1rem;
-
-}
-
-
-
-.mt-3 {
-
-    margin-top: 1.5rem;
-
-}
-
-
-
-.mt-4 {
-
-    margin-top: 2rem;
-
-}
-
-
-
-.mb-1 {
-
-    margin-bottom: 0.5rem;
-
-}
-
-
-
-.mb-2 {
-
-    margin-bottom: 1rem;
-
-}
-
-
-
-.mb-3 {
-
-    margin-bottom: 1.5rem;
-
-}
-
-
-
-.mb-4 {
-
-    margin-bottom: 2rem;
-
-}
-
-
-
-.p-1 {
-
-    padding: 0.5rem;
-
-}
-
-
-
-.p-2 {
-
-    padding: 1rem;
-
-}
-
-
-
-.p-3 {
-
-    padding: 1.5rem;
-
-}
-
-
-
-.p-4 {
-
-    padding: 2rem;
-
-}
-
-
-
-/* ==========================================================================
-   TYPOGRAPHY FOUNDATION
-   ========================================================================== */
-
-
-.heading-xl {
-
-    font-size: 3rem;
-
-    line-height: 1.15;
-
-    font-weight: 700;
-
-}
-
-
-
-.heading-lg {
-
-    font-size: 2.25rem;
-
-    line-height: 1.2;
-
-    font-weight: 700;
-
-}
-
-
-
-.heading-md {
-
-    font-size: 1.75rem;
-
-    line-height: 1.3;
-
-    font-weight: 600;
-
-}
-
-
-
-.heading-sm {
-
-    font-size: 1.25rem;
-
-    line-height: 1.4;
-
-    font-weight: 600;
-
-}
-
-
-
-.text-large {
-
-    font-size: 1.125rem;
-
-}
-
-
-
-.text-small {
-
-    font-size: 0.875rem;
-
-}
-
-
-
-.text-center {
-
-    text-align: center;
-
-}
-
-
-
-.text-left {
-
-    text-align: left;
-
-}
-
-
-
-.text-right {
-
-    text-align: right;
-
-}
-
-
-
-/* ==========================================================================
-   FORM FOUNDATION
-   ========================================================================== */
-
-
-input,
-textarea,
-select {
-
-    width: 100%;
-
-    outline: none;
-
-}
-
-
-
-label {
-
-    display: block;
-
-    margin-bottom: 0.5rem;
-
-    font-weight: 500;
-
-}
-
-
-
-textarea {
-
-    resize: vertical;
-
-}
-
-
-
-/* ==========================================================================
-   BUTTON FOUNDATION
-   ========================================================================== */
-
-
-.btn {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 0.5rem;
-
-    padding: 0.85rem 1.75rem;
-
-    border-radius: 0.5rem;
-
-    font-weight: 600;
-
-    transition:
-        transform 0.2s ease,
-        opacity 0.2s ease;
-
-}
-
-
-
-.btn:hover {
-
-    transform: translateY(-1px);
-
-}
-
-
-
-.btn:disabled {
-
-    cursor: not-allowed;
-
-    opacity: 0.6;
-
-    transform: none;
-
-}
-
-
-
-/* ==========================================================================
-   ACCESSIBILITY
-   ========================================================================== */
-
-
-.sr-only {
-
-    position: absolute;
-
-    width: 1px;
-
-    height: 1px;
-
-    padding: 0;
-
-    margin: -1px;
-
-    overflow: hidden;
-
-    clip: rect(0,0,0,0);
-
-    white-space: nowrap;
-
-    border: 0;
-
-}
-
-
-
-:focus-visible {
-
-    outline-width: 3px;
-
-    outline-style: solid;
-
-    outline-offset: 3px;
-
-}
-
-
-/* ==========================================================================
-   CARD & SURFACE FOUNDATION
-   ========================================================================== */
-
-
-.card {
-
-    width: 100%;
-
-    border-radius: 1rem;
-
-    padding: 2rem;
-
-}
-
-
-
-.surface {
-
-    width: 100%;
-
-    border-radius: 1rem;
-
-}
 
 
 
 /* ==========================================================================
    SECTION FOUNDATION
+
    ========================================================================== */
 
 
 .section {
 
-    width: 100%;
 
-    padding-top: 4rem;
+    width:
 
-    padding-bottom: 4rem;
+        100%;
+
+
+    padding:
+
+        72px 0;
+
 
 }
+
 
 
 
 .section-header {
 
-    width: 100%;
 
-    margin-bottom: 2rem;
+    max-width:
+
+        760px;
+
+
+    margin:
+
+        0 auto 48px;
+
+
+    text-align:
+
+        center;
+
 
 }
 
 
 
-.section-title {
 
-    margin-bottom: 0.75rem;
+.section-eyebrow {
+
+
+    display:
+
+        inline-block;
+
+
+    margin-bottom:
+
+        16px;
+
+
+    color:
+
+        var(--ctm-teal-soft);
+
+
+    font-size:
+
+        14px;
+
+
+    font-weight:
+
+        600;
+
+
+    letter-spacing:
+
+        0.12em;
+
+
+    text-transform:
+
+        uppercase;
+
 
 }
+
 
 
 
 .section-description {
 
-    max-width: 720px;
+
+    max-width:
+
+        700px;
+
+
+    margin:
+
+        20px auto 0;
+
+
+    color:
+
+        var(--ctm-text-secondary);
+
 
 }
+
 
 
 
 /* ==========================================================================
-   PAGE FOUNDATION
+   CONTENT WIDTH SYSTEM
+
    ========================================================================== */
 
 
-.page {
+.content-narrow {
 
-    width: 100%;
 
-    min-height: calc(100vh - 80px);
+    max-width:
 
-    display: flex;
+        760px;
 
-    flex-direction: column;
+
+    margin:
+
+        0 auto;
+
+
+}
+
+
+
+
+.content-medium {
+
+
+    max-width:
+
+        980px;
+
+
+    margin:
+
+        0 auto;
+
 
 }
 
 
 
-.page-content {
 
-    width: 100%;
+.content-wide {
 
-    flex: 1;
+
+    max-width:
+
+        1200px;
+
+
+    margin:
+
+        0 auto;
+
 
 }
+
 
 
 
 /* ==========================================================================
-   APPLICATION STATES
+   ACCESSIBILITY FOUNDATION
+
+   Senior-friendly readability.
+
    ========================================================================== */
 
 
-.is-loading {
+.large-readable {
 
-    pointer-events: none;
 
-    user-select: none;
+    font-size:
+
+        20px;
+
+
+    line-height:
+
+        2;
+
 
 }
 
 
 
-.is-disabled {
 
-    pointer-events: none;
+.readable-spacing {
 
-    opacity: 0.6;
+
+    letter-spacing:
+
+        0.02em;
+
 
 }
 
 
 
-.is-active {
 
-    display: block;
-
-}
+.high-contrast {
 
 
+    color:
 
-.is-hidden {
+        var(--ctm-white);
 
-    display: none !important;
 
 }
+
 
 
 
 /* ==========================================================================
-   LOADING COMPONENT FOUNDATION
+   SCREEN READER SUPPORT
+
    ========================================================================== */
 
 
-.global-loader {
+.sr-only {
 
-    position: fixed;
 
-    inset: 0;
+    position:
 
-    display: flex;
+        absolute;
 
-    align-items: center;
 
-    justify-content: center;
+    width:
 
-    z-index: 9999;
+        1px;
+
+
+    height:
+
+        1px;
+
+
+    padding:
+
+        0;
+
+
+    margin:
+
+        -1px;
+
+
+    overflow:
+
+        hidden;
+
+
+    clip:
+
+        rect(
+            0,
+            0,
+            0,
+            0
+        );
+
+
+    white-space:
+
+        nowrap;
+
+
+    border:
+
+        0;
+
 
 }
 
+/* ==========================================================================
+   RESPONSIVE TYPOGRAPHY FOUNDATION
+
+   Ensures readability across:
+
+   • Desktop
+   • Tablet
+   • Mobile
 
 
-.loader-container {
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 1rem;
-
-}
+   ========================================================================== */
 
 
-
-.loader-spinner {
-
-    width: 42px;
-
-    height: 42px;
-
-    border-radius: 50%;
-
-    animation: loader-spin 1s linear infinite;
-
-}
+@media (max-width: 1024px) {
 
 
+    body {
 
-@keyframes loader-spin {
 
-    from {
+        font-size:
 
-        transform: rotate(0deg);
+            16px;
+
 
     }
 
 
-    to {
 
-        transform: rotate(360deg);
+
+    .page {
+
+
+        padding:
+
+            64px 0;
+
 
     }
 
+
+
+
+    .section {
+
+
+        padding:
+
+            56px 0;
+
+
+    }
+
+
+
 }
+
+
+
+
+@media (max-width: 768px) {
+
+
+    .app-container {
+
+
+        width:
+
+            min(
+                100% - 32px,
+                1200px
+            );
+
+
+    }
+
+
+
+
+    h1 {
+
+
+        font-size:
+
+            clamp(
+                32px,
+                8vw,
+                44px
+            );
+
+
+    }
+
+
+
+
+    h2 {
+
+
+        font-size:
+
+            clamp(
+                26px,
+                7vw,
+                36px
+            );
+
+
+    }
+
+
+
+
+    h3 {
+
+
+        font-size:
+
+            clamp(
+                22px,
+                6vw,
+                30px
+            );
+
+
+    }
+
+
+
+
+    p {
+
+
+        font-size:
+
+            16px;
+
+
+        line-height:
+
+            1.8;
+
+
+    }
+
+
+
+
+    .tamil {
+
+
+        line-height:
+
+            2;
+
+
+    }
+
+
+
+
+    .page {
+
+
+        padding:
+
+            48px 0;
+
+
+    }
+
+
+
+}
+
 
 
 
 /* ==========================================================================
-   ERROR MESSAGE FOUNDATION
+   MOTION SAFETY
+
    ========================================================================== */
 
 
-.error-container {
+@media (prefers-reduced-motion: reduce) {
 
-    position: fixed;
 
-    bottom: 2rem;
+    html {
 
-    left: 50%;
 
-    transform: translateX(-50%);
+        scroll-behavior:
 
-    max-width: 480px;
+            auto;
 
-    width: calc(100% - 2rem);
 
-    padding: 1rem 1.5rem;
+    }
 
-    border-radius: 0.75rem;
 
-    z-index: 9998;
 
 }
+
 
 
 
 /* ==========================================================================
-   PROGRESS FOUNDATION
+   PRINT FOUNDATION
+
+   Print-friendly output for reports.
+
    ========================================================================== */
 
 
-.progress-wrapper {
+@media print {
 
-    width: 100%;
+
+    body {
+
+
+        background:
+
+            white;
+
+
+        color:
+
+            black;
+
+
+    }
+
+
+
+
+    .app-header,
+    .app-footer,
+    .btn {
+
+
+        display:
+
+            none;
+
+
+    }
+
+
 
 }
 
-
-
-.progress-track {
-
-    width: 100%;
-
-    height: 8px;
-
-    border-radius: 999px;
-
-    overflow: hidden;
-
-}
-
-
-
-.progress-fill {
-
-    height: 100%;
-
-    width: 0%;
-
-    transition:
-
-        width 0.4s ease;
-
-}
 
 
 
 /* ==========================================================================
-   DIVIDERS
-   ========================================================================== */
+   END OF FILE
 
+   File:
 
-.divider {
+   css/foundation.css
 
-    width: 100%;
 
-    height: 1px;
+   Status:
 
-}
+   CTM PATH™ FOUNDATION SYSTEM COMPLETE
 
-
-
-.divider-horizontal {
-
-    margin-top: 1.5rem;
-
-    margin-bottom: 1.5rem;
-
-}
-
-
-
-/* ==========================================================================
-   ALIGNMENT HELPERS
-   ========================================================================== */
-
-
-.items-center {
-
-    align-items: center;
-
-}
-
-
-
-.items-start {
-
-    align-items: flex-start;
-
-}
-
-
-
-.items-end {
-
-    align-items: flex-end;
-
-}
-
-
-
-.justify-center {
-
-    justify-content: center;
-
-}
-
-
-
-.justify-start {
-
-    justify-content: flex-start;
-
-}
-
-
-
-.justify-end {
-
-    justify-content: flex-end;
-
-}
-
-
-
-/* ==========================================================================
-   WIDTH HELPERS
-   ========================================================================== */
-
-
-.w-full {
-
-    width: 100%;
-
-}
-
-
-
-.w-auto {
-
-    width: auto;
-
-}
-
-
-
-.max-content {
-
-    width: max-content;
-
-}
-
-
-
-.full-height {
-
-    min-height: 100vh;
-
-}
-
-
-
-/* ==========================================================================
-   BORDER RADIUS SYSTEM
-   ========================================================================== */
-
-
-.radius-sm {
-
-    border-radius: 0.375rem;
-
-}
-
-
-
-.radius-md {
-
-    border-radius: 0.75rem;
-
-}
-
-
-
-.radius-lg {
-
-    border-radius: 1.25rem;
-
-}
-
-
-
-.radius-full {
-
-    border-radius: 999px;
-
-}
-
-
-
-/* ==========================================================================
-   SHADOW FOUNDATION
-   ========================================================================== */
-
-
-.shadow-sm {
-
-    box-shadow:
-        0 2px 8px rgba(0,0,0,0.08);
-
-}
-
-
-
-.shadow-md {
-
-    box-shadow:
-        0 8px 24px rgba(0,0,0,0.12);
-
-}
-
-
-
-.shadow-lg {
-
-    box-shadow:
-        0 16px 40px rgba(0,0,0,0.16);
-
-}
-
-
-
-/* ==========================================================================
-   TRANSITION FOUNDATION
-   ========================================================================== */
-
-
-.transition {
-
-    transition:
-
-        all 0.25s ease;
-
-}
-
-
-
-.transition-fast {
-
-    transition:
-
-        all 0.15s ease;
-
-}
-
-
-
-.transition-slow {
-
-    transition:
-
-        all 0.4s ease;
-
-}
-
-
-
-/* ==========================================================================
-   END OF FOUNDATION LAYER
-
-   Theme variables:
-   theme.css
-
-   Responsive behavior:
-   responsive.css
-
-   Page styling:
-   Individual page stylesheets
 
    ========================================================================== */
-
