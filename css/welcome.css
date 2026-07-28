@@ -3,12 +3,12 @@
    CTM PATH™ Guided Journey™
 
    File        : css/welcome.css
-   Version     : 2.0
+   Version     : 2.1
 
    Page        : PAGE 01 — WELCOME™
 
    Purpose:
-   Premium Welcome Page Experience
+   Premium Welcome Experience Styling
 
    Dependencies:
    theme.css
@@ -18,23 +18,22 @@
 
 
 /* ==========================================================================
-   PAGE CANVAS
-   ========================================================================== */
+   PAGE FOUNDATION
+========================================================================== */
 
 
 .welcome-page {
 
     min-height:100vh;
 
-    background:#081C3A;
+    background:
+    var(--ctm-bg-primary);
 
     display:flex;
 
     flex-direction:column;
 
 }
-
-
 
 
 
@@ -42,42 +41,26 @@
 
     flex:1;
 
-    display:flex;
-
-    flex-direction:column;
-
 }
-
-
 
 
 
 /* ==========================================================================
    HERO SECTION
-   ========================================================================== */
+========================================================================== */
 
 
 .welcome-hero {
 
-    min-height:
-
-        calc(100vh - 160px);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
+    min-height:auto;
 
     padding:
 
-        80px 0;
+    55px 0 40px;
+
+    text-align:center;
 
 }
-
-
 
 
 
@@ -91,45 +74,63 @@
 
 
 
+/* Small premium eyebrow */
 
 
 .welcome-eyebrow {
 
-    color:#14B8A6;
+    color:
 
-    font-size:14px;
+    var(--ctm-teal);
 
-    letter-spacing:3px;
+    font-size:
 
-    text-transform:uppercase;
+    13px;
 
-    font-weight:600;
+    letter-spacing:
 
-    margin-bottom:24px;
+    3px;
+
+    font-weight:
+
+    600;
+
+    margin-bottom:
+
+    20px;
 
 }
 
 
 
+
+
+/* Tamil Primary Message */
 
 
 .welcome-title {
 
-    color:#F5F1E8;
+    margin:0;
+
+    color:
+
+    var(--ctm-text-primary);
 
     font-family:
 
-        var(--font-display);
+    var(--font-tamil);
 
     font-size:
 
-        clamp(42px,5vw,64px);
+    clamp(38px,5vw,60px);
 
-    line-height:1.2;
+    line-height:
 
-    font-weight:700;
+    1.35;
 
-    margin:0;
+    font-weight:
+
+    700;
 
 }
 
@@ -137,17 +138,26 @@
 
 
 
+/* English Meaning */
+
+
 .welcome-subtitle {
 
-    margin-top:20px;
+    margin-top:
 
-    color:#C8A96A;
+    14px;
+
+    color:
+
+    var(--ctm-gold);
 
     font-size:
 
-        clamp(22px,3vw,32px);
+    clamp(22px,3vw,32px);
 
-    font-weight:600;
+    font-weight:
+
+    700;
 
 }
 
@@ -157,42 +167,71 @@
 
 .welcome-description {
 
-    max-width:720px;
+    max-width:
 
-    margin:30px auto 0;
+    720px;
 
-    color:#B7C2D0;
+    margin:
 
-    font-size:18px;
+    22px auto 0;
 
-    line-height:1.8;
+    color:
+
+    var(--ctm-text-secondary);
+
+    font-size:
+
+    17px;
+
+    line-height:
+
+    1.8;
 
 }
 
 
 
-
-
 /* ==========================================================================
-   LIFE TRANSFORMATION STATEMENT
-   ========================================================================== */
+   JOURNEY PROMISE CARD
+========================================================================== */
 
 
 .welcome-promise {
 
-    margin-top:60px;
+    max-width:
 
-    padding:40px;
+    850px;
 
-    background:#0D223F;
+    margin:
+
+    25px auto 0;
+
+    padding:
+
+    30px 40px;
+
+
+    background:
+
+    var(--ctm-bg-secondary);
+
 
     border:
 
-        1px solid
+    1px solid
 
-        rgba(200,169,106,0.25);
+    var(--ctm-border-soft);
 
-    border-radius:24px;
+
+    border-radius:
+
+    var(--radius-lg);
+
+
+    text-align:
+
+    center;
+
 
 }
 
@@ -202,11 +241,21 @@
 
 .promise-title {
 
-    color:#C8A96A;
+    color:
 
-    font-size:18px;
+    var(--ctm-gold);
 
-    font-weight:700;
+    font-size:
+
+    15px;
+
+    letter-spacing:
+
+    2px;
+
+    font-weight:
+
+    700;
 
 }
 
@@ -216,31 +265,36 @@
 
 .promise-text {
 
-    margin-top:12px;
+    margin-top:
 
-    color:#F5F1E8;
+    10px;
 
-    font-size:24px;
+    color:
 
-    font-weight:600;
+    var(--ctm-text-primary);
+
+    font-size:
+
+    24px;
+
+    font-weight:
+
+    600;
 
 }
 
 
 
-
-
-
 /* ==========================================================================
    DISCOVERY SECTION
-   ========================================================================== */
+========================================================================== */
 
 
 .discovery-section {
 
     padding:
 
-        80px 0;
+    45px 0;
 
     text-align:center;
 
@@ -248,17 +302,23 @@
 
 
 
-
-
 .discovery-title {
 
-    color:#F5F1E8;
+    color:
 
-    font-size:32px;
+    var(--ctm-gold);
 
-    font-weight:700;
+    font-size:
 
-    margin-bottom:40px;
+    32px;
+
+    font-weight:
+
+    700;
+
+    margin-bottom:
+
+    30px;
 
 }
 
@@ -272,9 +332,11 @@
 
     grid-template-columns:
 
-        repeat(4,1fr);
+    repeat(4,1fr);
 
-    gap:24px;
+    gap:
+
+    22px;
 
 }
 
@@ -284,19 +346,32 @@
 
 .discovery-card {
 
-    background:#122B4A;
+    min-height:
+
+    220px;
+
+
+    background:
+
+    var(--ctm-bg-card);
+
 
     border:
 
-        1px solid
+    1px solid
 
-        rgba(200,169,106,0.25);
+    var(--ctm-border-soft);
 
-    border-radius:24px;
 
-    padding:32px 24px;
+    border-radius:
 
-    min-height:220px;
+    var(--radius-lg);
+
+
+    padding:
+
+    28px 20px;
+
 
     display:flex;
 
@@ -306,11 +381,10 @@
 
     justify-content:center;
 
-    text-align:center;
 
     transition:
 
-        0.35s ease;
+    var(--transition-normal);
 
 }
 
@@ -322,23 +396,33 @@
 
     transform:
 
-        translateY(-8px);
+    translateY(-6px);
 
-    border-color:#C8A96A;
+    border-color:
+
+    var(--ctm-gold);
+
+    box-shadow:
+
+    var(--ctm-shadow-gold);
 
 }
 
 
 
+/* Icon circles */
 
 
 .discovery-icon {
 
-    width:56px;
+    width:
 
-    height:56px;
+    58px;
 
-    border-radius:50%;
+    height:
+
+    58px;
+
 
     display:flex;
 
@@ -346,13 +430,37 @@
 
     justify-content:center;
 
-    background:#0D223F;
 
-    color:#C8A96A;
+    border-radius:
 
-    font-size:24px;
+    50%;
 
-    margin-bottom:20px;
+
+    background:
+
+    rgba(212,175,55,0.12);
+
+
+    border:
+
+    1px solid
+
+    rgba(212,175,55,0.35);
+
+
+    color:
+
+    var(--ctm-gold);
+
+
+    font-size:
+
+    24px;
+
+
+    margin-bottom:
+
+    16px;
 
 }
 
@@ -362,11 +470,46 @@
 
 .discovery-card-title {
 
-    color:#F5F1E8;
+    color:
 
-    font-size:20px;
+    var(--ctm-text-primary);
 
-    font-weight:700;
+
+    font-size:
+
+    19px;
+
+
+    font-weight:
+
+    700;
+
+}
+
+
+
+
+
+.discovery-card-subtitle {
+
+    margin-top:
+
+    5px;
+
+
+    color:
+
+    var(--ctm-teal);
+
+
+    font-size:
+
+    15px;
+
+
+    font-weight:
+
+    600;
 
 }
 
@@ -376,31 +519,38 @@
 
 .discovery-card-text {
 
-    margin-top:10px;
+    margin-top:
 
-    color:#B7C2D0;
+    10px;
 
-    font-size:15px;
+
+    color:
+
+    var(--ctm-text-muted);
+
+
+    font-size:
+
+    14px;
 
 }
 
 
 
-
-
-
 /* ==========================================================================
    CTA SECTION
-   ========================================================================== */
+========================================================================== */
 
 
 .welcome-cta-section {
 
     padding:
 
-        80px 0;
+    45px 0 65px;
 
-    text-align:center;
+    text-align:
+
+    center;
 
 }
 
@@ -410,47 +560,77 @@
 
 .begin-button {
 
-    display:inline-flex;
+    display:
 
-    align-items:center;
+    inline-flex;
 
-    justify-content:center;
+
+    align-items:
+
+    center;
+
+
+    justify-content:
+
+    center;
+
+
+    min-width:
+
+    280px;
+
 
     padding:
 
-        18px 48px;
+    18px 46px;
 
-    border-radius:999px;
+
+    border-radius:
+
+    var(--radius-pill);
+
 
     background:
 
-        linear-gradient(
+    linear-gradient(
 
-            135deg,
+        135deg,
 
-            #E3C98A,
+        var(--ctm-gold-light),
 
-            #C8A96A
+        var(--ctm-gold)
 
-        );
+    );
 
-    color:#081C3A;
 
-    font-size:18px;
+    color:
 
-    font-weight:700;
+    var(--ctm-bg-primary);
 
-    letter-spacing:.5px;
+
+    font-size:
+
+    17px;
+
+
+    font-weight:
+
+    800;
+
+
+    letter-spacing:
+
+    .5px;
+
 
     box-shadow:
 
-        0 15px 40px
+    var(--ctm-shadow-gold);
 
-        rgba(200,169,106,.30);
 
     transition:
 
-        .35s ease;
+    var(--transition-normal);
 
 }
 
@@ -462,59 +642,52 @@
 
     transform:
 
-        translateY(-4px);
+    translateY(-4px);
+
 
     box-shadow:
 
-        0 20px 55px
+    0 20px 55px
 
-        rgba(200,169,106,.45);
+    rgba(212,175,55,.45);
 
 }
 
 
 
-
-
-
 /* ==========================================================================
-   FOOTER SPACING SUPPORT
-   ========================================================================== */
+   FOOTER BREATHING SPACE
+========================================================================== */
 
 
 .welcome-footer-space {
 
     padding-bottom:
 
-        40px;
+    50px;
 
 }
 
 
 
-
-
-
 /* ==========================================================================
-   RESPONSIVE DESIGN
-   ========================================================================== */
+   RESPONSIVE
+========================================================================== */
 
 
-@media(max-width:1024px){
+@media(max-width:1100px){
 
 
     .discovery-grid {
 
         grid-template-columns:
 
-            repeat(2,1fr);
+        repeat(2,1fr);
 
     }
 
 
 }
-
-
 
 
 
@@ -525,49 +698,68 @@
 
         padding:
 
-            50px 0;
+        35px 0;
 
     }
 
 
-    .welcome-description {
 
-        font-size:16px;
+    .welcome-title {
+
+        font-size:
+
+        36px;
 
     }
+
 
 
     .welcome-promise {
 
-        padding:28px;
+        padding:
+
+        25px;
 
     }
+
 
 
     .promise-text {
 
-        font-size:20px;
+        font-size:
+
+        20px;
 
     }
+
 
 
     .discovery-grid {
 
         grid-template-columns:
 
-            1fr;
+        1fr;
 
     }
+
 
 
     .begin-button {
 
         width:
 
-            90%;
+        90%;
 
     }
 
 
 }
+
+
+/* ==========================================================================
+   END OF FILE
+
+   CTM PATH™ Welcome Styling v2.1
+
+========================================================================== */
 
