@@ -15,15 +15,17 @@
 
    • Move between journey pages.
    • Manage current page state.
+   • Load journey pages dynamically.
    • Trigger page lifecycle events.
    • Update progress.
 
 
    Does NOT:
 
-   • Own page content.
    • Calculate results.
    • Process assessments.
+   • Generate diagnosis.
+   • Generate prescription.
 
 
    ========================================================================== */
@@ -49,7 +51,7 @@ CTMPATH.Navigation =
 
     version:
 
-        "1.0",
+        "1.1",
 
 
 
@@ -67,7 +69,86 @@ CTMPATH.Navigation =
 
     totalPages:
 
-        18
+        18,
+
+
+
+    pageMap:
+
+    {
+
+        1:
+        "pages/welcome.html",
+
+
+        2:
+        "pages/registration.html",
+
+
+        3:
+        "pages/assessment-01.html",
+
+
+        4:
+        "pages/assessment-02.html",
+
+
+        5:
+        "pages/assessment-03.html",
+
+
+        6:
+        "pages/assessment-04.html",
+
+
+        7:
+        "pages/assessment-05.html",
+
+
+        8:
+        "pages/assessment-06.html",
+
+
+        9:
+        "pages/assessment-07.html",
+
+
+        10:
+        "pages/assessment-08.html",
+
+
+        11:
+        "pages/assessment-09.html",
+
+
+        12:
+        "pages/assessment-10.html",
+
+
+        13:
+        "pages/assessment-11.html",
+
+
+        14:
+        "pages/assessment-12.html",
+
+
+        15:
+        "pages/kalachakra.html",
+
+
+        16:
+        "pages/diagnosis.html",
+
+
+        17:
+        "pages/prescription.html",
+
+
+        18:
+        "pages/cta.html"
+
+    }
 
 
 
@@ -109,24 +190,6 @@ CTMPATH.Navigation.init = function()
 
 
 
-    /*
-    ----------------------------------------------------
-
-    Initial Page Render
-
-    Purpose:
-
-    Load the current journey page immediately after
-    application initialization.
-
-    Default:
-
-    Page 01 — Welcome™
-
-    ----------------------------------------------------
-    */
-
-
     CTMPATH.Navigation.renderPage(
 
         CTMPATH.Navigation.currentPage
@@ -140,9 +203,6 @@ CTMPATH.Navigation.init = function()
 
 
 };
-
-
-
 
 /* ==========================================================================
    GO TO PAGE
@@ -200,15 +260,26 @@ CTMPATH.Navigation.goto = function(
 
 };
 
+
+
+
 /* ==========================================================================
    PAGE RENDERING
 
-   Displays requested journey page.
+   Dynamic page loader.
+
+   Loads:
+
+   /pages/*.html
+
+   Injects into:
+
+   #app-content
 
    ========================================================================== */
 
 
-CTMPATH.Navigation.renderPage = function(
+CTMPATH.Navigation.renderPage = async function(
 
     pageNumber
 
@@ -216,39 +287,26 @@ CTMPATH.Navigation.renderPage = function(
 {
 
 
-    const pages = document.querySelectorAll(
+    const container = document.getElementById(
 
-        ".page"
-
-    );
-
-
-
-    pages.forEach(function(page)
-    {
-
-
-        page.style.display = "none";
-
-
-
-    });
-
-
-
-    const targetPage = document.querySelector(
-
-        `[data-page="${pageNumber}"]`
+        "app-content"
 
     );
 
 
 
-    if (targetPage)
+    if (!container)
     {
 
 
-        targetPage.style.display = "block";
+        console.error(
+
+            "Application content container not found."
+
+        );
+
+
+        return false;
 
 
 
@@ -256,11 +314,119 @@ CTMPATH.Navigation.renderPage = function(
 
 
 
-    CTMPATH.Navigation.dispatchPageEvent(
+    const pageURL =
 
-        pageNumber
+        CTMPATH.Navigation.pageMap[pageNumber];
 
-    );
+
+
+    if (!pageURL)
+    {
+
+
+        console.error(
+
+            "Page mapping missing:",
+
+            pageNumber
+
+        );
+
+
+        return false;
+
+
+
+    }
+
+
+
+    try
+
+    {
+
+
+        CTMPATH.Navigation.showLoader();
+
+
+
+        const response = await fetch(
+
+            pageURL
+
+        );
+
+
+
+        if (!response.ok)
+        {
+
+
+            throw new Error(
+
+                "Unable to load page: " + pageURL
+
+            );
+
+
+        }
+
+
+
+        const html = await response.text();
+
+
+
+        container.innerHTML = html;
+
+
+
+        CTMPATH.Navigation.hideLoader();
+
+
+
+        CTMPATH.Navigation.dispatchPageEvent(
+
+            pageNumber
+
+        );
+
+
+
+        return true;
+
+
+
+    }
+
+    catch(error)
+
+    {
+
+
+        CTMPATH.Navigation.hideLoader();
+
+
+
+        console.error(
+
+            "Navigation loading error:",
+
+            error
+
+        );
+
+
+
+        CTMPATH.Navigation.showError();
+
+
+
+        return false;
+
+
+
+    }
 
 
 
@@ -268,6 +434,118 @@ CTMPATH.Navigation.renderPage = function(
 
 
 
+
+/* ==========================================================================
+   LOADING STATE
+
+   ========================================================================== */
+
+
+CTMPATH.Navigation.showLoader = function()
+{
+
+
+    const loader = document.getElementById(
+
+        "global-loader"
+
+    );
+
+
+
+    if (loader)
+    {
+
+
+        loader.classList.remove(
+
+            "hidden"
+
+        );
+
+
+    }
+
+
+
+};
+
+
+
+
+CTMPATH.Navigation.hideLoader = function()
+{
+
+
+    const loader = document.getElementById(
+
+        "global-loader"
+
+    );
+
+
+
+    if (loader)
+    {
+
+
+        loader.classList.add(
+
+            "hidden"
+
+        );
+
+
+    }
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   ERROR STATE
+
+   ========================================================================== */
+
+
+CTMPATH.Navigation.showError = function()
+{
+
+
+    const errorContainer = document.getElementById(
+
+        "error-container"
+
+    );
+
+
+
+    if (errorContainer)
+    {
+
+
+        errorContainer.classList.remove(
+
+            "hidden"
+
+        );
+
+
+        errorContainer.innerHTML =
+
+
+            "Unable to load this journey step. Please try again.";
+
+
+
+    }
+
+
+
+};
 
 /* ==========================================================================
    PAGE EVENT DISPATCH
@@ -299,7 +577,12 @@ CTMPATH.Navigation.dispatchPageEvent = function(
 
                     page:
 
-                        pageNumber
+                        pageNumber,
+
+
+                    url:
+
+                        CTMPATH.Navigation.pageMap[pageNumber]
 
                 }
 
@@ -407,6 +690,9 @@ CTMPATH.Navigation.restorePage = function()
 
 };
 
+
+
+
 /* ==========================================================================
    NEXT PAGE
 
@@ -465,9 +751,6 @@ CTMPATH.Navigation.previous = function()
 
 
 };
-
-
-
 
 /* ==========================================================================
    UPDATE PROGRESS
@@ -577,6 +860,9 @@ CTMPATH.Navigation.bindGlobalEvents = function()
 
 };
 
+
+
+
 /* ==========================================================================
    GET CURRENT PAGE
 
@@ -664,9 +950,6 @@ CTMPATH.Navigation.isLastPage = function()
 
 };
 
-
-
-
 /* ==========================================================================
    RESET JOURNEY
 
@@ -696,6 +979,9 @@ CTMPATH.Navigation.reset = function()
 
 
 };
+
+
+
 
 /* ==========================================================================
    NAVIGATION STATUS
