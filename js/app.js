@@ -3,15 +3,17 @@
    CTM PATH™ Guided Journey™
 
    File        : app.js
-   Version     : 1.0
+   Version     : 1.1
    Status      : DEVELOPMENT
 
    Purpose:
+
    Application bootstrap controller.
 
    Responsibilities:
 
    • Start application.
+   • Load shared components.
    • Initialize shared systems.
    • Coordinate module loading.
    • Manage global application state.
@@ -25,12 +27,14 @@
    ========================================================================== */
 
 
+
 /* ==========================================================================
    GLOBAL APPLICATION NAMESPACE
    ========================================================================== */
 
 
 window.CTMPATH = window.CTMPATH || {};
+
 
 
 
@@ -45,7 +49,7 @@ CTMPATH.App = {
 
     version:
 
-        "1.0",
+        "1.1",
 
 
 
@@ -72,12 +76,14 @@ CTMPATH.App = {
 
 
 
+
 /* ==========================================================================
    APPLICATION INITIALIZATION
    ========================================================================== */
 
 
-CTMPATH.App.init = function() {
+CTMPATH.App.init = async function() {
+
 
 
     if (
@@ -95,7 +101,14 @@ CTMPATH.App.init = function() {
 
 
 
+
+    await CTMPATH.App.loadComponents();
+
+
+
+
     CTMPATH.App.loadModules();
+
 
 
 
@@ -103,7 +116,9 @@ CTMPATH.App.init = function() {
 
 
 
+
     CTMPATH.App.startNavigation();
+
 
 
 
@@ -113,14 +128,164 @@ CTMPATH.App.init = function() {
 
 };
 
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
 
-   File        : app.js
-   Continuation: Batch 1B
+
+
+
+/* ==========================================================================
+   GLOBAL COMPONENT LOADER
+
+   Loads:
+
+   components/header.html
+   components/footer.html
 
    ========================================================================== */
 
+
+CTMPATH.App.loadComponents = async function() {
+
+
+
+    const components = [
+
+
+
+        {
+
+            target:
+
+                "#app-header",
+
+            file:
+
+                "components/header.html"
+
+        },
+
+
+
+        {
+
+            target:
+
+                "#app-footer",
+
+            file:
+
+                "components/footer.html"
+
+        }
+
+
+
+    ];
+
+
+
+
+
+    for (
+
+        const component of components
+
+    ) {
+
+
+
+        try {
+
+
+
+            const response = await fetch(
+
+                component.file
+
+            );
+
+
+
+
+            if (
+
+                !response.ok
+
+            ) {
+
+
+
+                throw new Error(
+
+                    "Unable to load " +
+
+                    component.file
+
+                );
+
+
+
+            }
+
+
+
+
+            const html = await response.text();
+
+
+
+
+            const container = document.querySelector(
+
+                component.target
+
+            );
+
+
+
+
+            if (
+
+                container
+
+            ) {
+
+
+
+                container.innerHTML = html;
+
+
+
+            }
+
+
+
+        }
+
+
+
+        catch(error) {
+
+
+
+            console.error(
+
+                "Component loading error:",
+
+                error
+
+            );
+
+
+
+        }
+
+
+
+    }
+
+
+
+};
 
 /* ==========================================================================
    MODULE LOADING
@@ -133,23 +298,32 @@ CTMPATH.App.init = function() {
 CTMPATH.App.loadModules = function() {
 
 
+
     const modules = [
 
 
         "API",
 
+
         "Storage",
+
 
         "Navigation",
 
+
         "AssessmentEngine",
 
+
         "Scoring",
+
 
         "Report"
 
 
+
     ];
+
+
 
 
 
@@ -162,6 +336,7 @@ CTMPATH.App.loadModules = function() {
             CTMPATH[moduleName]
 
         ) {
+
 
 
             console.log(
@@ -187,6 +362,7 @@ CTMPATH.App.loadModules = function() {
 
 
 
+
 /* ==========================================================================
    SESSION RESTORATION
 
@@ -198,18 +374,25 @@ CTMPATH.App.loadModules = function() {
 CTMPATH.App.restoreSession = function() {
 
 
+
     if (
 
+
         CTMPATH.Storage &&
+
 
         typeof CTMPATH.Storage.getSession ===
 
             "function"
 
+
+
     ) {
 
 
+
         CTMPATH.App.state =
+
 
             CTMPATH.Storage.getSession()
 
@@ -226,10 +409,11 @@ CTMPATH.App.restoreSession = function() {
 
 
 
+
 /* ==========================================================================
    NAVIGATION START
 
-   Starts page routing system.
+   Starts journey navigation system.
 
    ========================================================================== */
 
@@ -237,15 +421,21 @@ CTMPATH.App.restoreSession = function() {
 CTMPATH.App.startNavigation = function() {
 
 
+
     if (
 
+
         CTMPATH.Navigation &&
+
 
         typeof CTMPATH.Navigation.init ===
 
             "function"
 
+
+
     ) {
+
 
 
         CTMPATH.Navigation.init();
@@ -261,6 +451,7 @@ CTMPATH.App.startNavigation = function() {
 
 
 
+
 /* ==========================================================================
    APPLICATION READY EVENT
 
@@ -270,7 +461,9 @@ CTMPATH.App.startNavigation = function() {
 CTMPATH.App.ready = function() {
 
 
+
     document.dispatchEvent(
+
 
         new CustomEvent(
 
@@ -278,19 +471,15 @@ CTMPATH.App.ready = function() {
 
         )
 
+
     );
 
 
 
 };
 
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
 
-   File        : app.js
-   Continuation: Batch 1C
 
-   ========================================================================== */
 
 
 /* ==========================================================================
@@ -304,35 +493,50 @@ CTMPATH.App.ready = function() {
 CTMPATH.App.onPageChange = function(pageNumber) {
 
 
+
     CTMPATH.App.currentPage = pageNumber;
+
+
 
 
 
     document.dispatchEvent(
 
+
         new CustomEvent(
 
             "CTMPATH_PAGE_LOADED",
 
+
             {
+
 
                 detail:
 
+
                 {
 
-                    page: pageNumber
+
+                    page:
+
+                        pageNumber
+
 
                 }
 
+
             }
 
+
         )
+
 
     );
 
 
 
 };
+
 
 
 
@@ -340,52 +544,65 @@ CTMPATH.App.onPageChange = function(pageNumber) {
 /* ==========================================================================
    GLOBAL ERROR HANDLER
 
-   Application-level error capture.
-
    ========================================================================== */
 
 
 CTMPATH.App.handleError = function(error) {
 
 
+
     console.error(
+
 
         "CTM PATH™ Application Error:",
 
+
         error
+
 
     );
 
 
 
+
+
     document.dispatchEvent(
+
 
         new CustomEvent(
 
+
             "CTMPATH_APP_ERROR",
+
 
             {
 
+
                 detail:
+
 
                 {
 
-                    error: error
+
+                    error:
+
+                        error
+
 
                 }
 
+
             }
 
+
         )
+
 
     );
 
 
 
 };
-
-
-
 
 /* ==========================================================================
    APPLICATION RESET
@@ -398,15 +615,21 @@ CTMPATH.App.handleError = function(error) {
 CTMPATH.App.reset = function() {
 
 
+
     if (
 
+
         CTMPATH.Storage &&
+
 
         typeof CTMPATH.Storage.clearSession ===
 
             "function"
 
+
+
     ) {
+
 
 
         CTMPATH.Storage.clearSession();
@@ -414,6 +637,8 @@ CTMPATH.App.reset = function() {
 
 
     }
+
+
 
 
 
@@ -428,51 +653,15 @@ CTMPATH.App.reset = function() {
 
 
 
-/* ==========================================================================
-   DOM READY
-
-   Application startup trigger.
-
-   ========================================================================== */
-
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    function() {
-
-
-        CTMPATH.App.init();
-
-
-
-        CTMPATH.App.ready();
-
-
-
-    }
-
-);
-
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
-
-   File        : app.js
-   Continuation: Batch 1D
-
-   ========================================================================== */
-
 
 /* ==========================================================================
    GET APPLICATION STATE
-
-   Provides current journey state.
 
    ========================================================================== */
 
 
 CTMPATH.App.getState = function() {
+
 
 
     return CTMPATH.App.state;
@@ -484,13 +673,13 @@ CTMPATH.App.getState = function() {
 
 
 
+
 /* ==========================================================================
    UPDATE APPLICATION STATE
 
-   Updates global temporary state.
+   Temporary runtime state.
 
-   Persistent storage handled separately
-   by storage.js.
+   Persistent storage handled by storage.js.
 
    ========================================================================== */
 
@@ -504,11 +693,13 @@ CTMPATH.App.updateState = function(
 ) {
 
 
+
     CTMPATH.App.state[key] = value;
 
 
 
 };
+
 
 
 
@@ -522,11 +713,13 @@ CTMPATH.App.updateState = function(
 CTMPATH.App.getCurrentPage = function() {
 
 
+
     return CTMPATH.App.currentPage;
 
 
 
 };
+
 
 
 
@@ -540,11 +733,72 @@ CTMPATH.App.getCurrentPage = function() {
 CTMPATH.App.getVersion = function() {
 
 
+
     return CTMPATH.App.version;
 
 
 
 };
+
+
+
+
+
+/* ==========================================================================
+   DOM READY
+
+   Application startup trigger.
+
+   ========================================================================== */
+
+
+document.addEventListener(
+
+
+    "DOMContentLoaded",
+
+
+    async function() {
+
+
+
+        try {
+
+
+
+            await CTMPATH.App.init();
+
+
+
+            CTMPATH.App.ready();
+
+
+
+        }
+
+
+
+        catch(error) {
+
+
+
+            CTMPATH.App.handleError(
+
+                error
+
+            );
+
+
+
+        }
+
+
+
+    }
+
+
+);
+
 
 
 
