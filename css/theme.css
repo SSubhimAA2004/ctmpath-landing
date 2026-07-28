@@ -4,34 +4,30 @@
 
    File        : theme.css
    Version     : 1.0
-   Status      : DEVELOPMENT
-   Stage       : STAGE 0 — FOUNDATION
 
-   Purpose     :
-   Defines the complete visual identity system for the
-   CTM PATH™ Guided Journey™ application.
+   Purpose:
 
-   Responsibilities:
+   Global visual identity system.
 
-   • Brand colors
-   • Typography tokens
-   • Surface system
-   • Border system
-   • Shadow system
-   • Visual emphasis hierarchy
+   Controls:
 
-   Does NOT contain:
+   • Brand colours
+   • Surfaces
+   • Typography colours
+   • Borders
+   • Shadows
+   • Premium UI language
 
-   • Layout rules
-   • Responsive rules
-   • Page-specific components
+   Used by:
+
+   All 18 journey pages.
 
    ========================================================================== */
 
 
 
 /* ==========================================================================
-   DESIGN TOKENS
+   ROOT THEME TOKENS
    ========================================================================== */
 
 
@@ -39,35 +35,39 @@
 
 
     /* ----------------------------------------------------------------------
-       BRAND COLOR SYSTEM
-
-       Premium transformation experience.
-
-       ------------------------------------------------------------------- */
+       CTM PATH™ Primary Background System
+       ---------------------------------------------------------------------- */
 
 
-    --ctm-deep-charcoal:
+    --ctm-background:
 
         #181A1F;
 
 
-    --ctm-charcoal-light:
 
-        #23262D;
+    --ctm-background-soft:
+
+        #20232A;
+
 
 
     --ctm-surface:
 
-        #242831;
-
-
-    --ctm-surface-elevated:
-
-        #2C3039;
+        #252A33;
 
 
 
-    /* Primary Brand Accent */
+    --ctm-surface-light:
+
+        #2D333D;
+
+
+
+
+
+    /* ----------------------------------------------------------------------
+       CTM PATH™ Brand Colours
+       ---------------------------------------------------------------------- */
 
 
     --ctm-teal:
@@ -75,888 +75,1725 @@
         #0FA3B1;
 
 
-    --ctm-teal-light:
 
-        #39C6D4;
+    --ctm-teal-soft:
 
-
-    --ctm-teal-dark:
-
-        #087681;
+        #48C9D4;
 
 
 
-    /* Premium Accent */
+    --ctm-gold:
 
-
-    --ctm-muted-gold:
-
-        #C6A15B;
-
-
-    --ctm-muted-gold-light:
-
-        #D9BC7A;
-
-
-    --ctm-muted-gold-dark:
-
-        #9B773A;
+        #C9A227;
 
 
 
-    /* Text System */
+    --ctm-gold-soft:
+
+        #E1C45A;
 
 
-    --ctm-ivory:
 
-        #F6F1E8;
+
+
+    /* ----------------------------------------------------------------------
+       Typography Colours
+       ---------------------------------------------------------------------- */
 
 
     --ctm-white:
 
-        #FFFFFF;
+        #F7F4EA;
+
 
 
     --ctm-text-primary:
 
-        #F6F1E8;
+        #F7F4EA;
+
 
 
     --ctm-text-secondary:
 
-        #B7BBC5;
+        #C7CBD1;
+
 
 
     --ctm-text-muted:
 
-        #858B98;
+        #9CA3AF;
 
 
 
-    /* Status Colors */
+
+
+    /* ----------------------------------------------------------------------
+       Borders
+       ---------------------------------------------------------------------- */
+
+
+    --ctm-border:
+
+        rgba(255,255,255,0.12);
+
+
+
+    --ctm-border-highlight:
+
+        rgba(15,163,177,0.45);
+
+
+
+
+
+    /* ----------------------------------------------------------------------
+       Status Colours
+       ---------------------------------------------------------------------- */
 
 
     --ctm-success:
 
-        #4CAF78;
+        #3BB273;
+
 
 
     --ctm-warning:
 
-        #D89B3C;
+        #D9A441;
+
 
 
     --ctm-error:
 
-        #D85C5C;
+        #D9534F;
 
 
-
-    /* ----------------------------------------------------------------------
-       TYPOGRAPHY SYSTEM
-       ------------------------------------------------------------------- */
-
-
-    --font-primary:
-
-        "Inter",
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
-
-    --font-heading:
-
-        "Inter",
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
-
-
-    --weight-regular:
-
-        400;
-
-
-    --weight-medium:
-
-        500;
-
-
-    --weight-semibold:
-
-        600;
-
-
-    --weight-bold:
-
-        700;
 
 
 
     /* ----------------------------------------------------------------------
-       FONT SCALE
-       ------------------------------------------------------------------- */
+       Shadows
+       ---------------------------------------------------------------------- */
 
 
-    --text-xs:
-
-        0.75rem;
-
-
-    --text-sm:
-
-        0.875rem;
-
-
-    --text-base:
-
-        1rem;
-
-
-    --text-lg:
-
-        1.125rem;
-
-
-    --text-xl:
-
-        1.25rem;
-
-
-    --text-2xl:
-
-        1.5rem;
-
-
-    --text-3xl:
-
-        2rem;
-
-
-    --text-4xl:
-
-        2.75rem;
-
-
-    --text-5xl:
-
-        3.5rem;
-
-
-
-    /* ----------------------------------------------------------------------
-       SPACING SYSTEM
-       ------------------------------------------------------------------- */
-
-
-    --space-1:
-
-        0.25rem;
-
-
-    --space-2:
-
-        0.5rem;
-
-
-    --space-3:
-
-        0.75rem;
-
-
-    --space-4:
-
-        1rem;
-
-
-    --space-5:
-
-        1.25rem;
-
-
-    --space-6:
-
-        1.5rem;
-
-
-    --space-8:
-
-        2rem;
-
-
-    --space-10:
-
-        2.5rem;
-
-
-    --space-12:
-
-        3rem;
-
-
-    --space-16:
-
-        4rem;
-
-
-    --space-20:
-
-        5rem;
-
-
-
-    /* ----------------------------------------------------------------------
-       BORDER SYSTEM
-       ------------------------------------------------------------------- */
-
-
-    --border-subtle:
-
-        rgba(255,255,255,0.08);
-
-
-    --border-medium:
-
-        rgba(255,255,255,0.15);
-
-
-    --border-accent:
-
-        rgba(15,163,177,0.5);
-
-
-
-    /* ----------------------------------------------------------------------
-       RADIUS SYSTEM
-       ------------------------------------------------------------------- */
-
-
-    --radius-sm:
-
-        0.375rem;
-
-
-    --radius-md:
-
-        0.75rem;
-
-
-    --radius-lg:
-
-        1.25rem;
-
-
-    --radius-xl:
-
-        1.75rem;
-
-
-    --radius-pill:
-
-        999px;
-
-
-
-    /* ----------------------------------------------------------------------
-       SHADOW SYSTEM
-       ------------------------------------------------------------------- */
-
-
-    --shadow-soft:
+    --ctm-shadow-small:
 
         0 8px 24px rgba(0,0,0,0.18);
 
 
-    --shadow-medium:
 
-        0 16px 40px rgba(0,0,0,0.25);
+    --ctm-shadow-medium:
+
+        0 16px 40px rgba(0,0,0,0.28);
 
 
-    --shadow-premium:
 
-        0 24px 60px rgba(0,0,0,0.35);
+    --ctm-shadow-large:
+
+        0 30px 80px rgba(0,0,0,0.40);
+
+
 
 
 
     /* ----------------------------------------------------------------------
-       TRANSITIONS
-       ------------------------------------------------------------------- */
+       Radius System
+       ---------------------------------------------------------------------- */
 
 
-    --transition-fast:
+    --ctm-radius-small:
 
-        0.15s ease;
-
-
-    --transition-default:
-
-        0.25s ease;
+        8px;
 
 
-    --transition-slow:
 
-        0.4s ease;
+    --ctm-radius-medium:
+
+        16px;
+
+
+
+    --ctm-radius-large:
+
+        28px;
 
 
 
 }
 
 /* ==========================================================================
-   GLOBAL THEME APPLICATION
+   TYPOGRAPHY COLOUR SYSTEM
+
+   Shared text hierarchy.
+
    ========================================================================== */
 
 
-body {
+.text-primary {
 
-    background:
-
-        var(--ctm-deep-charcoal);
 
     color:
 
         var(--ctm-text-primary);
 
-    font-family:
-
-        var(--font-primary);
 
 }
 
 
 
-/* ==========================================================================
-   TYPOGRAPHY THEME
-   ========================================================================== */
 
+.text-secondary {
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-
-    font-family:
-
-        var(--font-heading);
-
-    color:
-
-        var(--ctm-text-primary);
-
-    font-weight:
-
-        var(--weight-semibold);
-
-    letter-spacing:
-
-        -0.02em;
-
-}
-
-
-
-h1 {
-
-    font-size:
-
-        var(--text-5xl);
-
-    line-height:
-
-        1.1;
-
-}
-
-
-
-h2 {
-
-    font-size:
-
-        var(--text-4xl);
-
-    line-height:
-
-        1.2;
-
-}
-
-
-
-h3 {
-
-    font-size:
-
-        var(--text-3xl);
-
-    line-height:
-
-        1.25;
-
-}
-
-
-
-h4 {
-
-    font-size:
-
-        var(--text-2xl);
-
-}
-
-
-
-p {
 
     color:
 
         var(--ctm-text-secondary);
 
-    font-size:
-
-        var(--text-base);
 
 }
 
-
-
-/* ==========================================================================
-   LINK THEME
-   ========================================================================== */
-
-
-a {
-
-    color:
-
-        var(--ctm-teal);
-
-    transition:
-
-        color var(--transition-default);
-
-}
-
-
-
-a:hover {
-
-    color:
-
-        var(--ctm-teal-light);
-
-}
-
-
-
-/* ==========================================================================
-   SURFACE SYSTEM
-   ========================================================================== */
-
-
-.surface {
-
-    background:
-
-        var(--ctm-surface);
-
-    border:
-
-        1px solid var(--border-subtle);
-
-}
-
-
-
-.surface-elevated {
-
-    background:
-
-        var(--ctm-surface-elevated);
-
-    border:
-
-        1px solid var(--border-medium);
-
-    box-shadow:
-
-        var(--shadow-soft);
-
-}
-
-
-
-/* ==========================================================================
-   CARD THEME
-   ========================================================================== */
-
-
-.card {
-
-    background:
-
-        var(--ctm-surface);
-
-    border:
-
-        1px solid var(--border-subtle);
-
-    border-radius:
-
-        var(--radius-lg);
-
-    box-shadow:
-
-        var(--shadow-soft);
-
-}
-
-
-
-.card:hover {
-
-    border-color:
-
-        var(--border-accent);
-
-}
-
-
-
-/* ==========================================================================
-   BUTTON THEME
-   ========================================================================== */
-
-
-.btn-primary {
-
-    background:
-
-        var(--ctm-teal);
-
-    color:
-
-        var(--ctm-white);
-
-}
-
-
-
-.btn-primary:hover {
-
-    background:
-
-        var(--ctm-teal-light);
-
-}
-
-
-
-.btn-secondary {
-
-    background:
-
-        transparent;
-
-    color:
-
-        var(--ctm-text-primary);
-
-    border:
-
-        1px solid var(--border-medium);
-
-}
-
-
-
-.btn-secondary:hover {
-
-    border-color:
-
-        var(--ctm-teal);
-
-    color:
-
-        var(--ctm-teal-light);
-
-}
-
-
-
-.btn-accent {
-
-    background:
-
-        var(--ctm-muted-gold);
-
-    color:
-
-        var(--ctm-deep-charcoal);
-
-}
-
-
-
-.btn-accent:hover {
-
-    background:
-
-        var(--ctm-muted-gold-light);
-
-}
-
-
-
-/* ==========================================================================
-   FORM THEME
-   ========================================================================== */
-
-
-input,
-textarea,
-select {
-
-    background:
-
-        var(--ctm-surface);
-
-    color:
-
-        var(--ctm-text-primary);
-
-    border:
-
-        1px solid var(--border-medium);
-
-    border-radius:
-
-        var(--radius-md);
-
-    padding:
-
-        0.85rem 1rem;
-
-    transition:
-
-        border-color var(--transition-default),
-        box-shadow var(--transition-default);
-
-}
-
-
-
-input::placeholder,
-textarea::placeholder {
-
-    color:
-
-        var(--ctm-text-muted);
-
-}
-
-
-
-input:focus,
-textarea:focus,
-select:focus {
-
-    border-color:
-
-        var(--ctm-teal);
-
-    box-shadow:
-
-        0 0 0 3px rgba(15,163,177,0.15);
-
-}
-
-
-
-/* ==========================================================================
-   LABEL THEME
-   ========================================================================== */
-
-
-label {
-
-    color:
-
-        var(--ctm-text-primary);
-
-    font-size:
-
-        var(--text-sm);
-
-}
-
-
-
-/* ==========================================================================
-   PROGRESS THEME
-   ========================================================================== */
-
-
-.progress-track {
-
-    background:
-
-        rgba(255,255,255,0.08);
-
-}
-
-
-
-.progress-fill {
-
-    background:
-
-        linear-gradient(
-            90deg,
-            var(--ctm-teal),
-            var(--ctm-teal-light)
-        );
-
-}
-
-
-
-/* ==========================================================================
-   LOADING THEME
-   ========================================================================== */
-
-
-.global-loader {
-
-    background:
-
-        rgba(24,26,31,0.96);
-
-}
-
-
-
-.loader-spinner {
-
-    border:
-
-        4px solid rgba(255,255,255,0.15);
-
-    border-top-color:
-
-        var(--ctm-teal);
-
-}
-
-
-
-/* ==========================================================================
-   ERROR THEME
-   ========================================================================== */
-
-
-.error-container {
-
-    background:
-
-        var(--ctm-error);
-
-    color:
-
-        var(--ctm-white);
-
-}
-
-
-
-/* ==========================================================================
-   DIVIDER THEME
-   ========================================================================== */
-
-
-.divider {
-
-    background:
-
-        var(--border-subtle);
-
-}
-
-
-
-/* ==========================================================================
-   FOCUS THEME
-   ========================================================================== */
-
-
-:focus-visible {
-
-    outline-color:
-
-        var(--ctm-teal);
-
-}
-
-
-
-/* ==========================================================================
-   PREMIUM EMPHASIS CLASSES
-   ========================================================================== */
-
-
-.text-accent {
-
-    color:
-
-        var(--ctm-teal);
-
-}
-
-
-
-.text-gold {
-
-    color:
-
-        var(--ctm-muted-gold);
-
-}
 
 
 
 .text-muted {
 
+
     color:
 
         var(--ctm-text-muted);
+
 
 }
 
 
 
-.text-primary {
+
+.text-accent {
+
+
+    color:
+
+        var(--ctm-teal);
+
+
+}
+
+
+
+
+.text-highlight {
+
+
+    color:
+
+        var(--ctm-gold);
+
+
+}
+
+
+
+
+/* ==========================================================================
+   PREMIUM SURFACE SYSTEM
+
+   Used by:
+
+   Cards
+   Panels
+   Assessment blocks
+   Diagnosis sections
+
+   ========================================================================== */
+
+
+.surface {
+
+
+    background:
+
+        var(--ctm-surface);
+
+
+
+    border:
+
+        1px solid var(--ctm-border);
+
+
+
+    border-radius:
+
+        var(--ctm-radius-medium);
+
+
+
+    box-shadow:
+
+        var(--ctm-shadow-small);
+
+
+
+}
+
+
+
+
+.surface-elevated {
+
+
+    background:
+
+        var(--ctm-surface-light);
+
+
+
+    border:
+
+        1px solid var(--ctm-border-highlight);
+
+
+
+    border-radius:
+
+        var(--ctm-radius-large);
+
+
+
+    box-shadow:
+
+        var(--ctm-shadow-medium);
+
+
+
+}
+
+
+
+
+/* ==========================================================================
+   PREMIUM CARD SYSTEM
+
+   ========================================================================== */
+
+
+.card {
+
+
+    background:
+
+        var(--ctm-surface);
+
+
+
+    border:
+
+        1px solid var(--ctm-border);
+
+
+
+    border-radius:
+
+        var(--ctm-radius-medium);
+
+
+
+    padding:
+
+        32px;
+
+
+
+    box-shadow:
+
+        var(--ctm-shadow-small);
+
+
+
+    transition:
+
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+
+
+
+}
+
+
+
+
+.card:hover {
+
+
+    transform:
+
+        translateY(-4px);
+
+
+
+    border-color:
+
+        var(--ctm-border-highlight);
+
+
+
+    box-shadow:
+
+        var(--ctm-shadow-medium);
+
+
+
+}
+
+
+
+
+/* ==========================================================================
+   PREMIUM DIVIDERS
+
+   ========================================================================== */
+
+
+.divider {
+
+
+    height:
+
+        1px;
+
+
+
+    width:
+
+        100%;
+
+
+
+    background:
+
+        var(--ctm-border);
+
+
+
+    margin:
+
+        32px 0;
+
+
+
+}
+
+
+
+
+/* ==========================================================================
+   ACCENT ELEMENTS
+
+   ========================================================================== */
+
+
+.accent-line {
+
+
+    width:
+
+        64px;
+
+
+
+    height:
+
+        3px;
+
+
+
+    background:
+
+        var(--ctm-gold);
+
+
+
+    border-radius:
+
+        10px;
+
+
+
+}
+
+
+
+
+.accent-glow {
+
+
+    box-shadow:
+
+        0 0 24px rgba(15,163,177,0.35);
+
+
+
+}
+
+/* ==========================================================================
+   PREMIUM BUTTON SYSTEM
+
+   Shared by:
+
+   • Welcome CTA
+   • Registration actions
+   • Assessment navigation
+   • Final CTA page
+
+   ========================================================================== */
+
+
+.btn {
+
+
+    display:
+
+        inline-flex;
+
+
+
+    align-items:
+
+        center;
+
+
+
+    justify-content:
+
+        center;
+
+
+
+    gap:
+
+        12px;
+
+
+
+    min-height:
+
+        52px;
+
+
+
+    padding:
+
+        14px 32px;
+
+
+
+    border:
+
+        none;
+
+
+
+    border-radius:
+
+        var(--ctm-radius-medium);
+
+
+
+    font-size:
+
+        16px;
+
+
+
+    font-weight:
+
+        600;
+
+
+
+    letter-spacing:
+
+        0.02em;
+
+
+
+    cursor:
+
+        pointer;
+
+
+
+    transition:
+
+        all 0.3s ease;
+
+
+
+}
+
+
+
+
+
+/* --------------------------------------------------------------------------
+   Primary CTM PATH™ Button
+
+   -------------------------------------------------------------------------- */
+
+
+.btn-primary {
+
+
+    background:
+
+        var(--ctm-teal);
+
+
+
+    color:
+
+        var(--ctm-white);
+
+
+
+    box-shadow:
+
+        0 12px 30px rgba(15,163,177,0.25);
+
+
+
+}
+
+
+
+
+.btn-primary:hover {
+
+
+    background:
+
+        var(--ctm-teal-soft);
+
+
+
+    transform:
+
+        translateY(-3px);
+
+
+
+    box-shadow:
+
+        0 18px 40px rgba(15,163,177,0.35);
+
+
+
+}
+
+
+
+
+/* --------------------------------------------------------------------------
+   Gold Accent Button
+
+   -------------------------------------------------------------------------- */
+
+
+.btn-gold {
+
+
+    background:
+
+        var(--ctm-gold);
+
+
+
+    color:
+
+        #181A1F;
+
+
+
+    box-shadow:
+
+        0 12px 30px rgba(201,162,39,0.25);
+
+
+
+}
+
+
+
+
+.btn-gold:hover {
+
+
+    background:
+
+        var(--ctm-gold-soft);
+
+
+
+    transform:
+
+        translateY(-3px);
+
+
+
+}
+
+
+
+
+/* --------------------------------------------------------------------------
+   Secondary Button
+
+   -------------------------------------------------------------------------- */
+
+
+.btn-secondary {
+
+
+    background:
+
+        transparent;
+
+
 
     color:
 
         var(--ctm-text-primary);
 
+
+
+    border:
+
+        1px solid var(--ctm-border);
+
+
+
 }
 
 
 
+
+.btn-secondary:hover {
+
+
+    border-color:
+
+        var(--ctm-teal);
+
+
+
+    color:
+
+        var(--ctm-teal);
+
+
+
+}
+
+
+
+
 /* ==========================================================================
-   END OF THEME FOUNDATION
-
-   Responsive adaptation:
-   responsive.css
-
-   Page styling:
-   Individual page stylesheets
+   JOURNEY UI ELEMENTS
 
    ========================================================================== */
 
+
+.journey-badge {
+
+
+    display:
+
+        inline-flex;
+
+
+
+    align-items:
+
+        center;
+
+
+
+    padding:
+
+        8px 16px;
+
+
+
+    background:
+
+        rgba(15,163,177,0.12);
+
+
+
+    color:
+
+        var(--ctm-teal-soft);
+
+
+
+    border:
+
+        1px solid rgba(15,163,177,0.25);
+
+
+
+    border-radius:
+
+        999px;
+
+
+
+    font-size:
+
+        14px;
+
+
+
+}
+
+
+
+
+
+/* --------------------------------------------------------------------------
+   Progress Indicator
+
+   -------------------------------------------------------------------------- */
+
+
+.progress-track {
+
+
+    width:
+
+        100%;
+
+
+
+    height:
+
+        6px;
+
+
+
+    background:
+
+        rgba(255,255,255,0.08);
+
+
+
+    border-radius:
+
+        20px;
+
+
+
+    overflow:
+
+        hidden;
+
+
+
+}
+
+
+
+
+.progress-fill {
+
+
+    height:
+
+        100%;
+
+
+
+    background:
+
+        var(--ctm-teal);
+
+
+
+    transition:
+
+        width 0.5s ease;
+
+
+
+}
+
+
+
+
+/* ==========================================================================
+   FOCUS ACCESSIBILITY
+
+   ========================================================================== */
+
+
+button:focus-visible,
+a:focus-visible {
+
+
+    outline:
+
+        3px solid var(--ctm-gold);
+
+
+
+    outline-offset:
+
+        4px;
+
+
+
+}
+
+/* ==========================================================================
+   FORM ELEMENT SYSTEM
+
+   Shared by:
+
+   • Registration page
+   • Assessment pages
+   • CTA forms
+
+   ========================================================================== */
+
+
+.input {
+
+
+    width:
+
+        100%;
+
+
+
+    min-height:
+
+        52px;
+
+
+
+    padding:
+
+        14px 18px;
+
+
+
+    background:
+
+        var(--ctm-background-soft);
+
+
+
+    color:
+
+        var(--ctm-text-primary);
+
+
+
+    border:
+
+        1px solid var(--ctm-border);
+
+
+
+    border-radius:
+
+        var(--ctm-radius-small);
+
+
+
+    font-size:
+
+        16px;
+
+
+
+    transition:
+
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+
+
+
+}
+
+
+
+
+.input::placeholder {
+
+
+    color:
+
+        var(--ctm-text-muted);
+
+
+
+}
+
+
+
+
+.input:focus {
+
+
+    outline:
+
+        none;
+
+
+
+    border-color:
+
+        var(--ctm-teal);
+
+
+
+    box-shadow:
+
+        0 0 0 4px rgba(15,163,177,0.15);
+
+
+
+}
+
+
+
+
+/* ==========================================================================
+   BADGES AND STATUS STATES
+
+   Used by:
+
+   • KALA CHAKRA™
+   • Diagnosis™
+   • Prescription™
+
+   ========================================================================== */
+
+
+.status-card {
+
+
+    padding:
+
+        24px;
+
+
+
+    background:
+
+        var(--ctm-surface);
+
+
+
+    border:
+
+        1px solid var(--ctm-border);
+
+
+
+    border-radius:
+
+        var(--ctm-radius-medium);
+
+
+
+}
+
+
+
+
+.status-success {
+
+
+    border-color:
+
+        rgba(59,178,115,0.45);
+
+
+
+}
+
+
+
+
+.status-warning {
+
+
+    border-color:
+
+        rgba(217,164,65,0.45);
+
+
+
+}
+
+
+
+
+.status-error {
+
+
+    border-color:
+
+        rgba(217,83,79,0.45);
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   ANIMATION SYSTEM
+
+   Premium calm transitions.
+
+   ========================================================================== */
+
+
+.fade-in {
+
+
+    animation:
+
+        ctmFadeIn 0.6s ease forwards;
+
+
+
+}
+
+
+
+
+.slide-up {
+
+
+    animation:
+
+        ctmSlideUp 0.6s ease forwards;
+
+
+
+}
+
+
+
+
+@keyframes ctmFadeIn {
+
+
+    from {
+
+
+        opacity:
+
+            0;
+
+
+
+    }
+
+
+    to {
+
+
+        opacity:
+
+            1;
+
+
+
+    }
+
+
+}
+
+
+
+
+@keyframes ctmSlideUp {
+
+
+    from {
+
+
+        opacity:
+
+            0;
+
+
+
+        transform:
+
+            translateY(24px);
+
+
+
+    }
+
+
+    to {
+
+
+        opacity:
+
+            1;
+
+
+
+        transform:
+
+            translateY(0);
+
+
+
+    }
+
+
+}
+
+
+
+
+/* ==========================================================================
+   DISABLED STATES
+
+   ========================================================================== */
+
+
+.is-disabled,
+button:disabled {
+
+
+    opacity:
+
+        0.5;
+
+
+
+    cursor:
+
+        not-allowed;
+
+
+
+    pointer-events:
+
+        none;
+
+
+
+}
+
+
+
+
+/* ==========================================================================
+   VISIBILITY HELPERS
+
+   ========================================================================== */
+
+
+.hidden {
+
+
+    display:
+
+        none !important;
+
+
+
+}
+
+
+
+
+.visible {
+
+
+    display:
+
+        block;
+
+
+
+}
+
+/* ==========================================================================
+   LAYOUT UTILITY CLASSES
+
+   Shared across all CTM PATH™ pages.
+
+   ========================================================================== */
+
+
+.container {
+
+
+    width:
+
+        min(100% - 48px, 1200px);
+
+
+
+    margin:
+
+        0 auto;
+
+
+
+}
+
+
+
+
+.container-narrow {
+
+
+    width:
+
+        min(100% - 48px, 820px);
+
+
+
+    margin:
+
+        0 auto;
+
+
+
+}
+
+
+
+
+.section {
+
+
+    padding:
+
+        80px 0;
+
+
+
+}
+
+
+
+
+.section-small {
+
+
+    padding:
+
+        48px 0;
+
+
+
+}
+
+
+
+
+.text-center {
+
+
+    text-align:
+
+        center;
+
+
+
+}
+
+
+
+
+.text-left {
+
+
+    text-align:
+
+        left;
+
+
+
+}
+
+
+
+
+/* ==========================================================================
+   FLEX UTILITIES
+
+   ========================================================================== */
+
+
+.flex {
+
+
+    display:
+
+        flex;
+
+
+
+}
+
+
+
+
+.flex-center {
+
+
+    display:
+
+        flex;
+
+
+
+    align-items:
+
+        center;
+
+
+
+    justify-content:
+
+        center;
+
+
+
+}
+
+
+
+
+.flex-between {
+
+
+    display:
+
+        flex;
+
+
+
+    align-items:
+
+        center;
+
+
+
+    justify-content:
+
+        space-between;
+
+
+
+}
+
+
+
+
+.flex-column {
+
+
+    flex-direction:
+
+        column;
+
+
+
+}
+
+
+
+
+/* ==========================================================================
+   GRID UTILITIES
+
+   ========================================================================== */
+
+
+.grid {
+
+
+    display:
+
+        grid;
+
+
+
+}
+
+
+
+
+.grid-2 {
+
+
+    grid-template-columns:
+
+        repeat(2, 1fr);
+
+
+
+}
+
+
+
+
+.grid-3 {
+
+
+    grid-template-columns:
+
+        repeat(3, 1fr);
+
+
+
+}
+
+
+
+
+/* ==========================================================================
+   SPACING UTILITIES
+
+   ========================================================================== */
+
+
+.mt-small {
+
+
+    margin-top:
+
+        16px;
+
+
+
+}
+
+
+
+
+.mt-medium {
+
+
+    margin-top:
+
+        32px;
+
+
+
+}
+
+
+
+
+.mt-large {
+
+
+    margin-top:
+
+        64px;
+
+
+
+}
+
+
+
+
+.mb-small {
+
+
+    margin-bottom:
+
+        16px;
+
+
+
+}
+
+
+
+
+.mb-medium {
+
+
+    margin-bottom:
+
+        32px;
+
+
+
+}
+
+
+
+
+.mb-large {
+
+
+    margin-bottom:
+
+        64px;
+
+
+
+}
+
+
+
+
+/* ==========================================================================
+   PREMIUM DIVIDER ELEMENT
+
+   ========================================================================== */
+
+
+.ctm-divider {
+
+
+    width:
+
+        80px;
+
+
+
+    height:
+
+        3px;
+
+
+
+    margin:
+
+        24px auto;
+
+
+
+    background:
+
+        var(--ctm-gold);
+
+
+
+    border-radius:
+
+        20px;
+
+
+
+}
+
+
+
+
+/* ==========================================================================
+   BRAND MARK ELEMENTS
+
+   ========================================================================== */
+
+
+.brand-accent {
+
+
+    color:
+
+        var(--ctm-teal);
+
+
+
+}
+
+
+
+
+.brand-gold {
+
+
+    color:
+
+        var(--ctm-gold);
+
+
+
+}
+
+
+
+
+/* ==========================================================================
+   REDUCED MOTION ACCESSIBILITY
+
+   ========================================================================== */
+
+
+@media (prefers-reduced-motion: reduce) {
+
+
+    *,
+    *::before,
+    *::after {
+
+
+        animation-duration:
+
+            0.01ms !important;
+
+
+
+        animation-iteration-count:
+
+            1 !important;
+
+
+
+        scroll-behavior:
+
+            auto !important;
+
+
+
+        transition-duration:
+
+            0.01ms !important;
+
+
+
+    }
+
+
+}
+
+
+
+
+/* ==========================================================================
+   END OF FILE
+
+   File:
+
+   css/theme.css
+
+
+   Status:
+
+   CTM PATH™ PREMIUM DESIGN SYSTEM COMPLETE
+
+   ========================================================================== */
