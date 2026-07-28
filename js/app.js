@@ -5,45 +5,28 @@
    File        : app.js
    Version     : 1.0
    Status      : DEVELOPMENT
-   Stage       : STAGE 0 — FOUNDATION
 
-   Purpose     :
+   Purpose:
    Application bootstrap controller.
 
    Responsibilities:
 
-   • Initialize frontend application.
-   • Register application lifecycle.
-   • Prepare global UI state.
-   • Initialize required foundation modules.
-   • Handle controlled startup errors.
+   • Start application.
+   • Initialize shared systems.
+   • Coordinate module loading.
+   • Manage global application state.
 
    Does NOT:
 
-   • Perform business calculations.
-   • Store assessment results.
-   • Generate diagnosis.
-   • Generate prescriptions.
-   • Replace backend services.
-
-   Backend Ownership:
-
-   • Visitor creation
-   • Assessment persistence
-   • Scoring
-   • KALA CHAKRA™ calculations
-   • Diagnosis
-   • Prescription
-   • Reports
+   • Own page-specific behaviour.
+   • Calculate scores.
+   • Generate reports.
 
    ========================================================================== */
 
 
 /* ==========================================================================
-   APPLICATION NAMESPACE
-
-   Single global namespace to prevent collisions.
-
+   GLOBAL APPLICATION NAMESPACE
    ========================================================================== */
 
 
@@ -51,9 +34,9 @@ window.CTMPATH = window.CTMPATH || {};
 
 
 
-/* ==========================================================================
-   APPLICATION CONFIGURATION
 
+/* ==========================================================================
+   APPLICATION CORE
    ========================================================================== */
 
 
@@ -72,19 +55,13 @@ CTMPATH.App = {
 
 
 
-    environment:
-
-        "production",
-
-
-
-    startTime:
+    currentPage:
 
         null,
 
 
 
-    modules:
+    state:
 
         {}
 
@@ -94,63 +71,114 @@ CTMPATH.App = {
 
 
 
+
 /* ==========================================================================
    APPLICATION INITIALIZATION
+   ========================================================================== */
 
-   Entry point called after DOM ready.
+
+CTMPATH.App.init = function() {
+
+
+    if (
+
+        CTMPATH.App.initialized
+
+    ) {
+
+
+        return;
+
+
+
+    }
+
+
+
+    CTMPATH.App.loadModules();
+
+
+
+    CTMPATH.App.restoreSession();
+
+
+
+    CTMPATH.App.startNavigation();
+
+
+
+    CTMPATH.App.initialized = true;
+
+
+
+};
+
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : app.js
+   Continuation: Batch 1B
 
    ========================================================================== */
 
 
-CTMPATH.App.init = async function () {
+/* ==========================================================================
+   MODULE LOADING
+
+   Initializes shared application systems.
+
+   ========================================================================== */
 
 
-    try {
+CTMPATH.App.loadModules = function() {
 
 
-        CTMPATH.App.startTime = Date.now();
+    const modules = [
 
 
+        "API",
 
-        CTMPATH.App.showLoader();
+        "Storage",
 
+        "Navigation",
 
+        "AssessmentEngine",
 
-        CTMPATH.App.registerModules();
+        "Scoring",
 
-
-
-        CTMPATH.App.initializeFoundation();
-
-
-
-        CTMPATH.App.initialized = true;
+        "Report"
 
 
-
-        CTMPATH.App.hideLoader();
-
-
-
-        console.info(
-
-            "CTM PATH™ Guided Journey™ initialized successfully."
-
-        );
+    ];
 
 
 
-    }
-
-
-    catch (error) {
-
-
-        CTMPATH.App.handleError(error);
+    modules.forEach(function(moduleName) {
 
 
 
-    }
+        if (
+
+            CTMPATH[moduleName]
+
+        ) {
+
+
+            console.log(
+
+                moduleName +
+
+                " initialized"
+
+            );
+
+
+
+        }
+
+
+
+    });
 
 
 
@@ -160,86 +188,32 @@ CTMPATH.App.init = async function () {
 
 
 /* ==========================================================================
-   MODULE REGISTRATION
+   SESSION RESTORATION
 
-   Modules are injected by their own files.
-
-   This function only confirms availability.
+   Restores visitor journey state.
 
    ========================================================================== */
 
 
-CTMPATH.App.registerModules = function () {
-
-
-    CTMPATH.App.modules = {
-
-
-        api:
-
-            CTMPATH.API || null,
-
-
-
-        storage:
-
-            CTMPATH.Storage || null,
-
-
-
-        navigation:
-
-            CTMPATH.Navigation || null,
-
-
-
-        assessment:
-
-            CTMPATH.AssessmentEngine || null,
-
-
-
-        scoring:
-
-            CTMPATH.Scoring || null,
-
-
-
-        report:
-
-            CTMPATH.Report || null
-
-
-
-    };
-
-
-
-};
-
-
-
-/* ==========================================================================
-   FOUNDATION INITIALIZATION
-
-   Coordinates foundation services.
-
-   ========================================================================== */
-
-
-CTMPATH.App.initializeFoundation = function () {
+CTMPATH.App.restoreSession = function() {
 
 
     if (
 
         CTMPATH.Storage &&
 
-        typeof CTMPATH.Storage.init === "function"
+        typeof CTMPATH.Storage.getSession ===
+
+            "function"
 
     ) {
 
 
-        CTMPATH.Storage.init();
+        CTMPATH.App.state =
+
+            CTMPATH.Storage.getSession()
+
+            || {};
 
 
 
@@ -247,11 +221,29 @@ CTMPATH.App.initializeFoundation = function () {
 
 
 
+};
+
+
+
+
+/* ==========================================================================
+   NAVIGATION START
+
+   Starts page routing system.
+
+   ========================================================================== */
+
+
+CTMPATH.App.startNavigation = function() {
+
+
     if (
 
         CTMPATH.Navigation &&
 
-        typeof CTMPATH.Navigation.init === "function"
+        typeof CTMPATH.Navigation.init ===
+
+            "function"
 
     ) {
 
@@ -270,93 +262,90 @@ CTMPATH.App.initializeFoundation = function () {
 
 
 /* ==========================================================================
-   GLOBAL LOADING STATE
+   APPLICATION READY EVENT
 
    ========================================================================== */
 
 
-CTMPATH.App.showLoader = function () {
+CTMPATH.App.ready = function() {
 
 
-    const loader = document.getElementById(
+    document.dispatchEvent(
 
-        "global-loader"
+        new CustomEvent(
 
-    );
+            "CTMPATH_APP_READY"
 
-
-
-    if (loader) {
-
-
-        loader.classList.remove(
-
-            "hidden"
-
-        );
-
-
-    }
-
-
-
-};
-
-
-
-
-CTMPATH.App.hideLoader = function () {
-
-
-    const loader = document.getElementById(
-
-        "global-loader"
+        )
 
     );
 
 
 
-    if (loader) {
-
-
-        loader.classList.add(
-
-            "hidden"
-
-        );
-
-
-    }
-
-
-
 };
-
 
 /* ==========================================================================
    CTM PATH™ Guided Journey™
 
    File        : app.js
-   Continuation: Batch 1B
+   Continuation: Batch 1C
 
    ========================================================================== */
 
 
 /* ==========================================================================
-   GLOBAL ERROR HANDLING
+   PAGE CHANGE HANDLER
 
-   Centralized frontend error capture.
-
-   Purpose:
-
-   • Prevent application crashes.
-   • Provide controlled user feedback.
-   • Preserve debugging information.
+   Receives navigation events.
 
    ========================================================================== */
 
 
-CTMPATH.App.handleError = function (error) {
+CTMPATH.App.onPageChange = function(pageNumber) {
+
+
+    CTMPATH.App.currentPage = pageNumber;
+
+
+
+    document.dispatchEvent(
+
+        new CustomEvent(
+
+            "CTMPATH_PAGE_LOADED",
+
+            {
+
+                detail:
+
+                {
+
+                    page: pageNumber
+
+                }
+
+            }
+
+        )
+
+    );
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   GLOBAL ERROR HANDLER
+
+   Application-level error capture.
+
+   ========================================================================== */
+
+
+CTMPATH.App.handleError = function(error) {
 
 
     console.error(
@@ -369,32 +358,58 @@ CTMPATH.App.handleError = function (error) {
 
 
 
-    CTMPATH.App.hideLoader();
+    document.dispatchEvent(
 
+        new CustomEvent(
 
+            "CTMPATH_APP_ERROR",
 
-    const container = document.getElementById(
+            {
 
-        "error-container"
+                detail:
+
+                {
+
+                    error: error
+
+                }
+
+            }
+
+        )
 
     );
 
 
 
-    if (container) {
-
-
-        container.textContent =
-
-            "Something went wrong while preparing your journey. Please try again.";
+};
 
 
 
-        container.classList.remove(
 
-            "hidden"
+/* ==========================================================================
+   APPLICATION RESET
 
-        );
+   Clears local journey state.
+
+   ========================================================================== */
+
+
+CTMPATH.App.reset = function() {
+
+
+    if (
+
+        CTMPATH.Storage &&
+
+        typeof CTMPATH.Storage.clearSession ===
+
+            "function"
+
+    ) {
+
+
+        CTMPATH.Storage.clearSession();
 
 
 
@@ -402,55 +417,9 @@ CTMPATH.App.handleError = function (error) {
 
 
 
-};
+    CTMPATH.App.state = {};
 
-
-
-
-/* ==========================================================================
-   APPLICATION HEALTH CHECK
-
-   Used internally to verify foundation readiness.
-
-   ========================================================================== */
-
-
-CTMPATH.App.healthCheck = function () {
-
-
-    return {
-
-
-        initialized:
-
-            CTMPATH.App.initialized,
-
-
-
-        version:
-
-            CTMPATH.App.version,
-
-
-
-        modules:
-
-            Object.keys(
-
-                CTMPATH.App.modules
-
-            ).filter(function(module){
-
-
-                return CTMPATH.App.modules[module] !== null;
-
-
-
-            })
-
-
-
-    };
+    CTMPATH.App.currentPage = null;
 
 
 
@@ -460,9 +429,9 @@ CTMPATH.App.healthCheck = function () {
 
 
 /* ==========================================================================
-   DOM READY HANDLER
+   DOM READY
 
-   Application entry trigger.
+   Application startup trigger.
 
    ========================================================================== */
 
@@ -471,10 +440,14 @@ document.addEventListener(
 
     "DOMContentLoaded",
 
-    function () {
+    function() {
 
 
         CTMPATH.App.init();
+
+
+
+        CTMPATH.App.ready();
 
 
 
@@ -482,84 +455,27 @@ document.addEventListener(
 
 );
 
-
-
 /* ==========================================================================
-   DEVELOPMENT DEBUG ACCESS
+   CTM PATH™ Guided Journey™
 
-   Provides controlled inspection during development.
-
-   Removed or restricted during final production deployment.
+   File        : app.js
+   Continuation: Batch 1D
 
    ========================================================================== */
 
 
-CTMPATH.App.debug = function () {
-
-
-    return {
-
-
-        app:
-
-            CTMPATH.App,
-
-
-
-        health:
-
-            CTMPATH.App.healthCheck()
-
-
-
-    };
-
-
-
-};
-
-
-
 /* ==========================================================================
-   APPLICATION READY EVENT
+   GET APPLICATION STATE
 
-   Other modules may listen for this event.
+   Provides current journey state.
 
    ========================================================================== */
 
 
-CTMPATH.App.dispatchReadyEvent = function () {
+CTMPATH.App.getState = function() {
 
 
-    const event = new CustomEvent(
-
-        "CTMPATH_READY",
-
-        {
-
-            detail: {
-
-
-                version:
-
-                    CTMPATH.App.version
-
-
-
-            }
-
-
-        }
-
-    );
-
-
-
-    document.dispatchEvent(
-
-        event
-
-    );
+    return CTMPATH.App.state;
 
 
 
@@ -569,40 +485,67 @@ CTMPATH.App.dispatchReadyEvent = function () {
 
 
 /* ==========================================================================
-   UPDATE INITIALIZATION FLOW
+   UPDATE APPLICATION STATE
 
-   Extend initialization completion.
+   Updates global temporary state.
+
+   Persistent storage handled separately
+   by storage.js.
 
    ========================================================================== */
 
 
-const originalInitialize = CTMPATH.App.init;
+CTMPATH.App.updateState = function(
+
+    key,
+
+    value
+
+) {
 
 
-
-CTMPATH.App.init = async function () {
-
-
-    await originalInitialize();
-
-
-
-    if (
-
-        CTMPATH.App.initialized
-
-    ) {
-
-
-        CTMPATH.App.dispatchReadyEvent();
-
-
-
-    }
+    CTMPATH.App.state[key] = value;
 
 
 
 };
+
+
+
+
+/* ==========================================================================
+   GET CURRENT PAGE
+
+   ========================================================================== */
+
+
+CTMPATH.App.getCurrentPage = function() {
+
+
+    return CTMPATH.App.currentPage;
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   VERSION INFORMATION
+
+   ========================================================================== */
+
+
+CTMPATH.App.getVersion = function() {
+
+
+    return CTMPATH.App.version;
+
+
+
+};
+
 
 
 
@@ -616,11 +559,7 @@ CTMPATH.App.init = async function () {
 
    Status:
 
-   FOUNDATION MODULE COMPLETE
+   APPLICATION CONTROLLER COMPLETE
 
-
-   Next:
-
-   js/api.js
 
    ========================================================================== */
