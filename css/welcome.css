@@ -1,54 +1,36 @@
 
-/*
-==============================================================================
- CTM PATH™ Guided Journey™
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
 
- File        : css/welcome.css
- Version     : 1.4
+   File        : css/welcome.css
+   Version     : 2.0
 
- Page:
- PAGE 01 — WELCOME™
+   Page        : PAGE 01 — WELCOME™
 
- Purpose:
- Welcome experience under global CTM PATH™ header.
+   Purpose:
+   Premium Welcome Page Experience
 
- Status:
- 🔒 GLOBAL HEADER ALIGNED
+   Dependencies:
+   theme.css
+   foundation.css
 
-==============================================================================
-*/
-
-
-
+   ========================================================================== */
 
 
 /* ==========================================================================
-   PAGE FOUNDATION
-========================================================================== */
+   PAGE CANVAS
+   ========================================================================== */
 
 
 .welcome-page {
 
+    min-height:100vh;
 
-    min-height:
+    background:#081C3A;
 
-        100vh;
+    display:flex;
 
-
-    background:
-
-        var(--ctm-background);
-
-
-    color:
-
-        var(--ctm-ivory);
-
-
-    padding:
-
-        50px 20px 90px;
-
+    flex-direction:column;
 
 }
 
@@ -56,31 +38,15 @@
 
 
 
+.welcome-main {
 
+    flex:1;
 
-.welcome-container {
+    display:flex;
 
-
-    max-width:
-
-        980px;
-
-
-    margin:
-
-        0 auto;
-
-
-    text-align:
-
-        center;
-
+    flex-direction:column;
 
 }
-
-
-
-
 
 
 
@@ -88,20 +54,40 @@
 
 /* ==========================================================================
    HERO SECTION
-========================================================================== */
+   ========================================================================== */
 
 
 .welcome-hero {
 
+    min-height:
+
+        calc(100vh - 160px);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
 
     padding:
 
-        25px 0 20px;
-
+        80px 0;
 
 }
 
 
+
+
+
+.welcome-hero-content {
+
+    max-width:900px;
+
+    margin:0 auto;
+
+}
 
 
 
@@ -109,35 +95,19 @@
 
 .welcome-eyebrow {
 
+    color:#14B8A6;
 
-    color:
+    font-size:14px;
 
-        var(--ctm-gold);
+    letter-spacing:3px;
 
+    text-transform:uppercase;
 
-    font-size:
+    font-weight:600;
 
-        12px;
-
-
-    letter-spacing:
-
-        5px;
-
-
-    text-transform:
-
-        uppercase;
-
-
-    margin-bottom:
-
-        30px;
-
+    margin-bottom:24px;
 
 }
-
-
 
 
 
@@ -145,43 +115,23 @@
 
 .welcome-title {
 
+    color:#F5F1E8;
 
-    color:
+    font-family:
 
-        var(--ctm-ivory);
-
+        var(--font-display);
 
     font-size:
 
-        clamp(
+        clamp(42px,5vw,64px);
 
-            42px,
+    line-height:1.2;
 
-            6vw,
+    font-weight:700;
 
-            64px
-
-        );
-
-
-    line-height:
-
-        1.35;
-
-
-    font-weight:
-
-        700;
-
-
-    margin:
-
-        0 auto 25px;
-
+    margin:0;
 
 }
-
-
 
 
 
@@ -189,38 +139,17 @@
 
 .welcome-subtitle {
 
+    margin-top:20px;
 
-    color:
-
-        var(--ctm-teal-light);
-
+    color:#C8A96A;
 
     font-size:
 
-        clamp(
+        clamp(22px,3vw,32px);
 
-            20px,
-
-            3vw,
-
-            26px
-
-        );
-
-
-    letter-spacing:
-
-        3px;
-
-
-    margin-bottom:
-
-        40px;
-
+    font-weight:600;
 
 }
-
-
 
 
 
@@ -228,90 +157,74 @@
 
 .welcome-description {
 
+    max-width:720px;
 
-    max-width:
+    margin:30px auto 0;
 
-        760px;
+    color:#B7C2D0;
 
+    font-size:18px;
 
-    margin:
-
-        auto;
-
-
-    color:
-
-        var(--ctm-text);
-
-
-    font-size:
-
-        18px;
-
-
-    line-height:
-
-        2;
-
+    line-height:1.8;
 
 }
-
-
-
-
-
-
-
-.welcome-description p {
-
-
-    margin:
-
-        18px 0;
-
-
-}
-
-
-
-
 
 
 
 
 
 /* ==========================================================================
-   PREMIUM DIVIDER
-========================================================================== */
+   LIFE TRANSFORMATION STATEMENT
+   ========================================================================== */
 
 
-.welcome-divider {
+.welcome-promise {
 
+    margin-top:60px;
 
-    color:
+    padding:40px;
 
-        var(--ctm-gold);
+    background:#0D223F;
 
+    border:
 
-    font-size:
+        1px solid
 
-        20px;
+        rgba(200,169,106,0.25);
 
-
-    letter-spacing:
-
-        6px;
-
-
-    margin:
-
-        60px auto;
-
+    border-radius:24px;
 
 }
 
 
 
+
+
+.promise-title {
+
+    color:#C8A96A;
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+
+
+
+
+.promise-text {
+
+    margin-top:12px;
+
+    color:#F5F1E8;
+
+    font-size:24px;
+
+    font-weight:600;
+
+}
 
 
 
@@ -320,20 +233,18 @@
 
 /* ==========================================================================
    DISCOVERY SECTION
-========================================================================== */
+   ========================================================================== */
 
 
 .discovery-section {
 
+    padding:
 
-    margin-top:
+        80px 0;
 
-        20px;
-
+    text-align:center;
 
 }
-
-
 
 
 
@@ -341,30 +252,15 @@
 
 .discovery-title {
 
+    color:#F5F1E8;
 
-    color:
+    font-size:32px;
 
-        var(--ctm-gold);
+    font-weight:700;
 
-
-    font-size:
-
-        26px;
-
-
-    line-height:
-
-        1.5;
-
-
-    margin-bottom:
-
-        45px;
-
+    margin-bottom:40px;
 
 }
-
-
 
 
 
@@ -372,89 +268,51 @@
 
 .discovery-grid {
 
-
-    display:
-
-        grid;
-
+    display:grid;
 
     grid-template-columns:
 
-        repeat(
+        repeat(4,1fr);
 
-            2,
-
-            1fr
-
-        );
-
-
-    gap:
-
-        30px;
-
+    gap:24px;
 
 }
 
 
 
-
-
-
-
-
-
-/* ==========================================================================
-   DISCOVERY CARDS
-========================================================================== */
 
 
 .discovery-card {
 
-
-    background:
-
-        var(--ctm-card);
-
+    background:#122B4A;
 
     border:
 
-        1px solid var(--ctm-border);
+        1px solid
 
+        rgba(200,169,106,0.25);
 
-    border-radius:
+    border-radius:24px;
 
-        22px;
+    padding:32px 24px;
 
+    min-height:220px;
 
-    padding:
+    display:flex;
 
-        38px 30px;
+    flex-direction:column;
 
+    align-items:center;
 
-    box-shadow:
+    justify-content:center;
 
-        0 25px 60px rgba(
-
-            0,
-
-            0,
-
-            0,
-
-            .30
-
-        );
-
+    text-align:center;
 
     transition:
 
-        all .35s ease;
-
+        0.35s ease;
 
 }
-
-
 
 
 
@@ -462,16 +320,11 @@
 
 .discovery-card:hover {
 
-
     transform:
 
         translateY(-8px);
 
-
-    border-color:
-
-        var(--ctm-gold);
-
+    border-color:#C8A96A;
 
 }
 
@@ -479,56 +332,27 @@
 
 
 
+.discovery-icon {
 
+    width:56px;
 
-.discovery-symbol {
+    height:56px;
 
+    border-radius:50%;
 
-    color:
+    display:flex;
 
-        var(--ctm-teal-light);
+    align-items:center;
 
+    justify-content:center;
 
-    font-size:
+    background:#0D223F;
 
-        42px;
+    color:#C8A96A;
 
+    font-size:24px;
 
-    margin-bottom:
-
-        20px;
-
-
-}
-
-
-
-
-
-
-
-.discovery-card h3 {
-
-
-    color:
-
-        var(--ctm-ivory);
-
-
-    font-size:
-
-        20px;
-
-
-    line-height:
-
-        1.6;
-
-
-    margin-bottom:
-
-        15px;
-
+    margin-bottom:20px;
 
 }
 
@@ -536,30 +360,29 @@
 
 
 
+.discovery-card-title {
 
+    color:#F5F1E8;
 
-.discovery-card p {
+    font-size:20px;
 
-
-    color:
-
-        var(--ctm-text);
-
-
-    font-size:
-
-        16px;
-
-
-    line-height:
-
-        1.8;
-
+    font-weight:700;
 
 }
 
 
 
+
+
+.discovery-card-text {
+
+    margin-top:10px;
+
+    color:#B7C2D0;
+
+    font-size:15px;
+
+}
 
 
 
@@ -568,139 +391,66 @@
 
 /* ==========================================================================
    CTA SECTION
-========================================================================== */
+   ========================================================================== */
 
 
-.welcome-action {
-
-
-    margin-top:
-
-        85px;
-
-
-}
-
-
-
-
-
-
-
-.welcome-action h2 {
-
-
-    color:
-
-        var(--ctm-ivory);
-
-
-    font-size:
-
-        30px;
-
-
-    line-height:
-
-        1.5;
-
-
-}
-
-
-
-
-
-
-
-.welcome-action p {
-
-
-    color:
-
-        var(--ctm-text);
-
-
-    margin:
-
-        20px 0 35px;
-
-
-}
-
-
-
-
-
-
-
-.welcome-button {
-
-
-    min-width:
-
-        320px;
-
+.welcome-cta-section {
 
     padding:
 
-        20px 55px;
+        80px 0;
 
+    text-align:center;
+
+}
+
+
+
+
+
+.begin-button {
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:
+
+        18px 48px;
+
+    border-radius:999px;
 
     background:
 
-        var(--ctm-teal);
+        linear-gradient(
 
+            135deg,
 
-    color:
+            #E3C98A,
 
-        #FFFFFF;
-
-
-    border:
-
-        none;
-
-
-    border-radius:
-
-        50px;
-
-
-    font-size:
-
-        18px;
-
-
-    font-weight:
-
-        700;
-
-
-    cursor:
-
-        pointer;
-
-
-    box-shadow:
-
-        0 15px 40px rgba(
-
-            20,
-
-            184,
-
-            166,
-
-            .25
+            #C8A96A
 
         );
 
+    color:#081C3A;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+    box-shadow:
+
+        0 15px 40px
+
+        rgba(200,169,106,.30);
 
     transition:
 
-        all .35s ease;
-
+        .35s ease;
 
 }
 
@@ -708,25 +458,19 @@
 
 
 
-
-
-.welcome-button:hover {
-
-
-    background:
-
-        var(--ctm-teal-light);
-
+.begin-button:hover {
 
     transform:
 
-        translateY(-5px);
+        translateY(-4px);
 
+    box-shadow:
+
+        0 20px 55px
+
+        rgba(200,169,106,.45);
 
 }
-
-
-
 
 
 
@@ -734,71 +478,95 @@
 
 
 /* ==========================================================================
-   MOBILE
-========================================================================== */
+   FOOTER SPACING SUPPORT
+   ========================================================================== */
+
+
+.welcome-footer-space {
+
+    padding-bottom:
+
+        40px;
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+
+@media(max-width:1024px){
+
+
+    .discovery-grid {
+
+        grid-template-columns:
+
+            repeat(2,1fr);
+
+    }
+
+
+}
+
+
+
 
 
 @media(max-width:768px){
 
 
-
-    .welcome-page {
-
+    .welcome-hero {
 
         padding:
 
-            35px 15px 60px;
-
-
-    }
-
-
-
-
-
-    .welcome-title {
-
-
-        font-size:
-
-            38px;
-
+            50px 0;
 
     }
 
 
+    .welcome-description {
 
+        font-size:16px;
+
+    }
+
+
+    .welcome-promise {
+
+        padding:28px;
+
+    }
+
+
+    .promise-text {
+
+        font-size:20px;
+
+    }
 
 
     .discovery-grid {
-
 
         grid-template-columns:
 
             1fr;
 
-
     }
 
 
-
-
-
-    .welcome-button {
-
+    .begin-button {
 
         width:
 
-            100%;
-
-
-        min-width:
-
-            auto;
-
+            90%;
 
     }
-
 
 
 }
