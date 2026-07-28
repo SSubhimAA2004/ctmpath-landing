@@ -3,145 +3,139 @@
    CTM PATH™ Guided Journey™
 
    File        : css/foundation.css
-   Version     : 2.0
+   Version     : 2.1
 
    Purpose:
-   Premium Application Layout Framework
+   Premium Application Shell Framework
 
-   Dependency:
-   css/theme.css
-
-   Used By:
-   • All 18 Journey Pages
-   • Global Components
-   • Assessment Engine UI
-   • Result Dashboards
+   Architecture:
+   Theme Layer
+        ↓
+   Foundation Layer
+        ↓
+   Components
+        ↓
+   Pages
 
    ========================================================================== */
-
 
 
 /* ==========================================================================
-   1. APPLICATION ROOT STRUCTURE
+   1. APPLICATION ROOT
    ========================================================================== */
+
+
+html {
+
+    width:100%;
+
+    min-height:100%;
+
+}
+
+
+body {
+
+    width:100%;
+
+    min-height:100vh;
+
+    margin:0;
+
+    background:#081C3A;
+
+}
 
 
 .app {
 
+    min-height:100vh;
 
-    width:
-        100%;
+    width:100%;
 
+    display:flex;
 
-    min-height:
-        100vh;
+    flex-direction:column;
 
-
-    display:
-        flex;
-
-
-    flex-direction:
-        column;
-
+    background:#081C3A;
 
 }
-
 
 
 
 .app-main {
 
+    flex:1;
 
-    flex:
-        1;
+    width:100%;
 
-
-    width:
-        100%;
-
+    background:#081C3A;
 
 }
 
 
 
+/* ==========================================================================
+   2. PAGE CANVAS
+   ========================================================================== */
 
 
 .page {
 
+    width:100%;
 
-    width:
-        100%;
+    min-height:100vh;
 
+    background:#081C3A;
 
-    min-height:
-        calc(100vh - 120px);
+    display:flex;
 
-
-    display:
-        flex;
-
-
-    flex-direction:
-        column;
-
+    flex-direction:column;
 
 }
 
+
+
+.page-content {
+
+    flex:1;
+
+}
 
 
 
 
 
 /* ==========================================================================
-   2. GLOBAL CONTAINERS
+   3. CONTAINER SYSTEM
    ========================================================================== */
 
 
 .container {
 
+    width:min(1200px,92%);
 
-    width:
-        min(1200px, 92%);
-
-
-    margin:
-        0 auto;
-
+    margin:0 auto;
 
 }
-
-
 
 
 
 .container-sm {
 
+    width:min(760px,92%);
 
-    width:
-        min(760px, 92%);
-
-
-    margin:
-        0 auto;
-
+    margin:0 auto;
 
 }
-
-
 
 
 
 .container-lg {
 
+    width:min(1440px,94%);
 
-    width:
-        min(1440px, 94%);
-
-
-    margin:
-        0 auto;
-
+    margin:0 auto;
 
 }
 
@@ -149,519 +143,345 @@
 
 
 
-
 /* ==========================================================================
-   3. SECTION SYSTEM
+   4. GLOBAL SECTION SYSTEM
    ========================================================================== */
 
 
 .section {
 
+    width:100%;
 
-    width:
-        100%;
+    padding:80px 0;
 
-
-    padding:
-
-        var(--space-xl)
-
-        0;
-
+    background:#081C3A;
 
 }
 
 
+
+.section-surface {
+
+    background:#0D223F;
+
+}
 
 
 
 .section-center {
 
+    display:flex;
 
-    display:
-        flex;
+    flex-direction:column;
 
+    align-items:center;
 
-    flex-direction:
-        column;
+    justify-content:center;
 
-
-    align-items:
-        center;
-
-
-    justify-content:
-        center;
-
-
-    text-align:
-        center;
-
+    text-align:center;
 
 }
-
-
-
-
-
-.section-hero {
-
-
-    min-height:
-
-        85vh;
-
-
-    display:
-        flex;
-
-
-    align-items:
-        center;
-
-
-    justify-content:
-        center;
-
-
-}
-
 
 
 
 
 
 /* ==========================================================================
-   4. FLEX LAYOUT SYSTEM
+   5. HEADER SUPPORT
+   ========================================================================== */
+
+
+.header-container {
+
+    width:min(1200px,92%);
+
+    margin:0 auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+
+.brand-mark {
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+.brand-identity {
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
+
+}
+
+
+
+
+
+/* ==========================================================================
+   6. FOOTER SUPPORT
+   ========================================================================== */
+
+
+.footer-container {
+
+    width:min(1200px,92%);
+
+    margin:0 auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+}
+
+
+
+
+
+/* ==========================================================================
+   7. FLEX UTILITIES
    ========================================================================== */
 
 
 .flex {
 
-
-    display:
-        flex;
-
+    display:flex;
 
 }
-
-
-
 
 
 .flex-column {
 
-
-    flex-direction:
-        column;
-
+    flex-direction:column;
 
 }
 
 
+.flex-center {
 
+    align-items:center;
 
-
-.flex-row {
-
-
-    flex-direction:
-        row;
-
+    justify-content:center;
 
 }
 
 
+.flex-between {
 
-
-
-.align-center {
-
-
-    align-items:
-        center;
-
+    justify-content:space-between;
 
 }
 
 
+.text-center {
 
-
-
-.justify-center {
-
-
-    justify-content:
-        center;
-
+    text-align:center;
 
 }
-
-
-
-
-
-.justify-between {
-
-
-    justify-content:
-        space-between;
-
-
-}
-
-
-
-
-
-.gap-xs {
-
-
-    gap:
-        var(--space-xs);
-
-
-}
-
-
-
-
-
-.gap-sm {
-
-
-    gap:
-        var(--space-sm);
-
-
-}
-
-
-
-
-
-.gap-md {
-
-
-    gap:
-        var(--space-md);
-
-
-}
-
-
-
-
-
-.gap-lg {
-
-
-    gap:
-        var(--space-lg);
-
-
-}
-
-
-
-
-
-.gap-xl {
-
-
-    gap:
-        var(--space-xl);
-
-
-}
-
 
 
 
 
 
 /* ==========================================================================
-   5. GRID SYSTEM
+   8. GRID SYSTEM
    ========================================================================== */
 
 
 .grid {
 
-
-    display:
-        grid;
-
+    display:grid;
 
 }
-
-
 
 
 
 .grid-2 {
 
+    grid-template-columns:repeat(2,1fr);
 
-    grid-template-columns:
-
-        repeat(2,1fr);
-
+    gap:32px;
 
 }
-
-
 
 
 
 .grid-3 {
 
+    grid-template-columns:repeat(3,1fr);
 
-    grid-template-columns:
-
-        repeat(3,1fr);
-
+    gap:32px;
 
 }
-
-
 
 
 
 .grid-4 {
 
+    grid-template-columns:repeat(4,1fr);
 
-    grid-template-columns:
-
-        repeat(4,1fr);
-
+    gap:24px;
 
 }
-
 
 
 
 
 
 /* ==========================================================================
-   6. WELCOME PAGE STRUCTURE
+   9. PREMIUM CARD FOUNDATION
    ========================================================================== */
 
 
-.hero-content {
+.surface-card {
 
+    background:#122B4A;
 
-    max-width:
+    border:
 
-        900px;
+        1px solid
 
+        rgba(200,169,106,0.25);
 
-    margin:
+    border-radius:24px;
 
-        0 auto;
-
-
-    text-align:
-
-        center;
-
+    padding:32px;
 
 }
 
 
 
+.glass-card {
 
+    background:
 
-.hero-title {
+        rgba(255,255,255,0.04);
 
+    backdrop-filter:
 
-    margin-bottom:
+        blur(14px);
 
-        var(--space-md);
+    border:
 
+        1px solid
 
-}
+        rgba(200,169,106,0.20);
 
-
-
-
-
-.hero-description {
-
-
-    max-width:
-
-        700px;
-
-
-    margin:
-
-        0 auto;
-
-
-    color:
-
-        var(--text-secondary);
-
+    border-radius:24px;
 
 }
-
 
 
 
 
 
 /* ==========================================================================
-   7. JOURNEY CARD SYSTEM
+   10. JOURNEY LAYOUT
    ========================================================================== */
+
+
+.journey-wrapper {
+
+    width:100%;
+
+    min-height:100vh;
+
+    background:#081C3A;
+
+}
+
+
+
+.journey-content {
+
+    max-width:900px;
+
+    margin:0 auto;
+
+    text-align:center;
+
+}
+
 
 
 .journey-grid {
 
-
-    display:
-
-        grid;
-
+    display:grid;
 
     grid-template-columns:
 
         repeat(4,1fr);
 
-
-    gap:
-
-        var(--space-md);
-
+    gap:24px;
 
 }
-
-
-
-
-
-.journey-card {
-
-
-    min-height:
-
-        220px;
-
-
-    display:
-
-        flex;
-
-
-    flex-direction:
-
-        column;
-
-
-    justify-content:
-
-        center;
-
-
-    align-items:
-
-        center;
-
-
-    text-align:
-
-        center;
-
-
-}
-
 
 
 
 
 
 /* ==========================================================================
-   8. ASSESSMENT LAYOUT FOUNDATION
+   11. ASSESSMENT FOUNDATION
    ========================================================================== */
 
 
-.assessment-layout {
+.assessment-container {
 
+    width:min(900px,92%);
 
-    width:
-
-        100%;
-
-
-    max-width:
-
-        900px;
-
-
-    margin:
-
-        0 auto;
-
+    margin:0 auto;
 
 }
-
-
 
 
 
 .question-stack {
 
+    display:flex;
 
-    display:
+    flex-direction:column;
 
-        flex;
-
-
-    flex-direction:
-
-        column;
-
-
-    gap:
-
-        var(--space-md);
-
+    gap:24px;
 
 }
 
 
 
+.rating-scale {
 
-
-.question-card {
-
-
-    width:
-
-        100%;
-
-
-}
-
-
-
-
-
-.rating-group {
-
-
-    display:
-
-        grid;
-
+    display:grid;
 
     grid-template-columns:
 
         repeat(10,1fr);
 
-
-    gap:
-
-        10px;
-
+    gap:10px;
 
 }
 
@@ -669,239 +489,92 @@
 
 
 
-
 /* ==========================================================================
-   9. DASHBOARD LAYOUT FOUNDATION
+   12. RESULT DASHBOARD FOUNDATION
    ========================================================================== */
+
+
+.dashboard-layout {
+
+    width:min(1200px,92%);
+
+    margin:0 auto;
+
+}
+
 
 
 .dashboard-grid {
 
-
-    display:
-
-        grid;
-
+    display:grid;
 
     grid-template-columns:
 
         repeat(3,1fr);
 
-
-    gap:
-
-        var(--space-lg);
-
+    gap:32px;
 
 }
 
 
 
+.chart-container {
 
+    display:flex;
 
-.dashboard-center {
+    justify-content:center;
 
-
-    display:
-
-        flex;
-
-
-    justify-content:
-
-        center;
-
-
-    align-items:
-
-        center;
-
+    align-items:center;
 
 }
-
-
-
-
-
-.kalachakra-container {
-
-
-    width:
-
-        min(500px,90vw);
-
-
-    margin:
-
-        0 auto;
-
-
-}
-
 
 
 
 
 
 /* ==========================================================================
-   10. FORM LAYOUT FOUNDATION
+   13. FORM FOUNDATION
    ========================================================================== */
 
 
-.form-layout {
+.form-container {
 
+    width:min(600px,92%);
 
-    max-width:
-
-        600px;
-
-
-    margin:
-
-        0 auto;
-
+    margin:0 auto;
 
 }
-
-
 
 
 
 .form-group {
 
+    display:flex;
 
-    display:
+    flex-direction:column;
 
-        flex;
-
-
-    flex-direction:
-
-        column;
-
-
-    gap:
-
-        8px;
-
+    gap:8px;
 
 }
-
-
 
 
 
 .form-actions {
 
+    display:flex;
 
-    display:
+    justify-content:center;
 
-        flex;
-
-
-    justify-content:
-
-        center;
-
-
-    gap:
-
-        var(--space-md);
-
-
-    margin-top:
-
-        var(--space-lg);
-
+    gap:20px;
 
 }
-
 
 
 
 
 
 /* ==========================================================================
-   11. FOOTER FOUNDATION
-   ========================================================================== */
-
-
-.footer-layout {
-
-
-    width:
-
-        100%;
-
-
-    display:
-
-        flex;
-
-
-    flex-direction:
-
-        column;
-
-
-    align-items:
-
-        center;
-
-
-    justify-content:
-
-        center;
-
-
-    text-align:
-
-        center;
-
-
-}
-
-
-
-
-
-
-/* ==========================================================================
-   12. VISIBILITY UTILITIES
-   ========================================================================== */
-
-
-.hidden {
-
-
-    display:
-
-        none !important;
-
-
-}
-
-
-
-
-
-.visible {
-
-
-    display:
-
-        block;
-
-
-}
-
-
-
-
-
-
-/* ==========================================================================
-   13. RESPONSIVE GRID
+   14. RESPONSIVE SYSTEM
    ========================================================================== */
 
 
@@ -910,92 +583,64 @@
 
     .grid-4 {
 
-
         grid-template-columns:
 
             repeat(2,1fr);
-
 
     }
 
 
     .journey-grid {
 
-
         grid-template-columns:
 
             repeat(2,1fr);
-
 
     }
 
 
 }
-
-
 
 
 
 @media(max-width:768px){
 
 
-    .flex-row {
+    .section {
 
-
-        flex-direction:
-
-            column;
-
+        padding:50px 0;
 
     }
-
 
 
     .grid-2,
     .grid-3,
     .grid-4 {
 
-
         grid-template-columns:
 
             1fr;
-
 
     }
 
 
     .journey-grid {
 
-
         grid-template-columns:
 
             1fr;
 
-
     }
 
 
-    .rating-group {
-
+    .rating-scale {
 
         grid-template-columns:
 
             repeat(5,1fr);
 
-
     }
 
 
 }
-
-
-
-
-
-/* ==========================================================================
-   END OF FILE
-
-   CTM PATH™ Application Layout Framework v2.0
-
-   ========================================================================== */
 
