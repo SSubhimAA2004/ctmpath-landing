@@ -1,882 +1,639 @@
 
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
+/*
+========================================================
 
-   File        : pillars.js
-   Version     : 1.0
-   Status      : DEVELOPMENT
-   Stage       : STAGE 0 — FOUNDATION
+CTM PATH™ GUIDED JOURNEY™
+DATA LAYER
 
-   Purpose     :
-   Frontend pillar definition data.
+File:
+data/pillars.js
 
-   Responsibilities:
+Purpose:
+Central pillar metadata database for the
+CTM PATH™ Life Assessment Engine™
 
-   • Store pillar display information.
-   • Maintain pillar ordering.
-   • Provide UI metadata.
-   • Support assessment page rendering.
+Ownership:
+- Pillar names
+- Pillar descriptions
+- Icons
+- Display information
+- Journey presentation data
 
-   Does NOT:
+Rules:
+- Questions belong only in questions.js
+- Scoring belongs only in scoring.js
+- Diagnosis and prescription belong to backend
 
-   • Calculate pillar scores.
-   • Evaluate user responses.
-   • Generate diagnosis.
-   • Generate recommendations.
+Assessment Structure:
 
-   Backend Ownership:
+12 Pillars™
 
-   • Pillar calculations
-   • KALA CHAKRA™ engine
-   • Diagnosis engine
-   • Prescription engine
+========================================================
+*/
 
-   ========================================================================== */
 
+/*
+========================================================
+NAMESPACE
+========================================================
+*/
 
-/* ==========================================================================
-   GLOBAL NAMESPACE
-   ========================================================================== */
+const CTM_PILLARS = {
 
 
-window.CTMPATH = window.CTMPATH || {};
+/*
+========================================================
+METADATA
+========================================================
+*/
 
+version: "1.0",
 
+totalPillars: 12,
 
-/* ==========================================================================
-   PILLAR DATA
 
-   Locked 12 Life Pillars
+/*
+========================================================
+PILLAR DATABASE
+========================================================
+*/
 
-   ========================================================================== */
+pillars: [
 
 
-CTMPATH.Pillars = [
+/*
+========================================================
+PILLAR 01
 
+PURPOSE™
 
-    {
+========================================================
+*/
 
+{
+    id: "PURPOSE",
 
-        id:
+    number: 1,
 
-            "purpose",
+    name: "Purpose™",
 
+    tamilName:
+    "வாழ்க்கை நோக்கம்™",
 
+    shortDescription:
+    "Discover your direction, meaning and inner calling.",
 
-        number:
+    tamilDescription:
+    "உங்கள் வாழ்க்கையின் திசை, அர்த்தம் மற்றும் உள்ளார்ந்த அழைப்பை கண்டறிதல்.",
 
-            1,
+    icon:
+    "compass",
 
+    colorTheme:
+    "purpose",
 
+    displayOrder: 1
+},
 
-        title:
 
-            "Purpose™",
+/*
+========================================================
+PILLAR 02
 
+HEALTH™
 
+========================================================
+*/
 
-        subtitle:
+{
+    id: "HEALTH",
 
-            "Direction & Meaning",
+    number: 2,
 
+    name: "Health™",
 
+    tamilName:
+    "ஆரோக்கியம்™",
 
-        description:
+    shortDescription:
+    "Build physical vitality and lifelong well-being.",
 
-            "Understanding your deeper direction, values and life purpose.",
+    tamilDescription:
+    "உடல் சக்தி மற்றும் நீண்டகால நலனை உருவாக்குதல்.",
 
+    icon:
+    "heart",
 
+    colorTheme:
+    "health",
 
-        assessmentPage:
+    displayOrder: 2
+},
 
-            3
 
+/*
+========================================================
+PILLAR 03
 
+RELATIONSHIPS™
 
-    },
+========================================================
+*/
 
+{
+    id: "RELATIONSHIPS",
 
+    number: 3,
 
-    {
+    name: "Relationships™",
 
+    tamilName:
+    "உறவுகள்™",
 
-        id:
+    shortDescription:
+    "Create meaningful connections and supportive relationships.",
 
-            "vitality",
+    tamilDescription:
+    "அர்த்தமுள்ள இணைப்புகள் மற்றும் ஆதரவான உறவுகளை உருவாக்குதல்.",
 
+    icon:
+    "users",
 
+    colorTheme:
+    "relationships",
 
-        number:
+    displayOrder: 3
+}
 
-            2,
 
+/*
+========================================================
+END OF BATCH 1A
 
+Completed:
+✅ Namespace
+✅ Metadata
+✅ Purpose™
+✅ Health™
+✅ Relationships™
 
-        title:
+Next:
+PILLAR 04 — Character & Integrity™
 
-            "Vitality™",
+========================================================
+*/
 
+   /*
+========================================================
 
+CTM PATH™ GUIDED JOURNEY™
+DATA LAYER
 
-        subtitle:
+Continuation:
+data/pillars.js
 
-            "Health & Energy",
+Batch:
+1B
 
+Current Section:
+PILLAR 04 — CHARACTER & INTEGRITY™
 
+========================================================
+*/
 
-        description:
 
-            "Exploring physical wellbeing, energy and personal vitality.",
+/*
+========================================================
+PILLAR 04
 
+CHARACTER & INTEGRITY™
 
+========================================================
+*/
 
-        assessmentPage:
+{
+    id: "CHARACTER",
 
-            4
+    number: 4,
 
+    name: "Character & Integrity™",
 
+    tamilName:
+    "குணநலம் மற்றும் நேர்மை™",
 
-    },
+    shortDescription:
+    "Strengthen values, honesty and self-leadership.",
 
+    tamilDescription:
+    "மதிப்புகள், நேர்மை மற்றும் சுய தலைமைத்துவத்தை வலுப்படுத்துதல்.",
 
+    icon:
+    "shield",
 
-    {
+    colorTheme:
+    "character",
 
+    displayOrder: 4
+},
 
-        id:
 
-            "relationships",
+/*
+========================================================
+PILLAR 05
 
+LEARNING & MASTERY™
 
+========================================================
+*/
 
-        number:
+{
+    id: "LEARNING",
 
-            3,
+    number: 5,
 
+    name: "Learning & Mastery™",
 
+    tamilName:
+    "கற்றல் மற்றும் திறமை மேம்பாடு™",
 
-        title:
+    shortDescription:
+    "Develop continuous learning and personal excellence.",
 
-            "Love & Relationships™",
+    tamilDescription:
+    "தொடர்ச்சியான கற்றல் மற்றும் தனிப்பட்ட மேன்மையை வளர்த்தல்.",
 
+    icon:
+    "book",
 
+    colorTheme:
+    "learning",
 
-        subtitle:
+    displayOrder: 5
+},
 
-            "Connection & Belonging",
 
+/*
+========================================================
+PILLAR 06
 
+CAREER & CONTRIBUTION™
 
-        description:
+========================================================
+*/
 
-            "Understanding the quality of meaningful relationships.",
+{
+    id: "CAREER",
 
+    number: 6,
 
+    name: "Career & Contribution™",
 
-        assessmentPage:
+    tamilName:
+    "தொழில் மற்றும் பங்களிப்பு™",
 
-            5
+    shortDescription:
+    "Create excellence, meaningful work and impact.",
 
+    tamilDescription:
+    "சிறப்பு, அர்த்தமுள்ள வேலை மற்றும் தாக்கத்தை உருவாக்குதல்.",
 
+    icon:
+    "briefcase",
 
-    },
+    colorTheme:
+    "career",
 
+    displayOrder: 6
+},
 
 
-    {
+/*
+========================================================
+PILLAR 07
 
+FINANCIAL FREEDOM™
 
-        id:
+========================================================
+*/
 
-            "character",
+{
+    id: "FINANCIAL",
 
+    number: 7,
 
+    name: "Financial Freedom™",
 
-        number:
+    tamilName:
+    "நிதி சுதந்திரம்™",
 
-            4,
+    shortDescription:
+    "Build financial stability, security and abundance.",
 
+    tamilDescription:
+    "நிதி நிலைத்தன்மை, பாதுகாப்பு மற்றும் வளத்தை உருவாக்குதல்.",
 
+    icon:
+    "wallet",
 
-        title:
+    colorTheme:
+    "financial",
 
-            "Character & Integrity™",
+    displayOrder: 7
+}
 
 
+/*
+========================================================
+END OF BATCH 1B
 
-        subtitle:
+Completed:
+✅ Purpose™
+✅ Health™
+✅ Relationships™
+✅ Character & Integrity™
+✅ Learning & Mastery™
+✅ Career & Contribution™
+✅ Financial Freedom™
 
-            "Values & Trust",
+Next:
+PILLAR 08 — Time Freedom™
+PILLAR 09 — Tribe™
 
+========================================================
+*/
 
+/*
+========================================================
 
-        description:
+CTM PATH™ GUIDED JOURNEY™
+DATA LAYER
 
-            "Exploring personal values, honesty and inner alignment.",
+Continuation:
+data/pillars.js
 
+Batch:
+1C
 
+Current Section:
+PILLAR 08 — TIME FREEDOM™
+PILLAR 09 — TRIBE™
 
-        assessmentPage:
+========================================================
+*/
 
-            6
 
+/*
+========================================================
+PILLAR 08
 
+TIME FREEDOM™
 
-    }
+========================================================
+*/
 
+{
+    id: "TIME",
 
+    number: 8,
 
-];
+    name: "Time Freedom™",
 
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
+    tamilName:
+    "நேர சுதந்திரம்™",
 
-   File        : pillars.js
-   Continuation: Batch 1B
+    shortDescription:
+    "Design your time around priorities, balance and freedom.",
 
-   ========================================================================== */
+    tamilDescription:
+    "முன்னுரிமைகள், சமநிலை மற்றும் சுதந்திரத்திற்கு ஏற்ப உங்கள் நேரத்தை வடிவமைத்தல்.",
 
+    icon:
+    "clock",
 
+    colorTheme:
+    "time",
 
-/* ==========================================================================
-   CONTINUED PILLAR DATA
+    displayOrder: 8
+},
 
-   ========================================================================== */
 
+/*
+========================================================
+PILLAR 09
 
-CTMPATH.Pillars.push(
+TRIBE™
 
+========================================================
+*/
 
-    {
+{
+    id: "TRIBE",
 
+    number: 9,
 
-        id:
+    name: "Tribe™",
 
-            "financialFreedom",
+    tamilName:
+    "உங்கள் மக்கள் வட்டம்™",
 
+    shortDescription:
+    "Create a supportive community and meaningful connections.",
 
+    tamilDescription:
+    "ஆதரவான சமூகத்தையும் அர்த்தமுள்ள மனித இணைப்புகளையும் உருவாக்குதல்.",
 
-        number:
+    icon:
+    "community",
 
-            5,
+    colorTheme:
+    "tribe",
 
+    displayOrder: 9
+},
 
 
-        title:
+/*
+========================================================
+PILLAR 10
 
-            "Financial Freedom™",
+AUTOMATION™
 
+========================================================
+*/
 
+{
+    id: "AUTOMATION",
 
-        subtitle:
+    number: 10,
 
-            "Security & Abundance",
+    name: "Automation™",
 
+    tamilName:
+    "அமைப்புகள் மற்றும் தானியக்கம்™",
 
+    shortDescription:
+    "Create systems that improve efficiency and multiply results.",
 
-        description:
+    tamilDescription:
+    "திறனை உயர்த்தும் மற்றும் முடிவுகளை பெருக்கும் அமைப்புகளை உருவாக்குதல்.",
 
-            "Exploring financial stability, responsibility and wealth mindset.",
+    icon:
+    "system",
 
+    colorTheme:
+    "automation",
 
+    displayOrder: 10
+}
 
-        assessmentPage:
 
-            7
+/*
+========================================================
+END OF BATCH 1C
 
+Completed:
+✅ Purpose™
+✅ Health™
+✅ Relationships™
+✅ Character & Integrity™
+✅ Learning & Mastery™
+✅ Career & Contribution™
+✅ Financial Freedom™
+✅ Time Freedom™
+✅ Tribe™
+✅ Automation™
 
+Next:
+PILLAR 11 — Contribution™
+PILLAR 12 — Vision™
 
-    },
+========================================================
+*/
 
+/*
+========================================================
 
+CTM PATH™ GUIDED JOURNEY™
+DATA LAYER
 
-    {
+Continuation:
+data/pillars.js
 
+Batch:
+1D
 
-        id:
+Current Section:
+PILLAR 11 — CONTRIBUTION™
+PILLAR 12 — VISION™
 
-            "innerPeace",
+========================================================
+*/
 
 
+/*
+========================================================
+PILLAR 11
 
-        number:
+CONTRIBUTION™
 
-            6,
+========================================================
+*/
 
+{
+    id: "CONTRIBUTION",
 
+    number: 11,
 
-        title:
+    name: "Contribution™",
 
-            "Inner Peace™",
+    tamilName:
+    "பங்களிப்பு மற்றும் மரபு™",
 
+    shortDescription:
+    "Create meaningful service, impact and lasting legacy.",
 
+    tamilDescription:
+    "அர்த்தமுள்ள சேவை, தாக்கம் மற்றும் நிலையான மரபை உருவாக்குதல்.",
 
-        subtitle:
+    icon:
+    "gift",
 
-            "Mind & Emotional Well-Being",
+    colorTheme:
+    "contribution",
 
+    displayOrder: 11
+},
 
 
-        description:
+/*
+========================================================
+PILLAR 12
 
-            "Understanding emotional balance, awareness and inner calm.",
+VISION™
 
+========================================================
+*/
 
+{
+    id: "VISION",
 
-        assessmentPage:
+    number: 12,
 
-            8
+    name: "Vision™",
 
+    tamilName:
+    "எதிர்கால பார்வை™",
 
+    shortDescription:
+    "Define your dreams, possibilities and desired future.",
 
-    },
+    tamilDescription:
+    "உங்கள் கனவுகள், வாய்ப்புகள் மற்றும் விரும்பும் எதிர்காலத்தை தெளிவுபடுத்துதல்.",
 
+    icon:
+    "eye",
 
+    colorTheme:
+    "vision",
 
-    {
+    displayOrder: 12
+}
 
 
-        id:
-
-            "growthMastery",
-
-
-
-        number:
-
-            7,
-
-
-
-        title:
-
-            "Growth & Mastery™",
-
-
-
-        subtitle:
-
-            "Learning & Evolution",
-
-
-
-        description:
-
-            "Exploring continuous growth, learning and personal development.",
-
-
-
-        assessmentPage:
-
-            9
-
-
-
-    },
-
-
-
-    {
-
-
-        id:
-
-            "disciplineHabits",
-
-
-
-        number:
-
-            8,
-
-
-
-        title:
-
-            "Discipline & Habits™",
-
-
-
-        subtitle:
-
-            "Consistency & Execution",
-
-
-
-        description:
-
-            "Understanding routines, discipline and daily practices.",
-
-
-
-        assessmentPage:
-
-            10
-
-
-
-    }
-
-
-
-);
-
-
-
-
-/* ==========================================================================
-   END OF BATCH 1B
-
-   Next:
-
-   Batch 1C
-
-   ========================================================================== */
-
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
-
-   File        : pillars.js
-   Continuation: Batch 1C
-
-   ========================================================================== */
-
-
-/* ==========================================================================
-   CONTINUED PILLAR DATA
-
-   ========================================================================== */
-
-
-CTMPATH.Pillars.push(
-
-
-    {
-
-
-        id:
-
-            "gratitudePresence",
-
-
-
-        number:
-
-            9,
-
-
-
-        title:
-
-            "Gratitude & Presence™",
-
-
-
-        subtitle:
-
-            "Awareness & Appreciation",
-
-
-
-        description:
-
-            "Exploring mindfulness, gratitude and the ability to live fully in the present moment.",
-
-
-
-        assessmentPage:
-
-            11
-
-
-
-    },
-
-
-
-    {
-
-
-        id:
-
-            "contributionService",
-
-
-
-        number:
-
-            10,
-
-
-
-        title:
-
-            "Contribution & Service™",
-
-
-
-        subtitle:
-
-            "Impact & Giving",
-
-
-
-        description:
-
-            "Understanding personal contribution, service and positive impact.",
-
-
-
-        assessmentPage:
-
-            12
-
-
-
-    },
-
-
-
-    {
-
-
-        id:
-
-            "spiritAlignment",
-
-
-
-        number:
-
-            11,
-
-
-
-        title:
-
-            "Spirit & Alignment™",
-
-
-
-        subtitle:
-
-            "Inner Connection",
-
-
-
-        description:
-
-            "Exploring alignment between inner values, beliefs and life actions.",
-
-
-
-        assessmentPage:
-
-            13
-
-
-
-    },
-
-
-
-    {
-
-
-        id:
-
-            "legacyVision",
-
-
-
-        number:
-
-            12,
-
-
-
-        title:
-
-            "Legacy & Vision™",
-
-
-
-        subtitle:
-
-            "Future & Purposeful Impact",
-
-
-
-        description:
-
-            "Understanding long-term vision, legacy and the life impact you desire to create.",
-
-
-
-        assessmentPage:
-
-            14
-
-
-
-    }
-
-
-
-);
-
-
-
-
-/* ==========================================================================
-   PILLAR HELPERS
-
-   Frontend display utilities only.
-
-   ========================================================================== */
-
-
-/**
- * Get all pillars.
- *
- * @returns {Array}
- */
-
-CTMPATH.getPillars = function() {
-
-
-    return CTMPATH.Pillars;
-
-
+]
 
 };
 
 
+/*
+========================================================
 
+PILLAR DATABASE COMPLETE
 
-/**
- * Get pillar by identifier.
- *
- * @param {String} id
- *
- * @returns {Object|null}
- */
+Total Structure:
 
+12 Pillars™
 
-CTMPATH.getPillarById = function(id) {
+Completed:
 
+✅ Purpose™
+✅ Health™
+✅ Relationships™
+✅ Character & Integrity™
+✅ Learning & Mastery™
+✅ Career & Contribution™
+✅ Financial Freedom™
+✅ Time Freedom™
+✅ Tribe™
+✅ Automation™
+✅ Contribution™
+✅ Vision™
 
-    return CTMPATH.Pillars.find(function(pillar) {
+Global Access:
 
+CTM_PILLARS.pillars
 
-        return pillar.id === id;
 
-
-
-    }) || null;
-
-
-
-};
-
-
-
-
-/**
- * Get pillar by assessment page.
- *
- * @param {Number} page
- *
- * @returns {Object|null}
- */
-
-
-CTMPATH.getPillarByPage = function(page) {
-
-
-    return CTMPATH.Pillars.find(function(pillar) {
-
-
-        return pillar.assessmentPage === page;
-
-
-
-    }) || null;
-
-
-
-};
-
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
-
-   File        : pillars.js
-   Continuation: Batch 1D
-
-   ========================================================================== */
-
-
-/* ==========================================================================
-   PILLAR COLLECTION STATUS
-
-   Internal frontend data diagnostic.
-
-   ========================================================================== */
-
-
-/**
- * Returns pillar collection information.
- *
- * Presentation data only.
- *
- * @returns {Object}
- */
-
-
-CTMPATH.getPillarStatus = function() {
-
-
-    return {
-
-
-        total:
-
-            CTMPATH.Pillars.length,
-
-
-
-        pillars:
-
-            CTMPATH.Pillars.map(function(pillar) {
-
-
-                return {
-
-
-                    id:
-
-                        pillar.id,
-
-
-
-                    title:
-
-                        pillar.title
-
-
-
-                };
-
-
-            })
-
-
-
-    };
-
-
-};
-
-
-
-
-/* ==========================================================================
-   ASSESSMENT ORDER VALIDATION
-
-   Frontend consistency check.
-
-   Does NOT validate backend scoring.
-
-   ========================================================================== */
-
-
-/**
- * Checks that all assessment pages exist.
- *
- * @returns {Boolean}
- */
-
-
-CTMPATH.validatePillarSequence = function() {
-
-
-    return CTMPATH.Pillars.every(function(pillar) {
-
-
-        return Boolean(
-
-            pillar.assessmentPage
-
-        );
-
-
-
-    });
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   EXPORT READY EVENT
-
-   Allows dependent frontend modules to access pillar data.
-
-   ========================================================================== */
-
-
-document.dispatchEvent(
-
-    new CustomEvent(
-
-        "CTMPATH_PILLARS_READY",
-
-        {
-
-
-            detail:
-
-                {
-
-
-                    count:
-
-                        CTMPATH.Pillars.length
-
-
-
-                }
-
-
-
-        }
-
-    )
-
-);
-
-
-
-
-/* ==========================================================================
-   END OF FILE
-
-   File:
-
-   data/pillars.js
-
-
-   Status:
-
-   FOUNDATION MODULE COMPLETE
-
-
-   Next:
-
-   data/questions.js
-
-   ========================================================================== */
+========================================================
+*/
 
