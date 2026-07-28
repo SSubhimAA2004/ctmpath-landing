@@ -1,96 +1,88 @@
 
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
+/*
+===============================================================================
 
+   CTM PATH™ Guided Journey™
    File        : css/foundation.css
-   Version     : 2.1
+   Version     : 2.2
+   Status      : Premium Global Layout Foundation
 
    Purpose:
-   Premium Application Shell Framework
+   Core structural CSS used across all 18 journey pages.
 
-   Architecture:
-   Theme Layer
-        ↓
-   Foundation Layer
-        ↓
-   Components
-        ↓
-   Pages
+   Responsibilities:
+   • Global page layout
+   • Section spacing
+   • Alignment system
+   • Typography foundation
+   • Responsive behaviour
+   • Premium brand consistency
 
-   ========================================================================== */
+===============================================================================
+*/
 
 
 /* ==========================================================================
-   1. APPLICATION ROOT
-   ========================================================================== */
+   1. GLOBAL PAGE FOUNDATION
+========================================================================== */
 
 
-html {
+html,
+body {
 
-    width:100%;
+    width:
+    100%;
 
-    min-height:100%;
+    overflow-x:
+    hidden;
 
 }
 
 
 body {
 
-    width:100%;
-
-    min-height:100vh;
-
-    margin:0;
-
-    background:#081C3A;
-
-}
-
-
-.app {
-
-    min-height:100vh;
-
-    width:100%;
-
-    display:flex;
-
-    flex-direction:column;
-
-    background:#081C3A;
+    background:
+    var(--ctm-bg-primary);
 
 }
 
 
 
-.app-main {
+/* Main application wrapper */
 
-    flex:1;
+#app {
 
-    width:100%;
+    min-height:
+    100vh;
 
-    background:#081C3A;
+    display:
+    flex;
+
+    flex-direction:
+    column;
 
 }
 
 
 
 /* ==========================================================================
-   2. PAGE CANVAS
-   ========================================================================== */
+   2. PAGE STRUCTURE
+========================================================================== */
 
 
 .page {
 
-    width:100%;
+    width:
+    100%;
 
-    min-height:100vh;
+    min-height:
+    100vh;
 
-    background:#081C3A;
+    display:
+    flex;
 
-    display:flex;
-
-    flex-direction:column;
+    flex-direction:
+    column;
 
 }
 
@@ -98,225 +90,162 @@ body {
 
 .page-content {
 
-    flex:1;
+    flex:
+    1;
 
 }
 
 
 
-
-
 /* ==========================================================================
-   3. CONTAINER SYSTEM
-   ========================================================================== */
+   3. GLOBAL CONTAINER SYSTEM
+========================================================================== */
 
 
 .container {
 
-    width:min(1200px,92%);
+    width:
+    min(1200px, 90%);
 
-    margin:0 auto;
-
-}
-
-
-
-.container-sm {
-
-    width:min(760px,92%);
-
-    margin:0 auto;
+    margin:
+    0 auto;
 
 }
 
 
 
-.container-lg {
+.container-narrow {
 
-    width:min(1440px,94%);
+    width:
+    min(900px, 90%);
 
-    margin:0 auto;
+    margin:
+    0 auto;
 
 }
 
 
+
+.container-wide {
+
+    width:
+    min(1400px, 94%);
+
+    margin:
+    0 auto;
+
+}
 
 
 
 /* ==========================================================================
-   4. GLOBAL SECTION SYSTEM
-   ========================================================================== */
+   4. SECTION SYSTEM
+========================================================================== */
 
 
 .section {
 
-    width:100%;
+    width:
+    100%;
 
-    padding:80px 0;
-
-    background:#081C3A;
-
-}
-
-
-
-.section-surface {
-
-    background:#0D223F;
+    padding:
+    var(--space-xl) 0;
 
 }
 
 
 
-.section-center {
+.section-sm {
 
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
+    padding:
+    var(--space-lg) 0;
 
 }
 
 
+
+.section-lg {
+
+    padding:
+    var(--space-xxl) 0;
+
+}
+
+
+
+/* Premium section rhythm */
+
+.section + .section {
+
+    padding-top:
+    var(--space-lg);
+
+}
 
 
 
 /* ==========================================================================
-   5. HEADER SUPPORT
-   ========================================================================== */
-
-
-.header-container {
-
-    width:min(1200px,92%);
-
-    margin:0 auto;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-}
-
-
-
-.brand-mark {
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-
-
-
-.brand-identity {
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    text-align:center;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   6. FOOTER SUPPORT
-   ========================================================================== */
-
-
-.footer-container {
-
-    width:min(1200px,92%);
-
-    margin:0 auto;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   7. FLEX UTILITIES
-   ========================================================================== */
+   5. FLEX ALIGNMENT SYSTEM
+========================================================================== */
 
 
 .flex {
 
-    display:flex;
+    display:
+    flex;
 
 }
 
-
-.flex-column {
-
-    flex-direction:column;
-
-}
 
 
 .flex-center {
 
-    align-items:center;
+    display:
+    flex;
 
-    justify-content:center;
+    align-items:
+    center;
+
+    justify-content:
+    center;
 
 }
+
 
 
 .flex-between {
 
-    justify-content:space-between;
+    display:
+    flex;
+
+    align-items:
+    center;
+
+    justify-content:
+    space-between;
 
 }
 
 
-.text-center {
 
-    text-align:center;
+.flex-column {
+
+    flex-direction:
+    column;
 
 }
-
-
 
 
 
 /* ==========================================================================
-   8. GRID SYSTEM
-   ========================================================================== */
+   6. GRID SYSTEM
+========================================================================== */
 
 
 .grid {
 
-    display:grid;
+    display:
+    grid;
 
 }
 
@@ -324,9 +253,11 @@ body {
 
 .grid-2 {
 
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:
+    repeat(2, 1fr);
 
-    gap:32px;
+    gap:
+    var(--space-lg);
 
 }
 
@@ -334,9 +265,11 @@ body {
 
 .grid-3 {
 
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:
+    repeat(3, 1fr);
 
-    gap:32px;
+    gap:
+    var(--space-lg);
 
 }
 
@@ -344,238 +277,271 @@ body {
 
 .grid-4 {
 
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:
+    repeat(4, 1fr);
 
-    gap:24px;
+    gap:
+    var(--space-md);
 
 }
-
-
 
 
 
 /* ==========================================================================
-   9. PREMIUM CARD FOUNDATION
-   ========================================================================== */
+   7. TYPOGRAPHY FOUNDATION
+========================================================================== */
 
 
-.surface-card {
+h1,
+h2,
+h3,
+h4 {
 
-    background:#122B4A;
+    margin-top:
+    0;
 
-    border:
+    color:
+    var(--ctm-text-primary);
 
-        1px solid
+    font-weight:
+    700;
 
-        rgba(200,169,106,0.25);
+    line-height:
+    1.25;
 
-    border-radius:24px;
+}
 
-    padding:32px;
+
+
+h1 {
+
+    font-size:
+    clamp(2.4rem,5vw,4.5rem);
 
 }
 
 
 
-.glass-card {
+h2 {
 
-    background:
-
-        rgba(255,255,255,0.04);
-
-    backdrop-filter:
-
-        blur(14px);
-
-    border:
-
-        1px solid
-
-        rgba(200,169,106,0.20);
-
-    border-radius:24px;
+    font-size:
+    clamp(1.8rem,3vw,3rem);
 
 }
 
 
+
+h3 {
+
+    font-size:
+    clamp(1.3rem,2vw,2rem);
+
+}
+
+
+
+p {
+
+    color:
+    var(--ctm-text-secondary);
+
+    font-size:
+    1rem;
+
+    line-height:
+    1.8;
+
+}
+
+
+
+/* Tamil content */
+
+.tamil {
+
+    font-family:
+    var(--font-tamil);
+
+}
+
+
+
+/* English subtitle */
+
+.subtitle {
+
+    color:
+    var(--ctm-teal);
+
+    letter-spacing:
+    2px;
+
+    text-transform:
+    uppercase;
+
+    font-size:
+    0.85rem;
+
+    font-weight:
+    600;
+
+}
 
 
 
 /* ==========================================================================
-   10. JOURNEY LAYOUT
-   ========================================================================== */
+   8. HEADER FOUNDATION
+========================================================================== */
 
 
-.journey-wrapper {
+.header-space {
 
-    width:100%;
+    padding-top:
+    40px;
 
-    min-height:100vh;
-
-    background:#081C3A;
-
-}
-
-
-
-.journey-content {
-
-    max-width:900px;
-
-    margin:0 auto;
-
-    text-align:center;
+    padding-bottom:
+    30px;
 
 }
 
 
 
-.journey-grid {
+.brand-stack {
 
-    display:grid;
+    text-align:
+    center;
+
+}
+
+
+
+.brand-stack img {
+
+    max-width:
+    120px;
+
+    margin-bottom:
+    18px;
+
+}
+
+
+
+/* ==========================================================================
+   9. CARD GRID FOUNDATION
+========================================================================== */
+
+
+.card-grid {
+
+    display:
+    grid;
 
     grid-template-columns:
+    repeat(4,1fr);
 
-        repeat(4,1fr);
-
-    gap:24px;
+    gap:
+    24px;
 
 }
 
 
+
+.card-grid .card {
+
+    min-height:
+    260px;
+
+}
 
 
 
 /* ==========================================================================
-   11. ASSESSMENT FOUNDATION
-   ========================================================================== */
+   10. CTA AREA
+========================================================================== */
 
 
-.assessment-container {
+.cta-section {
 
-    width:min(900px,92%);
+    text-align:
+    center;
 
-    margin:0 auto;
-
-}
-
-
-
-.question-stack {
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:24px;
+    padding:
+    50px 0;
 
 }
-
-
-
-.rating-scale {
-
-    display:grid;
-
-    grid-template-columns:
-
-        repeat(10,1fr);
-
-    gap:10px;
-
-}
-
-
 
 
 
 /* ==========================================================================
-   12. RESULT DASHBOARD FOUNDATION
-   ========================================================================== */
+   11. FOOTER FOUNDATION
+========================================================================== */
 
 
-.dashboard-layout {
+.footer {
 
-    width:min(1200px,92%);
+    width:
+    100%;
 
-    margin:0 auto;
+    margin-top:
+    auto;
 
-}
+    padding:
 
-
-
-.dashboard-grid {
-
-    display:grid;
-
-    grid-template-columns:
-
-        repeat(3,1fr);
-
-    gap:32px;
-
-}
+    70px 0 80px;
 
 
+    text-align:
+    center;
 
-.chart-container {
+    border-top:
 
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
+    1px solid var(--ctm-border-soft);
 
 }
 
 
+
+.footer p {
+
+    margin:
+    8px 0;
+
+}
 
 
 
 /* ==========================================================================
-   13. FORM FOUNDATION
-   ========================================================================== */
+   12. ACCESSIBILITY
+========================================================================== */
 
 
-.form-container {
+button,
+a {
 
-    width:min(600px,92%);
-
-    margin:0 auto;
-
-}
-
-
-
-.form-group {
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:8px;
+    -webkit-tap-highlight-color:
+    transparent;
 
 }
 
 
 
-.form-actions {
+button:focus,
+a:focus {
 
-    display:flex;
+    outline:
+    2px solid var(--ctm-teal);
 
-    justify-content:center;
-
-    gap:20px;
+    outline-offset:
+    4px;
 
 }
-
-
 
 
 
 /* ==========================================================================
-   14. RESPONSIVE SYSTEM
-   ========================================================================== */
+   13. RESPONSIVE SYSTEM
+========================================================================== */
 
 
 @media(max-width:1024px){
@@ -584,17 +550,15 @@ body {
     .grid-4 {
 
         grid-template-columns:
-
-            repeat(2,1fr);
+        repeat(2,1fr);
 
     }
 
 
-    .journey-grid {
+    .card-grid {
 
         grid-template-columns:
-
-            repeat(2,1fr);
+        repeat(2,1fr);
 
     }
 
@@ -608,39 +572,49 @@ body {
 
     .section {
 
-        padding:50px 0;
+        padding:
+        48px 0;
 
     }
+
+
+
+    .container,
+    .container-narrow,
+    .container-wide {
+
+        width:
+        92%;
+
+    }
+
 
 
     .grid-2,
     .grid-3,
-    .grid-4 {
+    .grid-4,
+    .card-grid {
 
         grid-template-columns:
-
-            1fr;
+        1fr;
 
     }
 
 
-    .journey-grid {
 
-        grid-template-columns:
+    .header-space {
 
-            1fr;
-
-    }
-
-
-    .rating-scale {
-
-        grid-template-columns:
-
-            repeat(5,1fr);
+        padding-top:
+        25px;
 
     }
 
 
 }
+
+
+
+/* ==========================================================================
+   END OF FOUNDATION SYSTEM v2.2
+========================================================================== */
 
