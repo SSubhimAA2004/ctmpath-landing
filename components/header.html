@@ -1,90 +1,343 @@
 
 <!-- ==========================================================================
-     CTM PATH™ Guided Journey™
+   CTM PATH™ Guided Journey™
 
-     File        : components/header.html
-     Version     : 2.4
-     Status      : Premium Global Brand Header
+   File        : header.html
+   Version     : 1.1
 
-     Purpose:
-     Unified Premium Brand Header
-     Used Across All 18 Guided Journey Pages
+   Purpose:
 
-     Brand Architecture
+   Global premium branded header component.
 
-            CTM PATH™
-                 ↓
-           KAALACHAKRA™
-                 ↓
-   The Millionaire Production System™
-                 ↓
-      From Survival To Living™
+   Responsibilities:
 
-========================================================================== -->
+   • Display CTM PATH™ logo.
+   • Display journey identity.
+   • Display bilingual journey title.
+   • Display progress indicator.
 
-<header class="ctm-header">
+   Does NOT:
 
-    <div class="container header-container">
+   • Execute navigation.
+   • Store user data.
+   • Call backend APIs.
 
-        <!-- ==========================================================
-             BRAND BLOCK
-        =========================================================== -->
+   Loaded into:
 
-        <div class="header-brand">
+   #app-header
 
-            <!-- Logo -->
+   ========================================================================== -->
 
-            <a
-                href="index.html"
-                class="header-logo-link"
-                aria-label="CTM PATH™ Home"
-            >
 
-                <img
-                    src="assets/logo/CTM_Logo_Transparent.svg"
-                    alt="CTM PATH™ Logo"
-                    class="header-logo"
-                >
+<header class="journey-header">
 
-            </a>
 
-            <!-- Brand Identity -->
 
-            <div class="brand-identity">
+<div class="header-container">
 
-                <div class="brand-name">
 
-                    CTM PATH™
 
-                </div>
 
-                <div class="brand-framework">
 
-                    KAALACHAKRA™
+<!-- ==========================================================================
+     BRAND AREA
 
-                </div>
+     Asset:
 
-                <div class="brand-system">
+     assets/logo/CTM_Logo_Transparent.svg
 
-                    The Millionaire Production System™
+     ========================================================================== -->
 
-                </div>
 
-                <div class="brand-mission">
+<div class="header-brand">
 
-                    From Survival To Living™
 
-                </div>
 
-            </div>
+<img
 
-        </div>
+    src="assets/logo/CTM_Logo_Transparent.svg"
 
-        <!-- Premium Divider -->
+    alt="CTM PATH™ Logo"
 
-        <div class="header-divider"></div>
+    class="ctm-logo"
 
-    </div>
+
+
+>
+
+
+
+<div class="brand-text">
+
+
+
+<div class="brand-name">
+
+
+    CTM PATH™
+
+
+</div>
+
+
+
+<div class="brand-subtitle">
+
+
+    Guided Journey™
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<!-- ==========================================================================
+     JOURNEY IDENTITY
+
+     ========================================================================== -->
+
+
+<div class="header-title">
+
+
+
+<p class="tamil">
+
+
+    உங்கள் வாழ்க்கை பயணம்
+
+
+</p>
+
+
+
+<p class="english">
+
+
+    Your Guided Life Journey
+
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+<!-- ==========================================================================
+     JOURNEY PROGRESS
+
+     Controlled by:
+
+     js/navigation.js
+
+     ========================================================================== -->
+
+
+<div class="header-progress">
+
+
+
+<div class="progress-label">
+
+
+
+<span class="tamil">
+
+
+    பயணம்
+
+
+</span>
+
+
+
+
+<span class="english">
+
+
+    Journey
+
+
+</span>
+
+
+
+</div>
+
+
+
+
+
+<div class="progress-track">
+
+
+
+<div
+
+class="progress-fill"
+
+data-progress-fill>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<div
+
+class="progress-counter"
+
+data-progress-counter>
+
+
+1 / 18
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
 
 </header>
+
+<!-- ==========================================================================
+     ACCESSIBILITY ENHANCEMENTS
+
+     ========================================================================== -->
+
+
+<nav
+
+    class="journey-header-nav"
+
+    aria-label="CTM PATH™ Guided Journey Navigation"
+
+
+
+>
+
+
+
+
+
+<!-- ==========================================================================
+     BRAND ACCESSIBILITY LABEL
+
+     ========================================================================== -->
+
+
+<div
+
+    class="sr-only"
+
+
+>
+
+    CTM PATH Guided Journey
+
+
+</div>
+
+
+
+
+
+<!-- ==========================================================================
+     PROGRESS INFORMATION
+
+     ========================================================================== -->
+
+
+<div
+
+    class="journey-status"
+
+    role="status"
+
+    aria-live="polite"
+
+
+
+>
+
+
+
+<span class="sr-only">
+
+    Current journey progress:
+
+</span>
+
+
+
+<span
+
+    data-progress-text
+
+>
+
+    Step 1 of 18
+
+
+</span>
+
+
+
+</div>
+
+
+
+
+
+</nav>
+
+
+
+
+
+<!-- ==========================================================================
+     HEADER DECORATIVE ACCENT
+
+     Premium visual separator.
+
+     ========================================================================== -->
+
+
+<div
+
+    class="header-accent-line"
+
+
+></div>
 
