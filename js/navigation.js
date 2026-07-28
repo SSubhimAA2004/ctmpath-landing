@@ -5,34 +5,22 @@
    File        : navigation.js
    Version     : 1.0
    Status      : DEVELOPMENT
-   Stage       : STAGE 0 — FOUNDATION
 
-   Purpose     :
-   Frontend navigation controller for the CTM PATH™ Guided Journey™.
+   Purpose:
+   Global journey navigation controller.
 
    Responsibilities:
 
-   • Manage page transitions.
-   • Track current journey location.
-   • Render page containers.
-   • Coordinate navigation events.
-   • Maintain frontend journey state.
+   • Move between journey pages.
+   • Manage current page state.
+   • Trigger page lifecycle events.
+   • Update progress.
 
    Does NOT:
 
-   • Validate business completion rules.
-   • Calculate assessment scores.
-   • Generate diagnosis.
-   • Generate prescriptions.
-   • Replace backend workflow.
-
-   Backend Ownership:
-
-   • Assessment validation
-   • Scoring engine
-   • KALA CHAKRA™ calculations
-   • Diagnosis engine
-   • Prescription engine
+   • Own page content.
+   • Calculate results.
+   • Process assessments.
 
    ========================================================================== */
 
@@ -46,8 +34,9 @@ window.CTMPATH = window.CTMPATH || {};
 
 
 
+
 /* ==========================================================================
-   NAVIGATION SERVICE
+   NAVIGATION CONTROLLER
    ========================================================================== */
 
 
@@ -74,120 +63,7 @@ CTMPATH.Navigation = {
 
     totalPages:
 
-        18,
-
-
-
-    container:
-
-        null
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   LOCKED JOURNEY MAP
-
-   Exactly 18 pages.
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.pages = {
-
-
-    1:
-
-        "welcome.html",
-
-
-    2:
-
-        "registration.html",
-
-
-    3:
-
-        "assessment-01.html",
-
-
-    4:
-
-        "assessment-02.html",
-
-
-    5:
-
-        "assessment-03.html",
-
-
-    6:
-
-        "assessment-04.html",
-
-
-    7:
-
-        "assessment-05.html",
-
-
-    8:
-
-        "assessment-06.html",
-
-
-    9:
-
-        "assessment-07.html",
-
-
-    10:
-
-        "assessment-08.html",
-
-
-    11:
-
-        "assessment-09.html",
-
-
-    12:
-
-        "assessment-10.html",
-
-
-    13:
-
-        "assessment-11.html",
-
-
-    14:
-
-        "assessment-12.html",
-
-
-    15:
-
-        "kalachakra.html",
-
-
-    16:
-
-        "diagnosis.html",
-
-
-    17:
-
-        "prescription.html",
-
-
-    18:
-
-        "cta.html"
+        18
 
 
 
@@ -204,13 +80,26 @@ CTMPATH.Navigation.pages = {
 CTMPATH.Navigation.init = function() {
 
 
-    CTMPATH.Navigation.container =
+    if (
 
-        document.getElementById(
+        CTMPATH.Navigation.initialized
 
-            "app-content"
+    ) {
 
-        );
+
+        return;
+
+
+
+    }
+
+
+
+    CTMPATH.Navigation.restorePage();
+
+
+
+    CTMPATH.Navigation.bindGlobalEvents();
 
 
 
@@ -224,32 +113,29 @@ CTMPATH.Navigation.init = function() {
 
 
 /* ==========================================================================
-   LOAD PAGE
+   GO TO PAGE
 
-   Loads frontend page content.
+   Main navigation method.
 
    ========================================================================== */
 
 
-CTMPATH.Navigation.loadPage = async function(pageNumber) {
+CTMPATH.Navigation.goto = function(
+
+    pageNumber
+
+) {
 
 
     if (
 
-        !CTMPATH.Navigation.pages[pageNumber]
+        pageNumber < 1 ||
+
+        pageNumber > CTMPATH.Navigation.totalPages
 
     ) {
 
 
-        console.error(
-
-            "Invalid CTM PATH™ page:",
-
-            pageNumber
-
-        );
-
-
         return false;
 
 
@@ -258,87 +144,23 @@ CTMPATH.Navigation.loadPage = async function(pageNumber) {
 
 
 
-    try {
-
-
-        const response = await fetch(
-
-            "pages/" +
-
-            CTMPATH.Navigation.pages[pageNumber]
-
-        );
+    CTMPATH.Navigation.currentPage = pageNumber;
 
 
 
-        const html = await response.text();
+    CTMPATH.Navigation.savePage();
 
 
 
-        if (
+    CTMPATH.Navigation.renderPage(
 
-            CTMPATH.Navigation.container
+        pageNumber
 
-        ) {
-
-
-            CTMPATH.Navigation.container.innerHTML = html;
+    );
 
 
 
-        }
-
-
-
-        CTMPATH.Navigation.currentPage =
-
-            pageNumber;
-
-
-
-        CTMPATH.Navigation.savePosition();
-
-
-
-        window.scrollTo(
-
-            {
-
-                top: 0,
-
-                behavior: "smooth"
-
-            }
-
-        );
-
-
-
-        return true;
-
-
-
-    }
-
-
-    catch(error) {
-
-
-        console.error(
-
-            "CTM PATH™ Navigation Error:",
-
-            error
-
-        );
-
-
-
-        return false;
-
-
-
-    }
+    return true;
 
 
 
@@ -354,35 +176,51 @@ CTMPATH.Navigation.loadPage = async function(pageNumber) {
 
 
 /* ==========================================================================
-   NEXT PAGE
+   PAGE RENDERING
 
-   Moves user forward through the journey.
-
-   Navigation only.
-   Business validation belongs to backend.
+   Displays requested journey page.
 
    ========================================================================== */
 
 
-CTMPATH.Navigation.next = function() {
+CTMPATH.Navigation.renderPage = function(
+
+    pageNumber
+
+) {
 
 
-    const nextPage =
+    const pages = document.querySelectorAll(
 
-        CTMPATH.Navigation.currentPage + 1;
+        ".page"
 
-
-
-    if (
-
-        nextPage >
-
-        CTMPATH.Navigation.totalPages
-
-    ) {
+    );
 
 
-        return false;
+
+    pages.forEach(function(page) {
+
+
+        page.style.display = "none";
+
+
+
+    });
+
+
+
+    const targetPage = document.querySelector(
+
+        `[data-page="${pageNumber}"]`
+
+    );
+
+
+
+    if (targetPage) {
+
+
+        targetPage.style.display = "block";
 
 
 
@@ -390,54 +228,9 @@ CTMPATH.Navigation.next = function() {
 
 
 
-    return CTMPATH.Navigation.loadPage(
+    CTMPATH.Navigation.dispatchPageEvent(
 
-        nextPage
-
-    );
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   PREVIOUS PAGE
-
-   Moves user backward through the journey.
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.previous = function() {
-
-
-    const previousPage =
-
-        CTMPATH.Navigation.currentPage - 1;
-
-
-
-    if (
-
-        previousPage < 1
-
-    ) {
-
-
-        return false;
-
-
-
-    }
-
-
-
-    return CTMPATH.Navigation.loadPage(
-
-        previousPage
+        pageNumber
 
     );
 
@@ -449,21 +242,41 @@ CTMPATH.Navigation.previous = function() {
 
 
 /* ==========================================================================
-   GOTO PAGE
+   PAGE EVENT DISPATCH
 
-   Direct page navigation helper.
-
-   Used internally only.
+   Notifies page controllers.
 
    ========================================================================== */
 
 
-CTMPATH.Navigation.goto = function(pageNumber) {
+CTMPATH.Navigation.dispatchPageEvent = function(
+
+    pageNumber
+
+) {
 
 
-    return CTMPATH.Navigation.loadPage(
+    document.dispatchEvent(
 
-        Number(pageNumber)
+        new CustomEvent(
+
+            "CTMPATH_PAGE_LOADED",
+
+            {
+
+                detail:
+
+                {
+
+                    page:
+
+                        pageNumber
+
+                }
+
+            }
+
+        )
 
     );
 
@@ -475,28 +288,28 @@ CTMPATH.Navigation.goto = function(pageNumber) {
 
 
 /* ==========================================================================
-   SAVE CURRENT POSITION
+   SAVE CURRENT PAGE
 
-   Stores temporary journey position.
+   Uses storage layer.
 
    ========================================================================== */
 
 
-CTMPATH.Navigation.savePosition = function() {
+CTMPATH.Navigation.savePage = function() {
 
 
     if (
 
         CTMPATH.Storage &&
 
-        typeof CTMPATH.Storage.setCurrentPage ===
+        typeof CTMPATH.Storage.saveCurrentPage ===
 
             "function"
 
     ) {
 
 
-        CTMPATH.Storage.setCurrentPage(
+        CTMPATH.Storage.saveCurrentPage(
 
             CTMPATH.Navigation.currentPage
 
@@ -514,14 +327,14 @@ CTMPATH.Navigation.savePosition = function() {
 
 
 /* ==========================================================================
-   RESTORE LAST POSITION
+   RESTORE PAGE
 
-   Restores frontend session location.
+   Restores visitor journey position.
 
    ========================================================================== */
 
 
-CTMPATH.Navigation.restorePosition = function() {
+CTMPATH.Navigation.restorePage = function() {
 
 
     if (
@@ -541,16 +354,12 @@ CTMPATH.Navigation.restorePosition = function() {
 
 
 
-        if (
-
-            savedPage
-
-        ) {
+        if (savedPage) {
 
 
             CTMPATH.Navigation.currentPage =
 
-                Number(savedPage);
+                savedPage;
 
 
 
@@ -564,98 +373,352 @@ CTMPATH.Navigation.restorePosition = function() {
 
 };
 
-
-
-
 /* ==========================================================================
-   GET CURRENT PAGE INFORMATION
+   CTM PATH™ Guided Journey™
+
+   File        : navigation.js
+   Continuation: Batch 1C
 
    ========================================================================== */
 
 
-CTMPATH.Navigation.getCurrent = function() {
+/* ==========================================================================
+   NEXT PAGE
+
+   Moves forward one journey step.
+
+   ========================================================================== */
+
+
+CTMPATH.Navigation.next = function() {
+
+
+    const nextPage =
+
+        CTMPATH.Navigation.currentPage + 1;
+
+
+
+    return CTMPATH.Navigation.goto(
+
+        nextPage
+
+    );
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   PREVIOUS PAGE
+
+   Moves backward one journey step.
+
+   ========================================================================== */
+
+
+CTMPATH.Navigation.previous = function() {
+
+
+    const previousPage =
+
+        CTMPATH.Navigation.currentPage - 1;
+
+
+
+    return CTMPATH.Navigation.goto(
+
+        previousPage
+
+    );
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   UPDATE PROGRESS
+
+   Updates shared progress component.
+
+   ========================================================================== */
+
+
+CTMPATH.Navigation.updateProgress = function() {
+
+
+    const progressElements = document.querySelectorAll(
+
+        "[data-progress-fill]"
+
+    );
+
+
+
+    const percentage =
+
+        (
+
+            CTMPATH.Navigation.currentPage /
+
+            CTMPATH.Navigation.totalPages
+
+        ) * 100;
+
+
+
+    progressElements.forEach(function(element) {
+
+
+        element.style.width =
+
+            percentage + "%";
+
+
+
+    });
+
+
+
+    const counters = document.querySelectorAll(
+
+        "[data-progress-counter]"
+
+    );
+
+
+
+    counters.forEach(function(counter) {
+
+
+        counter.textContent =
+
+
+            CTMPATH.Navigation.currentPage +
+
+            " / " +
+
+            CTMPATH.Navigation.totalPages;
+
+
+
+    });
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   GLOBAL NAVIGATION EVENTS
+
+   ========================================================================== */
+
+
+CTMPATH.Navigation.bindGlobalEvents = function() {
+
+
+    document.addEventListener(
+
+        "CTMPATH_PAGE_LOADED",
+
+        function() {
+
+
+            CTMPATH.Navigation.updateProgress();
+
+
+
+        }
+
+    );
+
+
+
+};
+
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : navigation.js
+   Continuation: Batch 1D
+
+   ========================================================================== */
+
+
+/* ==========================================================================
+   GET CURRENT PAGE
+
+   Returns active journey location.
+
+   ========================================================================== */
+
+
+CTMPATH.Navigation.getCurrentPage = function() {
+
+
+    return CTMPATH.Navigation.currentPage;
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   GET TOTAL PAGES
+
+   Returns journey length.
+
+   ========================================================================== */
+
+
+CTMPATH.Navigation.getTotalPages = function() {
+
+
+    return CTMPATH.Navigation.totalPages;
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   IS FIRST PAGE
+
+   ========================================================================== */
+
+
+CTMPATH.Navigation.isFirstPage = function() {
+
+
+    return (
+
+        CTMPATH.Navigation.currentPage === 1
+
+    );
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   IS LAST PAGE
+
+   ========================================================================== */
+
+
+CTMPATH.Navigation.isLastPage = function() {
+
+
+    return (
+
+        CTMPATH.Navigation.currentPage ===
+
+        CTMPATH.Navigation.totalPages
+
+    );
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   RESET JOURNEY
+
+   Returns visitor to beginning.
+
+   ========================================================================== */
+
+
+CTMPATH.Navigation.reset = function() {
+
+
+    CTMPATH.Navigation.currentPage = 1;
+
+
+
+    CTMPATH.Navigation.savePage();
+
+
+
+    CTMPATH.Navigation.renderPage(
+
+        1
+
+    );
+
+
+
+};
+
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : navigation.js
+   Continuation: Batch 1E
+
+   ========================================================================== */
+
+
+/* ==========================================================================
+   NAVIGATION STATUS
+
+   Returns current navigation state.
+
+   ========================================================================== */
+
+
+CTMPATH.Navigation.getStatus = function() {
 
 
     return {
 
 
-        page:
+        version:
+
+            CTMPATH.Navigation.version,
+
+
+
+        currentPage:
 
             CTMPATH.Navigation.currentPage,
 
 
 
-        file:
+        totalPages:
 
-            CTMPATH.Navigation.pages[
-
-                CTMPATH.Navigation.currentPage
-
-            ],
+            CTMPATH.Navigation.totalPages,
 
 
 
-        total:
+        initialized:
 
-            CTMPATH.Navigation.totalPages
+            CTMPATH.Navigation.initialized
 
 
 
     };
 
 
-};
-
-
-
-
-/* ==========================================================================
-   PAGE CHANGE EVENT
-
-   Allows page controllers to initialize.
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.dispatchPageLoaded = function() {
-
-
-    const event = new CustomEvent(
-
-        "CTMPATH_PAGE_LOADED",
-
-        {
-
-
-            detail:
-
-
-                {
-
-
-                    page:
-
-                        CTMPATH.Navigation.currentPage
-
-
-
-                }
-
-
-
-        }
-
-    );
-
-
-
-    document.dispatchEvent(
-
-        event
-
-    );
-
-
 
 };
 
@@ -663,49 +726,25 @@ CTMPATH.Navigation.dispatchPageLoaded = function() {
 
 
 /* ==========================================================================
-   EXTEND LOAD PAGE WITH EVENT DISPATCH
+   INITIALIZE ON APPLICATION READY
 
    ========================================================================== */
 
 
-const originalLoadPage =
+document.addEventListener(
 
-    CTMPATH.Navigation.loadPage;
+    "CTMPATH_APP_READY",
 
-
-
-
-CTMPATH.Navigation.loadPage = async function(pageNumber) {
+    function() {
 
 
-    const result = await originalLoadPage(
-
-        pageNumber
-
-    );
-
-
-
-    if (
-
-        result
-
-    ) {
-
-
-        CTMPATH.Navigation.dispatchPageLoaded();
+        CTMPATH.Navigation.init();
 
 
 
     }
 
-
-
-    return result;
-
-
-
-};
+);
 
 
 
@@ -720,12 +759,7 @@ CTMPATH.Navigation.loadPage = async function(pageNumber) {
 
    Status:
 
-   FOUNDATION MODULE COMPLETE
+   NAVIGATION CONTROLLER COMPLETE
 
-
-   Next:
-
-   js/assessmentEngine.js
 
    ========================================================================== */
-
