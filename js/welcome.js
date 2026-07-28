@@ -1,370 +1,59 @@
 
 /* ==========================================================================
-   
    CTM PATH™ Guided Journey™
 
-   File        : js/welcome.js
-   Version     : 2.2
+   File        : welcome.js
+   Version     : 1.0
+   Status      : DEVELOPMENT
+   Stage       : STAGE 1 — WELCOME™
 
-   Page        : PAGE 01 — WELCOME™
-
-   Purpose:
-   Premium Welcome Page Controller
+   Purpose     :
+   Welcome page interaction controller.
 
    Responsibilities:
-   • Initialise welcome experience
-   • Capture journey metadata
-   • Handle journey start
-   • Navigate to registration
 
-   Architecture:
+   • Initialize Welcome page.
+   • Bind CTA button events.
+   • Trigger journey navigation.
+   • Handle page-level interactions.
 
-   welcome.js
-        ↓
-   sessionStorage
-        ↓
-   registration.js
-        ↓
-   api.js
-        ↓
-   Frozen Backend
+   Does NOT:
 
-========================================================================== */
+   • Create visitors.
+   • Store user data.
+   • Call backend services.
+   • Execute assessment logic.
+
+   ========================================================================== */
+
+
+/* ==========================================================================
+   GLOBAL NAMESPACE
+   ========================================================================== */
+
+
+window.CTMPATH = window.CTMPATH || {};
 
 
 
 /* ==========================================================================
-   PAGE INITIALISATION
-========================================================================== */
+   WELCOME CONTROLLER
+   ========================================================================== */
 
 
-document.addEventListener(
-    "DOMContentLoaded",
-    initWelcomePage
-);
+CTMPATH.Welcome = {
 
 
+    version:
 
-function initWelcomePage(){
+        "1.0",
 
 
-    console.log(
-        "CTM PATH™ Welcome Journey Loaded"
-    );
 
+    initialized:
 
-    initialiseJourneySession();
+        false
 
-
-    bindBeginJourneyButton();
-
-
-}
-
-
-
-
-
-
-/* ==========================================================================
-   JOURNEY SESSION
-========================================================================== */
-
-
-function initialiseJourneySession(){
-
-
-    const journeySession = {
-
-
-        journey:
-
-            "CTM PATH™ Guided Journey™",
-
-
-        page:
-
-            "WELCOME",
-
-
-        startedAt:
-
-            new Date().toISOString(),
-
-
-        device:
-
-            detectDevice(),
-
-
-        language:
-
-            detectLanguage(),
-
-
-        source:
-
-            detectSource()
-
-
-    };
-
-
-
-    sessionStorage.setItem(
-
-        "ctmJourneySession",
-
-        JSON.stringify(journeySession)
-
-    );
-
-
-}
-
-
-
-
-
-
-/* ==========================================================================
-   DEVICE DETECTION
-========================================================================== */
-
-
-function detectDevice(){
-
-
-    const width =
-        window.innerWidth;
-
-
-
-    if(width <= 768){
-
-        return "Mobile";
-
-    }
-
-
-
-    if(width <= 1024){
-
-        return "Tablet";
-
-    }
-
-
-
-    return "Desktop";
-
-
-}
-
-
-
-
-
-
-/* ==========================================================================
-   LANGUAGE DETECTION
-========================================================================== */
-
-
-function detectLanguage(){
-
-
-    const browserLanguage =
-
-        navigator.language;
-
-
-
-    if(browserLanguage){
-
-
-        return browserLanguage;
-
-
-    }
-
-
-
-    return "en";
-
-
-}
-
-
-
-
-
-
-/* ==========================================================================
-   SOURCE TRACKING
-========================================================================== */
-
-
-function detectSource(){
-
-
-    const params =
-
-        new URLSearchParams(
-
-            window.location.search
-
-        );
-
-
-
-    return (
-
-        params.get("source")
-
-        ||
-
-        "Direct"
-
-    );
-
-
-}
-
-
-
-
-
-
-/* ==========================================================================
-   BEGIN JOURNEY ACTION
-========================================================================== */
-
-
-function bindBeginJourneyButton(){
-
-
-    const button =
-
-        document.getElementById(
-
-            "beginJourneyButton"
-
-        );
-
-
-
-    if(!button){
-
-
-        console.warn(
-
-            "CTM PATH™ Begin Journey button not found"
-
-        );
-
-
-        return;
-
-
-    }
-
-
-
-
-
-    button.addEventListener(
-
-        "click",
-
-        beginJourney
-
-    );
-
-
-}
-
-
-
-
-
-
-function beginJourney(event){
-
-
-    event.preventDefault();
-
-
-
-    sessionStorage.setItem(
-
-        "ctmJourneyStatus",
-
-        "STARTED"
-
-    );
-
-
-
-    window.location.href =
-
-        "pages/registration.html";
-
-
-}
-
-
-
-
-
-
-/* ==========================================================================
-   PUBLIC JOURNEY CONTROLS
-========================================================================== */
-
-
-window.CTMWelcome = {
-
-
-    getSession:function(){
-
-
-        return JSON.parse(
-
-            sessionStorage.getItem(
-
-                "ctmJourneySession"
-
-            )
-
-        );
-
-
-    },
-
-
-
-    reset:function(){
-
-
-        sessionStorage.removeItem(
-
-            "ctmJourneySession"
-
-        );
-
-
-        sessionStorage.removeItem(
-
-            "ctmJourneyStatus"
-
-        );
-
-
-        window.location.reload();
-
-
-    }
 
 
 };
@@ -372,13 +61,283 @@ window.CTMWelcome = {
 
 
 
+/* ==========================================================================
+   INITIALIZATION
+   ========================================================================== */
+
+
+CTMPATH.Welcome.init = function() {
+
+
+    if (
+
+        CTMPATH.Welcome.initialized
+
+    ) {
+
+
+        return;
+
+
+
+    }
+
+
+
+    CTMPATH.Welcome.bindEvents();
+
+
+
+    CTMPATH.Welcome.initialized = true;
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   EVENT BINDING
+   ========================================================================== */
+
+
+CTMPATH.Welcome.bindEvents = function() {
+
+
+    const button = document.getElementById(
+
+        "begin-journey-btn"
+
+    );
+
+
+
+    if (!button) {
+
+
+        return;
+
+
+
+    }
+
+
+
+    button.addEventListener(
+
+        "click",
+
+        function() {
+
+
+            CTMPATH.Welcome.beginJourney();
+
+
+
+        }
+
+    );
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   BEGIN JOURNEY ACTION
+
+   Moves user to Registration™ page.
+
+   ========================================================================== */
+
+
+CTMPATH.Welcome.beginJourney = function() {
+
+
+    if (
+
+        CTMPATH.Navigation &&
+
+        typeof CTMPATH.Navigation.goto ===
+
+            "function"
+
+    ) {
+
+
+        CTMPATH.Navigation.goto(
+
+            2
+
+        );
+
+
+
+        return true;
+
+
+
+    }
+
+
+
+    return false;
+
+
+
+};
+
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : welcome.js
+   Continuation: Batch 1B
+
+   ========================================================================== */
+
+
+/* ==========================================================================
+   PAGE ACTIVATION HANDLER
+
+   Called when navigation loads Welcome™ page.
+
+   ========================================================================== */
+
+
+CTMPATH.Welcome.activate = function() {
+
+
+    CTMPATH.Welcome.init();
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   RESET STATE
+
+   Clears only page-level state.
+
+   Does NOT affect journey data.
+
+   ========================================================================== */
+
+
+CTMPATH.Welcome.reset = function() {
+
+
+    CTMPATH.Welcome.initialized = false;
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   PAGE LOADED EVENT LISTENER
+
+   Navigation dispatches:
+
+   CTMPATH_PAGE_LOADED
+
+   ========================================================================== */
+
+
+document.addEventListener(
+
+    "CTMPATH_PAGE_LOADED",
+
+    function(event) {
+
+
+        if (
+
+            event.detail &&
+
+            event.detail.page === 1
+
+        ) {
+
+
+            CTMPATH.Welcome.activate();
+
+
+
+        }
+
+
+
+    }
+
+);
+
+
+
+
+/* ==========================================================================
+   DIRECT PAGE LOAD SUPPORT
+
+   Handles initial application loading.
+
+   ========================================================================== */
+
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    function() {
+
+
+        const page = document.getElementById(
+
+            "welcome-page"
+
+        );
+
+
+
+        if (page) {
+
+
+            CTMPATH.Welcome.activate();
+
+
+
+        }
+
+
+
+    }
+
+);
+
+
 
 
 /* ==========================================================================
    END OF FILE
 
-   CTM PATH™ Guided Journey™
-   Welcome Controller v2.2
+   File:
 
-========================================================================== */
+   js/welcome.js
 
+
+   Status:
+
+   STAGE 1 — WELCOME™ CONTROLLER COMPLETE
+
+
+   Next:
+
+   STAGE 2 — REGISTRATION™
+
+   ========================================================================== */
