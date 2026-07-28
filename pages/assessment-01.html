@@ -1,1655 +1,223 @@
 
 <!-- ==========================================================================
-     CTM PATH™ Guided Journey
+   CTM PATH™ Guided Journey™
 
-     FROM SURVIVAL TO LIVING™
+   File        : assessment-01.html
+   Version     : 1.0
+   Status      : DEVELOPMENT
+   Stage       : STAGE 3 — ASSESSMENT 01
+                 Purpose™
 
-     File        : pages/assessment-01.html
-     Version     : 6.4
+   Purpose     :
+   First pillar assessment page.
 
-     Status      : 🔒 PREMIUM EXPERIENCE MASTER
+   Responsibilities:
 
+   • Present Purpose™ questions.
+   • Provide rating interface container.
+   • Support assessment navigation.
 
-     Assessment  : Spoke 01
+   Does NOT:
 
-     Pillar      : Purpose™
+   • Calculate scores.
+   • Store responses directly.
+   • Apply assessment logic.
 
-     ========================================================================== -->
+   ========================================================================== -->
 
 
-<!DOCTYPE html>
+<section class="page assessment-page"
+         id="assessment-01-page">
 
-<html lang="en">
 
+    <div class="app-container">
 
 
-<head>
+        <div class="assessment-wrapper">
 
 
 
-<meta charset="UTF-8">
+            <!-- ==============================================================
+                 Progress Header
+                 ============================================================== -->
 
 
+            <div class="assessment-progress">
 
-<meta
 
-name="viewport"
+                <p class="assessment-step">
 
-content="width=device-width, initial-scale=1.0">
+                    Journey Step 01 / 12
 
+                </p>
 
 
-<meta
 
-name="theme-color"
+                <div class="progress-wrapper">
 
-content="#061426">
 
+                    <div class="progress-track">
 
 
+                        <div class="progress-fill"
+                             style="width:8.33%;">
 
+                        </div>
 
-<title>
 
-CTM PATH™ | Purpose™
+                    </div>
 
-</title>
 
+                </div>
 
 
 
+            </div>
 
 
 
 
 
-<!-- ==========================================================================
-     PREMIUM FONTS
-     ========================================================================== -->
+            <!-- ==============================================================
+                 Pillar Header
+                 ============================================================== -->
 
 
-<link
+            <div class="assessment-header">
 
-rel="preconnect"
 
-href="https://fonts.googleapis.com">
+                <p class="assessment-eyebrow">
 
+                    Life Dimension 01
 
+                </p>
 
-<link
 
-rel="preconnect"
 
-href="https://fonts.gstatic.com"
+                <h1 class="assessment-title">
 
-crossorigin>
+                    Purpose™
 
+                </h1>
 
 
 
+                <p class="assessment-description">
 
-<link
+                    Discover how clearly your direction,
+                    values and life purpose guide your choices.
 
-href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@300;400;500;600;700&display=swap"
+                </p>
 
-rel="stylesheet">
 
 
+            </div>
 
 
 
 
 
+            <!-- ==============================================================
+                 Questions Container
+                 ============================================================== -->
 
 
-<!-- ==========================================================================
-     CSS LOADING ORDER
+            <div class="assessment-card card">
 
-     Foundation
-          ↓
-     Application
-          ↓
-     Components
-          ↓
-     Page Premium Skin
 
-     ========================================================================== -->
 
+                <div id="question-container"
+                     class="question-container">
 
 
+                </div>
 
 
-<!-- FOUNDATION -->
 
+            </div>
 
-<link
+             <!-- ==========================================================================
+   CTM PATH™ Guided Journey™
 
-rel="stylesheet"
+   File        : assessment-01.html
+   Continuation: Batch 1B
 
-href="../css/reset.css">
+   ========================================================================== -->
 
 
+            <!-- ==============================================================
+                 Assessment Navigation
+                 ============================================================== -->
 
-<link
 
-rel="stylesheet"
+            <div class="assessment-actions">
 
-href="../css/tokens.css">
 
 
+                <button
 
-<link
+                    type="button"
 
-rel="stylesheet"
+                    id="assessment-back-btn"
 
-href="../css/base.css">
+                    class="btn btn-secondary">
 
 
+                    Previous
 
 
+                </button>
 
 
 
-<!-- APPLICATION -->
 
 
-<link
+                <button
 
-rel="stylesheet"
+                    type="button"
 
-href="../css/app.css">
+                    id="assessment-next-btn"
 
+                    class="btn btn-primary">
 
 
-<link
+                    Continue
 
-rel="stylesheet"
 
-href="../css/assessment.css">
+                </button>
 
 
 
+            </div>
 
 
 
 
-<!-- PREMIUM COMPONENTS -->
+            <!-- ==============================================================
+                 Reflection Reminder
+                 ============================================================== -->
 
 
-<link
+            <div class="assessment-footer">
 
-rel="stylesheet"
 
-href="../css/rating-scale.css">
+                <p>
 
+                    Answer honestly.
+                    This journey is about awareness, not perfection.
 
+                </p>
 
-<link
 
-rel="stylesheet"
+            </div>
 
-href="../css/status-card.css">
 
 
+        </div>
 
-<link
 
-rel="stylesheet"
-
-href="../css/kaalachakra-dashboard.css">
-
-
-
-
-
-
-
-<!-- PAGE MASTER -->
-
-
-<link
-
-rel="stylesheet"
-
-href="../css/assessment01.css">
-
-
-
-
-
-
-
-
-
-</head>
-
-
-
-
-
-
-
-
-
-<body>
-
-
-
-<div
-
-class="assessment-page">
-
-
-
-
-
-<div
-
-class="assessment-container">
-
-
-
-
-
-<main
-
-class="premium-assessment-card">
-
-
-
-
-
-
-
-
-
-
-<!-- ==========================================================================
-     HEADER COMPONENT MOUNT
-
-     Loaded by:
-
-     js/assessment01.js
-
-     ========================================================================== -->
-
-
-<div
-
-id="header">
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- ==========================================================================
-     LIFE MAP™
-
-     ========================================================================== -->
-
-
-<section
-
-class="life-map">
-
-
-
-
-
-<div
-
-class="life-map-title">
-
-
-YOUR LIFE MAP™
-
-
-</div>
-
-
-
-
-
-
-
-<div
-
-id="lifeMapProgress"
-
-class="life-map-progress">
-
-
-01 / 12
-
-
-</div>
-
-
-
-
-
-
-
-<div
-
-class="life-map-subtitle">
-
-
-12 Dimensions.
-
-
-<br>
-
-
-1 Complete Human Journey.
-
-
-</div>
-
-
-
+    </div>
 
 
 </section>
 
-     
-<!-- ==========================================================================
-     KALA CHAKRA™ DASHBOARD COMPONENT MOUNT
-
-     Premium Experience Layer
-
-     Loaded by:
-
-     js/assessment01.js
-
-     Component:
-
-     kaalachakra-dashboard.html
-
-
-     ========================================================================== -->
-
-
-<div
-
-id="kaalachakraDashboard">
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- ==========================================================================
-     OPENING RITUAL™
-
-     ========================================================================== -->
-
-
-<section
-
-class="opening-ritual">
-
-
-
-
-
-<div
-
-class="ritual-label">
-
-
-YOUR JOURNEY BEGINS HERE™
-
-
-</div>
-
-
-
-
-
-
-
-<p
-
-class="ritual-text-ta">
-
-
-சரியான பதில்கள் தேவையில்லை.
-
-
-<br>
-
-
-உண்மையான பதில்கள் மட்டுமே தேவை.
-
-
-</p>
-
-
-
-
-
-
-
-<p
-
-class="ritual-text-en">
-
-
-There are no right answers.
-
-
-<br>
-
-
-Only honest reflection.
-
-
-</p>
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- ==========================================================================
-     PURPOSE™ IDENTITY
-
-     ========================================================================== -->
-
-
-<section
-
-class="pillar-section">
-
-
-
-
-
-<div
-
-class="spoke-number">
-
-
-SPOKE 01 OF 12
-
-
-</div>
-
-
-
-
-
-
-
-<h1
-
-class="pillar-title-ta">
-
-
-நோக்கம்™
-
-
-</h1>
-
-
-
-
-
-
-
-<h2
-
-class="pillar-title-en">
-
-
-PURPOSE™
-
-
-</h2>
-
-
-
-
-
-
-
-<div
-
-class="core-question-ta">
-
-
-நான் ஏன் இங்கு இருக்கிறேன்?
-
-
-</div>
-
-
-
-
-
-
-
-<div
-
-class="core-question-en">
-
-
-Why do I exist?
-
-
-</div>
-
-
-
-
-
-
-
-<div
-
-class="pillar-introduction">
-
-
-
-
-
-<p>
-
-
-உங்கள் வாழ்க்கையின் ஆழமான நோக்கத்தையும்
-அர்த்தத்தையும் கண்டறியும் பயணம்.
-
-
-</p>
-
-
-
-
-
-
-
-<p>
-
-
-A journey to discover the deeper purpose
-and meaning of your life.
-
-
-</p>
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- ==========================================================================
-     INNER JOURNEY™
-
-     ========================================================================== -->
-
-
-<section
-
-class="inner-journey">
-
-
-
-
-
-<div
-
-class="journey-step">
-
-
-
-
-
-<div
-
-class="journey-step-number">
-
-
-01
-
-
-</div>
-
-
-
-
-
-
-
-<div
-
-class="journey-step-title">
-
-
-AWARENESS™
-
-
-</div>
-
-
-
-
-
-
-
-<div
-
-class="journey-step-subtitle">
-
-
-நான் என்னை அறிகிறேன்
-
-
-<br>
-
-
-I See Myself
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div
-
-class="journey-arrow">
-
-
-→
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div
-
-class="journey-step">
-
-
-
-
-
-<div
-
-class="journey-step-number">
-
-
-02
-
-
-</div>
-
-
-
-
-
-
-
-<div
-
-class="journey-step-title">
-
-
-ALIGNMENT™
-
-
-</div>
-
-
-
-
-
-
-
-<div
-
-class="journey-step-subtitle">
-
-
-நான் என்னை இணைக்கிறேன்
-
-
-<br>
-
-
-I Align Myself
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div
-
-class="journey-arrow">
-
-
-→
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div
-
-class="journey-step">
-
-
-
-
-
-<div
-
-class="journey-step-number">
-
-
-03
-
-
-</div>
-
-
-
-
-
-
-
-<div
-
-class="journey-step-title">
-
-
-EMBODIMENT™
-
-
-</div>
-
-
-
-
-
-
-
-<div
-
-class="journey-step-subtitle">
-
-
-நான் அதை வாழ்கிறேன்
-
-
-<br>
-
-
-I Become It
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-</section>
-
-     
-<!-- ==========================================================================
-     PREMIUM QUESTION EXPERIENCE™
-
-     Controlled by:
-
-     js/assessmentUI.js
-
-     Version : 2.0
-
-
-     ========================================================================== -->
-
-
-<section
-
-id="questionCard"
-
-class="question-card premium-question-card">
-
-
-
-
-
-<div
-
-id="questionNumber"
-
-class="question-number">
-
-
-01
-
-
-</div>
-
-
-
-
-
-
-
-<div
-
-class="question-type">
-
-
-PURPOSE™
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<h2
-
-id="questionTamil"
-
-class="question-text-ta">
-
-
-என் வாழ்க்கையின் ஆழமான நோக்கமும்
-அர்த்தமும் என்ன என்பது எனக்கு தெளிவாக உள்ளது.
-
-
-</h2>
-
-
-
-
-
-
-
-
-
-<p
-
-id="questionEnglish"
-
-class="question-text-en">
-
-
-I have clarity about the deeper purpose
-and meaning of my life.
-
-
-</p>
-
-
-
-
-
-
-
-
-
-<div
-
-class="rating-question-label">
-
-
-How true is this for me?
-
-
-<br>
-
-
-இது எனக்கு எவ்வளவு உண்மை?
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- ==========================================================================
-     PREMIUM RATING COMPONENT MOUNT
-
-     Loaded by:
-
-     js/assessment01.js
-
-
-     Component:
-
-     rating-scale.html
-
-
-     ========================================================================== -->
-
-
-<div
-
-id="ratingScale">
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div
-
-class="rating-guide">
-
-
-
-<span>
-
-
-1 - Awareness Needed
-
-
-</span>
-
-
-
-
-
-
-
-<span>
-
-
-10 - Alignment Zone
-
-
-</span>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- ==========================================================================
-     PURPOSE™ SCORE REVEAL™
-
-     ========================================================================== -->
-
-
-<section
-
-class="score-preview">
-
-
-
-
-
-<div
-
-class="score-title">
-
-
-PURPOSE™ ALIGNMENT SCORE
-
-
-<br>
-
-
-நோக்கம்™ தற்போதைய நிலை
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div
-
-id="spokeRawScore"
-
-class="score-value">
-
-
-0 / 30
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div
-
-id="spokePercentage"
-
-class="score-label">
-
-
-0 / 100
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div
-
-class="score-description">
-
-
-Your current Purpose™ alignment
-
-
-<br>
-
-
-உங்கள் தற்போதைய நோக்க இணைப்பு நிலை
-
-
-</div>
-
-
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- ==========================================================================
-     CURRENT STATUS™ COMPONENT MOUNT
-
-     Loaded by:
-
-     js/assessment01.js
-
-
-     Component:
-
-     status-card.html
-
-
-     ========================================================================== -->
-
-
-<div
-
-id="statusCard">
-
-
-</div>
-
-     
-<!-- ==========================================================================
-     CURRENT STATUS™ DISPLAY
-
-     ========================================================================== -->
-
-
-<section
-
-class="current-status-section">
-
-
-
-
-
-<div
-
-class="current-status-title">
-
-
-YOUR CURRENT STATUS™
-
-
-<br>
-
-
-உங்கள் தற்போதைய நிலை
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div
-
-id="lifeEvolutionLevel"
-
-class="life-evolution-level">
-
-
-</div>
-
-
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- ==========================================================================
-     REFLECTION MOMENT™
-
-     ========================================================================== -->
-
-
-<section
-
-class="reflection-panel">
-
-
-
-
-
-<div
-
-class="panel-heading">
-
-
-REFLECTION MOMENT™
-
-
-<br>
-
-
-ஒரு நிமிட சிந்தனை™
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<p
-
-class="reflection-text-ta">
-
-
-என் வாழ்க்கை நான் உண்மையாக
-விரும்பும் நோக்கத்தை வெளிப்படுத்துகிறதா?
-
-
-</p>
-
-
-
-
-
-
-
-
-
-<p
-
-class="reflection-text-en">
-
-
-Is my life expressing the purpose
-I truly desire?
-
-
-</p>
-
-
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- ==========================================================================
-     WISDOM MOMENT™
-
-     ========================================================================== -->
-
-
-<section
-
-class="wisdom-panel">
-
-
-
-
-
-<div
-
-class="panel-heading">
-
-
-WISDOM MOMENT™
-
-
-<br>
-
-
-ஞான தருணம்™
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<p
-
-class="wisdom-text-ta">
-
-
-தெளிவான நோக்கம் கொண்ட வாழ்க்கை,
-தெளிவான பாதையை உருவாக்குகிறது.
-
-
-</p>
-
-
-
-
-
-
-
-
-
-<p
-
-class="wisdom-text-en">
-
-
-A life guided by clear purpose
-creates a clear path.
-
-
-</p>
-
-
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- ==========================================================================
-     JOURNEY CONTINUATION CTA
-
-     ========================================================================== -->
-
-
-<section
-
-class="assessment-navigation">
-
-
-
-
-
-<button
-
-type="button"
-
-class="assessment-button button-secondary">
-
-
-← BACK
-
-
-</button>
-
-
-
-
-
-
-
-
-
-<button
-
-id="continueButton"
-
-type="button"
-
-class="assessment-button button-primary">
-
-
-CONTINUE JOURNEY →
-
-
-<br>
-
-
-தொடருங்கள்
-
-
-</button>
-
-
-
-
-
-
-
-</section>
-
-     
-<!-- ==========================================================================
-     FOOTER COMPONENT MOUNT
-
-     Loaded by:
-
-     js/assessment01.js
-
-
-     ========================================================================== -->
-
-
-<div
-
-id="footer">
-
-
-</div>
-
-
-
-
-
-
-
-
-
-</main>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- ==========================================================================
-     JAVASCRIPT ENGINE
-
-     Correct dependency loading order
-
-
-     Foundation
-          ↓
-     Data
-          ↓
-     Engine
-          ↓
-     UI
-          ↓
-     Page Controller
-
-
-     ========================================================================== -->
-
-
-
-
-
-<script src="../js/framework.js"></script>
-
-
-<script src="../js/assessmentData.js"></script>
-
-
-<script src="../js/scoring.js"></script>
-
-
-<script src="../js/assessmentEngine.js"></script>
-
-
-<script src="../js/assessmentCommon.js"></script>
-
-
-<script src="../js/assessmentUI.js"></script>
-
-
-<script src="../js/dashboard.js"></script>
-
-
-<script src="../js/report.js"></script>
-
-
-<script src="../js/assessment01.js"></script>
-
-
-
-
-
-
-
-
-
-</body>
-
-
-</html>
-
-
-
-
-
-
-
-
-
-<!-- ==========================================================================
-     END OF FILE
-
-     assessment-01.html
-
-     Version : 6.4
-
-
-     Status
-
-     ✓ PREMIUM CSS PIPELINE CONNECTED
-     ✓ COMPONENT MOUNTS READY
-     ✓ UI RENDERING READY
-     ✓ ENGINE COMPATIBLE
-     ✓ PAGE STRUCTURE COMPLETE
-
-
-     ========================================================================== -->
-
-     
