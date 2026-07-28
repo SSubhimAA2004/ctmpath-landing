@@ -1,634 +1,962 @@
 
 /* ==========================================================================
-
    CTM PATH™ Guided Journey™
-   File        : css/theme.css
-   Version     : 2.3
-   Status      : Premium Global Brand Theme
 
-   Purpose:
-   • Global design tokens
-   • Premium colour system
-   • Typography hierarchy
-   • Button system
-   • Shadows
-   • Borders
-   • Spacing foundation
+   File        : theme.css
+   Version     : 1.0
+   Status      : DEVELOPMENT
+   Stage       : STAGE 0 — FOUNDATION
 
-   Brand Language:
-   • Deep Navy Luxury
-   • Muted Gold Excellence
-   • CTM Teal Transformation
-   • Warm Ivory Human Connection
+   Purpose     :
+   Defines the complete visual identity system for the
+   CTM PATH™ Guided Journey™ application.
 
-========================================================================== */
+   Responsibilities:
 
+   • Brand colors
+   • Typography tokens
+   • Surface system
+   • Border system
+   • Shadow system
+   • Visual emphasis hierarchy
 
-/* ==========================================================================
-   ROOT DESIGN TOKENS
-========================================================================== */
+   Does NOT contain:
 
-:root {
+   • Layout rules
+   • Responsive rules
+   • Page-specific components
 
-
-/* --------------------------------------------------------------------------
-   PREMIUM BRAND COLOURS
---------------------------------------------------------------------------- */
-
-
-/* Primary Background */
-
---ctm-navy:
-#081C3A;
-
-
-/* Secondary Surface */
-
---ctm-surface:
-#102B4E;
-
-
-/* Elevated Card Surface */
-
---ctm-card:
-#12345A;
-
-
-/* Primary Heading */
-
---ctm-ivory:
-#F5F1E8;
-
-
-/* Secondary Heading */
-
---ctm-soft-white:
-#E5E7EB;
-
-
-/* Body Text */
-
---ctm-body:
-#B8C4D6;
-
-
-/* Muted Text */
-
---ctm-muted:
-#7F8C9A;
-
-
-/* Premium Gold */
-
---ctm-gold:
-#C8A96A;
-
-
-/* Champagne Gold */
-
---ctm-gold-light:
-#D4B978;
-
-
-/* Transformation Teal */
-
---ctm-teal:
-#14B8A6;
-
-
-/* Border Gold */
-
---ctm-gold-border:
-rgba(200,169,106,0.28);
-
-
-/* Soft Teal Border */
-
---ctm-teal-border:
-rgba(20,184,166,0.25);
+   ========================================================================== */
 
 
 
 /* ==========================================================================
-   TYPOGRAPHY SYSTEM
-========================================================================== */
-
-
-/* Main Tamil Hero */
-
---font-hero:
-clamp(2.5rem,5vw,4.8rem);
-
-
-/* Section Titles */
-
---font-section:
-clamp(2rem,3vw,3rem);
-
-
-/* Card Titles */
-
---font-card:
-1.25rem;
-
-
-/* Body */
-
---font-body:
-1.05rem;
-
-
-/* Small Labels */
-
---font-label:
-0.75rem;
-
-
-
-/* ==========================================================================
-   FONT WEIGHTS
-========================================================================== */
-
-
---weight-light:
-300;
-
---weight-regular:
-400;
-
---weight-medium:
-500;
-
---weight-semibold:
-600;
-
---weight-bold:
-700;
-
-
-
-/* ==========================================================================
-   LINE HEIGHTS
-========================================================================== */
-
-
---line-tight:
-1.15;
-
-
---line-normal:
-1.6;
-
-
---line-relaxed:
-1.85;
-
-
-
-/* ==========================================================================
-   SPACING SYSTEM
-========================================================================== */
-
-
---space-xs:
-0.5rem;
-
-
---space-sm:
-1rem;
-
-
---space-md:
-2rem;
-
-
---space-lg:
-4rem;
-
-
---space-xl:
-6rem;
-
-
---space-xxl:
-8rem;
-
-
-
-/* ==========================================================================
-   CONTAINER SYSTEM
-========================================================================== */
-
-
---container-width:
-1200px;
-
-
---container-padding:
-2rem;
-
-
-
-/* ==========================================================================
-   BORDER SYSTEM
-========================================================================== */
-
-
---radius-sm:
-12px;
-
-
---radius-md:
-20px;
-
-
---radius-lg:
-32px;
-
-
---radius-pill:
-999px;
-
-
-
-/* ==========================================================================
-   PREMIUM SHADOWS
-========================================================================== */
-
-
---shadow-soft:
-
-0 20px 60px
-rgba(0,0,0,0.25);
-
-
-
---shadow-gold:
-
-0 15px 40px
-rgba(200,169,106,0.25);
-
-
-
---shadow-teal:
-
-0 15px 40px
-rgba(20,184,166,0.18);
-
-
-
-/* ==========================================================================
-   TRANSITIONS
-========================================================================== */
-
-
---transition-fast:
-0.25s ease;
-
-
---transition-normal:
-0.4s ease;
-
-
---transition-slow:
-0.7s ease;
-
-
-
-/* ==========================================================================
-   BUTTON SYSTEM
-========================================================================== */
-
-
-/* Primary CTA */
-
---button-primary-bg:
-
-linear-gradient(
-135deg,
-#D4B978,
-#C8A96A
-);
-
-
-
---button-primary-text:
-#081C3A;
-
-
-
-/* Secondary CTA */
-
---button-secondary-bg:
-#14B8A6;
-
-
-
---button-secondary-text:
-#081C3A;
-
-
-
-/* Ghost Button */
-
---button-outline-border:
-rgba(200,169,106,0.65);
-
-
-
-/* ==========================================================================
-   ICON SYSTEM
-========================================================================== */
-
-
---icon-circle-bg:
-rgba(200,169,106,0.12);
-
-
---icon-circle-border:
-rgba(200,169,106,0.35);
-
-
-
-/* ==========================================================================
-   GLOBAL PAGE SETTINGS
-========================================================================== */
-
-
---page-background:
-var(--ctm-navy);
-
-
---section-background:
-var(--ctm-navy);
-
-
---card-background:
-var(--ctm-card);
-
-
-
-}
-
-
-
-/* ==========================================================================
-
-   GLOBAL TEXT UTILITY CLASSES
-
-========================================================================== */
-
-
-.ctm-heading {
-
-color:
-var(--ctm-ivory);
-
-font-weight:
-var(--weight-bold);
-
-line-height:
-var(--line-tight);
-
-}
-
-
-
-.ctm-gold-text {
-
-color:
-var(--ctm-gold);
-
-}
-
-
-
-.ctm-teal-text {
-
-color:
-var(--ctm-teal);
-
-}
-
-
-
-.ctm-body-text {
-
-color:
-var(--ctm-body);
-
-font-weight:
-var(--weight-regular);
-
-line-height:
-var(--line-relaxed);
-
-}
-
-
-
-/* ==========================================================================
-
-   PREMIUM BUTTON BASE
-
-========================================================================== */
-
-
-.ctm-button {
-
-
-display:inline-flex;
-
-align-items:center;
-
-justify-content:center;
-
-
-padding:
-1rem 2.8rem;
-
-
-border-radius:
-var(--radius-pill);
-
-
-font-size:
-1rem;
-
-
-font-weight:
-var(--weight-semibold);
-
-
-letter-spacing:
-0.04em;
-
-
-cursor:pointer;
-
-
-transition:
-var(--transition-normal);
-
-
-text-decoration:none;
-
-
-}
-
-
-
-/* Primary Button */
-
-.ctm-button-primary {
-
-
-background:
-var(--button-primary-bg);
-
-
-color:
-var(--button-primary-text);
-
-
-box-shadow:
-var(--shadow-gold);
-
-
-}
-
-
-
-.ctm-button-primary:hover {
-
-
-transform:
-translateY(-3px);
-
-
-box-shadow:
-
-0 20px 50px
-rgba(200,169,106,0.40);
-
-
-}
-
-
-
-/* Secondary Button */
-
-.ctm-button-secondary {
-
-
-background:
-var(--button-secondary-bg);
-
-
-color:
-var(--button-secondary-text);
-
-
-box-shadow:
-var(--shadow-teal);
-
-
-}
-
-
-
-/* ==========================================================================
-
-   PREMIUM CARD SYSTEM
-
-========================================================================== */
-
-
-.ctm-card {
-
-
-background:
-var(--ctm-card);
-
-
-border:
-
-1px solid
-var(--ctm-gold-border);
-
-
-border-radius:
-var(--radius-lg);
-
-
-padding:
-2rem;
-
-
-transition:
-var(--transition-normal);
-
-
-}
-
-
-
-.ctm-card:hover {
-
-
-transform:
-translateY(-6px);
-
-
-box-shadow:
-var(--shadow-soft);
-
-
-border-color:
-var(--ctm-gold);
-
-
-}
-
-
-
-/* ==========================================================================
-
-   RESPONSIVE TOKENS
-
-========================================================================== */
-
-
-@media(max-width:768px){
+   DESIGN TOKENS
+   ========================================================================== */
 
 
 :root {
 
 
---container-padding:
-1.25rem;
+    /* ----------------------------------------------------------------------
+       BRAND COLOR SYSTEM
+
+       Premium transformation experience.
+
+       ------------------------------------------------------------------- */
 
 
---space-lg:
-3rem;
+    --ctm-deep-charcoal:
+
+        #181A1F;
 
 
---space-xl:
-4rem;
+    --ctm-charcoal-light:
+
+        #23262D;
+
+
+    --ctm-surface:
+
+        #242831;
+
+
+    --ctm-surface-elevated:
+
+        #2C3039;
+
+
+
+    /* Primary Brand Accent */
+
+
+    --ctm-teal:
+
+        #0FA3B1;
+
+
+    --ctm-teal-light:
+
+        #39C6D4;
+
+
+    --ctm-teal-dark:
+
+        #087681;
+
+
+
+    /* Premium Accent */
+
+
+    --ctm-muted-gold:
+
+        #C6A15B;
+
+
+    --ctm-muted-gold-light:
+
+        #D9BC7A;
+
+
+    --ctm-muted-gold-dark:
+
+        #9B773A;
+
+
+
+    /* Text System */
+
+
+    --ctm-ivory:
+
+        #F6F1E8;
+
+
+    --ctm-white:
+
+        #FFFFFF;
+
+
+    --ctm-text-primary:
+
+        #F6F1E8;
+
+
+    --ctm-text-secondary:
+
+        #B7BBC5;
+
+
+    --ctm-text-muted:
+
+        #858B98;
+
+
+
+    /* Status Colors */
+
+
+    --ctm-success:
+
+        #4CAF78;
+
+
+    --ctm-warning:
+
+        #D89B3C;
+
+
+    --ctm-error:
+
+        #D85C5C;
+
+
+
+    /* ----------------------------------------------------------------------
+       TYPOGRAPHY SYSTEM
+       ------------------------------------------------------------------- */
+
+
+    --font-primary:
+
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+
+    --font-heading:
+
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+
+
+    --weight-regular:
+
+        400;
+
+
+    --weight-medium:
+
+        500;
+
+
+    --weight-semibold:
+
+        600;
+
+
+    --weight-bold:
+
+        700;
+
+
+
+    /* ----------------------------------------------------------------------
+       FONT SCALE
+       ------------------------------------------------------------------- */
+
+
+    --text-xs:
+
+        0.75rem;
+
+
+    --text-sm:
+
+        0.875rem;
+
+
+    --text-base:
+
+        1rem;
+
+
+    --text-lg:
+
+        1.125rem;
+
+
+    --text-xl:
+
+        1.25rem;
+
+
+    --text-2xl:
+
+        1.5rem;
+
+
+    --text-3xl:
+
+        2rem;
+
+
+    --text-4xl:
+
+        2.75rem;
+
+
+    --text-5xl:
+
+        3.5rem;
+
+
+
+    /* ----------------------------------------------------------------------
+       SPACING SYSTEM
+       ------------------------------------------------------------------- */
+
+
+    --space-1:
+
+        0.25rem;
+
+
+    --space-2:
+
+        0.5rem;
+
+
+    --space-3:
+
+        0.75rem;
+
+
+    --space-4:
+
+        1rem;
+
+
+    --space-5:
+
+        1.25rem;
+
+
+    --space-6:
+
+        1.5rem;
+
+
+    --space-8:
+
+        2rem;
+
+
+    --space-10:
+
+        2.5rem;
+
+
+    --space-12:
+
+        3rem;
+
+
+    --space-16:
+
+        4rem;
+
+
+    --space-20:
+
+        5rem;
+
+
+
+    /* ----------------------------------------------------------------------
+       BORDER SYSTEM
+       ------------------------------------------------------------------- */
+
+
+    --border-subtle:
+
+        rgba(255,255,255,0.08);
+
+
+    --border-medium:
+
+        rgba(255,255,255,0.15);
+
+
+    --border-accent:
+
+        rgba(15,163,177,0.5);
+
+
+
+    /* ----------------------------------------------------------------------
+       RADIUS SYSTEM
+       ------------------------------------------------------------------- */
+
+
+    --radius-sm:
+
+        0.375rem;
+
+
+    --radius-md:
+
+        0.75rem;
+
+
+    --radius-lg:
+
+        1.25rem;
+
+
+    --radius-xl:
+
+        1.75rem;
+
+
+    --radius-pill:
+
+        999px;
+
+
+
+    /* ----------------------------------------------------------------------
+       SHADOW SYSTEM
+       ------------------------------------------------------------------- */
+
+
+    --shadow-soft:
+
+        0 8px 24px rgba(0,0,0,0.18);
+
+
+    --shadow-medium:
+
+        0 16px 40px rgba(0,0,0,0.25);
+
+
+    --shadow-premium:
+
+        0 24px 60px rgba(0,0,0,0.35);
+
+
+
+    /* ----------------------------------------------------------------------
+       TRANSITIONS
+       ------------------------------------------------------------------- */
+
+
+    --transition-fast:
+
+        0.15s ease;
+
+
+    --transition-default:
+
+        0.25s ease;
+
+
+    --transition-slow:
+
+        0.4s ease;
+
 
 
 }
 
+/* ==========================================================================
+   GLOBAL THEME APPLICATION
+   ========================================================================== */
+
+
+body {
+
+    background:
+
+        var(--ctm-deep-charcoal);
+
+    color:
+
+        var(--ctm-text-primary);
+
+    font-family:
+
+        var(--font-primary);
 
 }
+
 
 
 /* ==========================================================================
+   TYPOGRAPHY THEME
+   ========================================================================== */
 
-   END OF FILE
 
-   CTM PATH™ Guided Journey™
-   Theme System v2.3
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 
-========================================================================== */
+    font-family:
+
+        var(--font-heading);
+
+    color:
+
+        var(--ctm-text-primary);
+
+    font-weight:
+
+        var(--weight-semibold);
+
+    letter-spacing:
+
+        -0.02em;
+
+}
+
+
+
+h1 {
+
+    font-size:
+
+        var(--text-5xl);
+
+    line-height:
+
+        1.1;
+
+}
+
+
+
+h2 {
+
+    font-size:
+
+        var(--text-4xl);
+
+    line-height:
+
+        1.2;
+
+}
+
+
+
+h3 {
+
+    font-size:
+
+        var(--text-3xl);
+
+    line-height:
+
+        1.25;
+
+}
+
+
+
+h4 {
+
+    font-size:
+
+        var(--text-2xl);
+
+}
+
+
+
+p {
+
+    color:
+
+        var(--ctm-text-secondary);
+
+    font-size:
+
+        var(--text-base);
+
+}
+
+
+
+/* ==========================================================================
+   LINK THEME
+   ========================================================================== */
+
+
+a {
+
+    color:
+
+        var(--ctm-teal);
+
+    transition:
+
+        color var(--transition-default);
+
+}
+
+
+
+a:hover {
+
+    color:
+
+        var(--ctm-teal-light);
+
+}
+
+
+
+/* ==========================================================================
+   SURFACE SYSTEM
+   ========================================================================== */
+
+
+.surface {
+
+    background:
+
+        var(--ctm-surface);
+
+    border:
+
+        1px solid var(--border-subtle);
+
+}
+
+
+
+.surface-elevated {
+
+    background:
+
+        var(--ctm-surface-elevated);
+
+    border:
+
+        1px solid var(--border-medium);
+
+    box-shadow:
+
+        var(--shadow-soft);
+
+}
+
+
+
+/* ==========================================================================
+   CARD THEME
+   ========================================================================== */
+
+
+.card {
+
+    background:
+
+        var(--ctm-surface);
+
+    border:
+
+        1px solid var(--border-subtle);
+
+    border-radius:
+
+        var(--radius-lg);
+
+    box-shadow:
+
+        var(--shadow-soft);
+
+}
+
+
+
+.card:hover {
+
+    border-color:
+
+        var(--border-accent);
+
+}
+
+
+
+/* ==========================================================================
+   BUTTON THEME
+   ========================================================================== */
+
+
+.btn-primary {
+
+    background:
+
+        var(--ctm-teal);
+
+    color:
+
+        var(--ctm-white);
+
+}
+
+
+
+.btn-primary:hover {
+
+    background:
+
+        var(--ctm-teal-light);
+
+}
+
+
+
+.btn-secondary {
+
+    background:
+
+        transparent;
+
+    color:
+
+        var(--ctm-text-primary);
+
+    border:
+
+        1px solid var(--border-medium);
+
+}
+
+
+
+.btn-secondary:hover {
+
+    border-color:
+
+        var(--ctm-teal);
+
+    color:
+
+        var(--ctm-teal-light);
+
+}
+
+
+
+.btn-accent {
+
+    background:
+
+        var(--ctm-muted-gold);
+
+    color:
+
+        var(--ctm-deep-charcoal);
+
+}
+
+
+
+.btn-accent:hover {
+
+    background:
+
+        var(--ctm-muted-gold-light);
+
+}
+
+
+
+/* ==========================================================================
+   FORM THEME
+   ========================================================================== */
+
+
+input,
+textarea,
+select {
+
+    background:
+
+        var(--ctm-surface);
+
+    color:
+
+        var(--ctm-text-primary);
+
+    border:
+
+        1px solid var(--border-medium);
+
+    border-radius:
+
+        var(--radius-md);
+
+    padding:
+
+        0.85rem 1rem;
+
+    transition:
+
+        border-color var(--transition-default),
+        box-shadow var(--transition-default);
+
+}
+
+
+
+input::placeholder,
+textarea::placeholder {
+
+    color:
+
+        var(--ctm-text-muted);
+
+}
+
+
+
+input:focus,
+textarea:focus,
+select:focus {
+
+    border-color:
+
+        var(--ctm-teal);
+
+    box-shadow:
+
+        0 0 0 3px rgba(15,163,177,0.15);
+
+}
+
+
+
+/* ==========================================================================
+   LABEL THEME
+   ========================================================================== */
+
+
+label {
+
+    color:
+
+        var(--ctm-text-primary);
+
+    font-size:
+
+        var(--text-sm);
+
+}
+
+
+
+/* ==========================================================================
+   PROGRESS THEME
+   ========================================================================== */
+
+
+.progress-track {
+
+    background:
+
+        rgba(255,255,255,0.08);
+
+}
+
+
+
+.progress-fill {
+
+    background:
+
+        linear-gradient(
+            90deg,
+            var(--ctm-teal),
+            var(--ctm-teal-light)
+        );
+
+}
+
+
+
+/* ==========================================================================
+   LOADING THEME
+   ========================================================================== */
+
+
+.global-loader {
+
+    background:
+
+        rgba(24,26,31,0.96);
+
+}
+
+
+
+.loader-spinner {
+
+    border:
+
+        4px solid rgba(255,255,255,0.15);
+
+    border-top-color:
+
+        var(--ctm-teal);
+
+}
+
+
+
+/* ==========================================================================
+   ERROR THEME
+   ========================================================================== */
+
+
+.error-container {
+
+    background:
+
+        var(--ctm-error);
+
+    color:
+
+        var(--ctm-white);
+
+}
+
+
+
+/* ==========================================================================
+   DIVIDER THEME
+   ========================================================================== */
+
+
+.divider {
+
+    background:
+
+        var(--border-subtle);
+
+}
+
+
+
+/* ==========================================================================
+   FOCUS THEME
+   ========================================================================== */
+
+
+:focus-visible {
+
+    outline-color:
+
+        var(--ctm-teal);
+
+}
+
+
+
+/* ==========================================================================
+   PREMIUM EMPHASIS CLASSES
+   ========================================================================== */
+
+
+.text-accent {
+
+    color:
+
+        var(--ctm-teal);
+
+}
+
+
+
+.text-gold {
+
+    color:
+
+        var(--ctm-muted-gold);
+
+}
+
+
+
+.text-muted {
+
+    color:
+
+        var(--ctm-text-muted);
+
+}
+
+
+
+.text-primary {
+
+    color:
+
+        var(--ctm-text-primary);
+
+}
+
+
+
+/* ==========================================================================
+   END OF THEME FOUNDATION
+
+   Responsive adaptation:
+   responsive.css
+
+   Page styling:
+   Individual page stylesheets
+
+   ========================================================================== */
 
