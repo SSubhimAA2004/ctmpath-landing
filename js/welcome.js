@@ -1,252 +1,280 @@
 
-/*
-==============================================================================
- CTM PATH™ Guided Journey™
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
 
- File        : js/welcome.js
- Version     : 1.4
+   File        : js/welcome.js
+   Version     : 2.0
 
- Page        : PAGE 01 — WELCOME™
+   Page        : 01 — WELCOME™
 
- Purpose:
- Production Welcome page controller.
+   Purpose:
+   Welcome page controller
 
- Responsibilities:
- - Activate Begin Journey CTA
- - Navigate through CTM_APP router
- - Support dynamically loaded pages
+   Responsibilities:
+   • Initialise page
+   • Capture journey start
+   • Capture device metadata
+   • Navigate visitor to registration
 
- Rules:
- - No backend calls
- - No registration logic
- - No assessment logic
-
- Architecture:
- - Compatible with app.js dynamic loader
-
- Status:
- 🔒 PAGE 01 Navigation Fix
-
-==============================================================================
-*/
-
-
-(function () {
-
-
-    "use strict";
+   ========================================================================== */
 
 
 
-    /*
-    ==========================================================================
-       INITIALIZATION
-    ==========================================================================
-    */
+/* ==========================================================================
+   PAGE INITIALISATION
+   ========================================================================== */
 
 
-    function initWelcomePage(){
+document.addEventListener(
+    "DOMContentLoaded",
+    initialiseWelcome
+);
 
 
 
-        console.log(
+function initialiseWelcome(){
 
-            "CTM PATH™ Welcome Controller Ready."
 
+    console.log(
+        "CTM PATH™ Welcome Page Initialised"
+    );
+
+
+    captureJourneyStart();
+
+
+    bindJourneyButton();
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   JOURNEY START TRACKING
+   ========================================================================== */
+
+
+function captureJourneyStart(){
+
+
+    const journeyStart = {
+
+
+        startedAt:
+            new Date().toISOString(),
+
+
+        device:
+            detectDevice(),
+
+
+        language:
+            navigator.language || "en",
+
+
+        source:
+            getSource()
+
+
+
+    };
+
+
+
+    sessionStorage.setItem(
+
+        "ctmJourneyStart",
+
+        JSON.stringify(journeyStart)
+
+    );
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   DEVICE DETECTION
+   ========================================================================== */
+
+
+function detectDevice(){
+
+
+    const width =
+        window.innerWidth;
+
+
+
+    if(width <= 768){
+
+        return "Mobile";
+
+    }
+
+
+
+    if(width <= 1024){
+
+        return "Tablet";
+
+    }
+
+
+
+    return "Desktop";
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   SOURCE TRACKING
+   ========================================================================== */
+
+
+function getSource(){
+
+
+    const params =
+        new URLSearchParams(
+            window.location.search
         );
 
 
+
+    return (
+
+        params.get("source")
+
+        ||
+
+        "Direct"
+
+    );
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   BEGIN JOURNEY BUTTON
+   ========================================================================== */
+
+
+function bindJourneyButton(){
+
+
+    const button =
+        document.getElementById(
+            "beginJourneyButton"
+        );
+
+
+
+    if(!button){
+
+        console.warn(
+            "Begin Journey button not found"
+        );
+
+        return;
 
     }
 
 
 
 
-
-
-
-
-    /*
-    ==========================================================================
-       EVENT DELEGATION
-       
-       Works with dynamically injected HTML
-    ==========================================================================
-    */
-
-
-    document.addEventListener(
-
+    button.addEventListener(
         "click",
+        handleJourneyStart
+    );
 
-        function(event){
 
-
-
-            const button =
-
-                event.target.closest(
-
-                    "#beginJourneyButton"
-
-                );
+}
 
 
 
 
 
-            if(!button){
+
+function handleJourneyStart(event){
 
 
-                return;
-
-
-            }
-
+    event.preventDefault();
 
 
 
+    sessionStorage.setItem(
 
-            event.preventDefault();
+        "ctmJourneyStatus",
 
-
-
-
-
-            startJourney();
-
-
-
-        }
-
-
+        "STARTED"
 
     );
 
 
 
+    window.location.href =
+        "pages/registration.html";
 
 
+}
 
 
 
 
-    /*
-    ==========================================================================
-       START JOURNEY
-    ==========================================================================
-    */
 
 
-    function startJourney(){
+/* ==========================================================================
+   PUBLIC API
+   ========================================================================== */
 
 
+window.CTMWelcome = {
 
-        const button =
 
-            document.getElementById(
+    restartJourney:function(){
 
-                "beginJourneyButton"
 
-            );
+        sessionStorage.clear();
 
 
-
-
-
-        if(button){
-
-
-
-            button.classList.add(
-
-                "journey-starting"
-
-            );
-
-
-        }
-
-
-
-
-
-
-
-        setTimeout(
-
-            function(){
-
-
-
-
-
-                if(
-
-                    window.CTM_APP &&
-
-                    typeof window.CTM_APP.loadPage === "function"
-
-                ){
-
-
-
-                    window.CTM_APP.loadPage(
-
-                        "pages/registration.html"
-
-                    );
-
-
-
-                }
-
-                else {
-
-
-
-                    console.error(
-
-                        "CTM PATH™: Router unavailable."
-
-                    );
-
-
-
-                }
-
-
-
-
-
-            },
-
-            200
-
-        );
-
+        window.location.reload();
 
 
     }
 
 
 
+};
 
 
 
 
 
 
-    /*
-    ==========================================================================
-       START CONTROLLER
-    ==========================================================================
-    */
+/* ==========================================================================
+   END OF FILE
 
+   CTM PATH™ Guided Journey™
+   Welcome Controller v2.0
 
-    initWelcomePage();
-
-
-
-})();
+   ========================================================================== */
 
