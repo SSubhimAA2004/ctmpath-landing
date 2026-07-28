@@ -386,3 +386,1004 @@ PILLAR 04 — Character & Integrity™
 
 ========================================================
 */
+
+
+/*
+========================================================
+
+CTM PATH™ GUIDED JOURNEY™
+DATA LAYER
+
+Continuation:
+data/questions.js
+
+Batch:
+1C
+
+Current Section:
+PILLAR 04 — CHARACTER & INTEGRITY™
+
+========================================================
+*/
+
+
+/*
+========================================================
+PILLAR 04
+
+CHARACTER & INTEGRITY™
+
+Values,
+Honesty,
+Self-Leadership
+
+========================================================
+*/
+
+
+{
+    id: "CHARACTER_01",
+
+    pillar: "Character & Integrity",
+
+    pillarNumber: 4,
+
+    questionNumber: 1,
+
+    tamil:
+    "உங்கள் மதிப்புகள் மற்றும் நம்பிக்கைகளுக்கு ஏற்ப நீங்கள் எவ்வளவு நேர்மையாக வாழ்கிறீர்கள்?",
+
+    english:
+    "How consistently do you live according to your values and beliefs?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+{
+    id: "CHARACTER_02",
+
+    pillar: "Character & Integrity",
+
+    pillarNumber: 4,
+
+    questionNumber: 2,
+
+    tamil:
+    "யாரும் பார்க்காத நேரங்களிலும் சரியான முடிவுகளை எடுக்கும் உங்கள் திறன் எவ்வளவு வலிமையானது?",
+
+    english:
+    "How strong is your ability to make the right decisions even when no one is watching?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+{
+    id: "CHARACTER_03",
+
+    pillar: "Character & Integrity",
+
+    pillarNumber: 4,
+
+    questionNumber: 3,
+
+    tamil:
+    "உங்கள் வாழ்க்கைக்கு முழுமையான பொறுப்பை ஏற்றுக்கொண்டு செயல்படும் பழக்கம் உங்களிடம் எவ்வளவு உள்ளது?",
+
+    english:
+    "How strongly do you take ownership and responsibility for your life?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+/*
+========================================================
+PILLAR 05
+
+LEARNING & MASTERY™
+
+Growth,
+Skills,
+Continuous Improvement
+
+========================================================
+*/
+
+
+{
+    id: "LEARNING_01",
+
+    pillar: "Learning & Mastery",
+
+    pillarNumber: 5,
+
+    questionNumber: 1,
+
+    tamil:
+    "புதிய அறிவு, திறன்கள் மற்றும் அனுபவங்களை தொடர்ந்து கற்றுக்கொள்ளும் உங்கள் ஆர்வம் எவ்வளவு அதிகம்?",
+
+    english:
+    "How strong is your desire to continuously learn new knowledge, skills and experiences?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+{
+    id: "LEARNING_02",
+
+    pillar: "Learning & Mastery",
+
+    pillarNumber: 5,
+
+    questionNumber: 2,
+
+    tamil:
+    "உங்கள் திறமைகளை மேம்படுத்துவதற்காக நீங்கள் தொடர்ந்து நேரத்தையும் முயற்சியையும் முதலீடு செய்கிறீர்களா?",
+
+    english:
+    "How consistently do you invest time and effort to improve your abilities?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+{
+    id: "LEARNING_03",
+
+    pillar: "Learning & Mastery",
+
+    pillarNumber: 5,
+
+    questionNumber: 3,
+
+    tamil:
+    "வாழ்க்கை மாற்றங்களை வளர்ச்சிக்கான வாய்ப்புகளாக ஏற்றுக்கொள்ளும் உங்கள் மனநிலை எவ்வளவு வலிமையானது?",
+
+    english:
+    "How strong is your mindset to embrace life changes as opportunities for growth?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+}
+
+
+/*
+========================================================
+END OF BATCH 1C
+
+Completed:
+✅ Purpose™
+✅ Health™
+✅ Relationships™
+✅ Character & Integrity™
+✅ Learning & Mastery™
+
+Next:
+PILLAR 06 — Career & Contribution™
+
+========================================================
+*/
+
+/*
+========================================================
+
+CTM PATH™ GUIDED JOURNEY™
+DATA LAYER
+
+Continuation:
+data/questions.js
+
+Batch:
+1D
+
+Current Section:
+PILLAR 06 — CAREER & CONTRIBUTION™
+
+========================================================
+*/
+
+
+/*
+========================================================
+PILLAR 06
+
+CAREER & CONTRIBUTION™
+
+Work,
+Excellence,
+Impact
+
+========================================================
+*/
+
+
+{
+    id: "CAREER_01",
+
+    pillar: "Career & Contribution",
+
+    pillarNumber: 6,
+
+    questionNumber: 1,
+
+    tamil:
+    "உங்கள் தொழில் அல்லது பணியில் உங்கள் திறமைகளை முழுமையாக பயன்படுத்துகிறீர்கள் என்று எவ்வளவு உணர்கிறீர்கள்?",
+
+    english:
+    "How much do you feel you are fully using your talents in your career or work?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+{
+    id: "CAREER_02",
+
+    pillar: "Career & Contribution",
+
+    pillarNumber: 6,
+
+    questionNumber: 2,
+
+    tamil:
+    "உங்கள் வேலை அல்லது தொழில் உங்கள் வாழ்க்கை நோக்கத்துடன் எவ்வளவு இணைந்துள்ளது?",
+
+    english:
+    "How aligned is your work or career with your life purpose?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+{
+    id: "CAREER_03",
+
+    pillar: "Career & Contribution",
+
+    pillarNumber: 6,
+
+    questionNumber: 3,
+
+    tamil:
+    "உலகிற்கு மதிப்பை உருவாக்குகிறேன் என்ற உணர்வு உங்கள் பணியில் எவ்வளவு உள்ளது?",
+
+    english:
+    "How strongly do you feel that your work creates meaningful value for the world?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+/*
+========================================================
+PILLAR 07
+
+FINANCIAL FREEDOM™
+
+Money,
+Security,
+Abundance
+
+========================================================
+*/
+
+
+{
+    id: "FINANCIAL_01",
+
+    pillar: "Financial Freedom",
+
+    pillarNumber: 7,
+
+    questionNumber: 1,
+
+    tamil:
+    "உங்கள் தற்போதைய நிதி நிலை மற்றும் பண மேலாண்மை குறித்து நீங்கள் எவ்வளவு திருப்தியாக உள்ளீர்கள்?",
+
+    english:
+    "How satisfied are you with your current financial situation and money management?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+{
+    id: "FINANCIAL_02",
+
+    pillar: "Financial Freedom",
+
+    pillarNumber: 7,
+
+    questionNumber: 2,
+
+    tamil:
+    "உங்கள் எதிர்கால நிதி பாதுகாப்பை உருவாக்குவதற்கான தெளிவான திட்டம் உங்களிடம் எவ்வளவு உள்ளது?",
+
+    english:
+    "How clear is your plan for creating future financial security?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+{
+    id: "FINANCIAL_03",
+
+    pillar: "Financial Freedom",
+
+    pillarNumber: 7,
+
+    questionNumber: 3,
+
+    tamil:
+    "செல்வத்தை உருவாக்கவும், பாதுகாக்கவும், பெருக்கவும் உங்கள் திறன் மீது உங்களுக்கு எவ்வளவு நம்பிக்கை உள்ளது?",
+
+    english:
+    "How confident are you in your ability to create, protect and grow wealth?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+}
+
+
+/*
+========================================================
+END OF BATCH 1D
+
+Completed:
+✅ Purpose™
+✅ Health™
+✅ Relationships™
+✅ Character & Integrity™
+✅ Learning & Mastery™
+✅ Career & Contribution™
+✅ Financial Freedom™
+
+Next:
+PILLAR 08 — Time Freedom™
+
+========================================================
+*/
+
+/*
+========================================================
+
+CTM PATH™ GUIDED JOURNEY™
+DATA LAYER
+
+Continuation:
+data/questions.js
+
+Batch:
+1E
+
+Current Section:
+PILLAR 08 — TIME FREEDOM™
+
+========================================================
+*/
+
+
+/*
+========================================================
+PILLAR 08
+
+TIME FREEDOM™
+
+Priorities,
+Balance,
+Life Design
+
+========================================================
+*/
+
+
+{
+    id: "TIME_01",
+
+    pillar: "Time Freedom",
+
+    pillarNumber: 8,
+
+    questionNumber: 1,
+
+    tamil:
+    "உங்கள் நேரத்தை நீங்கள் முக்கியமான விஷயங்களுக்கு முன்னுரிமையுடன் பயன்படுத்துகிறீர்கள் என்று எவ்வளவு உணர்கிறீர்கள்?",
+
+    english:
+    "How effectively do you use your time according to your most important priorities?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+{
+    id: "TIME_02",
+
+    pillar: "Time Freedom",
+
+    pillarNumber: 8,
+
+    questionNumber: 2,
+
+    tamil:
+    "உங்கள் வேலை, குடும்பம், தனிப்பட்ட வளர்ச்சி மற்றும் ஓய்வு ஆகியவற்றிற்கு இடையில் சமநிலையை எவ்வளவு பராமரிக்கிறீர்கள்?",
+
+    english:
+    "How well do you maintain balance between work, family, personal growth and rest?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+{
+    id: "TIME_03",
+
+    pillar: "Time Freedom",
+
+    pillarNumber: 8,
+
+    questionNumber: 3,
+
+    tamil:
+    "உங்கள் வாழ்க்கையை நீங்கள் தேர்ந்தெடுத்த விதத்தில் வடிவமைக்கும் சுதந்திரம் உங்களுக்கு எவ்வளவு உள்ளது?",
+
+    english:
+    "How much freedom do you have to design your life the way you choose?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+/*
+========================================================
+PILLAR 09
+
+TRIBE™
+
+Community,
+Support,
+Belonging
+
+========================================================
+*/
+
+
+{
+    id: "TRIBE_01",
+
+    pillar: "Tribe",
+
+    pillarNumber: 9,
+
+    questionNumber: 1,
+
+    tamil:
+    "உங்கள் வளர்ச்சியை ஆதரிக்கும் நேர்மறையான மனிதர்களின் குழு உங்கள் வாழ்க்கையில் எவ்வளவு உள்ளது?",
+
+    english:
+    "How strong is your circle of positive people who support your growth?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+{
+    id: "TRIBE_02",
+
+    pillar: "Tribe",
+
+    pillarNumber: 9,
+
+    questionNumber: 2,
+
+    tamil:
+    "உங்கள் எண்ணங்கள், கனவுகள் மற்றும் சவால்களை பகிர்ந்து கொள்ள நம்பிக்கையான மனிதர்கள் உங்களிடம் எவ்வளவு உள்ளனர்?",
+
+    english:
+    "How much do you have trusted people with whom you can share your dreams and challenges?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+{
+    id: "TRIBE_03",
+
+    pillar: "Tribe",
+
+    pillarNumber: 9,
+
+    questionNumber: 3,
+
+    tamil:
+    "மற்றவர்களின் வாழ்க்கையில் நேர்மறையான தாக்கத்தை ஏற்படுத்தும் உங்கள் பங்களிப்பு எவ்வளவு உள்ளது?",
+
+    english:
+    "How strong is your contribution towards creating a positive impact in others' lives?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+}
+
+
+/*
+========================================================
+END OF BATCH 1E
+
+Completed:
+✅ Purpose™
+✅ Health™
+✅ Relationships™
+✅ Character & Integrity™
+✅ Learning & Mastery™
+✅ Career & Contribution™
+✅ Financial Freedom™
+✅ Time Freedom™
+✅ Tribe™
+
+Next:
+PILLAR 10 — Automation™
+
+========================================================
+*/
+
+/*
+========================================================
+
+CTM PATH™ GUIDED JOURNEY™
+DATA LAYER
+
+Continuation:
+data/questions.js
+
+Batch:
+1F
+
+Current Section:
+PILLAR 10 — AUTOMATION™
+
+========================================================
+*/
+
+
+/*
+========================================================
+PILLAR 10
+
+AUTOMATION™
+
+Systems,
+Efficiency,
+Leverage
+
+========================================================
+*/
+
+
+{
+    id: "AUTOMATION_01",
+
+    pillar: "Automation",
+
+    pillarNumber: 10,
+
+    questionNumber: 1,
+
+    tamil:
+    "உங்கள் வாழ்க்கை மற்றும் பணியில் மீண்டும் மீண்டும் செய்யப்படும் செயல்களை எளிமைப்படுத்தும் அமைப்புகள் உங்களிடம் எவ்வளவு உள்ளன?",
+
+    english:
+    "How much do you have systems that simplify repetitive tasks in your life and work?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+{
+    id: "AUTOMATION_02",
+
+    pillar: "Automation",
+
+    pillarNumber: 10,
+
+    questionNumber: 2,
+
+    tamil:
+    "தொழில்நுட்பம் மற்றும் கருவிகளை பயன்படுத்தி உங்கள் நேரத்தையும் திறமையையும் பெருக்குகிறீர்களா?",
+
+    english:
+    "How effectively do you use technology and tools to multiply your time and productivity?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+{
+    id: "AUTOMATION_03",
+
+    pillar: "Automation",
+
+    pillarNumber: 10,
+
+    questionNumber: 3,
+
+    tamil:
+    "உங்கள் வாழ்க்கை இலக்குகளை அடைய உதவும் தெளிவான செயல்முறைகள் மற்றும் பழக்க அமைப்புகள் உங்களிடம் எவ்வளவு உள்ளன?",
+
+    english:
+    "How strong are your processes and habit systems that help you achieve your life goals?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+/*
+========================================================
+PILLAR 11
+
+CONTRIBUTION™
+
+Service,
+Legacy,
+Impact
+
+========================================================
+*/
+
+
+{
+    id: "CONTRIBUTION_01",
+
+    pillar: "Contribution",
+
+    pillarNumber: 11,
+
+    questionNumber: 1,
+
+    tamil:
+    "உலகிற்கு மதிப்பையும் நன்மையையும் வழங்க வேண்டும் என்ற உணர்வு உங்களிடம் எவ்வளவு உள்ளது?",
+
+    english:
+    "How strong is your desire to create value and goodness for the world?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+{
+    id: "CONTRIBUTION_02",
+
+    pillar: "Contribution",
+
+    pillarNumber: 11,
+
+    questionNumber: 2,
+
+    tamil:
+    "உங்கள் அறிவு, அனுபவம் மற்றும் திறமைகளை மற்றவர்களின் வளர்ச்சிக்காக பகிர்ந்து கொள்கிறீர்களா?",
+
+    english:
+    "How consistently do you share your knowledge, experience and abilities to help others grow?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+{
+    id: "CONTRIBUTION_03",
+
+    pillar: "Contribution",
+
+    pillarNumber: 11,
+
+    questionNumber: 3,
+
+    tamil:
+    "உங்கள் வாழ்க்கை ஒரு அர்த்தமுள்ள மரபை உருவாக்குகிறது என்ற உணர்வு உங்களுக்கு எவ்வளவு உள்ளது?",
+
+    english:
+    "How strongly do you feel that your life is creating a meaningful legacy?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+}
+
+
+/*
+========================================================
+END OF BATCH 1F
+
+Completed:
+✅ Purpose™
+✅ Health™
+✅ Relationships™
+✅ Character & Integrity™
+✅ Learning & Mastery™
+✅ Career & Contribution™
+✅ Financial Freedom™
+✅ Time Freedom™
+✅ Tribe™
+✅ Automation™
+✅ Contribution™
+
+Next:
+PILLAR 12 — Vision™
+
+========================================================
+*/
+
+/*
+========================================================
+
+CTM PATH™ GUIDED JOURNEY™
+DATA LAYER
+
+Continuation:
+data/questions.js
+
+Batch:
+1G
+
+Current Section:
+PILLAR 12 — VISION™
+
+========================================================
+*/
+
+
+/*
+========================================================
+PILLAR 12
+
+VISION™
+
+Dreams,
+Future,
+Possibility
+
+========================================================
+*/
+
+
+{
+    id: "VISION_01",
+
+    pillar: "Vision",
+
+    pillarNumber: 12,
+
+    questionNumber: 1,
+
+    tamil:
+    "உங்கள் எதிர்கால வாழ்க்கை எப்படி இருக்க வேண்டும் என்பதற்கான தெளிவான பார்வை உங்களிடம் எவ்வளவு உள்ளது?",
+
+    english:
+    "How clear is your vision of the future life you want to create?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+{
+    id: "VISION_02",
+
+    pillar: "Vision",
+
+    pillarNumber: 12,
+
+    questionNumber: 2,
+
+    tamil:
+    "உங்கள் கனவுகளை நனவாக்க தேவையான நம்பிக்கை, திட்டம் மற்றும் செயல்பாடு உங்களிடம் எவ்வளவு உள்ளது?",
+
+    english:
+    "How much confidence, planning and action do you have to transform your dreams into reality?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+},
+
+
+{
+    id: "VISION_03",
+
+    pillar: "Vision",
+
+    pillarNumber: 12,
+
+    questionNumber: 3,
+
+    tamil:
+    "உங்கள் சிறந்த வாழ்க்கையை உருவாக்குவதற்கான எதிர்கால வாய்ப்புகளை நீங்கள் எவ்வளவு நம்பிக்கையுடன் பார்க்கிறீர்கள்?",
+
+    english:
+    "How confidently do you see the future possibilities for creating your best life?",
+
+    scale:
+    {
+        min: 1,
+        max: 10
+    }
+
+}
+
+
+]
+
+};
+
+
+/*
+========================================================
+
+QUESTION DATABASE COMPLETE
+
+Total Structure:
+
+12 Pillars™
+
+Completed:
+✅ Purpose™
+✅ Health™
+✅ Relationships™
+✅ Character & Integrity™
+✅ Learning & Mastery™
+✅ Career & Contribution™
+✅ Financial Freedom™
+✅ Time Freedom™
+✅ Tribe™
+✅ Automation™
+✅ Contribution™
+✅ Vision™
+
+Question Count:
+
+12 Pillars
+×
+3 Questions
+
+=
+36 Questions
+
+========================================================
+
+
+GLOBAL ACCESS
+
+The assessment engine can access:
+
+CTM_QUESTIONS.questions
+
+
+========================================================
+*/
+
