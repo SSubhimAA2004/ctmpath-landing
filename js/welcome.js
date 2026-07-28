@@ -3,26 +3,38 @@
    CTM PATH™ Guided Journey™
 
    File        : js/welcome.js
-   Version     : 2.0
+   Version     : 2.1
 
    Page        : 01 — WELCOME™
 
    Purpose:
-   Welcome page controller
+   Premium Welcome Page Controller
 
    Responsibilities:
-   • Initialise page
+   • Initialise Welcome experience
    • Capture journey start
-   • Capture device metadata
-   • Navigate visitor to registration
+   • Store temporary session data
+   • Navigate to Registration™
 
-   ========================================================================== */
+   Architecture:
+
+   welcome.js
+        ↓
+   sessionStorage
+        ↓
+   registration.js
+        ↓
+   api.js
+        ↓
+   Frozen Backend
+
+========================================================================== */
 
 
 
 /* ==========================================================================
    PAGE INITIALISATION
-   ========================================================================== */
+========================================================================== */
 
 
 document.addEventListener(
@@ -36,7 +48,7 @@ function initialiseWelcome(){
 
 
     console.log(
-        "CTM PATH™ Welcome Page Initialised"
+        "CTM PATH™ Welcome Journey Initialised"
     );
 
 
@@ -54,30 +66,42 @@ function initialiseWelcome(){
 
 
 /* ==========================================================================
-   JOURNEY START TRACKING
-   ========================================================================== */
+   JOURNEY SESSION INITIALISATION
+========================================================================== */
 
 
 function captureJourneyStart(){
 
 
-    const journeyStart = {
+    const journeyData = {
+
+
+        journeyStarted:
+
+            true,
 
 
         startedAt:
+
             new Date().toISOString(),
 
 
+
         device:
+
             detectDevice(),
 
 
+
         language:
-            navigator.language || "en",
+
+            detectLanguage(),
+
 
 
         source:
-            getSource()
+
+            detectSource()
 
 
 
@@ -89,7 +113,7 @@ function captureJourneyStart(){
 
         "ctmJourneyStart",
 
-        JSON.stringify(journeyStart)
+        JSON.stringify(journeyData)
 
     );
 
@@ -103,7 +127,7 @@ function captureJourneyStart(){
 
 /* ==========================================================================
    DEVICE DETECTION
-   ========================================================================== */
+========================================================================== */
 
 
 function detectDevice(){
@@ -141,16 +165,45 @@ function detectDevice(){
 
 
 /* ==========================================================================
-   SOURCE TRACKING
-   ========================================================================== */
+   LANGUAGE DETECTION
+========================================================================== */
 
 
-function getSource(){
+function detectLanguage(){
+
+
+    return (
+
+        navigator.language
+
+        ||
+
+        "en"
+
+    );
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   SOURCE DETECTION
+========================================================================== */
+
+
+function detectSource(){
 
 
     const params =
+
         new URLSearchParams(
+
             window.location.search
+
         );
 
 
@@ -175,35 +228,47 @@ function getSource(){
 
 /* ==========================================================================
    BEGIN JOURNEY BUTTON
-   ========================================================================== */
+========================================================================== */
 
 
 function bindJourneyButton(){
 
 
     const button =
+
         document.getElementById(
+
             "beginJourneyButton"
+
         );
 
 
 
     if(!button){
 
+
         console.warn(
-            "Begin Journey button not found"
+
+            "CTM PATH™ Begin Journey button missing"
+
         );
 
+
         return;
+
 
     }
 
 
 
 
+
     button.addEventListener(
+
         "click",
-        handleJourneyStart
+
+        startJourney
+
     );
 
 
@@ -214,7 +279,7 @@ function bindJourneyButton(){
 
 
 
-function handleJourneyStart(event){
+function startJourney(event){
 
 
     event.preventDefault();
@@ -232,6 +297,7 @@ function handleJourneyStart(event){
 
 
     window.location.href =
+
         "pages/registration.html";
 
 
@@ -243,24 +309,34 @@ function handleJourneyStart(event){
 
 
 /* ==========================================================================
-   PUBLIC API
-   ========================================================================== */
+   JOURNEY RESET SUPPORT
+========================================================================== */
 
 
 window.CTMWelcome = {
 
 
-    restartJourney:function(){
+    reset:function(){
 
 
-        sessionStorage.clear();
+        sessionStorage.removeItem(
+
+            "ctmJourneyStart"
+
+        );
+
+
+        sessionStorage.removeItem(
+
+            "ctmJourneyStatus"
+
+        );
 
 
         window.location.reload();
 
 
     }
-
 
 
 };
@@ -274,7 +350,7 @@ window.CTMWelcome = {
    END OF FILE
 
    CTM PATH™ Guided Journey™
-   Welcome Controller v2.0
+   Welcome Controller v2.1
 
-   ========================================================================== */
+========================================================================== */
 
