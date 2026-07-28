@@ -1,1 +1,453 @@
 
+<!-- ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   Component   : progress.html
+   Version     : 1.0
+
+   Purpose:
+   Reusable journey progress indicator.
+
+   Used by:
+
+   • Welcome™
+   • Registration™
+   • Assessment Pages 03–14
+   • KALA CHAKRA™
+   • Diagnosis™
+   • Prescription™
+   • CTA™
+
+   ========================================================================== -->
+
+
+<div class="progress-component"
+
+     data-component="progress">
+
+
+
+
+
+    <!-- ==============================================================
+         Progress Header
+         ============================================================== -->
+
+
+    <div class="progress-header">
+
+
+        <span class="progress-label">
+
+
+            Your Journey
+
+
+        </span>
+
+
+
+        <span class="progress-counter"
+
+
+              data-progress-counter>
+
+
+            {{CURRENT_PAGE}} / {{TOTAL_PAGES}}
+
+
+        </span>
+
+
+
+    </div>
+
+
+
+
+
+    <!-- ==============================================================
+         Progress Track
+         ============================================================== -->
+
+
+    <div class="progress-track">
+
+
+
+        <div class="progress-fill"
+
+
+             data-progress-fill>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   Component   : progress.html
+   Continuation : Batch 1B
+
+   ========================================================================== */
+
+
+
+    <!-- ==============================================================
+         Progress Steps
+
+         Optional visual journey markers.
+
+         Controlled by navigation.js
+
+         ============================================================== -->
+
+
+    <div class="progress-steps"
+
+
+
+         data-progress-steps>
+
+
+
+        <div class="progress-step active">
+
+
+            <span class="step-marker">
+
+
+                1
+
+
+            </span>
+
+
+            <span class="step-label">
+
+
+                Begin
+
+
+            </span>
+
+
+        </div>
+
+
+
+
+
+        <div class="progress-step">
+
+
+            <span class="step-marker">
+
+
+                2
+
+
+            </span>
+
+
+            <span class="step-label">
+
+
+                Discover
+
+
+            </span>
+
+
+        </div>
+
+
+
+
+
+        <div class="progress-step">
+
+
+            <span class="step-marker">
+
+
+                3
+
+
+            </span>
+
+
+            <span class="step-label">
+
+
+                Transform
+
+
+            </span>
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+    <!-- ==============================================================
+         Status Message
+
+         Dynamic state:
+
+         • In Progress
+         • Completed
+         • Ready
+
+         ============================================================== -->
+
+
+    <div class="progress-status"
+
+
+         data-progress-status>
+
+
+        Journey In Progress
+
+
+    </div>
+
+
+
+
+  /* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   Component   : progress.html
+   Continuation : Batch 1C
+
+   ========================================================================== */
+
+
+
+    <!-- ==============================================================
+         Accessibility Support
+
+         Provides progress context for
+         assistive technologies.
+
+         ============================================================== -->
+
+
+    <div class="progress-accessibility">
+
+
+        <span class="sr-only">
+
+
+            Journey completion progress
+
+
+        </span>
+
+
+
+        <span class="sr-only"
+
+
+              data-progress-description>
+
+
+            {{CURRENT_PAGE}}
+
+            of
+
+            {{TOTAL_PAGES}}
+
+            pages completed.
+
+
+        </span>
+
+
+    </div>
+
+
+
+
+
+    <!-- ==============================================================
+         Progress Metadata
+
+         Controlled by navigation.js
+
+         ============================================================== -->
+
+
+    <div class="progress-meta"
+
+
+         data-current-page="{{CURRENT_PAGE}}"
+
+
+         data-total-pages="{{TOTAL_PAGES}}"
+
+
+         data-progress-percent="{{PERCENTAGE}}">
+
+
+
+    </div>
+
+
+
+
+
+    <!-- ==============================================================
+         Completion Indicator
+
+         Displayed when journey reaches final stage.
+
+         ============================================================== -->
+
+
+    <div class="progress-complete"
+
+
+         data-complete="false">
+
+
+
+        <span class="complete-icon">
+
+
+            ✓
+
+
+        </span>
+
+
+
+        <span class="complete-text">
+
+
+            Journey Complete
+
+
+        </span>
+
+
+
+    </div>
+
+
+
+
+  /* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   Component   : progress.html
+   Continuation : Batch 1D
+
+   ========================================================================== */
+
+
+
+    <!-- ==============================================================
+         Component State
+
+         Used by navigation.js
+
+         States:
+
+         • active
+         • completed
+         • locked
+
+         ============================================================== -->
+
+
+    <div class="progress-state"
+
+         data-state="active">
+
+
+    </div>
+
+
+
+
+
+    <!-- ==============================================================
+         Loading State
+
+         Displayed while page transition occurs.
+
+         ============================================================== -->
+
+
+    <div class="progress-loading"
+
+         data-loading="false">
+
+
+        Loading Journey...
+
+
+    </div>
+
+
+
+
+
+    <!-- ==============================================================
+         Error State
+
+         Controlled by application layer.
+
+         ============================================================== -->
+
+
+    <div class="progress-error"
+
+         data-error="false">
+
+
+    </div>
+
+
+
+
+
+</div>
+
+
+
+
+
+<!-- ==========================================================================
+   COMPONENT END
+
+   File:
+
+   components/progress.html
+
+
+   Status:
+
+   Shared Progress Component Complete
+
+   ========================================================================== -->
+
+
+  
