@@ -1,327 +1,613 @@
 
-/*
-==============================================================================
- CTM PATH™ Guided Journey™
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
 
- File        : js/storage.js
- Version     : 1.0
+   File        : storage.js
+   Version     : 1.0
+   Status      : DEVELOPMENT
+   Stage       : STAGE 0 — FOUNDATION
 
- Purpose:
- Browser storage manager.
+   Purpose     :
+   Frontend session storage service.
 
- Responsibilities:
- - Store visitor session
- - Retrieve visitor identity
- - Maintain journey progress
- - Clear journey data when required
+   Responsibilities:
 
- Rules:
- - No backend calls
- - No scoring logic
- - No assessment calculations
+   • Store temporary journey state.
+   • Retrieve temporary user inputs.
+   • Maintain current visitor session reference.
+   • Provide controlled browser storage access.
 
-==============================================================================
-*/
+   Does NOT:
 
+   • Replace backend database.
+   • Store permanent assessment records.
+   • Calculate scores.
+   • Generate diagnosis.
+   • Generate prescriptions.
 
-(function () {
+   Backend Ownership:
 
+   • Permanent visitor data
+   • Assessment persistence
+   • Scoring
+   • KALA CHAKRA™ processing
+   • Reports
 
-    "use strict";
-
-
-
-    /*
-    ==========================================================================
-       STORAGE KEYS
-    ==========================================================================
-    */
+   ========================================================================== */
 
 
-    const STORAGE_KEYS = {
+/* ==========================================================================
+   GLOBAL NAMESPACE
+   ========================================================================== */
 
 
-        VISITOR:
-
-            "ctm_path_visitor",
+window.CTMPATH = window.CTMPATH || {};
 
 
 
-        JOURNEY:
-
-            "ctm_path_journey",
-
-
-
-        LANGUAGE:
-
-            "ctm_path_language"
+/* ==========================================================================
+   STORAGE SERVICE
+   ========================================================================== */
 
 
+CTMPATH.Storage = {
 
-    };
+
+    version:
+
+        "1.0",
 
 
 
+    initialized:
+
+        false,
+
+
+
+    prefix:
+
+        "CTMPATH_"
+
+
+
+};
 
 
 
 
-
-    /*
-    ==========================================================================
-       STORAGE MANAGER
-    ==========================================================================
-    */
+/* ==========================================================================
+   INITIALIZATION
+   ========================================================================== */
 
 
-    const CTM_STORAGE = {
+CTMPATH.Storage.init = function() {
+
+
+    CTMPATH.Storage.initialized = true;
 
 
 
-        /*
-        ----------------------------------------------------------------------
-           SAVE VISITOR
-        ----------------------------------------------------------------------
-        */
+};
 
 
-        saveVisitor:
-
-            function(visitor){
 
 
-                localStorage.setItem(
+/* ==========================================================================
+   KEY GENERATOR
 
-                    STORAGE_KEYS.VISITOR,
+   Prevents naming collisions.
 
-                    JSON.stringify(visitor)
+   ========================================================================== */
+
+
+CTMPATH.Storage.createKey = function(key) {
+
+
+    return (
+
+        CTMPATH.Storage.prefix +
+
+        key
+
+    );
+
+
+};
+
+
+
+
+/* ==========================================================================
+   SAVE DATA
+
+   Stores temporary session information.
+
+   ========================================================================== */
+
+
+CTMPATH.Storage.set = function(key, value) {
+
+
+    try {
+
+
+        const storageKey =
+
+            CTMPATH.Storage.createKey(
+
+                key
+
+            );
+
+
+
+        localStorage.setItem(
+
+            storageKey,
+
+            JSON.stringify(
+
+                value
+
+            )
+
+        );
+
+
+
+        return true;
+
+
+
+    }
+
+
+    catch(error) {
+
+
+        console.error(
+
+            "CTM PATH™ Storage Save Error:",
+
+            error
+
+        );
+
+
+
+        return false;
+
+
+
+    }
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   GET DATA
+
+   Retrieves temporary session information.
+
+   ========================================================================== */
+
+
+CTMPATH.Storage.get = function(key) {
+
+
+    try {
+
+
+        const storageKey =
+
+            CTMPATH.Storage.createKey(
+
+                key
+
+            );
+
+
+
+        const data = localStorage.getItem(
+
+            storageKey
+
+        );
+
+
+
+        if (!data) {
+
+
+            return null;
+
+
+
+        }
+
+
+
+        return JSON.parse(
+
+            data
+
+        );
+
+
+
+    }
+
+
+    catch(error) {
+
+
+        console.error(
+
+            "CTM PATH™ Storage Read Error:",
+
+            error
+
+        );
+
+
+
+        return null;
+
+
+
+    }
+
+
+
+};
+
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : storage.js
+   Continuation: Batch 1B
+
+   ========================================================================== */
+
+
+/* ==========================================================================
+   REMOVE DATA
+
+   Removes temporary browser session information.
+
+   ========================================================================== */
+
+
+CTMPATH.Storage.remove = function(key) {
+
+
+    try {
+
+
+        const storageKey =
+
+            CTMPATH.Storage.createKey(
+
+                key
+
+            );
+
+
+
+        localStorage.removeItem(
+
+            storageKey
+
+        );
+
+
+
+        return true;
+
+
+
+    }
+
+
+    catch(error) {
+
+
+        console.error(
+
+            "CTM PATH™ Storage Remove Error:",
+
+            error
+
+        );
+
+
+
+        return false;
+
+
+
+    }
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   CLEAR JOURNEY SESSION
+
+   Clears all CTM PATH™ frontend session data.
+
+   IMPORTANT:
+
+   This does NOT affect backend records.
+
+   ========================================================================== */
+
+
+CTMPATH.Storage.clear = function() {
+
+
+    try {
+
+
+        const keys = Object.keys(
+
+            localStorage
+
+        );
+
+
+
+        keys.forEach(function(key) {
+
+
+            if (
+
+                key.startsWith(
+
+                    CTMPATH.Storage.prefix
+
+                )
+
+            ) {
+
+
+                localStorage.removeItem(
+
+                    key
 
                 );
 
-
-            },
-
-
-
-
-
-
-
-        /*
-        ----------------------------------------------------------------------
-           GET VISITOR
-        ----------------------------------------------------------------------
-        */
-
-
-        getVisitor:
-
-            function(){
-
-
-                const visitor =
-
-                    localStorage.getItem(
-
-                        STORAGE_KEYS.VISITOR
-
-                    );
-
-
-
-                return visitor
-
-                    ? JSON.parse(visitor)
-
-                    : null;
-
-
-            },
-
-
-
-
-
-
-
-        /*
-        ----------------------------------------------------------------------
-           SAVE JOURNEY STATE
-        ----------------------------------------------------------------------
-        */
-
-
-        saveJourney:
-
-            function(data){
-
-
-                localStorage.setItem(
-
-                    STORAGE_KEYS.JOURNEY,
-
-                    JSON.stringify(data)
-
-                );
-
-
-            },
-
-
-
-
-
-
-
-        /*
-        ----------------------------------------------------------------------
-           GET JOURNEY STATE
-        ----------------------------------------------------------------------
-        */
-
-
-        getJourney:
-
-            function(){
-
-
-                const journey =
-
-                    localStorage.getItem(
-
-                        STORAGE_KEYS.JOURNEY
-
-                    );
-
-
-
-                return journey
-
-                    ? JSON.parse(journey)
-
-                    : {};
-
-
-
-            },
-
-
-
-
-
-
-
-        /*
-        ----------------------------------------------------------------------
-           SAVE LANGUAGE
-        ----------------------------------------------------------------------
-        */
-
-
-        saveLanguage:
-
-            function(language){
-
-
-                localStorage.setItem(
-
-                    STORAGE_KEYS.LANGUAGE,
-
-                    language
-
-                );
-
-
-            },
-
-
-
-
-
-
-
-        /*
-        ----------------------------------------------------------------------
-           GET LANGUAGE
-        ----------------------------------------------------------------------
-        */
-
-
-        getLanguage:
-
-            function(){
-
-
-                return localStorage.getItem(
-
-                    STORAGE_KEYS.LANGUAGE
-
-                );
-
-
-            },
-
-
-
-
-
-
-
-        /*
-        ----------------------------------------------------------------------
-           CLEAR JOURNEY
-        ----------------------------------------------------------------------
-        */
-
-
-        clearJourney:
-
-            function(){
-
-
-                Object.values(
-
-                    STORAGE_KEYS
-
-                ).forEach(
-
-                    function(key){
-
-
-                        localStorage.removeItem(key);
-
-
-                    }
-
-                );
 
 
             }
 
 
 
+        });
+
+
+
+        return true;
+
+
+
+    }
+
+
+    catch(error) {
+
+
+        console.error(
+
+            "CTM PATH™ Storage Clear Error:",
+
+            error
+
+        );
+
+
+
+        return false;
+
+
+
+    }
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   VISITOR SESSION MANAGEMENT
+
+   Temporary reference storage.
+
+   Backend remains source of truth.
+
+   ========================================================================== */
+
+
+CTMPATH.Storage.setVisitorId = function(visitorId) {
+
+
+    return CTMPATH.Storage.set(
+
+        "visitorId",
+
+        visitorId
+
+    );
+
+
+};
+
+
+
+
+CTMPATH.Storage.getVisitorId = function() {
+
+
+    return CTMPATH.Storage.get(
+
+        "visitorId"
+
+    );
+
+
+};
+
+
+
+
+/* ==========================================================================
+   JOURNEY POSITION MANAGEMENT
+
+   Stores current frontend page state.
+
+   ========================================================================== */
+
+
+CTMPATH.Storage.setCurrentPage = function(page) {
+
+
+    return CTMPATH.Storage.set(
+
+        "currentPage",
+
+        page
+
+    );
+
+
+};
+
+
+
+
+CTMPATH.Storage.getCurrentPage = function() {
+
+
+    return CTMPATH.Storage.get(
+
+        "currentPage"
+
+    );
+
+
+};
+
+
+
+
+/* ==========================================================================
+   ASSESSMENT TEMPORARY STATE
+
+   Stores incomplete frontend progress only.
+
+   Final answers are persisted through API.
+
+   ========================================================================== */
+
+
+CTMPATH.Storage.saveProgress = function(progress) {
+
+
+    return CTMPATH.Storage.set(
+
+        "assessmentProgress",
+
+        progress
+
+    );
+
+
+};
+
+
+
+
+CTMPATH.Storage.getProgress = function() {
+
+
+    return CTMPATH.Storage.get(
+
+        "assessmentProgress"
+
+    );
+
+
+};
+
+
+
+
+/* ==========================================================================
+   STORAGE STATUS
+
+   Internal diagnostics.
+
+   ========================================================================== */
+
+
+CTMPATH.Storage.status = function() {
+
+
+    return {
+
+
+        initialized:
+
+            CTMPATH.Storage.initialized,
+
+
+
+        available:
+
+            typeof localStorage !== "undefined",
+
+
+
+        prefix:
+
+            CTMPATH.Storage.prefix
+
 
 
     };
 
 
+};
 
 
 
 
+/* ==========================================================================
+   END OF FILE
+
+   File:
+
+   js/storage.js
 
 
-    /*
-    ==========================================================================
-       EXPOSE GLOBAL STORAGE
-    ==========================================================================
-    */
+   Status:
+
+   FOUNDATION MODULE COMPLETE
 
 
-    window.CTM_STORAGE = CTM_STORAGE;
+   Next:
 
+   js/navigation.js
 
-
-})();
-
+   ========================================================================== */
