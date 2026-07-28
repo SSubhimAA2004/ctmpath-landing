@@ -1,700 +1,644 @@
 
-<!--
-==============================================================================
- CTM PATH™ Guided Journey™
+<!-- ==========================================================================
+   CTM PATH™ Guided Journey™
 
- File        : pages/registration.html
- Version     : 1.0
+   File        : registration.html
+   Version     : 1.0
+   Status      : DEVELOPMENT
+   Stage       : STAGE 2 — REGISTRATION™
 
- Page:
- PAGE 02 — REGISTRATION™
+   Purpose     :
+   Visitor registration page presentation layer.
 
- Purpose:
- Visitor identity creation before assessment.
+   Responsibilities:
 
- Backend Mapping:
+   • Collect visitor information.
+   • Provide structured input fields.
+   • Prepare registration experience.
 
- FullName
- Email
- Mobile
- District
- State
- Language
- Source
- Device
+   Does NOT:
 
- Status:
- 🔒 PAGE 02 FOUNDATION
+   • Create visitors.
+   • Save database records.
+   • Generate IDs.
+   • Call backend APIs.
 
-==============================================================================
--->
+   ========================================================================== -->
 
 
+<section class="page registration-page"
+         id="registration-page">
 
-<section class="registration-page">
+
+    <div class="app-container">
 
 
-
-<div class="registration-container">
+        <div class="registration-wrapper">
 
 
 
+            <!-- ==============================================================
+                 Header
+                 ============================================================== -->
 
 
-    <!-- ============================================================
-         HEADER
-    ============================================================= -->
+            <div class="registration-header">
 
 
-    <div class="registration-header">
+                <p class="registration-eyebrow">
+
+                    CTM PATH™ Guided Journey™
+
+                </p>
 
 
 
-        <div class="registration-eyebrow">
+                <h1 class="registration-title">
 
-            CTM PATH™ GUIDED JOURNEY™
+                    Begin Your Personal Journey™
+
+                </h1>
+
+
+
+                <p class="registration-description">
+
+                    Share a few details so we can create
+                    your personalised life assessment experience.
+
+                </p>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 Registration Form Card
+                 ============================================================== -->
+
+
+            <div class="card registration-card">
+
+
+
+                <form id="registration-form"
+                      class="registration-form">
+
+
+
+                    <!-- ======================================================
+                         Personal Information
+                         ====================================================== -->
+
+
+                    <div class="form-section">
+
+
+                        <h2 class="form-section-title">
+
+                            Your Details
+
+                        </h2>
+
+
+
+                        <div class="form-grid">
+
+
+
+                            <div class="form-group">
+
+
+                                <label for="fullName">
+
+                                    Full Name
+
+                                </label>
+
+
+
+                                <input
+
+                                    type="text"
+
+                                    id="fullName"
+
+                                    name="fullName"
+
+                                    placeholder="Enter your name"
+
+                                    autocomplete="name"
+
+                                    required>
+
+
+                            </div>
+
+
+
+
+
+                            <div class="form-group">
+
+
+                                <label for="email">
+
+                                    Email Address
+
+                                </label>
+
+
+
+                                <input
+
+                                    type="email"
+
+                                    id="email"
+
+                                    name="email"
+
+                                    placeholder="Enter your email"
+
+                                    autocomplete="email"
+
+                                    required>
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+
+                 <!-- ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : registration.html
+   Continuation: Batch 1B
+
+   ========================================================================== -->
+
+
+                    <!-- ======================================================
+                         Contact Information
+                         ====================================================== -->
+
+
+                    <div class="form-section">
+
+
+                        <h2 class="form-section-title">
+
+                            Contact Information
+
+                        </h2>
+
+
+
+                        <div class="form-grid">
+
+
+
+                            <div class="form-group">
+
+
+                                <label for="mobile">
+
+                                    Mobile Number
+
+                                </label>
+
+
+
+                                <input
+
+                                    type="tel"
+
+                                    id="mobile"
+
+                                    name="mobile"
+
+                                    placeholder="Enter mobile number"
+
+                                    autocomplete="tel"
+
+                                    required>
+
+
+                            </div>
+
+
+
+
+
+                            <div class="form-group">
+
+
+                                <label for="city">
+
+                                    City
+
+                                </label>
+
+
+
+                                <input
+
+                                    type="text"
+
+                                    id="city"
+
+                                    name="city"
+
+                                    placeholder="Enter your city"
+
+                                    autocomplete="address-level2"
+
+                                    required>
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+                        <div class="form-grid">
+
+
+
+                            <div class="form-group">
+
+
+                                <label for="district">
+
+                                    District
+
+                                </label>
+
+
+
+                                <input
+
+                                    type="text"
+
+                                    id="district"
+
+                                    name="district"
+
+                                    placeholder="Enter your district"
+
+                                    required>
+
+
+                            </div>
+
+
+
+
+
+                            <div class="form-group">
+
+
+                                <label for="state">
+
+                                    State
+
+                                </label>
+
+
+
+                                <input
+
+                                    type="text"
+
+                                    id="state"
+
+                                    name="state"
+
+                                    placeholder="Enter your state"
+
+                                    required>
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+                    <!-- ======================================================
+                         Journey Information
+                         ====================================================== -->
+
+
+                    <div class="form-section">
+
+
+                        <h2 class="form-section-title">
+
+                            Journey Details
+
+                        </h2>
+
+
+
+                        <div class="form-grid">
+
+
+
+                            <div class="form-group">
+
+
+                                <label for="source">
+
+                                    How did you discover CTM PATH™?
+
+                                </label>
+
+
+
+                                <select
+
+                                    id="source"
+
+                                    name="source"
+
+                                    required>
+
+
+
+                                    <option value="">
+
+                                        Select an option
+
+                                    </option>
+
+
+
+                                    <option value="whatsapp">
+
+                                        WhatsApp
+
+                                    </option>
+
+
+
+                                    <option value="referral">
+
+                                        Personal Referral
+
+                                    </option>
+
+
+
+                                    <option value="social">
+
+                                        Social Media
+
+                                    </option>
+
+
+
+                                    <option value="website">
+
+                                        Website
+
+                                    </option>
+
+
+
+                                    <option value="other">
+
+                                        Other
+
+                                    </option>
+
+
+
+                                </select>
+
+
+                            </div>
+
+
+
+
+                            <div class="form-group">
+
+
+                                <label for="language">
+
+                                    Preferred Language
+
+                                </label>
+
+
+
+                                <select
+
+                                    id="language"
+
+                                    name="language"
+
+                                    required>
+
+
+
+                                    <option value="">
+
+                                        Select language
+
+                                    </option>
+
+
+
+                                    <option value="english">
+
+                                        English
+
+                                    </option>
+
+
+
+                                    <option value="tamil">
+
+                                        Tamil
+
+                                    </option>
+
+
+
+                                    <option value="bilingual">
+
+                                        Tamil + English
+
+                                    </option>
+
+
+
+                                </select>
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+
+                 <!-- ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : registration.html
+   Continuation: Batch 1C
+
+   ========================================================================== -->
+
+
+                    <!-- ======================================================
+                         Consent Section
+                         ====================================================== -->
+
+
+                    <div class="form-section registration-consent">
+
+
+                        <label class="checkbox-wrapper">
+
+
+                            <input
+
+                                type="checkbox"
+
+                                id="consent"
+
+                                name="consent"
+
+                                required>
+
+
+
+                            <span class="checkbox-text">
+
+
+                                I understand that this guided journey
+                                is designed for personal reflection
+                                and growth.
+
+
+                            </span>
+
+
+
+                        </label>
+
+
+                    </div>
+
+
+
+
+
+                    <!-- ======================================================
+                         Form Actions
+                         ====================================================== -->
+
+
+                    <div class="registration-actions">
+
+
+
+                        <button
+
+                            type="button"
+
+                            id="registration-back-btn"
+
+                            class="btn btn-secondary">
+
+
+                            Back
+
+
+                        </button>
+
+
+
+
+
+                        <button
+
+                            type="submit"
+
+                            id="registration-submit-btn"
+
+                            class="btn btn-primary">
+
+
+                            Continue Journey™
+
+
+                        </button>
+
+
+
+                    </div>
+
+
+
+                </form>
+
+
+
+            </div>
+
+
+
+
+            <!-- ==============================================================
+                 Privacy Message
+                 ============================================================== -->
+
+
+            <div class="registration-footer">
+
+
+                <p>
+
+                    Your information is used only to create
+                    your CTM PATH™ Guided Journey™ experience.
+
+                </p>
+
+
+            </div>
+
+
 
         </div>
 
 
-
-
-
-        <h1>
-
-
-            உங்கள் பயணம் இங்கே தொடங்குகிறது
-
-
-            <br>
-
-
-            Your Journey Begins Here™
-
-
-        </h1>
-
-
-
-
-
-
-
-        <p>
-
-
-            உங்கள் தனிப்பட்ட பயணத்தை உருவாக்க
-            சில அடிப்படை விவரங்களை பகிருங்கள்.
-
-
-        </p>
-
-
-
-        <p>
-
-
-            Share a few details to personalise
-            your CTM PATH™ transformation journey.
-
-
-        </p>
-
-
-
-
     </div>
-
-
-
-
-
-
-
-
-
-    <!-- ============================================================
-         REGISTRATION CARD
-    ============================================================= -->
-
-
-    <div class="registration-card">
-
-
-
-
-
-
-
-        <form
-
-            id="registrationForm"
-
-        >
-
-
-
-
-
-            <!-- NAME -->
-
-
-            <div class="form-group">
-
-
-                <label>
-
-
-                    முழுப் பெயர்
-
-                    <span>
-
-                        Full Name
-
-                    </span>
-
-
-                </label>
-
-
-
-                <input
-
-
-                    type="text"
-
-
-                    id="fullName"
-
-
-                    name="fullName"
-
-
-                    placeholder="Enter your name"
-
-
-                    required
-
-
-                >
-
-
-
-            </div>
-
-
-
-
-
-
-
-
-
-            <!-- EMAIL -->
-
-
-            <div class="form-group">
-
-
-                <label>
-
-
-                    மின்னஞ்சல்
-
-                    <span>
-
-                        Email Address
-
-                    </span>
-
-
-                </label>
-
-
-
-                <input
-
-
-                    type="email"
-
-
-                    id="email"
-
-
-                    name="email"
-
-
-                    placeholder="your@email.com"
-
-
-                    required
-
-
-                >
-
-
-
-            </div>
-
-
-
-
-
-
-
-
-
-            <!-- MOBILE -->
-
-
-            <div class="form-group">
-
-
-                <label>
-
-
-                    WhatsApp எண்
-
-                    <span>
-
-                        WhatsApp Number
-
-                    </span>
-
-
-                </label>
-
-
-
-                <input
-
-
-                    type="tel"
-
-
-                    id="mobile"
-
-
-                    name="mobile"
-
-
-                    placeholder="9876543210"
-
-
-                    required
-
-
-                >
-
-
-
-            </div>
-
-
-
-
-
-
-
-
-
-            <!-- DISTRICT -->
-
-
-            <div class="form-group">
-
-
-                <label>
-
-
-                    மாவட்டம்
-
-                    <span>
-
-                        District
-
-                    </span>
-
-
-                </label>
-
-
-
-                <input
-
-
-                    type="text"
-
-
-                    id="district"
-
-
-                    name="district"
-
-
-                    placeholder="Your district"
-
-
-                    required
-
-
-                >
-
-
-
-            </div>
-
-
-
-
-
-
-
-
-
-            <!-- STATE -->
-
-
-            <div class="form-group">
-
-
-                <label>
-
-
-                    மாநிலம்
-
-                    <span>
-
-                        State
-
-                    </span>
-
-
-                </label>
-
-
-
-                <input
-
-
-                    type="text"
-
-
-                    id="state"
-
-
-                    name="state"
-
-
-                    placeholder="Your state"
-
-
-                    required
-
-
-                >
-
-
-
-            </div>
-
-
-
-
-
-
-
-
-
-            <!-- LANGUAGE -->
-
-
-            <div class="form-group">
-
-
-                <label>
-
-
-                    மொழி விருப்பம்
-
-                    <span>
-
-                        Language Preference
-
-                    </span>
-
-
-                </label>
-
-
-
-
-                <select
-
-
-                    id="language"
-
-
-                    name="language"
-
-
-                    required
-
-
-                >
-
-
-
-                    <option value="Tamil">
-
-
-                        தமிழ் / Tamil
-
-
-                    </option>
-
-
-
-                    <option value="English">
-
-
-                        English
-
-
-                    </option>
-
-
-
-
-                </select>
-
-
-
-            </div>
-
-
-
-
-
-
-
-
-
-            <!-- SOURCE -->
-
-
-            <div class="form-group">
-
-
-                <label>
-
-
-                    இந்த பயணத்தைப் பற்றி நீங்கள் எப்படி அறிந்தீர்கள்?
-
-
-                    <span>
-
-                        How did you hear about CTM PATH™?
-
-                    </span>
-
-
-                </label>
-
-
-
-
-
-                <select
-
-
-                    id="source"
-
-
-                    name="source"
-
-
-                    required
-
-
-                >
-
-
-
-                    <option value="">
-
-
-                        Select One
-
-
-                    </option>
-
-
-
-                    <option value="WhatsApp">
-
-
-                        WhatsApp
-
-
-                    </option>
-
-
-
-                    <option value="Friend Referral">
-
-
-                        Friend / Family Recommendation
-
-
-                    </option>
-
-
-
-                    <option value="YouTube">
-
-
-                        YouTube
-
-
-                    </option>
-
-
-
-                    <option value="Social Media">
-
-
-                        Instagram / Facebook
-
-
-                    </option>
-
-
-
-                    <option value="Website">
-
-
-                        Website Search
-
-
-                    </option>
-
-
-
-                    <option value="Event">
-
-
-                        Event / Workshop
-
-
-                    </option>
-
-
-
-                    <option value="Other">
-
-
-                        Other
-
-
-                    </option>
-
-
-
-
-                </select>
-
-
-
-
-            </div>
-
-
-
-
-
-
-
-
-
-            <!-- CTA -->
-
-
-            <button
-
-
-                type="submit"
-
-
-                id="continueJourneyButton"
-
-
-                class="registration-button"
-
-
-
-            >
-
-
-
-                தொடருங்கள்
-
-
-                <br>
-
-
-                Continue My Journey
-
-
-
-            </button>
-
-
-
-
-
-
-        </form>
-
-
-
-
-
-
-    </div>
-
-
-
-
-
-
-
-
-
-    <!-- SECURITY MESSAGE -->
-
-
-    <div class="registration-note">
-
-
-        🔒 Your information is secure.
-
-        <br>
-
-        It is used only to create your personalised
-        CTM PATH™ journey.
-
-
-    </div>
-
-
-
-
-
-
-
-</div>
-
 
 
 </section>
