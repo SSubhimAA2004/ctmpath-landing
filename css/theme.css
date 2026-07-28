@@ -3,344 +3,571 @@
 
    CTM PATH™ Guided Journey™
    File        : css/theme.css
-   Version     : 2.2
-   Status      : Premium Global Design System
-   
+   Version     : 2.3
+   Status      : Premium Global Brand Theme
+
    Purpose:
-   Central visual identity system for all 18 pages.
+   • Global design tokens
+   • Premium colour system
+   • Typography hierarchy
+   • Button system
+   • Shadows
+   • Borders
+   • Spacing foundation
 
-   Design Philosophy:
-   • Premium global brand aesthetic
-   • Deep executive navy foundation
-   • Gold authority accents
-   • Teal transformation highlights
-   • Ivory readable typography
-   • Calm, spacious, trustworthy experience
-
-   Used By:
-   • foundation.css
-   • welcome.css
-   • registration.css
-   • assessment pages
-   • result pages
-   • diagnosis pages
-   • prescription pages
+   Brand Language:
+   • Deep Navy Luxury
+   • Muted Gold Excellence
+   • CTM Teal Transformation
+   • Warm Ivory Human Connection
 
 ========================================================================== */
 
 
 /* ==========================================================================
-   1. ROOT DESIGN TOKENS
+   ROOT DESIGN TOKENS
 ========================================================================== */
 
 :root {
 
-    /* ----------------------------------------------------------------------
-       BRAND BACKGROUNDS
-    ---------------------------------------------------------------------- */
 
-    --ctm-bg-primary: #061A33;
-    --ctm-bg-secondary: #0B2447;
-    --ctm-bg-surface: #102E52;
-    --ctm-bg-card: #12365D;
+/* --------------------------------------------------------------------------
+   PREMIUM BRAND COLOURS
+--------------------------------------------------------------------------- */
 
 
-    /* ----------------------------------------------------------------------
-       BRAND ACCENTS
-    ---------------------------------------------------------------------- */
+/* Primary Background */
 
-    --ctm-gold: #D4AF37;
-    --ctm-gold-light: #E6C76A;
-    --ctm-gold-dark: #A67C00;
+--ctm-navy:
+#081C3A;
 
 
-    --ctm-teal: #14B8A6;
-    --ctm-teal-light: #38D9C8;
-    --ctm-teal-dark: #0F766E;
+/* Secondary Surface */
+
+--ctm-surface:
+#102B4E;
 
 
-    /* ----------------------------------------------------------------------
-       TEXT SYSTEM
-    ---------------------------------------------------------------------- */
+/* Elevated Card Surface */
 
-    --ctm-text-primary: #F8F5ED;
-    --ctm-text-secondary: #D5DFEA;
-    --ctm-text-muted: #9FB3C8;
+--ctm-card:
+#12345A;
 
 
-    /* ----------------------------------------------------------------------
-       STATUS COLOURS
-    ---------------------------------------------------------------------- */
+/* Primary Heading */
 
-    --ctm-success: #22C55E;
-    --ctm-warning: #F59E0B;
-    --ctm-error: #EF4444;
+--ctm-ivory:
+#F5F1E8;
 
 
-    /* ----------------------------------------------------------------------
-       BORDERS
-    ---------------------------------------------------------------------- */
+/* Secondary Heading */
 
-    --ctm-border-soft: rgba(212,175,55,0.25);
-    --ctm-border-light: rgba(255,255,255,0.12);
+--ctm-soft-white:
+#E5E7EB;
 
 
-    /* ----------------------------------------------------------------------
-       SHADOWS
-    ---------------------------------------------------------------------- */
+/* Body Text */
 
-    --ctm-shadow-soft:
-    0 20px 60px rgba(0,0,0,0.25);
+--ctm-body:
+#B8C4D6;
 
 
-    --ctm-shadow-gold:
-    0 12px 40px rgba(212,175,55,0.20);
+/* Muted Text */
+
+--ctm-muted:
+#7F8C9A;
 
 
-    --ctm-shadow-teal:
-    0 12px 40px rgba(20,184,166,0.20);
+/* Premium Gold */
+
+--ctm-gold:
+#C8A96A;
 
 
+/* Champagne Gold */
 
-    /* ----------------------------------------------------------------------
-       TYPOGRAPHY
-    ---------------------------------------------------------------------- */
-
-    --font-primary:
-    "Inter",
-    "Segoe UI",
-    Arial,
-    sans-serif;
+--ctm-gold-light:
+#D4B978;
 
 
-    --font-tamil:
-    "Noto Sans Tamil",
-    "Latha",
-    "Arial",
-    sans-serif;
+/* Transformation Teal */
+
+--ctm-teal:
+#14B8A6;
 
 
-    /* ----------------------------------------------------------------------
-       SPACING SYSTEM
-    ---------------------------------------------------------------------- */
+/* Border Gold */
 
-    --space-xs: 8px;
-    --space-sm: 16px;
-    --space-md: 24px;
-    --space-lg: 40px;
-    --space-xl: 64px;
-    --space-xxl: 96px;
+--ctm-gold-border:
+rgba(200,169,106,0.28);
 
 
+/* Soft Teal Border */
 
-    /* ----------------------------------------------------------------------
-       BORDER RADIUS
-    ---------------------------------------------------------------------- */
-
-    --radius-sm: 8px;
-    --radius-md: 16px;
-    --radius-lg: 24px;
-    --radius-pill: 999px;
-
-
-
-    /* ----------------------------------------------------------------------
-       TRANSITIONS
-    ---------------------------------------------------------------------- */
-
-    --transition-fast:
-    0.2s ease;
-
-
-    --transition-normal:
-    0.35s ease;
-
-}
+--ctm-teal-border:
+rgba(20,184,166,0.25);
 
 
 
 /* ==========================================================================
-   2. GLOBAL RESET
+   TYPOGRAPHY SYSTEM
 ========================================================================== */
 
 
-*,
-*::before,
-*::after {
+/* Main Tamil Hero */
 
-    box-sizing:
-    border-box;
-
-}
+--font-hero:
+clamp(2.5rem,5vw,4.8rem);
 
 
+/* Section Titles */
 
-html {
-
-    scroll-behavior:
-    smooth;
-
-}
+--font-section:
+clamp(2rem,3vw,3rem);
 
 
+/* Card Titles */
 
-body {
+--font-card:
+1.25rem;
 
-    margin:
-    0;
 
-    background:
-    var(--ctm-bg-primary);
+/* Body */
 
-    color:
-    var(--ctm-text-primary);
+--font-body:
+1.05rem;
 
-    font-family:
-    var(--font-primary);
 
-    line-height:
-    1.6;
+/* Small Labels */
 
-    min-height:
-    100vh;
-
-}
+--font-label:
+0.75rem;
 
 
 
 /* ==========================================================================
-   3. GLOBAL BRAND BACKGROUND
+   FONT WEIGHTS
 ========================================================================== */
 
 
-.ctm-page {
+--weight-light:
+300;
 
-    background:
-    linear-gradient(
-        180deg,
-        #061A33 0%,
-        #081F3D 45%,
-        #061A33 100%
-    );
+--weight-regular:
+400;
 
-    min-height:
-    100vh;
+--weight-medium:
+500;
 
-}
+--weight-semibold:
+600;
 
-
-
-.ctm-section {
-
-    width:
-    100%;
-
-    background:
-    transparent;
-
-}
+--weight-bold:
+700;
 
 
 
 /* ==========================================================================
-   4. CONTAINER SYSTEM
+   LINE HEIGHTS
 ========================================================================== */
 
 
-.ctm-container {
-
-    width:
-    min(1200px, 90%);
-
-    margin:
-    0 auto;
-
-}
+--line-tight:
+1.15;
 
 
+--line-normal:
+1.6;
 
-.ctm-content-center {
 
-    text-align:
-    center;
-
-}
+--line-relaxed:
+1.85;
 
 
 
 /* ==========================================================================
-   5. BRAND TEXT CLASSES
+   SPACING SYSTEM
 ========================================================================== */
 
 
-.text-gold {
-
-    color:
-    var(--ctm-gold);
-
-}
+--space-xs:
+0.5rem;
 
 
-
-.text-teal {
-
-    color:
-    var(--ctm-teal);
-
-}
+--space-sm:
+1rem;
 
 
+--space-md:
+2rem;
 
-.text-ivory {
 
-    color:
-    var(--ctm-text-primary);
+--space-lg:
+4rem;
 
-}
+
+--space-xl:
+6rem;
+
+
+--space-xxl:
+8rem;
 
 
 
-.text-muted {
+/* ==========================================================================
+   CONTAINER SYSTEM
+========================================================================== */
 
-    color:
-    var(--ctm-text-muted);
+
+--container-width:
+1200px;
+
+
+--container-padding:
+2rem;
+
+
+
+/* ==========================================================================
+   BORDER SYSTEM
+========================================================================== */
+
+
+--radius-sm:
+12px;
+
+
+--radius-md:
+20px;
+
+
+--radius-lg:
+32px;
+
+
+--radius-pill:
+999px;
+
+
+
+/* ==========================================================================
+   PREMIUM SHADOWS
+========================================================================== */
+
+
+--shadow-soft:
+
+0 20px 60px
+rgba(0,0,0,0.25);
+
+
+
+--shadow-gold:
+
+0 15px 40px
+rgba(200,169,106,0.25);
+
+
+
+--shadow-teal:
+
+0 15px 40px
+rgba(20,184,166,0.18);
+
+
+
+/* ==========================================================================
+   TRANSITIONS
+========================================================================== */
+
+
+--transition-fast:
+0.25s ease;
+
+
+--transition-normal:
+0.4s ease;
+
+
+--transition-slow:
+0.7s ease;
+
+
+
+/* ==========================================================================
+   BUTTON SYSTEM
+========================================================================== */
+
+
+/* Primary CTA */
+
+--button-primary-bg:
+
+linear-gradient(
+135deg,
+#D4B978,
+#C8A96A
+);
+
+
+
+--button-primary-text:
+#081C3A;
+
+
+
+/* Secondary CTA */
+
+--button-secondary-bg:
+#14B8A6;
+
+
+
+--button-secondary-text:
+#081C3A;
+
+
+
+/* Ghost Button */
+
+--button-outline-border:
+rgba(200,169,106,0.65);
+
+
+
+/* ==========================================================================
+   ICON SYSTEM
+========================================================================== */
+
+
+--icon-circle-bg:
+rgba(200,169,106,0.12);
+
+
+--icon-circle-border:
+rgba(200,169,106,0.35);
+
+
+
+/* ==========================================================================
+   GLOBAL PAGE SETTINGS
+========================================================================== */
+
+
+--page-background:
+var(--ctm-navy);
+
+
+--section-background:
+var(--ctm-navy);
+
+
+--card-background:
+var(--ctm-card);
+
+
 
 }
 
 
 
 /* ==========================================================================
-   6. PREMIUM CARD SYSTEM
+
+   GLOBAL TEXT UTILITY CLASSES
+
+========================================================================== */
+
+
+.ctm-heading {
+
+color:
+var(--ctm-ivory);
+
+font-weight:
+var(--weight-bold);
+
+line-height:
+var(--line-tight);
+
+}
+
+
+
+.ctm-gold-text {
+
+color:
+var(--ctm-gold);
+
+}
+
+
+
+.ctm-teal-text {
+
+color:
+var(--ctm-teal);
+
+}
+
+
+
+.ctm-body-text {
+
+color:
+var(--ctm-body);
+
+font-weight:
+var(--weight-regular);
+
+line-height:
+var(--line-relaxed);
+
+}
+
+
+
+/* ==========================================================================
+
+   PREMIUM BUTTON BASE
+
+========================================================================== */
+
+
+.ctm-button {
+
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+
+padding:
+1rem 2.8rem;
+
+
+border-radius:
+var(--radius-pill);
+
+
+font-size:
+1rem;
+
+
+font-weight:
+var(--weight-semibold);
+
+
+letter-spacing:
+0.04em;
+
+
+cursor:pointer;
+
+
+transition:
+var(--transition-normal);
+
+
+text-decoration:none;
+
+
+}
+
+
+
+/* Primary Button */
+
+.ctm-button-primary {
+
+
+background:
+var(--button-primary-bg);
+
+
+color:
+var(--button-primary-text);
+
+
+box-shadow:
+var(--shadow-gold);
+
+
+}
+
+
+
+.ctm-button-primary:hover {
+
+
+transform:
+translateY(-3px);
+
+
+box-shadow:
+
+0 20px 50px
+rgba(200,169,106,0.40);
+
+
+}
+
+
+
+/* Secondary Button */
+
+.ctm-button-secondary {
+
+
+background:
+var(--button-secondary-bg);
+
+
+color:
+var(--button-secondary-text);
+
+
+box-shadow:
+var(--shadow-teal);
+
+
+}
+
+
+
+/* ==========================================================================
+
+   PREMIUM CARD SYSTEM
+
 ========================================================================== */
 
 
 .ctm-card {
 
-    background:
-    rgba(
-        16,
-        46,
-        82,
-        0.85
-    );
 
-    border:
-    1px solid var(--ctm-border-light);
+background:
+var(--ctm-card);
 
-    border-radius:
-    var(--radius-lg);
 
-    padding:
-    var(--space-lg);
+border:
 
-    box-shadow:
-    var(--ctm-shadow-soft);
+1px solid
+var(--ctm-gold-border);
 
-    backdrop-filter:
-    blur(12px);
 
-    transition:
-    var(--transition-normal);
+border-radius:
+var(--radius-lg);
+
+
+padding:
+2rem;
+
+
+transition:
+var(--transition-normal);
+
 
 }
 
@@ -348,174 +575,60 @@ body {
 
 .ctm-card:hover {
 
-    transform:
-    translateY(-6px);
 
-    border-color:
-    var(--ctm-gold);
+transform:
+translateY(-6px);
+
+
+box-shadow:
+var(--shadow-soft);
+
+
+border-color:
+var(--ctm-gold);
+
 
 }
 
 
 
 /* ==========================================================================
-   7. PREMIUM BUTTON SYSTEM
-========================================================================== */
 
+   RESPONSIVE TOKENS
 
-.ctm-button {
-
-    display:
-    inline-flex;
-
-    align-items:
-    center;
-
-    justify-content:
-    center;
-
-
-    background:
-    linear-gradient(
-        135deg,
-        #E6C76A,
-        #D4AF37
-    );
-
-
-    color:
-    #061A33;
-
-
-    font-weight:
-    700;
-
-
-    letter-spacing:
-    0.5px;
-
-
-    padding:
-    16px 42px;
-
-
-    border:
-    none;
-
-
-    border-radius:
-    var(--radius-pill);
-
-
-    cursor:
-    pointer;
-
-
-    box-shadow:
-    var(--ctm-shadow-gold);
-
-
-    transition:
-    var(--transition-normal);
-
-}
-
-
-
-.ctm-button:hover {
-
-    transform:
-    translateY(-3px);
-
-
-    box-shadow:
-    0 18px 50px rgba(212,175,55,0.35);
-
-}
-
-
-
-/* ==========================================================================
-   8. BRAND DIVIDERS
-========================================================================== */
-
-
-.ctm-divider {
-
-    width:
-    120px;
-
-
-    height:
-    2px;
-
-
-    background:
-    linear-gradient(
-        90deg,
-        transparent,
-        var(--ctm-gold),
-        transparent
-    );
-
-
-    margin:
-    30px auto;
-
-}
-
-
-
-/* ==========================================================================
-   9. HEADER / FOOTER SUPPORT
-========================================================================== */
-
-
-.brand-gold {
-
-    color:
-    var(--ctm-gold);
-
-}
-
-
-
-.brand-teal {
-
-    color:
-    var(--ctm-teal);
-
-}
-
-
-
-.brand-white {
-
-    color:
-    var(--ctm-text-primary);
-
-}
-
-
-
-/* ==========================================================================
-   10. RESPONSIVE TOKENS
 ========================================================================== */
 
 
 @media(max-width:768px){
 
-    :root {
 
-        --space-xl:
-        48px;
+:root {
 
 
-        --space-xxl:
-        64px;
+--container-padding:
+1.25rem;
 
-    }
+
+--space-lg:
+3rem;
+
+
+--space-xl:
+4rem;
 
 
 }
+
+
+}
+
+
+/* ==========================================================================
+
+   END OF FILE
+
+   CTM PATH™ Guided Journey™
+   Theme System v2.3
+
+========================================================================== */
 
