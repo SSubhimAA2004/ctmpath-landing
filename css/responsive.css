@@ -1,1 +1,644 @@
 
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : responsive.css
+   Version     : 1.0
+   Status      : DEVELOPMENT
+   Stage       : STAGE 0 — FOUNDATION
+
+   Purpose     :
+   Responsive adaptation layer for the CTM PATH™ Guided Journey™
+   frontend application.
+
+   Responsibilities:
+
+   • Desktop-first responsive behaviour
+   • Tablet adaptations
+   • Mobile adaptations
+   • Typography scaling
+   • Container adjustments
+   • Navigation adaptations
+
+   Does NOT contain:
+
+   • Brand colors
+   • Theme variables
+   • Business logic
+   • Page-specific styling
+
+   ========================================================================== */
+
+
+/* ==========================================================================
+   LARGE DESKTOP OPTIMIZATION
+   Base design target:
+
+   Desktop-first
+
+   Primary viewport:
+   1280px+
+
+   ========================================================================== */
+
+
+@media (min-width: 1440px) {
+
+
+    .app-container {
+
+        max-width:
+
+            1440px;
+
+    }
+
+
+
+    .heading-xl {
+
+        font-size:
+
+            3.5rem;
+
+    }
+
+
+
+}
+
+
+
+/* ==========================================================================
+   STANDARD DESKTOP
+
+   1024px - 1439px
+
+   ========================================================================== */
+
+
+@media (max-width: 1439px) {
+
+
+    .app-container {
+
+        padding-left:
+
+            1.5rem;
+
+        padding-right:
+
+            1.5rem;
+
+    }
+
+
+
+}
+
+
+
+/* ==========================================================================
+   TABLET LANDSCAPE
+
+   768px - 1023px
+
+   ========================================================================== */
+
+
+@media (max-width: 1023px) {
+
+
+    html {
+
+        font-size:
+
+            15px;
+
+    }
+
+
+
+    .app-container {
+
+        padding-left:
+
+            1.25rem;
+
+        padding-right:
+
+            1.25rem;
+
+    }
+
+
+
+    .heading-xl {
+
+        font-size:
+
+            2.75rem;
+
+    }
+
+
+
+    .heading-lg {
+
+        font-size:
+
+            2rem;
+
+    }
+
+
+
+    .heading-md {
+
+        font-size:
+
+            1.5rem;
+
+    }
+
+
+
+    .section {
+
+        padding-top:
+
+            3rem;
+
+
+        padding-bottom:
+
+            3rem;
+
+    }
+
+
+
+    .flex-between {
+
+        flex-direction:
+
+            column;
+
+        align-items:
+
+            flex-start;
+
+        gap:
+
+            1rem;
+
+    }
+
+
+
+}
+
+/* ==========================================================================
+   MOBILE LANDSCAPE / SMALL TABLET
+
+   600px - 767px
+
+   ========================================================================== */
+
+
+@media (max-width: 767px) {
+
+
+    html {
+
+        font-size:
+
+            14px;
+
+    }
+
+
+
+    .app-container {
+
+        padding-left:
+
+            1rem;
+
+
+        padding-right:
+
+            1rem;
+
+    }
+
+
+
+    .heading-xl {
+
+        font-size:
+
+            2.25rem;
+
+        line-height:
+
+            1.15;
+
+    }
+
+
+
+    .heading-lg {
+
+        font-size:
+
+            1.75rem;
+
+    }
+
+
+
+    .heading-md {
+
+        font-size:
+
+            1.4rem;
+
+    }
+
+
+
+    .section {
+
+        padding-top:
+
+            2.5rem;
+
+
+        padding-bottom:
+
+            2.5rem;
+
+    }
+
+
+
+    .card {
+
+        padding:
+
+            1.25rem;
+
+    }
+
+
+
+    .btn {
+
+        width:
+
+            100%;
+
+    }
+
+
+
+    .text-center-mobile {
+
+        text-align:
+
+            center;
+
+    }
+
+
+
+    .flex-mobile-column {
+
+        flex-direction:
+
+            column;
+
+    }
+
+
+
+}
+
+
+
+/* ==========================================================================
+   MOBILE DEVICES
+
+   Below 600px
+
+   ========================================================================== */
+
+
+@media (max-width: 599px) {
+
+
+    html {
+
+        font-size:
+
+            14px;
+
+    }
+
+
+
+    body {
+
+        overflow-x:
+
+            hidden;
+
+    }
+
+
+
+    .app-container {
+
+        padding-left:
+
+            0.875rem;
+
+
+        padding-right:
+
+            0.875rem;
+
+    }
+
+
+
+    .heading-xl {
+
+        font-size:
+
+            1.9rem;
+
+    }
+
+
+
+    .heading-lg {
+
+        font-size:
+
+            1.55rem;
+
+    }
+
+
+
+    .heading-md {
+
+        font-size:
+
+            1.25rem;
+
+    }
+
+
+
+    .text-large {
+
+        font-size:
+
+            1rem;
+
+    }
+
+
+
+    .section {
+
+        padding-top:
+
+            2rem;
+
+
+        padding-bottom:
+
+            2rem;
+
+    }
+
+
+
+    .card {
+
+        border-radius:
+
+            0.875rem;
+
+        padding:
+
+            1rem;
+
+    }
+
+
+
+    .surface {
+
+        border-radius:
+
+            0.875rem;
+
+    }
+
+
+
+    .global-loader {
+
+        padding:
+
+            1rem;
+
+    }
+
+
+
+    .loader-message {
+
+        text-align:
+
+            center;
+
+    }
+
+
+
+    input,
+    textarea,
+    select {
+
+        font-size:
+
+            16px;
+
+    }
+
+
+
+}
+
+
+
+/* ==========================================================================
+   SMALL MOBILE DEVICES
+
+   Below 375px
+
+   ========================================================================== */
+
+
+@media (max-width: 374px) {
+
+
+    .app-container {
+
+        padding-left:
+
+            0.75rem;
+
+
+        padding-right:
+
+            0.75rem;
+
+    }
+
+
+
+    .heading-xl {
+
+        font-size:
+
+            1.7rem;
+
+    }
+
+
+
+    .heading-lg {
+
+        font-size:
+
+            1.4rem;
+
+    }
+
+
+
+    .btn {
+
+        padding:
+
+            0.75rem 1rem;
+
+    }
+
+
+
+}
+
+
+
+/* ==========================================================================
+   ACCESSIBILITY RESPONSIVE SUPPORT
+
+   Reduced Motion
+
+   ========================================================================== */
+
+
+@media (prefers-reduced-motion: reduce) {
+
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+
+            0.01ms !important;
+
+
+        animation-iteration-count:
+
+            1 !important;
+
+
+        scroll-behavior:
+
+            auto !important;
+
+
+        transition-duration:
+
+            0.01ms !important;
+
+    }
+
+
+
+}
+
+
+
+/* ==========================================================================
+   PRINT OPTIMIZATION
+
+   ========================================================================== */
+
+
+@media print {
+
+
+    body {
+
+        background:
+
+            #ffffff;
+
+        color:
+
+            #000000;
+
+    }
+
+
+
+    .global-loader,
+    .app-navigation,
+    .app-footer {
+
+        display:
+
+            none !important;
+
+    }
+
+
+
+    .card,
+    .surface {
+
+        box-shadow:
+
+            none;
+
+        border:
+
+            1px solid #cccccc;
+
+    }
+
+
+
+}
+
