@@ -590,3 +590,519 @@ textarea {
 
 }
 
+
+/* ==========================================================================
+   CARD & SURFACE FOUNDATION
+   ========================================================================== */
+
+
+.card {
+
+    width: 100%;
+
+    border-radius: 1rem;
+
+    padding: 2rem;
+
+}
+
+
+
+.surface {
+
+    width: 100%;
+
+    border-radius: 1rem;
+
+}
+
+
+
+/* ==========================================================================
+   SECTION FOUNDATION
+   ========================================================================== */
+
+
+.section {
+
+    width: 100%;
+
+    padding-top: 4rem;
+
+    padding-bottom: 4rem;
+
+}
+
+
+
+.section-header {
+
+    width: 100%;
+
+    margin-bottom: 2rem;
+
+}
+
+
+
+.section-title {
+
+    margin-bottom: 0.75rem;
+
+}
+
+
+
+.section-description {
+
+    max-width: 720px;
+
+}
+
+
+
+/* ==========================================================================
+   PAGE FOUNDATION
+   ========================================================================== */
+
+
+.page {
+
+    width: 100%;
+
+    min-height: calc(100vh - 80px);
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+
+.page-content {
+
+    width: 100%;
+
+    flex: 1;
+
+}
+
+
+
+/* ==========================================================================
+   APPLICATION STATES
+   ========================================================================== */
+
+
+.is-loading {
+
+    pointer-events: none;
+
+    user-select: none;
+
+}
+
+
+
+.is-disabled {
+
+    pointer-events: none;
+
+    opacity: 0.6;
+
+}
+
+
+
+.is-active {
+
+    display: block;
+
+}
+
+
+
+.is-hidden {
+
+    display: none !important;
+
+}
+
+
+
+/* ==========================================================================
+   LOADING COMPONENT FOUNDATION
+   ========================================================================== */
+
+
+.global-loader {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 9999;
+
+}
+
+
+
+.loader-container {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 1rem;
+
+}
+
+
+
+.loader-spinner {
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 50%;
+
+    animation: loader-spin 1s linear infinite;
+
+}
+
+
+
+@keyframes loader-spin {
+
+    from {
+
+        transform: rotate(0deg);
+
+    }
+
+
+    to {
+
+        transform: rotate(360deg);
+
+    }
+
+}
+
+
+
+/* ==========================================================================
+   ERROR MESSAGE FOUNDATION
+   ========================================================================== */
+
+
+.error-container {
+
+    position: fixed;
+
+    bottom: 2rem;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    max-width: 480px;
+
+    width: calc(100% - 2rem);
+
+    padding: 1rem 1.5rem;
+
+    border-radius: 0.75rem;
+
+    z-index: 9998;
+
+}
+
+
+
+/* ==========================================================================
+   PROGRESS FOUNDATION
+   ========================================================================== */
+
+
+.progress-wrapper {
+
+    width: 100%;
+
+}
+
+
+
+.progress-track {
+
+    width: 100%;
+
+    height: 8px;
+
+    border-radius: 999px;
+
+    overflow: hidden;
+
+}
+
+
+
+.progress-fill {
+
+    height: 100%;
+
+    width: 0%;
+
+    transition:
+
+        width 0.4s ease;
+
+}
+
+
+
+/* ==========================================================================
+   DIVIDERS
+   ========================================================================== */
+
+
+.divider {
+
+    width: 100%;
+
+    height: 1px;
+
+}
+
+
+
+.divider-horizontal {
+
+    margin-top: 1.5rem;
+
+    margin-bottom: 1.5rem;
+
+}
+
+
+
+/* ==========================================================================
+   ALIGNMENT HELPERS
+   ========================================================================== */
+
+
+.items-center {
+
+    align-items: center;
+
+}
+
+
+
+.items-start {
+
+    align-items: flex-start;
+
+}
+
+
+
+.items-end {
+
+    align-items: flex-end;
+
+}
+
+
+
+.justify-center {
+
+    justify-content: center;
+
+}
+
+
+
+.justify-start {
+
+    justify-content: flex-start;
+
+}
+
+
+
+.justify-end {
+
+    justify-content: flex-end;
+
+}
+
+
+
+/* ==========================================================================
+   WIDTH HELPERS
+   ========================================================================== */
+
+
+.w-full {
+
+    width: 100%;
+
+}
+
+
+
+.w-auto {
+
+    width: auto;
+
+}
+
+
+
+.max-content {
+
+    width: max-content;
+
+}
+
+
+
+.full-height {
+
+    min-height: 100vh;
+
+}
+
+
+
+/* ==========================================================================
+   BORDER RADIUS SYSTEM
+   ========================================================================== */
+
+
+.radius-sm {
+
+    border-radius: 0.375rem;
+
+}
+
+
+
+.radius-md {
+
+    border-radius: 0.75rem;
+
+}
+
+
+
+.radius-lg {
+
+    border-radius: 1.25rem;
+
+}
+
+
+
+.radius-full {
+
+    border-radius: 999px;
+
+}
+
+
+
+/* ==========================================================================
+   SHADOW FOUNDATION
+   ========================================================================== */
+
+
+.shadow-sm {
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.08);
+
+}
+
+
+
+.shadow-md {
+
+    box-shadow:
+        0 8px 24px rgba(0,0,0,0.12);
+
+}
+
+
+
+.shadow-lg {
+
+    box-shadow:
+        0 16px 40px rgba(0,0,0,0.16);
+
+}
+
+
+
+/* ==========================================================================
+   TRANSITION FOUNDATION
+   ========================================================================== */
+
+
+.transition {
+
+    transition:
+
+        all 0.25s ease;
+
+}
+
+
+
+.transition-fast {
+
+    transition:
+
+        all 0.15s ease;
+
+}
+
+
+
+.transition-slow {
+
+    transition:
+
+        all 0.4s ease;
+
+}
+
+
+
+/* ==========================================================================
+   END OF FOUNDATION LAYER
+
+   Theme variables:
+   theme.css
+
+   Responsive behavior:
+   responsive.css
+
+   Page styling:
+   Individual page stylesheets
+
+   ========================================================================== */
+
