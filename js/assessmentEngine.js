@@ -5,34 +5,28 @@
    File        : assessmentEngine.js
    Version     : 1.0
    Status      : DEVELOPMENT
-   Stage       : STAGE 0 — FOUNDATION
 
-   Purpose     :
-   Frontend assessment orchestration engine.
+   Purpose:
+   Core assessment orchestration engine.
 
    Responsibilities:
 
    • Load assessment questions.
    • Render question interface.
-   • Capture user selections.
-   • Maintain temporary assessment state.
-   • Submit responses through API service.
+   • Capture responses.
+   • Manage assessment state.
 
    Does NOT:
 
-   • Calculate scores.
-   • Determine pillar results.
    • Generate diagnosis.
    • Generate prescription.
-   • Apply business rules.
+   • Create reports.
 
-   Backend Ownership:
+   Backend owns:
 
-   • Assessment persistence
-   • Scoring engine
-   • KALA CHAKRA™ engine
-   • Diagnosis engine
-   • Prescription engine
+   • Final calculations.
+   • Diagnosis generation.
+   • Prescription generation.
 
    ========================================================================== */
 
@@ -43,6 +37,7 @@
 
 
 window.CTMPATH = window.CTMPATH || {};
+
 
 
 
@@ -72,12 +67,6 @@ CTMPATH.AssessmentEngine = {
 
 
 
-    currentQuestion:
-
-        0,
-
-
-
     responses:
 
         {}
@@ -97,11 +86,30 @@ CTMPATH.AssessmentEngine = {
 CTMPATH.AssessmentEngine.init = function() {
 
 
+    if (
+
+        CTMPATH.AssessmentEngine.initialized
+
+    ) {
+
+
+        return;
+
+
+
+    }
+
+
+
+    CTMPATH.AssessmentEngine.restoreResponses();
+
+
+
+    CTMPATH.AssessmentEngine.bindEvents();
+
+
+
     CTMPATH.AssessmentEngine.initialized = true;
-
-
-
-    CTMPATH.AssessmentEngine.restoreState();
 
 
 
@@ -113,162 +121,25 @@ CTMPATH.AssessmentEngine.init = function() {
 /* ==========================================================================
    LOAD ASSESSMENT
 
-   Receives assessment configuration from data layer.
+   Receives pillar question set.
 
    ========================================================================== */
 
 
-CTMPATH.AssessmentEngine.load = function(config) {
+CTMPATH.AssessmentEngine.load = function(
 
-
-    CTMPATH.AssessmentEngine.currentAssessment = config;
-
-
-
-    CTMPATH.AssessmentEngine.currentQuestion = 0;
-
-
-
-    CTMPATH.AssessmentEngine.responses = {};
-
-
-
-    return true;
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   GET CURRENT QUESTION
-
-   ========================================================================== */
-
-
-CTMPATH.AssessmentEngine.getCurrentQuestion = function() {
-
-
-    if (
-
-        !CTMPATH.AssessmentEngine.currentAssessment
-
-    ) {
-
-
-        return null;
-
-
-
-    }
-
-
-
-    return CTMPATH.AssessmentEngine.currentAssessment.questions[
-
-        CTMPATH.AssessmentEngine.currentQuestion
-
-    ];
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   RECORD RESPONSE
-
-   Stores temporary answer selection.
-
-   Final persistence happens through API.
-
-   ========================================================================== */
-
-
-CTMPATH.AssessmentEngine.recordResponse = function(
-
-    questionId,
-
-    answer
+    assessment
 
 ) {
 
 
-    CTMPATH.AssessmentEngine.responses[
+    CTMPATH.AssessmentEngine.currentAssessment =
 
-        questionId
-
-    ] = answer;
+        assessment;
 
 
 
-    CTMPATH.AssessmentEngine.saveState();
-
-
-
-    return true;
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   MOVE TO NEXT QUESTION
-
-   ========================================================================== */
-
-
-CTMPATH.AssessmentEngine.nextQuestion = function() {
-
-
-    if (
-
-        !CTMPATH.AssessmentEngine.currentAssessment
-
-    ) {
-
-
-        return false;
-
-
-
-    }
-
-
-
-    const total =
-
-        CTMPATH.AssessmentEngine.currentAssessment.questions.length;
-
-
-
-    if (
-
-        CTMPATH.AssessmentEngine.currentQuestion >= total - 1
-
-    ) {
-
-
-        return false;
-
-
-
-    }
-
-
-
-    CTMPATH.AssessmentEngine.currentQuestion++;
-
-
-
-    return true;
+    CTMPATH.AssessmentEngine.render();
 
 
 
@@ -284,17 +155,43 @@ CTMPATH.AssessmentEngine.nextQuestion = function() {
 
 
 /* ==========================================================================
-   MOVE TO PREVIOUS QUESTION
+   RENDER ASSESSMENT
+
+   Creates question interface.
+
+   Uses:
+
+   • question-card component
+   • rating-scale component
 
    ========================================================================== */
 
 
-CTMPATH.AssessmentEngine.previousQuestion = function() {
+CTMPATH.AssessmentEngine.render = function() {
+
+
+    const container = document.getElementById(
+
+        "question-container"
+
+    );
+
+
+
+    if (!container) {
+
+
+        return false;
+
+
+
+    }
+
 
 
     if (
 
-        CTMPATH.AssessmentEngine.currentQuestion <= 0
+        !CTMPATH.AssessmentEngine.currentAssessment
 
     ) {
 
@@ -307,7 +204,41 @@ CTMPATH.AssessmentEngine.previousQuestion = function() {
 
 
 
-    CTMPATH.AssessmentEngine.currentQuestion--;
+    container.innerHTML = "";
+
+
+
+    CTMPATH.AssessmentEngine.currentAssessment.questions
+
+        .forEach(function(question, index) {
+
+
+
+            const questionCard =
+
+                CTMPATH.AssessmentEngine.createQuestionCard(
+
+                    question,
+
+                    index + 1
+
+                );
+
+
+
+            container.appendChild(
+
+                questionCard
+
+            );
+
+
+
+        });
+
+
+
+    CTMPATH.AssessmentEngine.bindRatingEvents();
 
 
 
@@ -321,99 +252,160 @@ CTMPATH.AssessmentEngine.previousQuestion = function() {
 
 
 /* ==========================================================================
-   GET PROGRESS
+   CREATE QUESTION CARD
 
-   Calculates frontend display progress only.
-
-   Does NOT calculate assessment score.
+   Presentation generation only.
 
    ========================================================================== */
 
 
-CTMPATH.AssessmentEngine.getProgress = function() {
+CTMPATH.AssessmentEngine.createQuestionCard = function(
+
+    question,
+
+    number
+
+) {
 
 
-    if (
+    const card = document.createElement(
 
-        !CTMPATH.AssessmentEngine.currentAssessment
+        "div"
+
+    );
+
+
+
+    card.className =
+
+        "question-card";
+
+
+
+    card.innerHTML = `
+
+
+        <div class="question-number">
+
+
+            Question ${number}
+
+
+        </div>
+
+
+        <div class="question-text">
+
+
+            ${question.text}
+
+
+        </div>
+
+
+        <div class="rating-scale">
+
+
+            ${
+
+                CTMPATH.AssessmentEngine.createRatingScale(
+
+                    question.id
+
+                )
+
+            }
+
+
+        </div>
+
+
+    `;
+
+
+
+    return card;
+
+
+
+};
+
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : assessmentEngine.js
+   Continuation: Batch 1C
+
+   ========================================================================== */
+
+
+/* ==========================================================================
+   CREATE RATING SCALE
+
+   Generates 1-10 response options.
+
+   Presentation helper only.
+
+   ========================================================================== */
+
+
+CTMPATH.AssessmentEngine.createRatingScale = function(
+
+    questionId
+
+) {
+
+
+    let html = "";
+
+
+
+    for (
+
+        let score = 1;
+
+        score <= 10;
+
+        score++
 
     ) {
 
 
-        return {
+        html += `
 
 
-            current:
-
-                0,
+            <label class="rating-option">
 
 
-            total:
+                <input
 
-                0,
+                    type="radio"
 
+                    name="${questionId}"
 
-            percentage:
-
-                0
+                    value="${score}">
 
 
 
-        };
+                <span>
+
+                    ${score}
+
+                </span>
+
+
+            </label>
+
+
+        `;
+
 
 
     }
 
 
 
-    const total =
-
-        CTMPATH.AssessmentEngine.currentAssessment.questions.length;
-
-
-
-    const current =
-
-        CTMPATH.AssessmentEngine.currentQuestion + 1;
-
-
-
-    return {
-
-
-        current:
-
-            current,
-
-
-
-        total:
-
-            total,
-
-
-
-        percentage:
-
-            Math.round(
-
-                (
-
-                    current /
-
-                    total
-
-                )
-
-                *
-
-                100
-
-            )
-
-
-
-    };
+    return html;
 
 
 
@@ -423,9 +415,135 @@ CTMPATH.AssessmentEngine.getProgress = function() {
 
 
 /* ==========================================================================
+   BIND RATING EVENTS
+
+   Captures user selections.
+
+   ========================================================================== */
+
+
+CTMPATH.AssessmentEngine.bindRatingEvents = function() {
+
+
+    const options = document.querySelectorAll(
+
+        ".rating-option input"
+
+    );
+
+
+
+    options.forEach(function(option) {
+
+
+
+        option.addEventListener(
+
+            "change",
+
+            function() {
+
+
+
+                CTMPATH.AssessmentEngine.recordResponse(
+
+                    option.name,
+
+                    option.value
+
+                );
+
+
+
+            }
+
+        );
+
+
+
+    });
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   RECORD RESPONSE
+
+   Stores temporary assessment response.
+
+   ========================================================================== */
+
+
+CTMPATH.AssessmentEngine.recordResponse = function(
+
+    questionId,
+
+    value
+
+) {
+
+
+    CTMPATH.AssessmentEngine.responses[questionId] =
+
+        Number(value);
+
+
+
+    CTMPATH.AssessmentEngine.saveResponses();
+
+
+
+    document.dispatchEvent(
+
+        new CustomEvent(
+
+            "CTMPATH_RESPONSE_UPDATED",
+
+            {
+
+                detail:
+
+                {
+
+                    questionId:
+
+                        questionId,
+
+
+
+                    value:
+
+                        value
+
+                }
+
+            }
+
+        )
+
+    );
+
+
+
+};
+
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : assessmentEngine.js
+   Continuation: Batch 1D
+
+   ========================================================================== */
+
+
+/* ==========================================================================
    GET RESPONSES
 
-   Returns temporary captured responses.
+   Returns current assessment answers.
 
    ========================================================================== */
 
@@ -443,112 +561,31 @@ CTMPATH.AssessmentEngine.getResponses = function() {
 
 
 /* ==========================================================================
-   SUBMIT ASSESSMENT RESPONSES
+   SAVE RESPONSES
 
-   Sends captured responses to backend.
-
-   Backend owns validation and scoring.
+   Saves temporary assessment state.
 
    ========================================================================== */
 
 
-CTMPATH.AssessmentEngine.submit = async function() {
+CTMPATH.AssessmentEngine.saveResponses = function() {
 
 
     if (
 
-        !CTMPATH.API ||
+        CTMPATH.Storage &&
 
-        typeof CTMPATH.API.completeAssessment !==
+        typeof CTMPATH.Storage.saveAssessmentState ===
 
             "function"
 
     ) {
 
 
-        throw new Error(
-
-            "Assessment API service unavailable."
-
-        );
-
-
-
-    }
-
-
-
-    const payload = {
-
-
-        responses:
+        CTMPATH.Storage.saveAssessmentState(
 
             CTMPATH.AssessmentEngine.responses
 
-
-
-    };
-
-
-
-    const result = await CTMPATH.API.completeAssessment(
-
-        payload
-
-    );
-
-
-
-    return result;
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   SAVE TEMPORARY STATE
-
-   ========================================================================== */
-
-
-CTMPATH.AssessmentEngine.saveState = function() {
-
-
-    if (
-
-        CTMPATH.Storage &&
-
-        typeof CTMPATH.Storage.saveProgress ===
-
-            "function"
-
-    ) {
-
-
-        CTMPATH.Storage.saveProgress(
-
-
-            {
-
-
-                question:
-
-                    CTMPATH.AssessmentEngine.currentQuestion,
-
-
-
-                responses:
-
-                    CTMPATH.AssessmentEngine.responses
-
-
-
-            }
-
-
         );
 
 
@@ -563,47 +600,39 @@ CTMPATH.AssessmentEngine.saveState = function() {
 
 
 /* ==========================================================================
-   RESTORE TEMPORARY STATE
+   RESTORE RESPONSES
+
+   Restores unfinished assessment.
 
    ========================================================================== */
 
 
-CTMPATH.AssessmentEngine.restoreState = function() {
+CTMPATH.AssessmentEngine.restoreResponses = function() {
 
 
     if (
 
         CTMPATH.Storage &&
 
-        typeof CTMPATH.Storage.getProgress ===
+        typeof CTMPATH.Storage.getAssessmentState ===
 
             "function"
 
     ) {
 
 
-        const saved =
+        const savedResponses =
 
-            CTMPATH.Storage.getProgress();
-
-
-
-        if (
-
-            saved
-
-        ) {
+            CTMPATH.Storage.getAssessmentState();
 
 
-            CTMPATH.AssessmentEngine.currentQuestion =
 
-                saved.question || 0;
-
+        if (savedResponses) {
 
 
             CTMPATH.AssessmentEngine.responses =
 
-                saved.responses || {};
+                savedResponses;
 
 
 
@@ -621,44 +650,164 @@ CTMPATH.AssessmentEngine.restoreState = function() {
 
 
 /* ==========================================================================
-   RESET ASSESSMENT SESSION
+   CLEAR RESPONSES
 
-   Clears temporary frontend assessment state.
+   Resets current assessment answers.
 
    ========================================================================== */
 
 
-CTMPATH.AssessmentEngine.reset = function() {
-
-
-    CTMPATH.AssessmentEngine.currentQuestion = 0;
-
+CTMPATH.AssessmentEngine.clearResponses = function() {
 
 
     CTMPATH.AssessmentEngine.responses = {};
 
 
 
-    if (
-
-        CTMPATH.Storage
-
-    ) {
+    CTMPATH.AssessmentEngine.saveResponses();
 
 
-        CTMPATH.Storage.remove(
 
-            "assessmentProgress"
+};
 
-        );
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : assessmentEngine.js
+   Continuation: Batch 1E
+
+   ========================================================================== */
+
+
+/* ==========================================================================
+   COMPLETE ASSESSMENT
+
+   Finalizes current assessment section.
+
+   Backend submission handled separately.
+
+   ========================================================================== */
+
+
+CTMPATH.AssessmentEngine.complete = function() {
+
+
+    const payload = {
+
+
+        assessment:
+
+            CTMPATH.AssessmentEngine.currentAssessment,
+
+
+
+        responses:
+
+            CTMPATH.AssessmentEngine.responses
+
+
+
+    };
+
+
+
+    document.dispatchEvent(
+
+        new CustomEvent(
+
+            "CTMPATH_ASSESSMENT_COMPLETE",
+
+            {
+
+                detail:
+
+                {
+
+                    payload:
+
+                        payload
+
+                }
+
+            }
+
+        )
+
+    );
+
+
+
+    return true;
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   GET CURRENT ASSESSMENT
+
+   ========================================================================== */
+
+
+CTMPATH.AssessmentEngine.getCurrentAssessment = function() {
+
+
+    return CTMPATH.AssessmentEngine.currentAssessment;
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   SET CURRENT ASSESSMENT
+
+   ========================================================================== */
+
+
+CTMPATH.AssessmentEngine.setCurrentAssessment = function(
+
+    assessment
+
+) {
+
+
+    CTMPATH.AssessmentEngine.currentAssessment =
+
+        assessment;
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   INITIALIZE ENGINE
+
+   ========================================================================== */
+
+
+document.addEventListener(
+
+    "CTMPATH_APP_READY",
+
+    function() {
+
+
+        CTMPATH.AssessmentEngine.init();
 
 
 
     }
 
-
-
-};
+);
 
 
 
@@ -673,11 +822,7 @@ CTMPATH.AssessmentEngine.reset = function() {
 
    Status:
 
-   FOUNDATION MODULE COMPLETE
+   ASSESSMENT ENGINE COMPLETE
 
-
-   Next:
-
-   js/scoring.js
 
    ========================================================================== */
