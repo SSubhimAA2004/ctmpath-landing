@@ -7,7 +7,9 @@
    Status      : DEVELOPMENT
 
    Purpose:
+
    Global journey navigation controller.
+
 
    Responsibilities:
 
@@ -16,11 +18,13 @@
    • Trigger page lifecycle events.
    • Update progress.
 
+
    Does NOT:
 
    • Own page content.
    • Calculate results.
    • Process assessments.
+
 
    ========================================================================== */
 
@@ -28,7 +32,6 @@
 /* ==========================================================================
    GLOBAL NAMESPACE
    ========================================================================== */
-
 
 window.CTMPATH = window.CTMPATH || {};
 
@@ -40,7 +43,8 @@ window.CTMPATH = window.CTMPATH || {};
    ========================================================================== */
 
 
-CTMPATH.Navigation = {
+CTMPATH.Navigation =
+{
 
 
     version:
@@ -77,14 +81,16 @@ CTMPATH.Navigation = {
    ========================================================================== */
 
 
-CTMPATH.Navigation.init = function() {
+CTMPATH.Navigation.init = function()
+{
 
 
     if (
 
         CTMPATH.Navigation.initialized
 
-    ) {
+    )
+    {
 
 
         return;
@@ -100,6 +106,32 @@ CTMPATH.Navigation.init = function() {
 
 
     CTMPATH.Navigation.bindGlobalEvents();
+
+
+
+    /*
+    ----------------------------------------------------
+
+    Initial Page Render
+
+    Purpose:
+
+    Load the current journey page immediately after
+    application initialization.
+
+    Default:
+
+    Page 01 — Welcome™
+
+    ----------------------------------------------------
+    */
+
+
+    CTMPATH.Navigation.renderPage(
+
+        CTMPATH.Navigation.currentPage
+
+    );
 
 
 
@@ -124,7 +156,8 @@ CTMPATH.Navigation.goto = function(
 
     pageNumber
 
-) {
+)
+{
 
 
     if (
@@ -133,7 +166,8 @@ CTMPATH.Navigation.goto = function(
 
         pageNumber > CTMPATH.Navigation.totalPages
 
-    ) {
+    )
+    {
 
 
         return false;
@@ -167,15 +201,6 @@ CTMPATH.Navigation.goto = function(
 };
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey™
-
-   File        : navigation.js
-   Continuation: Batch 1B
-
-   ========================================================================== */
-
-
-/* ==========================================================================
    PAGE RENDERING
 
    Displays requested journey page.
@@ -187,7 +212,8 @@ CTMPATH.Navigation.renderPage = function(
 
     pageNumber
 
-) {
+)
+{
 
 
     const pages = document.querySelectorAll(
@@ -198,7 +224,8 @@ CTMPATH.Navigation.renderPage = function(
 
 
 
-    pages.forEach(function(page) {
+    pages.forEach(function(page)
+    {
 
 
         page.style.display = "none";
@@ -217,7 +244,8 @@ CTMPATH.Navigation.renderPage = function(
 
 
 
-    if (targetPage) {
+    if (targetPage)
+    {
 
 
         targetPage.style.display = "block";
@@ -253,7 +281,8 @@ CTMPATH.Navigation.dispatchPageEvent = function(
 
     pageNumber
 
-) {
+)
+{
 
 
     document.dispatchEvent(
@@ -295,7 +324,8 @@ CTMPATH.Navigation.dispatchPageEvent = function(
    ========================================================================== */
 
 
-CTMPATH.Navigation.savePage = function() {
+CTMPATH.Navigation.savePage = function()
+{
 
 
     if (
@@ -306,7 +336,8 @@ CTMPATH.Navigation.savePage = function() {
 
             "function"
 
-    ) {
+    )
+    {
 
 
         CTMPATH.Storage.saveCurrentPage(
@@ -334,7 +365,8 @@ CTMPATH.Navigation.savePage = function() {
    ========================================================================== */
 
 
-CTMPATH.Navigation.restorePage = function() {
+CTMPATH.Navigation.restorePage = function()
+{
 
 
     if (
@@ -345,7 +377,8 @@ CTMPATH.Navigation.restorePage = function() {
 
             "function"
 
-    ) {
+    )
+    {
 
 
         const savedPage =
@@ -354,7 +387,8 @@ CTMPATH.Navigation.restorePage = function() {
 
 
 
-        if (savedPage) {
+        if (savedPage)
+        {
 
 
             CTMPATH.Navigation.currentPage =
@@ -374,15 +408,6 @@ CTMPATH.Navigation.restorePage = function() {
 };
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey™
-
-   File        : navigation.js
-   Continuation: Batch 1C
-
-   ========================================================================== */
-
-
-/* ==========================================================================
    NEXT PAGE
 
    Moves forward one journey step.
@@ -390,7 +415,8 @@ CTMPATH.Navigation.restorePage = function() {
    ========================================================================== */
 
 
-CTMPATH.Navigation.next = function() {
+CTMPATH.Navigation.next = function()
+{
 
 
     const nextPage =
@@ -420,7 +446,8 @@ CTMPATH.Navigation.next = function() {
    ========================================================================== */
 
 
-CTMPATH.Navigation.previous = function() {
+CTMPATH.Navigation.previous = function()
+{
 
 
     const previousPage =
@@ -450,7 +477,8 @@ CTMPATH.Navigation.previous = function() {
    ========================================================================== */
 
 
-CTMPATH.Navigation.updateProgress = function() {
+CTMPATH.Navigation.updateProgress = function()
+{
 
 
     const progressElements = document.querySelectorAll(
@@ -473,7 +501,8 @@ CTMPATH.Navigation.updateProgress = function() {
 
 
 
-    progressElements.forEach(function(element) {
+    progressElements.forEach(function(element)
+    {
 
 
         element.style.width =
@@ -494,7 +523,8 @@ CTMPATH.Navigation.updateProgress = function() {
 
 
 
-    counters.forEach(function(counter) {
+    counters.forEach(function(counter)
+    {
 
 
         counter.textContent =
@@ -523,14 +553,16 @@ CTMPATH.Navigation.updateProgress = function() {
    ========================================================================== */
 
 
-CTMPATH.Navigation.bindGlobalEvents = function() {
+CTMPATH.Navigation.bindGlobalEvents = function()
+{
 
 
     document.addEventListener(
 
         "CTMPATH_PAGE_LOADED",
 
-        function() {
+        function()
+        {
 
 
             CTMPATH.Navigation.updateProgress();
@@ -546,15 +578,6 @@ CTMPATH.Navigation.bindGlobalEvents = function() {
 };
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey™
-
-   File        : navigation.js
-   Continuation: Batch 1D
-
-   ========================================================================== */
-
-
-/* ==========================================================================
    GET CURRENT PAGE
 
    Returns active journey location.
@@ -562,7 +585,8 @@ CTMPATH.Navigation.bindGlobalEvents = function() {
    ========================================================================== */
 
 
-CTMPATH.Navigation.getCurrentPage = function() {
+CTMPATH.Navigation.getCurrentPage = function()
+{
 
 
     return CTMPATH.Navigation.currentPage;
@@ -582,7 +606,8 @@ CTMPATH.Navigation.getCurrentPage = function() {
    ========================================================================== */
 
 
-CTMPATH.Navigation.getTotalPages = function() {
+CTMPATH.Navigation.getTotalPages = function()
+{
 
 
     return CTMPATH.Navigation.totalPages;
@@ -600,7 +625,8 @@ CTMPATH.Navigation.getTotalPages = function() {
    ========================================================================== */
 
 
-CTMPATH.Navigation.isFirstPage = function() {
+CTMPATH.Navigation.isFirstPage = function()
+{
 
 
     return (
@@ -622,7 +648,8 @@ CTMPATH.Navigation.isFirstPage = function() {
    ========================================================================== */
 
 
-CTMPATH.Navigation.isLastPage = function() {
+CTMPATH.Navigation.isLastPage = function()
+{
 
 
     return (
@@ -648,7 +675,8 @@ CTMPATH.Navigation.isLastPage = function() {
    ========================================================================== */
 
 
-CTMPATH.Navigation.reset = function() {
+CTMPATH.Navigation.reset = function()
+{
 
 
     CTMPATH.Navigation.currentPage = 1;
@@ -670,15 +698,6 @@ CTMPATH.Navigation.reset = function() {
 };
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey™
-
-   File        : navigation.js
-   Continuation: Batch 1E
-
-   ========================================================================== */
-
-
-/* ==========================================================================
    NAVIGATION STATUS
 
    Returns current navigation state.
@@ -686,7 +705,8 @@ CTMPATH.Navigation.reset = function() {
    ========================================================================== */
 
 
-CTMPATH.Navigation.getStatus = function() {
+CTMPATH.Navigation.getStatus = function()
+{
 
 
     return {
@@ -735,7 +755,8 @@ document.addEventListener(
 
     "CTMPATH_APP_READY",
 
-    function() {
+    function()
+    {
 
 
         CTMPATH.Navigation.init();
