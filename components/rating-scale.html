@@ -1,61 +1,64 @@
 
 <!-- ==========================================================================
-     CTM PATH™
-     KALA CHAKRA™ v3.0
+   CTM PATH™ Guided Journey™
 
-     Component   : rating-scale.html
-     Version     : 2.0
+   Component   : rating-scale.html
+   Version     : 1.0
 
-     Status      : PREMIUM EXPERIENCE LAYER
+   Purpose:
+   Reusable 1-10 assessment rating component.
 
+   Used by:
 
-     PURPOSE
+   • Assessment 01 — Purpose™
+   • Assessment 02 — Health™
+   • Assessment 03 — Relationships™
+   • Assessment 04 — Character & Integrity™
+   • Assessment 05 — Learning & Mastery™
+   • Assessment 06 — Career & Contribution™
+   • Assessment 07 — Financial Freedom™
+   • Assessment 08 — Time Freedom™
+   • Assessment 09 — Tribe™
+   • Assessment 10 — Automation™
+   • Assessment 11 — Contribution™
+   • Assessment 12 — Vision™
 
-     Premium Rating Interface™
-
-     Owns:
-
-     ✓ Visual score selection
-     ✓ Rating zones
-     ✓ User interaction surface
-     ✓ Accessibility labels
-
-
-     Does NOT:
-
-     ✗ Calculate scores
-     ✗ Store answers
-     ✗ Modify engine state
+   ========================================================================== -->
 
 
-     ========================================================================== -->
+<div class="rating-scale"
+
+     data-component="rating-scale">
 
 
-<section class="ctm-rating-scale"
 
-         id="ratingScale">
 
 
     <!-- ==============================================================
-         HEADER
+         Rating Label Header
          ============================================================== -->
 
 
     <div class="rating-header">
 
 
-        <h3 class="rating-title">
-
-            Rate Yourself™
-
-        </h3>
+        <span class="rating-min-label">
 
 
-        <p class="rating-subtitle">
+            Beginning
 
-            Choose the score that best reflects your present reality.
 
-        </p>
+        </span>
+
+
+
+        <span class="rating-max-label">
+
+
+            Mastery
+
+
+        </span>
 
 
     </div>
@@ -65,278 +68,264 @@
 
 
     <!-- ==============================================================
-         SCORE ZONES
-         ============================================================== -->
+         Rating Options
+
+         Values:
+
+         1 → 10
+
+         ================================================================= -->
 
 
-    <div class="rating-zones">
-
-
-
-        <div class="rating-zone beginning">
-
-
-            <span class="zone-icon">
-
-                🌱
-
-            </span>
-
-
-            <span class="zone-label">
-
-                Beginning Journey
-
-            </span>
-
-
-            <span class="zone-range">
-
-                1 — 3
-
-            </span>
-
-
-        </div>
+    <div class="rating-options">
 
 
 
+        <label class="rating-option">
 
 
-        <div class="rating-zone developing">
+            <input
+
+                type="radio"
+
+                name="{{QUESTION_ID}}"
+
+                value="1">
 
 
-            <span class="zone-icon">
 
-                🌿
+            <span>
+
+                1
 
             </span>
 
 
-            <span class="zone-label">
-
-                Building Momentum
-
-            </span>
-
-
-            <span class="zone-range">
-
-                4 — 7
-
-            </span>
-
-
-        </div>
+        </label>
 
 
 
+        <label class="rating-option">
 
 
-        <div class="rating-zone flourishing">
+            <input
+
+                type="radio"
+
+                name="{{QUESTION_ID}}"
+
+                value="2">
 
 
-            <span class="zone-icon">
 
-                ✨
+            <span>
+
+                2
 
             </span>
 
 
-            <span class="zone-label">
+        </label>
 
-                Living Your Potential
+
+
+        <label class="rating-option">
+
+
+            <input
+
+                type="radio"
+
+                name="{{QUESTION_ID}}"
+
+                value="3">
+
+
+
+            <span>
+
+                3
 
             </span>
 
 
-            <span class="zone-range">
+        </label>
 
-                8 — 10
+         <!-- ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   Component   : rating-scale.html
+   Continuation : Batch 1B
+
+   ========================================================================== -->
+
+
+
+        <label class="rating-option">
+
+
+            <input
+
+                type="radio"
+
+                name="{{QUESTION_ID}}"
+
+                value="4">
+
+
+
+            <span>
+
+                4
 
             </span>
 
 
-        </div>
+        </label>
 
 
 
-    </div>
+        <label class="rating-option">
 
 
+            <input
 
+                type="radio"
 
+                name="{{QUESTION_ID}}"
 
-    <!-- ==============================================================
-         SCORE BUTTONS
-         ============================================================== -->
+                value="5">
 
 
-    <div class="rating-buttons"
 
-         role="radiogroup"
+            <span>
 
-         aria-label="Choose your current rating">
+                5
 
+            </span>
 
 
-        <button
+        </label>
 
-            class="rating-button"
 
-            data-rating="1"
 
-            role="radio"
+        <label class="rating-option">
 
-            aria-label="Rating 1">
 
-            1
+            <input
 
-        </button>
+                type="radio"
 
+                name="{{QUESTION_ID}}"
 
+                value="6">
 
-        <button
 
-            class="rating-button"
 
-            data-rating="2"
+            <span>
 
-            role="radio"
+                6
 
-            aria-label="Rating 2">
+            </span>
 
-            2
 
-        </button>
+        </label>
 
 
 
-        <button
+        <label class="rating-option">
 
-            class="rating-button"
 
-            data-rating="3"
+            <input
 
-            role="radio"
+                type="radio"
 
-            aria-label="Rating 3">
+                name="{{QUESTION_ID}}"
 
-            3
+                value="7">
 
-        </button>
 
 
+            <span>
 
-        <button
+                7
 
-            class="rating-button"
+            </span>
 
-            data-rating="4"
 
-            role="radio"
+        </label>
 
-            aria-label="Rating 4">
 
-            4
 
-        </button>
+        <label class="rating-option">
 
 
+            <input
 
-        <button
+                type="radio"
 
-            class="rating-button"
+                name="{{QUESTION_ID}}"
 
-            data-rating="5"
+                value="8">
 
-            role="radio"
 
-            aria-label="Rating 5">
 
-            5
+            <span>
 
-        </button>
+                8
 
+            </span>
 
 
-        <button
+        </label>
 
-            class="rating-button"
 
-            data-rating="6"
 
-            role="radio"
+        <label class="rating-option">
 
-            aria-label="Rating 6">
 
-            6
+            <input
 
-        </button>
+                type="radio"
 
+                name="{{QUESTION_ID}}"
 
+                value="9">
 
-        <button
 
-            class="rating-button"
 
-            data-rating="7"
+            <span>
 
-            role="radio"
+                9
 
-            aria-label="Rating 7">
+            </span>
 
-            7
 
-        </button>
+        </label>
 
 
 
-        <button
+        <label class="rating-option">
 
-            class="rating-button"
 
-            data-rating="8"
+            <input
 
-            role="radio"
+                type="radio"
 
-            aria-label="Rating 8">
+                name="{{QUESTION_ID}}"
 
-            8
+                value="10">
 
-        </button>
 
 
+            <span>
 
-        <button
+                10
 
-            class="rating-button"
+            </span>
 
-            data-rating="9"
 
-            role="radio"
-
-            aria-label="Rating 9">
-
-            9
-
-        </button>
-
-
-
-        <button
-
-            class="rating-button rating-final"
-
-            data-rating="10"
-
-            role="radio"
-
-            aria-label="Rating 10">
-
-            10
-
-        </button>
+        </label>
 
 
 
@@ -347,7 +336,10 @@
 
 
     <!-- ==============================================================
-         CURRENT SELECTION DISPLAY
+         Selected Value Display
+
+         Controlled by assessmentEngine.js
+
          ============================================================== -->
 
 
@@ -356,29 +348,152 @@
 
         <span class="selected-label">
 
-            Your Current Rating
+
+            Selected:
+
 
         </span>
 
 
 
-        <span
+        <span class="selected-value">
 
-            id="currentRatingValue"
 
-            class="selected-value">
+            --
 
-            —
 
         </span>
 
 
 
-        <span class="selected-total">
+    </div>
 
-            /10
+
+
+<!-- ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   Component   : rating-scale.html
+   Continuation : Batch 1C
+
+   ========================================================================== -->
+
+
+
+    <!-- ==============================================================
+         Accessibility Description
+
+         Provides context for screen readers.
+
+         ============================================================== -->
+
+
+    <div class="rating-accessibility">
+
+
+        <span class="sr-only">
+
+
+            Choose a score between
+            1 and 10 based on your current experience.
+
 
         </span>
+
+
+    </div>
+
+
+
+
+
+    <!-- ==============================================================
+         Rating Guidance
+
+         Helps user understand scale meaning.
+
+         ============================================================== -->
+
+
+    <div class="rating-guidance">
+
+
+        <div class="guidance-item">
+
+
+            <span class="guidance-number">
+
+
+                1
+
+
+            </span>
+
+
+            <span class="guidance-text">
+
+
+                Needs Attention
+
+
+            </span>
+
+
+        </div>
+
+
+
+
+
+        <div class="guidance-item">
+
+
+            <span class="guidance-number">
+
+
+                5
+
+
+            </span>
+
+
+            <span class="guidance-text">
+
+
+                Developing
+
+
+            </span>
+
+
+        </div>
+
+
+
+
+
+        <div class="guidance-item">
+
+
+            <span class="guidance-number">
+
+
+                10
+
+
+            </span>
+
+
+            <span class="guidance-text">
+
+
+                Fully Aligned
+
+
+            </span>
+
+
+        </div>
 
 
 
@@ -389,405 +504,101 @@
 
 
     <!-- ==============================================================
-         JOURNEY MESSAGE
+         Component Metadata
+
+         Used by assessmentEngine.js
+
          ============================================================== -->
 
 
-    <div class="rating-message">
+    <div class="rating-meta"
 
 
-        Select a score to continue your CTM PATH™ journey.
+         data-question-id="{{QUESTION_ID}}"
 
+
+         data-current-value="">
 
 
     </div>
 
 
 
-</section>
+
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   Component   : rating-scale.html
+   Continuation : Batch 1D
+
+   ========================================================================== */
+
+
+
+    <!-- ==============================================================
+         Component State Container
+
+         Assessment engine updates:
+
+         • selected
+         • completed
+         • validation state
+
+         ============================================================== -->
+
+
+    <div class="rating-state"
+
+
+         data-state="ready">
+
+
+    </div>
+
+
+
+
+
+    <!-- ==============================================================
+         Validation Message
+
+         Controlled by assessmentEngine.js
+
+         ============================================================== -->
+
+
+    <div class="rating-validation-message"
+
+
+         aria-live="polite">
+
+
+    </div>
+
+
+
+
+
+</div>
+
+
 
 
 
 <!-- ==========================================================================
-     END COMPONENT
+   COMPONENT END
 
-     rating-scale.html
+   File:
 
-     Version : 2.0
+   components/rating-scale.html
 
-     ========================================================================== -->
 
+   Status:
+
+   Shared 1-10 Rating Component Complete
+
+   ========================================================================== -->
      
-<!-- ==========================================================================
-     INTERACTION HOOKS
 
-     CTM PATH™ Rating Scale Interaction Layer™
-
-     Controlled by:
-
-     js/assessmentUI.js
-
-
-     ========================================================================== -->
-
-
-<script>
-
-
-(function(){
-
-
-
-    const container =
-
-        document.querySelector(
-
-            "#ratingScale"
-
-        );
-
-
-
-    if(!container){
-
-        return;
-
-    }
-
-
-
-
-
-    const buttons =
-
-        container.querySelectorAll(
-
-            ".rating-button"
-
-        );
-
-
-
-
-
-    buttons.forEach(function(button){
-
-
-
-        button.setAttribute(
-
-            "aria-checked",
-
-            "false"
-
-        );
-
-
-
-
-
-        button.addEventListener(
-
-            "click",
-
-            function(){
-
-
-
-                const value =
-
-                    this.dataset.rating;
-
-
-
-
-
-                buttons.forEach(
-
-                    function(item){
-
-
-
-                        item.classList.remove(
-
-                            "selected"
-
-                        );
-
-
-
-                        item.setAttribute(
-
-                            "aria-checked",
-
-                            "false"
-
-                        );
-
-
-
-                    }
-
-                );
-
-
-
-
-
-                this.classList.add(
-
-                    "selected"
-
-                );
-
-
-
-
-
-                this.setAttribute(
-
-                    "aria-checked",
-
-                    "true"
-
-                );
-
-
-
-
-
-                const display =
-
-                    container.querySelector(
-
-                        "#currentRatingValue"
-
-                    );
-
-
-
-
-
-                if(display){
-
-
-
-                    display.textContent =
-
-                        value;
-
-
-
-                }
-
-
-
-
-
-                container.classList.add(
-
-                    "rating-selected-animation"
-
-                );
-
-
-
-
-
-                setTimeout(
-
-                    function(){
-
-
-
-                        container.classList.remove(
-
-                            "rating-selected-animation"
-
-                        );
-
-
-
-                    },
-
-                    400
-
-                );
-
-
-
-
-
-                /*
-
-                   EVENT BRIDGE
-
-                   ----------------
-
-                   assessmentUI.js
-
-                   can listen here.
-
-                */
-
-
-
-                container.dispatchEvent(
-
-                    new CustomEvent(
-
-                        "ctmRatingSelected",
-
-                        {
-
-
-                            detail : {
-
-
-                                rating :
-
-                                    Number(value)
-
-
-
-                            },
-
-
-                            bubbles:true
-
-
-                        }
-
-                    )
-
-                );
-
-
-
-            }
-
-        );
-
-
-
-    });
-
-
-
-})();
-
-
-
-</script>
-
-<!-- ==========================================================================
-     PREMIUM MICROCOPY LAYER
-
-     Provides emotional guidance without controlling logic.
-
-     ========================================================================== -->
-
-
-<div class="rating-guidance"
-
-     aria-live="polite">
-
-
-    <p class="guidance-primary">
-
-
-        Every honest reflection creates a meaningful transformation.
-
-
-    </p>
-
-
-
-    <p class="guidance-secondary">
-
-
-        There are no right or wrong answers.
-
-        Only your present reality.
-
-
-    </p>
-
-
-
-</div>
-
-
-
-
-
-<!-- ==========================================================================
-     FALLBACK MESSAGE
-
-     Visible only when JavaScript is unavailable.
-
-     ========================================================================== -->
-
-
-<noscript>
-
-
-    <div class="rating-noscript">
-
-
-        CTM PATH™ requires JavaScript enabled
-
-        to provide your guided assessment experience.
-
-
-    </div>
-
-
-</noscript>
-
-
-
-
-
-<!-- ==========================================================================
-     COMPONENT READY MARKER
-
-     Allows assessmentUI.js to verify loading.
-
-     ========================================================================== -->
-
-
-<div
-
-    id="ratingScaleReady"
-
-    data-component="rating-scale"
-
-    data-version="2.0"
-
-    hidden>
-
-
-</div>
-
-
-
-
-
-<!-- ==========================================================================
-     END COMPONENT
-
-     rating-scale.html
-
-     Version : 2.0
-
-     Status
-
-     ✓ PREMIUM UI READY
-     ✓ EVENT BRIDGE READY
-     ✓ ACCESSIBILITY READY
-     ✓ ASSESSMENT UI COMPATIBLE
-
-     ========================================================================== -->
 
      
