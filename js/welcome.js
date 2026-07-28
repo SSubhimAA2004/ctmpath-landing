@@ -1,20 +1,21 @@
 
 /* ==========================================================================
+   
    CTM PATH™ Guided Journey™
 
    File        : js/welcome.js
-   Version     : 2.1
+   Version     : 2.2
 
-   Page        : 01 — WELCOME™
+   Page        : PAGE 01 — WELCOME™
 
    Purpose:
    Premium Welcome Page Controller
 
    Responsibilities:
-   • Initialise Welcome experience
-   • Capture journey start
-   • Store temporary session data
-   • Navigate to Registration™
+   • Initialise welcome experience
+   • Capture journey metadata
+   • Handle journey start
+   • Navigate to registration
 
    Architecture:
 
@@ -39,23 +40,23 @@
 
 document.addEventListener(
     "DOMContentLoaded",
-    initialiseWelcome
+    initWelcomePage
 );
 
 
 
-function initialiseWelcome(){
+function initWelcomePage(){
 
 
     console.log(
-        "CTM PATH™ Welcome Journey Initialised"
+        "CTM PATH™ Welcome Journey Loaded"
     );
 
 
-    captureJourneyStart();
+    initialiseJourneySession();
 
 
-    bindJourneyButton();
+    bindBeginJourneyButton();
 
 
 }
@@ -66,19 +67,24 @@ function initialiseWelcome(){
 
 
 /* ==========================================================================
-   JOURNEY SESSION INITIALISATION
+   JOURNEY SESSION
 ========================================================================== */
 
 
-function captureJourneyStart(){
+function initialiseJourneySession(){
 
 
-    const journeyData = {
+    const journeySession = {
 
 
-        journeyStarted:
+        journey:
 
-            true,
+            "CTM PATH™ Guided Journey™",
+
+
+        page:
+
+            "WELCOME",
 
 
         startedAt:
@@ -86,11 +92,9 @@ function captureJourneyStart(){
             new Date().toISOString(),
 
 
-
         device:
 
             detectDevice(),
-
 
 
         language:
@@ -98,11 +102,9 @@ function captureJourneyStart(){
             detectLanguage(),
 
 
-
         source:
 
             detectSource()
-
 
 
     };
@@ -111,9 +113,9 @@ function captureJourneyStart(){
 
     sessionStorage.setItem(
 
-        "ctmJourneyStart",
+        "ctmJourneySession",
 
-        JSON.stringify(journeyData)
+        JSON.stringify(journeySession)
 
     );
 
@@ -172,15 +174,23 @@ function detectDevice(){
 function detectLanguage(){
 
 
-    return (
+    const browserLanguage =
 
-        navigator.language
+        navigator.language;
 
-        ||
 
-        "en"
 
-    );
+    if(browserLanguage){
+
+
+        return browserLanguage;
+
+
+    }
+
+
+
+    return "en";
 
 
 }
@@ -191,7 +201,7 @@ function detectLanguage(){
 
 
 /* ==========================================================================
-   SOURCE DETECTION
+   SOURCE TRACKING
 ========================================================================== */
 
 
@@ -227,11 +237,11 @@ function detectSource(){
 
 
 /* ==========================================================================
-   BEGIN JOURNEY BUTTON
+   BEGIN JOURNEY ACTION
 ========================================================================== */
 
 
-function bindJourneyButton(){
+function bindBeginJourneyButton(){
 
 
     const button =
@@ -249,7 +259,7 @@ function bindJourneyButton(){
 
         console.warn(
 
-            "CTM PATH™ Begin Journey button missing"
+            "CTM PATH™ Begin Journey button not found"
 
         );
 
@@ -267,7 +277,7 @@ function bindJourneyButton(){
 
         "click",
 
-        startJourney
+        beginJourney
 
     );
 
@@ -279,7 +289,7 @@ function bindJourneyButton(){
 
 
 
-function startJourney(event){
+function beginJourney(event){
 
 
     event.preventDefault();
@@ -309,11 +319,29 @@ function startJourney(event){
 
 
 /* ==========================================================================
-   JOURNEY RESET SUPPORT
+   PUBLIC JOURNEY CONTROLS
 ========================================================================== */
 
 
 window.CTMWelcome = {
+
+
+    getSession:function(){
+
+
+        return JSON.parse(
+
+            sessionStorage.getItem(
+
+                "ctmJourneySession"
+
+            )
+
+        );
+
+
+    },
+
 
 
     reset:function(){
@@ -321,7 +349,7 @@ window.CTMWelcome = {
 
         sessionStorage.removeItem(
 
-            "ctmJourneyStart"
+            "ctmJourneySession"
 
         );
 
@@ -350,7 +378,7 @@ window.CTMWelcome = {
    END OF FILE
 
    CTM PATH™ Guided Journey™
-   Welcome Controller v2.1
+   Welcome Controller v2.2
 
 ========================================================================== */
 
