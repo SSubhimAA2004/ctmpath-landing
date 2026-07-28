@@ -1,919 +1,521 @@
 
 /* ==========================================================================
+
    CTM PATH™ Guided Journey™
-   
    File        : css/theme.css
-   Version     : 2.0
+   Version     : 2.2
+   Status      : Premium Global Design System
    
    Purpose:
-   Premium Global Design System Foundation
-   
-   Used By:
-   • All 18 Journey Pages
-   • Global Components
-   • Application Shell
-   
-   Brand:
-   CTM PATH™
-   KAALACHAKRA™
-   The Millionaire Production System™
-   From Survival To Living™
+   Central visual identity system for all 18 pages.
 
-   ========================================================================== */
+   Design Philosophy:
+   • Premium global brand aesthetic
+   • Deep executive navy foundation
+   • Gold authority accents
+   • Teal transformation highlights
+   • Ivory readable typography
+   • Calm, spacious, trustworthy experience
+
+   Used By:
+   • foundation.css
+   • welcome.css
+   • registration.css
+   • assessment pages
+   • result pages
+   • diagnosis pages
+   • prescription pages
+
+========================================================================== */
 
 
 /* ==========================================================================
    1. ROOT DESIGN TOKENS
-   ========================================================================== */
-
+========================================================================== */
 
 :root {
 
+    /* ----------------------------------------------------------------------
+       BRAND BACKGROUNDS
+    ---------------------------------------------------------------------- */
 
-    /* --------------------------------------------------
-       PRIMARY BRAND COLORS
-       -------------------------------------------------- */
-
-
-    --ctm-navy:
-        #081C3A;
-
-
-    --ctm-surface:
-        #0D223F;
+    --ctm-bg-primary: #061A33;
+    --ctm-bg-secondary: #0B2447;
+    --ctm-bg-surface: #102E52;
+    --ctm-bg-card: #12365D;
 
 
-    --ctm-card:
-        #122B4A;
+    /* ----------------------------------------------------------------------
+       BRAND ACCENTS
+    ---------------------------------------------------------------------- */
+
+    --ctm-gold: #D4AF37;
+    --ctm-gold-light: #E6C76A;
+    --ctm-gold-dark: #A67C00;
 
 
-    --ctm-gold:
-        #C8A96A;
+    --ctm-teal: #14B8A6;
+    --ctm-teal-light: #38D9C8;
+    --ctm-teal-dark: #0F766E;
 
 
-    --ctm-gold-light:
-        #E3C98A;
+    /* ----------------------------------------------------------------------
+       TEXT SYSTEM
+    ---------------------------------------------------------------------- */
+
+    --ctm-text-primary: #F8F5ED;
+    --ctm-text-secondary: #D5DFEA;
+    --ctm-text-muted: #9FB3C8;
 
 
-    --ctm-teal:
-        #14B8A6;
+    /* ----------------------------------------------------------------------
+       STATUS COLOURS
+    ---------------------------------------------------------------------- */
+
+    --ctm-success: #22C55E;
+    --ctm-warning: #F59E0B;
+    --ctm-error: #EF4444;
 
 
-    --ctm-ivory:
-        #F5F1E8;
+    /* ----------------------------------------------------------------------
+       BORDERS
+    ---------------------------------------------------------------------- */
+
+    --ctm-border-soft: rgba(212,175,55,0.25);
+    --ctm-border-light: rgba(255,255,255,0.12);
 
 
-    --ctm-white:
-        #FFFFFF;
+    /* ----------------------------------------------------------------------
+       SHADOWS
+    ---------------------------------------------------------------------- */
+
+    --ctm-shadow-soft:
+    0 20px 60px rgba(0,0,0,0.25);
 
 
-    --ctm-muted:
-        #B7C2D0;
+    --ctm-shadow-gold:
+    0 12px 40px rgba(212,175,55,0.20);
 
 
-    --ctm-border:
-        rgba(200,169,106,0.25);
-
-
-
-    /* --------------------------------------------------
-       STATE COLORS
-       -------------------------------------------------- */
-
-
-    --success:
-        #14B87A;
-
-
-    --warning:
-        #D6A85F;
-
-
-    --danger:
-        #D85C5C;
-
-
-
-
-    /* --------------------------------------------------
-       BACKGROUND SYSTEM
-       -------------------------------------------------- */
-
-
-    --background-primary:
-        var(--ctm-navy);
-
-
-    --background-surface:
-        var(--ctm-surface);
-
-
-    --background-card:
-        var(--ctm-card);
+    --ctm-shadow-teal:
+    0 12px 40px rgba(20,184,166,0.20);
 
 
 
-
-
-    /* --------------------------------------------------
+    /* ----------------------------------------------------------------------
        TYPOGRAPHY
-       -------------------------------------------------- */
-
+    ---------------------------------------------------------------------- */
 
     --font-primary:
-
-        "Inter",
-        "Noto Sans",
-        Arial,
-        sans-serif;
-
-
-    --font-display:
-
-        "Playfair Display",
-        "Georgia",
-        serif;
+    "Inter",
+    "Segoe UI",
+    Arial,
+    sans-serif;
 
 
-
-    --text-primary:
-        var(--ctm-ivory);
-
-
-    --text-secondary:
-        var(--ctm-muted);
+    --font-tamil:
+    "Noto Sans Tamil",
+    "Latha",
+    "Arial",
+    sans-serif;
 
 
-
-    /* --------------------------------------------------
+    /* ----------------------------------------------------------------------
        SPACING SYSTEM
-       -------------------------------------------------- */
+    ---------------------------------------------------------------------- */
 
-
-    --space-xs:
-        8px;
-
-
-    --space-sm:
-        16px;
-
-
-    --space-md:
-        24px;
-
-
-    --space-lg:
-        40px;
-
-
-    --space-xl:
-        64px;
-
-
-    --space-xxl:
-        96px;
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 40px;
+    --space-xl: 64px;
+    --space-xxl: 96px;
 
 
 
+    /* ----------------------------------------------------------------------
+       BORDER RADIUS
+    ---------------------------------------------------------------------- */
 
-    /* --------------------------------------------------
-       BORDER SYSTEM
-       -------------------------------------------------- */
-
-
-    --radius-sm:
-        8px;
-
-
-    --radius-md:
-        16px;
-
-
-    --radius-lg:
-        24px;
-
-
-    --radius-pill:
-        999px;
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-pill: 999px;
 
 
 
-
-    /* --------------------------------------------------
-       SHADOW SYSTEM
-       -------------------------------------------------- */
-
-
-    --shadow-card:
-
-        0 20px 50px
-        rgba(0,0,0,0.25);
-
-
-
-    --shadow-gold:
-
-        0 15px 40px
-        rgba(200,169,106,0.25);
-
-
-
-    /* --------------------------------------------------
+    /* ----------------------------------------------------------------------
        TRANSITIONS
-       -------------------------------------------------- */
-
+    ---------------------------------------------------------------------- */
 
     --transition-fast:
-        0.2s ease;
+    0.2s ease;
 
 
     --transition-normal:
-        0.35s ease;
-
+    0.35s ease;
 
 }
 
 
 
-
-
-
 /* ==========================================================================
    2. GLOBAL RESET
-   ========================================================================== */
+========================================================================== */
 
 
 *,
 *::before,
 *::after {
 
-
     box-sizing:
-        border-box;
-
+    border-box;
 
 }
-
-
 
 
 
 html {
 
-
     scroll-behavior:
-        smooth;
-
+    smooth;
 
 }
-
-
 
 
 
 body {
 
-
     margin:
-        0;
-
-
-    min-height:
-        100vh;
-
+    0;
 
     background:
-        var(--background-primary);
-
+    var(--ctm-bg-primary);
 
     color:
-        var(--text-primary);
-
+    var(--ctm-text-primary);
 
     font-family:
-        var(--font-primary);
-
+    var(--font-primary);
 
     line-height:
-        1.6;
+    1.6;
 
-
-    -webkit-font-smoothing:
-        antialiased;
-
+    min-height:
+    100vh;
 
 }
-
-
-
-
-
-img {
-
-
-    max-width:
-        100%;
-
-
-    display:
-        block;
-
-
-}
-
-
-
-
-
-a {
-
-
-    color:
-        inherit;
-
-
-    text-decoration:
-        none;
-
-
-}
-
-
-
-
-
-button,
-input,
-textarea,
-select {
-
-
-    font:
-        inherit;
-
-
-}
-
-
-
 
 
 
 /* ==========================================================================
-   3. APPLICATION CANVAS
-   ========================================================================== */
+   3. GLOBAL BRAND BACKGROUND
+========================================================================== */
 
 
-.app-shell {
-
-
-    min-height:
-        100vh;
-
+.ctm-page {
 
     background:
+    linear-gradient(
+        180deg,
+        #061A33 0%,
+        #081F3D 45%,
+        #061A33 100%
+    );
 
-        linear-gradient(
-
-            180deg,
-
-            #06162F 0%,
-
-            #081C3A 100%
-
-        );
-
+    min-height:
+    100vh;
 
 }
 
 
 
-
-
-.page-container {
-
+.ctm-section {
 
     width:
-        100%;
+    100%;
 
-
-    max-width:
-        1200px;
-
-
-    margin:
-        0 auto;
-
-
-    padding:
-
-        0 var(--space-md);
-
+    background:
+    transparent;
 
 }
-
-
-
-
-
-.section {
-
-
-    padding:
-
-        var(--space-xl) 0;
-
-
-}
-
-
-
 
 
 
 /* ==========================================================================
-   4. TYPOGRAPHY SYSTEM
-   ========================================================================== */
+   4. CONTAINER SYSTEM
+========================================================================== */
 
 
-.heading-xl {
+.ctm-container {
 
+    width:
+    min(1200px, 90%);
 
-    font-family:
-        var(--font-display);
-
-
-    font-size:
-        clamp(42px,5vw,64px);
-
-
-    line-height:
-        1.15;
-
-
-    font-weight:
-        700;
-
+    margin:
+    0 auto;
 
 }
 
 
 
+.ctm-content-center {
 
-
-.heading-lg {
-
-
-    font-size:
-        clamp(32px,4vw,48px);
-
-
-    font-weight:
-        700;
-
+    text-align:
+    center;
 
 }
 
 
 
+/* ==========================================================================
+   5. BRAND TEXT CLASSES
+========================================================================== */
 
 
-.heading-md {
+.text-gold {
 
-
-    font-size:
-        28px;
-
-
-    font-weight:
-        600;
-
+    color:
+    var(--ctm-gold);
 
 }
 
 
 
+.text-teal {
 
-
-.body-lg {
-
-
-    font-size:
-        20px;
-
+    color:
+    var(--ctm-teal);
 
 }
 
 
 
+.text-ivory {
 
-
-.body {
-
-
-    font-size:
-        16px;
-
+    color:
+    var(--ctm-text-primary);
 
 }
-
-
 
 
 
 .text-muted {
 
-
     color:
-        var(--text-secondary);
-
+    var(--ctm-text-muted);
 
 }
 
 
 
+/* ==========================================================================
+   6. PREMIUM CARD SYSTEM
+========================================================================== */
+
+
+.ctm-card {
+
+    background:
+    rgba(
+        16,
+        46,
+        82,
+        0.85
+    );
+
+    border:
+    1px solid var(--ctm-border-light);
+
+    border-radius:
+    var(--radius-lg);
+
+    padding:
+    var(--space-lg);
+
+    box-shadow:
+    var(--ctm-shadow-soft);
+
+    backdrop-filter:
+    blur(12px);
+
+    transition:
+    var(--transition-normal);
+
+}
+
+
+
+.ctm-card:hover {
+
+    transform:
+    translateY(-6px);
+
+    border-color:
+    var(--ctm-gold);
+
+}
 
 
 
 /* ==========================================================================
-   5. PREMIUM CARD SYSTEM
-   ========================================================================== */
+   7. PREMIUM BUTTON SYSTEM
+========================================================================== */
 
 
-.card {
+.ctm-button {
+
+    display:
+    inline-flex;
+
+    align-items:
+    center;
+
+    justify-content:
+    center;
 
 
     background:
-
-        rgba(
-            18,
-            43,
-            74,
-            0.85
-        );
+    linear-gradient(
+        135deg,
+        #E6C76A,
+        #D4AF37
+    );
 
 
-    border:
-
-        1px solid
-
-        var(--ctm-border);
-
-
-    border-radius:
-
-        var(--radius-md);
-
-
-    box-shadow:
-
-        var(--shadow-card);
-
-
-    padding:
-
-        var(--space-lg);
-
-
-    backdrop-filter:
-
-        blur(12px);
-
-
-}
-
-
-
-
-
-.card:hover {
-
-
-    transform:
-
-        translateY(-4px);
-
-
-    transition:
-
-        var(--transition-normal);
-
-
-}
-
-
-
-
-
-
-/* ==========================================================================
-   6. BUTTON SYSTEM
-   ========================================================================== */
-
-
-.btn {
-
-
-    display:
-        inline-flex;
-
-
-    align-items:
-        center;
-
-
-    justify-content:
-        center;
-
-
-    gap:
-        10px;
-
-
-    border:
-        none;
-
-
-    cursor:
-        pointer;
+    color:
+    #061A33;
 
 
     font-weight:
-        700;
+    700;
+
+
+    letter-spacing:
+    0.5px;
 
 
     padding:
+    16px 42px;
 
-        16px 36px;
+
+    border:
+    none;
 
 
     border-radius:
+    var(--radius-pill);
 
-        var(--radius-pill);
+
+    cursor:
+    pointer;
+
+
+    box-shadow:
+    var(--ctm-shadow-gold);
 
 
     transition:
-
-        var(--transition-normal);
-
+    var(--transition-normal);
 
 }
 
 
 
-
-
-.btn-primary {
-
-
-    background:
-
-        linear-gradient(
-
-            135deg,
-
-            var(--ctm-gold-light),
-
-            var(--ctm-gold)
-
-        );
-
-
-    color:
-
-        var(--ctm-navy);
-
-
-    box-shadow:
-
-        var(--shadow-gold);
-
-
-}
-
-
-
-
-
-.btn-primary:hover {
-
+.ctm-button:hover {
 
     transform:
-
-        translateY(-3px);
+    translateY(-3px);
 
 
     box-shadow:
-
-        0 20px 50px
-
-        rgba(200,169,106,0.45);
-
+    0 18px 50px rgba(212,175,55,0.35);
 
 }
-
-
-
-
-
-.btn-secondary {
-
-
-    background:
-
-        transparent;
-
-
-    color:
-
-        var(--ctm-ivory);
-
-
-    border:
-
-        1px solid
-
-        var(--ctm-border);
-
-
-}
-
-
-
 
 
 
 /* ==========================================================================
-   7. FORM FOUNDATION
-   ========================================================================== */
+   8. BRAND DIVIDERS
+========================================================================== */
 
 
-.form-control {
-
+.ctm-divider {
 
     width:
-        100%;
+    120px;
 
 
-    padding:
-
-        16px 18px;
-
-
-    border-radius:
-
-        var(--radius-sm);
-
-
-    border:
-
-        1px solid
-
-        rgba(245,241,232,0.15);
+    height:
+    2px;
 
 
     background:
+    linear-gradient(
+        90deg,
+        transparent,
+        var(--ctm-gold),
+        transparent
+    );
 
-        rgba(255,255,255,0.05);
 
+    margin:
+    30px auto;
+
+}
+
+
+
+/* ==========================================================================
+   9. HEADER / FOOTER SUPPORT
+========================================================================== */
+
+
+.brand-gold {
 
     color:
-
-        var(--ctm-ivory);
-
+    var(--ctm-gold);
 
 }
 
 
 
+.brand-teal {
 
-
-.form-control:focus {
-
-
-    outline:
-        none;
-
-
-    border-color:
-
-        var(--ctm-gold);
-
-
-    box-shadow:
-
-        0 0 0 3px
-
-        rgba(200,169,106,0.15);
-
+    color:
+    var(--ctm-teal);
 
 }
 
 
 
+.brand-white {
+
+    color:
+    var(--ctm-text-primary);
+
+}
 
 
 
 /* ==========================================================================
-   8. ALIGNMENT UTILITIES
-   ========================================================================== */
-
-
-.text-center {
-
-
-    text-align:
-        center;
-
-
-}
-
-
-
-
-
-.flex-center {
-
-
-    display:
-        flex;
-
-
-    align-items:
-        center;
-
-
-    justify-content:
-        center;
-
-
-}
-
-
-
-
-
-
-/* ==========================================================================
-   9. RESPONSIVE FOUNDATION
-   ========================================================================== */
+   10. RESPONSIVE TOKENS
+========================================================================== */
 
 
 @media(max-width:768px){
 
+    :root {
 
-    .page-container {
-
-
-        padding:
-
-            0 var(--space-sm);
+        --space-xl:
+        48px;
 
 
-    }
-
-
-    .section {
-
-
-        padding:
-
-            var(--space-lg) 0;
-
-
-    }
-
-
-    .heading-xl {
-
-
-        font-size:
-            38px;
-
-
-    }
-
-
-    .body-lg {
-
-
-        font-size:
-            18px;
-
+        --space-xxl:
+        64px;
 
     }
 
 
 }
 
-
-
-
-
-
-/* ==========================================================================
-   END OF FILE
-   
-   CTM PATH™ Premium Global Design System v2.0
-
-   ========================================================================== */
