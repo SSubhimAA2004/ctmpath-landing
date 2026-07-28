@@ -1,214 +1,246 @@
 
-<!DOCTYPE html>
-<html lang="en">
+<!-- ==========================================================================
+   CTM PATH™ Guided Journey™
 
-<head>
+   File        : kalachakra.html
+   Version     : 1.0
+   Status      : DEVELOPMENT
+   Stage       : STAGE 15 — KALA CHAKRA™
 
-    <!-- ==========================================================
-         CTM PATH™ Guided Journey v2.0
+   Purpose     :
+   Life balance visualization page.
 
-         File    : kaalachakra.html
-         Version : 1.0
-         Status  : 🔒 LOCKED
+   Responsibilities:
 
-         Module Purpose:
-         Kala Chakra™ Life Wheel Visualization
+   • Display KALA CHAKRA™ wheel.
+   • Present 12 life pillar summary.
+   • Prepare transition to Diagnosis™.
 
-         Responsibilities:
-         ✓ Display completed assessment results
-         ✓ Present 12 life spokes
-         ✓ Show life balance awareness
-         ✓ Guide visitor toward Diagnosis™
+   Does NOT:
 
-         Does NOT:
-         ✗ Calculate scores
-         ✗ Generate diagnosis
-         ✗ Modify assessment data
+   • Calculate scores.
+   • Interpret results.
+   • Generate recommendations.
 
-         ========================================================== -->
+   ========================================================================== -->
 
 
-    <meta charset="UTF-8">
+<section class="page kalachakra-page"
+         id="kalachakra-page">
 
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <div class="app-container">
 
 
-    <meta
-        name="description"
-        content="CTM PATH™ Kala Chakra™">
+        <div class="kalachakra-wrapper">
 
 
-    <meta
-        name="theme-color"
-        content="#081C3A">
 
+            <!-- ==============================================================
+                 Header
+                 ============================================================== -->
 
 
-    <title>
+            <div class="kalachakra-header">
 
-        CTM PATH™ | Kala Chakra™
 
-    </title>
+                <p class="section-eyebrow">
 
+                    Your Life Balance Map™
 
+                </p>
 
-    <!-- ==========================================================
-         Typography
-         ========================================================== -->
 
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com">
+                <h1 class="section-title">
 
+                    KALA CHAKRA™
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
+                </h1>
 
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
 
+                <p class="section-description">
 
+                    A visual reflection of the twelve dimensions
+                    that shape your journey.
 
-    <!-- ==========================================================
-         Foundation Styles
-         ========================================================== -->
+                </p>
 
 
-    <link
-        rel="stylesheet"
-        href="../css/reset.css">
+            </div>
 
 
-    <link
-        rel="stylesheet"
-        href="../css/tokens.css">
 
 
-    <link
-        rel="stylesheet"
-        href="../css/base.css">
 
+            <!-- ==============================================================
+                 Wheel Container
+                 ============================================================== -->
 
-    <link
-        rel="stylesheet"
-        href="../css/app.css">
 
+            <div class="kalachakra-dashboard">
 
 
-    <!-- ==========================================================
-         Page Styles
-         ========================================================== -->
 
+                <div id="kalachakra-wheel"
 
-    <link
-        rel="stylesheet"
-        href="../css/kaalachakra.css">
+                     class="kalachakra-wheel">
 
 
 
-</head>
+                    <!--
 
+                    Wheel visualization generated
+                    by kalachakra.js
 
+                    Backend data:
 
-<body>
+                    • pillar name
+                    • score
+                    • percentage
+                    • status
 
+                    -->
 
 
-<div class="app">
+                </div>
 
 
 
-<!-- ==========================================================
-     Header
-     ========================================================== -->
+            </div>
 
+            <!-- ==========================================================================
+   CTM PATH™ Guided Journey™
 
-<header class="app-header">
+   File        : kalachakra.html
+   Continuation: Batch 1B
 
+   ========================================================================== -->
 
-    <div class="container">
 
+            <!-- ==============================================================
+                 Pillar Summary Grid
+                 ============================================================== -->
 
-        <img
 
-            src="../assets/logo/ctm-path-logo.svg"
+            <div class="pillar-summary-grid"
 
-            alt="CTM PATH™"
+                 id="pillar-summary-grid">
 
-            class="logo">
 
 
+                <!--
 
-    </div>
+                Generated dynamically by kalachakra.js
 
 
-</header>
+                Each pillar card contains:
 
 
+                • Pillar Name
 
+                • Score
 
-<!-- ==========================================================
-     Main Experience
-     ========================================================== -->
+                • Completion Level
 
+                • Reflection Status
 
-<main class="app-main">
 
+                Example structure:
 
-<div class="container">
 
+                <div class="pillar-card">
 
+                    <h3>
 
-<section class="glass-card kaalachakra-card">
+                        Health™
 
+                    </h3>
 
 
-<!-- ==========================================================
-     Journey Progress
-     ========================================================== -->
+                    <span>
 
+                        85%
 
-<div class="progress">
+                    </span>
 
 
-    <div class="progress-label">
+                </div>
 
 
-        <span>
+                -->
 
-            Stage 4 of 7
 
-        </span>
+            </div>
 
 
 
-        <span>
 
-            Kala Chakra™
 
-        </span>
+            <!-- ==============================================================
+                 Insight Container
+                 ============================================================== -->
 
 
-    </div>
+            <div class="kalachakra-insight-card card"
 
+                 id="kalachakra-insight">
 
 
-    <div class="progress-track">
 
+                <h2>
 
-        <div
+                    Your Life Pattern™
 
-            class="progress-fill"
+                </h2>
 
-            style="width:57%;">
+
+
+                <p>
+
+                    Your KALA CHAKRA™ reveals the areas
+                    of strength, balance and opportunity
+                    across your life journey.
+
+                </p>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 Continue Action
+                 ============================================================== -->
+
+
+            <div class="kalachakra-actions">
+
+
+
+                <button
+
+                    type="button"
+
+                    id="kalachakra-next-btn"
+
+                    class="btn btn-primary">
+
+
+                    View Your Diagnosis
+
+
+                </button>
+
+
+
+            </div>
+
+
 
         </div>
 
@@ -216,649 +248,5 @@
     </div>
 
 
-</div>
-
-
-
-
-<!-- ==========================================================
-     Introduction
-     ========================================================== -->
-
-
-<div class="page-header">
-
-
-<h1 class="page-title">
-
-
-    உங்கள் வாழ்க்கை சக்கரம்™
-
-
-</h1>
-
-
-
-<h2 class="page-subtitle">
-
-
-    Your Kala Chakra™
-
-
-</h2>
-
-
-
-<p class="page-description">
-
-
-    உங்கள் 12 வாழ்க்கைத் தூண்களின் தற்போதைய நிலையை
-    காணுங்கள்.
-
-
-    <br><br>
-
-
-    See the current balance of the 12 essential dimensions
-    that shape a well-lived life.
-
-
-</p>
-
-
-</div>
-
-
-
-<!-- ==========================================================
-     Continue in Batch 2/n
-     ========================================================== -->
-
-
-/* ==========================================================
-     Kala Chakra™ Wheel Section
-     ========================================================== */
-
-
-<section class="wheel-section">
-
-
-    <div class="wheel-container">
-
-
-        <canvas
-
-            id="kaalachakraCanvas"
-
-            class="kaalachakra-wheel"
-
-            width="700"
-
-            height="700"
-
-            aria-label="Your Kala Chakra™ Life Wheel">
-
-
-        </canvas>
-
-
-    </div>
-
-
 </section>
 
-
-
-
-
-<!-- ==========================================================
-     Wheel Explanation
-     ========================================================== -->
-
-
-<section class="wheel-message">
-
-
-<h3>
-
-
-    உங்கள் வாழ்க்கை சமநிலை™
-
-
-</h3>
-
-
-
-<p>
-
-
-    இந்த சக்கரம் உங்கள் 12 வாழ்க்கைத் தூண்களின்
-    தற்போதைய வலிமையை காட்டுகிறது.
-
-
-    <br><br>
-
-
-    A balanced wheel creates a smoother journey.
-
-    A smaller wheel reveals areas where conscious growth
-    can create transformation.
-
-
-</p>
-
-
-
-</section>
-
-
-
-
-
-<!-- ==========================================================
-     Score Summary
-     ========================================================== -->
-
-
-<section class="summary-section">
-
-
-<div class="summary-grid">
-
-
-
-    <div class="summary-card">
-
-
-        <span class="summary-label">
-
-
-            Overall Score
-
-
-        </span>
-
-
-
-        <div
-
-            id="overallScore"
-
-            class="summary-value">
-
-
-            0%
-
-
-        </div>
-
-
-
-    </div>
-
-
-
-
-
-    <div class="summary-card">
-
-
-        <span class="summary-label">
-
-
-            Wheel Status
-
-
-        </span>
-
-
-
-        <div
-
-            id="wheelStatus"
-
-            class="summary-value">
-
-
-            —
-
-
-        </div>
-
-
-
-    </div>
-
-
-
-
-
-    <div class="summary-card">
-
-
-        <span class="summary-label">
-
-
-            Strongest Spoke
-
-
-        </span>
-
-
-
-        <div
-
-            id="strongestSpoke"
-
-            class="summary-value">
-
-
-            —
-
-
-        </div>
-
-
-
-    </div>
-
-
-
-
-
-    <div class="summary-card">
-
-
-        <span class="summary-label">
-
-
-            Growth Opportunity
-
-
-        </span>
-
-
-
-        <div
-
-            id="weakestSpoke"
-
-            class="summary-value">
-
-
-            —
-
-
-        </div>
-
-
-
-    </div>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-<!-- ==========================================================
-     Reflection Questions
-     ========================================================== -->
-
-
-<section class="reflection-panel">
-
-
-<h3>
-
-
-    சிந்தனைக்கான இரண்டு கேள்விகள்™
-
-
-</h3>
-
-
-
-<div class="reflection-question">
-
-
-<p>
-
-
-    1. உங்கள் காலச்சக்கரம் ஒரு முழுமையான வட்டமாக
-    தெரிகிறதா?
-
-
-</p>
-
-
-
-<p>
-
-
-    Does your Kala Chakra™ look like a complete circle?
-
-
-</p>
-
-
-</div>
-
-
-
-
-<div class="reflection-question">
-
-
-<p>
-
-
-    2. உங்கள் வாழ்க்கைச் சக்கரம் சிறியதா அல்லது பெரியதா?
-
-
-</p>
-
-
-
-<p>
-
-
-    Is your Kala Chakra™ small or expansive?
-
-
-</p>
-
-
-</div>
-
-
-
-</section>
-
-
-
-<!-- ==========================================================
-     Continue in Batch 3/n
-     ========================================================== -->
-
-
-
-    /* ==========================================================
-     Life Spoke Details
-     ========================================================== */
-
-
-<section class="spokes-section">
-
-
-<h3 class="section-title">
-
-
-    உங்கள் 12 வாழ்க்கைத் தூண்கள்™
-
-
-</h3>
-
-
-
-<div
-
-    id="spokeSummary"
-
-    class="spoke-grid">
-
-
-    <!--
-
-        Dynamically populated by
-
-        kaalachakra.js
-
-
-        Each card contains:
-
-
-        ✓ Spoke Name
-
-        ✓ Score
-
-        ✓ Percentage
-
-        ✓ Growth Indicator
-
-
-    -->
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-<!-- ==========================================================
-     Insight Panel
-     ========================================================== -->
-
-
-<section class="insight-panel">
-
-
-<h3>
-
-
-    உங்கள் வாழ்க்கை விழிப்புணர்வு™
-
-
-</h3>
-
-
-
-<p
-
-    id="lifeInsight">
-
-
-    Your Kala Chakra™ reveals the current
-    shape of your life journey.
-
-
-</p>
-
-
-
-</section>
-
-
-
-
-
-<!-- ==========================================================
-     Next Journey Step
-     ========================================================== -->
-
-
-<section class="wisdom-panel">
-
-
-<h3>
-
-
-    அடுத்த பயணம்™
-
-
-</h3>
-
-
-
-<p>
-
-
-    Awareness creates clarity.
-
-
-    <br><br>
-
-
-    Your Diagnosis™ will now reveal your
-    strongest foundations, hidden opportunities,
-    and the areas where focused action can create
-    the greatest transformation.
-
-
-
-</p>
-
-
-
-</section>
-
-
-
-
-
-<!-- ==========================================================
-     Navigation
-     ========================================================== -->
-
-
-<div class="navigation">
-
-
-
-<button
-
-    type="button"
-
-    id="backButton"
-
-    class="btn btn-secondary">
-
-
-    ← Back to Assessment
-
-
-</button>
-
-
-
-
-
-<button
-
-    type="button"
-
-    id="continueButton"
-
-    class="btn btn-primary">
-
-
-    Continue to Diagnosis →
-
-
-</button>
-
-
-
-</div>
-
-
-
-
-</section>
-
-
-</div>
-
-
-</main>
-
-
-
-
-
-<!-- ==========================================================
-     Footer
-     ========================================================== -->
-
-
-<footer class="app-footer">
-
-
-<div class="container">
-
-
-<p>
-
-
-    CTM PATH™ Guided Journey™
-
-
-    <br>
-
-
-    From Awareness To Transformation™
-
-
-</p>
-
-
-</div>
-
-
-</footer>
-
-
-
-
-
-</div>
-
-
-
-
-
-<!-- ==========================================================
-     Core Application Scripts
-     ========================================================== -->
-
-
-<script src="../js/storage.js"></script>
-
-
-<script src="../js/api.js"></script>
-
-
-<script src="../js/router.js"></script>
-
-
-<script src="../js/app.js"></script>
-
-
-
-
-<!-- ==========================================================
-     Page Controller
-     ========================================================== -->
-
-
-<script src="../js/kaalachakra.js"></script>
-
-
-
-
-</body>
-
-
-</html>
-
-
-    
