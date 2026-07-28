@@ -1,23 +1,374 @@
 
-/*
-==============================================================================
- CTM PATH™ GLOBAL PREMIUM HEADER
- Version: 1.2
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+   
+   File        : css/theme.css
+   Version     : 2.0
+   
+   Purpose:
+   Premium Global Design System Foundation
+   
+   Used By:
+   • All 18 Journey Pages
+   • Global Components
+   • Application Shell
+   
+   Brand:
+   CTM PATH™
+   KAALACHAKRA™
+   The Millionaire Production System™
+   From Survival To Living™
 
- Brand:
- CTM PATH™
- KAALACHAKRA™
-
-==============================================================================
-*/
+   ========================================================================== */
 
 
-.ctm-header {
+/* ==========================================================================
+   1. ROOT DESIGN TOKENS
+   ========================================================================== */
 
 
-    width:
+:root {
 
+
+    /* --------------------------------------------------
+       PRIMARY BRAND COLORS
+       -------------------------------------------------- */
+
+
+    --ctm-navy:
+        #081C3A;
+
+
+    --ctm-surface:
+        #0D223F;
+
+
+    --ctm-card:
+        #122B4A;
+
+
+    --ctm-gold:
+        #C8A96A;
+
+
+    --ctm-gold-light:
+        #E3C98A;
+
+
+    --ctm-teal:
+        #14B8A6;
+
+
+    --ctm-ivory:
+        #F5F1E8;
+
+
+    --ctm-white:
+        #FFFFFF;
+
+
+    --ctm-muted:
+        #B7C2D0;
+
+
+    --ctm-border:
+        rgba(200,169,106,0.25);
+
+
+
+    /* --------------------------------------------------
+       STATE COLORS
+       -------------------------------------------------- */
+
+
+    --success:
+        #14B87A;
+
+
+    --warning:
+        #D6A85F;
+
+
+    --danger:
+        #D85C5C;
+
+
+
+
+    /* --------------------------------------------------
+       BACKGROUND SYSTEM
+       -------------------------------------------------- */
+
+
+    --background-primary:
+        var(--ctm-navy);
+
+
+    --background-surface:
+        var(--ctm-surface);
+
+
+    --background-card:
+        var(--ctm-card);
+
+
+
+
+
+    /* --------------------------------------------------
+       TYPOGRAPHY
+       -------------------------------------------------- */
+
+
+    --font-primary:
+
+        "Inter",
+        "Noto Sans",
+        Arial,
+        sans-serif;
+
+
+    --font-display:
+
+        "Playfair Display",
+        "Georgia",
+        serif;
+
+
+
+    --text-primary:
+        var(--ctm-ivory);
+
+
+    --text-secondary:
+        var(--ctm-muted);
+
+
+
+    /* --------------------------------------------------
+       SPACING SYSTEM
+       -------------------------------------------------- */
+
+
+    --space-xs:
+        8px;
+
+
+    --space-sm:
+        16px;
+
+
+    --space-md:
+        24px;
+
+
+    --space-lg:
+        40px;
+
+
+    --space-xl:
+        64px;
+
+
+    --space-xxl:
+        96px;
+
+
+
+
+    /* --------------------------------------------------
+       BORDER SYSTEM
+       -------------------------------------------------- */
+
+
+    --radius-sm:
+        8px;
+
+
+    --radius-md:
+        16px;
+
+
+    --radius-lg:
+        24px;
+
+
+    --radius-pill:
+        999px;
+
+
+
+
+    /* --------------------------------------------------
+       SHADOW SYSTEM
+       -------------------------------------------------- */
+
+
+    --shadow-card:
+
+        0 20px 50px
+        rgba(0,0,0,0.25);
+
+
+
+    --shadow-gold:
+
+        0 15px 40px
+        rgba(200,169,106,0.25);
+
+
+
+    /* --------------------------------------------------
+       TRANSITIONS
+       -------------------------------------------------- */
+
+
+    --transition-fast:
+        0.2s ease;
+
+
+    --transition-normal:
+        0.35s ease;
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   2. GLOBAL RESET
+   ========================================================================== */
+
+
+*,
+*::before,
+*::after {
+
+
+    box-sizing:
+        border-box;
+
+
+}
+
+
+
+
+
+html {
+
+
+    scroll-behavior:
+        smooth;
+
+
+}
+
+
+
+
+
+body {
+
+
+    margin:
+        0;
+
+
+    min-height:
+        100vh;
+
+
+    background:
+        var(--background-primary);
+
+
+    color:
+        var(--text-primary);
+
+
+    font-family:
+        var(--font-primary);
+
+
+    line-height:
+        1.6;
+
+
+    -webkit-font-smoothing:
+        antialiased;
+
+
+}
+
+
+
+
+
+img {
+
+
+    max-width:
         100%;
+
+
+    display:
+        block;
+
+
+}
+
+
+
+
+
+a {
+
+
+    color:
+        inherit;
+
+
+    text-decoration:
+        none;
+
+
+}
+
+
+
+
+
+button,
+input,
+textarea,
+select {
+
+
+    font:
+        inherit;
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   3. APPLICATION CANVAS
+   ========================================================================== */
+
+
+.app-shell {
+
+
+    min-height:
+        100vh;
 
 
     background:
@@ -26,36 +377,51 @@
 
             180deg,
 
-            #061A35 0%,
+            #06162F 0%,
 
             #081C3A 100%
 
         );
 
 
+}
+
+
+
+
+
+.page-container {
+
+
+    width:
+        100%;
+
+
+    max-width:
+        1200px;
+
+
+    margin:
+        0 auto;
+
+
     padding:
 
-        32px 20px 28px;
+        0 var(--space-md);
 
 
-    text-align:
-
-        center;
+}
 
 
-    border-bottom:
 
-        1px solid rgba(
 
-            200,
 
-            169,
+.section {
 
-            106,
 
-            .35
+    padding:
 
-        );
+        var(--space-xl) 0;
 
 
 }
@@ -65,84 +431,230 @@
 
 
 
+/* ==========================================================================
+   4. TYPOGRAPHY SYSTEM
+   ========================================================================== */
 
-.ctm-header-container {
+
+.heading-xl {
+
+
+    font-family:
+        var(--font-display);
+
+
+    font-size:
+        clamp(42px,5vw,64px);
+
+
+    line-height:
+        1.15;
+
+
+    font-weight:
+        700;
+
+
+}
+
+
+
+
+
+.heading-lg {
+
+
+    font-size:
+        clamp(32px,4vw,48px);
+
+
+    font-weight:
+        700;
+
+
+}
+
+
+
+
+
+.heading-md {
+
+
+    font-size:
+        28px;
+
+
+    font-weight:
+        600;
+
+
+}
+
+
+
+
+
+.body-lg {
+
+
+    font-size:
+        20px;
+
+
+}
+
+
+
+
+
+.body {
+
+
+    font-size:
+        16px;
+
+
+}
+
+
+
+
+
+.text-muted {
+
+
+    color:
+        var(--text-secondary);
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   5. PREMIUM CARD SYSTEM
+   ========================================================================== */
+
+
+.card {
+
+
+    background:
+
+        rgba(
+            18,
+            43,
+            74,
+            0.85
+        );
+
+
+    border:
+
+        1px solid
+
+        var(--ctm-border);
+
+
+    border-radius:
+
+        var(--radius-md);
+
+
+    box-shadow:
+
+        var(--shadow-card);
+
+
+    padding:
+
+        var(--space-lg);
+
+
+    backdrop-filter:
+
+        blur(12px);
+
+
+}
+
+
+
+
+
+.card:hover {
+
+
+    transform:
+
+        translateY(-4px);
+
+
+    transition:
+
+        var(--transition-normal);
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   6. BUTTON SYSTEM
+   ========================================================================== */
+
+
+.btn {
 
 
     display:
-
-        flex;
-
-
-    flex-direction:
-
-        column;
+        inline-flex;
 
 
     align-items:
-
         center;
 
 
     justify-content:
-
         center;
 
 
-}
+    gap:
+        10px;
 
 
+    border:
+        none;
 
 
+    cursor:
+        pointer;
 
 
-
-/*
-==============================================================================
- LOGO
-==============================================================================
-*/
+    font-weight:
+        700;
 
 
-.ctm-header-logo {
+    padding:
+
+        16px 36px;
 
 
-    width:
+    border-radius:
 
-        68px;
-
-
-    height:
-
-        auto;
+        var(--radius-pill);
 
 
-    margin-bottom:
+    transition:
 
-        18px;
-
-
-}
-
-
-
-
-
-
-
-/*
-==============================================================================
- BRAND IDENTITY
-==============================================================================
-*/
-
-
-.ctm-header-brand {
-
-
-    text-align:
-
-        center;
+        var(--transition-normal);
 
 
 }
@@ -151,14 +663,65 @@
 
 
 
+.btn-primary {
 
 
-/*
- MASTER BRAND
-*/
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            var(--ctm-gold-light),
+
+            var(--ctm-gold)
+
+        );
 
 
-.ctm-header-primary {
+    color:
+
+        var(--ctm-navy);
+
+
+    box-shadow:
+
+        var(--shadow-gold);
+
+
+}
+
+
+
+
+
+.btn-primary:hover {
+
+
+    transform:
+
+        translateY(-3px);
+
+
+    box-shadow:
+
+        0 20px 50px
+
+        rgba(200,169,106,0.45);
+
+
+}
+
+
+
+
+
+.btn-secondary {
+
+
+    background:
+
+        transparent;
 
 
     color:
@@ -166,24 +729,11 @@
         var(--ctm-ivory);
 
 
-    font-size:
+    border:
 
-        26px;
+        1px solid
 
-
-    font-weight:
-
-        700;
-
-
-    letter-spacing:
-
-        5px;
-
-
-    line-height:
-
-        1.2;
+        var(--ctm-border);
 
 
 }
@@ -193,38 +743,68 @@
 
 
 
+/* ==========================================================================
+   7. FORM FOUNDATION
+   ========================================================================== */
 
-/*
- PROPRIETARY FRAMEWORK
-*/
+
+.form-control {
 
 
-.ctm-header-framework {
+    width:
+        100%;
+
+
+    padding:
+
+        16px 18px;
+
+
+    border-radius:
+
+        var(--radius-sm);
+
+
+    border:
+
+        1px solid
+
+        rgba(245,241,232,0.15);
+
+
+    background:
+
+        rgba(255,255,255,0.05);
 
 
     color:
+
+        var(--ctm-ivory);
+
+
+}
+
+
+
+
+
+.form-control:focus {
+
+
+    outline:
+        none;
+
+
+    border-color:
 
         var(--ctm-gold);
 
 
-    font-size:
+    box-shadow:
 
-        20px;
+        0 0 0 3px
 
-
-    font-weight:
-
-        600;
-
-
-    letter-spacing:
-
-        4px;
-
-
-    margin-top:
-
-        8px;
+        rgba(200,169,106,0.15);
 
 
 }
@@ -234,33 +814,37 @@
 
 
 
-
-/*
- POSITIONING STATEMENT
-*/
-
-
-.ctm-header-system {
+/* ==========================================================================
+   8. ALIGNMENT UTILITIES
+   ========================================================================== */
 
 
-    color:
-
-        #D8DDE5;
+.text-center {
 
 
-    font-size:
-
-        15px;
-
-
-    letter-spacing:
-
-        1.5px;
+    text-align:
+        center;
 
 
-    margin-top:
+}
 
-        16px;
+
+
+
+
+.flex-center {
+
+
+    display:
+        flex;
+
+
+    align-items:
+        center;
+
+
+    justify-content:
+        center;
 
 
 }
@@ -270,157 +854,66 @@
 
 
 
-
-/*
- TRANSFORMATION PHILOSOPHY
-*/
-
-
-.ctm-header-tagline {
-
-
-    color:
-
-        var(--ctm-teal-light);
-
-
-    font-size:
-
-        16px;
-
-
-    font-style:
-
-        italic;
-
-
-    margin-top:
-
-        10px;
-
-
-    letter-spacing:
-
-        1px;
-
-
-}
-
-
-
-
-
-
-
-
-
-/*
-==============================================================================
- MOBILE HEADER
-==============================================================================
-*/
+/* ==========================================================================
+   9. RESPONSIVE FOUNDATION
+   ========================================================================== */
 
 
 @media(max-width:768px){
 
 
-
-    .ctm-header {
+    .page-container {
 
 
         padding:
 
-            25px 15px;
+            0 var(--space-sm);
 
 
     }
 
 
+    .section {
 
 
+        padding:
 
-
-    .ctm-header-logo {
-
-
-        width:
-
-            55px;
+            var(--space-lg) 0;
 
 
     }
 
 
-
-
-
-
-    .ctm-header-primary {
+    .heading-xl {
 
 
         font-size:
-
-            21px;
-
-
-        letter-spacing:
-
-            3px;
+            38px;
 
 
     }
 
 
-
-
-
-
-    .ctm-header-framework {
+    .body-lg {
 
 
         font-size:
-
-            17px;
-
-
-        letter-spacing:
-
-            2px;
+            18px;
 
 
     }
-
-
-
-
-
-
-    .ctm-header-system {
-
-
-        font-size:
-
-            13px;
-
-
-    }
-
-
-
-
-
-
-    .ctm-header-tagline {
-
-
-        font-size:
-
-            14px;
-
-
-    }
-
 
 
 }
 
+
+
+
+
+
+/* ==========================================================================
+   END OF FILE
+   
+   CTM PATH™ Premium Global Design System v2.0
+
+   ========================================================================== */
