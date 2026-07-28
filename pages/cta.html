@@ -1,1 +1,485 @@
 
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : cta.html
+   Version     : 1.0
+   Status      : DEVELOPMENT
+   Stage       : STAGE 18 — CTA™
+
+   Purpose     :
+   Final conversion and relationship page.
+
+   Responsibilities:
+
+   • Present completion message.
+   • Provide next-step actions.
+   • Connect visitor with CTM PATH™.
+
+   Does NOT:
+
+   • Process payments.
+   • Schedule calls directly.
+   • Generate reports.
+
+   Backend / external services own:
+
+   • Booking integration.
+   • Report generation.
+   • Membership actions.
+
+   ========================================================================== */
+
+
+<section class="page cta-page"
+         id="cta-page">
+
+
+    <div class="app-container">
+
+
+        <div class="cta-wrapper">
+
+
+
+            <!-- ==============================================================
+                 Completion Header
+                 ============================================================== -->
+
+
+            <div class="cta-header">
+
+
+                <p class="section-eyebrow">
+
+                    Your Journey Continues™
+
+                </p>
+
+
+
+                <h1 class="section-title">
+
+                    YOUR NEXT CHAPTER™
+
+                </h1>
+
+
+
+                <p class="section-description">
+
+                    You now have clarity about where you are
+                    and the path ahead.
+
+                </p>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 Completion Summary
+                 ============================================================== -->
+
+
+            <div class="cta-summary-card card">
+
+
+                <div id="cta-summary">
+
+
+                    <!--
+
+                    Loaded dynamically:
+
+
+                    • Visitor name
+
+                    • Life alignment score
+
+                    • Journey completion message
+
+
+                    -->
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 Action Options
+                 ============================================================== -->
+
+
+            <div class="cta-actions-grid">
+
+
+
+              /* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : cta.html
+   Continuation: Batch 1B
+
+   ========================================================================== */
+
+
+
+            <!-- ==============================================================
+                 Discovery Call Action
+                 ============================================================== -->
+
+
+            <div class="cta-card card">
+
+
+                <h2>
+
+                    Book Your Discovery Call™
+
+                </h2>
+
+
+
+                <p>
+
+                    Discuss your results and discover
+                    your personalised next steps.
+
+                </p>
+
+
+
+                <button
+
+                    type="button"
+
+                    id="book-call-btn"
+
+                    class="btn btn-primary">
+
+
+                    Book Discovery Call
+
+
+                </button>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 Join CTM PATH™ Action
+                 ============================================================== -->
+
+
+            <div class="cta-card card">
+
+
+                <h2>
+
+                    Join CTM PATH™
+
+                </h2>
+
+
+
+                <p>
+
+                    Begin your guided transformation
+                    journey with personal support.
+
+                </p>
+
+
+
+                <button
+
+                    type="button"
+
+                    id="join-path-btn"
+
+                    class="btn btn-primary">
+
+
+                    Join CTM PATH™
+
+
+                </button>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 Report Download Action
+                 ============================================================== -->
+
+
+            <div class="cta-card card">
+
+
+                <h2>
+
+                    Download Your Report™
+
+                </h2>
+
+
+
+                <p>
+
+                    Keep your assessment insights
+                    and personal life map.
+
+                </p>
+
+
+
+                <button
+
+                    type="button"
+
+                    id="download-report-btn"
+
+                    class="btn btn-secondary">
+
+
+                    Download Report
+
+
+                </button>
+
+
+
+            </div>
+
+              /* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : cta.html
+   Continuation: Batch 1C
+
+   ========================================================================== */
+
+
+
+            <!-- ==============================================================
+                 Contact Mentor Action
+                 ============================================================== -->
+
+
+            <div class="cta-card card">
+
+
+                <h2>
+
+                    Connect With Your Mentor™
+
+                </h2>
+
+
+
+                <p>
+
+                    Have questions or need guidance?
+                    Reach out directly.
+
+                </p>
+
+
+
+                <button
+
+                    type="button"
+
+                    id="contact-mentor-btn"
+
+                    class="btn btn-secondary">
+
+
+                    Contact Mentor
+
+
+                </button>
+
+
+
+            </div>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 Final Invitation
+                 ============================================================== -->
+
+
+            <div class="cta-invitation card">
+
+
+                <p class="invitation-eyebrow">
+
+                    CTM PATH™ Guided Journey™
+
+                </p>
+
+
+
+                <h2>
+
+                    Your Transformation Starts Now
+
+                </h2>
+
+
+
+                <p>
+
+                    Clarity creates direction.
+                    Action creates transformation.
+
+                </p>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 Hidden CTA Data Container
+
+                 Receives backend/session information.
+
+                 No processing happens here.
+
+                 ============================================================== -->
+
+
+            <div id="cta-data"
+
+                 data-loaded="false"
+
+                 hidden>
+
+
+            </div>
+
+          /* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : cta.html
+   Continuation: Batch 1D
+
+   ========================================================================== */
+
+
+
+            <!-- ==============================================================
+                 Footer Navigation
+
+                 Shared footer component integration.
+
+                 ============================================================== -->
+
+
+            <footer class="journey-footer">
+
+
+                <p>
+
+                    © CTM PATH™ Guided Journey™
+
+                </p>
+
+
+                <p>
+
+                    Your journey of clarity,
+                    growth and transformation continues.
+
+                </p>
+
+
+            </footer>
+
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+
+
+<!-- ==========================================================================
+   SCRIPT DEPENDENCIES
+
+   Load order:
+
+   1. Foundation modules
+   2. Shared navigation
+   3. CTA controller
+
+   No business logic in HTML.
+
+   ========================================================================== -->
+
+
+<script src="../js/foundation/core.js"></script>
+
+<script src="../js/foundation/navigation.js"></script>
+
+<script src="../js/cta.js"></script>
+
+
+
+
+
+<!-- ==========================================================================
+   END OF PAGE
+
+   File:
+
+   pages/cta.html
+
+
+   Status:
+
+   STAGE 18 — CTA™ PAGE COMPLETE
+
+   ========================================================================== -->
+
+   
