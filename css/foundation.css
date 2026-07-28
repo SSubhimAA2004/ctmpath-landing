@@ -1,1 +1,1001 @@
 
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : css/foundation.css
+   Version     : 2.0
+
+   Purpose:
+   Premium Application Layout Framework
+
+   Dependency:
+   css/theme.css
+
+   Used By:
+   • All 18 Journey Pages
+   • Global Components
+   • Assessment Engine UI
+   • Result Dashboards
+
+   ========================================================================== */
+
+
+
+/* ==========================================================================
+   1. APPLICATION ROOT STRUCTURE
+   ========================================================================== */
+
+
+.app {
+
+
+    width:
+        100%;
+
+
+    min-height:
+        100vh;
+
+
+    display:
+        flex;
+
+
+    flex-direction:
+        column;
+
+
+}
+
+
+
+
+.app-main {
+
+
+    flex:
+        1;
+
+
+    width:
+        100%;
+
+
+}
+
+
+
+
+
+.page {
+
+
+    width:
+        100%;
+
+
+    min-height:
+        calc(100vh - 120px);
+
+
+    display:
+        flex;
+
+
+    flex-direction:
+        column;
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   2. GLOBAL CONTAINERS
+   ========================================================================== */
+
+
+.container {
+
+
+    width:
+        min(1200px, 92%);
+
+
+    margin:
+        0 auto;
+
+
+}
+
+
+
+
+
+.container-sm {
+
+
+    width:
+        min(760px, 92%);
+
+
+    margin:
+        0 auto;
+
+
+}
+
+
+
+
+
+.container-lg {
+
+
+    width:
+        min(1440px, 94%);
+
+
+    margin:
+        0 auto;
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   3. SECTION SYSTEM
+   ========================================================================== */
+
+
+.section {
+
+
+    width:
+        100%;
+
+
+    padding:
+
+        var(--space-xl)
+
+        0;
+
+
+}
+
+
+
+
+
+.section-center {
+
+
+    display:
+        flex;
+
+
+    flex-direction:
+        column;
+
+
+    align-items:
+        center;
+
+
+    justify-content:
+        center;
+
+
+    text-align:
+        center;
+
+
+}
+
+
+
+
+
+.section-hero {
+
+
+    min-height:
+
+        85vh;
+
+
+    display:
+        flex;
+
+
+    align-items:
+        center;
+
+
+    justify-content:
+        center;
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   4. FLEX LAYOUT SYSTEM
+   ========================================================================== */
+
+
+.flex {
+
+
+    display:
+        flex;
+
+
+}
+
+
+
+
+
+.flex-column {
+
+
+    flex-direction:
+        column;
+
+
+}
+
+
+
+
+
+.flex-row {
+
+
+    flex-direction:
+        row;
+
+
+}
+
+
+
+
+
+.align-center {
+
+
+    align-items:
+        center;
+
+
+}
+
+
+
+
+
+.justify-center {
+
+
+    justify-content:
+        center;
+
+
+}
+
+
+
+
+
+.justify-between {
+
+
+    justify-content:
+        space-between;
+
+
+}
+
+
+
+
+
+.gap-xs {
+
+
+    gap:
+        var(--space-xs);
+
+
+}
+
+
+
+
+
+.gap-sm {
+
+
+    gap:
+        var(--space-sm);
+
+
+}
+
+
+
+
+
+.gap-md {
+
+
+    gap:
+        var(--space-md);
+
+
+}
+
+
+
+
+
+.gap-lg {
+
+
+    gap:
+        var(--space-lg);
+
+
+}
+
+
+
+
+
+.gap-xl {
+
+
+    gap:
+        var(--space-xl);
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   5. GRID SYSTEM
+   ========================================================================== */
+
+
+.grid {
+
+
+    display:
+        grid;
+
+
+}
+
+
+
+
+
+.grid-2 {
+
+
+    grid-template-columns:
+
+        repeat(2,1fr);
+
+
+}
+
+
+
+
+
+.grid-3 {
+
+
+    grid-template-columns:
+
+        repeat(3,1fr);
+
+
+}
+
+
+
+
+
+.grid-4 {
+
+
+    grid-template-columns:
+
+        repeat(4,1fr);
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   6. WELCOME PAGE STRUCTURE
+   ========================================================================== */
+
+
+.hero-content {
+
+
+    max-width:
+
+        900px;
+
+
+    margin:
+
+        0 auto;
+
+
+    text-align:
+
+        center;
+
+
+}
+
+
+
+
+
+.hero-title {
+
+
+    margin-bottom:
+
+        var(--space-md);
+
+
+}
+
+
+
+
+
+.hero-description {
+
+
+    max-width:
+
+        700px;
+
+
+    margin:
+
+        0 auto;
+
+
+    color:
+
+        var(--text-secondary);
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   7. JOURNEY CARD SYSTEM
+   ========================================================================== */
+
+
+.journey-grid {
+
+
+    display:
+
+        grid;
+
+
+    grid-template-columns:
+
+        repeat(4,1fr);
+
+
+    gap:
+
+        var(--space-md);
+
+
+}
+
+
+
+
+
+.journey-card {
+
+
+    min-height:
+
+        220px;
+
+
+    display:
+
+        flex;
+
+
+    flex-direction:
+
+        column;
+
+
+    justify-content:
+
+        center;
+
+
+    align-items:
+
+        center;
+
+
+    text-align:
+
+        center;
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   8. ASSESSMENT LAYOUT FOUNDATION
+   ========================================================================== */
+
+
+.assessment-layout {
+
+
+    width:
+
+        100%;
+
+
+    max-width:
+
+        900px;
+
+
+    margin:
+
+        0 auto;
+
+
+}
+
+
+
+
+
+.question-stack {
+
+
+    display:
+
+        flex;
+
+
+    flex-direction:
+
+        column;
+
+
+    gap:
+
+        var(--space-md);
+
+
+}
+
+
+
+
+
+.question-card {
+
+
+    width:
+
+        100%;
+
+
+}
+
+
+
+
+
+.rating-group {
+
+
+    display:
+
+        grid;
+
+
+    grid-template-columns:
+
+        repeat(10,1fr);
+
+
+    gap:
+
+        10px;
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   9. DASHBOARD LAYOUT FOUNDATION
+   ========================================================================== */
+
+
+.dashboard-grid {
+
+
+    display:
+
+        grid;
+
+
+    grid-template-columns:
+
+        repeat(3,1fr);
+
+
+    gap:
+
+        var(--space-lg);
+
+
+}
+
+
+
+
+
+.dashboard-center {
+
+
+    display:
+
+        flex;
+
+
+    justify-content:
+
+        center;
+
+
+    align-items:
+
+        center;
+
+
+}
+
+
+
+
+
+.kalachakra-container {
+
+
+    width:
+
+        min(500px,90vw);
+
+
+    margin:
+
+        0 auto;
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   10. FORM LAYOUT FOUNDATION
+   ========================================================================== */
+
+
+.form-layout {
+
+
+    max-width:
+
+        600px;
+
+
+    margin:
+
+        0 auto;
+
+
+}
+
+
+
+
+
+.form-group {
+
+
+    display:
+
+        flex;
+
+
+    flex-direction:
+
+        column;
+
+
+    gap:
+
+        8px;
+
+
+}
+
+
+
+
+
+.form-actions {
+
+
+    display:
+
+        flex;
+
+
+    justify-content:
+
+        center;
+
+
+    gap:
+
+        var(--space-md);
+
+
+    margin-top:
+
+        var(--space-lg);
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   11. FOOTER FOUNDATION
+   ========================================================================== */
+
+
+.footer-layout {
+
+
+    width:
+
+        100%;
+
+
+    display:
+
+        flex;
+
+
+    flex-direction:
+
+        column;
+
+
+    align-items:
+
+        center;
+
+
+    justify-content:
+
+        center;
+
+
+    text-align:
+
+        center;
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   12. VISIBILITY UTILITIES
+   ========================================================================== */
+
+
+.hidden {
+
+
+    display:
+
+        none !important;
+
+
+}
+
+
+
+
+
+.visible {
+
+
+    display:
+
+        block;
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   13. RESPONSIVE GRID
+   ========================================================================== */
+
+
+@media(max-width:1024px){
+
+
+    .grid-4 {
+
+
+        grid-template-columns:
+
+            repeat(2,1fr);
+
+
+    }
+
+
+    .journey-grid {
+
+
+        grid-template-columns:
+
+            repeat(2,1fr);
+
+
+    }
+
+
+}
+
+
+
+
+
+@media(max-width:768px){
+
+
+    .flex-row {
+
+
+        flex-direction:
+
+            column;
+
+
+    }
+
+
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+
+
+        grid-template-columns:
+
+            1fr;
+
+
+    }
+
+
+    .journey-grid {
+
+
+        grid-template-columns:
+
+            1fr;
+
+
+    }
+
+
+    .rating-group {
+
+
+        grid-template-columns:
+
+            repeat(5,1fr);
+
+
+    }
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   END OF FILE
+
+   CTM PATH™ Application Layout Framework v2.0
+
+   ========================================================================== */
+
