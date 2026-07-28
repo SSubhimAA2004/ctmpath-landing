@@ -3,12 +3,17 @@
      CTM PATH™ Guided Journey™
 
      File        : pages/welcome.html
-     Version     : 2.0
+     Version     : 2.1
 
      Page        : 01 — WELCOME™
 
      Purpose:
-     Premium Entry Experience
+     Premium visitor entry experience
+
+     Flow:
+     Welcome™
+        ↓
+     Registration™
 
      Components:
      • header.html
@@ -22,18 +27,15 @@
      Script:
      • welcome.js
 
-     ========================================================================== -->
+========================================================================== -->
 
 
 <div class="page welcome-page">
 
 
-    <!-- ==========================================================
-         GLOBAL HEADER
-         ========================================================== -->
+    <!-- GLOBAL HEADER -->
 
     <div data-component="header"></div>
-
 
 
 
@@ -43,7 +45,8 @@
 
         <!-- ======================================================
              HERO SECTION
-             ====================================================== -->
+        ======================================================= -->
+
 
         <section class="welcome-hero">
 
@@ -57,18 +60,21 @@
 
                     <div class="welcome-eyebrow">
 
-                        YOUR TRANSFORMATION JOURNEY BEGINS HERE
+                        உங்கள் வாழ்க்கைப் பயணம் இங்கே தொடங்குகிறது
 
                     </div>
 
 
 
+                    <h1 class="welcome-title tamil">
 
-                    <h1 class="welcome-title">
 
-                        வாழ்வின் முழுமையை
+                        உங்கள் வாழ்க்கையின்
                         <br>
-                        கண்டறியும் பயணம்
+                        முழுமையான பாதையை
+                        <br>
+                        கண்டறியுங்கள்
+
 
                     </h1>
 
@@ -86,10 +92,14 @@
 
                     <p class="welcome-description">
 
-                        CTM PATH™ Guided Journey™ helps you
-                        understand your current life alignment,
-                        discover your strengths, identify growth
-                        opportunities, and create your path forward.
+
+                        CTM PATH™ Guided Journey™
+                        உங்கள் வாழ்க்கையின் முக்கியமான
+                        பகுதிகளை புரிந்து கொள்ள,
+                        உங்கள் தற்போதைய நிலையை அறிந்து,
+                        அடுத்த உயரத்திற்கு செல்லும் பாதையை
+                        தெளிவுபடுத்தும் ஒரு வழிகாட்டும் பயணம்.
+
 
                     </p>
 
@@ -109,8 +119,8 @@
 
 
         <!-- ======================================================
-             TRANSFORMATION PROMISE
-             ====================================================== -->
+             JOURNEY PROMISE
+        ======================================================= -->
 
 
         <section class="section">
@@ -124,18 +134,22 @@
 
                     <div class="promise-title">
 
-                        THE JOURNEY WITHIN
+                        THE INNER DISCOVERY JOURNEY™
 
                     </div>
+
 
 
 
                     <div class="promise-text">
 
-                        Discover where you are.
-                        Understand where you can go.
+
+                        உங்களை அறியுங்கள்.
+                        உங்கள் பாதையை உருவாக்குங்கள்.
+
 
                     </div>
+
 
 
                 </div>
@@ -151,9 +165,10 @@
 
 
 
+
         <!-- ======================================================
-             DISCOVERY SECTION
-             ====================================================== -->
+             DISCOVERY PILLARS
+        ======================================================= -->
 
 
         <section class="discovery-section">
@@ -164,10 +179,9 @@
 
                 <h2 class="discovery-title">
 
-                    What You Will Discover
+                    நீங்கள் கண்டறியப் போவது
 
                 </h2>
-
 
 
 
@@ -175,27 +189,40 @@
 
 
 
+                    <!-- CARD 01 -->
+
                     <article class="discovery-card">
 
 
                         <div class="discovery-icon">
 
-                            01
+                            🌱
 
                         </div>
 
 
+
                         <h3 class="discovery-card-title">
 
-                            Your Life Alignment
+                            வாழ்க்கை சமநிலை
 
                         </h3>
 
 
+
+                        <div class="discovery-card-subtitle">
+
+                            Life Alignment
+
+                        </div>
+
+
+
                         <p class="discovery-card-text">
 
-                            Understand the balance
-                            of your life's key areas.
+                            உங்கள் வாழ்க்கையின் முக்கிய
+                            பகுதிகளின் தற்போதைய நிலையை
+                            அறிந்து கொள்ளுங்கள்.
 
                         </p>
 
@@ -206,14 +233,19 @@
 
 
 
+
+
+                    <!-- CARD 02 -->
+
                     <article class="discovery-card">
 
 
                         <div class="discovery-icon">
 
-                            02
+                            🌀
 
                         </div>
+
 
 
                         <h3 class="discovery-card-title">
@@ -223,10 +255,20 @@
                         </h3>
 
 
+
+                        <div class="discovery-card-subtitle">
+
+                            12 Dimensions Of Life
+
+                        </div>
+
+
+
                         <p class="discovery-card-text">
 
-                            Discover your 12 dimensions
-                            of life alignment.
+                            உங்கள் வாழ்க்கையின் 12 முக்கிய
+                            பரிமாணங்களின் சமநிலையை
+                            கண்டறியுங்கள்.
 
                         </p>
 
@@ -237,27 +279,42 @@
 
 
 
+
+
+                    <!-- CARD 03 -->
+
                     <article class="discovery-card">
 
 
                         <div class="discovery-icon">
 
-                            03
+                            🔍
 
                         </div>
 
 
+
                         <h3 class="discovery-card-title">
+
+                            வாழ்க்கை பகுப்பாய்வு
+
+                        </h3>
+
+
+
+                        <div class="discovery-card-subtitle">
 
                             Personal Diagnosis™
 
-                        </h3>
+                        </div>
+
 
 
                         <p class="discovery-card-text">
 
-                            Receive insights into your
-                            strengths and growth areas.
+                            உங்கள் வலிமைகள் மற்றும்
+                            வளர்ச்சி வாய்ப்புகளை
+                            தெளிவாக அறியுங்கள்.
 
                         </p>
 
@@ -268,27 +325,41 @@
 
 
 
+
+
+                    <!-- CARD 04 -->
+
                     <article class="discovery-card">
 
 
                         <div class="discovery-icon">
 
-                            04
+                            🚀
 
                         </div>
 
 
+
                         <h3 class="discovery-card-title">
 
-                            Transformation Path
+                            மாற்றத்தின் பாதை
 
                         </h3>
 
 
+
+                        <div class="discovery-card-subtitle">
+
+                            Transformation Path
+
+                        </div>
+
+
+
                         <p class="discovery-card-text">
 
-                            Create your next steps
-                            with clarity.
+                            உங்கள் அடுத்த நிலைக்கான
+                            செயல்திட்டத்தை உருவாக்குங்கள்.
 
                         </p>
 
@@ -310,9 +381,10 @@
 
 
 
+
         <!-- ======================================================
-             CTA SECTION
-             ====================================================== -->
+             CTA
+        ======================================================= -->
 
 
         <section class="welcome-cta-section">
@@ -323,9 +395,13 @@
 
 
                 <a
+
                     href="pages/registration.html"
-                    class="begin-button"
+
                     id="beginJourneyButton"
+
+                    class="begin-button"
+
                 >
 
                     BEGIN MY GUIDED JOURNEY™
@@ -341,6 +417,7 @@
 
 
 
+
     </main>
 
 
@@ -348,9 +425,7 @@
 
 
 
-    <!-- ==========================================================
-         GLOBAL FOOTER
-         ========================================================== -->
+    <!-- GLOBAL FOOTER -->
 
     <div data-component="footer"></div>
 
