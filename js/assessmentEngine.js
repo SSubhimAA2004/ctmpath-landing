@@ -7,7 +7,9 @@
    Status      : DEVELOPMENT
 
    Purpose:
+
    Core assessment orchestration engine.
+
 
    Responsibilities:
 
@@ -16,11 +18,13 @@
    • Capture responses.
    • Manage assessment state.
 
+
    Does NOT:
 
    • Generate diagnosis.
    • Generate prescription.
    • Create reports.
+
 
    Backend owns:
 
@@ -35,9 +39,7 @@
    GLOBAL NAMESPACE
    ========================================================================== */
 
-
 window.CTMPATH = window.CTMPATH || {};
-
 
 
 
@@ -45,8 +47,8 @@ window.CTMPATH = window.CTMPATH || {};
    ASSESSMENT ENGINE
    ========================================================================== */
 
-
-CTMPATH.AssessmentEngine = {
+CTMPATH.AssessmentEngine =
+{
 
 
     version:
@@ -77,13 +79,13 @@ CTMPATH.AssessmentEngine = {
 
 
 
-
 /* ==========================================================================
    INITIALIZATION
    ========================================================================== */
 
 
-CTMPATH.AssessmentEngine.init = function() {
+CTMPATH.AssessmentEngine.init = function()
+{
 
 
     if (
@@ -94,7 +96,6 @@ CTMPATH.AssessmentEngine.init = function() {
 
 
         return;
-
 
 
     }
@@ -112,9 +113,33 @@ CTMPATH.AssessmentEngine.init = function() {
     CTMPATH.AssessmentEngine.initialized = true;
 
 
+    console.log(
+        "AssessmentEngine initialized."
+    );
+
 
 };
 
+
+
+/* ==========================================================================
+   BIND GLOBAL EVENTS
+
+   Application-level event bindings.
+
+   ========================================================================== */
+
+
+CTMPATH.AssessmentEngine.bindEvents = function()
+{
+
+
+    console.log(
+        "AssessmentEngine events bound."
+    );
+
+
+};
 
 
 
@@ -146,15 +171,6 @@ CTMPATH.AssessmentEngine.load = function(
 };
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey™
-
-   File        : assessmentEngine.js
-   Continuation: Batch 1B
-
-   ========================================================================== */
-
-
-/* ==========================================================================
    RENDER ASSESSMENT
 
    Creates question interface.
@@ -167,7 +183,8 @@ CTMPATH.AssessmentEngine.load = function(
    ========================================================================== */
 
 
-CTMPATH.AssessmentEngine.render = function() {
+CTMPATH.AssessmentEngine.render = function()
+{
 
 
     const container = document.getElementById(
@@ -178,11 +195,11 @@ CTMPATH.AssessmentEngine.render = function() {
 
 
 
-    if (!container) {
+    if (!container)
+    {
 
 
         return false;
-
 
 
     }
@@ -193,11 +210,11 @@ CTMPATH.AssessmentEngine.render = function() {
 
         !CTMPATH.AssessmentEngine.currentAssessment
 
-    ) {
+    )
+    {
 
 
         return false;
-
 
 
     }
@@ -210,8 +227,8 @@ CTMPATH.AssessmentEngine.render = function() {
 
     CTMPATH.AssessmentEngine.currentAssessment.questions
 
-        .forEach(function(question, index) {
-
+        .forEach(function(question, index)
+        {
 
 
             const questionCard =
@@ -233,7 +250,6 @@ CTMPATH.AssessmentEngine.render = function() {
             );
 
 
-
         });
 
 
@@ -243,7 +259,6 @@ CTMPATH.AssessmentEngine.render = function() {
 
 
     return true;
-
 
 
 };
@@ -265,7 +280,8 @@ CTMPATH.AssessmentEngine.createQuestionCard = function(
 
     number
 
-) {
+)
+{
 
 
     const card = document.createElement(
@@ -287,35 +303,27 @@ CTMPATH.AssessmentEngine.createQuestionCard = function(
 
         <div class="question-number">
 
-
             Question ${number}
-
 
         </div>
 
 
         <div class="question-text">
 
-
             ${question.text}
-
 
         </div>
 
 
         <div class="rating-scale">
 
-
             ${
-
                 CTMPATH.AssessmentEngine.createRatingScale(
 
                     question.id
 
                 )
-
             }
-
 
         </div>
 
@@ -327,16 +335,9 @@ CTMPATH.AssessmentEngine.createQuestionCard = function(
     return card;
 
 
-
 };
 
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
 
-   File        : assessmentEngine.js
-   Continuation: Batch 1C
-
-   ========================================================================== */
 
 
 /* ==========================================================================
@@ -353,7 +354,8 @@ CTMPATH.AssessmentEngine.createRatingScale = function(
 
     questionId
 
-) {
+)
+{
 
 
     let html = "";
@@ -368,7 +370,8 @@ CTMPATH.AssessmentEngine.createRatingScale = function(
 
         score++
 
-    ) {
+    )
+    {
 
 
         html += `
@@ -386,7 +389,6 @@ CTMPATH.AssessmentEngine.createRatingScale = function(
                     value="${score}">
 
 
-
                 <span>
 
                     ${score}
@@ -400,7 +402,6 @@ CTMPATH.AssessmentEngine.createRatingScale = function(
         `;
 
 
-
     }
 
 
@@ -408,11 +409,7 @@ CTMPATH.AssessmentEngine.createRatingScale = function(
     return html;
 
 
-
 };
-
-
-
 
 /* ==========================================================================
    BIND RATING EVENTS
@@ -422,7 +419,8 @@ CTMPATH.AssessmentEngine.createRatingScale = function(
    ========================================================================== */
 
 
-CTMPATH.AssessmentEngine.bindRatingEvents = function() {
+CTMPATH.AssessmentEngine.bindRatingEvents = function()
+{
 
 
     const options = document.querySelectorAll(
@@ -433,16 +431,16 @@ CTMPATH.AssessmentEngine.bindRatingEvents = function() {
 
 
 
-    options.forEach(function(option) {
-
+    options.forEach(function(option)
+    {
 
 
         option.addEventListener(
 
             "change",
 
-            function() {
-
+            function()
+            {
 
 
                 CTMPATH.AssessmentEngine.recordResponse(
@@ -454,15 +452,12 @@ CTMPATH.AssessmentEngine.bindRatingEvents = function() {
                 );
 
 
-
             }
 
         );
 
 
-
     });
-
 
 
 };
@@ -484,7 +479,8 @@ CTMPATH.AssessmentEngine.recordResponse = function(
 
     value
 
-) {
+)
+{
 
 
     CTMPATH.AssessmentEngine.responses[questionId] =
@@ -514,7 +510,6 @@ CTMPATH.AssessmentEngine.recordResponse = function(
                         questionId,
 
 
-
                     value:
 
                         value
@@ -528,16 +523,9 @@ CTMPATH.AssessmentEngine.recordResponse = function(
     );
 
 
-
 };
 
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
 
-   File        : assessmentEngine.js
-   Continuation: Batch 1D
-
-   ========================================================================== */
 
 
 /* ==========================================================================
@@ -548,11 +536,11 @@ CTMPATH.AssessmentEngine.recordResponse = function(
    ========================================================================== */
 
 
-CTMPATH.AssessmentEngine.getResponses = function() {
+CTMPATH.AssessmentEngine.getResponses = function()
+{
 
 
     return CTMPATH.AssessmentEngine.responses;
-
 
 
 };
@@ -568,7 +556,8 @@ CTMPATH.AssessmentEngine.getResponses = function() {
    ========================================================================== */
 
 
-CTMPATH.AssessmentEngine.saveResponses = function() {
+CTMPATH.AssessmentEngine.saveResponses = function()
+{
 
 
     if (
@@ -579,7 +568,8 @@ CTMPATH.AssessmentEngine.saveResponses = function() {
 
             "function"
 
-    ) {
+    )
+    {
 
 
         CTMPATH.Storage.saveAssessmentState(
@@ -589,15 +579,10 @@ CTMPATH.AssessmentEngine.saveResponses = function() {
         );
 
 
-
     }
 
 
-
 };
-
-
-
 
 /* ==========================================================================
    RESTORE RESPONSES
@@ -607,7 +592,8 @@ CTMPATH.AssessmentEngine.saveResponses = function() {
    ========================================================================== */
 
 
-CTMPATH.AssessmentEngine.restoreResponses = function() {
+CTMPATH.AssessmentEngine.restoreResponses = function()
+{
 
 
     if (
@@ -618,7 +604,8 @@ CTMPATH.AssessmentEngine.restoreResponses = function() {
 
             "function"
 
-    ) {
+    )
+    {
 
 
         const savedResponses =
@@ -627,7 +614,8 @@ CTMPATH.AssessmentEngine.restoreResponses = function() {
 
 
 
-        if (savedResponses) {
+        if (savedResponses)
+        {
 
 
             CTMPATH.AssessmentEngine.responses =
@@ -635,13 +623,10 @@ CTMPATH.AssessmentEngine.restoreResponses = function() {
                 savedResponses;
 
 
-
         }
 
 
-
     }
-
 
 
 };
@@ -657,7 +642,8 @@ CTMPATH.AssessmentEngine.restoreResponses = function() {
    ========================================================================== */
 
 
-CTMPATH.AssessmentEngine.clearResponses = function() {
+CTMPATH.AssessmentEngine.clearResponses = function()
+{
 
 
     CTMPATH.AssessmentEngine.responses = {};
@@ -667,16 +653,9 @@ CTMPATH.AssessmentEngine.clearResponses = function() {
     CTMPATH.AssessmentEngine.saveResponses();
 
 
-
 };
 
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
 
-   File        : assessmentEngine.js
-   Continuation: Batch 1E
-
-   ========================================================================== */
 
 
 /* ==========================================================================
@@ -689,10 +668,13 @@ CTMPATH.AssessmentEngine.clearResponses = function() {
    ========================================================================== */
 
 
-CTMPATH.AssessmentEngine.complete = function() {
+CTMPATH.AssessmentEngine.complete = function()
+{
 
 
-    const payload = {
+    const payload =
+
+    {
 
 
         assessment:
@@ -740,7 +722,6 @@ CTMPATH.AssessmentEngine.complete = function() {
     return true;
 
 
-
 };
 
 
@@ -752,11 +733,11 @@ CTMPATH.AssessmentEngine.complete = function() {
    ========================================================================== */
 
 
-CTMPATH.AssessmentEngine.getCurrentAssessment = function() {
+CTMPATH.AssessmentEngine.getCurrentAssessment = function()
+{
 
 
     return CTMPATH.AssessmentEngine.currentAssessment;
-
 
 
 };
@@ -774,7 +755,8 @@ CTMPATH.AssessmentEngine.setCurrentAssessment = function(
 
     assessment
 
-) {
+)
+{
 
 
     CTMPATH.AssessmentEngine.currentAssessment =
@@ -798,19 +780,16 @@ document.addEventListener(
 
     "CTMPATH_APP_READY",
 
-    function() {
+    function()
+    {
 
 
         CTMPATH.AssessmentEngine.init();
 
 
-
     }
 
 );
-
-
-
 
 /* ==========================================================================
    END OF FILE
