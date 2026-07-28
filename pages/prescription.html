@@ -1,465 +1,593 @@
 
-<!DOCTYPE html>
-<html lang="en">
+<!-- ==========================================================================
+   CTM PATH™ Guided Journey™
 
-<head>
+   File        : prescription.html
+   Version     : 1.0
+   Status      : DEVELOPMENT
+   Stage       : STAGE 17 — PRESCRIPTION™
 
-    <!-- ==========================================================
-         CTM PATH™ Guided Journey v2.0
-         File    : prescription.html
-         Version : 1.0
-         Status  : 🔒 LOCKED
-         ========================================================== -->
+   Purpose     :
+   Personal Transformation Action Plan page.
 
-    <meta charset="UTF-8">
+   Responsibilities:
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+   • Display personalised prescription.
+   • Present 30/60/90 day roadmap.
+   • Prepare transition to CTA™.
 
-    <meta
-        name="description"
-        content="CTM PATH™ Personalised Prescription">
+   Does NOT:
 
-    <meta
-        name="theme-color"
-        content="#081C3A">
+   • Generate prescription.
+   • Calculate actions.
+   • Modify recommendations.
 
-    <title>
+   Backend owns:
 
-        CTM PATH™ | Prescription™
+   • Prescription generation.
+   • Action prioritisation.
+   • Transformation roadmap.
 
-    </title>
+   ========================================================================== -->
 
-    <!-- ==========================================================
-         Google Fonts
-         ========================================================== -->
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com">
+<section class="page prescription-page"
+         id="prescription-page">
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <div class="app-container">
 
-    <!-- ==========================================================
-         Foundation CSS
-         ========================================================== -->
 
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/tokens.css">
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/app.css">
+        <div class="prescription-wrapper">
 
-    <!-- ==========================================================
-         Page CSS
-         ========================================================== -->
 
-    <link
-        rel="stylesheet"
-        href="../css/prescription.css">
 
-</head>
+            <!-- ==============================================================
+                 Header
+                 ============================================================== -->
 
-<body>
 
-<div class="app">
+            <div class="prescription-header">
 
-<header class="app-header">
 
-    <div class="container">
+                <p class="section-eyebrow">
 
-        <img
+                    Your Personal Action Plan™
 
-            src="../assets/logo/ctm-path-logo.svg"
+                </p>
 
-            alt="CTM PATH™"
 
-            class="logo">
 
-    </div>
+                <h1 class="section-title">
 
-</header>
+                    YOUR PRESCRIPTION™
 
-<main class="app-main">
+                </h1>
 
-<div class="container">
 
-<section class="glass-card prescription-card">
 
-<!-- ==========================================================
-     Progress
-     ========================================================== -->
+                <p class="section-description">
 
-<div class="progress">
+                    A focused pathway designed from
+                    your unique life diagnosis.
 
-    <div class="progress-label">
+                </p>
 
-        <span>
 
-            Stage 6 of 7
 
-        </span>
+            </div>
 
-        <span>
 
-            Prescription™
 
-        </span>
 
-    </div>
 
-    <div class="progress-track">
+            <!-- ==============================================================
+                 Prescription Overview
+                 ============================================================== -->
 
-        <div
 
-            class="progress-fill"
+            <div class="prescription-overview card">
 
-            style="width:86%;">
+
+                <div id="prescription-summary">
+
+
+                    <!--
+
+                    Loaded dynamically:
+
+
+                    • Prescription title
+
+                    • Primary transformation theme
+
+                    • Main focus area
+
+
+                    -->
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 30 DAY FOCUS
+                 ============================================================== -->
+
+
+            <div class="action-plan-card card">
+
+
+                <div class="action-plan-header">
+
+
+                    <span class="action-period">
+
+                        30 DAYS
+
+                    </span>
+
+
+
+                    <h2>
+
+                        Your Immediate Focus™
+
+                    </h2>
+
+
+                </div>
+
+
+
+                <div id="thirty-day-focus">
+
+
+                    <!--
+
+                    Generated dynamically
+
+
+                    -->
+
+
+                </div>
+
+
+
+            </div>
+
+            <!-- ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : prescription.html
+   Continuation: Batch 1B
+
+   ========================================================================== -->
+
+
+
+            <!-- ==============================================================
+                 60 DAY GROWTH
+                 ============================================================== -->
+
+
+            <div class="action-plan-card card">
+
+
+                <div class="action-plan-header">
+
+
+                    <span class="action-period">
+
+                        60 DAYS
+
+                    </span>
+
+
+
+                    <h2>
+
+                        Your Growth Path™
+
+                    </h2>
+
+
+                </div>
+
+
+
+                <div id="sixty-day-growth">
+
+
+                    <!--
+
+                    Generated dynamically:
+
+
+                    • Growth priorities
+
+                    • Development actions
+
+                    • Key habits
+
+
+                    -->
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 90 DAY TRANSFORMATION
+                 ============================================================== -->
+
+
+            <div class="action-plan-card card">
+
+
+                <div class="action-plan-header">
+
+
+                    <span class="action-period">
+
+                        90 DAYS
+
+                    </span>
+
+
+
+                    <h2>
+
+                        Your Transformation Journey™
+
+                    </h2>
+
+
+                </div>
+
+
+
+                <div id="ninety-day-transformation">
+
+
+                    <!--
+
+                    Generated dynamically:
+
+
+                    • Long-term milestones
+
+                    • Transformation goals
+
+                    • Success markers
+
+
+                    -->
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 Core Commitment Section
+                 ============================================================== -->
+
+
+            <div class="commitment-card card">
+
+
+                <h2>
+
+                    Your Commitment™
+
+                </h2>
+
+
+
+                <p id="commitment-message">
+
+
+                    <!--
+
+                    Backend-generated commitment message
+
+                    -->
+
+
+                </p>
+
+
+
+            </div>
+
+            <!-- ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : prescription.html
+   Continuation: Batch 1C
+
+   ========================================================================== -->
+
+
+
+            <!-- ==============================================================
+                 Action Summary Container
+                 ============================================================== -->
+
+
+            <div class="prescription-summary-card card">
+
+
+                <h2>
+
+                    Your Transformation Blueprint™
+
+                </h2>
+
+
+
+                <div id="action-summary">
+
+
+                    <!--
+
+                    Generated dynamically:
+
+
+                    • Priority action
+
+                    • Daily practice
+
+                    • Key milestone
+
+
+                    -->
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 Next Journey Action
+                 ============================================================== -->
+
+
+            <div class="prescription-actions">
+
+
+
+                <button
+
+                    type="button"
+
+                    id="prescription-back-btn"
+
+                    class="btn btn-secondary">
+
+
+                    Review Diagnosis
+
+
+                </button>
+
+
+
+
+
+                <button
+
+                    type="button"
+
+                    id="prescription-next-btn"
+
+                    class="btn btn-primary">
+
+
+                    Begin Your Next Chapter™
+
+
+                </button>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 Hidden Prescription Data Container
+
+                 Receives backend-generated prescription payload.
+
+                 No processing happens here.
+
+                 ============================================================== -->
+
+
+            <div id="prescription-data"
+
+                 data-loaded="false"
+
+                 hidden>
+
+
+            </div>
+
+            <!-- ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : prescription.html
+   Continuation: Batch 1D
+
+   ========================================================================== -->
+
+
+
+            <!-- ==============================================================
+                 Journey Completion Message
+                 ============================================================== -->
+
+
+            <div class="completion-message">
+
+
+
+                <p class="completion-eyebrow">
+
+                    Your Path Is Clear™
+
+                </p>
+
+
+
+                <h2>
+
+                    Transformation Begins With Action
+
+                </h2>
+
+
+
+                <p>
+
+                    Your prescription is your personal
+                    roadmap from awareness to meaningful change.
+
+                </p>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 Footer Navigation
+                 ============================================================== -->
+
+
+            <div class="journey-footer">
+
+
+
+                <button
+
+                    type="button"
+
+                    id="prescription-home-btn"
+
+                    class="btn btn-secondary">
+
+
+                    Review Journey
+
+
+                </button>
+
+
+
+
+
+                <button
+
+                    type="button"
+
+                    id="prescription-cta-btn"
+
+                    class="btn btn-primary">
+
+
+                    Continue
+
+
+                </button>
+
+
+
+            </div>
+
+
 
         </div>
 
-    </div>
-
-</div>
-
-<!-- ==========================================================
-     Heading
-     ========================================================== -->
-
-<h1 class="page-title">
-
-    உங்கள் மாற்றப் பயண வரைபடம்™
-
-</h1>
-
-<h2 class="page-subtitle">
-
-    Your Personal Prescription™
-
-</h2>
-
-<p class="page-description">
-
-    Awareness creates clarity.
-
-    Action creates transformation.
-
-    Your Prescription™ converts your Diagnosis™ into
-    practical daily, weekly and long-term practices that
-    gradually strengthen every spoke of your Kala Chakra™.
-
-</p>
-
-<!-- ==========================================================
-     Continue in Batch 2/n
-     ========================================================== -->
-
-
-    <!-- ==========================================================
-     Transformation Summary
-     ========================================================== -->
-
-<section class="summary-section">
-
-<div class="summary-grid">
-
-<div class="summary-card">
-
-    <span class="summary-label">
-
-        Current Life Score
-
-    </span>
-
-    <div
-        id="currentScore"
-        class="summary-value">
-
-        0%
 
     </div>
 
-</div>
-
-<div class="summary-card">
-
-    <span class="summary-label">
-
-        Transformation Focus
-
-    </span>
-
-    <div
-        id="focusArea"
-        class="summary-value">
-
-        —
-
-    </div>
-
-</div>
-
-<div class="summary-card">
-
-    <span class="summary-label">
-
-        Priority Actions
-
-    </span>
-
-    <div
-        id="actionCount"
-        class="summary-value">
-
-        0
-
-    </div>
-
-</div>
-
-<div class="summary-card">
-
-    <span class="summary-label">
-
-        Journey Status
-
-    </span>
-
-    <div
-        id="journeyStatus"
-        class="summary-value">
-
-        Ready
-
-    </div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ==========================================================
-     Daily Practices
-     ========================================================== -->
-
-<section class="practice-panel">
-
-    <h3>
-
-        Daily Practices™
-
-    </h3>
-
-    <p class="panel-description">
-
-        Small actions repeated every day create powerful
-        transformation over time.
-
-    </p>
-
-    <div
-        id="dailyPractices"
-        class="practice-list">
-
-    </div>
 
 </section>
 
 
-<!-- ==========================================================
-     Weekly Practices
-     ========================================================== -->
 
-<section class="practice-panel">
 
-    <h3>
 
-        Weekly Practices™
+<!-- ==========================================================================
+   SCRIPT DEPENDENCIES
 
-    </h3>
+   Load order:
 
-    <p class="panel-description">
+   1. Foundation modules
+   2. Shared navigation
+   3. Prescription controller
 
-        Weekly reflection and intentional action help maintain
-        steady progress.
+   No business logic in HTML.
 
-    </p>
+   ========================================================================== -->
 
-    <div
-        id="weeklyPractices"
-        class="practice-list">
 
-    </div>
+<script src="../js/foundation/core.js"></script>
 
-</section>
-
-<!-- ==========================================================
-     Continue in Batch 3/n
-     ========================================================== -->
-
-
-    <!-- ==========================================================
-     Monthly Transformation Plan
-     ========================================================== -->
-
-<section class="practice-panel">
-
-    <h3>
-
-        Monthly Transformation Plan™
-
-    </h3>
-
-    <p class="panel-description">
-
-        Long-term transformation is created through
-        consistent improvement across your most important
-        life dimensions.
-
-    </p>
-
-    <div
-        id="monthlyPlan"
-        class="practice-list">
-
-    </div>
-
-</section>
-
-
-<!-- ==========================================================
-     Priority Spokes
-     ========================================================== -->
-
-<section class="priority-panel">
-
-    <h3>
-
-        Your Priority Spokes™
-
-    </h3>
-
-    <div
-        id="prioritySpokes"
-        class="priority-grid">
-
-    </div>
-
-</section>
-
-
-<!-- ==========================================================
-     Commitment Statement
-     ========================================================== -->
-
-<section class="commitment-panel">
-
-    <h3>
-
-        Your Commitment™
-
-    </h3>
-
-    <p id="commitmentText">
-
-    </p>
-
-</section>
-
-
-<!-- ==========================================================
-     Navigation
-     ========================================================== -->
-
-<div class="navigation">
-
-    <button
-
-        type="button"
-
-        id="backButton"
-
-        class="btn btn-secondary">
-
-        ← Back
-
-    </button>
-
-
-    <button
-
-        type="button"
-
-        id="continueButton"
-
-        class="btn btn-primary">
-
-        Complete Journey →
-
-    </button>
-
-</div>
-
-
-</section>
-
-</div>
-
-</main>
-
-
-<!-- ==========================================================
-     Footer
-     ========================================================== -->
-
-<footer class="app-footer">
-
-    <div class="container">
-
-        <p>
-
-            © 2026 CTM PATH™ Guided Journey™
-
-        </p>
-
-    </div>
-
-</footer>
-
-
-</div>
-
-
-<!-- ==========================================================
-     Core JavaScript
-     ========================================================== -->
-
-<script src="../js/storage.js"></script>
-
-<script src="../js/api.js"></script>
-
-<script src="../js/router.js"></script>
-
-<script src="../js/app.js"></script>
-
-
-<!-- ==========================================================
-     Page Controller
-     ========================================================== -->
+<script src="../js/foundation/navigation.js"></script>
 
 <script src="../js/prescription.js"></script>
 
 
-</body>
-
-</html>
 
 
+
+<!-- ==========================================================================
+   END OF PAGE
+
+   File:
+
+   pages/prescription.html
+
+
+   Status:
+
+   STAGE 17 — PRESCRIPTION™ PAGE COMPLETE
+
+   ========================================================================== -->
+   
