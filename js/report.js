@@ -5,32 +5,21 @@
    File        : report.js
    Version     : 1.0
    Status      : DEVELOPMENT
-   Stage       : STAGE 0 — FOUNDATION
 
-   Purpose     :
-   Frontend report presentation helper.
+   Purpose:
+   Report management controller.
 
    Responsibilities:
 
-   • Receive backend-generated report data.
-   • Store report display state.
-   • Format report sections.
-   • Prepare UI presentation objects.
+   • Request reports.
+   • Handle report status.
+   • Manage report delivery.
 
    Does NOT:
 
-   • Generate reports.
-   • Create PDFs.
-   • Store reports.
-   • Send emails.
-   • Apply business rules.
-
-   Backend Ownership:
-
-   • Report generation
-   • PDF generation
-   • Drive storage
-   • Email delivery
+   • Generate report content.
+   • Create PDFs directly.
+   • Calculate assessment results.
 
    ========================================================================== */
 
@@ -44,8 +33,9 @@ window.CTMPATH = window.CTMPATH || {};
 
 
 
+
 /* ==========================================================================
-   REPORT SERVICE
+   REPORT CONTROLLER
    ========================================================================== */
 
 
@@ -64,7 +54,13 @@ CTMPATH.Report = {
 
 
 
-    data:
+    status:
+
+        "ready",
+
+
+
+    reportData:
 
         null
 
@@ -83,6 +79,25 @@ CTMPATH.Report = {
 CTMPATH.Report.init = function() {
 
 
+    if (
+
+        CTMPATH.Report.initialized
+
+    ) {
+
+
+        return;
+
+
+
+    }
+
+
+
+    CTMPATH.Report.bindEvents();
+
+
+
     CTMPATH.Report.initialized = true;
 
 
@@ -93,21 +108,189 @@ CTMPATH.Report.init = function() {
 
 
 /* ==========================================================================
-   LOAD REPORT DATA
+   REQUEST REPORT
 
-   Receives completed backend report response.
+   Sends report request through API layer.
 
    ========================================================================== */
 
 
-CTMPATH.Report.load = function(reportData) {
+CTMPATH.Report.request = function() {
 
 
-    CTMPATH.Report.data = reportData;
+    CTMPATH.Report.status =
+
+        "processing";
 
 
 
-    return true;
+    if (
+
+        CTMPATH.API &&
+
+        typeof CTMPATH.API.downloadReport ===
+
+            "function"
+
+    ) {
+
+
+        return CTMPATH.API.downloadReport()
+
+            .then(function(response) {
+
+
+
+                CTMPATH.Report.reportData =
+
+                    response;
+
+
+
+                CTMPATH.Report.status =
+
+                    "completed";
+
+
+
+                return response;
+
+
+
+            });
+
+
+
+    }
+
+
+
+    return false;
+
+
+
+};
+
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : report.js
+   Continuation: Batch 1B
+
+   ========================================================================== */
+
+
+/* ==========================================================================
+   EVENT BINDING
+
+   ========================================================================== */
+
+
+CTMPATH.Report.bindEvents = function() {
+
+
+    document.addEventListener(
+
+        "CTMPATH_SCORE_READY",
+
+        function(event) {
+
+
+            CTMPATH.Report.prepare(
+
+                event.detail.score
+
+            );
+
+
+
+        }
+
+    );
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   PREPARE REPORT DATA
+
+   Stores completed journey information.
+
+   Does not generate document.
+
+   ========================================================================== */
+
+
+CTMPATH.Report.prepare = function(
+
+    scoreData
+
+) {
+
+
+    CTMPATH.Report.reportData = {
+
+
+        score:
+
+            scoreData,
+
+
+
+        timestamp:
+
+            new Date().toISOString()
+
+
+
+    };
+
+
+
+    CTMPATH.Report.status =
+
+        "ready";
+
+
+
+    return CTMPATH.Report.reportData;
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   GET REPORT STATUS
+
+   ========================================================================== */
+
+
+CTMPATH.Report.getStatus = function() {
+
+
+    return {
+
+
+        version:
+
+            CTMPATH.Report.version,
+
+
+
+        status:
+
+            CTMPATH.Report.status
+
+
+
+    };
 
 
 
@@ -125,161 +308,7 @@ CTMPATH.Report.load = function(reportData) {
 CTMPATH.Report.getData = function() {
 
 
-    return CTMPATH.Report.data;
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   GET REPORT TITLE
-
-   Presentation helper.
-
-   ========================================================================== */
-
-
-CTMPATH.Report.getTitle = function() {
-
-
-    if (
-
-        !CTMPATH.Report.data
-
-    ) {
-
-
-        return "";
-
-
-
-    }
-
-
-
-    return (
-
-        CTMPATH.Report.data.title ||
-
-        "CTM PATH™ Guided Journey™ Report"
-
-    );
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   GET REPORT SECTIONS
-
-   Returns backend sections without modification.
-
-   ========================================================================== */
-
-
-CTMPATH.Report.getSections = function() {
-
-
-    if (
-
-        !CTMPATH.Report.data
-
-    ) {
-
-
-        return [];
-
-
-
-    }
-
-
-
-    return (
-
-        CTMPATH.Report.data.sections ||
-
-        []
-
-    );
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   FORMAT SECTION
-
-   Converts backend section into display object.
-
-   ========================================================================== */
-
-
-CTMPATH.Report.formatSection = function(section) {
-
-
-    return {
-
-
-        heading:
-
-            section.heading || "",
-
-
-
-        content:
-
-            section.content || "",
-
-
-
-        type:
-
-            section.type || "text"
-
-
-
-    };
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   FORMAT ALL SECTIONS
-
-   ========================================================================== */
-
-
-CTMPATH.Report.formatSections = function() {
-
-
-    return CTMPATH.Report.getSections()
-
-        .map(function(section) {
-
-
-            return CTMPATH.Report.formatSection(
-
-                section
-
-            );
-
-
-
-        });
+    return CTMPATH.Report.reportData;
 
 
 
@@ -289,43 +318,416 @@ CTMPATH.Report.formatSections = function() {
    CTM PATH™ Guided Journey™
 
    File        : report.js
-   Continuation: Batch 1B
+   Continuation: Batch 1C
 
    ========================================================================== */
 
 
 /* ==========================================================================
-   REQUEST REPORT GENERATION
+   DOWNLOAD REPORT
 
-   Sends request to backend report service.
+   Requests final generated report.
 
-   Backend owns:
+   Backend handles:
 
-   • Report creation
-   • PDF generation
-   • Drive storage
-   • Email delivery
+   • PDF creation
+   • Storage
+   • Delivery
 
    ========================================================================== */
 
 
-CTMPATH.Report.generate = async function(visitorId) {
+CTMPATH.Report.download = function() {
+
+
+    CTMPATH.Report.status =
+
+        "processing";
+
 
 
     if (
 
-        !CTMPATH.API ||
+        CTMPATH.API &&
 
-        typeof CTMPATH.API.generateReport !==
+        typeof CTMPATH.API.downloadReport ===
 
             "function"
 
     ) {
 
 
-        throw new Error(
+        return CTMPATH.API.downloadReport()
 
-            "Report API service unavailable."
+            .then(function(response) {
+
+
+
+                CTMPATH.Report.status =
+
+                    "completed";
+
+
+
+                CTMPATH.Report.reportData =
+
+                    response;
+
+
+
+                document.dispatchEvent(
+
+                    new CustomEvent(
+
+                        "CTMPATH_REPORT_READY",
+
+                        {
+
+                            detail:
+
+                            {
+
+                                report:
+
+                                    response
+
+                            }
+
+                        }
+
+                    )
+
+                );
+
+
+
+                return response;
+
+
+
+            });
+
+
+
+    }
+
+
+
+    return false;
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   REPORT ERROR HANDLER
+
+   ========================================================================== */
+
+
+CTMPATH.Report.handleError = function(error) {
+
+
+    console.error(
+
+        "CTM PATH™ Report Error:",
+
+        error
+
+    );
+
+
+
+    CTMPATH.Report.status =
+
+        "error";
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   RESET REPORT
+
+   Clears temporary report state.
+
+   ========================================================================== */
+
+
+CTMPATH.Report.reset = function() {
+
+
+    CTMPATH.Report.reportData = null;
+
+
+
+    CTMPATH.Report.status =
+
+        "ready";
+
+
+
+};
+
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : report.js
+   Continuation: Batch 1D
+
+   ========================================================================== */
+
+
+/* ==========================================================================
+   REPORT URL HANDLER
+
+   Opens generated report location.
+
+   Backend provides final URL.
+
+   ========================================================================== */
+
+
+CTMPATH.Report.openReport = function(
+
+    reportURL
+
+) {
+
+
+    if (
+
+        !reportURL
+
+    ) {
+
+
+        return false;
+
+
+
+    }
+
+
+
+    window.open(
+
+        reportURL,
+
+        "_blank"
+
+    );
+
+
+
+    return true;
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   REPORT MESSAGE HANDLER
+
+   Updates user-facing report state.
+
+   ========================================================================== */
+
+
+CTMPATH.Report.showStatus = function(
+
+    message
+
+) {
+
+
+    const statusElement = document.querySelector(
+
+        "[data-report-status]"
+
+    );
+
+
+
+    if (statusElement) {
+
+
+        statusElement.textContent = message;
+
+
+
+    }
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   REPORT STATE EVENTS
+
+   ========================================================================== */
+
+
+document.addEventListener(
+
+    "CTMPATH_REPORT_READY",
+
+    function(event) {
+
+
+        if (
+
+            event.detail &&
+
+            event.detail.report
+
+        ) {
+
+
+            CTMPATH.Report.showStatus(
+
+                "Your report is ready."
+
+            );
+
+
+
+        }
+
+
+
+    }
+
+);
+
+
+
+
+/* ==========================================================================
+   INITIALIZE REPORT MODULE
+
+   ========================================================================== */
+
+
+document.addEventListener(
+
+    "CTMPATH_APP_READY",
+
+    function() {
+
+
+        CTMPATH.Report.init();
+
+
+
+    }
+
+);
+
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : report.js
+   Continuation: Batch 1E
+
+   ========================================================================== */
+
+
+/* ==========================================================================
+   REPORT VALIDATION
+
+   Checks report availability.
+
+   ========================================================================== */
+
+
+CTMPATH.Report.isReady = function() {
+
+
+    return (
+
+        CTMPATH.Report.status ===
+
+        "completed"
+
+    );
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   REPORT CONFIGURATION
+
+   Stores report preferences.
+
+   Temporary runtime configuration.
+
+   ========================================================================== */
+
+
+CTMPATH.Report.config = {
+
+
+    format:
+
+        "PDF",
+
+
+
+    delivery:
+
+        "download"
+
+
+
+};
+
+
+
+
+/* ==========================================================================
+   UPDATE REPORT CONFIGURATION
+
+   ========================================================================== */
+
+
+CTMPATH.Report.updateConfig = function(
+
+    settings
+
+) {
+
+
+    if (
+
+        settings &&
+
+        typeof settings === "object"
+
+    ) {
+
+
+        CTMPATH.Report.config = Object.assign(
+
+            CTMPATH.Report.config,
+
+            settings
 
         );
 
@@ -335,23 +737,7 @@ CTMPATH.Report.generate = async function(visitorId) {
 
 
 
-    const result = await CTMPATH.API.generateReport(
-
-        visitorId
-
-    );
-
-
-
-    CTMPATH.Report.load(
-
-        result
-
-    );
-
-
-
-    return result;
+    return CTMPATH.Report.config;
 
 
 
@@ -361,112 +747,15 @@ CTMPATH.Report.generate = async function(visitorId) {
 
 
 /* ==========================================================================
-   GET DOWNLOAD INFORMATION
-
-   Returns backend supplied report references.
-
-   Frontend does not create files.
+   GET REPORT CONFIGURATION
 
    ========================================================================== */
 
 
-CTMPATH.Report.getDownloadInfo = function() {
+CTMPATH.Report.getConfig = function() {
 
 
-    if (
-
-        !CTMPATH.Report.data
-
-    ) {
-
-
-        return null;
-
-
-
-    }
-
-
-
-    return {
-
-
-        url:
-
-            CTMPATH.Report.data.url || null,
-
-
-
-        fileId:
-
-            CTMPATH.Report.data.fileId || null
-
-
-
-    };
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   CLEAR REPORT STATE
-
-   ========================================================================== */
-
-
-CTMPATH.Report.reset = function() {
-
-
-    CTMPATH.Report.data = null;
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   REPORT STATUS
-
-   Internal diagnostic helper.
-
-   ========================================================================== */
-
-
-CTMPATH.Report.status = function() {
-
-
-    return {
-
-
-        initialized:
-
-            CTMPATH.Report.initialized,
-
-
-
-        available:
-
-            Boolean(
-
-                CTMPATH.Report.data
-
-            ),
-
-
-
-        version:
-
-            CTMPATH.Report.version
-
-
-
-    };
+    return CTMPATH.Report.config;
 
 
 
@@ -485,12 +774,8 @@ CTMPATH.Report.status = function() {
 
    Status:
 
-   FOUNDATION MODULE COMPLETE
+   REPORT GENERATOR COMPLETE
 
-
-   Next:
-
-   data/pillars.js
 
    ========================================================================== */
 
