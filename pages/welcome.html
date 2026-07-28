@@ -3,26 +3,26 @@
    CTM PATH™ Guided Journey™
 
    File        : welcome.html
-   Version     : 1.0
-   Status      : DEVELOPMENT
-   Stage       : STAGE 1 — WELCOME™
+   Version     : 2.0
+   Status      : FINAL DESIGN STRUCTURE
 
-   Purpose     :
-   Welcome page presentation layer.
+   Stage       : WELCOME™
 
-   Responsibilities:
+   Purpose:
 
-   • Introduce CTM PATH™ Guided Journey™.
-   • Present opening message.
-   • Provide journey entry experience.
-   • Render navigation trigger points.
+   Premium bilingual welcome experience.
+
+   Language Priority:
+
+   Tamil First
+   English Support
+
 
    Does NOT:
 
    • Execute application logic.
-   • Create visitors.
    • Call backend APIs.
-   • Store user data.
+   • Store visitor data.
 
    ========================================================================== -->
 
@@ -31,276 +31,89 @@
          id="welcome-page">
 
 
-    <div class="app-container">
 
+<div class="app-container">
 
-        <div class="welcome-wrapper">
 
 
+<div class="welcome-wrapper">
 
-            <!-- ==============================================================
-                 Hero Content
-                 ============================================================== -->
-
-
-            <div class="welcome-content">
-
-
-
-                <p class="welcome-eyebrow">
-
-                    CTM PATH™ Guided Journey™
-
-                </p>
-
-
-
-                <h1 class="welcome-title">
-
-                    Discover The Life You Are Meant To Create
-
-                </h1>
-
-
-
-                <p class="welcome-subtitle">
-
-                    A guided journey to understand your purpose,
-                    strengths, opportunities and the path ahead.
-
-                </p>
-
-
-
-                <p class="welcome-description">
-
-                    Through 12 dimensions of a meaningful life,
-                    this assessment helps you discover where you are today
-                    and where your greatest growth is waiting.
-
-                </p>
-
-
-
-            </div>
-
-
-
-
-
-            <!-- ==============================================================
-                 Journey Introduction Card
-                 ============================================================== -->
-
-
-            <div class="card welcome-card">
-
-
-
-                <div class="welcome-card-header">
-
-
-                    <h2>
-
-                        Your Seven Minute Journey™
-
-                    </h2>
-
-
-                </div>
-
-
-
-
-                <div class="welcome-card-body">
-
-
-                    <p>
-
-                        Take a moment for yourself.
-                        Answer honestly.
-                        Discover your current life alignment.
-
-                    </p>
-
-
-
-                    <ul class="welcome-points">
-
-
-                        <li>
-
-                            12 Life Dimensions™
-
-                        </li>
-
-
-
-                        <li>
-
-                            Personal Insight Journey
-
-                        </li>
-
-
-
-                        <li>
-
-                            Growth Direction & Next Steps
-
-                        </li>
-
-
-
-                    </ul>
-
-
-
-                </div>
-
-
-            </div>
-
-
-
-        </div>
-
-
-    </div>
-
-
-</section>
-
-<!-- ==========================================================================
-   CTM PATH™ Guided Journey™
-
-   File        : welcome.html
-   Continuation: Batch 1B
-
-   ========================================================================== -->
 
 
 <!-- ==========================================================================
-   JOURNEY PREVIEW SECTION
+     HERO SECTION
+     ========================================================================== -->
 
-   ========================================================================== -->
 
+<section class="welcome-hero">
 
-<section class="welcome-preview">
 
 
+<p class="welcome-eyebrow">
 
-    <div class="welcome-preview-grid">
+    CTM PATH™ Guided Journey™
 
+</p>
 
 
-        <div class="welcome-preview-item">
 
 
-            <div class="preview-number">
+<h1 class="welcome-title tamil">
 
-                12
+    வாழ்வாங்கு வாழ்ந்திட வாரீர்
 
-            </div>
+</h1>
 
 
-            <div class="preview-content">
 
 
-                <h3>
+<h2 class="welcome-title english">
 
-                    Life Dimensions™
+    FROM SURVIVAL TO LIVING™
 
-                </h3>
+</h2>
 
 
-                <p>
 
-                    Explore the key areas that shape a fulfilled life.
 
-                </p>
+<p class="welcome-tagline tamil">
 
+    ஒரு புதிய பார்வை.
+    <br>
+    ஒரு புதிய தொடக்கம்.
 
-            </div>
+</p>
 
 
-        </div>
 
 
+<p class="welcome-tagline english">
 
+    A new perspective.
+    <br>
+    A new beginning.
 
+</p>
 
-        <div class="welcome-preview-item">
 
 
-            <div class="preview-number">
 
-                60
+<p class="welcome-description tamil">
 
-            </div>
+    உங்கள் வாழ்க்கையை முழுமையாகப் பார்க்கும்
+    ஒரு அமைதியான உள் பயணம்.
 
+</p>
 
-            <div class="preview-content">
 
 
-                <h3>
 
-                    Reflection Questions™
+<p class="welcome-description english">
 
-                </h3>
+    A quiet inner journey to understand,
+    realign and redesign your life.
 
-
-                <p>
-
-                    Gain deeper awareness through thoughtful self-reflection.
-
-                </p>
-
-
-            </div>
-
-
-        </div>
-
-
-
-
-
-        <div class="welcome-preview-item">
-
-
-            <div class="preview-number">
-
-                1
-
-            </div>
-
-
-            <div class="preview-content">
-
-
-                <h3>
-
-                    Personal Life Map™
-
-                </h3>
-
-
-                <p>
-
-                    Discover your current alignment and growth direction.
-
-                </p>
-
-
-            </div>
-
-
-        </div>
-
-
-
-    </div>
+</p>
 
 
 
@@ -310,60 +123,1122 @@
 
 
 <!-- ==========================================================================
-   ACTION AREA
-
-   Navigation controller handles journey movement.
-
-   ========================================================================== -->
+     JOURNEY INTRODUCTION CARD
+     ========================================================================== -->
 
 
-<div class="welcome-actions">
+<section class="welcome-introduction card">
 
 
 
-    <button
+<h2 class="section-title tamil">
 
-        id="begin-journey-btn"
+    உங்கள் வாழ்க்கையை புதிய பார்வையில்
+    காணும் நேரம்
 
-        class="btn btn-primary welcome-button"
-
-        type="button">
-
-
-        Begin Your Journey™
+</h2>
 
 
-    </button>
+
+
+<h3 class="section-subtitle english">
+
+    A Moment To See Your Life Through A New Lens
+
+</h3>
+
+
+
+
+<p class="section-text tamil">
+
+    அடுத்த சில நிமிடங்களில்,
+    உங்கள் வாழ்க்கையின் முக்கியமான பகுதிகளை
+    ஒரு புதிய பார்வையில் காண்பீர்கள்.
+
+</p>
+
+
+
+
+<p class="section-text english">
+
+    In the next few minutes,
+    you will explore the essential areas
+    of your life through a new lens.
+
+</p>
+
+
+
+
+<div class="welcome-principles">
+
+
+<div class="principle-item">
+
+
+<h4 class="tamil">
+
+    அவசரம் இல்லை
+
+</h4>
+
+
+<p class="english">
+
+    No rush.
+
+</p>
+
+
+</div>
+
+
+
+
+<div class="principle-item">
+
+
+<h4 class="tamil">
+
+    ஒப்பீடு இல்லை
+
+</h4>
+
+
+<p class="english">
+
+    No comparison.
+
+</p>
+
+
+</div>
+
+
+
+
+<div class="principle-item">
+
+
+<h4 class="tamil">
+
+    உண்மையான உங்களை அறிந்து கொள்ளும்
+    ஒரு நேரம்
+
+</h4>
+
+
+<p class="english">
+
+    Just an opportunity to understand
+    your true self.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+</section>
+
+   <!-- ==========================================================================
+     WHAT YOU WILL DISCOVER
+     ========================================================================== -->
+
+
+<section class="welcome-discovery">
+
+
+
+<h2 class="section-title tamil">
+
+    இந்த பயணத்தில் நீங்கள் பெறுவது
+
+</h2>
+
+
+
+
+<h3 class="section-subtitle english">
+
+    What You Will Discover
+
+</h3>
+
+
+
+
+<div class="discovery-grid">
+
+
+
+<!-- ----------------------------------------------------------------------
+     DISCOVERY 01
+     ---------------------------------------------------------------------- -->
+
+
+<div class="discovery-card">
+
+
+
+<div class="discovery-number">
+
+    01
+
+</div>
+
+
+
+
+<h4 class="tamil">
+
+    உங்கள் இன்றைய வாழ்க்கை நிலை
+
+</h4>
+
+
+
+
+<h5 class="english">
+
+    Your Life Today
+
+</h5>
+
+
+
+
+<p class="tamil">
+
+    உங்கள் தற்போதைய வாழ்க்கை நிலையை
+    தெளிவாகப் புரிந்து கொள்வீர்கள்.
+
+</p>
+
+
+
+
+<p class="english">
+
+    Understand where you truly stand today.
+
+</p>
 
 
 
 </div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------
+     DISCOVERY 02
+     ---------------------------------------------------------------------- -->
+
+
+<div class="discovery-card">
+
+
+
+<div class="discovery-number">
+
+    02
+
+</div>
+
+
+
+
+<h4 class="tamil">
+
+    உங்கள் காலச்சக்கரம்™
+
+</h4>
+
+
+
+
+<h5 class="english">
+
+    Your Kala Chakra™
+
+</h5>
+
+
+
+
+<p class="tamil">
+
+    வாழ்வின் 12 முக்கிய பகுதிகளில்
+    உங்கள் சமநிலையை பார்ப்பீர்கள்.
+
+</p>
+
+
+
+
+<p class="english">
+
+    Explore balance across the essential
+    areas of life.
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------
+     DISCOVERY 03
+     ---------------------------------------------------------------------- -->
+
+
+<div class="discovery-card">
+
+
+
+<div class="discovery-number">
+
+    03
+
+</div>
+
+
+
+
+<h4 class="tamil">
+
+    உங்கள் தனிப்பட்ட மதிப்பீடு™
+
+</h4>
+
+
+
+
+<h5 class="english">
+
+    Your Personal Diagnosis™
+
+</h5>
+
+
+
+
+<p class="tamil">
+
+    உங்கள் வலிமைகள்,
+    வளர்ச்சி வாய்ப்புகள்,
+    மாற்றத்திற்கான இடங்களை
+    அறிந்து கொள்வீர்கள்.
+
+</p>
+
+
+
+
+<p class="english">
+
+    Discover your strengths and areas
+    for growth.
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------
+     DISCOVERY 04
+     ---------------------------------------------------------------------- -->
+
+
+<div class="discovery-card">
+
+
+
+<div class="discovery-number">
+
+    04
+
+</div>
+
+
+
+
+<h4 class="tamil">
+
+    உங்கள் வளர்ச்சிக்கான வழிகாட்டி™
+
+</h4>
+
+
+
+
+<h5 class="english">
+
+    Your Personal Prescription™
+
+</h5>
+
+
+
+
+<p class="tamil">
+
+    உங்கள் அடுத்த வாழ்க்கை கட்டத்திற்கான
+    தெளிவான வழிகாட்டுதலை பெறுவீர்கள்.
+
+</p>
+
+
+
+
+<p class="english">
+
+    Receive your personalised roadmap
+    for your next chapter.
+
+</p>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
 
 
 
 
 <!-- ==========================================================================
-   CLOSING MESSAGE
-
-   ========================================================================== -->
-
-
-<div class="welcome-closing">
+     12 LIFE DIMENSIONS INTRODUCTION
+     ========================================================================== -->
 
 
-    <p>
+<section class="welcome-dimensions">
 
-        Your journey begins with one honest moment of reflection.
 
-    </p>
+
+<h2 class="section-title tamil">
+
+    வாழ்வின் 12 முக்கிய பகுதிகள்
+
+</h2>
+
+
+
+
+<h3 class="section-subtitle english">
+
+    The 12 Essential Areas of Life
+
+</h3>
+
+
+
+
+<p class="section-text tamil">
+
+    உங்கள் வாழ்க்கையை உருவாக்கும்
+    முக்கியமான 12 பகுதிகளை
+    ஒரு புதிய பார்வையில் ஆராய்வோம்.
+
+</p>
+
+
+
+
+<p class="section-text english">
+
+    Explore the key areas that shape
+    your life, growth and wellbeing.
+
+</p>
+
+
+
+</section>
+
+   <!-- ==========================================================================
+     KALA CHAKRA™ LIFE DIMENSIONS PREVIEW
+     ========================================================================== -->
+
+
+<section class="welcome-kalachakra">
+
+
+
+<div class="kalachakra-grid">
+
+
+
+<!-- ----------------------------------------------------------------------
+     PILLAR 01
+     ---------------------------------------------------------------------- -->
+
+
+<div class="kalachakra-item">
+
+
+<span class="pillar-number">
+
+01
+
+</span>
+
+
+<h4 class="tamil">
+
+நோக்கம்
+
+</h4>
+
+
+<p class="english">
+
+Purpose
+
+</p>
 
 
 </div>
 
+
+
+
+
+<!-- ----------------------------------------------------------------------
+     PILLAR 02
+     ---------------------------------------------------------------------- -->
+
+
+<div class="kalachakra-item">
+
+
+<span class="pillar-number">
+
+02
+
+</span>
+
+
+<h4 class="tamil">
+
+ஆரோக்கியம்
+
+</h4>
+
+
+<p class="english">
+
+Health
+
+</p>
+
+
+</div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------
+     PILLAR 03
+     ---------------------------------------------------------------------- -->
+
+
+<div class="kalachakra-item">
+
+
+<span class="pillar-number">
+
+03
+
+</span>
+
+
+<h4 class="tamil">
+
+உறவுகள்
+
+</h4>
+
+
+<p class="english">
+
+Relationships
+
+</p>
+
+
+</div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------
+     PILLAR 04
+     ---------------------------------------------------------------------- -->
+
+
+<div class="kalachakra-item">
+
+
+<span class="pillar-number">
+
+04
+
+</span>
+
+
+<h4 class="tamil">
+
+மனமும் உணர்வுகளும்
+
+</h4>
+
+
+<p class="english">
+
+Mind & Emotional Well-Being
+
+</p>
+
+
+</div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------
+     PILLAR 05
+     ---------------------------------------------------------------------- -->
+
+
+<div class="kalachakra-item">
+
+
+<span class="pillar-number">
+
+05
+
+</span>
+
+
+<h4 class="tamil">
+
+நற்பண்பு
+
+</h4>
+
+
+<p class="english">
+
+Character
+
+</p>
+
+
+</div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------
+     PILLAR 06
+     ---------------------------------------------------------------------- -->
+
+
+<div class="kalachakra-item">
+
+
+<span class="pillar-number">
+
+06
+
+</span>
+
+
+<h4 class="tamil">
+
+வளர்ச்சியும் கற்றலும்
+
+</h4>
+
+
+<p class="english">
+
+Growth & Learning
+
+</p>
+
+
+</div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------
+     PILLAR 07
+     ---------------------------------------------------------------------- -->
+
+
+<div class="kalachakra-item">
+
+
+<span class="pillar-number">
+
+07
+
+</span>
+
+
+<h4 class="tamil">
+
+தொழிலும் பங்களிப்பும்
+
+</h4>
+
+
+<p class="english">
+
+Career & Contribution
+
+</p>
+
+
+</div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------
+     PILLAR 08
+     ---------------------------------------------------------------------- -->
+
+
+<div class="kalachakra-item">
+
+
+<span class="pillar-number">
+
+08
+
+</span>
+
+
+<h4 class="tamil">
+
+பண வளமும் நிலைத்தன்மையும்
+
+</h4>
+
+
+<p class="english">
+
+Financial Stability & Abundance
+
+</p>
+
+
+</div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------
+     PILLAR 09
+     ---------------------------------------------------------------------- -->
+
+
+<div class="kalachakra-item">
+
+
+<span class="pillar-number">
+
+09
+
+</span>
+
+
+<h4 class="tamil">
+
+ஒழுக்கமும் பழக்கங்களும்
+
+</h4>
+
+
+<p class="english">
+
+Self-Discipline & Habits
+
+</p>
+
+
+</div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------
+     PILLAR 10
+     ---------------------------------------------------------------------- -->
+
+
+<div class="kalachakra-item">
+
+
+<span class="pillar-number">
+
+10
+
+</span>
+
+
+<h4 class="tamil">
+
+சமூகமும் ஆதரவு வட்டமும்
+
+</h4>
+
+
+<p class="english">
+
+Community & Tribe
+
+</p>
+
+
+</div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------
+     PILLAR 11
+     ---------------------------------------------------------------------- -->
+
+
+<div class="kalachakra-item">
+
+
+<span class="pillar-number">
+
+11
+
+</span>
+
+
+<h4 class="tamil">
+
+வாழ்க்கை சமநிலையும் அமைப்பும்
+
+</h4>
+
+
+<p class="english">
+
+Systems & Balance
+
+</p>
+
+
+</div>
+
+
+
+
+
+<!-- ----------------------------------------------------------------------
+     PILLAR 12
+     ---------------------------------------------------------------------- -->
+
+
+<div class="kalachakra-item">
+
+
+<span class="pillar-number">
+
+12
+
+</span>
+
+
+<h4 class="tamil">
+
+மரபும் பங்களிப்பும்
+
+</h4>
+
+
+<p class="english">
+
+Legacy & Contribution
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+<!-- ==========================================================================
+     FINAL INVITATION
+     ========================================================================== -->
+
+
+<section class="welcome-final">
+
+
+
+<h2 class="section-title tamil">
+
+இன்று உங்கள் வாழ்க்கையின்
+புதிய அத்தியாயம் தொடங்கட்டும்.
+
+</h2>
+
+
+
+
+<h3 class="section-subtitle english">
+
+Today can become the beginning
+of a new chapter in your life.
+
+</h3>
+
+
+
+
+<p class="section-text tamil">
+
+சிறிய ஒரு பயணம்.
+ஆனால் ஒரு பெரிய மாற்றத்திற்கான தொடக்கம்.
+
+</p>
+
+
+
+
+<p class="section-text english">
+
+A small journey.
+A meaningful step towards a better life.
+
+</p>
+
+
+
+</section>
+
+   <!-- ==========================================================================
+     ACTION AREA
+
+     Navigation controller handles journey movement.
+
+     ========================================================================== -->
+
+
+<section class="welcome-actions">
+
+
+
+<button
+
+    id="begin-journey-btn"
+
+    class="btn btn-primary welcome-button"
+
+    type="button">
+
+
+    <span class="tamil">
+
+        என் பயணத்தை தொடங்குகிறேன்
+
+    </span>
+
+
+
+    <span class="english">
+
+        Begin My Guided Journey
+
+    </span>
+
+
+</button>
+
+
+
+</section>
+
+
+
+
+
+<!-- ==========================================================================
+     CLOSING MESSAGE
+     ========================================================================== -->
+
+
+<section class="welcome-closing">
+
+
+
+<p class="tamil">
+
+    உங்கள் வாழ்க்கையை ஒரு புதிய பார்வையில்
+    ஆராயும் இந்த பயணத்தை தொடங்குங்கள்.
+
+</p>
+
+
+
+
+<p class="english">
+
+    Begin your journey of self-discovery
+    and transformation.
+
+</p>
+
+
+
+</section>
+
+
+
+
+
+</div>
 
 
 </div>
 
 
 </section>
+
+
+
+<!-- ==========================================================================
+   PAGE CONTROLLER HOOK
+
+   Controlled by:
+
+   js/welcome.js
+
+
+   ========================================================================== -->
+
+
+<script>
+
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    function()
+
+    {
+
+
+        const button = document.getElementById(
+
+            "begin-journey-btn"
+
+        );
+
+
+
+        if(button)
+
+        {
+
+
+            button.addEventListener(
+
+                "click",
+
+                function()
+
+                {
+
+
+                    if(
+
+                        CTMPATH &&
+
+                        CTMPATH.Navigation
+
+                    )
+
+                    {
+
+
+                        CTMPATH.Navigation.next();
+
+
+
+                    }
+
+
+
+                }
+
+            );
+
+
+
+        }
+
+
+
+    }
+
+);
+
+
+</script>
 
