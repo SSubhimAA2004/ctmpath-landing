@@ -1,446 +1,476 @@
 
-<!DOCTYPE html>
-<html lang="en">
+<!-- ==========================================================================
+   CTM PATH™ Guided Journey™
 
-<head>
+   File        : diagnosis.html
+   Version     : 1.0
+   Status      : DEVELOPMENT
+   Stage       : STAGE 16 — DIAGNOSIS™
 
-    <!-- ==========================================================
-         CTM PATH™ Guided Journey v2.0
-         File    : diagnosis.html
-         Version : 1.0
-         Status  : 🔒 LOCKED
-         ========================================================== -->
+   Purpose     :
+   Personalized life pattern diagnosis page.
 
-    <meta charset="UTF-8">
+   Responsibilities:
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+   • Display diagnosis summary.
+   • Present strengths and opportunities.
+   • Prepare transition to transformation pathway.
 
-    <meta
-        name="description"
-        content="CTM PATH™ Personalised Diagnosis">
+   Does NOT:
 
-    <meta
-        name="theme-color"
-        content="#081C3A">
+   • Calculate results.
+   • Generate diagnosis.
+   • Evaluate user responses.
 
-    <title>
+   ========================================================================== -->
 
-        CTM PATH™ | Diagnosis™
 
-    </title>
+<section class="page diagnosis-page"
+         id="diagnosis-page">
 
-    <!-- ==========================================================
-         Google Fonts
-         ========================================================== -->
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com">
+    <div class="app-container">
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+        <div class="diagnosis-wrapper">
 
-    <!-- ==========================================================
-         Foundation CSS
-         ========================================================== -->
 
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/tokens.css">
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/app.css">
 
-    <!-- ==========================================================
-         Page CSS
-         ========================================================== -->
+            <!-- ==============================================================
+                 Header
+                 ============================================================== -->
 
-    <link
-        rel="stylesheet"
-        href="../css/diagnosis.css">
 
-</head>
+            <div class="diagnosis-header">
 
-<body>
 
-<div class="app">
+                <p class="section-eyebrow">
 
-<header class="app-header">
+                    Your Personal Insight Report™
 
-    <div class="container">
+                </p>
 
-        <img
 
-            src="../assets/logo/ctm-path-logo.svg"
 
-            alt="CTM PATH"
+                <h1 class="section-title">
 
-            class="logo">
+                    YOUR DIAGNOSIS™
 
-    </div>
+                </h1>
 
-</header>
 
-<main class="app-main">
 
-<div class="container">
+                <p class="section-description">
 
-<section class="glass-card diagnosis-card">
+                    A reflection of your current life patterns,
+                    strengths and areas for transformation.
 
-<!-- ==========================================================
-     Progress
-     ========================================================== -->
+                </p>
 
-<div class="progress">
 
-    <div class="progress-label">
 
-        <span>
+            </div>
 
-            Stage 5 of 7
 
-        </span>
 
-        <span>
 
-            Diagnosis™
 
-        </span>
+            <!-- ==============================================================
+                 Overall Profile Card
+                 ============================================================== -->
 
-    </div>
 
-    <div class="progress-track">
+            <div class="diagnosis-profile-card card">
 
-        <div
 
-            class="progress-fill"
+                <div id="diagnosis-profile">
 
-            style="width:72%;">
+
+                    <!--
+
+                    Loaded dynamically:
+
+
+                    • Life Pattern Name
+
+                    • Summary
+
+                    • Overall Readiness
+
+
+                    -->
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 Core Insight Container
+                 ============================================================== -->
+
+
+            <div class="diagnosis-insight-card card">
+
+
+                <h2>
+
+                    Your Core Insight™
+
+                </h2>
+
+
+
+                <div id="core-insight">
+
+
+                </div>
+
+
+
+            </div>
+
+            <!-- ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : diagnosis.html
+   Continuation: Batch 1B
+
+   ========================================================================== -->
+
+
+
+            <!-- ==============================================================
+                 Strengths Section
+                 ============================================================== -->
+
+
+            <div class="diagnosis-section card">
+
+
+                <h2>
+
+                    Your Strengths™
+
+                </h2>
+
+
+
+                <div id="strengths-container"
+
+                     class="insight-list">
+
+
+
+                    <!--
+
+                    Generated dynamically:
+
+
+                    • Strength area 01
+
+                    • Strength area 02
+
+                    • Strength area 03
+
+
+                    -->
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 Growth Opportunities Section
+                 ============================================================== -->
+
+
+            <div class="diagnosis-section card">
+
+
+                <h2>
+
+                    Your Growth Path™
+
+                </h2>
+
+
+
+                <div id="growth-container"
+
+                     class="insight-list">
+
+
+
+                    <!--
+
+                    Generated dynamically:
+
+
+                    • Opportunity area 01
+
+                    • Opportunity area 02
+
+                    • Opportunity area 03
+
+
+                    -->
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 Life Pattern Summary
+                 ============================================================== -->
+
+
+            <div class="diagnosis-summary-card card">
+
+
+                <h2>
+
+                    Your Life Pattern™
+
+                </h2>
+
+
+
+                <p id="life-pattern-summary">
+
+
+                </p>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 Continue Action
+                 ============================================================== -->
+
+
+            <div class="diagnosis-actions">
+
+
+
+                <button
+
+                    type="button"
+
+                    id="diagnosis-next-btn"
+
+                    class="btn btn-primary">
+
+
+                    Discover Your Path Forward™
+
+
+                </button>
+
+
+
+            </div>
+
+            <!-- ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : diagnosis.html
+   Continuation: Batch 1C
+
+   ========================================================================== -->
+
+
+
+            <!-- ==============================================================
+                 Hidden Diagnosis Data Container
+
+                 Receives backend-generated diagnosis payload.
+
+                 No processing happens here.
+
+                 ============================================================== -->
+
+
+            <div id="diagnosis-data"
+
+                 data-loaded="false"
+
+                 hidden>
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 Journey Completion Message
+                 ============================================================== -->
+
+
+            <div class="completion-message">
+
+
+
+                <p class="completion-eyebrow">
+
+                    Your Awareness Has Expanded™
+
+                </p>
+
+
+
+                <h2>
+
+                    Your Next Chapter Begins Here
+
+                </h2>
+
+
+
+                <p>
+
+                    Understanding your current pattern
+                    is the first step toward intentional
+                    transformation.
+
+                </p>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- ==============================================================
+                 Footer Navigation
+                 ============================================================== -->
+
+
+            <div class="journey-footer">
+
+
+
+                <button
+
+                    type="button"
+
+                    id="diagnosis-back-btn"
+
+                    class="btn btn-secondary">
+
+
+                    Review Life Map
+
+
+                </button>
+
+
+
+
+
+                <button
+
+                    type="button"
+
+                    id="diagnosis-path-btn"
+
+                    class="btn btn-primary">
+
+
+                    Explore Your Transformation Path™
+
+
+                </button>
+
+
+
+            </div>
+
+
 
         </div>
 
-    </div>
-
-</div>
-
-<!-- ==========================================================
-     Heading
-     ========================================================== -->
-
-<h1 class="page-title">
-
-    உங்கள் வாழ்க்கை மதிப்பீடு™
-
-</h1>
-
-<h2 class="page-subtitle">
-
-    Your Personal Diagnosis™
-
-</h2>
-
-<p class="page-description">
-
-    Your assessment responses have now been analysed.
-
-    This Diagnosis™ identifies your present strengths,
-    your greatest growth opportunities,
-    and the areas that deserve your immediate attention.
-
-</p>
-
-<!-- ==========================================================
-     Continue in Batch 2/n
-     ========================================================== -->
-
-
-    <!-- ==========================================================
-     Overall Life Summary
-     ========================================================== -->
-
-<section class="summary-section">
-
-<div class="summary-grid">
-
-<div class="summary-card">
-
-    <span class="summary-label">
-
-        Overall Score
-
-    </span>
-
-    <div
-        id="overallScore"
-        class="summary-value">
-
-        0%
 
     </div>
 
-</div>
-
-<div class="summary-card">
-
-    <span class="summary-label">
-
-        Life Balance
-
-    </span>
-
-    <div
-        id="lifeBalance"
-        class="summary-value">
-
-        —
-
-    </div>
-
-</div>
-
-<div class="summary-card">
-
-    <span class="summary-label">
-
-        Primary Strength
-
-    </span>
-
-    <div
-        id="primaryStrength"
-        class="summary-value">
-
-        —
-
-    </div>
-
-</div>
-
-<div class="summary-card">
-
-    <span class="summary-label">
-
-        Priority Focus
-
-    </span>
-
-    <div
-        id="priorityFocus"
-        class="summary-value">
-
-        —
-
-    </div>
-
-</div>
-
-</div>
 
 </section>
 
-<!-- ==========================================================
-     Strengths
-     ========================================================== -->
+<!-- ==========================================================================
+   CTM PATH™ Guided Journey™
 
-<section class="strengths-panel">
+   File        : diagnosis.html
+   Continuation: Batch 1D
 
-    <h3>
+   ========================================================================== -->
 
-        Your Greatest Strengths™
 
-    </h3>
 
-    <ul id="strengthList">
+<!-- ==========================================================================
+   SCRIPT DEPENDENCIES
 
-    </ul>
+   Load order:
 
-</section>
+   1. Foundation modules
+   2. Shared navigation
+   3. Diagnosis controller
 
-<!-- ==========================================================
-     Growth Opportunities
-     ========================================================== -->
+   No business logic in HTML.
 
-<section class="growth-panel">
+   ========================================================================== -->
 
-    <h3>
 
-        Your Greatest Growth Opportunities™
+<script src="../js/foundation/core.js"></script>
 
-    </h3>
-
-    <ul id="growthList">
-
-    </ul>
-
-</section>
-
-<!-- ==========================================================
-     Diagnosis Insight
-     ========================================================== -->
-
-<section class="diagnosis-panel">
-
-    <h3>
-
-        Life Insight™
-
-    </h3>
-
-    <p id="diagnosisInsight">
-
-    </p>
-
-</section>
-
-<!-- ==========================================================
-     Continue in Batch 3/n
-     ========================================================== -->
-
-
-    <!-- ==========================================================
-     Priority Recommendations
-     ========================================================== -->
-
-<section class="recommendations-panel">
-
-    <h3>
-
-        Your Highest Priorities™
-
-    </h3>
-
-    <ol id="priorityRecommendations">
-
-    </ol>
-
-</section>
-
-<!-- ==========================================================
-     Encouragement
-     ========================================================== -->
-
-<section class="reflection-panel">
-
-    <h3>
-
-        Reflection™
-
-    </h3>
-
-    <p id="reflectionText">
-
-    </p>
-
-</section>
-
-<!-- ==========================================================
-     Next Step
-     ========================================================== -->
-
-<section class="wisdom-panel">
-
-    <h3>
-
-        Your Next Step™
-
-    </h3>
-
-    <p>
-
-        Your Diagnosis™ has revealed where your life currently
-        stands.
-
-        Your personalised Prescription™ will now convert these
-        insights into practical daily actions that gradually
-        transform every spoke of your Kala Chakra™.
-
-    </p>
-
-</section>
-
-<!-- ==========================================================
-     Navigation
-     ========================================================== -->
-
-<div class="navigation">
-
-    <button
-
-        type="button"
-
-        id="backButton"
-
-        class="btn btn-secondary">
-
-        ← Back
-
-    </button>
-
-    <button
-
-        type="button"
-
-        id="continueButton"
-
-        class="btn btn-primary">
-
-        Continue to Prescription →
-
-    </button>
-
-</div>
-
-</section>
-
-</div>
-
-</main>
-
-<!-- ==========================================================
-     Footer
-     ========================================================== -->
-
-<footer class="app-footer">
-
-    <div class="container">
-
-        <p>
-
-            © 2026 CTM PATH™ Guided Journey™
-
-        </p>
-
-    </div>
-
-</footer>
-
-</div>
-
-<!-- ==========================================================
-     Core JavaScript
-     ========================================================== -->
-
-<script src="../js/storage.js"></script>
-
-<script src="../js/api.js"></script>
-
-<script src="../js/router.js"></script>
-
-<script src="../js/app.js"></script>
-
-<!-- ==========================================================
-     Page Controller
-     ========================================================== -->
+<script src="../js/foundation/navigation.js"></script>
 
 <script src="../js/diagnosis.js"></script>
 
-</body>
 
-</html>
 
+
+
+<!-- ==========================================================================
+   END OF PAGE
+
+   File:
+
+   pages/diagnosis.html
+
+
+   Status:
+
+   STAGE 16 — DIAGNOSIS™ PAGE COMPLETE
+
+   ========================================================================== -->
+
+   
