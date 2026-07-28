@@ -1,31 +1,56 @@
 
 /* ==========================================================================
-
    CTM PATH™ Guided Journey™
 
-   File        : css/foundation.css
-   Version     : 2.2
+   File        : foundation.css
+   Version     : 1.0
+   Status      : DEVELOPMENT
+   Stage       : STAGE 0 — FOUNDATION
 
-   Status:
-   Premium Global Layout Foundation
+   Purpose     :
+   Establish the global CSS foundation for the CTM PATH™ Guided Journey™
+   application.
 
-   Purpose:
-   Application-wide structural framework.
+   Responsibilities:
 
-========================================================================== */
+   • CSS reset
+   • Global box model
+   • Base typography
+   • Layout primitives
+   • Container system
+   • Utility classes
+   • Accessibility foundations
+
+   Does NOT contain:
+
+   • Brand theme variables
+   • Page-specific styles
+   • Component-specific styles
+   • Responsive breakpoints
+
+   Those responsibilities belong to:
+
+   theme.css
+   responsive.css
+   component/page stylesheets
+
+   ========================================================================== */
 
 
 /* ==========================================================================
-   1. GLOBAL RESET
-========================================================================== */
+   CSS RESET
+   ========================================================================== */
 
 
 *,
 *::before,
 *::after {
 
-    box-sizing:
-    border-box;
+    box-sizing: border-box;
+
+    margin: 0;
+
+    padding: 0;
 
 }
 
@@ -33,11 +58,13 @@
 
 html {
 
-    width:
-    100%;
+    font-size: 16px;
 
-    scroll-behavior:
-    smooth;
+    scroll-behavior: smooth;
+
+    -webkit-font-smoothing: antialiased;
+
+    -moz-osx-font-smoothing: grayscale;
 
 }
 
@@ -45,291 +72,126 @@ html {
 
 body {
 
-    margin:
-    0;
-
-    width:
-    100%;
-
-    min-height:
-    100vh;
-
-    background:
-    var(--ctm-navy);
-
-    color:
-    var(--ctm-ivory);
+    min-height: 100vh;
 
     font-family:
-    var(--font-primary);
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    line-height: 1.6;
+
+    overflow-x: hidden;
 
 }
 
 
 
-/* Remove default spacing */
+img,
+svg {
 
-h1,
-h2,
-h3,
-h4,
-p {
+    display: block;
 
-    margin:
-    0;
+    max-width: 100%;
 
 }
+
+
+
+button,
+input,
+textarea,
+select {
+
+    font: inherit;
+
+}
+
+
+
+button {
+
+    cursor: pointer;
+
+    border: none;
+
+    background: none;
+
+}
+
 
 
 a {
 
-    text-decoration:
-    none;
-
-    color:
-    inherit;
+    text-decoration: none;
 
 }
 
 
+
+ul,
+ol {
+
+    list-style: none;
+
+}
 
 
 
 /* ==========================================================================
-   2. APPLICATION SHELL
-========================================================================== */
+   ROOT APPLICATION STRUCTURE
+   ========================================================================== */
 
 
-#app {
+#app-shell {
 
-    width:
-    100%;
+    min-height: 100vh;
 
-    min-height:
-    100vh;
+    display: flex;
 
-    display:
-    flex;
-
-    flex-direction:
-    column;
-
-    background:
-    var(--ctm-navy);
+    flex-direction: column;
 
 }
 
 
 
-.page {
+#app-content {
 
-    width:
-    100%;
+    flex: 1;
 
-    min-height:
-    100vh;
-
-    display:
-    flex;
-
-    flex-direction:
-    column;
-
-    background:
-    var(--ctm-navy);
+    width: 100%;
 
 }
 
 
 
-.page-content {
+.app-container {
 
-    flex:
-    1;
+    width: 100%;
+
+    max-width: 1280px;
+
+    margin-left: auto;
+
+    margin-right: auto;
+
+    padding-left: 2rem;
+
+    padding-right: 2rem;
 
 }
-
-
 
 
 
 /* ==========================================================================
-   3. CONTAINER SYSTEM
-========================================================================== */
-
-
-.container {
-
-
-    width:
-    min(
-        var(--container-width),
-        calc(100% - (var(--container-padding) * 2))
-    );
-
-
-    margin:
-    0 auto;
-
-
-}
-
-
-
-.container-small {
-
-
-    width:
-    min(
-        850px,
-        calc(100% - (var(--container-padding) * 2))
-    );
-
-
-    margin:
-    0 auto;
-
-
-}
-
-
-
-.container-wide {
-
-
-    width:
-    min(
-        1400px,
-        calc(100% - 4rem)
-    );
-
-
-    margin:
-    0 auto;
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   4. SECTION SYSTEM
-========================================================================== */
-
-
-.section {
-
-
-    width:
-    100%;
-
-
-    padding:
-
-    var(--space-lg)
-
-    0;
-
-
-}
-
-
-
-.section-large {
-
-
-    padding:
-
-    var(--space-xl)
-
-    0;
-
-
-}
-
-
-
-.section-center {
-
-
-    display:
-    flex;
-
-
-    flex-direction:
-    column;
-
-
-    align-items:
-    center;
-
-
-    justify-content:
-    center;
-
-
-    text-align:
-    center;
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   5. PREMIUM SPACING RHYTHM
-========================================================================== */
-
-
-.space-top {
-
-    margin-top:
-    var(--space-lg);
-
-}
-
-
-
-.space-bottom {
-
-    margin-bottom:
-    var(--space-lg);
-
-}
-
-
-
-.compact-section {
-
-
-    padding:
-
-    var(--space-md)
-
-    0;
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   6. FLEX SYSTEM
-========================================================================== */
+   GLOBAL LAYOUT UTILITIES
+   ========================================================================== */
 
 
 .flex {
 
-
-    display:
-    flex;
-
+    display: flex;
 
 }
 
@@ -337,10 +199,9 @@ a {
 
 .flex-column {
 
+    display: flex;
 
-    flex-direction:
-    column;
-
+    flex-direction: column;
 
 }
 
@@ -348,18 +209,11 @@ a {
 
 .flex-center {
 
+    display: flex;
 
-    display:
-    flex;
+    align-items: center;
 
-
-    align-items:
-    center;
-
-
-    justify-content:
-    center;
-
+    justify-content: center;
 
 }
 
@@ -367,103 +221,229 @@ a {
 
 .flex-between {
 
+    display: flex;
 
-    display:
-    flex;
+    align-items: center;
 
-
-    align-items:
-    center;
-
-
-    justify-content:
-    space-between;
-
+    justify-content: space-between;
 
 }
 
-
-
-
-
-/* ==========================================================================
-   7. GRID SYSTEM
-========================================================================== */
 
 
 .grid {
 
-
-    display:
-    grid;
-
+    display: grid;
 
 }
 
 
 
-.grid-2 {
+.hidden {
 
-
-    grid-template-columns:
-
-    repeat(2,1fr);
-
-
-    gap:
-
-    var(--space-md);
-
+    display: none !important;
 
 }
 
 
 
-.grid-3 {
+.visible {
 
-
-    grid-template-columns:
-
-    repeat(3,1fr);
-
-
-    gap:
-
-    var(--space-md);
-
+    display: block;
 
 }
 
 
 
-.grid-4 {
+.relative {
 
-
-    grid-template-columns:
-
-    repeat(4,1fr);
-
-
-    gap:
-
-    var(--space-md);
-
+    position: relative;
 
 }
 
 
+
+.absolute {
+
+    position: absolute;
+
+}
 
 
 
 /* ==========================================================================
-   8. TEXT ALIGNMENT
-========================================================================== */
+   SPACING UTILITIES
+   ========================================================================== */
+
+
+.mt-1 {
+
+    margin-top: 0.5rem;
+
+}
+
+
+
+.mt-2 {
+
+    margin-top: 1rem;
+
+}
+
+
+
+.mt-3 {
+
+    margin-top: 1.5rem;
+
+}
+
+
+
+.mt-4 {
+
+    margin-top: 2rem;
+
+}
+
+
+
+.mb-1 {
+
+    margin-bottom: 0.5rem;
+
+}
+
+
+
+.mb-2 {
+
+    margin-bottom: 1rem;
+
+}
+
+
+
+.mb-3 {
+
+    margin-bottom: 1.5rem;
+
+}
+
+
+
+.mb-4 {
+
+    margin-bottom: 2rem;
+
+}
+
+
+
+.p-1 {
+
+    padding: 0.5rem;
+
+}
+
+
+
+.p-2 {
+
+    padding: 1rem;
+
+}
+
+
+
+.p-3 {
+
+    padding: 1.5rem;
+
+}
+
+
+
+.p-4 {
+
+    padding: 2rem;
+
+}
+
+
+
+/* ==========================================================================
+   TYPOGRAPHY FOUNDATION
+   ========================================================================== */
+
+
+.heading-xl {
+
+    font-size: 3rem;
+
+    line-height: 1.15;
+
+    font-weight: 700;
+
+}
+
+
+
+.heading-lg {
+
+    font-size: 2.25rem;
+
+    line-height: 1.2;
+
+    font-weight: 700;
+
+}
+
+
+
+.heading-md {
+
+    font-size: 1.75rem;
+
+    line-height: 1.3;
+
+    font-weight: 600;
+
+}
+
+
+
+.heading-sm {
+
+    font-size: 1.25rem;
+
+    line-height: 1.4;
+
+    font-weight: 600;
+
+}
+
+
+
+.text-large {
+
+    font-size: 1.125rem;
+
+}
+
+
+
+.text-small {
+
+    font-size: 0.875rem;
+
+}
+
 
 
 .text-center {
 
-    text-align:
-    center;
+    text-align: center;
 
 }
 
@@ -471,8 +451,7 @@ a {
 
 .text-left {
 
-    text-align:
-    left;
+    text-align: left;
 
 }
 
@@ -480,420 +459,134 @@ a {
 
 .text-right {
 
-    text-align:
-    right;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   9. PREMIUM DIVIDERS
-========================================================================== */
-
-
-.gold-divider {
-
-
-    width:
-    120px;
-
-
-    height:
-    2px;
-
-
-    margin:
-
-    24px auto;
-
-
-    background:
-
-    linear-gradient(
-
-        90deg,
-
-        transparent,
-
-        var(--ctm-gold),
-
-        transparent
-
-    );
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   10. IMAGE SYSTEM
-========================================================================== */
-
-
-img {
-
-
-    max-width:
-    100%;
-
-
-    height:
-    auto;
-
-
-    display:
-    block;
-
-
-}
-
-
-
-.brand-logo {
-
-
-    width:
-    110px;
-
-
-    margin:
-    0 auto;
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   11. PREMIUM CARD SUPPORT
-========================================================================== */
-
-
-.card-grid {
-
-
-    display:
-    grid;
-
-
-    grid-template-columns:
-
-    repeat(4,1fr);
-
-
-    gap:
-
-    var(--space-md);
-
-
-}
-
-
-
-.card-center {
-
-
-    display:
-    flex;
-
-
-    flex-direction:
-    column;
-
-
-    align-items:
-    center;
-
-
-    justify-content:
-    center;
-
-
-    text-align:
-    center;
-
-
-}
-
-
-
-
-/* ==========================================================================
-   12. HEADER / FOOTER SUPPORT
-========================================================================== */
-
-
-/* --------------------------------------------------------------------------
-   PREMIUM HEADER
---------------------------------------------------------------------------- */
-
-.header-wrapper{
-
-    padding:
-    40px 0 24px;
-
-}
-
-
-
-/* --------------------------------------------------------------------------
-   PREMIUM FOOTER
---------------------------------------------------------------------------- */
-
-.footer-wrapper{
-
-    padding:
-    90px 0 120px;
-
-}
-
-
-
-.footer-container{
-
-    max-width:
-    760px;
-
-    margin:
-    0 auto;
-
-    display:
-    flex;
-
-    flex-direction:
-    column;
-
-    align-items:
-    center;
-
-    justify-content:
-    center;
-
-    text-align:
-    center;
-
-}
-
-
-
-.footer-divider{
-
-    width:
-    180px;
-
-    height:
-    1px;
-
-    margin:
-    36px auto;
-
-}
-
-
-
-.footer-brand{
-
-    display:
-    flex;
-
-    flex-direction:
-    column;
-
-    align-items:
-    center;
-
-    gap:
-    12px;
-
-}
-
-
-
-.footer-founder{
-
-    display:
-    flex;
-
-    flex-direction:
-    column;
-
-    align-items:
-    center;
-
-    gap:
-    8px;
-
-    margin-top:
-    28px;
-
-}
-
-
-
-.footer-contact{
-
-    display:
-    flex;
-
-    flex-direction:
-    column;
-
-    align-items:
-    center;
-
-    gap:
-    14px;
-
-    margin-top:
-    30px;
-
-}
-
-
-
-.footer-contact-link{
-
-    display:
-    inline-flex;
-
-    align-items:
-    center;
-
-    justify-content:
-    center;
-
-    gap:
-    10px;
-
-}
-
-
-
-.footer-icon{
-
-    display:
-    inline-flex;
-
-    align-items:
-    center;
-
-    justify-content:
-    center;
-
-    width:
-    22px;
-
-}
-
-
-
-.footer-bottom-divider{
-
-    margin-top:
-    42px;
+    text-align: right;
 
 }
 
 
 
 /* ==========================================================================
-   13. RESPONSIVE SYSTEM
-========================================================================== */
+   FORM FOUNDATION
+   ========================================================================== */
 
 
-@media(max-width:1100px){
+input,
+textarea,
+select {
 
+    width: 100%;
 
-    .grid-4,
-    .card-grid {
-
-
-        grid-template-columns:
-
-        repeat(2,1fr);
-
-
-    }
-
+    outline: none;
 
 }
 
 
 
+label {
 
+    display: block;
 
-@media(max-width:768px){
+    margin-bottom: 0.5rem;
 
-
-    :root {
-
-
-        --container-padding:
-        1.25rem;
-
-
-    }
-
-
-
-    .section {
-
-
-        padding:
-
-        40px 0;
-
-
-    }
-
-
-
-    .grid-2,
-    .grid-3,
-    .grid-4,
-    .card-grid {
-
-
-        grid-template-columns:
-
-        1fr;
-
-
-    }
-
-
-    .header-wrapper {
-
-
-        padding:
-
-        25px 0 20px;
-
-
-    }
-
+    font-weight: 500;
 
 }
 
 
 
+textarea {
+
+    resize: vertical;
+
+}
 
 
 
 /* ==========================================================================
+   BUTTON FOUNDATION
+   ========================================================================== */
 
-   END OF FILE
 
-   CTM PATH™ Guided Journey™
-   Foundation System v2.2
+.btn {
 
-========================================================================== */
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.5rem;
+
+    padding: 0.85rem 1.75rem;
+
+    border-radius: 0.5rem;
+
+    font-weight: 600;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+
+}
+
+
+
+.btn:hover {
+
+    transform: translateY(-1px);
+
+}
+
+
+
+.btn:disabled {
+
+    cursor: not-allowed;
+
+    opacity: 0.6;
+
+    transform: none;
+
+}
+
+
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+
+.sr-only {
+
+    position: absolute;
+
+    width: 1px;
+
+    height: 1px;
+
+    padding: 0;
+
+    margin: -1px;
+
+    overflow: hidden;
+
+    clip: rect(0,0,0,0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}
+
+
+
+:focus-visible {
+
+    outline-width: 3px;
+
+    outline-style: solid;
+
+    outline-offset: 3px;
+
+}
 
