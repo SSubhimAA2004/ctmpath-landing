@@ -3,23 +3,28 @@
    CTM PATH™ Guided Journey™
 
    File        : js/app.js
-   Version     : 2.5
+   Version     : 2.6
 
-   Status      : FRAGMENT ROUTER COMPATIBILITY PATCH
+   Status      : PAGE MODULE INITIALIZER PATCH
+
+
+   Purpose:
+
+   Core application bootstrap controller.
 
 
    Responsibilities:
 
-   ✓ Application bootstrap
-   ✓ Component loading
-   ✓ Fragment page loading
-   ✓ Journey state
+   ✓ Initialize application
+   ✓ Load global components
+   ✓ Load journey pages
+   ✓ Initialize page modules
 
 
    Does NOT:
 
    ✗ API processing
-   ✗ Database logic
+   ✗ Business logic
    ✗ Assessment logic
 
 
@@ -27,6 +32,8 @@
 
 
 const CTMApp = (() => {
+
+
 
 
 
@@ -42,12 +49,6 @@ const CTMApp = (() => {
         currentPage:
 
         1,
-
-
-
-        totalPages:
-
-        18,
 
 
 
@@ -76,7 +77,6 @@ const CTMApp = (() => {
         }
 
 
-
     };
 
 
@@ -91,6 +91,11 @@ const CTMApp = (() => {
 
 
 
+
+
+    /* ==========================================================
+       APPLICATION START
+       ========================================================== */
 
 
     async function init(){
@@ -115,6 +120,8 @@ const CTMApp = (() => {
 
 
 
+
+
         await loadPage(
 
             CONFIG.initialPage
@@ -129,8 +136,6 @@ const CTMApp = (() => {
 
 
 
-        initialisePage();
-
 
 
     }
@@ -141,6 +146,11 @@ const CTMApp = (() => {
 
 
 
+
+
+    /* ==========================================================
+       LOAD GLOBAL COMPONENTS
+       ========================================================== */
 
 
     async function loadGlobalComponents(){
@@ -189,31 +199,27 @@ const CTMApp = (() => {
 
     async function loadComponent(
 
-        id,
+        elementId,
 
-        path
+        filePath
 
     ){
 
 
 
-        const element =
+        const container =
 
-        document.getElementById(id);
+        document.getElementById(
+
+            elementId
+
+        );
 
 
 
 
 
-        if(!element){
-
-            console.warn(
-
-                "Missing component:",
-
-                id
-
-            );
+        if(!container){
 
             return;
 
@@ -225,12 +231,13 @@ const CTMApp = (() => {
 
 
 
-        try{
+        try {
+
 
 
             const response =
 
-            await fetch(path);
+            await fetch(filePath);
 
 
 
@@ -238,7 +245,15 @@ const CTMApp = (() => {
 
             if(!response.ok){
 
-                throw new Error(path);
+
+
+                throw new Error(
+
+                    filePath
+
+                );
+
+
 
             }
 
@@ -246,7 +261,7 @@ const CTMApp = (() => {
 
 
 
-            element.innerHTML =
+            container.innerHTML =
 
             await response.text();
 
@@ -255,16 +270,19 @@ const CTMApp = (() => {
         }
 
 
+
         catch(error){
+
 
 
             console.error(
 
-                "Component failed:",
+                "Component loading failed:",
 
                 error
 
             );
+
 
 
         }
@@ -279,6 +297,11 @@ const CTMApp = (() => {
 
 
 
+
+
+    /* ==========================================================
+       PAGE LOADING
+       ========================================================== */
 
 
     async function loadPage(
@@ -303,11 +326,15 @@ const CTMApp = (() => {
 
         if(!container){
 
+
+
             console.error(
 
                 "Missing #app-content"
 
             );
+
+
 
             return;
 
@@ -319,8 +346,7 @@ const CTMApp = (() => {
 
 
 
-
-        try{
+        try {
 
 
 
@@ -338,11 +364,15 @@ const CTMApp = (() => {
 
             if(!response.ok){
 
+
+
                 throw new Error(
 
-                    `Page missing: ${pageName}`
+                    `Page not found: ${pageName}`
 
                 );
+
+
 
             }
 
@@ -358,9 +388,43 @@ const CTMApp = (() => {
 
 
 
-            initialisePage();
 
 
+            initializePageModule(
+
+                pageName
+
+            );
+
+
+
+
+
+            document.dispatchEvent(
+
+
+
+                new CustomEvent(
+
+                    "ctm-page-loaded",
+
+                    {
+
+                        detail:{
+
+
+                            page:pageName
+
+
+                        }
+
+                    }
+
+                )
+
+
+
+            );
 
 
 
@@ -382,20 +446,6 @@ const CTMApp = (() => {
 
 
 
-            container.innerHTML =
-
-            `
-
-            <div class="error-message">
-
-            Journey page unavailable.
-
-            </div>
-
-            `;
-
-
-
         }
 
 
@@ -410,76 +460,85 @@ const CTMApp = (() => {
 
 
 
-    function initialisePage(){
+    /* ==========================================================
+       PAGE MODULE INITIALIZER
+       ========================================================== */
+
+
+    function initializePageModule(
+
+        pageName
+
+    ){
 
 
 
-        window.scrollTo(
-
-            0,
-
-            0
-
-        );
-
-
-
-
-
-
-
-        if(
-
-            window.Navigation
-
-        ){
-
-
-
-            Navigation.updateNavigation();
-
-
-
-        }
+        switch(pageName){
 
 
 
 
 
+            case "welcome":
 
 
 
-        const pageEvent =
+                if(
 
-        new CustomEvent(
+                    window.Welcome &&
 
-            "ctm-page-loaded",
+                    Welcome.init
 
-            {
-
-                detail:{
+                ){
 
 
-                    page:
 
-                    CONFIG.currentPage
+                    Welcome.init();
+
 
 
                 }
 
-            }
-
-        );
 
 
+            break;
 
 
 
-        document.dispatchEvent(
 
-            pageEvent
 
-        );
+
+
+
+            case "registration":
+
+
+
+                if(
+
+                    window.Registration &&
+
+                    Registration.init
+
+                ){
+
+
+
+                    Registration.init();
+
+
+
+                }
+
+
+
+            break;
+
+
+
+
+
+        }
 
 
 
@@ -491,6 +550,68 @@ const CTMApp = (() => {
 
 
 
+
+
+    /* ==========================================================
+       JOURNEY CONTROL
+       ========================================================== */
+
+
+    function startJourney(){
+
+
+
+        CONFIG.currentPage = 2;
+
+
+
+
+
+        showNavigation();
+
+
+
+
+
+        loadPage(
+
+            "registration"
+
+        );
+
+
+
+
+
+        if(window.Navigation){
+
+
+
+            Navigation.setPage(
+
+                2
+
+            );
+
+
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       NAVIGATION VISIBILITY
+       ========================================================== */
 
 
     function hideNavigation(){
@@ -573,54 +694,6 @@ const CTMApp = (() => {
 
 
 
-    function startJourney(){
-
-
-
-        CONFIG.currentPage = 2;
-
-
-
-        showNavigation();
-
-
-
-        loadPage(
-
-            "registration"
-
-        );
-
-
-
-
-
-        if(window.Navigation){
-
-
-
-            Navigation.setPage(
-
-                2
-
-            );
-
-
-
-        }
-
-
-
-    }
-
-
-
-
-
-
-
-
-
     return {
 
 
@@ -634,11 +707,24 @@ const CTMApp = (() => {
         startJourney
 
 
+
     };
 
 
 
+
+
 })();
+
+
+
+
+
+
+
+
+
+window.CTMApp = CTMApp;
 
 
 
@@ -658,16 +744,7 @@ document.addEventListener(
         CTMApp.init();
 
 
+
     }
 
 );
-
-
-
-
-
-
-
-
-
-window.CTMApp = CTMApp;
