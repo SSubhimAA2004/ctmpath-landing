@@ -3,297 +3,137 @@
    CTM PATH™ Guided Journey™
 
    File        : header.html
-   Version     : 2.0
+   Version     : 3.0
 
    Purpose:
 
-   Global premium journey header.
+   Global premium brand header.
 
    Responsibilities:
 
-   • Display CTM PATH™ branding.
-   • Display journey identity.
+   • Display CTM PATH™ identity.
+   • Display logo.
    • Display journey progress.
 
    Does NOT:
 
-   • Execute navigation.
-   • Store user data.
-   • Call backend services.
+   • Control navigation.
+   • Manage application state.
+   • Execute scripts.
 
    ========================================================================== -->
 
 
-<header class="journey-header">
+<header class="ctm-header">
 
 
 
-<div class="header-container">
+    <div class="ctm-header-container">
 
 
 
 
 
-<!-- ==========================================================================
-     BRAND IDENTITY
-     ========================================================================== -->
+        <!-- BRAND AREA -->
 
+        <div class="ctm-brand">
 
-<div class="header-brand">
 
 
+            <img
 
-<img
+                src="assets/logo/CTM_Logo_Transparent.svg"
 
-    src="assets/logo/CTM_Logo_Transparent.svg"
+                alt="CTM PATH™ Logo"
 
-    alt="CTM PATH™ Logo"
+                class="ctm-header-logo"
 
-    class="ctm-logo"
+            />
 
 
 
->
 
 
+            <div class="ctm-brand-text">
 
 
-<div class="brand-text">
 
+                <div class="ctm-brand-name">
 
+                    CTM PATH™
 
-<div class="brand-name">
+                </div>
 
 
-    CTM PATH™
 
 
-</div>
+                <div class="ctm-brand-subtitle">
 
+                    Guided Journey™
 
+                </div>
 
-<div class="brand-subtitle">
 
 
-    Guided Journey™
 
+                <div class="ctm-brand-tagline">
 
-</div>
+                    Every Dream Has A Path™
 
+                </div>
 
 
-</div>
 
+            </div>
 
 
-</div>
 
+        </div>
 
 
 
 
 
 
-<!-- ==========================================================================
-     JOURNEY TITLE
 
-     ========================================================================== -->
 
+        <!-- JOURNEY STATUS -->
 
-<div class="header-journey-title">
+        <div class="ctm-journey-status">
 
 
 
-<p class="tamil">
+            <div class="ctm-journey-label">
 
+                Journey
 
-    உங்கள் வாழ்க்கை பயணம்
+            </div>
 
 
-</p>
 
+            <div
 
+                class="ctm-journey-step"
 
+                data-current-step
 
-<p class="english">
+            >
 
+                01 / 18
 
-    Your Guided Life Journey
+            </div>
 
 
-</p>
 
+        </div>
 
 
-</div>
 
 
 
-
-
-
-<!-- ==========================================================================
-     PROGRESS INDICATOR
-
-     Controlled by navigation.js
-
-     ========================================================================== -->
-
-
-<div class="header-progress">
-
-
-
-<div class="progress-label">
-
-
-
-<span class="tamil">
-
-
-    பயணம்
-
-
-</span>
-
-
-
-<span class="english">
-
-
-    Journey
-
-
-</span>
-
-
-
-</div>
-
-
-
-
-<div class="progress-value">
-
-
-    01 / 18
-
-
-</div>
-
-
-
-
-<div class="progress-track">
-
-
-<div
-
-class="progress-fill"
-
-data-progress-fill>
-
-</div>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-</div>
+    </div>
 
 
 
 </header>
-
-<!-- ==========================================================================
-     ACCESSIBILITY LAYER
-
-     ========================================================================== -->
-
-
-<nav
-
-    class="header-accessibility"
-
-    aria-label="CTM PATH™ Guided Journey Navigation"
-
->
-
-
-
-
-
-<div class="sr-only">
-
-
-    CTM PATH™ Guided Journey™
-
-
-</div>
-
-
-
-
-
-<div
-
-    class="journey-status"
-
-    role="status"
-
-    aria-live="polite"
-
->
-
-
-
-
-<span class="sr-only">
-
-
-    Current journey progress
-
-
-</span>
-
-
-
-<span data-progress-text>
-
-
-    Step 01 of 18
-
-
-</span>
-
-
-
-</div>
-
-
-
-
-
-</nav>
-
-
-
-
-
-
-<!-- ==========================================================================
-     DECORATIVE BRAND DIVIDER
-
-     ========================================================================== -->
-
-
-<div class="header-accent-line"></div>
 
