@@ -2,142 +2,251 @@
 /* ==========================================================================
    CTM PATH™ Guided Journey™
 
-   File        : theme.css
-   Version     : 2.0
+   File        : css/theme.css
+   Version     : 3.0
+
+   Status      : 🔒 PREMIUM DESIGN TOKENS
+
 
    Purpose:
 
-   Global CTM PATH™ Design Language
+   Global brand visual system.
 
-   Controls:
+
+   Responsibilities:
 
    ✓ Brand colours
-   ✓ Typography system
-   ✓ Surface system
-   ✓ Border system
-   ✓ Shadow system
-   ✓ Spacing system
+   ✓ Background system
+   ✓ Typography colours
+   ✓ Premium effects
+   ✓ Surface styling
 
-   Used by all 18 pages.
+
+   Does NOT:
+
+   ✗ Layout
+   ✗ Components
+   ✗ Page logic
+
 
    ========================================================================== */
 
 
 
+
+
+/* ==========================================================================
+   ROOT DESIGN TOKENS
+   ========================================================================== */
 
 
 :root {
 
 
+
+    /* ======================================================
+       PRIMARY BRAND COLOURS
+       ====================================================== */
+
+
+    --ctm-navy:
+
+    #081C3A;
+
+
+
+    --ctm-navy-deep:
+
+    #06152D;
+
+
+
+    --ctm-blue:
+
+    #12376E;
+
+
+
+    --ctm-teal:
+
+    #00C7D9;
+
+
+
+    --ctm-teal-soft:
+
+    #42D9E8;
+
+
+
+    --ctm-gold:
+
+    #C9A227;
+
+
+
+    --ctm-gold-soft:
+
+    #E2C35B;
+
+
+
+    --ctm-ivory:
+
+    #F7F4EA;
+
+
+
+    --ctm-white:
+
+    #FFFFFF;
+
+
+
+
+
+    /* ======================================================
+       MUTED COLOURS
+       ====================================================== */
+
+
+    --text-primary:
+
+    #F7F4EA;
+
+
+
+    --text-secondary:
+
+    #C8D3E6;
+
+
+
+    --text-muted:
+
+    #94A6C2;
+
+
+
+    --border-soft:
+
+    rgba(201,162,39,0.25);
+
+
+
+    --surface-glass:
+
+    rgba(255,255,255,0.04);
+
+
+
+
+
+    /* ======================================================
+       EFFECTS
+       ====================================================== */
+
+
+    --shadow-soft:
+
+    0 20px 60px rgba(0,0,0,0.35);
+
+
+
+    --shadow-gold:
+
+    0 0 40px rgba(201,162,39,0.20);
+
+
+
+    --shadow-teal:
+
+    0 0 40px rgba(0,199,217,0.25);
+
+
+
+
+
+    /* ======================================================
+       RADIUS SYSTEM
+       ====================================================== */
+
+
+    --radius-sm:
+
+    12px;
+
+
+
+    --radius-md:
+
+    24px;
+
+
+
+    --radius-lg:
+
+    36px;
+
+
+
+    --radius-pill:
+
+    999px;
+
+
+
+
+
+    /* ======================================================
+       TRANSITIONS
+       ====================================================== */
+
+
+    --transition-fast:
+
+    .2s ease;
+
+
+
+    --transition-normal:
+
+    .35s ease;
+
+
+
+}
+
+
+
+
+
+
+
+
+
 /* ==========================================================================
-   CORE BACKGROUND UNIVERSE
+   GLOBAL THEME APPLICATION
    ========================================================================== */
 
 
---ctm-background:
-
-#081C3A;
+body {
 
 
---ctm-background-deep:
+    background:
 
-#06152D;
-
-
---ctm-surface:
-
-#0B2447;
-
-
---ctm-surface-light:
-
-rgba(
-    255,
-    255,
-    255,
-    0.05
-);
+    var(--ctm-navy);
 
 
 
---ctm-glass:
+    color:
 
-rgba(
-    8,
-    28,
-    58,
-    0.88
-);
+    var(--text-primary);
 
 
 
+}
 
-
-
-
-
-/* ==========================================================================
-   BRAND IDENTITY COLOURS
-   ========================================================================== */
-
-
---ctm-gold:
-
-#D9B56A;
-
-
---ctm-gold-light:
-
-#FFF3A6;
-
-
---ctm-gold-dark:
-
-#A86B16;
-
-
-
-
-
---ctm-teal:
-
-#00B7B7;
-
-
---ctm-teal-light:
-
-#57D6D6;
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   CTA SYSTEM
-   ========================================================================== */
-
-
---ctm-blue:
-
-#00B7FF;
-
-
---ctm-blue-deep:
-
-#0066CC;
-
-
---ctm-blue-glow:
-
-rgba(
-    0,
-    183,
-    255,
-    0.45
-);
 
 
 
@@ -151,247 +260,7 @@ rgba(
    ========================================================================== */
 
 
---text-primary:
-
-#F8F4EA;
-
-
-
---text-secondary:
-
-#D6DCE8;
-
-
-
---text-muted:
-
-rgba(
-    248,
-    244,
-    234,
-    0.72
-);
-
-
-
---text-dark:
-
-#081C3A;
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   BORDER SYSTEM
-   ========================================================================== */
-
-
---border-soft:
-
-rgba(
-    255,
-    255,
-    255,
-    0.10
-);
-
-
-
---border-gold:
-
-rgba(
-    217,
-    181,
-    106,
-    0.45
-);
-
-
-
---border-blue:
-
-rgba(
-    0,
-    183,
-    255,
-    0.35
-);
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   TYPOGRAPHY SYSTEM
-   ========================================================================== */
-
-
---font-primary:
-
-"Inter",
-"Segoe UI",
-Arial,
-sans-serif;
-
-
-
---font-tamil:
-
-"Noto Sans Tamil",
-"Latha",
-sans-serif;
-
-
-
---font-serif:
-
-Georgia,
-serif;
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   SPACING SYSTEM
-   ========================================================================== */
-
-
---space-xs:
-
-8px;
-
-
---space-sm:
-
-16px;
-
-
---space-md:
-
-32px;
-
-
---space-lg:
-
-64px;
-
-
---space-xl:
-
-96px;
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   CORNER SYSTEM
-   ========================================================================== */
-
-
---radius-sm:
-
-12px;
-
-
---radius-md:
-
-24px;
-
-
---radius-lg:
-
-36px;
-
-
---radius-pill:
-
-999px;
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   SHADOW SYSTEM
-   ========================================================================== */
-
-
---shadow-premium:
-
-0 25px 70px rgba(
-    0,
-    0,
-    0,
-    0.35
-);
-
-
-
---shadow-gold:
-
-0 0 40px rgba(
-    217,
-    181,
-    106,
-    0.25
-);
-
-
-
---shadow-blue:
-
-0 0 45px rgba(
-    0,
-    183,
-    255,
-    0.35
-);
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   GLOBAL BACKGROUND LOCK
-
-   All pages inherit the same universe.
-
-   ========================================================================== */
-
-
-html,
-body {
-
-
-    background:
-
-    var(--ctm-background);
-
+.text-primary {
 
 
     color:
@@ -399,111 +268,47 @@ body {
     var(--text-primary);
 
 
-
 }
 
 
 
-
-
-
-
-
-body {
-
-
-    font-family:
-
-    var(--font-primary);
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   COMMON SURFACE CLASSES
-   ========================================================================== */
-
-
-.ctm-surface {
-
-
-    background:
-
-    var(--ctm-surface);
-
-
-
-    border:
-
-    1px solid var(--border-soft);
-
-
-
-    border-radius:
-
-    var(--radius-md);
-
-
-
-}
-
-
-
-
-
-
-
-
-.ctm-glass {
-
-
-    background:
-
-    var(--ctm-glass);
-
-
-
-    backdrop-filter:
-
-    blur(12px);
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   BRAND TEXT HELPERS
-   ========================================================================== */
-
-
-.gold-text {
+.text-secondary {
 
 
     color:
 
-    var(--ctm-gold);
+    var(--text-secondary);
 
 
 }
 
 
 
-.teal-text {
+.text-muted {
+
+
+    color:
+
+    var(--text-muted);
+
+
+}
+
+
+
+.text-gold {
+
+
+    color:
+
+    var(--ctm-gold-soft);
+
+
+}
+
+
+
+.text-teal {
 
 
     color:
@@ -515,12 +320,36 @@ body {
 
 
 
-.primary-text {
 
 
-    color:
 
-    var(--text-primary);
+
+
+
+/* ==========================================================================
+   PREMIUM SURFACES
+   ========================================================================== */
+
+
+.surface {
+
+
+    background:
+
+    var(--surface-glass);
+
+
+
+    border:
+
+    1px solid var(--border-soft);
+
+
+
+    backdrop-filter:
+
+    blur(14px);
+
 
 
 }
@@ -532,11 +361,297 @@ body {
 
 
 
+
 /* ==========================================================================
-   END OF FILE
-
-   css/theme.css
-
-   Version 2.0
-
+   PREMIUM CARD STYLE
    ========================================================================== */
+
+
+.premium-card {
+
+
+    background:
+
+    linear-gradient(
+
+        145deg,
+
+        rgba(255,255,255,0.06),
+
+        rgba(255,255,255,0.02)
+
+    );
+
+
+
+    border:
+
+    1px solid rgba(201,162,39,0.22);
+
+
+
+    border-radius:
+
+    var(--radius-md);
+
+
+
+    box-shadow:
+
+    var(--shadow-soft);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   BRAND GLOW EFFECTS
+   ========================================================================== */
+
+
+.gold-glow {
+
+
+    box-shadow:
+
+    var(--shadow-gold);
+
+
+
+}
+
+
+
+.teal-glow {
+
+
+    box-shadow:
+
+    var(--shadow-teal);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   PREMIUM BUTTON THEME
+   ========================================================================== */
+
+
+.btn-primary {
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        var(--ctm-teal),
+
+        #008FD1
+
+    );
+
+
+
+    color:
+
+    white;
+
+
+
+    box-shadow:
+
+    0 15px 40px rgba(0,199,217,0.25);
+
+
+
+}
+
+
+
+.btn-primary:hover {
+
+
+    box-shadow:
+
+    0 20px 55px rgba(0,199,217,0.35);
+
+
+
+}
+
+
+
+
+
+
+
+.btn-secondary {
+
+
+    background:
+
+    transparent;
+
+
+
+    color:
+
+    var(--ctm-gold-soft);
+
+
+
+    border:
+
+    1px solid var(--ctm-gold);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   DIVIDERS
+   ========================================================================== */
+
+
+.gold-divider {
+
+
+    width:
+
+    80px;
+
+
+
+    height:
+
+    2px;
+
+
+
+    background:
+
+    var(--ctm-gold);
+
+
+
+    margin:
+
+    24px auto;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   BRAND TYPOGRAPHY
+   ========================================================================== */
+
+
+.brand-title {
+
+
+    color:
+
+    var(--ctm-ivory);
+
+
+
+    letter-spacing:
+
+    .08em;
+
+
+
+}
+
+
+
+.brand-subtitle {
+
+
+    color:
+
+    var(--ctm-gold-soft);
+
+
+
+    letter-spacing:
+
+    .25em;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   GLOBAL LINK STYLE
+   ========================================================================== */
+
+
+a {
+
+
+    transition:
+
+    color var(--transition-fast);
+
+
+
+}
+
+
+
+a:hover {
+
+
+    color:
+
+    var(--ctm-teal);
+
+
+
+}
+
