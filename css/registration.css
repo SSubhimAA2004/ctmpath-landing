@@ -5,344 +5,35 @@
    File        : css/registration.css
    Version     : 1.0
 
-   Status      : 🔒 PREMIUM REGISTRATION DESIGN SYSTEM
-
-
-   Page:
-
-   02 — Registration
+   Status      : PREMIUM REGISTRATION DESIGN SYSTEM
 
 
    ========================================================================== */
 
 
 
-
-
-/* ==========================================================================
-   REGISTRATION PAGE
-   ========================================================================== */
+/* ==========================================================
+   PAGE CONTAINER
+   ========================================================== */
 
 
 .registration-page {
 
+    width:100%;
 
-    min-height:
+    min-height:100vh;
 
-    100vh;
-
-
-
-    padding:
-
-    70px 40px;
-
-
-
-    background:
-
-    radial-gradient(
-
-        circle at top,
-
-        rgba(18,55,110,0.45),
-
-        transparent 45%
-
-    ),
-
-    var(--ctm-navy);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   HERO
-   ========================================================================== */
-
-
-.registration-hero {
-
-
-    max-width:
-
-    900px;
-
-
-
-    margin:
-
-    0 auto 50px;
-
-
-
-    text-align:
-
-    center;
-
-
-
-}
-
-
-
-.registration-title {
-
-
-    font-size:
-
-    clamp(
-
-        38px,
-
-        4vw,
-
-        58px
-
-    );
-
-
-
-    line-height:
-
-    1.25;
-
-
-
-    color:
-
-    var(--ctm-ivory);
-
-
-
-    font-weight:
-
-    700;
-
-
-
-    margin-bottom:
-
-    20px;
-
-
-
-}
-
-
-
-.registration-subtitle {
-
-
-    font-size:
-
-    22px;
-
-
-
-    letter-spacing:
-
-    .15em;
-
-
-
-    color:
-
-    var(--ctm-gold-soft);
-
-
-
-    margin-bottom:
-
-    25px;
-
-
-
-}
-
-
-
-.registration-description {
-
-
-    max-width:
-
-    800px;
-
-
-
-    margin:
-
-    0 auto 12px;
-
-
-
-    color:
-
-    var(--text-secondary);
-
-
-
-    font-size:
-
-    18px;
-
-
-
-    line-height:
-
-    1.8;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   FORM CARD
-   ========================================================================== */
-
-
-.registration-card {
-
-
-    max-width:
-
-    850px;
-
-
-
-    margin:
-
-    0 auto;
-
-
-
-    padding:
-
-    50px;
-
-
+    padding:80px 24px 100px;
 
     background:
 
     linear-gradient(
-
-        145deg,
-
-        rgba(255,255,255,0.08),
-
-        rgba(255,255,255,0.03)
-
+        180deg,
+        #081C3A 0%,
+        #06152D 100%
     );
 
-
-
-    border:
-
-    1px solid rgba(
-
-        201,
-
-        162,
-
-        39,
-
-        0.25
-
-    );
-
-
-
-    border-radius:
-
-    32px;
-
-
-
-    box-shadow:
-
-    var(--shadow-soft);
-
-
-
-    backdrop-filter:
-
-    blur(18px);
-
-
-
-}
-
-
-
-.registration-card h2 {
-
-
-    text-align:
-
-    center;
-
-
-
-    font-size:
-
-    34px;
-
-
-
-    color:
-
-    var(--ctm-ivory);
-
-
-
-    margin-bottom:
-
-    8px;
-
-
-
-}
-
-
-
-.form-heading {
-
-
-    text-align:
-
-    center;
-
-
-
-    color:
-
-    var(--ctm-teal);
-
-
-
-    margin-bottom:
-
-    35px;
-
-
+    color:#F7F3EA;
 
 }
 
@@ -354,57 +45,201 @@
 
 
 
-/* ==========================================================================
-   FORM STRUCTURE
-   ========================================================================== */
+/* ==========================================================
+   HERO
+   ========================================================== */
+
+
+.registration-hero {
+
+    max-width:900px;
+
+    margin:0 auto 60px;
+
+    text-align:center;
+
+}
+
+
+
+.page-title {
+
+    font-size:48px;
+
+    line-height:1.25;
+
+    font-weight:700;
+
+    letter-spacing:-0.5px;
+
+    margin-bottom:24px;
+
+}
+
+
+
+.page-title span {
+
+    display:block;
+
+    margin-top:16px;
+
+    font-size:18px;
+
+    font-weight:400;
+
+    color:#16B8D4;
+
+    letter-spacing:1px;
+
+}
+
+
+
+
+
+.page-description {
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    color:#D8E2F0;
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================
+   FORM WIDTH
+   ========================================================== */
 
 
 .registration-form {
 
+    max-width:760px;
 
-    display:
+    margin:auto;
 
-    flex;
-
-
-
-    flex-direction:
-
-    column;
+}
 
 
 
-    gap:
 
-    24px;
 
+
+
+
+
+/* ==========================================================
+   FORM CARD
+   ========================================================== */
+
+
+.form-card {
+
+
+    background:
+
+    rgba(255,255,255,0.04);
+
+
+    border:
+
+    1px solid rgba(212,175,55,0.25);
+
+
+    border-radius:24px;
+
+
+    padding:36px;
+
+
+    margin-bottom:28px;
+
+
+    backdrop-filter:blur(10px);
 
 
 }
 
 
 
+
+
+
+
+
+
+.form-card-header {
+
+
+    margin-bottom:30px;
+
+
+}
+
+
+
+.form-card-header h2 {
+
+
+    font-size:30px;
+
+
+    margin:0;
+
+
+    color:#F7F3EA;
+
+
+}
+
+
+
+.form-card-header span {
+
+
+    display:block;
+
+
+    margin-top:8px;
+
+
+    color:#16B8D4;
+
+
+    font-size:14px;
+
+
+    letter-spacing:1px;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================
+   FORM GROUP
+   ========================================================== */
 
 
 .form-group {
 
 
-    display:
-
-    flex;
-
-
-
-    flex-direction:
-
-    column;
-
-
-
-    gap:
-
-    10px;
-
+    margin-bottom:24px;
 
 
 }
@@ -414,47 +249,38 @@
 .form-group label {
 
 
-    color:
-
-    var(--ctm-ivory);
+    display:flex;
 
 
-
-    font-size:
-
-    17px;
+    flex-direction:column;
 
 
+    gap:6px;
 
-    font-weight:
 
-    600;
+    font-size:18px;
 
+
+    font-weight:600;
+
+
+    margin-bottom:10px;
 
 
 }
 
 
 
-.form-group label span {
+.form-group label small {
 
 
-    color:
-
-    var(--text-muted);
+    font-size:13px;
 
 
-
-    font-size:
-
-    14px;
+    color:#16B8D4;
 
 
-
-    font-weight:
-
-    400;
-
+    font-weight:400;
 
 
 }
@@ -464,117 +290,66 @@
 
 
 
-
-
-
-/* ==========================================================================
-   INPUTS
-   ========================================================================== */
 
 
 .form-group input,
-.form-group select {
 
 
-    width:
-
-    100%;
+.form-card select {
 
 
-
-    padding:
-
-    16px 20px;
+    width:100%;
 
 
+    padding:16px 18px;
 
-    border-radius:
 
-    14px;
-
+    border-radius:14px;
 
 
     border:
 
-    1px solid rgba(
-
-        255,
-
-        255,
-
-        255,
-
-        .15
-
-    );
-
+    1px solid rgba(255,255,255,0.15);
 
 
     background:
 
-    rgba(
-
-        255,
-
-        255,
-
-        255,
-
-        .05
-
-    );
+    rgba(255,255,255,0.08);
 
 
-
-    color:
-
-    var(--ctm-ivory);
+    color:#FFFFFF;
 
 
-
-    font-size:
-
-    17px;
+    font-size:16px;
 
 
+    outline:none;
 
-    outline:
 
-    none;
-
+    transition:.3s ease;
 
 
 }
 
 
 
-.form-group input::placeholder {
 
 
-    color:
-
-    var(--text-muted);
-
-
-
-}
 
 
 
 .form-group input:focus,
-.form-group select:focus {
 
 
-    border-color:
+.form-card select:focus {
 
-    var(--ctm-teal);
 
+    border-color:#16B8D4;
 
 
     box-shadow:
 
-    var(--shadow-teal);
-
+    0 0 0 3px rgba(22,184,212,.15);
 
 
 }
@@ -587,125 +362,116 @@
 
 
 
-/* ==========================================================================
+/* ==========================================================
+   FIELD DESCRIPTION
+   ========================================================== */
+
+
+.field-description {
+
+
+    color:#D8E2F0;
+
+
+    line-height:1.7;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================
    LANGUAGE OPTIONS
-   ========================================================================== */
+   ========================================================== */
 
 
 .language-options {
 
 
-    display:
-
-    flex;
+    display:flex;
 
 
-
-    gap:
-
-    20px;
-
+    gap:20px;
 
 
 }
 
 
 
-.option-card {
+.language-option {
 
 
-    flex:
-
-    1;
+    flex:1;
 
 
-
-    padding:
-
-    18px;
+    cursor:pointer;
 
 
-
-    border-radius:
-
-    16px;
+}
 
 
 
-    text-align:
+.language-option input {
 
-    center;
 
+    display:none;
+
+
+}
+
+
+
+.language-option span {
+
+
+    display:block;
+
+
+    text-align:center;
+
+
+    padding:20px;
+
+
+    border-radius:18px;
 
 
     border:
 
-    1px solid rgba(
-
-        201,
-
-        162,
-
-        39,
-
-        .25
-
-    );
-
-
-
-    cursor:
-
-    pointer;
-
-
-
-    color:
-
-    var(--ctm-ivory);
-
-
-
-}
-
-
-
-.option-card input {
-
-
-    display:
-
-    none;
-
-
-
-}
-
-
-
-.option-card:has(input:checked) {
+    1px solid rgba(212,175,55,.25);
 
 
     background:
 
-    rgba(
+    rgba(255,255,255,.03);
 
-        0,
 
-        199,
+    font-size:22px;
 
-        217,
 
-        .12
-
-    );
+}
 
 
 
-    border-color:
+.language-option small {
 
-    var(--ctm-teal);
 
+    display:block;
+
+
+    margin-top:8px;
+
+
+    color:#16B8D4;
+
+
+    font-size:14px;
 
 
 }
@@ -718,65 +484,84 @@
 
 
 
-/* ==========================================================================
+.language-option input:checked + span {
+
+
+    background:
+
+    rgba(22,184,212,.15);
+
+
+    border-color:#16B8D4;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================
    CONSENT
-   ========================================================================== */
+   ========================================================== */
 
 
-.consent-box {
+.consent-card {
 
 
-    padding:
-
-    20px;
+    padding:24px;
 
 
+    margin-bottom:35px;
 
-    border-radius:
 
-    16px;
-
+    border-radius:18px;
 
 
     background:
 
-    rgba(
-
-        255,
-
-        255,
-
-        255,
-
-        .04
-
-    );
+    rgba(255,255,255,.03);
 
 
+    border:
 
-    color:
-
-    var(--text-secondary);
-
-
-
-    line-height:
-
-    1.7;
-
+    1px solid rgba(255,255,255,.1);
 
 
 }
 
 
 
-.consent-box input {
+.consent-card label {
 
 
-    margin-right:
+    display:flex;
 
-    12px;
 
+    gap:14px;
+
+
+    line-height:1.7;
+
+
+    color:#D8E2F0;
+
+
+}
+
+
+
+.consent-card input {
+
+
+    width:20px;
+
+
+    height:20px;
 
 
 }
@@ -789,24 +574,18 @@
 
 
 
-/* ==========================================================================
+/* ==========================================================
    CTA BUTTON
-   ========================================================================== */
+   ========================================================== */
 
 
 .registration-action {
 
 
-    margin-top:
-
-    20px;
+    text-align:center;
 
 
-
-    text-align:
-
-    center;
-
+    margin-top:30px;
 
 
 }
@@ -816,60 +595,45 @@
 .continue-button {
 
 
-    padding:
-
-    18px 55px;
+    min-width:320px;
 
 
+    padding:20px 36px;
 
-    border-radius:
 
-    999px;
+    border:none;
 
+
+    border-radius:50px;
+
+
+    cursor:pointer;
 
 
     background:
 
     linear-gradient(
-
         135deg,
-
-        var(--ctm-teal),
-
-        #007ED0
-
+        #16B8D4,
+        #0077CC
     );
 
 
-
-    color:
-
-    white;
+    color:white;
 
 
-
-    font-size:
-
-    20px;
+    font-size:20px;
 
 
-
-    font-weight:
-
-    700;
-
+    font-weight:700;
 
 
     box-shadow:
 
-    var(--shadow-teal);
+    0 15px 40px rgba(0,119,204,.35);
 
 
-
-    transition:
-
-    transform .3s ease;
-
+    transition:.3s ease;
 
 
 }
@@ -879,10 +643,23 @@
 .continue-button:hover {
 
 
-    transform:
+    transform:translateY(-3px);
 
-    translateY(-4px);
 
+}
+
+
+
+.continue-button small {
+
+
+    display:block;
+
+
+    font-size:14px;
+
+
+    margin-top:6px;
 
 
 }
@@ -895,36 +672,24 @@
 
 
 
-/* ==========================================================================
-   PRIVACY NOTE
-   ========================================================================== */
+/* ==========================================================
+   SECURITY NOTE
+   ========================================================== */
 
 
-.privacy-note {
+.security-note {
 
 
-    text-align:
-
-    center;
+    text-align:center;
 
 
-
-    margin:
-
-    35px auto;
+    margin-top:35px;
 
 
-
-    color:
-
-    var(--text-muted);
+    color:#AFC2D8;
 
 
-
-    font-size:
-
-    14px;
-
+    line-height:1.8;
 
 
 }
@@ -937,51 +702,61 @@
 
 
 
-/* ==========================================================================
+/* ==========================================================
    RESPONSIVE
-   ========================================================================== */
+   ========================================================== */
 
 
-@media(max-width:700px){
+@media(max-width:768px){
 
 
-
-.registration-page{
-
-
-    padding:
-
-    40px 20px;
+    .registration-page {
 
 
+        padding:50px 16px;
 
-}
+
+    }
 
 
 
-.registration-card{
+    .page-title {
 
 
-    padding:
-
-    30px 22px;
+        font-size:34px;
 
 
-
-}
+    }
 
 
 
-.language-options{
+    .form-card {
 
 
-    flex-direction:
-
-    column;
+        padding:24px;
 
 
+    }
 
-}
+
+
+    .language-options {
+
+
+        flex-direction:column;
+
+
+    }
+
+
+
+    .continue-button {
+
+
+        width:100%;
+
+
+    }
 
 
 
