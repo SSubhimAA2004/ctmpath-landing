@@ -3,62 +3,75 @@
    CTM PATH™ Guided Journey™
 
    File        : js/navigation.js
-   Version     : 2.5
+   Version     : 2.6
 
-   Status      : PAGE 01 GATEWAY LOCK
-
-   Purpose:
-
-   Global journey navigation controller.
+   Status      : FINAL JOURNEY NAVIGATION CONNECTOR
 
 
    Responsibilities:
 
-   ✓ Control journey movement
-   ✓ Manage Previous visibility
-   ✓ Manage Continue visibility
+   ✓ Handle journey controls
+   ✓ Dispatch navigation events
+   ✓ Control navigator visibility
    ✓ Update journey counter
-   ✓ Dispatch page change events
-   ✓ Protect Page 01 gateway experience
 
 
    Does NOT:
 
-   ✗ Render pages
-   ✗ Load HTML
-   ✗ Handle API
-   ✗ Handle assessment logic
+   ✗ Load pages
+   ✗ Inject HTML
+   ✗ Handle business logic
 
 
-   Architecture Rule:
+   Architecture:
 
-   PAGE 01 = Gateway Experience
-
-   Pages 02-18 = Guided Journey Flow
+   navigation.js
+          |
+          ↓
+   ctm-page-change event
+          |
+          ↓
+   app.js
+          |
+          ↓
+   pages/*.html
 
 
    ========================================================================== */
+
 
 
 const Navigation = (() => {
 
 
 
-    let currentPage = 1;
+    let currentPage = 2;
 
 
     const totalPages = 18;
 
 
+    let initialized = false;
 
 
 
-    /* ==========================================================
-       INITIALIZE
-       ========================================================== */
+
+
+
+
 
 
     function init(){
+
+
+        if(initialized){
+
+            return;
+
+        }
+
+
+        initialized = true;
 
 
         bindEvents();
@@ -75,11 +88,6 @@ const Navigation = (() => {
 
 
 
-
-
-    /* ==========================================================
-       EVENT BINDING
-       ========================================================== */
 
 
     function bindEvents(){
@@ -122,25 +130,28 @@ const Navigation = (() => {
 
 
 
-                if(action === "previous"){
-
-
-                    goPrevious();
-
-
-                }
-
-
-
-
 
                 if(action === "continue"){
 
 
-                    goNext();
+                    next();
 
 
                 }
+
+
+
+
+
+
+                if(action === "previous"){
+
+
+                    previous();
+
+
+                }
+
 
 
 
@@ -160,31 +171,23 @@ const Navigation = (() => {
 
 
 
-
-    /* ==========================================================
-       NEXT PAGE
-       ========================================================== */
-
-
-    function goNext(){
+    function next(){
 
 
 
-        if(currentPage < totalPages){
+        if(currentPage >= totalPages){
 
-
-
-            currentPage++;
-
-
-
-            loadPage(
-                currentPage
-            );
-
-
+            return;
 
         }
+
+
+
+        currentPage++;
+
+
+        dispatch();
+
 
 
     }
@@ -197,29 +200,23 @@ const Navigation = (() => {
 
 
 
-    /* ==========================================================
-       PREVIOUS PAGE
-       ========================================================== */
-
-
-    function goPrevious(){
+    function previous(){
 
 
 
-        if(currentPage > 1){
+        if(currentPage <= 2){
 
-
-
-            currentPage--;
-
-
-
-            loadPage(
-                currentPage
-            );
-
+            return;
 
         }
+
+
+
+        currentPage--;
+
+
+        dispatch();
+
 
 
     }
@@ -232,16 +229,12 @@ const Navigation = (() => {
 
 
 
-    /* ==========================================================
-       PAGE CHANGE EVENT
-       ========================================================== */
-
-
-    function loadPage(pageNumber){
+    function dispatch(){
 
 
 
         document.dispatchEvent(
+
 
 
             new CustomEvent(
@@ -253,16 +246,15 @@ const Navigation = (() => {
                     detail:{
 
 
-                        page:pageNumber
+                        page: currentPage
 
 
                     }
 
-
                 }
 
-
             )
+
 
 
         );
@@ -283,11 +275,6 @@ const Navigation = (() => {
 
 
 
-    /* ==========================================================
-       NAVIGATION VISIBILITY CONTROL
-       ========================================================== */
-
-
     function updateNavigation(){
 
 
@@ -304,48 +291,9 @@ const Navigation = (() => {
 
 
 
-
-        /*
-            PAGE 01
-
-            Welcome gateway.
-
-            No global navigator.
-        */
-
-
-        if(currentPage === 1){
-
-
-
-            if(navigation){
-
-
-
-                navigation.classList.add(
-
-                    "hidden"
-
-                );
-
-
-
-                navigation.style.display =
-
-                "none";
-
-
-
-            }
-
-
-
-            updateCounter();
-
-
+        if(!navigation){
 
             return;
-
 
         }
 
@@ -354,24 +302,19 @@ const Navigation = (() => {
 
 
 
-
-
-        /*
-            PAGE 02 - 18
-
-            Enable navigator.
-        */
-
-
-        if(navigation){
+        if(currentPage <= 1){
 
 
 
-            navigation.classList.remove(
+            navigation.style.display =
 
-                "hidden"
+            "none";
 
-            );
+
+
+        }
+
+        else {
 
 
 
@@ -382,6 +325,7 @@ const Navigation = (() => {
 
 
         }
+
 
 
 
@@ -402,11 +346,6 @@ const Navigation = (() => {
 
 
 
-    /* ==========================================================
-       COUNTER
-       ========================================================== */
-
-
     function updateCounter(){
 
 
@@ -422,12 +361,12 @@ const Navigation = (() => {
 
 
 
+
         if(counter){
 
 
 
             counter.textContent =
-
 
             String(currentPage)
 
@@ -459,10 +398,35 @@ const Navigation = (() => {
 
 
 
+    function setPage(page){
+
+
+
+        currentPage = page;
+
+
+        updateNavigation();
+
+
+
+    }
+
+
+
+
+
+
+
+
+
     return {
 
 
+
         init,
+
+
+        setPage,
 
 
         updateNavigation,
@@ -490,19 +454,5 @@ const Navigation = (() => {
 
 
 
+window.Navigation = Navigation;
 
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    ()=>{
-
-
-        Navigation.init();
-
-
-    }
-
-
-);
