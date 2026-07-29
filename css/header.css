@@ -3,24 +3,22 @@
    CTM PATH™ Guided Journey™
 
    File        : css/header.css
-   Version     : 4.0
-   Status      : Premium Global Header
+   Version     : 5.0
+   Status      : Premium Executive Header
    Architecture: Static HTML + CSS + Vanilla JavaScript
+
    --------------------------------------------------------------------------
 
-   PURPOSE
+   DESIGN OBJECTIVES
 
-   Premium styling for the global site header.
-
-   Covers:
-
-   • Sticky Header
-   • Glass Navigation
-   • Brand Area
-   • Navigation Links
-   • CTA Button
-   • Scroll States
-   • Responsive Layout
+   ✓ Premium floating navigation
+   ✓ Stronger brand hierarchy
+   ✓ Larger executive logo
+   ✓ Glassmorphism
+   ✓ Rich lighting
+   ✓ Hero integration
+   ✓ Desktop-first
+   ✓ HTML preserved
 
 ========================================================================== */
 
@@ -54,12 +52,35 @@
 
         1000;
 
+    padding:
+
+        18px 0;
+
+    background:
+
+        rgba(5,12,20,.32);
+
+    backdrop-filter:
+
+        blur(26px);
+
+    -webkit-backdrop-filter:
+
+        blur(26px);
+
+    border-bottom:
+
+        1px solid rgba(255,255,255,.05);
+
     transition:
 
         background .45s ease,
-        border-color .45s ease,
+
+        padding .45s ease,
+
         box-shadow .45s ease,
-        padding .45s ease;
+
+        border-color .45s ease;
 
 }
 
@@ -67,27 +88,85 @@
 
 
 
-.site-header.scrolled{
+.site-header::before{
+
+    content:
+
+        "";
+
+    position:
+
+        absolute;
+
+    inset:
+
+        0;
 
     background:
 
-        rgba(8,16,24,.88);
+        linear-gradient(
 
-    backdrop-filter:
+            180deg,
 
-        blur(18px);
+            rgba(35,212,200,.10),
 
-    -webkit-backdrop-filter:
+            rgba(35,212,200,0)
 
-        blur(18px);
+        );
 
-    border-bottom:
+    opacity:
 
-        1px solid rgba(255,255,255,.08);
+        .65;
 
-    box-shadow:
+    pointer-events:
 
-        0 12px 42px rgba(0,0,0,.28);
+        none;
+
+}
+
+
+
+
+
+.site-header::after{
+
+    content:
+
+        "";
+
+    position:
+
+        absolute;
+
+    left:
+
+        0;
+
+    right:
+
+        0;
+
+    bottom:
+
+        0;
+
+    height:
+
+        1px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            rgba(201,162,39,.75),
+
+            transparent
+
+        );
 
 }
 
@@ -96,14 +175,46 @@
 
 
 /* ==========================================================================
+   SCROLLED HEADER
+========================================================================== */
+
+.site-header.scrolled{
+
+    padding:
+
+        12px 0;
+
+    background:
+
+        rgba(4,10,18,.82);
+
+    border-bottom:
+
+        1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+
+        0 18px 60px rgba(0,0,0,.40);
+
+}
+
+/* ==========================================================================
    HEADER CONTAINER
 ========================================================================== */
 
 .header-container{
 
+    position:
+
+        relative;
+
+    z-index:
+
+        2;
+
     width:
 
-        min(1320px,100% - 48px);
+        min(1440px,calc(100% - 64px));
 
     margin:
 
@@ -123,27 +234,7 @@
 
     gap:
 
-        2rem;
-
-    padding:
-
-        1.15rem 0;
-
-    transition:
-
-        padding .35s ease;
-
-}
-
-
-
-
-
-.site-header.scrolled .header-container{
-
-    padding:
-
-        .85rem 0;
+        3rem;
 
 }
 
@@ -167,31 +258,35 @@
 
     gap:
 
-        1rem;
+        1.25rem;
 
     text-decoration:
 
         none;
 
-}
-
-/* ==========================================================================
-   BRAND IDENTITY
-========================================================================== */
-
-.header-logo{
-
-    width:
-
-        54px;
-
-    height:
-
-        54px;
-
     flex-shrink:
 
         0;
+
+}
+
+
+
+
+
+.header-logo{
+
+    position:
+
+        relative;
+
+    width:
+
+        72px;
+
+    height:
+
+        72px;
 
     border-radius:
 
@@ -205,9 +300,9 @@
 
         linear-gradient(
 
-            135deg,
+            145deg,
 
-            rgba(35,212,200,.16),
+            rgba(35,212,200,.18),
 
             rgba(201,162,39,.10)
 
@@ -219,7 +314,47 @@
 
     box-shadow:
 
-        0 12px 32px rgba(0,0,0,.24);
+        0 0 0 1px rgba(35,212,200,.08),
+
+        0 16px 40px rgba(0,0,0,.35),
+
+        0 0 42px rgba(35,212,200,.14);
+
+}
+
+
+
+
+
+.header-logo::after{
+
+    content:
+
+        "";
+
+    position:
+
+        absolute;
+
+    inset:
+
+        0;
+
+    background:
+
+        radial-gradient(
+
+            circle at 30% 25%,
+
+            rgba(255,255,255,.28),
+
+            transparent 48%
+
+        );
+
+    pointer-events:
+
+        none;
 
 }
 
@@ -257,25 +392,29 @@
 
         column;
 
+    justify-content:
+
+        center;
+
     gap:
 
-        .25rem;
+        .28rem;
 
 }
 
-
-
-
+/* ==========================================================================
+   BRAND TYPOGRAPHY
+========================================================================== */
 
 .header-title{
 
     color:
 
-        var(--text-heading);
+        var(--ctm-white);
 
     font-size:
 
-        1.18rem;
+        clamp(1.55rem,1.4vw,1.9rem);
 
     font-weight:
 
@@ -283,11 +422,47 @@
 
     letter-spacing:
 
-        .04em;
+        .08em;
 
     line-height:
 
-        1.1;
+        1;
+
+    text-transform:
+
+        uppercase;
+
+    text-shadow:
+
+        0 2px 16px rgba(0,0,0,.28);
+
+}
+
+
+
+
+
+.header-subtitle{
+
+    color:
+
+        var(--ctm-gold-soft);
+
+    font-size:
+
+        .78rem;
+
+    font-weight:
+
+        600;
+
+    letter-spacing:
+
+        .32em;
+
+    text-transform:
+
+        uppercase;
 
 }
 
@@ -299,19 +474,19 @@
 
     color:
 
-        var(--text-support);
+        rgba(255,255,255,.78);
 
     font-size:
 
-        .82rem;
+        .92rem;
 
-    letter-spacing:
+    font-weight:
 
-        .18em;
+        500;
 
-    text-transform:
+    line-height:
 
-        uppercase;
+        1.45;
 
 }
 
@@ -333,9 +508,13 @@
 
         center;
 
-    gap:
+    justify-content:
 
-        2rem;
+        center;
+
+    flex:
+
+        1;
 
 }
 
@@ -355,7 +534,19 @@
 
     gap:
 
-        2rem;
+        clamp(2rem,2.8vw,3.6rem);
+
+    list-style:
+
+        none;
+
+    margin:
+
+        0;
+
+    padding:
+
+        0;
 
 }
 
@@ -369,17 +560,29 @@
 
         relative;
 
+    display:
+
+        inline-flex;
+
+    align-items:
+
+        center;
+
+    height:
+
+        52px;
+
     color:
 
-        var(--text-secondary);
+        rgba(255,255,255,.82);
 
     font-size:
 
-        .96rem;
+        .98rem;
 
     font-weight:
 
-        500;
+        600;
 
     letter-spacing:
 
@@ -387,15 +590,17 @@
 
     transition:
 
-        color .30s ease;
+        color .35s ease,
+
+        transform .35s ease;
 
 }
 
 /* ==========================================================================
-   NAVIGATION LINKS
+   NAVIGATION STATES
 ========================================================================== */
 
-.header-nav a::after{
+.header-nav a::before{
 
     content:
 
@@ -407,19 +612,19 @@
 
     left:
 
-        0;
+        50%;
 
     bottom:
 
-        -8px;
+        -10px;
 
     width:
 
-        100%;
+        0;
 
     height:
 
-        2px;
+        3px;
 
     border-radius:
 
@@ -439,15 +644,11 @@
 
     transform:
 
-        scaleX(0);
-
-    transform-origin:
-
-        center;
+        translateX(-50%);
 
     transition:
 
-        transform .35s ease;
+        width .35s ease;
 
 }
 
@@ -461,7 +662,11 @@
 
     color:
 
-        var(--text-primary);
+        var(--ctm-white);
+
+    transform:
+
+        translateY(-2px);
 
 }
 
@@ -469,15 +674,15 @@
 
 
 
-.header-nav a:hover::after,
+.header-nav a:hover::before,
 
-.header-nav a:focus-visible::after,
+.header-nav a:focus-visible::before,
 
-.header-nav a.active::after{
+.header-nav a.active::before{
 
-    transform:
+    width:
 
-        scaleX(1);
+        100%;
 
 }
 
@@ -489,7 +694,7 @@
 
     color:
 
-        var(--ctm-teal-soft);
+        var(--ctm-white);
 
 }
 
@@ -498,7 +703,7 @@
 
 
 /* ==========================================================================
-   HEADER CTA
+   HEADER ACTIONS
 ========================================================================== */
 
 .header-actions{
@@ -511,15 +716,27 @@
 
         center;
 
+    justify-content:
+
+        flex-end;
+
     gap:
 
         1rem;
+
+    flex-shrink:
+
+        0;
 
 }
 
 
 
 
+
+/* ==========================================================================
+   PREMIUM CTA
+========================================================================== */
 
 .header-cta{
 
@@ -535,17 +752,21 @@
 
         center;
 
-    min-height:
+    min-width:
 
-        48px;
+        220px;
+
+    height:
+
+        58px;
 
     padding:
 
-        .85rem 1.75rem;
+        0 2rem;
 
     border-radius:
 
-        var(--radius-pill);
+        999px;
 
     background:
 
@@ -553,7 +774,7 @@
 
             135deg,
 
-            var(--ctm-teal),
+            #23D4C8,
 
             #1298D8
 
@@ -561,19 +782,29 @@
 
     color:
 
-        var(--ctm-white);
+        #FFFFFF;
+
+    font-size:
+
+        .96rem;
 
     font-weight:
 
-        600;
+        700;
 
     letter-spacing:
 
-        .02em;
+        .04em;
+
+    text-transform:
+
+        uppercase;
 
     box-shadow:
 
-        0 14px 34px rgba(35,212,200,.24);
+        0 12px 36px rgba(35,212,200,.28),
+
+        0 0 42px rgba(35,212,200,.14);
 
     transition:
 
@@ -595,7 +826,7 @@
 
     transform:
 
-        translateY(-2px);
+        translateY(-3px);
 
     filter:
 
@@ -603,12 +834,14 @@
 
     box-shadow:
 
-        0 20px 48px rgba(35,212,200,.34);
+        0 20px 56px rgba(35,212,200,.38),
+
+        0 0 60px rgba(35,212,200,.20);
 
 }
 
 /* ==========================================================================
-   MOBILE NAVIGATION TOGGLE
+   MOBILE TOGGLE
 ========================================================================== */
 
 .header-toggle{
@@ -627,39 +860,39 @@
 
     width:
 
-        48px;
+        56px;
 
     height:
 
-        48px;
-
-    border-radius:
-
-        var(--radius-pill);
+        56px;
 
     border:
 
         1px solid rgba(255,255,255,.08);
 
+    border-radius:
+
+        50%;
+
     background:
 
         rgba(255,255,255,.03);
 
+    backdrop-filter:
+
+        blur(20px);
+
+    -webkit-backdrop-filter:
+
+        blur(20px);
+
     color:
 
-        var(--text-primary);
-
-    cursor:
-
-        pointer;
+        var(--ctm-white);
 
     transition:
 
-        background .35s ease,
-
-        border-color .35s ease,
-
-        transform .35s ease;
+        all .35s ease;
 
 }
 
@@ -673,15 +906,15 @@
 
     background:
 
-        rgba(35,212,200,.08);
+        rgba(35,212,200,.10);
 
     border-color:
 
-        rgba(35,212,200,.25);
+        rgba(35,212,200,.28);
 
-    transform:
+    box-shadow:
 
-        translateY(-2px);
+        0 0 28px rgba(35,212,200,.18);
 
 }
 
@@ -709,7 +942,7 @@
    RESPONSIVE
 ========================================================================== */
 
-@media (max-width:1024px){
+@media (max-width:1100px){
 
     .header-nav{
 
@@ -727,6 +960,14 @@
 
     }
 
+    .header-container{
+
+        width:
+
+            min(100% - 40px,1440px);
+
+    }
+
 }
 
 
@@ -735,15 +976,19 @@
 
 @media (max-width:768px){
 
-    .header-container{
-
-        width:
-
-            min(100% - 32px,1320px);
+    .site-header{
 
         padding:
 
-            1rem 0;
+            12px 0;
+
+    }
+
+    .header-container{
+
+        gap:
+
+            1rem;
 
     }
 
@@ -751,11 +996,11 @@
 
         width:
 
-            46px;
+            58px;
 
         height:
 
-            46px;
+            58px;
 
     }
 
@@ -763,31 +1008,47 @@
 
         font-size:
 
-            1.05rem;
+            1.25rem;
+
+    }
+
+    .header-subtitle{
+
+        font-size:
+
+            .68rem;
+
+        letter-spacing:
+
+            .22em;
 
     }
 
     .header-tagline{
 
-        font-size:
+        display:
 
-            .74rem;
-
-        letter-spacing:
-
-            .14em;
+            none;
 
     }
 
     .header-cta{
 
+        min-width:
+
+            170px;
+
+        height:
+
+            50px;
+
         padding:
 
-            .75rem 1.35rem;
+            0 1.4rem;
 
-        min-height:
+        font-size:
 
-            44px;
+            .88rem;
 
     }
 
@@ -809,84 +1070,11 @@
 
     outline:
 
-        2px solid var(--ctm-teal-soft);
+        2px solid rgba(35,212,200,.70);
 
     outline-offset:
 
-        3px;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   END OF BATCH
-========================================================================== */
-
-
-/* ==========================================================================
-   HEADER SCROLL STATES
-========================================================================== */
-
-.site-header.is-hidden{
-
-    transform:
-
-        translateY(-100%);
-
-}
-
-
-
-
-
-.site-header.is-visible{
-
-    transform:
-
-        translateY(0);
-
-}
-
-
-
-
-
-.site-header.is-transparent{
-
-    background:
-
-        transparent;
-
-    border-bottom:
-
-        1px solid transparent;
-
-    box-shadow:
-
-        none;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   SAFE AREA SUPPORT
-========================================================================== */
-
-@supports (padding:max(0px)){
-
-    .site-header{
-
-        padding-top:
-
-            env(safe-area-inset-top);
-
-    }
+        4px;
 
 }
 
@@ -902,11 +1090,9 @@
 
     .site-header,
 
-    .header-container,
-
     .header-nav a,
 
-    .header-nav a::after,
+    .header-nav a::before,
 
     .header-cta,
 
@@ -947,4 +1133,3 @@
 /* ==========================================================================
    END OF FILE
 ========================================================================== */
-
