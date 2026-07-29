@@ -1,1 +1,482 @@
 
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : footer.css
+   Version     : 2.1
+
+   Purpose:
+
+   Premium global footer styling.
+
+   Controls:
+
+   • Footer spacing
+   • Brand signature
+   • Founder identity
+   • Closing statement
+
+   ========================================================================== */
+
+
+
+
+
+/* ==========================================================================
+   FOOTER FOUNDATION
+   ========================================================================== */
+
+
+.ctm-footer {
+
+
+    width:
+
+    100%;
+
+
+    margin-top:
+
+    120px;
+
+
+    padding:
+
+    64px 0;
+
+
+    background:
+
+    rgba(
+        8,
+        28,
+        58,
+        0.65
+    );
+
+
+    border-top:
+
+    1px solid var(--ctm-border);
+
+
+
+}
+
+
+
+
+
+
+
+.ctm-footer-container {
+
+
+    width:
+
+    min(
+        calc(100% - 120px),
+        1440px
+    );
+
+
+    margin:
+
+    0 auto;
+
+
+    display:
+
+    flex;
+
+
+    flex-direction:
+
+    column;
+
+
+    align-items:
+
+    center;
+
+
+    text-align:
+
+    center;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   BRAND SIGNATURE
+   ========================================================================== */
+
+
+.ctm-footer-brand-name {
+
+
+    color:
+
+    var(--ctm-text-primary);
+
+
+    font-family:
+
+    var(--font-primary);
+
+
+    font-size:
+
+    28px;
+
+
+    font-weight:
+
+    800;
+
+
+    letter-spacing:
+
+    0.18em;
+
+
+
+}
+
+
+
+
+
+
+
+.ctm-footer-brand-subtitle {
+
+
+    margin-top:
+
+    10px;
+
+
+    color:
+
+    var(--ctm-teal-soft);
+
+
+    font-size:
+
+    13px;
+
+
+    letter-spacing:
+
+    0.35em;
+
+
+    text-transform:
+
+    uppercase;
+
+
+
+}
+
+
+
+
+
+
+
+.ctm-footer-tagline {
+
+
+    margin-top:
+
+    18px;
+
+
+    color:
+
+    var(--ctm-gold);
+
+
+    font-family:
+
+    var(--font-serif);
+
+
+    font-size:
+
+    18px;
+
+
+    font-style:
+
+    italic;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   FOUNDER SIGNATURE
+   ========================================================================== */
+
+
+.ctm-footer-founder {
+
+
+    margin-top:
+
+    48px;
+
+
+
+}
+
+
+
+
+
+
+
+.ctm-footer-created {
+
+
+    color:
+
+    var(--ctm-text-muted);
+
+
+    font-size:
+
+    14px;
+
+
+
+}
+
+
+
+
+
+
+
+.ctm-footer-founder-name {
+
+
+    margin-top:
+
+    12px;
+
+
+    color:
+
+    var(--ctm-text-primary);
+
+
+    font-family:
+
+    var(--font-serif);
+
+
+    font-size:
+
+    24px;
+
+
+    font-weight:
+
+    700;
+
+
+
+}
+
+
+
+
+
+
+
+.ctm-footer-role {
+
+
+    margin-top:
+
+    8px;
+
+
+    color:
+
+    var(--ctm-gold-soft);
+
+
+    font-size:
+
+    15px;
+
+
+    letter-spacing:
+
+    0.08em;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   FOOTER BOTTOM
+   ========================================================================== */
+
+
+.ctm-footer-bottom {
+
+
+    margin-top:
+
+    48px;
+
+
+    padding-top:
+
+    24px;
+
+
+    width:
+
+    100%;
+
+
+    border-top:
+
+    1px solid var(--ctm-border);
+
+
+    color:
+
+    var(--ctm-text-muted);
+
+
+    font-size:
+
+    13px;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   MOBILE
+   ========================================================================== */
+
+
+@media(max-width:767px){
+
+
+.ctm-footer {
+
+
+    padding:
+
+    48px 0;
+
+
+    margin-top:
+
+    80px;
+
+
+
+}
+
+
+
+.ctm-footer-container {
+
+
+    width:
+
+    calc(
+        100% - 32px
+    );
+
+
+
+}
+
+
+
+.ctm-footer-brand-name {
+
+
+    font-size:
+
+    22px;
+
+
+
+}
+
+
+
+.ctm-footer-founder-name {
+
+
+    font-size:
+
+    20px;
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   END OF FILE
+
+   File:
+   css/footer.css
+
+   Version:
+   CTM PATH™ Premium Footer Styling v2.1
+
+   Status:
+   UPDATED 🔒
+
+   ========================================================================== */
