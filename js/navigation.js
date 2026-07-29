@@ -2,32 +2,45 @@
 /* ==========================================================================
    CTM PATH™ Guided Journey™
 
-   File        : navigation.js
+   File        : js/navigation.js
    Version     : 2.5
 
-   Status      : FINAL NAVIGATION VISIBILITY LOCK
+   Status      : PAGE 01 GATEWAY LOCK
+
+   Purpose:
+
+   Global journey navigation controller.
 
 
    Responsibilities:
 
    ✓ Control journey movement
-   ✓ Control navigation visibility
+   ✓ Manage Previous visibility
+   ✓ Manage Continue visibility
    ✓ Update journey counter
-   ✓ Dispatch router events
+   ✓ Dispatch page change events
+   ✓ Protect Page 01 gateway experience
 
 
    Does NOT:
 
-   ✗ Load pages
+   ✗ Render pages
+   ✗ Load HTML
    ✗ Handle API
    ✗ Handle assessment logic
+
+
+   Architecture Rule:
+
+   PAGE 01 = Gateway Experience
+
+   Pages 02-18 = Guided Journey Flow
 
 
    ========================================================================== */
 
 
-
-const CTMNavigation = (() => {
+const Navigation = (() => {
 
 
 
@@ -35,11 +48,6 @@ const CTMNavigation = (() => {
 
 
     const totalPages = 18;
-
-
-    let initialized = false;
-
-
 
 
 
@@ -53,24 +61,10 @@ const CTMNavigation = (() => {
     function init(){
 
 
-
-        if(initialized){
-
-            return;
-
-        }
-
-
-
-        initialized = true;
-
-
-
         bindEvents();
 
 
         updateNavigation();
-
 
 
     }
@@ -84,7 +78,7 @@ const CTMNavigation = (() => {
 
 
     /* ==========================================================
-       EVENT HANDLING
+       EVENT BINDING
        ========================================================== */
 
 
@@ -104,11 +98,9 @@ const CTMNavigation = (() => {
 
                 event.target.closest(
 
-                    "[data-action]"
+                    ".nav-button"
 
                 );
-
-
 
 
 
@@ -122,8 +114,6 @@ const CTMNavigation = (() => {
 
 
 
-
-
                 const action =
 
                 button.dataset.action;
@@ -132,15 +122,10 @@ const CTMNavigation = (() => {
 
 
 
+                if(action === "previous"){
 
 
-
-                if(action === "continue"){
-
-
-
-                    goNext();
-
+                    goPrevious();
 
 
                 }
@@ -149,13 +134,10 @@ const CTMNavigation = (() => {
 
 
 
-
-                if(action === "previous"){
-
+                if(action === "continue"){
 
 
-                    goPrevious();
-
+                    goNext();
 
 
                 }
@@ -179,10 +161,8 @@ const CTMNavigation = (() => {
 
 
 
-
-
     /* ==========================================================
-       NEXT
+       NEXT PAGE
        ========================================================== */
 
 
@@ -198,13 +178,13 @@ const CTMNavigation = (() => {
 
 
 
-
-            dispatchPageChange();
+            loadPage(
+                currentPage
+            );
 
 
 
         }
-
 
 
     }
@@ -217,11 +197,8 @@ const CTMNavigation = (() => {
 
 
 
-
-
-
     /* ==========================================================
-       PREVIOUS
+       PREVIOUS PAGE
        ========================================================== */
 
 
@@ -237,13 +214,12 @@ const CTMNavigation = (() => {
 
 
 
-
-            dispatchPageChange();
-
+            loadPage(
+                currentPage
+            );
 
 
         }
-
 
 
     }
@@ -256,20 +232,16 @@ const CTMNavigation = (() => {
 
 
 
-
-
-
     /* ==========================================================
-       ROUTER EVENT
+       PAGE CHANGE EVENT
        ========================================================== */
 
 
-    function dispatchPageChange(){
+    function loadPage(pageNumber){
 
 
 
         document.dispatchEvent(
-
 
 
             new CustomEvent(
@@ -281,7 +253,7 @@ const CTMNavigation = (() => {
                     detail:{
 
 
-                        page: currentPage
+                        page:pageNumber
 
 
                     }
@@ -289,8 +261,8 @@ const CTMNavigation = (() => {
 
                 }
 
-            )
 
+            )
 
 
         );
@@ -311,9 +283,6 @@ const CTMNavigation = (() => {
 
 
 
-
-
-
     /* ==========================================================
        NAVIGATION VISIBILITY CONTROL
        ========================================================== */
@@ -323,9 +292,7 @@ const CTMNavigation = (() => {
 
 
 
-
-
-        const navigationContainer =
+        const navigation =
 
         document.getElementById(
 
@@ -338,30 +305,34 @@ const CTMNavigation = (() => {
 
 
 
-
-
         /*
             PAGE 01
 
-            Welcome page owns CTA.
+            Welcome gateway.
 
-            Hide global navigator completely.
-
+            No global navigator.
         */
-
 
 
         if(currentPage === 1){
 
 
 
-
-
-            if(navigationContainer){
+            if(navigation){
 
 
 
-                navigationContainer.style.display = "none";
+                navigation.classList.add(
+
+                    "hidden"
+
+                );
+
+
+
+                navigation.style.display =
+
+                "none";
 
 
 
@@ -372,12 +343,11 @@ const CTMNavigation = (() => {
             updateCounter();
 
 
+
             return;
 
 
-
         }
-
 
 
 
@@ -390,58 +360,24 @@ const CTMNavigation = (() => {
             PAGE 02 - 18
 
             Enable navigator.
-
         */
 
 
-
-        if(navigationContainer){
-
-
-
-            navigationContainer.style.display = "block";
+        if(navigation){
 
 
 
-        }
+            navigation.classList.remove(
+
+                "hidden"
+
+            );
 
 
 
+            navigation.style.display =
 
-
-
-
-
-        const previousButton =
-
-        document.querySelector(
-
-            "[data-action='previous']"
-
-        );
-
-
-
-
-
-
-
-
-        if(previousButton){
-
-
-
-            previousButton.style.display =
-
-            currentPage === 1
-
-            ?
-
-            "none"
-
-            :
-
-            "inline-flex";
+            "flex";
 
 
 
@@ -450,126 +386,13 @@ const CTMNavigation = (() => {
 
 
 
-
-
-
-
-        updateContinueButton();
 
 
         updateCounter();
 
 
 
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       CONTINUE BUTTON STATE
-       ========================================================== */
-
-
-    function updateContinueButton(){
-
-
-
-        const button =
-
-        document.querySelector(
-
-            "[data-action='continue']"
-
-        );
-
-
-
-
-
-        if(!button){
-
-            return;
-
-        }
-
-
-
-
-
-
-
-
-        if(currentPage === totalPages){
-
-
-
-            button.innerHTML = `
-
-
-            <span class="nav-label">
-
-            Complete Journey
-
-            </span>
-
-
-            <span class="nav-icon">
-
-            ✓
-
-            </span>
-
-
-            `;
-
-
-
-        }
-
-        else {
-
-
-
-            button.innerHTML = `
-
-
-            <span class="nav-label">
-
-            Continue
-
-            </span>
-
-
-            <span class="nav-icon">
-
-            →
-
-            </span>
-
-
-            `;
-
-
-
-        }
-
-
-
-    }
-
-
-
 
 
 
@@ -599,12 +422,12 @@ const CTMNavigation = (() => {
 
 
 
-
         if(counter){
 
 
 
             counter.textContent =
+
 
             String(currentPage)
 
@@ -636,14 +459,6 @@ const CTMNavigation = (() => {
 
 
 
-
-
-
-    /* ==========================================================
-       PUBLIC METHODS
-       ========================================================== */
-
-
     return {
 
 
@@ -655,15 +470,15 @@ const CTMNavigation = (() => {
 
         getCurrentPage(){
 
+
             return currentPage;
+
 
         }
 
 
 
     };
-
-
 
 
 
@@ -677,9 +492,17 @@ const CTMNavigation = (() => {
 
 
 
-/* ==========================================================================
-   GLOBAL ACCESS
-   ========================================================================== */
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    ()=>{
 
 
-window.CTMNavigation = CTMNavigation;
+        Navigation.init();
+
+
+    }
+
+
+);
