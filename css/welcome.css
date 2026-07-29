@@ -3,23 +3,23 @@
    CTM PATH™ Guided Journey™
 
    File        : welcome.css
-   Version     : 2.0
+   Version     : 3.0
 
    Purpose:
 
    Premium styling for:
 
-   Page 01 — Welcome™
+   PAGE 01 — WELCOME™
 
-   Design Philosophy:
+   Design Direction:
 
-   • Calm
-   • Premium
-   • Transformational
-   • Human
-   • Tamil-first
+   • Premium transformation experience
+   • Tamil-first emotional hierarchy
+   • Calm luxury presentation
+   • Global coaching brand quality
 
    ========================================================================== */
+
 
 
 /* ==========================================================================
@@ -36,35 +36,15 @@
 
 
 
-    min-height:
-
-        100vh;
-
-
-
     background:
 
-        radial-gradient(
-
-            circle at top,
-
-            rgba(
-
-                19,
-
-                168,
-
-                184,
-
-                0.12
-
-            ),
-
-            transparent 40%
-
-        ),
-
         var(--ctm-background);
+
+
+
+    overflow:
+
+        hidden;
 
 
 
@@ -77,9 +57,15 @@
 .welcome-wrapper {
 
 
-    width:
+    position:
 
-        100%;
+        relative;
+
+
+
+    z-index:
+
+        1;
 
 
 
@@ -90,9 +76,9 @@
 
 
 /* ==========================================================================
-   HERO SECTION
+   HERO EXPERIENCE
 
-   First emotional impression.
+   First impression area.
 
    ========================================================================== */
 
@@ -102,7 +88,7 @@
 
     max-width:
 
-        900px;
+        1000px;
 
 
 
@@ -114,7 +100,7 @@
 
     padding:
 
-        96px 0 64px;
+        96px 0 72px;
 
 
 
@@ -133,16 +119,19 @@
 .welcome-eyebrow {
 
 
-    display:
-
-        inline-block;
-
-
-
     margin-bottom:
 
-        28px;
+        32px;
 
+
+
+}
+
+
+
+
+
+.welcome-eyebrow {
 
 
     color:
@@ -153,7 +142,7 @@
 
     font-size:
 
-        14px;
+        15px;
 
 
 
@@ -165,7 +154,7 @@
 
     letter-spacing:
 
-        0.18em;
+        0.20em;
 
 
 
@@ -201,7 +190,14 @@
 
     color:
 
-        var(--ctm-white);
+        var(--ctm-text-primary);
+
+
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
 
 
 
@@ -219,15 +215,15 @@
 
 
 
+    line-height:
+
+        1.55;
+
+
+
     font-weight:
 
         700;
-
-
-
-    line-height:
-
-        1.45;
 
 
 
@@ -242,7 +238,7 @@
 
     margin-top:
 
-        18px;
+        20px;
 
 
 
@@ -252,15 +248,22 @@
 
 
 
+    font-family:
+
+        "Inter",
+        sans-serif;
+
+
+
     font-size:
 
         clamp(
 
-            26px,
+            28px,
 
             4vw,
 
-            44px
+            42px
 
         );
 
@@ -283,13 +286,13 @@
 
     max-width:
 
-        760px;
+        820px;
 
 
 
     margin:
 
-        32px auto 0;
+        36px auto 0;
 
 
 
@@ -301,13 +304,13 @@
 
     font-size:
 
-        22px;
+        24px;
 
 
 
     line-height:
 
-        1.9;
+        2;
 
 
 
@@ -322,7 +325,7 @@
 
     max-width:
 
-        720px;
+        760px;
 
 
 
@@ -340,7 +343,7 @@
 
     font-size:
 
-        18px;
+        19px;
 
 
 
@@ -353,9 +356,9 @@
 }
 
 /* ==========================================================================
-   JOURNEY INTRODUCTION CARD
+   JOURNEY INVITATION CARD
 
-   Premium transformation invitation card.
+   Premium transformation entry card.
 
    ========================================================================== */
 
@@ -365,19 +368,19 @@
 
     max-width:
 
-        900px;
+        980px;
 
 
 
     margin:
 
-        40px auto;
+        40px auto 80px;
 
 
 
     padding:
 
-        48px;
+        56px;
 
 
 
@@ -385,13 +388,13 @@
 
         rgba(
 
+            24,
+
             29,
 
-            34,
+            38,
 
-            43,
-
-            0.75
+            0.78
 
         );
 
@@ -399,7 +402,21 @@
 
     backdrop-filter:
 
-        blur(18px);
+        blur(
+
+            24px
+
+        );
+
+
+
+    -webkit-backdrop-filter:
+
+        blur(
+
+            24px
+
+        );
 
 
 
@@ -411,13 +428,84 @@
 
     border-radius:
 
-        var(--ctm-radius-large);
+        var(--radius-lg);
 
 
 
     box-shadow:
 
-        var(--ctm-shadow-medium);
+        var(--shadow-premium);
+
+
+
+    position:
+
+        relative;
+
+
+
+    overflow:
+
+        hidden;
+
+
+
+}
+
+
+
+
+
+.welcome-card::before {
+
+
+    content:
+
+        "";
+
+
+
+    position:
+
+        absolute;
+
+
+
+    top:
+
+        0;
+
+
+
+    left:
+
+        0;
+
+
+
+    width:
+
+        100%;
+
+
+
+    height:
+
+        4px;
+
+
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            var(--ctm-teal),
+
+            var(--ctm-gold)
+
+        );
 
 
 
@@ -438,7 +526,7 @@
 
     margin-bottom:
 
-        32px;
+        36px;
 
 
 
@@ -465,7 +553,7 @@
 
             4vw,
 
-            40px
+            42px
 
         );
 
@@ -501,9 +589,21 @@
 
 
 
+    max-width:
+
+        760px;
+
+
+
+    margin:
+
+        0 auto;
+
+
+
     font-size:
 
-        20px;
+        21px;
 
 
 
@@ -520,7 +620,7 @@
 
 
 /* ==========================================================================
-   WELCOME HIGHLIGHT POINTS
+   JOURNEY HIGHLIGHTS
 
    ========================================================================== */
 
@@ -548,25 +648,19 @@
 
     gap:
 
-        24px;
+        28px;
+
+
+
+    margin-top:
+
+        48px;
 
 
 
     list-style:
 
         none;
-
-
-
-    padding:
-
-        40px 0 0;
-
-
-
-    margin:
-
-        0;
 
 
 
@@ -581,7 +675,7 @@
 
     padding:
 
-        24px;
+        28px;
 
 
 
@@ -599,7 +693,7 @@
 
     border-radius:
 
-        var(--ctm-radius-medium);
+        var(--radius-md);
 
 
 
@@ -611,16 +705,26 @@
 
     font-size:
 
-        17px;
+        18px;
+
+
+
+    font-weight:
+
+        600;
+
+
+
+    text-align:
+
+        center;
 
 
 
     transition:
 
-        transform
-        0.3s ease,
-        border-color
-        0.3s ease;
+        all
+        var(--transition-medium);
 
 
 
@@ -637,7 +741,7 @@
 
         translateY(
 
-            -5px
+            -6px
 
         );
 
@@ -645,7 +749,13 @@
 
     border-color:
 
-        var(--ctm-teal);
+        var(--ctm-gold);
+
+
+
+    box-shadow:
+
+        var(--shadow-gold);
 
 
 
@@ -656,7 +766,7 @@
 
 
 /* ==========================================================================
-   LIFE DIMENSIONS PREVIEW
+   DISCOVERY PREVIEW SECTION
 
    ========================================================================== */
 
@@ -666,13 +776,13 @@
 
     max-width:
 
-        1100px;
+        1200px;
 
 
 
     margin:
 
-        80px auto;
+        0 auto 96px;
 
 
 
@@ -705,7 +815,7 @@
 
     gap:
 
-        28px;
+        32px;
 
 
 
@@ -726,7 +836,7 @@
 
     align-items:
 
-        center;
+        flex-start;
 
 
 
@@ -738,7 +848,7 @@
 
     padding:
 
-        32px;
+        36px;
 
 
 
@@ -756,7 +866,42 @@
 
     border-radius:
 
-        var(--ctm-radius-large);
+        var(--radius-lg);
+
+
+
+    transition:
+
+        transform
+        var(--transition-medium),
+
+        border-color
+        var(--transition-medium);
+
+
+
+}
+
+
+
+
+
+.welcome-preview-item:hover {
+
+
+    transform:
+
+        translateY(
+
+            -6px
+
+        );
+
+
+
+    border-color:
+
+        var(--ctm-teal);
 
 
 
@@ -769,15 +914,21 @@
 .preview-number {
 
 
-    min-width:
+    flex-shrink:
 
-        64px;
+        0;
+
+
+
+    width:
+
+        68px;
 
 
 
     height:
 
-        64px;
+        68px;
 
 
 
@@ -841,28 +992,26 @@
 
 }
 
+/* ==========================================================================
+   KALA CHAKRA™ LIFE DIMENSIONS PREVIEW
+
+   Premium preview of the 12 life dimensions.
+
+   ========================================================================== */
 
 
+.kalachakra-preview {
 
 
-.preview-content h3 {
+    max-width:
+
+        1200px;
+
 
 
     margin:
 
-        0 0 8px;
-
-
-
-    color:
-
-        var(--ctm-white);
-
-
-
-    font-size:
-
-        22px;
+        0 auto 96px;
 
 
 
@@ -872,12 +1021,294 @@
 
 
 
-.preview-content p {
+.kalachakra-header {
+
+
+    text-align:
+
+        center;
+
+
+
+    margin-bottom:
+
+        56px;
+
+
+
+}
+
+
+
+
+
+.kalachakra-header h2 {
+
+
+    color:
+
+        var(--ctm-text-primary);
+
+
+
+}
+
+
+
+
+
+.kalachakra-header p {
+
+
+    max-width:
+
+        760px;
+
 
 
     margin:
 
-        0;
+        24px auto 0;
+
+
+
+    color:
+
+        var(--ctm-text-secondary);
+
+
+
+}
+
+
+
+
+
+.kalachakra-grid {
+
+
+    display:
+
+        grid;
+
+
+
+    grid-template-columns:
+
+        repeat(
+
+            4,
+
+            1fr
+
+        );
+
+
+
+    gap:
+
+        24px;
+
+
+
+}
+
+
+
+
+
+.kalachakra-item {
+
+
+    padding:
+
+        28px;
+
+
+
+    background:
+
+        var(--ctm-surface);
+
+
+
+    border:
+
+        1px solid var(--ctm-border);
+
+
+
+    border-radius:
+
+        var(--radius-md);
+
+
+
+    text-align:
+
+        center;
+
+
+
+    transition:
+
+        transform
+        var(--transition-medium),
+
+        border-color
+        var(--transition-medium);
+
+
+
+}
+
+
+
+
+
+.kalachakra-item:hover {
+
+
+    transform:
+
+        translateY(
+
+            -6px
+
+        );
+
+
+
+    border-color:
+
+        var(--ctm-gold);
+
+
+
+    box-shadow:
+
+        var(--shadow-gold);
+
+
+
+}
+
+
+
+
+
+.pillar-number {
+
+
+    width:
+
+        52px;
+
+
+
+    height:
+
+        52px;
+
+
+
+    margin:
+
+        0 auto 18px;
+
+
+
+    display:
+
+        flex;
+
+
+
+    align-items:
+
+        center;
+
+
+
+    justify-content:
+
+        center;
+
+
+
+    border-radius:
+
+        50%;
+
+
+
+    background:
+
+        rgba(
+
+            20,
+
+            184,
+
+            184,
+
+            0.12
+
+        );
+
+
+
+    color:
+
+        var(--ctm-teal-soft);
+
+
+
+    font-weight:
+
+        700;
+
+
+
+    font-size:
+
+        20px;
+
+
+
+}
+
+
+
+
+
+.kalachakra-item h4 {
+
+
+    color:
+
+        var(--ctm-text-primary);
+
+
+
+    margin-bottom:
+
+        10px;
+
+
+
+}
+
+
+
+
+
+.kalachakra-item p {
+
+
+    color:
+
+        var(--ctm-text-secondary);
 
 
 
@@ -889,10 +1320,15 @@
 
 }
 
-/* ==========================================================================
-   FINAL JOURNEY INVITATION SECTION
 
-   Premium emotional closing area.
+
+
+
+
+/* ==========================================================================
+   FINAL JOURNEY INVITATION
+
+   Emotional conversion section.
 
    ========================================================================== */
 
@@ -902,19 +1338,19 @@
 
     max-width:
 
-        900px;
+        960px;
 
 
 
     margin:
 
-        80px auto 40px;
+        0 auto 64px;
 
 
 
     padding:
 
-        64px 48px;
+        72px 56px;
 
 
 
@@ -932,11 +1368,11 @@
 
             rgba(
 
+                24,
+
                 29,
 
-                34,
-
-                43,
+                38,
 
                 0.95
 
@@ -944,11 +1380,11 @@
 
             rgba(
 
-                16,
+                11,
+
+                13,
 
                 18,
-
-                22,
 
                 0.95
 
@@ -966,13 +1402,13 @@
 
     border-radius:
 
-        var(--ctm-radius-large);
+        var(--radius-lg);
 
 
 
     box-shadow:
 
-        var(--ctm-shadow-gold);
+        var(--shadow-gold);
 
 
 
@@ -987,7 +1423,7 @@
 
     color:
 
-        var(--ctm-white);
+        var(--ctm-text-primary);
 
 
 
@@ -995,11 +1431,11 @@
 
         clamp(
 
-            28px,
+            30px,
 
             4vw,
 
-            42px
+            48px
 
         );
 
@@ -1007,7 +1443,7 @@
 
     line-height:
 
-        1.8;
+        1.7;
 
 
 
@@ -1022,7 +1458,7 @@
 
     margin-top:
 
-        16px;
+        18px;
 
 
 
@@ -1034,7 +1470,7 @@
 
     font-size:
 
-        22px;
+        24px;
 
 
 
@@ -1045,9 +1481,7 @@
 
 
 /* ==========================================================================
-   ACTION AREA
-
-   Primary journey entry point.
+   BEGIN JOURNEY CTA
 
    ========================================================================== */
 
@@ -1090,25 +1524,25 @@
 
     min-width:
 
-        320px;
+        360px;
 
 
 
     min-height:
 
-        68px;
+        72px;
 
 
 
     padding:
 
-        0 48px;
+        0 56px;
 
 
 
     border-radius:
 
-        999px;
+        var(--radius-pill);
 
 
 
@@ -1128,7 +1562,7 @@
 
     color:
 
-        #17120A;
+        #181207;
 
 
 
@@ -1144,15 +1578,9 @@
 
 
 
-    letter-spacing:
-
-        0.02em;
-
-
-
     box-shadow:
 
-        var(--ctm-shadow-gold);
+        var(--shadow-gold);
 
 
 
@@ -1169,23 +1597,7 @@
 
         translateY(
 
-            -4px
-
-        );
-
-
-
-    box-shadow:
-
-        0 20px 50px rgba(
-
-            201,
-
-            162,
-
-            39,
-
-            0.35
+            -5px
 
         );
 
@@ -1193,12 +1605,10 @@
 
 }
 
-
-
-
-
 /* ==========================================================================
    CLOSING MESSAGE
+
+   Final emotional reinforcement.
 
    ========================================================================== */
 
@@ -1208,13 +1618,13 @@
 
     max-width:
 
-        700px;
+        760px;
 
 
 
     margin:
 
-        0 auto 80px;
+        0 auto 96px;
 
 
 
@@ -1258,7 +1668,7 @@
 
 
 /* ==========================================================================
-   PREMIUM DIVIDER
+   PREMIUM SECTION DIVIDER
 
    ========================================================================== */
 
@@ -1280,7 +1690,7 @@
 
     width:
 
-        120px;
+        140px;
 
 
 
@@ -1292,7 +1702,7 @@
 
     margin:
 
-        0 auto 40px;
+        0 auto 48px;
 
 
 
@@ -1314,19 +1724,47 @@
 
 }
 
+
+
+
+
 /* ==========================================================================
-   RESPONSIVE WELCOME EXPERIENCE
-
-   Premium experience across:
-
-   • Desktop
-   • Tablet
-   • Mobile
+   RESPONSIVE EXPERIENCE
 
    ========================================================================== */
 
 
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
+
+
+    .kalachakra-grid {
+
+
+        grid-template-columns:
+
+            repeat(
+
+                3,
+
+                1fr
+
+            );
+
+
+
+    }
+
+
+
+
+
+}
+
+
+
+
+
+@media (max-width: 1024px) {
 
 
     .welcome-content {
@@ -1335,6 +1773,33 @@
         padding:
 
             80px 32px 56px;
+
+
+
+    }
+
+
+
+
+
+    .welcome-card {
+
+
+        margin-left:
+
+            32px;
+
+
+
+        margin-right:
+
+            32px;
+
+
+
+        padding:
+
+            44px;
 
 
 
@@ -1365,16 +1830,24 @@
 
 
 
-    .welcome-points {
+    .kalachakra-grid {
 
 
         grid-template-columns:
 
-            1fr;
+            repeat(
+
+                2,
+
+                1fr
+
+            );
 
 
 
     }
+
+
 
 
 
@@ -1407,7 +1880,7 @@
 
         font-size:
 
-            38px;
+            36px;
 
 
 
@@ -1443,7 +1916,7 @@
 
         font-size:
 
-            18px;
+            19px;
 
 
 
@@ -1458,7 +1931,7 @@
 
         font-size:
 
-            16px;
+            17px;
 
 
 
@@ -1473,7 +1946,7 @@
 
         margin:
 
-            32px 20px;
+            32px 16px;
 
 
 
@@ -1489,12 +1962,12 @@
 
 
 
-    .welcome-card-body p {
+    .welcome-points {
 
 
-        font-size:
+        grid-template-columns:
 
-            18px;
+            1fr;
 
 
 
@@ -1509,7 +1982,7 @@
 
         margin:
 
-            48px 20px;
+            0 20px 64px;
 
 
 
@@ -1534,12 +2007,27 @@
 
 
 
-    .welcome-preview-item {
+    .kalachakra-preview {
 
 
-        padding:
+        margin:
 
-            24px;
+            0 20px 64px;
+
+
+
+    }
+
+
+
+
+
+    .kalachakra-grid {
+
+
+        grid-template-columns:
+
+            1fr;
 
 
 
@@ -1554,7 +2042,7 @@
 
         margin:
 
-            48px 20px;
+            0 20px 48px;
 
 
 
@@ -1635,7 +2123,7 @@
 
         font-size:
 
-            26px;
+            28px;
 
 
 
@@ -1645,24 +2133,12 @@
 
 
 
-    .preview-number {
-
-
-        min-width:
-
-            52px;
-
-
-
-        height:
-
-            52px;
-
+    .welcome-card-body p {
 
 
         font-size:
 
-            22px;
+            18px;
 
 
 
@@ -1679,9 +2155,7 @@
 
 
 /* ==========================================================================
-   ACCESSIBILITY REFINEMENT
-
-   Senior-friendly focus visibility.
+   ACCESSIBILITY
 
    ========================================================================== */
 
@@ -1753,12 +2227,12 @@
 
    Version:
 
-   CTM PATH™ Welcome™ Premium Experience v2.0
+   CTM PATH™ Welcome™ Premium Experience v3.0
 
 
    Status:
 
-   COMPLETE
+   COMPLETE 🔒
 
 
    ========================================================================== */
