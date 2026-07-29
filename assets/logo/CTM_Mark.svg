@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg
+xmlns="http://www.w3.org/2000/svg"
+width="1000"
+height="1000"
+viewBox="0 0 1000 1000">
+
+
+<defs>
+
+
+<!-- =====================================
+     CTM PATH™ COSMIC GOLD
+     ===================================== -->
+
+
+<linearGradient
+
+id="gold"
+
+x1="0%"
+
+y1="0%"
+
+x2="100%"
+
+y2="100%">
+
+
+<stop
+
+offset="0%"
+
+stop-color="#FFF3A6"/>
+
+
+<stop
+
+offset="45%"
+
+stop-color="#D9B56A"/>
+
+
+<stop
+
+offset="100%"
+
+stop-color="#A86B16"/>
+
+
+</linearGradient>
+
+
+
+
+
+<!-- =====================================
+     MASTER CLOCKWISE COSMIC ARCH
+
+     ===================================== -->
+
+
+<path
+
+id="arch"
+
+d="
+
+M500 220
+
+C600 170 760 230 820 360
+
+"
+
+fill="none"
+
+stroke="url(#gold)"
+
+stroke-width="34"
+
+stroke-linecap="round"
+
+
+/>
+
+
+
+
+
+<!-- =====================================
+     MASTER NINE POINT TIP
+
+     ===================================== -->
+
+
+<path
+
+id="tip"
+
+d="
+
+M500 330
+
+L535 410
+
+L465 410
+
+Z"
+
+
+/>
+
+
+</defs>
+
+
+
+
+
+
+
+<!-- =====================================
+     NINE COSMIC ARCHES
+
+     SAME SIZE
+     SAME CURVE
+     CLOCKWISE ROTATION
+
+     ===================================== -->
+
+
+<g>
+
+
+<use href="#arch"/>
+
+
+<use href="#arch"
+
+transform="rotate(40 500 500)"/>
+
+
+<use href="#arch"
+
+transform="rotate(80 500 500)"/>
+
+
+<use href="#arch"
+
+transform="rotate(120 500 500)"/>
+
+
+<use href="#arch"
+
+transform="rotate(160 500 500)"/>
+
+
+<use href="#arch"
+
+transform="rotate(200 500 500)"/>
+
+
+<use href="#arch"
+
+transform="rotate(240 500 500)"/>
+
+
+<use href="#arch"
+
+transform="rotate(280 500 500)"/>
+
+
+<use href="#arch"
+
+transform="rotate(320 500 500)"/>
+
+
+</g>
+
+
+
+
+
+
+
+
+<!-- =====================================
+     NINE POINT COSMIC STAR
+
+     ONLY TIPS
+
+     ===================================== -->
+
+
+<g fill="url(#gold)">
+
+
+
+<use href="#tip"/>
+
+
+<use href="#tip"
+
+transform="rotate(40 500 500)"/>
+
+
+<use href="#tip"
+
+transform="rotate(80 500 500)"/>
+
+
+<use href="#tip"
+
+transform="rotate(120 500 500)"/>
+
+
+<use href="#tip"
+
+transform="rotate(160 500 500)"/>
+
+
+<use href="#tip"
+
+transform="rotate(200 500 500)"/>
+
+
+<use href="#tip"
+
+transform="rotate(240 500 500)"/>
+
+
+<use href="#tip"
+
+transform="rotate(280 500 500)"/>
+
+
+<use href="#tip"
+
+transform="rotate(320 500 500)"/>
+
+
+</g>
+
+
+
+
+
+
+
+<!-- =====================================
+     BLACK HOLE SOURCE
+
+     PERFECT VOID
+
+     ===================================== -->
+
+
+<circle
+
+cx="500"
+
+cy="500"
+
+r="55"
+
+fill="#000000"
+
+/>
+
+
+
+
+
+
+</svg>
