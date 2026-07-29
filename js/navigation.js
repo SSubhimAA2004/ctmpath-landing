@@ -3,41 +3,48 @@
    CTM PATH™ Guided Journey™
 
    File        : js/navigation.js
-   Version     : 2.6
+   Version     : 2.7
 
-   Status      : FINAL JOURNEY NAVIGATION CONNECTOR
+   Status      : 🔒 PAGE 01 GATEWAY PROTECTION
+
+
+   Purpose:
+
+   Global journey navigation controller.
+
+
+   Architecture Rule:
+
+   PAGE 01
+
+   Welcome Gateway
+
+   No Global Navigation
+
+
+   PAGE 02 - PAGE 18
+
+   Guided Journey Navigation Active
 
 
    Responsibilities:
 
-   ✓ Handle journey controls
-   ✓ Dispatch navigation events
-   ✓ Control navigator visibility
-   ✓ Update journey counter
+   ✓ Previous control
+   ✓ Continue control
+   ✓ Journey counter
+   ✓ Navigation state
 
 
    Does NOT:
 
+   ✗ Render pages
    ✗ Load pages
-   ✗ Inject HTML
-   ✗ Handle business logic
-
-
-   Architecture:
-
-   navigation.js
-          |
-          ↓
-   ctm-page-change event
-          |
-          ↓
-   app.js
-          |
-          ↓
-   pages/*.html
+   ✗ Call backend
 
 
    ========================================================================== */
+
+
 
 
 
@@ -45,10 +52,14 @@ const Navigation = (() => {
 
 
 
-    let currentPage = 2;
+
+
+    let currentPage = 1;
+
 
 
     const totalPages = 18;
+
 
 
     let initialized = false;
@@ -61,7 +72,13 @@ const Navigation = (() => {
 
 
 
+    /* ==========================================================
+       INITIALIZE
+       ========================================================== */
+
+
     function init(){
+
 
 
         if(initialized){
@@ -71,13 +88,19 @@ const Navigation = (() => {
         }
 
 
+
+
+
         initialized = true;
+
 
 
         bindEvents();
 
 
+
         updateNavigation();
+
 
 
     }
@@ -88,6 +111,11 @@ const Navigation = (() => {
 
 
 
+
+
+    /* ==========================================================
+       EVENT BINDING
+       ========================================================== */
 
 
     function bindEvents(){
@@ -112,11 +140,15 @@ const Navigation = (() => {
 
 
 
+
+
                 if(!button){
 
                     return;
 
                 }
+
+
 
 
 
@@ -131,10 +163,13 @@ const Navigation = (() => {
 
 
 
-                if(action === "continue"){
+
+                if(action === "previous"){
 
 
-                    next();
+
+                    previous();
+
 
 
                 }
@@ -144,10 +179,14 @@ const Navigation = (() => {
 
 
 
-                if(action === "previous"){
 
 
-                    previous();
+                if(action === "continue"){
+
+
+
+                    next();
+
 
 
                 }
@@ -171,6 +210,11 @@ const Navigation = (() => {
 
 
 
+    /* ==========================================================
+       NEXT
+       ========================================================== */
+
+
     function next(){
 
 
@@ -183,10 +227,17 @@ const Navigation = (() => {
 
 
 
+
+
         currentPage++;
 
 
-        dispatch();
+
+
+
+        dispatchPageChange();
+
+
 
 
 
@@ -198,6 +249,11 @@ const Navigation = (() => {
 
 
 
+
+
+    /* ==========================================================
+       PREVIOUS
+       ========================================================== */
 
 
     function previous(){
@@ -212,10 +268,17 @@ const Navigation = (() => {
 
 
 
+
+
         currentPage--;
 
 
-        dispatch();
+
+
+
+        dispatchPageChange();
+
+
 
 
 
@@ -229,7 +292,12 @@ const Navigation = (() => {
 
 
 
-    function dispatch(){
+    /* ==========================================================
+       DISPATCH ROUTER EVENT
+       ========================================================== */
+
+
+    function dispatchPageChange(){
 
 
 
@@ -246,10 +314,11 @@ const Navigation = (() => {
                     detail:{
 
 
-                        page: currentPage
+                        page:currentPage
 
 
                     }
+
 
                 }
 
@@ -258,6 +327,37 @@ const Navigation = (() => {
 
 
         );
+
+
+
+
+
+        updateNavigation();
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       PAGE STATE CONTROL
+       ========================================================== */
+
+
+    function setPage(page){
+
+
+
+        currentPage = page;
 
 
 
@@ -275,11 +375,16 @@ const Navigation = (() => {
 
 
 
+    /* ==========================================================
+       NAVIGATION VISIBILITY
+       ========================================================== */
+
+
     function updateNavigation(){
 
 
 
-        const navigation =
+        const container =
 
         document.getElementById(
 
@@ -291,7 +396,7 @@ const Navigation = (() => {
 
 
 
-        if(!navigation){
+        if(!container){
 
             return;
 
@@ -302,33 +407,100 @@ const Navigation = (() => {
 
 
 
-        if(currentPage <= 1){
+
+
+        /*
+            PAGE 01 LOCK
+
+            Gateway screen.
+
+            Hide completely.
+
+        */
+
+
+        if(currentPage === 1){
 
 
 
-            navigation.style.display =
+            container.style.display =
 
             "none";
 
 
 
-        }
-
-        else {
+            updateCounter();
 
 
 
-            navigation.style.display =
-
-            "flex";
-
-
+            return;
 
         }
 
 
 
 
+
+
+
+
+
+        /*
+            PAGE 02-18
+
+            Enable journey navigation.
+
+        */
+
+
+        container.style.display =
+
+        "flex";
+
+
+
+
+
+
+
+        const previousButton =
+
+        document.querySelector(
+
+            "[data-action='previous']"
+
+        );
+
+
+
+
+
+        if(previousButton){
+
+
+
+            previousButton.style.display =
+
+            currentPage <= 2
+
+            ?
+
+            "none"
+
+            :
+
+            "inline-flex";
+
+
+
+        }
+
+
+
+
+
+
+        updateContinueState();
 
 
 
@@ -344,6 +516,110 @@ const Navigation = (() => {
 
 
 
+
+
+    /* ==========================================================
+       CONTINUE STATE
+       ========================================================== */
+
+
+    function updateContinueState(){
+
+
+
+        const continueButton =
+
+        document.querySelector(
+
+            "[data-action='continue']"
+
+        );
+
+
+
+
+
+        if(!continueButton){
+
+            return;
+
+        }
+
+
+
+
+
+
+
+        if(currentPage === totalPages){
+
+
+
+            continueButton.innerHTML = `
+
+
+                <span class="nav-label">
+
+                    Complete Journey
+
+                </span>
+
+
+                <span class="nav-icon">
+
+                    ✓
+
+                </span>
+
+
+            `;
+
+
+
+        }
+
+        else {
+
+
+
+            continueButton.innerHTML = `
+
+
+                <span class="nav-label">
+
+                    Continue
+
+                </span>
+
+
+                <span class="nav-icon">
+
+                    →
+
+                </span>
+
+
+            `;
+
+
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       COUNTER
+       ========================================================== */
 
 
     function updateCounter(){
@@ -398,27 +674,6 @@ const Navigation = (() => {
 
 
 
-    function setPage(page){
-
-
-
-        currentPage = page;
-
-
-        updateNavigation();
-
-
-
-    }
-
-
-
-
-
-
-
-
-
     return {
 
 
@@ -446,6 +701,8 @@ const Navigation = (() => {
 
 
 
+
+
 })();
 
 
@@ -454,5 +711,11 @@ const Navigation = (() => {
 
 
 
-window.Navigation = Navigation;
 
+
+/* ==========================================================================
+   GLOBAL ACCESS
+   ========================================================================== */
+
+
+window.Navigation = Navigation;
