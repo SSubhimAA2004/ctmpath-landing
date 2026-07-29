@@ -1,304 +1,127 @@
 
-<!-- ==========================================================================
-   CTM PATH™ Guided Journey™
-
-   File        : index.html
-   Version     : 2.1
-
-   Status      : FOUNDATION RECOVERY PATCH
-
-   Purpose:
-
-   Primary application shell.
-
-   Responsibilities:
-
-   ✓ Load global design system
-   ✓ Mount shared components
-   ✓ Provide application containers
-   ✓ Initialize frontend engine
-
-
-   Architecture:
-
-   FRONTEND
-   ├── HTML
-   ├── CSS
-   └── Vanilla JavaScript
-
-
-   IMPORTANT:
-
-   No business logic exists here.
-
-   ========================================================================== -->
-
-
 <!DOCTYPE html>
-
 <html lang="en">
-
-
 
 <head>
 
-
 <meta charset="UTF-8">
 
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-
-<meta name="description"
-      content="CTM PATH™ Guided Journey™ — From Survival To Living™">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>
 CTM PATH™ Guided Journey™
 </title>
 
 
+<!-- ==================================================
+     FOUNDATION STYLES
+================================================== -->
+
+<link rel="stylesheet" href="css/foundation.css">
 
 
+<!-- Screen Styles -->
 
-<!-- ======================================================================
-     PREMIUM DESIGN SYSTEM
-     ====================================================================== -->
-
-
-<link rel="stylesheet"
-      href="css/foundation.css">
-
-
-
-<link rel="stylesheet"
-      href="css/theme.css">
-
-
-
-<!-- Global Components -->
-
-<link rel="stylesheet"
-      href="css/header.css">
-
-
-
-<link rel="stylesheet"
-      href="css/footer.css">
-
-
-
-<!-- Page 01 -->
-
-<link rel="stylesheet"
-      href="css/welcome.css">
-
-
-
-<!-- Responsive -->
-
-<link rel="stylesheet"
-      href="css/responsive.css">
-
-
-
+<link rel="stylesheet" href="css/screens.css">
 
 
 </head>
 
 
 
-
-
 <body>
 
 
+<!-- ==================================================
+     APPLICATION HEADER
+================================================== -->
 
-
-<div id="app-shell"
-     class="app-shell">
-
-
-
-
-
-
-<!-- ======================================================================
-     GLOBAL LOADER
-     ====================================================================== -->
-
-
-<div id="global-loader"
-     class="global-loader hidden">
-
-
-<div class="loader-container">
-
-
-<div class="loader-spinner"></div>
-
-
-<p class="loader-message"></p>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- ======================================================================
-     GLOBAL HEADER
-     ====================================================================== -->
-
-
-<header id="app-header"
-        class="app-header">
+<header id="app-header">
 
 </header>
 
 
 
+<!-- ==================================================
+     JOURNEY CONTENT AREA
+     
+     app.js injects:
+     pages/welcome.html
+     pages/registration.html
+     etc.
 
+================================================== -->
 
-
-
-
-
-<!-- ======================================================================
-     JOURNEY CONTENT
-     ====================================================================== -->
-
-
-<main id="app-content"
-      class="app-content"
-      role="main">
-
+<main id="app-content">
 
 </main>
 
 
 
-
-
-
-
-
-
-<!-- ======================================================================
+<!-- ==================================================
      GLOBAL NAVIGATION
-     ====================================================================== -->
 
+     Hidden on Page 01
+     Activated after journey begins
 
-<nav id="app-navigation"
-     class="app-navigation">
+================================================== -->
 
+<nav id="app-navigation">
 
 </nav>
 
 
 
+<!-- ==================================================
+     APPLICATION FOOTER
+================================================== -->
 
-
-
-
-
-
-<!-- ======================================================================
-     GLOBAL FOOTER
-     ====================================================================== -->
-
-
-<footer id="app-footer"
-        class="app-footer">
-
+<footer id="app-footer">
 
 </footer>
 
 
 
 
+<!-- ==================================================
+     CORE APPLICATION ENGINE
+================================================== -->
 
 
-</div>
-
-
-
-
-
-
+<script src="js/app.js"></script>
 
 
 
-<div id="error-container"
-     class="error-container hidden">
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- ======================================================================
-     JAVASCRIPT FOUNDATION LOAD ORDER
-
-     Dependency order:
-
-     1. API layer
-     2. Storage layer
-     3. Navigation engine
-     4. Page controllers
-     5. Application bootstrap
-
-     ====================================================================== -->
-
-
-
-
-
-<script src="js/api.js"></script>
-
-
-<script src="js/storage.js"></script>
+<!-- ==================================================
+     NAVIGATION CONTROLLER
+================================================== -->
 
 
 <script src="js/navigation.js"></script>
 
 
 
+<!-- ==================================================
+     SUPPORT MODULES
+================================================== -->
 
 
-<!-- Page Controllers -->
+<script src="js/storage.js"></script>
 
-<script src="js/welcome.js"></script>
+<script src="js/assessmentEngine.js"></script>
 
+<script src="js/scoring.js"></script>
 
+<script src="js/diagnosis.js"></script>
 
+<script src="js/prescription.js"></script>
 
+<script src="js/report.js"></script>
 
-<!-- Application Bootstrap -->
-
-<script src="js/app.js"></script>
-
-
-
-
+<script src="js/cta.js"></script>
 
 
 </body>
 
-
 </html>
+
