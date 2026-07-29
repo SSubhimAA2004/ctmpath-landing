@@ -8,21 +8,35 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <title>
 CTM PATH™ Guided Journey™
 </title>
 
 
+<meta name="description"
+content="CTM PATH™ Guided Journey™ — Every Dream Has A Path™">
+
+
 <!-- ==================================================
-     FOUNDATION STYLES
-================================================== -->
+     CTM PATH™ DESIGN SYSTEM
+     ================================================== -->
+
 
 <link rel="stylesheet" href="css/foundation.css">
 
+<link rel="stylesheet" href="css/theme.css">
 
-<!-- Screen Styles -->
+<link rel="stylesheet" href="css/header.css">
 
-<link rel="stylesheet" href="css/screens.css">
+<link rel="stylesheet" href="css/footer.css">
+
+<link rel="stylesheet" href="css/welcome.css">
+
+<link rel="stylesheet" href="css/registration.css">
+
+<link rel="stylesheet" href="css/responsive.css">
+
 
 
 </head>
@@ -33,95 +47,62 @@ CTM PATH™ Guided Journey™
 
 
 <!-- ==================================================
-     APPLICATION HEADER
-================================================== -->
-
-<header id="app-header">
-
-</header>
+     APPLICATION SHELL
+     ================================================== -->
 
 
+<div id="app">
 
-<!-- ==================================================
-     JOURNEY CONTENT AREA
-     
-     app.js injects:
-     pages/welcome.html
-     pages/registration.html
-     etc.
 
-================================================== -->
+    <!-- GLOBAL HEADER -->
 
-<main id="app-content">
-
-</main>
+    <div id="app-header"></div>
 
 
 
-<!-- ==================================================
-     GLOBAL NAVIGATION
+    <!-- JOURNEY CONTENT -->
 
-     Hidden on Page 01
-     Activated after journey begins
+    <main id="app-content">
 
-================================================== -->
-
-<nav id="app-navigation">
-
-</nav>
+    </main>
 
 
 
-<!-- ==================================================
-     APPLICATION FOOTER
-================================================== -->
+    <!-- GLOBAL NAVIGATION -->
 
-<footer id="app-footer">
+    <div id="app-navigation"></div>
 
-</footer>
+
+
+    <!-- GLOBAL FOOTER -->
+
+    <div id="app-footer"></div>
+
+
+
+</div>
+
 
 
 
 
 <!-- ==================================================
-     CORE APPLICATION ENGINE
-================================================== -->
+     CORE JAVASCRIPT
+     ================================================== -->
 
+
+<script src="js/api.js"></script>
+
+<script src="js/navigation.js"></script>
+
+<script src="js/welcome.js"></script>
+
+<script src="js/registration.js"></script>
 
 <script src="js/app.js"></script>
 
 
 
-<!-- ==================================================
-     NAVIGATION CONTROLLER
-================================================== -->
-
-
-<script src="js/navigation.js"></script>
-
-
-
-<!-- ==================================================
-     SUPPORT MODULES
-================================================== -->
-
-
-<script src="js/storage.js"></script>
-
-<script src="js/assessmentEngine.js"></script>
-
-<script src="js/scoring.js"></script>
-
-<script src="js/diagnosis.js"></script>
-
-<script src="js/prescription.js"></script>
-
-<script src="js/report.js"></script>
-
-<script src="js/cta.js"></script>
-
-
 </body>
 
 </html>
-
