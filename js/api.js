@@ -2,589 +2,54 @@
 /* ==========================================================================
    CTM PATH™ Guided Journey™
 
-   File        : api.js
-   Version     : 1.0
-   Status      : DEVELOPMENT
+   File        : js/api.js
+   Version     : 2.0
+
+   Status      : 🔒 REGISTRATION ENDPOINT ALIGNMENT
+
 
    Purpose:
-   Frontend API communication layer.
+
+   Frontend communication layer.
+
 
    Responsibilities:
 
-   • Communicate with backend.
-   • Send user data.
-   • Receive processed results.
-   • Standardize requests.
+   ✓ Communicate with Google Apps Script API
+   ✓ Send visitor registration data
+   ✓ Handle responses
+
 
    Does NOT:
 
-   • Render interface.
-   • Calculate scores.
-   • Generate reports.
+   ✗ Database operations
+   ✗ Assessment logic
+   ✗ Business rules
+
 
    ========================================================================== */
 
 
-/* ==========================================================================
-   GLOBAL NAMESPACE
-   ========================================================================== */
+const API = (() => {
 
 
-window.CTMPATH = window.CTMPATH || {};
 
 
 
+    const CONFIG = {
 
-/* ==========================================================================
-   API CONTROLLER
-   ========================================================================== */
 
 
-CTMPATH.API = {
+        /*
+            Replace with active
+            Google Apps Script Web App URL
+        */
 
 
-    version:
+        endpoint:
 
-        "1.0",
 
-
-
-    baseURL:
-
-        "",
-
-
-
-    initialized:
-
-        false
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   INITIALIZATION
-   ========================================================================== */
-
-
-CTMPATH.API.init = function(config) {
-
-
-    if (
-
-        CTMPATH.API.initialized
-
-    ) {
-
-
-        return;
-
-
-
-    }
-
-
-
-    if (
-
-        config &&
-
-        config.baseURL
-
-    ) {
-
-
-        CTMPATH.API.baseURL =
-
-            config.baseURL;
-
-
-
-    }
-
-
-
-    CTMPATH.API.initialized = true;
-
-
-
-};
-
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
-
-   File        : api.js
-   Continuation: Batch 1B
-
-   ========================================================================== */
-
-
-/* ==========================================================================
-   GENERIC REQUEST HANDLER
-
-   Centralizes backend communication.
-
-   ========================================================================== */
-
-
-CTMPATH.API.request = function(
-
-    endpoint,
-
-    payload
-
-) {
-
-
-    const url =
-
-        CTMPATH.API.baseURL +
-
-        endpoint;
-
-
-
-    return fetch(
-
-        url,
-
-        {
-
-
-            method:
-
-                "POST",
-
-
-
-            headers:
-
-            {
-
-
-                "Content-Type":
-
-                    "application/json"
-
-
-            },
-
-
-
-            body:
-
-                JSON.stringify(
-
-                    payload || {}
-
-                )
-
-
-        }
-
-    )
-
-    .then(function(response) {
-
-
-        return response.json();
-
-
-
-    })
-
-    .catch(function(error) {
-
-
-        CTMPATH.API.handleError(
-
-            error
-
-        );
-
-
-
-        throw error;
-
-
-
-    });
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   ERROR HANDLER
-
-   ========================================================================== */
-
-
-CTMPATH.API.handleError = function(error) {
-
-
-    console.error(
-
-        "CTM PATH™ API Error:",
-
-        error
-
-    );
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   HEALTH CHECK
-
-   Verifies backend availability.
-
-   ========================================================================== */
-
-
-CTMPATH.API.healthCheck = function() {
-
-
-    return CTMPATH.API.request(
-
-        "/health",
-
-        {}
-
-    );
-
-
-
-};
-
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
-
-   File        : api.js
-   Continuation: Batch 1C
-
-   ========================================================================== */
-
-
-/* ==========================================================================
-   REGISTRATION API
-
-   Sends visitor registration payload.
-
-   Backend creates:
-
-   • Visitor ID
-   • Profile record
-   • Journey session
-
-   ========================================================================== */
-
-
-CTMPATH.API.registerVisitor = function(
-
-    visitorData
-
-) {
-
-
-    return CTMPATH.API.request(
-
-        "/register",
-
-        visitorData
-
-    );
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   SAVE ASSESSMENT RESPONSE
-
-   Sends individual assessment response.
-
-   Backend handles:
-
-   • Storage
-   • Scoring preparation
-
-   ========================================================================== */
-
-
-CTMPATH.API.saveAssessmentResponse = function(
-
-    responseData
-
-) {
-
-
-    return CTMPATH.API.request(
-
-        "/assessment/save",
-
-        responseData
-
-    );
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   GET KALA CHAKRA™
-
-   Retrieves completed life alignment result.
-
-   Backend provides:
-
-   • 12 pillar scores
-   • Alignment data
-   • Summary information
-
-   ========================================================================== */
-
-
-CTMPATH.API.getKalaChakra = function() {
-
-
-    return CTMPATH.API.request(
-
-        "/kalachakra",
-
-        {}
-
-    );
-
-
-
-};
-
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
-
-   File        : api.js
-   Continuation: Batch 1D
-
-   ========================================================================== */
-
-
-/* ==========================================================================
-   GET DIAGNOSIS™
-
-   Retrieves backend-generated diagnosis.
-
-   Backend provides:
-
-   • Life pattern
-   • Strengths
-   • Challenges
-   • Growth areas
-
-   ========================================================================== */
-
-
-CTMPATH.API.getDiagnosis = function() {
-
-
-    return CTMPATH.API.request(
-
-        "/diagnosis",
-
-        {}
-
-    );
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   GET PRESCRIPTION™
-
-   Retrieves backend-generated action plan.
-
-   Backend provides:
-
-   • 30 Day Focus
-   • 60 Day Growth
-   • 90 Day Transformation Plan
-
-   ========================================================================== */
-
-
-CTMPATH.API.getPrescription = function() {
-
-
-    return CTMPATH.API.request(
-
-        "/prescription",
-
-        {}
-
-    );
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   GET CTA DATA
-
-   Retrieves completion information.
-
-   Backend provides:
-
-   • Visitor identity
-   • Journey completion status
-   • Next-step information
-
-   ========================================================================== */
-
-
-CTMPATH.API.getCTAData = function() {
-
-
-    return CTMPATH.API.request(
-
-        "/cta",
-
-        {}
-
-    );
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   DOWNLOAD REPORT REQUEST
-
-   Requests generated report.
-
-   ========================================================================== */
-
-
-CTMPATH.API.downloadReport = function() {
-
-
-    return CTMPATH.API.request(
-
-        "/report/download",
-
-        {}
-
-    );
-
-
-
-};
-
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
-
-   File        : api.js
-   Continuation: Batch 1E
-
-   ========================================================================== */
-
-
-/* ==========================================================================
-   UPDATE API BASE URL
-
-   Allows environment configuration.
-
-   Supports:
-
-   • Development
-   • Testing
-   • Production
-
-   ========================================================================== */
-
-
-CTMPATH.API.setBaseURL = function(
-
-    url
-
-) {
-
-
-    if (
-
-        typeof url === "string"
-
-    ) {
-
-
-        CTMPATH.API.baseURL = url;
-
-
-
-    }
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   GET API STATUS
-
-   Returns current API configuration.
-
-   ========================================================================== */
-
-
-CTMPATH.API.getStatus = function() {
-
-
-    return {
-
-
-        version:
-
-            CTMPATH.API.version,
-
-
-
-        baseURL:
-
-            CTMPATH.API.baseURL,
-
-
-
-        initialized:
-
-            CTMPATH.API.initialized
+        "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL"
 
 
 
@@ -592,47 +57,229 @@ CTMPATH.API.getStatus = function() {
 
 
 
-};
 
 
 
 
-/* ==========================================================================
-   INITIAL API STARTUP
-
-   ========================================================================== */
 
 
-document.addEventListener(
-
-    "CTMPATH_APP_READY",
-
-    function() {
+    /* ==========================================================
+       GENERIC REQUEST
+       ========================================================== */
 
 
-        CTMPATH.API.init();
+    async function request(
+
+        payload
+
+    ){
+
+
+
+        const response =
+
+        await fetch(
+
+            CONFIG.endpoint,
+
+            {
+
+
+                method:
+
+                "POST",
+
+
+
+                headers:{
+
+
+                    "Content-Type":
+
+                    "text/plain;charset=utf-8"
+
+
+                },
+
+
+
+                body:
+
+                JSON.stringify(payload)
+
+
+
+            }
+
+        );
+
+
+
+
+
+
+
+        if(!response.ok){
+
+
+
+            throw new Error(
+
+                "API request failed"
+
+            );
+
+
+
+        }
+
+
+
+
+
+
+
+        return await response.json();
 
 
 
     }
 
-);
 
 
 
 
-/* ==========================================================================
-   END OF FILE
-
-   File:
-
-   js/api.js
 
 
-   Status:
-
-   API COMMUNICATION LAYER COMPLETE
 
 
-   ========================================================================== */
+    /* ==========================================================
+       REGISTER VISITOR
+       ========================================================== */
 
+
+    async function registerVisitor(
+
+        visitorData
+
+    ){
+
+
+
+        const payload = {
+
+
+
+            action:
+
+            "registerVisitor",
+
+
+
+            data:{
+
+
+
+                fullName:
+
+                visitorData.fullName,
+
+
+
+                email:
+
+                visitorData.email,
+
+
+
+                mobile:
+
+                visitorData.mobile,
+
+
+
+                district:
+
+                visitorData.district,
+
+
+
+                state:
+
+                visitorData.state,
+
+
+
+                language:
+
+                visitorData.language,
+
+
+
+                source:
+
+                visitorData.source,
+
+
+
+                device:
+
+                visitorData.device
+
+
+
+            }
+
+
+
+        };
+
+
+
+
+
+
+
+        return await request(
+
+            payload
+
+        );
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    return {
+
+
+
+        registerVisitor
+
+
+
+    };
+
+
+
+
+
+})();
+
+
+
+
+
+
+
+
+
+window.API = API;
