@@ -3,1070 +3,473 @@
    CTM PATH™ Guided Journey™
 
    File        : navigation.js
-   Version     : 1.0
-   Status      : DEVELOPMENT
+   Version     : 2.0
 
    Purpose:
 
-   Global journey navigation controller.
-
+   Central navigation controller.
 
    Responsibilities:
 
-   • Move between journey pages.
-   • Manage current page state.
-   • Load journey pages dynamically.
-   • Trigger page lifecycle events.
-   • Update progress.
+   • Manage journey page transitions
+   • Load page modules
+   • Update journey progress
+   • Handle CTA navigation
+   • Maintain scroll position
 
+   IMPORTANT:
 
-   Does NOT:
-
-   • Calculate results.
-   • Process assessments.
-   • Generate diagnosis.
-   • Generate prescription.
-
+   No business logic.
+   No scoring logic.
+   No assessment calculations.
 
    ========================================================================== */
 
 
-/* ==========================================================================
-   GLOBAL NAMESPACE
-   ========================================================================== */
 
-window.CTMPATH = window.CTMPATH || {};
 
 
+const CTMNavigation = (() => {
 
 
-/* ==========================================================================
-   NAVIGATION CONTROLLER
-   ========================================================================== */
 
+    /* ==========================================================
+       JOURNEY CONFIGURATION
+       ========================================================== */
 
-CTMPATH.Navigation =
-{
 
+    const journey = {
 
-    version:
 
-        "1.1",
+        currentPage: 1,
 
 
+        totalPages: 18,
 
-    initialized:
 
-        false,
 
+        pages: [
 
+            "welcome",
 
-    currentPage:
+            "registration",
 
-        1,
+            "assessment-01",
 
+            "assessment-02",
 
+            "assessment-03",
 
-    totalPages:
+            "assessment-04",
 
-        18,
+            "assessment-05",
 
+            "assessment-06",
 
+            "assessment-07",
 
-    pageMap:
+            "assessment-08",
 
-    {
+            "assessment-09",
 
-        1:
-        "pages/welcome.html",
+            "assessment-10",
 
+            "kala-chakra",
 
-        2:
-        "pages/registration.html",
+            "diagnosis",
 
+            "prescription",
 
-        3:
-        "pages/assessment-01.html",
+            "review",
 
+            "commitment",
 
-        4:
-        "pages/assessment-02.html",
+            "cta"
 
-
-        5:
-        "pages/assessment-03.html",
-
-
-        6:
-        "pages/assessment-04.html",
-
-
-        7:
-        "pages/assessment-05.html",
-
-
-        8:
-        "pages/assessment-06.html",
-
-
-        9:
-        "pages/assessment-07.html",
-
-
-        10:
-        "pages/assessment-08.html",
-
-
-        11:
-        "pages/assessment-09.html",
-
-
-        12:
-        "pages/assessment-10.html",
-
-
-        13:
-        "pages/assessment-11.html",
-
-
-        14:
-        "pages/assessment-12.html",
-
-
-        15:
-        "pages/kalachakra.html",
-
-
-        16:
-        "pages/diagnosis.html",
-
-
-        17:
-        "pages/prescription.html",
-
-
-        18:
-        "pages/cta.html"
-
-    }
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   INITIALIZATION
-   ========================================================================== */
-
-
-CTMPATH.Navigation.init = function()
-{
-
-
-    if (
-
-        CTMPATH.Navigation.initialized
-
-    )
-    {
-
-
-        return;
-
-
-
-    }
-
-
-
-    CTMPATH.Navigation.restorePage();
-
-
-
-    CTMPATH.Navigation.bindGlobalEvents();
-
-
-
-    CTMPATH.Navigation.renderPage(
-
-        CTMPATH.Navigation.currentPage
-
-    );
-
-
-
-    CTMPATH.Navigation.initialized = true;
-
-
-
-};
-
-/* ==========================================================================
-   GO TO PAGE
-
-   Main navigation method.
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.goto = function(
-
-    pageNumber
-
-)
-{
-
-
-    if (
-
-        pageNumber < 1 ||
-
-        pageNumber > CTMPATH.Navigation.totalPages
-
-    )
-    {
-
-
-        return false;
-
-
-
-    }
-
-
-
-    CTMPATH.Navigation.currentPage = pageNumber;
-
-
-
-    CTMPATH.Navigation.savePage();
-
-
-
-    CTMPATH.Navigation.renderPage(
-
-        pageNumber
-
-    );
-
-
-
-    return true;
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   PAGE RENDERING
-
-   Dynamic page loader.
-
-   Loads:
-
-   /pages/*.html
-
-   Injects into:
-
-   #app-content
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.renderPage = async function(
-
-    pageNumber
-
-)
-{
-
-
-    const container = document.getElementById(
-
-        "app-content"
-
-    );
-
-
-
-    if (!container)
-    {
-
-
-        console.error(
-
-            "Application content container not found."
-
-        );
-
-
-        return false;
-
-
-
-    }
-
-
-
-    const pageURL =
-
-        CTMPATH.Navigation.pageMap[pageNumber];
-
-
-
-    if (!pageURL)
-    {
-
-
-        console.error(
-
-            "Page mapping missing:",
-
-            pageNumber
-
-        );
-
-
-        return false;
-
-
-
-    }
-
-
-
-    try
-
-    {
-
-
-        CTMPATH.Navigation.showLoader();
-
-
-
-        const response = await fetch(
-
-            pageURL
-
-        );
-
-
-
-        if (!response.ok)
-        {
-
-
-            throw new Error(
-
-                "Unable to load page: " + pageURL
-
-            );
-
-
-        }
-
-
-
-        const html = await response.text();
-
-
-
-        container.innerHTML = html;
-
-
-
-        CTMPATH.Navigation.hideLoader();
-
-
-
-        CTMPATH.Navigation.dispatchPageEvent(
-
-            pageNumber
-
-        );
-
-
-
-        return true;
-
-
-
-    }
-
-    catch(error)
-
-    {
-
-
-        CTMPATH.Navigation.hideLoader();
-
-
-
-        console.error(
-
-            "Navigation loading error:",
-
-            error
-
-        );
-
-
-
-        CTMPATH.Navigation.showError();
-
-
-
-        return false;
-
-
-
-    }
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   LOADING STATE
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.showLoader = function()
-{
-
-
-    const loader = document.getElementById(
-
-        "global-loader"
-
-    );
-
-
-
-    if (loader)
-    {
-
-
-        loader.classList.remove(
-
-            "hidden"
-
-        );
-
-
-    }
-
-
-
-};
-
-
-
-
-CTMPATH.Navigation.hideLoader = function()
-{
-
-
-    const loader = document.getElementById(
-
-        "global-loader"
-
-    );
-
-
-
-    if (loader)
-    {
-
-
-        loader.classList.add(
-
-            "hidden"
-
-        );
-
-
-    }
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   ERROR STATE
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.showError = function()
-{
-
-
-    const errorContainer = document.getElementById(
-
-        "error-container"
-
-    );
-
-
-
-    if (errorContainer)
-    {
-
-
-        errorContainer.classList.remove(
-
-            "hidden"
-
-        );
-
-
-        errorContainer.innerHTML =
-
-
-            "Unable to load this journey step. Please try again.";
-
-
-
-    }
-
-
-
-};
-
-/* ==========================================================================
-   PAGE EVENT DISPATCH
-
-   Notifies page controllers.
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.dispatchPageEvent = function(
-
-    pageNumber
-
-)
-{
-
-
-    document.dispatchEvent(
-
-        new CustomEvent(
-
-            "CTMPATH_PAGE_LOADED",
-
-            {
-
-                detail:
-
-                {
-
-                    page:
-
-                        pageNumber,
-
-
-                    url:
-
-                        CTMPATH.Navigation.pageMap[pageNumber]
-
-                }
-
-            }
-
-        )
-
-    );
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   SAVE CURRENT PAGE
-
-   Uses storage layer.
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.savePage = function()
-{
-
-
-    if (
-
-        CTMPATH.Storage &&
-
-        typeof CTMPATH.Storage.saveCurrentPage ===
-
-            "function"
-
-    )
-    {
-
-
-        CTMPATH.Storage.saveCurrentPage(
-
-            CTMPATH.Navigation.currentPage
-
-        );
-
-
-
-    }
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   RESTORE PAGE
-
-   Restores visitor journey position.
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.restorePage = function()
-{
-
-
-    if (
-
-        CTMPATH.Storage &&
-
-        typeof CTMPATH.Storage.getCurrentPage ===
-
-            "function"
-
-    )
-    {
-
-
-        const savedPage =
-
-            CTMPATH.Storage.getCurrentPage();
-
-
-
-        if (savedPage)
-        {
-
-
-            CTMPATH.Navigation.currentPage =
-
-                savedPage;
-
-
-
-        }
-
-
-
-    }
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   NEXT PAGE
-
-   Moves forward one journey step.
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.next = function()
-{
-
-
-    const nextPage =
-
-        CTMPATH.Navigation.currentPage + 1;
-
-
-
-    return CTMPATH.Navigation.goto(
-
-        nextPage
-
-    );
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   PREVIOUS PAGE
-
-   Moves backward one journey step.
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.previous = function()
-{
-
-
-    const previousPage =
-
-        CTMPATH.Navigation.currentPage - 1;
-
-
-
-    return CTMPATH.Navigation.goto(
-
-        previousPage
-
-    );
-
-
-
-};
-
-/* ==========================================================================
-   UPDATE PROGRESS
-
-   Updates shared progress component.
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.updateProgress = function()
-{
-
-
-    const progressElements = document.querySelectorAll(
-
-        "[data-progress-fill]"
-
-    );
-
-
-
-    const percentage =
-
-        (
-
-            CTMPATH.Navigation.currentPage /
-
-            CTMPATH.Navigation.totalPages
-
-        ) * 100;
-
-
-
-    progressElements.forEach(function(element)
-    {
-
-
-        element.style.width =
-
-            percentage + "%";
-
-
-
-    });
-
-
-
-    const counters = document.querySelectorAll(
-
-        "[data-progress-counter]"
-
-    );
-
-
-
-    counters.forEach(function(counter)
-    {
-
-
-        counter.textContent =
-
-
-            CTMPATH.Navigation.currentPage +
-
-            " / " +
-
-            CTMPATH.Navigation.totalPages;
-
-
-
-    });
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   GLOBAL NAVIGATION EVENTS
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.bindGlobalEvents = function()
-{
-
-
-    document.addEventListener(
-
-        "CTMPATH_PAGE_LOADED",
-
-        function()
-        {
-
-
-            CTMPATH.Navigation.updateProgress();
-
-
-
-        }
-
-    );
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   GET CURRENT PAGE
-
-   Returns active journey location.
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.getCurrentPage = function()
-{
-
-
-    return CTMPATH.Navigation.currentPage;
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   GET TOTAL PAGES
-
-   Returns journey length.
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.getTotalPages = function()
-{
-
-
-    return CTMPATH.Navigation.totalPages;
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   IS FIRST PAGE
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.isFirstPage = function()
-{
-
-
-    return (
-
-        CTMPATH.Navigation.currentPage === 1
-
-    );
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   IS LAST PAGE
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.isLastPage = function()
-{
-
-
-    return (
-
-        CTMPATH.Navigation.currentPage ===
-
-        CTMPATH.Navigation.totalPages
-
-    );
-
-
-
-};
-
-/* ==========================================================================
-   RESET JOURNEY
-
-   Returns visitor to beginning.
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.reset = function()
-{
-
-
-    CTMPATH.Navigation.currentPage = 1;
-
-
-
-    CTMPATH.Navigation.savePage();
-
-
-
-    CTMPATH.Navigation.renderPage(
-
-        1
-
-    );
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   NAVIGATION STATUS
-
-   Returns current navigation state.
-
-   ========================================================================== */
-
-
-CTMPATH.Navigation.getStatus = function()
-{
-
-
-    return {
-
-
-        version:
-
-            CTMPATH.Navigation.version,
-
-
-
-        currentPage:
-
-            CTMPATH.Navigation.currentPage,
-
-
-
-        totalPages:
-
-            CTMPATH.Navigation.totalPages,
-
-
-
-        initialized:
-
-            CTMPATH.Navigation.initialized
-
+        ]
 
 
     };
 
 
 
-};
 
 
 
 
-/* ==========================================================================
-   INITIALIZE ON APPLICATION READY
 
-   ========================================================================== */
-
-
-document.addEventListener(
-
-    "CTMPATH_APP_READY",
-
-    function()
-    {
+    /* ==========================================================
+       INITIALIZE NAVIGATION
+       ========================================================== */
 
 
-        CTMPATH.Navigation.init();
+    function init(){
+
+
+        bindNavigationEvents();
+
+
+        updateJourneyCounter();
 
 
 
     }
 
-);
+
+
+
+
+
+
+
+    /* ==========================================================
+       BUTTON EVENTS
+       ========================================================== */
+
+
+    function bindNavigationEvents(){
+
+
+
+        document.addEventListener(
+            "click",
+            function(event){
+
+
+
+                const target = event.target.closest(
+                    "[data-action='next-page']"
+                );
+
+
+
+                if(!target){
+
+                    return;
+
+                }
+
+
+
+                event.preventDefault();
+
+
+
+                nextPage();
+
+
+
+            }
+        );
+
+
+
+    }
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       NEXT PAGE
+       ========================================================== */
+
+
+    function nextPage(){
+
+
+
+        if(
+            journey.currentPage >= journey.totalPages
+        ){
+
+            return;
+
+        }
+
+
+
+        journey.currentPage++;
+
+
+
+
+        loadPage(
+            journey.currentPage
+        );
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       LOAD PAGE
+       ========================================================== */
+
+
+    function loadPage(pageNumber){
+
+
+
+        const pageName =
+            journey.pages[
+                pageNumber - 1
+            ];
+
+
+
+
+        const container =
+            document.getElementById(
+                "app-content"
+            );
+
+
+
+        if(!container){
+
+            return;
+
+        }
+
+
+
+
+
+
+        fetch(
+            `pages/${pageName}.html`
+        )
+
+        .then(
+            response => response.text()
+        )
+
+        .then(
+            html => {
+
+
+
+                container.innerHTML = html;
+
+
+
+                updateJourneyCounter();
+
+
+
+                scrollToTop();
+
+
+
+                loadPageScript(
+                    pageName
+                );
+
+
+
+            }
+
+        )
+
+        .catch(
+            error => {
+
+
+                console.error(
+                    "Page loading error:",
+                    error
+                );
+
+
+            }
+        );
+
+
+
+    }
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       PAGE SCRIPT LOADER
+       ========================================================== */
+
+
+    function loadPageScript(pageName){
+
+
+
+        const script =
+            document.createElement(
+                "script"
+            );
+
+
+
+        script.src =
+            `js/pages/${pageName}.js`;
+
+
+
+        script.defer = true;
+
+
+
+        document.body.appendChild(
+            script
+        );
+
+
+
+    }
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       JOURNEY COUNTER
+       ========================================================== */
+
+
+    function updateJourneyCounter(){
+
+
+
+        const counter =
+            document.getElementById(
+                "journey-counter"
+            );
+
+
+
+        if(!counter){
+
+            return;
+
+        }
+
+
+
+
+        counter.textContent =
+
+
+            String(
+                journey.currentPage
+            )
+            .padStart(2,"0")
+
+            +
+
+            " / "
+
+            +
+
+            journey.totalPages;
+
+
+
+    }
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       SCROLL RESET
+       ========================================================== */
+
+
+    function scrollToTop(){
+
+
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
+
+
+
+    }
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       PUBLIC API
+       ========================================================== */
+
+
+    return {
+
+
+        init,
+
+        nextPage,
+
+        loadPage,
+
+        scrollToTop
+
+
+    };
+
+
+
+})();
+
+
+
 
 
 
 
 /* ==========================================================================
-   END OF FILE
-
-   File:
-
-   js/navigation.js
-
-
-   Status:
-
-   NAVIGATION CONTROLLER COMPLETE
-
+   AUTO START
 
    ========================================================================== */
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+
+        CTMNavigation.init();
+
+
+
+    }
+);
