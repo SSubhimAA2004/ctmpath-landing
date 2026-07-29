@@ -3,13 +3,18 @@
    CTM PATH™ Guided Journey™
 
    File        : welcome.css
-   Version     : 3.0
-
-   Page        : 01 - Welcome™
+   Version     : 3.1
 
    Purpose:
 
-   Premium welcome experience styling.
+   Final Page 01 Welcome™ visual refinement.
+
+   Updates:
+
+   • CTA premium treatment
+   • Discovery card polish
+   • Symbol enhancement
+   • Theme variable alignment
 
    ========================================================================== */
 
@@ -17,609 +22,125 @@
 
 
 
-
 /* ==========================================================================
-   WELCOME SCREEN
-   ========================================================================== */
-
-
-.welcome-screen {
-
-    background:
-
-    #081C3A;
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   HERO EXPERIENCE
-   ========================================================================== */
-
-
-.welcome-hero {
-
-
-    max-width:
-
-    1100px;
-
-
-    margin:
-
-    0 auto;
-
-
-    padding-top:
-
-    80px;
-
-
-    text-align:
-
-    center;
-
-
-}
-
-
-
-
-
-
-.welcome-title {
-
-
-    font-family:
-
-    var(--font-tamil);
-
-
-    font-size:
-
-    clamp(
-        52px,
-        6vw,
-        86px
-    );
-
-
-    line-height:
-
-    1.35;
-
-
-    font-weight:
-
-    800;
-
-
-    color:
-
-    var(--ctm-text-primary);
-
-
-
-}
-
-
-
-
-
-
-
-.welcome-positioning {
-
-
-    margin-top:
-
-    28px;
-
-
-    font-size:
-
-    32px;
-
-
-    letter-spacing:
-
-    0.08em;
-
-
-    color:
-
-    var(--ctm-gold-light);
-
-
-
-}
-
-
-
-
-
-
-
-.welcome-message {
-
-
-    margin:
-
-    50px auto 0;
-
-
-    max-width:
-
-    850px;
-
-
-    font-family:
-
-    var(--font-tamil);
-
-
-    font-size:
-
-    25px;
-
-
-    line-height:
-
-    2;
-
-
-    color:
-
-    var(--ctm-text-primary);
-
-
-
-}
-
-
-
-
-
-
-
-.welcome-message-en {
-
-
-    margin:
-
-    30px auto 0;
-
-
-    max-width:
-
-    800px;
-
-
-    font-size:
-
-    21px;
-
-
-    line-height:
-
-    1.9;
-
-
-    color:
-
-    var(--ctm-text-secondary);
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   NEW LENS SECTION
-   ========================================================================== */
-
-
-.welcome-lens {
-
-
-    margin:
-
-    140px auto 0;
-
-
-    max-width:
-
-    1000px;
-
-
-    text-align:
-
-    center;
-
-
-
-}
-
-
-
-
-
-
-
-.lens-title {
-
-
-    font-family:
-
-    var(--font-tamil);
-
-
-    font-size:
-
-    48px;
-
-
-    line-height:
-
-    1.5;
-
-
-    color:
-
-    var(--ctm-text-primary);
-
-
-
-}
-
-
-
-
-
-
-
-.lens-title-en {
-
-
-    margin-top:
-
-    18px;
-
-
-    color:
-
-    var(--ctm-gold);
-
-
-    font-size:
-
-    26px;
-
-
-
-}
-
-
-
-
-
-
-
-.lens-description {
-
-
-    margin:
-
-    45px auto 0;
-
-
-    font-size:
-
-    21px;
-
-
-    line-height:
-
-    2;
-
-
-}
-
-
-
-.lens-description-en {
-
-
-    margin-top:
-
-    24px;
-
-
-    color:
-
-    var(--ctm-text-secondary);
-
-
-    font-size:
-
-    18px;
-
-
-}
-
-
-
-
-
-
-
-.welcome-permission {
-
-
-    margin:
-
-    60px auto 0;
-
-
-    max-width:
-
-    650px;
-
-
-    padding:
-
-    36px;
-
-
-    text-align:
-
-    center;
-
-
-    border:
-
-    1px solid var(--ctm-border-gold);
-
-
-    border-radius:
-
-    28px;
-
-
-    background:
-
-    rgba(
-        255,
-        255,
-        255,
-        0.04
-    );
-
-
-    color:
-
-    var(--ctm-gold-light);
-
-
-    font-size:
-
-    20px;
-
-
-    line-height:
-
-    2;
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   DISCOVERY SECTION
-   ========================================================================== */
-
-
-.welcome-discovery {
-
-
-    margin-top:
-
-    140px;
-
-
-    text-align:
-
-    center;
-
-
-
-}
-
-
-
-
-
-
-
-.discovery-title {
-
-
-    font-family:
-
-    var(--font-tamil);
-
-
-    font-size:
-
-    52px;
-
-
-    color:
-
-    var(--ctm-text-primary);
-
-
-
-}
-
-
-
-
-
-
-
-.discovery-title-en {
-
-
-    margin-top:
-
-    18px;
-
-
-    font-size:
-
-    26px;
-
-
-    color:
-
-    var(--ctm-gold);
-
-
-
-}
-
-
-
-
-
-
-
-.discovery-grid {
-
-
-    margin-top:
-
-    80px;
-
-
-    display:
-
-    grid;
-
-
-    grid-template-columns:
-
-    repeat(
-        2,
-        1fr
-    );
-
-
-    gap:
-
-    42px;
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   PREMIUM DISCOVERY CARDS
+   DISCOVERY CARDS — FINAL PREMIUM TREATMENT
    ========================================================================== */
 
 
 .discovery-card {
 
 
-    min-height:
+    position:
 
-    390px;
-
-
-    padding:
-
-    46px;
+    relative;
 
 
-    display:
 
-    flex;
+    overflow:
 
+    hidden;
 
-    flex-direction:
-
-    column;
-
-
-    align-items:
-
-    center;
-
-
-    justify-content:
-
-    flex-start;
 
 
     background:
 
-    rgba(
-        8,
-        28,
-        58,
-        0.95
-    );
+    var(--ctm-surface-glass);
+
 
 
     border:
 
-    1px solid rgba(
-        87,
-        214,
-        214,
-        0.35
-    );
+    1px solid var(--ctm-border-blue);
+
 
 
     border-radius:
 
-    30px;
+    var(--radius-large);
+
 
 
     box-shadow:
 
-    0 20px 60px rgba(
-        0,
-        0,
-        0,
-        0.35
+    var(--ctm-shadow);
+
+
+
+    transition:
+
+    transform .35s ease,
+    border-color .35s ease,
+    box-shadow .35s ease;
+
+
+
+}
+
+
+
+
+
+
+
+.discovery-card::before {
+
+
+    content:
+
+    "";
+
+
+
+    position:
+
+    absolute;
+
+
+
+    top:
+
+    0;
+
+
+
+    left:
+
+    0;
+
+
+
+    width:
+
+    100%;
+
+
+
+    height:
+
+    2px;
+
+
+
+    background:
+
+    linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        var(--ctm-blue),
+
+        transparent
+
     );
+
+
+
+    opacity:
+
+    .8;
+
 
 
 }
@@ -633,9 +154,27 @@
 .discovery-card:hover {
 
 
+    transform:
+
+    translateY(-8px);
+
+
+
     border-color:
 
     var(--ctm-gold);
+
+
+
+    box-shadow:
+
+    0 25px 70px rgba(
+        0,
+        183,
+        255,
+        0.20
+    );
+
 
 
 }
@@ -644,6 +183,286 @@
 
 
 
+
+
+/* ==========================================================================
+   DISCOVERY SYMBOLS
+   ========================================================================== */
+
+
+.discovery-icon {
+
+
+    width:
+
+    82px;
+
+
+
+    height:
+
+    82px;
+
+
+
+    display:
+
+    flex;
+
+
+
+    align-items:
+
+    center;
+
+
+
+    justify-content:
+
+    center;
+
+
+
+}
+
+
+
+.discovery-icon svg {
+
+
+    stroke:
+
+    var(--ctm-gold-light);
+
+
+
+    stroke-width:
+
+    4;
+
+
+
+    filter:
+
+    drop-shadow(
+        0 0 12px rgba(
+            217,
+            181,
+            106,
+            .45
+        )
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   DISCOVERY NUMBER BADGES
+   ========================================================================== */
+
+
+.discovery-number {
+
+
+    background:
+
+    rgba(
+        0,
+        183,
+        255,
+        0.08
+    );
+
+
+
+    border:
+
+    1px solid var(--ctm-blue);
+
+
+
+    color:
+
+    var(--ctm-blue);
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   CTA BUTTON — CTM BLUE SIGNATURE
+   ========================================================================== */
+
+
+.welcome-start-btn {
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        var(--ctm-blue),
+
+        var(--ctm-blue-deep)
+
+    );
+
+
+
+    color:
+
+    #FFFFFF;
+
+
+
+    border:
+
+    1px solid rgba(
+        255,
+        255,
+        255,
+        0.25
+    );
+
+
+
+    box-shadow:
+
+    0 0 35px var(--ctm-blue-glow);
+
+
+
+    letter-spacing:
+
+    .03em;
+
+
+
+}
+
+
+
+
+
+
+
+.welcome-start-btn:hover {
+
+
+    box-shadow:
+
+    0 0 60px var(--ctm-blue-glow-strong);
+
+
+
+    transform:
+
+    translateY(-5px);
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   CTA TEXT HIERARCHY
+   ========================================================================== */
+
+
+.welcome-start-btn span:first-child {
+
+
+    font-family:
+
+    var(--font-tamil);
+
+
+
+    font-size:
+
+    20px;
+
+
+
+}
+
+
+
+.welcome-start-btn span:last-child {
+
+
+    font-size:
+
+    14px;
+
+
+
+    opacity:
+
+    .95;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   HERO SPACING REFINEMENT
+   ========================================================================== */
+
+
+.welcome-hero {
+
+
+    padding-top:
+
+    55px;
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   MOBILE REFINEMENT
+   ========================================================================== */
+
+
+@media(max-width:767px){
 
 
 
@@ -652,104 +471,13 @@
 
     width:
 
-    72px;
+    70px;
+
 
 
     height:
 
-    72px;
-
-
-    margin-bottom:
-
-    24px;
-
-
-}
-
-
-.discovery-icon svg {
-
-
-    width:
-
-    100%;
-
-
-    height:
-
-    100%;
-
-
-    fill:
-
-    none;
-
-
-    stroke:
-
-    var(--ctm-gold);
-
-
-    stroke-width:
-
-    5;
-
-
-}
-
-
-
-
-
-
-
-.discovery-number {
-
-
-    width:
-
-    46px;
-
-
-    height:
-
-    46px;
-
-
-    display:
-
-    flex;
-
-
-    align-items:
-
-    center;
-
-
-    justify-content:
-
-    center;
-
-
-    border-radius:
-
-    50%;
-
-
-    border:
-
-    1px solid var(--ctm-gold);
-
-
-    color:
-
-    var(--ctm-gold-light);
-
-
-    margin-bottom:
-
-    24px;
+    70px;
 
 
 
@@ -757,75 +485,7 @@
 
 
 
-
-
-
-
-.discovery-card h4 {
-
-
-    font-family:
-
-    var(--font-tamil);
-
-
-    font-size:
-
-    28px;
-
-
-    color:
-
-    var(--ctm-text-primary);
-
-
-
-}
-
-
-
-
-
-
-
-.discovery-card h5 {
-
-
-    margin-top:
-
-    12px;
-
-
-    color:
-
-    var(--ctm-teal-soft);
-
-
-    letter-spacing:
-
-    0.08em;
-
-
-
-}
-
-
-
-
-
-
-
-.discovery-card p {
-
-
-    margin-top:
-
-    20px;
-
-
-    color:
-
-    var(--ctm-text-secondary);
+.welcome-start-btn span:first-child {
 
 
     font-size:
@@ -833,312 +493,9 @@
     18px;
 
 
-    line-height:
-
-    1.8;
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   CTA SECTION
-   ========================================================================== */
-
-
-.welcome-final {
-
-
-    margin:
-
-    140px auto 0;
-
-
-    text-align:
-
-    center;
-
-
-
-}
-
-
-
-
-
-
-
-.welcome-final h2 {
-
-
-    font-family:
-
-    var(--font-tamil);
-
-
-    font-size:
-
-    46px;
-
-
-}
-
-
-
-.welcome-final p {
-
-
-    margin-top:
-
-    35px;
-
-
-    font-size:
-
-    22px;
-
-
-    line-height:
-
-    2;
-
-
-
-}
-
-
-
-
-
-
-
-/* CTM BLUE PREMIUM BUTTON */
-
-
-.welcome-start-btn {
-
-
-    margin-top:
-
-    55px;
-
-
-    min-width:
-
-    360px;
-
-
-    min-height:
-
-    72px;
-
-
-    border:
-
-    none;
-
-
-    border-radius:
-
-    999px;
-
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #00B7FF,
-        #0066CC
-    );
-
-
-    color:
-
-    #FFFFFF;
-
-
-    font-size:
-
-    18px;
-
-
-    font-weight:
-
-    700;
-
-
-    cursor:
-
-    pointer;
-
-
-    box-shadow:
-
-    0 0 35px rgba(
-        0,
-        183,
-        255,
-        0.45
-    );
-
-
-    transition:
-
-    transform
-    0.3s ease,
-    box-shadow
-    0.3s ease;
-
-
-
-}
-
-
-
-.welcome-start-btn:hover {
-
-
-    transform:
-
-    translateY(-4px);
-
-
-    box-shadow:
-
-    0 0 55px rgba(
-        0,
-        183,
-        255,
-        0.65
-    );
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   RESPONSIVE
-   ========================================================================== */
-
-
-@media(max-width:1024px){
-
-
-.discovery-grid {
-
-
-    grid-template-columns:
-
-    1fr;
-
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-@media(max-width:767px){
-
-
-.welcome-title {
-
-
-    font-size:
-
-    42px;
-
-
-
-}
-
-
-.welcome-positioning {
-
-
-    font-size:
-
-    22px;
-
-
-
-}
-
-
-.discovery-card {
-
-
-    min-height:
-
-    auto;
-
-
-    padding:
-
-    32px;
-
-
-
-}
-
-
-
-.welcome-start-btn {
-
-
-    width:
-
-    100%;
-
-
-    min-width:
-
-    auto;
-
-
 
 }
 
 
 
 }
-
-
-
-
-
-
-
-/* ==========================================================================
-   END OF FILE
-
-   File:
-   css/welcome.css
-
-   Version:
-   CTM PATH™ Premium Welcome Experience v3.0
-
-   Status:
-   UPDATED 🔒
-
-   ========================================================================== */
