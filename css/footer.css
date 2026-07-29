@@ -3,16 +3,8 @@
    CTM PATH™ Guided Journey™
 
    File        : css/footer.css
-   Version     : 4.0
+   Version     : 5.0
    Status      : PREMIUM FOOTER SYSTEM
-
-   Purpose
-   -------
-   Global premium footer styling.
-
-   Supports
-   --------
-   ✓ components/footer.html
 
 ========================================================================== */
 
@@ -28,11 +20,9 @@
 
     position:relative;
 
-    margin-top:120px;
+    margin-top:140px;
 
-    background:var(--color-surface,#081C3A);
-
-    border-top:1px solid rgba(255,255,255,.06);
+    background:#081C3A;
 
     overflow:hidden;
 
@@ -45,7 +35,7 @@
 
 
 /* ==========================================================================
-   SUBTLE BACKGROUND GLOW
+   SUBTLE PREMIUM LIGHT
 ========================================================================== */
 
 .ctm-footer::before{
@@ -59,12 +49,66 @@
     background:
 
         radial-gradient(
+
             circle at top center,
-            rgba(0,184,169,.08),
-            transparent 60%
+
+            rgba(33,208,197,.08),
+
+            transparent 62%
+
         );
 
     pointer-events:none;
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   TOP TAGLINE
+========================================================================== */
+
+.footer-topline{
+
+    position:relative;
+
+    z-index:2;
+
+    max-width:1600px;
+
+    margin:0 auto;
+
+    padding:80px 40px 70px;
+
+    text-align:center;
+
+    color:#F8F5EF;
+
+    font-size:2.6rem;
+
+    font-weight:300;
+
+    letter-spacing:.01em;
+
+    line-height:1.45;
+
+}
+
+
+
+
+
+
+
+.footer-topline span{
+
+    margin:0 18px;
+
+    color:#21D0C5;
 
 }
 
@@ -84,61 +128,11 @@
 
     z-index:2;
 
-    max-width:1280px;
+    max-width:1500px;
 
     margin:0 auto;
 
-    padding:72px 56px 36px;
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   TOP TAGLINE
-========================================================================== */
-
-.footer-topline{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    flex-wrap:wrap;
-
-    gap:18px;
-
-    margin-bottom:72px;
-
-    color:rgba(255,255,255,.92);
-
-    font-size:2rem;
-
-    font-weight:300;
-
-    letter-spacing:.01em;
-
-    text-align:center;
-
-}
-
-
-
-
-
-
-
-.footer-topline span{
-
-    color:var(--ctm-teal,#00B8A9);
-
-    font-size:1rem;
+    padding:0 70px 40px;
 
 }
 
@@ -156,37 +150,17 @@
 
     display:grid;
 
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:
 
-    gap:80px;
+        1fr
+
+        1fr
+
+        1fr;
+
+    gap:90px;
 
     align-items:start;
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   LABELS
-========================================================================== */
-
-.footer-label{
-
-    margin-bottom:18px;
-
-    color:#D4AF37;
-
-    font-size:.72rem;
-
-    font-weight:700;
-
-    letter-spacing:.26em;
-
-    text-transform:uppercase;
 
 }
 
@@ -200,17 +174,27 @@
    BRAND
 ========================================================================== */
 
-.footer-brand-name{
+.footer-brand{
 
-    margin-bottom:14px;
+    text-align:left;
+
+}
+
+
+
+
+
+
+
+.footer-brand-name{
 
     color:#FFFFFF;
 
-    font-size:2.15rem;
+    font-size:2.7rem;
 
     font-weight:800;
 
-    letter-spacing:.02em;
+    margin-bottom:18px;
 
 }
 
@@ -222,13 +206,13 @@
 
 .footer-brand-subtitle{
 
+    color:#C9D7E4;
+
+    font-size:1.45rem;
+
+    font-weight:400;
+
     margin-bottom:18px;
-
-    color:#BFD3E2;
-
-    font-size:1.08rem;
-
-    font-weight:500;
 
 }
 
@@ -242,13 +226,37 @@
 
     color:#FFFFFF;
 
-    opacity:.90;
-
-    font-size:1.35rem;
+    font-size:1.65rem;
 
     font-style:italic;
 
-    line-height:1.5;
+    opacity:.96;
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   LABEL
+========================================================================== */
+
+.footer-label{
+
+    color:#D4AF37;
+
+    font-size:.82rem;
+
+    font-weight:700;
+
+    letter-spacing:.34em;
+
+    text-transform:uppercase;
+
+    margin-bottom:20px;
 
 }
 
@@ -262,17 +270,27 @@
    FOUNDER
 ========================================================================== */
 
-.footer-founder-name{
+.footer-founder{
 
-    margin-bottom:14px;
+    text-align:center;
+
+}
+
+
+
+
+
+
+
+.footer-founder-name{
 
     color:#FFFFFF;
 
-    font-size:1.9rem;
+    font-size:2.3rem;
 
     font-weight:700;
 
-    line-height:1.35;
+    margin-bottom:18px;
 
 }
 
@@ -284,9 +302,9 @@
 
 .footer-role{
 
-    color:#DCE7F2;
+    color:#D7E5F2;
 
-    font-size:1.1rem;
+    font-size:1.4rem;
 
     line-height:1.7;
 
@@ -302,13 +320,21 @@
    CONTACT
 ========================================================================== */
 
+.footer-contact{
+
+    text-align:right;
+
+}
+
+
+
+
+
+
+
 .footer-contact-item{
 
-    display:flex;
-
-    flex-direction:column;
-
-    margin-bottom:26px;
+    margin-bottom:28px;
 
 }
 
@@ -320,13 +346,13 @@
 
 .footer-contact-item span{
 
-    margin-bottom:8px;
+    display:block;
 
-    color:#FFFFFF;
+    margin-bottom:10px;
 
-    font-size:1rem;
+    color:#F7F4EF;
 
-    font-weight:500;
+    font-size:1.15rem;
 
 }
 
@@ -338,19 +364,17 @@
 
 .footer-contact-item a{
 
-    color:var(--ctm-teal,#00B8A9);
+    color:#21D0C5;
+
+    font-size:1.42rem;
 
     text-decoration:none;
 
-    font-size:1.08rem;
-
     transition:
-
-        color .25s ease,
 
         opacity .25s ease,
 
-        transform .25s ease;
+        color .25s ease;
 
 }
 
@@ -362,9 +386,7 @@
 
 .footer-contact-item a:hover{
 
-    opacity:.85;
-
-    transform:translateX(3px);
+    opacity:.82;
 
 }
 
@@ -380,17 +402,17 @@
 
 .footer-bottom{
 
-    margin-top:70px;
+    margin-top:80px;
 
-    padding-top:28px;
+    padding:38px 0;
 
-    border-top:1px solid rgba(255,255,255,.06);
+    border-top:1px solid rgba(255,255,255,.08);
 
     text-align:center;
 
-    color:rgba(255,255,255,.72);
+    color:rgba(255,255,255,.78);
 
-    font-size:.95rem;
+    font-size:1.08rem;
 
     letter-spacing:.05em;
 
@@ -406,11 +428,11 @@
    RESPONSIVE
 ========================================================================== */
 
-@media (max-width:1024px){
+@media (max-width:1200px){
 
     .footer-grid{
 
-        gap:56px;
+        gap:60px;
 
     }
 
@@ -422,11 +444,19 @@
 
 
 
-@media (max-width:900px){
+@media (max-width:980px){
+
+    .footer-topline{
+
+        font-size:2rem;
+
+        padding:70px 24px 55px;
+
+    }
 
     .footer-container{
 
-        padding:64px 36px 32px;
+        padding:0 28px 40px;
 
     }
 
@@ -434,23 +464,19 @@
 
         grid-template-columns:1fr;
 
-        gap:50px;
+        gap:60px;
 
         text-align:center;
 
     }
 
-    .footer-topline{
+    .footer-brand,
 
-        font-size:1.55rem;
+    .footer-founder,
 
-        line-height:1.6;
+    .footer-contact{
 
-    }
-
-    .footer-contact-item{
-
-        align-items:center;
+        text-align:center;
 
     }
 
@@ -464,45 +490,45 @@
 
 @media (max-width:640px){
 
-    .footer-container{
-
-        padding:56px 24px 28px;
-
-    }
-
     .footer-topline{
 
-        font-size:1.2rem;
+        font-size:1.35rem;
 
-        gap:10px;
+        line-height:1.7;
 
     }
 
     .footer-brand-name{
 
-        font-size:1.8rem;
+        font-size:2rem;
 
     }
 
     .footer-brand-subtitle{
 
-        font-size:1rem;
+        font-size:1.2rem;
 
     }
 
     .footer-brand-signature{
 
-        font-size:1.15rem;
+        font-size:1.3rem;
 
     }
 
     .footer-founder-name{
 
-        font-size:1.6rem;
+        font-size:1.8rem;
 
     }
 
     .footer-role{
+
+        font-size:1.15rem;
+
+    }
+
+    .footer-contact-item span{
 
         font-size:1rem;
 
@@ -510,19 +536,19 @@
 
     .footer-contact-item a{
 
-        font-size:1rem;
+        font-size:1.15rem;
 
         word-break:break-word;
 
     }
 
+    .footer-bottom{
+
+        margin-top:55px;
+
+    }
+
 }
-
-
-
-
-
-
 
 /* ==========================================================================
    END OF FILE
