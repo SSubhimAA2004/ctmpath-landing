@@ -3,12 +3,13 @@
    CTM PATH™ Guided Journey™
 
    File        : index.html
-   Version     : 2.0
-   Status      : FOUNDATION RECOVERY
+   Version     : 2.1
+
+   Status      : FOUNDATION RECOVERY PATCH
 
    Purpose:
 
-   Primary application shell for CTM PATH™ Guided Journey™
+   Primary application shell.
 
    Responsibilities:
 
@@ -16,11 +17,6 @@
    ✓ Mount shared components
    ✓ Provide application containers
    ✓ Initialize frontend engine
-   ✓ Maintain clean separation between:
-        Presentation
-        Navigation
-        Business Logic
-        Backend Services
 
 
    Architecture:
@@ -31,18 +27,9 @@
    └── Vanilla JavaScript
 
 
-   BACKEND
-   ├── Google Apps Script API
-   ├── Google Sheets Database
-   ├── Assessment Engine
-   ├── Scoring Engine
-   ├── Diagnosis Engine
-   └── Report Generation
-
-
    IMPORTANT:
 
-   This file contains NO business logic.
+   No business logic exists here.
 
    ========================================================================== -->
 
@@ -50,6 +37,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 
 
 <head>
@@ -66,38 +54,54 @@
       content="CTM PATH™ Guided Journey™ — From Survival To Living™">
 
 
-<meta name="application-name"
-      content="CTM PATH™ Guided Journey™">
-
-
 <title>
 CTM PATH™ Guided Journey™
 </title>
 
 
 
-<!-- ==========================================================================
+
+
+<!-- ======================================================================
      PREMIUM DESIGN SYSTEM
-     ========================================================================== -->
+     ====================================================================== -->
 
 
 <link rel="stylesheet"
       href="css/foundation.css">
 
 
+
 <link rel="stylesheet"
       href="css/theme.css">
 
+
+
+<!-- Global Components -->
+
+<link rel="stylesheet"
+      href="css/header.css">
+
+
+
+<link rel="stylesheet"
+      href="css/footer.css">
+
+
+
+<!-- Page 01 -->
+
+<link rel="stylesheet"
+      href="css/welcome.css">
+
+
+
+<!-- Responsive -->
 
 <link rel="stylesheet"
       href="css/responsive.css">
 
 
-
-<!-- Shared Assessment Styling -->
-
-<link rel="stylesheet"
-      href="css/assessment.css">
 
 
 
@@ -105,13 +109,11 @@ CTM PATH™ Guided Journey™
 
 
 
+
+
 <body>
 
 
-
-<!-- ==========================================================================
-     APPLICATION ROOT
-     ========================================================================== -->
 
 
 <div id="app-shell"
@@ -119,18 +121,12 @@ CTM PATH™ Guided Journey™
 
 
 
-<!-- ==========================================================================
+
+
+
+<!-- ======================================================================
      GLOBAL LOADER
-
-     Controlled by:
-     js/app.js
-
-     Purpose:
-     Initial application preparation only.
-
-     No visible technical messages.
-
-     ========================================================================== -->
+     ====================================================================== -->
 
 
 <div id="global-loader"
@@ -140,30 +136,28 @@ CTM PATH™ Guided Journey™
 <div class="loader-container">
 
 
-<div class="loader-spinner">
-</div>
+<div class="loader-spinner"></div>
 
 
-<p class="loader-message">
-</p>
-
-
-</div>
+<p class="loader-message"></p>
 
 
 </div>
 
 
+</div>
 
 
-<!-- ==========================================================================
+
+
+
+
+
+
+
+<!-- ======================================================================
      GLOBAL HEADER
-
-     Loaded dynamically:
-
-     components/header.html
-
-     ========================================================================== -->
+     ====================================================================== -->
 
 
 <header id="app-header"
@@ -174,22 +168,14 @@ CTM PATH™ Guided Journey™
 
 
 
-<!-- ==========================================================================
-     JOURNEY CONTENT AREA
 
-     All 18 pages render here.
 
-     Journey:
 
-     01 Welcome
-     02 Registration
-     03-14 Assessment Engine
-     15 Kala Chakra™
-     16 Diagnosis
-     17 Prescription
-     18 CTA
 
-     ========================================================================== -->
+
+<!-- ======================================================================
+     JOURNEY CONTENT
+     ====================================================================== -->
 
 
 <main id="app-content"
@@ -203,23 +189,18 @@ CTM PATH™ Guided Journey™
 
 
 
-<!-- ==========================================================================
-     JOURNEY NAVIGATION
-
-     Loaded dynamically:
-
-     components/navigation.html
 
 
-     Controlled by:
 
-     js/navigation.js
 
-     ========================================================================== -->
+<!-- ======================================================================
+     GLOBAL NAVIGATION
+     ====================================================================== -->
 
 
 <nav id="app-navigation"
      class="app-navigation">
+
 
 </nav>
 
@@ -227,84 +208,93 @@ CTM PATH™ Guided Journey™
 
 
 
-<!-- ==========================================================================
+
+
+
+
+<!-- ======================================================================
      GLOBAL FOOTER
-
-     Loaded dynamically:
-
-     components/footer.html
-
-     ========================================================================== -->
+     ====================================================================== -->
 
 
 <footer id="app-footer"
         class="app-footer">
+
 
 </footer>
 
 
 
 
+
+
 </div>
 
 
 
 
-<!-- ==========================================================================
-     ERROR HANDLING CONTAINER
-
-     Controlled by:
-
-     js/app.js
 
 
-     User-friendly errors only.
 
-     ========================================================================== -->
 
 
 <div id="error-container"
      class="error-container hidden">
 
+
 </div>
 
 
 
 
 
-<!-- ==========================================================================
+
+
+
+
+<!-- ======================================================================
      JAVASCRIPT FOUNDATION LOAD ORDER
 
-     IMPORTANT:
+     Dependency order:
 
-     Dependency sequence:
+     1. API layer
+     2. Storage layer
+     3. Navigation engine
+     4. Page controllers
+     5. Application bootstrap
 
-     1. app.js
-     2. api.js
-     3. storage.js
-     4. navigation.js
-     5. assessmentEngine.js
-     6. scoring.js
-     7. report.js
-
-
-     ========================================================================== -->
+     ====================================================================== -->
 
 
 
-<script src="js/app.js"></script>
+
 
 <script src="js/api.js"></script>
 
+
 <script src="js/storage.js"></script>
+
 
 <script src="js/navigation.js"></script>
 
-<script src="js/assessmentEngine.js"></script>
 
-<script src="js/scoring.js"></script>
 
-<script src="js/report.js"></script>
+
+
+<!-- Page Controllers -->
+
+<script src="js/welcome.js"></script>
+
+
+
+
+
+<!-- Application Bootstrap -->
+
+<script src="js/app.js"></script>
+
+
+
 
 
 
