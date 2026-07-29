@@ -3,149 +3,223 @@
    CTM PATH™ Guided Journey™
 
    File        : css/header.css
-   Version     : 2.0
+   Version     : 4.0
+   Status      : Premium Global Header
+   Architecture: Static HTML + CSS + Vanilla JavaScript
+   --------------------------------------------------------------------------
 
-   Status      : 🔒 PREMIUM HEADER SYSTEM
+   PURPOSE
 
+   Premium styling for the global site header.
 
-   Purpose:
+   Covers:
 
-   Global brand header styling.
+   • Sticky Header
+   • Glass Navigation
+   • Brand Area
+   • Navigation Links
+   • CTA Button
+   • Scroll States
+   • Responsive Layout
 
-
-   ========================================================================== */
+========================================================================== */
 
 
 
 
 
 /* ==========================================================================
-   HEADER FOUNDATION
-   ========================================================================== */
+   HEADER
+========================================================================== */
+
+.site-header{
+
+    position:
+
+        fixed;
+
+    top:
+
+        0;
+
+    left:
+
+        0;
+
+    right:
+
+        0;
+
+    z-index:
+
+        1000;
+
+    transition:
+
+        background .45s ease,
+        border-color .45s ease,
+        box-shadow .45s ease,
+        padding .45s ease;
+
+}
 
 
-.ctm-header {
-
-
-    width:100%;
 
 
 
-    padding:
-
-    28px 60px;
-
-
-
-    display:flex;
-
-
-
-    align-items:center;
-
-
-
-    justify-content:space-between;
-
-
+.site-header.scrolled{
 
     background:
 
-    rgba(8,28,58,0.85);
-
-
-
-    border-bottom:
-
-    1px solid rgba(201,162,39,0.18);
-
-
+        rgba(8,16,24,.88);
 
     backdrop-filter:
 
-    blur(16px);
+        blur(18px);
 
+    -webkit-backdrop-filter:
 
+        blur(18px);
 
-    position:relative;
+    border-bottom:
 
+        1px solid rgba(255,255,255,.08);
 
+    box-shadow:
 
-    z-index:10;
-
-
+        0 12px 42px rgba(0,0,0,.28);
 
 }
-
-
-
-
 
 
 
 
 
 /* ==========================================================================
-   BRAND AREA
-   ========================================================================== */
+   HEADER CONTAINER
+========================================================================== */
 
+.header-container{
 
-.header-brand {
+    width:
 
+        min(1320px,100% - 48px);
 
-    display:flex;
+    margin:
 
+        0 auto;
 
+    display:
 
-    align-items:center;
+        flex;
 
+    align-items:
 
+        center;
 
-    gap:28px;
+    justify-content:
 
+        space-between;
 
+    gap:
+
+        2rem;
+
+    padding:
+
+        1.15rem 0;
+
+    transition:
+
+        padding .35s ease;
 
 }
 
 
 
 
+
+.site-header.scrolled .header-container{
+
+    padding:
+
+        .85rem 0;
+
+}
 
 
 
 
 
 /* ==========================================================================
-   LOGO
-   ========================================================================== */
+   BRAND
+========================================================================== */
 
+.header-brand{
 
-.header-logo {
+    display:
 
+        flex;
 
-    width:110px;
+    align-items:
 
+        center;
 
+    gap:
 
-    height:110px;
+        1rem;
 
+    text-decoration:
 
+        none;
 
-    display:flex;
+}
 
+/* ==========================================================================
+   BRAND IDENTITY
+========================================================================== */
 
+.header-logo{
 
-    align-items:center;
+    width:
 
+        54px;
 
+    height:
 
-    justify-content:center;
+        54px;
 
+    flex-shrink:
 
+        0;
 
-    flex-shrink:0;
+    border-radius:
 
+        50%;
 
+    overflow:
+
+        hidden;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            rgba(35,212,200,.16),
+
+            rgba(201,162,39,.10)
+
+        );
+
+    border:
+
+        1px solid rgba(255,255,255,.10);
+
+    box-shadow:
+
+        0 12px 32px rgba(0,0,0,.24);
 
 }
 
@@ -153,136 +227,439 @@
 
 
 
+.header-logo img{
+
+    width:
+
+        100%;
+
+    height:
+
+        100%;
+
+    object-fit:
+
+        cover;
+
+}
 
 
-.brand-symbol {
-
-
-    width:100%;
 
 
 
-    height:100%;
+.header-brand-text{
+
+    display:
+
+        flex;
+
+    flex-direction:
+
+        column;
+
+    gap:
+
+        .25rem;
+
+}
 
 
 
-    object-fit:contain;
 
 
+.header-title{
+
+    color:
+
+        var(--text-heading);
+
+    font-size:
+
+        1.18rem;
+
+    font-weight:
+
+        700;
+
+    letter-spacing:
+
+        .04em;
+
+    line-height:
+
+        1.1;
+
+}
+
+
+
+
+
+.header-tagline{
+
+    color:
+
+        var(--text-support);
+
+    font-size:
+
+        .82rem;
+
+    letter-spacing:
+
+        .18em;
+
+    text-transform:
+
+        uppercase;
+
+}
+
+
+
+
+
+/* ==========================================================================
+   NAVIGATION
+========================================================================== */
+
+.header-nav{
+
+    display:
+
+        flex;
+
+    align-items:
+
+        center;
+
+    gap:
+
+        2rem;
+
+}
+
+
+
+
+
+.header-nav ul{
+
+    display:
+
+        flex;
+
+    align-items:
+
+        center;
+
+    gap:
+
+        2rem;
+
+}
+
+
+
+
+
+.header-nav a{
+
+    position:
+
+        relative;
+
+    color:
+
+        var(--text-secondary);
+
+    font-size:
+
+        .96rem;
+
+    font-weight:
+
+        500;
+
+    letter-spacing:
+
+        .02em;
+
+    transition:
+
+        color .30s ease;
+
+}
+
+/* ==========================================================================
+   NAVIGATION LINKS
+========================================================================== */
+
+.header-nav a::after{
+
+    content:
+
+        "";
+
+    position:
+
+        absolute;
+
+    left:
+
+        0;
+
+    bottom:
+
+        -8px;
+
+    width:
+
+        100%;
+
+    height:
+
+        2px;
+
+    border-radius:
+
+        999px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            var(--ctm-teal),
+
+            var(--ctm-gold)
+
+        );
+
+    transform:
+
+        scaleX(0);
+
+    transform-origin:
+
+        center;
+
+    transition:
+
+        transform .35s ease;
+
+}
+
+
+
+
+
+.header-nav a:hover,
+
+.header-nav a:focus-visible{
+
+    color:
+
+        var(--text-primary);
+
+}
+
+
+
+
+
+.header-nav a:hover::after,
+
+.header-nav a:focus-visible::after,
+
+.header-nav a.active::after{
+
+    transform:
+
+        scaleX(1);
+
+}
+
+
+
+
+
+.header-nav a.active{
+
+    color:
+
+        var(--ctm-teal-soft);
+
+}
+
+
+
+
+
+/* ==========================================================================
+   HEADER CTA
+========================================================================== */
+
+.header-actions{
+
+    display:
+
+        flex;
+
+    align-items:
+
+        center;
+
+    gap:
+
+        1rem;
+
+}
+
+
+
+
+
+.header-cta{
+
+    display:
+
+        inline-flex;
+
+    align-items:
+
+        center;
+
+    justify-content:
+
+        center;
+
+    min-height:
+
+        48px;
+
+    padding:
+
+        .85rem 1.75rem;
+
+    border-radius:
+
+        var(--radius-pill);
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            var(--ctm-teal),
+
+            #1298D8
+
+        );
+
+    color:
+
+        var(--ctm-white);
+
+    font-weight:
+
+        600;
+
+    letter-spacing:
+
+        .02em;
+
+    box-shadow:
+
+        0 14px 34px rgba(35,212,200,.24);
+
+    transition:
+
+        transform .35s ease,
+
+        box-shadow .35s ease,
+
+        filter .35s ease;
+
+}
+
+
+
+
+
+.header-cta:hover,
+
+.header-cta:focus-visible{
+
+    transform:
+
+        translateY(-2px);
 
     filter:
 
-    drop-shadow(
+        brightness(1.05);
 
-        0 0 20px rgba(0,199,217,0.35)
+    box-shadow:
 
-    );
-
-
+        0 20px 48px rgba(35,212,200,.34);
 
 }
-
-
-
-
-
-
-
-
 
 /* ==========================================================================
-   BRAND IDENTITY STACK
-   ========================================================================== */
+   MOBILE NAVIGATION TOGGLE
+========================================================================== */
 
+.header-toggle{
 
-.brand-identity {
+    display:
 
+        none;
 
-    display:flex;
+    align-items:
 
+        center;
 
+    justify-content:
 
-    flex-direction:column;
+        center;
 
+    width:
 
+        48px;
 
-    gap:5px;
+    height:
 
+        48px;
 
+    border-radius:
 
-}
+        var(--radius-pill);
 
+    border:
 
+        1px solid rgba(255,255,255,.08);
 
+    background:
 
-
-
-
-
-
-.brand-name {
-
-
-    font-size:
-
-    38px;
-
-
-
-    line-height:1;
-
-
-
-    font-weight:800;
-
-
-
-    letter-spacing:
-
-    0.08em;
-
-
+        rgba(255,255,255,.03);
 
     color:
 
-    var(--ctm-ivory);
+        var(--text-primary);
 
+    cursor:
 
+        pointer;
 
-}
+    transition:
 
+        background .35s ease,
 
+        border-color .35s ease,
 
-
-
-
-
-
-
-.brand-tagline-main {
-
-
-    font-size:
-
-    15px;
-
-
-
-    letter-spacing:
-
-    0.28em;
-
-
-
-    color:
-
-    var(--ctm-gold-soft);
-
-
-
-    font-weight:600;
-
-
+        transform .35s ease;
 
 }
 
@@ -290,34 +667,21 @@
 
 
 
+.header-toggle:hover,
 
+.header-toggle:focus-visible{
 
+    background:
 
+        rgba(35,212,200,.08);
 
-.brand-tagline {
+    border-color:
 
+        rgba(35,212,200,.25);
 
-    font-size:
+    transform:
 
-    17px;
-
-
-
-    letter-spacing:
-
-    0.18em;
-
-
-
-    color:
-
-    var(--ctm-teal);
-
-
-
-    font-weight:600;
-
-
+        translateY(-2px);
 
 }
 
@@ -325,140 +689,17 @@
 
 
 
+.header-toggle svg{
 
+    width:
 
+        22px;
 
+    height:
 
-.brand-signature {
-
-
-    font-size:
-
-    15px;
-
-
-
-    font-style:italic;
-
-
-
-    color:
-
-    var(--text-secondary);
-
-
-
-    margin-top:
-
-    4px;
-
-
+        22px;
 
 }
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   JOURNEY STATUS
-   ========================================================================== */
-
-
-.journey-status {
-
-
-    display:flex;
-
-
-
-    flex-direction:column;
-
-
-
-    align-items:flex-end;
-
-
-
-    gap:8px;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.journey-label {
-
-
-    font-size:
-
-    12px;
-
-
-
-    letter-spacing:
-
-    0.35em;
-
-
-
-    color:
-
-    var(--text-muted);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.journey-counter {
-
-
-    font-size:
-
-    24px;
-
-
-
-    font-weight:700;
-
-
-
-    letter-spacing:
-
-    0.08em;
-
-
-
-    color:
-
-    var(--ctm-gold-soft);
-
-
-
-}
-
-
-
-
 
 
 
@@ -466,64 +707,25 @@
 
 /* ==========================================================================
    RESPONSIVE
-   ========================================================================== */
+========================================================================== */
 
+@media (max-width:1024px){
 
-@media(max-width:900px){
+    .header-nav{
 
+        display:
 
+            none;
 
-.ctm-header{
+    }
 
+    .header-toggle{
 
-    padding:
+        display:
 
-    22px 30px;
+            inline-flex;
 
-
-
-}
-
-
-
-.header-logo{
-
-
-    width:80px;
-
-
-
-    height:80px;
-
-
-
-}
-
-
-
-.brand-name{
-
-
-    font-size:
-
-    28px;
-
-
-
-}
-
-
-
-.journey-status{
-
-
-    display:none;
-
-
-
-}
-
-
+    }
 
 }
 
@@ -531,54 +733,94 @@
 
 
 
+@media (max-width:768px){
 
+    .header-container{
 
+        width:
 
-@media(max-width:600px){
+            min(100% - 32px,1320px);
 
+        padding:
 
+            1rem 0;
 
-.ctm-header{
+    }
 
+    .header-logo{
 
-    flex-direction:column;
+        width:
 
+            46px;
 
+        height:
 
-    gap:20px;
+            46px;
 
+    }
 
+    .header-title{
+
+        font-size:
+
+            1.05rem;
+
+    }
+
+    .header-tagline{
+
+        font-size:
+
+            .74rem;
+
+        letter-spacing:
+
+            .14em;
+
+    }
+
+    .header-cta{
+
+        padding:
+
+            .75rem 1.35rem;
+
+        min-height:
+
+            44px;
+
+    }
 
 }
 
 
 
-.header-brand{
 
 
-    flex-direction:column;
+/* ==========================================================================
+   ACCESSIBILITY
+========================================================================== */
 
+.header-nav a:focus-visible,
 
+.header-cta:focus-visible,
 
-    text-align:center;
+.header-toggle:focus-visible{
 
+    outline:
 
+        2px solid var(--ctm-teal-soft);
 
-}
+    outline-offset:
 
-
-
-.brand-tagline-main{
-
-
-    letter-spacing:
-
-    0.15em;
-
-
+        3px;
 
 }
 
 
 
-}
+
+
+/* ==========================================================================
+   END OF BATCH
+========================================================================== */
