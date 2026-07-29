@@ -1,99 +1,64 @@
 
 /* ==========================================================================
+
    CTM PATH™ Guided Journey™
 
-   File        : welcome.js
+   File        : js/welcome.js
    Version     : 1.0
 
-   Page        : 01 — Welcome™
+   Status      : 🔒 PAGE 01 CTA CONTROLLER
+
 
    Purpose:
 
-   Welcome page controller.
+   Controls Welcome Page interaction.
+
 
    Responsibilities:
 
-   ✓ Initialize welcome experience
-   ✓ Capture journey start metadata
-   ✓ Prepare session information
+   ✓ Start journey
+   ✓ Dispatch Page 02 transition
 
 
    Does NOT:
 
-   ✗ Navigation
-   ✗ Assessment
-   ✗ Scoring
-   ✗ Backend processing
+   ✗ Load pages
+   ✗ Handle API
+   ✗ Process data
 
 
    ========================================================================== */
 
 
+const Welcome = (() => {
 
 
 
-const CTMWelome = (() => {
-
-
-
-    const session = {
-
-
-        startedAt:
-
-        null,
-
-
-        device:
-
-        null,
-
-
-        source:
-
-        null
-
-
-
-    };
+    let initialized = false;
 
 
 
 
 
-
-
-
-
-    /* ==========================================================
-       INITIALIZATION
-       ========================================================== */
 
 
     function init(){
 
 
 
-        session.startedAt =
+        if(initialized){
 
-        new Date().toISOString();
+            return;
 
-
-
-        session.device =
-
-        detectDevice();
+        }
 
 
 
-        session.source =
-
-        detectSource();
+        initialized = true;
 
 
 
-
-        storeSession();
+        bindStartButton();
 
 
 
@@ -107,81 +72,37 @@ const CTMWelome = (() => {
 
 
 
-    /* ==========================================================
-       DEVICE DETECTION
-       ========================================================== */
-
-
-    function detectDevice(){
+    function bindStartButton(){
 
 
 
-        const width =
+        const button =
 
-        window.innerWidth;
+        document.getElementById(
 
-
-
-        if(width < 768){
-
-
-            return "mobile";
-
-
-        }
-
-
-
-        if(width < 1200){
-
-
-            return "tablet";
-
-
-        }
-
-
-
-        return "desktop";
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       SOURCE DETECTION
-       ========================================================== */
-
-
-    function detectSource(){
-
-
-
-        const params =
-
-        new URLSearchParams(
-
-            window.location.search
+            "start-journey"
 
         );
 
 
 
-        return (
 
-            params.get("source")
 
-            ||
+        if(!button){
 
-            "direct"
+            return;
+
+        }
+
+
+
+
+
+        button.addEventListener(
+
+            "click",
+
+            startJourney
 
         );
 
@@ -197,57 +118,35 @@ const CTMWelome = (() => {
 
 
 
-    /* ==========================================================
-       SESSION STORAGE
-
-       Temporary frontend storage only.
-
-       Backend persistence comes later.
-
-       ========================================================== */
-
-
-    function storeSession(){
+    function startJourney(){
 
 
 
-        try {
+        document.dispatchEvent(
 
 
 
-            sessionStorage.setItem(
+            new CustomEvent(
 
-                "ctm_welcome_session",
+                "ctm-page-change",
 
-                JSON.stringify(
+                {
 
-                    session
-
-                )
-
-            );
+                    detail:{
 
 
-
-        }
-
+                        page:2
 
 
-        catch(error){
+                    }
+
+                }
+
+            )
 
 
 
-            console.warn(
-
-                "Session storage unavailable",
-
-                error
-
-            );
-
-
-
-        }
+        );
 
 
 
@@ -259,14 +158,10 @@ const CTMWelome = (() => {
 
 
 
-
-
-    /* ==========================================================
-       PUBLIC API
-       ========================================================== */
 
 
     return {
+
 
 
         init
@@ -287,23 +182,15 @@ const CTMWelome = (() => {
 
 
 
-/* ==========================================================================
-   START PAGE CONTROLLER
-
-   ========================================================================== */
-
-
 document.addEventListener(
 
-    "DOMContentLoaded",
+"DOMContentLoaded",
 
-    function(){
-
-
-        CTMWelome.init();
+()=>{
 
 
+    Welcome.init();
 
-    }
 
-);
+
+});
