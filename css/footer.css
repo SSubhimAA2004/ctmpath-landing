@@ -5,7 +5,6 @@
    File        : css/footer.css
    Version     : 5.0
    Status      : PREMIUM FOOTER SYSTEM
-
 ========================================================================== */
 
 
@@ -35,7 +34,7 @@
 
 
 /* ==========================================================================
-   SUBTLE PREMIUM LIGHT
+   SUBTLE PREMIUM GLOW
 ========================================================================== */
 
 .ctm-footer::before{
@@ -47,15 +46,10 @@
     inset:0;
 
     background:
-
         radial-gradient(
-
             circle at top center,
-
-            rgba(33,208,197,.08),
-
+            rgba(35,212,200,.08),
             transparent 62%
-
         );
 
     pointer-events:none;
@@ -69,7 +63,7 @@
 
 
 /* ==========================================================================
-   TOP TAGLINE
+   JOURNEY TAGLINE
 ========================================================================== */
 
 .footer-topline{
@@ -82,19 +76,19 @@
 
     margin:0 auto;
 
-    padding:80px 40px 70px;
+    padding:85px 40px 75px;
 
     text-align:center;
 
     color:#F8F5EF;
 
-    font-size:2.6rem;
+    font-size:2.65rem;
 
     font-weight:300;
 
-    letter-spacing:.01em;
-
     line-height:1.45;
+
+    letter-spacing:.01em;
 
 }
 
@@ -108,7 +102,7 @@
 
     margin:0 18px;
 
-    color:#21D0C5;
+    color:#23D4C8;
 
 }
 
@@ -132,7 +126,7 @@
 
     margin:0 auto;
 
-    padding:0 70px 40px;
+    padding:0 70px 45px;
 
 }
 
@@ -150,15 +144,9 @@
 
     display:grid;
 
-    grid-template-columns:
+    grid-template-columns:1fr 1fr 1fr;
 
-        1fr
-
-        1fr
-
-        1fr;
-
-    gap:90px;
+    gap:120px;
 
     align-items:start;
 
@@ -170,13 +158,73 @@
 
 
 
-/* ==========================================================================
-   BRAND
-========================================================================== */
+.footer-brand,
+.footer-founder,
+.footer-contact{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+
+
+
 
 .footer-brand{
 
-    text-align:left;
+    align-items:flex-start;
+
+}
+
+
+
+
+
+
+
+.footer-founder{
+
+    align-items:center;
+
+}
+
+
+
+
+
+
+
+.footer-contact{
+
+    align-items:flex-end;
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   FIRST ROW
+========================================================================== */
+
+.footer-brand-name,
+.footer-founder-name,
+.footer-contact-title{
+
+    color:#FFFFFF;
+
+    font-size:2.15rem;
+
+    font-weight:700;
+
+    line-height:1.25;
 
 }
 
@@ -188,91 +236,7 @@
 
 .footer-brand-name{
 
-    color:#FFFFFF;
-
-    font-size:2.7rem;
-
-    font-weight:800;
-
-    margin-bottom:18px;
-
-}
-
-
-
-
-
-
-
-.footer-brand-subtitle{
-
-    color:#C9D7E4;
-
-    font-size:1.45rem;
-
-    font-weight:400;
-
-    margin-bottom:18px;
-
-}
-
-
-
-
-
-
-
-.footer-brand-signature{
-
-    color:#FFFFFF;
-
-    font-size:1.65rem;
-
-    font-style:italic;
-
-    opacity:.96;
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   LABEL
-========================================================================== */
-
-.footer-label{
-
-    color:#D4AF37;
-
-    font-size:.82rem;
-
-    font-weight:700;
-
-    letter-spacing:.34em;
-
-    text-transform:uppercase;
-
-    margin-bottom:20px;
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   FOUNDER
-========================================================================== */
-
-.footer-founder{
-
-    text-align:center;
+    margin-bottom:24px;
 
 }
 
@@ -284,13 +248,11 @@
 
 .footer-founder-name{
 
-    color:#FFFFFF;
+    white-space:nowrap;
 
-    font-size:2.3rem;
+    letter-spacing:-0.02em;
 
-    font-weight:700;
-
-    margin-bottom:18px;
+    margin-bottom:24px;
 
 }
 
@@ -300,13 +262,64 @@
 
 
 
+.footer-contact-title{
+
+    margin-bottom:24px;
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   SECOND ROW
+========================================================================== */
+
+.footer-brand-subtitle,
 .footer-role{
 
     color:#D7E5F2;
 
-    font-size:1.4rem;
+    font-size:1.32rem;
 
-    line-height:1.7;
+    line-height:1.85;
+
+}
+
+
+
+
+
+
+
+.footer-brand-subtitle{
+
+    margin-bottom:22px;
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   THIRD ROW
+========================================================================== */
+
+.footer-brand-signature{
+
+    color:#F6F7F9;
+
+    font-size:1.32rem;
+
+    font-style:italic;
+
+    line-height:1.8;
 
 }
 
@@ -320,21 +333,15 @@
    CONTACT
 ========================================================================== */
 
-.footer-contact{
-
-    text-align:right;
-
-}
-
-
-
-
-
-
-
 .footer-contact-item{
 
-    margin-bottom:28px;
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    margin-bottom:22px;
 
 }
 
@@ -344,15 +351,21 @@
 
 
 
-.footer-contact-item span{
+.contact-icon{
 
-    display:block;
+    display:flex;
 
-    margin-bottom:10px;
+    align-items:center;
 
-    color:#F7F4EF;
+    justify-content:center;
 
-    font-size:1.15rem;
+    width:34px;
+
+    height:34px;
+
+    font-size:1.2rem;
+
+    color:#23D4C8;
 
 }
 
@@ -364,17 +377,17 @@
 
 .footer-contact-item a{
 
-    color:#21D0C5;
+    color:#4EF7EC;
 
-    font-size:1.42rem;
+    font-size:1.30rem;
+
+    font-weight:600;
 
     text-decoration:none;
 
     transition:
-
-        opacity .25s ease,
-
-        color .25s ease;
+        color .25s ease,
+        opacity .25s ease;
 
 }
 
@@ -386,7 +399,7 @@
 
 .footer-contact-item a:hover{
 
-    opacity:.82;
+    color:#8CFFF8;
 
 }
 
@@ -402,9 +415,9 @@
 
 .footer-bottom{
 
-    margin-top:80px;
+    margin-top:85px;
 
-    padding:38px 0;
+    padding-top:38px;
 
     border-top:1px solid rgba(255,255,255,.08);
 
@@ -412,9 +425,9 @@
 
     color:rgba(255,255,255,.78);
 
-    font-size:1.08rem;
+    font-size:1.05rem;
 
-    letter-spacing:.05em;
+    letter-spacing:.08em;
 
 }
 
@@ -432,7 +445,7 @@
 
     .footer-grid{
 
-        gap:60px;
+        gap:70px;
 
     }
 
@@ -444,19 +457,11 @@
 
 
 
-@media (max-width:980px){
-
-    .footer-topline{
-
-        font-size:2rem;
-
-        padding:70px 24px 55px;
-
-    }
+@media (max-width:992px){
 
     .footer-container{
 
-        padding:0 28px 40px;
+        padding:0 36px 40px;
 
     }
 
@@ -466,17 +471,21 @@
 
         gap:60px;
 
+    }
+
+    .footer-brand,
+    .footer-founder,
+    .footer-contact{
+
+        align-items:center;
+
         text-align:center;
 
     }
 
-    .footer-brand,
+    .footer-founder-name{
 
-    .footer-founder,
-
-    .footer-contact{
-
-        text-align:center;
+        white-space:normal;
 
     }
 
@@ -488,7 +497,47 @@
 
 
 
-@media (max-width:640px){
+@media (max-width:768px){
+
+    .footer-topline{
+
+        font-size:1.8rem;
+
+        padding:70px 24px 55px;
+
+    }
+
+    .footer-brand-name,
+    .footer-founder-name,
+    .footer-contact-title{
+
+        font-size:1.8rem;
+
+    }
+
+    .footer-brand-subtitle,
+    .footer-role,
+    .footer-brand-signature{
+
+        font-size:1.12rem;
+
+    }
+
+    .footer-contact-item a{
+
+        font-size:1.12rem;
+
+    }
+
+}
+
+
+
+
+
+
+
+@media (max-width:480px){
 
     .footer-topline{
 
@@ -498,53 +547,25 @@
 
     }
 
-    .footer-brand-name{
+    .footer-container{
 
-        font-size:2rem;
-
-    }
-
-    .footer-brand-subtitle{
-
-        font-size:1.2rem;
+        padding:0 22px 30px;
 
     }
 
-    .footer-brand-signature{
+    .footer-contact-item{
 
-        font-size:1.3rem;
+        justify-content:center;
 
-    }
-
-    .footer-founder-name{
-
-        font-size:1.8rem;
-
-    }
-
-    .footer-role{
-
-        font-size:1.15rem;
-
-    }
-
-    .footer-contact-item span{
-
-        font-size:1rem;
+        flex-wrap:wrap;
 
     }
 
     .footer-contact-item a{
 
-        font-size:1.15rem;
-
         word-break:break-word;
 
-    }
-
-    .footer-bottom{
-
-        margin-top:55px;
+        text-align:center;
 
     }
 
