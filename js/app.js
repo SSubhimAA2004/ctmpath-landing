@@ -7,20 +7,23 @@
 
    Purpose:
 
-   Frontend application bootstrap.
+   Core application bootstrap controller.
 
    Responsibilities:
 
-   • Initialize application
-   • Load reusable components
-   • Load current journey page
-   • Remove loader state
+   ✓ Initialize application
+   ✓ Load shared components
+   ✓ Load first journey page
+   ✓ Prepare frontend environment
+
 
    Does NOT:
 
-   • Handle navigation
-   • Handle scoring
-   • Handle backend operations
+   ✗ Navigation routing
+   ✗ Assessment logic
+   ✗ Scoring
+   ✗ Backend operations
+
 
    ========================================================================== */
 
@@ -32,7 +35,7 @@ const CTMApp = (() => {
 
 
 
-    const config = {
+    const CONFIG = {
 
 
         initialPage:
@@ -52,8 +55,13 @@ const CTMApp = (() => {
 
             footer:
 
-            "components/footer.html"
+            "components/footer.html",
 
+
+
+            navigation:
+
+            "components/navigation.html"
 
 
         }
@@ -67,8 +75,18 @@ const CTMApp = (() => {
 
 
 
+
+    let started = false;
+
+
+
+
+
+
+
+
     /* ==========================================================
-       INITIALIZATION
+       APPLICATION START
        ========================================================== */
 
 
@@ -76,17 +94,27 @@ const CTMApp = (() => {
 
 
 
+        if(started){
+
+            return;
+
+        }
+
+
+
+        started = true;
+
+
+
         hideLoader();
 
 
 
-        await loadComponents();
+        await loadGlobalComponents();
 
 
 
-        await loadPage(
-            config.initialPage
-        );
+        await loadInitialPage();
 
 
 
@@ -99,13 +127,12 @@ const CTMApp = (() => {
 
 
 
-
     /* ==========================================================
-       LOAD GLOBAL COMPONENTS
+       LOAD SHARED COMPONENTS
        ========================================================== */
 
 
-    async function loadComponents(){
+    async function loadGlobalComponents(){
 
 
 
@@ -113,10 +140,19 @@ const CTMApp = (() => {
 
             "app-header",
 
-            config.components.header
+            CONFIG.components.header
 
         );
 
+
+
+        await loadComponent(
+
+            "app-navigation",
+
+            CONFIG.components.navigation
+
+        );
 
 
 
@@ -124,7 +160,7 @@ const CTMApp = (() => {
 
             "app-footer",
 
-            config.components.footer
+            CONFIG.components.footer
 
         );
 
@@ -140,85 +176,11 @@ const CTMApp = (() => {
 
 
     async function loadComponent(
+
         elementId,
+
         filePath
-    ){
 
-
-
-        const element =
-
-        document.getElementById(
-            elementId
-        );
-
-
-
-        if(!element){
-
-            return;
-
-        }
-
-
-
-
-
-
-        try {
-
-
-
-            const response =
-
-            await fetch(filePath);
-
-
-
-
-
-            element.innerHTML =
-
-            await response.text();
-
-
-
-        }
-
-
-        catch(error){
-
-
-            console.error(
-
-                "Component load error:",
-
-                error
-
-            );
-
-
-        }
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       LOAD JOURNEY PAGE
-       ========================================================== */
-
-
-    async function loadPage(
-        pageName
     ){
 
 
@@ -227,7 +189,7 @@ const CTMApp = (() => {
 
         document.getElementById(
 
-            "app-content"
+            elementId
 
         );
 
@@ -243,20 +205,12 @@ const CTMApp = (() => {
 
 
 
-
-
         try {
-
 
 
             const response =
 
-            await fetch(
-
-                `pages/${pageName}.html`
-
-            );
-
+            await fetch(filePath);
 
 
 
@@ -266,14 +220,12 @@ const CTMApp = (() => {
 
                 throw new Error(
 
-                    "Page not found"
+                    `Unable to load ${filePath}`
 
                 );
 
 
             }
-
-
 
 
 
@@ -284,34 +236,22 @@ const CTMApp = (() => {
 
 
 
-
-
-
-            window.scrollTo({
-
-                top:0,
-
-                behavior:"instant"
-
-            });
-
-
-
-
-
         }
+
 
 
         catch(error){
 
 
+
             console.error(
 
-                "Page load error:",
+                "Component loading failed:",
 
                 error
 
             );
+
 
 
         }
@@ -329,7 +269,107 @@ const CTMApp = (() => {
 
 
     /* ==========================================================
-       LOADER
+       LOAD FIRST JOURNEY PAGE
+       ========================================================== */
+
+
+    async function loadInitialPage(){
+
+
+
+        const content =
+
+        document.getElementById(
+
+            "app-content"
+
+        );
+
+
+
+        if(!content){
+
+            return;
+
+        }
+
+
+
+
+
+        try {
+
+
+
+            const response =
+
+            await fetch(
+
+                `pages/${CONFIG.initialPage}.html`
+
+            );
+
+
+
+
+
+            if(!response.ok){
+
+
+                throw new Error(
+
+                    "Welcome page not found"
+
+                );
+
+
+            }
+
+
+
+
+
+            content.innerHTML =
+
+            await response.text();
+
+
+
+
+
+        }
+
+
+
+        catch(error){
+
+
+
+            console.error(
+
+                "Initial page loading failed:",
+
+                error
+
+            );
+
+
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       LOADER CONTROL
        ========================================================== */
 
 
@@ -347,22 +387,25 @@ const CTMApp = (() => {
 
 
 
-        if(loader){
+        if(!loader){
 
-
-            loader.classList.add(
-
-                "hidden"
-
-            );
-
+            return;
 
         }
 
 
 
-    }
 
+
+        loader.classList.add(
+
+            "hidden"
+
+        );
+
+
+
+    }
 
 
 
@@ -377,7 +420,7 @@ const CTMApp = (() => {
         init,
 
 
-        loadPage
+        loadInitialPage
 
 
 
@@ -394,9 +437,8 @@ const CTMApp = (() => {
 
 
 
-
 /* ==========================================================================
-   START APPLICATION
+   APPLICATION BOOT
    ========================================================================== */
 
 
@@ -404,11 +446,10 @@ document.addEventListener(
 
     "DOMContentLoaded",
 
-    function(){
+    () => {
 
 
         CTMApp.init();
-
 
 
     }
