@@ -2,110 +2,126 @@
 <!-- ==========================================================================
    CTM PATH™ Guided Journey™
 
-   File        : components/header.html
-   Version     : 5.0
+   Component   : header.html
+   Version     : 5.1
 
    Purpose:
 
-   Global premium header identity.
+   Global premium brand header.
 
-   Responsibilities:
+   Displays:
 
-   • Display CTM PATH™ brand mark
-   • Display brand hierarchy
-   • Display journey progress
+   • Cosmic Logo Mark
+   • CTM PATH™
+   • Millionaire Production Path™
+   • Guided Journey™
+   • Brand Signature
+   • Journey Progress Indicator
 
-   Does NOT:
 
-   • Handle navigation logic
-   • Handle application state
+   IMPORTANT:
+
+   This component contains:
+   ✓ Presentation only
+
+   No:
+   ✗ Navigation logic
+   ✗ Business logic
+   ✗ Data processing
 
    ========================================================================== -->
+
 
 
 <header class="ctm-header">
 
 
 
-<div class="header-container">
+    <!-- ==========================================================
+         BRAND AREA
+         ========================================================== -->
 
 
+    <div class="header-brand">
 
 
 
-<!-- ==========================================================================
-     BRAND AREA
-     ========================================================================== -->
+        <!-- Cosmic Symbol -->
 
+        <div class="header-logo">
 
-<div class="header-brand">
 
+            <img
+            src="assets/logo/CTM_Mark.svg"
+            alt="CTM PATH™ Cosmic Mark"
+            class="brand-symbol">
 
 
+        </div>
 
 
-<!-- LOGO -->
 
-<div class="header-logo">
 
 
-<img src="assets/logo/CTM_Mark.svg"
-     alt="CTM PATH™ Cosmic Mark">
 
 
-</div>
+        <!-- Brand Identity Stack -->
 
 
+        <div class="brand-identity">
 
 
 
+            <div class="brand-name">
 
+                CTM PATH™
 
-<!-- BRAND TEXT -->
 
-<div class="header-brand-text">
+            </div>
 
 
 
 
 
-<div class="brand-primary">
+            <div class="brand-tagline-main">
 
+                MILLIONAIRE PRODUCTION PATH™
 
-CTM PATH™
+            </div>
 
 
-</div>
 
 
 
 
+            <div class="brand-tagline">
 
+                GUIDED JOURNEY™
 
+            </div>
 
 
-<div class="brand-tagline">
 
 
-MILLIONAIRE PRODUCTION PATH™
 
 
-</div>
+            <div class="brand-signature">
 
+                Every Dream Has A Path™
 
+            </div>
 
 
 
 
 
+        </div>
 
-<div class="brand-secondary">
 
 
-GUIDED JOURNEY™
+    </div>
 
 
-</div>
 
 
 
@@ -113,77 +129,44 @@ GUIDED JOURNEY™
 
 
 
+    <!-- ==========================================================
+         JOURNEY INDICATOR
+         ========================================================== -->
 
-<div class="brand-promise">
 
+    <div class="journey-status">
 
-Every Dream Has A Path™
 
 
-</div>
+        <span class="journey-label">
 
+            JOURNEY
 
+        </span>
 
 
 
-</div>
 
 
+        <span
+        class="journey-counter"
+        id="journey-counter">
 
-</div>
 
+            01 / 18
 
 
+        </span>
 
 
 
 
 
-<!-- ==========================================================================
-     JOURNEY INDICATOR
-     ========================================================================== -->
+    </div>
 
 
-<div class="header-progress">
 
 
-
-
-
-<div class="progress-label">
-
-
-JOURNEY
-
-
-</div>
-
-
-
-
-
-<div class="progress-count">
-
-
-01 / 18
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-</div>
 
 
 </header>
-
