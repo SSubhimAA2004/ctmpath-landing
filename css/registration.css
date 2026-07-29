@@ -2,29 +2,21 @@
 /* ==========================================================================
    CTM PATH™ Guided Journey™
 
-   File        : registration.css
+   File        : css/registration.css
    Version     : 1.0
-   Status      : DEVELOPMENT
-   Stage       : STAGE 2 — REGISTRATION™
 
-   Purpose     :
-   Registration page styling.
+   Status      : 🔒 PREMIUM REGISTRATION DESIGN SYSTEM
 
-   Responsibilities:
 
-   • Registration layout.
-   • Form card presentation.
-   • Input group styling.
-   • Action area styling.
-   • Consent presentation.
+   Page:
 
-   Does NOT:
+   02 — Registration
 
-   • Validate fields.
-   • Submit data.
-   • Communicate with backend.
 
    ========================================================================== */
+
+
+
 
 
 /* ==========================================================================
@@ -34,119 +26,70 @@
 
 .registration-page {
 
+
     min-height:
 
-        100vh;
+    100vh;
 
-    display:
 
-        flex;
 
-    align-items:
+    padding:
 
-        center;
+    70px 40px;
 
-    padding-top:
 
-        var(--space-12);
 
-    padding-bottom:
+    background:
 
-        var(--space-12);
+    radial-gradient(
+
+        circle at top,
+
+        rgba(18,55,110,0.45),
+
+        transparent 45%
+
+    ),
+
+    var(--ctm-navy);
+
+
 
 }
 
 
 
 
+
+
+
+
+
 /* ==========================================================================
-   REGISTRATION WRAPPER
+   HERO
    ========================================================================== */
 
 
-.registration-wrapper {
+.registration-hero {
 
-    width:
-
-        100%;
 
     max-width:
 
-        900px;
+    900px;
+
+
 
     margin:
 
-        0 auto;
-
-    display:
-
-        flex;
-
-    flex-direction:
-
-        column;
-
-    align-items:
-
-        center;
-
-    gap:
-
-        var(--space-8);
-
-}
+    0 auto 50px;
 
 
-
-
-/* ==========================================================================
-   REGISTRATION HEADER
-   ========================================================================== */
-
-
-.registration-header {
-
-    width:
-
-        100%;
 
     text-align:
 
-        center;
-
-    max-width:
-
-        760px;
-
-}
+    center;
 
 
-
-.registration-eyebrow {
-
-    color:
-
-        var(--ctm-teal);
-
-    font-size:
-
-        var(--text-sm);
-
-    font-weight:
-
-        var(--weight-semibold);
-
-    letter-spacing:
-
-        0.12em;
-
-    text-transform:
-
-        uppercase;
-
-    margin-bottom:
-
-        var(--space-4);
 
 }
 
@@ -154,9 +97,75 @@
 
 .registration-title {
 
+
+    font-size:
+
+    clamp(
+
+        38px,
+
+        4vw,
+
+        58px
+
+    );
+
+
+
+    line-height:
+
+    1.25;
+
+
+
+    color:
+
+    var(--ctm-ivory);
+
+
+
+    font-weight:
+
+    700;
+
+
+
     margin-bottom:
 
-        var(--space-4);
+    20px;
+
+
+
+}
+
+
+
+.registration-subtitle {
+
+
+    font-size:
+
+    22px;
+
+
+
+    letter-spacing:
+
+    .15em;
+
+
+
+    color:
+
+    var(--ctm-gold-soft);
+
+
+
+    margin-bottom:
+
+    25px;
+
+
 
 }
 
@@ -164,132 +173,239 @@
 
 .registration-description {
 
+
+    max-width:
+
+    800px;
+
+
+
+    margin:
+
+    0 auto 12px;
+
+
+
     color:
 
-        var(--ctm-text-secondary);
+    var(--text-secondary);
+
+
 
     font-size:
 
-        var(--text-lg);
+    18px;
+
+
+
+    line-height:
+
+    1.8;
+
+
 
 }
 
 
 
+
+
+
+
+
+
 /* ==========================================================================
-   REGISTRATION CARD
+   FORM CARD
    ========================================================================== */
 
 
 .registration-card {
 
-    width:
 
-        100%;
+    max-width:
+
+    850px;
+
+
+
+    margin:
+
+    0 auto;
+
+
 
     padding:
 
-        var(--space-10);
+    50px;
+
+
+
+    background:
+
+    linear-gradient(
+
+        145deg,
+
+        rgba(255,255,255,0.08),
+
+        rgba(255,255,255,0.03)
+
+    );
+
+
+
+    border:
+
+    1px solid rgba(
+
+        201,
+
+        162,
+
+        39,
+
+        0.25
+
+    );
+
+
+
+    border-radius:
+
+    32px;
+
+
+
+    box-shadow:
+
+    var(--shadow-soft);
+
+
+
+    backdrop-filter:
+
+    blur(18px);
+
+
 
 }
 
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
-
-   File        : registration.css
-   Continuation: Batch 1B
-
-   ========================================================================== */
 
 
-/* ==========================================================================
-   FORM SECTIONS
-   ========================================================================== */
+.registration-card h2 {
 
 
-.form-section {
+    text-align:
 
-    width:
-
-        100%;
-
-    margin-bottom:
-
-        var(--space-10);
-
-}
+    center;
 
 
-
-.form-section-title {
 
     font-size:
 
-        var(--text-xl);
+    34px;
+
+
 
     color:
 
-        var(--ctm-ivory);
+    var(--ctm-ivory);
+
+
 
     margin-bottom:
 
-        var(--space-6);
+    8px;
 
-    padding-bottom:
 
-        var(--space-3);
 
-    border-bottom:
+}
 
-        1px solid var(--border-subtle);
+
+
+.form-heading {
+
+
+    text-align:
+
+    center;
+
+
+
+    color:
+
+    var(--ctm-teal);
+
+
+
+    margin-bottom:
+
+    35px;
+
+
 
 }
 
 
 
 
+
+
+
+
+
 /* ==========================================================================
-   FORM GRID
+   FORM STRUCTURE
    ========================================================================== */
 
 
-.form-grid {
+.registration-form {
+
 
     display:
 
-        grid;
+    flex;
 
-    grid-template-columns:
 
-        repeat(2, 1fr);
+
+    flex-direction:
+
+    column;
+
+
 
     gap:
 
-        var(--space-6);
+    24px;
 
-    margin-bottom:
 
-        var(--space-6);
 
 }
 
 
 
-
-/* ==========================================================================
-   FORM GROUP
-   ========================================================================== */
 
 
 .form-group {
 
+
     display:
 
-        flex;
+    flex;
+
+
 
     flex-direction:
 
-        column;
+    column;
+
+
+
+    gap:
+
+    10px;
+
+
 
 }
 
@@ -297,407 +413,576 @@
 
 .form-group label {
 
-    margin-bottom:
 
-        var(--space-2);
+    color:
+
+    var(--ctm-ivory);
+
+
+
+    font-size:
+
+    17px;
+
+
+
+    font-weight:
+
+    600;
+
+
 
 }
+
+
+
+.form-group label span {
+
+
+    color:
+
+    var(--text-muted);
+
+
+
+    font-size:
+
+    14px;
+
+
+
+    font-weight:
+
+    400;
+
+
+
+}
+
+
+
+
+
 
 
 
 
 /* ==========================================================================
-   CONSENT SECTION
+   INPUTS
    ========================================================================== */
 
 
-.registration-consent {
+.form-group input,
+.form-group select {
 
-    margin-top:
-
-        var(--space-4);
-
-}
-
-
-
-.checkbox-wrapper {
-
-    display:
-
-        flex;
-
-    align-items:
-
-        flex-start;
-
-    gap:
-
-        var(--space-3);
-
-    cursor:
-
-        pointer;
-
-}
-
-
-
-.checkbox-wrapper input {
 
     width:
 
-        auto;
+    100%;
 
-    margin-top:
 
-        0.25rem;
 
-}
+    padding:
 
+    16px 20px;
 
 
-.checkbox-text {
 
-    color:
+    border-radius:
 
-        var(--ctm-text-secondary);
+    14px;
 
-    font-size:
 
-        var(--text-sm);
 
-    line-height:
+    border:
 
-        1.6;
+    1px solid rgba(
 
-}
+        255,
 
+        255,
 
+        255,
 
+        .15
 
-/* ==========================================================================
-   ACTION AREA
-   ========================================================================== */
+    );
 
 
-.registration-actions {
-
-    display:
-
-        flex;
-
-    justify-content:
-
-        space-between;
-
-    align-items:
-
-        center;
-
-    gap:
-
-        var(--space-6);
-
-    margin-top:
-
-        var(--space-8);
-
-}
-
-
-
-.registration-actions .btn {
-
-    min-width:
-
-        180px;
-
-}
-
-
-
-
-/* ==========================================================================
-   FOOTER MESSAGE
-   ========================================================================== */
-
-
-.registration-footer {
-
-    max-width:
-
-        650px;
-
-    text-align:
-
-        center;
-
-}
-
-
-
-.registration-footer p {
-
-    color:
-
-        var(--ctm-text-muted);
-
-    font-size:
-
-        var(--text-sm);
-
-}
-
-
-
-/* ==========================================================================
-   INPUT FOCUS ENHANCEMENT
-   ========================================================================== */
-
-
-.registration-card input:focus,
-.registration-card select:focus {
-
-    border-color:
-
-        var(--ctm-teal);
-
-}
-
-
-
-/* ==========================================================================
-   END OF BATCH 1B
-
-   Continuing:
-
-   css/registration.css — Batch 1C
-
-   ========================================================================== */
-
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
-
-   File        : registration.css
-   Continuation: Batch 1C
-
-   ========================================================================== */
-
-
-/* ==========================================================================
-   FORM INTERACTION STATES
-   ========================================================================== */
-
-
-.registration-card input:hover,
-.registration-card select:hover {
-
-    border-color:
-
-        var(--border-accent);
-
-}
-
-
-
-.registration-card input:disabled,
-.registration-card select:disabled {
-
-    opacity:
-
-        0.6;
-
-    cursor:
-
-        not-allowed;
-
-}
-
-
-
-/* ==========================================================================
-   ERROR STATE FOUNDATION
-
-   Controlled by registration.js
-
-   ========================================================================== */
-
-
-.form-group.error input,
-.form-group.error select {
-
-    border-color:
-
-        var(--ctm-error);
-
-}
-
-
-
-.form-error-message {
-
-    margin-top:
-
-        var(--space-2);
-
-    color:
-
-        var(--ctm-error);
-
-    font-size:
-
-        var(--text-sm);
-
-}
-
-
-
-
-/* ==========================================================================
-   SUCCESS STATE FOUNDATION
-
-   Controlled by registration.js
-
-   ========================================================================== */
-
-
-.form-group.success input,
-.form-group.success select {
-
-    border-color:
-
-        var(--ctm-success);
-
-}
-
-
-
-
-/* ==========================================================================
-   PREMIUM CARD ENHANCEMENT
-   ========================================================================== */
-
-
-.registration-card {
-
-    position:
-
-        relative;
-
-    overflow:
-
-        hidden;
-
-}
-
-
-
-.registration-card::before {
-
-    content:
-
-        "";
-
-    position:
-
-        absolute;
-
-    top:
-
-        0;
-
-    left:
-
-        0;
-
-    width:
-
-        100%;
-
-    height:
-
-        3px;
 
     background:
 
-        linear-gradient(
+    rgba(
 
-            90deg,
+        255,
 
-            var(--ctm-teal),
+        255,
 
-            var(--ctm-muted-gold)
+        255,
 
-        );
+        .05
+
+    );
+
+
+
+    color:
+
+    var(--ctm-ivory);
+
+
+
+    font-size:
+
+    17px;
+
+
+
+    outline:
+
+    none;
+
+
 
 }
 
 
 
-.registration-card > * {
+.form-group input::placeholder {
 
-    position:
 
-        relative;
+    color:
 
-    z-index:
+    var(--text-muted);
 
-        1;
+
 
 }
+
+
+
+.form-group input:focus,
+.form-group select:focus {
+
+
+    border-color:
+
+    var(--ctm-teal);
+
+
+
+    box-shadow:
+
+    var(--shadow-teal);
+
+
+
+}
+
+
+
+
+
 
 
 
 
 /* ==========================================================================
-   ACCESSIBILITY
+   LANGUAGE OPTIONS
    ========================================================================== */
 
 
-.registration-actions button:focus-visible {
+.language-options {
 
-    outline:
 
-        3px solid var(--ctm-teal-light);
+    display:
 
-    outline-offset:
+    flex;
 
-        4px;
+
+
+    gap:
+
+    20px;
+
+
+
+}
+
+
+
+.option-card {
+
+
+    flex:
+
+    1;
+
+
+
+    padding:
+
+    18px;
+
+
+
+    border-radius:
+
+    16px;
+
+
+
+    text-align:
+
+    center;
+
+
+
+    border:
+
+    1px solid rgba(
+
+        201,
+
+        162,
+
+        39,
+
+        .25
+
+    );
+
+
+
+    cursor:
+
+    pointer;
+
+
+
+    color:
+
+    var(--ctm-ivory);
+
+
 
 }
 
 
 
-.checkbox-wrapper:focus-within {
+.option-card input {
 
-    outline:
 
-        2px solid var(--ctm-teal);
+    display:
 
-    outline-offset:
+    none;
 
-        4px;
+
 
 }
+
+
+
+.option-card:has(input:checked) {
+
+
+    background:
+
+    rgba(
+
+        0,
+
+        199,
+
+        217,
+
+        .12
+
+    );
+
+
+
+    border-color:
+
+    var(--ctm-teal);
+
+
+
+}
+
+
+
+
+
+
 
 
 
 /* ==========================================================================
-   END OF FILE
-
-   File:
-
-   css/registration.css
-
-
-   Status:
-
-   STAGE 2 — REGISTRATION™ STYLE COMPLETE
-
-
-   Next:
-
-   js/registration.js
-
+   CONSENT
    ========================================================================== */
+
+
+.consent-box {
+
+
+    padding:
+
+    20px;
+
+
+
+    border-radius:
+
+    16px;
+
+
+
+    background:
+
+    rgba(
+
+        255,
+
+        255,
+
+        255,
+
+        .04
+
+    );
+
+
+
+    color:
+
+    var(--text-secondary);
+
+
+
+    line-height:
+
+    1.7;
+
+
+
+}
+
+
+
+.consent-box input {
+
+
+    margin-right:
+
+    12px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   CTA BUTTON
+   ========================================================================== */
+
+
+.registration-action {
+
+
+    margin-top:
+
+    20px;
+
+
+
+    text-align:
+
+    center;
+
+
+
+}
+
+
+
+.continue-button {
+
+
+    padding:
+
+    18px 55px;
+
+
+
+    border-radius:
+
+    999px;
+
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        var(--ctm-teal),
+
+        #007ED0
+
+    );
+
+
+
+    color:
+
+    white;
+
+
+
+    font-size:
+
+    20px;
+
+
+
+    font-weight:
+
+    700;
+
+
+
+    box-shadow:
+
+    var(--shadow-teal);
+
+
+
+    transition:
+
+    transform .3s ease;
+
+
+
+}
+
+
+
+.continue-button:hover {
+
+
+    transform:
+
+    translateY(-4px);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   PRIVACY NOTE
+   ========================================================================== */
+
+
+.privacy-note {
+
+
+    text-align:
+
+    center;
+
+
+
+    margin:
+
+    35px auto;
+
+
+
+    color:
+
+    var(--text-muted);
+
+
+
+    font-size:
+
+    14px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+
+@media(max-width:700px){
+
+
+
+.registration-page{
+
+
+    padding:
+
+    40px 20px;
+
+
+
+}
+
+
+
+.registration-card{
+
+
+    padding:
+
+    30px 22px;
+
+
+
+}
+
+
+
+.language-options{
+
+
+    flex-direction:
+
+    column;
+
+
+
+}
+
+
+
+}
