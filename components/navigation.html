@@ -2,29 +2,37 @@
 <!-- ==========================================================================
 
    CTM PATH™ Guided Journey™
-   FROM SURVIVAL TO LIVING™
 
    File        : components/navigation.html
-   Version     : 2.0
-   Status      : 🔒 PREMIUM FOUNDATION
+   Version     : 2.1
 
-   Purpose
-   --------------------------------------------------------------------------
-   Global Journey Navigation Component
+   Status      : CLEAN GLOBAL NAVIGATOR
 
-   Responsibilities
-   --------------------------------------------------------------------------
-   ✓ Provide consistent Previous / Continue navigation
-   ✓ Maintain guided journey rhythm
-   ✓ Support multi-page experience flow
-   ✓ Provide accessible navigation controls
 
-   Does NOT
-   --------------------------------------------------------------------------
-   ✗ Control routing logic
-   ✗ Contain page-specific actions
-   ✗ Perform API calls
-   ✗ Contain business logic
+   Purpose:
+
+   Premium journey navigation component.
+
+
+   Responsibilities:
+
+   ✓ Display Previous button
+   ✓ Display Continue button
+   ✓ Provide navigation hooks
+
+
+   Does NOT:
+
+   ✗ Control visibility
+   ✗ Control routing
+   ✗ Load pages
+   ✗ Handle business logic
+
+
+   Visibility controlled by:
+
+   js/navigation.js
+
 
    ========================================================================== -->
 
@@ -33,88 +41,108 @@
      aria-label="Journey Navigation">
 
 
-    <div class="navigation-group">
-
-
-        <button
-
-            type="button"
-
-            class="nav-button nav-button-secondary"
-
-            data-action="previous"
-
-            aria-label="Previous Step"
-
-        >
-
-            <span class="nav-icon">
-
-                ←
-
-            </span>
-
-
-            <span class="nav-label">
-
-                Previous
-
-            </span>
-
-
-        </button>
-
-
-    </div>
 
 
 
-    <div class="navigation-group">
+    <!-- ==========================================================
+         PREVIOUS BUTTON
+         ========================================================== -->
 
 
-        <button
+    <button
 
-            type="button"
+        type="button"
 
-            class="nav-button nav-button-primary"
+        class="nav-button nav-button-secondary"
 
-            data-action="continue"
+        data-action="previous"
 
-            aria-label="Continue Journey"
+        aria-label="Previous Step"
 
-        >
-
-            <span class="nav-label">
-
-                Continue
-
-            </span>
+    >
 
 
-            <span class="nav-icon">
+        <span class="nav-icon">
 
-                →
+            ←
 
-            </span>
-
-
-        </button>
+        </span>
 
 
-    </div>
+
+        <span class="nav-label">
+
+            Previous
+
+        </span>
+
+
+
+    </button>
+
+
+
+
+
+
+
+
+    <!-- ==========================================================
+         CONTINUE BUTTON
+         ========================================================== -->
+
+
+    <button
+
+        type="button"
+
+        class="nav-button nav-button-primary"
+
+        data-action="continue"
+
+        aria-label="Continue Journey"
+
+    >
+
+
+
+        <span class="nav-label">
+
+            Continue
+
+        </span>
+
+
+
+
+        <span class="nav-icon">
+
+            →
+
+        </span>
+
+
+
+
+    </button>
+
+
+
+
 
 
 </nav>
+
+
+
 
 
 <!-- ==========================================================================
 
    END OF FILE
 
-   File        : components/navigation.html
-   Version     : 2.0
-   Status      : 🔒 PREMIUM FOUNDATION
+   components/navigation.html
+
+   Version : 2.1
 
    ========================================================================== -->
-
-   
