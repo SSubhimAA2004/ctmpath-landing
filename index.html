@@ -3,30 +3,24 @@
    CTM PATH™ Guided Journey™
 
    File        : index.html
-   Version     : 1.3
+   Version     : 1.4
 
-   Status      : FOUNDATION FREEZE
-
-   Stage       : STAGE 0 — FOUNDATION
+   Status      : PAGE 01 REFINEMENT UPDATE
 
    Purpose:
 
-   Application entry point for the CTM PATH™ Guided Journey™
-   frontend application.
+   Application entry point for CTM PATH™ Guided Journey™.
 
    Responsibilities:
 
-   • Initialize application shell.
    • Load global styles.
-   • Provide component mount points.
-   • Load frontend modules in dependency order.
+   • Provide application shell.
+   • Mount components.
+   • Load frontend controllers.
 
    IMPORTANT:
 
-   This file contains NO business logic.
-
-   All calculations, persistence and workflow decisions
-   belong exclusively to backend services.
+   No business logic exists in this file.
 
    ========================================================================== -->
 
@@ -44,7 +38,6 @@
 
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
-
 
 
 <meta name="description"
@@ -66,60 +59,43 @@ CTM PATH™ Guided Journey™
 
 
 <!-- ==========================================================================
-     CSS LOAD ORDER
+     CSS FOUNDATION LOAD ORDER
 
-     Foundation
-          ↓
-     Brand Universe
-          ↓
-     Header Component
-          ↓
-     Page Experience
-          ↓
-     Footer Component
-          ↓
-     Responsive Layer
+     1. Global Structure
+     2. Brand Universe
+     3. Header Component
+     4. Welcome Experience
+     5. Footer Component
+     6. Responsive Behaviour
 
      ========================================================================== -->
 
 
-
-<!-- Global Structure -->
 
 <link rel="stylesheet"
       href="css/foundation.css">
 
 
 
-<!-- CTM Premium Dark Blue Universe -->
-
 <link rel="stylesheet"
       href="css/theme.css">
 
 
-
-<!-- Global Header -->
 
 <link rel="stylesheet"
       href="css/header.css">
 
 
 
-<!-- Page 01 Welcome Experience -->
-
 <link rel="stylesheet"
       href="css/welcome.css">
 
 
 
-<!-- Global Footer -->
-
 <link rel="stylesheet"
       href="css/footer.css">
 
 
-
-<!-- Responsive Behaviour -->
 
 <link rel="stylesheet"
       href="css/responsive.css">
@@ -155,11 +131,7 @@ CTM PATH™ Guided Journey™
 
 
 <!-- ==========================================================================
-     GLOBAL LOADING LAYER
-
-     Controlled by:
-     js/app.js
-
+     GLOBAL LOADER
      ========================================================================== -->
 
 
@@ -171,12 +143,10 @@ CTM PATH™ Guided Journey™
 <div class="loader-container">
 
 
-
 <div class="loader-spinner"
      aria-label="Loading">
 
 </div>
-
 
 
 
@@ -202,8 +172,6 @@ Preparing your journey...
 <!-- ==========================================================================
      HEADER COMPONENT
 
-     Component:
-
      components/header.html
 
      ========================================================================== -->
@@ -221,22 +189,10 @@ Preparing your journey...
 
 
 
-
 <!-- ==========================================================================
-     MAIN APPLICATION CONTENT
+     MAIN CONTENT AREA
 
      All 18 journey pages render here.
-
-     Journey:
-
-     Page 01  Welcome™
-     Page 02  Registration™
-     Page 03  Assessment
-     ...
-     Page 15  KALA CHAKRA™
-     Page 16  Diagnosis™
-     Page 17  Prescription™
-     Page 18  CTA™
 
      ========================================================================== -->
 
@@ -244,7 +200,6 @@ Preparing your journey...
 <main id="app-content"
       class="app-content"
       role="main">
-
 
 
 </main>
@@ -255,11 +210,8 @@ Preparing your journey...
 
 
 
-
 <!-- ==========================================================================
      NAVIGATION COMPONENT
-
-     Component:
 
      components/navigation.html
 
@@ -278,11 +230,8 @@ Preparing your journey...
 
 
 
-
 <!-- ==========================================================================
      FOOTER COMPONENT
-
-     Component:
 
      components/footer.html
 
@@ -310,11 +259,7 @@ Preparing your journey...
 
 
 <!-- ==========================================================================
-     APPLICATION ERROR CONTAINER
-
-     Controlled by:
-     js/app.js
-
+     ERROR CONTAINER
      ========================================================================== -->
 
 
@@ -330,26 +275,24 @@ Preparing your journey...
 
 
 
-
 <!-- ==========================================================================
      JAVASCRIPT LOAD ORDER
 
      Foundation:
 
-     1. app.js
-     2. api.js
-     3. storage.js
-     4. navigation.js
-     5. assessmentEngine.js
-     6. scoring.js
-     7. report.js
+     app.js
+     api.js
+     storage.js
+     navigation.js
+     assessmentEngine.js
+     scoring.js
+     report.js
 
-     Page Controllers:
+     Page:
 
-     8. welcome.js
+     welcome.js
 
      ========================================================================== -->
-
 
 
 
@@ -374,8 +317,6 @@ Preparing your journey...
 <script src="js/report.js"></script>
 
 
-
-<!-- Page 01 Controller -->
 
 <script src="js/welcome.js"></script>
 
