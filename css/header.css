@@ -1,1 +1,803 @@
 
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+
+   File        : header.css
+   Version     : 3.0
+
+   Purpose:
+
+   Premium global header styling.
+
+   ========================================================================== */
+
+
+
+/* ==========================================================================
+   HEADER CONTAINER
+   ========================================================================== */
+
+
+.ctm-header {
+
+
+    width:
+
+        100%;
+
+
+
+    background:
+
+        rgba(
+
+            11,
+
+            13,
+
+            18,
+
+            0.96
+
+        );
+
+
+
+    border-bottom:
+
+        1px solid var(--ctm-border);
+
+
+
+    position:
+
+        relative;
+
+
+
+    z-index:
+
+        100;
+
+
+
+}
+
+
+
+
+
+
+
+.ctm-header-container {
+
+
+    max-width:
+
+        1280px;
+
+
+
+    margin:
+
+        0 auto;
+
+
+
+    padding:
+
+        18px 40px;
+
+
+
+    display:
+
+        flex;
+
+
+
+    align-items:
+
+        center;
+
+
+
+    justify-content:
+
+        space-between;
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   BRAND AREA
+   ========================================================================== */
+
+
+.ctm-brand {
+
+
+    display:
+
+        flex;
+
+
+
+    align-items:
+
+        center;
+
+
+
+    gap:
+
+        18px;
+
+
+
+}
+
+
+
+
+
+.ctm-header-logo {
+
+
+    width:
+
+        54px;
+
+
+
+    height:
+
+        54px;
+
+
+
+    object-fit:
+
+        contain;
+
+
+
+}
+
+
+
+
+
+
+
+.ctm-brand-text {
+
+
+    display:
+
+        flex;
+
+
+
+    flex-direction:
+
+        column;
+
+
+
+    justify-content:
+
+        center;
+
+
+
+}
+
+
+
+
+
+
+
+.ctm-brand-name {
+
+
+    color:
+
+        var(--ctm-text-primary);
+
+
+
+    font-family:
+
+        "Inter",
+
+        sans-serif;
+
+
+
+    font-size:
+
+        22px;
+
+
+
+    font-weight:
+
+        700;
+
+
+
+    letter-spacing:
+
+        0.08em;
+
+
+
+}
+
+
+
+
+
+.ctm-brand-subtitle {
+
+
+    color:
+
+        var(--ctm-teal-soft);
+
+
+
+    font-size:
+
+        14px;
+
+
+
+    letter-spacing:
+
+        0.18em;
+
+
+
+}
+
+
+
+
+
+.ctm-brand-tagline {
+
+
+    margin-top:
+
+        4px;
+
+
+
+    color:
+
+        var(--ctm-gold-soft);
+
+
+
+    font-size:
+
+        12px;
+
+
+
+    font-style:
+
+        italic;
+
+
+
+}
+
+/* ==========================================================================
+   JOURNEY STATUS AREA
+
+   Right-side progress indicator.
+
+   ========================================================================== */
+
+
+.ctm-journey-status {
+
+
+    display:
+
+        flex;
+
+
+
+    align-items:
+
+        center;
+
+
+
+    gap:
+
+        24px;
+
+
+
+}
+
+
+
+
+
+.ctm-journey-label {
+
+
+    color:
+
+        var(--ctm-text-secondary);
+
+
+
+    font-size:
+
+        14px;
+
+
+
+    letter-spacing:
+
+        0.12em;
+
+
+
+    text-transform:
+
+        uppercase;
+
+
+
+}
+
+
+
+
+
+
+
+.ctm-journey-step {
+
+
+    min-width:
+
+        72px;
+
+
+
+    padding:
+
+        10px 18px;
+
+
+
+    border:
+
+        1px solid var(--ctm-border);
+
+
+
+    border-radius:
+
+        var(--radius-pill);
+
+
+
+    background:
+
+        rgba(
+
+            255,
+
+            255,
+
+            255,
+
+            0.04
+
+        );
+
+
+
+    color:
+
+        var(--ctm-gold-soft);
+
+
+
+    font-size:
+
+        16px;
+
+
+
+    font-weight:
+
+        700;
+
+
+
+    text-align:
+
+        center;
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   HEADER ACCENT LINE
+
+   ========================================================================== */
+
+
+.ctm-header::after {
+
+
+    content:
+
+        "";
+
+
+
+    position:
+
+        absolute;
+
+
+
+    bottom:
+
+        0;
+
+
+
+    left:
+
+        50%;
+
+
+
+    transform:
+
+        translateX(-50%);
+
+
+
+    width:
+
+        120px;
+
+
+
+    height:
+
+        2px;
+
+
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            var(--ctm-gold),
+
+            transparent
+
+        );
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   MOBILE HEADER
+
+   ========================================================================== */
+
+
+@media (max-width: 768px) {
+
+
+    .ctm-header-container {
+
+
+        padding:
+
+            16px 20px;
+
+
+
+    }
+
+
+
+
+
+    .ctm-brand {
+
+
+        gap:
+
+            12px;
+
+
+
+    }
+
+
+
+
+
+    .ctm-header-logo {
+
+
+        width:
+
+            42px;
+
+
+
+        height:
+
+            42px;
+
+
+
+    }
+
+
+
+
+
+    .ctm-brand-name {
+
+
+        font-size:
+
+            18px;
+
+
+
+    }
+
+
+
+
+
+    .ctm-brand-subtitle {
+
+
+        font-size:
+
+            12px;
+
+
+
+    }
+
+
+
+
+
+    .ctm-brand-tagline {
+
+
+        display:
+
+            none;
+
+
+
+    }
+
+
+
+
+
+    .ctm-journey-status {
+
+
+        gap:
+
+            8px;
+
+
+
+    }
+
+
+
+
+
+    .ctm-journey-label {
+
+
+        display:
+
+            none;
+
+
+
+    }
+
+
+
+
+
+    .ctm-journey-step {
+
+
+        padding:
+
+            8px 12px;
+
+
+
+        font-size:
+
+            14px;
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   SMALL MOBILE
+
+   ========================================================================== */
+
+
+@media (max-width: 480px) {
+
+
+    .ctm-header-container {
+
+
+        padding:
+
+            14px 16px;
+
+
+
+    }
+
+
+
+
+
+    .ctm-brand-name {
+
+
+        font-size:
+
+            16px;
+
+
+
+    }
+
+
+
+
+
+    .ctm-header-logo {
+
+
+        width:
+
+            36px;
+
+
+
+        height:
+
+            36px;
+
+
+
+    }
+
+
+
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   ACCESSIBILITY
+
+   ========================================================================== */
+
+
+.ctm-header a:focus-visible,
+
+.ctm-header button:focus-visible {
+
+
+    outline:
+
+        3px solid var(--ctm-gold);
+
+
+
+    outline-offset:
+
+        4px;
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   END OF FILE
+
+   File:
+
+   css/header.css
+
+
+   Version:
+
+   CTM PATH™ Premium Header Styling v3.0
+
+
+   Status:
+
+   COMPLETE 🔒
+
+
+   ========================================================================== */
