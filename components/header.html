@@ -3,16 +3,17 @@
    CTM PATH™ Guided Journey™
 
    File        : header.html
-   Version     : 3.2
+   Version     : 4.0
 
    Purpose:
 
-   Single premium global header.
+   Premium global header component.
 
    Responsibilities:
 
-   • Display CTM PATH™ brand identity.
-   • Display journey progress.
+   • Display CTM PATH™ identity.
+   • Display frozen CTM cosmic mark.
+   • Display journey progress indicator.
 
    Does NOT:
 
@@ -32,22 +33,6 @@
 
         <!-- ==============================================================
              BRAND IDENTITY
-             
-             SVG logo removed.
-
-             Reason:
-             CTM_Logo_Transparent.svg contains the complete brand lockup:
-
-             • Infinity symbol
-             • CTM PATH
-             • Guided Journey
-             • Every Dream Has A Path
-
-             Rendering it here created duplicate branding.
-
-             Future:
-             Replace with compact CTM_Mark.svg if required.
-
              ============================================================== -->
 
 
@@ -55,6 +40,33 @@
 
 
 
+            <!-- ----------------------------------------------------------
+                 CTM MASTER SYMBOL
+
+                 Frozen Asset:
+
+                 assets/logo/CTM_Mark.svg
+
+                 ---------------------------------------------------------- -->
+
+
+            <img
+
+                src="assets/logo/CTM_Mark.svg"
+
+                alt="CTM PATH™ Cosmic Journey"
+
+                class="ctm-header-logo"
+
+            />
+
+
+
+
+
+            <!-- ----------------------------------------------------------
+                 BRAND TEXT
+                 ---------------------------------------------------------- -->
 
 
             <div class="ctm-brand-text">
@@ -70,13 +82,11 @@
 
 
 
-
                 <div class="ctm-brand-subtitle">
 
                     Guided Journey™
 
                 </div>
-
 
 
 
@@ -102,7 +112,7 @@
 
 
         <!-- ==============================================================
-             JOURNEY PROGRESS
+             JOURNEY STATUS
              ============================================================== -->
 
 
@@ -110,16 +120,11 @@
 
 
 
-
-
             <div class="ctm-journey-label">
-
 
                 Journey
 
-
             </div>
-
 
 
 
@@ -137,7 +142,11 @@
 
 
 
-                /
+                <span class="ctm-step-divider">
+
+                    /
+
+                </span>
 
 
 
@@ -150,8 +159,6 @@
 
 
             </div>
-
-
 
 
 
