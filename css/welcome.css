@@ -1,19 +1,46 @@
 
 /* ==========================================================================
+
    CTM PATH™ Guided Journey™
 
    File        : css/welcome.css
-   Version     : 3.0
+   Version     : 8.0
+   Status      : 🔒 PREMIUM LAUNCH EDITION
 
-   Status      : 🔒 PREMIUM HERO SYSTEM
+   Supports:
+   ✓ pages/welcome.html
+   ✓ components/header.html
+   ✓ components/footer.html
+
+   Notes
+   -----
+   No framework.
+   No routing dependency.
+   Uses existing theme variables.
+
+========================================================================== */
 
 
-   Page:
-
-   01 — Welcome
 
 
-   ========================================================================== */
+
+/* ==========================================================================
+   PAGE
+========================================================================== */
+
+.welcome-page{
+
+    position:relative;
+
+    width:100%;
+
+    max-width:1280px;
+
+    margin:0 auto;
+
+    padding:0;
+
+}
 
 
 
@@ -22,50 +49,62 @@
 
 
 /* ==========================================================================
-   WELCOME PAGE ROOT
-   ========================================================================== */
+   HERO
+========================================================================== */
+
+.welcome-hero{
+
+    position:relative;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-height:78vh;
+
+    padding:90px 60px 100px;
+
+}
 
 
-.welcome-page {
 
 
-    min-height:
-
-    100vh;
 
 
+
+/* ==========================================================================
+   BACKGROUND
+========================================================================== */
+
+.welcome-hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
 
     background:
 
-    radial-gradient(
+        radial-gradient(
+            circle at top right,
+            rgba(0,184,169,.14),
+            transparent 38%
+        ),
 
-        circle at top,
+        radial-gradient(
+            circle at bottom left,
+            rgba(255,255,255,.04),
+            transparent 45%
+        );
 
-        rgba(18,55,110,0.45),
-
-        transparent 45%
-
-    ),
-
-    var(--ctm-navy);
-
-
-
-    display:
-
-    flex;
-
-
-
-    flex-direction:
-
-    column;
-
-
+    pointer-events:none;
 
 }
-
-
 
 
 
@@ -74,46 +113,42 @@
 
 
 /* ==========================================================================
-   HERO SECTION
-   ========================================================================== */
+   VISUAL ANCHOR
+========================================================================== */
 
+.hero-visual{
 
-.welcome-hero {
+    position:absolute;
 
+    inset:0;
 
-    max-width:
+    opacity:.06;
 
-    1200px;
+    pointer-events:none;
 
+    background-position:center;
 
+    background-repeat:no-repeat;
 
-    width:
-
-    100%;
-
-
-
-    margin:
-
-    0 auto;
-
-
-
-    padding:
-
-    110px 40px 80px;
-
-
-
-    text-align:
-
-    center;
-
-
+    background-size:520px;
 
 }
 
 
+
+
+
+/*
+
+Optional:
+
+background-image:url("../assets/images/kalachakra-watermark.svg");
+
+or
+
+background-image:url("../assets/images/light-path.webp");
+
+*/
 
 
 
@@ -122,60 +157,22 @@
 
 
 /* ==========================================================================
-   MAIN TITLE
-   ========================================================================== */
+   HERO CONTENT
+========================================================================== */
 
+.hero-content{
 
-.welcome-title {
+    position:relative;
 
+    z-index:2;
 
-    font-size:
+    width:100%;
 
-    clamp(
+    max-width:860px;
 
-        42px,
-
-        5vw,
-
-        72px
-
-    );
-
-
-
-    line-height:
-
-    1.25;
-
-
-
-    font-weight:
-
-    700;
-
-
-
-    color:
-
-    var(--ctm-ivory);
-
-
-
-    letter-spacing:
-
-    0.02em;
-
-
-
-    margin:
-
-    0 auto 24px;
-
-
+    text-align:center;
 
 }
-
-
 
 
 
@@ -184,46 +181,84 @@
 
 
 /* ==========================================================================
-   TAGLINE
-   ========================================================================== */
+   EYEBROW
+========================================================================== */
 
+.hero-eyebrow{
 
-.welcome-tagline {
+    display:inline-flex;
 
+    align-items:center;
 
-    font-size:
+    justify-content:center;
 
-    22px;
+    margin-bottom:28px;
 
+    padding:10px 22px;
 
+    border:1px solid rgba(255,255,255,.12);
 
-    letter-spacing:
+    border-radius:999px;
 
-    .22em;
+    background:rgba(255,255,255,.03);
 
+    color:var(--ctm-teal);
 
+    font-size:.82rem;
 
-    color:
+    font-weight:700;
 
-    var(--ctm-gold-soft);
+    letter-spacing:.18em;
 
-
-
-    margin-bottom:
-
-    30px;
-
-
-
-    text-transform:
-
-    uppercase;
-
-
+    text-transform:uppercase;
 
 }
 
 
+
+
+
+
+
+/* ==========================================================================
+   HERO TITLE
+========================================================================== */
+
+.hero-title{
+
+    margin:0;
+
+    color:var(--color-text-primary);
+
+    font-size:clamp(2.5rem,5vw,4.7rem);
+
+    font-weight:800;
+
+    line-height:1.12;
+
+    letter-spacing:-.03em;
+
+}
+
+
+
+
+
+
+
+.hero-title-english{
+
+    margin:28px 0 0;
+
+    color:var(--color-text-secondary);
+
+    font-size:1.45rem;
+
+    font-weight:500;
+
+    line-height:1.55;
+
+}
 
 
 
@@ -233,45 +268,51 @@
 
 /* ==========================================================================
    DESCRIPTION
-   ========================================================================== */
+========================================================================== */
 
+.hero-description{
 
-.welcome-description {
+    max-width:760px;
 
-
-    max-width:
-
-    850px;
-
-
-
-    margin:
-
-    0 auto;
-
-
-
-    font-size:
-
-    20px;
-
-
-
-    line-height:
-
-    1.9;
-
-
-
-    color:
-
-    var(--text-secondary);
-
-
+    margin:48px auto 0;
 
 }
 
 
+
+
+
+
+
+.hero-description .tamil{
+
+    margin:0;
+
+    color:var(--color-text-primary);
+
+    font-size:1.18rem;
+
+    line-height:2.05;
+
+}
+
+
+
+
+
+
+
+.hero-description .english{
+
+    margin:34px 0 0;
+
+    color:var(--color-text-secondary);
+
+    font-size:1.04rem;
+
+    line-height:1.9;
+
+}
 
 
 
@@ -280,36 +321,12 @@
 
 
 /* ==========================================================================
-   DISCOVERY SECTION
-   ========================================================================== */
+   SECTION
+========================================================================== */
 
+.journey-introduction{
 
-.discovery-section {
-
-
-    width:
-
-    100%;
-
-
-
-    max-width:
-
-    1300px;
-
-
-
-    margin:
-
-    0 auto;
-
-
-
-    padding:
-
-    40px;
-
-
+    padding:100px 60px;
 
 }
 
@@ -319,38 +336,53 @@
 
 
 
+.section-heading{
 
+    max-width:760px;
 
-.discovery-title {
+    margin:0 auto 70px;
 
-
-    text-align:
-
-    center;
-
-
-
-    font-size:
-
-    32px;
-
-
-
-    color:
-
-    var(--ctm-ivory);
-
-
-
-    margin-bottom:
-
-    50px;
-
-
+    text-align:center;
 
 }
 
 
+
+
+
+
+
+.section-heading h2{
+
+    margin:0;
+
+    color:var(--color-text-primary);
+
+    font-size:2.3rem;
+
+    font-weight:700;
+
+}
+
+
+
+
+
+
+
+.section-heading p{
+
+    margin:18px 0 0;
+
+    color:var(--ctm-teal);
+
+    font-size:1rem;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+
+}
 
 
 
@@ -359,36 +391,16 @@
 
 
 /* ==========================================================================
-   DISCOVERY CARDS
-   ========================================================================== */
+   CARD GRID
+========================================================================== */
 
+.journey-cards{
 
-.discovery-grid {
+    display:grid;
 
+    grid-template-columns:repeat(2,minmax(0,1fr));
 
-    display:
-
-    grid;
-
-
-
-    grid-template-columns:
-
-    repeat(
-
-        4,
-
-        1fr
-
-    );
-
-
-
-    gap:
-
-    24px;
-
-
+    gap:34px;
 
 }
 
@@ -398,97 +410,33 @@
 
 
 
+/* ==========================================================================
+   CARD
+========================================================================== */
 
+.journey-card{
 
-.discovery-card {
+    position:relative;
 
+    overflow:hidden;
 
-    min-height:
+    padding:42px;
 
-    260px;
+    border:1px solid rgba(255,255,255,.08);
 
+    border-radius:28px;
 
+    background:rgba(255,255,255,.03);
 
-    padding:
-
-    35px 25px;
-
-
-
-    text-align:
-
-    center;
-
-
-
-    background:
-
-    linear-gradient(
-
-        145deg,
-
-        rgba(255,255,255,0.07),
-
-        rgba(255,255,255,0.02)
-
-    );
-
-
-
-    border:
-
-    1px solid rgba(
-
-        201,
-
-        162,
-
-        39,
-
-        .25
-
-    );
-
-
-
-    border-radius:
-
-    var(--radius-md);
-
-
+    backdrop-filter:blur(10px);
 
     transition:
 
-    transform .35s ease,
+        transform .35s ease,
 
-    border-color .35s ease;
+        border-color .35s ease,
 
-
-
-}
-
-
-
-
-
-
-
-
-
-.discovery-card:hover {
-
-
-    transform:
-
-    translateY(-8px);
-
-
-
-    border-color:
-
-    var(--ctm-gold);
-
-
+        box-shadow .35s ease;
 
 }
 
@@ -498,287 +446,417 @@
 
 
 
+.journey-card:hover{
 
+    transform:translateY(-8px);
 
-.discovery-number {
-
-
-    font-size:
-
-    14px;
-
-
-
-    color:
-
-    var(--ctm-gold-soft);
-
-
-
-    letter-spacing:
-
-    .25em;
-
-
-
-    margin-bottom:
-
-    20px;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.discovery-card h3 {
-
-
-    font-size:
-
-    24px;
-
-
-
-    color:
-
-    var(--ctm-ivory);
-
-
-
-    margin-bottom:
-
-    18px;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.discovery-card p {
-
-
-    font-size:
-
-    16px;
-
-
-
-    line-height:
-
-    1.8;
-
-
-
-    color:
-
-    var(--text-secondary);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   CTA SECTION
-   ========================================================================== */
-
-
-.welcome-cta {
-
-
-    margin:
-
-    80px auto;
-
-
-
-    text-align:
-
-    center;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.welcome-cta-title {
-
-
-    font-size:
-
-    34px;
-
-
-
-    color:
-
-    var(--ctm-ivory);
-
-
-
-    margin-bottom:
-
-    12px;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.welcome-cta-subtitle {
-
-
-    color:
-
-    var(--text-muted);
-
-
-
-    font-size:
-
-    18px;
-
-
-
-    margin-bottom:
-
-    35px;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.begin-button {
-
-
-    display:
-
-    inline-flex;
-
-
-
-    align-items:
-
-    center;
-
-
-
-    justify-content:
-
-    center;
-
-
-
-    gap:
-
-    12px;
-
-
-
-    padding:
-
-    18px 55px;
-
-
-
-    border-radius:
-
-    var(--radius-pill);
-
-
-
-    background:
-
-    linear-gradient(
-
-        135deg,
-
-        var(--ctm-teal),
-
-        #007ED0
-
-    );
-
-
-
-    color:
-
-    white;
-
-
-
-    font-size:
-
-    20px;
-
-
-
-    font-weight:
-
-    600;
-
-
-
-    text-decoration:
-
-    none;
-
-
+    border-color:rgba(0,184,169,.35);
 
     box-shadow:
 
-    var(--shadow-teal);
+        0 20px 50px rgba(0,0,0,.28);
+
+}
 
 
+
+
+
+
+
+.card-number{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:54px;
+
+    height:54px;
+
+    margin-bottom:26px;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        var(--ctm-teal),
+        rgba(0,184,169,.55)
+    );
+
+    color:#ffffff;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+}
+
+
+
+
+
+
+
+.card-icon{
+
+    margin-bottom:22px;
+
+    color:var(--ctm-teal);
+
+    font-size:1.8rem;
+
+}
+
+/* ==========================================================================
+   CARD TYPOGRAPHY
+========================================================================== */
+
+.journey-card h3{
+
+    margin:0 0 12px;
+
+    color:var(--color-text-primary);
+
+    font-size:1.55rem;
+
+    font-weight:700;
+
+    line-height:1.35;
+
+}
+
+
+
+
+
+
+
+.journey-card h4{
+
+    margin:0 0 22px;
+
+    color:var(--ctm-teal);
+
+    font-size:.98rem;
+
+    font-weight:600;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+
+}
+
+
+
+
+
+
+
+.journey-card p{
+
+    margin:0;
+
+    color:var(--color-text-secondary);
+
+    font-size:1rem;
+
+    line-height:1.85;
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   REFLECTION SECTION
+========================================================================== */
+
+.reflection-section{
+
+    padding:20px 60px 100px;
+
+}
+
+
+
+
+
+
+
+.reflection-card{
+
+    max-width:900px;
+
+    margin:0 auto;
+
+    padding:60px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.025);
+
+    text-align:center;
+
+}
+
+
+
+
+
+
+
+.reflection-card h2{
+
+    margin:0;
+
+    color:var(--color-text-primary);
+
+    font-size:2.2rem;
+
+    font-weight:700;
+
+}
+
+
+
+
+
+
+
+.reflection-card h3{
+
+    margin:18px 0 36px;
+
+    color:var(--ctm-teal);
+
+    font-size:1rem;
+
+    letter-spacing:.14em;
+
+    text-transform:uppercase;
+
+    font-weight:600;
+
+}
+
+
+
+
+
+
+
+.reflection-card .tamil{
+
+    margin:0;
+
+    color:var(--color-text-primary);
+
+    font-size:1.15rem;
+
+    line-height:2;
+
+}
+
+
+
+
+
+
+
+.reflection-card .english{
+
+    margin:36px 0 0;
+
+    color:var(--color-text-secondary);
+
+    font-size:1rem;
+
+    line-height:1.9;
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   CTA
+========================================================================== */
+
+.welcome-action{
+
+    padding:20px 60px 120px;
+
+    text-align:center;
+
+}
+
+
+
+
+
+
+
+.welcome-action h2{
+
+    margin:0;
+
+    color:var(--color-text-primary);
+
+    font-size:clamp(2rem,4vw,3.3rem);
+
+    font-weight:800;
+
+    line-height:1.25;
+
+}
+
+
+
+
+
+
+
+.cta-subtitle{
+
+    margin:18px 0 0;
+
+    color:var(--ctm-teal);
+
+    font-size:1rem;
+
+    letter-spacing:.14em;
+
+    text-transform:uppercase;
+
+}
+
+
+
+
+
+
+
+.cta-meta{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:14px;
+
+    margin:40px 0 46px;
+
+    color:var(--color-text-secondary);
+
+    font-size:.95rem;
+
+    font-weight:500;
+
+}
+
+
+
+
+
+
+
+.cta-meta span{
+
+    color:var(--ctm-teal);
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   PRIMARY BUTTON
+========================================================================== */
+
+.primary-button{
+
+    display:inline-flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    min-width:360px;
+
+    min-height:74px;
+
+    padding:20px 42px;
+
+    border:none;
+
+    border-radius:999px;
+
+    cursor:pointer;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--ctm-teal),
+            #2fd5c5
+        );
+
+    color:#ffffff;
+
+    font-weight:700;
+
+    box-shadow:
+
+        0 16px 40px rgba(0,184,169,.30);
 
     transition:
 
-    transform .25s ease;
+        transform .30s ease,
+
+        box-shadow .30s ease,
+
+        filter .30s ease;
+
+}
 
 
+
+
+
+
+
+.primary-button:hover{
+
+    transform:translateY(-3px);
+
+    filter:brightness(1.04);
+
+    box-shadow:
+
+        0 24px 54px rgba(0,184,169,.42);
 
 }
 
@@ -788,20 +866,161 @@
 
 
 
+.primary-button:active{
 
-
-.begin-button:hover {
-
-
-    transform:
-
-    translateY(-5px);
-
-
+    transform:translateY(0);
 
 }
 
 
+
+
+
+
+
+.button-tamil{
+
+    font-size:1.08rem;
+
+    line-height:1.4;
+
+}
+
+
+
+
+
+
+
+.button-english{
+
+    font-size:.82rem;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+
+    opacity:.95;
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   TRUST MESSAGE
+========================================================================== */
+
+.trust-message{
+
+    max-width:760px;
+
+    margin:42px auto 0;
+
+}
+
+
+
+
+
+
+
+.trust-message .tamil{
+
+    margin:0;
+
+    color:var(--color-text-primary);
+
+    font-size:1rem;
+
+    line-height:1.8;
+
+}
+
+
+
+
+
+
+
+.trust-message .english{
+
+    margin:18px 0 0;
+
+    color:var(--color-text-secondary);
+
+    font-size:.95rem;
+
+    line-height:1.8;
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   CLOSING
+========================================================================== */
+
+.welcome-closing{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:18px;
+
+    margin-top:60px;
+
+    color:var(--ctm-teal);
+
+    font-size:.90rem;
+
+    font-weight:600;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+
+}
+
+
+
+
+
+
+
+.welcome-closing span{
+
+    position:relative;
+
+}
+
+
+
+
+
+
+
+.welcome-closing span:not(:last-child)::after{
+
+    content:"•";
+
+    margin-left:18px;
+
+    color:rgba(255,255,255,.30);
+
+}
 
 
 
@@ -811,36 +1030,32 @@
 
 /* ==========================================================================
    RESPONSIVE
-   ========================================================================== */
+========================================================================== */
 
+@media (max-width:992px){
 
-@media(max-width:900px){
+    .welcome-hero,
+    .journey-introduction,
+    .reflection-section,
+    .welcome-action{
 
+        padding-left:32px;
+        padding-right:32px;
 
+    }
 
-.discovery-grid{
+    .journey-cards{
 
+        grid-template-columns:1fr;
 
-    grid-template-columns:
+    }
 
-    1fr 1fr;
+    .primary-button{
 
+        width:100%;
+        min-width:0;
 
-}
-
-
-
-.welcome-hero{
-
-
-    padding:
-
-    70px 25px;
-
-
-}
-
-
+    }
 
 }
 
@@ -848,44 +1063,108 @@
 
 
 
-@media(max-width:600px){
 
 
+@media (max-width:768px){
 
-.discovery-grid{
+    .welcome-hero{
 
+        min-height:auto;
 
-    grid-template-columns:
+        padding-top:70px;
+        padding-bottom:70px;
 
-    1fr;
+    }
 
+    .hero-title{
+
+        font-size:2.4rem;
+
+    }
+
+    .hero-title-english{
+
+        font-size:1.15rem;
+
+    }
+
+    .hero-description .tamil{
+
+        font-size:1.05rem;
+
+        line-height:1.9;
+
+    }
+
+    .journey-card{
+
+        padding:32px;
+
+    }
+
+    .reflection-card{
+
+        padding:40px 28px;
+
+    }
+
+    .welcome-action{
+
+        padding-bottom:90px;
+
+    }
 
 }
 
 
 
-.welcome-title{
 
 
-    font-size:
 
-    38px;
 
+@media (max-width:480px){
+
+    .welcome-hero,
+    .journey-introduction,
+    .reflection-section,
+    .welcome-action{
+
+        padding-left:20px;
+        padding-right:20px;
+
+    }
+
+    .hero-eyebrow{
+
+        font-size:.72rem;
+
+    }
+
+    .hero-title{
+
+        font-size:2rem;
+
+    }
+
+    .section-heading h2{
+
+        font-size:1.8rem;
+
+    }
+
+    .reflection-card h2{
+
+        font-size:1.8rem;
+
+    }
+
+    .cta-meta{
+
+        flex-direction:column;
+
+        gap:8px;
+
+    }
 
 }
 
-
-
-.welcome-description{
-
-
-    font-size:
-
-    17px;
-
-
-}
-
-
-
-}
