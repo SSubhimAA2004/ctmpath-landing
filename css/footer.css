@@ -3,73 +3,68 @@
    CTM PATH™ Guided Journey™
 
    File        : css/footer.css
-   Version     : 2.0
+   Version     : 4.0
+   Status      : PREMIUM FOOTER SYSTEM
 
-   Status      : 🔒 PREMIUM FOOTER SYSTEM
+   Purpose
+   -------
+   Global premium footer styling.
 
+   Supports
+   --------
+   ✓ components/footer.html
 
-   Purpose:
-
-   Global footer presentation.
-
-
-   ========================================================================== */
+========================================================================== */
 
 
 
 
 
 /* ==========================================================================
-   FOOTER ROOT
-   ========================================================================== */
+   FOOTER
+========================================================================== */
+
+.ctm-footer{
+
+    position:relative;
+
+    margin-top:120px;
+
+    background:var(--color-surface,#081C3A);
+
+    border-top:1px solid rgba(255,255,255,.06);
+
+    overflow:hidden;
+
+}
 
 
-.ctm-footer {
-
-
-    width:100%;
 
 
 
-    margin-top:auto;
 
 
+/* ==========================================================================
+   SUBTLE BACKGROUND GLOW
+========================================================================== */
 
-    padding:
+.ctm-footer::before{
 
-    45px 60px 25px;
+    content:"";
 
+    position:absolute;
 
+    inset:0;
 
     background:
 
-    linear-gradient(
+        radial-gradient(
+            circle at top center,
+            rgba(0,184,169,.08),
+            transparent 60%
+        );
 
-        180deg,
-
-        rgba(6,21,45,0.95),
-
-        #06152D
-
-    );
-
-
-
-    border-top:
-
-    1px solid rgba(
-
-        201,
-
-        162,
-
-        39,
-
-        0.20
-
-    );
-
-
+    pointer-events:none;
 
 }
 
@@ -79,53 +74,95 @@
 
 
 
+/* ==========================================================================
+   CONTAINER
+========================================================================== */
+
+.footer-container{
+
+    position:relative;
+
+    z-index:2;
+
+    max-width:1280px;
+
+    margin:0 auto;
+
+    padding:72px 56px 36px;
+
+}
+
+
+
+
+
 
 
 /* ==========================================================================
-   FOOTER CONTAINER
-   ========================================================================== */
+   TOP TAGLINE
+========================================================================== */
+
+.footer-topline{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:18px;
+
+    margin-bottom:72px;
+
+    color:rgba(255,255,255,.92);
+
+    font-size:2rem;
+
+    font-weight:300;
+
+    letter-spacing:.01em;
+
+    text-align:center;
+
+}
 
 
-.footer-container {
-
-
-    max-width:
-
-    1200px;
 
 
 
-    margin:
-
-    0 auto;
 
 
+.footer-topline span{
 
-    display:
+    color:var(--ctm-teal,#00B8A9);
 
-    grid;
+    font-size:1rem;
 
-
-
-    grid-template-columns:
-
-    repeat(3,1fr);
+}
 
 
 
-    gap:
-
-    45px;
 
 
+
+
+/* ==========================================================================
+   GRID
+========================================================================== */
+
+.footer-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:80px;
 
     align-items:start;
 
-
-
 }
-
-
 
 
 
@@ -134,102 +171,24 @@
 
 
 /* ==========================================================================
-   BRAND SECTION
-   ========================================================================== */
+   LABELS
+========================================================================== */
 
+.footer-label{
 
-.footer-brand-name {
+    margin-bottom:18px;
 
+    color:#D4AF37;
 
-    font-size:
+    font-size:.72rem;
 
-    28px;
+    font-weight:700;
 
+    letter-spacing:.26em;
 
-
-    font-weight:
-
-    800;
-
-
-
-    letter-spacing:
-
-    0.12em;
-
-
-
-    color:
-
-    var(--ctm-ivory);
-
-
+    text-transform:uppercase;
 
 }
-
-
-
-.footer-brand-subtitle {
-
-
-    margin-top:
-
-    8px;
-
-
-
-    font-size:
-
-    14px;
-
-
-
-    letter-spacing:
-
-    0.25em;
-
-
-
-    color:
-
-    var(--ctm-teal);
-
-
-
-}
-
-
-
-.footer-brand-signature {
-
-
-    margin-top:
-
-    14px;
-
-
-
-    font-size:
-
-    15px;
-
-
-
-    font-style:
-
-    italic;
-
-
-
-    color:
-
-    var(--text-secondary);
-
-
-
-}
-
-
 
 
 
@@ -238,96 +197,60 @@
 
 
 /* ==========================================================================
-   FOUNDER SECTION
-   ========================================================================== */
+   BRAND
+========================================================================== */
 
+.footer-brand-name{
 
-.footer-label {
+    margin-bottom:14px;
 
+    color:#FFFFFF;
 
-    font-size:
+    font-size:2.15rem;
 
-    12px;
+    font-weight:800;
 
-
-
-    letter-spacing:
-
-    0.3em;
-
-
-
-    text-transform:
-
-    uppercase;
-
-
-
-    color:
-
-    var(--ctm-gold-soft);
-
-
-
-    margin-bottom:
-
-    12px;
-
-
+    letter-spacing:.02em;
 
 }
 
 
 
-.footer-founder-name {
-
-
-    font-size:
-
-    20px;
 
 
 
-    font-weight:
 
-    700;
+.footer-brand-subtitle{
 
+    margin-bottom:18px;
 
+    color:#BFD3E2;
 
-    color:
+    font-size:1.08rem;
 
-    var(--ctm-ivory);
-
-
+    font-weight:500;
 
 }
 
 
 
-.footer-role {
-
-
-    margin-top:
-
-    6px;
 
 
 
-    color:
 
-    var(--text-secondary);
+.footer-brand-signature{
 
+    color:#FFFFFF;
 
+    opacity:.90;
 
-    font-size:
+    font-size:1.35rem;
 
-    15px;
+    font-style:italic;
 
-
+    line-height:1.5;
 
 }
-
-
 
 
 
@@ -336,78 +259,114 @@
 
 
 /* ==========================================================================
-   CONTACT SECTION
-   ========================================================================== */
+   FOUNDER
+========================================================================== */
 
+.footer-founder-name{
 
-.footer-contact-item {
+    margin-bottom:14px;
 
+    color:#FFFFFF;
 
-    display:
+    font-size:1.9rem;
 
-    flex;
+    font-weight:700;
 
-
-
-    flex-direction:
-
-    column;
-
-
-
-    gap:
-
-    5px;
-
-
-
-    margin-bottom:
-
-    14px;
-
-
-
-    color:
-
-    var(--text-secondary);
-
-
+    line-height:1.35;
 
 }
 
 
 
-.footer-contact-item a {
 
 
-    color:
-
-    var(--ctm-teal);
 
 
+.footer-role{
+
+    color:#DCE7F2;
+
+    font-size:1.1rem;
+
+    line-height:1.7;
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   CONTACT
+========================================================================== */
+
+.footer-contact-item{
+
+    display:flex;
+
+    flex-direction:column;
+
+    margin-bottom:26px;
+
+}
+
+
+
+
+
+
+
+.footer-contact-item span{
+
+    margin-bottom:8px;
+
+    color:#FFFFFF;
+
+    font-size:1rem;
+
+    font-weight:500;
+
+}
+
+
+
+
+
+
+
+.footer-contact-item a{
+
+    color:var(--ctm-teal,#00B8A9);
+
+    text-decoration:none;
+
+    font-size:1.08rem;
 
     transition:
 
-    color .25s ease;
+        color .25s ease,
 
+        opacity .25s ease,
 
-
-}
-
-
-
-.footer-contact-item a:hover {
-
-
-    color:
-
-    var(--ctm-gold-soft);
-
-
+        transform .25s ease;
 
 }
 
 
+
+
+
+
+
+.footer-contact-item a:hover{
+
+    opacity:.85;
+
+    transform:translateX(3px);
+
+}
 
 
 
@@ -417,61 +376,25 @@
 
 /* ==========================================================================
    COPYRIGHT
-   ========================================================================== */
+========================================================================== */
 
+.footer-bottom{
 
-.footer-bottom {
+    margin-top:70px;
 
+    padding-top:28px;
 
-    margin-top:
+    border-top:1px solid rgba(255,255,255,.06);
 
-    35px;
+    text-align:center;
 
+    color:rgba(255,255,255,.72);
 
+    font-size:.95rem;
 
-    padding-top:
-
-    20px;
-
-
-
-    border-top:
-
-    1px solid rgba(
-
-        255,
-
-        255,
-
-        255,
-
-        0.08
-
-    );
-
-
-
-    text-align:
-
-    center;
-
-
-
-    font-size:
-
-    13px;
-
-
-
-    color:
-
-    var(--text-muted);
-
-
+    letter-spacing:.05em;
 
 }
-
-
 
 
 
@@ -481,56 +404,126 @@
 
 /* ==========================================================================
    RESPONSIVE
-   ========================================================================== */
+========================================================================== */
 
+@media (max-width:1024px){
 
-@media(max-width:900px){
+    .footer-grid{
 
+        gap:56px;
 
-
-.footer-container{
-
-
-    grid-template-columns:
-
-    1fr;
-
-
-
-    text-align:
-
-    center;
-
-
+    }
 
 }
 
 
 
-.ctm-footer{
 
 
-    padding:
-
-    40px 25px 25px;
 
 
+@media (max-width:900px){
+
+    .footer-container{
+
+        padding:64px 36px 32px;
+
+    }
+
+    .footer-grid{
+
+        grid-template-columns:1fr;
+
+        gap:50px;
+
+        text-align:center;
+
+    }
+
+    .footer-topline{
+
+        font-size:1.55rem;
+
+        line-height:1.6;
+
+    }
+
+    .footer-contact-item{
+
+        align-items:center;
+
+    }
 
 }
 
 
 
-.footer-contact-item{
 
 
-    align-items:
-
-    center;
 
 
+@media (max-width:640px){
+
+    .footer-container{
+
+        padding:56px 24px 28px;
+
+    }
+
+    .footer-topline{
+
+        font-size:1.2rem;
+
+        gap:10px;
+
+    }
+
+    .footer-brand-name{
+
+        font-size:1.8rem;
+
+    }
+
+    .footer-brand-subtitle{
+
+        font-size:1rem;
+
+    }
+
+    .footer-brand-signature{
+
+        font-size:1.15rem;
+
+    }
+
+    .footer-founder-name{
+
+        font-size:1.6rem;
+
+    }
+
+    .footer-role{
+
+        font-size:1rem;
+
+    }
+
+    .footer-contact-item a{
+
+        font-size:1rem;
+
+        word-break:break-word;
+
+    }
 
 }
 
 
 
-}
+
+
+
+
+/* ==========================================================================
+   END OF FILE
+========================================================================== */
