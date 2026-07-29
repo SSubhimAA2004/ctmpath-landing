@@ -3,9 +3,9 @@
    CTM PATH™ Guided Journey™
 
    File        : js/api.js
-   Version     : 2.0
+   Version     : 2.1
 
-   Status      : 🔒 REGISTRATION ENDPOINT ALIGNMENT
+   Status      : REGISTRATION API COMPATIBILITY PATCH
 
 
    Purpose:
@@ -15,16 +15,15 @@
 
    Responsibilities:
 
-   ✓ Communicate with Google Apps Script API
-   ✓ Send visitor registration data
-   ✓ Handle responses
+   ✓ Send requests to Google Apps Script
+   ✓ Register visitors
 
 
    Does NOT:
 
    ✗ Database operations
-   ✗ Assessment logic
    ✗ Business rules
+   ✗ Assessment processing
 
 
    ========================================================================== */
@@ -40,14 +39,7 @@ const API = (() => {
 
 
 
-        /*
-            Replace with active
-            Google Apps Script Web App URL
-        */
-
-
         endpoint:
-
 
         "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL"
 
@@ -64,15 +56,11 @@ const API = (() => {
 
 
     /* ==========================================================
-       GENERIC REQUEST
+       GENERIC REQUEST HANDLER
        ========================================================== */
 
 
-    async function request(
-
-        payload
-
-    ){
+    async function request(payload){
 
 
 
@@ -125,7 +113,7 @@ const API = (() => {
 
             throw new Error(
 
-                "API request failed"
+                "API connection failed"
 
             );
 
@@ -158,11 +146,7 @@ const API = (() => {
        ========================================================== */
 
 
-    async function registerVisitor(
-
-        visitorData
-
-    ){
+    async function registerVisitor(data){
 
 
 
@@ -182,49 +166,49 @@ const API = (() => {
 
                 fullName:
 
-                visitorData.fullName,
+                data.fullName,
 
 
 
                 email:
 
-                visitorData.email,
+                data.email,
 
 
 
                 mobile:
 
-                visitorData.mobile,
+                data.mobile,
 
 
 
                 district:
 
-                visitorData.district,
+                data.district,
 
 
 
                 state:
 
-                visitorData.state,
+                data.state,
 
 
 
                 language:
 
-                visitorData.language,
+                data.language,
 
 
 
                 source:
 
-                visitorData.source,
+                data.source,
 
 
 
                 device:
 
-                visitorData.device
+                data.device
 
 
 
