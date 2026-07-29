@@ -1,740 +1,492 @@
 
-<!-- ==========================================================================
+<!-- ==========================================================
      CTM PATH™ Guided Journey™
 
-     File        : pages/registration.html
-     Version     : 1.1
+     Page       : Registration
+     Version    : 1.2
 
-     Status      : PREMIUM REGISTRATION RESTORATION PATCH
+     Status     : FRAGMENT RESTORATION
 
+     Loaded by  : js/app.js
+========================================================== -->
 
-     Purpose:
 
-     Page 02 — Visitor Registration Experience
+<section 
+class="registration-page"
+id="registration-page">
 
 
-     Responsibilities:
 
-     ✓ Capture visitor details
-     ✓ Present premium onboarding experience
-     ✓ Prepare data for registration.js
+<!-- ==========================================================
+     PAGE HEADER
+========================================================== -->
 
 
-     Does NOT:
+<section class="registration-header">
 
-     ✗ API processing
-     ✗ Navigation control
-     ✗ Database logic
 
+<h1>
 
-     ========================================================================== -->
+உங்கள் பயணம் இப்போது தொடங்குகிறது
 
+</h1>
 
-<section class="registration-page">
 
+<p class="english">
 
+Begin Your Personal Journey™
 
-    <!-- =====================================================
-         HERO INTRODUCTION
-         ===================================================== -->
+</p>
 
 
-    <div class="registration-hero">
 
+<p>
 
-        <h1 class="page-title">
+உங்கள் வாழ்க்கைப் பயணத்தை தனிப்பட்ட முறையில் புரிந்து கொள்ள,
+சில அடிப்படை விவரங்களை எங்களுடன் பகிர்ந்து கொள்ளுங்கள்.
 
-            உங்கள் பயணம் இப்போது தொடங்குகிறது
+</p>
 
-            <span>
-                Begin Your Personal Journey™
-            </span>
 
-        </h1>
 
+</section>
 
 
-        <p class="page-description">
 
-            உங்கள் வாழ்க்கைப் பயணத்தை தனிப்பட்ட முறையில் புரிந்து கொள்ள
-            சில அடிப்படை விவரங்களை எங்களுடன் பகிருங்கள்.
 
-            <br><br>
 
-            Share a few details so we can create your personalised
-            CTM PATH™ Guided Journey™ experience.
 
-        </p>
+<!-- ==========================================================
+     REGISTRATION FORM
+========================================================== -->
 
 
-    </div>
+<form id="registration-form">
 
 
 
 
 
+<!-- FULL NAME -->
 
+<div class="form-group">
 
 
+<label>
 
-    <!-- =====================================================
-         REGISTRATION FORM
-         ===================================================== -->
+முழு பெயர்
 
+<br>
 
-    <form
-        id="registration-form"
-        class="registration-form"
-        autocomplete="on"
-    >
+Full Name
 
+</label>
 
 
+<input
 
+type="text"
 
+id="fullName"
 
+name="fullName"
 
+placeholder="உங்கள் பெயரை உள்ளிடவும்"
 
-        <!-- =====================================================
-             PERSONAL DETAILS CARD
-             ===================================================== -->
+required
 
+>
 
-        <div class="form-card">
 
+</div>
 
-            <div class="form-card-header">
 
 
-                <h2>
 
-                    உங்கள் விவரங்கள்
 
-                </h2>
 
+<!-- EMAIL -->
 
-                <span>
+<div class="form-group">
 
-                    Your Details
 
-                </span>
+<label>
 
+மின்னஞ்சல்
 
-            </div>
+<br>
 
+Email Address
 
+</label>
 
 
+<input
 
+type="email"
 
+id="email"
 
-            <div class="form-group">
+name="email"
 
+placeholder="உங்கள் email முகவரி"
 
-                <label for="fullName">
+required
 
+>
 
-                    முழு பெயர்
 
-                    <small>
-                        Full Name
-                    </small>
+</div>
 
 
-                </label>
 
 
 
-                <input
 
-                    type="text"
+<!-- MOBILE -->
 
-                    id="fullName"
+<div class="form-group">
 
-                    name="fullName"
 
-                    placeholder="உங்கள் முழு பெயரை உள்ளிடுங்கள் | Enter your full name"
+<label>
 
-                    required
+கைபேசி எண்
 
-                >
+<br>
 
+Mobile Number
 
-            </div>
+</label>
 
 
+<input
 
+type="tel"
 
+id="mobile"
 
+name="mobile"
 
+placeholder="உங்கள் mobile number"
 
+required
 
-            <div class="form-group">
+>
 
 
-                <label for="email">
+</div>
 
 
-                    மின்னஞ்சல்
 
-                    <small>
-                        Email Address
-                    </small>
 
 
-                </label>
 
 
+<!-- DISTRICT -->
 
-                <input
+<div class="form-group">
 
-                    type="email"
 
-                    id="email"
+<label>
 
-                    name="email"
+மாவட்டம்
 
-                    placeholder="உங்கள் மின்னஞ்சல் முகவரியை உள்ளிடுங்கள் | Enter your email address"
+<br>
 
-                    required
+District
 
-                >
+</label>
 
 
-            </div>
+<input
 
+type="text"
 
+id="district"
 
-        </div>
+name="district"
 
+placeholder="உங்கள் மாவட்டம்"
 
+required
 
+>
 
 
+</div>
 
 
 
 
-        <!-- =====================================================
-             CONTACT INFORMATION CARD
-             ===================================================== -->
 
 
-        <div class="form-card">
 
+<!-- STATE -->
 
-            <div class="form-card-header">
+<div class="form-group">
 
 
-                <h2>
+<label>
 
-                    தொடர்பு விவரங்கள்
+மாநிலம்
 
-                </h2>
+<br>
 
+State
 
-                <span>
+</label>
 
-                    Contact Information
 
-                </span>
+<input
 
+type="text"
 
-            </div>
+id="state"
 
+name="state"
 
+placeholder="உங்கள் மாநிலம்"
 
+required
 
+>
 
 
+</div>
 
 
-            <div class="form-group">
 
 
-                <label for="mobile">
 
 
-                    கைபேசி எண்
 
-                    <small>
-                        Mobile Number
-                    </small>
+<!-- LANGUAGE -->
 
+<div class="form-group">
 
-                </label>
 
+<label>
 
+விருப்பமான மொழி
 
-                <input
+<br>
 
-                    type="tel"
+Preferred Language
 
-                    id="mobile"
+</label>
 
-                    name="mobile"
 
-                    placeholder="உங்கள் கைபேசி எண்ணை உள்ளிடுங்கள் | Enter your mobile number"
 
-                    required
+<div class="language-options">
 
-                >
 
+<label>
 
-            </div>
+<input
 
+type="radio"
 
+name="language"
 
+value="Tamil"
 
+checked
 
+>
 
+தமிழ்
 
+</label>
 
-            <div class="form-group">
 
 
-                <label for="district">
 
+<label>
 
-                    மாவட்டம்
+<input
 
-                    <small>
-                        District
-                    </small>
+type="radio"
 
+name="language"
 
-                </label>
+value="English"
 
+>
 
+English
 
-                <input
+</label>
 
-                    type="text"
 
-                    id="district"
 
-                    name="district"
+</div>
 
-                    placeholder="உங்கள் மாவட்டத்தை உள்ளிடுங்கள் | Enter your district"
 
-                    required
+</div>
 
-                >
 
 
-            </div>
 
 
 
 
 
+<!-- SOURCE -->
 
+<div class="form-group">
 
 
-            <div class="form-group">
+<label>
 
+CTM PATH™ பற்றி எப்படி அறிந்தீர்கள்?
 
-                <label for="state">
+<br>
 
+How did you discover CTM PATH™?
 
-                    மாநிலம்
+</label>
 
-                    <small>
-                        State
-                    </small>
 
 
-                </label>
+<select
 
+id="source"
 
+name="source"
 
-                <input
+>
 
-                    type="text"
 
-                    id="state"
+<option value="">
 
-                    name="state"
+Select
 
-                    placeholder="உங்கள் மாநிலத்தை உள்ளிடுங்கள் | Enter your state"
+</option>
 
-                    required
 
-                >
+<option value="WhatsApp">
 
+WhatsApp
 
-            </div>
+</option>
 
 
+<option value="Facebook">
 
-        </div>
+Facebook
 
+</option>
 
 
+<option value="Instagram">
 
+Instagram
 
+</option>
 
 
+<option value="Friend">
 
+Friend / Referral
 
-        <!-- =====================================================
-             LANGUAGE CARD
-             ===================================================== -->
+</option>
 
 
-        <div class="form-card">
+<option value="Other">
 
+Other
 
-            <div class="form-card-header">
+</option>
 
 
-                <h2>
+</select>
 
-                    விருப்பமான மொழி
 
-                </h2>
+</div>
 
 
-                <span>
 
-                    Preferred Language
 
-                </span>
 
 
-            </div>
 
 
+<!-- CONSENT -->
 
+<div class="form-group consent">
 
-            <p class="field-description">
 
-                உங்கள் பயண அனுபவத்திற்கான மொழியை தேர்வு செய்யுங்கள்.
+<label>
 
-                <br>
 
-                Choose the language for your journey experience.
+<input
 
-            </p>
+type="checkbox"
 
+id="consent"
 
+required
 
+>
 
 
+இந்த தகவல்கள் உங்கள் தனிப்பட்ட CTM PATH™ Guided Journey™ அனுபவத்தை உருவாக்க மட்டுமே பயன்படுத்தப்படும்.
 
-            <div class="language-options">
 
+</label>
 
-                <label class="language-option">
 
+</div>
 
-                    <input
 
-                        type="radio"
 
-                        name="language"
 
-                        value="Tamil"
 
-                        checked
 
-                    >
 
+<!-- ACTION -->
 
-                    <span>
+<div class="form-actions">
 
-                        தமிழ்
 
-                        <small>
-                            Tamil
-                        </small>
+<button
 
-                    </span>
+type="button"
 
+id="continue-registration"
 
-                </label>
+class="primary-button"
 
 
+>
 
+என் பயணத்தை தொடர்கிறேன்
 
+<br>
 
+<span>
 
-                <label class="language-option">
+Continue My Journey™
 
+</span>
 
-                    <input
 
-                        type="radio"
+</button>
 
-                        name="language"
 
-                        value="English"
+</div>
 
-                    >
 
 
-                    <span>
 
-                        English
 
-                        <small>
-                            English
-                        </small>
 
-                    </span>
+</form>
 
 
-                </label>
-
-
-            </div>
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-
-        <!-- =====================================================
-             SOURCE CARD
-             ===================================================== -->
-
-
-        <div class="form-card">
-
-
-            <div class="form-card-header">
-
-
-                <h2>
-
-                    CTM PATH™ பற்றி எப்படித் தெரிந்துகொண்டீர்கள்?
-
-                </h2>
-
-
-                <span>
-
-                    How did you discover CTM PATH™?
-
-                </span>
-
-
-            </div>
-
-
-
-
-
-
-            <select
-
-                id="source"
-
-                name="source"
-
-                required
-
-            >
-
-
-                <option value="">
-
-                    Select
-
-                </option>
-
-
-                <option value="WhatsApp">
-
-                    WhatsApp
-
-                </option>
-
-
-                <option value="Facebook">
-
-                    Facebook
-
-                </option>
-
-
-                <option value="Instagram">
-
-                    Instagram
-
-                </option>
-
-
-                <option value="YouTube">
-
-                    YouTube
-
-                </option>
-
-
-                <option value="Friend">
-
-                    Friend / Family
-
-                </option>
-
-
-                <option value="Other">
-
-                    Other
-
-                </option>
-
-
-
-            </select>
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-
-        <!-- =====================================================
-             CONSENT CARD
-             ===================================================== -->
-
-
-        <div class="consent-card">
-
-
-            <label>
-
-
-                <input
-
-                    type="checkbox"
-
-                    id="consent"
-
-                    required
-
-                >
-
-
-
-                <span>
-
-
-                    எனது தகவல்கள் CTM PATH™ Guided Journey™
-                    அனுபவத்தை உருவாக்க மட்டுமே பயன்படுத்தப்படும் என்பதை
-                    புரிந்துகொள்கிறேன்.
-
-
-                    <br><br>
-
-
-                    I understand that my information will only be used
-                    to create my personalised CTM PATH™ Guided Journey™
-                    experience.
-
-
-                </span>
-
-
-
-            </label>
-
-
-        </div>
-
-
-
-
-
-
-
-
-
-        <!-- =====================================================
-             CTA
-             ===================================================== -->
-
-
-        <div class="registration-action">
-
-
-            <button
-
-                type="submit"
-
-                class="continue-button"
-
-            >
-
-
-                <span>
-
-                    என் பயணத்தை தொடர்கிறேன் →
-
-                </span>
-
-
-                <small>
-
-                    Continue My Journey™
-
-                </small>
-
-
-            </button>
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-
-        <!-- =====================================================
-             SECURITY NOTE
-             ===================================================== -->
-
-
-        <p class="security-note">
-
-
-            உங்கள் தகவல்கள் பாதுகாப்பாக கையாளப்படும்.
-
-            <br>
-
-            Your information is handled securely.
-
-
-        </p>
-
-
-
-
-
-    </form>
 
 
 
 
 
 </section>
-
