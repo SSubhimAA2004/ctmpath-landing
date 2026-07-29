@@ -2,30 +2,39 @@
 /* ==========================================================================
    CTM PATH™ Guided Journey™
 
-   File        : theme.css
-   Version     : 2.0
+   File:
+   css/theme.css
+
+   Version:
+   3.0
 
    Purpose:
-
    Premium global design system.
 
    Design Language:
 
-   • Deep premium backgrounds
-   • Muted gold accents
-   • CTM teal interaction
-   • Ivory typography
-   • Calm transformation experience
+   • Transformation
+   • Trust
+   • Calm confidence
+   • Premium mentorship
+   • Human connection
 
    Applies to:
 
-   All 18 journey pages.
+   • Header
+   • Footer
+   • All 18 Journey Pages
+   • Cards
+   • Buttons
+   • Typography
+   • Animations
 
    ========================================================================== */
 
 
+
 /* ==========================================================================
-   PREMIUM DESIGN TOKENS
+   DESIGN TOKENS
    ========================================================================== */
 
 
@@ -33,72 +42,82 @@
 
 
     /* --------------------------------------------------
-       BRAND COLOURS
+       CORE BRAND COLORS
        -------------------------------------------------- */
 
 
     --ctm-background:
 
-        #101216;
+        #0B0D12;
 
 
 
     --ctm-background-soft:
 
-        #171B22;
+        #12161D;
 
 
 
     --ctm-surface:
 
-        #1D222B;
+        #181D26;
 
 
 
-    --ctm-surface-light:
+    --ctm-surface-elevated:
 
-        #242B36;
-
-
-
-    --ctm-white:
-
-        #F8F6F0;
+        #202631;
 
 
 
-    --ctm-text-primary:
+    --ctm-border:
 
-        #F5F2EA;
+        rgba(
+
+            255,
+
+            255,
+
+            255,
+
+            0.10
+
+        );
 
 
 
-    --ctm-text-secondary:
+    --ctm-border-highlight:
 
-        #C9CDD4;
+        rgba(
+
+            201,
+
+            162,
+
+            39,
+
+            0.35
+
+        );
 
 
-
-    --ctm-text-muted:
-
-        #8E95A3;
 
 
 
     /* --------------------------------------------------
-       SIGNATURE COLOURS
+       BRAND ACCENTS
        -------------------------------------------------- */
 
 
     --ctm-teal:
 
-        #13A8B8;
+        #14B8B8;
 
 
 
     --ctm-teal-soft:
 
-        #5FD4DE;
+        #7FE3DF;
 
 
 
@@ -110,57 +129,219 @@
 
     --ctm-gold-soft:
 
-        #E6C96A;
+        #E5C76B;
 
 
 
-    /* --------------------------------------------------
-       BORDERS
-       -------------------------------------------------- */
+    --ctm-ivory:
 
-
-    --ctm-border:
-
-        rgba(
-            255,
-            255,
-            255,
-            0.08
-        );
+        #F8F5EC;
 
 
 
-    --ctm-border-highlight:
+    --ctm-white:
 
-        rgba(
-            201,
-            162,
-            39,
-            0.35
-        );
+        #FFFFFF;
+
+
 
 
 
     /* --------------------------------------------------
-       RADIUS SYSTEM
+       TEXT SYSTEM
        -------------------------------------------------- */
 
 
-    --ctm-radius-small:
+    --ctm-text-primary:
 
-        12px;
+        #F8F5EC;
 
 
 
-    --ctm-radius-medium:
+    --ctm-text-secondary:
+
+        rgba(
+
+            248,
+
+            245,
+
+            236,
+
+            0.72
+
+        );
+
+
+
+    --ctm-text-muted:
+
+        rgba(
+
+            248,
+
+            245,
+
+            236,
+
+            0.48
+
+        );
+
+
+
+
+
+    /* --------------------------------------------------
+       TYPOGRAPHY SCALE
+       -------------------------------------------------- */
+
+
+    --font-display:
+
+        "Noto Sans Tamil",
+        "Noto Sans",
+        sans-serif;
+
+
+
+    --font-body:
+
+        "Noto Sans Tamil",
+        "Inter",
+        sans-serif;
+
+
+
+    --text-xs:
+
+        14px;
+
+
+
+    --text-sm:
+
+        16px;
+
+
+
+    --text-md:
 
         20px;
 
 
 
-    --ctm-radius-large:
+    --text-lg:
+
+        28px;
+
+
+
+    --text-xl:
+
+        40px;
+
+
+
+    --text-hero:
+
+        clamp(
+
+            42px,
+
+            6vw,
+
+            72px
+
+        );
+
+
+
+
+
+    /* --------------------------------------------------
+       SPACING SYSTEM
+       -------------------------------------------------- */
+
+
+    --space-1:
+
+        8px;
+
+
+
+    --space-2:
+
+        16px;
+
+
+
+    --space-3:
+
+        24px;
+
+
+
+    --space-4:
 
         32px;
+
+
+
+    --space-5:
+
+        48px;
+
+
+
+    --space-6:
+
+        64px;
+
+
+
+    --space-7:
+
+        96px;
+
+
+
+    --space-8:
+
+        128px;
+
+
+
+
+
+    /* --------------------------------------------------
+       BORDER RADIUS
+       -------------------------------------------------- */
+
+
+    --radius-sm:
+
+        12px;
+
+
+
+    --radius-md:
+
+        20px;
+
+
+
+    --radius-lg:
+
+        32px;
+
+
+
+    --radius-pill:
+
+        999px;
+
+
 
 
 
@@ -169,47 +350,120 @@
        -------------------------------------------------- */
 
 
-    --ctm-shadow-soft:
-
-        0 10px 40px rgba(
-            0,
-            0,
-            0,
-            0.25
-        );
-
-
-
-    --ctm-shadow-medium:
+    --shadow-soft:
 
         0 20px 60px rgba(
+
             0,
+
             0,
+
             0,
-            0.35
+
+            0.25
+
         );
 
 
 
-    --ctm-shadow-gold:
+    --shadow-premium:
 
-        0 0 40px rgba(
+        0 30px 90px rgba(
+
+            0,
+
+            0,
+
+            0,
+
+            0.45
+
+        );
+
+
+
+    --shadow-gold:
+
+        0 20px 70px rgba(
+
             201,
+
             162,
+
             39,
-            0.18
+
+            0.25
+
         );
 
+
+
+
+
+    /* --------------------------------------------------
+       TRANSITIONS
+       -------------------------------------------------- */
+
+
+    --transition-fast:
+
+        0.2s ease;
+
+
+
+    --transition-medium:
+
+        0.35s ease;
+
+
+
+    --transition-slow:
+
+        0.6s ease;
 
 
 }
 
 /* ==========================================================================
-   GLOBAL FOUNDATION
+   GLOBAL RESET & FOUNDATION
+
+   Clean baseline for premium consistency.
+
    ========================================================================== */
 
 
+*,
+
+*::before,
+
+*::after {
+
+
+    box-sizing:
+
+        border-box;
+
+
+
+}
+
+
+
+
+
 html {
+
+
+    margin:
+
+        0;
+
+
+
+    padding:
+
+        0;
+
 
 
     background:
@@ -233,6 +487,24 @@ html {
 body {
 
 
+    margin:
+
+        0;
+
+
+
+    padding:
+
+        0;
+
+
+
+    min-height:
+
+        100vh;
+
+
+
     background:
 
         var(--ctm-background);
@@ -247,10 +519,13 @@ body {
 
     font-family:
 
-        "Inter",
-        "Noto Sans Tamil",
-        "Segoe UI",
-        sans-serif;
+        var(--font-body);
+
+
+
+    font-size:
+
+        var(--text-md);
 
 
 
@@ -260,15 +535,208 @@ body {
 
 
 
-    font-size:
+    -webkit-font-smoothing:
 
-        18px;
+        antialiased;
 
 
 
-    letter-spacing:
+    text-rendering:
 
-        0.01em;
+        optimizeLegibility;
+
+
+
+}
+
+
+
+
+
+img {
+
+
+    max-width:
+
+        100%;
+
+
+
+    height:
+
+        auto;
+
+
+
+    display:
+
+        block;
+
+
+
+}
+
+
+
+
+
+button,
+
+input,
+
+textarea,
+
+select {
+
+
+    font:
+
+        inherit;
+
+
+
+}
+
+
+
+
+
+a {
+
+
+    color:
+
+        var(--ctm-teal-soft);
+
+
+
+    text-decoration:
+
+        none;
+
+
+
+    transition:
+
+        color
+        var(--transition-fast);
+
+
+
+}
+
+
+
+
+
+a:hover {
+
+
+    color:
+
+        var(--ctm-gold-soft);
+
+
+
+}
+
+
+
+
+
+ul,
+
+ol {
+
+
+    margin:
+
+        0;
+
+
+
+    padding:
+
+        0;
+
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   APPLICATION CONTAINERS
+
+   Premium content width system.
+
+   ========================================================================== */
+
+
+.app-container {
+
+
+    width:
+
+        min(
+
+            100% - 64px,
+
+            1200px
+
+        );
+
+
+
+    margin:
+
+        0 auto;
+
+
+
+}
+
+
+
+
+
+.content-container {
+
+
+    width:
+
+        min(
+
+            100% - 48px,
+
+            1000px
+
+        );
+
+
+
+    margin:
+
+        0 auto;
+
+
+
+}
+
+
+
+
+
+.section {
+
+
+    padding:
+
+        var(--space-8)
+
+        0;
 
 
 
@@ -281,67 +749,39 @@ body {
 /* ==========================================================================
    TYPOGRAPHY SYSTEM
 
-   Tamil-first premium reading experience.
+   Tamil-first premium reading hierarchy.
 
    ========================================================================== */
 
 
-
-.tamil {
-
-
-    font-family:
-
-        "Noto Sans Tamil",
-        "Latha",
-        sans-serif;
-
-
-
-    color:
-
-        var(--ctm-text-primary);
-
-
-
-}
-
-
-
-
-
-.english {
-
-
-    font-family:
-
-        "Inter",
-        "Segoe UI",
-        sans-serif;
-
-
-
-    color:
-
-        var(--ctm-text-secondary);
-
-
-
-}
-
-
-
-
-
 h1,
+
 h2,
+
 h3,
-h4 {
+
+h4,
+
+h5,
+
+h6 {
+
+
+    margin:
+
+        0;
+
 
 
     color:
 
         var(--ctm-text-primary);
+
+
+
+    font-family:
+
+        var(--font-display);
 
 
 
@@ -353,7 +793,7 @@ h4 {
 
     line-height:
 
-        1.3;
+        1.35;
 
 
 
@@ -368,11 +808,13 @@ h1 {
 
     font-size:
 
-        clamp(
-            42px,
-            5vw,
-            72px
-        );
+        var(--text-hero);
+
+
+
+    letter-spacing:
+
+        -0.02em;
 
 
 
@@ -388,9 +830,13 @@ h2 {
     font-size:
 
         clamp(
-            30px,
-            3vw,
+
+            32px,
+
+            4vw,
+
             48px
+
         );
 
 
@@ -406,7 +852,30 @@ h3 {
 
     font-size:
 
-        28px;
+        clamp(
+
+            24px,
+
+            3vw,
+
+            32px
+
+        );
+
+
+
+}
+
+
+
+
+
+h4 {
+
+
+    font-size:
+
+        22px;
 
 
 
@@ -417,6 +886,64 @@ h3 {
 
 
 p {
+
+
+    margin:
+
+        0;
+
+
+
+    color:
+
+        var(--ctm-text-secondary);
+
+
+
+    font-size:
+
+        var(--text-md);
+
+
+
+    line-height:
+
+        2;
+
+
+
+}
+
+
+
+
+
+.tamil {
+
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        var(--font-body);
+
+
+
+}
+
+
+
+
+
+.english {
+
+
+    font-family:
+
+        "Inter",
+
+        sans-serif;
+
 
 
     color:
@@ -431,87 +958,47 @@ p {
 
 
 
+.eyebrow {
+
+
+    color:
+
+        var(--ctm-gold-soft);
+
+
+
+    font-size:
+
+        var(--text-sm);
+
+
+
+    font-weight:
+
+        700;
+
+
+
+    letter-spacing:
+
+        0.18em;
+
+
+
+    text-transform:
+
+        uppercase;
+
+
+
+}
+
 /* ==========================================================================
-   PREMIUM SURFACE SYSTEM
+   PREMIUM CARD SYSTEM
+
+   Core surface language used throughout CTM PATH™
 
    ========================================================================== */
-
-
-.surface {
-
-
-    background:
-
-        var(--ctm-surface);
-
-
-
-    border:
-
-        1px solid var(--ctm-border);
-
-
-
-    border-radius:
-
-        var(--ctm-radius-large);
-
-
-
-    box-shadow:
-
-        var(--ctm-shadow-soft);
-
-
-
-}
-
-
-
-
-
-.glass-card {
-
-
-    background:
-
-        rgba(
-            29,
-            34,
-            43,
-            0.72
-        );
-
-
-
-    backdrop-filter:
-
-        blur(18px);
-
-
-
-    border:
-
-        1px solid var(--ctm-border);
-
-
-
-    border-radius:
-
-        var(--ctm-radius-large);
-
-
-
-    box-shadow:
-
-        var(--ctm-shadow-medium);
-
-
-
-}
-
-
-
 
 
 .card {
@@ -531,22 +1018,32 @@ p {
 
     border-radius:
 
-        var(--ctm-radius-medium);
+        var(--radius-lg);
 
 
 
     padding:
 
-        36px;
+        var(--space-5);
+
+
+
+    box-shadow:
+
+        var(--shadow-soft);
 
 
 
     transition:
 
         transform
-        0.3s ease,
+        var(--transition-medium),
+
         box-shadow
-        0.3s ease;
+        var(--transition-medium),
+
+        border-color
+        var(--transition-medium);
 
 
 
@@ -562,23 +1059,196 @@ p {
     transform:
 
         translateY(
-            -4px
+
+            -6px
+
         );
+
+
+
+    border-color:
+
+        var(--ctm-border-highlight);
 
 
 
     box-shadow:
 
-        var(--ctm-shadow-gold);
+        var(--shadow-premium);
 
 
 
 }
 
+
+
+
+
+/* ==========================================================================
+   PREMIUM GLASS SURFACE
+
+   Used for hero cards, invitations and transformation sections.
+
+   ========================================================================== */
+
+
+.glass-card {
+
+
+    background:
+
+        rgba(
+
+            24,
+
+            29,
+
+            38,
+
+            0.72
+
+        );
+
+
+
+    backdrop-filter:
+
+        blur(
+
+            20px
+
+        );
+
+
+
+    -webkit-backdrop-filter:
+
+        blur(
+
+            20px
+
+        );
+
+
+
+    border:
+
+        1px solid rgba(
+
+            255,
+
+            255,
+
+            255,
+
+            0.10
+
+        );
+
+
+
+    border-radius:
+
+        var(--radius-lg);
+
+
+
+    box-shadow:
+
+        var(--shadow-premium);
+
+
+
+}
+
+
+
+
+
+.card-accent {
+
+
+    position:
+
+        relative;
+
+
+
+    overflow:
+
+        hidden;
+
+
+
+}
+
+
+
+
+
+.card-accent::before {
+
+
+    content:
+
+        "";
+
+
+
+    position:
+
+        absolute;
+
+
+
+    top:
+
+        0;
+
+
+
+    left:
+
+        0;
+
+
+
+    width:
+
+        100%;
+
+
+
+    height:
+
+        3px;
+
+
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            var(--ctm-teal),
+
+            var(--ctm-gold)
+
+        );
+
+
+
+}
+
+
+
+
+
 /* ==========================================================================
    BUTTON SYSTEM
 
-   Premium CTM PATH™ interaction language.
+   Premium CTM PATH™ actions.
 
    ========================================================================== */
 
@@ -612,25 +1282,25 @@ p {
 
     min-height:
 
-        56px;
+        60px;
 
 
 
     padding:
 
-        0 36px;
-
-
-
-    border-radius:
-
-        999px;
+        0 40px;
 
 
 
     border:
 
         none;
+
+
+
+    border-radius:
+
+        var(--radius-pill);
 
 
 
@@ -642,7 +1312,7 @@ p {
 
     font-weight:
 
-        600;
+        700;
 
 
 
@@ -652,16 +1322,32 @@ p {
 
 
 
-    text-decoration:
-
-        none;
-
-
-
     transition:
 
-        all
-        0.3s ease;
+        transform
+        var(--transition-fast),
+
+        box-shadow
+        var(--transition-fast);
+
+
+
+}
+
+
+
+
+
+.btn:hover {
+
+
+    transform:
+
+        translateY(
+
+            -3px
+
+        );
 
 
 
@@ -690,17 +1376,17 @@ p {
 
     color:
 
-        #081014;
+        #061214;
 
 
 
     box-shadow:
 
-        0 12px 30px rgba(
+        0 18px 50px rgba(
 
-            19,
+            20,
 
-            168,
+            184,
 
             184,
 
@@ -719,23 +1405,13 @@ p {
 .btn-primary:hover {
 
 
-    transform:
-
-        translateY(
-
-            -3px
-
-        );
-
-
-
     box-shadow:
 
-        0 18px 40px rgba(
+        0 24px 70px rgba(
 
-            19,
+            20,
 
-            168,
+            184,
 
             184,
 
@@ -770,13 +1446,13 @@ p {
 
     color:
 
-        #17120A;
+        #181207;
 
 
 
     box-shadow:
 
-        var(--ctm-shadow-gold);
+        var(--shadow-gold);
 
 
 
@@ -786,16 +1462,24 @@ p {
 
 
 
-.btn-gold:hover {
+.btn-outline {
 
 
-    transform:
+    background:
 
-        translateY(
+        transparent;
 
-            -3px
 
-        );
+
+    border:
+
+        1px solid var(--ctm-border-highlight);
+
+
+
+    color:
+
+        var(--ctm-gold-soft);
 
 
 
@@ -806,15 +1490,27 @@ p {
 
 
 /* ==========================================================================
-   CTA PREMIUM SECTION
+   BADGES & LABELS
 
    ========================================================================== */
 
 
-.ctm-cta {
+.badge {
 
 
-    text-align:
+    display:
+
+        inline-flex;
+
+
+
+    align-items:
+
+        center;
+
+
+
+    justify-content:
 
         center;
 
@@ -822,65 +1518,83 @@ p {
 
     padding:
 
-        80px 32px;
+        8px 18px;
 
 
 
-}
+    border-radius:
+
+        var(--radius-pill);
 
 
 
+    background:
 
+        rgba(
 
-.ctm-cta-title {
+            201,
 
+            162,
 
-    margin-bottom:
+            39,
 
-        24px;
+            0.12
 
-
-
-}
-
-
-
-
-
-.ctm-cta-description {
-
-
-    max-width:
-
-        720px;
+        );
 
 
 
-    margin:
+    border:
 
-        0 auto 40px;
+        1px solid rgba(
+
+            201,
+
+            162,
+
+            39,
+
+            0.25
+
+        );
 
 
 
     color:
 
-        var(--ctm-text-secondary);
+        var(--ctm-gold-soft);
+
+
+
+    font-size:
+
+        14px;
+
+
+
+    font-weight:
+
+        700;
 
 
 
 }
 
-
-
-
-
 /* ==========================================================================
-   HEADER BRAND SYSTEM
+   HEADER PREMIUM SYSTEM
+
+   Global branded journey header.
 
    ========================================================================== */
 
 
 .app-header {
+
+
+    position:
+
+        relative;
+
 
 
     width:
@@ -891,7 +1605,88 @@ p {
 
     min-height:
 
-        84px;
+        76px;
+
+
+
+    display:
+
+        flex;
+
+
+
+    align-items:
+
+        center;
+
+
+
+    background:
+
+        rgba(
+
+            11,
+
+            13,
+
+            18,
+
+            0.88
+
+        );
+
+
+
+    backdrop-filter:
+
+        blur(
+
+            18px
+
+        );
+
+
+
+    -webkit-backdrop-filter:
+
+        blur(
+
+            18px
+
+        );
+
+
+
+    border-bottom:
+
+        1px solid var(--ctm-border);
+
+
+
+}
+
+
+
+
+
+.header-container {
+
+
+    width:
+
+        min(
+
+            100% - 64px,
+
+            1200px
+
+        );
+
+
+
+    margin:
+
+        0 auto;
 
 
 
@@ -913,58 +1708,9 @@ p {
 
 
 
-    padding:
+    gap:
 
-        18px 48px;
-
-
-
-    background:
-
-        rgba(
-
-            16,
-
-            18,
-
-            22,
-
-            0.88
-
-        );
-
-
-
-    backdrop-filter:
-
-        blur(16px);
-
-
-
-    border-bottom:
-
-        1px solid var(--ctm-border);
-
-
-
-}
-
-
-
-
-
-.header-logo {
-
-
-    height:
-
-        52px;
-
-
-
-    width:
-
-        auto;
+        24px;
 
 
 
@@ -975,6 +1721,60 @@ p {
 
 
 .header-brand {
+
+
+    display:
+
+        flex;
+
+
+
+    align-items:
+
+        center;
+
+
+
+    gap:
+
+        16px;
+
+
+
+}
+
+
+
+
+
+.ctm-logo {
+
+
+    width:
+
+        54px;
+
+
+
+    height:
+
+        54px;
+
+
+
+    object-fit:
+
+        contain;
+
+
+
+}
+
+
+
+
+
+.brand-name {
 
 
     color:
@@ -995,13 +1795,19 @@ p {
 
 
 
+    letter-spacing:
+
+        0.04em;
+
+
+
 }
 
 
 
 
 
-.header-progress {
+.brand-subtitle {
 
 
     color:
@@ -1012,16 +1818,143 @@ p {
 
     font-size:
 
-        16px;
+        14px;
 
 
 
 }
 
-/* ==========================================================================
-   FOOTER BRAND SYSTEM
 
-   Premium transformation footer.
+
+
+
+.header-progress {
+
+
+    display:
+
+        flex;
+
+
+
+    align-items:
+
+        center;
+
+
+
+    gap:
+
+        16px;
+
+
+
+    color:
+
+        var(--ctm-text-secondary);
+
+
+
+}
+
+
+
+
+
+.progress-track {
+
+
+    width:
+
+        120px;
+
+
+
+    height:
+
+        6px;
+
+
+
+    overflow:
+
+        hidden;
+
+
+
+    border-radius:
+
+        var(--radius-pill);
+
+
+
+    background:
+
+        rgba(
+
+            255,
+
+            255,
+
+            255,
+
+            0.10
+
+        );
+
+
+
+}
+
+
+
+
+
+.progress-fill {
+
+
+    height:
+
+        100%;
+
+
+
+    width:
+
+        6%;
+
+
+
+    border-radius:
+
+        inherit;
+
+
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            var(--ctm-teal),
+
+            var(--ctm-gold)
+
+        );
+
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   FOOTER PREMIUM SYSTEM
+
+   Minimal transformation-brand signature.
 
    ========================================================================== */
 
@@ -1035,9 +1968,17 @@ p {
 
 
 
+    margin-top:
+
+        var(--space-8);
+
+
+
     padding:
 
-        56px 32px;
+        var(--space-6)
+
+        24px;
 
 
 
@@ -1065,7 +2006,34 @@ p {
 
 
 
-.footer-brand {
+.footer-container {
+
+
+    width:
+
+        min(
+
+            100% - 48px,
+
+            800px
+
+        );
+
+
+
+    margin:
+
+        0 auto;
+
+
+
+}
+
+
+
+
+
+.footer-brand-name {
 
 
     color:
@@ -1088,7 +2056,7 @@ p {
 
     margin-bottom:
 
-        16px;
+        20px;
 
 
 
@@ -1098,7 +2066,7 @@ p {
 
 
 
-.footer-founder {
+.footer-founder-name {
 
 
     color:
@@ -1109,13 +2077,13 @@ p {
 
     font-size:
 
-        18px;
+        22px;
 
 
 
-    margin-bottom:
+    font-weight:
 
-        18px;
+        700;
 
 
 
@@ -1125,37 +2093,7 @@ p {
 
 
 
-.footer-contact {
-
-
-    display:
-
-        flex;
-
-
-
-    justify-content:
-
-        center;
-
-
-
-    align-items:
-
-        center;
-
-
-
-    flex-wrap:
-
-        wrap;
-
-
-
-    gap:
-
-        24px;
-
+.footer-founder-role {
 
 
     color:
@@ -1170,13 +2108,58 @@ p {
 
 
 
+    margin-top:
+
+        8px;
+
+
+
 }
 
 
 
 
 
-.footer-contact a {
+.footer-contact {
+
+
+    margin-top:
+
+        28px;
+
+
+
+    display:
+
+        flex;
+
+
+
+    justify-content:
+
+        center;
+
+
+
+    gap:
+
+        28px;
+
+
+
+    flex-wrap:
+
+        wrap;
+
+
+
+}
+
+
+
+
+
+.footer-contact-item {
 
 
     color:
@@ -1185,16 +2168,9 @@ p {
 
 
 
-    text-decoration:
+    font-size:
 
-        none;
-
-
-
-    transition:
-
-        color
-        0.3s ease;
+        17px;
 
 
 
@@ -1204,27 +2180,12 @@ p {
 
 
 
-.footer-contact a:hover {
-
-
-    color:
-
-        var(--ctm-white);
-
-
-
-}
-
-
-
-
-
-.footer-copyright {
+.footer-legal {
 
 
     margin-top:
 
-        32px;
+        36px;
 
 
 
@@ -1237,6 +2198,187 @@ p {
     font-size:
 
         14px;
+
+
+
+}
+
+/* ==========================================================================
+   FORM SYSTEM
+
+   Premium input experience for Registration™ and Assessment™ pages.
+
+   ========================================================================== */
+
+
+.form-group {
+
+
+    margin-bottom:
+
+        var(--space-4);
+
+
+
+}
+
+
+
+
+
+.form-label {
+
+
+    display:
+
+        block;
+
+
+
+    margin-bottom:
+
+        10px;
+
+
+
+    color:
+
+        var(--ctm-text-primary);
+
+
+
+    font-size:
+
+        16px;
+
+
+
+    font-weight:
+
+        600;
+
+
+
+}
+
+
+
+
+
+.form-input,
+
+.form-select,
+
+.form-textarea {
+
+
+    width:
+
+        100%;
+
+
+
+    padding:
+
+        16px 20px;
+
+
+
+    background:
+
+        var(--ctm-surface);
+
+
+
+    border:
+
+        1px solid var(--ctm-border);
+
+
+
+    border-radius:
+
+        var(--radius-md);
+
+
+
+    color:
+
+        var(--ctm-text-primary);
+
+
+
+    font-size:
+
+        18px;
+
+
+
+    transition:
+
+        border-color
+        var(--transition-fast),
+
+        box-shadow
+        var(--transition-fast);
+
+
+
+}
+
+
+
+
+
+.form-input::placeholder,
+
+.form-textarea::placeholder {
+
+
+    color:
+
+        var(--ctm-text-muted);
+
+
+
+}
+
+
+
+
+
+.form-input:focus,
+
+.form-select:focus,
+
+.form-textarea:focus {
+
+
+    outline:
+
+        none;
+
+
+
+    border-color:
+
+        var(--ctm-teal);
+
+
+
+    box-shadow:
+
+        0 0 0 4px rgba(
+
+            20,
+
+            184,
+
+            184,
+
+            0.12
+
+        );
 
 
 
@@ -1261,13 +2403,13 @@ p {
 
 
 
-    justify-content:
+    align-items:
 
         center;
 
 
 
-    align-items:
+    justify-content:
 
         center;
 
@@ -1288,22 +2430,28 @@ p {
 .nav-item {
 
 
+    padding:
+
+        10px 20px;
+
+
+
+    border-radius:
+
+        var(--radius-pill);
+
+
+
     color:
 
         var(--ctm-text-secondary);
 
 
 
-    text-decoration:
-
-        none;
-
-
-
     transition:
 
         all
-        0.3s ease;
+        var(--transition-fast);
 
 
 
@@ -1314,6 +2462,22 @@ p {
 
 
 .nav-item:hover {
+
+
+    background:
+
+        rgba(
+
+            20,
+
+            184,
+
+            184,
+
+            0.10
+
+        );
+
 
 
     color:
@@ -1331,15 +2495,204 @@ p {
 .nav-item.active {
 
 
+    background:
+
+        rgba(
+
+            201,
+
+            162,
+
+            39,
+
+            0.12
+
+        );
+
+
+
     color:
 
         var(--ctm-gold-soft);
 
 
 
-    font-weight:
+}
 
-        600;
+
+
+
+
+/* ==========================================================================
+   LOADING SYSTEM
+
+   Premium waiting experience.
+
+   ========================================================================== */
+
+
+.global-loader {
+
+
+    position:
+
+        fixed;
+
+
+
+    inset:
+
+        0;
+
+
+
+    display:
+
+        flex;
+
+
+
+    align-items:
+
+        center;
+
+
+
+    justify-content:
+
+        center;
+
+
+
+    background:
+
+        rgba(
+
+            11,
+
+            13,
+
+            18,
+
+            0.92
+
+        );
+
+
+
+    backdrop-filter:
+
+        blur(
+
+            12px
+
+        );
+
+
+
+    z-index:
+
+        9999;
+
+
+
+}
+
+
+
+
+
+.loader-spinner {
+
+
+    width:
+
+        48px;
+
+
+
+    height:
+
+        48px;
+
+
+
+    border-radius:
+
+        50%;
+
+
+
+    border:
+
+        4px solid rgba(
+
+            255,
+
+            255,
+
+            255,
+
+            0.15
+
+        );
+
+
+
+    border-top-color:
+
+        var(--ctm-gold);
+
+
+
+    animation:
+
+        ctmSpin
+
+        1s linear infinite;
+
+
+
+}
+
+
+
+
+
+@keyframes ctmSpin {
+
+
+    from {
+
+
+        transform:
+
+            rotate(
+
+                0deg
+
+            );
+
+
+
+    }
+
+
+
+    to {
+
+
+        transform:
+
+            rotate(
+
+                360deg
+
+            );
+
+
+
+    }
 
 
 
@@ -1355,14 +2708,12 @@ p {
    ========================================================================== */
 
 
-button:focus-visible,
-
-a:focus-visible {
+:focus-visible {
 
 
     outline:
 
-        3px solid var(--ctm-teal-soft);
+        3px solid var(--ctm-gold);
 
 
 
@@ -1378,39 +2729,37 @@ a:focus-visible {
 
 
 
-/* ==========================================================================
-   PREMIUM ANIMATION LANGUAGE
+.hidden {
 
-   Calm transformation experience.
+
+    display:
+
+        none !important;
+
+
+
+}
+
+/* ==========================================================================
+   PREMIUM BACKGROUND ATMOSPHERE
+
+   Creates depth without images.
 
    ========================================================================== */
 
 
-.fade-in {
+.page {
 
 
-    animation:
+    position:
 
-        ctmFadeIn
-        0.8s ease
-        forwards;
-
-
-
-}
+        relative;
 
 
 
+    overflow:
 
-
-.slide-up {
-
-
-    animation:
-
-        ctmSlideUp
-        0.8s ease
-        forwards;
+        hidden;
 
 
 
@@ -1420,32 +2769,79 @@ a:focus-visible {
 
 
 
-@keyframes ctmFadeIn {
+.page::before {
 
 
-    from {
+    content:
 
-
-        opacity:
-
-            0;
+        "";
 
 
 
-    }
+    position:
+
+        absolute;
 
 
 
-    to {
+    top:
 
-
-        opacity:
-
-            1;
+        -300px;
 
 
 
-    }
+    right:
+
+        -250px;
+
+
+
+    width:
+
+        700px;
+
+
+
+    height:
+
+        700px;
+
+
+
+    border-radius:
+
+        50%;
+
+
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(
+
+                20,
+
+                184,
+
+                184,
+
+                0.12
+
+            ),
+
+            transparent 70%
+
+        );
+
+
+
+    pointer-events:
+
+        none;
+
 
 
 }
@@ -1454,60 +2850,193 @@ a:focus-visible {
 
 
 
-@keyframes ctmSlideUp {
+.page::after {
 
 
-    from {
+    content:
 
-
-        opacity:
-
-            0;
+        "";
 
 
 
-        transform:
+    position:
 
-            translateY(
-
-                24px
-
-            );
+        absolute;
 
 
 
-    }
+    bottom:
+
+        -300px;
 
 
 
-    to {
+    left:
 
-
-        opacity:
-
-            1;
+        -250px;
 
 
 
-        transform:
+    width:
 
-            translateY(
-
-                0
-
-            );
+        650px;
 
 
 
-    }
+    height:
+
+        650px;
+
+
+
+    border-radius:
+
+        50%;
+
+
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(
+
+                201,
+
+                162,
+
+                39,
+
+                0.10
+
+            ),
+
+            transparent 70%
+
+        );
+
+
+
+    pointer-events:
+
+        none;
+
 
 
 }
+
+
+
+
 
 /* ==========================================================================
-   RESPONSIVE PREMIUM SCALING
+   SECTION DIVIDERS
 
-   Maintains premium experience across devices.
+   Premium visual rhythm.
+
+   ========================================================================== */
+
+
+.section-divider {
+
+
+    width:
+
+        120px;
+
+
+
+    height:
+
+        2px;
+
+
+
+    margin:
+
+        var(--space-6)
+
+        auto;
+
+
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            var(--ctm-gold),
+
+            transparent
+
+        );
+
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   PREMIUM STATUS ELEMENTS
+
+   ========================================================================== */
+
+
+.status-success {
+
+
+    color:
+
+        var(--ctm-teal-soft);
+
+
+
+}
+
+
+
+
+
+.status-highlight {
+
+
+    color:
+
+        var(--ctm-gold-soft);
+
+
+
+}
+
+
+
+
+
+.status-muted {
+
+
+    color:
+
+        var(--ctm-text-muted);
+
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   GLOBAL RESPONSIVE ADJUSTMENTS
 
    ========================================================================== */
 
@@ -1515,33 +3044,16 @@ a:focus-visible {
 @media (max-width: 1024px) {
 
 
-    .app-header {
+    .app-container {
 
 
-        padding:
+        width:
 
-            16px 32px;
+            min(
 
+                100% - 48px,
 
-
-    }
-
-
-
-
-
-    h1 {
-
-
-        font-size:
-
-            clamp(
-
-                38px,
-
-                6vw,
-
-                56px
+                1200px
 
             );
 
@@ -1553,18 +3065,16 @@ a:focus-visible {
 
 
 
-    h2 {
+    .header-container {
 
 
-        font-size:
+        width:
 
-            clamp(
+            min(
 
-                28px,
+                100% - 48px,
 
-                5vw,
-
-                42px
+                1200px
 
             );
 
@@ -1573,18 +3083,6 @@ a:focus-visible {
     }
 
 
-
-
-    .card {
-
-
-        padding:
-
-            28px;
-
-
-
-    }
 
 
 
@@ -1597,61 +3095,10 @@ a:focus-visible {
 @media (max-width: 768px) {
 
 
-    body {
+    :root {
 
 
-        font-size:
-
-            16px;
-
-
-
-    }
-
-
-
-
-
-    .app-header {
-
-
-        min-height:
-
-            72px;
-
-
-
-        padding:
-
-            14px 20px;
-
-
-
-    }
-
-
-
-
-
-    .header-logo {
-
-
-        height:
-
-            44px;
-
-
-
-    }
-
-
-
-
-
-    .header-brand {
-
-
-        font-size:
+        --text-md:
 
             18px;
 
@@ -1663,27 +3110,16 @@ a:focus-visible {
 
 
 
-    h1 {
+    .app-container {
 
 
-        font-size:
+        width:
 
-            36px;
+            calc(
 
+                100% - 32px
 
-
-    }
-
-
-
-
-
-    h2 {
-
-
-        font-size:
-
-            30px;
+            );
 
 
 
@@ -1693,33 +3129,28 @@ a:focus-visible {
 
 
 
-    h3 {
+    .header-container {
 
 
-        font-size:
+        width:
 
-            24px;
+            calc(
 
+                100% - 32px
 
-
-    }
-
-
-
-
-
-    p {
-
-
-        font-size:
-
-            16px;
+            );
 
 
 
-        line-height:
+        flex-direction:
 
-            1.9;
+            column;
+
+
+
+        padding:
+
+            16px 0;
 
 
 
@@ -1729,7 +3160,7 @@ a:focus-visible {
 
 
 
-    .btn {
+    .header-progress {
 
 
         width:
@@ -1738,9 +3169,41 @@ a:focus-visible {
 
 
 
-        min-height:
+        justify-content:
 
-            60px;
+            center;
+
+
+
+    }
+
+
+
+
+
+    .progress-track {
+
+
+        width:
+
+            100px;
+
+
+
+    }
+
+
+
+
+
+    .section {
+
+
+        padding:
+
+            var(--space-6)
+
+            0;
 
 
 
@@ -1761,7 +3224,7 @@ a:focus-visible {
 
         gap:
 
-            16px;
+            12px;
 
 
 
@@ -1778,42 +3241,12 @@ a:focus-visible {
 @media (max-width: 480px) {
 
 
-    .app-header {
-
-
-        padding:
-
-            12px 16px;
-
-
-
-    }
-
-
-
-
-
-    .header-logo {
-
-
-        height:
-
-            40px;
-
-
-
-    }
-
-
-
-
-
-    h1 {
+    body {
 
 
         font-size:
 
-            32px;
+            16px;
 
 
 
@@ -1826,15 +3259,24 @@ a:focus-visible {
     .card {
 
 
-        border-radius:
-
-            var(--ctm-radius-medium);
-
-
-
         padding:
 
-            22px;
+            var(--space-3);
+
+
+
+    }
+
+
+
+
+
+    .btn {
+
+
+        width:
+
+            100%;
 
 
 
@@ -1853,7 +3295,7 @@ a:focus-visible {
 /* ==========================================================================
    REDUCED MOTION SUPPORT
 
-   Accessibility requirement.
+   Accessibility.
 
    ========================================================================== */
 
@@ -1880,15 +3322,15 @@ a:focus-visible {
 
 
 
-        transition-duration:
-
-            0.01ms !important;
-
-
-
         scroll-behavior:
 
             auto !important;
+
+
+
+        transition-duration:
+
+            0.01ms !important;
 
 
 
@@ -1916,13 +3358,13 @@ a:focus-visible {
 
         background:
 
-            white;
+            #ffffff;
 
 
 
         color:
 
-            black;
+            #000000;
 
 
 
@@ -1936,12 +3378,14 @@ a:focus-visible {
 
     .app-navigation,
 
-    .app-footer {
+    .app-footer,
+
+    .global-loader {
 
 
         display:
 
-            none;
+            none !important;
 
 
 
@@ -1965,13 +3409,12 @@ a:focus-visible {
 
    Version:
 
-   CTM PATH™ Premium Design System v2.0
+   CTM PATH™ Premium Design System v3.0
 
 
    Status:
 
-   COMPLETE
+   COMPLETE 🔒
 
 
    ========================================================================== */
-
