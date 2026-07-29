@@ -3,9 +3,10 @@
    CTM PATH™ Guided Journey™
 
    File        : navigation.js
-   Version     : 2.3
+   Version     : 2.4
 
-   Status      : GLOBAL JOURNEY NAVIGATION ENGINE
+   Status      : PAGE VISIBILITY + ROUTER READY
+
 
    Responsibilities:
 
@@ -13,6 +14,7 @@
    ✓ Manage Previous visibility
    ✓ Manage Continue visibility
    ✓ Update journey counter
+   ✓ Control navigator visibility by page
 
 
    Does NOT:
@@ -20,6 +22,7 @@
    ✗ Render page content
    ✗ Handle business logic
    ✗ Handle API processing
+
 
    ========================================================================== */
 
@@ -41,9 +44,7 @@ const Navigation = (() => {
 
 
     /* ==========================================================
-       INITIALIZE NAVIGATION
-
-       Called AFTER navigation.html loads
+       INITIALIZE
        ========================================================== */
 
 
@@ -116,7 +117,7 @@ const Navigation = (() => {
 
 
     /* ==========================================================
-       BUTTON HANDLER
+       BUTTON ACTIONS
        ========================================================== */
 
 
@@ -126,11 +127,7 @@ const Navigation = (() => {
 
         const action =
 
-        event.currentTarget
-
-        .dataset
-
-        .action;
+        event.currentTarget.dataset.action;
 
 
 
@@ -169,7 +166,7 @@ const Navigation = (() => {
 
 
     /* ==========================================================
-       NEXT PAGE
+       NEXT
        ========================================================== */
 
 
@@ -204,7 +201,7 @@ const Navigation = (() => {
 
 
     /* ==========================================================
-       PREVIOUS PAGE
+       PREVIOUS
        ========================================================== */
 
 
@@ -239,11 +236,23 @@ const Navigation = (() => {
 
 
     /* ==========================================================
-       UPDATE BUTTON VISIBILITY
+       NAVIGATION DISPLAY CONTROL
        ========================================================== */
 
 
     const updateNavigation = () => {
+
+
+
+        const navigation =
+
+        document.querySelector(
+
+            ".navigation"
+
+        );
+
+
 
 
 
@@ -276,7 +285,38 @@ const Navigation = (() => {
         /*
             PAGE 01
 
-            No previous destination exists.
+            Welcome page has its own CTA.
+
+            Global navigation hidden.
+        */
+
+
+        if(navigation){
+
+
+
+            navigation.style.display =
+
+            currentPage === 1
+
+            ? "none"
+
+            : "flex";
+
+
+
+        }
+
+
+
+
+
+
+
+        /*
+            Previous button
+
+            Hidden only on first journey step.
         */
 
 
@@ -303,7 +343,7 @@ const Navigation = (() => {
 
 
         /*
-            FINAL PAGE
+            Final page handling
         */
 
 
@@ -342,6 +382,7 @@ const Navigation = (() => {
 
 
         }
+
 
 
 
@@ -421,9 +462,7 @@ const Navigation = (() => {
 
 
     /* ==========================================================
-       PAGE CHANGE EVENT
-
-       app.js handles actual loading
+       PAGE EVENT TO APP ROUTER
        ========================================================== */
 
 
@@ -477,6 +516,11 @@ const Navigation = (() => {
 
 
 
+    /* ==========================================================
+       PUBLIC API
+       ========================================================== */
+
+
     return {
 
 
@@ -485,6 +529,12 @@ const Navigation = (() => {
 
 
         updateNavigation,
+
+
+        goNext,
+
+
+        goPrevious,
 
 
         getCurrentPage: () => currentPage
@@ -505,10 +555,9 @@ const Navigation = (() => {
 
 
 /* ==========================================================================
-   EXPOSE GLOBAL CONTROLLER
+   GLOBAL EXPOSURE
 
-   app.js will initialize this after
-   navigation component injection.
+   app.js initializes after component loading.
 
    ========================================================================== */
 
