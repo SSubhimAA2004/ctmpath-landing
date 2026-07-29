@@ -3,9 +3,9 @@
    CTM PATH™ Guided Journey™
 
    File        : navigation.js
-   Version     : 2.2
+   Version     : 2.3
 
-   Status      : PAGE-AWARE NAVIGATION PATCH
+   Status      : GLOBAL JOURNEY NAVIGATION ENGINE
 
    Responsibilities:
 
@@ -13,6 +13,7 @@
    ✓ Manage Previous visibility
    ✓ Manage Continue visibility
    ✓ Update journey counter
+
 
    Does NOT:
 
@@ -23,7 +24,9 @@
    ========================================================================== */
 
 
+
 const Navigation = (() => {
+
 
 
     let currentPage = 1;
@@ -31,6 +34,17 @@ const Navigation = (() => {
 
     const totalPages = 18;
 
+
+
+
+
+
+
+    /* ==========================================================
+       INITIALIZE NAVIGATION
+
+       Called AFTER navigation.html loads
+       ========================================================== */
 
 
     const init = () => {
@@ -50,26 +64,45 @@ const Navigation = (() => {
 
 
 
+
+
+    /* ==========================================================
+       EVENT BINDING
+       ========================================================== */
+
+
     const bindEvents = () => {
 
 
+
         const buttons =
-            document.querySelectorAll(
-                ".nav-button"
-            );
+
+        document.querySelectorAll(
+
+            ".nav-button"
+
+        );
+
+
 
 
 
         buttons.forEach(button => {
 
 
+
             button.addEventListener(
+
                 "click",
+
                 handleNavigation
+
             );
 
 
+
         });
+
 
 
     };
@@ -80,17 +113,30 @@ const Navigation = (() => {
 
 
 
+
+
+    /* ==========================================================
+       BUTTON HANDLER
+       ========================================================== */
+
+
     const handleNavigation = (event) => {
 
 
+
         const action =
-            event.currentTarget
-            .dataset
-            .action;
+
+        event.currentTarget
+
+        .dataset
+
+        .action;
 
 
 
-        if(action === "previous") {
+
+
+        if(action === "previous"){
 
 
             goPrevious();
@@ -100,7 +146,9 @@ const Navigation = (() => {
 
 
 
-        if(action === "continue") {
+
+
+        if(action === "continue"){
 
 
             goNext();
@@ -109,27 +157,40 @@ const Navigation = (() => {
         }
 
 
+
     };
 
 
 
 
 
+
+
+
+
+    /* ==========================================================
+       NEXT PAGE
+       ========================================================== */
 
 
     const goNext = () => {
 
 
-        if(currentPage < totalPages) {
+
+        if(currentPage < totalPages){
+
 
 
             currentPage++;
 
 
+
             loadPage(currentPage);
 
 
+
         }
+
 
 
     };
@@ -138,21 +199,33 @@ const Navigation = (() => {
 
 
 
+
+
+
+
+    /* ==========================================================
+       PREVIOUS PAGE
+       ========================================================== */
 
 
     const goPrevious = () => {
 
 
-        if(currentPage > 1) {
+
+        if(currentPage > 1){
+
 
 
             currentPage--;
 
 
+
             loadPage(currentPage);
 
 
+
         }
+
 
 
     };
@@ -162,6 +235,12 @@ const Navigation = (() => {
 
 
 
+
+
+
+    /* ==========================================================
+       UPDATE BUTTON VISIBILITY
+       ========================================================== */
 
 
     const updateNavigation = () => {
@@ -169,46 +248,50 @@ const Navigation = (() => {
 
 
         const previousButton =
-            document.querySelector(
-                '[data-action="previous"]'
-            );
+
+        document.querySelector(
+
+            '[data-action="previous"]'
+
+        );
+
+
 
 
 
         const continueButton =
-            document.querySelector(
-                '[data-action="continue"]'
-            );
+
+        document.querySelector(
+
+            '[data-action="continue"]'
+
+        );
+
+
 
 
 
 
 
         /*
-            PAGE 01 RULE
+            PAGE 01
 
-            First page has no previous destination.
+            No previous destination exists.
         */
 
 
-        if(previousButton) {
+        if(previousButton){
 
 
-            if(currentPage === 1) {
 
+            previousButton.style.display =
 
-                previousButton.style.display =
-                    "none";
+            currentPage === 1
 
+            ? "none"
 
-            } else {
+            : "inline-flex";
 
-
-                previousButton.style.display =
-                    "inline-flex";
-
-
-            }
 
 
         }
@@ -218,30 +301,44 @@ const Navigation = (() => {
 
 
 
+
         /*
-            Final page handling
+            FINAL PAGE
         */
 
 
-        if(continueButton) {
+        if(continueButton){
 
 
-            if(currentPage === totalPages) {
+
+            if(currentPage === totalPages){
+
 
 
                 continueButton.innerHTML =
+
                 `
+
                 <span class="nav-label">
-                    Complete Journey
+
+                Complete Journey
+
                 </span>
 
+
                 <span class="nav-icon">
-                    ✓
+
+                ✓
+
                 </span>
+
+
                 `;
 
 
+
             }
+
 
 
         }
@@ -254,6 +351,7 @@ const Navigation = (() => {
         updateJourneyCounter();
 
 
+
     };
 
 
@@ -261,32 +359,55 @@ const Navigation = (() => {
 
 
 
+
+
+
+    /* ==========================================================
+       JOURNEY COUNTER
+       ========================================================== */
 
 
     const updateJourneyCounter = () => {
 
 
+
         const counter =
-            document.getElementById(
-                "journey-counter"
-            );
+
+        document.getElementById(
+
+            "journey-counter"
+
+        );
 
 
 
-        if(counter) {
+
+
+        if(counter){
+
 
 
             counter.textContent =
+
+
             String(currentPage)
+
             .padStart(2,"0")
+
             +
+
             " / "
+
             +
+
             String(totalPages)
+
             .padStart(2,"0");
 
 
+
         }
+
 
 
     };
@@ -297,35 +418,58 @@ const Navigation = (() => {
 
 
 
+
+
+    /* ==========================================================
+       PAGE CHANGE EVENT
+
+       app.js handles actual loading
+       ========================================================== */
+
+
     const loadPage = (pageNumber) => {
 
-
-        /*
-            Page loading handled by app.js
-            This function only triggers the event.
-        */
 
 
         document.dispatchEvent(
 
+
+
             new CustomEvent(
+
                 "ctm-page-change",
+
                 {
-                    detail:
-                    {
+
+
+                    detail:{
+
+
                         page: pageNumber
+
+
                     }
+
+
                 }
+
             )
 
+
+
         );
+
+
 
 
 
         updateNavigation();
 
 
+
     };
+
+
 
 
 
@@ -336,6 +480,7 @@ const Navigation = (() => {
     return {
 
 
+
         init,
 
 
@@ -343,6 +488,7 @@ const Navigation = (() => {
 
 
         getCurrentPage: () => currentPage
+
 
 
     };
@@ -355,11 +501,16 @@ const Navigation = (() => {
 
 
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
 
-        Navigation.init();
 
-    }
-);
+
+/* ==========================================================================
+   EXPOSE GLOBAL CONTROLLER
+
+   app.js will initialize this after
+   navigation component injection.
+
+   ========================================================================== */
+
+
+window.CTMNavigation = Navigation;
