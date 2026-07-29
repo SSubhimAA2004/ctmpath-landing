@@ -3,39 +3,26 @@
    CTM PATH™ Guided Journey™
 
    File        : js/registration.js
-   Version     : 1.1
+   Version     : 8.0
+   Status      : PREMIUM LAUNCH EDITION
 
-   Status      : FRAGMENT FORM ACTIVATION PATCH
+   Responsibilities
 
-
-   Purpose:
-
-   Controls Page 02 registration experience.
-
-
-   Responsibilities:
-
-   ✓ Capture visitor details
+   ✓ Initialize registration page
    ✓ Validate form
-   ✓ Send registration request
+   ✓ Toggle "Other" source
+   ✓ Submit registration
+   ✓ Prevent duplicate submissions
+   ✓ Preserve existing API contract
+   ✓ Dispatch registration-complete event
 
-
-   Does NOT:
-
-   ✗ Database operations
-   ✗ Assessment logic
-
-
-   ========================================================================== */
-
+========================================================================== */
 
 const Registration = (() => {
 
-
-
     let initialized = false;
 
-
+    let isSubmitting = false;
 
 
 
@@ -45,27 +32,15 @@ const Registration = (() => {
 
     function init(){
 
-
-
         if(initialized){
 
             return;
 
         }
 
-
-
-        const form =
-
-        document.getElementById(
-
+        const form = document.getElementById(
             "registration-form"
-
         );
-
-
-
-
 
         if(!form){
 
@@ -73,19 +48,13 @@ const Registration = (() => {
 
         }
 
-
-
         initialized = true;
-
-
 
         bindSubmit(form);
 
-
+        bindSourceSelector();
 
     }
-
-
 
 
 
@@ -95,58 +64,82 @@ const Registration = (() => {
 
     function bindSubmit(form){
 
-
-
         form.addEventListener(
-
             "submit",
-
             handleSubmit
-
         );
 
-
-
-        const button =
-
-        document.getElementById(
-
+        const button = document.getElementById(
             "continue-registration"
-
         );
-
-
-
-
 
         if(button){
 
-
-
             button.addEventListener(
-
                 "click",
-
-                ()=>{
-
+                () => {
 
                     form.requestSubmit();
 
-
-
                 }
-
             );
 
-
-
         }
-
-
 
     }
 
 
+
+
+
+
+
+    function bindSourceSelector(){
+
+        const source = document.getElementById("source");
+
+        const otherGroup = document.getElementById(
+            "other-source-group"
+        );
+
+        const otherField = document.getElementById(
+            "otherSource"
+        );
+
+        if(!source || !otherGroup){
+
+            return;
+
+        }
+
+        source.addEventListener(
+            "change",
+            () => {
+
+                const show =
+                    source.value === "Other";
+
+                otherGroup.style.display =
+                    show
+                    ? "block"
+                    : "none";
+
+                if(otherField){
+
+                    otherField.required = show;
+
+                    if(!show){
+
+                        otherField.value = "";
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
 
 
 
@@ -156,143 +149,79 @@ const Registration = (() => {
 
     async function handleSubmit(event){
 
-
-
         event.preventDefault();
 
-
-
-
-
-        const data =
-
-        collectData();
-
-
-
-
-
-        if(!validate(data)){
-
-
-
-            showMessage(
-
-                "Please complete all required fields."
-
-            );
-
-
+        if(isSubmitting){
 
             return;
 
         }
 
+        const data = collectData();
 
+        const validation = validate(data);
 
+        if(!validation.valid){
 
+            showMessage(validation.message);
 
+            focusField(validation.field);
 
+            return;
+
+        }
+
+        isSubmitting = true;
 
         setLoading(true);
 
-
-
-
-
-        try {
-
-
+           try{
 
             const response =
-
-            await API.registerVisitor(
-
-                data
-
-            );
-
-
-
-
+                await API.registerVisitor(data);
 
             console.log(
-
                 "Registration success:",
-
                 response
-
             );
-
-
-
-
 
             document.dispatchEvent(
 
-
-
                 new CustomEvent(
-
                     "registration-complete",
-
                     {
-
-
-                        detail:response
-
-
+                        detail: response
                     }
-
                 )
-
-
 
             );
 
-
-
         }
-
-
 
         catch(error){
 
-
-
             console.error(
-
                 "Registration error:",
-
                 error
-
             );
-
-
 
             showMessage(
 
-                "Unable to complete registration."
+                error.message ||
+
+                "Unable to complete registration. Please try again."
 
             );
 
-
-
         }
 
+        finally{
 
-
-        finally {
-
-
+            isSubmitting = false;
 
             setLoading(false);
 
-
-
         }
-
-
 
     }
 
@@ -302,71 +231,47 @@ const Registration = (() => {
 
 
 
-
+    /* ==========================================================
+       DATA COLLECTION
+    ========================================================== */
 
     function collectData(){
 
+        const source = value("source");
 
+        const otherSource = value("otherSource");
 
-        return {
-
-
+        return{
 
             fullName:
-
-            value("fullName"),
-
-
+                value("fullName"),
 
             email:
-
-            value("email"),
-
-
+                value("email"),
 
             mobile:
-
-            value("mobile"),
-
-
+                value("mobile"),
 
             district:
-
-            value("district"),
-
-
+                value("district"),
 
             state:
-
-            value("state"),
-
-
+                value("state"),
 
             language:
-
-            selectedLanguage(),
-
-
+                selectedLanguage(),
 
             source:
-
-            value("source"),
-
-
+                source === "Other"
+                    ? otherSource
+                    : source,
 
             device:
-
-            navigator.userAgent
-
-
+                navigator.userAgent
 
         };
 
-
-
     }
-
-
 
 
 
@@ -376,31 +281,18 @@ const Registration = (() => {
 
     function value(id){
 
-
-
         const element =
+            document.getElementById(id);
 
-        document.getElementById(id);
+        if(!element){
 
+            return "";
 
+        }
 
-
-
-        return element
-
-        ?
-
-        element.value.trim()
-
-        :
-
-        "";
-
-
+        return element.value.trim();
 
     }
-
-
 
 
 
@@ -410,31 +302,17 @@ const Registration = (() => {
 
     function selectedLanguage(){
 
-
-
-        const selected =
-
-        document.querySelector(
+        const selected = document.querySelector(
 
             "input[name='language']:checked"
 
         );
 
-
-
-
-
         return selected
 
-        ?
+            ? selected.value
 
-        selected.value
-
-        :
-
-        "Tamil";
-
-
+            : "Tamil";
 
     }
 
@@ -444,27 +322,115 @@ const Registration = (() => {
 
 
 
-
+    /* ==========================================================
+       VALIDATION
+    ========================================================== */
 
     function validate(data){
 
+        if(!data.fullName){
 
+            return{
 
-        return (
+                valid:false,
 
-            data.fullName &&
+                field:"fullName",
 
-            data.email &&
+                message:"Please enter your full name."
 
-            data.mobile &&
+            };
 
-            data.district &&
+        }
 
-            data.state
+        if(!data.email){
 
-        );
+            return{
 
+                valid:false,
 
+                field:"email",
+
+                message:"Please enter your email address."
+
+            };
+
+        }
+
+        if(!data.mobile){
+
+            return{
+
+                valid:false,
+
+                field:"mobile",
+
+                message:"Please enter your mobile number."
+
+            };
+
+        }
+
+        if(!data.district){
+
+            return{
+
+                valid:false,
+
+                field:"district",
+
+                message:"Please enter your district."
+
+            };
+
+        }
+
+        if(!data.state){
+
+            return{
+
+                valid:false,
+
+                field:"state",
+
+                message:"Please enter your state."
+
+            };
+
+        }
+
+        if(!data.source){
+
+            return{
+
+                valid:false,
+
+                field:"source",
+
+                message:"Please tell us how you discovered CTM PATH™."
+
+            };
+
+        }
+
+        if(!document.getElementById("consent")?.checked){
+
+            return{
+
+                valid:false,
+
+                field:"consent",
+
+                message:"Please accept the consent statement."
+
+            };
+
+        }
+
+        return{
+
+            valid:true
+
+        };
 
     }
 
@@ -474,23 +440,49 @@ const Registration = (() => {
 
 
 
+    function focusField(id){
 
+        const field = document.getElementById(id);
+
+        if(!field){
+
+            return;
+
+        }
+
+        field.focus({
+
+            preventScroll:false
+
+        });
+
+        field.scrollIntoView({
+
+            behavior:"smooth",
+
+            block:"center"
+
+        });
+
+    }
+
+
+
+
+
+
+
+    /* ==========================================================
+       UI
+    ========================================================== */
 
     function setLoading(state){
 
-
-
-        const button =
-
-        document.getElementById(
+        const button = document.getElementById(
 
             "continue-registration"
 
         );
-
-
-
-
 
         if(!button){
 
@@ -498,57 +490,47 @@ const Registration = (() => {
 
         }
 
-
-
-
-
         button.disabled = state;
-
-
-
-
 
         if(state){
 
+            button.innerHTML = `
 
+                <span class="button-tamil">
 
-            button.innerHTML =
+                    உங்கள் பயணம் உருவாக்கப்படுகிறது...
 
-            "Creating Your Journey...";
+                </span>
 
+                <span class="button-english">
 
+                    Creating Your Journey™
 
-        }
-
-        else {
-
-
-
-            button.innerHTML =
-
-            `
-
-            என் பயணத்தை தொடர்கிறேன்
-
-            <br>
-
-            <span>
-
-            Continue My Journey™
-
-            </span>
+                </span>
 
             `;
 
-
+            return;
 
         }
 
+        button.innerHTML = `
 
+            <span class="button-tamil">
+
+                என் வாழ்க்கைப் பயணத்தை தொடர்கிறேன்
+
+            </span>
+
+            <span class="button-english">
+
+                Continue My Guided Journey™
+
+            </span>
+
+        `;
 
     }
-
-
 
 
 
@@ -558,11 +540,7 @@ const Registration = (() => {
 
     function showMessage(message){
 
-
-
         alert(message);
-
-
 
     }
 
@@ -572,23 +550,13 @@ const Registration = (() => {
 
 
 
-
-
-    return {
-
-
+    return{
 
         init
 
-
-
     };
 
-
-
 })();
-
-
 
 
 
@@ -604,18 +572,18 @@ window.Registration = Registration;
 
 
 
-
-
 document.addEventListener(
 
     "ctm-page-loaded",
 
-    ()=>{
-
+    () => {
 
         Registration.init();
-
 
     }
 
 );
+
+/* ==========================================================
+   END OF FILE
+========================================================== */
