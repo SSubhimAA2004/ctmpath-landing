@@ -2,24 +2,23 @@
 <!-- ==========================================================================
    CTM PATH™ Guided Journey™
 
-   File        : header.html
-   Version     : 4.0
+   File        : components/header.html
+   Version     : 5.0
 
    Purpose:
 
-   Premium global header component.
+   Global premium header identity.
 
    Responsibilities:
 
-   • Display CTM PATH™ identity.
-   • Display frozen CTM cosmic mark.
-   • Display journey progress indicator.
+   • Display CTM PATH™ brand mark
+   • Display brand hierarchy
+   • Display journey progress
 
    Does NOT:
 
-   • Render page content.
-   • Control navigation.
-   • Manage application state.
+   • Handle navigation logic
+   • Handle application state
 
    ========================================================================== -->
 
@@ -27,83 +26,71 @@
 <header class="ctm-header">
 
 
-    <div class="ctm-header-container">
 
+<div class="header-container">
 
 
-        <!-- ==============================================================
-             BRAND IDENTITY
-             ============================================================== -->
 
 
-        <div class="ctm-brand">
 
+<!-- ==========================================================================
+     BRAND AREA
+     ========================================================================== -->
 
 
-            <!-- ----------------------------------------------------------
-                 CTM MASTER SYMBOL
+<div class="header-brand">
 
-                 Frozen Asset:
 
-                 assets/logo/CTM_Mark.svg
 
-                 ---------------------------------------------------------- -->
 
 
-            <img
+<!-- LOGO -->
 
-                src="assets/logo/CTM_Mark.svg"
+<div class="header-logo">
 
-                alt="CTM PATH™ Cosmic Journey"
 
-                class="ctm-header-logo"
+<img src="assets/logo/CTM_Mark.svg"
+     alt="CTM PATH™ Cosmic Mark">
 
-            />
 
+</div>
 
 
 
 
-            <!-- ----------------------------------------------------------
-                 BRAND TEXT
-                 ---------------------------------------------------------- -->
 
 
-            <div class="ctm-brand-text">
 
+<!-- BRAND TEXT -->
 
+<div class="header-brand-text">
 
-                <div class="ctm-brand-name">
 
-                    CTM PATH™
 
-                </div>
 
 
+<div class="brand-primary">
 
 
-                <div class="ctm-brand-subtitle">
+CTM PATH™
 
-                    Guided Journey™
 
-                </div>
+</div>
 
 
 
 
-                <div class="ctm-brand-tagline">
 
-                    Every Dream Has A Path™
 
-                </div>
 
 
+<div class="brand-tagline">
 
-            </div>
 
+MILLIONAIRE PRODUCTION PATH™
 
 
-        </div>
+</div>
 
 
 
@@ -111,64 +98,91 @@
 
 
 
-        <!-- ==============================================================
-             JOURNEY STATUS
-             ============================================================== -->
 
+<div class="brand-secondary">
 
-        <div class="ctm-journey-status">
 
+GUIDED JOURNEY™
 
 
-            <div class="ctm-journey-label">
+</div>
 
-                Journey
 
-            </div>
 
 
 
 
 
-            <div class="ctm-journey-step">
 
+<div class="brand-promise">
 
 
-                <span data-current-step>
+Every Dream Has A Path™
 
-                    01
 
-                </span>
+</div>
 
 
 
-                <span class="ctm-step-divider">
 
-                    /
 
-                </span>
+</div>
 
 
 
-                <span data-total-steps>
+</div>
 
-                    18
 
-                </span>
 
 
 
-            </div>
 
 
 
-        </div>
+<!-- ==========================================================================
+     JOURNEY INDICATOR
+     ========================================================================== -->
 
 
+<div class="header-progress">
 
 
 
-    </div>
+
+
+<div class="progress-label">
+
+
+JOURNEY
+
+
+</div>
+
+
+
+
+
+<div class="progress-count">
+
+
+01 / 18
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+</div>
 
 
 </header>
