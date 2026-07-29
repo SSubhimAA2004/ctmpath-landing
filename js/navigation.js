@@ -3,26 +3,26 @@
    CTM PATH™ Guided Journey™
 
    File        : navigation.js
-   Version     : 2.2
+   Version     : 2.0
 
    Purpose:
 
-   Static page navigation controller.
+   Central journey transition controller.
 
    Responsibilities:
 
-   • Handle CTA buttons
-   • Move user to next journey page
-   • Reset scroll position
+   ✓ Manage page movement
+   ✓ Track current journey position
+   ✓ Update progress indicator
+   ✓ Handle navigation events
 
-   IMPORTANT:
 
-   This file does NOT:
+   Does NOT:
 
-   • Load HTML dynamically
-   • Replace app-content
-   • Fetch pages
-   • Control backend logic
+   ✗ Assessment logic
+   ✗ Scoring logic
+   ✗ Backend operations
+
 
    ========================================================================== */
 
@@ -34,7 +34,8 @@ const CTMNavigation = (() => {
 
 
 
-    const config = {
+
+    const journey = {
 
 
         currentPage: 1,
@@ -52,9 +53,75 @@ const CTMNavigation = (() => {
 
 
 
+    const routes = [
+
+
+        "welcome",
+
+
+        "registration",
+
+
+        "assessment-01",
+
+
+        "assessment-02",
+
+
+        "assessment-03",
+
+
+        "assessment-04",
+
+
+        "assessment-05",
+
+
+        "assessment-06",
+
+
+        "assessment-07",
+
+
+        "assessment-08",
+
+
+        "assessment-09",
+
+
+        "assessment-10",
+
+
+        "assessment-11",
+
+
+        "assessment-12",
+
+
+        "kalachakra",
+
+
+        "diagnosis",
+
+
+        "prescription",
+
+
+        "cta"
+
+
+    ];
+
+
+
+
+
+
+
+
 
     /* ==========================================================
-       INITIALIZE
+       INITIALIZATION
        ========================================================== */
 
 
@@ -62,11 +129,11 @@ const CTMNavigation = (() => {
 
 
 
-        bindNavigation();
+        bindEvents();
 
 
 
-        updateCounter();
+        updateProgress();
 
 
 
@@ -79,12 +146,13 @@ const CTMNavigation = (() => {
 
 
 
+
     /* ==========================================================
-       BUTTON HANDLER
+       EVENT MANAGEMENT
        ========================================================== */
 
 
-    function bindNavigation(){
+    function bindEvents(){
 
 
 
@@ -96,31 +164,62 @@ const CTMNavigation = (() => {
 
 
 
-                const button = event.target.closest(
+                const nextButton =
 
-                    "[data-action='next-page']"
+                event.target.closest(
+
+                    "[data-action='next']"
 
                 );
 
 
 
-                if(!button){
+                if(nextButton){
 
-                    return;
+
+
+                    event.preventDefault();
+
+
+
+                    next();
+
+
 
                 }
 
 
 
-                event.preventDefault();
+
+
+                const previousButton =
+
+                event.target.closest(
+
+                    "[data-action='previous']"
+
+                );
 
 
 
-                goNext();
+                if(previousButton){
+
+
+
+                    event.preventDefault();
+
+
+
+                    previous();
+
+
+
+                }
 
 
 
             }
+
 
         );
 
@@ -135,97 +234,37 @@ const CTMNavigation = (() => {
 
 
 
+
     /* ==========================================================
-       NEXT PAGE ROUTING
+       NEXT PAGE
        ========================================================== */
 
 
-    function goNext(){
+    function next(){
 
 
 
-        const nextPage =
+        if(
 
-            config.currentPage + 1;
+            journey.currentPage >=
 
+            journey.totalPages
 
-
-
-
-        if(nextPage > config.totalPages){
-
+        ){
 
             return;
-
 
         }
 
 
 
 
-        /*
-            Static routing.
-
-            Page naming convention:
-
-            welcome.html
-            registration.html
-            assessment-01.html
-            etc.
-
-        */
-
-
-
-        const routes = [
-
-            "welcome.html",
-
-            "registration.html",
-
-            "assessment-01.html",
-
-            "assessment-02.html",
-
-            "assessment-03.html",
-
-            "assessment-04.html",
-
-            "assessment-05.html",
-
-            "assessment-06.html",
-
-            "assessment-07.html",
-
-            "assessment-08.html",
-
-            "assessment-09.html",
-
-            "assessment-10.html",
-
-            "kala-chakra.html",
-
-            "diagnosis.html",
-
-            "prescription.html",
-
-            "review.html",
-
-            "commitment.html",
-
-            "cta.html"
-
-        ];
+        journey.currentPage++;
 
 
 
 
-
-        window.location.href = routes[
-
-            nextPage - 1
-
-        ];
+        loadPage();
 
 
 
@@ -238,16 +277,168 @@ const CTMNavigation = (() => {
 
 
 
+
     /* ==========================================================
-       JOURNEY COUNTER
+       PREVIOUS PAGE
        ========================================================== */
 
 
-    function updateCounter(){
+    function previous(){
 
 
 
-        const counter = document.getElementById(
+        if(
+
+            journey.currentPage <= 1
+
+        ){
+
+            return;
+
+        }
+
+
+
+
+        journey.currentPage--;
+
+
+
+
+        loadPage();
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       PAGE LOADER
+       ========================================================== */
+
+
+    async function loadPage(){
+
+
+
+        const page =
+
+        routes[
+
+            journey.currentPage - 1
+
+        ];
+
+
+
+
+
+        const container =
+
+        document.getElementById(
+
+            "app-content"
+
+        );
+
+
+
+        if(!container){
+
+            return;
+
+        }
+
+
+
+
+
+
+
+        try {
+
+
+
+            const response =
+
+            await fetch(
+
+                `pages/${page}.html`
+
+            );
+
+
+
+
+
+
+            container.innerHTML =
+
+            await response.text();
+
+
+
+
+
+            updateProgress();
+
+
+
+            scrollTop();
+
+
+
+        }
+
+
+
+        catch(error){
+
+
+
+            console.error(
+
+                "Navigation failed:",
+
+                error
+
+            );
+
+
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       JOURNEY PROGRESS
+       ========================================================== */
+
+
+    function updateProgress(){
+
+
+
+        const counter =
+
+        document.getElementById(
 
             "journey-counter"
 
@@ -264,30 +455,32 @@ const CTMNavigation = (() => {
 
 
 
+
         counter.textContent =
 
 
-            String(
 
-                config.currentPage
+        String(
 
-            )
+            journey.currentPage
 
-            .padStart(
+        )
 
-                2,
+        .padStart(
 
-                "0"
+            2,
 
-            )
+            "0"
 
-            +
+        )
 
-            " / "
+        +
 
-            +
+        " / "
 
-            config.totalPages;
+        +
+
+        journey.totalPages;
 
 
 
@@ -300,8 +493,9 @@ const CTMNavigation = (() => {
 
 
 
+
     /* ==========================================================
-       SCROLL HELPER
+       SCROLL RESET
        ========================================================== */
 
 
@@ -313,9 +507,8 @@ const CTMNavigation = (() => {
 
             top:0,
 
-            left:0,
-
             behavior:"smooth"
+
 
         });
 
@@ -330,16 +523,20 @@ const CTMNavigation = (() => {
 
 
 
+
     return {
 
 
         init,
 
 
-        goNext,
+        next,
 
 
-        scrollTop
+        previous,
+
+
+        loadPage
 
 
 
@@ -356,8 +553,10 @@ const CTMNavigation = (() => {
 
 
 
+
 /* ==========================================================================
-   START
+   START NAVIGATION
+
    ========================================================================== */
 
 
@@ -365,11 +564,10 @@ document.addEventListener(
 
     "DOMContentLoaded",
 
-    function(){
+    () => {
 
 
         CTMNavigation.init();
-
 
 
     }
