@@ -3,97 +3,307 @@
    CTM PATH™ Guided Journey™
 
    File        : welcome.js
-   Version     : 2.0
+   Version     : 1.0
 
-   Page        : 01 - Welcome™
+   Page        : 01 — Welcome™
 
    Purpose:
 
-   Controls first journey entry.
+   Welcome page controller.
 
    Responsibilities:
 
-   • Begin Journey button.
-   • Navigate visitor to next experience.
+   ✓ Initialize welcome experience
+   ✓ Capture journey start metadata
+   ✓ Prepare session information
+
 
    Does NOT:
 
-   • Calculate scores.
-   • Store assessment data.
-   • Call APIs.
+   ✗ Navigation
+   ✗ Assessment
+   ✗ Scoring
+   ✗ Backend processing
+
 
    ========================================================================== */
 
 
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
+
+
+const CTMWelome = (() => {
 
 
 
-        const beginButton = document.querySelector(
-            ".welcome-start-btn"
-        );
+    const session = {
+
+
+        startedAt:
+
+        null,
+
+
+        device:
+
+        null,
+
+
+        source:
+
+        null
 
 
 
-        if(!beginButton){
+    };
 
-            return;
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       INITIALIZATION
+       ========================================================== */
+
+
+    function init(){
+
+
+
+        session.startedAt =
+
+        new Date().toISOString();
+
+
+
+        session.device =
+
+        detectDevice();
+
+
+
+        session.source =
+
+        detectSource();
+
+
+
+
+        storeSession();
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       DEVICE DETECTION
+       ========================================================== */
+
+
+    function detectDevice(){
+
+
+
+        const width =
+
+        window.innerWidth;
+
+
+
+        if(width < 768){
+
+
+            return "mobile";
+
 
         }
 
 
 
+        if(width < 1200){
 
 
-        beginButton.addEventListener(
-            "click",
-            function(){
+            return "tablet";
 
 
-
-                /*
-                --------------------------------------------------------------
-                CTM PATH™ Journey Entry
-
-                Next destination:
-                Registration Experience
-
-                --------------------------------------------------------------
-                */
+        }
 
 
 
-                window.location.href =
-                "registration.html";
+        return "desktop";
 
 
 
-            }
+    }
+
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       SOURCE DETECTION
+       ========================================================== */
+
+
+    function detectSource(){
+
+
+
+        const params =
+
+        new URLSearchParams(
+
+            window.location.search
+
+        );
+
+
+
+        return (
+
+            params.get("source")
+
+            ||
+
+            "direct"
+
         );
 
 
 
     }
 
-);
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       SESSION STORAGE
+
+       Temporary frontend storage only.
+
+       Backend persistence comes later.
+
+       ========================================================== */
+
+
+    function storeSession(){
+
+
+
+        try {
+
+
+
+            sessionStorage.setItem(
+
+                "ctm_welcome_session",
+
+                JSON.stringify(
+
+                    session
+
+                )
+
+            );
+
+
+
+        }
+
+
+
+        catch(error){
+
+
+
+            console.warn(
+
+                "Session storage unavailable",
+
+                error
+
+            );
+
+
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       PUBLIC API
+       ========================================================== */
+
+
+    return {
+
+
+        init
+
+
+
+    };
+
+
+
+})();
+
+
+
+
 
 
 
 
 
 /* ==========================================================================
-   END OF FILE
-
-   File:
-   js/welcome.js
-
-   Version:
-   CTM PATH™ Welcome Interaction v2.0
-
-   Status:
-   COMPLETE 🔒
+   START PAGE CONTROLLER
 
    ========================================================================== */
+
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    function(){
+
+
+        CTMWelome.init();
+
+
+
+    }
+
+);
