@@ -3,24 +3,24 @@
    CTM PATH™ Guided Journey™
 
    File        : navigation.js
-   Version     : 2.4
+   Version     : 2.5
 
-   Status      : PAGE VISIBILITY + ROUTER READY
+   Status      : FINAL NAVIGATION VISIBILITY LOCK
 
 
    Responsibilities:
 
-   ✓ Journey movement control
-   ✓ Navigation visibility
-   ✓ Journey counter update
-   ✓ Router event dispatch
+   ✓ Control journey movement
+   ✓ Control navigation visibility
+   ✓ Update journey counter
+   ✓ Dispatch router events
 
 
    Does NOT:
 
-   ✗ Load HTML pages
-   ✗ Handle assessment
+   ✗ Load pages
    ✗ Handle API
+   ✗ Handle assessment logic
 
 
    ========================================================================== */
@@ -37,7 +37,6 @@ const CTMNavigation = (() => {
     const totalPages = 18;
 
 
-
     let initialized = false;
 
 
@@ -46,9 +45,8 @@ const CTMNavigation = (() => {
 
 
 
-
     /* ==========================================================
-       INITIALIZATION
+       INITIALIZE
        ========================================================== */
 
 
@@ -71,7 +69,6 @@ const CTMNavigation = (() => {
         bindEvents();
 
 
-
         updateNavigation();
 
 
@@ -87,7 +84,7 @@ const CTMNavigation = (() => {
 
 
     /* ==========================================================
-       EVENT BINDING
+       EVENT HANDLING
        ========================================================== */
 
 
@@ -99,7 +96,7 @@ const CTMNavigation = (() => {
 
             "click",
 
-            (event)=>{
+            function(event){
 
 
 
@@ -137,22 +134,8 @@ const CTMNavigation = (() => {
 
 
 
-                if(action==="previous"){
 
-
-
-                    goPrevious();
-
-
-
-                }
-
-
-
-
-
-
-                if(action==="continue"){
+                if(action === "continue"){
 
 
 
@@ -163,6 +146,19 @@ const CTMNavigation = (() => {
                 }
 
 
+
+
+
+
+                if(action === "previous"){
+
+
+
+                    goPrevious();
+
+
+
+                }
 
 
 
@@ -182,8 +178,11 @@ const CTMNavigation = (() => {
 
 
 
+
+
+
     /* ==========================================================
-       NEXT PAGE
+       NEXT
        ========================================================== */
 
 
@@ -204,7 +203,6 @@ const CTMNavigation = (() => {
 
 
 
-
         }
 
 
@@ -219,8 +217,11 @@ const CTMNavigation = (() => {
 
 
 
+
+
+
     /* ==========================================================
-       PREVIOUS PAGE
+       PREVIOUS
        ========================================================== */
 
 
@@ -241,7 +242,6 @@ const CTMNavigation = (() => {
 
 
 
-
         }
 
 
@@ -256,8 +256,11 @@ const CTMNavigation = (() => {
 
 
 
+
+
+
     /* ==========================================================
-       SEND ROUTER EVENT
+       ROUTER EVENT
        ========================================================== */
 
 
@@ -277,9 +280,12 @@ const CTMNavigation = (() => {
 
                     detail:{
 
+
                         page: currentPage
 
+
                     }
+
 
                 }
 
@@ -288,7 +294,6 @@ const CTMNavigation = (() => {
 
 
         );
-
 
 
 
@@ -306,8 +311,11 @@ const CTMNavigation = (() => {
 
 
 
+
+
+
     /* ==========================================================
-       UPDATE NAVIGATION UI
+       NAVIGATION VISIBILITY CONTROL
        ========================================================== */
 
 
@@ -315,7 +323,96 @@ const CTMNavigation = (() => {
 
 
 
-        const previous =
+
+
+        const navigationContainer =
+
+        document.getElementById(
+
+            "app-navigation"
+
+        );
+
+
+
+
+
+
+
+
+        /*
+            PAGE 01
+
+            Welcome page owns CTA.
+
+            Hide global navigator completely.
+
+        */
+
+
+
+        if(currentPage === 1){
+
+
+
+
+
+            if(navigationContainer){
+
+
+
+                navigationContainer.style.display = "none";
+
+
+
+            }
+
+
+
+            updateCounter();
+
+
+            return;
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+        /*
+            PAGE 02 - 18
+
+            Enable navigator.
+
+        */
+
+
+
+        if(navigationContainer){
+
+
+
+            navigationContainer.style.display = "block";
+
+
+
+        }
+
+
+
+
+
+
+
+
+        const previousButton =
 
         document.querySelector(
 
@@ -326,33 +423,15 @@ const CTMNavigation = (() => {
 
 
 
-        const continueButton =
-
-        document.querySelector(
-
-            "[data-action='continue']"
-
-        );
 
 
 
 
+        if(previousButton){
 
 
 
-        /*
-          PAGE 01
-
-          No previous destination
-        */
-
-
-
-        if(previous){
-
-
-
-            previous.style.display =
+            previousButton.style.display =
 
             currentPage === 1
 
@@ -375,54 +454,12 @@ const CTMNavigation = (() => {
 
 
 
-
-        /*
-          FINAL PAGE
-        */
-
-
-
-        if(continueButton){
-
-
-
-            if(currentPage===totalPages){
-
-
-
-                continueButton.innerHTML = `
-
-                <span class="nav-label">
-
-                Complete Journey
-
-                </span>
-
-
-                <span class="nav-icon">
-
-                ✓
-
-                </span>
-
-
-                `;
-
-
-
-            }
-
-
-
-        }
-
-
-
-
-
+        updateContinueButton();
 
 
         updateCounter();
+
+
 
 
 
@@ -436,8 +473,114 @@ const CTMNavigation = (() => {
 
 
 
+
+
+
     /* ==========================================================
-       JOURNEY COUNTER
+       CONTINUE BUTTON STATE
+       ========================================================== */
+
+
+    function updateContinueButton(){
+
+
+
+        const button =
+
+        document.querySelector(
+
+            "[data-action='continue']"
+
+        );
+
+
+
+
+
+        if(!button){
+
+            return;
+
+        }
+
+
+
+
+
+
+
+
+        if(currentPage === totalPages){
+
+
+
+            button.innerHTML = `
+
+
+            <span class="nav-label">
+
+            Complete Journey
+
+            </span>
+
+
+            <span class="nav-icon">
+
+            ✓
+
+            </span>
+
+
+            `;
+
+
+
+        }
+
+        else {
+
+
+
+            button.innerHTML = `
+
+
+            <span class="nav-label">
+
+            Continue
+
+            </span>
+
+
+            <span class="nav-icon">
+
+            →
+
+            </span>
+
+
+            `;
+
+
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       COUNTER
        ========================================================== */
 
 
@@ -493,13 +636,15 @@ const CTMNavigation = (() => {
 
 
 
+
+
+
     /* ==========================================================
-       PUBLIC API
+       PUBLIC METHODS
        ========================================================== */
 
 
     return {
-
 
 
         init,
@@ -515,7 +660,10 @@ const CTMNavigation = (() => {
         }
 
 
+
     };
+
+
 
 
 
@@ -527,8 +675,10 @@ const CTMNavigation = (() => {
 
 
 
+
+
 /* ==========================================================================
-   GLOBAL ACCESS FOR app.js
+   GLOBAL ACCESS
    ========================================================================== */
 
 
