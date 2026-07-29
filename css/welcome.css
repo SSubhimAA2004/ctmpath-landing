@@ -3,20 +3,13 @@
    CTM PATH™ Guided Journey™
 
    File        : welcome.css
-   Version     : 2.1
+   Version     : 3.0
 
    Page        : 01 - Welcome™
 
    Purpose:
 
-   Premium opening journey experience.
-
-   Controls:
-
-   • Hero composition
-   • Welcome typography
-   • Discovery cards
-   • Final invitation
+   Premium welcome experience styling.
 
    ========================================================================== */
 
@@ -34,10 +27,9 @@
 
     background:
 
-    transparent;
+    #081C3A;
 
 }
-
 
 
 
@@ -58,9 +50,19 @@
     1100px;
 
 
+    margin:
+
+    0 auto;
+
+
     padding-top:
 
-    60px;
+    80px;
+
+
+    text-align:
+
+    center;
 
 
 }
@@ -70,7 +72,7 @@
 
 
 
-.welcome-theme {
+.welcome-title {
 
 
     font-family:
@@ -78,27 +80,23 @@
     var(--font-tamil);
 
 
-
     font-size:
 
     clamp(
-        48px,
+        52px,
         6vw,
-        76px
+        86px
     );
-
 
 
     line-height:
 
-    1.45;
-
+    1.35;
 
 
     font-weight:
 
-    700;
-
+    800;
 
 
     color:
@@ -115,46 +113,27 @@
 
 
 
-.welcome-theme-en {
+.welcome-positioning {
 
 
     margin-top:
 
-    24px;
-
-
-
-    font-family:
-
-    var(--font-primary);
-
+    28px;
 
 
     font-size:
 
-    clamp(
-        28px,
-        3vw,
-        40px
-    );
-
+    32px;
 
 
     letter-spacing:
 
-    0.06em;
-
+    0.08em;
 
 
     color:
 
-    var(--ctm-gold);
-
-
-
-    font-weight:
-
-    700;
+    var(--ctm-gold-light);
 
 
 
@@ -166,19 +145,17 @@
 
 
 
-.welcome-introduction {
+.welcome-message {
 
 
-    margin-top:
+    margin:
 
-    48px;
-
+    50px auto 0;
 
 
     max-width:
 
-    900px;
-
+    850px;
 
 
     font-family:
@@ -186,17 +163,51 @@
     var(--font-tamil);
 
 
-
     font-size:
 
-    24px;
-
+    25px;
 
 
     line-height:
 
     2;
 
+
+    color:
+
+    var(--ctm-text-primary);
+
+
+
+}
+
+
+
+
+
+
+
+.welcome-message-en {
+
+
+    margin:
+
+    30px auto 0;
+
+
+    max-width:
+
+    800px;
+
+
+    font-size:
+
+    21px;
+
+
+    line-height:
+
+    1.9;
 
 
     color:
@@ -213,59 +224,28 @@
 
 
 
-.welcome-introduction-en {
-
-
-    margin-top:
-
-    28px;
-
-
-
-    max-width:
-
-    850px;
-
-
-
-    font-size:
-
-    20px;
-
-
-
-    line-height:
-
-    1.9;
-
-
-
-    color:
-
-    var(--ctm-text-muted);
-
-
-
-}
-
-
-
-
-
-
-
 
 /* ==========================================================================
-   LIFE THROUGH NEW LENS
+   NEW LENS SECTION
    ========================================================================== */
 
 
 .welcome-lens {
 
 
+    margin:
+
+    140px auto 0;
+
+
     max-width:
 
-    1100px;
+    1000px;
+
+
+    text-align:
+
+    center;
 
 
 
@@ -277,13 +257,103 @@
 
 
 
-.welcome-lens .ctm-screen-title {
+.lens-title {
 
 
-    margin-bottom:
+    font-family:
 
-    20px;
+    var(--font-tamil);
 
+
+    font-size:
+
+    48px;
+
+
+    line-height:
+
+    1.5;
+
+
+    color:
+
+    var(--ctm-text-primary);
+
+
+
+}
+
+
+
+
+
+
+
+.lens-title-en {
+
+
+    margin-top:
+
+    18px;
+
+
+    color:
+
+    var(--ctm-gold);
+
+
+    font-size:
+
+    26px;
+
+
+
+}
+
+
+
+
+
+
+
+.lens-description {
+
+
+    margin:
+
+    45px auto 0;
+
+
+    font-size:
+
+    21px;
+
+
+    line-height:
+
+    2;
+
+
+}
+
+
+
+.lens-description-en {
+
+
+    margin-top:
+
+    24px;
+
+
+    color:
+
+    var(--ctm-text-secondary);
+
+
+    font-size:
+
+    18px;
 
 
 }
@@ -297,22 +367,34 @@
 .welcome-permission {
 
 
-    margin-top:
+    margin:
 
-    64px;
+    60px auto 0;
 
+
+    max-width:
+
+    650px;
 
 
     padding:
 
-    36px 48px;
+    36px;
 
 
+    text-align:
 
-    border-left:
+    center;
 
-    3px solid var(--ctm-gold);
 
+    border:
+
+    1px solid var(--ctm-border-gold);
+
+
+    border-radius:
+
+    28px;
 
 
     background:
@@ -325,23 +407,14 @@
     );
 
 
-
-    border-radius:
-
-    0 24px 24px 0;
-
-
-
     color:
 
     var(--ctm-gold-light);
 
 
-
     font-size:
 
     20px;
-
 
 
     line-height:
@@ -360,16 +433,21 @@
 
 
 /* ==========================================================================
-   DISCOVERY EXPERIENCE
+   DISCOVERY SECTION
    ========================================================================== */
 
 
 .welcome-discovery {
 
 
-    width:
+    margin-top:
 
-    100%;
+    140px;
+
+
+    text-align:
+
+    center;
 
 
 
@@ -384,31 +462,19 @@
 .discovery-title {
 
 
-    text-align:
-
-    center;
-
-
-
     font-family:
 
     var(--font-tamil);
 
 
-
     font-size:
 
-    clamp(
-        36px,
-        4vw,
-        52px
-    );
+    52px;
 
 
+    color:
 
-    line-height:
-
-    1.6;
+    var(--ctm-text-primary);
 
 
 
@@ -423,27 +489,19 @@
 .discovery-title-en {
 
 
-    text-align:
-
-    center;
-
-
-
     margin-top:
 
-    16px;
-
-
-
-    color:
-
-    var(--ctm-gold);
-
+    18px;
 
 
     font-size:
 
     26px;
+
+
+    color:
+
+    var(--ctm-gold);
 
 
 
@@ -463,11 +521,9 @@
     80px;
 
 
-
     display:
 
     grid;
-
 
 
     grid-template-columns:
@@ -478,10 +534,9 @@
     );
 
 
-
     gap:
 
-    40px;
+    42px;
 
 
 
@@ -493,34 +548,78 @@
 
 
 
+
+/* ==========================================================================
+   PREMIUM DISCOVERY CARDS
+   ========================================================================== */
+
+
 .discovery-card {
-
-
-    padding:
-
-    48px;
-
 
 
     min-height:
 
-    380px;
+    390px;
 
+
+    padding:
+
+    46px;
+
+
+    display:
+
+    flex;
+
+
+    flex-direction:
+
+    column;
+
+
+    align-items:
+
+    center;
+
+
+    justify-content:
+
+    flex-start;
+
+
+    background:
+
+    rgba(
+        8,
+        28,
+        58,
+        0.95
+    );
 
 
     border:
 
-    1px solid var(--ctm-border);
+    1px solid rgba(
+        87,
+        214,
+        214,
+        0.35
+    );
 
 
+    border-radius:
 
-    transition:
+    30px;
 
-    transform
-    0.35s ease,
-    border-color
-    0.35s ease;
 
+    box-shadow:
+
+    0 20px 60px rgba(
+        0,
+        0,
+        0,
+        0.35
+    );
 
 
 }
@@ -534,16 +633,67 @@
 .discovery-card:hover {
 
 
-    transform:
-
-    translateY(-10px);
-
-
-
     border-color:
 
-    var(--ctm-border-gold);
+    var(--ctm-gold);
 
+
+}
+
+
+
+
+
+
+
+
+.discovery-icon {
+
+
+    width:
+
+    72px;
+
+
+    height:
+
+    72px;
+
+
+    margin-bottom:
+
+    24px;
+
+
+}
+
+
+.discovery-icon svg {
+
+
+    width:
+
+    100%;
+
+
+    height:
+
+    100%;
+
+
+    fill:
+
+    none;
+
+
+    stroke:
+
+    var(--ctm-gold);
+
+
+    stroke-width:
+
+    5;
 
 
 }
@@ -559,14 +709,12 @@
 
     width:
 
-    54px;
-
+    46px;
 
 
     height:
 
-    54px;
-
+    46px;
 
 
     display:
@@ -574,11 +722,9 @@
     flex;
 
 
-
     align-items:
 
     center;
-
 
 
     justify-content:
@@ -586,11 +732,9 @@
     center;
 
 
-
     border-radius:
 
     50%;
-
 
 
     border:
@@ -598,28 +742,14 @@
     1px solid var(--ctm-gold);
 
 
-
     color:
 
     var(--ctm-gold-light);
 
 
-
-    font-size:
-
-    18px;
-
-
-
-    font-weight:
-
-    700;
-
-
-
     margin-bottom:
 
-    36px;
+    24px;
 
 
 
@@ -639,16 +769,14 @@
     var(--font-tamil);
 
 
-
     font-size:
 
-    30px;
+    28px;
 
 
+    color:
 
-    line-height:
-
-    1.6;
+    var(--ctm-text-primary);
 
 
 
@@ -665,20 +793,12 @@
 
     margin-top:
 
-    16px;
-
+    12px;
 
 
     color:
 
     var(--ctm-teal-soft);
-
-
-
-    font-size:
-
-    17px;
-
 
 
     letter-spacing:
@@ -700,25 +820,22 @@
 
     margin-top:
 
-    24px;
-
-
-
-    font-size:
-
     20px;
-
-
-
-    line-height:
-
-    1.9;
-
 
 
     color:
 
     var(--ctm-text-secondary);
+
+
+    font-size:
+
+    18px;
+
+
+    line-height:
+
+    1.8;
 
 
 
@@ -732,34 +849,21 @@
 
 
 /* ==========================================================================
-   FINAL INVITATION
+   CTA SECTION
    ========================================================================== */
 
 
 .welcome-final {
 
 
-    max-width:
+    margin:
 
-    1000px;
-
+    140px auto 0;
 
 
     text-align:
 
     center;
-
-
-
-    margin-left:
-
-    auto;
-
-
-
-    margin-right:
-
-    auto;
 
 
 
@@ -779,57 +883,12 @@
     var(--font-tamil);
 
 
-
     font-size:
 
-    clamp(
-        34px,
-        4vw,
-        52px
-    );
-
-
-
-    line-height:
-
-    1.7;
-
+    46px;
 
 
 }
-
-
-
-
-
-
-
-.welcome-final h3 {
-
-
-    margin-top:
-
-    24px;
-
-
-
-    color:
-
-    var(--ctm-gold);
-
-
-
-    font-size:
-
-    28px;
-
-
-
-}
-
-
-
-
 
 
 
@@ -838,14 +897,12 @@
 
     margin-top:
 
-    36px;
-
+    35px;
 
 
     font-size:
 
     22px;
-
 
 
     line-height:
@@ -862,30 +919,105 @@
 
 
 
+/* CTM BLUE PREMIUM BUTTON */
+
+
 .welcome-start-btn {
 
 
     margin-top:
 
-    56px;
-
+    55px;
 
 
     min-width:
 
-    320px;
-
+    360px;
 
 
     min-height:
 
-    64px;
+    72px;
 
+
+    border:
+
+    none;
+
+
+    border-radius:
+
+    999px;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #00B7FF,
+        #0066CC
+    );
+
+
+    color:
+
+    #FFFFFF;
 
 
     font-size:
 
     18px;
+
+
+    font-weight:
+
+    700;
+
+
+    cursor:
+
+    pointer;
+
+
+    box-shadow:
+
+    0 0 35px rgba(
+        0,
+        183,
+        255,
+        0.45
+    );
+
+
+    transition:
+
+    transform
+    0.3s ease,
+    box-shadow
+    0.3s ease;
+
+
+
+}
+
+
+
+.welcome-start-btn:hover {
+
+
+    transform:
+
+    translateY(-4px);
+
+
+    box-shadow:
+
+    0 0 55px rgba(
+        0,
+        183,
+        255,
+        0.65
+    );
 
 
 
@@ -899,7 +1031,7 @@
 
 
 /* ==========================================================================
-   TABLET
+   RESPONSIVE
    ========================================================================== */
 
 
@@ -914,8 +1046,43 @@
     1fr;
 
 
+
 }
 
+
+}
+
+
+
+
+
+
+
+@media(max-width:767px){
+
+
+.welcome-title {
+
+
+    font-size:
+
+    42px;
+
+
+
+}
+
+
+.welcome-positioning {
+
+
+    font-size:
+
+    22px;
+
+
+
+}
 
 
 .discovery-card {
@@ -926,138 +1093,10 @@
     auto;
 
 
-}
-
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   MOBILE
-   ========================================================================== */
-
-
-@media(max-width:767px){
-
-
-
-.welcome-hero {
-
-
-    padding-top:
-
-    32px;
-
-
-}
-
-
-
-
-.welcome-theme {
-
-
-    font-size:
-
-    42px;
-
-
-}
-
-
-
-
-.welcome-theme-en {
-
-
-    font-size:
-
-    24px;
-
-
-}
-
-
-
-
-.welcome-introduction {
-
-
-    font-size:
-
-    19px;
-
-
-}
-
-
-
-
-.welcome-permission {
-
-
-    padding:
-
-    28px;
-
-
-    font-size:
-
-    17px;
-
-
-}
-
-
-
-.discovery-grid {
-
-
-    margin-top:
-
-    48px;
-
-
-}
-
-
-
-.discovery-card {
-
-
     padding:
 
     32px;
 
-
-}
-
-
-
-.discovery-card h4 {
-
-
-    font-size:
-
-    24px;
-
-
-}
-
-
-
-.discovery-card p {
-
-
-    font-size:
-
-    17px;
 
 
 }
@@ -1077,12 +1116,12 @@
     auto;
 
 
-}
-
-
 
 }
 
+
+
+}
 
 
 
@@ -1097,7 +1136,7 @@
    css/welcome.css
 
    Version:
-   CTM PATH™ Welcome Premium Experience v2.1
+   CTM PATH™ Premium Welcome Experience v3.0
 
    Status:
    UPDATED 🔒
