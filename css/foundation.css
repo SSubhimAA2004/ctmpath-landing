@@ -3,7 +3,7 @@
    CTM PATH™ Guided Journey™
 
    File        : foundation.css
-   Version     : 2.0
+   Version     : 2.1
 
    Purpose:
 
@@ -12,17 +12,16 @@
    Controls:
 
    • Browser normalization
-   • Box sizing
    • Application shell
-   • Global containers
-   • Screen layout system
+   • Layout containers
+   • Screen structure
    • Spacing primitives
 
    Does NOT control:
 
    • Colours
    • Brand identity
-   • Page-specific styling
+   • Page-specific components
 
    ========================================================================== */
 
@@ -39,11 +38,8 @@
 *::before,
 *::after {
 
-
     box-sizing:
-
     border-box;
-
 
 }
 
@@ -53,21 +49,14 @@
 
 html {
 
-
     width:
-
     100%;
-
 
     min-height:
-
     100%;
 
-
     scroll-behavior:
-
     smooth;
-
 
 }
 
@@ -77,21 +66,14 @@ html {
 
 body {
 
-
     width:
-
     100%;
 
-
     min-height:
-
     100vh;
 
-
     margin:
-
     0;
-
 
 }
 
@@ -99,18 +81,18 @@ body {
 
 
 
+
+
 img {
 
-
     max-width:
-
     100%;
 
+    height:
+    auto;
 
     display:
-
     block;
-
 
 }
 
@@ -123,11 +105,8 @@ input,
 textarea,
 select {
 
-
     font:
-
     inherit;
-
 
 }
 
@@ -144,26 +123,17 @@ select {
 
 .app-shell {
 
-
     width:
-
     100%;
 
-
     min-height:
-
     100vh;
 
-
     display:
-
     flex;
 
-
     flex-direction:
-
     column;
-
 
 }
 
@@ -173,16 +143,11 @@ select {
 
 .app-content {
 
-
     flex:
-
     1;
 
-
     width:
-
     100%;
-
 
 }
 
@@ -193,7 +158,13 @@ select {
 
 
 /* ==========================================================================
-   GLOBAL CONTAINER SYSTEM
+   PREMIUM EXPERIENCE CONTAINER
+
+   Updated:
+   1280px → 1440px
+
+   Creates wider cinematic layout.
+
    ========================================================================== */
 
 
@@ -203,8 +174,8 @@ select {
     width:
 
     min(
-        calc(100% - 80px),
-        1280px
+        calc(100% - 120px),
+        1440px
     );
 
 
@@ -221,10 +192,11 @@ select {
 
 
 
+
 /* ==========================================================================
    CTM SCREEN FOUNDATION
 
-   Shared by all 18 journey pages
+   Shared by all 18 journey pages.
 
    ========================================================================== */
 
@@ -259,8 +231,8 @@ select {
     width:
 
     min(
-        calc(100% - 80px),
-        1280px
+        calc(100% - 120px),
+        1440px
     );
 
 
@@ -271,13 +243,23 @@ select {
 
     padding:
 
-    96px 0 120px;
+    120px 0 140px;
 
 
 }
 
 
 
+
+
+
+
+/* ==========================================================================
+   CONTENT COLUMN SYSTEM
+
+   Controls readable text width.
+
+   ========================================================================== */
 
 
 .ctm-content-column {
@@ -285,11 +267,26 @@ select {
 
     max-width:
 
-    900px;
+    1100px;
 
 
 }
 
+
+
+
+
+
+
+.ctm-content-narrow {
+
+
+    max-width:
+
+    850px;
+
+
+}
 
 
 
@@ -439,7 +436,7 @@ select {
 
     margin-top:
 
-    48px;
+    56px;
 
 }
 
@@ -449,7 +446,7 @@ select {
 
     margin-top:
 
-    96px;
+    120px;
 
 }
 
@@ -469,7 +466,7 @@ select {
 
     margin-bottom:
 
-    48px;
+    56px;
 
 }
 
@@ -479,45 +476,9 @@ select {
 
     margin-bottom:
 
-    96px;
+    120px;
 
 }
-
-
-
-
-
-
-
-/* ==========================================================================
-   VISIBILITY HELPERS
-   ========================================================================== */
-
-
-.hidden {
-
-
-    display:
-
-    none !important;
-
-
-}
-
-
-
-
-
-.invisible {
-
-
-    visibility:
-
-    hidden;
-
-
-}
-
 
 
 
@@ -539,10 +500,13 @@ select {
 
     width:
 
-    calc(100% - 64px);
+    calc(
+        100% - 64px
+    );
 
 
 }
+
 
 
 .ctm-screen-container {
@@ -550,7 +514,7 @@ select {
 
     padding:
 
-    72px 0 96px;
+    90px 0 110px;
 
 
 }
@@ -578,7 +542,9 @@ select {
 
     width:
 
-    calc(100% - 32px);
+    calc(
+        100% - 32px
+    );
 
 
 }
@@ -590,7 +556,7 @@ select {
 
     padding:
 
-    56px 0 72px;
+    64px 0 90px;
 
 
 }
@@ -618,14 +584,15 @@ select {
 
     width:
 
-    calc(100% - 24px);
+    calc(
+        100% - 24px
+    );
 
 
 }
 
 
 }
-
 
 
 
@@ -640,7 +607,7 @@ select {
    css/foundation.css
 
    Version:
-   CTM PATH™ Foundation System v2.0
+   CTM PATH™ Premium Layout Foundation v2.1
 
    Status:
    UPDATED 🔒
