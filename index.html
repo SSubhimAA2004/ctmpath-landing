@@ -4,24 +4,45 @@
 
    File        : index.html
    Version     : 2.0
+   Status      : FOUNDATION RECOVERY
 
-   Architecture:
+   Purpose:
 
-   Static Premium Landing Page
+   Primary application shell for CTM PATH™ Guided Journey™
 
    Responsibilities:
 
-   • Load global styles
-   • Render Page 01 Welcome experience
-   • Mount header
-   • Mount footer
-   • Handle CTA navigation
+   ✓ Load global design system
+   ✓ Mount shared components
+   ✓ Provide application containers
+   ✓ Initialize frontend engine
+   ✓ Maintain clean separation between:
+        Presentation
+        Navigation
+        Business Logic
+        Backend Services
+
+
+   Architecture:
+
+   FRONTEND
+   ├── HTML
+   ├── CSS
+   └── Vanilla JavaScript
+
+
+   BACKEND
+   ├── Google Apps Script API
+   ├── Google Sheets Database
+   ├── Assessment Engine
+   ├── Scoring Engine
+   ├── Diagnosis Engine
+   └── Report Generation
+
 
    IMPORTANT:
 
-   No dynamic page injection.
-   No SPA routing.
-   No content replacement.
+   This file contains NO business logic.
 
    ========================================================================== -->
 
@@ -41,24 +62,22 @@
       content="width=device-width, initial-scale=1.0">
 
 
-
 <meta name="description"
-      content="CTM PATH™ Guided Journey™ — Discover the life you are meant to create.">
+      content="CTM PATH™ Guided Journey™ — From Survival To Living™">
 
+
+<meta name="application-name"
+      content="CTM PATH™ Guided Journey™">
 
 
 <title>
-
 CTM PATH™ Guided Journey™
-
 </title>
 
 
 
-
-
 <!-- ==========================================================================
-     GLOBAL STYLES
+     PREMIUM DESIGN SYSTEM
      ========================================================================== -->
 
 
@@ -71,19 +90,14 @@ CTM PATH™ Guided Journey™
 
 
 <link rel="stylesheet"
-      href="css/header.css">
-
-
-<link rel="stylesheet"
-      href="css/welcome.css">
-
-
-<link rel="stylesheet"
-      href="css/footer.css">
-
-
-<link rel="stylesheet"
       href="css/responsive.css">
+
+
+
+<!-- Shared Assessment Styling -->
+
+<link rel="stylesheet"
+      href="css/assessment.css">
 
 
 
@@ -91,131 +105,96 @@ CTM PATH™ Guided Journey™
 
 
 
-
-
 <body>
 
 
-<div class="ctm-page">
 
+<!-- ==========================================================================
+     APPLICATION ROOT
+     ========================================================================== -->
+
+
+<div id="app-shell"
+     class="app-shell">
+
+
+
+<!-- ==========================================================================
+     GLOBAL LOADER
+
+     Controlled by:
+     js/app.js
+
+     Purpose:
+     Initial application preparation only.
+
+     No visible technical messages.
+
+     ========================================================================== -->
+
+
+<div id="global-loader"
+     class="global-loader hidden">
+
+
+<div class="loader-container">
+
+
+<div class="loader-spinner">
+</div>
+
+
+<p class="loader-message">
+</p>
+
+
+</div>
+
+
+</div>
 
 
 
 
 <!-- ==========================================================================
-     HEADER
+     GLOBAL HEADER
+
+     Loaded dynamically:
+
+     components/header.html
+
      ========================================================================== -->
 
 
 <header id="app-header"
         class="app-header">
 
-
-<!-- Header HTML -->
-
-<div class="header-brand">
-
-
-<img src="assets/logo/CTM_Mark.svg"
-     class="brand-symbol"
-     alt="CTM PATH Logo">
-
-
-
-<div class="brand-identity">
-
-
-<div class="brand-name">
-
-CTM PATH™
-
-</div>
-
-
-
-<div class="brand-tagline-main">
-
-MILLIONAIRE PRODUCTION PATH™
-
-</div>
-
-
-
-<div class="brand-tagline">
-
-GUIDED JOURNEY™
-
-</div>
-
-
-
-<div class="brand-signature">
-
-Every Dream Has A Path™
-
-</div>
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="journey-status">
-
-
-<span class="journey-label">
-
-JOURNEY
-
-</span>
-
-
-<span id="journey-counter"
-      class="journey-counter">
-
-01 / 18
-
-</span>
-
-
-</div>
-
-
-
 </header>
 
 
 
 
-
-
-
-
-
-
 <!-- ==========================================================================
-     MAIN WELCOME EXPERIENCE
+     JOURNEY CONTENT AREA
+
+     All 18 pages render here.
+
+     Journey:
+
+     01 Welcome
+     02 Registration
+     03-14 Assessment Engine
+     15 Kala Chakra™
+     16 Diagnosis
+     17 Prescription
+     18 CTA
+
      ========================================================================== -->
 
 
-<main>
-
-
-<section id="welcome"
-         class="welcome-page">
-
-
-
-<!-- Page content loaded here -->
-
-</section>
-
+<main id="app-content"
+      class="app-content"
+      role="main">
 
 
 </main>
@@ -224,143 +203,68 @@ JOURNEY
 
 
 
+<!-- ==========================================================================
+     JOURNEY NAVIGATION
+
+     Loaded dynamically:
+
+     components/navigation.html
+
+
+     Controlled by:
+
+     js/navigation.js
+
+     ========================================================================== -->
+
+
+<nav id="app-navigation"
+     class="app-navigation">
+
+</nav>
 
 
 
 
 
 <!-- ==========================================================================
-     FOOTER
+     GLOBAL FOOTER
+
+     Loaded dynamically:
+
+     components/footer.html
+
      ========================================================================== -->
 
 
-<footer class="app-footer">
-
-
-<div class="footer-brand">
-
-
-<h3>
-
-CTM PATH™
-
-</h3>
-
-
-
-<p>
-
-GUIDED JOURNEY™
-
-</p>
-
-
-
-<p>
-
-Every Dream Has A Path™
-
-</p>
-
-
-
-</div>
-
-
-
-
-
-
-<div class="footer-founder">
-
-
-<span>
-
-Created by
-
-</span>
-
-
-
-<h4>
-
-Healer King Raphael Raj
-
-</h4>
-
-
-
-<p>
-
-Founder & Chief Mentor
-
-</p>
-
-
-</div>
-
-
-
-
-
-
-<div class="footer-contact">
-
-
-<p>
-
-🟡 WhatsApp:
-
-<a href="tel:7036970339">
-
-70-369-70-339
-
-</a>
-
-
-</p>
-
-
-
-
-<p>
-
-✉ Email:
-
-<a href="mailto:healerking@umbaravai.com">
-
-healerking@umbaravai.com
-
-</a>
-
-
-</p>
-
-
-</div>
-
-
-
-
-
-
-<div class="footer-copy">
-
-
-© 2026 CTM PATH™ Guided Journey™
-
-</div>
-
-
+<footer id="app-footer"
+        class="app-footer">
 
 </footer>
 
 
 
 
+</div>
 
 
 
+
+<!-- ==========================================================================
+     ERROR HANDLING CONTAINER
+
+     Controlled by:
+
+     js/app.js
+
+
+     User-friendly errors only.
+
+     ========================================================================== -->
+
+
+<div id="error-container"
+     class="error-container hidden">
 
 </div>
 
@@ -368,20 +272,39 @@ healerking@umbaravai.com
 
 
 
-
-
 <!-- ==========================================================================
-     JAVASCRIPT
+     JAVASCRIPT FOUNDATION LOAD ORDER
 
-     Minimal Foundation Only
+     IMPORTANT:
+
+     Dependency sequence:
+
+     1. app.js
+     2. api.js
+     3. storage.js
+     4. navigation.js
+     5. assessmentEngine.js
+     6. scoring.js
+     7. report.js
+
 
      ========================================================================== -->
 
 
+
 <script src="js/app.js"></script>
 
+<script src="js/api.js"></script>
+
+<script src="js/storage.js"></script>
 
 <script src="js/navigation.js"></script>
+
+<script src="js/assessmentEngine.js"></script>
+
+<script src="js/scoring.js"></script>
+
+<script src="js/report.js"></script>
 
 
 
