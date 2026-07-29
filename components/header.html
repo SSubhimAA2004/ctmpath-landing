@@ -3,28 +3,23 @@
    CTM PATH™ Guided Journey™
 
    File        : header.html
-   Version     : 1.1
+   Version     : 2.0
 
    Purpose:
 
-   Global premium branded header component.
+   Global premium journey header.
 
    Responsibilities:
 
-   • Display CTM PATH™ logo.
+   • Display CTM PATH™ branding.
    • Display journey identity.
-   • Display bilingual journey title.
-   • Display progress indicator.
+   • Display journey progress.
 
    Does NOT:
 
    • Execute navigation.
    • Store user data.
-   • Call backend APIs.
-
-   Loaded into:
-
-   #app-header
+   • Call backend services.
 
    ========================================================================== -->
 
@@ -40,12 +35,7 @@
 
 
 <!-- ==========================================================================
-     BRAND AREA
-
-     Asset:
-
-     assets/logo/CTM_Logo_Transparent.svg
-
+     BRAND IDENTITY
      ========================================================================== -->
 
 
@@ -64,6 +54,7 @@
 
 
 >
+
 
 
 
@@ -102,13 +93,14 @@
 
 
 
+
 <!-- ==========================================================================
-     JOURNEY IDENTITY
+     JOURNEY TITLE
 
      ========================================================================== -->
 
 
-<div class="header-title">
+<div class="header-journey-title">
 
 
 
@@ -119,6 +111,7 @@
 
 
 </p>
+
 
 
 
@@ -140,11 +133,9 @@
 
 
 <!-- ==========================================================================
-     JOURNEY PROGRESS
+     PROGRESS INDICATOR
 
-     Controlled by:
-
-     js/navigation.js
+     Controlled by navigation.js
 
      ========================================================================== -->
 
@@ -167,7 +158,6 @@
 
 
 
-
 <span class="english">
 
 
@@ -183,9 +173,18 @@
 
 
 
+<div class="progress-value">
+
+
+    01 / 18
+
+
+</div>
+
+
+
 
 <div class="progress-track">
-
 
 
 <div
@@ -194,25 +193,8 @@ class="progress-fill"
 
 data-progress-fill>
 
-
 </div>
 
-
-
-</div>
-
-
-
-
-
-<div
-
-class="progress-counter"
-
-data-progress-counter>
-
-
-1 / 18
 
 
 </div>
@@ -232,51 +214,33 @@ data-progress-counter>
 </header>
 
 <!-- ==========================================================================
-     ACCESSIBILITY ENHANCEMENTS
+     ACCESSIBILITY LAYER
 
      ========================================================================== -->
 
 
 <nav
 
-    class="journey-header-nav"
+    class="header-accessibility"
 
     aria-label="CTM PATH™ Guided Journey Navigation"
 
-
-
 >
 
 
 
 
 
-<!-- ==========================================================================
-     BRAND ACCESSIBILITY LABEL
-
-     ========================================================================== -->
+<div class="sr-only">
 
 
-<div
-
-    class="sr-only"
-
-
->
-
-    CTM PATH Guided Journey
+    CTM PATH™ Guided Journey™
 
 
 </div>
 
 
 
-
-
-<!-- ==========================================================================
-     PROGRESS INFORMATION
-
-     ========================================================================== -->
 
 
 <div
@@ -287,27 +251,25 @@ data-progress-counter>
 
     aria-live="polite"
 
-
-
 >
+
 
 
 
 <span class="sr-only">
 
-    Current journey progress:
+
+    Current journey progress
+
 
 </span>
 
 
 
-<span
+<span data-progress-text>
 
-    data-progress-text
 
->
-
-    Step 1 of 18
+    Step 01 of 18
 
 
 </span>
@@ -326,18 +288,12 @@ data-progress-counter>
 
 
 
-<!-- ==========================================================================
-     HEADER DECORATIVE ACCENT
 
-     Premium visual separator.
+<!-- ==========================================================================
+     DECORATIVE BRAND DIVIDER
 
      ========================================================================== -->
 
 
-<div
-
-    class="header-accent-line"
-
-
-></div>
+<div class="header-accent-line"></div>
 
