@@ -3,14 +3,20 @@
    CTM PATH™ Guided Journey™
 
    File        : header.css
-   Version     : 3.1
+   Version     : 4.0
 
    Purpose:
 
    Premium compact global header styling.
 
-   ========================================================================== */
+   Responsibilities:
 
+   • CTM cosmic mark positioning.
+   • Brand typography.
+   • Journey progress display.
+   • Responsive header behaviour.
+
+   ========================================================================== */
 
 
 /* ==========================================================================
@@ -20,56 +26,27 @@
 
 .ctm-header {
 
-
-    width:
-
-        100%;
-
-
-
-    height:
-
-        auto;
-
-
+    width:100%;
 
     background:
-
-        rgba(
-
-            11,
-
-            13,
-
-            18,
-
-            0.96
-
-        );
-
-
+    rgba(
+        11,
+        13,
+        18,
+        0.96
+    );
 
     border-bottom:
-
-        1px solid var(--ctm-border);
-
-
+    1px solid var(--ctm-border);
 
     position:
-
-        relative;
-
-
+    relative;
 
     z-index:
-
-        100;
-
+    100;
 
 
 }
-
-
 
 
 
@@ -79,43 +56,30 @@
 
 
     max-width:
-
-        1280px;
-
+    1280px;
 
 
     margin:
-
-        0 auto;
-
+    0 auto;
 
 
     padding:
-
-        14px 36px;
-
+    12px 36px;
 
 
     display:
-
-        flex;
-
+    flex;
 
 
     align-items:
-
-        center;
-
+    center;
 
 
     justify-content:
-
-        space-between;
-
+    space-between;
 
 
 }
-
 
 
 
@@ -131,21 +95,15 @@
 
 
     display:
-
-        flex;
-
+    flex;
 
 
     align-items:
-
-        center;
-
+    center;
 
 
     gap:
-
-        14px;
-
+    16px;
 
 
 }
@@ -158,32 +116,22 @@
 
 
     width:
-
-        48px;
-
+    54px;
 
 
     height:
-
-        48px;
-
+    54px;
 
 
     object-fit:
-
-        contain;
-
+    contain;
 
 
     flex-shrink:
-
-        0;
-
+    0;
 
 
 }
-
-
 
 
 
@@ -193,27 +141,19 @@
 
 
     display:
-
-        flex;
-
+    flex;
 
 
     flex-direction:
-
-        column;
-
+    column;
 
 
     justify-content:
-
-        center;
-
+    center;
 
 
     line-height:
-
-        1.2;
-
+    1.2;
 
 
 }
@@ -226,35 +166,24 @@
 
 
     color:
-
-        var(--ctm-text-primary);
-
+    var(--ctm-text-primary);
 
 
     font-family:
-
-        "Inter",
-
-        sans-serif;
-
+    "Inter",
+    sans-serif;
 
 
     font-size:
-
-        20px;
-
+    20px;
 
 
     font-weight:
-
-        700;
-
+    700;
 
 
     letter-spacing:
-
-        0.08em;
-
+    0.10em;
 
 
 }
@@ -267,27 +196,23 @@
 
 
     color:
-
-        var(--ctm-teal-soft);
-
+    var(--ctm-teal-soft);
 
 
     font-size:
-
-        12px;
-
+    11px;
 
 
     font-weight:
-
-        600;
-
+    600;
 
 
     letter-spacing:
+    0.28em;
 
-        0.22em;
 
+    text-transform:
+    uppercase;
 
 
 }
@@ -300,30 +225,28 @@
 
 
     margin-top:
-
-        3px;
-
+    4px;
 
 
     color:
+    var(--ctm-gold-soft);
 
-        var(--ctm-gold-soft);
 
+    font-family:
+    Georgia,
+    serif;
 
 
     font-size:
-
-        11px;
-
+    11px;
 
 
     font-style:
-
-        italic;
-
+    italic;
 
 
 }
+
 
 
 
@@ -338,21 +261,15 @@
 
 
     display:
-
-        flex;
-
+    flex;
 
 
     align-items:
-
-        center;
-
+    center;
 
 
     gap:
-
-        16px;
-
+    18px;
 
 
 }
@@ -365,27 +282,19 @@
 
 
     color:
-
-        var(--ctm-text-secondary);
-
+    var(--ctm-text-secondary);
 
 
     font-size:
-
-        13px;
-
+    12px;
 
 
     letter-spacing:
-
-        0.12em;
-
+    0.20em;
 
 
     text-transform:
-
-        uppercase;
-
+    uppercase;
 
 
 }
@@ -397,62 +306,72 @@
 .ctm-journey-step {
 
 
+    min-width:
+    74px;
+
+
     padding:
-
-        8px 18px;
-
+    8px 16px;
 
 
     border-radius:
-
-        999px;
-
+    999px;
 
 
     border:
-
-        1px solid var(--ctm-border);
-
+    1px solid var(--ctm-border);
 
 
     background:
-
-        rgba(
-
-            255,
-
-            255,
-
-            255,
-
-            0.04
-
-        );
-
+    rgba(
+        255,
+        255,
+        255,
+        0.04
+    );
 
 
     color:
-
-        var(--ctm-gold-soft);
-
+    var(--ctm-gold-soft);
 
 
     font-size:
-
-        15px;
-
+    15px;
 
 
     font-weight:
+    700;
 
-        700;
 
+    text-align:
+    center;
 
 
 }
 
+
+
+
+
+.ctm-step-divider {
+
+
+    opacity:
+    0.6;
+
+
+    margin:
+    0 4px;
+
+
+}
+
+
+
+
+
 /* ==========================================================================
-   HEADER ACCENT LINE
+   HEADER GOLD SIGNATURE LINE
    ========================================================================== */
 
 
@@ -460,61 +379,85 @@
 
 
     content:
-
-        "";
-
+    "";
 
 
     position:
-
-        absolute;
-
+    absolute;
 
 
     bottom:
-
-        0;
-
+    0;
 
 
     left:
-
-        50%;
-
+    50%;
 
 
     transform:
-
-        translateX(-50%);
-
+    translateX(-50%);
 
 
     width:
-
-        140px;
-
+    160px;
 
 
     height:
-
-        2px;
-
+    2px;
 
 
     background:
+    linear-gradient(
+        90deg,
+        transparent,
+        var(--ctm-gold),
+        transparent
+    );
 
-        linear-gradient(
 
-            90deg,
+}
 
-            transparent,
 
-            var(--ctm-gold),
 
-            transparent
 
-        );
 
+
+/* ==========================================================================
+   TABLET
+   ========================================================================== */
+
+
+@media (max-width:1024px){
+
+
+.ctm-header-container {
+
+
+    padding:
+    12px 24px;
+
+
+}
+
+
+.ctm-brand-tagline {
+
+
+    display:
+    none;
+
+
+}
+
+
+.ctm-journey-label {
+
+
+    display:
+    none;
+
+
+}
 
 
 }
@@ -526,202 +469,82 @@
 
 
 /* ==========================================================================
-   TABLET RESPONSIVE
+   MOBILE
    ========================================================================== */
 
 
-@media (max-width: 1024px) {
+@media (max-width:767px){
 
 
-    .ctm-header-container {
+.ctm-header-container {
 
 
-        padding:
-
-            14px 24px;
-
-
-
-    }
-
-
-
-
-
-    .ctm-brand-name {
-
-
-        font-size:
-
-            18px;
-
-
-
-    }
-
-
-
-
-
-    .ctm-brand-tagline {
-
-
-        display:
-
-            none;
-
-
-
-    }
-
-
-
-
-
-    .ctm-journey-label {
-
-
-        display:
-
-            none;
-
-
-
-    }
-
+    padding:
+    10px 18px;
 
 
 }
 
 
+.ctm-header-logo {
 
 
+    width:
+    44px;
 
 
-
-/* ==========================================================================
-   MOBILE RESPONSIVE
-   ========================================================================== */
-
-
-@media (max-width: 768px) {
-
-
-    .ctm-header-container {
-
-
-        padding:
-
-            12px 18px;
-
-
-
-    }
-
-
-
-
-
-    .ctm-header-logo {
-
-
-        width:
-
-            40px;
-
-
-
-        height:
-
-            40px;
-
-
-
-    }
-
-
-
-
-
-    .ctm-brand {
-
-
-        gap:
-
-            10px;
-
-
-
-    }
-
-
-
-
-
-    .ctm-brand-name {
-
-
-        font-size:
-
-            16px;
-
-
-
-        letter-spacing:
-
-            0.05em;
-
-
-
-    }
-
-
-
-
-
-    .ctm-brand-subtitle {
-
-
-        font-size:
-
-            10px;
-
-
-
-        letter-spacing:
-
-            0.16em;
-
-
-
-    }
-
-
-
-
-
-    .ctm-journey-step {
-
-
-        padding:
-
-            7px 12px;
-
-
-
-        font-size:
-
-            13px;
-
-
-
-    }
-
+    height:
+    44px;
 
 
 }
 
 
+.ctm-brand {
+
+
+    gap:
+    10px;
+
+
+}
+
+
+.ctm-brand-name {
+
+
+    font-size:
+    16px;
+
+
+}
+
+
+.ctm-brand-subtitle {
+
+
+    font-size:
+    9px;
+
+
+}
+
+
+.ctm-journey-step {
+
+
+    padding:
+    7px 12px;
+
+
+    font-size:
+    13px;
+
+
+}
+
+
+}
 
 
 
@@ -732,96 +555,58 @@
    ========================================================================== */
 
 
-@media (max-width: 480px) {
+@media (max-width:480px){
 
 
-    .ctm-header-container {
+.ctm-header-logo {
 
 
-        padding:
-
-            10px 14px;
-
+    width:
+    38px;
 
 
-    }
-
-
-
-
-
-    .ctm-header-logo {
-
-
-        width:
-
-            34px;
-
-
-
-        height:
-
-            34px;
-
-
-
-    }
-
-
-
-
-
-    .ctm-brand-name {
-
-
-        font-size:
-
-            14px;
-
-
-
-    }
-
-
-
-
-
-    .ctm-brand-subtitle {
-
-
-        font-size:
-
-            9px;
-
-
-
-    }
-
-
-
-
-
-    .ctm-journey-step {
-
-
-        padding:
-
-            6px 10px;
-
-
-
-        font-size:
-
-            12px;
-
-
-
-    }
-
+    height:
+    38px;
 
 
 }
 
+
+.ctm-brand-name {
+
+
+    font-size:
+    14px;
+
+
+}
+
+
+.ctm-brand-subtitle {
+
+
+    display:
+    none;
+
+
+}
+
+
+.ctm-journey-step {
+
+
+    min-width:
+    60px;
+
+
+    padding:
+    6px 10px;
+
+
+}
+
+
+}
 
 
 
@@ -837,54 +622,14 @@
 
 
     outline:
-
-        3px solid var(--ctm-gold);
-
+    3px solid var(--ctm-gold);
 
 
     outline-offset:
-
-        4px;
-
+    4px;
 
 
 }
-
-
-
-
-
-
-
-/* ==========================================================================
-   REDUCED MOTION
-   ========================================================================== */
-
-
-@media (prefers-reduced-motion: reduce) {
-
-
-    .ctm-header * {
-
-
-        transition:
-
-            none !important;
-
-
-
-        animation:
-
-            none !important;
-
-
-
-    }
-
-
-
-}
-
 
 
 
@@ -895,18 +640,13 @@
    END OF FILE
 
    File:
-
    css/header.css
 
-
    Version:
-
-   CTM PATH™ Premium Header Styling v3.1
-
+   CTM PATH™ Premium Header Styling v4.0
 
    Status:
-
    COMPLETE 🔒
 
-
    ========================================================================== */
+
