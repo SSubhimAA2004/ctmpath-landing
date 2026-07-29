@@ -3,27 +3,37 @@
    CTM PATH™ Guided Journey™
 
    File        : app.js
-   Version     : 2.3
+   Version     : 2.1
 
-   Status      : REAL 18 PAGE ROUTER
+   Status      : NAVIGATION INITIALIZATION FIX
+
+
+   Purpose:
+
+   Core application bootstrap controller.
 
 
    Responsibilities:
 
-   ✓ Application bootstrap
-   ✓ Shared component loading
-   ✓ Journey page loading
-   ✓ Navigation integration
+   ✓ Initialize application
+   ✓ Load shared components
+   ✓ Load first journey page
+   ✓ Start navigation after DOM injection
+   ✓ Prepare frontend environment
 
 
    Does NOT:
 
-   ✗ Assessment calculations
-   ✗ Scoring
-   ✗ Backend processing
+   ✗ Handle assessment logic
+   ✗ Handle scoring
+   ✗ Handle backend operations
 
 
    ========================================================================== */
+
+
+
+
 
 
 
@@ -32,11 +42,17 @@ const CTMApp = (() => {
 
 
 
+
     const CONFIG = {
 
 
 
-        initialPage: 1,
+        initialPage:
+
+        "welcome",
+
+
+
 
 
 
@@ -50,15 +66,23 @@ const CTMApp = (() => {
 
 
 
-            navigation:
-
-            "components/navigation.html",
 
 
 
             footer:
 
-            "components/footer.html"
+            "components/footer.html",
+
+
+
+
+
+
+            navigation:
+
+            "components/navigation.html"
+
+
 
 
 
@@ -72,7 +96,14 @@ const CTMApp = (() => {
 
 
 
+
+
+
+
     let started = false;
+
+
+
 
 
 
@@ -88,11 +119,19 @@ const CTMApp = (() => {
 
 
 
+
+
         if(started){
+
 
             return;
 
+
         }
+
+
+
+
 
 
 
@@ -102,19 +141,66 @@ const CTMApp = (() => {
 
 
 
+
+
+
+        showLoader();
+
+
+
+
+
+
+
         await loadGlobalComponents();
 
 
 
-        initializeNavigation();
 
 
 
-        bindPageRouter();
+
+
+        await loadInitialPage();
 
 
 
-        await loadPage(1);
+
+
+
+
+
+        /*
+            IMPORTANT
+
+            Navigation starts only after:
+
+            1. navigation.html exists
+            2. welcome.html exists
+
+
+        */
+
+
+
+
+
+
+        if(window.CTMNavigation){
+
+
+
+            CTMNavigation.init();
+
+
+
+        }
+
+
+
+
+
+
 
 
 
@@ -122,7 +208,14 @@ const CTMApp = (() => {
 
 
 
+
+
     }
+
+
+
+
+
 
 
 
@@ -141,118 +234,71 @@ const CTMApp = (() => {
 
 
 
+
+
+
         await loadComponent(
+
+
 
             "app-header",
 
+
+
             CONFIG.components.header
+
+
 
         );
 
 
 
 
+
+
+
+
         await loadComponent(
+
+
 
             "app-navigation",
 
+
+
             CONFIG.components.navigation
 
+
+
         );
+
+
+
+
 
 
 
 
         await loadComponent(
 
+
+
             "app-footer",
+
+
 
             CONFIG.components.footer
 
-        );
 
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       START NAVIGATION ENGINE
-       ========================================================== */
-
-
-    function initializeNavigation(){
-
-
-
-        if(
-
-            window.CTMNavigation
-
-            &&
-
-            typeof window.CTMNavigation.init === "function"
-
-        ){
-
-
-
-            window.CTMNavigation.init();
-
-
-
-        }
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       ROUTER LISTENER
-       ========================================================== */
-
-
-    function bindPageRouter(){
-
-
-
-        document.addEventListener(
-
-            "ctm-page-change",
-
-            (event)=>{
-
-
-
-                loadPage(
-
-                    event.detail.page
-
-                );
-
-
-
-            }
 
         );
 
 
 
+
+
+
+
     }
 
 
@@ -263,8 +309,13 @@ const CTMApp = (() => {
 
 
 
+
+
+
+
+
     /* ==========================================================
-       LOAD COMPONENT
+       COMPONENT LOADER
        ========================================================== */
 
 
@@ -278,6 +329,9 @@ const CTMApp = (() => {
 
 
 
+
+
+
         const container =
 
         document.getElementById(
@@ -288,9 +342,27 @@ const CTMApp = (() => {
 
 
 
+
+
+
+
         if(!container){
 
+
+
+            console.warn(
+
+                "Missing container:",
+
+                elementId
+
+            );
+
+
+
             return;
+
+
 
         }
 
@@ -298,13 +370,43 @@ const CTMApp = (() => {
 
 
 
-        const response =
-
-        await fetch(filePath);
 
 
 
-        if(response.ok){
+        try {
+
+
+
+
+
+            const response =
+
+            await fetch(filePath);
+
+
+
+
+
+
+
+            if(!response.ok){
+
+
+
+                throw new Error(
+
+                    `Failed loading ${filePath}`
+
+                );
+
+
+
+            }
+
+
+
+
+
 
 
 
@@ -314,7 +416,35 @@ const CTMApp = (() => {
 
 
 
+
+
+
+
         }
+
+        catch(error){
+
+
+
+
+
+            console.error(
+
+                "Component loading error:",
+
+                error
+
+            );
+
+
+
+
+
+        }
+
+
+
+
 
 
 
@@ -328,12 +458,51 @@ const CTMApp = (() => {
 
 
 
+
+
+
+
+
     /* ==========================================================
-       LOAD JOURNEY PAGE
+       PAGE LOADER
        ========================================================== */
 
 
-    async function loadPage(pageNumber){
+    async function loadInitialPage(){
+
+
+
+
+
+
+        await loadPage(
+
+            CONFIG.initialPage
+
+        );
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    async function loadPage(pageName){
+
+
+
 
 
 
@@ -349,20 +518,17 @@ const CTMApp = (() => {
 
 
 
+
+
         if(!content){
+
+
 
             return;
 
+
+
         }
-
-
-
-
-
-
-        const pageFile =
-
-        getPageFile(pageNumber);
 
 
 
@@ -375,13 +541,17 @@ const CTMApp = (() => {
 
 
 
+
+
+
             const response =
 
             await fetch(
 
-                `pages/${pageFile}.html`
+                `pages/${pageName}.html`
 
             );
+
 
 
 
@@ -395,13 +565,15 @@ const CTMApp = (() => {
 
                 throw new Error(
 
-                    `${pageFile}.html not found`
+                    `Page not found: ${pageName}`
 
                 );
 
 
 
             }
+
+
 
 
 
@@ -418,15 +590,42 @@ const CTMApp = (() => {
 
 
 
-            window.scrollTo(
 
-                {
 
-                    top:0,
+            /*
+                Notify page system
 
-                    behavior:"smooth"
+            */
 
-                }
+
+
+
+
+
+            document.dispatchEvent(
+
+
+
+                new CustomEvent(
+
+                    "ctm-page-loaded",
+
+                    {
+
+                        detail:{
+
+
+                            page: pageName
+
+
+                        }
+
+
+                    }
+
+                )
+
+
 
             );
 
@@ -436,31 +635,19 @@ const CTMApp = (() => {
 
 
 
-            if(window.CTMNavigation){
-
-
-
-                window.CTMNavigation.updateNavigation();
-
-
-
-            }
-
-
-
-
 
         }
-
-
 
         catch(error){
 
 
 
+
+
+
             console.error(
 
-                "Page loading error:",
+                "Page loading failed:",
 
                 error
 
@@ -468,149 +655,16 @@ const CTMApp = (() => {
 
 
 
+
+
+
+
         }
 
 
 
-    }
 
 
-
-
-
-
-
-
-
-    /* ==========================================================
-       MASTER PAGE MAP
-       ========================================================== */
-
-
-    function getPageFile(page){
-
-
-
-        const pages = {
-
-
-
-            1:
-
-            "welcome",
-
-
-
-            2:
-
-            "registration",
-
-
-
-
-            3:
-
-            "assessment-01",
-
-
-
-            4:
-
-            "assessment-02",
-
-
-
-            5:
-
-            "assessment-03",
-
-
-
-            6:
-
-            "assessment-04",
-
-
-
-            7:
-
-            "assessment-05",
-
-
-
-            8:
-
-            "assessment-06",
-
-
-
-            9:
-
-            "assessment-07",
-
-
-
-            10:
-
-            "assessment-08",
-
-
-
-            11:
-
-            "assessment-09",
-
-
-
-            12:
-
-            "assessment-10",
-
-
-
-            13:
-
-            "assessment-11",
-
-
-
-            14:
-
-            "assessment-12",
-
-
-
-            15:
-
-            "kalachakra",
-
-
-
-            16:
-
-            "diagnosis",
-
-
-
-            17:
-
-            "prescription",
-
-
-
-            18:
-
-            "cta"
-
-
-
-        };
-
-
-
-
-
-        return pages[page];
 
 
 
@@ -624,12 +678,19 @@ const CTMApp = (() => {
 
 
 
+
+
+
+
     /* ==========================================================
-       LOADER
+       LOADER CONTROL
        ========================================================== */
 
 
-    function hideLoader(){
+    function showLoader(){
+
+
+
 
 
 
@@ -640,6 +701,58 @@ const CTMApp = (() => {
             "global-loader"
 
         );
+
+
+
+
+
+
+
+        if(loader){
+
+
+
+            loader.classList.remove(
+
+                "hidden"
+
+            );
+
+
+
+        }
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+    function hideLoader(){
+
+
+
+
+
+
+        const loader =
+
+        document.getElementById(
+
+            "global-loader"
+
+        );
+
+
 
 
 
@@ -661,6 +774,10 @@ const CTMApp = (() => {
 
 
 
+
+
+
+
     }
 
 
@@ -671,14 +788,29 @@ const CTMApp = (() => {
 
 
 
+
+
+
+
+
+    /* ==========================================================
+       PUBLIC API
+       ========================================================== */
+
+
     return {
+
+
 
 
 
         init,
 
 
+
         loadPage
+
+
 
 
 
@@ -686,7 +818,15 @@ const CTMApp = (() => {
 
 
 
+
+
+
+
 })();
+
+
+
+
 
 
 
@@ -703,14 +843,26 @@ const CTMApp = (() => {
 
 document.addEventListener(
 
+
+
     "DOMContentLoaded",
 
+
+
     ()=>{
+
+
+
 
 
         CTMApp.init();
 
 
+
+
+
     }
+
+
 
 );
