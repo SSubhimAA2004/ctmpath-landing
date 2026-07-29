@@ -3,25 +3,26 @@
    CTM PATH™ Guided Journey™
 
    File        : foundation.css
-   Version     : 2.1
+   Version     : 2.0
 
    Purpose:
 
-   Global structural foundation.
+   Global CSS foundation layer.
 
-   Controls:
+   Responsibilities:
 
-   • Browser normalization
-   • Application shell
-   • Layout containers
-   • Screen structure
-   • Spacing primitives
+   ✓ Browser reset
+   ✓ Base typography
+   ✓ Layout foundation
+   ✓ Universal containers
+   ✓ Accessibility basics
 
-   Does NOT control:
+   Does NOT contain:
 
-   • Colours
-   • Brand identity
-   • Page-specific components
+   ✗ Page-specific styling
+   ✗ Assessment styling
+   ✗ Brand colours
+   ✗ Business logic
 
    ========================================================================== */
 
@@ -38,8 +39,11 @@
 *::before,
 *::after {
 
+
     box-sizing:
+
     border-box;
+
 
 }
 
@@ -49,14 +53,21 @@
 
 html {
 
-    width:
-    100%;
 
-    min-height:
-    100%;
+    margin:
+
+    0;
+
+
+    padding:
+
+    0;
+
 
     scroll-behavior:
+
     smooth;
+
 
 }
 
@@ -66,14 +77,26 @@ html {
 
 body {
 
-    width:
-    100%;
-
-    min-height:
-    100vh;
 
     margin:
+
     0;
+
+
+    padding:
+
+    0;
+
+
+    min-height:
+
+    100vh;
+
+
+    overflow-x:
+
+    hidden;
+
 
 }
 
@@ -81,18 +104,18 @@ body {
 
 
 
-
-
 img {
 
+
     max-width:
+
     100%;
 
-    height:
-    auto;
 
     display:
+
     block;
+
 
 }
 
@@ -105,9 +128,12 @@ input,
 textarea,
 select {
 
+
     font:
+
     inherit;
 
+
 }
 
 
@@ -116,40 +142,88 @@ select {
 
 
 
+
 /* ==========================================================================
-   APPLICATION SHELL
+   APPLICATION FOUNDATION
    ========================================================================== */
 
 
-.app-shell {
+#app-shell {
+
 
     width:
+
     100%;
+
 
     min-height:
+
     100vh;
 
+
     display:
+
     flex;
 
+
     flex-direction:
+
     column;
 
+
 }
 
 
 
 
 
-.app-content {
+
+
+
+#app-content {
+
 
     flex:
+
     1;
 
+
     width:
+
     100%;
 
+
 }
+
+
+
+
+
+.app-header,
+.app-footer {
+
+
+    width:
+
+    100%;
+
+
+}
+
+
+
+
+
+main {
+
+
+    display:
+
+    block;
+
+
+}
+
 
 
 
@@ -158,25 +232,19 @@ select {
 
 
 /* ==========================================================================
-   PREMIUM EXPERIENCE CONTAINER
+   CONTAINER SYSTEM
 
-   Updated:
-   1280px → 1440px
-
-   Creates wider cinematic layout.
+   Shared by all 18 pages
 
    ========================================================================== */
 
 
-.container {
+.ctm-container {
 
 
     width:
 
-    min(
-        calc(100% - 120px),
-        1440px
-    );
+    min(1200px, 92%);
 
 
     margin:
@@ -194,126 +262,146 @@ select {
 
 
 /* ==========================================================================
-   CTM SCREEN FOUNDATION
+   TYPOGRAPHY FOUNDATION
+   ========================================================================== */
 
-   Shared by all 18 journey pages.
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+
+    margin:
+
+    0;
+
+
+    padding:
+
+    0;
+
+
+    line-height:
+
+    1.2;
+
+
+}
+
+
+
+
+
+p {
+
+
+    margin:
+
+    0;
+
+
+    line-height:
+
+    1.7;
+
+
+}
+
+
+
+
+
+a {
+
+
+    text-decoration:
+
+    none;
+
+
+}
+
+
+
+
+
+.tamil {
+
+
+    font-family:
+
+    "Noto Sans Tamil",
+    "Latha",
+    sans-serif;
+
+
+}
+
+
+
+
+
+.text-center {
+
+
+    text-align:
+
+    center;
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   VISIBILITY UTILITIES
+   ========================================================================== */
+
+
+.hidden {
+
+
+    display:
+
+    none !important;
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   GLOBAL LOADER FOUNDATION
+
+   Visual styling handled elsewhere.
 
    ========================================================================== */
 
 
-.ctm-screen {
-
-
-    width:
-
-    100%;
-
-
-    min-height:
-
-    100vh;
+.global-loader {
 
 
     position:
 
-    relative;
+    fixed;
 
 
-}
+    inset:
 
-
-
-
-
-.ctm-screen-container {
-
-
-    width:
-
-    min(
-        calc(100% - 120px),
-        1440px
-    );
-
-
-    margin:
-
-    0 auto;
-
-
-    padding:
-
-    120px 0 140px;
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   CONTENT COLUMN SYSTEM
-
-   Controls readable text width.
-
-   ========================================================================== */
-
-
-.ctm-content-column {
-
-
-    max-width:
-
-    1100px;
-
-
-}
-
-
-
-
-
-
-
-.ctm-content-narrow {
-
-
-    max-width:
-
-    850px;
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   FLEX UTILITIES
-   ========================================================================== */
-
-
-.flex {
-
-
-    display:
-
-    flex;
-
-
-}
-
-
-
-
-
-.flex-center {
+    0;
 
 
     display:
@@ -331,50 +419,13 @@ select {
     center;
 
 
-}
+    z-index:
 
-
-
-
-
-.flex-between {
-
-
-    display:
-
-    flex;
-
-
-    align-items:
-
-    center;
-
-
-    justify-content:
-
-    space-between;
+    9999;
 
 
 }
 
-
-
-
-
-.flex-column {
-
-
-    display:
-
-    flex;
-
-
-    flex-direction:
-
-    column;
-
-
-}
 
 
 
@@ -383,102 +434,40 @@ select {
 
 
 /* ==========================================================================
-   GRID FOUNDATION
+   ERROR CONTAINER FOUNDATION
    ========================================================================== */
 
 
-.grid {
+.error-container {
 
 
-    display:
+    position:
 
-    grid;
-
-
-}
+    fixed;
 
 
-
-
-
-.grid-center {
-
-
-    place-items:
-
-    center;
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   SPACING SYSTEM
-   ========================================================================== */
-
-
-.mt-small {
-
-    margin-top:
+    bottom:
 
     24px;
 
-}
+
+    left:
+
+    50%;
 
 
+    transform:
 
-.mt-medium {
-
-    margin-top:
-
-    56px;
-
-}
+    translateX(-50%);
 
 
+    z-index:
 
-.mt-large {
+    10000;
 
-    margin-top:
-
-    120px;
 
 }
 
-
-
-.mb-small {
-
-    margin-bottom:
-
-    24px;
-
-}
-
-
-
-.mb-medium {
-
-    margin-bottom:
-
-    56px;
-
-}
-
-
-
-.mb-large {
-
-    margin-bottom:
-
-    120px;
-
-}
 
 
 
@@ -487,40 +476,39 @@ select {
 
 
 /* ==========================================================================
-   TABLET FOUNDATION
+   FORM FOUNDATION
+
+   Used from Registration onwards
+
    ========================================================================== */
 
 
-@media(max-width:1024px){
-
-
-.container,
-.ctm-screen-container {
+input,
+textarea,
+select {
 
 
     width:
 
-    calc(
-        100% - 64px
-    );
+    100%;
 
 
 }
 
 
 
-.ctm-screen-container {
 
 
-    padding:
+button {
 
-    90px 0 110px;
+
+    cursor:
+
+    pointer;
 
 
 }
 
-
-}
 
 
 
@@ -529,70 +517,28 @@ select {
 
 
 /* ==========================================================================
-   MOBILE FOUNDATION
+   ACCESSIBILITY
+
    ========================================================================== */
 
 
-@media(max-width:767px){
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
 
 
-.container,
-.ctm-screen-container {
+    outline:
+
+    2px solid currentColor;
 
 
-    width:
+    outline-offset:
 
-    calc(
-        100% - 32px
-    );
-
-
-}
-
-
-
-.ctm-screen-container {
-
-
-    padding:
-
-    64px 0 90px;
+    3px;
 
 
 }
 
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   SMALL MOBILE
-   ========================================================================== */
-
-
-@media(max-width:480px){
-
-
-.container,
-.ctm-screen-container {
-
-
-    width:
-
-    calc(
-        100% - 24px
-    );
-
-
-}
-
-
-}
 
 
 
@@ -603,13 +549,8 @@ select {
 /* ==========================================================================
    END OF FILE
 
-   File:
    css/foundation.css
 
-   Version:
-   CTM PATH™ Premium Layout Foundation v2.1
-
-   Status:
-   UPDATED 🔒
+   Version 2.0
 
    ========================================================================== */
