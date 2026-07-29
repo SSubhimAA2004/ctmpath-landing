@@ -3,76 +3,37 @@
    CTM PATH™ Guided Journey™
 
    File        : js/app.js
-   Version     : 2.4
+   Version     : 2.3
 
-   Status      : PAGE 01 LIFECYCLE LOCK
+   Status      : PAGE ROUTER + REGISTRATION ACTIVATION PATCH
 
 
    Responsibilities:
 
-   ✓ Application bootstrap
-   ✓ Component loading
-   ✓ Page loading
-   ✓ Welcome CTA routing
-   ✓ Journey lifecycle control
+   ✓ Page routing
+   ✓ Dynamic page loading
+   ✓ Script initialization
+   ✓ Journey state management
 
 
    Does NOT:
 
-   ✗ Assessment logic
-   ✗ Scoring
-   ✗ Backend processing
+   ✗ API processing
+   ✗ Form validation
+   ✗ Database operations
 
 
    ========================================================================== */
 
 
-const CTMApp = (() => {
+const App = (() => {
 
 
 
-    const CONFIG = {
+    const TOTAL_PAGES = 18;
 
 
-        currentPage:1,
-
-
-        totalPages:18,
-
-
-
-        components:{
-
-
-            header:
-
-            "components/header.html",
-
-
-
-            footer:
-
-            "components/footer.html",
-
-
-
-            navigation:
-
-            "components/navigation.html"
-
-
-
-        }
-
-
-
-    };
-
-
-
-
-
-    let initialized = false;
+    let currentPage = 1;
 
 
 
@@ -83,15 +44,101 @@ const CTMApp = (() => {
 
 
     /* ==========================================================
-       START APPLICATION
+       INITIALIZATION
        ========================================================== */
 
 
-    async function init(){
+    function init(){
 
 
 
-        if(initialized){
+        bindPageChange();
+
+
+
+        loadPage(
+
+            currentPage
+
+        );
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       PAGE CHANGE EVENT
+       ========================================================== */
+
+
+    function bindPageChange(){
+
+
+
+        document.addEventListener(
+
+
+
+            "ctm-page-change",
+
+
+
+            event => {
+
+
+
+                const page =
+
+                event.detail.page;
+
+
+
+                navigateTo(page);
+
+
+
+            }
+
+
+
+        );
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       NAVIGATION
+       ========================================================== */
+
+
+    function navigateTo(page){
+
+
+
+        if(
+
+            page < 1 ||
+
+            page > TOTAL_PAGES
+
+        ){
 
             return;
 
@@ -99,31 +146,17 @@ const CTMApp = (() => {
 
 
 
-        initialized = true;
+
+
+        currentPage = page;
 
 
 
+        loadPage(
 
-
-        await loadGlobalComponents();
-
-
-
-        await loadPage(
-
-            "welcome"
+            page
 
         );
-
-
-
-
-
-        hideGlobalNavigation();
-
-
-
-        bindWelcomeStart();
 
 
 
@@ -138,65 +171,11 @@ const CTMApp = (() => {
 
 
     /* ==========================================================
-       LOAD GLOBAL COMPONENTS
+       PAGE LOADER
        ========================================================== */
 
 
-    async function loadGlobalComponents(){
-
-
-
-        await loadComponent(
-
-            "app-header",
-
-            CONFIG.components.header
-
-        );
-
-
-
-
-
-        await loadComponent(
-
-            "app-footer",
-
-            CONFIG.components.footer
-
-        );
-
-
-
-
-
-        await loadComponent(
-
-            "app-navigation",
-
-            CONFIG.components.navigation
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    async function loadComponent(
-
-        id,
-
-        file
-
-    ){
+    async function loadPage(page){
 
 
 
@@ -204,17 +183,38 @@ const CTMApp = (() => {
 
         document.getElementById(
 
-            id
+            "journey-container"
 
         );
 
 
 
+
+
         if(!container){
+
+            console.error(
+
+                "Journey container missing"
+
+            );
+
 
             return;
 
         }
+
+
+
+
+
+
+
+        const pageName =
+
+        getPageName(page);
+
+
 
 
 
@@ -223,25 +223,76 @@ const CTMApp = (() => {
         try{
 
 
+
             const response =
 
-            await fetch(file);
+            await fetch(
+
+                `pages/${pageName}.html`
+
+            );
 
 
 
 
 
-            if(response.ok){
+
+
+            if(!response.ok){
 
 
 
-                container.innerHTML =
+                throw new Error(
 
-                await response.text();
+                    "Page not found"
+
+                );
 
 
 
             }
+
+
+
+
+
+
+
+            const html =
+
+            await response.text();
+
+
+
+
+
+
+
+            container.innerHTML = html;
+
+
+
+
+
+
+
+            updatePageState(
+
+                page
+
+            );
+
+
+
+
+
+
+
+            initializePageScripts(
+
+                pageName
+
+            );
 
 
 
@@ -255,7 +306,7 @@ const CTMApp = (() => {
 
             console.error(
 
-                "Component load error:",
+                "Page loading error:",
 
                 error
 
@@ -278,63 +329,135 @@ const CTMApp = (() => {
 
 
     /* ==========================================================
-       PAGE LOADER
+       PAGE MAP
        ========================================================== */
 
 
-    async function loadPage(
-
-        pageName
-
-    ){
+    function getPageName(page){
 
 
 
-        const content =
-
-        document.getElementById(
-
-            "app-content"
-
-        );
+        const pages = {
 
 
 
+            1:
 
-
-        if(!content){
-
-            return;
-
-        }
+            "welcome",
 
 
 
+            2:
 
-
-        const response =
-
-        await fetch(
-
-            `pages/${pageName}.html`
-
-        );
+            "registration",
 
 
 
+            3:
 
-
-        if(response.ok){
-
-
-
-            content.innerHTML =
-
-            await response.text();
+            "assessment-01",
 
 
 
-        }
+            4:
+
+            "assessment-02",
+
+
+
+            5:
+
+            "assessment-03",
+
+
+
+            6:
+
+            "assessment-04",
+
+
+
+            7:
+
+            "assessment-05",
+
+
+
+            8:
+
+            "assessment-06",
+
+
+
+            9:
+
+            "assessment-07",
+
+
+
+            10:
+
+            "assessment-08",
+
+
+
+            11:
+
+            "assessment-09",
+
+
+
+            12:
+
+            "assessment-10",
+
+
+
+            13:
+
+            "assessment-11",
+
+
+
+            14:
+
+            "assessment-12",
+
+
+
+            15:
+
+            "kalachakra",
+
+
+
+            16:
+
+            "diagnosis",
+
+
+
+            17:
+
+            "prescription",
+
+
+
+            18:
+
+            "completion"
+
+
+
+        };
+
+
+
+
+
+
+
+        return pages[page];
 
 
 
@@ -349,46 +472,69 @@ const CTMApp = (() => {
 
 
     /* ==========================================================
-       WELCOME CTA
+       PAGE STATE UPDATE
        ========================================================== */
 
 
-    function bindWelcomeStart(){
+    function updatePageState(page){
 
 
 
-        const button =
+        document.dispatchEvent(
 
-        document.getElementById(
 
-            "start-journey"
+
+            new CustomEvent(
+
+                "page-loaded",
+
+                {
+
+                    detail:{
+
+
+                        page:page
+
+
+                    }
+
+                }
+
+            )
+
+
 
         );
 
 
 
+        if(
+
+            window.Navigation
+
+        ){
 
 
-        if(!button){
 
-            return;
+            Navigation.setPage(
+
+                page
+
+            );
+
+
 
         }
 
 
 
+        window.scrollTo(
 
+            {
 
-        button.addEventListener(
+                top:0,
 
-            "click",
-
-            ()=>{
-
-
-                startJourney();
-
-
+                behavior:"smooth"
 
             }
 
@@ -407,178 +553,57 @@ const CTMApp = (() => {
 
 
     /* ==========================================================
-       START JOURNEY
+       SCRIPT INITIALIZER
        ========================================================== */
 
 
-    async function startJourney(){
+    function initializePageScripts(
 
+        pageName
 
+    ){
 
-        CONFIG.currentPage = 2;
 
 
+        switch(pageName){
 
 
 
-        await loadPage(
+            case "welcome":
 
-            "registration"
 
-        );
 
+                if(window.Welcome){
 
 
+                    Welcome.init();
 
 
-        await enableNavigation();
+                }
 
 
+            break;
 
-        updateCounter();
 
 
 
-    }
 
 
 
+            case "registration":
 
 
 
+                if(window.Registration){
 
 
+                    Registration.init();
 
-    /* ==========================================================
-       NAVIGATION CONTROL
-       ========================================================== */
 
+                }
 
-    function hideGlobalNavigation(){
 
-
-
-        const navigation =
-
-        document.getElementById(
-
-            "app-navigation"
-
-        );
-
-
-
-
-
-        if(navigation){
-
-
-
-            navigation.style.display =
-
-            "none";
-
-
-
-        }
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    async function enableNavigation(){
-
-
-
-        const navigation =
-
-        document.getElementById(
-
-            "app-navigation"
-
-        );
-
-
-
-
-
-        if(navigation){
-
-
-
-            navigation.style.display =
-
-            "flex";
-
-
-
-        }
-
-
-
-
-
-        if(window.Navigation){
-
-
-
-            Navigation.setPage(
-
-                2
-
-            );
-
-
-
-            Navigation.updateNavigation();
-
-
-
-        }
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    function updateCounter(){
-
-
-
-        const counter =
-
-        document.getElementById(
-
-            "journey-counter"
-
-        );
-
-
-
-
-
-        if(counter){
-
-
-
-            counter.textContent =
-
-            "02 / 18";
+            break;
 
 
 
@@ -599,13 +624,14 @@ const CTMApp = (() => {
     return {
 
 
+
         init,
 
 
-        loadPage,
+        navigateTo,
 
 
-        startJourney
+        getCurrentPage:()=>currentPage
 
 
 
@@ -625,13 +651,15 @@ const CTMApp = (() => {
 
 document.addEventListener(
 
-"DOMContentLoaded",
+    "DOMContentLoaded",
 
-()=>{
-
-
-    CTMApp.init();
+    ()=>{
 
 
+        App.init();
 
-});
+
+
+    }
+
+);
