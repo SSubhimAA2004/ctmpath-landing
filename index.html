@@ -3,24 +3,23 @@
    CTM PATH™ Guided Journey™
 
    File        : index.html
-   Version     : 1.4
+   Version     : 1.5
 
    Status      : PAGE 01 REFINEMENT UPDATE
 
    Purpose:
 
-   Application entry point for CTM PATH™ Guided Journey™.
+   Application entry point.
 
    Responsibilities:
 
-   • Load global styles.
-   • Provide application shell.
-   • Mount components.
-   • Load frontend controllers.
+   • Load frontend foundation.
+   • Mount application containers.
+   • Load controllers.
 
    IMPORTANT:
 
-   No business logic exists in this file.
+   No business logic exists here.
 
    ========================================================================== -->
 
@@ -40,12 +39,14 @@
       content="width=device-width, initial-scale=1.0">
 
 
+
 <meta name="description"
       content="CTM PATH™ Guided Journey™ — A transformational life journey experience.">
 
 
 <meta name="application-name"
       content="CTM PATH™ Guided Journey™">
+
 
 
 <title>
@@ -58,15 +59,17 @@ CTM PATH™ Guided Journey™
 
 
 
-<!-- ==========================================================================
-     CSS FOUNDATION LOAD ORDER
 
-     1. Global Structure
-     2. Brand Universe
-     3. Header Component
-     4. Welcome Experience
-     5. Footer Component
-     6. Responsive Behaviour
+
+<!-- ==========================================================================
+     CSS LOAD ORDER
+
+     Foundation
+     Theme
+     Header
+     Welcome
+     Footer
+     Responsive
 
      ========================================================================== -->
 
@@ -116,9 +119,6 @@ CTM PATH™ Guided Journey™
 
 
 
-<!-- ==========================================================================
-     APPLICATION SHELL
-     ========================================================================== -->
 
 
 <div id="app-shell"
@@ -132,15 +132,23 @@ CTM PATH™ Guided Journey™
 
 <!-- ==========================================================================
      GLOBAL LOADER
+
+     Hidden by default.
+
+     Controlled by:
+     js/app.js
+
      ========================================================================== -->
 
 
 <div id="global-loader"
-     class="global-loader hidden">
+     class="global-loader hidden"
+     aria-hidden="true">
 
 
 
 <div class="loader-container">
+
 
 
 <div class="loader-spinner"
@@ -150,15 +158,10 @@ CTM PATH™ Guided Journey™
 
 
 
-<p class="loader-message">
-
-Preparing your journey...
-
-</p>
-
 
 
 </div>
+
 
 
 </div>
@@ -190,9 +193,9 @@ Preparing your journey...
 
 
 <!-- ==========================================================================
-     MAIN CONTENT AREA
+     MAIN CONTENT
 
-     All 18 journey pages render here.
+     All journey pages render here.
 
      ========================================================================== -->
 
@@ -212,8 +215,6 @@ Preparing your journey...
 
 <!-- ==========================================================================
      NAVIGATION COMPONENT
-
-     components/navigation.html
 
      ========================================================================== -->
 
@@ -249,8 +250,8 @@ Preparing your journey...
 
 
 
-</div>
 
+</div>
 
 
 
@@ -260,6 +261,7 @@ Preparing your journey...
 
 <!-- ==========================================================================
      ERROR CONTAINER
+
      ========================================================================== -->
 
 
@@ -278,22 +280,7 @@ Preparing your journey...
 <!-- ==========================================================================
      JAVASCRIPT LOAD ORDER
 
-     Foundation:
-
-     app.js
-     api.js
-     storage.js
-     navigation.js
-     assessmentEngine.js
-     scoring.js
-     report.js
-
-     Page:
-
-     welcome.js
-
      ========================================================================== -->
-
 
 
 <script src="js/app.js"></script>
@@ -318,7 +305,11 @@ Preparing your journey...
 
 
 
+<!-- Page 01 Controller -->
+
 <script src="js/welcome.js"></script>
+
+
 
 
 
