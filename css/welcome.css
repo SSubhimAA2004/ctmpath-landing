@@ -3,7 +3,7 @@
    CTM PATH™ Guided Journey™
 
    File        : welcome.css
-   Version     : 2.0
+   Version     : 2.1
 
    Page        : 01 - Welcome™
 
@@ -19,6 +19,7 @@
    • Final invitation
 
    ========================================================================== */
+
 
 
 
@@ -42,8 +43,10 @@
 
 
 
+
+
 /* ==========================================================================
-   HERO INTRO
+   HERO EXPERIENCE
    ========================================================================== */
 
 
@@ -52,15 +55,16 @@
 
     max-width:
 
-    900px;
+    1100px;
 
 
     padding-top:
 
-    40px;
+    60px;
 
 
 }
+
 
 
 
@@ -74,23 +78,21 @@
     var(--font-tamil);
 
 
+
     font-size:
 
     clamp(
-        38px,
-        5vw,
-        64px
+        48px,
+        6vw,
+        76px
     );
+
 
 
     line-height:
 
-    1.5;
+    1.45;
 
-
-    color:
-
-    var(--ctm-text-primary);
 
 
     font-weight:
@@ -98,7 +100,16 @@
     700;
 
 
+
+    color:
+
+    var(--ctm-text-primary);
+
+
+
 }
+
+
 
 
 
@@ -109,17 +120,30 @@
 
     margin-top:
 
-    20px;
+    24px;
+
+
+
+    font-family:
+
+    var(--font-primary);
+
 
 
     font-size:
 
-    26px;
+    clamp(
+        28px,
+        3vw,
+        40px
+    );
+
 
 
     letter-spacing:
 
-    0.04em;
+    0.06em;
+
 
 
     color:
@@ -127,12 +151,16 @@
     var(--ctm-gold);
 
 
+
     font-weight:
 
-    600;
+    700;
+
 
 
 }
+
+
 
 
 
@@ -143,12 +171,26 @@
 
     margin-top:
 
-    40px;
+    48px;
+
+
+
+    max-width:
+
+    900px;
+
+
+
+    font-family:
+
+    var(--font-tamil);
+
 
 
     font-size:
 
-    22px;
+    24px;
+
 
 
     line-height:
@@ -156,12 +198,16 @@
     2;
 
 
+
     color:
 
     var(--ctm-text-secondary);
 
 
+
 }
+
+
 
 
 
@@ -172,22 +218,32 @@
 
     margin-top:
 
-    24px;
+    28px;
+
+
+
+    max-width:
+
+    850px;
+
 
 
     font-size:
 
-    18px;
+    20px;
+
 
 
     line-height:
 
-    1.8;
+    1.9;
+
 
 
     color:
 
     var(--ctm-text-muted);
+
 
 
 }
@@ -200,7 +256,7 @@
 
 
 /* ==========================================================================
-   NEW LENS SECTION
+   LIFE THROUGH NEW LENS
    ========================================================================== */
 
 
@@ -209,10 +265,30 @@
 
     max-width:
 
-    1000px;
+    1100px;
+
 
 
 }
+
+
+
+
+
+
+
+.welcome-lens .ctm-screen-title {
+
+
+    margin-bottom:
+
+    20px;
+
+
+
+}
+
+
 
 
 
@@ -223,32 +299,20 @@
 
     margin-top:
 
-    48px;
+    64px;
+
 
 
     padding:
 
-    28px;
+    36px 48px;
+
 
 
     border-left:
 
-    2px solid var(--ctm-gold);
+    3px solid var(--ctm-gold);
 
-
-    color:
-
-    var(--ctm-gold-light);
-
-
-    font-size:
-
-    18px;
-
-
-    line-height:
-
-    2;
 
 
     background:
@@ -257,8 +321,33 @@
         255,
         255,
         255,
-        0.03
+        0.04
     );
+
+
+
+    border-radius:
+
+    0 24px 24px 0;
+
+
+
+    color:
+
+    var(--ctm-gold-light);
+
+
+
+    font-size:
+
+    20px;
+
+
+
+    line-height:
+
+    2;
+
 
 
 }
@@ -269,9 +358,27 @@
 
 
 
+
 /* ==========================================================================
-   DISCOVERY SECTION
+   DISCOVERY EXPERIENCE
    ========================================================================== */
+
+
+.welcome-discovery {
+
+
+    width:
+
+    100%;
+
+
+
+}
+
+
+
+
+
 
 
 .discovery-title {
@@ -282,22 +389,32 @@
     center;
 
 
+
     font-family:
 
     var(--font-tamil);
 
 
+
     font-size:
 
-    42px;
+    clamp(
+        36px,
+        4vw,
+        52px
+    );
 
 
-    color:
 
-    var(--ctm-text-primary);
+    line-height:
+
+    1.6;
+
 
 
 }
+
+
 
 
 
@@ -311,19 +428,23 @@
     center;
 
 
+
     margin-top:
 
-    12px;
+    16px;
 
-
-    font-size:
-
-    22px;
 
 
     color:
 
     var(--ctm-gold);
+
+
+
+    font-size:
+
+    26px;
+
 
 
 }
@@ -339,12 +460,14 @@
 
     margin-top:
 
-    60px;
+    80px;
+
 
 
     display:
 
     grid;
+
 
 
     grid-template-columns:
@@ -355,12 +478,16 @@
     );
 
 
+
     gap:
 
-    32px;
+    40px;
+
 
 
 }
+
+
 
 
 
@@ -371,22 +498,34 @@
 
     padding:
 
-    36px;
+    48px;
+
 
 
     min-height:
 
-    320px;
+    380px;
+
+
+
+    border:
+
+    1px solid var(--ctm-border);
+
 
 
     transition:
 
     transform
-    0.3s
-    ease;
+    0.35s ease,
+    border-color
+    0.35s ease;
+
 
 
 }
+
+
 
 
 
@@ -397,10 +536,19 @@
 
     transform:
 
-    translateY(-8px);
+    translateY(-10px);
+
+
+
+    border-color:
+
+    var(--ctm-border-gold);
+
 
 
 }
+
+
 
 
 
@@ -411,12 +559,14 @@
 
     width:
 
-    44px;
+    54px;
+
 
 
     height:
 
-    44px;
+    54px;
+
 
 
     display:
@@ -424,9 +574,11 @@
     flex;
 
 
+
     align-items:
 
     center;
+
 
 
     justify-content:
@@ -434,9 +586,11 @@
     center;
 
 
+
     border-radius:
 
     50%;
+
 
 
     border:
@@ -444,17 +598,34 @@
     1px solid var(--ctm-gold);
 
 
+
     color:
 
-    var(--ctm-gold);
+    var(--ctm-gold-light);
+
+
+
+    font-size:
+
+    18px;
+
+
+
+    font-weight:
+
+    700;
+
 
 
     margin-bottom:
 
-    28px;
+    36px;
+
 
 
 }
+
+
 
 
 
@@ -468,17 +639,22 @@
     var(--font-tamil);
 
 
+
     font-size:
 
-    24px;
+    30px;
+
 
 
     line-height:
 
-    1.7;
+    1.6;
+
 
 
 }
+
+
 
 
 
@@ -489,17 +665,20 @@
 
     margin-top:
 
-    12px;
+    16px;
+
 
 
     color:
 
-    var(--ctm-teal);
+    var(--ctm-teal-soft);
+
 
 
     font-size:
 
-    15px;
+    17px;
+
 
 
     letter-spacing:
@@ -507,7 +686,10 @@
     0.08em;
 
 
+
 }
+
+
 
 
 
@@ -518,17 +700,26 @@
 
     margin-top:
 
-    18px;
+    24px;
+
+
+
+    font-size:
+
+    20px;
+
+
+
+    line-height:
+
+    1.9;
+
 
 
     color:
 
     var(--ctm-text-secondary);
 
-
-    line-height:
-
-    1.8;
 
 
 }
@@ -548,14 +739,16 @@
 .welcome-final {
 
 
+    max-width:
+
+    1000px;
+
+
+
     text-align:
 
     center;
 
-
-    max-width:
-
-    850px;
 
 
     margin-left:
@@ -563,12 +756,16 @@
     auto;
 
 
+
     margin-right:
 
     auto;
 
 
+
 }
+
+
 
 
 
@@ -582,17 +779,26 @@
     var(--font-tamil);
 
 
+
     font-size:
 
-    42px;
+    clamp(
+        34px,
+        4vw,
+        52px
+    );
+
 
 
     line-height:
 
-    1.6;
+    1.7;
+
 
 
 }
+
+
 
 
 
@@ -603,7 +809,8 @@
 
     margin-top:
 
-    20px;
+    24px;
+
 
 
     color:
@@ -611,12 +818,16 @@
     var(--ctm-gold);
 
 
+
     font-size:
 
-    24px;
+    28px;
+
 
 
 }
+
+
 
 
 
@@ -627,12 +838,14 @@
 
     margin-top:
 
-    32px;
+    36px;
+
 
 
     font-size:
 
-    20px;
+    22px;
+
 
 
     line-height:
@@ -640,12 +853,10 @@
     2;
 
 
-    color:
-
-    var(--ctm-text-secondary);
-
 
 }
+
+
 
 
 
@@ -656,15 +867,30 @@
 
     margin-top:
 
-    48px;
+    56px;
+
 
 
     min-width:
 
-    260px;
+    320px;
+
+
+
+    min-height:
+
+    64px;
+
+
+
+    font-size:
+
+    18px;
+
 
 
 }
+
 
 
 
@@ -691,8 +917,20 @@
 }
 
 
+
+.discovery-card {
+
+
+    min-height:
+
+    auto;
+
+
 }
 
+
+
+}
 
 
 
@@ -708,38 +946,11 @@
 @media(max-width:767px){
 
 
-.welcome-theme {
+
+.welcome-hero {
 
 
-    font-size:
-
-    34px;
-
-
-}
-
-
-
-
-
-.welcome-introduction {
-
-
-    font-size:
-
-    18px;
-
-
-}
-
-
-
-
-
-.discovery-title {
-
-
-    font-size:
+    padding-top:
 
     32px;
 
@@ -749,27 +960,121 @@
 
 
 
+.welcome-theme {
+
+
+    font-size:
+
+    42px;
+
+
+}
+
+
+
+
+.welcome-theme-en {
+
+
+    font-size:
+
+    24px;
+
+
+}
+
+
+
+
+.welcome-introduction {
+
+
+    font-size:
+
+    19px;
+
+
+}
+
+
+
+
+.welcome-permission {
+
+
+    padding:
+
+    28px;
+
+
+    font-size:
+
+    17px;
+
+
+}
+
+
+
+.discovery-grid {
+
+
+    margin-top:
+
+    48px;
+
+
+}
+
+
 
 .discovery-card {
 
 
     padding:
 
-    26px;
+    32px;
 
 
 }
 
 
 
-
-
-.welcome-final h2 {
+.discovery-card h4 {
 
 
     font-size:
 
-    30px;
+    24px;
+
+
+}
+
+
+
+.discovery-card p {
+
+
+    font-size:
+
+    17px;
+
+
+}
+
+
+
+.welcome-start-btn {
+
+
+    width:
+
+    100%;
+
+
+    min-width:
+
+    auto;
 
 
 }
@@ -777,6 +1082,7 @@
 
 
 }
+
 
 
 
@@ -791,9 +1097,9 @@
    css/welcome.css
 
    Version:
-   CTM PATH™ Welcome Experience v2.0
+   CTM PATH™ Welcome Premium Experience v2.1
 
    Status:
-   COMPLETE 🔒
+   UPDATED 🔒
 
    ========================================================================== */
