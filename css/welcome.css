@@ -3,22 +3,23 @@
    CTM PATH™ Guided Journey™
 
    File        : welcome.css
-   Version     : 1.0
+   Version     : 2.0
 
    Purpose:
 
-   Page 01 — Welcome™ premium visual system.
+   Premium styling for:
 
-   Controls:
+   Page 01 — Welcome™
 
-   • Hero section
-   • Welcome content
-   • Discovery cards
-   • CTA section
-   • Page rhythm
+   Design Philosophy:
+
+   • Calm
+   • Premium
+   • Transformational
+   • Human
+   • Tamil-first
 
    ========================================================================== */
-
 
 
 /* ==========================================================================
@@ -29,19 +30,46 @@
 .welcome-page {
 
 
+    position:
+
+        relative;
+
+
+
+    min-height:
+
+        100vh;
+
+
+
     background:
+
+        radial-gradient(
+
+            circle at top,
+
+            rgba(
+
+                19,
+
+                168,
+
+                184,
+
+                0.12
+
+            ),
+
+            transparent 40%
+
+        ),
 
         var(--ctm-background);
 
 
 
-    overflow:
-
-        hidden;
-
-
-
 }
+
 
 
 
@@ -63,39 +91,30 @@
 
 /* ==========================================================================
    HERO SECTION
+
+   First emotional impression.
+
    ========================================================================== */
 
 
-.welcome-hero {
+.welcome-content {
 
 
-    min-height:
+    max-width:
 
-        90vh;
-
-
-
-    display:
-
-        flex;
+        900px;
 
 
 
-    flex-direction:
+    margin:
 
-        column;
-
-
-
-    justify-content:
-
-        center;
+        0 auto;
 
 
 
-    align-items:
+    padding:
 
-        center;
+        96px 0 64px;
 
 
 
@@ -105,13 +124,8 @@
 
 
 
-    padding:
-
-        80px 0;
-
-
-
 }
+
 
 
 
@@ -127,13 +141,13 @@
 
     margin-bottom:
 
-        24px;
+        28px;
 
 
 
     color:
 
-        var(--ctm-teal-soft);
+        var(--ctm-gold-soft);
 
 
 
@@ -151,7 +165,7 @@
 
     letter-spacing:
 
-        0.15em;
+        0.18em;
 
 
 
@@ -167,17 +181,22 @@
 
 
 
+.welcome-title {
+
+
+    margin:
+
+        0;
+
+
+
+}
+
+
+
+
+
 .welcome-title.tamil {
-
-
-    font-size:
-
-        clamp(
-            40px,
-            6vw,
-            72px
-        );
-
 
 
     color:
@@ -186,9 +205,29 @@
 
 
 
-    margin-bottom:
+    font-size:
 
-        16px;
+        clamp(
+
+            42px,
+
+            6vw,
+
+            72px
+
+        );
+
+
+
+    font-weight:
+
+        700;
+
+
+
+    line-height:
+
+        1.45;
 
 
 
@@ -201,19 +240,29 @@
 .welcome-title.english {
 
 
-    font-size:
+    margin-top:
 
-        clamp(
-            24px,
-            4vw,
-            42px
-        );
+        18px;
 
 
 
     color:
 
-        var(--ctm-gold);
+        var(--ctm-teal-soft);
+
+
+
+    font-size:
+
+        clamp(
+
+            26px,
+
+            4vw,
+
+            44px
+
+        );
 
 
 
@@ -229,22 +278,7 @@
 
 
 
-.welcome-tagline {
-
-
-    margin-top:
-
-        24px;
-
-
-
-}
-
-
-
-
-
-.welcome-description {
+.welcome-subtitle {
 
 
     max-width:
@@ -259,9 +293,42 @@
 
 
 
+    color:
+
+        var(--ctm-text-primary);
+
+
+
     font-size:
 
-        20px;
+        22px;
+
+
+
+    line-height:
+
+        1.9;
+
+
+
+}
+
+
+
+
+
+.welcome-description {
+
+
+    max-width:
+
+        720px;
+
+
+
+    margin:
+
+        24px auto 0;
 
 
 
@@ -271,15 +338,29 @@
 
 
 
+    font-size:
+
+        18px;
+
+
+
+    line-height:
+
+        2;
+
+
+
 }
 
 /* ==========================================================================
-   WELCOME INTRODUCTION CARD
+   JOURNEY INTRODUCTION CARD
+
+   Premium transformation invitation card.
 
    ========================================================================== */
 
 
-.welcome-introduction {
+.welcome-card {
 
 
     max-width:
@@ -290,7 +371,7 @@
 
     margin:
 
-        0 auto;
+        40px auto;
 
 
 
@@ -300,15 +381,25 @@
 
 
 
-    text-align:
-
-        center;
-
-
-
     background:
 
-        var(--ctm-surface);
+        rgba(
+
+            29,
+
+            34,
+
+            43,
+
+            0.75
+
+        );
+
+
+
+    backdrop-filter:
+
+        blur(18px);
 
 
 
@@ -336,28 +427,47 @@
 
 
 
-.section-title.tamil {
+.welcome-card-header {
+
+
+    text-align:
+
+        center;
+
+
+
+    margin-bottom:
+
+        32px;
+
+
+
+}
+
+
+
+
+
+.welcome-card-header h2 {
 
 
     color:
 
-        var(--ctm-white);
+        var(--ctm-gold-soft);
 
 
 
     font-size:
 
         clamp(
+
             28px,
+
             4vw,
-            42px
+
+            40px
+
         );
-
-
-
-    margin-bottom:
-
-        12px;
 
 
 
@@ -366,45 +476,40 @@
 
 
 
-.section-subtitle.english {
+
+.welcome-card-body {
+
+
+    text-align:
+
+        center;
+
+
+
+}
+
+
+
+
+
+.welcome-card-body p {
 
 
     color:
 
-        var(--ctm-teal-soft);
+        var(--ctm-text-primary);
 
 
 
     font-size:
 
-        22px;
+        20px;
 
 
 
-    margin-bottom:
+    line-height:
 
-        28px;
-
-
-
-}
-
-
-
-
-
-.section-text {
-
-
-    max-width:
-
-        720px;
-
-
-
-    margin:
-
-        0 auto 20px;
+        2;
 
 
 
@@ -415,12 +520,12 @@
 
 
 /* ==========================================================================
-   WELCOME PRINCIPLES
+   WELCOME HIGHLIGHT POINTS
 
    ========================================================================== */
 
 
-.welcome-principles {
+.welcome-points {
 
 
     display:
@@ -431,7 +536,13 @@
 
     grid-template-columns:
 
-        repeat(3, 1fr);
+        repeat(
+
+            3,
+
+            1fr
+
+        );
 
 
 
@@ -441,9 +552,21 @@
 
 
 
-    margin-top:
+    list-style:
 
-        40px;
+        none;
+
+
+
+    padding:
+
+        40px 0 0;
+
+
+
+    margin:
+
+        0;
 
 
 
@@ -452,7 +575,8 @@
 
 
 
-.principle-item {
+
+.welcome-points li {
 
 
     padding:
@@ -463,7 +587,7 @@
 
     background:
 
-        var(--ctm-background-soft);
+        var(--ctm-surface);
 
 
 
@@ -479,30 +603,49 @@
 
 
 
+    color:
+
+        var(--ctm-text-primary);
+
+
+
+    font-size:
+
+        17px;
+
+
+
+    transition:
+
+        transform
+        0.3s ease,
+        border-color
+        0.3s ease;
+
+
+
 }
 
 
 
 
 
-.principle-item h4 {
+.welcome-points li:hover {
 
 
-    color:
+    transform:
 
-        var(--ctm-gold);
+        translateY(
 
+            -5px
 
-
-    margin-bottom:
-
-        12px;
+        );
 
 
 
-    font-size:
+    border-color:
 
-        20px;
+        var(--ctm-teal);
 
 
 
@@ -513,17 +656,23 @@
 
 
 /* ==========================================================================
-   DISCOVERY SECTION
+   LIFE DIMENSIONS PREVIEW
 
    ========================================================================== */
 
 
-.welcome-discovery {
+.welcome-preview {
 
 
-    padding:
+    max-width:
 
-        80px 0;
+        1100px;
+
+
+
+    margin:
+
+        80px auto;
 
 
 
@@ -533,7 +682,7 @@
 
 
 
-.discovery-grid {
+.welcome-preview-grid {
 
 
     display:
@@ -544,19 +693,19 @@
 
     grid-template-columns:
 
-        repeat(4, 1fr);
+        repeat(
+
+            3,
+
+            1fr
+
+        );
 
 
 
     gap:
 
-        24px;
-
-
-
-    margin-top:
-
-        48px;
+        28px;
 
 
 
@@ -566,7 +715,25 @@
 
 
 
-.discovery-card {
+.welcome-preview-item {
+
+
+    display:
+
+        flex;
+
+
+
+    align-items:
+
+        center;
+
+
+
+    gap:
+
+        24px;
+
 
 
     padding:
@@ -589,14 +756,7 @@
 
     border-radius:
 
-        var(--ctm-radius-medium);
-
-
-
-    transition:
-
-        transform 0.3s ease,
-        border-color 0.3s ease;
+        var(--ctm-radius-large);
 
 
 
@@ -606,39 +766,18 @@
 
 
 
-.discovery-card:hover {
+.preview-number {
 
 
-    transform:
+    min-width:
 
-        translateY(-6px);
-
-
-
-    border-color:
-
-        var(--ctm-teal);
-
-
-
-}
-
-
-
-
-
-.discovery-number {
-
-
-    width:
-
-        48px;
+        64px;
 
 
 
     height:
 
-        48px;
+        64px;
 
 
 
@@ -660,12 +799,6 @@
 
 
 
-    margin-bottom:
-
-        20px;
-
-
-
     border-radius:
 
         50%;
@@ -674,196 +807,29 @@
 
     background:
 
-        rgba(15,163,177,0.15);
+        rgba(
+
+            201,
+
+            162,
+
+            39,
+
+            0.12
+
+        );
 
 
 
     color:
 
-        var(--ctm-teal-soft);
+        var(--ctm-gold-soft);
 
 
 
-    font-weight:
+    font-size:
 
-        700;
-
-
-
-}
-
-/* ==========================================================================
-   KALA CHAKRA™ PREVIEW SECTION
-
-   ========================================================================== */
-
-
-.welcome-kalachakra {
-
-
-    padding:
-
-        80px 0;
-
-
-
-}
-
-
-
-
-.kalachakra-grid {
-
-
-    display:
-
-        grid;
-
-
-
-    grid-template-columns:
-
-        repeat(4, 1fr);
-
-
-
-    gap:
-
-        20px;
-
-
-
-    margin-top:
-
-        48px;
-
-
-
-}
-
-
-
-
-.kalachakra-item {
-
-
-    padding:
-
-        28px 20px;
-
-
-
-    text-align:
-
-        center;
-
-
-
-    background:
-
-        var(--ctm-surface);
-
-
-
-    border:
-
-        1px solid var(--ctm-border);
-
-
-
-    border-radius:
-
-        var(--ctm-radius-medium);
-
-
-
-    transition:
-
-        all 0.3s ease;
-
-
-
-}
-
-
-
-
-
-.kalachakra-item:hover {
-
-
-    transform:
-
-        translateY(-5px);
-
-
-
-    border-color:
-
-        var(--ctm-gold);
-
-
-
-}
-
-
-
-
-
-.pillar-number {
-
-
-    display:
-
-        inline-flex;
-
-
-
-    align-items:
-
-        center;
-
-
-
-    justify-content:
-
-        center;
-
-
-
-    width:
-
-        42px;
-
-
-
-    height:
-
-        42px;
-
-
-
-    margin-bottom:
-
-        16px;
-
-
-
-    border-radius:
-
-        50%;
-
-
-
-    background:
-
-        rgba(201,162,39,0.12);
-
-
-
-    color:
-
-        var(--ctm-gold);
+        28px;
 
 
 
@@ -879,7 +845,13 @@
 
 
 
-.kalachakra-item h4 {
+.preview-content h3 {
+
+
+    margin:
+
+        0 0 8px;
+
 
 
     color:
@@ -888,15 +860,9 @@
 
 
 
-    margin-bottom:
-
-        8px;
-
-
-
     font-size:
 
-        18px;
+        22px;
 
 
 
@@ -905,29 +871,28 @@
 
 
 
-.kalachakra-item p {
+
+.preview-content p {
 
 
-    color:
+    margin:
 
-        var(--ctm-teal-soft);
+        0;
 
 
 
     font-size:
 
-        14px;
+        16px;
 
 
 
 }
-
-
-
-
 
 /* ==========================================================================
-   FINAL INVITATION SECTION
+   FINAL JOURNEY INVITATION SECTION
+
+   Premium emotional closing area.
 
    ========================================================================== */
 
@@ -949,7 +914,7 @@
 
     padding:
 
-        56px 40px;
+        64px 48px;
 
 
 
@@ -965,9 +930,29 @@
 
             145deg,
 
-            var(--ctm-surface),
+            rgba(
 
-            var(--ctm-background-soft)
+                29,
+
+                34,
+
+                43,
+
+                0.95
+
+            ),
+
+            rgba(
+
+                16,
+
+                18,
+
+                22,
+
+                0.95
+
+            )
 
         );
 
@@ -985,17 +970,9 @@
 
 
 
-}
+    box-shadow:
 
-
-
-
-.welcome-final .section-title {
-
-
-    margin-bottom:
-
-        20px;
+        var(--ctm-shadow-gold);
 
 
 
@@ -1004,12 +981,60 @@
 
 
 
-.welcome-final .section-text {
+
+.welcome-final .tamil {
+
+
+    color:
+
+        var(--ctm-white);
+
 
 
     font-size:
 
-        20px;
+        clamp(
+
+            28px,
+
+            4vw,
+
+            42px
+
+        );
+
+
+
+    line-height:
+
+        1.8;
+
+
+
+}
+
+
+
+
+
+.welcome-final .english {
+
+
+    margin-top:
+
+        16px;
+
+
+
+    color:
+
+        var(--ctm-teal-soft);
+
+
+
+    font-size:
+
+        22px;
 
 
 
@@ -1020,7 +1045,9 @@
 
 
 /* ==========================================================================
-   CTA SECTION
+   ACTION AREA
+
+   Primary journey entry point.
 
    ========================================================================== */
 
@@ -1040,9 +1067,15 @@
 
 
 
+    align-items:
+
+        center;
+
+
+
     margin:
 
-        48px 0;
+        56px 0;
 
 
 
@@ -1057,73 +1090,104 @@
 
     min-width:
 
-        280px;
+        320px;
 
 
 
     min-height:
 
-        64px;
+        68px;
 
 
 
-    font-size:
+    padding:
 
-        18px;
+        0 48px;
+
+
+
+    border-radius:
+
+        999px;
 
 
 
     background:
 
-        var(--ctm-teal);
+        linear-gradient(
 
+            135deg,
 
+            var(--ctm-gold),
 
-}
+            var(--ctm-gold-soft)
 
-
-
-
-
-.welcome-button .tamil {
-
-
-    display:
-
-        block;
-
-
-
-    font-size:
-
-        18px;
-
-
-
-}
-
-
-
-
-
-.welcome-button .english {
-
-
-    display:
-
-        block;
-
-
-
-    font-size:
-
-        14px;
+        );
 
 
 
     color:
 
-        rgba(255,255,255,0.85);
+        #17120A;
+
+
+
+    font-size:
+
+        20px;
+
+
+
+    font-weight:
+
+        700;
+
+
+
+    letter-spacing:
+
+        0.02em;
+
+
+
+    box-shadow:
+
+        var(--ctm-shadow-gold);
+
+
+
+}
+
+
+
+
+
+.welcome-button:hover {
+
+
+    transform:
+
+        translateY(
+
+            -4px
+
+        );
+
+
+
+    box-shadow:
+
+        0 20px 50px rgba(
+
+            201,
+
+            162,
+
+            39,
+
+            0.35
+
+        );
 
 
 
@@ -1142,15 +1206,21 @@
 .welcome-closing {
 
 
+    max-width:
+
+        700px;
+
+
+
+    margin:
+
+        0 auto 80px;
+
+
+
     text-align:
 
         center;
-
-
-
-    padding:
-
-        32px 0 80px;
 
 
 
@@ -1171,16 +1241,87 @@
 
     font-size:
 
-        18px;
+        20px;
+
+
+
+    line-height:
+
+        2;
+
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   PREMIUM DIVIDER
+
+   ========================================================================== */
+
+
+.welcome-page::after {
+
+
+    content:
+
+        "";
+
+
+
+    display:
+
+        block;
+
+
+
+    width:
+
+        120px;
+
+
+
+    height:
+
+        2px;
+
+
+
+    margin:
+
+        0 auto 40px;
+
+
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            var(--ctm-gold),
+
+            transparent
+
+        );
 
 
 
 }
 
 /* ==========================================================================
-   RESPONSIVE WELCOME PAGE FOUNDATION
+   RESPONSIVE WELCOME EXPERIENCE
 
-   Desktop-first adaptation.
+   Premium experience across:
+
+   • Desktop
+   • Tablet
+   • Mobile
 
    ========================================================================== */
 
@@ -1188,26 +1329,12 @@
 @media (max-width: 1100px) {
 
 
-    .discovery-grid {
+    .welcome-content {
 
 
-        grid-template-columns:
+        padding:
 
-            repeat(2, 1fr);
-
-
-
-    }
-
-
-
-
-    .kalachakra-grid {
-
-
-        grid-template-columns:
-
-            repeat(3, 1fr);
+            80px 32px 56px;
 
 
 
@@ -1216,12 +1343,34 @@
 
 
 
-    .welcome-principles {
+
+    .welcome-preview-grid {
 
 
         grid-template-columns:
 
-            repeat(3, 1fr);
+            repeat(
+
+                2,
+
+                1fr
+
+            );
+
+
+
+    }
+
+
+
+
+
+    .welcome-points {
+
+
+        grid-template-columns:
+
+            1fr;
 
 
 
@@ -1238,18 +1387,12 @@
 @media (max-width: 768px) {
 
 
-    .welcome-hero {
-
-
-        min-height:
-
-            auto;
-
+    .welcome-content {
 
 
         padding:
 
-            48px 0;
+            56px 20px 40px;
 
 
 
@@ -1258,7 +1401,80 @@
 
 
 
-    .welcome-introduction {
+
+    .welcome-title.tamil {
+
+
+        font-size:
+
+            38px;
+
+
+
+        line-height:
+
+            1.8;
+
+
+
+    }
+
+
+
+
+
+    .welcome-title.english {
+
+
+        font-size:
+
+            24px;
+
+
+
+    }
+
+
+
+
+
+    .welcome-subtitle {
+
+
+        font-size:
+
+            18px;
+
+
+
+    }
+
+
+
+
+
+    .welcome-description {
+
+
+        font-size:
+
+            16px;
+
+
+
+    }
+
+
+
+
+
+    .welcome-card {
+
+
+        margin:
+
+            32px 20px;
+
 
 
         padding:
@@ -1272,12 +1488,13 @@
 
 
 
-    .welcome-description {
+
+    .welcome-card-body p {
 
 
         font-size:
 
-            17px;
+            18px;
 
 
 
@@ -1286,7 +1503,23 @@
 
 
 
-    .welcome-principles {
+
+    .welcome-preview {
+
+
+        margin:
+
+            48px 20px;
+
+
+
+    }
+
+
+
+
+
+    .welcome-preview-grid {
 
 
         grid-template-columns:
@@ -1300,21 +1533,8 @@
 
 
 
-    .discovery-grid {
 
-
-        grid-template-columns:
-
-            1fr;
-
-
-
-    }
-
-
-
-
-    .discovery-card {
+    .welcome-preview-item {
 
 
         padding:
@@ -1328,21 +1548,14 @@
 
 
 
-    .kalachakra-grid {
-
-
-        grid-template-columns:
-
-            repeat(2, 1fr);
-
-
-
-    }
-
-
-
 
     .welcome-final {
+
+
+        margin:
+
+            48px 20px;
+
 
 
         padding:
@@ -1351,13 +1564,8 @@
 
 
 
-        margin-top:
-
-            48px;
-
-
-
     }
+
 
 
 
@@ -1371,13 +1579,14 @@
 
 
 
-        max-width:
+        min-width:
 
-            360px;
+            auto;
 
 
 
     }
+
 
 
 
@@ -1396,7 +1605,7 @@
 
         font-size:
 
-            34px;
+            32px;
 
 
 
@@ -1405,7 +1614,50 @@
 
 
 
+
     .welcome-title.english {
+
+
+        font-size:
+
+            21px;
+
+
+
+    }
+
+
+
+
+
+    .welcome-card-header h2 {
+
+
+        font-size:
+
+            26px;
+
+
+
+    }
+
+
+
+
+
+    .preview-number {
+
+
+        min-width:
+
+            52px;
+
+
+
+        height:
+
+            52px;
+
 
 
         font-size:
@@ -1419,59 +1671,24 @@
 
 
 
-    .section-title.tamil {
-
-
-        font-size:
-
-            28px;
-
-
-
-    }
-
-
-
-
-    .kalachakra-grid {
-
-
-        grid-template-columns:
-
-            1fr;
-
-
-
-    }
-
-
-
-
-    .welcome-closing {
-
-
-        padding-bottom:
-
-            48px;
-
-
-
-    }
-
-
 
 }
 
 
 
 
+
 /* ==========================================================================
-   ACCESSIBILITY REFINEMENTS
+   ACCESSIBILITY REFINEMENT
+
+   Senior-friendly focus visibility.
 
    ========================================================================== */
 
 
-.welcome-page :focus-visible {
+.welcome-page button:focus-visible,
+
+.welcome-page a:focus-visible {
 
 
     outline:
@@ -1482,11 +1699,46 @@
 
     outline-offset:
 
-        4px;
+        5px;
 
 
 
 }
+
+
+
+
+
+/* ==========================================================================
+   REDUCED MOTION
+
+   ========================================================================== */
+
+
+@media (prefers-reduced-motion: reduce) {
+
+
+    .welcome-page * {
+
+
+        animation:
+
+            none !important;
+
+
+
+        transition:
+
+            none !important;
+
+
+
+    }
+
+
+
+}
+
 
 
 
@@ -1499,9 +1751,14 @@
    css/welcome.css
 
 
+   Version:
+
+   CTM PATH™ Welcome™ Premium Experience v2.0
+
+
    Status:
 
-   PAGE 01 — WELCOME™ PREMIUM STYLE COMPLETE
+   COMPLETE
 
 
    ========================================================================== */
