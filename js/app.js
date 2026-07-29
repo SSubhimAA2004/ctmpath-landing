@@ -1,49 +1,27 @@
 
 /* ==========================================================================
-
    CTM PATH™ Guided Journey™
 
    File        : js/app.js
-   Version     : 2.3
+   Version     : 2.4
 
-   Status      : 🔒 ROUTER CONNECTION PATCH
-
-
-   Purpose:
-
-   Core application bootstrap controller.
+   Status      : PAGE 01 LIFECYCLE LOCK
 
 
    Responsibilities:
 
-   ✓ Initialize application
-   ✓ Load global components
-   ✓ Load journey pages
-   ✓ Control first journey entry
-   ✓ Connect Welcome CTA
-   ✓ Maintain page state
+   ✓ Application bootstrap
+   ✓ Component loading
+   ✓ Page loading
+   ✓ Welcome CTA routing
+   ✓ Journey lifecycle control
 
 
    Does NOT:
 
-   ✗ Handle assessment logic
-   ✗ Handle scoring
-   ✗ Handle backend operations
-
-
-   Journey Flow:
-
-   PAGE 01
-   Welcome
-
-        ↓
-
-   CTA Click
-
-        ↓
-
-   PAGE 02
-   Registration
+   ✗ Assessment logic
+   ✗ Scoring
+   ✗ Backend processing
 
 
    ========================================================================== */
@@ -56,15 +34,10 @@ const CTMApp = (() => {
     const CONFIG = {
 
 
-        currentPage: 1,
+        currentPage:1,
 
 
-        totalPages: 18,
-
-
-        initialPage:
-
-        "welcome",
+        totalPages:18,
 
 
 
@@ -88,12 +61,12 @@ const CTMApp = (() => {
             "components/navigation.html"
 
 
+
         }
 
 
+
     };
-
-
 
 
 
@@ -107,8 +80,10 @@ const CTMApp = (() => {
 
 
 
+
+
     /* ==========================================================
-       APPLICATION INIT
+       START APPLICATION
        ========================================================== */
 
 
@@ -128,23 +103,27 @@ const CTMApp = (() => {
 
 
 
+
+
         await loadGlobalComponents();
 
 
 
         await loadPage(
 
-            CONFIG.initialPage
+            "welcome"
 
         );
 
 
 
-        hideNavigation();
+
+
+        hideGlobalNavigation();
 
 
 
-        bindWelcomeCTA();
+        bindWelcomeStart();
 
 
 
@@ -158,10 +137,8 @@ const CTMApp = (() => {
 
 
 
-
-
     /* ==========================================================
-       GLOBAL COMPONENT LOADER
+       LOAD GLOBAL COMPONENTS
        ========================================================== */
 
 
@@ -179,11 +156,25 @@ const CTMApp = (() => {
 
 
 
+
+
         await loadComponent(
 
             "app-footer",
 
             CONFIG.components.footer
+
+        );
+
+
+
+
+
+        await loadComponent(
+
+            "app-navigation",
+
+            CONFIG.components.navigation
 
         );
 
@@ -199,13 +190,11 @@ const CTMApp = (() => {
 
 
 
-
-
     async function loadComponent(
 
-        elementId,
+        id,
 
-        filePath
+        file
 
     ){
 
@@ -215,7 +204,7 @@ const CTMApp = (() => {
 
         document.getElementById(
 
-            elementId
+            id
 
         );
 
@@ -230,30 +219,29 @@ const CTMApp = (() => {
 
 
 
+
         try{
 
 
             const response =
 
-            await fetch(filePath);
+            await fetch(file);
 
 
 
-            if(!response.ok){
 
-                throw new Error(
 
-                    filePath
+            if(response.ok){
 
-                );
+
+
+                container.innerHTML =
+
+                await response.text();
+
+
 
             }
-
-
-
-            container.innerHTML =
-
-            await response.text();
 
 
 
@@ -264,16 +252,19 @@ const CTMApp = (() => {
         catch(error){
 
 
+
             console.error(
 
-                "Component error:",
+                "Component load error:",
 
                 error
 
             );
 
 
+
         }
+
 
 
     }
@@ -309,6 +300,8 @@ const CTMApp = (() => {
 
 
 
+
+
         if(!content){
 
             return;
@@ -319,38 +312,19 @@ const CTMApp = (() => {
 
 
 
-        try{
+        const response =
 
+        await fetch(
 
-            const response =
+            `pages/${pageName}.html`
 
-            await fetch(
-
-                `pages/${pageName}.html`
-
-            );
+        );
 
 
 
 
 
-            if(!response.ok){
-
-
-                throw new Error(
-
-                    "Page missing: "
-
-                    +
-
-                    pageName
-
-                );
-
-
-            }
-
-
+        if(response.ok){
 
 
 
@@ -358,38 +332,6 @@ const CTMApp = (() => {
 
             await response.text();
 
-
-
-
-            window.scrollTo(
-
-                {
-
-                    top:0,
-
-                    behavior:"instant"
-
-                }
-
-            );
-
-
-
-        }
-
-
-
-        catch(error){
-
-
-
-            console.error(
-
-                "Page loading failed:",
-
-                error
-
-            );
 
 
         }
@@ -406,14 +348,12 @@ const CTMApp = (() => {
 
 
 
-
-
     /* ==========================================================
-       WELCOME CTA CONNECTION
+       WELCOME CTA
        ========================================================== */
 
 
-    function bindWelcomeCTA(){
+    function bindWelcomeStart(){
 
 
 
@@ -424,6 +364,8 @@ const CTMApp = (() => {
             "start-journey"
 
         );
+
+
 
 
 
@@ -447,6 +389,7 @@ const CTMApp = (() => {
                 startJourney();
 
 
+
             }
 
         );
@@ -463,9 +406,12 @@ const CTMApp = (() => {
 
 
 
+    /* ==========================================================
+       START JOURNEY
+       ========================================================== */
 
 
-    function startJourney(){
+    async function startJourney(){
 
 
 
@@ -473,7 +419,9 @@ const CTMApp = (() => {
 
 
 
-        loadPage(
+
+
+        await loadPage(
 
             "registration"
 
@@ -481,11 +429,13 @@ const CTMApp = (() => {
 
 
 
-        loadJourneyNavigation();
+
+
+        await enableNavigation();
 
 
 
-        updateJourneyCounter();
+        updateCounter();
 
 
 
@@ -500,51 +450,11 @@ const CTMApp = (() => {
 
 
     /* ==========================================================
-       NAVIGATION ACTIVATION
+       NAVIGATION CONTROL
        ========================================================== */
 
 
-    async function loadJourneyNavigation(){
-
-
-
-        await loadComponent(
-
-            "app-navigation",
-
-            CONFIG.components.navigation
-
-        );
-
-
-
-        if(window.Navigation){
-
-
-            Navigation.init();
-
-
-        }
-
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       PAGE 01 RULE
-       ========================================================== */
-
-
-    function hideNavigation(){
+    function hideGlobalNavigation(){
 
 
 
@@ -558,13 +468,20 @@ const CTMApp = (() => {
 
 
 
+
+
         if(navigation){
 
 
-            navigation.innerHTML = "";
+
+            navigation.style.display =
+
+            "none";
+
 
 
         }
+
 
 
     }
@@ -577,7 +494,69 @@ const CTMApp = (() => {
 
 
 
-    function updateJourneyCounter(){
+    async function enableNavigation(){
+
+
+
+        const navigation =
+
+        document.getElementById(
+
+            "app-navigation"
+
+        );
+
+
+
+
+
+        if(navigation){
+
+
+
+            navigation.style.display =
+
+            "flex";
+
+
+
+        }
+
+
+
+
+
+        if(window.Navigation){
+
+
+
+            Navigation.setPage(
+
+                2
+
+            );
+
+
+
+            Navigation.updateNavigation();
+
+
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    function updateCounter(){
 
 
 
@@ -588,6 +567,8 @@ const CTMApp = (() => {
             "journey-counter"
 
         );
+
+
 
 
 
@@ -604,6 +585,7 @@ const CTMApp = (() => {
         }
 
 
+
     }
 
 
@@ -614,7 +596,7 @@ const CTMApp = (() => {
 
 
 
-    return{
+    return {
 
 
         init,
@@ -626,9 +608,8 @@ const CTMApp = (() => {
         startJourney
 
 
+
     };
-
-
 
 
 
@@ -642,23 +623,15 @@ const CTMApp = (() => {
 
 
 
-/* ==========================================================================
-
-   APPLICATION BOOT
-
-   ========================================================================== */
-
-
 document.addEventListener(
 
-    "DOMContentLoaded",
+"DOMContentLoaded",
 
-    ()=>{
-
-
-        CTMApp.init();
+()=>{
 
 
-    }
+    CTMApp.init();
 
-);
+
+
+});
