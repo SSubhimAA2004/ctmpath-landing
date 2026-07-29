@@ -3,25 +3,24 @@
    CTM PATH™ Guided Journey™
 
    File        : app.js
-   Version     : 2.2
+   Version     : 2.3
 
-   Status      : PAGE ROUTER PATCH
+   Status      : REAL 18 PAGE ROUTER
 
 
    Responsibilities:
 
-   ✓ Initialize application
-   ✓ Load shared components
-   ✓ Initialize navigation engine
-   ✓ Load journey pages
-   ✓ Handle page transitions
+   ✓ Application bootstrap
+   ✓ Shared component loading
+   ✓ Journey page loading
+   ✓ Navigation integration
 
 
    Does NOT:
 
-   ✗ Assessment logic
+   ✗ Assessment calculations
    ✗ Scoring
-   ✗ Backend operations
+   ✗ Backend processing
 
 
    ========================================================================== */
@@ -33,22 +32,11 @@ const CTMApp = (() => {
 
 
 
-
     const CONFIG = {
 
 
 
-        initialPage:
-
-        1,
-
-
-
-        totalPages:
-
-        18,
-
-
+        initialPage: 1,
 
 
 
@@ -62,11 +50,9 @@ const CTMApp = (() => {
 
 
 
-
             navigation:
 
             "components/navigation.html",
-
 
 
 
@@ -86,16 +72,7 @@ const CTMApp = (() => {
 
 
 
-
-
     let started = false;
-
-
-
-    let currentPage = 1;
-
-
-
 
 
 
@@ -123,6 +100,8 @@ const CTMApp = (() => {
 
 
 
+
+
         await loadGlobalComponents();
 
 
@@ -131,11 +110,11 @@ const CTMApp = (() => {
 
 
 
-        bindPageChange();
+        bindPageRouter();
 
 
 
-        await loadPage(currentPage);
+        await loadPage(1);
 
 
 
@@ -154,7 +133,7 @@ const CTMApp = (() => {
 
 
     /* ==========================================================
-       LOAD SHARED COMPONENTS
+       LOAD GLOBAL COMPONENTS
        ========================================================== */
 
 
@@ -172,6 +151,7 @@ const CTMApp = (() => {
 
 
 
+
         await loadComponent(
 
             "app-navigation",
@@ -179,6 +159,7 @@ const CTMApp = (() => {
             CONFIG.components.navigation
 
         );
+
 
 
 
@@ -242,11 +223,11 @@ const CTMApp = (() => {
 
 
     /* ==========================================================
-       LISTEN FOR PAGE CHANGES
+       ROUTER LISTENER
        ========================================================== */
 
 
-    function bindPageChange(){
+    function bindPageRouter(){
 
 
 
@@ -258,13 +239,11 @@ const CTMApp = (() => {
 
 
 
-                const page =
+                loadPage(
 
-                event.detail.page;
+                    event.detail.page
 
-
-
-                loadPage(page);
+                );
 
 
 
@@ -309,8 +288,6 @@ const CTMApp = (() => {
 
 
 
-
-
         if(!container){
 
             return;
@@ -321,59 +298,19 @@ const CTMApp = (() => {
 
 
 
-        try {
+        const response =
+
+        await fetch(filePath);
 
 
 
-            const response =
-
-            await fetch(filePath);
-
-
-
-
-
-            if(!response.ok){
-
-
-
-                throw new Error(
-
-                    `Cannot load ${filePath}`
-
-                );
-
-
-
-            }
-
-
-
+        if(response.ok){
 
 
 
             container.innerHTML =
 
             await response.text();
-
-
-
-
-        }
-
-
-
-        catch(error){
-
-
-
-            console.error(
-
-                "Component error:",
-
-                error
-
-            );
 
 
 
@@ -400,10 +337,6 @@ const CTMApp = (() => {
 
 
 
-        currentPage = pageNumber;
-
-
-
         const content =
 
         document.getElementById(
@@ -427,10 +360,10 @@ const CTMApp = (() => {
 
 
 
+        const pageFile =
 
-        const pageName =
+        getPageFile(pageNumber);
 
-        getPageName(pageNumber);
 
 
 
@@ -446,7 +379,7 @@ const CTMApp = (() => {
 
             await fetch(
 
-                `pages/${pageName}.html`
+                `pages/${pageFile}.html`
 
             );
 
@@ -462,7 +395,7 @@ const CTMApp = (() => {
 
                 throw new Error(
 
-                    `Page ${pageName} missing`
+                    `${pageFile}.html not found`
 
                 );
 
@@ -475,12 +408,9 @@ const CTMApp = (() => {
 
 
 
-
-
             content.innerHTML =
 
             await response.text();
-
 
 
 
@@ -520,10 +450,7 @@ const CTMApp = (() => {
 
 
 
-
         }
-
-
 
 
 
@@ -533,7 +460,7 @@ const CTMApp = (() => {
 
             console.error(
 
-                "Page loading failed:",
+                "Page loading error:",
 
                 error
 
@@ -556,11 +483,11 @@ const CTMApp = (() => {
 
 
     /* ==========================================================
-       PAGE MAP
+       MASTER PAGE MAP
        ========================================================== */
 
 
-    function getPageName(pageNumber){
+    function getPageFile(page){
 
 
 
@@ -568,58 +495,112 @@ const CTMApp = (() => {
 
 
 
-            1:"welcome",
+            1:
+
+            "welcome",
 
 
-            2:"registration",
+
+            2:
+
+            "registration",
 
 
-            3:"assessment",
 
 
-            4:"assessment",
+            3:
+
+            "assessment-01",
 
 
-            5:"assessment",
+
+            4:
+
+            "assessment-02",
 
 
-            6:"assessment",
+
+            5:
+
+            "assessment-03",
 
 
-            7:"assessment",
+
+            6:
+
+            "assessment-04",
 
 
-            8:"assessment",
+
+            7:
+
+            "assessment-05",
 
 
-            9:"assessment",
+
+            8:
+
+            "assessment-06",
 
 
-            10:"assessment",
+
+            9:
+
+            "assessment-07",
 
 
-            11:"assessment",
+
+            10:
+
+            "assessment-08",
 
 
-            12:"assessment",
+
+            11:
+
+            "assessment-09",
 
 
-            13:"assessment",
+
+            12:
+
+            "assessment-10",
 
 
-            14:"assessment",
+
+            13:
+
+            "assessment-11",
 
 
-            15:"kalachakra",
+
+            14:
+
+            "assessment-12",
 
 
-            16:"diagnosis",
+
+            15:
+
+            "kalachakra",
 
 
-            17:"prescription",
+
+            16:
+
+            "diagnosis",
 
 
-            18:"cta"
+
+            17:
+
+            "prescription",
+
+
+
+            18:
+
+            "cta"
 
 
 
@@ -629,7 +610,7 @@ const CTMApp = (() => {
 
 
 
-        return pages[pageNumber];
+        return pages[page];
 
 
 
@@ -702,8 +683,6 @@ const CTMApp = (() => {
 
 
     };
-
-
 
 
 
