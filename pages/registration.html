@@ -2,18 +2,20 @@
 <!-- ==========================================================
      CTM PATH™ Guided Journey™
 
-     Page       : Registration
-     Version    : 1.2
-
-     Status     : FRAGMENT RESTORATION
+     File       : pages/registration.html
+     Version    : 8.0
+     Status     : PREMIUM LAUNCH EDITION
 
      Loaded by  : js/app.js
+
+     Fragment Only
 ========================================================== -->
 
-
-<section 
+<section
 class="registration-page"
 id="registration-page">
+
+
 
 
 
@@ -21,35 +23,59 @@ id="registration-page">
      PAGE HEADER
 ========================================================== -->
 
-
 <section class="registration-header">
+
+
+<div class="page-badge">
+
+    CREATE YOUR PERSONAL LIFE MAP™
+
+</div>
 
 
 <h1>
 
-உங்கள் பயணம் இப்போது தொடங்குகிறது
+உங்கள் வாழ்க்கைப் பயணம்
+இப்போது தொடங்குகிறது
 
 </h1>
 
 
-<p class="english">
+<h2>
 
-Begin Your Personal Journey™
+Create Your Personal Life Map™
+
+</h2>
+
+
+<p class="intro-tamil">
+
+இந்த Guided Journey™
+உங்களுக்கே உரிய வாழ்க்கைப் பாதையை
+தெளிவாக புரிந்து கொள்ள உருவாக்கப்பட்டுள்ளது.
+
+<br><br>
+
+தொடங்குவதற்கு முன்,
+சில அடிப்படை தகவல்களை மட்டும்
+எங்களுடன் பகிர்ந்து கொள்ளுங்கள்.
 
 </p>
 
 
+<p class="intro-english">
 
-<p>
+Before we begin,
+tell us a little about yourself.
 
-உங்கள் வாழ்க்கைப் பயணத்தை தனிப்பட்ட முறையில் புரிந்து கொள்ள,
-சில அடிப்படை விவரங்களை எங்களுடன் பகிர்ந்து கொள்ளுங்கள்.
+We'll use these details only to personalise
+your CTM PATH™ Guided Journey™ experience.
 
 </p>
-
 
 
 </section>
+
 
 
 
@@ -60,8 +86,37 @@ Begin Your Personal Journey™
      REGISTRATION FORM
 ========================================================== -->
 
+<form
+id="registration-form"
+autocomplete="on">
 
-<form id="registration-form">
+
+
+
+
+<!-- ==========================================================
+     SECTION 01
+========================================================== -->
+
+<div class="form-section">
+
+<div class="section-title">
+
+    01
+
+</div>
+
+<h3>
+
+உங்களைப் பற்றி
+
+</h3>
+
+<p>
+
+About You
+
+</p>
 
 
 
@@ -71,17 +126,15 @@ Begin Your Personal Journey™
 
 <div class="form-group">
 
-
-<label>
+<label for="fullName">
 
 முழு பெயர்
 
 <br>
 
-Full Name
+<span>Full Name</span>
 
 </label>
-
 
 <input
 
@@ -91,12 +144,11 @@ id="fullName"
 
 name="fullName"
 
-placeholder="உங்கள் பெயரை உள்ளிடவும்"
+placeholder="உங்கள் முழு பெயரை உள்ளிடுங்கள்"
 
-required
+autocomplete="name"
 
->
-
+required>
 
 </div>
 
@@ -109,17 +161,15 @@ required
 
 <div class="form-group">
 
+<label for="email">
 
-<label>
-
-மின்னஞ்சல்
+மின்னஞ்சல் முகவரி
 
 <br>
 
-Email Address
+<span>Email Address</span>
 
 </label>
-
 
 <input
 
@@ -129,12 +179,11 @@ id="email"
 
 name="email"
 
-placeholder="உங்கள் email முகவரி"
+placeholder="example@email.com"
 
-required
+autocomplete="email"
 
->
-
+required>
 
 </div>
 
@@ -147,17 +196,15 @@ required
 
 <div class="form-group">
 
-
-<label>
+<label for="mobile">
 
 கைபேசி எண்
 
 <br>
 
-Mobile Number
+<span>Mobile Number</span>
 
 </label>
-
 
 <input
 
@@ -167,12 +214,13 @@ id="mobile"
 
 name="mobile"
 
-placeholder="உங்கள் mobile number"
+placeholder="+91 XXXXX XXXXX"
 
-required
+autocomplete="tel"
 
->
+required>
 
+</div>
 
 </div>
 
@@ -182,21 +230,46 @@ required
 
 
 
-<!-- DISTRICT -->
+<!-- ==========================================================
+     SECTION 02
+========================================================== -->
+
+<div class="form-section">
+
+<div class="section-title">
+
+    02
+
+</div>
+
+<h3>
+
+உங்கள் இருப்பிடம்
+
+</h3>
+
+<p>
+
+Your Location
+
+</p>
+
+
+
+
+
 
 <div class="form-group">
 
-
-<label>
+<label for="district">
 
 மாவட்டம்
 
 <br>
 
-District
+<span>District</span>
 
 </label>
-
 
 <input
 
@@ -208,10 +281,7 @@ name="district"
 
 placeholder="உங்கள் மாவட்டம்"
 
-required
-
->
-
+required>
 
 </div>
 
@@ -220,22 +290,17 @@ required
 
 
 
-
-<!-- STATE -->
-
 <div class="form-group">
 
-
-<label>
+<label for="state">
 
 மாநிலம்
 
 <br>
 
-State
+<span>State</span>
 
 </label>
-
 
 <input
 
@@ -247,10 +312,9 @@ name="state"
 
 placeholder="உங்கள் மாநிலம்"
 
-required
+required>
 
->
-
+</div>
 
 </div>
 
@@ -260,10 +324,35 @@ required
 
 
 
-<!-- LANGUAGE -->
+<!-- ==========================================================
+     SECTION 03
+========================================================== -->
+
+<div class="form-section">
+
+<div class="section-title">
+
+    03
+
+</div>
+
+<h3>
+
+உங்கள் விருப்பம்
+
+</h3>
+
+<p>
+
+Your Preference
+
+</p>
+
+
+
+
 
 <div class="form-group">
-
 
 <label>
 
@@ -271,16 +360,13 @@ required
 
 <br>
 
-Preferred Language
+<span>Preferred Language</span>
 
 </label>
 
-
-
 <div class="language-options">
 
-
-<label>
+<label class="language-card">
 
 <input
 
@@ -290,18 +376,17 @@ name="language"
 
 value="Tamil"
 
-checked
+checked>
 
->
+<span>
 
 தமிழ்
 
+</span>
+
 </label>
 
-
-
-
-<label>
+<label class="language-card">
 
 <input
 
@@ -309,44 +394,61 @@ type="radio"
 
 name="language"
 
-value="English"
+value="English">
 
->
+<span>
 
 English
 
+</span>
+
 </label>
 
-
+</div>
 
 </div>
 
+</div>
+
+     <!-- ==========================================================
+     SECTION 04
+========================================================== -->
+
+<div class="form-section">
+
+<div class="section-title">
+
+    04
 
 </div>
 
+<h3>
+
+எங்களை எப்படி அறிந்தீர்கள்?
+
+</h3>
+
+<p>
+
+How Did You Discover CTM PATH™?
+
+</p>
 
 
 
 
-
-
-
-<!-- SOURCE -->
 
 <div class="form-group">
 
+<label for="source">
 
-<label>
-
-CTM PATH™ பற்றி எப்படி அறிந்தீர்கள்?
+CTM PATH™ பற்றி முதன்முதலில் எங்கு அறிந்தீர்கள்?
 
 <br>
 
-How did you discover CTM PATH™?
+<span>Where did you first hear about CTM PATH™?</span>
 
 </label>
-
-
 
 <select
 
@@ -354,15 +456,13 @@ id="source"
 
 name="source"
 
->
-
+required>
 
 <option value="">
 
-Select
+தேர்வு செய்யவும் / Select One
 
 </option>
-
 
 <option value="WhatsApp">
 
@@ -370,13 +470,11 @@ WhatsApp
 
 </option>
 
-
 <option value="Facebook">
 
 Facebook
 
 </option>
-
 
 <option value="Instagram">
 
@@ -384,13 +482,35 @@ Instagram
 
 </option>
 
+<option value="YouTube">
 
-<option value="Friend">
-
-Friend / Referral
+YouTube
 
 </option>
 
+<option value="Google Search">
+
+Google Search
+
+</option>
+
+<option value="Friend / Family">
+
+Friend / Family
+
+</option>
+
+<option value="Webinar / Event">
+
+Webinar / Event
+
+</option>
+
+<option value="Existing Member">
+
+Existing Member
+
+</option>
 
 <option value="Other">
 
@@ -398,9 +518,41 @@ Other
 
 </option>
 
-
 </select>
 
+</div>
+
+
+
+
+
+
+<div
+class="form-group other-source"
+id="other-source-group"
+style="display:none;">
+
+<label for="otherSource">
+
+தயவுசெய்து குறிப்பிடுங்கள்
+
+<br>
+
+<span>Please Specify</span>
+
+</label>
+
+<input
+
+type="text"
+
+id="otherSource"
+
+name="otherSource"
+
+placeholder="Please specify">
+
+</div>
 
 </div>
 
@@ -410,14 +562,49 @@ Other
 
 
 
+<!-- ==========================================================
+     PRIVACY
+========================================================== -->
 
-<!-- CONSENT -->
+<section class="privacy-card">
+
+<div class="privacy-icon">
+
+🔒
+
+</div>
+
+<h3>
+
+உங்கள் தகவல்கள் பாதுகாப்பாக இருக்கும்
+
+</h3>
+
+<p>
+
+Your information is used only to personalise your
+CTM PATH™ Guided Journey™.
+
+We never sell or share your personal information with
+third parties.
+
+</p>
+
+</section>
+
+
+
+
+
+
+
+<!-- ==========================================================
+     CONSENT
+========================================================== -->
 
 <div class="form-group consent">
 
-
-<label>
-
+<label class="consent-card">
 
 <input
 
@@ -425,16 +612,27 @@ type="checkbox"
 
 id="consent"
 
-required
+required>
 
->
+<span>
 
+இந்த தகவல்கள்
+எனது தனிப்பட்ட CTM PATH™ Guided Journey™
+அனுபவத்தை உருவாக்க மட்டுமே பயன்படுத்தப்படும் என்பதை
+நான் புரிந்துகொள்கிறேன்.
 
-இந்த தகவல்கள் உங்கள் தனிப்பட்ட CTM PATH™ Guided Journey™ அனுபவத்தை உருவாக்க மட்டுமே பயன்படுத்தப்படும்.
+<br><br>
 
+<small>
+
+I understand that these details will be used only to
+create my personalised CTM PATH™ Guided Journey™.
+
+</small>
+
+</span>
 
 </label>
-
 
 </div>
 
@@ -444,10 +642,11 @@ required
 
 
 
-<!-- ACTION -->
+<!-- ==========================================================
+     ACTION
+========================================================== -->
 
 <div class="form-actions">
-
 
 <button
 
@@ -455,24 +654,21 @@ type="button"
 
 id="continue-registration"
 
-class="primary-button"
+class="primary-button">
 
+<span class="button-tamil">
 
->
-
-என் பயணத்தை தொடர்கிறேன்
-
-<br>
-
-<span>
-
-Continue My Journey™
+என் வாழ்க்கைப் பயணத்தை தொடர்கிறேன்
 
 </span>
 
+<span class="button-english">
+
+Continue My Guided Journey™
+
+</span>
 
 </button>
-
 
 </div>
 
@@ -481,12 +677,52 @@ Continue My Journey™
 
 
 
+
+<!-- ==========================================================
+     TRUST
+========================================================== -->
+
+<div class="registration-footer-note">
+
+<p class="tamil">
+
+சுமார் 7 நிமிடங்களில் உங்கள்
+தனிப்பட்ட வாழ்க்கை வரைபடத்தை
+உருவாக்கும் பயணத்தைத் தொடங்கலாம்.
+
+</p>
+
+<p class="english">
+
+Approximately 7 minutes • Secure • Private • Personal
+
+</p>
+
+</div>
+
 </form>
 
-
-
-
-
-
-
 </section>
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+
+    const source=document.getElementById("source");
+    const other=document.getElementById("other-source-group");
+
+    if(source && other){
+
+        source.addEventListener("change",function(){
+
+            other.style.display=
+                this.value==="Other"
+                ? "block"
+                : "none";
+
+        });
+
+    }
+
+});
+</script>
+
