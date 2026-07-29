@@ -2,20 +2,16 @@
 /* ==========================================================================
    CTM PATH™ Guided Journey™
 
-   File        : footer.css
-   Version     : 2.2
+   File        : css/footer.css
+   Version     : 2.0
+
+   Status      : 🔒 PREMIUM FOOTER SYSTEM
+
 
    Purpose:
 
-   Premium global footer styling.
+   Global footer presentation.
 
-   Controls:
-
-   • Footer layout
-   • Brand signature
-   • Founder identity
-   • Contact visibility
-   • Closing experience
 
    ========================================================================== */
 
@@ -24,44 +20,53 @@
 
 
 /* ==========================================================================
-   FOOTER FOUNDATION
+   FOOTER ROOT
    ========================================================================== */
 
 
 .ctm-footer {
 
 
-    width:
-
-    100%;
+    width:100%;
 
 
 
-    margin-top:
-
-    90px;
+    margin-top:auto;
 
 
 
     padding:
 
-    72px 0;
+    45px 60px 25px;
 
 
 
     background:
 
-    #081C3A;
+    linear-gradient(
+
+        180deg,
+
+        rgba(6,21,45,0.95),
+
+        #06152D
+
+    );
 
 
 
     border-top:
 
     1px solid rgba(
-        255,
-        255,
-        255,
-        0.12
+
+        201,
+
+        162,
+
+        39,
+
+        0.20
+
     );
 
 
@@ -75,15 +80,18 @@
 
 
 
-.ctm-footer-container {
+
+/* ==========================================================================
+   FOOTER CONTAINER
+   ========================================================================== */
 
 
-    width:
+.footer-container {
 
-    min(
-        calc(100% - 120px),
-        1440px
-    );
+
+    max-width:
+
+    1200px;
 
 
 
@@ -95,25 +103,23 @@
 
     display:
 
-    flex;
+    grid;
 
 
 
-    flex-direction:
+    grid-template-columns:
 
-    column;
-
-
-
-    align-items:
-
-    center;
+    repeat(3,1fr);
 
 
 
-    text-align:
+    gap:
 
-    center;
+    45px;
+
+
+
+    align-items:start;
 
 
 
@@ -125,29 +131,19 @@
 
 
 
+
+
 /* ==========================================================================
-   BRAND SIGNATURE
+   BRAND SECTION
    ========================================================================== */
 
 
-.ctm-footer-brand-name {
-
-
-    color:
-
-    var(--ctm-text-primary);
-
-
-
-    font-family:
-
-    var(--font-primary);
-
+.footer-brand-name {
 
 
     font-size:
 
-    30px;
+    28px;
 
 
 
@@ -159,7 +155,13 @@
 
     letter-spacing:
 
-    0.18em;
+    0.12em;
+
+
+
+    color:
+
+    var(--ctm-ivory);
 
 
 
@@ -167,40 +169,30 @@
 
 
 
-
-
-
-
-.ctm-footer-brand-subtitle {
+.footer-brand-subtitle {
 
 
     margin-top:
 
-    10px;
-
-
-
-    color:
-
-    var(--ctm-teal-soft);
+    8px;
 
 
 
     font-size:
 
-    13px;
-
-
-
-    font-weight:
-
-    700;
+    14px;
 
 
 
     letter-spacing:
 
-    0.35em;
+    0.25em;
+
+
+
+    color:
+
+    var(--ctm-teal);
 
 
 
@@ -208,34 +200,18 @@
 
 
 
-
-
-
-
-.ctm-footer-tagline {
+.footer-brand-signature {
 
 
     margin-top:
 
-    20px;
-
-
-
-    color:
-
-    var(--ctm-gold-light);
-
-
-
-    font-family:
-
-    var(--font-serif);
+    14px;
 
 
 
     font-size:
 
-    19px;
+    15px;
 
 
 
@@ -245,7 +221,14 @@
 
 
 
+    color:
+
+    var(--text-secondary);
+
+
+
 }
+
 
 
 
@@ -255,16 +238,40 @@
 
 
 /* ==========================================================================
-   FOUNDER SIGNATURE
+   FOUNDER SECTION
    ========================================================================== */
 
 
-.ctm-footer-founder {
+.footer-label {
 
 
-    margin-top:
+    font-size:
 
-    46px;
+    12px;
+
+
+
+    letter-spacing:
+
+    0.3em;
+
+
+
+    text-transform:
+
+    uppercase;
+
+
+
+    color:
+
+    var(--ctm-gold-soft);
+
+
+
+    margin-bottom:
+
+    12px;
 
 
 
@@ -272,16 +279,43 @@
 
 
 
+.footer-founder-name {
+
+
+    font-size:
+
+    20px;
 
 
 
+    font-weight:
 
-.ctm-footer-created {
+    700;
+
 
 
     color:
 
-    var(--ctm-text-secondary);
+    var(--ctm-ivory);
+
+
+
+}
+
+
+
+.footer-role {
+
+
+    margin-top:
+
+    6px;
+
+
+
+    color:
+
+    var(--text-secondary);
 
 
 
@@ -299,95 +333,14 @@
 
 
 
-.ctm-footer-founder-name {
-
-
-    margin-top:
-
-    12px;
-
-
-
-    color:
-
-    var(--ctm-text-primary);
-
-
-
-    font-family:
-
-    var(--font-serif);
-
-
-
-    font-size:
-
-    26px;
-
-
-
-    font-weight:
-
-    700;
-
-
-
-}
-
-
-
-
-
-
-
-.ctm-footer-role {
-
-
-    margin-top:
-
-    8px;
-
-
-
-    color:
-
-    var(--ctm-gold-soft);
-
-
-
-    font-size:
-
-    16px;
-
-
-
-    letter-spacing:
-
-    0.08em;
-
-
-
-}
-
-
-
-
-
-
 
 
 /* ==========================================================================
-   CONTACT INFORMATION
+   CONTACT SECTION
    ========================================================================== */
 
 
-.ctm-footer-contact {
-
-
-    margin-top:
-
-    42px;
-
+.footer-contact-item {
 
 
     display:
@@ -404,19 +357,19 @@
 
     gap:
 
-    18px;
+    5px;
 
 
 
-    font-size:
+    margin-bottom:
 
-    18px;
+    14px;
 
 
 
     color:
 
-    var(--ctm-text-primary);
+    var(--text-secondary);
 
 
 
@@ -424,94 +377,18 @@
 
 
 
-
-
-
-
-.ctm-contact-item {
-
-
-    display:
-
-    flex;
-
-
-
-    align-items:
-
-    center;
-
-
-
-    justify-content:
-
-    center;
-
-
-
-    gap:
-
-    10px;
-
-
-
-}
-
-
-
-
-
-
-
-.contact-icon {
+.footer-contact-item a {
 
 
     color:
 
-    var(--ctm-gold);
-
-
-
-    font-size:
-
-    18px;
-
-
-
-}
-
-
-
-
-
-
-
-.ctm-contact-item a {
-
-
-    color:
-
-    var(--ctm-gold-light);
-
-
-
-    text-decoration:
-
-    none;
-
-
-
-    font-weight:
-
-    600;
+    var(--ctm-teal);
 
 
 
     transition:
 
-    color
-    0.3s
-    ease;
+    color .25s ease;
 
 
 
@@ -519,20 +396,17 @@
 
 
 
-
-
-
-
-.ctm-contact-item a:hover {
+.footer-contact-item a:hover {
 
 
     color:
 
-    #FFFFFF;
+    var(--ctm-gold-soft);
 
 
 
 }
+
 
 
 
@@ -546,52 +420,52 @@
    ========================================================================== */
 
 
-.ctm-footer-bottom {
-
-
-    width:
-
-    100%;
-
+.footer-bottom {
 
 
     margin-top:
 
-    52px;
+    35px;
 
 
 
     padding-top:
 
-    24px;
+    20px;
 
 
 
     border-top:
 
     1px solid rgba(
+
         255,
+
         255,
+
         255,
-        0.12
+
+        0.08
+
     );
+
+
+
+    text-align:
+
+    center;
+
+
+
+    font-size:
+
+    13px;
 
 
 
     color:
 
-    rgba(
-        248,
-        244,
-        234,
-        0.75
-    );
-
-
-
-    font-size:
-
-    14px;
+    var(--text-muted);
 
 
 
@@ -604,21 +478,41 @@
 
 
 
+
 /* ==========================================================================
-   MOBILE
+   RESPONSIVE
    ========================================================================== */
 
 
-@media(max-width:767px){
+@media(max-width:900px){
 
 
 
-.ctm-footer {
+.footer-container{
+
+
+    grid-template-columns:
+
+    1fr;
+
+
+
+    text-align:
+
+    center;
+
+
+
+}
+
+
+
+.ctm-footer{
 
 
     padding:
 
-    56px 0;
+    40px 25px 25px;
 
 
 
@@ -626,59 +520,12 @@
 
 
 
-.ctm-footer-container {
+.footer-contact-item{
 
 
-    width:
+    align-items:
 
-    calc(
-        100% - 32px
-    );
-
-
-
-}
-
-
-
-.ctm-footer-brand-name {
-
-
-    font-size:
-
-    24px;
-
-
-
-}
-
-
-
-.ctm-footer-founder-name {
-
-
-    font-size:
-
-    22px;
-
-
-
-}
-
-
-
-.ctm-contact-item {
-
-
-    flex-direction:
-
-    column;
-
-
-
-    gap:
-
-    6px;
+    center;
 
 
 
@@ -687,24 +534,3 @@
 
 
 }
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   END OF FILE
-
-   File:
-   css/footer.css
-
-   Version:
-   CTM PATH™ Premium Footer Styling v2.2
-
-   Status:
-   UPDATED 🔒
-
-   ========================================================================== */
