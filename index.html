@@ -3,23 +3,25 @@
    CTM PATH™ Guided Journey™
 
    File        : index.html
-   Version     : 1.5
+   Version     : 2.0
 
-   Status      : PAGE 01 REFINEMENT UPDATE
+   Architecture:
 
-   Purpose:
-
-   Application entry point.
+   Static Premium Landing Page
 
    Responsibilities:
 
-   • Load frontend foundation.
-   • Mount application containers.
-   • Load controllers.
+   • Load global styles
+   • Render Page 01 Welcome experience
+   • Mount header
+   • Mount footer
+   • Handle CTA navigation
 
    IMPORTANT:
 
-   No business logic exists here.
+   No dynamic page injection.
+   No SPA routing.
+   No content replacement.
 
    ========================================================================== -->
 
@@ -41,11 +43,7 @@
 
 
 <meta name="description"
-      content="CTM PATH™ Guided Journey™ — A transformational life journey experience.">
-
-
-<meta name="application-name"
-      content="CTM PATH™ Guided Journey™">
+      content="CTM PATH™ Guided Journey™ — Discover the life you are meant to create.">
 
 
 
@@ -59,45 +57,29 @@ CTM PATH™ Guided Journey™
 
 
 
-
-
 <!-- ==========================================================================
-     CSS LOAD ORDER
-
-     Foundation
-     Theme
-     Header
-     Welcome
-     Footer
-     Responsive
-
+     GLOBAL STYLES
      ========================================================================== -->
-
 
 
 <link rel="stylesheet"
       href="css/foundation.css">
 
 
-
 <link rel="stylesheet"
       href="css/theme.css">
-
 
 
 <link rel="stylesheet"
       href="css/header.css">
 
 
-
 <link rel="stylesheet"
       href="css/welcome.css">
 
 
-
 <link rel="stylesheet"
       href="css/footer.css">
-
 
 
 <link rel="stylesheet"
@@ -111,77 +93,99 @@ CTM PATH™ Guided Journey™
 
 
 
-
-
 <body>
 
 
-
-
-
-
-
-<div id="app-shell"
-     class="app-shell">
-
-
+<div class="ctm-page">
 
 
 
 
 
 <!-- ==========================================================================
-     GLOBAL LOADER
-
-     Hidden by default.
-
-     Controlled by:
-     js/app.js
-
-     ========================================================================== -->
-
-
-<div id="global-loader"
-     class="global-loader hidden"
-     aria-hidden="true">
-
-
-
-<div class="loader-container">
-
-
-
-<div class="loader-spinner"
-     aria-label="Loading">
-
-</div>
-
-
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-<!-- ==========================================================================
-     HEADER COMPONENT
-
-     components/header.html
-
+     HEADER
      ========================================================================== -->
 
 
 <header id="app-header"
         class="app-header">
+
+
+<!-- Header HTML -->
+
+<div class="header-brand">
+
+
+<img src="assets/logo/CTM_Mark.svg"
+     class="brand-symbol"
+     alt="CTM PATH Logo">
+
+
+
+<div class="brand-identity">
+
+
+<div class="brand-name">
+
+CTM PATH™
+
+</div>
+
+
+
+<div class="brand-tagline-main">
+
+MILLIONAIRE PRODUCTION PATH™
+
+</div>
+
+
+
+<div class="brand-tagline">
+
+GUIDED JOURNEY™
+
+</div>
+
+
+
+<div class="brand-signature">
+
+Every Dream Has A Path™
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="journey-status">
+
+
+<span class="journey-label">
+
+JOURNEY
+
+</span>
+
+
+<span id="journey-counter"
+      class="journey-counter">
+
+01 / 18
+
+</span>
+
+
+</div>
+
 
 
 </header>
@@ -192,17 +196,26 @@ CTM PATH™ Guided Journey™
 
 
 
+
+
+
 <!-- ==========================================================================
-     MAIN CONTENT
-
-     All journey pages render here.
-
+     MAIN WELCOME EXPERIENCE
      ========================================================================== -->
 
 
-<main id="app-content"
-      class="app-content"
-      role="main">
+<main>
+
+
+<section id="welcome"
+         class="welcome-page">
+
+
+
+<!-- Page content loaded here -->
+
+</section>
+
 
 
 </main>
@@ -213,34 +226,131 @@ CTM PATH™ Guided Journey™
 
 
 
-<!-- ==========================================================================
-     NAVIGATION COMPONENT
-
-     ========================================================================== -->
-
-
-<nav id="app-navigation"
-     class="app-navigation">
-
-
-</nav>
-
-
-
-
 
 
 
 <!-- ==========================================================================
-     FOOTER COMPONENT
-
-     components/footer.html
-
+     FOOTER
      ========================================================================== -->
 
 
-<footer id="app-footer"
-        class="app-footer">
+<footer class="app-footer">
+
+
+<div class="footer-brand">
+
+
+<h3>
+
+CTM PATH™
+
+</h3>
+
+
+
+<p>
+
+GUIDED JOURNEY™
+
+</p>
+
+
+
+<p>
+
+Every Dream Has A Path™
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="footer-founder">
+
+
+<span>
+
+Created by
+
+</span>
+
+
+
+<h4>
+
+Healer King Raphael Raj
+
+</h4>
+
+
+
+<p>
+
+Founder & Chief Mentor
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div class="footer-contact">
+
+
+<p>
+
+🟡 WhatsApp:
+
+<a href="tel:7036970339">
+
+70-369-70-339
+
+</a>
+
+
+</p>
+
+
+
+
+<p>
+
+✉ Email:
+
+<a href="mailto:healerking@umbaravai.com">
+
+healerking@umbaravai.com
+
+</a>
+
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div class="footer-copy">
+
+
+© 2026 CTM PATH™ Guided Journey™
+
+</div>
+
 
 
 </footer>
@@ -251,23 +361,6 @@ CTM PATH™ Guided Journey™
 
 
 
-</div>
-
-
-
-
-
-
-
-<!-- ==========================================================================
-     ERROR CONTAINER
-
-     ========================================================================== -->
-
-
-<div id="error-container"
-     class="error-container hidden">
-
 
 </div>
 
@@ -278,7 +371,9 @@ CTM PATH™ Guided Journey™
 
 
 <!-- ==========================================================================
-     JAVASCRIPT LOAD ORDER
+     JAVASCRIPT
+
+     Minimal Foundation Only
 
      ========================================================================== -->
 
@@ -286,32 +381,7 @@ CTM PATH™ Guided Journey™
 <script src="js/app.js"></script>
 
 
-<script src="js/api.js"></script>
-
-
-<script src="js/storage.js"></script>
-
-
 <script src="js/navigation.js"></script>
-
-
-<script src="js/assessmentEngine.js"></script>
-
-
-<script src="js/scoring.js"></script>
-
-
-<script src="js/report.js"></script>
-
-
-
-<!-- Page 01 Controller -->
-
-<script src="js/welcome.js"></script>
-
-
-
-
 
 
 
