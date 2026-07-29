@@ -3,110 +3,28 @@
    CTM PATH™ Guided Journey™
 
    File        : welcome.css
-   Version     : 3.1
+   Version     : 5.0
+
+   Page        : 01 — Welcome™
 
    Purpose:
 
-   Final Page 01 Welcome™ visual refinement.
+   Premium Welcome Experience Styling
 
-   Updates:
-
-   • CTA premium treatment
-   • Discovery card polish
-   • Symbol enhancement
-   • Theme variable alignment
 
    ========================================================================== */
+
 
 
 
 
 
 /* ==========================================================================
-   DISCOVERY CARDS — FINAL PREMIUM TREATMENT
+   PAGE FOUNDATION
    ========================================================================== */
 
 
-.discovery-card {
-
-
-    position:
-
-    relative;
-
-
-
-    overflow:
-
-    hidden;
-
-
-
-    background:
-
-    var(--ctm-surface-glass);
-
-
-
-    border:
-
-    1px solid var(--ctm-border-blue);
-
-
-
-    border-radius:
-
-    var(--radius-large);
-
-
-
-    box-shadow:
-
-    var(--ctm-shadow);
-
-
-
-    transition:
-
-    transform .35s ease,
-    border-color .35s ease,
-    box-shadow .35s ease;
-
-
-
-}
-
-
-
-
-
-
-
-.discovery-card::before {
-
-
-    content:
-
-    "";
-
-
-
-    position:
-
-    absolute;
-
-
-
-    top:
-
-    0;
-
-
-
-    left:
-
-    0;
-
+.welcome-page {
 
 
     width:
@@ -114,36 +32,398 @@
     100%;
 
 
+    min-height:
 
-    height:
-
-    2px;
-
+    100vh;
 
 
     background:
 
-    linear-gradient(
-
-        90deg,
-
-        transparent,
-
-        var(--ctm-blue),
-
-        transparent
-
-    );
+    var(--ctm-background);
 
 
+    color:
 
-    opacity:
-
-    .8;
-
+    var(--text-primary);
 
 
 }
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+
+
+.welcome-hero {
+
+
+    padding-top:
+
+    var(--space-lg);
+
+
+    padding-bottom:
+
+    var(--space-md);
+
+
+    text-align:
+
+    center;
+
+
+}
+
+
+
+
+
+
+
+
+.welcome-content {
+
+
+    max-width:
+
+    900px;
+
+
+    margin:
+
+    0 auto;
+
+
+}
+
+
+
+
+
+
+
+
+.welcome-title {
+
+
+    font-family:
+
+    var(--font-tamil);
+
+
+    font-size:
+
+    clamp(
+        38px,
+        5vw,
+        64px
+    );
+
+
+    line-height:
+
+    1.45;
+
+
+    font-weight:
+
+    700;
+
+
+    color:
+
+    var(--text-primary);
+
+
+}
+
+
+
+
+
+
+
+
+.welcome-tagline {
+
+
+    margin-top:
+
+    24px;
+
+
+    font-size:
+
+    clamp(
+        22px,
+        3vw,
+        32px
+    );
+
+
+    letter-spacing:
+
+    4px;
+
+
+    color:
+
+    var(--ctm-gold);
+
+
+    font-weight:
+
+    700;
+
+
+}
+
+
+
+
+
+
+
+
+.welcome-description {
+
+
+    margin-top:
+
+    32px;
+
+
+    font-size:
+
+    22px;
+
+
+    color:
+
+    var(--text-secondary);
+
+
+}
+
+
+
+
+
+
+
+
+.welcome-description-en {
+
+
+    margin-top:
+
+    18px;
+
+
+    font-size:
+
+    18px;
+
+
+    color:
+
+    var(--text-muted);
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   DISCOVERY SECTION
+   ========================================================================== */
+
+
+.discovery-section {
+
+
+    padding:
+
+    var(--space-md) 0;
+
+
+    text-align:
+
+    center;
+
+
+}
+
+
+
+
+
+
+
+
+.section-heading h2 {
+
+
+    font-family:
+
+    var(--font-tamil);
+
+
+    font-size:
+
+    34px;
+
+
+    color:
+
+    var(--text-primary);
+
+
+}
+
+
+
+
+
+
+
+
+.section-heading p {
+
+
+    margin-top:
+
+    12px;
+
+
+    color:
+
+    var(--ctm-teal-light);
+
+
+    letter-spacing:
+
+    2px;
+
+
+}
+
+
+
+
+
+
+
+
+.discovery-grid {
+
+
+    margin-top:
+
+    45px;
+
+
+    display:
+
+    grid;
+
+
+    grid-template-columns:
+
+    repeat(
+        4,
+        1fr
+    );
+
+
+    gap:
+
+    24px;
+
+
+}
+
+
+
+
+
+
+
+
+.discovery-card {
+
+
+    padding:
+
+    32px 24px;
+
+
+    min-height:
+
+    340px;
+
+
+    display:
+
+    flex;
+
+
+    flex-direction:
+
+    column;
+
+
+    align-items:
+
+    center;
+
+
+    justify-content:
+
+    flex-start;
+
+
+    background:
+
+    var(--ctm-glass);
+
+
+    border:
+
+    1px solid var(--border-soft);
+
+
+    border-radius:
+
+    var(--radius-lg);
+
+
+    box-shadow:
+
+    var(--shadow-premium);
+
+
+    transition:
+
+    all .35s ease;
+
+
+}
+
 
 
 
@@ -159,22 +439,14 @@
     translateY(-8px);
 
 
-
     border-color:
 
     var(--ctm-gold);
 
 
-
     box-shadow:
 
-    0 25px 70px rgba(
-        0,
-        183,
-        255,
-        0.20
-    );
-
+    var(--shadow-gold);
 
 
 }
@@ -184,10 +456,6 @@
 
 
 
-
-/* ==========================================================================
-   DISCOVERY SYMBOLS
-   ========================================================================== */
 
 
 .discovery-icon {
@@ -195,14 +463,12 @@
 
     width:
 
-    82px;
-
+    72px;
 
 
     height:
 
-    82px;
-
+    72px;
 
 
     display:
@@ -210,11 +476,9 @@
     flex;
 
 
-
     align-items:
 
     center;
-
 
 
     justify-content:
@@ -222,37 +486,29 @@
     center;
 
 
+    border-radius:
 
-}
-
-
-
-.discovery-icon svg {
+    50%;
 
 
-    stroke:
+    font-size:
 
-    var(--ctm-gold-light);
-
-
-
-    stroke-width:
-
-    4;
+    34px;
 
 
+    color:
 
-    filter:
+    var(--ctm-gold);
 
-    drop-shadow(
-        0 0 12px rgba(
-            217,
-            181,
-            106,
-            .45
-        )
-    );
 
+    border:
+
+    1px solid var(--border-gold);
+
+
+    margin-bottom:
+
+    18px;
 
 
 }
@@ -262,37 +518,187 @@
 
 
 
-
-
-/* ==========================================================================
-   DISCOVERY NUMBER BADGES
-   ========================================================================== */
 
 
 .discovery-number {
 
 
-    background:
+    font-size:
 
-    rgba(
-        0,
-        183,
-        255,
-        0.08
-    );
+    14px;
 
 
+    letter-spacing:
 
-    border:
-
-    1px solid var(--ctm-blue);
-
+    3px;
 
 
     color:
 
-    var(--ctm-blue);
+    var(--ctm-teal);
 
+
+    margin-bottom:
+
+    14px;
+
+
+}
+
+
+
+
+
+
+
+
+.discovery-card h3 {
+
+
+    font-family:
+
+    var(--font-tamil);
+
+
+    font-size:
+
+    22px;
+
+
+    color:
+
+    var(--text-primary);
+
+
+}
+
+
+
+
+
+
+
+
+.discovery-card h4 {
+
+
+    margin-top:
+
+    12px;
+
+
+    color:
+
+    var(--ctm-gold-light);
+
+
+    font-size:
+
+    15px;
+
+
+    letter-spacing:
+
+    1px;
+
+
+}
+
+
+
+
+
+
+
+
+.discovery-card p {
+
+
+    margin-top:
+
+    20px;
+
+
+    color:
+
+    var(--text-secondary);
+
+
+    line-height:
+
+    1.8;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   FINAL INVITATION
+   ========================================================================== */
+
+
+.welcome-invitation {
+
+
+    padding:
+
+    var(--space-lg) 0;
+
+
+    text-align:
+
+    center;
+
+
+}
+
+
+
+
+
+
+
+
+.welcome-invitation h2 {
+
+
+    font-family:
+
+    var(--font-tamil);
+
+
+    font-size:
+
+    36px;
+
+
+}
+
+
+
+
+
+
+
+
+.welcome-invitation p {
+
+
+    margin-top:
+
+    20px;
+
+
+    color:
+
+    var(--text-secondary);
 
 
 }
@@ -305,11 +711,32 @@
 
 
 /* ==========================================================================
-   CTA BUTTON — CTM BLUE SIGNATURE
+   CTA BUTTON
+
    ========================================================================== */
 
 
 .welcome-start-btn {
+
+
+    margin-top:
+
+    40px;
+
+
+    padding:
+
+    18px 45px;
+
+
+    border:
+
+    none;
+
+
+    border-radius:
+
+    var(--radius-pill);
 
 
     background:
@@ -325,37 +752,34 @@
     );
 
 
-
     color:
 
-    #FFFFFF;
+    white;
 
 
+    font-size:
 
-    border:
+    18px;
 
-    1px solid rgba(
-        255,
-        255,
-        255,
-        0.25
-    );
 
+    font-weight:
+
+    700;
 
 
     box-shadow:
 
-    0 0 35px var(--ctm-blue-glow);
+    var(--shadow-blue);
 
 
+    transition:
 
-    letter-spacing:
-
-    .03em;
-
+    transform .3s ease,
+    box-shadow .3s ease;
 
 
 }
+
 
 
 
@@ -366,17 +790,15 @@
 .welcome-start-btn:hover {
 
 
-    box-shadow:
-
-    0 0 60px var(--ctm-blue-glow-strong);
-
-
-
     transform:
 
     translateY(-5px);
 
 
+    box-shadow:
+
+    0 0 60px var(--ctm-blue-glow);
+
 
 }
 
@@ -387,111 +809,73 @@
 
 
 
+
 /* ==========================================================================
-   CTA TEXT HIERARCHY
+   RESPONSIVE
    ========================================================================== */
 
 
-.welcome-start-btn span:first-child {
+@media(max-width:1100px){
 
 
-    font-family:
 
-    var(--font-tamil);
+.discovery-grid {
 
+
+    grid-template-columns:
+
+    repeat(
+        2,
+        1fr
+    );
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+@media(max-width:700px){
+
+
+
+.discovery-grid {
+
+
+    grid-template-columns:
+
+    1fr;
+
+
+}
+
+
+
+.welcome-title {
 
 
     font-size:
 
-    20px;
-
-
-
-}
-
-
-
-.welcome-start-btn span:last-child {
-
-
-    font-size:
-
-    14px;
-
-
-
-    opacity:
-
-    .95;
-
+    36px;
 
 
 }
 
 
 
-
-
-
-
-
-/* ==========================================================================
-   HERO SPACING REFINEMENT
-   ========================================================================== */
-
-
-.welcome-hero {
-
-
-    padding-top:
-
-    55px;
-
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   MOBILE REFINEMENT
-   ========================================================================== */
-
-
-@media(max-width:767px){
-
-
-
-.discovery-icon {
-
-
-    width:
-
-    70px;
-
-
-
-    height:
-
-    70px;
-
-
-
-}
-
-
-
-.welcome-start-btn span:first-child {
+.welcome-description {
 
 
     font-size:
 
     18px;
-
 
 
 }
