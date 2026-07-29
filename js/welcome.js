@@ -1,30 +1,29 @@
 
 /* ==========================================================================
-
    CTM PATH™ Guided Journey™
 
    File        : js/welcome.js
-   Version     : 1.0
+   Version     : 1.1
 
-   Status      : 🔒 PAGE 01 CTA CONTROLLER
+   Status      : CTA ROUTER COMPATIBILITY PATCH
 
 
    Purpose:
 
-   Controls Welcome Page interaction.
+   Controls Page 01 Welcome interaction.
 
 
    Responsibilities:
 
-   ✓ Start journey
-   ✓ Dispatch Page 02 transition
+   ✓ Begin Journey button
+   ✓ Connect to app router
 
 
    Does NOT:
 
    ✗ Load pages
-   ✗ Handle API
-   ✗ Process data
+   ✗ Handle data
+   ✗ Call backend
 
 
    ========================================================================== */
@@ -35,6 +34,8 @@ const Welcome = (() => {
 
 
     let initialized = false;
+
+
 
 
 
@@ -90,9 +91,17 @@ const Welcome = (() => {
 
         if(!button){
 
+            console.warn(
+
+                "Welcome CTA button not found"
+
+            );
+
             return;
 
         }
+
+
 
 
 
@@ -102,7 +111,7 @@ const Welcome = (() => {
 
             "click",
 
-            startJourney
+            handleStart
 
         );
 
@@ -118,35 +127,39 @@ const Welcome = (() => {
 
 
 
-    function startJourney(){
+    function handleStart(){
 
 
 
-        document.dispatchEvent(
+        if(
+
+            window.CTMApp &&
+
+            CTMApp.startJourney
+
+        ){
 
 
 
-            new CustomEvent(
-
-                "ctm-page-change",
-
-                {
-
-                    detail:{
-
-
-                        page:2
-
-
-                    }
-
-                }
-
-            )
+            CTMApp.startJourney();
 
 
 
-        );
+        }
+
+        else {
+
+
+
+            console.error(
+
+                "CTMApp router unavailable"
+
+            );
+
+
+
+        }
 
 
 
@@ -182,15 +195,26 @@ const Welcome = (() => {
 
 
 
+window.Welcome = Welcome;
+
+
+
+
+
+
+
+
+
 document.addEventListener(
 
-"DOMContentLoaded",
+    "ctm-page-loaded",
 
-()=>{
-
-
-    Welcome.init();
+    ()=>{
 
 
+        Welcome.init();
 
-});
+
+    }
+
+);
