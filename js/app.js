@@ -3,7 +3,7 @@
    CTM PATH™ Guided Journey™
 
    File        : app.js
-   Version     : 2.0
+   Version     : 2.1
 
    Purpose:
 
@@ -13,21 +13,17 @@
 
    ✓ Initialize application
    ✓ Load shared components
+   ✓ Initialize navigation after component injection
    ✓ Load first journey page
-   ✓ Prepare frontend environment
 
 
    Does NOT:
 
-   ✗ Navigation routing
    ✗ Assessment logic
    ✗ Scoring
    ✗ Backend operations
 
-
    ========================================================================== */
-
-
 
 
 
@@ -73,9 +69,6 @@ const CTMApp = (() => {
 
 
 
-
-
-
     let started = false;
 
 
@@ -85,13 +78,7 @@ const CTMApp = (() => {
 
 
 
-    /* ==========================================================
-       APPLICATION START
-       ========================================================== */
-
-
     async function init(){
-
 
 
         if(started){
@@ -99,7 +86,6 @@ const CTMApp = (() => {
             return;
 
         }
-
 
 
         started = true;
@@ -114,6 +100,10 @@ const CTMApp = (() => {
 
 
 
+        initializeNavigation();
+
+
+
         await loadInitialPage();
 
 
@@ -125,11 +115,6 @@ const CTMApp = (() => {
 
 
 
-
-
-    /* ==========================================================
-       LOAD SHARED COMPONENTS
-       ========================================================== */
 
 
     async function loadGlobalComponents(){
@@ -175,6 +160,40 @@ const CTMApp = (() => {
 
 
 
+
+    function initializeNavigation(){
+
+
+
+        if(
+
+            window.CTMNavigation
+
+            &&
+
+            typeof window.CTMNavigation.init === "function"
+
+        ){
+
+
+            window.CTMNavigation.init();
+
+
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
     async function loadComponent(
 
         elementId,
@@ -208,10 +227,10 @@ const CTMApp = (() => {
         try {
 
 
+
             const response =
 
             await fetch(filePath);
-
 
 
 
@@ -253,7 +272,6 @@ const CTMApp = (() => {
             );
 
 
-
         }
 
 
@@ -266,11 +284,6 @@ const CTMApp = (() => {
 
 
 
-
-
-    /* ==========================================================
-       LOAD FIRST JOURNEY PAGE
-       ========================================================== */
 
 
     async function loadInitialPage(){
@@ -292,6 +305,7 @@ const CTMApp = (() => {
             return;
 
         }
+
 
 
 
@@ -354,7 +368,6 @@ const CTMApp = (() => {
             );
 
 
-
         }
 
 
@@ -367,10 +380,6 @@ const CTMApp = (() => {
 
 
 
-
-    /* ==========================================================
-       LOADER CONTROL
-       ========================================================== */
 
 
     function hideLoader(){
@@ -414,6 +423,7 @@ const CTMApp = (() => {
 
 
 
+
     return {
 
 
@@ -421,7 +431,6 @@ const CTMApp = (() => {
 
 
         loadInitialPage
-
 
 
     };
@@ -437,8 +446,11 @@ const CTMApp = (() => {
 
 
 
+
 /* ==========================================================================
+
    APPLICATION BOOT
+
    ========================================================================== */
 
 
