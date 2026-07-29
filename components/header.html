@@ -3,23 +3,23 @@
    CTM PATH™ Guided Journey™
 
    File        : header.html
-   Version     : 3.0
+   Version     : 3.1
 
    Purpose:
 
-   Global premium brand header.
+   Single premium global header.
 
    Responsibilities:
 
-   • Display CTM PATH™ identity.
+   • Display CTM PATH™ brand identity.
    • Display logo.
    • Display journey progress.
 
    Does NOT:
 
+   • Render page content.
    • Control navigation.
    • Manage application state.
-   • Execute scripts.
 
    ========================================================================== -->
 
@@ -27,14 +27,14 @@
 <header class="ctm-header">
 
 
-
     <div class="ctm-header-container">
 
 
 
+        <!-- ==============================================================
+             BRAND IDENTITY
+             ============================================================== -->
 
-
-        <!-- BRAND AREA -->
 
         <div class="ctm-brand">
 
@@ -44,12 +44,11 @@
 
                 src="assets/logo/CTM_Logo_Transparent.svg"
 
-                alt="CTM PATH™ Logo"
+                alt="CTM PATH™ Guided Journey™"
 
                 class="ctm-header-logo"
 
             />
-
 
 
 
@@ -95,9 +94,10 @@
 
 
 
+        <!-- ==============================================================
+             JOURNEY PROGRESS
+             ============================================================== -->
 
-
-        <!-- JOURNEY STATUS -->
 
         <div class="ctm-journey-status">
 
@@ -105,21 +105,34 @@
 
             <div class="ctm-journey-label">
 
+
                 Journey
+
 
             </div>
 
 
 
-            <div
 
-                class="ctm-journey-step"
+            <div class="ctm-journey-step">
 
-                data-current-step
 
-            >
+                <span data-current-step>
 
-                01 / 18
+                    01
+
+                </span>
+
+
+                /
+
+                <span data-total-steps>
+
+                    18
+
+                </span>
+
+
 
             </div>
 
@@ -130,9 +143,7 @@
 
 
 
-
     </div>
-
 
 
 </header>
