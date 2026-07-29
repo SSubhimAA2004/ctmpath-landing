@@ -3,41 +3,28 @@
    CTM PATH™ Guided Journey™
 
    File        : responsive.css
-   Version     : 1.0
-   Status      : DEVELOPMENT
-   Stage       : STAGE 0 — FOUNDATION
+   Version     : 2.0
 
-   Purpose     :
-   Responsive adaptation layer for the CTM PATH™ Guided Journey™
-   frontend application.
+   Purpose:
 
-   Responsibilities:
+   Premium responsive behaviour layer.
 
-   • Desktop-first responsive behaviour
-   • Tablet adaptations
-   • Mobile adaptations
-   • Typography scaling
-   • Container adjustments
-   • Navigation adaptations
+   Controls:
 
-   Does NOT contain:
-
-   • Brand colors
-   • Theme variables
-   • Business logic
-   • Page-specific styling
+   • Desktop scaling
+   • Tablet adaptation
+   • Mobile experience
+   • Typography adjustments
+   • Touch-friendly interaction
 
    ========================================================================== */
 
 
+
 /* ==========================================================================
    LARGE DESKTOP OPTIMIZATION
-   Base design target:
 
-   Desktop-first
-
-   Primary viewport:
-   1280px+
+   Screens above 1440px
 
    ========================================================================== */
 
@@ -47,19 +34,57 @@
 
     .app-container {
 
+
         max-width:
 
-            1440px;
+            1280px;
+
+
 
     }
 
 
 
-    .heading-xl {
+
+
+    .welcome-content {
+
+
+        max-width:
+
+            1100px;
+
+
+
+    }
+
+
+
+
+
+    .welcome-title.tamil {
+
 
         font-size:
 
-            3.5rem;
+            76px;
+
+
+
+    }
+
+
+
+
+
+    .welcome-card {
+
+
+        padding:
+
+            64px;
+
+
 
     }
 
@@ -69,10 +94,12 @@
 
 
 
-/* ==========================================================================
-   STANDARD DESKTOP
 
-   1024px - 1439px
+
+/* ==========================================================================
+   LAPTOP / STANDARD DESKTOP
+
+   1025px - 1439px
 
    ========================================================================== */
 
@@ -82,13 +109,60 @@
 
     .app-container {
 
-        padding-left:
 
-            1.5rem;
+        width:
 
-        padding-right:
+            calc(
 
-            1.5rem;
+                100% - 80px
+
+            );
+
+
+
+    }
+
+
+
+
+
+    .welcome-title.tamil {
+
+
+        font-size:
+
+            clamp(
+
+                48px,
+
+                5vw,
+
+                68px
+
+            );
+
+
+
+    }
+
+
+
+
+
+    .kalachakra-grid {
+
+
+        grid-template-columns:
+
+            repeat(
+
+                4,
+
+                1fr
+
+            );
+
+
 
     }
 
@@ -96,112 +170,207 @@
 
 }
 
-
-
 /* ==========================================================================
-   TABLET LANDSCAPE
+   TABLET EXPERIENCE
 
-   768px - 1023px
+   768px - 1024px
 
    ========================================================================== */
 
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
 
 
-    html {
+    .app-container,
+
+    .container {
+
+
+        width:
+
+            calc(
+
+                100% - 64px
+
+            );
+
+
+
+    }
+
+
+
+
+
+    .welcome-content {
+
+
+        padding:
+
+            72px 0 56px;
+
+
+
+    }
+
+
+
+
+
+    .welcome-title.tamil {
+
 
         font-size:
 
-            15px;
+            48px;
+
+
+
+        line-height:
+
+            1.7;
+
+
 
     }
 
 
 
-    .app-container {
-
-        padding-left:
-
-            1.25rem;
-
-        padding-right:
-
-            1.25rem;
-
-    }
 
 
+    .welcome-title.english {
 
-    .heading-xl {
 
         font-size:
 
-            2.75rem;
+            30px;
+
+
 
     }
 
 
 
-    .heading-lg {
+
+
+    .welcome-subtitle {
+
 
         font-size:
 
-            2rem;
+            21px;
+
+
 
     }
 
 
 
-    .heading-md {
+
+
+    .welcome-description {
+
 
         font-size:
 
-            1.5rem;
+            18px;
+
+
 
     }
 
 
 
-    .section {
-
-        padding-top:
-
-            3rem;
 
 
-        padding-bottom:
+    .welcome-points {
 
-            3rem;
+
+        grid-template-columns:
+
+            repeat(
+
+                1,
+
+                1fr
+
+            );
+
+
+
+    }
+
+
+
+
+
+    .welcome-preview-grid {
+
+
+        grid-template-columns:
+
+            repeat(
+
+                2,
+
+                1fr
+
+            );
+
+
 
     }
 
 
 
-    .flex-between {
 
-        flex-direction:
 
-            column;
+    .kalachakra-grid {
 
-        align-items:
 
-            flex-start;
+        grid-template-columns:
 
-        gap:
+            repeat(
 
-            1rem;
+                3,
+
+                1fr
+
+            );
+
+
 
     }
+
+
+
+
+
+    .header-container {
+
+
+        padding:
+
+            0 24px;
+
+
+
+    }
+
+
 
 
 
 }
 
-/* ==========================================================================
-   MOBILE LANDSCAPE / SMALL TABLET
 
-   600px - 767px
+
+
+
+/* ==========================================================================
+   MOBILE PREMIUM EXPERIENCE
+
+   481px - 767px
 
    ========================================================================== */
 
@@ -209,277 +378,660 @@
 @media (max-width: 767px) {
 
 
-    html {
-
-        font-size:
-
-            14px;
-
-    }
-
-
-
-    .app-container {
-
-        padding-left:
-
-            1rem;
-
-
-        padding-right:
-
-            1rem;
-
-    }
-
-
-
-    .heading-xl {
-
-        font-size:
-
-            2.25rem;
-
-        line-height:
-
-            1.15;
-
-    }
-
-
-
-    .heading-lg {
-
-        font-size:
-
-            1.75rem;
-
-    }
-
-
-
-    .heading-md {
-
-        font-size:
-
-            1.4rem;
-
-    }
-
-
-
-    .section {
-
-        padding-top:
-
-            2.5rem;
-
-
-        padding-bottom:
-
-            2.5rem;
-
-    }
-
-
-
-    .card {
-
-        padding:
-
-            1.25rem;
-
-    }
-
-
-
-    .btn {
-
-        width:
-
-            100%;
-
-    }
-
-
-
-    .text-center-mobile {
-
-        text-align:
-
-            center;
-
-    }
-
-
-
-    .flex-mobile-column {
-
-        flex-direction:
-
-            column;
-
-    }
-
-
-
-}
-
-
-
-/* ==========================================================================
-   MOBILE DEVICES
-
-   Below 600px
-
-   ========================================================================== */
-
-
-@media (max-width: 599px) {
-
-
-    html {
-
-        font-size:
-
-            14px;
-
-    }
-
-
-
     body {
 
-        overflow-x:
-
-            hidden;
-
-    }
-
-
-
-    .app-container {
-
-        padding-left:
-
-            0.875rem;
-
-
-        padding-right:
-
-            0.875rem;
-
-    }
-
-
-
-    .heading-xl {
-
-        font-size:
-
-            1.9rem;
-
-    }
-
-
-
-    .heading-lg {
-
-        font-size:
-
-            1.55rem;
-
-    }
-
-
-
-    .heading-md {
-
-        font-size:
-
-            1.25rem;
-
-    }
-
-
-
-    .text-large {
-
-        font-size:
-
-            1rem;
-
-    }
-
-
-
-    .section {
-
-        padding-top:
-
-            2rem;
-
-
-        padding-bottom:
-
-            2rem;
-
-    }
-
-
-
-    .card {
-
-        border-radius:
-
-            0.875rem;
-
-        padding:
-
-            1rem;
-
-    }
-
-
-
-    .surface {
-
-        border-radius:
-
-            0.875rem;
-
-    }
-
-
-
-    .global-loader {
-
-        padding:
-
-            1rem;
-
-    }
-
-
-
-    .loader-message {
-
-        text-align:
-
-            center;
-
-    }
-
-
-
-    input,
-    textarea,
-    select {
 
         font-size:
 
             16px;
 
+
+
+    }
+
+
+
+
+
+    .app-container {
+
+
+        width:
+
+            calc(
+
+                100% - 32px
+
+            );
+
+
+
+    }
+
+
+
+
+
+    .welcome-content {
+
+
+        padding:
+
+            48px 0 40px;
+
+
+
+    }
+
+
+
+
+
+    .welcome-title.tamil {
+
+
+        font-size:
+
+            34px;
+
+
+
+        line-height:
+
+            1.9;
+
+
+
+    }
+
+
+
+
+
+    .welcome-title.english {
+
+
+        margin-top:
+
+            14px;
+
+
+
+        font-size:
+
+            22px;
+
+
+
+    }
+
+
+
+
+
+    .welcome-subtitle {
+
+
+        margin-top:
+
+            24px;
+
+
+
+        font-size:
+
+            18px;
+
+
+
+        line-height:
+
+            2;
+
+
+
+    }
+
+
+
+
+
+    .welcome-description {
+
+
+        font-size:
+
+            16px;
+
+
+
+        line-height:
+
+            2;
+
+
+
+    }
+
+
+
+
+
+    .welcome-card {
+
+
+        margin:
+
+            24px 0 56px;
+
+
+
+        padding:
+
+            28px 20px;
+
+
+
+        border-radius:
+
+            24px;
+
+
+
+    }
+
+
+
+
+
+    .welcome-card-body p {
+
+
+        font-size:
+
+            17px;
+
+
+
+    }
+
+
+
+
+
+    .welcome-preview-grid {
+
+
+        grid-template-columns:
+
+            1fr;
+
+
+
+    }
+
+
+
+
+
+    .kalachakra-grid {
+
+
+        grid-template-columns:
+
+            1fr;
+
+
+
+    }
+
+
+
+
+
+    .welcome-final {
+
+
+        padding:
+
+            40px 20px;
+
+
+
+    }
+
+
+
+
+
+    .welcome-button {
+
+
+        width:
+
+            100%;
+
+
+
+        min-height:
+
+            64px;
+
+
+
+        font-size:
+
+            18px;
+
+
+
+    }
+
+
+
+}
+
+/* ==========================================================================
+   SMALL MOBILE EXPERIENCE
+
+   Below 480px
+
+   ========================================================================== */
+
+
+@media (max-width: 480px) {
+
+
+    .app-container,
+
+    .container {
+
+
+        width:
+
+            calc(
+
+                100% - 24px
+
+            );
+
+
+
+    }
+
+
+
+
+
+    .welcome-eyebrow {
+
+
+        font-size:
+
+            12px;
+
+
+
+        letter-spacing:
+
+            0.14em;
+
+
+
+    }
+
+
+
+
+
+    .welcome-title.tamil {
+
+
+        font-size:
+
+            30px;
+
+
+
+        line-height:
+
+            2;
+
+
+
+    }
+
+
+
+
+
+    .welcome-title.english {
+
+
+        font-size:
+
+            20px;
+
+
+
+    }
+
+
+
+
+
+    .welcome-subtitle {
+
+
+        font-size:
+
+            17px;
+
+
+
+    }
+
+
+
+
+
+    .welcome-card {
+
+
+        padding:
+
+            24px 16px;
+
+
+
+    }
+
+
+
+
+
+    .welcome-card-header h2 {
+
+
+        font-size:
+
+            26px;
+
+
+
+    }
+
+
+
+
+
+    .welcome-points li {
+
+
+        padding:
+
+            20px;
+
+
+
+        font-size:
+
+            16px;
+
+
+
+    }
+
+
+
+
+
+    .preview-number {
+
+
+        width:
+
+            56px;
+
+
+
+        height:
+
+            56px;
+
+
+
+        font-size:
+
+            22px;
+
+
+
+    }
+
+
+
+
+
+    .kalachakra-item {
+
+
+        padding:
+
+            22px;
+
+
+
+    }
+
+
+
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   HEADER MOBILE REFINEMENT
+
+   ========================================================================== */
+
+
+@media (max-width: 767px) {
+
+
+    .header-container {
+
+
+        flex-direction:
+
+            column;
+
+
+
+        justify-content:
+
+            center;
+
+
+
+        gap:
+
+            12px;
+
+
+
+        padding:
+
+            16px 0;
+
+
+
+    }
+
+
+
+
+
+    .header-brand {
+
+
+        justify-content:
+
+            center;
+
+
+
+    }
+
+
+
+
+
+    .ctm-logo {
+
+
+        width:
+
+            44px;
+
+
+
+        height:
+
+            44px;
+
+
+
+    }
+
+
+
+
+
+    .brand-name {
+
+
+        font-size:
+
+            18px;
+
+
+
+    }
+
+
+
+
+
+    .brand-subtitle {
+
+
+        font-size:
+
+            12px;
+
+
+
+    }
+
+
+
+
+
+    .header-progress {
+
+
+        justify-content:
+
+            center;
+
+
+
+        width:
+
+            100%;
+
+
+
+    }
+
+
+
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   FOOTER MOBILE REFINEMENT
+
+   ========================================================================== */
+
+
+@media (max-width: 767px) {
+
+
+    .app-footer {
+
+
+        padding:
+
+            48px 20px;
+
+
+
+    }
+
+
+
+
+
+    .footer-brand-name {
+
+
+        font-size:
+
+            21px;
+
+
+
+    }
+
+
+
+
+
+    .footer-founder-name {
+
+
+        font-size:
+
+            20px;
+
+
+
+    }
+
+
+
+
+
+    .footer-contact-item {
+
+
+        font-size:
+
+            16px;
+
+
+
     }
 
 
@@ -488,57 +1040,44 @@
 
 
 
-/* ==========================================================================
-   SMALL MOBILE DEVICES
 
-   Below 375px
+
+/* ==========================================================================
+   TOUCH DEVICE OPTIMIZATION
 
    ========================================================================== */
 
 
-@media (max-width: 374px) {
+@media (hover: none) {
 
 
-    .app-container {
+    .card:hover,
 
-        padding-left:
+    .welcome-preview-item:hover,
 
-            0.75rem;
+    .kalachakra-item:hover {
 
 
-        padding-right:
+        transform:
 
-            0.75rem;
+            none;
+
+
 
     }
 
 
-
-    .heading-xl {
-
-        font-size:
-
-            1.7rem;
-
-    }
-
-
-
-    .heading-lg {
-
-        font-size:
-
-            1.4rem;
-
-    }
 
 
 
     .btn {
 
-        padding:
 
-            0.75rem 1rem;
+        min-height:
+
+            64px;
+
+
 
     }
 
@@ -548,10 +1087,10 @@
 
 
 
-/* ==========================================================================
-   ACCESSIBILITY RESPONSIVE SUPPORT
 
-   Reduced Motion
+
+/* ==========================================================================
+   ACCESSIBILITY SUPPORT
 
    ========================================================================== */
 
@@ -560,17 +1099,22 @@
 
 
     *,
+
     *::before,
+
     *::after {
 
-        animation-duration:
 
-            0.01ms !important;
+        animation:
+
+            none !important;
 
 
-        animation-iteration-count:
 
-            1 !important;
+        transition:
+
+            none !important;
+
 
 
         scroll-behavior:
@@ -578,67 +1122,33 @@
             auto !important;
 
 
-        transition-duration:
-
-            0.01ms !important;
 
     }
 
 
 
 }
+
+
 
 
 
 /* ==========================================================================
-   PRINT OPTIMIZATION
+   END OF FILE
+
+   File:
+
+   css/responsive.css
+
+
+   Version:
+
+   CTM PATH™ Premium Responsive Layer v2.0
+
+
+   Status:
+
+   COMPLETE 🔒
+
 
    ========================================================================== */
-
-
-@media print {
-
-
-    body {
-
-        background:
-
-            #ffffff;
-
-        color:
-
-            #000000;
-
-    }
-
-
-
-    .global-loader,
-    .app-navigation,
-    .app-footer {
-
-        display:
-
-            none !important;
-
-    }
-
-
-
-    .card,
-    .surface {
-
-        box-shadow:
-
-            none;
-
-        border:
-
-            1px solid #cccccc;
-
-    }
-
-
-
-}
-
