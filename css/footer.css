@@ -3,8 +3,14 @@
    CTM PATH™ Guided Journey™
 
    File        : css/footer.css
-   Version     : 5.0
+   Version     : 6.0
    Status      : PREMIUM FOOTER SYSTEM
+   Author      : CTM PATH™
+
+   Purpose
+   -------
+   Premium global footer for the Guided Journey™ website.
+
 ========================================================================== */
 
 
@@ -25,16 +31,16 @@
 
     overflow:hidden;
 
+    border-top:1px solid rgba(255,255,255,.06);
+
 }
 
 
 
 
 
-
-
 /* ==========================================================================
-   SUBTLE PREMIUM GLOW
+   PREMIUM ATMOSPHERIC GLOW
 ========================================================================== */
 
 .ctm-footer::before{
@@ -46,10 +52,17 @@
     inset:0;
 
     background:
+
         radial-gradient(
             circle at top center,
-            rgba(35,212,200,.08),
+            rgba(35,212,200,.10),
             transparent 62%
+        ),
+
+        radial-gradient(
+            circle at bottom center,
+            rgba(255,255,255,.025),
+            transparent 70%
         );
 
     pointer-events:none;
@@ -60,10 +73,8 @@
 
 
 
-
-
 /* ==========================================================================
-   JOURNEY TAGLINE
+   JOURNEY SIGNATURE
 ========================================================================== */
 
 .footer-topline{
@@ -72,27 +83,25 @@
 
     z-index:2;
 
-    max-width:1600px;
+    width:min(95%,1600px);
 
     margin:0 auto;
 
-    padding:85px 40px 75px;
+    padding:95px 40px 82px;
 
     text-align:center;
 
     color:#F8F5EF;
 
-    font-size:2.65rem;
+    font-size:2.85rem;
 
     font-weight:300;
 
     line-height:1.45;
 
-    letter-spacing:.01em;
+    letter-spacing:.015em;
 
 }
-
-
 
 
 
@@ -100,13 +109,15 @@
 
 .footer-topline span{
 
-    margin:0 18px;
+    display:inline-block;
+
+    margin:0 20px;
 
     color:#23D4C8;
 
+    font-weight:500;
+
 }
-
-
 
 
 
@@ -122,15 +133,13 @@
 
     z-index:2;
 
-    max-width:1500px;
+    width:min(96%,1600px);
 
     margin:0 auto;
 
-    padding:0 70px 45px;
+    padding:0 48px 52px;
 
 }
-
-
 
 
 
@@ -144,15 +153,17 @@
 
     display:grid;
 
-    grid-template-columns:1fr 1fr 1fr;
+    grid-template-columns:
 
-    gap:120px;
+        1.15fr
+        1.45fr
+        1.15fr;
+
+    column-gap:70px;
 
     align-items:start;
 
 }
-
-
 
 
 
@@ -172,9 +183,9 @@
 
 
 
-
-
 .footer-brand{
+
+    justify-content:flex-start;
 
     align-items:flex-start;
 
@@ -184,9 +195,9 @@
 
 
 
-
-
 .footer-founder{
+
+    justify-content:flex-start;
 
     align-items:center;
 
@@ -196,15 +207,13 @@
 
 
 
-
-
 .footer-contact{
+
+    justify-content:flex-start;
 
     align-items:flex-end;
 
 }
-
-
 
 
 
@@ -220,15 +229,15 @@
 
     color:#FFFFFF;
 
-    font-size:2.15rem;
+    font-size:2.45rem;
 
     font-weight:700;
 
-    line-height:1.25;
+    line-height:1.2;
+
+    letter-spacing:-.01em;
 
 }
-
-
 
 
 
@@ -236,11 +245,9 @@
 
 .footer-brand-name{
 
-    margin-bottom:24px;
+    margin-bottom:28px;
 
 }
-
-
 
 
 
@@ -250,13 +257,9 @@
 
     white-space:nowrap;
 
-    letter-spacing:-0.02em;
-
-    margin-bottom:24px;
+    margin-bottom:28px;
 
 }
-
-
 
 
 
@@ -264,15 +267,9 @@
 
 .footer-contact-title{
 
-    margin-bottom:24px;
+    margin-bottom:28px;
 
 }
-
-
-
-
-
-
 
 /* ==========================================================================
    SECOND ROW
@@ -281,15 +278,15 @@
 .footer-brand-subtitle,
 .footer-role{
 
-    color:#D7E5F2;
+    color:#D9E6F2;
 
-    font-size:1.32rem;
+    font-size:1.36rem;
 
-    line-height:1.85;
+    font-weight:400;
+
+    line-height:1.9;
 
 }
-
-
 
 
 
@@ -305,6 +302,24 @@
 
 
 
+.footer-role{
+
+    margin-bottom:22px;
+
+}
+
+
+
+
+
+.footer-role:last-child{
+
+    margin-bottom:0;
+
+}
+
+
+
 
 
 /* ==========================================================================
@@ -313,17 +328,17 @@
 
 .footer-brand-signature{
 
-    color:#F6F7F9;
+    color:#F8F8F8;
 
-    font-size:1.32rem;
+    font-size:1.36rem;
 
     font-style:italic;
 
-    line-height:1.8;
+    font-weight:400;
+
+    line-height:1.9;
 
 }
-
-
 
 
 
@@ -339,6 +354,8 @@
 
     align-items:center;
 
+    justify-content:flex-end;
+
     gap:14px;
 
     margin-bottom:22px;
@@ -346,6 +363,14 @@
 }
 
 
+
+
+
+.footer-contact-item:last-child{
+
+    margin-bottom:0;
+
+}
 
 
 
@@ -359,17 +384,17 @@
 
     justify-content:center;
 
-    width:34px;
+    width:30px;
 
-    height:34px;
+    min-width:30px;
 
-    font-size:1.2rem;
+    height:30px;
 
-    color:#23D4C8;
+    color:#27E5D8;
+
+    font-size:1.25rem;
 
 }
-
-
 
 
 
@@ -377,21 +402,23 @@
 
 .footer-contact-item a{
 
-    color:#4EF7EC;
+    color:#63FFF6;
 
-    font-size:1.30rem;
+    font-size:1.42rem;
 
     font-weight:600;
 
     text-decoration:none;
 
     transition:
+
         color .25s ease,
-        opacity .25s ease;
+
+        opacity .25s ease,
+
+        transform .25s ease;
 
 }
-
-
 
 
 
@@ -399,11 +426,11 @@
 
 .footer-contact-item a:hover{
 
-    color:#8CFFF8;
+    color:#B5FFF9;
+
+    transform:translateX(2px);
 
 }
-
-
 
 
 
@@ -415,37 +442,54 @@
 
 .footer-bottom{
 
-    margin-top:85px;
+    margin-top:95px;
 
-    padding-top:38px;
+    padding-top:40px;
 
     border-top:1px solid rgba(255,255,255,.08);
 
     text-align:center;
 
-    color:rgba(255,255,255,.78);
+    color:rgba(255,255,255,.82);
 
-    font-size:1.05rem;
+    font-size:1.10rem;
+
+    font-weight:400;
 
     letter-spacing:.08em;
 
 }
 
-
-
-
-
-
-
 /* ==========================================================================
    RESPONSIVE
 ========================================================================== */
 
-@media (max-width:1200px){
+@media (max-width:1280px){
+
+    .footer-container{
+
+        width:min(96%,1400px);
+
+        padding:0 40px 48px;
+
+    }
 
     .footer-grid{
 
-        gap:70px;
+        grid-template-columns:
+            1fr
+            1.35fr
+            1fr;
+
+        column-gap:50px;
+
+    }
+
+    .footer-brand-name,
+    .footer-founder-name,
+    .footer-contact-title{
+
+        font-size:2.15rem;
 
     }
 
@@ -455,9 +499,17 @@
 
 
 
-
-
 @media (max-width:992px){
+
+    .footer-topline{
+
+        padding:72px 30px 60px;
+
+        font-size:2rem;
+
+        line-height:1.55;
+
+    }
 
     .footer-container{
 
@@ -469,7 +521,7 @@
 
         grid-template-columns:1fr;
 
-        gap:60px;
+        row-gap:60px;
 
     }
 
@@ -480,6 +532,12 @@
         align-items:center;
 
         text-align:center;
+
+    }
+
+    .footer-contact-item{
+
+        justify-content:center;
 
     }
 
@@ -495,15 +553,13 @@
 
 
 
-
-
 @media (max-width:768px){
 
     .footer-topline{
 
-        font-size:1.8rem;
+        padding:60px 24px 50px;
 
-        padding:70px 24px 55px;
+        font-size:1.70rem;
 
     }
 
@@ -511,7 +567,7 @@
     .footer-founder-name,
     .footer-contact-title{
 
-        font-size:1.8rem;
+        font-size:1.75rem;
 
     }
 
@@ -519,19 +575,35 @@
     .footer-role,
     .footer-brand-signature{
 
-        font-size:1.12rem;
+        font-size:1.10rem;
+
+    }
+
+    .footer-contact-item{
+
+        gap:10px;
 
     }
 
     .footer-contact-item a{
 
-        font-size:1.12rem;
+        font-size:1.08rem;
+
+    }
+
+    .contact-icon{
+
+        width:26px;
+
+        min-width:26px;
+
+        height:26px;
+
+        font-size:1.10rem;
 
     }
 
 }
-
-
 
 
 
@@ -541,35 +613,69 @@
 
     .footer-topline{
 
-        font-size:1.35rem;
+        font-size:1.30rem;
 
-        line-height:1.7;
+        line-height:1.75;
+
+        padding:52px 20px 42px;
+
+    }
+
+    .footer-topline span{
+
+        margin:0 10px;
 
     }
 
     .footer-container{
 
-        padding:0 22px 30px;
+        padding:0 20px 28px;
+
+    }
+
+    .footer-brand-name,
+    .footer-founder-name,
+    .footer-contact-title{
+
+        font-size:1.45rem;
+
+    }
+
+    .footer-brand-subtitle,
+    .footer-role,
+    .footer-brand-signature{
+
+        font-size:1rem;
+
+        line-height:1.7;
 
     }
 
     .footer-contact-item{
 
+        flex-wrap:wrap;
+
         justify-content:center;
 
-        flex-wrap:wrap;
+        text-align:center;
+
+        gap:8px;
 
     }
 
     .footer-contact-item a{
 
-        word-break:break-word;
+        font-size:1rem;
 
-        text-align:center;
+        word-break:break-word;
 
     }
 
 }
+
+
+
+
 
 /* ==========================================================================
    END OF FILE
