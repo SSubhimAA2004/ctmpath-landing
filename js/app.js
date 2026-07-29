@@ -3,97 +3,70 @@
    CTM PATH™ Guided Journey™
 
    File        : app.js
-   Version     : 1.1
-   Status      : DEVELOPMENT
+   Version     : 1.6
 
    Purpose:
 
-   Application bootstrap controller.
+   Frontend application bootstrap controller.
 
    Responsibilities:
 
-   • Start application.
-   • Load shared components.
-   • Initialize shared systems.
-   • Coordinate module loading.
-   • Manage global application state.
+   • Initialize application shell
+   • Control silent loading state
+   • Initialize components
+   • Start navigation
 
    Does NOT:
 
-   • Own page-specific behaviour.
-   • Calculate scores.
-   • Generate reports.
+   • Calculate scores
+   • Store business data
+   • Handle assessments
 
    ========================================================================== */
 
 
 
-/* ==========================================================================
-   GLOBAL APPLICATION NAMESPACE
-   ========================================================================== */
 
 
-window.CTMPATH = window.CTMPATH || {};
+const CTMApp = (() => {
 
 
 
-
-
-/* ==========================================================================
-   APPLICATION CORE
-   ========================================================================== */
-
-
-CTMPATH.App = {
-
-
-    version:
-
-        "1.1",
-
-
-
-    initialized:
-
-        false,
-
-
-
-    currentPage:
-
-        null,
-
-
-
-    state:
-
-        {}
-
-
-
-};
+    let initialized = false;
 
 
 
 
 
-/* ==========================================================================
-   APPLICATION INITIALIZATION
-   ========================================================================== */
-
-
-CTMPATH.App.init = async function() {
 
 
 
-    if (
-
-        CTMPATH.App.initialized
-
-    ) {
+    /* ==========================================================
+       INITIALIZATION
+       ========================================================== */
 
 
-        return;
+    function init(){
+
+
+
+        if(initialized){
+
+            return;
+
+        }
+
+
+
+        initialized = true;
+
+
+
+        hideLoader();
+
+
+
+        initializeComponents();
 
 
 
@@ -102,537 +75,204 @@ CTMPATH.App.init = async function() {
 
 
 
-    await CTMPATH.App.loadComponents();
 
 
 
 
-    CTMPATH.App.loadModules();
+    /* ==========================================================
+       COMPONENT INITIALIZATION
+       ========================================================== */
+
+
+    function initializeComponents(){
 
 
 
+        if(
+            typeof CTMNavigation !== "undefined"
+        ){
 
-    CTMPATH.App.restoreSession();
-
-
-
-
-    CTMPATH.App.startNavigation();
-
-
-
-
-    CTMPATH.App.initialized = true;
-
-
-
-};
-
-
-
-
-
-/* ==========================================================================
-   GLOBAL COMPONENT LOADER
-
-   Loads:
-
-   components/header.html
-   components/footer.html
-
-   ========================================================================== */
-
-
-CTMPATH.App.loadComponents = async function() {
-
-
-
-    const components = [
-
-
-
-        {
-
-            target:
-
-                "#app-header",
-
-            file:
-
-                "components/header.html"
-
-        },
-
-
-
-        {
-
-            target:
-
-                "#app-footer",
-
-            file:
-
-                "components/footer.html"
+            CTMNavigation.init();
 
         }
 
 
 
-    ];
+        loadGlobalComponents();
+
+
+
+    }
 
 
 
 
 
-    for (
-
-        const component of components
-
-    ) {
 
 
 
-        try {
+    /* ==========================================================
+       GLOBAL COMPONENT LOADER
+       ========================================================== */
+
+
+    function loadGlobalComponents(){
 
 
 
-            const response = await fetch(
+        loadComponent(
+            "app-header",
+            "components/header.html"
+        );
 
-                component.file
 
+
+        loadComponent(
+            "app-footer",
+            "components/footer.html"
+        );
+
+
+
+    }
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       COMPONENT FETCHER
+       ========================================================== */
+
+
+    function loadComponent(
+        elementId,
+        filePath
+    ){
+
+
+
+        const element =
+            document.getElementById(
+                elementId
             );
 
 
 
+        if(!element){
 
-            if (
+            return;
 
-                !response.ok
-
-            ) {
-
+        }
 
 
-                throw new Error(
 
-                    "Unable to load " +
 
-                    component.file
+        fetch(filePath)
 
+        .then(
+            response => response.text()
+        )
+
+        .then(
+            html => {
+
+
+                element.innerHTML = html;
+
+
+
+            }
+
+        )
+
+        .catch(
+            error => {
+
+
+                console.error(
+                    "Component loading error:",
+                    error
                 );
 
 
-
             }
+        );
+
+
+
+    }
 
 
 
 
-            const html = await response.text();
 
 
 
 
-            const container = document.querySelector(
+    /* ==========================================================
+       SILENT LOADER CONTROL
+       ========================================================== */
 
-                component.target
 
+    function showLoader(){
+
+
+
+        const loader =
+            document.getElementById(
+                "global-loader"
             );
 
 
 
+        if(!loader){
 
-            if (
-
-                container
-
-            ) {
-
-
-
-                container.innerHTML = html;
-
-
-
-            }
-
-
+            return;
 
         }
 
 
 
-        catch(error) {
+        loader.classList.remove(
+            "hidden"
+        );
 
 
 
-            console.error(
+    }
 
-                "Component loading error:",
 
-                error
 
+
+
+
+
+    function hideLoader(){
+
+
+
+        const loader =
+            document.getElementById(
+                "global-loader"
             );
 
 
+
+        if(!loader){
+
+            return;
 
         }
 
 
 
-    }
-
-
-
-};
-
-/* ==========================================================================
-   MODULE LOADING
-
-   Initializes shared application systems.
-
-   ========================================================================== */
-
-
-CTMPATH.App.loadModules = function() {
-
-
-
-    const modules = [
-
-
-        "API",
-
-
-        "Storage",
-
-
-        "Navigation",
-
-
-        "AssessmentEngine",
-
-
-        "Scoring",
-
-
-        "Report"
-
-
-
-    ];
-
-
-
-
-
-    modules.forEach(function(moduleName) {
-
-
-
-        if (
-
-            CTMPATH[moduleName]
-
-        ) {
-
-
-
-            console.log(
-
-                moduleName +
-
-                " initialized"
-
-            );
-
-
-
-        }
-
-
-
-    });
-
-
-
-};
-
-
-
-
-
-/* ==========================================================================
-   SESSION RESTORATION
-
-   Restores visitor journey state.
-
-   ========================================================================== */
-
-
-CTMPATH.App.restoreSession = function() {
-
-
-
-    if (
-
-
-        CTMPATH.Storage &&
-
-
-        typeof CTMPATH.Storage.getSession ===
-
-            "function"
-
-
-
-    ) {
-
-
-
-        CTMPATH.App.state =
-
-
-            CTMPATH.Storage.getSession()
-
-            || {};
-
-
-
-    }
-
-
-
-};
-
-
-
-
-
-/* ==========================================================================
-   NAVIGATION START
-
-   Starts journey navigation system.
-
-   ========================================================================== */
-
-
-CTMPATH.App.startNavigation = function() {
-
-
-
-    if (
-
-
-        CTMPATH.Navigation &&
-
-
-        typeof CTMPATH.Navigation.init ===
-
-            "function"
-
-
-
-    ) {
-
-
-
-        CTMPATH.Navigation.init();
-
-
-
-    }
-
-
-
-};
-
-
-
-
-
-/* ==========================================================================
-   APPLICATION READY EVENT
-
-   ========================================================================== */
-
-
-CTMPATH.App.ready = function() {
-
-
-
-    document.dispatchEvent(
-
-
-        new CustomEvent(
-
-            "CTMPATH_APP_READY"
-
-        )
-
-
-    );
-
-
-
-};
-
-
-
-
-
-/* ==========================================================================
-   PAGE CHANGE HANDLER
-
-   Receives navigation events.
-
-   ========================================================================== */
-
-
-CTMPATH.App.onPageChange = function(pageNumber) {
-
-
-
-    CTMPATH.App.currentPage = pageNumber;
-
-
-
-
-
-    document.dispatchEvent(
-
-
-        new CustomEvent(
-
-            "CTMPATH_PAGE_LOADED",
-
-
-            {
-
-
-                detail:
-
-
-                {
-
-
-                    page:
-
-                        pageNumber
-
-
-                }
-
-
-            }
-
-
-        )
-
-
-    );
-
-
-
-};
-
-
-
-
-
-/* ==========================================================================
-   GLOBAL ERROR HANDLER
-
-   ========================================================================== */
-
-
-CTMPATH.App.handleError = function(error) {
-
-
-
-    console.error(
-
-
-        "CTM PATH™ Application Error:",
-
-
-        error
-
-
-    );
-
-
-
-
-
-    document.dispatchEvent(
-
-
-        new CustomEvent(
-
-
-            "CTMPATH_APP_ERROR",
-
-
-            {
-
-
-                detail:
-
-
-                {
-
-
-                    error:
-
-                        error
-
-
-                }
-
-
-            }
-
-
-        )
-
-
-    );
-
-
-
-};
-
-/* ==========================================================================
-   APPLICATION RESET
-
-   Clears local journey state.
-
-   ========================================================================== */
-
-
-CTMPATH.App.reset = function() {
-
-
-
-    if (
-
-
-        CTMPATH.Storage &&
-
-
-        typeof CTMPATH.Storage.clearSession ===
-
-            "function"
-
-
-
-    ) {
-
-
-
-        CTMPATH.Storage.clearSession();
+        loader.classList.add(
+            "hidden"
+        );
 
 
 
@@ -642,178 +282,50 @@ CTMPATH.App.reset = function() {
 
 
 
-    CTMPATH.App.state = {};
-
-    CTMPATH.App.currentPage = null;
 
 
 
-};
+    /* ==========================================================
+       PUBLIC API
+       ========================================================== */
+
+
+    return {
+
+
+        init,
+
+        showLoader,
+
+        hideLoader
+
+
+    };
 
 
 
+})();
 
 
-/* ==========================================================================
-   GET APPLICATION STATE
-
-   ========================================================================== */
-
-
-CTMPATH.App.getState = function() {
-
-
-
-    return CTMPATH.App.state;
-
-
-
-};
 
 
 
 
 
 /* ==========================================================================
-   UPDATE APPLICATION STATE
-
-   Temporary runtime state.
-
-   Persistent storage handled by storage.js.
-
-   ========================================================================== */
-
-
-CTMPATH.App.updateState = function(
-
-    key,
-
-    value
-
-) {
-
-
-
-    CTMPATH.App.state[key] = value;
-
-
-
-};
-
-
-
-
-
-/* ==========================================================================
-   GET CURRENT PAGE
-
-   ========================================================================== */
-
-
-CTMPATH.App.getCurrentPage = function() {
-
-
-
-    return CTMPATH.App.currentPage;
-
-
-
-};
-
-
-
-
-
-/* ==========================================================================
-   VERSION INFORMATION
-
-   ========================================================================== */
-
-
-CTMPATH.App.getVersion = function() {
-
-
-
-    return CTMPATH.App.version;
-
-
-
-};
-
-
-
-
-
-/* ==========================================================================
-   DOM READY
-
-   Application startup trigger.
+   APPLICATION START
 
    ========================================================================== */
 
 
 document.addEventListener(
-
-
     "DOMContentLoaded",
+    function(){
 
 
-    async function() {
-
-
-
-        try {
-
-
-
-            await CTMPATH.App.init();
-
-
-
-            CTMPATH.App.ready();
-
-
-
-        }
-
-
-
-        catch(error) {
-
-
-
-            CTMPATH.App.handleError(
-
-                error
-
-            );
-
-
-
-        }
+        CTMApp.init();
 
 
 
     }
-
-
 );
-
-
-
-
-
-/* ==========================================================================
-   END OF FILE
-
-   File:
-
-   js/app.js
-
-
-   Status:
-
-   APPLICATION CONTROLLER COMPLETE
-
-
-   ========================================================================== */
