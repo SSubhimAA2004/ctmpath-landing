@@ -3,27 +3,24 @@
    CTM PATH™ Guided Journey™
 
    File        : app.js
-   Version     : 1.7
+   Version     : 2.0
 
    Purpose:
 
-   Frontend application bootstrap controller.
+   Frontend application bootstrap.
 
    Responsibilities:
 
-   • Initialize frontend application
-   • Remove loading state
-   • Prepare UI environment
+   • Initialize application
+   • Load reusable components
+   • Load current journey page
+   • Remove loader state
 
-   IMPORTANT:
+   Does NOT:
 
-   This file does NOT:
-
-   • Load pages dynamically
-   • Replace app-content
-   • Load components
-   • Control navigation routes
-   • Handle business logic
+   • Handle navigation
+   • Handle scoring
+   • Handle backend operations
 
    ========================================================================== */
 
@@ -35,38 +32,61 @@ const CTMApp = (() => {
 
 
 
-    let initialized = false;
+    const config = {
+
+
+        initialPage:
+
+        "welcome",
+
+
+
+        components: {
+
+
+            header:
+
+            "components/header.html",
+
+
+
+            footer:
+
+            "components/footer.html"
+
+
+
+        }
+
+
+    };
+
+
 
 
 
 
 
     /* ==========================================================
-       APPLICATION INITIALIZATION
+       INITIALIZATION
        ========================================================== */
 
 
-    function init(){
+    async function init(){
 
 
 
-        if(initialized){
-
-            return;
-
-        }
+        hideLoader();
 
 
 
-        initialized = true;
+        await loadComponents();
 
 
 
-        removeLoader();
-
-
-
-        initializeUI();
+        await loadPage(
+            config.initialPage
+        );
 
 
 
@@ -79,32 +99,32 @@ const CTMApp = (() => {
 
 
 
+
     /* ==========================================================
-       UI INITIALIZATION
+       LOAD GLOBAL COMPONENTS
        ========================================================== */
 
 
-    function initializeUI(){
+    async function loadComponents(){
 
 
 
-        /*
-            Reserved for future
-            frontend initialization.
+        await loadComponent(
 
-            Examples:
+            "app-header",
 
-            - animations
-            - accessibility
-            - theme setup
+            config.components.header
 
-        */
+        );
 
 
 
-        document.documentElement.classList.add(
 
-            "ctm-ready"
+        await loadComponent(
+
+            "app-footer",
+
+            config.components.footer
 
         );
 
@@ -119,20 +139,207 @@ const CTMApp = (() => {
 
 
 
+    async function loadComponent(
+        elementId,
+        filePath
+    ){
+
+
+
+        const element =
+
+        document.getElementById(
+            elementId
+        );
+
+
+
+        if(!element){
+
+            return;
+
+        }
+
+
+
+
+
+
+        try {
+
+
+
+            const response =
+
+            await fetch(filePath);
+
+
+
+
+
+            element.innerHTML =
+
+            await response.text();
+
+
+
+        }
+
+
+        catch(error){
+
+
+            console.error(
+
+                "Component load error:",
+
+                error
+
+            );
+
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
     /* ==========================================================
-       LOADER CONTROL
-
-       Removes:
-       "Preparing your journey..."
-
-       ================================================================= */
+       LOAD JOURNEY PAGE
+       ========================================================== */
 
 
-    function removeLoader(){
+    async function loadPage(
+        pageName
+    ){
 
 
 
-        const loader = document.getElementById(
+        const container =
+
+        document.getElementById(
+
+            "app-content"
+
+        );
+
+
+
+        if(!container){
+
+            return;
+
+        }
+
+
+
+
+
+
+
+        try {
+
+
+
+            const response =
+
+            await fetch(
+
+                `pages/${pageName}.html`
+
+            );
+
+
+
+
+
+            if(!response.ok){
+
+
+                throw new Error(
+
+                    "Page not found"
+
+                );
+
+
+            }
+
+
+
+
+
+
+            container.innerHTML =
+
+            await response.text();
+
+
+
+
+
+
+            window.scrollTo({
+
+                top:0,
+
+                behavior:"instant"
+
+            });
+
+
+
+
+
+        }
+
+
+        catch(error){
+
+
+            console.error(
+
+                "Page load error:",
+
+                error
+
+            );
+
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       LOADER
+       ========================================================== */
+
+
+    function hideLoader(){
+
+
+
+        const loader =
+
+        document.getElementById(
 
             "global-loader"
 
@@ -140,21 +347,17 @@ const CTMApp = (() => {
 
 
 
-        if(!loader){
+        if(loader){
 
-            return;
+
+            loader.classList.add(
+
+                "hidden"
+
+            );
+
 
         }
-
-
-
-
-
-        loader.classList.add(
-
-            "hidden"
-
-        );
 
 
 
@@ -166,10 +369,6 @@ const CTMApp = (() => {
 
 
 
-
-    /* ==========================================================
-       PUBLIC API
-       ========================================================== */
 
 
     return {
@@ -178,7 +377,7 @@ const CTMApp = (() => {
         init,
 
 
-        removeLoader
+        loadPage
 
 
 
@@ -197,7 +396,7 @@ const CTMApp = (() => {
 
 
 /* ==========================================================================
-   APPLICATION START
+   START APPLICATION
    ========================================================================== */
 
 
@@ -206,7 +405,6 @@ document.addEventListener(
     "DOMContentLoaded",
 
     function(){
-
 
 
         CTMApp.init();
