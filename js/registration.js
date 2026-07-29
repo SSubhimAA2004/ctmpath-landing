@@ -2,468 +2,73 @@
 /* ==========================================================================
    CTM PATH™ Guided Journey™
 
-   File        : registration.js
+   File        : js/registration.js
    Version     : 1.0
-   Status      : DEVELOPMENT
-   Stage       : STAGE 2 — REGISTRATION™
 
-   Purpose     :
-   Registration page interaction controller.
+   Status      : 🔒 REGISTRATION DATA CAPTURE CONTROLLER
+
+
+   Purpose:
+
+   Manage Page 02 registration experience.
+
 
    Responsibilities:
 
-   • Initialize registration form.
-   • Capture user input.
-   • Validate required fields.
-   • Submit registration payload.
-   • Handle backend response.
-   • Move visitor into assessment journey.
+   ✓ Capture visitor details
+   ✓ Validate form
+   ✓ Prepare registration payload
+   ✓ Communicate with API layer
+
 
    Does NOT:
 
-   • Create database records directly.
-   • Generate visitor IDs.
-   • Apply business rules.
-   • Manage assessment scoring.
+   ✗ Backend processing
+   ✗ Database operations
+   ✗ Assessment logic
 
-   Backend Ownership:
-
-   • Visitor creation
-   • Data persistence
-   • Workflow management
 
    ========================================================================== */
 
 
-/* ==========================================================================
-   GLOBAL NAMESPACE
-   ========================================================================== */
+const Registration = (() => {
 
 
-window.CTMPATH = window.CTMPATH || {};
 
 
 
-/* ==========================================================================
-   REGISTRATION CONTROLLER
-   ========================================================================== */
+    let initialized = false;
 
 
-CTMPATH.Registration = {
 
 
-    version:
 
-        "1.0",
 
 
 
-    initialized:
 
-        false,
+    /* ==========================================================
+       INITIALIZATION
+       ========================================================== */
 
 
+    function init(){
 
-    form:
 
-        null
 
+        if(initialized){
 
-
-};
-
-
-
-
-/* ==========================================================================
-   INITIALIZATION
-   ========================================================================== */
-
-
-CTMPATH.Registration.init = function() {
-
-
-    if (
-
-        CTMPATH.Registration.initialized
-
-    ) {
-
-
-        return;
-
-
-
-    }
-
-
-
-    CTMPATH.Registration.form = document.getElementById(
-
-        "registration-form"
-
-    );
-
-
-
-    CTMPATH.Registration.bindEvents();
-
-
-
-    CTMPATH.Registration.initialized = true;
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   EVENT BINDING
-   ========================================================================== */
-
-
-CTMPATH.Registration.bindEvents = function() {
-
-
-    if (
-
-        !CTMPATH.Registration.form
-
-    ) {
-
-
-        return;
-
-
-
-    }
-
-
-
-    CTMPATH.Registration.form.addEventListener(
-
-        "submit",
-
-        function(event) {
-
-
-            event.preventDefault();
-
-
-
-            CTMPATH.Registration.submit();
-
-
-
-        }
-
-    );
-
-
-
-    const backButton = document.getElementById(
-
-        "registration-back-btn"
-
-    );
-
-
-
-    if (backButton) {
-
-
-        backButton.addEventListener(
-
-            "click",
-
-            function() {
-
-
-                CTMPATH.Navigation.previous();
-
-
-
-            }
-
-        );
-
-
-    }
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   COLLECT FORM DATA
-
-   Presentation layer extraction only.
-
-   ========================================================================== */
-
-
-CTMPATH.Registration.collectData = function() {
-
-
-    const formData = new FormData(
-
-        CTMPATH.Registration.form
-
-    );
-
-
-
-    return {
-
-
-        fullName:
-
-            formData.get(
-
-                "fullName"
-
-            ),
-
-
-
-        email:
-
-            formData.get(
-
-                "email"
-
-            ),
-
-
-
-        mobile:
-
-            formData.get(
-
-                "mobile"
-
-            ),
-
-
-
-        city:
-
-            formData.get(
-
-                "city"
-
-            ),
-
-
-
-        district:
-
-            formData.get(
-
-                "district"
-
-            ),
-
-
-
-        state:
-
-            formData.get(
-
-                "state"
-
-            ),
-
-
-
-        source:
-
-            formData.get(
-
-                "source"
-
-            ),
-
-
-
-        language:
-
-            formData.get(
-
-                "language"
-
-            )
-
-
-
-    };
-
-
-};
-
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
-
-   File        : registration.js
-   Continuation: Batch 1B
-
-   ========================================================================== */
-
-
-/* ==========================================================================
-   FRONTEND VALIDATION
-
-   Validates input completeness only.
-
-   Backend remains final authority.
-
-   ========================================================================== */
-
-
-CTMPATH.Registration.validate = function(data) {
-
-
-    const requiredFields = [
-
-
-        "fullName",
-
-        "email",
-
-        "mobile",
-
-        "city",
-
-        "district",
-
-        "state",
-
-        "source",
-
-        "language"
-
-
-
-    ];
-
-
-
-    for (
-
-        let i = 0;
-
-        i < requiredFields.length;
-
-        i++
-
-    ) {
-
-
-        const field = requiredFields[i];
-
-
-
-        if (
-
-            !data[field]
-
-        ) {
-
-
-            return {
-
-
-                valid:
-
-                    false,
-
-
-
-                field:
-
-                    field
-
-
-
-            };
-
+            return;
 
         }
 
 
 
-    }
+        initialized = true;
 
 
 
-    return {
-
-
-        valid:
-
-            true
-
-
-
-    };
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   SUBMIT REGISTRATION
-
-   Sends registration request through API layer.
-
-   Backend creates visitor record.
-
-   ========================================================================== */
-
-
-CTMPATH.Registration.submit = async function() {
-
-
-    const data =
-
-        CTMPATH.Registration.collectData();
-
-
-
-    const validation =
-
-        CTMPATH.Registration.validate(
-
-            data
-
-        );
-
-
-
-    if (
-
-        !validation.valid
-
-    ) {
-
-
-        CTMPATH.Registration.showError(
-
-            validation.field
-
-        );
-
-
-
-        return false;
+        bindForm();
 
 
 
@@ -471,31 +76,129 @@ CTMPATH.Registration.submit = async function() {
 
 
 
-    try {
-
-
-        CTMPATH.App.showLoader();
 
 
 
-        const response = await CTMPATH.API.registerVisitor(
 
-            data
+
+
+    /* ==========================================================
+       FORM BINDING
+       ========================================================== */
+
+
+    function bindForm(){
+
+
+
+        const form =
+
+        document.getElementById(
+
+            "registration-form"
 
         );
 
 
 
-        if (
-
-            response &&
-
-            response.success !== false
-
-        ) {
 
 
-            CTMPATH.Registration.handleSuccess(
+        if(!form){
+
+            return;
+
+        }
+
+
+
+
+
+        form.addEventListener(
+
+            "submit",
+
+            handleSubmit
+
+        );
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       SUBMIT HANDLER
+       ========================================================== */
+
+
+    async function handleSubmit(event){
+
+
+
+        event.preventDefault();
+
+
+
+
+
+        const payload =
+
+        collectData();
+
+
+
+
+
+        if(!validate(payload)){
+
+
+            showMessage(
+
+                "Please complete all required fields."
+
+            );
+
+
+            return;
+
+        }
+
+
+
+
+
+
+
+        setLoading(true);
+
+
+
+
+
+        try{
+
+
+
+            const response =
+
+            await sendRegistration(
+
+                payload
+
+            );
+
+
+
+
+
+            handleSuccess(
 
                 response
 
@@ -506,14 +209,24 @@ CTMPATH.Registration.submit = async function() {
         }
 
 
-        else {
+
+        catch(error){
 
 
-            CTMPATH.Registration.showMessage(
 
-                response.message ||
+            console.error(
 
-                "Registration failed."
+                "Registration failed:",
+
+                error
+
+            );
+
+
+
+            showMessage(
+
+                "Something went wrong. Please try again."
 
             );
 
@@ -523,250 +236,11 @@ CTMPATH.Registration.submit = async function() {
 
 
 
-    }
+        finally{
 
 
-    catch(error) {
 
-
-        CTMPATH.Registration.showMessage(
-
-            error.message
-
-        );
-
-
-
-    }
-
-
-    finally {
-
-
-        CTMPATH.App.hideLoader();
-
-
-
-    }
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   SUCCESS HANDLER
-
-   Stores backend visitor reference.
-
-   ========================================================================== */
-
-
-CTMPATH.Registration.handleSuccess = function(response) {
-
-
-    if (
-
-        response.visitorId &&
-
-        CTMPATH.Storage
-
-    ) {
-
-
-        CTMPATH.Storage.setVisitorId(
-
-            response.visitorId
-
-        );
-
-
-
-    }
-
-
-
-    CTMPATH.Navigation.goto(
-
-        3
-
-    );
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   DISPLAY ERROR
-
-   Controlled frontend feedback.
-
-   ========================================================================== */
-
-
-CTMPATH.Registration.showError = function(field) {
-
-
-    const element = document.getElementById(
-
-        field
-
-    );
-
-
-
-    if (element) {
-
-
-        element.focus();
-
-
-
-    }
-
-
-
-};
-
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
-
-   File        : registration.js
-   Continuation: Batch 1C
-
-   ========================================================================== */
-
-
-/* ==========================================================================
-   MESSAGE DISPLAY
-
-   Provides controlled user feedback.
-
-   ========================================================================== */
-
-
-CTMPATH.Registration.showMessage = function(message) {
-
-
-    const container = document.getElementById(
-
-        "error-container"
-
-    );
-
-
-
-    if (!container) {
-
-
-        return;
-
-
-
-    }
-
-
-
-    container.textContent = message;
-
-
-
-    container.classList.remove(
-
-        "hidden"
-
-    );
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   RESET FORM
-
-   Clears current registration input.
-
-   ========================================================================== */
-
-
-CTMPATH.Registration.reset = function() {
-
-
-    if (
-
-        CTMPATH.Registration.form
-
-    ) {
-
-
-        CTMPATH.Registration.form.reset();
-
-
-
-    }
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   PAGE ACTIVATION HANDLER
-
-   Called when registration page loads.
-
-   ========================================================================== */
-
-
-CTMPATH.Registration.activate = function() {
-
-
-    CTMPATH.Registration.init();
-
-
-
-};
-
-
-
-
-/* ==========================================================================
-   PAGE LOADED EVENT LISTENER
-
-   Navigation dispatches:
-
-   CTMPATH_PAGE_LOADED
-
-   ========================================================================== */
-
-
-document.addEventListener(
-
-    "CTMPATH_PAGE_LOADED",
-
-    function(event) {
-
-
-        if (
-
-            event.detail &&
-
-            event.detail.page === 2
-
-        ) {
-
-
-            CTMPATH.Registration.activate();
+            setLoading(false);
 
 
 
@@ -776,38 +250,227 @@ document.addEventListener(
 
     }
 
-);
 
 
 
 
-/* ==========================================================================
-   DIRECT PAGE LOAD SUPPORT
-
-   Handles standalone loading.
-
-   ========================================================================== */
 
 
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    function() {
 
 
-        const page = document.getElementById(
+    /* ==========================================================
+       COLLECT FORM DATA
+       ========================================================== */
 
-            "registration-page"
+
+    function collectData(){
+
+
+
+        return {
+
+
+            fullName:
+
+            getValue("fullName"),
+
+
+
+            email:
+
+            getValue("email"),
+
+
+
+            mobile:
+
+            getValue("mobile"),
+
+
+
+            district:
+
+            getValue("district"),
+
+
+
+            state:
+
+            getValue("state"),
+
+
+
+            language:
+
+            getLanguage(),
+
+
+
+            source:
+
+            getValue("source"),
+
+
+
+            device:
+
+            navigator.userAgent
+
+
+
+        };
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    function getValue(id){
+
+
+
+        const element =
+
+        document.getElementById(id);
+
+
+
+
+
+        return element
+
+        ?
+
+        element.value.trim()
+
+        :
+
+        "";
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    function getLanguage(){
+
+
+
+        const selected =
+
+        document.querySelector(
+
+            "input[name='language']:checked"
 
         );
 
 
 
-        if (page) {
 
 
-            CTMPATH.Registration.activate();
+        return selected
+
+        ?
+
+        selected.value
+
+        :
+
+        "Tamil";
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       VALIDATION
+       ========================================================== */
+
+
+    function validate(data){
+
+
+
+        return (
+
+
+
+            data.fullName &&
+
+            data.email &&
+
+            data.mobile &&
+
+            data.district &&
+
+            data.state
+
+
+
+        );
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       API CONNECTION
+       ========================================================== */
+
+
+    async function sendRegistration(
+
+        payload
+
+    ){
+
+
+
+        if(
+
+            window.API &&
+
+            API.registerVisitor
+
+        ){
+
+
+
+            return await API.registerVisitor(
+
+                payload
+
+            );
 
 
 
@@ -815,28 +478,191 @@ document.addEventListener(
 
 
 
+
+
+        throw new Error(
+
+            "API layer unavailable"
+
+        );
+
+
+
     }
 
-);
 
 
 
 
-/* ==========================================================================
-   END OF FILE
-
-   File:
-
-   js/registration.js
 
 
-   Status:
-
-   STAGE 2 — REGISTRATION™ CONTROLLER COMPLETE
 
 
-   Next:
+    /* ==========================================================
+       SUCCESS
+       ========================================================== */
 
-   STAGE 3 — ASSESSMENT 01
 
-   ========================================================================== */
+    function handleSuccess(response){
+
+
+
+        console.log(
+
+            "Registration successful:",
+
+            response
+
+        );
+
+
+
+
+
+        document.dispatchEvent(
+
+
+
+            new CustomEvent(
+
+                "registration-complete",
+
+                {
+
+                    detail:response
+
+                }
+
+            )
+
+
+
+        );
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       UI HELPERS
+       ========================================================== */
+
+
+    function setLoading(state){
+
+
+
+        const button =
+
+        document.querySelector(
+
+            ".continue-button"
+
+        );
+
+
+
+
+
+        if(!button){
+
+            return;
+
+        }
+
+
+
+
+
+        button.disabled = state;
+
+
+
+
+
+        button.innerHTML =
+
+        state
+
+        ?
+
+        "Creating Your Journey..."
+
+        :
+
+        "என் பயணத்தை தொடர்கிறேன்<br>Continue My Journey™";
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    function showMessage(message){
+
+
+
+        alert(message);
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    return {
+
+
+
+        init
+
+
+
+    };
+
+
+
+
+
+})();
+
+
+
+
+
+
+
+
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+()=>{
+
+
+    Registration.init();
+
+
+
+});
