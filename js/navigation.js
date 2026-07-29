@@ -3,46 +3,43 @@
    CTM PATH™ Guided Journey™
 
    File        : navigation.js
-   Version     : 2.0
+   Version     : 2.2
 
-   Purpose:
-
-   Central journey transition controller.
+   Status      : PAGE-AWARE NAVIGATION PATCH
 
    Responsibilities:
 
-   ✓ Manage page movement
-   ✓ Track current journey position
-   ✓ Update progress indicator
-   ✓ Handle navigation events
-
+   ✓ Control journey movement
+   ✓ Manage Previous visibility
+   ✓ Manage Continue visibility
+   ✓ Update journey counter
 
    Does NOT:
 
-   ✗ Assessment logic
-   ✗ Scoring logic
-   ✗ Backend operations
-
+   ✗ Render page content
+   ✗ Handle business logic
+   ✗ Handle API processing
 
    ========================================================================== */
 
 
+const Navigation = (() => {
+
+
+    let currentPage = 1;
+
+
+    const totalPages = 18;
 
 
 
-const CTMNavigation = (() => {
+    const init = () => {
 
 
+        bindEvents();
 
 
-    const journey = {
-
-
-        currentPage: 1,
-
-
-        totalPages: 18
-
+        updateNavigation();
 
 
     };
@@ -53,470 +50,282 @@ const CTMNavigation = (() => {
 
 
 
-    const routes = [
+    const bindEvents = () => {
 
 
-        "welcome",
-
-
-        "registration",
-
-
-        "assessment-01",
-
-
-        "assessment-02",
-
-
-        "assessment-03",
-
-
-        "assessment-04",
-
-
-        "assessment-05",
-
-
-        "assessment-06",
-
-
-        "assessment-07",
-
-
-        "assessment-08",
-
-
-        "assessment-09",
-
-
-        "assessment-10",
-
-
-        "assessment-11",
-
-
-        "assessment-12",
-
-
-        "kalachakra",
-
-
-        "diagnosis",
-
-
-        "prescription",
-
-
-        "cta"
-
-
-    ];
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       INITIALIZATION
-       ========================================================== */
-
-
-    function init(){
-
-
-
-        bindEvents();
-
-
-
-        updateProgress();
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       EVENT MANAGEMENT
-       ========================================================== */
-
-
-    function bindEvents(){
-
-
-
-        document.addEventListener(
-
-            "click",
-
-            function(event){
-
-
-
-                const nextButton =
-
-                event.target.closest(
-
-                    "[data-action='next']"
-
-                );
-
-
-
-                if(nextButton){
-
-
-
-                    event.preventDefault();
-
-
-
-                    next();
-
-
-
-                }
-
-
-
-
-
-                const previousButton =
-
-                event.target.closest(
-
-                    "[data-action='previous']"
-
-                );
-
-
-
-                if(previousButton){
-
-
-
-                    event.preventDefault();
-
-
-
-                    previous();
-
-
-
-                }
-
-
-
-            }
-
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       NEXT PAGE
-       ========================================================== */
-
-
-    function next(){
-
-
-
-        if(
-
-            journey.currentPage >=
-
-            journey.totalPages
-
-        ){
-
-            return;
-
-        }
-
-
-
-
-        journey.currentPage++;
-
-
-
-
-        loadPage();
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       PREVIOUS PAGE
-       ========================================================== */
-
-
-    function previous(){
-
-
-
-        if(
-
-            journey.currentPage <= 1
-
-        ){
-
-            return;
-
-        }
-
-
-
-
-        journey.currentPage--;
-
-
-
-
-        loadPage();
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       PAGE LOADER
-       ========================================================== */
-
-
-    async function loadPage(){
-
-
-
-        const page =
-
-        routes[
-
-            journey.currentPage - 1
-
-        ];
-
-
-
-
-
-        const container =
-
-        document.getElementById(
-
-            "app-content"
-
-        );
-
-
-
-        if(!container){
-
-            return;
-
-        }
-
-
-
-
-
-
-
-        try {
-
-
-
-            const response =
-
-            await fetch(
-
-                `pages/${page}.html`
-
+        const buttons =
+            document.querySelectorAll(
+                ".nav-button"
             );
 
 
 
+        buttons.forEach(button => {
 
 
-
-            container.innerHTML =
-
-            await response.text();
-
-
-
-
-
-            updateProgress();
-
-
-
-            scrollTop();
-
-
-
-        }
-
-
-
-        catch(error){
-
-
-
-            console.error(
-
-                "Navigation failed:",
-
-                error
-
+            button.addEventListener(
+                "click",
+                handleNavigation
             );
-
-
-
-        }
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       JOURNEY PROGRESS
-       ========================================================== */
-
-
-    function updateProgress(){
-
-
-
-        const counter =
-
-        document.getElementById(
-
-            "journey-counter"
-
-        );
-
-
-
-        if(!counter){
-
-            return;
-
-        }
-
-
-
-
-
-        counter.textContent =
-
-
-
-        String(
-
-            journey.currentPage
-
-        )
-
-        .padStart(
-
-            2,
-
-            "0"
-
-        )
-
-        +
-
-        " / "
-
-        +
-
-        journey.totalPages;
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       SCROLL RESET
-       ========================================================== */
-
-
-    function scrollTop(){
-
-
-
-        window.scrollTo({
-
-            top:0,
-
-            behavior:"smooth"
 
 
         });
 
 
+    };
 
-    }
 
 
+
+
+
+
+    const handleNavigation = (event) => {
+
+
+        const action =
+            event.currentTarget
+            .dataset
+            .action;
+
+
+
+        if(action === "previous") {
+
+
+            goPrevious();
+
+
+        }
+
+
+
+        if(action === "continue") {
+
+
+            goNext();
+
+
+        }
+
+
+    };
+
+
+
+
+
+
+
+    const goNext = () => {
+
+
+        if(currentPage < totalPages) {
+
+
+            currentPage++;
+
+
+            loadPage(currentPage);
+
+
+        }
+
+
+    };
+
+
+
+
+
+
+
+    const goPrevious = () => {
+
+
+        if(currentPage > 1) {
+
+
+            currentPage--;
+
+
+            loadPage(currentPage);
+
+
+        }
+
+
+    };
+
+
+
+
+
+
+
+
+    const updateNavigation = () => {
+
+
+
+        const previousButton =
+            document.querySelector(
+                '[data-action="previous"]'
+            );
+
+
+
+        const continueButton =
+            document.querySelector(
+                '[data-action="continue"]'
+            );
+
+
+
+
+
+        /*
+            PAGE 01 RULE
+
+            First page has no previous destination.
+        */
+
+
+        if(previousButton) {
+
+
+            if(currentPage === 1) {
+
+
+                previousButton.style.display =
+                    "none";
+
+
+            } else {
+
+
+                previousButton.style.display =
+                    "inline-flex";
+
+
+            }
+
+
+        }
+
+
+
+
+
+
+        /*
+            Final page handling
+        */
+
+
+        if(continueButton) {
+
+
+            if(currentPage === totalPages) {
+
+
+                continueButton.innerHTML =
+                `
+                <span class="nav-label">
+                    Complete Journey
+                </span>
+
+                <span class="nav-icon">
+                    ✓
+                </span>
+                `;
+
+
+            }
+
+
+        }
+
+
+
+
+
+
+        updateJourneyCounter();
+
+
+    };
+
+
+
+
+
+
+
+
+    const updateJourneyCounter = () => {
+
+
+        const counter =
+            document.getElementById(
+                "journey-counter"
+            );
+
+
+
+        if(counter) {
+
+
+            counter.textContent =
+            String(currentPage)
+            .padStart(2,"0")
+            +
+            " / "
+            +
+            String(totalPages)
+            .padStart(2,"0");
+
+
+        }
+
+
+    };
+
+
+
+
+
+
+
+    const loadPage = (pageNumber) => {
+
+
+        /*
+            Page loading handled by app.js
+            This function only triggers the event.
+        */
+
+
+        document.dispatchEvent(
+
+            new CustomEvent(
+                "ctm-page-change",
+                {
+                    detail:
+                    {
+                        page: pageNumber
+                    }
+                }
+            )
+
+        );
+
+
+
+        updateNavigation();
+
+
+    };
 
 
 
@@ -530,14 +339,10 @@ const CTMNavigation = (() => {
         init,
 
 
-        next,
+        updateNavigation,
 
 
-        previous,
-
-
-        loadPage
-
+        getCurrentPage: () => currentPage
 
 
     };
@@ -550,26 +355,11 @@ const CTMNavigation = (() => {
 
 
 
-
-
-
-
-/* ==========================================================================
-   START NAVIGATION
-
-   ========================================================================== */
-
-
 document.addEventListener(
-
     "DOMContentLoaded",
-
     () => {
 
-
-        CTMNavigation.init();
-
+        Navigation.init();
 
     }
-
 );
