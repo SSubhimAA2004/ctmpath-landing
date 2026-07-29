@@ -3,9 +3,9 @@
    CTM PATH™ Guided Journey™
 
    File        : js/navigation.js
-   Version     : 2.7
+   Version     : 2.8
 
-   Status      : 🔒 PAGE 01 GATEWAY PROTECTION
+   Status      : 🔒 PAGE OWNERSHIP + NAVIGATION CONTROL
 
 
    Purpose:
@@ -13,57 +13,35 @@
    Global journey navigation controller.
 
 
-   Architecture Rule:
-
-   PAGE 01
-
-   Welcome Gateway
-
-   No Global Navigation
-
-
-   PAGE 02 - PAGE 18
-
-   Guided Journey Navigation Active
-
-
    Responsibilities:
 
-   ✓ Previous control
-   ✓ Continue control
-   ✓ Journey counter
-   ✓ Navigation state
+   ✓ Previous button
+   ✓ Continue button
+   ✓ Counter update
+   ✓ Visibility control
 
 
    Does NOT:
 
    ✗ Render pages
    ✗ Load pages
-   ✗ Call backend
+   ✗ Inject UI
 
 
    ========================================================================== */
-
-
-
 
 
 const Navigation = (() => {
 
 
 
-
-
     let currentPage = 1;
-
 
 
     const totalPages = 18;
 
 
-
     let initialized = false;
-
 
 
 
@@ -89,17 +67,13 @@ const Navigation = (() => {
 
 
 
-
-
         initialized = true;
-
 
 
         bindEvents();
 
 
-
-        updateNavigation();
+        update();
 
 
 
@@ -114,7 +88,7 @@ const Navigation = (() => {
 
 
     /* ==========================================================
-       EVENT BINDING
+       EVENTS
        ========================================================== */
 
 
@@ -126,7 +100,7 @@ const Navigation = (() => {
 
             "click",
 
-            function(event){
+            event => {
 
 
 
@@ -134,7 +108,7 @@ const Navigation = (() => {
 
                 event.target.closest(
 
-                    ".nav-button"
+                    "[data-action]"
 
                 );
 
@@ -152,8 +126,6 @@ const Navigation = (() => {
 
 
 
-
-
                 const action =
 
                 button.dataset.action;
@@ -162,35 +134,25 @@ const Navigation = (() => {
 
 
 
-
-
-                if(action === "previous"){
-
-
-
-                    previous();
-
-
-
-                }
-
-
-
-
-
-
-
-
                 if(action === "continue"){
-
 
 
                     next();
 
 
-
                 }
 
+
+
+
+
+                if(action === "previous"){
+
+
+                    previous();
+
+
+                }
 
 
 
@@ -227,17 +189,11 @@ const Navigation = (() => {
 
 
 
+        setPage(
 
+            currentPage + 1
 
-        currentPage++;
-
-
-
-
-
-        dispatchPageChange();
-
-
+        );
 
 
 
@@ -260,7 +216,7 @@ const Navigation = (() => {
 
 
 
-        if(currentPage <= 2){
+        if(currentPage <= 1){
 
             return;
 
@@ -268,17 +224,11 @@ const Navigation = (() => {
 
 
 
+        setPage(
 
+            currentPage - 1
 
-        currentPage--;
-
-
-
-
-
-        dispatchPageChange();
-
-
+        );
 
 
 
@@ -293,11 +243,19 @@ const Navigation = (() => {
 
 
     /* ==========================================================
-       DISPATCH ROUTER EVENT
+       SET PAGE
        ========================================================== */
 
 
-    function dispatchPageChange(){
+    function setPage(page){
+
+
+
+        currentPage = page;
+
+
+
+        update();
 
 
 
@@ -310,6 +268,7 @@ const Navigation = (() => {
                 "ctm-page-change",
 
                 {
+
 
                     detail:{
 
@@ -330,14 +289,6 @@ const Navigation = (() => {
 
 
 
-
-
-        updateNavigation();
-
-
-
-
-
     }
 
 
@@ -349,42 +300,15 @@ const Navigation = (() => {
 
 
     /* ==========================================================
-       PAGE STATE CONTROL
+       UPDATE NAVIGATION STATE
        ========================================================== */
 
 
-    function setPage(page){
+    function update(){
 
 
 
-        currentPage = page;
-
-
-
-        updateNavigation();
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       NAVIGATION VISIBILITY
-       ========================================================== */
-
-
-    function updateNavigation(){
-
-
-
-        const container =
+        const navigation =
 
         document.getElementById(
 
@@ -396,7 +320,7 @@ const Navigation = (() => {
 
 
 
-        if(!container){
+        if(!navigation){
 
             return;
 
@@ -409,12 +333,11 @@ const Navigation = (() => {
 
 
 
+
         /*
-            PAGE 01 LOCK
+            PAGE 01
 
-            Gateway screen.
-
-            Hide completely.
+            Welcome owns the action.
 
         */
 
@@ -423,7 +346,7 @@ const Navigation = (() => {
 
 
 
-            container.style.display =
+            navigation.style.display =
 
             "none";
 
@@ -434,6 +357,7 @@ const Navigation = (() => {
 
 
             return;
+
 
         }
 
@@ -448,12 +372,12 @@ const Navigation = (() => {
         /*
             PAGE 02-18
 
-            Enable journey navigation.
+            Enable global journey controls.
 
         */
 
 
-        container.style.display =
+        navigation.style.display =
 
         "flex";
 
@@ -463,9 +387,10 @@ const Navigation = (() => {
 
 
 
-        const previousButton =
 
-        document.querySelector(
+        const previous =
+
+        navigation.querySelector(
 
             "[data-action='previous']"
 
@@ -475,21 +400,22 @@ const Navigation = (() => {
 
 
 
-        if(previousButton){
+
+        if(previous){
 
 
 
-            previousButton.style.display =
+            previous.style.visibility =
 
             currentPage <= 2
 
             ?
 
-            "none"
+            "hidden"
 
             :
 
-            "inline-flex";
+            "visible";
 
 
 
@@ -499,111 +425,10 @@ const Navigation = (() => {
 
 
 
-
-        updateContinueState();
 
 
 
         updateCounter();
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       CONTINUE STATE
-       ========================================================== */
-
-
-    function updateContinueState(){
-
-
-
-        const continueButton =
-
-        document.querySelector(
-
-            "[data-action='continue']"
-
-        );
-
-
-
-
-
-        if(!continueButton){
-
-            return;
-
-        }
-
-
-
-
-
-
-
-        if(currentPage === totalPages){
-
-
-
-            continueButton.innerHTML = `
-
-
-                <span class="nav-label">
-
-                    Complete Journey
-
-                </span>
-
-
-                <span class="nav-icon">
-
-                    ✓
-
-                </span>
-
-
-            `;
-
-
-
-        }
-
-        else {
-
-
-
-            continueButton.innerHTML = `
-
-
-                <span class="nav-label">
-
-                    Continue
-
-                </span>
-
-
-                <span class="nav-icon">
-
-                    →
-
-                </span>
-
-
-            `;
-
-
-
-        }
 
 
 
@@ -638,11 +463,19 @@ const Navigation = (() => {
 
 
 
-        if(counter){
+        if(!counter){
+
+            return;
+
+        }
 
 
 
-            counter.textContent =
+
+
+        counter.textContent =
+
+
 
             String(currentPage)
 
@@ -657,10 +490,6 @@ const Navigation = (() => {
             String(totalPages)
 
             .padStart(2,"0");
-
-
-
-        }
 
 
 
@@ -684,7 +513,7 @@ const Navigation = (() => {
         setPage,
 
 
-        updateNavigation,
+        update,
 
 
         getCurrentPage(){
@@ -701,8 +530,6 @@ const Navigation = (() => {
 
 
 
-
-
 })();
 
 
@@ -713,9 +540,25 @@ const Navigation = (() => {
 
 
 
-/* ==========================================================================
-   GLOBAL ACCESS
-   ========================================================================== */
-
-
 window.Navigation = Navigation;
+
+
+
+
+
+
+
+
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+()=>{
+
+
+    Navigation.init();
+
+
+
+});
