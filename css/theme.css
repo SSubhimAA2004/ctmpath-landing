@@ -3,19 +3,22 @@
    CTM PATH™ Guided Journey™
 
    File        : theme.css
-   Version     : 1.2
+   Version     : 2.0
 
    Purpose:
 
-   Global visual identity system.
+   Global CTM PATH™ Design Language
 
    Controls:
 
-   • Background universe
-   • Brand colours
-   • Typography colours
-   • CTA accents
-   • Premium surfaces
+   ✓ Brand colours
+   ✓ Typography system
+   ✓ Surface system
+   ✓ Border system
+   ✓ Shadow system
+   ✓ Spacing system
+
+   Used by all 18 pages.
 
    ========================================================================== */
 
@@ -27,7 +30,7 @@
 
 
 /* ==========================================================================
-   CORE UNIVERSE
+   CORE BACKGROUND UNIVERSE
    ========================================================================== */
 
 
@@ -36,24 +39,37 @@
 #081C3A;
 
 
+--ctm-background-deep:
+
+#06152D;
+
+
 --ctm-surface:
 
-#081C3A;
+#0B2447;
 
 
---ctm-surface-glass:
+--ctm-surface-light:
+
+rgba(
+    255,
+    255,
+    255,
+    0.05
+);
+
+
+
+--ctm-glass:
 
 rgba(
     8,
     28,
     58,
-    0.92
+    0.88
 );
 
 
---ctm-footer-bg:
-
-#081C3A;
 
 
 
@@ -61,7 +77,7 @@ rgba(
 
 
 /* ==========================================================================
-   GOLD IDENTITY
+   BRAND IDENTITY COLOURS
    ========================================================================== */
 
 
@@ -75,9 +91,23 @@ rgba(
 #FFF3A6;
 
 
---ctm-gold-soft:
+--ctm-gold-dark:
 
-#E8C982;
+#A86B16;
+
+
+
+
+
+--ctm-teal:
+
+#00B7B7;
+
+
+--ctm-teal-light:
+
+#57D6D6;
+
 
 
 
@@ -86,11 +116,7 @@ rgba(
 
 
 /* ==========================================================================
-   CTM BLUE CTA IDENTITY
-
-   New:
-   Premium journey action colour
-
+   CTA SYSTEM
    ========================================================================== */
 
 
@@ -114,37 +140,6 @@ rgba(
 );
 
 
---ctm-blue-glow-strong:
-
-rgba(
-    0,
-    183,
-    255,
-    0.65
-);
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   TEAL SYSTEM
-   ========================================================================== */
-
-
---ctm-teal:
-
-#00B7B7;
-
-
---ctm-teal-soft:
-
-#57D6D6;
-
-
 
 
 
@@ -156,17 +151,19 @@ rgba(
    ========================================================================== */
 
 
---ctm-text-primary:
+--text-primary:
 
 #F8F4EA;
 
 
---ctm-text-secondary:
+
+--text-secondary:
 
 #D6DCE8;
 
 
---ctm-text-muted:
+
+--text-muted:
 
 rgba(
     248,
@@ -174,6 +171,12 @@ rgba(
     234,
     0.72
 );
+
+
+
+--text-dark:
+
+#081C3A;
 
 
 
@@ -187,7 +190,7 @@ rgba(
    ========================================================================== */
 
 
---ctm-border:
+--border-soft:
 
 rgba(
     255,
@@ -198,7 +201,7 @@ rgba(
 
 
 
---ctm-border-gold:
+--border-gold:
 
 rgba(
     217,
@@ -209,7 +212,7 @@ rgba(
 
 
 
---ctm-border-blue:
+--border-blue:
 
 rgba(
     0,
@@ -226,7 +229,7 @@ rgba(
 
 
 /* ==========================================================================
-   TYPOGRAPHY
+   TYPOGRAPHY SYSTEM
    ========================================================================== */
 
 
@@ -260,21 +263,57 @@ serif;
 
 
 /* ==========================================================================
-   SHAPE SYSTEM
+   SPACING SYSTEM
    ========================================================================== */
 
 
---radius-small:
+--space-xs:
+
+8px;
+
+
+--space-sm:
+
+16px;
+
+
+--space-md:
+
+32px;
+
+
+--space-lg:
+
+64px;
+
+
+--space-xl:
+
+96px;
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   CORNER SYSTEM
+   ========================================================================== */
+
+
+--radius-sm:
 
 12px;
 
 
---radius-medium:
+--radius-md:
 
 24px;
 
 
---radius-large:
+--radius-lg:
 
 36px;
 
@@ -288,14 +327,16 @@ serif;
 
 
 
+
+
 /* ==========================================================================
    SHADOW SYSTEM
    ========================================================================== */
 
 
---ctm-shadow:
+--shadow-premium:
 
-0 20px 60px rgba(
+0 25px 70px rgba(
     0,
     0,
     0,
@@ -303,11 +344,26 @@ serif;
 );
 
 
---ctm-shadow-blue:
 
-0 0 35px var(--ctm-blue-glow);
+--shadow-gold:
+
+0 0 40px rgba(
+    217,
+    181,
+    106,
+    0.25
+);
 
 
+
+--shadow-blue:
+
+0 0 45px rgba(
+    0,
+    183,
+    255,
+    0.35
+);
 
 
 
@@ -322,6 +378,9 @@ serif;
 
 /* ==========================================================================
    GLOBAL BACKGROUND LOCK
+
+   All pages inherit the same universe.
+
    ========================================================================== */
 
 
@@ -329,15 +388,15 @@ html,
 body {
 
 
-background:
+    background:
 
-var(--ctm-background);
+    var(--ctm-background);
 
 
 
-color:
+    color:
 
-var(--ctm-text-primary);
+    var(--text-primary);
 
 
 
@@ -353,21 +412,9 @@ var(--ctm-text-primary);
 body {
 
 
-margin:
+    font-family:
 
-0;
-
-
-
-min-height:
-
-100vh;
-
-
-
-font-family:
-
-var(--font-primary);
+    var(--font-primary);
 
 
 
@@ -381,22 +428,99 @@ var(--font-primary);
 
 
 /* ==========================================================================
-   APPLICATION SURFACE LOCK
+   COMMON SURFACE CLASSES
    ========================================================================== */
 
 
-.app-shell,
-.app-content,
-.ctm-screen,
-.welcome-screen,
-.ctm-footer,
-.app-header {
+.ctm-surface {
 
 
-background:
+    background:
 
-var(--ctm-background);
+    var(--ctm-surface);
 
+
+
+    border:
+
+    1px solid var(--border-soft);
+
+
+
+    border-radius:
+
+    var(--radius-md);
+
+
+
+}
+
+
+
+
+
+
+
+
+.ctm-glass {
+
+
+    background:
+
+    var(--ctm-glass);
+
+
+
+    backdrop-filter:
+
+    blur(12px);
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   BRAND TEXT HELPERS
+   ========================================================================== */
+
+
+.gold-text {
+
+
+    color:
+
+    var(--ctm-gold);
+
+
+}
+
+
+
+.teal-text {
+
+
+    color:
+
+    var(--ctm-teal);
+
+
+}
+
+
+
+.primary-text {
+
+
+    color:
+
+    var(--text-primary);
 
 
 }
@@ -411,13 +535,8 @@ var(--ctm-background);
 /* ==========================================================================
    END OF FILE
 
-   File:
    css/theme.css
 
-   Version:
-   CTM PATH™ Theme System v1.2
-
-   Status:
-   UPDATED 🔒
+   Version 2.0
 
    ========================================================================== */
