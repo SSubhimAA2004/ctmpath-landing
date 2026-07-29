@@ -3,33 +3,33 @@
    CTM PATH™ Guided Journey™
 
    File        : css/theme.css
-   Version     : 3.0
+   Version     : 4.0
 
    Status      : 🔒 PREMIUM DESIGN TOKENS
 
+   Purpose
+   -------
+   Global visual language for the CTM PATH™ Guided Journey™.
 
-   Purpose:
+   Responsibilities
 
-   Global brand visual system.
+   ✓ Brand Colours
+   ✓ Typography Colours
+   ✓ Surface Tokens
+   ✓ Border System
+   ✓ Shadow System
+   ✓ Glow System
+   ✓ Radius System
+   ✓ Transition System
+   ✓ Spacing Tokens
 
-
-   Responsibilities:
-
-   ✓ Brand colours
-   ✓ Background system
-   ✓ Typography colours
-   ✓ Premium effects
-   ✓ Surface styling
-
-
-   Does NOT:
+   Does NOT
 
    ✗ Layout
    ✗ Components
-   ✗ Page logic
+   ✗ Page Logic
 
-
-   ========================================================================== */
+========================================================================== */
 
 
 
@@ -37,131 +37,310 @@
 
 /* ==========================================================================
    ROOT DESIGN TOKENS
-   ========================================================================== */
+========================================================================== */
 
+:root{
 
-:root {
 
 
 
     /* ======================================================
-       PRIMARY BRAND COLOURS
-       ====================================================== */
-
+       BRAND COLOURS
+    ====================================================== */
 
     --ctm-navy:
 
-    #081C3A;
-
-
+        #081C3A;
 
     --ctm-navy-deep:
 
-    #06152D;
+        #06152D;
 
+    --ctm-navy-soft:
 
+        #0D2650;
 
     --ctm-blue:
 
-    #12376E;
+        #12376E;
 
 
+
+
+
+    /* ======================================================
+       ACCENT SYSTEM
+    ====================================================== */
 
     --ctm-teal:
 
-    #00C7D9;
-
-
+        #23D4C8;
 
     --ctm-teal-soft:
 
-    #42D9E8;
+        #4EF7EC;
+
+    --ctm-teal-light:
+
+        #7BEDE4;
+
+    --ctm-teal-highlight:
+
+        #B8FFF8;
+
+
 
 
 
     --ctm-gold:
 
-    #C9A227;
-
-
+        #C9A227;
 
     --ctm-gold-soft:
 
-    #E2C35B;
+        #E2C35B;
 
 
-
-    --ctm-ivory:
-
-    #F7F4EA;
 
 
 
     --ctm-white:
 
-    #FFFFFF;
+        #FFFFFF;
+
+    --ctm-ivory:
+
+        #FAF8F5;
 
 
 
 
 
     /* ======================================================
-       MUTED COLOURS
-       ====================================================== */
+       BACKGROUND SYSTEM
+    ====================================================== */
 
+    --bg-primary:
+
+        var(--ctm-navy);
+
+    --bg-secondary:
+
+        #0C2145;
+
+    --bg-tertiary:
+
+        #12335E;
+
+    --bg-card:
+
+        rgba(255,255,255,.045);
+
+    --bg-card-hover:
+
+        rgba(255,255,255,.065);
+
+    --bg-glass:
+
+        rgba(255,255,255,.035);
+
+
+
+
+
+    /* ======================================================
+       TYPOGRAPHY COLOURS
+    ====================================================== */
 
     --text-primary:
 
-    #F7F4EA;
+        var(--ctm-ivory);
 
+    --text-heading:
 
+        #FFFFFF;
+
+    --text-title:
+
+        #F2F7FB;
+
+    --text-body:
+
+        #DCE7F1;
 
     --text-secondary:
 
-    #C8D3E6;
+        #C6D6E7;
 
+    --text-support:
 
+        #B8C9D8;
 
     --text-muted:
 
-    #94A6C2;
+        #95A8BC;
 
+    --text-disabled:
 
-
-    --border-soft:
-
-    rgba(201,162,39,0.25);
-
-
-
-    --surface-glass:
-
-    rgba(255,255,255,0.04);
+        #74889C;
 
 
 
 
 
     /* ======================================================
-       EFFECTS
-       ====================================================== */
+       LINK COLOURS
+    ====================================================== */
 
+    --link:
+
+        var(--ctm-teal-soft);
+
+    --link-hover:
+
+        var(--ctm-teal-highlight);
+
+    --link-active:
+
+        var(--ctm-teal);
+
+
+
+
+
+    /* ======================================================
+       BORDER SYSTEM
+    ====================================================== */
+
+    --border-soft:
+
+        rgba(255,255,255,.06);
+
+    --border-light:
+
+        rgba(255,255,255,.10);
+
+    --border-medium:
+
+        rgba(255,255,255,.16);
+
+    --border-accent:
+
+        rgba(35,212,200,.24);
+
+    --border-gold:
+
+        rgba(201,162,39,.28);
+
+    /* ======================================================
+       DIVIDER SYSTEM
+    ====================================================== */
+
+    --divider-soft:
+
+        rgba(255,255,255,.05);
+
+    --divider-medium:
+
+        rgba(255,255,255,.08);
+
+    --divider-strong:
+
+        rgba(255,255,255,.14);
+
+
+
+
+
+    /* ======================================================
+       SURFACE SYSTEM
+    ====================================================== */
+
+    --surface-glass:
+
+        rgba(255,255,255,.045);
+
+    --surface-glass-hover:
+
+        rgba(255,255,255,.065);
+
+    --surface-overlay:
+
+        linear-gradient(
+
+            180deg,
+
+            rgba(255,255,255,.045),
+
+            rgba(255,255,255,.018)
+
+        );
+
+
+
+
+
+    /* ======================================================
+       SHADOW SYSTEM
+    ====================================================== */
+
+    --shadow-xs:
+
+        0 4px 12px rgba(0,0,0,.14);
+
+    --shadow-sm:
+
+        0 10px 26px rgba(0,0,0,.18);
+
+    --shadow-md:
+
+        0 18px 46px rgba(0,0,0,.26);
+
+    --shadow-lg:
+
+        0 28px 72px rgba(0,0,0,.34);
+
+    --shadow-xl:
+
+        0 40px 96px rgba(0,0,0,.42);
+
+
+
+
+
+    /* Backward Compatibility */
 
     --shadow-soft:
 
-    0 20px 60px rgba(0,0,0,0.35);
-
-
+        var(--shadow-md);
 
     --shadow-gold:
 
-    0 0 40px rgba(201,162,39,0.20);
-
-
+        0 0 42px rgba(201,162,39,.18);
 
     --shadow-teal:
 
-    0 0 40px rgba(0,199,217,0.25);
+        0 0 42px rgba(35,212,200,.22);
+
+
+
+
+
+    /* ======================================================
+       GLOW SYSTEM
+    ====================================================== */
+
+    --glow-soft:
+
+        0 0 36px rgba(35,212,200,.08);
+
+    --glow-medium:
+
+        0 0 60px rgba(35,212,200,.14);
+
+    --glow-strong:
+
+        0 0 86px rgba(35,212,200,.20);
 
 
 
@@ -169,57 +348,101 @@
 
     /* ======================================================
        RADIUS SYSTEM
-       ====================================================== */
+    ====================================================== */
 
+    --radius-xs:
+
+        8px;
 
     --radius-sm:
 
-    12px;
-
-
+        12px;
 
     --radius-md:
 
-    24px;
-
-
+        24px;
 
     --radius-lg:
 
-    36px;
+        36px;
 
+    --radius-xl:
 
+        48px;
 
     --radius-pill:
 
-    999px;
+        999px;
 
 
 
 
 
     /* ======================================================
-       TRANSITIONS
-       ====================================================== */
+       SPACING SYSTEM
+    ====================================================== */
 
+    --space-1:
+
+        .25rem;
+
+    --space-2:
+
+        .50rem;
+
+    --space-3:
+
+        .75rem;
+
+    --space-4:
+
+        1rem;
+
+    --space-5:
+
+        1.5rem;
+
+    --space-6:
+
+        2rem;
+
+    --space-7:
+
+        3rem;
+
+    --space-8:
+
+        4rem;
+
+    --space-9:
+
+        5rem;
+
+    --space-10:
+
+        6rem;
+
+    /* ======================================================
+       TRANSITIONS
+    ====================================================== */
 
     --transition-fast:
 
-    .2s ease;
-
-
+        .20s ease;
 
     --transition-normal:
 
-    .35s ease;
+        .35s ease;
 
+    --transition-slow:
 
+        .60s ease;
+
+    --transition-premium:
+
+        .80s cubic-bezier(.22,1,.36,1);
 
 }
-
-
-
-
 
 
 
@@ -227,130 +450,167 @@
 
 /* ==========================================================================
    GLOBAL THEME APPLICATION
-   ========================================================================== */
+========================================================================== */
 
+html{
 
-body {
-
-
-    background:
-
-    var(--ctm-navy);
-
-
-
-    color:
-
-    var(--text-primary);
-
-
+    scroll-behavior:smooth;
 
 }
 
 
 
+body{
 
+    background:
+
+        var(--bg-primary);
+
+    color:
+
+        var(--text-primary);
+
+    -webkit-font-smoothing:
+
+        antialiased;
+
+    -moz-osx-font-smoothing:
+
+        grayscale;
+
+    text-rendering:
+
+        optimizeLegibility;
+
+}
 
 
 
 
 
 /* ==========================================================================
-   TEXT SYSTEM
-   ========================================================================== */
+   TYPOGRAPHY COLOUR UTILITIES
+========================================================================== */
 
-
-.text-primary {
-
+.text-primary{
 
     color:
 
-    var(--text-primary);
-
+        var(--text-primary);
 
 }
 
 
 
-.text-secondary {
-
+.text-heading{
 
     color:
 
-    var(--text-secondary);
-
+        var(--text-heading);
 
 }
 
 
 
-.text-muted {
-
+.text-title{
 
     color:
 
-    var(--text-muted);
-
+        var(--text-title);
 
 }
 
 
 
-.text-gold {
-
+.text-body{
 
     color:
 
-    var(--ctm-gold-soft);
-
+        var(--text-body);
 
 }
 
 
 
-.text-teal {
-
+.text-secondary{
 
     color:
 
-    var(--ctm-teal);
-
+        var(--text-secondary);
 
 }
 
 
 
+.text-support{
+
+    color:
+
+        var(--text-support);
+
+}
 
 
 
+.text-muted{
+
+    color:
+
+        var(--text-muted);
+
+}
 
 
+
+.text-gold{
+
+    color:
+
+        var(--ctm-gold-soft);
+
+}
+
+
+
+.text-teal{
+
+    color:
+
+        var(--ctm-teal);
+
+}
+
+
+
+.text-accent{
+
+    color:
+
+        var(--ctm-teal-soft);
+
+}
 
 /* ==========================================================================
    PREMIUM SURFACES
-   ========================================================================== */
+========================================================================== */
 
-
-.surface {
-
+.surface{
 
     background:
 
-    var(--surface-glass);
-
-
+        var(--surface-glass);
 
     border:
 
-    1px solid var(--border-soft);
-
-
+        1px solid var(--border-soft);
 
     backdrop-filter:
 
-    blur(14px);
+        blur(14px);
 
+    -webkit-backdrop-filter:
 
+        blur(14px);
 
 }
 
@@ -358,86 +618,101 @@ body {
 
 
 
+.surface-elevated{
+
+    background:
+
+        var(--surface-overlay);
+
+    border:
+
+        1px solid var(--border-light);
+
+    box-shadow:
+
+        var(--shadow-sm);
+
+}
+
 
 
 
 
 /* ==========================================================================
-   PREMIUM CARD STYLE
-   ========================================================================== */
+   PREMIUM CARD SYSTEM
+========================================================================== */
 
-
-.premium-card {
-
+.premium-card{
 
     background:
 
-    linear-gradient(
+        linear-gradient(
 
-        145deg,
+            145deg,
 
-        rgba(255,255,255,0.06),
+            rgba(255,255,255,.06),
 
-        rgba(255,255,255,0.02)
+            rgba(255,255,255,.02)
 
-    );
-
-
+        );
 
     border:
 
-    1px solid rgba(201,162,39,0.22);
-
-
+        1px solid var(--border-gold);
 
     border-radius:
 
-    var(--radius-md);
-
-
+        var(--radius-md);
 
     box-shadow:
 
-    var(--shadow-soft);
+        var(--shadow-soft);
 
+    transition:
 
+        transform var(--transition-normal),
+
+        box-shadow var(--transition-normal),
+
+        border-color var(--transition-normal);
 
 }
 
 
 
 
+
+.premium-card:hover{
+
+    transform:
+
+        translateY(-6px);
+
+    border-color:
+
+        var(--border-accent);
+
+    box-shadow:
+
+        var(--shadow-lg),
+
+        var(--glow-soft);
+
+}
 
 
 
 
 
 /* ==========================================================================
-   BRAND GLOW EFFECTS
-   ========================================================================== */
+   GLOW UTILITIES
+========================================================================== */
 
-
-.gold-glow {
-
+.gold-glow{
 
     box-shadow:
 
-    var(--shadow-gold);
-
-
-
-}
-
-
-
-.teal-glow {
-
-
-    box-shadow:
-
-    var(--shadow-teal);
-
-
+        var(--shadow-gold);
 
 }
 
@@ -445,85 +720,99 @@ body {
 
 
 
+.teal-glow{
+
+    box-shadow:
+
+        var(--shadow-teal);
+
+}
 
 
 
+
+
+.glow-soft{
+
+    box-shadow:
+
+        var(--glow-soft);
+
+}
+
+
+
+
+
+.glow-medium{
+
+    box-shadow:
+
+        var(--glow-medium);
+
+}
+
+
+
+
+
+.glow-strong{
+
+    box-shadow:
+
+        var(--glow-strong);
+
+}
 
 /* ==========================================================================
    PREMIUM BUTTON THEME
-   ========================================================================== */
+========================================================================== */
 
+.btn-primary{
 
-.btn-primary {
+    display:inline-flex;
 
+    align-items:center;
 
-    background:
+    justify-content:center;
 
-    linear-gradient(
-
-        135deg,
-
-        var(--ctm-teal),
-
-        #008FD1
-
-    );
-
-
-
-    color:
-
-    white;
-
-
-
-    box-shadow:
-
-    0 15px 40px rgba(0,199,217,0.25);
-
-
-
-}
-
-
-
-.btn-primary:hover {
-
-
-    box-shadow:
-
-    0 20px 55px rgba(0,199,217,0.35);
-
-
-
-}
-
-
-
-
-
-
-
-.btn-secondary {
-
+    gap:.65rem;
 
     background:
 
-    transparent;
+        linear-gradient(
 
+            135deg,
 
+            var(--ctm-teal),
+
+            #1298D8
+
+        );
 
     color:
 
-    var(--ctm-gold-soft);
-
-
+        var(--ctm-white);
 
     border:
 
-    1px solid var(--ctm-gold);
+        none;
 
+    border-radius:
 
+        var(--radius-pill);
+
+    box-shadow:
+
+        0 16px 42px rgba(35,212,200,.26);
+
+    transition:
+
+        transform var(--transition-normal),
+
+        box-shadow var(--transition-normal),
+
+        filter var(--transition-normal);
 
 }
 
@@ -531,96 +820,185 @@ body {
 
 
 
+.btn-primary:hover{
+
+    transform:
+
+        translateY(-3px);
+
+    filter:
+
+        brightness(1.05);
+
+    box-shadow:
+
+        0 24px 58px rgba(35,212,200,.36);
+
+}
 
 
 
 
-/* ==========================================================================
-   DIVIDERS
-   ========================================================================== */
 
+.btn-primary:active{
 
-.gold-divider {
+    transform:
 
+        translateY(-1px);
 
-    width:
-
-    80px;
+}
 
 
 
-    height:
-
-    2px;
 
 
+.btn-secondary{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:.65rem;
 
     background:
 
-    var(--ctm-gold);
+        transparent;
 
+    color:
 
+        var(--ctm-gold-soft);
 
-    margin:
+    border:
 
-    24px auto;
+        1px solid var(--ctm-gold);
 
+    border-radius:
 
+        var(--radius-pill);
+
+    transition:
+
+        all var(--transition-normal);
 
 }
 
 
 
 
+
+.btn-secondary:hover{
+
+    background:
+
+        rgba(201,162,39,.08);
+
+    border-color:
+
+        var(--ctm-gold-soft);
+
+}
 
 
 
 
 
 /* ==========================================================================
+   DIVIDER SYSTEM
+========================================================================== */
+
+.gold-divider{
+
+    width:84px;
+
+    height:2px;
+
+    margin:28px auto;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            var(--ctm-gold),
+
+            transparent
+
+        );
+
+}
+
+
+
+
+
+.teal-divider{
+
+    width:84px;
+
+    height:2px;
+
+    margin:28px auto;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            var(--ctm-teal),
+
+            transparent
+
+        );
+
+}
+
+/* ==========================================================================
    BRAND TYPOGRAPHY
-   ========================================================================== */
+========================================================================== */
 
-
-.brand-title {
-
+.brand-title{
 
     color:
 
-    var(--ctm-ivory);
+        var(--ctm-ivory);
 
+    font-weight:
 
-
-    letter-spacing:
-
-    .08em;
-
-
-
-}
-
-
-
-.brand-subtitle {
-
-
-    color:
-
-    var(--ctm-gold-soft);
-
-
+        700;
 
     letter-spacing:
 
-    .25em;
-
-
+        .08em;
 
 }
 
 
 
 
+
+.brand-subtitle{
+
+    color:
+
+        var(--ctm-gold-soft);
+
+    letter-spacing:
+
+        .24em;
+
+    text-transform:
+
+        uppercase;
+
+}
 
 
 
@@ -628,30 +1006,120 @@ body {
 
 /* ==========================================================================
    GLOBAL LINK STYLE
-   ========================================================================== */
+========================================================================== */
 
-
-a {
-
-
-    transition:
-
-    color var(--transition-fast);
-
-
-
-}
-
-
-
-a:hover {
-
+a{
 
     color:
 
-    var(--ctm-teal);
+        inherit;
 
+    text-decoration:
 
+        none;
+
+    transition:
+
+        color var(--transition-fast),
+
+        opacity var(--transition-fast);
 
 }
 
+
+
+
+
+a:hover{
+
+    color:
+
+        var(--link);
+
+}
+
+
+
+
+
+a:focus-visible{
+
+    outline:
+
+        2px solid var(--ctm-teal-soft);
+
+    outline-offset:
+
+        3px;
+
+}
+
+
+
+
+
+/* ==========================================================================
+   SELECTION
+========================================================================== */
+
+::selection{
+
+    background:
+
+        rgba(35,212,200,.30);
+
+    color:
+
+        var(--ctm-white);
+
+}
+
+
+
+
+
+::-moz-selection{
+
+    background:
+
+        rgba(35,212,200,.30);
+
+    color:
+
+        var(--ctm-white);
+
+}
+
+
+
+
+
+/* ==========================================================================
+   ACCESSIBILITY
+========================================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    *,
+
+    *::before,
+
+    *::after{
+
+        animation:none !important;
+
+        transition:none !important;
+
+        scroll-behavior:auto !important;
+
+    }
+
+}
+
+
+
+
+
+/* ==========================================================================
+   END OF FILE
+========================================================================== */
