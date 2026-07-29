@@ -3,9 +3,9 @@
    CTM PATH™ Guided Journey™
 
    File        : js/navigation.js
-   Version     : 2.8
+   Version     : 2.9
 
-   Status      : 🔒 PAGE OWNERSHIP + NAVIGATION CONTROL
+   Status      : APP 2.5 COMPATIBILITY PATCH
 
 
    Purpose:
@@ -15,17 +15,16 @@
 
    Responsibilities:
 
-   ✓ Previous button
-   ✓ Continue button
-   ✓ Counter update
-   ✓ Visibility control
+   ✓ Previous control
+   ✓ Continue control
+   ✓ Page state
+   ✓ Navigation visibility
 
 
    Does NOT:
 
    ✗ Render pages
-   ✗ Load pages
-   ✗ Inject UI
+   ✗ Handle business logic
 
 
    ========================================================================== */
@@ -50,10 +49,6 @@ const Navigation = (() => {
 
 
 
-    /* ==========================================================
-       INITIALIZE
-       ========================================================== */
-
 
     function init(){
 
@@ -70,10 +65,12 @@ const Navigation = (() => {
         initialized = true;
 
 
+
         bindEvents();
 
 
-        update();
+
+        updateNavigation();
 
 
 
@@ -85,11 +82,6 @@ const Navigation = (() => {
 
 
 
-
-
-    /* ==========================================================
-       EVENTS
-       ========================================================== */
 
 
     function bindEvents(){
@@ -134,10 +126,12 @@ const Navigation = (() => {
 
 
 
-                if(action === "continue"){
+                if(action === "previous"){
 
 
-                    next();
+
+                    previous();
+
 
 
                 }
@@ -146,10 +140,12 @@ const Navigation = (() => {
 
 
 
-                if(action === "previous"){
+                if(action === "continue"){
 
 
-                    previous();
+
+                    next();
+
 
 
                 }
@@ -170,11 +166,6 @@ const Navigation = (() => {
 
 
 
-
-
-    /* ==========================================================
-       NEXT
-       ========================================================== */
 
 
     function next(){
@@ -207,11 +198,6 @@ const Navigation = (() => {
 
 
 
-    /* ==========================================================
-       PREVIOUS
-       ========================================================== */
-
-
     function previous(){
 
 
@@ -242,11 +228,6 @@ const Navigation = (() => {
 
 
 
-    /* ==========================================================
-       SET PAGE
-       ========================================================== */
-
-
     function setPage(page){
 
 
@@ -255,7 +236,9 @@ const Navigation = (() => {
 
 
 
-        update();
+        updateNavigation();
+
+
 
 
 
@@ -273,7 +256,7 @@ const Navigation = (() => {
                     detail:{
 
 
-                        page:currentPage
+                        page:page
 
 
                     }
@@ -299,12 +282,7 @@ const Navigation = (() => {
 
 
 
-    /* ==========================================================
-       UPDATE NAVIGATION STATE
-       ========================================================== */
-
-
-    function update(){
+    function updateNavigation(){
 
 
 
@@ -332,12 +310,10 @@ const Navigation = (() => {
 
 
 
-
-
         /*
             PAGE 01
 
-            Welcome owns the action.
+            Welcome page owns CTA.
 
         */
 
@@ -352,11 +328,18 @@ const Navigation = (() => {
 
 
 
-            updateCounter();
+        }
 
 
 
-            return;
+        else {
+
+
+
+            navigation.style.display =
+
+            "flex";
+
 
 
         }
@@ -368,27 +351,7 @@ const Navigation = (() => {
 
 
 
-
-        /*
-            PAGE 02-18
-
-            Enable global journey controls.
-
-        */
-
-
-        navigation.style.display =
-
-        "flex";
-
-
-
-
-
-
-
-
-        const previous =
+        const previousButton =
 
         navigation.querySelector(
 
@@ -400,12 +363,13 @@ const Navigation = (() => {
 
 
 
-
-        if(previous){
-
+        if(previousButton){
 
 
-            previous.style.visibility =
+
+            previousButton.style.visibility =
+
+
 
             currentPage <= 2
 
@@ -427,7 +391,6 @@ const Navigation = (() => {
 
 
 
-
         updateCounter();
 
 
@@ -440,11 +403,6 @@ const Navigation = (() => {
 
 
 
-
-
-    /* ==========================================================
-       COUNTER
-       ========================================================== */
 
 
     function updateCounter(){
@@ -473,23 +431,25 @@ const Navigation = (() => {
 
 
 
+
+
         counter.textContent =
 
 
 
-            String(currentPage)
+        String(currentPage)
 
-            .padStart(2,"0")
+        .padStart(2,"0")
 
-            +
+        +
 
-            " / "
+        " / "
 
-            +
+        +
 
-            String(totalPages)
+        String(totalPages)
 
-            .padStart(2,"0");
+        .padStart(2,"0");
 
 
 
@@ -513,13 +473,15 @@ const Navigation = (() => {
         setPage,
 
 
-        update,
+        updateNavigation,
 
 
         getCurrentPage(){
 
 
+
             return currentPage;
+
 
 
         }
@@ -552,13 +514,15 @@ window.Navigation = Navigation;
 
 document.addEventListener(
 
-"DOMContentLoaded",
+    "DOMContentLoaded",
 
-()=>{
-
-
-    Navigation.init();
+    ()=>{
 
 
+        Navigation.init();
 
-});
+
+
+    }
+
+);
