@@ -3,27 +3,25 @@
    CTM PATH™ Guided Journey™
 
    File        : js/registration.js
-   Version     : 1.0
+   Version     : 1.1
 
-   Status      : 🔒 REGISTRATION DATA CAPTURE CONTROLLER
+   Status      : FRAGMENT FORM ACTIVATION PATCH
 
 
    Purpose:
 
-   Manage Page 02 registration experience.
+   Controls Page 02 registration experience.
 
 
    Responsibilities:
 
    ✓ Capture visitor details
    ✓ Validate form
-   ✓ Prepare registration payload
-   ✓ Communicate with API layer
+   ✓ Send registration request
 
 
    Does NOT:
 
-   ✗ Backend processing
    ✗ Database operations
    ✗ Assessment logic
 
@@ -32,8 +30,6 @@
 
 
 const Registration = (() => {
-
-
 
 
 
@@ -47,11 +43,6 @@ const Registration = (() => {
 
 
 
-    /* ==========================================================
-       INITIALIZATION
-       ========================================================== */
-
-
     function init(){
 
 
@@ -61,33 +52,6 @@ const Registration = (() => {
             return;
 
         }
-
-
-
-        initialized = true;
-
-
-
-        bindForm();
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       FORM BINDING
-       ========================================================== */
-
-
-    function bindForm(){
 
 
 
@@ -111,15 +75,11 @@ const Registration = (() => {
 
 
 
+        initialized = true;
 
 
-        form.addEventListener(
 
-            "submit",
-
-            handleSubmit
-
-        );
+        bindSubmit(form);
 
 
 
@@ -133,9 +93,65 @@ const Registration = (() => {
 
 
 
-    /* ==========================================================
-       SUBMIT HANDLER
-       ========================================================== */
+    function bindSubmit(form){
+
+
+
+        form.addEventListener(
+
+            "submit",
+
+            handleSubmit
+
+        );
+
+
+
+        const button =
+
+        document.getElementById(
+
+            "continue-registration"
+
+        );
+
+
+
+
+
+        if(button){
+
+
+
+            button.addEventListener(
+
+                "click",
+
+                ()=>{
+
+
+                    form.requestSubmit();
+
+
+
+                }
+
+            );
+
+
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
 
 
     async function handleSubmit(event){
@@ -148,7 +164,7 @@ const Registration = (() => {
 
 
 
-        const payload =
+        const data =
 
         collectData();
 
@@ -156,7 +172,8 @@ const Registration = (() => {
 
 
 
-        if(!validate(payload)){
+        if(!validate(data)){
+
 
 
             showMessage(
@@ -164,6 +181,7 @@ const Registration = (() => {
                 "Please complete all required fields."
 
             );
+
 
 
             return;
@@ -182,15 +200,15 @@ const Registration = (() => {
 
 
 
-        try{
+        try {
 
 
 
             const response =
 
-            await sendRegistration(
+            await API.registerVisitor(
 
-                payload
+                data
 
             );
 
@@ -198,9 +216,37 @@ const Registration = (() => {
 
 
 
-            handleSuccess(
+            console.log(
+
+                "Registration success:",
 
                 response
+
+            );
+
+
+
+
+
+            document.dispatchEvent(
+
+
+
+                new CustomEvent(
+
+                    "registration-complete",
+
+                    {
+
+
+                        detail:response
+
+
+                    }
+
+                )
+
+
 
             );
 
@@ -216,7 +262,7 @@ const Registration = (() => {
 
             console.error(
 
-                "Registration failed:",
+                "Registration error:",
 
                 error
 
@@ -226,7 +272,7 @@ const Registration = (() => {
 
             showMessage(
 
-                "Something went wrong. Please try again."
+                "Unable to complete registration."
 
             );
 
@@ -236,7 +282,7 @@ const Registration = (() => {
 
 
 
-        finally{
+        finally {
 
 
 
@@ -258,11 +304,6 @@ const Registration = (() => {
 
 
 
-    /* ==========================================================
-       COLLECT FORM DATA
-       ========================================================== */
-
-
     function collectData(){
 
 
@@ -270,45 +311,46 @@ const Registration = (() => {
         return {
 
 
+
             fullName:
 
-            getValue("fullName"),
+            value("fullName"),
 
 
 
             email:
 
-            getValue("email"),
+            value("email"),
 
 
 
             mobile:
 
-            getValue("mobile"),
+            value("mobile"),
 
 
 
             district:
 
-            getValue("district"),
+            value("district"),
 
 
 
             state:
 
-            getValue("state"),
+            value("state"),
 
 
 
             language:
 
-            getLanguage(),
+            selectedLanguage(),
 
 
 
             source:
 
-            getValue("source"),
+            value("source"),
 
 
 
@@ -332,7 +374,7 @@ const Registration = (() => {
 
 
 
-    function getValue(id){
+    function value(id){
 
 
 
@@ -366,7 +408,7 @@ const Registration = (() => {
 
 
 
-    function getLanguage(){
+    function selectedLanguage(){
 
 
 
@@ -404,18 +446,11 @@ const Registration = (() => {
 
 
 
-    /* ==========================================================
-       VALIDATION
-       ========================================================== */
-
-
     function validate(data){
 
 
 
         return (
-
-
 
             data.fullName &&
 
@@ -427,8 +462,6 @@ const Registration = (() => {
 
             data.state
 
-
-
         );
 
 
@@ -441,119 +474,6 @@ const Registration = (() => {
 
 
 
-
-
-    /* ==========================================================
-       API CONNECTION
-       ========================================================== */
-
-
-    async function sendRegistration(
-
-        payload
-
-    ){
-
-
-
-        if(
-
-            window.API &&
-
-            API.registerVisitor
-
-        ){
-
-
-
-            return await API.registerVisitor(
-
-                payload
-
-            );
-
-
-
-        }
-
-
-
-
-
-        throw new Error(
-
-            "API layer unavailable"
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       SUCCESS
-       ========================================================== */
-
-
-    function handleSuccess(response){
-
-
-
-        console.log(
-
-            "Registration successful:",
-
-            response
-
-        );
-
-
-
-
-
-        document.dispatchEvent(
-
-
-
-            new CustomEvent(
-
-                "registration-complete",
-
-                {
-
-                    detail:response
-
-                }
-
-            )
-
-
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       UI HELPERS
-       ========================================================== */
 
 
     function setLoading(state){
@@ -562,9 +482,9 @@ const Registration = (() => {
 
         const button =
 
-        document.querySelector(
+        document.getElementById(
 
-            ".continue-button"
+            "continue-registration"
 
         );
 
@@ -588,17 +508,41 @@ const Registration = (() => {
 
 
 
-        button.innerHTML =
+        if(state){
 
-        state
 
-        ?
 
-        "Creating Your Journey..."
+            button.innerHTML =
 
-        :
+            "Creating Your Journey...";
 
-        "என் பயணத்தை தொடர்கிறேன்<br>Continue My Journey™";
+
+
+        }
+
+        else {
+
+
+
+            button.innerHTML =
+
+            `
+
+            என் பயணத்தை தொடர்கிறேன்
+
+            <br>
+
+            <span>
+
+            Continue My Journey™
+
+            </span>
+
+            `;
+
+
+
+        }
 
 
 
@@ -642,9 +586,17 @@ const Registration = (() => {
 
 
 
-
-
 })();
+
+
+
+
+
+
+
+
+
+window.Registration = Registration;
 
 
 
@@ -656,13 +608,14 @@ const Registration = (() => {
 
 document.addEventListener(
 
-"DOMContentLoaded",
+    "ctm-page-loaded",
 
-()=>{
-
-
-    Registration.init();
+    ()=>{
 
 
+        Registration.init();
 
-});
+
+    }
+
+);
