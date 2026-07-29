@@ -2,14 +2,16 @@
 /* ==========================================================================
    CTM PATH™ Guided Journey™
 
-   File        : css/header.css
-   Version     : 6.0
-   Status      : PREMIUM EXECUTIVE HEADER
+   File        : header.css
+   Version     : 7.0
+   Status      : LUXURY EXECUTIVE EDITION
    Architecture: Static HTML + CSS
 
-   IMPORTANT
+   PURPOSE
 
-   This stylesheet is written ONLY for the following HTML:
+   Premium executive brand header.
+
+   Designed exclusively for:
 
    .ctm-header
    .header-brand
@@ -28,93 +30,67 @@
 
 
 
-
-
 /* ==========================================================================
    HEADER
 ========================================================================== */
 
 .ctm-header{
 
-    position:
+    position:relative;
 
-        relative;
+    z-index:100;
 
-    z-index:
+    display:flex;
 
-        100;
+    align-items:center;
 
-    display:
+    justify-content:space-between;
 
-        flex;
+    gap:40px;
 
-    align-items:
+    width:min(1580px,calc(100% - 72px));
 
-        center;
+    margin:22px auto 0;
 
-    justify-content:
+    padding:18px 34px;
 
-        space-between;
+    min-height:84px;
 
-    gap:
+    overflow:hidden;
 
-        48px;
+    border-radius:24px;
 
-    width:
-
-        min(1600px,calc(100% - 72px));
-
-    margin:
-
-        28px auto 0;
-
-    padding:
-
-        22px 34px;
-
-    min-height:
-
-        96px;
-
-    border-radius:
-
-        28px;
-
-    overflow:
-
-        hidden;
+    isolation:isolate;
 
     background:
 
         linear-gradient(
-
             180deg,
-
-            rgba(14,28,48,.88),
-
-            rgba(8,18,34,.82)
-
+            rgba(11,24,45,.92),
+            rgba(8,18,34,.88)
         );
 
     border:
 
-        1px solid rgba(255,255,255,.08);
+        1px solid rgba(255,255,255,.06);
 
     backdrop-filter:
 
-        blur(24px);
+        blur(22px);
 
     -webkit-backdrop-filter:
 
-        blur(24px);
+        blur(22px);
 
     box-shadow:
 
-        0 20px 60px rgba(0,0,0,.34);
+        0 18px 48px rgba(0,0,0,.34),
+
+        inset 0 1px 0 rgba(255,255,255,.05);
 
     transition:
 
-        all .45s ease;
+        .35s ease;
 
 }
 
@@ -122,35 +98,41 @@
 
 
 
+/* ==========================================================================
+   AMBIENT LIGHT
+========================================================================== */
+
 .ctm-header::before{
 
-    content:
+    content:"";
 
-        "";
+    position:absolute;
 
-    position:
+    inset:0;
 
-        absolute;
-
-    inset:
-
-        0;
+    pointer-events:none;
 
     background:
 
         radial-gradient(
 
-            circle at left center,
+            circle at 0% 50%,
 
-            rgba(35,212,200,.12),
+            rgba(33,210,198,.16),
 
-            transparent 45%
+            transparent 42%
+
+        ),
+
+        radial-gradient(
+
+            circle at 100% 0%,
+
+            rgba(201,162,39,.05),
+
+            transparent 40%
 
         );
-
-    pointer-events:
-
-        none;
 
 }
 
@@ -158,31 +140,23 @@
 
 
 
+/* ==========================================================================
+   TOP HIGHLIGHT
+========================================================================== */
+
 .ctm-header::after{
 
-    content:
+    content:"";
 
-        "";
+    position:absolute;
 
-    position:
+    left:32px;
 
-        absolute;
+    right:32px;
 
-    left:
+    top:0;
 
-        80px;
-
-    right:
-
-        80px;
-
-    bottom:
-
-        0;
-
-    height:
-
-        1px;
+    height:1px;
 
     background:
 
@@ -192,7 +166,7 @@
 
             transparent,
 
-            rgba(201,162,39,.75),
+            rgba(255,255,255,.12),
 
             transparent
 
@@ -201,34 +175,24 @@
 }
 
 /* ==========================================================================
-   BRAND
+   BRAND LAYOUT
 ========================================================================== */
 
 .header-brand{
 
-    position:
+    position:relative;
 
-        relative;
+    z-index:2;
 
-    display:
+    display:flex;
 
-        flex;
+    align-items:center;
 
-    align-items:
+    gap:18px;
 
-        center;
+    flex:1;
 
-    gap:
-
-        22px;
-
-    flex-shrink:
-
-        0;
-
-    z-index:
-
-        2;
+    min-width:0;
 
 }
 
@@ -242,47 +206,29 @@
 
 .header-logo{
 
-    position:
+    position:relative;
 
-        relative;
+    display:flex;
 
-    display:
+    align-items:center;
 
-        flex;
+    justify-content:center;
 
-    align-items:
+    width:72px;
 
-        center;
+    height:72px;
 
-    justify-content:
+    flex-shrink:0;
 
-        center;
+    border-radius:50%;
 
-    width:
-
-        78px;
-
-    height:
-
-        78px;
-
-    border-radius:
-
-        50%;
-
-    overflow:
-
-        hidden;
-
-    flex-shrink:
-
-        0;
+    overflow:hidden;
 
     background:
 
         radial-gradient(
 
-            circle at 30% 30%,
+            circle at 35% 30%,
 
             rgba(255,255,255,.10),
 
@@ -294,7 +240,7 @@
 
             145deg,
 
-            rgba(35,212,200,.14),
+            rgba(33,210,198,.16),
 
             rgba(201,162,39,.08)
 
@@ -302,15 +248,23 @@
 
     border:
 
-        1px solid rgba(255,255,255,.10);
+        1px solid rgba(255,255,255,.08);
 
     box-shadow:
 
-        0 0 0 1px rgba(35,212,200,.08),
+        inset 0 1px 0 rgba(255,255,255,.08),
 
-        0 18px 46px rgba(0,0,0,.35),
+        0 14px 36px rgba(0,0,0,.28),
 
-        0 0 42px rgba(35,212,200,.12);
+        0 0 36px rgba(33,210,198,.10);
+
+    transition:
+
+        transform .35s ease,
+
+        box-shadow .35s ease,
+
+        border-color .35s ease;
 
 }
 
@@ -320,25 +274,51 @@
 
 .header-logo::before{
 
-    content:
+    content:"";
 
-        "";
+    position:absolute;
 
-    position:
+    inset:7px;
 
-        absolute;
-
-    inset:
-
-        8px;
-
-    border-radius:
-
-        50%;
+    border-radius:50%;
 
     border:
 
-        1px solid rgba(255,255,255,.05);
+        1px solid rgba(255,255,255,.06);
+
+}
+
+
+
+
+
+.header-logo::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(33,210,198,.18),
+
+            transparent 72%
+
+        );
+
+    opacity:.55;
+
+    z-index:-1;
 
 }
 
@@ -348,21 +328,39 @@
 
 .brand-symbol{
 
-    width:
+    width:54px;
 
-        58px;
+    height:54px;
 
-    height:
-
-        58px;
-
-    object-fit:
-
-        contain;
+    object-fit:contain;
 
     filter:
 
-        drop-shadow(0 4px 14px rgba(35,212,200,.20));
+        drop-shadow(0 2px 10px rgba(33,210,198,.22));
+
+}
+
+
+
+
+
+.ctm-header:hover .header-logo{
+
+    transform:
+
+        translateY(-1px) scale(1.035);
+
+    border-color:
+
+        rgba(33,210,198,.18);
+
+    box-shadow:
+
+        inset 0 1px 0 rgba(255,255,255,.08),
+
+        0 18px 44px rgba(0,0,0,.34),
+
+        0 0 52px rgba(33,210,198,.18);
 
 }
 
@@ -371,26 +369,20 @@
 
 
 /* ==========================================================================
-   BRAND TYPOGRAPHY
+   BRAND IDENTITY
 ========================================================================== */
 
 .brand-identity{
 
-    display:
+    display:flex;
 
-        flex;
+    flex-direction:column;
 
-    flex-direction:
+    justify-content:center;
 
-        column;
+    gap:2px;
 
-    justify-content:
-
-        center;
-
-    gap:
-
-        4px;
+    min-width:0;
 
 }
 
@@ -400,37 +392,27 @@
 
 .brand-name{
 
-    margin:
+    margin:0;
 
-        0;
+    padding:0;
 
-    color:
+    color:#FFFFFF;
 
-        #FFFFFF;
+    font-size:clamp(1.72rem,1.45vw,2rem);
 
-    font-size:
+    font-weight:800;
 
-        clamp(1.75rem,1.45vw,2.05rem);
+    line-height:1;
 
-    font-weight:
+    letter-spacing:.12em;
 
-        800;
+    text-transform:uppercase;
 
-    line-height:
-
-        1;
-
-    letter-spacing:
-
-        .10em;
-
-    text-transform:
-
-        uppercase;
+    white-space:nowrap;
 
     text-shadow:
 
-        0 2px 16px rgba(0,0,0,.30);
+        0 2px 12px rgba(0,0,0,.30);
 
 }
 
@@ -440,37 +422,23 @@
 
 .brand-tagline-main{
 
-    margin-top:
+    margin-top:5px;
 
-        4px;
+    color:var(--ctm-gold-soft);
 
-    color:
+    font-size:.74rem;
 
-        var(--ctm-gold-soft);
+    font-weight:700;
 
-    font-size:
+    line-height:1.25;
 
-        .78rem;
+    letter-spacing:.34em;
 
-    font-weight:
+    text-transform:uppercase;
 
-        700;
+    white-space:nowrap;
 
-    letter-spacing:
-
-        .34em;
-
-    line-height:
-
-        1.2;
-
-    text-transform:
-
-        uppercase;
-
-    opacity:
-
-        .96;
+    opacity:.96;
 
 }
 
@@ -480,29 +448,21 @@
 
 .brand-tagline{
 
-    color:
+    margin-top:2px;
 
-        rgba(35,212,200,.96);
+    color:rgba(33,210,198,.95);
 
-    font-size:
+    font-size:.83rem;
 
-        .86rem;
+    font-weight:600;
 
-    font-weight:
+    line-height:1.25;
 
-        600;
+    letter-spacing:.16em;
 
-    letter-spacing:
+    text-transform:uppercase;
 
-        .18em;
-
-    line-height:
-
-        1.2;
-
-    text-transform:
-
-        uppercase;
+    white-space:nowrap;
 
 }
 
@@ -512,29 +472,19 @@
 
 .brand-signature{
 
-    margin-top:
+    margin-top:6px;
 
-        6px;
+    color:rgba(255,255,255,.70);
 
-    color:
+    font-size:.92rem;
 
-        rgba(255,255,255,.74);
+    font-weight:400;
 
-    font-size:
+    line-height:1.45;
 
-        .95rem;
+    letter-spacing:.015em;
 
-    font-weight:
-
-        400;
-
-    line-height:
-
-        1.5;
-
-    letter-spacing:
-
-        .01em;
+    white-space:nowrap;
 
 }
 
@@ -548,41 +498,27 @@
 
 .journey-status{
 
-    position:
+    position:relative;
 
-        relative;
+    z-index:2;
 
-    display:
+    display:flex;
 
-        flex;
+    flex-direction:column;
 
-    flex-direction:
+    align-items:center;
 
-        column;
+    justify-content:center;
 
-    align-items:
+    width:140px;
 
-        center;
+    min-width:140px;
 
-    justify-content:
+    height:72px;
 
-        center;
+    border-radius:20px;
 
-    min-width:
-
-        132px;
-
-    min-height:
-
-        76px;
-
-    padding:
-
-        14px 24px;
-
-    border-radius:
-
-        22px;
+    overflow:hidden;
 
     background:
 
@@ -590,9 +526,9 @@
 
             180deg,
 
-            rgba(255,255,255,.05),
+            rgba(255,255,255,.055),
 
-            rgba(255,255,255,.02)
+            rgba(255,255,255,.020)
 
         );
 
@@ -602,31 +538,23 @@
 
     box-shadow:
 
-        0 14px 36px rgba(0,0,0,.24);
+        inset 0 1px 0 rgba(255,255,255,.05),
+
+        0 12px 30px rgba(0,0,0,.22);
 
 }
 
-/* ==========================================================================
-   JOURNEY BADGE CONTENT
-========================================================================== */
+
+
+
 
 .journey-status::before{
 
-    content:
+    content:"";
 
-        "";
+    position:absolute;
 
-    position:
-
-        absolute;
-
-    inset:
-
-        0;
-
-    border-radius:
-
-        inherit;
+    inset:0;
 
     background:
 
@@ -634,15 +562,13 @@
 
             circle at top,
 
-            rgba(35,212,200,.10),
+            rgba(33,210,198,.12),
 
-            transparent 68%
+            transparent 70%
 
         );
 
-    pointer-events:
-
-        none;
+    pointer-events:none;
 
 }
 
@@ -650,39 +576,59 @@
 
 
 
+.journey-status::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:18px;
+
+    right:18px;
+
+    bottom:0;
+
+    height:1px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            rgba(33,210,198,.22),
+
+            transparent
+
+        );
+
+}
+
+/* ==========================================================================
+   JOURNEY CONTENT
+========================================================================== */
+
 .journey-label{
 
-    position:
+    position:relative;
 
-        relative;
+    z-index:2;
 
-    z-index:
+    margin:0 0 8px;
 
-        2;
+    color:rgba(255,255,255,.62);
 
-    color:
+    font-size:.66rem;
 
-        rgba(255,255,255,.68);
+    font-weight:700;
 
-    font-size:
+    line-height:1;
 
-        .70rem;
+    letter-spacing:.34em;
 
-    font-weight:
-
-        700;
-
-    letter-spacing:
-
-        .34em;
-
-    text-transform:
-
-        uppercase;
-
-    margin-bottom:
-
-        10px;
+    text-transform:uppercase;
 
 }
 
@@ -692,49 +638,31 @@
 
 .journey-counter{
 
-    position:
+    position:relative;
 
-        relative;
+    z-index:2;
 
-    z-index:
+    display:flex;
 
-        2;
+    align-items:baseline;
 
-    display:
+    justify-content:center;
 
-        inline-flex;
+    gap:6px;
 
-    align-items:
+    color:#FFFFFF;
 
-        center;
+    font-size:1.48rem;
 
-    justify-content:
+    font-weight:800;
 
-        center;
+    line-height:1;
 
-    color:
-
-        var(--ctm-white);
-
-    font-size:
-
-        1.55rem;
-
-    font-weight:
-
-        800;
-
-    line-height:
-
-        1;
-
-    letter-spacing:
-
-        .08em;
+    letter-spacing:.08em;
 
     text-shadow:
 
-        0 2px 14px rgba(0,0,0,.28);
+        0 2px 10px rgba(0,0,0,.28);
 
 }
 
@@ -743,36 +671,20 @@
 
 
 /* ==========================================================================
-   HEADER INTERACTION
+   PREMIUM INTERACTION
 ========================================================================== */
 
-.ctm-header:hover{
-
-    border-color:
-
-        rgba(35,212,200,.16);
-
-    box-shadow:
-
-        0 28px 72px rgba(0,0,0,.40),
-
-        0 0 46px rgba(35,212,200,.08);
-
-}
-
-
-
-
-
-.header-logo{
+.ctm-header{
 
     transition:
 
-        transform .45s ease,
+        transform .35s ease,
 
-        box-shadow .45s ease,
+        box-shadow .35s ease,
 
-        border-color .45s ease;
+        border-color .35s ease,
+
+        background .35s ease;
 
 }
 
@@ -780,21 +692,89 @@
 
 
 
-.ctm-header:hover .header-logo{
+.ctm-header:hover{
 
     transform:
 
-        scale(1.04);
+        translateY(-2px);
 
     border-color:
 
-        rgba(35,212,200,.22);
+        rgba(33,210,198,.14);
 
     box-shadow:
 
-        0 20px 52px rgba(0,0,0,.40),
+        0 26px 60px rgba(0,0,0,.38),
 
-        0 0 52px rgba(35,212,200,.18);
+        0 0 48px rgba(33,210,198,.08),
+
+        inset 0 1px 0 rgba(255,255,255,.06);
+
+}
+
+
+
+
+
+.ctm-header:hover .brand-name{
+
+    color:
+
+        #FFFFFF;
+
+}
+
+
+
+
+
+.ctm-header:hover .brand-tagline{
+
+    color:
+
+        rgba(65,225,214,.98);
+
+}
+
+
+
+
+
+.ctm-header:hover .journey-status{
+
+    border-color:
+
+        rgba(33,210,198,.16);
+
+    box-shadow:
+
+        inset 0 1px 0 rgba(255,255,255,.08),
+
+        0 16px 34px rgba(0,0,0,.28),
+
+        0 0 34px rgba(33,210,198,.08);
+
+}
+
+
+
+
+
+/* ==========================================================================
+   ACCESSIBILITY
+========================================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    .ctm-header,
+
+    .header-logo,
+
+    .journey-status{
+
+        transition:none;
+
+    }
 
 }
 
@@ -806,85 +786,73 @@
 
     .ctm-header{
 
-        width:
+        width:calc(100% - 48px);
 
-            calc(100% - 40px);
+        padding:16px 28px;
 
-        padding:
+        gap:30px;
 
-            20px 28px;
+        min-height:80px;
 
-        gap:
+        border-radius:22px;
 
-            28px;
+    }
+
+    .header-brand{
+
+        gap:16px;
 
     }
 
     .header-logo{
 
-        width:
+        width:66px;
 
-            70px;
-
-        height:
-
-            70px;
+        height:66px;
 
     }
 
     .brand-symbol{
 
-        width:
+        width:50px;
 
-            52px;
-
-        height:
-
-            52px;
+        height:50px;
 
     }
 
     .brand-name{
 
-        font-size:
-
-            1.55rem;
+        font-size:1.55rem;
 
     }
 
     .brand-tagline-main{
 
-        font-size:
+        font-size:.70rem;
 
-            .72rem;
-
-        letter-spacing:
-
-            .26em;
+        letter-spacing:.28em;
 
     }
 
     .brand-tagline{
 
-        font-size:
-
-            .80rem;
+        font-size:.78rem;
 
     }
 
     .brand-signature{
 
-        font-size:
-
-            .88rem;
+        font-size:.86rem;
 
     }
 
     .journey-status{
 
-        min-width:
+        width:126px;
 
-            118px;
+        min-width:126px;
+
+        height:68px;
 
     }
 
@@ -898,37 +866,33 @@
 
     .ctm-header{
 
-        flex-direction:
+        flex-direction:column;
 
-            column;
+        align-items:flex-start;
 
-        align-items:
+        gap:20px;
 
-            flex-start;
+        padding:20px;
 
-        gap:
+        min-height:auto;
 
-            22px;
+    }
 
-        padding:
+    .header-brand{
 
-            24px;
+        width:100%;
 
     }
 
     .journey-status{
 
-        align-self:
+        width:100%;
 
-            stretch;
+        min-width:100%;
 
-        width:
+        height:68px;
 
-            100%;
-
-        min-height:
-
-            72px;
+        align-self:stretch;
 
     }
 
@@ -942,113 +906,77 @@
 
     .ctm-header{
 
-        width:
+        width:calc(100% - 24px);
 
-            calc(100% - 24px);
+        margin-top:16px;
 
-        margin-top:
+        padding:18px;
 
-            16px;
-
-        padding:
-
-            18px;
-
-        border-radius:
-
-            22px;
+        border-radius:20px;
 
     }
 
     .header-brand{
 
-        gap:
-
-            16px;
+        gap:14px;
 
     }
 
     .header-logo{
 
-        width:
+        width:58px;
 
-            60px;
-
-        height:
-
-            60px;
+        height:58px;
 
     }
 
     .brand-symbol{
 
-        width:
+        width:42px;
 
-            44px;
-
-        height:
-
-            44px;
+        height:42px;
 
     }
 
     .brand-name{
 
-        font-size:
+        font-size:1.22rem;
 
-            1.30rem;
-
-        letter-spacing:
-
-            .08em;
+        letter-spacing:.08em;
 
     }
 
     .brand-tagline-main{
 
-        font-size:
+        font-size:.62rem;
 
-            .66rem;
-
-        letter-spacing:
-
-            .18em;
+        letter-spacing:.16em;
 
     }
 
     .brand-tagline{
 
-        font-size:
+        font-size:.70rem;
 
-            .72rem;
-
-        letter-spacing:
-
-            .12em;
+        letter-spacing:.10em;
 
     }
 
     .brand-signature{
 
-        display:
-
-            none;
+        display:none;
 
     }
 
     .journey-label{
 
-        font-size:
-
-            .64rem;
+        font-size:.62rem;
 
     }
 
     .journey-counter{
 
-        font-size:
-
-            1.35rem;
+        font-size:1.28rem;
 
     }
 
@@ -1062,91 +990,68 @@
 
     .ctm-header{
 
-        padding:
+        padding:16px;
 
-            16px;
+        border-radius:18px;
 
     }
 
     .header-brand{
 
-        align-items:
-
-            flex-start;
+        gap:12px;
 
     }
 
     .header-logo{
 
-        width:
+        width:52px;
 
-            54px;
-
-        height:
-
-            54px;
+        height:52px;
 
     }
 
     .brand-symbol{
 
-        width:
+        width:36px;
 
-            38px;
-
-        height:
-
-            38px;
+        height:36px;
 
     }
 
     .brand-name{
 
-        font-size:
-
-            1.10rem;
+        font-size:1.02rem;
 
     }
 
     .brand-tagline-main{
 
-        font-size:
-
-            .60rem;
+        font-size:.58rem;
 
     }
 
     .brand-tagline{
 
-        font-size:
-
-            .66rem;
+        font-size:.64rem;
 
     }
 
     .journey-status{
 
-        border-radius:
+        height:60px;
 
-            18px;
-
-        min-height:
-
-            64px;
-
-        padding:
-
-            12px 16px;
+        border-radius:16px;
 
     }
 
     .journey-counter{
 
-        font-size:
-
-            1.20rem;
+        font-size:1.12rem;
 
     }
 
 }
 
+/* ==========================================================================
+   END OF FILE
+========================================================================== */
