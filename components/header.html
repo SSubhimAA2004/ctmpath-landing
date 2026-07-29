@@ -3,7 +3,7 @@
    CTM PATH™ Guided Journey™
 
    File        : header.html
-   Version     : 3.1
+   Version     : 3.2
 
    Purpose:
 
@@ -12,7 +12,6 @@
    Responsibilities:
 
    • Display CTM PATH™ brand identity.
-   • Display logo.
    • Display journey progress.
 
    Does NOT:
@@ -33,22 +32,27 @@
 
         <!-- ==============================================================
              BRAND IDENTITY
+             
+             SVG logo removed.
+
+             Reason:
+             CTM_Logo_Transparent.svg contains the complete brand lockup:
+
+             • Infinity symbol
+             • CTM PATH
+             • Guided Journey
+             • Every Dream Has A Path
+
+             Rendering it here created duplicate branding.
+
+             Future:
+             Replace with compact CTM_Mark.svg if required.
+
              ============================================================== -->
 
 
         <div class="ctm-brand">
 
-
-
-            <img
-
-                src="assets/logo/CTM_Logo_Transparent.svg"
-
-                alt="CTM PATH™ Guided Journey™"
-
-                class="ctm-header-logo"
-
-            />
 
 
 
@@ -66,11 +70,13 @@
 
 
 
+
                 <div class="ctm-brand-subtitle">
 
                     Guided Journey™
 
                 </div>
+
 
 
 
@@ -94,12 +100,15 @@
 
 
 
+
         <!-- ==============================================================
              JOURNEY PROGRESS
              ============================================================== -->
 
 
         <div class="ctm-journey-status">
+
+
 
 
 
@@ -114,7 +123,10 @@
 
 
 
+
+
             <div class="ctm-journey-step">
+
 
 
                 <span data-current-step>
@@ -124,7 +136,10 @@
                 </span>
 
 
+
                 /
+
+
 
                 <span data-total-steps>
 
@@ -138,7 +153,10 @@
 
 
 
+
+
         </div>
+
 
 
 
