@@ -2,55 +2,28 @@
 /* ==========================================================================
    CTM PATH™ Guided Journey™
 
-   File:
-
-   css/theme.css
-
-
-   Version:
-
-   3.1
-
+   File        : theme.css
+   Version     : 1.0
 
    Purpose:
 
-   Premium global design system.
+   Global visual identity system.
 
+   Controls:
 
-   Design Language:
-
-   • Transformation
-   • Trust
-   • Calm confidence
-   • Premium mentorship
-   • Human connection
-
-
-   Applies to:
-
-   • Footer
-   • All 18 Journey Pages
-   • Cards
-   • Buttons
-   • Typography
-   • Animations
-
-
-   Header Responsibility:
-
-   Moved to:
-
-   css/header.css
-
-   CTM PATH™ Premium Header Styling v3.1
-
+   • Premium dark blue universe
+   • Brand colours
+   • Typography tokens
+   • Surface layers
+   • Border system
+   • Glow system
 
    ========================================================================== */
 
 
 
 /* ==========================================================================
-   DESIGN TOKENS
+   ROOT DESIGN TOKENS
    ========================================================================== */
 
 
@@ -58,63 +31,37 @@
 
 
     /* --------------------------------------------------
-       CORE BRAND COLORS
+       PRIMARY BACKGROUND SYSTEM
        -------------------------------------------------- */
 
 
-    --ctm-background:
+    --ctm-background-primary:
 
-        #0B0D12;
-
-
-
-    --ctm-background-soft:
-
-        #12161D;
+        #081C3A;
 
 
 
-    --ctm-surface:
+    --ctm-background-secondary:
 
-        #181D26;
-
-
-
-    --ctm-surface-elevated:
-
-        #202631;
+        #0D2548;
 
 
 
-    --ctm-border:
+    --ctm-background-surface:
+
+        #12376E;
+
+
+
+    --ctm-background-card:
 
         rgba(
-
             255,
-
             255,
-
             255,
-
-            0.10
-
+            0.06
         );
 
-
-
-    --ctm-border-highlight:
-
-        rgba(
-
-            201,
-
-            162,
-
-            39,
-
-            0.35
-
-        );
 
 
 
@@ -124,39 +71,34 @@
        -------------------------------------------------- */
 
 
+    --ctm-gold:
+
+        #D9B56A;
+
+
+
+    --ctm-gold-light:
+
+        #FFF3A6;
+
+
+
+    --ctm-gold-dark:
+
+        #A86B16;
+
+
+
+
     --ctm-teal:
 
-        #14B8B8;
+        #00C2B8;
 
 
 
     --ctm-teal-soft:
 
-        #7FE3DF;
-
-
-
-    --ctm-gold:
-
-        #C9A227;
-
-
-
-    --ctm-gold-soft:
-
-        #E5C76B;
-
-
-
-    --ctm-ivory:
-
-        #F8F5EC;
-
-
-
-    --ctm-white:
-
-        #FFFFFF;
+        #63E6DF;
 
 
 
@@ -169,184 +111,137 @@
 
     --ctm-text-primary:
 
-        #F8F5EC;
+        #F5F4EE;
 
 
 
     --ctm-text-secondary:
 
-        rgba(
-
-            248,
-
-            245,
-
-            236,
-
-            0.72
-
-        );
+        #C7CEDA;
 
 
 
     --ctm-text-muted:
 
+        #8995A8;
+
+
+
+
+
+    /* --------------------------------------------------
+       BORDER SYSTEM
+       -------------------------------------------------- */
+
+
+    --ctm-border:
+
         rgba(
+            255,
+            255,
+            255,
+            0.12
+        );
 
-            248,
 
-            245,
 
-            236,
+    --ctm-border-gold:
 
-            0.48
-
+        rgba(
+            217,
+            181,
+            106,
+            0.35
         );
 
 
 
 
+
     /* --------------------------------------------------
-       TYPOGRAPHY SCALE
+       SHADOW SYSTEM
        -------------------------------------------------- */
 
 
-    --font-display:
+    --ctm-shadow-soft:
 
-        "Noto Sans Tamil",
-        "Noto Sans",
-        sans-serif;
+        0 20px 60px
+        rgba(
+            0,
+            0,
+            0,
+            0.35
+        );
 
 
 
-    --font-body:
+    --ctm-shadow-gold:
 
-        "Noto Sans Tamil",
+        0 0 40px
+        rgba(
+            217,
+            181,
+            106,
+            0.25
+        );
+
+
+
+
+
+    /* --------------------------------------------------
+       TYPOGRAPHY
+       -------------------------------------------------- */
+
+
+    --font-primary:
+
         "Inter",
+        "Segoe UI",
+        Arial,
         sans-serif;
 
 
 
-    --text-xs:
+    --font-serif:
 
-        14px;
-
-
-
-    --text-sm:
-
-        16px;
+        Georgia,
+        "Times New Roman",
+        serif;
 
 
 
-    --text-md:
+    --font-tamil:
 
-        20px;
-
-
-
-    --text-lg:
-
-        28px;
+        "Noto Sans Tamil",
+        "Latha",
+        sans-serif;
 
 
-
-    --text-xl:
-
-        40px;
-
-
-
-    --text-hero:
-
-        clamp(
-
-            42px,
-
-            6vw,
-
-            72px
-
-        );
 
 
 
 
     /* --------------------------------------------------
-       SPACING SYSTEM
+       RADIUS SYSTEM
        -------------------------------------------------- */
 
 
-    --space-1:
-
-        8px;
-
-
-
-    --space-2:
-
-        16px;
-
-
-
-    --space-3:
-
-        24px;
-
-
-
-    --space-4:
-
-        32px;
-
-
-
-    --space-5:
-
-        48px;
-
-
-
-    --space-6:
-
-        64px;
-
-
-
-    --space-7:
-
-        96px;
-
-
-
-    --space-8:
-
-        128px;
-
-
-
-
-
-    /* --------------------------------------------------
-       BORDER RADIUS
-       -------------------------------------------------- */
-
-
-    --radius-sm:
+    --radius-small:
 
         12px;
 
 
 
-    --radius-md:
+    --radius-medium:
 
-        20px;
+        24px;
 
 
 
-    --radius-lg:
+    --radius-large:
 
-        32px;
+        36px;
 
 
 
@@ -357,142 +252,18 @@
 
 
 
-    /* --------------------------------------------------
-       SHADOW SYSTEM
-       -------------------------------------------------- */
-
-
-    --shadow-soft:
-
-        0 20px 60px rgba(
-
-            0,
-
-            0,
-
-            0,
-
-            0.25
-
-        );
-
-
-
-    --shadow-premium:
-
-        0 30px 90px rgba(
-
-            0,
-
-            0,
-
-            0,
-
-            0.45
-
-        );
-
-
-
-    --shadow-gold:
-
-        0 20px 70px rgba(
-
-            201,
-
-            162,
-
-            39,
-
-            0.25
-
-        );
-
-
-
-
-    /* --------------------------------------------------
-       TRANSITIONS
-       -------------------------------------------------- */
-
-
-    --transition-fast:
-
-        0.2s ease;
-
-
-
-    --transition-medium:
-
-        0.35s ease;
-
-
-
-    --transition-slow:
-
-        0.6s ease;
-
-
 }
+
+
+
+
+
+
+
 
 /* ==========================================================================
-   GLOBAL RESET & FOUNDATION
-
-   Clean baseline for premium consistency.
-
+   GLOBAL BODY ENVIRONMENT
    ========================================================================== */
-
-
-*,
-
-*::before,
-
-*::after {
-
-
-    box-sizing:
-
-        border-box;
-
-
-
-}
-
-
-
-
-
-html {
-
-
-    margin:
-
-        0;
-
-
-
-    padding:
-
-        0;
-
-
-
-    background:
-
-        var(--ctm-background);
-
-
-
-    scroll-behavior:
-
-        smooth;
-
-
-
-}
-
-
-
 
 
 body {
@@ -500,180 +271,66 @@ body {
 
     margin:
 
-        0;
-
-
-
-    padding:
-
-        0;
+    0;
 
 
 
     min-height:
 
-        100vh;
+    100vh;
 
 
 
     background:
 
-        var(--ctm-background);
+
+    radial-gradient(
+
+        circle at top right,
+
+        rgba(
+            18,
+            55,
+            110,
+            0.45
+        ),
+
+        transparent 40%
+
+    ),
+
+
+    var(--ctm-background-primary);
 
 
 
     color:
 
-        var(--ctm-text-primary);
+    var(--ctm-text-primary);
 
 
 
     font-family:
 
-        var(--font-body);
-
-
-
-    font-size:
-
-        var(--text-md);
-
-
-
-    line-height:
-
-        1.8;
+    var(--font-primary);
 
 
 
     -webkit-font-smoothing:
 
-        antialiased;
+    antialiased;
 
 
 
     text-rendering:
 
-        optimizeLegibility;
+    optimizeLegibility;
 
 
 
 }
 
 
-
-
-
-img {
-
-
-    max-width:
-
-        100%;
-
-
-
-    height:
-
-        auto;
-
-
-
-    display:
-
-        block;
-
-
-
-}
-
-
-
-
-
-button,
-
-input,
-
-textarea,
-
-select {
-
-
-    font:
-
-        inherit;
-
-
-
-}
-
-
-
-
-
-a {
-
-
-    color:
-
-        var(--ctm-teal-soft);
-
-
-
-    text-decoration:
-
-        none;
-
-
-
-    transition:
-
-        color
-
-        var(--transition-fast);
-
-
-
-}
-
-
-
-
-
-a:hover {
-
-
-    color:
-
-        var(--ctm-gold-soft);
-
-
-
-}
-
-
-
-
-
-ul,
-
-ol {
-
-
-    margin:
-
-        0;
-
-
-
-    padding:
-
-        0;
-
-
-
-}
 
 
 
@@ -681,133 +338,31 @@ ol {
 
 
 /* ==========================================================================
-   APPLICATION CONTAINERS
-
-   Premium content width system.
-
-   ========================================================================== */
-
-
-.app-container {
-
-
-    width:
-
-        min(
-
-            100% - 64px,
-
-            1200px
-
-        );
-
-
-
-    margin:
-
-        0 auto;
-
-
-
-}
-
-
-
-
-
-.content-container {
-
-
-    width:
-
-        min(
-
-            100% - 48px,
-
-            1000px
-
-        );
-
-
-
-    margin:
-
-        0 auto;
-
-
-
-}
-
-
-
-
-
-.section {
-
-
-    padding:
-
-        var(--space-8)
-
-        0;
-
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   TYPOGRAPHY SYSTEM
-
-   Tamil-first premium reading hierarchy.
-
+   GLOBAL HEADINGS
    ========================================================================== */
 
 
 h1,
-
 h2,
-
 h3,
-
-h4,
-
-h5,
-
-h6 {
-
-
-    margin:
-
-        0;
-
+h4 {
 
 
     color:
 
-        var(--ctm-text-primary);
+    var(--ctm-text-primary);
 
 
 
-    font-family:
+    margin:
 
-        var(--font-display);
+    0;
 
 
 
     font-weight:
 
-        700;
-
-
-
-    line-height:
-
-        1.35;
-
+    700;
 
 
 }
@@ -816,119 +371,9 @@ h6 {
 
 
 
-h1 {
-
-
-    font-size:
-
-        var(--text-hero);
-
-
-
-    letter-spacing:
-
-        -0.02em;
-
-
-
-}
-
-
-
-
-
-h2 {
-
-
-    font-size:
-
-        clamp(
-
-            32px,
-
-            4vw,
-
-            48px
-
-        );
-
-
-
-}
-
-
-
-
-
-h3 {
-
-
-    font-size:
-
-        clamp(
-
-            24px,
-
-            3vw,
-
-            32px
-
-        );
-
-
-
-}
-
-
-
-
-
-h4 {
-
-
-    font-size:
-
-        22px;
-
-
-
-}
-
-
-
-
-
-p {
-
-
-    margin:
-
-        0;
-
-
-
-    color:
-
-        var(--ctm-text-secondary);
-
-
-
-    font-size:
-
-        var(--text-md);
-
-
-
-    line-height:
-
-        2;
-
-
-
-}
-
-
-
+/* ==========================================================================
+   TAMIL TYPOGRAPHY SYSTEM
+   ========================================================================== */
 
 
 .tamil {
@@ -936,242 +381,81 @@ p {
 
     font-family:
 
-        "Noto Sans Tamil",
-
-        var(--font-body);
-
-
-
-}
-
-
-
-
-
-.english {
-
-
-    font-family:
-
-        "Inter",
-
-        sans-serif;
+    var(--font-tamil);
 
 
 
     color:
 
-        var(--ctm-text-secondary);
-
-
-
-}
-
-
-
-
-
-.eyebrow {
-
-
-    color:
-
-        var(--ctm-gold-soft);
-
-
-
-    font-size:
-
-        var(--text-sm);
-
-
-
-    font-weight:
-
-        700;
-
-
-
-    letter-spacing:
-
-        0.18em;
-
-
-
-    text-transform:
-
-        uppercase;
-
+    var(--ctm-text-primary);
 
 
 }
+
+
+
+
+
+
+
 
 /* ==========================================================================
-   PREMIUM CARD SYSTEM
-
-   Core surface language used throughout CTM PATH™
-
+   GOLD SIGNATURE TEXT
    ========================================================================== */
 
 
-.card {
+.gold-text {
+
+
+    color:
+
+    var(--ctm-gold);
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   PREMIUM CARD SYSTEM
+   ========================================================================== */
+
+
+.ctm-card {
 
 
     background:
 
-        var(--ctm-surface);
+    var(--ctm-background-card);
 
 
 
     border:
 
-        1px solid var(--ctm-border);
+    1px solid var(--ctm-border);
 
 
 
     border-radius:
 
-        var(--radius-lg);
-
-
-
-    padding:
-
-        var(--space-5);
+    var(--radius-medium);
 
 
 
     box-shadow:
 
-        var(--shadow-soft);
-
-
-
-    transition:
-
-        transform
-
-        var(--transition-medium),
-
-        box-shadow
-
-        var(--transition-medium),
-
-        border-color
-
-        var(--transition-medium);
-
-
-
-}
-
-
-
-
-
-.card:hover {
-
-
-    transform:
-
-        translateY(
-
-            -6px
-
-        );
-
-
-
-    border-color:
-
-        var(--ctm-border-highlight);
-
-
-
-    box-shadow:
-
-        var(--shadow-premium);
-
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   PREMIUM GLASS SURFACE
-
-   Used for hero cards, invitations and transformation sections.
-
-   ========================================================================== */
-
-
-.glass-card {
-
-
-    background:
-
-        rgba(
-
-            24,
-
-            29,
-
-            38,
-
-            0.72
-
-        );
+    var(--ctm-shadow-soft);
 
 
 
     backdrop-filter:
 
-        blur(
-
-            20px
-
-        );
-
-
-
-    -webkit-backdrop-filter:
-
-        blur(
-
-            20px
-
-        );
-
-
-
-    border:
-
-        1px solid rgba(
-
-            255,
-
-            255,
-
-            255,
-
-            0.10
-
-        );
-
-
-
-    border-radius:
-
-        var(--radius-lg);
-
-
-
-    box-shadow:
-
-        var(--shadow-premium);
+    blur(12px);
 
 
 
@@ -1179,1980 +463,139 @@ p {
 
 
 
-
-
-.card-accent {
-
-
-    position:
-
-        relative;
-
-
-
-    overflow:
-
-        hidden;
-
-
-
-}
-
-
-
-
-
-.card-accent::before {
-
-
-    content:
-
-        "";
-
-
-
-    position:
-
-        absolute;
-
-
-
-    top:
-
-        0;
-
-
-
-    left:
-
-        0;
-
-
-
-    width:
-
-        100%;
-
-
-
-    height:
-
-        3px;
-
-
-
-    background:
-
-        linear-gradient(
-
-            90deg,
-
-            var(--ctm-teal),
-
-            var(--ctm-gold)
-
-        );
-
-
-
-}
 
 
 
 
 
 /* ==========================================================================
-   BUTTON SYSTEM
-
-   Premium CTM PATH™ actions.
-
+   GOLD ACCENT LINE
    ========================================================================== */
 
 
-.btn {
+.ctm-gold-line {
+
+
+    width:
+
+    120px;
+
+
+
+    height:
+
+    2px;
+
+
+
+    background:
+
+    linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        var(--ctm-gold),
+
+        transparent
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   BUTTON FOUNDATION
+   ========================================================================== */
+
+
+.ctm-button {
 
 
     display:
 
-        inline-flex;
+    inline-flex;
 
 
 
     align-items:
 
-        center;
+    center;
 
 
 
     justify-content:
 
-        center;
-
-
-
-    gap:
-
-        12px;
+    center;
 
 
 
     min-height:
 
-        60px;
+    56px;
 
 
 
     padding:
 
-        0 40px;
-
-
-
-    border:
-
-        none;
+    0 32px;
 
 
 
     border-radius:
 
-        var(--radius-pill);
+    var(--radius-pill);
 
 
 
-    font-size:
+    background:
 
-        18px;
+    linear-gradient(
+
+        135deg,
+
+        var(--ctm-gold-light),
+
+        var(--ctm-gold-dark)
+
+    );
+
+
+
+    color:
+
+    #081C3A;
 
 
 
     font-weight:
 
-        700;
+    700;
+
+
+
+    border:
+
+    none;
 
 
 
     cursor:
 
-        pointer;
-
-
-
-    transition:
-
-        transform
-
-        var(--transition-fast),
-
-        box-shadow
-
-        var(--transition-fast);
+    pointer;
 
 
 
 }
 
-
-
-
-
-.btn:hover {
-
-
-    transform:
-
-        translateY(
-
-            -3px
-
-        );
-
-
-
-}
-
-
-
-
-
-.btn-primary {
-
-
-    background:
-
-        linear-gradient(
-
-            135deg,
-
-            var(--ctm-teal),
-
-            var(--ctm-teal-soft)
-
-        );
-
-
-
-    color:
-
-        #061214;
-
-
-
-    box-shadow:
-
-        0 18px 50px rgba(
-
-            20,
-
-            184,
-
-            184,
-
-            0.25
-
-        );
-
-
-
-}
-
-
-
-
-
-.btn-primary:hover {
-
-
-    box-shadow:
-
-        0 24px 70px rgba(
-
-            20,
-
-            184,
-
-            184,
-
-            0.35
-
-        );
-
-
-
-}
-
-
-
-
-
-.btn-gold {
-
-
-    background:
-
-        linear-gradient(
-
-            135deg,
-
-            var(--ctm-gold),
-
-            var(--ctm-gold-soft)
-
-        );
-
-
-
-    color:
-
-        #181207;
-
-
-
-    box-shadow:
-
-        var(--shadow-gold);
-
-
-
-}
-
-
-
-
-
-.btn-outline {
-
-
-    background:
-
-        transparent;
-
-
-
-    border:
-
-        1px solid var(--ctm-border-highlight);
-
-
-
-    color:
-
-        var(--ctm-gold-soft);
-
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   BADGES & LABELS
-
-   ========================================================================== */
-
-
-.badge {
-
-
-    display:
-
-        inline-flex;
-
-
-
-    align-items:
-
-        center;
-
-
-
-    justify-content:
-
-        center;
-
-
-
-    padding:
-
-        8px 18px;
-
-
-
-    border-radius:
-
-        var(--radius-pill);
-
-
-
-    background:
-
-        rgba(
-
-            201,
-
-            162,
-
-            39,
-
-            0.12
-
-        );
-
-
-
-    border:
-
-        1px solid rgba(
-
-            201,
-
-            162,
-
-            39,
-
-            0.25
-
-        );
-
-
-
-    color:
-
-        var(--ctm-gold-soft);
-
-
-
-    font-size:
-
-        14px;
-
-
-
-    font-weight:
-
-        700;
-
-
-
-}
-
-/* ==========================================================================
-   FOOTER PREMIUM SYSTEM
-
-   Minimal transformation-brand signature.
-
-   ========================================================================== */
-
-
-.app-footer {
-
-
-    width:
-
-        100%;
-
-
-
-    margin-top:
-
-        var(--space-8);
-
-
-
-    padding:
-
-        var(--space-6)
-
-        24px;
-
-
-
-    background:
-
-        var(--ctm-background-soft);
-
-
-
-    border-top:
-
-        1px solid var(--ctm-border);
-
-
-
-    text-align:
-
-        center;
-
-
-
-}
-
-
-
-
-
-.footer-container {
-
-
-    width:
-
-        min(
-
-            100% - 48px,
-
-            800px
-
-        );
-
-
-
-    margin:
-
-        0 auto;
-
-
-
-}
-
-
-
-
-
-.footer-brand-name {
-
-
-    color:
-
-        var(--ctm-text-primary);
-
-
-
-    font-size:
-
-        24px;
-
-
-
-    font-weight:
-
-        700;
-
-
-
-    margin-bottom:
-
-        20px;
-
-
-
-}
-
-
-
-
-
-.footer-founder-name {
-
-
-    color:
-
-        var(--ctm-gold-soft);
-
-
-
-    font-size:
-
-        22px;
-
-
-
-    font-weight:
-
-        700;
-
-
-
-}
-
-
-
-
-
-.footer-founder-role {
-
-
-    color:
-
-        var(--ctm-text-secondary);
-
-
-
-    font-size:
-
-        16px;
-
-
-
-    margin-top:
-
-        8px;
-
-
-
-}
-
-
-
-
-
-.footer-contact {
-
-
-    margin-top:
-
-        28px;
-
-
-
-    display:
-
-        flex;
-
-
-
-    justify-content:
-
-        center;
-
-
-
-    gap:
-
-        28px;
-
-
-
-    flex-wrap:
-
-        wrap;
-
-
-
-}
-
-
-
-
-
-.footer-contact-item {
-
-
-    color:
-
-        var(--ctm-teal-soft);
-
-
-
-    font-size:
-
-        17px;
-
-
-
-}
-
-
-
-
-
-.footer-legal {
-
-
-    margin-top:
-
-        36px;
-
-
-
-    color:
-
-        var(--ctm-text-muted);
-
-
-
-    font-size:
-
-        14px;
-
-
-
-}
-
-
-
-
-
-
-/* ==========================================================================
-   FORM SYSTEM
-
-   Premium input experience for Registration™ and Assessment™ pages.
-
-   ========================================================================== */
-
-
-.form-group {
-
-
-    margin-bottom:
-
-        var(--space-4);
-
-
-
-}
-
-
-
-
-
-.form-label {
-
-
-    display:
-
-        block;
-
-
-
-    margin-bottom:
-
-        10px;
-
-
-
-    color:
-
-        var(--ctm-text-primary);
-
-
-
-    font-size:
-
-        16px;
-
-
-
-    font-weight:
-
-        600;
-
-
-
-}
-
-
-
-
-
-.form-input,
-
-.form-select,
-
-.form-textarea {
-
-
-    width:
-
-        100%;
-
-
-
-    padding:
-
-        16px 20px;
-
-
-
-    background:
-
-        var(--ctm-surface);
-
-
-
-    border:
-
-        1px solid var(--ctm-border);
-
-
-
-    border-radius:
-
-        var(--radius-md);
-
-
-
-    color:
-
-        var(--ctm-text-primary);
-
-
-
-    font-size:
-
-        18px;
-
-
-
-    transition:
-
-        border-color
-
-        var(--transition-fast),
-
-        box-shadow
-
-        var(--transition-fast);
-
-
-
-}
-
-
-
-
-
-.form-input::placeholder,
-
-.form-textarea::placeholder {
-
-
-    color:
-
-        var(--ctm-text-muted);
-
-
-
-}
-
-
-
-
-
-.form-input:focus,
-
-.form-select:focus,
-
-.form-textarea:focus {
-
-
-    outline:
-
-        none;
-
-
-
-    border-color:
-
-        var(--ctm-teal);
-
-
-
-    box-shadow:
-
-        0 0 0 4px rgba(
-
-            20,
-
-            184,
-
-            184,
-
-            0.12
-
-        );
-
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   NAVIGATION SYSTEM
-
-   ========================================================================== */
-
-
-.app-navigation {
-
-
-    display:
-
-        flex;
-
-
-
-    align-items:
-
-        center;
-
-
-
-    justify-content:
-
-        center;
-
-
-
-    gap:
-
-        16px;
-
-
-
-}
-
-
-
-
-
-.nav-item {
-
-
-    padding:
-
-        10px 20px;
-
-
-
-    border-radius:
-
-        var(--radius-pill);
-
-
-
-    color:
-
-        var(--ctm-text-secondary);
-
-
-
-    transition:
-
-        all
-
-        var(--transition-fast);
-
-
-
-}
-
-
-
-
-
-.nav-item:hover {
-
-
-    background:
-
-        rgba(
-
-            20,
-
-            184,
-
-            184,
-
-            0.10
-
-        );
-
-
-
-    color:
-
-        var(--ctm-teal-soft);
-
-
-
-}
-
-
-
-
-
-.nav-item.active {
-
-
-    background:
-
-        rgba(
-
-            201,
-
-            162,
-
-            39,
-
-            0.12
-
-        );
-
-
-
-    color:
-
-        var(--ctm-gold-soft);
-
-
-
-}
-
-/* ==========================================================================
-   LOADING SYSTEM
-
-   Premium waiting experience.
-
-   ========================================================================== */
-
-
-.global-loader {
-
-
-    position:
-
-        fixed;
-
-
-
-    inset:
-
-        0;
-
-
-
-    display:
-
-        flex;
-
-
-
-    align-items:
-
-        center;
-
-
-
-    justify-content:
-
-        center;
-
-
-
-    background:
-
-        rgba(
-
-            11,
-
-            13,
-
-            18,
-
-            0.92
-
-        );
-
-
-
-    backdrop-filter:
-
-        blur(
-
-            12px
-
-        );
-
-
-
-    z-index:
-
-        9999;
-
-
-
-}
-
-
-
-
-
-.loader-spinner {
-
-
-    width:
-
-        48px;
-
-
-
-    height:
-
-        48px;
-
-
-
-    border-radius:
-
-        50%;
-
-
-
-    border:
-
-        4px solid rgba(
-
-            255,
-
-            255,
-
-            255,
-
-            0.15
-
-        );
-
-
-
-    border-top-color:
-
-        var(--ctm-gold);
-
-
-
-    animation:
-
-        ctmSpin
-
-        1s linear infinite;
-
-
-
-}
-
-
-
-
-
-@keyframes ctmSpin {
-
-
-    from {
-
-
-        transform:
-
-            rotate(
-
-                0deg
-
-            );
-
-
-
-    }
-
-
-
-    to {
-
-
-        transform:
-
-            rotate(
-
-                360deg
-
-            );
-
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   ACCESSIBILITY STATES
-
-   ========================================================================== */
-
-
-:focus-visible {
-
-
-    outline:
-
-        3px solid var(--ctm-gold);
-
-
-
-    outline-offset:
-
-        4px;
-
-
-
-}
-
-
-
-
-
-.hidden {
-
-
-    display:
-
-        none !important;
-
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   PREMIUM BACKGROUND ATMOSPHERE
-
-   Creates depth without images.
-
-   ========================================================================== */
-
-
-.page {
-
-
-    position:
-
-        relative;
-
-
-
-    overflow:
-
-        hidden;
-
-
-
-}
-
-
-
-
-
-.page::before {
-
-
-    content:
-
-        "";
-
-
-
-    position:
-
-        absolute;
-
-
-
-    top:
-
-        -300px;
-
-
-
-    right:
-
-        -250px;
-
-
-
-    width:
-
-        700px;
-
-
-
-    height:
-
-        700px;
-
-
-
-    border-radius:
-
-        50%;
-
-
-
-    background:
-
-        radial-gradient(
-
-            circle,
-
-            rgba(
-
-                20,
-
-                184,
-
-                184,
-
-                0.12
-
-            ),
-
-            transparent 70%
-
-        );
-
-
-
-    pointer-events:
-
-        none;
-
-
-
-}
-
-
-
-
-
-.page::after {
-
-
-    content:
-
-        "";
-
-
-
-    position:
-
-        absolute;
-
-
-
-    bottom:
-
-        -300px;
-
-
-
-    left:
-
-        -250px;
-
-
-
-    width:
-
-        650px;
-
-
-
-    height:
-
-        650px;
-
-
-
-    border-radius:
-
-        50%;
-
-
-
-    background:
-
-        radial-gradient(
-
-            circle,
-
-            rgba(
-
-                201,
-
-                162,
-
-                39,
-
-                0.10
-
-            ),
-
-            transparent 70%
-
-        );
-
-
-
-    pointer-events:
-
-        none;
-
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   SECTION DIVIDERS
-
-   Premium visual rhythm.
-
-   ========================================================================== */
-
-
-.section-divider {
-
-
-    width:
-
-        120px;
-
-
-
-    height:
-
-        2px;
-
-
-
-    margin:
-
-        var(--space-6)
-
-        auto;
-
-
-
-    background:
-
-        linear-gradient(
-
-            90deg,
-
-            transparent,
-
-            var(--ctm-gold),
-
-            transparent
-
-        );
-
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   PREMIUM STATUS ELEMENTS
-
-   ========================================================================== */
-
-
-.status-success {
-
-
-    color:
-
-        var(--ctm-teal-soft);
-
-
-
-}
-
-
-
-
-
-.status-highlight {
-
-
-    color:
-
-        var(--ctm-gold-soft);
-
-
-
-}
-
-
-
-
-
-.status-muted {
-
-
-    color:
-
-        var(--ctm-text-muted);
-
-
-
-}
-
-/* ==========================================================================
-   RESPONSIVE GLOBAL ADJUSTMENTS
-
-   Premium behaviour across devices.
-
-   ========================================================================== */
-
-
-@media (max-width: 1024px) {
-
-
-    .app-container {
-
-
-        width:
-
-            calc(
-
-                100% - 48px
-
-            );
-
-
-
-    }
-
-
-
-
-
-    .section {
-
-
-        padding:
-
-            var(--space-7)
-
-            0;
-
-
-
-    }
-
-
-
-
-
-    p {
-
-
-        font-size:
-
-            18px;
-
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-
-@media (max-width: 768px) {
-
-
-    :root {
-
-
-        --space-8:
-
-            72px;
-
-
-
-        --space-7:
-
-            56px;
-
-
-
-    }
-
-
-
-
-
-    .app-container {
-
-
-        width:
-
-            calc(
-
-                100% - 32px
-
-            );
-
-
-
-    }
-
-
-
-
-
-    .content-container {
-
-
-        width:
-
-            calc(
-
-                100% - 32px
-
-            );
-
-
-
-    }
-
-
-
-
-
-    h1 {
-
-
-        font-size:
-
-            38px;
-
-
-
-    }
-
-
-
-
-
-    h2 {
-
-
-        font-size:
-
-            32px;
-
-
-
-    }
-
-
-
-
-
-    h3 {
-
-
-        font-size:
-
-            26px;
-
-
-
-    }
-
-
-
-
-
-    p {
-
-
-        font-size:
-
-            17px;
-
-
-
-        line-height:
-
-            1.9;
-
-
-
-    }
-
-
-
-
-
-    .btn {
-
-
-        width:
-
-            100%;
-
-
-
-        min-height:
-
-            64px;
-
-
-
-    }
-
-
-
-
-
-    .footer-contact {
-
-
-        flex-direction:
-
-            column;
-
-
-
-        gap:
-
-            16px;
-
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-
-@media (max-width: 480px) {
-
-
-    :root {
-
-
-        --text-md:
-
-            18px;
-
-
-
-    }
-
-
-
-
-
-    .section {
-
-
-        padding:
-
-            48px
-
-            0;
-
-
-
-    }
-
-
-
-
-
-    h1 {
-
-
-        font-size:
-
-            32px;
-
-
-
-    }
-
-
-
-
-
-    h2 {
-
-
-        font-size:
-
-            28px;
-
-
-
-    }
-
-
-
-
-
-    .card {
-
-
-        padding:
-
-            24px;
-
-
-
-        border-radius:
-
-            var(--radius-md);
-
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   REDUCED MOTION SUPPORT
-
-   Accessibility preference.
-
-   ========================================================================== */
-
-
-@media (prefers-reduced-motion: reduce) {
-
-
-    *,
-
-    *::before,
-
-    *::after {
-
-
-        animation-duration:
-
-            0.01ms !important;
-
-
-
-        animation-iteration-count:
-
-            1 !important;
-
-
-
-        transition-duration:
-
-            0.01ms !important;
-
-
-
-        scroll-behavior:
-
-            auto !important;
-
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   PRINT SUPPORT
-
-   Clean document output.
-
-   ========================================================================== */
-
-
-@media print {
-
-
-    body {
-
-
-        background:
-
-            #ffffff;
-
-
-
-        color:
-
-            #000000;
-
-
-
-    }
-
-
-
-
-
-    .btn,
-
-    .app-navigation,
-
-    .global-loader {
-
-
-        display:
-
-            none !important;
-
-
-
-    }
-
-
-
-
-
-    .card {
-
-
-        box-shadow:
-
-            none;
-
-
-
-        border:
-
-            1px solid #cccccc;
-
-
-
-    }
-
-
-
-}
 
 
 
@@ -3163,27 +606,13 @@ p {
 /* ==========================================================================
    END OF FILE
 
-
    File:
-
    css/theme.css
 
-
    Version:
-
-   CTM PATH™ Premium Design System v3.1
-
+   CTM PATH™ Premium Dark Blue Universe v1.0
 
    Status:
-
    COMPLETE 🔒
-
-
-   Header System:
-
-   Managed separately by:
-
-   css/header.css
-
 
    ========================================================================== */
