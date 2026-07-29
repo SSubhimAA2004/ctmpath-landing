@@ -3,25 +3,26 @@
    CTM PATH™ Guided Journey™
 
    File        : navigation.js
-   Version     : 2.1
+   Version     : 2.2
 
    Purpose:
 
-   Central journey navigation controller.
+   Static page navigation controller.
 
    Responsibilities:
 
-   • Move between journey pages
-   • Load page content
-   • Update progress indicator
-   • Handle CTA navigation
+   • Handle CTA buttons
+   • Move user to next journey page
    • Reset scroll position
 
-   Does NOT:
+   IMPORTANT:
 
-   • Handle assessments
-   • Handle scoring
-   • Handle backend data
+   This file does NOT:
+
+   • Load HTML dynamically
+   • Replace app-content
+   • Fetch pages
+   • Control backend logic
 
    ========================================================================== */
 
@@ -33,19 +34,13 @@ const CTMNavigation = (() => {
 
 
 
-    const state = {
+    const config = {
 
 
         currentPage: 1,
 
 
-        totalPages: 18,
-
-
-        isLoading: false,
-
-
-        loadedScripts: []
+        totalPages: 18
 
 
 
@@ -58,85 +53,20 @@ const CTMNavigation = (() => {
 
 
 
-    const pages = [
-
-
-        "welcome",
-
-
-        "registration",
-
-
-        "assessment-01",
-
-
-        "assessment-02",
-
-
-        "assessment-03",
-
-
-        "assessment-04",
-
-
-        "assessment-05",
-
-
-        "assessment-06",
-
-
-        "assessment-07",
-
-
-        "assessment-08",
-
-
-        "assessment-09",
-
-
-        "assessment-10",
-
-
-        "kala-chakra",
-
-
-        "diagnosis",
-
-
-        "prescription",
-
-
-        "review",
-
-
-        "commitment",
-
-
-        "cta"
-
-
-    ];
-
-
-
-
-
-
-
-
-
     /* ==========================================================
-       INITIALIZATION
+       INITIALIZE
        ========================================================== */
 
 
     function init(){
 
 
-        bindEvents();
+
+        bindNavigation();
 
 
-        updateJourneyCounter();
+
+        updateCounter();
 
 
 
@@ -149,18 +79,12 @@ const CTMNavigation = (() => {
 
 
 
-
     /* ==========================================================
-       EVENT BINDING
-
-       Handles:
-
-       Begin My Guided Journey™
-
+       BUTTON HANDLER
        ========================================================== */
 
 
-    function bindEvents(){
+    function bindNavigation(){
 
 
 
@@ -182,9 +106,7 @@ const CTMNavigation = (() => {
 
                 if(!button){
 
-
                     return;
-
 
                 }
 
@@ -194,13 +116,12 @@ const CTMNavigation = (() => {
 
 
 
-                nextPage();
+                goNext();
 
 
 
             }
 
-
         );
 
 
@@ -214,17 +135,24 @@ const CTMNavigation = (() => {
 
 
 
-
     /* ==========================================================
-       NEXT PAGE
+       NEXT PAGE ROUTING
        ========================================================== */
 
 
-    function nextPage(){
+    function goNext(){
 
 
 
-        if(state.isLoading){
+        const nextPage =
+
+            config.currentPage + 1;
+
+
+
+
+
+        if(nextPage > config.totalPages){
 
 
             return;
@@ -235,164 +163,69 @@ const CTMNavigation = (() => {
 
 
 
-        if(
-            state.currentPage >= state.totalPages
-        ){
+        /*
+            Static routing.
 
+            Page naming convention:
 
-            return;
+            welcome.html
+            registration.html
+            assessment-01.html
+            etc.
 
-
-        }
-
-
-
-
-        state.currentPage++;
+        */
 
 
 
-        loadPage(
-            state.currentPage
-        );
+        const routes = [
 
+            "welcome.html",
 
+            "registration.html",
 
-    }
+            "assessment-01.html",
 
+            "assessment-02.html",
 
+            "assessment-03.html",
 
+            "assessment-04.html",
 
+            "assessment-05.html",
 
+            "assessment-06.html",
 
+            "assessment-07.html",
 
+            "assessment-08.html",
 
+            "assessment-09.html",
 
-    /* ==========================================================
-       PAGE LOADER
-       ========================================================== */
+            "assessment-10.html",
 
+            "kala-chakra.html",
 
-    async function loadPage(pageNumber){
+            "diagnosis.html",
 
+            "prescription.html",
 
+            "review.html",
 
-        state.isLoading = true;
+            "commitment.html",
 
+            "cta.html"
 
-
-        const pageName = pages[
-            pageNumber - 1
         ];
 
 
 
-        const container =
-            document.getElementById(
-                "app-content"
-            );
 
 
+        window.location.href = routes[
 
-        if(!container){
+            nextPage - 1
 
-
-
-            state.isLoading = false;
-
-
-            return;
-
-
-        }
-
-
-
-
-
-        try {
-
-
-
-            const response = await fetch(
-
-                `pages/${pageName}.html`
-
-            );
-
-
-
-            if(!response.ok){
-
-
-                throw new Error(
-
-                    "Page not found"
-
-                );
-
-
-            }
-
-
-
-
-            const html =
-                await response.text();
-
-
-
-
-            container.innerHTML = html;
-
-
-
-
-
-            updateJourneyCounter();
-
-
-
-            scrollToTop();
-
-
-
-
-            loadPageScript(
-                pageName
-            );
-
-
-
-
-
-        }
-
-        catch(error){
-
-
-
-            console.error(
-
-                "Navigation error:",
-
-                error
-
-            );
-
-
-
-        }
-
-        finally {
-
-
-
-            state.isLoading = false;
-
-
-
-        }
+        ];
 
 
 
@@ -405,105 +238,28 @@ const CTMNavigation = (() => {
 
 
 
-
     /* ==========================================================
-       PAGE SCRIPT LOADER
+       JOURNEY COUNTER
        ========================================================== */
 
 
-    function loadPageScript(pageName){
+    function updateCounter(){
 
 
 
-        const scriptPath =
+        const counter = document.getElementById(
 
-            `js/pages/${pageName}.js`;
+            "journey-counter"
 
-
-
-
-
-        if(
-            state.loadedScripts.includes(
-                scriptPath
-            )
-        ){
-
-
-            return;
-
-
-        }
-
-
-
-
-
-        const script =
-
-            document.createElement(
-                "script"
-            );
-
-
-
-
-        script.src = scriptPath;
-
-
-        script.defer = true;
-
-
-
-        document.body.appendChild(
-            script
         );
-
-
-
-
-        state.loadedScripts.push(
-            scriptPath
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       JOURNEY COUNTER UPDATE
-       ========================================================== */
-
-
-    function updateJourneyCounter(){
-
-
-
-        const counter =
-
-            document.getElementById(
-                "journey-counter"
-            );
-
 
 
 
         if(!counter){
 
-
             return;
 
-
         }
-
 
 
 
@@ -512,11 +268,17 @@ const CTMNavigation = (() => {
 
 
             String(
-                state.currentPage
+
+                config.currentPage
+
             )
+
             .padStart(
+
                 2,
+
                 "0"
+
             )
 
             +
@@ -525,7 +287,7 @@ const CTMNavigation = (() => {
 
             +
 
-            state.totalPages;
+            config.totalPages;
 
 
 
@@ -538,26 +300,22 @@ const CTMNavigation = (() => {
 
 
 
-
     /* ==========================================================
-       SCROLL RESET
+       SCROLL HELPER
        ========================================================== */
 
 
-    function scrollToTop(){
+    function scrollTop(){
 
 
 
         window.scrollTo({
 
-            top: 0,
+            top:0,
 
+            left:0,
 
-            left: 0,
-
-
-            behavior: "smooth"
-
+            behavior:"smooth"
 
         });
 
@@ -572,25 +330,16 @@ const CTMNavigation = (() => {
 
 
 
-
-    /* ==========================================================
-       PUBLIC API
-       ========================================================== */
-
-
     return {
 
 
         init,
 
 
-        nextPage,
+        goNext,
 
 
-        loadPage,
-
-
-        scrollToTop
+        scrollTop
 
 
 
@@ -608,8 +357,7 @@ const CTMNavigation = (() => {
 
 
 /* ==========================================================================
-   START CONTROLLER
-
+   START
    ========================================================================== */
 
 
@@ -618,7 +366,6 @@ document.addEventListener(
     "DOMContentLoaded",
 
     function(){
-
 
 
         CTMNavigation.init();
