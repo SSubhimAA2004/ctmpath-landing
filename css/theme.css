@@ -3,22 +3,26 @@
    CTM PATH™ Guided Journey™
 
    File        : theme.css
-   Version     : 1.0
+   Version     : 1.1
 
    Purpose:
 
-   Global visual identity system.
+   Global visual identity layer.
 
    Controls:
 
-   • Premium dark blue universe
    • Brand colours
-   • Typography tokens
-   • Surface layers
-   • Border system
-   • Glow system
+   • Typography colours
+   • Surface colours
+   • Accent system
+
+   IMPORTANT:
+
+   All screens share one premium dark blue universe.
 
    ========================================================================== */
+
+
 
 
 
@@ -30,225 +34,213 @@
 :root {
 
 
-    /* --------------------------------------------------
-       PRIMARY BACKGROUND SYSTEM
-       -------------------------------------------------- */
+    /* ----------------------------------------------------------
+       PRIMARY UNIVERSE
+       ---------------------------------------------------------- */
 
 
-    --ctm-background-primary:
+    --ctm-background:
 
-        #081C3A;
-
-
-
-    --ctm-background-secondary:
-
-        #0D2548;
+    #081C3A;
 
 
+    --ctm-surface:
 
-    --ctm-background-surface:
-
-        #12376E;
-
+    #081C3A;
 
 
-    --ctm-background-card:
+    --ctm-surface-soft:
 
-        rgba(
-            255,
-            255,
-            255,
-            0.06
-        );
+    rgba(
+        8,
+        28,
+        58,
+        0.96
+    );
 
+
+
+    --ctm-footer-bg:
+
+    #081C3A;
 
 
 
 
-    /* --------------------------------------------------
+
+
+    /* ----------------------------------------------------------
        BRAND ACCENTS
-       -------------------------------------------------- */
+       ---------------------------------------------------------- */
 
 
     --ctm-gold:
 
-        #D9B56A;
+    #D9B56A;
 
 
 
     --ctm-gold-light:
 
-        #FFF3A6;
+    #FFF3A6;
 
 
 
-    --ctm-gold-dark:
+    --ctm-gold-soft:
 
-        #A86B16;
+    #E8C982;
+
+
+
+    --ctm-border-gold:
+
+    rgba(
+        217,
+        181,
+        106,
+        0.45
+    );
+
 
 
 
 
     --ctm-teal:
 
-        #00C2B8;
+    #00B7B7;
 
 
 
     --ctm-teal-soft:
 
-        #63E6DF;
+    #57D6D6;
 
 
 
 
 
-    /* --------------------------------------------------
+
+    /* ----------------------------------------------------------
        TEXT SYSTEM
-       -------------------------------------------------- */
+       ---------------------------------------------------------- */
 
 
     --ctm-text-primary:
 
-        #F5F4EE;
+    #F8F4EA;
 
 
 
     --ctm-text-secondary:
 
-        #C7CEDA;
+    #D6DCE8;
 
 
 
     --ctm-text-muted:
 
-        #8995A8;
+    rgba(
+        248,
+        244,
+        234,
+        0.72
+    );
 
 
 
 
 
-    /* --------------------------------------------------
-       BORDER SYSTEM
-       -------------------------------------------------- */
+
+    /* ----------------------------------------------------------
+       BORDERS / SHADOWS
+       ---------------------------------------------------------- */
 
 
     --ctm-border:
 
-        rgba(
-            255,
-            255,
-            255,
-            0.12
-        );
+    rgba(
+        255,
+        255,
+        255,
+        0.10
+    );
 
 
 
-    --ctm-border-gold:
+    --ctm-shadow:
 
-        rgba(
-            217,
-            181,
-            106,
-            0.35
-        );
-
-
-
-
-
-    /* --------------------------------------------------
-       SHADOW SYSTEM
-       -------------------------------------------------- */
-
-
-    --ctm-shadow-soft:
-
-        0 20px 60px
-        rgba(
-            0,
-            0,
-            0,
-            0.35
-        );
-
-
-
-    --ctm-shadow-gold:
-
-        0 0 40px
-        rgba(
-            217,
-            181,
-            106,
-            0.25
-        );
+    0 20px 60px rgba(
+        0,
+        0,
+        0,
+        0.35
+    );
 
 
 
 
 
-    /* --------------------------------------------------
+
+
+    /* ----------------------------------------------------------
        TYPOGRAPHY
-       -------------------------------------------------- */
+       ---------------------------------------------------------- */
 
 
     --font-primary:
 
-        "Inter",
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
-
-
-    --font-serif:
-
-        Georgia,
-        "Times New Roman",
-        serif;
+    "Inter",
+    "Segoe UI",
+    Arial,
+    sans-serif;
 
 
 
     --font-tamil:
 
-        "Noto Sans Tamil",
-        "Latha",
-        sans-serif;
+    "Noto Sans Tamil",
+    "Latha",
+    sans-serif;
+
+
+
+    --font-serif:
+
+    "Georgia",
+    serif;
 
 
 
 
 
 
-    /* --------------------------------------------------
-       RADIUS SYSTEM
-       -------------------------------------------------- */
+
+    /* ----------------------------------------------------------
+       SHAPE SYSTEM
+       ---------------------------------------------------------- */
 
 
     --radius-small:
 
-        12px;
+    12px;
 
 
 
     --radius-medium:
 
-        24px;
+    24px;
 
 
 
     --radius-large:
 
-        36px;
+    36px;
 
 
 
     --radius-pill:
 
-        999px;
-
+    999px;
 
 
 
@@ -262,11 +254,41 @@
 
 
 /* ==========================================================================
-   GLOBAL BODY ENVIRONMENT
+   GLOBAL BACKGROUND LOCK
    ========================================================================== */
 
 
+html,
 body {
+
+
+    background:
+
+    var(--ctm-background);
+
+
+
+    color:
+
+    var(--ctm-text-primary);
+
+
+
+}
+
+
+
+
+
+
+
+body {
+
+
+    font-family:
+
+    var(--font-primary);
+
 
 
     margin:
@@ -281,50 +303,34 @@ body {
 
 
 
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   APPLICATION SURFACES
+
+   Every section inherits the same universe.
+
+   ========================================================================== */
+
+
+.app-shell,
+.app-content,
+.ctm-screen,
+.welcome-screen,
+.ctm-footer,
+.app-header {
+
+
     background:
 
-
-    radial-gradient(
-
-        circle at top right,
-
-        rgba(
-            18,
-            55,
-            110,
-            0.45
-        ),
-
-        transparent 40%
-
-    ),
-
-
-    var(--ctm-background-primary);
-
-
-
-    color:
-
-    var(--ctm-text-primary);
-
-
-
-    font-family:
-
-    var(--font-primary);
-
-
-
-    -webkit-font-smoothing:
-
-    antialiased;
-
-
-
-    text-rendering:
-
-    optimizeLegibility;
+    var(--ctm-background);
 
 
 
@@ -338,56 +344,41 @@ body {
 
 
 /* ==========================================================================
-   GLOBAL HEADINGS
+   PREMIUM TEXT DEFAULTS
    ========================================================================== */
 
 
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5,
+h6 {
 
 
     color:
 
     var(--ctm-text-primary);
 
-
-
-    margin:
-
-    0;
-
-
-
-    font-weight:
-
-    700;
 
 
 }
 
 
 
-
-
-/* ==========================================================================
-   TAMIL TYPOGRAPHY SYSTEM
-   ========================================================================== */
-
-
-.tamil {
-
-
-    font-family:
-
-    var(--font-tamil);
-
+p {
 
 
     color:
 
-    var(--ctm-text-primary);
+    var(--ctm-text-secondary);
+
+
+
+    line-height:
+
+    1.8;
+
 
 
 }
@@ -398,13 +389,7 @@ h4 {
 
 
 
-
-/* ==========================================================================
-   GOLD SIGNATURE TEXT
-   ========================================================================== */
-
-
-.gold-text {
+a {
 
 
     color:
@@ -412,52 +397,6 @@ h4 {
     var(--ctm-gold);
 
 
-}
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   PREMIUM CARD SYSTEM
-   ========================================================================== */
-
-
-.ctm-card {
-
-
-    background:
-
-    var(--ctm-background-card);
-
-
-
-    border:
-
-    1px solid var(--ctm-border);
-
-
-
-    border-radius:
-
-    var(--radius-medium);
-
-
-
-    box-shadow:
-
-    var(--ctm-shadow-soft);
-
-
-
-    backdrop-filter:
-
-    blur(12px);
-
-
 
 }
 
@@ -467,24 +406,23 @@ h4 {
 
 
 
-
 /* ==========================================================================
-   GOLD ACCENT LINE
+   GOLD SIGNATURE ELEMENT
    ========================================================================== */
 
 
 .ctm-gold-line {
 
 
-    width:
-
-    120px;
-
-
-
     height:
 
     2px;
+
+
+
+    width:
+
+    220px;
 
 
 
@@ -503,6 +441,7 @@ h4 {
     );
 
 
+
 }
 
 
@@ -513,84 +452,39 @@ h4 {
 
 
 /* ==========================================================================
-   BUTTON FOUNDATION
+   PREMIUM CARD SURFACE
    ========================================================================== */
 
 
-.ctm-button {
-
-
-    display:
-
-    inline-flex;
-
-
-
-    align-items:
-
-    center;
-
-
-
-    justify-content:
-
-    center;
-
-
-
-    min-height:
-
-    56px;
-
-
-
-    padding:
-
-    0 32px;
-
-
-
-    border-radius:
-
-    var(--radius-pill);
-
+.ctm-card {
 
 
     background:
 
-    linear-gradient(
-
-        135deg,
-
-        var(--ctm-gold-light),
-
-        var(--ctm-gold-dark)
-
+    rgba(
+        8,
+        28,
+        58,
+        0.85
     );
-
-
-
-    color:
-
-    #081C3A;
-
-
-
-    font-weight:
-
-    700;
 
 
 
     border:
 
-    none;
+    1px solid var(--ctm-border);
 
 
 
-    cursor:
+    box-shadow:
 
-    pointer;
+    var(--ctm-shadow);
+
+
+
+    border-radius:
+
+    var(--radius-medium);
 
 
 
@@ -610,9 +504,9 @@ h4 {
    css/theme.css
 
    Version:
-   CTM PATH™ Premium Dark Blue Universe v1.0
+   CTM PATH™ Premium Dark Blue Universe Lock v1.1
 
    Status:
-   COMPLETE 🔒
+   UPDATED 🔒
 
    ========================================================================== */
