@@ -3,7 +3,7 @@
    CTM PATH™ Guided Journey™
 
    File        : app.js
-   Version     : 1.6
+   Version     : 1.7
 
    Purpose:
 
@@ -11,16 +11,19 @@
 
    Responsibilities:
 
-   • Initialize application shell
-   • Control silent loading state
-   • Initialize components
-   • Start navigation
+   • Initialize frontend application
+   • Remove loading state
+   • Prepare UI environment
 
-   Does NOT:
+   IMPORTANT:
 
-   • Calculate scores
-   • Store business data
-   • Handle assessments
+   This file does NOT:
+
+   • Load pages dynamically
+   • Replace app-content
+   • Load components
+   • Control navigation routes
+   • Handle business logic
 
    ========================================================================== */
 
@@ -38,11 +41,8 @@ const CTMApp = (() => {
 
 
 
-
-
-
     /* ==========================================================
-       INITIALIZATION
+       APPLICATION INITIALIZATION
        ========================================================== */
 
 
@@ -62,43 +62,11 @@ const CTMApp = (() => {
 
 
 
-        hideLoader();
+        removeLoader();
 
 
 
-        initializeComponents();
-
-
-
-    }
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       COMPONENT INITIALIZATION
-       ========================================================== */
-
-
-    function initializeComponents(){
-
-
-
-        if(
-            typeof CTMNavigation !== "undefined"
-        ){
-
-            CTMNavigation.init();
-
-        }
-
-
-
-        loadGlobalComponents();
+        initializeUI();
 
 
 
@@ -112,24 +80,32 @@ const CTMApp = (() => {
 
 
     /* ==========================================================
-       GLOBAL COMPONENT LOADER
+       UI INITIALIZATION
        ========================================================== */
 
 
-    function loadGlobalComponents(){
+    function initializeUI(){
 
 
 
-        loadComponent(
-            "app-header",
-            "components/header.html"
-        );
+        /*
+            Reserved for future
+            frontend initialization.
+
+            Examples:
+
+            - animations
+            - accessibility
+            - theme setup
+
+        */
 
 
 
-        loadComponent(
-            "app-footer",
-            "components/footer.html"
+        document.documentElement.classList.add(
+
+            "ctm-ready"
+
         );
 
 
@@ -144,88 +120,23 @@ const CTMApp = (() => {
 
 
     /* ==========================================================
-       COMPONENT FETCHER
-       ========================================================== */
+       LOADER CONTROL
+
+       Removes:
+       "Preparing your journey..."
+
+       ================================================================= */
 
 
-    function loadComponent(
-        elementId,
-        filePath
-    ){
-
-
-
-        const element =
-            document.getElementById(
-                elementId
-            );
+    function removeLoader(){
 
 
 
-        if(!element){
+        const loader = document.getElementById(
 
-            return;
+            "global-loader"
 
-        }
-
-
-
-
-        fetch(filePath)
-
-        .then(
-            response => response.text()
-        )
-
-        .then(
-            html => {
-
-
-                element.innerHTML = html;
-
-
-
-            }
-
-        )
-
-        .catch(
-            error => {
-
-
-                console.error(
-                    "Component loading error:",
-                    error
-                );
-
-
-            }
         );
-
-
-
-    }
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       SILENT LOADER CONTROL
-       ========================================================== */
-
-
-    function showLoader(){
-
-
-
-        const loader =
-            document.getElementById(
-                "global-loader"
-            );
 
 
 
@@ -236,42 +147,13 @@ const CTMApp = (() => {
         }
 
 
-
-        loader.classList.remove(
-            "hidden"
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-    function hideLoader(){
-
-
-
-        const loader =
-            document.getElementById(
-                "global-loader"
-            );
-
-
-
-        if(!loader){
-
-            return;
-
-        }
 
 
 
         loader.classList.add(
+
             "hidden"
+
         );
 
 
@@ -295,9 +177,9 @@ const CTMApp = (() => {
 
         init,
 
-        showLoader,
 
-        hideLoader
+        removeLoader
+
 
 
     };
@@ -312,15 +194,19 @@ const CTMApp = (() => {
 
 
 
+
+
 /* ==========================================================================
    APPLICATION START
-
    ========================================================================== */
 
 
 document.addEventListener(
+
     "DOMContentLoaded",
+
     function(){
+
 
 
         CTMApp.init();
@@ -328,4 +214,5 @@ document.addEventListener(
 
 
     }
+
 );
