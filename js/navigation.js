@@ -10,25 +10,24 @@
 
    Responsibilities:
 
-   ✓ Control journey movement
-   ✓ Manage Previous visibility
-   ✓ Manage Continue visibility
-   ✓ Update journey counter
-   ✓ Control navigator visibility by page
+   ✓ Journey movement control
+   ✓ Navigation visibility
+   ✓ Journey counter update
+   ✓ Router event dispatch
 
 
    Does NOT:
 
-   ✗ Render page content
-   ✗ Handle business logic
-   ✗ Handle API processing
+   ✗ Load HTML pages
+   ✗ Handle assessment
+   ✗ Handle API
 
 
    ========================================================================== */
 
 
 
-const Navigation = (() => {
+const CTMNavigation = (() => {
 
 
 
@@ -39,25 +38,45 @@ const Navigation = (() => {
 
 
 
+    let initialized = false;
+
+
+
+
 
 
 
 
     /* ==========================================================
-       INITIALIZE
+       INITIALIZATION
        ========================================================== */
 
 
-    const init = () => {
+    function init(){
+
+
+
+        if(initialized){
+
+            return;
+
+        }
+
+
+
+        initialized = true;
+
 
 
         bindEvents();
 
 
+
         updateNavigation();
 
 
-    };
+
+    }
 
 
 
@@ -72,41 +91,88 @@ const Navigation = (() => {
        ========================================================== */
 
 
-    const bindEvents = () => {
+    function bindEvents(){
 
 
 
-        const buttons =
+        document.addEventListener(
 
-        document.querySelectorAll(
+            "click",
 
-            ".nav-button"
+            (event)=>{
+
+
+
+                const button =
+
+                event.target.closest(
+
+                    "[data-action]"
+
+                );
+
+
+
+
+
+                if(!button){
+
+                    return;
+
+                }
+
+
+
+
+
+
+
+                const action =
+
+                button.dataset.action;
+
+
+
+
+
+
+
+                if(action==="previous"){
+
+
+
+                    goPrevious();
+
+
+
+                }
+
+
+
+
+
+
+                if(action==="continue"){
+
+
+
+                    goNext();
+
+
+
+                }
+
+
+
+
+
+            }
 
         );
 
 
 
-
-
-        buttons.forEach(button => {
-
-
-
-            button.addEventListener(
-
-                "click",
-
-                handleNavigation
-
-            );
-
-
-
-        });
-
-
-
-    };
+    }
 
 
 
@@ -117,60 +183,11 @@ const Navigation = (() => {
 
 
     /* ==========================================================
-       BUTTON ACTIONS
+       NEXT PAGE
        ========================================================== */
 
 
-    const handleNavigation = (event) => {
-
-
-
-        const action =
-
-        event.currentTarget.dataset.action;
-
-
-
-
-
-        if(action === "previous"){
-
-
-            goPrevious();
-
-
-        }
-
-
-
-
-
-        if(action === "continue"){
-
-
-            goNext();
-
-
-        }
-
-
-
-    };
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       NEXT
-       ========================================================== */
-
-
-    const goNext = () => {
+    function goNext(){
 
 
 
@@ -182,7 +199,9 @@ const Navigation = (() => {
 
 
 
-            loadPage(currentPage);
+
+            dispatchPageChange();
+
 
 
 
@@ -190,7 +209,7 @@ const Navigation = (() => {
 
 
 
-    };
+    }
 
 
 
@@ -201,11 +220,11 @@ const Navigation = (() => {
 
 
     /* ==========================================================
-       PREVIOUS
+       PREVIOUS PAGE
        ========================================================== */
 
 
-    const goPrevious = () => {
+    function goPrevious(){
 
 
 
@@ -217,7 +236,9 @@ const Navigation = (() => {
 
 
 
-            loadPage(currentPage);
+
+            dispatchPageChange();
+
 
 
 
@@ -225,7 +246,7 @@ const Navigation = (() => {
 
 
 
-    };
+    }
 
 
 
@@ -236,34 +257,71 @@ const Navigation = (() => {
 
 
     /* ==========================================================
-       NAVIGATION DISPLAY CONTROL
+       SEND ROUTER EVENT
        ========================================================== */
 
 
-    const updateNavigation = () => {
+    function dispatchPageChange(){
 
 
 
-        const navigation =
+        document.dispatchEvent(
 
-        document.querySelector(
 
-            ".navigation"
+
+            new CustomEvent(
+
+                "ctm-page-change",
+
+                {
+
+                    detail:{
+
+                        page: currentPage
+
+                    }
+
+                }
+
+            )
+
+
 
         );
 
 
 
 
+        updateNavigation();
 
-        const previousButton =
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /* ==========================================================
+       UPDATE NAVIGATION UI
+       ========================================================== */
+
+
+    function updateNavigation(){
+
+
+
+        const previous =
 
         document.querySelector(
 
-            '[data-action="previous"]'
+            "[data-action='previous']"
 
         );
-
 
 
 
@@ -272,7 +330,7 @@ const Navigation = (() => {
 
         document.querySelector(
 
-            '[data-action="continue"]'
+            "[data-action='continue']"
 
         );
 
@@ -283,25 +341,28 @@ const Navigation = (() => {
 
 
         /*
-            PAGE 01
+          PAGE 01
 
-            Welcome page has its own CTA.
-
-            Global navigation hidden.
+          No previous destination
         */
 
 
-        if(navigation){
+
+        if(previous){
 
 
 
-            navigation.style.display =
+            previous.style.display =
 
             currentPage === 1
 
-            ? "none"
+            ?
 
-            : "flex";
+            "none"
+
+            :
+
+            "inline-flex";
 
 
 
@@ -313,51 +374,23 @@ const Navigation = (() => {
 
 
 
-        /*
-            Previous button
-
-            Hidden only on first journey step.
-        */
-
-
-        if(previousButton){
-
-
-
-            previousButton.style.display =
-
-            currentPage === 1
-
-            ? "none"
-
-            : "inline-flex";
-
-
-
-        }
-
-
-
-
-
 
 
         /*
-            Final page handling
+          FINAL PAGE
         */
+
 
 
         if(continueButton){
 
 
 
-            if(currentPage === totalPages){
+            if(currentPage===totalPages){
 
 
 
-                continueButton.innerHTML =
-
-                `
+                continueButton.innerHTML = `
 
                 <span class="nav-label">
 
@@ -389,11 +422,11 @@ const Navigation = (() => {
 
 
 
-        updateJourneyCounter();
+        updateCounter();
 
 
 
-    };
+    }
 
 
 
@@ -408,7 +441,7 @@ const Navigation = (() => {
        ========================================================== */
 
 
-    const updateJourneyCounter = () => {
+    function updateCounter(){
 
 
 
@@ -430,7 +463,6 @@ const Navigation = (() => {
 
             counter.textContent =
 
-
             String(currentPage)
 
             .padStart(2,"0")
@@ -451,62 +483,7 @@ const Navigation = (() => {
 
 
 
-    };
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       PAGE EVENT TO APP ROUTER
-       ========================================================== */
-
-
-    const loadPage = (pageNumber) => {
-
-
-
-        document.dispatchEvent(
-
-
-
-            new CustomEvent(
-
-                "ctm-page-change",
-
-                {
-
-
-                    detail:{
-
-
-                        page: pageNumber
-
-
-                    }
-
-
-                }
-
-            )
-
-
-
-        );
-
-
-
-
-
-        updateNavigation();
-
-
-
-    };
+    }
 
 
 
@@ -531,14 +508,11 @@ const Navigation = (() => {
         updateNavigation,
 
 
-        goNext,
+        getCurrentPage(){
 
+            return currentPage;
 
-        goPrevious,
-
-
-        getCurrentPage: () => currentPage
-
+        }
 
 
     };
@@ -553,13 +527,9 @@ const Navigation = (() => {
 
 
 
-
 /* ==========================================================================
-   GLOBAL EXPOSURE
-
-   app.js initializes after component loading.
-
+   GLOBAL ACCESS FOR app.js
    ========================================================================== */
 
 
-window.CTMNavigation = Navigation;
+window.CTMNavigation = CTMNavigation;
