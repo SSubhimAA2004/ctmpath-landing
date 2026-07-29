@@ -3,62 +3,175 @@
    CTM PATH™ Guided Journey™
 
    File        : js/app.js
-   Version     : 2.3
+   Version     : 2.5
 
-   Status      : PAGE ROUTER + REGISTRATION ACTIVATION PATCH
+   Status      : FRAGMENT ROUTER COMPATIBILITY PATCH
 
 
    Responsibilities:
 
-   ✓ Page routing
-   ✓ Dynamic page loading
-   ✓ Script initialization
-   ✓ Journey state management
+   ✓ Application bootstrap
+   ✓ Component loading
+   ✓ Fragment page loading
+   ✓ Journey state
 
 
    Does NOT:
 
    ✗ API processing
-   ✗ Form validation
-   ✗ Database operations
+   ✗ Database logic
+   ✗ Assessment logic
 
 
    ========================================================================== */
 
 
-const App = (() => {
+const CTMApp = (() => {
 
 
 
-    const TOTAL_PAGES = 18;
+    const CONFIG = {
 
 
-    let currentPage = 1;
+        initialPage:
 
-
-
-
-
+        "welcome",
 
 
 
+        currentPage:
 
-    /* ==========================================================
-       INITIALIZATION
-       ========================================================== */
-
-
-    function init(){
+        1,
 
 
 
-        bindPageChange();
+        totalPages:
+
+        18,
 
 
 
-        loadPage(
+        components:{
 
-            currentPage
+
+
+            header:
+
+            "components/header.html",
+
+
+
+            footer:
+
+            "components/footer.html",
+
+
+
+            navigation:
+
+            "components/navigation.html"
+
+
+
+        }
+
+
+
+    };
+
+
+
+
+
+    let started = false;
+
+
+
+
+
+
+
+
+
+    async function init(){
+
+
+
+        if(started){
+
+            return;
+
+        }
+
+
+
+        started = true;
+
+
+
+
+
+        await loadGlobalComponents();
+
+
+
+        await loadPage(
+
+            CONFIG.initialPage
+
+        );
+
+
+
+
+
+        hideNavigation();
+
+
+
+        initialisePage();
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    async function loadGlobalComponents(){
+
+
+
+        await loadComponent(
+
+            "app-header",
+
+            CONFIG.components.header
+
+        );
+
+
+
+        await loadComponent(
+
+            "app-navigation",
+
+            CONFIG.components.navigation
+
+        );
+
+
+
+        await loadComponent(
+
+            "app-footer",
+
+            CONFIG.components.footer
 
         );
 
@@ -74,71 +187,33 @@ const App = (() => {
 
 
 
-    /* ==========================================================
-       PAGE CHANGE EVENT
-       ========================================================== */
+    async function loadComponent(
 
+        id,
 
-    function bindPageChange(){
+        path
 
-
-
-        document.addEventListener(
+    ){
 
 
 
-            "ctm-page-change",
+        const element =
 
-
-
-            event => {
-
-
-
-                const page =
-
-                event.detail.page;
-
-
-
-                navigateTo(page);
-
-
-
-            }
-
-
-
-        );
-
-
-
-    }
+        document.getElementById(id);
 
 
 
 
 
+        if(!element){
 
+            console.warn(
 
+                "Missing component:",
 
+                id
 
-    /* ==========================================================
-       NAVIGATION
-       ========================================================== */
-
-
-    function navigateTo(page){
-
-
-
-        if(
-
-            page < 1 ||
-
-            page > TOTAL_PAGES
-
-        ){
+            );
 
             return;
 
@@ -148,15 +223,51 @@ const App = (() => {
 
 
 
-        currentPage = page;
+
+
+        try{
+
+
+            const response =
+
+            await fetch(path);
 
 
 
-        loadPage(
 
-            page
 
-        );
+            if(!response.ok){
+
+                throw new Error(path);
+
+            }
+
+
+
+
+
+            element.innerHTML =
+
+            await response.text();
+
+
+
+        }
+
+
+        catch(error){
+
+
+            console.error(
+
+                "Component failed:",
+
+                error
+
+            );
+
+
+        }
 
 
 
@@ -170,12 +281,11 @@ const App = (() => {
 
 
 
-    /* ==========================================================
-       PAGE LOADER
-       ========================================================== */
+    async function loadPage(
 
+        pageName
 
-    async function loadPage(page){
+    ){
 
 
 
@@ -183,7 +293,7 @@ const App = (() => {
 
         document.getElementById(
 
-            "journey-container"
+            "app-content"
 
         );
 
@@ -195,24 +305,14 @@ const App = (() => {
 
             console.error(
 
-                "Journey container missing"
+                "Missing #app-content"
 
             );
-
 
             return;
 
         }
 
-
-
-
-
-
-
-        const pageName =
-
-        getPageName(page);
 
 
 
@@ -236,19 +336,13 @@ const App = (() => {
 
 
 
-
-
             if(!response.ok){
-
-
 
                 throw new Error(
 
-                    "Page not found"
+                    `Page missing: ${pageName}`
 
                 );
-
-
 
             }
 
@@ -256,9 +350,7 @@ const App = (() => {
 
 
 
-
-
-            const html =
+            container.innerHTML =
 
             await response.text();
 
@@ -266,33 +358,9 @@ const App = (() => {
 
 
 
+            initialisePage();
 
 
-            container.innerHTML = html;
-
-
-
-
-
-
-
-            updatePageState(
-
-                page
-
-            );
-
-
-
-
-
-
-
-            initializePageScripts(
-
-                pageName
-
-            );
 
 
 
@@ -306,11 +374,25 @@ const App = (() => {
 
             console.error(
 
-                "Page loading error:",
+                "Page loading failed:",
 
                 error
 
             );
+
+
+
+            container.innerHTML =
+
+            `
+
+            <div class="error-message">
+
+            Journey page unavailable.
+
+            </div>
+
+            `;
 
 
 
@@ -328,183 +410,21 @@ const App = (() => {
 
 
 
-    /* ==========================================================
-       PAGE MAP
-       ========================================================== */
+    function initialisePage(){
 
 
-    function getPageName(page){
 
+        window.scrollTo(
 
+            0,
 
-        const pages = {
-
-
-
-            1:
-
-            "welcome",
-
-
-
-            2:
-
-            "registration",
-
-
-
-            3:
-
-            "assessment-01",
-
-
-
-            4:
-
-            "assessment-02",
-
-
-
-            5:
-
-            "assessment-03",
-
-
-
-            6:
-
-            "assessment-04",
-
-
-
-            7:
-
-            "assessment-05",
-
-
-
-            8:
-
-            "assessment-06",
-
-
-
-            9:
-
-            "assessment-07",
-
-
-
-            10:
-
-            "assessment-08",
-
-
-
-            11:
-
-            "assessment-09",
-
-
-
-            12:
-
-            "assessment-10",
-
-
-
-            13:
-
-            "assessment-11",
-
-
-
-            14:
-
-            "assessment-12",
-
-
-
-            15:
-
-            "kalachakra",
-
-
-
-            16:
-
-            "diagnosis",
-
-
-
-            17:
-
-            "prescription",
-
-
-
-            18:
-
-            "completion"
-
-
-
-        };
-
-
-
-
-
-
-
-        return pages[page];
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       PAGE STATE UPDATE
-       ========================================================== */
-
-
-    function updatePageState(page){
-
-
-
-        document.dispatchEvent(
-
-
-
-            new CustomEvent(
-
-                "page-loaded",
-
-                {
-
-                    detail:{
-
-
-                        page:page
-
-
-                    }
-
-                }
-
-            )
-
-
+            0
 
         );
+
+
+
+
 
 
 
@@ -516,11 +436,7 @@ const App = (() => {
 
 
 
-            Navigation.setPage(
-
-                page
-
-            );
+            Navigation.updateNavigation();
 
 
 
@@ -528,15 +444,40 @@ const App = (() => {
 
 
 
-        window.scrollTo(
+
+
+
+
+
+        const pageEvent =
+
+        new CustomEvent(
+
+            "ctm-page-loaded",
 
             {
 
-                top:0,
+                detail:{
 
-                behavior:"smooth"
+
+                    page:
+
+                    CONFIG.currentPage
+
+
+                }
 
             }
+
+        );
+
+
+
+
+
+        document.dispatchEvent(
+
+            pageEvent
 
         );
 
@@ -552,58 +493,117 @@ const App = (() => {
 
 
 
-    /* ==========================================================
-       SCRIPT INITIALIZER
-       ========================================================== */
-
-
-    function initializePageScripts(
-
-        pageName
-
-    ){
+    function hideNavigation(){
 
 
 
-        switch(pageName){
+        const nav =
 
+        document.getElementById(
 
+            "app-navigation"
 
-            case "welcome":
-
-
-
-                if(window.Welcome){
-
-
-                    Welcome.init();
-
-
-                }
-
-
-            break;
+        );
 
 
 
 
 
-
-
-            case "registration":
+        if(nav){
 
 
 
-                if(window.Registration){
+            nav.style.display =
+
+            "none";
 
 
-                    Registration.init();
+
+        }
 
 
-                }
+
+    }
 
 
-            break;
+
+
+
+
+
+
+
+    function showNavigation(){
+
+
+
+        const nav =
+
+        document.getElementById(
+
+            "app-navigation"
+
+        );
+
+
+
+
+
+        if(nav){
+
+
+
+            nav.style.display =
+
+            "flex";
+
+
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    function startJourney(){
+
+
+
+        CONFIG.currentPage = 2;
+
+
+
+        showNavigation();
+
+
+
+        loadPage(
+
+            "registration"
+
+        );
+
+
+
+
+
+        if(window.Navigation){
+
+
+
+            Navigation.setPage(
+
+                2
+
+            );
 
 
 
@@ -628,11 +628,10 @@ const App = (() => {
         init,
 
 
-        navigateTo,
+        loadPage,
 
 
-        getCurrentPage:()=>currentPage
-
+        startJourney
 
 
     };
@@ -656,10 +655,19 @@ document.addEventListener(
     ()=>{
 
 
-        App.init();
-
+        CTMApp.init();
 
 
     }
 
 );
+
+
+
+
+
+
+
+
+
+window.CTMApp = CTMApp;
