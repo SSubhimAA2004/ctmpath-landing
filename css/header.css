@@ -3,7 +3,7 @@
    CTM PATH™ Guided Journey™
 
    File        : header.css
-   Version     : 4.1
+   Version     : 5.0
 
    Purpose:
 
@@ -11,13 +11,12 @@
 
    Controls:
 
-   • CTM cosmic mark presence
-   • Brand identity
+   • Cosmic logo placement
+   • Brand hierarchy
    • Journey indicator
    • Header spacing
 
    ========================================================================== */
-
 
 
 
@@ -36,29 +35,27 @@
     100%;
 
 
+
     background:
 
-    rgba(
-        8,
-        28,
-        58,
-        0.96
-    );
+    #081C3A;
+
 
 
     border-bottom:
 
-    1px solid var(--ctm-border);
+    1px solid rgba(
+        255,
+        255,
+        255,
+        0.08
+    );
+
 
 
     position:
 
     relative;
-
-
-    z-index:
-
-    100;
 
 
 
@@ -70,7 +67,7 @@
 
 
 
-.ctm-header-container {
+.header-container {
 
 
     max-width:
@@ -78,14 +75,17 @@
     1440px;
 
 
+
     margin:
 
     0 auto;
 
 
+
     padding:
 
-    18px 60px;
+    26px 60px;
+
 
 
     display:
@@ -93,9 +93,11 @@
     flex;
 
 
+
     align-items:
 
     center;
+
 
 
     justify-content:
@@ -112,17 +114,19 @@
 
 
 
+
 /* ==========================================================================
-   BRAND IDENTITY
+   BRAND AREA
    ========================================================================== */
 
 
-.ctm-brand {
+.header-brand {
 
 
     display:
 
     flex;
+
 
 
     align-items:
@@ -130,9 +134,10 @@
     center;
 
 
+
     gap:
 
-    20px;
+    22px;
 
 
 
@@ -142,20 +147,27 @@
 
 
 
-/* Frozen CTM Cosmic Mark */
 
 
-.ctm-header-logo {
+
+/* ==========================================================================
+   COSMIC MARK
+   ========================================================================== */
+
+
+.header-logo img {
 
 
     width:
 
-    72px;
+    74px;
+
 
 
     height:
 
-    72px;
+    74px;
+
 
 
     object-fit:
@@ -163,11 +175,6 @@
     contain;
 
 
-    flex-shrink:
-
-    0;
-
-
 
 }
 
@@ -177,7 +184,13 @@
 
 
 
-.ctm-brand-text {
+
+/* ==========================================================================
+   BRAND TEXT HIERARCHY
+   ========================================================================== */
+
+
+.header-brand-text {
 
 
     display:
@@ -185,14 +198,10 @@
     flex;
 
 
+
     flex-direction:
 
     column;
-
-
-    justify-content:
-
-    center;
 
 
 
@@ -204,22 +213,19 @@
 
 
 
-.ctm-brand-name {
+.brand-primary {
 
 
     color:
 
-    var(--ctm-text-primary);
+    #F8F4EA;
 
-
-    font-family:
-
-    var(--font-primary);
 
 
     font-size:
 
-    22px;
+    28px;
+
 
 
     font-weight:
@@ -227,9 +233,16 @@
     800;
 
 
+
     letter-spacing:
 
-    0.12em;
+    0.18em;
+
+
+
+    line-height:
+
+    1.1;
 
 
 
@@ -241,17 +254,29 @@
 
 
 
-.ctm-brand-subtitle {
+
+/* MAIN POSITIONING LINE */
+
+
+.brand-tagline {
+
+
+    margin-top:
+
+    8px;
+
 
 
     color:
 
-    var(--ctm-teal-soft);
+    #D9B56A;
+
 
 
     font-size:
 
-    12px;
+    13px;
+
 
 
     font-weight:
@@ -259,9 +284,11 @@
     700;
 
 
+
     letter-spacing:
 
-    0.35em;
+    0.22em;
+
 
 
     text-transform:
@@ -278,7 +305,11 @@
 
 
 
-.ctm-brand-tagline {
+
+/* EXPERIENCE NAME */
+
+
+.brand-secondary {
 
 
     margin-top:
@@ -286,19 +317,75 @@
     6px;
 
 
+
     color:
 
-    var(--ctm-gold-soft);
+    #57D6D6;
 
-
-    font-family:
-
-    var(--font-serif);
 
 
     font-size:
 
-    12px;
+    13px;
+
+
+
+    font-weight:
+
+    700;
+
+
+
+    letter-spacing:
+
+    0.32em;
+
+
+
+    text-transform:
+
+    uppercase;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* EMOTIONAL PROMISE */
+
+
+.brand-promise {
+
+
+    margin-top:
+
+    8px;
+
+
+
+    color:
+
+    #FFF3A6;
+
+
+
+    font-family:
+
+    Georgia,
+    serif;
+
+
+
+    font-size:
+
+    15px;
+
 
 
     font-style:
@@ -315,12 +402,13 @@
 
 
 
+
 /* ==========================================================================
    JOURNEY INDICATOR
    ========================================================================== */
 
 
-.ctm-journey-status {
+.header-progress {
 
 
     display:
@@ -328,12 +416,127 @@
     flex;
 
 
+
     align-items:
 
     center;
 
 
+
     gap:
+
+    18px;
+
+
+
+}
+
+
+
+
+
+
+
+.progress-label {
+
+
+    color:
+
+    rgba(
+        248,
+        244,
+        234,
+        0.85
+    );
+
+
+
+    font-size:
+
+    12px;
+
+
+
+    letter-spacing:
+
+    0.35em;
+
+
+
+}
+
+
+
+
+
+
+
+.progress-count {
+
+
+    padding:
+
+    12px 22px;
+
+
+
+    border-radius:
+
+    999px;
+
+
+
+    border:
+
+    1px solid rgba(
+        217,
+        181,
+        106,
+        0.45
+    );
+
+
+
+    color:
+
+    #D9B56A;
+
+
+
+    font-weight:
+
+    700;
+
+
+
+    font-size:
+
+    14px;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   MOBILE HEADER
+   ========================================================================== */
+
+
+@media(max-width:767px){
+
+
+
+.header-container {
+
+
+    padding:
 
     20px;
 
@@ -343,267 +546,7 @@
 
 
 
-
-
-.ctm-journey-label {
-
-
-    color:
-
-    var(--ctm-text-secondary);
-
-
-    font-size:
-
-    12px;
-
-
-    letter-spacing:
-
-    0.30em;
-
-
-    text-transform:
-
-    uppercase;
-
-
-
-}
-
-
-
-
-
-
-
-.ctm-journey-step {
-
-
-    min-width:
-
-    90px;
-
-
-    padding:
-
-    10px 20px;
-
-
-    border-radius:
-
-    var(--radius-pill);
-
-
-    border:
-
-    1px solid var(--ctm-border-gold);
-
-
-    background:
-
-    rgba(
-        255,
-        255,
-        255,
-        0.05
-    );
-
-
-    color:
-
-    var(--ctm-gold-light);
-
-
-    font-size:
-
-    16px;
-
-
-    font-weight:
-
-    800;
-
-
-    text-align:
-
-    center;
-
-
-
-}
-
-
-
-
-
-
-
-.ctm-step-divider {
-
-
-    opacity:
-
-    0.5;
-
-
-    margin:
-
-    0 6px;
-
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   GOLD SIGNATURE LINE
-   ========================================================================== */
-
-
-.ctm-header::after {
-
-
-    content:
-
-    "";
-
-
-    position:
-
-    absolute;
-
-
-    bottom:
-
-    0;
-
-
-    left:
-
-    50%;
-
-
-    transform:
-
-    translateX(-50%);
-
-
-    width:
-
-    220px;
-
-
-    height:
-
-    2px;
-
-
-    background:
-
-    linear-gradient(
-
-        90deg,
-
-        transparent,
-
-        var(--ctm-gold),
-
-        transparent
-
-    );
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   TABLET
-   ========================================================================== */
-
-
-@media(max-width:1024px){
-
-
-.ctm-header-container {
-
-
-    padding:
-
-    16px 32px;
-
-
-}
-
-
-
-.ctm-header-logo {
-
-
-    width:
-
-    60px;
-
-
-    height:
-
-    60px;
-
-
-}
-
-
-
-.ctm-brand-tagline {
-
-
-    display:
-
-    none;
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   MOBILE
-   ========================================================================== */
-
-
-@media(max-width:767px){
-
-
-.ctm-header-container {
-
-
-    padding:
-
-    12px 18px;
-
-
-}
-
-
-
-.ctm-header-logo {
+.header-logo img {
 
 
     width:
@@ -611,52 +554,58 @@
     52px;
 
 
+
     height:
 
     52px;
 
 
+
 }
 
 
 
-.ctm-brand {
+.brand-primary {
 
 
-    gap:
+    font-size:
+
+    20px;
+
+
+
+}
+
+
+
+.brand-tagline,
+.brand-secondary {
+
+
+    font-size:
+
+    10px;
+
+
+
+}
+
+
+
+.brand-promise {
+
+
+    font-size:
 
     12px;
 
 
-}
-
-
-
-.ctm-brand-name {
-
-
-    font-size:
-
-    16px;
-
 
 }
 
 
 
-.ctm-brand-subtitle {
-
-
-    font-size:
-
-    9px;
-
-
-}
-
-
-
-.ctm-journey-label {
+.header-progress {
 
 
     display:
@@ -664,33 +613,13 @@
     none;
 
 
-}
-
-
-
-.ctm-journey-step {
-
-
-    min-width:
-
-    70px;
-
-
-    padding:
-
-    8px 12px;
-
-
-    font-size:
-
-    13px;
-
 
 }
 
 
 
 }
+
 
 
 
@@ -705,7 +634,7 @@
    css/header.css
 
    Version:
-   CTM PATH™ Premium Header Presence v4.1
+   CTM PATH™ Premium Brand Hierarchy v5.0
 
    Status:
    UPDATED 🔒
