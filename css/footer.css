@@ -173,6 +173,7 @@
    TOP JOURNEY LINE
 ========================================================================== */
 
+
 .footer-topline{
 
     position:
@@ -209,7 +210,7 @@
 
     color:
 
-        var(--text-support);
+        var(--ctm-gold-soft);
 
     font-size:
 
@@ -217,15 +218,19 @@
 
     font-weight:
 
-        600;
+        700;
 
     letter-spacing:
 
-        .18em;
+        .20em;
 
     text-transform:
 
         uppercase;
+
+    text-shadow:
+
+        0 0 18px rgba(201,162,39,.18);
 
     border-bottom:
 
