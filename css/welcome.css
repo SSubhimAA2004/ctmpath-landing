@@ -3,25 +3,25 @@
    CTM PATH™ Guided Journey™
 
    File        : css/welcome.css
-   Version     : 4.0
-   Status      : Premium Welcome Experience
+   Version     : 5.0
+   Status      : Luxury Executive Welcome Experience
    Architecture: Static HTML + CSS + Vanilla JavaScript
+
    --------------------------------------------------------------------------
 
    PURPOSE
 
-   Premium styling for the Welcome Page only.
+   Premium styling for the Welcome Page.
 
-   Covers:
+   Preserves the existing HTML structure while elevating:
 
-   • Hero
-   • Discovery Section
-   • Journey Cards
-   • Why This Journey
-   • CTA
+   • Hero Composition
+   • Journey Introduction
+   • Reflection Experience
+   • CTA Experience
    • Scroll Rhythm
-   • Responsive Hero
    • Premium Lighting
+   • Visual Hierarchy
 
 ========================================================================== */
 
@@ -43,24 +43,78 @@
 
         hidden;
 
+    isolation:
+
+        isolate;
+
     background:
 
         radial-gradient(
-            circle at top center,
-            rgba(35,212,200,.06),
-            transparent 38%
+
+            ellipse at top center,
+
+            rgba(35,212,200,.07),
+
+            transparent 34%
+
         ),
 
         radial-gradient(
-            circle at bottom right,
-            rgba(201,162,39,.05),
-            transparent 36%
+
+            ellipse at bottom right,
+
+            rgba(201,162,39,.035),
+
+            transparent 42%
+
         ),
 
         linear-gradient(
+
             180deg,
-            #081018 0%,
-            #0C1623 100%
+
+            #081C3A 0%,
+
+            #0A2346 40%,
+
+            #0A2346 100%
+
+        );
+
+}
+
+
+
+
+
+.welcome-page::before{
+
+    content:
+
+        "";
+
+    position:
+
+        absolute;
+
+    inset:
+
+        0;
+
+    pointer-events:
+
+        none;
+
+    background:
+
+        radial-gradient(
+
+            circle at 50% 0%,
+
+            rgba(255,255,255,.025),
+
+            transparent 45%
+
         );
 
 }
@@ -79,10 +133,6 @@
 
         relative;
 
-    min-height:
-
-        100vh;
-
     display:
 
         flex;
@@ -99,9 +149,17 @@
 
         center;
 
+    min-height:
+
+        calc(100vh - 120px);
+
     padding:
 
-        clamp(6rem,10vw,8rem) 2rem;
+        clamp(5rem,8vw,7rem)
+
+        2rem
+
+        clamp(4rem,6vw,5rem);
 
 }
 
@@ -123,21 +181,21 @@
 
         0;
 
+    pointer-events:
+
+        none;
+
     background:
 
         radial-gradient(
 
-            circle,
+            circle at center,
 
             rgba(35,212,200,.10),
 
-            transparent 62%
+            transparent 58%
 
         );
-
-    pointer-events:
-
-        none;
 
 }
 
@@ -145,23 +203,143 @@
 
 
 
-.welcome-container{
+.welcome-container,
+
+.hero-content{
 
     position:
 
         relative;
 
+    z-index:
+
+        2;
+
     width:
 
-        min(1180px,100%);
+        min(1080px,100%);
 
     margin:
 
         0 auto;
 
+}
+
+/* ==========================================================================
+   HERO VISUAL
+========================================================================== */
+
+.hero-visual{
+
+    position:
+
+        absolute;
+
+    left:
+
+        50%;
+
+    top:
+
+        48%;
+
+    width:
+
+        min(760px,72vw);
+
+    aspect-ratio:
+
+        1;
+
+    transform:
+
+        translate(-50%,-50%);
+
+    pointer-events:
+
+        none;
+
+    opacity:
+
+        .42;
+
     z-index:
 
-        2;
+        1;
+
+}
+
+
+
+
+
+.hero-visual::before{
+
+    content:
+
+        "";
+
+    position:
+
+        absolute;
+
+    inset:
+
+        0;
+
+    border-radius:
+
+        50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(35,212,200,.14),
+
+            rgba(35,212,200,.05) 32%,
+
+            transparent 72%
+
+        );
+
+    filter:
+
+        blur(42px);
+
+}
+
+
+
+
+
+.hero-visual::after{
+
+    content:
+
+        "";
+
+    position:
+
+        absolute;
+
+    inset:
+
+        18%;
+
+    border-radius:
+
+        50%;
+
+    border:
+
+        1px solid rgba(35,212,200,.12);
+
+    box-shadow:
+
+        0 0 90px rgba(35,212,200,.08);
 
 }
 
@@ -170,10 +348,10 @@
 
 
 /* ==========================================================================
-   HERO LABEL
+   HERO EYEBROW
 ========================================================================== */
 
-.hero-label{
+.hero-eyebrow{
 
     display:
 
@@ -183,17 +361,17 @@
 
         center;
 
-    gap:
+    justify-content:
 
-        .75rem;
+        center;
 
     padding:
 
-        .7rem 1.5rem;
+        .85rem 1.8rem;
 
-    border:
+    margin-bottom:
 
-        1px solid rgba(35,212,200,.22);
+        2rem;
 
     border-radius:
 
@@ -202,6 +380,14 @@
     background:
 
         rgba(255,255,255,.03);
+
+    border:
+
+        1px solid rgba(35,212,200,.18);
+
+    backdrop-filter:
+
+        blur(14px);
 
     color:
 
@@ -213,31 +399,31 @@
 
     font-weight:
 
-        600;
+        700;
 
     letter-spacing:
 
-        .18em;
+        .22em;
 
     text-transform:
 
         uppercase;
 
-    backdrop-filter:
-
-        blur(14px);
-
 }
 
+
+
+
+
 /* ==========================================================================
-   HERO HEADINGS
+   HERO TITLE
 ========================================================================== */
 
 .hero-title{
 
     margin:
 
-        2rem auto 1.5rem;
+        0 auto;
 
     max-width:
 
@@ -245,11 +431,11 @@
 
     color:
 
-        var(--text-heading);
+        var(--ctm-ivory);
 
     font-size:
 
-        clamp(2.9rem,6vw,5.8rem);
+        clamp(3.8rem,7vw,6.6rem);
 
     font-weight:
 
@@ -257,95 +443,59 @@
 
     line-height:
 
-        1.08;
+        1.02;
 
     letter-spacing:
 
         -.04em;
 
-}
+    text-wrap:
 
+        balance;
 
+    text-shadow:
 
-
-
-.hero-title-tamil{
-
-    display:
-
-        block;
-
-    margin-bottom:
-
-        1rem;
-
-    color:
-
-        var(--ctm-ivory);
-
-    font-weight:
-
-        700;
+        0 8px 36px rgba(0,0,0,.32);
 
 }
 
-
-
-
+/* ==========================================================================
+   HERO ENGLISH TITLE
+========================================================================== */
 
 .hero-title-english{
 
-    display:
+    margin:
 
-        block;
+        2rem auto 0;
+
+    max-width:
+
+        760px;
 
     color:
 
         var(--ctm-gold-soft);
 
-    font-weight:
-
-        800;
-
-}
-
-
-
-
-
-.hero-subtitle{
-
-    max-width:
-
-        860px;
-
-    margin:
-
-        0 auto;
-
-    color:
-
-        var(--text-secondary);
-
     font-size:
 
-        clamp(1.1rem,1.8vw,1.35rem);
+        clamp(1.85rem,2.8vw,3rem);
+
+    font-weight:
+
+        700;
 
     line-height:
 
-        1.9;
+        1.18;
 
-}
+    letter-spacing:
 
+        -.02em;
 
+    text-wrap:
 
-
-
-.hero-subtitle strong{
-
-    color:
-
-        var(--text-primary);
+        balance;
 
 }
 
@@ -354,34 +504,162 @@
 
 
 /* ==========================================================================
-   HERO DIVIDER
+   HERO DESCRIPTION
 ========================================================================== */
 
-.hero-divider{
+.hero-description{
 
     width:
 
-        120px;
-
-    height:
-
-        2px;
+        min(860px,100%);
 
     margin:
 
-        2.5rem auto;
+        2.75rem auto 0;
+
+}
+
+
+
+
+
+.hero-description .tamil{
+
+    margin:
+
+        0 auto 2rem;
+
+    max-width:
+
+        820px;
+
+    color:
+
+        var(--text-primary);
+
+    font-size:
+
+        clamp(1.15rem,1.35vw,1.30rem);
+
+    line-height:
+
+        2.0;
+
+    font-weight:
+
+        400;
+
+}
+
+
+
+
+
+.hero-description .english{
+
+    margin:
+
+        0 auto;
+
+    max-width:
+
+        760px;
+
+    color:
+
+        var(--text-secondary);
+
+    font-size:
+
+        clamp(1rem,1.15vw,1.15rem);
+
+    line-height:
+
+        1.95;
+
+    font-weight:
+
+        400;
+
+}
+
+
+
+
+
+.hero-description p{
+
+    text-wrap:
+
+        pretty;
+
+}
+
+
+
+
+
+/* ==========================================================================
+   HERO SPACING
+========================================================================== */
+
+.hero-content>*+*{
+
+    margin-top:
+
+        0;
+
+}
+
+/* ==========================================================================
+   JOURNEY INTRODUCTION
+========================================================================== */
+
+.journey-introduction{
+
+    position:
+
+        relative;
+
+    padding:
+
+        clamp(7rem,9vw,9rem)
+
+        0;
+
+}
+
+
+
+
+
+.journey-introduction::before{
+
+    content:
+
+        "";
+
+    position:
+
+        absolute;
+
+    inset:
+
+        0;
+
+    pointer-events:
+
+        none;
 
     background:
 
-        linear-gradient(
+        radial-gradient(
 
-            90deg,
+            ellipse at center,
 
-            transparent,
+            rgba(35,212,200,.045),
 
-            var(--ctm-gold),
-
-            transparent
+            transparent 62%
 
         );
 
@@ -391,107 +669,23 @@
 
 
 
-/* ==========================================================================
-   HERO CTA
-========================================================================== */
-
-.hero-actions{
-
-    display:
-
-        flex;
-
-    justify-content:
-
-        center;
-
-    align-items:
-
-        center;
-
-    gap:
-
-        1.25rem;
-
-    flex-wrap:
-
-        wrap;
-
-    margin-top:
-
-        3rem;
-
-}
-
-
-
-
-
-.hero-helper{
-
-    margin-top:
-
-        1.5rem;
-
-    color:
-
-        var(--text-support);
-
-    font-size:
-
-        .96rem;
-
-    letter-spacing:
-
-        .04em;
-
-}
-
-/* ==========================================================================
-   DISCOVERY SECTION
-========================================================================== */
-
-.discovery-section{
+.section-heading{
 
     position:
 
         relative;
 
-    padding:
+    z-index:
 
-        clamp(6rem,9vw,8rem) 0;
-
-}
-
-
-
-
-
-.discovery-container{
+        2;
 
     width:
 
-        min(1180px,100% - 48px);
+        min(900px,100% - 48px);
 
     margin:
 
-        0 auto;
-
-}
-
-
-
-
-
-.discovery-header{
-
-    max-width:
-
-        820px;
-
-    margin:
-
-        0 auto 4rem;
+        0 auto 4.5rem;
 
     text-align:
 
@@ -503,11 +697,7 @@
 
 
 
-.discovery-title{
-
-    margin-bottom:
-
-        1.25rem;
+.section-heading h2{
 
     color:
 
@@ -515,7 +705,19 @@
 
     font-size:
 
-        clamp(2rem,3vw,3.4rem);
+        clamp(2.3rem,4vw,4rem);
+
+    font-weight:
+
+        700;
+
+    line-height:
+
+        1.15;
+
+    margin-bottom:
+
+        1rem;
 
 }
 
@@ -523,19 +725,27 @@
 
 
 
-.discovery-description{
+.section-heading p{
 
     color:
 
-        var(--text-secondary);
+        var(--ctm-gold-soft);
 
     font-size:
 
-        clamp(1.05rem,1.5vw,1.2rem);
+        1.05rem;
 
-    line-height:
+    font-weight:
 
-        1.9;
+        600;
+
+    letter-spacing:
+
+        .20em;
+
+    text-transform:
+
+        uppercase;
 
 }
 
@@ -544,10 +754,26 @@
 
 
 /* ==========================================================================
-   DISCOVERY CARDS
+   JOURNEY CARDS
 ========================================================================== */
 
-.discovery-grid{
+.journey-cards{
+
+    position:
+
+        relative;
+
+    z-index:
+
+        2;
+
+    width:
+
+        min(1380px,100% - 64px);
+
+    margin:
+
+        0 auto;
 
     display:
 
@@ -555,7 +781,7 @@
 
     grid-template-columns:
 
-        repeat(auto-fit,minmax(280px,1fr));
+        repeat(4,1fr);
 
     gap:
 
@@ -563,19 +789,43 @@
 
 }
 
+/* ==========================================================================
+   JOURNEY CARD
+========================================================================== */
 
-
-
-
-.discovery-card{
+.journey-card{
 
     position:
 
         relative;
 
+    display:
+
+        flex;
+
+    flex-direction:
+
+        column;
+
+    align-items:
+
+        flex-start;
+
+    min-height:
+
+        420px;
+
     padding:
 
-        2.4rem;
+        2.75rem;
+
+    overflow:
+
+        hidden;
+
+    border-radius:
+
+        32px;
 
     background:
 
@@ -585,7 +835,7 @@
 
             rgba(255,255,255,.055),
 
-            rgba(255,255,255,.02)
+            rgba(255,255,255,.018)
 
         );
 
@@ -593,21 +843,25 @@
 
         1px solid rgba(255,255,255,.08);
 
-    border-radius:
+    backdrop-filter:
 
-        28px;
+        blur(18px);
+
+    -webkit-backdrop-filter:
+
+        blur(18px);
+
+    box-shadow:
+
+        0 24px 70px rgba(0,0,0,.26);
 
     transition:
 
         transform .45s ease,
 
-        box-shadow .45s ease,
+        border-color .45s ease,
 
-        border-color .45s ease;
-
-    overflow:
-
-        hidden;
+        box-shadow .45s ease;
 
 }
 
@@ -615,7 +869,7 @@
 
 
 
-.discovery-card::before{
+.journey-card::before{
 
     content:
 
@@ -635,9 +889,9 @@
 
             circle at top,
 
-            rgba(35,212,200,.10),
+            rgba(35,212,200,.12),
 
-            transparent 65%
+            transparent 62%
 
         );
 
@@ -649,29 +903,25 @@
 
         opacity .45s ease;
 
-    pointer-events:
-
-        none;
-
 }
 
 
 
 
 
-.discovery-card:hover{
+.journey-card:hover{
 
     transform:
 
-        translateY(-10px);
+        translateY(-12px);
 
     border-color:
 
-        rgba(35,212,200,.24);
+        rgba(35,212,200,.20);
 
     box-shadow:
 
-        0 30px 70px rgba(0,0,0,.32);
+        0 36px 90px rgba(0,0,0,.34);
 
 }
 
@@ -679,7 +929,7 @@
 
 
 
-.discovery-card:hover::before{
+.journey-card:hover::before{
 
     opacity:
 
@@ -687,11 +937,39 @@
 
 }
 
-/* ==========================================================================
-   DISCOVERY CARD CONTENT
-========================================================================== */
 
-.discovery-icon{
+
+
+
+.card-number{
+
+    color:
+
+        rgba(255,255,255,.18);
+
+    font-size:
+
+        3.6rem;
+
+    font-weight:
+
+        800;
+
+    line-height:
+
+        1;
+
+    margin-bottom:
+
+        1rem;
+
+}
+
+
+
+
+
+.card-icon{
 
     display:
 
@@ -715,7 +993,7 @@
 
     margin-bottom:
 
-        1.75rem;
+        2rem;
 
     border-radius:
 
@@ -727,7 +1005,7 @@
 
             135deg,
 
-            rgba(35,212,200,.18),
+            rgba(35,212,200,.16),
 
             rgba(35,212,200,.05)
 
@@ -739,11 +1017,11 @@
 
     color:
 
-        var(--ctm-teal);
+        var(--ctm-teal-soft);
 
     font-size:
 
-        1.8rem;
+        2rem;
 
 }
 
@@ -751,11 +1029,7 @@
 
 
 
-.discovery-card-title{
-
-    margin-bottom:
-
-        1rem;
+.journey-card h3{
 
     color:
 
@@ -769,13 +1043,53 @@
 
         700;
 
+    line-height:
+
+        1.35;
+
+    margin-bottom:
+
+        .60rem;
+
 }
 
 
 
 
 
-.discovery-card-text{
+.journey-card h4{
+
+    color:
+
+        var(--ctm-gold-soft);
+
+    font-size:
+
+        .95rem;
+
+    font-weight:
+
+        600;
+
+    letter-spacing:
+
+        .12em;
+
+    text-transform:
+
+        uppercase;
+
+    margin-bottom:
+
+        1.35rem;
+
+}
+
+
+
+
+
+.journey-card p{
 
     color:
 
@@ -789,17 +1103,17 @@
 
         1.9;
 
+    margin-top:
+
+        auto;
+
 }
-
-
-
-
 
 /* ==========================================================================
-   WHY THIS JOURNEY
+   REFLECTION
 ========================================================================== */
 
-.why-section{
+.reflection-section{
 
     position:
 
@@ -807,7 +1121,9 @@
 
     padding:
 
-        clamp(6rem,8vw,8rem) 0;
+        clamp(7rem,9vw,9rem)
+
+        0;
 
 }
 
@@ -815,67 +1131,7 @@
 
 
 
-.why-container{
-
-    width:
-
-        min(1180px,100% - 48px);
-
-    margin:
-
-        0 auto;
-
-}
-
-
-
-
-
-.why-panel{
-
-    position:
-
-        relative;
-
-    padding:
-
-        clamp(3rem,5vw,4.5rem);
-
-    border-radius:
-
-        36px;
-
-    background:
-
-        linear-gradient(
-
-            180deg,
-
-            rgba(255,255,255,.055),
-
-            rgba(255,255,255,.02)
-
-        );
-
-    border:
-
-        1px solid rgba(255,255,255,.08);
-
-    box-shadow:
-
-        0 28px 72px rgba(0,0,0,.28);
-
-    overflow:
-
-        hidden;
-
-}
-
-
-
-
-
-.why-panel::before{
+.reflection-section::before{
 
     content:
 
@@ -889,33 +1145,129 @@
 
         0;
 
+    pointer-events:
+
+        none;
+
+    background:
+
+        radial-gradient(
+
+            ellipse at center,
+
+            rgba(201,162,39,.035),
+
+            transparent 64%
+
+        );
+
+}
+
+
+
+
+
+.reflection-card{
+
+    position:
+
+        relative;
+
+    width:
+
+        min(1120px,100% - 64px);
+
+    margin:
+
+        0 auto;
+
+    padding:
+
+        clamp(3.5rem,5vw,5rem);
+
+    overflow:
+
+        hidden;
+
+    text-align:
+
+        center;
+
+    border-radius:
+
+        40px;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            rgba(255,255,255,.055),
+
+            rgba(255,255,255,.020)
+
+        );
+
+    border:
+
+        1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:
+
+        blur(20px);
+
+    -webkit-backdrop-filter:
+
+        blur(20px);
+
+    box-shadow:
+
+        0 30px 80px rgba(0,0,0,.30);
+
+}
+
+
+
+
+
+.reflection-card::before{
+
+    content:
+
+        "";
+
+    position:
+
+        absolute;
+
+    inset:
+
+        0;
+
+    pointer-events:
+
+        none;
+
     background:
 
         radial-gradient(
 
             circle at top right,
 
-            rgba(201,162,39,.08),
+            rgba(35,212,200,.08),
 
-            transparent 55%
+            transparent 58%
 
         );
 
-    pointer-events:
-
-        none;
-
 }
 
-/* ==========================================================================
-   WHY PANEL CONTENT
-========================================================================== */
 
-.why-title{
 
-    margin-bottom:
 
-        1.25rem;
+
+.reflection-card h2{
 
     color:
 
@@ -923,7 +1275,19 @@
 
     font-size:
 
-        clamp(2rem,3vw,3.2rem);
+        clamp(2.4rem,4vw,4rem);
+
+    font-weight:
+
+        700;
+
+    line-height:
+
+        1.15;
+
+    margin-bottom:
+
+        .75rem;
 
 }
 
@@ -931,11 +1295,71 @@
 
 
 
-.why-description{
+.reflection-card h3{
 
-    max-width:
+    color:
 
-        820px;
+        var(--ctm-gold-soft);
+
+    font-size:
+
+        1rem;
+
+    font-weight:
+
+        600;
+
+    letter-spacing:
+
+        .20em;
+
+    text-transform:
+
+        uppercase;
+
+    margin-bottom:
+
+        2.5rem;
+
+}
+
+
+
+
+
+.reflection-card .tamil{
+
+    width:
+
+        min(760px,100%);
+
+    margin:
+
+        0 auto 2rem;
+
+    color:
+
+        var(--text-primary);
+
+    font-size:
+
+        clamp(1.12rem,1.35vw,1.28rem);
+
+    line-height:
+
+        2;
+
+}
+
+
+
+
+
+.reflection-card .english{
+
+    width:
+
+        min(700px,100%);
 
     margin:
 
@@ -947,11 +1371,35 @@
 
     font-size:
 
-        clamp(1.05rem,1.5vw,1.2rem);
+        clamp(1rem,1.15vw,1.15rem);
 
     line-height:
 
-        1.95;
+        1.9;
+
+}
+
+/* ==========================================================================
+   CTA
+========================================================================== */
+
+.welcome-action{
+
+    position:
+
+        relative;
+
+    padding:
+
+        clamp(7rem,10vw,9rem)
+
+        2rem
+
+        clamp(8rem,10vw,10rem);
+
+    text-align:
+
+        center;
 
 }
 
@@ -959,63 +1407,111 @@
 
 
 
-.why-features{
+.welcome-action::before{
 
-    display:
+    content:
 
-        grid;
+        "";
 
-    grid-template-columns:
+    position:
 
-        repeat(auto-fit,minmax(260px,1fr));
+        absolute;
 
-    gap:
-
-        1.75rem;
-
-    margin-top:
-
-        3rem;
-
-}
-
-
-
-
-
-.why-feature{
-
-    display:
-
-        flex;
-
-    align-items:
-
-        flex-start;
-
-    gap:
-
-        1rem;
-
-}
-
-
-
-
-
-.why-feature-icon{
-
-    flex-shrink:
+    inset:
 
         0;
 
-    width:
+    pointer-events:
 
-        52px;
+        none;
 
-    height:
+    background:
 
-        52px;
+        radial-gradient(
+
+            ellipse at center,
+
+            rgba(35,212,200,.06),
+
+            transparent 62%
+
+        );
+
+}
+
+
+
+
+
+.welcome-action h2{
+
+    max-width:
+
+        920px;
+
+    margin:
+
+        0 auto 1.5rem;
+
+    color:
+
+        var(--text-heading);
+
+    font-size:
+
+        clamp(2.8rem,5vw,5rem);
+
+    font-weight:
+
+        800;
+
+    line-height:
+
+        1.08;
+
+    letter-spacing:
+
+        -.03em;
+
+    text-wrap:
+
+        balance;
+
+}
+
+
+
+
+
+.cta-subtitle{
+
+    color:
+
+        var(--ctm-gold-soft);
+
+    font-size:
+
+        1.05rem;
+
+    font-weight:
+
+        600;
+
+    letter-spacing:
+
+        .22em;
+
+    text-transform:
+
+        uppercase;
+
+}
+
+
+
+
+
+.cta-meta{
 
     display:
 
@@ -1029,25 +1525,41 @@
 
         center;
 
+    flex-wrap:
+
+        wrap;
+
+    gap:
+
+        .85rem;
+
+    margin:
+
+        2.5rem auto 3.5rem;
+
+    padding:
+
+        1rem 2rem;
+
     border-radius:
 
-        50%;
+        999px;
 
     background:
 
-        rgba(35,212,200,.10);
+        rgba(255,255,255,.03);
 
     border:
 
-        1px solid rgba(35,212,200,.18);
+        1px solid rgba(35,212,200,.12);
 
     color:
 
-        var(--ctm-teal);
+        var(--text-secondary);
 
-    font-size:
+    backdrop-filter:
 
-        1.25rem;
+        blur(14px);
 
 }
 
@@ -1055,15 +1567,105 @@
 
 
 
-.why-feature-title{
-
-    margin-bottom:
-
-        .45rem;
+.cta-meta span{
 
     color:
 
-        var(--text-primary);
+        rgba(255,255,255,.28);
+
+}
+
+
+
+
+
+.primary-button{
+
+    min-width:
+
+        380px;
+
+    min-height:
+
+        76px;
+
+    padding:
+
+        1.3rem 2.8rem;
+
+    border:
+
+        none;
+
+    border-radius:
+
+        999px;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            var(--ctm-teal),
+
+            #20D4C8
+
+        );
+
+    color:
+
+        #07161B;
+
+    font-size:
+
+        1rem;
+
+    font-weight:
+
+        700;
+
+    cursor:
+
+        pointer;
+
+    transition:
+
+        transform .35s ease,
+
+        box-shadow .35s ease;
+
+    box-shadow:
+
+        0 18px 50px rgba(35,212,200,.28);
+
+}
+
+
+
+
+
+.primary-button:hover{
+
+    transform:
+
+        translateY(-4px);
+
+    box-shadow:
+
+        0 28px 70px rgba(35,212,200,.36);
+
+}
+
+/* ==========================================================================
+   CTA CONTENT
+========================================================================== */
+
+.primary-button .button-tamil{
+
+    display:
+
+        block;
 
     font-size:
 
@@ -1071,7 +1673,11 @@
 
     font-weight:
 
-        600;
+        700;
+
+    line-height:
+
+        1.35;
 
 }
 
@@ -1079,11 +1685,91 @@
 
 
 
-.why-feature-text{
+.primary-button .button-english{
+
+    display:
+
+        block;
+
+    margin-top:
+
+        .35rem;
+
+    font-size:
+
+        .88rem;
+
+    font-weight:
+
+        600;
+
+    letter-spacing:
+
+        .08em;
+
+    opacity:
+
+        .82;
+
+    text-transform:
+
+        uppercase;
+
+}
+
+
+
+
+
+.trust-message{
+
+    width:
+
+        min(760px,100%);
+
+    margin:
+
+        3rem auto 0;
+
+}
+
+
+
+
+
+.trust-message .tamil{
+
+    color:
+
+        var(--text-primary);
+
+    font-size:
+
+        1.05rem;
+
+    line-height:
+
+        1.9;
+
+    margin-bottom:
+
+        1rem;
+
+}
+
+
+
+
+
+.trust-message .english{
 
     color:
 
         var(--text-secondary);
+
+    font-size:
+
+        .98rem;
 
     line-height:
 
@@ -1095,99 +1781,7 @@
 
 
 
-/* ==========================================================================
-   CTA SECTION
-========================================================================== */
-
-.cta-section{
-
-    position:
-
-        relative;
-
-    padding:
-
-        clamp(6rem,9vw,8rem) 0;
-
-    text-align:
-
-        center;
-
-}
-
-
-
-
-
-.cta-container{
-
-    width:
-
-        min(900px,100% - 48px);
-
-    margin:
-
-        0 auto;
-
-}
-
-/* ==========================================================================
-   CTA CONTENT
-========================================================================== */
-
-.cta-title{
-
-    margin-bottom:
-
-        1.25rem;
-
-    color:
-
-        var(--text-heading);
-
-    font-size:
-
-        clamp(2.3rem,3.5vw,3.8rem);
-
-    line-height:
-
-        1.15;
-
-}
-
-
-
-
-
-.cta-description{
-
-    max-width:
-
-        760px;
-
-    margin:
-
-        0 auto 2.75rem;
-
-    color:
-
-        var(--text-secondary);
-
-    font-size:
-
-        clamp(1.05rem,1.5vw,1.2rem);
-
-    line-height:
-
-        1.9;
-
-}
-
-
-
-
-
-.cta-actions{
+.welcome-closing{
 
     display:
 
@@ -1207,7 +1801,11 @@
 
     gap:
 
-        1.25rem;
+        2.5rem;
+
+    margin-top:
+
+        4rem;
 
 }
 
@@ -1215,28 +1813,80 @@
 
 
 
-.cta-note{
+.welcome-closing span{
 
-    margin-top:
+    position:
 
-        1.75rem;
+        relative;
 
     color:
 
-        var(--text-support);
+        var(--ctm-gold-soft);
 
     font-size:
 
         .95rem;
 
+    font-weight:
+
+        600;
+
+    letter-spacing:
+
+        .14em;
+
+    text-transform:
+
+        uppercase;
+
 }
 
 
 
 
 
+.welcome-closing span:not(:last-child)::after{
+
+    content:
+
+        "";
+
+    position:
+
+        absolute;
+
+    top:
+
+        50%;
+
+    right:
+
+        -1.3rem;
+
+    width:
+
+        6px;
+
+    height:
+
+        6px;
+
+    border-radius:
+
+        50%;
+
+    background:
+
+        rgba(35,212,200,.45);
+
+    transform:
+
+        translateY(-50%);
+
+}
+
 /* ==========================================================================
-   PREMIUM REVEAL SUPPORT
+   PREMIUM REVEAL ANIMATIONS
 ========================================================================== */
 
 .reveal{
@@ -1247,13 +1897,19 @@
 
     transform:
 
-        translateY(40px);
+        translateY(42px);
 
     transition:
 
-        opacity .8s ease,
+        opacity .9s ease,
 
-        transform .8s ease;
+        transform .9s cubic-bezier(.22,1,.36,1);
+
+    will-change:
+
+        opacity,
+
+        transform;
 
 }
 
@@ -1277,8 +1933,116 @@
 
 
 
+.hero-content>*{
+
+    animation:
+
+        heroFade .9s ease forwards;
+
+}
+
+
+
+
+
+.hero-content>*:nth-child(1){
+
+    animation-delay:
+
+        .10s;
+
+}
+
+
+
+
+
+.hero-content>*:nth-child(2){
+
+    animation-delay:
+
+        .20s;
+
+}
+
+
+
+
+
+.hero-content>*:nth-child(3){
+
+    animation-delay:
+
+        .35s;
+
+}
+
+
+
+
+
+.hero-content>*:nth-child(4){
+
+    animation-delay:
+
+        .50s;
+
+}
+
+
+
+
+
+@keyframes heroFade{
+
+    from{
+
+        opacity:
+
+            0;
+
+        transform:
+
+            translateY(28px);
+
+    }
+
+    to{
+
+        opacity:
+
+            1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+
+
+
+
 /* ==========================================================================
-   RESPONSIVE
+   PREMIUM RESPONSIVE
+========================================================================== */
+
+@media (max-width:1200px){
+
+    .journey-cards{
+
+        grid-template-columns:
+
+            repeat(2,1fr);
+
+    }
+
+}
+
+/* ==========================================================================
+   TABLET
 ========================================================================== */
 
 @media (max-width:992px){
@@ -1291,31 +2055,117 @@
 
         padding:
 
-            7rem 1.5rem 5rem;
+            6rem 1.5rem 5rem;
 
     }
 
-    .hero-actions{
 
-        flex-direction:
 
-            column;
+    .hero-visual{
+
+        width:
+
+            min(620px,90vw);
+
+        opacity:
+
+            .30;
 
     }
 
-    .discovery-grid{
+
+
+    .hero-title{
+
+        font-size:
+
+            clamp(3rem,9vw,4.8rem);
+
+    }
+
+
+
+    .hero-title-english{
+
+        font-size:
+
+            clamp(1.5rem,4vw,2.3rem);
+
+    }
+
+
+
+    .hero-description .tamil{
+
+        font-size:
+
+            1.08rem;
+
+        line-height:
+
+            1.9;
+
+    }
+
+
+
+    .hero-description .english{
+
+        font-size:
+
+            1rem;
+
+    }
+
+
+
+    .journey-cards{
 
         grid-template-columns:
 
             1fr;
 
+        gap:
+
+            1.75rem;
+
     }
 
-    .why-features{
 
-        grid-template-columns:
 
-            1fr;
+    .journey-card{
+
+        min-height:
+
+            auto;
+
+    }
+
+
+
+    .reflection-card{
+
+        padding:
+
+            3rem 2rem;
+
+    }
+
+
+
+    .primary-button{
+
+        min-width:
+
+            320px;
+
+        width:
+
+            100%;
+
+        max-width:
+
+            420px;
 
     }
 
@@ -1325,37 +2175,289 @@
 
 
 
+/* ==========================================================================
+   MOBILE
+========================================================================== */
+
 @media (max-width:640px){
+
+    .welcome-hero{
+
+        padding:
+
+            5rem 1.25rem 4rem;
+
+    }
+
+
+
+    .hero-eyebrow{
+
+        padding:
+
+            .75rem 1.25rem;
+
+        font-size:
+
+            .72rem;
+
+        letter-spacing:
+
+            .14em;
+
+    }
+
+
 
     .hero-title{
 
         font-size:
 
-            clamp(2.2rem,9vw,3.2rem);
+            clamp(2.4rem,10vw,3.5rem);
+
+        line-height:
+
+            1.08;
 
     }
 
-    .hero-subtitle{
+
+
+    .hero-title-english{
+
+        margin-top:
+
+            1.5rem;
 
         font-size:
 
+            1.35rem;
+
+    }
+
+
+
+    .section-heading h2,
+
+    .reflection-card h2,
+
+    .welcome-action h2{
+
+        font-size:
+
+            clamp(2rem,8vw,2.8rem);
+
+    }
+
+
+
+    .cta-meta{
+
+        border-radius:
+
+            24px;
+
+        padding:
+
+            1rem 1.25rem;
+
+    }
+
+
+
+    .welcome-closing{
+
+        gap:
+
             1rem;
 
-    }
+        flex-direction:
 
-    .discovery-card{
-
-        padding:
-
-            2rem;
+            column;
 
     }
 
-    .why-panel{
 
-        padding:
 
-            2rem;
+    .welcome-closing span::after{
+
+        display:
+
+            none;
+
+    }
+
+}
+
+/* ==========================================================================
+   ACCESSIBILITY & POLISH
+========================================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    *{
+
+        animation:
+
+            none !important;
+
+        transition:
+
+            none !important;
+
+        scroll-behavior:
+
+            auto !important;
+
+    }
+
+}
+
+
+
+
+
+.primary-button:focus-visible{
+
+    outline:
+
+        3px solid rgba(35,212,200,.45);
+
+    outline-offset:
+
+        4px;
+
+}
+
+
+
+
+
+.journey-card:focus-within{
+
+    border-color:
+
+        rgba(35,212,200,.22);
+
+    box-shadow:
+
+        0 30px 80px rgba(0,0,0,.34);
+
+}
+
+
+
+
+
+::selection{
+
+    background:
+
+        rgba(35,212,200,.24);
+
+    color:
+
+        var(--text-heading);
+
+}
+
+
+
+
+
+html{
+
+    scroll-behavior:
+
+        smooth;
+
+}
+
+
+
+
+
+/* ==========================================================================
+   LARGE DESKTOP OPTIMIZATION
+========================================================================== */
+
+@media (min-width:1600px){
+
+    .hero-content{
+
+        width:
+
+            min(1200px,100%);
+
+    }
+
+
+
+    .journey-cards{
+
+        width:
+
+            min(1500px,100% - 80px);
+
+    }
+
+
+
+    .reflection-card{
+
+        width:
+
+            min(1200px,100% - 80px);
+
+    }
+
+}
+
+
+
+
+
+/* ==========================================================================
+   PRINT
+========================================================================== */
+
+@media print{
+
+    .hero-visual{
+
+        display:
+
+            none;
+
+    }
+
+
+
+    .welcome-page{
+
+        background:
+
+            #ffffff;
+
+    }
+
+
+
+    .journey-card,
+
+    .reflection-card{
+
+        box-shadow:
+
+            none;
+
+        border:
+
+            1px solid #cccccc;
+
+        background:
+
+            #ffffff;
 
     }
 
