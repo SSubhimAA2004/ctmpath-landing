@@ -4,8 +4,8 @@
  * CTM PATH™ Guided Journey™
  *
  * File        : js/welcome.js
- * Version     : 6.0
- * Status      : Luxury Hero Experience
+ * Version     : 6.1
+ * Status      : Dynamic Component Compatible Welcome Experience
  *
  * ---------------------------------------------------------------------------
  *
@@ -13,32 +13,15 @@
  *
  * • Premium hero entrance animation
  * • Scroll reveal animation
- * • Journey card reveal animation
+ * • Journey card animation
  * • CTA enhancement effects
- * • Guided Journey navigation trigger
+ * • Dynamic CTA navigation
  * • Accessibility support
  * • Reduced-motion support
  *
  ******************************************************************************/
 
 "use strict";
-
-
-
-
-
-/* ============================================================================
-   APPLICATION INITIALIZATION
-============================================================================ */
-
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    initializeWelcomePage
-
-);
 
 
 
@@ -54,6 +37,31 @@ document.addEventListener(
 let prefersReducedMotion = false;
 
 let revealObserver = null;
+
+
+
+
+
+
+
+
+/* ============================================================================
+   APPLICATION INITIALIZATION
+============================================================================ */
+
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    function(){
+
+        initializeWelcomePage();
+
+    }
+
+);
+
 
 
 
@@ -84,10 +92,6 @@ function initializeWelcomePage(){
     initializeCTAEffects();
 
 
-    initializeJourneyNavigation();
-
-
-
 }
 
 
@@ -112,7 +116,6 @@ function initializeReducedMotion(){
             "(prefers-reduced-motion: reduce)"
 
         ).matches;
-
 
 
 }
@@ -144,9 +147,13 @@ function initializeHero(){
 
     if(!hero){
 
+
         return;
 
+
     }
+
+
 
 
 
@@ -169,31 +176,33 @@ function initializeHero(){
 
 
 
-    requestAnimationFrame(function(){
 
 
-        hero.classList.add(
 
-            "is-loaded"
-
-        );
+    requestAnimationFrame(
 
 
-    });
+        function(){
 
+
+            hero.classList.add(
+
+                "is-loaded"
+
+            );
+
+
+        }
+
+
+    );
 
 
 }
 
 
-
-
-
-
-
-
 /* ============================================================================
-   SCROLL REVEAL
+   SCROLL REVEAL ANIMATION
 ============================================================================ */
 
 
@@ -222,20 +231,28 @@ function initializeRevealAnimations(){
 
 
 
+
+
     if(prefersReducedMotion){
 
 
-        elements.forEach(function(element){
+        elements.forEach(
 
 
-            element.classList.add(
-
-                "is-visible"
-
-            );
+            function(element){
 
 
-        });
+                element.classList.add(
+
+                    "is-visible"
+
+                );
+
+
+            }
+
+
+        );
 
 
 
@@ -243,6 +260,7 @@ function initializeRevealAnimations(){
 
 
     }
+
 
 
 
@@ -270,7 +288,7 @@ function initializeRevealAnimations(){
 
                 threshold:
 
-                    .12
+                    0.12
 
 
             }
@@ -284,21 +302,27 @@ function initializeRevealAnimations(){
 
 
 
-    elements.forEach(function(element){
+    elements.forEach(
 
 
-        revealObserver.observe(
-
-            element
-
-        );
+        function(element){
 
 
-    });
+            revealObserver.observe(
 
+                element
+
+            );
+
+
+        }
+
+
+    );
 
 
 }
+
 
 
 
@@ -309,48 +333,56 @@ function initializeRevealAnimations(){
 function handleRevealIntersection(entries){
 
 
-    entries.forEach(function(entry){
+    entries.forEach(
+
+
+        function(entry){
 
 
 
-        if(!entry.isIntersecting){
+            if(!entry.isIntersecting){
 
 
-            return;
+                return;
 
 
-        }
-
-
-
-
-
-        entry.target.classList.add(
-
-            "is-visible"
-
-        );
+            }
 
 
 
 
 
-        if(revealObserver){
 
+            entry.target.classList.add(
 
-            revealObserver.unobserve(
-
-                entry.target
+                "is-visible"
 
             );
 
 
+
+
+
+
+
+            if(revealObserver){
+
+
+                revealObserver.unobserve(
+
+                    entry.target
+
+                );
+
+
+            }
+
+
+
         }
 
 
-
-    });
-
+    );
 
 
 }
@@ -361,8 +393,9 @@ function handleRevealIntersection(entries){
 
 
 
+
 /* ============================================================================
-   JOURNEY CARD ANIMATIONS
+   JOURNEY CARD ANIMATION
 ============================================================================ */
 
 
@@ -392,41 +425,58 @@ function initializeJourneyCardAnimations(){
 
 
 
-    cards.forEach(function(card,index){
+
+    cards.forEach(
+
+
+        function(card,index){
 
 
 
-        if(prefersReducedMotion){
+            if(prefersReducedMotion){
 
 
-            card.classList.add(
+                card.classList.add(
 
-                "is-visible"
+                    "is-visible"
 
-            );
+                );
 
 
-            return;
+                return;
+
+
+            }
+
+
+
+
+
+
+            card.style.transitionDelay =
+
+
+                (
+
+                    index * 120
+
+                )
+
+                +
+
+                "ms";
+
 
 
         }
 
 
-
-
-
-        card.style.transitionDelay =
-
-
-            (index * 120) + "ms";
-
-
-
-    });
+    );
 
 
 
 }
+
 
 
 
@@ -452,7 +502,6 @@ function initializeCTAEffects(){
 
 
 
-
     if(!buttons.length){
 
 
@@ -466,55 +515,63 @@ function initializeCTAEffects(){
 
 
 
-    buttons.forEach(function(button){
+    buttons.forEach(
+
+
+        function(button){
 
 
 
-        button.addEventListener(
+            button.addEventListener(
 
-            "mouseenter",
+                "mouseenter",
 
-            handleButtonEnter
+                handleButtonEnter
 
-        );
-
-
-
-
-        button.addEventListener(
-
-            "mouseleave",
-
-            handleButtonLeave
-
-        );
+            );
 
 
 
 
-        button.addEventListener(
 
-            "focus",
+            button.addEventListener(
 
-            handleButtonEnter
+                "mouseleave",
 
-        );
+                handleButtonLeave
 
-
-
-
-        button.addEventListener(
-
-            "blur",
-
-            handleButtonLeave
-
-        );
+            );
 
 
 
-    });
 
+
+            button.addEventListener(
+
+                "focus",
+
+                handleButtonEnter
+
+            );
+
+
+
+
+
+            button.addEventListener(
+
+                "blur",
+
+                handleButtonLeave
+
+            );
+
+
+
+        }
+
+
+    );
 
 
 }
@@ -525,8 +582,8 @@ function initializeCTAEffects(){
 
 
 
-function handleButtonEnter(event){
 
+function handleButtonEnter(event){
 
 
     if(prefersReducedMotion){
@@ -540,14 +597,16 @@ function handleButtonEnter(event){
 
 
 
+
+
     event.currentTarget.style.transform =
 
 
         "translateY(-4px)";
 
 
-
 }
+
 
 
 
@@ -560,213 +619,192 @@ function handleButtonLeave(event){
 
     event.currentTarget.style.transform =
 
+
         "";
 
 
-
 }
-
 
 /* ============================================================================
    GUIDED JOURNEY NAVIGATION
 ============================================================================ */
 
 
-function initializeJourneyNavigation(){
+/*
+   IMPORTANT
+
+   CTM PATH™ uses dynamic component loading.
+
+   The welcome screen is injected after the
+   main application has already loaded.
+
+   Therefore we use event delegation
+   instead of direct button binding.
+
+*/
 
 
-    const startButton =
+document.addEventListener(
 
-        document.getElementById(
+    "click",
 
-            "start-journey"
-
-        );
-
-
-
-    if(!startButton){
-
-
-        return;
-
-
-    }
-
-
+    function(event){
 
 
 
+        const startButton =
 
+            event.target.closest(
 
-    startButton.addEventListener(
+                "#start-journey"
 
-
-        "click",
-
-
-        handleStartJourney
-
-
-    );
-
-
-
-}
+            );
 
 
 
 
 
+        if(!startButton){
 
 
-function handleStartJourney(){
+            return;
 
 
-
-    console.log(
-
-        "CTM PATH™ Guided Journey Started"
-
-    );
+        }
 
 
 
 
 
-    /*
-       Preferred application router
-    */
 
 
-    if(
+        console.log(
 
-        typeof loadScreen === "function"
-
-    ){
-
-
-        loadScreen(
-
-            "registration"
+            "CTM PATH™ Guided Journey Started"
 
         );
 
 
-        return;
+
+
+
+
+
+
+        /*
+           PRIMARY ROUTER
+        */
+
+
+        if(
+
+            typeof loadScreen === "function"
+
+        ){
+
+
+            loadScreen(
+
+                "registration"
+
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+
+
+        /*
+           SECONDARY ROUTER
+        */
+
+
+        if(
+
+            typeof navigateTo === "function"
+
+        ){
+
+
+            navigateTo(
+
+                "registration"
+
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+
+
+        /*
+           FALLBACK ROUTER
+        */
+
+
+        if(
+
+            typeof showScreen === "function"
+
+        ){
+
+
+            showScreen(
+
+                "registration"
+
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+
+
+        /*
+           LAST RESORT
+
+           Keeps browser navigation available
+           if router is not loaded.
+
+        */
+
+
+        window.location.hash =
+
+            "registration";
+
+
+
 
 
     }
 
+);
 
-
-
-
-
-    /*
-       Alternative navigation handlers
-    */
-
-
-    if(
-
-        typeof navigateTo === "function"
-
-    ){
-
-
-        navigateTo(
-
-            "registration"
-
-        );
-
-
-        return;
-
-
-    }
-
-
-
-
-
-
-    if(
-
-        typeof showScreen === "function"
-
-    ){
-
-
-        showScreen(
-
-            "registration"
-
-        );
-
-
-        return;
-
-
-    }
-
-
-
-
-
-
-    /*
-       Fallback hash navigation
-    */
-
-
-    window.location.hash =
-
-        "registration";
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ============================================================================
-   SCROLL TO TOP SUPPORT
-============================================================================ */
-
-
-function scrollWelcomeToTop(){
-
-
-    window.scrollTo({
-
-
-        top:
-
-            0,
-
-
-        behavior:
-
-            prefersReducedMotion
-
-                ? "auto"
-
-                : "smooth"
-
-
-
-    });
-
-
-
-}
 
 
 
@@ -789,18 +827,45 @@ document.addEventListener(
 
         if(
 
-            event.key === "Enter"
+            event.key !== "Enter"
+
+        ){
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+        const activeElement =
+
+            document.activeElement;
+
+
+
+
+
+
+
+        if(
+
+            activeElement
 
             &&
 
-            document.activeElement.id ===
+            activeElement.id ===
 
                 "start-journey"
 
         ){
 
 
-            handleStartJourney();
+            activeElement.click();
 
 
         }
@@ -810,6 +875,7 @@ document.addEventListener(
     }
 
 );
+
 
 
 
@@ -824,9 +890,7 @@ document.addEventListener(
 
 window.addEventListener(
 
-
     "beforeunload",
-
 
     function(){
 
@@ -838,15 +902,14 @@ window.addEventListener(
             revealObserver.disconnect();
 
 
-
         }
 
 
 
     }
 
-
 );
+
 
 
 
