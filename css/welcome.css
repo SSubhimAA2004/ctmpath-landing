@@ -3,25 +3,33 @@
    CTM PATH™ Guided Journey™
 
    File        : css/welcome.css
-   Version     : 5.0
-   Status      : Luxury Executive Welcome Experience
+   Version     : 6.0
+   Edition     : Luxury Hero Edition™
+   Status      : Production Release
    Architecture: Static HTML + CSS + Vanilla JavaScript
 
    --------------------------------------------------------------------------
 
-   PURPOSE
+   DESIGN PHILOSOPHY
 
-   Premium styling for the Welcome Page.
+   Luxury.
+   Calm.
+   Spacious.
+   Timeless.
 
-   Preserves the existing HTML structure while elevating:
+   This stylesheet preserves the existing welcome.html while
+   transforming the Welcome experience into a cinematic,
+   executive-quality landing page.
 
-   • Hero Composition
-   • Journey Introduction
-   • Reflection Experience
-   • CTA Experience
-   • Scroll Rhythm
+   Focus Areas
+
+   • Cinematic Hero
    • Premium Lighting
-   • Visual Hierarchy
+   • Luxury Typography
+   • Glass Morphism
+   • Elegant Scroll Rhythm
+   • Executive CTA
+   • Seamless Footer Transition
 
 ========================================================================== */
 
@@ -29,8 +37,10 @@
 
 
 
+
+
 /* ==========================================================================
-   PAGE
+   PAGE FOUNDATION
 ========================================================================== */
 
 .welcome-page{
@@ -51,21 +61,21 @@
 
         radial-gradient(
 
-            ellipse at top center,
+            ellipse at 50% -15%,
 
-            rgba(35,212,200,.07),
+            rgba(35,212,200,.075),
 
-            transparent 34%
+            transparent 42%
 
         ),
 
         radial-gradient(
 
-            ellipse at bottom right,
+            ellipse at 100% 100%,
 
-            rgba(201,162,39,.035),
+            rgba(201,162,39,.040),
 
-            transparent 42%
+            transparent 48%
 
         ),
 
@@ -73,11 +83,13 @@
 
             180deg,
 
-            #081C3A 0%,
+            #071B37 0%,
 
-            #0A2346 40%,
+            #081F41 34%,
 
-            #0A2346 100%
+            #092346 68%,
+
+            #0A274C 100%
 
         );
 
@@ -111,13 +123,68 @@
 
             circle at 50% 0%,
 
-            rgba(255,255,255,.025),
+            rgba(255,255,255,.020),
 
-            transparent 45%
+            transparent 42%
 
         );
 
 }
+
+
+
+
+
+.welcome-page::after{
+
+    content:
+
+        "";
+
+    position:
+
+        absolute;
+
+    inset:
+
+        0;
+
+    pointer-events:
+
+        none;
+
+    opacity:
+
+        .18;
+
+    background-image:
+
+        linear-gradient(
+
+            rgba(255,255,255,.015) 1px,
+
+            transparent 1px
+
+        ),
+
+        linear-gradient(
+
+            90deg,
+
+            rgba(255,255,255,.015) 1px,
+
+            transparent 1px
+
+        );
+
+    background-size:
+
+        120px 120px;
+
+}
+
+
+
 
 
 
@@ -151,15 +218,19 @@
 
     min-height:
 
-        calc(100vh - 120px);
+        calc(100vh - 110px);
 
     padding:
 
-        clamp(5rem,8vw,7rem)
+        clamp(5rem,7vw,7rem)
 
         2rem
 
-        clamp(4rem,6vw,5rem);
+        clamp(6rem,8vw,8rem);
+
+    overflow:
+
+        hidden;
 
 }
 
@@ -177,9 +248,29 @@
 
         absolute;
 
-    inset:
+    width:
 
-        0;
+        1200px;
+
+    height:
+
+        1200px;
+
+    left:
+
+        50%;
+
+    top:
+
+        42%;
+
+    transform:
+
+        translate(-50%,-50%);
+
+    border-radius:
+
+        50%;
 
     pointer-events:
 
@@ -189,13 +280,19 @@
 
         radial-gradient(
 
-            circle at center,
+            circle,
 
-            rgba(35,212,200,.10),
+            rgba(35,212,200,.090),
 
-            transparent 58%
+            rgba(35,212,200,.030) 38%,
+
+            transparent 74%
 
         );
+
+    filter:
+
+        blur(50px);
 
 }
 
@@ -203,7 +300,63 @@
 
 
 
-.welcome-container,
+.welcome-hero::after{
+
+    content:
+
+        "";
+
+    position:
+
+        absolute;
+
+    width:
+
+        1600px;
+
+    height:
+
+        800px;
+
+    left:
+
+        50%;
+
+    top:
+
+        100%;
+
+    transform:
+
+        translateX(-50%);
+
+    background:
+
+        radial-gradient(
+
+            ellipse,
+
+            rgba(201,162,39,.030),
+
+            transparent 70%
+
+        );
+
+    pointer-events:
+
+        none;
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   HERO CONTENT
+========================================================================== */
 
 .hero-content{
 
@@ -213,11 +366,11 @@
 
     z-index:
 
-        2;
+        10;
 
     width:
 
-        min(1080px,100%);
+        min(1320px,100%);
 
     margin:
 
@@ -225,8 +378,24 @@
 
 }
 
+
+
+
+
+.hero-content>*{
+
+    position:
+
+        relative;
+
+    z-index:
+
+        5;
+
+}
+
 /* ==========================================================================
-   HERO VISUAL
+   LUXURY HERO VISUAL
 ========================================================================== */
 
 .hero-visual{
@@ -241,11 +410,11 @@
 
     top:
 
-        48%;
+        46%;
 
     width:
 
-        min(760px,72vw);
+        min(980px,78vw);
 
     aspect-ratio:
 
@@ -259,13 +428,13 @@
 
         none;
 
-    opacity:
-
-        .42;
-
     z-index:
 
         1;
+
+    opacity:
+
+        .42;
 
 }
 
@@ -285,29 +454,21 @@
 
     inset:
 
-        0;
+        8%;
 
     border-radius:
 
         50%;
 
-    background:
+    border:
 
-        radial-gradient(
+        1px solid rgba(35,212,200,.10);
 
-            circle,
+    box-shadow:
 
-            rgba(35,212,200,.14),
+        0 0 140px rgba(35,212,200,.10),
 
-            rgba(35,212,200,.05) 32%,
-
-            transparent 72%
-
-        );
-
-    filter:
-
-        blur(42px);
+        inset 0 0 120px rgba(35,212,200,.04);
 
 }
 
@@ -327,7 +488,7 @@
 
     inset:
 
-        18%;
+        22%;
 
     border-radius:
 
@@ -335,11 +496,33 @@
 
     border:
 
-        1px solid rgba(35,212,200,.12);
+        1px solid rgba(201,162,39,.08);
 
-    box-shadow:
+    filter:
 
-        0 0 90px rgba(35,212,200,.08);
+        blur(.3px);
+
+}
+
+
+
+
+
+.hero-visual{
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(35,212,200,.050),
+
+            rgba(35,212,200,.020) 34%,
+
+            transparent 70%
+
+        );
 
 }
 
@@ -365,13 +548,17 @@
 
         center;
 
+    gap:
+
+        .75rem;
+
     padding:
 
-        .85rem 1.8rem;
+        .9rem 1.9rem;
 
     margin-bottom:
 
-        2rem;
+        2.4rem;
 
     border-radius:
 
@@ -379,7 +566,7 @@
 
     background:
 
-        rgba(255,255,255,.03);
+        rgba(255,255,255,.035);
 
     border:
 
@@ -387,7 +574,11 @@
 
     backdrop-filter:
 
-        blur(14px);
+        blur(18px);
+
+    -webkit-backdrop-filter:
+
+        blur(18px);
 
     color:
 
@@ -403,11 +594,15 @@
 
     letter-spacing:
 
-        .22em;
+        .24em;
 
     text-transform:
 
         uppercase;
+
+    box-shadow:
+
+        0 12px 36px rgba(0,0,0,.18);
 
 }
 
@@ -415,19 +610,79 @@
 
 
 
+.hero-eyebrow::before{
+
+    content:
+
+        "";
+
+    width:
+
+        8px;
+
+    height:
+
+        8px;
+
+    border-radius:
+
+        50%;
+
+    background:
+
+        var(--ctm-gold);
+
+    box-shadow:
+
+        0 0 12px rgba(201,162,39,.60);
+
+}
+
+
+
+
+
+.hero-eyebrow::after{
+
+    content:
+
+        "";
+
+    width:
+
+        8px;
+
+    height:
+
+        8px;
+
+    border-radius:
+
+        50%;
+
+    background:
+
+        var(--ctm-teal);
+
+    box-shadow:
+
+        0 0 12px rgba(35,212,200,.60);
+
+}
+
 /* ==========================================================================
    HERO TITLE
 ========================================================================== */
 
 .hero-title{
 
+    max-width:
+
+        1180px;
+
     margin:
 
         0 auto;
-
-    max-width:
-
-        980px;
 
     color:
 
@@ -435,7 +690,7 @@
 
     font-size:
 
-        clamp(3.8rem,7vw,6.6rem);
+        clamp(4.4rem,7.2vw,7.2rem);
 
     font-weight:
 
@@ -447,7 +702,7 @@
 
     letter-spacing:
 
-        -.04em;
+        -.045em;
 
     text-wrap:
 
@@ -455,9 +710,83 @@
 
     text-shadow:
 
-        0 8px 36px rgba(0,0,0,.32);
+        0 10px 42px rgba(0,0,0,.32);
 
 }
+
+
+
+
+
+.hero-title br{
+
+    display:
+
+        block;
+
+    content:
+
+        "";
+
+}
+
+
+
+
+
+.hero-title::after{
+
+    content:
+
+        "";
+
+    display:
+
+        block;
+
+    width:
+
+        180px;
+
+    height:
+
+        3px;
+
+    margin:
+
+        2.5rem auto 0;
+
+    border-radius:
+
+        999px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            rgba(201,162,39,.15),
+
+            var(--ctm-gold),
+
+            rgba(201,162,39,.15),
+
+            transparent
+
+        );
+
+    box-shadow:
+
+        0 0 24px rgba(201,162,39,.22);
+
+}
+
+
+
+
 
 /* ==========================================================================
    HERO ENGLISH TITLE
@@ -465,13 +794,13 @@
 
 .hero-title-english{
 
-    margin:
-
-        2rem auto 0;
-
     max-width:
 
-        760px;
+        920px;
+
+    margin:
+
+        2.4rem auto 0;
 
     color:
 
@@ -479,7 +808,7 @@
 
     font-size:
 
-        clamp(1.85rem,2.8vw,3rem);
+        clamp(2.05rem,3vw,3.35rem);
 
     font-weight:
 
@@ -511,11 +840,11 @@
 
     width:
 
-        min(860px,100%);
+        min(980px,100%);
 
     margin:
 
-        2.75rem auto 0;
+        3.5rem auto 0;
 
 }
 
@@ -525,13 +854,13 @@
 
 .hero-description .tamil{
 
-    margin:
-
-        0 auto 2rem;
-
     max-width:
 
-        820px;
+        920px;
+
+    margin:
+
+        0 auto 2.75rem;
 
     color:
 
@@ -539,55 +868,15 @@
 
     font-size:
 
-        clamp(1.15rem,1.35vw,1.30rem);
+        clamp(1.28rem,1.5vw,1.55rem);
 
     line-height:
 
-        2.0;
+        2.05;
 
     font-weight:
 
         400;
-
-}
-
-
-
-
-
-.hero-description .english{
-
-    margin:
-
-        0 auto;
-
-    max-width:
-
-        760px;
-
-    color:
-
-        var(--text-secondary);
-
-    font-size:
-
-        clamp(1rem,1.15vw,1.15rem);
-
-    line-height:
-
-        1.95;
-
-    font-weight:
-
-        400;
-
-}
-
-
-
-
-
-.hero-description p{
 
     text-wrap:
 
@@ -599,15 +888,35 @@
 
 
 
-/* ==========================================================================
-   HERO SPACING
-========================================================================== */
+.hero-description .english{
 
-.hero-content>*+*{
+    max-width:
 
-    margin-top:
+        860px;
 
-        0;
+    margin:
+
+        0 auto;
+
+    color:
+
+        var(--text-secondary);
+
+    font-size:
+
+        clamp(1.12rem,1.3vw,1.28rem);
+
+    line-height:
+
+        1.95;
+
+    font-weight:
+
+        400;
+
+    text-wrap:
+
+        pretty;
 
 }
 
@@ -623,7 +932,7 @@
 
     padding:
 
-        clamp(7rem,9vw,9rem)
+        clamp(8rem,10vw,10rem)
 
         0;
 
@@ -655,7 +964,7 @@
 
         radial-gradient(
 
-            ellipse at center,
+            ellipse at center top,
 
             rgba(35,212,200,.045),
 
@@ -681,11 +990,11 @@
 
     width:
 
-        min(900px,100% - 48px);
+        min(1000px,100% - 48px);
 
     margin:
 
-        0 auto 4.5rem;
+        0 auto 5rem;
 
     text-align:
 
@@ -699,13 +1008,17 @@
 
 .section-heading h2{
 
+    margin:
+
+        0 0 1.25rem;
+
     color:
 
         var(--text-heading);
 
     font-size:
 
-        clamp(2.3rem,4vw,4rem);
+        clamp(2.8rem,4vw,4.4rem);
 
     font-weight:
 
@@ -715,9 +1028,9 @@
 
         1.15;
 
-    margin-bottom:
+    letter-spacing:
 
-        1rem;
+        -.03em;
 
 }
 
@@ -726,6 +1039,10 @@
 
 
 .section-heading p{
+
+    margin:
+
+        0;
 
     color:
 
@@ -741,7 +1058,7 @@
 
     letter-spacing:
 
-        .20em;
+        .24em;
 
     text-transform:
 
@@ -754,7 +1071,7 @@
 
 
 /* ==========================================================================
-   JOURNEY CARDS
+   JOURNEY CARDS GRID
 ========================================================================== */
 
 .journey-cards{
@@ -769,7 +1086,7 @@
 
     width:
 
-        min(1380px,100% - 64px);
+        min(1480px,100% - 80px);
 
     margin:
 
@@ -789,8 +1106,12 @@
 
 }
 
+
+
+
+
 /* ==========================================================================
-   JOURNEY CARD
+   PREMIUM JOURNEY CARD
 ========================================================================== */
 
 .journey-card{
@@ -798,6 +1119,14 @@
     position:
 
         relative;
+
+    min-height:
+
+        440px;
+
+    padding:
+
+        3rem;
 
     display:
 
@@ -807,33 +1136,21 @@
 
         column;
 
-    align-items:
-
-        flex-start;
-
-    min-height:
-
-        420px;
-
-    padding:
-
-        2.75rem;
-
     overflow:
 
         hidden;
 
     border-radius:
 
-        32px;
+        36px;
 
     background:
 
         linear-gradient(
 
-            180deg,
+            160deg,
 
-            rgba(255,255,255,.055),
+            rgba(255,255,255,.065),
 
             rgba(255,255,255,.018)
 
@@ -841,19 +1158,19 @@
 
     border:
 
-        1px solid rgba(255,255,255,.08);
+        1px solid rgba(255,255,255,.085);
 
     backdrop-filter:
 
-        blur(18px);
+        blur(22px);
 
     -webkit-backdrop-filter:
 
-        blur(18px);
+        blur(22px);
 
     box-shadow:
 
-        0 24px 70px rgba(0,0,0,.26);
+        0 30px 90px rgba(0,0,0,.28);
 
     transition:
 
@@ -889,9 +1206,9 @@
 
             circle at top,
 
-            rgba(35,212,200,.12),
+            rgba(35,212,200,.14),
 
-            transparent 62%
+            transparent 64%
 
         );
 
@@ -903,6 +1220,10 @@
 
         opacity .45s ease;
 
+    pointer-events:
+
+        none;
+
 }
 
 
@@ -913,15 +1234,15 @@
 
     transform:
 
-        translateY(-12px);
+        translateY(-14px);
 
     border-color:
 
-        rgba(35,212,200,.20);
+        rgba(35,212,200,.25);
 
     box-shadow:
 
-        0 36px 90px rgba(0,0,0,.34);
+        0 45px 110px rgba(0,0,0,.38);
 
 }
 
@@ -937,19 +1258,27 @@
 
 }
 
-
-
-
+/* ==========================================================================
+   JOURNEY CARD CONTENT
+========================================================================== */
 
 .card-number{
 
+    position:
+
+        relative;
+
+    z-index:
+
+        2;
+
     color:
 
-        rgba(255,255,255,.18);
+        rgba(255,255,255,.16);
 
     font-size:
 
-        3.6rem;
+        4rem;
 
     font-weight:
 
@@ -959,9 +1288,13 @@
 
         1;
 
+    letter-spacing:
+
+        -.04em;
+
     margin-bottom:
 
-        1rem;
+        1.25rem;
 
 }
 
@@ -970,6 +1303,14 @@
 
 
 .card-icon{
+
+    position:
+
+        relative;
+
+    z-index:
+
+        2;
 
     display:
 
@@ -985,11 +1326,11 @@
 
     width:
 
-        72px;
+        78px;
 
     height:
 
-        72px;
+        78px;
 
     margin-bottom:
 
@@ -1003,17 +1344,17 @@
 
         linear-gradient(
 
-            135deg,
+            145deg,
 
-            rgba(35,212,200,.16),
+            rgba(35,212,200,.20),
 
-            rgba(35,212,200,.05)
+            rgba(35,212,200,.045)
 
         );
 
     border:
 
-        1px solid rgba(35,212,200,.18);
+        1px solid rgba(35,212,200,.20);
 
     color:
 
@@ -1023,6 +1364,12 @@
 
         2rem;
 
+    box-shadow:
+
+        inset 0 1px 0 rgba(255,255,255,.08),
+
+        0 12px 36px rgba(35,212,200,.12);
+
 }
 
 
@@ -1031,13 +1378,25 @@
 
 .journey-card h3{
 
+    position:
+
+        relative;
+
+    z-index:
+
+        2;
+
+    margin:
+
+        0 0 0.75rem;
+
     color:
 
         var(--text-heading);
 
     font-size:
 
-        1.45rem;
+        1.55rem;
 
     font-weight:
 
@@ -1047,10 +1406,6 @@
 
         1.35;
 
-    margin-bottom:
-
-        .60rem;
-
 }
 
 
@@ -1058,6 +1413,18 @@
 
 
 .journey-card h4{
+
+    position:
+
+        relative;
+
+    z-index:
+
+        2;
+
+    margin:
+
+        0 0 1.5rem;
 
     color:
 
@@ -1073,15 +1440,11 @@
 
     letter-spacing:
 
-        .12em;
+        .14em;
 
     text-transform:
 
         uppercase;
-
-    margin-bottom:
-
-        1.35rem;
 
 }
 
@@ -1091,26 +1454,38 @@
 
 .journey-card p{
 
+    position:
+
+        relative;
+
+    z-index:
+
+        2;
+
+    margin:
+
+        auto 0 0;
+
     color:
 
         var(--text-secondary);
 
     font-size:
 
-        1rem;
+        1.05rem;
 
     line-height:
 
         1.9;
 
-    margin-top:
-
-        auto;
-
 }
 
+
+
+
+
 /* ==========================================================================
-   REFLECTION
+   REFLECTION SECTION
 ========================================================================== */
 
 .reflection-section{
@@ -1121,7 +1496,7 @@
 
     padding:
 
-        clamp(7rem,9vw,9rem)
+        clamp(8rem,10vw,10rem)
 
         0;
 
@@ -1155,9 +1530,9 @@
 
             ellipse at center,
 
-            rgba(201,162,39,.035),
+            rgba(201,162,39,.045),
 
-            transparent 64%
+            transparent 62%
 
         );
 
@@ -1175,7 +1550,7 @@
 
     width:
 
-        min(1120px,100% - 64px);
+        min(1180px,100% - 80px);
 
     margin:
 
@@ -1183,27 +1558,27 @@
 
     padding:
 
-        clamp(3.5rem,5vw,5rem);
-
-    overflow:
-
-        hidden;
+        clamp(4rem,6vw,6rem);
 
     text-align:
 
         center;
 
+    overflow:
+
+        hidden;
+
     border-radius:
 
-        40px;
+        44px;
 
     background:
 
         linear-gradient(
 
-            180deg,
+            160deg,
 
-            rgba(255,255,255,.055),
+            rgba(255,255,255,.065),
 
             rgba(255,255,255,.020)
 
@@ -1211,25 +1586,25 @@
 
     border:
 
-        1px solid rgba(255,255,255,.08);
+        1px solid rgba(255,255,255,.09);
 
     backdrop-filter:
 
-        blur(20px);
+        blur(24px);
 
     -webkit-backdrop-filter:
 
-        blur(20px);
+        blur(24px);
 
     box-shadow:
 
-        0 30px 80px rgba(0,0,0,.30);
+        0 40px 100px rgba(0,0,0,.32);
 
 }
 
-
-
-
+/* ==========================================================================
+   REFLECTION CONTENT
+========================================================================== */
 
 .reflection-card::before{
 
@@ -1255,9 +1630,19 @@
 
             circle at top right,
 
-            rgba(35,212,200,.08),
+            rgba(35,212,200,.10),
 
             transparent 58%
+
+        ),
+
+        radial-gradient(
+
+            circle at bottom left,
+
+            rgba(201,162,39,.06),
+
+            transparent 60%
 
         );
 
@@ -1269,13 +1654,25 @@
 
 .reflection-card h2{
 
+    position:
+
+        relative;
+
+    z-index:
+
+        2;
+
+    margin:
+
+        0 0 1rem;
+
     color:
 
         var(--text-heading);
 
     font-size:
 
-        clamp(2.4rem,4vw,4rem);
+        clamp(2.8rem,4vw,4.5rem);
 
     font-weight:
 
@@ -1285,9 +1682,9 @@
 
         1.15;
 
-    margin-bottom:
+    letter-spacing:
 
-        .75rem;
+        -.035em;
 
 }
 
@@ -1296,6 +1693,18 @@
 
 
 .reflection-card h3{
+
+    position:
+
+        relative;
+
+    z-index:
+
+        2;
+
+    margin:
+
+        0 0 3rem;
 
     color:
 
@@ -1311,15 +1720,11 @@
 
     letter-spacing:
 
-        .20em;
+        .24em;
 
     text-transform:
 
         uppercase;
-
-    margin-bottom:
-
-        2.5rem;
 
 }
 
@@ -1329,13 +1734,21 @@
 
 .reflection-card .tamil{
 
+    position:
+
+        relative;
+
+    z-index:
+
+        2;
+
     width:
 
-        min(760px,100%);
+        min(820px,100%);
 
     margin:
 
-        0 auto 2rem;
+        0 auto 2.5rem;
 
     color:
 
@@ -1343,11 +1756,11 @@
 
     font-size:
 
-        clamp(1.12rem,1.35vw,1.28rem);
+        clamp(1.18rem,1.45vw,1.38rem);
 
     line-height:
 
-        2;
+        2.05;
 
 }
 
@@ -1357,9 +1770,17 @@
 
 .reflection-card .english{
 
+    position:
+
+        relative;
+
+    z-index:
+
+        2;
+
     width:
 
-        min(700px,100%);
+        min(760px,100%);
 
     margin:
 
@@ -1371,16 +1792,20 @@
 
     font-size:
 
-        clamp(1rem,1.15vw,1.15rem);
+        clamp(1.05rem,1.25vw,1.22rem);
 
     line-height:
 
-        1.9;
+        1.95;
 
 }
 
+
+
+
+
 /* ==========================================================================
-   CTA
+   CTA SECTION
 ========================================================================== */
 
 .welcome-action{
@@ -1391,11 +1816,11 @@
 
     padding:
 
-        clamp(7rem,10vw,9rem)
+        clamp(8rem,11vw,11rem)
 
         2rem
 
-        clamp(8rem,10vw,10rem);
+        clamp(9rem,12vw,12rem);
 
     text-align:
 
@@ -1431,7 +1856,7 @@
 
             ellipse at center,
 
-            rgba(35,212,200,.06),
+            rgba(35,212,200,.065),
 
             transparent 62%
 
@@ -1445,13 +1870,21 @@
 
 .welcome-action h2{
 
-    max-width:
+    position:
 
-        920px;
+        relative;
+
+    z-index:
+
+        2;
+
+    width:
+
+        min(1000px,100%);
 
     margin:
 
-        0 auto 1.5rem;
+        0 auto 1.75rem;
 
     color:
 
@@ -1459,7 +1892,7 @@
 
     font-size:
 
-        clamp(2.8rem,5vw,5rem);
+        clamp(3.2rem,5.5vw,5.8rem);
 
     font-weight:
 
@@ -1471,7 +1904,7 @@
 
     letter-spacing:
 
-        -.03em;
+        -.045em;
 
     text-wrap:
 
@@ -1479,11 +1912,23 @@
 
 }
 
-
-
-
+/* ==========================================================================
+   CTA SUBTITLE
+========================================================================== */
 
 .cta-subtitle{
+
+    position:
+
+        relative;
+
+    z-index:
+
+        2;
+
+    margin:
+
+        0 auto;
 
     color:
 
@@ -1491,7 +1936,7 @@
 
     font-size:
 
-        1.05rem;
+        1.12rem;
 
     font-weight:
 
@@ -1499,7 +1944,7 @@
 
     letter-spacing:
 
-        .22em;
+        .26em;
 
     text-transform:
 
@@ -1511,7 +1956,19 @@
 
 
 
+/* ==========================================================================
+   CTA META
+========================================================================== */
+
 .cta-meta{
+
+    position:
+
+        relative;
+
+    z-index:
+
+        2;
 
     display:
 
@@ -1531,15 +1988,15 @@
 
     gap:
 
-        .85rem;
+        1rem;
 
     margin:
 
-        2.5rem auto 3.5rem;
+        3rem auto 3.75rem;
 
     padding:
 
-        1rem 2rem;
+        1.15rem 2.4rem;
 
     border-radius:
 
@@ -1547,19 +2004,31 @@
 
     background:
 
-        rgba(255,255,255,.03);
+        rgba(255,255,255,.035);
 
     border:
 
-        1px solid rgba(35,212,200,.12);
+        1px solid rgba(35,212,200,.14);
+
+    backdrop-filter:
+
+        blur(18px);
+
+    -webkit-backdrop-filter:
+
+        blur(18px);
 
     color:
 
         var(--text-secondary);
 
-    backdrop-filter:
+    font-size:
 
-        blur(14px);
+        1rem;
+
+    font-weight:
+
+        500;
 
 }
 
@@ -1571,7 +2040,7 @@
 
     color:
 
-        rgba(255,255,255,.28);
+        rgba(255,255,255,.25);
 
 }
 
@@ -1579,19 +2048,47 @@
 
 
 
+/* ==========================================================================
+   PRIMARY CTA BUTTON
+========================================================================== */
+
 .primary-button{
+
+    position:
+
+        relative;
+
+    z-index:
+
+        2;
+
+    display:
+
+        inline-flex;
+
+    flex-direction:
+
+        column;
+
+    align-items:
+
+        center;
+
+    justify-content:
+
+        center;
 
     min-width:
 
-        380px;
+        440px;
 
     min-height:
 
-        76px;
+        92px;
 
     padding:
 
-        1.3rem 2.8rem;
+        1.4rem 3rem;
 
     border:
 
@@ -1601,33 +2098,33 @@
 
         999px;
 
+    cursor:
+
+        pointer;
+
+    overflow:
+
+        hidden;
+
     background:
 
         linear-gradient(
 
             135deg,
 
-            var(--ctm-teal),
+            #23D4C8,
 
-            #20D4C8
+            #49E6DA
 
         );
 
     color:
 
-        #07161B;
+        #06141A;
 
-    font-size:
+    box-shadow:
 
-        1rem;
-
-    font-weight:
-
-        700;
-
-    cursor:
-
-        pointer;
+        0 22px 70px rgba(35,212,200,.30);
 
     transition:
 
@@ -1635,9 +2132,47 @@
 
         box-shadow .35s ease;
 
-    box-shadow:
+}
 
-        0 18px 50px rgba(35,212,200,.28);
+
+
+
+
+.primary-button::before{
+
+    content:
+
+        "";
+
+    position:
+
+        absolute;
+
+    inset:
+
+        0;
+
+    background:
+
+        linear-gradient(
+
+            120deg,
+
+            transparent,
+
+            rgba(255,255,255,.35),
+
+            transparent
+
+        );
+
+    transform:
+
+        translateX(-120%);
+
+    transition:
+
+        transform .65s ease;
 
 }
 
@@ -1649,19 +2184,39 @@
 
     transform:
 
-        translateY(-4px);
+        translateY(-6px);
 
     box-shadow:
 
-        0 28px 70px rgba(35,212,200,.36);
+        0 34px 90px rgba(35,212,200,.42);
 
 }
 
-/* ==========================================================================
-   CTA CONTENT
-========================================================================== */
 
-.primary-button .button-tamil{
+
+
+
+.primary-button:hover::before{
+
+    transform:
+
+        translateX(120%);
+
+}
+
+
+
+
+
+.button-tamil{
+
+    position:
+
+        relative;
+
+    z-index:
+
+        2;
 
     display:
 
@@ -1669,7 +2224,7 @@
 
     font-size:
 
-        1.08rem;
+        1.12rem;
 
     font-weight:
 
@@ -1677,7 +2232,7 @@
 
     line-height:
 
-        1.35;
+        1.4;
 
 }
 
@@ -1685,7 +2240,15 @@
 
 
 
-.primary-button .button-english{
+.button-english{
+
+    position:
+
+        relative;
+
+    z-index:
+
+        2;
 
     display:
 
@@ -1705,31 +2268,39 @@
 
     letter-spacing:
 
-        .08em;
-
-    opacity:
-
-        .82;
+        .10em;
 
     text-transform:
 
         uppercase;
 
+    opacity:
+
+        .82;
+
 }
 
-
-
-
+/* ==========================================================================
+   CTA TRUST MESSAGE
+========================================================================== */
 
 .trust-message{
 
+    position:
+
+        relative;
+
+    z-index:
+
+        2;
+
     width:
 
-        min(760px,100%);
+        min(820px,100%);
 
     margin:
 
-        3rem auto 0;
+        3.5rem auto 0;
 
 }
 
@@ -1739,21 +2310,21 @@
 
 .trust-message .tamil{
 
+    margin:
+
+        0 auto 1.25rem;
+
     color:
 
         var(--text-primary);
 
     font-size:
 
-        1.05rem;
+        1.08rem;
 
     line-height:
 
         1.9;
-
-    margin-bottom:
-
-        1rem;
 
 }
 
@@ -1763,17 +2334,21 @@
 
 .trust-message .english{
 
+    margin:
+
+        0 auto;
+
     color:
 
         var(--text-secondary);
 
     font-size:
 
-        .98rem;
+        1rem;
 
     line-height:
 
-        1.8;
+        1.85;
 
 }
 
@@ -1781,17 +2356,29 @@
 
 
 
+/* ==========================================================================
+   CLOSING SIGNATURE
+========================================================================== */
+
 .welcome-closing{
+
+    position:
+
+        relative;
+
+    z-index:
+
+        2;
 
     display:
 
         flex;
 
-    justify-content:
+    align-items:
 
         center;
 
-    align-items:
+    justify-content:
 
         center;
 
@@ -1801,11 +2388,11 @@
 
     gap:
 
-        2.5rem;
+        2.8rem;
 
     margin-top:
 
-        4rem;
+        4.5rem;
 
 }
 
@@ -1825,7 +2412,7 @@
 
     font-size:
 
-        .95rem;
+        .98rem;
 
     font-weight:
 
@@ -1833,7 +2420,7 @@
 
     letter-spacing:
 
-        .14em;
+        .18em;
 
     text-transform:
 
@@ -1861,15 +2448,15 @@
 
     right:
 
-        -1.3rem;
+        -1.55rem;
 
     width:
 
-        6px;
+        5px;
 
     height:
 
-        6px;
+        5px;
 
     border-radius:
 
@@ -1877,7 +2464,11 @@
 
     background:
 
-        rgba(35,212,200,.45);
+        var(--ctm-teal);
+
+    box-shadow:
+
+        0 0 12px rgba(35,212,200,.50);
 
     transform:
 
@@ -1885,8 +2476,12 @@
 
 }
 
+
+
+
+
 /* ==========================================================================
-   PREMIUM REVEAL ANIMATIONS
+   REVEAL ANIMATION SUPPORT
 ========================================================================== */
 
 .reveal{
@@ -1897,19 +2492,13 @@
 
     transform:
 
-        translateY(42px);
+        translateY(45px);
 
     transition:
 
         opacity .9s ease,
 
         transform .9s cubic-bezier(.22,1,.36,1);
-
-    will-change:
-
-        opacity,
-
-        transform;
 
 }
 
@@ -1933,11 +2522,19 @@
 
 
 
-.hero-content>*{
+/* ==========================================================================
+   HERO ENTRY ANIMATION
+========================================================================== */
+
+.hero-content > *{
+
+    opacity:
+
+        0;
 
     animation:
 
-        heroFade .9s ease forwards;
+        luxuryHeroReveal .9s ease forwards;
 
 }
 
@@ -1945,11 +2542,11 @@
 
 
 
-.hero-content>*:nth-child(1){
+.hero-content > *:nth-child(1){
 
     animation-delay:
 
-        .10s;
+        .15s;
 
 }
 
@@ -1957,11 +2554,11 @@
 
 
 
-.hero-content>*:nth-child(2){
+.hero-content > *:nth-child(2){
 
     animation-delay:
 
-        .20s;
+        .30s;
 
 }
 
@@ -1969,11 +2566,11 @@
 
 
 
-.hero-content>*:nth-child(3){
+.hero-content > *:nth-child(3){
 
     animation-delay:
 
-        .35s;
+        .48s;
 
 }
 
@@ -1981,11 +2578,11 @@
 
 
 
-.hero-content>*:nth-child(4){
+.hero-content > *:nth-child(4){
 
     animation-delay:
 
-        .50s;
+        .65s;
 
 }
 
@@ -1993,7 +2590,7 @@
 
 
 
-@keyframes heroFade{
+@keyframes luxuryHeroReveal{
 
     from{
 
@@ -2003,9 +2600,10 @@
 
         transform:
 
-            translateY(28px);
+            translateY(35px);
 
     }
+
 
     to{
 
@@ -2021,15 +2619,31 @@
 
 }
 
-
-
-
-
 /* ==========================================================================
-   PREMIUM RESPONSIVE
+   RESPONSIVE — LARGE TABLET
 ========================================================================== */
 
 @media (max-width:1200px){
+
+    .hero-content{
+
+        width:
+
+            min(1100px,100%);
+
+    }
+
+
+
+    .hero-title{
+
+        font-size:
+
+            clamp(3.8rem,7vw,5.8rem);
+
+    }
+
+
 
     .journey-cards{
 
@@ -2037,12 +2651,40 @@
 
             repeat(2,1fr);
 
+        width:
+
+            min(100% - 64px,1100px);
+
+    }
+
+
+
+    .journey-card{
+
+        min-height:
+
+            400px;
+
+    }
+
+
+
+    .reflection-card{
+
+        width:
+
+            min(100% - 64px,1000px);
+
     }
 
 }
 
+
+
+
+
 /* ==========================================================================
-   TABLET
+   RESPONSIVE — TABLET
 ========================================================================== */
 
 @media (max-width:992px){
@@ -2065,11 +2707,11 @@
 
         width:
 
-            min(620px,90vw);
+            720px;
 
         opacity:
 
-            .30;
+            .28;
 
     }
 
@@ -2079,7 +2721,7 @@
 
         font-size:
 
-            clamp(3rem,9vw,4.8rem);
+            clamp(3rem,8vw,4.8rem);
 
     }
 
@@ -2089,7 +2731,17 @@
 
         font-size:
 
-            clamp(1.5rem,4vw,2.3rem);
+            clamp(1.7rem,4vw,2.6rem);
+
+    }
+
+
+
+    .hero-description{
+
+        margin-top:
+
+            2.5rem;
 
     }
 
@@ -2099,11 +2751,7 @@
 
         font-size:
 
-            1.08rem;
-
-        line-height:
-
-            1.9;
+            1.15rem;
 
     }
 
@@ -2113,7 +2761,25 @@
 
         font-size:
 
-            1rem;
+            1.05rem;
+
+    }
+
+
+
+    .journey-introduction,
+
+    .reflection-section,
+
+    .welcome-action{
+
+        padding-top:
+
+            6rem;
+
+        padding-bottom:
+
+            6rem;
 
     }
 
@@ -2125,9 +2791,9 @@
 
             1fr;
 
-        gap:
+        width:
 
-            1.75rem;
+            min(100% - 48px,700px);
 
     }
 
@@ -2145,9 +2811,13 @@
 
     .reflection-card{
 
+        width:
+
+            min(100% - 48px,760px);
+
         padding:
 
-            3rem 2rem;
+            3.5rem 2rem;
 
     }
 
@@ -2157,15 +2827,7 @@
 
         min-width:
 
-            320px;
-
-        width:
-
-            100%;
-
-        max-width:
-
-            420px;
+            360px;
 
     }
 
@@ -2176,7 +2838,7 @@
 
 
 /* ==========================================================================
-   MOBILE
+   RESPONSIVE — MOBILE
 ========================================================================== */
 
 @media (max-width:640px){
@@ -2185,7 +2847,21 @@
 
         padding:
 
-            5rem 1.25rem 4rem;
+            4.5rem 1.15rem 4rem;
+
+    }
+
+
+
+    .hero-visual{
+
+        width:
+
+            520px;
+
+        opacity:
+
+            .22;
 
     }
 
@@ -2195,15 +2871,15 @@
 
         padding:
 
-            .75rem 1.25rem;
+            .75rem 1.2rem;
 
         font-size:
 
-            .72rem;
+            .68rem;
 
         letter-spacing:
 
-            .14em;
+            .16em;
 
     }
 
@@ -2213,11 +2889,25 @@
 
         font-size:
 
-            clamp(2.4rem,10vw,3.5rem);
+            clamp(2.3rem,10vw,3.4rem);
 
         line-height:
 
-            1.08;
+            1.10;
+
+    }
+
+
+
+    .hero-title::after{
+
+        width:
+
+            120px;
+
+        margin-top:
+
+            1.8rem;
 
     }
 
@@ -2227,7 +2917,7 @@
 
         margin-top:
 
-            1.5rem;
+            1.7rem;
 
         font-size:
 
@@ -2237,11 +2927,73 @@
 
 
 
-    .section-heading h2,
+    .hero-description .tamil{
 
-    .reflection-card h2,
+        font-size:
 
-    .welcome-action h2{
+            1.02rem;
+
+        line-height:
+
+            1.85;
+
+    }
+
+
+
+    .hero-description .english{
+
+        font-size:
+
+            .96rem;
+
+        line-height:
+
+            1.8;
+
+    }
+
+}
+
+/* ==========================================================================
+   MOBILE REFINEMENTS
+========================================================================== */
+
+@media (max-width:640px){
+
+    .journey-introduction,
+
+    .reflection-section,
+
+    .welcome-action{
+
+        padding-top:
+
+            5rem;
+
+        padding-bottom:
+
+            5rem;
+
+    }
+
+
+
+    .section-heading{
+
+        width:
+
+            calc(100% - 32px);
+
+        margin-bottom:
+
+            3rem;
+
+    }
+
+
+
+    .section-heading h2{
 
         font-size:
 
@@ -2251,15 +3003,297 @@
 
 
 
+    .section-heading p{
+
+        font-size:
+
+            .78rem;
+
+        letter-spacing:
+
+            .16em;
+
+    }
+
+
+
+    .journey-cards{
+
+        width:
+
+            calc(100% - 32px);
+
+        gap:
+
+            1.25rem;
+
+    }
+
+
+
+    .journey-card{
+
+        padding:
+
+            2rem;
+
+        border-radius:
+
+            28px;
+
+    }
+
+
+
+    .card-number{
+
+        font-size:
+
+            3rem;
+
+    }
+
+
+
+    .card-icon{
+
+        width:
+
+            64px;
+
+        height:
+
+            64px;
+
+        margin-bottom:
+
+            1.5rem;
+
+    }
+
+
+
+    .journey-card h3{
+
+        font-size:
+
+            1.25rem;
+
+    }
+
+
+
+    .journey-card h4{
+
+        font-size:
+
+            .78rem;
+
+    }
+
+
+
+    .journey-card p{
+
+        font-size:
+
+            .95rem;
+
+    }
+
+
+
+    .reflection-card{
+
+        width:
+
+            calc(100% - 32px);
+
+        padding:
+
+            2.5rem 1.4rem;
+
+        border-radius:
+
+            32px;
+
+    }
+
+
+
+    .reflection-card h2{
+
+        font-size:
+
+            clamp(2rem,8vw,2.8rem);
+
+    }
+
+
+
+    .reflection-card h3{
+
+        font-size:
+
+            .78rem;
+
+        letter-spacing:
+
+            .16em;
+
+    }
+
+
+
+    .reflection-card .tamil{
+
+        font-size:
+
+            1rem;
+
+        line-height:
+
+            1.85;
+
+    }
+
+
+
+    .reflection-card .english{
+
+        font-size:
+
+            .92rem;
+
+        line-height:
+
+            1.8;
+
+    }
+
+
+
+    .welcome-action h2{
+
+        font-size:
+
+            clamp(2.2rem,9vw,3.2rem);
+
+    }
+
+
+
+    .cta-subtitle{
+
+        font-size:
+
+            .78rem;
+
+        letter-spacing:
+
+            .16em;
+
+    }
+
+
+
     .cta-meta{
+
+        width:
+
+            100%;
+
+        max-width:
+
+            340px;
+
+        padding:
+
+            1rem;
 
         border-radius:
 
             24px;
 
+        font-size:
+
+            .88rem;
+
+    }
+
+
+
+    .primary-button{
+
+        width:
+
+            100%;
+
+        min-width:
+
+            0;
+
+        max-width:
+
+            360px;
+
+        min-height:
+
+            82px;
+
         padding:
 
-            1rem 1.25rem;
+            1.1rem 1.5rem;
+
+    }
+
+
+
+    .button-tamil{
+
+        font-size:
+
+            1rem;
+
+    }
+
+
+
+    .button-english{
+
+        font-size:
+
+            .76rem;
+
+    }
+
+
+
+    .trust-message{
+
+        width:
+
+            calc(100% - 16px);
+
+    }
+
+
+
+    .trust-message .tamil{
+
+        font-size:
+
+            .96rem;
+
+    }
+
+
+
+    .trust-message .english{
+
+        font-size:
+
+            .88rem;
 
     }
 
@@ -2267,13 +3301,27 @@
 
     .welcome-closing{
 
-        gap:
-
-            1rem;
-
         flex-direction:
 
             column;
+
+        gap:
+
+            1.1rem;
+
+        margin-top:
+
+            3rem;
+
+    }
+
+
+
+    .welcome-closing span{
+
+        font-size:
+
+            .82rem;
 
     }
 
@@ -2289,21 +3337,33 @@
 
 }
 
+
+
+
+
 /* ==========================================================================
-   ACCESSIBILITY & POLISH
+   ACCESSIBILITY
 ========================================================================== */
 
 @media (prefers-reduced-motion:reduce){
 
-    *{
+    *,
 
-        animation:
+    *::before,
 
-            none !important;
+    *::after{
 
-        transition:
+        animation-duration:
 
-            none !important;
+            .01ms !important;
+
+        animation-iteration-count:
+
+            1 !important;
+
+        transition-duration:
+
+            .01ms !important;
 
         scroll-behavior:
 
@@ -2321,11 +3381,11 @@
 
     outline:
 
-        3px solid rgba(35,212,200,.45);
+        3px solid rgba(35,212,200,.55);
 
     outline-offset:
 
-        4px;
+        5px;
 
 }
 
@@ -2337,48 +3397,12 @@
 
     border-color:
 
-        rgba(35,212,200,.22);
-
-    box-shadow:
-
-        0 30px 80px rgba(0,0,0,.34);
+        rgba(35,212,200,.25);
 
 }
-
-
-
-
-
-::selection{
-
-    background:
-
-        rgba(35,212,200,.24);
-
-    color:
-
-        var(--text-heading);
-
-}
-
-
-
-
-
-html{
-
-    scroll-behavior:
-
-        smooth;
-
-}
-
-
-
-
 
 /* ==========================================================================
-   LARGE DESKTOP OPTIMIZATION
+   LARGE DESKTOP PREMIUM OPTIMIZATION
 ========================================================================== */
 
 @media (min-width:1600px){
@@ -2387,7 +3411,27 @@ html{
 
         width:
 
-            min(1200px,100%);
+            min(1400px,100%);
+
+    }
+
+
+
+    .hero-title{
+
+        font-size:
+
+            clamp(5rem,6.5vw,7.5rem);
+
+    }
+
+
+
+    .hero-description{
+
+        width:
+
+            min(1080px,100%);
 
     }
 
@@ -2397,7 +3441,17 @@ html{
 
         width:
 
-            min(1500px,100% - 80px);
+            min(1520px,100% - 100px);
+
+    }
+
+
+
+    .journey-card{
+
+        min-height:
+
+            460px;
 
     }
 
@@ -2407,7 +3461,67 @@ html{
 
         width:
 
-            min(1200px,100% - 80px);
+            min(1240px,100% - 100px);
+
+    }
+
+}
+
+
+
+
+
+/* ==========================================================================
+   EXTRA LARGE SCREEN BALANCE
+========================================================================== */
+
+@media (min-width:2000px){
+
+    .welcome-hero{
+
+        min-height:
+
+            1100px;
+
+    }
+
+
+
+    .hero-title{
+
+        font-size:
+
+            8rem;
+
+    }
+
+
+
+    .hero-title-english{
+
+        font-size:
+
+            3.8rem;
+
+    }
+
+
+
+    .hero-description .tamil{
+
+        font-size:
+
+            1.7rem;
+
+    }
+
+
+
+    .hero-description .english{
+
+        font-size:
+
+            1.4rem;
 
     }
 
@@ -2423,7 +3537,25 @@ html{
 
 @media print{
 
-    .hero-visual{
+    .welcome-page{
+
+        background:
+
+            #ffffff;
+
+        color:
+
+            #000000;
+
+    }
+
+
+
+    .hero-visual,
+
+    .welcome-page::before,
+
+    .welcome-page::after{
 
         display:
 
@@ -2433,33 +3565,77 @@ html{
 
 
 
-    .welcome-page{
-
-        background:
-
-            #ffffff;
-
-    }
-
-
-
     .journey-card,
 
     .reflection-card{
 
-        box-shadow:
+        background:
 
-            none;
+            #ffffff;
 
         border:
 
             1px solid #cccccc;
 
+        box-shadow:
+
+            none;
+
+    }
+
+
+
+    .primary-button{
+
         background:
 
             #ffffff;
 
+        border:
+
+            1px solid #000000;
+
+        color:
+
+            #000000;
+
+        box-shadow:
+
+            none;
+
     }
+
+}
+
+
+
+
+
+/* ==========================================================================
+   FINAL POLISH
+========================================================================== */
+
+::selection{
+
+    background:
+
+        rgba(35,212,200,.25);
+
+    color:
+
+        var(--ctm-ivory);
+
+}
+
+
+
+
+
+html{
+
+    scroll-behavior:
+
+        smooth;
 
 }
 
