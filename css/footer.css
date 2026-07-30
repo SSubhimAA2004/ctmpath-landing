@@ -3,9 +3,10 @@
    CTM PATH™ Guided Journey™
 
    File        : css/footer.css
-   Version     : 4.0
+   Version     : 5.0
    Status      : Premium Global Footer
    Architecture: Static HTML + CSS + Vanilla JavaScript
+
    --------------------------------------------------------------------------
 
    PURPOSE
@@ -21,6 +22,14 @@
    • Bottom Copyright
    • Responsive Layout
    • Premium Hover Effects
+
+   v5.0 UPDATE
+
+   • Footer now visually merges into the main page.
+   • Removed heavy black footer block.
+   • Introduced seamless background continuation.
+   • Softer ambient lighting.
+   • All layout, typography and spacing preserved.
 
 ========================================================================== */
 
@@ -46,31 +55,33 @@
 
         clamp(5rem,8vw,8rem);
 
+    isolation:
+
+        isolate;
+
     background:
 
         linear-gradient(
 
             180deg,
 
-            rgba(255,255,255,.02),
+            rgba(8,28,58,0),
 
-            rgba(255,255,255,.01)
+            rgba(8,28,58,.10) 12%,
 
-        ),
+            rgba(8,28,58,.22) 28%,
 
-        linear-gradient(
+            rgba(8,28,58,.42) 52%,
 
-            180deg,
+            rgba(8,28,58,.70) 76%,
 
-            #071019,
-
-            #050B12
+            rgba(8,28,58,.92) 100%
 
         );
 
     border-top:
 
-        1px solid rgba(255,255,255,.08);
+        1px solid rgba(255,255,255,.035);
 
 }
 
@@ -92,27 +103,71 @@
 
         0;
 
+    pointer-events:
+
+        none;
+
     background:
 
         radial-gradient(
 
-            circle at top,
+            ellipse at top center,
 
-            rgba(35,212,200,.08),
+            rgba(35,212,200,.045),
 
-            transparent 60%
+            transparent 58%
+
+        ),
+
+        radial-gradient(
+
+            ellipse at bottom center,
+
+            rgba(255,255,255,.015),
+
+            transparent 76%
 
         );
-
-    pointer-events:
-
-        none;
 
 }
 
 
 
 
+
+.ctm-footer::after{
+
+    content:
+
+        "";
+
+    position:
+
+        absolute;
+
+    inset:
+
+        0;
+
+    pointer-events:
+
+        none;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            rgba(255,255,255,.015),
+
+            transparent 10%,
+
+            transparent 100%
+
+        );
+
+}
 
 /* ==========================================================================
    TOP JOURNEY LINE
@@ -123,6 +178,10 @@
     position:
 
         relative;
+
+    z-index:
+
+        2;
 
     display:
 
@@ -146,7 +205,7 @@
 
     padding:
 
-        1.4rem 2rem;
+        1.40rem 2rem;
 
     color:
 
@@ -170,7 +229,19 @@
 
     border-bottom:
 
-        1px solid rgba(255,255,255,.06);
+        1px solid rgba(255,255,255,.035);
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            rgba(255,255,255,.010),
+
+            rgba(255,255,255,.004)
+
+        );
 
 }
 
@@ -183,6 +254,10 @@
     color:
 
         var(--ctm-gold);
+
+    opacity:
+
+        .90;
 
 }
 
@@ -200,6 +275,10 @@
 
         relative;
 
+    z-index:
+
+        2;
+
     width:
 
         min(1280px,100% - 48px);
@@ -210,9 +289,17 @@
 
     padding:
 
-        clamp(4rem,7vw,6rem) 0 2rem;
+        clamp(4rem,7vw,6rem)
+
+        0
+
+        2rem;
 
 }
+
+
+
+
 
 /* ==========================================================================
    FOOTER GRID
@@ -226,7 +313,11 @@
 
     grid-template-columns:
 
-        1.25fr .9fr 1fr;
+        1.25fr
+
+        .90fr
+
+        1fr;
 
     gap:
 
@@ -237,10 +328,6 @@
         start;
 
 }
-
-
-
-
 
 /* ==========================================================================
    BRAND
@@ -558,6 +645,10 @@
 
         500;
 
+    text-decoration:
+
+        none;
+
     transition:
 
         color .30s ease;
@@ -596,7 +687,7 @@
 
     border-top:
 
-        1px solid rgba(255,255,255,.06);
+        1px solid rgba(255,255,255,.05);
 
     text-align:
 
@@ -687,6 +778,10 @@
         letter-spacing:
 
             .10em;
+
+        padding:
+
+            1.2rem 1rem;
 
     }
 
