@@ -6,24 +6,21 @@
      PAGE 01
      FROM SURVIVAL TO LIVING™
 
-     File:
-     pages/page01.html
-
-     Responsibility:
      Presentation Layer Only
 
-     ============================================================ -->
+============================================================ -->
 
 
 <section
+
     id="page01"
-    class="journey-page page01-page">
+
+    class="journey-page page01-page"
+
+    aria-labelledby="page01-title">
 
 
 
-    <!-- =========================================================
-         HERO CONTAINER
-    ========================================================== -->
 
 
     <div class="page01-container">
@@ -33,27 +30,78 @@
 
 
         <!-- =====================================================
-             WELCOME IDENTITY
+             BRAND WELCOME
+        ====================================================== -->
+
+
+        <header class="page01-header">
+
+
+            <div class="brand-block">
+
+
+                <div class="brand-name">
+
+                    CTM PATH™ MILLIONAIRES™
+
+                </div>
+
+
+
+                <div class="brand-subtitle">
+
+                    GUIDED JOURNEY™
+
+                </div>
+
+
+
+                <div class="brand-tagline">
+
+                    Every Dream Has A Path™
+
+                </div>
+
+
+            </div>
+
+
+
+        </header>
+
+
+
+
+
+
+
+
+
+        <!-- =====================================================
+             WELCOME MESSAGE
         ====================================================== -->
 
 
         <div class="page01-welcome">
 
 
+            <h2 class="welcome-tamil">
 
-            <p class="welcome-tamil">
 
                 CTM PATH குபேர உலகிற்கு
                 உங்களை வரவேற்கிறோம்!
 
-            </p>
+
+            </h2>
 
 
 
             <p class="welcome-english">
 
+
                 Welcome to the world of
                 CTM PATH™ MILLIONAIRES™
+
 
             </p>
 
@@ -70,7 +118,7 @@
 
 
         <!-- =====================================================
-             MAIN TRANSFORMATION MESSAGE
+             HERO MESSAGE
         ====================================================== -->
 
 
@@ -78,7 +126,11 @@
 
 
 
-            <h1 class="hero-tamil">
+            <h1
+
+                id="page01-title"
+
+                class="hero-tamil">
 
 
                 வாழ்வாங்கு வாழ்ந்திட வாரீர்™
@@ -89,10 +141,13 @@
 
 
 
+
             <h2 class="hero-english">
 
 
-                FROM SURVIVAL TO<br>
+                FROM SURVIVAL TO
+
+                <br>
 
                 LIVING™
 
@@ -117,7 +172,6 @@
 
 
         <div class="page01-message">
-
 
 
             <p class="message-tamil">
@@ -159,12 +213,20 @@
         ====================================================== -->
 
 
-        <div class="page01-discovery-grid">
+        <div
+
+            class="page01-discovery-grid"
+
+            aria-label="Guided Discovery Areas">
 
 
 
-            <div class="discovery-card">
 
+
+            <article class="discovery-card">
+
+
+                <div class="card-decoration"></div>
 
 
                 <div class="card-icon">
@@ -174,13 +236,11 @@
                 </div>
 
 
-
                 <h3 class="card-title-tamil">
 
                     உங்கள் வாழ்க்கை
 
                 </h3>
-
 
 
                 <p class="card-title-english">
@@ -191,7 +251,7 @@
 
 
 
-            </div>
+            </article>
 
 
 
@@ -201,8 +261,10 @@
 
 
 
-            <div class="discovery-card">
+            <article class="discovery-card">
 
+
+                <div class="card-decoration"></div>
 
 
                 <div class="card-icon">
@@ -212,13 +274,11 @@
                 </div>
 
 
-
                 <h3 class="card-title-tamil">
 
                     உங்கள் கனவுகள்
 
                 </h3>
-
 
 
                 <p class="card-title-english">
@@ -229,7 +289,7 @@
 
 
 
-            </div>
+            </article>
 
 
 
@@ -239,8 +299,10 @@
 
 
 
-            <div class="discovery-card">
+            <article class="discovery-card">
 
+
+                <div class="card-decoration"></div>
 
 
                 <div class="card-icon">
@@ -250,13 +312,11 @@
                 </div>
 
 
-
                 <h3 class="card-title-tamil">
 
                     உங்கள் குபேர பயணம்
 
                 </h3>
-
 
 
                 <p class="card-title-english">
@@ -267,7 +327,7 @@
 
 
 
-            </div>
+            </article>
 
 
 
@@ -282,7 +342,7 @@
 
 
         <!-- =====================================================
-             CTA
+             PRIMARY JOURNEY CTA
         ====================================================== -->
 
 
@@ -292,24 +352,37 @@
 
             <button
 
+
                 id="beginJourneyBtn"
 
-                class="journey-primary-btn">
+
+                class="journey-primary-btn"
+
+
+                type="button"
+
+
+                aria-label="குபேர பயணத்தை தொடங்குகிறேன் - I BEGIN MY MILLIONAIRE JOURNEY">
 
 
 
                 <span class="btn-tamil">
 
+
                     குபேர பயணத்தை தொடங்குகிறேன்™
+
 
                 </span>
 
 
 
 
+
                 <span class="btn-english">
 
+
                     I BEGIN MY MILLIONAIRE JOURNEY™
+
 
                 </span>
 
@@ -330,39 +403,51 @@
 
 
         <!-- =====================================================
-             JOURNEY INDICATOR
+             JOURNEY PROGRESS
         ====================================================== -->
 
 
-        <div class="journey-progress">
+        <footer class="journey-progress">
 
 
 
             <span class="progress-tamil">
 
+
                 உங்கள் பயணம் தொடங்குகிறது
 
+
             </span>
+
+
 
 
 
             <span class="progress-english">
 
+
                 BEGIN YOUR GUIDED JOURNEY™
 
+
             </span>
+
+
 
 
 
             <span class="progress-number">
 
+
                 01 / 07
+
 
             </span>
 
 
 
-        </div>
+        </footer>
+
+
 
 
 
@@ -371,54 +456,4 @@
 
 
 </section>
-
-/* ============================================================
-   ACCESSIBILITY ENHANCEMENTS
-============================================================ */
-
-
-/*
-    Added through HTML attributes:
-
-    • Main section identification
-    • Button accessibility label
-    • Screen reader friendly structure
-    • Keyboard compatible CTA
-*/
-
-
-
-<!-- Final CTA button enhancement -->
-
-
-<button
-
-    id="beginJourneyBtn"
-
-    class="journey-primary-btn"
-
-    type="button"
-
-    aria-label="குபேர பயணத்தை தொடங்குகிறேன் - I Begin My Millionaire Journey">
-
-
-
-    <span class="btn-tamil">
-
-        குபேர பயணத்தை தொடங்குகிறேன்™
-
-    </span>
-
-
-
-
-    <span class="btn-english">
-
-        I BEGIN MY MILLIONAIRE JOURNEY™
-
-    </span>
-
-
-
-</button>
 
