@@ -3,15 +3,17 @@
    CTM PATH™ MILLIONAIRES™
    Guided Journey™
 
-   PAGE 01 STYLES
+   PAGE 01 PREMIUM VISUAL SYSTEM
 
    File:
    css/page01.css
 
    Responsibility:
-   Presentation Only
+   Presentation Layer Only
 
 ============================================================ */
+
+
 
 
 
@@ -22,27 +24,106 @@
 
 .page01-page {
 
+
     min-height:100vh;
 
-    background:
 
-    radial-gradient(
-        circle at top,
-        rgba(13,54,95,0.45),
-        transparent 45%
-    ),
+    width:100%;
 
-    #081426;
-
-    color:#F7F3EA;
 
     display:flex;
 
-    align-items:center;
 
     justify-content:center;
 
+
+    align-items:center;
+
+
+    position:relative;
+
+
+    overflow:hidden;
+
+
     padding:80px 40px;
+
+
+
+    background:
+
+
+    radial-gradient(
+
+        circle at 50% 15%,
+
+        rgba(18,55,110,0.45),
+
+        transparent 45%
+
+    ),
+
+
+    radial-gradient(
+
+        circle at 80% 80%,
+
+        rgba(0,180,170,0.08),
+
+        transparent 35%
+
+    ),
+
+
+    #081426;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*
+   Subtle premium atmosphere
+*/
+
+
+
+.page01-page::before {
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+    background:
+
+
+    linear-gradient(
+
+        180deg,
+
+        transparent,
+
+        rgba(0,0,0,0.35)
+
+    );
+
+
+    pointer-events:none;
+
+
 
 }
 
@@ -56,13 +137,25 @@
 
 .page01-container {
 
+
+    position:relative;
+
+
+    z-index:1;
+
+
     width:100%;
 
-    max-width:1200px;
 
-    margin:0 auto;
+    max-width:1180px;
+
+
+    margin:auto;
+
 
     text-align:center;
+
+
 
 }
 
@@ -75,16 +168,115 @@
 
 
 /* ============================================================
-   WELCOME IDENTITY
+   BRAND HEADER
+============================================================ */
+
+
+
+.page01-header {
+
+
+    margin-bottom:45px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.brand-name {
+
+
+    font-size:20px;
+
+
+    font-weight:700;
+
+
+    letter-spacing:3px;
+
+
+    color:#F7F3EA;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.brand-subtitle {
+
+
+    margin-top:8px;
+
+
+    font-size:14px;
+
+
+    letter-spacing:4px;
+
+
+    color:#8EDFD6;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.brand-tagline {
+
+
+    margin-top:12px;
+
+
+    font-size:13px;
+
+
+    letter-spacing:2px;
+
+
+    color:#C9A227;
+
+
+
+}
+
+/* ============================================================
+   WELCOME MESSAGE
 ============================================================ */
 
 
 
 .page01-welcome {
 
-    margin-bottom:50px;
+
+    margin-bottom:55px;
+
 
 }
+
+
+
+
 
 
 
@@ -93,18 +285,29 @@
 .welcome-tamil {
 
 
-    font-size:28px;
+    margin:0 0 14px;
+
+
+    font-size:30px;
+
 
     font-weight:700;
 
+
+    line-height:1.6;
+
+
     color:#F7F3EA;
 
-    line-height:1.5;
 
-    margin-bottom:10px;
+    letter-spacing:0.2px;
+
 
 
 }
+
+
+
 
 
 
@@ -114,13 +317,20 @@
 .welcome-english {
 
 
+    margin:0;
+
+
     font-size:16px;
 
-    letter-spacing:1.8px;
 
-    text-transform:uppercase;
+    font-weight:400;
+
+
+    letter-spacing:2px;
+
 
     color:#8EDFD6;
+
 
 
 }
@@ -142,7 +352,7 @@
 .page01-hero {
 
 
-    margin-bottom:40px;
+    margin-bottom:45px;
 
 
 }
@@ -152,16 +362,22 @@
 
 
 
+
+
+
 .hero-tamil {
+
+
+    margin:0;
 
 
     font-size:clamp(
 
-        42px,
+        48px,
 
-        6vw,
+        7vw,
 
-        72px
+        82px
 
     );
 
@@ -172,13 +388,23 @@
     line-height:1.15;
 
 
+    letter-spacing:0.5px;
+
+
     color:#F7F3EA;
 
 
-    margin:0 0 18px;
+    text-shadow:
+
+
+    0 10px 35px rgba(0,0,0,0.35);
+
 
 
 }
+
+
+
 
 
 
@@ -188,13 +414,16 @@
 .hero-english {
 
 
+    margin:22px 0 0;
+
+
     font-size:clamp(
 
-        28px,
+        30px,
 
         4vw,
 
-        48px
+        52px
 
     );
 
@@ -202,19 +431,24 @@
     font-weight:600;
 
 
-    letter-spacing:3px;
+    letter-spacing:5px;
 
 
-    line-height:1.2;
+    line-height:1.25;
 
 
     color:#C9A227;
 
 
-    margin:0;
-
-
 }
+
+
+
+
+
+
+
+
 
 /* ============================================================
    SUPPORTING MESSAGE
@@ -224,13 +458,22 @@
 
 .page01-message {
 
+
     max-width:850px;
+
 
     margin:
 
-    0 auto 55px;
+
+    0 auto 65px;
+
+
 
 }
+
+
+
+
 
 
 
@@ -239,18 +482,26 @@
 .message-tamil {
 
 
+    margin:0 0 14px;
+
+
     font-size:24px;
 
-    line-height:1.7;
 
     font-weight:500;
 
+
+    line-height:1.8;
+
+
     color:#F7F3EA;
 
-    margin-bottom:12px;
 
 
 }
+
+
+
 
 
 
@@ -260,13 +511,20 @@
 .message-english {
 
 
+    margin:0;
+
+
     font-size:15px;
 
-    letter-spacing:1px;
+
+    letter-spacing:1.8px;
+
+
+    line-height:1.7;
+
 
     color:#8EDFD6;
 
-    line-height:1.6;
 
 
 }
@@ -296,157 +554,18 @@
     repeat(3,1fr);
 
 
-    gap:30px;
+    gap:32px;
 
 
-    margin:
+    margin-bottom:65px;
 
-    0 auto 60px;
 
 
 }
-
-
-
-
-
-
-
-
 
 /* ============================================================
-   PREMIUM DISCOVERY CARD
+   CARD TYPOGRAPHY
 ============================================================ */
-
-
-
-.discovery-card {
-
-
-    position:relative;
-
-
-    padding:40px 30px;
-
-
-    background:
-
-    rgba(255,255,255,0.03);
-
-
-    border-radius:24px;
-
-
-    border:
-
-    1px solid rgba(201,162,39,0.45);
-
-
-    overflow:hidden;
-
-
-    transition:
-
-    transform .3s ease,
-
-    border-color .3s ease;
-
-
-}
-
-
-
-
-
-
-/*
-   Inner luxury border
-*/
-
-
-
-.discovery-card::before {
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-    inset:8px;
-
-
-    border:
-
-
-    1px solid rgba(247,243,234,0.12);
-
-
-    border-radius:18px;
-
-
-    pointer-events:none;
-
-
-}
-
-
-
-
-
-
-.discovery-card:hover {
-
-
-    transform:
-
-    translateY(-6px);
-
-
-    border-color:
-
-    rgba(201,162,39,0.85);
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ============================================================
-   CARD CONTENT
-============================================================ */
-
-
-
-.card-icon {
-
-
-    position:relative;
-
-
-    z-index:1;
-
-
-    font-size:32px;
-
-
-    color:#C9A227;
-
-
-    margin-bottom:20px;
-
-
-}
-
-
-
 
 
 
@@ -459,19 +578,26 @@
     z-index:1;
 
 
+    margin:0 0 10px;
+
+
     font-size:26px;
 
 
     font-weight:700;
 
 
+    line-height:1.5;
+
+
     color:#F7F3EA;
 
 
-    margin-bottom:10px;
-
 
 }
+
+
+
 
 
 
@@ -487,10 +613,13 @@
     z-index:1;
 
 
-    font-size:14px;
+    margin:0;
 
 
-    letter-spacing:1.5px;
+    font-size:13px;
+
+
+    letter-spacing:2px;
 
 
     text-transform:uppercase;
@@ -499,13 +628,20 @@
     color:#8EDFD6;
 
 
+
 }
 
+
+
+
+
+
+
+
+
 /* ============================================================
-   PRIMARY CTA BUTTON
+   PRIMARY JOURNEY CTA
 ============================================================ */
-
-
 
 
 
@@ -518,7 +654,8 @@
     justify-content:center;
 
 
-    margin-bottom:45px;
+    margin-bottom:50px;
+
 
 
 }
@@ -537,6 +674,12 @@
     position:relative;
 
 
+    min-width:430px;
+
+
+    padding:24px 45px;
+
+
     display:flex;
 
 
@@ -552,22 +695,17 @@
     gap:10px;
 
 
-    min-width:360px;
-
-
-    padding:22px 45px;
-
-
     cursor:pointer;
 
 
-    border-radius:18px;
+    border-radius:22px;
 
 
     border:
 
 
-    1px solid rgba(201,162,39,0.8);
+    1px solid rgba(201,162,39,0.9);
+
 
 
     background:
@@ -577,28 +715,65 @@
 
         135deg,
 
-        #0D365F,
+        rgba(18,55,110,0.95),
 
-        #081426
+        rgba(8,20,38,1)
 
     );
 
-
-    color:#F7F3EA;
 
 
     box-shadow:
 
 
-    0 10px 30px rgba(0,0,0,0.35);
+    0 20px 50px rgba(0,0,0,0.4),
+
+    inset 0 0 25px rgba(201,162,39,0.08);
+
 
 
     transition:
 
 
-    transform .3s ease,
+    transform .35s ease,
 
-    box-shadow .3s ease;
+    box-shadow .35s ease;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.journey-primary-btn::before {
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:5px;
+
+
+    border:
+
+
+    1px solid rgba(247,243,234,0.12);
+
+
+    border-radius:17px;
+
+
+    pointer-events:none;
+
 
 
 }
@@ -617,13 +792,17 @@
     transform:
 
 
-    translateY(-4px);
+    translateY(-6px);
+
 
 
     box-shadow:
 
 
-    0 15px 40px rgba(0,0,0,0.45);
+    0 25px 60px rgba(0,0,0,0.5),
+
+    inset 0 0 30px rgba(201,162,39,0.12);
+
 
 
 }
@@ -639,16 +818,23 @@
 .btn-tamil {
 
 
-    font-size:28px;
+    position:relative;
+
+
+    z-index:1;
+
+
+    font-size:30px;
 
 
     font-weight:800;
 
 
-    line-height:1.4;
+    line-height:1.5;
 
 
     color:#F7F3EA;
+
 
 
 }
@@ -664,16 +850,23 @@
 .btn-english {
 
 
+    position:relative;
+
+
+    z-index:1;
+
+
     font-size:13px;
 
 
-    letter-spacing:2px;
+    letter-spacing:2.5px;
+
+
+    color:#8EDFD6;
 
 
     text-transform:uppercase;
 
-
-    color:#8EDFD6;
 
 
 }
@@ -692,9 +885,6 @@
 
 
 
-
-
-
 .journey-progress {
 
 
@@ -710,7 +900,12 @@
     gap:8px;
 
 
+
 }
+
+
+
+
 
 
 
@@ -728,7 +923,11 @@
     color:#F7F3EA;
 
 
+
 }
+
+
+
 
 
 
@@ -741,13 +940,17 @@
     font-size:12px;
 
 
-    letter-spacing:2px;
+    letter-spacing:2.5px;
 
 
     color:#8EDFD6;
 
 
+
 }
+
+
+
 
 
 
@@ -760,13 +963,14 @@
     margin-top:8px;
 
 
-    font-size:14px;
+    font-size:15px;
 
 
-    letter-spacing:3px;
+    letter-spacing:4px;
 
 
     color:#C9A227;
+
 
 
 }
