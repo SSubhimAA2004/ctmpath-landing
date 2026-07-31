@@ -1,528 +1,170 @@
 
-/* ==========================================================================
+/* ==========================================================
    CTM PATH™ Guided Journey™
+   Version : 1.0
+   File    : navigation.js
+   Purpose : Navigation Controller
+   ========================================================== */
 
-   File        : js/navigation.js
-   Version     : 2.9
+'use strict';
 
-   Status      : APP 2.5 COMPATIBILITY PATCH
+/* ==========================================================
+   NAVIGATION
+   ========================================================== */
 
+const Navigation = {
 
-   Purpose:
+    /* ------------------------------------------------------
+       Initialize
+       ------------------------------------------------------ */
 
-   Global journey navigation controller.
+    initialize() {
 
+        console.info('Navigation initialized.');
 
-   Responsibilities:
+        window.addEventListener(
 
-   ✓ Previous control
-   ✓ Continue control
-   ✓ Page state
-   ✓ Navigation visibility
+            'popstate',
 
+            () => {
 
-   Does NOT:
-
-   ✗ Render pages
-   ✗ Handle business logic
-
-
-   ========================================================================== */
-
-
-const Navigation = (() => {
-
-
-
-    let currentPage = 1;
-
-
-    const totalPages = 18;
-
-
-    let initialized = false;
-
-
-
-
-
-
-
-
-
-    function init(){
-
-
-
-        if(initialized){
-
-            return;
-
-        }
-
-
-
-        initialized = true;
-
-
-
-        bindEvents();
-
-
-
-        updateNavigation();
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    function bindEvents(){
-
-
-
-        document.addEventListener(
-
-            "click",
-
-            event => {
-
-
-
-                const button =
-
-                event.target.closest(
-
-                    "[data-action]"
-
-                );
-
-
-
-
-
-                if(!button){
-
-                    return;
-
-                }
-
-
-
-
-
-                const action =
-
-                button.dataset.action;
-
-
-
-
-
-                if(action === "previous"){
-
-
-
-                    previous();
-
-
-
-                }
-
-
-
-
-
-                if(action === "continue"){
-
-
-
-                    next();
-
-
-
-                }
-
-
+                this.handleBrowserNavigation();
 
             }
 
         );
 
+    },
 
+    /* ------------------------------------------------------
+       Navigate
+       ------------------------------------------------------ */
 
-    }
+    async go(page) {
 
+        try {
 
+            if (!page) return;
 
+            State.app.previousPage =
 
+                State.app.currentPage;
 
+            State.app.currentPage = page;
 
-
-
-
-    function next(){
-
-
-
-        if(currentPage >= totalPages){
-
-            return;
-
-        }
-
-
-
-        setPage(
-
-            currentPage + 1
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    function previous(){
-
-
-
-        if(currentPage <= 1){
-
-            return;
-
-        }
-
-
-
-        setPage(
-
-            currentPage - 1
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    function setPage(page){
-
-
-
-        currentPage = page;
-
-
-
-        updateNavigation();
-
-
-
-
-
-        document.dispatchEvent(
-
-
-
-            new CustomEvent(
-
-                "ctm-page-change",
+            history.pushState(
 
                 {
 
+                    page
 
-                    detail:{
+                },
 
+                '',
 
-                        page:page
+                `#${page}`
 
+            );
 
-                    }
+            if (typeof Router !== 'undefined') {
 
+                await Router.load(page);
 
-                }
+            }
 
-            )
+        }
 
+        catch (error) {
 
+            console.error(error);
+
+        }
+
+    },
+
+    /* ------------------------------------------------------
+       Next Page
+       ------------------------------------------------------ */
+
+    next() {
+
+        const nextStep =
+
+            State.journey.currentStep + 1;
+
+        this.go(
+
+            `page0${nextStep}`
 
         );
 
+    },
 
+    /* ------------------------------------------------------
+       Previous Page
+       ------------------------------------------------------ */
+
+    previous() {
+
+        if (
+
+            State.app.previousPage
+
+        ) {
+
+            this.go(
+
+                State.app.previousPage
+
+            );
+
+        }
+
+    },
+
+    /* ------------------------------------------------------
+       Browser Navigation
+       ------------------------------------------------------ */
+
+    handleBrowserNavigation() {
+
+        const hash =
+
+            window.location.hash.replace(
+
+                '#',
+
+                ''
+
+            );
+
+        if (
+
+            hash
+
+            &&
+
+            typeof Router !== 'undefined'
+
+        ) {
+
+            Router.load(hash);
+
+        }
+
+    },
+
+    /* ------------------------------------------------------
+       Restart Journey
+       ------------------------------------------------------ */
+
+    restart() {
+
+        State.reset();
+
+        this.go('page01');
 
     }
 
+};
 
-
-
-
-
-
-
-
-    function updateNavigation(){
-
-
-
-        const navigation =
-
-        document.getElementById(
-
-            "app-navigation"
-
-        );
-
-
-
-
-
-        if(!navigation){
-
-            return;
-
-        }
-
-
-
-
-
-
-
-        /*
-            PAGE 01
-
-            Welcome page owns CTA.
-
-        */
-
-
-        if(currentPage === 1){
-
-
-
-            navigation.style.display =
-
-            "none";
-
-
-
-        }
-
-
-
-        else {
-
-
-
-            navigation.style.display =
-
-            "flex";
-
-
-
-        }
-
-
-
-
-
-
-
-
-        const previousButton =
-
-        navigation.querySelector(
-
-            "[data-action='previous']"
-
-        );
-
-
-
-
-
-        if(previousButton){
-
-
-
-            previousButton.style.visibility =
-
-
-
-            currentPage <= 2
-
-            ?
-
-            "hidden"
-
-            :
-
-            "visible";
-
-
-
-        }
-
-
-
-
-
-
-
-        updateCounter();
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    function updateCounter(){
-
-
-
-        const counter =
-
-        document.getElementById(
-
-            "journey-counter"
-
-        );
-
-
-
-
-
-        if(!counter){
-
-            return;
-
-        }
-
-
-
-
-
-
-
-        counter.textContent =
-
-
-
-        String(currentPage)
-
-        .padStart(2,"0")
-
-        +
-
-        " / "
-
-        +
-
-        String(totalPages)
-
-        .padStart(2,"0");
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    return {
-
-
-
-        init,
-
-
-        setPage,
-
-
-        updateNavigation,
-
-
-        getCurrentPage(){
-
-
-
-            return currentPage;
-
-
-
-        }
-
-
-
-    };
-
-
-
-})();
-
-
-
-
-
-
-
-
-
-window.Navigation = Navigation;
-
-
-
-
-
-
-
-
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    ()=>{
-
-
-        Navigation.init();
-
-
-
-    }
-
-);
