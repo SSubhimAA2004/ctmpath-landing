@@ -2,43 +2,38 @@
 /* ==========================================================================
    CTM PATH™ MILLIONAIRES™
 
-   File        : footer.css
-   Version     : 10.0
+   File      : footer.css
+   Version   : 10.2
 
-   Status      : PREMIUM GLOBAL FOOTER
+   Status    : PREMIUM GLOBAL FOOTER
 
-   Purpose:
+   Philosophy:
 
-   Final brand signature layer.
-
-   Covers:
-
-   ✓ Journey Signature
-   ✓ Brand Identity
-   ✓ Founder Identity
-   ✓ Movement Connection
-   ✓ Legacy Statement
-   ✓ Copyright
-   ✓ Responsive Layout
+   The footer is not an ending.
+   It is the final signature of the movement.
 
    ========================================================================== */
 
 
 
 /* ==========================================================================
-   FOOTER CONTAINER
+   FOOTER FOUNDATION
 ========================================================================== */
 
 
 .ctm-footer {
 
+
     position:relative;
+
 
     overflow:hidden;
 
+
     margin-top:
 
-        clamp(5rem,8vw,9rem);
+        clamp(7rem,10vw,12rem);
+
 
 
     padding-top:
@@ -46,29 +41,30 @@
         0;
 
 
+
     isolation:isolate;
 
 
+
     background:
+
 
         linear-gradient(
 
             180deg,
 
-            rgba(8,28,58,0),
+            rgba(8,28,58,.10),
 
-            rgba(8,28,58,.25) 20%,
-
-            rgba(8,28,58,.75) 70%,
-
-            rgba(6,16,32,.98)
+            rgba(8,28,58,.95)
 
         );
+
 
 
     border-top:
 
         1px solid rgba(255,255,255,.06);
+
 
 }
 
@@ -77,15 +73,18 @@
 
 
 /* ==========================================================================
-   PREMIUM AMBIENT LIGHT
+   PREMIUM LIGHTING
 ========================================================================== */
 
 
 .ctm-footer::before {
 
+
     content:"";
 
+
     position:absolute;
+
 
     inset:0;
 
@@ -93,27 +92,32 @@
     pointer-events:none;
 
 
+
     background:
+
 
         radial-gradient(
 
             ellipse at top center,
 
-            rgba(33,210,198,.10),
+            rgba(35,212,200,.12),
 
             transparent 45%
 
         ),
 
+
+
         radial-gradient(
 
             ellipse at bottom right,
 
-            rgba(201,162,39,.10),
+            rgba(216,180,90,.12),
 
-            transparent 42%
+            transparent 40%
 
         );
+
 
 }
 
@@ -123,20 +127,28 @@
 
 .ctm-footer::after {
 
+
     content:"";
+
 
     position:absolute;
 
-    left:10%;
-
-    right:10%;
 
     top:0;
+
+
+    left:12%;
+
+
+    right:12%;
+
 
     height:1px;
 
 
+
     background:
+
 
         linear-gradient(
 
@@ -144,11 +156,12 @@
 
             transparent,
 
-            rgba(201,162,39,.55),
+            rgba(216,180,90,.65),
 
             transparent
 
         );
+
 
 }
 
@@ -163,46 +176,62 @@
 
 .footer-topline {
 
+
     position:relative;
+
 
     z-index:2;
 
 
+
     display:flex;
+
 
     justify-content:center;
 
+
     align-items:center;
+
 
     flex-wrap:wrap;
 
 
-    gap:1rem;
+
+    gap:
+
+        1.4rem;
+
 
 
     padding:
 
-        2rem 1.5rem;
+
+        3.5rem 2rem;
+
 
 
     color:
 
-        var(--ctm-gold-soft,#D6B45C);
+        #D8B45A;
+
 
 
     font-size:
 
-        .82rem;
+        .85rem;
+
 
 
     font-weight:
 
-        800;
+        900;
+
 
 
     letter-spacing:
 
-        .28em;
+        .35em;
+
 
 
     text-transform:
@@ -210,7 +239,9 @@
         uppercase;
 
 
+
     text-align:center;
+
 
 }
 
@@ -220,9 +251,10 @@
 
 .footer-divider {
 
+
     color:
 
-        var(--ctm-teal,#23D4C8);
+        #23D4C8;
 
 
 }
@@ -232,20 +264,24 @@
 
 
 /* ==========================================================================
-   FOOTER CONTENT
+   MAIN FOOTER AREA
 ========================================================================== */
 
 
 .footer-container {
 
+
     position:relative;
+
 
     z-index:2;
 
 
+
     width:
 
-        min(1280px,calc(100% - 72px));
+        min(1380px,calc(100% - 96px));
+
 
 
     margin:
@@ -253,13 +289,12 @@
         0 auto;
 
 
+
     padding:
 
-        clamp(4rem,7vw,6rem)
 
-        0
+        5rem 0 2.5rem;
 
-        2rem;
 
 }
 
@@ -269,10 +304,13 @@
 
 .footer-grid {
 
+
     display:grid;
 
 
+
     grid-template-columns:
+
 
         1.2fr
 
@@ -281,12 +319,16 @@
         1.2fr;
 
 
+
     gap:
 
-        clamp(2rem,5vw,5rem);
+
+        clamp(5rem,8vw,9rem);
+
 
 
     align-items:start;
+
 
 }
 
@@ -295,20 +337,24 @@
 
 
 /* ==========================================================================
-   BRAND SECTION
+   BRAND COLUMN
 ========================================================================== */
 
 
 .footer-brand {
 
+
     display:flex;
+
 
     flex-direction:column;
 
 
+
     gap:
 
-        .8rem;
+        1.2rem;
+
 
 }
 
@@ -318,14 +364,27 @@
 
 .footer-brand-name {
 
+
     color:
 
-        #FFFFFF;
+        #F8F5ED;
+
+
+
+    font-family:
+
+        "Cinzel",
+
+        "Playfair Display",
+
+        serif;
+
 
 
     font-size:
 
-        clamp(2rem,3vw,2.8rem);
+        clamp(2rem,3vw,3rem);
+
 
 
     font-weight:
@@ -333,14 +392,17 @@
         900;
 
 
+
     letter-spacing:
 
-        .14em;
+        .18em;
 
 
-    text-transform:
 
-        uppercase;
+    line-height:
+
+        1;
+
 
 }
 
@@ -350,29 +412,35 @@
 
 .footer-brand-subtitle {
 
+
     color:
 
-        var(--ctm-gold-soft,#D6B45C);
+        #D8B45A;
+
 
 
     font-size:
 
-        .95rem;
+        1rem;
+
 
 
     font-weight:
 
-        800;
+        900;
+
 
 
     letter-spacing:
 
-        .32em;
+        .45em;
+
 
 
     text-transform:
 
         uppercase;
+
 
 }
 
@@ -382,19 +450,29 @@
 
 .footer-brand-description {
 
+
     color:
 
-        rgba(255,255,255,.80);
+        #23D4C8;
+
 
 
     font-size:
 
-        1rem;
+        1.05rem;
 
 
-    line-height:
 
-        1.7;
+    font-weight:
+
+        700;
+
+
+
+    letter-spacing:
+
+        .06em;
+
 
 }
 
@@ -404,9 +482,11 @@
 
 .footer-brand-signature {
 
+
     color:
 
-        var(--ctm-teal-soft,#6BE8DD);
+        rgba(248,245,237,.75);
+
 
 
     font-size:
@@ -414,9 +494,11 @@
         1rem;
 
 
-    font-weight:
 
-        600;
+    letter-spacing:
+
+        .04em;
+
 
 }
 
@@ -434,22 +516,26 @@
 
     color:
 
-        rgba(255,255,255,.45);
+        rgba(248,245,237,.45);
+
 
 
     font-size:
 
-        .7rem;
+        .72rem;
+
 
 
     font-weight:
 
-        800;
+        900;
+
 
 
     letter-spacing:
 
-        .3em;
+        .35em;
+
 
 
     text-transform:
@@ -464,20 +550,24 @@
 
 
 /* ==========================================================================
-   FOUNDER SECTION
+   FOUNDER COLUMN
 ========================================================================== */
 
 
 .footer-founder {
 
+
     display:flex;
+
 
     flex-direction:column;
 
 
+
     gap:
 
-        .75rem;
+        1rem;
+
 
 }
 
@@ -487,22 +577,37 @@
 
 .footer-founder-name {
 
-    color:#FFFFFF;
+
+    color:
+
+        #F8F5ED;
+
+
+
+    font-family:
+
+        "Cinzel",
+
+        serif;
+
 
 
     font-size:
 
-        1.25rem;
+        1.35rem;
+
 
 
     font-weight:
 
-        800;
+        700;
+
 
 
     line-height:
 
-        1.4;
+        1.5;
+
 
 }
 
@@ -512,9 +617,11 @@
 
 .footer-role {
 
+
     color:
 
-        rgba(255,255,255,.68);
+        rgba(248,245,237,.68);
+
 
 
     font-size:
@@ -522,9 +629,11 @@
         1rem;
 
 
+
     line-height:
 
-        1.7;
+        1.8;
+
 
 }
 
@@ -533,20 +642,24 @@
 
 
 /* ==========================================================================
-   CONTACT SECTION
+   CONTACT COLUMN
 ========================================================================== */
 
 
 .footer-contact {
 
+
     display:flex;
+
 
     flex-direction:column;
 
 
+
     gap:
 
-        1.1rem;
+        1.4rem;
+
 
 }
 
@@ -556,7 +669,11 @@
 
 .footer-contact-title {
 
-    color:#FFFFFF;
+
+    color:
+
+        #F8F5ED;
+
 
 
     font-size:
@@ -564,19 +681,23 @@
         1rem;
 
 
+
     font-weight:
 
-        800;
+        900;
+
 
 
     letter-spacing:
 
-        .08em;
+        .12em;
+
 
 
     text-transform:
 
         uppercase;
+
 
 }
 
@@ -586,20 +707,24 @@
 
 .footer-contact-item {
 
+
     display:flex;
 
 
     align-items:center;
 
 
+
     gap:
 
-        1rem;
+        1.2rem;
+
 
 
     transition:
 
-        transform .3s ease;
+        .3s ease;
+
 
 }
 
@@ -609,9 +734,11 @@
 
 .footer-contact-item:hover {
 
+
     transform:
 
-        translateX(8px);
+        translateX(10px);
+
 
 }
 
@@ -621,14 +748,17 @@
 
 .contact-icon {
 
+
     width:
 
-        44px;
+        48px;
+
 
 
     height:
 
-        44px;
+        48px;
+
 
 
     display:flex;
@@ -640,24 +770,24 @@
     justify-content:center;
 
 
+
     border-radius:
 
         50%;
 
 
+
     background:
 
-        rgba(33,210,198,.12);
+        rgba(35,212,200,.12);
+
 
 
     border:
 
-        1px solid rgba(33,210,198,.25);
+        1px solid rgba(35,212,200,.25);
 
 
-    font-size:
-
-        1.1rem;
 
 }
 
@@ -667,22 +797,28 @@
 
 .footer-contact-item a {
 
+
     color:
 
-        #FFFFFF;
+        #F8F5ED;
+
 
 
     text-decoration:none;
 
 
+
     font-size:
 
-        1rem;
+        1.05rem;
 
 
-    transition:
 
-        color .3s ease;
+    font-weight:
+
+        600;
+
+
 
 }
 
@@ -692,9 +828,11 @@
 
 .footer-contact-item:hover a {
 
+
     color:
 
-        var(--ctm-teal-soft,#6BE8DD);
+        #23D4C8;
+
 
 }
 
@@ -703,33 +841,46 @@
 
 
 /* ==========================================================================
-   LEGACY STATEMENT
+   LEGACY MESSAGE
 ========================================================================== */
 
 
 .footer-legacy {
 
+
     margin-top:
 
-        4rem;
+        5rem;
+
 
 
     padding:
 
-        2rem;
+
+        3rem;
+
 
 
     text-align:center;
 
 
+
     color:
 
-        rgba(255,255,255,.75);
+        rgba(248,245,237,.85);
+
 
 
     font-size:
 
-        1.05rem;
+        1.25rem;
+
+
+
+    font-weight:
+
+        500;
+
 
 
     line-height:
@@ -737,19 +888,23 @@
         2;
 
 
+
     letter-spacing:
 
-        .04em;
+        .08em;
+
 
 
     border-top:
 
-        1px solid rgba(255,255,255,.06);
+        1px solid rgba(255,255,255,.08);
+
 
 
     border-bottom:
 
-        1px solid rgba(255,255,255,.06);
+        1px solid rgba(255,255,255,.08);
+
 
 }
 
@@ -764,22 +919,27 @@
 
 .footer-bottom {
 
+
     margin-top:
 
-        2rem;
+        2.5rem;
+
 
 
     padding-top:
 
-        1.5rem;
+        1.8rem;
+
 
 
     text-align:center;
 
 
+
     color:
 
-        rgba(255,255,255,.45);
+        rgba(248,245,237,.45);
+
 
 
     font-size:
@@ -787,9 +947,12 @@
         .85rem;
 
 
+
     letter-spacing:
 
-        .12em;
+        .18em;
+
+
 
 }
 
@@ -802,37 +965,52 @@
 ========================================================================== */
 
 
-@media(max-width:1000px){
+@media(max-width:1100px){
 
 
-    .footer-grid {
-
-        grid-template-columns:
-
-            1fr;
+.footer-grid {
 
 
-        text-align:center;
+    grid-template-columns:
 
-    }
-
-
-    .footer-brand,
-
-    .footer-founder,
-
-    .footer-contact {
-
-        align-items:center;
-
-    }
+        1fr;
 
 
-    .footer-contact-item {
 
-        justify-content:center;
+    gap:
 
-    }
+        3.5rem;
+
+
+
+    text-align:center;
+
+
+}
+
+
+
+.footer-brand,
+
+.footer-founder,
+
+.footer-contact {
+
+
+    align-items:center;
+
+
+}
+
+
+
+.footer-contact-item {
+
+
+    justify-content:center;
+
+
+}
 
 
 }
@@ -844,37 +1022,63 @@
 @media(max-width:600px){
 
 
-    .footer-container {
-
-        width:
-
-            calc(100% - 32px);
-
-    }
+.footer-container {
 
 
-    .footer-topline {
+    width:
 
-        font-size:
-
-            .70rem;
-
-
-        letter-spacing:
-
-            .16em;
-
-    }
-
-
-    .footer-brand-name {
-
-        font-size:
-
-            1.7rem;
-
-    }
+        calc(100% - 32px);
 
 
 }
 
+
+
+.footer-topline {
+
+
+    font-size:
+
+        .7rem;
+
+
+
+    letter-spacing:
+
+        .18em;
+
+
+}
+
+
+
+.footer-brand-name {
+
+
+    font-size:
+
+        1.8rem;
+
+
+}
+
+
+
+.footer-legacy {
+
+
+    padding:
+
+        2rem;
+
+
+
+    font-size:
+
+        1rem;
+
+
+}
+
+
+}
