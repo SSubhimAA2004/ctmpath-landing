@@ -2,471 +2,205 @@
 /*!
  * ==============================================================
  * CTM PATH™ Guided Journey™
- * Component Loader Module
+ * Component Loader
  * --------------------------------------------------------------
- * Version : 5.0
- * Pattern : Singleton
+ * Version : 1.0 (Working MVP)
  *
  * Responsibilities
  * --------------------------------------------------------------
- * ✓ Load Shared HTML Components
- * ✓ Component Caching
- * ✓ Header Loading
- * ✓ Footer Loading
- * ✓ Shared Resource Initialization
+ * ✓ Load Header Component
+ * ✓ Load Footer Component
+ * ✓ Inject Shared HTML
  *
  * Never
  * --------------------------------------------------------------
- * ✗ UI Logic
  * ✗ Routing
- * ✗ Navigation
- * ✗ Business Logic
- * ✗ Validation
- * ✗ API
- * ✗ Application State
+ * ✗ Page Logic
+ * ✗ Assessment Logic
+ * ✗ State Management
+ *
  * ==============================================================
  */
 
+
 window.CTM = window.CTM || {};
 
-class ComponentLoader {
 
-    /* ==========================================================
-       PRIVATE STATE
-    ========================================================== */
+/* ==============================================================
+   COMPONENT LOADER
+============================================================== */
 
-    #initialized = false;
 
-    #cache = new Map();
+CTM.ComponentLoader = {
 
-    /* ==========================================================
-       INITIALIZE
-    ========================================================== */
 
-    async init() {
+    async loadComponents() {
 
-        if (this.#initialized) {
-            return;
-        }
 
-        this.#initialized = true;
+        await this.loadHeader();
 
-        CTM.Logger.info(
-            'Component Loader initialized.'
-        );
 
-    }
+        await this.loadFooter();
 
-    /* ==========================================================
-       DESTROY
-    ========================================================== */
 
-    async destroy() {
+        console.log(
 
-        this.#cache.clear();
-
-        this.#initialized = false;
-
-    }
-
-    /* ==========================================================
-       STATUS
-    ========================================================== */
-
-    isInitialized() {
-
-        return this.#initialized;
-
-    }
-
-    /* ==========================================================
-       LOAD COMPONENT
-
-    ========================================================== */
-
-    async load(componentName, container) {
-
-        const target = CTM.DOM.get(container);
-
-        if (!target) {
-
-            throw new Error(
-
-                `Container not found: ${container}`
-
-            );
-
-        }
-
-        const html = await this.#fetchComponent(
-
-            componentName
+            "CTM PATH™ Components Loaded."
 
         );
 
-        target.innerHTML = html;
 
-    }
+    },
+
+
 
     /* ==========================================================
-       LOAD HEADER
-
+       HEADER
     ========================================================== */
+
 
     async loadHeader() {
 
-        await this.load(
 
-            'header',
+        const target = document.querySelector(
 
-            '#header'
+            "#header-container"
 
         );
 
-    }
+
+        if (!target) {
+
+
+            console.warn(
+
+                "Header container not found."
+
+            );
+
+
+            return;
+
+
+        }
+
+
+
+        await this.load(
+
+            "components/header.html",
+
+            target
+
+        );
+
+
+    },
+
+
 
     /* ==========================================================
-       LOAD FOOTER
-
+       FOOTER
     ========================================================== */
+
 
     async loadFooter() {
 
-        await this.load(
 
-            'footer',
+        const target = document.querySelector(
 
-            '#footer'
-
-        );
-
-    }
-
-    /* ==========================================================
-       Remaining Methods
-
-       Batch 1B
-
-       -----------------------------------------
-
-       loadShared()
-
-       #fetchComponent()
-
-       clearCache()
-
-       getCacheSize()
-
-    ========================================================== */
-
-}
-
-CTM.ComponentLoader = Object.freeze(
-
-    new ComponentLoader()
-
-);
-
-    /* ==========================================================
-       LOAD SHARED COMPONENTS
-
-       Header + Footer
-
-    ========================================================== */
-
-    async loadShared() {
-
-        await Promise.all([
-
-            this.loadHeader(),
-
-            this.loadFooter()
-
-        ]);
-
-        CTM.Logger.info(
-
-            'Shared components loaded.'
+            "#footer-container"
 
         );
 
-    }
 
-    /* ==========================================================
-       FETCH COMPONENT
+        if (!target) {
 
-       Uses in-memory cache.
 
-    ========================================================== */
+            console.warn(
 
-    async #fetchComponent(componentName) {
-
-        if (
-
-            this.#cache.has(componentName)
-
-        ) {
-
-            return this.#cache.get(
-
-                componentName
+                "Footer container not found."
 
             );
 
-        }
 
-        const url =
+            return;
 
-            `${CTM.Config.COMPONENTS.PATH}/${componentName}.html`;
-
-        const response =
-
-            await fetch(url);
-
-        if (!response.ok) {
-
-            throw new Error(
-
-                `Unable to load component: ${componentName}`
-
-            );
 
         }
 
-        const html =
 
-            await response.text();
-
-        this.#cache.set(
-
-            componentName,
-
-            html
-
-        );
-
-        return html;
-
-    }
-
-    /* ==========================================================
-       PRELOAD COMPONENTS
-
-       Warm cache without rendering.
-
-    ========================================================== */
-
-    async preload(...componentNames) {
-
-        await Promise.all(
-
-            componentNames.map(
-
-                component =>
-
-                    this.#fetchComponent(component)
-
-            )
-
-        );
-
-    }
-
-    /* ==========================================================
-       CACHE
-
-    ========================================================== */
-
-    clearCache() {
-
-        this.#cache.clear();
-
-    }
-
-    has(componentName) {
-
-        return this.#cache.has(
-
-            componentName
-
-        );
-
-    }
-
-    getCacheSize() {
-
-        return this.#cache.size;
-
-    }
-
-    /* ==========================================================
-       Remaining Methods
-
-       Batch 1C (EOF)
-
-       -----------------------------------------
-
-       reload()
-
-       dispose()
-
-       Singleton Export
-
-       Framework Freeze
-
-    ========================================================== */
-
-    /* ==========================================================
-       RELOAD COMPONENT
-
-       Removes cache and reloads.
-
-    ========================================================== */
-
-    async reload(componentName, container) {
-
-        this.#cache.delete(
-
-            componentName
-
-        );
 
         await this.load(
 
-            componentName,
+            "components/footer.html",
 
-            container
-
-        );
-
-    }
-
-    /* ==========================================================
-       RELOAD SHARED COMPONENTS
-
-    ========================================================== */
-
-    async reloadShared() {
-
-        this.clearCache();
-
-        await this.loadShared();
-
-    }
-
-    /* ==========================================================
-       COMPONENT EXISTS IN CACHE
-
-    ========================================================== */
-
-    isCached(componentName) {
-
-        return this.#cache.has(
-
-            componentName
+            target
 
         );
 
-    }
+
+    },
+
+
 
     /* ==========================================================
-       DISPOSE
-
+       GENERIC HTML LOADER
     ========================================================== */
 
-    async dispose() {
 
-        await this.destroy();
+    async load(url, target) {
+
+
+        try {
+
+
+            const response = await fetch(
+
+                url
+
+            );
+
+
+
+            if (!response.ok) {
+
+
+                throw new Error(
+
+                    `Unable to load ${url}`
+
+                );
+
+
+            }
+
+
+
+            target.innerHTML = await response.text();
+
+
+
+        }
+
+
+        catch(error) {
+
+
+            console.error(
+
+                "Component loading failed:",
+
+                error
+
+            );
+
+
+        }
+
 
     }
 
-}
 
-/* ==============================================================
-   SINGLETON EXPORT
-============================================================== */
-
-CTM.ComponentLoader = Object.freeze(
-
-    new ComponentLoader()
-
-);
-
-/* ==============================================================
-   FRAMEWORK FREEZE v5.0
-
-   Responsibilities
-
-   ✓ Load Shared Components
-
-   ✓ Load HTML Fragments
-
-   ✓ Cache Components
-
-   ✓ Preload Components
-
-   ✓ Reload Components
-
-   ✓ Manage Component Lifecycle
-
-
-   Never
-
-   ✗ Business Logic
-
-   ✗ Routing
-
-   ✗ Navigation
-
-   ✗ UI
-
-   ✗ Validation
-
-   ✗ API
-
-   ✗ State Management
-
-
-   Public API
-
-   ✓ init()
-
-   ✓ destroy()
-
-   ✓ dispose()
-
-   ✓ isInitialized()
-
-   ✓ load()
-
-   ✓ loadHeader()
-
-   ✓ loadFooter()
-
-   ✓ loadShared()
-
-   ✓ preload()
-
-   ✓ reload()
-
-   ✓ reloadShared()
-
-   ✓ clearCache()
-
-   ✓ has()
-
-   ✓ isCached()
-
-   ✓ getCacheSize()
-
-
-   Status
-
-   FRAMEWORK v5.0
-
-   FROZEN
-
-   EOF
-
-============================================================== */
+};
 
