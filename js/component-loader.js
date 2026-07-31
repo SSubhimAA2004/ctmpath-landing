@@ -3,26 +3,28 @@
    CTM PATH™ MILLIONAIRES™
 
    File      : component-loader.js
-   Version   : 1.0
+   Version   : 2.0
 
-   Purpose:
+   Status    : PREMIUM COMPONENT LOADER
 
-   Global Component Loader
 
    Responsibilities:
 
-   ✓ Load Header
-   ✓ Load Footer
+   ✓ Load Header Component
+   ✓ Load Footer Component
    ✓ Inject Shared Components
+   ✓ Load Header Controller
+
 
    Does NOT:
 
    ✗ Routing
+   ✗ Page Loading
    ✗ Business Logic
-   ✗ State Management
    ✗ API Calls
+   ✗ Assessment Logic
 
-   ========================================================================== */
+========================================================================== */
 
 
 (function(){
@@ -30,6 +32,13 @@
 
 "use strict";
 
+
+
+
+
+/* ==========================================================================
+   COMPONENT PATHS
+========================================================================== */
 
 
 const COMPONENT_PATH = {
@@ -40,9 +49,11 @@ const COMPONENT_PATH = {
         "components/header.html",
 
 
+
     footer:
 
         "components/footer.html"
+
 
 
 };
@@ -51,8 +62,27 @@ const COMPONENT_PATH = {
 
 
 
+const SCRIPT_PATH = {
+
+
+    header:
+
+        "js/header.js"
+
+
+
+};
+
+
+
+
+
+
+
+
+
 /* ==========================================================================
-   LOAD COMPONENT
+   LOAD HTML COMPONENT
 ========================================================================== */
 
 
@@ -74,9 +104,23 @@ async function loadComponent(
 
     if(!container){
 
+
+        console.warn(
+
+            "Component container missing:",
+
+            selector
+
+        );
+
+
         return;
 
+
     }
+
+
+
 
 
 
@@ -90,19 +134,27 @@ async function loadComponent(
 
 
 
+
+
         if(!response.ok){
+
 
 
             throw new Error(
 
-                "Unable to load "
+                "Unable to load component: "
 
-                + file
+                +
+
+                file
 
             );
 
 
         }
+
+
+
 
 
 
@@ -112,7 +164,21 @@ async function loadComponent(
 
 
 
+
+
+        console.log(
+
+            "Loaded component:",
+
+            file
+
+        );
+
+
+
     }
+
+
 
     catch(error){
 
@@ -140,30 +206,136 @@ async function loadComponent(
 
 
 
+
+
 /* ==========================================================================
-   LOAD GLOBAL COMPONENTS
+   LOAD JAVASCRIPT CONTROLLER
 ========================================================================== */
 
 
-async function loadGlobalComponents(){
+function loadScript(file){
 
 
 
-    await loadComponent(
+    return new Promise(
 
-        "#global-header",
-
-        COMPONENT_PATH.header
-
-    );
+        function(resolve,reject){
 
 
 
-    await loadComponent(
 
-        "#global-footer",
 
-        COMPONENT_PATH.footer
+            const existing =
+
+                document.querySelector(
+
+                    `script[src="${file}"]`
+
+                );
+
+
+
+
+
+
+            if(existing){
+
+
+                resolve();
+
+
+                return;
+
+
+            }
+
+
+
+
+
+
+            const script =
+
+                document.createElement(
+
+                    "script"
+
+                );
+
+
+
+
+
+
+            script.src = file;
+
+
+
+            script.async = false;
+
+
+
+
+
+
+            script.onload = function(){
+
+
+
+                console.log(
+
+                    "Loaded script:",
+
+                    file
+
+                );
+
+
+
+                resolve();
+
+
+
+            };
+
+
+
+
+
+
+
+
+            script.onerror = function(){
+
+
+
+                reject(
+
+                    new Error(
+
+                        "Script loading failed: "
+
+                        +
+
+                        file
+
+                    )
+
+                );
+
+
+            };
+
+
+
+
+
+
+            document.body.appendChild(script);
+
+
+
+        }
 
     );
 
@@ -177,6 +349,96 @@ async function loadGlobalComponents(){
 
 
 
+
+
+/* ==========================================================================
+   LOAD GLOBAL COMPONENTS
+========================================================================== */
+
+
+async function loadGlobalComponents(){
+
+
+
+
+
+    /*
+       HEADER
+    */
+
+
+    await loadComponent(
+
+        "#global-header",
+
+        COMPONENT_PATH.header
+
+    );
+
+
+
+
+
+
+
+    /*
+       HEADER CONTROLLER
+    */
+
+
+    await loadScript(
+
+        SCRIPT_PATH.header
+
+    );
+
+
+
+
+
+
+
+    /*
+       FOOTER
+    */
+
+
+    await loadComponent(
+
+        "#global-footer",
+
+        COMPONENT_PATH.footer
+
+    );
+
+
+
+
+
+
+    console.log(
+
+        "CTM PATH™ Global Components Loaded."
+
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   PUBLIC API
+========================================================================== */
+
+
 window.CTM_COMPONENTS = {
 
 
@@ -185,7 +447,10 @@ window.CTM_COMPONENTS = {
         loadGlobalComponents
 
 
+
 };
+
+
 
 
 
