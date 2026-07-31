@@ -1,1 +1,826 @@
 
+/* ============================================================
+   CTM PATH™ MILLIONAIRES™
+   Guided Journey™
+
+   PAGE06
+   PERSONAL TRANSFORMATION PRESCRIPTION™
+
+   File:
+   css/page06.css
+
+   Responsibility:
+   Visual presentation only
+
+============================================================ */
+
+
+
+/* ============================================================
+   PAGE CONTAINER
+============================================================ */
+
+
+.page06-container {
+
+
+    width:min(1200px,92%);
+
+
+    margin:0 auto;
+
+
+    padding:70px 0 100px;
+
+
+    color:#F7F4EA;
+
+
+}
+
+
+
+
+
+/* ============================================================
+   HEADER
+============================================================ */
+
+
+.prescription-header {
+
+
+    text-align:center;
+
+
+    max-width:950px;
+
+
+    margin:0 auto 65px;
+
+
+}
+
+
+
+
+
+.journey-label {
+
+
+    color:#2ED1C4;
+
+
+    font-size:14px;
+
+
+    letter-spacing:3px;
+
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+
+
+.prescription-header h1 {
+
+
+    font-size:clamp(38px,5vw,60px);
+
+
+    line-height:1.15;
+
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+
+
+.english-title {
+
+
+    color:#C8A951;
+
+
+    font-size:24px;
+
+
+    margin-bottom:30px;
+
+
+}
+
+
+
+
+
+.intro-text {
+
+
+    color:rgba(247,244,234,0.8);
+
+
+    font-size:18px;
+
+
+    line-height:1.9;
+
+
+}
+
+
+
+
+
+
+
+
+/* ============================================================
+   COMMON CARDS
+============================================================ */
+
+
+.focus-card,
+.roadmap-card,
+.daily-rhythm-card,
+.outcomes-card,
+.journey-transition-card {
+
+
+    background:
+
+
+    linear-gradient(
+
+        145deg,
+
+        rgba(255,255,255,0.06),
+
+        rgba(255,255,255,0.015)
+
+    );
+
+
+    border:
+
+    1px solid rgba(46,209,196,0.18);
+
+
+    border-radius:28px;
+
+
+    padding:42px;
+
+
+    backdrop-filter:blur(12px);
+
+
+}
+
+
+
+
+
+
+
+/* ============================================================
+   PRIMARY FOCUS
+============================================================ */
+
+
+.focus-card {
+
+
+    text-align:center;
+
+
+    margin-bottom:65px;
+
+
+}
+
+
+
+
+
+.card-icon {
+
+
+    font-size:42px;
+
+
+    color:#C8A951;
+
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+
+
+.focus-card h2 {
+
+
+    font-size:32px;
+
+
+    margin-bottom:10px;
+
+
+}
+
+
+
+
+
+.focus-card h3 {
+
+
+    color:#2ED1C4;
+
+
+    font-size:18px;
+
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+
+
+.focus-card p {
+
+
+    font-size:21px;
+
+
+    line-height:1.8;
+
+
+}
+
+
+
+
+
+
+
+
+/* ============================================================
+   SECTION HEADINGS
+============================================================ */
+
+
+.section-heading {
+
+
+    text-align:center;
+
+
+    margin-bottom:40px;
+
+
+}
+
+
+
+
+
+.section-heading h2 {
+
+
+    font-size:34px;
+
+
+    margin-bottom:10px;
+
+
+}
+
+
+
+
+
+.section-heading h3 {
+
+
+    color:#2ED1C4;
+
+
+    font-size:18px;
+
+
+    font-weight:500;
+
+
+}
+
+
+
+
+
+
+
+
+/* ============================================================
+   ROADMAP SECTION
+============================================================ */
+
+
+.roadmap-section {
+
+
+    margin-bottom:65px;
+
+
+}
+
+
+
+
+
+.roadmap-grid {
+
+
+    display:grid;
+
+
+    grid-template-columns:repeat(3,1fr);
+
+
+    gap:30px;
+
+
+}
+
+
+
+
+
+
+.roadmap-card {
+
+
+    min-height:360px;
+
+
+    position:relative;
+
+
+    overflow:hidden;
+
+
+}
+
+
+
+
+
+.roadmap-card::before {
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    top:0;
+
+
+    left:0;
+
+
+    width:100%;
+
+
+    height:4px;
+
+
+    background:#2ED1C4;
+
+
+}
+
+
+
+
+
+.phase-number {
+
+
+    font-size:48px;
+
+
+    font-weight:700;
+
+
+    color:#C8A951;
+
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+
+
+.roadmap-card h2 {
+
+
+    font-size:28px;
+
+
+    margin-bottom:8px;
+
+
+}
+
+
+
+
+
+.roadmap-card h3 {
+
+
+    color:#2ED1C4;
+
+
+    font-size:17px;
+
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+
+
+.roadmap-card p {
+
+
+    color:rgba(247,244,234,0.82);
+
+
+    font-size:17px;
+
+
+    line-height:1.8;
+
+
+}
+
+
+
+
+
+
+
+
+/* ============================================================
+   DAILY RHYTHM
+============================================================ */
+
+
+.daily-rhythm-card {
+
+
+    margin-bottom:50px;
+
+
+}
+
+
+
+
+
+.rhythm-list {
+
+
+    display:grid;
+
+
+    gap:18px;
+
+
+}
+
+
+
+
+
+.rhythm-item {
+
+
+    padding:22px;
+
+
+    border-radius:18px;
+
+
+    background:rgba(8,20,38,0.65);
+
+
+    border-left:3px solid #C8A951;
+
+
+    font-size:17px;
+
+
+    line-height:1.6;
+
+
+}
+
+
+
+
+
+
+
+
+/* ============================================================
+   OUTCOMES
+============================================================ */
+
+
+.outcomes-card {
+
+
+    margin-bottom:50px;
+
+
+}
+
+
+
+
+
+.outcomes-card ul {
+
+
+    list-style:none;
+
+
+    padding:0;
+
+
+}
+
+
+
+
+
+.outcomes-card li {
+
+
+    position:relative;
+
+
+    padding-left:32px;
+
+
+    margin-bottom:18px;
+
+
+    font-size:18px;
+
+
+    line-height:1.7;
+
+
+}
+
+
+
+
+
+.outcomes-card li::before {
+
+
+    content:"✓";
+
+
+    position:absolute;
+
+
+    left:0;
+
+
+    color:#2ED1C4;
+
+
+}
+
+
+
+
+
+
+
+
+/* ============================================================
+   CTA
+============================================================ */
+
+
+.journey-transition-card {
+
+
+    text-align:center;
+
+
+    border-color:rgba(200,169,81,0.35);
+
+
+}
+
+
+
+
+
+.journey-transition-card h2 {
+
+
+    font-size:34px;
+
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+
+
+.journey-transition-card p {
+
+
+    font-size:18px;
+
+
+    color:rgba(247,244,234,0.75);
+
+
+    margin-bottom:35px;
+
+
+}
+
+
+
+
+
+.primary-btn {
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        #2ED1C4,
+
+        #159C96
+
+    );
+
+
+    border:none;
+
+
+    padding:18px 42px;
+
+
+    border-radius:50px;
+
+
+    color:#081426;
+
+
+    font-size:18px;
+
+
+    font-weight:700;
+
+
+    cursor:pointer;
+
+
+    transition:.3s ease;
+
+
+}
+
+
+
+
+
+.primary-btn:hover {
+
+
+    transform:translateY(-3px);
+
+
+}
+
+
+
+
+
+
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+
+@media(max-width:1000px){
+
+
+    .roadmap-grid {
+
+
+        grid-template-columns:1fr;
+
+
+    }
+
+
+}
+
+
+
+
+
+
+@media(max-width:700px){
+
+
+    .page06-container {
+
+
+        padding-top:40px;
+
+
+    }
+
+
+
+    .focus-card,
+    .roadmap-card,
+    .daily-rhythm-card,
+    .outcomes-card,
+    .journey-transition-card {
+
+
+        padding:28px;
+
+
+    }
+
+
+
+    .section-heading h2 {
+
+
+        font-size:28px;
+
+
+    }
+
+
+
+    .primary-btn {
+
+
+        width:100%;
+
+
+    }
+
+
+
+}
+
