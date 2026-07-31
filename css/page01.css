@@ -1,32 +1,54 @@
 
-/* ==========================================================================
+/* ============================================================
    CTM PATH™ MILLIONAIRES™
+   Guided Journey™
 
-   PAGE 01 STYLE SYSTEM
+   PAGE 01 STYLES
 
-   FROM SURVIVAL TO LIVING™
+   File:
+   css/page01.css
 
-   Version: 10.0
+   Responsibility:
+   Presentation Only
 
-========================================================================== */
+============================================================ */
 
 
-/* ==========================================================================
+
+/* ============================================================
    PAGE FOUNDATION
-========================================================================== */
+============================================================ */
 
 
-.page01 {
+.page01-page {
 
     min-height:100vh;
 
-    background:#081426;
+    background:
 
-    color:#F8F5ED;
+    radial-gradient(
+        circle at top,
+        rgba(13,54,95,0.45),
+        transparent 45%
+    ),
 
-    overflow:hidden;
+    #081426;
+
+    color:#F7F3EA;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:80px 40px;
 
 }
+
+
+
+
 
 
 
@@ -34,106 +56,33 @@
 
 .page01-container {
 
+    width:100%;
 
-    width:min(100%,1200px);
+    max-width:1200px;
 
     margin:0 auto;
 
-    padding:
-
-    80px 32px 120px;
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   GLOBAL PAGE TYPOGRAPHY
-========================================================================== */
-
-
-.page01 h1,
-.page01 h2,
-.page01 h3 {
-
-
-    font-family:
-
-    "Cinzel",
-    serif;
-
-
-    letter-spacing:
-
-    .04em;
-
-
-}
-
-
-
-
-
-.page01 p {
-
-
-    font-family:
-
-    "Inter",
-    "Noto Sans Tamil",
-    sans-serif;
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   HERO SECTION
-========================================================================== */
-
-
-.hero-section {
-
-
     text-align:center;
 
-    padding:
-
-    80px 20px 120px;
-
-
 }
 
 
 
-.hero-kicker {
 
 
-    font-size:
-
-    1.1rem;
 
 
-    color:
-
-    #D8B45A;
 
 
-    font-weight:
+/* ============================================================
+   WELCOME IDENTITY
+============================================================ */
 
-    600;
 
 
-    margin-bottom:
+.page01-welcome {
 
-    28px;
-
+    margin-bottom:50px;
 
 }
 
@@ -141,38 +90,145 @@
 
 
 
-.hero-title {
+.welcome-tamil {
 
 
-    font-size:
+    font-size:28px;
 
-    clamp(3rem,7vw,5.8rem);
+    font-weight:700;
 
+    color:#F7F3EA;
 
-    line-height:
+    line-height:1.5;
 
-    1.15;
-
-
-    font-weight:
-
-    900;
+    margin-bottom:10px;
 
 
-    color:
+}
 
-    #F8F5ED;
 
+
+
+
+
+.welcome-english {
+
+
+    font-size:16px;
+
+    letter-spacing:1.8px;
+
+    text-transform:uppercase;
+
+    color:#8EDFD6;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   HERO MESSAGE
+============================================================ */
+
+
+
+.page01-hero {
+
+
+    margin-bottom:40px;
+
+
+}
+
+
+
+
+
+
+.hero-tamil {
+
+
+    font-size:clamp(
+
+        42px,
+
+        6vw,
+
+        72px
+
+    );
+
+
+    font-weight:800;
+
+
+    line-height:1.15;
+
+
+    color:#F7F3EA;
+
+
+    margin:0 0 18px;
+
+
+}
+
+
+
+
+
+
+.hero-english {
+
+
+    font-size:clamp(
+
+        28px,
+
+        4vw,
+
+        48px
+
+    );
+
+
+    font-weight:600;
+
+
+    letter-spacing:3px;
+
+
+    line-height:1.2;
+
+
+    color:#C9A227;
+
+
+    margin:0;
+
+
+}
+
+/* ============================================================
+   SUPPORTING MESSAGE
+============================================================ */
+
+
+
+.page01-message {
+
+    max-width:850px;
 
     margin:
 
-    0 auto 40px;
-
-
-    max-width:
-
-    1100px;
-
+    0 auto 55px;
 
 }
 
@@ -180,38 +236,18 @@
 
 
 
-.hero-subtitle {
+.message-tamil {
 
 
-    font-family:
+    font-size:24px;
 
-    "Noto Sans Tamil",
-    sans-serif;
+    line-height:1.7;
 
+    font-weight:500;
 
-    font-size:
+    color:#F7F3EA;
 
-    clamp(1.5rem,3vw,2.3rem);
-
-
-    line-height:
-
-    1.8;
-
-
-    font-weight:
-
-    600;
-
-
-    max-width:
-
-    850px;
-
-
-    margin:
-
-    auto;
+    margin-bottom:12px;
 
 
 }
@@ -221,30 +257,16 @@
 
 
 
-/* ==========================================================================
-   STORY SECTIONS
-========================================================================== */
+.message-english {
 
 
-.story-section {
+    font-size:15px;
 
+    letter-spacing:1px;
 
-    text-align:center;
+    color:#8EDFD6;
 
-
-    max-width:
-
-    760px;
-
-
-    margin:
-
-    0 auto;
-
-
-    padding:
-
-    90px 20px;
+    line-height:1.6;
 
 
 }
@@ -253,136 +275,17 @@
 
 
 
-.story-section p {
 
 
-    font-size:
 
-    1.35rem;
 
+/* ============================================================
+   DISCOVERY CARD GRID
+============================================================ */
 
-    line-height:
 
-    2;
 
-
-    color:
-
-    #E2E7EF;
-
-
-    margin-bottom:
-
-    28px;
-
-
-}
-
-
-
-
-
-.story-section .english-text {
-
-
-    font-size:
-
-    1.15rem;
-
-
-    color:
-
-    #B9C6D8;
-
-
-    line-height:
-
-    1.9;
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   DISCOVERY SECTION
-========================================================================== */
-
-
-.discovery-section {
-
-
-    text-align:center;
-
-
-    padding:
-
-    100px 20px;
-
-
-}
-
-
-
-
-.discovery-title {
-
-
-    font-family:
-
-    "Noto Sans Tamil",
-    sans-serif;
-
-
-    font-size:
-
-    clamp(2rem,4vw,3rem);
-
-
-    line-height:
-
-    1.5;
-
-
-    margin-bottom:
-
-    18px;
-
-
-}
-
-
-
-
-
-.discovery-subtitle {
-
-
-    color:
-
-    #B9C6D8;
-
-
-    font-size:
-
-    1.25rem;
-
-
-}
-
-
-
-
-
-
-/* ==========================================================================
-   DISCOVERY CARDS
-========================================================================== */
-
-
-.discovery-grid {
+.page01-discovery-grid {
 
 
     display:grid;
@@ -390,49 +293,63 @@
 
     grid-template-columns:
 
-    repeat(2,1fr);
+    repeat(3,1fr);
 
 
-    gap:
-
-    50px;
+    gap:30px;
 
 
-    margin-top:
+    margin:
 
-    70px;
+    0 auto 60px;
 
 
 }
 
 
+
+
+
+
+
+
+
+/* ============================================================
+   PREMIUM DISCOVERY CARD
+============================================================ */
 
 
 
 .discovery-card {
 
 
-    text-align:center;
+    position:relative;
 
 
-    padding:
-
-    35px;
-
-
-    border:
-
-    1px solid rgba(255,255,255,.08);
-
-
-    border-radius:
-
-    24px;
+    padding:40px 30px;
 
 
     background:
 
-    rgba(255,255,255,.025);
+    rgba(255,255,255,0.03);
+
+
+    border-radius:24px;
+
+
+    border:
+
+    1px solid rgba(201,162,39,0.45);
+
+
+    overflow:hidden;
+
+
+    transition:
+
+    transform .3s ease,
+
+    border-color .3s ease;
 
 
 }
@@ -441,47 +358,35 @@
 
 
 
-.discovery-card h3 {
 
-
-    font-family:
-
-    "Noto Sans Tamil",
-    sans-serif;
-
-
-    color:
-
-    #F8F5ED;
-
-
-    font-size:
-
-    1.4rem;
-
-
-}
+/*
+   Inner luxury border
+*/
 
 
 
+.discovery-card::before {
 
 
-.discovery-card p {
+    content:"";
 
 
-    color:
-
-    #C7D1DF;
+    position:absolute;
 
 
-    font-size:
-
-    1.1rem;
+    inset:8px;
 
 
-    line-height:
+    border:
 
-    1.8;
+
+    1px solid rgba(247,243,234,0.12);
+
+
+    border-radius:18px;
+
+
+    pointer-events:none;
 
 
 }
@@ -490,45 +395,18 @@
 
 
 
-/* ==========================================================================
-   NEXT CHAPTER CTA
-========================================================================== */
+
+.discovery-card:hover {
 
 
-.cta-section {
+    transform:
+
+    translateY(-6px);
 
 
-    text-align:center;
+    border-color:
 
-
-    padding:
-
-    120px 20px;
-
-
-}
-
-
-
-
-
-.cta-title {
-
-
-    font-family:
-
-    "Noto Sans Tamil",
-    sans-serif;
-
-
-    font-size:
-
-    clamp(2rem,4vw,3rem);
-
-
-    line-height:
-
-    1.5;
+    rgba(201,162,39,0.85);
 
 
 }
@@ -537,22 +415,32 @@
 
 
 
-.cta-subtitle {
 
 
-    font-size:
-
-    1.2rem;
 
 
-    color:
+/* ============================================================
+   CARD CONTENT
+============================================================ */
 
-    #B9C6D8;
 
 
-    margin:
+.card-icon {
 
-    20px auto 50px;
+
+    position:relative;
+
+
+    z-index:1;
+
+
+    font-size:32px;
+
+
+    color:#C9A227;
+
+
+    margin-bottom:20px;
 
 
 }
@@ -561,10 +449,98 @@
 
 
 
-.journey-button {
+
+.card-title-tamil {
 
 
-    display:inline-flex;
+    position:relative;
+
+
+    z-index:1;
+
+
+    font-size:26px;
+
+
+    font-weight:700;
+
+
+    color:#F7F3EA;
+
+
+    margin-bottom:10px;
+
+
+}
+
+
+
+
+
+
+.card-title-english {
+
+
+    position:relative;
+
+
+    z-index:1;
+
+
+    font-size:14px;
+
+
+    letter-spacing:1.5px;
+
+
+    text-transform:uppercase;
+
+
+    color:#8EDFD6;
+
+
+}
+
+/* ============================================================
+   PRIMARY CTA BUTTON
+============================================================ */
+
+
+
+
+
+.page01-action {
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    margin-bottom:45px;
+
+
+}
+
+
+
+
+
+
+
+
+
+.journey-primary-btn {
+
+
+    position:relative;
+
+
+    display:flex;
+
+
+    flex-direction:column;
 
 
     align-items:center;
@@ -573,52 +549,56 @@
     justify-content:center;
 
 
-    padding:
-
-    18px 48px;
+    gap:10px;
 
 
-    border-radius:
-
-    50px;
+    min-width:360px;
 
 
-    background:
+    padding:22px 45px;
 
-    transparent;
+
+    cursor:pointer;
+
+
+    border-radius:18px;
 
 
     border:
 
-    2px solid #23D4C8;
+
+    1px solid rgba(201,162,39,0.8);
 
 
-    color:
-
-    #23D4C8;
+    background:
 
 
-    font-size:
+    linear-gradient(
 
-    1.05rem;
+        135deg,
 
+        #0D365F,
 
-    font-weight:
+        #081426
 
-    700;
-
-
-    letter-spacing:
-
-    .08em;
+    );
 
 
-    text-decoration:none;
+    color:#F7F3EA;
+
+
+    box-shadow:
+
+
+    0 10px 30px rgba(0,0,0,0.35);
 
 
     transition:
 
-    all .3s ease;
+
+    transform .3s ease,
+
+    box-shadow .3s ease;
 
 
 }
@@ -627,27 +607,23 @@
 
 
 
-.journey-button:hover {
 
 
-    background:
-
-    #23D4C8;
 
 
-    color:
-
-    #081426;
+.journey-primary-btn:hover {
 
 
     transform:
+
 
     translateY(-4px);
 
 
     box-shadow:
 
-    0 15px 40px rgba(35,212,200,.25);
+
+    0 15px 40px rgba(0,0,0,0.45);
 
 
 }
@@ -657,75 +633,141 @@
 
 
 
-/* ==========================================================================
-   RESPONSIVE
-========================================================================== */
-
-
-@media(max-width:768px){
 
 
 
-.page01-container {
+.btn-tamil {
 
 
-padding:
-
-50px 20px 80px;
+    font-size:28px;
 
 
-}
+    font-weight:800;
 
 
+    line-height:1.4;
 
-.discovery-grid {
 
-
-grid-template-columns:
-
-1fr;
+    color:#F7F3EA;
 
 
 }
 
 
 
-.story-section {
-
-
-padding:
-
-60px 15px;
-
-
-}
 
 
 
-.story-section p {
-
-
-font-size:
-
-1.15rem;
-
-
-}
 
 
 
-.hero-title {
+.btn-english {
 
 
-font-size:
+    font-size:13px;
 
-2.8rem;
+
+    letter-spacing:2px;
+
+
+    text-transform:uppercase;
+
+
+    color:#8EDFD6;
 
 
 }
 
 
 
+
+
+
+
+
+
+/* ============================================================
+   JOURNEY PROGRESS
+============================================================ */
+
+
+
+
+
+
+.journey-progress {
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
+
+
+    gap:8px;
+
+
 }
 
+
+
+
+
+.progress-tamil {
+
+
+    font-size:18px;
+
+
+    font-weight:600;
+
+
+    color:#F7F3EA;
+
+
+}
+
+
+
+
+
+
+.progress-english {
+
+
+    font-size:12px;
+
+
+    letter-spacing:2px;
+
+
+    color:#8EDFD6;
+
+
+}
+
+
+
+
+
+
+.progress-number {
+
+
+    margin-top:8px;
+
+
+    font-size:14px;
+
+
+    letter-spacing:3px;
+
+
+    color:#C9A227;
+
+
+}
 
