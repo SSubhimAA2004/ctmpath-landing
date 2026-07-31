@@ -1,1 +1,1917 @@
 
+/* ==========================================================================
+   CTM PATH™ MILLIONAIRES™
+
+   FILE:
+   page03.css
+
+   PAGE:
+   KALA CHAKRA™ LIFE ASSESSMENT™
+
+   VERSION:
+   10.0
+
+========================================================================== */
+
+
+
+/* ==========================================================================
+   PAGE FOUNDATION
+========================================================================== */
+
+
+.page03 {
+
+
+    min-height:
+
+        100vh;
+
+
+    background:
+
+        #081426;
+
+
+    color:
+
+        #F8F5ED;
+
+
+    overflow:
+
+        hidden;
+
+
+}
+
+
+
+
+
+
+.page03 * {
+
+
+    box-sizing:
+
+        border-box;
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   CONTAINER
+========================================================================== */
+
+
+.page03-container {
+
+
+    width:
+
+        min(1200px, calc(100% - 96px));
+
+
+    margin:
+
+        0 auto;
+
+
+    padding:
+
+        80px 0 120px;
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   HERO
+========================================================================== */
+
+
+.page03-hero {
+
+
+    text-align:
+
+        center;
+
+
+    padding:
+
+        60px 20px 100px;
+
+
+}
+
+
+
+
+
+.journey-marker {
+
+
+    display:
+
+        flex;
+
+
+    flex-direction:
+
+        column;
+
+
+    align-items:
+
+        center;
+
+
+    gap:
+
+        12px;
+
+
+}
+
+
+
+
+
+.journey-label {
+
+
+    color:
+
+        #23D4C8;
+
+
+    font-size:
+
+        .75rem;
+
+
+    font-weight:
+
+        800;
+
+
+    letter-spacing:
+
+        .35em;
+
+
+}
+
+
+
+
+
+.journey-number {
+
+
+    color:
+
+        #D8B45A;
+
+
+    font-size:
+
+        1.3rem;
+
+
+    font-weight:
+
+        800;
+
+
+    letter-spacing:
+
+        .25em;
+
+
+}
+
+
+
+
+
+
+
+.page03-title {
+
+
+    margin:
+
+        50px auto 40px;
+
+
+    max-width:
+
+        1000px;
+
+
+    font-family:
+
+        "Cinzel",
+        serif;
+
+
+    font-size:
+
+        clamp(
+
+            2.4rem,
+
+            5vw,
+
+            4.5rem
+
+        );
+
+
+    line-height:
+
+        1.35;
+
+
+    letter-spacing:
+
+        .08em;
+
+
+    color:
+
+        #F8F5ED;
+
+
+}
+
+
+
+
+
+
+.page03-tamil-title {
+
+
+    margin:
+
+        0 auto 30px;
+
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+
+    font-size:
+
+        clamp(
+
+            1.8rem,
+
+            3vw,
+
+            2.8rem
+
+        );
+
+
+    line-height:
+
+        1.8;
+
+
+    color:
+
+        #F8F5ED;
+
+
+}
+
+
+
+
+
+.page03-subtitle {
+
+
+    color:
+
+        #D8B45A;
+
+
+    font-size:
+
+        1.3rem;
+
+
+    font-weight:
+
+        700;
+
+
+    letter-spacing:
+
+        .18em;
+
+
+    line-height:
+
+        1.8;
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   INTRODUCTION
+========================================================================== */
+
+
+.page03-introduction {
+
+
+    max-width:
+
+        850px;
+
+
+    margin:
+
+        0 auto;
+
+
+    text-align:
+
+        center;
+
+
+    padding:
+
+        60px 20px;
+
+
+}
+
+
+
+
+
+.page03-introduction h2 {
+
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+
+    font-size:
+
+        clamp(
+
+            1.8rem,
+
+            3vw,
+
+            2.6rem
+
+        );
+
+
+    line-height:
+
+        1.9;
+
+
+    color:
+
+        #F8F5ED;
+
+
+}
+
+
+
+
+
+.page03-introduction p {
+
+
+    margin-top:
+
+        30px;
+
+
+    color:
+
+        #B9C6D8;
+
+
+    font-size:
+
+        1.2rem;
+
+
+    line-height:
+
+        1.9;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   REFLECTION QUESTION
+========================================================================== */
+
+
+.reflection-question {
+
+
+    margin:
+
+        60px auto 0;
+
+
+    padding:
+
+        42px;
+
+
+    max-width:
+
+        500px;
+
+
+    border-radius:
+
+        30px;
+
+
+    background:
+
+        rgba(255,255,255,.035);
+
+
+    border:
+
+        1px solid rgba(255,255,255,.10);
+
+
+}
+
+
+
+
+
+.reflection-question h3 {
+
+
+    color:
+
+        #F8F5ED;
+
+
+    font-size:
+
+        2rem;
+
+
+    line-height:
+
+        1.6;
+
+
+}
+
+
+
+
+
+.reflection-question span {
+
+
+    display:
+
+        block;
+
+
+    margin-top:
+
+        20px;
+
+
+    color:
+
+        #23D4C8;
+
+
+    font-size:
+
+        1.4rem;
+
+
+    font-weight:
+
+        700;
+
+
+}
+
+/* ==========================================================================
+   KALA CHAKRA™ INTRODUCTION
+========================================================================== */
+
+
+.page03-scoring {
+
+
+    max-width:
+
+        900px;
+
+
+    margin:
+
+        80px auto;
+
+
+    text-align:
+
+        center;
+
+
+    padding:
+
+        50px 30px;
+
+
+}
+
+
+
+
+
+.page03-scoring h2 {
+
+
+    font-family:
+
+        "Cinzel",
+        serif;
+
+
+    color:
+
+        #D8B45A;
+
+
+    font-size:
+
+        clamp(
+
+            1.8rem,
+
+            3vw,
+
+            2.8rem
+
+        );
+
+
+    letter-spacing:
+
+        .12em;
+
+
+    line-height:
+
+        1.5;
+
+
+}
+
+
+
+
+
+.page03-scoring p {
+
+
+    margin:
+
+        30px auto;
+
+
+    color:
+
+        #E2E7EF;
+
+
+    font-size:
+
+        1.15rem;
+
+
+    line-height:
+
+        1.9;
+
+
+}
+
+
+
+
+
+.english-text {
+
+
+    color:
+
+        #B9C6D8 !important;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   SCORE GUIDE
+========================================================================== */
+
+
+.score-guide {
+
+
+    display:
+
+        flex;
+
+
+    justify-content:
+
+        center;
+
+
+    gap:
+
+        40px;
+
+
+    margin-top:
+
+        50px;
+
+
+}
+
+
+
+
+
+.score-item {
+
+
+    min-width:
+
+        220px;
+
+
+    padding:
+
+        30px;
+
+
+    border-radius:
+
+        24px;
+
+
+    background:
+
+        rgba(255,255,255,.035);
+
+
+    border:
+
+        1px solid rgba(255,255,255,.10);
+
+
+}
+
+
+
+
+
+.score-item strong {
+
+
+    display:
+
+        block;
+
+
+    color:
+
+        #D8B45A;
+
+
+    font-size:
+
+        3rem;
+
+
+    font-family:
+
+        "Cinzel",
+        serif;
+
+
+}
+
+
+
+
+
+.score-item span {
+
+
+    display:
+
+        block;
+
+
+    margin-top:
+
+        12px;
+
+
+    color:
+
+        #C8D3E2;
+
+
+    font-size:
+
+        .95rem;
+
+
+    line-height:
+
+        1.6;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   PILLAR SECTION
+========================================================================== */
+
+
+.pillar-section {
+
+
+    width:
+
+        min(1200px, calc(100% - 96px));
+
+
+    margin:
+
+        0 auto;
+
+
+    padding:
+
+        80px 0;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   PILLAR GRID
+========================================================================== */
+
+
+.pillar-grid {
+
+
+    display:
+
+        grid;
+
+
+    grid-template-columns:
+
+        repeat(3,1fr);
+
+
+    gap:
+
+        28px;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   PILLAR CARD
+========================================================================== */
+
+
+.pillar-card {
+
+
+    position:
+
+        relative;
+
+
+    display:
+
+        flex;
+
+
+    flex-direction:
+
+        column;
+
+
+    align-items:
+
+        center;
+
+
+    text-align:
+
+        center;
+
+
+    min-height:
+
+        420px;
+
+
+    padding:
+
+        36px 26px;
+
+
+    border-radius:
+
+        28px;
+
+
+    background:
+
+
+        linear-gradient(
+
+            145deg,
+
+            rgba(255,255,255,.06),
+
+            rgba(255,255,255,.025)
+
+        );
+
+
+    border:
+
+        1px solid rgba(255,255,255,.10);
+
+
+    transition:
+
+        .35s ease;
+
+
+}
+
+
+
+
+
+.pillar-card:hover {
+
+
+    transform:
+
+        translateY(-8px);
+
+
+    border-color:
+
+        rgba(35,212,200,.45);
+
+
+    box-shadow:
+
+        0 25px 70px rgba(0,0,0,.25);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   ICON
+========================================================================== */
+
+
+.pillar-icon {
+
+
+    display:
+
+        flex;
+
+
+    align-items:
+
+        center;
+
+
+    justify-content:
+
+        center;
+
+
+    width:
+
+        70px;
+
+
+    height:
+
+        70px;
+
+
+    border-radius:
+
+        50%;
+
+
+    background:
+
+        rgba(216,180,90,.12);
+
+
+    font-size:
+
+        2rem;
+
+
+    margin-bottom:
+
+        24px;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   CARD TYPOGRAPHY
+========================================================================== */
+
+
+.pillar-card h3 {
+
+
+    margin:
+
+        0 0 20px;
+
+
+    color:
+
+        #F8F5ED;
+
+
+    font-family:
+
+        "Cinzel",
+        serif;
+
+
+    font-size:
+
+        1.25rem;
+
+
+    line-height:
+
+        1.6;
+
+
+}
+
+
+
+
+
+.pillar-card p {
+
+
+    flex-grow:
+
+        1;
+
+
+    color:
+
+        #C7D2E0;
+
+
+    font-size:
+
+        .98rem;
+
+
+    line-height:
+
+        1.8;
+
+
+}
+
+/* ==========================================================================
+   SCORE SELECTOR
+========================================================================== */
+
+
+.score-selector {
+
+
+    margin-top:
+
+        28px;
+
+
+    width:
+
+        100%;
+
+
+    color:
+
+        #D8B45A;
+
+
+    font-size:
+
+        .85rem;
+
+
+    font-weight:
+
+        700;
+
+
+    letter-spacing:
+
+        .08em;
+
+
+}
+
+
+
+
+
+.score-options {
+
+
+    display:
+
+        flex;
+
+
+    justify-content:
+
+        center;
+
+
+    flex-wrap:
+
+        wrap;
+
+
+    gap:
+
+        8px;
+
+
+    margin-top:
+
+        16px;
+
+
+}
+
+
+
+
+
+.score-options button {
+
+
+    width:
+
+        34px;
+
+
+    height:
+
+        34px;
+
+
+    border-radius:
+
+        50%;
+
+
+    border:
+
+        1px solid rgba(255,255,255,.18);
+
+
+    background:
+
+        rgba(255,255,255,.04);
+
+
+    color:
+
+        #DCE5F2;
+
+
+    font-size:
+
+        .85rem;
+
+
+    cursor:
+
+        pointer;
+
+
+    transition:
+
+        all .3s ease;
+
+
+}
+
+
+
+
+
+.score-options button:hover {
+
+
+    border-color:
+
+        #23D4C8;
+
+
+    color:
+
+        #23D4C8;
+
+
+    transform:
+
+        translateY(-3px);
+
+
+}
+
+
+
+
+
+.score-options button.selected {
+
+
+    background:
+
+        #23D4C8;
+
+
+    color:
+
+        #081426;
+
+
+    border-color:
+
+        #23D4C8;
+
+
+    box-shadow:
+
+        0 0 25px rgba(35,212,200,.35);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   SELECTED PILLAR CARD STATE
+========================================================================== */
+
+
+.pillar-card.scored {
+
+
+    border-color:
+
+        rgba(35,212,200,.65);
+
+
+    background:
+
+
+        linear-gradient(
+
+            145deg,
+
+            rgba(35,212,200,.10),
+
+            rgba(255,255,255,.04)
+
+        );
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   COMPLETION MESSAGE
+========================================================================== */
+
+
+.page03-completion {
+
+
+    padding:
+
+        80px 20px;
+
+
+    text-align:
+
+        center;
+
+
+}
+
+
+
+
+
+.completion-card {
+
+
+    max-width:
+
+        760px;
+
+
+    margin:
+
+        0 auto;
+
+
+    padding:
+
+        50px;
+
+
+    border-radius:
+
+        32px;
+
+
+    background:
+
+        linear-gradient(
+
+            145deg,
+
+            rgba(216,180,90,.08),
+
+            rgba(255,255,255,.035)
+
+        );
+
+
+    border:
+
+        1px solid rgba(255,255,255,.12);
+
+
+}
+
+
+
+
+
+.completion-card h2 {
+
+
+    color:
+
+        #D8B45A;
+
+
+    font-family:
+
+        "Cinzel",
+        serif;
+
+
+    font-size:
+
+        2rem;
+
+
+}
+
+
+
+
+
+.completion-card p {
+
+
+    color:
+
+        #F8F5ED;
+
+
+    font-size:
+
+        1.2rem;
+
+
+    line-height:
+
+        1.9;
+
+
+}
+
+
+
+
+
+.completion-card .english {
+
+
+    color:
+
+        #B9C6D8;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   FINAL ACTION
+========================================================================== */
+
+
+.page03-action {
+
+
+    display:
+
+        flex;
+
+
+    justify-content:
+
+        center;
+
+
+    padding:
+
+        40px 20px 100px;
+
+
+}
+
+
+
+
+
+.journey-button {
+
+
+    display:
+
+        inline-flex;
+
+
+    flex-direction:
+
+        column;
+
+
+    align-items:
+
+        center;
+
+
+    justify-content:
+
+        center;
+
+
+    gap:
+
+        10px;
+
+
+    min-width:
+
+        360px;
+
+
+    padding:
+
+        22px 48px;
+
+
+    border-radius:
+
+        999px;
+
+
+    border:
+
+        none;
+
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #D8B45A,
+
+            #F0D78A
+
+        );
+
+
+    color:
+
+        #081426;
+
+
+    font-size:
+
+        1rem;
+
+
+    font-weight:
+
+        900;
+
+
+    letter-spacing:
+
+        .08em;
+
+
+    cursor:
+
+        pointer;
+
+
+    transition:
+
+        .35s ease;
+
+
+}
+
+
+
+
+
+.journey-button small {
+
+
+    font-size:
+
+        .72rem;
+
+
+    letter-spacing:
+
+        .18em;
+
+
+}
+
+
+
+
+
+.journey-button:hover {
+
+
+    transform:
+
+        translateY(-5px);
+
+
+    box-shadow:
+
+        0 30px 70px rgba(216,180,90,.35);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   REFLECTION NOTE
+========================================================================== */
+
+
+.page03-reflection {
+
+
+    max-width:
+
+        900px;
+
+
+    margin:
+
+        0 auto;
+
+
+    padding:
+
+        0 20px 100px;
+
+
+}
+
+
+
+
+
+.reflection-card {
+
+
+    padding:
+
+        40px;
+
+
+    border-radius:
+
+        28px;
+
+
+    background:
+
+        rgba(255,255,255,.03);
+
+
+    border:
+
+        1px solid rgba(255,255,255,.08);
+
+
+    text-align:
+
+        center;
+
+
+}
+
+
+
+
+
+.reflection-card p {
+
+
+    color:
+
+        #C7D2E0;
+
+
+    line-height:
+
+        1.9;
+
+
+    font-size:
+
+        1rem;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   TABLET
+========================================================================== */
+
+
+@media(max-width:1000px){
+
+
+
+.pillar-grid {
+
+
+    grid-template-columns:
+
+        repeat(2,1fr);
+
+
+}
+
+
+
+
+
+.score-guide {
+
+
+    flex-direction:
+
+        column;
+
+
+    align-items:
+
+        center;
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   MOBILE
+========================================================================== */
+
+
+@media(max-width:700px){
+
+
+
+.page03-hero {
+
+
+    padding:
+
+        40px 15px 60px;
+
+
+}
+
+
+
+
+
+.page03-title {
+
+
+    font-size:
+
+        2.1rem;
+
+
+}
+
+
+
+
+
+.page03-tamil-title {
+
+
+    font-size:
+
+        1.5rem;
+
+
+}
+
+
+
+
+
+.pillar-section {
+
+
+    width:
+
+        calc(100% - 32px);
+
+
+}
+
+
+
+
+
+.pillar-grid {
+
+
+    grid-template-columns:
+
+        1fr;
+
+
+}
+
+
+
+
+
+.pillar-card {
+
+
+    min-height:
+
+        auto;
+
+
+    padding:
+
+        30px 20px;
+
+
+}
+
+
+
+
+
+.score-options button {
+
+
+    width:
+
+        32px;
+
+
+    height:
+
+        32px;
+
+
+}
+
+
+
+
+
+.completion-card {
+
+
+    padding:
+
+        32px 20px;
+
+
+}
+
+
+
+
+
+.journey-button {
+
+
+    min-width:
+
+        100%;
+
+
+    padding:
+
+        20px;
+
+
+}
+
+
+
+
+
+.reflection-card {
+
+
+    padding:
+
+        28px 20px;
+
+
+}
+
+
+
+}
+
