@@ -6,96 +6,93 @@
 
     <!-- ======================================================
          CTM PATH™ Guided Journey™
-         Foundation v1.0
+         Working MVP Shell v1.0
          ====================================================== -->
 
+
     <meta charset="UTF-8">
+
 
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
+
     <meta
         name="description"
         content="CTM PATH™ Guided Journey™ — Every Dream Has A Path™">
+
 
     <meta
         name="theme-color"
         content="#0F172A">
 
+
     <meta
         name="color-scheme"
         content="dark">
 
+
     <title>
-
         CTM PATH™ Guided Journey™
-
     </title>
 
+
+
     <!-- ======================================================
-         Stylesheets
+         CORE STYLES
          ====================================================== -->
+
 
     <link
         rel="stylesheet"
         href="css/foundation.css">
 
+
     <link
         rel="stylesheet"
         href="css/theme.css">
+
 
     <link
         rel="stylesheet"
         href="css/responsive.css">
 
+
+
 </head>
+
 
 <body>
 
-    <!-- ======================================================
-         Global Loader
-         ====================================================== -->
-
-    <div
-        id="loader-container"
-        aria-hidden="true">
-    </div>
 
     <!-- ======================================================
-         Global Modal
+         APPLICATION SHELL
          ====================================================== -->
 
-    <div
-        id="modal-container"
-        aria-hidden="true">
-    </div>
-
-    <!-- ======================================================
-         Global Toast
-         ====================================================== -->
-
-    <div
-        id="toast-container"
-        aria-live="polite"
-        aria-atomic="true">
-    </div>
-
-    <!-- ======================================================
-         Permanent Application Shell
-         ====================================================== -->
 
     <div id="application-shell">
+
+
+        <!-- HEADER COMPONENT -->
 
         <header
             id="header-container"
             role="banner">
         </header>
 
+
+
+        <!-- JOURNEY PROGRESS -->
+
         <section
             id="progress-container"
             aria-label="Journey Progress">
         </section>
+
+
+
+        <!-- PAGE CONTENT -->
 
         <main
             id="app"
@@ -103,41 +100,56 @@
             tabindex="-1">
         </main>
 
+
+
+        <!-- FOOTER COMPONENT -->
+
         <footer
             id="footer-container"
             role="contentinfo">
         </footer>
 
+
+
     </div>
 
+
+
+
     <!-- ======================================================
-         JavaScript
-         Load Order MUST NEVER change.
+         MVP JAVASCRIPT LOAD ORDER
          ====================================================== -->
+
+
+    <!-- Configuration -->
 
     <script src="js/config.js"></script>
 
-    <script src="js/logger.js"></script>
 
-    <script src="js/events.js"></script>
 
-    <script src="js/state.js"></script>
-
-    <script src="js/storage.js"></script>
-
-    <script src="js/validation.js"></script>
+    <!-- API / Backend Connection -->
 
     <script src="js/api.js"></script>
 
-    <script src="js/services.js"></script>
 
-    <script src="js/ui.js"></script>
 
-    <script src="js/router.js"></script>
+    <!-- Shared Components -->
+
+    <script src="js/component-loader.js"></script>
+
+
+
+    <!-- Simple Page Navigation -->
 
     <script src="js/navigation.js"></script>
 
+
+
+    <!-- Application Controller -->
+
     <script src="js/app.js"></script>
+
+
 
 </body>
 
