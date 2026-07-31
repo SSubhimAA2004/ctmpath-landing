@@ -1,839 +1,100 @@
 
-/*!
- * ==============================================================
- * CTM PATH™ Guided Journey™
- * Application Module
- * --------------------------------------------------------------
- * Version : 1.1 (Working MVP Orchestrator)
- * Pattern : Singleton
- *
- * Responsibilities
- * --------------------------------------------------------------
- * ✓ Bootstrap Application
- * ✓ Load Shared Components
- * ✓ Start Guided Journey
- * ✓ Manage Page Navigation
- * ✓ Bind Global Events
- * ✓ Handle Startup Errors
- *
- * Never
- * --------------------------------------------------------------
- * ✗ Business Logic
- * ✗ Assessment Calculation
- * ✗ Diagnosis Logic
- * ✗ API Processing
- * ✗ Data Rules
- *
- * ==============================================================
- */
+/* ==========================================================================
+   CTM PATH™ MILLIONAIRES™
 
+   File      : app.js
+   Version   : 2.0
 
-window.CTM = window.CTM || {};
+   Status    : WORKING MVP ORCHESTRATOR
 
+   Responsibilities:
 
+   ✓ Bootstrap Application
+   ✓ Load Global Components
+   ✓ Detect Current Page
+   ✓ Start Page Module
 
-/* ==============================================================
-   APPLICATION CLASS
-============================================================== */
+   Does NOT:
 
+   ✗ Business Logic
+   ✗ API Calls
+   ✗ Database
+   ✗ Complex Routing
+   ✗ State Management
 
-class App {
+   ========================================================================== */
 
 
-    /* ==========================================================
-       PRIVATE STATE
-    ========================================================== */
+(function(){
 
 
-    #initialized = false;
+"use strict";
 
 
-    #starting = false;
 
+/* ==========================================================================
+   APPLICATION CONFIGURATION
+========================================================================== */
 
-    #currentPage = 1;
 
+const APP_CONFIG = {
 
-    #totalPages = 7;
 
+    defaultPage:
 
+        "pages/page01.html",
 
 
-    /* ==========================================================
-       INITIALIZE APPLICATION
-    ========================================================== */
 
+    defaultScript:
 
-    async init() {
+        "js/page01.js"
 
 
-        if (this.#initialized) {
 
-            return;
+};
 
-        }
 
 
-        if (this.#starting) {
 
-            return;
 
-        }
 
 
-        this.#starting = true;
+/* ==========================================================================
+   APPLICATION START
+========================================================================== */
 
 
+async function startApplication(){
 
-        try {
 
 
-            console.log(
+    console.log(
 
-                "CTM PATH™ Starting..."
+        "CTM PATH™ MILLIONAIRES™ starting..."
 
-            );
+    );
 
 
 
-            await this.#loadComponents();
+    await loadGlobalComponents();
 
 
 
-            await this.#bindEvents();
+    await loadCurrentPage();
 
 
 
-            await this.#startJourney();
+    initializePage();
 
 
 
-            this.#initialized = true;
+    console.log(
 
+        "CTM PATH™ MILLIONAIRES™ ready."
 
+    );
 
-            console.log(
-
-                "CTM PATH™ Ready."
-
-            );
-
-
-        }
-
-
-        catch(error) {
-
-
-            this.#handleError(
-
-                error
-
-            );
-
-
-        }
-
-
-        finally {
-
-
-            this.#starting = false;
-
-
-        }
-
-
-    }
-
-
-
-
-    /* ==========================================================
-       PUBLIC STATUS
-    ========================================================== */
-
-
-    isInitialized() {
-
-
-        return this.#initialized;
-
-
-    }
-
-
-
-    getCurrentPage() {
-
-
-        return this.#currentPage;
-
-
-    }
-
-
-
-    getTotalPages() {
-
-
-        return this.#totalPages;
-
-
-    }
-
-
-
-    /* ==========================================================
-       NEXT:
-
-       Batch 1B
-
-       #loadComponents()
-       #loadHeader()
-       #loadFooter()
-       #bindEvents()
-       #startJourney()
-
-    ========================================================== */
-
-    /* ==========================================================
-       LOAD SHARED COMPONENTS
-
-       Header
-       Footer
-
-    ========================================================== */
-
-
-    async #loadComponents() {
-
-
-        await this.#loadHeader();
-
-
-        await this.#loadFooter();
-
-
-
-        console.log(
-
-            "CTM PATH™ Components Loaded."
-
-        );
-
-
-    }
-
-
-
-
-    /* ==========================================================
-       LOAD HEADER COMPONENT
-
-    ========================================================== */
-
-
-    async #loadHeader() {
-
-
-        const container = document.querySelector(
-
-            "#header-container"
-
-        );
-
-
-
-        if (!container) {
-
-
-            console.warn(
-
-                "Header container not found."
-
-            );
-
-
-            return;
-
-
-        }
-
-
-
-        try {
-
-
-            const response = await fetch(
-
-                "components/header.html"
-
-            );
-
-
-
-            if (!response.ok) {
-
-
-                throw new Error(
-
-                    "Header component unavailable."
-
-                );
-
-
-            }
-
-
-
-            container.innerHTML = await response.text();
-
-
-
-        }
-
-
-        catch(error) {
-
-
-            console.error(
-
-                "Header loading failed.",
-
-                error
-
-            );
-
-
-        }
-
-
-    }
-
-
-
-
-    /* ==========================================================
-       LOAD FOOTER COMPONENT
-
-    ========================================================== */
-
-
-    async #loadFooter() {
-
-
-        const container = document.querySelector(
-
-            "#footer-container"
-
-        );
-
-
-
-        if (!container) {
-
-
-            console.warn(
-
-                "Footer container not found."
-
-            );
-
-
-            return;
-
-
-        }
-
-
-
-        try {
-
-
-            const response = await fetch(
-
-                "components/footer.html"
-
-            );
-
-
-
-            if (!response.ok) {
-
-
-                throw new Error(
-
-                    "Footer component unavailable."
-
-                );
-
-
-            }
-
-
-
-            container.innerHTML = await response.text();
-
-
-
-        }
-
-
-        catch(error) {
-
-
-            console.error(
-
-                "Footer loading failed.",
-
-                error
-
-            );
-
-
-        }
-
-
-    }
-
-
-
-
-    /* ==========================================================
-       GLOBAL EVENTS
-
-    ========================================================== */
-
-
-    async #bindEvents() {
-
-
-        document.addEventListener(
-
-            "click",
-
-            event => {
-
-
-                const nextButton = event.target.closest(
-
-                    "[data-next-page]"
-
-                );
-
-
-
-                if (nextButton) {
-
-
-                    const pageNumber = Number(
-
-                        nextButton.dataset.nextPage
-
-                    );
-
-
-
-                    this.loadPage(
-
-                        pageNumber
-
-                    );
-
-
-                }
-
-
-
-                const previousButton = event.target.closest(
-
-                    "[data-prev-page]"
-
-                );
-
-
-
-                if (previousButton) {
-
-
-                    const pageNumber = Number(
-
-                        previousButton.dataset.prevPage
-
-                    );
-
-
-
-                    this.loadPage(
-
-                        pageNumber
-
-                    );
-
-
-                }
-
-
-            }
-
-        );
-
-
-    }
-
-
-
-
-    /* ==========================================================
-       START JOURNEY
-
-    ========================================================== */
-
-
-    async #startJourney() {
-
-
-        const hashPage = Number(
-
-            location.hash.replace(
-
-                "#page",
-
-                ""
-
-            )
-
-        );
-
-
-
-        if (
-
-            hashPage >= 1 &&
-
-            hashPage <= this.#totalPages
-
-        ) {
-
-
-            await this.loadPage(
-
-                hashPage
-
-            );
-
-
-        }
-
-        else {
-
-
-            await this.loadPage(
-
-                1
-
-            );
-
-
-        }
-
-
-    }
-
-
-
-
-    /* ==========================================================
-       NEXT:
-
-       Batch 1C
-
-       loadPage()
-
-       #handleError()
-
-       destroy()
-
-       restart()
-
-       dispose()
-
-       Closing class brace
-
-       Singleton export
-
-       DOMContentLoaded
-
-    ========================================================== */
-
-    /* ==========================================================
-       LOAD PAGE
-
-       page01.html → page07.html
-
-    ========================================================== */
-
-
-    async loadPage(pageNumber) {
-
-
-        if (
-
-            pageNumber < 1 ||
-
-            pageNumber > this.#totalPages
-
-        ) {
-
-
-            return;
-
-
-        }
-
-
-
-        const container = document.querySelector(
-
-            "#app"
-
-        );
-
-
-
-        if (!container) {
-
-
-            console.error(
-
-                "Application container #app missing."
-
-            );
-
-
-            return;
-
-
-        }
-
-
-
-        try {
-
-
-            const response = await fetch(
-
-                `pages/page0${pageNumber}.html`
-
-            );
-
-
-
-            if (!response.ok) {
-
-
-                throw new Error(
-
-                    `Page ${pageNumber} not found.`
-
-                );
-
-
-            }
-
-
-
-            container.innerHTML = await response.text();
-
-
-
-            this.#currentPage = pageNumber;
-
-
-
-            location.hash =
-
-                `page${pageNumber}`;
-
-
-
-            window.scrollTo(
-
-                {
-
-                    top: 0,
-
-                    behavior: "smooth"
-
-                }
-
-            );
-
-
-
-            console.log(
-
-                `Loaded CTM PATH™ Page ${pageNumber}/${this.#totalPages}`
-
-            );
-
-
-        }
-
-
-        catch(error) {
-
-
-            this.#handleError(
-
-                error
-
-            );
-
-
-        }
-
-
-    }
-
-
-
-
-    /* ==========================================================
-       ERROR HANDLING
-
-    ========================================================== */
-
-
-    #handleError(error) {
-
-
-        console.error(
-
-            "CTM PATH™ Application Error:",
-
-            error
-
-        );
-
-
-
-        const container = document.querySelector(
-
-            "#app"
-
-        );
-
-
-
-        if (container) {
-
-
-            container.innerHTML = `
-
-                <section class="error-screen">
-
-                    <h2>
-                        Something went wrong
-                    </h2>
-
-                    <p>
-                        Please refresh and try again.
-                    </p>
-
-                </section>
-
-            `;
-
-
-        }
-
-
-    }
-
-
-
-
-    /* ==========================================================
-       DESTROY
-
-    ========================================================== */
-
-
-    async destroy() {
-
-
-        this.#initialized = false;
-
-
-        this.#currentPage = 1;
-
-
-
-        const container = document.querySelector(
-
-            "#app"
-
-        );
-
-
-
-        if (container) {
-
-
-            container.innerHTML = "";
-
-
-        }
-
-
-
-        console.log(
-
-            "CTM PATH™ Application stopped."
-
-        );
-
-
-    }
-
-
-
-
-    /* ==========================================================
-       RESTART
-
-    ========================================================== */
-
-
-    async restart() {
-
-
-        await this.destroy();
-
-
-        await this.init();
-
-
-    }
-
-
-
-
-    /* ==========================================================
-       DISPOSE
-
-    ========================================================== */
-
-
-    async dispose() {
-
-
-        await this.destroy();
-
-
-    }
 
 
 }
@@ -841,91 +102,445 @@ class App {
 
 
 
-/* ==============================================================
-   SINGLETON EXPORT
-============================================================== */
-
-
-CTM.App = new App();
 
 
 
+/* ==========================================================================
+   LOAD GLOBAL COMPONENTS
+========================================================================== */
 
-/* ==============================================================
-   APPLICATION ENTRY POINT
-============================================================== */
+
+async function loadGlobalComponents(){
+
+
+
+    if(
+
+        window.CTM_COMPONENTS &&
+
+        typeof window.CTM_COMPONENTS.load ===
+
+        "function"
+
+    ){
+
+
+
+        await window.CTM_COMPONENTS.load();
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   LOAD CURRENT PAGE
+========================================================================== */
+
+
+async function loadCurrentPage(){
+
+
+
+    const app =
+
+        document.getElementById(
+
+            "app"
+
+        );
+
+
+
+    if(!app){
+
+        return;
+
+    }
+
+
+
+
+
+    const page =
+
+        APP_CONFIG.defaultPage;
+
+
+
+
+
+    const response =
+
+        await fetch(page);
+
+
+
+
+
+    if(!response.ok){
+
+
+
+        throw new Error(
+
+            "Page loading failed"
+
+        );
+
+
+
+    }
+
+
+
+
+
+    const html =
+
+        await response.text();
+
+
+
+
+
+    app.innerHTML = html;
+
+
+
+}
+
+
+ /* ==========================================================================
+   LOAD PAGE SCRIPT
+========================================================================== */
+
+
+async function loadPageScript(){
+
+
+
+    const scriptPath =
+
+        APP_CONFIG.defaultScript;
+
+
+
+    return new Promise(
+
+        function(resolve,reject){
+
+
+
+            const existing =
+
+                document.querySelector(
+
+                    `script[src="${scriptPath}"]`
+
+                );
+
+
+
+            if(existing){
+
+
+                resolve();
+
+
+                return;
+
+
+            }
+
+
+
+
+
+            const script =
+
+                document.createElement(
+
+                    "script"
+
+                );
+
+
+
+
+
+            script.src = scriptPath;
+
+
+
+            script.async = false;
+
+
+
+
+
+            script.onload = function(){
+
+
+
+                resolve();
+
+
+
+            };
+
+
+
+
+
+            script.onerror = function(){
+
+
+
+                reject(
+
+                    new Error(
+
+                        "Page script failed: "
+
+                        +
+
+                        scriptPath
+
+                    )
+
+                );
+
+
+
+            };
+
+
+
+
+
+            document.body.appendChild(
+
+                script
+
+            );
+
+
+
+        }
+
+    );
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   INITIALIZE PAGE MODULE
+========================================================================== */
+
+
+function initializePage(){
+
+
+
+    if(
+
+        window.CTM_PAGE01 &&
+
+        typeof window.CTM_PAGE01.init ===
+
+        "function"
+
+    ){
+
+
+
+        window.CTM_PAGE01.init();
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   APPLICATION ERROR HANDLING
+========================================================================== */
+
+
+function handleApplicationError(error){
+
+
+
+    console.error(
+
+        "CTM PATH™ Application Error:",
+
+        error
+
+    );
+
+
+
+    const app =
+
+        document.getElementById(
+
+            "app"
+
+        );
+
+
+
+    if(app){
+
+
+
+        app.innerHTML = `
+
+            <section class="error-screen">
+
+                <h1>
+
+                    Something went wrong.
+
+                </h1>
+
+
+                <p>
+
+                    Please refresh and try again.
+
+                </p>
+
+
+            </section>
+
+        `;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   START APPLICATION
+========================================================================== */
 
 
 document.addEventListener(
 
+
     "DOMContentLoaded",
 
-    async () => {
+
+    async function(){
 
 
-        await CTM.App.init();
+
+        try {
+
+
+
+            await startApplication();
+
+
+
+            await loadPageScript();
+
+
+
+            console.log(
+
+                "Page module loaded."
+
+            );
+
+
+
+        }
+
+
+        catch(error){
+
+
+
+            handleApplicationError(
+
+                error
+
+            );
+
+
+
+        }
+
 
 
     }
+
 
 );
 
 
 
 
-/* ==============================================================
-   CTM PATH™ MVP ORCHESTRATOR v1.1
-
-   Flow
-
-   Browser
-
-      ↓
-
-   App.init()
-
-      ↓
-
-   Header Component
-
-      ↓
-
-   Footer Component
-
-      ↓
-
-   Page 01
-
-      ↓
-
-   Page 02
-
-      ↓
-
-   Page 03
-
-      ↓
-
-   Page 04
-
-      ↓
-
-   Page 05
-
-      ↓
-
-   Page 06
-
-      ↓
-
-   Page 07
 
 
-   Status
 
-   WORKING MVP ORCHESTRATOR v1.1
+/* ==========================================================================
+   PUBLIC MVP API
+========================================================================== */
 
-   EOF
 
-============================================================== */
+window.CTM_APP = {
+
+
+    start:
+
+        startApplication,
+
+
+    loadPage:
+
+        loadCurrentPage
+
+
+};
+
+
+
+})();
 
