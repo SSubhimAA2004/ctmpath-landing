@@ -1,3607 +1,496 @@
 
 /* ==========================================================================
    CTM PATH™ Guided Journey™
-
    File        : css/welcome.css
-   Version     : 6.0
-   Edition     : Luxury Hero Edition™
-   Status      : Production Release
-   Architecture: Static HTML + CSS + Vanilla JavaScript
+   Version     : 1.0
+   Status      : PAGE 01 (Freeze Candidate)
 
-   --------------------------------------------------------------------------
-
-   DESIGN PHILOSOPHY
-
-   Luxury.
-   Calm.
-   Spacious.
-   Timeless.
-
-   This stylesheet preserves the existing welcome.html while
-   transforming the Welcome experience into a cinematic,
-   executive-quality landing page.
-
-   Focus Areas
-
-   • Cinematic Hero
-   • Premium Lighting
-   • Luxury Typography
-   • Glass Morphism
-   • Elegant Scroll Rhythm
-   • Executive CTA
-   • Seamless Footer Transition
-
+   Purpose
+   -------
+   Page-specific styling for Welcome Page only.
 ========================================================================== */
 
+/* ==========================================================
+   PAGE
+========================================================== */
 
+.welcome-page {
 
+    position: relative;
 
+    width: 100%;
 
-
-
-/* ==========================================================================
-   PAGE FOUNDATION
-========================================================================== */
-
-.welcome-page{
-
-    position:
-
-        relative;
-
-    overflow:
-
-        hidden;
-
-    isolation:
-
-        isolate;
-
-    background:
-
-        radial-gradient(
-
-            ellipse at 50% -15%,
-
-            rgba(35,212,200,.075),
-
-            transparent 42%
-
-        ),
-
-        radial-gradient(
-
-            ellipse at 100% 100%,
-
-            rgba(201,162,39,.040),
-
-            transparent 48%
-
-        ),
-
-        linear-gradient(
-
-            180deg,
-
-            #071B37 0%,
-
-            #081F41 34%,
-
-            #092346 68%,
-
-            #0A274C 100%
-
-        );
+    overflow: hidden;
 
 }
 
 
 
+/* ==========================================================
+   COMMON CONTAINER
+========================================================== */
 
+.welcome-container {
 
-.welcome-page::before{
+    width: min(1120px, 92%);
 
-    content:
-
-        "";
-
-    position:
-
-        absolute;
-
-    inset:
-
-        0;
-
-    pointer-events:
-
-        none;
-
-    background:
-
-        radial-gradient(
-
-            circle at 50% 0%,
-
-            rgba(255,255,255,.020),
-
-            transparent 42%
-
-        );
+    margin: 0 auto;
 
 }
 
 
 
-
-
-.welcome-page::after{
-
-    content:
-
-        "";
-
-    position:
-
-        absolute;
-
-    inset:
-
-        0;
-
-    pointer-events:
-
-        none;
-
-    opacity:
-
-        .18;
-
-    background-image:
-
-        linear-gradient(
-
-            rgba(255,255,255,.015) 1px,
-
-            transparent 1px
-
-        ),
-
-        linear-gradient(
-
-            90deg,
-
-            rgba(255,255,255,.015) 1px,
-
-            transparent 1px
-
-        );
-
-    background-size:
-
-        120px 120px;
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================================================
+/* ==========================================================
    HERO
-========================================================================== */
+========================================================== */
 
-.welcome-hero{
+.welcome-hero {
 
-    position:
+    padding: 7rem 0 5rem;
 
-        relative;
+    text-align: center;
 
-    display:
-
-        flex;
-
-    align-items:
-
-        center;
-
-    justify-content:
-
-        center;
-
-    text-align:
-
-        center;
-
-    min-height:
-
-        calc(100vh - 110px);
-
-    padding:
-
-        clamp(5rem,7vw,7rem)
-
-        2rem
-
-        clamp(6rem,8vw,8rem);
-
-    overflow:
-
-        hidden;
-
 }
-
-
-
-
-
-.welcome-hero::before{
-
-    content:
-
-        "";
-
-    position:
-
-        absolute;
-
-    width:
-
-        1200px;
-
-    height:
-
-        1200px;
-
-    left:
-
-        50%;
-
-    top:
 
-        42%;
 
-    transform:
 
-        translate(-50%,-50%);
+.welcome-greeting {
 
-    border-radius:
+    margin-bottom: .6rem;
 
-        50%;
+    font-size: 1.15rem;
 
-    pointer-events:
+    font-weight: 600;
 
-        none;
-
-    background:
-
-        radial-gradient(
-
-            circle,
-
-            rgba(35,212,200,.090),
-
-            rgba(35,212,200,.030) 38%,
-
-            transparent 74%
-
-        );
-
-    filter:
-
-        blur(50px);
-
 }
-
-
-
-
-
-.welcome-hero::after{
-
-    content:
 
-        "";
 
-    position:
 
-        absolute;
+.welcome-greeting-en {
 
-    width:
+    margin-bottom: 3rem;
 
-        1600px;
+    opacity: .75;
 
-    height:
+    font-size: .95rem;
 
-        800px;
-
-    left:
-
-        50%;
-
-    top:
-
-        100%;
-
-    transform:
-
-        translateX(-50%);
-
-    background:
-
-        radial-gradient(
-
-            ellipse,
-
-            rgba(201,162,39,.030),
-
-            transparent 70%
-
-        );
-
-    pointer-events:
-
-        none;
-
 }
-
 
 
 
+.hero-title {
 
+    margin-bottom: 2rem;
 
+    font-size: clamp(2.8rem,6vw,5rem);
 
-/* ==========================================================================
-   HERO CONTENT
-========================================================================== */
+    font-weight: 800;
 
-.hero-content{
+    line-height: 1.05;
 
-    position:
-
-        relative;
-
-    z-index:
-
-        10;
-
-    width:
-
-        min(1320px,100%);
-
-    margin:
-
-        0 auto;
-
 }
 
 
 
+.hero-subtitle {
 
+    margin-bottom: 1rem;
 
-.hero-content>*{
+    font-size: clamp(2rem,4vw,3.2rem);
 
-    position:
+    line-height: 1.4;
 
-        relative;
-
-    z-index:
-
-        5;
-
 }
-
-/* ==========================================================================
-   LUXURY HERO VISUAL
-========================================================================== */
-
-.hero-visual{
-
-    position:
-
-        absolute;
-
-    left:
 
-        50%;
 
-    top:
 
-        46%;
+.hero-subtitle-en {
 
-    width:
+    max-width: 760px;
 
-        min(980px,78vw);
+    margin: 0 auto;
 
-    aspect-ratio:
+    opacity: .82;
 
-        1;
+    font-size: 1.2rem;
 
-    transform:
-
-        translate(-50%,-50%);
-
-    pointer-events:
-
-        none;
-
-    z-index:
-
-        1;
-
-    opacity:
-
-        .42;
-
 }
-
-
-
-
-
-.hero-visual::before{
-
-    content:
-
-        "";
-
-    position:
 
-        absolute;
 
-    inset:
 
-        8%;
+/* ==========================================================
+   CONTENT SECTIONS
+========================================================== */
 
-    border-radius:
+.welcome-section {
 
-        50%;
+    padding: 5rem 0;
 
-    border:
-
-        1px solid rgba(35,212,200,.10);
-
-    box-shadow:
-
-        0 0 140px rgba(35,212,200,.10),
-
-        inset 0 0 120px rgba(35,212,200,.04);
-
 }
-
-
-
-
-
-.hero-visual::after{
-
-    content:
-
-        "";
-
-    position:
-
-        absolute;
-
-    inset:
-
-        22%;
 
-    border-radius:
 
-        50%;
 
-    border:
+.section-header {
 
-        1px solid rgba(201,162,39,.08);
+    margin-bottom: 3rem;
 
-    filter:
+    text-align: center;
 
-        blur(.3px);
-
 }
-
-
-
-
-
-.hero-visual{
-
-    background:
-
-        radial-gradient(
 
-            circle,
 
-            rgba(35,212,200,.050),
 
-            rgba(35,212,200,.020) 34%,
+.section-header h2 {
 
-            transparent 70%
+    margin-bottom: 1rem;
 
-        );
-
 }
-
-
-
-
-
-/* ==========================================================================
-   HERO EYEBROW
-========================================================================== */
-
-.hero-eyebrow{
-
-    display:
 
-        inline-flex;
 
-    align-items:
 
-        center;
+.section-header p {
 
-    justify-content:
+    opacity: .75;
 
-        center;
-
-    gap:
-
-        .75rem;
-
-    padding:
-
-        .9rem 1.9rem;
-
-    margin-bottom:
-
-        2.4rem;
-
-    border-radius:
-
-        999px;
-
-    background:
-
-        rgba(255,255,255,.035);
-
-    border:
-
-        1px solid rgba(35,212,200,.18);
-
-    backdrop-filter:
-
-        blur(18px);
-
-    -webkit-backdrop-filter:
-
-        blur(18px);
-
-    color:
-
-        var(--ctm-teal-soft);
-
-    font-size:
-
-        .82rem;
-
-    font-weight:
-
-        700;
-
-    letter-spacing:
-
-        .24em;
-
-    text-transform:
-
-        uppercase;
-
-    box-shadow:
-
-        0 12px 36px rgba(0,0,0,.18);
-
 }
-
-
-
 
 
-.hero-eyebrow::before{
 
-    content:
+/* ==========================================================
+   REFLECTION CARDS
+========================================================== */
 
-        "";
+.reflection-card,
 
-    width:
+.journey-card {
 
-        8px;
+    max-width: 920px;
 
-    height:
+    margin: 0 auto 2rem;
 
-        8px;
+    padding: 2.5rem;
 
-    border-radius:
+    border-radius: 24px;
 
-        50%;
-
-    background:
-
-        var(--ctm-gold);
-
-    box-shadow:
-
-        0 0 12px rgba(201,162,39,.60);
-
 }
-
-
-
-
-
-.hero-eyebrow::after{
-
-    content:
-
-        "";
-
-    width:
-
-        8px;
-
-    height:
-
-        8px;
 
-    border-radius:
 
-        50%;
 
-    background:
+.reflection-card p,
 
-        var(--ctm-teal);
+.journey-card p {
 
-    box-shadow:
+    margin-bottom: 1rem;
 
-        0 0 12px rgba(35,212,200,.60);
+    line-height: 1.9;
 
 }
-
-/* ==========================================================================
-   HERO TITLE
-========================================================================== */
-
-.hero-title{
-
-    max-width:
-
-        1180px;
-
-    margin:
-
-        0 auto;
-
-    color:
-
-        var(--ctm-ivory);
-
-    font-size:
-
-        clamp(4.4rem,7.2vw,7.2rem);
-
-    font-weight:
-
-        800;
-
-    line-height:
-
-        1.02;
-
-    letter-spacing:
-
-        -.045em;
 
-    text-wrap:
 
-        balance;
 
-    text-shadow:
+.english {
 
-        0 10px 42px rgba(0,0,0,.32);
+    opacity: .82;
 
 }
 
 
 
+/* ==========================================================
+   DISCOVER GRID
+========================================================== */
 
+.discover-grid {
 
-.hero-title br{
+    display: grid;
 
-    display:
+    grid-template-columns: repeat(2,1fr);
 
-        block;
+    gap: 2rem;
 
-    content:
-
-        "";
-
 }
-
-
-
-
-
-.hero-title::after{
-
-    content:
-
-        "";
-
-    display:
-
-        block;
-
-    width:
-
-        180px;
-
-    height:
-
-        3px;
-
-    margin:
 
-        2.5rem auto 0;
 
-    border-radius:
 
-        999px;
+.discover-card {
 
-    background:
+    padding: 2rem;
 
-        linear-gradient(
+    border-radius: 22px;
 
-            90deg,
+    transition: transform .35s ease;
 
-            transparent,
-
-            rgba(201,162,39,.15),
-
-            var(--ctm-gold),
-
-            rgba(201,162,39,.15),
+}
 
-            transparent
 
-        );
 
-    box-shadow:
+.discover-card:hover {
 
-        0 0 24px rgba(201,162,39,.22);
+    transform: translateY(-6px);
 
 }
 
 
 
+.discover-card h3 {
 
+    margin-bottom: 1rem;
 
-/* ==========================================================================
-   HERO ENGLISH TITLE
-========================================================================== */
+}
 
-.hero-title-english{
 
-    max-width:
 
-        920px;
+.discover-card h4 {
 
-    margin:
+    margin-bottom: 1rem;
 
-        2.4rem auto 0;
+    opacity: .8;
 
-    color:
+}
 
-        var(--ctm-gold-soft);
 
-    font-size:
 
-        clamp(2.05rem,3vw,3.35rem);
+.discover-card p {
 
-    font-weight:
+    margin-bottom: .8rem;
 
-        700;
+}
 
-    line-height:
 
-        1.18;
 
-    letter-spacing:
+/* ==========================================================
+   CTA
+========================================================== */
 
-        -.02em;
+.welcome-cta {
 
-    text-wrap:
+    padding: 6rem 0;
 
-        balance;
+    text-align: center;
 
 }
-
 
 
 
+.welcome-cta h2 {
 
-/* ==========================================================================
-   HERO DESCRIPTION
-========================================================================== */
+    margin-bottom: 1rem;
 
-.hero-description{
-
-    width:
-
-        min(980px,100%);
-
-    margin:
-
-        3.5rem auto 0;
-
 }
-
-
-
 
 
-.hero-description .tamil{
 
-    max-width:
+.welcome-cta h3 {
 
-        920px;
+    margin-bottom: 3rem;
 
-    margin:
+    opacity: .8;
 
-        0 auto 2.75rem;
-
-    color:
+}
 
-        var(--text-primary);
 
-    font-size:
 
-        clamp(1.28rem,1.5vw,1.55rem);
+/* ==========================================================
+   HIGHLIGHTS
+========================================================== */
 
-    line-height:
+.journey-highlights {
 
-        2.05;
+    display: flex;
 
-    font-weight:
+    flex-wrap: wrap;
 
-        400;
+    justify-content: center;
 
-    text-wrap:
+    gap: 1rem;
 
-        pretty;
+    margin-bottom: 3rem;
 
 }
 
 
 
+.highlight-item {
 
+    padding: 1rem 1.4rem;
 
-.hero-description .english{
+    border-radius: 999px;
 
-    max-width:
+}
 
-        860px;
 
-    margin:
 
-        0 auto;
+/* ==========================================================
+   CTA BUTTON
+========================================================== */
 
-    color:
+.btn-primary {
 
-        var(--text-secondary);
+    display: inline-flex;
 
-    font-size:
+    flex-direction: column;
 
-        clamp(1.12rem,1.3vw,1.28rem);
+    align-items: center;
 
-    line-height:
+    gap: .45rem;
 
-        1.95;
+    padding: 1.25rem 3rem;
 
-    font-weight:
+    border: none;
 
-        400;
+    border-radius: 999px;
 
-    text-wrap:
+    cursor: pointer;
 
-        pretty;
+    transition: all .35s ease;
 
 }
-
-/* ==========================================================================
-   JOURNEY INTRODUCTION
-========================================================================== */
 
-.journey-introduction{
 
-    position:
 
-        relative;
+.btn-primary:hover {
 
-    padding:
+    transform: translateY(-3px);
 
-        clamp(8rem,10vw,10rem)
-
-        0;
-
 }
-
-
-
-
-
-.journey-introduction::before{
-
-    content:
-
-        "";
-
-    position:
-
-        absolute;
-
-    inset:
 
-        0;
 
-    pointer-events:
 
-        none;
+.btn-primary small {
 
-    background:
+    font-size: .85rem;
 
-        radial-gradient(
+    opacity: .8;
 
-            ellipse at center top,
-
-            rgba(35,212,200,.045),
-
-            transparent 62%
-
-        );
-
 }
 
 
 
+/* ==========================================================
+   PRIVACY
+========================================================== */
 
+.privacy-section {
 
-.section-heading{
+    padding: 5rem 0 7rem;
 
-    position:
-
-        relative;
-
-    z-index:
+}
 
-        2;
 
-    width:
 
-        min(1000px,100% - 48px);
+.privacy-card {
 
-    margin:
+    max-width: 960px;
 
-        0 auto 5rem;
+    margin: 0 auto;
 
-    text-align:
+    padding: 2.5rem;
 
-        center;
+    border-radius: 24px;
 
 }
 
 
 
+.privacy-card h3 {
 
+    margin-bottom: 1.5rem;
 
-.section-heading h2{
+    text-align: center;
 
-    margin:
+}
 
-        0 0 1.25rem;
 
-    color:
 
-        var(--text-heading);
+.privacy-card p {
 
-    font-size:
+    margin-bottom: 1.25rem;
 
-        clamp(2.8rem,4vw,4.4rem);
+    line-height: 1.9;
 
-    font-weight:
+}
 
-        700;
 
-    line-height:
 
-        1.15;
+/* ==========================================================
+   ENTRANCE ANIMATION
+========================================================== */
 
-    letter-spacing:
+.welcome-page.is-ready .welcome-hero {
 
-        -.03em;
+    animation: fadeUp .8s ease both;
 
 }
-
 
 
 
+.welcome-page.is-ready .discover-card {
 
-.section-heading p{
+    animation: fadeUp .8s ease both;
 
-    margin:
+}
 
-        0;
 
-    color:
 
-        var(--ctm-gold-soft);
+@keyframes fadeUp {
 
-    font-size:
+    from {
 
-        1.05rem;
+        opacity: 0;
 
-    font-weight:
+        transform: translateY(40px);
 
-        600;
+    }
 
-    letter-spacing:
+    to {
 
-        .24em;
+        opacity: 1;
 
-    text-transform:
+        transform: translateY(0);
 
-        uppercase;
+    }
 
 }
-
 
 
 
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
 
-/* ==========================================================================
-   JOURNEY CARDS GRID
-========================================================================== */
+@media (max-width:900px) {
 
-.journey-cards{
+    .discover-grid {
 
-    position:
+        grid-template-columns: 1fr;
 
-        relative;
-
-    z-index:
+    }
 
-        2;
+}
 
-    width:
 
-        min(1480px,100% - 80px);
 
-    margin:
+@media (max-width:768px) {
 
-        0 auto;
+    .welcome-hero {
 
-    display:
+        padding: 5rem 0 4rem;
 
-        grid;
-
-    grid-template-columns:
-
-        repeat(4,1fr);
-
-    gap:
-
-        2rem;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   PREMIUM JOURNEY CARD
-========================================================================== */
-
-.journey-card{
-
-    position:
-
-        relative;
-
-    min-height:
-
-        440px;
-
-    padding:
-
-        3rem;
-
-    display:
-
-        flex;
-
-    flex-direction:
-
-        column;
-
-    overflow:
-
-        hidden;
-
-    border-radius:
-
-        36px;
-
-    background:
-
-        linear-gradient(
-
-            160deg,
-
-            rgba(255,255,255,.065),
-
-            rgba(255,255,255,.018)
-
-        );
-
-    border:
-
-        1px solid rgba(255,255,255,.085);
-
-    backdrop-filter:
-
-        blur(22px);
-
-    -webkit-backdrop-filter:
-
-        blur(22px);
-
-    box-shadow:
-
-        0 30px 90px rgba(0,0,0,.28);
-
-    transition:
-
-        transform .45s ease,
-
-        border-color .45s ease,
-
-        box-shadow .45s ease;
-
-}
-
-
-
-
-
-.journey-card::before{
-
-    content:
-
-        "";
-
-    position:
-
-        absolute;
-
-    inset:
-
-        0;
-
-    background:
-
-        radial-gradient(
-
-            circle at top,
-
-            rgba(35,212,200,.14),
-
-            transparent 64%
-
-        );
-
-    opacity:
-
-        0;
-
-    transition:
-
-        opacity .45s ease;
-
-    pointer-events:
-
-        none;
-
-}
-
-
-
-
-
-.journey-card:hover{
-
-    transform:
-
-        translateY(-14px);
-
-    border-color:
-
-        rgba(35,212,200,.25);
-
-    box-shadow:
-
-        0 45px 110px rgba(0,0,0,.38);
-
-}
-
-
-
-
-
-.journey-card:hover::before{
-
-    opacity:
-
-        1;
-
-}
-
-/* ==========================================================================
-   JOURNEY CARD CONTENT
-========================================================================== */
-
-.card-number{
-
-    position:
-
-        relative;
-
-    z-index:
-
-        2;
-
-    color:
-
-        rgba(255,255,255,.16);
-
-    font-size:
-
-        4rem;
-
-    font-weight:
-
-        800;
-
-    line-height:
-
-        1;
-
-    letter-spacing:
-
-        -.04em;
-
-    margin-bottom:
-
-        1.25rem;
-
-}
-
-
-
-
-
-.card-icon{
-
-    position:
-
-        relative;
-
-    z-index:
-
-        2;
-
-    display:
-
-        inline-flex;
-
-    align-items:
-
-        center;
-
-    justify-content:
-
-        center;
-
-    width:
-
-        78px;
-
-    height:
-
-        78px;
-
-    margin-bottom:
-
-        2rem;
-
-    border-radius:
-
-        50%;
-
-    background:
-
-        linear-gradient(
-
-            145deg,
-
-            rgba(35,212,200,.20),
-
-            rgba(35,212,200,.045)
-
-        );
-
-    border:
-
-        1px solid rgba(35,212,200,.20);
-
-    color:
-
-        var(--ctm-teal-soft);
-
-    font-size:
-
-        2rem;
-
-    box-shadow:
-
-        inset 0 1px 0 rgba(255,255,255,.08),
-
-        0 12px 36px rgba(35,212,200,.12);
-
-}
-
-
-
-
-
-.journey-card h3{
-
-    position:
-
-        relative;
-
-    z-index:
-
-        2;
-
-    margin:
-
-        0 0 0.75rem;
-
-    color:
-
-        var(--text-heading);
-
-    font-size:
-
-        1.55rem;
-
-    font-weight:
-
-        700;
-
-    line-height:
-
-        1.35;
-
-}
-
-
-
-
-
-.journey-card h4{
-
-    position:
-
-        relative;
-
-    z-index:
-
-        2;
-
-    margin:
-
-        0 0 1.5rem;
-
-    color:
-
-        var(--ctm-gold-soft);
-
-    font-size:
-
-        .95rem;
-
-    font-weight:
-
-        600;
-
-    letter-spacing:
-
-        .14em;
-
-    text-transform:
-
-        uppercase;
-
-}
-
-
-
-
-
-.journey-card p{
-
-    position:
-
-        relative;
-
-    z-index:
-
-        2;
-
-    margin:
-
-        auto 0 0;
-
-    color:
-
-        var(--text-secondary);
-
-    font-size:
-
-        1.05rem;
-
-    line-height:
-
-        1.9;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   REFLECTION SECTION
-========================================================================== */
-
-.reflection-section{
-
-    position:
-
-        relative;
-
-    padding:
-
-        clamp(8rem,10vw,10rem)
-
-        0;
-
-}
-
-
-
-
-
-.reflection-section::before{
-
-    content:
-
-        "";
-
-    position:
-
-        absolute;
-
-    inset:
-
-        0;
-
-    pointer-events:
-
-        none;
-
-    background:
-
-        radial-gradient(
-
-            ellipse at center,
-
-            rgba(201,162,39,.045),
-
-            transparent 62%
-
-        );
-
-}
-
-
-
-
-
-.reflection-card{
-
-    position:
-
-        relative;
-
-    width:
-
-        min(1180px,100% - 80px);
-
-    margin:
-
-        0 auto;
-
-    padding:
-
-        clamp(4rem,6vw,6rem);
-
-    text-align:
-
-        center;
-
-    overflow:
-
-        hidden;
-
-    border-radius:
-
-        44px;
-
-    background:
-
-        linear-gradient(
-
-            160deg,
-
-            rgba(255,255,255,.065),
-
-            rgba(255,255,255,.020)
-
-        );
-
-    border:
-
-        1px solid rgba(255,255,255,.09);
-
-    backdrop-filter:
-
-        blur(24px);
-
-    -webkit-backdrop-filter:
-
-        blur(24px);
-
-    box-shadow:
-
-        0 40px 100px rgba(0,0,0,.32);
-
-}
-
-/* ==========================================================================
-   REFLECTION CONTENT
-========================================================================== */
-
-.reflection-card::before{
-
-    content:
-
-        "";
-
-    position:
-
-        absolute;
-
-    inset:
-
-        0;
-
-    pointer-events:
-
-        none;
-
-    background:
-
-        radial-gradient(
-
-            circle at top right,
-
-            rgba(35,212,200,.10),
-
-            transparent 58%
-
-        ),
-
-        radial-gradient(
-
-            circle at bottom left,
-
-            rgba(201,162,39,.06),
-
-            transparent 60%
-
-        );
-
-}
-
-
-
-
-
-.reflection-card h2{
-
-    position:
-
-        relative;
-
-    z-index:
-
-        2;
-
-    margin:
-
-        0 0 1rem;
-
-    color:
-
-        var(--text-heading);
-
-    font-size:
-
-        clamp(2.8rem,4vw,4.5rem);
-
-    font-weight:
-
-        700;
-
-    line-height:
-
-        1.15;
-
-    letter-spacing:
-
-        -.035em;
-
-}
-
-
-
-
-
-.reflection-card h3{
-
-    position:
-
-        relative;
-
-    z-index:
-
-        2;
-
-    margin:
-
-        0 0 3rem;
-
-    color:
-
-        var(--ctm-gold-soft);
-
-    font-size:
-
-        1rem;
-
-    font-weight:
-
-        600;
-
-    letter-spacing:
-
-        .24em;
-
-    text-transform:
-
-        uppercase;
-
-}
-
-
-
-
-
-.reflection-card .tamil{
-
-    position:
-
-        relative;
-
-    z-index:
-
-        2;
-
-    width:
-
-        min(820px,100%);
-
-    margin:
-
-        0 auto 2.5rem;
-
-    color:
-
-        var(--text-primary);
-
-    font-size:
-
-        clamp(1.18rem,1.45vw,1.38rem);
-
-    line-height:
-
-        2.05;
-
-}
-
-
-
-
-
-.reflection-card .english{
-
-    position:
-
-        relative;
-
-    z-index:
-
-        2;
-
-    width:
-
-        min(760px,100%);
-
-    margin:
-
-        0 auto;
-
-    color:
-
-        var(--text-secondary);
-
-    font-size:
-
-        clamp(1.05rem,1.25vw,1.22rem);
-
-    line-height:
-
-        1.95;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   CTA SECTION
-========================================================================== */
-
-.welcome-action{
-
-    position:
-
-        relative;
-
-    padding:
-
-        clamp(8rem,11vw,11rem)
-
-        2rem
-
-        clamp(9rem,12vw,12rem);
-
-    text-align:
-
-        center;
-
-}
-
-
-
-
-
-.welcome-action::before{
-
-    content:
-
-        "";
-
-    position:
-
-        absolute;
-
-    inset:
-
-        0;
-
-    pointer-events:
-
-        none;
-
-    background:
-
-        radial-gradient(
-
-            ellipse at center,
-
-            rgba(35,212,200,.065),
-
-            transparent 62%
-
-        );
-
-}
-
-
-
-
-
-.welcome-action h2{
-
-    position:
-
-        relative;
-
-    z-index:
-
-        2;
-
-    width:
-
-        min(1000px,100%);
-
-    margin:
-
-        0 auto 1.75rem;
-
-    color:
-
-        var(--text-heading);
-
-    font-size:
-
-        clamp(3.2rem,5.5vw,5.8rem);
-
-    font-weight:
-
-        800;
-
-    line-height:
-
-        1.08;
-
-    letter-spacing:
-
-        -.045em;
-
-    text-wrap:
-
-        balance;
-
-}
-
-/* ==========================================================================
-   CTA SUBTITLE
-========================================================================== */
-
-.cta-subtitle{
-
-    position:
-
-        relative;
-
-    z-index:
-
-        2;
-
-    margin:
-
-        0 auto;
-
-    color:
-
-        var(--ctm-gold-soft);
-
-    font-size:
-
-        1.12rem;
-
-    font-weight:
-
-        600;
-
-    letter-spacing:
-
-        .26em;
-
-    text-transform:
-
-        uppercase;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   CTA META
-========================================================================== */
-
-.cta-meta{
-
-    position:
-
-        relative;
-
-    z-index:
-
-        2;
-
-    display:
-
-        inline-flex;
-
-    align-items:
-
-        center;
-
-    justify-content:
-
-        center;
-
-    flex-wrap:
-
-        wrap;
-
-    gap:
-
-        1rem;
-
-    margin:
-
-        3rem auto 3.75rem;
-
-    padding:
-
-        1.15rem 2.4rem;
-
-    border-radius:
-
-        999px;
-
-    background:
-
-        rgba(255,255,255,.035);
-
-    border:
-
-        1px solid rgba(35,212,200,.14);
-
-    backdrop-filter:
-
-        blur(18px);
-
-    -webkit-backdrop-filter:
-
-        blur(18px);
-
-    color:
-
-        var(--text-secondary);
-
-    font-size:
-
-        1rem;
-
-    font-weight:
-
-        500;
-
-}
-
-
-
-
-
-.cta-meta span{
-
-    color:
-
-        rgba(255,255,255,.25);
-
-}
-
-
-
-
-
-/* ==========================================================================
-   PRIMARY CTA BUTTON
-========================================================================== */
-
-.primary-button{
-
-    position:
-
-        relative;
-
-    z-index:
-
-        2;
-
-    display:
-
-        inline-flex;
-
-    flex-direction:
-
-        column;
-
-    align-items:
-
-        center;
-
-    justify-content:
-
-        center;
-
-    min-width:
-
-        440px;
-
-    min-height:
-
-        92px;
-
-    padding:
-
-        1.4rem 3rem;
-
-    border:
-
-        none;
-
-    border-radius:
-
-        999px;
-
-    cursor:
-
-        pointer;
-
-    overflow:
-
-        hidden;
-
-    background:
-
-        linear-gradient(
-
-            135deg,
-
-            #23D4C8,
-
-            #49E6DA
-
-        );
-
-    color:
-
-        #06141A;
-
-    box-shadow:
-
-        0 22px 70px rgba(35,212,200,.30);
-
-    transition:
-
-        transform .35s ease,
-
-        box-shadow .35s ease;
-
-}
-
-
-
-
-
-.primary-button::before{
-
-    content:
-
-        "";
-
-    position:
-
-        absolute;
-
-    inset:
-
-        0;
-
-    background:
-
-        linear-gradient(
-
-            120deg,
-
-            transparent,
-
-            rgba(255,255,255,.35),
-
-            transparent
-
-        );
-
-    transform:
-
-        translateX(-120%);
-
-    transition:
-
-        transform .65s ease;
-
-}
-
-
-
-
-
-.primary-button:hover{
-
-    transform:
-
-        translateY(-6px);
-
-    box-shadow:
-
-        0 34px 90px rgba(35,212,200,.42);
-
-}
-
-
-
-
-
-.primary-button:hover::before{
-
-    transform:
-
-        translateX(120%);
-
-}
-
-
-
-
-
-.button-tamil{
-
-    position:
-
-        relative;
-
-    z-index:
-
-        2;
-
-    display:
-
-        block;
-
-    font-size:
-
-        1.12rem;
-
-    font-weight:
-
-        700;
-
-    line-height:
-
-        1.4;
-
-}
-
-
-
-
-
-.button-english{
-
-    position:
-
-        relative;
-
-    z-index:
-
-        2;
-
-    display:
-
-        block;
-
-    margin-top:
-
-        .35rem;
-
-    font-size:
-
-        .88rem;
-
-    font-weight:
-
-        600;
-
-    letter-spacing:
-
-        .10em;
-
-    text-transform:
-
-        uppercase;
-
-    opacity:
-
-        .82;
-
-}
-
-/* ==========================================================================
-   CTA TRUST MESSAGE
-========================================================================== */
-
-.trust-message{
-
-    position:
-
-        relative;
-
-    z-index:
-
-        2;
-
-    width:
-
-        min(820px,100%);
-
-    margin:
-
-        3.5rem auto 0;
-
-}
-
-
-
-
-
-.trust-message .tamil{
-
-    margin:
-
-        0 auto 1.25rem;
-
-    color:
-
-        var(--text-primary);
-
-    font-size:
-
-        1.08rem;
-
-    line-height:
-
-        1.9;
-
-}
-
-
-
-
-
-.trust-message .english{
-
-    margin:
-
-        0 auto;
-
-    color:
-
-        var(--text-secondary);
-
-    font-size:
-
-        1rem;
-
-    line-height:
-
-        1.85;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   CLOSING SIGNATURE
-========================================================================== */
-
-.welcome-closing{
-
-    position:
-
-        relative;
-
-    z-index:
-
-        2;
-
-    display:
-
-        flex;
-
-    align-items:
-
-        center;
-
-    justify-content:
-
-        center;
-
-    flex-wrap:
-
-        wrap;
-
-    gap:
-
-        2.8rem;
-
-    margin-top:
-
-        4.5rem;
-
-}
-
-
-
-
-
-.welcome-closing span{
-
-    position:
-
-        relative;
-
-    color:
-
-        var(--ctm-gold-soft);
-
-    font-size:
-
-        .98rem;
-
-    font-weight:
-
-        600;
-
-    letter-spacing:
-
-        .18em;
-
-    text-transform:
-
-        uppercase;
-
-}
-
-
-
-
-
-.welcome-closing span:not(:last-child)::after{
-
-    content:
-
-        "";
-
-    position:
-
-        absolute;
-
-    top:
-
-        50%;
-
-    right:
-
-        -1.55rem;
-
-    width:
-
-        5px;
-
-    height:
-
-        5px;
-
-    border-radius:
-
-        50%;
-
-    background:
-
-        var(--ctm-teal);
-
-    box-shadow:
-
-        0 0 12px rgba(35,212,200,.50);
-
-    transform:
-
-        translateY(-50%);
-
-}
-
-
-
-
-
-/* ==========================================================================
-   REVEAL ANIMATION SUPPORT
-========================================================================== */
-
-.reveal{
-
-    opacity:
-
-        0;
-
-    transform:
-
-        translateY(45px);
-
-    transition:
-
-        opacity .9s ease,
-
-        transform .9s cubic-bezier(.22,1,.36,1);
-
-}
-
-
-
-
-
-.reveal.is-visible{
-
-    opacity:
-
-        1;
-
-    transform:
-
-        translateY(0);
-
-}
-
-
-
-
-
-/* ==========================================================================
-   HERO ENTRY ANIMATION
-========================================================================== */
-
-.hero-content > *{
-
-    opacity:
-
-        0;
-
-    animation:
-
-        luxuryHeroReveal .9s ease forwards;
-
-}
-
-
-
-
-
-.hero-content > *:nth-child(1){
-
-    animation-delay:
-
-        .15s;
-
-}
-
-
-
-
-
-.hero-content > *:nth-child(2){
-
-    animation-delay:
-
-        .30s;
-
-}
-
-
-
-
-
-.hero-content > *:nth-child(3){
-
-    animation-delay:
-
-        .48s;
-
-}
-
-
-
-
-
-.hero-content > *:nth-child(4){
-
-    animation-delay:
-
-        .65s;
-
-}
-
-
-
-
-
-@keyframes luxuryHeroReveal{
-
-    from{
-
-        opacity:
-
-            0;
-
-        transform:
-
-            translateY(35px);
-
-    }
-
-
-    to{
-
-        opacity:
-
-            1;
-
-        transform:
-
-            translateY(0);
-
-    }
-
-}
-
-/* ==========================================================================
-   RESPONSIVE — LARGE TABLET
-========================================================================== */
-
-@media (max-width:1200px){
-
-    .hero-content{
-
-        width:
-
-            min(1100px,100%);
-
-    }
-
-
-
-    .hero-title{
-
-        font-size:
-
-            clamp(3.8rem,7vw,5.8rem);
-
-    }
-
-
-
-    .journey-cards{
-
-        grid-template-columns:
-
-            repeat(2,1fr);
-
-        width:
-
-            min(100% - 64px,1100px);
-
-    }
-
-
-
-    .journey-card{
-
-        min-height:
-
-            400px;
-
-    }
-
-
-
-    .reflection-card{
-
-        width:
-
-            min(100% - 64px,1000px);
-
-    }
-
-}
-
-
-
-
-
-/* ==========================================================================
-   RESPONSIVE — TABLET
-========================================================================== */
-
-@media (max-width:992px){
-
-    .welcome-hero{
-
-        min-height:
-
-            auto;
-
-        padding:
-
-            6rem 1.5rem 5rem;
-
-    }
-
-
-
-    .hero-visual{
-
-        width:
-
-            720px;
-
-        opacity:
-
-            .28;
-
-    }
-
-
-
-    .hero-title{
-
-        font-size:
-
-            clamp(3rem,8vw,4.8rem);
-
-    }
-
-
-
-    .hero-title-english{
-
-        font-size:
-
-            clamp(1.7rem,4vw,2.6rem);
-
-    }
-
-
-
-    .hero-description{
-
-        margin-top:
-
-            2.5rem;
-
-    }
-
-
-
-    .hero-description .tamil{
-
-        font-size:
-
-            1.15rem;
-
-    }
-
-
-
-    .hero-description .english{
-
-        font-size:
-
-            1.05rem;
-
-    }
-
-
-
-    .journey-introduction,
-
-    .reflection-section,
-
-    .welcome-action{
-
-        padding-top:
-
-            6rem;
-
-        padding-bottom:
-
-            6rem;
-
-    }
-
-
-
-    .journey-cards{
-
-        grid-template-columns:
-
-            1fr;
-
-        width:
-
-            min(100% - 48px,700px);
-
-    }
-
-
-
-    .journey-card{
-
-        min-height:
-
-            auto;
-
-    }
-
-
-
-    .reflection-card{
-
-        width:
-
-            min(100% - 48px,760px);
-
-        padding:
-
-            3.5rem 2rem;
-
-    }
-
-
-
-    .primary-button{
-
-        min-width:
-
-            360px;
-
-    }
-
-}
-
-
-
-
-
-/* ==========================================================================
-   RESPONSIVE — MOBILE
-========================================================================== */
-
-@media (max-width:640px){
-
-    .welcome-hero{
-
-        padding:
-
-            4.5rem 1.15rem 4rem;
-
-    }
-
-
-
-    .hero-visual{
-
-        width:
-
-            520px;
-
-        opacity:
-
-            .22;
-
-    }
-
-
-
-    .hero-eyebrow{
-
-        padding:
-
-            .75rem 1.2rem;
-
-        font-size:
-
-            .68rem;
-
-        letter-spacing:
-
-            .16em;
-
-    }
-
-
-
-    .hero-title{
-
-        font-size:
-
-            clamp(2.3rem,10vw,3.4rem);
-
-        line-height:
-
-            1.10;
-
-    }
-
-
-
-    .hero-title::after{
-
-        width:
-
-            120px;
-
-        margin-top:
-
-            1.8rem;
-
-    }
-
-
-
-    .hero-title-english{
-
-        margin-top:
-
-            1.7rem;
-
-        font-size:
-
-            1.35rem;
-
-    }
-
-
-
-    .hero-description .tamil{
-
-        font-size:
-
-            1.02rem;
-
-        line-height:
-
-            1.85;
-
-    }
-
-
-
-    .hero-description .english{
-
-        font-size:
-
-            .96rem;
-
-        line-height:
-
-            1.8;
-
-    }
-
-}
-
-/* ==========================================================================
-   MOBILE REFINEMENTS
-========================================================================== */
-
-@media (max-width:640px){
-
-    .journey-introduction,
-
-    .reflection-section,
-
-    .welcome-action{
-
-        padding-top:
-
-            5rem;
-
-        padding-bottom:
-
-            5rem;
-
-    }
-
-
-
-    .section-heading{
-
-        width:
-
-            calc(100% - 32px);
-
-        margin-bottom:
-
-            3rem;
-
-    }
-
-
-
-    .section-heading h2{
-
-        font-size:
-
-            clamp(2rem,8vw,2.8rem);
-
-    }
-
-
-
-    .section-heading p{
-
-        font-size:
-
-            .78rem;
-
-        letter-spacing:
-
-            .16em;
-
-    }
-
-
-
-    .journey-cards{
-
-        width:
-
-            calc(100% - 32px);
-
-        gap:
-
-            1.25rem;
-
-    }
-
-
-
-    .journey-card{
-
-        padding:
-
-            2rem;
-
-        border-radius:
-
-            28px;
-
-    }
-
-
-
-    .card-number{
-
-        font-size:
-
-            3rem;
-
-    }
-
-
-
-    .card-icon{
-
-        width:
-
-            64px;
-
-        height:
-
-            64px;
-
-        margin-bottom:
-
-            1.5rem;
-
-    }
-
-
-
-    .journey-card h3{
-
-        font-size:
-
-            1.25rem;
-
-    }
-
-
-
-    .journey-card h4{
-
-        font-size:
-
-            .78rem;
-
-    }
-
-
-
-    .journey-card p{
-
-        font-size:
-
-            .95rem;
-
-    }
-
-
-
-    .reflection-card{
-
-        width:
-
-            calc(100% - 32px);
-
-        padding:
-
-            2.5rem 1.4rem;
-
-        border-radius:
-
-            32px;
-
-    }
-
-
-
-    .reflection-card h2{
-
-        font-size:
-
-            clamp(2rem,8vw,2.8rem);
-
-    }
-
-
-
-    .reflection-card h3{
-
-        font-size:
-
-            .78rem;
-
-        letter-spacing:
-
-            .16em;
-
-    }
-
-
-
-    .reflection-card .tamil{
-
-        font-size:
-
-            1rem;
-
-        line-height:
-
-            1.85;
-
-    }
-
-
-
-    .reflection-card .english{
-
-        font-size:
-
-            .92rem;
-
-        line-height:
-
-            1.8;
-
     }
-
-
-
-    .welcome-action h2{
-
-        font-size:
-
-            clamp(2.2rem,9vw,3.2rem);
-
-    }
-
-
-
-    .cta-subtitle{
-
-        font-size:
-
-            .78rem;
-
-        letter-spacing:
-
-            .16em;
-
-    }
-
-
-
-    .cta-meta{
-
-        width:
-
-            100%;
-
-        max-width:
-
-            340px;
-
-        padding:
-
-            1rem;
-
-        border-radius:
-
-            24px;
-
-        font-size:
-
-            .88rem;
-
-    }
-
-
-
-    .primary-button{
-
-        width:
-
-            100%;
-
-        min-width:
-
-            0;
-
-        max-width:
-
-            360px;
-
-        min-height:
-
-            82px;
-
-        padding:
-
-            1.1rem 1.5rem;
-
-    }
-
-
-
-    .button-tamil{
-
-        font-size:
-
-            1rem;
-
-    }
-
-
-
-    .button-english{
-
-        font-size:
-
-            .76rem;
-
-    }
-
-
-
-    .trust-message{
-
-        width:
-
-            calc(100% - 16px);
-
-    }
-
-
-
-    .trust-message .tamil{
-
-        font-size:
-
-            .96rem;
-
-    }
-
-
-
-    .trust-message .english{
-
-        font-size:
-
-            .88rem;
-
-    }
-
-
-
-    .welcome-closing{
-
-        flex-direction:
-
-            column;
-
-        gap:
-
-            1.1rem;
-
-        margin-top:
-
-            3rem;
-
-    }
-
-
-
-    .welcome-closing span{
-
-        font-size:
-
-            .82rem;
-
-    }
-
-
-
-    .welcome-closing span::after{
-
-        display:
-
-            none;
-
-    }
-
-}
-
-
-
-
-
-/* ==========================================================================
-   ACCESSIBILITY
-========================================================================== */
-
-@media (prefers-reduced-motion:reduce){
-
-    *,
-
-    *::before,
-
-    *::after{
-
-        animation-duration:
-
-            .01ms !important;
-
-        animation-iteration-count:
-
-            1 !important;
-
-        transition-duration:
-
-            .01ms !important;
-
-        scroll-behavior:
-
-            auto !important;
-
-    }
-
-}
-
-
-
-
-
-.primary-button:focus-visible{
-
-    outline:
-
-        3px solid rgba(35,212,200,.55);
-
-    outline-offset:
-
-        5px;
-
-}
-
-
-
-
-
-.journey-card:focus-within{
-
-    border-color:
-
-        rgba(35,212,200,.25);
-
-}
-
-/* ==========================================================================
-   LARGE DESKTOP PREMIUM OPTIMIZATION
-========================================================================== */
-
-@media (min-width:1600px){
-
-    .hero-content{
-
-        width:
-
-            min(1400px,100%);
-
-    }
-
-
-
-    .hero-title{
-
-        font-size:
-
-            clamp(5rem,6.5vw,7.5rem);
-
-    }
-
-
-
-    .hero-description{
-
-        width:
-
-            min(1080px,100%);
-
-    }
-
-
-
-    .journey-cards{
-
-        width:
-
-            min(1520px,100% - 100px);
-
-    }
-
-
-
-    .journey-card{
-
-        min-height:
-
-            460px;
-
-    }
-
-
-
-    .reflection-card{
-
-        width:
-
-            min(1240px,100% - 100px);
-
-    }
-
-}
-
-
-
-
-
-/* ==========================================================================
-   EXTRA LARGE SCREEN BALANCE
-========================================================================== */
-
-@media (min-width:2000px){
-
-    .welcome-hero{
-
-        min-height:
-
-            1100px;
-
-    }
-
-
-
-    .hero-title{
-
-        font-size:
-
-            8rem;
-
-    }
-
-
-
-    .hero-title-english{
-
-        font-size:
-
-            3.8rem;
-
-    }
-
-
-
-    .hero-description .tamil{
-
-        font-size:
-
-            1.7rem;
-
-    }
-
-
-
-    .hero-description .english{
-
-        font-size:
-
-            1.4rem;
-
-    }
-
-}
-
-
-
-
-
-/* ==========================================================================
-   PRINT
-========================================================================== */
-
-@media print{
-
-    .welcome-page{
-
-        background:
-
-            #ffffff;
-
-        color:
-
-            #000000;
-
-    }
-
-
-
-    .hero-visual,
-
-    .welcome-page::before,
-
-    .welcome-page::after{
-
-        display:
-
-            none;
-
-    }
-
 
+    .reflection-card,
 
     .journey-card,
 
-    .reflection-card{
+    .privacy-card {
 
-        background:
-
-            #ffffff;
-
-        border:
-
-            1px solid #cccccc;
-
-        box-shadow:
-
-            none;
+        padding: 2rem;
 
     }
 
+    .btn-primary {
 
-
-    .primary-button{
-
-        background:
-
-            #ffffff;
-
-        border:
-
-            1px solid #000000;
-
-        color:
-
-            #000000;
-
-        box-shadow:
-
-            none;
+        width: 100%;
 
     }
 
@@ -3609,40 +498,13 @@
 
 
 
+@media (max-width:480px) {
 
+    .journey-highlights {
 
-/* ==========================================================================
-   FINAL POLISH
-========================================================================== */
+        flex-direction: column;
 
-::selection{
-
-    background:
-
-        rgba(35,212,200,.25);
-
-    color:
-
-        var(--ctm-ivory);
+    }
 
 }
 
-
-
-
-
-html{
-
-    scroll-behavior:
-
-        smooth;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   END OF FILE
-========================================================================== */
