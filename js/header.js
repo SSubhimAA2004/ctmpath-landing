@@ -3,91 +3,98 @@
    CTM PATH™ MILLIONAIRES™
 
    File      : header.js
-   Version   : 1.0
+   Version   : 2.0
 
-   Purpose:
+   Status    : PREMIUM HEADER CONTROLLER
 
-   ✓ Dynamic Header Journey Navigator
-   ✓ Detect Current Page
-   ✓ Update Journey Counter
+
+   Responsibilities:
+
+   ✓ Detect Current Journey Page
    ✓ Update Journey Title
+   ✓ Update Journey Counter
+   ✓ Synchronize Global Header
 
 
    Does NOT:
 
-   ✗ Load pages
-   ✗ Handle APIs
-   ✗ Manage assessments
+   ✗ Routing
+   ✗ Page Loading
+   ✗ API Calls
+   ✗ Assessment Logic
+   ✗ Backend Communication
 
 ========================================================================== */
 
 
 (function(){
 
+
 "use strict";
 
 
 
 /* ==========================================================================
-   JOURNEY CONFIGURATION
+   CONFIGURATION
 ========================================================================== */
 
 
 const HEADER_CONFIG = {
 
 
-    totalPages: 7,
+    totalPages:7,
+
 
 
     journeys:{
 
 
-        1:
-        {
-            number:"01",
+        1:{
+
             title:"BEGINNING YOUR JOURNEY™"
+
         },
 
 
-        2:
-        {
-            number:"02",
+        2:{
+
             title:"FINANCIAL CONFIDENCE™"
+
         },
 
 
-        3:
-        {
-            number:"03",
+        3:{
+
             title:"LIFE ALIGNMENT™"
+
         },
 
 
-        4:
-        {
-            number:"04",
+        4:{
+
             title:"PERSONAL DISCOVERY™"
+
         },
 
 
-        5:
-        {
-            number:"05",
+        5:{
+
             title:"PERSONAL ROADMAP™"
+
         },
 
 
-        6:
-        {
-            number:"06",
+        6:{
+
             title:"TRANSFORMATION™"
+
         },
 
 
-        7:
-        {
-            number:"07",
+        7:{
+
             title:"MILLIONAIRE LEGACY™"
+
         }
 
 
@@ -109,24 +116,42 @@ const HEADER_CONFIG = {
 function getCurrentPage(){
 
 
-    const filename =
+    const path =
 
-        window.location.pathname
-        .split("/")
-        .pop();
+        window.location.pathname;
 
 
 
     const match =
 
-        filename.match(/page(\d+)/);
+        path.match(
+
+            /page(\d+)/
+
+        );
 
 
 
     if(match){
 
 
-        return Number(match[1]);
+        const page =
+
+            Number(match[1]);
+
+
+
+        if(
+
+            page >=1 &&
+
+            page <= HEADER_CONFIG.totalPages
+
+        ){
+
+            return page;
+
+        }
 
 
     }
@@ -145,56 +170,32 @@ function getCurrentPage(){
 
 
 /* ==========================================================================
-   UPDATE HEADER
+   UPDATE HEADER UI
 ========================================================================== */
 
 
 function updateHeader(){
 
 
-    const page =
+
+    const currentPage =
 
         getCurrentPage();
 
 
 
+
     const journey =
 
-        HEADER_CONFIG.journeys[page];
+        HEADER_CONFIG.journeys[currentPage];
 
 
 
     if(!journey){
 
+
         return;
 
-    }
-
-
-
-
-    const counter =
-
-        document.getElementById(
-            "journey-counter"
-        );
-
-
-
-
-    if(counter){
-
-
-        counter.textContent =
-
-            journey.number
-            +
-            " / "
-            +
-            String(
-                HEADER_CONFIG.totalPages
-            ).padStart(2,"0");
-
 
     }
 
@@ -203,19 +204,22 @@ function updateHeader(){
 
 
 
-    const title =
+    const titleElement =
 
         document.getElementById(
+
             "journey-title"
+
         );
 
 
 
 
-    if(title){
+
+    if(titleElement){
 
 
-        title.textContent =
+        titleElement.textContent =
 
             journey.title;
 
@@ -226,13 +230,62 @@ function updateHeader(){
 
 
 
+
+
+
+    const counterElement =
+
+        document.getElementById(
+
+            "journey-counter"
+
+        );
+
+
+
+
+
+    if(counterElement){
+
+
+        counterElement.textContent =
+
+
+            String(currentPage)
+
+            .padStart(2,"0")
+
+            +
+
+            " / "
+
+            +
+
+            String(
+
+                HEADER_CONFIG.totalPages
+
+            )
+
+            .padStart(2,"0");
+
+
+
+    }
+
+
+
+
+
+
+
     console.log(
 
         "CTM PATH™ Header Updated:",
 
-        journey.number,
+        journey.title,
 
-        journey.title
+        currentPage
 
     );
 
@@ -245,22 +298,60 @@ function updateHeader(){
 
 
 
+
 /* ==========================================================================
-   INITIALIZE
+   AUTO INITIALIZATION
+
+   Works with dynamically injected components
+
 ========================================================================== */
 
 
-document.addEventListener(
-
-"DOMContentLoaded",
-
-function(){
+function initializeHeader(){
 
 
     updateHeader();
 
 
-});
+}
+
+
+
+
+
+if(
+
+    document.readyState === "loading"
+
+){
+
+
+
+    document.addEventListener(
+
+        "DOMContentLoaded",
+
+        initializeHeader
+
+    );
+
+
+
+}
+
+else{
+
+
+    initializeHeader();
+
+
+}
+
+
+
+
+
+
 
 
 /* ==========================================================================
@@ -271,13 +362,21 @@ function(){
 window.CTM_HEADER = {
 
 
-    update:updateHeader,
+    update:
+
+        updateHeader,
 
 
-    currentPage:getCurrentPage
+    currentPage:
+
+        getCurrentPage
+
 
 
 };
+
+
+
 
 
 
