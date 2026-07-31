@@ -1,219 +1,409 @@
 
-/* ==========================================================
-   CTM PATH™ Guided Journey™
-   Foundation v1.0
-   File : api.js
-   ========================================================== */
+/* ============================================================
+   CTM PATH™ MILLIONAIRES™
+   Guided Journey™
 
-'use strict';
+   API SERVICE LAYER
 
-window.CTM = window.CTM || {};
+   File:
+   js/api.js
 
-class API {
 
-    #initialized = false;
+   Responsibility:
 
-    #baseUrl = '';
+   Frontend
+        ↓
+   Google Apps Script WebApp
 
-    #defaultTimeout = 30000;
 
-    init() {
+   NO:
+   - Calculations
+   - Diagnosis logic
+   - Roadmap logic
+   - Report generation
 
-        if (this.#initialized) {
-            return;
-        }
 
-        this.#baseUrl = CTM.Config.API.BASE_URL;
+============================================================ */
 
-        if (CTM.Config.API.TIMEOUT) {
-            this.#defaultTimeout = CTM.Config.API.TIMEOUT;
-        }
 
-        this.#initialized = true;
 
-        CTM.Logger.info('API initialized.');
+const CTM_API = (function(){
 
-    }
 
-    /* ======================================================
-       GET
-       ====================================================== */
+"use strict";
 
-    async get(action, params = {}) {
 
-        return this.request({
 
-            method: 'GET',
+/* ============================================================
+   CONFIGURATION
+============================================================ */
 
-            action,
 
-            params
+const CONFIG = {
 
-        });
 
-    }
+    endpoint:
 
-    /* ======================================================
-       POST
-       ====================================================== */
+    "YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL",
 
-    async post(action, payload = {}) {
 
-        return this.request({
 
-            method: 'POST',
+    version:
 
-            action,
+    "v1"
 
-            payload
 
-        });
+};
 
-    }
 
-    /* ======================================================
-       REQUEST
-       ====================================================== */
 
-    async request({
 
-        method = 'GET',
 
-        action = '',
 
-        params = {},
 
-        payload = {}
 
-    }) {
+/* ============================================================
+   GENERIC REQUEST
+============================================================ */
 
-        const controller = new AbortController();
 
-        const timeout = setTimeout(
+async function request(action,payload){
 
-            () => controller.abort(),
 
-            this.#defaultTimeout
+
+    try {
+
+
+
+        const response =
+
+        await fetch(
+
+            CONFIG.endpoint,
+
+            {
+
+
+                method:"POST",
+
+
+                headers:{
+
+
+                    "Content-Type":
+
+                    "application/json"
+
+
+                },
+
+
+                body:
+
+                JSON.stringify({
+
+
+                    action:action,
+
+
+                    version:
+
+                    CONFIG.version,
+
+
+                    payload:payload
+
+
+                })
+
+
+            }
 
         );
 
-        try {
 
-            let url = this.#baseUrl;
 
-            const options = {
 
-                method,
+        return await response.json();
 
-                signal: controller.signal,
 
-                headers: {
-
-                    'Content-Type': 'application/json'
-
-                }
-
-            };
-
-            if (method === 'GET') {
-
-                const query = new URLSearchParams({
-
-                    action,
-
-                    ...params
-
-                });
-
-                url += '?' + query.toString();
-
-            }
-            else {
-
-                options.body = JSON.stringify({
-
-                    action,
-
-                    ...payload
-
-                });
-
-            }
-
-            const response = await fetch(
-
-                url,
-
-                options
-
-            );
-
-            clearTimeout(timeout);
-
-            if (!response.ok) {
-
-                throw new Error(
-
-                    `HTTP ${response.status}`
-
-                );
-
-            }
-
-            const data = await response.json();
-
-            return {
-
-                success: true,
-
-                data,
-
-                error: null
-
-            };
-
-        }
-        catch (error) {
-
-            clearTimeout(timeout);
-
-            CTM.Logger.error(
-
-                'API request failed.',
-
-                error
-
-            );
-
-            return {
-
-                success: false,
-
-                data: null,
-
-                error: error.message
-
-            };
-
-        }
 
     }
 
-    /* ======================================================
-       Destroy
-       ====================================================== */
 
-    destroy() {
 
-        this.#initialized = false;
+    catch(error){
+
+
+
+        console.error(
+
+            "CTM API Error:",
+
+            error
+
+        );
+
+
+
+        return {
+
+
+            success:false,
+
+
+            message:
+
+            "Connection failed"
+
+
+        };
+
+
 
     }
+
+
 
 }
 
-CTM.API = Object.freeze(
 
-    new API()
 
-);
+
+
+
+
+
+
+/* ============================================================
+   PAGE 02
+   FINANCIAL DISCOVERY
+============================================================ */
+
+
+async function saveDiscovery(data){
+
+
+
+    return request(
+
+        "saveDiscovery",
+
+        data
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   PAGE 03
+   LIFE ASSESSMENT
+============================================================ */
+
+
+async function saveAssessment(data){
+
+
+
+    return request(
+
+        "saveAssessment",
+
+        data
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   PAGE 04
+   LIFE ALIGNMENT
+============================================================ */
+
+
+async function getAlignment(data){
+
+
+
+    return request(
+
+        "getAlignment",
+
+        data
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   PAGE 05
+   PERSONAL DIAGNOSIS
+============================================================ */
+
+
+async function generateDiagnosis(data){
+
+
+
+    return request(
+
+        "generateDiagnosis",
+
+        data
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   PAGE 06
+   TRANSFORMATION ROADMAP
+============================================================ */
+
+
+async function generateRoadmap(data){
+
+
+
+    return request(
+
+        "generateRoadmap",
+
+        data
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   PAGE 07
+   REPORT
+============================================================ */
+
+
+async function generateReport(data){
+
+
+
+    return request(
+
+        "generateReport",
+
+        data
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   PAGE 07
+   DISCOVERY SESSION
+============================================================ */
+
+
+async function bookDiscovery(data){
+
+
+
+    return request(
+
+        "bookDiscovery",
+
+        data
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   PUBLIC API
+============================================================ */
+
+
+return {
+
+
+    saveDiscovery,
+
+    saveAssessment,
+
+    getAlignment,
+
+    generateDiagnosis,
+
+    generateRoadmap,
+
+    generateReport,
+
+    bookDiscovery
+
+
+};
+
+
+
+})();
 
