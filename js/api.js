@@ -13,14 +13,19 @@
 
    Frontend
         ↓
+   API Layer
+        ↓
    Google Apps Script WebApp
 
 
-   NO:
-   - Calculations
-   - Diagnosis logic
-   - Roadmap logic
-   - Report generation
+   Rules:
+
+   ✅ No calculations
+   ✅ No diagnosis logic
+   ✅ No roadmap logic
+   ✅ No report generation logic
+
+   Backend owns intelligence.
 
 
 ============================================================ */
@@ -44,7 +49,7 @@ const CONFIG = {
 
     endpoint:
 
-    "YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL",
+    "https://script.google.com/macros/s/AKfycbxrgqadtKd3_Bzri2DbCwjp3CWouD3wU_cIqRFgtV-1EHXseRLDSraEQfQP-_F6ZUrFIw/exec",
 
 
 
@@ -62,12 +67,13 @@ const CONFIG = {
 
 
 
+
 /* ============================================================
-   GENERIC REQUEST
+   GENERIC REQUEST HANDLER
 ============================================================ */
 
 
-async function request(action,payload){
+async function request(action, payload){
 
 
 
@@ -75,19 +81,22 @@ async function request(action,payload){
 
 
 
-        const response =
-
-        await fetch(
+        const response = await fetch(
 
             CONFIG.endpoint,
 
             {
 
 
-                method:"POST",
+                method:
+
+                "POST",
 
 
-                headers:{
+
+                headers:
+
+                {
 
 
                     "Content-Type":
@@ -98,33 +107,55 @@ async function request(action,payload){
                 },
 
 
+
                 body:
 
-                JSON.stringify({
+                JSON.stringify(
+
+                    {
 
 
-                    action:action,
+                        action:
 
 
-                    version:
-
-                    CONFIG.version,
+                        action,
 
 
-                    payload:payload
+
+                        version:
 
 
-                })
+                        CONFIG.version,
+
+
+
+                        payload:
+
+
+                        payload
+
+
+                    }
+
+                )
 
 
             }
+
 
         );
 
 
 
 
-        return await response.json();
+        const result =
+
+        await response.json();
+
+
+
+
+        return result;
 
 
 
@@ -138,11 +169,12 @@ async function request(action,payload){
 
         console.error(
 
-            "CTM API Error:",
+            "CTM API Request Failed:",
 
             error
 
         );
+
 
 
 
@@ -152,13 +184,15 @@ async function request(action,payload){
             success:false,
 
 
+            error:error.message,
+
+
             message:
 
-            "Connection failed"
+            "Unable to connect with CTM PATH™ server"
 
 
         };
-
 
 
     }
@@ -179,6 +213,7 @@ async function request(action,payload){
    PAGE 02
    FINANCIAL DISCOVERY
 ============================================================ */
+
 
 
 async function saveDiscovery(data){
@@ -206,8 +241,9 @@ async function saveDiscovery(data){
 
 /* ============================================================
    PAGE 03
-   LIFE ASSESSMENT
+   KALA CHAKRA™ LIFE ASSESSMENT
 ============================================================ */
+
 
 
 async function saveAssessment(data){
@@ -235,8 +271,9 @@ async function saveAssessment(data){
 
 /* ============================================================
    PAGE 04
-   LIFE ALIGNMENT
+   LIFE ALIGNMENT RESULT
 ============================================================ */
+
 
 
 async function getAlignment(data){
@@ -264,8 +301,9 @@ async function getAlignment(data){
 
 /* ============================================================
    PAGE 05
-   PERSONAL DIAGNOSIS
+   PERSONAL LIFE DIAGNOSIS™
 ============================================================ */
+
 
 
 async function generateDiagnosis(data){
@@ -293,8 +331,9 @@ async function generateDiagnosis(data){
 
 /* ============================================================
    PAGE 06
-   TRANSFORMATION ROADMAP
+   PERSONAL TRANSFORMATION PRESCRIPTION™
 ============================================================ */
+
 
 
 async function generateRoadmap(data){
@@ -322,8 +361,9 @@ async function generateRoadmap(data){
 
 /* ============================================================
    PAGE 07
-   REPORT
+   REPORT GENERATION
 ============================================================ */
+
 
 
 async function generateReport(data){
@@ -351,8 +391,9 @@ async function generateReport(data){
 
 /* ============================================================
    PAGE 07
-   DISCOVERY SESSION
+   DISCOVERY SESSION BOOKING
 ============================================================ */
+
 
 
 async function bookDiscovery(data){
@@ -379,6 +420,35 @@ async function bookDiscovery(data){
 
 
 /* ============================================================
+   HEALTH CHECK
+   Used during deployment testing
+============================================================ */
+
+
+async function healthCheck(){
+
+
+
+    return request(
+
+        "healthCheck",
+
+        {}
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ============================================================
    PUBLIC API
 ============================================================ */
 
@@ -388,17 +458,26 @@ return {
 
     saveDiscovery,
 
+
     saveAssessment,
+
 
     getAlignment,
 
+
     generateDiagnosis,
+
 
     generateRoadmap,
 
+
     generateReport,
 
-    bookDiscovery
+
+    bookDiscovery,
+
+
+    healthCheck
 
 
 };
