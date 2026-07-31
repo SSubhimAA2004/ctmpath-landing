@@ -1,104 +1,64 @@
 
-/* ==========================================================================
+/* ============================================================
    CTM PATH™ MILLIONAIRES™
+   Guided Journey™
 
-   PAGE 01 JAVASCRIPT CONTROLLER
+   PAGE 01 JAVASCRIPT
 
-   FROM SURVIVAL TO LIVING™
-
-   Version: 10.0
-
-
-   Responsibilities:
-
-   ✓ Page Initialization
-   ✓ Journey Button Behaviour
-   ✓ Smooth UX Enhancements
-   ✓ Future Tracking Hooks
+   File:
+   js/page01.js
 
 
-   Does NOT:
+   Responsibility:
 
-   ✗ Business Logic
-   ✗ Assessment Calculation
-   ✗ Global Routing
-   ✗ API Processing
+   • Page interaction only
+   • CTA navigation only
+   • No business logic
 
-========================================================================== */
+============================================================ */
 
 
 
-(function(){
-
-
-
-"use strict";
+'use strict';
 
 
 
 
 
-/* ==========================================================================
-   PAGE MODULE
-========================================================================== */
-
-
-const CTM_PAGE01 = {
+/* ============================================================
+   PAGE INITIALIZATION
+============================================================ */
 
 
 
+function initPage01(){
 
 
-    init(){
 
+    const beginButton =
 
-        console.log(
+        document.getElementById(
 
-            "CTM PATH™ MILLIONAIRES™ Page01 Loaded"
+            "beginJourneyBtn"
 
         );
 
 
 
-        this.bindJourneyButton();
 
 
-
-        this.enableSmoothExperience();
-
+    if(!beginButton){
 
 
-    },
+        console.warn(
 
-
-
-
-
-
-
-
-/* ==========================================================================
-   JOURNEY BUTTON
-========================================================================== */
-
-
-bindJourneyButton(){
-
-
-
-    const button =
-
-        document.querySelector(
-
-            ".journey-button"
+            "PAGE01 CTA button not found."
 
         );
 
-
-
-    if(!button){
 
         return;
+
 
     }
 
@@ -106,86 +66,13 @@ bindJourneyButton(){
 
 
 
-    button.addEventListener(
+
+
+    beginButton.addEventListener(
 
         "click",
 
-        function(event){
-
-
-
-            /*
-
-            Future:
-
-            - capture visitor intent
-            - save journey start time
-            - analytics event
-
-            */
-
-
-
-            console.log(
-
-                "Journey Started"
-
-            );
-
-
-
-        }
-
-
-    );
-
-
-
-},
-
-
-
-
-
-
-
-/* ==========================================================================
-   PREMIUM SCROLL EXPERIENCE
-========================================================================== */
-
-
-enableSmoothExperience(){
-
-
-
-    document.documentElement.style.scrollBehavior =
-
-        "smooth";
-
-
-
-},
-
-
-
-
-
-
-
-/* ==========================================================================
-   FUTURE PERSONALISATION HOOK
-========================================================================== */
-
-
-setVisitorContext(data){
-
-
-
-    sessionStorage.setItem(
-
-        "CTM_PAGE01_CONTEXT",
-
-        JSON.stringify(data)
+        handleBeginJourney
 
     );
 
@@ -197,7 +84,40 @@ setVisitorContext(data){
 
 
 
-};
+
+
+
+
+/* ============================================================
+   CTA ACTION
+============================================================ */
+
+
+
+function handleBeginJourney(){
+
+
+
+    /*
+        Optional analytics hook
+
+        Example:
+
+        CTMAnalytics.track(
+            "PAGE01_BEGIN_JOURNEY"
+        );
+
+    */
+
+
+
+
+
+    navigateToNextPage();
+
+
+
+}
 
 
 
@@ -205,40 +125,98 @@ setVisitorContext(data){
 
 
 
-/* ==========================================================================
-   EXPOSE PAGE MODULE
-========================================================================== */
 
 
-window.CTM_PAGE01 = CTM_PAGE01;
-
-
+/* ============================================================
+   PAGE NAVIGATION
+============================================================ */
 
 
 
+function navigateToNextPage(){
 
 
-/* ==========================================================================
-   AUTO INITIALIZE
-========================================================================== */
+
+    /*
+        Uses existing application navigation.
+
+        Does NOT load pages directly.
+
+        app.js remains responsible
+        for routing.
+
+    */
+
+
+
+
+
+    if(
+
+        typeof window.goToPage === "function"
+
+    ){
+
+
+
+        window.goToPage(
+
+            2
+
+        );
+
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+
+    /*
+        Fallback
+
+        Used only if global router
+        is unavailable.
+
+    */
+
+
+
+
+
+    window.location.href =
+
+        "page02.html";
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   AUTO INITIALIZATION
+============================================================ */
+
 
 
 document.addEventListener(
 
     "DOMContentLoaded",
 
-    function(){
-
-
-        CTM_PAGE01.init();
-
-
-    }
+    initPage01
 
 );
 
-
-
-
-
-})();
