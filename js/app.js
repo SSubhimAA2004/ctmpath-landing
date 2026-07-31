@@ -3,23 +3,25 @@
    CTM PATH™ MILLIONAIRES™
 
    File      : app.js
-   Version   : 2.0
+   Version   : 3.0
 
-   Status    : WORKING MVP ORCHESTRATOR
+   Status    : PREMIUM PAGE MODULE ORCHESTRATOR
 
    Responsibilities:
 
    ✓ Bootstrap Application
-   ✓ Load Global Components
-   ✓ Detect Current Page
-   ✓ Start Page Module
+   ✓ Load Global Header/Footer
+   ✓ Detect Current Journey Page
+   ✓ Load Page HTML
+   ✓ Load Page CSS
+   ✓ Load Page JavaScript
+   ✓ Initialize Page Module
 
    Does NOT:
 
    ✗ Business Logic
    ✗ API Calls
    ✗ Database
-   ✗ Complex Routing
    ✗ State Management
 
    ========================================================================== */
@@ -27,13 +29,12 @@
 
 (function(){
 
-
 "use strict";
 
 
 
 /* ==========================================================================
-   APPLICATION CONFIGURATION
+   CONFIGURATION
 ========================================================================== */
 
 
@@ -42,19 +43,36 @@ const APP_CONFIG = {
 
     defaultPage:
 
-        "pages/page01.html",
+        1,
 
 
+    totalPages:
 
-    defaultScript:
+        7,
 
-        "js/page01.js"
 
+    folders:{
+
+
+        pages:
+
+            "pages/",
+
+
+        css:
+
+            "css/",
+
+
+        js:
+
+            "js/"
+
+
+    }
 
 
 };
-
-
 
 
 
@@ -68,10 +86,9 @@ const APP_CONFIG = {
 async function startApplication(){
 
 
-
     console.log(
 
-        "CTM PATH™ MILLIONAIRES™ starting..."
+        "CTM PATH™ MILLIONAIRES™ Starting..."
 
     );
 
@@ -81,20 +98,33 @@ async function startApplication(){
 
 
 
-    await loadCurrentPage();
+    const pageNumber =
+
+        detectPage();
 
 
 
-    initializePage();
+    await loadPage(pageNumber);
+
+
+
+    await loadPageStyle(pageNumber);
+
+
+
+    await loadPageScript(pageNumber);
+
+
+
+    initializePage(pageNumber);
 
 
 
     console.log(
 
-        "CTM PATH™ MILLIONAIRES™ ready."
+        "CTM PATH™ MILLIONAIRES™ Ready."
 
     );
-
 
 
 }
@@ -106,34 +136,60 @@ async function startApplication(){
 
 
 /* ==========================================================================
-   LOAD GLOBAL COMPONENTS
+   DETECT PAGE
 ========================================================================== */
 
 
-async function loadGlobalComponents(){
+function detectPage(){
+
+
+    const hash =
+
+        window.location.hash;
 
 
 
-    if(
-
-        window.CTM_COMPONENTS &&
-
-        typeof window.CTM_COMPONENTS.load ===
-
-        "function"
-
-    ){
+    if(hash){
 
 
+        const number =
 
-        await window.CTM_COMPONENTS.load();
+            hash.replace(
 
+                "#page",
+
+                ""
+
+            );
+
+
+
+        const page =
+
+            Number(number);
+
+
+
+        if(
+
+            page >=1 &&
+
+            page <= APP_CONFIG.totalPages
+
+        ){
+
+            return page;
+
+        }
 
 
     }
 
 
 
+    return APP_CONFIG.defaultPage;
+
+
 }
 
 
@@ -142,12 +198,45 @@ async function loadGlobalComponents(){
 
 
 
+
 /* ==========================================================================
-   LOAD CURRENT PAGE
+   GLOBAL COMPONENTS
 ========================================================================== */
 
 
-async function loadCurrentPage(){
+async function loadGlobalComponents(){
+
+
+    if(
+
+        window.CTM_COMPONENTS &&
+
+        typeof window.CTM_COMPONENTS.load === "function"
+
+    ){
+
+
+        await window.CTM_COMPONENTS.load();
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   LOAD PAGE HTML
+========================================================================== */
+
+
+async function loadPage(pageNumber){
 
 
 
@@ -163,17 +252,20 @@ async function loadCurrentPage(){
 
     if(!app){
 
-        return;
+        throw new Error(
+
+            "Application container missing"
+
+        );
 
     }
 
 
 
 
+    const file =
 
-    const page =
-
-        APP_CONFIG.defaultPage;
+        `${APP_CONFIG.folders.pages}page${String(pageNumber).padStart(2,"0")}.html`;
 
 
 
@@ -181,7 +273,7 @@ async function loadCurrentPage(){
 
     const response =
 
-        await fetch(page);
+        await fetch(file);
 
 
 
@@ -190,13 +282,11 @@ async function loadCurrentPage(){
     if(!response.ok){
 
 
-
         throw new Error(
 
-            "Page loading failed"
+            "Unable to load "+file
 
         );
-
 
 
     }
@@ -204,34 +294,100 @@ async function loadCurrentPage(){
 
 
 
-
-    const html =
+    app.innerHTML =
 
         await response.text();
 
 
 
 
+}
 
-    app.innerHTML = html;
+
+
+
+
+
+
+
+/* ==========================================================================
+   LOAD PAGE CSS
+========================================================================== */
+
+
+function loadPageStyle(pageNumber){
+
+
+
+    const cssFile =
+
+        `${APP_CONFIG.folders.css}page${String(pageNumber).padStart(2,"0")}.css`;
+
+
+
+
+    if(
+
+        document.querySelector(
+
+            `link[href="${cssFile}"]`
+
+        )
+
+    ){
+
+        return;
+
+    }
+
+
+
+
+    const link =
+
+        document.createElement(
+
+            "link"
+
+        );
+
+
+
+    link.rel =
+
+        "stylesheet";
+
+
+
+    link.href =
+
+        cssFile;
+
+
+
+    document.head.appendChild(
+
+        link
+
+    );
 
 
 
 }
 
 
- /* ==========================================================================
-   LOAD PAGE SCRIPT
+
+
+
+
+
+
+/* ==========================================================================
+   LOAD PAGE JAVASCRIPT
 ========================================================================== */
 
 
-async function loadPageScript(){
-
-
-
-    const scriptPath =
-
-        APP_CONFIG.defaultScript;
+function loadPageScript(pageNumber){
 
 
 
@@ -241,24 +397,31 @@ async function loadPageScript(){
 
 
 
+            const jsFile =
+
+                `${APP_CONFIG.folders.js}page${String(pageNumber).padStart(2,"0")}.js`;
+
+
+
+
+
             const existing =
 
                 document.querySelector(
 
-                    `script[src="${scriptPath}"]`
+                    `script[src="${jsFile}"]`
 
                 );
 
 
 
-            if(existing){
 
+
+            if(existing){
 
                 resolve();
 
-
                 return;
-
 
             }
 
@@ -278,7 +441,9 @@ async function loadPageScript(){
 
 
 
-            script.src = scriptPath;
+            script.src =
+
+                jsFile;
 
 
 
@@ -287,42 +452,30 @@ async function loadPageScript(){
 
 
 
+            script.onload =
 
-            script.onload = function(){
-
-
-
-                resolve();
-
-
-
-            };
+                resolve;
 
 
 
 
+            script.onerror =
 
-            script.onerror = function(){
-
-
-
-                reject(
-
-                    new Error(
-
-                        "Page script failed: "
-
-                        +
-
-                        scriptPath
-
-                    )
-
-                );
+                function(){
 
 
+                    reject(
 
-            };
+                        new Error(
+
+                            "Page JS failed: "+jsFile
+
+                        )
+
+                    );
+
+
+                };
 
 
 
@@ -341,8 +494,9 @@ async function loadPageScript(){
     );
 
 
-
 }
+
+
 
 
 
@@ -355,24 +509,27 @@ async function loadPageScript(){
 ========================================================================== */
 
 
-function initializePage(){
+function initializePage(pageNumber){
+
+
+
+    const moduleName =
+
+        `CTM_PAGE${String(pageNumber).padStart(2,"0")}`;
+
 
 
 
     if(
 
-        window.CTM_PAGE01 &&
+        window[moduleName] &&
 
-        typeof window.CTM_PAGE01.init ===
-
-        "function"
+        typeof window[moduleName].init === "function"
 
     ){
 
 
-
-        window.CTM_PAGE01.init();
-
+        window[moduleName].init();
 
 
     }
@@ -387,8 +544,10 @@ function initializePage(){
 
 
 
+
+
 /* ==========================================================================
-   APPLICATION ERROR HANDLING
+   ERROR HANDLING
 ========================================================================== */
 
 
@@ -398,7 +557,7 @@ function handleApplicationError(error){
 
     console.error(
 
-        "CTM PATH™ Application Error:",
+        "CTM PATH™ Error:",
 
         error
 
@@ -419,32 +578,24 @@ function handleApplicationError(error){
     if(app){
 
 
-
         app.innerHTML = `
 
-            <section class="error-screen">
+        <section class="error-screen">
 
-                <h1>
+        <h1>
+        Something went wrong.
+        </h1>
 
-                    Something went wrong.
+        <p>
+        Please refresh and try again.
+        </p>
 
-                </h1>
-
-
-                <p>
-
-                    Please refresh and try again.
-
-                </p>
-
-
-            </section>
+        </section>
 
         `;
 
 
     }
-
 
 
 }
@@ -455,38 +606,23 @@ function handleApplicationError(error){
 
 
 
+
 /* ==========================================================================
-   START APPLICATION
+   BOOT
 ========================================================================== */
 
 
 document.addEventListener(
 
-
     "DOMContentLoaded",
-
 
     async function(){
 
 
-
-        try {
-
+        try{
 
 
             await startApplication();
-
-
-
-            await loadPageScript();
-
-
-
-            console.log(
-
-                "Page module loaded."
-
-            );
 
 
 
@@ -496,13 +632,7 @@ document.addEventListener(
         catch(error){
 
 
-
-            handleApplicationError(
-
-                error
-
-            );
-
+            handleApplicationError(error);
 
 
         }
@@ -520,8 +650,9 @@ document.addEventListener(
 
 
 
+
 /* ==========================================================================
-   PUBLIC MVP API
+   PUBLIC API
 ========================================================================== */
 
 
@@ -535,7 +666,7 @@ window.CTM_APP = {
 
     loadPage:
 
-        loadCurrentPage
+        loadPage
 
 
 };
