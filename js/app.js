@@ -4,64 +4,67 @@
  * CTM PATH™ Guided Journey™
  * Application Module
  * --------------------------------------------------------------
- * Version : 5.0 (Framework Freeze)
+ * Version : 1.0 (Working MVP Orchestrator)
  * Pattern : Singleton
  * Author  : CTM PATH™ Engineering
  *
  * Responsibilities
  * --------------------------------------------------------------
  * ✓ Bootstrap Application
- * ✓ Initialize Framework Modules
- * ✓ Initialize Shared Components
+ * ✓ Load Shared Components
  * ✓ Start Guided Journey
+ * ✓ Manage Page Navigation
  * ✓ Bind Global Events
- * ✓ Graceful Shutdown
- * ✓ Fatal Error Handling
+ * ✓ Handle Startup Errors
  *
  * Never
  * --------------------------------------------------------------
  * ✗ Business Logic
- * ✗ Routing Logic
- * ✗ UI Logic
- * ✗ Validation
- * ✗ API Calls
- * ✗ State Mutation
- *
- * Startup Sequence
- * --------------------------------------------------------------
- *
- * DOMContentLoaded
- *      ↓
- * App.init()
- *      ↓
- * initializeFramework()
- *      ↓
- * ComponentLoader.loadShared()
- *      ↓
- * bindGlobalEvents()
- *      ↓
- * startJourney()
+ * ✗ Assessment Calculation
+ * ✗ Diagnosis Logic
+ * ✗ API Processing
+ * ✗ Data Rules
  *
  * ==============================================================
  */
 
+
 window.CTM = window.CTM || {};
 
+
+/* ==============================================================
+   APPLICATION CLASS
+============================================================== */
+
+
 class App {
+
 
     /* ==========================================================
        PRIVATE STATE
     ========================================================== */
 
+
     #initialized = false;
+
 
     #starting = false;
 
+
+    #currentPage = 1;
+
+
+    #totalPages = 7;
+
+
+
     /* ==========================================================
-       INITIALIZE
+       INITIALIZE APPLICATION
     ========================================================== */
 
+
     async init() {
+
 
         if (this.#initialized) {
 
@@ -69,541 +72,621 @@ class App {
 
         }
 
+
         if (this.#starting) {
 
             return;
 
         }
 
+
         this.#starting = true;
+
 
         try {
 
-            CTM.Logger.info(
 
-                'Starting CTM PATH™...'
+            console.log(
+
+                "CTM PATH™ Starting..."
 
             );
 
-            await this.#initializeFramework();
 
-            await this.#initializeSharedComponents();
 
-            await this.#bindGlobalEvents();
+            await this.#loadComponents();
+
+
+
+            await this.#bindEvents();
+
+
 
             await this.#startJourney();
 
+
+
             this.#initialized = true;
 
-            CTM.Logger.info(
 
-                'Application started.'
+
+            console.log(
+
+                "CTM PATH™ Ready."
 
             );
 
-        }
-        catch (error) {
 
-            await this.#handleFatalError(
+        }
+
+        catch(error) {
+
+
+            this.#handleError(
 
                 error
 
             );
 
+
         }
+
+
         finally {
+
 
             this.#starting = false;
 
+
         }
+
 
     }
 
+
+
+
     /* ==========================================================
-       PUBLIC API
+       PUBLIC STATUS
     ========================================================== */
+
 
     isInitialized() {
 
+
         return this.#initialized;
+
 
     }
 
+
+
+
+    getCurrentPage() {
+
+
+        return this.#currentPage;
+
+
+    }
+
+
+
+
+    getTotalPages() {
+
+
+        return this.#totalPages;
+
+
+    }
+
+
+
     /* ==========================================================
-       PRIVATE METHODS
+       NEXT BATCH
 
        Batch 1B
 
-       -----------------------------------------
+       --------------------------------------
 
-       #initializeFramework()
+       #loadComponents()
 
-       #initializeSharedComponents()
+       #loadHeader()
 
-       #bindGlobalEvents()
+       #loadFooter()
+
+       #bindEvents()
 
        #startJourney()
 
+       loadPage()
+
     ========================================================== */
+
 
 }
 
-CTM.App = Object.freeze(
+/* ==============================================================
+   LOAD SHARED COMPONENTS
 
-    new App()
+   Header
+   Footer
 
-);
+============================================================== */
 
-    /* ==========================================================
-       INITIALIZE FRAMEWORK
 
-       Initialization Order
+async #loadComponents() {
 
-       Config
-           ↓
-       Events
-           ↓
-       Storage
-           ↓
-       State
-           ↓
-       DOM
-           ↓
-       ComponentLoader
-           ↓
-       UI
-           ↓
-       Router
-           ↓
-       Navigation
 
-    ========================================================== */
+    await this.#loadHeader();
 
-    async #initializeFramework() {
 
-        await CTM.Events.init();
+    await this.#loadFooter();
 
-        await CTM.Storage.init();
 
-        await CTM.State.init();
+    console.log(
 
-        await CTM.DOM.init();
+        "CTM PATH™ Components Loaded."
 
-        await CTM.ComponentLoader.init();
+    );
 
-        await CTM.UI.init();
 
-        await CTM.Router.init();
+}
 
-        await CTM.Navigation.init();
 
-        CTM.Logger.info(
 
-            'Framework initialized.'
+/* ==============================================================
+   LOAD HEADER
 
-        );
+============================================================== */
 
-    }
 
-    /* ==========================================================
-       INITIALIZE SHARED COMPONENTS
+async #loadHeader() {
 
-       Header
-       Footer
-       Shared Layout
 
-    ========================================================== */
+    const container = document.querySelector(
 
-    async #initializeSharedComponents() {
+        "#header"
 
-        await CTM.ComponentLoader.loadShared();
+    );
 
-        CTM.Logger.info(
 
-            'Shared components initialized.'
+    if (!container) {
+
+
+        console.warn(
+
+            "Header container not found."
 
         );
 
+
+        return;
+
+
     }
 
-    /* ==========================================================
-       BIND GLOBAL EVENTS
 
-       Browser lifecycle events only.
 
-    ========================================================== */
+    try {
 
-    async #bindGlobalEvents() {
 
-        window.addEventListener(
+        const response = await fetch(
 
-            'beforeunload',
-
-            this.#onBeforeUnload.bind(this)
+            "components/header.html"
 
         );
 
-        window.addEventListener(
 
-            'resize',
+        container.innerHTML = await response.text();
 
-            this.#onResize.bind(this)
 
-        );
-
-        document.addEventListener(
-
-            'visibilitychange',
-
-            this.#onVisibilityChange.bind(this)
-
-        );
-
-        CTM.Logger.info(
-
-            'Global events registered.'
-
-        );
 
     }
 
-    /* ==========================================================
-       START JOURNEY
+    catch(error) {
 
-    ========================================================== */
 
-    async #startJourney() {
+        console.error(
 
-        await CTM.Navigation.first();
-
-    }
-
-    /* ==========================================================
-       GLOBAL EVENT HANDLERS
-
-    ========================================================== */
-
-    #onBeforeUnload(event) {
-
-        CTM.Logger.info(
-
-            'Application closing.'
-
-        );
-
-    }
-
-    #onResize(event) {
-
-        if (
-
-            typeof CTM.UI.onResize ===
-            'function'
-
-        ) {
-
-            CTM.UI.onResize();
-
-        }
-
-    }
-
-    #onVisibilityChange(event) {
-
-        if (
-
-            typeof CTM.UI.onVisibilityChange ===
-            'function'
-
-        ) {
-
-            CTM.UI.onVisibilityChange();
-
-        }
-
-    }
-
-    /* ==========================================================
-       Remaining Methods
-
-       Batch 1C
-
-       -----------------------------------------
-
-       #handleFatalError()
-
-       destroy()
-
-       restart()
-
-       dispose()
-
-       Singleton Export
-
-       DOMContentLoaded
-
-       Framework Freeze
-
-    ========================================================== */
-
-    /* ==========================================================
-       HANDLE FATAL ERROR
-
-       Called when application startup fails.
-
-    ========================================================== */
-
-    async #handleFatalError(error) {
-
-        CTM.Logger.error(
-
-            'Application startup failed.',
+            "Header loading failed.",
 
             error
 
         );
 
-        this.#initialized = false;
 
-        this.#starting = false;
+    }
 
-        CTM.Events.emit(
 
-            CTM.Config.EVENTS.APPLICATION_ERROR,
+}
+
+
+
+
+/* ==============================================================
+   LOAD FOOTER
+
+============================================================== */
+
+
+async #loadFooter() {
+
+
+    const container = document.querySelector(
+
+        "#footer"
+
+    );
+
+
+    if (!container) {
+
+
+        console.warn(
+
+            "Footer container not found."
+
+        );
+
+
+        return;
+
+
+    }
+
+
+
+    try {
+
+
+        const response = await fetch(
+
+            "components/footer.html"
+
+        );
+
+
+        container.innerHTML = await response.text();
+
+
+
+    }
+
+    catch(error) {
+
+
+        console.error(
+
+            "Footer loading failed.",
+
+            error
+
+        );
+
+
+    }
+
+
+}
+
+
+
+
+
+/* ==============================================================
+   GLOBAL EVENTS
+
+============================================================== */
+
+
+async #bindEvents() {
+
+
+    document.addEventListener(
+
+        "click",
+
+        event => {
+
+
+            const button = event.target.closest(
+
+                "[data-next-page]"
+
+            );
+
+
+            if (!button) {
+
+
+                return;
+
+
+            }
+
+
+
+            const nextPage = Number(
+
+                button.dataset.nextPage
+
+            );
+
+
+
+            if (nextPage) {
+
+
+                this.loadPage(
+
+                    nextPage
+
+                );
+
+
+            }
+
+
+        }
+
+    );
+
+
+
+    window.addEventListener(
+
+        "popstate",
+
+        () => {
+
+
+            const page = Number(
+
+                location.hash.replace(
+
+                    "#page",
+
+                    ""
+
+                )
+
+            );
+
+
+
+            if (page) {
+
+
+                this.loadPage(
+
+                    page
+
+                );
+
+
+            }
+
+
+        }
+
+    );
+
+
+}
+
+
+
+
+
+/* ==============================================================
+   START JOURNEY
+
+============================================================== */
+
+
+async #startJourney() {
+
+
+    const hashPage = Number(
+
+        location.hash.replace(
+
+            "#page",
+
+            ""
+
+        )
+
+    );
+
+
+
+    if (
+
+        hashPage >= 1 &&
+
+        hashPage <= this.#totalPages
+
+    ) {
+
+
+        await this.loadPage(
+
+            hashPage
+
+        );
+
+
+    }
+
+    else {
+
+
+        await this.loadPage(
+
+            1
+
+        );
+
+
+    }
+
+
+}
+
+
+
+
+
+/* ==============================================================
+   LOAD PAGE
+
+   page01.html → page07.html
+
+============================================================== */
+
+
+async loadPage(pageNumber) {
+
+
+    if (
+
+        pageNumber < 1 ||
+
+        pageNumber > this.#totalPages
+
+    ) {
+
+
+        return;
+
+
+    }
+
+
+
+    const container = document.querySelector(
+
+        "#app"
+
+    );
+
+
+
+    if (!container) {
+
+
+        console.error(
+
+            "Application container #app missing."
+
+        );
+
+
+        return;
+
+
+    }
+
+
+
+    try {
+
+
+        const response = await fetch(
+
+            `pages/page0${pageNumber}.html`
+
+        );
+
+
+
+        if (!response.ok) {
+
+
+            throw new Error(
+
+                `Page ${pageNumber} not found`
+
+            );
+
+
+        }
+
+
+
+        container.innerHTML = await response.text();
+
+
+
+        this.#currentPage = pageNumber;
+
+
+
+        location.hash =
+
+            `page${pageNumber}`;
+
+
+
+        window.scrollTo(
 
             {
 
-                error
+                top: 0,
+
+                behavior: "smooth"
 
             }
 
         );
 
-        if (
 
-            typeof CTM.UI.showFatalError ===
-            'function'
 
-        ) {
+        console.log(
 
-            CTM.UI.showFatalError(
-
-                error
-
-            );
-
-        }
-
-    }
-
-    /* ==========================================================
-       DESTROY
-
-       Shutdown Order
-
-       Navigation
-            ↓
-       Router
-            ↓
-       UI
-            ↓
-       ComponentLoader
-            ↓
-       DOM
-            ↓
-       State
-            ↓
-       Storage
-            ↓
-       Events
-
-    ========================================================== */
-
-    async destroy() {
-
-        if (!this.#initialized) {
-
-            return;
-
-        }
-
-        await CTM.Navigation.destroy();
-
-        await CTM.Router.destroy();
-
-        await CTM.UI.destroy();
-
-        await CTM.ComponentLoader.destroy();
-
-        await CTM.DOM.destroy();
-
-        await CTM.State.destroy();
-
-        await CTM.Storage.destroy();
-
-        await CTM.Events.destroy();
-
-        this.#initialized = false;
-
-        CTM.Logger.info(
-
-            'Application shutdown complete.'
+            `Loaded CTM PATH™ Page ${pageNumber}/7`
 
         );
 
-    }
 
-    /* ==========================================================
-       RESTART
-
-    ========================================================== */
-
-    async restart() {
-
-        await this.destroy();
-
-        await this.init();
 
     }
 
-    /* ==========================================================
-       DISPOSE
+    catch(error) {
 
-    ========================================================== */
 
-    async dispose() {
+        this.#handleError(
 
-        await this.destroy();
+            error
+
+        );
+
 
     }
+
 
 }
 
-/* ==============================================================
-   SINGLETON EXPORT
-============================================================== */
 
-CTM.App = Object.freeze(
-
-    new App()
-
-);
 
 /* ==============================================================
-   APPLICATION ENTRY POINT
-============================================================== */
+   Remaining
 
-document.addEventListener(
+   Batch 1C
 
-    'DOMContentLoaded',
+   --------------------------------------
 
-    async () => {
+   #handleError()
 
-        await CTM.App.init();
+   destroy()
 
-    }
+   Singleton Export
 
-);
-
-/* ==============================================================
-   FRAMEWORK FREEZE v5.0
-
-   Composition Root
-
-           App
-
-            │
-
-            ▼
-
-      Framework Bootstrap
-
-            │
-
-     ┌──────┼───────────────┐
-     │      │               │
-     ▼      ▼               ▼
-
-    DOM   ComponentLoader   UI
-                │
-                ▼
-             Router
-                │
-                ▼
-           Navigation
-                │
-                ▼
-             Event Bus
-
-
-   Responsibilities
-
-   ✓ Bootstrap Application
-
-   ✓ Initialize Framework Modules
-
-   ✓ Initialize Shared Components
-
-   ✓ Start Guided Journey
-
-   ✓ Global Event Wiring
-
-   ✓ Graceful Shutdown
-
-   ✓ Fatal Error Handling
-
-
-   Framework Modules
-
-   ✓ config.js
-
-   ✓ logger.js
-
-   ✓ events.js
-
-   ✓ storage.js
-
-   ✓ state.js
-
-   ✓ validation.js
-
-   ✓ api.js
-
-   ✓ services.js
-
-   ✓ dom.js
-
-   ✓ component-loader.js
-
-   ✓ ui.js
-
-   ✓ router.js
-
-   ✓ navigation.js
-
-   ✓ app.js
-
-
-   Never
-
-   ✗ Business Logic
-
-   ✗ Routing Logic
-
-   ✗ UI Logic
-
-   ✗ Validation
-
-   ✗ API
-
-   ✗ Application State
-
-
-   Status
-
-   FRAMEWORK FREEZE v5.0
+   DOMContentLoaded
 
    EOF
 
 ============================================================== */
-
