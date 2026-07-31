@@ -3,9 +3,11 @@
    CTM PATH™ MILLIONAIRES™
 
    File      : footer.css
-   Version   : 10.2
+
+   Version   : 10.3
 
    Status    : PREMIUM GLOBAL FOOTER
+               MOBILE REFINED
 
    Philosophy:
 
@@ -16,9 +18,12 @@
 
 
 
+
+
 /* ==========================================================================
    FOOTER FOUNDATION
 ========================================================================== */
+
 
 
 .ctm-footer {
@@ -32,11 +37,13 @@
 
     margin-top:
 
-        clamp(7rem,10vw,12rem);
+
+        clamp(4rem,8vw,8rem);
 
 
 
     padding-top:
+
 
         0;
 
@@ -46,6 +53,15 @@
 
 
 
+
+    /*
+       Premium deep navy foundation
+
+       Removed excessive transparency
+       to avoid mobile washed-out effect
+    */
+
+
     background:
 
 
@@ -53,17 +69,20 @@
 
             180deg,
 
-            rgba(8,28,58,.10),
+            #081C3A 0%,
 
-            rgba(8,28,58,.95)
+            #050D1A 100%
 
         );
 
 
 
+
     border-top:
 
-        1px solid rgba(255,255,255,.06);
+
+        1px solid rgba(216,180,90,.22);
+
 
 
 }
@@ -72,9 +91,14 @@
 
 
 
+
+
+
+
 /* ==========================================================================
    PREMIUM LIGHTING
 ========================================================================== */
+
 
 
 .ctm-footer::before {
@@ -93,14 +117,17 @@
 
 
 
+
+
     background:
+
 
 
         radial-gradient(
 
             ellipse at top center,
 
-            rgba(35,212,200,.12),
+            rgba(35,212,200,.06),
 
             transparent 45%
 
@@ -108,18 +135,25 @@
 
 
 
+
+
         radial-gradient(
 
             ellipse at bottom right,
 
-            rgba(216,180,90,.12),
+            rgba(216,180,90,.06),
 
             transparent 40%
 
         );
 
 
+
 }
+
+
+
+
 
 
 
@@ -147,7 +181,10 @@
 
 
 
+
+
     background:
+
 
 
         linear-gradient(
@@ -156,22 +193,20 @@
 
             transparent,
 
-            rgba(216,180,90,.65),
+            rgba(216,180,90,.75),
 
             transparent
 
         );
 
 
+
 }
-
-
-
-
 
 /* ==========================================================================
    JOURNEY SIGNATURE
 ========================================================================== */
+
 
 
 .footer-topline {
@@ -181,6 +216,7 @@
 
 
     z-index:2;
+
 
 
 
@@ -197,53 +233,81 @@
 
 
 
+
+
     gap:
 
+
         1.4rem;
+
+
 
 
 
     padding:
 
 
-        3.5rem 2rem;
+
+        3rem 1.5rem;
+
+
 
 
 
     color:
 
+
         #D8B45A;
+
+
 
 
 
     font-size:
 
-        .85rem;
+
+        .82rem;
+
+
 
 
 
     font-weight:
 
+
         900;
+
+
 
 
 
     letter-spacing:
 
-        .35em;
+
+        .32em;
+
+
 
 
 
     text-transform:
 
+
         uppercase;
+
+
 
 
 
     text-align:center;
 
 
+
 }
+
+
+
+
 
 
 
@@ -254,7 +318,9 @@
 
     color:
 
+
         #23D4C8;
+
 
 
 }
@@ -263,9 +329,14 @@
 
 
 
+
+
+
+
 /* ==========================================================================
    MAIN FOOTER AREA
 ========================================================================== */
+
 
 
 .footer-container {
@@ -278,25 +349,39 @@
 
 
 
+
+
     width:
 
-        min(1380px,calc(100% - 96px));
+
+        min(1380px,100%);
+
+
 
 
 
     margin:
 
+
         0 auto;
+
+
 
 
 
     padding:
 
 
-        5rem 0 2.5rem;
+
+        4.5rem 48px 2.5rem;
+
 
 
 }
+
+
+
+
 
 
 
@@ -309,7 +394,10 @@
 
 
 
+
+
     grid-template-columns:
+
 
 
         1.2fr
@@ -320,14 +408,19 @@
 
 
 
+
+
     gap:
 
 
-        clamp(5rem,8vw,9rem);
+        clamp(4rem,7vw,8rem);
+
+
 
 
 
     align-items:start;
+
 
 
 }
@@ -336,9 +429,14 @@
 
 
 
+
+
+
+
 /* ==========================================================================
    BRAND COLUMN
 ========================================================================== */
+
 
 
 .footer-brand {
@@ -351,12 +449,20 @@
 
 
 
+
+
     gap:
+
 
         1.2rem;
 
 
+
 }
+
+
+
+
 
 
 
@@ -367,44 +473,67 @@
 
     color:
 
+
         #F8F5ED;
+
+
 
 
 
     font-family:
 
+
         "Cinzel",
 
+
         "Playfair Display",
+
 
         serif;
 
 
 
+
+
     font-size:
 
-        clamp(2rem,3vw,3rem);
+
+        clamp(1.8rem,3vw,3rem);
+
+
 
 
 
     font-weight:
 
+
         900;
+
+
 
 
 
     letter-spacing:
 
-        .18em;
+
+        .16em;
+
+
 
 
 
     line-height:
 
+
         1;
 
 
+
 }
+
+
+
+
 
 
 
@@ -415,34 +544,52 @@
 
     color:
 
+
         #D8B45A;
+
+
 
 
 
     font-size:
 
-        1rem;
+
+        .95rem;
+
+
 
 
 
     font-weight:
 
+
         900;
+
+
 
 
 
     letter-spacing:
 
-        .45em;
+
+        .4em;
+
+
 
 
 
     text-transform:
 
+
         uppercase;
 
 
+
 }
+
+
+
+
 
 
 
@@ -453,28 +600,43 @@
 
     color:
 
+
         #23D4C8;
+
+
 
 
 
     font-size:
 
-        1.05rem;
+
+        1rem;
+
+
 
 
 
     font-weight:
 
+
         700;
+
+
 
 
 
     letter-spacing:
 
-        .06em;
+
+        .05em;
+
 
 
 }
+
+
+
+
 
 
 
@@ -485,26 +647,30 @@
 
     color:
 
+
         rgba(248,245,237,.75);
+
+
 
 
 
     font-size:
 
-        1rem;
+
+        .95rem;
+
+
 
 
 
     letter-spacing:
 
+
         .04em;
 
 
+
 }
-
-
-
-
 
 /* ==========================================================================
    SECTION LABEL
@@ -516,31 +682,45 @@
 
     color:
 
+
         rgba(248,245,237,.45);
+
+
 
 
 
     font-size:
 
+
         .72rem;
+
+
 
 
 
     font-weight:
 
+
         900;
+
+
 
 
 
     letter-spacing:
 
+
         .35em;
+
+
 
 
 
     text-transform:
 
+
         uppercase;
+
 
 
 }
@@ -549,9 +729,14 @@
 
 
 
+
+
+
+
 /* ==========================================================================
    FOUNDER COLUMN
 ========================================================================== */
+
 
 
 .footer-founder {
@@ -564,12 +749,20 @@
 
 
 
+
+
     gap:
+
 
         1rem;
 
 
+
 }
+
+
+
+
 
 
 
@@ -580,36 +773,55 @@
 
     color:
 
+
         #F8F5ED;
+
+
 
 
 
     font-family:
 
+
         "Cinzel",
+
 
         serif;
 
 
 
+
+
     font-size:
 
-        1.35rem;
+
+        1.3rem;
+
+
 
 
 
     font-weight:
 
+
         700;
+
+
 
 
 
     line-height:
 
+
         1.5;
 
 
+
 }
+
+
+
+
 
 
 
@@ -620,19 +832,27 @@
 
     color:
 
+
         rgba(248,245,237,.68);
+
+
 
 
 
     font-size:
 
+
         1rem;
+
+
 
 
 
     line-height:
 
+
         1.8;
+
 
 
 }
@@ -641,9 +861,14 @@
 
 
 
+
+
+
+
 /* ==========================================================================
    CONTACT COLUMN
 ========================================================================== */
+
 
 
 .footer-contact {
@@ -656,12 +881,20 @@
 
 
 
+
+
     gap:
+
 
         1.4rem;
 
 
+
 }
+
+
+
+
 
 
 
@@ -672,34 +905,52 @@
 
     color:
 
+
         #F8F5ED;
+
+
 
 
 
     font-size:
 
+
         1rem;
+
+
 
 
 
     font-weight:
 
+
         900;
+
+
 
 
 
     letter-spacing:
 
+
         .12em;
+
+
 
 
 
     text-transform:
 
+
         uppercase;
 
 
+
 }
+
+
+
+
 
 
 
@@ -715,18 +966,29 @@
 
 
 
+
+
     gap:
+
 
         1.2rem;
 
 
 
+
+
     transition:
 
-        .3s ease;
+
+        transform .3s ease;
+
 
 
 }
+
+
+
+
 
 
 
@@ -737,10 +999,16 @@
 
     transform:
 
-        translateX(10px);
+
+        translateX(8px);
+
 
 
 }
+
+
+
+
 
 
 
@@ -751,13 +1019,19 @@
 
     width:
 
+
         48px;
+
+
 
 
 
     height:
 
+
         48px;
+
+
 
 
 
@@ -771,25 +1045,38 @@
 
 
 
+
+
     border-radius:
+
 
         50%;
 
 
 
+
+
     background:
 
-        rgba(35,212,200,.12);
+
+        rgba(35,212,200,.10);
+
+
 
 
 
     border:
 
-        1px solid rgba(35,212,200,.25);
+
+        1px solid rgba(35,212,200,.22);
 
 
 
 }
+
+
+
+
 
 
 
@@ -800,21 +1087,33 @@
 
     color:
 
+
         #F8F5ED;
 
 
 
-    text-decoration:none;
+
+
+    text-decoration:
+
+
+        none;
+
+
 
 
 
     font-size:
 
+
         1.05rem;
 
 
 
+
+
     font-weight:
+
 
         600;
 
@@ -826,15 +1125,25 @@
 
 
 
+
+
+
+
 .footer-contact-item:hover a {
 
 
     color:
 
+
         #23D4C8;
 
 
+
 }
+
+
+
+
 
 
 
@@ -845,68 +1154,103 @@
 ========================================================================== */
 
 
+
 .footer-legacy {
 
 
     margin-top:
 
-        5rem;
+
+        4rem;
+
+
 
 
 
     padding:
 
 
-        3rem;
+        2.5rem 2rem;
 
 
 
-    text-align:center;
+
+
+    text-align:
+
+
+        center;
+
+
 
 
 
     color:
 
-        rgba(248,245,237,.85);
+
+        rgba(248,245,237,.88);
+
+
 
 
 
     font-size:
 
-        1.25rem;
+
+        1.2rem;
+
+
 
 
 
     font-weight:
 
+
         500;
+
+
 
 
 
     line-height:
 
+
         2;
+
+
 
 
 
     letter-spacing:
 
+
         .08em;
+
+
 
 
 
     border-top:
 
-        1px solid rgba(255,255,255,.08);
+
+        1px solid rgba(255,255,255,.10);
+
+
 
 
 
     border-bottom:
 
-        1px solid rgba(255,255,255,.08);
+
+        1px solid rgba(255,255,255,.10);
+
 
 
 }
+
+
+
+
 
 
 
@@ -917,168 +1261,61 @@
 ========================================================================== */
 
 
+
 .footer-bottom {
 
 
     margin-top:
 
-        2.5rem;
-
-
-
-    padding-top:
-
-        1.8rem;
-
-
-
-    text-align:center;
-
-
-
-    color:
-
-        rgba(248,245,237,.45);
-
-
-
-    font-size:
-
-        .85rem;
-
-
-
-    letter-spacing:
-
-        .18em;
-
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   RESPONSIVE
-========================================================================== */
-
-
-@media(max-width:1100px){
-
-
-.footer-grid {
-
-
-    grid-template-columns:
-
-        1fr;
-
-
-
-    gap:
-
-        3.5rem;
-
-
-
-    text-align:center;
-
-
-}
-
-
-
-.footer-brand,
-
-.footer-founder,
-
-.footer-contact {
-
-
-    align-items:center;
-
-
-}
-
-
-
-.footer-contact-item {
-
-
-    justify-content:center;
-
-
-}
-
-
-}
-
-
-
-
-
-@media(max-width:600px){
-
-
-.footer-container {
-
-
-    width:
-
-        calc(100% - 32px);
-
-
-}
-
-
-
-.footer-topline {
-
-
-    font-size:
-
-        .7rem;
-
-
-
-    letter-spacing:
-
-        .18em;
-
-
-}
-
-
-
-.footer-brand-name {
-
-
-    font-size:
-
-        1.8rem;
-
-
-}
-
-
-
-.footer-legacy {
-
-
-    padding:
 
         2rem;
 
 
 
+
+
+    padding-top:
+
+
+        1.5rem;
+
+
+
+
+
+    text-align:
+
+
+        center;
+
+
+
+
+
+    color:
+
+
+        rgba(248,245,237,.45);
+
+
+
+
+
     font-size:
 
-        1rem;
+
+        .82rem;
+
+
+
+
+
+    letter-spacing:
+
+
+        .16em;
+
 
 
 }
 
-
-}
