@@ -13,7 +13,13 @@ class State {
 
     #initialized = false;
 
+    #dirty = false;
+
     #state = {};
+
+    /* ======================================================
+       Initialize
+       ====================================================== */
 
     init() {
 
@@ -25,17 +31,17 @@ class State {
 
         this.#initialized = true;
 
-        CTM.Logger.info("Application state initialized.");
+        CTM.Logger.info("Application State initialized.");
 
     }
 
     /* ======================================================
-       Reset State
+       Default State
        ====================================================== */
 
-    reset() {
+    #defaultState() {
 
-        this.#state = {
+        return {
 
             app: {
 
@@ -45,7 +51,7 @@ class State {
 
                 previousRoute: null,
 
-                language: CTM.Config.APP.LANGUAGE
+                language: CTM.Config.APP.DEFAULT_LANGUAGE
 
             },
 
@@ -63,13 +69,21 @@ class State {
 
                 district: "",
 
-                state: ""
+                state: "",
+
+                source: "",
+
+                language: "",
+
+                registeredAt: null
 
             },
 
             journey: {
 
                 currentStep: 1,
+
+                totalSteps: 18,
 
                 completedSteps: [],
 
@@ -81,25 +95,43 @@ class State {
 
             discovery: {
 
+                completed: false,
+
+                answers: {},
+
+                financialConfidence: 0,
+
+                monthlyIncome: 0,
+
+                monthlySavings: 0,
+
+                completedAt: null
+
             },
 
             assessment: {
+
+                completed: false,
 
                 responses: {},
 
                 totalScore: 0,
 
-                completed: false
+                completedAt: null
 
             },
 
             results: {
 
+                lifeAlignmentScore: 0,
+
                 diagnosis: null,
 
                 roadmap: null,
 
-                alignment: null
+                recommendations: [],
+
+                generatedAt: null
 
             },
 
@@ -116,50 +148,114 @@ class State {
     }
 
     /* ======================================================
-       Generic Get
+       Validation
+       ====================================================== */
+
+    #validate(section, value) {
+
+        if (!(section in this.#state)) {
+
+            throw new Error(
+                `Unknown state section: ${section}`
+            );
+
+        }
+
+        if (value === null) {
+
+            throw new Error(
+                `State cannot be null.`
+            );
+
+        }
+
+        if (typeof value !== "object") {
+
+            throw new Error(
+                `State must be an object.`
+            );
+
+        }
+
+    }
+
+    /* ======================================================
+       Dirty Flag
+       ====================================================== */
+
+    #markDirty() {
+
+        this.#dirty = true;
+
+    }
+
+    clearDirty() {
+
+        this.#dirty = false;
+
+    }
+
+    isDirty() {
+
+        return this.#dirty;
+
+    }
+
+    /* ======================================================
+       Read
        ====================================================== */
 
     get(section) {
 
-        return structuredClone(this.#state[section]);
+        return structuredClone(
+
+            this.#state[section]
+
+        );
+
+    }
+
+    snapshot() {
+
+        return structuredClone(
+
+            this.#state
+
+        );
 
     }
 
     /* ======================================================
-       Generic Set
+       Write
        ====================================================== */
 
     set(section, value) {
 
-        if (!(section in this.#state)) {
-
-            throw new Error(
-
-                `Unknown state section: ${section}`
-
-            );
-
-        }
+        this.#validate(section, value);
 
         this.#state[section] = structuredClone(value);
 
-    }
+        this.#markDirty();
 
-    /* ======================================================
-       Generic Update
-       ====================================================== */
+        CTM.Events.emit(
+
+            "state:changed",
+
+            {
+
+                section,
+
+                value: this.get(section)
+
+            }
+
+        );
+
+    }
 
     update(section, values) {
 
-        if (!(section in this.#state)) {
-
-            throw new Error(
-
-                `Unknown state section: ${section}`
-
-            );
-
-        }
+        this.#validate(section, values);
 
         Object.assign(
 
@@ -169,15 +265,41 @@ class State {
 
         );
 
+        this.#markDirty();
+
+        CTM.Events.emit(
+
+            "state:changed",
+
+            {
+
+                section,
+
+                value: this.get(section)
+
+            }
+
+        );
+
     }
 
     /* ======================================================
-       Snapshot
+       Reset
        ====================================================== */
 
-    snapshot() {
+    reset() {
 
-        return structuredClone(this.#state);
+        this.#state = this.#defaultState();
+
+        this.clearDirty();
+
+        CTM.Events.emit(
+
+            "state:reset",
+
+            this.snapshot()
+
+        );
 
     }
 
@@ -191,15 +313,21 @@ class State {
 
     }
 
+    updateApp(values) {
+
+        this.update("app", values);
+
+    }
+
     getVisitor() {
 
         return this.get("visitor");
 
     }
 
-    setVisitor(visitor) {
+    updateVisitor(values) {
 
-        this.set("visitor", visitor);
+        this.update("visitor", values);
 
     }
 
@@ -209,9 +337,21 @@ class State {
 
     }
 
-    setJourney(journey) {
+    updateJourney(values) {
 
-        this.set("journey", journey);
+        this.update("journey", values);
+
+    }
+
+    getDiscovery() {
+
+        return this.get("discovery");
+
+    }
+
+    updateDiscovery(values) {
+
+        this.update("discovery", values);
 
     }
 
@@ -223,13 +363,7 @@ class State {
 
     updateAssessment(values) {
 
-        this.update(
-
-            "assessment",
-
-            values
-
-        );
+        this.update("assessment", values);
 
     }
 
@@ -239,15 +373,21 @@ class State {
 
     }
 
-    setResults(results) {
+    updateResults(values) {
 
-        this.set(
+        this.update("results", values);
 
-            "results",
+    }
 
-            results
+    getSession() {
 
-        );
+        return this.get("session");
+
+    }
+
+    updateSession(values) {
+
+        this.update("session", values);
 
     }
 
@@ -258,6 +398,8 @@ class State {
     destroy() {
 
         this.#state = {};
+
+        this.#dirty = false;
 
         this.#initialized = false;
 
