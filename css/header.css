@@ -2,35 +2,25 @@
 /* ==========================================================================
    CTM PATH™ MILLIONAIRES™
 
-   File        : header.css
-   Version     : 10.1
+   File      : header.css
+   Version   : 10.2
 
-   Status      : PREMIUM MOVEMENT IDENTITY
+   Status    : PREMIUM BRAND HEADER
 
-   Architecture:
-   Static HTML + CSS
+   Philosophy:
 
-   Designed for:
+   Luxury is created through:
 
-   .ctm-header
-   .header-brand
-   .header-logo
-   .brand-symbol
-   .brand-identity
-   .brand-name
-   .brand-tagline-main
-   .brand-tagline
-   .brand-signature
-   .journey-status
-   .journey-label
-   .journey-counter
+   Space
+   Hierarchy
+   Typography
+   Restraint
 
    ========================================================================== */
 
 
-
 /* ==========================================================================
-   HEADER CONTAINER
+   HEADER SHELL
 ========================================================================== */
 
 
@@ -40,40 +30,55 @@
 
     z-index:100;
 
+
     display:flex;
 
     align-items:center;
 
     justify-content:space-between;
 
-    gap:48px;
 
-    width:min(1580px,calc(100% - 72px));
+    width:min(1580px,calc(100% - 96px));
 
-    margin:24px auto 0;
 
-    padding:24px 42px;
+    margin:
 
-    min-height:104px;
+        32px auto 0;
+
+
+    padding:
+
+        28px 52px;
+
+
+    min-height:
+
+        120px;
+
+
+    border-radius:
+
+        32px;
+
 
     overflow:hidden;
 
-    border-radius:28px;
-
     isolation:isolate;
+
 
 
     background:
 
         linear-gradient(
 
-            180deg,
+            135deg,
 
-            rgba(10,24,45,.96),
+            rgba(8,28,58,.96),
 
-            rgba(6,16,32,.92)
+            rgba(7,18,38,.96)
 
         );
+
 
 
     border:
@@ -81,55 +86,64 @@
         1px solid rgba(255,255,255,.08);
 
 
+
     backdrop-filter:
 
-        blur(24px);
+        blur(28px);
 
 
     -webkit-backdrop-filter:
 
-        blur(24px);
+        blur(28px);
+
 
 
     box-shadow:
 
-        0 24px 70px rgba(0,0,0,.42),
+        0 30px 90px rgba(0,0,0,.45),
 
         inset 0 1px 0 rgba(255,255,255,.08);
 
 
     transition:
 
-        .35s ease;
+        all .35s ease;
 
 }
 
 
 
 
+
 /* ==========================================================================
-   AMBIENT BRAND LIGHT
+   PREMIUM LIGHTING
 ========================================================================== */
 
 
 .ctm-header::before {
 
+
     content:"";
+
 
     position:absolute;
 
+
     inset:0;
+
 
     pointer-events:none;
 
 
+
     background:
+
 
         radial-gradient(
 
             circle at 0% 50%,
 
-            rgba(33,210,198,.20),
+            rgba(35,212,200,.22),
 
             transparent 42%
 
@@ -138,37 +152,45 @@
 
         radial-gradient(
 
-            circle at 100% 0%,
+            circle at 90% 0%,
 
-            rgba(201,162,39,.10),
+            rgba(216,180,90,.14),
 
             transparent 38%
 
         );
 
+
 }
 
 
 
-/* GOLD SIGNATURE LINE */
 
 
 .ctm-header::after {
 
+
     content:"";
+
 
     position:absolute;
 
-    left:42px;
-
-    right:42px;
 
     top:0;
+
+
+    left:52px;
+
+
+    right:52px;
+
 
     height:1px;
 
 
+
     background:
+
 
         linear-gradient(
 
@@ -176,37 +198,48 @@
 
             transparent,
 
-            rgba(201,162,39,.45),
+            rgba(216,180,90,.65),
 
             transparent
 
         );
 
+
 }
+
 
 
 
 
 /* ==========================================================================
-   BRAND AREA
+   BRAND GROUP
 ========================================================================== */
 
 
 .header-brand {
 
+
     position:relative;
+
 
     z-index:2;
 
+
     display:flex;
+
 
     align-items:center;
 
-    gap:22px;
 
-    flex:1;
+
+    gap:
+
+        32px;
+
 
 }
+
+
 
 
 
@@ -217,48 +250,53 @@
 
 .header-logo {
 
+
     position:relative;
+
 
     display:flex;
 
+
     align-items:center;
+
 
     justify-content:center;
 
 
-    width:84px;
 
-    height:84px;
+    width:
+
+        92px;
+
+
+    height:
+
+        92px;
 
 
     flex-shrink:0;
 
 
-    border-radius:50%;
+
+    border-radius:
+
+        50%;
+
 
 
     background:
 
+
         radial-gradient(
 
-            circle at 35% 30%,
+            circle,
 
-            rgba(255,255,255,.14),
+            rgba(35,212,200,.20),
 
-            transparent 58%
-
-        ),
-
-
-        linear-gradient(
-
-            145deg,
-
-            rgba(33,210,198,.20),
-
-            rgba(201,162,39,.12)
+            rgba(216,180,90,.08)
 
         );
+
 
 
     border:
@@ -266,44 +304,61 @@
         1px solid rgba(255,255,255,.12);
 
 
+
     box-shadow:
 
-        inset 0 1px 0 rgba(255,255,255,.12),
 
-        0 18px 48px rgba(0,0,0,.38),
+        0 20px 50px rgba(0,0,0,.40),
 
-        0 0 42px rgba(33,210,198,.15);
+
+        inset 0 1px 0 rgba(255,255,255,.12);
+
 
 }
+
 
 
 
 
 .header-logo::before {
 
+
     content:"";
+
 
     position:absolute;
 
-    inset:8px;
+
+    inset:10px;
+
 
     border-radius:50%;
 
 
+
     border:
 
-        1px solid rgba(255,255,255,.08);
+        1px solid rgba(216,180,90,.25);
+
 
 }
 
 
 
 
+
 .brand-symbol {
 
-    width:62px;
 
-    height:62px;
+    width:
+
+        68px;
+
+
+    height:
+
+        68px;
+
 
     object-fit:contain;
 
@@ -312,11 +367,13 @@
 
         drop-shadow(
 
-            0 4px 14px rgba(33,210,198,.28)
+            0 6px 18px rgba(35,212,200,.25)
 
         );
 
+
 }
+
 
 
 
@@ -328,86 +385,85 @@
 
 .brand-identity {
 
+
     display:flex;
+
 
     flex-direction:column;
 
+
     justify-content:center;
 
-    gap:4px;
+
+
+    gap:
+
+        10px;
+
 
 }
+
 
 
 
 
 .brand-name {
 
+
     margin:0;
 
-    color:#FFFFFF;
+
+
+    color:
+
+        #F8F5ED;
+
+
+
+    font-family:
+
+        "Cinzel",
+        "Playfair Display",
+        serif;
+
 
 
     font-size:
 
-        clamp(2rem,1.8vw,2.35rem);
+        clamp(2rem,2.2vw,2.5rem);
 
 
-    font-weight:900;
 
-    line-height:1;
+    font-weight:
 
-
-    letter-spacing:.14em;
-
-    text-transform:uppercase;
+        900;
 
 
-    text-shadow:
 
-        0 3px 16px rgba(0,0,0,.35);
+    letter-spacing:
+
+        .16em;
+
+
+
+    line-height:
+
+        1;
+
 
 }
+
 
 
 
 
 .brand-tagline-main {
 
-    margin-top:4px;
-
 
     color:
 
-        var(--ctm-gold-soft,#D6B45C);
+        #D8B45A;
 
-
-    font-size:
-
-        .82rem;
-
-
-    font-weight:800;
-
-
-    line-height:1.3;
-
-
-    letter-spacing:.38em;
-
-
-    text-transform:uppercase;
-
-}
-
-
-
-
-.brand-tagline {
-
-    color:
-
-        rgba(33,210,198,.98);
 
 
     font-size:
@@ -415,38 +471,88 @@
         .86rem;
 
 
-    font-weight:700;
+
+    font-weight:
+
+        800;
 
 
-    letter-spacing:.20em;
+
+    letter-spacing:
+
+        .45em;
 
 
-    text-transform:uppercase;
+
+    text-transform:
+
+        uppercase;
+
 
 }
 
 
 
 
-.brand-signature {
 
-    margin-top:5px;
+.brand-tagline {
 
 
     color:
 
-        rgba(255,255,255,.72);
+        #23D4C8;
+
 
 
     font-size:
 
-        .94rem;
+        .9rem;
 
 
-    font-weight:400;
+
+    font-weight:
+
+        800;
 
 
-    letter-spacing:.02em;
+
+    letter-spacing:
+
+        .25em;
+
+
+
+    text-transform:
+
+        uppercase;
+
+
+}
+
+
+
+
+
+.brand-signature {
+
+
+    color:
+
+        rgba(248,245,237,.72);
+
+
+
+    font-size:
+
+        1rem;
+
+
+
+    letter-spacing:
+
+        .04em;
+
+
 
 }
 
@@ -455,48 +561,64 @@
 
 
 /* ==========================================================================
-   JOURNEY STATUS
+   JOURNEY BADGE
 ========================================================================== */
 
 
 .journey-status {
 
+
     position:relative;
+
 
     z-index:2;
 
 
+
     display:flex;
+
 
     flex-direction:column;
 
+
     align-items:center;
+
 
     justify-content:center;
 
 
-    width:180px;
 
-    min-width:180px;
+    width:
 
-
-    height:82px;
+        210px;
 
 
-    border-radius:22px;
+
+    height:
+
+        96px;
+
+
+
+    border-radius:
+
+        26px;
+
 
 
     background:
+
 
         linear-gradient(
 
             180deg,
 
-            rgba(255,255,255,.07),
+            rgba(255,255,255,.08),
 
             rgba(255,255,255,.025)
 
         );
+
 
 
     border:
@@ -504,94 +626,134 @@
         1px solid rgba(255,255,255,.10);
 
 
+
     box-shadow:
 
-        inset 0 1px 0 rgba(255,255,255,.08),
 
-        0 14px 36px rgba(0,0,0,.28);
+        inset 0 1px 0 rgba(255,255,255,.10),
+
+        0 20px 45px rgba(0,0,0,.35);
+
 
 }
+
 
 
 
 
 .journey-label {
 
+
     color:
 
-        rgba(255,255,255,.60);
+        rgba(248,245,237,.55);
+
 
 
     font-size:
 
-        .62rem;
+        .68rem;
 
 
-    font-weight:800;
+
+    font-weight:
+
+        900;
 
 
-    letter-spacing:.32em;
+
+    letter-spacing:
+
+        .35em;
 
 
-    text-transform:uppercase;
+
+    text-transform:
+
+        uppercase;
+
 
 }
+
 
 
 
 
 .journey-counter {
 
-    margin-top:8px;
+
+    margin-top:
+
+        10px;
 
 
-    color:#FFFFFF;
+
+    color:
+
+        #F8F5ED;
+
+
+
+    font-family:
+
+        "Cinzel",
+        serif;
+
 
 
     font-size:
 
-        1.55rem;
+        1.65rem;
 
 
-    font-weight:900;
+
+    font-weight:
+
+        900;
 
 
-    letter-spacing:.12em;
 
+    letter-spacing:
 
-    text-shadow:
+        .16em;
 
-        0 3px 12px rgba(0,0,0,.35);
 
 }
+
 
 
 
 
 /* ==========================================================================
-   HOVER PREMIUM EFFECT
+   HOVER
 ========================================================================== */
 
 
 .ctm-header:hover {
 
+
     transform:
 
-        translateY(-2px);
+        translateY(-3px);
+
 
 
     border-color:
 
-        rgba(33,210,198,.18);
+        rgba(35,212,200,.22);
+
 
 
     box-shadow:
 
-        0 30px 80px rgba(0,0,0,.45),
 
-        0 0 60px rgba(33,210,198,.10);
+        0 35px 100px rgba(0,0,0,.50),
+
+        0 0 60px rgba(35,212,200,.12);
+
 
 }
+
 
 
 
@@ -601,63 +763,103 @@
 ========================================================================== */
 
 
-@media(max-width:992px) {
+@media(max-width:1000px){
 
 
-    .ctm-header {
-
-        flex-direction:column;
-
-        align-items:flex-start;
-
-    }
+.ctm-header {
 
 
-    .journey-status {
+    flex-direction:column;
 
-        width:100%;
 
-    }
+    gap:24px;
+
+
+    align-items:flex-start;
+
 
 }
 
 
 
-@media(max-width:600px) {
+.journey-status {
 
 
-    .ctm-header {
-
-        width:calc(100% - 24px);
-
-        padding:18px;
-
-    }
+    width:100%;
 
 
-    .header-logo {
-
-        width:62px;
-
-        height:62px;
-
-    }
+}
 
 
-    .brand-symbol {
-
-        width:44px;
-
-        height:44px;
-
-    }
+}
 
 
-    .brand-name {
 
-        font-size:1.3rem;
 
-    }
+@media(max-width:600px){
+
+
+.ctm-header {
+
+
+    width:
+
+        calc(100% - 32px);
+
+
+    padding:
+
+        22px;
+
+
+}
+
+
+
+.header-logo {
+
+
+    width:
+
+        70px;
+
+
+    height:
+
+        70px;
+
+
+}
+
+
+
+.brand-symbol {
+
+
+    width:
+
+        52px;
+
+
+    height:
+
+        52px;
+
+
+}
+
+
+
+.brand-name {
+
+
+    font-size:
+
+        1.5rem;
+
+
+}
+
 
 
 }
