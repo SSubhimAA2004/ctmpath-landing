@@ -3,7 +3,7 @@
      CTM PATH™ MILLIONAIRES™
 
      Component : header.html
-     Version   : 10.1
+     Version   : 11.0
 
      Status    : 🔒 PREMIUM BRAND HEADER
 
@@ -24,8 +24,9 @@
      ✓ Brand Identity
      ✓ Millionaire Movement Identity
      ✓ Cosmic Mark Display
-     ✓ Journey Progress Indicator
+     ✓ Dynamic Journey Indicator
      ✓ Premium Executive Positioning
+
 
      Does NOT:
 
@@ -34,36 +35,49 @@
      ✗ API Calls
      ✗ Business Logic
 
-     ========================================================================== -->
+========================================================================== -->
 
 
-<header class="ctm-header">
+<header 
+    class="ctm-header"
+    role="banner"
+>
 
 
     <!-- ======================================================
          BRAND IDENTITY
          ====================================================== -->
 
+
     <div class="header-brand">
+
 
 
         <!-- ==================================================
              COSMIC MARK
              ================================================== -->
 
+
         <div class="header-logo">
+
 
             <img
 
                 src="assets/logo/CTM_Mark.svg"
 
-                alt="CTM PATH™ Millionaires™"
+                alt="CTM PATH™ Millionaires™ Symbol"
 
                 class="brand-symbol"
 
+                loading="eager"
+
             >
 
+
         </div>
+
+
+
 
 
 
@@ -71,12 +85,16 @@
              BRAND MESSAGE
              ================================================== -->
 
+
         <div class="brand-identity">
+
 
 
             <!-- PRIMARY BRAND -->
 
-            <div class="brand-name">
+            <div 
+                class="brand-name"
+            >
 
                 CTM PATH™
 
@@ -84,9 +102,13 @@
 
 
 
+
+
             <!-- MOVEMENT IDENTITY -->
 
-            <div class="brand-tagline-main">
+            <div 
+                class="brand-tagline-main"
+            >
 
                 MILLIONAIRES™
 
@@ -94,9 +116,14 @@
 
 
 
+
+
+
             <!-- EXPERIENCE LAYER -->
 
-            <div class="brand-tagline">
+            <div 
+                class="brand-tagline"
+            >
 
                 GUIDED JOURNEY™
 
@@ -104,19 +131,30 @@
 
 
 
+
+
+
             <!-- BRAND PHILOSOPHY -->
 
-            <div class="brand-signature">
+            <div 
+                class="brand-signature"
+            >
 
                 Every Dream Has A Path™
 
             </div>
 
 
+
         </div>
 
 
+
     </div>
+
+
+
+
 
 
 
@@ -126,16 +164,40 @@
          JOURNEY STATUS
          ====================================================== -->
 
-    <div class="journey-status">
+
+    <div 
+
+        class="journey-status"
+
+        aria-label="Current journey progress"
+
+    >
 
 
-        <span class="journey-label">
 
-            MILLIONAIRE JOURNEY
+
+
+        <!-- Dynamic Journey Name -->
+
+        <span
+
+            class="journey-label"
+
+            id="journey-title"
+
+        >
+
+            MILLIONAIRE JOURNEY™
 
         </span>
 
 
+
+
+
+
+
+        <!-- Dynamic Journey Counter -->
 
         <span
 
@@ -150,7 +212,12 @@
         </span>
 
 
+
+
+
     </div>
+
+
 
 
 
