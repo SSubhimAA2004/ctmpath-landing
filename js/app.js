@@ -690,3 +690,254 @@ async loadPage(pageNumber) {
    EOF
 
 ============================================================== */
+
+
+/* ==============================================================
+   ERROR HANDLING
+
+============================================================== */
+
+
+#handleError(error) {
+
+
+    console.error(
+
+        "CTM PATH™ Application Error:",
+
+        error
+
+    );
+
+
+
+    const container = document.querySelector(
+
+        "#app"
+
+    );
+
+
+
+    if (container) {
+
+
+        container.innerHTML = `
+
+            <section class="error-screen">
+
+                <h2>
+                    Something went wrong
+                </h2>
+
+                <p>
+                    Please refresh and try again.
+                </p>
+
+            </section>
+
+        `;
+
+
+    }
+
+
+}
+
+
+
+
+/* ==============================================================
+   DESTROY
+
+============================================================== */
+
+
+async destroy() {
+
+
+    this.#initialized = false;
+
+
+    this.#currentPage = 1;
+
+
+
+    const app = document.querySelector(
+
+        "#app"
+
+    );
+
+
+    if (app) {
+
+
+        app.innerHTML = "";
+
+
+    }
+
+
+
+    console.log(
+
+        "CTM PATH™ Application stopped."
+
+    );
+
+
+}
+
+
+
+
+/* ==============================================================
+   RESTART
+
+============================================================== */
+
+
+async restart() {
+
+
+    await this.destroy();
+
+
+    await this.init();
+
+
+}
+
+
+
+
+/* ==============================================================
+   DISPOSE
+
+============================================================== */
+
+
+async dispose() {
+
+
+    await this.destroy();
+
+
+}
+
+
+}
+
+
+/* ==============================================================
+   SINGLETON EXPORT
+============================================================== */
+
+
+CTM.App = new App();
+
+
+
+
+/* ==============================================================
+   APPLICATION ENTRY POINT
+============================================================== */
+
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    async () => {
+
+
+        await CTM.App.init();
+
+
+    }
+
+);
+
+
+
+/* ==============================================================
+   WORKING MVP ORCHESTRATOR v1.0
+
+   Flow
+
+   Browser
+
+      ↓
+
+   App.init()
+
+      ↓
+
+   Header Component
+
+      ↓
+
+   Footer Component
+
+      ↓
+
+   Page 01
+
+      ↓
+
+   Page 02
+
+      ↓
+
+   Page 03
+
+      ↓
+
+   Page 04
+
+      ↓
+
+   Page 05
+
+      ↓
+
+   Page 06
+
+      ↓
+
+   Page 07
+
+
+   Responsibilities
+
+   ✓ Component Loading
+
+   ✓ Page Loading
+
+   ✓ Navigation Triggering
+
+   ✓ Startup Handling
+
+   ✓ Error Handling
+
+
+   Preserved
+
+   ✓ Existing Components
+
+   ✓ Existing CSS
+
+   ✓ Existing Page Content
+
+   ✓ Existing Seven Page Journey
+
+
+   Status
+
+   CTM PATH™ MVP ORCHESTRATOR v1.0
+
+   EOF
+
+============================================================== */
+
