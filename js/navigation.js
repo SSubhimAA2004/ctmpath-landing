@@ -4,545 +4,327 @@
  * CTM PATH™ Guided Journey™
  * Navigation Module
  * --------------------------------------------------------------
- * Version : 4.0 (Framework Freeze)
- * Pattern : Singleton
- * Author  : CTM PATH™ Engineering
+ * Version : 1.0 (Working MVP)
  *
  * Responsibilities
  * --------------------------------------------------------------
- * ✓ Determine Navigation Direction
- * ✓ Delegate Navigation to Router
- * ✓ Route Convenience Methods
+ * ✓ Load Journey Pages
+ * ✓ Handle Next Buttons
+ * ✓ Handle Previous Buttons
+ * ✓ Track Current Page
  *
  * Never
  * --------------------------------------------------------------
- * ✗ Render Pages
- * ✗ Manipulate DOM
  * ✗ Business Logic
- * ✗ API Calls
- * ✗ Validation
- * ✗ Application State
- * ✗ UI Manipulation
- *
- * Architecture
- * --------------------------------------------------------------
- *
- * User Action
- *      ↓
- * Navigation
- *      ↓
- * Router.navigate()
- *      ↓
- * Router Pipeline
- *      ↓
- * Event Bus
- *      ↓
- * UI
+ * ✗ Assessment Calculation
+ * ✗ Diagnosis Logic
+ * ✗ API Processing
  *
  * ==============================================================
  */
 
+
 window.CTM = window.CTM || {};
 
-class Navigation {
 
-    /* ==========================================================
-       PRIVATE STATE
-    ========================================================== */
 
-    #initialized = false;
+CTM.Navigation = {
+
+
+    currentPage: 1,
+
+
+    totalPages: 7,
+
+
 
     /* ==========================================================
        INITIALIZE
     ========================================================== */
 
-    async init() {
 
-        if (this.#initialized) {
+    init() {
+
+
+        this.bindEvents();
+
+
+        console.log(
+
+            "CTM PATH™ Navigation Ready."
+
+        );
+
+
+    },
+
+
+
+    /* ==========================================================
+       EVENT HANDLING
+    ========================================================== */
+
+
+    bindEvents() {
+
+
+        document.addEventListener(
+
+            "click",
+
+            event => {
+
+
+                const next = event.target.closest(
+
+                    "[data-next-page]"
+
+                );
+
+
+                if (next) {
+
+
+                    const page = Number(
+
+                        next.dataset.nextPage
+
+                    );
+
+
+                    this.go(page);
+
+
+                }
+
+
+
+                const previous = event.target.closest(
+
+                    "[data-prev-page]"
+
+                );
+
+
+                if (previous) {
+
+
+                    const page = Number(
+
+                        previous.dataset.prevPage
+
+                    );
+
+
+                    this.go(page);
+
+
+                }
+
+
+            }
+
+        );
+
+
+    },
+
+
+
+    /* ==========================================================
+       FIRST PAGE
+    ========================================================== */
+
+
+    first() {
+
+
+        return this.go(
+
+            1
+
+        );
+
+
+    },
+
+
+
+    /* ==========================================================
+       LOAD PAGE
+    ========================================================== */
+
+
+    async go(pageNumber) {
+
+
+        if (
+
+            pageNumber < 1 ||
+
+            pageNumber > this.totalPages
+
+        ) {
+
 
             return;
 
+
         }
 
-        this.#initialized = true;
 
-        CTM.Logger.info(
 
-            'Navigation initialized.'
+        const container = document.querySelector(
 
-        );
-
-    }
-
-    /* ==========================================================
-       DESTROY
-    ========================================================== */
-
-    async destroy() {
-
-        this.#initialized = false;
-
-        CTM.Logger.info(
-
-            'Navigation destroyed.'
+            "#app"
 
         );
 
-    }
 
-    /* ==========================================================
-       PUBLIC API
-    ========================================================== */
 
-    async go(route) {}
+        if (!container) {
 
-    async next() {}
 
-    async previous() {}
+            console.error(
 
-    async first() {}
-
-    async last() {}
-
-    canGoNext() {}
-
-    canGoPrevious() {}
-
-    currentRoute() {}
-
-    currentPage() {}
-
-    isInitialized() {
-
-        return this.#initialized;
-
-    }
-
-    /* ==========================================================
-       Navigation Methods
-
-       Batch 1B
-
-       -----------------------------------------
-
-       go()
-
-       next()
-
-       previous()
-
-       first()
-
-       last()
-
-    ========================================================== */
-
-}
-
-CTM.Navigation = Object.freeze(
-
-    new Navigation()
-
-);
-
-    /* ==========================================================
-       GO
-
-       Delegates navigation to the Router.
-
-    ========================================================== */
-
-    async go(route) {
-
-        if (!this.#initialized) {
-
-            throw new Error(
-
-                'Navigation is not initialized.'
+                "Missing #app container."
 
             );
 
+
+            return;
+
+
         }
 
-        return await CTM.Router.navigate(
 
-            route
 
-        );
+        try {
 
-    }
 
-    /* ==========================================================
-       NEXT
-    ========================================================== */
+            const response = await fetch(
 
-    async next() {
-
-        const currentRoute =
-
-            CTM.Router.getCurrentRoute();
-
-        const nextPage =
-
-            CTM.Config.getNextPage(
-
-                currentRoute
+                `pages/page0${pageNumber}.html`
 
             );
 
-        if (!nextPage) {
 
-            CTM.Logger.info(
 
-                'Already at last page.'
+            if (!response.ok) {
 
-            );
 
-            return false;
+                throw new Error(
 
-        }
+                    `Page ${pageNumber} unavailable`
 
-        return this.go(
+                );
 
-            nextPage.route
 
-        );
+            }
 
-    }
 
-    /* ==========================================================
-       PREVIOUS
-    ========================================================== */
 
-    async previous() {
+            container.innerHTML = await response.text();
 
-        const currentRoute =
 
-            CTM.Router.getCurrentRoute();
 
-        const previousPage =
+            this.currentPage = pageNumber;
 
-            CTM.Config.getPreviousPage(
 
-                currentRoute
 
-            );
+            this.updateProgress();
 
-        if (!previousPage) {
 
-            CTM.Logger.info(
 
-                'Already at first page.'
+            window.scrollTo(
+
+                {
+
+                    top: 0,
+
+                    behavior: "smooth"
+
+                }
 
             );
 
-            return false;
+
+
+            console.log(
+
+                `Loaded Page ${pageNumber}/${this.totalPages}`
+
+            );
+
+
 
         }
 
-        return this.go(
 
-            previousPage.route
+        catch(error) {
 
-        );
 
-    }
+            console.error(
 
-    /* ==========================================================
-       FIRST
-    ========================================================== */
+                "Navigation failed:",
 
-    async first() {
+                error
 
-        const page =
+            );
 
-            CTM.Config.getFirstPage();
-
-        if (!page) {
-
-            return false;
 
         }
 
-        return this.go(
 
-            page.route
+    },
+
+
+
+    /* ==========================================================
+       PROGRESS
+    ========================================================== */
+
+
+    updateProgress() {
+
+
+        const progress = document.querySelector(
+
+            "#progress-container"
 
         );
 
-    }
 
-    /* ==========================================================
-       LAST
-    ========================================================== */
+        if (!progress) {
 
-    async last() {
 
-        const page =
+            return;
 
-            CTM.Config.getLastPage();
-
-        if (!page) {
-
-            return false;
 
         }
 
-        return this.go(
 
-            page.route
 
-        );
+        progress.innerHTML = `
 
-    }
+            <div class="journey-progress">
 
-    /* ==========================================================
-       Remaining Methods
+                Journey
 
-       Batch 1C
+                ${this.currentPage}
 
-       -----------------------------------------
+                /
 
-       canGoNext()
+                ${this.totalPages}
 
-       canGoPrevious()
+            </div>
 
-       currentRoute()
+        `;
 
-       currentPage()
-
-       Singleton Export
-
-       Framework Freeze
-
-    ========================================================== */
-
-    /* ==========================================================
-       CAN GO NEXT
-
-       Returns
-
-       true  -> next page exists
-
-       false -> last page reached
-
-    ========================================================== */
-
-    canGoNext() {
-
-        const currentRoute =
-
-            CTM.Router.getCurrentRoute();
-
-        return CTM.Config.hasNextPage(
-
-            currentRoute
-
-        );
 
     }
 
-    /* ==========================================================
-       CAN GO PREVIOUS
 
-       Returns
 
-       true  -> previous page exists
-
-       false -> first page reached
-
-    ========================================================== */
-
-    canGoPrevious() {
-
-        const currentRoute =
-
-            CTM.Router.getCurrentRoute();
-
-        return CTM.Config.hasPreviousPage(
-
-            currentRoute
-
-        );
-
-    }
-
-    /* ==========================================================
-       CURRENT ROUTE
-
-    ========================================================== */
-
-    currentRoute() {
-
-        return CTM.Router.getCurrentRoute();
-
-    }
-
-    /* ==========================================================
-       CURRENT PAGE
-
-    ========================================================== */
-
-    currentPage() {
-
-        return CTM.Router.getCurrentPage();
-
-    }
-
-    /* ==========================================================
-       NAVIGATION STATUS
-
-    ========================================================== */
-
-    isBusy() {
-
-        return CTM.Router.isNavigating();
-
-    }
-
-    /* ==========================================================
-       RELOAD
-
-       Convenience wrapper.
-
-    ========================================================== */
-
-    async reload() {
-
-        return await CTM.Router.reload();
-
-    }
-
-    /* ==========================================================
-       REFRESH
-
-       Convenience wrapper.
-
-    ========================================================== */
-
-    async refresh() {
-
-        return await CTM.Router.refresh();
-
-    }
-
-    /* ==========================================================
-       DISPOSE
-
-    ========================================================== */
-
-    async dispose() {
-
-        await this.destroy();
-
-    }
-
-}
-
-/* ==============================================================
-   SINGLETON EXPORT
-============================================================== */
-
-CTM.Navigation = Object.freeze(
-
-    new Navigation()
-
-);
-
-/* ==============================================================
-   FRAMEWORK FREEZE v4.0
-
-   Responsibilities
-
-   ✓ Determine navigation direction
-
-   ✓ Route convenience methods
-
-   ✓ Delegate navigation to Router
-
-   ✓ Query navigation capability
-
-   Never
-
-   ✗ Render HTML
-
-   ✗ Manipulate DOM
-
-   ✗ Business Logic
-
-   ✗ Validation
-
-   ✗ Application State
-
-   ✗ API Calls
-
-   ✗ UI
-
-   Dependency Graph
-
-   App
-
-     │
-
-     ▼
-
-   Navigation
-
-     │
-
-     ▼
-
-   Router
-
-     │
-
-     ▼
-
-   Event Bus
-
-     │
-
-     ▼
-
-   UI
-
-   Public API
-
-   ✓ init()
-
-   ✓ destroy()
-
-   ✓ go()
-
-   ✓ next()
-
-   ✓ previous()
-
-   ✓ first()
-
-   ✓ last()
-
-   ✓ reload()
-
-   ✓ refresh()
-
-   ✓ canGoNext()
-
-   ✓ canGoPrevious()
-
-   ✓ currentRoute()
-
-   ✓ currentPage()
-
-   ✓ isBusy()
-
-   ✓ isInitialized()
-
-   Status
-
-   FRAMEWORK FREEZE v4.0
-
-   EOF
-
-============================================================== */
+};
 
