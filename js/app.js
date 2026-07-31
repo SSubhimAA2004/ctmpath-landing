@@ -1,750 +1,204 @@
 
-/* ==========================================================================
+/* ==========================================================
    CTM PATH™ Guided Journey™
+   Version : 1.0
+   File    : app.js
+   Purpose : Application Bootstrap
+   ========================================================== */
 
-   File        : js/app.js
-   Version     : 2.6
+'use strict';
 
-   Status      : PAGE MODULE INITIALIZER PATCH
+/* ==========================================================
+   APPLICATION
+   ========================================================== */
 
+const App = {
 
-   Purpose:
+    /* ------------------------------------------------------
+       Configuration
+       ------------------------------------------------------ */
 
-   Core application bootstrap controller.
+    version: '1.0.0',
 
+    name: 'CTM PATH™ Guided Journey™',
 
-   Responsibilities:
+    initialized: false,
 
-   ✓ Initialize application
-   ✓ Load global components
-   ✓ Load journey pages
-   ✓ Initialize page modules
+    /* ------------------------------------------------------
+       Initialize Application
+       ------------------------------------------------------ */
 
-
-   Does NOT:
-
-   ✗ API processing
-   ✗ Business logic
-   ✗ Assessment logic
-
-
-   ========================================================================== */
-
-
-const CTMApp = (() => {
-
-
-
-
-
-    const CONFIG = {
-
-
-        initialPage:
-
-        "welcome",
-
-
-
-        currentPage:
-
-        1,
-
-
-
-        components:{
-
-
-
-            header:
-
-            "components/header.html",
-
-
-
-            footer:
-
-            "components/footer.html",
-
-
-
-            navigation:
-
-            "components/navigation.html"
-
-
-
-        }
-
-
-    };
-
-
-
-
-
-    let started = false;
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       APPLICATION START
-       ========================================================== */
-
-
-    async function init(){
-
-
-
-        if(started){
-
-            return;
-
-        }
-
-
-
-        started = true;
-
-
-
-
-
-        await loadGlobalComponents();
-
-
-
-
-
-        await loadPage(
-
-            CONFIG.initialPage
-
-        );
-
-
-
-
-
-        hideNavigation();
-
-
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       LOAD GLOBAL COMPONENTS
-       ========================================================== */
-
-
-    async function loadGlobalComponents(){
-
-
-
-        await loadComponent(
-
-            "app-header",
-
-            CONFIG.components.header
-
-        );
-
-
-
-        await loadComponent(
-
-            "app-navigation",
-
-            CONFIG.components.navigation
-
-        );
-
-
-
-        await loadComponent(
-
-            "app-footer",
-
-            CONFIG.components.footer
-
-        );
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    async function loadComponent(
-
-        elementId,
-
-        filePath
-
-    ){
-
-
-
-        const container =
-
-        document.getElementById(
-
-            elementId
-
-        );
-
-
-
-
-
-        if(!container){
-
-            return;
-
-        }
-
-
-
-
-
-
+    async init() {
 
         try {
 
+            console.group(this.name);
 
+            console.info('Initializing application...');
 
-            const response =
+            this.showLoader();
 
-            await fetch(filePath);
+            await this.initializeState();
 
+            await this.loadSharedComponents();
 
+            this.initializeNavigation();
 
+            this.initializeRouter();
 
+            this.hideLoader();
 
-            if(!response.ok){
+            this.initialized = true;
 
+            console.info('Application initialized successfully.');
 
-
-                throw new Error(
-
-                    filePath
-
-                );
-
-
-
-            }
-
-
-
-
-
-            container.innerHTML =
-
-            await response.text();
-
-
+            console.groupEnd();
 
         }
 
+        catch (error) {
 
+            this.handleError(error);
 
-        catch(error){
+        }
 
+    },
 
+    /* ------------------------------------------------------
+       State
+       ------------------------------------------------------ */
 
-            console.error(
+    async initializeState() {
 
-                "Component loading failed:",
+        if (typeof State !== 'undefined') {
 
-                error
+            State.initialize();
 
+        }
+
+    },
+
+    /* ------------------------------------------------------
+       Shared Components
+       ------------------------------------------------------ */
+
+    async loadSharedComponents() {
+
+        if (typeof UI !== 'undefined') {
+
+            await UI.loadComponent(
+                'components/header.html',
+                'header-container'
             );
 
+            await UI.loadComponent(
+                'components/footer.html',
+                'footer-container'
+            );
 
+            await UI.loadComponent(
+                'components/progress.html',
+                'progress-container'
+            );
 
         }
 
+    },
 
+    /* ------------------------------------------------------
+       Navigation
+       ------------------------------------------------------ */
+
+    initializeNavigation() {
+
+        if (typeof Navigation !== 'undefined') {
+
+            Navigation.initialize();
+
+        }
+
+    },
+
+    /* ------------------------------------------------------
+       Router
+       ------------------------------------------------------ */
+
+    initializeRouter() {
+
+        if (typeof Router !== 'undefined') {
+
+            Router.start();
+
+        }
+
+    },
+
+    /* ------------------------------------------------------
+       Loader
+       ------------------------------------------------------ */
+
+    showLoader() {
+
+        if (typeof UI !== 'undefined') {
+
+            UI.showLoader();
+
+        }
+
+    },
+
+    hideLoader() {
+
+        if (typeof UI !== 'undefined') {
+
+            UI.hideLoader();
+
+        }
+
+    },
+
+    /* ------------------------------------------------------
+       Global Error Handler
+       ------------------------------------------------------ */
+
+    handleError(error) {
+
+        console.error(error);
+
+        if (typeof UI !== 'undefined') {
+
+            UI.hideLoader();
+
+            UI.showToast({
+
+                type: 'error',
+
+                title: 'Application Error',
+
+                message:
+                    'Something went wrong while starting the application.'
+
+            });
+
+        }
 
     }
 
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       PAGE LOADING
-       ========================================================== */
-
-
-    async function loadPage(
-
-        pageName
-
-    ){
-
-
-
-        const container =
-
-        document.getElementById(
-
-            "app-content"
-
-        );
-
-
-
-
-
-        if(!container){
-
-
-
-            console.error(
-
-                "Missing #app-content"
-
-            );
-
-
-
-            return;
-
-        }
-
-
-
-
-
-
-
-        try {
-
-
-
-            const response =
-
-            await fetch(
-
-                `pages/${pageName}.html`
-
-            );
-
-
-
-
-
-            if(!response.ok){
-
-
-
-                throw new Error(
-
-                    `Page not found: ${pageName}`
-
-                );
-
-
-
-            }
-
-
-
-
-
-            container.innerHTML =
-
-            await response.text();
-
-
-
-
-
-
-
-            initializePageModule(
-
-                pageName
-
-            );
-
-
-
-
-
-            document.dispatchEvent(
-
-
-
-                new CustomEvent(
-
-                    "ctm-page-loaded",
-
-                    {
-
-                        detail:{
-
-
-                            page:pageName
-
-
-                        }
-
-                    }
-
-                )
-
-
-
-            );
-
-
-
-        }
-
-
-
-        catch(error){
-
-
-
-            console.error(
-
-                "Page loading failed:",
-
-                error
-
-            );
-
-
-
-        }
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       PAGE MODULE INITIALIZER
-       ========================================================== */
-
-
-    function initializePageModule(
-
-        pageName
-
-    ){
-
-
-
-        switch(pageName){
-
-
-
-
-
-            case "welcome":
-
-
-
-                if(
-
-                    window.Welcome &&
-
-                    Welcome.init
-
-                ){
-
-
-
-                    Welcome.init();
-
-
-
-                }
-
-
-
-            break;
-
-
-
-
-
-
-
-
-            case "registration":
-
-
-
-                if(
-
-                    window.Registration &&
-
-                    Registration.init
-
-                ){
-
-
-
-                    Registration.init();
-
-
-
-                }
-
-
-
-            break;
-
-
-
-
-
-        }
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       JOURNEY CONTROL
-       ========================================================== */
-
-
-    function startJourney(){
-
-
-
-        CONFIG.currentPage = 2;
-
-
-
-
-
-        showNavigation();
-
-
-
-
-
-        loadPage(
-
-            "registration"
-
-        );
-
-
-
-
-
-        if(window.Navigation){
-
-
-
-            Navigation.setPage(
-
-                2
-
-            );
-
-
-
-        }
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       NAVIGATION VISIBILITY
-       ========================================================== */
-
-
-    function hideNavigation(){
-
-
-
-        const nav =
-
-        document.getElementById(
-
-            "app-navigation"
-
-        );
-
-
-
-
-
-        if(nav){
-
-
-
-            nav.style.display =
-
-            "none";
-
-
-
-        }
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    function showNavigation(){
-
-
-
-        const nav =
-
-        document.getElementById(
-
-            "app-navigation"
-
-        );
-
-
-
-
-
-        if(nav){
-
-
-
-            nav.style.display =
-
-            "flex";
-
-
-
-        }
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-    return {
-
-
-
-        init,
-
-
-        loadPage,
-
-
-        startJourney
-
-
-
-    };
-
-
-
-
-
-})();
-
-
-
-
-
-
-
-
-
-window.CTMApp = CTMApp;
-
-
-
-
-
-
-
-
+};
+
+/* ==========================================================
+   DOM READY
+   ========================================================== */
 
 document.addEventListener(
 
-    "DOMContentLoaded",
+    'DOMContentLoaded',
 
-    ()=>{
+    () => {
 
-
-        CTMApp.init();
-
-
+        App.init();
 
     }
 
 );
+
