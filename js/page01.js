@@ -2,157 +2,95 @@
 /* ==========================================================================
    CTM PATH™ MILLIONAIRES™
 
-   File      : page01.js
-   Version   : 10.0
+   PAGE 01 JAVASCRIPT CONTROLLER
 
-   Purpose:
+   FROM SURVIVAL TO LIVING™
 
-   Page 01 Experience Intelligence
+   Version: 10.0
+
 
    Responsibilities:
 
-   ✓ Initialize Page 01
-   ✓ Bind CTA Interaction
-   ✓ Update Journey Counter
-   ✓ Navigate To Page 02
+   ✓ Page Initialization
+   ✓ Journey Button Behaviour
+   ✓ Smooth UX Enhancements
+   ✓ Future Tracking Hooks
+
 
    Does NOT:
 
-   ✗ Global Routing
-   ✗ API Calls
    ✗ Business Logic
-   ✗ Application State
+   ✗ Assessment Calculation
+   ✗ Global Routing
+   ✗ API Processing
 
-   ========================================================================== */
+========================================================================== */
 
 
 
 (function(){
 
 
+
 "use strict";
 
 
 
-/* ==========================================================================
-   PAGE CONFIGURATION
-========================================================================== */
-
-
-const PAGE_CONFIG = {
-
-
-    currentPage: 1,
-
-
-    totalPages: 7,
-
-
-    nextPage:
-
-        "page02.html"
-
-
-};
-
-
-
 
 
 /* ==========================================================================
-   INITIALIZE PAGE
+   PAGE MODULE
 ========================================================================== */
 
 
-function initPage01(){
-
-
-
-    updateJourneyIndicator();
-
-
-
-    bindJourneyButton();
-
-
-
-    activateEntranceAnimation();
-
-
-
-}
+const CTM_PAGE01 = {
 
 
 
 
 
-/* ==========================================================================
-   UPDATE JOURNEY COUNTER
-========================================================================== */
+    init(){
 
 
-function updateJourneyIndicator(){
+        console.log(
 
-
-
-    const counter =
-
-        document.getElementById(
-
-            "journey-counter"
+            "CTM PATH™ MILLIONAIRES™ Page01 Loaded"
 
         );
 
 
 
-    if(!counter){
-
-        return;
-
-    }
+        this.bindJourneyButton();
 
 
 
-    counter.textContent =
-
-
-        String(PAGE_CONFIG.currentPage)
-
-            .padStart(2,"0")
-
-        +
-
-        " / "
-
-        +
-
-        String(PAGE_CONFIG.totalPages)
-
-            .padStart(2,"0");
+        this.enableSmoothExperience();
 
 
 
-}
+    },
+
+
+
 
 
 
 
 
 /* ==========================================================================
-   CTA BUTTON
+   JOURNEY BUTTON
 ========================================================================== */
 
 
-function bindJourneyButton(){
+bindJourneyButton(){
 
 
 
     const button =
 
+        document.querySelector(
 
-        document.getElementById(
-
-            "begin-journey-btn"
+            ".journey-button"
 
         );
 
@@ -163,6 +101,8 @@ function bindJourneyButton(){
         return;
 
     }
+
+
 
 
 
@@ -170,123 +110,25 @@ function bindJourneyButton(){
 
         "click",
 
-        startJourney
+        function(event){
 
-    );
 
 
-}
+            /*
 
+            Future:
 
+            - capture visitor intent
+            - save journey start time
+            - analytics event
 
+            */
 
 
-/* ==========================================================================
-   START JOURNEY
-========================================================================== */
 
+            console.log(
 
-function startJourney(){
-
-
-
-    buttonTransition();
-
-
-
-    setTimeout(
-
-        function(){
-
-
-            window.location.href =
-
-                PAGE_CONFIG.nextPage;
-
-
-
-        },
-
-        600
-
-    );
-
-
-
-}
-
-
- /* ==========================================================================
-   PREMIUM ENTRANCE ANIMATION
-========================================================================== */
-
-
-function activateEntranceAnimation(){
-
-
-
-    const animatedElements =
-
-
-        document.querySelectorAll(
-
-            ".hero-container, " +
-
-            ".reflection-text, " +
-
-            ".discovery-card, " +
-
-            ".story-highlight, " +
-
-            ".cta-card, " +
-
-            ".privacy-card"
-
-        );
-
-
-
-    animatedElements.forEach(
-
-        function(element,index){
-
-
-
-            element.style.opacity = "0";
-
-
-
-            element.style.transform =
-
-                "translateY(30px)";
-
-
-
-            element.style.transition =
-
-                "opacity .8s ease, transform .8s ease";
-
-
-
-            setTimeout(
-
-                function(){
-
-
-
-                    element.style.opacity = "1";
-
-
-
-                    element.style.transform =
-
-                        "translateY(0)";
-
-
-
-                },
-
-                120 * index
+                "Journey Started"
 
             );
 
@@ -294,11 +136,12 @@ function activateEntranceAnimation(){
 
         }
 
+
     );
 
 
 
-}
+},
 
 
 
@@ -307,46 +150,21 @@ function activateEntranceAnimation(){
 
 
 /* ==========================================================================
-   BUTTON PREMIUM TRANSITION
+   PREMIUM SCROLL EXPERIENCE
 ========================================================================== */
 
 
-function buttonTransition(){
+enableSmoothExperience(){
 
 
 
-    const button =
+    document.documentElement.style.scrollBehavior =
 
-
-        document.getElementById(
-
-            "begin-journey-btn"
-
-        );
+        "smooth";
 
 
 
-    if(!button){
-
-        return;
-
-    }
-
-
-
-    button.style.transform =
-
-        "scale(.96)";
-
-
-
-    button.style.opacity =
-
-        ".8";
-
-
-
-}
+},
 
 
 
@@ -355,102 +173,19 @@ function buttonTransition(){
 
 
 /* ==========================================================================
-   SCROLL REVEAL SUPPORT
-
-   Simple MVP version.
-   No external libraries.
-
+   FUTURE PERSONALISATION HOOK
 ========================================================================== */
 
 
-function enableScrollReveal(){
+setVisitorContext(data){
 
 
 
-    const elements =
+    sessionStorage.setItem(
 
+        "CTM_PAGE01_CONTEXT",
 
-        document.querySelectorAll(
-
-            ".discovery-card, " +
-
-            ".transformation-item"
-
-        );
-
-
-
-    const observer =
-
-
-        new IntersectionObserver(
-
-
-            function(entries){
-
-
-
-                entries.forEach(
-
-                    function(entry){
-
-
-
-                        if(entry.isIntersecting){
-
-
-
-                            entry.target.classList.add(
-
-                                "visible"
-
-                            );
-
-
-
-                            observer.unobserve(
-
-                                entry.target
-
-                            );
-
-
-
-                        }
-
-
-
-                    }
-
-                );
-
-
-
-            },
-
-
-            {
-
-                threshold:.15
-
-            }
-
-
-        );
-
-
-
-
-
-    elements.forEach(
-
-        function(element){
-
-
-            observer.observe(element);
-
-
-        }
+        JSON.stringify(data)
 
     );
 
@@ -462,33 +197,43 @@ function enableScrollReveal(){
 
 
 
+};
+
+
+
+
+
 
 
 /* ==========================================================================
-   SAFE START
+   EXPOSE PAGE MODULE
+========================================================================== */
+
+
+window.CTM_PAGE01 = CTM_PAGE01;
+
+
+
+
+
+
+
+/* ==========================================================================
+   AUTO INITIALIZE
 ========================================================================== */
 
 
 document.addEventListener(
 
-
     "DOMContentLoaded",
-
 
     function(){
 
 
-
-        initPage01();
-
-
-
-        enableScrollReveal();
-
+        CTM_PAGE01.init();
 
 
     }
-
 
 );
 
@@ -496,32 +241,4 @@ document.addEventListener(
 
 
 
-
-
-/* ==========================================================================
-   PUBLIC PAGE API
-
-   Minimal exposure only.
-
-========================================================================== */
-
-
-window.CTM_PAGE01 = {
-
-
-    init:
-
-        initPage01,
-
-
-    start:
-
-        startJourney
-
-
-};
-
-
-
 })();
-
