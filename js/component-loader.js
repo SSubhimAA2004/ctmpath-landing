@@ -1,206 +1,193 @@
 
-/*!
- * ==============================================================
- * CTM PATH™ Guided Journey™
- * Component Loader
- * --------------------------------------------------------------
- * Version : 1.0 (Working MVP)
- *
- * Responsibilities
- * --------------------------------------------------------------
- * ✓ Load Header Component
- * ✓ Load Footer Component
- * ✓ Inject Shared HTML
- *
- * Never
- * --------------------------------------------------------------
- * ✗ Routing
- * ✗ Page Logic
- * ✗ Assessment Logic
- * ✗ State Management
- *
- * ==============================================================
- */
+/* ==========================================================================
+   CTM PATH™ MILLIONAIRES™
+
+   File      : component-loader.js
+   Version   : 1.0
+
+   Purpose:
+
+   Global Component Loader
+
+   Responsibilities:
+
+   ✓ Load Header
+   ✓ Load Footer
+   ✓ Inject Shared Components
+
+   Does NOT:
+
+   ✗ Routing
+   ✗ Business Logic
+   ✗ State Management
+   ✗ API Calls
+
+   ========================================================================== */
 
 
-window.CTM = window.CTM || {};
+(function(){
 
 
-/* ==============================================================
-   COMPONENT LOADER
-============================================================== */
-
-
-CTM.ComponentLoader = {
-
-
-    async loadComponents() {
-
-
-        await this.loadHeader();
-
-
-        await this.loadFooter();
-
-
-        console.log(
-
-            "CTM PATH™ Components Loaded."
-
-        );
-
-
-    },
+"use strict";
 
 
 
-    /* ==========================================================
-       HEADER
-    ========================================================== */
+const COMPONENT_PATH = {
 
 
-    async loadHeader() {
+    header:
+
+        "components/header.html",
 
 
-        const target = document.querySelector(
+    footer:
 
-            "#header-container"
-
-        );
+        "components/footer.html"
 
 
-        if (!target) {
+};
 
 
-            console.warn(
 
-                "Header container not found."
+
+
+/* ==========================================================================
+   LOAD COMPONENT
+========================================================================== */
+
+
+async function loadComponent(
+
+    selector,
+
+    file
+
+){
+
+
+
+    const container =
+
+        document.querySelector(selector);
+
+
+
+    if(!container){
+
+        return;
+
+    }
+
+
+
+    try {
+
+
+
+        const response =
+
+            await fetch(file);
+
+
+
+        if(!response.ok){
+
+
+            throw new Error(
+
+                "Unable to load "
+
+                + file
 
             );
-
-
-            return;
 
 
         }
 
 
 
-        await this.load(
+        container.innerHTML =
 
-            "components/header.html",
-
-            target
-
-        );
-
-
-    },
+            await response.text();
 
 
 
-    /* ==========================================================
-       FOOTER
-    ========================================================== */
+    }
+
+    catch(error){
 
 
-    async loadFooter() {
 
+        console.error(
 
-        const target = document.querySelector(
+            "Component loading failed:",
 
-            "#footer-container"
+            error
 
         );
 
-
-        if (!target) {
-
-
-            console.warn(
-
-                "Footer container not found."
-
-            );
-
-
-            return;
-
-
-        }
-
-
-
-        await this.load(
-
-            "components/footer.html",
-
-            target
-
-        );
-
-
-    },
-
-
-
-    /* ==========================================================
-       GENERIC HTML LOADER
-    ========================================================== */
-
-
-    async load(url, target) {
-
-
-        try {
-
-
-            const response = await fetch(
-
-                url
-
-            );
-
-
-
-            if (!response.ok) {
-
-
-                throw new Error(
-
-                    `Unable to load ${url}`
-
-                );
-
-
-            }
-
-
-
-            target.innerHTML = await response.text();
-
-
-
-        }
-
-
-        catch(error) {
-
-
-            console.error(
-
-                "Component loading failed:",
-
-                error
-
-            );
-
-
-        }
 
 
     }
 
 
+
+}
+
+
+
+
+
+
+
+/* ==========================================================================
+   LOAD GLOBAL COMPONENTS
+========================================================================== */
+
+
+async function loadGlobalComponents(){
+
+
+
+    await loadComponent(
+
+        "#global-header",
+
+        COMPONENT_PATH.header
+
+    );
+
+
+
+    await loadComponent(
+
+        "#global-footer",
+
+        COMPONENT_PATH.footer
+
+    );
+
+
+
+}
+
+
+
+
+
+
+
+window.CTM_COMPONENTS = {
+
+
+    load:
+
+        loadGlobalComponents
+
+
 };
+
+
+
+})();
 
