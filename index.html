@@ -6,7 +6,7 @@
 
     <!-- ======================================================
          CTM PATH™ Guided Journey™
-         Working MVP Shell v1.0
+         Working MVP Shell v1.1
          ====================================================== -->
 
 
@@ -28,11 +28,6 @@
         content="#0F172A">
 
 
-    <meta
-        name="color-scheme"
-        content="dark">
-
-
     <title>
         CTM PATH™ Guided Journey™
     </title>
@@ -40,8 +35,8 @@
 
 
     <!-- ======================================================
-         CORE STYLES
-         ====================================================== -->
+         FOUNDATION CSS
+    ====================================================== -->
 
 
     <link
@@ -60,6 +55,74 @@
 
 
 
+    <!-- ======================================================
+         COMPONENT CSS
+    ====================================================== -->
+
+
+    <link
+        rel="stylesheet"
+        href="css/header.css">
+
+
+    <link
+        rel="stylesheet"
+        href="css/footer.css">
+
+
+    <link
+        rel="stylesheet"
+        href="css/navigation.css">
+
+
+    <link
+        rel="stylesheet"
+        href="css/progress.css">
+
+
+
+    <!-- ======================================================
+         PAGE CSS
+         All seven journey pages
+    ====================================================== -->
+
+
+    <link
+        rel="stylesheet"
+        href="css/welcome.css">
+
+
+    <link
+        rel="stylesheet"
+        href="css/discovery.css">
+
+
+    <link
+        rel="stylesheet"
+        href="css/assessment.css">
+
+
+    <link
+        rel="stylesheet"
+        href="css/results.css">
+
+
+    <link
+        rel="stylesheet"
+        href="css/diagnosis.css">
+
+
+    <link
+        rel="stylesheet"
+        href="css/roadmap.css">
+
+
+    <link
+        rel="stylesheet"
+        href="css/continue.css">
+
+
+
 </head>
 
 
@@ -68,13 +131,12 @@
 
     <!-- ======================================================
          APPLICATION SHELL
-         ====================================================== -->
+    ====================================================== -->
 
 
     <div id="application-shell">
 
 
-        <!-- HEADER COMPONENT -->
 
         <header
             id="header-container"
@@ -83,7 +145,6 @@
 
 
 
-        <!-- JOURNEY PROGRESS -->
 
         <section
             id="progress-container"
@@ -92,7 +153,6 @@
 
 
 
-        <!-- PAGE CONTENT -->
 
         <main
             id="app"
@@ -102,7 +162,6 @@
 
 
 
-        <!-- FOOTER COMPONENT -->
 
         <footer
             id="footer-container"
@@ -117,35 +176,21 @@
 
 
     <!-- ======================================================
-         MVP JAVASCRIPT LOAD ORDER
-         ====================================================== -->
+         JAVASCRIPT LOAD ORDER
+    ====================================================== -->
 
-
-    <!-- Configuration -->
 
     <script src="js/config.js"></script>
 
 
-
-    <!-- API / Backend Connection -->
-
     <script src="js/api.js"></script>
 
-
-
-    <!-- Shared Components -->
 
     <script src="js/component-loader.js"></script>
 
 
-
-    <!-- Simple Page Navigation -->
-
     <script src="js/navigation.js"></script>
 
-
-
-    <!-- Application Controller -->
 
     <script src="js/app.js"></script>
 
