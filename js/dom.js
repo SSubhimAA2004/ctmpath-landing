@@ -891,3 +891,332 @@ CTM.DOM = Object.freeze(
 
     ========================================================== */
 
+    /* ==========================================================
+       ADD EVENT LISTENER
+
+    ========================================================== */
+
+    on(target, eventName, handler, options = false) {
+
+        const element = this.#resolve(target);
+
+        if (!element || typeof handler !== 'function') {
+
+            return;
+
+        }
+
+        element.addEventListener(
+
+            eventName,
+
+            handler,
+
+            options
+
+        );
+
+    }
+
+    /* ==========================================================
+       REMOVE EVENT LISTENER
+
+    ========================================================== */
+
+    off(target, eventName, handler, options = false) {
+
+        const element = this.#resolve(target);
+
+        if (!element || typeof handler !== 'function') {
+
+            return;
+
+        }
+
+        element.removeEventListener(
+
+            eventName,
+
+            handler,
+
+            options
+
+        );
+
+    }
+
+    /* ==========================================================
+       ADD ONE-TIME EVENT LISTENER
+
+    ========================================================== */
+
+    once(target, eventName, handler) {
+
+        this.on(
+
+            target,
+
+            eventName,
+
+            handler,
+
+            {
+
+                once: true
+
+            }
+
+        );
+
+    }
+
+    /* ==========================================================
+       DISPATCH EVENT
+
+    ========================================================== */
+
+    trigger(target, eventName, detail = {}) {
+
+        const element = this.#resolve(target);
+
+        if (!element) {
+
+            return;
+
+        }
+
+        element.dispatchEvent(
+
+            new CustomEvent(
+
+                eventName,
+
+                {
+
+                    bubbles: true,
+
+                    cancelable: true,
+
+                    detail
+
+                }
+
+            )
+
+        );
+
+    }
+
+    /* ==========================================================
+       DOCUMENT READY
+
+    ========================================================== */
+
+    ready(callback) {
+
+        if (
+
+            typeof callback !== 'function'
+
+        ) {
+
+            return;
+
+        }
+
+        if (
+
+            document.readyState === 'loading'
+
+        ) {
+
+            document.addEventListener(
+
+                'DOMContentLoaded',
+
+                callback,
+
+                {
+
+                    once: true
+
+                }
+
+            );
+
+            return;
+
+        }
+
+        callback();
+
+    }
+
+    /* ==========================================================
+       DISPOSE
+
+    ========================================================== */
+
+    async dispose() {
+
+        await this.destroy();
+
+    }
+
+}
+
+/* ==============================================================
+   SINGLETON EXPORT
+============================================================== */
+
+CTM.DOM = Object.freeze(
+
+    new DOM()
+
+);
+
+/* ==============================================================
+   FRAMEWORK FREEZE v5.0
+
+   Responsibilities
+
+   ✓ DOM Queries
+
+   ✓ Element Visibility
+
+   ✓ Content Updates
+
+   ✓ Class Management
+
+   ✓ Attribute Management
+
+   ✓ DOM Tree Operations
+
+   ✓ Event Helpers
+
+   ✓ Browser DOM Utilities
+
+
+   Never
+
+   ✗ Business Logic
+
+   ✗ Navigation
+
+   ✗ Routing
+
+   ✗ Validation
+
+   ✗ API
+
+   ✗ State
+
+   ✗ UI Decisions
+
+
+   Public API
+
+   ✓ init()
+
+   ✓ destroy()
+
+   ✓ dispose()
+
+   ✓ isInitialized()
+
+   ✓ get()
+
+   ✓ getAll()
+
+   ✓ exists()
+
+   ✓ byId()
+
+   ✓ byClass()
+
+   ✓ byTag()
+
+   ✓ show()
+
+   ✓ hide()
+
+   ✓ toggle()
+
+   ✓ enable()
+
+   ✓ disable()
+
+   ✓ setReadOnly()
+
+   ✓ focus()
+
+   ✓ blur()
+
+   ✓ scrollIntoView()
+
+   ✓ addClass()
+
+   ✓ removeClass()
+
+   ✓ toggleClass()
+
+   ✓ hasClass()
+
+   ✓ setText()
+
+   ✓ getText()
+
+   ✓ setHTML()
+
+   ✓ getHTML()
+
+   ✓ getValue()
+
+   ✓ setValue()
+
+   ✓ clearValue()
+
+   ✓ setAttribute()
+
+   ✓ getAttribute()
+
+   ✓ removeAttribute()
+
+   ✓ create()
+
+   ✓ append()
+
+   ✓ prepend()
+
+   ✓ insertBefore()
+
+   ✓ insertAfter()
+
+   ✓ remove()
+
+   ✓ empty()
+
+   ✓ clone()
+
+   ✓ on()
+
+   ✓ off()
+
+   ✓ once()
+
+   ✓ trigger()
+
+   ✓ ready()
+
+   Status
+
+   FRAMEWORK v5.0
+
+   FROZEN
+
+   EOF
+
+============================================================== */
+
+
+
