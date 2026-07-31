@@ -1,269 +1,219 @@
 
-/* ==========================================================================
+/* ==========================================================
    CTM PATH™ Guided Journey™
+   Foundation v1.0
+   File : api.js
+   ========================================================== */
 
-   File        : js/api.js
-   Version     : 2.1
+'use strict';
 
-   Status      : REGISTRATION API COMPATIBILITY PATCH
+window.CTM = window.CTM || {};
 
+class API {
 
-   Purpose:
+    #initialized = false;
 
-   Frontend communication layer.
+    #baseUrl = '';
 
+    #defaultTimeout = 30000;
 
-   Responsibilities:
+    init() {
 
-   ✓ Send requests to Google Apps Script
-   ✓ Register visitors
-
-
-   Does NOT:
-
-   ✗ Database operations
-   ✗ Business rules
-   ✗ Assessment processing
-
-
-   ========================================================================== */
-
-
-const API = (() => {
-
-
-
-
-
-    const CONFIG = {
-
-
-
-        endpoint:
-
-        "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL"
-
-
-
-    };
-
-
-
-
-
-
-
-
-
-    /* ==========================================================
-       GENERIC REQUEST HANDLER
-       ========================================================== */
-
-
-    async function request(payload){
-
-
-
-        const response =
-
-        await fetch(
-
-            CONFIG.endpoint,
-
-            {
-
-
-                method:
-
-                "POST",
-
-
-
-                headers:{
-
-
-                    "Content-Type":
-
-                    "text/plain;charset=utf-8"
-
-
-                },
-
-
-
-                body:
-
-                JSON.stringify(payload)
-
-
-
-            }
-
-        );
-
-
-
-
-
-
-
-        if(!response.ok){
-
-
-
-            throw new Error(
-
-                "API connection failed"
-
-            );
-
-
-
+        if (this.#initialized) {
+            return;
         }
 
+        this.#baseUrl = CTM.Config.API.BASE_URL;
 
+        if (CTM.Config.API.TIMEOUT) {
+            this.#defaultTimeout = CTM.Config.API.TIMEOUT;
+        }
 
+        this.#initialized = true;
 
-
-
-
-        return await response.json();
-
-
+        CTM.Logger.info('API initialized.');
 
     }
 
+    /* ======================================================
+       GET
+       ====================================================== */
 
+    async get(action, params = {}) {
 
+        return this.request({
 
+            method: 'GET',
 
+            action,
 
+            params
 
+        });
 
+    }
 
-    /* ==========================================================
-       REGISTER VISITOR
-       ========================================================== */
+    /* ======================================================
+       POST
+       ====================================================== */
 
+    async post(action, payload = {}) {
 
-    async function registerVisitor(data){
+        return this.request({
 
+            method: 'POST',
 
-
-        const payload = {
-
-
-
-            action:
-
-            "registerVisitor",
-
-
-
-            data:{
-
-
-
-                fullName:
-
-                data.fullName,
-
-
-
-                email:
-
-                data.email,
-
-
-
-                mobile:
-
-                data.mobile,
-
-
-
-                district:
-
-                data.district,
-
-
-
-                state:
-
-                data.state,
-
-
-
-                language:
-
-                data.language,
-
-
-
-                source:
-
-                data.source,
-
-
-
-                device:
-
-                data.device
-
-
-
-            }
-
-
-
-        };
-
-
-
-
-
-
-
-        return await request(
+            action,
 
             payload
 
-        );
-
-
+        });
 
     }
 
+    /* ======================================================
+       REQUEST
+       ====================================================== */
 
+    async request({
 
+        method = 'GET',
 
+        action = '',
 
+        params = {},
 
+        payload = {}
 
+    }) {
 
+        const controller = new AbortController();
 
-    return {
+        const timeout = setTimeout(
 
+            () => controller.abort(),
 
+            this.#defaultTimeout
 
-        registerVisitor
+        );
 
+        try {
 
+            let url = this.#baseUrl;
 
-    };
+            const options = {
 
+                method,
 
+                signal: controller.signal,
 
+                headers: {
 
+                    'Content-Type': 'application/json'
 
-})();
+                }
 
+            };
 
+            if (method === 'GET') {
 
+                const query = new URLSearchParams({
 
+                    action,
 
+                    ...params
 
+                });
 
+                url += '?' + query.toString();
 
+            }
+            else {
 
-window.API = API;
+                options.body = JSON.stringify({
+
+                    action,
+
+                    ...payload
+
+                });
+
+            }
+
+            const response = await fetch(
+
+                url,
+
+                options
+
+            );
+
+            clearTimeout(timeout);
+
+            if (!response.ok) {
+
+                throw new Error(
+
+                    `HTTP ${response.status}`
+
+                );
+
+            }
+
+            const data = await response.json();
+
+            return {
+
+                success: true,
+
+                data,
+
+                error: null
+
+            };
+
+        }
+        catch (error) {
+
+            clearTimeout(timeout);
+
+            CTM.Logger.error(
+
+                'API request failed.',
+
+                error
+
+            );
+
+            return {
+
+                success: false,
+
+                data: null,
+
+                error: error.message
+
+            };
+
+        }
+
+    }
+
+    /* ======================================================
+       Destroy
+       ====================================================== */
+
+    destroy() {
+
+        this.#initialized = false;
+
+    }
+
+}
+
+CTM.API = Object.freeze(
+
+    new API()
+
+);
+
