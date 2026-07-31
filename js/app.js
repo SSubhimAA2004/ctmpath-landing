@@ -1,194 +1,201 @@
 
 /* ==========================================================
    CTM PATH™ Guided Journey™
-   Version : 1.0
-   File    : app.js
-   Purpose : Application Bootstrap
+   Foundation v1.0
+   File : app.js
    ========================================================== */
 
 'use strict';
 
-/* ==========================================================
-   APPLICATION
-   ========================================================== */
+window.CTM = window.CTM || {};
 
-const App = {
+class App {
 
-    /* ------------------------------------------------------
-       Configuration
-       ------------------------------------------------------ */
+    #initialized = false;
 
-    version: '1.0.0',
+    init() {
 
-    name: 'CTM PATH™ Guided Journey™',
-
-    initialized: false,
-
-    /* ------------------------------------------------------
-       Initialize Application
-       ------------------------------------------------------ */
-
-    async init() {
-
-        try {
-
-            console.group(this.name);
-
-            console.info('Initializing application...');
-
-            this.showLoader();
-
-            await this.initializeState();
-
-            await this.loadSharedComponents();
-
-            this.initializeNavigation();
-
-            this.initializeRouter();
-
-            this.hideLoader();
-
-            this.initialized = true;
-
-            console.info('Application initialized successfully.');
-
-            console.groupEnd();
-
+        if (this.#initialized) {
+            return;
         }
 
-        catch (error) {
+        /* ==============================================
+           Foundation
+           ============================================== */
 
-            this.handleError(error);
+        CTM.Config.init();
 
-        }
+        CTM.Logger.init();
 
-    },
+        CTM.Events.init();
 
-    /* ------------------------------------------------------
-       State
-       ------------------------------------------------------ */
+        CTM.State.init();
 
-    async initializeState() {
+        CTM.Storage.init();
 
-        if (typeof State !== 'undefined') {
+        CTM.Validation.init();
 
-            State.initialize();
+        CTM.API.init();
 
-        }
+        CTM.Services.init();
 
-    },
+        CTM.UI.init();
 
-    /* ------------------------------------------------------
-       Shared Components
-       ------------------------------------------------------ */
+        CTM.Router.init();
 
-    async loadSharedComponents() {
+        CTM.Navigation.init();
 
-        if (typeof UI !== 'undefined') {
+        this.#registerGlobalEvents();
 
-            await UI.loadComponent(
-                'components/header.html',
-                'header-container'
-            );
+        this.#initialized = true;
 
-            await UI.loadComponent(
-                'components/footer.html',
-                'footer-container'
-            );
+        CTM.Logger.info(
 
-            await UI.loadComponent(
-                'components/progress.html',
-                'progress-container'
-            );
+            'Application initialized.'
 
-        }
-
-    },
-
-    /* ------------------------------------------------------
-       Navigation
-       ------------------------------------------------------ */
-
-    initializeNavigation() {
-
-        if (typeof Navigation !== 'undefined') {
-
-            Navigation.initialize();
-
-        }
-
-    },
-
-    /* ------------------------------------------------------
-       Router
-       ------------------------------------------------------ */
-
-    initializeRouter() {
-
-        if (typeof Router !== 'undefined') {
-
-            Router.start();
-
-        }
-
-    },
-
-    /* ------------------------------------------------------
-       Loader
-       ------------------------------------------------------ */
-
-    showLoader() {
-
-        if (typeof UI !== 'undefined') {
-
-            UI.showLoader();
-
-        }
-
-    },
-
-    hideLoader() {
-
-        if (typeof UI !== 'undefined') {
-
-            UI.hideLoader();
-
-        }
-
-    },
-
-    /* ------------------------------------------------------
-       Global Error Handler
-       ------------------------------------------------------ */
-
-    handleError(error) {
-
-        console.error(error);
-
-        if (typeof UI !== 'undefined') {
-
-            UI.hideLoader();
-
-            UI.showToast({
-
-                type: 'error',
-
-                title: 'Application Error',
-
-                message:
-                    'Something went wrong while starting the application.'
-
-            });
-
-        }
+        );
 
     }
 
-};
+    /* ==============================================
+       Start
+       ============================================== */
 
-/* ==========================================================
-   DOM READY
-   ========================================================== */
+    start() {
+
+        if (!this.#initialized) {
+
+            this.init();
+
+        }
+
+        const app = CTM.State.getApp();
+
+        const startRoute =
+
+            app.currentRoute ||
+
+            CTM.Config.APP.DEFAULT_ROUTE;
+
+        CTM.Router.navigate(
+
+            startRoute
+
+        );
+
+        CTM.Events.emit(
+
+            CTM.Config.EVENTS.APP_STARTED
+
+        );
+
+        CTM.Logger.info(
+
+            'Application started.'
+
+        );
+
+    }
+
+    /* ==============================================
+       Restart
+       ============================================== */
+
+    restart() {
+
+        this.destroy();
+
+        this.init();
+
+        this.start();
+
+    }
+
+    /* ==============================================
+       Global Events
+       ============================================== */
+
+    #registerGlobalEvents() {
+
+        window.addEventListener(
+
+            'error',
+
+            event => {
+
+                CTM.Logger.error(
+
+                    'Unhandled Error',
+
+                    event.error
+
+                );
+
+            }
+
+        );
+
+        window.addEventListener(
+
+            'unhandledrejection',
+
+            event => {
+
+                CTM.Logger.error(
+
+                    'Unhandled Promise',
+
+                    event.reason
+
+                );
+
+            }
+
+        );
+
+    }
+
+    /* ==============================================
+       Destroy
+       ============================================== */
+
+    destroy() {
+
+        CTM.Navigation.destroy();
+
+        CTM.Router.destroy();
+
+        CTM.UI.destroy();
+
+        CTM.Services.destroy();
+
+        CTM.API.destroy();
+
+        CTM.Validation.destroy();
+
+        CTM.Storage.destroy();
+
+        CTM.State.destroy();
+
+        CTM.Events.destroy();
+
+        CTM.Logger.destroy();
+
+        this.#initialized = false;
+
+    }
+
+}
+
+CTM.App = Object.freeze(
+
+    new App()
+
+);
+
+/* ==============================================
+   Bootstrap
+   ============================================== */
 
 document.addEventListener(
 
@@ -196,7 +203,7 @@ document.addEventListener(
 
     () => {
 
-        App.init();
+        CTM.App.start();
 
     }
 
