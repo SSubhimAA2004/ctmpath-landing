@@ -1,1154 +1,251 @@
 
-/* ==========================================================================
+/* ==========================================================
    CTM PATH™ Guided Journey™
+   Version : 1.0
+   File    : responsive.css
+   Purpose : Responsive Layout System
+   ========================================================== */
 
-   File        : responsive.css
-   Version     : 2.0
 
-   Purpose:
+/* ==========================================================
+   LARGE DESKTOP
+   (1600px and below)
+   ========================================================== */
 
-   Premium responsive behaviour layer.
-
-   Controls:
-
-   • Desktop scaling
-   • Tablet adaptation
-   • Mobile experience
-   • Typography adjustments
-   • Touch-friendly interaction
-
-   ========================================================================== */
-
-
-
-/* ==========================================================================
-   LARGE DESKTOP OPTIMIZATION
-
-   Screens above 1440px
-
-   ========================================================================== */
-
-
-@media (min-width: 1440px) {
-
-
-    .app-container {
-
-
-        max-width:
-
-            1280px;
-
-
-
-    }
-
-
-
-
-
-    .welcome-content {
-
-
-        max-width:
-
-            1100px;
-
-
-
-    }
-
-
-
-
-
-    .welcome-title.tamil {
-
-
-        font-size:
-
-            76px;
-
-
-
-    }
-
-
-
-
-
-    .welcome-card {
-
-
-        padding:
-
-            64px;
-
-
-
-    }
-
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   LAPTOP / STANDARD DESKTOP
-
-   1025px - 1439px
-
-   ========================================================================== */
-
-
-@media (max-width: 1439px) {
-
-
-    .app-container {
-
-
-        width:
-
-            calc(
-
-                100% - 80px
-
-            );
-
-
-
-    }
-
-
-
-
-
-    .welcome-title.tamil {
-
-
-        font-size:
-
-            clamp(
-
-                48px,
-
-                5vw,
-
-                68px
-
-            );
-
-
-
-    }
-
-
-
-
-
-    .kalachakra-grid {
-
-
-        grid-template-columns:
-
-            repeat(
-
-                4,
-
-                1fr
-
-            );
-
-
-
-    }
-
-
-
-}
-
-/* ==========================================================================
-   TABLET EXPERIENCE
-
-   768px - 1024px
-
-   ========================================================================== */
-
-
-@media (max-width: 1024px) {
-
-
-    .app-container,
+@media (max-width: 1600px) {
 
     .container {
 
-
-        width:
-
-            calc(
-
-                100% - 64px
-
-            );
-
-
+        width: min(
+            1320px,
+            calc(100% - 64px)
+        );
 
     }
-
-
-
-
-
-    .welcome-content {
-
-
-        padding:
-
-            72px 0 56px;
-
-
-
-    }
-
-
-
-
-
-    .welcome-title.tamil {
-
-
-        font-size:
-
-            48px;
-
-
-
-        line-height:
-
-            1.7;
-
-
-
-    }
-
-
-
-
-
-    .welcome-title.english {
-
-
-        font-size:
-
-            30px;
-
-
-
-    }
-
-
-
-
-
-    .welcome-subtitle {
-
-
-        font-size:
-
-            21px;
-
-
-
-    }
-
-
-
-
-
-    .welcome-description {
-
-
-        font-size:
-
-            18px;
-
-
-
-    }
-
-
-
-
-
-    .welcome-points {
-
-
-        grid-template-columns:
-
-            repeat(
-
-                1,
-
-                1fr
-
-            );
-
-
-
-    }
-
-
-
-
-
-    .welcome-preview-grid {
-
-
-        grid-template-columns:
-
-            repeat(
-
-                2,
-
-                1fr
-
-            );
-
-
-
-    }
-
-
-
-
-
-    .kalachakra-grid {
-
-
-        grid-template-columns:
-
-            repeat(
-
-                3,
-
-                1fr
-
-            );
-
-
-
-    }
-
-
-
-
-
-    .header-container {
-
-
-        padding:
-
-            0 24px;
-
-
-
-    }
-
-
-
-
 
 }
 
 
+/* ==========================================================
+   DESKTOP
+   (1400px and below)
+   ========================================================== */
 
+@media (max-width: 1400px) {
 
+    :root {
 
-/* ==========================================================================
-   MOBILE PREMIUM EXPERIENCE
-
-   481px - 767px
-
-   ========================================================================== */
-
-
-@media (max-width: 767px) {
-
-
-    body {
-
-
-        font-size:
-
-            16px;
-
-
+        --container-width: 1200px;
 
     }
-
-
-
-
-
-    .app-container {
-
-
-        width:
-
-            calc(
-
-                100% - 32px
-
-            );
-
-
-
-    }
-
-
-
-
-
-    .welcome-content {
-
-
-        padding:
-
-            48px 0 40px;
-
-
-
-    }
-
-
-
-
-
-    .welcome-title.tamil {
-
-
-        font-size:
-
-            34px;
-
-
-
-        line-height:
-
-            1.9;
-
-
-
-    }
-
-
-
-
-
-    .welcome-title.english {
-
-
-        margin-top:
-
-            14px;
-
-
-
-        font-size:
-
-            22px;
-
-
-
-    }
-
-
-
-
-
-    .welcome-subtitle {
-
-
-        margin-top:
-
-            24px;
-
-
-
-        font-size:
-
-            18px;
-
-
-
-        line-height:
-
-            2;
-
-
-
-    }
-
-
-
-
-
-    .welcome-description {
-
-
-        font-size:
-
-            16px;
-
-
-
-        line-height:
-
-            2;
-
-
-
-    }
-
-
-
-
-
-    .welcome-card {
-
-
-        margin:
-
-            24px 0 56px;
-
-
-
-        padding:
-
-            28px 20px;
-
-
-
-        border-radius:
-
-            24px;
-
-
-
-    }
-
-
-
-
-
-    .welcome-card-body p {
-
-
-        font-size:
-
-            17px;
-
-
-
-    }
-
-
-
-
-
-    .welcome-preview-grid {
-
-
-        grid-template-columns:
-
-            1fr;
-
-
-
-    }
-
-
-
-
-
-    .kalachakra-grid {
-
-
-        grid-template-columns:
-
-            1fr;
-
-
-
-    }
-
-
-
-
-
-    .welcome-final {
-
-
-        padding:
-
-            40px 20px;
-
-
-
-    }
-
-
-
-
-
-    .welcome-button {
-
-
-        width:
-
-            100%;
-
-
-
-        min-height:
-
-            64px;
-
-
-
-        font-size:
-
-            18px;
-
-
-
-    }
-
-
 
 }
 
-/* ==========================================================================
-   SMALL MOBILE EXPERIENCE
 
-   Below 480px
+/* ==========================================================
+   LAPTOP
+   (1200px and below)
+   ========================================================== */
 
-   ========================================================================== */
+@media (max-width: 1200px) {
+
+    :root {
+
+        --container-width: 1100px;
+
+    }
+
+    section {
+
+        padding-block: 72px;
+
+    }
+
+}
 
 
-@media (max-width: 480px) {
+/* ==========================================================
+   TABLET LANDSCAPE
+   (992px and below)
+   ========================================================== */
 
-
-    .app-container,
+@media (max-width: 992px) {
 
     .container {
 
-
-        width:
-
-            calc(
-
-                100% - 24px
-
-            );
-
-
+        width: calc(100% - 48px);
 
     }
 
+    h1 {
 
-
-
-
-    .welcome-eyebrow {
-
-
-        font-size:
-
-            12px;
-
-
-
-        letter-spacing:
-
-            0.14em;
-
-
+        font-size: clamp(2.2rem, 5vw, 3.5rem);
 
     }
 
+    h2 {
 
-
-
-
-    .welcome-title.tamil {
-
-
-        font-size:
-
-            30px;
-
-
-
-        line-height:
-
-            2;
-
-
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
 
     }
 
+    section {
 
-
-
-
-    .welcome-title.english {
-
-
-        font-size:
-
-            20px;
-
-
+        padding-block: 64px;
 
     }
-
-
-
-
-
-    .welcome-subtitle {
-
-
-        font-size:
-
-            17px;
-
-
-
-    }
-
-
-
-
-
-    .welcome-card {
-
-
-        padding:
-
-            24px 16px;
-
-
-
-    }
-
-
-
-
-
-    .welcome-card-header h2 {
-
-
-        font-size:
-
-            26px;
-
-
-
-    }
-
-
-
-
-
-    .welcome-points li {
-
-
-        padding:
-
-            20px;
-
-
-
-        font-size:
-
-            16px;
-
-
-
-    }
-
-
-
-
-
-    .preview-number {
-
-
-        width:
-
-            56px;
-
-
-
-        height:
-
-            56px;
-
-
-
-        font-size:
-
-            22px;
-
-
-
-    }
-
-
-
-
-
-    .kalachakra-item {
-
-
-        padding:
-
-            22px;
-
-
-
-    }
-
-
-
-
 
 }
 
 
+/* ==========================================================
+   TABLET
+   (768px and below)
+   ========================================================== */
 
+@media (max-width: 768px) {
 
+    :root {
 
-/* ==========================================================================
-   HEADER MOBILE REFINEMENT
-
-   ========================================================================== */
-
-
-@media (max-width: 767px) {
-
-
-    .header-container {
-
-
-        flex-direction:
-
-            column;
-
-
-
-        justify-content:
-
-            center;
-
-
-
-        gap:
-
-            12px;
-
-
-
-        padding:
-
-            16px 0;
-
-
+        --header-height: 72px;
 
     }
 
+    .container {
 
-
-
-
-    .header-brand {
-
-
-        justify-content:
-
-            center;
-
-
+        width: calc(100% - 32px);
 
     }
 
+    section {
 
-
-
-
-    .ctm-logo {
-
-
-        width:
-
-            44px;
-
-
-
-        height:
-
-            44px;
-
-
+        padding-block: 56px;
 
     }
 
+    .card {
 
-
-
-
-    .brand-name {
-
-
-        font-size:
-
-            18px;
-
-
+        padding: 24px;
 
     }
 
+    .btn-primary,
+    .btn-secondary {
 
-
-
-
-    .brand-subtitle {
-
-
-        font-size:
-
-            12px;
-
-
+        width: 100%;
 
     }
-
-
-
-
-
-    .header-progress {
-
-
-        justify-content:
-
-            center;
-
-
-
-        width:
-
-            100%;
-
-
-
-    }
-
-
-
-
 
 }
 
 
+/* ==========================================================
+   MOBILE
+   (576px and below)
+   ========================================================== */
 
+@media (max-width: 576px) {
 
+    html {
 
-/* ==========================================================================
-   FOOTER MOBILE REFINEMENT
-
-   ========================================================================== */
-
-
-@media (max-width: 767px) {
-
-
-    .app-footer {
-
-
-        padding:
-
-            48px 20px;
-
-
+        font-size: 15px;
 
     }
 
+    .container {
 
-
-
-
-    .footer-brand-name {
-
-
-        font-size:
-
-            21px;
-
-
+        width: calc(100% - 24px);
 
     }
 
+    section {
 
-
-
-
-    .footer-founder-name {
-
-
-        font-size:
-
-            20px;
-
-
+        padding-block: 48px;
 
     }
 
+    .card {
 
+        padding: 20px;
 
-
-
-    .footer-contact-item {
-
-
-        font-size:
-
-            16px;
-
-
+        border-radius: var(--radius-md);
 
     }
 
+    h1 {
 
+        line-height: 1.15;
+
+    }
+
+    p {
+
+        line-height: 1.7;
+
+    }
 
 }
 
 
+/* ==========================================================
+   SMALL MOBILE
+   (400px and below)
+   ========================================================== */
+
+@media (max-width: 400px) {
+
+    html {
+
+        font-size: 14px;
+
+    }
+
+    .container {
+
+        width: calc(100% - 20px);
+
+    }
+
+    .card {
+
+        padding: 18px;
+
+    }
+
+}
 
 
-
-/* ==========================================================================
-   TOUCH DEVICE OPTIMIZATION
-
-   ========================================================================== */
-
+/* ==========================================================
+   TOUCH DEVICES
+   ========================================================== */
 
 @media (hover: none) {
 
+    .btn-primary:hover,
+    .btn-secondary:hover {
 
-    .card:hover,
-
-    .welcome-preview-item:hover,
-
-    .kalachakra-item:hover {
-
-
-        transform:
-
-            none;
-
-
+        transform: none;
 
     }
-
-
-
-
-
-    .btn {
-
-
-        min-height:
-
-            64px;
-
-
-
-    }
-
-
 
 }
 
 
-
-
-
-/* ==========================================================================
-   ACCESSIBILITY SUPPORT
-
-   ========================================================================== */
-
+/* ==========================================================
+   REDUCED MOTION
+   ========================================================== */
 
 @media (prefers-reduced-motion: reduce) {
 
+    * {
 
-    *,
+        animation: none !important;
 
-    *::before,
+        transition: none !important;
 
-    *::after {
-
-
-        animation:
-
-            none !important;
-
-
-
-        transition:
-
-            none !important;
-
-
-
-        scroll-behavior:
-
-            auto !important;
-
-
+        scroll-behavior: auto !important;
 
     }
 
-
-
 }
 
-
-
-
-
-/* ==========================================================================
-   END OF FILE
-
-   File:
-
-   css/responsive.css
-
-
-   Version:
-
-   CTM PATH™ Premium Responsive Layer v2.0
-
-
-   Status:
-
-   COMPLETE 🔒
-
-
-   ========================================================================== */
