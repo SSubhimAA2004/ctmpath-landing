@@ -1,922 +1,239 @@
 
-/******************************************************************************
- *
- * CTM PATH™ Guided Journey™
- *
- * File        : js/welcome.js
- * Version     : 6.1
- * Status      : Dynamic Component Compatible Welcome Experience
- *
- * ---------------------------------------------------------------------------
- *
- * RESPONSIBILITIES
- *
- * • Premium hero entrance animation
- * • Scroll reveal animation
- * • Journey card animation
- * • CTA enhancement effects
- * • Dynamic CTA navigation
- * • Accessibility support
- * • Reduced-motion support
- *
- ******************************************************************************/
+/* ==========================================================================
+   CTM PATH™ Guided Journey™
+   File        : js/welcome.js
+   Version     : 1.0
+   Status      : PAGE 01 (Freeze Candidate)
 
-"use strict";
+   Purpose
+   -------
+   Controller for Welcome Page.
 
+   Responsibilities
+   ----------------
+   ✓ Initialize page
+   ✓ Register events
+   ✓ Play entrance animation
+   ✓ Handle CTA
+   ✓ Update journey counter
+   ✓ Cleanup
 
+   Does NOT
+   --------
+   ✗ Business logic
+   ✗ Validation
+   ✗ API calls
+========================================================================== */
 
+'use strict';
 
+window.CTM = window.CTM || {};
+CTM.Pages = CTM.Pages || {};
 
+class WelcomePage {
 
+    #initialized = false;
 
-/* ============================================================================
-   GLOBAL STATE
-============================================================================ */
+    #page = null;
 
+    #btnBegin = null;
 
-let prefersReducedMotion = false;
+    #journeyCounter = null;
 
-let revealObserver = null;
+    #onBeginJourney = null;
 
+    init() {
 
-
-
-
-
-
-
-/* ============================================================================
-   APPLICATION INITIALIZATION
-============================================================================ */
-
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    function(){
-
-        initializeWelcomePage();
-
-    }
-
-);
-
-
-
-
-
-
-
-
-/* ============================================================================
-   INITIALIZATION
-============================================================================ */
-
-
-function initializeWelcomePage(){
-
-
-    initializeReducedMotion();
-
-
-    initializeHero();
-
-
-    initializeRevealAnimations();
-
-
-    initializeJourneyCardAnimations();
-
-
-    initializeCTAEffects();
-
-
-}
-
-
-
-
-
-
-
-
-/* ============================================================================
-   REDUCED MOTION
-============================================================================ */
-
-
-function initializeReducedMotion(){
-
-
-    prefersReducedMotion =
-
-        window.matchMedia(
-
-            "(prefers-reduced-motion: reduce)"
-
-        ).matches;
-
-
-}
-
-
-
-
-
-
-
-
-/* ============================================================================
-   HERO ENTRANCE
-============================================================================ */
-
-
-function initializeHero(){
-
-
-    const hero =
-
-        document.querySelector(
-
-            ".welcome-hero"
-
-        );
-
-
-
-    if(!hero){
-
-
-        return;
-
-
-    }
-
-
-
-
-
-
-    if(prefersReducedMotion){
-
-
-        hero.classList.add(
-
-            "is-loaded"
-
-        );
-
-
-        return;
-
-
-    }
-
-
-
-
-
-
-
-    requestAnimationFrame(
-
-
-        function(){
-
-
-            hero.classList.add(
-
-                "is-loaded"
-
-            );
-
-
+        if (this.#initialized) {
+            return;
         }
 
-
-    );
-
-
-}
-
-
-/* ============================================================================
-   SCROLL REVEAL ANIMATION
-============================================================================ */
-
-
-function initializeRevealAnimations(){
-
-
-    const elements =
-
-        document.querySelectorAll(
-
-            ".reveal"
-
+        this.#page = document.getElementById(
+            'welcome-page'
         );
 
+        if (!this.#page) {
 
+            CTM.Logger.warn(
+                'Welcome page not found.'
+            );
 
-    if(!elements.length){
+            return;
+        }
 
-
-        return;
-
-
-    }
-
-
-
-
-
-
-
-    if(prefersReducedMotion){
-
-
-        elements.forEach(
-
-
-            function(element){
-
-
-                element.classList.add(
-
-                    "is-visible"
-
-                );
-
-
-            }
-
-
+        this.#btnBegin = document.getElementById(
+            'btnBeginJourney'
         );
 
+        this.#journeyCounter = document.getElementById(
+            'journey-counter'
+        );
 
+        this.#updateJourneyCounter();
 
-        return;
+        this.#registerEvents();
 
+        this.#playEntranceAnimation();
 
-    }
-
-
-
-
-
-
-
-    revealObserver =
-
-        new IntersectionObserver(
-
-
-            handleRevealIntersection,
-
-
+        CTM.Events.emit(
+            CTM.Config.EVENTS.PAGE_INITIALIZED,
             {
-
-
-                root:null,
-
-
-                rootMargin:
-
-                    "0px 0px -10% 0px",
-
-
-                threshold:
-
-                    0.12
-
-
+                page: 'WELCOME'
             }
-
-
         );
 
+        this.#initialized = true;
 
-
-
-
-
-
-    elements.forEach(
-
-
-        function(element){
-
-
-            revealObserver.observe(
-
-                element
-
-            );
-
-
-        }
-
-
-    );
-
-
-}
-
-
-
-
-
-
-
-
-function handleRevealIntersection(entries){
-
-
-    entries.forEach(
-
-
-        function(entry){
-
-
-
-            if(!entry.isIntersecting){
-
-
-                return;
-
-
-            }
-
-
-
-
-
-
-            entry.target.classList.add(
-
-                "is-visible"
-
-            );
-
-
-
-
-
-
-
-            if(revealObserver){
-
-
-                revealObserver.unobserve(
-
-                    entry.target
-
-                );
-
-
-            }
-
-
-
-        }
-
-
-    );
-
-
-}
-
-
-
-
-
-
-
-
-/* ============================================================================
-   JOURNEY CARD ANIMATION
-============================================================================ */
-
-
-function initializeJourneyCardAnimations(){
-
-
-    const cards =
-
-        document.querySelectorAll(
-
-            ".journey-card"
-
+        CTM.Logger.info(
+            'Welcome page initialized.'
         );
-
-
-
-    if(!cards.length){
-
-
-        return;
-
 
     }
 
+    /* ==========================================================
+       Register Events
+    ========================================================== */
 
+    #registerEvents() {
 
+        this.#onBeginJourney =
+            this.#handleBeginJourney.bind(this);
 
+        if (this.#btnBegin) {
 
+            this.#btnBegin.addEventListener(
+                'click',
+                this.#onBeginJourney
+            );
 
+        }
 
-    cards.forEach(
+    }
 
+    /* ==========================================================
+       CTA
+    ========================================================== */
 
-        function(card,index){
+    async #handleBeginJourney() {
 
+        if (this.#btnBegin) {
 
+            this.#btnBegin.disabled = true;
 
-            if(prefersReducedMotion){
+        }
 
+        try {
 
-                card.classList.add(
+            CTM.Logger.info(
+                'Journey started.'
+            );
 
-                    "is-visible"
+            CTM.Events.emit(
+                CTM.Config.EVENTS.JOURNEY_STARTED
+            );
 
-                );
+            await CTM.Navigation.next();
 
+        }
+        catch (error) {
 
-                return;
+            CTM.Logger.error(
+                'Unable to start journey.',
+                error
+            );
 
+            if (this.#btnBegin) {
+
+                this.#btnBegin.disabled = false;
 
             }
 
+        }
 
+    }
 
+    /* ==========================================================
+       Journey Counter
+    ========================================================== */
 
+    #updateJourneyCounter() {
 
+        if (!this.#journeyCounter) {
+            return;
+        }
 
-            card.style.transitionDelay =
+        const journey = CTM.State.getJourney();
 
+        const currentStep =
+            journey.currentStep || 1;
 
-                (
+        const totalSteps =
+            journey.totalSteps || 18;
 
-                    index * 120
+        this.#journeyCounter.textContent =
+            String(currentStep)
+                .padStart(2, '0') +
+            ' / ' +
+            String(totalSteps).padStart(2, '0');
 
-                )
+    }
 
-                +
+    /* ==========================================================
+       Animation
+    ========================================================== */
 
-                "ms";
+    #playEntranceAnimation() {
 
+        requestAnimationFrame(() => {
 
+            this.#page.classList.add(
+                'is-ready'
+            );
+
+        });
+
+    }
+
+    /* ==========================================================
+       Destroy
+    ========================================================== */
+
+    destroy() {
+
+        if (this.#btnBegin &&
+            this.#onBeginJourney) {
+
+            this.#btnBegin.removeEventListener(
+                'click',
+                this.#onBeginJourney
+            );
 
         }
 
+        if (this.#page) {
 
-    );
+            this.#page.classList.remove(
+                'is-ready'
+            );
 
+        }
 
+        this.#page = null;
+        this.#btnBegin = null;
+        this.#journeyCounter = null;
+        this.#onBeginJourney = null;
 
-}
+        this.#initialized = false;
 
-
-
-
-
-
-
-
-/* ============================================================================
-   CTA VISUAL EFFECTS
-============================================================================ */
-
-
-function initializeCTAEffects(){
-
-
-    const buttons =
-
-        document.querySelectorAll(
-
-            ".primary-button, .btn-primary, .btn-secondary"
-
+        CTM.Logger.info(
+            'Welcome page destroyed.'
         );
 
-
-
-    if(!buttons.length){
-
-
-        return;
-
-
     }
-
-
-
-
-
-
-    buttons.forEach(
-
-
-        function(button){
-
-
-
-            button.addEventListener(
-
-                "mouseenter",
-
-                handleButtonEnter
-
-            );
-
-
-
-
-
-            button.addEventListener(
-
-                "mouseleave",
-
-                handleButtonLeave
-
-            );
-
-
-
-
-
-            button.addEventListener(
-
-                "focus",
-
-                handleButtonEnter
-
-            );
-
-
-
-
-
-            button.addEventListener(
-
-                "blur",
-
-                handleButtonLeave
-
-            );
-
-
-
-        }
-
-
-    );
-
 
 }
 
-
-
-
-
-
-
-
-function handleButtonEnter(event){
-
-
-    if(prefersReducedMotion){
-
-
-        return;
-
-
-    }
-
-
-
-
-
-
-    event.currentTarget.style.transform =
-
-
-        "translateY(-4px)";
-
-
-}
-
-
-
-
-
-
-
-
-function handleButtonLeave(event){
-
-
-    event.currentTarget.style.transform =
-
-
-        "";
-
-
-}
-
-/* ============================================================================
-   GUIDED JOURNEY NAVIGATION
-============================================================================ */
-
-
-/*
-   IMPORTANT
-
-   CTM PATH™ uses dynamic component loading.
-
-   The welcome screen is injected after the
-   main application has already loaded.
-
-   Therefore we use event delegation
-   instead of direct button binding.
-
-*/
-
-
-document.addEventListener(
-
-    "click",
-
-    function(event){
-
-
-
-        const startButton =
-
-            event.target.closest(
-
-                "#start-journey"
-
-            );
-
-
-
-
-
-        if(!startButton){
-
-
-            return;
-
-
-        }
-
-
-
-
-
-
-
-        console.log(
-
-            "CTM PATH™ Guided Journey Started"
-
-        );
-
-
-
-
-
-
-
-
-        /*
-           PRIMARY ROUTER
-        */
-
-
-        if(
-
-            typeof loadScreen === "function"
-
-        ){
-
-
-            loadScreen(
-
-                "registration"
-
-            );
-
-
-            return;
-
-
-        }
-
-
-
-
-
-
-
-
-        /*
-           SECONDARY ROUTER
-        */
-
-
-        if(
-
-            typeof navigateTo === "function"
-
-        ){
-
-
-            navigateTo(
-
-                "registration"
-
-            );
-
-
-            return;
-
-
-        }
-
-
-
-
-
-
-
-
-        /*
-           FALLBACK ROUTER
-        */
-
-
-        if(
-
-            typeof showScreen === "function"
-
-        ){
-
-
-            showScreen(
-
-                "registration"
-
-            );
-
-
-            return;
-
-
-        }
-
-
-
-
-
-
-
-
-        /*
-           LAST RESORT
-
-           Keeps browser navigation available
-           if router is not loaded.
-
-        */
-
-
-        window.location.hash =
-
-            "registration";
-
-
-
-
-
-    }
-
+CTM.Pages.Welcome = Object.freeze(
+    new WelcomePage()
 );
 
-
-
-
-
-
-
-
-/* ============================================================================
-   KEYBOARD ACCESSIBILITY
-============================================================================ */
-
-
-document.addEventListener(
-
-    "keydown",
-
-    function(event){
-
-
-
-        if(
-
-            event.key !== "Enter"
-
-        ){
-
-
-            return;
-
-
-        }
-
-
-
-
-
-
-        const activeElement =
-
-            document.activeElement;
-
-
-
-
-
-
-
-        if(
-
-            activeElement
-
-            &&
-
-            activeElement.id ===
-
-                "start-journey"
-
-        ){
-
-
-            activeElement.click();
-
-
-        }
-
-
-
-    }
-
-);
-
-
-
-
-
-
-
-
-/* ============================================================================
-   CLEANUP
-============================================================================ */
-
-
-window.addEventListener(
-
-    "beforeunload",
-
-    function(){
-
-
-
-        if(revealObserver){
-
-
-            revealObserver.disconnect();
-
-
-        }
-
-
-
-    }
-
-);
-
-
-
-
-
-
-
-
-/* ============================================================================
-   END OF FILE
-============================================================================ */
