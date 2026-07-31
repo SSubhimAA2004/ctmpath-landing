@@ -3,7 +3,7 @@
    CTM PATH™ MILLIONAIRES™
 
    File      : app.js
-   Version   : 3.0
+   Version   : 4.0
 
    Status    : PREMIUM PAGE MODULE ORCHESTRATOR
 
@@ -11,20 +11,22 @@
 
    ✓ Bootstrap Application
    ✓ Load Global Header/Footer
-   ✓ Detect Current Journey Page
+   ✓ Detect Current Page URL
    ✓ Load Page HTML
    ✓ Load Page CSS
    ✓ Load Page JavaScript
    ✓ Initialize Page Module
+
 
    Does NOT:
 
    ✗ Business Logic
    ✗ API Calls
    ✗ Database
-   ✗ State Management
+   ✗ Assessment Logic
+   ✗ Report Generation
 
-   ========================================================================== */
+========================================================================== */
 
 
 (function(){
@@ -54,19 +56,13 @@ const APP_CONFIG = {
     folders:{
 
 
-        pages:
-
-            "pages/",
+        pages:"pages/",
 
 
-        css:
-
-            "css/",
+        css:"css/",
 
 
-        js:
-
-            "js/"
+        js:"js/"
 
 
     }
@@ -79,7 +75,7 @@ const APP_CONFIG = {
 
 
 /* ==========================================================================
-   APPLICATION START
+   START APPLICATION
 ========================================================================== */
 
 
@@ -87,9 +83,7 @@ async function startApplication(){
 
 
     console.log(
-
         "CTM PATH™ MILLIONAIRES™ Starting..."
-
     );
 
 
@@ -99,8 +93,14 @@ async function startApplication(){
 
 
     const pageNumber =
+        detectCurrentPage();
 
-        detectPage();
+
+
+    console.log(
+        "Loading Page:",
+        pageNumber
+    );
 
 
 
@@ -108,7 +108,7 @@ async function startApplication(){
 
 
 
-    await loadPageStyle(pageNumber);
+    loadPageStyle(pageNumber);
 
 
 
@@ -121,9 +121,7 @@ async function startApplication(){
 
 
     console.log(
-
         "CTM PATH™ MILLIONAIRES™ Ready."
-
     );
 
 
@@ -134,48 +132,37 @@ async function startApplication(){
 
 
 
-
 /* ==========================================================================
-   DETECT PAGE
+   DETECT CURRENT PAGE
 ========================================================================== */
 
 
-function detectPage(){
+function detectCurrentPage(){
 
 
-    const hash =
-
-        window.location.hash;
-
-
-
-    if(hash){
+    const filename =
+        window.location.pathname
+        .split("/")
+        .pop();
 
 
-        const number =
 
-            hash.replace(
+    const match =
+        filename.match(/page(\d+)/);
 
-                "#page",
 
-                ""
 
-            );
-
+    if(match){
 
 
         const page =
-
-            Number(number);
+            Number(match[1]);
 
 
 
         if(
-
             page >=1 &&
-
             page <= APP_CONFIG.totalPages
-
         ){
 
             return page;
@@ -197,10 +184,8 @@ function detectPage(){
 
 
 
-
-
 /* ==========================================================================
-   GLOBAL COMPONENTS
+   LOAD GLOBAL COMPONENTS
 ========================================================================== */
 
 
@@ -230,7 +215,6 @@ async function loadGlobalComponents(){
 
 
 
-
 /* ==========================================================================
    LOAD PAGE HTML
 ========================================================================== */
@@ -239,23 +223,15 @@ async function loadGlobalComponents(){
 async function loadPage(pageNumber){
 
 
-
     const app =
-
-        document.getElementById(
-
-            "app"
-
-        );
+        document.getElementById("app");
 
 
 
     if(!app){
 
         throw new Error(
-
             "Application container missing"
-
         );
 
     }
@@ -270,12 +246,8 @@ async function loadPage(pageNumber){
 
 
 
-
     const response =
-
         await fetch(file);
-
-
 
 
 
@@ -283,9 +255,7 @@ async function loadPage(pageNumber){
 
 
         throw new Error(
-
             "Unable to load "+file
-
         );
 
 
@@ -295,15 +265,10 @@ async function loadPage(pageNumber){
 
 
     app.innerHTML =
-
         await response.text();
 
 
-
-
 }
-
-
 
 
 
@@ -318,22 +283,16 @@ async function loadPage(pageNumber){
 function loadPageStyle(pageNumber){
 
 
-
     const cssFile =
 
         `${APP_CONFIG.folders.css}page${String(pageNumber).padStart(2,"0")}.css`;
 
 
 
-
     if(
-
         document.querySelector(
-
             `link[href="${cssFile}"]`
-
         )
-
     ){
 
         return;
@@ -342,40 +301,25 @@ function loadPageStyle(pageNumber){
 
 
 
-
     const link =
-
-        document.createElement(
-
-            "link"
-
-        );
+        document.createElement("link");
 
 
 
     link.rel =
-
         "stylesheet";
 
 
 
     link.href =
-
         cssFile;
 
 
 
-    document.head.appendChild(
-
-        link
-
-    );
-
+    document.head.appendChild(link);
 
 
 }
-
-
 
 
 
@@ -390,9 +334,7 @@ function loadPageStyle(pageNumber){
 function loadPageScript(pageNumber){
 
 
-
     return new Promise(
-
         function(resolve,reject){
 
 
@@ -404,74 +346,36 @@ function loadPageScript(pageNumber){
 
 
 
-
-            const existing =
-
-                document.querySelector(
-
-                    `script[src="${jsFile}"]`
-
-                );
-
-
-
-
-
-            if(existing){
-
-                resolve();
-
-                return;
-
-            }
-
-
-
-
-
             const script =
-
-                document.createElement(
-
-                    "script"
-
-                );
-
-
+                document.createElement("script");
 
 
 
             script.src =
-
                 jsFile;
 
 
 
-            script.async = false;
+            script.async =
+                false;
 
 
 
 
             script.onload =
-
                 resolve;
 
 
 
 
             script.onerror =
-
                 function(){
 
 
                     reject(
-
                         new Error(
-
                             "Page JS failed: "+jsFile
-
                         )
-
                     );
 
 
@@ -479,14 +383,7 @@ function loadPageScript(pageNumber){
 
 
 
-
-
-            document.body.appendChild(
-
-                script
-
-            );
-
+            document.body.appendChild(script);
 
 
         }
@@ -501,16 +398,12 @@ function loadPageScript(pageNumber){
 
 
 
-
-
-
 /* ==========================================================================
    INITIALIZE PAGE MODULE
 ========================================================================== */
 
 
 function initializePage(pageNumber){
-
 
 
     const moduleName =
@@ -532,6 +425,12 @@ function initializePage(pageNumber){
         window[moduleName].init();
 
 
+        console.log(
+            moduleName,
+            "Initialized"
+        );
+
+
     }
 
 
@@ -543,35 +442,23 @@ function initializePage(pageNumber){
 
 
 
-
-
-
 /* ==========================================================================
-   ERROR HANDLING
+   ERROR HANDLER
 ========================================================================== */
 
 
 function handleApplicationError(error){
 
 
-
     console.error(
-
         "CTM PATH™ Error:",
-
         error
-
     );
 
 
 
     const app =
-
-        document.getElementById(
-
-            "app"
-
-        );
+        document.getElementById("app");
 
 
 
@@ -582,13 +469,15 @@ function handleApplicationError(error){
 
         <section class="error-screen">
 
-        <h1>
-        Something went wrong.
-        </h1>
+            <h1>
+                Something went wrong.
+            </h1>
 
-        <p>
-        Please refresh and try again.
-        </p>
+
+            <p>
+                Please refresh and try again.
+            </p>
+
 
         </section>
 
@@ -605,8 +494,6 @@ function handleApplicationError(error){
 
 
 
-
-
 /* ==========================================================================
    BOOT
 ========================================================================== */
@@ -614,41 +501,29 @@ function handleApplicationError(error){
 
 document.addEventListener(
 
-    "DOMContentLoaded",
+"DOMContentLoaded",
 
-    async function(){
-
-
-        try{
+async function(){
 
 
-            await startApplication();
+    try{
 
 
-
-        }
-
-
-        catch(error){
+        await startApplication();
 
 
-            handleApplicationError(error);
+    }
+
+    catch(error){
 
 
-        }
-
+        handleApplicationError(error);
 
 
     }
 
 
-);
-
-
-
-
-
-
+});
 
 
 /* ==========================================================================
@@ -659,14 +534,10 @@ document.addEventListener(
 window.CTM_APP = {
 
 
-    start:
-
-        startApplication,
+    start:startApplication,
 
 
-    loadPage:
-
-        loadPage
+    loadPage:loadPage
 
 
 };
