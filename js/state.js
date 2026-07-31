@@ -1,270 +1,273 @@
 
 /* ==========================================================
    CTM PATH™ Guided Journey™
-   Version : 1.0
-   File    : state.js
-   Purpose : Global Application State
+   Foundation v1.0
+   File : state.js
    ========================================================== */
 
 'use strict';
 
-/* ==========================================================
-   STATE MANAGER
-   ========================================================== */
+window.CTM = window.CTM || {};
 
-const State = {
+class State {
 
-    /* ------------------------------------------------------
-       Application State
-       ------------------------------------------------------ */
+    #initialized = false;
 
-    app: {
+    #state = {};
 
-        initialized: false,
+    init() {
 
-        version: '1.0.0',
+        if (this.#initialized) {
+            return;
+        }
 
-        currentPage: 'page01',
+        this.reset();
 
-        previousPage: null,
+        this.#initialized = true;
 
-        language: 'en',
+        CTM.Logger.info("Application state initialized.");
 
-        loading: false
-
-    },
-
-    /* ------------------------------------------------------
-       Journey Progress
-       ------------------------------------------------------ */
-
-    journey: {
-
-        currentStep: 1,
-
-        totalSteps: 7,
-
-        completedSteps: [],
-
-        startedAt: null,
-
-        completedAt: null
-
-    },
-
-    /* ------------------------------------------------------
-       Visitor
-       ------------------------------------------------------ */
-
-    visitor: {
-
-        id: '',
-
-        fullName: '',
-
-        mobile: '',
-
-        email: '',
-
-        city: '',
-
-        state: ''
-
-    },
-
-    /* ------------------------------------------------------
-       Financial Discovery
-       ------------------------------------------------------ */
-
-    discovery: {
-
-        financialConfidence: null,
-
-        monthlyIncome: null,
-
-        dreamIncome: null,
-
-        challenges: []
-
-    },
-
-    /* ------------------------------------------------------
-       Assessment
-       ------------------------------------------------------ */
-
-    assessment: {
-
-        responses: {},
-
-        totalScore: 0,
-
-        completed: false
-
-    },
-
-    /* ------------------------------------------------------
-       Results
-       ------------------------------------------------------ */
-
-    results: {
-
-        lifeAlignment: null,
-
-        diagnosis: null,
-
-        roadmap: null
-
-    },
-
-    /* ------------------------------------------------------
-       Session
-       ------------------------------------------------------ */
-
-    session: {
-
-        token: '',
-
-        lastSaved: null
-
-    },
+    }
 
     /* ======================================================
-       INITIALIZE
-       ====================================================== */
-
-    initialize() {
-
-        this.journey.startedAt = new Date().toISOString();
-
-        this.app.initialized = true;
-
-        console.info('State initialized.');
-
-    },
-
-    /* ======================================================
-       GET VALUE
-       ====================================================== */
-
-    get(path) {
-
-        return path.split('.').reduce(
-
-            (object, key) => object?.[key],
-
-            this
-
-        );
-
-    },
-
-    /* ======================================================
-       SET VALUE
-       ====================================================== */
-
-    set(path, value) {
-
-        const keys = path.split('.');
-
-        const lastKey = keys.pop();
-
-        const target = keys.reduce(
-
-            (object, key) => object[key],
-
-            this
-
-        );
-
-        target[lastKey] = value;
-
-    },
-
-    /* ======================================================
-       UPDATE
-       ====================================================== */
-
-    update(path, values) {
-
-        const target = this.get(path);
-
-        Object.assign(target, values);
-
-    },
-
-    /* ======================================================
-       RESET
+       Reset State
        ====================================================== */
 
     reset() {
 
-        this.app.currentPage = 'page01';
+        this.#state = {
 
-        this.app.previousPage = null;
+            app: {
 
-        this.journey.currentStep = 1;
+                initialized: false,
 
-        this.journey.completedSteps = [];
+                currentRoute: CTM.Config.APP.DEFAULT_ROUTE,
 
-        this.discovery = {
+                previousRoute: null,
 
-            financialConfidence: null,
+                language: CTM.Config.APP.LANGUAGE
 
-            monthlyIncome: null,
+            },
 
-            dreamIncome: null,
+            visitor: {
 
-            challenges: []
+                id: "",
+
+                fullName: "",
+
+                mobile: "",
+
+                email: "",
+
+                city: "",
+
+                district: "",
+
+                state: ""
+
+            },
+
+            journey: {
+
+                currentStep: 1,
+
+                completedSteps: [],
+
+                startedAt: null,
+
+                completedAt: null
+
+            },
+
+            discovery: {
+
+            },
+
+            assessment: {
+
+                responses: {},
+
+                totalScore: 0,
+
+                completed: false
+
+            },
+
+            results: {
+
+                diagnosis: null,
+
+                roadmap: null,
+
+                alignment: null
+
+            },
+
+            session: {
+
+                token: "",
+
+                lastSaved: null
+
+            }
 
         };
 
-        this.assessment.responses = {};
-
-        this.assessment.totalScore = 0;
-
-        this.assessment.completed = false;
-
-        this.results.lifeAlignment = null;
-
-        this.results.diagnosis = null;
-
-        this.results.roadmap = null;
-
-    },
+    }
 
     /* ======================================================
-       COMPLETE STEP
+       Generic Get
        ====================================================== */
 
-    completeStep(step) {
+    get(section) {
 
-        if (
+        return structuredClone(this.#state[section]);
 
-            !this.journey.completedSteps.includes(step)
+    }
 
-        ) {
+    /* ======================================================
+       Generic Set
+       ====================================================== */
 
-            this.journey.completedSteps.push(step);
+    set(section, value) {
+
+        if (!(section in this.#state)) {
+
+            throw new Error(
+
+                `Unknown state section: ${section}`
+
+            );
 
         }
 
-        this.journey.currentStep = step + 1;
+        this.#state[section] = structuredClone(value);
 
-    },
+    }
 
     /* ======================================================
-       EXPORT
+       Generic Update
        ====================================================== */
 
-    export() {
+    update(section, values) {
 
-        return JSON.parse(
+        if (!(section in this.#state)) {
 
-            JSON.stringify(this)
+            throw new Error(
+
+                `Unknown state section: ${section}`
+
+            );
+
+        }
+
+        Object.assign(
+
+            this.#state[section],
+
+            structuredClone(values)
 
         );
 
     }
 
-};
+    /* ======================================================
+       Snapshot
+       ====================================================== */
+
+    snapshot() {
+
+        return structuredClone(this.#state);
+
+    }
+
+    /* ======================================================
+       Domain Methods
+       ====================================================== */
+
+    getApp() {
+
+        return this.get("app");
+
+    }
+
+    getVisitor() {
+
+        return this.get("visitor");
+
+    }
+
+    setVisitor(visitor) {
+
+        this.set("visitor", visitor);
+
+    }
+
+    getJourney() {
+
+        return this.get("journey");
+
+    }
+
+    setJourney(journey) {
+
+        this.set("journey", journey);
+
+    }
+
+    getAssessment() {
+
+        return this.get("assessment");
+
+    }
+
+    updateAssessment(values) {
+
+        this.update(
+
+            "assessment",
+
+            values
+
+        );
+
+    }
+
+    getResults() {
+
+        return this.get("results");
+
+    }
+
+    setResults(results) {
+
+        this.set(
+
+            "results",
+
+            results
+
+        );
+
+    }
+
+    /* ======================================================
+       Destroy
+       ====================================================== */
+
+    destroy() {
+
+        this.#state = {};
+
+        this.#initialized = false;
+
+    }
+
+}
+
+CTM.State = Object.freeze(
+
+    new State()
+
+);
 
