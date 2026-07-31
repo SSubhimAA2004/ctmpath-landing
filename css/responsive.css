@@ -1,153 +1,759 @@
 
-/* ==========================================================
-   CTM PATH™ Guided Journey™
-   Responsive v1.0
-   File : responsive.css
-   ========================================================== */
+/* ==========================================================================
+   CTM PATH™ MILLIONAIRES™
 
-/* ==========================================================
-   Large Desktop
-   ========================================================== */
+   FILE:
+   responsive.css
 
-@media (max-width: 1440px) {
+   VERSION:
+   10.0
 
-    :root {
+   PURPOSE:
 
-        --container-width: 1200px;
+   Global responsive adaptation layer.
 
-    }
+   Controls:
 
-}
+   ✓ Mobile typography
+   ✓ Tablet scaling
+   ✓ Global containers
+   ✓ Header adaptation
+   ✓ Footer adaptation
+   ✓ Touch optimization
+   ✓ Accessibility
 
-/* ==========================================================
-   Desktop
-   ========================================================== */
+   Does NOT control:
 
-@media (max-width: 1200px) {
+   ✗ Page-specific sections
+   ✗ Page-specific cards
+   ✗ Page-specific layouts
 
-    :root {
+========================================================================== */
 
-        --container-width: 1080px;
 
-    }
 
-}
+/* ==========================================================================
+   GLOBAL RESPONSIVE FOUNDATION
+========================================================================== */
 
-/* ==========================================================
-   Laptop / Tablet Landscape
-   ========================================================== */
 
-@media (max-width: 992px) {
+*,
+*::before,
+*::after {
 
-    :root {
 
-        --container-width: 960px;
+    box-sizing:
 
-    }
+        border-box;
 
-}
-
-/* ==========================================================
-   Tablet
-   ========================================================== */
-
-@media (max-width: 768px) {
-
-    :root {
-
-        --container-width: 100%;
-
-        --space-6: 1.75rem;
-        --space-7: 2.5rem;
-        --space-8: 3rem;
-
-        --font-size-4xl: 2.5rem;
-        --font-size-3xl: 2rem;
-
-    }
-
-    .container {
-
-        width: calc(100% - 32px);
-
-    }
 
 }
 
-/* ==========================================================
-   Mobile
-   ========================================================== */
 
-@media (max-width: 576px) {
 
-    :root {
 
-        --font-size-4xl: 2rem;
-        --font-size-3xl: 1.75rem;
-        --font-size-2xl: 1.5rem;
+html {
 
-    }
 
-    .container {
+    scroll-behavior:
 
-        width: calc(100% - 24px);
+        smooth;
 
-    }
 
 }
 
-/* ==========================================================
-   Small Mobile
-   ========================================================== */
 
-@media (max-width: 360px) {
 
-    html {
 
-        font-size: 15px;
+body {
 
-    }
 
-}
+    margin:
 
-/* ==========================================================
-   Reduced Motion
-   ========================================================== */
+        0;
 
-@media (prefers-reduced-motion: reduce) {
 
-    *,
-    *::before,
-    *::after {
+    overflow-x:
 
-        animation: none !important;
-        transition: none !important;
-        scroll-behavior: auto !important;
+        hidden;
 
-    }
+
+    -webkit-font-smoothing:
+
+        antialiased;
+
+
+    text-rendering:
+
+        optimizeLegibility;
+
 
 }
 
-/* ==========================================================
-   Print
-   ========================================================== */
+
+
+
+
+img {
+
+
+    max-width:
+
+        100%;
+
+
+    height:
+
+        auto;
+
+
+    display:
+
+        block;
+
+
+}
+
+
+
+
+
+button,
+a {
+
+
+    -webkit-tap-highlight-color:
+
+        transparent;
+
+
+}
+
+
+
+
+
+.container {
+
+
+    width:
+
+        min(1200px, 90%);
+
+
+    margin:
+
+        0 auto;
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   LARGE TABLET / SMALL LAPTOP
+   1200px
+========================================================================== */
+
+
+@media(max-width:1200px){
+
+
+
+.container {
+
+
+    width:
+
+        92%;
+
+
+}
+
+
+
+
+
+}
+
+
+
+ 
+/* ==========================================================================
+   TABLET MODE
+   992px
+========================================================================== */
+
+
+@media(max-width:992px){
+
+
+
+body {
+
+
+    font-size:
+
+        16px;
+
+
+}
+
+
+
+
+
+h1 {
+
+
+    line-height:
+
+        1.15;
+
+
+}
+
+
+
+
+
+h2 {
+
+
+    line-height:
+
+        1.25;
+
+
+}
+
+
+
+
+
+.container {
+
+
+    width:
+
+        92%;
+
+
+}
+
+
+
+
+
+}
+
+
+
+
+/* ==========================================================================
+   MOBILE MODE
+   768px
+========================================================================== */
+
+
+@media(max-width:768px){
+
+
+
+/* ----------------------------------
+   Typography
+---------------------------------- */
+
+
+body {
+
+
+    font-size:
+
+        15px;
+
+
+}
+
+
+
+
+h1 {
+
+
+    font-size:
+
+        clamp(
+
+            2rem,
+
+            8vw,
+
+            3rem
+
+        );
+
+
+}
+
+
+
+
+
+h2 {
+
+
+    font-size:
+
+        clamp(
+
+            1.5rem,
+
+            6vw,
+
+            2.2rem
+
+        );
+
+
+}
+
+
+
+
+
+h3 {
+
+
+    font-size:
+
+        1.25rem;
+
+
+}
+
+
+
+
+
+p {
+
+
+    line-height:
+
+        1.8;
+
+
+}
+
+
+
+
+
+
+/* ----------------------------------
+   Containers
+---------------------------------- */
+
+
+.container {
+
+
+    width:
+
+        calc(100% - 32px);
+
+
+}
+
+
+
+
+
+
+/* ----------------------------------
+   Sections
+---------------------------------- */
+
+
+section {
+
+
+    padding-left:
+
+        0;
+
+
+    padding-right:
+
+        0;
+
+
+}
+
+
+
+
+
+/* ----------------------------------
+   Buttons
+---------------------------------- */
+
+
+button,
+.ctm-button,
+.journey-button {
+
+
+    min-height:
+
+        48px;
+
+
+    padding:
+
+        14px 24px;
+
+
+}
+
+
+
+
+
+
+}
+
+
+
+/* ==========================================================================
+   SMALL MOBILE
+   480px
+========================================================================== */
+
+
+@media(max-width:480px){
+
+
+
+body {
+
+
+    font-size:
+
+        14px;
+
+
+}
+
+
+
+
+
+h1 {
+
+
+    font-size:
+
+        2rem;
+
+
+}
+
+
+
+
+
+h2 {
+
+
+    font-size:
+
+        1.6rem;
+
+
+}
+
+
+
+
+
+.container {
+
+
+    width:
+
+        calc(100% - 24px);
+
+
+}
+
+
+
+
+
+}
+
+
+
+
+/* ==========================================================================
+   HEADER MOBILE SYSTEM
+========================================================================== */
+
+
+@media(max-width:768px){
+
+
+
+.global-header {
+
+
+    padding:
+
+        20px;
+
+
+}
+
+
+
+
+
+.header-brand {
+
+
+    flex-direction:
+
+        column;
+
+
+    align-items:
+
+        flex-start;
+
+
+}
+
+
+
+
+
+.header-title {
+
+
+    font-size:
+
+        1.8rem;
+
+
+}
+
+
+
+
+
+.header-subtitle {
+
+
+    font-size:
+
+        .8rem;
+
+
+}
+
+
+
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   FOOTER MOBILE SYSTEM
+========================================================================== */
+
+
+@media(max-width:768px){
+
+
+
+.footer-container {
+
+
+    grid-template-columns:
+
+        1fr;
+
+
+    text-align:
+
+        center;
+
+
+}
+
+
+
+
+
+.footer-contact {
+
+
+    justify-content:
+
+        center;
+
+
+}
+
+
+
+
+
+.footer-bottom {
+
+
+    font-size:
+
+        .8rem;
+
+
+}
+
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   ACCESSIBILITY
+========================================================================== */
+
+
+@media(prefers-reduced-motion:reduce){
+
+
+
+* {
+
+
+    animation-duration:
+
+        0.01ms !important;
+
+
+    transition-duration:
+
+        0.01ms !important;
+
+
+    scroll-behavior:
+
+        auto !important;
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   TOUCH DEVICE OPTIMIZATION
+========================================================================== */
+
+
+@media(pointer:coarse){
+
+
+
+a,
+button {
+
+
+    cursor:
+
+        default;
+
+
+}
+
+
+
+
+
+button {
+
+
+    min-height:
+
+        48px;
+
+
+}
+
+
+
+}
+
+
+
+
+/* ==========================================================================
+   PRINT FRIENDLY
+========================================================================== */
+
 
 @media print {
 
-    body {
 
-        background: white;
-        color: black;
 
-    }
+body {
 
-    #loader-container,
-    #toast-container,
-    #modal-container {
 
-        display: none !important;
+    background:
 
-    }
+        white;
+
+
+    color:
+
+        black;
+
+
+}
+
+
+
+
+
+.no-print {
+
+
+    display:
+
+        none;
+
+
+}
+
+
 
 }
 
