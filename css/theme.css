@@ -1,782 +1,165 @@
 
-/* ==========================================================================
+/* ==========================================================
    CTM PATH™ Guided Journey™
+   Version : 1.0
+   File    : theme.css
+   Purpose : Premium Visual Theme
+   ========================================================== */
 
-   File        : css/theme.css
-   Version     : 4.0
+/* ==========================================================
+   PAGE BACKGROUND
+   ========================================================== */
 
-   Status      : 🔒 PREMIUM DESIGN TOKENS
+body {
 
-   Purpose
-   -------
-   Global visual language for the CTM PATH™ Guided Journey™.
+    background:
+        radial-gradient(
+            circle at top,
+            #0B2A4D 0%,
+            #071A2F 45%,
+            #04101F 100%
+        );
 
-   Responsibilities
+}
 
-   ✓ Brand Colours
-   ✓ Typography Colours
-   ✓ Surface Tokens
-   ✓ Border System
-   ✓ Shadow System
-   ✓ Glow System
-   ✓ Radius System
-   ✓ Transition System
-   ✓ Spacing Tokens
+/* ==========================================================
+   TYPOGRAPHY
+   ========================================================== */
 
-   Does NOT
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 
-   ✗ Layout
-   ✗ Components
-   ✗ Page Logic
+    font-weight: 700;
 
-========================================================================== */
+    color: var(--color-text);
 
+    line-height: 1.2;
 
+}
 
+h1 {
 
+    font-size: clamp(2.6rem, 5vw, 4.5rem);
 
-/* ==========================================================================
-   ROOT DESIGN TOKENS
-========================================================================== */
+}
 
-:root{
+h2 {
 
+    font-size: clamp(2rem, 4vw, 3rem);
 
+}
 
+h3 {
 
-    /* ======================================================
-       BRAND COLOURS
-    ====================================================== */
+    font-size: 1.75rem;
 
-    --ctm-navy:
+}
 
-        #081C3A;
+p {
 
-    --ctm-navy-deep:
+    color: var(--color-text-secondary);
 
-        #06152D;
+    font-size: 1.05rem;
 
-    --ctm-navy-soft:
+    line-height: 1.8;
 
-        #0D2650;
+}
 
-    --ctm-blue:
+/* ==========================================================
+   SECTION
+   ========================================================== */
 
-        #12376E;
+section {
 
+    padding-block: 80px;
 
+}
 
+/* ==========================================================
+   PREMIUM CARD
+   ========================================================== */
 
+.card {
 
-    /* ======================================================
-       ACCENT SYSTEM
-    ====================================================== */
-
-    --ctm-teal:
-
-        #23D4C8;
-
-    --ctm-teal-soft:
-
-        #4EF7EC;
-
-    --ctm-teal-light:
-
-        #7BEDE4;
-
-    --ctm-teal-highlight:
-
-        #B8FFF8;
-
-
-
-
-
-    --ctm-gold:
-
-        #C9A227;
-
-    --ctm-gold-soft:
-
-        #E2C35B;
-
-
-
-
-
-    --ctm-white:
-
-        #FFFFFF;
-
-    --ctm-ivory:
-
-        #FAF8F5;
-
-
-
-
-
-    /* ======================================================
-       BACKGROUND SYSTEM
-    ====================================================== */
-
-    --bg-primary:
-
-        var(--ctm-navy);
-
-    --bg-secondary:
-
-        #0C2145;
-
-    --bg-tertiary:
-
-        #12335E;
-
-    --bg-card:
-
-        rgba(255,255,255,.045);
-
-    --bg-card-hover:
-
-        rgba(255,255,255,.065);
-
-    --bg-glass:
-
-        rgba(255,255,255,.035);
-
-
-
-
-
-    /* ======================================================
-       TYPOGRAPHY COLOURS
-    ====================================================== */
-
-    --text-primary:
-
-        var(--ctm-ivory);
-
-    --text-heading:
-
-        #FFFFFF;
-
-    --text-title:
-
-        #F2F7FB;
-
-    --text-body:
-
-        #DCE7F1;
-
-    --text-secondary:
-
-        #C6D6E7;
-
-    --text-support:
-
-        #B8C9D8;
-
-    --text-muted:
-
-        #95A8BC;
-
-    --text-disabled:
-
-        #74889C;
-
-
-
-
-
-    /* ======================================================
-       LINK COLOURS
-    ====================================================== */
-
-    --link:
-
-        var(--ctm-teal-soft);
-
-    --link-hover:
-
-        var(--ctm-teal-highlight);
-
-    --link-active:
-
-        var(--ctm-teal);
-
-
-
-
-
-    /* ======================================================
-       BORDER SYSTEM
-    ====================================================== */
-
-    --border-soft:
-
-        rgba(255,255,255,.06);
-
-    --border-light:
-
-        rgba(255,255,255,.10);
-
-    --border-medium:
-
-        rgba(255,255,255,.16);
-
-    --border-accent:
-
-        rgba(35,212,200,.24);
-
-    --border-gold:
-
-        rgba(201,162,39,.28);
-
-    /* ======================================================
-       DIVIDER SYSTEM
-    ====================================================== */
-
-    --divider-soft:
-
-        rgba(255,255,255,.05);
-
-    --divider-medium:
-
-        rgba(255,255,255,.08);
-
-    --divider-strong:
-
-        rgba(255,255,255,.14);
-
-
-
-
-
-    /* ======================================================
-       SURFACE SYSTEM
-    ====================================================== */
-
-    --surface-glass:
-
-        rgba(255,255,255,.045);
-
-    --surface-glass-hover:
-
-        rgba(255,255,255,.065);
-
-    --surface-overlay:
+    background:
 
         linear-gradient(
 
             180deg,
 
-            rgba(255,255,255,.045),
+            rgba(255,255,255,.08),
 
-            rgba(255,255,255,.018)
+            rgba(255,255,255,.04)
 
         );
 
-
-
-
-
-    /* ======================================================
-       SHADOW SYSTEM
-    ====================================================== */
-
-    --shadow-xs:
-
-        0 4px 12px rgba(0,0,0,.14);
-
-    --shadow-sm:
-
-        0 10px 26px rgba(0,0,0,.18);
-
-    --shadow-md:
-
-        0 18px 46px rgba(0,0,0,.26);
-
-    --shadow-lg:
-
-        0 28px 72px rgba(0,0,0,.34);
-
-    --shadow-xl:
-
-        0 40px 96px rgba(0,0,0,.42);
-
-
-
-
-
-    /* Backward Compatibility */
-
-    --shadow-soft:
-
-        var(--shadow-md);
-
-    --shadow-gold:
-
-        0 0 42px rgba(201,162,39,.18);
-
-    --shadow-teal:
-
-        0 0 42px rgba(35,212,200,.22);
-
-
-
-
-
-    /* ======================================================
-       GLOW SYSTEM
-    ====================================================== */
-
-    --glow-soft:
-
-        0 0 36px rgba(35,212,200,.08);
-
-    --glow-medium:
-
-        0 0 60px rgba(35,212,200,.14);
-
-    --glow-strong:
-
-        0 0 86px rgba(35,212,200,.20);
-
-
-
-
-
-    /* ======================================================
-       RADIUS SYSTEM
-    ====================================================== */
-
-    --radius-xs:
-
-        8px;
-
-    --radius-sm:
-
-        12px;
-
-    --radius-md:
-
-        24px;
-
-    --radius-lg:
-
-        36px;
-
-    --radius-xl:
-
-        48px;
-
-    --radius-pill:
-
-        999px;
-
-
-
-
-
-    /* ======================================================
-       SPACING SYSTEM
-    ====================================================== */
-
-    --space-1:
-
-        .25rem;
-
-    --space-2:
-
-        .50rem;
-
-    --space-3:
-
-        .75rem;
-
-    --space-4:
-
-        1rem;
-
-    --space-5:
-
-        1.5rem;
-
-    --space-6:
-
-        2rem;
-
-    --space-7:
-
-        3rem;
-
-    --space-8:
-
-        4rem;
-
-    --space-9:
-
-        5rem;
-
-    --space-10:
-
-        6rem;
-
-    /* ======================================================
-       TRANSITIONS
-    ====================================================== */
-
-    --transition-fast:
-
-        .20s ease;
-
-    --transition-normal:
-
-        .35s ease;
-
-    --transition-slow:
-
-        .60s ease;
-
-    --transition-premium:
-
-        .80s cubic-bezier(.22,1,.36,1);
-
-}
-
-
-
-
-
-/* ==========================================================================
-   GLOBAL THEME APPLICATION
-========================================================================== */
-
-html{
-
-    scroll-behavior:smooth;
-
-}
-
-
-
-body{
-
-    background:
-
-        var(--bg-primary);
-
-    color:
-
-        var(--text-primary);
-
-    -webkit-font-smoothing:
-
-        antialiased;
-
-    -moz-osx-font-smoothing:
-
-        grayscale;
-
-    text-rendering:
-
-        optimizeLegibility;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   TYPOGRAPHY COLOUR UTILITIES
-========================================================================== */
-
-.text-primary{
-
-    color:
-
-        var(--text-primary);
-
-}
-
-
-
-.text-heading{
-
-    color:
-
-        var(--text-heading);
-
-}
-
-
-
-.text-title{
-
-    color:
-
-        var(--text-title);
-
-}
-
-
-
-.text-body{
-
-    color:
-
-        var(--text-body);
-
-}
-
-
-
-.text-secondary{
-
-    color:
-
-        var(--text-secondary);
-
-}
-
-
-
-.text-support{
-
-    color:
-
-        var(--text-support);
-
-}
-
-
-
-.text-muted{
-
-    color:
-
-        var(--text-muted);
-
-}
-
-
-
-.text-gold{
-
-    color:
-
-        var(--ctm-gold-soft);
-
-}
-
-
-
-.text-teal{
-
-    color:
-
-        var(--ctm-teal);
-
-}
-
-
-
-.text-accent{
-
-    color:
-
-        var(--ctm-teal-soft);
-
-}
-
-/* ==========================================================================
-   PREMIUM SURFACES
-========================================================================== */
-
-.surface{
-
-    background:
-
-        var(--surface-glass);
-
     border:
 
-        1px solid var(--border-soft);
+        1px solid
+
+        rgba(255,255,255,.08);
+
+    border-radius:
+
+        var(--radius-lg);
 
     backdrop-filter:
 
         blur(14px);
 
-    -webkit-backdrop-filter:
+    box-shadow:
 
-        blur(14px);
+        var(--shadow-md);
+
+    padding:
+
+        32px;
 
 }
 
+/* ==========================================================
+   GLASS PANEL
+   ========================================================== */
 
-
-
-
-.surface-elevated{
+.glass {
 
     background:
 
-        var(--surface-overlay);
+        rgba(255,255,255,.06);
+
+    backdrop-filter:
+
+        blur(18px);
 
     border:
 
-        1px solid var(--border-light);
-
-    box-shadow:
-
-        var(--shadow-sm);
+        1px solid rgba(255,255,255,.10);
 
 }
 
+/* ==========================================================
+   PRIMARY BUTTON
+   ========================================================== */
 
+.btn-primary {
 
+    display: inline-flex;
 
+    align-items: center;
 
-/* ==========================================================================
-   PREMIUM CARD SYSTEM
-========================================================================== */
+    justify-content: center;
 
-.premium-card{
+    gap: 12px;
 
-    background:
+    min-width: 220px;
 
-        linear-gradient(
+    padding:
 
-            145deg,
-
-            rgba(255,255,255,.06),
-
-            rgba(255,255,255,.02)
-
-        );
-
-    border:
-
-        1px solid var(--border-gold);
-
-    border-radius:
-
-        var(--radius-md);
-
-    box-shadow:
-
-        var(--shadow-soft);
-
-    transition:
-
-        transform var(--transition-normal),
-
-        box-shadow var(--transition-normal),
-
-        border-color var(--transition-normal);
-
-}
-
-
-
-
-
-.premium-card:hover{
-
-    transform:
-
-        translateY(-6px);
-
-    border-color:
-
-        var(--border-accent);
-
-    box-shadow:
-
-        var(--shadow-lg),
-
-        var(--glow-soft);
-
-}
-
-
-
-
-
-/* ==========================================================================
-   GLOW UTILITIES
-========================================================================== */
-
-.gold-glow{
-
-    box-shadow:
-
-        var(--shadow-gold);
-
-}
-
-
-
-
-
-.teal-glow{
-
-    box-shadow:
-
-        var(--shadow-teal);
-
-}
-
-
-
-
-
-.glow-soft{
-
-    box-shadow:
-
-        var(--glow-soft);
-
-}
-
-
-
-
-
-.glow-medium{
-
-    box-shadow:
-
-        var(--glow-medium);
-
-}
-
-
-
-
-
-.glow-strong{
-
-    box-shadow:
-
-        var(--glow-strong);
-
-}
-
-/* ==========================================================================
-   PREMIUM BUTTON THEME
-========================================================================== */
-
-.btn-primary{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:.65rem;
+        16px 32px;
 
     background:
 
@@ -784,342 +167,225 @@ body{
 
             135deg,
 
-            var(--ctm-teal),
+            var(--color-primary),
 
-            #1298D8
+            #1A72D1
 
         );
 
     color:
 
-        var(--ctm-white);
-
-    border:
-
-        none;
+        #FFFFFF;
 
     border-radius:
 
-        var(--radius-pill);
-
-    box-shadow:
-
-        0 16px 42px rgba(35,212,200,.26);
-
-    transition:
-
-        transform var(--transition-normal),
-
-        box-shadow var(--transition-normal),
-
-        filter var(--transition-normal);
-
-}
-
-
-
-
-
-.btn-primary:hover{
-
-    transform:
-
-        translateY(-3px);
-
-    filter:
-
-        brightness(1.05);
-
-    box-shadow:
-
-        0 24px 58px rgba(35,212,200,.36);
-
-}
-
-
-
-
-
-.btn-primary:active{
-
-    transform:
-
-        translateY(-1px);
-
-}
-
-
-
-
-
-.btn-secondary{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:.65rem;
-
-    background:
-
-        transparent;
-
-    color:
-
-        var(--ctm-gold-soft);
-
-    border:
-
-        1px solid var(--ctm-gold);
-
-    border-radius:
-
-        var(--radius-pill);
-
-    transition:
-
-        all var(--transition-normal);
-
-}
-
-
-
-
-
-.btn-secondary:hover{
-
-    background:
-
-        rgba(201,162,39,.08);
-
-    border-color:
-
-        var(--ctm-gold-soft);
-
-}
-
-
-
-
-
-/* ==========================================================================
-   DIVIDER SYSTEM
-========================================================================== */
-
-.gold-divider{
-
-    width:84px;
-
-    height:2px;
-
-    margin:28px auto;
-
-    background:
-
-        linear-gradient(
-
-            90deg,
-
-            transparent,
-
-            var(--ctm-gold),
-
-            transparent
-
-        );
-
-}
-
-
-
-
-
-.teal-divider{
-
-    width:84px;
-
-    height:2px;
-
-    margin:28px auto;
-
-    background:
-
-        linear-gradient(
-
-            90deg,
-
-            transparent,
-
-            var(--ctm-teal),
-
-            transparent
-
-        );
-
-}
-
-/* ==========================================================================
-   BRAND TYPOGRAPHY
-========================================================================== */
-
-.brand-title{
-
-    color:
-
-        var(--ctm-ivory);
+        999px;
 
     font-weight:
 
         700;
 
-    letter-spacing:
+    transition:
 
-        .08em;
+        var(--transition-normal);
 
-}
+    box-shadow:
 
-
-
-
-
-.brand-subtitle{
-
-    color:
-
-        var(--ctm-gold-soft);
-
-    letter-spacing:
-
-        .24em;
-
-    text-transform:
-
-        uppercase;
+        var(--shadow-md);
 
 }
 
+.btn-primary:hover {
 
+    transform:
 
+        translateY(-3px);
 
+    box-shadow:
 
-/* ==========================================================================
-   GLOBAL LINK STYLE
-========================================================================== */
+        var(--shadow-lg);
 
-a{
+}
+
+/* ==========================================================
+   SECONDARY BUTTON
+   ========================================================== */
+
+.btn-secondary {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+
+        16px 32px;
+
+    border:
+
+        1px solid rgba(255,255,255,.20);
+
+    border-radius:
+
+        999px;
 
     color:
 
-        inherit;
-
-    text-decoration:
-
-        none;
+        var(--color-text);
 
     transition:
 
-        color var(--transition-fast),
-
-        opacity var(--transition-fast);
+        var(--transition-normal);
 
 }
 
-
-
-
-
-a:hover{
-
-    color:
-
-        var(--link);
-
-}
-
-
-
-
-
-a:focus-visible{
-
-    outline:
-
-        2px solid var(--ctm-teal-soft);
-
-    outline-offset:
-
-        3px;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   SELECTION
-========================================================================== */
-
-::selection{
+.btn-secondary:hover {
 
     background:
 
-        rgba(35,212,200,.30);
-
-    color:
-
-        var(--ctm-white);
+        rgba(255,255,255,.08);
 
 }
 
+/* ==========================================================
+   INPUTS
+   ========================================================== */
 
+.input {
 
+    width: 100%;
 
+    padding:
 
-::-moz-selection{
+        16px 18px;
 
     background:
 
-        rgba(35,212,200,.30);
+        rgba(255,255,255,.05);
 
     color:
 
-        var(--ctm-white);
+        var(--color-text);
+
+    border:
+
+        1px solid rgba(255,255,255,.12);
+
+    border-radius:
+
+        var(--radius-md);
+
+    transition:
+
+        var(--transition-fast);
 
 }
 
+.input:focus {
 
+    border-color:
 
+        var(--color-primary);
 
+    box-shadow:
 
-/* ==========================================================================
-   ACCESSIBILITY
-========================================================================== */
+        0 0 0 4px rgba(14,92,173,.20);
 
-@media (prefers-reduced-motion:reduce){
+}
 
-    *,
+/* ==========================================================
+   LABELS
+   ========================================================== */
 
-    *::before,
+label {
 
-    *::after{
+    display: block;
 
-        animation:none !important;
+    margin-bottom: 10px;
 
-        transition:none !important;
+    font-weight: 600;
 
-        scroll-behavior:auto !important;
+    color: var(--color-text);
+
+}
+
+/* ==========================================================
+   DIVIDERS
+   ========================================================== */
+
+.divider {
+
+    width: 100%;
+
+    height: 1px;
+
+    background:
+
+        rgba(255,255,255,.08);
+
+}
+
+/* ==========================================================
+   STATUS COLORS
+   ========================================================== */
+
+.success {
+
+    color:
+
+        var(--color-success);
+
+}
+
+.warning {
+
+    color:
+
+        var(--color-warning);
+
+}
+
+.error {
+
+    color:
+
+        var(--color-danger);
+
+}
+
+/* ==========================================================
+   FADE-IN ANIMATION
+   ========================================================== */
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(24px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
 
     }
 
 }
 
+.fade-in {
 
+    animation:
 
+        fadeIn
 
+        .6s ease-out;
 
-/* ==========================================================================
-   END OF FILE
-========================================================================== */
+}
+
