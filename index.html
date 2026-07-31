@@ -4,24 +4,28 @@
 
 <head>
 
-    <!-- ==========================================================
+    <!-- ======================================================
          CTM PATH™ Guided Journey™
-         Version : 1.0
-         File    : index.html
-         Purpose : Application Entry Point
-         ========================================================== -->
+         Foundation v1.0
+         ====================================================== -->
 
     <meta charset="UTF-8">
 
-    <meta http-equiv="X-UA-Compatible"
-          content="IE=edge">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="CTM PATH™ Guided Journey™ — Every Dream Has A Path™">
 
-    <!-- ==========================================================
-         SEO
-         ========================================================== -->
+    <meta
+        name="theme-color"
+        content="#0F172A">
+
+    <meta
+        name="color-scheme"
+        content="dark">
 
     <title>
 
@@ -29,125 +33,93 @@
 
     </title>
 
-    <meta name="description"
-          content="CTM PATH™ Guided Journey™ — Every Dream Has A Path™">
+    <!-- ======================================================
+         Stylesheets
+         ====================================================== -->
 
-    <meta name="theme-color"
-          content="#071A2F">
+    <link
+        rel="stylesheet"
+        href="css/foundation.css">
 
-    <!-- ==========================================================
-         Favicon
-         ========================================================== -->
+    <link
+        rel="stylesheet"
+        href="css/theme.css">
 
-    <link rel="icon"
-          href="assets/logo/CTM_Mark.svg"
-          type="image/svg+xml">
-
-    <!-- ==========================================================
-         Foundation CSS
-         ========================================================== -->
-
-    <link rel="stylesheet"
-          href="css/foundation.css">
-
-    <link rel="stylesheet"
-          href="css/theme.css">
-
-    <link rel="stylesheet"
-          href="css/responsive.css">
-
-    <!-- ==========================================================
-         Shared Component CSS
-         ========================================================== -->
-
-    <link rel="stylesheet"
-          href="css/header.css">
-
-    <link rel="stylesheet"
-          href="css/footer.css">
-
-    <!-- ==========================================================
-         Page CSS
-         ========================================================== -->
-
-    <link rel="stylesheet"
-          href="css/welcome.css">
+    <link
+        rel="stylesheet"
+        href="css/responsive.css">
 
 </head>
 
 <body>
 
-    <!-- ==========================================================
-         Loader
-         ========================================================== -->
+    <!-- ======================================================
+         Global Loader
+         ====================================================== -->
 
-    <div id="loader-container"
-         class="hidden"></div>
+    <div
+        id="loader-container"
+        aria-hidden="true">
+    </div>
 
-    <!-- ==========================================================
-         Modal
-         ========================================================== -->
+    <!-- ======================================================
+         Global Modal
+         ====================================================== -->
 
-    <div id="modal-container"
-         class="hidden"></div>
+    <div
+        id="modal-container"
+        aria-hidden="true">
+    </div>
 
-    <!-- ==========================================================
-         Toast
-         ========================================================== -->
+    <!-- ======================================================
+         Global Toast
+         ====================================================== -->
 
-    <div id="toast-container"
-         class="hidden"></div>
+    <div
+        id="toast-container"
+        aria-live="polite"
+        aria-atomic="true">
+    </div>
 
-    <!-- ==========================================================
-         Application Shell
-         ========================================================== -->
+    <!-- ======================================================
+         Permanent Application Shell
+         ====================================================== -->
 
     <div id="application-shell">
 
-        <!-- ==============================================
-             Persistent Header
-             ============================================== -->
-
-        <header id="header-container">
-
+        <header
+            id="header-container"
+            role="banner">
         </header>
 
-        <!-- ==============================================
-             Persistent Progress
-             ============================================== -->
-
-        <section id="progress-container">
-
+        <section
+            id="progress-container"
+            aria-label="Journey Progress">
         </section>
 
-        <!-- ==============================================
-             Dynamic Page Area
-             Only this section changes.
-             ============================================== -->
-
-        <main id="app">
-
+        <main
+            id="app"
+            role="main"
+            tabindex="-1">
         </main>
 
-        <!-- ==============================================
-             Persistent Footer
-             ============================================== -->
-
-        <footer id="footer-container">
-
+        <footer
+            id="footer-container"
+            role="contentinfo">
         </footer>
 
     </div>
 
-    <!-- ==========================================================
-         Configuration
-         ========================================================== -->
+    <!-- ======================================================
+         JavaScript
+         Load Order MUST NEVER change.
+         ====================================================== -->
 
-    <script src="data/config.js"></script>
+    <script src="js/config.js"></script>
 
-    <!-- ==========================================================
-         Core
-         ========================================================== -->
+    <script src="js/logger.js"></script>
+
+    <script src="js/events.js"></script>
 
     <script src="js/state.js"></script>
 
@@ -157,21 +129,13 @@
 
     <script src="js/api.js"></script>
 
-    <script src="js/ui.js"></script>
+    <script src="js/services.js"></script>
 
-    <script src="js/navigation.js"></script>
+    <script src="js/ui.js"></script>
 
     <script src="js/router.js"></script>
 
-    <!-- ==========================================================
-         Page Controllers
-         ========================================================== -->
-
-    <script src="js/welcome.js"></script>
-
-    <!-- ==========================================================
-         Bootstrap
-         ========================================================== -->
+    <script src="js/navigation.js"></script>
 
     <script src="js/app.js"></script>
 
