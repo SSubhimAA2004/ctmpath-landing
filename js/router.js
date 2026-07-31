@@ -1,99 +1,58 @@
 
-/* ==========================================================================
-   CTM PATH™ Guided Journey™
-   ==========================================================================
-   File        : js/router.js
-   Version     : 3.0
-   Status      : FRAMEWORK FREEZE v3.0
-   Architecture: Manifest Driven SPA Router
-
-   --------------------------------------------------------------------------
-   PURPOSE
-
-   The Router is responsible for ONE thing:
-
-       Managing the lifecycle of application pages.
-
-   --------------------------------------------------------------------------
-   RESPONSIBILITIES
-
-   ✓ Validate Routes
-   ✓ Resolve Page Manifest
-   ✓ Fetch Page HTML
-   ✓ Manage HTML Cache
-   ✓ Load / Swap Stylesheets
-   ✓ Render Pages
-   ✓ Initialize Controllers
-   ✓ Destroy Controllers
-   ✓ Emit Navigation Events
-
-   --------------------------------------------------------------------------
-   NOT RESPONSIBLE FOR
-
-   ✗ Business Logic
-   ✗ API Communication
-   ✗ Form Validation
-   ✗ State Mutations
-   ✗ UI Widgets
-   ✗ Storage
-   ✗ Authentication
-
-   --------------------------------------------------------------------------
-   NAVIGATION PIPELINE
-
-   navigate(route)
-
-           │
-
-           ▼
-
-   validateRoute()
-
-           │
-
-           ▼
-
-   resolvePage()
-
-           │
-
-           ▼
-
-   fetchPageHtml()
-
-           │
-
-           ▼
-
-   ensureStylesheet()
-
-           │
-
-           ▼
-
-   destroyCurrentController()
-
-           │
-
-           ▼
-
-   renderPage(html)
-
-           │
-
-           ▼
-
-   initializeController()
-
-           │
-
-           ▼
-
-   afterNavigation()
-
-========================================================================== */
-
-'use strict';
+/*!
+ * ==============================================================
+ * CTM PATH™ Guided Journey™
+ * Router Module
+ * --------------------------------------------------------------
+ * Version : 4.0 (Framework Freeze)
+ * Pattern : Singleton
+ * Author  : CTM PATH™ Engineering
+ *
+ * Responsibilities
+ * --------------------------------------------------------------
+ * ✓ Route Validation
+ * ✓ Route Resolution
+ * ✓ HTML Fetching
+ * ✓ HTML Cache
+ * ✓ Stylesheet Lifecycle
+ * ✓ Page Rendering
+ * ✓ Controller Lifecycle
+ * ✓ Navigation Events
+ *
+ * Non Responsibilities
+ * --------------------------------------------------------------
+ * ✗ Business Logic
+ * ✗ API Calls
+ * ✗ Application State
+ * ✗ UI Rendering
+ * ✗ Form Validation
+ * ✗ DOM Manipulation outside Page Container
+ *
+ * Navigation Pipeline
+ * --------------------------------------------------------------
+ *
+ * navigate()
+ *      ↓
+ * validateRoute()
+ *      ↓
+ * resolvePage()
+ *      ↓
+ * beforeNavigation()
+ *      ↓
+ * fetchPageHtml()
+ *      ↓
+ * ensureStylesheet()
+ *      ↓
+ * destroyCurrentController()
+ *      ↓
+ * renderPage()
+ *      ↓
+ * initializeController()
+ *      ↓
+ * afterNavigation()
+ *
+ * ==============================================================
+ */
 
 window.CTM = window.CTM || {};
 
@@ -122,7 +81,7 @@ class Router {
     #currentStylesheetHref = null;
 
     /* ==========================================================
-       INITIALIZATION
+       INITIALIZE
     ========================================================== */
 
     async init() {
@@ -133,15 +92,18 @@ class Router {
 
         }
 
-        this.#pageContainer =
-            document.getElementById(
-                CTM.Config.UI.PAGE_CONTAINER_ID
-            );
+        this.#pageContainer = document.querySelector(
+
+            CTM.Config.SELECTORS.PAGE_CONTAINER
+
+        );
 
         if (!this.#pageContainer) {
 
             throw new Error(
-                'Router initialization failed. Page container not found.'
+
+                CTM.Config.ERRORS.PAGE_CONTAINER_NOT_FOUND
+
             );
 
         }
@@ -149,61 +111,43 @@ class Router {
         this.#initialized = true;
 
         CTM.Logger.info(
-            'Router initialized.'
-        );
 
-        CTM.Events.emit(
-            CTM.Config.EVENTS.APP_INITIALIZED,
-            {
-                module: 'Router'
-            }
+            'Router initialized.'
+
         );
 
     }
 
     /* ==========================================================
-       SHUTDOWN
+       DESTROY
     ========================================================== */
 
     async destroy() {
 
-        if (!this.#initialized) {
-
-            return;
-
-        }
-
         await this.#destroyCurrentController();
 
-        this.clearCache();
+        this.#removeActiveStylesheet();
 
-        this.#pageContainer = null;
+        this.#pageCache.clear();
 
         this.#currentRoute = null;
 
         this.#currentPage = null;
-
-        this.#currentController = null;
-
-        this.#activeStylesheet = null;
-
-        this.#currentStylesheetHref = null;
 
         this.#navigationLock = false;
 
         this.#initialized = false;
 
         CTM.Logger.info(
+
             'Router destroyed.'
+
         );
 
     }
 
     /* ==========================================================
        PUBLIC API
-
-       These are the ONLY public methods exposed
-       by the Router.
     ========================================================== */
 
     async navigate(route) {}
@@ -247,35 +191,27 @@ class Router {
 
        Batch 1B
 
-       #validateRoute()
-       #resolvePage()
-
-       navigate()
-       reload()
-       refresh()
+       • navigate()
+       • reload()
+       • refresh()
+       • validateRoute()
+       • resolvePage()
+       • beforeNavigation()
 
     ========================================================== */
+
 }
 
-/* ==============================================================
-   SINGLETON EXPORT
-============================================================== */
-
 CTM.Router = Object.freeze(
+
     new Router()
+
 );
-
-/* ==========================================================================
-   END OF BATCH 1A
-
-   Next:
-   router.js — Batch 1B
-========================================================================== */
 
     /* ==========================================================
        NAVIGATE
-       ----------------------------------------------------------
-       Master navigation pipeline.
+
+       Master Navigation Pipeline
 
        validateRoute()
 
@@ -310,6 +246,7 @@ CTM.Router = Object.freeze(
             ↓
 
        afterNavigation()
+
     ========================================================== */
 
     async navigate(route) {
@@ -329,10 +266,14 @@ CTM.Router = Object.freeze(
         try {
 
             const validRoute =
-                this.#validateRoute(route);
+                this.#validateRoute(
+                    route
+                );
 
             const page =
-                this.#resolvePage(validRoute);
+                this.#resolvePage(
+                    validRoute
+                );
 
             await this.#beforeNavigation(
                 page
@@ -351,6 +292,19 @@ CTM.Router = Object.freeze(
 
             await this.#renderPage(
                 html
+            );
+
+            CTM.Events.emit(
+
+                CTM.Config.EVENTS.PAGE_RENDERED,
+
+                {
+
+                    page:
+                        page.route
+
+                }
+
             );
 
             await this.#initializeController(
@@ -372,11 +326,12 @@ CTM.Router = Object.freeze(
         }
         catch (error) {
 
-            this.#navigationLock = false;
-
             await this.#handleNavigationError(
+
                 error,
+
                 route
+
             );
 
             return false;
@@ -398,7 +353,9 @@ CTM.Router = Object.freeze(
         }
 
         return this.navigate(
+
             this.#currentRoute
+
         );
 
     }
@@ -410,7 +367,9 @@ CTM.Router = Object.freeze(
     async refresh() {
 
         if (
+
             !this.#currentController
+
         ) {
 
             return;
@@ -418,12 +377,13 @@ CTM.Router = Object.freeze(
         }
 
         if (
-            typeof this.#currentController
-                .init === 'function'
+
+            typeof this.#currentController.init ===
+            'function'
+
         ) {
 
-            await this.#currentController
-                .init();
+            await this.#currentController.init();
 
         }
 
@@ -435,20 +395,30 @@ CTM.Router = Object.freeze(
 
     #validateRoute(route) {
 
-        if (!route) {
+        if (
+
+            !route
+
+        ) {
 
             throw new Error(
+
                 CTM.Config.ERRORS.INVALID_ROUTE
+
             );
 
         }
 
         if (
+
             !CTM.Config.hasRoute(route)
+
         ) {
 
             throw new Error(
+
                 `Unknown route: ${route}`
+
             );
 
         }
@@ -464,12 +434,16 @@ CTM.Router = Object.freeze(
     #resolvePage(route) {
 
         const page =
-            CTM.Config.getPage(route);
+            CTM.Config.getPage(
+                route
+            );
 
         if (!page) {
 
             throw new Error(
+
                 CTM.Config.ERRORS.PAGE_NOT_FOUND
+
             );
 
         }
@@ -480,18 +454,24 @@ CTM.Router = Object.freeze(
 
     /* ==========================================================
        BEFORE NAVIGATION
+
+       Emits lifecycle events only.
+
+       No UI logic.
+
     ========================================================== */
 
     async #beforeNavigation(page) {
 
         CTM.Logger.info(
+
             `Navigating to ${page.route}`
+
         );
 
         CTM.Events.emit(
 
-            CTM.Config.EVENTS
-                .NAVIGATION_STARTED,
+            CTM.Config.EVENTS.NAVIGATION_STARTED,
 
             {
 
@@ -499,131 +479,62 @@ CTM.Router = Object.freeze(
                     this.#currentRoute,
 
                 to:
-                    page.route
+                    page.route,
+
+                order:
+                    page.order,
+
+                total:
+                    CTM.Config.JOURNEY
+                        .TOTAL_PAGES
 
             }
 
         );
 
-        if (
-            CTM.UI &&
-            typeof CTM.UI.showLoading ===
-                'function'
-        ) {
-
-            CTM.UI.showLoading();
-
-        }
-
     }
 
     /* ==========================================================
-       AFTER NAVIGATION
-    ========================================================== */
-
-    async #afterNavigation(page) {
-
-        this.#navigationLock = false;
-
-        if (
-            CTM.UI &&
-            typeof CTM.UI.hideLoading ===
-                'function'
-        ) {
-
-            CTM.UI.hideLoading();
-
-        }
-
-        if (
-            CTM.UI &&
-            typeof CTM.UI.scrollTop ===
-                'function'
-        ) {
-
-            CTM.UI.scrollTop();
-
-        }
-
-        if (
-            CTM.UI &&
-            typeof CTM.UI
-                .updateJourneyCounter ===
-                'function'
-        ) {
-
-            CTM.UI.updateJourneyCounter(
-
-                page.order,
-
-                CTM.Config.JOURNEY
-                    .TOTAL_PAGES
-
-            );
-
-        }
-
-        CTM.Events.emit(
-
-            CTM.Config.EVENTS
-                .NAVIGATION_COMPLETED,
-
-            {
-
-                route:
-                    page.route
-
-            }
-
-        );
-
-        CTM.Logger.info(
-            `Navigation complete: ${page.route}`
-        );
-
-    }
-
-    /* ==========================================================
-       Remaining methods
+       Remaining Methods
 
        Batch 1C
 
-       ----------------------------------------
+       -----------------------------------------
 
        #fetchPageHtml()
 
-       #renderPage()
-
        #cachePage()
 
-       HTML cache
+       #renderPage()
+
+       HTML Cache
 
     ========================================================== */
 
     /* ==========================================================
        FETCH PAGE HTML
-       ----------------------------------------------------------
+
        Responsibility
 
-       ✓ Fetch HTML
        ✓ Read Cache
+       ✓ Fetch HTML
        ✓ Update Cache
 
-       Does NOT
+       Never
 
-       ✗ Render
-       ✗ Touch DOM
+       ✗ Manipulate DOM
        ✗ Load CSS
+       ✗ Initialize Controllers
+
     ========================================================== */
 
     async #fetchPageHtml(page) {
 
-        const cacheKey =
-            page.route;
+        const cacheKey = page.route;
 
-        /* ---------------------------------------------
+        /* ------------------------------------------------------
            Cache Hit
-        --------------------------------------------- */
+        ------------------------------------------------------ */
 
         if (
 
@@ -636,7 +547,9 @@ CTM.Router = Object.freeze(
         ) {
 
             CTM.Logger.info(
-                `Using cached page: ${cacheKey}`
+
+                `Page cache hit: ${cacheKey}`
+
             );
 
             return this.#pageCache.get(
@@ -645,37 +558,39 @@ CTM.Router = Object.freeze(
 
         }
 
-        /* ---------------------------------------------
-           Fetch
-        --------------------------------------------- */
+        /* ------------------------------------------------------
+           Fetch HTML
+        ------------------------------------------------------ */
 
         CTM.Logger.info(
+
             `Fetching ${page.html}`
+
         );
 
-        const response =
-            await fetch(
+        const response = await fetch(
 
-                page.html,
+            page.html,
 
-                {
-                    cache: 'no-cache'
-                }
+            {
 
-            );
+                cache: 'no-cache'
+
+            }
+
+        );
 
         if (!response.ok) {
 
             throw new Error(
 
-                `Unable to fetch page: ${page.html}`
+                `Unable to load page: ${page.html}`
 
             );
 
         }
 
-        const html =
-            await response.text();
+        const html = await response.text();
 
         this.#cachePage(
 
@@ -702,7 +617,9 @@ CTM.Router = Object.freeze(
     ) {
 
         if (
+
             !CTM.Config.CACHE.PAGES
+
         ) {
 
             return;
@@ -728,7 +645,9 @@ CTM.Router = Object.freeze(
         this.#pageCache.clear();
 
         CTM.Logger.info(
+
             'Router cache cleared.'
+
         );
 
     }
@@ -738,37 +657,35 @@ CTM.Router = Object.freeze(
 
        Responsibility
 
-       ✓ DOM only
+       ✓ Inject HTML
 
-       Never performs
+       Never
 
-       ✗ fetch()
-       ✗ cache
-       ✗ controller
-       ✗ stylesheet
+       ✗ Fetch
+       ✗ Cache
+       ✗ CSS
+       ✗ Controller
+
     ========================================================== */
 
     async #renderPage(html) {
 
         if (
+
             !this.#pageContainer
+
         ) {
 
             throw new Error(
-                'Page container unavailable.'
+
+                CTM.Config.ERRORS.PAGE_CONTAINER_NOT_FOUND
+
             );
 
         }
 
         this.#pageContainer.innerHTML =
             html;
-
-        CTM.Events.emit(
-
-            CTM.Config.EVENTS
-                .PAGE_RENDERED
-
-        );
 
     }
 
@@ -779,7 +696,9 @@ CTM.Router = Object.freeze(
     #clearPage() {
 
         if (
+
             !this.#pageContainer
+
         ) {
 
             return;
@@ -792,23 +711,21 @@ CTM.Router = Object.freeze(
     }
 
     /* ==========================================================
-       PREFETCH
+       PREFETCH NEXT PAGE
 
-       Loads the next page HTML into cache.
+       Loads only HTML.
 
-       No DOM changes.
-
-       No controller initialization.
-
+       No DOM updates.
+       No controller creation.
        No stylesheet loading.
+
     ========================================================== */
 
     async #prefetchNextPage() {
 
         if (
 
-            !CTM.Config.APP
-                .PRELOAD_NEXT_PAGE ||
+            !CTM.Config.APP.PRELOAD_NEXT_PAGE ||
 
             !this.#currentRoute
 
@@ -819,13 +736,18 @@ CTM.Router = Object.freeze(
         }
 
         const nextPage =
+
             CTM.Config.getNextPage(
 
                 this.#currentRoute
 
             );
 
-        if (!nextPage) {
+        if (
+
+            !nextPage
+
+        ) {
 
             return;
 
@@ -865,7 +787,7 @@ CTM.Router = Object.freeze(
 
             CTM.Logger.warn(
 
-                'Page prefetch skipped.',
+                'Prefetch skipped.',
 
                 error
 
@@ -876,11 +798,11 @@ CTM.Router = Object.freeze(
     }
 
     /* ==========================================================
-       Remaining methods
+       Remaining Methods
 
        Batch 1D
 
-       --------------------------------------
+       -----------------------------------------
 
        #ensureStylesheet()
 
@@ -888,26 +810,27 @@ CTM.Router = Object.freeze(
 
        #swapStylesheet()
 
-       #removeOldStylesheet()
+       #removeActiveStylesheet()
 
-       Zero Flash Of Unstyled Content
+       Prevent Flash Of Unstyled Content (FOUC)
 
     ========================================================== */
 
     /* ==========================================================
        ENSURE STYLESHEET
-       ----------------------------------------------------------
+
        Responsibility
 
        ✓ Load page stylesheet
        ✓ Wait until loaded
        ✓ Swap stylesheets
-       ✓ Prevent FOUC
+       ✓ Prevent Flash Of Unstyled Content (FOUC)
 
        Never
 
        ✗ Render HTML
-       ✗ Initialize Controller
+       ✗ Initialize Controllers
+
     ========================================================== */
 
     async #ensureStylesheet(page) {
@@ -929,13 +852,20 @@ CTM.Router = Object.freeze(
 
         }
 
-        const newStylesheet =
+        const stylesheet =
+
             await this.#createStylesheet(
+
                 page.css
+
             );
 
         await this.#swapStylesheet(
-            newStylesheet
+
+            stylesheet,
+
+            page.css
+
         );
 
     }
@@ -943,8 +873,9 @@ CTM.Router = Object.freeze(
     /* ==========================================================
        CREATE STYLESHEET
 
-       Creates a detached stylesheet and waits until
-       completely loaded before returning it.
+       Creates a detached stylesheet and waits
+       until it is completely loaded.
+
     ========================================================== */
 
     #createStylesheet(href) {
@@ -954,16 +885,25 @@ CTM.Router = Object.freeze(
             (resolve, reject) => {
 
                 const link =
+
                     document.createElement(
+
                         'link'
+
                     );
 
                 link.rel = 'stylesheet';
 
                 link.href = href;
 
-                link.dataset.pageStylesheet =
-                    'true';
+                link.id =
+
+                    CTM.Config.CSS
+                        .PAGE_STYLESHEET_ID;
+
+                link.dataset.ctm =
+
+                    'page-stylesheet';
 
                 link.onload = () => {
 
@@ -986,7 +926,9 @@ CTM.Router = Object.freeze(
                 };
 
                 document.head.appendChild(
+
                     link
+
                 );
 
             }
@@ -998,26 +940,31 @@ CTM.Router = Object.freeze(
     /* ==========================================================
        SWAP STYLESHEETS
 
-       Wait until the new stylesheet is loaded before
-       removing the previous stylesheet.
+       New stylesheet is already loaded.
 
-       This completely eliminates Flash Of Unstyled Content.
+       Safe to remove previous stylesheet.
+
     ========================================================== */
 
     async #swapStylesheet(
 
-        newStylesheet
+        newStylesheet,
+
+        href
 
     ) {
 
         const previous =
+
             this.#activeStylesheet;
 
         this.#activeStylesheet =
+
             newStylesheet;
 
         this.#currentStylesheetHref =
-            newStylesheet.href;
+
+            href;
 
         if (previous) {
 
@@ -1033,7 +980,11 @@ CTM.Router = Object.freeze(
 
     #removeActiveStylesheet() {
 
-        if (!this.#activeStylesheet) {
+        if (
+
+            !this.#activeStylesheet
+
+        ) {
 
             return;
 
@@ -1043,8 +994,7 @@ CTM.Router = Object.freeze(
 
         this.#activeStylesheet = null;
 
-        this.#currentStylesheetHref =
-            null;
+        this.#currentStylesheetHref = null;
 
     }
 
@@ -1064,11 +1014,17 @@ CTM.Router = Object.freeze(
 
     async reloadStylesheet() {
 
-        if (!this.#currentPage) {
+        if (
+
+            !this.#currentPage
+
+        ) {
 
             return;
 
         }
+
+        this.#removeActiveStylesheet();
 
         await this.#ensureStylesheet(
 
@@ -1079,9 +1035,10 @@ CTM.Router = Object.freeze(
     }
 
     /* ==========================================================
-       STYLESHEET CLEANUP
+       DESTROY STYLESHEET
 
        Called during Router.destroy()
+
     ========================================================== */
 
     #destroyStylesheet() {
@@ -1091,37 +1048,35 @@ CTM.Router = Object.freeze(
     }
 
     /* ==========================================================
-       Remaining methods
+       Remaining Methods
 
-       Batch 1E
+       Batch 1E (EOF)
 
-       --------------------------------------
+       -----------------------------------------
 
        #initializeController()
 
        #destroyCurrentController()
 
+       #afterNavigation()
+
        #handleNavigationError()
 
-       Singleton Export
+       Utility Methods
 
-       EOF
+       Singleton Export
 
     ========================================================== */
 
     /* ==========================================================
        INITIALIZE CONTROLLER
-       ----------------------------------------------------------
+
        Responsibility
 
        ✓ Resolve controller
        ✓ Initialize controller
        ✓ Emit lifecycle events
 
-       Never
-
-       ✗ Render HTML
-       ✗ Fetch Resources
     ========================================================== */
 
     async #initializeController(page) {
@@ -1152,8 +1107,7 @@ CTM.Router = Object.freeze(
 
         CTM.Events.emit(
 
-            CTM.Config.EVENTS
-                .PAGE_INITIALIZING,
+            CTM.Config.EVENTS.PAGE_INITIALIZING,
 
             {
 
@@ -1177,8 +1131,7 @@ CTM.Router = Object.freeze(
 
         CTM.Events.emit(
 
-            CTM.Config.EVENTS
-                .PAGE_INITIALIZED,
+            CTM.Config.EVENTS.PAGE_INITIALIZED,
 
             {
 
@@ -1209,8 +1162,7 @@ CTM.Router = Object.freeze(
 
         CTM.Events.emit(
 
-            CTM.Config.EVENTS
-                .PAGE_DESTROYING,
+            CTM.Config.EVENTS.PAGE_DESTROYING,
 
             {
 
@@ -1234,8 +1186,7 @@ CTM.Router = Object.freeze(
 
         CTM.Events.emit(
 
-            CTM.Config.EVENTS
-                .PAGE_DESTROYED,
+            CTM.Config.EVENTS.PAGE_DESTROYED,
 
             {
 
@@ -1248,6 +1199,50 @@ CTM.Router = Object.freeze(
 
         this.#currentController =
             null;
+
+    }
+
+    /* ==========================================================
+       AFTER NAVIGATION
+
+       Emits completion event only.
+
+       UI reacts independently.
+
+    ========================================================== */
+
+    async #afterNavigation(page) {
+
+        this.#navigationLock =
+            false;
+
+        CTM.Events.emit(
+
+            CTM.Config.EVENTS.NAVIGATION_COMPLETED,
+
+            {
+
+                route:
+                    page.route,
+
+                order:
+                    page.order,
+
+                total:
+                    CTM.Config.JOURNEY
+                        .TOTAL_PAGES
+
+            }
+
+        );
+
+        this.#prefetchNextPage();
+
+        CTM.Logger.info(
+
+            `Navigation complete: ${page.route}`
+
+        );
 
     }
 
@@ -1274,23 +1269,9 @@ CTM.Router = Object.freeze(
 
         );
 
-        if (
-
-            CTM.UI &&
-
-            typeof CTM.UI.hideLoading ===
-            'function'
-
-        ) {
-
-            CTM.UI.hideLoading();
-
-        }
-
         CTM.Events.emit(
 
-            CTM.Config.EVENTS
-                .NAVIGATION_FAILED,
+            CTM.Config.EVENTS.NAVIGATION_FAILED,
 
             {
 
@@ -1302,29 +1283,10 @@ CTM.Router = Object.freeze(
 
         );
 
-        if (
-
-            CTM.UI &&
-
-            typeof CTM.UI.showToast ===
-            'function'
-
-        ) {
-
-            CTM.UI.showToast(
-
-                error.message,
-
-                'error'
-
-            );
-
-        }
-
     }
 
     /* ==========================================================
-       UTILITY
+       CACHE HELPERS
     ========================================================== */
 
     hasCachedPage(route) {
@@ -1342,7 +1304,7 @@ CTM.Router = Object.freeze(
     }
 
     /* ==========================================================
-       FINAL CLEANUP
+       DISPOSE
     ========================================================== */
 
     async dispose() {
@@ -1358,71 +1320,72 @@ CTM.Router = Object.freeze(
 ============================================================== */
 
 CTM.Router = Object.freeze(
+
     new Router()
+
 );
 
-/* ==========================================================================
-   FRAMEWORK FREEZE v3.0
+/* ==============================================================
+   FRAMEWORK FREEZE v4.0
 
-   Router Responsibilities
+   Responsibilities
 
    ✓ Route Validation
-   ✓ Page Resolution
-   ✓ HTML Fetch
+   ✓ Route Resolution
+   ✓ HTML Fetching
    ✓ HTML Cache
    ✓ Stylesheet Lifecycle
    ✓ HTML Rendering
    ✓ Controller Lifecycle
    ✓ Navigation Events
 
+   Does NOT
+
+   ✗ Display UI
+   ✗ Show Loaders
+   ✗ Show Toasts
+   ✗ Scroll Window
+   ✗ Update Journey Counter
+   ✗ Perform Business Logic
+   ✗ Mutate Application State
+   ✗ Call APIs
+
+   Communication
+
+   Router
+       ↓
+   Event Bus
+       ↓
+   UI / Navigation / Pages
+
    Navigation Pipeline
 
    navigate()
-
        ↓
-
    validateRoute()
-
        ↓
-
    resolvePage()
-
        ↓
-
+   beforeNavigation()
+       ↓
    fetchPageHtml()
-
        ↓
-
    ensureStylesheet()
-
        ↓
-
    destroyCurrentController()
-
        ↓
-
    renderPage()
-
        ↓
-
+   PAGE_RENDERED
+       ↓
    initializeController()
-
        ↓
-
    afterNavigation()
-
-   Router contains
-
-   ✓ No business logic
-   ✓ No API logic
-   ✓ No form validation
-   ✓ No application state mutations
 
    Status
 
-   FRAMEWORK FREEZE v3.0
+   FRAMEWORK FREEZE v4.0
 
    EOF
-
-========================================================================== */
+============================================================== */
 
