@@ -1,1 +1,2157 @@
 
+/* ==========================================================================
+   CTM PATH™ MILLIONAIRES™
+
+   FILE:
+   page04.css
+
+   PAGE:
+   KALA CHAKRA™ LIFE ALIGNMENT RESULT™
+
+   VERSION:
+   10.0
+
+========================================================================== */
+
+
+
+
+
+/* ==========================================================================
+   PAGE FOUNDATION
+========================================================================== */
+
+
+.page04 {
+
+
+    min-height:
+
+        100vh;
+
+
+    background:
+
+        #081426;
+
+
+    color:
+
+        #F8F5ED;
+
+
+    overflow:
+
+        hidden;
+
+
+}
+
+
+
+.page04 * {
+
+
+    box-sizing:
+
+        border-box;
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   HERO SECTION
+========================================================================== */
+
+
+.page04-hero {
+
+
+    text-align:
+
+        center;
+
+
+    padding:
+
+        70px 20px 80px;
+
+
+}
+
+
+
+
+
+
+
+.page04 .journey-marker {
+
+
+    display:
+
+        flex;
+
+
+    flex-direction:
+
+        column;
+
+
+    align-items:
+
+        center;
+
+
+    gap:
+
+        12px;
+
+
+}
+
+
+
+
+
+
+
+.page04 .journey-label {
+
+
+    color:
+
+        #23D4C8;
+
+
+    font-size:
+
+        .75rem;
+
+
+    font-weight:
+
+        800;
+
+
+    letter-spacing:
+
+        .35em;
+
+
+}
+
+
+
+
+
+
+.page04 .journey-number {
+
+
+    color:
+
+        #D8B45A;
+
+
+    font-size:
+
+        1.3rem;
+
+
+    font-weight:
+
+        900;
+
+
+    letter-spacing:
+
+        .25em;
+
+
+}
+
+
+
+
+
+
+
+.page04-title {
+
+
+    margin:
+
+        50px auto 40px;
+
+
+    max-width:
+
+        1000px;
+
+
+    font-family:
+
+        "Cinzel",
+        serif;
+
+
+    font-size:
+
+        clamp(
+
+            2.2rem,
+
+            5vw,
+
+            4.5rem
+
+        );
+
+
+    line-height:
+
+        1.35;
+
+
+    letter-spacing:
+
+        .08em;
+
+
+}
+
+
+
+
+
+
+
+.page04-tamil {
+
+
+    color:
+
+        #F8F5ED;
+
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+
+    font-size:
+
+        clamp(
+
+            2rem,
+
+            4vw,
+
+            3rem
+
+        );
+
+
+    line-height:
+
+        1.8;
+
+
+}
+
+
+
+
+
+.page04-english {
+
+
+    margin-top:
+
+        25px;
+
+
+    color:
+
+        #D8B45A;
+
+
+    font-size:
+
+        1.4rem;
+
+
+    font-weight:
+
+        700;
+
+
+    letter-spacing:
+
+        .12em;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   INTRODUCTION
+========================================================================== */
+
+
+.page04-introduction {
+
+
+    max-width:
+
+        850px;
+
+
+    margin:
+
+        0 auto;
+
+
+    padding:
+
+        40px 20px 80px;
+
+
+    text-align:
+
+        center;
+
+
+}
+
+
+
+
+
+.page04-introduction p {
+
+
+    color:
+
+        #D8E1ED;
+
+
+    font-size:
+
+        1.2rem;
+
+
+    line-height:
+
+        2;
+
+
+}
+
+
+
+
+
+.page04-introduction .english {
+
+
+    margin-top:
+
+        30px;
+
+
+    color:
+
+        #B9C6D8;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   LIFE WHEEL SECTION
+========================================================================== */
+
+
+.life-wheel-section {
+
+
+    text-align:
+
+        center;
+
+
+    padding:
+
+        60px 20px;
+
+
+}
+
+
+
+
+
+
+
+.life-wheel-section h2 {
+
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+
+    font-size:
+
+        clamp(
+
+            1.8rem,
+
+            3vw,
+
+            2.8rem
+
+        );
+
+
+    line-height:
+
+        1.8;
+
+
+    color:
+
+        #F8F5ED;
+
+
+}
+
+
+
+
+
+
+
+.life-wheel-section span {
+
+
+    display:
+
+        block;
+
+
+    margin-top:
+
+        15px;
+
+
+    color:
+
+        #D8B45A;
+
+
+    font-size:
+
+        1.3rem;
+
+
+    font-weight:
+
+        700;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   KALA CHAKRA WHEEL CONTAINER
+========================================================================== */
+
+
+.kala-wheel-container {
+
+
+    width:
+
+        min(650px,80vw);
+
+
+    aspect-ratio:
+
+        1;
+
+
+    margin:
+
+        60px auto;
+
+
+    display:
+
+        flex;
+
+
+    align-items:
+
+        center;
+
+
+    justify-content:
+
+        center;
+
+
+}
+
+
+
+
+
+
+
+.kala-wheel {
+
+
+    width:
+
+        100%;
+
+
+    height:
+
+        100%;
+
+
+    border-radius:
+
+        50%;
+
+
+    background:
+
+
+        radial-gradient(
+
+            circle,
+
+            rgba(35,212,200,.18),
+
+            rgba(255,255,255,.03)
+
+        );
+
+
+    border:
+
+        2px solid rgba(35,212,200,.35);
+
+
+    box-shadow:
+
+
+        0 0 80px rgba(35,212,200,.15);
+
+
+
+    position:
+
+        relative;
+
+
+}
+
+/* ==========================================================================
+   ALIGNMENT SUMMARY
+========================================================================== */
+
+
+.alignment-summary {
+
+
+    width:
+
+        min(1000px, calc(100% - 60px));
+
+
+    margin:
+
+        40px auto 100px;
+
+
+    display:
+
+        grid;
+
+
+    grid-template-columns:
+
+        repeat(2,1fr);
+
+
+    gap:
+
+        30px;
+
+
+}
+
+
+
+
+
+
+
+.score-card,
+.level-card {
+
+
+    padding:
+
+        45px 35px;
+
+
+    border-radius:
+
+        32px;
+
+
+    text-align:
+
+        center;
+
+
+    background:
+
+
+        linear-gradient(
+
+            145deg,
+
+            rgba(255,255,255,.06),
+
+            rgba(255,255,255,.025)
+
+        );
+
+
+    border:
+
+        1px solid rgba(255,255,255,.12);
+
+
+}
+
+
+
+
+
+
+
+.score-card h3,
+.level-card h3 {
+
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+
+    font-size:
+
+        1.5rem;
+
+
+    line-height:
+
+        1.8;
+
+
+    color:
+
+        #F8F5ED;
+
+
+}
+
+
+
+
+
+
+
+.english-label {
+
+
+    display:
+
+        block;
+
+
+    margin:
+
+        20px 0;
+
+
+    color:
+
+        #B9C6D8;
+
+
+    font-size:
+
+        1rem;
+
+
+}
+
+
+
+
+
+
+
+#alignment-score {
+
+
+    display:
+
+        block;
+
+
+    margin-top:
+
+        25px;
+
+
+    color:
+
+        #23D4C8;
+
+
+    font-family:
+
+        "Cinzel",
+        serif;
+
+
+    font-size:
+
+        3.5rem;
+
+
+    font-weight:
+
+        900;
+
+
+}
+
+
+
+
+
+
+
+#alignment-percentage {
+
+
+    display:
+
+        inline-block;
+
+
+    margin-top:
+
+        15px;
+
+
+    color:
+
+        #D8B45A;
+
+
+    font-size:
+
+        2rem;
+
+
+    font-weight:
+
+        900;
+
+
+}
+
+
+
+
+
+
+
+.level-card span {
+
+
+    display:
+
+        block;
+
+
+    margin:
+
+        20px 0;
+
+
+    color:
+
+        #B9C6D8;
+
+
+}
+
+
+
+
+
+
+
+#life-level {
+
+
+    display:
+
+        block;
+
+
+    margin-top:
+
+        25px;
+
+
+    color:
+
+        #D8B45A;
+
+
+    font-size:
+
+        2.4rem;
+
+
+    font-family:
+
+        "Cinzel",
+        serif;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   INSIGHT SECTION
+========================================================================== */
+
+
+.insight-section {
+
+
+    width:
+
+        min(1200px, calc(100% - 96px));
+
+
+    margin:
+
+        0 auto;
+
+
+    padding:
+
+        60px 0 100px;
+
+
+    text-align:
+
+        center;
+
+
+}
+
+
+
+
+
+
+
+.insight-section h2 {
+
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+
+    font-size:
+
+        clamp(
+
+            2rem,
+
+            4vw,
+
+            3rem
+
+        );
+
+
+    line-height:
+
+        1.8;
+
+
+}
+
+
+
+
+
+
+
+.insight-section > p {
+
+
+    color:
+
+        #D8B45A;
+
+
+    font-size:
+
+        1.3rem;
+
+
+    font-weight:
+
+        700;
+
+
+    letter-spacing:
+
+        .12em;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   INSIGHT GRID
+========================================================================== */
+
+
+.insight-grid {
+
+
+    margin-top:
+
+        60px;
+
+
+    display:
+
+        grid;
+
+
+    grid-template-columns:
+
+        repeat(3,1fr);
+
+
+    gap:
+
+        30px;
+
+
+}
+
+
+
+
+
+
+
+.insight-card {
+
+
+    padding:
+
+        40px 30px;
+
+
+    min-height:
+
+        520px;
+
+
+    border-radius:
+
+        30px;
+
+
+    background:
+
+
+        linear-gradient(
+
+            145deg,
+
+            rgba(255,255,255,.06),
+
+            rgba(255,255,255,.025)
+
+        );
+
+
+    border:
+
+        1px solid rgba(255,255,255,.10);
+
+
+    transition:
+
+        .35s ease;
+
+
+}
+
+
+
+
+
+
+
+.insight-card:hover {
+
+
+    transform:
+
+        translateY(-8px);
+
+
+    border-color:
+
+        rgba(35,212,200,.4);
+
+
+}
+
+
+
+
+
+
+
+.insight-icon {
+
+
+    width:
+
+        70px;
+
+
+    height:
+
+        70px;
+
+
+    margin:
+
+        0 auto 25px;
+
+
+    display:
+
+        flex;
+
+
+    justify-content:
+
+        center;
+
+
+    align-items:
+
+        center;
+
+
+    border-radius:
+
+        50%;
+
+
+    background:
+
+        rgba(216,180,90,.12);
+
+
+    font-size:
+
+        2rem;
+
+
+}
+
+
+
+
+
+
+
+.insight-card h3 {
+
+
+    color:
+
+        #F8F5ED;
+
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+
+    font-size:
+
+        1.5rem;
+
+
+    line-height:
+
+        1.8;
+
+
+}
+
+
+
+
+
+
+
+.insight-card span {
+
+
+    display:
+
+        block;
+
+
+    margin:
+
+        15px 0;
+
+
+    color:
+
+        #23D4C8;
+
+
+    font-size:
+
+        .95rem;
+
+
+    font-weight:
+
+        700;
+
+
+}
+
+
+
+
+
+
+
+.insight-card strong {
+
+
+    display:
+
+        block;
+
+
+    margin:
+
+        20px 0;
+
+
+    color:
+
+        #D8B45A;
+
+
+    font-size:
+
+        1.3rem;
+
+
+}
+
+
+
+
+
+
+
+.insight-score {
+
+
+    color:
+
+        #23D4C8;
+
+
+    font-size:
+
+        1.6rem;
+
+
+    font-weight:
+
+        900;
+
+
+}
+
+
+
+
+
+
+
+.insight-card p {
+
+
+    margin-top:
+
+        25px;
+
+
+    color:
+
+        #C7D2E0;
+
+
+    line-height:
+
+        1.9;
+
+
+}
+
+
+
+
+
+
+
+.english-text {
+
+
+    color:
+
+        #AEBCCD !important;
+
+
+}
+
+/* ==========================================================================
+   PILLAR DETAILS SECTION
+========================================================================== */
+
+
+.pillar-details {
+
+
+    width:
+
+        min(900px, calc(100% - 60px));
+
+
+    margin:
+
+        0 auto;
+
+
+    padding:
+
+        40px 0 100px;
+
+
+    text-align:
+
+        center;
+
+
+}
+
+
+
+
+
+.pillar-toggle {
+
+
+    padding:
+
+        18px 40px;
+
+
+    border-radius:
+
+        999px;
+
+
+    border:
+
+        1px solid rgba(35,212,200,.45);
+
+
+    background:
+
+        rgba(35,212,200,.08);
+
+
+    color:
+
+        #23D4C8;
+
+
+    font-size:
+
+        1rem;
+
+
+    font-weight:
+
+        800;
+
+
+    letter-spacing:
+
+        .08em;
+
+
+    cursor:
+
+        pointer;
+
+
+    transition:
+
+        .35s ease;
+
+
+}
+
+
+
+
+
+.pillar-toggle:hover {
+
+
+    background:
+
+        rgba(35,212,200,.18);
+
+
+    transform:
+
+        translateY(-3px);
+
+
+}
+
+
+
+
+
+
+
+.pillar-score-list {
+
+
+    display:
+
+        none;
+
+
+    margin-top:
+
+        40px;
+
+
+    padding:
+
+        30px;
+
+
+    border-radius:
+
+        28px;
+
+
+    background:
+
+        rgba(255,255,255,.04);
+
+
+    border:
+
+        1px solid rgba(255,255,255,.10);
+
+
+}
+
+
+
+
+
+.pillar-score-list.active {
+
+
+    display:
+
+        block;
+
+
+}
+
+
+
+
+
+
+
+.pillar-row {
+
+
+    display:
+
+        flex;
+
+
+    justify-content:
+
+        space-between;
+
+
+    align-items:
+
+        center;
+
+
+    padding:
+
+        18px 10px;
+
+
+    border-bottom:
+
+        1px solid rgba(255,255,255,.08);
+
+
+    color:
+
+        #E7EDF5;
+
+
+    font-size:
+
+        1.05rem;
+
+
+}
+
+
+
+
+
+.pillar-row:last-child {
+
+
+    border-bottom:
+
+        none;
+
+
+}
+
+
+
+
+
+.pillar-row strong {
+
+
+    color:
+
+        #D8B45A;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   TRANSFORMATION INSIGHT
+========================================================================== */
+
+
+.transformation-insight {
+
+
+    max-width:
+
+        850px;
+
+
+    margin:
+
+        0 auto;
+
+
+    padding:
+
+        60px 30px;
+
+
+    text-align:
+
+        center;
+
+
+}
+
+
+
+
+
+.transformation-insight h2 {
+
+
+    color:
+
+        #F8F5ED;
+
+
+    font-family:
+
+        "Noto Sans Tamil",
+        sans-serif;
+
+
+    font-size:
+
+        clamp(
+
+            1.7rem,
+
+            3vw,
+
+            2.5rem
+
+        );
+
+
+    line-height:
+
+        1.9;
+
+
+}
+
+
+
+
+
+.transformation-insight .english-text {
+
+
+    margin-top:
+
+        30px;
+
+
+    color:
+
+        #B9C6D8;
+
+
+    font-size:
+
+        1.2rem;
+
+
+    line-height:
+
+        1.8;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   DIAGNOSIS CTA
+========================================================================== */
+
+
+.page04-action {
+
+
+    display:
+
+        flex;
+
+
+    justify-content:
+
+        center;
+
+
+    padding:
+
+        50px 20px 100px;
+
+
+}
+
+
+
+
+
+
+
+.page04-action .journey-button {
+
+
+    display:
+
+        inline-flex;
+
+
+    flex-direction:
+
+        column;
+
+
+    align-items:
+
+        center;
+
+
+    justify-content:
+
+        center;
+
+
+    gap:
+
+        12px;
+
+
+    min-width:
+
+        380px;
+
+
+    padding:
+
+        24px 50px;
+
+
+    border-radius:
+
+        999px;
+
+
+    border:
+
+        none;
+
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #D8B45A,
+
+            #F2D88D
+
+        );
+
+
+    color:
+
+        #081426;
+
+
+    font-size:
+
+        1.05rem;
+
+
+    font-weight:
+
+        900;
+
+
+    cursor:
+
+        pointer;
+
+
+    transition:
+
+        .35s ease;
+
+
+}
+
+
+
+
+
+
+
+.page04-action .journey-button:hover {
+
+
+    transform:
+
+        translateY(-6px);
+
+
+    box-shadow:
+
+        0 30px 70px rgba(216,180,90,.35);
+
+
+}
+
+
+
+
+
+
+
+.page04-action small {
+
+
+    font-size:
+
+        .75rem;
+
+
+    letter-spacing:
+
+        .18em;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   REFLECTION NOTE
+========================================================================== */
+
+
+.page04-reflection {
+
+
+    width:
+
+        min(900px, calc(100% - 60px));
+
+
+    margin:
+
+        0 auto;
+
+
+    padding:
+
+        0 0 100px;
+
+
+}
+
+
+
+
+
+
+
+.page04-reflection .reflection-card {
+
+
+    padding:
+
+        40px;
+
+
+    border-radius:
+
+        30px;
+
+
+    text-align:
+
+        center;
+
+
+    background:
+
+        rgba(255,255,255,.03);
+
+
+    border:
+
+        1px solid rgba(255,255,255,.10);
+
+
+}
+
+
+
+
+
+.page04-reflection p {
+
+
+    color:
+
+        #C7D2E0;
+
+
+    font-size:
+
+        1.05rem;
+
+
+    line-height:
+
+        2;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   TABLET
+========================================================================== */
+
+
+@media(max-width:1000px){
+
+
+
+.alignment-summary {
+
+
+    grid-template-columns:
+
+        1fr;
+
+
+}
+
+
+
+
+
+.insight-grid {
+
+
+    grid-template-columns:
+
+        1fr;
+
+
+}
+
+
+
+
+
+.kala-wheel-container {
+
+
+    width:
+
+        min(520px,85vw);
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   MOBILE
+========================================================================== */
+
+
+@media(max-width:700px){
+
+
+
+.page04-hero {
+
+
+    padding:
+
+        40px 15px 60px;
+
+
+}
+
+
+
+
+
+.page04-title {
+
+
+    font-size:
+
+        2rem;
+
+
+}
+
+
+
+
+
+.page04-tamil {
+
+
+    font-size:
+
+        1.6rem;
+
+
+}
+
+
+
+
+
+.alignment-summary {
+
+
+    width:
+
+        calc(100% - 32px);
+
+
+}
+
+
+
+
+
+#alignment-score {
+
+
+    font-size:
+
+        2.7rem;
+
+
+}
+
+
+
+
+
+#life-level {
+
+
+    font-size:
+
+        1.8rem;
+
+
+}
+
+
+
+
+
+.insight-section {
+
+
+    width:
+
+        calc(100% - 32px);
+
+
+}
+
+
+
+
+
+.insight-card {
+
+
+    min-height:
+
+        auto;
+
+
+}
+
+
+
+
+
+.page04-action .journey-button {
+
+
+    min-width:
+
+        100%;
+
+
+}
+
+
+
+
+
+.pillar-row {
+
+
+    flex-direction:
+
+        column;
+
+
+    gap:
+
+        10px;
+
+
+}
+
+
+
+
+
+.page04-reflection {
+
+
+    width:
+
+        calc(100% - 32px);
+
+
+}
+
+
+
+
+
+}
+
