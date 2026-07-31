@@ -4,7 +4,7 @@
  * CTM PATH™ Guided Journey™
  * Application Module
  * --------------------------------------------------------------
- * Version : 4.0 (Framework Freeze)
+ * Version : 5.0 (Framework Freeze)
  * Pattern : Singleton
  * Author  : CTM PATH™ Engineering
  *
@@ -12,7 +12,7 @@
  * --------------------------------------------------------------
  * ✓ Bootstrap Application
  * ✓ Initialize Framework Modules
- * ✓ Load Shared Components
+ * ✓ Initialize Shared Components
  * ✓ Start Guided Journey
  * ✓ Bind Global Events
  * ✓ Graceful Shutdown
@@ -36,7 +36,7 @@
  *      ↓
  * initializeFramework()
  *      ↓
- * loadSharedComponents()
+ * ComponentLoader.loadShared()
  *      ↓
  * bindGlobalEvents()
  *      ↓
@@ -87,7 +87,7 @@ class App {
 
             await this.#initializeFramework();
 
-            await this.#loadSharedComponents();
+            await this.#initializeSharedComponents();
 
             await this.#bindGlobalEvents();
 
@@ -138,7 +138,7 @@ class App {
 
        #initializeFramework()
 
-       #loadSharedComponents()
+       #initializeSharedComponents()
 
        #bindGlobalEvents()
 
@@ -157,9 +157,25 @@ CTM.App = Object.freeze(
     /* ==========================================================
        INITIALIZE FRAMEWORK
 
-       Order is intentional.
+       Initialization Order
 
-       Never change without architectural review.
+       Config
+           ↓
+       Events
+           ↓
+       Storage
+           ↓
+       State
+           ↓
+       DOM
+           ↓
+       ComponentLoader
+           ↓
+       UI
+           ↓
+       Router
+           ↓
+       Navigation
 
     ========================================================== */
 
@@ -171,11 +187,15 @@ CTM.App = Object.freeze(
 
         await CTM.State.init();
 
+        await CTM.DOM.init();
+
+        await CTM.ComponentLoader.init();
+
+        await CTM.UI.init();
+
         await CTM.Router.init();
 
         await CTM.Navigation.init();
-
-        await CTM.UI.init();
 
         CTM.Logger.info(
 
@@ -186,25 +206,21 @@ CTM.App = Object.freeze(
     }
 
     /* ==========================================================
-       LOAD SHARED COMPONENTS
+       INITIALIZE SHARED COMPONENTS
 
-       Loads Header and Footer once.
+       Header
+       Footer
+       Shared Layout
 
     ========================================================== */
 
-    async #loadSharedComponents() {
+    async #initializeSharedComponents() {
 
-        await Promise.all([
-
-            CTM.UI.loadHeader(),
-
-            CTM.UI.loadFooter()
-
-        ]);
+        await CTM.ComponentLoader.loadShared();
 
         CTM.Logger.info(
 
-            'Shared components loaded.'
+            'Shared components initialized.'
 
         );
 
@@ -213,7 +229,7 @@ CTM.App = Object.freeze(
     /* ==========================================================
        BIND GLOBAL EVENTS
 
-       Global browser events only.
+       Browser lifecycle events only.
 
     ========================================================== */
 
@@ -318,9 +334,13 @@ CTM.App = Object.freeze(
 
        destroy()
 
+       restart()
+
        dispose()
 
        Singleton Export
+
+       DOMContentLoaded
 
        Framework Freeze
 
@@ -381,16 +401,20 @@ CTM.App = Object.freeze(
 
        Shutdown Order
 
-       UI
-       ↓
        Navigation
-       ↓
+            ↓
        Router
-       ↓
+            ↓
+       UI
+            ↓
+       ComponentLoader
+            ↓
+       DOM
+            ↓
        State
-       ↓
+            ↓
        Storage
-       ↓
+            ↓
        Events
 
     ========================================================== */
@@ -403,11 +427,15 @@ CTM.App = Object.freeze(
 
         }
 
-        await CTM.UI.destroy();
-
         await CTM.Navigation.destroy();
 
         await CTM.Router.destroy();
+
+        await CTM.UI.destroy();
+
+        await CTM.ComponentLoader.destroy();
+
+        await CTM.DOM.destroy();
 
         await CTM.State.destroy();
 
@@ -463,7 +491,6 @@ CTM.App = Object.freeze(
 
 /* ==============================================================
    APPLICATION ENTRY POINT
-
 ============================================================== */
 
 document.addEventListener(
@@ -479,52 +506,43 @@ document.addEventListener(
 );
 
 /* ==============================================================
-   FRAMEWORK FREEZE v4.0
+   FRAMEWORK FREEZE v5.0
 
    Composition Root
 
-        App
+           App
 
-         │
+            │
 
-         ▼
+            ▼
 
-   Framework Bootstrap
+      Framework Bootstrap
 
-         │
+            │
 
-         ├──────────────┐
+     ┌──────┼───────────────┐
+     │      │               │
+     ▼      ▼               ▼
 
-         ▼              ▼
-
-    Navigation       Router
-
-                        │
-
-                        ▼
-
-                    Event Bus
-
-                        │
-
-                        ▼
-
-                       UI
-
-                        │
-
-                        ▼
-
-                       DOM
+    DOM   ComponentLoader   UI
+                │
+                ▼
+             Router
+                │
+                ▼
+           Navigation
+                │
+                ▼
+             Event Bus
 
 
    Responsibilities
 
    ✓ Bootstrap Application
 
-   ✓ Initialize Framework
+   ✓ Initialize Framework Modules
 
-   ✓ Load Shared Resources
+   ✓ Initialize Shared Components
 
    ✓ Start Guided Journey
 
@@ -533,21 +551,6 @@ document.addEventListener(
    ✓ Graceful Shutdown
 
    ✓ Fatal Error Handling
-
-
-   Never
-
-   ✗ Business Logic
-
-   ✗ Routing Logic
-
-   ✗ UI Logic
-
-   ✗ Validation
-
-   ✗ API
-
-   ✗ Application State
 
 
    Framework Modules
@@ -568,18 +571,37 @@ document.addEventListener(
 
    ✓ services.js
 
-   ✓ router.js
+   ✓ dom.js
+
+   ✓ component-loader.js
 
    ✓ ui.js
+
+   ✓ router.js
 
    ✓ navigation.js
 
    ✓ app.js
 
 
+   Never
+
+   ✗ Business Logic
+
+   ✗ Routing Logic
+
+   ✗ UI Logic
+
+   ✗ Validation
+
+   ✗ API
+
+   ✗ Application State
+
+
    Status
 
-   FRAMEWORK FREEZE v4.0
+   FRAMEWORK FREEZE v5.0
 
    EOF
 
