@@ -1,1665 +1,297 @@
 
-/* ==========================================================================
+/* ==========================================================
    CTM PATH™ Guided Journey™
+   Version : 1.0
+   File    : foundation.css
+   Purpose : Global Design Foundation
+   ========================================================== */
 
-   File        : css/foundation.css
-   Version     : 4.0
-   Status      : Premium Global Foundation
-   Architecture: Static HTML + CSS + Vanilla JavaScript
-   Author      : OpenAI
-   --------------------------------------------------------------------------
-   PURPOSE
-
-   This file establishes the global visual foundation for the entire
-   Guided Journey™ experience.
-
-   It provides:
-
-   • CSS Reset
-   • Global Typography
-   • Layout Foundation
-   • Responsive Containers
-   • Section Rhythm
-   • Base Components
-   • Utility Classes
-   • Accessibility Defaults
-   • Premium Interaction Foundation
-
-   NOTE
-
-   This file intentionally contains NO page-specific styling.
-
-   Welcome page
-   Registration page
-   Kala Chakra
-   Prescription
-   etc.
-
-   each maintain their own CSS files.
-
-========================================================================== */
-
-
-
-
-
-/* ==========================================================================
-   GLOBAL RESET
-========================================================================== */
+/* ==========================================================
+   RESET
+   ========================================================== */
 
 *,
 *::before,
-*::after{
+*::after {
 
-    margin:
-
-        0;
-
-    padding:
-
-        0;
-
-    box-sizing:
-
-        border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 
 }
 
+/* ==========================================================
+   ROOT DESIGN TOKENS
+   ========================================================== */
 
+:root {
 
+    /* ------------------------------------------------------
+       Brand Colours
+       ------------------------------------------------------ */
 
+    --color-primary: #0E5CAD;
+    --color-primary-dark: #081C3A;
 
-html{
+    --color-accent: #C9A227;
 
-    font-size:
+    --color-success: #28A745;
+    --color-warning: #F4B400;
+    --color-danger: #D93025;
 
-        16px;
+    /* ------------------------------------------------------
+       Backgrounds
+       ------------------------------------------------------ */
 
-    scroll-behavior:
+    --color-background: #071A2F;
 
-        smooth;
+    --color-surface: #102944;
 
-    -webkit-text-size-adjust:
+    --color-surface-light: #183C63;
 
-        100%;
+    /* ------------------------------------------------------
+       Text
+       ------------------------------------------------------ */
+
+    --color-text: #FFFFFF;
+
+    --color-text-secondary: #D8E4F2;
+
+    --color-text-muted: #A9B8C8;
+
+    /* ------------------------------------------------------
+       Borders
+       ------------------------------------------------------ */
+
+    --color-border: rgba(255,255,255,0.12);
+
+    /* ------------------------------------------------------
+       Radius
+       ------------------------------------------------------ */
+
+    --radius-sm: 8px;
+
+    --radius-md: 14px;
+
+    --radius-lg: 20px;
+
+    --radius-xl: 28px;
+
+    /* ------------------------------------------------------
+       Shadows
+       ------------------------------------------------------ */
+
+    --shadow-sm:
+        0 4px 10px rgba(0,0,0,.15);
+
+    --shadow-md:
+        0 10px 25px rgba(0,0,0,.20);
+
+    --shadow-lg:
+        0 20px 50px rgba(0,0,0,.30);
+
+    /* ------------------------------------------------------
+       Width
+       ------------------------------------------------------ */
+
+    --container-width: 1280px;
+
+    --content-width: 1080px;
+
+    /* ------------------------------------------------------
+       Header
+       ------------------------------------------------------ */
+
+    --header-height: 90px;
+
+    /* ------------------------------------------------------
+       Animation
+       ------------------------------------------------------ */
+
+    --transition-fast: .20s ease;
+
+    --transition-normal: .35s ease;
+
+    --transition-slow: .60s ease;
+
+    /* ------------------------------------------------------
+       Z Index
+       ------------------------------------------------------ */
+
+    --z-loader: 9999;
+
+    --z-modal: 9000;
+
+    --z-toast: 8000;
+
+    --z-header: 500;
 
 }
 
+/* ==========================================================
+   HTML
+   ========================================================== */
 
+html {
 
+    font-size: 16px;
 
+    scroll-behavior: smooth;
 
-body{
+}
 
-    min-height:
+/* ==========================================================
+   BODY
+   ========================================================== */
 
-        100vh;
+body {
 
-    overflow-x:
+    min-height: 100vh;
 
-        hidden;
+    background: var(--color-background);
+
+    color: var(--color-text);
 
     font-family:
 
         "Inter",
+
+        "Segoe UI",
+
+        Roboto,
+
+        Helvetica,
+
+        Arial,
+
         sans-serif;
 
-    font-size:
+    line-height: 1.6;
 
-        1rem;
+    overflow-x: hidden;
 
-    font-weight:
+    -webkit-font-smoothing: antialiased;
 
-        400;
-
-    line-height:
-
-        1.75;
-
-    letter-spacing:
-
-        .01em;
-
-    background:
-
-        var(--bg-primary);
-
-    color:
-
-        var(--text-body);
-
-    -webkit-font-smoothing:
-
-        antialiased;
-
-    -moz-osx-font-smoothing:
-
-        grayscale;
-
-    text-rendering:
-
-        optimizeLegibility;
+    text-rendering: optimizeLegibility;
 
 }
 
+/* ==========================================================
+   ROOT APPLICATION
+   ========================================================== */
 
+#app {
 
+    width: 100%;
 
-
-img{
-
-    display:
-
-        block;
-
-    max-width:
-
-        100%;
-
-    height:
-
-        auto;
+    min-height: 100vh;
 
 }
 
+/* ==========================================================
+   IMAGES
+   ========================================================== */
 
+img {
 
+    display: block;
 
+    max-width: 100%;
 
-picture{
-
-    display:
-
-        block;
-
-}
-
-
-
-
-
-svg{
-
-    display:
-
-        block;
-
-    max-width:
-
-        100%;
+    height: auto;
 
 }
 
+/* ==========================================================
+   LINKS
+   ========================================================== */
 
+a {
 
+    color: inherit;
 
-
-video{
-
-    display:
-
-        block;
-
-    width:
-
-        100%;
-
-    height:
-
-        auto;
+    text-decoration: none;
 
 }
 
+/* ==========================================================
+   BUTTONS
+   ========================================================== */
 
+button {
 
+    border: none;
 
+    outline: none;
 
-canvas{
+    cursor: pointer;
 
-    display:
+    background: transparent;
 
-        block;
-
-}
-
-
-
-
-
-iframe{
-
-    border:
-
-        none;
+    font: inherit;
 
 }
 
-
-
-
-
-button{
-
-    font:
-
-        inherit;
-
-    color:
-
-        inherit;
-
-    background:
-
-        none;
-
-    border:
-
-        none;
-
-    cursor:
-
-        pointer;
-
-}
-
-
-
-
+/* ==========================================================
+   INPUTS
+   ========================================================== */
 
 input,
 textarea,
-select{
+select {
 
-    font:
+    font: inherit;
 
-        inherit;
-
-    color:
-
-        inherit;
+    outline: none;
 
 }
 
-
-
-
-
-textarea{
-
-    resize:
-
-        vertical;
-
-}
-
-
-
-
+/* ==========================================================
+   LISTS
+   ========================================================== */
 
 ul,
-ol{
+ol {
 
-    list-style:
+    list-style: none;
 
-        none;
-
-}
-
-
-
-
-
-table{
-
-    border-collapse:
-
-        collapse;
-
-    border-spacing:
-
-        0;
-
-}
-
-
-
-
-
-hr{
-
-    border:
-
-        none;
-
-}
-
-/* ==========================================================================
-   GLOBAL TYPOGRAPHY
-========================================================================== */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6{
-
-    color:
-
-        var(--text-heading);
-
-    font-weight:
-
-        700;
-
-    line-height:
-
-        1.20;
-
-    letter-spacing:
-
-        -.02em;
-
-    text-wrap:
-
-        balance;
-
-}
-
-
-
-
-
-h1{
-
-    font-size:
-
-        clamp(2.6rem,4vw,4.8rem);
-
-}
-
-
-
-
-
-h2{
-
-    font-size:
-
-        clamp(2.1rem,3vw,3.6rem);
-
-}
-
-
-
-
-
-h3{
-
-    font-size:
-
-        clamp(1.75rem,2.4vw,2.6rem);
-
-}
-
-
-
-
-
-h4{
-
-    font-size:
-
-        clamp(1.35rem,2vw,2rem);
-
-}
-
-
-
-
-
-h5{
-
-    font-size:
-
-        1.15rem;
-
-}
-
-
-
-
-
-h6{
-
-    font-size:
-
-        1rem;
-
-}
-
-
-
-
-
-p{
-
-    color:
-
-        var(--text-body);
-
-    margin-bottom:
-
-        1.25rem;
-
-    text-wrap:
-
-        pretty;
-
-}
-
-
-
-
-
-strong{
-
-    color:
-
-        var(--text-primary);
-
-    font-weight:
-
-        600;
-
-}
-
-
-
-
-
-small{
-
-    color:
-
-        var(--text-muted);
-
-}
-
-
-
-
-
-mark{
-
-    color:
-
-        var(--ctm-white);
-
-    background:
-
-        rgba(35,212,200,.18);
-
-    padding:
-
-        .1rem .3rem;
-
-    border-radius:
-
-        4px;
-
-}
-
-
-
-
-
-blockquote{
-
-    margin:
-
-        2rem 0;
-
-    padding:
-
-        1.5rem 2rem;
-
-    border-left:
-
-        4px solid var(--ctm-teal);
-
-    background:
-
-        rgba(255,255,255,.03);
-
-    color:
-
-        var(--text-secondary);
-
-    font-style:
-
-        italic;
-
-}
-
-
-
-
-
-code{
-
-    padding:
-
-        .15rem .4rem;
-
-    border-radius:
-
-        6px;
-
-    background:
-
-        rgba(255,255,255,.06);
-
-    font-family:
-
-        Consolas,
-        Monaco,
-        monospace;
-
-    font-size:
-
-        .92em;
-
-}
-
-
-
-
-
-pre{
-
-    overflow-x:
-
-        auto;
-
-    padding:
-
-        1.5rem;
-
-    border-radius:
-
-        var(--radius-sm);
-
-    background:
-
-        rgba(255,255,255,.04);
-
-}
-
-/* ==========================================================================
-   LAYOUT FOUNDATION
-========================================================================== */
-
-:root{
-
-    --container-xs:
-
-        640px;
-
-    --container-sm:
-
-        768px;
-
-    --container-md:
-
-        960px;
-
-    --container-lg:
-
-        1180px;
-
-    --container-xl:
-
-        1320px;
-
-}
-
-
-
-
-
-.container{
-
-    width:
-
-        min(100% - 48px,var(--container-lg));
-
-    margin-inline:
-
-        auto;
-
-}
-
-
-
-
-
-.container-wide{
-
-    width:
-
-        min(100% - 48px,var(--container-xl));
-
-    margin-inline:
-
-        auto;
-
-}
-
-
-
-
-
-.container-narrow{
-
-    width:
-
-        min(100% - 48px,var(--container-md));
-
-    margin-inline:
-
-        auto;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   SECTION RHYTHM
-========================================================================== */
-
-section{
-
-    position:
-
-        relative;
-
-}
-
-
-
-
-
-.section{
-
-    padding:
-
-        clamp(4rem,8vw,7rem) 0;
-
-}
-
-
-
-
-
-.section-sm{
-
-    padding:
-
-        clamp(3rem,6vw,5rem) 0;
-
-}
-
-
-
-
-
-.section-lg{
-
-    padding:
-
-        clamp(5rem,10vw,9rem) 0;
-
-}
-
-
-
-
-
-.section-header{
-
-    max-width:
-
-        760px;
-
-    margin:
-
-        0 auto 3.5rem;
-
-    text-align:
-
-        center;
-
-}
-
-
-
-
-
-.section-title{
-
-    margin-bottom:
-
-        1rem;
-
-}
-
-
-
-
-
-.section-subtitle{
-
-    color:
-
-        var(--text-secondary);
-
-    font-size:
-
-        clamp(1rem,1.5vw,1.15rem);
-
-    line-height:
-
-        1.8;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   SPACING UTILITIES
-========================================================================== */
-
-.mt-0{margin-top:0!important;}
-.mt-1{margin-top:var(--space-1)!important;}
-.mt-2{margin-top:var(--space-2)!important;}
-.mt-3{margin-top:var(--space-3)!important;}
-.mt-4{margin-top:var(--space-4)!important;}
-.mt-5{margin-top:var(--space-5)!important;}
-.mt-6{margin-top:var(--space-6)!important;}
-.mt-7{margin-top:var(--space-7)!important;}
-.mt-8{margin-top:var(--space-8)!important;}
-
-.mb-0{margin-bottom:0!important;}
-.mb-1{margin-bottom:var(--space-1)!important;}
-.mb-2{margin-bottom:var(--space-2)!important;}
-.mb-3{margin-bottom:var(--space-3)!important;}
-.mb-4{margin-bottom:var(--space-4)!important;}
-.mb-5{margin-bottom:var(--space-5)!important;}
-.mb-6{margin-bottom:var(--space-6)!important;}
-.mb-7{margin-bottom:var(--space-7)!important;}
-.mb-8{margin-bottom:var(--space-8)!important;}
-
-/* ==========================================================================
-   DISPLAY UTILITIES
-========================================================================== */
-
-.d-none{
-
-    display:
-
-        none !important;
-
-}
-
-
-
-
-
-.d-block{
-
-    display:
-
-        block !important;
-
-}
-
-
-
-
-
-.d-inline{
-
-    display:
-
-        inline !important;
-
-}
-
-
-
-
-
-.d-inline-block{
-
-    display:
-
-        inline-block !important;
-
-}
-
-
-
-
-
-.d-flex{
-
-    display:
-
-        flex !important;
-
-}
-
-
-
-
-
-.d-grid{
-
-    display:
-
-        grid !important;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   FLEX UTILITIES
-========================================================================== */
-
-.flex-row{
-
-    display:
-
-        flex;
-
-    flex-direction:
-
-        row;
-
-}
-
-
-
-
-
-.flex-column{
-
-    display:
-
-        flex;
-
-    flex-direction:
-
-        column;
-
-}
-
-
-
-
-
-.align-center{
-
-    align-items:
-
-        center;
-
-}
-
-
-
-
-
-.justify-center{
-
-    justify-content:
-
-        center;
-
-}
-
-
-
-
-
-.justify-between{
-
-    justify-content:
-
-        space-between;
-
-}
-
-
-
-
-
-.justify-around{
-
-    justify-content:
-
-        space-around;
-
-}
-
-
-
-
-
-.flex-wrap{
-
-    flex-wrap:
-
-        wrap;
-
-}
-
-
-
-
-
-.gap-1{
-
-    gap:
-
-        var(--space-1);
-
-}
-
-
-
-
-
-.gap-2{
-
-    gap:
-
-        var(--space-2);
-
-}
-
-
-
-
-
-.gap-3{
-
-    gap:
-
-        var(--space-3);
-
-}
-
-
-
-
-
-.gap-4{
-
-    gap:
-
-        var(--space-4);
-
-}
-
-
-
-
-
-.gap-5{
-
-    gap:
-
-        var(--space-5);
-
-}
-
-
-
-
-
-.gap-6{
-
-    gap:
-
-        var(--space-6);
-
-}
-
-
-
-
-
-/* ==========================================================================
-   WIDTH UTILITIES
-========================================================================== */
-
-.w-100{
-
-    width:
-
-        100%;
-
-}
-
-
-
-
-
-.h-100{
-
-    height:
-
-        100%;
-
-}
-
-
-
-
-
-.min-vh-100{
-
-    min-height:
-
-        100vh;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   TEXT ALIGNMENT
-========================================================================== */
-
-.text-left{
-
-    text-align:
-
-        left;
-
-}
-
-
-
-
-
-.text-center{
-
-    text-align:
-
-        center;
-
-}
-
-
-
-
-
-.text-right{
-
-    text-align:
-
-        right;
-
-}
-
-/* ==========================================================================
-   VISIBILITY UTILITIES
-========================================================================== */
-
-.visible{
-
-    visibility:
-
-        visible !important;
-
-}
-
-
-
-
-
-.invisible{
-
-    visibility:
-
-        hidden !important;
-
-}
-
-
-
-
-
-.opacity-0{
-
-    opacity:
-
-        0 !important;
-
-}
-
-
-
-
-
-.opacity-25{
-
-    opacity:
-
-        .25 !important;
-
-}
-
-
-
-
-
-.opacity-50{
-
-    opacity:
-
-        .50 !important;
-
-}
-
-
-
-
-
-.opacity-75{
-
-    opacity:
-
-        .75 !important;
-
-}
-
-
-
-
-
-.opacity-100{
-
-    opacity:
-
-        1 !important;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   POSITION UTILITIES
-========================================================================== */
-
-.position-relative{
-
-    position:
-
-        relative;
-
-}
-
-
-
-
-
-.position-absolute{
-
-    position:
-
-        absolute;
-
-}
-
-
-
-
-
-.position-fixed{
-
-    position:
-
-        fixed;
-
-}
-
-
-
-
-
-.overflow-hidden{
-
-    overflow:
-
-        hidden;
-
-}
-
-
-
-
-
-.overflow-auto{
-
-    overflow:
-
-        auto;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   BORDER RADIUS UTILITIES
-========================================================================== */
-
-.rounded-xs{
-
-    border-radius:
-
-        var(--radius-xs);
-
-}
-
-
-
-
-
-.rounded-sm{
-
-    border-radius:
-
-        var(--radius-sm);
-
-}
-
-
-
-
-
-.rounded-md{
-
-    border-radius:
-
-        var(--radius-md);
-
-}
-
-
-
-
-
-.rounded-lg{
-
-    border-radius:
-
-        var(--radius-lg);
-
-}
-
-
-
-
-
-.rounded-xl{
-
-    border-radius:
-
-        var(--radius-xl);
-
-}
-
-
-
-
-
-.rounded-pill{
-
-    border-radius:
-
-        var(--radius-pill);
-
-}
-
-
-
-
-
-/* ==========================================================================
-   SHADOW UTILITIES
-========================================================================== */
-
-.shadow-xs{
-
-    box-shadow:
-
-        var(--shadow-xs);
-
-}
-
-
-
-
-
-.shadow-sm{
-
-    box-shadow:
-
-        var(--shadow-sm);
-
-}
-
-
-
-
-
-.shadow-md{
-
-    box-shadow:
-
-        var(--shadow-md);
-
-}
-
-
-
-
-
-.shadow-lg{
-
-    box-shadow:
-
-        var(--shadow-lg);
-
-}
-
-
-
-
-
-.shadow-xl{
-
-    box-shadow:
-
-        var(--shadow-xl);
-
-}
-
-/* ==========================================================================
-   ANIMATION UTILITIES
-========================================================================== */
-
-.fade-in{
-
-    animation:
-
-        fadeIn .8s ease both;
-
-}
-
-
-
-
-
-.fade-up{
-
-    animation:
-
-        fadeUp .8s ease both;
-
-}
-
-
-
-
-
-.scale-in{
-
-    animation:
-
-        scaleIn .6s ease both;
-
-}
-
-
-
-
-
-@keyframes fadeIn{
-
-    from{
-
-        opacity:
-
-            0;
-
-    }
-
-    to{
-
-        opacity:
-
-            1;
-
-    }
-
-}
-
-
-
-
-
-@keyframes fadeUp{
-
-    from{
-
-        opacity:
-
-            0;
-
-        transform:
-
-            translateY(24px);
-
-    }
-
-    to{
-
-        opacity:
-
-            1;
-
-        transform:
-
-            translateY(0);
-
-    }
-
-}
-
-
-
-
-
-@keyframes scaleIn{
-
-    from{
-
-        opacity:
-
-            0;
-
-        transform:
-
-            scale(.96);
-
-    }
-
-    to{
-
-        opacity:
-
-            1;
-
-        transform:
-
-            scale(1);
-
-    }
-
 }
-
-
-
-
-
-/* ==========================================================================
-   SCREEN READER ACCESSIBILITY
-========================================================================== */
-
-.sr-only{
-
-    position:
-
-        absolute;
-
-    width:
-
-        1px;
-
-    height:
-
-        1px;
-
-    padding:
-
-        0;
-
-    margin:
-
-        -1px;
-
-    overflow:
-
-        hidden;
-
-    clip:
-
-        rect(0,0,0,0);
-
-    white-space:
 
-        nowrap;
+/* ==========================================================
+   UTILITIES
+   ========================================================== */
 
-    border:
+.hidden {
 
-        0;
+    display: none !important;
 
 }
 
+.text-center {
 
+    text-align: center;
 
-
-
-:focus-visible{
-
-    outline:
-
-        2px solid var(--ctm-teal-soft);
-
-    outline-offset:
-
-        3px;
-
 }
-
-
-
-
-
-/* ==========================================================================
-   REDUCED MOTION
-========================================================================== */
-
-@media (prefers-reduced-motion:reduce){
-
-    *,
-
-    *::before,
-
-    *::after{
 
-        animation:
+.container {
 
-            none !important;
+    width: min(
+        var(--container-width),
+        calc(100% - 48px)
+    );
 
-        transition:
+    margin-inline: auto;
 
-            none !important;
-
-        scroll-behavior:
-
-            auto !important;
-
-    }
-
 }
-
-
-
-
 
-/* ==========================================================================
-   PRINT
-========================================================================== */
+.content {
 
-@media print{
+    width: min(
+        var(--content-width),
+        100%
+    );
 
-    body{
+    margin-inline: auto;
 
-        background:
-
-            #ffffff;
-
-        color:
-
-            #000000;
-
-    }
-
 }
-
-
-
-
 
-/* ==========================================================================
-   END OF FILE
-========================================================================== */
