@@ -4,9 +4,8 @@
  * CTM PATH™ Guided Journey™
  * Application Module
  * --------------------------------------------------------------
- * Version : 1.0 (Working MVP Orchestrator)
+ * Version : 1.1 (Working MVP Orchestrator)
  * Pattern : Singleton
- * Author  : CTM PATH™ Engineering
  *
  * Responsibilities
  * --------------------------------------------------------------
@@ -30,6 +29,7 @@
 
 
 window.CTM = window.CTM || {};
+
 
 
 /* ==============================================================
@@ -58,6 +58,7 @@ class App {
 
 
 
+
     /* ==========================================================
        INITIALIZE APPLICATION
     ========================================================== */
@@ -81,6 +82,7 @@ class App {
 
 
         this.#starting = true;
+
 
 
         try {
@@ -118,6 +120,7 @@ class App {
 
 
         }
+
 
         catch(error) {
 
@@ -161,7 +164,6 @@ class App {
 
 
 
-
     getCurrentPage() {
 
 
@@ -169,7 +171,6 @@ class App {
 
 
     }
-
 
 
 
@@ -184,650 +185,660 @@ class App {
 
 
     /* ==========================================================
-       NEXT BATCH
+       NEXT:
 
        Batch 1B
 
-       --------------------------------------
-
        #loadComponents()
-
        #loadHeader()
-
        #loadFooter()
-
        #bindEvents()
-
        #startJourney()
 
-       loadPage()
+    ========================================================== */
+
+    /* ==========================================================
+       LOAD SHARED COMPONENTS
+
+       Header
+       Footer
 
     ========================================================== */
 
 
-}
+    async #loadComponents() {
 
-/* ==============================================================
-   LOAD SHARED COMPONENTS
 
-   Header
-   Footer
+        await this.#loadHeader();
 
-============================================================== */
 
-
-async #loadComponents() {
-
-
-    await this.#loadHeader();
-
-
-    await this.#loadFooter();
-
-
-    console.log(
-
-        "CTM PATH™ Components Loaded."
-
-    );
-
-
-}
-
-
-
-/* ==============================================================
-   LOAD HEADER
-
-============================================================== */
-
-
-async #loadHeader() {
-
-
-    const container = document.querySelector(
-
-        "#header"
-
-    );
-
-
-    if (!container) {
-
-
-        console.warn(
-
-            "Header container not found."
-
-        );
-
-
-        return;
-
-
-    }
-
-
-
-    try {
-
-
-        const response = await fetch(
-
-            "components/header.html"
-
-        );
-
-
-        container.innerHTML = await response.text();
-
-
-
-    }
-
-    catch(error) {
-
-
-        console.error(
-
-            "Header loading failed.",
-
-            error
-
-        );
-
-
-    }
-
-
-}
-
-
-
-
-/* ==============================================================
-   LOAD FOOTER
-
-============================================================== */
-
-
-async #loadFooter() {
-
-
-    const container = document.querySelector(
-
-        "#footer"
-
-    );
-
-
-    if (!container) {
-
-
-        console.warn(
-
-            "Footer container not found."
-
-        );
-
-
-        return;
-
-
-    }
-
-
-
-    try {
-
-
-        const response = await fetch(
-
-            "components/footer.html"
-
-        );
-
-
-        container.innerHTML = await response.text();
-
-
-
-    }
-
-    catch(error) {
-
-
-        console.error(
-
-            "Footer loading failed.",
-
-            error
-
-        );
-
-
-    }
-
-
-}
-
-
-
-
-
-/* ==============================================================
-   GLOBAL EVENTS
-
-============================================================== */
-
-
-async #bindEvents() {
-
-
-    document.addEventListener(
-
-        "click",
-
-        event => {
-
-
-            const button = event.target.closest(
-
-                "[data-next-page]"
-
-            );
-
-
-            if (!button) {
-
-
-                return;
-
-
-            }
-
-
-
-            const nextPage = Number(
-
-                button.dataset.nextPage
-
-            );
-
-
-
-            if (nextPage) {
-
-
-                this.loadPage(
-
-                    nextPage
-
-                );
-
-
-            }
-
-
-        }
-
-    );
-
-
-
-    window.addEventListener(
-
-        "popstate",
-
-        () => {
-
-
-            const page = Number(
-
-                location.hash.replace(
-
-                    "#page",
-
-                    ""
-
-                )
-
-            );
-
-
-
-            if (page) {
-
-
-                this.loadPage(
-
-                    page
-
-                );
-
-
-            }
-
-
-        }
-
-    );
-
-
-}
-
-
-
-
-
-/* ==============================================================
-   START JOURNEY
-
-============================================================== */
-
-
-async #startJourney() {
-
-
-    const hashPage = Number(
-
-        location.hash.replace(
-
-            "#page",
-
-            ""
-
-        )
-
-    );
-
-
-
-    if (
-
-        hashPage >= 1 &&
-
-        hashPage <= this.#totalPages
-
-    ) {
-
-
-        await this.loadPage(
-
-            hashPage
-
-        );
-
-
-    }
-
-    else {
-
-
-        await this.loadPage(
-
-            1
-
-        );
-
-
-    }
-
-
-}
-
-
-
-
-
-/* ==============================================================
-   LOAD PAGE
-
-   page01.html → page07.html
-
-============================================================== */
-
-
-async loadPage(pageNumber) {
-
-
-    if (
-
-        pageNumber < 1 ||
-
-        pageNumber > this.#totalPages
-
-    ) {
-
-
-        return;
-
-
-    }
-
-
-
-    const container = document.querySelector(
-
-        "#app"
-
-    );
-
-
-
-    if (!container) {
-
-
-        console.error(
-
-            "Application container #app missing."
-
-        );
-
-
-        return;
-
-
-    }
-
-
-
-    try {
-
-
-        const response = await fetch(
-
-            `pages/page0${pageNumber}.html`
-
-        );
-
-
-
-        if (!response.ok) {
-
-
-            throw new Error(
-
-                `Page ${pageNumber} not found`
-
-            );
-
-
-        }
-
-
-
-        container.innerHTML = await response.text();
-
-
-
-        this.#currentPage = pageNumber;
-
-
-
-        location.hash =
-
-            `page${pageNumber}`;
-
-
-
-        window.scrollTo(
-
-            {
-
-                top: 0,
-
-                behavior: "smooth"
-
-            }
-
-        );
+        await this.#loadFooter();
 
 
 
         console.log(
 
-            `Loaded CTM PATH™ Page ${pageNumber}/7`
+            "CTM PATH™ Components Loaded."
+
+        );
+
+
+    }
+
+
+
+
+    /* ==========================================================
+       LOAD HEADER COMPONENT
+
+    ========================================================== */
+
+
+    async #loadHeader() {
+
+
+        const container = document.querySelector(
+
+            "#header-container"
 
         );
 
 
 
+        if (!container) {
+
+
+            console.warn(
+
+                "Header container not found."
+
+            );
+
+
+            return;
+
+
+        }
+
+
+
+        try {
+
+
+            const response = await fetch(
+
+                "components/header.html"
+
+            );
+
+
+
+            if (!response.ok) {
+
+
+                throw new Error(
+
+                    "Header component unavailable."
+
+                );
+
+
+            }
+
+
+
+            container.innerHTML = await response.text();
+
+
+
+        }
+
+
+        catch(error) {
+
+
+            console.error(
+
+                "Header loading failed.",
+
+                error
+
+            );
+
+
+        }
+
+
     }
 
-    catch(error) {
 
 
-        this.#handleError(
+
+    /* ==========================================================
+       LOAD FOOTER COMPONENT
+
+    ========================================================== */
+
+
+    async #loadFooter() {
+
+
+        const container = document.querySelector(
+
+            "#footer-container"
+
+        );
+
+
+
+        if (!container) {
+
+
+            console.warn(
+
+                "Footer container not found."
+
+            );
+
+
+            return;
+
+
+        }
+
+
+
+        try {
+
+
+            const response = await fetch(
+
+                "components/footer.html"
+
+            );
+
+
+
+            if (!response.ok) {
+
+
+                throw new Error(
+
+                    "Footer component unavailable."
+
+                );
+
+
+            }
+
+
+
+            container.innerHTML = await response.text();
+
+
+
+        }
+
+
+        catch(error) {
+
+
+            console.error(
+
+                "Footer loading failed.",
+
+                error
+
+            );
+
+
+        }
+
+
+    }
+
+
+
+
+    /* ==========================================================
+       GLOBAL EVENTS
+
+    ========================================================== */
+
+
+    async #bindEvents() {
+
+
+        document.addEventListener(
+
+            "click",
+
+            event => {
+
+
+                const nextButton = event.target.closest(
+
+                    "[data-next-page]"
+
+                );
+
+
+
+                if (nextButton) {
+
+
+                    const pageNumber = Number(
+
+                        nextButton.dataset.nextPage
+
+                    );
+
+
+
+                    this.loadPage(
+
+                        pageNumber
+
+                    );
+
+
+                }
+
+
+
+                const previousButton = event.target.closest(
+
+                    "[data-prev-page]"
+
+                );
+
+
+
+                if (previousButton) {
+
+
+                    const pageNumber = Number(
+
+                        previousButton.dataset.prevPage
+
+                    );
+
+
+
+                    this.loadPage(
+
+                        pageNumber
+
+                    );
+
+
+                }
+
+
+            }
+
+        );
+
+
+    }
+
+
+
+
+    /* ==========================================================
+       START JOURNEY
+
+    ========================================================== */
+
+
+    async #startJourney() {
+
+
+        const hashPage = Number(
+
+            location.hash.replace(
+
+                "#page",
+
+                ""
+
+            )
+
+        );
+
+
+
+        if (
+
+            hashPage >= 1 &&
+
+            hashPage <= this.#totalPages
+
+        ) {
+
+
+            await this.loadPage(
+
+                hashPage
+
+            );
+
+
+        }
+
+        else {
+
+
+            await this.loadPage(
+
+                1
+
+            );
+
+
+        }
+
+
+    }
+
+
+
+
+    /* ==========================================================
+       NEXT:
+
+       Batch 1C
+
+       loadPage()
+
+       #handleError()
+
+       destroy()
+
+       restart()
+
+       dispose()
+
+       Closing class brace
+
+       Singleton export
+
+       DOMContentLoaded
+
+    ========================================================== */
+
+    /* ==========================================================
+       LOAD PAGE
+
+       page01.html → page07.html
+
+    ========================================================== */
+
+
+    async loadPage(pageNumber) {
+
+
+        if (
+
+            pageNumber < 1 ||
+
+            pageNumber > this.#totalPages
+
+        ) {
+
+
+            return;
+
+
+        }
+
+
+
+        const container = document.querySelector(
+
+            "#app"
+
+        );
+
+
+
+        if (!container) {
+
+
+            console.error(
+
+                "Application container #app missing."
+
+            );
+
+
+            return;
+
+
+        }
+
+
+
+        try {
+
+
+            const response = await fetch(
+
+                `pages/page0${pageNumber}.html`
+
+            );
+
+
+
+            if (!response.ok) {
+
+
+                throw new Error(
+
+                    `Page ${pageNumber} not found.`
+
+                );
+
+
+            }
+
+
+
+            container.innerHTML = await response.text();
+
+
+
+            this.#currentPage = pageNumber;
+
+
+
+            location.hash =
+
+                `page${pageNumber}`;
+
+
+
+            window.scrollTo(
+
+                {
+
+                    top: 0,
+
+                    behavior: "smooth"
+
+                }
+
+            );
+
+
+
+            console.log(
+
+                `Loaded CTM PATH™ Page ${pageNumber}/${this.#totalPages}`
+
+            );
+
+
+        }
+
+
+        catch(error) {
+
+
+            this.#handleError(
+
+                error
+
+            );
+
+
+        }
+
+
+    }
+
+
+
+
+    /* ==========================================================
+       ERROR HANDLING
+
+    ========================================================== */
+
+
+    #handleError(error) {
+
+
+        console.error(
+
+            "CTM PATH™ Application Error:",
 
             error
 
         );
 
 
-    }
 
+        const container = document.querySelector(
 
-}
+            "#app"
 
-
-
-/* ==============================================================
-   Remaining
-
-   Batch 1C
-
-   --------------------------------------
-
-   #handleError()
-
-   destroy()
-
-   Singleton Export
-
-   DOMContentLoaded
-
-   EOF
-
-============================================================== */
-
-
-/* ==============================================================
-   ERROR HANDLING
-
-============================================================== */
-
-
-#handleError(error) {
-
-
-    console.error(
-
-        "CTM PATH™ Application Error:",
-
-        error
-
-    );
+        );
 
 
 
-    const container = document.querySelector(
-
-        "#app"
-
-    );
+        if (container) {
 
 
+            container.innerHTML = `
 
-    if (container) {
+                <section class="error-screen">
 
+                    <h2>
+                        Something went wrong
+                    </h2>
 
-        container.innerHTML = `
+                    <p>
+                        Please refresh and try again.
+                    </p>
 
-            <section class="error-screen">
+                </section>
 
-                <h2>
-                    Something went wrong
-                </h2>
-
-                <p>
-                    Please refresh and try again.
-                </p>
-
-            </section>
-
-        `;
+            `;
 
 
-    }
-
-
-}
-
-
-
-
-/* ==============================================================
-   DESTROY
-
-============================================================== */
-
-
-async destroy() {
-
-
-    this.#initialized = false;
-
-
-    this.#currentPage = 1;
-
-
-
-    const app = document.querySelector(
-
-        "#app"
-
-    );
-
-
-    if (app) {
-
-
-        app.innerHTML = "";
+        }
 
 
     }
 
 
 
-    console.log(
 
-        "CTM PATH™ Application stopped."
+    /* ==========================================================
+       DESTROY
 
-    );
+    ========================================================== */
+
+
+    async destroy() {
+
+
+        this.#initialized = false;
+
+
+        this.#currentPage = 1;
+
+
+
+        const container = document.querySelector(
+
+            "#app"
+
+        );
+
+
+
+        if (container) {
+
+
+            container.innerHTML = "";
+
+
+        }
+
+
+
+        console.log(
+
+            "CTM PATH™ Application stopped."
+
+        );
+
+
+    }
+
+
+
+
+    /* ==========================================================
+       RESTART
+
+    ========================================================== */
+
+
+    async restart() {
+
+
+        await this.destroy();
+
+
+        await this.init();
+
+
+    }
+
+
+
+
+    /* ==========================================================
+       DISPOSE
+
+    ========================================================== */
+
+
+    async dispose() {
+
+
+        await this.destroy();
+
+
+    }
 
 
 }
 
 
-
-
-/* ==============================================================
-   RESTART
-
-============================================================== */
-
-
-async restart() {
-
-
-    await this.destroy();
-
-
-    await this.init();
-
-
-}
-
-
-
-
-/* ==============================================================
-   DISPOSE
-
-============================================================== */
-
-
-async dispose() {
-
-
-    await this.destroy();
-
-
-}
-
-
-}
 
 
 /* ==============================================================
@@ -861,8 +872,9 @@ document.addEventListener(
 
 
 
+
 /* ==============================================================
-   WORKING MVP ORCHESTRATOR v1.0
+   CTM PATH™ MVP ORCHESTRATOR v1.1
 
    Flow
 
@@ -909,33 +921,9 @@ document.addEventListener(
    Page 07
 
 
-   Responsibilities
-
-   ✓ Component Loading
-
-   ✓ Page Loading
-
-   ✓ Navigation Triggering
-
-   ✓ Startup Handling
-
-   ✓ Error Handling
-
-
-   Preserved
-
-   ✓ Existing Components
-
-   ✓ Existing CSS
-
-   ✓ Existing Page Content
-
-   ✓ Existing Seven Page Journey
-
-
    Status
 
-   CTM PATH™ MVP ORCHESTRATOR v1.0
+   WORKING MVP ORCHESTRATOR v1.1
 
    EOF
 
