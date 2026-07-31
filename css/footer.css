@@ -1,63 +1,53 @@
 
 /* ==========================================================================
-   CTM PATH™ Guided Journey™
+   CTM PATH™ MILLIONAIRES™
 
-   File        : css/footer.css
-   Version     : 5.0
-   Status      : Premium Global Footer
-   Architecture: Static HTML + CSS + Vanilla JavaScript
+   File        : footer.css
+   Version     : 10.0
 
-   --------------------------------------------------------------------------
+   Status      : PREMIUM GLOBAL FOOTER
 
-   PURPOSE
+   Purpose:
 
-   Premium styling for the global footer.
+   Final brand signature layer.
 
-   Covers
+   Covers:
 
-   • Footer Hero Line
-   • Brand Section
-   • Founder Section
-   • Contact Section
-   • Bottom Copyright
-   • Responsive Layout
-   • Premium Hover Effects
+   ✓ Journey Signature
+   ✓ Brand Identity
+   ✓ Founder Identity
+   ✓ Movement Connection
+   ✓ Legacy Statement
+   ✓ Copyright
+   ✓ Responsive Layout
 
-   v5.0 UPDATE
-
-   • Footer now visually merges into the main page.
-   • Removed heavy black footer block.
-   • Introduced seamless background continuation.
-   • Softer ambient lighting.
-   • All layout, typography and spacing preserved.
-
-========================================================================== */
-
-
+   ========================================================================== */
 
 
 
 /* ==========================================================================
-   FOOTER
+   FOOTER CONTAINER
 ========================================================================== */
 
-.ctm-footer{
 
-    position:
+.ctm-footer {
 
-        relative;
+    position:relative;
 
-    overflow:
-
-        hidden;
+    overflow:hidden;
 
     margin-top:
 
-        clamp(5rem,8vw,8rem);
+        clamp(5rem,8vw,9rem);
 
-    isolation:
 
-        isolate;
+    padding-top:
+
+        0;
+
+
+    isolation:isolate;
+
 
     background:
 
@@ -67,21 +57,18 @@
 
             rgba(8,28,58,0),
 
-            rgba(8,28,58,.10) 12%,
+            rgba(8,28,58,.25) 20%,
 
-            rgba(8,28,58,.22) 28%,
+            rgba(8,28,58,.75) 70%,
 
-            rgba(8,28,58,.42) 52%,
-
-            rgba(8,28,58,.70) 76%,
-
-            rgba(8,28,58,.92) 100%
+            rgba(6,16,32,.98)
 
         );
 
+
     border-top:
 
-        1px solid rgba(255,255,255,.035);
+        1px solid rgba(255,255,255,.06);
 
 }
 
@@ -89,23 +76,22 @@
 
 
 
-.ctm-footer::before{
+/* ==========================================================================
+   PREMIUM AMBIENT LIGHT
+========================================================================== */
 
-    content:
 
-        "";
+.ctm-footer::before {
 
-    position:
+    content:"";
 
-        absolute;
+    position:absolute;
 
-    inset:
+    inset:0;
 
-        0;
 
-    pointer-events:
+    pointer-events:none;
 
-        none;
 
     background:
 
@@ -113,19 +99,19 @@
 
             ellipse at top center,
 
-            rgba(35,212,200,.045),
+            rgba(33,210,198,.10),
 
-            transparent 58%
+            transparent 45%
 
         ),
 
         radial-gradient(
 
-            ellipse at bottom center,
+            ellipse at bottom right,
 
-            rgba(255,255,255,.015),
+            rgba(201,162,39,.10),
 
-            transparent 76%
+            transparent 42%
 
         );
 
@@ -135,118 +121,96 @@
 
 
 
-.ctm-footer::after{
+.ctm-footer::after {
 
-    content:
+    content:"";
 
-        "";
+    position:absolute;
 
-    position:
+    left:10%;
 
-        absolute;
+    right:10%;
 
-    inset:
+    top:0;
 
-        0;
+    height:1px;
 
-    pointer-events:
-
-        none;
 
     background:
 
         linear-gradient(
 
-            180deg,
+            90deg,
 
-            rgba(255,255,255,.015),
+            transparent,
 
-            transparent 10%,
+            rgba(201,162,39,.55),
 
-            transparent 100%
+            transparent
 
         );
 
 }
 
+
+
+
+
 /* ==========================================================================
-   TOP JOURNEY LINE
+   JOURNEY SIGNATURE
 ========================================================================== */
 
 
-.footer-topline{
+.footer-topline {
 
-    position:
+    position:relative;
 
-        relative;
+    z-index:2;
 
-    z-index:
 
-        2;
+    display:flex;
 
-    display:
+    justify-content:center;
 
-        flex;
+    align-items:center;
 
-    justify-content:
+    flex-wrap:wrap;
 
-        center;
 
-    align-items:
+    gap:1rem;
 
-        center;
-
-    flex-wrap:
-
-        wrap;
-
-    gap:
-
-        1rem;
 
     padding:
 
-        1.40rem 2rem;
+        2rem 1.5rem;
+
 
     color:
 
-        var(--ctm-gold-soft);
+        var(--ctm-gold-soft,#D6B45C);
+
 
     font-size:
 
-        .86rem;
+        .82rem;
+
 
     font-weight:
 
-        700;
+        800;
+
 
     letter-spacing:
 
-        .20em;
+        .28em;
+
 
     text-transform:
 
         uppercase;
 
-    text-shadow:
 
-        0 0 18px rgba(201,162,39,.18);
-
-    border-bottom:
-
-        1px solid rgba(255,255,255,.035);
-
-    background:
-
-        linear-gradient(
-
-            180deg,
-
-            rgba(255,255,255,.010),
-
-            rgba(255,255,255,.004)
-
-        );
+    text-align:center;
 
 }
 
@@ -254,15 +218,12 @@
 
 
 
-.footer-topline span{
+.footer-divider {
 
     color:
 
-        var(--ctm-gold);
+        var(--ctm-teal,#23D4C8);
 
-    opacity:
-
-        .90;
 
 }
 
@@ -271,26 +232,26 @@
 
 
 /* ==========================================================================
-   CONTAINER
+   FOOTER CONTENT
 ========================================================================== */
 
-.footer-container{
 
-    position:
+.footer-container {
 
-        relative;
+    position:relative;
 
-    z-index:
+    z-index:2;
 
-        2;
 
     width:
 
-        min(1280px,100% - 48px);
+        min(1280px,calc(100% - 72px));
+
 
     margin:
 
         0 auto;
+
 
     padding:
 
@@ -306,51 +267,48 @@
 
 
 
-/* ==========================================================================
-   FOOTER GRID
-========================================================================== */
+.footer-grid {
 
-.footer-grid{
+    display:grid;
 
-    display:
-
-        grid;
 
     grid-template-columns:
 
-        1.25fr
+        1.2fr
 
-        .90fr
+        .9fr
 
-        1fr;
+        1.2fr;
+
 
     gap:
 
-        clamp(2rem,4vw,4rem);
+        clamp(2rem,5vw,5rem);
 
-    align-items:
 
-        start;
+    align-items:start;
 
 }
+
+
+
+
 
 /* ==========================================================================
-   BRAND
+   BRAND SECTION
 ========================================================================== */
 
-.footer-brand{
 
-    display:
+.footer-brand {
 
-        flex;
+    display:flex;
 
-    flex-direction:
+    flex-direction:column;
 
-        column;
 
     gap:
 
-        .85rem;
+        .8rem;
 
 }
 
@@ -358,47 +316,27 @@
 
 
 
-.footer-brand-name{
+.footer-brand-name {
 
     color:
 
-        var(--text-heading);
+        #FFFFFF;
+
 
     font-size:
 
-        clamp(1.8rem,2.5vw,2.4rem);
+        clamp(2rem,3vw,2.8rem);
+
 
     font-weight:
 
-        700;
+        900;
+
 
     letter-spacing:
 
-        .04em;
+        .14em;
 
-}
-
-
-
-
-
-.footer-brand-subtitle{
-
-    color:
-
-        var(--ctm-gold-soft);
-
-    font-size:
-
-        .92rem;
-
-    font-weight:
-
-        600;
-
-    letter-spacing:
-
-        .22em;
 
     text-transform:
 
@@ -410,19 +348,75 @@
 
 
 
-.footer-brand-signature{
+.footer-brand-subtitle {
 
     color:
 
-        var(--text-secondary);
+        var(--ctm-gold-soft,#D6B45C);
+
+
+    font-size:
+
+        .95rem;
+
+
+    font-weight:
+
+        800;
+
+
+    letter-spacing:
+
+        .32em;
+
+
+    text-transform:
+
+        uppercase;
+
+}
+
+
+
+
+
+.footer-brand-description {
+
+    color:
+
+        rgba(255,255,255,.80);
+
 
     font-size:
 
         1rem;
 
+
     line-height:
 
-        1.8;
+        1.7;
+
+}
+
+
+
+
+
+.footer-brand-signature {
+
+    color:
+
+        var(--ctm-teal-soft,#6BE8DD);
+
+
+    font-size:
+
+        1rem;
+
+
+    font-weight:
+
+        600;
 
 }
 
@@ -431,18 +425,55 @@
 
 
 /* ==========================================================================
-   FOUNDER
+   SECTION LABEL
 ========================================================================== */
 
-.footer-founder{
 
-    display:
+.footer-section-label {
 
-        flex;
 
-    flex-direction:
+    color:
 
-        column;
+        rgba(255,255,255,.45);
+
+
+    font-size:
+
+        .7rem;
+
+
+    font-weight:
+
+        800;
+
+
+    letter-spacing:
+
+        .3em;
+
+
+    text-transform:
+
+        uppercase;
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   FOUNDER SECTION
+========================================================================== */
+
+
+.footer-founder {
+
+    display:flex;
+
+    flex-direction:column;
+
 
     gap:
 
@@ -454,23 +485,24 @@
 
 
 
-.footer-founder-name{
+.footer-founder-name {
 
-    color:
+    color:#FFFFFF;
 
-        var(--text-primary);
 
     font-size:
 
-        1.2rem;
+        1.25rem;
+
 
     font-weight:
 
-        700;
+        800;
 
-    white-space:
 
-        nowrap;
+    line-height:
+
+        1.4;
 
 }
 
@@ -478,15 +510,17 @@
 
 
 
-.footer-role{
+.footer-role {
 
     color:
 
-        var(--text-support);
+        rgba(255,255,255,.68);
+
 
     font-size:
 
-        .98rem;
+        1rem;
+
 
     line-height:
 
@@ -494,265 +528,312 @@
 
 }
 
-/* ==========================================================================
-   CONTACT
-========================================================================== */
-
-.footer-contact{
-
-    display:
-
-        flex;
-
-    flex-direction:
-
-        column;
-
-    gap:
-
-        1rem;
-
-}
-
-
-
-
-
-.footer-contact-title{
-
-    color:
-
-        var(--text-heading);
-
-    font-size:
-
-        1.12rem;
-
-    font-weight:
-
-        700;
-
-    letter-spacing:
-
-        .04em;
-
-    margin-bottom:
-
-        .35rem;
-
-}
-
-
-
-
-
-.footer-contact-item{
-
-    display:
-
-        flex;
-
-    align-items:
-
-        center;
-
-    gap:
-
-        .9rem;
-
-    color:
-
-        var(--text-primary);
-
-    transition:
-
-        transform .30s ease,
-
-        color .30s ease;
-
-}
-
-
-
-
-
-.footer-contact-item:hover{
-
-    transform:
-
-        translateX(6px);
-
-}
-
-
-
-
-
-.contact-icon{
-
-    display:
-
-        inline-flex;
-
-    align-items:
-
-        center;
-
-    justify-content:
-
-        center;
-
-    width:
-
-        42px;
-
-    height:
-
-        42px;
-
-    flex-shrink:
-
-        0;
-
-    border-radius:
-
-        50%;
-
-    background:
-
-        rgba(35,212,200,.10);
-
-    border:
-
-        1px solid rgba(35,212,200,.18);
-
-    font-size:
-
-        1rem;
-
-}
-
-
-
-
-
-.footer-contact-item a{
-
-    color:
-
-        var(--text-primary);
-
-    font-size:
-
-        1rem;
-
-    font-weight:
-
-        500;
-
-    text-decoration:
-
-        none;
-
-    transition:
-
-        color .30s ease;
-
-}
-
-
-
-
-
-.footer-contact-item:hover a{
-
-    color:
-
-        var(--ctm-teal-soft);
-
-}
-
 
 
 
 
 /* ==========================================================================
-   FOOTER BOTTOM
+   CONTACT SECTION
 ========================================================================== */
 
-.footer-bottom{
 
-    margin-top:
+.footer-contact {
 
-        clamp(3rem,5vw,4rem);
+    display:flex;
 
-    padding-top:
+    flex-direction:column;
 
-        2rem;
 
-    border-top:
+    gap:
 
-        1px solid rgba(255,255,255,.05);
+        1.1rem;
 
-    text-align:
+}
 
-        center;
 
-    color:
 
-        var(--text-muted);
+
+
+.footer-contact-title {
+
+    color:#FFFFFF;
+
 
     font-size:
 
-        .9rem;
+        1rem;
+
+
+    font-weight:
+
+        800;
+
 
     letter-spacing:
 
         .08em;
 
+
+    text-transform:
+
+        uppercase;
+
 }
+
+
+
+
+
+.footer-contact-item {
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:
+
+        1rem;
+
+
+    transition:
+
+        transform .3s ease;
+
+}
+
+
+
+
+
+.footer-contact-item:hover {
+
+    transform:
+
+        translateX(8px);
+
+}
+
+
+
+
+
+.contact-icon {
+
+    width:
+
+        44px;
+
+
+    height:
+
+        44px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    border-radius:
+
+        50%;
+
+
+    background:
+
+        rgba(33,210,198,.12);
+
+
+    border:
+
+        1px solid rgba(33,210,198,.25);
+
+
+    font-size:
+
+        1.1rem;
+
+}
+
+
+
+
+
+.footer-contact-item a {
+
+    color:
+
+        #FFFFFF;
+
+
+    text-decoration:none;
+
+
+    font-size:
+
+        1rem;
+
+
+    transition:
+
+        color .3s ease;
+
+}
+
+
+
+
+
+.footer-contact-item:hover a {
+
+    color:
+
+        var(--ctm-teal-soft,#6BE8DD);
+
+}
+
+
+
+
+
+/* ==========================================================================
+   LEGACY STATEMENT
+========================================================================== */
+
+
+.footer-legacy {
+
+    margin-top:
+
+        4rem;
+
+
+    padding:
+
+        2rem;
+
+
+    text-align:center;
+
+
+    color:
+
+        rgba(255,255,255,.75);
+
+
+    font-size:
+
+        1.05rem;
+
+
+    line-height:
+
+        2;
+
+
+    letter-spacing:
+
+        .04em;
+
+
+    border-top:
+
+        1px solid rgba(255,255,255,.06);
+
+
+    border-bottom:
+
+        1px solid rgba(255,255,255,.06);
+
+}
+
+
+
+
+
+/* ==========================================================================
+   COPYRIGHT
+========================================================================== */
+
+
+.footer-bottom {
+
+    margin-top:
+
+        2rem;
+
+
+    padding-top:
+
+        1.5rem;
+
+
+    text-align:center;
+
+
+    color:
+
+        rgba(255,255,255,.45);
+
+
+    font-size:
+
+        .85rem;
+
+
+    letter-spacing:
+
+        .12em;
+
+}
+
+
+
+
 
 /* ==========================================================================
    RESPONSIVE
 ========================================================================== */
 
-@media (max-width:992px){
 
-    .footer-grid{
+@media(max-width:1000px){
+
+
+    .footer-grid {
 
         grid-template-columns:
 
             1fr;
 
-        gap:
 
-            3rem;
-
-        text-align:
-
-            center;
+        text-align:center;
 
     }
+
 
     .footer-brand,
 
     .footer-founder,
 
-    .footer-contact{
+    .footer-contact {
 
-        align-items:
-
-            center;
+        align-items:center;
 
     }
 
-    .footer-contact-item{
 
-        justify-content:
+    .footer-contact-item {
 
-            center;
+        justify-content:center;
 
     }
+
 
 }
 
@@ -760,132 +841,40 @@
 
 
 
-@media (max-width:640px){
+@media(max-width:600px){
 
-    .footer-container{
+
+    .footer-container {
 
         width:
 
-            min(100% - 32px,1280px);
+            calc(100% - 32px);
 
     }
 
-    .footer-topline{
 
-        gap:
-
-            .6rem;
+    .footer-topline {
 
         font-size:
 
-            .76rem;
+            .70rem;
+
 
         letter-spacing:
 
-            .10em;
-
-        padding:
-
-            1.2rem 1rem;
+            .16em;
 
     }
 
-    .footer-brand-name{
+
+    .footer-brand-name {
 
         font-size:
 
-            1.8rem;
+            1.7rem;
 
     }
 
-    .footer-founder-name{
-
-        white-space:
-
-            normal;
-
-        text-align:
-
-            center;
-
-    }
 
 }
 
-
-
-
-
-/* ==========================================================================
-   ACCESSIBILITY
-========================================================================== */
-
-.footer-contact-item a:focus-visible{
-
-    outline:
-
-        2px solid var(--ctm-teal-soft);
-
-    outline-offset:
-
-        3px;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   REDUCED MOTION
-========================================================================== */
-
-@media (prefers-reduced-motion:reduce){
-
-    .footer-contact-item,
-
-    .footer-contact-item a{
-
-        transition:
-
-            none !important;
-
-    }
-
-}
-
-
-
-
-
-/* ==========================================================================
-   PRINT
-========================================================================== */
-
-@media print{
-
-    .ctm-footer{
-
-        background:
-
-            #ffffff;
-
-        color:
-
-            #000000;
-
-        border-top:
-
-            1px solid #cccccc;
-
-    }
-
-}
-
-
-
-
-
-/* ==========================================================================
-   END OF FILE
-========================================================================== */
