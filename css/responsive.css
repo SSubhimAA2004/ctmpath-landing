@@ -6,7 +6,7 @@
    responsive.css
 
    VERSION:
-   10.0
+   10.1
 
    PURPOSE:
 
@@ -21,6 +21,7 @@
    ✓ Footer adaptation
    ✓ Touch optimization
    ✓ Accessibility
+   ✓ Premium mobile foundation
 
    Does NOT control:
 
@@ -32,9 +33,12 @@
 
 
 
+
+
 /* ==========================================================================
    GLOBAL RESPONSIVE FOUNDATION
 ========================================================================== */
+
 
 
 *,
@@ -52,7 +56,19 @@
 
 
 
+
+
 html {
+
+
+    width:
+
+        100%;
+
+
+    max-width:
+
+        100%;
 
 
     scroll-behavior:
@@ -65,12 +81,29 @@ html {
 
 
 
+
+
 body {
 
 
     margin:
 
         0;
+
+
+    padding:
+
+        0;
+
+
+    width:
+
+        100%;
+
+
+    max-width:
+
+        100%;
 
 
     overflow-x:
@@ -94,12 +127,34 @@ body {
 
 
 
-img {
+
+/*
+   Prevent accidental horizontal overflow
+   from sections, images and components
+*/
+
+
+
+img,
+section,
+header,
+footer,
+main {
 
 
     max-width:
 
         100%;
+
+
+}
+
+
+
+
+
+
+img {
 
 
     height:
@@ -113,6 +168,7 @@ img {
 
 
 }
+
 
 
 
@@ -133,6 +189,28 @@ a {
 
 
 
+
+button {
+
+
+    font-family:
+
+        inherit;
+
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   GLOBAL CONTAINER SYSTEM
+========================================================================== */
+
+
+
 .container {
 
 
@@ -147,10 +225,6 @@ a {
 
 
 }
-
-
-
-
 
 
 /* ==========================================================================
@@ -175,13 +249,16 @@ a {
 
 
 
-
-
 }
 
 
 
- 
+
+
+
+
+
+
 /* ==========================================================================
    TABLET MODE
    992px
@@ -206,6 +283,8 @@ body {
 
 
 
+
+
 h1 {
 
 
@@ -215,6 +294,8 @@ h1 {
 
 
 }
+
+
 
 
 
@@ -234,6 +315,8 @@ h2 {
 
 
 
+
+
 .container {
 
 
@@ -248,7 +331,33 @@ h2 {
 
 
 
+
+
+section,
+header,
+footer,
+main {
+
+
+    width:
+
+        100%;
+
+
 }
+
+
+
+
+
+
+
+}
+
+
+
+
+
 
 
 
@@ -268,6 +377,7 @@ h2 {
 ---------------------------------- */
 
 
+
 body {
 
 
@@ -277,6 +387,9 @@ body {
 
 
 }
+
+
+
 
 
 
@@ -298,6 +411,8 @@ h1 {
 
 
 }
+
+
 
 
 
@@ -325,6 +440,8 @@ h2 {
 
 
 
+
+
 h3 {
 
 
@@ -334,6 +451,8 @@ h3 {
 
 
 }
+
+
 
 
 
@@ -354,9 +473,13 @@ p {
 
 
 
+
+
+
 /* ----------------------------------
-   Containers
+   Premium Mobile Containers
 ---------------------------------- */
+
 
 
 .container {
@@ -364,7 +487,17 @@ p {
 
     width:
 
-        calc(100% - 32px);
+        100%;
+
+
+    padding-left:
+
+        20px;
+
+
+    padding-right:
+
+        20px;
 
 
 }
@@ -374,9 +507,11 @@ p {
 
 
 
-/* ----------------------------------
-   Sections
----------------------------------- */
+
+/*
+   Prevent mobile content touching edges
+*/
+
 
 
 section {
@@ -384,15 +519,17 @@ section {
 
     padding-left:
 
-        0;
+        20px;
 
 
     padding-right:
 
-        0;
+        20px;
 
 
 }
+
+
 
 
 
@@ -401,6 +538,7 @@ section {
 /* ----------------------------------
    Buttons
 ---------------------------------- */
+
 
 
 button,
@@ -418,6 +556,11 @@ button,
         14px 24px;
 
 
+    max-width:
+
+        100%;
+
+
 }
 
 
@@ -425,8 +568,8 @@ button,
 
 
 
-}
 
+}
 
 
 /* ==========================================================================
@@ -453,6 +596,8 @@ body {
 
 
 
+
+
 h1 {
 
 
@@ -462,6 +607,8 @@ h1 {
 
 
 }
+
+
 
 
 
@@ -481,12 +628,35 @@ h2 {
 
 
 
+
+
+h3 {
+
+
+    font-size:
+
+        1.15rem;
+
+
+}
+
+
+
+
+
+
+
 .container {
 
 
-    width:
+    padding-left:
 
-        calc(100% - 24px);
+        16px;
+
+
+    padding-right:
+
+        16px;
 
 
 }
@@ -495,7 +665,35 @@ h2 {
 
 
 
+
+
+section {
+
+
+    padding-left:
+
+        16px;
+
+
+    padding-right:
+
+        16px;
+
+
 }
+
+
+
+
+
+
+
+}
+
+
+
+
+
 
 
 
@@ -512,12 +710,19 @@ h2 {
 .global-header {
 
 
+    width:
+
+        100%;
+
+
     padding:
 
-        20px;
+        16px 20px;
 
 
 }
+
+
 
 
 
@@ -542,15 +747,24 @@ h2 {
 
 
 
+
+
 .header-title {
 
 
     font-size:
 
-        1.8rem;
+        1.4rem;
+
+
+    line-height:
+
+        1.3;
 
 
 }
+
+
 
 
 
@@ -561,7 +775,12 @@ h2 {
 
     font-size:
 
-        .8rem;
+        .75rem;
+
+
+    line-height:
+
+        1.5;
 
 
 }
@@ -570,7 +789,13 @@ h2 {
 
 
 
+
+
 }
+
+
+
+
 
 
 
@@ -585,7 +810,33 @@ h2 {
 
 
 
+footer {
+
+
+    width:
+
+        100%;
+
+
+    padding:
+
+        45px 20px;
+
+
+}
+
+
+
+
+
+
+
 .footer-container {
+
+
+    width:
+
+        100%;
 
 
     grid-template-columns:
@@ -604,6 +855,8 @@ h2 {
 
 
 
+
+
 .footer-contact {
 
 
@@ -612,7 +865,14 @@ h2 {
         center;
 
 
+    flex-wrap:
+
+        wrap;
+
+
 }
+
+
 
 
 
@@ -626,11 +886,24 @@ h2 {
         .8rem;
 
 
+    line-height:
+
+        1.6;
+
+
 }
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -674,6 +947,9 @@ h2 {
 
 
 
+
+
+
 /* ==========================================================================
    TOUCH DEVICE OPTIMIZATION
 ========================================================================== */
@@ -698,6 +974,8 @@ button {
 
 
 
+
+
 button {
 
 
@@ -706,11 +984,21 @@ button {
         48px;
 
 
+    touch-action:
+
+        manipulation;
+
+
 }
 
 
 
 }
+
+
+
+
+
 
 
 
@@ -738,6 +1026,8 @@ body {
 
 
 }
+
+
 
 
 
