@@ -1,37 +1,15 @@
 
 /* ==========================================================
    CTM PATH™ Guided Journey™
-   Version : 1.0
-   File    : responsive.css
-   Purpose : Responsive Layout System
+   Responsive v1.0
+   File : responsive.css
    ========================================================== */
-
 
 /* ==========================================================
-   LARGE DESKTOP
-   (1600px and below)
+   Large Desktop
    ========================================================== */
 
-@media (max-width: 1600px) {
-
-    .container {
-
-        width: min(
-            1320px,
-            calc(100% - 64px)
-        );
-
-    }
-
-}
-
-
-/* ==========================================================
-   DESKTOP
-   (1400px and below)
-   ========================================================== */
-
-@media (max-width: 1400px) {
+@media (max-width: 1440px) {
 
     :root {
 
@@ -41,73 +19,50 @@
 
 }
 
-
 /* ==========================================================
-   LAPTOP
-   (1200px and below)
+   Desktop
    ========================================================== */
 
 @media (max-width: 1200px) {
 
     :root {
 
-        --container-width: 1100px;
-
-    }
-
-    section {
-
-        padding-block: 72px;
+        --container-width: 1080px;
 
     }
 
 }
 
-
 /* ==========================================================
-   TABLET LANDSCAPE
-   (992px and below)
+   Laptop / Tablet Landscape
    ========================================================== */
 
 @media (max-width: 992px) {
 
-    .container {
+    :root {
 
-        width: calc(100% - 48px);
-
-    }
-
-    h1 {
-
-        font-size: clamp(2.2rem, 5vw, 3.5rem);
-
-    }
-
-    h2 {
-
-        font-size: clamp(1.8rem, 4vw, 2.6rem);
-
-    }
-
-    section {
-
-        padding-block: 64px;
+        --container-width: 960px;
 
     }
 
 }
 
-
 /* ==========================================================
-   TABLET
-   (768px and below)
+   Tablet
    ========================================================== */
 
 @media (max-width: 768px) {
 
     :root {
 
-        --header-height: 72px;
+        --container-width: 100%;
+
+        --space-6: 1.75rem;
+        --space-7: 2.5rem;
+        --space-8: 3rem;
+
+        --font-size-4xl: 2.5rem;
+        --font-size-3xl: 2rem;
 
     }
 
@@ -117,38 +72,19 @@
 
     }
 
-    section {
-
-        padding-block: 56px;
-
-    }
-
-    .card {
-
-        padding: 24px;
-
-    }
-
-    .btn-primary,
-    .btn-secondary {
-
-        width: 100%;
-
-    }
-
 }
 
-
 /* ==========================================================
-   MOBILE
-   (576px and below)
+   Mobile
    ========================================================== */
 
 @media (max-width: 576px) {
 
-    html {
+    :root {
 
-        font-size: 15px;
+        --font-size-4xl: 2rem;
+        --font-size-3xl: 1.75rem;
+        --font-size-2xl: 1.5rem;
 
     }
 
@@ -158,92 +94,58 @@
 
     }
 
-    section {
-
-        padding-block: 48px;
-
-    }
-
-    .card {
-
-        padding: 20px;
-
-        border-radius: var(--radius-md);
-
-    }
-
-    h1 {
-
-        line-height: 1.15;
-
-    }
-
-    p {
-
-        line-height: 1.7;
-
-    }
-
 }
 
-
 /* ==========================================================
-   SMALL MOBILE
-   (400px and below)
+   Small Mobile
    ========================================================== */
 
-@media (max-width: 400px) {
+@media (max-width: 360px) {
 
     html {
 
-        font-size: 14px;
-
-    }
-
-    .container {
-
-        width: calc(100% - 20px);
-
-    }
-
-    .card {
-
-        padding: 18px;
+        font-size: 15px;
 
     }
 
 }
 
-
 /* ==========================================================
-   TOUCH DEVICES
-   ========================================================== */
-
-@media (hover: none) {
-
-    .btn-primary:hover,
-    .btn-secondary:hover {
-
-        transform: none;
-
-    }
-
-}
-
-
-/* ==========================================================
-   REDUCED MOTION
+   Reduced Motion
    ========================================================== */
 
 @media (prefers-reduced-motion: reduce) {
 
-    * {
+    *,
+    *::before,
+    *::after {
 
         animation: none !important;
-
         transition: none !important;
-
         scroll-behavior: auto !important;
+
+    }
+
+}
+
+/* ==========================================================
+   Print
+   ========================================================== */
+
+@media print {
+
+    body {
+
+        background: white;
+        color: black;
+
+    }
+
+    #loader-container,
+    #toast-container,
+    #modal-container {
+
+        display: none !important;
 
     }
 
