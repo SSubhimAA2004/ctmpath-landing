@@ -4,16 +4,19 @@
  * CTM PATH™ Guided Journey™
  * UI Module
  * --------------------------------------------------------------
- * Version : 4.0 (Framework Freeze)
+ * Version : 5.0 (Framework Freeze)
  * Pattern : Singleton
  *
  * Responsibilities
  * --------------------------------------------------------------
  * ✓ Presentation
- * ✓ DOM Utilities
- * ✓ Shared Components
+ * ✓ Loader
+ * ✓ Toast Notifications
+ * ✓ Modal
+ * ✓ Journey Counter
+ * ✓ Page Transitions
+ * ✓ Animation
  * ✓ Event Subscriptions
- * ✓ Visual Feedback
  *
  * Never
  * --------------------------------------------------------------
@@ -22,6 +25,8 @@
  * ✗ Validation
  * ✗ API
  * ✗ State Mutation
+ * ✗ DOM Utilities
+ * ✗ Component Loading
  * ==============================================================
  */
 
@@ -41,10 +46,6 @@ class UI {
 
     #modal = null;
 
-    #header = null;
-
-    #footer = null;
-
     #journeyCounter = null;
 
     #subscriptions = [];
@@ -61,16 +62,28 @@ class UI {
 
         }
 
-        this.#header = document.querySelector(
-            CTM.Config.SELECTORS.HEADER
+        this.#loader = CTM.DOM.get(
+
+            CTM.Config.SELECTORS.LOADER
+
         );
 
-        this.#footer = document.querySelector(
-            CTM.Config.SELECTORS.FOOTER
+        this.#toast = CTM.DOM.get(
+
+            CTM.Config.SELECTORS.TOAST
+
         );
 
-        this.#journeyCounter = document.querySelector(
+        this.#modal = CTM.DOM.get(
+
+            CTM.Config.SELECTORS.MODAL
+
+        );
+
+        this.#journeyCounter = CTM.DOM.get(
+
             CTM.Config.SELECTORS.JOURNEY_COUNTER
+
         );
 
         this.#registerEvents();
@@ -78,7 +91,9 @@ class UI {
         this.#initialized = true;
 
         CTM.Logger.info(
+
             'UI initialized.'
+
         );
 
     }
@@ -91,10 +106,20 @@ class UI {
 
         this.#unsubscribeEvents();
 
+        this.#loader = null;
+
+        this.#toast = null;
+
+        this.#modal = null;
+
+        this.#journeyCounter = null;
+
         this.#initialized = false;
 
         CTM.Logger.info(
+
             'UI destroyed.'
+
         );
 
     }
@@ -155,13 +180,21 @@ class UI {
 
     }
 
+    /* ==========================================================
+       EVENT CLEANUP
+    ========================================================== */
+
     #unsubscribeEvents() {
 
         this.#subscriptions.forEach(
 
             unsubscribe => {
 
-                if (typeof unsubscribe === 'function') {
+                if (
+
+                    typeof unsubscribe === 'function'
+
+                ) {
 
                     unsubscribe();
 
@@ -176,9 +209,11 @@ class UI {
     }
 
     /* ==========================================================
-       EVENT HANDLERS
+       Remaining Methods
 
        Batch 1B
+
+       -----------------------------------------
 
        #onNavigationStarted()
 
@@ -188,13 +223,17 @@ class UI {
 
        #onNavigationFailed()
 
-       Loader
+       showLoader()
 
-       Toast
+       hideLoader()
 
-       Journey Counter
+       showToast()
 
-       Scroll Manager
+       hideToast()
+
+       updateJourneyCounter()
+
+       scrollTop()
 
     ========================================================== */
 
@@ -226,8 +265,9 @@ CTM.UI = Object.freeze(
 
        Responsibility
 
-       ✓ Page transition
-       ✓ Focus management
+       ✓ Page Transition
+
+       ✓ Focus Management
 
     ========================================================== */
 
@@ -245,7 +285,9 @@ CTM.UI = Object.freeze(
        Responsibility
 
        ✓ Hide Loader
+
        ✓ Scroll Top
+
        ✓ Journey Counter
 
     ========================================================== */
@@ -272,6 +314,7 @@ CTM.UI = Object.freeze(
        Responsibility
 
        ✓ Hide Loader
+
        ✓ Error Toast
 
     ========================================================== */
@@ -293,20 +336,11 @@ CTM.UI = Object.freeze(
     }
 
     /* ==========================================================
-       LOADER
+       SHOW LOADER
+
     ========================================================== */
 
     showLoader() {
-
-        if (!this.#loader) {
-
-            this.#loader = document.querySelector(
-
-                CTM.Config.SELECTORS.LOADER
-
-            );
-
-        }
 
         if (!this.#loader) {
 
@@ -314,9 +348,15 @@ CTM.UI = Object.freeze(
 
         }
 
-        this.#loader.hidden = false;
+        CTM.DOM.show(
 
-        this.#loader.setAttribute(
+            this.#loader
+
+        );
+
+        CTM.DOM.setAttribute(
+
+            this.#loader,
 
             'aria-hidden',
 
@@ -324,13 +364,20 @@ CTM.UI = Object.freeze(
 
         );
 
-        this.#loader.classList.add(
+        CTM.DOM.addClass(
+
+            this.#loader,
 
             CTM.Config.CSS.LOADER_VISIBLE
 
         );
 
     }
+
+    /* ==========================================================
+       HIDE LOADER
+
+    ========================================================== */
 
     hideLoader() {
 
@@ -340,15 +387,23 @@ CTM.UI = Object.freeze(
 
         }
 
-        this.#loader.classList.remove(
+        CTM.DOM.removeClass(
+
+            this.#loader,
 
             CTM.Config.CSS.LOADER_VISIBLE
 
         );
 
-        this.#loader.hidden = true;
+        CTM.DOM.hide(
 
-        this.#loader.setAttribute(
+            this.#loader
+
+        );
+
+        CTM.DOM.setAttribute(
+
+            this.#loader,
 
             'aria-hidden',
 
@@ -359,7 +414,8 @@ CTM.UI = Object.freeze(
     }
 
     /* ==========================================================
-       TOAST
+       SHOW TOAST
+
     ========================================================== */
 
     showToast(
@@ -372,31 +428,29 @@ CTM.UI = Object.freeze(
 
         if (!this.#toast) {
 
-            this.#toast = document.querySelector(
-
-                CTM.Config.SELECTORS.TOAST
-
-            );
-
-        }
-
-        if (!this.#toast) {
-
             return;
 
         }
 
-        this.#toast.textContent =
+        CTM.DOM.setText(
 
-            message;
+            this.#toast,
 
-        this.#toast.dataset.type =
+            message
 
-            type;
+        );
 
-        this.#toast.hidden = false;
+        this.#toast.dataset.type = type;
 
-        this.#toast.classList.add(
+        CTM.DOM.show(
+
+            this.#toast
+
+        );
+
+        CTM.DOM.addClass(
+
+            this.#toast,
 
             CTM.Config.CSS.TOAST_VISIBLE
 
@@ -416,6 +470,11 @@ CTM.UI = Object.freeze(
 
     }
 
+    /* ==========================================================
+       HIDE TOAST
+
+    ========================================================== */
+
     hideToast() {
 
         if (!this.#toast) {
@@ -424,18 +483,25 @@ CTM.UI = Object.freeze(
 
         }
 
-        this.#toast.classList.remove(
+        CTM.DOM.removeClass(
+
+            this.#toast,
 
             CTM.Config.CSS.TOAST_VISIBLE
 
         );
 
-        this.#toast.hidden = true;
+        CTM.DOM.hide(
+
+            this.#toast
+
+        );
 
     }
 
     /* ==========================================================
        JOURNEY COUNTER
+
     ========================================================== */
 
     updateJourneyCounter(
@@ -452,14 +518,19 @@ CTM.UI = Object.freeze(
 
         }
 
-        this.#journeyCounter.textContent =
+        CTM.DOM.setText(
 
-            `${current} / ${total}`;
+            this.#journeyCounter,
+
+            `${current} / ${total}`
+
+        );
 
     }
 
     /* ==========================================================
-       SCROLL
+       SCROLL TOP
+
     ========================================================== */
 
     scrollTop() {
@@ -481,375 +552,30 @@ CTM.UI = Object.freeze(
 
        -----------------------------------------
 
-       loadComponent()
+       focusPage()
 
-       loadHeader()
+       showModal()
 
-       loadFooter()
+       hideModal()
 
-       DOM Helpers
+       fadeInPage()
 
-       Query Helpers
+       fadeOutPage()
+
+       waitForTransition()
+
+       reflow()
 
     ========================================================== */
 
     /* ==========================================================
-       LOAD COMPONENT
+       FOCUS PAGE
 
-       Loads reusable HTML components.
-
-       Examples
-
-       header.html
-       footer.html
-
-    ========================================================== */
-
-    async loadComponent(
-
-        container,
-
-        file
-
-    ) {
-
-        if (
-
-            !container ||
-
-            !file
-
-        ) {
-
-            return;
-
-        }
-
-        const response = await fetch(
-
-            file,
-
-            {
-
-                cache: 'no-cache'
-
-            }
-
-        );
-
-        if (!response.ok) {
-
-            throw new Error(
-
-                `Unable to load component: ${file}`
-
-            );
-
-        }
-
-        container.innerHTML =
-
-            await response.text();
-
-    }
-
-    /* ==========================================================
-       LOAD HEADER
-    ========================================================== */
-
-    async loadHeader() {
-
-        if (!this.#header) {
-
-            return;
-
-        }
-
-        await this.loadComponent(
-
-            this.#header,
-
-            CTM.Config.COMPONENTS.HEADER
-
-        );
-
-    }
-
-    /* ==========================================================
-       LOAD FOOTER
-    ========================================================== */
-
-    async loadFooter() {
-
-        if (!this.#footer) {
-
-            return;
-
-        }
-
-        await this.loadComponent(
-
-            this.#footer,
-
-            CTM.Config.COMPONENTS.FOOTER
-
-        );
-
-    }
-
-    /* ==========================================================
-       LOAD SHARED COMPONENTS
-    ========================================================== */
-
-    async loadSharedComponents() {
-
-        await Promise.all([
-
-            this.loadHeader(),
-
-            this.loadFooter()
-
-        ]);
-
-    }
-
-    /* ==========================================================
-       QUERY HELPERS
-    ========================================================== */
-
-    get(selector) {
-
-        return document.querySelector(
-
-            selector
-
-        );
-
-    }
-
-    getAll(selector) {
-
-        return Array.from(
-
-            document.querySelectorAll(
-
-                selector
-
-            )
-
-        );
-
-    }
-
-    /* ==========================================================
-       VISIBILITY
-    ========================================================== */
-
-    show(element) {
-
-        if (!element) {
-
-            return;
-
-        }
-
-        element.hidden = false;
-
-    }
-
-    hide(element) {
-
-        if (!element) {
-
-            return;
-
-        }
-
-        element.hidden = true;
-
-    }
-
-    /* ==========================================================
-       TEXT
-    ========================================================== */
-
-    setText(
-
-        element,
-
-        value
-
-    ) {
-
-        if (!element) {
-
-            return;
-
-        }
-
-        element.textContent =
-
-            value;
-
-    }
-
-    /* ==========================================================
-       HTML
-    ========================================================== */
-
-    setHTML(
-
-        element,
-
-        html
-
-    ) {
-
-        if (!element) {
-
-            return;
-
-        }
-
-        element.innerHTML =
-
-            html;
-
-    }
-
-    /* ==========================================================
-       CLASS HELPERS
-    ========================================================== */
-
-    addClass(
-
-        element,
-
-        className
-
-    ) {
-
-        if (!element) {
-
-            return;
-
-        }
-
-        element.classList.add(
-
-            className
-
-        );
-
-    }
-
-    removeClass(
-
-        element,
-
-        className
-
-    ) {
-
-        if (!element) {
-
-            return;
-
-        }
-
-        element.classList.remove(
-
-            className
-
-        );
-
-    }
-
-    toggleClass(
-
-        element,
-
-        className,
-
-        force
-
-    ) {
-
-        if (!element) {
-
-            return;
-
-        }
-
-        element.classList.toggle(
-
-            className,
-
-            force
-
-        );
-
-    }
-
-    /* ==========================================================
-       ATTRIBUTE HELPERS
-    ========================================================== */
-
-    setAttribute(
-
-        element,
-
-        name,
-
-        value
-
-    ) {
-
-        if (!element) {
-
-            return;
-
-        }
-
-        element.setAttribute(
-
-            name,
-
-            value
-
-        );
-
-    }
-
-    removeAttribute(
-
-        element,
-
-        name
-
-    ) {
-
-        if (!element) {
-
-            return;
-
-        }
-
-        element.removeAttribute(
-
-            name
-
-        );
-
-    }
-
-    /* ==========================================================
-       FOCUS
     ========================================================== */
 
     focusPage() {
 
-        const page = document.querySelector(
+        const page = CTM.DOM.get(
 
             CTM.Config.SELECTORS.PAGE_CONTAINER
 
@@ -861,7 +587,9 @@ CTM.UI = Object.freeze(
 
         }
 
-        page.setAttribute(
+        CTM.DOM.setAttribute(
+
+            page,
 
             'tabindex',
 
@@ -869,44 +597,20 @@ CTM.UI = Object.freeze(
 
         );
 
-        page.focus();
+        CTM.DOM.focus(
+
+            page
+
+        );
 
     }
 
     /* ==========================================================
-       Remaining Methods
-
-       Batch 1D
-
-       -----------------------------------------
-
-       Modal
-
-       Fade In
-
-       Fade Out
-
-       Animation Helpers
-
-       Transition Helpers
-
-    ========================================================== */
-
-    /* ==========================================================
        SHOW MODAL
+
     ========================================================== */
 
     showModal(content) {
-
-        if (!this.#modal) {
-
-            this.#modal = document.querySelector(
-
-                CTM.Config.SELECTORS.MODAL
-
-            );
-
-        }
 
         if (!this.#modal) {
 
@@ -914,21 +618,35 @@ CTM.UI = Object.freeze(
 
         }
 
-        const body = this.#modal.querySelector(
+        const body = CTM.DOM.get(
 
-            CTM.Config.SELECTORS.MODAL_BODY
+            CTM.Config.SELECTORS.MODAL_BODY,
+
+            this.#modal
 
         );
 
         if (body) {
 
-            body.innerHTML = content;
+            CTM.DOM.setHTML(
+
+                body,
+
+                content
+
+            );
 
         }
 
-        this.#modal.hidden = false;
+        CTM.DOM.show(
 
-        this.#modal.setAttribute(
+            this.#modal
+
+        );
+
+        CTM.DOM.setAttribute(
+
+            this.#modal,
 
             'aria-hidden',
 
@@ -936,7 +654,9 @@ CTM.UI = Object.freeze(
 
         );
 
-        this.#modal.classList.add(
+        CTM.DOM.addClass(
+
+            this.#modal,
 
             CTM.Config.CSS.MODAL_VISIBLE
 
@@ -946,6 +666,7 @@ CTM.UI = Object.freeze(
 
     /* ==========================================================
        HIDE MODAL
+
     ========================================================== */
 
     hideModal() {
@@ -956,15 +677,23 @@ CTM.UI = Object.freeze(
 
         }
 
-        this.#modal.classList.remove(
+        CTM.DOM.removeClass(
+
+            this.#modal,
 
             CTM.Config.CSS.MODAL_VISIBLE
 
         );
 
-        this.#modal.hidden = true;
+        CTM.DOM.hide(
 
-        this.#modal.setAttribute(
+            this.#modal
+
+        );
+
+        CTM.DOM.setAttribute(
+
+            this.#modal,
 
             'aria-hidden',
 
@@ -975,12 +704,13 @@ CTM.UI = Object.freeze(
     }
 
     /* ==========================================================
-       PAGE FADE IN
+       FADE IN PAGE
+
     ========================================================== */
 
     fadeInPage() {
 
-        const page = document.querySelector(
+        const page = CTM.DOM.get(
 
             CTM.Config.SELECTORS.PAGE_CONTAINER
 
@@ -992,13 +722,17 @@ CTM.UI = Object.freeze(
 
         }
 
-        page.classList.remove(
+        CTM.DOM.removeClass(
+
+            page,
 
             CTM.Config.CSS.PAGE_FADE_OUT
 
         );
 
-        page.classList.add(
+        CTM.DOM.addClass(
+
+            page,
 
             CTM.Config.CSS.PAGE_FADE_IN
 
@@ -1007,12 +741,13 @@ CTM.UI = Object.freeze(
     }
 
     /* ==========================================================
-       PAGE FADE OUT
+       FADE OUT PAGE
+
     ========================================================== */
 
     fadeOutPage() {
 
-        const page = document.querySelector(
+        const page = CTM.DOM.get(
 
             CTM.Config.SELECTORS.PAGE_CONTAINER
 
@@ -1024,13 +759,17 @@ CTM.UI = Object.freeze(
 
         }
 
-        page.classList.remove(
+        CTM.DOM.removeClass(
+
+            page,
 
             CTM.Config.CSS.PAGE_FADE_IN
 
         );
 
-        page.classList.add(
+        CTM.DOM.addClass(
+
+            page,
 
             CTM.Config.CSS.PAGE_FADE_OUT
 
@@ -1039,75 +778,17 @@ CTM.UI = Object.freeze(
     }
 
     /* ==========================================================
-       ENABLE
-    ========================================================== */
+       WAIT FOR TRANSITION
 
-    enable(element) {
-
-        if (!element) {
-
-            return;
-
-        }
-
-        element.disabled = false;
-
-    }
-
-    /* ==========================================================
-       DISABLE
-    ========================================================== */
-
-    disable(element) {
-
-        if (!element) {
-
-            return;
-
-        }
-
-        element.disabled = true;
-
-    }
-
-    /* ==========================================================
-       LOADING STATE
-    ========================================================== */
-
-    setLoading(
-
-        element,
-
-        loading = true
-
-    ) {
-
-        if (!element) {
-
-            return;
-
-        }
-
-        element.disabled = loading;
-
-        element.classList.toggle(
-
-            CTM.Config.CSS.LOADING,
-
-            loading
-
-        );
-
-    }
-
-    /* ==========================================================
-       ANIMATION
-
-       Returns Promise resolved after transition.
+       Returns a Promise.
 
     ========================================================== */
 
-    waitForTransition(element) {
+    waitForTransition(target) {
+
+        const element =
+
+            CTM.DOM.get(target) ?? target;
 
         return new Promise(
 
@@ -1123,7 +804,9 @@ CTM.UI = Object.freeze(
 
                 const handler = () => {
 
-                    element.removeEventListener(
+                    CTM.DOM.off(
+
+                        element,
 
                         'transitionend',
 
@@ -1135,17 +818,13 @@ CTM.UI = Object.freeze(
 
                 };
 
-                element.addEventListener(
+                CTM.DOM.once(
+
+                    element,
 
                     'transitionend',
 
-                    handler,
-
-                    {
-
-                        once: true
-
-                    }
+                    handler
 
                 );
 
@@ -1158,11 +837,13 @@ CTM.UI = Object.freeze(
     /* ==========================================================
        FORCE REFLOW
 
-       Useful before CSS transitions.
-
     ========================================================== */
 
-    reflow(element) {
+    reflow(target) {
+
+        const element =
+
+            CTM.DOM.get(target) ?? target;
 
         if (!element) {
 
@@ -1177,26 +858,30 @@ CTM.UI = Object.freeze(
     /* ==========================================================
        Remaining Methods
 
-       Batch 1E (EOF)
+       Batch 1D
 
        -----------------------------------------
 
-       Utilities
+       reset()
 
-       Reset
+       onResize()
 
-       Cleanup
+       onVisibilityChange()
 
-       Singleton Export
+       isInitialized()
 
-       Framework Freeze
+       isLoaderVisible()
+
+       isModalVisible()
+
+       dispose()
 
     ========================================================== */
 
     /* ==========================================================
        RESET UI
 
-       Restores UI to its default visual state.
+       Restores UI to default visual state.
 
     ========================================================== */
 
@@ -1211,9 +896,9 @@ CTM.UI = Object.freeze(
     }
 
     /* ==========================================================
-       RESIZE
+       WINDOW RESIZE
 
-       Hook for future responsive behaviour.
+       Reserved for future responsive behaviour.
 
     ========================================================== */
 
@@ -1230,7 +915,7 @@ CTM.UI = Object.freeze(
     /* ==========================================================
        VISIBILITY CHANGE
 
-       Hook for future lifecycle events.
+       Reserved for future lifecycle behaviour.
 
     ========================================================== */
 
@@ -1245,7 +930,7 @@ CTM.UI = Object.freeze(
     }
 
     /* ==========================================================
-       PUBLIC HELPERS
+       STATUS
 
     ========================================================== */
 
@@ -1255,24 +940,42 @@ CTM.UI = Object.freeze(
 
     }
 
+    /* ==========================================================
+       LOADER STATUS
+
+    ========================================================== */
+
     isLoaderVisible() {
 
-        return this.#loader
-            ? !this.#loader.hidden
-            : false;
+        if (!this.#loader) {
 
-    }
+            return false;
 
-    isModalVisible() {
+        }
 
-        return this.#modal
-            ? !this.#modal.hidden
-            : false;
+        return !this.#loader.hidden;
 
     }
 
     /* ==========================================================
-       CLEANUP
+       MODAL STATUS
+
+    ========================================================== */
+
+    isModalVisible() {
+
+        if (!this.#modal) {
+
+            return false;
+
+        }
+
+        return !this.#modal.hidden;
+
+    }
+
+    /* ==========================================================
+       DISPOSE
 
     ========================================================== */
 
@@ -1297,49 +1000,140 @@ CTM.UI = Object.freeze(
 );
 
 /* ==============================================================
-   FRAMEWORK FREEZE v4.0
+   FRAMEWORK FREEZE v5.0
 
    Responsibilities
 
-   ✓ Presentation
+   ✓ Presentation Layer
+
    ✓ Loader
+
    ✓ Toast Notifications
+
    ✓ Modal
-   ✓ Scroll Management
+
    ✓ Journey Counter
-   ✓ Shared Component Loading
+
    ✓ Page Transitions
+
    ✓ Animation Helpers
-   ✓ DOM Interaction
+
    ✓ Event Subscriptions
+
+
+   Uses
+
+   ✓ CTM.DOM
+
+   ✓ CTM.Events
+
+   ✓ CTM.Logger
+
+   ✓ CTM.Config
+
 
    Never
 
-   ✗ Routing
    ✗ Business Logic
+
+   ✗ Routing
+
+   ✗ Navigation
+
    ✗ Validation
+
    ✗ API
-   ✗ Application State
+
+   ✗ Storage
+
+   ✗ State Mutation
+
+   ✗ Generic DOM Utilities
+
+   ✗ Component Loading
+
+
+   Public API
+
+   ✓ init()
+
+   ✓ destroy()
+
+   ✓ showLoader()
+
+   ✓ hideLoader()
+
+   ✓ showToast()
+
+   ✓ hideToast()
+
+   ✓ showModal()
+
+   ✓ hideModal()
+
+   ✓ updateJourneyCounter()
+
+   ✓ scrollTop()
+
+   ✓ fadeInPage()
+
+   ✓ fadeOutPage()
+
+   ✓ focusPage()
+
+   ✓ waitForTransition()
+
+   ✓ reflow()
+
+   ✓ reset()
+
+   ✓ onResize()
+
+   ✓ onVisibilityChange()
+
+   ✓ isInitialized()
+
+   ✓ isLoaderVisible()
+
+   ✓ isModalVisible()
+
+   ✓ dispose()
+
 
    Event Flow
 
    Router
 
-       ↓
+      │
 
-   Event Bus
+      ▼
 
-       ↓
+   Events
 
-   UI
+      │
 
-       ↓
+      ▼
 
-   DOM
+      UI
+
+      │
+
+      ▼
+
+   CTM.DOM
+
+      │
+
+      ▼
+
+     Browser DOM
+
 
    Status
 
-   FRAMEWORK FREEZE v4.0
+   FRAMEWORK v5.0
+
+   FROZEN
 
    EOF
 
