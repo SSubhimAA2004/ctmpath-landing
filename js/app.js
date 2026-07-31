@@ -1,280 +1,90 @@
 
 /* ==========================================================================
-   CTM PATH™ MILLIONAIRES™
-   Guided Journey™
-
-   FILE:
-   js/app.js
-
-
-   VERSION:
-   4.1
-
-
-   LAYER:
-   Application Orchestrator
-
-
-   RESPONSIBILITY:
-
-   ✓ Application boot sequence
-   ✓ Dynamic page loading
-   ✓ Page resource loading
-   ✓ Navigation control
-   ✓ Lifecycle management
-
-
-   DOES NOT:
-
-   ✗ Business logic
-   ✗ Assessment calculations
-   ✗ Diagnosis logic
-   ✗ Roadmap generation
-
-
+   PAGE STYLE LOADER
 ========================================================================== */
 
 
 
-
-
-(function(){
-
-
-
-"use strict";
+async function loadPageStyle(pageNumber){
 
 
 
+    const cssFile =
 
 
-/* ==========================================================================
-   APPLICATION CONFIGURATION
-========================================================================== */
+        `${APP_CONFIG.folders.css}` +
 
-
-
-const APP_CONFIG = {
-
-
-    appName:
-
-        "CTM PATH™ MILLIONAIRES™ Guided Journey™",
+        `page${String(pageNumber).padStart(2,"0")}.css`;
 
 
 
-    version:
-
-        "4.1",
 
 
 
-    totalPages:
 
-        7,
+    if(
 
+        APP_STATE.loadedStyles[pageNumber]
 
-
-    folders:{
-
-
-        pages:
-
-            "pages/",
+    ){
 
 
 
-        css:
-
-            "css/",
-
-
-
-        js:
-
-            "js/",
-
-
-
-        components:
-
-            "components/"
-
-
-
-    },
-
-
-
-    elements:{
-
-
-        app:
-
-            "app",
-
-
-
-        header:
-
-            "global-header",
-
-
-
-        footer:
-
-            "global-footer"
-
+        return true;
 
 
     }
 
 
 
-};
 
 
 
 
+    const existing =
 
+        document.querySelector(
 
-
-
-
-/* ==========================================================================
-   APPLICATION STATE
-========================================================================== */
-
-
-
-const APP_STATE = {
-
-
-    currentPage:
-
-        1,
-
-
-
-    loadedPages:{},
-
-
-
-    loadedStyles:{},
-
-
-
-    loadedScripts:{},
-
-
-
-    initializedPages:{}
-
-
-
-};
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   DOM HELPERS
-========================================================================== */
-
-
-
-function getElement(id){
-
-
-    return document.getElementById(id);
-
-
-}
-
-
-
-
-
-
-
-
-
-function getAppContainer(){
-
-
-    const app =
-
-        getElement(
-
-            APP_CONFIG.elements.app
+            `link[data-page-css="${pageNumber}"]`
 
         );
 
 
 
-    if(!app){
 
 
-        throw new Error(
 
-            "Application container not found."
 
-        );
+    if(existing){
+
+
+
+        APP_STATE.loadedStyles[pageNumber] =
+
+            true;
+
+
+
+        return true;
 
 
     }
 
 
 
-    return app;
-
-
-}
-
- /* ==========================================================================
-   PAGE LOADING ENGINE
-========================================================================== */
-
-
-
-async function loadPage(pageNumber){
-
-
-
-    const app =
-
-        getAppContainer();
 
 
 
 
-
-    const pageFile =
-
-
-        `${APP_CONFIG.folders.pages}` +
-
-        `page${String(pageNumber).padStart(2,"0")}.html`;
+    return new Promise(function(resolve,reject){
 
 
 
+        const link =
 
+            document.createElement(
 
-
-    try {
-
-
-
-        const response =
-
-            await fetch(
-
-                pageFile
+                "link"
 
             );
 
@@ -284,21 +94,9 @@ async function loadPage(pageNumber){
 
 
 
-        if(!response.ok){
+        link.rel =
 
-
-
-            throw new Error(
-
-                "Unable to load page: " +
-
-                pageNumber
-
-            );
-
-
-
-        }
+            "stylesheet";
 
 
 
@@ -306,17 +104,9 @@ async function loadPage(pageNumber){
 
 
 
-        const html =
+        link.href =
 
-            await response.text();
-
-
-
-
-
-
-
-        app.innerHTML = html;
+            cssFile;
 
 
 
@@ -324,7 +114,7 @@ async function loadPage(pageNumber){
 
 
 
-        APP_STATE.currentPage =
+        link.dataset.pageCss =
 
             pageNumber;
 
@@ -334,24 +124,364 @@ async function loadPage(pageNumber){
 
 
 
-        APP_STATE.loadedPages[pageNumber] =
-
-            true;
+        link.onload = function(){
 
 
 
+            APP_STATE.loadedStyles[pageNumber] =
 
+                true;
+
+
+
+
+
+
+
+            console.log(
+
+
+
+                "Page CSS loaded:",
+
+
+
+                cssFile
+
+
+
+            );
+
+
+
+
+
+
+
+            resolve(true);
+
+
+
+        };
+
+
+
+
+
+
+
+        link.onerror = function(){
+
+
+
+            console.error(
+
+
+
+                "CSS loading failed:",
+
+
+
+                cssFile
+
+
+
+            );
+
+
+
+
+
+
+
+            reject(
+
+
+
+                new Error(
+
+                    "Unable to load CSS: " +
+
+                    cssFile
+
+                )
+
+
+
+            );
+
+
+
+        };
+
+
+
+
+
+
+
+        document.head.appendChild(
+
+            link
+
+        );
+
+
+
+    });
+
+
+
+}
+
+/* ==========================================================================
+   APPLICATION START
+========================================================================== */
+
+
+async function startApplication(){
+
+
+
+    try {
 
 
 
         console.log(
 
 
-            "Page loaded:",
+            "Starting CTM PATH™ Guided Journey™"
 
+
+        );
+
+
+
+
+
+
+
+        await loadPage(
+
+
+            APP_STATE.currentPage
+
+
+        );
+
+
+
+
+
+
+
+        await loadPageStyle(
+
+
+            APP_STATE.currentPage
+
+
+        );
+
+
+
+
+
+
+
+        await loadPageScript(
+
+
+            APP_STATE.currentPage
+
+
+        );
+
+
+
+
+
+
+
+        initializePage(
+
+
+            APP_STATE.currentPage
+
+
+        );
+
+
+
+
+
+
+
+    }
+
+
+
+    catch(error){
+
+
+
+        handleApplicationError(
+
+
+            error
+
+
+        );
+
+
+
+    }
+
+
+
+}
+
+/* ==========================================================================
+   RESOURCE VALIDATION HELPERS
+========================================================================== */
+
+
+
+function isResourceLoaded(type,pageNumber){
+
+
+
+    if(type === "css"){
+
+
+
+        return Boolean(
+
+            APP_STATE.loadedStyles[pageNumber]
+
+        );
+
+
+
+    }
+
+
+
+
+
+
+
+    if(type === "js"){
+
+
+
+        return Boolean(
+
+            APP_STATE.loadedScripts[pageNumber]
+
+        );
+
+
+
+    }
+
+
+
+
+
+
+
+    return false;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   PAGE RUNTIME RESET
+========================================================================== */
+
+
+
+function resetPageRuntime(){
+
+
+
+    APP_STATE.initializedPages = {};
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   SAFE PAGE PREPARATION
+========================================================================== */
+
+
+
+async function preparePage(pageNumber){
+
+
+
+    try {
+
+
+
+        await loadPage(
 
             pageNumber
 
+        );
+
+
+
+
+
+
+
+        await loadPageStyle(
+
+            pageNumber
+
+        );
+
+
+
+
+
+
+
+        await loadPageScript(
+
+            pageNumber
+
+        );
+
+
+
+
+
+
+
+        initializePage(
+
+            pageNumber
 
         );
 
@@ -391,842 +521,16 @@ async function loadPage(pageNumber){
 
 }
 
-
-
-
-
-
-
-
-
 /* ==========================================================================
-   PAGE RESOURCE CHECK
+   APPLICATION PUBLIC API
 ========================================================================== */
-
-
-
-function isPageLoaded(pageNumber){
-
-
-
-    return Boolean(
-
-        APP_STATE.loadedPages[pageNumber]
-
-    );
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   PAGE TRANSITION HELPER
-========================================================================== */
-
-
-
-function clearApplication(){
-
-
-
-    const app =
-
-        getAppContainer();
-
-
-
-
-
-    app.innerHTML = "";
-
-
-
-}
-
-
- /* ==========================================================================
-   PAGE STYLE LOADER
-========================================================================== */
-
-
-
-function loadPageStyle(pageNumber){
-
-
-
-    const cssFile =
-
-
-        `${APP_CONFIG.folders.css}` +
-
-        `page${String(pageNumber).padStart(2,"0")}.css`;
-
-
-
-
-
-
-
-    if(
-
-        APP_STATE.loadedStyles[pageNumber]
-
-    ){
-
-
-
-        return;
-
-
-    }
-
-
-
-
-
-
-
-    const existing =
-
-        document.querySelector(
-
-            `link[data-page-css="${pageNumber}"]`
-
-        );
-
-
-
-
-
-
-
-    if(existing){
-
-
-
-        APP_STATE.loadedStyles[pageNumber] =
-
-            true;
-
-
-
-        return;
-
-
-    }
-
-
-
-
-
-
-
-    const link =
-
-        document.createElement(
-
-            "link"
-
-        );
-
-
-
-
-
-
-
-    link.rel =
-
-        "stylesheet";
-
-
-
-
-
-
-
-    link.href =
-
-        cssFile;
-
-
-
-
-
-
-
-    link.dataset.pageCss =
-
-        pageNumber;
-
-
-
-
-
-
-
-    document.head.appendChild(
-
-        link
-
-    );
-
-
-
-
-
-
-
-    APP_STATE.loadedStyles[pageNumber] =
-
-        true;
-
-
-
-
-
-
-
-    console.log(
-
-
-        "Page CSS loaded:",
-
-
-        cssFile
-
-
-    );
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   PAGE SCRIPT LOADER
-========================================================================== */
-
-
-
-function loadPageScript(pageNumber){
-
-
-
-    return new Promise(function(resolve,reject){
-
-
-
-        if(
-
-            APP_STATE.loadedScripts[pageNumber]
-
-        ){
-
-
-
-            resolve();
-
-
-            return;
-
-
-        }
-
-
-
-
-
-
-
-        const scriptFile =
-
-
-
-            `${APP_CONFIG.folders.js}` +
-
-            `page${String(pageNumber).padStart(2,"0")}.js`;
-
-
-
-
-
-
-
-
-
-        const existing =
-
-            document.querySelector(
-
-                `script[data-page-js="${pageNumber}"]`
-
-            );
-
-
-
-
-
-
-
-        if(existing){
-
-
-
-            APP_STATE.loadedScripts[pageNumber] =
-
-                true;
-
-
-
-            resolve();
-
-
-            return;
-
-
-        }
-
-
-
-
-
-
-
-        const script =
-
-            document.createElement(
-
-                "script"
-
-            );
-
-
-
-
-
-
-
-        script.src =
-
-            scriptFile;
-
-
-
-
-
-
-
-        script.dataset.pageJs =
-
-            pageNumber;
-
-
-
-
-
-
-
-        script.onload = function(){
-
-
-
-            APP_STATE.loadedScripts[pageNumber] =
-
-                true;
-
-
-
-            console.log(
-
-
-                "Page JS loaded:",
-
-
-                scriptFile
-
-
-            );
-
-
-
-            resolve();
-
-
-
-        };
-
-
-
-
-
-
-
-        script.onerror = function(){
-
-
-
-            reject(
-
-
-                new Error(
-
-                    "Unable to load page script: " +
-
-                    scriptFile
-
-                )
-
-
-            );
-
-
-
-        };
-
-
-
-
-
-
-
-        document.body.appendChild(
-
-            script
-
-        );
-
-
-
-    });
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   PAGE INITIALIZATION
-========================================================================== */
-
-
-
-function initializePage(pageNumber){
-
-
-
-    if(
-
-        APP_STATE.initializedPages[pageNumber]
-
-    ){
-
-
-
-        return;
-
-
-    }
-
-
-
-
-
-
-
-    const initializer =
-
-
-
-        window[
-
-            `initPage${String(pageNumber).padStart(2,"0")}`
-
-        ];
-
-
-
-
-
-
-
-    if(
-
-        typeof initializer === "function"
-
-    ){
-
-
-
-        initializer();
-
-
-    }
-
-
-
-
-
-
-
-    APP_STATE.initializedPages[pageNumber] =
-
-        true;
-
-
-
-
-
-
-
-    console.log(
-
-
-        "Page initialized:",
-
-
-        pageNumber
-
-
-    );
-
-
-
-}
-
- /* ==========================================================================
-   APPLICATION ERROR HANDLER
-========================================================================== */
-
-
-
-function handleApplicationError(error){
-
-
-
-    console.error(
-
-        "CTM PATH™ Application Error:",
-
-        error
-
-    );
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   APPLICATION START
-========================================================================== */
-
-
-
-async function startApplication(){
-
-
-
-    try {
-
-
-
-        console.log(
-
-            "Starting CTM PATH™ Guided Journey™"
-
-        );
-
-
-
-
-
-
-
-        await loadPage(
-
-            APP_STATE.currentPage
-
-        );
-
-
-
-
-
-
-
-        loadPageStyle(
-
-            APP_STATE.currentPage
-
-        );
-
-
-
-
-
-
-
-        await loadPageScript(
-
-            APP_STATE.currentPage
-
-        );
-
-
-
-
-
-
-
-        initializePage(
-
-            APP_STATE.currentPage
-
-        );
-
-
-
-
-
-    }
-
-
-
-    catch(error){
-
-
-
-        handleApplicationError(
-
-            error
-
-        );
-
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   GLOBAL PAGE NAVIGATION API
-
-   Used by:
-
-       Page Modules
-
-
-   Example:
-
-       window.goToPage(2)
-
-========================================================================== */
-
-
-
-window.goToPage = async function(pageNumber){
-
-
-
-    try {
-
-
-
-        if(
-
-
-
-            !pageNumber ||
-
-
-
-            pageNumber < 1 ||
-
-
-
-            pageNumber > APP_CONFIG.totalPages
-
-
-
-        ){
-
-
-
-            console.error(
-
-
-
-                "Invalid page number:",
-
-
-
-                pageNumber
-
-
-
-            );
-
-
-
-            return;
-
-
-
-        }
-
-
-
-
-
-
-
-        console.log(
-
-
-
-            "Navigating to page:",
-
-
-
-            pageNumber
-
-
-
-        );
-
-
-
-
-
-
-
-        await loadPage(
-
-            pageNumber
-
-        );
-
-
-
-
-
-
-
-        loadPageStyle(
-
-            pageNumber
-
-        );
-
-
-
-
-
-
-
-        await loadPageScript(
-
-            pageNumber
-
-        );
-
-
-
-
-
-
-
-        initializePage(
-
-            pageNumber
-
-        );
-
-
-
-
-
-    }
-
-
-
-    catch(error){
-
-
-
-        handleApplicationError(
-
-            error
-
-        );
-
-
-
-    }
-
-
-
-};
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   PUBLIC APPLICATION API
-========================================================================== */
-
 
 
 window.CTM_APP = {
 
 
-
     start:
+
 
         startApplication,
 
@@ -1234,17 +538,27 @@ window.CTM_APP = {
 
     loadPage:
 
+
         loadPage,
 
 
 
+    preparePage:
+
+
+        preparePage,
+
+
+
     goToPage:
+
 
         window.goToPage,
 
 
 
     version:
+
 
         APP_CONFIG.version
 
@@ -1261,13 +575,11 @@ window.CTM_APP = {
 
 
 /* ==========================================================================
-   APPLICATION BOOT
+   APPLICATION BOOTSTRAP
 ========================================================================== */
 
 
-
 document.addEventListener(
-
 
 
     "DOMContentLoaded",
@@ -1290,5 +602,33 @@ document.addEventListener(
 
 
 
-})(); 
 
+
+
+
+
+
+/* ==========================================================================
+   APPLICATION READY
+========================================================================== */
+
+
+console.log(
+
+
+    "CTM PATH™ Guided Journey™ Runtime Ready",
+
+    APP_CONFIG.version
+
+
+);
+
+
+
+
+
+
+
+
+
+})(); 
