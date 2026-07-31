@@ -1,170 +1,185 @@
 
 /* ==========================================================
    CTM PATH™ Guided Journey™
-   Version : 1.0
-   File    : navigation.js
-   Purpose : Navigation Controller
+   Foundation v1.0
+   File : navigation.js
    ========================================================== */
 
 'use strict';
 
-/* ==========================================================
-   NAVIGATION
-   ========================================================== */
+window.CTM = window.CTM || {};
 
-const Navigation = {
+class Navigation {
 
-    /* ------------------------------------------------------
-       Initialize
-       ------------------------------------------------------ */
+    #initialized = false;
 
-    initialize() {
+    #steps = [];
 
-        console.info('Navigation initialized.');
+    init() {
 
-        window.addEventListener(
+        if (this.#initialized) {
+            return;
+        }
 
-            'popstate',
+        this.#steps = Object.freeze([
 
-            () => {
+            'WELCOME',
+            'DISCOVERY',
+            'ASSESSMENT',
+            'RESULTS',
+            'DIAGNOSIS',
+            'ROADMAP',
+            'CONTINUE'
 
-                this.handleBrowserNavigation();
+        ]);
 
-            }
+        this.#initialized = true;
 
+        CTM.Logger.info(
+            'Navigation initialized.'
         );
-
-    },
-
-    /* ------------------------------------------------------
-       Navigate
-       ------------------------------------------------------ */
-
-    async go(page) {
-
-        try {
-
-            if (!page) return;
-
-            State.app.previousPage =
-
-                State.app.currentPage;
-
-            State.app.currentPage = page;
-
-            history.pushState(
-
-                {
-
-                    page
-
-                },
-
-                '',
-
-                `#${page}`
-
-            );
-
-            if (typeof Router !== 'undefined') {
-
-                await Router.load(page);
-
-            }
-
-        }
-
-        catch (error) {
-
-            console.error(error);
-
-        }
-
-    },
-
-    /* ------------------------------------------------------
-       Next Page
-       ------------------------------------------------------ */
-
-    next() {
-
-        const nextStep =
-
-            State.journey.currentStep + 1;
-
-        this.go(
-
-            `page0${nextStep}`
-
-        );
-
-    },
-
-    /* ------------------------------------------------------
-       Previous Page
-       ------------------------------------------------------ */
-
-    previous() {
-
-        if (
-
-            State.app.previousPage
-
-        ) {
-
-            this.go(
-
-                State.app.previousPage
-
-            );
-
-        }
-
-    },
-
-    /* ------------------------------------------------------
-       Browser Navigation
-       ------------------------------------------------------ */
-
-    handleBrowserNavigation() {
-
-        const hash =
-
-            window.location.hash.replace(
-
-                '#',
-
-                ''
-
-            );
-
-        if (
-
-            hash
-
-            &&
-
-            typeof Router !== 'undefined'
-
-        ) {
-
-            Router.load(hash);
-
-        }
-
-    },
-
-    /* ------------------------------------------------------
-       Restart Journey
-       ------------------------------------------------------ */
-
-    restart() {
-
-        State.reset();
-
-        this.go('page01');
 
     }
 
-};
+    /* ======================================================
+       Current Step
+       ====================================================== */
+
+    currentStep() {
+
+        return CTM.State
+            .getJourney()
+            .currentStep;
+
+    }
+
+    totalSteps() {
+
+        return this.#steps.length;
+
+    }
+
+    /* ======================================================
+       Navigation Validation
+       ====================================================== */
+
+    canNavigate(step) {
+
+        return (
+
+            step >= 1 &&
+
+            step <= this.totalSteps()
+
+        );
+
+    }
+
+    /* ======================================================
+       Next
+       ====================================================== */
+
+    async next() {
+
+        const nextStep =
+
+            this.currentStep() + 1;
+
+        if (!this.canNavigate(nextStep)) {
+
+            return false;
+
+        }
+
+        return this.goTo(nextStep);
+
+    }
+
+    /* ======================================================
+       Previous
+       ====================================================== */
+
+    async previous() {
+
+        const previousStep =
+
+            this.currentStep() - 1;
+
+        if (!this.canNavigate(previousStep)) {
+
+            return false;
+
+        }
+
+        return this.goTo(previousStep);
+
+    }
+
+    /* ======================================================
+       Go To Step
+       ====================================================== */
+
+    async goTo(step) {
+
+        if (!this.canNavigate(step)) {
+
+            CTM.Logger.warn(
+
+                `Invalid step: ${step}`
+
+            );
+
+            return false;
+
+        }
+
+        const route =
+
+            this.#steps[step - 1];
+
+        CTM.State.updateJourney({
+
+            currentStep: step
+
+        });
+
+        CTM.Events.emit(
+
+            CTM.Config.EVENTS.JOURNEY_STEP_CHANGED,
+
+            {
+
+                step,
+
+                route
+
+            }
+
+        );
+
+        return CTM.Router.navigate(
+
+            route
+
+        );
+
+    }
+
+    /* ======================================================
+       Destroy
+       ====================================================== */
+
+    destroy() {
+
+        this.#initialized = false;
+
+    }
+
+}
+
+CTM.Navigation = Object.freeze(
+
+    new Navigation()
+
+);
 
