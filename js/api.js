@@ -35,7 +35,10 @@
 const CTM_API = (function(){
 
 
+
 "use strict";
+
+
 
 
 
@@ -47,15 +50,21 @@ const CTM_API = (function(){
 const CONFIG = {
 
 
+
     endpoint:
+
 
     "https://script.google.com/macros/s/AKfycbxrgqadtKd3_Bzri2DbCwjp3CWouD3wU_cIqRFgtV-1EHXseRLDSraEQfQP-_F6ZUrFIw/exec",
 
 
 
+
+
     version:
 
+
     "v1"
+
 
 
 };
@@ -73,7 +82,14 @@ const CONFIG = {
 ============================================================ */
 
 
-async function request(action, payload){
+
+async function request(
+
+    action,
+
+    payload
+
+){
 
 
 
@@ -83,42 +99,61 @@ async function request(action, payload){
 
         const response = await fetch(
 
+
+
             CONFIG.endpoint,
+
+
 
             {
 
 
+
                 method:
+
 
                 "POST",
 
 
 
+
+
                 headers:
+
 
                 {
 
 
+
                     "Content-Type":
 
+
                     "application/json"
+
 
 
                 },
 
 
 
+
+
                 body:
 
+
                 JSON.stringify(
+
+
 
                     {
 
 
+
                         action:
 
-
                         action,
+
+
 
 
 
@@ -129,18 +164,25 @@ async function request(action, payload){
 
 
 
+
+
                         payload:
 
 
                         payload
 
 
+
                     }
+
+
 
                 )
 
 
+
             }
+
 
 
         );
@@ -148,9 +190,17 @@ async function request(action, payload){
 
 
 
+
+
+
         const result =
 
+
+
         await response.json();
+
+
+
 
 
 
@@ -163,17 +213,30 @@ async function request(action, payload){
 
 
 
+
+
     catch(error){
+
+
 
 
 
         console.error(
 
+
+
             "CTM API Request Failed:",
+
+
 
             error
 
+
+
         );
+
+
+
 
 
 
@@ -181,22 +244,62 @@ async function request(action, payload){
         return {
 
 
+
             success:false,
+
+
+
 
 
             error:error.message,
 
 
+
+
+
             message:
 
+
             "Unable to connect with CTM PATH™ server"
+
 
 
         };
 
 
+
     }
 
+
+
+}
+
+                 /* ============================================================
+   PAGE 02
+   REGISTRATION + FINANCIAL DISCOVERY
+============================================================ */
+
+
+
+
+
+
+
+async function register(
+
+    data
+
+){
+
+
+
+    return request(
+
+        "register",
+
+        data
+
+    );
 
 
 }
@@ -209,14 +312,11 @@ async function request(action, payload){
 
 
 
-/* ============================================================
-   PAGE 02
-   FINANCIAL DISCOVERY
-============================================================ */
+async function saveDiscovery(
 
+    data
 
-
-async function saveDiscovery(data){
+){
 
 
 
@@ -246,7 +346,15 @@ async function saveDiscovery(data){
 
 
 
-async function saveAssessment(data){
+
+
+
+
+async function saveAssessment(
+
+    data
+
+){
 
 
 
@@ -276,7 +384,15 @@ async function saveAssessment(data){
 
 
 
-async function getAlignment(data){
+
+
+
+
+async function getAlignment(
+
+    data
+
+){
 
 
 
@@ -306,7 +422,15 @@ async function getAlignment(data){
 
 
 
-async function generateDiagnosis(data){
+
+
+
+
+async function generateDiagnosis(
+
+    data
+
+){
 
 
 
@@ -321,22 +445,22 @@ async function generateDiagnosis(data){
 
 }
 
-
-
-
-
-
-
-
-
-/* ============================================================
+                 /* ============================================================
    PAGE 06
    PERSONAL TRANSFORMATION PRESCRIPTION™
 ============================================================ */
 
 
 
-async function generateRoadmap(data){
+
+
+
+
+async function generateRoadmap(
+
+    data
+
+){
 
 
 
@@ -366,7 +490,15 @@ async function generateRoadmap(data){
 
 
 
-async function generateReport(data){
+
+
+
+
+async function generateReport(
+
+    data
+
+){
 
 
 
@@ -391,12 +523,95 @@ async function generateReport(data){
 
 /* ============================================================
    PAGE 07
+   DOCUMENT GENERATION
+============================================================ */
+
+
+
+
+
+
+
+async function generateDocument(
+
+    data
+
+){
+
+
+
+    return request(
+
+        "generateDocument",
+
+        data
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   EMAIL DELIVERY
+============================================================ */
+
+
+
+
+
+
+
+async function sendEmail(
+
+    data
+
+){
+
+
+
+    return request(
+
+        "sendEmail",
+
+        data
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   PAGE 07
    DISCOVERY SESSION BOOKING
 ============================================================ */
 
 
 
-async function bookDiscovery(data){
+
+
+
+
+async function bookDiscovery(
+
+    data
+
+){
 
 
 
@@ -420,9 +635,116 @@ async function bookDiscovery(data){
 
 
 /* ============================================================
+   PAGE 07
+   JOURNEY SUMMARY
+============================================================ */
+
+
+
+
+
+
+
+async function getJourneySummary(
+
+    data
+
+){
+
+
+
+    return request(
+
+        "getJourneySummary",
+
+        data
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   QA / PREVIEW SERVICES
+============================================================ */
+
+
+
+
+
+
+
+async function previewReport(
+
+    data
+
+){
+
+
+
+    return request(
+
+        "previewReport",
+
+        data
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+async function previewRoadmap(
+
+    data
+
+){
+
+
+
+    return request(
+
+        "previewRoadmap",
+
+        data
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ============================================================
    HEALTH CHECK
    Used during deployment testing
 ============================================================ */
+
+
+
+
+
 
 
 async function healthCheck(){
@@ -453,34 +775,78 @@ async function healthCheck(){
 ============================================================ */
 
 
+
+
+
+
+
 return {
+
+
+
+    register,
+
 
 
     saveDiscovery,
 
 
+
     saveAssessment,
+
 
 
     getAlignment,
 
 
+
     generateDiagnosis,
+
 
 
     generateRoadmap,
 
 
+
     generateReport,
+
+
+
+    generateDocument,
+
+
+
+    sendEmail,
+
 
 
     bookDiscovery,
 
 
+
+    getJourneySummary,
+
+
+
+    previewReport,
+
+
+
+    previewRoadmap,
+
+
+
     healthCheck
 
 
+
 };
+
+
+
+
+
+
 
 
 
