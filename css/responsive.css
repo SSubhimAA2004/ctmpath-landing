@@ -1,4 +1,5 @@
 
+
 /* ==========================================================================
    CTM PATH™ MILLIONAIRES™
 
@@ -6,7 +7,7 @@
    responsive.css
 
    VERSION:
-   10.1
+   10.2
 
    PURPOSE:
 
@@ -519,12 +520,12 @@ section {
 
     padding-left:
 
-        20px;
+        12px;
 
 
     padding-right:
 
-        20px;
+        12px;
 
 
 }
@@ -548,7 +549,7 @@ button,
 
     min-height:
 
-        48px;
+        52px;
 
 
     padding:
@@ -818,11 +819,6 @@ footer {
         100%;
 
 
-    padding:
-
-        45px 20px;
-
-
 }
 
 
@@ -834,14 +830,9 @@ footer {
 .footer-container {
 
 
-    width:
+    max-width:
 
         100%;
-
-
-    grid-template-columns:
-
-        1fr;
 
 
     text-align:
@@ -1009,6 +1000,13 @@ button {
 
 
 @media print {
+
+
+
+* {
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
 
 
 
