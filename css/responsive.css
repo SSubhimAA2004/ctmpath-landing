@@ -1,5 +1,6 @@
 
 
+
 /* ==========================================================================
    CTM PATH™ MILLIONAIRES™
 
@@ -7,7 +8,7 @@
    responsive.css
 
    VERSION:
-   10.2
+   10.3
 
    PURPOSE:
 
@@ -217,7 +218,7 @@ button {
 
     width:
 
-        min(1200px, 90%);
+        min(1120px, 90%);
 
 
     margin:
@@ -673,12 +674,12 @@ section {
 
     padding-left:
 
-        16px;
+        12px;
 
 
     padding-right:
 
-        16px;
+        12px;
 
 
 }
@@ -718,7 +719,7 @@ section {
 
     padding:
 
-        16px 20px;
+        14px 18px;
 
 
 }
@@ -755,7 +756,7 @@ section {
 
     font-size:
 
-        1.4rem;
+        1.3rem;
 
 
     line-height:
@@ -776,7 +777,7 @@ section {
 
     font-size:
 
-        .75rem;
+        .72rem;
 
 
     line-height:
@@ -856,11 +857,6 @@ footer {
         center;
 
 
-    flex-wrap:
-
-        wrap;
-
-
 }
 
 
@@ -870,11 +866,6 @@ footer {
 
 
 .footer-bottom {
-
-
-    font-size:
-
-        .8rem;
 
 
     line-height:
@@ -972,7 +963,7 @@ button {
 
     min-height:
 
-        48px;
+        52px;
 
 
     touch-action:
@@ -1044,4 +1035,6 @@ body {
 
 
 }
+
+
 
