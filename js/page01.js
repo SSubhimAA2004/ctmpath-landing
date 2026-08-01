@@ -1,78 +1,114 @@
 
-/* ============================================================
+/* ==========================================================================
    CTM PATH™ MILLIONAIRES™
-   Guided Journey™
 
-   PAGE 01 JAVASCRIPT
-
-   File:
+   FILE:
    js/page01.js
 
 
-   Responsibility:
-
-   • Page interaction only
-   • CTA navigation only
-   • No business logic
-
-============================================================ */
+   VERSION:
+   1.0
 
 
-
-'use strict';
-
-
+   PAGE:
+   PAGE 01 — WELCOME JOURNEY
 
 
-
-/* ============================================================
-   PAGE INITIALIZATION
-============================================================ */
+   ARCHITECTURE:
+   STATIC JOURNEY MODEL
 
 
+   RESPONSIBILITY:
 
-function initPage01(){
+   ✓ Page 01 interactions
+   ✓ CTA tracking
+   ✓ Discovery card behaviour
+
+
+   DOES NOT:
+
+   ✗ Routing
+   ✗ Page loading
+   ✗ Application management
+
+
+========================================================================== */
 
 
 
-    const beginButton =
-
-        document.getElementById(
-
-            "beginJourneyBtn"
-
-        );
+"use strict";
 
 
 
 
 
-    if(!beginButton){
 
 
-        console.warn(
-
-            "PAGE01 CTA button not found."
-
-        );
 
 
-        return;
+/* ==========================================================================
+   PAGE READY
+========================================================================== */
+
+
+document.addEventListener(
+
+
+
+    "DOMContentLoaded",
+
+
+
+    function(){
+
+
+
+        initializePage01();
+
 
 
     }
 
 
 
+);
 
 
 
 
-    beginButton.addEventListener(
 
-        "click",
 
-        handleBeginJourney
+
+
+
+/* ==========================================================================
+   PAGE 01 INITIALIZATION
+========================================================================== */
+
+
+function initializePage01(){
+
+
+
+    initializeJourneyButton();
+
+
+
+    initializeDiscoveryCards();
+
+
+
+
+
+
+
+    console.log(
+
+
+
+        "CTM PATH™ Page 01 Ready"
+
+
 
     );
 
@@ -88,86 +124,35 @@ function initPage01(){
 
 
 
-/* ============================================================
-   CTA ACTION
-============================================================ */
+/* ==========================================================================
+   PRIMARY JOURNEY BUTTON
+========================================================================== */
+
+
+function initializeJourneyButton(){
 
 
 
-function handleBeginJourney(){
+    const button =
 
+        document.querySelector(
 
-
-    /*
-        Optional analytics hook
-
-        Example:
-
-        CTMAnalytics.track(
-            "PAGE01_BEGIN_JOURNEY"
-        );
-
-    */
-
-
-
-
-
-    navigateToNextPage();
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ============================================================
-   PAGE NAVIGATION
-============================================================ */
-
-
-
-function navigateToNextPage(){
-
-
-
-    /*
-        Uses existing application navigation.
-
-        Does NOT load pages directly.
-
-        app.js remains responsible
-        for routing.
-
-    */
-
-
-
-
-
-    if(
-
-        typeof window.goToPage === "function"
-
-    ){
-
-
-
-        window.goToPage(
-
-            2
+            ".journey-button"
 
         );
+
+
+
+
+
+
+
+    if(!button){
 
 
 
         return;
+
 
 
     }
@@ -178,21 +163,54 @@ function navigateToNextPage(){
 
 
 
-    /*
-        Fallback
-
-        Used only if global router
-        is unavailable.
-
-    */
+    button.addEventListener(
 
 
 
+        "click",
 
 
-    window.location.href =
 
-        "page02.html";
+        function(){
+
+
+
+            trackCTMEvent(
+
+
+
+                "page01_begin_journey",
+
+
+
+                {
+
+
+                    page:
+
+                        "01",
+
+
+
+                    action:
+
+                        "Begin Millionaire Journey"
+
+
+
+                }
+
+
+
+            );
+
+
+
+        }
+
+
+
+    );
 
 
 
@@ -206,17 +224,321 @@ function navigateToNextPage(){
 
 
 
-/* ============================================================
-   AUTO INITIALIZATION
-============================================================ */
+/* ==========================================================================
+   DISCOVERY CARDS
+========================================================================== */
+
+
+function initializeDiscoveryCards(){
 
 
 
-document.addEventListener(
+    const cards =
 
-    "DOMContentLoaded",
+        document.querySelectorAll(
 
-    initPage01
+            ".discovery-card"
 
-);
+        );
+
+
+
+
+
+
+
+    cards.forEach(function(card){
+
+
+
+        card.addEventListener(
+
+
+
+            "mouseenter",
+
+
+
+            function(){
+
+
+
+                this.classList.add(
+
+                    "active"
+
+                );
+
+
+
+            }
+
+
+
+        );
+
+
+
+
+
+
+
+        card.addEventListener(
+
+
+
+            "mouseleave",
+
+
+
+            function(){
+
+
+
+                this.classList.remove(
+
+                    "active"
+
+                );
+
+
+
+            }
+
+
+
+        );
+
+
+
+    });
+
+
+
+}
+
+/* ==========================================================================
+   MOBILE TOUCH CARD SUPPORT
+========================================================================== */
+
+
+function enableMobileCardInteraction(){
+
+
+
+    const cards =
+
+        document.querySelectorAll(
+
+            ".discovery-card"
+
+        );
+
+
+
+
+
+
+
+    cards.forEach(function(card){
+
+
+
+        card.addEventListener(
+
+
+
+            "touchstart",
+
+
+
+            function(){
+
+
+
+                this.classList.add(
+
+                    "active"
+
+                );
+
+
+
+            },
+
+
+
+            {
+
+                passive:true
+
+            }
+
+
+
+        );
+
+
+
+
+
+
+
+        card.addEventListener(
+
+
+
+            "touchend",
+
+
+
+            function(){
+
+
+
+                this.classList.remove(
+
+                    "active"
+
+                );
+
+
+
+            },
+
+
+
+            {
+
+                passive:true
+
+            }
+
+
+
+        );
+
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   REDUCED MOTION SUPPORT
+========================================================================== */
+
+
+function respectMotionPreference(){
+
+
+
+    if(
+
+        window.matchMedia(
+
+            "(prefers-reduced-motion: reduce)"
+
+        ).matches
+
+    ){
+
+
+
+        document.documentElement.classList.add(
+
+            "reduce-motion"
+
+        );
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   PAGE 01 ENHANCED INITIALIZATION
+========================================================================== */
+
+
+function initializePage01Enhancements(){
+
+
+
+    enableMobileCardInteraction();
+
+
+
+    respectMotionPreference();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   PAGE 01 PUBLIC NAMESPACE
+========================================================================== */
+
+
+window.CTM_PAGE01 = {
+
+
+
+    version:
+
+        "1.0",
+
+
+
+    initialize:
+
+        initializePage01Enhancements
+
+
+
+};
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   RUN PAGE ENHANCEMENTS
+========================================================================== */
+
+
+initializePage01Enhancements();
 
