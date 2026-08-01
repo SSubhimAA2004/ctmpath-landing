@@ -1,5 +1,6 @@
 
 
+
 /* ==========================================================================
    CTM PATH™ MILLIONAIRES™
 
@@ -8,7 +9,7 @@
 
 
    VERSION:
-   10.4
+   10.5
 
 
    STATUS:
@@ -51,16 +52,7 @@
 
     margin-top:
 
-
-        clamp(
-
-            3rem,
-
-            5vw,
-
-            5rem
-
-        );
+        0;
 
 
 
@@ -264,9 +256,9 @@
 
         min(
 
-            1380px,
+            1120px,
 
-            calc(100% - 96px)
+            calc(100% - 64px)
 
         );
 
@@ -281,7 +273,7 @@
     padding:
 
 
-        3.25rem 0 1.75rem;
+        2.75rem 0 1.25rem;
 
 
 
@@ -342,7 +334,7 @@
     gap:
 
 
-        1.4rem;
+        1.1rem;
 
 
 
@@ -421,11 +413,11 @@
     grid-template-columns:
 
 
-        1.2fr
+        1.1fr
 
-        .9fr
+        .85fr
 
-        1.2fr;
+        1.05fr;
 
 
 
@@ -434,11 +426,11 @@
 
         clamp(
 
-            2.5rem,
+            2rem,
 
-            4vw,
+            3vw,
 
-            4.5rem
+            3.5rem
 
         );
 
@@ -483,7 +475,7 @@
     gap:
 
 
-        1.2rem;
+        .9rem;
 
 
 
@@ -527,13 +519,13 @@
 
     width:
 
-        72px;
+        64px;
 
 
 
     height:
 
-        72px;
+        64px;
 
 
 
@@ -575,11 +567,11 @@
 
         clamp(
 
-            2rem,
+            1.8rem,
 
-            3vw,
+            2.6vw,
 
-            3rem
+            2.6rem
 
         );
 
@@ -686,7 +678,7 @@
 
     letter-spacing:
 
-        .08em;
+        .04em;
 
 
 
@@ -980,13 +972,13 @@
 
     width:
 
-        48px;
+        44px;
 
 
 
     height:
 
-        48px;
+        44px;
 
 
 
@@ -1090,14 +1082,14 @@
     margin-top:
 
 
-        2.75rem;
+        1.25rem;
 
 
 
     padding:
 
 
-        2rem;
+        1.25rem;
 
 
 
@@ -1115,7 +1107,7 @@
 
     font-size:
 
-        1.08rem;
+        .95rem;
 
 
 
@@ -1127,7 +1119,7 @@
 
     line-height:
 
-        1.75;
+        1.6;
 
 
 
@@ -1209,7 +1201,7 @@
     padding:
 
 
-        1.25rem 0;
+        .9rem 0;
 
 
 
@@ -1361,6 +1353,20 @@
 @media(max-width:768px){
 
 
+.ctm-footer .footer-legacy,
+.ctm-footer .footer-legacy p,
+.ctm-footer .footer-contact-title,
+.ctm-footer .footer-founder-name,
+.ctm-footer .footer-role,
+.ctm-footer .footer-section-label {
+
+    color: rgba(248,245,237,.90);
+
+}
+
+
+
+
 
 .footer-container {
 
@@ -1374,7 +1380,7 @@
     padding:
 
 
-        2.25rem 0 1.5rem;
+        1.75rem 0 1rem;
 
 
 
@@ -1406,7 +1412,7 @@
     padding:
 
 
-        1.5rem 1rem;
+        1.1rem .75rem;
 
 
 
@@ -1425,13 +1431,13 @@
 
     width:
 
-        58px;
+        54px;
 
 
 
     height:
 
-        58px;
+        54px;
 
 
 
@@ -1450,7 +1456,7 @@
 
     font-size:
 
-        1.8rem;
+        1.65rem;
 
 
 
@@ -1489,20 +1495,20 @@
     margin-top:
 
 
-        2rem;
+        1.25rem;
 
 
 
     padding:
 
 
-        1.5rem 1rem;
+        1rem .75rem;
 
 
 
     font-size:
 
-        1rem;
+        .9rem;
 
 
 
@@ -1553,14 +1559,20 @@
 
     flex-direction:
 
-        column;
+        row;
+
+
+
+    justify-content:
+
+        center;
 
 
 
     gap:
 
 
-        .8rem;
+        .75rem;
 
 
 
