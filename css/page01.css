@@ -1,5 +1,6 @@
 
 
+
 /* ==========================================================================
    CTM PATH™ MILLIONAIRES™
 
@@ -8,7 +9,7 @@
 
 
    VERSION:
-   5.2
+   5.3
 
 
    PAGE:
@@ -97,7 +98,7 @@
 
     width:
 
-        min(1200px, 92%);
+        min(1120px, 90%);
 
 
 
@@ -110,7 +111,7 @@
     padding:
 
 
-        clamp(2.25rem,5vw,4rem) 0;
+        clamp(2rem,4vw,3.5rem) 0;
 
 
 
@@ -472,9 +473,9 @@
 
             2rem,
 
-            6vw,
+            4.8vw,
 
-            4rem
+            3.35rem
 
         );
 
@@ -673,13 +674,13 @@
     gap:
 
 
-        1.8rem;
+        1px;
 
 
 
     margin:
 
-        2.75rem auto;
+        2.5rem auto 2.75rem;
 
 
 
@@ -704,13 +705,13 @@
 
     padding:
 
-        2rem 1.6rem;
+        1.75rem 1.5rem;
 
 
 
     min-height:
 
-        160px;
+        132px;
 
 
 
@@ -746,7 +747,7 @@
 
     border-radius:
 
-        24px;
+        0;
 
 
 
@@ -767,14 +768,14 @@
 
     border:
 
-        1px solid rgba(216,180,90,.35);
+        1px solid rgba(216,180,90,.22);
 
 
 
     box-shadow:
 
 
-        0 20px 60px rgba(0,0,0,.25);
+        none;
 
 
 
@@ -800,45 +801,9 @@
 
 .discovery-card::before {
 
-
-    content:"";
-
-
-
-    position:
-
-        absolute;
-
-
-
-    inset:
-
-        8px;
-
-
-
-    border-radius:
-
-        18px;
-
-
-
-    border:
-
-        1px solid rgba(35,212,200,.18);
-
-
-
-    pointer-events:
-
-        none;
-
-
+    content:none;
 
 }
-
-
-
 
 
 
@@ -966,13 +931,13 @@
 
     transform:
 
-        translateY(-8px);
+        translateY(-3px);
 
 
 
     border-color:
 
-        rgba(216,180,90,.8);
+        rgba(216,180,90,.48);
 
 
 
@@ -1071,26 +1036,26 @@
 
     width:
 
-        min(100%,420px);
+        min(100%,400px);
 
 
 
     min-height:
 
-        92px;
+        82px;
 
 
 
     padding:
 
 
-        1.4rem 2rem;
+        1.15rem 1.75rem;
 
 
 
     border-radius:
 
-        22px;
+        16px;
 
 
 
@@ -1123,7 +1088,7 @@
 
     border:
 
-        1px solid rgba(255,255,255,.45);
+        1px solid rgba(216,180,90,.48);
 
 
 
@@ -1131,7 +1096,8 @@
 
 
         0 18px 45px rgba(0,0,0,.35),
-        0 0 0 1px rgba(255,255,255,.08) inset;
+        0 8px 28px rgba(15,81,56,.24),
+        0 0 0 1px rgba(255,255,255,.05) inset;
 
 
 
@@ -1243,15 +1209,15 @@
 
     transform:
 
-        translateY(-5px);
+        translateY(-3px);
 
 
 
     box-shadow:
 
 
-        0 24px 60px rgba(232,93,4,.24),
-        0 18px 45px rgba(0,0,0,.42);
+        0 22px 50px rgba(0,0,0,.40),
+        0 10px 32px rgba(15,81,56,.34);
 
 
 
@@ -1354,7 +1320,7 @@
 
     color:
 
-        #FFFFFF;
+        #D8B45A;
 
 
 
@@ -1539,7 +1505,7 @@
     gap:
 
 
-        1.2rem;
+        .75rem;
 
 
 
@@ -1558,14 +1524,14 @@
 
     min-height:
 
-        140px;
+        96px;
 
 
 
     padding:
 
 
-        1.6rem 1.2rem;
+        1.25rem 1rem;
 
 
 
@@ -1590,7 +1556,7 @@
 
     min-height:
 
-        88px;
+        80px;
 
 
 
@@ -1716,7 +1682,7 @@
 
     height:
 
-        64px;
+        24px;
 
 
 
@@ -1960,6 +1926,8 @@ body {
 
 
 }
+
+
 
 
 
