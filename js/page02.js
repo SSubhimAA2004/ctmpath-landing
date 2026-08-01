@@ -2,25 +2,38 @@
 /* ==========================================================================
    CTM PATH™ MILLIONAIRES™
 
-   PAGE 02 JAVASCRIPT CONTROLLER
-
-   FINANCIAL CONFIDENCE DISCOVERY™
-
-   Version: 10.0
+   FILE:
+   js/page02.js
 
 
-   Responsibilities:
+   VERSION:
+   1.0
 
-   ✓ Initialize Page 02
-   ✓ Enhance User Experience
-   ✓ Save Temporary Progress
-   ✓ Prepare Page 03 Transition
+
+   PAGE:
+   PAGE 02 — FINANCIAL CONFIDENCE DISCOVERY™
+
+
+   ARCHITECTURE:
+   STATIC JOURNEY MODEL
+
+
+   RESPONSIBILITY:
+
+   ✓ Page interactions
+   ✓ CTA tracking
+   ✓ Discovery card enhancement
+
+
+   DOES NOT:
+
+   ✗ Routing
+   ✗ Page loading
+   ✗ Application management
 
 
 ========================================================================== */
 
-
-(function(){
 
 
 "use strict";
@@ -29,68 +42,71 @@
 
 
 
-/* ==========================================================================
-   PAGE CONFIGURATION
-========================================================================== */
-
-
-const PAGE02_CONFIG = {
-
-
-    page:
-
-        "02",
-
-
-    nextPage:
-
-        "page03.html",
-
-
-    storageKey:
-
-        "CTM_PAGE02_DATA"
-
-
-};
-
-
-
-
 
 
 
 
 /* ==========================================================================
-   INITIALIZE PAGE
+   PAGE READY
 ========================================================================== */
 
 
-function initPage02(){
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    function(){
+
+
+        initializePage02();
+
+
+    }
+
+);
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   PAGE INITIALIZATION
+========================================================================== */
+
+
+function initializePage02(){
+
+
+
+    initializeJourneyButton();
+
+
+
+    initializeDiscoveryCards();
+
+
+
+    enableTouchInteractions();
+
+
+
+
 
 
 
     console.log(
 
-        "CTM PATH™ MILLIONAIRES™ Page02 Loaded"
+
+
+        "CTM PATH™ Page 02 Ready"
+
+
 
     );
-
-
-
-    bindInputTracking();
-
-
-
-    bindRatingInteraction();
-
-
-
-    bindNavigation();
-
-
-
-    restoreSavedData();
 
 
 
@@ -105,411 +121,15 @@ function initPage02(){
 
 
 /* ==========================================================================
-   INPUT TRACKING
+   CTA TRACKING
 ========================================================================== */
 
 
-function bindInputTracking(){
-
-
-
-    const inputs =
-
-
-        document.querySelectorAll(
-
-            "input, textarea, select"
-
-        );
-
-
-
-
-
-    inputs.forEach(
-
-        function(input){
-
-
-
-            input.addEventListener(
-
-                "change",
-
-                saveProgress
-
-            );
-
-
-
-            input.addEventListener(
-
-                "blur",
-
-                saveProgress
-
-            );
-
-
-
-        }
-
-
-    );
-
-
-}
-
-
-
-
-
-
-
-/* ==========================================================================
-   SAVE TEMPORARY PROGRESS
-========================================================================== */
-
-
-function saveProgress(){
-
-
-
-    const formData = {};
-
-
-
-
-
-    const fields =
-
-
-        document.querySelectorAll(
-
-            "input, textarea, select"
-
-        );
-
-
-
-
-
-    fields.forEach(
-
-        function(field,index){
-
-
-
-            if(field.type === "checkbox"){
-
-
-
-                formData[
-
-                    "field_"+index
-
-                ] = field.checked;
-
-
-
-            }
-
-
-            else if(field.type === "radio"){
-
-
-
-                if(field.checked){
-
-
-
-                    formData[
-
-                        field.name
-
-                    ] = field.value;
-
-
-
-                }
-
-
-            }
-
-
-            else {
-
-
-
-                formData[
-
-                    "field_"+index
-
-                ] = field.value;
-
-
-
-            }
-
-
-
-        }
-
-
-    );
-
-
-
-
-
-    sessionStorage.setItem(
-
-
-        PAGE02_CONFIG.storageKey,
-
-
-        JSON.stringify(formData)
-
-
-    );
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   RESTORE PROGRESS
-========================================================================== */
-
-
-function restoreSavedData(){
-
-
-
-    const saved =
-
-
-        sessionStorage.getItem(
-
-            PAGE02_CONFIG.storageKey
-
-        );
-
-
-
-
-
-    if(!saved){
-
-        return;
-
-    }
-
-
-
-
-
-    const data =
-
-
-        JSON.parse(saved);
-
-
-
-
-
-    const fields =
-
-
-        document.querySelectorAll(
-
-            "input, textarea, select"
-
-        );
-
-
-
-
-
-    fields.forEach(
-
-        function(field,index){
-
-
-
-            const key =
-
-                "field_"+index;
-
-
-
-
-
-            if(field.type === "checkbox"){
-
-
-
-                field.checked =
-
-                    data[key] || false;
-
-
-
-            }
-
-
-            else if(
-
-                field.type !== "radio"
-
-            ){
-
-
-
-                field.value =
-
-                    data[key] || "";
-
-
-
-            }
-
-
-
-        }
-
-
-    );
-
-
-
-}
-
-
- /* ==========================================================================
-   RATING INTERACTION
-========================================================================== */
-
-
-function bindRatingInteraction(){
-
-
-
-    const ratingButtons =
-
-
-        document.querySelectorAll(
-
-            ".rating-scale button"
-
-        );
-
-
-
-
-
-    ratingButtons.forEach(
-
-        function(button){
-
-
-
-            button.addEventListener(
-
-                "click",
-
-                function(){
-
-
-
-                    const parent =
-
-                        button.parentElement;
-
-
-
-                    parent
-
-                        .querySelectorAll(
-
-                            "button"
-
-                        )
-
-                        .forEach(
-
-                            function(item){
-
-
-
-                                item.classList.remove(
-
-                                    "selected"
-
-                                );
-
-
-                            }
-
-                        );
-
-
-
-
-
-                    button.classList.add(
-
-                        "selected"
-
-                    );
-
-
-
-                    saveProgress();
-
-
-
-                }
-
-
-            );
-
-
-
-        }
-
-
-    );
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   NAVIGATION
-========================================================================== */
-
-
-function bindNavigation(){
+function initializeJourneyButton(){
 
 
 
     const button =
-
 
         document.querySelector(
 
@@ -521,9 +141,15 @@ function bindNavigation(){
 
 
 
+
+
     if(!button){
 
+
+
         return;
+
+
 
     }
 
@@ -531,43 +157,67 @@ function bindNavigation(){
 
 
 
+
+
     button.addEventListener(
+
+
 
         "click",
 
-        function(event){
+
+
+        function(){
 
 
 
-            event.preventDefault();
+            if(
+
+                window.CTM_GLOBAL &&
+
+                window.CTM_GLOBAL.track
+
+            ){
 
 
 
-
-
-            saveProgress();
-
+                window.CTM_GLOBAL.track(
 
 
 
-
-            console.log(
-
-                "Moving to Page 03 — Life Assessment"
-
-            );
+                    "page02_continue_journey",
 
 
 
+                    {
 
 
-            window.location.href =
+                        page:
 
-                PAGE02_CONFIG.nextPage;
+                            "02",
+
+
+
+                        action:
+
+                            "Discover Money Path"
+
+
+
+                    }
+
+
+
+                );
+
+
+
+            }
 
 
 
         }
+
 
 
     );
@@ -583,21 +233,21 @@ function bindNavigation(){
 
 
 
+
 /* ==========================================================================
-   COMPLETION FEEDBACK
+   DISCOVERY CARD INTERACTION
 ========================================================================== */
 
 
-function showCompletionMessage(){
+function initializeDiscoveryCards(){
 
 
 
-    const message =
+    const cards =
 
+        document.querySelectorAll(
 
-        document.createElement(
-
-            "div"
+            ".discovery-card"
 
         );
 
@@ -605,57 +255,182 @@ function showCompletionMessage(){
 
 
 
-    message.className =
-
-        "page-feedback";
 
 
+    cards.forEach(function(card){
 
 
 
-    message.innerHTML = `
-
-        <strong>
-
-        Great!
-
-        </strong>
-
-        <br>
-
-        Let's understand your next step.
-
-    `;
+        card.addEventListener(
 
 
 
-
-
-    document.body.appendChild(
-
-        message
-
-    );
+            "mouseenter",
 
 
 
-
-
-    setTimeout(
-
-        function(){
+            function(){
 
 
 
-            message.remove();
+                this.classList.add(
+
+                    "active"
+
+                );
 
 
 
-        },
+            }
 
-        3000
 
-    );
+
+        );
+
+
+
+
+
+
+
+        card.addEventListener(
+
+
+
+            "mouseleave",
+
+
+
+            function(){
+
+
+
+                this.classList.remove(
+
+                    "active"
+
+                );
+
+
+
+            }
+
+
+
+        );
+
+
+
+    });
+
+
+
+}
+
+/* ==========================================================================
+   MOBILE TOUCH INTERACTION
+========================================================================== */
+
+
+function enableTouchInteractions(){
+
+
+
+    const cards =
+
+        document.querySelectorAll(
+
+            ".discovery-card"
+
+        );
+
+
+
+
+
+
+
+    cards.forEach(function(card){
+
+
+
+        card.addEventListener(
+
+
+
+            "touchstart",
+
+
+
+            function(){
+
+
+
+                this.classList.add(
+
+                    "active"
+
+                );
+
+
+
+            },
+
+
+
+            {
+
+                passive:true
+
+            }
+
+
+
+        );
+
+
+
+
+
+
+
+        card.addEventListener(
+
+
+
+            "touchend",
+
+
+
+            function(){
+
+
+
+                this.classList.remove(
+
+                    "active"
+
+                );
+
+
+
+            },
+
+
+
+            {
+
+                passive:true
+
+            }
+
+
+
+        );
+
+
+
+    });
 
 
 
@@ -668,22 +443,100 @@ function showCompletionMessage(){
 
 
 
+
 /* ==========================================================================
-   PUBLIC PAGE MODULE
+   REDUCED MOTION SUPPORT
+========================================================================== */
+
+
+function respectMotionPreference(){
+
+
+
+    if(
+
+
+
+        window.matchMedia(
+
+            "(prefers-reduced-motion: reduce)"
+
+        ).matches
+
+
+
+    ){
+
+
+
+        document.documentElement.classList.add(
+
+            "reduce-motion"
+
+        );
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   PAGE 02 ENHANCED INITIALIZATION
+========================================================================== */
+
+
+function initializePage02Enhancements(){
+
+
+
+    enableTouchInteractions();
+
+
+
+    respectMotionPreference();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   PAGE 02 PUBLIC NAMESPACE
 ========================================================================== */
 
 
 window.CTM_PAGE02 = {
 
 
-    init:
 
-        initPage02,
+    version:
+
+        "1.0",
 
 
-    save:
 
-        saveProgress
+    initialize:
+
+        initializePage02Enhancements
+
 
 
 };
@@ -695,26 +548,11 @@ window.CTM_PAGE02 = {
 
 
 
+
 /* ==========================================================================
-   AUTO INITIALIZE
+   RUN ENHANCEMENTS
 ========================================================================== */
 
 
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    function(){
-
-
-        initPage02();
-
-
-    }
-
-);
-
-
-
-})();
+initializePage02Enhancements();
 
