@@ -2,19 +2,27 @@
 /* ==========================================================================
    CTM PATH™ MILLIONAIRES™
 
-   File      : footer.css
+   FILE:
+   css/footer.css
 
-   Version   : 10.3
 
-   Status    : PREMIUM GLOBAL FOOTER
-               MOBILE REFINED
+   VERSION:
+   10.3
 
-   Philosophy:
 
-   The footer is not an ending.
-   It is the final signature of the movement.
+   STATUS:
+   GLOBAL PREMIUM FOOTER
 
-   ========================================================================== */
+
+   RESPONSIBILITY:
+
+   ✓ Footer identity
+   ✓ Footer layout
+   ✓ Footer branding
+   ✓ Contact foundation
+
+
+========================================================================== */
 
 
 
@@ -25,41 +33,46 @@
 ========================================================================== */
 
 
-
 .ctm-footer {
 
 
-    position:relative;
+    position:
+
+        relative;
 
 
-    overflow:hidden;
+
+    overflow:
+
+        hidden;
+
 
 
     margin-top:
 
 
-        clamp(4rem,8vw,8rem);
+        clamp(
+
+            6rem,
+
+            10vw,
+
+            10rem
+
+        );
 
 
 
     padding-top:
 
-
         0;
 
 
 
-    isolation:isolate;
+    isolation:
 
+        isolate;
 
-
-
-    /*
-       Premium deep navy foundation
-
-       Removed excessive transparency
-       to avoid mobile washed-out effect
-    */
 
 
     background:
@@ -71,17 +84,16 @@
 
             #081C3A 0%,
 
-            #050D1A 100%
+            #050B12 100%
 
         );
-
 
 
 
     border-top:
 
 
-        1px solid rgba(216,180,90,.22);
+        1px solid rgba(255,255,255,.08);
 
 
 
@@ -100,34 +112,39 @@
 ========================================================================== */
 
 
-
 .ctm-footer::before {
 
 
     content:"";
 
 
-    position:absolute;
+
+    position:
+
+        absolute;
 
 
-    inset:0;
+
+    inset:
+
+        0;
 
 
-    pointer-events:none;
 
+    pointer-events:
 
+        none;
 
 
 
     background:
 
 
-
         radial-gradient(
 
             ellipse at top center,
 
-            rgba(35,212,200,.06),
+            rgba(35,212,200,.12),
 
             transparent 45%
 
@@ -135,13 +152,11 @@
 
 
 
-
-
         radial-gradient(
 
             ellipse at bottom right,
 
-            rgba(216,180,90,.06),
+            rgba(216,180,90,.10),
 
             transparent 40%
 
@@ -165,26 +180,38 @@
     content:"";
 
 
-    position:absolute;
+
+    position:
+
+        absolute;
 
 
-    top:0;
+
+    top:
+
+        0;
 
 
-    left:12%;
+
+    left:
+
+        12%;
 
 
-    right:12%;
+
+    right:
+
+        12%;
 
 
-    height:1px;
 
+    height:
 
+        1px;
 
 
 
     background:
-
 
 
         linear-gradient(
@@ -193,7 +220,7 @@
 
             transparent,
 
-            rgba(216,180,90,.75),
+            rgba(216,180,90,.65),
 
             transparent
 
@@ -203,35 +230,111 @@
 
 }
 
+
+
+
+
+
+
+
+
 /* ==========================================================================
-   JOURNEY SIGNATURE
+   FOOTER CONTAINER
 ========================================================================== */
 
+
+.footer-container {
+
+
+    position:
+
+        relative;
+
+
+
+    z-index:
+
+        2;
+
+
+
+    width:
+
+
+        min(
+
+            1380px,
+
+            calc(100% - 96px)
+
+        );
+
+
+
+    margin:
+
+        0 auto;
+
+
+
+    padding:
+
+
+        5rem 0 2.5rem;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   TOP SIGNATURE
+========================================================================== */
 
 
 .footer-topline {
 
 
-    position:relative;
+    position:
 
-
-    z-index:2;
-
+        relative;
 
 
 
-    display:flex;
+    z-index:
+
+        2;
 
 
-    justify-content:center;
+
+    display:
+
+        flex;
 
 
-    align-items:center;
+
+    justify-content:
+
+        center;
 
 
-    flex-wrap:wrap;
+
+    align-items:
+
+        center;
 
 
+
+    flex-wrap:
+
+        wrap;
 
 
 
@@ -242,64 +345,40 @@
 
 
 
-
-
     padding:
 
 
-
-        3rem 1.5rem;
-
-
+        3rem 2rem;
 
 
 
     color:
 
-
         #D8B45A;
-
-
 
 
 
     font-size:
 
-
-        .82rem;
-
-
+        .85rem;
 
 
 
     font-weight:
 
-
         900;
-
-
 
 
 
     letter-spacing:
 
-
-        .32em;
-
+        .35em;
 
 
 
+    text-align:
 
-    text-transform:
-
-
-        uppercase;
-
-
-
-
-
-    text-align:center;
+        center;
 
 
 
@@ -318,86 +397,27 @@
 
     color:
 
-
         #23D4C8;
 
 
 
 }
 
-
-
-
-
-
-
-
-
 /* ==========================================================================
-   MAIN FOOTER AREA
+   FOOTER GRID
 ========================================================================== */
-
-
-
-.footer-container {
-
-
-    position:relative;
-
-
-    z-index:2;
-
-
-
-
-
-    width:
-
-
-        min(1380px,100%);
-
-
-
-
-
-    margin:
-
-
-        0 auto;
-
-
-
-
-
-    padding:
-
-
-
-        4.5rem 48px 2.5rem;
-
-
-
-}
-
-
-
-
-
-
-
 
 
 .footer-grid {
 
 
-    display:grid;
+    display:
 
-
+        grid;
 
 
 
     grid-template-columns:
-
 
 
         1.2fr
@@ -408,18 +428,24 @@
 
 
 
-
-
     gap:
 
 
-        clamp(4rem,7vw,8rem);
+        clamp(
+
+            4rem,
+
+            7vw,
+
+            8rem
+
+        );
 
 
 
+    align-items:
 
-
-    align-items:start;
+        start;
 
 
 
@@ -438,16 +464,18 @@
 ========================================================================== */
 
 
-
 .footer-brand {
 
 
-    display:flex;
+    display:
+
+        flex;
 
 
-    flex-direction:column;
 
+    flex-direction:
 
+        column;
 
 
 
@@ -468,64 +496,103 @@
 
 
 
-.footer-brand-name {
+.footer-logo {
+
+
+    display:
+
+        flex;
+
+
+
+    align-items:
+
+        center;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.footer-logo .ctm-logo {
+
+
+    width:
+
+        72px;
+
+
+
+    height:
+
+        72px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.footer-brand h2 {
+
+
+    margin:
+
+        0;
+
 
 
     color:
-
 
         #F8F5ED;
 
 
 
-
-
     font-family:
 
-
         "Cinzel",
-
-
-        "Playfair Display",
-
 
         serif;
 
 
 
-
-
     font-size:
 
 
-        clamp(1.8rem,3vw,3rem);
+        clamp(
 
+            2rem,
 
+            3vw,
+
+            3rem
+
+        );
 
 
 
     font-weight:
 
-
         900;
-
-
 
 
 
     letter-spacing:
 
-
-        .16em;
-
-
-
-
-
-    line-height:
-
-
-        1;
+        .18em;
 
 
 
@@ -539,96 +606,49 @@
 
 
 
-.footer-brand-subtitle {
+.footer-brand-text p {
+
+
+    margin:
+
+        0;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.footer-brand-text p:first-of-type {
 
 
     color:
-
 
         #D8B45A;
 
 
 
-
-
     font-size:
-
-
-        .95rem;
-
-
-
-
-
-    font-weight:
-
-
-        900;
-
-
-
-
-
-    letter-spacing:
-
-
-        .4em;
-
-
-
-
-
-    text-transform:
-
-
-        uppercase;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.footer-brand-description {
-
-
-    color:
-
-
-        #23D4C8;
-
-
-
-
-
-    font-size:
-
 
         1rem;
 
 
 
-
-
     font-weight:
 
-
-        700;
-
-
+        900;
 
 
 
     letter-spacing:
 
-
-        .05em;
+        .45em;
 
 
 
@@ -642,38 +662,45 @@
 
 
 
-.footer-brand-signature {
+.footer-tagline {
 
 
     color:
 
-
-        rgba(248,245,237,.75);
-
-
+        #23D4C8;
 
 
 
     font-size:
 
+        1rem;
 
-        .95rem;
 
 
+    font-weight:
+
+        700;
 
 
 
     letter-spacing:
 
-
-        .04em;
+        .08em;
 
 
 
 }
 
+
+
+
+
+
+
+
+
 /* ==========================================================================
-   SECTION LABEL
+   FOOTER SECTION LABEL
 ========================================================================== */
 
 
@@ -682,42 +709,29 @@
 
     color:
 
-
         rgba(248,245,237,.45);
-
-
 
 
 
     font-size:
 
-
         .72rem;
-
-
 
 
 
     font-weight:
 
-
         900;
-
-
 
 
 
     letter-spacing:
 
-
         .35em;
 
 
 
-
-
     text-transform:
-
 
         uppercase;
 
@@ -738,16 +752,18 @@
 ========================================================================== */
 
 
-
 .footer-founder {
 
 
-    display:flex;
+    display:
+
+        flex;
 
 
-    flex-direction:column;
 
+    flex-direction:
 
+        column;
 
 
 
@@ -773,45 +789,31 @@
 
     color:
 
-
         #F8F5ED;
-
-
 
 
 
     font-family:
 
-
         "Cinzel",
-
 
         serif;
 
 
 
-
-
     font-size:
 
-
-        1.3rem;
-
-
+        1.35rem;
 
 
 
     font-weight:
 
-
         700;
 
 
 
-
-
     line-height:
-
 
         1.5;
 
@@ -832,24 +834,17 @@
 
     color:
 
-
         rgba(248,245,237,.68);
-
-
 
 
 
     font-size:
 
-
         1rem;
 
 
 
-
-
     line-height:
-
 
         1.8;
 
@@ -870,16 +865,18 @@
 ========================================================================== */
 
 
-
 .footer-contact {
 
 
-    display:flex;
+    display:
+
+        flex;
 
 
-    flex-direction:column;
 
+    flex-direction:
 
+        column;
 
 
 
@@ -905,44 +902,25 @@
 
     color:
 
-
         #F8F5ED;
-
-
 
 
 
     font-size:
 
-
         1rem;
-
-
 
 
 
     font-weight:
 
-
         900;
-
-
 
 
 
     letter-spacing:
 
-
         .12em;
-
-
-
-
-
-    text-transform:
-
-
-        uppercase;
 
 
 
@@ -956,15 +934,18 @@
 
 
 
-.footer-contact-item {
+.contact-item {
 
 
-    display:flex;
+    display:
+
+        flex;
 
 
-    align-items:center;
 
+    align-items:
 
+        center;
 
 
 
@@ -972,35 +953,6 @@
 
 
         1.2rem;
-
-
-
-
-
-    transition:
-
-
-        transform .3s ease;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.footer-contact-item:hover {
-
-
-    transform:
-
-
-        translateX(8px);
 
 
 
@@ -1019,56 +971,49 @@
 
     width:
 
-
         48px;
-
-
 
 
 
     height:
 
-
         48px;
 
 
 
+    display:
+
+        flex;
 
 
-    display:flex;
+
+    align-items:
+
+        center;
 
 
-    align-items:center;
 
+    justify-content:
 
-    justify-content:center;
-
-
+        center;
 
 
 
     border-radius:
 
-
         50%;
-
-
 
 
 
     background:
 
-
-        rgba(35,212,200,.10);
-
-
+        rgba(35,212,200,.12);
 
 
 
     border:
 
-
-        1px solid rgba(35,212,200,.22);
+        1px solid rgba(35,212,200,.25);
 
 
 
@@ -1082,38 +1027,30 @@
 
 
 
-.footer-contact-item a {
+.contact-item a,
+
+.contact-item span {
 
 
     color:
-
 
         #F8F5ED;
 
 
 
-
-
     text-decoration:
-
 
         none;
 
 
 
-
-
     font-size:
-
 
         1.05rem;
 
 
 
-
-
     font-weight:
-
 
         600;
 
@@ -1121,21 +1058,85 @@
 
 }
 
+/* ==========================================================================
+   LEGACY MESSAGE
+========================================================================== */
+
+
+.footer-legacy {
+
+
+    position:
+
+        relative;
 
 
 
+    z-index:
+
+        2;
 
 
 
+    margin-top:
 
 
-.footer-contact-item:hover a {
+        5rem;
+
+
+
+    padding:
+
+
+        3rem;
+
+
+
+    text-align:
+
+        center;
+
 
 
     color:
 
+        rgba(248,245,237,.85);
 
-        #23D4C8;
+
+
+    font-size:
+
+        1.25rem;
+
+
+
+    font-weight:
+
+        500;
+
+
+
+    line-height:
+
+        2;
+
+
+
+    letter-spacing:
+
+        .08em;
+
+
+
+    border-top:
+
+        1px solid rgba(255,255,255,.08);
+
+
+
+    border-bottom:
+
+        1px solid rgba(255,255,255,.08);
 
 
 
@@ -1149,100 +1150,13 @@
 
 
 
-/* ==========================================================================
-   LEGACY MESSAGE
-========================================================================== */
+.footer-legacy p {
 
 
+    margin:
 
-.footer-legacy {
 
-
-    margin-top:
-
-
-        4rem;
-
-
-
-
-
-    padding:
-
-
-        2.5rem 2rem;
-
-
-
-
-
-    text-align:
-
-
-        center;
-
-
-
-
-
-    color:
-
-
-        rgba(248,245,237,.88);
-
-
-
-
-
-    font-size:
-
-
-        1.2rem;
-
-
-
-
-
-    font-weight:
-
-
-        500;
-
-
-
-
-
-    line-height:
-
-
-        2;
-
-
-
-
-
-    letter-spacing:
-
-
-        .08em;
-
-
-
-
-
-    border-top:
-
-
-        1px solid rgba(255,255,255,.10);
-
-
-
-
-
-    border-bottom:
-
-
-        1px solid rgba(255,255,255,.10);
+        .5rem 0;
 
 
 
@@ -1261,61 +1175,505 @@
 ========================================================================== */
 
 
-
 .footer-bottom {
+
+
+    position:
+
+        relative;
+
+
+
+    z-index:
+
+        2;
+
 
 
     margin-top:
 
 
-        2rem;
+        2.5rem;
 
 
 
+    padding:
 
 
-    padding-top:
-
-
-        1.5rem;
-
-
+        1.8rem 0;
 
 
 
     text-align:
 
-
         center;
-
-
 
 
 
     color:
 
-
         rgba(248,245,237,.45);
-
-
 
 
 
     font-size:
 
-
-        .82rem;
-
-
+        .85rem;
 
 
 
     letter-spacing:
 
-
-        .16em;
+        .18em;
 
 
 
 }
 
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   TABLET FOOTER
+========================================================================== */
+
+
+@media(max-width:1100px){
+
+
+
+.footer-container {
+
+
+    width:
+
+        calc(100% - 64px);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.footer-grid {
+
+
+    grid-template-columns:
+
+        1fr;
+
+
+
+    gap:
+
+
+        3.5rem;
+
+
+
+    text-align:
+
+        center;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.footer-brand,
+
+.footer-founder,
+
+.footer-contact {
+
+
+    align-items:
+
+        center;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.contact-item {
+
+
+    justify-content:
+
+        center;
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   MOBILE FOOTER
+========================================================================== */
+
+
+@media(max-width:768px){
+
+
+
+.footer-container {
+
+
+    width:
+
+        calc(100% - 32px);
+
+
+
+    padding:
+
+
+        3rem 0 2rem;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.footer-topline {
+
+
+    font-size:
+
+        .7rem;
+
+
+
+    letter-spacing:
+
+        .18em;
+
+
+
+    padding:
+
+
+        2rem 1rem;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.footer-logo .ctm-logo {
+
+
+    width:
+
+        58px;
+
+
+
+    height:
+
+        58px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.footer-brand h2 {
+
+
+    font-size:
+
+        1.8rem;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.footer-brand-text p:first-of-type {
+
+
+    font-size:
+
+        .75rem;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.footer-legacy {
+
+
+    margin-top:
+
+
+        3rem;
+
+
+
+    padding:
+
+
+        2rem 1rem;
+
+
+
+    font-size:
+
+        1rem;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.footer-bottom {
+
+
+    font-size:
+
+        .75rem;
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   SMALL MOBILE
+========================================================================== */
+
+
+@media(max-width:480px){
+
+
+
+.footer-topline {
+
+
+    flex-direction:
+
+        column;
+
+
+
+    gap:
+
+
+        .8rem;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.footer-contact {
+
+
+    width:
+
+        100%;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+.contact-item {
+
+
+    flex-direction:
+
+        column;
+
+
+
+    gap:
+
+
+        .8rem;
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   ACCESSIBILITY
+========================================================================== */
+
+
+.footer-contact a:focus-visible {
+
+
+    outline:
+
+        3px solid #23D4C8;
+
+
+
+    outline-offset:
+
+        5px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   REDUCED MOTION
+========================================================================== */
+
+
+@media(prefers-reduced-motion:reduce){
+
+
+
+.ctm-footer *,
+
+.ctm-footer *::before,
+
+.ctm-footer *::after {
+
+
+    transition:
+
+        none !important;
+
+
+
+    animation:
+
+        none !important;
+
+
+
+}
+
+
+
+}
