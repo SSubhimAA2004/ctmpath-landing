@@ -3,455 +3,437 @@
    CTM PATH™ MILLIONAIRES™
 
    File      : component-loader.js
-   Version   : 2.0
+   Version   : 3.0
+   Status    : PRODUCTION
 
-   Status    : PREMIUM COMPONENT LOADER
+   Architecture:
+   STATIC MULTI-PAGE GUIDED JOURNEY
 
+   Pages:
+   /pages/page02.html
+   /pages/page03.html
+   /pages/page04.html
+   /pages/page05.html
+   /pages/page06.html
+   /pages/page07.html
 
    Responsibilities:
 
-   ✓ Load Header Component
-   ✓ Load Footer Component
+   ✓ Load Global Header
+   ✓ Load Global Footer
    ✓ Inject Shared Components
    ✓ Load Header Controller
-
+   ✓ Resolve component paths from site root
+   ✓ Support Pages 02–07 consistently
 
    Does NOT:
 
-   ✗ Routing
-   ✗ Page Loading
-   ✗ Business Logic
-   ✗ API Calls
-   ✗ Assessment Logic
+   ✗ Route pages
+   ✗ Load page content
+   ✗ Call backend APIs
+   ✗ Contain business logic
+   ✗ Contain assessment logic
 
-========================================================================== */
+   ========================================================================== */
 
 
-(function(){
+(function () {
 
+    "use strict";
 
-"use strict";
 
+    /* ======================================================================
+       ROOT PATHS
+       ======================================================================
 
+       IMPORTANT:
 
+       Pages 02–07 live inside:
 
+           /pages/
 
-/* ==========================================================================
-   COMPONENT PATHS
-========================================================================== */
+       Therefore paths such as:
 
+           components/header.html
 
-const COMPONENT_PATH = {
+       would resolve as:
 
+           /pages/components/header.html
 
-    header:
+       which is incorrect.
 
-        "components/header.html",
+       Root-relative paths guarantee that every journey page loads
+       the canonical global components from the project root.
 
+       ====================================================================== */
 
 
-    footer:
+    const COMPONENT_PATH = {
 
-        "components/footer.html"
+        header:
+            "/components/header.html",
 
+        footer:
+            "/components/footer.html"
 
+    };
 
-};
 
+    const SCRIPT_PATH = {
 
+        header:
+            "/js/header.js"
 
+    };
 
 
-const SCRIPT_PATH = {
+    /* ======================================================================
+       LOAD HTML COMPONENT
+       ====================================================================== */
 
 
-    header:
+    async function loadComponent(
+        selector,
+        file
+    ) {
 
-        "js/header.js"
+        const container =
+            document.querySelector(selector);
 
 
+        if (!container) {
 
-};
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   LOAD HTML COMPONENT
-========================================================================== */
-
-
-async function loadComponent(
-
-    selector,
-
-    file
-
-){
-
-
-
-    const container =
-
-        document.querySelector(selector);
-
-
-
-    if(!container){
-
-
-        console.warn(
-
-            "Component container missing:",
-
-            selector
-
-        );
-
-
-        return;
-
-
-    }
-
-
-
-
-
-
-    try {
-
-
-
-        const response =
-
-            await fetch(file);
-
-
-
-
-
-        if(!response.ok){
-
-
-
-            throw new Error(
-
-                "Unable to load component: "
-
-                +
-
-                file
-
+            console.warn(
+                "CTM Component container missing:",
+                selector
             );
 
+            return false;
 
         }
 
 
+        try {
 
-
-
-
-        container.innerHTML =
-
-            await response.text();
-
-
-
-
-
-        console.log(
-
-            "Loaded component:",
-
-            file
-
-        );
-
-
-
-    }
-
-
-
-    catch(error){
-
-
-
-        console.error(
-
-            "Component loading failed:",
-
-            error
-
-        );
-
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   LOAD JAVASCRIPT CONTROLLER
-========================================================================== */
-
-
-function loadScript(file){
-
-
-
-    return new Promise(
-
-        function(resolve,reject){
-
-
-
-
-
-            const existing =
-
-                document.querySelector(
-
-                    `script[src="${file}"]`
-
+            const response =
+                await fetch(
+                    file,
+                    {
+                        cache: "no-cache"
+                    }
                 );
 
 
+            if (!response.ok) {
 
-
-
-
-            if(existing){
-
-
-                resolve();
-
-
-                return;
-
+                throw new Error(
+                    "Unable to load component: " +
+                    file +
+                    " — HTTP " +
+                    response.status
+                );
 
             }
 
 
+            const html =
+                await response.text();
 
 
+            container.innerHTML =
+                html;
 
 
-            const script =
-
-                document.createElement(
-
-                    "script"
-
-                );
+            console.log(
+                "CTM Component loaded:",
+                file
+            );
 
 
-
-
-
-
-            script.src = file;
-
-
-
-            script.async = false;
-
-
-
-
-
-
-            script.onload = function(){
-
-
-
-                console.log(
-
-                    "Loaded script:",
-
-                    file
-
-                );
-
-
-
-                resolve();
-
-
-
-            };
-
-
-
-
-
-
-
-
-            script.onerror = function(){
-
-
-
-                reject(
-
-                    new Error(
-
-                        "Script loading failed: "
-
-                        +
-
-                        file
-
-                    )
-
-                );
-
-
-            };
-
-
-
-
-
-
-            document.body.appendChild(script);
-
-
+            return true;
 
         }
 
-    );
 
+        catch (error) {
 
+            console.error(
+                "CTM Component loading failed:",
+                file,
+                error
+            );
 
-}
 
+            return false;
 
+        }
 
+    }
 
 
+    /* ======================================================================
+       LOAD JAVASCRIPT CONTROLLER
+       ====================================================================== */
 
 
+    function loadScript(file) {
 
+        return new Promise(
+            function (resolve, reject) {
 
-/* ==========================================================================
-   LOAD GLOBAL COMPONENTS
-========================================================================== */
 
+                /*
+                 * Prevent duplicate loading.
+                 */
 
-async function loadGlobalComponents(){
+                const existing =
+                    document.querySelector(
+                        'script[src="' + file + '"]'
+                    );
 
 
+                if (existing) {
 
+                    resolve(true);
 
+                    return;
 
-    /*
-       HEADER
-    */
+                }
 
 
-    await loadComponent(
+                const script =
+                    document.createElement(
+                        "script"
+                    );
 
-        "#global-header",
 
-        COMPONENT_PATH.header
+                script.src =
+                    file;
 
-    );
 
+                script.async =
+                    false;
 
 
+                script.onload =
+                    function () {
 
+                        console.log(
+                            "CTM Script loaded:",
+                            file
+                        );
 
+                        resolve(true);
 
+                    };
 
-    /*
-       HEADER CONTROLLER
-    */
 
+                script.onerror =
+                    function () {
 
-    await loadScript(
+                        const error =
+                            new Error(
+                                "Script loading failed: " +
+                                file
+                            );
 
-        SCRIPT_PATH.header
 
-    );
+                        console.error(
+                            error
+                        );
 
 
+                        reject(
+                            error
+                        );
 
+                    };
 
 
+                document.body.appendChild(
+                    script
+                );
 
+            }
+        );
 
-    /*
-       FOOTER
-    */
+    }
 
 
-    await loadComponent(
+    /* ======================================================================
+       LOAD HEADER
+       ====================================================================== */
 
-        "#global-footer",
 
-        COMPONENT_PATH.footer
+    async function loadHeader() {
 
-    );
+        const loaded =
+            await loadComponent(
+                "#global-header",
+                COMPONENT_PATH.header
+            );
 
 
+        if (!loaded) {
 
+            return false;
 
+        }
 
 
-    console.log(
+        /*
+         * Header HTML must exist before header.js executes.
+         */
 
-        "CTM PATH™ Global Components Loaded."
+        try {
 
-    );
+            await loadScript(
+                SCRIPT_PATH.header
+            );
 
 
+            return true;
 
-}
+        }
 
 
+        catch (error) {
 
+            console.error(
+                "CTM Header controller failed:",
+                error
+            );
 
 
+            return false;
 
+        }
 
+    }
 
 
-/* ==========================================================================
-   PUBLIC API
-========================================================================== */
+    /* ======================================================================
+       LOAD FOOTER
+       ====================================================================== */
 
 
-window.CTM_COMPONENTS = {
+    async function loadFooter() {
 
+        return loadComponent(
+            "#global-footer",
+            COMPONENT_PATH.footer
+        );
 
-    load:
+    }
 
-        loadGlobalComponents
 
+    /* ======================================================================
+       LOAD GLOBAL COMPONENTS
+       ====================================================================== */
 
 
-};
+    async function loadGlobalComponents() {
 
+        console.log(
+            "CTM PATH™ Global Component Loader starting..."
+        );
 
 
+        /*
+         * HEADER
+         */
+
+        const headerLoaded =
+            await loadHeader();
+
+
+        /*
+         * FOOTER
+         */
+
+        const footerLoaded =
+            await loadFooter();
+
+
+        /*
+         * RESULT
+         */
+
+        const result = {
+
+            header:
+                headerLoaded,
+
+            footer:
+                footerLoaded,
+
+            success:
+                headerLoaded &&
+                footerLoaded
+
+        };
+
+
+        if (result.success) {
+
+            console.log(
+                "CTM PATH™ Global Components Ready."
+            );
+
+        }
+
+        else {
+
+            console.warn(
+                "CTM PATH™ Global Components loaded with errors.",
+                result
+            );
+
+        }
+
+
+        return result;
+
+    }
+
+
+    /* ======================================================================
+       OPTIONAL AUTO INITIALIZATION
+       ======================================================================
+
+       Pages may call:
+
+           CTM_COMPONENTS.load()
+
+       explicitly.
+
+       Therefore this loader does NOT automatically execute itself.
+
+       This prevents duplicate component loading.
+
+       ====================================================================== */
+
+
+    /* ======================================================================
+       PUBLIC API
+       ====================================================================== */
+
+
+    window.CTM_COMPONENTS = {
+
+        version:
+            "3.0",
+
+        load:
+            loadGlobalComponents,
+
+        loadHeader:
+            loadHeader,
+
+        loadFooter:
+            loadFooter
+
+    };
 
 
 })();
