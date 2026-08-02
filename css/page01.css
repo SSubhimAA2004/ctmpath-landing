@@ -1,2235 +1,1124 @@
 
-
-
-
-/* ==========================================================================
+/* ==========================================================
    CTM PATH™ MILLIONAIRES™
+   PAGE 01 — FROM SURVIVAL TO LIVING™
 
    FILE:
    css/page01.css
 
-
    VERSION:
-   5.3
+   5.5
+
+   STATUS:
+   PRODUCTION CANDIDATE
+
+   ARCHITECTURE:
+   Scoped to .page01
+   Global header/footer intentionally untouched
+========================================================== */
 
 
-   PAGE:
-   PAGE 01 — WELCOME JOURNEY
-
-
-   PURPOSE:
-
-   Premium first impression experience.
-
-========================================================================== */
-
-
-
-/* ==========================================================================
-   PAGE ROOT
-========================================================================== */
-
+/* ==========================================================
+   PAGE FOUNDATION
+========================================================== */
 
 .page01 {
-
-
-    min-height:
-
-        100vh;
-
-
-
-    width:
-
-        100%;
-
-
-
-    overflow:
-
-        hidden;
-
-
-
-    position:
-
-        relative;
-
-
-
-    background:
-
-
-        linear-gradient(
-
-            180deg,
-
-            #081C3A 0%,
-
-            #101820 55%,
-
-            #0B1118 100%
-
-        );
-
-
-
-    color:
-
-        #F8F5ED;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   CONTAINER
-========================================================================== */
-
-
-.page01-container {
-
-
-    width:
-
-        min(1120px, 90%);
-
-
-
-    margin:
-
-        0 auto;
-
-
-
-    padding:
-
-
-        clamp(2rem,4vw,3.5rem) 0;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   JOURNEY INDICATOR
-========================================================================== */
-
-
-.journey-indicator {
-
-
-    display:
-
-        flex;
-
-
-
-    justify-content:
-
-        space-between;
-
-
-
-    align-items:
-
-        center;
-
-
-
-    margin-bottom:
-
-
-        2rem;
-
-
-
-    padding:
-
-
-        1rem 1.5rem;
-
-
-
-    border:
-
-
-        1px solid rgba(216,180,90,.25);
-
-
-
-    border-radius:
-
-
-        999px;
-
-
-
-    background:
-
-
-        rgba(255,255,255,.03);
-
-
-
-    backdrop-filter:
-
-        blur(10px);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.journey-title {
-
-
-    color:
-
-        #D8B45A;
-
-
-
-    font-size:
-
-        .85rem;
-
-
-
-    font-weight:
-
-        900;
-
-
-
-    letter-spacing:
-
-        .25em;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.journey-number {
-
-
-    color:
-
-        #23D4C8;
-
-
-
-    font-size:
-
-        .9rem;
-
-
-
-    font-weight:
-
-        900;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   WELCOME SECTION
-========================================================================== */
-
-
-.welcome-section {
-
-
-    text-align:
-
-        center;
-
-
-
-    margin-bottom:
-
-
-        2.75rem;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.welcome-section h1 {
-
-
-    margin:
-
-        0;
-
-
-
-    font-family:
-
-        "Noto Sans Tamil",
-
-        sans-serif;
-
-
-
-    font-size:
-
-
-        clamp(
-
-            2rem,
-
-            5vw,
-
-            3.5rem
-
-        );
-
-
-
-    line-height:
-
-        1.4;
-
-
-
-    font-weight:
-
-        900;
-
-
-
-    color:
-
-        #F8F5ED;
-
-
-}
-
-
-
-
-
-
-
-
-
-.english-subtitle {
-
-
-    margin-top:
-
-        1.5rem;
-
-
-
-    font-family:
-
-        "Cinzel",
-
-        serif;
-
-
-
-    color:
-
-        #D8B45A;
-
-
-
-    font-size:
-
-
-        clamp(
-
-            .9rem,
-
-            2vw,
-
-            1.2rem
-
-        );
-
-
-
-    letter-spacing:
-
-        .12em;
-
-
-
-}
-
-
-/* ==========================================================================
-   TRANSFORMATION SECTION
-========================================================================== */
-
-
-.transformation-section {
-
-
-    text-align:
-
-        center;
-
-
-
-    max-width:
-
-        900px;
-
-
-
-    margin:
-
-        0 auto 2.75rem;
-
-
-
-    padding:
-
-        0 1rem;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.transformation-section h2 {
-
-
-    margin:
-
-        0;
-
-
-
-    font-family:
-
-        "Noto Sans Tamil",
-
-        sans-serif;
-
-
-
-    font-size:
-
-
-        clamp(
-
-            2rem,
-
-            4.8vw,
-
-            3.35rem
-
-        );
-
-
-
-    line-height:
-
-        1.35;
-
-
-
-    font-weight:
-
-        900;
-
-
-
-    color:
-
-        #F8F5ED;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.transformation-section h3 {
-
-
-    margin-top:
-
-        1.5rem;
-
-
-
-    font-family:
-
-        "Cinzel",
-
-        serif;
-
-
-
-    font-size:
-
-
-        clamp(
-
-            1.5rem,
-
-            4vw,
-
-            2.5rem
-
-        );
-
-
-
-    letter-spacing:
-
-        .18em;
-
-
-
-    line-height:
-
-        1.5;
-
-
-
-    color:
-
-        #D8B45A;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.tamil-description {
-
-
-    margin-top:
-
-        1.5rem;
-
-
-
-    font-size:
-
-        1.1rem;
-
-
-
-    line-height:
-
-        1.9;
-
-
-
-    color:
-
-        rgba(248,245,237,.85);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.english-description {
-
-
-    margin-top:
-
-        .8rem;
-
-
-
-    color:
-
-        #23D4C8;
-
-
-
-    font-family:
-
-        "Cinzel",
-
-        serif;
-
-
-
-    letter-spacing:
-
-        .08em;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   DISCOVERY CARDS
-========================================================================== */
-
-
-.discovery-cards {
-
-
-    display:
-
-        grid;
-
-
-
-    grid-template-columns:
-
-        repeat(
-
-            3,
-
-            1fr
-
-        );
-
-
-
-    gap:
-
-
-        1px;
-
-
-
-    margin:
-
-        2.5rem auto 2.75rem;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.discovery-card {
-
-
-    position:
-
-        relative;
-
-
-
-    padding:
-
-        1.75rem 1.5rem;
-
-
-
-    min-height:
-
-        132px;
-
-
-
-    display:
-
-        flex;
-
-
-
-    flex-direction:
-
-        column;
-
-
-
-    justify-content:
-
-        center;
-
-
-
-    align-items:
-
-        center;
-
-
-
-    text-align:
-
-        center;
-
-
-
-    border-radius:
-
-        0;
-
-
-
-    background:
-
-
-        linear-gradient(
-
-            145deg,
-
-            rgba(255,255,255,.06),
-
-            rgba(255,255,255,.015)
-
-        );
-
-
-
-    border:
-
-        1px solid rgba(216,180,90,.22);
-
-
-
-    box-shadow:
-
-
-        none;
-
-
-
-    transition:
-
-        transform .35s ease,
-
-        border-color .35s ease,
-
-        background .35s ease;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.discovery-card::before {
-
-    content:none;
-
-}
-
-
-
-
-
-
-.discovery-card h3 {
-
-
-    position:
-
-        relative;
-
-
-
-    z-index:
-
-        1;
-
-
-
-    margin:
-
-        0 0 1rem;
-
-
-
-    font-family:
-
-        "Noto Sans Tamil",
-
-        sans-serif;
-
-
-
-    font-size:
-
-        1.35rem;
-
-
-
-    font-weight:
-
-        900;
-
-
-
-    color:
-
-        #F8F5ED;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.discovery-card p {
-
-
-    position:
-
-        relative;
-
-
-
-    z-index:
-
-        1;
-
-
-
-    margin:
-
-        0;
-
-
-
-    font-family:
-
-        "Cinzel",
-
-        serif;
-
-
-
-    color:
-
-        #23D4C8;
-
-
-
-    font-size:
-
-        .95rem;
-
-
-
-    letter-spacing:
-
-        .08em;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.discovery-card:hover,
-
-.discovery-card.active {
-
-
-    transform:
-
-        translateY(-3px);
-
-
-
-    border-color:
-
-        rgba(216,180,90,.48);
-
-
-
-    background:
-
-
-        linear-gradient(
-
-            145deg,
-
-            rgba(35,212,200,.12),
-
-            rgba(255,255,255,.04)
-
-        );
-
-
-
-}
-
-/* ==========================================================================
-   PRIMARY JOURNEY CTA
-========================================================================== */
-
-
-.journey-cta {
-
-
-    display:
-
-        flex;
-
-
-
-    justify-content:
-
-        center;
-
-
-
-    margin-top:
-
-
-        2.75rem;
-
-
-
-    padding:
-
-        0 1rem;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.journey-button {
-
-
-    position:
-
-        relative;
-
-
-
-    display:
-
-        flex;
-
-
-
-    flex-direction:
-
-        column;
-
-
-
-    align-items:
-
-        center;
-
-
-
-    justify-content:
-
-        center;
-
-
-
-    width:
-
-        min(100%,400px);
-
-
-
-    min-height:
-
-        82px;
-
-
-
-    padding:
-
-
-        1.15rem 1.75rem;
-
-
-
-    border-radius:
-
-        16px;
-
-
-
-    text-decoration:
-
-        none;
-
-
-
-    text-align:
-
-        center;
-
-
-
-    background:
-
-
-        linear-gradient(
-
-            135deg,
-
-            #FF6A00 0%,
-
-            #E85D04 100%
-
-        );
-
-
-
-    border:
-
-        1px solid rgba(216,180,90,.48);
-
-
-
-    box-shadow:
-
-
-        0 18px 45px rgba(0,0,0,.35),
-        0 8px 28px rgba(15,81,56,.24),
-        0 0 0 1px rgba(255,255,255,.05) inset;
-
-
-
-    overflow:
-
-        hidden;
-
-
-
-    transition:
-
-        transform .35s ease,
-
-        box-shadow .35s ease;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.journey-button::before {
-
-
-    content:"";
-
-
-
-    position:
-
-        absolute;
-
-
-
-    inset:
-
-        0;
-
-
-
-    background:
-
-
-        linear-gradient(
-
-            120deg,
-
-            transparent,
-
-            rgba(255,255,255,.35),
-
-            transparent
-
-        );
-
-
-
-    transform:
-
-        translateX(-120%);
-
-
-
-    transition:
-
-        transform .6s ease;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.journey-button:hover::before {
-
-
-    transform:
-
-        translateX(120%);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.journey-button:hover,
-
-.journey-button:focus {
-
-
-    transform:
-
-        translateY(-3px);
-
-
-
-    box-shadow:
-
-
-        0 22px 50px rgba(0,0,0,.40),
-        0 10px 32px rgba(15,81,56,.34);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.button-primary {
-
-
-    position:
-
-        relative;
-
-
-
-    z-index:
-
-        1;
-
-
-
-    color:
-
-        #FFFFFF;
-
-
-
-    font-family:
-
-        "Noto Sans Tamil",
-
-        sans-serif;
-
-
-
-    font-size:
-
-
-        clamp(
-
-            1.2rem,
-
-            4vw,
-
-            1.7rem
-
-        );
-
-
-
-    font-weight:
-
-        900;
-
-
-
-    line-height:
-
-        1.5;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.button-secondary {
-
-
-    position:
-
-        relative;
-
-
-
-    z-index:
-
-        1;
-
-
-
-    margin-top:
-
-        .35rem;
-
-
-
-    color:
-
-        #D8B45A;
-
-
-
-    font-family:
-
-        "Cinzel",
-
-        serif;
-
-
-
-    font-size:
-
-
-        clamp(
-
-            .65rem,
-
-            2vw,
-
-            .85rem
-
-        );
-
-
-
-    font-weight:
-
-        700;
-
-
-
-    letter-spacing:
-
-        .12em;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   MOBILE PREMIUM OVERRIDES
-========================================================================== */
-
-
-@media(max-width:768px){
-
-
-
-.page01 {
-
-
-    width:
-
-        100%;
-
-
-
-    overflow-x:
-
-        hidden;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.page01-container {
-
-
-    width:
-
-        calc(100% - 32px);
-
-
-
-    padding:
-
-
-        2rem 0 3rem;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.journey-indicator {
-
-
-    padding:
-
-
-        .8rem 1rem;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.journey-title {
-
-
-    font-size:
-
-        .65rem;
-
-
-
-    letter-spacing:
-
-        .12em;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.journey-number {
-
-
-    font-size:
-
-        .75rem;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.discovery-cards {
-
-
-    grid-template-columns:
-
-        1fr;
-
-
-
-    gap:
-
-
-        .75rem;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.discovery-card {
-
-
-    min-height:
-
-        96px;
-
-
-
-    padding:
-
-
-        1.25rem 1rem;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.journey-button {
-
-
-    width:
-
-        100%;
-
-
-
-    min-height:
-
-        80px;
-
-
-
-    padding:
-
-
-        1.2rem 1rem;
-
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   SMALL MOBILE
-========================================================================== */
-
-
-@media(max-width:480px){
-
-
-
-.page01-container {
-
-
-    width:
-
-        calc(100% - 24px);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.welcome-section h1 {
-
-
-    font-size:
-
-        1.8rem;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.transformation-section h2 {
-
-
-    font-size:
-
-        2rem;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.button-primary {
-
-
-    font-size:
-
-        1.15rem;
-
-
-
-}
-
-
-
-}
-
-/* ==========================================================================
-   PAGE FOOTER TRANSITION
-========================================================================== */
-
-
-.page01::after {
-
-
-    content:"";
-
-
-
-    display:
-
-        block;
-
-
-
-    height:
-
-        24px;
-
-
-
-    background:
-
-
-        linear-gradient(
-
-            180deg,
-
-            transparent,
-
-            rgba(8,28,58,.45)
-
-        );
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   GLOBAL MOBILE SAFETY
-========================================================================== */
-
-
-html,
-
-body {
-
-
-    max-width:
-
-        100%;
-
-
-
-    overflow-x:
-
-        hidden;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.page01 * {
-
-
-    max-width:
-
-        100%;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   FOCUS ACCESSIBILITY
-========================================================================== */
-
-
-.journey-button:focus-visible {
-
-
-    outline:
-
-        3px solid #23D4C8;
-
-
-
-    outline-offset:
-
-        6px;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.discovery-card:focus-visible {
-
-
-    outline:
-
-        2px solid #D8B45A;
-
-
-
-    outline-offset:
-
-        4px;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   REDUCED MOTION
-========================================================================== */
-
-
-@media(prefers-reduced-motion:reduce){
-
-
-
-.page01 *,
-
-.page01 *::before,
-
-.page01 *::after {
-
-
-    animation:
-
-        none !important;
-
-
-
-    transition:
-
-        none !important;
-
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   VERY SMALL DEVICES
-========================================================================== */
-
-
-@media(max-width:360px){
-
-
-
-.page01-container {
-
-
-    width:
-
-        calc(100% - 20px);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.journey-indicator {
-
-
-    flex-direction:
-
-        column;
-
-
-
-    gap:
-
-        .8rem;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-.button-primary {
-
-
-    font-size:
-
-        1rem;
-
-
-
-}
-
-
-
-}
-
-
-/* ==========================================================================
-   PAGE 01 — PREMIUM VISUAL REFINEMENT v5.4
-   Visual-only override layer.
-   Copy, content order and behaviour remain unchanged.
-   ========================================================================== */
-
-.page01-container {
-    width: min(1080px, 88%);
-    padding: clamp(2.4rem, 5vw, 4.5rem) 0 clamp(3.5rem, 7vw, 6rem);
-}
-
-.journey-indicator {
-    margin-bottom: clamp(3rem, 6vw, 5.5rem);
-    padding: .82rem 1.35rem;
-    border-color: rgba(216,180,90,.30);
-    background: rgba(255,255,255,.018);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-}
-
-.journey-title {
-    font-size: .78rem;
-    font-weight: 700;
-    letter-spacing: .18em;
-}
-
-.journey-number {
-    font-size: .82rem;
-    font-weight: 700;
-    letter-spacing: .06em;
-}
-
-.welcome-section {
-    max-width: 880px;
-    margin: 0 auto clamp(4.5rem, 8vw, 7rem);
-}
-
-.welcome-section h1 {
-    font-size: clamp(2.2rem, 5vw, 3.7rem);
-    line-height: 1.32;
-    letter-spacing: -.018em;
-    text-wrap: balance;
-}
-
-.english-subtitle {
-    margin-top: 1.65rem;
-    font-size: clamp(.82rem, 1.5vw, 1.05rem);
-    line-height: 1.75;
-    letter-spacing: .10em;
-    color: rgba(248,245,237,.78);
-    text-wrap: balance;
-}
-
-.transformation-section {
-    max-width: 820px;
-    margin: 0 auto clamp(4.5rem, 8vw, 7rem);
+    --p01-navy: #071b35;
+    --p01-navy-deep: #061525;
+    --p01-panel: rgba(7, 27, 53, 0.72);
+    --p01-panel-soft: rgba(255, 255, 255, 0.018);
+    --p01-ivory: #f5f0e6;
+    --p01-white: #fffdf7;
+    --p01-muted: rgba(245, 240, 230, 0.76);
+    --p01-muted-soft: rgba(245, 240, 230, 0.58);
+    --p01-gold: #d6ad55;
+    --p01-gold-soft: rgba(214, 173, 85, 0.32);
+    --p01-teal: #18b9b0;
+    --p01-teal-deep: #0d746f;
+    --p01-border: rgba(214, 173, 85, 0.28);
+
+    width: 100%;
+    margin: 0;
     padding: 0;
+    overflow: hidden;
+
+    color: var(--p01-ivory);
+    background:
+        radial-gradient(
+            circle at 50% 10%,
+            rgba(20, 73, 119, 0.14),
+            transparent 32rem
+        ),
+        linear-gradient(
+            180deg,
+            var(--p01-navy) 0%,
+            #07192e 38%,
+            var(--p01-navy-deep) 100%
+        );
 }
 
-.transformation-section h2 {
-    font-size: clamp(2.2rem, 4.8vw, 3.5rem);
-    line-height: 1.28;
-    letter-spacing: -.018em;
+
+.page01,
+.page01 * {
+    box-sizing: border-box;
+}
+
+
+.page01-container {
+    width: min(100% - 40px, 1120px);
+    margin: 0 auto;
+    padding: 44px 0 88px;
+}
+
+
+/* ==========================================================
+   TYPOGRAPHIC FOUNDATION
+========================================================== */
+
+.page01 h1,
+.page01 h2,
+.page01 h3,
+.page01 p {
+    margin-top: 0;
+}
+
+
+.page01 h1,
+.page01 h2,
+.page01 .tamil-description,
+.page01 .discovery-title-tamil,
+.page01 .discovery-copy-tamil,
+.page01 .why-tamil,
+.page01 .reflection-tamil,
+.page01 .privacy-tamil,
+.page01 .button-primary {
+    font-family: "Noto Sans Tamil", sans-serif;
+}
+
+
+.page01 .english-subtitle,
+.page01 .transformation-section > h3,
+.page01 .english-description,
+.page01 .journey-card > p,
+.page01 .reflection-english,
+.page01 .discovery-heading > h2,
+.page01 .discovery-title-english,
+.page01 .discovery-copy-english,
+.page01 .why-heading > p,
+.page01 .why-english,
+.page01 .next-chapter-heading > p,
+.page01 .journey-signal,
+.page01 .button-secondary,
+.page01 .privacy-assurance > h2,
+.page01 .privacy-english,
+.page01 .journey-title,
+.page01 .journey-number {
+    font-family: "Cinzel", serif;
+}
+
+
+/* ==========================================================
+   JOURNEY INDICATOR
+========================================================== */
+
+.page01 .journey-indicator {
+    width: 100%;
+    min-height: 58px;
+    margin: 0 auto 82px;
+    padding: 0 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    border: 1px solid var(--p01-border);
+    border-radius: 999px;
+
+    background: rgba(4, 20, 38, 0.48);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.025),
+        0 18px 50px rgba(0, 0, 0, 0.08);
+}
+
+
+.page01 .journey-title {
+    color: var(--p01-gold);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    line-height: 1.4;
+}
+
+
+.page01 .journey-number {
+    flex: 0 0 auto;
+
+    color: var(--p01-teal);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+
+/* ==========================================================
+   WELCOME SECTION
+========================================================== */
+
+.page01 .welcome-section {
+    width: min(100%, 820px);
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+.page01 .welcome-section h1 {
+    margin-bottom: 22px;
+
+    color: var(--p01-white);
+    font-size: clamp(2rem, 4vw, 3.45rem);
+    font-weight: 900;
+    line-height: 1.42;
+    letter-spacing: -0.025em;
+
     text-wrap: balance;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.18);
 }
 
-.transformation-section h3 {
-    margin-top: 1.85rem;
-    font-size: clamp(1.35rem, 3.5vw, 2.35rem);
-    line-height: 1.45;
-    letter-spacing: .15em;
+
+.page01 .english-subtitle {
+    margin-bottom: 0;
+
+    color: var(--p01-muted);
+    font-size: clamp(0.68rem, 1.15vw, 0.88rem);
     font-weight: 600;
+    line-height: 1.8;
+    letter-spacing: 0.11em;
+
+    text-transform: uppercase;
+}
+
+
+/* ==========================================================
+   TRANSFORMATION SECTION
+========================================================== */
+
+.page01 .transformation-section {
+    width: min(100%, 780px);
+    margin: 92px auto 0;
+    text-align: center;
+}
+
+
+.page01 .transformation-section h2 {
+    margin-bottom: 22px;
+
+    color: var(--p01-white);
+    font-size: clamp(1.75rem, 3.4vw, 2.8rem);
+    font-weight: 900;
+    line-height: 1.45;
+    letter-spacing: -0.018em;
+
     text-wrap: balance;
 }
 
-.tamil-description {
-    max-width: 720px;
-    margin: 2.3rem auto 0;
-    font-size: clamp(1.05rem, 1.8vw, 1.22rem);
+
+.page01 .transformation-section > h3 {
+    margin-bottom: 34px;
+
+    color: var(--p01-gold);
+    font-size: clamp(1.22rem, 2.3vw, 1.85rem);
+    font-weight: 600;
+    line-height: 1.42;
+    letter-spacing: 0.18em;
+
+    text-transform: uppercase;
+}
+
+
+.page01 .tamil-description {
+    width: min(100%, 650px);
+    margin: 0 auto 18px;
+
+    color: var(--p01-muted);
+    font-size: clamp(1rem, 1.8vw, 1.22rem);
+    font-weight: 400;
     line-height: 1.95;
-    color: rgba(248,245,237,.82);
-    text-wrap: pretty;
-}
 
-.english-description {
-    max-width: 700px;
-    margin: 1rem auto 0;
-    font-size: clamp(.82rem, 1.4vw, 1rem);
-    line-height: 1.75;
-    letter-spacing: .075em;
-    color: rgba(35,212,200,.82);
     text-wrap: balance;
 }
 
-.discovery-cards {
-    max-width: 940px;
-    gap: 1rem;
-    margin: clamp(3rem, 6vw, 5rem) auto clamp(3.5rem, 7vw, 5.5rem);
+
+.page01 .english-description {
+    margin-bottom: 0;
+
+    color: var(--p01-teal);
+    font-size: clamp(0.72rem, 1.2vw, 0.88rem);
+    font-weight: 600;
+    line-height: 1.75;
+    letter-spacing: 0.1em;
+
+    text-transform: uppercase;
 }
 
-.discovery-card {
-    min-height: 150px;
-    padding: 2rem 1.5rem;
-    border-radius: 14px;
-    border-color: rgba(216,180,90,.16);
-    background: rgba(255,255,255,.018);
-    box-shadow: 0 18px 50px rgba(0,0,0,.12);
+
+/* ==========================================================
+   JOURNEY PATH
+========================================================== */
+
+.page01 .journey-cards {
+    width: min(100%, 960px);
+    margin: 82px auto 0;
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
 }
 
-.discovery-card h3 {
-    margin-bottom: .7rem;
-    font-size: clamp(1.18rem, 1.8vw, 1.38rem);
+
+.page01 .journey-card {
+    min-height: 168px;
+    padding: 32px 24px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border: 1px solid var(--p01-border);
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.025),
+            rgba(255, 255, 255, 0.008)
+        );
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.025),
+        0 18px 45px rgba(0, 0, 0, 0.08);
+}
+
+
+.page01 .journey-card h3 {
+    margin-bottom: 12px;
+
+    color: var(--p01-white);
+    font-family: "Noto Sans Tamil", sans-serif;
+    font-size: clamp(1.12rem, 1.8vw, 1.35rem);
+    font-weight: 700;
     line-height: 1.5;
 }
 
-.discovery-card p {
-    color: rgba(248,245,237,.68);
-    font-size: .86rem;
-    line-height: 1.6;
-    letter-spacing: .06em;
+
+.page01 .journey-card > p {
+    margin-bottom: 0;
+
+    color: var(--p01-gold);
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.55;
+    letter-spacing: 0.08em;
 }
 
-.discovery-card:hover,
-.discovery-card.active {
-    transform: translateY(-2px);
-    border-color: rgba(216,180,90,.34);
-    background: rgba(255,255,255,.035);
-    box-shadow: 0 22px 58px rgba(0,0,0,.18);
+
+/* ==========================================================
+   EMOTIONAL BRIDGE
+========================================================== */
+
+.page01 .journey-reflection {
+    width: min(100%, 800px);
+    margin: 112px auto 0;
+    padding: 58px 56px;
+
+    text-align: center;
+
+    border-top: 1px solid var(--p01-gold-soft);
+    border-bottom: 1px solid var(--p01-gold-soft);
 }
 
-.journey-cta {
-    margin-top: clamp(3rem, 6vw, 5rem);
-    padding: 0;
+
+.page01 .reflection-tamil,
+.page01 .reflection-english {
+    width: min(100%, 660px);
+    margin: 0 auto;
 }
 
-.journey-button {
-    width: min(100%, 430px);
-    min-height: 76px;
-    padding: 1.05rem 1.65rem;
-    border-radius: 14px;
+
+.page01 .reflection-tamil p {
+    margin-bottom: 16px;
+
+    color: var(--p01-muted);
+    font-size: clamp(1.03rem, 1.75vw, 1.22rem);
+    line-height: 1.9;
+}
+
+
+.page01 .reflection-english p {
+    margin-bottom: 12px;
+
+    color: var(--p01-muted-soft);
+    font-size: clamp(0.76rem, 1.25vw, 0.9rem);
+    line-height: 1.8;
+    letter-spacing: 0.025em;
+}
+
+
+.page01 .reflection-pause {
+    color: var(--p01-gold) !important;
+    font-weight: 700;
+}
+
+
+.page01 .reflection-emphasis {
+    color: var(--p01-white) !important;
+    font-weight: 700;
+}
+
+
+.page01 .reflection-divider {
+    width: 54px;
+    height: 1px;
+    margin: 34px auto;
+
+    background: var(--p01-teal);
+    opacity: 0.7;
+}
+
+
+/* ==========================================================
+   DISCOVERY
+========================================================== */
+
+.page01 .discovery-section {
+    width: min(100%, 1000px);
+    margin: 116px auto 0;
+    text-align: center;
+}
+
+
+.page01 .discovery-heading {
+    width: min(100%, 720px);
+    margin: 0 auto 46px;
+}
+
+
+.page01 .discovery-kicker {
+    margin-bottom: 18px;
+
+    color: var(--p01-muted);
+    font-family: "Noto Sans Tamil", sans-serif;
+    font-size: clamp(0.96rem, 1.55vw, 1.12rem);
+    font-weight: 600;
+    line-height: 1.8;
+}
+
+
+.page01 .discovery-heading > h2 {
+    margin-bottom: 0;
+
+    color: var(--p01-gold);
+    font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.15em;
+
+    text-transform: uppercase;
+}
+
+
+.page01 .discovery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+
+.page01 .discovery-card {
+    position: relative;
+
+    min-height: 340px;
+    padding: 46px 38px 40px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    overflow: hidden;
+    text-align: center;
+
+    border: 1px solid var(--p01-border);
+    border-radius: 22px;
+
     background:
-        linear-gradient(135deg, #0B756F 0%, #075B57 100%);
-    border: 1px solid rgba(216,180,90,.42);
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(24, 185, 176, 0.055),
+            transparent 45%
+        ),
+        var(--p01-panel-soft);
+
     box-shadow:
-        0 18px 46px rgba(0,0,0,.30),
-        0 0 0 1px rgba(255,255,255,.035) inset;
+        inset 0 1px 0 rgba(255, 255, 255, 0.025),
+        0 24px 55px rgba(0, 0, 0, 0.08);
 }
 
-.journey-button::before {
-    background:
-        linear-gradient(
-            120deg,
-            transparent,
-            rgba(255,255,255,.16),
-            transparent
-        );
+
+.page01 .discovery-number {
+    position: absolute;
+    top: 20px;
+    right: 22px;
+
+    color: var(--p01-gold);
+    font-family: "Cinzel", serif;
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+
+    opacity: 0.72;
 }
 
-.journey-button:hover,
-.journey-button:focus {
-    transform: translateY(-2px);
-    box-shadow:
-        0 22px 52px rgba(0,0,0,.34),
-        0 8px 24px rgba(7,91,87,.22);
+
+.page01 .discovery-icon {
+    min-height: 42px;
+    margin-bottom: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.6rem;
+    line-height: 1;
 }
 
-.button-primary {
-    font-size: clamp(1.12rem, 3vw, 1.5rem);
+
+.page01 .discovery-title-tamil {
+    margin-bottom: 8px;
+
+    color: var(--p01-white);
+    font-size: clamp(1.05rem, 1.65vw, 1.3rem);
+    font-weight: 700;
+    line-height: 1.55;
+}
+
+
+.page01 .discovery-title-english {
+    margin-bottom: 22px;
+
+    color: var(--p01-teal);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.55;
+    letter-spacing: 0.09em;
+}
+
+
+.page01 .discovery-primary-title {
+    margin-top: 4px;
+    margin-bottom: 24px;
+
+    color: var(--p01-white);
+    font-size: clamp(1rem, 1.55vw, 1.22rem);
+}
+
+
+.page01 .discovery-copy-tamil {
+    width: min(100%, 360px);
+    margin: auto auto 14px;
+
+    color: var(--p01-muted);
+    font-size: clamp(0.9rem, 1.35vw, 1.02rem);
+    line-height: 1.85;
+}
+
+
+.page01 .discovery-copy-english {
+    width: min(100%, 380px);
+    margin: 0 auto;
+
+    color: var(--p01-muted-soft);
+    font-size: 0.7rem;
+    line-height: 1.75;
+    letter-spacing: 0.025em;
+}
+
+
+/* ==========================================================
+   WHY THIS JOURNEY
+========================================================== */
+
+.page01 .why-section {
+    width: min(100%, 790px);
+    margin: 120px auto 0;
+    text-align: center;
+}
+
+
+.page01 .why-heading {
+    margin-bottom: 42px;
+}
+
+
+.page01 .why-heading h2 {
+    margin-bottom: 10px;
+
+    color: var(--p01-white);
+    font-size: clamp(1.65rem, 3vw, 2.3rem);
+    font-weight: 900;
     line-height: 1.45;
 }
 
-.button-secondary {
-    margin-top: .25rem;
-    color: rgba(248,245,237,.70);
-    font-size: clamp(.62rem, 1.5vw, .78rem);
-    letter-spacing: .10em;
+
+.page01 .why-heading > p {
+    margin-bottom: 0;
+
+    color: var(--p01-gold);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
 }
 
-@media(max-width:768px) {
+
+.page01 .why-tamil {
+    width: min(100%, 660px);
+    margin: 0 auto;
+}
+
+
+.page01 .why-tamil p {
+    margin-bottom: 17px;
+
+    color: var(--p01-muted);
+    font-size: clamp(1rem, 1.65vw, 1.18rem);
+    line-height: 1.9;
+}
+
+
+.page01 .why-english {
+    width: min(100%, 620px);
+    margin: 36px auto 0;
+    padding-top: 32px;
+
+    border-top: 1px solid var(--p01-gold-soft);
+}
+
+
+.page01 .why-english p {
+    margin-bottom: 12px;
+
+    color: var(--p01-muted-soft);
+    font-size: clamp(0.75rem, 1.2vw, 0.88rem);
+    line-height: 1.8;
+}
+
+
+.page01 .why-emphasis {
+    color: var(--p01-white) !important;
+    font-weight: 700;
+}
+
+
+.page01 .why-rhythm {
+    color: var(--p01-gold) !important;
+    font-weight: 600;
+    line-height: 2 !important;
+}
+
+
+/* ==========================================================
+   NEXT CHAPTER
+========================================================== */
+
+.page01 .next-chapter-section {
+    width: min(100%, 900px);
+    margin: 120px auto 0;
+    text-align: center;
+}
+
+
+.page01 .next-chapter-heading h2 {
+    margin-bottom: 16px;
+
+    color: var(--p01-white);
+    font-size: clamp(1.65rem, 3vw, 2.35rem);
+    font-weight: 900;
+    line-height: 1.48;
+
+    text-wrap: balance;
+}
+
+
+.page01 .next-chapter-heading > p {
+    margin-bottom: 0;
+
+    color: var(--p01-gold);
+    font-size: clamp(0.82rem, 1.4vw, 1rem);
+    font-weight: 700;
+    line-height: 1.65;
+    letter-spacing: 0.15em;
+}
+
+
+.page01 .journey-signals {
+    width: min(100%, 820px);
+    margin: 48px auto 0;
+
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+
+.page01 .journey-signal {
+    min-height: 116px;
+    padding: 20px 14px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+
+    color: var(--p01-muted);
+    font-size: 0.64rem;
+    font-weight: 700;
+    line-height: 1.55;
+    letter-spacing: 0.07em;
+
+    border: 1px solid rgba(214, 173, 85, 0.2);
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.012);
+}
+
+
+.page01 .signal-icon {
+    color: var(--p01-teal);
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+
+/* ==========================================================
+   FROZEN PRIMARY CTA
+========================================================== */
+
+.page01 .journey-cta {
+    width: min(100%, 650px);
+    margin: 64px auto 0;
+    text-align: center;
+}
+
+
+.page01 .journey-button {
+    width: 100%;
+    min-height: 164px;
+    padding: 26px 34px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    text-decoration: none;
+
+    border: 1px solid rgba(214, 173, 85, 0.42);
+    border-radius: 20px;
+
+    background: #0d746f;
+
+    box-shadow:
+        0 20px 48px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.09);
+
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        filter 180ms ease;
+}
+
+
+.page01 .journey-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 26px 56px rgba(0, 0, 0, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+    filter: brightness(1.035);
+}
+
+
+.page01 .journey-button:focus-visible {
+    outline: 3px solid var(--p01-gold);
+    outline-offset: 5px;
+}
+
+
+.page01 .button-primary {
+    display: block;
+
+    color: var(--p01-white);
+    font-size: clamp(1.65rem, 3.2vw, 2.45rem);
+    font-weight: 900;
+    line-height: 1.34;
+    letter-spacing: -0.02em;
+}
+
+
+.page01 .button-secondary {
+    display: block;
+
+    color: var(--p01-gold);
+    font-size: clamp(0.72rem, 1.2vw, 0.88rem);
+    font-weight: 600;
+    line-height: 1.55;
+    letter-spacing: 0.12em;
+}
+
+
+/* ==========================================================
+   PRIVACY ASSURANCE
+========================================================== */
+
+.page01 .privacy-assurance {
+    width: min(100%, 760px);
+    margin: 42px auto 0;
+    padding: 26px 30px;
+
+    text-align: center;
+
+    border-top: 1px solid rgba(214, 173, 85, 0.18);
+}
+
+
+.page01 .privacy-assurance > h2 {
+    margin-bottom: 16px;
+
+    color: var(--p01-gold);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+}
+
+
+.page01 .privacy-tamil {
+    margin-bottom: 12px;
+
+    color: var(--p01-muted);
+    font-size: 0.82rem;
+    line-height: 1.8;
+}
+
+
+.page01 .privacy-english {
+    margin-bottom: 0;
+
+    color: var(--p01-muted-soft);
+    font-size: 0.66rem;
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+}
+
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media (max-width: 900px) {
+
     .page01-container {
-        width: calc(100% - 48px);
-        padding: 1.75rem 0 4rem;
+        width: min(100% - 36px, 760px);
+        padding-top: 36px;
+        padding-bottom: 72px;
     }
 
-    .journey-indicator {
-        margin-bottom: 3.4rem;
-        padding: .72rem 1rem;
+
+    .page01 .journey-indicator {
+        margin-bottom: 66px;
     }
 
-    .journey-title {
-        font-size: .67rem;
-        letter-spacing: .10em;
+
+    .page01 .journey-cards {
+        grid-template-columns: 1fr;
+        width: min(100%, 620px);
     }
 
-    .journey-number {
-        font-size: .76rem;
+
+    .page01 .journey-card {
+        min-height: 140px;
     }
 
-    .welcome-section {
-        margin-bottom: 4.75rem;
+
+    .page01 .discovery-grid {
+        grid-template-columns: 1fr;
+        width: min(100%, 640px);
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    .welcome-section h1 {
-        font-size: clamp(2rem, 8.8vw, 2.75rem);
-        line-height: 1.34;
+
+    .page01 .discovery-card {
+        min-height: 0;
     }
 
-    .english-subtitle {
-        margin-top: 1.35rem;
-        font-size: .82rem;
+
+    .page01 .journey-signals {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: min(100%, 620px);
+    }
+
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 600px) {
+
+    .page01-container {
+        width: min(100% - 32px, 520px);
+        padding: 24px 0 60px;
+    }
+
+
+    .page01 .journey-indicator {
+        min-height: 54px;
+        margin-bottom: 58px;
+        padding: 0 18px;
+        gap: 14px;
+    }
+
+
+    .page01 .journey-title {
+        font-size: 0.59rem;
+        letter-spacing: 0.09em;
+    }
+
+
+    .page01 .journey-number {
+        font-size: 0.68rem;
+    }
+
+
+    .page01 .welcome-section h1 {
+        margin-bottom: 18px;
+        font-size: clamp(1.85rem, 8.4vw, 2.55rem);
+        line-height: 1.42;
+    }
+
+
+    .page01 .english-subtitle {
+        font-size: 0.61rem;
         line-height: 1.7;
-        letter-spacing: .07em;
+        letter-spacing: 0.075em;
     }
 
-    .transformation-section {
-        margin-bottom: 4.75rem;
+
+    .page01 .transformation-section {
+        margin-top: 74px;
     }
 
-    .transformation-section h2 {
-        font-size: clamp(2rem, 8.6vw, 2.7rem);
-        line-height: 1.32;
+
+    .page01 .transformation-section h2 {
+        margin-bottom: 20px;
+        font-size: clamp(1.65rem, 7vw, 2.1rem);
     }
 
-    .transformation-section h3 {
-        margin-top: 1.55rem;
-        font-size: clamp(1.35rem, 6vw, 1.85rem);
-        line-height: 1.45;
-        letter-spacing: .12em;
+
+    .page01 .transformation-section > h3 {
+        margin-bottom: 28px;
+        font-size: 1.12rem;
+        letter-spacing: 0.13em;
     }
 
-    .tamil-description {
-        margin-top: 2.2rem;
-        font-size: 1.05rem;
+
+    .page01 .tamil-description {
+        font-size: 1rem;
         line-height: 1.9;
     }
 
-    .english-description {
-        margin-top: 1rem;
-        font-size: .82rem;
-        line-height: 1.75;
-        letter-spacing: .055em;
+
+    .page01 .english-description {
+        font-size: 0.64rem;
+        letter-spacing: 0.075em;
     }
 
-    .discovery-cards {
-        gap: .9rem;
-        margin: 3.25rem auto 3.75rem;
+
+    .page01 .journey-cards {
+        margin-top: 66px;
+        gap: 14px;
     }
 
-    .discovery-card {
-        min-height: 0;
-        padding: 1.45rem 1.25rem;
-        border-radius: 12px;
+
+    .page01 .journey-card {
+        min-height: 124px;
+        padding: 24px 20px;
+        border-radius: 16px;
     }
 
-    .discovery-card h3 {
-        margin-bottom: .45rem;
-        font-size: 1.2rem;
+
+    .page01 .journey-reflection {
+        margin-top: 82px;
+        padding: 46px 8px;
     }
 
-    .discovery-card p {
-        font-size: .82rem;
+
+    .page01 .reflection-tamil p {
+        font-size: 1rem;
+        line-height: 1.85;
     }
 
-    .journey-cta {
-        margin-top: 3.25rem;
+
+    .page01 .reflection-english p {
+        font-size: 0.74rem;
     }
 
-    .journey-button {
-        min-height: 72px;
-        padding: 1rem 1.15rem;
-        border-radius: 13px;
+
+    .page01 .discovery-section {
+        margin-top: 88px;
     }
+
+
+    .page01 .discovery-heading {
+        margin-bottom: 34px;
+    }
+
+
+    .page01 .discovery-heading > h2 {
+        font-size: 1.05rem;
+        letter-spacing: 0.11em;
+    }
+
+
+    .page01 .discovery-card {
+        padding: 40px 24px 32px;
+        border-radius: 18px;
+    }
+
+
+    .page01 .discovery-copy-tamil {
+        font-size: 0.92rem;
+    }
+
+
+    .page01 .why-section,
+    .page01 .next-chapter-section {
+        margin-top: 90px;
+    }
+
+
+    .page01 .why-heading {
+        margin-bottom: 34px;
+    }
+
+
+    .page01 .why-tamil p {
+        font-size: 0.98rem;
+        line-height: 1.85;
+    }
+
+
+    .page01 .journey-signals {
+        margin-top: 38px;
+        gap: 10px;
+    }
+
+
+    .page01 .journey-signal {
+        min-height: 106px;
+        padding: 18px 10px;
+        font-size: 0.57rem;
+    }
+
+
+    .page01 .journey-cta {
+        margin-top: 48px;
+    }
+
+
+    .page01 .journey-button {
+        min-height: 156px;
+        padding: 24px 18px;
+        border-radius: 19px;
+    }
+
+
+    .page01 .button-primary {
+        font-size: clamp(1.65rem, 8vw, 2.15rem);
+    }
+
+
+    .page01 .button-secondary {
+        font-size: 0.66rem;
+        letter-spacing: 0.09em;
+    }
+
+
+    .page01 .privacy-assurance {
+        margin-top: 34px;
+        padding: 24px 8px 0;
+    }
+
 }
 
-@media(max-width:480px) {
+
+/* ==========================================================
+   VERY SMALL MOBILE
+========================================================== */
+
+@media (max-width: 380px) {
+
     .page01-container {
-        width: calc(100% - 40px);
+        width: min(100% - 24px, 360px);
     }
 
-    .welcome-section h1 {
-        font-size: clamp(1.9rem, 9vw, 2.45rem);
+
+    .page01 .journey-indicator {
+        padding: 0 14px;
     }
 
-    .transformation-section h2 {
-        font-size: clamp(1.9rem, 8.8vw, 2.4rem);
+
+    .page01 .journey-title {
+        font-size: 0.54rem;
     }
 
-    .journey-button {
-        width: 100%;
+
+    .page01 .journey-signals {
+        grid-template-columns: 1fr;
     }
+
+
+    .page01 .journey-signal {
+        min-height: 88px;
+    }
+
 }
 
-@media(max-width:360px) {
-    .page01-container {
-        width: calc(100% - 32px);
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .page01 .journey-button {
+        transition: none;
     }
 
-    .journey-indicator {
-        flex-direction: row;
-        gap: .5rem;
+
+    .page01 .journey-button:hover {
+        transform: none;
     }
+
 }
 
 
