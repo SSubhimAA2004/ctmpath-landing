@@ -1,1 +1,521 @@
 
+<!DOCTYPE html>
+
+<html lang="ta">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="CTM PATH™ Millionaires™ — Middle Class to Millionaire Lifestyle Scorecard™ — Dimension 04"
+    >
+
+    <title>
+        CTM PATH™ MILLIONAIRES™ — Dimension 04
+    </title>
+
+
+    <!-- =====================================================================
+         GLOBAL FOUNDATION
+    ====================================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/foundation/tokens.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/foundation/base.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/foundation/responsive.css"
+    >
+
+
+    <!-- =====================================================================
+         GLOBAL COMPONENTS
+    ====================================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/header.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/footer.css"
+    >
+
+
+    <!-- =====================================================================
+         PAGE 02 SHARED DIMENSION SYSTEM
+    ====================================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/page02/page02-shared.css"
+    >
+
+
+    <!-- =====================================================================
+         PAGE 02E
+    ====================================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/page02/page02e.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================================
+     GLOBAL HEADER
+============================================================================ -->
+
+
+<div
+    id="global-header"
+    data-component="header"
+></div>
+
+
+
+<!-- =========================================================================
+     PAGE 02E
+     DIMENSION 04
+     INDICATORS 16–20
+============================================================================ -->
+
+
+<main
+    id="page02e"
+    class="page02-dimension page02e"
+>
+
+
+    <div class="page02-dimension-shell">
+
+
+        <!-- =================================================================
+             JOURNEY PROGRESS
+        ================================================================== -->
+
+
+        <div
+            class="dimension-progress"
+            aria-label="Scorecard journey progress"
+        >
+
+
+            <div class="dimension-progress-meta">
+
+
+                <p class="dimension-progress-label">
+
+                    MILLIONAIRE LIFESTYLE SCORECARD™
+
+                </p>
+
+
+                <p
+                    id="dimensionProgressNumber"
+                    class="dimension-progress-number"
+                >
+
+                    4 / 5
+
+                </p>
+
+
+            </div>
+
+
+            <div class="dimension-progress-track">
+
+
+                <span
+                    id="dimensionProgressFill"
+                    class="dimension-progress-fill"
+                    role="progressbar"
+                    aria-label="Dimension progress"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="80"
+                ></span>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================================
+             DIMENSION HEADER
+        ================================================================== -->
+
+
+        <header class="dimension-header">
+
+
+            <p class="dimension-eyebrow">
+
+                DIMENSION 04
+
+            </p>
+
+
+            <!--
+                Dimension title is populated from page02-data.js
+                by page02-scorecard.js.
+
+                CONFIG dimensionId:
+                lifestyleFreedom
+            -->
+
+
+            <h1
+                id="dimensionTitleTamil"
+                class="dimension-title-tamil"
+            ></h1>
+
+
+            <p
+                id="dimensionTitleEnglish"
+                class="dimension-title-english"
+            ></p>
+
+
+            <p class="dimension-introduction">
+
+                உங்கள் தற்போதைய வாழ்க்கை நிலைக்கு
+                மிகவும் பொருத்தமான ஒரு தேர்வை
+                ஒவ்வொரு அளவுகோலிலும் தேர்ந்தெடுக்கவும்.
+
+            </p>
+
+
+
+            <!-- =============================================================
+                 LIVE DIMENSION SCORE
+            ============================================================== -->
+
+
+            <div
+                class="dimension-score-panel"
+                aria-live="polite"
+            >
+
+
+                <span class="dimension-score-label">
+
+                    YOUR DIMENSION SCORE
+
+                </span>
+
+
+                <span class="dimension-score-value">
+
+
+                    <span
+                        id="dimensionScoreCurrent"
+                        class="dimension-score-current"
+                    >
+
+                        0
+
+                    </span>
+
+
+                    <span
+                        id="dimensionScoreTotal"
+                        class="dimension-score-total"
+                    >
+
+                        / 20
+
+                    </span>
+
+
+                </span>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================================
+             SCORECARD
+
+             No indicator data is duplicated in this file.
+
+             page02-scorecard.js reads:
+
+                 dimensionId = "lifestyleFreedom"
+
+             from page02-data.js and renders Indicators 16–20 here.
+        ================================================================== -->
+
+
+        <section
+            class="dimension-scorecard"
+            aria-label="Dimension 04 scorecard"
+        >
+
+
+            <div
+                id="scorecardList"
+                class="scorecard-list"
+            ></div>
+
+
+        </section>
+
+
+
+        <!-- =================================================================
+             ANSWER PROGRESS
+        ================================================================== -->
+
+
+        <div
+            class="dimension-completion"
+            aria-live="polite"
+        >
+
+
+            <p>
+
+                <span data-dimension-answered>
+                    0
+                </span>
+
+                /
+
+                <span data-dimension-total>
+                    5
+                </span>
+
+                INDICATORS COMPLETED
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- =================================================================
+             HOW YOUR SCORE WORKS
+
+             Dynamically rendered by page02-scorecard.js.
+
+             Four levels:
+
+                 1 — Starting
+                 2 — Developing
+                 3 — Strong
+                 4 — Target
+
+             The guide uses the same four-option architecture as
+             Indicators 16–20.
+        ================================================================== -->
+
+
+        <aside
+            id="scoreGuide"
+            class="score-guide"
+            aria-label="How your score works"
+        ></aside>
+
+
+
+        <!-- =================================================================
+             VALIDATION MESSAGE
+
+             If any of Indicators 16–20 remain unanswered:
+
+                 ✓ navigation is blocked
+                 ✓ message appears here
+                 ✓ viewport moves to first unanswered indicator
+        ================================================================== -->
+
+
+        <div
+            id="dimensionMessage"
+            class="dimension-message"
+            role="alert"
+            aria-live="assertive"
+            hidden
+        ></div>
+
+
+
+        <!-- =================================================================
+             NAVIGATION
+        ================================================================== -->
+
+
+        <nav
+            class="dimension-navigation"
+            aria-label="Scorecard navigation"
+        >
+
+
+            <!-- =============================================================
+                 PREVIOUS
+            ============================================================== -->
+
+
+            <button
+                id="previousButton"
+                class="
+                    dimension-button
+                    dimension-button-secondary
+                "
+                type="button"
+            >
+
+
+                <span class="dimension-button-primary-text">
+
+                    ← முந்தைய பரிமாணம்
+
+                </span>
+
+
+                <span class="dimension-button-secondary-text">
+
+                    BACK TO DIMENSION 03
+
+                </span>
+
+
+            </button>
+
+
+
+            <!-- =============================================================
+                 NEXT
+
+                 page02e.js:
+
+                 1. validates Indicators 16–20
+                 2. completes "lifestyleFreedom"
+                 3. sets "protectionContribution"
+                 4. navigates to page02f.html
+            ============================================================== -->
+
+
+            <button
+                id="nextButton"
+                class="
+                    dimension-button
+                    dimension-button-primary
+                "
+                type="button"
+            >
+
+
+                <span class="dimension-button-primary-text">
+
+                    இறுதி பரிமாணம் →
+
+                </span>
+
+
+                <span class="dimension-button-secondary-text">
+
+                    CONTINUE TO DIMENSION 05
+
+                </span>
+
+
+            </button>
+
+
+        </nav>
+
+
+    </div>
+
+
+</main>
+
+
+
+<!-- =========================================================================
+     GLOBAL FOOTER
+============================================================================ -->
+
+
+<div
+    id="global-footer"
+    data-component="footer"
+></div>
+
+
+
+<!-- =========================================================================
+     GLOBAL JAVASCRIPT
+============================================================================ -->
+
+
+<script src="../js/component-loader.js"></script>
+
+<script src="../js/global.js"></script>
+
+<script src="../js/api.js"></script>
+
+
+
+<!-- =========================================================================
+     PAGE 02 JAVASCRIPT
+
+     LOAD ORDER IS CRITICAL:
+
+     1. page02-data.js
+        Frozen 25 indicators + 100 ranges
+
+     2. page02-session.js
+        Shared answer / journey persistence
+
+     3. page02-scorecard.js
+        Shared rendering / selection / scoring / validation
+
+     4. page02e.js
+        Dimension 04 controller
+============================================================================ -->
+
+
+<script src="../js/page02/page02-data.js"></script>
+
+<script src="../js/page02/page02-session.js"></script>
+
+<script src="../js/page02/page02-scorecard.js"></script>
+
+<script src="../js/page02/page02e.js"></script>
+
+
+</body>
+
+</html>
+
