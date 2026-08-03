@@ -241,7 +241,7 @@
 
 
 
-            <!-- INSTRUCTION -->
+            <!-- SCORECARD INSTRUCTION -->
 
             <div class="instruction-card">
 
@@ -326,6 +326,9 @@
 
             </div>
 
+
+
+            <!-- INTRO CTA -->
 
             <button
                 class="primary-btn"
@@ -1010,6 +1013,8 @@
 
 
 
+                <!-- KYC ERROR -->
+
                 <p
                     class="form-error"
                     id="kyc-error"
@@ -1018,6 +1023,8 @@
                 ></p>
 
 
+
+                <!-- KYC SUBMIT -->
 
                 <button
                     class="primary-btn"
@@ -1059,30 +1066,44 @@
         <div class="section-shell">
 
 
+            <!-- =============================================
+                 DIMENSION PROGRESS
+                 Rendered by page02.js
+            ============================================== -->
+
             <div
                 class="dimension-progress"
-                id="dimensionProgress"
+                id="dimension-progress"
                 aria-label="Scorecard dimension progress"
             ></div>
 
 
-            <!--
-                Dimension content is rendered by page02.js.
 
-                Five dimensions:
+            <!-- =============================================
+                 DIMENSION QUESTION HOST
 
-                01 Wealth
-                02 Income & Cash Flow
-                03 Assets
-                04 Lifestyle & Freedom
-                05 Protection & Contribution
-            -->
+                 page02.js renders:
 
-            <div id="dimensionHost"></div>
+                 5 Dimensions
+                 ×
+                 5 Indicators
+                 =
+                 25 Indicators
+
+                 Each indicator renders exactly
+                 FOUR range options.
+            ============================================== -->
+
+            <div
+                id="dimension-questions"
+                aria-live="polite"
+            ></div>
 
 
 
-            <!-- SCORING EXPLANATION -->
+            <!-- =============================================
+                 SCORING EXPLANATION
+            ============================================== -->
 
             <details class="scoring-details">
 
@@ -1208,13 +1229,17 @@
 
 
 
+            <!-- =============================================
+                 SCORECARD NAVIGATION
+            ============================================== -->
+
             <div class="scorecard-actions">
 
 
                 <button
                     class="secondary-btn"
                     type="button"
-                    id="dimensionBack"
+                    id="dimension-back"
                 >
                     ← BACK
                 </button>
@@ -1223,7 +1248,7 @@
                 <button
                     class="primary-btn primary-btn--compact"
                     type="button"
-                    id="dimensionNext"
+                    id="dimension-next"
                 >
                     NEXT DIMENSION →
                 </button>
@@ -1232,10 +1257,14 @@
             </div>
 
 
+
+            <!-- SCORECARD ERROR -->
+
             <p
                 class="form-error"
-                id="scorecardError"
+                id="scorecard-error"
                 role="alert"
+                aria-live="polite"
             ></p>
 
 
@@ -1270,7 +1299,9 @@
 
 
 
-            <!-- OVERALL SCORE -->
+            <!-- =================================================
+                 OVERALL SCORE
+            ================================================== -->
 
             <div class="result-hero">
 
@@ -1285,17 +1316,17 @@
                 </h3>
 
 
-                <strong id="resultScore">
+                <strong id="result-score">
                     0 / 100
                 </strong>
 
 
-                <b id="resultPercentage">
+                <b id="result-percentage">
                     0%
                 </b>
 
 
-                <p id="resultStage">
+                <p id="result-stage">
                     —
                 </p>
 
@@ -1304,7 +1335,9 @@
 
 
 
-            <!-- GAP -->
+            <!-- =================================================
+                 GAP
+            ================================================== -->
 
             <div class="gap-card">
 
@@ -1317,7 +1350,7 @@
                 </span>
 
 
-                <strong id="resultGap">
+                <strong id="result-gap">
                     100%
                 </strong>
 
@@ -1334,7 +1367,9 @@
 
 
 
-            <!-- FIVE DIMENSIONS -->
+            <!-- =================================================
+                 FIVE DIMENSIONS
+            ================================================== -->
 
             <section class="result-block">
 
@@ -1349,14 +1384,19 @@
                 </h3>
 
 
-                <div id="dimensionResults"></div>
+                <div
+                    id="dimension-results"
+                    aria-live="polite"
+                ></div>
 
 
             </section>
 
 
 
-            <!-- STRONGEST / GROWTH -->
+            <!-- =================================================
+                 STRONGEST / GROWTH
+            ================================================== -->
 
             <div class="result-pair">
 
@@ -1374,12 +1414,12 @@
                     </h3>
 
 
-                    <strong id="strongestDimension">
+                    <strong id="strongest-dimension">
                         —
                     </strong>
 
 
-                    <b id="strongestPercentage">
+                    <b id="strongest-percentage">
                         0%
                     </b>
 
@@ -1401,12 +1441,12 @@
                     </h3>
 
 
-                    <strong id="growthDimension">
+                    <strong id="growth-dimension">
                         —
                     </strong>
 
 
-                    <b id="growthPercentage">
+                    <b id="growth-percentage">
                         0%
                     </b>
 
@@ -1418,7 +1458,9 @@
 
 
 
-            <!-- LIFESTYLE STAGE -->
+            <!-- =================================================
+                 LIFESTYLE STAGE
+            ================================================== -->
 
             <section class="stage-scale">
 
@@ -1524,7 +1566,9 @@
 
 
 
-            <!-- PAGE 03 TRANSITION -->
+            <!-- =================================================
+                 PAGE 03 TRANSITION
+            ================================================== -->
 
             <section class="transition-card">
 
@@ -1587,7 +1631,7 @@
                 <button
                     class="primary-btn"
                     type="button"
-                    id="continuePage03"
+                    id="result-continue"
                 >
 
                     <span>
