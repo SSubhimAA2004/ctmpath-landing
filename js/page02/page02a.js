@@ -8,72 +8,52 @@
  * js/page02/page02a.js
  *
  * VERSION:
- * 3.1
+ * 4.0
  *
  * PAGE:
- * PAGE 02A — INTRODUCTION + KYC
- *
- * STATUS:
- * PRODUCTION CONTROLLER
+ * PAGE 02A — INTRODUCTION + ABOUT YOU™ KYC
  *
  * =============================================================================
  *
  * PURPOSE
  *
- * Controls the first stage of the Millionaire Lifestyle Scorecard™ journey:
+ * Controls Page 02A only:
  *
- *      INTRO
- *        ↓
- *      KYC
- *        ↓
- *      VALIDATE
- *        ↓
- *      REGISTER CLIENT
- *        ↓
- *      PRESERVE CLIENT + KYC IN Page02Session
- *        ↓
- *      SET DIMENSION 01
- *        ↓
- *      page02b.html
+ *      • Scorecard introduction
+ *      • LET'S BEGIN transition
+ *      • Expanded 16-field KYC
+ *      • KYC restoration
+ *      • Client-side validation
+ *      • Backend registration
+ *      • Client identity preservation
+ *      • Page 02 session preservation
+ *      • Dimension 01 activation
+ *      • Navigation to page02b.html
  *
  * =============================================================================
  *
- * DEPENDENCIES
+ * IMPORTANT TRANSACTION
  *
- *      js/api.js
- *      js/page02/page02-data.js
- *      js/page02/page02-session.js
+ * BEGIN MY SCORECARD™
  *
- * =============================================================================
+ *      Validate KYC
+ *          ↓
+ *      Preserve KYC locally
+ *          ↓
+ *      CTM_API.register()
+ *          ↓
+ *      Confirm backend registration
+ *          ↓
+ *      Preserve returned client identity
+ *          ↓
+ *      Set current dimension = wealth
+ *          ↓
+ *      Navigate to page02b.html
  *
- * ARCHITECTURAL RULES
- *
- * THIS FILE:
- *
- *      ✓ controls Page 02A only
- *      ✓ controls Intro → KYC
- *      ✓ validates KYC
- *      ✓ calls CTM_API.register()
- *      ✓ stores identity in Page02Session
- *      ✓ stores KYC in Page02Session
- *      ✓ sets Dimension 01
- *      ✓ navigates to Page 02B
- *      ✓ preserves KYC draft
- *      ✓ prevents duplicate submissions
- *      ✓ survives non-critical initialization failures
- *
- * THIS FILE DOES NOT:
- *
- *      ✗ load global header/footer
- *      ✗ contain indicator definitions
- *      ✗ render scorecard questions
- *      ✗ calculate dimension scores
- *      ✗ call CTM_API.saveDiscovery()
- *      ✗ control Page 02B
+ * NEVER navigate to Page 02B if backend registration fails.
  *
  * =============================================================================
  */
-
 
 'use strict';
 
@@ -82,12 +62,14 @@
 
 
     /* =========================================================================
-     * CONFIGURATION
-     * =========================================================================
-     */
+     * CONSTANTS
+     * ========================================================================= */
 
 
-    const CONFIG = {
+    const PAGE02A = {
+
+        version:
+            '4.0',
 
         nextPage:
             'page02b.html',
@@ -95,2036 +77,238 @@
         firstDimension:
             'wealth',
 
-        defaultSource:
-            'CTM PATH™ Guided Journey™',
-
-        defaultLanguage:
-            'ta',
-
-        loadingTextTamil:
-            'பதிவு செய்கிறோம்...',
-
-        loadingTextEnglish:
-            'PLEASE WAIT',
-
-        defaultButtonTamil:
-            'தொடர்கிறேன்',
-
-        defaultButtonEnglish:
-            'CONTINUE →',
-
-        registrationSuccessTamil:
-            'பதிவு வெற்றிகரமாக முடிந்தது.',
-
-        genericInitializationError:
-            'CTM PATH™ journey could not be initialized.',
-
-        genericRegistrationError:
-            'பதிவு செய்ய முடியவில்லை. மீண்டும் முயற்சிக்கவும்.'
+        submitting:
+            false
 
     };
 
 
     /* =========================================================================
-     * DOM CONTRACT
-     * =========================================================================
-     *
-     * pages/page02a.html must expose:
-     *
-     * INTRO
-     *
-     *      #introScreen
-     *      #beginButton
-     *
-     * KYC
-     *
-     *      #kycScreen
-     *      #kycForm
-     *
-     *      #fullName
-     *      #mobile
-     *      #email
-     *      #city
-     *      #district
-     *      #state
-     *      #pincode
-     *
-     *      #kycSubmitButton
-     *
-     * FEEDBACK
-     *
-     *      #kycError
-     *      #kycSuccess
-     *
-     * =========================================================================
-     */
+     * DOM REFERENCES
+     * ========================================================================= */
 
 
-    const DOM_IDS = {
+    const DOM = {
 
         introScreen:
-            'introScreen',
-
-        beginButton:
-            'beginButton',
+            null,
 
         kycScreen:
-            'kycScreen',
+            null,
+
+        beginButton:
+            null,
 
         kycForm:
-            'kycForm',
-
-        fullName:
-            'fullName',
-
-        mobile:
-            'mobile',
-
-        email:
-            'email',
-
-        city:
-            'city',
-
-        district:
-            'district',
-
-        state:
-            'state',
-
-        pincode:
-            'pincode',
+            null,
 
         submitButton:
-            'kycSubmitButton',
+            null,
 
         error:
-            'kycError',
+            null,
 
         success:
-            'kycSuccess'
+            null
 
     };
 
 
     /* =========================================================================
-     * STATE
-     * =========================================================================
-     */
+     * REQUIRED FIELD DEFINITIONS
+     * ========================================================================= */
 
 
-    let isSubmitting =
-        false;
+    const FIELD_IDS = [
+
+        'fullName',
+        'mobile',
+        'email',
+        'age',
+
+        'occupation',
+        'employerBusiness',
+        'dependents',
+
+        'city',
+        'district',
+        'state',
+        'country',
+        'pincode',
+
+        'source'
+
+    ];
 
 
-    let initialized =
-        false;
+    const RADIO_FIELDS = [
 
+        'gender',
+        'maritalStatus',
+        'preferredLanguage'
 
-    let introBound =
-        false;
-
-
-    let formBound =
-        false;
-
-
-    let draftPersistenceBound =
-        false;
+    ];
 
 
     /* =========================================================================
-     * DOM HELPERS
-     * =========================================================================
-     */
+     * UTILITY — SAFE STRING
+     * ========================================================================= */
 
 
-    function getElement(id) {
+    function cleanString(value) {
 
-        return (
-            document.getElementById(id) ||
-            null
-        );
-
-    }
-
-
-    function getValue(id) {
-
-        const element =
-            getElement(id);
-
-
-        if (!element) {
+        if (
+            value === null ||
+            value === undefined
+        ) {
 
             return '';
 
         }
 
 
-        return String(
-            element.value || ''
-        ).trim();
+        return String(value).trim();
 
     }
 
 
     /* =========================================================================
-     * SHOW / HIDE
-     * =========================================================================
-     */
+     * UTILITY — GET ELEMENT
+     * ========================================================================= */
 
 
-    function showElement(element) {
+    function getElement(id) {
 
-        if (!element) {
-
-            return;
-
-        }
-
-
-        element.hidden =
-            false;
-
-
-        element.removeAttribute(
-            'aria-hidden'
-        );
-
-    }
-
-
-    function hideElement(element) {
-
-        if (!element) {
-
-            return;
-
-        }
-
-
-        element.hidden =
-            true;
-
-
-        element.setAttribute(
-            'aria-hidden',
-            'true'
-        );
+        return document.getElementById(id);
 
     }
 
 
     /* =========================================================================
-     * SCROLL
-     * =========================================================================
-     */
+     * CACHE DOM
+     * ========================================================================= */
 
 
-    function scrollToTop() {
+    function cacheDom() {
 
-        try {
+        DOM.introScreen =
+            getElement('introScreen');
 
-            window.scrollTo({
 
-                top: 0,
+        DOM.kycScreen =
+            getElement('kycScreen');
 
-                left: 0,
 
-                behavior: 'smooth'
+        DOM.beginButton =
+            getElement('beginButton');
 
-            });
 
-        }
-        catch (error) {
+        DOM.kycForm =
+            getElement('kycForm');
 
-            window.scrollTo(
-                0,
-                0
-            );
 
-        }
+        DOM.submitButton =
+            getElement('kycSubmitButton');
 
-    }
 
+        DOM.error =
+            getElement('kycError');
 
-    /* =========================================================================
-     * MESSAGE SYSTEM
-     * =========================================================================
-     */
 
-
-    function clearMessages() {
-
-        const error =
-            getElement(
-                DOM_IDS.error
-            );
-
-
-        const success =
-            getElement(
-                DOM_IDS.success
-            );
-
-
-        if (error) {
-
-            error.textContent =
-                '';
-
-
-            hideElement(
-                error
-            );
-
-        }
-
-
-        if (success) {
-
-            success.textContent =
-                '';
-
-
-            hideElement(
-                success
-            );
-
-        }
-
-    }
-
-
-    function showError(message) {
-
-        clearMessages();
-
-
-        const error =
-            getElement(
-                DOM_IDS.error
-            );
-
-
-        if (error) {
-
-            error.textContent =
-                message;
-
-
-            showElement(
-                error
-            );
-
-        }
-
-
-        console.error(
-            'CTM PATH™ Page 02A:',
-            message
-        );
-
-    }
-
-
-    function showSuccess(message) {
-
-        clearMessages();
-
-
-        const success =
-            getElement(
-                DOM_IDS.success
-            );
-
-
-        if (success) {
-
-            success.textContent =
-                message;
-
-
-            showElement(
-                success
-            );
-
-        }
-
-    }
-
-
-    /* =========================================================================
-     * INTRO → KYC
-     * =========================================================================
-     */
-
-
-    function openKyc() {
-
-        const introScreen =
-            getElement(
-                DOM_IDS.introScreen
-            );
-
-
-        const kycScreen =
-            getElement(
-                DOM_IDS.kycScreen
-            );
-
-
-        if (!kycScreen) {
-
-            console.error(
-                'CTM PATH™ Page 02A: #kycScreen not found.'
-            );
-
-            return;
-
-        }
-
-
-        hideElement(
-            introScreen
-        );
-
-
-        showElement(
-            kycScreen
-        );
-
-
-        clearMessages();
-
-
-        scrollToTop();
-
-
-        window.setTimeout(
-            function () {
-
-                const fullName =
-                    getElement(
-                        DOM_IDS.fullName
-                    );
-
-
-                if (fullName) {
-
-                    try {
-
-                        fullName.focus({
-                            preventScroll: true
-                        });
-
-                    }
-                    catch (error) {
-
-                        fullName.focus();
-
-                    }
-
-                }
-
-            },
-            350
-        );
-
-    }
-
-
-    /* =========================================================================
-     * RESTORE KYC
-     * =========================================================================
-     */
-
-
-    function restoreKyc() {
-
-        if (
-            !window.Page02Session ||
-            typeof window.Page02Session.getKyc !== 'function'
-        ) {
-
-            return;
-
-        }
-
-
-        let kyc;
-
-
-        try {
-
-            kyc =
-                window.Page02Session.getKyc();
-
-        }
-        catch (error) {
-
-            console.warn(
-                'CTM PATH™ Page 02A: unable to restore KYC.',
-                error
-            );
-
-            return;
-
-        }
-
-
-        if (
-            !kyc ||
-            typeof kyc !== 'object'
-        ) {
-
-            return;
-
-        }
-
-
-        const fields = {
-
-            fullName:
-                kyc.fullName,
-
-            mobile:
-                kyc.mobile,
-
-            email:
-                kyc.email,
-
-            city:
-                kyc.city,
-
-            district:
-                kyc.district,
-
-            state:
-                kyc.state,
-
-            pincode:
-                kyc.pincode
-
-        };
-
-
-        Object.keys(fields).forEach(
-            function (id) {
-
-                const element =
-                    getElement(id);
-
-
-                const value =
-                    fields[id];
-
-
-                if (
-                    element &&
-                    value !== undefined &&
-                    value !== null
-                ) {
-
-                    element.value =
-                        value;
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /* =========================================================================
-     * BUILD KYC
-     * =========================================================================
-     */
-
-
-    function buildKyc() {
-
-        return {
-
-            fullName:
-                getValue(
-                    DOM_IDS.fullName
-                ),
-
-            mobile:
-                getValue(
-                    DOM_IDS.mobile
-                ),
-
-            email:
-                getValue(
-                    DOM_IDS.email
-                ),
-
-            city:
-                getValue(
-                    DOM_IDS.city
-                ),
-
-            district:
-                getValue(
-                    DOM_IDS.district
-                ),
-
-            state:
-                getValue(
-                    DOM_IDS.state
-                ),
-
-            pincode:
-                getValue(
-                    DOM_IDS.pincode
-                )
-
-        };
-
-    }
-
-
-    /* =========================================================================
-     * NORMALIZE MOBILE
-     * =========================================================================
-     */
-
-
-    function normalizeMobile(value) {
-
-        let mobile =
-            String(
-                value || ''
-            )
-            .replace(
-                /\D/g,
-                ''
-            );
-
-
-        if (
-            mobile.length === 12 &&
-            mobile.startsWith('91')
-        ) {
-
-            mobile =
-                mobile.substring(2);
-
-        }
-
-
-        return mobile;
-
-    }
-
-
-    /* =========================================================================
-     * NORMALIZE EMAIL
-     * =========================================================================
-     */
-
-
-    function normalizeEmail(value) {
-
-        return String(
-            value || ''
-        )
-        .trim()
-        .toLowerCase();
-
-    }
-
-
-    /* =========================================================================
-     * VALIDATE EMAIL
-     * =========================================================================
-     */
-
-
-    function isValidEmail(email) {
-
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-            email
-        );
-
-    }
-
-
-    /* =========================================================================
-     * VALIDATE KYC
-     * =========================================================================
-     */
-
-
-    function validateKyc(kyc) {
-
-        if (
-            !kyc.fullName ||
-            kyc.fullName.length < 2
-        ) {
-
-            return {
-
-                valid:
-                    false,
-
-                field:
-                    DOM_IDS.fullName,
-
-                message:
-                    'உங்கள் பெயரை உள்ளிடுங்கள்.'
-
-            };
-
-        }
-
-
-        const mobile =
-            normalizeMobile(
-                kyc.mobile
-            );
-
-
-        if (
-            !/^[6-9]\d{9}$/.test(
-                mobile
-            )
-        ) {
-
-            return {
-
-                valid:
-                    false,
-
-                field:
-                    DOM_IDS.mobile,
-
-                message:
-                    'சரியான 10 இலக்க WhatsApp / Mobile எண்ணை உள்ளிடுங்கள்.'
-
-            };
-
-        }
-
-
-        const email =
-            normalizeEmail(
-                kyc.email
-            );
-
-
-        if (
-            !email ||
-            !isValidEmail(email)
-        ) {
-
-            return {
-
-                valid:
-                    false,
-
-                field:
-                    DOM_IDS.email,
-
-                message:
-                    'சரியான மின்னஞ்சல் முகவரியை உள்ளிடுங்கள்.'
-
-            };
-
-        }
-
-
-        if (!kyc.district) {
-
-            return {
-
-                valid:
-                    false,
-
-                field:
-                    DOM_IDS.district,
-
-                message:
-                    'உங்கள் மாவட்டத்தை உள்ளிடுங்கள்.'
-
-            };
-
-        }
-
-
-        if (!kyc.state) {
-
-            return {
-
-                valid:
-                    false,
-
-                field:
-                    DOM_IDS.state,
-
-                message:
-                    'உங்கள் மாநிலத்தை உள்ளிடுங்கள்.'
-
-            };
-
-        }
-
-
-        if (
-            kyc.pincode &&
-            !/^\d{6}$/.test(
-                kyc.pincode
-            )
-        ) {
-
-            return {
-
-                valid:
-                    false,
-
-                field:
-                    DOM_IDS.pincode,
-
-                message:
-                    'சரியான 6 இலக்க PIN code-ஐ உள்ளிடுங்கள்.'
-
-            };
-
-        }
-
-
-        return {
-
-            valid:
-                true,
-
-            field:
-                null,
-
-            message:
-                ''
-
-        };
-
-    }
-
-
-    /* =========================================================================
-     * FOCUS INVALID FIELD
-     * =========================================================================
-     */
-
-
-    function focusField(id) {
-
-        const field =
-            getElement(id);
-
-
-        if (!field) {
-
-            return;
-
-        }
-
-
-        try {
-
-            field.focus({
-                preventScroll: true
-            });
-
-        }
-        catch (error) {
-
-            field.focus();
-
-        }
-
-
-        if (
-            typeof field.scrollIntoView ===
-            'function'
-        ) {
-
-            field.scrollIntoView({
-
-                behavior:
-                    'smooth',
-
-                block:
-                    'center'
-
-            });
-
-        }
-
-    }
-
-
-    /* =========================================================================
-     * DEVICE INFORMATION
-     * =========================================================================
-     */
-
-
-    function getDeviceType() {
-
-        const width =
-            window.innerWidth;
-
-
-        if (width <= 768) {
-
-            return 'mobile';
-
-        }
-
-
-        if (width <= 1024) {
-
-            return 'tablet';
-
-        }
-
-
-        return 'desktop';
-
-    }
-
-
-    /* =========================================================================
-     * REGISTRATION PAYLOAD
-     * =========================================================================
-     *
-     * BACKEND CONTRACT:
-     *
-     *      fullName
-     *      email
-     *      mobile
-     *      district
-     *      state
-     *      source
-     *      language
-     *      device
-     *
-     * city + pincode remain in Page02Session.
-     *
-     * =========================================================================
-     */
-
-
-    function buildRegistrationPayload(kyc) {
-
-        return {
-
-            fullName:
-                kyc.fullName,
-
-            email:
-                normalizeEmail(
-                    kyc.email
-                ),
-
-            mobile:
-                normalizeMobile(
-                    kyc.mobile
-                ),
-
-            district:
-                kyc.district,
-
-            state:
-                kyc.state,
-
-            source:
-                CONFIG.defaultSource,
-
-            language:
-                (
-                    document.documentElement.lang ||
-                    CONFIG.defaultLanguage
-                ),
-
-            device:
-                getDeviceType()
-
-        };
-
-    }
-
-
-    /* =========================================================================
-     * SUBMIT BUTTON STATE
-     * =========================================================================
-     */
-
-
-    function setSubmitting(submitting) {
-
-        isSubmitting =
-            submitting;
-
-
-        const button =
-            getElement(
-                DOM_IDS.submitButton
-            );
-
-
-        if (!button) {
-
-            return;
-
-        }
-
-
-        button.disabled =
-            submitting;
-
-
-        button.setAttribute(
-            'aria-busy',
-            submitting
-                ? 'true'
-                : 'false'
-        );
-
-
-        const primary =
-            button.querySelector(
-                '.button-primary'
-            );
-
-
-        const secondary =
-            button.querySelector(
-                '.button-secondary'
-            );
-
-
-        if (primary) {
-
-            if (
-                !primary.dataset.defaultText
-            ) {
-
-                primary.dataset.defaultText =
-                    primary.textContent.trim();
-
-            }
-
-
-            primary.textContent =
-                submitting
-                    ? CONFIG.loadingTextTamil
-                    : (
-                        primary.dataset.defaultText ||
-                        CONFIG.defaultButtonTamil
-                    );
-
-        }
-
-
-        if (secondary) {
-
-            if (
-                !secondary.dataset.defaultText
-            ) {
-
-                secondary.dataset.defaultText =
-                    secondary.textContent.trim();
-
-            }
-
-
-            secondary.textContent =
-                submitting
-                    ? CONFIG.loadingTextEnglish
-                    : (
-                        secondary.dataset.defaultText ||
-                        CONFIG.defaultButtonEnglish
-                    );
-
-        }
-
-    }
-
-
-    /* =========================================================================
-     * RESPONSE SUCCESS CHECK
-     * =========================================================================
-     */
-
-
-    function registrationSucceeded(response) {
-
-        if (!response) {
-
-            return false;
-
-        }
-
-
-        if (
-            response.success === false ||
-            response.ok === false
-        ) {
-
-            return false;
-
-        }
-
-
-        return true;
-
-    }
-
-
-    /* =========================================================================
-     * EXTRACT REGISTRATION DATA
-     * =========================================================================
-     */
-
-
-    function getResponseData(response) {
-
-        if (
-            response &&
-            response.data &&
-            typeof response.data === 'object'
-        ) {
-
-            return response.data;
-
-        }
-
-
-        return (
-            response &&
-            typeof response === 'object'
-        )
-            ? response
-            : {};
-
-    }
-
-
-    /* =========================================================================
-     * EXTRACT CLIENT
-     * =========================================================================
-     */
-
-
-    function extractClient(response, kyc) {
-
-        const data =
-            getResponseData(
-                response
-            );
-
-
-        const nestedClient =
-            (
-                data.client &&
-                typeof data.client === 'object'
-            )
-                ? data.client
-                : {};
-
-
-        const nestedPerson =
-            (
-                data.person &&
-                typeof data.person === 'object'
-            )
-                ? data.person
-                : {};
-
-
-        const peopleId =
-            data.peopleId ||
-            data.peopleID ||
-            data.personId ||
-            nestedClient.peopleId ||
-            nestedClient.peopleID ||
-            nestedClient.personId ||
-            nestedPerson.peopleId ||
-            nestedPerson.peopleID ||
-            nestedPerson.personId ||
-            data.id ||
-            nestedClient.id ||
-            nestedPerson.id ||
-            null;
-
-
-        const clientId =
-            data.clientId ||
-            data.clientID ||
-            nestedClient.clientId ||
-            nestedClient.clientID ||
-            nestedClient.id ||
-            peopleId ||
-            null;
-
-
-        return {
-
-            peopleId:
-                peopleId,
-
-            clientId:
-                clientId,
-
-            fullName:
-                kyc.fullName
-
-        };
-
-    }
-
-
-    /* =========================================================================
-     * SAVE KYC LOCALLY
-     * =========================================================================
-     */
-
-
-    function preserveKyc(kyc) {
-
-        const normalized = {
-
-            fullName:
-                kyc.fullName,
-
-            mobile:
-                normalizeMobile(
-                    kyc.mobile
-                ),
-
-            email:
-                normalizeEmail(
-                    kyc.email
-                ),
-
-            city:
-                kyc.city,
-
-            district:
-                kyc.district,
-
-            state:
-                kyc.state,
-
-            pincode:
-                kyc.pincode
-
-        };
-
-
-        if (
-            !window.Page02Session ||
-            typeof window.Page02Session.setKyc !== 'function'
-        ) {
-
-            throw new Error(
-                'Page02Session.setKyc() is unavailable.'
-            );
-
-        }
-
-
-        window.Page02Session.setKyc(
-            normalized
-        );
-
-
-        return normalized;
-
-    }
-
-
-    /* =========================================================================
-     * SESSION CAPABILITY CHECK
-     * =========================================================================
-     */
-
-
-    function sessionReadyForJourney() {
-
-        return Boolean(
-
-            window.Page02Session &&
-
-            typeof window.Page02Session.setKyc ===
-                'function' &&
-
-            typeof window.Page02Session.setClient ===
-                'function' &&
-
-            typeof window.Page02Session.getClient ===
-                'function' &&
-
-            typeof window.Page02Session.hasRegisteredClient ===
-                'function' &&
-
-            typeof window.Page02Session.setCurrentDimension ===
-                'function'
-
-        );
-
-    }
-
-
-    /* =========================================================================
-     * API CAPABILITY CHECK
-     * =========================================================================
-     */
-
-
-    function registrationApiReady() {
-
-        return Boolean(
-
-            window.CTM_API &&
-
-            typeof window.CTM_API.register ===
-                'function'
-
-        );
-
-    }
-
-
-    /* =========================================================================
-     * DIMENSION DATA CAPABILITY CHECK
-     * =========================================================================
-     */
-
-
-    function dimensionDataReady() {
-
-        return Boolean(
-
-            window.Page02Data &&
-
-            typeof window.Page02Data.getDimensionById ===
-                'function'
-
-        );
-
-    }
-
-
-    /* =========================================================================
-     * VERIFY DIMENSION 01
-     * =========================================================================
-     */
-
-
-    function verifyFirstDimension() {
-
-        if (!dimensionDataReady()) {
-
-            return false;
-
-        }
-
-
-        try {
-
-            return Boolean(
-                window.Page02Data.getDimensionById(
-                    CONFIG.firstDimension
-                )
-            );
-
-        }
-        catch (error) {
-
-            console.error(
-                'CTM PATH™ Page 02A: unable to verify Dimension 01.',
-                error
-            );
-
-            return false;
-
-        }
-
-    }
-
-
-    /* =========================================================================
-     * NAVIGATE TO DIMENSION 01
-     * =========================================================================
-     */
-
-
-    function goToDimensionOne() {
-
-        if (!sessionReadyForJourney()) {
-
-            throw new Error(
-                'Page02Session is unavailable.'
-            );
-
-        }
-
-
-        if (!verifyFirstDimension()) {
-
-            throw new Error(
-                'Dimension 01 could not be initialized.'
-            );
-
-        }
-
-
-        const result =
-            window.Page02Session.setCurrentDimension(
-                CONFIG.firstDimension
-            );
-
-
-        /*
-         * Some session implementations return a value and some simply mutate
-         * state. Only an explicit false is treated as failure.
-         */
-
-        if (result === false) {
-
-            throw new Error(
-                'Unable to activate Dimension 01.'
-            );
-
-        }
-
-
-        console.info(
-            'CTM PATH™ Page 02A → Page 02B:',
-            {
-                dimension:
-                    CONFIG.firstDimension,
-
-                destination:
-                    CONFIG.nextPage
-            }
-        );
-
-
-        window.location.assign(
-            CONFIG.nextPage
-        );
-
-    }
-
-
-    /* =========================================================================
-     * REGISTER CLIENT
-     * =========================================================================
-     */
-
-
-    async function registerClient(kyc) {
-
-        if (!registrationApiReady()) {
-
-            throw new Error(
-                'CTM_API.register() is unavailable.'
-            );
-
-        }
-
-
-        const payload =
-            buildRegistrationPayload(
-                kyc
-            );
-
-
-        console.info(
-            'CTM PATH™ Page 02A registration:',
-            {
-                fullName:
-                    payload.fullName,
-
-                district:
-                    payload.district,
-
-                state:
-                    payload.state,
-
-                source:
-                    payload.source
-            }
-        );
-
-
-        const response =
-            await window.CTM_API.register(
-                payload
-            );
-
-
-        if (
-            !registrationSucceeded(
-                response
-            )
-        ) {
-
-            const message =
-                (
-                    response &&
-                    (
-                        response.message ||
-                        response.error
-                    )
-                ) ||
-                'Registration failed.';
-
-
-            throw new Error(
-                message
-            );
-
-        }
-
-
-        return response;
-
-    }
-
-
-    /* =========================================================================
-     * HANDLE KYC SUBMISSION
-     * =========================================================================
-     */
-
-
-    async function handleKycSubmit(event) {
-
-        if (event) {
-
-            event.preventDefault();
-
-        }
-
-
-        if (isSubmitting) {
-
-            return;
-
-        }
-
-
-        clearMessages();
-
-
-        const kyc =
-            buildKyc();
-
-
-        const validation =
-            validateKyc(
-                kyc
-            );
-
-
-        if (!validation.valid) {
-
-            showError(
-                validation.message
-            );
-
-
-            focusField(
-                validation.field
-            );
-
-
-            return;
-
-        }
-
-
-        /*
-         * The user must be able to enter the KYC screen even if a network
-         * dependency is temporarily unavailable.
-         *
-         * Submission, however, requires the actual journey infrastructure.
-         */
-
-
-        if (!sessionReadyForJourney()) {
-
-            showError(
-                'CTM PATH™ session is unavailable. Please refresh and try again.'
-            );
-
-            console.error(
-                'CTM PATH™ Page 02A session dependency unavailable.'
-            );
-
-            return;
-
-        }
-
-
-        if (!registrationApiReady()) {
-
-            showError(
-                'CTM PATH™ registration service is unavailable. Please refresh and try again.'
-            );
-
-            console.error(
-                'CTM PATH™ Page 02A registration API unavailable.'
-            );
-
-            return;
-
-        }
-
-
-        if (!verifyFirstDimension()) {
-
-            showError(
-                'CTM PATH™ scorecard could not be initialized. Please refresh and try again.'
-            );
-
-            console.error(
-                'CTM PATH™ Page 02A Dimension 01 unavailable:',
-                CONFIG.firstDimension
-            );
-
-            return;
-
-        }
-
-
-        /*
-         * PRESERVE BEFORE NETWORK REQUEST
-         *
-         * If connectivity fails, the visitor should not need to re-enter KYC.
-         */
-
-
-        let normalizedKyc;
-
-
-        try {
-
-            normalizedKyc =
-                preserveKyc(
-                    kyc
-                );
-
-        }
-        catch (error) {
-
-            console.error(
-                'CTM PATH™ Page 02A KYC persistence error:',
-                error
-            );
-
-
-            showError(
-                'உங்கள் விவரங்களை சேமிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.'
-            );
-
-
-            return;
-
-        }
-
-
-        setSubmitting(
-            true
-        );
-
-
-        try {
-
-
-            /* -----------------------------------------------------------------
-             * ALREADY REGISTERED
-             *
-             * If the visitor comes Back from Page 02B, do not create another
-             * backend registration.
-             * -----------------------------------------------------------------
-             */
-
-
-            if (
-                window.Page02Session.hasRegisteredClient()
-            ) {
-
-                console.info(
-                    'CTM PATH™ Page 02A: existing registered client recovered.'
-                );
-
-
-                goToDimensionOne();
-
-
-                return;
-
-            }
-
-
-            /* -----------------------------------------------------------------
-             * REGISTER
-             * -----------------------------------------------------------------
-             */
-
-
-            const response =
-                await registerClient(
-                    normalizedKyc
-                );
-
-
-            /* -----------------------------------------------------------------
-             * PRESERVE CLIENT IDENTITY
-             * -----------------------------------------------------------------
-             */
-
-
-            const client =
-                extractClient(
-                    response,
-                    normalizedKyc
-                );
-
-
-            window.Page02Session.setClient(
-                client
-            );
-
-
-            /* -----------------------------------------------------------------
-             * SUCCESS
-             * -----------------------------------------------------------------
-             */
-
-
-            showSuccess(
-                CONFIG.registrationSuccessTamil
-            );
-
-
-            console.info(
-                'CTM PATH™ Page 02A registration complete:',
-                window.Page02Session.getClient()
-            );
-
-
-            /* -----------------------------------------------------------------
-             * PAGE 02B
-             * -----------------------------------------------------------------
-             */
-
-
-            goToDimensionOne();
-
-
-        }
-        catch (error) {
-
-
-            console.error(
-                'CTM PATH™ Page 02A registration error:',
-                error
-            );
-
-
-            showError(
-                (
-                    error &&
-                    error.message
-                ) ||
-                CONFIG.genericRegistrationError
-            );
-
-
-        }
-        finally {
-
-
-            setSubmitting(
-                false
-            );
-
-
-        }
-
-    }
-
-
-    /* =========================================================================
-     * FORM INPUT PERSISTENCE
-     * =========================================================================
-     */
-
-
-    function preserveFormDraft() {
-
-        if (draftPersistenceBound) {
-
-            return;
-
-        }
-
-
-        const form =
-            getElement(
-                DOM_IDS.kycForm
-            );
-
-
-        if (!form) {
-
-            return;
-
-        }
-
-
-        form.addEventListener(
-            'input',
-            function () {
-
-                if (
-                    !window.Page02Session ||
-                    typeof window.Page02Session.setKyc !==
-                        'function'
-                ) {
-
-                    return;
-
-                }
-
-
-                try {
-
-                    window.Page02Session.setKyc(
-                        buildKyc()
-                    );
-
-                }
-                catch (error) {
-
-                    /*
-                     * Draft persistence is intentionally non-blocking.
-                     *
-                     * A local persistence failure must never make the form
-                     * unusable.
-                     */
-
-                    console.warn(
-                        'CTM PATH™ Page 02A: draft persistence skipped.',
-                        error
-                    );
-
-                }
-
-            }
-        );
-
-
-        draftPersistenceBound =
-            true;
-
-    }
-
-
-    /* =========================================================================
-     * BIND INTRO
-     * =========================================================================
-     */
-
-
-    function bindIntro() {
-
-        if (introBound) {
-
-            return true;
-
-        }
-
-
-        const button =
-            getElement(
-                DOM_IDS.beginButton
-            );
-
-
-        if (!button) {
-
-            console.error(
-                'CTM PATH™ Page 02A: #beginButton not found.'
-            );
-
-
-            return false;
-
-        }
-
-
-        button.addEventListener(
-            'click',
-            function (event) {
-
-                event.preventDefault();
-
-
-                openKyc();
-
-            }
-        );
-
-
-        introBound =
-            true;
-
-
-        return true;
-
-    }
-
-
-    /* =========================================================================
-     * BIND FORM
-     * =========================================================================
-     */
-
-
-    function bindForm() {
-
-        if (formBound) {
-
-            return true;
-
-        }
-
-
-        const form =
-            getElement(
-                DOM_IDS.kycForm
-            );
-
-
-        if (!form) {
-
-            console.error(
-                'CTM PATH™ Page 02A: #kycForm not found.'
-            );
-
-
-            return false;
-
-        }
-
-
-        form.addEventListener(
-            'submit',
-            handleKycSubmit
-        );
-
-
-        /*
-         * Defensive fallback:
-         *
-         * Current canonical markup uses type="submit".
-         * If that markup changes accidentally, the button remains functional.
-         */
-
-
-        const submitButton =
-            getElement(
-                DOM_IDS.submitButton
-            );
-
-
-        if (
-            submitButton &&
-            String(
-                submitButton.type || ''
-            ).toLowerCase() !==
-                'submit'
-        ) {
-
-            submitButton.addEventListener(
-                'click',
-                handleKycSubmit
-            );
-
-        }
-
-
-        formBound =
-            true;
-
-
-        return true;
+        DOM.success =
+            getElement('kycSuccess');
 
     }
 
 
     /* =========================================================================
      * DOM CONTRACT CHECK
-     * =========================================================================
-     */
+     * ========================================================================= */
 
 
-    function verifyDomContract() {
+    function validateDomContract() {
 
-        const requiredIds = [
+        const required = {
 
-            DOM_IDS.introScreen,
+            introScreen:
+                DOM.introScreen,
 
-            DOM_IDS.beginButton,
+            kycScreen:
+                DOM.kycScreen,
 
-            DOM_IDS.kycScreen,
+            beginButton:
+                DOM.beginButton,
 
-            DOM_IDS.kycForm,
+            kycForm:
+                DOM.kycForm,
 
-            DOM_IDS.fullName,
+            submitButton:
+                DOM.submitButton,
 
-            DOM_IDS.mobile,
+            kycError:
+                DOM.error,
 
-            DOM_IDS.email,
+            kycSuccess:
+                DOM.success
 
-            DOM_IDS.city,
-
-            DOM_IDS.district,
-
-            DOM_IDS.state,
-
-            DOM_IDS.pincode,
-
-            DOM_IDS.submitButton,
-
-            DOM_IDS.error,
-
-            DOM_IDS.success
-
-        ];
+        };
 
 
-        const missing =
-            requiredIds.filter(
-                function (id) {
+        const missing = [];
 
-                    return !getElement(id);
+
+        Object.keys(required).forEach(
+            function (key) {
+
+                if (
+                    !required[key]
+                ) {
+
+                    missing.push(key);
 
                 }
-            );
+
+            }
+        );
 
 
-        if (missing.length) {
+        FIELD_IDS.forEach(
+            function (id) {
+
+                if (
+                    !getElement(id)
+                ) {
+
+                    missing.push(id);
+
+                }
+
+            }
+        );
+
+
+        RADIO_FIELDS.forEach(
+            function (name) {
+
+                if (
+                    !document.querySelector(
+                        'input[name="' +
+                        name +
+                        '"]'
+                    )
+                ) {
+
+                    missing.push(name);
+
+                }
+
+            }
+        );
+
+
+        if (
+            missing.length
+        ) {
 
             console.error(
                 'CTM PATH™ Page 02A DOM contract failure:',
@@ -2143,30 +327,414 @@
 
 
     /* =========================================================================
-     * DEPENDENCY REPORT
-     * =========================================================================
-     */
+     * SESSION AVAILABILITY
+     * ========================================================================= */
 
 
-    function getDependencyReport() {
+    function hasSessionApi() {
+
+        return Boolean(
+
+            window.Page02Session &&
+
+            typeof window.Page02Session.setKyc ===
+                'function' &&
+
+            typeof window.Page02Session.setClient ===
+                'function' &&
+
+            typeof window.Page02Session.setCurrentDimension ===
+                'function'
+
+        );
+
+    }
+
+
+    /* =========================================================================
+     * API AVAILABILITY
+     * ========================================================================= */
+
+
+    function hasRegistrationApi() {
+
+        return Boolean(
+
+            window.CTM_API &&
+
+            typeof window.CTM_API.register ===
+                'function'
+
+        );
+
+    }
+
+
+    /* =========================================================================
+     * FEEDBACK
+     * ========================================================================= */
+
+
+    function clearFeedback() {
+
+        if (
+            DOM.error
+        ) {
+
+            DOM.error.textContent =
+                '';
+
+            DOM.error.hidden =
+                true;
+
+        }
+
+
+        if (
+            DOM.success
+        ) {
+
+            DOM.success.textContent =
+                '';
+
+            DOM.success.hidden =
+                true;
+
+        }
+
+    }
+
+
+    function showError(message) {
+
+        if (
+            !DOM.error
+        ) {
+
+            return;
+
+        }
+
+
+        DOM.error.textContent =
+            cleanString(message) ||
+            'Unable to continue. Please check your details and try again.';
+
+
+        DOM.error.hidden =
+            false;
+
+
+        if (
+            DOM.success
+        ) {
+
+            DOM.success.hidden =
+                true;
+
+        }
+
+
+        try {
+
+            DOM.error.scrollIntoView({
+
+                behavior:
+                    'smooth',
+
+                block:
+                    'center'
+
+            });
+
+        }
+        catch (error) {
+
+            /* Non-critical UI enhancement. */
+
+        }
+
+    }
+
+
+    function showSuccess(message) {
+
+        if (
+            !DOM.success
+        ) {
+
+            return;
+
+        }
+
+
+        DOM.success.textContent =
+            cleanString(message);
+
+
+        DOM.success.hidden =
+            false;
+
+
+        if (
+            DOM.error
+        ) {
+
+            DOM.error.hidden =
+                true;
+
+        }
+
+    }
+
+
+    /* =========================================================================
+     * SCREEN CONTROL
+     * ========================================================================= */
+
+
+    function showIntro() {
+
+        if (
+            DOM.introScreen
+        ) {
+
+            DOM.introScreen.hidden =
+                false;
+
+            DOM.introScreen.setAttribute(
+                'aria-hidden',
+                'false'
+            );
+
+        }
+
+
+        if (
+            DOM.kycScreen
+        ) {
+
+            DOM.kycScreen.hidden =
+                true;
+
+            DOM.kycScreen.setAttribute(
+                'aria-hidden',
+                'true'
+            );
+
+        }
+
+    }
+
+
+    function showKyc() {
+
+        if (
+            DOM.introScreen
+        ) {
+
+            DOM.introScreen.hidden =
+                true;
+
+            DOM.introScreen.setAttribute(
+                'aria-hidden',
+                'true'
+            );
+
+        }
+
+
+        if (
+            DOM.kycScreen
+        ) {
+
+            DOM.kycScreen.hidden =
+                false;
+
+            DOM.kycScreen.setAttribute(
+                'aria-hidden',
+                'false'
+            );
+
+        }
+
+
+        clearFeedback();
+
+
+        window.requestAnimationFrame(
+            function () {
+
+                window.scrollTo({
+
+                    top:
+                        0,
+
+                    behavior:
+                        'smooth'
+
+                });
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================================
+     * GET RADIO VALUE
+     * ========================================================================= */
+
+
+    function getRadioValue(name) {
+
+        const selected =
+            document.querySelector(
+                'input[name="' +
+                name +
+                '"]:checked'
+            );
+
+
+        return selected
+            ? cleanString(selected.value)
+            : '';
+
+    }
+
+
+    /* =========================================================================
+     * SET RADIO VALUE
+     * ========================================================================= */
+
+
+    function setRadioValue(
+        name,
+        value
+    ) {
+
+        value =
+            cleanString(value);
+
+
+        if (
+            !value
+        ) {
+
+            return;
+
+        }
+
+
+        const options =
+            document.querySelectorAll(
+                'input[name="' +
+                name +
+                '"]'
+            );
+
+
+        options.forEach(
+            function (option) {
+
+                option.checked =
+                    cleanString(option.value) ===
+                    value;
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================================
+     * READ KYC
+     * ========================================================================= */
+
+
+    function readKyc() {
 
         return {
 
-            Page02Data:
-                Boolean(
-                    window.Page02Data
+            fullName:
+                cleanString(
+                    getElement('fullName').value
                 ),
 
-            Page02Session:
-                Boolean(
-                    window.Page02Session
+            mobile:
+                cleanString(
+                    getElement('mobile').value
                 ),
 
-            CTM_API_register:
-                registrationApiReady(),
+            email:
+                cleanString(
+                    getElement('email').value
+                ),
 
-            firstDimension:
-                verifyFirstDimension()
+            age:
+                cleanString(
+                    getElement('age').value
+                ),
+
+            gender:
+                getRadioValue(
+                    'gender'
+                ),
+
+            occupation:
+                cleanString(
+                    getElement('occupation').value
+                ),
+
+            employerBusiness:
+                cleanString(
+                    getElement('employerBusiness').value
+                ),
+
+            maritalStatus:
+                getRadioValue(
+                    'maritalStatus'
+                ),
+
+            dependents:
+                cleanString(
+                    getElement('dependents').value
+                ),
+
+            city:
+                cleanString(
+                    getElement('city').value
+                ),
+
+            district:
+                cleanString(
+                    getElement('district').value
+                ),
+
+            state:
+                cleanString(
+                    getElement('state').value
+                ),
+
+            country:
+                cleanString(
+                    getElement('country').value
+                ),
+
+            pincode:
+                cleanString(
+                    getElement('pincode').value
+                ),
+
+            preferredLanguage:
+                getRadioValue(
+                    'preferredLanguage'
+                ),
+
+            source:
+                cleanString(
+                    getElement('source').value
+                )
 
         };
 
@@ -2174,307 +742,2182 @@
 
 
     /* =========================================================================
-     * VERIFY JOURNEY DEPENDENCIES
-     * =========================================================================
-     */
+     * WRITE KYC
+     * ========================================================================= */
 
 
-    function verifyJourneyDependencies() {
+    function writeKyc(kyc) {
 
-        const report =
-            getDependencyReport();
+        if (
+            !kyc ||
+            typeof kyc !== 'object'
+        ) {
 
-
-        const missing =
-            [];
-
-
-        if (!report.Page02Data) {
-
-            missing.push(
-                'Page02Data'
-            );
+            return;
 
         }
 
 
-        if (!report.Page02Session) {
+        FIELD_IDS.forEach(
+            function (id) {
 
-            missing.push(
-                'Page02Session'
-            );
+                const element =
+                    getElement(id);
+
+
+                if (
+                    !element
+                ) {
+
+                    return;
+
+                }
+
+
+                if (
+                    kyc[id] !== undefined &&
+                    kyc[id] !== null
+                ) {
+
+                    element.value =
+                        cleanString(
+                            kyc[id]
+                        );
+
+                }
+
+            }
+        );
+
+
+        setRadioValue(
+            'gender',
+            kyc.gender
+        );
+
+
+        setRadioValue(
+            'maritalStatus',
+            kyc.maritalStatus
+        );
+
+
+        setRadioValue(
+            'preferredLanguage',
+            kyc.preferredLanguage
+        );
+
+    }
+
+
+    /* =========================================================================
+     * RESTORE EXISTING KYC
+     * ========================================================================= */
+
+
+    function restoreKyc() {
+
+        if (
+            !hasSessionApi() ||
+            typeof window.Page02Session.getKyc !==
+                'function'
+        ) {
+
+            return;
 
         }
 
 
-        if (!report.CTM_API_register) {
+        try {
 
-            missing.push(
-                'CTM_API.register'
+            const kyc =
+                window.Page02Session.getKyc();
+
+
+            writeKyc(
+                kyc
             );
+
+        }
+        catch (error) {
+
+            console.warn(
+                'CTM PATH™ Page 02A KYC restoration failed:',
+                error
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================================
+     * VALIDATION HELPERS
+     * ========================================================================= */
+
+
+    function markInvalid(element) {
+
+        if (
+            element
+        ) {
+
+            element.setAttribute(
+                'aria-invalid',
+                'true'
+            );
+
+        }
+
+    }
+
+
+    function clearInvalidState() {
+
+        const invalid =
+            DOM.kycForm.querySelectorAll(
+                '[aria-invalid="true"]'
+            );
+
+
+        invalid.forEach(
+            function (element) {
+
+                element.removeAttribute(
+                    'aria-invalid'
+                );
+
+            }
+        );
+
+    }
+
+
+    function focusField(element) {
+
+        if (
+            !element
+        ) {
+
+            return;
+
+        }
+
+
+        try {
+
+            element.focus({
+
+                preventScroll:
+                    true
+
+            });
+
+        }
+        catch (error) {
+
+            element.focus();
+
+        }
+
+
+        try {
+
+            element.scrollIntoView({
+
+                behavior:
+                    'smooth',
+
+                block:
+                    'center'
+
+            });
+
+        }
+        catch (error) {
+
+            /* Non-critical. */
+
+        }
+
+    }
+
+
+    /* =========================================================================
+     * VALIDATE KYC
+     * ========================================================================= */
+
+
+    function validateKyc(kyc) {
+
+        clearInvalidState();
+
+
+        /* ---------------------------------------------------------------------
+         * FULL NAME
+         * ------------------------------------------------------------------ */
+
+
+        if (
+            kyc.fullName.length < 2
+        ) {
+
+            const element =
+                getElement('fullName');
+
+
+            markInvalid(element);
+
+
+            return {
+
+                valid:
+                    false,
+
+                element:
+                    element,
+
+                message:
+                    'Please enter your full name.'
+
+            };
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * MOBILE
+         * ------------------------------------------------------------------ */
+
+
+        const mobileDigits =
+            kyc.mobile.replace(
+                /\D/g,
+                ''
+            );
+
+
+        if (
+            mobileDigits.length < 10 ||
+            mobileDigits.length > 15
+        ) {
+
+            const element =
+                getElement('mobile');
+
+
+            markInvalid(element);
+
+
+            return {
+
+                valid:
+                    false,
+
+                element:
+                    element,
+
+                message:
+                    'Please enter a valid mobile number.'
+
+            };
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * EMAIL
+         * ------------------------------------------------------------------ */
+
+
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+        if (
+            !emailPattern.test(
+                kyc.email
+            )
+        ) {
+
+            const element =
+                getElement('email');
+
+
+            markInvalid(element);
+
+
+            return {
+
+                valid:
+                    false,
+
+                element:
+                    element,
+
+                message:
+                    'Please enter a valid email address.'
+
+            };
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * AGE
+         * ------------------------------------------------------------------ */
+
+
+        const age =
+            Number(
+                kyc.age
+            );
+
+
+        if (
+            !Number.isInteger(age) ||
+            age < 18 ||
+            age > 100
+        ) {
+
+            const element =
+                getElement('age');
+
+
+            markInvalid(element);
+
+
+            return {
+
+                valid:
+                    false,
+
+                element:
+                    element,
+
+                message:
+                    'Please enter a valid age between 18 and 100.'
+
+            };
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * GENDER
+         * ------------------------------------------------------------------ */
+
+
+        if (
+            !kyc.gender
+        ) {
+
+            const element =
+                document.querySelector(
+                    'input[name="gender"]'
+                );
+
+
+            return {
+
+                valid:
+                    false,
+
+                element:
+                    element,
+
+                message:
+                    'Please select your gender.'
+
+            };
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * OCCUPATION
+         * ------------------------------------------------------------------ */
+
+
+        if (
+            kyc.occupation.length < 2
+        ) {
+
+            const element =
+                getElement('occupation');
+
+
+            markInvalid(element);
+
+
+            return {
+
+                valid:
+                    false,
+
+                element:
+                    element,
+
+                message:
+                    'Please enter your occupation.'
+
+            };
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * EMPLOYER / BUSINESS
+         * ------------------------------------------------------------------ */
+
+
+        if (
+            kyc.employerBusiness.length < 2
+        ) {
+
+            const element =
+                getElement('employerBusiness');
+
+
+            markInvalid(element);
+
+
+            return {
+
+                valid:
+                    false,
+
+                element:
+                    element,
+
+                message:
+                    'Please enter your employer or business.'
+
+            };
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * MARITAL STATUS
+         * ------------------------------------------------------------------ */
+
+
+        if (
+            !kyc.maritalStatus
+        ) {
+
+            const element =
+                document.querySelector(
+                    'input[name="maritalStatus"]'
+                );
+
+
+            return {
+
+                valid:
+                    false,
+
+                element:
+                    element,
+
+                message:
+                    'Please select your marital status.'
+
+            };
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * DEPENDENTS
+         *
+         * IMPORTANT:
+         * "0" is a valid mandatory selection.
+         * ------------------------------------------------------------------ */
+
+
+        if (
+            kyc.dependents === ''
+        ) {
+
+            const element =
+                getElement('dependents');
+
+
+            markInvalid(element);
+
+
+            return {
+
+                valid:
+                    false,
+
+                element:
+                    element,
+
+                message:
+                    'Please select the number of dependents.'
+
+            };
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * CITY
+         * ------------------------------------------------------------------ */
+
+
+        if (
+            kyc.city.length < 2
+        ) {
+
+            const element =
+                getElement('city');
+
+
+            markInvalid(element);
+
+
+            return {
+
+                valid:
+                    false,
+
+                element:
+                    element,
+
+                message:
+                    'Please enter your city.'
+
+            };
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * DISTRICT
+         * ------------------------------------------------------------------ */
+
+
+        if (
+            kyc.district.length < 2
+        ) {
+
+            const element =
+                getElement('district');
+
+
+            markInvalid(element);
+
+
+            return {
+
+                valid:
+                    false,
+
+                element:
+                    element,
+
+                message:
+                    'Please enter your district.'
+
+            };
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * STATE
+         * ------------------------------------------------------------------ */
+
+
+        if (
+            kyc.state.length < 2
+        ) {
+
+            const element =
+                getElement('state');
+
+
+            markInvalid(element);
+
+
+            return {
+
+                valid:
+                    false,
+
+                element:
+                    element,
+
+                message:
+                    'Please enter your state.'
+
+            };
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * COUNTRY
+         * ------------------------------------------------------------------ */
+
+
+        if (
+            !kyc.country
+        ) {
+
+            const element =
+                getElement('country');
+
+
+            markInvalid(element);
+
+
+            return {
+
+                valid:
+                    false,
+
+                element:
+                    element,
+
+                message:
+                    'Please select your country.'
+
+            };
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * PINCODE
+         *
+         * Current Page 02A country selector defaults to India.
+         * India therefore requires a six-digit pincode.
+         * ------------------------------------------------------------------ */
+
+
+        if (
+            kyc.country === 'India' &&
+            !/^[0-9]{6}$/.test(
+                kyc.pincode
+            )
+        ) {
+
+            const element =
+                getElement('pincode');
+
+
+            markInvalid(element);
+
+
+            return {
+
+                valid:
+                    false,
+
+                element:
+                    element,
+
+                message:
+                    'Please enter a valid 6-digit pincode.'
+
+            };
 
         }
 
 
         if (
-            report.Page02Data &&
-            !report.firstDimension
+            kyc.country !== 'India' &&
+            !kyc.pincode
         ) {
 
-            missing.push(
-                'Page02Data:' +
-                CONFIG.firstDimension
-            );
+            const element =
+                getElement('pincode');
+
+
+            markInvalid(element);
+
+
+            return {
+
+                valid:
+                    false,
+
+                element:
+                    element,
+
+                message:
+                    'Please enter your postal code.'
+
+            };
 
         }
 
 
-        if (missing.length) {
+        /* ---------------------------------------------------------------------
+         * PREFERRED LANGUAGE
+         * ------------------------------------------------------------------ */
 
-            console.error(
-                'CTM PATH™ Page 02A journey dependencies unavailable:',
-                missing
+
+        if (
+            !kyc.preferredLanguage
+        ) {
+
+            const element =
+                document.querySelector(
+                    'input[name="preferredLanguage"]'
+                );
+
+
+            return {
+
+                valid:
+                    false,
+
+                element:
+                    element,
+
+                message:
+                    'Please select your preferred language.'
+
+            };
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * SOURCE
+         * ------------------------------------------------------------------ */
+
+
+        if (
+            !kyc.source
+        ) {
+
+            const element =
+                getElement('source');
+
+
+            markInvalid(element);
+
+
+            return {
+
+                valid:
+                    false,
+
+                element:
+                    element,
+
+                message:
+                    'Please tell us how you heard about CTM PATH MILLIONAIRES.'
+
+            };
+
+        }
+
+
+        return {
+
+            valid:
+                true,
+
+            element:
+                null,
+
+            message:
+                ''
+
+        };
+
+    }
+
+
+    /* =========================================================================
+     * NORMALIZE MOBILE FOR BACKEND
+     * ========================================================================= */
+
+
+    function normalizeMobile(value) {
+
+        return cleanString(value)
+            .replace(
+                /\s+/g,
+                ''
             );
 
+    }
+
+
+    /* =========================================================================
+     * BUILD REGISTRATION PAYLOAD
+     *
+     * IMPORTANT
+     *
+     * The expanded KYC fields are included here.
+     *
+     * api.js / backend must subsequently be verified to ensure these fields
+     * are forwarded to Google Apps Script and written to Google Sheets.
+     * ========================================================================= */
+
+
+    function buildRegistrationPayload(kyc) {
+
+        return {
+
+            /* -----------------------------------------------------------------
+             * CANONICAL CORE REGISTRATION FIELDS
+             * ----------------------------------------------------------------- */
+
+            fullName:
+                kyc.fullName,
+
+            mobile:
+                normalizeMobile(
+                    kyc.mobile
+                ),
+
+            email:
+                kyc.email,
+
+            city:
+                kyc.city,
+
+            district:
+                kyc.district,
+
+            state:
+                kyc.state,
+
+            pincode:
+                kyc.pincode,
+
+            source:
+                kyc.source,
+
+
+            /* -----------------------------------------------------------------
+             * EXPANDED PAGE 02A KYC
+             * ----------------------------------------------------------------- */
+
+            age:
+                Number(
+                    kyc.age
+                ),
+
+            gender:
+                kyc.gender,
+
+            occupation:
+                kyc.occupation,
+
+            employerBusiness:
+                kyc.employerBusiness,
+
+            maritalStatus:
+                kyc.maritalStatus,
+
+            dependents:
+                kyc.dependents,
+
+            country:
+                kyc.country,
+
+            preferredLanguage:
+                kyc.preferredLanguage,
+
+
+            /* -----------------------------------------------------------------
+             * JOURNEY METADATA
+             * ----------------------------------------------------------------- */
+
+            language:
+                kyc.preferredLanguage,
+
+            page:
+                2,
+
+            journey:
+                'Millionaire Lifestyle Scorecard™',
+
+            device:
+                getDeviceType()
+
+        };
+
+    }
+
+
+    /* =========================================================================
+     * DEVICE TYPE
+     * ========================================================================= */
+
+
+    function getDeviceType() {
+
+        const width =
+            window.innerWidth ||
+            document.documentElement.clientWidth ||
+            0;
+
+
+        if (
+            width <= 767
+        ) {
+
+            return 'mobile';
+
+        }
+
+
+        if (
+            width <= 1100
+        ) {
+
+            return 'tablet';
+
+        }
+
+
+        return 'desktop';
+
+    }
+
+
+    /* =========================================================================
+     * SUBMIT STATE
+     * ========================================================================= */
+
+
+    function setSubmitting(isSubmitting) {
+
+        PAGE02A.submitting =
+            Boolean(
+                isSubmitting
+            );
+
+
+        if (
+            !DOM.submitButton
+        ) {
+
+            return;
+
+        }
+
+
+        DOM.submitButton.disabled =
+            PAGE02A.submitting;
+
+
+        DOM.submitButton.setAttribute(
+            'aria-busy',
+            PAGE02A.submitting
+                ? 'true'
+                : 'false'
+        );
+
+
+        const primary =
+            DOM.submitButton.querySelector(
+                '.button-primary'
+            );
+
+
+        const secondary =
+            DOM.submitButton.querySelector(
+                '.button-secondary'
+            );
+
+
+        if (
+            PAGE02A.submitting
+        ) {
+
+            if (
+                primary
+            ) {
+
+                primary.textContent =
+                    'பதிவு செய்கிறோம்...';
+
+            }
+
+
+            if (
+                secondary
+            ) {
+
+                secondary.textContent =
+                    'CREATING YOUR SCORECARD...';
+
+            }
+
+        }
+        else {
+
+            if (
+                primary
+            ) {
+
+                primary.textContent =
+                    'என் Scorecard™-ஐ தொடங்குகிறேன்';
+
+            }
+
+
+            if (
+                secondary
+            ) {
+
+                secondary.textContent =
+                    'BEGIN MY SCORECARD™';
+
+            }
+
+        }
+
+    }
+
+
+    /* =========================================================================
+     * API RESPONSE HELPERS
+     * ========================================================================= */
+
+
+    function firstValue() {
+
+        for (
+            let index = 0;
+            index < arguments.length;
+            index += 1
+        ) {
+
+            const value =
+                arguments[index];
+
+
+            if (
+                value !== undefined &&
+                value !== null &&
+                value !== ''
+            ) {
+
+                return value;
+
+            }
+
+        }
+
+
+        return null;
+
+    }
+
+
+    function getResponseData(response) {
+
+        if (
+            response &&
+            response.data &&
+            typeof response.data === 'object'
+        ) {
+
+            return response.data;
+
+        }
+
+
+        if (
+            response &&
+            response.result &&
+            typeof response.result === 'object'
+        ) {
+
+            return response.result;
+
+        }
+
+
+        return (
+            response &&
+            typeof response === 'object'
+        )
+            ? response
+            : {};
+
+    }
+
+
+    function responseIndicatesFailure(response) {
+
+        if (
+            response === false ||
+            response === null ||
+            response === undefined
+        ) {
+
+            return true;
+
+        }
+
+
+        if (
+            typeof response !== 'object'
+        ) {
 
             return false;
 
         }
 
 
-        return true;
+        if (
+            response.success === false ||
+            response.ok === false
+        ) {
+
+            return true;
+
+        }
+
+
+        const data =
+            getResponseData(
+                response
+            );
+
+
+        if (
+            data.success === false ||
+            data.ok === false
+        ) {
+
+            return true;
+
+        }
+
+
+        return false;
+
+    }
+
+
+    function getResponseError(response) {
+
+        const data =
+            getResponseData(
+                response
+            );
+
+
+        return cleanString(
+
+            firstValue(
+
+                response &&
+                response.message,
+
+                response &&
+                response.error,
+
+                data &&
+                data.message,
+
+                data &&
+                data.error
+
+            )
+
+        );
 
     }
 
 
     /* =========================================================================
-     * INITIAL SCREEN STATE
-     * =========================================================================
-     */
+     * EXTRACT REGISTERED CLIENT
+     *
+     * Tolerates the common backend response shapes while still requiring
+     * an actual backend-generated identity before Page 02B navigation.
+     * ========================================================================= */
 
 
-    function initializeScreens() {
+    function extractClient(
+        response,
+        kyc
+    ) {
 
-        const introScreen =
-            getElement(
-                DOM_IDS.introScreen
+        const data =
+            getResponseData(
+                response
             );
 
 
-        const kycScreen =
-            getElement(
-                DOM_IDS.kycScreen
+        const clientObject =
+
+            (
+                data.client &&
+                typeof data.client === 'object'
+            )
+                ? data.client
+                : {};
+
+
+        const responseClient =
+
+            (
+                response &&
+                response.client &&
+                typeof response.client === 'object'
+            )
+                ? response.client
+                : {};
+
+
+        const peopleId =
+            firstValue(
+
+                clientObject.peopleId,
+
+                responseClient.peopleId,
+
+                data.peopleId,
+
+                data.peopleID,
+
+                data.personId,
+
+                data.id,
+
+                response &&
+                response.peopleId,
+
+                response &&
+                response.peopleID,
+
+                response &&
+                response.personId
+
             );
 
 
-        if (introScreen) {
+        const clientId =
+            firstValue(
 
-            showElement(
-                introScreen
+                clientObject.clientId,
+
+                responseClient.clientId,
+
+                data.clientId,
+
+                data.clientID,
+
+                response &&
+                response.clientId,
+
+                response &&
+                response.clientID
+
+            );
+
+
+        const fullName =
+            firstValue(
+
+                clientObject.fullName,
+
+                responseClient.fullName,
+
+                data.fullName,
+
+                response &&
+                response.fullName,
+
+                kyc.fullName
+
+            );
+
+
+        return {
+
+            peopleId:
+                peopleId
+                    ? cleanString(peopleId)
+                    : null,
+
+            clientId:
+                clientId
+                    ? cleanString(clientId)
+                    : null,
+
+            fullName:
+                cleanString(
+                    fullName
+                )
+
+        };
+
+    }
+
+
+    /* =========================================================================
+     * VERIFY REGISTERED IDENTITY
+     * ========================================================================= */
+
+
+    function hasBackendIdentity(client) {
+
+        return Boolean(
+
+            client &&
+
+            (
+                client.peopleId ||
+                client.clientId
+            )
+
+        );
+
+    }
+
+
+    /* =========================================================================
+     * REGISTER CLIENT
+     * ========================================================================= */
+
+
+    async function registerClient(payload) {
+
+        if (
+            !hasRegistrationApi()
+        ) {
+
+            throw new Error(
+                'CTM PATH™ registration service is unavailable.'
             );
 
         }
 
 
-        if (kycScreen) {
+        /*
+         * Promise.resolve() supports both:
+         *
+         *      CTM_API.register() → Promise
+         *
+         * and
+         *
+         *      CTM_API.register() → immediate value
+         */
 
-            hideElement(
-                kycScreen
+
+        return await Promise.resolve(
+
+            window.CTM_API.register(
+                payload
+            )
+
+        );
+
+    }
+
+
+    /* =========================================================================
+     * PRESERVE KYC
+     * ========================================================================= */
+
+
+    function preserveKyc(kyc) {
+
+        if (
+            !hasSessionApi()
+        ) {
+
+            throw new Error(
+                'CTM PATH™ Page 02 session is unavailable.'
             );
 
         }
+
+
+        window.Page02Session.setKyc(
+            kyc
+        );
+
+    }
+
+
+    /* =========================================================================
+     * PRESERVE REGISTERED CLIENT
+     * ========================================================================= */
+
+
+    function preserveClient(client) {
+
+        if (
+            !hasSessionApi()
+        ) {
+
+            throw new Error(
+                'CTM PATH™ Page 02 session is unavailable.'
+            );
+
+        }
+
+
+        window.Page02Session.setClient({
+
+            peopleId:
+                client.peopleId,
+
+            clientId:
+                client.clientId,
+
+            fullName:
+                client.fullName
+
+        });
+
+
+        /*
+         * Page02Session.setClient() itself determines registered status
+         * from peopleId/clientId and preserves the legacy identity keys.
+         */
+
+    }
+
+
+    /* =========================================================================
+     * ACTIVATE DIMENSION 01
+     * ========================================================================= */
+
+
+    function activateFirstDimension() {
+
+        if (
+            !hasSessionApi()
+        ) {
+
+            throw new Error(
+                'CTM PATH™ Page 02 session is unavailable.'
+            );
+
+        }
+
+
+        const activated =
+            window.Page02Session
+                .setCurrentDimension(
+                    PAGE02A.firstDimension
+                );
+
+
+        if (
+            activated !== true
+        ) {
+
+            throw new Error(
+                'Unable to initialize Dimension 01.'
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================================
+     * NAVIGATE TO PAGE 02B
+     * ========================================================================= */
+
+
+    function goToPage02b() {
+
+        window.location.href =
+            PAGE02A.nextPage;
+
+    }
+
+
+    /* =========================================================================
+     * BEGIN BUTTON
+     * ========================================================================= */
+
+
+    function handleBeginClick(event) {
+
+        if (
+            event
+        ) {
+
+            event.preventDefault();
+
+        }
+
+
+        showKyc();
+
+
+        /*
+         * Restore after screen reveal so browsers can correctly focus
+         * controls if necessary.
+         */
+
+
+        restoreKyc();
+
+    }
+
+
+    /* =========================================================================
+     * KYC SUBMIT
+     * ========================================================================= */
+
+
+    async function handleKycSubmit(event) {
+
+        event.preventDefault();
+
+
+        if (
+            PAGE02A.submitting
+        ) {
+
+            return;
+
+        }
+
+
+        clearFeedback();
+
+
+        /* ---------------------------------------------------------------------
+         * CHECK SHARED SESSION
+         * ------------------------------------------------------------------ */
+
+
+        if (
+            !hasSessionApi()
+        ) {
+
+            console.error(
+                'CTM PATH™ Page 02A cannot find Page02Session.',
+                window.Page02Session
+            );
+
+
+            showError(
+                'CTM PATH™ session could not be started. Please refresh the page and try again.'
+            );
+
+
+            return;
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * CHECK REGISTRATION API
+         * ------------------------------------------------------------------ */
+
+
+        if (
+            !hasRegistrationApi()
+        ) {
+
+            console.error(
+                'CTM PATH™ Page 02A cannot find CTM_API.register().',
+                window.CTM_API
+            );
+
+
+            showError(
+                'Registration service is temporarily unavailable. Please refresh the page and try again.'
+            );
+
+
+            return;
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * READ
+         * ------------------------------------------------------------------ */
+
+
+        const kyc =
+            readKyc();
+
+
+        /* ---------------------------------------------------------------------
+         * VALIDATE
+         * ------------------------------------------------------------------ */
+
+
+        const validation =
+            validateKyc(
+                kyc
+            );
+
+
+        if (
+            !validation.valid
+        ) {
+
+            showError(
+                validation.message
+            );
+
+
+            focusField(
+                validation.element
+            );
+
+
+            return;
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * PRESERVE BEFORE NETWORK REQUEST
+         *
+         * This prevents loss of completed form data if the backend request
+         * fails. It does NOT mark the client registered.
+         * ------------------------------------------------------------------ */
+
+
+        try {
+
+            preserveKyc(
+                kyc
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                'CTM PATH™ Page 02A could not preserve KYC:',
+                error
+            );
+
+
+            showError(
+                'Your details could not be saved in this session. Please refresh the page and try again.'
+            );
+
+
+            return;
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * BUILD BACKEND PAYLOAD
+         * ------------------------------------------------------------------ */
+
+
+        const payload =
+            buildRegistrationPayload(
+                kyc
+            );
+
+
+        /* ---------------------------------------------------------------------
+         * REGISTER
+         * ------------------------------------------------------------------ */
+
+
+        setSubmitting(
+            true
+        );
+
+
+        try {
+
+            const response =
+                await registerClient(
+                    payload
+                );
+
+
+            console.info(
+                'CTM PATH™ Page 02A registration response:',
+                response
+            );
+
+
+            /* -----------------------------------------------------------------
+             * EXPLICIT BACKEND FAILURE
+             * -------------------------------------------------------------- */
+
+
+            if (
+                responseIndicatesFailure(
+                    response
+                )
+            ) {
+
+                throw new Error(
+
+                    getResponseError(
+                        response
+                    ) ||
+
+                    'Registration could not be completed.'
+
+                );
+
+            }
+
+
+            /* -----------------------------------------------------------------
+             * EXTRACT BACKEND IDENTITY
+             * -------------------------------------------------------------- */
+
+
+            const client =
+                extractClient(
+                    response,
+                    kyc
+                );
+
+
+            /* -----------------------------------------------------------------
+             * REQUIRE ACTUAL BACKEND ID
+             *
+             * This is the safety gate preventing Page 02B from opening merely
+             * because an HTTP/API call returned something truthy.
+             * -------------------------------------------------------------- */
+
+
+            if (
+                !hasBackendIdentity(
+                    client
+                )
+            ) {
+
+                console.error(
+                    'CTM PATH™ registration returned no client identity:',
+                    response
+                );
+
+
+                throw new Error(
+                    'Registration completed without a client ID. Please try again.'
+                );
+
+            }
+
+
+            /* -----------------------------------------------------------------
+             * PRESERVE REGISTERED IDENTITY
+             * -------------------------------------------------------------- */
+
+
+            preserveClient(
+                client
+            );
+
+
+            /* -----------------------------------------------------------------
+             * PRESERVE KYC AGAIN
+             *
+             * Ensures final normalized KYC and registered identity coexist in
+             * the same Page02Session before navigation.
+             * -------------------------------------------------------------- */
+
+
+            preserveKyc(
+                kyc
+            );
+
+
+            /* -----------------------------------------------------------------
+             * ACTIVATE DIMENSION 01
+             * -------------------------------------------------------------- */
+
+
+            activateFirstDimension();
+
+
+            /* -----------------------------------------------------------------
+             * FINAL SESSION VERIFICATION
+             * -------------------------------------------------------------- */
+
+
+            if (
+                typeof window.Page02Session.hasRegisteredClient ===
+                    'function' &&
+                !window.Page02Session.hasRegisteredClient()
+            ) {
+
+                throw new Error(
+                    'Registered client identity could not be preserved.'
+                );
+
+            }
+
+
+            /* -----------------------------------------------------------------
+             * SUCCESS
+             * -------------------------------------------------------------- */
+
+
+            showSuccess(
+                'Your details have been registered. Opening your Scorecard™...'
+            );
+
+
+            /*
+             * Short delay lets the success state render and guarantees the
+             * sessionStorage writes have completed before the next document
+             * starts loading.
+             */
+
+
+            window.setTimeout(
+                function () {
+
+                    goToPage02b();
+
+                },
+                260
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                'CTM PATH™ Page 02A registration failed:',
+                error
+            );
+
+
+            showError(
+
+                cleanString(
+                    error &&
+                    error.message
+                ) ||
+
+                'We could not register your details. Please try again.'
+
+            );
+
+
+            setSubmitting(
+                false
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================================
+     * LIVE FIELD CLEANUP
+     * ========================================================================= */
+
+
+    function handleFieldInput(event) {
+
+        const target =
+            event.target;
+
+
+        if (
+            target &&
+            target.hasAttribute &&
+            target.hasAttribute(
+                'aria-invalid'
+            )
+        ) {
+
+            target.removeAttribute(
+                'aria-invalid'
+            );
+
+        }
+
+
+        if (
+            DOM.error &&
+            !DOM.error.hidden
+        ) {
+
+            DOM.error.hidden =
+                true;
+
+        }
+
+    }
+
+
+    /* =========================================================================
+     * MOBILE INPUT NORMALIZATION
+     * ========================================================================= */
+
+
+    function normalizeMobileInput() {
+
+        const element =
+            getElement('mobile');
+
+
+        if (
+            !element
+        ) {
+
+            return;
+
+        }
+
+
+        /*
+         * Keep:
+         *
+         *      digits
+         *      spaces
+         *      +
+         *      -
+         *      parentheses
+         *
+         * Backend normalization happens at submission.
+         */
+
+
+        element.value =
+            element.value.replace(
+                /[^0-9+\-()\s]/g,
+                ''
+            );
+
+    }
+
+
+    /* =========================================================================
+     * PINCODE INPUT NORMALIZATION
+     * ========================================================================= */
+
+
+    function normalizePincodeInput() {
+
+        const country =
+            cleanString(
+                getElement('country').value
+            );
+
+
+        const element =
+            getElement('pincode');
+
+
+        if (
+            !element
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            country === 'India'
+        ) {
+
+            element.value =
+                element.value
+                    .replace(
+                        /\D/g,
+                        ''
+                    )
+                    .slice(
+                        0,
+                        6
+                    );
+
+        }
+
+    }
+
+
+    /* =========================================================================
+     * EVENT BINDING
+     * ========================================================================= */
+
+
+    function bindEvents() {
+
+        DOM.beginButton.addEventListener(
+            'click',
+            handleBeginClick
+        );
+
+
+        DOM.kycForm.addEventListener(
+            'submit',
+            handleKycSubmit
+        );
+
+
+        DOM.kycForm.addEventListener(
+            'input',
+            handleFieldInput
+        );
+
+
+        DOM.kycForm.addEventListener(
+            'change',
+            handleFieldInput
+        );
+
+
+        const mobile =
+            getElement('mobile');
+
+
+        if (
+            mobile
+        ) {
+
+            mobile.addEventListener(
+                'input',
+                normalizeMobileInput
+            );
+
+        }
+
+
+        const pincode =
+            getElement('pincode');
+
+
+        if (
+            pincode
+        ) {
+
+            pincode.addEventListener(
+                'input',
+                normalizePincodeInput
+            );
+
+        }
+
+
+        const country =
+            getElement('country');
+
+
+        if (
+            country
+        ) {
+
+            country.addEventListener(
+                'change',
+                normalizePincodeInput
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================================
+     * RESTORE JOURNEY STATE
+     * ========================================================================= */
+
+
+    function restoreJourneyState() {
+
+        if (
+            !hasSessionApi()
+        ) {
+
+            /*
+             * Do not kill Page 02A during initialization.
+             *
+             * The visitor can still see the intro. Submission will perform
+             * the strict dependency check and display a useful error.
+             */
+
+
+            console.error(
+                'CTM PATH™ Page 02A initialized without Page02Session.'
+            );
+
+
+            showIntro();
+
+
+            return;
+
+        }
+
+
+        restoreKyc();
+
+
+        /*
+         * If a registered client already exists, the visitor may have returned
+         * to Page 02A using browser navigation.
+         *
+         * We intentionally DO NOT auto-forward them. Page 02A remains stable
+         * and their KYC is restored.
+         */
+
+
+        showIntro();
 
     }
 
 
     /* =========================================================================
      * INITIALIZE
-     * =========================================================================
-     */
+     * ========================================================================= */
 
 
-    function init() {
+    function initialize() {
 
-        if (initialized) {
-
-            return;
-
-        }
+        cacheDom();
 
 
-        console.info(
-            'CTM PATH™ Page 02A initializing...'
-        );
-
-
-        /*
-         * ---------------------------------------------------------------------
-         * 1. DOM FIRST
-         *
-         * Page interaction must be established before checking network/business
-         * dependencies.
-         *
-         * This prevents a missing backend dependency from leaving LET'S BEGIN
-         * visibly present but completely dead.
-         * ---------------------------------------------------------------------
-         */
-
-
-        if (!verifyDomContract()) {
-
-            console.error(
-                'CTM PATH™ Page 02A cannot initialize because its DOM contract is incomplete.'
-            );
-
+        if (
+            !validateDomContract()
+        ) {
 
             return;
 
         }
 
 
-        initializeScreens();
+        bindEvents();
 
 
-        /*
-         * ---------------------------------------------------------------------
-         * 2. BIND INTRO IMMEDIATELY
-         * ---------------------------------------------------------------------
-         */
-
-
-        bindIntro();
-
-
-        /*
-         * ---------------------------------------------------------------------
-         * 3. BIND FORM
-         * ---------------------------------------------------------------------
-         */
-
-
-        bindForm();
-
-
-        /*
-         * ---------------------------------------------------------------------
-         * 4. OPTIONAL SESSION RESTORATION
-         *
-         * Session restoration is useful but must not prevent the user from
-         * entering KYC.
-         * ---------------------------------------------------------------------
-         */
-
-
-        try {
-
-            restoreKyc();
-
-        }
-        catch (error) {
-
-            console.warn(
-                'CTM PATH™ Page 02A KYC restore skipped:',
-                error
-            );
-
-        }
-
-
-        /*
-         * ---------------------------------------------------------------------
-         * 5. OPTIONAL DRAFT PERSISTENCE
-         * ---------------------------------------------------------------------
-         */
-
-
-        try {
-
-            preserveFormDraft();
-
-        }
-        catch (error) {
-
-            console.warn(
-                'CTM PATH™ Page 02A draft persistence unavailable:',
-                error
-            );
-
-        }
-
-
-        /*
-         * ---------------------------------------------------------------------
-         * 6. REPORT JOURNEY DEPENDENCIES
-         *
-         * IMPORTANT:
-         *
-         * Missing backend/session dependencies do NOT disable Intro → KYC.
-         *
-         * They are enforced at the point where submission actually requires
-         * them.
-         * ---------------------------------------------------------------------
-         */
-
-
-        const journeyReady =
-            verifyJourneyDependencies();
-
-
-        if (!journeyReady) {
-
-            console.warn(
-                'CTM PATH™ Page 02A UI is active, but registration dependencies are incomplete.'
-            );
-
-        }
-
-
-        clearMessages();
-
-
-        initialized =
-            true;
-
-
-        let summary =
-            null;
-
-
-        try {
-
-            if (
-                window.Page02Session &&
-                typeof window.Page02Session.getSummary ===
-                    'function'
-            ) {
-
-                summary =
-                    window.Page02Session.getSummary();
-
-            }
-
-        }
-        catch (error) {
-
-            console.warn(
-                'CTM PATH™ Page 02A session summary unavailable.',
-                error
-            );
-
-        }
+        restoreJourneyState();
 
 
         console.info(
             'CTM PATH™ Page 02A ready.',
             {
-                journeyReady:
-                    journeyReady,
 
-                dependencies:
-                    getDependencyReport(),
+                version:
+                    PAGE02A.version,
 
                 session:
-                    summary
+                    hasSessionApi(),
+
+                registrationApi:
+                    hasRegistrationApi(),
+
+                nextPage:
+                    PAGE02A.nextPage,
+
+                firstDimension:
+                    PAGE02A.firstDimension
+
             }
         );
 
@@ -2483,8 +2926,7 @@
 
     /* =========================================================================
      * DOM READY
-     * =========================================================================
-     */
+     * ========================================================================= */
 
 
     if (
@@ -2494,137 +2936,67 @@
 
         document.addEventListener(
             'DOMContentLoaded',
-            init,
+            initialize,
             {
-                once: true
+                once:
+                    true
             }
         );
 
     }
     else {
 
-        init();
+        initialize();
 
     }
 
 
     /* =========================================================================
-     * PUBLIC PAGE CONTROLLER
+     * OPTIONAL DEBUG EXPOSURE
      *
-     * Browser QA helpers:
-     *
-     *      Page02A.getStatus()
-     *      Page02A.openKyc()
-     *      Page02A.buildKyc()
-     *      Page02A.validateKyc(...)
-     *      Page02A.goNext()
-     * =========================================================================
-     */
+     * Useful during Page 02A QA.
+     * ========================================================================= */
 
 
     window.Page02A = {
 
         version:
-            '3.1',
+            PAGE02A.version,
 
-        init:
-            init,
-
-        openKyc:
-            openKyc,
-
-        buildKyc:
-            buildKyc,
+        readKyc:
+            readKyc,
 
         validateKyc:
-            validateKyc,
-
-        submit:
-            handleKycSubmit,
-
-        goNext:
-            goToDimensionOne,
-
-        getStatus:
             function () {
 
-                return {
+                return validateKyc(
+                    readKyc()
+                );
 
-                    initialized:
-                        initialized,
+            },
 
-                    introBound:
-                        introBound,
+        buildRegistrationPayload:
+            function () {
 
-                    formBound:
-                        formBound,
+                return buildRegistrationPayload(
+                    readKyc()
+                );
 
-                    draftPersistenceBound:
-                        draftPersistenceBound,
+            },
 
-                    submitting:
-                        isSubmitting,
+        hasSessionApi:
+            hasSessionApi,
 
-                    dependencies:
-                        getDependencyReport(),
+        hasRegistrationApi:
+            hasRegistrationApi,
 
-                    destination:
-                        CONFIG.nextPage,
+        showIntro:
+            showIntro,
 
-                    firstDimension:
-                        CONFIG.firstDimension
-
-                };
-
-            }
+        showKyc:
+            showKyc
 
     };
-
-
-    /* =========================================================================
-     * END
-     * =========================================================================
-     *
-     * REQUIRED SCRIPT ORDER IN pages/page02a.html:
-     *
-     *      <script src="../js/component-loader.js"></script>
-     *
-     *      [CTM_COMPONENTS.load()]
-     *
-     *      <script src="../js/global.js"></script>
-     *
-     *      <script src="../js/api.js"></script>
-     *
-     *      <script src="../js/page02/page02-data.js"></script>
-     *
-     *      <script src="../js/page02/page02-session.js"></script>
-     *
-     *      <script src="../js/page02/page02a.js"></script>
-     *
-     * -------------------------------------------------------------------------
-     *
-     * PAGE 02A JOURNEY:
-     *
-     *      INTRO
-     *        ↓
-     *      LET'S BEGIN
-     *        ↓
-     *      KYC
-     *        ↓
-     *      VALIDATION
-     *        ↓
-     *      CTM_API.register()
-     *        ↓
-     *      Page02Session.setClient()
-     *        ↓
-     *      Page02Session.setKyc()
-     *        ↓
-     *      Page02Session.setCurrentDimension('wealth')
-     *        ↓
-     *      page02b.html
-     *
-     * =========================================================================
-     */
 
 
 })(window, document);
