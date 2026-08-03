@@ -3,7 +3,7 @@
    CTM PATH™ MILLIONAIRES™
 
    File      : component-loader.js
-   Version   : 3.0
+   Version   : 3.1
    Status    : PRODUCTION
 
    Architecture:
@@ -22,6 +22,7 @@
    ✓ Load Global Header
    ✓ Load Global Footer
    ✓ Inject Shared Components
+   ✓ Load Component Stylesheets
    ✓ Load Header Controller
    ✓ Resolve component paths from site root
    ✓ Support Pages 02–07 consistently
@@ -44,29 +45,7 @@
 
     /* ======================================================================
        ROOT PATHS
-       ======================================================================
-
-       IMPORTANT:
-
-       Pages 02–07 live inside:
-
-           /pages/
-
-       Therefore paths such as:
-
-           components/header.html
-
-       would resolve as:
-
-           /pages/components/header.html
-
-       which is incorrect.
-
-       Root-relative paths guarantee that every journey page loads
-       the canonical global components from the project root.
-
        ====================================================================== */
-
 
     const COMPONENT_PATH = {
 
@@ -79,12 +58,109 @@
     };
 
 
+    const STYLE_PATH = {
+
+        header:
+            "/css/header.css"
+
+    };
+
+
     const SCRIPT_PATH = {
 
         header:
             "/js/header.js"
 
     };
+
+
+    /* ======================================================================
+       LOAD STYLESHEET
+       ====================================================================== */
+
+
+    function loadStyle(file) {
+
+        return new Promise(
+            function (resolve, reject) {
+
+
+                /*
+                 * Prevent duplicate stylesheet loading.
+                 */
+
+                const existing =
+                    document.querySelector(
+                        'link[href="' + file + '"]'
+                    );
+
+
+                if (existing) {
+
+                    resolve(true);
+
+                    return;
+
+                }
+
+
+                const link =
+                    document.createElement(
+                        "link"
+                    );
+
+
+                link.rel =
+                    "stylesheet";
+
+
+                link.href =
+                    file;
+
+
+                link.onload =
+                    function () {
+
+                        console.log(
+                            "CTM Stylesheet loaded:",
+                            file
+                        );
+
+                        resolve(true);
+
+                    };
+
+
+                link.onerror =
+                    function () {
+
+                        const error =
+                            new Error(
+                                "Stylesheet loading failed: " +
+                                file
+                            );
+
+
+                        console.error(
+                            error
+                        );
+
+
+                        reject(
+                            error
+                        );
+
+                    };
+
+
+                document.head.appendChild(
+                    link
+                );
+
+            }
+        );
+
+    }
 
 
     /* ======================================================================
@@ -119,7 +195,8 @@
                 await fetch(
                     file,
                     {
-                        cache: "no-cache"
+                        cache:
+                            "no-cache"
                     }
                 );
 
@@ -267,25 +344,49 @@
 
     async function loadHeader() {
 
-        const loaded =
-            await loadComponent(
-                "#global-header",
-                COMPONENT_PATH.header
+        try {
+
+
+            /*
+             * STEP 1
+             *
+             * Load canonical header stylesheet first.
+             *
+             * This guarantees that when header.html is injected,
+             * its layout is immediately governed by header.css.
+             */
+
+            await loadStyle(
+                STYLE_PATH.header
             );
 
 
-        if (!loaded) {
+            /*
+             * STEP 2
+             *
+             * Inject header component.
+             */
 
-            return false;
+            const loaded =
+                await loadComponent(
+                    "#global-header",
+                    COMPONENT_PATH.header
+                );
 
-        }
+
+            if (!loaded) {
+
+                return false;
+
+            }
 
 
-        /*
-         * Header HTML must exist before header.js executes.
-         */
-
-        try {
+            /*
+             * STEP 3
+             *
+             * Header HTML must exist before
+             * header.js executes.
+             */
 
             await loadScript(
                 SCRIPT_PATH.header
@@ -300,7 +401,7 @@
         catch (error) {
 
             console.error(
-                "CTM Header controller failed:",
+                "CTM Header loading failed:",
                 error
             );
 
@@ -382,6 +483,7 @@
 
         }
 
+
         else {
 
             console.warn(
@@ -422,7 +524,7 @@
     window.CTM_COMPONENTS = {
 
         version:
-            "3.0",
+            "3.1",
 
         load:
             loadGlobalComponents,
@@ -437,4 +539,3 @@
 
 
 })();
-
