@@ -1,5 +1,4 @@
 
-
 /* ==========================================================================
    CTM PATH™ MILLIONAIRES™
 
@@ -7,98 +6,113 @@
    page02.css
 
    VERSION:
-   11.1
-
-   PAGE:
-   PAGE 02 — MILLIONAIRE LIFESTYLE SCORECARD™
+   2.1
 
    STATUS:
-   PRODUCTION / EXACT DOM MAPPING
+   PRODUCTION CANDIDATE
+
+   PAGE:
+   PAGE 02 — MIDDLE CLASS → MILLIONAIRE
+   LIFESTYLE SCORECARD™
 
    ARCHITECTURE:
 
    ✓ Intro Screen
-   ✓ ABOUT YOU™ KYC
-   ✓ 25-Indicator Scorecard
+   ✓ ABOUT YOU™ / KYC
+   ✓ 25 Indicator Scorecard
    ✓ 5 Dimensions
-   ✓ Four Range Options Per Indicator
-   ✓ 4 × 1 Desktop Option Grid
-   ✓ 2 × 2 Tablet Option Grid
-   ✓ 1 × 4 Mobile Option Stack
-   ✓ Score Reveal
-   ✓ Page 03 Transition
-   ✓ Loading State
+   ✓ Four Option Score Architecture
+   ✓ Live Score Presentation
+   ✓ Scoring Explanation
+   ✓ Result Reveal
+   ✓ Mobile Responsive
+   ✓ Premium Touch Targets
+   ✓ CTM PATH™ Navigation Language
 
    IMPORTANT:
 
-   This stylesheet controls ONLY Page 02.
+   This stylesheet controls PAGE 02 only.
 
    It does NOT control:
 
    ✗ Global Header
    ✗ Global Footer
-   ✗ Global Component Loader
-   ✗ JavaScript Scoring Logic
+   ✗ API Logic
+   ✗ Score Calculation
+   ✗ Page Routing
+   ✗ Component Loading
 
 ========================================================================== */
 
 
 /* ==========================================================================
-   PAGE TOKENS
+   PAGE 02 DESIGN TOKENS
 ========================================================================== */
 
-:root {
+.page02 {
 
     --p02-navy:
-        #071a31;
+        #081426;
+
+    --p02-navy-soft:
+        #0b1c31;
+
+    --p02-navy-card:
+        #07182b;
+
+    --p02-navy-card-hover:
+        #0c2239;
 
     --p02-navy-deep:
-        #04111f;
-
-    --p02-panel:
-        rgba(7, 18, 31, 0.72);
-
-    --p02-panel-soft:
-        rgba(255, 255, 255, 0.025);
-
-    --p02-panel-hover:
-        rgba(255, 255, 255, 0.055);
+        #05111f;
 
     --p02-ivory:
-        #f5f0e6;
+        #f7f3e8;
 
     --p02-ivory-soft:
-        #ddd6c8;
+        #ded8c8;
 
     --p02-muted:
-        #a9b0b8;
+        #aeb7c2;
 
     --p02-gold:
-        #ddb64e;
+        #e3b84f;
 
-    --p02-gold-light:
-        #edcc73;
+    --p02-gold-soft:
+        #c99a35;
 
     --p02-teal:
-        #20c7c5;
+        #14877f;
+
+    --p02-teal-bright:
+        #20c9c3;
+
+    --p02-teal-dark:
+        #0d6965;
 
     --p02-border:
-        rgba(221, 182, 78, 0.20);
+        rgba(227, 184, 79, 0.16);
 
     --p02-border-soft:
-        rgba(255, 255, 255, 0.075);
-
-    --p02-danger:
-        #f1a6a6;
-
-    --p02-radius:
-        28px;
-
-    --p02-radius-small:
-        18px;
+        rgba(255, 255, 255, 0.07);
 
     --p02-shadow:
         0 24px 70px rgba(0, 0, 0, 0.22);
+
+    --p02-shadow-strong:
+        0 28px 80px rgba(0, 0, 0, 0.34);
+
+    --p02-radius:
+        30px;
+
+    --p02-radius-medium:
+        22px;
+
+    --p02-radius-small:
+        15px;
+
+    --p02-max:
+        1280px;
 
 }
 
@@ -127,9 +141,9 @@
     background:
         linear-gradient(
             180deg,
-            #071d38 0%,
-            #071a31 38%,
-            #071522 100%
+            #08203a 0%,
+            var(--p02-navy) 48%,
+            #07121f 100%
         );
 
     color:
@@ -139,16 +153,6 @@
         "Noto Sans Tamil",
         Arial,
         sans-serif;
-
-}
-
-
-.page02 *,
-.page02 *::before,
-.page02 *::after {
-
-    box-sizing:
-        border-box;
 
 }
 
@@ -182,50 +186,68 @@
 }
 
 
-.page02 .screen[data-screen="intro"] {
-
-    min-height:
-        100vh;
-
-}
-
-
-.page02 .screen[data-screen="about"],
-.page02 .screen[data-screen="scorecard"],
-.page02 .screen[data-screen="result"] {
-
-    padding:
-        82px 0 110px;
-
-}
-
-
 /* ==========================================================================
-   SHARED PAGE SHELL
+   SHARED PAGE CONTAINER
 ========================================================================== */
 
 .page02 .section-shell {
 
     width:
-        min(1180px, calc(100% - 48px));
+        min(var(--p02-max), calc(100% - 80px));
 
     margin:
         0 auto;
+
+    padding:
+        90px 0 110px;
 
 }
 
 
 /* ==========================================================================
-   INTRO HERO
+   TYPOGRAPHY
+========================================================================== */
+
+.page02 h1,
+.page02 h2,
+.page02 h3,
+.page02 p {
+
+    margin-top:
+        0;
+
+}
+
+
+.page02 h1,
+.page02 h2,
+.page02 h3 {
+
+    color:
+        var(--p02-ivory);
+
+}
+
+
+.page02 button,
+.page02 input,
+.page02 select {
+
+    font:
+        inherit;
+
+}
+
+
+/* ==========================================================================
+   SCREEN 01
+   INTRODUCTION
 ========================================================================== */
 
 .page02 .hero {
 
     width:
-        min(1180px, calc(100% - 48px));
-
-    min-height:
-        100vh;
+        min(1180px, calc(100% - 80px));
 
     margin:
         0 auto;
@@ -233,25 +255,18 @@
     padding:
         110px 0 120px;
 
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-
     text-align:
         center;
 
 }
 
 
-.page02 .eyebrow {
+/* EYEBROW */
 
-    margin:
-        0 0 34px;
+.page02 .hero > .eyebrow {
+
+    margin-bottom:
+        48px;
 
     color:
         var(--p02-gold);
@@ -268,102 +283,127 @@
         700;
 
     line-height:
-        1.5;
+        1.4;
 
     letter-spacing:
-        0.22em;
-
-    text-transform:
-        uppercase;
+        0.20em;
 
 }
 
+
+/* PRIMARY TAMIL QUESTION */
 
 .page02 .hero > h1 {
 
     max-width:
-        980px;
+        950px;
 
     margin:
-        0;
+        0 auto;
 
-    color:
-        var(--p02-ivory);
-
-    font-size:
-        clamp(3.4rem, 5.3vw, 5.6rem);
-
-    font-weight:
-        900;
-
-    line-height:
-        1.18;
-
-    letter-spacing:
-        -0.025em;
-
-}
-
-
-.page02 .hero-arrow {
-
-    width:
-        58px;
-
-    height:
-        58px;
-
-    margin:
-        40px auto;
-
-    border:
-        1px solid var(--p02-border);
-
-    border-radius:
-        50%;
-
-    display:
-        grid;
-
-    place-items:
-        center;
-
-    color:
-        var(--p02-gold);
+    font-family:
+        "Noto Sans Tamil",
+        sans-serif;
 
     font-size:
-        1.55rem;
-
-}
-
-
-.page02 .hero > h2 {
-
-    max-width:
-        850px;
-
-    margin:
-        0;
-
-    color:
-        var(--p02-ivory);
-
-    font-size:
-        clamp(2.25rem, 3.6vw, 4rem);
+        clamp(3rem, 5.6vw, 5.7rem);
 
     font-weight:
         800;
 
     line-height:
-        1.28;
+        1.34;
+
+    letter-spacing:
+        -0.035em;
 
 }
 
 
-.page02 .english-lead {
+/* ARROW */
+
+.page02 .hero-arrow {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        64px;
+
+    height:
+        64px;
 
     margin:
-        48px 0 0;
+        42px auto;
+
+    border:
+        1px solid rgba(227, 184, 79, 0.38);
+
+    border-radius:
+        50%;
+
+    color:
+        var(--p02-gold);
+
+    font-size:
+        1.8rem;
+
+}
+
+
+/* SECOND TAMIL QUESTION */
+
+.page02 .hero > h2 {
+
+    max-width:
+        900px;
+
+    margin:
+        0 auto 34px;
+
+    font-family:
+        "Noto Sans Tamil",
+        sans-serif;
+
+    font-size:
+        clamp(2.25rem, 4vw, 4.1rem);
+
+    font-weight:
+        700;
+
+    line-height:
+        1.42;
+
+}
+
+
+/* ENGLISH TRANSITION */
+
+.page02 .english-lead {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        16px;
+
+    margin:
+        0 auto 100px;
 
     color:
         var(--p02-ivory-soft);
@@ -380,7 +420,7 @@
         600;
 
     line-height:
-        1.8;
+        1.6;
 
     letter-spacing:
         0.12em;
@@ -390,41 +430,38 @@
 
 .page02 .english-lead span {
 
-    display:
-        inline-block;
-
-    margin:
-        0 12px;
-
     color:
-        var(--p02-teal);
+        var(--p02-teal-bright);
+
+    font-size:
+        1.3rem;
 
 }
 
 
 /* ==========================================================================
-   INTRO TITLE LOCKUP
+   TITLE LOCKUP
 ========================================================================== */
 
 .page02 .title-lockup {
 
-    width:
-        min(920px, 100%);
+    max-width:
+        940px;
 
     margin:
-        110px auto 0;
+        0 auto 70px;
 
     padding:
-        58px 56px;
+        70px 60px;
 
     border:
-        1px solid var(--p02-border-soft);
+        1px solid var(--p02-border);
 
     border-radius:
         var(--p02-radius);
 
     background:
-        var(--p02-panel-soft);
+        rgba(5, 17, 31, 0.42);
 
     box-shadow:
         var(--p02-shadow);
@@ -434,8 +471,8 @@
 
 .page02 .title-lockup h3 {
 
-    margin:
-        0 0 34px;
+    margin-bottom:
+        38px;
 
     color:
         var(--p02-gold);
@@ -446,7 +483,7 @@
         serif;
 
     font-size:
-        clamp(1.55rem, 2.3vw, 2.35rem);
+        clamp(1.7rem, 2.5vw, 2.65rem);
 
     font-weight:
         700;
@@ -455,7 +492,7 @@
         1.45;
 
     letter-spacing:
-        0.07em;
+        0.06em;
 
 }
 
@@ -466,7 +503,7 @@
         var(--p02-ivory);
 
     font-size:
-        1.1rem;
+        1.2rem;
 
     line-height:
         2;
@@ -485,7 +522,7 @@
         serif;
 
     font-size:
-        0.83rem;
+        0.91rem;
 
     font-weight:
         600;
@@ -494,23 +531,15 @@
         1.9;
 
     letter-spacing:
-        0.08em;
-
-}
-
-
-.page02 .title-lockup .tamil-copy {
-
-    margin:
-        0 0 26px;
+        0.06em;
 
 }
 
 
 .page02 .title-lockup .english-copy {
 
-    margin:
-        0;
+    margin-top:
+        32px;
 
 }
 
@@ -521,37 +550,34 @@
 
 .page02 .metric-strip {
 
-    width:
-        min(920px, 100%);
-
-    margin:
-        34px auto 0;
-
     display:
         grid;
 
     grid-template-columns:
         repeat(3, 1fr);
 
+    max-width:
+        940px;
+
+    margin:
+        0 auto 70px;
+
+    overflow:
+        hidden;
+
     border:
         1px solid var(--p02-border);
 
     border-radius:
-        var(--p02-radius-small);
+        var(--p02-radius-medium);
 
-    overflow:
-        hidden;
+    background:
+        rgba(5, 17, 31, 0.46);
 
 }
 
 
 .page02 .metric-strip > div {
-
-    min-height:
-        145px;
-
-    padding:
-        28px 20px;
 
     display:
         flex;
@@ -565,8 +591,14 @@
     justify-content:
         center;
 
-    gap:
-        8px;
+    min-height:
+        165px;
+
+    padding:
+        30px;
+
+    text-align:
+        center;
 
 }
 
@@ -581,8 +613,14 @@
 
 .page02 .metric-strip strong {
 
+    display:
+        block;
+
+    margin-bottom:
+        12px;
+
     color:
-        var(--p02-gold-light);
+        var(--p02-gold);
 
     font-family:
         "Cinzel",
@@ -590,10 +628,10 @@
         serif;
 
     font-size:
-        2.25rem;
+        2.4rem;
 
-    line-height:
-        1;
+    font-weight:
+        700;
 
 }
 
@@ -609,7 +647,7 @@
         serif;
 
     font-size:
-        0.72rem;
+        0.76rem;
 
     font-weight:
         600;
@@ -629,14 +667,14 @@
 
 .page02 .instruction-card {
 
-    width:
-        min(920px, 100%);
+    max-width:
+        940px;
 
     margin:
-        34px auto 42px;
+        0 auto 60px;
 
     padding:
-        56px;
+        65px;
 
     border:
         1px solid var(--p02-border-soft);
@@ -645,7 +683,13 @@
         var(--p02-radius);
 
     background:
-        rgba(4, 15, 27, 0.45);
+        var(--p02-navy-card);
+
+    box-shadow:
+        var(--p02-shadow);
+
+    text-align:
+        left;
 
 }
 
@@ -654,10 +698,10 @@
 .page02 .section-kicker {
 
     display:
-        block;
+        inline-block;
 
-    margin:
-        0 0 18px;
+    margin-bottom:
+        22px;
 
     color:
         var(--p02-gold);
@@ -668,13 +712,10 @@
         serif;
 
     font-size:
-        0.78rem;
+        0.8rem;
 
     font-weight:
         700;
-
-    line-height:
-        1.5;
 
     letter-spacing:
         0.15em;
@@ -684,48 +725,17 @@
 
 .page02 .instruction-card h3 {
 
-    margin:
-        0 0 26px;
-
-    color:
-        var(--p02-ivory);
+    margin-bottom:
+        26px;
 
     font-size:
-        clamp(1.65rem, 2.6vw, 2.45rem);
+        clamp(1.7rem, 2.7vw, 2.6rem);
 
     font-weight:
-        800;
+        700;
 
     line-height:
-        1.55;
-
-}
-
-
-.page02 .instruction-card .tamil-copy,
-.page02 .instruction-card .english-copy {
-
-    margin:
-        22px 0;
-
-}
-
-
-.page02 .muted {
-
-    color:
-        var(--p02-muted);
-
-    font-family:
-        "Noto Sans Tamil",
-        Arial,
-        sans-serif;
-
-    font-weight:
-        400;
-
-    letter-spacing:
-        0;
+        1.6;
 
 }
 
@@ -739,15 +749,23 @@
         1px;
 
     margin:
-        36px 0;
+        38px 0;
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            var(--p02-border),
+            rgba(227, 184, 79, 0.45),
             transparent
         );
+
+}
+
+
+.page02 .muted {
+
+    color:
+        var(--p02-muted);
 
 }
 
@@ -755,25 +773,16 @@
 .page02 .auto-note {
 
     margin:
-        34px 0 0;
-
-    padding:
-        22px 24px;
-
-    border-left:
-        3px solid var(--p02-teal);
-
-    background:
-        rgba(32, 199, 197, 0.055);
+        36px 0 0;
 
     color:
         var(--p02-ivory-soft);
 
     font-size:
-        0.98rem;
+        1rem;
 
     line-height:
-        1.8;
+        1.9;
 
 }
 
@@ -781,7 +790,7 @@
 .page02 .auto-note strong {
 
     color:
-        var(--p02-teal);
+        var(--p02-teal-bright);
 
     font-family:
         "Cinzel",
@@ -789,55 +798,23 @@
         serif;
 
     font-size:
-        0.78rem;
+        0.86rem;
 
     letter-spacing:
-        0.07em;
+        0.05em;
 
 }
 
 
 /* ==========================================================================
-   BUTTON SYSTEM
+   PRIMARY BUTTON
+   CANONICAL CTM PATH™ TEAL NAVIGATION LANGUAGE
 ========================================================================== */
-
-.page02 button {
-
-    font-family:
-        inherit;
-
-}
-
 
 .page02 .primary-btn {
 
-    min-width:
-        300px;
-
-    min-height:
-        76px;
-
-    padding:
-        17px 36px;
-
-    border:
-        1px solid rgba(255, 255, 255, 0.18);
-
-    border-radius:
-        17px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--p02-gold-light),
-            var(--p02-gold)
-        );
-
-    color:
-        #162033;
-
     display:
-        inline-flex;
+        flex;
 
     flex-direction:
         column;
@@ -848,268 +825,76 @@
     justify-content:
         center;
 
-    gap:
-        4px;
+    width:
+        min(680px, 100%);
+
+    min-height:
+        126px;
+
+    margin:
+        50px auto 0;
+
+    padding:
+        24px 42px;
+
+    border:
+        1px solid rgba(227, 184, 79, 0.55);
+
+    border-radius:
+        28px;
+
+    background:
+        #14877f;
+
+    color:
+        #ffffff;
+
+    box-shadow:
+        0 20px 55px rgba(0, 0, 0, 0.25);
 
     cursor:
         pointer;
 
-    box-shadow:
-        0 14px 34px rgba(0, 0, 0, 0.18);
-
     transition:
         transform 180ms ease,
-        box-shadow 180ms ease,
-        filter 180ms ease;
-
-}
-
-
-.page02 .primary-btn:hover {
-
-    transform:
-        translateY(-2px);
-
-    filter:
-        brightness(1.05);
-
-    box-shadow:
-        0 18px 42px rgba(0, 0, 0, 0.26);
+        background 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
 
 }
 
 
 .page02 .primary-btn span {
 
+    display:
+        block;
+
+    color:
+        #ffffff;
+
+    font-family:
+        "Noto Sans Tamil",
+        sans-serif;
+
     font-size:
-        1rem;
+        1.65rem;
 
     font-weight:
-        700;
+        800;
+
+    line-height:
+        1.45;
 
 }
 
 
 .page02 .primary-btn strong {
 
-    font-family:
-        "Cinzel",
-        Georgia,
-        serif;
-
-    font-size:
-        0.78rem;
-
-    letter-spacing:
-        0.07em;
-
-}
-
-
-.page02 .primary-btn--compact {
-
-    min-width:
-        260px;
-
-    min-height:
-        64px;
-
-}
-
-
-.page02 .secondary-btn {
-
-    min-width:
-        150px;
-
-    min-height:
-        64px;
-
-    padding:
-        16px 26px;
-
-    border:
-        1px solid var(--p02-border-soft);
-
-    border-radius:
-        16px;
-
-    background:
-        rgba(255, 255, 255, 0.025);
-
-    color:
-        var(--p02-ivory-soft);
-
-    font-family:
-        "Cinzel",
-        Georgia,
-        serif;
-
-    font-size:
-        0.82rem;
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        0.06em;
-
-    cursor:
-        pointer;
-
-}
-
-
-/* ==========================================================================
-   ABOUT YOU — HEADING
-========================================================================== */
-
-.page02 .section-heading {
-
-    max-width:
-        780px;
-
-    margin:
-        0 auto 58px;
-
-    text-align:
-        center;
-
-}
-
-
-.page02 .section-heading h2 {
-
-    margin:
-        0 0 24px;
-
-    color:
-        var(--p02-ivory);
-
-    font-family:
-        "Cinzel",
-        Georgia,
-        serif;
-
-    font-size:
-        clamp(2.5rem, 4vw, 4rem);
-
-    line-height:
-        1.2;
-
-    letter-spacing:
-        0.04em;
-
-}
-
-
-.page02 .section-heading > p:not(.english-sub) {
-
-    margin:
-        0;
-
-    color:
-        var(--p02-ivory);
-
-    font-size:
-        1.08rem;
-
-    line-height:
-        1.9;
-
-}
-
-
-.page02 .english-sub {
-
-    margin:
-        18px 0 0;
-
-    color:
-        var(--p02-muted);
-
-    font-size:
-        0.95rem;
-
-    line-height:
-        1.8;
-
-}
-
-
-/* ==========================================================================
-   KYC FORM
-========================================================================== */
-
-.page02 #kycForm {
-
-    width:
-        min(1000px, 100%);
-
-    margin:
-        0 auto;
-
-}
-
-
-.page02 .form-card {
-
-    position:
-        relative;
-
-    margin:
-        0 0 30px;
-
-    padding:
-        48px;
-
-    border:
-        1px solid var(--p02-border-soft);
-
-    border-radius:
-        var(--p02-radius);
-
-    background:
-        rgba(4, 15, 27, 0.45);
-
-    box-shadow:
-        var(--p02-shadow);
-
-}
-
-
-.page02 .card-number {
-
-    position:
-        absolute;
-
-    top:
-        28px;
-
-    right:
-        32px;
-
-    color:
-        rgba(221, 182, 78, 0.5);
-
-    font-family:
-        "Cinzel",
-        Georgia,
-        serif;
-
-    font-size:
-        1.1rem;
-
-    font-weight:
-        700;
-
-}
-
-
-.page02 .form-card > h3 {
-
-    margin:
-        0 0 34px;
+    display:
+        block;
+
+    margin-top:
+        10px;
 
     color:
         var(--p02-gold);
@@ -1120,13 +905,265 @@
         serif;
 
     font-size:
-        1.25rem;
+        0.92rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.4;
 
     letter-spacing:
-        0.08em;
+        0.11em;
 
 }
 
+
+.page02 .primary-btn:hover {
+
+    background:
+        #17958c;
+
+    border-color:
+        var(--p02-gold);
+
+    box-shadow:
+        0 25px 65px rgba(0, 0, 0, 0.34);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.page02 .primary-btn:active {
+
+    transform:
+        translateY(0);
+
+}
+
+
+.page02 .primary-btn:focus-visible {
+
+    outline:
+        3px solid rgba(32, 201, 195, 0.42);
+
+    outline-offset:
+        5px;
+
+}
+
+
+/* COMPACT NAVIGATION CTA */
+
+.page02 .primary-btn--compact {
+
+    width:
+        auto;
+
+    min-width:
+        300px;
+
+    min-height:
+        82px;
+
+    margin:
+        0;
+
+    padding:
+        20px 34px;
+
+    border-radius:
+        20px;
+
+    flex-direction:
+        row;
+
+}
+
+
+.page02 .primary-btn--compact span {
+
+    font-size:
+        1rem;
+
+}
+
+
+.page02 .primary-btn--compact strong {
+
+    margin:
+        0;
+
+    font-size:
+        0.86rem;
+
+}
+
+
+/* ==========================================================================
+   ABOUT YOU™
+========================================================================== */
+
+.page02 .section-heading {
+
+    max-width:
+        850px;
+
+    margin:
+        0 auto 65px;
+
+    text-align:
+        center;
+
+}
+
+
+.page02 .section-heading h2 {
+
+    margin-bottom:
+        26px;
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(2.2rem, 4vw, 4rem);
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.06em;
+
+}
+
+
+.page02 .section-heading > p {
+
+    color:
+        var(--p02-ivory);
+
+    font-size:
+        1.25rem;
+
+    line-height:
+        1.9;
+
+}
+
+
+.page02 .section-heading .english-sub {
+
+    margin-top:
+        16px;
+
+    color:
+        var(--p02-muted);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        0.86rem;
+
+    line-height:
+        1.7;
+
+    letter-spacing:
+        0.05em;
+
+}
+
+
+/* ==========================================================================
+   KYC FORM CARDS
+========================================================================== */
+
+.page02 .form-card {
+
+    position:
+        relative;
+
+    margin-bottom:
+        36px;
+
+    padding:
+        52px;
+
+    border:
+        1px solid var(--p02-border-soft);
+
+    border-radius:
+        var(--p02-radius);
+
+    background:
+        rgba(5, 17, 31, 0.62);
+
+    box-shadow:
+        var(--p02-shadow);
+
+}
+
+
+.page02 .card-number {
+
+    display:
+        block;
+
+    margin-bottom:
+        18px;
+
+    color:
+        var(--p02-gold);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        0.9rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.15em;
+
+}
+
+
+.page02 .form-card > h3 {
+
+    margin-bottom:
+        42px;
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        1.45rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.07em;
+
+}
+
+
+/* ==========================================================================
+   FORM GRID
+========================================================================== */
 
 .page02 .form-grid {
 
@@ -1137,17 +1174,20 @@
         repeat(2, minmax(0, 1fr));
 
     gap:
-        28px;
+        30px;
 
 }
 
 
 .page02 .field {
 
-    min-width:
-        0;
+    display:
+        flex;
 
-    margin:
+    flex-direction:
+        column;
+
+    min-width:
         0;
 
 }
@@ -1161,25 +1201,14 @@
 }
 
 
-.page02 label.field {
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-}
-
-
 .page02 .field > span,
-.page02 .choice-field legend > span {
+.page02 .choice-field legend span {
 
     display:
         block;
 
-    margin:
-        0 0 5px;
+    margin-bottom:
+        7px;
 
     color:
         var(--p02-ivory);
@@ -1190,35 +1219,41 @@
     font-weight:
         700;
 
-    line-height:
-        1.5;
-
 }
 
 
-.page02 .field > small,
+.page02 .field small,
 .page02 .choice-field legend small {
 
     display:
         block;
 
-    margin:
-        0 0 12px;
+    margin-bottom:
+        13px;
 
     color:
         var(--p02-muted);
 
-    font-size:
-        0.8rem;
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
 
-    line-height:
-        1.4;
+    font-size:
+        0.72rem;
+
+    letter-spacing:
+        0.04em;
 
 }
 
 
-.page02 .field input:not([type="radio"]),
-.page02 .field select {
+/* ==========================================================================
+   INPUTS
+========================================================================== */
+
+.page02 input,
+.page02 select {
 
     width:
         100%;
@@ -1227,13 +1262,13 @@
         58px;
 
     padding:
-        0 18px;
+        13px 17px;
 
     border:
-        1px solid rgba(255, 255, 255, 0.11);
+        1px solid rgba(255, 255, 255, 0.12);
 
     border-radius:
-        13px;
+        12px;
 
     outline:
         none;
@@ -1244,39 +1279,36 @@
     color:
         var(--p02-ivory);
 
-    font-family:
-        inherit;
-
     font-size:
         1rem;
 
     transition:
-        border-color 180ms ease,
-        box-shadow 180ms ease,
-        background 180ms ease;
+        border-color 160ms ease,
+        background 160ms ease,
+        box-shadow 160ms ease;
 
 }
 
 
-.page02 .field input:not([type="radio"]):focus,
-.page02 .field select:focus {
+.page02 input:focus,
+.page02 select:focus {
 
     border-color:
-        rgba(32, 199, 197, 0.65);
+        var(--p02-teal-bright);
 
     background:
         rgba(255, 255, 255, 0.065);
 
     box-shadow:
-        0 0 0 3px rgba(32, 199, 197, 0.08);
+        0 0 0 3px rgba(32, 201, 195, 0.10);
 
 }
 
 
-.page02 .field select option {
+.page02 select option {
 
     background:
-        #071a31;
+        var(--p02-navy);
 
     color:
         var(--p02-ivory);
@@ -1285,10 +1317,13 @@
 
 
 /* ==========================================================================
-   KYC CHOICE FIELDS
+   CHOICE FIELDS
 ========================================================================== */
 
 .page02 .choice-field {
+
+    margin:
+        0;
 
     padding:
         0;
@@ -1301,8 +1336,8 @@
 
 .page02 .choice-field legend {
 
-    margin:
-        0 0 12px;
+    width:
+        100%;
 
     padding:
         0;
@@ -1319,7 +1354,7 @@
         wrap;
 
     gap:
-        10px;
+        12px;
 
 }
 
@@ -1335,33 +1370,24 @@
 }
 
 
-.page02 .choice-row input[type="radio"] {
+.page02 .choice-row input {
 
     position:
         absolute;
 
+    width:
+        1px;
+
+    height:
+        1px;
+
     opacity:
         0;
-
-    pointer-events:
-        none;
 
 }
 
 
 .page02 .choice-row label > span {
-
-    min-height:
-        48px;
-
-    padding:
-        12px 18px;
-
-    border:
-        1px solid var(--p02-border-soft);
-
-    border-radius:
-        12px;
 
     display:
         flex;
@@ -1372,14 +1398,23 @@
     justify-content:
         center;
 
+    min-height:
+        50px;
+
+    padding:
+        10px 20px;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.12);
+
+    border-radius:
+        999px;
+
     background:
-        rgba(255, 255, 255, 0.025);
+        rgba(255, 255, 255, 0.045);
 
     color:
         var(--p02-ivory-soft);
-
-    font-size:
-        0.92rem;
 
     transition:
         all 160ms ease;
@@ -1387,116 +1422,90 @@
 }
 
 
-.page02 .choice-row input[type="radio"]:checked + span {
+.page02 .choice-row input:checked + span {
 
     border-color:
-        var(--p02-gold);
+        var(--p02-teal-bright);
 
     background:
-        rgba(221, 182, 78, 0.12);
+        var(--p02-teal);
 
     color:
-        var(--p02-gold-light);
+        #ffffff;
 
     box-shadow:
-        inset 0 0 0 1px rgba(221, 182, 78, 0.15);
-
-}
-
-
-.page02 #kycForm > .primary-btn {
-
-    display:
-        flex;
-
-    margin:
-        46px auto 0;
+        0 8px 25px rgba(20, 135, 127, 0.22);
 
 }
 
 
 /* ==========================================================================
-   SCORECARD DIMENSION PROGRESS
+   DIMENSION PROGRESS
 ========================================================================== */
 
 .page02 .dimension-progress {
 
-    width:
-        min(1000px, 100%);
-
-    margin:
-        0 auto 36px;
-
     display:
-        grid;
+        flex;
 
-    grid-template-columns:
-        repeat(5, 1fr);
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    flex-wrap:
+        wrap;
 
     gap:
         10px;
 
-}
-
-
-.page02 .dimension-progress > * {
-
-    min-height:
-        8px;
-
-    border-radius:
-        999px;
-
-    background:
-        rgba(255, 255, 255, 0.08);
-
-    overflow:
-        hidden;
+    margin-bottom:
+        50px;
 
 }
 
 
 /*
-   Compatibility selectors for progress elements
+   Supports progress elements dynamically
    generated by page02.js.
 */
 
-.page02 .dimension-progress .active,
-.page02 .dimension-progress .is-active,
-.page02 .dimension-progress [aria-current="true"] {
+.page02 .dimension-progress > * {
 
-    background:
-        var(--p02-gold);
+    min-width:
+        46px;
 
 }
 
 
 /* ==========================================================================
-   DYNAMIC SCORECARD HOST
+   DYNAMIC SCORECARD
+   page02.js RENDER TARGET
 ========================================================================== */
 
 .page02 #dimensionHost {
 
     width:
-        min(1000px, 100%);
-
-    margin:
-        0 auto;
+        100%;
 
 }
 
 
-/* ==========================================================================
-   DYNAMIC DIMENSION HEADER
-   Supports likely JS-generated class structures.
-========================================================================== */
+/*
+   The following aliases deliberately support
+   the dynamic rendering architecture without
+   requiring changes to the static page02.html.
+*/
 
-.page02 #dimensionHost .dimension-header,
-.page02 #dimensionHost .dimension-heading,
-.page02 #dimensionHost .scorecard-heading {
+.page02 .dimension-header,
+.page02 .dimension-heading {
+
+    max-width:
+        900px;
 
     margin:
-        0 0 34px;
+        0 auto 50px;
 
     text-align:
         center;
@@ -1504,15 +1513,11 @@
 }
 
 
-.page02 #dimensionHost .dimension-header h2,
-.page02 #dimensionHost .dimension-heading h2,
-.page02 #dimensionHost .scorecard-heading h2 {
+.page02 .dimension-header h2,
+.page02 .dimension-heading h2 {
 
-    margin:
-        10px 0;
-
-    color:
-        var(--p02-ivory);
+    margin-bottom:
+        18px;
 
     font-family:
         "Cinzel",
@@ -1520,20 +1525,25 @@
         serif;
 
     font-size:
-        clamp(2rem, 3.4vw, 3.3rem);
+        clamp(2rem, 3.8vw, 3.5rem);
+
+    font-weight:
+        700;
 
     line-height:
-        1.25;
+        1.3;
 
 }
 
 
-.page02 #dimensionHost .dimension-header p,
-.page02 #dimensionHost .dimension-heading p,
-.page02 #dimensionHost .scorecard-heading p {
+.page02 .dimension-header p,
+.page02 .dimension-heading p {
 
     color:
         var(--p02-muted);
+
+    font-size:
+        1rem;
 
     line-height:
         1.8;
@@ -1542,52 +1552,45 @@
 
 
 /* ==========================================================================
-   SCORECARD QUESTION CARD
-
-   Multiple compatible selectors are intentionally provided because the
-   question DOM is injected by page02.js rather than being static HTML.
+   INDICATOR / QUESTION CARDS
 ========================================================================== */
 
-.page02 #dimensionHost .question-card,
-.page02 #dimensionHost .scorecard-question,
-.page02 #dimensionHost .indicator-card,
-.page02 #dimensionHost .metric-card {
+.page02 .indicator-card,
+.page02 .question-card,
+.page02 .scorecard-card {
 
     width:
         100%;
 
-    margin:
-        0 0 26px;
+    margin-bottom:
+        34px;
 
     padding:
-        38px 40px;
+        46px 50px;
 
     border:
         1px solid var(--p02-border-soft);
 
     border-radius:
-        24px;
+        var(--p02-radius);
 
     background:
-        rgba(4, 15, 27, 0.46);
+        rgba(5, 17, 31, 0.70);
 
     box-shadow:
-        0 16px 46px rgba(0, 0, 0, 0.13);
+        0 18px 50px rgba(0, 0, 0, 0.16);
 
 }
 
 
-/* QUESTION NUMBER */
-
-.page02 #dimensionHost .question-number,
-.page02 #dimensionHost .indicator-number,
-.page02 #dimensionHost .metric-number {
+.page02 .indicator-number,
+.page02 .question-number {
 
     display:
         block;
 
-    margin:
-        0 0 8px;
+    margin-bottom:
+        20px;
 
     color:
         var(--p02-gold);
@@ -1604,29 +1607,29 @@
         700;
 
     letter-spacing:
-        0.08em;
+        0.13em;
 
 }
 
 
-/* TAMIL QUESTION */
+.page02 .indicator-title,
+.page02 .question-title {
 
-.page02 #dimensionHost .question-title,
-.page02 #dimensionHost .question-tamil,
-.page02 #dimensionHost .indicator-title,
-.page02 #dimensionHost .metric-title {
-
-    margin:
-        0 0 8px;
+    margin-bottom:
+        9px;
 
     color:
         var(--p02-ivory);
 
+    font-family:
+        "Noto Sans Tamil",
+        sans-serif;
+
     font-size:
-        1.35rem;
+        clamp(1.35rem, 2vw, 1.85rem);
 
     font-weight:
-        800;
+        700;
 
     line-height:
         1.55;
@@ -1634,21 +1637,18 @@
 }
 
 
-/* ENGLISH QUESTION */
+.page02 .indicator-subtitle,
+.page02 .question-subtitle,
+.page02 .indicator-english {
 
-.page02 #dimensionHost .question-subtitle,
-.page02 #dimensionHost .question-english,
-.page02 #dimensionHost .indicator-subtitle,
-.page02 #dimensionHost .metric-subtitle {
-
-    margin:
-        0 0 26px;
+    margin-bottom:
+        28px;
 
     color:
         var(--p02-muted);
 
     font-size:
-        0.94rem;
+        1rem;
 
     line-height:
         1.6;
@@ -1657,304 +1657,243 @@
 
 
 /* ==========================================================================
-   FOUR RANGE OPTIONS
-   DESKTOP = 4 × 1
-   TABLET  = 2 × 2
-   MOBILE  = 1 × 4
+   CURRENT REALITY LABEL
 ========================================================================== */
 
-.page02 #dimensionHost .range-options,
-.page02 #dimensionHost .option-grid,
-.page02 #dimensionHost .score-options,
-.page02 #dimensionHost .answer-options,
-.page02 #dimensionHost .range-grid {
+.page02 .reality-label,
+.page02 .option-label,
+.page02 .select-label {
 
-    width:
-        100%;
+    display:
+        flex;
 
-    margin:
-        28px 0 0;
+    align-items:
+        baseline;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        8px;
+
+    margin-bottom:
+        20px;
+
+    color:
+        var(--p02-ivory);
+
+    font-size:
+        1rem;
+
+    line-height:
+        1.6;
+
+}
+
+
+.page02 .reality-label span,
+.page02 .option-label span,
+.page02 .select-label span {
+
+    color:
+        var(--p02-muted);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        0.72rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.04em;
+
+}
+
+
+/* ==========================================================================
+   FOUR OPTION SCORECARD
+
+   DESKTOP:
+   2 × 2
+
+   MOBILE:
+   1 × 4
+========================================================================== */
+
+.page02 .option-grid,
+.page02 .range-options,
+.page02 .score-options,
+.page02 .indicator-options {
 
     display:
         grid;
 
     grid-template-columns:
-        repeat(4, minmax(0, 1fr));
+        repeat(2, minmax(0, 1fr));
 
     gap:
-        16px;
-
-}
-
-
-/*
-   OPTION LABEL / BUTTON
-*/
-
-.page02 #dimensionHost .range-option,
-.page02 #dimensionHost .option-card,
-.page02 #dimensionHost .score-option,
-.page02 #dimensionHost .answer-option {
-
-    position:
-        relative;
+        18px;
 
     width:
         100%;
 
-    min-width:
-        0;
+    margin:
+        0 0 28px;
 
 }
 
 
-/*
-   Hidden radio control
-*/
+/* OPTION BUTTON */
 
-.page02 #dimensionHost .range-option input,
-.page02 #dimensionHost .option-card input,
-.page02 #dimensionHost .score-option input,
-.page02 #dimensionHost .answer-option input {
+.page02 .option-btn,
+.page02 .range-option,
+.page02 .score-option,
+.page02 .indicator-option {
 
     position:
-        absolute;
+        relative;
 
-    opacity:
-        0;
+    display:
+        flex;
 
-    pointer-events:
-        none;
+    align-items:
+        center;
 
-}
-
-
-/*
-   Premium visual option surface
-*/
-
-.page02 #dimensionHost .range-option > span,
-.page02 #dimensionHost .option-card > span,
-.page02 #dimensionHost .score-option > span,
-.page02 #dimensionHost .answer-option > span,
-.page02 #dimensionHost button.range-option,
-.page02 #dimensionHost button.option-card,
-.page02 #dimensionHost button.score-option,
-.page02 #dimensionHost button.answer-option {
+    justify-content:
+        flex-start;
 
     width:
         100%;
 
     min-height:
-        82px;
+        92px;
+
+    margin:
+        0;
 
     padding:
-        18px 16px;
+        20px 24px;
 
     border:
-        1px solid rgba(221, 182, 78, 0.18);
+        1px solid rgba(255, 255, 255, 0.11);
 
     border-radius:
         16px;
 
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
     background:
-        rgba(255, 255, 255, 0.035);
+        rgba(255, 255, 255, 0.045);
 
     color:
         var(--p02-ivory);
 
-    font-family:
-        inherit;
-
-    font-size:
-        0.96rem;
-
-    font-weight:
-        600;
+    text-align:
+        left;
 
     line-height:
         1.45;
-
-    text-align:
-        center;
 
     cursor:
         pointer;
 
     transition:
-        border-color 180ms ease,
-        background 180ms ease,
-        transform 180ms ease,
-        box-shadow 180ms ease;
+        transform 160ms ease,
+        border-color 160ms ease,
+        background 160ms ease,
+        box-shadow 160ms ease;
 
 }
 
 
-.page02 #dimensionHost .range-option:hover > span,
-.page02 #dimensionHost .option-card:hover > span,
-.page02 #dimensionHost .score-option:hover > span,
-.page02 #dimensionHost .answer-option:hover > span,
-.page02 #dimensionHost button.range-option:hover,
-.page02 #dimensionHost button.option-card:hover,
-.page02 #dimensionHost button.score-option:hover,
-.page02 #dimensionHost button.answer-option:hover {
+/* HOVER */
+
+.page02 .option-btn:hover,
+.page02 .range-option:hover,
+.page02 .score-option:hover,
+.page02 .indicator-option:hover {
 
     border-color:
-        rgba(221, 182, 78, 0.55);
+        rgba(32, 201, 195, 0.55);
 
     background:
-        rgba(221, 182, 78, 0.08);
+        rgba(20, 135, 127, 0.12);
 
     transform:
         translateY(-2px);
 
-    box-shadow:
-        0 10px 26px rgba(0, 0, 0, 0.14);
-
 }
 
 
-/*
-   SELECTED RADIO OPTION
-*/
+/* SELECTED */
 
-.page02 #dimensionHost .range-option input:checked + span,
-.page02 #dimensionHost .option-card input:checked + span,
-.page02 #dimensionHost .score-option input:checked + span,
-.page02 #dimensionHost .answer-option input:checked + span {
+.page02 .option-btn.is-selected,
+.page02 .option-btn.selected,
+.page02 .range-option.is-selected,
+.page02 .range-option.selected,
+.page02 .score-option.is-selected,
+.page02 .score-option.selected,
+.page02 .indicator-option.is-selected,
+.page02 .indicator-option.selected,
+.page02 [aria-pressed="true"].option-btn,
+.page02 [aria-pressed="true"].range-option,
+.page02 [aria-pressed="true"].score-option,
+.page02 [aria-pressed="true"].indicator-option {
 
     border-color:
         var(--p02-gold);
 
     background:
-        linear-gradient(
-            135deg,
-            rgba(221, 182, 78, 0.20),
-            rgba(221, 182, 78, 0.08)
-        );
+        var(--p02-teal);
 
     color:
-        var(--p02-gold-light);
+        #ffffff;
 
     box-shadow:
-        0 10px 28px rgba(0, 0, 0, 0.18),
-        inset 0 0 0 1px rgba(221, 182, 78, 0.18);
+        0 16px 38px rgba(20, 135, 127, 0.28);
+
+    transform:
+        translateY(-1px);
 
 }
 
 
-/*
-   Compatibility for JS button-selected states
-*/
+/* OPTION SCORE / BADGE SUPPORT */
 
-.page02 #dimensionHost .range-option.selected,
-.page02 #dimensionHost .range-option.is-selected,
-.page02 #dimensionHost .option-card.selected,
-.page02 #dimensionHost .option-card.is-selected,
-.page02 #dimensionHost .score-option.selected,
-.page02 #dimensionHost .score-option.is-selected,
-.page02 #dimensionHost .answer-option.selected,
-.page02 #dimensionHost .answer-option.is-selected {
-
-    border-color:
-        var(--p02-gold);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(221, 182, 78, 0.20),
-            rgba(221, 182, 78, 0.08)
-        );
-
-    color:
-        var(--p02-gold-light);
-
-    box-shadow:
-        0 10px 28px rgba(0, 0, 0, 0.18),
-        inset 0 0 0 1px rgba(221, 182, 78, 0.18);
-
-}
-
-
-/* ==========================================================================
-   QUESTION META
-   REALITY / BENCHMARK / SCORE
-========================================================================== */
-
-.page02 #dimensionHost .question-meta,
-.page02 #dimensionHost .indicator-meta,
-.page02 #dimensionHost .score-meta,
-.page02 #dimensionHost .benchmark-row {
-
-    margin:
-        22px 0 0;
-
-    padding-top:
-        18px;
-
-    border-top:
-        1px solid var(--p02-border-soft);
+.page02 .option-score {
 
     display:
         flex;
 
-    flex-wrap:
-        wrap;
+    flex:
+        0 0 auto;
 
     align-items:
         center;
 
     justify-content:
-        space-between;
+        center;
 
-    gap:
-        12px 22px;
+    width:
+        42px;
 
-    color:
-        var(--p02-muted);
+    height:
+        42px;
 
-    font-size:
-        0.88rem;
+    margin-right:
+        16px;
 
-    line-height:
-        1.6;
+    border:
+        1px solid rgba(227, 184, 79, 0.42);
 
-}
-
-
-.page02 #dimensionHost .benchmark,
-.page02 #dimensionHost .benchmark-value {
+    border-radius:
+        50%;
 
     color:
-        var(--p02-ivory-soft);
-
-}
-
-
-.page02 #dimensionHost .benchmark strong,
-.page02 #dimensionHost .benchmark-value strong {
-
-    color:
-        var(--p02-gold-light);
-
-}
-
-
-.page02 #dimensionHost .question-score,
-.page02 #dimensionHost .indicator-score,
-.page02 #dimensionHost .score-value {
-
-    color:
-        var(--p02-teal);
+        var(--p02-gold);
 
     font-family:
         "Cinzel",
@@ -1967,37 +1906,161 @@
 }
 
 
+.page02 .option-btn.is-selected .option-score,
+.page02 .option-btn.selected .option-score,
+.page02 .range-option.is-selected .option-score,
+.page02 .range-option.selected .option-score,
+.page02 .score-option.is-selected .option-score,
+.page02 .score-option.selected .option-score,
+.page02 .indicator-option.is-selected .option-score,
+.page02 .indicator-option.selected .option-score {
+
+    border-color:
+        rgba(255, 255, 255, 0.55);
+
+    color:
+        #ffffff;
+
+}
+
+
 /* ==========================================================================
-   SCORING DETAILS
+   BENCHMARK
+========================================================================== */
+
+.page02 .benchmark,
+.page02 .indicator-benchmark,
+.page02 .benchmark-line {
+
+    margin-top:
+        20px;
+
+    color:
+        var(--p02-ivory-soft);
+
+    font-size:
+        0.95rem;
+
+    line-height:
+        1.6;
+
+}
+
+
+.page02 .benchmark strong,
+.page02 .indicator-benchmark strong,
+.page02 .benchmark-line strong {
+
+    color:
+        var(--p02-ivory);
+
+    font-weight:
+        800;
+
+}
+
+
+/* ==========================================================================
+   LIVE SCORE
+========================================================================== */
+
+.page02 .live-score,
+.page02 .indicator-score,
+.page02 .score-display {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    min-height:
+        48px;
+
+    margin-top:
+        12px;
+
+    padding:
+        8px 16px;
+
+    border:
+        1px solid rgba(32, 201, 195, 0.34);
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(20, 135, 127, 0.14);
+
+    color:
+        var(--p02-teal-bright);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        1.15rem;
+
+    font-weight:
+        900;
+
+    line-height:
+        1;
+
+    letter-spacing:
+        0.03em;
+
+    text-shadow:
+        0 0 22px rgba(32, 201, 195, 0.18);
+
+}
+
+
+/* ==========================================================================
+   HOW YOUR SCORE WORKS
 ========================================================================== */
 
 .page02 .scoring-details {
 
     width:
-        min(1000px, 100%);
+        100%;
 
-    margin:
-        38px auto 0;
+    margin-top:
+        52px;
+
+    overflow:
+        hidden;
 
     border:
         1px solid var(--p02-border-soft);
 
     border-radius:
-        20px;
+        var(--p02-radius-medium);
 
     background:
-        rgba(4, 15, 27, 0.38);
-
-    overflow:
-        hidden;
+        rgba(5, 17, 31, 0.66);
 
 }
 
 
 .page02 .scoring-details summary {
 
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        16px;
+
     padding:
-        24px 28px;
+        28px 34px;
 
     color:
         var(--p02-ivory);
@@ -2014,13 +2077,13 @@
     cursor:
         pointer;
 
+    list-style-position:
+        inside;
+
 }
 
 
 .page02 .scoring-details summary span {
-
-    margin-left:
-        12px;
 
     color:
         var(--p02-gold);
@@ -2031,10 +2094,13 @@
         serif;
 
     font-size:
-        0.72rem;
+        0.73rem;
+
+    font-weight:
+        700;
 
     letter-spacing:
-        0.06em;
+        0.08em;
 
 }
 
@@ -2047,36 +2113,26 @@
 }
 
 
-.page02 .scoring-grid {
+/* FIVE SCORE STATES */
 
-    padding:
-        28px;
+.page02 .scoring-grid {
 
     display:
         grid;
 
     grid-template-columns:
-        repeat(4, minmax(0, 1fr));
+        repeat(5, minmax(0, 1fr));
 
     gap:
-        12px;
+        14px;
+
+    padding:
+        34px;
 
 }
 
 
 .page02 .scoring-grid > div {
-
-    min-height:
-        135px;
-
-    padding:
-        20px 14px;
-
-    border:
-        1px solid var(--p02-border-soft);
-
-    border-radius:
-        14px;
 
     display:
         flex;
@@ -2090,6 +2146,21 @@
     justify-content:
         center;
 
+    min-height:
+        150px;
+
+    padding:
+        22px 15px;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.055);
+
+    border-radius:
+        16px;
+
+    background:
+        rgba(255, 255, 255, 0.018);
+
     text-align:
         center;
 
@@ -2098,42 +2169,55 @@
 
 .page02 .scoring-grid strong {
 
+    margin-bottom:
+        12px;
+
     color:
-        var(--p02-gold-light);
+        var(--p02-gold);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
 
     font-size:
         1.2rem;
+
+    font-weight:
+        800;
 
 }
 
 
 .page02 .scoring-grid span {
 
-    margin:
-        9px 0 5px;
-
     color:
         var(--p02-ivory);
 
     font-size:
-        0.72rem;
+        0.9rem;
 
     line-height:
-        1.45;
+        1.55;
 
 }
 
 
 .page02 .scoring-grid small {
 
+    margin-top:
+        8px;
+
     color:
         var(--p02-muted);
 
     font-size:
-        0.7rem;
+        0.72rem;
 
 }
 
+
+/* SCORE EXPLANATION FOOTNOTE */
 
 .page02 .scoring-details > p {
 
@@ -2141,19 +2225,16 @@
         0;
 
     padding:
-        0 28px 30px;
+        0 34px 34px;
 
     color:
         var(--p02-muted);
 
-    font-size:
-        0.82rem;
-
-    line-height:
-        1.7;
-
     text-align:
         center;
+
+    line-height:
+        1.8;
 
 }
 
@@ -2177,12 +2258,6 @@
 
 .page02 .scorecard-actions {
 
-    width:
-        min(1000px, 100%);
-
-    margin:
-        38px auto 0;
-
     display:
         flex;
 
@@ -2193,7 +2268,74 @@
         space-between;
 
     gap:
-        20px;
+        30px;
+
+    margin-top:
+        50px;
+
+}
+
+
+/* SECONDARY BUTTON */
+
+.page02 .secondary-btn {
+
+    min-width:
+        170px;
+
+    min-height:
+        74px;
+
+    padding:
+        18px 28px;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius:
+        18px;
+
+    background:
+        rgba(255, 255, 255, 0.02);
+
+    color:
+        var(--p02-ivory-soft);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        0.82rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.06em;
+
+    cursor:
+        pointer;
+
+    transition:
+        border-color 160ms ease,
+        background 160ms ease,
+        color 160ms ease;
+
+}
+
+
+.page02 .secondary-btn:hover {
+
+    border-color:
+        rgba(227, 184, 79, 0.38);
+
+    background:
+        rgba(227, 184, 79, 0.05);
+
+    color:
+        var(--p02-gold);
 
 }
 
@@ -2205,16 +2347,19 @@
 .page02 .form-error {
 
     min-height:
-        24px;
+        28px;
 
     margin:
-        24px auto 0;
+        26px 0 0;
 
     color:
-        var(--p02-danger);
+        #f3a9a9;
 
     font-size:
         0.9rem;
+
+    font-weight:
+        600;
 
     line-height:
         1.6;
@@ -2239,8 +2384,97 @@
 
 .page02 .result-shell > h2 {
 
+    margin-bottom:
+        50px;
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(2rem, 4vw, 3.8rem);
+
+    letter-spacing:
+        0.05em;
+
+}
+
+
+/* ==========================================================================
+   RESULT HERO
+========================================================================== */
+
+.page02 .result-hero {
+
+    max-width:
+        900px;
+
     margin:
-        0 0 44px;
+        0 auto 42px;
+
+    padding:
+        70px 45px;
+
+    border:
+        1px solid rgba(227, 184, 79, 0.30);
+
+    border-radius:
+        var(--p02-radius);
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(20, 135, 127, 0.16),
+            rgba(5, 17, 31, 0.72) 65%
+        );
+
+    box-shadow:
+        var(--p02-shadow-strong);
+
+}
+
+
+.page02 .result-hero > span {
+
+    display:
+        block;
+
+    margin-bottom:
+        12px;
+
+    color:
+        var(--p02-ivory-soft);
+
+}
+
+
+.page02 .result-hero h3 {
+
+    margin-bottom:
+        32px;
+
+    color:
+        var(--p02-gold);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(1.25rem, 2vw, 1.8rem);
+
+    letter-spacing:
+        0.06em;
+
+}
+
+
+.page02 #resultScore {
+
+    display:
+        block;
 
     color:
         var(--p02-ivory);
@@ -2251,56 +2485,43 @@
         serif;
 
     font-size:
-        clamp(2.3rem, 4vw, 4rem);
+        clamp(3.2rem, 7vw, 6.5rem);
 
-    letter-spacing:
-        0.04em;
+    font-weight:
+        900;
 
-}
-
-
-.page02 .result-hero {
-
-    width:
-        min(700px, 100%);
-
-    margin:
-        0 auto;
-
-    padding:
-        58px 38px;
-
-    border:
-        1px solid var(--p02-border);
-
-    border-radius:
-        30px;
-
-    background:
-        radial-gradient(
-            circle at top,
-            rgba(221, 182, 78, 0.10),
-            rgba(4, 15, 27, 0.5) 60%
-        );
-
-    box-shadow:
-        var(--p02-shadow);
+    line-height:
+        1;
 
 }
 
 
-.page02 .result-hero > span {
+.page02 #resultPercentage {
+
+    display:
+        block;
+
+    margin-top:
+        18px;
 
     color:
-        var(--p02-muted);
+        var(--p02-teal-bright);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(2rem, 4vw, 3.8rem);
 
 }
 
 
-.page02 .result-hero h3 {
+.page02 #resultStage {
 
     margin:
-        12px 0 28px;
+        28px 0 0;
 
     color:
         var(--p02-gold);
@@ -2313,66 +2534,11 @@
     font-size:
         1rem;
 
-    letter-spacing:
-        0.08em;
-
-}
-
-
-.page02 .result-hero > strong {
-
-    display:
-        block;
-
-    color:
-        var(--p02-ivory);
-
-    font-family:
-        "Cinzel",
-        Georgia,
-        serif;
-
-    font-size:
-        clamp(3rem, 7vw, 6rem);
-
-    line-height:
-        1;
-
-}
-
-
-.page02 .result-hero > b {
-
-    display:
-        block;
-
-    margin:
-        18px 0;
-
-    color:
-        var(--p02-teal);
-
-    font-size:
-        clamp(2rem, 4vw, 3.5rem);
-
-}
-
-
-.page02 .result-hero > p {
-
-    margin:
-        0;
-
-    color:
-        var(--p02-gold-light);
-
-    font-family:
-        "Cinzel",
-        Georgia,
-        serif;
-
     font-weight:
         700;
+
+    letter-spacing:
+        0.07em;
 
 }
 
@@ -2383,34 +2549,34 @@
 
 .page02 .gap-card {
 
-    width:
-        min(700px, 100%);
+    max-width:
+        900px;
 
     margin:
-        26px auto 60px;
+        0 auto 65px;
 
     padding:
-        30px;
+        38px;
 
     border:
         1px solid var(--p02-border-soft);
 
     border-radius:
-        20px;
+        var(--p02-radius-medium);
 
     background:
-        rgba(255, 255, 255, 0.025);
+        rgba(5, 17, 31, 0.60);
 
 }
 
 
-.page02 .gap-card span {
+.page02 .gap-card > span {
 
     display:
         block;
 
     color:
-        var(--p02-ivory-soft);
+        var(--p02-ivory);
 
     line-height:
         1.7;
@@ -2424,13 +2590,18 @@
         block;
 
     margin:
-        14px 0;
+        15px 0;
 
     color:
-        var(--p02-gold-light);
+        var(--p02-gold);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
 
     font-size:
-        2.6rem;
+        3rem;
 
 }
 
@@ -2446,7 +2617,7 @@
         serif;
 
     letter-spacing:
-        0.06em;
+        0.05em;
 
 }
 
@@ -2457,26 +2628,28 @@
 
 .page02 .result-block {
 
-    width:
-        min(900px, 100%);
-
     margin:
-        70px auto 0;
+        70px 0;
 
     padding:
-        0;
+        55px;
+
+    border:
+        1px solid var(--p02-border-soft);
+
+    border-radius:
+        var(--p02-radius);
+
+    background:
+        rgba(5, 17, 31, 0.56);
 
 }
 
 
-.page02 .result-block h3,
-.page02 .stage-scale > h3 {
+.page02 .result-block h3 {
 
-    margin:
-        8px 0 30px;
-
-    color:
-        var(--p02-ivory);
+    margin-bottom:
+        38px;
 
     font-family:
         "Cinzel",
@@ -2484,10 +2657,10 @@
         serif;
 
     font-size:
-        1.65rem;
+        1.8rem;
 
     letter-spacing:
-        0.05em;
+        0.06em;
 
 }
 
@@ -2498,28 +2671,7 @@
         grid;
 
     gap:
-        14px;
-
-}
-
-
-/*
-   Compatibility for JS-generated dimension result rows.
-*/
-
-.page02 #dimensionResults > * {
-
-    padding:
-        20px 24px;
-
-    border:
-        1px solid var(--p02-border-soft);
-
-    border-radius:
         15px;
-
-    background:
-        rgba(255, 255, 255, 0.025);
 
 }
 
@@ -2530,12 +2682,6 @@
 
 .page02 .result-pair {
 
-    width:
-        min(900px, 100%);
-
-    margin:
-        28px auto 0;
-
     display:
         grid;
 
@@ -2543,7 +2689,10 @@
         repeat(2, minmax(0, 1fr));
 
     gap:
-        22px;
+        28px;
+
+    margin:
+        60px 0;
 
 }
 
@@ -2551,35 +2700,38 @@
 .page02 .result-pair article {
 
     padding:
-        36px 28px;
+        48px 36px;
 
     border:
         1px solid var(--p02-border-soft);
 
     border-radius:
-        22px;
+        var(--p02-radius-medium);
 
     background:
-        rgba(4, 15, 27, 0.4);
+        rgba(5, 17, 31, 0.62);
 
 }
 
 
 .page02 .result-pair article > span {
 
-    color:
-        var(--p02-muted);
+    display:
+        block;
 
-    font-size:
-        0.9rem;
+    margin-bottom:
+        15px;
+
+    color:
+        var(--p02-ivory-soft);
 
 }
 
 
-.page02 .result-pair article h3 {
+.page02 .result-pair h3 {
 
-    margin:
-        12px 0 24px;
+    margin-bottom:
+        25px;
 
     color:
         var(--p02-gold);
@@ -2590,10 +2742,10 @@
         serif;
 
     font-size:
-        0.9rem;
+        1rem;
 
     line-height:
-        1.5;
+        1.6;
 
     letter-spacing:
         0.05em;
@@ -2601,7 +2753,7 @@
 }
 
 
-.page02 .result-pair article strong {
+.page02 .result-pair strong {
 
     display:
         block;
@@ -2610,7 +2762,7 @@
         var(--p02-ivory);
 
     font-size:
-        1.35rem;
+        1.45rem;
 
     line-height:
         1.5;
@@ -2618,19 +2770,24 @@
 }
 
 
-.page02 .result-pair article b {
+.page02 .result-pair b {
 
     display:
         block;
 
-    margin:
-        14px 0 0;
+    margin-top:
+        15px;
 
     color:
-        var(--p02-teal);
+        var(--p02-teal-bright);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
 
     font-size:
-        1.6rem;
+        2rem;
 
 }
 
@@ -2641,11 +2798,27 @@
 
 .page02 .stage-scale {
 
-    width:
-        min(900px, 100%);
-
     margin:
-        72px auto 0;
+        70px 0;
+
+}
+
+
+.page02 .stage-scale > h3 {
+
+    margin-bottom:
+        38px;
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        1.8rem;
+
+    letter-spacing:
+        0.06em;
 
 }
 
@@ -2656,30 +2829,18 @@
         grid;
 
     gap:
-        10px;
+        12px;
 
 }
 
 
 .page02 .stage-list > div {
 
-    min-height:
-        70px;
-
-    padding:
-        16px 22px;
-
-    border:
-        1px solid var(--p02-border-soft);
-
-    border-radius:
-        14px;
-
     display:
         grid;
 
     grid-template-columns:
-        100px 1fr;
+        110px 1fr;
 
     align-items:
         center;
@@ -2687,11 +2848,23 @@
     gap:
         20px;
 
-    text-align:
-        left;
+    min-height:
+        76px;
+
+    padding:
+        17px 24px;
+
+    border:
+        1px solid var(--p02-border-soft);
+
+    border-radius:
+        14px;
 
     background:
-        rgba(255, 255, 255, 0.02);
+        rgba(255, 255, 255, 0.025);
+
+    text-align:
+        left;
 
 }
 
@@ -2723,27 +2896,27 @@
         serif;
 
     font-size:
-        0.82rem;
+        0.83rem;
 
     letter-spacing:
-        0.05em;
+        0.04em;
 
 }
 
 
-/*
-   Compatibility with result JS active-stage classes.
-*/
+/* ACTIVE STAGE SUPPORT */
 
-.page02 .stage-list > .active,
-.page02 .stage-list > .is-active,
-.page02 .stage-list > [aria-current="true"] {
+.page02 .stage-list > div.is-active,
+.page02 .stage-list > div.active {
 
     border-color:
-        var(--p02-gold);
+        var(--p02-teal-bright);
 
     background:
-        rgba(221, 182, 78, 0.10);
+        rgba(20, 135, 127, 0.16);
+
+    box-shadow:
+        0 12px 30px rgba(20, 135, 127, 0.15);
 
 }
 
@@ -2754,40 +2927,37 @@
 
 .page02 .transition-card {
 
-    width:
-        min(800px, 100%);
+    max-width:
+        920px;
 
     margin:
         80px auto 0;
 
     padding:
-        58px 48px;
+        65px 55px;
 
     border:
         1px solid var(--p02-border);
 
     border-radius:
-        28px;
+        var(--p02-radius);
 
     background:
-        rgba(4, 15, 27, 0.48);
+        rgba(5, 17, 31, 0.66);
 
-    text-align:
-        center;
+    box-shadow:
+        var(--p02-shadow);
 
 }
 
 
 .page02 .transition-card h3 {
 
-    margin:
-        0;
-
-    color:
-        var(--p02-ivory);
+    margin-bottom:
+        28px;
 
     font-size:
-        clamp(1.7rem, 2.8vw, 2.6rem);
+        clamp(1.55rem, 2.6vw, 2.5rem);
 
     line-height:
         1.65;
@@ -2797,33 +2967,14 @@
 
 .page02 .transition-card > p:not(.english-copy) {
 
-    margin:
-        26px 0;
-
     color:
         var(--p02-ivory);
 
     font-size:
-        1.05rem;
+        1.12rem;
 
     line-height:
         1.9;
-
-}
-
-
-.page02 .transition-card .english-copy {
-
-    margin:
-        22px 0;
-
-}
-
-
-.page02 .transition-card .primary-btn {
-
-    margin-top:
-        24px;
 
 }
 
@@ -2855,14 +3006,11 @@
     justify-content:
         center;
 
-    gap:
-        22px;
-
     background:
-        rgba(4, 12, 22, 0.94);
+        rgba(5, 17, 31, 0.94);
 
     backdrop-filter:
-        blur(10px);
+        blur(8px);
 
 }
 
@@ -2870,7 +3018,7 @@
 .page02 .loading-overlay[hidden] {
 
     display:
-        none !important;
+        none;
 
 }
 
@@ -2878,13 +3026,13 @@
 .page02 .loader {
 
     width:
-        52px;
+        54px;
 
     height:
-        52px;
+        54px;
 
     border:
-        3px solid rgba(255, 255, 255, 0.12);
+        4px solid rgba(255, 255, 255, 0.10);
 
     border-top-color:
         var(--p02-gold);
@@ -2893,7 +3041,7 @@
         50%;
 
     animation:
-        p02-spin 0.8s linear infinite;
+        p02-spin 800ms linear infinite;
 
 }
 
@@ -2901,7 +3049,7 @@
 .page02 .loading-overlay p {
 
     margin:
-        0;
+        20px 0 0;
 
     color:
         var(--p02-gold);
@@ -2911,11 +3059,11 @@
         Georgia,
         serif;
 
-    font-size:
-        0.9rem;
+    font-weight:
+        700;
 
     letter-spacing:
-        0.16em;
+        0.12em;
 
 }
 
@@ -2936,22 +3084,26 @@
    TABLET
 ========================================================================== */
 
-@media (max-width: 900px) {
+@media (max-width: 992px) {
 
-    .page02 .screen[data-screen="about"],
-    .page02 .screen[data-screen="scorecard"],
-    .page02 .screen[data-screen="result"] {
+    .page02 .section-shell {
+
+        width:
+            calc(100% - 48px);
 
         padding:
-            64px 0 90px;
+            72px 0 90px;
 
     }
 
 
     .page02 .hero {
 
+        width:
+            calc(100% - 48px);
+
         padding:
-            82px 0 96px;
+            85px 0 100px;
 
     }
 
@@ -2960,7 +3112,7 @@
     .page02 .instruction-card {
 
         padding:
-            44px 36px;
+            48px 40px;
 
     }
 
@@ -2968,19 +3120,7 @@
     .page02 .form-card {
 
         padding:
-            38px 32px;
-
-    }
-
-
-    .page02 #dimensionHost .range-options,
-    .page02 #dimensionHost .option-grid,
-    .page02 #dimensionHost .score-options,
-    .page02 #dimensionHost .answer-options,
-    .page02 #dimensionHost .range-grid {
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
+            42px 36px;
 
     }
 
@@ -2988,7 +3128,15 @@
     .page02 .scoring-grid {
 
         grid-template-columns:
-            repeat(2, minmax(0, 1fr));
+            repeat(3, minmax(0, 1fr));
+
+    }
+
+
+    .page02 .result-block {
+
+        padding:
+            45px 35px;
 
     }
 
@@ -2997,10 +3145,17 @@
 
 /* ==========================================================================
    MOBILE
-   HARD EDGE-TO-EDGE PAGE FOUNDATION
+   768px
 ========================================================================== */
 
 @media (max-width: 768px) {
+
+
+    /* ----------------------------------------------------------------------
+       HARD EDGE-TO-EDGE MOBILE FOUNDATION
+
+       Prevents the white mobile frame/gutter.
+    ---------------------------------------------------------------------- */
 
     html,
     body {
@@ -3020,6 +3175,9 @@
         overflow-x:
             hidden;
 
+        background:
+            #081426;
+
     }
 
 
@@ -3037,41 +3195,22 @@
         padding:
             0;
 
+        border:
+            0;
+
     }
 
-
-    /*
-       IMPORTANT:
-       No global section padding is allowed to create the white/mobile frame.
-       Page 02 owns its own internal spacing.
-    */
 
     .page02 .screen {
 
         width:
             100%;
 
-        max-width:
-            none;
-
         margin:
             0;
 
-        padding-left:
-            0;
-
-        padding-right:
-            0;
-
-    }
-
-
-    .page02 .screen[data-screen="about"],
-    .page02 .screen[data-screen="scorecard"],
-    .page02 .screen[data-screen="result"] {
-
         padding:
-            52px 0 76px;
+            0;
 
     }
 
@@ -3088,12 +3227,10 @@
             0;
 
         padding:
-            0 20px;
+            58px 20px 76px;
 
     }
 
-
-    /* HERO */
 
     .page02 .hero {
 
@@ -3103,28 +3240,27 @@
         max-width:
             none;
 
-        min-height:
-            auto;
-
         margin:
             0;
 
         padding:
-            72px 22px 84px;
+            65px 22px 80px;
 
     }
 
 
-    .page02 .eyebrow {
+    /* INTRO */
+
+    .page02 .hero > .eyebrow {
 
         margin-bottom:
-            26px;
+            34px;
 
         font-size:
-            0.76rem;
+            0.72rem;
 
         letter-spacing:
-            0.12em;
+            0.13em;
 
     }
 
@@ -3132,10 +3268,10 @@
     .page02 .hero > h1 {
 
         font-size:
-            clamp(2.65rem, 11vw, 4.4rem);
+            clamp(2.45rem, 11vw, 4rem);
 
         line-height:
-            1.22;
+            1.38;
 
     }
 
@@ -3143,10 +3279,10 @@
     .page02 .hero-arrow {
 
         width:
-            50px;
+            56px;
 
         height:
-            50px;
+            56px;
 
         margin:
             32px auto;
@@ -3157,51 +3293,44 @@
     .page02 .hero > h2 {
 
         font-size:
-            clamp(2rem, 8vw, 3.1rem);
+            clamp(1.85rem, 8vw, 3rem);
 
         line-height:
-            1.35;
+            1.48;
 
     }
 
 
     .page02 .english-lead {
 
-        margin-top:
-            36px;
+        gap:
+            8px;
+
+        margin-bottom:
+            65px;
 
         font-size:
-            0.7rem;
-
-        line-height:
-            1.9;
+            0.68rem;
 
         letter-spacing:
-            0.06em;
+            0.07em;
 
     }
 
 
-    .page02 .english-lead span {
+    /* INTRO CARDS */
 
-        margin:
-            0 5px;
+    .page02 .title-lockup,
+    .page02 .instruction-card {
 
-    }
-
-
-    /* INTRO */
-
-    .page02 .title-lockup {
-
-        margin-top:
-            76px;
+        width:
+            100%;
 
         padding:
-            36px 22px;
+            36px 24px;
 
         border-radius:
-            20px;
+            22px;
 
     }
 
@@ -3209,7 +3338,7 @@
     .page02 .title-lockup h3 {
 
         font-size:
-            1.35rem;
+            1.45rem;
 
     }
 
@@ -3228,10 +3357,7 @@
     .page02 .english-copy {
 
         font-size:
-            0.72rem;
-
-        line-height:
-            1.8;
+            0.76rem;
 
     }
 
@@ -3243,13 +3369,16 @@
         grid-template-columns:
             1fr;
 
+        border-radius:
+            20px;
+
     }
 
 
     .page02 .metric-strip > div {
 
         min-height:
-            110px;
+            120px;
 
     }
 
@@ -3265,53 +3394,37 @@
     }
 
 
-    /* INSTRUCTION */
-
-    .page02 .instruction-card {
-
-        padding:
-            36px 22px;
-
-        border-radius:
-            20px;
-
-    }
-
-
-    .page02 .instruction-card h3 {
-
-        font-size:
-            1.45rem;
-
-    }
-
-
-    /* BUTTONS */
+    /* BUTTON */
 
     .page02 .primary-btn {
 
         width:
             100%;
 
-        min-width:
-            0;
-
         min-height:
-            70px;
+            112px;
 
         padding:
-            15px 20px;
+            20px 20px;
+
+        border-radius:
+            22px;
 
     }
 
 
-    .page02 .secondary-btn {
+    .page02 .primary-btn span {
 
-        width:
-            100%;
+        font-size:
+            1.35rem;
 
-        min-width:
-            0;
+    }
+
+
+    .page02 .primary-btn strong {
+
+        font-size:
+            0.74rem;
 
     }
 
@@ -3321,7 +3434,7 @@
     .page02 .section-heading {
 
         margin-bottom:
-            38px;
+            42px;
 
     }
 
@@ -3329,7 +3442,15 @@
     .page02 .section-heading h2 {
 
         font-size:
-            2.25rem;
+            2rem;
+
+    }
+
+
+    .page02 .section-heading > p {
+
+        font-size:
+            1rem;
 
     }
 
@@ -3337,21 +3458,10 @@
     .page02 .form-card {
 
         padding:
-            34px 20px;
+            32px 22px;
 
         border-radius:
-            20px;
-
-    }
-
-
-    .page02 .card-number {
-
-        top:
-            20px;
-
-        right:
-            20px;
+            22px;
 
     }
 
@@ -3362,7 +3472,7 @@
             1fr;
 
         gap:
-            22px;
+            24px;
 
     }
 
@@ -3375,157 +3485,383 @@
     }
 
 
-    .page02 .choice-row {
+    .page02 input,
+    .page02 select {
 
-        display:
-            grid;
+        min-height:
+            58px;
+
+        font-size:
+            16px;
+
+    }
+
+
+    /* ----------------------------------------------------------------------
+       FOUR OPTIONS
+
+       MOBILE = ONE OPTION PER LINE
+    ---------------------------------------------------------------------- */
+
+    .page02 .option-grid,
+    .page02 .range-options,
+    .page02 .score-options,
+    .page02 .indicator-options {
 
         grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-    }
-
-
-    .page02 .choice-row label > span {
-
-        width:
-            100%;
-
-    }
-
-
-    /* SCORECARD PROGRESS */
-
-    .page02 .dimension-progress {
-
-        margin-bottom:
-            26px;
+            1fr;
 
         gap:
-            6px;
+            14px;
+
+    }
+
+
+    .page02 .option-btn,
+    .page02 .range-option,
+    .page02 .score-option,
+    .page02 .indicator-option {
+
+        min-height:
+            78px;
+
+        padding:
+            17px 18px;
+
+        border-radius:
+            14px;
+
+        font-size:
+            0.95rem;
 
     }
 
 
     /* QUESTION CARDS */
 
-    .page02 #dimensionHost .question-card,
-    .page02 #dimensionHost .scorecard-question,
-    .page02 #dimensionHost .indicator-card,
-    .page02 #dimensionHost .metric-card {
+    .page02 .indicator-card,
+    .page02 .question-card,
+    .page02 .scorecard-card {
 
         margin-bottom:
-            20px;
+            22px;
 
         padding:
-            28px 20px;
+            30px 22px;
 
         border-radius:
-            19px;
+            22px;
 
     }
 
 
-    .page02 #dimensionHost .question-title,
-    .page02 #dimensionHost .question-tamil,
-    .page02 #dimensionHost .indicator-title,
-    .page02 #dimensionHost .metric-title {
+    .page02 .indicator-title,
+    .page02 .question-title {
 
         font-size:
-            1.18rem;
-
-        line-height:
-            1.55;
+            1.35rem;
 
     }
 
 
-    /*
-       FOUR OPTIONS:
-       MOBILE = ONE OPTION PER LINE
-    */
+    /* LIVE SCORE */
 
-    .page02 #dimensionHost .range-options,
-    .page02 #dimensionHost .option-grid,
-    .page02 #dimensionHost .score-options,
-    .page02 #dimensionHost .answer-options,
-    .page02 #dimensionHost .range-grid {
+    .page02 .live-score,
+    .page02 .indicator-score,
+    .page02 .score-display {
 
-        grid-template-columns:
-            1fr;
+        min-height:
+            48px;
+
+        padding:
+            9px 15px;
+
+        font-size:
+            1.1rem;
+
+    }
+
+
+    /* HOW SCORE WORKS */
+
+    .page02 .scoring-details {
+
+        margin-top:
+            38px;
+
+        border-radius:
+            20px;
+
+    }
+
+
+    .page02 .scoring-details summary {
 
         gap:
             10px;
 
-    }
-
-
-    .page02 #dimensionHost .range-option > span,
-    .page02 #dimensionHost .option-card > span,
-    .page02 #dimensionHost .score-option > span,
-    .page02 #dimensionHost .answer-option > span,
-    .page02 #dimensionHost button.range-option,
-    .page02 #dimensionHost button.option-card,
-    .page02 #dimensionHost button.score-option,
-    .page02 #dimensionHost button.answer-option {
-
-        min-height:
-            64px;
-
         padding:
-            14px 16px;
-
-        justify-content:
-            flex-start;
+            23px 20px;
 
         font-size:
             0.94rem;
-
-        text-align:
-            left;
-
-    }
-
-
-    .page02 #dimensionHost .question-meta,
-    .page02 #dimensionHost .indicator-meta,
-    .page02 #dimensionHost .score-meta,
-    .page02 #dimensionHost .benchmark-row {
-
-        flex-direction:
-            column;
-
-        align-items:
-            flex-start;
-
-    }
-
-
-    /* SCORING */
-
-    .page02 .scoring-details summary {
-
-        padding:
-            20px;
-
-    }
-
-
-    .page02 .scoring-details summary span {
-
-        display:
-            block;
-
-        margin:
-            7px 0 0;
 
     }
 
 
     .page02 .scoring-grid {
 
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap:
+            10px;
+
         padding:
             20px;
+
+    }
+
+
+    .page02 .scoring-grid > div {
+
+        min-height:
+            135px;
+
+        padding:
+            18px 10px;
+
+    }
+
+
+    .page02 .scoring-grid > div:last-child {
+
+        grid-column:
+            1 / -1;
+
+    }
+
+
+    .page02 .scoring-details > p {
+
+        padding:
+            0 20px 26px;
+
+        font-size:
+            0.78rem;
+
+    }
+
+
+    /* NAVIGATION */
+
+    .page02 .scorecard-actions {
+
+        flex-direction:
+            column-reverse;
+
+        gap:
+            14px;
+
+        margin-top:
+            36px;
+
+    }
+
+
+    .page02 .scorecard-actions .primary-btn--compact {
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+        min-height:
+            74px;
+
+    }
+
+
+    .page02 .scorecard-actions .secondary-btn {
+
+        width:
+            100%;
+
+        min-height:
+            62px;
+
+    }
+
+
+    /* RESULT */
+
+    .page02 .result-hero {
+
+        padding:
+            48px 20px;
+
+        border-radius:
+            22px;
+
+    }
+
+
+    .page02 .gap-card {
+
+        padding:
+            30px 20px;
+
+    }
+
+
+    .page02 .result-block {
+
+        margin:
+            50px 0;
+
+        padding:
+            35px 20px;
+
+        border-radius:
+            22px;
+
+    }
+
+
+    .page02 .result-pair {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            18px;
+
+    }
+
+
+    .page02 .result-pair article {
+
+        padding:
+            35px 22px;
+
+    }
+
+
+    .page02 .stage-list > div {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            8px;
+
+        padding:
+            20px;
+
+        text-align:
+            center;
+
+    }
+
+
+    .page02 .transition-card {
+
+        margin-top:
+            55px;
+
+        padding:
+            40px 22px;
+
+        border-radius:
+            22px;
+
+    }
+
+}
+
+
+/* ==========================================================================
+   SMALL MOBILE
+   480px
+========================================================================== */
+
+@media (max-width: 480px) {
+
+    .page02 .section-shell {
+
+        padding:
+            48px 16px 68px;
+
+    }
+
+
+    .page02 .hero {
+
+        padding:
+            52px 18px 70px;
+
+    }
+
+
+    .page02 .hero > h1 {
+
+        font-size:
+            clamp(2.2rem, 11.5vw, 3.15rem);
+
+    }
+
+
+    .page02 .hero > h2 {
+
+        font-size:
+            clamp(1.7rem, 8.3vw, 2.4rem);
+
+    }
+
+
+    .page02 .title-lockup,
+    .page02 .instruction-card {
+
+        padding:
+            30px 19px;
+
+    }
+
+
+    .page02 .form-card {
+
+        padding:
+            28px 18px;
+
+    }
+
+
+    .page02 .indicator-card,
+    .page02 .question-card,
+    .page02 .scorecard-card {
+
+        padding:
+            28px 18px;
+
+    }
+
+
+    .page02 .option-btn,
+    .page02 .range-option,
+    .page02 .score-option,
+    .page02 .indicator-option {
+
+        min-height:
+            74px;
+
+        padding:
+            15px 16px;
+
+    }
+
+
+    .page02 .scoring-grid {
 
         grid-template-columns:
             1fr;
@@ -3541,26 +3877,15 @@
     }
 
 
-    .page02 .scoring-details > p {
-
-        padding:
-            0 20px 24px;
-
-    }
-
-
-    /* ACTIONS */
-
-    .page02 .scorecard-actions {
+    .page02 .choice-row {
 
         flex-direction:
-            column-reverse;
+            column;
 
     }
 
 
-    .page02 .scorecard-actions .primary-btn,
-    .page02 .scorecard-actions .secondary-btn {
+    .page02 .choice-row label {
 
         width:
             100%;
@@ -3568,165 +3893,26 @@
     }
 
 
-    /* RESULTS */
+    .page02 .choice-row label > span {
 
-    .page02 .result-hero {
-
-        padding:
-            44px 20px;
-
-        border-radius:
-            22px;
+        width:
+            100%;
 
     }
 
 
-    .page02 .gap-card {
-
-        padding:
-            26px 20px;
-
-    }
-
-
-    .page02 .result-pair {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
-    .page02 .stage-list > div {
-
-        grid-template-columns:
-            1fr;
-
-        gap:
-            7px;
-
-        text-align:
-            center;
-
-    }
-
-
-    .page02 .transition-card {
-
-        padding:
-            40px 22px;
-
-        border-radius:
-            22px;
-
-    }
-
-}
-
-
-/* ==========================================================================
-   SMALL MOBILE
-========================================================================== */
-
-@media (max-width: 480px) {
-
-    .page02 .section-shell {
-
-        padding:
-            0 16px;
-
-    }
-
-
-    .page02 .hero {
-
-        padding:
-            60px 18px 72px;
-
-    }
-
-
-    .page02 .hero > h1 {
-
-        font-size:
-            clamp(2.35rem, 11.5vw, 3.4rem);
-
-    }
-
-
-    .page02 .hero > h2 {
-
-        font-size:
-            clamp(1.8rem, 8.5vw, 2.5rem);
-
-    }
-
-
-    .page02 .title-lockup,
-    .page02 .instruction-card {
-
-        padding-left:
-            18px;
-
-        padding-right:
-            18px;
-
-    }
-
-
-    .page02 .form-card {
-
-        padding-left:
-            18px;
-
-        padding-right:
-            18px;
-
-    }
-
-
-    .page02 .choice-row {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
-    .page02 #dimensionHost .question-card,
-    .page02 #dimensionHost .scorecard-question,
-    .page02 #dimensionHost .indicator-card,
-    .page02 #dimensionHost .metric-card {
-
-        padding:
-            24px 16px;
-
-    }
-
-
-    .page02 #dimensionHost .range-option > span,
-    .page02 #dimensionHost .option-card > span,
-    .page02 #dimensionHost .score-option > span,
-    .page02 #dimensionHost .answer-option > span,
-    .page02 #dimensionHost button.range-option,
-    .page02 #dimensionHost button.option-card,
-    .page02 #dimensionHost button.score-option,
-    .page02 #dimensionHost button.answer-option {
+    .page02 .primary-btn {
 
         min-height:
-            62px;
+            104px;
 
-        padding:
-            13px 14px;
+    }
 
-        justify-content:
-            flex-start;
+
+    .page02 .primary-btn span {
 
         font-size:
-            0.9rem;
-
-        text-align:
-            left;
+            1.2rem;
 
     }
 
@@ -3734,17 +3920,23 @@
 
 
 /* ==========================================================================
-   TOUCH
+   TOUCH DEVICES
 ========================================================================== */
 
 @media (pointer: coarse) {
 
-    .page02 .primary-btn,
-    .page02 .secondary-btn,
-    .page02 #dimensionHost .range-option,
-    .page02 #dimensionHost .option-card,
-    .page02 #dimensionHost .score-option,
-    .page02 #dimensionHost .answer-option {
+    .page02 .option-btn,
+    .page02 .range-option,
+    .page02 .score-option,
+    .page02 .indicator-option {
+
+        min-height:
+            76px;
+
+    }
+
+
+    .page02 button {
 
         touch-action:
             manipulation;
@@ -3764,6 +3956,9 @@
     .page02 *::before,
     .page02 *::after {
 
+        scroll-behavior:
+            auto !important;
+
         animation-duration:
             0.01ms !important;
 
@@ -3779,33 +3974,7 @@
 
 
 /* ==========================================================================
-   PRINT
+   END
+   PAGE 02 — MILLIONAIRE LIFESTYLE SCORECARD™
 ========================================================================== */
-
-@media print {
-
-    .page02 {
-
-        background:
-            white;
-
-        color:
-            black;
-
-    }
-
-
-    .page02 .scorecard-actions,
-    .page02 .primary-btn,
-    .page02 .secondary-btn,
-    .page02 .loading-overlay {
-
-        display:
-            none !important;
-
-    }
-
-}
-
-
 
