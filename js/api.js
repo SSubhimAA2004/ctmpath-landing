@@ -33,13 +33,10 @@
 ============================================================ */
 
 
-
 const CTM_API = (function(){
 
 
-
 "use strict";
-
 
 
 
@@ -50,7 +47,6 @@ const CTM_API = (function(){
 
 
 const CONFIG = {
-
 
 
     /*
@@ -84,16 +80,13 @@ const CONFIG = {
 
 
 
-
     version:
 
 
     "v1"
 
 
-
 };
-
 
 
 
@@ -107,7 +100,6 @@ const CONFIG = {
 ============================================================ */
 
 
-
 async function request(
 
     action,
@@ -117,9 +109,7 @@ async function request(
 ){
 
 
-
     try {
-
 
 
 
@@ -132,12 +122,10 @@ async function request(
         const requestBody = {
 
 
-
             action:
 
 
                 action,
-
 
 
 
@@ -150,16 +138,13 @@ async function request(
 
 
 
-
             payload:
 
 
                 payload || {}
 
 
-
         };
-
 
 
 
@@ -180,13 +165,10 @@ async function request(
         const response = await fetch(
 
 
-
             CONFIG.endpoint,
 
 
-
             {
-
 
 
                 method:
@@ -197,12 +179,10 @@ async function request(
 
 
 
-
                 headers:
 
 
                     {
-
 
 
                         "Content-Type":
@@ -211,9 +191,7 @@ async function request(
                             "application/json"
 
 
-
                     },
-
 
 
 
@@ -230,20 +208,16 @@ async function request(
 
 
 
-
                 cache:
 
 
                     "no-store"
 
 
-
             }
 
 
-
         );
-
 
 
 
@@ -271,7 +245,6 @@ async function request(
 
 
 
-
         /*
          * Empty response protection.
          */
@@ -286,7 +259,6 @@ async function request(
         ) {
 
 
-
             throw new Error(
 
                 "CTM PATH™ server returned an empty response."
@@ -294,9 +266,7 @@ async function request(
             );
 
 
-
         }
-
 
 
 
@@ -313,9 +283,7 @@ async function request(
         let result;
 
 
-
         try {
-
 
 
             result = JSON.parse(
@@ -325,13 +293,10 @@ async function request(
             );
 
 
-
         }
 
 
-
         catch(parseError){
-
 
 
             console.error(
@@ -345,7 +310,6 @@ async function request(
 
 
 
-
             throw new Error(
 
                 "CTM PATH™ server returned an invalid response."
@@ -353,9 +317,7 @@ async function request(
             );
 
 
-
         }
-
 
 
 
@@ -378,7 +340,6 @@ async function request(
         ) {
 
 
-
             console.error(
 
                 "CTM API HTTP Error:",
@@ -392,9 +353,7 @@ async function request(
 
 
 
-
             return {
-
 
 
                 success:
@@ -405,12 +364,10 @@ async function request(
 
 
 
-
                 status:
 
 
                     response.status,
-
 
 
 
@@ -427,7 +384,6 @@ async function request(
 
 
 
-
                 message:
 
 
@@ -438,20 +394,16 @@ async function request(
 
 
 
-
                 data:
 
 
                     result
 
 
-
             };
 
 
-
         }
-
 
 
 
@@ -471,9 +423,7 @@ async function request(
         return result;
 
 
-
     }
-
 
 
 
@@ -483,17 +433,13 @@ async function request(
 
 
 
-
         console.error(
-
 
 
             "CTM API Request Failed:",
 
 
-
             error
-
 
 
         );
@@ -505,16 +451,13 @@ async function request(
 
 
 
-
         return {
-
 
 
             success:
 
 
                 false,
-
 
 
 
@@ -531,24 +474,19 @@ async function request(
 
 
 
-
             message:
 
 
                 "Unable to connect with CTM PATH™ server"
 
 
-
         };
-
 
 
     }
 
 
-
 }
-
 
 
 
@@ -565,13 +503,11 @@ async function request(
 
 
 
-
 async function register(
 
     data
 
 ){
-
 
 
     return request(
@@ -592,13 +528,11 @@ async function register(
 
 
 
-
 async function saveDiscovery(
 
     data
 
 ){
-
 
 
     return request(
@@ -619,12 +553,10 @@ async function saveDiscovery(
 
 
 
-
 /* ============================================================
    PAGE 03
    KALA CHAKRA™ LIFE ASSESSMENT
 ============================================================ */
-
 
 
 
@@ -634,7 +566,6 @@ async function saveAssessment(
     data
 
 ){
-
 
 
     return request(
@@ -655,12 +586,10 @@ async function saveAssessment(
 
 
 
-
 /* ============================================================
    PAGE 04
    LIFE ALIGNMENT RESULT
 ============================================================ */
-
 
 
 
@@ -670,7 +599,6 @@ async function getAlignment(
     data
 
 ){
-
 
 
     return request(
@@ -691,12 +619,10 @@ async function getAlignment(
 
 
 
-
 /* ============================================================
    PAGE 05
    PERSONAL LIFE DIAGNOSIS™
 ============================================================ */
-
 
 
 
@@ -706,7 +632,6 @@ async function generateDiagnosis(
     data
 
 ){
-
 
 
     return request(
@@ -727,12 +652,10 @@ async function generateDiagnosis(
 
 
 
-
 /* ============================================================
    PAGE 06
    PERSONAL TRANSFORMATION PRESCRIPTION™
 ============================================================ */
-
 
 
 
@@ -742,7 +665,6 @@ async function generateRoadmap(
     data
 
 ){
-
 
 
     return request(
@@ -763,12 +685,10 @@ async function generateRoadmap(
 
 
 
-
 /* ============================================================
    PAGE 07
    REPORT GENERATION
 ============================================================ */
-
 
 
 
@@ -778,7 +698,6 @@ async function generateReport(
     data
 
 ){
-
 
 
     return request(
@@ -799,12 +718,10 @@ async function generateReport(
 
 
 
-
 /* ============================================================
    PAGE 07
    DOCUMENT GENERATION
 ============================================================ */
-
 
 
 
@@ -814,7 +731,6 @@ async function generateDocument(
     data
 
 ){
-
 
 
     return request(
@@ -835,11 +751,9 @@ async function generateDocument(
 
 
 
-
 /* ============================================================
    EMAIL DELIVERY
 ============================================================ */
-
 
 
 
@@ -849,7 +763,6 @@ async function sendEmail(
     data
 
 ){
-
 
 
     return request(
@@ -870,12 +783,10 @@ async function sendEmail(
 
 
 
-
 /* ============================================================
    PAGE 07
    DISCOVERY SESSION BOOKING
 ============================================================ */
-
 
 
 
@@ -885,7 +796,6 @@ async function bookDiscovery(
     data
 
 ){
-
 
 
     return request(
@@ -906,12 +816,10 @@ async function bookDiscovery(
 
 
 
-
 /* ============================================================
    PAGE 07
    JOURNEY SUMMARY
 ============================================================ */
-
 
 
 
@@ -921,7 +829,6 @@ async function getJourneySummary(
     data
 
 ){
-
 
 
     return request(
@@ -942,11 +849,9 @@ async function getJourneySummary(
 
 
 
-
 /* ============================================================
    QA / PREVIEW SERVICES
 ============================================================ */
-
 
 
 
@@ -956,7 +861,6 @@ async function previewReport(
     data
 
 ){
-
 
 
     return request(
@@ -977,13 +881,11 @@ async function previewReport(
 
 
 
-
 async function previewRoadmap(
 
     data
 
 ){
-
 
 
     return request(
@@ -996,7 +898,6 @@ async function previewRoadmap(
 
 
 }
-
 
 
 
@@ -1027,9 +928,7 @@ async function previewRoadmap(
 
 
 
-
 async function healthCheck(){
-
 
 
     return request(
@@ -1050,7 +949,6 @@ async function healthCheck(){
 
 
 
-
 /* ============================================================
    PUBLIC API
 ============================================================ */
@@ -1058,75 +956,86 @@ async function healthCheck(){
 
 
 
-
 return {
-
 
 
     register,
 
 
-
     saveDiscovery,
-
 
 
     saveAssessment,
 
 
-
     getAlignment,
-
 
 
     generateDiagnosis,
 
 
-
     generateRoadmap,
-
 
 
     generateReport,
 
 
-
     generateDocument,
-
 
 
     sendEmail,
 
 
-
     bookDiscovery,
-
 
 
     getJourneySummary,
 
 
-
     previewReport,
-
 
 
     previewRoadmap,
 
 
-
     healthCheck
-
 
 
 };
 
 
-
-
-
-
-
-
-
 })();
+
+
+/* ============================================================
+   BROWSER GLOBAL EXPOSURE
+
+   Page controllers use:
+
+       window.CTM_API
+
+   Explicit exposure guarantees that page02a.js and the other
+   Guided Journey™ controllers can access the shared API layer
+   through a stable browser-global contract.
+============================================================ */
+
+
+window.CTM_API = CTM_API;
+
+
+/* ============================================================
+   API SERVICE READY
+============================================================ */
+
+
+console.info(
+    "CTM PATH™ API Service ready.",
+    {
+        version: "v1",
+        endpoint: "/api",
+        register: (
+            typeof window.CTM_API.register === "function"
+        )
+    }
+);
+
