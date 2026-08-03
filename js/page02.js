@@ -11158,3 +11158,2238 @@ Page02.discoveryInfo = function(){
  * =============================================================================
  */
 
+/* =============================================================================
+ * BATCH 6
+ *
+ * SESSION PERSISTENCE
+ * SESSION RECOVERY
+ * FINAL CONTROLLER
+ * PAGE 03 CTA
+ * PRODUCTION BOOT SEQUENCE
+ * =============================================================================
+ *
+ * RESPONSIBILITIES
+ *
+ *      ✓ Persist Page 02 journey state
+ *      ✓ Recover valid Page 02 session
+ *      ✓ Restore KYC fields
+ *      ✓ Restore PeopleID / ClientID
+ *      ✓ Restore all selected answers
+ *      ✓ Restore current dimension
+ *      ✓ Restore completed result
+ *      ✓ Bind Batch 2
+ *      ✓ Bind Batch 4
+ *      ✓ Bind Page 03 CTA
+ *      ✓ Select correct initial screen
+ *      ✓ Protect initialization from duplicate execution
+ *      ✓ Run DOM contract diagnostics
+ *      ✓ Expose window.Page02
+ *      ✓ Boot on DOMContentLoaded
+ *
+ * =============================================================================
+ */
+
+
+/* =============================================================================
+ * FINAL SESSION STORAGE KEY
+ * =============================================================================
+ */
+
+
+Page02.CONFIG.storageKeys.session =
+    Page02.CONFIG.storageKeys.session ||
+    'ctm_page02_session_v2_3';
+
+
+/* =============================================================================
+ * SESSION VERSION
+ * =============================================================================
+ */
+
+
+Page02.SESSION_VERSION =
+    '2.3';
+
+
+/* =============================================================================
+ * SESSION STATE FLAGS
+ * =============================================================================
+ */
+
+
+Page02.state.initialized =
+    Boolean(
+        Page02.state.initialized
+    );
+
+
+Page02.state.initializing =
+    Boolean(
+        Page02.state.initializing
+    );
+
+
+Page02.state.sessionRecovered =
+    Boolean(
+        Page02.state.sessionRecovered
+    );
+
+
+Page02.state.keyboardBound =
+    Boolean(
+        Page02.state.keyboardBound
+    );
+
+
+/* =============================================================================
+ * SAFE SESSION STORAGE
+ * =============================================================================
+ */
+
+
+Page02.getSessionStorage = function(){
+
+    try{
+
+        const testKey =
+            '__ctm_page02_storage_test__';
+
+
+        sessionStorage.setItem(
+            testKey,
+            '1'
+        );
+
+
+        sessionStorage.removeItem(
+            testKey
+        );
+
+
+        return sessionStorage;
+
+    }
+    catch(error){
+
+        console.warn(
+            '[Page02] sessionStorage unavailable:',
+            error
+        );
+
+
+        return null;
+
+    }
+
+};
+
+
+/* =============================================================================
+ * BUILD SESSION SNAPSHOT
+ * =============================================================================
+ *
+ * IMPORTANT:
+ *
+ * Only serializable journey data is stored.
+ *
+ * DOM nodes, functions and transient navigation
+ * locks are deliberately excluded.
+ *
+ * =============================================================================
+ */
+
+
+Page02.buildSessionSnapshot = function(){
+
+    return {
+
+        sessionVersion:
+            Page02.SESSION_VERSION,
+
+        pageVersion:
+            Page02.version,
+
+        page:
+            Page02.CONFIG.page,
+
+        currentScreen:
+            Page02.state.currentScreen,
+
+        currentDimension:
+            Page02.state.currentDimension,
+
+        peopleId:
+            Page02.state.peopleId ||
+            null,
+
+        clientId:
+            Page02.state.clientId ||
+            null,
+
+        kyc:
+            Page02.state.kyc ||
+            null,
+
+        answers:
+            Page02.state.answers ||
+            {},
+
+        result:
+            Page02.state.result ||
+            null,
+
+        registrationResponse:
+            Page02.state.registrationResponse ||
+            null,
+
+        discoveryResponse:
+            Page02.state.discoveryResponse ||
+            null,
+
+        answered:
+            Page02.getAnsweredCount(),
+
+        score:
+            Page02.getTotalScore(),
+
+        complete:
+            Page02.isScorecardComplete(),
+
+        savedAt:
+            new Date().toISOString()
+
+    };
+
+};
+
+
+/* =============================================================================
+ * SAVE SESSION
+ * =============================================================================
+ */
+
+
+Page02.saveSession = function(){
+
+    const storage =
+        Page02.getSessionStorage();
+
+
+    if(!storage){
+
+        return false;
+
+    }
+
+
+    try{
+
+        const snapshot =
+            Page02.buildSessionSnapshot();
+
+
+        storage.setItem(
+            Page02.CONFIG.storageKeys.session,
+            JSON.stringify(
+                snapshot
+            )
+        );
+
+
+        /*
+         * Preserve legacy identity keys as well.
+         */
+
+        if(
+            Page02.state.peopleId
+        ){
+
+            storage.setItem(
+                Page02.CONFIG.storageKeys.peopleId,
+                Page02.state.peopleId
+            );
+
+        }
+
+
+        if(
+            Page02.state.kyc &&
+            Page02.state.kyc.fullName
+        ){
+
+            storage.setItem(
+                Page02.CONFIG.storageKeys.fullName,
+                Page02.state.kyc.fullName
+            );
+
+        }
+
+
+        return true;
+
+    }
+    catch(error){
+
+        console.warn(
+            '[Page02] Unable to save session:',
+            error
+        );
+
+
+        return false;
+
+    }
+
+};
+
+
+/* =============================================================================
+ * READ SESSION
+ * =============================================================================
+ */
+
+
+Page02.readSession = function(){
+
+    const storage =
+        Page02.getSessionStorage();
+
+
+    if(!storage){
+
+        return null;
+
+    }
+
+
+    try{
+
+        const raw =
+            storage.getItem(
+                Page02.CONFIG.storageKeys.session
+            );
+
+
+        if(!raw){
+
+            return null;
+
+        }
+
+
+        const session =
+            JSON.parse(
+                raw
+            );
+
+
+        if(
+            !session ||
+            typeof session !==
+                'object'
+        ){
+
+            return null;
+
+        }
+
+
+        return session;
+
+    }
+    catch(error){
+
+        console.warn(
+            '[Page02] Unable to read saved session:',
+            error
+        );
+
+
+        return null;
+
+    }
+
+};
+
+
+/* =============================================================================
+ * VALID SESSION
+ * =============================================================================
+ */
+
+
+Page02.isValidSession = function(
+    session
+){
+
+    if(
+        !session ||
+        typeof session !==
+            'object'
+    ){
+
+        return false;
+
+    }
+
+
+    if(
+        session.page &&
+        session.page !==
+            Page02.CONFIG.page
+    ){
+
+        return false;
+
+    }
+
+
+    if(
+        session.answers &&
+        typeof session.answers !==
+            'object'
+    ){
+
+        return false;
+
+    }
+
+
+    return true;
+
+};
+
+
+/* =============================================================================
+ * CLEAR SESSION
+ * =============================================================================
+ */
+
+
+Page02.clearSession = function(){
+
+    const storage =
+        Page02.getSessionStorage();
+
+
+    if(!storage){
+
+        return false;
+
+    }
+
+
+    try{
+
+        storage.removeItem(
+            Page02.CONFIG.storageKeys.session
+        );
+
+
+        storage.removeItem(
+            Page02.CONFIG.storageKeys.peopleId
+        );
+
+
+        storage.removeItem(
+            Page02.CONFIG.storageKeys.fullName
+        );
+
+
+        return true;
+
+    }
+    catch(error){
+
+        console.warn(
+            '[Page02] Unable to clear session:',
+            error
+        );
+
+
+        return false;
+
+    }
+
+};
+
+
+/* =============================================================================
+ * SANITIZE RECOVERED ANSWERS
+ * =============================================================================
+ *
+ * Never trust sessionStorage blindly.
+ *
+ * Only answers matching:
+ *
+ *      • a real frozen indicator
+ *      • one of its four real scores
+ *
+ * are restored.
+ *
+ * =============================================================================
+ */
+
+
+Page02.sanitizeRecoveredAnswers = function(
+    answers
+){
+
+    const clean =
+        {};
+
+
+    if(
+        !answers ||
+        typeof answers !==
+            'object'
+    ){
+
+        return clean;
+
+    }
+
+
+    Page02.getAllIndicators()
+        .forEach(
+            function(indicator){
+
+                const stored =
+                    answers[
+                        indicator.id
+                    ];
+
+
+                if(!stored){
+
+                    return;
+
+                }
+
+
+                const score =
+                    Number(
+                        stored.score
+                    );
+
+
+                const option =
+                    indicator.options.find(
+                        function(item){
+
+                            return (
+                                Number(
+                                    item.score
+                                ) ===
+                                score
+                            );
+
+                        }
+                    );
+
+
+                if(!option){
+
+                    return;
+
+                }
+
+
+                const dimension =
+                    Page02.getIndicatorDimension(
+                        indicator.id
+                    );
+
+
+                if(!dimension){
+
+                    return;
+
+                }
+
+
+                clean[
+                    indicator.id
+                ] =
+                    Page02.buildAnswer(
+                        dimension,
+                        indicator,
+                        option
+                    );
+
+
+                /*
+                 * Preserve original answer timestamp
+                 * where available.
+                 */
+
+                if(
+                    stored.answeredAt
+                ){
+
+                    clean[
+                        indicator.id
+                    ].answeredAt =
+                        stored.answeredAt;
+
+                }
+
+            }
+        );
+
+
+    return clean;
+
+};
+
+
+/* =============================================================================
+ * RECOVER LEGACY IDENTITY
+ * =============================================================================
+ */
+
+
+Page02.recoverLegacyIdentity = function(){
+
+    const storage =
+        Page02.getSessionStorage();
+
+
+    if(!storage){
+
+        return;
+
+    }
+
+
+    if(
+        !Page02.state.peopleId
+    ){
+
+        const peopleId =
+            storage.getItem(
+                Page02.CONFIG.storageKeys.peopleId
+            );
+
+
+        if(peopleId){
+
+            Page02.state.peopleId =
+                peopleId;
+
+        }
+
+    }
+
+
+    if(
+        !Page02.state.clientId &&
+        Page02.state.peopleId
+    ){
+
+        Page02.state.clientId =
+            Page02.state.peopleId;
+
+    }
+
+};
+
+
+/* =============================================================================
+ * RESTORE SESSION INTO STATE
+ * =============================================================================
+ */
+
+
+Page02.restoreSessionState = function(
+    session
+){
+
+    if(
+        !Page02.isValidSession(
+            session
+        )
+    ){
+
+        return false;
+
+    }
+
+
+    Page02.state.peopleId =
+        session.peopleId ||
+        null;
+
+
+    Page02.state.clientId =
+        session.clientId ||
+        session.peopleId ||
+        null;
+
+
+    Page02.state.kyc =
+        (
+            session.kyc &&
+            typeof session.kyc ===
+                'object'
+        )
+            ? session.kyc
+            : null;
+
+
+    Page02.state.answers =
+        Page02.sanitizeRecoveredAnswers(
+            session.answers
+        );
+
+
+    Page02.state.registrationResponse =
+        session.registrationResponse ||
+        null;
+
+
+    Page02.state.discoveryResponse =
+        session.discoveryResponse ||
+        null;
+
+
+    Page02.state.result =
+        (
+            session.result &&
+            typeof session.result ===
+                'object'
+        )
+            ? session.result
+            : null;
+
+
+    const dimension =
+        Number(
+            session.currentDimension
+        );
+
+
+    if(
+        Number.isInteger(
+            dimension
+        ) &&
+        dimension >= 0 &&
+        dimension <
+            Page02.CONFIG.scoring.dimensionCount
+    ){
+
+        Page02.state.currentDimension =
+            dimension;
+
+    }
+    else{
+
+        Page02.state.currentDimension =
+            0;
+
+    }
+
+
+    if(
+        session.currentScreen &&
+        Object.prototype.hasOwnProperty.call(
+            Page02.SCREEN_IDS,
+            session.currentScreen
+        )
+    ){
+
+        Page02.state.currentScreen =
+            session.currentScreen;
+
+    }
+
+
+    Page02.state.sessionRecovered =
+        true;
+
+
+    Page02.recoverLegacyIdentity();
+
+
+    return true;
+
+};
+
+
+/* =============================================================================
+ * RECOVER SESSION
+ * =============================================================================
+ */
+
+
+Page02.recoverSession = function(){
+
+    const session =
+        Page02.readSession();
+
+
+    if(!session){
+
+        Page02.recoverLegacyIdentity();
+
+        return false;
+
+    }
+
+
+    return Page02.restoreSessionState(
+        session
+    );
+
+};
+
+
+/* =============================================================================
+ * SET FORM VALUE
+ * =============================================================================
+ */
+
+
+Page02.setFormValue = function(
+    form,
+    name,
+    value
+){
+
+    if(!form){
+
+        return;
+
+    }
+
+
+    const controls =
+        Page02.queryAll(
+            '[name="' +
+            name +
+            '"]',
+            form
+        );
+
+
+    if(
+        controls.length ===
+        0
+    ){
+
+        return;
+
+    }
+
+
+    controls.forEach(
+        function(control){
+
+            if(
+                control.type ===
+                    'radio'
+            ){
+
+                control.checked =
+                    Page02.safeText(
+                        control.value
+                    ) ===
+                    Page02.safeText(
+                        value
+                    );
+
+
+                return;
+
+            }
+
+
+            if(
+                control.type ===
+                    'checkbox'
+            ){
+
+                control.checked =
+                    Boolean(
+                        value
+                    );
+
+
+                return;
+
+            }
+
+
+            control.value =
+                value === null ||
+                value === undefined
+                    ? ''
+                    : value;
+
+        }
+    );
+
+};
+
+
+/* =============================================================================
+ * RESTORE KYC FORM
+ * =============================================================================
+ */
+
+
+Page02.restoreKYCForm = function(){
+
+    const form =
+        Page02.getKYCForm();
+
+
+    const kyc =
+        Page02.state.kyc;
+
+
+    if(
+        !form ||
+        !kyc
+    ){
+
+        return false;
+
+    }
+
+
+    Page02.setFormValue(
+        form,
+        'fullName',
+        kyc.fullName
+    );
+
+
+    Page02.setFormValue(
+        form,
+        'mobileNumber',
+        kyc.mobile
+    );
+
+
+    Page02.setFormValue(
+        form,
+        'emailAddress',
+        kyc.email
+    );
+
+
+    Page02.setFormValue(
+        form,
+        'age',
+        kyc.age
+    );
+
+
+    Page02.setFormValue(
+        form,
+        'gender',
+        kyc.gender
+    );
+
+
+    Page02.setFormValue(
+        form,
+        'occupation',
+        kyc.occupation
+    );
+
+
+    Page02.setFormValue(
+        form,
+        'employerBusiness',
+        kyc.employerBusiness
+    );
+
+
+    Page02.setFormValue(
+        form,
+        'maritalStatus',
+        kyc.maritalStatus
+    );
+
+
+    Page02.setFormValue(
+        form,
+        'dependents',
+        kyc.dependents
+    );
+
+
+    Page02.setFormValue(
+        form,
+        'city',
+        kyc.city
+    );
+
+
+    Page02.setFormValue(
+        form,
+        'district',
+        kyc.district
+    );
+
+
+    Page02.setFormValue(
+        form,
+        'state',
+        kyc.state
+    );
+
+
+    Page02.setFormValue(
+        form,
+        'country',
+        kyc.country
+    );
+
+
+    Page02.setFormValue(
+        form,
+        'pincode',
+        kyc.pincode
+    );
+
+
+    Page02.setFormValue(
+        form,
+        'preferredLanguage',
+        kyc.preferredLanguage
+    );
+
+
+    Page02.setFormValue(
+        form,
+        'referralSource',
+        kyc.referralSource
+    );
+
+
+    Page02.updateClientName();
+
+
+    return true;
+
+};
+
+
+/* =============================================================================
+ * RESULT IS RECOVERABLE
+ * =============================================================================
+ */
+
+
+Page02.hasRecoverableResult = function(){
+
+    const result =
+        Page02.state.result;
+
+
+    if(
+        !result ||
+        typeof result !==
+            'object'
+    ){
+
+        return false;
+
+    }
+
+
+    return (
+        Number(
+            result.answered
+        ) ===
+            Page02.CONFIG.scoring.indicatorCount &&
+
+        Number(
+            result.totalScore
+        ) >= 0 &&
+
+        Number(
+            result.totalScore
+        ) <=
+            Page02.CONFIG.scoring.maximumScore
+    );
+
+};
+
+
+/* =============================================================================
+ * DETERMINE INITIAL SCREEN
+ * =============================================================================
+ *
+ * PRIORITY:
+ *
+ *      1. Saved completed result
+ *      2. Registered user with answers
+ *      3. Registered user without answers
+ *      4. KYC started but not registered
+ *      5. Intro
+ *
+ * =============================================================================
+ */
+
+
+Page02.determineInitialScreen = function(){
+
+    if(
+        Page02.hasRecoverableResult()
+    ){
+
+        return Page02.SCREENS.RESULT;
+
+    }
+
+
+    if(
+        Page02.state.peopleId ||
+        Page02.state.clientId
+    ){
+
+        return Page02.SCREENS.SCORECARD;
+
+    }
+
+
+    if(
+        Page02.state.kyc
+    ){
+
+        return Page02.SCREENS.KYC;
+
+    }
+
+
+    return Page02.SCREENS.INTRO;
+
+};
+
+
+/* =============================================================================
+ * RESTORE SCORECARD POSITION
+ * =============================================================================
+ */
+
+
+Page02.restoreScorecardPosition = function(){
+
+    /*
+     * If the stored current dimension is complete
+     * but a later dimension is incomplete,
+     * preserve the user's actual last position.
+     *
+     * If the stored dimension is invalid,
+     * recover to first incomplete.
+     */
+
+
+    let index =
+        Page02.state.currentDimension;
+
+
+    if(
+        !Number.isInteger(
+            index
+        ) ||
+        index < 0 ||
+        index >=
+            Page02.CONFIG.scoring.dimensionCount
+    ){
+
+        const incomplete =
+            Page02.getFirstIncompleteDimensionIndex();
+
+
+        index =
+            incomplete >= 0
+                ? incomplete
+                : 0;
+
+    }
+
+
+    Page02.state.currentDimension =
+        index;
+
+
+    Page02.renderCurrentDimension();
+
+
+    Page02.refreshVisibleAnswerStates();
+
+};
+
+
+/* =============================================================================
+ * RESTORE RESULT SCREEN
+ * =============================================================================
+ */
+
+
+Page02.restoreResultScreen = function(){
+
+    if(
+        !Page02.hasRecoverableResult()
+    ){
+
+        return false;
+
+    }
+
+
+    Page02.renderResult(
+        Page02.state.result
+    );
+
+
+    return true;
+
+};
+
+
+/* =============================================================================
+ * PAGE 03 URL
+ * =============================================================================
+ */
+
+
+Page02.getPage03URL = function(){
+
+    /*
+     * Page 02 lives inside /pages/.
+     *
+     * Therefore page03.html is a sibling page.
+     */
+
+    return 'page03.html';
+
+};
+
+
+/* =============================================================================
+ * FIND PAGE 03 CTA
+ * =============================================================================
+ *
+ * Supports the canonical ID first.
+ *
+ * Fallback selectors make the controller tolerant
+ * if the final result HTML uses a data attribute.
+ *
+ * =============================================================================
+ */
+
+
+Page02.getPage03Button = function(){
+
+    return (
+
+        Page02.el(
+            'continue-page03'
+        ) ||
+
+        Page02.query(
+            '[data-page03]'
+        ) ||
+
+        Page02.query(
+            '[data-next-page="page03"]'
+        )
+
+    );
+
+};
+
+
+/* =============================================================================
+ * GO TO PAGE 03
+ * =============================================================================
+ */
+
+
+Page02.goToPage03 = function(){
+
+    Page02.saveSession();
+
+
+    window.location.href =
+        Page02.getPage03URL();
+
+};
+
+
+/* =============================================================================
+ * BIND PAGE 03 CTA
+ * =============================================================================
+ */
+
+
+Page02.bindPage03CTA = function(){
+
+    const button =
+        Page02.getPage03Button();
+
+
+    if(!button){
+
+        return false;
+
+    }
+
+
+    if(
+        button.dataset.page02Bound ===
+        'true'
+    ){
+
+        return true;
+
+    }
+
+
+    button.addEventListener(
+        'click',
+        function(event){
+
+            event.preventDefault();
+
+
+            Page02.goToPage03();
+
+        }
+    );
+
+
+    button.dataset.page02Bound =
+        'true';
+
+
+    return true;
+
+};
+
+
+/* =============================================================================
+ * ENSURE RESULT CTA
+ * =============================================================================
+ *
+ * Batch 5 dynamically renders the result screen.
+ *
+ * Therefore the Page 03 CTA must exist after result
+ * rendering, not merely during initial DOM parsing.
+ *
+ * If page02.html already provides a canonical CTA,
+ * this function leaves it untouched.
+ *
+ * =============================================================================
+ */
+
+
+Page02.ensureResultCTA = function(){
+
+    const existing =
+        Page02.getPage03Button();
+
+
+    if(existing){
+
+        Page02.bindPage03CTA();
+
+        return existing;
+
+    }
+
+
+    const host =
+        Page02.getResultHost();
+
+
+    if(!host){
+
+        return null;
+
+    }
+
+
+    const wrapper =
+        document.createElement(
+            'div'
+        );
+
+
+    wrapper.className =
+        'result-next-step';
+
+
+    wrapper.innerHTML = `
+
+        <button
+            type="button"
+            id="continue-page03"
+            class="journey-button"
+            data-page03
+        >
+
+            <span class="button-primary">
+                அடுத்த கட்டத்திற்கு செல்கிறேன்
+            </span>
+
+            <span class="button-secondary">
+                CONTINUE MY JOURNEY™
+            </span>
+
+        </button>
+
+    `;
+
+
+    host.appendChild(
+        wrapper
+    );
+
+
+    Page02.bindPage03CTA();
+
+
+    return Page02.getPage03Button();
+
+};
+
+
+/* =============================================================================
+ * WRAP ORIGINAL SHOW RESULT
+ * =============================================================================
+ *
+ * Batch 5 defines:
+ *
+ *      Page02.showResult()
+ *
+ * Extend it here so every dynamically generated
+ * result automatically receives its Page 03 CTA.
+ *
+ * =============================================================================
+ */
+
+
+Page02._showResult =
+    Page02.showResult;
+
+
+Page02.showResult = function(
+    result
+){
+
+    const rendered =
+        Page02._showResult(
+            result
+        );
+
+
+    Page02.ensureResultCTA();
+
+
+    Page02.saveSession();
+
+
+    return rendered;
+
+};
+
+
+/* =============================================================================
+ * HIDE LOADING ON BOOT
+ * =============================================================================
+ */
+
+
+Page02.resetLoadingState = function(){
+
+    Page02.state.isRegistering =
+        false;
+
+
+    Page02.state.isSavingDiscovery =
+        false;
+
+
+    Page02.state.navigationLocked =
+        false;
+
+
+    Page02.setLoading(
+        false
+    );
+
+
+    Page02.setKYCSubmitState(
+        false
+    );
+
+};
+
+
+/* =============================================================================
+ * RESET TRANSIENT ERRORS
+ * =============================================================================
+ */
+
+
+Page02.resetErrors = function(){
+
+    Page02.setKYCError(
+        ''
+    );
+
+
+    Page02.setScorecardError(
+        ''
+    );
+
+};
+
+
+/* =============================================================================
+ * BATCH 6 DOM AUDIT
+ * =============================================================================
+ */
+
+
+Page02.validateFinalDOM = function(){
+
+    const batch2 =
+        Page02.validateBatch2DOM();
+
+
+    const requiredIds = [
+
+        Page02.DOM.introScreen,
+
+        Page02.DOM.kycScreen,
+
+        Page02.DOM.scorecardScreen,
+
+        Page02.DOM.resultScreen,
+
+        Page02.DOM.beginButton,
+
+        Page02.DOM.kycForm,
+
+        Page02.DOM.dimensionProgress,
+
+        Page02.DOM.dimensionQuestions,
+
+        Page02.DOM.dimensionBack,
+
+        Page02.DOM.dimensionNext
+
+    ];
+
+
+    const missing =
+        requiredIds.filter(
+            function(id){
+
+                return !Page02.el(
+                    id
+                );
+
+            }
+        );
+
+
+    return {
+
+        valid:
+            (
+                batch2.valid &&
+                missing.length ===
+                    0
+            ),
+
+        batch2:
+            batch2,
+
+        missingIds:
+            missing
+
+    };
+
+};
+
+
+/* =============================================================================
+ * LOG DOM AUDIT
+ * =============================================================================
+ */
+
+
+Page02.logDOMAudit = function(){
+
+    const audit =
+        Page02.validateFinalDOM();
+
+
+    if(audit.valid){
+
+        console.info(
+            '[Page02] DOM contract verified.'
+        );
+
+    }
+    else{
+
+        console.warn(
+            '[Page02] DOM contract mismatch:',
+            audit
+        );
+
+    }
+
+
+    return audit;
+
+};
+
+
+/* =============================================================================
+ * APPLY INITIAL SCREEN
+ * =============================================================================
+ */
+
+
+Page02.applyInitialScreen = function(){
+
+    const screen =
+        Page02.determineInitialScreen();
+
+
+    /* -------------------------------------------------------------------------
+     * RESULT
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        screen ===
+        Page02.SCREENS.RESULT
+    ){
+
+        Page02.restoreResultScreen();
+
+
+        Page02.showScreen(
+            Page02.SCREENS.RESULT,
+            {
+                scroll:
+                    false
+            }
+        );
+
+
+        Page02.ensureResultCTA();
+
+
+        return screen;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * SCORECARD
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        screen ===
+        Page02.SCREENS.SCORECARD
+    ){
+
+        Page02.showScreen(
+            Page02.SCREENS.SCORECARD,
+            {
+                scroll:
+                    false
+            }
+        );
+
+
+        Page02.restoreScorecardPosition();
+
+
+        return screen;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * KYC
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        screen ===
+        Page02.SCREENS.KYC
+    ){
+
+        Page02.restoreKYCForm();
+
+
+        Page02.showScreen(
+            Page02.SCREENS.KYC,
+            {
+                scroll:
+                    false
+            }
+        );
+
+
+        return screen;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * INTRO
+     * -------------------------------------------------------------------------
+     */
+
+
+    Page02.showScreen(
+        Page02.SCREENS.INTRO,
+        {
+            scroll:
+                false
+        }
+    );
+
+
+    return Page02.SCREENS.INTRO;
+
+};
+
+
+/* =============================================================================
+ * FINAL PAGE 02 INITIALIZER
+ * =============================================================================
+ */
+
+
+Page02.init = function(){
+
+    if(
+        Page02.state.initialized
+    ){
+
+        return true;
+
+    }
+
+
+    if(
+        Page02.state.initializing
+    ){
+
+        return false;
+
+    }
+
+
+    Page02.state.initializing =
+        true;
+
+
+    try{
+
+        console.info(
+            'CTM PATH™ Page 02 v' +
+            Page02.version +
+            ' starting...'
+        );
+
+
+        /* ---------------------------------------------------------------------
+         * 01 — DOM CONTRACT
+         * ---------------------------------------------------------------------
+         */
+
+
+        Page02.logDOMAudit();
+
+
+        /* ---------------------------------------------------------------------
+         * 02 — RESET TRANSIENT UI
+         * ---------------------------------------------------------------------
+         */
+
+
+        Page02.resetLoadingState();
+
+        Page02.resetErrors();
+
+
+        /* ---------------------------------------------------------------------
+         * 03 — BIND INTRO + KYC
+         * ---------------------------------------------------------------------
+         */
+
+
+        Page02.bindBatch2();
+
+
+        /* ---------------------------------------------------------------------
+         * 04 — BIND SCORECARD NAVIGATION
+         * ---------------------------------------------------------------------
+         */
+
+
+        Page02.initializeScorecardNavigation();
+
+
+        /* ---------------------------------------------------------------------
+         * 05 — RECOVER SESSION
+         * ---------------------------------------------------------------------
+         */
+
+
+        Page02.recoverSession();
+
+
+        /* ---------------------------------------------------------------------
+         * 06 — RESTORE KYC VALUES
+         * ---------------------------------------------------------------------
+         */
+
+
+        Page02.restoreKYCForm();
+
+
+        /* ---------------------------------------------------------------------
+         * 07 — CHOOSE INITIAL SCREEN
+         * ---------------------------------------------------------------------
+         */
+
+
+        const initialScreen =
+            Page02.applyInitialScreen();
+
+
+        /* ---------------------------------------------------------------------
+         * 08 — UPDATE CLIENT NAME
+         * ---------------------------------------------------------------------
+         */
+
+
+        Page02.updateClientName();
+
+
+        /* ---------------------------------------------------------------------
+         * 09 — FINAL NAVIGATION STATE
+         * ---------------------------------------------------------------------
+         */
+
+
+        Page02.updateDimensionNavigation();
+
+
+        /* ---------------------------------------------------------------------
+         * 10 — MARK INITIALIZED
+         * ---------------------------------------------------------------------
+         */
+
+
+        Page02.state.initialized =
+            true;
+
+
+        Page02.state.initializing =
+            false;
+
+
+        /* ---------------------------------------------------------------------
+         * 11 — SAVE CLEAN SNAPSHOT
+         * ---------------------------------------------------------------------
+         */
+
+
+        Page02.saveSession();
+
+
+        console.info(
+            'CTM PATH™ Page 02 ready.',
+            {
+                screen:
+                    initialScreen,
+
+                recovered:
+                    Page02.state.sessionRecovered,
+
+                peopleId:
+                    Page02.state.peopleId,
+
+                answered:
+                    Page02.getAnsweredCount(),
+
+                score:
+                    Page02.getTotalScore()
+            }
+        );
+
+
+        return true;
+
+    }
+    catch(error){
+
+        Page02.state.initializing =
+            false;
+
+
+        console.error(
+            'CTM PATH™ Page 02 initialization failed:',
+            error
+        );
+
+
+        return false;
+
+    }
+
+};
+
+
+/* =============================================================================
+ * PUBLIC DIAGNOSTIC
+ * =============================================================================
+ */
+
+
+Page02.info = function(){
+
+    return {
+
+        product:
+            'CTM PATH™ MILLIONAIRES™',
+
+        page:
+            Page02.CONFIG.pageLabel,
+
+        version:
+            Page02.version,
+
+        initialized:
+            Page02.state.initialized,
+
+        sessionRecovered:
+            Page02.state.sessionRecovered,
+
+        currentScreen:
+            Page02.state.currentScreen,
+
+        peopleId:
+            Page02.state.peopleId,
+
+        clientId:
+            Page02.state.clientId,
+
+        currentDimension:
+            Page02.state.currentDimension +
+            1,
+
+        answered:
+            Page02.getAnsweredCount(),
+
+        remaining:
+            Page02.getRemainingCount(),
+
+        score:
+            Page02.getTotalScore(),
+
+        gap:
+            Page02.getTotalGap(),
+
+        scorecardComplete:
+            Page02.isScorecardComplete(),
+
+        result:
+            Page02.getResultSnapshot(),
+
+        dom:
+            Page02.validateFinalDOM()
+
+    };
+
+};
+
+
+/* =============================================================================
+ * PUBLIC EXPOSURE
+ * =============================================================================
+ *
+ * Page02 has been built in one IIFE across six batches.
+ *
+ * Expose only after the full controller exists.
+ *
+ * =============================================================================
+ */
+
+
+window.Page02 =
+    Page02;
+
+
+/* =============================================================================
+ * PRODUCTION BOOT
+ * =============================================================================
+ */
+
+
+function bootPage02(){
+
+    Page02.init();
+
+}
+
+
+if(
+    document.readyState ===
+    'loading'
+){
+
+    document.addEventListener(
+        'DOMContentLoaded',
+        bootPage02,
+        {
+            once:
+                true
+        }
+    );
+
+}
+else{
+
+    bootPage02();
+
+}
+
+
+/* =============================================================================
+ * END OF PAGE02.JS v2.3
+ * =============================================================================
+ *
+ * CTM PATH™ MILLIONAIRES™
+ *
+ * PAGE 02
+ * MILLIONAIRE LIFESTYLE SCORECARD™
+ *
+ * VERSION:
+ *      2.3
+ *
+ * STATUS:
+ *      INTEGRATION CANDIDATE
+ *
+ *
+ * COMPLETE CONTROLLER
+ * =============================================================================
+ *
+ * BATCH 1
+ *
+ *      FOUNDATION
+ *      +
+ *      25 FROZEN INDICATORS
+ *      +
+ *      100 FROZEN RANGE DEFINITIONS
+ *
+ *
+ * BATCH 2
+ *
+ *      INTRO
+ *      +
+ *      KYC
+ *      +
+ *      CTM_API.register()
+ *      +
+ *      CLIENT IDENTITY
+ *
+ *
+ * BATCH 3
+ *
+ *      FOUR-OPTION SCORECARD
+ *      +
+ *      ANSWER STATE
+ *      +
+ *      LIVE SCORING
+ *      +
+ *      DIMENSION PROGRESS
+ *
+ *
+ * BATCH 4
+ *
+ *      DIMENSION NAVIGATION
+ *      +
+ *      VALIDATION
+ *      +
+ *      25-INDICATOR COMPLETION GATE
+ *
+ *
+ * BATCH 5
+ *
+ *      FINAL RESULT
+ *      +
+ *      MILLIONAIRE GAP™
+ *      +
+ *      CTM_API.saveDiscovery()
+ *      +
+ *      RESULT SCREEN
+ *
+ *
+ * BATCH 6
+ *
+ *      SESSION PERSISTENCE
+ *      +
+ *      SESSION RECOVERY
+ *      +
+ *      PAGE 03 CTA
+ *      +
+ *      FINAL INITIALIZER
+ *      +
+ *      PRODUCTION BOOT
+ *
+ *
+ * =============================================================================
+ * FINAL PAGE 02 JOURNEY
+ * =============================================================================
+ *
+ *      PAGE 02 LOADS
+ *          ↓
+ *
+ *      SESSION RECOVERY
+ *          ↓
+ *
+ *      INTRO
+ *          ↓
+ *
+ *      LET'S BEGIN
+ *          ↓
+ *
+ *      ABOUT YOU™ / KYC
+ *          ↓
+ *
+ *      CTM_API.register()
+ *          ↓
+ *
+ *      PEOPLE ID / CLIENT ID
+ *          ↓
+ *
+ *      DIMENSION 01
+ *          5 indicators
+ *          ↓
+ *
+ *      DIMENSION 02
+ *          5 indicators
+ *          ↓
+ *
+ *      DIMENSION 03
+ *          5 indicators
+ *          ↓
+ *
+ *      DIMENSION 04
+ *          5 indicators
+ *          ↓
+ *
+ *      DIMENSION 05
+ *          5 indicators
+ *          ↓
+ *
+ *      25 / 25 COMPLETE
+ *          ↓
+ *
+ *      TOTAL SCORE / 100
+ *          ↓
+ *
+ *      MILLIONAIRE GAP™
+ *          ↓
+ *
+ *      FIVE DIMENSION RESULTS
+ *          ↓
+ *
+ *      CTM_API.saveDiscovery()
+ *          ↓
+ *
+ *      RESULT SCREEN
+ *          ↓
+ *
+ *      CONTINUE MY JOURNEY™
+ *          ↓
+ *
+ *      PAGE 03
+ *
+ *
+ * =============================================================================
+ * SCORING CONTRACT
+ * =============================================================================
+ *
+ *      DIMENSIONS:
+ *          5
+ *
+ *      INDICATORS:
+ *          25
+ *
+ *      INDICATORS PER DIMENSION:
+ *          5
+ *
+ *      OPTIONS PER INDICATOR:
+ *          4
+ *
+ *      OPTION SCORES:
+ *          1 / 2 / 3 / 4
+ *
+ *      MAXIMUM PER DIMENSION:
+ *          20
+ *
+ *      MAXIMUM TOTAL:
+ *          100
+ *
+ *
+ * =============================================================================
+ * NEXT ENGINEERING ACTION
+ * =============================================================================
+ *
+ *      DO NOT ADD ANOTHER PAGE02.JS BATCH.
+ *
+ *      page02.js v2.3 IS NOW STRUCTURALLY COMPLETE.
+ *
+ *      NEXT:
+ *
+ *          INTEGRATION AUDIT
+ *
+ *              page02.html
+ *                  ↕
+ *              page02.css
+ *                  ↕
+ *              page02.js
+ *                  ↕
+ *              api.js
+ *
+ *      Verify every:
+ *
+ *          ID
+ *          class
+ *          field name
+ *          API method
+ *          payload key
+ *          response key
+ *          screen transition
+ *          mobile state
+ *
+ *      Only after that audit should PAGE 02 be frozen.
+ *
+ * =============================================================================
+ */
+
