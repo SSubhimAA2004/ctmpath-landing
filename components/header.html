@@ -3,37 +3,59 @@
      CTM PATH™ MILLIONAIRES™
 
      Component : header.html
-     Version   : 11.1
+     Version   : 12.0
+     Status    : CANONICAL GLOBAL HEADER
 
-     Status    : 🔒 PREMIUM BRAND HEADER
+     Architecture:
+     STATIC MULTI-PAGE GUIDED JOURNEY
+
+     Used By:
+     ✓ index.html
+     ✓ pages/page02.html
+     ✓ pages/page03.html
+     ✓ pages/page04.html
+     ✓ pages/page05.html
+     ✓ pages/page06.html
+     ✓ pages/page07.html
 
      Purpose:
-
-     Global premium identity layer.
+     Global CTM PATH™ MILLIONAIRES™ brand identity.
 
      Brand Architecture:
 
-     CTM PATH™ MILLIONAIRES™
-              ↓
-        Guided Journey™
-              ↓
-     Every Dream Has A Path™
+         CTM PATH™
+         MILLIONAIRES™
+         GUIDED JOURNEY™
+         Every Dream Has A Path™
 
      Responsibilities:
 
-     ✓ Brand Identity
-     ✓ Millionaire Movement Identity
-     ✓ Cosmic Mark Display
-     ✓ Dynamic Journey Indicator
-     ✓ Premium Executive Positioning
-
+     ✓ Cosmic Mark
+     ✓ CTM PATH™ Identity
+     ✓ MILLIONAIRES™ Identity
+     ✓ GUIDED JOURNEY™ Identity
+     ✓ Brand Philosophy
+     ✓ Consistent Header Across Pages 01–07
 
      Does NOT:
 
-     ✗ Navigation Logic
-     ✗ Routing
-     ✗ API Calls
-     ✗ Business Logic
+     ✗ Display Page Number
+     ✗ Display Journey Progress
+     ✗ Display Page-Specific Journey Name
+     ✗ Perform Navigation
+     ✗ Perform Routing
+     ✗ Call APIs
+     ✗ Contain Business Logic
+
+     IMPORTANT:
+
+     Page-specific journey indicators such as:
+
+         FINANCIAL CONFIDENCE™
+         02 / 07
+
+     belong inside the individual page,
+     NOT inside this global component.
 
 ========================================================================== -->
 
@@ -44,178 +66,103 @@
 >
 
 
-    <!-- ======================================================
-         BRAND IDENTITY
-         ====================================================== -->
+    <!-- ================================================================
+         HEADER CONTAINER
+    ================================================================= -->
 
 
-    <div class="header-brand">
+    <div class="header-container">
 
 
-
-        <!-- ==================================================
-             COSMIC MARK
-             ================================================== -->
-
-
-        <div class="header-logo">
+        <!-- ============================================================
+             BRAND SYSTEM
+        ============================================================= -->
 
 
-            <img
+        <div class="header-brand">
 
-                src="/assets/logo/CTM_Mark.svg"
 
-                alt="CTM PATH™ Millionaires™ Symbol"
+            <!-- ========================================================
+                 COSMIC MARK
+            ========================================================= -->
 
-                class="brand-symbol"
 
-                loading="eager"
+            <div class="brand-logo">
 
-                decoding="async"
 
-            >
+                <img
+
+                    src="/assets/logo/CTM_Mark.svg"
+
+                    alt="CTM PATH™ Millionaires™ Symbol"
+
+                    class="ctm-logo"
+
+                    loading="eager"
+
+                    decoding="async"
+
+                >
+
+
+            </div>
+
+
+            <!-- ========================================================
+                 BRAND IDENTITY
+            ========================================================= -->
+
+
+            <div class="brand-text">
+
+
+                <!-- PRIMARY BRAND -->
+
+
+                <div class="header-title">
+
+                    CTM PATH™
+
+                </div>
+
+
+                <!-- MOVEMENT IDENTITY -->
+
+
+                <div class="header-subtitle">
+
+                    MILLIONAIRES™
+
+                </div>
+
+
+                <!-- EXPERIENCE IDENTITY -->
+
+
+                <div class="header-journey">
+
+                    GUIDED JOURNEY™
+
+                </div>
+
+
+                <!-- BRAND PHILOSOPHY -->
+
+
+                <div class="header-tagline">
+
+                    Every Dream Has A Path™
+
+                </div>
+
+
+            </div>
 
 
         </div>
 
 
-
-
-
-
-        <!-- ==================================================
-             BRAND MESSAGE
-             ================================================== -->
-
-
-        <div class="brand-identity">
-
-
-
-            <!-- PRIMARY BRAND -->
-
-            <div
-                class="brand-name"
-            >
-
-                CTM PATH™
-
-            </div>
-
-
-
-
-
-            <!-- MOVEMENT IDENTITY -->
-
-            <div
-                class="brand-tagline-main"
-            >
-
-                MILLIONAIRES™
-
-            </div>
-
-
-
-
-
-
-            <!-- EXPERIENCE LAYER -->
-
-            <div
-                class="brand-tagline"
-            >
-
-                GUIDED JOURNEY™
-
-            </div>
-
-
-
-
-
-
-            <!-- BRAND PHILOSOPHY -->
-
-            <div
-                class="brand-signature"
-            >
-
-                Every Dream Has A Path™
-
-            </div>
-
-
-
-        </div>
-
-
-
     </div>
-
-
-
-
-
-
-
-    <!-- ======================================================
-         JOURNEY STATUS
-         ====================================================== -->
-
-
-    <div
-
-        class="journey-status"
-
-        aria-label="Current journey progress"
-
-    >
-
-
-
-
-
-        <!-- Dynamic Journey Name -->
-
-        <span
-
-            class="journey-label"
-
-            id="journey-title"
-
-        >
-
-            MILLIONAIRE JOURNEY™
-
-        </span>
-
-
-
-
-
-        <!-- Dynamic Journey Counter -->
-
-        <span
-
-            class="journey-counter"
-
-            id="journey-counter"
-
-        >
-
-            01 / 07
-
-        </span>
-
-
-
-
-
-    </div>
-
 
 
 </header>
-
