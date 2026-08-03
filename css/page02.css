@@ -1,4 +1,5 @@
 
+
 /* ==========================================================================
    CTM PATH™ MILLIONAIRES™
 
@@ -6,7 +7,7 @@
    page02.css
 
    VERSION:
-   11.0
+   11.1
 
    PAGE:
    PAGE 02 — MILLIONAIRE LIFESTYLE SCORECARD™
@@ -21,7 +22,8 @@
    ✓ 25-Indicator Scorecard
    ✓ 5 Dimensions
    ✓ Four Range Options Per Indicator
-   ✓ 2 × 2 Desktop Option Grid
+   ✓ 4 × 1 Desktop Option Grid
+   ✓ 2 × 2 Tablet Option Grid
    ✓ 1 × 4 Mobile Option Stack
    ✓ Score Reveal
    ✓ Page 03 Transition
@@ -1656,7 +1658,9 @@
 
 /* ==========================================================================
    FOUR RANGE OPTIONS
-   DESKTOP = 2 × 2
+   DESKTOP = 4 × 1
+   TABLET  = 2 × 2
+   MOBILE  = 1 × 4
 ========================================================================== */
 
 .page02 #dimensionHost .range-options,
@@ -1669,16 +1673,16 @@
         100%;
 
     margin:
-        22px 0 0;
+        28px 0 0;
 
     display:
         grid;
 
     grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+        repeat(4, minmax(0, 1fr));
 
     gap:
-        14px;
+        16px;
 
 }
 
@@ -1726,7 +1730,7 @@
 
 
 /*
-   Visual option surface
+   Premium visual option surface
 */
 
 .page02 #dimensionHost .range-option > span,
@@ -1742,16 +1746,16 @@
         100%;
 
     min-height:
-        76px;
+        82px;
 
     padding:
-        16px 20px;
+        18px 16px;
 
     border:
-        1px solid rgba(255, 255, 255, 0.10);
+        1px solid rgba(221, 182, 78, 0.18);
 
     border-radius:
-        15px;
+        16px;
 
     display:
         flex;
@@ -1760,7 +1764,7 @@
         center;
 
     justify-content:
-        flex-start;
+        center;
 
     background:
         rgba(255, 255, 255, 0.035);
@@ -1772,7 +1776,7 @@
         inherit;
 
     font-size:
-        1rem;
+        0.96rem;
 
     font-weight:
         600;
@@ -1781,16 +1785,16 @@
         1.45;
 
     text-align:
-        left;
+        center;
 
     cursor:
         pointer;
 
     transition:
-        border-color 160ms ease,
-        background 160ms ease,
-        transform 160ms ease,
-        box-shadow 160ms ease;
+        border-color 180ms ease,
+        background 180ms ease,
+        transform 180ms ease,
+        box-shadow 180ms ease;
 
 }
 
@@ -1805,13 +1809,16 @@
 .page02 #dimensionHost button.answer-option:hover {
 
     border-color:
-        rgba(221, 182, 78, 0.5);
+        rgba(221, 182, 78, 0.55);
 
     background:
-        rgba(221, 182, 78, 0.07);
+        rgba(221, 182, 78, 0.08);
 
     transform:
-        translateY(-1px);
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 26px rgba(0, 0, 0, 0.14);
 
 }
 
@@ -1831,16 +1838,16 @@
     background:
         linear-gradient(
             135deg,
-            rgba(221, 182, 78, 0.16),
-            rgba(221, 182, 78, 0.07)
+            rgba(221, 182, 78, 0.20),
+            rgba(221, 182, 78, 0.08)
         );
 
     color:
         var(--p02-gold-light);
 
     box-shadow:
-        inset 0 0 0 1px rgba(221, 182, 78, 0.16),
-        0 8px 24px rgba(0, 0, 0, 0.12);
+        0 10px 28px rgba(0, 0, 0, 0.18),
+        inset 0 0 0 1px rgba(221, 182, 78, 0.18);
 
 }
 
@@ -1862,10 +1869,18 @@
         var(--p02-gold);
 
     background:
-        rgba(221, 182, 78, 0.14);
+        linear-gradient(
+            135deg,
+            rgba(221, 182, 78, 0.20),
+            rgba(221, 182, 78, 0.08)
+        );
 
     color:
         var(--p02-gold-light);
+
+    box-shadow:
+        0 10px 28px rgba(0, 0, 0, 0.18),
+        inset 0 0 0 1px rgba(221, 182, 78, 0.18);
 
 }
 
@@ -2041,7 +2056,7 @@
         grid;
 
     grid-template-columns:
-        repeat(5, minmax(0, 1fr));
+        repeat(4, minmax(0, 1fr));
 
     gap:
         12px;
@@ -2958,7 +2973,11 @@
     }
 
 
-    .page02 .scoring-grid {
+    .page02 #dimensionHost .range-options,
+    .page02 #dimensionHost .option-grid,
+    .page02 #dimensionHost .score-options,
+    .page02 #dimensionHost .answer-options,
+    .page02 #dimensionHost .range-grid {
 
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
@@ -2966,10 +2985,10 @@
     }
 
 
-    .page02 .scoring-grid > div:last-child {
+    .page02 .scoring-grid {
 
-        grid-column:
-            1 / -1;
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
 
     }
 
@@ -3456,8 +3475,14 @@
         padding:
             14px 16px;
 
+        justify-content:
+            flex-start;
+
         font-size:
             0.94rem;
+
+        text-align:
+            left;
 
     }
 
@@ -3694,8 +3719,14 @@
         padding:
             13px 14px;
 
+        justify-content:
+            flex-start;
+
         font-size:
             0.9rem;
+
+        text-align:
+            left;
 
     }
 
@@ -3775,4 +3806,6 @@
     }
 
 }
+
+
 
