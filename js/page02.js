@@ -4,7 +4,7 @@
  * CTM PATH™ MILLIONAIRES™
  * Guided Journey™
  *
- * Frontend v1.1
+ * Frontend v2.0
  * -----------------------------------------------------------------------------
  * File          : js/page02.js
  * Page          : 02 / 07
@@ -23,6 +23,7 @@
  *      • Register person with backend
  *      • Render 25 scorecard indicators
  *      • Organise indicators into 5 dimensions
+ *      • Render five selectable ranges for every indicator
  *      • Calculate live score / gap
  *      • Save Millionaire Lifestyle Scorecard™
  *      • Render final result
@@ -33,8 +34,22 @@
  *      CTM_API.register()
  *      CTM_API.saveDiscovery()
  *
- * Contains NO backend business logic other than presentation-side
- * score preview required for the interactive scorecard.
+ * SCORING MODEL
+ *
+ *      0 = Starting
+ *      1 = Emerging
+ *      2 = Progressing
+ *      3 = Advancing
+ *      4 = Achieved
+ *
+ *      25 indicators × 4 = 100
+ *
+ * IMPORTANT
+ *
+ *      Users NEVER type financial / lifestyle values.
+ *
+ *      Every indicator presents five controlled ranges.
+ *      The selected range directly determines the score.
  *
  * =============================================================================
  */
@@ -50,7 +65,6 @@
 
 
 const Page02 = {};
-
 
 
 /* =============================================================================
@@ -83,7 +97,6 @@ Page02.CONFIG = {
 };
 
 
-
 /* =============================================================================
  * PAGE STATE
  * =============================================================================
@@ -109,6 +122,44 @@ Page02.state = {
 };
 
 
+/* =============================================================================
+ * OPTION HELPER
+ * =============================================================================
+ *
+ * value:
+ *      Representative numeric value retained for backend compatibility.
+ *
+ * score:
+ *      Actual Lifestyle Scorecard™ score.
+ *
+ * label:
+ *      User-visible range.
+ *
+ * =============================================================================
+ */
+
+
+Page02.option = function(
+    score,
+    label,
+    value
+){
+
+    return {
+
+        score:
+            score,
+
+        label:
+            label,
+
+        value:
+            value
+
+    };
+
+};
+
 
 /* =============================================================================
  * SCORECARD MASTER
@@ -118,17 +169,7 @@ Page02.state = {
  * 5 dimensions
  * 5 indicators per dimension
  *
- * Standard scoring:
- *
- *      0 = Starting
- *      1 = Emerging
- *      2 = Progressing
- *      3 = Advancing
- *      4 = Achieved
- *
- * Total:
- *
- *      25 × 4 = 100
+ * Every indicator contains exactly five selectable ranges.
  *
  * =============================================================================
  */
@@ -145,9 +186,11 @@ Page02.DIMENSIONS = [
 
     {
 
-        id: 'wealth',
+        id:
+            'wealth',
 
-        number: '01',
+        number:
+            '01',
 
         tamil:
             'செல்வம்',
@@ -157,11 +200,19 @@ Page02.DIMENSIONS = [
 
         indicators: [
 
+
+            /* -----------------------------------------------------------------
+             * 01 — NET WORTH
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'netWorth',
+                id:
+                    'netWorth',
 
-                number: 1,
+                number:
+                    1,
 
                 tamil:
                     'நிகர சொத்து மதிப்பு',
@@ -169,32 +220,61 @@ Page02.DIMENSIONS = [
                 english:
                     'Net Worth',
 
-                unit:
-                    '₹',
-
-                placeholder:
-                    'Enter current net worth',
-
                 ideal:
                     '₹10 Cr+',
 
                 target:
                     100000000,
 
-                type:
-                    'money',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        '₹0 – ₹2.49 Cr',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '₹2.5 Cr – ₹4.99 Cr',
+                        25000000
+                    ),
+
+                    Page02.option(
+                        2,
+                        '₹5 Cr – ₹7.49 Cr',
+                        50000000
+                    ),
+
+                    Page02.option(
+                        3,
+                        '₹7.5 Cr – ₹9.99 Cr',
+                        75000000
+                    ),
+
+                    Page02.option(
+                        4,
+                        '₹10 Cr+',
+                        100000000
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 06 — LIQUID FINANCIAL INVESTMENTS
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'liquidFinancialInvestments',
+                id:
+                    'liquidFinancialInvestments',
 
-                number: 6,
+                number:
+                    6,
 
                 tamil:
                     'திரவ நிதி முதலீடுகள்',
@@ -202,32 +282,61 @@ Page02.DIMENSIONS = [
                 english:
                     'Liquid Financial Investments',
 
-                unit:
-                    '₹',
-
-                placeholder:
-                    'Enter current investments',
-
                 ideal:
                     '₹2 Cr+',
 
                 target:
                     20000000,
 
-                type:
-                    'money',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        '₹0 – ₹49 Lakh',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '₹50 Lakh – ₹99 Lakh',
+                        5000000
+                    ),
+
+                    Page02.option(
+                        2,
+                        '₹1 Cr – ₹1.49 Cr',
+                        10000000
+                    ),
+
+                    Page02.option(
+                        3,
+                        '₹1.5 Cr – ₹1.99 Cr',
+                        15000000
+                    ),
+
+                    Page02.option(
+                        4,
+                        '₹2 Cr+',
+                        20000000
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 07 — CASH / OPPORTUNITY RESERVE
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'cashOpportunityReserve',
+                id:
+                    'cashOpportunityReserve',
 
-                number: 7,
+                number:
+                    7,
 
                 tamil:
                     'பண / வாய்ப்பு கையிருப்பு',
@@ -235,32 +344,65 @@ Page02.DIMENSIONS = [
                 english:
                     'Cash / Opportunity Reserve',
 
-                unit:
-                    '₹',
-
-                placeholder:
-                    'Enter current reserve',
-
                 ideal:
                     '₹50 Lakh+',
 
                 target:
                     5000000,
 
-                type:
-                    'money',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        '₹0 – ₹12.49 Lakh',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '₹12.5 – ₹24.99 Lakh',
+                        1250000
+                    ),
+
+                    Page02.option(
+                        2,
+                        '₹25 – ₹37.49 Lakh',
+                        2500000
+                    ),
+
+                    Page02.option(
+                        3,
+                        '₹37.5 – ₹49.99 Lakh',
+                        3750000
+                    ),
+
+                    Page02.option(
+                        4,
+                        '₹50 Lakh+',
+                        5000000
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 08 — HIGH-INTEREST DEBT
+             * -----------------------------------------------------------------
+             *
+             * Inverse scoring.
+             *
+             * Less debt = higher score.
+             */
+
             {
 
-                id: 'highInterestDebt',
+                id:
+                    'highInterestDebt',
 
-                number: 8,
+                number:
+                    8,
 
                 tamil:
                     'அதிக வட்டி கடன்',
@@ -268,32 +410,61 @@ Page02.DIMENSIONS = [
                 english:
                     'High-Interest Debt',
 
-                unit:
-                    '₹',
-
-                placeholder:
-                    'Enter outstanding debt',
-
                 ideal:
                     '₹0',
 
                 target:
                     0,
 
-                type:
-                    'money',
+                options: [
 
-                direction:
-                    'lower'
+                    Page02.option(
+                        0,
+                        '₹10 Lakh+',
+                        1000001
+                    ),
+
+                    Page02.option(
+                        1,
+                        '₹5.01 – ₹10 Lakh',
+                        1000000
+                    ),
+
+                    Page02.option(
+                        2,
+                        '₹1.01 – ₹5 Lakh',
+                        500000
+                    ),
+
+                    Page02.option(
+                        3,
+                        '₹1 – ₹1 Lakh',
+                        100000
+                    ),
+
+                    Page02.option(
+                        4,
+                        '₹0 — No High-Interest Debt',
+                        0
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 12 — GOLD OWNERSHIP
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'goldOwnership',
+                id:
+                    'goldOwnership',
 
-                number: 12,
+                number:
+                    12,
 
                 tamil:
                     'தங்க சொத்து',
@@ -301,23 +472,45 @@ Page02.DIMENSIONS = [
                 english:
                     'Gold Ownership',
 
-                unit:
-                    'grams',
-
-                placeholder:
-                    'Enter grams owned',
-
                 ideal:
                     '1 Kg+',
 
                 target:
                     1000,
 
-                type:
-                    'number',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        '0 – 249 grams',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '250 – 499 grams',
+                        250
+                    ),
+
+                    Page02.option(
+                        2,
+                        '500 – 749 grams',
+                        500
+                    ),
+
+                    Page02.option(
+                        3,
+                        '750 – 999 grams',
+                        750
+                    ),
+
+                    Page02.option(
+                        4,
+                        '1 Kg+',
+                        1000
+                    )
+
+                ]
 
             }
 
@@ -334,9 +527,11 @@ Page02.DIMENSIONS = [
 
     {
 
-        id: 'incomeCashFlow',
+        id:
+            'incomeCashFlow',
 
-        number: '02',
+        number:
+            '02',
 
         tamil:
             'வருமானம் & பணப்புழக்கம்',
@@ -346,11 +541,19 @@ Page02.DIMENSIONS = [
 
         indicators: [
 
+
+            /* -----------------------------------------------------------------
+             * 02 — ANNUAL PERSONAL INCOME
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'annualPersonalIncome',
+                id:
+                    'annualPersonalIncome',
 
-                number: 2,
+                number:
+                    2,
 
                 tamil:
                     'ஆண்டு தனிப்பட்ட வருமானம்',
@@ -358,32 +561,61 @@ Page02.DIMENSIONS = [
                 english:
                     'Annual Personal Income',
 
-                unit:
-                    '₹',
-
-                placeholder:
-                    'Enter annual income',
-
                 ideal:
                     '₹1 Cr+',
 
                 target:
                     10000000,
 
-                type:
-                    'money',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        '₹0 – ₹24.99 Lakh',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '₹25 – ₹49.99 Lakh',
+                        2500000
+                    ),
+
+                    Page02.option(
+                        2,
+                        '₹50 – ₹74.99 Lakh',
+                        5000000
+                    ),
+
+                    Page02.option(
+                        3,
+                        '₹75 – ₹99.99 Lakh',
+                        7500000
+                    ),
+
+                    Page02.option(
+                        4,
+                        '₹1 Cr+',
+                        10000000
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 03 — MONTHLY INCOME
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'monthlyIncome',
+                id:
+                    'monthlyIncome',
 
-                number: 3,
+                number:
+                    3,
 
                 tamil:
                     'மாத வருமானம்',
@@ -391,32 +623,61 @@ Page02.DIMENSIONS = [
                 english:
                     'Monthly Income',
 
-                unit:
-                    '₹',
-
-                placeholder:
-                    'Enter monthly income',
-
                 ideal:
                     '₹10 Lakh+',
 
                 target:
                     1000000,
 
-                type:
-                    'money',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        '₹0 – ₹2.49 Lakh',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '₹2.5 – ₹4.99 Lakh',
+                        250000
+                    ),
+
+                    Page02.option(
+                        2,
+                        '₹5 – ₹7.49 Lakh',
+                        500000
+                    ),
+
+                    Page02.option(
+                        3,
+                        '₹7.5 – ₹9.99 Lakh',
+                        750000
+                    ),
+
+                    Page02.option(
+                        4,
+                        '₹10 Lakh+',
+                        1000000
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 04 — PASSIVE / INVESTMENT INCOME
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'passiveInvestmentIncome',
+                id:
+                    'passiveInvestmentIncome',
 
-                number: 4,
+                number:
+                    4,
 
                 tamil:
                     'செயலற்ற / முதலீட்டு வருமானம்',
@@ -424,32 +685,61 @@ Page02.DIMENSIONS = [
                 english:
                     'Passive / Investment Income',
 
-                unit:
-                    '₹ / month',
-
-                placeholder:
-                    'Enter monthly passive income',
-
                 ideal:
                     '₹5 Lakh+/month',
 
                 target:
                     500000,
 
-                type:
-                    'money',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        '₹0 – ₹1.24 Lakh / month',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '₹1.25 – ₹2.49 Lakh / month',
+                        125000
+                    ),
+
+                    Page02.option(
+                        2,
+                        '₹2.5 – ₹3.74 Lakh / month',
+                        250000
+                    ),
+
+                    Page02.option(
+                        3,
+                        '₹3.75 – ₹4.99 Lakh / month',
+                        375000
+                    ),
+
+                    Page02.option(
+                        4,
+                        '₹5 Lakh+ / month',
+                        500000
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 05 — ANNUAL INCOME TAX PAID
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'annualIncomeTaxPaid',
+                id:
+                    'annualIncomeTaxPaid',
 
-                number: 5,
+                number:
+                    5,
 
                 tamil:
                     'ஆண்டு வருமான வரி செலுத்தல்',
@@ -457,32 +747,61 @@ Page02.DIMENSIONS = [
                 english:
                     'Annual Income Tax Paid',
 
-                unit:
-                    '₹',
-
-                placeholder:
-                    'Enter annual income tax paid',
-
                 ideal:
                     '₹25 Lakh+',
 
                 target:
                     2500000,
 
-                type:
-                    'money',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        '₹0 – ₹6.24 Lakh',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '₹6.25 – ₹12.49 Lakh',
+                        625000
+                    ),
+
+                    Page02.option(
+                        2,
+                        '₹12.5 – ₹18.74 Lakh',
+                        1250000
+                    ),
+
+                    Page02.option(
+                        3,
+                        '₹18.75 – ₹24.99 Lakh',
+                        1875000
+                    ),
+
+                    Page02.option(
+                        4,
+                        '₹25 Lakh+',
+                        2500000
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 11 — INCOME-PRODUCING PROPERTIES
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'incomeProducingProperties',
+                id:
+                    'incomeProducingProperties',
 
-                number: 11,
+                number:
+                    11,
 
                 tamil:
                     'வருமானம் தரும் சொத்துகள்',
@@ -490,23 +809,45 @@ Page02.DIMENSIONS = [
                 english:
                     'Income-Producing Properties',
 
-                unit:
-                    'properties',
-
-                placeholder:
-                    'Enter number of properties',
-
                 ideal:
                     '2+ properties',
 
                 target:
                     2,
 
-                type:
-                    'number',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        'None',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        'Planning / acquiring first property',
+                        0.5
+                    ),
+
+                    Page02.option(
+                        2,
+                        '1 property',
+                        1
+                    ),
+
+                    Page02.option(
+                        3,
+                        '1 property + another being acquired',
+                        1.5
+                    ),
+
+                    Page02.option(
+                        4,
+                        '2+ income-producing properties',
+                        2
+                    )
+
+                ]
 
             }
 
@@ -523,9 +864,11 @@ Page02.DIMENSIONS = [
 
     {
 
-        id: 'assets',
+        id:
+            'assets',
 
-        number: '03',
+        number:
+            '03',
 
         tamil:
             'சொத்துகள்',
@@ -535,11 +878,19 @@ Page02.DIMENSIONS = [
 
         indicators: [
 
+
+            /* -----------------------------------------------------------------
+             * 09 — LAND OWNERSHIP
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'landOwnership',
+                id:
+                    'landOwnership',
 
-                number: 9,
+                number:
+                    9,
 
                 tamil:
                     'நில உரிமை',
@@ -547,32 +898,61 @@ Page02.DIMENSIONS = [
                 english:
                     'Land Ownership',
 
-                unit:
-                    'acres',
-
-                placeholder:
-                    'Enter acres owned',
-
                 ideal:
                     '10+ acres',
 
                 target:
                     10,
 
-                type:
-                    'number',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        'No land',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        'Up to 2.49 acres',
+                        2.5
+                    ),
+
+                    Page02.option(
+                        2,
+                        '2.5 – 4.99 acres',
+                        5
+                    ),
+
+                    Page02.option(
+                        3,
+                        '5 – 9.99 acres',
+                        7.5
+                    ),
+
+                    Page02.option(
+                        4,
+                        '10+ acres',
+                        10
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 10 — PRIMARY RESIDENCE
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'primaryResidence',
+                id:
+                    'primaryResidence',
 
-                number: 10,
+                number:
+                    10,
 
                 tamil:
                     'முதன்மை வீடு',
@@ -580,32 +960,61 @@ Page02.DIMENSIONS = [
                 english:
                     'Primary Residence',
 
-                unit:
-                    '₹',
-
-                placeholder:
-                    'Enter owned home value',
-
                 ideal:
                     '₹2 Cr+ owned home',
 
                 target:
                     20000000,
 
-                type:
-                    'money',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        'No owned home / ₹0 – ₹49 Lakh',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '₹50 – ₹99 Lakh',
+                        5000000
+                    ),
+
+                    Page02.option(
+                        2,
+                        '₹1 Cr – ₹1.49 Cr',
+                        10000000
+                    ),
+
+                    Page02.option(
+                        3,
+                        '₹1.5 Cr – ₹1.99 Cr',
+                        15000000
+                    ),
+
+                    Page02.option(
+                        4,
+                        '₹2 Cr+ owned home',
+                        20000000
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 13 — PREMIUM AUTOMOBILE
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'premiumAutomobile',
+                id:
+                    'premiumAutomobile',
 
-                number: 13,
+                number:
+                    13,
 
                 tamil:
                     'பிரீமியம் வாகனம்',
@@ -613,32 +1022,61 @@ Page02.DIMENSIONS = [
                 english:
                     'Premium Automobile',
 
-                unit:
-                    '₹',
-
-                placeholder:
-                    'Enter automobile value',
-
                 ideal:
                     '₹1 Cr+ car',
 
                 target:
                     10000000,
 
-                type:
-                    'money',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        'No car / below ₹25 Lakh',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '₹25 – ₹49.99 Lakh',
+                        2500000
+                    ),
+
+                    Page02.option(
+                        2,
+                        '₹50 – ₹74.99 Lakh',
+                        5000000
+                    ),
+
+                    Page02.option(
+                        3,
+                        '₹75 – ₹99.99 Lakh',
+                        7500000
+                    ),
+
+                    Page02.option(
+                        4,
+                        '₹1 Cr+ car',
+                        10000000
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 21 — CHILDREN'S EDUCATION FUND
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'childrenEducationFund',
+                id:
+                    'childrenEducationFund',
 
-                number: 21,
+                number:
+                    21,
 
                 tamil:
                     'குழந்தைகளின் கல்வி நிதி',
@@ -646,32 +1084,61 @@ Page02.DIMENSIONS = [
                 english:
                     "Children's Education Fund",
 
-                unit:
-                    '₹ / child',
-
-                placeholder:
-                    'Enter fund per child',
-
                 ideal:
                     '₹50 Lakh+/child',
 
                 target:
                     5000000,
 
-                type:
-                    'money',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        'No dedicated fund / below ₹12.5 Lakh per child',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '₹12.5 – ₹24.99 Lakh per child',
+                        1250000
+                    ),
+
+                    Page02.option(
+                        2,
+                        '₹25 – ₹37.49 Lakh per child',
+                        2500000
+                    ),
+
+                    Page02.option(
+                        3,
+                        '₹37.5 – ₹49.99 Lakh per child',
+                        3750000
+                    ),
+
+                    Page02.option(
+                        4,
+                        '₹50 Lakh+ per child',
+                        5000000
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 18 — HOUSEHOLD SUPPORT
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'householdSupport',
+                id:
+                    'householdSupport',
 
-                number: 18,
+                number:
+                    18,
 
                 tamil:
                     'வீட்டு உதவி',
@@ -679,23 +1146,45 @@ Page02.DIMENSIONS = [
                 english:
                     'Household Support',
 
-                unit:
-                    'staff',
-
-                placeholder:
-                    'Enter number of paid staff',
-
                 ideal:
                     '2+ paid staff',
 
                 target:
                     2,
 
-                type:
-                    'number',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        'No paid household support',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        'Occasional paid help',
+                        0.5
+                    ),
+
+                    Page02.option(
+                        2,
+                        '1 regular paid staff',
+                        1
+                    ),
+
+                    Page02.option(
+                        3,
+                        '1 full-time staff + additional support',
+                        1.5
+                    ),
+
+                    Page02.option(
+                        4,
+                        '2+ regular paid staff',
+                        2
+                    )
+
+                ]
 
             }
 
@@ -712,9 +1201,11 @@ Page02.DIMENSIONS = [
 
     {
 
-        id: 'lifestyleFreedom',
+        id:
+            'lifestyleFreedom',
 
-        number: '04',
+        number:
+            '04',
 
         tamil:
             'வாழ்க்கைமுறை & சுதந்திரம்',
@@ -724,11 +1215,19 @@ Page02.DIMENSIONS = [
 
         indicators: [
 
+
+            /* -----------------------------------------------------------------
+             * 14 — INTERNATIONAL TRAVEL
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'internationalTravel',
+                id:
+                    'internationalTravel',
 
-                number: 14,
+                number:
+                    14,
 
                 tamil:
                     'சர்வதேச பயணம்',
@@ -736,32 +1235,61 @@ Page02.DIMENSIONS = [
                 english:
                     'International Travel',
 
-                unit:
-                    'trips / year',
-
-                placeholder:
-                    'Enter trips per year',
-
                 ideal:
                     '12+ trips/year',
 
                 target:
                     12,
 
-                type:
-                    'number',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        'No international travel',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '1 – 2 trips / year',
+                        3
+                    ),
+
+                    Page02.option(
+                        2,
+                        '3 – 5 trips / year',
+                        6
+                    ),
+
+                    Page02.option(
+                        3,
+                        '6 – 11 trips / year',
+                        9
+                    ),
+
+                    Page02.option(
+                        4,
+                        '12+ trips / year',
+                        12
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 15 — PREMIUM FAMILY VACATIONS
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'premiumFamilyVacations',
+                id:
+                    'premiumFamilyVacations',
 
-                number: 15,
+                number:
+                    15,
 
                 tamil:
                     'பிரீமியம் குடும்ப விடுமுறைகள்',
@@ -769,32 +1297,61 @@ Page02.DIMENSIONS = [
                 english:
                     'Premium Family Vacations',
 
-                unit:
-                    'vacations / year',
-
-                placeholder:
-                    'Enter vacations per year',
-
                 ideal:
                     '2+ per year',
 
                 target:
                     2,
 
-                type:
-                    'number',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        'None',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        'Occasional / once in several years',
+                        0.5
+                    ),
+
+                    Page02.option(
+                        2,
+                        '1 vacation / year',
+                        1
+                    ),
+
+                    Page02.option(
+                        3,
+                        '1 premium vacation + additional short breaks',
+                        1.5
+                    ),
+
+                    Page02.option(
+                        4,
+                        '2+ premium family vacations / year',
+                        2
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 16 — PREMIUM ACCOMMODATION
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'premiumAccommodation',
+                id:
+                    'premiumAccommodation',
 
-                number: 16,
+                number:
+                    16,
 
                 tamil:
                     'பிரீமியம் தங்குமிடம்',
@@ -802,32 +1359,61 @@ Page02.DIMENSIONS = [
                 english:
                     'Premium Accommodation',
 
-                unit:
-                    '%',
-
-                placeholder:
-                    'Enter % of travel using 5-star accommodation',
-
                 ideal:
                     '5-star when travelling',
 
                 target:
                     100,
 
-                type:
-                    'percentage',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        'Rarely / never use premium accommodation',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        'About 25% of travel',
+                        25
+                    ),
+
+                    Page02.option(
+                        2,
+                        'About 50% of travel',
+                        50
+                    ),
+
+                    Page02.option(
+                        3,
+                        'About 75% of travel',
+                        75
+                    ),
+
+                    Page02.option(
+                        4,
+                        '5-star / premium accommodation consistently',
+                        100
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 17 — PREMIUM AIR TRAVEL
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'premiumAirTravel',
+                id:
+                    'premiumAirTravel',
 
-                number: 17,
+                number:
+                    17,
 
                 tamil:
                     'பிரீமியம் விமானப் பயணம்',
@@ -835,32 +1421,61 @@ Page02.DIMENSIONS = [
                 english:
                     'Premium Air Travel',
 
-                unit:
-                    'flights / year',
-
-                placeholder:
-                    'Enter business-class flights per year',
-
                 ideal:
                     '6+ business-class/year',
 
                 target:
                     6,
 
-                type:
-                    'number',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        'No business-class travel',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '1 business-class flight / year',
+                        1.5
+                    ),
+
+                    Page02.option(
+                        2,
+                        '2 – 3 flights / year',
+                        3
+                    ),
+
+                    Page02.option(
+                        3,
+                        '4 – 5 flights / year',
+                        4.5
+                    ),
+
+                    Page02.option(
+                        4,
+                        '6+ business-class flights / year',
+                        6
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 25 — TIME FREEDOM
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'timeFreedom',
+                id:
+                    'timeFreedom',
 
-                number: 25,
+                number:
+                    25,
 
                 tamil:
                     'நேர சுதந்திரம்',
@@ -868,23 +1483,45 @@ Page02.DIMENSIONS = [
                 english:
                     'Time Freedom',
 
-                unit:
-                    'days / year',
-
-                placeholder:
-                    'Enter discretionary days per year',
-
                 ideal:
                     '30+ discretionary days',
 
                 target:
                     30,
 
-                type:
-                    'number',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        '0 – 7 discretionary days / year',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '8 – 14 days / year',
+                        7.5
+                    ),
+
+                    Page02.option(
+                        2,
+                        '15 – 21 days / year',
+                        15
+                    ),
+
+                    Page02.option(
+                        3,
+                        '22 – 29 days / year',
+                        22.5
+                    ),
+
+                    Page02.option(
+                        4,
+                        '30+ discretionary days / year',
+                        30
+                    )
+
+                ]
 
             }
 
@@ -901,9 +1538,11 @@ Page02.DIMENSIONS = [
 
     {
 
-        id: 'protectionContribution',
+        id:
+            'protectionContribution',
 
-        number: '05',
+        number:
+            '05',
 
         tamil:
             'பாதுகாப்பு & பங்களிப்பு',
@@ -913,11 +1552,19 @@ Page02.DIMENSIONS = [
 
         indicators: [
 
+
+            /* -----------------------------------------------------------------
+             * 19 — HEALTH & FITNESS INVESTMENT
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'healthFitnessInvestment',
+                id:
+                    'healthFitnessInvestment',
 
-                number: 19,
+                number:
+                    19,
 
                 tamil:
                     'உடல்நலம் & உடற்பயிற்சி முதலீடு',
@@ -925,32 +1572,61 @@ Page02.DIMENSIONS = [
                 english:
                     'Health & Fitness Investment',
 
-                unit:
-                    '₹ / year',
-
-                placeholder:
-                    'Enter annual investment',
-
                 ideal:
                     '₹2 Lakh+/year',
 
                 target:
                     200000,
 
-                type:
-                    'money',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        '₹0 – ₹49,999 / year',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '₹50,000 – ₹99,999 / year',
+                        50000
+                    ),
+
+                    Page02.option(
+                        2,
+                        '₹1 – ₹1.49 Lakh / year',
+                        100000
+                    ),
+
+                    Page02.option(
+                        3,
+                        '₹1.5 – ₹1.99 Lakh / year',
+                        150000
+                    ),
+
+                    Page02.option(
+                        4,
+                        '₹2 Lakh+ / year',
+                        200000
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 20 — LEARNING & DEVELOPMENT
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'learningDevelopment',
+                id:
+                    'learningDevelopment',
 
-                number: 20,
+                number:
+                    20,
 
                 tamil:
                     'கற்றல் & மேம்பாடு',
@@ -958,32 +1634,61 @@ Page02.DIMENSIONS = [
                 english:
                     'Learning & Development',
 
-                unit:
-                    '₹ / year',
-
-                placeholder:
-                    'Enter annual investment',
-
                 ideal:
                     '₹5 Lakh+/year',
 
                 target:
                     500000,
 
-                type:
-                    'money',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        '₹0 – ₹1.24 Lakh / year',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '₹1.25 – ₹2.49 Lakh / year',
+                        125000
+                    ),
+
+                    Page02.option(
+                        2,
+                        '₹2.5 – ₹3.74 Lakh / year',
+                        250000
+                    ),
+
+                    Page02.option(
+                        3,
+                        '₹3.75 – ₹4.99 Lakh / year',
+                        375000
+                    ),
+
+                    Page02.option(
+                        4,
+                        '₹5 Lakh+ / year',
+                        500000
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 22 — LIFE INSURANCE PROTECTION
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'lifeInsuranceProtection',
+                id:
+                    'lifeInsuranceProtection',
 
-                number: 22,
+                number:
+                    22,
 
                 tamil:
                     'ஆயுள் காப்பீட்டு பாதுகாப்பு',
@@ -991,32 +1696,61 @@ Page02.DIMENSIONS = [
                 english:
                     'Life Insurance Protection',
 
-                unit:
-                    '₹',
-
-                placeholder:
-                    'Enter life insurance cover',
-
                 ideal:
                     '₹5 Cr+ cover',
 
                 target:
                     50000000,
 
-                type:
-                    'money',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        'No cover / below ₹1.25 Cr',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '₹1.25 – ₹2.49 Cr',
+                        12500000
+                    ),
+
+                    Page02.option(
+                        2,
+                        '₹2.5 – ₹3.74 Cr',
+                        25000000
+                    ),
+
+                    Page02.option(
+                        3,
+                        '₹3.75 – ₹4.99 Cr',
+                        37500000
+                    ),
+
+                    Page02.option(
+                        4,
+                        '₹5 Cr+ cover',
+                        50000000
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 23 — FAMILY HEALTH INSURANCE
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'familyHealthInsurance',
+                id:
+                    'familyHealthInsurance',
 
-                number: 23,
+                number:
+                    23,
 
                 tamil:
                     'குடும்ப மருத்துவ காப்பீடு',
@@ -1024,32 +1758,61 @@ Page02.DIMENSIONS = [
                 english:
                     'Family Health Insurance',
 
-                unit:
-                    '₹',
-
-                placeholder:
-                    'Enter family health cover',
-
                 ideal:
                     '₹50 Lakh+ cover',
 
                 target:
                     5000000,
 
-                type:
-                    'money',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        'No cover / below ₹12.5 Lakh',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '₹12.5 – ₹24.99 Lakh',
+                        1250000
+                    ),
+
+                    Page02.option(
+                        2,
+                        '₹25 – ₹37.49 Lakh',
+                        2500000
+                    ),
+
+                    Page02.option(
+                        3,
+                        '₹37.5 – ₹49.99 Lakh',
+                        3750000
+                    ),
+
+                    Page02.option(
+                        4,
+                        '₹50 Lakh+ cover',
+                        5000000
+                    )
+
+                ]
 
             },
 
 
+            /* -----------------------------------------------------------------
+             * 24 — CHARITY / SOCIAL CONTRIBUTION
+             * -----------------------------------------------------------------
+             */
+
             {
 
-                id: 'charitySocialContribution',
+                id:
+                    'charitySocialContribution',
 
-                number: 24,
+                number:
+                    24,
 
                 tamil:
                     'அறப்பணி / சமூக பங்களிப்பு',
@@ -1057,23 +1820,45 @@ Page02.DIMENSIONS = [
                 english:
                     'Charity / Social Contribution',
 
-                unit:
-                    '₹ / year',
-
-                placeholder:
-                    'Enter annual contribution',
-
                 ideal:
                     '₹10 Lakh+/year',
 
                 target:
                     1000000,
 
-                type:
-                    'money',
+                options: [
 
-                direction:
-                    'higher'
+                    Page02.option(
+                        0,
+                        '₹0 – ₹2.49 Lakh / year',
+                        0
+                    ),
+
+                    Page02.option(
+                        1,
+                        '₹2.5 – ₹4.99 Lakh / year',
+                        250000
+                    ),
+
+                    Page02.option(
+                        2,
+                        '₹5 – ₹7.49 Lakh / year',
+                        500000
+                    ),
+
+                    Page02.option(
+                        3,
+                        '₹7.5 – ₹9.99 Lakh / year',
+                        750000
+                    ),
+
+                    Page02.option(
+                        4,
+                        '₹10 Lakh+ / year',
+                        1000000
+                    )
+
+                ]
 
             }
 
@@ -1084,7 +1869,6 @@ Page02.DIMENSIONS = [
 ];
 
 
-
 /* =============================================================================
  * DOM HELPERS
  * =============================================================================
@@ -1093,7 +1877,9 @@ Page02.DIMENSIONS = [
 
 Page02.$ = function(selector){
 
-    return document.querySelector(selector);
+    return document.querySelector(
+        selector
+    );
 
 };
 
@@ -1101,11 +1887,12 @@ Page02.$ = function(selector){
 Page02.$$ = function(selector){
 
     return Array.from(
-        document.querySelectorAll(selector)
+        document.querySelectorAll(
+            selector
+        )
     );
 
 };
-
 
 
 /* =============================================================================
@@ -1116,81 +1903,54 @@ Page02.$$ = function(selector){
 
 Page02.escapeHtml = function(value){
 
-    return String(value ?? '')
+    return String(
+        value ?? ''
+    )
 
-        .replaceAll('&', '&amp;')
+        .replaceAll(
+            '&',
+            '&amp;'
+        )
 
-        .replaceAll('<', '&lt;')
+        .replaceAll(
+            '<',
+            '&lt;'
+        )
 
-        .replaceAll('>', '&gt;')
+        .replaceAll(
+            '>',
+            '&gt;'
+        )
 
-        .replaceAll('"', '&quot;')
+        .replaceAll(
+            '"',
+            '&quot;'
+        )
 
-        .replaceAll("'", '&#039;');
+        .replaceAll(
+            "'",
+            '&#039;'
+        );
 
 };
 
 
-
 /* =============================================================================
- * NUMBER HELPERS
+ * NUMBER HELPER
  * =============================================================================
  */
 
 
 Page02.toNumber = function(value){
 
-    const normalized =
-
-        String(value ?? '')
-
-            .replace(/,/g, '')
-
-            .replace(/[^\d.-]/g, '')
-
-            .trim();
-
-
-    if(normalized === ''){
-
-        return 0;
-
-    }
-
-
-    const number = Number(normalized);
-
+    const number =
+        Number(value);
 
     return Number.isFinite(number)
-
         ? number
-
         : 0;
 
 };
-
-
-
-Page02.formatNumber = function(value){
-
-    const number =
-        Page02.toNumber(value);
-
-
-    return new Intl.NumberFormat(
-
-        'en-IN',
-
-        {
-
-            maximumFractionDigits: 2
-
-        }
-
-    ).format(number);
-
-};
-
 
 
 /* =============================================================================
@@ -1209,7 +1969,8 @@ Page02.showScreen = function(screenName){
 
                 'is-active',
 
-                screen.dataset.screen === screenName
+                screen.dataset.screen ===
+                    screenName
 
             );
 
@@ -1224,14 +1985,15 @@ Page02.showScreen = function(screenName){
 
     window.scrollTo({
 
-        top: 0,
+        top:
+            0,
 
-        behavior: 'smooth'
+        behavior:
+            'smooth'
 
     });
 
 };
-
 
 
 /* =============================================================================
@@ -1243,7 +2005,9 @@ Page02.showScreen = function(screenName){
 Page02.setLoading = function(isLoading){
 
     const overlay =
-        Page02.$('#loadingOverlay');
+        Page02.$(
+            '#loadingOverlay'
+        );
 
 
     if(!overlay){
@@ -1259,7 +2023,6 @@ Page02.setLoading = function(isLoading){
 };
 
 
-
 /* =============================================================================
  * ERROR HELPERS
  * =============================================================================
@@ -1267,15 +2030,14 @@ Page02.setLoading = function(isLoading){
 
 
 Page02.setError = function(
-
     target,
-
     message
-
 ){
 
     const element =
-        Page02.$(target);
+        Page02.$(
+            target
+        );
 
 
     if(element){
@@ -1288,64 +2050,39 @@ Page02.setError = function(
 };
 
 
-
 /* =============================================================================
  * API ADAPTER
- * =============================================================================
- *
- * Canonical frontend API:
- *
- *      js/api.js
- *
- * exposes:
- *
- *      CTM_API.register(payload)
- *      CTM_API.saveDiscovery(payload)
- *
- * IMPORTANT:
- *
- *      api.js MUST load before page02.js.
- *
  * =============================================================================
  */
 
 
 Page02.api = async function(
-
     action,
-
     payload
-
 ){
 
-
     if(
-
-        typeof CTM_API === 'undefined' ||
+        typeof CTM_API ===
+            'undefined' ||
 
         !CTM_API
-
     ){
 
         throw new Error(
-
             'CTM PATH™ API service is unavailable.'
-
         );
 
     }
 
 
     if(
-
-        typeof CTM_API[action] !== 'function'
-
+        typeof CTM_API[action] !==
+            'function'
     ){
 
         throw new Error(
 
             'CTM PATH™ API action is unavailable: ' +
-
             action
 
         );
@@ -1354,13 +2091,10 @@ Page02.api = async function(
 
 
     return CTM_API[action](
-
         payload
-
     );
 
 };
-
 
 
 /* =============================================================================
@@ -1371,19 +2105,19 @@ Page02.api = async function(
 
 Page02.unwrapResponse = function(response){
 
-
     if(!response){
 
         throw new Error(
-
             'Empty response received from CTM PATH™ server.'
-
         );
 
     }
 
 
-    if(response.success === false){
+    if(
+        response.success ===
+        false
+    ){
 
         throw new Error(
 
@@ -1399,11 +2133,10 @@ Page02.unwrapResponse = function(response){
 
 
     if(
-
         response.data &&
 
-        typeof response.data === 'object'
-
+        typeof response.data ===
+            'object'
     ){
 
         return response.data;
@@ -1416,7 +2149,6 @@ Page02.unwrapResponse = function(response){
 };
 
 
-
 /* =============================================================================
  * INTRO
  * =============================================================================
@@ -1425,43 +2157,39 @@ Page02.unwrapResponse = function(response){
 
 Page02.bindIntro = function(){
 
+    Page02
+        .$$('[data-next]')
+        .forEach(
 
-    Page02.$$('[data-next]').forEach(
+            function(button){
 
-        function(button){
+                button.addEventListener(
 
+                    'click',
 
-            button.addEventListener(
+                    function(){
 
-                'click',
-
-                function(){
-
-
-                    const next =
-                        button.dataset.next;
+                        const next =
+                            button.dataset.next;
 
 
-                    if(next){
+                        if(next){
 
-                        Page02.showScreen(
+                            Page02.showScreen(
+                                next
+                            );
 
-                            next
-
-                        );
+                        }
 
                     }
 
-                }
+                );
 
-            );
+            }
 
-        }
-
-    );
+        );
 
 };
-
 
 
 /* =============================================================================
@@ -1471,7 +2199,6 @@ Page02.bindIntro = function(){
 
 
 Page02.serializeKyc = function(form){
-
 
     const data =
         new FormData(form);
@@ -1484,90 +2211,75 @@ Page02.serializeKyc = function(form){
                 data.get('fullName') || ''
             ).trim(),
 
-
         mobileNumber:
             String(
                 data.get('mobileNumber') || ''
             ).trim(),
-
 
         emailAddress:
             String(
                 data.get('emailAddress') || ''
             ).trim(),
 
-
         age:
             Page02.toNumber(
                 data.get('age')
             ),
-
 
         gender:
             String(
                 data.get('gender') || ''
             ).trim(),
 
-
         occupation:
             String(
                 data.get('occupation') || ''
             ).trim(),
-
 
         employerBusiness:
             String(
                 data.get('employerBusiness') || ''
             ).trim(),
 
-
         maritalStatus:
             String(
                 data.get('maritalStatus') || ''
             ).trim(),
-
 
         dependents:
             String(
                 data.get('dependents') || ''
             ).trim(),
 
-
         city:
             String(
                 data.get('city') || ''
             ).trim(),
-
 
         district:
             String(
                 data.get('district') || ''
             ).trim(),
 
-
         state:
             String(
                 data.get('state') || ''
             ).trim(),
-
 
         country:
             String(
                 data.get('country') || 'India'
             ).trim(),
 
-
         pincode:
             String(
                 data.get('pincode') || ''
             ).trim(),
 
-
         preferredLanguage:
             String(
                 data.get('preferredLanguage') || ''
             ).trim(),
-
 
         referralSource:
             String(
@@ -1579,7 +2291,6 @@ Page02.serializeKyc = function(form){
 };
 
 
-
 /* =============================================================================
  * KYC VALIDATION
  * =============================================================================
@@ -1587,24 +2298,19 @@ Page02.serializeKyc = function(form){
 
 
 Page02.validateKyc = function(
-
     form,
-
     payload
-
 ){
 
-
     Page02.setError(
-
         '#kycError',
-
         ''
-
     );
 
 
-    if(!form.checkValidity()){
+    if(
+        !form.checkValidity()
+    ){
 
         form.reportValidity();
 
@@ -1614,13 +2320,9 @@ Page02.validateKyc = function(
 
 
     if(
-
         !/^[0-9]{10}$/.test(
-
             payload.mobileNumber
-
         )
-
     ){
 
         Page02.setError(
@@ -1637,13 +2339,9 @@ Page02.validateKyc = function(
 
 
     if(
-
         !/^[0-9]{6}$/.test(
-
             payload.pincode
-
         )
-
     ){
 
         Page02.setError(
@@ -1664,7 +2362,6 @@ Page02.validateKyc = function(
 };
 
 
-
 /* =============================================================================
  * PEOPLE ID EXTRACTION
  * =============================================================================
@@ -1672,7 +2369,6 @@ Page02.validateKyc = function(
 
 
 Page02.extractPeopleId = function(data){
-
 
     if(!data){
 
@@ -1698,7 +2394,6 @@ Page02.extractPeopleId = function(data){
 };
 
 
-
 /* =============================================================================
  * KYC SUBMISSION
  * =============================================================================
@@ -1707,11 +2402,12 @@ Page02.extractPeopleId = function(data){
 
 Page02.handleKycSubmit = async function(event){
 
-
     event.preventDefault();
 
 
-    if(Page02.state.saving){
+    if(
+        Page02.state.saving
+    ){
 
         return;
 
@@ -1723,19 +2419,16 @@ Page02.handleKycSubmit = async function(event){
 
 
     const payload =
-        Page02.serializeKyc(form);
+        Page02.serializeKyc(
+            form
+        );
 
 
     if(
-
         !Page02.validateKyc(
-
             form,
-
             payload
-
         )
-
     ){
 
         return;
@@ -1748,19 +2441,17 @@ Page02.handleKycSubmit = async function(event){
 
 
     Page02.setError(
-
         '#kycError',
-
         ''
-
     );
 
 
-    Page02.setLoading(true);
+    Page02.setLoading(
+        true
+    );
 
 
     try{
-
 
         const response =
 
@@ -1776,27 +2467,21 @@ Page02.handleKycSubmit = async function(event){
         const data =
 
             Page02.unwrapResponse(
-
                 response
-
             );
 
 
         const peopleId =
 
             Page02.extractPeopleId(
-
                 data
-
             );
 
 
         if(!peopleId){
 
             throw new Error(
-
                 'Registration succeeded but PeopleID was not returned.'
-
             );
 
         }
@@ -1810,8 +2495,15 @@ Page02.handleKycSubmit = async function(event){
             payload;
 
 
-        try{
+        /*
+         * Fresh registration starts a fresh scorecard.
+         */
 
+        Page02.state.answers =
+            {};
+
+
+        try{
 
             sessionStorage.setItem(
 
@@ -1834,11 +2526,9 @@ Page02.handleKycSubmit = async function(event){
 
             );
 
-
         }
 
         catch(storageError){
-
 
             console.warn(
 
@@ -1861,16 +2551,12 @@ Page02.handleKycSubmit = async function(event){
 
 
         Page02.showScreen(
-
             'scorecard'
-
         );
-
 
     }
 
     catch(error){
-
 
         console.error(
 
@@ -1891,22 +2577,21 @@ Page02.handleKycSubmit = async function(event){
 
         );
 
-
     }
 
     finally{
-
 
         Page02.state.saving =
             false;
 
 
-        Page02.setLoading(false);
+        Page02.setLoading(
+            false
+        );
 
     }
 
 };
-
 
 
 /* =============================================================================
@@ -1917,9 +2602,10 @@ Page02.handleKycSubmit = async function(event){
 
 Page02.bindKyc = function(){
 
-
     const form =
-        Page02.$('#kycForm');
+        Page02.$(
+            '#kycForm'
+        );
 
 
     if(!form){
@@ -1944,21 +2630,25 @@ Page02.bindKyc = function(){
 
     if(mobile){
 
-
         mobile.addEventListener(
 
             'input',
 
             function(){
 
-
                 mobile.value =
 
                     mobile.value
 
-                        .replace(/\D/g, '')
+                        .replace(
+                            /\D/g,
+                            ''
+                        )
 
-                        .slice(0, 10);
+                        .slice(
+                            0,
+                            10
+                        );
 
             }
 
@@ -1973,21 +2663,25 @@ Page02.bindKyc = function(){
 
     if(pincode){
 
-
         pincode.addEventListener(
 
             'input',
 
             function(){
 
-
                 pincode.value =
 
                     pincode.value
 
-                        .replace(/\D/g, '')
+                        .replace(
+                            /\D/g,
+                            ''
+                        )
 
-                        .slice(0, 6);
+                        .slice(
+                            0,
+                            6
+                        );
 
             }
 
@@ -1998,7 +2692,6 @@ Page02.bindKyc = function(){
 };
 
 
-
 /* =============================================================================
  * DIMENSION PROGRESS
  * =============================================================================
@@ -2007,9 +2700,10 @@ Page02.bindKyc = function(){
 
 Page02.renderDimensionProgress = function(){
 
-
     const host =
-        Page02.$('#dimensionProgress');
+        Page02.$(
+            '#dimensionProgress'
+        );
 
 
     if(!host){
@@ -2026,26 +2720,21 @@ Page02.renderDimensionProgress = function(){
             .map(
 
                 function(
-
                     dimension,
-
                     index
-
                 ){
-
 
                     const active =
 
                         index ===
-                        Page02.state.currentDimension;
+                        Page02.state
+                            .currentDimension;
 
 
                     const completed =
 
                         Page02.isDimensionComplete(
-
                             index
-
                         );
 
 
@@ -2091,22 +2780,18 @@ Page02.renderDimensionProgress = function(){
     host
 
         .querySelectorAll(
-
             '[data-dimension-index]'
-
         )
 
         .forEach(
 
             function(button){
 
-
                 button.addEventListener(
 
                     'click',
 
                     function(){
-
 
                         const index =
 
@@ -2119,26 +2804,19 @@ Page02.renderDimensionProgress = function(){
 
 
                         if(
-
                             index <=
-                            Page02.state.currentDimension
-
+                            Page02.state
+                                .currentDimension
                         ){
 
-
-                            Page02.preserveCurrentDimension();
-
-
-                            Page02.state.currentDimension =
+                            Page02.state
+                                .currentDimension =
                                 index;
 
 
                             Page02.setError(
-
                                 '#scorecardError',
-
                                 ''
-
                             );
 
 
@@ -2159,7 +2837,6 @@ Page02.renderDimensionProgress = function(){
 };
 
 
-
 /* =============================================================================
  * DIMENSION COMPLETION
  * =============================================================================
@@ -2168,9 +2845,10 @@ Page02.renderDimensionProgress = function(){
 
 Page02.isDimensionComplete = function(index){
 
-
     const dimension =
-        Page02.DIMENSIONS[index];
+        Page02.DIMENSIONS[
+            index
+        ];
 
 
     if(!dimension){
@@ -2183,7 +2861,6 @@ Page02.isDimensionComplete = function(index){
     return dimension.indicators.every(
 
         function(indicator){
-
 
             return Object.prototype
                 .hasOwnProperty
@@ -2202,200 +2879,15 @@ Page02.isDimensionComplete = function(index){
 };
 
 
-
 /* =============================================================================
- * SCORE CALCULATION
+ * GET EXISTING ANSWER
  * =============================================================================
  */
 
 
-Page02.calculateIndicator = function(
-
-    indicator,
-
-    rawValue
-
-){
-
-
-    const value =
-
-        Math.max(
-
-            0,
-
-            Page02.toNumber(
-
-                rawValue
-
-            )
-
-        );
-
-
-    /*
-     * HIGH-INTEREST DEBT
-     *
-     * Ideal benchmark = ₹0.
-     *
-     * Zero cannot be evaluated through a normal
-     * percentage-of-target calculation.
-     *
-     * Temporary inverse scoring bands:
-     *
-     *      ₹0           = 4
-     *      ≤ ₹1 Lakh    = 3
-     *      ≤ ₹5 Lakh    = 2
-     *      ≤ ₹10 Lakh   = 1
-     *      > ₹10 Lakh   = 0
-     *
-     * This rule should remain aligned with the
-     * backend AssessmentEngine before final freeze.
-     */
+Page02.getIndicatorAnswer = function(indicatorId){
 
     if(
-
-        indicator.direction === 'lower'
-
-    ){
-
-
-        let score = 0;
-
-
-        if(value === 0){
-
-            score = 4;
-
-        }
-
-        else if(value <= 100000){
-
-            score = 3;
-
-        }
-
-        else if(value <= 500000){
-
-            score = 2;
-
-        }
-
-        else if(value <= 1000000){
-
-            score = 1;
-
-        }
-
-
-        return {
-
-            value:
-                value,
-
-            ratio:
-                null,
-
-            percentage:
-                null,
-
-            score:
-                score,
-
-            gap:
-                value
-
-        };
-
-    }
-
-
-    let ratio = 0;
-
-
-    if(indicator.target > 0){
-
-        ratio =
-
-            value /
-            indicator.target;
-
-    }
-
-
-    const percentage =
-        ratio * 100;
-
-
-    let score = 0;
-
-
-    if(percentage >= 100){
-
-        score = 4;
-
-    }
-
-    else if(percentage >= 75){
-
-        score = 3;
-
-    }
-
-    else if(percentage >= 50){
-
-        score = 2;
-
-    }
-
-    else if(percentage >= 25){
-
-        score = 1;
-
-    }
-
-
-    return {
-
-        value:
-            value,
-
-        ratio:
-            ratio,
-
-        percentage:
-            percentage,
-
-        score:
-            score,
-
-        gap:
-            Math.max(
-
-                indicator.target -
-                value,
-
-                0
-
-            )
-
-    };
-
-};
-
-
-
-/* =============================================================================
- * INDICATOR INPUT VALUE
- * =============================================================================
- */
-
-
-Page02.getIndicatorValue = function(indicatorId){
-
-
-    if(
-
         Object.prototype
             .hasOwnProperty
             .call(
@@ -2405,20 +2897,213 @@ Page02.getIndicatorValue = function(indicatorId){
                 indicatorId
 
             )
-
     ){
 
         return Page02.state
-            .answers[indicatorId]
-            .value;
+            .answers[
+                indicatorId
+            ];
 
     }
 
 
-    return '';
+    return null;
 
 };
 
+
+/* =============================================================================
+ * FIND INDICATOR
+ * =============================================================================
+ */
+
+
+Page02.findIndicator = function(indicatorId){
+
+    for(
+        const dimension of
+        Page02.DIMENSIONS
+    ){
+
+        const indicator =
+
+            dimension.indicators.find(
+
+                function(item){
+
+                    return (
+                        item.id ===
+                        indicatorId
+                    );
+
+                }
+
+            );
+
+
+        if(indicator){
+
+            return indicator;
+
+        }
+
+    }
+
+
+    return null;
+
+};
+
+
+/* =============================================================================
+ * FIND CURRENT DIMENSION
+ * =============================================================================
+ */
+
+
+Page02.getCurrentDimension = function(){
+
+    return Page02.DIMENSIONS[
+
+        Page02.state
+            .currentDimension
+
+    ] || null;
+
+};
+
+
+/* =============================================================================
+ * BUILD ANSWER FROM SELECTED RANGE
+ * =============================================================================
+ */
+
+
+Page02.buildAnswer = function(
+    dimension,
+    indicator,
+    option
+){
+
+    return {
+
+        indicatorId:
+            indicator.id,
+
+        indicatorNumber:
+            indicator.number,
+
+        dimensionId:
+            dimension.id,
+
+        dimension:
+            dimension.english,
+
+        label:
+            indicator.english,
+
+        value:
+            option.value,
+
+        selectedRange:
+            option.label,
+
+        rangeLabel:
+            option.label,
+
+        ideal:
+            indicator.ideal,
+
+        target:
+            indicator.target,
+
+        score:
+            option.score,
+
+        gap:
+            Math.max(
+                4 -
+                option.score,
+                0
+            )
+
+    };
+
+};
+
+
+/* =============================================================================
+ * RENDER OPTION
+ * =============================================================================
+ */
+
+
+Page02.renderOption = function(
+    indicator,
+    option,
+    selectedAnswer
+){
+
+    const selected =
+
+        selectedAnswer &&
+
+        Number(
+            selectedAnswer.score
+        ) ===
+            Number(
+                option.score
+            );
+
+
+    return `
+
+        <button
+
+            type="button"
+
+            class="
+                indicator-option
+                ${selected ? 'is-selected' : ''}
+            "
+
+            data-indicator-option="${Page02.escapeHtml(
+                indicator.id
+            )}"
+
+            data-option-score="${option.score}"
+
+            aria-pressed="${selected ? 'true' : 'false'}"
+
+        >
+
+            <span class="indicator-option__radio">
+
+                <span></span>
+
+            </span>
+
+
+            <span class="indicator-option__label">
+
+                ${Page02.escapeHtml(
+                    option.label
+                )}
+
+            </span>
+
+
+            <span class="indicator-option__score">
+
+                ${option.score}
+
+            </span>
+
+        </button>
+
+    `;
+
+};
 
 
 /* =============================================================================
@@ -2429,29 +3114,20 @@ Page02.getIndicatorValue = function(indicatorId){
 
 Page02.renderIndicator = function(indicator){
 
+    const selectedAnswer =
 
-    const existingValue =
-
-        Page02.getIndicatorValue(
-
+        Page02.getIndicatorAnswer(
             indicator.id
-
         );
 
 
-    const inputMode =
+    const scoreText =
 
-        (
-            indicator.type === 'money' ||
+        selectedAnswer
 
-            indicator.type === 'number' ||
+            ? `${selectedAnswer.score} / 4`
 
-            indicator.type === 'percentage'
-        )
-
-            ? 'decimal'
-
-            : 'text';
+            : '— / 4';
 
 
     return `
@@ -2466,13 +3142,18 @@ Page02.renderIndicator = function(indicator){
 
         >
 
+
             <div class="indicator-heading">
+
 
                 <span class="indicator-number">
 
                     ${String(
                         indicator.number
-                    ).padStart(2, '0')}
+                    ).padStart(
+                        2,
+                        '0'
+                    )}
 
                 </span>
 
@@ -2487,6 +3168,7 @@ Page02.renderIndicator = function(indicator){
 
                     </h3>
 
+
                     <p>
 
                         ${Page02.escapeHtml(
@@ -2497,74 +3179,86 @@ Page02.renderIndicator = function(indicator){
 
                 </div>
 
+
             </div>
 
 
             <div class="indicator-comparison">
 
 
-                <label class="indicator-current">
+                <div class="indicator-current">
+
 
                     <span>
+
                         உங்கள் தற்போதைய நிலை
+
                     </span>
 
+
                     <small>
-                        YOUR CURRENT REALITY
+
+                        SELECT YOUR CURRENT REALITY
+
                     </small>
 
 
-                    <div class="indicator-input-wrap">
+                    <div
 
-                        <input
+                        class="indicator-options"
 
-                            type="text"
+                        role="group"
 
-                            inputmode="${inputMode}"
+                        aria-label="${Page02.escapeHtml(
+                            indicator.english
+                        )}"
 
-                            autocomplete="off"
+                    >
 
-                            data-indicator-input="${Page02.escapeHtml(
-                                indicator.id
-                            )}"
+                        ${indicator.options
 
-                            value="${Page02.escapeHtml(
-                                existingValue
-                            )}"
+                            .map(
 
-                            placeholder="${Page02.escapeHtml(
-                                indicator.placeholder
-                            )}"
+                                function(option){
 
-                            aria-label="${Page02.escapeHtml(
-                                indicator.english
-                            )}"
+                                    return Page02.renderOption(
 
-                        >
+                                        indicator,
 
+                                        option,
 
-                        <span class="indicator-unit">
+                                        selectedAnswer
 
-                            ${Page02.escapeHtml(
-                                indicator.unit
-                            )}
+                                    );
 
-                        </span>
+                                }
+
+                            )
+
+                            .join('')}
 
                     </div>
 
-                </label>
+
+                </div>
 
 
                 <div class="indicator-ideal">
 
+
                     <span>
+
                         Millionaire Ideal™
+
                     </span>
 
+
                     <small>
+
                         BENCHMARK
+
                     </small>
+
 
                     <strong>
 
@@ -2573,6 +3267,7 @@ Page02.renderIndicator = function(indicator){
                         )}
 
                     </strong>
+
 
                 </div>
 
@@ -2594,18 +3289,21 @@ Page02.renderIndicator = function(indicator){
                     SCORE
                 </span>
 
+
                 <strong>
-                    — / 4
+
+                    ${scoreText}
+
                 </strong>
 
             </div>
+
 
         </article>
 
     `;
 
 };
-
 
 
 /* =============================================================================
@@ -2616,9 +3314,10 @@ Page02.renderIndicator = function(indicator){
 
 Page02.renderDimension = function(){
 
-
     const host =
-        Page02.$('#dimensionHost');
+        Page02.$(
+            '#dimensionHost'
+        );
 
 
     if(!host){
@@ -2629,13 +3328,7 @@ Page02.renderDimension = function(){
 
 
     const dimension =
-
-        Page02.DIMENSIONS[
-
-            Page02.state
-                .currentDimension
-
-        ];
+        Page02.getCurrentDimension();
 
 
     if(!dimension){
@@ -2656,6 +3349,7 @@ Page02.renderDimension = function(){
             )}"
 
         >
+
 
             <span class="section-kicker">
 
@@ -2686,16 +3380,19 @@ Page02.renderDimension = function(){
 
             <p>
 
-                உங்கள் தற்போதைய உண்மை நிலையை பதிவு செய்யுங்கள்.
+                உங்கள் தற்போதைய நிலைக்கு மிகவும் பொருத்தமான
+                பதிலைத் தேர்ந்தெடுக்கவும்.
 
             </p>
 
 
             <p class="english-sub">
 
-                ENTER YOUR CURRENT REALITY TODAY.
+                SELECT THE RANGE THAT BEST REPRESENTS
+                YOUR CURRENT REALITY.
 
             </p>
+
 
         </section>
 
@@ -2705,9 +3402,7 @@ Page02.renderDimension = function(){
             ${dimension.indicators
 
                 .map(
-
                     Page02.renderIndicator
-
                 )
 
                 .join('')}
@@ -2717,115 +3412,138 @@ Page02.renderDimension = function(){
     `;
 
 
-    Page02.bindIndicatorInputs();
+    Page02.bindIndicatorOptions();
 
     Page02.updateDimensionButtons();
 
 };
 
 
-
 /* =============================================================================
- * INDICATOR INPUT BINDING
+ * OPTION SELECTION
  * =============================================================================
  */
 
 
-Page02.bindIndicatorInputs = function(){
+Page02.selectIndicatorOption = function(
+    button
+){
+
+    const indicatorId =
+        button.dataset
+            .indicatorOption;
 
 
-    Page02
-
-        .$$('[data-indicator-input]')
-
-        .forEach(
-
-            function(input){
+    const optionScore =
+        Number(
+            button.dataset
+                .optionScore
+        );
 
 
-                input.addEventListener(
-
-                    'input',
-
-                    function(){
-
-
-                        input.value =
-
-                            input.value
-
-                                .replace(
-
-                                    /[^\d.,]/g,
-
-                                    ''
-
-                                );
+    const indicator =
+        Page02.findIndicator(
+            indicatorId
+        );
 
 
-                        Page02.previewIndicator(
-
-                            input.dataset
-                                .indicatorInput,
-
-                            input.value
-
-                        );
-
-                    }
-
-                );
+    const dimension =
+        Page02.getCurrentDimension();
 
 
-                if(input.value !== ''){
+    if(
+        !indicator ||
+        !dimension
+    ){
+
+        return;
+
+    }
 
 
-                    Page02.previewIndicator(
+    const option =
 
-                        input.dataset
-                            .indicatorInput,
+        indicator.options.find(
 
-                        input.value
+            function(item){
 
-                    );
-
-                }
+                return Number(
+                    item.score
+                ) ===
+                    optionScore;
 
             }
 
         );
 
-};
+
+    if(!option){
+
+        return;
+
+    }
 
 
+    /*
+     * Save answer immediately.
+     */
 
-/* =============================================================================
- * FIND INDICATOR
- * =============================================================================
- */
+    Page02.state.answers[
+        indicator.id
+    ] =
+
+        Page02.buildAnswer(
+
+            dimension,
+
+            indicator,
+
+            option
+
+        );
 
 
-Page02.findIndicator = function(indicatorId){
+    /*
+     * Update visual selection.
+     */
+
+    const card =
+        button.closest(
+            '[data-indicator]'
+        );
 
 
-    for(
+    if(card){
 
-        const dimension of
-        Page02.DIMENSIONS
+        card
+            .querySelectorAll(
+                '[data-indicator-option]'
+            )
+            .forEach(
 
-    ){
+                function(optionButton){
+
+                    const selected =
+                        optionButton ===
+                        button;
 
 
-        const indicator =
+                    optionButton.classList.toggle(
 
-            dimension.indicators.find(
+                        'is-selected',
 
-                function(item){
+                        selected
 
-                    return (
+                    );
 
-                        item.id ===
-                        indicatorId
+
+                    optionButton.setAttribute(
+
+                        'aria-pressed',
+
+                        selected
+                            ? 'true'
+                            : 'false'
 
                     );
 
@@ -2833,260 +3551,106 @@ Page02.findIndicator = function(indicatorId){
 
             );
 
-
-        if(indicator){
-
-            return indicator;
-
-        }
-
     }
 
 
-    return null;
-
-};
-
-
-
-/* =============================================================================
- * LIVE INDICATOR PREVIEW
- * =============================================================================
- */
-
-
-Page02.previewIndicator = function(
-
-    indicatorId,
-
-    value
-
-){
-
-
-    const indicator =
-
-        Page02.findIndicator(
-
-            indicatorId
-
-        );
-
-
-    if(!indicator){
-
-        return;
-
-    }
-
+    /*
+     * Update score preview.
+     */
 
     const scoreElement =
 
         Page02.$(
 
-            `[data-indicator-score="${indicatorId}"] strong`
+            `[data-indicator-score="${indicator.id}"] strong`
 
         );
 
 
-    if(!scoreElement){
-
-        return;
-
-    }
-
-
-    if(
-
-        String(value).trim() === ''
-
-    ){
+    if(scoreElement){
 
         scoreElement.textContent =
-            '— / 4';
-
-        return;
+            `${option.score} / 4`;
 
     }
 
 
-    const calculated =
-
-        Page02.calculateIndicator(
-
-            indicator,
-
-            value
-
-        );
+    Page02.setError(
+        '#scorecardError',
+        ''
+    );
 
 
-    scoreElement.textContent =
-
-        `${calculated.score} / 4`;
+    Page02.renderDimensionProgress();
 
 };
 
 
-
 /* =============================================================================
- * BUILD ANSWER
+ * OPTION BINDING
  * =============================================================================
  */
 
 
-Page02.buildAnswer = function(
+Page02.bindIndicatorOptions = function(){
 
-    dimension,
+    Page02
+        .$$('[data-indicator-option]')
+        .forEach(
 
-    indicator,
+            function(button){
 
-    rawValue
+                button.addEventListener(
 
-){
+                    'click',
 
+                    function(){
 
-    const calculation =
+                        Page02.selectIndicatorOption(
+                            button
+                        );
 
-        Page02.calculateIndicator(
+                    }
 
-            indicator,
+                );
 
-            rawValue
+            }
 
         );
-
-
-    return {
-
-        indicatorId:
-            indicator.id,
-
-        indicatorNumber:
-            indicator.number,
-
-        dimensionId:
-            dimension.id,
-
-        dimension:
-            dimension.english,
-
-        label:
-            indicator.english,
-
-        value:
-            calculation.value,
-
-        ideal:
-            indicator.ideal,
-
-        target:
-            indicator.target,
-
-        score:
-            calculation.score,
-
-        gap:
-            calculation.gap
-
-    };
 
 };
 
 
-
 /* =============================================================================
  * PRESERVE CURRENT DIMENSION
+ * =============================================================================
+ *
+ * Answers are saved immediately when an option is clicked.
+ *
+ * This function remains as a compatibility hook because the original
+ * Page 02 architecture called preserveCurrentDimension() during navigation.
+ *
  * =============================================================================
  */
 
 
 Page02.preserveCurrentDimension = function(){
 
-
-    const dimension =
-
-        Page02.DIMENSIONS[
-
-            Page02.state
-                .currentDimension
-
-        ];
-
-
-    if(!dimension){
-
-        return;
-
-    }
-
-
-    dimension.indicators.forEach(
-
-        function(indicator){
-
-
-            const input =
-
-                Page02.$(
-
-                    `[data-indicator-input="${indicator.id}"]`
-
-                );
-
-
-            if(
-
-                input &&
-
-                String(
-                    input.value
-                ).trim() !== ''
-
-            ){
-
-
-                Page02.state.answers[
-                    indicator.id
-                ] =
-
-                    Page02.buildAnswer(
-
-                        dimension,
-
-                        indicator,
-
-                        input.value
-
-                    );
-
-            }
-
-        }
-
-    );
+    return true;
 
 };
 
 
-
 /* =============================================================================
- * CAPTURE CURRENT DIMENSION
+ * CAPTURE / VALIDATE CURRENT DIMENSION
  * =============================================================================
  */
 
 
 Page02.captureCurrentDimension = function(){
 
-
     const dimension =
-
-        Page02.DIMENSIONS[
-
-            Page02.state
-                .currentDimension
-
-        ];
+        Page02.getCurrentDimension();
 
 
     if(!dimension){
@@ -3097,54 +3661,68 @@ Page02.captureCurrentDimension = function(){
 
 
     Page02.setError(
-
         '#scorecardError',
-
         ''
-
     );
 
 
     for(
-
         const indicator of
         dimension.indicators
-
     ){
 
+        const answer =
 
-        const input =
-
-            Page02.$(
-
-                `[data-indicator-input="${indicator.id}"]`
-
+            Page02.getIndicatorAnswer(
+                indicator.id
             );
 
 
-        if(
-
-            !input ||
-
-            String(
-                input.value
-            ).trim() === ''
-
-        ){
-
+        if(!answer){
 
             Page02.setError(
 
                 '#scorecardError',
 
-                'Please complete all five indicators before continuing.'
+                'Please select one answer for all five indicators before continuing.'
 
             );
 
 
-            if(input){
+            const card =
 
-                input.focus();
+                Page02.$(
+
+                    `[data-indicator="${indicator.id}"]`
+
+                );
+
+
+            if(card){
+
+                card.scrollIntoView({
+
+                    behavior:
+                        'smooth',
+
+                    block:
+                        'center'
+
+                });
+
+
+                const firstOption =
+
+                    card.querySelector(
+                        '[data-indicator-option]'
+                    );
+
+
+                if(firstOption){
+
+                    firstOption.focus();
+
+                }
 
             }
 
@@ -3153,28 +3731,12 @@ Page02.captureCurrentDimension = function(){
 
         }
 
-
-        Page02.state.answers[
-            indicator.id
-        ] =
-
-            Page02.buildAnswer(
-
-                dimension,
-
-                indicator,
-
-                input.value
-
-            );
-
     }
 
 
     return true;
 
 };
-
 
 
 /* =============================================================================
@@ -3185,13 +3747,16 @@ Page02.captureCurrentDimension = function(){
 
 Page02.updateDimensionButtons = function(){
 
-
     const back =
-        Page02.$('#dimensionBack');
+        Page02.$(
+            '#dimensionBack'
+        );
 
 
     const next =
-        Page02.$('#dimensionNext');
+        Page02.$(
+            '#dimensionNext'
+        );
 
 
     if(back){
@@ -3199,20 +3764,21 @@ Page02.updateDimensionButtons = function(){
         back.disabled =
 
             Page02.state
-                .currentDimension === 0;
+                .currentDimension ===
+                0;
 
     }
 
 
     if(next){
 
-
         const isLast =
 
             Page02.state
                 .currentDimension ===
 
-            Page02.DIMENSIONS.length - 1;
+            Page02.DIMENSIONS.length -
+                1;
 
 
         next.textContent =
@@ -3228,7 +3794,6 @@ Page02.updateDimensionButtons = function(){
 };
 
 
-
 /* =============================================================================
  * NEXT DIMENSION
  * =============================================================================
@@ -3237,11 +3802,8 @@ Page02.updateDimensionButtons = function(){
 
 Page02.handleDimensionNext = async function(){
 
-
     if(
-
         !Page02.captureCurrentDimension()
-
     ){
 
         return;
@@ -3251,18 +3813,17 @@ Page02.handleDimensionNext = async function(){
 
     const lastIndex =
 
-        Page02.DIMENSIONS.length - 1;
+        Page02.DIMENSIONS.length -
+        1;
 
 
     if(
-
         Page02.state.currentDimension <
         lastIndex
-
     ){
 
-
-        Page02.state.currentDimension += 1;
+        Page02.state.currentDimension +=
+            1;
 
 
         Page02.renderDimensionProgress();
@@ -3272,9 +3833,11 @@ Page02.handleDimensionNext = async function(){
 
         window.scrollTo({
 
-            top: 0,
+            top:
+                0,
 
-            behavior: 'smooth'
+            behavior:
+                'smooth'
 
         });
 
@@ -3289,7 +3852,6 @@ Page02.handleDimensionNext = async function(){
 };
 
 
-
 /* =============================================================================
  * PREVIOUS DIMENSION
  * =============================================================================
@@ -3298,26 +3860,18 @@ Page02.handleDimensionNext = async function(){
 
 Page02.handleDimensionBack = function(){
 
-
-    Page02.preserveCurrentDimension();
-
-
     if(
-
-        Page02.state.currentDimension > 0
-
+        Page02.state.currentDimension >
+        0
     ){
 
-
-        Page02.state.currentDimension -= 1;
+        Page02.state.currentDimension -=
+            1;
 
 
         Page02.setError(
-
             '#scorecardError',
-
             ''
-
         );
 
 
@@ -3328,16 +3882,17 @@ Page02.handleDimensionBack = function(){
 
         window.scrollTo({
 
-            top: 0,
+            top:
+                0,
 
-            behavior: 'smooth'
+            behavior:
+                'smooth'
 
         });
 
     }
 
 };
-
 
 
 /* =============================================================================
@@ -3348,13 +3903,16 @@ Page02.handleDimensionBack = function(){
 
 Page02.bindScorecardNavigation = function(){
 
-
     const back =
-        Page02.$('#dimensionBack');
+        Page02.$(
+            '#dimensionBack'
+        );
 
 
     const next =
-        Page02.$('#dimensionNext');
+        Page02.$(
+            '#dimensionNext'
+        );
 
 
     if(back){
@@ -3385,7 +3943,6 @@ Page02.bindScorecardNavigation = function(){
 };
 
 
-
 /* =============================================================================
  * CALCULATE COMPLETE RESULT
  * =============================================================================
@@ -3394,8 +3951,8 @@ Page02.bindScorecardNavigation = function(){
 
 Page02.calculateResult = function(){
 
-
-    let totalScore = 0;
+    let totalScore =
+        0;
 
 
     const dimensions =
@@ -3414,9 +3971,10 @@ Page02.calculateResult = function(){
 
                             const answer =
 
-                                Page02.state.answers[
-                                    indicator.id
-                                ];
+                                Page02.state
+                                    .answers[
+                                        indicator.id
+                                    ];
 
 
                             return {
@@ -3432,6 +3990,12 @@ Page02.calculateResult = function(){
 
                                 value:
                                     answer.value,
+
+                                selectedRange:
+                                    answer.selectedRange,
+
+                                rangeLabel:
+                                    answer.rangeLabel,
 
                                 ideal:
                                     indicator.ideal,
@@ -3457,18 +4021,13 @@ Page02.calculateResult = function(){
                     indicatorResults.reduce(
 
                         function(
-
                             sum,
-
                             item
-
                         ){
 
                             return (
-
                                 sum +
                                 item.score
-
                             );
 
                         },
@@ -3478,13 +4037,15 @@ Page02.calculateResult = function(){
                     );
 
 
-                totalScore += score;
+                totalScore +=
+                    score;
 
 
                 const maximum =
 
                     dimension.indicators
-                        .length * 4;
+                        .length *
+                    4;
 
 
                 const percentage =
@@ -3496,7 +4057,8 @@ Page02.calculateResult = function(){
                             (
                                 score /
                                 maximum
-                            ) * 100
+                            ) *
+                            100
 
                         )
 
@@ -3536,9 +4098,8 @@ Page02.calculateResult = function(){
     /*
      * 25 indicators × 4 points = 100.
      *
-     * Therefore:
-     *
-     *      total score = overall percentage
+     * Therefore total score and percentage
+     * are numerically identical.
      */
 
     const percentage =
@@ -3560,9 +4121,7 @@ Page02.calculateResult = function(){
     const stage =
 
         Page02.getLifestyleStage(
-
             percentage
-
         );
 
 
@@ -3573,10 +4132,8 @@ Page02.calculateResult = function(){
             function(a, b){
 
                 return (
-
                     b.percentage -
                     a.percentage
-
                 );
 
             }
@@ -3590,7 +4147,8 @@ Page02.calculateResult = function(){
 
     const growth =
         sorted[
-            sorted.length - 1
+            sorted.length -
+            1
         ];
 
 
@@ -3642,10 +4200,8 @@ Page02.calculateResult = function(){
                     function(a, b){
 
                         return (
-
                             a.number -
                             b.number
-
                         );
 
                     }
@@ -3657,11 +4213,10 @@ Page02.calculateResult = function(){
                     function(indicator){
 
                         return (
-
-                            Page02.state.answers[
-                                indicator.id
-                            ]
-
+                            Page02.state
+                                .answers[
+                                    indicator.id
+                                ]
                         );
 
                     }
@@ -3673,7 +4228,6 @@ Page02.calculateResult = function(){
 };
 
 
-
 /* =============================================================================
  * LIFESTYLE STAGE
  * =============================================================================
@@ -3682,70 +4236,71 @@ Page02.calculateResult = function(){
 
 Page02.getLifestyleStage = function(percentage){
 
-
-    if(percentage >= 100){
+    if(
+        percentage >=
+        100
+    ){
 
         return (
-
             'Millionaire Lifestyle Benchmark Achieved'
-
         );
 
     }
 
 
-    if(percentage >= 81){
+    if(
+        percentage >=
+        81
+    ){
 
         return (
-
             'Millionaire Lifestyle'
-
         );
 
     }
 
 
-    if(percentage >= 61){
+    if(
+        percentage >=
+        61
+    ){
 
         return (
-
             'Wealth-Building Lifestyle'
-
         );
 
     }
 
 
-    if(percentage >= 41){
+    if(
+        percentage >=
+        41
+    ){
 
         return (
-
             'Affluent Transition'
-
         );
 
     }
 
 
-    if(percentage >= 21){
+    if(
+        percentage >=
+        21
+    ){
 
         return (
-
             'Middle-Class Stability'
-
         );
 
     }
 
 
     return (
-
         'Survival / Foundation'
-
     );
 
 };
-
 
 
 /* =============================================================================
@@ -3756,48 +4311,39 @@ Page02.getLifestyleStage = function(percentage){
 
 Page02.buildDiscoveryPayload = function(result){
 
-
     return {
 
         peopleId:
             Page02.state.peopleId,
 
-
         totalScore:
             result.totalScore,
-
 
         millionaireLifestylePercentage:
             result.percentage,
 
-
         overallGap:
             result.gap,
-
 
         lifestyleStage:
             result.stage,
 
-
         strongestDimension:
             result.strongestDimension.name,
 
-
         strongestDimensionPercentage:
-            result.strongestDimension.percentage,
-
+            result.strongestDimension
+                .percentage,
 
         growthDimension:
             result.growthDimension.name,
 
-
         growthDimensionPercentage:
-            result.growthDimension.percentage,
-
+            result.growthDimension
+                .percentage,
 
         dimensions:
             result.dimensions,
-
 
         indicators:
             result.indicators
@@ -3805,7 +4351,6 @@ Page02.buildDiscoveryPayload = function(result){
     };
 
 };
-
 
 
 /* =============================================================================
@@ -3816,8 +4361,9 @@ Page02.buildDiscoveryPayload = function(result){
 
 Page02.completeScorecard = async function(){
 
-
-    if(Page02.state.saving){
+    if(
+        Page02.state.saving
+    ){
 
         return;
 
@@ -3837,26 +4383,22 @@ Page02.completeScorecard = async function(){
 
 
     Page02.setError(
-
         '#scorecardError',
-
         ''
-
     );
 
 
-    Page02.setLoading(true);
+    Page02.setLoading(
+        true
+    );
 
 
     try{
 
-
         const payload =
 
             Page02.buildDiscoveryPayload(
-
                 result
-
             );
 
 
@@ -3872,14 +4414,11 @@ Page02.completeScorecard = async function(){
 
 
         Page02.unwrapResponse(
-
             response
-
         );
 
 
         try{
-
 
             sessionStorage.setItem(
 
@@ -3888,18 +4427,14 @@ Page02.completeScorecard = async function(){
                     .page02Result,
 
                 JSON.stringify(
-
                     result
-
                 )
 
             );
 
-
         }
 
         catch(storageError){
-
 
             console.warn(
 
@@ -3913,23 +4448,17 @@ Page02.completeScorecard = async function(){
 
 
         Page02.renderResult(
-
             result
-
         );
 
 
         Page02.showScreen(
-
             'result'
-
         );
-
 
     }
 
     catch(error){
-
 
         console.error(
 
@@ -3950,22 +4479,21 @@ Page02.completeScorecard = async function(){
 
         );
 
-
     }
 
     finally{
-
 
         Page02.state.saving =
             false;
 
 
-        Page02.setLoading(false);
+        Page02.setLoading(
+            false
+        );
 
     }
 
 };
-
 
 
 /* =============================================================================
@@ -3975,7 +4503,6 @@ Page02.completeScorecard = async function(){
 
 
 Page02.renderDimensionResult = function(dimension){
-
 
     return `
 
@@ -3989,6 +4516,7 @@ Page02.renderDimensionResult = function(dimension){
 
         >
 
+
             <div class="dimension-result__copy">
 
                 <strong>
@@ -3998,6 +4526,7 @@ Page02.renderDimensionResult = function(dimension){
                     )}
 
                 </strong>
+
 
                 <span>
 
@@ -4019,6 +4548,7 @@ Page02.renderDimensionResult = function(dimension){
                     ${dimension.maximum}
 
                 </strong>
+
 
                 <span>
 
@@ -4048,12 +4578,12 @@ Page02.renderDimensionResult = function(dimension){
 
             </div>
 
+
         </article>
 
     `;
 
 };
-
 
 
 /* =============================================================================
@@ -4064,47 +4594,63 @@ Page02.renderDimensionResult = function(dimension){
 
 Page02.renderResult = function(result){
 
-
     const score =
-        Page02.$('#resultScore');
+        Page02.$(
+            '#resultScore'
+        );
 
 
     const percentage =
-        Page02.$('#resultPercentage');
+        Page02.$(
+            '#resultPercentage'
+        );
 
 
     const stage =
-        Page02.$('#resultStage');
+        Page02.$(
+            '#resultStage'
+        );
 
 
     const gap =
-        Page02.$('#resultGap');
+        Page02.$(
+            '#resultGap'
+        );
 
 
     const dimensionResults =
-        Page02.$('#dimensionResults');
+        Page02.$(
+            '#dimensionResults'
+        );
 
 
     const strongestDimension =
-        Page02.$('#strongestDimension');
+        Page02.$(
+            '#strongestDimension'
+        );
 
 
     const strongestPercentage =
-        Page02.$('#strongestPercentage');
+        Page02.$(
+            '#strongestPercentage'
+        );
 
 
     const growthDimension =
-        Page02.$('#growthDimension');
+        Page02.$(
+            '#growthDimension'
+        );
 
 
     const growthPercentage =
-        Page02.$('#growthPercentage');
+        Page02.$(
+            '#growthPercentage'
+        );
 
 
     if(score){
 
         score.textContent =
-
             `${result.totalScore} / 100`;
 
     }
@@ -4113,7 +4659,6 @@ Page02.renderResult = function(result){
     if(percentage){
 
         percentage.textContent =
-
             `${result.percentage}%`;
 
     }
@@ -4122,7 +4667,6 @@ Page02.renderResult = function(result){
     if(stage){
 
         stage.textContent =
-
             `${result.stage.toUpperCase()}™`;
 
     }
@@ -4131,7 +4675,6 @@ Page02.renderResult = function(result){
     if(gap){
 
         gap.textContent =
-
             `${result.gap}%`;
 
     }
@@ -4139,15 +4682,12 @@ Page02.renderResult = function(result){
 
     if(dimensionResults){
 
-
         dimensionResults.innerHTML =
 
             result.dimensions
 
                 .map(
-
                     Page02.renderDimensionResult
-
                 )
 
                 .join('');
@@ -4158,7 +4698,6 @@ Page02.renderResult = function(result){
     if(strongestDimension){
 
         strongestDimension.textContent =
-
             result.strongestDimension.name;
 
     }
@@ -4176,7 +4715,6 @@ Page02.renderResult = function(result){
     if(growthDimension){
 
         growthDimension.textContent =
-
             result.growthDimension.name;
 
     }
@@ -4192,13 +4730,10 @@ Page02.renderResult = function(result){
 
 
     Page02.highlightStage(
-
         result.stage
-
     );
 
 };
-
 
 
 /* =============================================================================
@@ -4209,15 +4744,15 @@ Page02.renderResult = function(result){
 
 Page02.highlightStage = function(stage){
 
-
     Page02
 
-        .$$('.stage-list [data-stage]')
+        .$$(
+            '.stage-list [data-stage]'
+        )
 
         .forEach(
 
             function(item){
-
 
                 const active =
 
@@ -4236,7 +4771,6 @@ Page02.highlightStage = function(stage){
 
                 if(active){
 
-
                     item.setAttribute(
 
                         'aria-current',
@@ -4245,16 +4779,12 @@ Page02.highlightStage = function(stage){
 
                     );
 
-
                 }
 
                 else{
 
-
                     item.removeAttribute(
-
                         'aria-current'
-
                     );
 
                 }
@@ -4266,7 +4796,6 @@ Page02.highlightStage = function(stage){
 };
 
 
-
 /* =============================================================================
  * PAGE 03 NAVIGATION
  * =============================================================================
@@ -4275,8 +4804,9 @@ Page02.highlightStage = function(stage){
 
 Page02.continueToPage03 = function(){
 
-
-    if(!Page02.state.result){
+    if(
+        !Page02.state.result
+    ){
 
         return;
 
@@ -4284,11 +4814,9 @@ Page02.continueToPage03 = function(){
 
 
     window.location.href =
-
         Page02.CONFIG.nextPage;
 
 };
-
 
 
 /* =============================================================================
@@ -4299,9 +4827,10 @@ Page02.continueToPage03 = function(){
 
 Page02.bindContinue = function(){
 
-
     const button =
-        Page02.$('#continuePage03');
+        Page02.$(
+            '#continuePage03'
+        );
 
 
     if(!button){
@@ -4322,7 +4851,6 @@ Page02.bindContinue = function(){
 };
 
 
-
 /* =============================================================================
  * RESTORE SESSION
  * =============================================================================
@@ -4331,9 +4859,7 @@ Page02.bindContinue = function(){
 
 Page02.restoreSession = function(){
 
-
     try{
-
 
         const peopleId =
 
@@ -4353,11 +4879,9 @@ Page02.restoreSession = function(){
 
         }
 
-
     }
 
     catch(error){
-
 
         console.warn(
 
@@ -4372,7 +4896,6 @@ Page02.restoreSession = function(){
 };
 
 
-
 /* =============================================================================
  * DEPENDENCY CHECK
  * =============================================================================
@@ -4381,20 +4904,14 @@ Page02.restoreSession = function(){
 
 Page02.checkDependencies = function(){
 
-
     if(
-
-        typeof CTM_API === 'undefined'
-
+        typeof CTM_API ===
+        'undefined'
     ){
 
-
         console.error(
-
             'CTM PATH™ Page 02 dependency failure: js/api.js is not loaded.'
-
         );
-
 
         return false;
 
@@ -4402,19 +4919,13 @@ Page02.checkDependencies = function(){
 
 
     if(
-
         typeof CTM_API.register !==
         'function'
-
     ){
 
-
         console.error(
-
             'CTM PATH™ Page 02 dependency failure: CTM_API.register() is unavailable.'
-
         );
-
 
         return false;
 
@@ -4422,19 +4933,13 @@ Page02.checkDependencies = function(){
 
 
     if(
-
         typeof CTM_API.saveDiscovery !==
         'function'
-
     ){
 
-
         console.error(
-
             'CTM PATH™ Page 02 dependency failure: CTM_API.saveDiscovery() is unavailable.'
-
         );
-
 
         return false;
 
@@ -4446,7 +4951,6 @@ Page02.checkDependencies = function(){
 };
 
 
-
 /* =============================================================================
  * INITIALIZE
  * =============================================================================
@@ -4455,17 +4959,16 @@ Page02.checkDependencies = function(){
 
 Page02.init = function(){
 
-
     const root =
-        Page02.$('#page02');
+        Page02.$(
+            '#page02'
+        );
 
 
     if(!root){
 
         console.error(
-
             'CTM PATH™ Page 02 root element #page02 was not found.'
-
         );
 
         return;
@@ -4473,11 +4976,16 @@ Page02.init = function(){
     }
 
 
-    Page02.checkDependencies();
+    if(
+        !Page02.checkDependencies()
+    ){
+
+        return;
+
+    }
 
 
     Page02.restoreSession();
-
 
     Page02.bindIntro();
 
@@ -4490,27 +4998,18 @@ Page02.init = function(){
 
     /*
      * Page 02 always starts from its introduction.
-     *
-     * A previously stored PeopleID may be reused by the
-     * application session, but the page will not silently
-     * jump into an unfinished scorecard.
      */
 
     Page02.showScreen(
-
         'intro'
-
     );
 
 
     console.info(
-
-        'CTM PATH™ MILLIONAIRES™ — Page 02 ready.'
-
+        'CTM PATH™ MILLIONAIRES™ — Page 02 v2.0 Range Option Scorecard ready.'
     );
 
 };
-
 
 
 /* =============================================================================
@@ -4520,12 +5019,9 @@ Page02.init = function(){
 
 
 if(
-
     document.readyState ===
     'loading'
-
 ){
-
 
     document.addEventListener(
 
@@ -4535,11 +5031,9 @@ if(
 
     );
 
-
 }
 
 else{
-
 
     Page02.init();
 
@@ -4550,4 +5044,3 @@ else{
  * END OF FILE
  * =============================================================================
  */
-
