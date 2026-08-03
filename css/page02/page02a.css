@@ -1,1 +1,1935 @@
 
+/* ==========================================================================
+   CTM PATH™ MILLIONAIRES™
+
+   FILE:
+   css/page02/page02a.css
+
+   VERSION:
+   3.0
+
+   PAGE:
+   PAGE 02A — INTRODUCTION + KYC
+
+   PURPOSE:
+
+   ✓ Scorecard introduction
+   ✓ Centered premium instruction card
+   ✓ KYC presentation
+   ✓ KYC form architecture
+   ✓ Page 02A responsive behaviour
+   ✓ Premium CTM teal CTA language
+
+   DOES NOT CONTROL:
+
+   ✗ Global header
+   ✗ Global footer
+   ✗ Dimension scorecards
+   ✗ Four-option question cards
+   ✗ Page 02B–02F layouts
+
+========================================================================== */
+
+
+/* ==========================================================================
+   PAGE FOUNDATION
+========================================================================== */
+
+
+.page02a {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    margin: 0;
+
+    padding: 0;
+
+    overflow-x: hidden;
+
+}
+
+
+.page02a .page02-screen {
+
+    width: 100%;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+
+.page02a .page02-screen[hidden] {
+
+    display: none !important;
+
+}
+
+
+.page02a .page02-shell {
+
+    width: min(1120px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+}
+
+
+/* ==========================================================================
+   INTRO SCREEN
+========================================================================== */
+
+
+.page02-intro-screen {
+
+    position: relative;
+
+    padding:
+
+        clamp(72px, 8vw, 120px)
+
+        0
+
+        clamp(84px, 9vw, 132px);
+
+}
+
+
+.page02-intro-screen .page02-shell {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+}
+
+
+/* ==========================================================================
+   INTRO CARD
+========================================================================== */
+
+
+.scorecard-intro-card {
+
+    position: relative;
+
+    width: min(100%, 780px);
+
+    margin: 0 auto;
+
+    padding:
+
+        clamp(44px, 5vw, 68px)
+
+        clamp(34px, 6vw, 76px)
+
+        clamp(46px, 5vw, 70px);
+
+    text-align: center;
+
+    border:
+
+        1px solid
+
+        rgba(255, 255, 255, 0.10);
+
+    border-radius: 22px;
+
+    background:
+
+        linear-gradient(
+
+            145deg,
+
+            rgba(255, 255, 255, 0.035),
+
+            rgba(255, 255, 255, 0.012)
+
+        );
+
+    box-shadow:
+
+        0 24px 70px
+
+        rgba(0, 0, 0, 0.20);
+
+    overflow: hidden;
+
+}
+
+
+.scorecard-intro-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 50%;
+
+    width: 92px;
+
+    height: 3px;
+
+    transform: translateX(-50%);
+
+    border-radius:
+
+        0
+
+        0
+
+        4px
+
+        4px;
+
+    background:
+
+        #14b8a6;
+
+}
+
+
+/* ==========================================================================
+   EYEBROW
+========================================================================== */
+
+
+.scorecard-eyebrow {
+
+    margin:
+
+        0
+
+        0
+
+        24px;
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.72rem;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    letter-spacing: 0.22em;
+
+    text-transform: uppercase;
+
+    color:
+
+        rgba(255, 255, 255, 0.52);
+
+}
+
+
+/* ==========================================================================
+   INTRO TITLE
+========================================================================== */
+
+
+.scorecard-intro-title {
+
+    margin:
+
+        0
+
+        auto
+
+        24px;
+
+    max-width: 680px;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size:
+
+        clamp(
+
+            2rem,
+
+            4vw,
+
+            3.15rem
+
+        );
+
+    font-weight: 800;
+
+    line-height: 1.45;
+
+    letter-spacing: -0.025em;
+
+    color: #ffffff;
+
+}
+
+
+/* ==========================================================================
+   INTRO ENGLISH
+========================================================================== */
+
+
+.scorecard-intro-english {
+
+    margin:
+
+        0
+
+        auto
+
+        38px;
+
+}
+
+
+.scorecard-intro-english p {
+
+    margin: 0;
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size:
+
+        clamp(
+
+            0.72rem,
+
+            1vw,
+
+            0.86rem
+
+        );
+
+    font-weight: 700;
+
+    line-height: 1.75;
+
+    letter-spacing: 0.13em;
+
+    color: #14b8a6;
+
+}
+
+
+.scorecard-intro-english p + p {
+
+    margin-top: 2px;
+
+}
+
+
+/* ==========================================================================
+   INTRO COPY
+========================================================================== */
+
+
+.scorecard-intro-copy {
+
+    width: min(100%, 620px);
+
+    margin:
+
+        0
+
+        auto;
+
+}
+
+
+.scorecard-intro-copy p {
+
+    margin: 0;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size:
+
+        clamp(
+
+            1rem,
+
+            1.6vw,
+
+            1.14rem
+
+        );
+
+    font-weight: 500;
+
+    line-height: 2;
+
+    color:
+
+        rgba(255, 255, 255, 0.82);
+
+}
+
+
+.scorecard-intro-copy p + p {
+
+    margin-top: 18px;
+
+}
+
+
+/* ==========================================================================
+   ENGLISH SUPPORT COPY
+========================================================================== */
+
+
+.scorecard-intro-support {
+
+    width: min(100%, 600px);
+
+    margin:
+
+        30px
+
+        auto
+
+        0;
+
+    padding-top: 26px;
+
+    border-top:
+
+        1px solid
+
+        rgba(255, 255, 255, 0.08);
+
+}
+
+
+.scorecard-intro-support p {
+
+    margin: 0;
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.74rem;
+
+    font-weight: 600;
+
+    line-height: 1.8;
+
+    letter-spacing: 0.08em;
+
+    color:
+
+        rgba(255, 255, 255, 0.48);
+
+}
+
+
+.scorecard-intro-support p + p {
+
+    margin-top: 6px;
+
+    font-family:
+
+        Arial,
+
+        sans-serif;
+
+    font-size: 0.88rem;
+
+    font-weight: 400;
+
+    letter-spacing: 0;
+
+    color:
+
+        rgba(255, 255, 255, 0.42);
+
+}
+
+
+/* ==========================================================================
+   CALCULATION NOTE
+========================================================================== */
+
+
+.scorecard-calculation-note {
+
+    width: min(100%, 600px);
+
+    margin:
+
+        30px
+
+        auto
+
+        0;
+
+    padding:
+
+        18px
+
+        22px;
+
+    border:
+
+        1px solid
+
+        rgba(20, 184, 166, 0.22);
+
+    border-radius: 12px;
+
+    background:
+
+        rgba(20, 184, 166, 0.045);
+
+}
+
+
+.scorecard-calculation-note p {
+
+    margin: 0;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size: 0.94rem;
+
+    font-weight: 600;
+
+    line-height: 1.75;
+
+    color:
+
+        rgba(255, 255, 255, 0.76);
+
+}
+
+
+.scorecard-calculation-note span {
+
+    display: block;
+
+    margin-top: 6px;
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.62rem;
+
+    font-weight: 700;
+
+    line-height: 1.6;
+
+    letter-spacing: 0.09em;
+
+    color:
+
+        rgba(255, 255, 255, 0.38);
+
+}
+
+
+/* ==========================================================================
+   INTRO ACTION
+========================================================================== */
+
+
+.page02-intro-action {
+
+    display: flex;
+
+    justify-content: center;
+
+    width: 100%;
+
+    margin-top:
+
+        clamp(
+
+            36px,
+
+            5vw,
+
+            52px
+
+        );
+
+}
+
+
+/* ==========================================================================
+   PAGE 02 PRIMARY BUTTON
+
+   FROZEN VISUAL LANGUAGE:
+   CTM TEAL
+========================================================================== */
+
+
+.page02-primary-button {
+
+    position: relative;
+
+    display: inline-flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 4px;
+
+    width: min(100%, 390px);
+
+    min-height: 68px;
+
+    margin: 0;
+
+    padding:
+
+        15px
+
+        34px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #11a99a,
+
+            #0f8f84
+
+        );
+
+    box-shadow:
+
+        0 12px 30px
+
+        rgba(15, 143, 132, 0.20);
+
+    color: #ffffff;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+
+        transform 180ms ease,
+
+        box-shadow 180ms ease,
+
+        filter 180ms ease,
+
+        opacity 180ms ease;
+
+    -webkit-appearance: none;
+
+    appearance: none;
+
+}
+
+
+.page02-primary-button:hover {
+
+    transform:
+
+        translateY(-2px);
+
+    box-shadow:
+
+        0 16px 36px
+
+        rgba(15, 143, 132, 0.28);
+
+    filter:
+
+        brightness(1.04);
+
+}
+
+
+.page02-primary-button:active {
+
+    transform:
+
+        translateY(0);
+
+}
+
+
+.page02-primary-button:focus-visible {
+
+    outline:
+
+        3px solid
+
+        rgba(20, 184, 166, 0.34);
+
+    outline-offset: 4px;
+
+}
+
+
+.page02-primary-button:disabled {
+
+    cursor: wait;
+
+    opacity: 0.68;
+
+    transform: none;
+
+    box-shadow: none;
+
+}
+
+
+.page02-primary-button .button-primary {
+
+    display: block;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    color: #ffffff;
+
+}
+
+
+.page02-primary-button .button-secondary {
+
+    display: block;
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.68rem;
+
+    font-weight: 700;
+
+    line-height: 1.3;
+
+    letter-spacing: 0.09em;
+
+    color:
+
+        rgba(255, 255, 255, 0.80);
+
+}
+
+
+/* ==========================================================================
+   KYC SCREEN
+========================================================================== */
+
+
+.page02-kyc-screen {
+
+    position: relative;
+
+    padding:
+
+        clamp(62px, 7vw, 100px)
+
+        0
+
+        clamp(90px, 9vw, 132px);
+
+}
+
+
+/* ==========================================================================
+   KYC HEADING
+========================================================================== */
+
+
+.kyc-heading {
+
+    width: min(100%, 760px);
+
+    margin:
+
+        0
+
+        auto
+
+        clamp(
+
+            38px,
+
+            5vw,
+
+            54px
+
+        );
+
+    text-align: center;
+
+}
+
+
+.kyc-heading .scorecard-eyebrow {
+
+    margin-bottom: 18px;
+
+}
+
+
+.kyc-title {
+
+    margin: 0;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size:
+
+        clamp(
+
+            1.9rem,
+
+            3.8vw,
+
+            2.85rem
+
+        );
+
+    font-weight: 800;
+
+    line-height: 1.45;
+
+    letter-spacing: -0.025em;
+
+    color: #ffffff;
+
+}
+
+
+.kyc-title-english {
+
+    margin:
+
+        14px
+
+        0
+
+        0;
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size:
+
+        clamp(
+
+            0.72rem,
+
+            1vw,
+
+            0.84rem
+
+        );
+
+    font-weight: 700;
+
+    line-height: 1.5;
+
+    letter-spacing: 0.13em;
+
+    color: #14b8a6;
+
+}
+
+
+.kyc-introduction {
+
+    width: min(100%, 620px);
+
+    margin:
+
+        24px
+
+        auto
+
+        0;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size: 1rem;
+
+    font-weight: 400;
+
+    line-height: 1.9;
+
+    color:
+
+        rgba(255, 255, 255, 0.65);
+
+}
+
+
+/* ==========================================================================
+   KYC CARD
+========================================================================== */
+
+
+.kyc-card {
+
+    width: min(100%, 840px);
+
+    margin: 0 auto;
+
+    padding:
+
+        clamp(34px, 5vw, 56px);
+
+    border:
+
+        1px solid
+
+        rgba(255, 255, 255, 0.10);
+
+    border-radius: 20px;
+
+    background:
+
+        linear-gradient(
+
+            145deg,
+
+            rgba(255, 255, 255, 0.034),
+
+            rgba(255, 255, 255, 0.012)
+
+        );
+
+    box-shadow:
+
+        0 24px 70px
+
+        rgba(0, 0, 0, 0.18);
+
+}
+
+
+/* ==========================================================================
+   KYC FORM
+========================================================================== */
+
+
+.kyc-form {
+
+    display: grid;
+
+    grid-template-columns:
+
+        repeat(
+
+            2,
+
+            minmax(0, 1fr)
+
+        );
+
+    column-gap: 26px;
+
+    row-gap: 28px;
+
+    width: 100%;
+
+}
+
+
+.kyc-field {
+
+    min-width: 0;
+
+}
+
+
+.kyc-field-full {
+
+    grid-column:
+
+        1 / -1;
+
+}
+
+
+/* ==========================================================================
+   KYC LABELS
+========================================================================== */
+
+
+.kyc-label {
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    cursor: pointer;
+
+}
+
+
+.kyc-label-tamil {
+
+    display: block;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size: 0.9rem;
+
+    font-weight: 600;
+
+    line-height: 1.5;
+
+    color:
+
+        rgba(255, 255, 255, 0.82);
+
+}
+
+
+.kyc-label-english {
+
+    display: block;
+
+    margin-top: 3px;
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.58rem;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    letter-spacing: 0.09em;
+
+    color:
+
+        rgba(255, 255, 255, 0.35);
+
+}
+
+
+/* ==========================================================================
+   KYC INPUTS
+========================================================================== */
+
+
+.kyc-input {
+
+    display: block;
+
+    width: 100%;
+
+    min-width: 0;
+
+    height: 56px;
+
+    margin: 0;
+
+    padding:
+
+        0
+
+        16px;
+
+    border:
+
+        1px solid
+
+        rgba(255, 255, 255, 0.13);
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background:
+
+        rgba(255, 255, 255, 0.035);
+
+    color: #ffffff;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        Arial,
+
+        sans-serif;
+
+    font-size: 1rem;
+
+    font-weight: 500;
+
+    line-height: 1.4;
+
+    caret-color: #14b8a6;
+
+    transition:
+
+        border-color 160ms ease,
+
+        background 160ms ease,
+
+        box-shadow 160ms ease;
+
+    -webkit-appearance: none;
+
+    appearance: none;
+
+}
+
+
+.kyc-input:hover {
+
+    border-color:
+
+        rgba(255, 255, 255, 0.20);
+
+}
+
+
+.kyc-input:focus {
+
+    border-color:
+
+        rgba(20, 184, 166, 0.72);
+
+    background:
+
+        rgba(20, 184, 166, 0.035);
+
+    box-shadow:
+
+        0 0 0 3px
+
+        rgba(20, 184, 166, 0.08);
+
+}
+
+
+.kyc-input::placeholder {
+
+    color:
+
+        rgba(255, 255, 255, 0.28);
+
+}
+
+
+/* ==========================================================================
+   AUTOFILL
+========================================================================== */
+
+
+.kyc-input:-webkit-autofill,
+.kyc-input:-webkit-autofill:hover,
+.kyc-input:-webkit-autofill:focus {
+
+    -webkit-text-fill-color:
+
+        #ffffff;
+
+    -webkit-box-shadow:
+
+        0 0 0 1000px
+
+        #111d1c
+
+        inset;
+
+    transition:
+
+        background-color
+
+        9999s ease-in-out
+
+        0s;
+
+}
+
+
+/* ==========================================================================
+   FEEDBACK MESSAGES
+========================================================================== */
+
+
+.kyc-message {
+
+    grid-column:
+
+        1 / -1;
+
+    width: 100%;
+
+    margin: 0;
+
+    padding:
+
+        14px
+
+        18px;
+
+    border-radius: 8px;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        Arial,
+
+        sans-serif;
+
+    font-size: 0.9rem;
+
+    font-weight: 600;
+
+    line-height: 1.65;
+
+    text-align: center;
+
+}
+
+
+.kyc-message[hidden] {
+
+    display: none !important;
+
+}
+
+
+.kyc-error {
+
+    border:
+
+        1px solid
+
+        rgba(255, 116, 116, 0.25);
+
+    background:
+
+        rgba(255, 116, 116, 0.07);
+
+    color:
+
+        #ffb0b0;
+
+}
+
+
+.kyc-success {
+
+    border:
+
+        1px solid
+
+        rgba(20, 184, 166, 0.28);
+
+    background:
+
+        rgba(20, 184, 166, 0.07);
+
+    color:
+
+        #7ce0d4;
+
+}
+
+
+/* ==========================================================================
+   KYC ACTION
+========================================================================== */
+
+
+.kyc-action {
+
+    grid-column:
+
+        1 / -1;
+
+    display: flex;
+
+    justify-content: center;
+
+    width: 100%;
+
+    margin-top: 10px;
+
+}
+
+
+/* ==========================================================================
+   TABLET
+========================================================================== */
+
+
+@media (max-width: 900px) {
+
+
+    .page02a .page02-shell {
+
+        width:
+
+            min(
+
+                100%,
+
+                calc(100% - 36px)
+
+            );
+
+    }
+
+
+    .scorecard-intro-card {
+
+        padding:
+
+            46px
+
+            40px
+
+            50px;
+
+    }
+
+
+    .kyc-card {
+
+        padding:
+
+            38px
+
+            32px;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   MOBILE
+========================================================================== */
+
+
+@media (max-width: 768px) {
+
+
+    /* ----------------------------------------------------------------------
+       CRITICAL MOBILE WIDTH RESET
+
+       Prevents global section padding from creating the previous
+       white/empty border effect.
+    ---------------------------------------------------------------------- */
+
+
+    .page02a,
+
+    .page02a section,
+
+    .page02a .page02-screen {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        margin-left: 0;
+
+        margin-right: 0;
+
+        padding-left: 0;
+
+        padding-right: 0;
+
+    }
+
+
+    .page02a .page02-shell {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        margin: 0;
+
+        padding:
+
+            0
+
+            18px;
+
+    }
+
+
+    /* ----------------------------------------------------------------------
+       INTRO
+    ---------------------------------------------------------------------- */
+
+
+    .page02-intro-screen {
+
+        padding-top: 52px;
+
+        padding-bottom: 76px;
+
+    }
+
+
+    .scorecard-intro-card {
+
+        width: 100%;
+
+        padding:
+
+            38px
+
+            22px
+
+            40px;
+
+        border-radius: 16px;
+
+    }
+
+
+    .scorecard-eyebrow {
+
+        margin-bottom: 18px;
+
+        font-size: 0.62rem;
+
+        letter-spacing: 0.16em;
+
+    }
+
+
+    .scorecard-intro-title {
+
+        margin-bottom: 20px;
+
+        font-size:
+
+            clamp(
+
+                1.7rem,
+
+                7vw,
+
+                2.15rem
+
+            );
+
+        line-height: 1.5;
+
+    }
+
+
+    .scorecard-intro-english {
+
+        margin-bottom: 28px;
+
+    }
+
+
+    .scorecard-intro-english p {
+
+        font-size: 0.66rem;
+
+        line-height: 1.7;
+
+        letter-spacing: 0.09em;
+
+    }
+
+
+    .scorecard-intro-copy p {
+
+        font-size: 0.95rem;
+
+        line-height: 1.9;
+
+    }
+
+
+    .scorecard-intro-copy p + p {
+
+        margin-top: 14px;
+
+    }
+
+
+    .scorecard-intro-support {
+
+        margin-top: 24px;
+
+        padding-top: 22px;
+
+    }
+
+
+    .scorecard-calculation-note {
+
+        margin-top: 24px;
+
+        padding:
+
+            16px
+
+            14px;
+
+    }
+
+
+    .page02-intro-action {
+
+        margin-top: 30px;
+
+    }
+
+
+    /* ----------------------------------------------------------------------
+       BUTTON
+    ---------------------------------------------------------------------- */
+
+
+    .page02-primary-button {
+
+        width: 100%;
+
+        max-width: 390px;
+
+        min-height: 64px;
+
+        padding:
+
+            14px
+
+            20px;
+
+    }
+
+
+    /* ----------------------------------------------------------------------
+       KYC
+    ---------------------------------------------------------------------- */
+
+
+    .page02-kyc-screen {
+
+        padding-top: 48px;
+
+        padding-bottom: 78px;
+
+    }
+
+
+    .kyc-heading {
+
+        margin-bottom: 32px;
+
+    }
+
+
+    .kyc-title {
+
+        font-size:
+
+            clamp(
+
+                1.65rem,
+
+                7vw,
+
+                2.1rem
+
+            );
+
+        line-height: 1.5;
+
+    }
+
+
+    .kyc-introduction {
+
+        margin-top: 20px;
+
+        font-size: 0.94rem;
+
+        line-height: 1.85;
+
+    }
+
+
+    .kyc-card {
+
+        width: 100%;
+
+        padding:
+
+            30px
+
+            20px;
+
+        border-radius: 15px;
+
+    }
+
+
+    .kyc-form {
+
+        grid-template-columns:
+
+            minmax(0, 1fr);
+
+        row-gap: 24px;
+
+    }
+
+
+    .kyc-field-full,
+
+    .kyc-message,
+
+    .kyc-action {
+
+        grid-column: auto;
+
+    }
+
+
+    .kyc-input {
+
+        height: 54px;
+
+        font-size: 16px;
+
+    }
+
+
+    .kyc-action {
+
+        margin-top: 6px;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   SMALL MOBILE
+========================================================================== */
+
+
+@media (max-width: 480px) {
+
+
+    .page02a .page02-shell {
+
+        padding-left: 14px;
+
+        padding-right: 14px;
+
+    }
+
+
+    .page02-intro-screen {
+
+        padding-top: 38px;
+
+        padding-bottom: 64px;
+
+    }
+
+
+    .scorecard-intro-card {
+
+        padding:
+
+            34px
+
+            17px
+
+            36px;
+
+        border-radius: 14px;
+
+    }
+
+
+    .scorecard-intro-title {
+
+        font-size: 1.6rem;
+
+    }
+
+
+    .scorecard-intro-copy p {
+
+        font-size: 0.9rem;
+
+    }
+
+
+    .scorecard-calculation-note {
+
+        padding:
+
+            14px
+
+            12px;
+
+    }
+
+
+    .page02-kyc-screen {
+
+        padding-top: 38px;
+
+        padding-bottom: 68px;
+
+    }
+
+
+    .kyc-card {
+
+        padding:
+
+            26px
+
+            16px;
+
+        border-radius: 14px;
+
+    }
+
+
+    .kyc-title {
+
+        font-size: 1.55rem;
+
+    }
+
+
+    .kyc-label-tamil {
+
+        font-size: 0.86rem;
+
+    }
+
+
+    .kyc-input {
+
+        height: 52px;
+
+    }
+
+
+    .page02-primary-button {
+
+        min-height: 62px;
+
+        border-radius: 8px;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   TOUCH DEVICES
+========================================================================== */
+
+
+@media (pointer: coarse) {
+
+
+    .page02-primary-button {
+
+        min-height: 64px;
+
+        touch-action: manipulation;
+
+    }
+
+
+    .kyc-input {
+
+        min-height: 52px;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   REDUCED MOTION
+========================================================================== */
+
+
+@media (prefers-reduced-motion: reduce) {
+
+
+    .page02-primary-button,
+
+    .kyc-input {
+
+        transition: none;
+
+    }
+
+
+    .page02-primary-button:hover {
+
+        transform: none;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   PRINT
+========================================================================== */
+
+
+@media print {
+
+
+    .page02-intro-action,
+
+    .kyc-action {
+
+        display: none !important;
+
+    }
+
+
+    .scorecard-intro-card,
+
+    .kyc-card {
+
+        box-shadow: none;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   END
+
+   PAGE 02A STACK:
+
+   pages/page02a.html
+        ↓
+   css/page02/page02a.css
+        ↓
+   js/api.js
+        ↓
+   js/page02/page02-data.js
+        ↓
+   js/page02/page02-session.js
+        ↓
+   js/page02/page02a.js
+
+   NEXT:
+
+   css/page02/page02-shared.css
+
+   This establishes the common visual system for Dimensions 01–05.
+
+========================================================================== */
+
