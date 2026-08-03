@@ -86,6 +86,7 @@
 
     <section
         class="screen is-active"
+        id="intro-screen"
         data-screen="intro"
     >
 
@@ -326,10 +327,10 @@
             </div>
 
 
-
             <button
                 class="primary-btn"
                 type="button"
+                id="begin-page02"
                 data-next="about"
             >
 
@@ -357,6 +358,7 @@
 
     <section
         class="screen"
+        id="kyc-screen"
         data-screen="about"
     >
 
@@ -398,7 +400,7 @@
 
 
             <form
-                id="kycForm"
+                id="kyc-form"
                 novalidate
             >
 
@@ -1010,8 +1012,9 @@
 
                 <p
                     class="form-error"
-                    id="kycError"
+                    id="kyc-error"
                     role="alert"
+                    aria-live="polite"
                 ></p>
 
 
@@ -1019,6 +1022,7 @@
                 <button
                     class="primary-btn"
                     type="submit"
+                    id="submit-kyc"
                 >
 
                     <span>
@@ -1048,6 +1052,7 @@
 
     <section
         class="screen"
+        id="scorecard-screen"
         data-screen="scorecard"
     >
 
@@ -1247,6 +1252,7 @@
 
     <section
         class="screen"
+        id="result-screen"
         data-screen="result"
     >
 
@@ -1689,4 +1695,3 @@
 
 </html>
 
-    
