@@ -1,1 +1,335 @@
 
+/* ==========================================================================
+   CTM PATH™ MILLIONAIRES™
+
+   FILE:
+   css/page02/page02c.css
+
+   VERSION:
+   3.0
+
+   PAGE:
+   PAGE 02C — DIMENSION 02
+
+   STATUS:
+   PAGE-SPECIFIC PRESENTATION
+
+   DEPENDS ON:
+   css/page02/page02-shared.css
+
+   PURPOSE:
+
+   ✓ Dimension 02 page identity
+   ✓ Page-specific spacing refinements
+   ✓ Dimension 02 completion accent
+   ✓ Preserve shared premium visual language
+
+   SHARED SYSTEM OWNS:
+
+   ✗ Indicator cards
+   ✗ Four-option architecture
+   ✗ Option selected states
+   ✗ Score badges
+   ✗ Live score panel
+   ✗ Score guide
+   ✗ Navigation buttons
+   ✗ Core responsive architecture
+
+========================================================================== */
+
+
+/* ==========================================================================
+   PAGE 02C FOUNDATION
+========================================================================== */
+
+
+.page02c {
+
+    position: relative;
+
+}
+
+
+/* ==========================================================================
+   DIMENSION 02 HEADER
+========================================================================== */
+
+
+.page02c .dimension-header {
+
+    position: relative;
+
+}
+
+
+/* ==========================================================================
+   DIMENSION EYEBROW
+========================================================================== */
+
+
+.page02c .dimension-eyebrow {
+
+    color:
+        rgba(255, 255, 255, 0.42);
+
+}
+
+
+/* ==========================================================================
+   DIMENSION TITLE ACCENT
+========================================================================== */
+
+
+.page02c .dimension-title-english {
+
+    color: #14b8a6;
+
+}
+
+
+/* ==========================================================================
+   INTRODUCTION
+========================================================================== */
+
+
+.page02c .dimension-introduction {
+
+    max-width: 680px;
+
+}
+
+
+/* ==========================================================================
+   LIVE SCORE PANEL
+========================================================================== */
+
+
+.page02c .dimension-score-panel {
+
+    margin-top: 28px;
+
+}
+
+
+/* ==========================================================================
+   SCORECARD SECTION
+========================================================================== */
+
+
+.page02c .dimension-scorecard {
+
+    width: 100%;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+
+/* ==========================================================================
+   FIRST INDICATOR
+========================================================================== */
+
+
+.page02c .scorecard-card:first-child {
+
+    margin-top: 0;
+
+}
+
+
+/* ==========================================================================
+   COMPLETION STATUS
+========================================================================== */
+
+
+.page02c .dimension-completion {
+
+    margin-top: 24px;
+
+}
+
+
+/* ==========================================================================
+   COMPLETED DIMENSION STATE
+========================================================================== */
+
+
+.page02c [data-dimension-complete][data-complete="true"] {
+
+    color: #14b8a6;
+
+}
+
+
+/* ==========================================================================
+   VALIDATION
+========================================================================== */
+
+
+.page02c .dimension-message {
+
+    max-width: 960px;
+
+}
+
+
+/* ==========================================================================
+   NAVIGATION
+
+   The primary CTA intentionally inherits the frozen CTM teal button
+   treatment from page02-shared.css.
+
+   No local button colours are defined here.
+========================================================================== */
+
+
+.page02c .dimension-navigation {
+
+    padding-bottom: 4px;
+
+}
+
+
+/* ==========================================================================
+   TABLET
+========================================================================== */
+
+
+@media (max-width: 900px) {
+
+
+    .page02c .dimension-introduction {
+
+        max-width: 620px;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   MOBILE
+========================================================================== */
+
+
+@media (max-width: 768px) {
+
+
+    .page02c .dimension-header {
+
+        margin-bottom: 34px;
+
+    }
+
+
+    .page02c .dimension-score-panel {
+
+        margin-top: 22px;
+
+    }
+
+
+    .page02c .dimension-completion {
+
+        margin-top: 20px;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   SMALL MOBILE
+========================================================================== */
+
+
+@media (max-width: 420px) {
+
+
+    .page02c .dimension-header {
+
+        margin-bottom: 30px;
+
+    }
+
+
+    .page02c .dimension-introduction {
+
+        max-width: 100%;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   PRINT
+========================================================================== */
+
+
+@media print {
+
+
+    .page02c {
+
+        min-height: auto;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   END
+
+   PAGE 02C STACK:
+
+   pages/page02c.html
+          ↓
+   css/page02/page02-shared.css
+          ↓
+   css/page02/page02c.css
+
+   JAVASCRIPT:
+
+   page02-data.js
+          ↓
+   page02-session.js
+          ↓
+   page02-scorecard.js
+          ↓
+   page02c.js
+
+
+   PAGE 02C RESPONSIBILITY:
+
+   DIMENSION 02
+   INDICATORS 06–10
+
+
+   JOURNEY:
+
+   PAGE 02B
+   INDICATORS 01–05
+          ↓
+   PAGE 02C
+   INDICATORS 06–10
+          ↓
+   PAGE 02D
+   INDICATORS 11–15
+
+
+   NEXT FILE:
+
+   js/page02/page02d.js
+
+   DIMENSION 03
+
+========================================================================== */
+
