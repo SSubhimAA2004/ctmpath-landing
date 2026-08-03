@@ -1,1 +1,343 @@
 
+/* ==========================================================================
+   CTM PATH™ MILLIONAIRES™
+
+   FILE:
+   css/page02/page02e.css
+
+   VERSION:
+   3.0
+
+   PAGE:
+   PAGE 02E — DIMENSION 04
+
+   STATUS:
+   PAGE-SPECIFIC PRESENTATION
+
+   DEPENDS ON:
+   css/page02/page02-shared.css
+
+   PURPOSE:
+
+   ✓ Dimension 04 page identity
+   ✓ Page-specific spacing refinements
+   ✓ Dimension 04 completion accent
+   ✓ Preserve shared premium visual language
+
+   SHARED SYSTEM OWNS:
+
+   ✗ Indicator cards
+   ✗ Four-option architecture
+   ✗ Option selected states
+   ✗ Score badges
+   ✗ Live score panel
+   ✗ Score guide
+   ✗ Navigation button design
+   ✗ Core responsive architecture
+
+========================================================================== */
+
+
+/* ==========================================================================
+   PAGE 02E FOUNDATION
+========================================================================== */
+
+
+.page02e {
+
+    position: relative;
+
+}
+
+
+/* ==========================================================================
+   DIMENSION 04 HEADER
+========================================================================== */
+
+
+.page02e .dimension-header {
+
+    position: relative;
+
+}
+
+
+/* ==========================================================================
+   DIMENSION EYEBROW
+========================================================================== */
+
+
+.page02e .dimension-eyebrow {
+
+    color:
+        rgba(255, 255, 255, 0.42);
+
+}
+
+
+/* ==========================================================================
+   DIMENSION TITLE ACCENT
+========================================================================== */
+
+
+.page02e .dimension-title-english {
+
+    color: #14b8a6;
+
+}
+
+
+/* ==========================================================================
+   INTRODUCTION
+========================================================================== */
+
+
+.page02e .dimension-introduction {
+
+    max-width: 680px;
+
+}
+
+
+/* ==========================================================================
+   LIVE SCORE PANEL
+========================================================================== */
+
+
+.page02e .dimension-score-panel {
+
+    margin-top: 28px;
+
+}
+
+
+/* ==========================================================================
+   SCORECARD SECTION
+========================================================================== */
+
+
+.page02e .dimension-scorecard {
+
+    width: 100%;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+
+/* ==========================================================================
+   FIRST INDICATOR
+========================================================================== */
+
+
+.page02e .scorecard-card:first-child {
+
+    margin-top: 0;
+
+}
+
+
+/* ==========================================================================
+   COMPLETION STATUS
+========================================================================== */
+
+
+.page02e .dimension-completion {
+
+    margin-top: 24px;
+
+}
+
+
+/* ==========================================================================
+   COMPLETED DIMENSION STATE
+========================================================================== */
+
+
+.page02e [data-dimension-complete][data-complete="true"] {
+
+    color: #14b8a6;
+
+}
+
+
+/* ==========================================================================
+   VALIDATION MESSAGE
+========================================================================== */
+
+
+.page02e .dimension-message {
+
+    max-width: 960px;
+
+}
+
+
+/* ==========================================================================
+   NAVIGATION
+
+   IMPORTANT:
+
+   Primary and secondary navigation button colours are NOT defined here.
+
+   page02-shared.css remains the single source of truth for the button
+   visual language across Pages 02B–02F.
+
+   This preserves the frozen CTM teal primary CTA consistently throughout
+   the entire scorecard journey.
+========================================================================== */
+
+
+.page02e .dimension-navigation {
+
+    padding-bottom: 4px;
+
+}
+
+
+/* ==========================================================================
+   TABLET
+========================================================================== */
+
+
+@media (max-width: 900px) {
+
+
+    .page02e .dimension-introduction {
+
+        max-width: 620px;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   MOBILE
+========================================================================== */
+
+
+@media (max-width: 768px) {
+
+
+    .page02e .dimension-header {
+
+        margin-bottom: 34px;
+
+    }
+
+
+    .page02e .dimension-score-panel {
+
+        margin-top: 22px;
+
+    }
+
+
+    .page02e .dimension-completion {
+
+        margin-top: 20px;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   SMALL MOBILE
+========================================================================== */
+
+
+@media (max-width: 420px) {
+
+
+    .page02e .dimension-header {
+
+        margin-bottom: 30px;
+
+    }
+
+
+    .page02e .dimension-introduction {
+
+        max-width: 100%;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   PRINT
+========================================================================== */
+
+
+@media print {
+
+
+    .page02e {
+
+        min-height: auto;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   END
+
+   PAGE 02E STACK:
+
+   pages/page02e.html
+          ↓
+   css/page02/page02-shared.css
+          ↓
+   css/page02/page02e.css
+
+
+   JAVASCRIPT:
+
+   page02-data.js
+          ↓
+   page02-session.js
+          ↓
+   page02-scorecard.js
+          ↓
+   page02e.js
+
+
+   PAGE 02E RESPONSIBILITY:
+
+   DIMENSION 04
+   INDICATORS 16–20
+
+
+   JOURNEY:
+
+   PAGE 02D
+   INDICATORS 11–15
+          ↓
+
+   PAGE 02E
+   INDICATORS 16–20
+          ↓
+
+   PAGE 02F
+   INDICATORS 21–25
+
+
+   NEXT FILE:
+
+   js/page02/page02f.js
+
+   DIMENSION 05 — FINAL DIMENSION
+
+========================================================================== */
+
