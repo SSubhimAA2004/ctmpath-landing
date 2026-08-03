@@ -3,46 +3,102 @@
    CTM PATH™ MILLIONAIRES™
 
    FILE:
-   css/page02.css
+   page02.css
 
    VERSION:
-   2.0
-
-   STATUS:
-   PREMIUM RANGE OPTION SCORECARD
+   11.0
 
    PAGE:
-   PAGE 02 — FINANCIAL CONFIDENCE™
+   PAGE 02 — MILLIONAIRE LIFESTYLE SCORECARD™
+
+   STATUS:
+   PRODUCTION / EXACT DOM MAPPING
 
    ARCHITECTURE:
 
-   ✓ 25 Questions
-   ✓ 4 Range Options Per Question
+   ✓ Intro Screen
+   ✓ ABOUT YOU™ KYC
+   ✓ 25-Indicator Scorecard
+   ✓ 5 Dimensions
+   ✓ Four Range Options Per Indicator
    ✓ 2 × 2 Desktop Option Grid
-   ✓ Single Column Mobile Options
-   ✓ Click / Tap Selection
-   ✓ No Free-Text Financial Inputs
-   ✓ Premium Selected State
-   ✓ Millionaire Ideal™ Benchmark
-   ✓ Score Calculated Silently
-   ✓ Responsive
-   ✓ Touch Friendly
+   ✓ 1 × 4 Mobile Option Stack
+   ✓ Score Reveal
+   ✓ Page 03 Transition
+   ✓ Loading State
 
-   DESIGN PRINCIPLE:
+   IMPORTANT:
 
-   User selects reality.
-   System calculates score.
+   This stylesheet controls ONLY Page 02.
 
-   DOES NOT CONTROL:
+   It does NOT control:
 
-   ✗ Header
-   ✗ Footer
-   ✗ Backend
-   ✗ API
-   ✗ Scoring Logic
-   ✗ Page Routing
+   ✗ Global Header
+   ✗ Global Footer
+   ✗ Global Component Loader
+   ✗ JavaScript Scoring Logic
 
 ========================================================================== */
+
+
+/* ==========================================================================
+   PAGE TOKENS
+========================================================================== */
+
+:root {
+
+    --p02-navy:
+        #071a31;
+
+    --p02-navy-deep:
+        #04111f;
+
+    --p02-panel:
+        rgba(7, 18, 31, 0.72);
+
+    --p02-panel-soft:
+        rgba(255, 255, 255, 0.025);
+
+    --p02-panel-hover:
+        rgba(255, 255, 255, 0.055);
+
+    --p02-ivory:
+        #f5f0e6;
+
+    --p02-ivory-soft:
+        #ddd6c8;
+
+    --p02-muted:
+        #a9b0b8;
+
+    --p02-gold:
+        #ddb64e;
+
+    --p02-gold-light:
+        #edcc73;
+
+    --p02-teal:
+        #20c7c5;
+
+    --p02-border:
+        rgba(221, 182, 78, 0.20);
+
+    --p02-border-soft:
+        rgba(255, 255, 255, 0.075);
+
+    --p02-danger:
+        #f1a6a6;
+
+    --p02-radius:
+        28px;
+
+    --p02-radius-small:
+        18px;
+
+    --p02-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.22);
+
+}
 
 
 /* ==========================================================================
@@ -51,1127 +107,2812 @@
 
 .page02 {
 
-    width: 100%;
+    width:
+        100%;
 
-    min-height: 100vh;
-
-    margin: 0;
-
-    padding: 0;
-
-    background:
-        linear-gradient(
-            180deg,
-            #081C3A 0%,
-            #0A1C2E 52%,
-            #09131E 100%
-        );
-
-    color: #F8F5ED;
-
-    overflow-x: hidden;
-
-}
-
-
-.page02-container {
-
-    width: min(1280px, calc(100% - 96px));
-
-    margin: 0 auto;
-
-    padding:
-        7rem 0
-        6rem;
-
-}
-
-
-/* ==========================================================================
-   INTRO / HERO
-========================================================================== */
-
-.page02-intro {
-
-    width: min(100%, 1000px);
-
-    margin:
-        0 auto
-        5rem;
-
-    text-align: center;
-
-}
-
-
-.page02-kicker {
-
-    margin:
-        0 0
-        2rem;
-
-    color: #D8B45A;
-
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size:
-        .9rem;
-
-    font-weight: 700;
-
-    letter-spacing: .28em;
-
-    line-height: 1.5;
-
-    text-transform: uppercase;
-
-}
-
-
-.page02-intro h1 {
-
-    margin:
-        0 auto
-        1.5rem;
-
-    max-width: 1000px;
-
-    color: #F8F5ED;
-
-    font-family:
-        "Noto Sans Tamil",
-        sans-serif;
-
-    font-size:
-        clamp(
-            3rem,
-            6vw,
-            5.4rem
-        );
-
-    font-weight: 700;
-
-    line-height: 1.22;
-
-    letter-spacing: -.025em;
-
-}
-
-
-.page02-intro h2 {
+    min-height:
+        100vh;
 
     margin:
         0;
 
-    color: rgba(248,245,237,.76);
-
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size:
-        clamp(
-            1rem,
-            1.6vw,
-            1.25rem
-        );
-
-    font-weight: 600;
-
-    letter-spacing: .16em;
-
-    line-height: 1.6;
-
-    text-transform: uppercase;
-
-}
-
-
-/* ==========================================================================
-   SCROLL CUE
-========================================================================== */
-
-.page02-scroll-cue {
-
-    width: 58px;
-
-    height: 58px;
-
-    margin:
-        2.5rem auto
-        4rem;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border:
-        1px solid
-        rgba(216,180,90,.35);
-
-    border-radius: 50%;
-
-    color: #D8B45A;
-
-    font-size: 1.35rem;
-
-}
-
-
-/* ==========================================================================
-   SCORECARD FOUNDATION
-========================================================================== */
-
-.scorecard {
-
-    width: 100%;
-
-    margin: 0 auto;
-
-}
-
-
-.scorecard-section {
-
-    width: 100%;
-
-    margin:
-        0 0
-        4rem;
-
-}
-
-
-/* ==========================================================================
-   SCORECARD SECTION HEADER
-========================================================================== */
-
-.scorecard-section-header {
-
-    width: 100%;
-
-    margin:
-        0 0
-        2rem;
-
     padding:
-        2.5rem
-        2.75rem;
+        0;
 
-    border:
-        1px solid
-        rgba(255,255,255,.045);
-
-    border-radius: 28px;
+    overflow-x:
+        hidden;
 
     background:
         linear-gradient(
-            135deg,
-            rgba(10,31,50,.76),
-            rgba(13,27,42,.62)
+            180deg,
+            #071d38 0%,
+            #071a31 38%,
+            #071522 100%
         );
 
-}
-
-
-.scorecard-section-number {
-
-    margin:
-        0 0
-        .8rem;
-
-    color: #D8B45A;
-
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size: .85rem;
-
-    font-weight: 700;
-
-    letter-spacing: .12em;
-
-}
-
-
-.scorecard-section-title {
-
-    margin:
-        0 0
-        .7rem;
-
-    color: #F8F5ED;
+    color:
+        var(--p02-ivory);
 
     font-family:
         "Noto Sans Tamil",
+        Arial,
         sans-serif;
-
-    font-size:
-        clamp(
-            1.7rem,
-            3vw,
-            2.5rem
-        );
-
-    font-weight: 700;
-
-    line-height: 1.35;
 
 }
 
 
-.scorecard-section-title-en {
+.page02 *,
+.page02 *::before,
+.page02 *::after {
 
-    margin: 0;
-
-    color: rgba(248,245,237,.66);
-
-    font-size: 1rem;
-
-    font-weight: 600;
-
-    letter-spacing: .04em;
-
-    line-height: 1.6;
+    box-sizing:
+        border-box;
 
 }
 
 
 /* ==========================================================================
-   QUESTION CARD
+   SCREEN SYSTEM
 ========================================================================== */
 
-.scorecard-question,
-.question-card {
+.page02 .screen {
 
-    position: relative;
+    display:
+        none;
 
-    width: 100%;
+    width:
+        100%;
 
     margin:
-        0 0
-        2rem;
+        0;
 
     padding:
-        2.75rem;
+        0;
+
+}
+
+
+.page02 .screen.is-active {
+
+    display:
+        block;
+
+}
+
+
+.page02 .screen[data-screen="intro"] {
+
+    min-height:
+        100vh;
+
+}
+
+
+.page02 .screen[data-screen="about"],
+.page02 .screen[data-screen="scorecard"],
+.page02 .screen[data-screen="result"] {
+
+    padding:
+        82px 0 110px;
+
+}
+
+
+/* ==========================================================================
+   SHARED PAGE SHELL
+========================================================================== */
+
+.page02 .section-shell {
+
+    width:
+        min(1180px, calc(100% - 48px));
+
+    margin:
+        0 auto;
+
+}
+
+
+/* ==========================================================================
+   INTRO HERO
+========================================================================== */
+
+.page02 .hero {
+
+    width:
+        min(1180px, calc(100% - 48px));
+
+    min-height:
+        100vh;
+
+    margin:
+        0 auto;
+
+    padding:
+        110px 0 120px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    text-align:
+        center;
+
+}
+
+
+.page02 .eyebrow {
+
+    margin:
+        0 0 34px;
+
+    color:
+        var(--p02-gold);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        1rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.5;
+
+    letter-spacing:
+        0.22em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.page02 .hero > h1 {
+
+    max-width:
+        980px;
+
+    margin:
+        0;
+
+    color:
+        var(--p02-ivory);
+
+    font-size:
+        clamp(3.4rem, 5.3vw, 5.6rem);
+
+    font-weight:
+        900;
+
+    line-height:
+        1.18;
+
+    letter-spacing:
+        -0.025em;
+
+}
+
+
+.page02 .hero-arrow {
+
+    width:
+        58px;
+
+    height:
+        58px;
+
+    margin:
+        40px auto;
 
     border:
-        1px solid
-        rgba(255,255,255,.05);
+        1px solid var(--p02-border);
 
-    border-radius: 28px;
+    border-radius:
+        50%;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    color:
+        var(--p02-gold);
+
+    font-size:
+        1.55rem;
+
+}
+
+
+.page02 .hero > h2 {
+
+    max-width:
+        850px;
+
+    margin:
+        0;
+
+    color:
+        var(--p02-ivory);
+
+    font-size:
+        clamp(2.25rem, 3.6vw, 4rem);
+
+    font-weight:
+        800;
+
+    line-height:
+        1.28;
+
+}
+
+
+.page02 .english-lead {
+
+    margin:
+        48px 0 0;
+
+    color:
+        var(--p02-ivory-soft);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        0.92rem;
+
+    font-weight:
+        600;
+
+    line-height:
+        1.8;
+
+    letter-spacing:
+        0.12em;
+
+}
+
+
+.page02 .english-lead span {
+
+    display:
+        inline-block;
+
+    margin:
+        0 12px;
+
+    color:
+        var(--p02-teal);
+
+}
+
+
+/* ==========================================================================
+   INTRO TITLE LOCKUP
+========================================================================== */
+
+.page02 .title-lockup {
+
+    width:
+        min(920px, 100%);
+
+    margin:
+        110px auto 0;
+
+    padding:
+        58px 56px;
+
+    border:
+        1px solid var(--p02-border-soft);
+
+    border-radius:
+        var(--p02-radius);
 
     background:
-        linear-gradient(
-            135deg,
-            rgba(9,24,38,.88),
-            rgba(14,27,39,.74)
-        );
+        var(--p02-panel-soft);
 
     box-shadow:
-        0 18px 50px
-        rgba(0,0,0,.10);
-
-    transition:
-        border-color .25s ease,
-        background .25s ease,
-        box-shadow .25s ease;
+        var(--p02-shadow);
 
 }
 
 
-.scorecard-question:hover,
-.question-card:hover {
-
-    border-color:
-        rgba(216,180,90,.13);
-
-}
-
-
-/* ==========================================================================
-   QUESTION NUMBER
-========================================================================== */
-
-.question-number {
+.page02 .title-lockup h3 {
 
     margin:
-        0 0
-        .65rem;
+        0 0 34px;
 
-    color: #F8F5ED;
+    color:
+        var(--p02-gold);
 
     font-family:
         "Cinzel",
+        Georgia,
         serif;
 
-    font-size: 1rem;
+    font-size:
+        clamp(1.55rem, 2.3vw, 2.35rem);
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    letter-spacing: .08em;
+    line-height:
+        1.45;
+
+    letter-spacing:
+        0.07em;
+
+}
+
+
+.page02 .tamil-copy {
+
+    color:
+        var(--p02-ivory);
+
+    font-size:
+        1.1rem;
+
+    line-height:
+        2;
+
+}
+
+
+.page02 .english-copy {
+
+    color:
+        var(--p02-muted);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        0.83rem;
+
+    font-weight:
+        600;
+
+    line-height:
+        1.9;
+
+    letter-spacing:
+        0.08em;
+
+}
+
+
+.page02 .title-lockup .tamil-copy {
+
+    margin:
+        0 0 26px;
+
+}
+
+
+.page02 .title-lockup .english-copy {
+
+    margin:
+        0;
 
 }
 
 
 /* ==========================================================================
-   QUESTION TITLES
+   METRIC STRIP
 ========================================================================== */
 
-.question-title-tamil,
-.question-title {
+.page02 .metric-strip {
+
+    width:
+        min(920px, 100%);
 
     margin:
-        0 0
-        .65rem;
+        34px auto 0;
 
-    color: #F8F5ED;
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    border:
+        1px solid var(--p02-border);
+
+    border-radius:
+        var(--p02-radius-small);
+
+    overflow:
+        hidden;
+
+}
+
+
+.page02 .metric-strip > div {
+
+    min-height:
+        145px;
+
+    padding:
+        28px 20px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        8px;
+
+}
+
+
+.page02 .metric-strip > div + div {
+
+    border-left:
+        1px solid var(--p02-border);
+
+}
+
+
+.page02 .metric-strip strong {
+
+    color:
+        var(--p02-gold-light);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        2.25rem;
+
+    line-height:
+        1;
+
+}
+
+
+.page02 .metric-strip span {
+
+    color:
+        var(--p02-ivory-soft);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        0.72rem;
+
+    font-weight:
+        600;
+
+    line-height:
+        1.5;
+
+    letter-spacing:
+        0.08em;
+
+}
+
+
+/* ==========================================================================
+   INSTRUCTION CARD
+========================================================================== */
+
+.page02 .instruction-card {
+
+    width:
+        min(920px, 100%);
+
+    margin:
+        34px auto 42px;
+
+    padding:
+        56px;
+
+    border:
+        1px solid var(--p02-border-soft);
+
+    border-radius:
+        var(--p02-radius);
+
+    background:
+        rgba(4, 15, 27, 0.45);
+
+}
+
+
+.page02 .section-label,
+.page02 .section-kicker {
+
+    display:
+        block;
+
+    margin:
+        0 0 18px;
+
+    color:
+        var(--p02-gold);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        0.78rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.5;
+
+    letter-spacing:
+        0.15em;
+
+}
+
+
+.page02 .instruction-card h3 {
+
+    margin:
+        0 0 26px;
+
+    color:
+        var(--p02-ivory);
+
+    font-size:
+        clamp(1.65rem, 2.6vw, 2.45rem);
+
+    font-weight:
+        800;
+
+    line-height:
+        1.55;
+
+}
+
+
+.page02 .instruction-card .tamil-copy,
+.page02 .instruction-card .english-copy {
+
+    margin:
+        22px 0;
+
+}
+
+
+.page02 .muted {
+
+    color:
+        var(--p02-muted);
 
     font-family:
         "Noto Sans Tamil",
+        Arial,
         sans-serif;
 
-    font-size:
-        clamp(
-            1.35rem,
-            2.1vw,
-            1.75rem
+    font-weight:
+        400;
+
+    letter-spacing:
+        0;
+
+}
+
+
+.page02 .rule {
+
+    width:
+        100%;
+
+    height:
+        1px;
+
+    margin:
+        36px 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--p02-border),
+            transparent
         );
 
-    font-weight: 700;
+}
 
-    line-height: 1.45;
+
+.page02 .auto-note {
+
+    margin:
+        34px 0 0;
+
+    padding:
+        22px 24px;
+
+    border-left:
+        3px solid var(--p02-teal);
+
+    background:
+        rgba(32, 199, 197, 0.055);
+
+    color:
+        var(--p02-ivory-soft);
+
+    font-size:
+        0.98rem;
+
+    line-height:
+        1.8;
 
 }
 
 
-.question-title-english,
-.question-subtitle {
+.page02 .auto-note strong {
 
-    margin:
-        0 0
-        1.8rem;
+    color:
+        var(--p02-teal);
 
-    color: rgba(248,245,237,.72);
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
 
     font-size:
-        1rem;
+        0.78rem;
 
-    font-weight: 500;
-
-    line-height: 1.55;
+    letter-spacing:
+        0.07em;
 
 }
 
 
 /* ==========================================================================
-   CURRENT REALITY LABEL
+   BUTTON SYSTEM
 ========================================================================== */
 
-.reality-label,
-.option-label {
-
-    margin:
-        0 0
-        1.25rem;
-
-    color: #F8F5ED;
-
-    font-family:
-        "Noto Sans Tamil",
-        sans-serif;
-
-    font-size:
-        1rem;
-
-    font-weight: 600;
-
-    line-height: 1.6;
-
-}
-
-
-.reality-label span,
-.option-label span {
-
-    margin-left: .4rem;
-
-    color: rgba(248,245,237,.65);
+.page02 button {
 
     font-family:
         inherit;
 
-    font-size: .72rem;
+}
 
-    font-weight: 700;
 
-    letter-spacing: .06em;
+.page02 .primary-btn {
 
-    text-transform: uppercase;
+    min-width:
+        300px;
+
+    min-height:
+        76px;
+
+    padding:
+        17px 36px;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.18);
+
+    border-radius:
+        17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--p02-gold-light),
+            var(--p02-gold)
+        );
+
+    color:
+        #162033;
+
+    display:
+        inline-flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        4px;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 14px 34px rgba(0, 0, 0, 0.18);
+
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        filter 180ms ease;
+
+}
+
+
+.page02 .primary-btn:hover {
+
+    transform:
+        translateY(-2px);
+
+    filter:
+        brightness(1.05);
+
+    box-shadow:
+        0 18px 42px rgba(0, 0, 0, 0.26);
+
+}
+
+
+.page02 .primary-btn span {
+
+    font-size:
+        1rem;
+
+    font-weight:
+        700;
+
+}
+
+
+.page02 .primary-btn strong {
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        0.78rem;
+
+    letter-spacing:
+        0.07em;
+
+}
+
+
+.page02 .primary-btn--compact {
+
+    min-width:
+        260px;
+
+    min-height:
+        64px;
+
+}
+
+
+.page02 .secondary-btn {
+
+    min-width:
+        150px;
+
+    min-height:
+        64px;
+
+    padding:
+        16px 26px;
+
+    border:
+        1px solid var(--p02-border-soft);
+
+    border-radius:
+        16px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    color:
+        var(--p02-ivory-soft);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        0.82rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.06em;
+
+    cursor:
+        pointer;
 
 }
 
 
 /* ==========================================================================
-   RANGE OPTIONS
-
-   LOCKED:
-   EXACTLY FOUR OPTIONS
-
-   DESKTOP:
-   2 × 2
-
+   ABOUT YOU — HEADING
 ========================================================================== */
 
-.range-options,
-.option-grid,
-.question-options {
+.page02 .section-heading {
 
-    display: grid;
+    max-width:
+        780px;
+
+    margin:
+        0 auto 58px;
+
+    text-align:
+        center;
+
+}
+
+
+.page02 .section-heading h2 {
+
+    margin:
+        0 0 24px;
+
+    color:
+        var(--p02-ivory);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(2.5rem, 4vw, 4rem);
+
+    line-height:
+        1.2;
+
+    letter-spacing:
+        0.04em;
+
+}
+
+
+.page02 .section-heading > p:not(.english-sub) {
+
+    margin:
+        0;
+
+    color:
+        var(--p02-ivory);
+
+    font-size:
+        1.08rem;
+
+    line-height:
+        1.9;
+
+}
+
+
+.page02 .english-sub {
+
+    margin:
+        18px 0 0;
+
+    color:
+        var(--p02-muted);
+
+    font-size:
+        0.95rem;
+
+    line-height:
+        1.8;
+
+}
+
+
+/* ==========================================================================
+   KYC FORM
+========================================================================== */
+
+.page02 #kycForm {
+
+    width:
+        min(1000px, 100%);
+
+    margin:
+        0 auto;
+
+}
+
+
+.page02 .form-card {
+
+    position:
+        relative;
+
+    margin:
+        0 0 30px;
+
+    padding:
+        48px;
+
+    border:
+        1px solid var(--p02-border-soft);
+
+    border-radius:
+        var(--p02-radius);
+
+    background:
+        rgba(4, 15, 27, 0.45);
+
+    box-shadow:
+        var(--p02-shadow);
+
+}
+
+
+.page02 .card-number {
+
+    position:
+        absolute;
+
+    top:
+        28px;
+
+    right:
+        32px;
+
+    color:
+        rgba(221, 182, 78, 0.5);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        1.1rem;
+
+    font-weight:
+        700;
+
+}
+
+
+.page02 .form-card > h3 {
+
+    margin:
+        0 0 34px;
+
+    color:
+        var(--p02-gold);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        1.25rem;
+
+    letter-spacing:
+        0.08em;
+
+}
+
+
+.page02 .form-grid {
+
+    display:
+        grid;
 
     grid-template-columns:
         repeat(2, minmax(0, 1fr));
 
-    gap: 1rem;
+    gap:
+        28px;
 
-    width: 100%;
+}
+
+
+.page02 .field {
+
+    min-width:
+        0;
 
     margin:
-        0 0
+        0;
+
+}
+
+
+.page02 .field--wide {
+
+    grid-column:
+        1 / -1;
+
+}
+
+
+.page02 label.field {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+}
+
+
+.page02 .field > span,
+.page02 .choice-field legend > span {
+
+    display:
+        block;
+
+    margin:
+        0 0 5px;
+
+    color:
+        var(--p02-ivory);
+
+    font-size:
+        1rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.5;
+
+}
+
+
+.page02 .field > small,
+.page02 .choice-field legend small {
+
+    display:
+        block;
+
+    margin:
+        0 0 12px;
+
+    color:
+        var(--p02-muted);
+
+    font-size:
+        0.8rem;
+
+    line-height:
+        1.4;
+
+}
+
+
+.page02 .field input:not([type="radio"]),
+.page02 .field select {
+
+    width:
+        100%;
+
+    min-height:
+        58px;
+
+    padding:
+        0 18px;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.11);
+
+    border-radius:
+        13px;
+
+    outline:
+        none;
+
+    background:
+        rgba(255, 255, 255, 0.045);
+
+    color:
+        var(--p02-ivory);
+
+    font-family:
+        inherit;
+
+    font-size:
+        1rem;
+
+    transition:
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        background 180ms ease;
+
+}
+
+
+.page02 .field input:not([type="radio"]):focus,
+.page02 .field select:focus {
+
+    border-color:
+        rgba(32, 199, 197, 0.65);
+
+    background:
+        rgba(255, 255, 255, 0.065);
+
+    box-shadow:
+        0 0 0 3px rgba(32, 199, 197, 0.08);
+
+}
+
+
+.page02 .field select option {
+
+    background:
+        #071a31;
+
+    color:
+        var(--p02-ivory);
+
+}
+
+
+/* ==========================================================================
+   KYC CHOICE FIELDS
+========================================================================== */
+
+.page02 .choice-field {
+
+    padding:
+        0;
+
+    border:
+        0;
+
+}
+
+
+.page02 .choice-field legend {
+
+    margin:
+        0 0 12px;
+
+    padding:
+        0;
+
+}
+
+
+.page02 .choice-row {
+
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        10px;
+
+}
+
+
+.page02 .choice-row label {
+
+    position:
+        relative;
+
+    cursor:
+        pointer;
+
+}
+
+
+.page02 .choice-row input[type="radio"] {
+
+    position:
+        absolute;
+
+    opacity:
+        0;
+
+    pointer-events:
+        none;
+
+}
+
+
+.page02 .choice-row label > span {
+
+    min-height:
+        48px;
+
+    padding:
+        12px 18px;
+
+    border:
+        1px solid var(--p02-border-soft);
+
+    border-radius:
+        12px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    color:
+        var(--p02-ivory-soft);
+
+    font-size:
+        0.92rem;
+
+    transition:
+        all 160ms ease;
+
+}
+
+
+.page02 .choice-row input[type="radio"]:checked + span {
+
+    border-color:
+        var(--p02-gold);
+
+    background:
+        rgba(221, 182, 78, 0.12);
+
+    color:
+        var(--p02-gold-light);
+
+    box-shadow:
+        inset 0 0 0 1px rgba(221, 182, 78, 0.15);
+
+}
+
+
+.page02 #kycForm > .primary-btn {
+
+    display:
+        flex;
+
+    margin:
+        46px auto 0;
+
+}
+
+
+/* ==========================================================================
+   SCORECARD DIMENSION PROGRESS
+========================================================================== */
+
+.page02 .dimension-progress {
+
+    width:
+        min(1000px, 100%);
+
+    margin:
+        0 auto 36px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap:
+        10px;
+
+}
+
+
+.page02 .dimension-progress > * {
+
+    min-height:
+        8px;
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    overflow:
+        hidden;
+
+}
+
+
+/*
+   Compatibility selectors for progress elements
+   generated by page02.js.
+*/
+
+.page02 .dimension-progress .active,
+.page02 .dimension-progress .is-active,
+.page02 .dimension-progress [aria-current="true"] {
+
+    background:
+        var(--p02-gold);
+
+}
+
+
+/* ==========================================================================
+   DYNAMIC SCORECARD HOST
+========================================================================== */
+
+.page02 #dimensionHost {
+
+    width:
+        min(1000px, 100%);
+
+    margin:
+        0 auto;
+
+}
+
+
+/* ==========================================================================
+   DYNAMIC DIMENSION HEADER
+   Supports likely JS-generated class structures.
+========================================================================== */
+
+.page02 #dimensionHost .dimension-header,
+.page02 #dimensionHost .dimension-heading,
+.page02 #dimensionHost .scorecard-heading {
+
+    margin:
+        0 0 34px;
+
+    text-align:
+        center;
+
+}
+
+
+.page02 #dimensionHost .dimension-header h2,
+.page02 #dimensionHost .dimension-heading h2,
+.page02 #dimensionHost .scorecard-heading h2 {
+
+    margin:
+        10px 0;
+
+    color:
+        var(--p02-ivory);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(2rem, 3.4vw, 3.3rem);
+
+    line-height:
+        1.25;
+
+}
+
+
+.page02 #dimensionHost .dimension-header p,
+.page02 #dimensionHost .dimension-heading p,
+.page02 #dimensionHost .scorecard-heading p {
+
+    color:
+        var(--p02-muted);
+
+    line-height:
+        1.8;
+
+}
+
+
+/* ==========================================================================
+   SCORECARD QUESTION CARD
+
+   Multiple compatible selectors are intentionally provided because the
+   question DOM is injected by page02.js rather than being static HTML.
+========================================================================== */
+
+.page02 #dimensionHost .question-card,
+.page02 #dimensionHost .scorecard-question,
+.page02 #dimensionHost .indicator-card,
+.page02 #dimensionHost .metric-card {
+
+    width:
+        100%;
+
+    margin:
+        0 0 26px;
+
+    padding:
+        38px 40px;
+
+    border:
+        1px solid var(--p02-border-soft);
+
+    border-radius:
+        24px;
+
+    background:
+        rgba(4, 15, 27, 0.46);
+
+    box-shadow:
+        0 16px 46px rgba(0, 0, 0, 0.13);
+
+}
+
+
+/* QUESTION NUMBER */
+
+.page02 #dimensionHost .question-number,
+.page02 #dimensionHost .indicator-number,
+.page02 #dimensionHost .metric-number {
+
+    display:
+        block;
+
+    margin:
+        0 0 8px;
+
+    color:
+        var(--p02-gold);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        0.88rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.08em;
+
+}
+
+
+/* TAMIL QUESTION */
+
+.page02 #dimensionHost .question-title,
+.page02 #dimensionHost .question-tamil,
+.page02 #dimensionHost .indicator-title,
+.page02 #dimensionHost .metric-title {
+
+    margin:
+        0 0 8px;
+
+    color:
+        var(--p02-ivory);
+
+    font-size:
+        1.35rem;
+
+    font-weight:
+        800;
+
+    line-height:
+        1.55;
+
+}
+
+
+/* ENGLISH QUESTION */
+
+.page02 #dimensionHost .question-subtitle,
+.page02 #dimensionHost .question-english,
+.page02 #dimensionHost .indicator-subtitle,
+.page02 #dimensionHost .metric-subtitle {
+
+    margin:
+        0 0 26px;
+
+    color:
+        var(--p02-muted);
+
+    font-size:
+        0.94rem;
+
+    line-height:
+        1.6;
+
+}
+
+
+/* ==========================================================================
+   FOUR RANGE OPTIONS
+   DESKTOP = 2 × 2
+========================================================================== */
+
+.page02 #dimensionHost .range-options,
+.page02 #dimensionHost .option-grid,
+.page02 #dimensionHost .score-options,
+.page02 #dimensionHost .answer-options,
+.page02 #dimensionHost .range-grid {
+
+    width:
+        100%;
+
+    margin:
+        22px 0 0;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap:
+        14px;
+
+}
+
+
+/*
+   OPTION LABEL / BUTTON
+*/
+
+.page02 #dimensionHost .range-option,
+.page02 #dimensionHost .option-card,
+.page02 #dimensionHost .score-option,
+.page02 #dimensionHost .answer-option {
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+    min-width:
+        0;
+
+}
+
+
+/*
+   Hidden radio control
+*/
+
+.page02 #dimensionHost .range-option input,
+.page02 #dimensionHost .option-card input,
+.page02 #dimensionHost .score-option input,
+.page02 #dimensionHost .answer-option input {
+
+    position:
+        absolute;
+
+    opacity:
+        0;
+
+    pointer-events:
+        none;
+
+}
+
+
+/*
+   Visual option surface
+*/
+
+.page02 #dimensionHost .range-option > span,
+.page02 #dimensionHost .option-card > span,
+.page02 #dimensionHost .score-option > span,
+.page02 #dimensionHost .answer-option > span,
+.page02 #dimensionHost button.range-option,
+.page02 #dimensionHost button.option-card,
+.page02 #dimensionHost button.score-option,
+.page02 #dimensionHost button.answer-option {
+
+    width:
+        100%;
+
+    min-height:
+        76px;
+
+    padding:
+        16px 20px;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.10);
+
+    border-radius:
+        15px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        flex-start;
+
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    color:
+        var(--p02-ivory);
+
+    font-family:
+        inherit;
+
+    font-size:
+        1rem;
+
+    font-weight:
+        600;
+
+    line-height:
+        1.45;
+
+    text-align:
+        left;
+
+    cursor:
+        pointer;
+
+    transition:
+        border-color 160ms ease,
+        background 160ms ease,
+        transform 160ms ease,
+        box-shadow 160ms ease;
+
+}
+
+
+.page02 #dimensionHost .range-option:hover > span,
+.page02 #dimensionHost .option-card:hover > span,
+.page02 #dimensionHost .score-option:hover > span,
+.page02 #dimensionHost .answer-option:hover > span,
+.page02 #dimensionHost button.range-option:hover,
+.page02 #dimensionHost button.option-card:hover,
+.page02 #dimensionHost button.score-option:hover,
+.page02 #dimensionHost button.answer-option:hover {
+
+    border-color:
+        rgba(221, 182, 78, 0.5);
+
+    background:
+        rgba(221, 182, 78, 0.07);
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+/*
+   SELECTED RADIO OPTION
+*/
+
+.page02 #dimensionHost .range-option input:checked + span,
+.page02 #dimensionHost .option-card input:checked + span,
+.page02 #dimensionHost .score-option input:checked + span,
+.page02 #dimensionHost .answer-option input:checked + span {
+
+    border-color:
+        var(--p02-gold);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(221, 182, 78, 0.16),
+            rgba(221, 182, 78, 0.07)
+        );
+
+    color:
+        var(--p02-gold-light);
+
+    box-shadow:
+        inset 0 0 0 1px rgba(221, 182, 78, 0.16),
+        0 8px 24px rgba(0, 0, 0, 0.12);
+
+}
+
+
+/*
+   Compatibility for JS button-selected states
+*/
+
+.page02 #dimensionHost .range-option.selected,
+.page02 #dimensionHost .range-option.is-selected,
+.page02 #dimensionHost .option-card.selected,
+.page02 #dimensionHost .option-card.is-selected,
+.page02 #dimensionHost .score-option.selected,
+.page02 #dimensionHost .score-option.is-selected,
+.page02 #dimensionHost .answer-option.selected,
+.page02 #dimensionHost .answer-option.is-selected {
+
+    border-color:
+        var(--p02-gold);
+
+    background:
+        rgba(221, 182, 78, 0.14);
+
+    color:
+        var(--p02-gold-light);
+
+}
+
+
+/* ==========================================================================
+   QUESTION META
+   REALITY / BENCHMARK / SCORE
+========================================================================== */
+
+.page02 #dimensionHost .question-meta,
+.page02 #dimensionHost .indicator-meta,
+.page02 #dimensionHost .score-meta,
+.page02 #dimensionHost .benchmark-row {
+
+    margin:
+        22px 0 0;
+
+    padding-top:
+        18px;
+
+    border-top:
+        1px solid var(--p02-border-soft);
+
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        12px 22px;
+
+    color:
+        var(--p02-muted);
+
+    font-size:
+        0.88rem;
+
+    line-height:
+        1.6;
+
+}
+
+
+.page02 #dimensionHost .benchmark,
+.page02 #dimensionHost .benchmark-value {
+
+    color:
+        var(--p02-ivory-soft);
+
+}
+
+
+.page02 #dimensionHost .benchmark strong,
+.page02 #dimensionHost .benchmark-value strong {
+
+    color:
+        var(--p02-gold-light);
+
+}
+
+
+.page02 #dimensionHost .question-score,
+.page02 #dimensionHost .indicator-score,
+.page02 #dimensionHost .score-value {
+
+    color:
+        var(--p02-teal);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-weight:
+        700;
+
+}
+
+
+/* ==========================================================================
+   SCORING DETAILS
+========================================================================== */
+
+.page02 .scoring-details {
+
+    width:
+        min(1000px, 100%);
+
+    margin:
+        38px auto 0;
+
+    border:
+        1px solid var(--p02-border-soft);
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(4, 15, 27, 0.38);
+
+    overflow:
+        hidden;
+
+}
+
+
+.page02 .scoring-details summary {
+
+    padding:
+        24px 28px;
+
+    color:
+        var(--p02-ivory);
+
+    font-size:
+        1rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.6;
+
+    cursor:
+        pointer;
+
+}
+
+
+.page02 .scoring-details summary span {
+
+    margin-left:
+        12px;
+
+    color:
+        var(--p02-gold);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        0.72rem;
+
+    letter-spacing:
+        0.06em;
+
+}
+
+
+.page02 .scoring-details[open] summary {
+
+    border-bottom:
+        1px solid var(--p02-border-soft);
+
+}
+
+
+.page02 .scoring-grid {
+
+    padding:
+        28px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap:
+        12px;
+
+}
+
+
+.page02 .scoring-grid > div {
+
+    min-height:
+        135px;
+
+    padding:
+        20px 14px;
+
+    border:
+        1px solid var(--p02-border-soft);
+
+    border-radius:
+        14px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    text-align:
+        center;
+
+}
+
+
+.page02 .scoring-grid strong {
+
+    color:
+        var(--p02-gold-light);
+
+    font-size:
+        1.2rem;
+
+}
+
+
+.page02 .scoring-grid span {
+
+    margin:
+        9px 0 5px;
+
+    color:
+        var(--p02-ivory);
+
+    font-size:
+        0.72rem;
+
+    line-height:
+        1.45;
+
+}
+
+
+.page02 .scoring-grid small {
+
+    color:
+        var(--p02-muted);
+
+    font-size:
+        0.7rem;
+
+}
+
+
+.page02 .scoring-details > p {
+
+    margin:
+        0;
+
+    padding:
+        0 28px 30px;
+
+    color:
+        var(--p02-muted);
+
+    font-size:
+        0.82rem;
+
+    line-height:
+        1.7;
+
+    text-align:
+        center;
+
+}
+
+
+.page02 .scoring-details > p strong {
+
+    color:
+        var(--p02-gold);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+}
+
+
+/* ==========================================================================
+   SCORECARD ACTIONS
+========================================================================== */
+
+.page02 .scorecard-actions {
+
+    width:
+        min(1000px, 100%);
+
+    margin:
+        38px auto 0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        20px;
+
+}
+
+
+/* ==========================================================================
+   ERROR MESSAGES
+========================================================================== */
+
+.page02 .form-error {
+
+    min-height:
+        24px;
+
+    margin:
+        24px auto 0;
+
+    color:
+        var(--p02-danger);
+
+    font-size:
+        0.9rem;
+
+    line-height:
+        1.6;
+
+    text-align:
+        center;
+
+}
+
+
+/* ==========================================================================
+   RESULT SCREEN
+========================================================================== */
+
+.page02 .result-shell {
+
+    text-align:
+        center;
+
+}
+
+
+.page02 .result-shell > h2 {
+
+    margin:
+        0 0 44px;
+
+    color:
+        var(--p02-ivory);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(2.3rem, 4vw, 4rem);
+
+    letter-spacing:
+        0.04em;
+
+}
+
+
+.page02 .result-hero {
+
+    width:
+        min(700px, 100%);
+
+    margin:
+        0 auto;
+
+    padding:
+        58px 38px;
+
+    border:
+        1px solid var(--p02-border);
+
+    border-radius:
+        30px;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(221, 182, 78, 0.10),
+            rgba(4, 15, 27, 0.5) 60%
+        );
+
+    box-shadow:
+        var(--p02-shadow);
+
+}
+
+
+.page02 .result-hero > span {
+
+    color:
+        var(--p02-muted);
+
+}
+
+
+.page02 .result-hero h3 {
+
+    margin:
+        12px 0 28px;
+
+    color:
+        var(--p02-gold);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        1rem;
+
+    letter-spacing:
+        0.08em;
+
+}
+
+
+.page02 .result-hero > strong {
+
+    display:
+        block;
+
+    color:
+        var(--p02-ivory);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(3rem, 7vw, 6rem);
+
+    line-height:
+        1;
+
+}
+
+
+.page02 .result-hero > b {
+
+    display:
+        block;
+
+    margin:
+        18px 0;
+
+    color:
+        var(--p02-teal);
+
+    font-size:
+        clamp(2rem, 4vw, 3.5rem);
+
+}
+
+
+.page02 .result-hero > p {
+
+    margin:
+        0;
+
+    color:
+        var(--p02-gold-light);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-weight:
+        700;
+
+}
+
+
+/* ==========================================================================
+   GAP CARD
+========================================================================== */
+
+.page02 .gap-card {
+
+    width:
+        min(700px, 100%);
+
+    margin:
+        26px auto 60px;
+
+    padding:
+        30px;
+
+    border:
+        1px solid var(--p02-border-soft);
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+}
+
+
+.page02 .gap-card span {
+
+    display:
+        block;
+
+    color:
+        var(--p02-ivory-soft);
+
+    line-height:
+        1.7;
+
+}
+
+
+.page02 .gap-card strong {
+
+    display:
+        block;
+
+    margin:
+        14px 0;
+
+    color:
+        var(--p02-gold-light);
+
+    font-size:
+        2.6rem;
+
+}
+
+
+.page02 .gap-card small {
+
+    color:
+        var(--p02-muted);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    letter-spacing:
+        0.06em;
+
+}
+
+
+/* ==========================================================================
+   RESULT BLOCK
+========================================================================== */
+
+.page02 .result-block {
+
+    width:
+        min(900px, 100%);
+
+    margin:
+        70px auto 0;
+
+    padding:
+        0;
+
+}
+
+
+.page02 .result-block h3,
+.page02 .stage-scale > h3 {
+
+    margin:
+        8px 0 30px;
+
+    color:
+        var(--p02-ivory);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        1.65rem;
+
+    letter-spacing:
+        0.05em;
+
+}
+
+
+.page02 #dimensionResults {
+
+    display:
+        grid;
+
+    gap:
+        14px;
+
+}
+
+
+/*
+   Compatibility for JS-generated dimension result rows.
+*/
+
+.page02 #dimensionResults > * {
+
+    padding:
+        20px 24px;
+
+    border:
+        1px solid var(--p02-border-soft);
+
+    border-radius:
+        15px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+}
+
+
+/* ==========================================================================
+   STRONGEST / GROWTH RESULT
+========================================================================== */
+
+.page02 .result-pair {
+
+    width:
+        min(900px, 100%);
+
+    margin:
+        28px auto 0;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap:
+        22px;
+
+}
+
+
+.page02 .result-pair article {
+
+    padding:
+        36px 28px;
+
+    border:
+        1px solid var(--p02-border-soft);
+
+    border-radius:
+        22px;
+
+    background:
+        rgba(4, 15, 27, 0.4);
+
+}
+
+
+.page02 .result-pair article > span {
+
+    color:
+        var(--p02-muted);
+
+    font-size:
+        0.9rem;
+
+}
+
+
+.page02 .result-pair article h3 {
+
+    margin:
+        12px 0 24px;
+
+    color:
+        var(--p02-gold);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        0.9rem;
+
+    line-height:
+        1.5;
+
+    letter-spacing:
+        0.05em;
+
+}
+
+
+.page02 .result-pair article strong {
+
+    display:
+        block;
+
+    color:
+        var(--p02-ivory);
+
+    font-size:
+        1.35rem;
+
+    line-height:
+        1.5;
+
+}
+
+
+.page02 .result-pair article b {
+
+    display:
+        block;
+
+    margin:
+        14px 0 0;
+
+    color:
+        var(--p02-teal);
+
+    font-size:
         1.6rem;
 
 }
 
 
 /* ==========================================================================
-   RANGE OPTION BUTTON
+   STAGE SCALE
 ========================================================================== */
 
-.range-option,
-.option-card,
-.question-option {
+.page02 .stage-scale {
 
-    position: relative;
+    width:
+        min(900px, 100%);
 
-    width: 100%;
+    margin:
+        72px auto 0;
 
-    min-width: 0;
+}
 
-    min-height: 82px;
 
-    margin: 0;
+.page02 .stage-list {
+
+    display:
+        grid;
+
+    gap:
+        10px;
+
+}
+
+
+.page02 .stage-list > div {
+
+    min-height:
+        70px;
 
     padding:
-        1.2rem
-        1.35rem;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: flex-start;
-
-    text-align: left;
+        16px 22px;
 
     border:
-        1px solid
-        rgba(248,245,237,.13);
+        1px solid var(--p02-border-soft);
 
-    border-radius: 16px;
+    border-radius:
+        14px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        100px 1fr;
+
+    align-items:
+        center;
+
+    gap:
+        20px;
+
+    text-align:
+        left;
 
     background:
-        rgba(4,15,27,.64);
+        rgba(255, 255, 255, 0.02);
 
-    color: #F8F5ED;
+}
+
+
+.page02 .stage-list span {
+
+    color:
+        var(--p02-gold);
 
     font-family:
-        inherit;
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-weight:
+        700;
+
+}
+
+
+.page02 .stage-list strong {
+
+    color:
+        var(--p02-ivory-soft);
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
 
     font-size:
-        clamp(
-            .95rem,
-            1.25vw,
-            1.08rem
-        );
+        0.82rem;
 
-    font-weight: 600;
-
-    line-height: 1.45;
-
-    cursor: pointer;
-
-    appearance: none;
-
-    -webkit-appearance: none;
-
-    transition:
-        transform .2s ease,
-        border-color .2s ease,
-        background .2s ease,
-        box-shadow .2s ease,
-        color .2s ease;
+    letter-spacing:
+        0.05em;
 
 }
 
 
-/* ==========================================================================
-   OPTION HOVER
-========================================================================== */
+/*
+   Compatibility with result JS active-stage classes.
+*/
 
-.range-option:hover,
-.option-card:hover,
-.question-option:hover {
-
-    transform:
-        translateY(-2px);
+.page02 .stage-list > .active,
+.page02 .stage-list > .is-active,
+.page02 .stage-list > [aria-current="true"] {
 
     border-color:
-        rgba(216,180,90,.55);
+        var(--p02-gold);
 
     background:
-        rgba(216,180,90,.07);
-
-    box-shadow:
-        0 12px 28px
-        rgba(0,0,0,.14);
+        rgba(221, 182, 78, 0.10);
 
 }
 
 
 /* ==========================================================================
-   OPTION SELECTED STATE
+   PAGE 03 TRANSITION
 ========================================================================== */
 
-.range-option.selected,
-.range-option.is-selected,
-.range-option[aria-pressed="true"],
+.page02 .transition-card {
 
-.option-card.selected,
-.option-card.is-selected,
-.option-card[aria-pressed="true"],
-
-.question-option.selected,
-.question-option.is-selected,
-.question-option[aria-pressed="true"] {
-
-    border-color: #23D4C8;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(35,212,200,.18),
-            rgba(35,212,200,.07)
-        );
-
-    color: #FFFFFF;
-
-    box-shadow:
-        0 0 0 1px
-        rgba(35,212,200,.12),
-        0 14px 34px
-        rgba(0,0,0,.16);
-
-}
-
-
-/* ==========================================================================
-   SELECTED INDICATOR
-========================================================================== */
-
-.range-option.selected::after,
-.range-option.is-selected::after,
-.range-option[aria-pressed="true"]::after,
-
-.option-card.selected::after,
-.option-card.is-selected::after,
-.option-card[aria-pressed="true"]::after,
-
-.question-option.selected::after,
-.question-option.is-selected::after,
-.question-option[aria-pressed="true"]::after {
-
-    content: "✓";
-
-    position: absolute;
-
-    top: 50%;
-
-    right: 1.2rem;
-
-    transform:
-        translateY(-50%);
-
-    width: 28px;
-
-    height: 28px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: #23D4C8;
-
-    color: #081C3A;
-
-    font-size: .85rem;
-
-    font-weight: 900;
-
-}
-
-
-/* ==========================================================================
-   KEYBOARD FOCUS
-========================================================================== */
-
-.range-option:focus-visible,
-.option-card:focus-visible,
-.question-option:focus-visible {
-
-    outline:
-        3px solid
-        rgba(35,212,200,.75);
-
-    outline-offset:
-        4px;
-
-}
-
-
-/* ==========================================================================
-   MILLIONAIRE IDEAL™ BENCHMARK
-========================================================================== */
-
-.benchmark,
-.millionaire-benchmark,
-.question-benchmark {
-
-    width: 100%;
+    width:
+        min(800px, 100%);
 
     margin:
-        .25rem 0
-        0;
-
-    padding-top:
-        1.25rem;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.055);
-
-}
-
-
-.benchmark-label {
-
-    display: inline-block;
-
-    margin-right: .4rem;
-
-    color: rgba(248,245,237,.70);
-
-    font-size: .75rem;
-
-    font-weight: 700;
-
-    letter-spacing: .06em;
-
-    text-transform: uppercase;
-
-}
-
-
-.benchmark-value {
-
-    color: #F8F5ED;
-
-    font-size: 1rem;
-
-    font-weight: 700;
-
-    line-height: 1.5;
-
-}
-
-
-/* ==========================================================================
-   LEGACY SCORE DISPLAY
-
-   Score should normally be hidden from the participant.
-
-   The user selects reality.
-   The system calculates the score silently.
-
-========================================================================== */
-
-.question-score,
-.score-display,
-.current-score {
-
-    display: none !important;
-
-}
-
-
-/* ==========================================================================
-   SCORE EXPLANATION
-========================================================================== */
-
-.score-explanation {
-
-    width: 100%;
-
-    margin:
-        2.5rem 0
-        3rem;
+        80px auto 0;
 
     padding:
-        1.8rem
-        2rem;
+        58px 48px;
 
     border:
-        1px solid
-        rgba(255,255,255,.05);
+        1px solid var(--p02-border);
 
-    border-radius: 20px;
+    border-radius:
+        28px;
 
     background:
-        rgba(7,19,30,.56);
+        rgba(4, 15, 27, 0.48);
+
+    text-align:
+        center;
 
 }
 
 
-.score-explanation summary {
-
-    color: #F8F5ED;
-
-    font-family:
-        "Noto Sans Tamil",
-        sans-serif;
-
-    font-size: 1rem;
-
-    font-weight: 700;
-
-    line-height: 1.6;
-
-    cursor: pointer;
-
-}
-
-
-.score-explanation summary span {
-
-    margin-left: .6rem;
-
-    color: #D8B45A;
-
-    font-size: .7rem;
-
-    letter-spacing: .08em;
-
-    text-transform: uppercase;
-
-}
-
-
-.score-explanation-content {
-
-    padding:
-        1.5rem 0
-        .25rem;
-
-    color: rgba(248,245,237,.72);
-
-    line-height: 1.8;
-
-}
-
-
-/* ==========================================================================
-   FORM / VALIDATION MESSAGE
-========================================================================== */
-
-.page02-message,
-.form-message,
-.validation-message {
-
-    width: 100%;
-
-    min-height: 24px;
+.page02 .transition-card h3 {
 
     margin:
-        1rem auto;
-
-    text-align: center;
-
-    color: rgba(248,245,237,.70);
-
-    font-size: .9rem;
-
-    line-height: 1.6;
-
-}
-
-
-.page02-message.error,
-.form-message.error,
-.validation-message.error {
-
-    color: #F2AAAA;
-
-}
-
-
-.page02-message.success,
-.form-message.success,
-.validation-message.success {
-
-    color: #23D4C8;
-
-}
-
-
-/* ==========================================================================
-   PAGE NAVIGATION
-========================================================================== */
-
-.page-navigation,
-.navigation-row,
-.scorecard-navigation {
-
-    width: 100%;
-
-    margin:
-        3rem 0
         0;
 
-    display: flex;
+    color:
+        var(--p02-ivory);
 
-    align-items: center;
+    font-size:
+        clamp(1.7rem, 2.8vw, 2.6rem);
 
-    justify-content: space-between;
+    line-height:
+        1.65;
 
-    gap: 1.5rem;
+}
+
+
+.page02 .transition-card > p:not(.english-copy) {
+
+    margin:
+        26px 0;
+
+    color:
+        var(--p02-ivory);
+
+    font-size:
+        1.05rem;
+
+    line-height:
+        1.9;
+
+}
+
+
+.page02 .transition-card .english-copy {
+
+    margin:
+        22px 0;
+
+}
+
+
+.page02 .transition-card .primary-btn {
+
+    margin-top:
+        24px;
 
 }
 
 
 /* ==========================================================================
-   BACK BUTTON
+   LOADING OVERLAY
 ========================================================================== */
 
-.back-button,
-.nav-back {
+.page02 .loading-overlay {
 
-    min-height: 64px;
+    position:
+        fixed;
 
-    padding:
-        0
-        2rem;
+    inset:
+        0;
 
-    display: inline-flex;
+    z-index:
+        9999;
 
-    align-items: center;
+    display:
+        flex;
 
-    justify-content: center;
+    flex-direction:
+        column;
 
-    border:
-        1px solid
-        rgba(248,245,237,.08);
+    align-items:
+        center;
 
-    border-radius: 16px;
+    justify-content:
+        center;
+
+    gap:
+        22px;
 
     background:
-        rgba(6,17,27,.45);
+        rgba(4, 12, 22, 0.94);
 
-    color: rgba(248,245,237,.82);
+    backdrop-filter:
+        blur(10px);
+
+}
+
+
+.page02 .loading-overlay[hidden] {
+
+    display:
+        none !important;
+
+}
+
+
+.page02 .loader {
+
+    width:
+        52px;
+
+    height:
+        52px;
+
+    border:
+        3px solid rgba(255, 255, 255, 0.12);
+
+    border-top-color:
+        var(--p02-gold);
+
+    border-radius:
+        50%;
+
+    animation:
+        p02-spin 0.8s linear infinite;
+
+}
+
+
+.page02 .loading-overlay p {
+
+    margin:
+        0;
+
+    color:
+        var(--p02-gold);
 
     font-family:
         "Cinzel",
+        Georgia,
         serif;
 
-    font-size: .8rem;
+    font-size:
+        0.9rem;
 
-    font-weight: 700;
-
-    letter-spacing: .1em;
-
-    text-decoration: none;
-
-    cursor: pointer;
-
-    transition:
-        border-color .2s ease,
-        background .2s ease,
-        color .2s ease,
-        transform .2s ease;
+    letter-spacing:
+        0.16em;
 
 }
 
 
-.back-button:hover,
-.nav-back:hover {
+@keyframes p02-spin {
 
-    transform:
-        translateY(-2px);
+    to {
 
-    border-color:
-        rgba(216,180,90,.35);
+        transform:
+            rotate(360deg);
 
-    background:
-        rgba(216,180,90,.06);
-
-    color: #F8F5ED;
-
-}
-
-
-/* ==========================================================================
-   PRIMARY NAVIGATION BUTTON
-
-   IMPORTANT:
-
-   Keep this visual language consistent
-   across all journey pages.
-
-========================================================================== */
-
-.next-button,
-.result-button,
-.nav-next,
-.primary-navigation-button {
-
-    min-height: 64px;
-
-    padding:
-        0
-        2.6rem;
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border:
-        1px solid
-        rgba(216,180,90,.85);
-
-    border-radius: 16px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #E5C365,
-            #D6AD4D
-        );
-
-    color: #081C3A;
-
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size: .9rem;
-
-    font-weight: 700;
-
-    letter-spacing: .04em;
-
-    line-height: 1.3;
-
-    text-align: center;
-
-    text-decoration: none;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 12px 32px
-        rgba(216,180,90,.12);
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        filter .2s ease;
-
-}
-
-
-.next-button:hover,
-.result-button:hover,
-.nav-next:hover,
-.primary-navigation-button:hover {
-
-    transform:
-        translateY(-2px);
-
-    filter:
-        brightness(1.04);
-
-    box-shadow:
-        0 16px 38px
-        rgba(216,180,90,.18);
-
-}
-
-
-/* ==========================================================================
-   DISABLED PRIMARY BUTTON
-========================================================================== */
-
-.next-button:disabled,
-.result-button:disabled,
-.nav-next:disabled,
-.primary-navigation-button:disabled,
-
-.next-button.disabled,
-.result-button.disabled,
-.nav-next.disabled,
-.primary-navigation-button.disabled {
-
-    opacity: .45;
-
-    cursor: not-allowed;
-
-    transform: none;
-
-    box-shadow: none;
-
-}
-
-
-/* ==========================================================================
-   WEBAPP / API ERROR
-========================================================================== */
-
-.webapp-error,
-.api-error,
-#page02-error {
-
-    width: 100%;
-
-    margin:
-        1.5rem auto
-        0;
-
-    text-align: center;
-
-    color: #F2AAAA;
-
-    font-size: .9rem;
-
-    line-height: 1.6;
+    }
 
 }
 
@@ -1180,43 +2921,55 @@
    TABLET
 ========================================================================== */
 
-@media(max-width:992px) {
+@media (max-width: 900px) {
 
-    .page02-container {
-
-        width:
-            calc(100% - 48px);
+    .page02 .screen[data-screen="about"],
+    .page02 .screen[data-screen="scorecard"],
+    .page02 .screen[data-screen="result"] {
 
         padding:
-            5.5rem 0
-            5rem;
+            64px 0 90px;
 
     }
 
 
-    .scorecard-question,
-    .question-card {
+    .page02 .hero {
 
         padding:
-            2.25rem;
+            82px 0 96px;
 
     }
 
 
-    .scorecard-section-header {
+    .page02 .title-lockup,
+    .page02 .instruction-card {
 
         padding:
-            2.25rem;
+            44px 36px;
 
     }
 
 
-    .range-option,
-    .option-card,
-    .question-option {
+    .page02 .form-card {
 
-        min-height:
-            78px;
+        padding:
+            38px 32px;
+
+    }
+
+
+    .page02 .scoring-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+
+    .page02 .scoring-grid > div:last-child {
+
+        grid-column:
+            1 / -1;
 
     }
 
@@ -1225,119 +2978,216 @@
 
 /* ==========================================================================
    MOBILE
-
-   IMPORTANT:
-
-   Four options collapse into ONE column.
-
-   This deliberately prioritises:
-
-   ✓ Readability
-   ✓ Large tap targets
-   ✓ Senior-friendly interaction
-   ✓ No cramped range labels
-
+   HARD EDGE-TO-EDGE PAGE FOUNDATION
 ========================================================================== */
 
-@media(max-width:768px) {
+@media (max-width: 768px) {
+
+    html,
+    body {
+
+        margin:
+            0;
+
+        padding:
+            0;
+
+        width:
+            100%;
+
+        max-width:
+            100%;
+
+        overflow-x:
+            hidden;
+
+    }
+
 
     .page02 {
 
-        width: 100%;
+        width:
+            100%;
 
-        margin: 0;
+        max-width:
+            none;
 
-        padding: 0;
-
-    }
-
-
-    .page02-container {
-
-        width: 100%;
-
-        max-width: none;
-
-        margin: 0;
+        margin:
+            0;
 
         padding:
-            4.5rem
-            18px
-            4rem;
+            0;
 
     }
 
 
-    .page02-intro {
+    /*
+       IMPORTANT:
+       No global section padding is allowed to create the white/mobile frame.
+       Page 02 owns its own internal spacing.
+    */
+
+    .page02 .screen {
+
+        width:
+            100%;
+
+        max-width:
+            none;
+
+        margin:
+            0;
+
+        padding-left:
+            0;
+
+        padding-right:
+            0;
+
+    }
+
+
+    .page02 .screen[data-screen="about"],
+    .page02 .screen[data-screen="scorecard"],
+    .page02 .screen[data-screen="result"] {
+
+        padding:
+            52px 0 76px;
+
+    }
+
+
+    .page02 .section-shell {
+
+        width:
+            100%;
+
+        max-width:
+            none;
+
+        margin:
+            0;
+
+        padding:
+            0 20px;
+
+    }
+
+
+    /* HERO */
+
+    .page02 .hero {
+
+        width:
+            100%;
+
+        max-width:
+            none;
+
+        min-height:
+            auto;
+
+        margin:
+            0;
+
+        padding:
+            72px 22px 84px;
+
+    }
+
+
+    .page02 .eyebrow {
 
         margin-bottom:
-            3.5rem;
-
-    }
-
-
-    .page02-intro h1 {
+            26px;
 
         font-size:
-            clamp(
-                2.4rem,
-                11vw,
-                4rem
-            );
-
-        line-height:
-            1.28;
-
-    }
-
-
-    .page02-kicker {
-
-        font-size:
-            .75rem;
+            0.76rem;
 
         letter-spacing:
-            .18em;
+            0.12em;
 
     }
 
 
-    .scorecard-section {
+    .page02 .hero > h1 {
 
-        margin-bottom:
-            3rem;
+        font-size:
+            clamp(2.65rem, 11vw, 4.4rem);
+
+        line-height:
+            1.22;
 
     }
 
 
-    .scorecard-section-header {
+    .page02 .hero-arrow {
+
+        width:
+            50px;
+
+        height:
+            50px;
+
+        margin:
+            32px auto;
+
+    }
+
+
+    .page02 .hero > h2 {
+
+        font-size:
+            clamp(2rem, 8vw, 3.1rem);
+
+        line-height:
+            1.35;
+
+    }
+
+
+    .page02 .english-lead {
+
+        margin-top:
+            36px;
+
+        font-size:
+            0.7rem;
+
+        line-height:
+            1.9;
+
+        letter-spacing:
+            0.06em;
+
+    }
+
+
+    .page02 .english-lead span {
+
+        margin:
+            0 5px;
+
+    }
+
+
+    /* INTRO */
+
+    .page02 .title-lockup {
+
+        margin-top:
+            76px;
 
         padding:
-            1.75rem;
+            36px 22px;
 
         border-radius:
-            22px;
+            20px;
 
     }
 
 
-    .scorecard-question,
-    .question-card {
-
-        margin-bottom:
-            1.4rem;
-
-        padding:
-            1.65rem;
-
-        border-radius:
-            22px;
-
-    }
-
-
-    .question-title-tamil,
-    .question-title {
+    .page02 .title-lockup h3 {
 
         font-size:
             1.35rem;
@@ -1345,98 +3195,404 @@
     }
 
 
-    .question-title-english,
-    .question-subtitle {
-
-        margin-bottom:
-            1.5rem;
-
-        font-size:
-            .95rem;
-
-    }
-
-
-    /*
-       FOUR RANGE OPTIONS
-       ONE PER LINE
-    */
-
-    .range-options,
-    .option-grid,
-    .question-options {
-
-        grid-template-columns:
-            1fr;
-
-        gap:
-            .8rem;
-
-    }
-
-
-    .range-option,
-    .option-card,
-    .question-option {
-
-        min-height:
-            68px;
-
-        padding:
-            1rem
-            3.6rem
-            1rem
-            1.15rem;
-
-        border-radius:
-            14px;
+    .page02 .tamil-copy {
 
         font-size:
             1rem;
 
         line-height:
-            1.4;
+            1.9;
 
     }
 
 
-    .benchmark,
-    .millionaire-benchmark,
-    .question-benchmark {
+    .page02 .english-copy {
 
-        padding-top:
-            1rem;
+        font-size:
+            0.72rem;
+
+        line-height:
+            1.8;
 
     }
 
 
-    .page-navigation,
-    .navigation-row,
-    .scorecard-navigation {
+    /* METRICS */
+
+    .page02 .metric-strip {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .page02 .metric-strip > div {
+
+        min-height:
+            110px;
+
+    }
+
+
+    .page02 .metric-strip > div + div {
+
+        border-left:
+            0;
+
+        border-top:
+            1px solid var(--p02-border);
+
+    }
+
+
+    /* INSTRUCTION */
+
+    .page02 .instruction-card {
+
+        padding:
+            36px 22px;
+
+        border-radius:
+            20px;
+
+    }
+
+
+    .page02 .instruction-card h3 {
+
+        font-size:
+            1.45rem;
+
+    }
+
+
+    /* BUTTONS */
+
+    .page02 .primary-btn {
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+        min-height:
+            70px;
+
+        padding:
+            15px 20px;
+
+    }
+
+
+    .page02 .secondary-btn {
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+    }
+
+
+    /* KYC */
+
+    .page02 .section-heading {
+
+        margin-bottom:
+            38px;
+
+    }
+
+
+    .page02 .section-heading h2 {
+
+        font-size:
+            2.25rem;
+
+    }
+
+
+    .page02 .form-card {
+
+        padding:
+            34px 20px;
+
+        border-radius:
+            20px;
+
+    }
+
+
+    .page02 .card-number {
+
+        top:
+            20px;
+
+        right:
+            20px;
+
+    }
+
+
+    .page02 .form-grid {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            22px;
+
+    }
+
+
+    .page02 .field--wide {
+
+        grid-column:
+            auto;
+
+    }
+
+
+    .page02 .choice-row {
+
+        display:
+            grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+
+    .page02 .choice-row label > span {
+
+        width:
+            100%;
+
+    }
+
+
+    /* SCORECARD PROGRESS */
+
+    .page02 .dimension-progress {
+
+        margin-bottom:
+            26px;
+
+        gap:
+            6px;
+
+    }
+
+
+    /* QUESTION CARDS */
+
+    .page02 #dimensionHost .question-card,
+    .page02 #dimensionHost .scorecard-question,
+    .page02 #dimensionHost .indicator-card,
+    .page02 #dimensionHost .metric-card {
+
+        margin-bottom:
+            20px;
+
+        padding:
+            28px 20px;
+
+        border-radius:
+            19px;
+
+    }
+
+
+    .page02 #dimensionHost .question-title,
+    .page02 #dimensionHost .question-tamil,
+    .page02 #dimensionHost .indicator-title,
+    .page02 #dimensionHost .metric-title {
+
+        font-size:
+            1.18rem;
+
+        line-height:
+            1.55;
+
+    }
+
+
+    /*
+       FOUR OPTIONS:
+       MOBILE = ONE OPTION PER LINE
+    */
+
+    .page02 #dimensionHost .range-options,
+    .page02 #dimensionHost .option-grid,
+    .page02 #dimensionHost .score-options,
+    .page02 #dimensionHost .answer-options,
+    .page02 #dimensionHost .range-grid {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            10px;
+
+    }
+
+
+    .page02 #dimensionHost .range-option > span,
+    .page02 #dimensionHost .option-card > span,
+    .page02 #dimensionHost .score-option > span,
+    .page02 #dimensionHost .answer-option > span,
+    .page02 #dimensionHost button.range-option,
+    .page02 #dimensionHost button.option-card,
+    .page02 #dimensionHost button.score-option,
+    .page02 #dimensionHost button.answer-option {
+
+        min-height:
+            64px;
+
+        padding:
+            14px 16px;
+
+        font-size:
+            0.94rem;
+
+    }
+
+
+    .page02 #dimensionHost .question-meta,
+    .page02 #dimensionHost .indicator-meta,
+    .page02 #dimensionHost .score-meta,
+    .page02 #dimensionHost .benchmark-row {
+
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+
+    }
+
+
+    /* SCORING */
+
+    .page02 .scoring-details summary {
+
+        padding:
+            20px;
+
+    }
+
+
+    .page02 .scoring-details summary span {
+
+        display:
+            block;
+
+        margin:
+            7px 0 0;
+
+    }
+
+
+    .page02 .scoring-grid {
+
+        padding:
+            20px;
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .page02 .scoring-grid > div:last-child {
+
+        grid-column:
+            auto;
+
+    }
+
+
+    .page02 .scoring-details > p {
+
+        padding:
+            0 20px 24px;
+
+    }
+
+
+    /* ACTIONS */
+
+    .page02 .scorecard-actions {
 
         flex-direction:
             column-reverse;
 
-        align-items:
-            stretch;
+    }
 
-        gap:
-            1rem;
+
+    .page02 .scorecard-actions .primary-btn,
+    .page02 .scorecard-actions .secondary-btn {
+
+        width:
+            100%;
 
     }
 
 
-    .back-button,
-    .nav-back,
-    .next-button,
-    .result-button,
-    .nav-next,
-    .primary-navigation-button {
+    /* RESULTS */
 
-        width: 100%;
+    .page02 .result-hero {
 
-        min-height:
-            60px;
+        padding:
+            44px 20px;
+
+        border-radius:
+            22px;
+
+    }
+
+
+    .page02 .gap-card {
+
+        padding:
+            26px 20px;
+
+    }
+
+
+    .page02 .result-pair {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .page02 .stage-list > div {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            7px;
+
+        text-align:
+            center;
+
+    }
+
+
+    .page02 .transition-card {
+
+        padding:
+            40px 22px;
+
+        border-radius:
+            22px;
 
     }
 
@@ -1447,173 +3603,99 @@
    SMALL MOBILE
 ========================================================================== */
 
-@media(max-width:480px) {
+@media (max-width: 480px) {
 
-    .page02-container {
-
-        padding:
-            3.5rem
-            14px
-            3.5rem;
-
-    }
-
-
-    .page02-intro h1 {
-
-        font-size:
-            clamp(
-                2.15rem,
-                11vw,
-                3.1rem
-            );
-
-    }
-
-
-    .scorecard-question,
-    .question-card {
+    .page02 .section-shell {
 
         padding:
-            1.4rem;
-
-        border-radius:
-            18px;
+            0 16px;
 
     }
 
 
-    .scorecard-section-header {
+    .page02 .hero {
 
         padding:
-            1.4rem;
-
-        border-radius:
-            18px;
+            60px 18px 72px;
 
     }
 
 
-    .question-number {
+    .page02 .hero > h1 {
 
         font-size:
-            .9rem;
+            clamp(2.35rem, 11.5vw, 3.4rem);
 
     }
 
 
-    .question-title-tamil,
-    .question-title {
+    .page02 .hero > h2 {
 
         font-size:
-            1.22rem;
+            clamp(1.8rem, 8.5vw, 2.5rem);
 
     }
 
 
-    .question-title-english,
-    .question-subtitle {
-
-        font-size:
-            .9rem;
-
-    }
-
-
-    .reality-label,
-    .option-label {
-
-        font-size:
-            .95rem;
-
-    }
-
-
-    .range-option,
-    .option-card,
-    .question-option {
-
-        min-height:
-            64px;
-
-        padding:
-            .95rem
-            3.4rem
-            .95rem
-            1rem;
-
-        font-size:
-            .95rem;
-
-    }
-
-
-    .range-option.selected::after,
-    .range-option.is-selected::after,
-    .range-option[aria-pressed="true"]::after,
-
-    .option-card.selected::after,
-    .option-card.is-selected::after,
-    .option-card[aria-pressed="true"]::after,
-
-    .question-option.selected::after,
-    .question-option.is-selected::after,
-    .question-option[aria-pressed="true"]::after {
-
-        right:
-            .9rem;
-
-        width:
-            26px;
-
-        height:
-            26px;
-
-    }
-
-
-    .score-explanation {
-
-        padding:
-            1.4rem;
-
-    }
-
-}
-
-
-/* ==========================================================================
-   VERY SMALL DEVICES
-========================================================================== */
-
-@media(max-width:360px) {
-
-    .page02-container {
+    .page02 .title-lockup,
+    .page02 .instruction-card {
 
         padding-left:
-            10px;
+            18px;
 
         padding-right:
-            10px;
+            18px;
 
     }
 
 
-    .scorecard-question,
-    .question-card {
+    .page02 .form-card {
+
+        padding-left:
+            18px;
+
+        padding-right:
+            18px;
+
+    }
+
+
+    .page02 .choice-row {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .page02 #dimensionHost .question-card,
+    .page02 #dimensionHost .scorecard-question,
+    .page02 #dimensionHost .indicator-card,
+    .page02 #dimensionHost .metric-card {
 
         padding:
-            1.2rem;
+            24px 16px;
 
     }
 
 
-    .range-option,
-    .option-card,
-    .question-option {
+    .page02 #dimensionHost .range-option > span,
+    .page02 #dimensionHost .option-card > span,
+    .page02 #dimensionHost .score-option > span,
+    .page02 #dimensionHost .answer-option > span,
+    .page02 #dimensionHost button.range-option,
+    .page02 #dimensionHost button.option-card,
+    .page02 #dimensionHost button.score-option,
+    .page02 #dimensionHost button.answer-option {
+
+        min-height:
+            62px;
+
+        padding:
+            13px 14px;
 
         font-size:
-            .9rem;
+            0.9rem;
 
     }
 
@@ -1621,30 +3703,20 @@
 
 
 /* ==========================================================================
-   TOUCH OPTIMIZATION
+   TOUCH
 ========================================================================== */
 
-@media(pointer:coarse) {
+@media (pointer: coarse) {
 
-    .range-option,
-    .option-card,
-    .question-option {
-
-        min-height:
-            68px;
+    .page02 .primary-btn,
+    .page02 .secondary-btn,
+    .page02 #dimensionHost .range-option,
+    .page02 #dimensionHost .option-card,
+    .page02 #dimensionHost .score-option,
+    .page02 #dimensionHost .answer-option {
 
         touch-action:
             manipulation;
-
-    }
-
-
-    .range-option:hover,
-    .option-card:hover,
-    .question-option:hover {
-
-        transform:
-            none;
 
     }
 
@@ -1655,25 +3727,20 @@
    REDUCED MOTION
 ========================================================================== */
 
-@media(prefers-reduced-motion:reduce) {
+@media (prefers-reduced-motion: reduce) {
 
-    .range-option,
-    .option-card,
-    .question-option,
+    .page02 *,
+    .page02 *::before,
+    .page02 *::after {
 
-    .back-button,
-    .nav-back,
+        animation-duration:
+            0.01ms !important;
 
-    .next-button,
-    .result-button,
-    .nav-next,
-    .primary-navigation-button {
+        animation-iteration-count:
+            1 !important;
 
-        transition:
-            none !important;
-
-        transform:
-            none !important;
+        transition-duration:
+            0.01ms !important;
 
     }
 
@@ -1689,53 +3756,23 @@
     .page02 {
 
         background:
-            #FFFFFF;
+            white;
 
         color:
-            #000000;
+            black;
 
     }
 
 
-    .scorecard-question,
-    .question-card,
-    .scorecard-section-header {
-
-        background:
-            #FFFFFF;
-
-        color:
-            #000000;
-
-        border:
-            1px solid
-            #CCCCCC;
-
-        box-shadow:
-            none;
-
-    }
-
-
-    .page-navigation,
-    .navigation-row,
-    .scorecard-navigation,
-    .page02-scroll-cue {
+    .page02 .scorecard-actions,
+    .page02 .primary-btn,
+    .page02 .secondary-btn,
+    .page02 .loading-overlay {
 
         display:
-            none;
+            none !important;
 
     }
 
 }
-
-
-/* ==========================================================================
-   END OF FILE
-
-   CTM PATH™ MILLIONAIRES™
-   PAGE 02 RANGE OPTION SCORECARD
-   VERSION 2.0
-
-========================================================================== */
 
