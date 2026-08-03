@@ -77,6 +77,7 @@ const CONFIG = {
 
 
 
+
 /* ============================================================
    GENERIC REQUEST HANDLER
 ============================================================ */
@@ -128,7 +129,7 @@ async function request(
                     "Content-Type":
 
 
-                    "application/json"
+                    "text/plain;charset=UTF-8"
 
 
 
@@ -193,11 +194,17 @@ async function request(
 
 
 
+
+
+
         const result =
 
 
 
         await response.json();
+
+
+
 
 
 
@@ -241,6 +248,9 @@ async function request(
 
 
 
+
+
+
         return {
 
 
@@ -273,6 +283,8 @@ async function request(
 
 
 }
+
+
 
                  /* ============================================================
    PAGE 02
@@ -444,6 +456,8 @@ async function generateDiagnosis(
 
 
 }
+
+
 
                  /* ============================================================
    PAGE 06
@@ -841,6 +855,7 @@ return {
 
 
 };
+
 
 
 
