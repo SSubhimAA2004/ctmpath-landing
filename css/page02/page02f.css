@@ -1,1 +1,839 @@
 
+/* ==========================================================================
+   CTM PATH™ MILLIONAIRES™
+
+   FILE:
+   css/page02/page02f.css
+
+   VERSION:
+   3.0
+
+   PAGE:
+   PAGE 02F — DIMENSION 05 — FINAL DIMENSION
+
+   STATUS:
+   PAGE-SPECIFIC PRESENTATION
+
+   DEPENDS ON:
+   css/page02/page02-shared.css
+
+   PURPOSE:
+
+   ✓ Dimension 05 page identity
+   ✓ Final-dimension visual treatment
+   ✓ Final journey context
+   ✓ Final-result CTA refinement
+   ✓ Submission-state refinement
+   ✓ Preserve shared premium visual language
+
+   SHARED SYSTEM OWNS:
+
+   ✗ Indicator cards
+   ✗ Four-option architecture
+   ✗ Option selected states
+   ✗ Score badges
+   ✗ Live score panel
+   ✗ Score guide
+   ✗ Core navigation button design
+   ✗ Core responsive architecture
+
+========================================================================== */
+
+
+/* ==========================================================================
+   PAGE 02F FOUNDATION
+========================================================================== */
+
+
+.page02f {
+
+    position: relative;
+
+}
+
+
+/* ==========================================================================
+   FINAL DIMENSION HEADER
+========================================================================== */
+
+
+.page02f .dimension-header {
+
+    position: relative;
+
+}
+
+
+/* ==========================================================================
+   FINAL DIMENSION EYEBROW
+========================================================================== */
+
+
+.page02f .dimension-eyebrow {
+
+    color:
+        rgba(255, 255, 255, 0.50);
+
+}
+
+
+/* ==========================================================================
+   DIMENSION TITLE ACCENT
+========================================================================== */
+
+
+.page02f .dimension-title-english {
+
+    color: #14b8a6;
+
+}
+
+
+/* ==========================================================================
+   INTRODUCTION
+========================================================================== */
+
+
+.page02f .dimension-introduction {
+
+    max-width: 680px;
+
+}
+
+
+/* ==========================================================================
+   LIVE SCORE PANEL
+========================================================================== */
+
+
+.page02f .dimension-score-panel {
+
+    margin-top: 28px;
+
+}
+
+
+/* ==========================================================================
+   SCORECARD SECTION
+========================================================================== */
+
+
+.page02f .dimension-scorecard {
+
+    width: 100%;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+
+/* ==========================================================================
+   FIRST INDICATOR
+========================================================================== */
+
+
+.page02f .scorecard-card:first-child {
+
+    margin-top: 0;
+
+}
+
+
+/* ==========================================================================
+   COMPLETION STATUS
+========================================================================== */
+
+
+.page02f .dimension-completion {
+
+    margin-top: 24px;
+
+}
+
+
+/* ==========================================================================
+   COMPLETED FINAL DIMENSION STATE
+========================================================================== */
+
+
+.page02f [data-dimension-complete][data-complete="true"] {
+
+    color: #14b8a6;
+
+}
+
+
+/* ==========================================================================
+   FINAL DIMENSION CONTEXT
+
+   Appears after the 5 / 5 completion counter.
+
+   This is intentionally restrained. It signals that the user has reached
+   the final dimension without introducing a competing visual card.
+========================================================================== */
+
+
+.page02f .final-dimension-context {
+
+    width: 100%;
+
+    max-width: 760px;
+
+    margin:
+        18px
+        auto
+        0;
+
+    text-align: center;
+
+}
+
+
+/* ==========================================================================
+   FINAL CONTEXT — TAMIL
+========================================================================== */
+
+
+.page02f .final-dimension-context-primary {
+
+    margin: 0;
+
+    color:
+        rgba(255, 255, 255, 0.88);
+
+    font-size: 1rem;
+
+    font-weight: 600;
+
+    line-height: 1.6;
+
+    letter-spacing: 0;
+
+}
+
+
+/* ==========================================================================
+   FINAL CONTEXT — ENGLISH
+========================================================================== */
+
+
+.page02f .final-dimension-context-secondary {
+
+    margin:
+        7px
+        0
+        0;
+
+    color:
+        rgba(255, 255, 255, 0.42);
+
+    font-size: 0.72rem;
+
+    font-weight: 700;
+
+    line-height: 1.5;
+
+    letter-spacing: 0.10em;
+
+    text-transform: uppercase;
+
+}
+
+
+/* ==========================================================================
+   SCORE GUIDE SPACING
+
+   Core score-guide design remains entirely inside page02-shared.css.
+========================================================================== */
+
+
+.page02f .score-guide {
+
+    margin-top: 34px;
+
+}
+
+
+/* ==========================================================================
+   VALIDATION / BACKEND MESSAGE
+========================================================================== */
+
+
+.page02f .dimension-message {
+
+    max-width: 960px;
+
+}
+
+
+/* ==========================================================================
+   FINAL NAVIGATION
+========================================================================== */
+
+
+.page02f .final-dimension-navigation {
+
+    padding-bottom: 4px;
+
+}
+
+
+/* ==========================================================================
+   FINAL CTA
+
+   IMPORTANT:
+
+   The actual CTA colour is intentionally inherited from
+   page02-shared.css.
+
+   We DO NOT introduce a new colour for the final button.
+
+   The same frozen CTM teal button language therefore remains consistent
+   across the complete journey.
+========================================================================== */
+
+
+.page02f .dimension-button-final {
+
+    position: relative;
+
+}
+
+
+/* ==========================================================================
+   FINAL CTA — SUBTLE EMPHASIS
+
+   Gives the final action slightly stronger presence without changing
+   the shared button colour or creating a different CTA family.
+========================================================================== */
+
+
+.page02f .dimension-button-final:not(:disabled) {
+
+    box-shadow:
+        0 14px 34px rgba(20, 184, 166, 0.16);
+
+}
+
+
+/* ==========================================================================
+   FINAL CTA HOVER
+
+   The shared system still owns transform / border / background behaviour.
+
+   This rule only increases depth slightly.
+========================================================================== */
+
+
+@media (hover: hover) {
+
+
+    .page02f .dimension-button-final:not(:disabled):hover {
+
+        box-shadow:
+            0 18px 42px rgba(20, 184, 166, 0.22);
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   SUBMITTING STATE
+
+   page02f.js applies:
+
+       disabled = true
+       aria-busy = "true"
+
+   while CTM_API.saveDiscovery() is running.
+========================================================================== */
+
+
+.page02f .dimension-button-final[aria-busy="true"] {
+
+    cursor: wait;
+
+}
+
+
+/* ==========================================================================
+   SUBMITTING STATE — TEXT
+========================================================================== */
+
+
+.page02f
+.dimension-button-final[aria-busy="true"]
+.dimension-button-primary-text {
+
+    opacity: 0.92;
+
+}
+
+
+.page02f
+.dimension-button-final[aria-busy="true"]
+.dimension-button-secondary-text {
+
+    opacity: 0.62;
+
+}
+
+
+/* ==========================================================================
+   SUBMITTING STATE — PROGRESS INDICATOR
+
+   Uses a CSS-only spinner so no additional HTML or JavaScript dependency
+   is required.
+========================================================================== */
+
+
+.page02f .dimension-button-final[aria-busy="true"]::after {
+
+    content: "";
+
+    display: inline-block;
+
+    width: 16px;
+
+    height: 16px;
+
+    margin-left: 12px;
+
+    border:
+        2px solid
+        rgba(255, 255, 255, 0.34);
+
+    border-top-color:
+        rgba(255, 255, 255, 0.96);
+
+    border-radius: 50%;
+
+    vertical-align: middle;
+
+    animation:
+        page02f-submit-spin
+        0.8s
+        linear
+        infinite;
+
+}
+
+
+/* ==========================================================================
+   SUBMISSION SPINNER
+========================================================================== */
+
+
+@keyframes page02f-submit-spin {
+
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   FINAL SUBMISSION NOTE
+========================================================================== */
+
+
+.page02f .final-submission-note {
+
+    width: 100%;
+
+    max-width: 760px;
+
+    margin:
+        20px
+        auto
+        0;
+
+    text-align: center;
+
+}
+
+
+/* ==========================================================================
+   FINAL SUBMISSION NOTE — TAMIL
+========================================================================== */
+
+
+.page02f .final-submission-note p:first-child {
+
+    margin: 0;
+
+    color:
+        rgba(255, 255, 255, 0.52);
+
+    font-size: 0.84rem;
+
+    font-weight: 500;
+
+    line-height: 1.65;
+
+}
+
+
+/* ==========================================================================
+   FINAL SUBMISSION NOTE — ENGLISH
+========================================================================== */
+
+
+.page02f .final-submission-note p:last-child {
+
+    margin:
+        5px
+        0
+        0;
+
+    color:
+        rgba(255, 255, 255, 0.30);
+
+    font-size: 0.66rem;
+
+    font-weight: 700;
+
+    line-height: 1.5;
+
+    letter-spacing: 0.09em;
+
+    text-transform: uppercase;
+
+}
+
+
+/* ==========================================================================
+   DISABLED NAVIGATION
+
+   The shared system remains authoritative for disabled styling.
+
+   This only prevents the final CTA shadow from making a disabled button
+   look active.
+========================================================================== */
+
+
+.page02f .dimension-button-final:disabled {
+
+    box-shadow: none;
+
+}
+
+
+/* ==========================================================================
+   TABLET
+========================================================================== */
+
+
+@media (max-width: 900px) {
+
+
+    .page02f .dimension-introduction {
+
+        max-width: 620px;
+
+    }
+
+
+    .page02f .final-dimension-context {
+
+        max-width: 660px;
+
+    }
+
+
+    .page02f .final-submission-note {
+
+        max-width: 660px;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   MOBILE
+========================================================================== */
+
+
+@media (max-width: 768px) {
+
+
+    .page02f .dimension-header {
+
+        margin-bottom: 34px;
+
+    }
+
+
+    .page02f .dimension-score-panel {
+
+        margin-top: 22px;
+
+    }
+
+
+    .page02f .dimension-completion {
+
+        margin-top: 20px;
+
+    }
+
+
+    .page02f .final-dimension-context {
+
+        max-width: 100%;
+
+        margin-top: 16px;
+
+        padding:
+            0
+            8px;
+
+    }
+
+
+    .page02f .score-guide {
+
+        margin-top: 30px;
+
+    }
+
+
+    .page02f .final-submission-note {
+
+        max-width: 100%;
+
+        margin-top: 18px;
+
+        padding:
+            0
+            8px;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   SMALL MOBILE
+========================================================================== */
+
+
+@media (max-width: 420px) {
+
+
+    .page02f .dimension-header {
+
+        margin-bottom: 30px;
+
+    }
+
+
+    .page02f .dimension-introduction {
+
+        max-width: 100%;
+
+    }
+
+
+    .page02f .final-dimension-context-primary {
+
+        font-size: 0.94rem;
+
+    }
+
+
+    .page02f .final-dimension-context-secondary {
+
+        font-size: 0.66rem;
+
+        letter-spacing: 0.08em;
+
+    }
+
+
+    .page02f .final-submission-note p:first-child {
+
+        font-size: 0.80rem;
+
+    }
+
+
+    .page02f .final-submission-note p:last-child {
+
+        font-size: 0.62rem;
+
+        letter-spacing: 0.07em;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   REDUCED MOTION
+
+   Accessibility:
+   removes spinner animation for users who prefer reduced motion.
+========================================================================== */
+
+
+@media (prefers-reduced-motion: reduce) {
+
+
+    .page02f .dimension-button-final[aria-busy="true"]::after {
+
+        animation: none;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   PRINT
+========================================================================== */
+
+
+@media print {
+
+
+    .page02f {
+
+        min-height: auto;
+
+    }
+
+
+    .page02f .final-dimension-context {
+
+        max-width: 100%;
+
+    }
+
+
+    .page02f .final-submission-note {
+
+        max-width: 100%;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   END
+
+   PAGE 02F STACK:
+
+   pages/page02f.html
+          ↓
+   css/page02/page02-shared.css
+          ↓
+   css/page02/page02f.css
+
+
+   JAVASCRIPT:
+
+   page02-data.js
+          ↓
+   page02-session.js
+          ↓
+   page02-scorecard.js
+          ↓
+   page02f.js
+
+
+   PAGE 02F RESPONSIBILITY:
+
+   DIMENSION 05
+   INDICATORS 21–25
+
+          ↓
+
+   VALIDATE DIMENSION 05
+
+          ↓
+
+   VALIDATE COMPLETE
+   25 / 25 SCORECARD
+
+          ↓
+
+   TOTAL SCORE
+   / 100
+
+          ↓
+
+   BUILD DISCOVERY PAYLOAD
+
+          ↓
+
+   CTM_API.saveDiscovery()
+
+          ↓
+
+   STORE RESULT
+
+          ↓
+
+   PAGE 03
+
+
+   PAGE 02 SPLIT ARCHITECTURE:
+
+   02A
+   KYC
+
+          ↓
+
+   02B
+   DIMENSION 01
+   INDICATORS 01–05
+
+          ↓
+
+   02C
+   DIMENSION 02
+   INDICATORS 06–10
+
+          ↓
+
+   02D
+   DIMENSION 03
+   INDICATORS 11–15
+
+          ↓
+
+   02E
+   DIMENSION 04
+   INDICATORS 16–20
+
+          ↓
+
+   02F
+   DIMENSION 05
+   INDICATORS 21–25
+
+          ↓
+
+   PAGE 03
+
+
+========================================================================== */
+
