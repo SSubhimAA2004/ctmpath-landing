@@ -3,13 +3,14 @@
    CTM PATH™ MILLIONAIRES™
 
    File      : component-loader.js
-   Version   : 3.1
+   Version   : 3.2
    Status    : PRODUCTION
 
    Architecture:
    STATIC MULTI-PAGE GUIDED JOURNEY
 
    Pages:
+   /index.html
    /pages/page02.html
    /pages/page03.html
    /pages/page04.html
@@ -25,7 +26,7 @@
    ✓ Load Component Stylesheets
    ✓ Load Header Controller
    ✓ Resolve component paths from site root
-   ✓ Support Pages 02–07 consistently
+   ✓ Support Page 01–07 consistently
 
    Does NOT:
 
@@ -45,7 +46,25 @@
 
     /* ======================================================================
        ROOT PATHS
+       ======================================================================
+
+       All shared component resources use root-relative paths.
+
+       This guarantees consistent resolution from:
+
+           /index.html
+
+       and:
+
+           /pages/page02.html
+           /pages/page03.html
+           /pages/page04.html
+           /pages/page05.html
+           /pages/page06.html
+           /pages/page07.html
+
        ====================================================================== */
+
 
     const COMPONENT_PATH = {
 
@@ -61,7 +80,10 @@
     const STYLE_PATH = {
 
         header:
-            "/css/header.css"
+            "/css/header.css",
+
+        footer:
+            "/css/footer.css"
 
     };
 
@@ -87,11 +109,41 @@
 
                 /*
                  * Prevent duplicate stylesheet loading.
+                 *
+                 * Handles both:
+                 *
+                 *     /css/header.css
+                 *
+                 * and an existing browser-resolved absolute URL.
                  */
 
                 const existing =
-                    document.querySelector(
-                        'link[href="' + file + '"]'
+                    Array.from(
+                        document.querySelectorAll(
+                            'link[rel="stylesheet"]'
+                        )
+                    ).find(
+                        function (link) {
+
+                            try {
+
+                                return (
+                                    link.getAttribute("href") === file ||
+                                    new URL(
+                                        link.href,
+                                        window.location.origin
+                                    ).pathname === file
+                                );
+
+                            }
+
+                            catch (error) {
+
+                                return false;
+
+                            }
+
+                        }
                     );
 
 
@@ -174,7 +226,9 @@
     ) {
 
         const container =
-            document.querySelector(selector);
+            document.querySelector(
+                selector
+            );
 
 
         if (!container) {
@@ -264,8 +318,32 @@
                  */
 
                 const existing =
-                    document.querySelector(
-                        'script[src="' + file + '"]'
+                    Array.from(
+                        document.querySelectorAll(
+                            "script[src]"
+                        )
+                    ).find(
+                        function (script) {
+
+                            try {
+
+                                return (
+                                    script.getAttribute("src") === file ||
+                                    new URL(
+                                        script.src,
+                                        window.location.origin
+                                    ).pathname === file
+                                );
+
+                            }
+
+                            catch (error) {
+
+                                return false;
+
+                            }
+
+                        }
                     );
 
 
@@ -350,10 +428,7 @@
             /*
              * STEP 1
              *
-             * Load canonical header stylesheet first.
-             *
-             * This guarantees that when header.html is injected,
-             * its layout is immediately governed by header.css.
+             * Load canonical header stylesheet.
              */
 
             await loadStyle(
@@ -364,7 +439,7 @@
             /*
              * STEP 2
              *
-             * Inject header component.
+             * Inject canonical header component.
              */
 
             const loaded =
@@ -420,10 +495,59 @@
 
     async function loadFooter() {
 
-        return loadComponent(
-            "#global-footer",
-            COMPONENT_PATH.footer
-        );
+        try {
+
+
+            /*
+             * STEP 1
+             *
+             * Load canonical footer stylesheet.
+             *
+             * This ensures Page 01–07 all receive
+             * exactly the same footer styling.
+             */
+
+            await loadStyle(
+                STYLE_PATH.footer
+            );
+
+
+            /*
+             * STEP 2
+             *
+             * Inject canonical footer component.
+             */
+
+            const loaded =
+                await loadComponent(
+                    "#global-footer",
+                    COMPONENT_PATH.footer
+                );
+
+
+            if (!loaded) {
+
+                return false;
+
+            }
+
+
+            return true;
+
+        }
+
+
+        catch (error) {
+
+            console.error(
+                "CTM Footer loading failed:",
+                error
+            );
+
+
+            return false;
+
+        }
 
     }
 
@@ -503,15 +627,30 @@
        OPTIONAL AUTO INITIALIZATION
        ======================================================================
 
-       Pages may call:
+       Journey pages may call:
 
            CTM_COMPONENTS.load()
 
-       explicitly.
+       to load BOTH:
 
-       Therefore this loader does NOT automatically execute itself.
+           Header
+           Footer
 
-       This prevents duplicate component loading.
+
+       Page 01 may call:
+
+           CTM_COMPONENTS.loadFooter()
+
+       when its existing Page-01 header must remain untouched.
+
+
+       This loader deliberately does NOT automatically execute itself.
+
+       This prevents:
+
+           • duplicate component injection
+           • duplicate controller execution
+           • accidental Page-01 header replacement
 
        ====================================================================== */
 
@@ -524,7 +663,7 @@
     window.CTM_COMPONENTS = {
 
         version:
-            "3.1",
+            "3.2",
 
         load:
             loadGlobalComponents,
@@ -539,3 +678,4 @@
 
 
 })();
+
