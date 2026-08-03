@@ -1774,7 +1774,9 @@ Page02Data.DIMENSIONS = [
 
     ]
 
-};
+}
+
+];
 
 
 /* =============================================================================
@@ -1815,9 +1817,11 @@ Page02Data.getDimension = function(index){
 
 
     return (
+
         Page02Data.DIMENSIONS[
             normalizedIndex
         ] || null
+
     );
 
 };
@@ -2182,7 +2186,6 @@ Page02Data.validate = function(){
                     indicator.id +
                     '" must contain exactly four options.'
                 );
-
 
                 return;
 
