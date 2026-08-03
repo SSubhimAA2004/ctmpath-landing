@@ -4,7 +4,7 @@
  * CTM PATH™ MILLIONAIRES™
  * Guided Journey™
  *
- * Frontend v2.1
+ * Frontend v2.2
  * -----------------------------------------------------------------------------
  * File          : js/page02.js
  * Page          : 02 / 07
@@ -15,40 +15,73 @@
  *      LIFESTYLE SCORECARD™
  *
  * -----------------------------------------------------------------------------
- * RESPONSIBILITIES
+ * VERSION 2.2 ARCHITECTURE
  * -----------------------------------------------------------------------------
  *
- *      • Control Page 02 internal screens
- *      • Capture KYC information
- *      • Register person with backend
- *      • Render 25 scorecard indicators
- *      • Organise indicators into 5 dimensions
- *      • Render four selectable ranges for every indicator
- *      • Calculate live score / gap
- *      • Save Millionaire Lifestyle Scorecard™
- *      • Render final result
- *      • Continue to Page 03
+ *      Batch 1
+ *          Foundation
+ *          Configuration
+ *          Runtime state
+ *          Score model
+ *          Frozen 25-indicator master
+ *          Frozen 100 selectable ranges
  *
- * Backend actions used:
+ *      Batch 2
+ *          Canonical four-option renderer
+ *          Answer selection
+ *          Live scoring
+ *          Dimension progress
  *
- *      CTM_API.register()
- *      CTM_API.saveDiscovery()
+ *      Batch 3
+ *          KYC
+ *          CTM_API.register()
+ *          Client identity
+ *          Dimension navigation
  *
- * SCORING MODEL
+ *      Batch 4
+ *          Final result engine
+ *          CTM_API.saveDiscovery()
+ *          Page 02 Result screen
  *
- *      1 = Starting
- *      2 = Progressing
- *      3 = Advancing
- *      4 = Achieved
+ *      Batch 5
+ *          Session recovery
+ *          Initialization
+ *          Header integration
+ *          Page 03 continuation
+ *          Production closure
  *
- *      25 indicators × 4 = 100
+ * -----------------------------------------------------------------------------
+ * CORE SCORECARD MODEL
+ * -----------------------------------------------------------------------------
  *
+ *      5 dimensions
+ *      5 indicators per dimension
+ *      25 indicators total
+ *
+ *      Every indicator contains EXACTLY four controlled choices.
+ *
+ *          1 = STARTING™
+ *          2 = PROGRESSING™
+ *          3 = ADVANCING™
+ *          4 = ACHIEVED™
+ *
+ *      Maximum:
+ *
+ *          25 × 4 = 100
+ *
+ * -----------------------------------------------------------------------------
  * IMPORTANT
+ * -----------------------------------------------------------------------------
  *
- *      Users NEVER type financial / lifestyle values.
+ *      Users NEVER type financial or lifestyle values.
  *
- *      Every indicator presents exactly four controlled ranges.
- *      The selected range directly determines the score.
+ *      Every indicator is answered through one of four
+ *      predefined ranges.
+ *
+ *      The selected range determines the score.
+ *
+ *      The representative numeric value is retained only
+ *      for backend compatibility and structured reporting.
  *
  * =============================================================================
  */
@@ -67,6 +100,15 @@ const Page02 = {};
 
 
 /* =============================================================================
+ * VERSION
+ * =============================================================================
+ */
+
+
+Page02.version = '2.2';
+
+
+/* =============================================================================
  * CONFIGURATION
  * =============================================================================
  */
@@ -74,22 +116,59 @@ const Page02 = {};
 
 Page02.CONFIG = {
 
-    pageNumber: 2,
+    pageNumber:
+        2,
 
-    totalPages: 7,
+    totalPages:
+        7,
 
-    nextPage: 'page03.html',
+    pageLabel:
+        '02 / 07',
+
+    experience:
+        'MILLIONAIRE JOURNEY™',
+
+    module:
+        'Middle Class → Millionaire Lifestyle Scorecard™',
+
+    nextPage:
+        'page03.html',
+
+    scoring: {
+
+        minimum:
+            1,
+
+        maximum:
+            4,
+
+        indicatorCount:
+            25,
+
+        dimensionCount:
+            5,
+
+        indicatorsPerDimension:
+            5,
+
+        maximumScore:
+            100
+
+    },
 
     storageKeys: {
+
+        page02Session:
+            'CTM_PATH_PAGE02',
+
+        page02Result:
+            'CTM_PATH_MILLIONAIRE_RESULT',
 
         peopleId:
             'ctm_people_id',
 
         fullName:
-            'ctm_full_name',
-
-        page02Result:
-            'ctm_page02_result'
+            'ctm_full_name'
 
     }
 
@@ -97,42 +176,117 @@ Page02.CONFIG = {
 
 
 /* =============================================================================
- * PAGE STATE
+ * CANONICAL PAGE SCREENS
+ * =============================================================================
+ *
+ * These are logical screen identities.
+ *
+ * Batch 2–5 will map them directly to the frozen Page 02 DOM.
+ *
+ * No compatibility selectors are defined here.
+ *
+ * =============================================================================
+ */
+
+
+Page02.SCREENS = {
+
+    INTRO:
+        'intro',
+
+    KYC:
+        'kyc',
+
+    SCORECARD:
+        'scorecard',
+
+    RESULT:
+        'result'
+
+};
+
+
+/* =============================================================================
+ * RUNTIME STATE
  * =============================================================================
  */
 
 
 Page02.state = {
 
-    peopleId: null,
+    currentScreen:
+        Page02.SCREENS.INTRO,
 
-    currentScreen: 'intro',
+    currentDimension:
+        0,
 
-    currentDimension: 0,
+    clientId:
+        null,
 
-    kyc: {},
+    peopleId:
+        null,
 
-    answers: {},
+    kyc:
+        {},
 
-    result: null,
+    answers:
+        {},
 
-    saving: false
+    result:
+        null,
+
+    registrationResponse:
+        null,
+
+    discoveryResponse:
+        null,
+
+    isRegistering:
+        false,
+
+    isSaving:
+        false,
+
+    initialized:
+        false
 
 };
 
 
 /* =============================================================================
- * OPTION HELPER
+ * OPTION FACTORY
  * =============================================================================
  *
- * value:
- *      Representative numeric value retained for backend compatibility.
+ * score
+ * -----------------------------------------------------------------------------
  *
- * score:
- *      Actual Lifestyle Scorecard™ score.
+ *      Actual Lifestyle Scorecard™ score:
  *
- * label:
- *      User-visible range.
+ *          1
+ *          2
+ *          3
+ *          4
+ *
+ *
+ * label
+ * -----------------------------------------------------------------------------
+ *
+ *      Exact user-visible controlled range.
+ *
+ *
+ * value
+ * -----------------------------------------------------------------------------
+ *
+ *      Representative numeric value.
+ *
+ *      This is NOT independently entered by the user.
+ *
+ *      It exists for:
+ *
+ *          • backend compatibility
+ *          • structured discovery records
+ *          • reporting
+ *          • future analytics
  *
  * =============================================================================
  */
@@ -147,10 +301,10 @@ Page02.option = function(
     return {
 
         score:
-            score,
+            Number(score),
 
         label:
-            label,
+            String(label),
 
         value:
             value
@@ -160,32 +314,94 @@ Page02.option = function(
 };
 
 
-
 /* =============================================================================
  * FOUR-OPTION SCORE STATUS
  * =============================================================================
  */
 
-Page02.getScoreStatus = function(score){
 
-    switch(Number(score)){
+Page02.SCORE_STATUS = {
 
-        case 1:
-            return { tamil:'தொடக்கம்', english:'STARTING™' };
+    1: {
 
-        case 2:
-            return { tamil:'முன்னேற்றம்', english:'PROGRESSING™' };
+        score:
+            1,
 
-        case 3:
-            return { tamil:'மேம்பட்ட நிலை', english:'ADVANCING™' };
+        tamil:
+            'தொடக்கம்',
 
-        case 4:
-            return { tamil:'இலக்கு அடைந்தது', english:'ACHIEVED™' };
+        english:
+            'STARTING™'
 
-        default:
-            return { tamil:'', english:'' };
+    },
+
+    2: {
+
+        score:
+            2,
+
+        tamil:
+            'முன்னேற்றம்',
+
+        english:
+            'PROGRESSING™'
+
+    },
+
+    3: {
+
+        score:
+            3,
+
+        tamil:
+            'மேம்பட்ட நிலை',
+
+        english:
+            'ADVANCING™'
+
+    },
+
+    4: {
+
+        score:
+            4,
+
+        tamil:
+            'இலக்கு அடைந்தது',
+
+        english:
+            'ACHIEVED™'
 
     }
+
+};
+
+
+/* =============================================================================
+ * GET SCORE STATUS
+ * =============================================================================
+ */
+
+
+Page02.getScoreStatus = function(score){
+
+    const normalizedScore =
+        Number(score);
+
+    return (
+        Page02.SCORE_STATUS[
+            normalizedScore
+        ] || {
+            score:
+                0,
+
+            tamil:
+                '',
+
+            english:
+                ''
+        }
+    );
 
 };
 
@@ -194,11 +410,28 @@ Page02.getScoreStatus = function(score){
  * SCORECARD MASTER
  * =============================================================================
  *
- * 25 indicators
- * 5 dimensions
- * 5 indicators per dimension
+ * FROZEN CONTENT
  *
- * Every indicator contains exactly four selectable ranges.
+ *      5 dimensions
+ *      25 indicators
+ *      100 selectable ranges
+ *
+ * IMPORTANT
+ *
+ *      Do not modify:
+ *
+ *          • indicator IDs
+ *          • indicator numbers
+ *          • Tamil labels
+ *          • English labels
+ *          • ideal values
+ *          • targets
+ *          • option ordering
+ *          • option labels
+ *          • representative values
+ *          • score values
+ *
+ *      without deliberately creating a new scorecard version.
  *
  * =============================================================================
  */
@@ -212,6 +445,7 @@ Page02.DIMENSIONS = [
      * WEALTH
      * =========================================================================
      */
+
 
     {
 
@@ -234,6 +468,7 @@ Page02.DIMENSIONS = [
              * 01 — NET WORTH
              * -----------------------------------------------------------------
              */
+
 
             {
 
@@ -291,6 +526,7 @@ Page02.DIMENSIONS = [
              * -----------------------------------------------------------------
              */
 
+
             {
 
                 id:
@@ -347,6 +583,7 @@ Page02.DIMENSIONS = [
              * -----------------------------------------------------------------
              */
 
+
             {
 
                 id:
@@ -402,10 +639,13 @@ Page02.DIMENSIONS = [
              * 08 — HIGH-INTEREST DEBT
              * -----------------------------------------------------------------
              *
-             * Inverse scoring.
+             * INVERSE SCORING
              *
-             * Less debt = higher score.
+             *      Less high-interest debt = higher score.
+             *
+             * -----------------------------------------------------------------
              */
+
 
             {
 
@@ -462,6 +702,7 @@ Page02.DIMENSIONS = [
              * 12 — GOLD OWNERSHIP
              * -----------------------------------------------------------------
              */
+
 
             {
 
@@ -524,6 +765,7 @@ Page02.DIMENSIONS = [
      * =========================================================================
      */
 
+
     {
 
         id:
@@ -545,6 +787,7 @@ Page02.DIMENSIONS = [
              * 02 — ANNUAL PERSONAL INCOME
              * -----------------------------------------------------------------
              */
+
 
             {
 
@@ -602,6 +845,7 @@ Page02.DIMENSIONS = [
              * -----------------------------------------------------------------
              */
 
+
             {
 
                 id:
@@ -657,6 +901,7 @@ Page02.DIMENSIONS = [
              * 04 — PASSIVE / INVESTMENT INCOME
              * -----------------------------------------------------------------
              */
+
 
             {
 
@@ -714,6 +959,7 @@ Page02.DIMENSIONS = [
              * -----------------------------------------------------------------
              */
 
+
             {
 
                 id:
@@ -769,6 +1015,7 @@ Page02.DIMENSIONS = [
              * 11 — INCOME-PRODUCING PROPERTIES
              * -----------------------------------------------------------------
              */
+
 
             {
 
@@ -831,6 +1078,7 @@ Page02.DIMENSIONS = [
      * =========================================================================
      */
 
+
     {
 
         id:
@@ -852,6 +1100,7 @@ Page02.DIMENSIONS = [
              * 09 — LAND OWNERSHIP
              * -----------------------------------------------------------------
              */
+
 
             {
 
@@ -909,6 +1158,7 @@ Page02.DIMENSIONS = [
              * -----------------------------------------------------------------
              */
 
+
             {
 
                 id:
@@ -964,6 +1214,7 @@ Page02.DIMENSIONS = [
              * 13 — PREMIUM AUTOMOBILE
              * -----------------------------------------------------------------
              */
+
 
             {
 
@@ -1021,6 +1272,7 @@ Page02.DIMENSIONS = [
              * -----------------------------------------------------------------
              */
 
+
             {
 
                 id:
@@ -1076,6 +1328,7 @@ Page02.DIMENSIONS = [
              * 18 — HOUSEHOLD SUPPORT
              * -----------------------------------------------------------------
              */
+
 
             {
 
@@ -1138,6 +1391,7 @@ Page02.DIMENSIONS = [
      * =========================================================================
      */
 
+
     {
 
         id:
@@ -1159,6 +1413,7 @@ Page02.DIMENSIONS = [
              * 14 — INTERNATIONAL TRAVEL
              * -----------------------------------------------------------------
              */
+
 
             {
 
@@ -1216,6 +1471,7 @@ Page02.DIMENSIONS = [
              * -----------------------------------------------------------------
              */
 
+
             {
 
                 id:
@@ -1271,6 +1527,7 @@ Page02.DIMENSIONS = [
              * 16 — PREMIUM ACCOMMODATION
              * -----------------------------------------------------------------
              */
+
 
             {
 
@@ -1328,6 +1585,7 @@ Page02.DIMENSIONS = [
              * -----------------------------------------------------------------
              */
 
+
             {
 
                 id:
@@ -1383,6 +1641,7 @@ Page02.DIMENSIONS = [
              * 25 — TIME FREEDOM
              * -----------------------------------------------------------------
              */
+
 
             {
 
@@ -1445,6 +1704,7 @@ Page02.DIMENSIONS = [
      * =========================================================================
      */
 
+
     {
 
         id:
@@ -1466,6 +1726,7 @@ Page02.DIMENSIONS = [
              * 19 — HEALTH & FITNESS INVESTMENT
              * -----------------------------------------------------------------
              */
+
 
             {
 
@@ -1523,6 +1784,7 @@ Page02.DIMENSIONS = [
              * -----------------------------------------------------------------
              */
 
+
             {
 
                 id:
@@ -1578,6 +1840,7 @@ Page02.DIMENSIONS = [
              * 22 — LIFE INSURANCE PROTECTION
              * -----------------------------------------------------------------
              */
+
 
             {
 
@@ -1635,6 +1898,7 @@ Page02.DIMENSIONS = [
              * -----------------------------------------------------------------
              */
 
+
             {
 
                 id:
@@ -1690,6 +1954,7 @@ Page02.DIMENSIONS = [
              * 24 — CHARITY / SOCIAL CONTRIBUTION
              * -----------------------------------------------------------------
              */
+
 
             {
 
@@ -1749,27 +2014,20 @@ Page02.DIMENSIONS = [
 
 
 /* =============================================================================
- * END OF BATCH 1
- *
- * Foundation + complete 25-indicator master definition.
- *
- * DO NOT close or initialize Page02 here.
- * Batch 2 continues immediately after this line.
+ * BATCH 1 — MASTER INTEGRITY HELPERS
  * =============================================================================
- */
-
-/* =============================================================================
- * BATCH 2
  *
- * SCORECARD UTILITIES
- * FOUR-OPTION RENDERING ARCHITECTURE
- * LIVE SCORE HANDLING
+ * These helpers do not touch the DOM.
+ *
+ * Their only responsibility is to expose and validate the frozen
+ * scorecard definition.
+ *
  * =============================================================================
  */
 
 
 /* =============================================================================
- * FLATTEN ALL INDICATORS
+ * GET ALL INDICATORS
  * =============================================================================
  */
 
@@ -1777,9 +2035,9 @@ Page02.DIMENSIONS = [
 Page02.getAllIndicators = function(){
 
     return Page02.DIMENSIONS.reduce(
-        function(all, dimension){
+        function(allIndicators, dimension){
 
-            return all.concat(
+            return allIndicators.concat(
                 dimension.indicators
             );
 
@@ -1790,6 +2048,128 @@ Page02.getAllIndicators = function(){
 };
 
 
+/* =============================================================================
+ * GET DIMENSION COUNT
+ * =============================================================================
+ */
+
+
+Page02.getDimensionCount = function(){
+
+    return Page02.DIMENSIONS.length;
+
+};
+
+
+/* =============================================================================
+ * GET INDICATOR COUNT
+ * =============================================================================
+ */
+
+
+Page02.getIndicatorCount = function(){
+
+    return Page02
+        .getAllIndicators()
+        .length;
+
+};
+
+
+/* =============================================================================
+ * GET OPTION COUNT
+ * =============================================================================
+ */
+
+
+Page02.getOptionCount = function(){
+
+    return Page02
+        .getAllIndicators()
+        .reduce(
+            function(total, indicator){
+
+                return (
+                    total +
+                    indicator.options.length
+                );
+
+            },
+            0
+        );
+
+};
+
+
+/* =============================================================================
+ * GET MAXIMUM SCORE
+ * =============================================================================
+ */
+
+
+Page02.getMaximumScore = function(){
+
+    return (
+        Page02.getIndicatorCount() *
+        Page02.CONFIG.scoring.maximum
+    );
+
+};
+
+
+/* =============================================================================
+ * GET DIMENSION BY INDEX
+ * =============================================================================
+ */
+
+
+Page02.getDimension = function(index){
+
+    const normalizedIndex =
+        Number(index);
+
+    if(
+        !Number.isInteger(normalizedIndex) ||
+        normalizedIndex < 0 ||
+        normalizedIndex >= Page02.DIMENSIONS.length
+    ){
+
+        return null;
+
+    }
+
+    return (
+        Page02.DIMENSIONS[
+            normalizedIndex
+        ] || null
+    );
+
+};
+
+
+/* =============================================================================
+ * GET DIMENSION BY ID
+ * =============================================================================
+ */
+
+
+Page02.getDimensionById = function(dimensionId){
+
+    return (
+        Page02.DIMENSIONS.find(
+            function(dimension){
+
+                return (
+                    dimension.id ===
+                    dimensionId
+                );
+
+            }
+        ) || null
+    );
+
+};
+
 
 /* =============================================================================
  * GET INDICATOR BY ID
@@ -1799,46 +2179,596 @@ Page02.getAllIndicators = function(){
 
 Page02.getIndicator = function(indicatorId){
 
-    return Page02
-        .getAllIndicators()
-        .find(
-            function(indicator){
+    return (
+        Page02
+            .getAllIndicators()
+            .find(
+                function(indicator){
 
-                return indicator.id === indicatorId;
+                    return (
+                        indicator.id ===
+                        indicatorId
+                    );
 
-            }
-        ) || null;
+                }
+            ) || null
+    );
 
 };
 
 
-
 /* =============================================================================
- * GET DIMENSION
+ * GET INDICATOR'S DIMENSION
  * =============================================================================
  */
 
 
-Page02.getDimension = function(index){
+Page02.getIndicatorDimension = function(indicatorId){
 
-    if(
-        index < 0 ||
-        index >= Page02.DIMENSIONS.length
-    ){
+    return (
+        Page02.DIMENSIONS.find(
+            function(dimension){
 
-        return null;
+                return dimension.indicators.some(
+                    function(indicator){
 
-    }
+                        return (
+                            indicator.id ===
+                            indicatorId
+                        );
 
+                    }
+                );
 
-    return Page02.DIMENSIONS[index];
+            }
+        ) || null
+    );
 
 };
 
 
+/* =============================================================================
+ * VALIDATE FROZEN SCORECARD MASTER
+ * =============================================================================
+ *
+ * Expected:
+ *
+ *      5 dimensions
+ *      5 indicators each
+ *      25 indicators
+ *      4 options each
+ *      100 options
+ *      scores 1 / 2 / 3 / 4
+ *      maximum score 100
+ *      unique dimension IDs
+ *      unique indicator IDs
+ *
+ * =============================================================================
+ */
+
+
+Page02.validateMaster = function(){
+
+    const errors = [];
+
+    const dimensions =
+        Page02.DIMENSIONS;
+
+    const indicators =
+        Page02.getAllIndicators();
+
+    const dimensionIds =
+        new Set();
+
+    const indicatorIds =
+        new Set();
+
+
+    /* -------------------------------------------------------------------------
+     * DIMENSION COUNT
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        dimensions.length !==
+        Page02.CONFIG.scoring.dimensionCount
+    ){
+
+        errors.push(
+            'Expected exactly 5 dimensions.'
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * DIMENSION VALIDATION
+     * -------------------------------------------------------------------------
+     */
+
+
+    dimensions.forEach(
+        function(dimension, dimensionIndex){
+
+            if(
+                !dimension ||
+                typeof dimension !== 'object'
+            ){
+
+                errors.push(
+                    'Invalid dimension at index ' +
+                    dimensionIndex +
+                    '.'
+                );
+
+                return;
+
+            }
+
+
+            if(!dimension.id){
+
+                errors.push(
+                    'Dimension at index ' +
+                    dimensionIndex +
+                    ' has no ID.'
+                );
+
+            }
+
+
+            if(
+                dimensionIds.has(
+                    dimension.id
+                )
+            ){
+
+                errors.push(
+                    'Duplicate dimension ID: ' +
+                    dimension.id
+                );
+
+            }
+
+
+            dimensionIds.add(
+                dimension.id
+            );
+
+
+            if(
+                !Array.isArray(
+                    dimension.indicators
+                )
+            ){
+
+                errors.push(
+                    'Dimension ' +
+                    dimension.id +
+                    ' has no indicator array.'
+                );
+
+                return;
+
+            }
+
+
+            if(
+                dimension.indicators.length !==
+                Page02.CONFIG.scoring.indicatorsPerDimension
+            ){
+
+                errors.push(
+                    'Dimension ' +
+                    dimension.id +
+                    ' must contain exactly 5 indicators.'
+                );
+
+            }
+
+        }
+    );
+
+
+    /* -------------------------------------------------------------------------
+     * INDICATOR COUNT
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        indicators.length !==
+        Page02.CONFIG.scoring.indicatorCount
+    ){
+
+        errors.push(
+            'Expected exactly 25 indicators.'
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * INDICATOR VALIDATION
+     * -------------------------------------------------------------------------
+     */
+
+
+    indicators.forEach(
+        function(indicator){
+
+            if(
+                !indicator ||
+                typeof indicator !== 'object'
+            ){
+
+                errors.push(
+                    'Invalid indicator definition.'
+                );
+
+                return;
+
+            }
+
+
+            if(!indicator.id){
+
+                errors.push(
+                    'Indicator has no ID.'
+                );
+
+                return;
+
+            }
+
+
+            if(
+                indicatorIds.has(
+                    indicator.id
+                )
+            ){
+
+                errors.push(
+                    'Duplicate indicator ID: ' +
+                    indicator.id
+                );
+
+            }
+
+
+            indicatorIds.add(
+                indicator.id
+            );
+
+
+            if(
+                !Array.isArray(
+                    indicator.options
+                )
+            ){
+
+                errors.push(
+                    indicator.id +
+                    ' has no options array.'
+                );
+
+                return;
+
+            }
+
+
+            if(
+                indicator.options.length !== 4
+            ){
+
+                errors.push(
+                    indicator.id +
+                    ' must contain exactly four options.'
+                );
+
+                return;
+
+            }
+
+
+            const expectedScores =
+                [1, 2, 3, 4];
+
+
+            indicator.options.forEach(
+                function(option, optionIndex){
+
+                    if(
+                        !option ||
+                        typeof option !== 'object'
+                    ){
+
+                        errors.push(
+                            indicator.id +
+                            ' contains an invalid option.'
+                        );
+
+                        return;
+
+                    }
+
+
+                    if(
+                        Number(option.score) !==
+                        expectedScores[optionIndex]
+                    ){
+
+                        errors.push(
+                            indicator.id +
+                            ' option ' +
+                            (optionIndex + 1) +
+                            ' must have score ' +
+                            expectedScores[optionIndex] +
+                            '.'
+                        );
+
+                    }
+
+
+                    if(
+                        typeof option.label !==
+                        'string' ||
+                        !option.label.trim()
+                    ){
+
+                        errors.push(
+                            indicator.id +
+                            ' option ' +
+                            (optionIndex + 1) +
+                            ' has no label.'
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    /* -------------------------------------------------------------------------
+     * TOTAL OPTION COUNT
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        Page02.getOptionCount() !== 100
+    ){
+
+        errors.push(
+            'Expected exactly 100 controlled score ranges.'
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * MAXIMUM SCORE
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        Page02.getMaximumScore() !== 100
+    ){
+
+        errors.push(
+            'Maximum Lifestyle Scorecard™ score must equal 100.'
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * RESULT
+     * -------------------------------------------------------------------------
+     */
+
+
+    return {
+
+        valid:
+            errors.length === 0,
+
+        dimensions:
+            dimensions.length,
+
+        indicators:
+            indicators.length,
+
+        options:
+            Page02.getOptionCount(),
+
+        maximumScore:
+            Page02.getMaximumScore(),
+
+        errors:
+            errors
+
+    };
+
+};
+
 
 /* =============================================================================
- * SAFE DOM LOOKUP
+ * MASTER DEBUG INFORMATION
+ * =============================================================================
+ *
+ * Browser console after the complete v2.2 file is loaded:
+ *
+ *      Page02.masterInfo()
+ *
+ * Expected:
+ *
+ *      version         2.2
+ *      dimensions      5
+ *      indicators      25
+ *      options         100
+ *      maximumScore    100
+ *      valid           true
+ *
+ * =============================================================================
+ */
+
+
+Page02.masterInfo = function(){
+
+    const validation =
+        Page02.validateMaster();
+
+    return {
+
+        application:
+            'CTM PATH™ MILLIONAIRES™',
+
+        experience:
+            'Guided Journey™',
+
+        page:
+            Page02.CONFIG.pageLabel,
+
+        module:
+            Page02.CONFIG.module,
+
+        version:
+            Page02.version,
+
+        dimensions:
+            validation.dimensions,
+
+        indicators:
+            validation.indicators,
+
+        options:
+            validation.options,
+
+        maximumScore:
+            validation.maximumScore,
+
+        valid:
+            validation.valid,
+
+        errors:
+            validation.errors
+
+    };
+
+};
+
+
+/* =============================================================================
+ * END OF BATCH 1
+ * =============================================================================
+ *
+ * CTM PATH™ PAGE 02 v2.2
+ *
+ * COMPLETE IN THIS BATCH
+ *
+ *      ✓ Canonical Page02 namespace
+ *      ✓ v2.2 configuration
+ *      ✓ Canonical screen identities
+ *      ✓ Clean runtime state
+ *      ✓ Four-level scoring model
+ *
+ *      ✓ Dimension 01 — Wealth
+ *      ✓ Dimension 02 — Income & Cash Flow
+ *      ✓ Dimension 03 — Assets
+ *      ✓ Dimension 04 — Lifestyle & Freedom
+ *      ✓ Dimension 05 — Protection & Contribution
+ *
+ *      ✓ 25 frozen indicators
+ *      ✓ 4 frozen ranges per indicator
+ *      ✓ 100 controlled ranges
+ *      ✓ Maximum score = 100
+ *
+ *      ✓ Master lookup helpers
+ *      ✓ Master integrity validator
+ *      ✓ Duplicate-ID validation
+ *      ✓ Four-option validation
+ *      ✓ Score-order validation
+ *      ✓ Maximum-score validation
+ *
+ *
+ * IMPORTANT
+ *
+ *      DO NOT initialize Page02 here.
+ *
+ *      DO NOT attach DOM listeners here.
+ *
+ *      DO NOT render scorecard HTML here.
+ *
+ *      DO NOT call CTM_API here.
+ *
+ *      DO NOT expose window.Page02 here.
+ *
+ *
+ * Batch 2 continues immediately below this line.
+ *
+ *
+ * NEXT
+ *
+ *      BATCH 2
+ *
+ *      CANONICAL FOUR-OPTION RENDERER
+ *      ANSWER SELECTION
+ *      LIVE SCORING
+ *      DIMENSION PROGRESS
+ *
+ * =============================================================================
+ */
+
+/* =============================================================================
+ * BATCH 2
+ *
+ * CANONICAL FOUR-OPTION RENDERER
+ * ANSWER SELECTION
+ * LIVE SCORING
+ * DIMENSION PROGRESS
+ * =============================================================================
+ *
+ * RESPONSIBILITIES
+ *
+ *      • Flatten and enrich scorecard indicators
+ *      • Render one active dimension at a time
+ *      • Render five indicators per dimension
+ *      • Render exactly four options per indicator
+ *      • Restore previously selected answers
+ *      • Capture option selections
+ *      • Maintain strong selected-state feedback
+ *      • Update indicator score immediately
+ *      • Calculate dimension score
+ *      • Calculate total live score
+ *      • Calculate answered / remaining indicators
+ *      • Update scorecard progress
+ *      • Control dimension navigation availability
+ *
+ * IMPORTANT
+ *
+ *      This batch does NOT:
+ *
+ *          • Register the client
+ *          • Call CTM_API.register()
+ *          • Save discovery
+ *          • Call CTM_API.saveDiscovery()
+ *          • Calculate final result classification
+ *          • Navigate to Page 03
+ *
+ *      Those responsibilities belong to later batches.
+ *
+ * =============================================================================
+ */
+
+
+/* =============================================================================
+ * DOM LOOKUP
  * =============================================================================
  */
 
@@ -1850,14 +2780,13 @@ Page02.el = function(id){
 };
 
 
-
 /* =============================================================================
- * ESCAPE HTML
+ * SAFE TEXT
  * =============================================================================
  */
 
 
-Page02.escapeHTML = function(value){
+Page02.safeText = function(value){
 
     if(
         value === null ||
@@ -1868,33 +2797,193 @@ Page02.escapeHTML = function(value){
 
     }
 
-
-    return String(value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+    return String(value);
 
 };
 
 
-
 /* =============================================================================
- * FORMAT INDICATOR NUMBER
+ * ESCAPE HTML
  * =============================================================================
  */
 
 
-Page02.formatIndicatorNumber = function(number){
+Page02.escapeHTML = function(value){
 
-    return String(number).padStart(
-        2,
-        '0'
+    return Page02
+        .safeText(value)
+        .replace(
+            /&/g,
+            '&amp;'
+        )
+        .replace(
+            /</g,
+            '&lt;'
+        )
+        .replace(
+            />/g,
+            '&gt;'
+        )
+        .replace(
+            /"/g,
+            '&quot;'
+        )
+        .replace(
+            /'/g,
+            '&#039;'
+        );
+
+};
+
+
+/* =============================================================================
+ * CLAMP
+ * =============================================================================
+ */
+
+
+Page02.clamp = function(
+    value,
+    minimum,
+    maximum
+){
+
+    const numericValue =
+        Number(value);
+
+    if(
+        !Number.isFinite(
+            numericValue
+        )
+    ){
+
+        return minimum;
+
+    }
+
+
+    return Math.min(
+        maximum,
+        Math.max(
+            minimum,
+            numericValue
+        )
     );
 
 };
 
+
+/* =============================================================================
+ * GET ALL INDICATORS WITH DIMENSION METADATA
+ * =============================================================================
+ *
+ * Batch 1 exposes getAllIndicators().
+ *
+ * This helper adds dimension identity without mutating
+ * the frozen master definition.
+ *
+ * =============================================================================
+ */
+
+
+Page02.getScorecardIndicators = function(){
+
+    const indicators = [];
+
+
+    Page02.DIMENSIONS.forEach(
+        function(
+            dimension,
+            dimensionIndex
+        ){
+
+            dimension.indicators.forEach(
+                function(
+                    indicator,
+                    indicatorIndex
+                ){
+
+                    indicators.push({
+
+                        id:
+                            indicator.id,
+
+                        number:
+                            indicator.number,
+
+                        tamil:
+                            indicator.tamil,
+
+                        english:
+                            indicator.english,
+
+                        ideal:
+                            indicator.ideal,
+
+                        target:
+                            indicator.target,
+
+                        options:
+                            indicator.options,
+
+                        dimensionId:
+                            dimension.id,
+
+                        dimensionNumber:
+                            dimension.number,
+
+                        dimensionTamil:
+                            dimension.tamil,
+
+                        dimensionEnglish:
+                            dimension.english,
+
+                        dimensionIndex:
+                            dimensionIndex,
+
+                        indicatorIndex:
+                            indicatorIndex
+
+                    });
+
+                }
+            );
+
+        }
+    );
+
+
+    return indicators;
+
+};
+
+
+/* =============================================================================
+ * GET ENRICHED INDICATOR
+ * =============================================================================
+ */
+
+
+Page02.getScorecardIndicator = function(
+    indicatorId
+){
+
+    return (
+        Page02
+            .getScorecardIndicators()
+            .find(
+                function(indicator){
+
+                    return (
+                        indicator.id ===
+                        indicatorId
+                    );
+
+                }
+            ) || null
+    );
+
+};
 
 
 /* =============================================================================
@@ -1903,12 +2992,17 @@ Page02.formatIndicatorNumber = function(number){
  */
 
 
-Page02.getAnswer = function(indicatorId){
+Page02.getAnswer = function(
+    indicatorId
+){
 
-    return Page02.state.answers[indicatorId] || null;
+    return (
+        Page02.state.answers[
+            indicatorId
+        ] || null
+    );
 
 };
-
 
 
 /* =============================================================================
@@ -1917,24 +3011,42 @@ Page02.getAnswer = function(indicatorId){
  */
 
 
-Page02.hasAnswer = function(indicatorId){
+Page02.hasAnswer = function(
+    indicatorId
+){
 
     const answer =
-        Page02.getAnswer(indicatorId);
+        Page02.getAnswer(
+            indicatorId
+        );
 
 
-    return Boolean(
-        answer &&
-        Number(answer.score) >= 1 &&
-        Number(answer.score) <= 4
+    if(!answer){
+
+        return false;
+
+    }
+
+
+    const score =
+        Number(
+            answer.score
+        );
+
+
+    return (
+        Number.isFinite(score) &&
+        score >=
+            Page02.CONFIG.scoring.minimum &&
+        score <=
+            Page02.CONFIG.scoring.maximum
     );
 
 };
 
 
-
 /* =============================================================================
- * GET ANSWERED INDICATOR COUNT
+ * GET ANSWERED COUNT
  * =============================================================================
  */
 
@@ -1942,43 +3054,63 @@ Page02.hasAnswer = function(indicatorId){
 Page02.getAnsweredCount = function(){
 
     return Page02
-        .getAllIndicators()
-        .filter(
-            function(indicator){
+        .getScorecardIndicators()
+        .reduce(
+            function(
+                count,
+                indicator
+            ){
 
-                return Page02.hasAnswer(
-                    indicator.id
+                return (
+                    count +
+                    (
+                        Page02.hasAnswer(
+                            indicator.id
+                        )
+                            ? 1
+                            : 0
+                    )
                 );
 
-            }
-        )
-        .length;
+            },
+            0
+        );
 
 };
 
 
-
 /* =============================================================================
- * CALCULATE CURRENT TOTAL SCORE
- * =============================================================================
- *
- * Maximum:
- *
- *      25 × 4 = 100
- *
- * Because each selected option scores from 1–4,
- * the final raw total is already the score out of 100.
- *
+ * GET REMAINING COUNT
  * =============================================================================
  */
 
 
-Page02.calculateTotalScore = function(){
+Page02.getRemainingCount = function(){
+
+    return Math.max(
+        0,
+        Page02.CONFIG.scoring.indicatorCount -
+        Page02.getAnsweredCount()
+    );
+
+};
+
+
+/* =============================================================================
+ * GET RAW TOTAL SCORE
+ * =============================================================================
+ */
+
+
+Page02.getTotalScore = function(){
 
     return Page02
-        .getAllIndicators()
+        .getScorecardIndicators()
         .reduce(
-            function(total, indicator){
+            function(
+                total,
+                indicator
+            ){
 
                 const answer =
                     Page02.getAnswer(
@@ -1986,10 +3118,22 @@ Page02.calculateTotalScore = function(){
                     );
 
 
+                if(!answer){
+
+                    return total;
+
+                }
+
+
+                const score =
+                    Number(
+                        answer.score
+                    );
+
+
                 if(
-                    !answer ||
                     !Number.isFinite(
-                        Number(answer.score)
+                        score
                     )
                 ){
 
@@ -2000,7 +3144,11 @@ Page02.calculateTotalScore = function(){
 
                 return (
                     total +
-                    Number(answer.score)
+                    Page02.clamp(
+                        score,
+                        Page02.CONFIG.scoring.minimum,
+                        Page02.CONFIG.scoring.maximum
+                    )
                 );
 
             },
@@ -2010,49 +3158,123 @@ Page02.calculateTotalScore = function(){
 };
 
 
-
 /* =============================================================================
- * CALCULATE MAXIMUM SCORE
+ * GET MAXIMUM POSSIBLE SCORE FOR ANSWERED INDICATORS
  * =============================================================================
  */
 
 
-Page02.getMaximumScore = function(){
+Page02.getAnsweredMaximumScore = function(){
 
     return (
-        Page02.getAllIndicators().length *
-        4
+        Page02.getAnsweredCount() *
+        Page02.CONFIG.scoring.maximum
     );
 
 };
 
 
-
 /* =============================================================================
- * CALCULATE SCORE GAP
+ * GET TOTAL GAP
+ * =============================================================================
+ *
+ * Maximum final score = 100.
+ *
+ * The live gap is therefore:
+ *
+ *      100 - current score
+ *
+ * Unanswered indicators remain part of the gap.
+ *
  * =============================================================================
  */
 
 
-Page02.calculateScoreGap = function(){
+Page02.getTotalGap = function(){
 
     return Math.max(
         0,
-        Page02.getMaximumScore() -
-        Page02.calculateTotalScore()
+        Page02.CONFIG.scoring.maximumScore -
+        Page02.getTotalScore()
     );
 
 };
 
 
-
 /* =============================================================================
- * CALCULATE DIMENSION SCORE
+ * GET COMPLETION PERCENTAGE
  * =============================================================================
  */
 
 
-Page02.calculateDimensionScore = function(dimensionIndex){
+Page02.getCompletionPercentage = function(){
+
+    const total =
+        Page02.CONFIG.scoring.indicatorCount;
+
+
+    if(total <= 0){
+
+        return 0;
+
+    }
+
+
+    return Math.round(
+        (
+            Page02.getAnsweredCount() /
+            total
+        ) * 100
+    );
+
+};
+
+
+/* =============================================================================
+ * GET SCORE PERCENTAGE
+ * =============================================================================
+ *
+ * Because the final maximum score is exactly 100,
+ * the total raw score is already the final percentage.
+ *
+ * The explicit calculation is retained for architecture clarity.
+ *
+ * =============================================================================
+ */
+
+
+Page02.getScorePercentage = function(){
+
+    const maximum =
+        Page02.CONFIG.scoring.maximumScore;
+
+
+    if(maximum <= 0){
+
+        return 0;
+
+    }
+
+
+    return Math.round(
+        (
+            Page02.getTotalScore() /
+            maximum
+        ) * 100
+    );
+
+};
+
+
+/* =============================================================================
+ * GET DIMENSION ANSWERED COUNT
+ * =============================================================================
+ */
+
+
+Page02.getDimensionAnsweredCount = function(
+    dimensionIndex
+){
 
     const dimension =
         Page02.getDimension(
@@ -2068,7 +3290,57 @@ Page02.calculateDimensionScore = function(dimensionIndex){
 
 
     return dimension.indicators.reduce(
-        function(total, indicator){
+        function(
+            count,
+            indicator
+        ){
+
+            return (
+                count +
+                (
+                    Page02.hasAnswer(
+                        indicator.id
+                    )
+                        ? 1
+                        : 0
+                )
+            );
+
+        },
+        0
+    );
+
+};
+
+
+/* =============================================================================
+ * GET DIMENSION SCORE
+ * =============================================================================
+ */
+
+
+Page02.getDimensionScore = function(
+    dimensionIndex
+){
+
+    const dimension =
+        Page02.getDimension(
+            dimensionIndex
+        );
+
+
+    if(!dimension){
+
+        return 0;
+
+    }
+
+
+    return dimension.indicators.reduce(
+        function(
+            total,
+            indicator
+        ){
 
             const answer =
                 Page02.getAnswer(
@@ -2083,9 +3355,30 @@ Page02.calculateDimensionScore = function(dimensionIndex){
             }
 
 
+            const score =
+                Number(
+                    answer.score
+                );
+
+
+            if(
+                !Number.isFinite(
+                    score
+                )
+            ){
+
+                return total;
+
+            }
+
+
             return (
                 total +
-                Number(answer.score || 0)
+                Page02.clamp(
+                    score,
+                    1,
+                    4
+                )
             );
 
         },
@@ -2095,129 +3388,135 @@ Page02.calculateDimensionScore = function(dimensionIndex){
 };
 
 
-
 /* =============================================================================
- * DIMENSION COMPLETION
+ * GET DIMENSION MAXIMUM SCORE
  * =============================================================================
  */
 
 
-Page02.isDimensionComplete = function(dimensionIndex){
+Page02.getDimensionMaximumScore = function(){
 
-    const dimension =
-        Page02.getDimension(
-            dimensionIndex
-        );
-
-
-    if(!dimension){
-
-        return false;
-
-    }
-
-
-    return dimension.indicators.every(
-        function(indicator){
-
-            return Page02.hasAnswer(
-                indicator.id
-            );
-
-        }
+    return (
+        Page02.CONFIG.scoring.indicatorsPerDimension *
+        Page02.CONFIG.scoring.maximum
     );
 
 };
 
 
-
 /* =============================================================================
- * FIND FIRST UNANSWERED INDICATOR
+ * GET DIMENSION GAP
  * =============================================================================
  */
 
 
-Page02.getFirstUnansweredIndicator = function(dimensionIndex){
+Page02.getDimensionGap = function(
+    dimensionIndex
+){
 
-    const dimension =
-        Page02.getDimension(
+    return Math.max(
+        0,
+        Page02.getDimensionMaximumScore() -
+        Page02.getDimensionScore(
+            dimensionIndex
+        )
+    );
+
+};
+
+
+/* =============================================================================
+ * GET DIMENSION COMPLETION
+ * =============================================================================
+ */
+
+
+Page02.getDimensionCompletion = function(
+    dimensionIndex
+){
+
+    const answered =
+        Page02.getDimensionAnsweredCount(
             dimensionIndex
         );
 
 
-    if(!dimension){
-
-        return null;
-
-    }
-
-
-    return dimension.indicators.find(
-        function(indicator){
-
-            return !Page02.hasAnswer(
-                indicator.id
-            );
-
-        }
-    ) || null;
+    return Math.round(
+        (
+            answered /
+            Page02.CONFIG.scoring.indicatorsPerDimension
+        ) * 100
+    );
 
 };
 
 
-
 /* =============================================================================
- * SCORE STATUS CLASS
+ * IS DIMENSION COMPLETE
  * =============================================================================
  */
 
 
-Page02.getScoreClass = function(score){
+Page02.isDimensionComplete = function(
+    dimensionIndex
+){
 
-    switch(Number(score)){
-
-        case 1:
-            return 'score-starting';
-
-        case 2:
-            return 'score-progressing';
-
-        case 3:
-            return 'score-advancing';
-
-        case 4:
-            return 'score-achieved';
-
-        default:
-            return 'score-unanswered';
-
-    }
+    return (
+        Page02.getDimensionAnsweredCount(
+            dimensionIndex
+        ) ===
+        Page02.CONFIG.scoring.indicatorsPerDimension
+    );
 
 };
 
+
+/* =============================================================================
+ * IS SCORECARD COMPLETE
+ * =============================================================================
+ */
+
+
+Page02.isScorecardComplete = function(){
+
+    return (
+        Page02.getAnsweredCount() ===
+        Page02.CONFIG.scoring.indicatorCount
+    );
+
+};
 
 
 /* =============================================================================
  * CREATE OPTION BUTTON
  * =============================================================================
  *
- * DOM ARCHITECTURE
+ * Canonical option architecture:
  *
- * .score-option
- *      .score-option-number
- *      .score-option-content
- *          .score-option-range
- *          .score-option-status
+ *      button.score-option
  *
- * CSS can display:
+ *          .score-option__score
+ *              1 / 2 / 3 / 4
  *
- * Desktop:
+ *          .score-option__body
  *
- *      2 columns × 2 rows
+ *              .score-option__range
+ *              .score-option__status
  *
- * Mobile:
+ * This structure is intentionally simple.
  *
- *      1 option per row
+ * page02.css controls whether the four choices appear:
+ *
+ *      Desktop:
+ *          four columns
+ *
+ *      Tablet:
+ *          two rows × two columns
+ *
+ *      Mobile:
+ *          one option per row
+ *
+ * JavaScript does NOT control responsive layout.
  *
  * =============================================================================
  */
@@ -2225,20 +3524,13 @@ Page02.getScoreClass = function(score){
 
 Page02.createOptionButton = function(
     indicator,
-    option
+    option,
+    optionIndex
 ){
 
-    const selectedAnswer =
-        Page02.getAnswer(
-            indicator.id
-        );
-
-
-    const selected =
-        Boolean(
-            selectedAnswer &&
-            Number(selectedAnswer.score) ===
-            Number(option.score)
+    const button =
+        document.createElement(
+            'button'
         );
 
 
@@ -2248,9 +3540,21 @@ Page02.createOptionButton = function(
         );
 
 
-    const button =
-        document.createElement(
-            'button'
+    const currentAnswer =
+        Page02.getAnswer(
+            indicator.id
+        );
+
+
+    const selected =
+        Boolean(
+            currentAnswer &&
+            Number(
+                currentAnswer.score
+            ) ===
+            Number(
+                option.score
+            )
         );
 
 
@@ -2259,17 +3563,16 @@ Page02.createOptionButton = function(
 
 
     button.className =
-        [
-            'score-option',
-            Page02.getScoreClass(
-                option.score
-            ),
-            selected
-                ? 'is-selected'
-                : ''
-        ]
-        .filter(Boolean)
-        .join(' ');
+        'score-option';
+
+
+    if(selected){
+
+        button.classList.add(
+            'is-selected'
+        );
+
+    }
 
 
     button.dataset.indicator =
@@ -2277,11 +3580,15 @@ Page02.createOptionButton = function(
 
 
     button.dataset.score =
-        String(option.score);
+        String(
+            option.score
+        );
 
 
-    button.dataset.value =
-        String(option.value);
+    button.dataset.optionIndex =
+        String(
+            optionIndex
+        );
 
 
     button.setAttribute(
@@ -2294,44 +3601,55 @@ Page02.createOptionButton = function(
 
     button.setAttribute(
         'aria-label',
-        option.label +
-        ' — ' +
-        status.english +
-        ' — Score ' +
-        option.score +
-        ' out of 4'
+        (
+            indicator.english +
+            ': ' +
+            option.label +
+            '. Score ' +
+            option.score +
+            ' of 4. ' +
+            status.english
+        )
     );
 
 
     button.innerHTML = `
 
-        <span class="score-option-number">
+        <span class="score-option__score">
 
-            ${Page02.escapeHTML(option.score)}
+            ${Page02.escapeHTML(
+                option.score
+            )}
 
         </span>
 
 
-        <span class="score-option-content">
+        <span class="score-option__body">
 
-            <span class="score-option-range">
+            <span class="score-option__range">
 
-                ${Page02.escapeHTML(option.label)}
+                ${Page02.escapeHTML(
+                    option.label
+                )}
 
             </span>
 
 
-            <span class="score-option-status">
+            <span class="score-option__status">
 
-                <span class="score-option-status-tamil">
+                <span class="score-option__status-tamil">
 
-                    ${Page02.escapeHTML(status.tamil)}
+                    ${Page02.escapeHTML(
+                        status.tamil
+                    )}
 
                 </span>
 
-                <span class="score-option-status-english">
+                <span class="score-option__status-english">
 
-                    ${Page02.escapeHTML(status.english)}
+                    ${Page02.escapeHTML(
+                        status.english
+                    )}
 
                 </span>
 
@@ -2360,159 +3678,102 @@ Page02.createOptionButton = function(
 };
 
 
-
 /* =============================================================================
- * CREATE INDICATOR CARD
+ * CREATE QUESTION CARD
  * =============================================================================
  */
 
 
-Page02.createIndicatorCard = function(indicator){
+Page02.createQuestionCard = function(
+    indicator
+){
 
-    const answer =
-        Page02.getAnswer(
-            indicator.id
-        );
-
-
-    const article =
+    const card =
         document.createElement(
             'article'
         );
 
 
-    article.className =
+    card.className =
         'scorecard-question';
 
 
-    article.dataset.indicator =
+    card.dataset.indicator =
         indicator.id;
 
 
-    article.id =
-        'indicator-' +
-        indicator.id;
-
-
-    /* -------------------------------------------------------------------------
-     * NUMBER
-     * -------------------------------------------------------------------------
-     */
-
-
-    const number =
-        document.createElement(
-            'div'
-        );
-
-
-    number.className =
-        'question-number';
-
-
-    number.textContent =
-        Page02.formatIndicatorNumber(
+    card.dataset.questionNumber =
+        String(
             indicator.number
         );
 
 
-    article.appendChild(
-        number
-    );
-
-
-    /* -------------------------------------------------------------------------
-     * TAMIL TITLE
-     * -------------------------------------------------------------------------
-     */
-
-
-    const tamilTitle =
-        document.createElement(
-            'h3'
-        );
-
-
-    tamilTitle.className =
-        'question-title-tamil';
-
-
-    tamilTitle.textContent =
-        indicator.tamil;
-
-
-    article.appendChild(
-        tamilTitle
-    );
-
-
-    /* -------------------------------------------------------------------------
-     * ENGLISH TITLE
-     * -------------------------------------------------------------------------
-     */
-
-
-    const englishTitle =
-        document.createElement(
-            'p'
-        );
-
-
-    englishTitle.className =
-        'question-title-english';
-
-
-    englishTitle.textContent =
-        indicator.english;
-
-
-    article.appendChild(
-        englishTitle
-    );
-
-
-    /* -------------------------------------------------------------------------
-     * CURRENT REALITY LABEL
-     * -------------------------------------------------------------------------
-     */
-
-
-    const prompt =
+    const heading =
         document.createElement(
             'div'
         );
 
 
-    prompt.className =
-        'question-prompt';
+    heading.className =
+        'scorecard-question__heading';
 
 
-    prompt.innerHTML = `
+    heading.innerHTML = `
 
-        <span class="question-prompt-tamil">
+        <div class="scorecard-question__identity">
 
-            உங்கள் தற்போதைய நிலையைத் தேர்ந்தெடுக்கவும்
+            <span class="scorecard-question__number">
 
-        </span>
+                ${Page02.escapeHTML(
+                    indicator.number
+                )}
 
-        <span class="question-prompt-english">
+            </span>
 
-            SELECT YOUR CURRENT REALITY
 
-        </span>
+            <div class="scorecard-question__titles">
+
+                <h3 class="scorecard-question__tamil">
+
+                    ${Page02.escapeHTML(
+                        indicator.tamil
+                    )}
+
+                </h3>
+
+
+                <p class="scorecard-question__english">
+
+                    ${Page02.escapeHTML(
+                        indicator.english
+                    )}
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="scorecard-question__ideal">
+
+            <span class="scorecard-question__ideal-label">
+
+                IDEAL
+
+            </span>
+
+            <strong class="scorecard-question__ideal-value">
+
+                ${Page02.escapeHTML(
+                    indicator.ideal
+                )}
+
+            </strong>
+
+        </div>
 
     `;
-
-
-    article.appendChild(
-        prompt
-    );
-
-
-    /* -------------------------------------------------------------------------
-     * FOUR OPTION GRID
-     * -------------------------------------------------------------------------
-     */
 
 
     const options =
@@ -2533,78 +3794,26 @@ Page02.createIndicatorCard = function(indicator){
 
     options.setAttribute(
         'aria-label',
-        indicator.english +
-        ' options'
+        indicator.english
     );
 
 
     indicator.options.forEach(
-        function(option){
+        function(
+            option,
+            optionIndex
+        ){
 
             options.appendChild(
                 Page02.createOptionButton(
                     indicator,
-                    option
+                    option,
+                    optionIndex
                 )
             );
 
         }
     );
-
-
-    article.appendChild(
-        options
-    );
-
-
-    /* -------------------------------------------------------------------------
-     * BENCHMARK
-     * -------------------------------------------------------------------------
-     */
-
-
-    const benchmark =
-        document.createElement(
-            'div'
-        );
-
-
-    benchmark.className =
-        'question-benchmark';
-
-
-    benchmark.innerHTML = `
-
-        <span class="benchmark-label">
-
-            Millionaire Ideal™
-
-        </span>
-
-        <span class="benchmark-caption">
-
-            BENCHMARK
-
-        </span>
-
-        <strong class="benchmark-value">
-
-            ${Page02.escapeHTML(indicator.ideal)}
-
-        </strong>
-
-    `;
-
-
-    article.appendChild(
-        benchmark
-    );
-
-
-    /* -------------------------------------------------------------------------
-     * LIVE SCORE
-     * -------------------------------------------------------------------------
-     */
 
 
     const score =
@@ -2614,15 +3823,7 @@ Page02.createIndicatorCard = function(indicator){
 
 
     score.className =
-        [
-            'question-score',
-            answer
-                ? Page02.getScoreClass(
-                    answer.score
-                )
-                : 'score-unanswered'
-        ]
-        .join(' ');
+        'scorecard-question__score';
 
 
     score.dataset.scoreFor =
@@ -2631,33 +3832,44 @@ Page02.createIndicatorCard = function(indicator){
 
     Page02.populateScoreDisplay(
         score,
-        answer
+        Page02.getAnswer(
+            indicator.id
+        )
     );
 
 
-    article.appendChild(
+    card.appendChild(
+        heading
+    );
+
+
+    card.appendChild(
+        options
+    );
+
+
+    card.appendChild(
         score
     );
 
 
-    return article;
+    return card;
 
 };
 
 
-
 /* =============================================================================
- * POPULATE LIVE SCORE DISPLAY
+ * POPULATE INDICATOR SCORE DISPLAY
  * =============================================================================
  */
 
 
 Page02.populateScoreDisplay = function(
-    scoreElement,
+    element,
     answer
 ){
 
-    if(!scoreElement){
+    if(!element){
 
         return;
 
@@ -2666,23 +3878,30 @@ Page02.populateScoreDisplay = function(
 
     if(!answer){
 
-        scoreElement.className =
-            'question-score score-unanswered';
+        element.classList.remove(
+            'is-answered'
+        );
 
 
-        scoreElement.innerHTML = `
+        element.innerHTML = `
 
-            <span class="score-label">
+            <span class="scorecard-question__score-label">
 
                 SCORE
 
             </span>
 
-            <strong class="score-value">
+            <strong class="scorecard-question__score-value">
 
-                — / 4
+                —
 
             </strong>
+
+            <span class="scorecard-question__score-max">
+
+                / 4
+
+            </span>
 
         `;
 
@@ -2693,7 +3912,9 @@ Page02.populateScoreDisplay = function(
 
 
     const score =
-        Number(answer.score);
+        Number(
+            answer.score
+        );
 
 
     const status =
@@ -2702,46 +3923,41 @@ Page02.populateScoreDisplay = function(
         );
 
 
-    scoreElement.className =
-        'question-score ' +
-        Page02.getScoreClass(
-            score
-        );
+    element.classList.add(
+        'is-answered'
+    );
 
 
-    scoreElement.innerHTML = `
+    element.innerHTML = `
 
-        <span class="score-label">
+        <span class="scorecard-question__score-label">
 
             SCORE
 
         </span>
 
-        <strong class="score-value">
 
-            ${Page02.escapeHTML(score)} / 4
+        <strong class="scorecard-question__score-value">
+
+            ${Page02.escapeHTML(
+                score
+            )}
 
         </strong>
 
-        <span class="score-status">
 
-            <span class="score-status-tamil">
+        <span class="scorecard-question__score-max">
 
-                ${Page02.escapeHTML(status.tamil)}
+            / 4
 
-            </span>
+        </span>
 
-            <span class="score-status-divider">
 
-                ·
+        <span class="scorecard-question__score-status">
 
-            </span>
-
-            <span class="score-status-english">
-
-                ${Page02.escapeHTML(status.english)}
-
-            </span>
+            ${Page02.escapeHTML(
+                status.english
+            )}
 
         </span>
 
@@ -2749,6 +3965,134 @@ Page02.populateScoreDisplay = function(
 
 };
 
+
+/* =============================================================================
+ * RENDER CURRENT DIMENSION
+ * =============================================================================
+ */
+
+
+Page02.renderCurrentDimension = function(){
+
+    const dimension =
+        Page02.getDimension(
+            Page02.state.currentDimension
+        );
+
+
+    if(!dimension){
+
+        console.error(
+            'CTM PATH™ Page 02: Invalid dimension index.',
+            Page02.state.currentDimension
+        );
+
+        return;
+
+    }
+
+
+    const container =
+        Page02.el(
+            'dimension-questions'
+        );
+
+
+    if(!container){
+
+        console.error(
+            'CTM PATH™ Page 02: #dimension-questions was not found.'
+        );
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * DIMENSION IDENTITY
+     * -------------------------------------------------------------------------
+     */
+
+
+    const numberElement =
+        Page02.el(
+            'dimension-number'
+        );
+
+
+    const tamilElement =
+        Page02.el(
+            'dimension-title-tamil'
+        );
+
+
+    const englishElement =
+        Page02.el(
+            'dimension-title-english'
+        );
+
+
+    if(numberElement){
+
+        numberElement.textContent =
+            dimension.number;
+
+    }
+
+
+    if(tamilElement){
+
+        tamilElement.textContent =
+            dimension.tamil;
+
+    }
+
+
+    if(englishElement){
+
+        englishElement.textContent =
+            dimension.english;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * QUESTIONS
+     * -------------------------------------------------------------------------
+     */
+
+
+    container.innerHTML =
+        '';
+
+
+    dimension.indicators.forEach(
+        function(indicator){
+
+            container.appendChild(
+                Page02.createQuestionCard(
+                    indicator
+                )
+            );
+
+        }
+    );
+
+
+    /* -------------------------------------------------------------------------
+     * LIVE STATE
+     * -------------------------------------------------------------------------
+     */
+
+
+    Page02.updateLiveScore();
+
+    Page02.updateDimensionProgress();
+
+    Page02.updateDimensionNavigation();
+
+};
 
 
 /* =============================================================================
@@ -2763,7 +4107,7 @@ Page02.selectOption = function(
 ){
 
     const indicator =
-        Page02.getIndicator(
+        Page02.getScorecardIndicator(
             indicatorId
         );
 
@@ -2780,20 +4124,28 @@ Page02.selectOption = function(
     }
 
 
-    const selectedOption =
-        indicator.options.find(
+    const normalizedScore =
+        Number(
+            score
+        );
+
+
+    const optionIndex =
+        indicator.options.findIndex(
             function(option){
 
                 return (
-                    Number(option.score) ===
-                    Number(score)
+                    Number(
+                        option.score
+                    ) ===
+                    normalizedScore
                 );
 
             }
         );
 
 
-    if(!selectedOption){
+    if(optionIndex < 0){
 
         console.error(
             'CTM PATH™ Invalid score option:',
@@ -2806,13 +4158,27 @@ Page02.selectOption = function(
     }
 
 
+    const selectedOption =
+        indicator.options[
+            optionIndex
+        ];
+
+
+    const status =
+        Page02.getScoreStatus(
+            selectedOption.score
+        );
+
+
     /* -------------------------------------------------------------------------
-     * STORE ANSWER
+     * STORE CANONICAL ANSWER
      * -------------------------------------------------------------------------
      */
 
 
-    Page02.state.answers[indicatorId] = {
+    Page02.state.answers[
+        indicatorId
+    ] = {
 
         indicatorId:
             indicator.id,
@@ -2820,14 +4186,31 @@ Page02.selectOption = function(
         indicatorNumber:
             indicator.number,
 
+        dimensionId:
+            indicator.dimensionId,
+
+        dimensionNumber:
+            indicator.dimensionNumber,
+
         tamil:
             indicator.tamil,
 
         english:
             indicator.english,
 
+        ideal:
+            indicator.ideal,
+
+        target:
+            indicator.target,
+
+        optionIndex:
+            optionIndex,
+
         score:
-            Number(selectedOption.score),
+            Number(
+                selectedOption.score
+            ),
 
         selectedRange:
             selectedOption.label,
@@ -2835,26 +4218,26 @@ Page02.selectOption = function(
         value:
             selectedOption.value,
 
-        ideal:
-            indicator.ideal,
+        statusTamil:
+            status.tamil,
 
-        target:
-            indicator.target
+        statusEnglish:
+            status.english
 
     };
 
 
     /* -------------------------------------------------------------------------
-     * UPDATE BUTTON STATES
+     * UPDATE OPTION VISUAL STATES
      * -------------------------------------------------------------------------
      */
 
 
     const card =
         document.querySelector(
-            '[data-indicator="' +
+            '.scorecard-question[data-indicator="' +
             indicatorId +
-            '"].scorecard-question'
+            '"]'
         );
 
 
@@ -2869,22 +4252,26 @@ Page02.selectOption = function(
         buttons.forEach(
             function(button){
 
-                const isSelected =
+                const buttonScore =
                     Number(
                         button.dataset.score
-                    ) ===
-                    Number(score);
+                    );
+
+
+                const selected =
+                    buttonScore ===
+                    normalizedScore;
 
 
                 button.classList.toggle(
                     'is-selected',
-                    isSelected
+                    selected
                 );
 
 
                 button.setAttribute(
                     'aria-pressed',
-                    isSelected
+                    selected
                         ? 'true'
                         : 'false'
                 );
@@ -2903,245 +4290,86 @@ Page02.selectOption = function(
 
         Page02.populateScoreDisplay(
             scoreElement,
-            Page02.state.answers[indicatorId]
+            Page02.state.answers[
+                indicatorId
+            ]
+        );
+
+
+        card.classList.add(
+            'is-answered'
         );
 
     }
 
 
     /* -------------------------------------------------------------------------
-     * UPDATE PAGE / DIMENSION SCORE
+     * UPDATE SCORECARD
      * -------------------------------------------------------------------------
      */
 
 
     Page02.updateLiveScore();
 
+    Page02.updateDimensionProgress();
 
     Page02.updateDimensionNavigation();
+
+
+    /* -------------------------------------------------------------------------
+     * SESSION PERSISTENCE HOOK
+     * -------------------------------------------------------------------------
+     *
+     * Batch 5 supplies saveSession().
+     *
+     * Guarded here so Batch 2 can operate independently during assembly.
+     *
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        typeof Page02.saveSession ===
+        'function'
+    ){
+
+        Page02.saveSession();
+
+    }
 
 };
 
 
-
 /* =============================================================================
- * RENDER DIMENSION
- * =============================================================================
- */
-
-
-Page02.renderDimension = function(index){
-
-    const dimension =
-        Page02.getDimension(
-            index
-        );
-
-
-    if(!dimension){
-
-        console.error(
-            'CTM PATH™ Invalid dimension index:',
-            index
-        );
-
-        return false;
-
-    }
-
-
-    Page02.state.currentDimension =
-        index;
-
-
-    const container =
-        Page02.el(
-            'scorecard-questions'
-        );
-
-
-    if(!container){
-
-        console.error(
-            'CTM PATH™ Missing #scorecard-questions container.'
-        );
-
-        return false;
-
-    }
-
-
-    /* -------------------------------------------------------------------------
-     * CLEAR PREVIOUS DIMENSION
-     * -------------------------------------------------------------------------
-     */
-
-
-    container.innerHTML =
-        '';
-
-
-    /* -------------------------------------------------------------------------
-     * DIMENSION HEADER
-     * -------------------------------------------------------------------------
-     */
-
-
-    const header =
-        document.createElement(
-            'header'
-        );
-
-
-    header.className =
-        'dimension-header';
-
-
-    header.innerHTML = `
-
-        <div class="dimension-number">
-
-            DIMENSION
-            ${Page02.escapeHTML(dimension.number)}
-            / 05
-
-        </div>
-
-
-        <h2 class="dimension-title-tamil">
-
-            ${Page02.escapeHTML(dimension.tamil)}
-
-        </h2>
-
-
-        <p class="dimension-title-english">
-
-            ${Page02.escapeHTML(dimension.english)}
-
-        </p>
-
-    `;
-
-
-    container.appendChild(
-        header
-    );
-
-
-    /* -------------------------------------------------------------------------
-     * FIVE INDICATORS
-     * -------------------------------------------------------------------------
-     */
-
-
-    const questions =
-        document.createElement(
-            'div'
-        );
-
-
-    questions.className =
-        'dimension-questions';
-
-
-    dimension.indicators.forEach(
-        function(indicator){
-
-            questions.appendChild(
-                Page02.createIndicatorCard(
-                    indicator
-                )
-            );
-
-        }
-    );
-
-
-    container.appendChild(
-        questions
-    );
-
-
-    /* -------------------------------------------------------------------------
-     * UPDATE STATE / UI
-     * -------------------------------------------------------------------------
-     */
-
-
-    Page02.updateLiveScore();
-
-
-    Page02.updateDimensionNavigation();
-
-
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-
-
-    return true;
-
-};
-
-
-
-/* =============================================================================
- * LIVE SCORE SUMMARY
+ * UPDATE LIVE SCORE
  * =============================================================================
  */
 
 
 Page02.updateLiveScore = function(){
 
+    const score =
+        Page02.getTotalScore();
+
+
+    const gap =
+        Page02.getTotalGap();
+
+
     const answered =
         Page02.getAnsweredCount();
 
 
-    const totalIndicators =
-        Page02.getAllIndicators().length;
+    const remaining =
+        Page02.getRemainingCount();
 
 
-    const score =
-        Page02.calculateTotalScore();
-
-
-    const maximum =
-        Page02.getMaximumScore();
-
-
-    const gap =
-        Math.max(
-            0,
-            maximum - score
-        );
+    const completion =
+        Page02.getCompletionPercentage();
 
 
     /* -------------------------------------------------------------------------
-     * ANSWERED COUNT
-     * -------------------------------------------------------------------------
-     */
-
-
-    const answeredElement =
-        Page02.el(
-            'answered-count'
-        );
-
-
-    if(answeredElement){
-
-        answeredElement.textContent =
-            answered +
-            ' / ' +
-            totalIndicators;
-
-    }
-
-
-    /* -------------------------------------------------------------------------
-     * LIVE SCORE
+     * SCORE
      * -------------------------------------------------------------------------
      */
 
@@ -3155,46 +4383,35 @@ Page02.updateLiveScore = function(){
     if(scoreElement){
 
         scoreElement.textContent =
-            score +
-            ' / ' +
-            maximum;
+            String(score);
 
     }
 
 
     /* -------------------------------------------------------------------------
-     * LIVE PERCENTAGE
-     * -------------------------------------------------------------------------
-     *
-     * Final completed score:
-     *
-     *      25 indicators × max 4 = 100
-     *
-     * Therefore final raw score = percentage.
-     *
-     * During incomplete scoring we still show the
-     * accumulated score against the 100-point model.
-     *
+     * MAXIMUM
      * -------------------------------------------------------------------------
      */
 
 
-    const percentageElement =
+    const maximumElement =
         Page02.el(
-            'live-percentage'
+            'live-score-max'
         );
 
 
-    if(percentageElement){
+    if(maximumElement){
 
-        percentageElement.textContent =
-            score + '%';
+        maximumElement.textContent =
+            String(
+                Page02.CONFIG.scoring.maximumScore
+            );
 
     }
 
 
     /* -------------------------------------------------------------------------
-     * LIVE GAP
+     * GAP
      * -------------------------------------------------------------------------
      */
 
@@ -3208,43 +4425,387 @@ Page02.updateLiveScore = function(){
     if(gapElement){
 
         gapElement.textContent =
-            gap;
+            String(gap);
 
     }
 
 
     /* -------------------------------------------------------------------------
-     * DIMENSION SCORE
+     * ANSWERED
      * -------------------------------------------------------------------------
      */
 
 
-    const dimensionScoreElement =
+    const answeredElement =
         Page02.el(
-            'dimension-score'
+            'answered-count'
         );
 
 
-    if(dimensionScoreElement){
+    if(answeredElement){
 
-        const dimensionScore =
-            Page02.calculateDimensionScore(
-                Page02.state.currentDimension
-            );
+        answeredElement.textContent =
+            String(answered);
+
+    }
 
 
-        dimensionScoreElement.textContent =
-            dimensionScore +
-            ' / 20';
+    /* -------------------------------------------------------------------------
+     * REMAINING
+     * -------------------------------------------------------------------------
+     */
+
+
+    const remainingElement =
+        Page02.el(
+            'remaining-count'
+        );
+
+
+    if(remainingElement){
+
+        remainingElement.textContent =
+            String(remaining);
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * COMPLETION
+     * -------------------------------------------------------------------------
+     */
+
+
+    const completionElement =
+        Page02.el(
+            'scorecard-completion'
+        );
+
+
+    if(completionElement){
+
+        completionElement.textContent =
+            completion + '%';
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * PROGRESS BAR
+     * -------------------------------------------------------------------------
+     */
+
+
+    const progressBar =
+        Page02.el(
+            'scorecard-progress-bar'
+        );
+
+
+    if(progressBar){
+
+        progressBar.style.width =
+            completion + '%';
+
+
+        progressBar.setAttribute(
+            'aria-valuenow',
+            String(completion)
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * OPTIONAL SCORECARD ROOT STATE
+     * -------------------------------------------------------------------------
+     */
+
+
+    const scorecard =
+        Page02.el(
+            'lifestyle-scorecard'
+        );
+
+
+    if(scorecard){
+
+        scorecard.dataset.score =
+            String(score);
+
+
+        scorecard.dataset.answered =
+            String(answered);
+
+
+        scorecard.dataset.remaining =
+            String(remaining);
+
+
+        scorecard.dataset.complete =
+            Page02.isScorecardComplete()
+                ? 'true'
+                : 'false';
 
     }
 
 };
 
 
+/* =============================================================================
+ * UPDATE DIMENSION PROGRESS
+ * =============================================================================
+ */
+
+
+Page02.updateDimensionProgress = function(){
+
+    const index =
+        Page02.state.currentDimension;
+
+
+    const dimension =
+        Page02.getDimension(
+            index
+        );
+
+
+    if(!dimension){
+
+        return;
+
+    }
+
+
+    const answered =
+        Page02.getDimensionAnsweredCount(
+            index
+        );
+
+
+    const score =
+        Page02.getDimensionScore(
+            index
+        );
+
+
+    const maximum =
+        Page02.getDimensionMaximumScore();
+
+
+    const gap =
+        Page02.getDimensionGap(
+            index
+        );
+
+
+    const completion =
+        Page02.getDimensionCompletion(
+            index
+        );
+
+
+    /* -------------------------------------------------------------------------
+     * DIMENSION POSITION
+     * -------------------------------------------------------------------------
+     */
+
+
+    const positionElement =
+        Page02.el(
+            'dimension-position'
+        );
+
+
+    if(positionElement){
+
+        positionElement.textContent =
+            (
+                (index + 1) +
+                ' / ' +
+                Page02.CONFIG.scoring.dimensionCount
+            );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * ANSWERED
+     * -------------------------------------------------------------------------
+     */
+
+
+    const answeredElement =
+        Page02.el(
+            'dimension-answered'
+        );
+
+
+    if(answeredElement){
+
+        answeredElement.textContent =
+            (
+                answered +
+                ' / ' +
+                Page02.CONFIG.scoring.indicatorsPerDimension
+            );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * SCORE
+     * -------------------------------------------------------------------------
+     */
+
+
+    const scoreElement =
+        Page02.el(
+            'dimension-score'
+        );
+
+
+    if(scoreElement){
+
+        scoreElement.textContent =
+            String(score);
+
+    }
+
+
+    const maximumElement =
+        Page02.el(
+            'dimension-score-max'
+        );
+
+
+    if(maximumElement){
+
+        maximumElement.textContent =
+            String(maximum);
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * GAP
+     * -------------------------------------------------------------------------
+     */
+
+
+    const gapElement =
+        Page02.el(
+            'dimension-gap'
+        );
+
+
+    if(gapElement){
+
+        gapElement.textContent =
+            String(gap);
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * COMPLETION
+     * -------------------------------------------------------------------------
+     */
+
+
+    const completionElement =
+        Page02.el(
+            'dimension-completion'
+        );
+
+
+    if(completionElement){
+
+        completionElement.textContent =
+            completion + '%';
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * PROGRESS BAR
+     * -------------------------------------------------------------------------
+     */
+
+
+    const progressBar =
+        Page02.el(
+            'dimension-progress-bar'
+        );
+
+
+    if(progressBar){
+
+        progressBar.style.width =
+            completion + '%';
+
+
+        progressBar.setAttribute(
+            'aria-valuenow',
+            String(completion)
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * ROOT DATA
+     * -------------------------------------------------------------------------
+     */
+
+
+    const scorecard =
+        Page02.el(
+            'lifestyle-scorecard'
+        );
+
+
+    if(scorecard){
+
+        scorecard.dataset.dimension =
+            dimension.id;
+
+
+        scorecard.dataset.dimensionIndex =
+            String(index);
+
+
+        scorecard.dataset.dimensionComplete =
+            Page02.isDimensionComplete(
+                index
+            )
+                ? 'true'
+                : 'false';
+
+    }
+
+};
+
 
 /* =============================================================================
  * UPDATE DIMENSION NAVIGATION
+ * =============================================================================
+ *
+ * RULE
+ *
+ *      BACK
+ *          Available after Dimension 01.
+ *
+ *      NEXT
+ *          Disabled until all five indicators in the
+ *          current dimension are answered.
+ *
+ *      FINAL DIMENSION
+ *          The same button remains locked until all five
+ *          final indicators are answered.
+ *
+ * Batch 3 attaches the actual navigation behaviour.
+ *
  * =============================================================================
  */
 
@@ -3261,7 +4822,7 @@ Page02.updateDimensionNavigation = function(){
 
     const isLast =
         index ===
-        Page02.DIMENSIONS.length - 1;
+        Page02.CONFIG.scoring.dimensionCount - 1;
 
 
     const complete =
@@ -3283,7 +4844,7 @@ Page02.updateDimensionNavigation = function(){
 
 
     /* -------------------------------------------------------------------------
-     * BACK
+     * BACK BUTTON
      * -------------------------------------------------------------------------
      */
 
@@ -3291,19 +4852,27 @@ Page02.updateDimensionNavigation = function(){
     if(backButton){
 
         backButton.disabled =
-            false;
+            isFirst;
 
 
-        backButton.dataset.firstDimension =
+        backButton.setAttribute(
+            'aria-disabled',
             isFirst
                 ? 'true'
-                : 'false';
+                : 'false'
+        );
+
+
+        backButton.classList.toggle(
+            'is-disabled',
+            isFirst
+        );
 
     }
 
 
     /* -------------------------------------------------------------------------
-     * NEXT
+     * NEXT BUTTON
      * -------------------------------------------------------------------------
      */
 
@@ -3314,12 +4883,6 @@ Page02.updateDimensionNavigation = function(){
             !complete;
 
 
-        nextButton.classList.toggle(
-            'is-disabled',
-            !complete
-        );
-
-
         nextButton.setAttribute(
             'aria-disabled',
             complete
@@ -3328,17 +4891,41 @@ Page02.updateDimensionNavigation = function(){
         );
 
 
-        if(isLast){
+        nextButton.classList.toggle(
+            'is-disabled',
+            !complete
+        );
 
-            nextButton.textContent =
-                'VIEW MY RESULT →';
 
-        }
+        nextButton.dataset.finalDimension =
+            isLast
+                ? 'true'
+                : 'false';
 
-        else{
 
-            nextButton.textContent =
-                'NEXT DIMENSION →';
+        /*
+         * Keep visible button language synchronized
+         * with the journey position.
+         *
+         * If Page02.html contains a dedicated
+         * [data-next-label] span, only that span changes.
+         *
+         * Otherwise the frozen HTML button text remains untouched.
+         */
+
+
+        const label =
+            nextButton.querySelector(
+                '[data-next-label]'
+            );
+
+
+        if(label){
+
+            label.textContent =
+                isLast
+                    ? 'VIEW MY SCORE'
+                    : 'CONTINUE';
 
         }
 
@@ -3347,199 +4934,365 @@ Page02.updateDimensionNavigation = function(){
 };
 
 
-
 /* =============================================================================
- * SCORE EXPLANATION
+ * REFRESH VISIBLE ANSWER STATES
  * =============================================================================
  *
- * IMPORTANT:
+ * Useful after:
  *
- * Four levels only.
- *
- * There is no 0 / 4 option.
+ *      • session restoration
+ *      • dimension rendering
+ *      • future state recovery
  *
  * =============================================================================
  */
 
 
-Page02.SCORE_LEVELS = [
+Page02.refreshVisibleAnswerStates = function(){
 
-    {
-
-        score:
-            1,
-
-        tamil:
-            'தொடக்கம்',
-
-        english:
-            'STARTING™',
-
-        range:
-            'Current foundation'
-
-    },
-
-    {
-
-        score:
-            2,
-
-        tamil:
-            'முன்னேற்றம்',
-
-        english:
-            'PROGRESSING™',
-
-        range:
-            'Building momentum'
-
-    },
-
-    {
-
-        score:
-            3,
-
-        tamil:
-            'மேம்பட்ட நிலை',
-
-        english:
-            'ADVANCING™',
-
-        range:
-            'Approaching benchmark'
-
-    },
-
-    {
-
-        score:
-            4,
-
-        tamil:
-            'இலக்கு அடைந்தது',
-
-        english:
-            'ACHIEVED™',
-
-        range:
-            'Millionaire benchmark'
-
-    }
-
-];
-
-
-
-/* =============================================================================
- * RENDER HOW YOUR SCORE WORKS
- * =============================================================================
- */
-
-
-Page02.renderScoreExplanation = function(){
-
-    const container =
-        Page02.el(
-            'score-explanation-levels'
+    const cards =
+        document.querySelectorAll(
+            '.scorecard-question[data-indicator]'
         );
 
 
-    if(!container){
+    cards.forEach(
+        function(card){
 
-        return;
-
-    }
-
-
-    container.innerHTML =
-        '';
+            const indicatorId =
+                card.dataset.indicator;
 
 
-    Page02.SCORE_LEVELS.forEach(
-        function(level){
-
-            const card =
-                document.createElement(
-                    'div'
+            const answer =
+                Page02.getAnswer(
+                    indicatorId
                 );
 
 
-            card.className =
-                'score-explanation-level ' +
-                Page02.getScoreClass(
-                    level.score
+            const buttons =
+                card.querySelectorAll(
+                    '.score-option'
                 );
 
 
-            card.innerHTML = `
+            buttons.forEach(
+                function(button){
 
-                <strong class="score-explanation-number">
-
-                    ${Page02.escapeHTML(level.score)} / 4
-
-                </strong>
-
-
-                <span class="score-explanation-tamil">
-
-                    ${Page02.escapeHTML(level.tamil)}
-
-                </span>
+                    const buttonScore =
+                        Number(
+                            button.dataset.score
+                        );
 
 
-                <span class="score-explanation-english">
-
-                    ${Page02.escapeHTML(level.english)}
-
-                </span>
-
-
-                <span class="score-explanation-range">
-
-                    ${Page02.escapeHTML(level.range)}
-
-                </span>
-
-            `;
+                    const selected =
+                        Boolean(
+                            answer &&
+                            Number(
+                                answer.score
+                            ) ===
+                            buttonScore
+                        );
 
 
-            container.appendChild(
-                card
+                    button.classList.toggle(
+                        'is-selected',
+                        selected
+                    );
+
+
+                    button.setAttribute(
+                        'aria-pressed',
+                        selected
+                            ? 'true'
+                            : 'false'
+                    );
+
+                }
+            );
+
+
+            card.classList.toggle(
+                'is-answered',
+                Boolean(answer)
+            );
+
+
+            const scoreElement =
+                card.querySelector(
+                    '[data-score-for="' +
+                    indicatorId +
+                    '"]'
+                );
+
+
+            Page02.populateScoreDisplay(
+                scoreElement,
+                answer
             );
 
         }
     );
 
+
+    Page02.updateLiveScore();
+
+    Page02.updateDimensionProgress();
+
+    Page02.updateDimensionNavigation();
+
 };
 
+
+/* =============================================================================
+ * GET SCORECARD SNAPSHOT
+ * =============================================================================
+ *
+ * Internal diagnostic object.
+ *
+ * This becomes useful when validating Page 02 before
+ * sending anything to the backend.
+ *
+ * =============================================================================
+ */
+
+
+Page02.getScorecardSnapshot = function(){
+
+    const dimensions =
+        Page02.DIMENSIONS.map(
+            function(
+                dimension,
+                dimensionIndex
+            ){
+
+                return {
+
+                    dimensionId:
+                        dimension.id,
+
+                    number:
+                        dimension.number,
+
+                    tamil:
+                        dimension.tamil,
+
+                    english:
+                        dimension.english,
+
+                    answered:
+                        Page02.getDimensionAnsweredCount(
+                            dimensionIndex
+                        ),
+
+                    score:
+                        Page02.getDimensionScore(
+                            dimensionIndex
+                        ),
+
+                    maximumScore:
+                        Page02.getDimensionMaximumScore(),
+
+                    gap:
+                        Page02.getDimensionGap(
+                            dimensionIndex
+                        ),
+
+                    completion:
+                        Page02.getDimensionCompletion(
+                            dimensionIndex
+                        ),
+
+                    complete:
+                        Page02.isDimensionComplete(
+                            dimensionIndex
+                        )
+
+                };
+
+            }
+        );
+
+
+    return {
+
+        answered:
+            Page02.getAnsweredCount(),
+
+        remaining:
+            Page02.getRemainingCount(),
+
+        score:
+            Page02.getTotalScore(),
+
+        maximumScore:
+            Page02.CONFIG.scoring.maximumScore,
+
+        gap:
+            Page02.getTotalGap(),
+
+        scorePercentage:
+            Page02.getScorePercentage(),
+
+        completionPercentage:
+            Page02.getCompletionPercentage(),
+
+        complete:
+            Page02.isScorecardComplete(),
+
+        dimensions:
+            dimensions
+
+    };
+
+};
+
+
+/* =============================================================================
+ * SCORECARD CONSOLE AUDIT
+ * =============================================================================
+ *
+ * During development:
+ *
+ *      Page02.scorecardInfo()
+ *
+ * Example after 7 answers:
+ *
+ *      answered            7
+ *      remaining           18
+ *      score               ...
+ *      maximumScore        100
+ *      completion          28
+ *
+ * =============================================================================
+ */
+
+
+Page02.scorecardInfo = function(){
+
+    const snapshot =
+        Page02.getScorecardSnapshot();
+
+
+    return {
+
+        page:
+            Page02.CONFIG.pageLabel,
+
+        version:
+            Page02.version,
+
+        currentDimension:
+            Page02.state.currentDimension + 1,
+
+        answered:
+            snapshot.answered,
+
+        remaining:
+            snapshot.remaining,
+
+        score:
+            snapshot.score,
+
+        maximumScore:
+            snapshot.maximumScore,
+
+        gap:
+            snapshot.gap,
+
+        scorePercentage:
+            snapshot.scorePercentage,
+
+        completion:
+            snapshot.completionPercentage,
+
+        complete:
+            snapshot.complete,
+
+        dimensions:
+            snapshot.dimensions
+
+    };
+
+};
 
 
 /* =============================================================================
  * END OF BATCH 2
+ * =============================================================================
  *
- * Included:
+ * CTM PATH™ PAGE 02 v2.2
  *
- *      ✓ Indicator utilities
- *      ✓ Answer state helpers
- *      ✓ Total score calculation
- *      ✓ Dimension score calculation
- *      ✓ Four-option button architecture
- *      ✓ Indicator card rendering
- *      ✓ Strong live SCORE x / 4 display
- *      ✓ Option selection handling
- *      ✓ Dimension rendering
- *      ✓ Live 100-point score handling
- *      ✓ Four-level HOW YOUR SCORE WORKS architecture
+ * COMPLETE IN THIS BATCH
  *
- * Batch 3 continues with:
+ *      ✓ Canonical DOM utility
+ *      ✓ Safe HTML rendering
+ *      ✓ Enriched indicator metadata
  *
- *      → Screen controller
- *      → KYC capture
- *      → CTM_API.register()
- *      → Dimension navigation
- *      → Validation
+ *      ✓ Four-option renderer
+ *      ✓ Exactly four options per question
+ *      ✓ Score 1 / 2 / 3 / 4 visible
+ *      ✓ Range visible
+ *      ✓ STARTING™ / PROGRESSING™ / ADVANCING™ / ACHIEVED™ visible
+ *
+ *      ✓ Strong selected-state architecture
+ *      ✓ aria-pressed accessibility
+ *      ✓ Answer replacement supported
+ *      ✓ Indicator score updates immediately
+ *
+ *      ✓ Dimension answered count
+ *      ✓ Dimension score
+ *      ✓ Dimension gap
+ *      ✓ Dimension completion
+ *
+ *      ✓ Total answered count
+ *      ✓ Total remaining count
+ *      ✓ Live score
+ *      ✓ Live gap
+ *      ✓ Score percentage
+ *      ✓ Completion percentage
+ *
+ *      ✓ Dimension navigation locking
+ *      ✓ Current dimension renderer
+ *      ✓ Session persistence hook
+ *      ✓ Scorecard diagnostic snapshot
+ *
+ *
+ * IMPORTANT
+ *
+ *      Responsive arrangement belongs entirely to page02.css.
+ *
+ *      JavaScript always renders the SAME four-option structure.
+ *
+ *      Therefore:
+ *
+ *          DESKTOP
+ *              4 options across
+ *
+ *          TABLET
+ *              2 × 2
+ *
+ *          MOBILE
+ *              4 stacked rows
+ *
+ *      can all be controlled without changing this JavaScript.
+ *
+ *
+ * DO NOT initialize Page02 yet.
+ *
+ * DO NOT expose window.Page02 yet.
+ *
+ * DO NOT call CTM_API yet.
+ *
+ *
+ * NEXT
+ *
+ *      BATCH 3
+ *
+ *      KYC
+ *      CTM_API.register()
+ *      CLIENT IDENTITY
+ *      SCREEN CONTROL
+ *      DIMENSION BACK / NEXT NAVIGATION
  *
  * =============================================================================
  */
@@ -3547,37 +5300,100 @@ Page02.renderScoreExplanation = function(){
 /* =============================================================================
  * BATCH 3
  *
- * SCREEN CONTROLLER
- * KYC CAPTURE
- * CTM_API.REGISTER() INTEGRATION
+ * SCREEN CONTROL
+ * KYC
+ * CTM_API.register()
+ * CLIENT IDENTITY
  * DIMENSION NAVIGATION
- * VALIDATION
+ * =============================================================================
+ *
+ * RESPONSIBILITIES
+ *
+ *      • Control Page 02 internal screens
+ *      • Validate KYC
+ *      • Build canonical registration payload
+ *      • Call CTM_API.register()
+ *      • Capture People / Client ID
+ *      • Persist client identity
+ *      • Enter Lifestyle Scorecard™
+ *      • Navigate backward between dimensions
+ *      • Navigate forward between dimensions
+ *      • Prevent incomplete dimensions from advancing
+ *      • Hand completed Dimension 05 to Batch 4
+ *
+ * DOES NOT:
+ *
+ *      • Call CTM_API.saveDiscovery()
+ *      • Build final result classification
+ *      • Render final Page 02 result
+ *      • Navigate to Page 03
+ *
  * =============================================================================
  */
 
 
 /* =============================================================================
- * SCREEN DEFINITIONS
+ * SCREEN MAP
+ * =============================================================================
+ *
+ * CANONICAL PAGE 02 DOM
+ *
+ *      #intro-screen
+ *      #kyc-screen
+ *      #scorecard-screen
+ *      #result-screen
+ *
+ * No alternative selector architecture is used.
+ *
  * =============================================================================
  */
 
 
-Page02.SCREENS = {
+Page02.SCREEN_IDS = {
 
-    INTRO:
-        'intro',
+    intro:
+        'intro-screen',
 
-    KYC:
-        'kyc',
+    kyc:
+        'kyc-screen',
 
-    SCORECARD:
-        'scorecard',
+    scorecard:
+        'scorecard-screen',
 
-    SAVING:
-        'saving'
+    result:
+        'result-screen'
 
 };
 
+
+/* =============================================================================
+ * GET SCREEN ELEMENT
+ * =============================================================================
+ */
+
+
+Page02.getScreenElement = function(
+    screenName
+){
+
+    const id =
+        Page02.SCREEN_IDS[
+            screenName
+        ];
+
+
+    if(!id){
+
+        return null;
+
+    }
+
+
+    return Page02.el(
+        id
+    );
+
+};
 
 
 /* =============================================================================
@@ -3586,20 +5402,61 @@ Page02.SCREENS = {
  */
 
 
-Page02.showScreen = function(screenName){
+Page02.showScreen = function(
+    screenName,
+    options
+){
 
-    const screens =
-        document.querySelectorAll(
-            '[data-page02-screen]'
+    const settings =
+        Object.assign(
+            {
+                scroll:
+                    true,
+
+                focus:
+                    false
+            },
+            options || {}
         );
 
 
-    screens.forEach(
-        function(screen){
+    if(
+        !Object.prototype.hasOwnProperty.call(
+            Page02.SCREEN_IDS,
+            screenName
+        )
+    ){
+
+        console.error(
+            'CTM PATH™ Page 02: Unknown screen:',
+            screenName
+        );
+
+        return false;
+
+    }
+
+
+    Object.keys(
+        Page02.SCREEN_IDS
+    ).forEach(
+        function(name){
+
+            const screen =
+                Page02.getScreenElement(
+                    name
+                );
+
+
+            if(!screen){
+
+                return;
+
+            }
+
 
             const active =
-                screen.dataset.page02Screen ===
-                screenName;
+                name === screenName;
 
 
             screen.hidden =
@@ -3611,6 +5468,14 @@ Page02.showScreen = function(screenName){
                 active
             );
 
+
+            screen.setAttribute(
+                'aria-hidden',
+                active
+                    ? 'false'
+                    : 'true'
+            );
+
         }
     );
 
@@ -3619,62 +5484,217 @@ Page02.showScreen = function(screenName){
         screenName;
 
 
-    window.scrollTo({
+    /* -------------------------------------------------------------------------
+     * HEADER STATUS HOOK
+     * -------------------------------------------------------------------------
+     */
 
-        top:
-            0,
 
-        behavior:
-            'smooth'
+    if(
+        typeof Page02.updateHeaderStatus ===
+        'function'
+    ){
 
-    });
+        Page02.updateHeaderStatus();
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * SCROLL
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(settings.scroll){
+
+        window.scrollTo({
+            top:
+                0,
+
+            left:
+                0,
+
+            behavior:
+                'smooth'
+        });
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * OPTIONAL FOCUS
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(settings.focus){
+
+        const activeScreen =
+            Page02.getScreenElement(
+                screenName
+            );
+
+
+        if(activeScreen){
+
+            const heading =
+                activeScreen.querySelector(
+                    'h1, h2, [data-screen-heading]'
+                );
+
+
+            if(heading){
+
+                heading.setAttribute(
+                    'tabindex',
+                    '-1'
+                );
+
+
+                heading.focus({
+                    preventScroll:
+                        true
+                });
+
+            }
+
+        }
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * SESSION HOOK
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        typeof Page02.saveSession ===
+        'function'
+    ){
+
+        Page02.saveSession();
+
+    }
+
+
+    return true;
 
 };
 
 
-
 /* =============================================================================
- * NORMALIZE TEXT VALUE
+ * START KYC
  * =============================================================================
  */
 
 
-Page02.normalizeText = function(value){
+Page02.openKYC = function(){
 
-    if(
-        value === null ||
-        value === undefined
-    ){
+    Page02.showScreen(
+        Page02.SCREENS.KYC
+    );
+
+};
+
+
+/* =============================================================================
+ * RETURN TO INTRO
+ * =============================================================================
+ */
+
+
+Page02.returnToIntro = function(){
+
+    Page02.showScreen(
+        Page02.SCREENS.INTRO
+    );
+
+};
+
+
+/* =============================================================================
+ * GET KYC FORM
+ * =============================================================================
+ */
+
+
+Page02.getKYCForm = function(){
+
+    return Page02.el(
+        'kycForm'
+    );
+
+};
+
+
+/* =============================================================================
+ * GET FORM VALUE
+ * =============================================================================
+ */
+
+
+Page02.getFormValue = function(
+    form,
+    name
+){
+
+    if(!form){
 
         return '';
 
     }
 
 
-    return String(value)
-        .trim()
-        .replace(/\s+/g, ' ');
+    const field =
+        form.elements[
+            name
+        ];
+
+
+    if(!field){
+
+        return '';
+
+    }
+
+
+    return Page02
+        .safeText(
+            field.value
+        )
+        .trim();
 
 };
 
 
-
 /* =============================================================================
- * NORMALIZE MOBILE NUMBER
+ * NORMALIZE MOBILE
  * =============================================================================
  */
 
 
-Page02.normalizeMobile = function(value){
+Page02.normalizeMobile = function(
+    value
+){
 
-    return String(
-        value || ''
-    )
-    .replace(/\D/g, '')
-    .slice(-10);
+    return Page02
+        .safeText(value)
+        .replace(
+            /\D/g,
+            ''
+        )
+        .replace(
+            /^91(?=\d{10}$)/,
+            ''
+        )
+        .slice(
+            -10
+        );
 
 };
-
 
 
 /* =============================================================================
@@ -3683,25 +5703,51 @@ Page02.normalizeMobile = function(value){
  */
 
 
-Page02.normalizeEmail = function(value){
+Page02.normalizeEmail = function(
+    value
+){
 
-    return String(
-        value || ''
-    )
-    .trim()
-    .toLowerCase();
+    return Page02
+        .safeText(value)
+        .trim()
+        .toLowerCase();
 
 };
 
 
-
 /* =============================================================================
- * VALIDATE EMAIL
+ * NORMALIZE PINCODE
  * =============================================================================
  */
 
 
-Page02.isValidEmail = function(email){
+Page02.normalizePincode = function(
+    value
+){
+
+    return Page02
+        .safeText(value)
+        .replace(
+            /\D/g,
+            ''
+        )
+        .slice(
+            0,
+            6
+        );
+
+};
+
+
+/* =============================================================================
+ * EMAIL VALIDATION
+ * =============================================================================
+ */
+
+
+Page02.isValidEmail = function(
+    email
+){
 
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
         email
@@ -3710,14 +5756,15 @@ Page02.isValidEmail = function(email){
 };
 
 
-
 /* =============================================================================
- * VALIDATE MOBILE
+ * MOBILE VALIDATION
  * =============================================================================
  */
 
 
-Page02.isValidMobile = function(mobile){
+Page02.isValidMobile = function(
+    mobile
+){
 
     return /^[6-9]\d{9}$/.test(
         mobile
@@ -3726,109 +5773,28 @@ Page02.isValidMobile = function(mobile){
 };
 
 
-
 /* =============================================================================
- * READ FIELD
- * =============================================================================
- *
- * Supports either:
- *
- *      #fullName
- *
- * or:
- *
- *      [name="fullName"]
- *
- * This keeps Page 02 compatible with the existing HTML while
- * avoiding unnecessary dependency on one selector style.
- *
+ * PINCODE VALIDATION
  * =============================================================================
  */
 
 
-Page02.readField = function(name){
+Page02.isValidPincode = function(
+    pincode
+){
 
-    const element =
-        document.getElementById(name) ||
-        document.querySelector(
-            '[name="' + name + '"]'
-        );
+    if(!pincode){
 
-
-    if(!element){
-
-        return '';
+        return true;
 
     }
 
 
-    return Page02.normalizeText(
-        element.value
+    return /^[1-9][0-9]{5}$/.test(
+        pincode
     );
 
 };
-
-
-
-/* =============================================================================
- * WRITE FIELD ERROR
- * =============================================================================
- */
-
-
-Page02.setFieldError = function(
-    fieldName,
-    message
-){
-
-    const field =
-        document.getElementById(
-            fieldName
-        ) ||
-        document.querySelector(
-            '[name="' + fieldName + '"]'
-        );
-
-
-    if(field){
-
-        field.classList.toggle(
-            'has-error',
-            Boolean(message)
-        );
-
-
-        field.setAttribute(
-            'aria-invalid',
-            message
-                ? 'true'
-                : 'false'
-        );
-
-    }
-
-
-    const error =
-        document.querySelector(
-            '[data-error-for="' +
-            fieldName +
-            '"]'
-        );
-
-
-    if(error){
-
-        error.textContent =
-            message || '';
-
-
-        error.hidden =
-            !message;
-
-    }
-
-};
-
 
 
 /* =============================================================================
@@ -3839,191 +5805,606 @@ Page02.setFieldError = function(
 
 Page02.clearKYCErrors = function(){
 
-    [
-        'fullName',
-        'mobile',
-        'email',
-        'district',
-        'state'
-    ]
-    .forEach(
-        function(field){
-
-            Page02.setFieldError(
-                field,
-                ''
-            );
-
-        }
-    );
+    const form =
+        Page02.getKYCForm();
 
 
-    Page02.setStatusMessage(
-        ''
-    );
-
-};
-
-
-
-/* =============================================================================
- * STATUS MESSAGE
- * =============================================================================
- */
-
-
-Page02.setStatusMessage = function(
-    message,
-    type
-){
-
-    const status =
-        Page02.el(
-            'page02-status'
-        ) ||
-        document.querySelector(
-            '[data-page02-status]'
-        );
-
-
-    if(!status){
+    if(!form){
 
         return;
 
     }
 
 
-    status.textContent =
-        message || '';
+    form
+        .querySelectorAll(
+            '.field-error, .is-invalid'
+        )
+        .forEach(
+            function(element){
 
+                element.classList.remove(
+                    'field-error',
+                    'is-invalid'
+                );
 
-    status.hidden =
-        !message;
+                element.removeAttribute(
+                    'aria-invalid'
+                );
 
-
-    status.classList.remove(
-        'is-error',
-        'is-success',
-        'is-loading'
-    );
-
-
-    if(type){
-
-        status.classList.add(
-            'is-' + type
+            }
         );
+
+
+    form
+        .querySelectorAll(
+            '[data-error-for]'
+        )
+        .forEach(
+            function(element){
+
+                element.textContent =
+                    '';
+
+                element.hidden =
+                    true;
+
+            }
+        );
+
+
+    const generalError =
+        Page02.el(
+            'kyc-error'
+        );
+
+
+    if(generalError){
+
+        generalError.textContent =
+            '';
+
+        generalError.hidden =
+            true;
 
     }
 
 };
 
 
+/* =============================================================================
+ * SHOW FIELD ERROR
+ * =============================================================================
+ */
+
+
+Page02.showFieldError = function(
+    fieldName,
+    message
+){
+
+    const form =
+        Page02.getKYCForm();
+
+
+    if(!form){
+
+        return;
+
+    }
+
+
+    const field =
+        form.elements[
+            fieldName
+        ];
+
+
+    if(field){
+
+        field.classList.add(
+            'is-invalid'
+        );
+
+
+        field.setAttribute(
+            'aria-invalid',
+            'true'
+        );
+
+    }
+
+
+    const error =
+        form.querySelector(
+            '[data-error-for="' +
+            fieldName +
+            '"]'
+        );
+
+
+    if(error){
+
+        error.textContent =
+            message;
+
+        error.hidden =
+            false;
+
+    }
+
+};
+
 
 /* =============================================================================
- * CAPTURE KYC DATA
+ * SHOW KYC GENERAL ERROR
+ * =============================================================================
+ */
+
+
+Page02.showKYCError = function(
+    message
+){
+
+    const error =
+        Page02.el(
+            'kyc-error'
+        );
+
+
+    if(error){
+
+        error.textContent =
+            message;
+
+        error.hidden =
+            false;
+
+    }
+
+
+    console.error(
+        'CTM PATH™ Page 02:',
+        message
+    );
+
+};
+
+
+/* =============================================================================
+ * READ KYC
  * =============================================================================
  *
- * Backend-compatible registration payload:
+ * IMPORTANT
  *
- *      fullName
- *      email
- *      mobile
- *      district
- *      state
- *      source
- *      language
- *      device
+ * These names represent the canonical registration payload expected by
+ * the current CTM API architecture.
  *
  * =============================================================================
  */
 
 
-Page02.captureKYC = function(){
+Page02.readKYC = function(){
 
-    const fullName =
-        Page02.readField(
-            'fullName'
-        );
+    const form =
+        Page02.getKYCForm();
 
 
-    const mobile =
-        Page02.normalizeMobile(
-            Page02.readField(
-                'mobile'
-            )
-        );
+    if(!form){
 
+        return null;
 
-    const email =
-        Page02.normalizeEmail(
-            Page02.readField(
-                'email'
-            )
-        );
-
-
-    const district =
-        Page02.readField(
-            'district'
-        );
-
-
-    const state =
-        Page02.readField(
-            'state'
-        );
-
-
-    const sourceField =
-        Page02.readField(
-            'source'
-        );
-
-
-    const languageField =
-        Page02.readField(
-            'language'
-        );
+    }
 
 
     return {
 
         fullName:
-            fullName,
+            Page02.getFormValue(
+                form,
+                'fullName'
+            ),
 
         email:
-            email,
+            Page02.normalizeEmail(
+                Page02.getFormValue(
+                    form,
+                    'email'
+                )
+            ),
 
         mobile:
-            mobile,
+            Page02.normalizeMobile(
+                Page02.getFormValue(
+                    form,
+                    'mobile'
+                )
+            ),
+
+        gender:
+            Page02.getFormValue(
+                form,
+                'gender'
+            ),
+
+        maritalStatus:
+            Page02.getFormValue(
+                form,
+                'maritalStatus'
+            ),
+
+        ageRange:
+            Page02.getFormValue(
+                form,
+                'ageRange'
+            ),
+
+        occupation:
+            Page02.getFormValue(
+                form,
+                'occupation'
+            ),
+
+        city:
+            Page02.getFormValue(
+                form,
+                'city'
+            ),
 
         district:
-            district,
+            Page02.getFormValue(
+                form,
+                'district'
+            ),
 
         state:
-            state,
+            Page02.getFormValue(
+                form,
+                'state'
+            ),
 
-        source:
-            sourceField ||
-            'CTM PATH Millionaire Journey',
-
-        language:
-            languageField ||
-            document.documentElement.lang ||
-            'ta',
-
-        device:
-            Page02.getDeviceType()
+        pincode:
+            Page02.normalizePincode(
+                Page02.getFormValue(
+                    form,
+                    'pincode'
+                )
+            )
 
     };
 
 };
 
 
+/* =============================================================================
+ * VALIDATE KYC
+ * =============================================================================
+ */
+
+
+Page02.validateKYC = function(
+    kyc
+){
+
+    Page02.clearKYCErrors();
+
+
+    const errors = [];
+
+
+    if(!kyc){
+
+        return {
+            valid:
+                false,
+
+            errors: [
+                'KYC form is unavailable.'
+            ]
+        };
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * FULL NAME
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        !kyc.fullName ||
+        kyc.fullName.length < 2
+    ){
+
+        errors.push(
+            {
+                field:
+                    'fullName',
+
+                message:
+                    'Please enter your full name.'
+            }
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * MOBILE
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        !Page02.isValidMobile(
+            kyc.mobile
+        )
+    ){
+
+        errors.push(
+            {
+                field:
+                    'mobile',
+
+                message:
+                    'Please enter a valid 10-digit mobile number.'
+            }
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * EMAIL
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        !Page02.isValidEmail(
+            kyc.email
+        )
+    ){
+
+        errors.push(
+            {
+                field:
+                    'email',
+
+                message:
+                    'Please enter a valid email address.'
+            }
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * GENDER
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(!kyc.gender){
+
+        errors.push(
+            {
+                field:
+                    'gender',
+
+                message:
+                    'Please select your gender.'
+            }
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * MARITAL STATUS
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(!kyc.maritalStatus){
+
+        errors.push(
+            {
+                field:
+                    'maritalStatus',
+
+                message:
+                    'Please select your marital status.'
+            }
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * AGE RANGE
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(!kyc.ageRange){
+
+        errors.push(
+            {
+                field:
+                    'ageRange',
+
+                message:
+                    'Please select your age range.'
+            }
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * OCCUPATION
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(!kyc.occupation){
+
+        errors.push(
+            {
+                field:
+                    'occupation',
+
+                message:
+                    'Please select your occupation.'
+            }
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * CITY
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(!kyc.city){
+
+        errors.push(
+            {
+                field:
+                    'city',
+
+                message:
+                    'Please enter your city.'
+            }
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * DISTRICT
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(!kyc.district){
+
+        errors.push(
+            {
+                field:
+                    'district',
+
+                message:
+                    'Please enter your district.'
+            }
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * STATE
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(!kyc.state){
+
+        errors.push(
+            {
+                field:
+                    'state',
+
+                message:
+                    'Please select your state.'
+            }
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * PINCODE
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        !Page02.isValidPincode(
+            kyc.pincode
+        )
+    ){
+
+        errors.push(
+            {
+                field:
+                    'pincode',
+
+                message:
+                    'Please enter a valid 6-digit pincode.'
+            }
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * DISPLAY ERRORS
+     * -------------------------------------------------------------------------
+     */
+
+
+    errors.forEach(
+        function(error){
+
+            Page02.showFieldError(
+                error.field,
+                error.message
+            );
+
+        }
+    );
+
+
+    return {
+
+        valid:
+            errors.length === 0,
+
+        errors:
+            errors
+
+    };
+
+};
+
 
 /* =============================================================================
- * DEVICE TYPE
+ * DETECT LANGUAGE
+ * =============================================================================
+ */
+
+
+Page02.getLanguage = function(){
+
+    const language =
+        document.documentElement.lang;
+
+
+    return (
+        language ||
+        'ta'
+    );
+
+};
+
+
+/* =============================================================================
+ * DETECT DEVICE
  * =============================================================================
  */
 
@@ -4041,7 +6422,7 @@ Page02.getDeviceType = function(){
     }
 
 
-    if(width <= 1024){
+    if(width <= 1200){
 
         return 'tablet';
 
@@ -4053,210 +6434,267 @@ Page02.getDeviceType = function(){
 };
 
 
-
 /* =============================================================================
- * VALIDATE KYC
- * =============================================================================
- */
-
-
-Page02.validateKYC = function(data){
-
-    Page02.clearKYCErrors();
-
-
-    let valid =
-        true;
-
-
-    if(!data.fullName){
-
-        Page02.setFieldError(
-            'fullName',
-            'Please enter your name.'
-        );
-
-
-        valid =
-            false;
-
-    }
-
-
-    if(!data.mobile){
-
-        Page02.setFieldError(
-            'mobile',
-            'Please enter your WhatsApp mobile number.'
-        );
-
-
-        valid =
-            false;
-
-    }
-
-    else if(
-        !Page02.isValidMobile(
-            data.mobile
-        )
-    ){
-
-        Page02.setFieldError(
-            'mobile',
-            'Please enter a valid 10-digit Indian mobile number.'
-        );
-
-
-        valid =
-            false;
-
-    }
-
-
-    if(!data.email){
-
-        Page02.setFieldError(
-            'email',
-            'Please enter your email address.'
-        );
-
-
-        valid =
-            false;
-
-    }
-
-    else if(
-        !Page02.isValidEmail(
-            data.email
-        )
-    ){
-
-        Page02.setFieldError(
-            'email',
-            'Please enter a valid email address.'
-        );
-
-
-        valid =
-            false;
-
-    }
-
-
-    if(!data.district){
-
-        Page02.setFieldError(
-            'district',
-            'Please enter your district.'
-        );
-
-
-        valid =
-            false;
-
-    }
-
-
-    if(!data.state){
-
-        Page02.setFieldError(
-            'state',
-            'Please enter your state.'
-        );
-
-
-        valid =
-            false;
-
-    }
-
-
-    if(!valid){
-
-        Page02.setStatusMessage(
-            'Please complete the highlighted details before continuing.',
-            'error'
-        );
-
-    }
-
-
-    return valid;
-
-};
-
-
-
-/* =============================================================================
- * EXTRACT CLIENT ID
+ * BUILD REGISTRATION PAYLOAD
  * =============================================================================
  *
- * Supports common backend response structures without changing
- * the CTM_API contract.
+ * CTM_API.register() boundary remains intact.
  *
  * =============================================================================
  */
 
 
-Page02.extractClientId = function(response){
+Page02.buildRegistrationPayload = function(
+    kyc
+){
 
-    if(!response){
+    return {
 
-        return '';
+        fullName:
+            kyc.fullName,
 
-    }
+        email:
+            kyc.email,
 
+        mobile:
+            kyc.mobile,
 
-    if(
-        typeof response ===
-        'string'
-    ){
+        gender:
+            kyc.gender,
 
-        return response;
+        maritalStatus:
+            kyc.maritalStatus,
 
-    }
+        ageRange:
+            kyc.ageRange,
 
+        occupation:
+            kyc.occupation,
 
-    if(response.clientId){
+        city:
+            kyc.city,
 
-        return response.clientId;
+        district:
+            kyc.district,
 
-    }
+        state:
+            kyc.state,
 
+        pincode:
+            kyc.pincode,
 
-    if(response.id){
+        source:
+            'CTM PATH™ MILLIONAIRES™ — PAGE 02',
 
-        return response.id;
+        language:
+            Page02.getLanguage(),
 
-    }
+        device:
+            Page02.getDeviceType()
 
-
-    if(
-        response.data &&
-        response.data.clientId
-    ){
-
-        return response.data.clientId;
-
-    }
-
-
-    if(
-        response.result &&
-        response.result.clientId
-    ){
-
-        return response.result.clientId;
-
-    }
-
-
-    return '';
+    };
 
 };
 
+
+/* =============================================================================
+ * SET KYC SUBMIT STATE
+ * =============================================================================
+ */
+
+
+Page02.setKYCSubmitState = function(
+    loading
+){
+
+    const form =
+        Page02.getKYCForm();
+
+
+    if(!form){
+
+        return;
+
+    }
+
+
+    const submit =
+        form.querySelector(
+            '[type="submit"]'
+        );
+
+
+    if(!submit){
+
+        return;
+
+    }
+
+
+    submit.disabled =
+        Boolean(loading);
+
+
+    submit.classList.toggle(
+        'is-loading',
+        Boolean(loading)
+    );
+
+
+    submit.setAttribute(
+        'aria-busy',
+        loading
+            ? 'true'
+            : 'false'
+    );
+
+
+    const loadingText =
+        submit.dataset.loadingText;
+
+
+    const defaultText =
+        submit.dataset.defaultText;
+
+
+    if(
+        loading &&
+        loadingText
+    ){
+
+        if(
+            !submit.dataset.defaultText
+        ){
+
+            submit.dataset.defaultText =
+                submit.textContent.trim();
+
+        }
+
+
+        submit.textContent =
+            loadingText;
+
+    }
+
+
+    if(
+        !loading &&
+        defaultText
+    ){
+
+        submit.textContent =
+            defaultText;
+
+    }
+
+};
+
+
+/* =============================================================================
+ * EXTRACT REGISTRATION IDENTITY
+ * =============================================================================
+ *
+ * The backend/API boundary remains unchanged.
+ *
+ * This extractor accepts the common CTM response envelopes while
+ * normalizing the result into one frontend identity.
+ *
+ * =============================================================================
+ */
+
+
+Page02.extractRegistrationIdentity = function(
+    response
+){
+
+    const source =
+        response &&
+        response.data
+            ? response.data
+            : response || {};
+
+
+    const peopleId =
+        source.peopleId ||
+        source.peopleID ||
+        source.clientId ||
+        source.clientID ||
+        source.id ||
+        null;
+
+
+    const clientId =
+        source.clientId ||
+        source.clientID ||
+        source.peopleId ||
+        source.peopleID ||
+        source.id ||
+        null;
+
+
+    return {
+
+        peopleId:
+            peopleId
+                ? String(peopleId)
+                : null,
+
+        clientId:
+            clientId
+                ? String(clientId)
+                : null
+
+    };
+
+};
+
+
+/* =============================================================================
+ * SAVE CLIENT IDENTITY
+ * =============================================================================
+ */
+
+
+Page02.saveClientIdentity = function(){
+
+    try{
+
+        if(
+            Page02.state.peopleId
+        ){
+
+            sessionStorage.setItem(
+                Page02.CONFIG.storageKeys.peopleId,
+                Page02.state.peopleId
+            );
+
+        }
+
+
+        if(
+            Page02.state.kyc &&
+            Page02.state.kyc.fullName
+        ){
+
+            sessionStorage.setItem(
+                Page02.CONFIG.storageKeys.fullName,
+                Page02.state.kyc.fullName
+            );
+
+        }
+
+    }
+    catch(error){
+
+        console.warn(
+            'CTM PATH™ Page 02: Client identity could not be persisted.',
+            error
+        );
+
+    }
+
+};
 
 
 /* =============================================================================
@@ -4267,44 +6705,81 @@ Page02.extractClientId = function(response){
 
 Page02.registerClient = async function(){
 
-    const data =
-        Page02.captureKYC();
-
-
     if(
-        !Page02.validateKYC(
-            data
-        )
+        Page02.state.isRegistering
     ){
 
         return false;
 
     }
+
+
+    const kyc =
+        Page02.readKYC();
+
+
+    const validation =
+        Page02.validateKYC(
+            kyc
+        );
+
+
+    if(!validation.valid){
+
+        const firstError =
+            validation.errors[0];
+
+
+        if(
+            firstError &&
+            firstError.field
+        ){
+
+            const form =
+                Page02.getKYCForm();
+
+
+            const field =
+                form &&
+                form.elements[
+                    firstError.field
+                ];
+
+
+            if(
+                field &&
+                typeof field.focus ===
+                    'function'
+            ){
+
+                field.focus();
+
+            }
+
+        }
+
+
+        return false;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * API AVAILABILITY
+     * -------------------------------------------------------------------------
+     */
 
 
     if(
         !window.CTM_API ||
         typeof window.CTM_API.register !==
-        'function'
+            'function'
     ){
 
-        console.error(
-            'CTM PATH™ CTM_API.register() is unavailable.'
+        Page02.showKYCError(
+            'Registration service is temporarily unavailable. Please try again.'
         );
 
-
-        Page02.setStatusMessage(
-            'Registration service is temporarily unavailable. Please try again.',
-            'error'
-        );
-
-
-        return false;
-
-    }
-
-
-    if(Page02.state.isRegistering){
 
         return false;
 
@@ -4315,138 +6790,145 @@ Page02.registerClient = async function(){
         true;
 
 
-    Page02.setRegistrationBusy(
+    Page02.setKYCSubmitState(
         true
-    );
-
-
-    Page02.setStatusMessage(
-        'Preparing your Millionaire Lifestyle Scorecard™...',
-        'loading'
     );
 
 
     try{
 
-        const response =
-            await window.CTM_API.register(
-                data
+        const payload =
+            Page02.buildRegistrationPayload(
+                kyc
             );
 
 
-        console.log(
-            'CTM PATH™ registration response:',
-            response
-        );
-
-
-        /*
-         * Reject explicit backend failure responses.
-         */
+        const response =
+            await window.CTM_API.register(
+                payload
+            );
 
 
         if(
-            response &&
+            !response
+        ){
+
+            throw new Error(
+                'Empty registration response.'
+            );
+
+        }
+
+
+        if(
             response.success === false
         ){
 
             throw new Error(
                 response.message ||
+                response.error ||
                 'Registration failed.'
             );
 
         }
 
 
-        const clientId =
-            Page02.extractClientId(
+        const identity =
+            Page02.extractRegistrationIdentity(
                 response
             );
 
 
-        if(!clientId){
+        if(
+            !identity.peopleId &&
+            !identity.clientId
+        ){
 
             throw new Error(
-                'Registration completed without a client ID.'
+                'Registration succeeded but no client identity was returned.'
             );
 
         }
 
 
-        Page02.state.clientId =
-            clientId;
+        /* ---------------------------------------------------------------------
+         * COMMIT CLIENT STATE
+         * ---------------------------------------------------------------------
+         */
 
 
         Page02.state.kyc =
-            data;
+            Object.assign(
+                {},
+                kyc
+            );
+
+
+        Page02.state.peopleId =
+            identity.peopleId ||
+            identity.clientId;
+
+
+        Page02.state.clientId =
+            identity.clientId ||
+            identity.peopleId;
 
 
         Page02.state.registrationResponse =
             response;
 
 
-        /*
-         * Persist locally so a refresh during the 25-question
-         * scorecard does not immediately lose the journey identity.
+        Page02.saveClientIdentity();
+
+
+        if(
+            typeof Page02.saveSession ===
+            'function'
+        ){
+
+            Page02.saveSession();
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * ENTER SCORECARD
+         * ---------------------------------------------------------------------
          */
 
 
-        Page02.persistSession();
-
-
-        Page02.setStatusMessage(
-            ''
-        );
-
-
-        Page02.state.currentDimension =
-            0;
-
-
-        Page02.showScreen(
-            Page02.SCREENS.SCORECARD
-        );
-
-
-        Page02.renderDimension(
-            0
-        );
+        Page02.enterScorecard();
 
 
         return true;
 
     }
-
-
     catch(error){
 
         console.error(
-            'CTM PATH™ registration failed:',
+            'CTM PATH™ Page 02 registration failed:',
             error
         );
 
 
-        Page02.setStatusMessage(
+        Page02.showKYCError(
             error &&
             error.message
                 ? error.message
-                : 'Unable to register right now. Please try again.',
-            'error'
+                : 'We could not save your details. Please try again.'
         );
 
 
         return false;
 
     }
-
-
     finally{
 
         Page02.state.isRegistering =
             false;
 
 
-        Page02.setRegistrationBusy(
+        Page02.setKYCSubmitState(
             false
         );
 
@@ -4455,197 +6937,54 @@ Page02.registerClient = async function(){
 };
 
 
-
 /* =============================================================================
- * REGISTRATION BUTTON BUSY STATE
+ * HANDLE KYC SUBMIT
  * =============================================================================
  */
 
 
-Page02.setRegistrationBusy = function(
-    busy
+Page02.handleKYCSubmit = function(
+    event
 ){
 
-    const button =
-        Page02.el(
-            'kyc-submit'
-        ) ||
-        document.querySelector(
-            '[data-action="register"]'
-        );
+    if(event){
 
-
-    if(!button){
-
-        return;
+        event.preventDefault();
 
     }
 
 
-    button.disabled =
-        Boolean(busy);
-
-
-    button.classList.toggle(
-        'is-loading',
-        Boolean(busy)
-    );
-
-
-    button.setAttribute(
-        'aria-busy',
-        busy
-            ? 'true'
-            : 'false'
-    );
+    Page02.registerClient();
 
 };
 
 
-
 /* =============================================================================
- * PERSIST SESSION
+ * ENTER SCORECARD
  * =============================================================================
  */
 
 
-Page02.persistSession = function(){
+Page02.enterScorecard = function(){
 
-    try{
-
-        const session = {
-
-            clientId:
-                Page02.state.clientId || '',
-
-            kyc:
-                Page02.state.kyc || {},
-
-            answers:
-                Page02.state.answers || {},
-
-            currentDimension:
-                Page02.state.currentDimension || 0
-
-        };
+    /*
+     * A registered client identity is mandatory before
+     * the financial discovery begins.
+     */
 
 
-        sessionStorage.setItem(
-            'CTM_PATH_PAGE02',
-            JSON.stringify(
-                session
-            )
+    if(
+        !Page02.state.peopleId &&
+        !Page02.state.clientId
+    ){
+
+        console.error(
+            'CTM PATH™ Page 02: Cannot enter scorecard without client identity.'
         );
 
-    }
 
-
-    catch(error){
-
-        console.warn(
-            'CTM PATH™ Page 02 session could not be persisted:',
-            error
-        );
-
-    }
-
-};
-
-
-
-/* =============================================================================
- * RESTORE SESSION
- * =============================================================================
- */
-
-
-Page02.restoreSession = function(){
-
-    try{
-
-        const stored =
-            sessionStorage.getItem(
-                'CTM_PATH_PAGE02'
-            );
-
-
-        if(!stored){
-
-            return false;
-
-        }
-
-
-        const session =
-            JSON.parse(
-                stored
-            );
-
-
-        if(
-            session.clientId
-        ){
-
-            Page02.state.clientId =
-                session.clientId;
-
-        }
-
-
-        if(
-            session.kyc &&
-            typeof session.kyc ===
-            'object'
-        ){
-
-            Page02.state.kyc =
-                session.kyc;
-
-        }
-
-
-        if(
-            session.answers &&
-            typeof session.answers ===
-            'object'
-        ){
-
-            Page02.state.answers =
-                session.answers;
-
-        }
-
-
-        if(
-            Number.isInteger(
-                session.currentDimension
-            )
-        ){
-
-            Page02.state.currentDimension =
-                Math.min(
-                    Math.max(
-                        session.currentDimension,
-                        0
-                    ),
-                    Page02.DIMENSIONS.length - 1
-                );
-
-        }
-
-
-        return Boolean(
-            Page02.state.clientId
-        );
-
-    }
-
-
-    catch(error){
-
-        console.warn(
-            'CTM PATH™ Page 02 session restore failed:',
-            error
+        Page02.showScreen(
+            Page02.SCREENS.KYC
         );
 
 
@@ -4653,74 +6992,127 @@ Page02.restoreSession = function(){
 
     }
 
+
+    Page02.state.currentDimension =
+        Page02.clamp(
+            Page02.state.currentDimension,
+            0,
+            Page02.CONFIG.scoring.dimensionCount - 1
+        );
+
+
+    Page02.showScreen(
+        Page02.SCREENS.SCORECARD,
+        {
+            scroll:
+                true
+        }
+    );
+
+
+    Page02.renderCurrentDimension();
+
+
+    return true;
+
 };
 
 
-
 /* =============================================================================
- * SCROLL TO FIRST UNANSWERED QUESTION
+ * SCROLL TO DIMENSION TOP
  * =============================================================================
  */
 
 
-Page02.focusFirstUnanswered = function(){
+Page02.scrollToDimensionTop = function(){
 
-    const unanswered =
-        Page02.getFirstUnansweredIndicator(
-            Page02.state.currentDimension
-        );
-
-
-    if(!unanswered){
-
-        return;
-
-    }
-
-
-    const element =
+    const scorecard =
         Page02.el(
-            'indicator-' +
-            unanswered.id
+            'lifestyle-scorecard'
         );
 
 
-    if(!element){
+    if(scorecard){
+
+        scorecard.scrollIntoView({
+            behavior:
+                'smooth',
+
+            block:
+                'start'
+        });
+
 
         return;
 
     }
 
 
-    element.classList.add(
-        'needs-answer'
-    );
+    window.scrollTo({
+        top:
+            0,
 
-
-    element.scrollIntoView({
+        left:
+            0,
 
         behavior:
-            'smooth',
-
-        block:
-            'center'
-
+            'smooth'
     });
-
-
-    window.setTimeout(
-        function(){
-
-            element.classList.remove(
-                'needs-answer'
-            );
-
-        },
-        1800
-    );
 
 };
 
+
+/* =============================================================================
+ * GO TO DIMENSION
+ * =============================================================================
+ */
+
+
+Page02.goToDimension = function(
+    dimensionIndex
+){
+
+    const index =
+        Number(
+            dimensionIndex
+        );
+
+
+    if(
+        !Number.isInteger(index) ||
+        index < 0 ||
+        index >=
+            Page02.CONFIG.scoring.dimensionCount
+    ){
+
+        return false;
+
+    }
+
+
+    Page02.state.currentDimension =
+        index;
+
+
+    Page02.renderCurrentDimension();
+
+
+    if(
+        typeof Page02.saveSession ===
+        'function'
+    ){
+
+        Page02.saveSession();
+
+    }
+
+
+    Page02.scrollToDimensionTop();
+
+
+    return true;
+
+};
 
 
 /* =============================================================================
@@ -4735,41 +7127,159 @@ Page02.previousDimension = function(){
         Page02.state.currentDimension;
 
 
-    /*
-     * Dimension 01 back button returns to the previous
-     * Page 02 screen rather than producing index -1.
-     */
-
-
     if(current <= 0){
 
-        Page02.showScreen(
-            Page02.SCREENS.KYC
+        return false;
+
+    }
+
+
+    return Page02.goToDimension(
+        current - 1
+    );
+
+};
+
+
+/* =============================================================================
+ * FIND FIRST UNANSWERED INDICATOR IN CURRENT DIMENSION
+ * =============================================================================
+ */
+
+
+Page02.getFirstUnansweredIndicator = function(){
+
+    const dimension =
+        Page02.getDimension(
+            Page02.state.currentDimension
         );
 
+
+    if(!dimension){
+
+        return null;
+
+    }
+
+
+    return (
+        dimension.indicators.find(
+            function(indicator){
+
+                return !Page02.hasAnswer(
+                    indicator.id
+                );
+
+            }
+        ) || null
+    );
+
+};
+
+
+/* =============================================================================
+ * FOCUS UNANSWERED INDICATOR
+ * =============================================================================
+ */
+
+
+Page02.focusUnansweredIndicator = function(){
+
+    const indicator =
+        Page02.getFirstUnansweredIndicator();
+
+
+    if(!indicator){
 
         return;
 
     }
 
 
-    Page02.state.currentDimension =
-        current - 1;
+    const card =
+        document.querySelector(
+            '.scorecard-question[data-indicator="' +
+            indicator.id +
+            '"]'
+        );
 
 
-    Page02.persistSession();
+    if(!card){
+
+        return;
+
+    }
 
 
-    Page02.renderDimension(
-        Page02.state.currentDimension
+    card.classList.add(
+        'needs-answer'
+    );
+
+
+    card.scrollIntoView({
+        behavior:
+            'smooth',
+
+        block:
+            'center'
+    });
+
+
+    const firstOption =
+        card.querySelector(
+            '.score-option'
+        );
+
+
+    if(firstOption){
+
+        window.setTimeout(
+            function(){
+
+                firstOption.focus();
+
+            },
+            350
+        );
+
+    }
+
+
+    window.setTimeout(
+        function(){
+
+            card.classList.remove(
+                'needs-answer'
+            );
+
+        },
+        1800
     );
 
 };
 
 
-
 /* =============================================================================
  * NEXT DIMENSION
+ * =============================================================================
+ *
+ * IMPORTANT
+ *
+ * Dimension 01–04:
+ *
+ *      validate 5 answers
+ *      →
+ *      move to next dimension
+ *
+ *
+ * Dimension 05:
+ *
+ *      validate 5 answers
+ *      →
+ *      verify all 25 answers
+ *      →
+ *      hand over to Batch 4
+ *
  * =============================================================================
  */
 
@@ -4780,9 +7290,9 @@ Page02.nextDimension = async function(){
         Page02.state.currentDimension;
 
 
-    /*
-     * Do not allow users to advance with incomplete
-     * indicators in the current dimension.
+    /* -------------------------------------------------------------------------
+     * CURRENT DIMENSION MUST BE COMPLETE
+     * -------------------------------------------------------------------------
      */
 
 
@@ -4792,321 +7302,181 @@ Page02.nextDimension = async function(){
         )
     ){
 
-        Page02.focusFirstUnanswered();
+        Page02.focusUnansweredIndicator();
 
-
-        Page02.setStatusMessage(
-            'Please select one option for every indicator before continuing.',
-            'error'
-        );
-
-
-        return;
+        return false;
 
     }
 
 
-    Page02.setStatusMessage(
-        ''
-    );
+    const lastIndex =
+        Page02.CONFIG.scoring.dimensionCount - 1;
 
-
-    Page02.persistSession();
-
-
-    const lastDimension =
-        current ===
-        Page02.DIMENSIONS.length - 1;
-
-
-    /*
-     * Dimensions 01–04
-     */
-
-
-    if(!lastDimension){
-
-        Page02.state.currentDimension =
-            current + 1;
-
-
-        Page02.persistSession();
-
-
-        Page02.renderDimension(
-            Page02.state.currentDimension
-        );
-
-
-        return;
-
-    }
-
-
-    /*
-     * Dimension 05 completed.
-     *
-     * All 25 indicators should now have answers.
-     */
-
-
-    if(
-        Page02.getAnsweredCount() !==
-        Page02.getAllIndicators().length
-    ){
-
-        Page02.setStatusMessage(
-            'Please complete all 25 indicators before viewing your result.',
-            'error'
-        );
-
-
-        return;
-
-    }
-
-
-    /*
-     * Final save is implemented in Batch 4.
-     */
-
-
-    if(
-        typeof Page02.completeScorecard ===
-        'function'
-    ){
-
-        await Page02.completeScorecard();
-
-    }
-
-    else{
-
-        console.warn(
-            'CTM PATH™ completeScorecard() will be attached in Batch 4.'
-        );
-
-    }
-
-};
-
-
-
-/* =============================================================================
- * INTRO → KYC
- * =============================================================================
- */
-
-
-Page02.beginScorecard = function(){
-
-    Page02.setStatusMessage(
-        ''
-    );
-
-
-    Page02.showScreen(
-        Page02.SCREENS.KYC
-    );
-
-};
-
-
-
-/* =============================================================================
- * KYC → INTRO
- * =============================================================================
- */
-
-
-Page02.backToIntro = function(){
-
-    Page02.setStatusMessage(
-        ''
-    );
-
-
-    Page02.showScreen(
-        Page02.SCREENS.INTRO
-    );
-
-};
-
-
-
-/* =============================================================================
- * KEYBOARD ACCESSIBILITY FOR OPTION CARDS
- * =============================================================================
- *
- * Buttons already support Enter / Space natively.
- *
- * This adds arrow navigation between the four options.
- *
- * =============================================================================
- */
-
-
-Page02.handleOptionKeyboard = function(event){
-
-    const button =
-        event.target.closest(
-            '.score-option'
-        );
-
-
-    if(!button){
-
-        return;
-
-    }
-
-
-    if(
-        ![
-            'ArrowLeft',
-            'ArrowRight',
-            'ArrowUp',
-            'ArrowDown'
-        ].includes(
-            event.key
-        )
-    ){
-
-        return;
-
-    }
-
-
-    const group =
-        button.closest(
-            '.score-options'
-        );
-
-
-    if(!group){
-
-        return;
-
-    }
-
-
-    const buttons =
-        Array.from(
-            group.querySelectorAll(
-                '.score-option'
-            )
-        );
-
-
-    const index =
-        buttons.indexOf(
-            button
-        );
-
-
-    if(index === -1){
-
-        return;
-
-    }
-
-
-    let nextIndex =
-        index;
-
-
-    /*
-     * Desktop:
-     *
-     * 1   2
-     * 3   4
-     */
-
-
-    switch(event.key){
-
-        case 'ArrowLeft':
-
-            nextIndex =
-                Math.max(
-                    0,
-                    index - 1
-                );
-
-            break;
-
-
-        case 'ArrowRight':
-
-            nextIndex =
-                Math.min(
-                    buttons.length - 1,
-                    index + 1
-                );
-
-            break;
-
-
-        case 'ArrowUp':
-
-            nextIndex =
-                Math.max(
-                    0,
-                    index - 2
-                );
-
-            break;
-
-
-        case 'ArrowDown':
-
-            nextIndex =
-                Math.min(
-                    buttons.length - 1,
-                    index + 2
-                );
-
-            break;
-
-    }
-
-
-    if(
-        nextIndex !==
-        index
-    ){
-
-        event.preventDefault();
-
-
-        buttons[nextIndex].focus();
-
-    }
-
-};
-
-
-
-/* =============================================================================
- * BIND PAGE CONTROLS
- * =============================================================================
- */
-
-
-Page02.bindControls = function(){
 
     /* -------------------------------------------------------------------------
-     * INTRO BUTTON
+     * DIMENSIONS 01–04
      * -------------------------------------------------------------------------
      */
 
 
+    if(current < lastIndex){
+
+        return Page02.goToDimension(
+            current + 1
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * DIMENSION 05
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        !Page02.isScorecardComplete()
+    ){
+
+        /*
+         * Defensive recovery.
+         *
+         * Normally impossible because every dimension must be
+         * completed before advancing.
+         */
+
+
+        const incompleteDimension =
+            Page02.DIMENSIONS.findIndex(
+                function(
+                    dimension,
+                    index
+                ){
+
+                    return !Page02.isDimensionComplete(
+                        index
+                    );
+
+                }
+            );
+
+
+        if(
+            incompleteDimension >= 0
+        ){
+
+            Page02.goToDimension(
+                incompleteDimension
+            );
+
+
+            Page02.focusUnansweredIndicator();
+
+        }
+
+
+        return false;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * BATCH 4 HANDOFF
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        typeof Page02.completeScorecard !==
+        'function'
+    ){
+
+        console.error(
+            'CTM PATH™ Page 02: Batch 4 completion engine is not available.'
+        );
+
+
+        return false;
+
+    }
+
+
+    return await Page02.completeScorecard();
+
+};
+
+
+/* =============================================================================
+ * SET DIMENSION NAVIGATION BUSY STATE
+ * =============================================================================
+ */
+
+
+Page02.setDimensionNavigationBusy = function(
+    busy
+){
+
+    const backButton =
+        Page02.el(
+            'dimension-back'
+        );
+
+
+    const nextButton =
+        Page02.el(
+            'dimension-next'
+        );
+
+
+    if(backButton){
+
+        backButton.disabled =
+            Boolean(busy) ||
+            Page02.state.currentDimension === 0;
+
+
+        backButton.setAttribute(
+            'aria-busy',
+            busy
+                ? 'true'
+                : 'false'
+        );
+
+    }
+
+
+    if(nextButton){
+
+        nextButton.disabled =
+            Boolean(busy) ||
+            !Page02.isDimensionComplete(
+                Page02.state.currentDimension
+            );
+
+
+        nextButton.setAttribute(
+            'aria-busy',
+            busy
+                ? 'true'
+                : 'false'
+        );
+
+    }
+
+};
+
+
+/* =============================================================================
+ * BIND INTRO CONTROLS
+ * =============================================================================
+ */
+
+
+Page02.bindIntroControls = function(){
+
     const beginButton =
         Page02.el(
-            'begin-scorecard'
-        ) ||
-        document.querySelector(
-            '[data-action="begin-scorecard"]'
+            'begin-page02'
         );
 
 
@@ -5114,121 +7484,93 @@ Page02.bindControls = function(){
 
         beginButton.addEventListener(
             'click',
-            Page02.beginScorecard
+            function(event){
+
+                event.preventDefault();
+
+                Page02.openKYC();
+
+            }
+        );
+
+    }
+
+};
+
+
+/* =============================================================================
+ * BIND KYC CONTROLS
+ * =============================================================================
+ */
+
+
+Page02.bindKYCControls = function(){
+
+    const form =
+        Page02.getKYCForm();
+
+
+    if(form){
+
+        form.addEventListener(
+            'submit',
+            Page02.handleKYCSubmit
         );
 
     }
 
 
-    /* -------------------------------------------------------------------------
-     * KYC BACK
-     * -------------------------------------------------------------------------
-     */
-
-
-    const kycBack =
+    const backButton =
         Page02.el(
             'kyc-back'
-        ) ||
-        document.querySelector(
-            '[data-action="kyc-back"]'
         );
 
 
-    if(kycBack){
+    if(backButton){
 
-        kycBack.addEventListener(
-            'click',
-            Page02.backToIntro
-        );
-
-    }
-
-
-    /* -------------------------------------------------------------------------
-     * KYC SUBMIT
-     * -------------------------------------------------------------------------
-     */
-
-
-    const kycSubmit =
-        Page02.el(
-            'kyc-submit'
-        ) ||
-        document.querySelector(
-            '[data-action="register"]'
-        );
-
-
-    if(kycSubmit){
-
-        kycSubmit.addEventListener(
+        backButton.addEventListener(
             'click',
             function(event){
 
                 event.preventDefault();
 
-
-                Page02.registerClient();
+                Page02.returnToIntro();
 
             }
         );
 
     }
 
-
-    /* -------------------------------------------------------------------------
-     * KYC FORM SUBMIT
-     * -------------------------------------------------------------------------
-     */
+};
 
 
-    const kycForm =
-        Page02.el(
-            'kyc-form'
-        ) ||
-        document.querySelector(
-            '[data-page02-kyc-form]'
-        );
+/* =============================================================================
+ * BIND DIMENSION CONTROLS
+ * =============================================================================
+ */
 
 
-    if(kycForm){
+Page02.bindDimensionControls = function(){
 
-        kycForm.addEventListener(
-            'submit',
-            function(event){
-
-                event.preventDefault();
-
-
-                Page02.registerClient();
-
-            }
-        );
-
-    }
-
-
-    /* -------------------------------------------------------------------------
-     * DIMENSION BACK
-     * -------------------------------------------------------------------------
-     */
-
-
-    const dimensionBack =
+    const backButton =
         Page02.el(
             'dimension-back'
         );
 
 
-    if(dimensionBack){
+    const nextButton =
+        Page02.el(
+            'dimension-next'
+        );
 
-        dimensionBack.addEventListener(
+
+    if(backButton){
+
+        backButton.addEventListener(
             'click',
             function(event){
 
                 event.preventDefault();
-
 
                 Page02.previousDimension();
 
@@ -5238,129 +7580,170 @@ Page02.bindControls = function(){
     }
 
 
-    /* -------------------------------------------------------------------------
-     * DIMENSION NEXT
-     * -------------------------------------------------------------------------
-     */
+    if(nextButton){
 
-
-    const dimensionNext =
-        Page02.el(
-            'dimension-next'
-        );
-
-
-    if(dimensionNext){
-
-        dimensionNext.addEventListener(
+        nextButton.addEventListener(
             'click',
-            function(event){
+            async function(event){
 
                 event.preventDefault();
 
 
-                Page02.nextDimension();
+                if(
+                    Page02.state.isSaving
+                ){
+
+                    return;
+
+                }
+
+
+                await Page02.nextDimension();
 
             }
         );
 
     }
 
-
-    /* -------------------------------------------------------------------------
-     * OPTION KEYBOARD NAVIGATION
-     * -------------------------------------------------------------------------
-     */
-
-
-    document.addEventListener(
-        'keydown',
-        Page02.handleOptionKeyboard
-    );
-
 };
 
 
-
 /* =============================================================================
- * RESTORE EXISTING JOURNEY
+ * BIND PAGE 02 INTERACTION CONTROLS
+ * =============================================================================
+ *
+ * Called once from Batch 5 initialization.
+ *
  * =============================================================================
  */
 
 
-Page02.resumeExistingJourney = function(){
+Page02.bindControls = function(){
 
-    const restored =
-        Page02.restoreSession();
+    Page02.bindIntroControls();
 
+    Page02.bindKYCControls();
 
-    if(
-        !restored ||
-        !Page02.state.clientId
-    ){
-
-        return false;
-
-    }
-
-
-    Page02.showScreen(
-        Page02.SCREENS.SCORECARD
-    );
-
-
-    Page02.renderDimension(
-        Page02.state.currentDimension
-    );
-
-
-    return true;
+    Page02.bindDimensionControls();
 
 };
 
 
+/* =============================================================================
+ * CLIENT IDENTITY INFO
+ * =============================================================================
+ */
+
+
+Page02.clientInfo = function(){
+
+    return {
+
+        registered:
+            Boolean(
+                Page02.state.peopleId ||
+                Page02.state.clientId
+            ),
+
+        peopleId:
+            Page02.state.peopleId,
+
+        clientId:
+            Page02.state.clientId,
+
+        fullName:
+            Page02.state.kyc
+                ? Page02.state.kyc.fullName || ''
+                : '',
+
+        registrationResponse:
+            Page02.state.registrationResponse
+
+    };
+
+};
+
 
 /* =============================================================================
  * END OF BATCH 3
+ * =============================================================================
  *
- * Included:
+ * CTM PATH™ PAGE 02 v2.2
  *
- *      ✓ Page 02 screen controller
- *      ✓ KYC capture
+ * COMPLETE IN THIS BATCH
+ *
+ *      ✓ Canonical screen map
+ *      ✓ Intro → KYC
+ *      ✓ KYC → Intro
+ *      ✓ Canonical #kycForm
+ *
+ *      ✓ KYC reading
+ *      ✓ KYC normalization
  *      ✓ KYC validation
- *      ✓ Mobile / email normalization
- *      ✓ Backend-compatible registration payload
- *      ✓ Existing CTM_API.register() integration
- *      ✓ Client ID capture
- *      ✓ Session persistence
- *      ✓ Session recovery
- *      ✓ Previous dimension navigation
- *      ✓ Next dimension navigation
- *      ✓ Mandatory five-answer validation per dimension
+ *      ✓ Mobile validation
+ *      ✓ Email validation
+ *      ✓ Pincode validation
+ *
+ *      ✓ Registration payload
+ *      ✓ Source / language / device metadata
+ *
+ *      ✓ CTM_API.register()
+ *      ✓ Registration busy protection
+ *      ✓ Registration error handling
+ *      ✓ Client / People ID extraction
+ *      ✓ Client identity persistence
+ *
+ *      ✓ Registered client → Scorecard
+ *
+ *      ✓ Dimension Back
+ *      ✓ Dimension Next
+ *      ✓ Five-answer dimension gate
  *      ✓ First unanswered question focus
- *      ✓ Four-option keyboard navigation
- *      ✓ Final Dimension 05 handoff
+ *      ✓ Answer persistence while navigating
+ *
+ *      ✓ Dimension 05 completion gate
+ *      ✓ Full 25-answer validation
+ *      ✓ Batch 4 completion handoff
  *
  *
- * IMPORTANT:
+ * CRITICAL JOURNEY RULE
  *
- * Batch 3 does NOT call CTM_API.saveDiscovery().
+ *      Dimension 05 DOES NOT navigate directly to Page 03.
  *
- * That belongs at the final transactional boundary after all
- * 25 indicators are complete.
+ *      It calls:
+ *
+ *          Page02.completeScorecard()
+ *
+ *      which Batch 4 will implement as:
+ *
+ *          25 answers
+ *              ↓
+ *          calculate result
+ *              ↓
+ *          build backend payload
+ *              ↓
+ *          CTM_API.saveDiscovery()
+ *              ↓
+ *          Page 02 Result
+ *
+ *      Only the Result screen's Continue button will eventually
+ *      hand the journey to Page 03.
  *
  *
- * BATCH 4:
+ * DO NOT initialize Page02 yet.
  *
- *      → Build complete 25-indicator discovery payload
- *      → Calculate final score / 100
- *      → Calculate dimension totals
- *      → Calculate Millionaire Gap™
- *      → Result band
- *      → CTM_API.saveDiscovery()
- *      → Duplicate-save protection
- *      → Success / failure handling
- *      → Navigate Page 02 → Page 03
+ * DO NOT expose window.Page02 yet.
+ *
+ *
+ * NEXT
+ *
+ *      BATCH 4
+ *
+ *      FINAL RESULT ENGINE
+ *      RESULT CLASSIFICATION
+ *      BACKEND DISCOVERY PAYLOAD
+ *      CTM_API.saveDiscovery()
+ *      PAGE 02 RESULT SCREEN
  *
  * =============================================================================
  */
@@ -5368,35 +7751,240 @@ Page02.resumeExistingJourney = function(){
 /* =============================================================================
  * BATCH 4
  *
- * FINAL SCORE ENGINE
- * DIMENSION TOTALS
- * MILLIONAIRE GAP™
- * RESULT BAND
- * DISCOVERY PAYLOAD
+ * FINAL RESULT ENGINE
+ * RESULT CLASSIFICATION
+ * BACKEND DISCOVERY PAYLOAD
  * CTM_API.saveDiscovery()
- * DUPLICATE-SAVE PROTECTION
- * PAGE 03 HANDOFF
+ * PAGE 02 RESULT SCREEN
+ * =============================================================================
+ *
+ * RESPONSIBILITIES
+ *
+ *      • Validate complete 25-indicator scorecard
+ *      • Calculate final score / 100
+ *      • Calculate total gap
+ *      • Calculate five dimension results
+ *      • Determine overall score band
+ *      • Build canonical backend discovery payload
+ *      • Call CTM_API.saveDiscovery()
+ *      • Protect against duplicate saves
+ *      • Persist result locally
+ *      • Render Page 02 Result screen
+ *      • Keep Page 03 navigation OUT of this batch
+ *
+ * JOURNEY
+ *
+ *      Dimension 05 complete
+ *              ↓
+ *      Page02.completeScorecard()
+ *              ↓
+ *      Calculate result
+ *              ↓
+ *      Build discovery payload
+ *              ↓
+ *      CTM_API.saveDiscovery()
+ *              ↓
+ *      Render Page 02 Result
+ *              ↓
+ *      WAIT for user
+ *
+ * Batch 5 will bind:
+ *
+ *      CONTINUE TO PAGE 03
+ *
  * =============================================================================
  */
 
 
 /* =============================================================================
- * GET ALL ANSWERS
+ * RESULT BANDS
+ * =============================================================================
+ *
+ * These bands classify the 100-point Lifestyle Scorecard™.
+ *
+ * The scoring mathematics remain:
+ *
+ *      25 indicators × maximum 4 = 100
+ *
  * =============================================================================
  */
 
 
-Page02.getAnswerEntries = function(){
+Page02.RESULT_BANDS = [
 
-    return Page02
-        .getAllIndicators()
-        .map(
+    {
+        minimum:
+            0,
+
+        maximum:
+            25,
+
+        level:
+            1,
+
+        code:
+            'STARTING',
+
+        tamil:
+            'தொடக்க நிலை',
+
+        english:
+            'STARTING™'
+    },
+
+    {
+        minimum:
+            26,
+
+        maximum:
+            50,
+
+        level:
+            2,
+
+        code:
+            'PROGRESSING',
+
+        tamil:
+            'முன்னேற்ற நிலை',
+
+        english:
+            'PROGRESSING™'
+    },
+
+    {
+        minimum:
+            51,
+
+        maximum:
+            75,
+
+        level:
+            3,
+
+        code:
+            'ADVANCING',
+
+        tamil:
+            'மேம்பட்ட நிலை',
+
+        english:
+            'ADVANCING™'
+    },
+
+    {
+        minimum:
+            76,
+
+        maximum:
+            100,
+
+        level:
+            4,
+
+        code:
+            'ACHIEVED',
+
+        tamil:
+            'இலக்கு அடைந்த நிலை',
+
+        english:
+            'ACHIEVED™'
+    }
+
+];
+
+
+/* =============================================================================
+ * GET RESULT BAND
+ * =============================================================================
+ */
+
+
+Page02.getResultBand = function(
+    score
+){
+
+    const normalizedScore =
+        Page02.clamp(
+            Number(score),
+            0,
+            Page02.CONFIG.scoring.maximumScore
+        );
+
+
+    return (
+        Page02.RESULT_BANDS.find(
+            function(band){
+
+                return (
+                    normalizedScore >=
+                        band.minimum &&
+                    normalizedScore <=
+                        band.maximum
+                );
+
+            }
+        ) ||
+        Page02.RESULT_BANDS[0]
+    );
+
+};
+
+
+/* =============================================================================
+ * BUILD DIMENSION RESULT
+ * =============================================================================
+ */
+
+
+Page02.buildDimensionResult = function(
+    dimension,
+    dimensionIndex
+){
+
+    const score =
+        Page02.getDimensionScore(
+            dimensionIndex
+        );
+
+
+    const maximumScore =
+        Page02.getDimensionMaximumScore();
+
+
+    const gap =
+        Math.max(
+            0,
+            maximumScore - score
+        );
+
+
+    const percentage =
+        maximumScore > 0
+            ? Math.round(
+                (
+                    score /
+                    maximumScore
+                ) * 100
+            )
+            : 0;
+
+
+    const answered =
+        Page02.getDimensionAnsweredCount(
+            dimensionIndex
+        );
+
+
+    const indicators =
+        dimension.indicators.map(
             function(indicator){
 
                 const answer =
-                    Page02.state.answers[
+                    Page02.getAnswer(
                         indicator.id
-                    ];
+                    );
 
 
                 return {
@@ -5404,96 +7992,113 @@ Page02.getAnswerEntries = function(){
                     indicatorId:
                         indicator.id,
 
-                    dimensionId:
-                        indicator.dimensionId,
+                    indicatorNumber:
+                        indicator.number,
 
-                    score:
-                        answer &&
-                        Number.isFinite(
-                            Number(answer.score)
-                        )
-                            ? Number(answer.score)
-                            : null,
+                    tamil:
+                        indicator.tamil,
 
-                    optionIndex:
-                        answer &&
-                        Number.isFinite(
-                            Number(answer.optionIndex)
-                        )
-                            ? Number(answer.optionIndex)
-                            : null,
+                    english:
+                        indicator.english,
 
-                    range:
-                        answer &&
-                        answer.range
-                            ? answer.range
+                    ideal:
+                        indicator.ideal,
+
+                    target:
+                        indicator.target,
+
+                    selectedRange:
+                        answer
+                            ? answer.selectedRange
                             : '',
 
-                    benchmark:
-                        indicator.benchmark || ''
+                    value:
+                        answer
+                            ? answer.value
+                            : null,
+
+                    score:
+                        answer
+                            ? Number(answer.score)
+                            : 0,
+
+                    statusTamil:
+                        answer
+                            ? answer.statusTamil
+                            : '',
+
+                    statusEnglish:
+                        answer
+                            ? answer.statusEnglish
+                            : ''
 
                 };
 
             }
         );
 
+
+    return {
+
+        dimensionId:
+            dimension.id,
+
+        dimensionNumber:
+            dimension.number,
+
+        tamil:
+            dimension.tamil,
+
+        english:
+            dimension.english,
+
+        answered:
+            answered,
+
+        indicatorCount:
+            dimension.indicators.length,
+
+        score:
+            score,
+
+        maximumScore:
+            maximumScore,
+
+        gap:
+            gap,
+
+        percentage:
+            percentage,
+
+        complete:
+            answered ===
+                dimension.indicators.length,
+
+        indicators:
+            indicators
+
+    };
+
 };
 
 
-
 /* =============================================================================
- * VERIFY COMPLETE SCORECARD
+ * BUILD ALL DIMENSION RESULTS
  * =============================================================================
  */
 
 
-Page02.isScorecardComplete = function(){
+Page02.buildDimensionResults = function(){
 
-    const indicators =
-        Page02.getAllIndicators();
+    return Page02.DIMENSIONS.map(
+        function(
+            dimension,
+            dimensionIndex
+        ){
 
-
-    if(
-        indicators.length !== 25
-    ){
-
-        console.error(
-            'CTM PATH™ expected 25 indicators but found:',
-            indicators.length
-        );
-
-
-        return false;
-
-    }
-
-
-    return indicators.every(
-        function(indicator){
-
-            const answer =
-                Page02.state.answers[
-                    indicator.id
-                ];
-
-
-            if(!answer){
-
-                return false;
-
-            }
-
-
-            const score =
-                Number(
-                    answer.score
-                );
-
-
-            return (
-                Number.isInteger(score) &&
-                score >= 1 &&
-                score <= 4
+            return Page02.buildDimensionResult(
+                dimension,
+                dimensionIndex
             );
 
         }
@@ -5502,495 +8107,116 @@ Page02.isScorecardComplete = function(){
 };
 
 
-
 /* =============================================================================
- * CALCULATE RAW SCORE
- * =============================================================================
- *
- * 25 indicators × maximum 4 points
- *
- * Maximum:
- *
- *      100
- *
- * Therefore:
- *
- *      RAW SCORE === PERCENTAGE
- *
+ * FIND STRONGEST DIMENSION
  * =============================================================================
  */
 
 
-Page02.calculateTotalScore = function(){
-
-    return Page02
-        .getAllIndicators()
-        .reduce(
-            function(total, indicator){
-
-                const answer =
-                    Page02.state.answers[
-                        indicator.id
-                    ];
-
-
-                if(!answer){
-
-                    return total;
-
-                }
-
-
-                const score =
-                    Number(
-                        answer.score
-                    );
-
-
-                if(
-                    !Number.isFinite(score)
-                ){
-
-                    return total;
-
-                }
-
-
-                return total + score;
-
-            },
-            0
-        );
-
-};
-
-
-
-/* =============================================================================
- * CALCULATE PERCENTAGE
- * =============================================================================
- */
-
-
-Page02.calculatePercentage = function(){
-
-    const score =
-        Page02.calculateTotalScore();
-
-
-    return Math.max(
-        0,
-        Math.min(
-            100,
-            Math.round(score)
-        )
-    );
-
-};
-
-
-
-/* =============================================================================
- * MILLIONAIRE GAP™
- * =============================================================================
- *
- * 100 = Millionaire Ideal™
- *
- * Example:
- *
- *      Score 63
- *      Gap   37
- *
- * =============================================================================
- */
-
-
-Page02.calculateMillionaireGap = function(){
-
-    return Math.max(
-        0,
-        100 -
-        Page02.calculateTotalScore()
-    );
-
-};
-
-
-
-/* =============================================================================
- * DIMENSION SCORE
- * =============================================================================
- */
-
-
-Page02.calculateDimensionScore = function(
-    dimensionIndex
+Page02.getStrongestDimension = function(
+    dimensionResults
 ){
 
-    const dimension =
-        Page02.DIMENSIONS[
-            dimensionIndex
-        ];
-
-
-    if(!dimension){
-
-        return 0;
-
-    }
-
-
-    return dimension.indicators.reduce(
-        function(total, indicator){
-
-            const answer =
-                Page02.state.answers[
-                    indicator.id
-                ];
-
-
-            if(!answer){
-
-                return total;
-
-            }
-
-
-            const score =
-                Number(
-                    answer.score
-                );
-
-
-            return total +
-                (
-                    Number.isFinite(score)
-                        ? score
-                        : 0
-                );
-
-        },
-        0
-    );
-
-};
-
-
-
-/* =============================================================================
- * DIMENSION MAXIMUM
- * =============================================================================
- */
-
-
-Page02.getDimensionMaximum = function(
-    dimensionIndex
-){
-
-    const dimension =
-        Page02.DIMENSIONS[
-            dimensionIndex
-        ];
-
-
-    if(!dimension){
-
-        return 0;
-
-    }
-
-
-    return (
-        dimension.indicators.length *
-        4
-    );
-
-};
-
-
-
-/* =============================================================================
- * DIMENSION PERCENTAGE
- * =============================================================================
- */
-
-
-Page02.calculateDimensionPercentage = function(
-    dimensionIndex
-){
-
-    const score =
-        Page02.calculateDimensionScore(
-            dimensionIndex
-        );
-
-
-    const maximum =
-        Page02.getDimensionMaximum(
-            dimensionIndex
-        );
-
-
-    if(!maximum){
-
-        return 0;
-
-    }
-
-
-    return Math.round(
-        (
-            score /
-            maximum
-        ) *
-        100
-    );
-
-};
-
-
-
-/* =============================================================================
- * BUILD DIMENSION RESULTS
- * =============================================================================
- */
-
-
-Page02.buildDimensionResults = function(){
-
-    return Page02.DIMENSIONS.map(
-        function(dimension, index){
-
-            const score =
-                Page02.calculateDimensionScore(
-                    index
-                );
-
-
-            const maximum =
-                Page02.getDimensionMaximum(
-                    index
-                );
-
-
-            const percentage =
-                Page02.calculateDimensionPercentage(
-                    index
-                );
-
-
-            return {
-
-                id:
-                    dimension.id,
-
-                titleTamil:
-                    dimension.titleTamil || '',
-
-                titleEnglish:
-                    dimension.titleEnglish || '',
-
-                score:
-                    score,
-
-                maximum:
-                    maximum,
-
-                percentage:
-                    percentage,
-
-                gap:
-                    Math.max(
-                        0,
-                        maximum - score
-                    )
-
-            };
-
-        }
-    );
-
-};
-
-
-
-/* =============================================================================
- * RESULT BAND
- * =============================================================================
- *
- * Uses the same score philosophy displayed in
- * HOW YOUR SCORE WORKS.
- *
- * Since the completed scorecard minimum is 25,
- * the practical completed-score bands begin at 25.
- *
- * =============================================================================
- */
-
-
-Page02.getResultBand = function(
-    percentage
-){
-
-    const score =
-        Number(
-            percentage
-        );
-
-
-    if(score >= 75){
-
-        return {
-
-            key:
-                'ADVANCING',
-
-            tamil:
-                'மேம்பட்ட நிலை',
-
-            english:
-                'ADVANCING™',
-
-            minimum:
-                75,
-
-            maximum:
-                100
-
-        };
-
-    }
-
-
-    if(score >= 50){
-
-        return {
-
-            key:
-                'PROGRESSING',
-
-            tamil:
-                'முன்னேற்றம்',
-
-            english:
-                'PROGRESSING™',
-
-            minimum:
-                50,
-
-            maximum:
-                74
-
-        };
-
-    }
-
-
-    return {
-
-        key:
-            'EMERGING',
-
-        tamil:
-            'உருவாகும் நிலை',
-
-        english:
-            'EMERGING™',
-
-        minimum:
-            25,
-
-        maximum:
-            49
-
-    };
-
-};
-
-
-
-/* =============================================================================
- * BUILD INDICATOR RESULT
- * =============================================================================
- */
-
-
-Page02.buildIndicatorResult = function(
-    indicator
-){
-
-    const answer =
-        Page02.state.answers[
-            indicator.id
-        ];
-
-
-    if(!answer){
+    if(
+        !Array.isArray(
+            dimensionResults
+        ) ||
+        !dimensionResults.length
+    ){
 
         return null;
 
     }
 
 
-    return {
+    return dimensionResults.reduce(
+        function(
+            strongest,
+            current
+        ){
 
-        id:
-            indicator.id,
+            if(!strongest){
 
-        dimensionId:
-            indicator.dimensionId,
+                return current;
 
-        titleTamil:
-            indicator.titleTamil || '',
+            }
 
-        titleEnglish:
-            indicator.titleEnglish || '',
 
-        benchmark:
-            indicator.benchmark || '',
+            if(
+                current.score >
+                strongest.score
+            ){
 
-        optionIndex:
-            Number(
-                answer.optionIndex
-            ),
+                return current;
 
-        score:
-            Number(
-                answer.score
-            ),
+            }
 
-        range:
-            answer.range || ''
 
-    };
+            return strongest;
+
+        },
+        null
+    );
 
 };
 
 
-
 /* =============================================================================
- * BUILD ALL INDICATOR RESULTS
+ * FIND GREATEST OPPORTUNITY DIMENSION
+ * =============================================================================
+ *
+ * Lowest dimension score represents the largest current gap.
+ *
  * =============================================================================
  */
 
 
-Page02.buildIndicatorResults = function(){
+Page02.getGrowthDimension = function(
+    dimensionResults
+){
 
-    return Page02
-        .getAllIndicators()
-        .map(
-            function(indicator){
+    if(
+        !Array.isArray(
+            dimensionResults
+        ) ||
+        !dimensionResults.length
+    ){
 
-                return Page02.buildIndicatorResult(
-                    indicator
-                );
+        return null;
+
+    }
+
+
+    return dimensionResults.reduce(
+        function(
+            weakest,
+            current
+        ){
+
+            if(!weakest){
+
+                return current;
 
             }
-        )
-        .filter(Boolean);
+
+
+            if(
+                current.score <
+                weakest.score
+            ){
+
+                return current;
+
+            }
+
+
+            return weakest;
+
+        },
+        null
+    );
 
 };
-
 
 
 /* =============================================================================
@@ -5999,174 +8225,134 @@ Page02.buildIndicatorResults = function(){
  */
 
 
-Page02.buildResult = function(){
+Page02.calculateResult = function(){
 
-    const totalScore =
-        Page02.calculateTotalScore();
+    if(
+        !Page02.isScorecardComplete()
+    ){
+
+        throw new Error(
+            'Lifestyle Scorecard™ is incomplete.'
+        );
+
+    }
+
+
+    const score =
+        Page02.getTotalScore();
+
+
+    const maximumScore =
+        Page02.CONFIG.scoring.maximumScore;
+
+
+    const gap =
+        Math.max(
+            0,
+            maximumScore - score
+        );
 
 
     const percentage =
-        Page02.calculatePercentage();
+        maximumScore > 0
+            ? Math.round(
+                (
+                    score /
+                    maximumScore
+                ) * 100
+            )
+            : 0;
 
 
-    const millionaireGap =
-        Page02.calculateMillionaireGap();
+    const dimensionResults =
+        Page02.buildDimensionResults();
 
 
-    const resultBand =
+    const strongestDimension =
+        Page02.getStrongestDimension(
+            dimensionResults
+        );
+
+
+    const growthDimension =
+        Page02.getGrowthDimension(
+            dimensionResults
+        );
+
+
+    const band =
         Page02.getResultBand(
-            percentage
+            score
         );
 
 
     return {
 
-        totalIndicators:
-            25,
+        experience:
+            Page02.CONFIG.module,
 
-        maximumScore:
-            100,
+        version:
+            Page02.version,
 
-        totalScore:
-            totalScore,
-
-        percentage:
-            percentage,
-
-        millionaireGap:
-            millionaireGap,
-
-        resultBand:
-            resultBand,
-
-        dimensions:
-            Page02.buildDimensionResults(),
-
-        indicators:
-            Page02.buildIndicatorResults()
-
-    };
-
-};
-
-
-
-/* =============================================================================
- * BUILD DISCOVERY PAYLOAD
- * =============================================================================
- *
- * Existing backend integration remains:
- *
- *      CTM_API.saveDiscovery(payload)
- *
- * This payload intentionally carries:
- *
- *      client identity
- *      all 25 indicator answers
- *      dimension totals
- *      final score
- *      percentage
- *      Millionaire Gap™
- *      result band
- *
- * =============================================================================
- */
-
-
-Page02.buildDiscoveryPayload = function(){
-
-    const result =
-        Page02.buildResult();
-
-
-    return {
+        peopleId:
+            Page02.state.peopleId,
 
         clientId:
             Page02.state.clientId,
 
         fullName:
-            Page02.state.kyc &&
-            Page02.state.kyc.fullName
+            (
+                Page02.state.kyc &&
+                Page02.state.kyc.fullName
+            )
                 ? Page02.state.kyc.fullName
                 : '',
 
-        mobile:
-            Page02.state.kyc &&
-            Page02.state.kyc.mobile
-                ? Page02.state.kyc.mobile
-                : '',
+        indicatorCount:
+            Page02.CONFIG.scoring.indicatorCount,
 
-        email:
-            Page02.state.kyc &&
-            Page02.state.kyc.email
-                ? Page02.state.kyc.email
-                : '',
+        answeredCount:
+            Page02.getAnsweredCount(),
 
-        district:
-            Page02.state.kyc &&
-            Page02.state.kyc.district
-                ? Page02.state.kyc.district
-                : '',
-
-        state:
-            Page02.state.kyc &&
-            Page02.state.kyc.state
-                ? Page02.state.kyc.state
-                : '',
-
-        source:
-            Page02.state.kyc &&
-            Page02.state.kyc.source
-                ? Page02.state.kyc.source
-                : 'CTM PATH Millionaire Journey',
-
-        language:
-            Page02.state.kyc &&
-            Page02.state.kyc.language
-                ? Page02.state.kyc.language
-                : 'ta',
-
-        device:
-            Page02.state.kyc &&
-            Page02.state.kyc.device
-                ? Page02.state.kyc.device
-                : Page02.getDeviceType(),
-
-        assessment:
-            'MIDDLE CLASS TO MILLIONAIRE LIFESTYLE SCORECARD™',
-
-        assessmentVersion:
-            Page02.version || '2.1',
-
-        totalIndicators:
-            result.totalIndicators,
+        score:
+            score,
 
         maximumScore:
-            result.maximumScore,
+            maximumScore,
 
-        totalScore:
-            result.totalScore,
+        gap:
+            gap,
 
         percentage:
-            result.percentage,
+            percentage,
 
-        millionaireGap:
-            result.millionaireGap,
+        band: {
 
-        resultBand:
-            result.resultBand.key,
+            level:
+                band.level,
 
-        resultBandTamil:
-            result.resultBand.tamil,
+            code:
+                band.code,
 
-        resultBandEnglish:
-            result.resultBand.english,
+            tamil:
+                band.tamil,
+
+            english:
+                band.english
+
+        },
+
+        strongestDimension:
+            strongestDimension,
+
+        growthDimension:
+            growthDimension,
 
         dimensions:
-            result.dimensions,
+            dimensionResults,
 
-        answers:
-            result.indicators,
+        completed:
+            true,
 
         completedAt:
             new Date().toISOString()
@@ -6176,1480 +8362,269 @@ Page02.buildDiscoveryPayload = function(){
 };
 
 
-
 /* =============================================================================
- * SAVE BUTTON BUSY STATE
- * =============================================================================
- */
-
-
-Page02.setSaveBusy = function(
-    busy
-){
-
-    const button =
-        Page02.el(
-            'dimension-next'
-        );
-
-
-    if(!button){
-
-        return;
-
-    }
-
-
-    button.disabled =
-        Boolean(busy);
-
-
-    button.classList.toggle(
-        'is-loading',
-        Boolean(busy)
-    );
-
-
-    button.setAttribute(
-        'aria-busy',
-        busy
-            ? 'true'
-            : 'false'
-    );
-
-
-    if(busy){
-
-        if(
-            !button.dataset.originalText
-        ){
-
-            button.dataset.originalText =
-                button.textContent;
-
-        }
-
-
-        button.textContent =
-            'SAVING YOUR SCORE...';
-
-    }
-
-    else if(
-        button.dataset.originalText
-    ){
-
-        button.textContent =
-            button.dataset.originalText;
-
-    }
-
-};
-
-
-
-/* =============================================================================
- * SAVE LOCK KEY
- * =============================================================================
- */
-
-
-Page02.getSaveLockKey = function(){
-
-    return (
-        'CTM_PATH_PAGE02_SAVED_' +
-        (
-            Page02.state.clientId ||
-            'UNKNOWN'
-        )
-    );
-
-};
-
-
-
-/* =============================================================================
- * CHECK PREVIOUS SAVE
- * =============================================================================
- */
-
-
-Page02.hasAlreadySaved = function(){
-
-    try{
-
-        return (
-            sessionStorage.getItem(
-                Page02.getSaveLockKey()
-            ) ===
-            'true'
-        );
-
-    }
-
-
-    catch(error){
-
-        return false;
-
-    }
-
-};
-
-
-
-/* =============================================================================
- * MARK AS SAVED
- * =============================================================================
- */
-
-
-Page02.markAsSaved = function(){
-
-    try{
-
-        sessionStorage.setItem(
-            Page02.getSaveLockKey(),
-            'true'
-        );
-
-    }
-
-
-    catch(error){
-
-        console.warn(
-            'CTM PATH™ save lock could not be persisted:',
-            error
-        );
-
-    }
-
-};
-
-
-
-/* =============================================================================
- * CLEAR PAGE 02 WORKING SESSION
+ * BUILD FLAT ANSWER PAYLOAD
  * =============================================================================
  *
- * Do not clear the save-lock here.
+ * The backend receives one deterministic answer object per indicator.
  *
- * The lock prevents accidental duplicate submission if the user
- * navigates back from Page 03 during the same browser session.
+ * This preserves:
+ *
+ *      • indicator identity
+ *      • dimension identity
+ *      • selected range
+ *      • representative value
+ *      • score
+ *      • target
+ *      • ideal
  *
  * =============================================================================
  */
 
 
-Page02.clearWorkingSession = function(){
-
-    try{
-
-        sessionStorage.removeItem(
-            'CTM_PATH_PAGE02'
-        );
-
-    }
-
-
-    catch(error){
-
-        console.warn(
-            'CTM PATH™ Page 02 working session could not be cleared:',
-            error
-        );
-
-    }
-
-};
-
-
-
-/* =============================================================================
- * STORE RESULT FOR PAGE 03
- * =============================================================================
- *
- * Page 03 can read:
- *
- *      sessionStorage.getItem('CTM_PATH_MILLIONAIRE_RESULT')
- *
- * This avoids exposing the complete result in the URL.
- *
- * =============================================================================
- */
-
-
-Page02.storeResultForPage03 = function(
-    payload,
-    response
-){
-
-    try{
-
-        const handoff = {
-
-            clientId:
-                Page02.state.clientId,
-
-            totalScore:
-                payload.totalScore,
-
-            maximumScore:
-                payload.maximumScore,
-
-            percentage:
-                payload.percentage,
-
-            millionaireGap:
-                payload.millionaireGap,
-
-            resultBand:
-                payload.resultBand,
-
-            resultBandTamil:
-                payload.resultBandTamil,
-
-            resultBandEnglish:
-                payload.resultBandEnglish,
-
-            dimensions:
-                payload.dimensions,
-
-            answers:
-                payload.answers,
-
-            backendResponse:
-                response || null
-
-        };
-
-
-        sessionStorage.setItem(
-            'CTM_PATH_MILLIONAIRE_RESULT',
-            JSON.stringify(
-                handoff
-            )
-        );
-
-    }
-
-
-    catch(error){
-
-        console.warn(
-            'CTM PATH™ result handoff could not be stored:',
-            error
-        );
-
-    }
-
-};
-
-
-
-/* =============================================================================
- * PAGE 03 URL
- * =============================================================================
- */
-
-
-Page02.getPage03URL = function(){
-
-    return '/pages/page03.html';
-
-};
-
-
-
-/* =============================================================================
- * NAVIGATE TO PAGE 03
- * =============================================================================
- */
-
-
-Page02.goToPage03 = function(){
-
-    window.location.href =
-        Page02.getPage03URL();
-
-};
-
-
-
-/* =============================================================================
- * COMPLETE SCORECARD
- * =============================================================================
- *
- * This is the single transactional boundary for Page 02.
- *
- * Sequence:
- *
- *      1. Verify 25 answers
- *      2. Verify client ID
- *      3. Prevent duplicate save
- *      4. Build final result
- *      5. Build canonical backend payload
- *      6. CTM_API.saveDiscovery()
- *      7. Persist Page 03 handoff
- *      8. Lock duplicate submission
- *      9. Navigate to Page 03
- *
- * =============================================================================
- */
-
-
-Page02.completeScorecard = async function(){
-
-    /* -------------------------------------------------------------------------
-     * COMPLETE VALIDATION
-     * -------------------------------------------------------------------------
-     */
-
-
-    if(
-        !Page02.isScorecardComplete()
-    ){
-
-        Page02.setStatusMessage(
-            'Please complete all 25 indicators before viewing your result.',
-            'error'
-        );
-
-
-        Page02.focusFirstUnanswered();
-
-
-        return false;
-
-    }
-
-
-    /* -------------------------------------------------------------------------
-     * CLIENT ID VALIDATION
-     * -------------------------------------------------------------------------
-     */
-
-
-    if(
-        !Page02.state.clientId
-    ){
-
-        console.error(
-            'CTM PATH™ client ID missing before discovery save.'
-        );
-
-
-        Page02.setStatusMessage(
-            'Your registration session could not be found. Please register again.',
-            'error'
-        );
-
-
-        return false;
-
-    }
-
-
-    /* -------------------------------------------------------------------------
-     * DUPLICATE SUBMISSION GUARD
-     * -------------------------------------------------------------------------
-     */
-
-
-    if(
-        Page02.state.isSaving
-    ){
-
-        return false;
-
-    }
-
-
-    if(
-        Page02.hasAlreadySaved()
-    ){
-
-        console.warn(
-            'CTM PATH™ discovery was already saved for:',
-            Page02.state.clientId
-        );
-
-
-        /*
-         * If the result handoff still exists, simply continue.
-         */
-
-
-        try{
-
-            const storedResult =
-                sessionStorage.getItem(
-                    'CTM_PATH_MILLIONAIRE_RESULT'
-                );
-
-
-            if(storedResult){
-
-                Page02.goToPage03();
-
-
-                return true;
-
-            }
-
-        }
-
-        catch(error){
-
-            console.warn(
-                error
-            );
-
-        }
-
-
-        Page02.setStatusMessage(
-            'Your scorecard has already been submitted.',
-            'success'
-        );
-
-
-        return true;
-
-    }
-
-
-    /* -------------------------------------------------------------------------
-     * API VALIDATION
-     * -------------------------------------------------------------------------
-     */
-
-
-    if(
-        !window.CTM_API ||
-        typeof window.CTM_API.saveDiscovery !==
-        'function'
-    ){
-
-        console.error(
-            'CTM PATH™ CTM_API.saveDiscovery() is unavailable.'
-        );
-
-
-        Page02.setStatusMessage(
-            'The scorecard saving service is temporarily unavailable. Please try again.',
-            'error'
-        );
-
-
-        return false;
-
-    }
-
-
-    /* -------------------------------------------------------------------------
-     * BUILD PAYLOAD
-     * -------------------------------------------------------------------------
-     */
-
-
-    const payload =
-        Page02.buildDiscoveryPayload();
-
-
-    console.log(
-        'CTM PATH™ Discovery Payload:',
-        payload
-    );
-
-
-    /* -------------------------------------------------------------------------
-     * BEGIN SAVE
-     * -------------------------------------------------------------------------
-     */
-
-
-    Page02.state.isSaving =
-        true;
-
-
-    Page02.setSaveBusy(
-        true
-    );
-
-
-    Page02.setStatusMessage(
-        'Calculating and saving your Millionaire Lifestyle Score™...',
-        'loading'
-    );
-
-
-    try{
-
-        const response =
-            await window.CTM_API.saveDiscovery(
-                payload
-            );
-
-
-        console.log(
-            'CTM PATH™ discovery save response:',
-            response
-        );
-
-
-        /* ---------------------------------------------------------------------
-         * EXPLICIT BACKEND FAILURE
-         * ---------------------------------------------------------------------
-         */
-
-
-        if(
-            response &&
-            response.success === false
-        ){
-
-            throw new Error(
-                response.message ||
-                'Unable to save your scorecard.'
-            );
-
-        }
-
-
-        /* ---------------------------------------------------------------------
-         * STORE RESULT
-         * ---------------------------------------------------------------------
-         */
-
-
-        Page02.state.result =
-            Page02.buildResult();
-
-
-        Page02.state.discoveryResponse =
-            response;
-
-
-        Page02.storeResultForPage03(
-            payload,
-            response
-        );
-
-
-        /* ---------------------------------------------------------------------
-         * LOCK SUCCESSFUL SAVE
-         * ---------------------------------------------------------------------
-         */
-
-
-        Page02.markAsSaved();
-
-
-        Page02.clearWorkingSession();
-
-
-        /* ---------------------------------------------------------------------
-         * SUCCESS
-         * ---------------------------------------------------------------------
-         */
-
-
-        Page02.setStatusMessage(
-            'Your Millionaire Lifestyle Score™ is ready.',
-            'success'
-        );
-
-
-        /* ---------------------------------------------------------------------
-         * PAGE 03
-         * ---------------------------------------------------------------------
-         */
-
-
-        Page02.goToPage03();
-
-
-        return true;
-
-    }
-
-
-    catch(error){
-
-        console.error(
-            'CTM PATH™ discovery save failed:',
-            error
-        );
-
-
-        Page02.setStatusMessage(
-            error &&
-            error.message
-                ? error.message
-                : 'We could not save your scorecard. Your answers are preserved. Please try again.',
-            'error'
-        );
-
-
-        /*
-         * Keep the working session intact.
-         *
-         * The user must NOT lose 25 completed answers
-         * because of a temporary backend failure.
-         */
-
-
-        Page02.persistSession();
-
-
-        return false;
-
-    }
-
-
-    finally{
-
-        Page02.state.isSaving =
-            false;
-
-
-        Page02.setSaveBusy(
-            false
-        );
-
-    }
-
-};
-
-
-
-/* =============================================================================
- * RESULT DEBUGGER
- * =============================================================================
- *
- * Development helper.
- *
- * Browser console:
- *
- *      Page02.debugResult()
- *
- * =============================================================================
- */
-
-
-Page02.debugResult = function(){
-
-    const result =
-        Page02.buildResult();
-
-
-    console.table(
-        result.dimensions
-    );
-
-
-    console.table(
-        result.indicators
-    );
-
-
-    console.log(
-        'TOTAL SCORE:',
-        result.totalScore,
-        '/ 100'
-    );
-
-
-    console.log(
-        'PERCENTAGE:',
-        result.percentage + '%'
-    );
-
-
-    console.log(
-        'MILLIONAIRE GAP™:',
-        result.millionaireGap
-    );
-
-
-    console.log(
-        'RESULT BAND:',
-        result.resultBand
-    );
-
-
-    return result;
-
-};
-
-
-
-/* =============================================================================
- * PAYLOAD DEBUGGER
- * =============================================================================
- *
- * Browser console:
- *
- *      Page02.debugPayload()
- *
- * =============================================================================
- */
-
-
-Page02.debugPayload = function(){
-
-    const payload =
-        Page02.buildDiscoveryPayload();
-
-
-    console.log(
-        'CTM PATH™ FINAL DISCOVERY PAYLOAD'
-    );
-
-
-    console.log(
-        payload
-    );
-
-
-    return payload;
-
-};
-
-
-
-/* =============================================================================
- * END OF BATCH 4
- *
- * COMPLETE:
- *
- *      ✓ 25-indicator completion validation
- *      ✓ Maximum score = 100
- *      ✓ Total score calculation
- *      ✓ Percentage calculation
- *      ✓ Millionaire Gap™ calculation
- *      ✓ Five dimension calculations
- *      ✓ Dimension percentages
- *      ✓ Dimension gaps
- *      ✓ Result band
- *      ✓ Complete indicator result objects
- *      ✓ Canonical discovery payload
- *      ✓ Existing CTM_API.saveDiscovery() integration
- *      ✓ Client ID preservation
- *      ✓ Duplicate-save protection
- *      ✓ Backend error handling
- *      ✓ Answers preserved on save failure
- *      ✓ Page 03 result handoff
- *      ✓ Page 03 navigation
- *
- *
- * NEXT — BATCH 5:
- *
- *      → Page02 initialization
- *      → DOMContentLoaded boot
- *      → State initialization
- *      → Existing-session recovery
- *      → Header journey identity
- *      → Global event delegation
- *      → Initial screen decision
- *      → Production guards
- *      → Final closing architecture
- *
- * =============================================================================
- */
-
-/* =============================================================================
- * BATCH 5
- *
- * INITIALIZATION
- * DOM BOOT
- * SESSION RECOVERY
- * HEADER JOURNEY IDENTITY
- * PRODUCTION GUARDS
- * FINAL PUBLIC INTERFACE
- * =============================================================================
- */
-
-
-/* =============================================================================
- * VERSION
- * =============================================================================
- */
-
-
-Page02.version =
-    '2.1';
-
-
-
-/* =============================================================================
- * INITIAL STATE FLAGS
- * =============================================================================
- */
-
-
-Page02.state.clientId =
-    Page02.state.clientId || null;
-
-
-Page02.state.registrationResponse =
-    null;
-
-
-Page02.state.discoveryResponse =
-    null;
-
-
-Page02.state.isRegistering =
-    false;
-
-
-Page02.state.isSaving =
-    false;
-
-
-Page02.state.initialized =
-    false;
-
-
-
-/* =============================================================================
- * UPDATE GLOBAL JOURNEY HEADER
- * =============================================================================
- *
- * Shared header.html provides:
- *
- *      #journey-title
- *      #journey-counter
- *
- * Page 02 updates only the dynamic journey information.
- *
- * =============================================================================
- */
-
-
-Page02.updateJourneyHeader = function(){
-
-    const title =
-        document.getElementById(
-            'journey-title'
-        );
-
-
-    const counter =
-        document.getElementById(
-            'journey-counter'
-        );
-
-
-    if(title){
-
-        title.textContent =
-            'MILLIONAIRE JOURNEY™';
-
-    }
-
-
-    if(counter){
-
-        counter.textContent =
-            '02 / 07';
-
-    }
-
-};
-
-
-
-/* =============================================================================
- * WAIT FOR SHARED HEADER
- * =============================================================================
- *
- * Pages 02–07 load the global header asynchronously through
- * component-loader.js.
- *
- * Therefore Page 02 cannot assume the shared header DOM already
- * exists when page02.js initializes.
- *
- * =============================================================================
- */
-
-
-Page02.initializeJourneyHeader = function(){
-
-    Page02.updateJourneyHeader();
-
-
-    /*
-     * If the component loader has not injected the header yet,
-     * watch briefly for the shared component.
-     */
-
-
-    if(
-        document.getElementById(
-            'journey-counter'
-        )
-    ){
-
-        return;
-
-    }
-
-
-    if(
-        typeof MutationObserver ===
-        'undefined'
-    ){
-
-        return;
-
-    }
-
-
-    const observer =
-        new MutationObserver(
-            function(){
-
-                const counter =
-                    document.getElementById(
-                        'journey-counter'
+Page02.buildAnswerPayload = function(){
+
+    return Page02
+        .getScorecardIndicators()
+        .map(
+            function(indicator){
+
+                const answer =
+                    Page02.getAnswer(
+                        indicator.id
                     );
 
 
-                if(!counter){
+                if(!answer){
 
-                    return;
+                    return null;
 
                 }
 
 
-                Page02.updateJourneyHeader();
+                return {
 
+                    indicatorId:
+                        indicator.id,
 
-                observer.disconnect();
+                    indicatorNumber:
+                        indicator.number,
+
+                    dimensionId:
+                        indicator.dimensionId,
+
+                    dimensionNumber:
+                        indicator.dimensionNumber,
+
+                    tamil:
+                        indicator.tamil,
+
+                    english:
+                        indicator.english,
+
+                    ideal:
+                        indicator.ideal,
+
+                    target:
+                        indicator.target,
+
+                    optionIndex:
+                        answer.optionIndex,
+
+                    selectedRange:
+                        answer.selectedRange,
+
+                    value:
+                        answer.value,
+
+                    score:
+                        Number(
+                            answer.score
+                        ),
+
+                    statusTamil:
+                        answer.statusTamil,
+
+                    statusEnglish:
+                        answer.statusEnglish
+
+                };
 
             }
-        );
-
-
-    observer.observe(
-        document.body,
-        {
-
-            childList:
-                true,
-
-            subtree:
-                true
-
-        }
-    );
-
-
-    /*
-     * Production guard:
-     *
-     * Do not leave the observer alive indefinitely if the
-     * global header fails to load.
-     */
-
-
-    window.setTimeout(
-        function(){
-
-            observer.disconnect();
-
-        },
-        10000
-    );
+        )
+        .filter(Boolean);
 
 };
 
 
-
 /* =============================================================================
- * FIND SCREEN
+ * BUILD DISCOVERY PAYLOAD
+ * =============================================================================
+ *
+ * CTM_API.saveDiscovery() remains the backend boundary.
+ *
  * =============================================================================
  */
 
 
-Page02.getScreen = function(
-    screenName
+Page02.buildDiscoveryPayload = function(
+    result
 ){
 
-    return document.querySelector(
-        '[data-page02-screen="' +
-        screenName +
-        '"]'
-    );
+    if(!result){
 
-};
-
-
-
-/* =============================================================================
- * DETECT AVAILABLE SCREEN ARCHITECTURE
- * =============================================================================
- */
-
-
-Page02.hasScreenArchitecture = function(){
-
-    return Boolean(
-        document.querySelector(
-            '[data-page02-screen]'
-        )
-    );
-
-};
-
-
-
-/* =============================================================================
- * INITIALIZE SCREEN VISIBILITY
- * =============================================================================
- */
-
-
-Page02.initializeScreens = function(){
-
-    if(
-        !Page02.hasScreenArchitecture()
-    ){
-
-        console.warn(
-            'CTM PATH™ Page 02 screen architecture was not found.'
-        );
-
-
-        return false;
-
-    }
-
-
-    const intro =
-        Page02.getScreen(
-            Page02.SCREENS.INTRO
-        );
-
-
-    const kyc =
-        Page02.getScreen(
-            Page02.SCREENS.KYC
-        );
-
-
-    const scorecard =
-        Page02.getScreen(
-            Page02.SCREENS.SCORECARD
-        );
-
-
-    if(!intro){
-
-        console.warn(
-            'CTM PATH™ Page 02 intro screen is missing.'
+        throw new Error(
+            'Cannot build discovery payload without result.'
         );
 
     }
 
 
-    if(!kyc){
-
-        console.warn(
-            'CTM PATH™ Page 02 KYC screen is missing.'
-        );
-
-    }
+    const peopleId =
+        Page02.state.peopleId ||
+        Page02.state.clientId;
 
 
-    if(!scorecard){
-
-        console.warn(
-            'CTM PATH™ Page 02 scorecard screen is missing.'
-        );
-
-    }
-
-
-    return true;
-
-};
-
-
-
-/* =============================================================================
- * RESTORE KYC FIELDS
- * =============================================================================
- */
-
-
-Page02.restoreKYCFields = function(){
-
-    const data =
-        Page02.state.kyc;
+    const clientId =
+        Page02.state.clientId ||
+        Page02.state.peopleId;
 
 
     if(
-        !data ||
-        typeof data !==
-        'object'
+        !peopleId &&
+        !clientId
     ){
 
-        return;
+        throw new Error(
+            'Client identity is missing.'
+        );
 
     }
 
 
-    const fields = {
+    return {
 
-        fullName:
-            data.fullName,
+        peopleId:
+            peopleId,
 
-        mobile:
-            data.mobile,
+        clientId:
+            clientId,
 
-        email:
-            data.email,
+        page:
+            Page02.CONFIG.pageNumber,
 
-        district:
-            data.district,
+        journeyStage:
+            'MILLIONAIRE LIFESTYLE SCORECARD™',
 
-        state:
-            data.state,
+        assessment:
+            'Middle Class → Millionaire Lifestyle Scorecard™',
 
-        source:
-            data.source,
+        assessmentVersion:
+            Page02.version,
 
-        language:
-            data.language
+        indicatorCount:
+            Page02.CONFIG.scoring.indicatorCount,
+
+        answeredCount:
+            result.answeredCount,
+
+        score:
+            result.score,
+
+        maximumScore:
+            result.maximumScore,
+
+        gap:
+            result.gap,
+
+        percentage:
+            result.percentage,
+
+        level:
+            result.band.level,
+
+        levelCode:
+            result.band.code,
+
+        levelTamil:
+            result.band.tamil,
+
+        levelEnglish:
+            result.band.english,
+
+        strongestDimension:
+            result.strongestDimension
+                ? result.strongestDimension.dimensionId
+                : '',
+
+        growthDimension:
+            result.growthDimension
+                ? result.growthDimension.dimensionId
+                : '',
+
+        dimensions:
+            result.dimensions.map(
+                function(dimension){
+
+                    return {
+
+                        dimensionId:
+                            dimension.dimensionId,
+
+                        dimensionNumber:
+                            dimension.dimensionNumber,
+
+                        tamil:
+                            dimension.tamil,
+
+                        english:
+                            dimension.english,
+
+                        score:
+                            dimension.score,
+
+                        maximumScore:
+                            dimension.maximumScore,
+
+                        gap:
+                            dimension.gap,
+
+                        percentage:
+                            dimension.percentage
+
+                    };
+
+                }
+            ),
+
+        answers:
+            Page02.buildAnswerPayload(),
+
+        completedAt:
+            result.completedAt
 
     };
 
-
-    Object.keys(
-        fields
-    )
-    .forEach(
-        function(name){
-
-            const value =
-                fields[name];
-
-
-            if(
-                value === null ||
-                value === undefined ||
-                value === ''
-            ){
-
-                return;
-
-            }
-
-
-            const element =
-                document.getElementById(
-                    name
-                ) ||
-                document.querySelector(
-                    '[name="' +
-                    name +
-                    '"]'
-                );
-
-
-            if(!element){
-
-                return;
-
-            }
-
-
-            /*
-             * Never overwrite something the browser or user
-             * has already populated.
-             */
-
-
-            if(
-                String(
-                    element.value || ''
-                ).trim()
-            ){
-
-                return;
-
-            }
-
-
-            element.value =
-                value;
-
-        }
-    );
-
 };
 
 
-
 /* =============================================================================
- * RESTORE REGISTERED NAME
- * =============================================================================
- *
- * Optional Page 02 elements may use:
- *
- *      [data-client-name]
- *
- * This is presentation only.
- *
+ * VALIDATE DISCOVERY PAYLOAD
  * =============================================================================
  */
 
 
-Page02.updateClientName = function(){
+Page02.validateDiscoveryPayload = function(
+    payload
+){
 
-    const fullName =
-        Page02.state.kyc &&
-        Page02.state.kyc.fullName
-            ? Page02.state.kyc.fullName
-            : '';
+    const errors = [];
 
 
-    if(!fullName){
-
-        return;
-
-    }
-
-
-    document
-        .querySelectorAll(
-            '[data-client-name]'
-        )
-        .forEach(
-            function(element){
-
-                element.textContent =
-                    fullName;
-
-            }
-        );
-
-};
-
-
-
-/* =============================================================================
- * UPDATE DIMENSION PROGRESS
- * =============================================================================
- */
-
-
-Page02.updateDimensionProgress = function(){
-
-    const current =
-        Page02.state.currentDimension;
-
-
-    const total =
-        Page02.DIMENSIONS.length;
-
-
-    const currentNumber =
-        current + 1;
-
-
-    const progress =
-        Math.round(
-            (
-                currentNumber /
-                total
-            ) *
-            100
-        );
-
-
-    const currentElement =
-        Page02.el(
-            'current-dimension'
-        );
-
-
-    if(currentElement){
-
-        currentElement.textContent =
-            String(
-                currentNumber
-            )
-            .padStart(
-                2,
-                '0'
-            );
-
-    }
-
-
-    const totalElement =
-        Page02.el(
-            'total-dimensions'
-        );
-
-
-    if(totalElement){
-
-        totalElement.textContent =
-            String(total)
-            .padStart(
-                2,
-                '0'
-            );
-
-    }
-
-
-    const bar =
-        Page02.el(
-            'dimension-progress-bar'
-        ) ||
-        document.querySelector(
-            '[data-dimension-progress-bar]'
-        );
-
-
-    if(bar){
-
-        bar.style.width =
-            progress + '%';
-
-
-        bar.setAttribute(
-            'aria-valuenow',
-            String(progress)
-        );
-
-
-        bar.setAttribute(
-            'aria-valuemin',
-            '0'
-        );
-
-
-        bar.setAttribute(
-            'aria-valuemax',
-            '100'
-        );
-
-    }
-
-};
-
-
-
-/* =============================================================================
- * EXTEND DIMENSION RENDER
- * =============================================================================
- *
- * Batch 2 owns the canonical renderDimension().
- *
- * We wrap it once here so the progress and client identity
- * are refreshed after every dimension render.
- *
- * =============================================================================
- */
-
-
-Page02.installRenderEnhancement = function(){
-
-    if(
-        Page02._renderEnhancementInstalled
-    ){
-
-        return;
-
-    }
-
-
-    if(
-        typeof Page02.renderDimension !==
-        'function'
-    ){
-
-        return;
-
-    }
-
-
-    const originalRenderDimension =
-        Page02.renderDimension;
-
-
-    Page02.renderDimension =
-        function(index){
-
-            const result =
-                originalRenderDimension.call(
-                    Page02,
-                    index
-                );
-
-
-            Page02.updateDimensionProgress();
-
-
-            Page02.updateClientName();
-
-
-            Page02.persistSession();
-
-
-            return result;
-
-        };
-
-
-    Page02._renderEnhancementInstalled =
-        true;
-
-};
-
-
-
-/* =============================================================================
- * VALIDATE SCORECARD MASTER
- * =============================================================================
- *
- * Production integrity guard.
- *
- * Required:
- *
- *      5 dimensions
- *      5 indicators per dimension
- *      25 indicators total
- *      4 options per indicator
- *      scores 1,2,3,4 exactly once
- *
- * =============================================================================
- */
-
-
-Page02.validateMaster = function(){
-
-    const errors =
-        [];
-
-
-    if(
-        !Array.isArray(
-            Page02.DIMENSIONS
-        )
-    ){
+    if(!payload){
 
         errors.push(
-            'DIMENSIONS must be an array.'
+            'Discovery payload is missing.'
         );
 
 
@@ -7667,179 +8642,81 @@ Page02.validateMaster = function(){
 
 
     if(
-        Page02.DIMENSIONS.length !==
-        5
+        !payload.peopleId &&
+        !payload.clientId
     ){
 
         errors.push(
-            'Expected 5 dimensions; found ' +
-            Page02.DIMENSIONS.length +
-            '.'
+            'Client identity is missing.'
         );
 
     }
 
 
-    const ids =
-        new Set();
-
-
-    let indicatorCount =
-        0;
-
-
-    Page02.DIMENSIONS.forEach(
-        function(dimension, dimensionIndex){
-
-            if(
-                !Array.isArray(
-                    dimension.indicators
-                )
-            ){
-
-                errors.push(
-                    'Dimension ' +
-                    (
-                        dimensionIndex + 1
-                    ) +
-                    ' has no indicators array.'
-                );
-
-
-                return;
-
-            }
-
-
-            if(
-                dimension.indicators.length !==
-                5
-            ){
-
-                errors.push(
-                    'Dimension ' +
-                    (
-                        dimensionIndex + 1
-                    ) +
-                    ' must contain exactly 5 indicators.'
-                );
-
-            }
-
-
-            dimension.indicators.forEach(
-                function(indicator){
-
-                    indicatorCount +=
-                        1;
-
-
-                    if(!indicator.id){
-
-                        errors.push(
-                            'Indicator without ID found.'
-                        );
-
-                    }
-
-                    else if(
-                        ids.has(
-                            indicator.id
-                        )
-                    ){
-
-                        errors.push(
-                            'Duplicate indicator ID: ' +
-                            indicator.id
-                        );
-
-                    }
-
-                    else{
-
-                        ids.add(
-                            indicator.id
-                        );
-
-                    }
-
-
-                    if(
-                        !Array.isArray(
-                            indicator.options
-                        ) ||
-                        indicator.options.length !==
-                        4
-                    ){
-
-                        errors.push(
-                            'Indicator ' +
-                            indicator.id +
-                            ' must contain exactly four options.'
-                        );
-
-
-                        return;
-
-                    }
-
-
-                    const scores =
-                        indicator.options
-                            .map(
-                                function(option){
-
-                                    return Number(
-                                        option.score
-                                    );
-
-                                }
-                            )
-                            .sort(
-                                function(a, b){
-
-                                    return a - b;
-
-                                }
-                            );
-
-
-                    const validScores =
-                        (
-                            scores.length === 4 &&
-                            scores[0] === 1 &&
-                            scores[1] === 2 &&
-                            scores[2] === 3 &&
-                            scores[3] === 4
-                        );
-
-
-                    if(!validScores){
-
-                        errors.push(
-                            'Indicator ' +
-                            indicator.id +
-                            ' must contain scores 1, 2, 3 and 4.'
-                        );
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-
     if(
-        indicatorCount !==
-        25
+        payload.answeredCount !==
+        Page02.CONFIG.scoring.indicatorCount
     ){
 
         errors.push(
-            'Expected 25 indicators; found ' +
-            indicatorCount +
-            '.'
+            'All 25 indicators must be answered.'
+        );
+
+    }
+
+
+    if(
+        !Array.isArray(
+            payload.answers
+        ) ||
+        payload.answers.length !==
+            Page02.CONFIG.scoring.indicatorCount
+    ){
+
+        errors.push(
+            'Discovery payload must contain exactly 25 answers.'
+        );
+
+    }
+
+
+    if(
+        !Array.isArray(
+            payload.dimensions
+        ) ||
+        payload.dimensions.length !==
+            Page02.CONFIG.scoring.dimensionCount
+    ){
+
+        errors.push(
+            'Discovery payload must contain exactly 5 dimensions.'
+        );
+
+    }
+
+
+    if(
+        !Number.isFinite(
+            Number(
+                payload.score
+            )
+        )
+    ){
+
+        errors.push(
+            'Discovery score is invalid.'
+        );
+
+    }
+
+
+    if(
+        Number(payload.score) < 25 ||
+        Number(payload.score) > 100
+    ){
+
+        errors.push(
+            'Discovery score must be between 25 and 100.'
         );
 
     }
@@ -7858,24 +8735,386 @@ Page02.validateMaster = function(){
 };
 
 
-
 /* =============================================================================
- * LOG MASTER VALIDATION
+ * SAVE RESULT LOCALLY
  * =============================================================================
  */
 
 
-Page02.runMasterValidation = function(){
+Page02.saveResultLocally = function(
+    result
+){
+
+    if(!result){
+
+        return false;
+
+    }
+
+
+    try{
+
+        sessionStorage.setItem(
+            Page02.CONFIG.storageKeys.page02Result,
+            JSON.stringify(
+                result
+            )
+        );
+
+
+        return true;
+
+    }
+    catch(error){
+
+        console.warn(
+            'CTM PATH™ Page 02: Result could not be stored in sessionStorage.',
+            error
+        );
+
+
+        return false;
+
+    }
+
+};
+
+
+/* =============================================================================
+ * GET SAVED RESULT
+ * =============================================================================
+ */
+
+
+Page02.getSavedResult = function(){
+
+    try{
+
+        const raw =
+            sessionStorage.getItem(
+                Page02.CONFIG.storageKeys.page02Result
+            );
+
+
+        if(!raw){
+
+            return null;
+
+        }
+
+
+        return JSON.parse(
+            raw
+        );
+
+    }
+    catch(error){
+
+        console.warn(
+            'CTM PATH™ Page 02: Saved result could not be read.',
+            error
+        );
+
+
+        return null;
+
+    }
+
+};
+
+
+/* =============================================================================
+ * SET COMPLETION BUSY STATE
+ * =============================================================================
+ */
+
+
+Page02.setCompletionBusy = function(
+    busy
+){
+
+    Page02.state.isSaving =
+        Boolean(busy);
+
+
+    Page02.setDimensionNavigationBusy(
+        Boolean(busy)
+    );
+
+
+    const scorecard =
+        Page02.el(
+            'lifestyle-scorecard'
+        );
+
+
+    if(scorecard){
+
+        scorecard.classList.toggle(
+            'is-saving',
+            Boolean(busy)
+        );
+
+
+        scorecard.setAttribute(
+            'aria-busy',
+            busy
+                ? 'true'
+                : 'false'
+        );
+
+    }
+
+};
+
+
+/* =============================================================================
+ * SHOW SCORECARD SAVE ERROR
+ * =============================================================================
+ */
+
+
+Page02.showScorecardError = function(
+    message
+){
+
+    const error =
+        Page02.el(
+            'scorecard-error'
+        );
+
+
+    if(error){
+
+        error.textContent =
+            message;
+
+        error.hidden =
+            false;
+
+    }
+
+
+    console.error(
+        'CTM PATH™ Page 02:',
+        message
+    );
+
+};
+
+
+/* =============================================================================
+ * CLEAR SCORECARD SAVE ERROR
+ * =============================================================================
+ */
+
+
+Page02.clearScorecardError = function(){
+
+    const error =
+        Page02.el(
+            'scorecard-error'
+        );
+
+
+    if(error){
+
+        error.textContent =
+            '';
+
+        error.hidden =
+            true;
+
+    }
+
+};
+
+
+/* =============================================================================
+ * SAVE DISCOVERY
+ * =============================================================================
+ */
+
+
+Page02.saveDiscovery = async function(
+    result
+){
+
+    if(!result){
+
+        throw new Error(
+            'Result is required before discovery can be saved.'
+        );
+
+    }
+
+
+    if(
+        !window.CTM_API ||
+        typeof window.CTM_API.saveDiscovery !==
+            'function'
+    ){
+
+        throw new Error(
+            'Discovery service is temporarily unavailable.'
+        );
+
+    }
+
+
+    const payload =
+        Page02.buildDiscoveryPayload(
+            result
+        );
+
 
     const validation =
-        Page02.validateMaster();
+        Page02.validateDiscoveryPayload(
+            payload
+        );
 
 
-    if(validation.valid){
+    if(!validation.valid){
 
-        console.log(
-            'CTM PATH™ Page 02 master validated: ' +
-            '5 dimensions × 5 indicators × 4 options.'
+        throw new Error(
+            validation.errors.join(
+                ' '
+            )
+        );
+
+    }
+
+
+    const response =
+        await window.CTM_API.saveDiscovery(
+            payload
+        );
+
+
+    if(!response){
+
+        throw new Error(
+            'Empty discovery response.'
+        );
+
+    }
+
+
+    if(
+        response.success === false
+    ){
+
+        throw new Error(
+            response.message ||
+            response.error ||
+            'Discovery could not be saved.'
+        );
+
+    }
+
+
+    Page02.state.discoveryResponse =
+        response;
+
+
+    return response;
+
+};
+
+
+/* =============================================================================
+ * COMPLETE SCORECARD
+ * =============================================================================
+ *
+ * Called by Batch 3 after Dimension 05.
+ *
+ * DUPLICATE-SAVE PROTECTION
+ *
+ *      • state.isSaving blocks simultaneous requests
+ *      • state.result + discoveryResponse prevent repeat backend saves
+ *
+ * =============================================================================
+ */
+
+
+Page02.completeScorecard = async function(){
+
+    if(
+        Page02.state.isSaving
+    ){
+
+        return false;
+
+    }
+
+
+    Page02.clearScorecardError();
+
+
+    /* -------------------------------------------------------------------------
+     * COMPLETION VALIDATION
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        !Page02.isScorecardComplete()
+    ){
+
+        Page02.showScorecardError(
+            'Please answer all 25 indicators before viewing your result.'
+        );
+
+
+        return false;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * CLIENT VALIDATION
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        !Page02.state.peopleId &&
+        !Page02.state.clientId
+    ){
+
+        Page02.showScorecardError(
+            'Your registration identity is missing. Please complete your details again.'
+        );
+
+
+        Page02.showScreen(
+            Page02.SCREENS.KYC
+        );
+
+
+        return false;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * ALREADY COMPLETED
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        Page02.state.result &&
+        Page02.state.discoveryResponse
+    ){
+
+        Page02.renderResult(
+            Page02.state.result
+        );
+
+
+        Page02.showScreen(
+            Page02.SCREENS.RESULT
         );
 
 
@@ -7884,34 +9123,2395 @@ Page02.runMasterValidation = function(){
     }
 
 
-    console.error(
-        'CTM PATH™ Page 02 master validation failed:',
-        validation.errors
+    Page02.setCompletionBusy(
+        true
     );
 
 
-    return false;
+    try{
+
+        /* ---------------------------------------------------------------------
+         * CALCULATE
+         * ---------------------------------------------------------------------
+         */
+
+
+        const result =
+            Page02.calculateResult();
+
+
+        /* ---------------------------------------------------------------------
+         * SAVE BACKEND
+         * ---------------------------------------------------------------------
+         */
+
+
+        await Page02.saveDiscovery(
+            result
+        );
+
+
+        /* ---------------------------------------------------------------------
+         * COMMIT RESULT ONLY AFTER SUCCESSFUL SAVE
+         * ---------------------------------------------------------------------
+         */
+
+
+        Page02.state.result =
+            result;
+
+
+        Page02.saveResultLocally(
+            result
+        );
+
+
+        if(
+            typeof Page02.saveSession ===
+            'function'
+        ){
+
+            Page02.saveSession();
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * RENDER RESULT
+         * ---------------------------------------------------------------------
+         */
+
+
+        Page02.renderResult(
+            result
+        );
+
+
+        Page02.showScreen(
+            Page02.SCREENS.RESULT,
+            {
+                scroll:
+                    true,
+
+                focus:
+                    false
+            }
+        );
+
+
+        return true;
+
+    }
+    catch(error){
+
+        console.error(
+            'CTM PATH™ Page 02 discovery completion failed:',
+            error
+        );
+
+
+        Page02.showScorecardError(
+            error &&
+            error.message
+                ? error.message
+                : 'We could not save your scorecard. Please try again.'
+        );
+
+
+        return false;
+
+    }
+    finally{
+
+        Page02.setCompletionBusy(
+            false
+        );
+
+    }
 
 };
 
 
-
 /* =============================================================================
- * PROTECT AGAINST ACCIDENTAL DOUBLE INITIALIZATION
+ * SET RESULT TEXT
  * =============================================================================
  */
 
 
-Page02.canInitialize = function(){
+Page02.setResultText = function(
+    id,
+    value
+){
 
-    if(
-        Page02.state.initialized
-    ){
-
-        console.warn(
-            'CTM PATH™ Page 02 is already initialized.'
+    const element =
+        Page02.el(
+            id
         );
 
+
+    if(!element){
+
+        return;
+
+    }
+
+
+    element.textContent =
+        Page02.safeText(
+            value
+        );
+
+};
+
+
+/* =============================================================================
+ * SET RESULT WIDTH
+ * =============================================================================
+ */
+
+
+Page02.setResultWidth = function(
+    id,
+    percentage
+){
+
+    const element =
+        Page02.el(
+            id
+        );
+
+
+    if(!element){
+
+        return;
+
+    }
+
+
+    const normalized =
+        Page02.clamp(
+            percentage,
+            0,
+            100
+        );
+
+
+    element.style.width =
+        normalized + '%';
+
+
+    element.setAttribute(
+        'aria-valuenow',
+        String(normalized)
+    );
+
+};
+
+
+/* =============================================================================
+ * RENDER RESULT DIMENSIONS
+ * =============================================================================
+ */
+
+
+Page02.renderResultDimensions = function(
+    result
+){
+
+    const container =
+        Page02.el(
+            'result-dimensions'
+        );
+
+
+    if(!container){
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        '';
+
+
+    result.dimensions.forEach(
+        function(dimension){
+
+            const card =
+                document.createElement(
+                    'article'
+                );
+
+
+            card.className =
+                'result-dimension';
+
+
+            card.dataset.dimension =
+                dimension.dimensionId;
+
+
+            card.innerHTML = `
+
+                <div class="result-dimension__heading">
+
+                    <div class="result-dimension__identity">
+
+                        <span class="result-dimension__number">
+
+                            ${Page02.escapeHTML(
+                                dimension.dimensionNumber
+                            )}
+
+                        </span>
+
+
+                        <div>
+
+                            <h3 class="result-dimension__tamil">
+
+                                ${Page02.escapeHTML(
+                                    dimension.tamil
+                                )}
+
+                            </h3>
+
+
+                            <p class="result-dimension__english">
+
+                                ${Page02.escapeHTML(
+                                    dimension.english
+                                )}
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="result-dimension__score">
+
+                        <strong>
+
+                            ${Page02.escapeHTML(
+                                dimension.score
+                            )}
+
+                        </strong>
+
+                        <span>
+
+                            / ${Page02.escapeHTML(
+                                dimension.maximumScore
+                            )}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="result-dimension__progress"
+                    role="progressbar"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="${Page02.escapeHTML(
+                        dimension.percentage
+                    )}"
+                >
+
+                    <span
+                        class="result-dimension__progress-fill"
+                        style="width:${Page02.escapeHTML(
+                            dimension.percentage
+                        )}%"
+                    ></span>
+
+                </div>
+
+
+                <div class="result-dimension__meta">
+
+                    <span>
+
+                        ${Page02.escapeHTML(
+                            dimension.percentage
+                        )}%
+
+                    </span>
+
+                    <span>
+
+                        GAP ${Page02.escapeHTML(
+                            dimension.gap
+                        )}
+
+                    </span>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                card
+            );
+
+        }
+    );
+
+};
+
+
+/* =============================================================================
+ * RENDER RESULT
+ * =============================================================================
+ *
+ * Canonical result DOM IDs supported by v2.2:
+ *
+ *      #result-name
+ *      #result-score
+ *      #result-score-max
+ *      #result-percentage
+ *      #result-gap
+ *      #result-level-tamil
+ *      #result-level-english
+ *      #result-progress-bar
+ *
+ *      #result-strongest-tamil
+ *      #result-strongest-english
+ *
+ *      #result-growth-tamil
+ *      #result-growth-english
+ *
+ *      #result-dimensions
+ *
+ * Missing optional elements do not break the result renderer.
+ *
+ * =============================================================================
+ */
+
+
+Page02.renderResult = function(
+    result
+){
+
+    if(!result){
+
+        return false;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * NAME
+     * -------------------------------------------------------------------------
+     */
+
+
+    Page02.setResultText(
+        'result-name',
+        result.fullName
+    );
+
+
+    /* -------------------------------------------------------------------------
+     * SCORE
+     * -------------------------------------------------------------------------
+     */
+
+
+    Page02.setResultText(
+        'result-score',
+        result.score
+    );
+
+
+    Page02.setResultText(
+        'result-score-max',
+        result.maximumScore
+    );
+
+
+    Page02.setResultText(
+        'result-percentage',
+        result.percentage + '%'
+    );
+
+
+    Page02.setResultText(
+        'result-gap',
+        result.gap
+    );
+
+
+    /* -------------------------------------------------------------------------
+     * LEVEL
+     * -------------------------------------------------------------------------
+     */
+
+
+    Page02.setResultText(
+        'result-level-tamil',
+        result.band.tamil
+    );
+
+
+    Page02.setResultText(
+        'result-level-english',
+        result.band.english
+    );
+
+
+    /* -------------------------------------------------------------------------
+     * SCORE PROGRESS
+     * -------------------------------------------------------------------------
+     */
+
+
+    Page02.setResultWidth(
+        'result-progress-bar',
+        result.percentage
+    );
+
+
+    /* -------------------------------------------------------------------------
+     * STRONGEST DIMENSION
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        result.strongestDimension
+    ){
+
+        Page02.setResultText(
+            'result-strongest-tamil',
+            result.strongestDimension.tamil
+        );
+
+
+        Page02.setResultText(
+            'result-strongest-english',
+            result.strongestDimension.english
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * GROWTH DIMENSION
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        result.growthDimension
+    ){
+
+        Page02.setResultText(
+            'result-growth-tamil',
+            result.growthDimension.tamil
+        );
+
+
+        Page02.setResultText(
+            'result-growth-english',
+            result.growthDimension.english
+        );
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * FIVE DIMENSIONS
+     * -------------------------------------------------------------------------
+     */
+
+
+    Page02.renderResultDimensions(
+        result
+    );
+
+
+    /* -------------------------------------------------------------------------
+     * RESULT ROOT STATE
+     * -------------------------------------------------------------------------
+     */
+
+
+    const resultScreen =
+        Page02.getScreenElement(
+            Page02.SCREENS.RESULT
+        );
+
+
+    if(resultScreen){
+
+        resultScreen.dataset.score =
+            String(
+                result.score
+            );
+
+
+        resultScreen.dataset.level =
+            result.band.code;
+
+
+        resultScreen.dataset.complete =
+            'true';
+
+    }
+
+
+    return true;
+
+};
+
+
+/* =============================================================================
+ * RESULT INFO
+ * =============================================================================
+ *
+ * Development console:
+ *
+ *      Page02.resultInfo()
+ *
+ * =============================================================================
+ */
+
+
+Page02.resultInfo = function(){
+
+    const result =
+        Page02.state.result ||
+        Page02.getSavedResult();
+
+
+    if(!result){
+
+        return {
+
+            available:
+                false
+
+        };
+
+    }
+
+
+    return {
+
+        available:
+            true,
+
+        peopleId:
+            result.peopleId,
+
+        clientId:
+            result.clientId,
+
+        fullName:
+            result.fullName,
+
+        score:
+            result.score,
+
+        maximumScore:
+            result.maximumScore,
+
+        gap:
+            result.gap,
+
+        percentage:
+            result.percentage,
+
+        level:
+            result.band,
+
+        strongestDimension:
+            result.strongestDimension
+                ? result.strongestDimension.english
+                : null,
+
+        growthDimension:
+            result.growthDimension
+                ? result.growthDimension.english
+                : null,
+
+        dimensions:
+            result.dimensions.map(
+                function(dimension){
+
+                    return {
+
+                        dimension:
+                            dimension.english,
+
+                        score:
+                            dimension.score,
+
+                        maximum:
+                            dimension.maximumScore,
+
+                        gap:
+                            dimension.gap,
+
+                        percentage:
+                            dimension.percentage
+
+                    };
+
+                }
+            )
+
+    };
+
+};
+
+
+/* =============================================================================
+ * DISCOVERY DEBUG INFO
+ * =============================================================================
+ */
+
+
+Page02.discoveryInfo = function(){
+
+    return {
+
+        saved:
+            Boolean(
+                Page02.state.discoveryResponse
+            ),
+
+        saving:
+            Page02.state.isSaving,
+
+        response:
+            Page02.state.discoveryResponse,
+
+        result:
+            Page02.state.result
+
+    };
+
+};
+
+
+/* =============================================================================
+ * END OF BATCH 4
+ * =============================================================================
+ *
+ * CTM PATH™ PAGE 02 v2.2
+ *
+ * COMPLETE IN THIS BATCH
+ *
+ *      ✓ Final score calculation
+ *      ✓ Maximum score = 100
+ *      ✓ Gap calculation
+ *      ✓ Percentage calculation
+ *
+ *      ✓ Five dimension results
+ *      ✓ Dimension score / 20
+ *      ✓ Dimension gap
+ *      ✓ Dimension percentage
+ *
+ *      ✓ Strongest dimension
+ *      ✓ Growth opportunity dimension
+ *
+ *      ✓ Overall result band
+ *
+ *          STARTING™
+ *          PROGRESSING™
+ *          ADVANCING™
+ *          ACHIEVED™
+ *
+ *      ✓ Canonical 25-answer payload
+ *      ✓ Canonical five-dimension payload
+ *      ✓ Client identity validation
+ *
+ *      ✓ CTM_API.saveDiscovery()
+ *      ✓ Backend response validation
+ *      ✓ Duplicate-save protection
+ *      ✓ Busy state
+ *      ✓ Save error handling
+ *
+ *      ✓ Result stored in sessionStorage
+ *
+ *      ✓ Page 02 Result rendering
+ *      ✓ Overall score
+ *      ✓ Gap
+ *      ✓ Percentage
+ *      ✓ Level
+ *      ✓ Strongest dimension
+ *      ✓ Growth dimension
+ *      ✓ Five dimension score cards
+ *
+ *
+ * CRITICAL ARCHITECTURE
+ *
+ *      Page02.completeScorecard()
+ *
+ *      DOES NOT:
+ *
+ *          window.location.href = "page03.html"
+ *
+ *
+ *      Instead:
+ *
+ *          Dimension 05
+ *              ↓
+ *          Calculate
+ *              ↓
+ *          Save Discovery
+ *              ↓
+ *          RESULT SCREEN
+ *              ↓
+ *          USER SEES RESULT
+ *
+ *
+ *      Batch 5 will provide the final explicit handoff:
+ *
+ *          Result Continue
+ *              ↓
+ *          Page 03
+ *
+ *
+ * DO NOT initialize Page02 yet.
+ *
+ * DO NOT expose window.Page02 yet.
+ *
+ *
+ * NEXT
+ *
+ *      BATCH 5 — FINAL
+ *
+ *      SESSION RECOVERY
+ *      KYC RESTORATION
+ *      RESULT RECOVERY
+ *      HEADER STATUS
+ *      CONTINUE TO PAGE 03
+ *      INITIALIZATION
+ *      DOMContentLoaded
+ *      PUBLIC API
+ *      PRODUCTION CLOSURE
+ *
+ * =============================================================================
+ */
+
+/* =============================================================================
+ * BATCH 5 — FINAL
+ *
+ * SESSION RECOVERY
+ * KYC RESTORATION
+ * RESULT RECOVERY
+ * HEADER STATUS
+ * PAGE 03 HANDOFF
+ * INITIALIZATION
+ * DOMContentLoaded
+ * PUBLIC API
+ * PRODUCTION CLOSURE
+ * =============================================================================
+ *
+ * RESPONSIBILITIES
+ *
+ *      • Persist Page 02 journey state
+ *      • Recover interrupted Page 02 sessions
+ *      • Restore KYC fields
+ *      • Restore registered client identity
+ *      • Restore 25 scorecard answers
+ *      • Restore active dimension
+ *      • Restore completed result
+ *      • Restore correct internal screen
+ *      • Update shared header journey status
+ *      • Bind Result → Page 03 continuation
+ *      • Initialize Page 02 exactly once
+ *      • Expose controlled public API
+ *
+ * IMPORTANT
+ *
+ *      This is the FINAL batch of page02.js v2.2.
+ *
+ * =============================================================================
+ */
+
+
+/* =============================================================================
+ * SESSION STATE VERSION
+ * =============================================================================
+ */
+
+
+Page02.SESSION_VERSION =
+    '2.2';
+
+
+/* =============================================================================
+ * PAGE 03 DESTINATION
+ * =============================================================================
+ *
+ * Page 02 lives inside:
+ *
+ *      /pages/page02.html
+ *
+ * Therefore Page 03 is a sibling page.
+ *
+ * =============================================================================
+ */
+
+
+Page02.PAGE03_URL =
+    'page03.html';
+
+
+/* =============================================================================
+ * GET SESSION STORAGE KEY
+ * =============================================================================
+ */
+
+
+Page02.getSessionStorageKey = function(){
+
+    if(
+        Page02.CONFIG.storageKeys &&
+        Page02.CONFIG.storageKeys.page02State
+    ){
+
+        return Page02.CONFIG.storageKeys.page02State;
+
+    }
+
+
+    return 'ctm_page02_state_v2_2';
+
+};
+
+
+/* =============================================================================
+ * SERIALIZE ANSWERS
+ * =============================================================================
+ */
+
+
+Page02.serializeAnswers = function(){
+
+    const answers = {};
+
+
+    Page02
+        .getScorecardIndicators()
+        .forEach(
+            function(indicator){
+
+                const answer =
+                    Page02.getAnswer(
+                        indicator.id
+                    );
+
+
+                if(!answer){
+
+                    return;
+
+                }
+
+
+                answers[
+                    indicator.id
+                ] = {
+
+                    indicatorId:
+                        answer.indicatorId,
+
+                    indicatorNumber:
+                        answer.indicatorNumber,
+
+                    dimensionId:
+                        answer.dimensionId,
+
+                    dimensionNumber:
+                        answer.dimensionNumber,
+
+                    tamil:
+                        answer.tamil,
+
+                    english:
+                        answer.english,
+
+                    ideal:
+                        answer.ideal,
+
+                    target:
+                        answer.target,
+
+                    optionIndex:
+                        answer.optionIndex,
+
+                    score:
+                        Number(
+                            answer.score
+                        ),
+
+                    selectedRange:
+                        answer.selectedRange,
+
+                    value:
+                        answer.value,
+
+                    statusTamil:
+                        answer.statusTamil,
+
+                    statusEnglish:
+                        answer.statusEnglish
+
+                };
+
+            }
+        );
+
+
+    return answers;
+
+};
+
+
+/* =============================================================================
+ * BUILD SESSION STATE
+ * =============================================================================
+ */
+
+
+Page02.buildSessionState = function(){
+
+    return {
+
+        sessionVersion:
+            Page02.SESSION_VERSION,
+
+        page:
+            Page02.CONFIG.pageNumber,
+
+        currentScreen:
+            Page02.state.currentScreen,
+
+        currentDimension:
+            Page02.state.currentDimension,
+
+        peopleId:
+            Page02.state.peopleId,
+
+        clientId:
+            Page02.state.clientId,
+
+        kyc:
+            Page02.state.kyc
+                ? Object.assign(
+                    {},
+                    Page02.state.kyc
+                )
+                : null,
+
+        answers:
+            Page02.serializeAnswers(),
+
+        result:
+            Page02.state.result
+                ? Page02.state.result
+                : null,
+
+        discoverySaved:
+            Boolean(
+                Page02.state.discoveryResponse
+            ),
+
+        savedAt:
+            new Date().toISOString()
+
+    };
+
+};
+
+
+/* =============================================================================
+ * SAVE SESSION
+ * =============================================================================
+ */
+
+
+Page02.saveSession = function(){
+
+    try{
+
+        const session =
+            Page02.buildSessionState();
+
+
+        sessionStorage.setItem(
+            Page02.getSessionStorageKey(),
+            JSON.stringify(
+                session
+            )
+        );
+
+
+        /*
+         * Maintain the lightweight identity keys used
+         * elsewhere in the journey.
+         */
+
+
+        if(
+            Page02.state.peopleId
+        ){
+
+            sessionStorage.setItem(
+                Page02.CONFIG.storageKeys.peopleId,
+                Page02.state.peopleId
+            );
+
+        }
+
+
+        if(
+            Page02.state.kyc &&
+            Page02.state.kyc.fullName
+        ){
+
+            sessionStorage.setItem(
+                Page02.CONFIG.storageKeys.fullName,
+                Page02.state.kyc.fullName
+            );
+
+        }
+
+
+        return true;
+
+    }
+    catch(error){
+
+        console.warn(
+            'CTM PATH™ Page 02: Session could not be saved.',
+            error
+        );
+
+
+        return false;
+
+    }
+
+};
+
+
+/* =============================================================================
+ * READ SESSION
+ * =============================================================================
+ */
+
+
+Page02.readSession = function(){
+
+    try{
+
+        const raw =
+            sessionStorage.getItem(
+                Page02.getSessionStorageKey()
+            );
+
+
+        if(!raw){
+
+            return null;
+
+        }
+
+
+        const session =
+            JSON.parse(
+                raw
+            );
+
+
+        if(
+            !session ||
+            typeof session !==
+                'object'
+        ){
+
+            return null;
+
+        }
+
+
+        return session;
+
+    }
+    catch(error){
+
+        console.warn(
+            'CTM PATH™ Page 02: Session could not be read.',
+            error
+        );
+
+
+        return null;
+
+    }
+
+};
+
+
+/* =============================================================================
+ * CLEAR PAGE 02 SESSION
+ * =============================================================================
+ *
+ * This clears only the detailed Page 02 working state.
+ *
+ * Client identity is intentionally NOT deleted because Page 03
+ * requires the same registered journey identity.
+ *
+ * =============================================================================
+ */
+
+
+Page02.clearSession = function(){
+
+    try{
+
+        sessionStorage.removeItem(
+            Page02.getSessionStorageKey()
+        );
+
+
+        return true;
+
+    }
+    catch(error){
+
+        console.warn(
+            'CTM PATH™ Page 02: Session could not be cleared.',
+            error
+        );
+
+
+        return false;
+
+    }
+
+};
+
+
+/* =============================================================================
+ * RESTORE FIELD VALUE
+ * =============================================================================
+ */
+
+
+Page02.restoreFieldValue = function(
+    form,
+    name,
+    value
+){
+
+    if(
+        !form ||
+        value === null ||
+        value === undefined
+    ){
+
+        return;
+
+    }
+
+
+    const field =
+        form.elements[
+            name
+        ];
+
+
+    if(!field){
+
+        return;
+
+    }
+
+
+    /*
+     * Standard input / select / textarea.
+     */
+
+
+    if(
+        field instanceof
+            HTMLInputElement ||
+        field instanceof
+            HTMLSelectElement ||
+        field instanceof
+            HTMLTextAreaElement
+    ){
+
+        if(
+            field.type ===
+                'radio'
+        ){
+
+            const radios =
+                form.querySelectorAll(
+                    '[name="' +
+                    name +
+                    '"]'
+                );
+
+
+            radios.forEach(
+                function(radio){
+
+                    radio.checked =
+                        String(
+                            radio.value
+                        ) ===
+                        String(
+                            value
+                        );
+
+                }
+            );
+
+
+            return;
+
+        }
+
+
+        if(
+            field.type ===
+                'checkbox'
+        ){
+
+            field.checked =
+                Boolean(value);
+
+
+            return;
+
+        }
+
+
+        field.value =
+            value;
+
+
+        return;
+
+    }
+
+
+    /*
+     * RadioNodeList support.
+     */
+
+
+    if(
+        typeof field.length ===
+            'number'
+    ){
+
+        Array.from(
+            field
+        ).forEach(
+            function(control){
+
+                if(
+                    control.type ===
+                    'radio'
+                ){
+
+                    control.checked =
+                        String(
+                            control.value
+                        ) ===
+                        String(
+                            value
+                        );
+
+                }
+
+            }
+        );
+
+    }
+
+};
+
+
+/* =============================================================================
+ * RESTORE KYC FORM
+ * =============================================================================
+ */
+
+
+Page02.restoreKYCForm = function(
+    kyc
+){
+
+    if(!kyc){
+
+        return;
+
+    }
+
+
+    const form =
+        Page02.getKYCForm();
+
+
+    if(!form){
+
+        return;
+
+    }
+
+
+    const fields = [
+
+        'fullName',
+
+        'email',
+
+        'mobile',
+
+        'gender',
+
+        'maritalStatus',
+
+        'ageRange',
+
+        'occupation',
+
+        'city',
+
+        'district',
+
+        'state',
+
+        'pincode'
+
+    ];
+
+
+    fields.forEach(
+        function(name){
+
+            if(
+                Object.prototype.hasOwnProperty.call(
+                    kyc,
+                    name
+                )
+            ){
+
+                Page02.restoreFieldValue(
+                    form,
+                    name,
+                    kyc[name]
+                );
+
+            }
+
+        }
+    );
+
+};
+
+
+/* =============================================================================
+ * RESTORE ANSWERS
+ * =============================================================================
+ */
+
+
+Page02.restoreAnswers = function(
+    savedAnswers
+){
+
+    if(
+        !savedAnswers ||
+        typeof savedAnswers !==
+            'object'
+    ){
+
+        return 0;
+
+    }
+
+
+    let restored =
+        0;
+
+
+    Page02
+        .getScorecardIndicators()
+        .forEach(
+            function(indicator){
+
+                const saved =
+                    savedAnswers[
+                        indicator.id
+                    ];
+
+
+                if(!saved){
+
+                    return;
+
+                }
+
+
+                const score =
+                    Number(
+                        saved.score
+                    );
+
+
+                const option =
+                    indicator.options.find(
+                        function(item){
+
+                            return (
+                                Number(
+                                    item.score
+                                ) ===
+                                score
+                            );
+
+                        }
+                    );
+
+
+                if(!option){
+
+                    return;
+
+                }
+
+
+                const optionIndex =
+                    indicator.options.findIndex(
+                        function(item){
+
+                            return (
+                                Number(
+                                    item.score
+                                ) ===
+                                score
+                            );
+
+                        }
+                    );
+
+
+                const status =
+                    Page02.getScoreStatus(
+                        score
+                    );
+
+
+                /*
+                 * Rebuild from current frozen indicator definitions
+                 * instead of trusting stale descriptive session data.
+                 */
+
+
+                Page02.state.answers[
+                    indicator.id
+                ] = {
+
+                    indicatorId:
+                        indicator.id,
+
+                    indicatorNumber:
+                        indicator.number,
+
+                    dimensionId:
+                        indicator.dimensionId,
+
+                    dimensionNumber:
+                        indicator.dimensionNumber,
+
+                    tamil:
+                        indicator.tamil,
+
+                    english:
+                        indicator.english,
+
+                    ideal:
+                        indicator.ideal,
+
+                    target:
+                        indicator.target,
+
+                    optionIndex:
+                        optionIndex,
+
+                    score:
+                        score,
+
+                    selectedRange:
+                        option.label,
+
+                    value:
+                        option.value,
+
+                    statusTamil:
+                        status.tamil,
+
+                    statusEnglish:
+                        status.english
+
+                };
+
+
+                restored +=
+                    1;
+
+            }
+        );
+
+
+    return restored;
+
+};
+
+
+/* =============================================================================
+ * RESTORE LIGHTWEIGHT CLIENT IDENTITY
+ * =============================================================================
+ *
+ * Used if the detailed Page 02 session is unavailable but
+ * registration identity survived independently.
+ *
+ * =============================================================================
+ */
+
+
+Page02.restoreStoredIdentity = function(){
+
+    try{
+
+        if(
+            !Page02.state.peopleId
+        ){
+
+            const peopleId =
+                sessionStorage.getItem(
+                    Page02.CONFIG.storageKeys.peopleId
+                );
+
+
+            if(peopleId){
+
+                Page02.state.peopleId =
+                    peopleId;
+
+            }
+
+        }
+
+
+        if(
+            !Page02.state.clientId &&
+            Page02.state.peopleId
+        ){
+
+            Page02.state.clientId =
+                Page02.state.peopleId;
+
+        }
+
+
+        const fullName =
+            sessionStorage.getItem(
+                Page02.CONFIG.storageKeys.fullName
+            );
+
+
+        if(fullName){
+
+            Page02.state.kyc =
+                Page02.state.kyc || {};
+
+
+            if(
+                !Page02.state.kyc.fullName
+            ){
+
+                Page02.state.kyc.fullName =
+                    fullName;
+
+            }
+
+        }
+
+    }
+    catch(error){
+
+        console.warn(
+            'CTM PATH™ Page 02: Stored identity could not be restored.',
+            error
+        );
+
+    }
+
+};
+
+
+/* =============================================================================
+ * RESTORE SAVED RESULT
+ * =============================================================================
+ */
+
+
+Page02.restoreSavedResult = function(){
+
+    if(
+        Page02.state.result
+    ){
+
+        return Page02.state.result;
+
+    }
+
+
+    const savedResult =
+        Page02.getSavedResult();
+
+
+    if(!savedResult){
+
+        return null;
+
+    }
+
+
+    /*
+     * A valid result must represent the complete 25-indicator scorecard.
+     */
+
+
+    if(
+        Number(
+            savedResult.answeredCount
+        ) !==
+        Page02.CONFIG.scoring.indicatorCount
+    ){
+
+        return null;
+
+    }
+
+
+    if(
+        !Number.isFinite(
+            Number(
+                savedResult.score
+            )
+        )
+    ){
+
+        return null;
+
+    }
+
+
+    Page02.state.result =
+        savedResult;
+
+
+    return savedResult;
+
+};
+
+
+/* =============================================================================
+ * RESTORE SESSION
+ * =============================================================================
+ */
+
+
+Page02.restoreSession = function(){
+
+    const session =
+        Page02.readSession();
+
+
+    if(!session){
+
+        Page02.restoreStoredIdentity();
+
+        Page02.restoreSavedResult();
+
+
+        return {
+
+            restored:
+                false,
+
+            answers:
+                0,
+
+            result:
+                Boolean(
+                    Page02.state.result
+                )
+
+        };
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * CLIENT IDENTITY
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(session.peopleId){
+
+        Page02.state.peopleId =
+            String(
+                session.peopleId
+            );
+
+    }
+
+
+    if(session.clientId){
+
+        Page02.state.clientId =
+            String(
+                session.clientId
+            );
+
+    }
+
+
+    if(
+        !Page02.state.clientId &&
+        Page02.state.peopleId
+    ){
+
+        Page02.state.clientId =
+            Page02.state.peopleId;
+
+    }
+
+
+    if(
+        !Page02.state.peopleId &&
+        Page02.state.clientId
+    ){
+
+        Page02.state.peopleId =
+            Page02.state.clientId;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * KYC
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        session.kyc &&
+        typeof session.kyc ===
+            'object'
+    ){
+
+        Page02.state.kyc =
+            Object.assign(
+                {},
+                session.kyc
+            );
+
+    }
+
+
+    Page02.restoreKYCForm(
+        Page02.state.kyc
+    );
+
+
+    /* -------------------------------------------------------------------------
+     * ANSWERS
+     * -------------------------------------------------------------------------
+     */
+
+
+    const restoredAnswers =
+        Page02.restoreAnswers(
+            session.answers
+        );
+
+
+    /* -------------------------------------------------------------------------
+     * DIMENSION
+     * -------------------------------------------------------------------------
+     */
+
+
+    Page02.state.currentDimension =
+        Page02.clamp(
+            Number(
+                session.currentDimension
+            ) || 0,
+            0,
+            Page02.CONFIG.scoring.dimensionCount - 1
+        );
+
+
+    /* -------------------------------------------------------------------------
+     * RESULT
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        session.result &&
+        Number(
+            session.result.answeredCount
+        ) ===
+            Page02.CONFIG.scoring.indicatorCount
+    ){
+
+        Page02.state.result =
+            session.result;
+
+    }
+
+
+    /*
+     * Separate result key acts as a recovery fallback.
+     */
+
+
+    Page02.restoreSavedResult();
+
+
+    /* -------------------------------------------------------------------------
+     * DISCOVERY SAVED FLAG
+     * -------------------------------------------------------------------------
+     *
+     * We deliberately do NOT fabricate the original backend response.
+     *
+     * A small local marker is sufficient to prevent the completed journey
+     * from being treated as unsaved during the restored result screen.
+     *
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        session.discoverySaved &&
+        Page02.state.result
+    ){
+
+        Page02.state.discoveryResponse = {
+
+            success:
+                true,
+
+            restored:
+                true
+
+        };
+
+    }
+
+
+    Page02.restoreStoredIdentity();
+
+
+    return {
+
+        restored:
+            true,
+
+        answers:
+            restoredAnswers,
+
+        result:
+            Boolean(
+                Page02.state.result
+            ),
+
+        currentScreen:
+            session.currentScreen || null
+
+    };
+
+};
+
+
+/* =============================================================================
+ * GET HEADER JOURNEY STATUS
+ * =============================================================================
+ *
+ * Shared header remains global.
+ *
+ * Page 02 updates only the dynamic journey identity/counter.
+ *
+ * =============================================================================
+ */
+
+
+Page02.getHeaderJourneyStatus = function(){
+
+    const screen =
+        Page02.state.currentScreen;
+
+
+    if(
+        screen ===
+        Page02.SCREENS.RESULT
+    ){
+
+        return {
+
+            title:
+                'MILLIONAIRE JOURNEY™',
+
+            counter:
+                '02 / 07'
+
+        };
+
+    }
+
+
+    if(
+        screen ===
+        Page02.SCREENS.SCORECARD
+    ){
+
+        return {
+
+            title:
+                'MILLIONAIRE JOURNEY™',
+
+            counter:
+                '02 / 07'
+
+        };
+
+    }
+
+
+    if(
+        screen ===
+        Page02.SCREENS.KYC
+    ){
+
+        return {
+
+            title:
+                'MILLIONAIRE JOURNEY™',
+
+            counter:
+                '02 / 07'
+
+        };
+
+    }
+
+
+    return {
+
+        title:
+            'MILLIONAIRE JOURNEY™',
+
+        counter:
+            '02 / 07'
+
+    };
+
+};
+
+
+/* =============================================================================
+ * UPDATE HEADER STATUS
+ * =============================================================================
+ */
+
+
+Page02.updateHeaderStatus = function(){
+
+    const status =
+        Page02.getHeaderJourneyStatus();
+
+
+    const title =
+        Page02.el(
+            'journey-title'
+        );
+
+
+    const counter =
+        Page02.el(
+            'journey-counter'
+        );
+
+
+    if(title){
+
+        title.textContent =
+            status.title;
+
+    }
+
+
+    if(counter){
+
+        counter.textContent =
+            status.counter;
+
+    }
+
+};
+
+
+/* =============================================================================
+ * WAIT FOR GLOBAL HEADER
+ * =============================================================================
+ *
+ * Pages 02–07 load the shared header asynchronously.
+ *
+ * Page 02 therefore cannot assume the header DOM exists
+ * at the exact moment page02.js initializes.
+ *
+ * =============================================================================
+ */
+
+
+Page02.syncHeaderWhenReady = function(){
+
+    let attempts =
+        0;
+
+
+    const maximumAttempts =
+        30;
+
+
+    const interval =
+        window.setInterval(
+            function(){
+
+                attempts +=
+                    1;
+
+
+                const title =
+                    Page02.el(
+                        'journey-title'
+                    );
+
+
+                const counter =
+                    Page02.el(
+                        'journey-counter'
+                    );
+
+
+                if(
+                    title ||
+                    counter
+                ){
+
+                    Page02.updateHeaderStatus();
+
+
+                    window.clearInterval(
+                        interval
+                    );
+
+
+                    return;
+
+                }
+
+
+                if(
+                    attempts >=
+                    maximumAttempts
+                ){
+
+                    window.clearInterval(
+                        interval
+                    );
+
+                }
+
+            },
+            100
+        );
+
+};
+
+
+/* =============================================================================
+ * DETERMINE INITIAL SCREEN
+ * =============================================================================
+ *
+ * PRIORITY
+ *
+ *      1. Completed result
+ *      2. Registered + scorecard progress
+ *      3. KYC progress
+ *      4. Intro
+ *
+ * =============================================================================
+ */
+
+
+Page02.determineInitialScreen = function(
+    recovery
+){
+
+    /* -------------------------------------------------------------------------
+     * COMPLETED RESULT
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        Page02.state.result &&
+        Number(
+            Page02.state.result.answeredCount
+        ) ===
+            Page02.CONFIG.scoring.indicatorCount
+    ){
+
+        return Page02.SCREENS.RESULT;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * REGISTERED CLIENT
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        Page02.state.peopleId ||
+        Page02.state.clientId
+    ){
+
+        /*
+         * Once registration has succeeded we never force the
+         * user through registration again during the same journey.
+         */
+
+
+        return Page02.SCREENS.SCORECARD;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * PREVIOUS KYC SCREEN
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        recovery &&
+        recovery.currentScreen ===
+            Page02.SCREENS.KYC
+    ){
+
+        return Page02.SCREENS.KYC;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * INTRO
+     * -------------------------------------------------------------------------
+     */
+
+
+    return Page02.SCREENS.INTRO;
+
+};
+
+
+/* =============================================================================
+ * RESTORE INITIAL SCREEN
+ * =============================================================================
+ */
+
+
+Page02.restoreInitialScreen = function(
+    recovery
+){
+
+    const screen =
+        Page02.determineInitialScreen(
+            recovery
+        );
+
+
+    /* -------------------------------------------------------------------------
+     * RESULT
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        screen ===
+        Page02.SCREENS.RESULT
+    ){
+
+        Page02.renderResult(
+            Page02.state.result
+        );
+
+
+        Page02.showScreen(
+            Page02.SCREENS.RESULT,
+            {
+                scroll:
+                    false
+            }
+        );
+
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * SCORECARD
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        screen ===
+        Page02.SCREENS.SCORECARD
+    ){
+
+        Page02.showScreen(
+            Page02.SCREENS.SCORECARD,
+            {
+                scroll:
+                    false
+            }
+        );
+
+
+        Page02.renderCurrentDimension();
+
+
+        Page02.refreshVisibleAnswerStates();
+
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * KYC
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        screen ===
+        Page02.SCREENS.KYC
+    ){
+
+        Page02.restoreKYCForm(
+            Page02.state.kyc
+        );
+
+
+        Page02.showScreen(
+            Page02.SCREENS.KYC,
+            {
+                scroll:
+                    false
+            }
+        );
+
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * INTRO
+     * -------------------------------------------------------------------------
+     */
+
+
+    Page02.showScreen(
+        Page02.SCREENS.INTRO,
+        {
+            scroll:
+                false
+        }
+    );
+
+};
+
+
+/* =============================================================================
+ * CAN CONTINUE TO PAGE 03
+ * =============================================================================
+ */
+
+
+Page02.canContinueToPage03 = function(){
+
+    const result =
+        Page02.state.result;
+
+
+    if(!result){
+
+        return false;
+
+    }
+
+
+    if(
+        Number(
+            result.answeredCount
+        ) !==
+        Page02.CONFIG.scoring.indicatorCount
+    ){
+
+        return false;
+
+    }
+
+
+    if(
+        !Page02.state.peopleId &&
+        !Page02.state.clientId
+    ){
 
         return false;
 
@@ -7923,286 +11523,221 @@ Page02.canInitialize = function(){
 };
 
 
-
 /* =============================================================================
- * INITIAL SCREEN DECISION
+ * PREPARE PAGE 03 HANDOFF
  * =============================================================================
  *
- * New visitor:
- *
- *      INTRO
- *
- * Registered session:
- *
- *      SCORECARD at last active dimension
+ * Preserve the canonical client identity and Page 02 result.
  *
  * =============================================================================
  */
 
 
-Page02.selectInitialScreen = function(){
-
-    const restored =
-        Page02.restoreSession();
-
+Page02.preparePage03Handoff = function(){
 
     if(
-        restored &&
-        Page02.state.clientId
+        !Page02.canContinueToPage03()
     ){
 
-        Page02.restoreKYCFields();
-
-
-        Page02.updateClientName();
-
-
-        Page02.showScreen(
-            Page02.SCREENS.SCORECARD
-        );
-
-
-        Page02.renderDimension(
-            Page02.state.currentDimension
-        );
-
-
-        return;
+        return false;
 
     }
 
 
-    Page02.showScreen(
-        Page02.SCREENS.INTRO
-    );
+    try{
 
-};
-
-
-
-/* =============================================================================
- * FORM INPUT CLEANUP
- * =============================================================================
- */
+        const identity =
+            Page02.state.peopleId ||
+            Page02.state.clientId;
 
 
-Page02.bindFieldCleanup = function(){
-
-    const fields = [
-
-        'fullName',
-
-        'mobile',
-
-        'email',
-
-        'district',
-
-        'state'
-
-    ];
+        sessionStorage.setItem(
+            Page02.CONFIG.storageKeys.peopleId,
+            identity
+        );
 
 
-    fields.forEach(
-        function(name){
+        if(
+            Page02.state.kyc &&
+            Page02.state.kyc.fullName
+        ){
 
-            const field =
-                document.getElementById(
-                    name
-                ) ||
-                document.querySelector(
-                    '[name="' +
-                    name +
-                    '"]'
-                );
-
-
-            if(!field){
-
-                return;
-
-            }
-
-
-            field.addEventListener(
-                'input',
-                function(){
-
-                    Page02.setFieldError(
-                        name,
-                        ''
-                    );
-
-
-                    Page02.setStatusMessage(
-                        ''
-                    );
-
-                }
+            sessionStorage.setItem(
+                Page02.CONFIG.storageKeys.fullName,
+                Page02.state.kyc.fullName
             );
 
         }
-    );
+
+
+        sessionStorage.setItem(
+            Page02.CONFIG.storageKeys.page02Result,
+            JSON.stringify(
+                Page02.state.result
+            )
+        );
+
+
+        return true;
+
+    }
+    catch(error){
+
+        console.error(
+            'CTM PATH™ Page 02: Page 03 handoff could not be prepared.',
+            error
+        );
+
+
+        return false;
+
+    }
 
 };
 
 
-
 /* =============================================================================
- * MOBILE NUMBER INPUT GUARD
+ * CONTINUE TO PAGE 03
  * =============================================================================
  */
 
 
-Page02.bindMobileGuard = function(){
+Page02.continueToPage03 = function(){
 
-    const mobile =
-        document.getElementById(
-            'mobile'
-        ) ||
-        document.querySelector(
-            '[name="mobile"]'
+    if(
+        !Page02.canContinueToPage03()
+    ){
+
+        console.error(
+            'CTM PATH™ Page 02: Cannot continue to Page 03 before Page 02 is complete.'
         );
 
 
-    if(!mobile){
-
-        return;
+        return false;
 
     }
 
 
-    mobile.setAttribute(
-        'inputmode',
-        'numeric'
-    );
+    const prepared =
+        Page02.preparePage03Handoff();
 
 
-    mobile.setAttribute(
-        'autocomplete',
-        'tel'
-    );
+    if(!prepared){
+
+        return false;
+
+    }
 
 
-    mobile.addEventListener(
-        'input',
-        function(){
+    window.location.href =
+        Page02.PAGE03_URL;
 
-            const cleaned =
-                String(
-                    mobile.value || ''
-                )
-                .replace(
-                    /\D/g,
-                    ''
-                )
-                .slice(
-                    0,
-                    10
+
+    return true;
+
+};
+
+
+/* =============================================================================
+ * BIND RESULT CONTROLS
+ * =============================================================================
+ */
+
+
+Page02.bindResultControls = function(){
+
+    const continueButton =
+        Page02.el(
+            'result-continue'
+        );
+
+
+    if(continueButton){
+
+        continueButton.addEventListener(
+            'click',
+            function(event){
+
+                event.preventDefault();
+
+
+                Page02.continueToPage03();
+
+            }
+        );
+
+    }
+
+
+    /*
+     * Optional review button.
+     *
+     * If absent from Page 02 HTML, nothing happens.
+     */
+
+
+    const reviewButton =
+        Page02.el(
+            'result-review'
+        );
+
+
+    if(reviewButton){
+
+        reviewButton.addEventListener(
+            'click',
+            function(event){
+
+                event.preventDefault();
+
+
+                Page02.state.currentDimension =
+                    0;
+
+
+                Page02.showScreen(
+                    Page02.SCREENS.SCORECARD
                 );
 
 
-            if(
-                mobile.value !==
-                cleaned
-            ){
-
-                mobile.value =
-                    cleaned;
+                Page02.renderCurrentDimension();
 
             }
+        );
+
+    }
+
+};
+
+
+/* =============================================================================
+ * BIND SESSION PERSISTENCE EVENTS
+ * =============================================================================
+ */
+
+
+Page02.bindSessionEvents = function(){
+
+    /*
+     * Persist immediately before the document leaves.
+     */
+
+
+    window.addEventListener(
+        'pagehide',
+        function(){
+
+            Page02.saveSession();
 
         }
     );
 
-};
 
+    /*
+     * visibilitychange provides another lightweight recovery point,
+     * especially on mobile browsers.
+     */
 
-
-/* =============================================================================
- * EMAIL INPUT GUARD
- * =============================================================================
- */
-
-
-Page02.bindEmailGuard = function(){
-
-    const email =
-        document.getElementById(
-            'email'
-        ) ||
-        document.querySelector(
-            '[name="email"]'
-        );
-
-
-    if(!email){
-
-        return;
-
-    }
-
-
-    email.setAttribute(
-        'inputmode',
-        'email'
-    );
-
-
-    email.setAttribute(
-        'autocomplete',
-        'email'
-    );
-
-};
-
-
-
-/* =============================================================================
- * NAME INPUT GUARD
- * =============================================================================
- */
-
-
-Page02.bindNameGuard = function(){
-
-    const name =
-        document.getElementById(
-            'fullName'
-        ) ||
-        document.querySelector(
-            '[name="fullName"]'
-        );
-
-
-    if(!name){
-
-        return;
-
-    }
-
-
-    name.setAttribute(
-        'autocomplete',
-        'name'
-    );
-
-};
-
-
-
-/* =============================================================================
- * PAGE VISIBILITY SAVE
- * =============================================================================
- *
- * If the browser tab is hidden while the participant is
- * answering the scorecard, preserve current progress.
- *
- * =============================================================================
- */
-
-
-Page02.bindVisibilityPersistence = function(){
 
     document.addEventListener(
         'visibilitychange',
@@ -8210,27 +11745,10 @@ Page02.bindVisibilityPersistence = function(){
 
             if(
                 document.visibilityState ===
-                'hidden' &&
-                Page02.state.clientId
+                'hidden'
             ){
 
-                Page02.persistSession();
-
-            }
-
-        }
-    );
-
-
-    window.addEventListener(
-        'pagehide',
-        function(){
-
-            if(
-                Page02.state.clientId
-            ){
-
-                Page02.persistSession();
+                Page02.saveSession();
 
             }
 
@@ -8240,169 +11758,393 @@ Page02.bindVisibilityPersistence = function(){
 };
 
 
-
 /* =============================================================================
- * PREVENT ENTER FROM ACCIDENTALLY RELOADING KYC
+ * VALIDATE PAGE 02 DOM
+ * =============================================================================
+ *
+ * Production diagnostic only.
+ *
+ * Missing optional result elements do not fail initialization.
+ *
  * =============================================================================
  */
 
 
-Page02.bindFormProtection = function(){
+Page02.validateDOM = function(){
 
-    document
-        .querySelectorAll(
-            'form'
-        )
-        .forEach(
-            function(form){
+    const required = [
 
-                if(
-                    form.dataset.page02Protected ===
-                    'true'
-                ){
+        Page02.SCREEN_IDS.intro,
 
-                    return;
+        Page02.SCREEN_IDS.kyc,
 
-                }
+        Page02.SCREEN_IDS.scorecard,
 
+        Page02.SCREEN_IDS.result,
 
-                form.dataset.page02Protected =
-                    'true';
+        'kycForm',
 
+        'dimension-questions',
 
-                form.addEventListener(
-                    'submit',
-                    function(event){
+        'dimension-back',
 
-                        /*
-                         * The actual KYC form is already handled by
-                         * bindControls().
-                         *
-                         * Other forms on Page 02 must not trigger
-                         * browser navigation.
-                         */
+        'dimension-next'
+
+    ];
 
 
-                        const isKYC =
-                            (
-                                form.id ===
-                                'kyc-form'
-                            ) ||
-                            form.hasAttribute(
-                                'data-page02-kyc-form'
-                            );
+    const missing =
+        required.filter(
+            function(id){
 
-
-                        if(!isKYC){
-
-                            event.preventDefault();
-
-                        }
-
-                    }
+                return !Page02.el(
+                    id
                 );
 
             }
         );
 
+
+    if(missing.length){
+
+        console.error(
+            'CTM PATH™ Page 02: Required DOM elements are missing:',
+            missing
+        );
+
+
+        return {
+
+            valid:
+                false,
+
+            missing:
+                missing
+
+        };
+
+    }
+
+
+    return {
+
+        valid:
+            true,
+
+        missing:
+            []
+
+    };
+
 };
 
 
-
 /* =============================================================================
- * GLOBAL ERROR GUARD
+ * VALIDATE SCORECARD MASTER
  * =============================================================================
  *
- * Does not replace normal try/catch.
- *
- * This gives Page 02-specific console context if an unexpected
- * frontend error escapes.
+ * Final runtime protection for the frozen 25-indicator architecture.
  *
  * =============================================================================
  */
 
 
-Page02.bindErrorGuard = function(){
+Page02.validateScorecardMaster = function(){
 
-    window.addEventListener(
-        'error',
-        function(event){
+    const indicators =
+        Page02.getScorecardIndicators();
+
+
+    const errors = [];
+
+
+    if(
+        Page02.DIMENSIONS.length !==
+        Page02.CONFIG.scoring.dimensionCount
+    ){
+
+        errors.push(
+            'Expected exactly 5 dimensions.'
+        );
+
+    }
+
+
+    if(
+        indicators.length !==
+        Page02.CONFIG.scoring.indicatorCount
+    ){
+
+        errors.push(
+            'Expected exactly 25 indicators.'
+        );
+
+    }
+
+
+    Page02.DIMENSIONS.forEach(
+        function(dimension){
 
             if(
-                !event ||
-                !event.error
+                dimension.indicators.length !==
+                Page02.CONFIG.scoring.indicatorsPerDimension
             ){
+
+                errors.push(
+                    'Dimension ' +
+                    dimension.id +
+                    ' must contain exactly 5 indicators.'
+                );
+
+            }
+
+        }
+    );
+
+
+    indicators.forEach(
+        function(indicator){
+
+            if(
+                !Array.isArray(
+                    indicator.options
+                ) ||
+                indicator.options.length !==
+                    Page02.CONFIG.scoring.optionsPerIndicator
+            ){
+
+                errors.push(
+                    'Indicator ' +
+                    indicator.id +
+                    ' must contain exactly 4 options.'
+                );
+
 
                 return;
 
             }
 
 
-            console.error(
-                'CTM PATH™ Page 02 unexpected frontend error:',
-                event.error
+            const scores =
+                indicator.options.map(
+                    function(option){
+
+                        return Number(
+                            option.score
+                        );
+
+                    }
+                );
+
+
+            const expectedScores =
+                [1, 2, 3, 4];
+
+
+            expectedScores.forEach(
+                function(score){
+
+                    if(
+                        !scores.includes(
+                            score
+                        )
+                    ){
+
+                        errors.push(
+                            'Indicator ' +
+                            indicator.id +
+                            ' is missing score ' +
+                            score +
+                            '.'
+                        );
+
+                    }
+
+                }
             );
 
         }
     );
 
 
-    window.addEventListener(
-        'unhandledrejection',
-        function(event){
+    if(errors.length){
 
-            console.error(
-                'CTM PATH™ Page 02 unhandled promise rejection:',
-                event.reason
-            );
+        console.error(
+            'CTM PATH™ Page 02 scorecard master validation failed:',
+            errors
+        );
 
-        }
-    );
+
+        return {
+
+            valid:
+                false,
+
+            errors:
+                errors
+
+        };
+
+    }
+
+
+    return {
+
+        valid:
+            true,
+
+        errors:
+            []
+
+    };
 
 };
 
 
-
 /* =============================================================================
- * INITIALIZE SCORE EXPLANATION
+ * INITIALIZE STATE DEFAULTS
+ * =============================================================================
+ *
+ * Defensive only.
+ *
+ * Batch 1 should already establish the canonical state object.
+ *
  * =============================================================================
  */
 
 
-Page02.initializeScoreExplanation = function(){
+Page02.ensureStateDefaults = function(){
+
+    Page02.state =
+        Page02.state || {};
+
 
     if(
-        typeof Page02.renderScoreExplanation ===
-        'function'
+        !Page02.state.answers ||
+        typeof Page02.state.answers !==
+            'object'
     ){
 
-        Page02.renderScoreExplanation();
+        Page02.state.answers = {};
+
+    }
+
+
+    if(
+        !Number.isInteger(
+            Page02.state.currentDimension
+        )
+    ){
+
+        Page02.state.currentDimension =
+            0;
+
+    }
+
+
+    if(
+        typeof Page02.state.isRegistering !==
+            'boolean'
+    ){
+
+        Page02.state.isRegistering =
+            false;
+
+    }
+
+
+    if(
+        typeof Page02.state.isSaving !==
+            'boolean'
+    ){
+
+        Page02.state.isSaving =
+            false;
+
+    }
+
+
+    if(
+        !Page02.state.currentScreen
+    ){
+
+        Page02.state.currentScreen =
+            Page02.SCREENS.INTRO;
+
+    }
+
+
+    if(
+        Page02.state.peopleId ===
+        undefined
+    ){
+
+        Page02.state.peopleId =
+            null;
+
+    }
+
+
+    if(
+        Page02.state.clientId ===
+        undefined
+    ){
+
+        Page02.state.clientId =
+            null;
+
+    }
+
+
+    if(
+        Page02.state.kyc ===
+        undefined
+    ){
+
+        Page02.state.kyc =
+            null;
+
+    }
+
+
+    if(
+        Page02.state.result ===
+        undefined
+    ){
+
+        Page02.state.result =
+            null;
+
+    }
+
+
+    if(
+        Page02.state.discoveryResponse ===
+        undefined
+    ){
+
+        Page02.state.discoveryResponse =
+            null;
 
     }
 
 };
 
 
-
 /* =============================================================================
- * PAGE INITIALIZATION
+ * INITIALIZE PAGE 02
  * =============================================================================
  */
 
 
 Page02.init = function(){
 
-    /* -------------------------------------------------------------------------
-     * DOUBLE-BOOT GUARD
-     * -------------------------------------------------------------------------
-     */
-
-
     if(
-        !Page02.canInitialize()
+        Page02.state &&
+        Page02.state.initialized
     ){
 
-        return false;
+        return;
 
     }
 
@@ -8415,103 +12157,109 @@ Page02.init = function(){
 
 
     /* -------------------------------------------------------------------------
-     * MASTER DATA VALIDATION
+     * STATE
      * -------------------------------------------------------------------------
      */
 
 
+    Page02.ensureStateDefaults();
+
+
+    /* -------------------------------------------------------------------------
+     * MASTER VALIDATION
+     * -------------------------------------------------------------------------
+     */
+
+
+    const masterValidation =
+        Page02.validateScorecardMaster();
+
+
     if(
-        !Page02.runMasterValidation()
+        !masterValidation.valid
     ){
 
-        Page02.setStatusMessage(
-            'The Millionaire Lifestyle Scorecard™ could not be initialized.',
-            'error'
+        console.error(
+            'CTM PATH™ Page 02 initialization stopped: scorecard master invalid.'
         );
 
 
-        return false;
+        return;
 
     }
 
 
     /* -------------------------------------------------------------------------
-     * SCREEN ARCHITECTURE
+     * DOM VALIDATION
      * -------------------------------------------------------------------------
      */
 
 
-    Page02.initializeScreens();
+    const domValidation =
+        Page02.validateDOM();
+
+
+    if(
+        !domValidation.valid
+    ){
+
+        console.error(
+            'CTM PATH™ Page 02 initialization stopped: DOM invalid.'
+        );
+
+
+        return;
+
+    }
 
 
     /* -------------------------------------------------------------------------
-     * RENDER EXTENSIONS
-     * -------------------------------------------------------------------------
-     */
-
-
-    Page02.installRenderEnhancement();
-
-
-    /* -------------------------------------------------------------------------
-     * GLOBAL HEADER
-     * -------------------------------------------------------------------------
-     */
-
-
-    Page02.initializeJourneyHeader();
-
-
-    /* -------------------------------------------------------------------------
-     * SCORE EXPLANATION
-     * -------------------------------------------------------------------------
-     */
-
-
-    Page02.initializeScoreExplanation();
-
-
-    /* -------------------------------------------------------------------------
-     * PAGE CONTROLS
+     * CONTROLS
      * -------------------------------------------------------------------------
      */
 
 
     Page02.bindControls();
 
+    Page02.bindResultControls();
 
-    Page02.bindFieldCleanup();
-
-
-    Page02.bindMobileGuard();
-
-
-    Page02.bindEmailGuard();
-
-
-    Page02.bindNameGuard();
-
-
-    Page02.bindVisibilityPersistence();
-
-
-    Page02.bindFormProtection();
-
-
-    Page02.bindErrorGuard();
+    Page02.bindSessionEvents();
 
 
     /* -------------------------------------------------------------------------
-     * INITIAL SCREEN
+     * RECOVERY
      * -------------------------------------------------------------------------
      */
 
 
-    Page02.selectInitialScreen();
+    const recovery =
+        Page02.restoreSession();
 
 
     /* -------------------------------------------------------------------------
-     * INITIAL LIVE SCORE
+     * SCREEN
+     * -------------------------------------------------------------------------
+     */
+
+
+    Page02.restoreInitialScreen(
+        recovery
+    );
+
+
+    /* -------------------------------------------------------------------------
+     * HEADER
+     * -------------------------------------------------------------------------
+     */
+
+
+    Page02.updateHeaderStatus();
+
+    Page02.syncHeaderWhenReady();
+
+
+    /* -------------------------------------------------------------------------
+     * INITIAL LIVE STATE
      * -------------------------------------------------------------------------
      */
 
@@ -8519,11 +12267,20 @@ Page02.init = function(){
     Page02.updateLiveScore();
 
 
-    Page02.updateDimensionProgress();
+    if(
+        Page02.state.currentScreen ===
+        Page02.SCREENS.SCORECARD
+    ){
+
+        Page02.updateDimensionProgress();
+
+        Page02.updateDimensionNavigation();
+
+    }
 
 
     /* -------------------------------------------------------------------------
-     * COMPLETE
+     * INITIALIZED
      * -------------------------------------------------------------------------
      */
 
@@ -8532,148 +12289,114 @@ Page02.init = function(){
         true;
 
 
+    Page02.saveSession();
+
+
     console.log(
         'CTM PATH™ Page 02 v' +
         Page02.version +
-        ' ready.'
+        ' ready.',
+        {
+            screen:
+                Page02.state.currentScreen,
+
+            registered:
+                Boolean(
+                    Page02.state.peopleId ||
+                    Page02.state.clientId
+                ),
+
+            answered:
+                Page02.getAnsweredCount(),
+
+            score:
+                Page02.getTotalScore(),
+
+            result:
+                Boolean(
+                    Page02.state.result
+                )
+        }
     );
-
-
-    return true;
 
 };
 
 
-
 /* =============================================================================
- * PUBLIC DEBUG INFORMATION
+ * PUBLIC DIAGNOSTIC
  * =============================================================================
  */
 
 
 Page02.info = function(){
 
-    const validation =
-        Page02.validateMaster();
-
-
     return {
 
-        application:
-            'CTM PATH™ MILLIONAIRES™',
-
-        experience:
-            'Guided Journey™',
-
         page:
-            '02 / 07',
+            Page02.CONFIG.pageLabel,
+
+        pageNumber:
+            Page02.CONFIG.pageNumber,
 
         module:
-            'Middle Class → Millionaire Lifestyle Scorecard™',
+            Page02.CONFIG.module,
 
         version:
             Page02.version,
 
-        dimensions:
-            Page02.DIMENSIONS.length,
+        sessionVersion:
+            Page02.SESSION_VERSION,
 
-        indicators:
-            Page02.getAllIndicators().length,
+        screen:
+            Page02.state.currentScreen,
 
-        optionsPerIndicator:
-            4,
+        currentDimension:
+            Page02.state.currentDimension + 1,
 
-        maximumScore:
-            Page02.getMaximumScore(),
+        registered:
+            Boolean(
+                Page02.state.peopleId ||
+                Page02.state.clientId
+            ),
 
-        answered:
-            Page02.getAnsweredCount(),
-
-        currentScore:
-            Page02.calculateTotalScore(),
+        peopleId:
+            Page02.state.peopleId,
 
         clientId:
             Page02.state.clientId,
 
-        currentDimension:
-            Page02.state.currentDimension,
+        answered:
+            Page02.getAnsweredCount(),
 
-        initialized:
-            Page02.state.initialized,
+        remaining:
+            Page02.getRemainingCount(),
 
-        masterValid:
-            validation.valid,
+        score:
+            Page02.getTotalScore(),
 
-        masterErrors:
-            validation.errors
+        maximumScore:
+            Page02.CONFIG.scoring.maximumScore,
+
+        complete:
+            Page02.isScorecardComplete(),
+
+        resultAvailable:
+            Boolean(
+                Page02.state.result
+            ),
+
+        discoverySaved:
+            Boolean(
+                Page02.state.discoveryResponse
+            )
 
     };
 
 };
 
 
-
 /* =============================================================================
- * RESET PAGE 02 SESSION
- * =============================================================================
- *
- * Development / QA helper.
- *
- * Browser console:
- *
- *      Page02.reset()
- *
- * This does NOT delete anything already saved in the backend.
- *
- * =============================================================================
- */
-
-
-Page02.reset = function(){
-
-    try{
-
-        sessionStorage.removeItem(
-            'CTM_PATH_PAGE02'
-        );
-
-
-        sessionStorage.removeItem(
-            'CTM_PATH_MILLIONAIRE_RESULT'
-        );
-
-
-        if(
-            Page02.state.clientId
-        ){
-
-            sessionStorage.removeItem(
-                Page02.getSaveLockKey()
-            );
-
-        }
-
-    }
-
-
-    catch(error){
-
-        console.warn(
-            'CTM PATH™ Page 02 session reset warning:',
-            error
-        );
-
-    }
-
-
-    window.location.reload();
-
-};
-
-
-
-/* =============================================================================
- * DOM READY BOOT
+ * DOM READY
  * =============================================================================
  */
 
@@ -8685,25 +12408,16 @@ function initializePage02(){
         Page02.init();
 
     }
-
-
     catch(error){
 
         console.error(
-            'CTM PATH™ Page 02 initialization failed:',
+            'CTM PATH™ Page 02 fatal initialization error:',
             error
-        );
-
-
-        Page02.setStatusMessage(
-            'The Millionaire Lifestyle Scorecard™ could not be loaded. Please refresh the page.',
-            'error'
         );
 
     }
 
 }
-
 
 
 if(
@@ -8721,7 +12435,6 @@ if(
     );
 
 }
-
 else{
 
     initializePage02();
@@ -8729,16 +12442,16 @@ else{
 }
 
 
-
 /* =============================================================================
- * PUBLIC NAMESPACE
+ * PUBLIC API
  * =============================================================================
  *
- * Available for:
+ * Page02 remains available for:
  *
- *      QA
- *      Browser console inspection
- *      Future Page 02 controller extensions
+ *      • production integration
+ *      • controlled diagnostics
+ *      • Page 03 handoff
+ *      • browser console QA
  *
  * =============================================================================
  */
@@ -8748,106 +12461,112 @@ window.Page02 =
     Page02;
 
 
-
 /* =============================================================================
- * CTM PATH™ PAGE 02 v2.1
+ * FINAL PRODUCTION AUDIT
  * =============================================================================
  *
- * FINAL ARCHITECTURE
- *
- *      PAGE 02
- *
- *          INTRO
- *            ↓
- *
- *          KYC
- *            ↓
- *
- *      CTM_API.register()
- *            ↓
- *
- *      PeopleID / Client ID
- *            ↓
- *
- *      DIMENSION 01
- *      5 indicators
- *            ↓
- *
- *      DIMENSION 02
- *      5 indicators
- *            ↓
- *
- *      DIMENSION 03
- *      5 indicators
- *            ↓
- *
- *      DIMENSION 04
- *      5 indicators
- *            ↓
- *
- *      DIMENSION 05
- *      5 indicators
- *            ↓
- *
- *      25 INDICATORS COMPLETE
- *            ↓
- *
- *      FINAL SCORE / 100
- *            ↓
- *
- *      MILLIONAIRE GAP™
- *            ↓
- *
- *      CTM_API.saveDiscovery()
- *            ↓
- *
- *      PAGE 03
+ * PAGE 02 v2.2 ARCHITECTURE
  *
  *
- * SCORING
+ *      PAGE 02 INTRO
+ *           │
+ *           ▼
+ *      KYC
+ *           │
+ *           │ CTM_API.register()
+ *           ▼
+ *      PEOPLE / CLIENT ID
+ *           │
+ *           ▼
+ *      LIFESTYLE SCORECARD™
+ *           │
+ *           ├── DIMENSION 01
+ *           │      5 indicators
+ *           │
+ *           ├── DIMENSION 02
+ *           │      5 indicators
+ *           │
+ *           ├── DIMENSION 03
+ *           │      5 indicators
+ *           │
+ *           ├── DIMENSION 04
+ *           │      5 indicators
+ *           │
+ *           └── DIMENSION 05
+ *                  5 indicators
  *
- *      OPTION 1 = 1 POINT
- *      OPTION 2 = 2 POINTS
- *      OPTION 3 = 3 POINTS
- *      OPTION 4 = 4 POINTS
+ *                  TOTAL
+ *                  25 indicators
+ *                  × 4 maximum
+ *                  = 100
  *
- *      25 × 4 = 100
- *
- *
- * USER EXPERIENCE
- *
- *      ✓ No free-text financial answers
- *      ✓ Exactly four controlled choices
- *      ✓ 2 × 2 option architecture on desktop
- *      ✓ Single-column option architecture supported on mobile
- *      ✓ Visible score after selection
- *      ✓ Five indicators per dimension
- *      ✓ Cannot skip unanswered indicators
- *      ✓ Progress preserved during the session
- *      ✓ Backend failure does not destroy completed answers
- *      ✓ Duplicate final submission protected
- *
- *
- * BACKEND OWNERSHIP
- *
- *      Frontend:
- *
- *          ✓ Capture
- *          ✓ Controlled selection
- *          ✓ Presentation score
- *          ✓ Payload assembly
- *
- *      Backend:
- *
- *          ✓ Persistence
- *          ✓ Authoritative processing
- *          ✓ Diagnosis
- *          ✓ Roadmap
- *          ✓ Report generation
+ *                       │
+ *                       ▼
+ *               COMPLETE SCORECARD
+ *                       │
+ *                       ▼
+ *                CALCULATE RESULT
+ *                       │
+ *                       ▼
+ *             CTM_API.saveDiscovery()
+ *                       │
+ *                       ▼
+ *                  RESULT SCREEN
+ *                       │
+ *                  USER REVIEWS
+ *                       │
+ *                       ▼
+ *              CONTINUE TO PAGE 03
  *
  *
  * =============================================================================
- * END OF FILE
+ *
+ * FROZEN RULES
+ *
+ *      ✓ 5 dimensions
+ *
+ *      ✓ 5 indicators per dimension
+ *
+ *      ✓ 25 indicators total
+ *
+ *      ✓ exactly 4 options per indicator
+ *
+ *      ✓ scores 1 / 2 / 3 / 4
+ *
+ *      ✓ maximum score 100
+ *
+ *      ✓ no free-text financial answers
+ *
+ *      ✓ user clicks predefined ranges
+ *
+ *      ✓ responsive option arrangement belongs to CSS
+ *
+ *      ✓ CTM_API.register() preserved
+ *
+ *      ✓ CTM_API.saveDiscovery() preserved
+ *
+ *      ✓ client identity preserved
+ *
+ *      ✓ incomplete dimensions cannot advance
+ *
+ *      ✓ final result shown BEFORE Page 03
+ *
+ *      ✓ Page 03 requires explicit user continuation
+ *
+ *      ✓ interrupted scorecard can recover from sessionStorage
+ *
+ *      ✓ completed result can recover after refresh
+ *
+ *      ✓ global header remains shared
+ *
+ *      ✓ Page 02 controls only dynamic journey status
+ *
+ *
+ * =============================================================================
+ *
+ * PAGE02.JS v2.2
+ *
+ * COMPLETE
+ *
  * =============================================================================
  */
-
