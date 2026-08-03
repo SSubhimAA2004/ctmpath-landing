@@ -44,6 +44,11 @@
 
     <!-- =====================================================================
          GLOBAL COMPONENTS
+
+         NOTE:
+         component-loader.js also protects against duplicate stylesheet
+         loading. These links are retained so Page 02A remains visually
+         stable while the shared components are being injected.
     ====================================================================== -->
 
     <link
@@ -84,6 +89,9 @@
 
 <!-- =========================================================================
      GLOBAL HEADER
+
+     Populated by:
+     js/component-loader.js
 ============================================================================ -->
 
 
@@ -310,6 +318,15 @@
 
     <!-- =====================================================================
          KYC SCREEN
+
+         Initially hidden.
+
+         page02a.js owns:
+             Intro → KYC
+             KYC validation
+             registration
+             session persistence
+             Page 02A → Page 02B
     ====================================================================== -->
 
 
@@ -764,6 +781,9 @@
 
 <!-- =========================================================================
      GLOBAL FOOTER
+
+     Populated by:
+     js/component-loader.js
 ============================================================================ -->
 
 
@@ -775,13 +795,179 @@
 
 
 <!-- =========================================================================
-     GLOBAL JAVASCRIPT
+     JAVASCRIPT
+
+     EXECUTION CONTRACT
+
+     1. component-loader.js
+        Exposes window.CTM_COMPONENTS.
+
+     2. Explicit CTM_COMPONENTS.load()
+        Loads the global Header + Footer.
+        component-loader.js intentionally does NOT auto-initialize.
+
+     3. global.js
+        Global journey behaviour.
+
+     4. api.js
+        Exposes CTM_API, including CTM_API.register().
+
+     5. page02-data.js
+        Exposes canonical Page02Data.
+
+     6. page02-session.js
+        Requires Page02Data and exposes Page02Session.
+
+     7. page02a.js
+        Requires CTM_API + Page02Data + Page02Session.
+        Owns Intro → KYC → Registration → Page 02B.
+============================================================================ -->
+
+
+<!-- =========================================================================
+     GLOBAL COMPONENT LOADER
 ============================================================================ -->
 
 
 <script src="../js/component-loader.js"></script>
 
+
+<script>
+
+    /*
+     * ========================================================================
+     * PAGE 02A GLOBAL COMPONENT INITIALIZATION
+     * ========================================================================
+     *
+     * component-loader.js deliberately exposes an API without automatically
+     * executing it.
+     *
+     * Page 02A requires BOTH canonical global components:
+     *
+     *      • Header
+     *      • Footer
+     *
+     * Therefore Page 02A explicitly starts the shared component loader.
+     *
+     * This remains page-local and does NOT alter the component-loader contract
+     * used by frozen Page 01.
+     * ========================================================================
+     */
+
+    (function () {
+
+        "use strict";
+
+
+        function initializeGlobalComponents() {
+
+            if (
+                !window.CTM_COMPONENTS ||
+                typeof window.CTM_COMPONENTS.load !== "function"
+            ) {
+
+                console.error(
+                    "CTM PATH™ Global Component Loader unavailable on Page 02A."
+                );
+
+                return;
+
+            }
+
+
+            window.CTM_COMPONENTS
+                .load()
+                .then(
+                    function (result) {
+
+                        if (
+                            result &&
+                            result.success
+                        ) {
+
+                            console.info(
+                                "CTM PATH™ Page 02A global components ready."
+                            );
+
+                        }
+
+                        else {
+
+                            console.warn(
+                                "CTM PATH™ Page 02A global components loaded with errors:",
+                                result
+                            );
+
+                        }
+
+                    }
+                )
+                .catch(
+                    function (error) {
+
+                        console.error(
+                            "CTM PATH™ Page 02A global component initialization failed:",
+                            error
+                        );
+
+                    }
+                );
+
+        }
+
+
+        /*
+         * The script is positioned at the bottom of <body>, so the header
+         * and footer containers already exist.
+         *
+         * We nevertheless support both parser states so the initialization
+         * remains deterministic if script placement changes later.
+         */
+
+        if (
+            document.readyState === "loading"
+        ) {
+
+            document.addEventListener(
+                "DOMContentLoaded",
+                initializeGlobalComponents,
+                {
+                    once: true
+                }
+            );
+
+        }
+
+        else {
+
+            initializeGlobalComponents();
+
+        }
+
+
+    })();
+
+</script>
+
+
+
+<!-- =========================================================================
+     GLOBAL JOURNEY FOUNDATION
+============================================================================ -->
+
+
 <script src="../js/global.js"></script>
+
+
+
+<!-- =========================================================================
+     CTM PATH™ API
+
+     MUST load before page02a.js because page02a.js requires:
+
+         CTM_API.register()
+============================================================================ -->
+
 
 <script src="../js/api.js"></script>
 
@@ -790,11 +976,11 @@
 <!-- =========================================================================
      PAGE 02 SHARED JAVASCRIPT
 
-     IMPORTANT LOAD ORDER:
+     REQUIRED LOAD ORDER:
 
-     1. DATA
-     2. SESSION
-     3. PAGE CONTROLLER
+         1. DATA
+         2. SESSION
+         3. PAGE CONTROLLER
 ============================================================================ -->
 
 
