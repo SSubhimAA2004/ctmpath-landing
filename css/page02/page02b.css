@@ -1,1 +1,332 @@
 
+/* ==========================================================================
+   CTM PATH™ MILLIONAIRES™
+
+   FILE:
+   css/page02/page02b.css
+
+   VERSION:
+   3.0
+
+   PAGE:
+   PAGE 02B — DIMENSION 01 — WEALTH™
+
+   STATUS:
+   PAGE-SPECIFIC PRESENTATION
+
+   DEPENDS ON:
+   css/page02/page02-shared.css
+
+   PURPOSE:
+
+   ✓ Dimension 01 page identity
+   ✓ Wealth™-specific visual refinements
+   ✓ Page 02B spacing adjustments
+   ✓ Dimension 01 completion accent
+
+   SHARED SYSTEM OWNS:
+
+   ✗ Indicator cards
+   ✗ Four-option architecture
+   ✗ Option selected states
+   ✗ Score badges
+   ✗ Live score panel
+   ✗ Score guide
+   ✗ Navigation buttons
+   ✗ Core responsive architecture
+
+========================================================================== */
+
+
+/* ==========================================================================
+   PAGE 02B FOUNDATION
+========================================================================== */
+
+
+.page02b {
+
+    position: relative;
+
+}
+
+
+/* ==========================================================================
+   DIMENSION 01 HEADER
+========================================================================== */
+
+
+.page02b .dimension-header {
+
+    position: relative;
+
+}
+
+
+/* ==========================================================================
+   DIMENSION EYEBROW
+========================================================================== */
+
+
+.page02b .dimension-eyebrow {
+
+    color:
+        rgba(255, 255, 255, 0.42);
+
+}
+
+
+/* ==========================================================================
+   WEALTH™ TITLE ACCENT
+
+   The shared system provides the typography.
+   Page 02B only preserves the Dimension 01 accent.
+========================================================================== */
+
+
+.page02b .dimension-title-english {
+
+    color: #14b8a6;
+
+}
+
+
+/* ==========================================================================
+   INTRODUCTION WIDTH
+========================================================================== */
+
+
+.page02b .dimension-introduction {
+
+    max-width: 680px;
+
+}
+
+
+/* ==========================================================================
+   LIVE SCORE PANEL
+========================================================================== */
+
+
+.page02b .dimension-score-panel {
+
+    margin-top: 28px;
+
+}
+
+
+/* ==========================================================================
+   SCORECARD SECTION
+========================================================================== */
+
+
+.page02b .dimension-scorecard {
+
+    width: 100%;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+
+/* ==========================================================================
+   FIRST INDICATOR
+
+   Gives the beginning of the dimension slightly stronger separation from
+   the header without altering the shared card architecture.
+========================================================================== */
+
+
+.page02b .scorecard-card:first-child {
+
+    margin-top: 0;
+
+}
+
+
+/* ==========================================================================
+   COMPLETION STATUS
+========================================================================== */
+
+
+.page02b .dimension-completion {
+
+    margin-top: 24px;
+
+}
+
+
+/* ==========================================================================
+   COMPLETED DIMENSION STATE
+
+   page02-session.js / page02-scorecard.js may expose completion state
+   through data attributes. This rule is safe even when that optional
+   attribute is not present.
+========================================================================== */
+
+
+.page02b [data-dimension-complete][data-complete="true"] {
+
+    color: #14b8a6;
+
+}
+
+
+/* ==========================================================================
+   VALIDATION
+========================================================================== */
+
+
+.page02b .dimension-message {
+
+    max-width: 960px;
+
+}
+
+
+/* ==========================================================================
+   NAVIGATION
+
+   Button visual language remains entirely controlled by
+   page02-shared.css so the frozen teal CTA is identical across
+   Dimensions 01–05.
+========================================================================== */
+
+
+.page02b .dimension-navigation {
+
+    padding-bottom: 4px;
+
+}
+
+
+/* ==========================================================================
+   TABLET
+========================================================================== */
+
+
+@media (max-width: 900px) {
+
+
+    .page02b .dimension-introduction {
+
+        max-width: 620px;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   MOBILE
+========================================================================== */
+
+
+@media (max-width: 768px) {
+
+
+    .page02b .dimension-header {
+
+        margin-bottom: 34px;
+
+    }
+
+
+    .page02b .dimension-score-panel {
+
+        margin-top: 22px;
+
+    }
+
+
+    .page02b .dimension-completion {
+
+        margin-top: 20px;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   SMALL MOBILE
+========================================================================== */
+
+
+@media (max-width: 420px) {
+
+
+    .page02b .dimension-header {
+
+        margin-bottom: 30px;
+
+    }
+
+
+    .page02b .dimension-introduction {
+
+        max-width: 100%;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   PRINT
+========================================================================== */
+
+
+@media print {
+
+
+    .page02b {
+
+        min-height: auto;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   END
+
+   PAGE 02B STACK:
+
+   pages/page02b.html
+          ↓
+   css/page02/page02-shared.css
+          ↓
+   css/page02/page02b.css
+
+   JAVASCRIPT:
+
+   page02-data.js
+          ↓
+   page02-session.js
+          ↓
+   page02-scorecard.js
+          ↓
+   page02b.js
+
+
+   PAGE 02B RESPONSIBILITY:
+
+   DIMENSION 01 — WEALTH™
+   INDICATORS 01–05
+
+
+   NEXT FILE:
+
+   js/page02/page02c.js
+
+   DIMENSION 02
+
+========================================================================== */
+
