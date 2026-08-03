@@ -1,1 +1,2611 @@
 
+/* ==========================================================================
+   CTM PATH™ MILLIONAIRES™
+
+   FILE:
+   css/page02/page02-shared.css
+
+   VERSION:
+   3.0
+
+   STATUS:
+   SHARED DIMENSION VISUAL FOUNDATION
+
+   USED BY:
+
+   page02b.html — Dimension 01 — Wealth™
+   page02c.html — Dimension 02 — Income & Cash Flow™
+   page02d.html — Dimension 03 — Assets™
+   page02e.html — Dimension 04 — Lifestyle & Freedom™
+   page02f.html — Dimension 05 — Protection & Contribution™
+
+   PURPOSE:
+
+   ✓ Dimension header
+   ✓ Journey progress
+   ✓ Scorecard shell
+   ✓ Indicator cards
+   ✓ Four-option architecture
+   ✓ Selected option state
+   ✓ 1 / 2 / 3 / 4 score visibility
+   ✓ Live dimension score
+   ✓ Score explanation
+   ✓ Previous / Next navigation
+   ✓ Mobile two-column option architecture
+   ✓ Small-mobile single-column fallback
+   ✓ Touch accessibility
+
+   DOES NOT CONTROL:
+
+   ✗ Global header
+   ✗ Global footer
+   ✗ KYC
+   ✗ Page-specific copy
+   ✗ Page-specific dimension exceptions
+
+========================================================================== */
+
+
+/* ==========================================================================
+   PAGE 02 DIMENSION FOUNDATION
+========================================================================== */
+
+
+.page02-dimension {
+
+    width: 100%;
+
+    max-width: 100%;
+
+    min-height: 100vh;
+
+    margin: 0;
+
+    padding: 0;
+
+    overflow-x: hidden;
+
+}
+
+
+.page02-dimension * {
+
+    box-sizing: border-box;
+
+}
+
+
+.page02-dimension-shell {
+
+    width: min(1120px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+    padding:
+
+        clamp(58px, 6vw, 88px)
+
+        0
+
+        clamp(84px, 8vw, 120px);
+
+}
+
+
+/* ==========================================================================
+   DIMENSION PROGRESS
+========================================================================== */
+
+
+.dimension-progress {
+
+    width: min(100%, 960px);
+
+    margin:
+
+        0
+
+        auto
+
+        clamp(38px, 5vw, 58px);
+
+}
+
+
+.dimension-progress-meta {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.dimension-progress-label {
+
+    margin: 0;
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.66rem;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    letter-spacing: 0.15em;
+
+    text-transform: uppercase;
+
+    color:
+
+        rgba(255, 255, 255, 0.40);
+
+}
+
+
+.dimension-progress-number {
+
+    margin: 0;
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.72rem;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    letter-spacing: 0.08em;
+
+    color: #14b8a6;
+
+}
+
+
+.dimension-progress-track {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 3px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background:
+
+        rgba(255, 255, 255, 0.08);
+
+}
+
+
+.dimension-progress-fill {
+
+    display: block;
+
+    width: 0;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #14b8a6;
+
+    transition:
+
+        width 300ms ease;
+
+}
+
+
+/* ==========================================================================
+   DIMENSION HEADER
+========================================================================== */
+
+
+.dimension-header {
+
+    width: min(100%, 920px);
+
+    margin:
+
+        0
+
+        auto
+
+        clamp(42px, 5vw, 62px);
+
+    text-align: center;
+
+}
+
+
+.dimension-eyebrow {
+
+    margin:
+
+        0
+
+        0
+
+        16px;
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.68rem;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    letter-spacing: 0.18em;
+
+    text-transform: uppercase;
+
+    color:
+
+        rgba(255, 255, 255, 0.40);
+
+}
+
+
+.dimension-title-tamil {
+
+    margin: 0;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size:
+
+        clamp(
+
+            2rem,
+
+            4vw,
+
+            3rem
+
+        );
+
+    font-weight: 800;
+
+    line-height: 1.4;
+
+    letter-spacing: -0.025em;
+
+    color: #ffffff;
+
+}
+
+
+.dimension-title-english {
+
+    margin:
+
+        12px
+
+        0
+
+        0;
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size:
+
+        clamp(
+
+            0.76rem,
+
+            1.2vw,
+
+            0.94rem
+
+        );
+
+    font-weight: 700;
+
+    line-height: 1.5;
+
+    letter-spacing: 0.14em;
+
+    color: #14b8a6;
+
+}
+
+
+.dimension-introduction {
+
+    width: min(100%, 700px);
+
+    margin:
+
+        24px
+
+        auto
+
+        0;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size:
+
+        clamp(
+
+            0.95rem,
+
+            1.5vw,
+
+            1.06rem
+
+        );
+
+    font-weight: 400;
+
+    line-height: 1.9;
+
+    color:
+
+        rgba(255, 255, 255, 0.62);
+
+}
+
+
+/* ==========================================================================
+   LIVE DIMENSION SCORE
+========================================================================== */
+
+
+.dimension-score-panel {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 18px;
+
+    width: fit-content;
+
+    max-width: 100%;
+
+    margin:
+
+        30px
+
+        auto
+
+        0;
+
+    padding:
+
+        12px
+
+        22px;
+
+    border:
+
+        1px solid
+
+        rgba(20, 184, 166, 0.20);
+
+    border-radius: 10px;
+
+    background:
+
+        rgba(20, 184, 166, 0.045);
+
+}
+
+
+.dimension-score-label {
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.62rem;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    letter-spacing: 0.10em;
+
+    color:
+
+        rgba(255, 255, 255, 0.48);
+
+}
+
+
+.dimension-score-value {
+
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 3px;
+
+    white-space: nowrap;
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-weight: 800;
+
+    color: #14b8a6;
+
+}
+
+
+.dimension-score-current {
+
+    font-size: 1.35rem;
+
+    line-height: 1;
+
+}
+
+
+.dimension-score-total {
+
+    font-size: 0.78rem;
+
+    line-height: 1;
+
+    color:
+
+        rgba(255, 255, 255, 0.42);
+
+}
+
+
+/* ==========================================================================
+   SCORECARD LIST
+========================================================================== */
+
+
+.scorecard-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap:
+
+        clamp(
+
+            24px,
+
+            3vw,
+
+            34px
+
+        );
+
+    width: min(100%, 960px);
+
+    margin: 0 auto;
+
+}
+
+
+/* ==========================================================================
+   INDICATOR CARD
+========================================================================== */
+
+
+.scorecard-card {
+
+    position: relative;
+
+    width: 100%;
+
+    margin: 0;
+
+    padding:
+
+        clamp(28px, 4vw, 42px)
+
+        clamp(24px, 4vw, 42px);
+
+    border:
+
+        1px solid
+
+        rgba(255, 255, 255, 0.10);
+
+    border-radius: 16px;
+
+    background:
+
+        linear-gradient(
+
+            145deg,
+
+            rgba(255, 255, 255, 0.034),
+
+            rgba(255, 255, 255, 0.012)
+
+        );
+
+    box-shadow:
+
+        0 18px 48px
+
+        rgba(0, 0, 0, 0.14);
+
+    transition:
+
+        border-color 180ms ease,
+
+        box-shadow 180ms ease;
+
+}
+
+
+.scorecard-card.is-answered {
+
+    border-color:
+
+        rgba(20, 184, 166, 0.20);
+
+}
+
+
+.scorecard-card:focus-within {
+
+    border-color:
+
+        rgba(20, 184, 166, 0.30);
+
+}
+
+
+/* ==========================================================================
+   INDICATOR TOP
+========================================================================== */
+
+
+.scorecard-card-header {
+
+    display: grid;
+
+    grid-template-columns:
+
+        auto
+
+        minmax(0, 1fr)
+
+        auto;
+
+    align-items: start;
+
+    gap:
+
+        18px;
+
+    width: 100%;
+
+    margin-bottom: 26px;
+
+}
+
+
+/* ==========================================================================
+   INDICATOR NUMBER
+========================================================================== */
+
+
+.scorecard-number {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 38px;
+
+    height: 38px;
+
+    flex: 0 0 38px;
+
+    border:
+
+        1px solid
+
+        rgba(20, 184, 166, 0.24);
+
+    border-radius: 50%;
+
+    background:
+
+        rgba(20, 184, 166, 0.055);
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.66rem;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    letter-spacing: 0.04em;
+
+    color: #14b8a6;
+
+}
+
+
+/* ==========================================================================
+   INDICATOR TITLES
+========================================================================== */
+
+
+.scorecard-heading {
+
+    min-width: 0;
+
+}
+
+
+.scorecard-title-tamil {
+
+    margin: 0;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size:
+
+        clamp(
+
+            1rem,
+
+            1.8vw,
+
+            1.18rem
+
+        );
+
+    font-weight: 700;
+
+    line-height: 1.55;
+
+    color:
+
+        rgba(255, 255, 255, 0.92);
+
+}
+
+
+.scorecard-title-english {
+
+    margin:
+
+        5px
+
+        0
+
+        0;
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.66rem;
+
+    font-weight: 700;
+
+    line-height: 1.45;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+
+    color:
+
+        rgba(255, 255, 255, 0.38);
+
+}
+
+
+/* ==========================================================================
+   IDEAL BENCHMARK
+========================================================================== */
+
+
+.scorecard-ideal {
+
+    min-width: 128px;
+
+    padding:
+
+        8px
+
+        12px;
+
+    border:
+
+        1px solid
+
+        rgba(255, 255, 255, 0.08);
+
+    border-radius: 8px;
+
+    text-align: right;
+
+    background:
+
+        rgba(255, 255, 255, 0.022);
+
+}
+
+
+.scorecard-ideal-label {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.50rem;
+
+    font-weight: 700;
+
+    line-height: 1.3;
+
+    letter-spacing: 0.10em;
+
+    color:
+
+        rgba(255, 255, 255, 0.30);
+
+}
+
+
+.scorecard-ideal-value {
+
+    display: block;
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.74rem;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    color:
+
+        rgba(255, 255, 255, 0.66);
+
+}
+
+
+/* ==========================================================================
+   FOUR OPTION GRID
+
+   DESKTOP:
+   4 columns
+
+   MOBILE:
+   2 × 2
+
+   SMALL MOBILE:
+   1 × 4
+========================================================================== */
+
+
+.scorecard-options {
+
+    display: grid;
+
+    grid-template-columns:
+
+        repeat(
+
+            4,
+
+            minmax(0, 1fr)
+
+        );
+
+    gap: 12px;
+
+    width: 100%;
+
+}
+
+
+/* ==========================================================================
+   OPTION BUTTON
+========================================================================== */
+
+
+.scorecard-option {
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    width: 100%;
+
+    min-width: 0;
+
+    min-height: 104px;
+
+    margin: 0;
+
+    padding:
+
+        16px
+
+        12px;
+
+    overflow: hidden;
+
+    border:
+
+        1px solid
+
+        rgba(255, 255, 255, 0.10);
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background:
+
+        rgba(255, 255, 255, 0.022);
+
+    color: #ffffff;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition:
+
+        transform 160ms ease,
+
+        border-color 160ms ease,
+
+        background 160ms ease,
+
+        box-shadow 160ms ease;
+
+    -webkit-appearance: none;
+
+    appearance: none;
+
+}
+
+
+.scorecard-option:hover {
+
+    transform:
+
+        translateY(-2px);
+
+    border-color:
+
+        rgba(20, 184, 166, 0.36);
+
+    background:
+
+        rgba(20, 184, 166, 0.04);
+
+}
+
+
+.scorecard-option:focus-visible {
+
+    border-color:
+
+        rgba(20, 184, 166, 0.68);
+
+    box-shadow:
+
+        0 0 0 3px
+
+        rgba(20, 184, 166, 0.10);
+
+}
+
+
+/* ==========================================================================
+   SELECTED OPTION
+========================================================================== */
+
+
+.scorecard-option.is-selected,
+.scorecard-option[aria-pressed="true"] {
+
+    border-color:
+
+        rgba(20, 184, 166, 0.82);
+
+    background:
+
+        linear-gradient(
+
+            145deg,
+
+            rgba(20, 184, 166, 0.14),
+
+            rgba(20, 184, 166, 0.065)
+
+        );
+
+    box-shadow:
+
+        inset 0 0 0 1px
+
+        rgba(20, 184, 166, 0.10),
+
+        0 10px 24px
+
+        rgba(0, 0, 0, 0.12);
+
+}
+
+
+.scorecard-option.is-selected::before,
+.scorecard-option[aria-pressed="true"]::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 3px;
+
+    background: #14b8a6;
+
+}
+
+
+/* ==========================================================================
+   OPTION RANGE
+========================================================================== */
+
+
+.option-range {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 42px;
+
+    width: 100%;
+
+    overflow-wrap: anywhere;
+
+    font-family:
+
+        Arial,
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size:
+
+        clamp(
+
+            0.76rem,
+
+            1.1vw,
+
+            0.86rem
+
+        );
+
+    font-weight: 600;
+
+    line-height: 1.45;
+
+    color:
+
+        rgba(255, 255, 255, 0.72);
+
+}
+
+
+.scorecard-option.is-selected .option-range,
+.scorecard-option[aria-pressed="true"] .option-range {
+
+    color:
+
+        rgba(255, 255, 255, 0.96);
+
+}
+
+
+/* ==========================================================================
+   OPTION SCORE
+
+   IMPORTANT:
+   SCORE MUST BE VISUALLY STRONG.
+========================================================================== */
+
+
+.option-score {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 40px;
+
+    height: 27px;
+
+    padding:
+
+        0
+
+        9px;
+
+    border:
+
+        1px solid
+
+        rgba(20, 184, 166, 0.24);
+
+    border-radius: 999px;
+
+    background:
+
+        rgba(20, 184, 166, 0.055);
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.78rem;
+
+    font-weight: 900;
+
+    line-height: 1;
+
+    letter-spacing: 0.04em;
+
+    color: #14b8a6;
+
+}
+
+
+.scorecard-option.is-selected .option-score,
+.scorecard-option[aria-pressed="true"] .option-score {
+
+    border-color: #14b8a6;
+
+    background: #14b8a6;
+
+    color: #061412;
+
+}
+
+
+/* ==========================================================================
+   SCORE STATUS
+========================================================================== */
+
+
+.option-status {
+
+    display: block;
+
+    width: 100%;
+
+    min-height: 16px;
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.49rem;
+
+    font-weight: 700;
+
+    line-height: 1.35;
+
+    letter-spacing: 0.06em;
+
+    color:
+
+        rgba(255, 255, 255, 0.30);
+
+}
+
+
+.scorecard-option.is-selected .option-status,
+.scorecard-option[aria-pressed="true"] .option-status {
+
+    color:
+
+        rgba(255, 255, 255, 0.62);
+
+}
+
+
+/* ==========================================================================
+   CARD SCORE FEEDBACK
+========================================================================== */
+
+
+.scorecard-selection {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    min-height: 24px;
+
+    margin-top: 16px;
+
+    text-align: right;
+
+}
+
+
+.scorecard-selection-label {
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.54rem;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    letter-spacing: 0.08em;
+
+    color:
+
+        rgba(255, 255, 255, 0.28);
+
+}
+
+
+.scorecard-selection-score {
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.82rem;
+
+    font-weight: 900;
+
+    line-height: 1;
+
+    color: #14b8a6;
+
+}
+
+
+/* ==========================================================================
+   HOW YOUR SCORE WORKS
+========================================================================== */
+
+
+.score-guide {
+
+    width: min(100%, 960px);
+
+    margin:
+
+        clamp(34px, 5vw, 52px)
+
+        auto
+
+        0;
+
+    padding:
+
+        clamp(24px, 3vw, 32px);
+
+    border:
+
+        1px solid
+
+        rgba(255, 255, 255, 0.08);
+
+    border-radius: 14px;
+
+    background:
+
+        rgba(255, 255, 255, 0.018);
+
+}
+
+
+.score-guide-heading {
+
+    margin:
+
+        0
+
+        0
+
+        20px;
+
+    text-align: center;
+
+}
+
+
+.score-guide-heading-tamil {
+
+    display: block;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size: 0.94rem;
+
+    font-weight: 700;
+
+    line-height: 1.5;
+
+    color:
+
+        rgba(255, 255, 255, 0.76);
+
+}
+
+
+.score-guide-heading-english {
+
+    display: block;
+
+    margin-top: 4px;
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.58rem;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    letter-spacing: 0.10em;
+
+    color:
+
+        rgba(255, 255, 255, 0.32);
+
+}
+
+
+/* ==========================================================================
+   SCORE GUIDE — SAME FOUR-COLUMN ARCHITECTURE AS OPTIONS
+========================================================================== */
+
+
+.score-guide-grid {
+
+    display: grid;
+
+    grid-template-columns:
+
+        repeat(
+
+            4,
+
+            minmax(0, 1fr)
+
+        );
+
+    gap: 12px;
+
+}
+
+
+.score-guide-item {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    min-height: 88px;
+
+    padding:
+
+        13px
+
+        10px;
+
+    border:
+
+        1px solid
+
+        rgba(255, 255, 255, 0.065);
+
+    border-radius: 9px;
+
+    text-align: center;
+
+    background:
+
+        rgba(255, 255, 255, 0.016);
+
+}
+
+
+.score-guide-score {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 32px;
+
+    height: 32px;
+
+    border:
+
+        1px solid
+
+        rgba(20, 184, 166, 0.28);
+
+    border-radius: 50%;
+
+    background:
+
+        rgba(20, 184, 166, 0.055);
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.78rem;
+
+    font-weight: 900;
+
+    line-height: 1;
+
+    color: #14b8a6;
+
+}
+
+
+.score-guide-status-tamil {
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size: 0.72rem;
+
+    font-weight: 600;
+
+    line-height: 1.45;
+
+    color:
+
+        rgba(255, 255, 255, 0.66);
+
+}
+
+
+.score-guide-status-english {
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.48rem;
+
+    font-weight: 700;
+
+    line-height: 1.35;
+
+    letter-spacing: 0.05em;
+
+    color:
+
+        rgba(255, 255, 255, 0.30);
+
+}
+
+
+/* ==========================================================================
+   VALIDATION MESSAGE
+========================================================================== */
+
+
+.dimension-message {
+
+    display: none;
+
+    width: min(100%, 960px);
+
+    margin:
+
+        28px
+
+        auto
+
+        0;
+
+    padding:
+
+        13px
+
+        18px;
+
+    border:
+
+        1px solid
+
+        rgba(255, 116, 116, 0.24);
+
+    border-radius: 8px;
+
+    background:
+
+        rgba(255, 116, 116, 0.055);
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        Arial,
+
+        sans-serif;
+
+    font-size: 0.88rem;
+
+    font-weight: 600;
+
+    line-height: 1.6;
+
+    text-align: center;
+
+    color: #ffb0b0;
+
+}
+
+
+.dimension-message.is-visible {
+
+    display: block;
+
+}
+
+
+/* ==========================================================================
+   DIMENSION NAVIGATION
+========================================================================== */
+
+
+.dimension-navigation {
+
+    display: flex;
+
+    align-items: stretch;
+
+    justify-content: center;
+
+    gap: 16px;
+
+    width: min(100%, 960px);
+
+    margin:
+
+        clamp(42px, 6vw, 64px)
+
+        auto
+
+        0;
+
+}
+
+
+/* ==========================================================================
+   SHARED NAVIGATION BUTTON
+========================================================================== */
+
+
+.dimension-button {
+
+    display: inline-flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    width: min(100%, 330px);
+
+    min-height: 66px;
+
+    margin: 0;
+
+    padding:
+
+        13px
+
+        24px;
+
+    border-radius: 8px;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+
+        transform 170ms ease,
+
+        border-color 170ms ease,
+
+        background 170ms ease,
+
+        box-shadow 170ms ease,
+
+        opacity 170ms ease;
+
+    -webkit-appearance: none;
+
+    appearance: none;
+
+}
+
+
+.dimension-button-primary {
+
+    border:
+
+        1px solid
+
+        #0f8f84;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #11a99a,
+
+            #0f8f84
+
+        );
+
+    box-shadow:
+
+        0 12px 28px
+
+        rgba(15, 143, 132, 0.20);
+
+    color: #ffffff;
+
+}
+
+
+.dimension-button-primary:hover {
+
+    transform:
+
+        translateY(-2px);
+
+    box-shadow:
+
+        0 16px 34px
+
+        rgba(15, 143, 132, 0.27);
+
+}
+
+
+.dimension-button-secondary {
+
+    border:
+
+        1px solid
+
+        rgba(255, 255, 255, 0.13);
+
+    background:
+
+        rgba(255, 255, 255, 0.025);
+
+    color:
+
+        rgba(255, 255, 255, 0.70);
+
+}
+
+
+.dimension-button-secondary:hover {
+
+    transform:
+
+        translateY(-2px);
+
+    border-color:
+
+        rgba(20, 184, 166, 0.32);
+
+    background:
+
+        rgba(20, 184, 166, 0.035);
+
+}
+
+
+.dimension-button:focus-visible {
+
+    outline:
+
+        3px solid
+
+        rgba(20, 184, 166, 0.28);
+
+    outline-offset: 4px;
+
+}
+
+
+.dimension-button:disabled {
+
+    cursor: not-allowed;
+
+    opacity: 0.42;
+
+    transform: none;
+
+    box-shadow: none;
+
+}
+
+
+.dimension-button-primary-text {
+
+    display: block;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size: 0.92rem;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+}
+
+
+.dimension-button-secondary-text {
+
+    display: block;
+
+    font-family:
+
+        "Cinzel",
+
+        Georgia,
+
+        serif;
+
+    font-size: 0.58rem;
+
+    font-weight: 700;
+
+    line-height: 1.35;
+
+    letter-spacing: 0.07em;
+
+    opacity: 0.72;
+
+}
+
+
+/* ==========================================================================
+   COMPLETION SUMMARY
+========================================================================== */
+
+
+.dimension-completion {
+
+    width: min(100%, 960px);
+
+    margin:
+
+        24px
+
+        auto
+
+        0;
+
+    text-align: center;
+
+}
+
+
+.dimension-completion p {
+
+    margin: 0;
+
+    font-family:
+
+        "Noto Sans Tamil",
+
+        sans-serif;
+
+    font-size: 0.82rem;
+
+    font-weight: 500;
+
+    line-height: 1.65;
+
+    color:
+
+        rgba(255, 255, 255, 0.36);
+
+}
+
+
+/* ==========================================================================
+   TABLET
+========================================================================== */
+
+
+@media (max-width: 900px) {
+
+
+    .page02-dimension-shell {
+
+        width:
+
+            min(
+
+                100%,
+
+                calc(100% - 36px)
+
+            );
+
+    }
+
+
+    .scorecard-options {
+
+        grid-template-columns:
+
+            repeat(
+
+                2,
+
+                minmax(0, 1fr)
+
+            );
+
+    }
+
+
+    .score-guide-grid {
+
+        grid-template-columns:
+
+            repeat(
+
+                2,
+
+                minmax(0, 1fr)
+
+            );
+
+    }
+
+
+    .scorecard-option {
+
+        min-height: 96px;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   MOBILE
+========================================================================== */
+
+
+@media (max-width: 768px) {
+
+
+    /* ----------------------------------------------------------------------
+       FULL WIDTH MOBILE RESET
+
+       Explicitly neutralises global section side padding.
+    ---------------------------------------------------------------------- */
+
+
+    .page02-dimension,
+
+    .page02-dimension section {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        margin-left: 0;
+
+        margin-right: 0;
+
+        padding-left: 0;
+
+        padding-right: 0;
+
+    }
+
+
+    .page02-dimension-shell {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        margin: 0;
+
+        padding:
+
+            44px
+
+            16px
+
+            72px;
+
+    }
+
+
+    /* ----------------------------------------------------------------------
+       PROGRESS
+    ---------------------------------------------------------------------- */
+
+
+    .dimension-progress {
+
+        margin-bottom: 34px;
+
+    }
+
+
+    .dimension-progress-meta {
+
+        gap: 12px;
+
+    }
+
+
+    .dimension-progress-label {
+
+        font-size: 0.56rem;
+
+        letter-spacing: 0.10em;
+
+    }
+
+
+    .dimension-progress-number {
+
+        font-size: 0.64rem;
+
+    }
+
+
+    /* ----------------------------------------------------------------------
+       HEADER
+    ---------------------------------------------------------------------- */
+
+
+    .dimension-header {
+
+        margin-bottom: 36px;
+
+    }
+
+
+    .dimension-eyebrow {
+
+        font-size: 0.60rem;
+
+        letter-spacing: 0.13em;
+
+    }
+
+
+    .dimension-title-tamil {
+
+        font-size:
+
+            clamp(
+
+                1.65rem,
+
+                7vw,
+
+                2.15rem
+
+            );
+
+    }
+
+
+    .dimension-title-english {
+
+        font-size: 0.70rem;
+
+        letter-spacing: 0.10em;
+
+    }
+
+
+    .dimension-introduction {
+
+        margin-top: 20px;
+
+        font-size: 0.92rem;
+
+        line-height: 1.8;
+
+    }
+
+
+    .dimension-score-panel {
+
+        margin-top: 24px;
+
+        padding:
+
+            11px
+
+            17px;
+
+    }
+
+
+    /* ----------------------------------------------------------------------
+       CARD
+    ---------------------------------------------------------------------- */
+
+
+    .scorecard-list {
+
+        gap: 20px;
+
+    }
+
+
+    .scorecard-card {
+
+        padding:
+
+            24px
+
+            18px;
+
+        border-radius: 13px;
+
+    }
+
+
+    .scorecard-card-header {
+
+        grid-template-columns:
+
+            34px
+
+            minmax(0, 1fr);
+
+        gap: 13px;
+
+        margin-bottom: 22px;
+
+    }
+
+
+    .scorecard-number {
+
+        width: 34px;
+
+        height: 34px;
+
+        flex-basis: 34px;
+
+        font-size: 0.60rem;
+
+    }
+
+
+    .scorecard-title-tamil {
+
+        font-size: 0.96rem;
+
+    }
+
+
+    .scorecard-title-english {
+
+        font-size: 0.58rem;
+
+    }
+
+
+    .scorecard-ideal {
+
+        grid-column:
+
+            2;
+
+        min-width: 0;
+
+        width: fit-content;
+
+        margin-top: 2px;
+
+        padding:
+
+            6px
+
+            9px;
+
+        text-align: left;
+
+    }
+
+
+    /* ----------------------------------------------------------------------
+       OPTIONS — 2 × 2
+
+       This is the primary mobile architecture.
+    ---------------------------------------------------------------------- */
+
+
+    .scorecard-options {
+
+        grid-template-columns:
+
+            repeat(
+
+                2,
+
+                minmax(0, 1fr)
+
+            );
+
+        gap: 10px;
+
+    }
+
+
+    .scorecard-option {
+
+        min-height: 112px;
+
+        padding:
+
+            14px
+
+            10px;
+
+        border-radius: 9px;
+
+    }
+
+
+    .option-range {
+
+        min-height: 44px;
+
+        font-size: 0.78rem;
+
+        line-height: 1.45;
+
+    }
+
+
+    .option-score {
+
+        min-width: 38px;
+
+        height: 26px;
+
+        font-size: 0.74rem;
+
+    }
+
+
+    /* ----------------------------------------------------------------------
+       SCORE GUIDE — SAME 2 × 2 ARCHITECTURE
+    ---------------------------------------------------------------------- */
+
+
+    .score-guide {
+
+        margin-top: 30px;
+
+        padding:
+
+            22px
+
+            16px;
+
+        border-radius: 12px;
+
+    }
+
+
+    .score-guide-grid {
+
+        grid-template-columns:
+
+            repeat(
+
+                2,
+
+                minmax(0, 1fr)
+
+            );
+
+        gap: 10px;
+
+    }
+
+
+    .score-guide-item {
+
+        min-height: 84px;
+
+    }
+
+
+    /* ----------------------------------------------------------------------
+       NAVIGATION
+    ---------------------------------------------------------------------- */
+
+
+    .dimension-navigation {
+
+        flex-direction: column-reverse;
+
+        align-items: center;
+
+        gap: 12px;
+
+        margin-top: 40px;
+
+    }
+
+
+    .dimension-button {
+
+        width: 100%;
+
+        max-width: 390px;
+
+        min-height: 64px;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   SMALL MOBILE
+========================================================================== */
+
+
+@media (max-width: 420px) {
+
+
+    .page02-dimension-shell {
+
+        padding:
+
+            38px
+
+            13px
+
+            64px;
+
+    }
+
+
+    .scorecard-card {
+
+        padding:
+
+            22px
+
+            14px;
+
+    }
+
+
+    /* ----------------------------------------------------------------------
+       VERY NARROW DEVICES
+
+       Change from 2 × 2 to one option per line so ranges never become
+       cramped or illegible.
+    ---------------------------------------------------------------------- */
+
+
+    .scorecard-options {
+
+        grid-template-columns:
+
+            minmax(0, 1fr);
+
+        gap: 9px;
+
+    }
+
+
+    .scorecard-option {
+
+        flex-direction: row;
+
+        justify-content: space-between;
+
+        gap: 12px;
+
+        min-height: 68px;
+
+        padding:
+
+            12px
+
+            14px;
+
+        text-align: left;
+
+    }
+
+
+    .option-range {
+
+        justify-content: flex-start;
+
+        min-height: 0;
+
+        text-align: left;
+
+    }
+
+
+    .option-score {
+
+        flex: 0 0 auto;
+
+    }
+
+
+    .option-status {
+
+        display: none;
+
+    }
+
+
+    /* ----------------------------------------------------------------------
+       SCORE GUIDE STAYS 2 × 2
+
+       These labels are short enough to remain readable.
+    ---------------------------------------------------------------------- */
+
+
+    .score-guide-grid {
+
+        grid-template-columns:
+
+            repeat(
+
+                2,
+
+                minmax(0, 1fr)
+
+            );
+
+    }
+
+
+    .score-guide-item {
+
+        min-height: 78px;
+
+        padding:
+
+            11px
+
+            7px;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   TOUCH DEVICE OPTIMIZATION
+========================================================================== */
+
+
+@media (pointer: coarse) {
+
+
+    .scorecard-option {
+
+        touch-action: manipulation;
+
+    }
+
+
+    .dimension-button {
+
+        min-height: 64px;
+
+        touch-action: manipulation;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   REDUCED MOTION
+========================================================================== */
+
+
+@media (prefers-reduced-motion: reduce) {
+
+
+    .dimension-progress-fill,
+
+    .scorecard-card,
+
+    .scorecard-option,
+
+    .dimension-button {
+
+        transition: none;
+
+    }
+
+
+    .scorecard-option:hover,
+
+    .dimension-button:hover {
+
+        transform: none;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   PRINT
+========================================================================== */
+
+
+@media print {
+
+
+    .dimension-navigation {
+
+        display: none !important;
+
+    }
+
+
+    .scorecard-card,
+
+    .score-guide {
+
+        box-shadow: none;
+
+        break-inside: avoid;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   END
+
+   SHARED DIMENSION STACK:
+
+   page02-data.js
+          ↓
+   page02-session.js
+          ↓
+   page02-scorecard.js
+          ↓
+   page02b.js / page02c.js / page02d.js / page02e.js / page02f.js
+
+
+   VISUAL STACK:
+
+   header.css
+          ↓
+   responsive.css
+          ↓
+   page02-shared.css
+          ↓
+   page02b.css / page02c.css / page02d.css / page02e.css / page02f.css
+          ↓
+   footer.css
+
+
+   NEXT FILE:
+
+   js/page02/page02-scorecard.js
+
+========================================================================== */
+
