@@ -4,7 +4,7 @@
  * CTM PATH™ MILLIONAIRES™
  * Guided Journey™
  *
- * Frontend v1.0
+ * Frontend v1.1
  * -----------------------------------------------------------------------------
  * File          : js/page02.js
  * Page          : 02 / 07
@@ -30,10 +30,11 @@
  *
  * Backend actions used:
  *
- *      register
- *      saveDiscovery
+ *      CTM_API.register()
+ *      CTM_API.saveDiscovery()
  *
- * Contains NO backend business logic.
+ * Contains NO backend business logic other than presentation-side
+ * score preview required for the interactive scorecard.
  *
  * =============================================================================
  */
@@ -117,7 +118,7 @@ Page02.state = {
  * 5 dimensions
  * 5 indicators per dimension
  *
- * Each indicator:
+ * Standard scoring:
  *
  *      0 = Starting
  *      1 = Emerging
@@ -1173,15 +1174,19 @@ Page02.toNumber = function(value){
 Page02.formatNumber = function(value){
 
     const number =
-
         Page02.toNumber(value);
 
 
     return new Intl.NumberFormat(
+
         'en-IN',
+
         {
+
             maximumFractionDigits: 2
+
         }
+
     ).format(number);
 
 };
@@ -1261,7 +1266,13 @@ Page02.setLoading = function(isLoading){
  */
 
 
-Page02.setError = function(target, message){
+Page02.setError = function(
+
+    target,
+
+    message
+
+){
 
     const element =
         Page02.$(target);
@@ -1282,15 +1293,18 @@ Page02.setError = function(target, message){
  * API ADAPTER
  * =============================================================================
  *
- * Uses the project's global API layer when available.
+ * Canonical frontend API:
  *
- * Preferred contract:
+ *      js/api.js
  *
- *      API.request(action, payload)
+ * exposes:
  *
- * Compatibility:
+ *      CTM_API.register(payload)
+ *      CTM_API.saveDiscovery(payload)
  *
- *      API.post(action, payload)
+ * IMPORTANT:
+ *
+ *      api.js MUST load before page02.js.
  *
  * =============================================================================
  */
@@ -1307,47 +1321,41 @@ Page02.api = async function(
 
     if(
 
-        window.API &&
+        typeof CTM_API === 'undefined' ||
 
-        typeof window.API.request === 'function'
+        !CTM_API
 
     ){
 
-        return window.API.request(
+        throw new Error(
 
-            action,
-
-            payload
+            'CTM PATH™ API service is unavailable.'
 
         );
 
     }
-
 
 
     if(
 
-        window.API &&
-
-        typeof window.API.post === 'function'
+        typeof CTM_API[action] !== 'function'
 
     ){
 
-        return window.API.post(
+        throw new Error(
 
-            action,
+            'CTM PATH™ API action is unavailable: ' +
 
-            payload
+            action
 
         );
 
     }
 
 
+    return CTM_API[action](
 
-    throw new Error(
-
-        'CTM PATH™ API service is unavailable.'
+        payload
 
     );
 
@@ -1366,7 +1374,11 @@ Page02.unwrapResponse = function(response){
 
     if(!response){
 
-        return {};
+        throw new Error(
+
+            'Empty response received from CTM PATH™ server.'
+
+        );
 
     }
 
@@ -1432,14 +1444,17 @@ Page02.bindIntro = function(){
 
                     if(next){
 
-                        Page02.showScreen(next);
+                        Page02.showScreen(
+
+                            next
+
+                        );
 
                     }
 
                 }
 
             );
-
 
         }
 
@@ -1581,8 +1596,11 @@ Page02.validateKyc = function(
 
 
     Page02.setError(
+
         '#kycError',
+
         ''
+
     );
 
 
@@ -1656,6 +1674,13 @@ Page02.validateKyc = function(
 Page02.extractPeopleId = function(data){
 
 
+    if(!data){
+
+        return null;
+
+    }
+
+
     return (
 
         data.peopleId ||
@@ -1722,6 +1747,15 @@ Page02.handleKycSubmit = async function(event){
         true;
 
 
+    Page02.setError(
+
+        '#kycError',
+
+        ''
+
+    );
+
+
     Page02.setLoading(true);
 
 
@@ -1778,9 +1812,12 @@ Page02.handleKycSubmit = async function(event){
 
         try{
 
+
             sessionStorage.setItem(
 
-                Page02.CONFIG.storageKeys.peopleId,
+                Page02.CONFIG
+                    .storageKeys
+                    .peopleId,
 
                 peopleId
 
@@ -1789,15 +1826,19 @@ Page02.handleKycSubmit = async function(event){
 
             sessionStorage.setItem(
 
-                Page02.CONFIG.storageKeys.fullName,
+                Page02.CONFIG
+                    .storageKeys
+                    .fullName,
 
                 payload.fullName
 
             );
 
+
         }
 
         catch(storageError){
+
 
             console.warn(
 
@@ -1810,12 +1851,19 @@ Page02.handleKycSubmit = async function(event){
         }
 
 
+        Page02.state.currentDimension =
+            0;
+
+
         Page02.renderDimensionProgress();
 
         Page02.renderDimension();
 
+
         Page02.showScreen(
+
             'scorecard'
+
         );
 
 
@@ -1855,7 +1903,6 @@ Page02.handleKycSubmit = async function(event){
 
         Page02.setLoading(false);
 
-
     }
 
 };
@@ -1891,7 +1938,6 @@ Page02.bindKyc = function(){
     );
 
 
-
     const mobile =
         form.elements.mobileNumber;
 
@@ -1914,13 +1960,11 @@ Page02.bindKyc = function(){
 
                         .slice(0, 10);
 
-
             }
 
         );
 
     }
-
 
 
     const pincode =
@@ -1944,7 +1988,6 @@ Page02.bindKyc = function(){
                         .replace(/\D/g, '')
 
                         .slice(0, 6);
-
 
             }
 
@@ -1982,7 +2025,13 @@ Page02.renderDimensionProgress = function(){
 
             .map(
 
-                function(dimension, index){
+                function(
+
+                    dimension,
+
+                    index
+
+                ){
 
 
                     const active =
@@ -2006,9 +2055,11 @@ Page02.renderDimensionProgress = function(){
 
                             type="button"
 
-                            class="dimension-progress__item
-                            ${active ? 'is-active' : ''}
-                            ${completed ? 'is-complete' : ''}"
+                            class="
+                                dimension-progress__item
+                                ${active ? 'is-active' : ''}
+                                ${completed ? 'is-complete' : ''}
+                            "
 
                             data-dimension-index="${index}"
 
@@ -2030,7 +2081,6 @@ Page02.renderDimensionProgress = function(){
 
                     `;
 
-
                 }
 
             )
@@ -2041,7 +2091,9 @@ Page02.renderDimensionProgress = function(){
     host
 
         .querySelectorAll(
+
             '[data-dimension-index]'
+
         )
 
         .forEach(
@@ -2057,17 +2109,14 @@ Page02.renderDimensionProgress = function(){
 
 
                         const index =
+
                             Number(
-                                button.dataset.dimensionIndex
+
+                                button.dataset
+                                    .dimensionIndex
+
                             );
 
-
-                        /*
-                         * Allow backwards navigation.
-                         *
-                         * Forward navigation is only allowed
-                         * through completed dimensions.
-                         */
 
                         if(
 
@@ -2076,8 +2125,21 @@ Page02.renderDimensionProgress = function(){
 
                         ){
 
+
+                            Page02.preserveCurrentDimension();
+
+
                             Page02.state.currentDimension =
                                 index;
+
+
+                            Page02.setError(
+
+                                '#scorecardError',
+
+                                ''
+
+                            );
 
 
                             Page02.renderDimensionProgress();
@@ -2089,7 +2151,6 @@ Page02.renderDimensionProgress = function(){
                     }
 
                 );
-
 
             }
 
@@ -2124,14 +2185,15 @@ Page02.isDimensionComplete = function(index){
         function(indicator){
 
 
-            return Object.prototype.hasOwnProperty.call(
+            return Object.prototype
+                .hasOwnProperty
+                .call(
 
-                Page02.state.answers,
+                    Page02.state.answers,
 
-                indicator.id
+                    indicator.id
 
-            );
-
+                );
 
         }
 
@@ -2157,39 +2219,45 @@ Page02.calculateIndicator = function(
 
 
     const value =
+
         Math.max(
 
             0,
 
             Page02.toNumber(
+
                 rawValue
+
             )
 
         );
 
 
-    let ratio = 0;
-
-
     /*
-     * High-interest debt is the only inverse indicator.
+     * HIGH-INTEREST DEBT
      *
-     * Benchmark:
+     * Ideal benchmark = ₹0.
      *
-     *      ₹0 = achieved
+     * Zero cannot be evaluated through a normal
+     * percentage-of-target calculation.
      *
-     * Because a zero target cannot be divided into
-     * percentage bands, debt is scored using the
-     * same 0–4 scale through explicit status bands.
+     * Temporary inverse scoring bands:
      *
-     * ₹0          → 4
-     * ≤ ₹1 Lakh   → 3
-     * ≤ ₹5 Lakh   → 2
-     * ≤ ₹10 Lakh  → 1
-     * > ₹10 Lakh  → 0
+     *      ₹0           = 4
+     *      ≤ ₹1 Lakh    = 3
+     *      ≤ ₹5 Lakh    = 2
+     *      ≤ ₹10 Lakh   = 1
+     *      > ₹10 Lakh   = 0
+     *
+     * This rule should remain aligned with the
+     * backend AssessmentEngine before final freeze.
      */
 
-    if(indicator.direction === 'lower'){
+    if(
+
+        indicator.direction === 'lower'
+
+    ){
 
 
         let score = 0;
@@ -2222,30 +2290,37 @@ Page02.calculateIndicator = function(
 
         return {
 
-            value: value,
+            value:
+                value,
 
-            ratio: null,
+            ratio:
+                null,
 
-            percentage: null,
+            percentage:
+                null,
 
-            score: score,
+            score:
+                score,
 
-            gap: value
+            gap:
+                value
 
         };
 
     }
 
 
+    let ratio = 0;
+
 
     if(indicator.target > 0){
 
         ratio =
+
             value /
             indicator.target;
 
     }
-
 
 
     const percentage =
@@ -2282,18 +2357,26 @@ Page02.calculateIndicator = function(
 
     return {
 
-        value: value,
+        value:
+            value,
 
-        ratio: ratio,
+        ratio:
+            ratio,
 
-        percentage: percentage,
+        percentage:
+            percentage,
 
-        score: score,
+        score:
+            score,
 
         gap:
             Math.max(
-                indicator.target - value,
+
+                indicator.target -
+                value,
+
                 0
+
             )
 
     };
@@ -2313,17 +2396,21 @@ Page02.getIndicatorValue = function(indicatorId){
 
     if(
 
-        Object.prototype.hasOwnProperty.call(
+        Object.prototype
+            .hasOwnProperty
+            .call(
 
-            Page02.state.answers,
+                Page02.state.answers,
 
-            indicatorId
+                indicatorId
 
-        )
+            )
 
     ){
 
-        return Page02.state.answers[indicatorId].value;
+        return Page02.state
+            .answers[indicatorId]
+            .value;
 
     }
 
@@ -2354,9 +2441,13 @@ Page02.renderIndicator = function(indicator){
 
     const inputMode =
 
-        indicator.type === 'money' ||
-        indicator.type === 'number' ||
-        indicator.type === 'percentage'
+        (
+            indicator.type === 'money' ||
+
+            indicator.type === 'number' ||
+
+            indicator.type === 'percentage'
+        )
 
             ? 'decimal'
 
@@ -2378,21 +2469,30 @@ Page02.renderIndicator = function(indicator){
             <div class="indicator-heading">
 
                 <span class="indicator-number">
-                    ${String(indicator.number).padStart(2, '0')}
+
+                    ${String(
+                        indicator.number
+                    ).padStart(2, '0')}
+
                 </span>
+
 
                 <div>
 
                     <h3>
+
                         ${Page02.escapeHtml(
                             indicator.tamil
                         )}
+
                     </h3>
 
                     <p>
+
                         ${Page02.escapeHtml(
                             indicator.english
                         )}
+
                     </p>
 
                 </div>
@@ -2401,6 +2501,7 @@ Page02.renderIndicator = function(indicator){
 
 
             <div class="indicator-comparison">
+
 
                 <label class="indicator-current">
 
@@ -2411,6 +2512,7 @@ Page02.renderIndicator = function(indicator){
                     <small>
                         YOUR CURRENT REALITY
                     </small>
+
 
                     <div class="indicator-input-wrap">
 
@@ -2439,6 +2541,7 @@ Page02.renderIndicator = function(indicator){
                             )}"
 
                         >
+
 
                         <span class="indicator-unit">
 
@@ -2472,6 +2575,7 @@ Page02.renderIndicator = function(indicator){
                     </strong>
 
                 </div>
+
 
             </div>
 
@@ -2527,7 +2631,10 @@ Page02.renderDimension = function(){
     const dimension =
 
         Page02.DIMENSIONS[
-            Page02.state.currentDimension
+
+            Page02.state
+                .currentDimension
+
         ];
 
 
@@ -2552,9 +2659,12 @@ Page02.renderDimension = function(){
 
             <span class="section-kicker">
 
-                பரிமாணம் ${dimension.number} / 05
+                பரிமாணம்
+                ${dimension.number}
+                / 05
 
             </span>
+
 
             <h2>
 
@@ -2564,6 +2674,7 @@ Page02.renderDimension = function(){
 
             </h2>
 
+
             <h3>
 
                 ${Page02.escapeHtml(
@@ -2572,11 +2683,13 @@ Page02.renderDimension = function(){
 
             </h3>
 
+
             <p>
 
                 உங்கள் தற்போதைய உண்மை நிலையை பதிவு செய்யுங்கள்.
 
             </p>
+
 
             <p class="english-sub">
 
@@ -2592,7 +2705,9 @@ Page02.renderDimension = function(){
             ${dimension.indicators
 
                 .map(
+
                     Page02.renderIndicator
+
                 )
 
                 .join('')}
@@ -2635,31 +2750,27 @@ Page02.bindIndicatorInputs = function(){
                     function(){
 
 
-                        /*
-                         * Permit:
-                         *
-                         * digits
-                         * decimal
-                         * commas
-                         *
-                         * commas are ignored during calculation.
-                         */
-
                         input.value =
 
                             input.value
 
-                                .replace(/[^\d.,]/g, '');
+                                .replace(
+
+                                    /[^\d.,]/g,
+
+                                    ''
+
+                                );
 
 
                         Page02.previewIndicator(
 
-                            input.dataset.indicatorInput,
+                            input.dataset
+                                .indicatorInput,
 
                             input.value
 
                         );
-
 
                     }
 
@@ -2671,14 +2782,14 @@ Page02.bindIndicatorInputs = function(){
 
                     Page02.previewIndicator(
 
-                        input.dataset.indicatorInput,
+                        input.dataset
+                            .indicatorInput,
 
                         input.value
 
                     );
 
                 }
-
 
             }
 
@@ -2711,7 +2822,12 @@ Page02.findIndicator = function(indicatorId){
 
                 function(item){
 
-                    return item.id === indicatorId;
+                    return (
+
+                        item.id ===
+                        indicatorId
+
+                    );
 
                 }
 
@@ -2780,7 +2896,11 @@ Page02.previewIndicator = function(
     }
 
 
-    if(String(value).trim() === ''){
+    if(
+
+        String(value).trim() === ''
+
+    ){
 
         scoreElement.textContent =
             '— / 4';
@@ -2810,6 +2930,147 @@ Page02.previewIndicator = function(
 
 
 /* =============================================================================
+ * BUILD ANSWER
+ * =============================================================================
+ */
+
+
+Page02.buildAnswer = function(
+
+    dimension,
+
+    indicator,
+
+    rawValue
+
+){
+
+
+    const calculation =
+
+        Page02.calculateIndicator(
+
+            indicator,
+
+            rawValue
+
+        );
+
+
+    return {
+
+        indicatorId:
+            indicator.id,
+
+        indicatorNumber:
+            indicator.number,
+
+        dimensionId:
+            dimension.id,
+
+        dimension:
+            dimension.english,
+
+        label:
+            indicator.english,
+
+        value:
+            calculation.value,
+
+        ideal:
+            indicator.ideal,
+
+        target:
+            indicator.target,
+
+        score:
+            calculation.score,
+
+        gap:
+            calculation.gap
+
+    };
+
+};
+
+
+
+/* =============================================================================
+ * PRESERVE CURRENT DIMENSION
+ * =============================================================================
+ */
+
+
+Page02.preserveCurrentDimension = function(){
+
+
+    const dimension =
+
+        Page02.DIMENSIONS[
+
+            Page02.state
+                .currentDimension
+
+        ];
+
+
+    if(!dimension){
+
+        return;
+
+    }
+
+
+    dimension.indicators.forEach(
+
+        function(indicator){
+
+
+            const input =
+
+                Page02.$(
+
+                    `[data-indicator-input="${indicator.id}"]`
+
+                );
+
+
+            if(
+
+                input &&
+
+                String(
+                    input.value
+                ).trim() !== ''
+
+            ){
+
+
+                Page02.state.answers[
+                    indicator.id
+                ] =
+
+                    Page02.buildAnswer(
+
+                        dimension,
+
+                        indicator,
+
+                        input.value
+
+                    );
+
+            }
+
+        }
+
+    );
+
+};
+
+
+
+/* =============================================================================
  * CAPTURE CURRENT DIMENSION
  * =============================================================================
  */
@@ -2821,7 +3082,10 @@ Page02.captureCurrentDimension = function(){
     const dimension =
 
         Page02.DIMENSIONS[
-            Page02.state.currentDimension
+
+            Page02.state
+                .currentDimension
+
         ];
 
 
@@ -2833,8 +3097,11 @@ Page02.captureCurrentDimension = function(){
 
 
     Page02.setError(
+
         '#scorecardError',
+
         ''
+
     );
 
 
@@ -2859,9 +3126,12 @@ Page02.captureCurrentDimension = function(){
 
             !input ||
 
-            String(input.value).trim() === ''
+            String(
+                input.value
+            ).trim() === ''
 
         ){
+
 
             Page02.setError(
 
@@ -2884,50 +3154,19 @@ Page02.captureCurrentDimension = function(){
         }
 
 
-        const calculation =
+        Page02.state.answers[
+            indicator.id
+        ] =
 
-            Page02.calculateIndicator(
+            Page02.buildAnswer(
+
+                dimension,
 
                 indicator,
 
                 input.value
 
             );
-
-
-        Page02.state.answers[indicator.id] = {
-
-            indicatorId:
-                indicator.id,
-
-            indicatorNumber:
-                indicator.number,
-
-            dimensionId:
-                dimension.id,
-
-            dimension:
-                dimension.english,
-
-            label:
-                indicator.english,
-
-            value:
-                calculation.value,
-
-            ideal:
-                indicator.ideal,
-
-            target:
-                indicator.target,
-
-            score:
-                calculation.score,
-
-            gap:
-                calculation.gap
-
-        };
 
     }
 
@@ -2959,7 +3198,8 @@ Page02.updateDimensionButtons = function(){
 
         back.disabled =
 
-            Page02.state.currentDimension === 0;
+            Page02.state
+                .currentDimension === 0;
 
     }
 
@@ -2969,7 +3209,9 @@ Page02.updateDimensionButtons = function(){
 
         const isLast =
 
-            Page02.state.currentDimension ===
+            Page02.state
+                .currentDimension ===
+
             Page02.DIMENSIONS.length - 1;
 
 
@@ -3057,97 +3299,7 @@ Page02.handleDimensionNext = async function(){
 Page02.handleDimensionBack = function(){
 
 
-    /*
-     * Preserve anything already entered
-     * before moving backwards.
-     */
-
-    const dimension =
-
-        Page02.DIMENSIONS[
-            Page02.state.currentDimension
-        ];
-
-
-    if(dimension){
-
-
-        dimension.indicators.forEach(
-
-            function(indicator){
-
-
-                const input =
-
-                    Page02.$(
-
-                        `[data-indicator-input="${indicator.id}"]`
-
-                    );
-
-
-                if(
-
-                    input &&
-
-                    String(input.value).trim() !== ''
-
-                ){
-
-
-                    const calculation =
-
-                        Page02.calculateIndicator(
-
-                            indicator,
-
-                            input.value
-
-                        );
-
-
-                    Page02.state.answers[indicator.id] = {
-
-                        indicatorId:
-                            indicator.id,
-
-                        indicatorNumber:
-                            indicator.number,
-
-                        dimensionId:
-                            dimension.id,
-
-                        dimension:
-                            dimension.english,
-
-                        label:
-                            indicator.english,
-
-                        value:
-                            calculation.value,
-
-                        ideal:
-                            indicator.ideal,
-
-                        target:
-                            indicator.target,
-
-                        score:
-                            calculation.score,
-
-                        gap:
-                            calculation.gap
-
-                    };
-
-                }
-
-
-            }
-
-        );
-
-    }
+    Page02.preserveCurrentDimension();
 
 
     if(
@@ -3161,8 +3313,11 @@ Page02.handleDimensionBack = function(){
 
 
         Page02.setError(
+
             '#scorecardError',
+
             ''
+
         );
 
 
@@ -3301,9 +3456,20 @@ Page02.calculateResult = function(){
 
                     indicatorResults.reduce(
 
-                        function(sum, item){
+                        function(
 
-                            return sum + item.score;
+                            sum,
+
+                            item
+
+                        ){
+
+                            return (
+
+                                sum +
+                                item.score
+
+                            );
 
                         },
 
@@ -3316,7 +3482,9 @@ Page02.calculateResult = function(){
 
 
                 const maximum =
-                    dimension.indicators.length * 4;
+
+                    dimension.indicators
+                        .length * 4;
 
 
                 const percentage =
@@ -3324,7 +3492,12 @@ Page02.calculateResult = function(){
                     maximum > 0
 
                         ? Math.round(
-                            (score / maximum) * 100
+
+                            (
+                                score /
+                                maximum
+                            ) * 100
+
                         )
 
                         : 0;
@@ -3361,10 +3534,11 @@ Page02.calculateResult = function(){
 
 
     /*
-     * 25 indicators × 4 = 100.
+     * 25 indicators × 4 points = 100.
      *
-     * Therefore total score itself
-     * equals percentage.
+     * Therefore:
+     *
+     *      total score = overall percentage
      */
 
     const percentage =
@@ -3372,32 +3546,42 @@ Page02.calculateResult = function(){
 
 
     const gap =
+
         Math.max(
-            100 - percentage,
+
+            100 -
+            percentage,
+
             0
+
         );
 
 
     const stage =
+
         Page02.getLifestyleStage(
+
             percentage
+
         );
 
 
     const sorted =
 
-        [...dimensions]
+        [...dimensions].sort(
 
-            .sort(
+            function(a, b){
 
-                function(a, b){
+                return (
 
-                    return b.percentage -
-                           a.percentage;
+                    b.percentage -
+                    a.percentage
 
-                }
+                );
 
-            );
+            }
+
+        );
 
 
     const strongest =
@@ -3405,7 +3589,9 @@ Page02.calculateResult = function(){
 
 
     const growth =
-        sorted[sorted.length - 1];
+        sorted[
+            sorted.length - 1
+        ];
 
 
     return {
@@ -3438,6 +3624,7 @@ Page02.calculateResult = function(){
             dimensions,
 
         indicators:
+
             Page02.DIMENSIONS
 
                 .flatMap(
@@ -3454,8 +3641,12 @@ Page02.calculateResult = function(){
 
                     function(a, b){
 
-                        return a.number -
-                               b.number;
+                        return (
+
+                            a.number -
+                            b.number
+
+                        );
 
                     }
 
@@ -3465,9 +3656,13 @@ Page02.calculateResult = function(){
 
                     function(indicator){
 
-                        return Page02.state.answers[
-                            indicator.id
-                        ];
+                        return (
+
+                            Page02.state.answers[
+                                indicator.id
+                            ]
+
+                        );
 
                     }
 
@@ -3491,7 +3686,9 @@ Page02.getLifestyleStage = function(percentage){
     if(percentage >= 100){
 
         return (
+
             'Millionaire Lifestyle Benchmark Achieved'
+
         );
 
     }
@@ -3500,7 +3697,9 @@ Page02.getLifestyleStage = function(percentage){
     if(percentage >= 81){
 
         return (
+
             'Millionaire Lifestyle'
+
         );
 
     }
@@ -3509,7 +3708,9 @@ Page02.getLifestyleStage = function(percentage){
     if(percentage >= 61){
 
         return (
+
             'Wealth-Building Lifestyle'
+
         );
 
     }
@@ -3518,7 +3719,9 @@ Page02.getLifestyleStage = function(percentage){
     if(percentage >= 41){
 
         return (
+
             'Affluent Transition'
+
         );
 
     }
@@ -3527,14 +3730,18 @@ Page02.getLifestyleStage = function(percentage){
     if(percentage >= 21){
 
         return (
+
             'Middle-Class Stability'
+
         );
 
     }
 
 
     return (
+
         'Survival / Foundation'
+
     );
 
 };
@@ -3629,6 +3836,15 @@ Page02.completeScorecard = async function(){
         true;
 
 
+    Page02.setError(
+
+        '#scorecardError',
+
+        ''
+
+    );
+
+
     Page02.setLoading(true);
 
 
@@ -3656,7 +3872,9 @@ Page02.completeScorecard = async function(){
 
 
         Page02.unwrapResponse(
+
             response
+
         );
 
 
@@ -3665,9 +3883,15 @@ Page02.completeScorecard = async function(){
 
             sessionStorage.setItem(
 
-                Page02.CONFIG.storageKeys.page02Result,
+                Page02.CONFIG
+                    .storageKeys
+                    .page02Result,
 
-                JSON.stringify(result)
+                JSON.stringify(
+
+                    result
+
+                )
 
             );
 
@@ -3685,17 +3909,20 @@ Page02.completeScorecard = async function(){
 
             );
 
-
         }
 
 
         Page02.renderResult(
+
             result
+
         );
 
 
         Page02.showScreen(
+
             'result'
+
         );
 
 
@@ -3734,7 +3961,6 @@ Page02.completeScorecard = async function(){
 
 
         Page02.setLoading(false);
-
 
     }
 
@@ -3878,6 +4104,7 @@ Page02.renderResult = function(result){
     if(score){
 
         score.textContent =
+
             `${result.totalScore} / 100`;
 
     }
@@ -3886,6 +4113,7 @@ Page02.renderResult = function(result){
     if(percentage){
 
         percentage.textContent =
+
             `${result.percentage}%`;
 
     }
@@ -3894,6 +4122,7 @@ Page02.renderResult = function(result){
     if(stage){
 
         stage.textContent =
+
             `${result.stage.toUpperCase()}™`;
 
     }
@@ -3902,6 +4131,7 @@ Page02.renderResult = function(result){
     if(gap){
 
         gap.textContent =
+
             `${result.gap}%`;
 
     }
@@ -3915,7 +4145,9 @@ Page02.renderResult = function(result){
             result.dimensions
 
                 .map(
+
                     Page02.renderDimensionResult
+
                 )
 
                 .join('');
@@ -3926,6 +4158,7 @@ Page02.renderResult = function(result){
     if(strongestDimension){
 
         strongestDimension.textContent =
+
             result.strongestDimension.name;
 
     }
@@ -3934,6 +4167,7 @@ Page02.renderResult = function(result){
     if(strongestPercentage){
 
         strongestPercentage.textContent =
+
             `${result.strongestDimension.percentage}%`;
 
     }
@@ -3942,6 +4176,7 @@ Page02.renderResult = function(result){
     if(growthDimension){
 
         growthDimension.textContent =
+
             result.growthDimension.name;
 
     }
@@ -3950,13 +4185,16 @@ Page02.renderResult = function(result){
     if(growthPercentage){
 
         growthPercentage.textContent =
+
             `${result.growthDimension.percentage}%`;
 
     }
 
 
     Page02.highlightStage(
+
         result.stage
+
     );
 
 };
@@ -3998,6 +4236,7 @@ Page02.highlightStage = function(stage){
 
                 if(active){
 
+
                     item.setAttribute(
 
                         'aria-current',
@@ -4006,9 +4245,11 @@ Page02.highlightStage = function(stage){
 
                     );
 
+
                 }
 
                 else{
+
 
                     item.removeAttribute(
 
@@ -4017,7 +4258,6 @@ Page02.highlightStage = function(stage){
                     );
 
                 }
-
 
             }
 
@@ -4044,6 +4284,7 @@ Page02.continueToPage03 = function(){
 
 
     window.location.href =
+
         Page02.CONFIG.nextPage;
 
 };
@@ -4083,7 +4324,7 @@ Page02.bindContinue = function(){
 
 
 /* =============================================================================
- * RESTORE PEOPLE ID
+ * RESTORE SESSION
  * =============================================================================
  */
 
@@ -4098,7 +4339,9 @@ Page02.restoreSession = function(){
 
             sessionStorage.getItem(
 
-                Page02.CONFIG.storageKeys.peopleId
+                Page02.CONFIG
+                    .storageKeys
+                    .peopleId
 
             );
 
@@ -4124,8 +4367,81 @@ Page02.restoreSession = function(){
 
         );
 
+    }
+
+};
+
+
+
+/* =============================================================================
+ * DEPENDENCY CHECK
+ * =============================================================================
+ */
+
+
+Page02.checkDependencies = function(){
+
+
+    if(
+
+        typeof CTM_API === 'undefined'
+
+    ){
+
+
+        console.error(
+
+            'CTM PATH™ Page 02 dependency failure: js/api.js is not loaded.'
+
+        );
+
+
+        return false;
 
     }
+
+
+    if(
+
+        typeof CTM_API.register !==
+        'function'
+
+    ){
+
+
+        console.error(
+
+            'CTM PATH™ Page 02 dependency failure: CTM_API.register() is unavailable.'
+
+        );
+
+
+        return false;
+
+    }
+
+
+    if(
+
+        typeof CTM_API.saveDiscovery !==
+        'function'
+
+    ){
+
+
+        console.error(
+
+            'CTM PATH™ Page 02 dependency failure: CTM_API.saveDiscovery() is unavailable.'
+
+        );
+
+
+        return false;
+
+    }
+
+
+    return true;
 
 };
 
@@ -4146,9 +4462,18 @@ Page02.init = function(){
 
     if(!root){
 
+        console.error(
+
+            'CTM PATH™ Page 02 root element #page02 was not found.'
+
+        );
+
         return;
 
     }
+
+
+    Page02.checkDependencies();
 
 
     Page02.restoreSession();
@@ -4164,14 +4489,17 @@ Page02.init = function(){
 
 
     /*
-     * Page 02 always starts at the intro.
+     * Page 02 always starts from its introduction.
      *
-     * Internal state is intentionally not restored
-     * into the middle of an unfinished scorecard.
+     * A previously stored PeopleID may be reused by the
+     * application session, but the page will not silently
+     * jump into an unfinished scorecard.
      */
 
     Page02.showScreen(
+
         'intro'
+
     );
 
 
@@ -4191,7 +4519,12 @@ Page02.init = function(){
  */
 
 
-if(document.readyState === 'loading'){
+if(
+
+    document.readyState ===
+    'loading'
+
+){
 
 
     document.addEventListener(
@@ -4210,7 +4543,6 @@ else{
 
     Page02.init();
 
-
 }
 
 
@@ -4218,3 +4550,4 @@ else{
  * END OF FILE
  * =============================================================================
  */
+
