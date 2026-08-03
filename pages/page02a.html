@@ -14,7 +14,7 @@
 
     <meta
         name="description"
-        content="CTM PATH™ Millionaires™ Guided Journey™ — Middle Class to Millionaire Lifestyle Scorecard™"
+        content="CTM PATH™ MILLIONAIRES™ — Millionaire Lifestyle Scorecard™"
     >
 
     <title>
@@ -23,7 +23,7 @@
 
 
     <!-- =====================================================================
-         CTM PATH™ GLOBAL FOUNDATION
+         GLOBAL FOUNDATION
     ====================================================================== -->
 
     <link
@@ -44,11 +44,6 @@
 
     <!-- =====================================================================
          GLOBAL COMPONENTS
-
-         NOTE:
-         component-loader.js also protects against duplicate stylesheet
-         loading. These links are retained so Page 02A remains visually
-         stable while the shared components are being injected.
     ====================================================================== -->
 
     <link
@@ -63,18 +58,13 @@
 
 
     <!-- =====================================================================
-         PAGE 02 SHARED FOUNDATION
+         PAGE 02
     ====================================================================== -->
 
     <link
         rel="stylesheet"
         href="../css/page02/page02-shared.css"
     >
-
-
-    <!-- =====================================================================
-         PAGE 02A
-    ====================================================================== -->
 
     <link
         rel="stylesheet"
@@ -84,14 +74,11 @@
 </head>
 
 
-<body>
+<body class="page02a-body">
 
 
 <!-- =========================================================================
      GLOBAL HEADER
-
-     Populated by:
-     js/component-loader.js
 ============================================================================ -->
 
 
@@ -114,7 +101,8 @@
 
 
     <!-- =====================================================================
-         INTRO SCREEN
+         SCREEN 01
+         SCORECARD INTRODUCTION
     ====================================================================== -->
 
 
@@ -131,22 +119,9 @@
             <div class="scorecard-intro-card">
 
 
-                <!-- ---------------------------------------------------------
-                     EYEBROW
-                ---------------------------------------------------------- -->
-
-
                 <div class="scorecard-eyebrow">
-
                     SCORECARD INSTRUCTION
-
                 </div>
-
-
-
-                <!-- ---------------------------------------------------------
-                     PRIMARY MESSAGE
-                ---------------------------------------------------------- -->
 
 
                 <h1
@@ -156,16 +131,11 @@
 
                     இது ஒரு தேர்வு அல்ல.<br>
 
-                    இது உங்கள் வாழ்க்கையின்
+                    இது உங்கள் வாழ்க்கையின்<br>
+
                     இன்றைய படம்.
 
                 </h1>
-
-
-
-                <!-- ---------------------------------------------------------
-                     ENGLISH SUPPORT
-                ---------------------------------------------------------- -->
 
 
                 <div class="scorecard-intro-english">
@@ -175,108 +145,56 @@
                     </p>
 
                     <p>
-                        IT'S A PICTURE OF WHERE
-                        YOU ARE TODAY.
+                        IT'S A PICTURE OF WHERE YOU ARE TODAY.
                     </p>
 
                 </div>
-
-
-
-                <!-- ---------------------------------------------------------
-                     EXPLANATION
-                ---------------------------------------------------------- -->
 
 
                 <div class="scorecard-intro-copy">
 
-
                     <p>
-
-                        ஒவ்வொரு கேள்விக்கும்
-                        உங்கள் தற்போதைய உண்மை
-                        நிலையை மட்டுமே பதிவு
-                        செய்யுங்கள்.
-
+                        ஒவ்வொரு கேள்விக்கும் உங்கள் தற்போதைய உண்மை
+                        நிலையை மட்டுமே பதிவு செய்யுங்கள்.
                     </p>
 
-
                     <p>
-
-                        நீங்கள் இருக்க விரும்பும்
-                        நிலையை அல்ல —
-                        நீங்கள் இன்று இருக்கும்
-                        நிலையை.
-
+                        நீங்கள் இருக்க விரும்பும் நிலையை அல்ல —
+                        நீங்கள் இன்று இருக்கும் நிலையை.
                     </p>
-
 
                 </div>
-
-
-
-                <!-- ---------------------------------------------------------
-                     ENGLISH EXPLANATION
-                ---------------------------------------------------------- -->
 
 
                 <div class="scorecard-intro-support">
 
-
                     <p>
-
                         ENTER YOUR REALITY TODAY.
-
                     </p>
-
 
                     <p>
-
-                        Not where you hope to be.
-                        Where you are now.
-
+                        Not where you hope to be. Where you are now.
                     </p>
-
 
                 </div>
 
 
-
-                <!-- ---------------------------------------------------------
-                     CALCULATION NOTE
-                ---------------------------------------------------------- -->
-
-
                 <div class="scorecard-calculation-note">
 
-
                     <p>
-
-                        உங்கள் மதிப்பெண்
-                        மற்றும் சதவீதம்
+                        உங்கள் மதிப்பெண் மற்றும் சதவீதம்
                         தானாக கணக்கிடப்படும்.
-
                     </p>
 
-
                     <span>
-
-                        YOUR SCORE AND GAP WILL
-                        BE CALCULATED AUTOMATICALLY.
-
+                        YOUR SCORE AND GAP WILL BE
+                        CALCULATED AUTOMATICALLY.
                     </span>
-
 
                 </div>
 
 
             </div>
-
-
-
-            <!-- -------------------------------------------------------------
-                 INTRO CTA
-            -------------------------------------------------------------- -->
 
 
             <div class="page02-intro-action">
@@ -288,20 +206,13 @@
                     type="button"
                 >
 
-
                     <span class="button-primary">
-
                         தொடங்கலாம்.
-
                     </span>
-
 
                     <span class="button-secondary">
-
                         LET'S BEGIN
-
                     </span>
-
 
                 </button>
 
@@ -317,16 +228,11 @@
 
 
     <!-- =====================================================================
-         KYC SCREEN
+         SCREEN 02
+         ABOUT YOU™ / KYC
 
          Initially hidden.
-
-         page02a.js owns:
-             Intro → KYC
-             KYC validation
-             registration
-             session persistence
-             Page 02A → Page 02B
+         page02a.js reveals this screen after LET'S BEGIN.
     ====================================================================== -->
 
 
@@ -343,7 +249,7 @@
 
 
             <!-- =============================================================
-                 KYC INTRO
+                 KYC HEADING
             ============================================================== -->
 
 
@@ -351,9 +257,7 @@
 
 
                 <div class="scorecard-eyebrow">
-
                     BEFORE WE BEGIN
-
                 </div>
 
 
@@ -361,24 +265,19 @@
                     id="kycTitle"
                     class="kyc-title"
                 >
-
-                    முதலில் உங்களைப் பற்றி
-                    கொஞ்சம் தெரிந்துகொள்வோம்.
-
+                    ABOUT YOU™
                 </h1>
 
 
                 <p class="kyc-title-english">
-
-                    LET'S GET TO KNOW YOU.
-
+                    YOUR DETAILS. YOUR LIFE. YOUR JOURNEY.
                 </p>
 
 
                 <p class="kyc-introduction">
 
                     உங்கள் Millionaire Lifestyle Scorecard™
-                    முடிவை உங்களுக்காக உருவாக்க
+                    பயணத்தை உங்களுக்காக உருவாக்க,
                     கீழே உள்ள விவரங்களை பதிவு செய்யுங்கள்.
 
                 </p>
@@ -389,384 +288,1053 @@
 
 
             <!-- =============================================================
-                 KYC CARD
+                 KYC FORM
             ============================================================== -->
 
 
-            <div class="kyc-card">
+            <form
+                id="kycForm"
+                class="kyc-form kyc-form-three-card"
+                novalidate
+            >
 
 
-                <form
-                    id="kycForm"
-                    class="kyc-form"
-                    novalidate
+                <!-- =========================================================
+                     CARD 01 — YOUR DETAILS™
+                ========================================================== -->
+
+
+                <section
+                    class="kyc-card kyc-section-card"
+                    aria-labelledby="kycDetailsTitle"
                 >
 
 
-                    <!-- =====================================================
-                         FULL NAME
-                    ====================================================== -->
+                    <header class="kyc-card-heading">
 
 
-                    <div class="kyc-field kyc-field-full">
+                        <div class="kyc-card-number">
+                            CARD 01
+                        </div>
 
 
-                        <label
-                            for="fullName"
-                            class="kyc-label"
+                        <h2
+                            id="kycDetailsTitle"
+                            class="kyc-card-title"
+                        >
+                            YOUR DETAILS™
+                        </h2>
+
+
+                    </header>
+
+
+
+                    <div class="kyc-card-grid">
+
+
+                        <!-- FULL NAME -->
+
+
+                        <div class="kyc-field kyc-field-full">
+
+
+                            <label
+                                for="fullName"
+                                class="kyc-label"
+                            >
+
+                                <span class="kyc-label-tamil">
+                                    உங்கள் பெயர்
+                                </span>
+
+                                <span class="kyc-label-english">
+                                    FULL NAME
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                id="fullName"
+                                name="fullName"
+                                class="kyc-input"
+                                type="text"
+                                autocomplete="name"
+                                maxlength="100"
+                                required
+                            >
+
+
+                        </div>
+
+
+
+                        <!-- MOBILE NUMBER -->
+
+
+                        <div class="kyc-field">
+
+
+                            <label
+                                for="mobile"
+                                class="kyc-label"
+                            >
+
+                                <span class="kyc-label-tamil">
+                                    கைபேசி எண்
+                                </span>
+
+                                <span class="kyc-label-english">
+                                    MOBILE NUMBER
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                id="mobile"
+                                name="mobile"
+                                class="kyc-input"
+                                type="tel"
+                                inputmode="numeric"
+                                autocomplete="tel"
+                                maxlength="15"
+                                required
+                            >
+
+
+                        </div>
+
+
+
+                        <!-- EMAIL ADDRESS -->
+
+
+                        <div class="kyc-field">
+
+
+                            <label
+                                for="email"
+                                class="kyc-label"
+                            >
+
+                                <span class="kyc-label-tamil">
+                                    மின்னஞ்சல் முகவரி
+                                </span>
+
+                                <span class="kyc-label-english">
+                                    EMAIL ADDRESS
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                id="email"
+                                name="email"
+                                class="kyc-input"
+                                type="email"
+                                inputmode="email"
+                                autocomplete="email"
+                                maxlength="150"
+                                required
+                            >
+
+
+                        </div>
+
+
+
+                        <!-- AGE -->
+
+
+                        <div class="kyc-field">
+
+
+                            <label
+                                for="age"
+                                class="kyc-label"
+                            >
+
+                                <span class="kyc-label-tamil">
+                                    வயது
+                                </span>
+
+                                <span class="kyc-label-english">
+                                    AGE
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                id="age"
+                                name="age"
+                                class="kyc-input"
+                                type="number"
+                                inputmode="numeric"
+                                min="18"
+                                max="100"
+                                step="1"
+                                required
+                            >
+
+
+                        </div>
+
+
+
+                        <!-- GENDER -->
+
+
+                        <fieldset
+                            class="kyc-field kyc-choice-field"
                         >
 
-                            <span class="kyc-label-tamil">
 
-                                உங்கள் பெயர்
+                            <legend class="kyc-label">
 
-                            </span>
+                                <span class="kyc-label-tamil">
+                                    பாலினம்
+                                </span>
 
-                            <span class="kyc-label-english">
+                                <span class="kyc-label-english">
+                                    GENDER
+                                </span>
 
-                                FULL NAME
-
-                            </span>
-
-                        </label>
+                            </legend>
 
 
-                        <input
-                            id="fullName"
-                            name="fullName"
-                            class="kyc-input"
-                            type="text"
-                            autocomplete="name"
-                            maxlength="100"
-                            required
-                        >
+                            <div
+                                class="kyc-choice-group"
+                                role="radiogroup"
+                                aria-label="Gender"
+                            >
+
+
+                                <label class="kyc-choice">
+
+
+                                    <input
+                                        type="radio"
+                                        name="gender"
+                                        value="Male"
+                                        required
+                                    >
+
+
+                                    <span>
+                                        Male
+                                    </span>
+
+
+                                </label>
+
+
+                                <label class="kyc-choice">
+
+
+                                    <input
+                                        type="radio"
+                                        name="gender"
+                                        value="Female"
+                                        required
+                                    >
+
+
+                                    <span>
+                                        Female
+                                    </span>
+
+
+                                </label>
+
+
+                                <label class="kyc-choice">
+
+
+                                    <input
+                                        type="radio"
+                                        name="gender"
+                                        value="Other"
+                                        required
+                                    >
+
+
+                                    <span>
+                                        Other
+                                    </span>
+
+
+                                </label>
+
+
+                            </div>
+
+
+                        </fieldset>
 
 
                     </div>
 
 
-
-                    <!-- =====================================================
-                         MOBILE
-                    ====================================================== -->
+                </section>
 
 
-                    <div class="kyc-field">
+
+                <!-- =========================================================
+                     CARD 02 — YOUR LIFE™
+                ========================================================== -->
 
 
-                        <label
-                            for="mobile"
-                            class="kyc-label"
+                <section
+                    class="kyc-card kyc-section-card"
+                    aria-labelledby="kycLifeTitle"
+                >
+
+
+                    <header class="kyc-card-heading">
+
+
+                        <div class="kyc-card-number">
+                            CARD 02
+                        </div>
+
+
+                        <h2
+                            id="kycLifeTitle"
+                            class="kyc-card-title"
+                        >
+                            YOUR LIFE™
+                        </h2>
+
+
+                    </header>
+
+
+
+                    <div class="kyc-card-grid">
+
+
+                        <!-- OCCUPATION -->
+
+
+                        <div class="kyc-field">
+
+
+                            <label
+                                for="occupation"
+                                class="kyc-label"
+                            >
+
+                                <span class="kyc-label-tamil">
+                                    தொழில்
+                                </span>
+
+                                <span class="kyc-label-english">
+                                    OCCUPATION
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                id="occupation"
+                                name="occupation"
+                                class="kyc-input"
+                                type="text"
+                                autocomplete="organization-title"
+                                maxlength="120"
+                                required
+                            >
+
+
+                        </div>
+
+
+
+                        <!-- EMPLOYER / BUSINESS -->
+
+
+                        <div class="kyc-field">
+
+
+                            <label
+                                for="employerBusiness"
+                                class="kyc-label"
+                            >
+
+                                <span class="kyc-label-tamil">
+                                    நிறுவனம் / தொழில்
+                                </span>
+
+                                <span class="kyc-label-english">
+                                    EMPLOYER / BUSINESS
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                id="employerBusiness"
+                                name="employerBusiness"
+                                class="kyc-input"
+                                type="text"
+                                autocomplete="organization"
+                                maxlength="150"
+                                required
+                            >
+
+
+                        </div>
+
+
+
+                        <!-- MARITAL STATUS -->
+
+
+                        <fieldset
+                            class="kyc-field kyc-choice-field"
                         >
 
-                            <span class="kyc-label-tamil">
 
-                                WhatsApp / Mobile எண்
+                            <legend class="kyc-label">
 
-                            </span>
+                                <span class="kyc-label-tamil">
+                                    திருமண நிலை
+                                </span>
 
-                            <span class="kyc-label-english">
+                                <span class="kyc-label-english">
+                                    MARITAL STATUS
+                                </span>
 
-                                WHATSAPP / MOBILE
-
-                            </span>
-
-                        </label>
+                            </legend>
 
 
-                        <input
-                            id="mobile"
-                            name="mobile"
-                            class="kyc-input"
-                            type="tel"
-                            inputmode="numeric"
-                            autocomplete="tel"
-                            maxlength="15"
-                            required
-                        >
+                            <div
+                                class="kyc-choice-group"
+                                role="radiogroup"
+                                aria-label="Marital Status"
+                            >
+
+
+                                <label class="kyc-choice">
+
+
+                                    <input
+                                        type="radio"
+                                        name="maritalStatus"
+                                        value="Single"
+                                        required
+                                    >
+
+
+                                    <span>
+                                        Single
+                                    </span>
+
+
+                                </label>
+
+
+                                <label class="kyc-choice">
+
+
+                                    <input
+                                        type="radio"
+                                        name="maritalStatus"
+                                        value="Married"
+                                        required
+                                    >
+
+
+                                    <span>
+                                        Married
+                                    </span>
+
+
+                                </label>
+
+
+                                <label class="kyc-choice">
+
+
+                                    <input
+                                        type="radio"
+                                        name="maritalStatus"
+                                        value="Other"
+                                        required
+                                    >
+
+
+                                    <span>
+                                        Other
+                                    </span>
+
+
+                                </label>
+
+
+                            </div>
+
+
+                        </fieldset>
+
+
+
+                        <!-- DEPENDENTS -->
+
+
+                        <div class="kyc-field">
+
+
+                            <label
+                                for="dependents"
+                                class="kyc-label"
+                            >
+
+                                <span class="kyc-label-tamil">
+                                    உங்களைச் சார்ந்திருப்போர்
+                                </span>
+
+                                <span class="kyc-label-english">
+                                    DEPENDENTS
+                                </span>
+
+                            </label>
+
+
+                            <select
+                                id="dependents"
+                                name="dependents"
+                                class="kyc-input kyc-select"
+                                required
+                            >
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="0">
+                                    0
+                                </option>
+
+                                <option value="1">
+                                    1
+                                </option>
+
+                                <option value="2">
+                                    2
+                                </option>
+
+                                <option value="3">
+                                    3
+                                </option>
+
+                                <option value="4">
+                                    4
+                                </option>
+
+                                <option value="5">
+                                    5
+                                </option>
+
+                                <option value="6">
+                                    6
+                                </option>
+
+                                <option value="7">
+                                    7
+                                </option>
+
+                                <option value="8">
+                                    8
+                                </option>
+
+                                <option value="9">
+                                    9
+                                </option>
+
+                                <option value="10+">
+                                    10+
+                                </option>
+
+                            </select>
+
+
+                        </div>
 
 
                     </div>
 
 
-
-                    <!-- =====================================================
-                         EMAIL
-                    ====================================================== -->
+                </section>
 
 
-                    <div class="kyc-field">
+
+                <!-- =========================================================
+                     CARD 03 — YOUR LOCATION™
+                ========================================================== -->
 
 
-                        <label
-                            for="email"
-                            class="kyc-label"
+                <section
+                    class="kyc-card kyc-section-card"
+                    aria-labelledby="kycLocationTitle"
+                >
+
+
+                    <header class="kyc-card-heading">
+
+
+                        <div class="kyc-card-number">
+                            CARD 03
+                        </div>
+
+
+                        <h2
+                            id="kycLocationTitle"
+                            class="kyc-card-title"
+                        >
+                            YOUR LOCATION™
+                        </h2>
+
+
+                    </header>
+
+
+
+                    <div class="kyc-card-grid">
+
+
+                        <!-- CITY -->
+
+
+                        <div class="kyc-field">
+
+
+                            <label
+                                for="city"
+                                class="kyc-label"
+                            >
+
+                                <span class="kyc-label-tamil">
+                                    நகரம்
+                                </span>
+
+                                <span class="kyc-label-english">
+                                    CITY
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                id="city"
+                                name="city"
+                                class="kyc-input"
+                                type="text"
+                                autocomplete="address-level2"
+                                maxlength="100"
+                                required
+                            >
+
+
+                        </div>
+
+
+
+                        <!-- DISTRICT -->
+
+
+                        <div class="kyc-field">
+
+
+                            <label
+                                for="district"
+                                class="kyc-label"
+                            >
+
+                                <span class="kyc-label-tamil">
+                                    மாவட்டம்
+                                </span>
+
+                                <span class="kyc-label-english">
+                                    DISTRICT
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                id="district"
+                                name="district"
+                                class="kyc-input"
+                                type="text"
+                                maxlength="100"
+                                required
+                            >
+
+
+                        </div>
+
+
+
+                        <!-- STATE -->
+
+
+                        <div class="kyc-field">
+
+
+                            <label
+                                for="state"
+                                class="kyc-label"
+                            >
+
+                                <span class="kyc-label-tamil">
+                                    மாநிலம்
+                                </span>
+
+                                <span class="kyc-label-english">
+                                    STATE
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                id="state"
+                                name="state"
+                                class="kyc-input"
+                                type="text"
+                                autocomplete="address-level1"
+                                maxlength="100"
+                                required
+                            >
+
+
+                        </div>
+
+
+
+                        <!-- COUNTRY -->
+
+
+                        <div class="kyc-field">
+
+
+                            <label
+                                for="country"
+                                class="kyc-label"
+                            >
+
+                                <span class="kyc-label-tamil">
+                                    நாடு
+                                </span>
+
+                                <span class="kyc-label-english">
+                                    COUNTRY
+                                </span>
+
+                            </label>
+
+
+                            <select
+                                id="country"
+                                name="country"
+                                class="kyc-input kyc-select"
+                                required
+                            >
+
+                                <option
+                                    value="India"
+                                    selected
+                                >
+                                    India
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+
+                        </div>
+
+
+
+                        <!-- PINCODE -->
+
+
+                        <div class="kyc-field">
+
+
+                            <label
+                                for="pincode"
+                                class="kyc-label"
+                            >
+
+                                <span class="kyc-label-tamil">
+                                    அஞ்சல் குறியீடு
+                                </span>
+
+                                <span class="kyc-label-english">
+                                    PINCODE
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                id="pincode"
+                                name="pincode"
+                                class="kyc-input"
+                                type="text"
+                                inputmode="numeric"
+                                autocomplete="postal-code"
+                                maxlength="6"
+                                pattern="[0-9]{6}"
+                                required
+                            >
+
+
+                        </div>
+
+
+
+                        <!-- PREFERRED LANGUAGE -->
+
+
+                        <fieldset
+                            class="kyc-field kyc-choice-field"
                         >
 
-                            <span class="kyc-label-tamil">
 
-                                மின்னஞ்சல்
+                            <legend class="kyc-label">
 
-                            </span>
+                                <span class="kyc-label-tamil">
+                                    விருப்ப மொழி
+                                </span>
 
-                            <span class="kyc-label-english">
+                                <span class="kyc-label-english">
+                                    PREFERRED LANGUAGE
+                                </span>
 
-                                EMAIL
-
-                            </span>
-
-                        </label>
+                            </legend>
 
 
-                        <input
-                            id="email"
-                            name="email"
-                            class="kyc-input"
-                            type="email"
-                            inputmode="email"
-                            autocomplete="email"
-                            maxlength="150"
-                            required
-                        >
+                            <div
+                                class="kyc-choice-group"
+                                role="radiogroup"
+                                aria-label="Preferred Language"
+                            >
+
+
+                                <label class="kyc-choice">
+
+
+                                    <input
+                                        type="radio"
+                                        name="preferredLanguage"
+                                        value="ta"
+                                        required
+                                    >
+
+
+                                    <span>
+                                        தமிழ்
+                                    </span>
+
+
+                                </label>
+
+
+                                <label class="kyc-choice">
+
+
+                                    <input
+                                        type="radio"
+                                        name="preferredLanguage"
+                                        value="en"
+                                        required
+                                    >
+
+
+                                    <span>
+                                        English
+                                    </span>
+
+
+                                </label>
+
+
+                            </div>
+
+
+                        </fieldset>
+
+
+
+                        <!-- SOURCE -->
+
+
+                        <div class="kyc-field kyc-field-full">
+
+
+                            <label
+                                for="source"
+                                class="kyc-label"
+                            >
+
+                                <span class="kyc-label-tamil">
+                                    CTM PATH MILLIONAIRES பற்றி எப்படி அறிந்தீர்கள்?
+                                </span>
+
+                                <span class="kyc-label-english">
+                                    HOW DID YOU HEAR ABOUT CTM PATH MILLIONAIRES?
+                                </span>
+
+                            </label>
+
+
+                            <select
+                                id="source"
+                                name="source"
+                                class="kyc-input kyc-select"
+                                required
+                            >
+
+                                <option
+                                    value=""
+                                    selected
+                                    disabled
+                                >
+                                    Select
+                                </option>
+
+                                <option value="WhatsApp">
+                                    WhatsApp
+                                </option>
+
+                                <option value="Facebook">
+                                    Facebook
+                                </option>
+
+                                <option value="Instagram">
+                                    Instagram
+                                </option>
+
+                                <option value="YouTube">
+                                    YouTube
+                                </option>
+
+                                <option value="Google">
+                                    Google
+                                </option>
+
+                                <option value="Friend / Family">
+                                    Friend / Family
+                                </option>
+
+                                <option value="Event / Programme">
+                                    Event / Programme
+                                </option>
+
+                                <option value="Existing Community">
+                                    Existing Community
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+
+                        </div>
 
 
                     </div>
 
 
+                </section>
 
-                    <!-- =====================================================
-                         CITY
-                    ====================================================== -->
 
 
-                    <div class="kyc-field">
+                <!-- =========================================================
+                     FORM FEEDBACK
 
+                     page02a.js owns the content.
+                ========================================================== -->
 
-                        <label
-                            for="city"
-                            class="kyc-label"
-                        >
 
-                            <span class="kyc-label-tamil">
+                <div
+                    id="kycError"
+                    class="kyc-message kyc-error"
+                    role="alert"
+                    aria-live="assertive"
+                    hidden
+                ></div>
 
-                                நகரம் / ஊர்
 
-                            </span>
+                <div
+                    id="kycSuccess"
+                    class="kyc-message kyc-success"
+                    role="status"
+                    aria-live="polite"
+                    hidden
+                ></div>
 
-                            <span class="kyc-label-english">
 
-                                CITY / TOWN
 
-                            </span>
+                <!-- =========================================================
+                     FINAL CTA
 
-                        </label>
+                     IMPORTANT BACKEND EVENT
 
+                     page02a.js must:
 
-                        <input
-                            id="city"
-                            name="city"
-                            class="kyc-input"
-                            type="text"
-                            autocomplete="address-level2"
-                            maxlength="100"
-                        >
+                     1. Validate every mandatory field
+                     2. Build complete KYC payload
+                     3. Call CTM_API.register()
+                     4. Wait for backend success
+                     5. Preserve returned client identity
+                     6. Preserve complete KYC
+                     7. Set Dimension 01 = wealth
+                     8. Navigate to page02b.html
 
+                     NEVER navigate before successful registration.
+                ========================================================== -->
 
-                    </div>
 
+                <div class="kyc-action kyc-final-action">
 
 
-                    <!-- =====================================================
-                         DISTRICT
-                    ====================================================== -->
+                    <button
+                        id="kycSubmitButton"
+                        class="page02-primary-button kyc-scorecard-button"
+                        type="submit"
+                    >
 
 
-                    <div class="kyc-field">
+                        <span class="button-primary">
+                            என் Scorecard™-ஐ தொடங்குகிறேன்
+                        </span>
 
 
-                        <label
-                            for="district"
-                            class="kyc-label"
-                        >
+                        <span class="button-secondary">
+                            BEGIN MY SCORECARD™
+                        </span>
 
-                            <span class="kyc-label-tamil">
 
-                                மாவட்டம்
+                    </button>
 
-                            </span>
 
-                            <span class="kyc-label-english">
+                </div>
 
-                                DISTRICT
 
-                            </span>
-
-                        </label>
-
-
-                        <input
-                            id="district"
-                            name="district"
-                            class="kyc-input"
-                            type="text"
-                            maxlength="100"
-                            required
-                        >
-
-
-                    </div>
-
-
-
-                    <!-- =====================================================
-                         STATE
-                    ====================================================== -->
-
-
-                    <div class="kyc-field">
-
-
-                        <label
-                            for="state"
-                            class="kyc-label"
-                        >
-
-                            <span class="kyc-label-tamil">
-
-                                மாநிலம்
-
-                            </span>
-
-                            <span class="kyc-label-english">
-
-                                STATE
-
-                            </span>
-
-                        </label>
-
-
-                        <input
-                            id="state"
-                            name="state"
-                            class="kyc-input"
-                            type="text"
-                            autocomplete="address-level1"
-                            maxlength="100"
-                            required
-                        >
-
-
-                    </div>
-
-
-
-                    <!-- =====================================================
-                         PINCODE
-                    ====================================================== -->
-
-
-                    <div class="kyc-field">
-
-
-                        <label
-                            for="pincode"
-                            class="kyc-label"
-                        >
-
-                            <span class="kyc-label-tamil">
-
-                                அஞ்சல் குறியீடு
-
-                            </span>
-
-                            <span class="kyc-label-english">
-
-                                PIN CODE
-
-                            </span>
-
-                        </label>
-
-
-                        <input
-                            id="pincode"
-                            name="pincode"
-                            class="kyc-input"
-                            type="text"
-                            inputmode="numeric"
-                            autocomplete="postal-code"
-                            maxlength="6"
-                        >
-
-
-                    </div>
-
-
-
-                    <!-- =====================================================
-                         FEEDBACK
-                    ====================================================== -->
-
-
-                    <div
-                        id="kycError"
-                        class="kyc-message kyc-error"
-                        role="alert"
-                        aria-live="assertive"
-                        hidden
-                    ></div>
-
-
-                    <div
-                        id="kycSuccess"
-                        class="kyc-message kyc-success"
-                        role="status"
-                        aria-live="polite"
-                        hidden
-                    ></div>
-
-
-
-                    <!-- =====================================================
-                         SUBMIT
-                    ====================================================== -->
-
-
-                    <div class="kyc-action">
-
-
-                        <button
-                            id="kycSubmitButton"
-                            class="page02-primary-button"
-                            type="submit"
-                        >
-
-
-                            <span class="button-primary">
-
-                                தொடர்கிறேன்
-
-                            </span>
-
-
-                            <span class="button-secondary">
-
-                                CONTINUE →
-
-                            </span>
-
-
-                        </button>
-
-
-                    </div>
-
-
-                </form>
-
-
-            </div>
+            </form>
 
 
         </div>
@@ -781,9 +1349,6 @@
 
 <!-- =========================================================================
      GLOBAL FOOTER
-
-     Populated by:
-     js/component-loader.js
 ============================================================================ -->
 
 
@@ -795,64 +1360,39 @@
 
 
 <!-- =========================================================================
-     JAVASCRIPT
+     JAVASCRIPT CONTRACT
 
-     EXECUTION CONTRACT
+     ORDER IS INTENTIONAL.
 
-     1. component-loader.js
-        Exposes window.CTM_COMPONENTS.
-
-     2. Explicit CTM_COMPONENTS.load()
-        Loads the global Header + Footer.
-        component-loader.js intentionally does NOT auto-initialize.
-
-     3. global.js
-        Global journey behaviour.
-
-     4. api.js
-        Exposes CTM_API, including CTM_API.register().
-
-     5. page02-data.js
-        Exposes canonical Page02Data.
-
-     6. page02-session.js
-        Requires Page02Data and exposes Page02Session.
-
-     7. page02a.js
-        Requires CTM_API + Page02Data + Page02Session.
-        Owns Intro → KYC → Registration → Page 02B.
-============================================================================ -->
-
-
-<!-- =========================================================================
-     GLOBAL COMPONENT LOADER
+     component-loader
+         ↓
+     explicit global component initialization
+         ↓
+     global
+         ↓
+     API
+         ↓
+     Page02Data
+         ↓
+     Page02Session
+         ↓
+     Page02A controller
 ============================================================================ -->
 
 
 <script src="../js/component-loader.js"></script>
 
 
-<script>
 
-    /*
-     * ========================================================================
-     * PAGE 02A GLOBAL COMPONENT INITIALIZATION
-     * ========================================================================
-     *
-     * component-loader.js deliberately exposes an API without automatically
-     * executing it.
-     *
-     * Page 02A requires BOTH canonical global components:
-     *
-     *      • Header
-     *      • Footer
-     *
-     * Therefore Page 02A explicitly starts the shared component loader.
-     *
-     * This remains page-local and does NOT alter the component-loader contract
-     * used by frozen Page 01.
-     * ========================================================================
-     */
+<!-- =========================================================================
+     LOAD GLOBAL HEADER + FOOTER
+
+     component-loader.js intentionally does not auto-run.
+     Page 02A requires both global components.
+============================================================================ -->
+
+
+<script>
 
     (function () {
 
@@ -861,13 +1401,14 @@
 
         function initializeGlobalComponents() {
 
+
             if (
                 !window.CTM_COMPONENTS ||
                 typeof window.CTM_COMPONENTS.load !== "function"
             ) {
 
                 console.error(
-                    "CTM PATH™ Global Component Loader unavailable on Page 02A."
+                    "CTM PATH™ Page 02A: global component loader unavailable."
                 );
 
                 return;
@@ -886,7 +1427,7 @@
                         ) {
 
                             console.info(
-                                "CTM PATH™ Page 02A global components ready."
+                                "CTM PATH™ Page 02A: global header and footer ready."
                             );
 
                         }
@@ -894,7 +1435,7 @@
                         else {
 
                             console.warn(
-                                "CTM PATH™ Page 02A global components loaded with errors:",
+                                "CTM PATH™ Page 02A: global components loaded with errors.",
                                 result
                             );
 
@@ -906,7 +1447,7 @@
                     function (error) {
 
                         console.error(
-                            "CTM PATH™ Page 02A global component initialization failed:",
+                            "CTM PATH™ Page 02A: global component initialization failed.",
                             error
                         );
 
@@ -915,14 +1456,6 @@
 
         }
 
-
-        /*
-         * The script is positioned at the bottom of <body>, so the header
-         * and footer containers already exist.
-         *
-         * We nevertheless support both parser states so the initialization
-         * remains deterministic if script placement changes later.
-         */
 
         if (
             document.readyState === "loading"
@@ -961,10 +1494,11 @@
 
 
 <!-- =========================================================================
-     CTM PATH™ API
+     API
 
-     MUST load before page02a.js because page02a.js requires:
+     Must expose:
 
+         window.CTM_API
          CTM_API.register()
 ============================================================================ -->
 
@@ -974,19 +1508,74 @@
 
 
 <!-- =========================================================================
-     PAGE 02 SHARED JAVASCRIPT
+     PAGE 02 DATA
 
-     REQUIRED LOAD ORDER:
+     Must expose:
 
-         1. DATA
-         2. SESSION
-         3. PAGE CONTROLLER
+         window.Page02Data
 ============================================================================ -->
 
 
 <script src="../js/page02/page02-data.js"></script>
 
+
+
+<!-- =========================================================================
+     PAGE 02 SESSION
+
+     Must expose:
+
+         window.Page02Session
+============================================================================ -->
+
+
 <script src="../js/page02/page02-session.js"></script>
+
+
+
+<!-- =========================================================================
+     PAGE 02A CONTROLLER
+
+     NEW KYC DOM CONTRACT
+
+     TEXT / SELECT FIELDS:
+
+         #fullName
+         #mobile
+         #email
+         #age
+
+         #occupation
+         #employerBusiness
+         #dependents
+
+         #city
+         #district
+         #state
+         #country
+         #pincode
+         #source
+
+     RADIO GROUPS:
+
+         gender
+         maritalStatus
+         preferredLanguage
+
+     ACTION:
+
+         #kycSubmitButton
+
+     FEEDBACK:
+
+         #kycError
+         #kycSuccess
+
+     DESTINATION AFTER SUCCESS:
+
+         page02b.html
+============================================================================ -->
+
 
 <script src="../js/page02/page02a.js"></script>
 
