@@ -2,111 +2,44 @@
 /* ==========================================================================
    CTM PATH™ MILLIONAIRES™
 
-   FILE:
-   css/header.css
+   File      : css/header.css
+   Version   : 12.0
+   Status    : CANONICAL GLOBAL HEADER
 
+   Architecture:
+   STATIC MULTI-PAGE GUIDED JOURNEY
 
-   VERSION:
-   11.1
+   DOM CONTRACT:
 
+   .ctm-header
+       .header-container
+           .header-brand
+               .brand-logo
+                   .ctm-logo
+               .brand-text
+                   .header-title
+                   .header-subtitle
+                   .header-journey
+                   .header-tagline
 
-   STATUS:
-   🔒 GLOBAL PREMIUM BRAND HEADER
+   Responsibilities:
 
+   ✓ Global Header Layout
+   ✓ Cosmic Mark Containment
+   ✓ Brand Typography
+   ✓ Premium Brand Colours
+   ✓ Responsive Behaviour
+   ✓ Pages 01–07 Compatibility
 
-   PURPOSE:
+   Does NOT:
 
-   Shared premium identity header for the complete
-   CTM PATH™ MILLIONAIRES™ Guided Journey™.
-
-
-   DESIGN REFERENCE:
-
-   Page 01 Global Header
-
-
-   RESPONSIBILITY:
-
-   ✓ Hard logo containment
-   ✓ Brand identity
-   ✓ Millionaires™ identity
-   ✓ Guided Journey™ identity
-   ✓ Brand signature
-   ✓ Dynamic journey status
-   ✓ Desktop consistency
-   ✓ Tablet adaptation
-   ✓ Mobile adaptation
-
-
-   DOES NOT:
-
-   ✗ Navigation logic
-   ✗ Routing
-   ✗ API calls
-   ✗ Business logic
-   ✗ Page-specific content
-
+   ✗ Style Journey Progress
+   ✗ Style Page Numbers
+   ✗ Style Navigation Buttons
+   ✗ Style Page Content
+   ✗ Style Footer
 
 ========================================================================== */
-
-
-
-
-
-/* ==========================================================================
-   HEADER DESIGN TOKENS
-========================================================================== */
-
-
-.ctm-header {
-
-    --ctm-header-bg:
-        #081C3A;
-
-    --ctm-header-bg-deep:
-        #06182F;
-
-    --ctm-header-ivory:
-        #F8F5ED;
-
-    --ctm-header-gold:
-        #D8B45A;
-
-    --ctm-header-teal:
-        #23D4C8;
-
-    --ctm-header-muted:
-        rgba(248,245,237,.70);
-
-    --ctm-header-border:
-        rgba(216,180,90,.25);
-
-    --ctm-header-soft-border:
-        rgba(255,255,255,.07);
-
-}
-
-
-
-
-
-/* ==========================================================================
-   GLOBAL BOX SIZING PROTECTION
-========================================================================== */
-
-
-.ctm-header,
-.ctm-header *,
-.ctm-header *::before,
-.ctm-header *::after {
-
-    box-sizing:
-        border-box;
-
-}
-
-
-
 
 
 /* ==========================================================================
@@ -116,153 +49,122 @@
 
 .ctm-header {
 
-    position:
-        relative;
+    position: relative;
 
-    width:
-        100%;
+    width: 100%;
 
-    min-height:
-        200px;
-
-    margin:
-        0;
-
-    padding:
-        2rem
-        clamp(4rem,6vw,6rem);
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        space-between;
-
-    gap:
-        3rem;
-
-    overflow:
-        hidden;
-
-    isolation:
-        isolate;
+    box-sizing: border-box;
 
     background:
-
-        linear-gradient(
-            90deg,
-            rgba(4,24,46,.20) 0%,
-            rgba(8,28,58,.06) 50%,
-            rgba(8,28,58,.18) 100%
-        ),
-
         linear-gradient(
             180deg,
-            #09213F 0%,
-            var(--ctm-header-bg) 100%
+            #081C3A 0%,
+            #08213F 100%
         );
 
     border-bottom:
-        1px solid var(--ctm-header-border);
+        1px solid rgba(216, 180, 90, 0.28);
 
-    z-index:
-        10;
+    overflow: hidden;
+
+    z-index: 10;
 
 }
 
 
-
-
-
 /* ==========================================================================
-   HEADER PREMIUM LIGHTING
+   PREMIUM BACKGROUND LIGHTING
 ========================================================================== */
 
 
 .ctm-header::before {
 
-    content:
-        "";
+    content: "";
 
-    position:
-        absolute;
+    position: absolute;
 
-    inset:
-        0;
+    inset: 0;
 
-    pointer-events:
-        none;
+    pointer-events: none;
 
     background:
-
         radial-gradient(
             ellipse at 8% 25%,
-            rgba(35,212,200,.08),
-            transparent 35%
+            rgba(35, 212, 200, 0.08),
+            transparent 38%
         );
 
-    z-index:
-        -2;
+    z-index: 0;
 
 }
-
-
-
 
 
 .ctm-header::after {
 
-    content:
-        "";
+    content: "";
 
-    position:
-        absolute;
+    position: absolute;
 
-    left:
-        4%;
+    left: 8%;
 
-    right:
-        4%;
+    right: 8%;
 
-    bottom:
-        0;
+    bottom: 0;
 
-    height:
-        1px;
+    height: 1px;
 
-    pointer-events:
-        none;
+    pointer-events: none;
 
     background:
-
         linear-gradient(
             90deg,
             transparent,
-            rgba(216,180,90,.50),
+            rgba(216, 180, 90, 0.38),
             transparent
         );
 
-    z-index:
-        -1;
+    z-index: 0;
 
 }
 
 
+/* ==========================================================================
+   HEADER CONTAINER
 
+   This controls the overall Page-01-equivalent header dimensions.
+========================================================================== */
+
+
+.header-container {
+
+    position: relative;
+
+    z-index: 1;
+
+    width:
+        min(
+            1380px,
+            calc(100% - 96px)
+        );
+
+    margin:
+        0 auto;
+
+    padding:
+        1.6rem 0;
+
+    box-sizing:
+        border-box;
+
+}
 
 
 /* ==========================================================================
-   BRAND GROUP
+   BRAND SYSTEM
 ========================================================================== */
 
 
 .header-brand {
-
-    position:
-        relative;
 
     display:
         flex;
@@ -274,43 +176,26 @@
         flex-start;
 
     gap:
-        1.75rem;
+        1.65rem;
 
-    flex:
-        0 1 auto;
+    width:
+        100%;
 
     min-width:
         0;
 
-    margin:
-        0;
-
-    padding:
-        0;
-
-    z-index:
-        2;
-
 }
 
 
-
-
-
 /* ==========================================================================
-   COSMIC MARK CONTAINER
+   LOGO CONTAINER
 
    IMPORTANT:
-
-   This is a HARD containment boundary.
-
-   The intrinsic width / height contained inside CTM_Mark.svg
-   must NEVER determine header dimensions.
-
+   The SVG is never allowed to determine header dimensions.
 ========================================================================== */
 
 
-.header-logo {
+.brand-logo {
 
     position:
         relative;
@@ -324,61 +209,60 @@
     justify-content:
         center;
 
+    flex:
+        0 0 78px;
+
     width:
-        88px !important;
+        78px;
 
     height:
-        88px !important;
+        78px;
 
     min-width:
-        88px !important;
-
-    min-height:
-        88px !important;
+        78px;
 
     max-width:
-        88px !important;
+        78px;
+
+    min-height:
+        78px;
 
     max-height:
-        88px !important;
-
-    flex:
-        0 0 88px !important;
-
-    margin:
-        0;
-
-    padding:
-        0;
+        78px;
 
     overflow:
         hidden;
 
-    line-height:
-        0;
+    box-sizing:
+        border-box;
 
 }
 
 
-
-
-
 /* ==========================================================================
-   COSMIC MARK IMAGE — HARD CONTAINMENT
+   COSMIC MARK
+
+   HARD CONTAINMENT:
+   The SVG itself cannot escape the 78 × 78 box.
 ========================================================================== */
 
 
-.header-logo > .brand-symbol,
-.ctm-header .brand-symbol {
+.ctm-logo {
 
     display:
-        block !important;
+        block;
 
     width:
-        88px !important;
+        100% !important;
 
     height:
-        88px !important;
+        100% !important;
+
+    max-width:
+        78px !important;
+
+    max-height:
+        78px !important;
 
     min-width:
         0 !important;
@@ -386,75 +270,30 @@
     min-height:
         0 !important;
 
-    max-width:
-        88px !important;
-
-    max-height:
-        88px !important;
-
-    margin:
-        0 !important;
-
-    padding:
-        0 !important;
-
     object-fit:
-        contain !important;
+        contain;
 
     object-position:
-        center !important;
+        center;
 
     flex:
-        none !important;
+        none;
 
-    transform:
-        none !important;
+    margin:
+        0;
 
-    border:
+    padding:
         0;
 
 }
 
 
-
-
-
 /* ==========================================================================
-   EXTRA SVG / IMAGE PROTECTION
-
-   Prevent global page image rules from enlarging the brand mark.
+   BRAND TEXT SYSTEM
 ========================================================================== */
 
 
-.ctm-header img.brand-symbol {
-
-    width:
-        88px !important;
-
-    height:
-        88px !important;
-
-    max-width:
-        88px !important;
-
-    max-height:
-        88px !important;
-
-    object-fit:
-        contain !important;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   BRAND IDENTITY
-========================================================================== */
-
-
-.brand-identity {
+.brand-text {
 
     display:
         flex;
@@ -468,34 +307,21 @@
     justify-content:
         center;
 
-    flex:
-        0 1 auto;
-
     min-width:
         0;
 
-    margin:
-        0;
-
-    padding:
+    gap:
         0;
 
 }
-
-
-
 
 
 /* ==========================================================================
    PRIMARY BRAND
-   CTM PATH™
 ========================================================================== */
 
 
-.brand-name {
-
-    display:
-        block;
+.header-title {
 
     margin:
         0;
@@ -504,7 +330,7 @@
         0;
 
     color:
-        var(--ctm-header-ivory);
+        #F8F5ED;
 
     font-family:
         "Cinzel",
@@ -514,57 +340,41 @@
 
     font-size:
         clamp(
-            2rem,
-            2.7vw,
-            2.75rem
+            1.7rem,
+            2.45vw,
+            2.55rem
         );
-
-    font-style:
-        normal;
 
     font-weight:
         800;
 
     line-height:
-        1;
+        1.05;
 
     letter-spacing:
-        .15em;
-
-    text-transform:
-        uppercase;
+        0.14em;
 
     white-space:
         nowrap;
 
-    text-shadow:
-        0 2px 10px rgba(0,0,0,.18);
-
 }
 
 
-
-
-
 /* ==========================================================================
-   MOVEMENT IDENTITY
    MILLIONAIRES™
 ========================================================================== */
 
 
-.brand-tagline-main {
-
-    display:
-        block;
+.header-subtitle {
 
     margin:
-        .55rem 0 0;
+        0.35rem 0 0;
 
     padding:
         0;
 
     color:
-        var(--ctm-header-gold);
+        #D8B45A;
 
     font-family:
         "Cinzel",
@@ -574,25 +384,19 @@
 
     font-size:
         clamp(
-            .82rem,
+            0.82rem,
             1.25vw,
             1.05rem
         );
-
-    font-style:
-        normal;
 
     font-weight:
         800;
 
     line-height:
-        1.2;
+        1.15;
 
     letter-spacing:
-        .34em;
-
-    text-transform:
-        uppercase;
+        0.32em;
 
     white-space:
         nowrap;
@@ -600,28 +404,21 @@
 }
 
 
-
-
-
 /* ==========================================================================
-   EXPERIENCE IDENTITY
    GUIDED JOURNEY™
 ========================================================================== */
 
 
-.brand-tagline {
-
-    display:
-        block;
+.header-journey {
 
     margin:
-        .62rem 0 0;
+        0.55rem 0 0;
 
     padding:
         0;
 
     color:
-        var(--ctm-header-teal);
+        #23D4C8;
 
     font-family:
         "Cinzel",
@@ -631,13 +428,10 @@
 
     font-size:
         clamp(
-            .72rem,
-            1.1vw,
-            .92rem
+            0.72rem,
+            1.05vw,
+            0.92rem
         );
-
-    font-style:
-        normal;
 
     font-weight:
         700;
@@ -646,7 +440,7 @@
         1.2;
 
     letter-spacing:
-        .30em;
+        0.29em;
 
     text-transform:
         uppercase;
@@ -657,28 +451,21 @@
 }
 
 
-
-
-
 /* ==========================================================================
-   BRAND SIGNATURE
-   Every Dream Has A Path™
+   BRAND PHILOSOPHY
 ========================================================================== */
 
 
-.brand-signature {
-
-    display:
-        block;
+.header-tagline {
 
     margin:
-        .58rem 0 0;
+        0.5rem 0 0;
 
     padding:
         0;
 
     color:
-        var(--ctm-header-muted);
+        rgba(248, 245, 237, 0.72);
 
     font-family:
         "Cinzel",
@@ -688,22 +475,19 @@
 
     font-size:
         clamp(
-            .72rem,
-            .95vw,
-            .88rem
+            0.7rem,
+            0.95vw,
+            0.88rem
         );
-
-    font-style:
-        normal;
 
     font-weight:
         600;
 
     line-height:
-        1.35;
+        1.25;
 
     letter-spacing:
-        .07em;
+        0.08em;
 
     white-space:
         nowrap;
@@ -711,304 +495,24 @@
 }
 
 
-
-
-
 /* ==========================================================================
-   JOURNEY STATUS
+   LARGE DESKTOP
 ========================================================================== */
 
 
-.journey-status {
+@media (min-width: 1440px) {
 
-    position:
-        relative;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        space-between;
-
-    gap:
-        1.5rem;
-
-    flex:
-        0 0 auto;
-
-    width:
-        auto;
-
-    min-width:
-        330px;
-
-    max-width:
-        520px;
-
-    margin:
-        0;
-
-    padding:
-        .9rem
-        1.4rem;
-
-    border:
-        1px solid rgba(216,180,90,.25);
-
-    border-radius:
-        999px;
-
-    background:
-        rgba(3,18,36,.22);
-
-    box-shadow:
-
-        inset
-        0
-        1px
-        0
-        rgba(255,255,255,.025),
-
-        0
-        10px
-        30px
-        rgba(0,0,0,.08);
-
-    z-index:
-        2;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   JOURNEY LABEL
-========================================================================== */
-
-
-.journey-label {
-
-    display:
-        block;
-
-    margin:
-        0;
-
-    padding:
-        0;
-
-    color:
-        var(--ctm-header-gold);
-
-    font-family:
-        "Cinzel",
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(
-            .68rem,
-            .9vw,
-            .84rem
-        );
-
-    font-style:
-        normal;
-
-    font-weight:
-        700;
-
-    line-height:
-        1.2;
-
-    letter-spacing:
-        .14em;
-
-    text-transform:
-        uppercase;
-
-    white-space:
-        nowrap;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   JOURNEY COUNTER
-========================================================================== */
-
-
-.journey-counter {
-
-    display:
-        block;
-
-    margin:
-        0;
-
-    padding:
-        0;
-
-    color:
-        var(--ctm-header-teal);
-
-    font-family:
-        "Cinzel",
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(
-            .78rem,
-            1vw,
-            .94rem
-        );
-
-    font-style:
-        normal;
-
-    font-weight:
-        800;
-
-    line-height:
-        1;
-
-    letter-spacing:
-        .10em;
-
-    white-space:
-        nowrap;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   LARGE DESKTOP PROTECTION
-========================================================================== */
-
-
-@media (min-width:1600px) {
-
-
-    .ctm-header {
-
-        padding-left:
-            max(6rem,calc((100vw - 1500px) / 2));
-
-        padding-right:
-            max(6rem,calc((100vw - 1500px) / 2));
-
-    }
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   MEDIUM DESKTOP
-========================================================================== */
-
-
-@media (max-width:1200px) {
-
-
-    .ctm-header {
-
-        padding:
-            1.75rem
-            3rem;
-
-        gap:
-            2rem;
-
-    }
-
-
-
-    .header-brand {
-
-        gap:
-            1.4rem;
-
-    }
-
-
-
-    .header-logo {
+    .header-container {
 
         width:
-            78px !important;
-
-        height:
-            78px !important;
-
-        min-width:
-            78px !important;
-
-        min-height:
-            78px !important;
-
-        max-width:
-            78px !important;
-
-        max-height:
-            78px !important;
-
-        flex-basis:
-            78px !important;
+            min(
+                1380px,
+                calc(100% - 120px)
+            );
 
     }
-
-
-
-    .header-logo > .brand-symbol,
-    .ctm-header .brand-symbol,
-    .ctm-header img.brand-symbol {
-
-        width:
-            78px !important;
-
-        height:
-            78px !important;
-
-        max-width:
-            78px !important;
-
-        max-height:
-            78px !important;
-
-    }
-
-
-
-    .journey-status {
-
-        min-width:
-            290px;
-
-    }
-
 
 }
-
-
-
 
 
 /* ==========================================================================
@@ -1016,82 +520,54 @@
 ========================================================================== */
 
 
-@media (max-width:992px) {
+@media (max-width: 992px) {
 
+    .header-container {
 
-    .ctm-header {
-
-        min-height:
-            auto;
-
-        flex-direction:
-            column;
-
-        align-items:
-            stretch;
-
-        justify-content:
-            center;
-
-        gap:
-            1.35rem;
+        width:
+            calc(100% - 48px);
 
         padding:
-            1.6rem
-            2rem;
+            1.35rem 0;
 
     }
-
 
 
     .header-brand {
 
-        width:
-            100%;
-
-        justify-content:
-            flex-start;
+        gap:
+            1.25rem;
 
     }
 
 
+    .brand-logo {
 
-    .header-logo {
+        flex-basis:
+            68px;
 
         width:
-            68px !important;
+            68px;
 
         height:
-            68px !important;
+            68px;
 
         min-width:
-            68px !important;
+            68px;
+
+        max-width:
+            68px;
 
         min-height:
-            68px !important;
-
-        max-width:
-            68px !important;
+            68px;
 
         max-height:
-            68px !important;
-
-        flex:
-            0 0 68px !important;
+            68px;
 
     }
 
 
-
-    .header-logo > .brand-symbol,
-    .ctm-header .brand-symbol,
-    .ctm-header img.brand-symbol {
-
-        width:
-            68px !important;
-
-        height:
-            68px !important;
+    .ctm-logo {
 
         max-width:
             68px !important;
@@ -1102,34 +578,47 @@
     }
 
 
-
-    .brand-name {
+    .header-title {
 
         font-size:
-            1.75rem;
+            1.65rem;
+
+        letter-spacing:
+            0.12em;
 
     }
 
 
+    .header-subtitle {
 
-    .journey-status {
+        font-size:
+            0.78rem;
 
-        width:
-            100%;
-
-        min-width:
-            0;
-
-        max-width:
-            none;
+        letter-spacing:
+            0.27em;
 
     }
 
+
+    .header-journey {
+
+        font-size:
+            0.68rem;
+
+        letter-spacing:
+            0.24em;
+
+    }
+
+
+    .header-tagline {
+
+        font-size:
+            0.72rem;
+
+    }
 
 }
-
-
-
 
 
 /* ==========================================================================
@@ -1137,182 +626,117 @@
 ========================================================================== */
 
 
-@media (max-width:768px) {
+@media (max-width: 768px) {
 
+    .header-container {
 
-    .ctm-header {
+        width:
+            calc(100% - 32px);
 
         padding:
-            1.25rem
-            1.25rem;
-
-        gap:
-            1rem;
+            1.05rem 0;
 
     }
-
 
 
     .header-brand {
 
         gap:
-            1rem;
+            0.95rem;
 
     }
 
 
+    .brand-logo {
 
-    .header-logo {
+        flex-basis:
+            56px;
 
         width:
-            58px !important;
+            56px;
 
         height:
-            58px !important;
+            56px;
 
         min-width:
-            58px !important;
+            56px;
+
+        max-width:
+            56px;
 
         min-height:
-            58px !important;
-
-        max-width:
-            58px !important;
+            56px;
 
         max-height:
-            58px !important;
-
-        flex:
-            0 0 58px !important;
+            56px;
 
     }
 
 
-
-    .header-logo > .brand-symbol,
-    .ctm-header .brand-symbol,
-    .ctm-header img.brand-symbol {
-
-        width:
-            58px !important;
-
-        height:
-            58px !important;
+    .ctm-logo {
 
         max-width:
-            58px !important;
+            56px !important;
 
         max-height:
-            58px !important;
+            56px !important;
 
     }
 
 
-
-    .brand-name {
+    .header-title {
 
         font-size:
-            clamp(
-                1.15rem,
-                5vw,
-                1.5rem
-            );
+            1.2rem;
 
         letter-spacing:
-            .10em;
+            0.09em;
 
     }
 
 
-
-    .brand-tagline-main {
+    .header-subtitle {
 
         margin-top:
-            .4rem;
+            0.25rem;
 
         font-size:
-            .68rem;
+            0.62rem;
 
         letter-spacing:
-            .22em;
+            0.19em;
 
     }
 
 
-
-    .brand-tagline {
+    .header-journey {
 
         margin-top:
-            .42rem;
+            0.38rem;
 
         font-size:
-            .60rem;
+            0.56rem;
 
         letter-spacing:
-            .18em;
+            0.16em;
 
     }
 
 
-
-    .brand-signature {
+    .header-tagline {
 
         margin-top:
-            .42rem;
+            0.35rem;
 
         font-size:
-            .66rem;
+            0.62rem;
 
         letter-spacing:
-            .04em;
+            0.04em;
 
     }
-
-
-
-    .journey-status {
-
-        min-width:
-            0;
-
-        padding:
-            .75rem
-            1rem;
-
-        gap:
-            1rem;
-
-    }
-
-
-
-    .journey-label {
-
-        font-size:
-            .62rem;
-
-        letter-spacing:
-            .09em;
-
-        white-space:
-            normal;
-
-    }
-
-
-
-    .journey-counter {
-
-        font-size:
-            .72rem;
-
-    }
-
 
 }
-
-
-
 
 
 /* ==========================================================================
@@ -1320,298 +744,242 @@
 ========================================================================== */
 
 
-@media (max-width:540px) {
+@media (max-width: 480px) {
 
+    .header-container {
 
-    .ctm-header {
+        width:
+            calc(100% - 24px);
 
         padding:
-            1.1rem
-            1rem;
+            0.9rem 0;
 
     }
-
 
 
     .header-brand {
 
         gap:
-            .8rem;
+            0.75rem;
 
     }
 
 
+    .brand-logo {
 
-    .header-logo {
+        flex-basis:
+            48px;
 
         width:
-            50px !important;
+            48px;
 
         height:
-            50px !important;
+            48px;
 
         min-width:
-            50px !important;
+            48px;
+
+        max-width:
+            48px;
 
         min-height:
-            50px !important;
-
-        max-width:
-            50px !important;
+            48px;
 
         max-height:
-            50px !important;
-
-        flex:
-            0 0 50px !important;
+            48px;
 
     }
 
 
-
-    .header-logo > .brand-symbol,
-    .ctm-header .brand-symbol,
-    .ctm-header img.brand-symbol {
-
-        width:
-            50px !important;
-
-        height:
-            50px !important;
+    .ctm-logo {
 
         max-width:
-            50px !important;
+            48px !important;
 
         max-height:
-            50px !important;
+            48px !important;
 
     }
 
 
-
-    .brand-name {
+    .header-title {
 
         font-size:
-            1.02rem;
+            1rem;
 
         letter-spacing:
-            .07em;
+            0.07em;
 
     }
 
 
-
-    .brand-tagline-main {
+    .header-subtitle {
 
         font-size:
-            .58rem;
+            0.54rem;
 
         letter-spacing:
-            .16em;
+            0.14em;
 
     }
 
 
-
-    .brand-tagline {
+    .header-journey {
 
         font-size:
-            .53rem;
+            0.5rem;
 
         letter-spacing:
-            .13em;
+            0.12em;
 
     }
 
 
-
-    .brand-signature {
+    .header-tagline {
 
         font-size:
-            .57rem;
+            0.55rem;
 
-        white-space:
-            normal;
-
-    }
-
-
-
-    .journey-status {
-
-        border-radius:
-            16px;
-
-        padding:
-            .7rem
-            .85rem;
+        line-height:
+            1.2;
 
     }
-
-
-
-    .journey-label {
-
-        font-size:
-            .56rem;
-
-    }
-
-
-
-    .journey-counter {
-
-        font-size:
-            .67rem;
-
-    }
-
 
 }
-
-
-
 
 
 /* ==========================================================================
    VERY SMALL DEVICES
+
+   Preserve horizontal brand architecture.
+   Do NOT stack logo above brand.
 ========================================================================== */
 
 
-@media (max-width:390px) {
+@media (max-width: 360px) {
 
+    .header-container {
 
-    .ctm-header {
-
-        padding:
-            1rem
-            .8rem;
+        width:
+            calc(100% - 20px);
 
     }
-
 
 
     .header-brand {
 
         gap:
-            .7rem;
+            0.6rem;
 
     }
 
 
+    .brand-logo {
 
-    .header-logo {
+        flex-basis:
+            42px;
 
         width:
-            44px !important;
+            42px;
 
         height:
-            44px !important;
+            42px;
 
         min-width:
-            44px !important;
+            42px;
+
+        max-width:
+            42px;
 
         min-height:
-            44px !important;
-
-        max-width:
-            44px !important;
+            42px;
 
         max-height:
-            44px !important;
-
-        flex:
-            0 0 44px !important;
+            42px;
 
     }
 
 
-
-    .header-logo > .brand-symbol,
-    .ctm-header .brand-symbol,
-    .ctm-header img.brand-symbol {
-
-        width:
-            44px !important;
-
-        height:
-            44px !important;
+    .ctm-logo {
 
         max-width:
-            44px !important;
+            42px !important;
 
         max-height:
-            44px !important;
+            42px !important;
 
     }
 
 
-
-    .brand-name {
+    .header-title {
 
         font-size:
-            .9rem;
+            0.9rem;
 
     }
 
 
-
-    .brand-tagline-main {
+    .header-subtitle {
 
         font-size:
-            .51rem;
+            0.48rem;
 
     }
 
 
-
-    .brand-tagline {
+    .header-journey {
 
         font-size:
-            .47rem;
+            0.46rem;
 
     }
 
 
-
-    .brand-signature {
+    .header-tagline {
 
         font-size:
-            .52rem;
+            0.5rem;
 
     }
-
-
-
-    .journey-status {
-
-        gap:
-            .6rem;
-
-    }
-
 
 }
-
-
-
 
 
 /* ==========================================================================
-   BROKEN / EMPTY IMAGE PROTECTION
+   IMAGE SAFETY
+
+   Protect the global header from broad rules such as:
+
+       img { width:100%; }
+       img { max-width:none; }
+
+   elsewhere in the application.
 ========================================================================== */
 
 
-.brand-symbol:not([src]),
-.brand-symbol[src=""] {
+.ctm-header img {
 
-    display:
-        none !important;
+    box-sizing:
+        border-box;
 
 }
 
 
+.ctm-header .brand-logo > img.ctm-logo {
 
+    width:
+        100% !important;
+
+    height:
+        100% !important;
+
+    object-fit:
+        contain !important;
+
+    object-position:
+        center !important;
+
+}
 
 
 /* ==========================================================================
@@ -1623,15 +991,12 @@
 .ctm-header button:focus-visible {
 
     outline:
-        3px solid var(--ctm-header-teal);
+        3px solid #23D4C8;
 
     outline-offset:
-        5px;
+        4px;
 
 }
-
-
-
 
 
 /* ==========================================================================
@@ -1639,55 +1004,22 @@
 ========================================================================== */
 
 
-@media (prefers-reduced-motion:reduce) {
-
+@media (prefers-reduced-motion: reduce) {
 
     .ctm-header,
     .ctm-header *,
     .ctm-header *::before,
     .ctm-header *::after {
 
-        transition:
-            none !important;
-
         animation:
             none !important;
 
-    }
-
-
-}
-
-
-
-
-
-/* ==========================================================================
-   PRINT
-========================================================================== */
-
-
-@media print {
-
-
-    .ctm-header {
-
-        background:
-            #081C3A !important;
-
-        box-shadow:
+        transition:
             none !important;
 
-        break-inside:
-            avoid;
-
     }
 
-
 }
-
-
-
 
 
 /* ==========================================================================
