@@ -12,13 +12,16 @@
      PAGE 01 — FROM SURVIVAL TO LIVING™
 
      VERSION:
-     5.6
+     5.7
 
      STATUS:
      FROZEN COPY CANDIDATE
 
      PAGE 01 BODY COPY:
      LIMITED STRICTLY TO USER-FROZEN TEXT
+
+     ARCHITECTURE:
+     GLOBAL SHARED FOOTER ENABLED
 ========================================================== -->
 
 <meta charset="UTF-8">
@@ -49,6 +52,7 @@ CTM PATH™ MILLIONAIRES™ |
 <meta property="og:type"
       content="website">
 
+
 <!-- ==========================================================
      PREMIUM FONTS
 ========================================================== -->
@@ -62,6 +66,7 @@ CTM PATH™ MILLIONAIRES™ |
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Noto+Sans+Tamil:wght@400;600;700;900&display=swap"
       rel="stylesheet">
+
 
 <!-- ==========================================================
      CTM PATH™ GLOBAL CSS SYSTEM
@@ -80,6 +85,7 @@ CTM PATH™ MILLIONAIRES™ |
       href="css/footer.css">
 
 </head>
+
 
 <body>
 
@@ -102,6 +108,7 @@ CTM PATH™ MILLIONAIRES™ |
      class="ctm-logo">
 
 </div>
+
 
 <div class="brand-text">
 
@@ -472,148 +479,62 @@ BEGIN MY MILLIONAIRE JOURNEY™
 <!-- ==========================================================
      GLOBAL FOOTER
      CANONICAL SHARED COMPONENT
+
+     SAME FOOTER ARCHITECTURE AS PAGES 02–07
 ========================================================== -->
 
-<footer class="ctm-footer">
+<div id="global-footer"></div>
 
 
-<div class="footer-topline">
-
-<span>
-EVERY DREAM HAS A PATH™
-</span>
-
-<span class="footer-divider">
-•
-</span>
-
-<span>
-BUILDING EXCEPTIONAL LIVES
-</span>
-
-</div>
-
-
-<div class="footer-container">
-
-<div class="footer-grid">
-
-
-<div class="footer-brand">
-
-<div class="footer-logo">
-
-<img src="assets/logo/CTM_Mark.svg"
-     alt="CTM PATH™ Logo"
-     class="ctm-logo">
-
-</div>
-
-
-<div class="footer-brand-text">
-
-<h2>
-CTM PATH™
-</h2>
-
-<p>
-MILLIONAIRES™
-</p>
-
-<p class="footer-tagline">
-Every Dream Has A Path™
-</p>
-
-</div>
-
-</div>
-
-
-<div class="footer-founder">
-
-<div class="footer-section-label">
-FOUNDER
-</div>
-
-<div class="footer-founder-name">
-Healer King Raphael Raj
-</div>
-
-<div class="footer-role">
-Founder, CTM PATH™
-<br>
-Chief Mentor & Guide
-</div>
-
-</div>
-
-
-<div class="footer-contact">
-
-<div class="footer-contact-title">
-CONNECT WITH THE MOVEMENT
-</div>
-
-
-<div class="contact-item">
-
-<div class="contact-icon">
-📱
-</div>
-
-<a href="https://wa.me/917036970339">
-70-369-70-339
-</a>
-
-</div>
-
-
-<div class="contact-item">
-
-<div class="contact-icon">
-✉
-</div>
-
-<a href="mailto:healerking@umbaravai.com">
-healerking@umbaravai.com
-</a>
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-<div class="footer-legacy">
-
-<p>
-Building Exceptional Lives.
-</p>
-
-<p>
-Middle Class To Millionaire Legacy.
-</p>
-
-<p>
-One Dream At A Time.
-</p>
-
-</div>
-
-
-<div class="footer-bottom">
-© 2026 CTM PATH™ MILLIONAIRES™
-</div>
-
-
-</footer>
-
+<!-- ==========================================================
+     GLOBAL RUNTIME
+========================================================== -->
 
 <script src="js/global.js"></script>
+
+
+<!-- ==========================================================
+     GLOBAL COMPONENT LOADER
+========================================================== -->
+
+<script src="js/component-loader.js"></script>
+
+
+<!-- ==========================================================
+     PAGE 01 COMPONENT INITIALIZATION
+
+     PAGE 01 RETAINS ITS EXISTING HEADER.
+     ONLY THE CANONICAL SHARED FOOTER IS LOADED HERE.
+========================================================== -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function () {
+
+        if (
+            window.CTM_COMPONENTS &&
+            typeof window.CTM_COMPONENTS.loadFooter === "function"
+        ) {
+
+            await window.CTM_COMPONENTS.loadFooter();
+
+        }
+
+        else {
+
+            console.error(
+                "CTM PATH™ Component Loader unavailable."
+            );
+
+        }
+
+    }
+);
+
+</script>
+
 
 </body>
 
