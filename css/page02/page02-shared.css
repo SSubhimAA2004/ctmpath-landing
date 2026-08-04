@@ -6,10 +6,10 @@
    css/page02/page02-shared.css
 
    VERSION:
-   3.0
+   4.0
 
    STATUS:
-   SHARED DIMENSION VISUAL FOUNDATION
+   PREMIUM SHARED DIMENSION VISUAL FOUNDATION
 
    USED BY:
 
@@ -19,21 +19,24 @@
    page02e.html — Dimension 04 — Lifestyle & Freedom™
    page02f.html — Dimension 05 — Protection & Contribution™
 
-   PURPOSE:
+   DESIGN DIRECTION:
 
-   ✓ Dimension header
-   ✓ Journey progress
-   ✓ Scorecard shell
-   ✓ Indicator cards
-   ✓ Four-option architecture
-   ✓ Selected option state
-   ✓ 1 / 2 / 3 / 4 score visibility
-   ✓ Live dimension score
-   ✓ Score explanation
-   ✓ Previous / Next navigation
-   ✓ Mobile two-column option architecture
+   ✓ CTM premium dark-blue visual language
+   ✓ Page02A visual continuity
+   ✓ Stronger information hierarchy
+   ✓ Premium elevated scorecard surfaces
+   ✓ World-class four-range selector
+   ✓ Clear hover / focus / selected states
+   ✓ Strong 1 / 2 / 3 / 4 scoring visibility
+   ✓ Restrained teal interaction language
+   ✓ Champagne-gold ideal benchmark language
+   ✓ High-legibility Tamil-first typography
+   ✓ Desktop-first premium composition
+   ✓ Tablet 2 × 2 options
    ✓ Small-mobile single-column fallback
    ✓ Touch accessibility
+   ✓ Reduced motion
+   ✓ Print safety
 
    DOES NOT CONTROL:
 
@@ -47,11 +50,96 @@
 
 
 /* ==========================================================================
-   PAGE 02 DIMENSION FOUNDATION
+   01. PAGE 02 DESIGN TOKENS
 ========================================================================== */
 
-
 .page02-dimension {
+
+    --p02-bg:
+        #071f3d;
+
+    --p02-bg-deep:
+        #051a34;
+
+    --p02-bg-deeper:
+        #04162d;
+
+    --p02-surface:
+        #0c315b;
+
+    --p02-surface-elevated:
+        #10406f;
+
+    --p02-surface-soft:
+        #0a294e;
+
+    --p02-input:
+        #061f3d;
+
+    --p02-teal:
+        #22c7bd;
+
+    --p02-teal-strong:
+        #18b9ae;
+
+    --p02-teal-deep:
+        #0f8f84;
+
+    --p02-teal-soft:
+        rgba(34, 199, 189, 0.10);
+
+    --p02-gold:
+        #d8ad58;
+
+    --p02-gold-bright:
+        #e8c472;
+
+    --p02-gold-soft:
+        rgba(216, 173, 88, 0.10);
+
+    --p02-ivory:
+        #f7f2e9;
+
+    --p02-white:
+        #ffffff;
+
+    --p02-text:
+        rgba(247, 242, 233, 0.94);
+
+    --p02-text-soft:
+        rgba(247, 242, 233, 0.72);
+
+    --p02-text-muted:
+        rgba(247, 242, 233, 0.50);
+
+    --p02-text-faint:
+        rgba(247, 242, 233, 0.34);
+
+    --p02-border:
+        rgba(103, 173, 219, 0.24);
+
+    --p02-border-strong:
+        rgba(103, 173, 219, 0.40);
+
+    --p02-teal-border:
+        rgba(34, 199, 189, 0.46);
+
+    --p02-gold-border:
+        rgba(216, 173, 88, 0.42);
+
+    --p02-danger:
+        #ffaaa8;
+
+    --p02-shadow:
+        0 24px 64px rgba(0, 8, 22, 0.26);
+
+    --p02-shadow-soft:
+        0 14px 34px rgba(0, 8, 22, 0.18);
+
+    --p02-shadow-teal:
+        0 16px 36px rgba(9, 125, 119, 0.18);
+
+    position: relative;
 
     width: 100%;
 
@@ -65,6 +153,22 @@
 
     overflow-x: hidden;
 
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(26, 89, 139, 0.18),
+            transparent 38%
+        ),
+        linear-gradient(
+            180deg,
+            var(--p02-bg) 0%,
+            var(--p02-bg-deep) 58%,
+            var(--p02-bg) 100%
+        );
+
+    color:
+        var(--p02-text);
+
 }
 
 
@@ -75,39 +179,45 @@
 }
 
 
+/* ==========================================================================
+   02. PAGE SHELL
+========================================================================== */
+
 .page02-dimension-shell {
 
-    width: min(1120px, calc(100% - 48px));
+    width:
+        min(
+            1180px,
+            calc(100% - 64px)
+        );
 
-    margin: 0 auto;
+    margin:
+        0 auto;
 
     padding:
-
-        clamp(58px, 6vw, 88px)
-
+        clamp(64px, 6vw, 92px)
         0
-
-        clamp(84px, 8vw, 120px);
+        clamp(92px, 8vw, 132px);
 
 }
 
 
 /* ==========================================================================
-   DIMENSION PROGRESS
+   03. DIMENSION PROGRESS
 ========================================================================== */
-
 
 .dimension-progress {
 
-    width: min(100%, 960px);
+    width:
+        min(
+            100%,
+            980px
+        );
 
     margin:
-
         0
-
         auto
-
-        clamp(38px, 5vw, 58px);
+        clamp(46px, 5vw, 66px);
 
 }
 
@@ -122,7 +232,7 @@
 
     gap: 24px;
 
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 
 }
 
@@ -132,26 +242,27 @@
     margin: 0;
 
     font-family:
-
         "Cinzel",
-
         Georgia,
-
         serif;
 
-    font-size: 0.66rem;
+    font-size:
+        0.68rem;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    line-height: 1.4;
+    line-height:
+        1.4;
 
-    letter-spacing: 0.15em;
+    letter-spacing:
+        0.16em;
 
-    text-transform: uppercase;
+    text-transform:
+        uppercase;
 
     color:
-
-        rgba(255, 255, 255, 0.40);
+        var(--p02-gold);
 
 }
 
@@ -161,150 +272,218 @@
     margin: 0;
 
     font-family:
-
         "Cinzel",
-
         Georgia,
-
         serif;
 
-    font-size: 0.72rem;
+    font-size:
+        0.76rem;
 
-    font-weight: 700;
+    font-weight:
+        800;
 
-    line-height: 1.4;
+    line-height:
+        1.4;
 
-    letter-spacing: 0.08em;
+    letter-spacing:
+        0.08em;
 
-    color: #14b8a6;
+    color:
+        var(--p02-teal);
 
 }
 
 
 .dimension-progress-track {
 
-    position: relative;
+    position:
+        relative;
 
-    width: 100%;
+    width:
+        100%;
 
-    height: 3px;
+    height:
+        4px;
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
-    border-radius: 999px;
+    border:
+        1px solid
+        rgba(103, 173, 219, 0.13);
+
+    border-radius:
+        999px;
 
     background:
-
-        rgba(255, 255, 255, 0.08);
+        rgba(2, 16, 35, 0.52);
 
 }
 
 
 .dimension-progress-fill {
 
-    display: block;
+    display:
+        block;
 
-    width: 0;
+    width:
+        0;
 
-    height: 100%;
+    height:
+        100%;
 
-    border-radius: inherit;
+    border-radius:
+        inherit;
 
-    background: #14b8a6;
+    background:
+        linear-gradient(
+            90deg,
+            var(--p02-teal-deep),
+            var(--p02-teal)
+        );
+
+    box-shadow:
+        0 0 16px
+        rgba(34, 199, 189, 0.28);
 
     transition:
-
-        width 300ms ease;
+        width 320ms ease;
 
 }
 
 
 /* ==========================================================================
-   DIMENSION HEADER
+   04. DIMENSION HEADER
 ========================================================================== */
-
 
 .dimension-header {
 
-    width: min(100%, 920px);
+    position:
+        relative;
+
+    width:
+        min(
+            100%,
+            940px
+        );
 
     margin:
-
         0
-
         auto
+        clamp(50px, 6vw, 72px);
 
-        clamp(42px, 5vw, 62px);
+    padding:
+        0 24px;
 
-    text-align: center;
+    text-align:
+        center;
 
 }
 
+
+.dimension-header::after {
+
+    content:
+        "";
+
+    display:
+        block;
+
+    width:
+        74px;
+
+    height:
+        2px;
+
+    margin:
+        34px auto 0;
+
+    border-radius:
+        999px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--p02-teal),
+            transparent
+        );
+
+}
+
+
+/* ==========================================================================
+   05. DIMENSION EYEBROW
+========================================================================== */
 
 .dimension-eyebrow {
 
     margin:
-
         0
-
         0
-
-        16px;
+        17px;
 
     font-family:
-
         "Cinzel",
-
         Georgia,
-
         serif;
 
-    font-size: 0.68rem;
+    font-size:
+        0.70rem;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    line-height: 1.4;
+    line-height:
+        1.4;
 
-    letter-spacing: 0.18em;
+    letter-spacing:
+        0.20em;
 
-    text-transform: uppercase;
+    text-transform:
+        uppercase;
 
     color:
-
-        rgba(255, 255, 255, 0.40);
+        var(--p02-gold);
 
 }
 
 
+/* ==========================================================================
+   06. DIMENSION TITLE
+========================================================================== */
+
 .dimension-title-tamil {
 
-    margin: 0;
+    margin:
+        0;
 
     font-family:
-
         "Noto Sans Tamil",
-
         sans-serif;
 
     font-size:
-
         clamp(
-
-            2rem,
-
-            4vw,
-
-            3rem
-
+            2.2rem,
+            4.4vw,
+            3.35rem
         );
 
-    font-weight: 800;
+    font-weight:
+        800;
 
-    line-height: 1.4;
+    line-height:
+        1.32;
 
-    letter-spacing: -0.025em;
+    letter-spacing:
+        -0.025em;
 
-    color: #ffffff;
+    color:
+        var(--p02-ivory);
+
+    text-shadow:
+        0 6px 22px
+        rgba(0, 0, 0, 0.14);
 
 }
 
@@ -312,129 +491,136 @@
 .dimension-title-english {
 
     margin:
-
         12px
-
         0
-
         0;
 
     font-family:
-
         "Cinzel",
-
         Georgia,
-
         serif;
 
     font-size:
-
         clamp(
-
-            0.76rem,
-
-            1.2vw,
-
-            0.94rem
-
+            0.80rem,
+            1.25vw,
+            0.98rem
         );
 
-    font-weight: 700;
+    font-weight:
+        800;
 
-    line-height: 1.5;
+    line-height:
+        1.5;
 
-    letter-spacing: 0.14em;
+    letter-spacing:
+        0.17em;
 
-    color: #14b8a6;
-
-}
-
-
-.dimension-introduction {
-
-    width: min(100%, 700px);
-
-    margin:
-
-        24px
-
-        auto
-
-        0;
-
-    font-family:
-
-        "Noto Sans Tamil",
-
-        sans-serif;
-
-    font-size:
-
-        clamp(
-
-            0.95rem,
-
-            1.5vw,
-
-            1.06rem
-
-        );
-
-    font-weight: 400;
-
-    line-height: 1.9;
+    text-transform:
+        uppercase;
 
     color:
-
-        rgba(255, 255, 255, 0.62);
+        var(--p02-teal);
 
 }
 
 
 /* ==========================================================================
-   LIVE DIMENSION SCORE
+   07. DIMENSION INTRODUCTION
 ========================================================================== */
 
+.dimension-introduction {
+
+    width:
+        min(
+            100%,
+            720px
+        );
+
+    margin:
+        25px
+        auto
+        0;
+
+    font-family:
+        "Noto Sans Tamil",
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(
+            1rem,
+            1.5vw,
+            1.10rem
+        );
+
+    font-weight:
+        400;
+
+    line-height:
+        1.95;
+
+    text-align:
+        center;
+
+    color:
+        var(--p02-text-soft);
+
+}
+
+
+/* ==========================================================================
+   08. LIVE DIMENSION SCORE
+========================================================================== */
 
 .dimension-score-panel {
 
-    display: flex;
+    display:
+        inline-flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    gap: 18px;
+    gap:
+        20px;
 
-    width: fit-content;
+    width:
+        auto;
 
-    max-width: 100%;
+    max-width:
+        100%;
 
     margin:
-
-        30px
-
+        32px
         auto
-
         0;
 
     padding:
-
-        12px
-
-        22px;
+        13px
+        24px;
 
     border:
-
         1px solid
+        rgba(34, 199, 189, 0.34);
 
-        rgba(20, 184, 166, 0.20);
-
-    border-radius: 10px;
+    border-radius:
+        12px;
 
     background:
+        linear-gradient(
+            145deg,
+            rgba(34, 199, 189, 0.105),
+            rgba(34, 199, 189, 0.035)
+        );
 
-        rgba(20, 184, 166, 0.045);
+    box-shadow:
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.035),
+        0 12px 30px
+        rgba(0, 10, 24, 0.16);
 
 }
 
@@ -442,155 +628,227 @@
 .dimension-score-label {
 
     font-family:
-
         "Cinzel",
-
         Georgia,
-
         serif;
 
-    font-size: 0.62rem;
+    font-size:
+        0.62rem;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    line-height: 1.4;
+    line-height:
+        1.4;
 
-    letter-spacing: 0.10em;
+    letter-spacing:
+        0.11em;
+
+    text-transform:
+        uppercase;
 
     color:
-
-        rgba(255, 255, 255, 0.48);
+        var(--p02-text-muted);
 
 }
 
 
 .dimension-score-value {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: baseline;
+    align-items:
+        baseline;
 
-    gap: 3px;
+    gap:
+        4px;
 
-    white-space: nowrap;
+    white-space:
+        nowrap;
 
     font-family:
-
         "Cinzel",
-
         Georgia,
-
         serif;
 
-    font-weight: 800;
+    font-weight:
+        800;
 
-    color: #14b8a6;
+    color:
+        var(--p02-teal);
 
 }
 
 
 .dimension-score-current {
 
-    font-size: 1.35rem;
+    font-size:
+        1.45rem;
 
-    line-height: 1;
+    line-height:
+        1;
 
 }
 
 
 .dimension-score-total {
 
-    font-size: 0.78rem;
+    font-size:
+        0.80rem;
 
-    line-height: 1;
+    line-height:
+        1;
 
     color:
-
-        rgba(255, 255, 255, 0.42);
+        var(--p02-text-muted);
 
 }
 
 
 /* ==========================================================================
-   SCORECARD LIST
+   09. SCORECARD LIST
 ========================================================================== */
-
 
 .scorecard-list {
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
     gap:
-
         clamp(
-
-            24px,
-
-            3vw,
-
-            34px
-
+            28px,
+            3.5vw,
+            40px
         );
 
-    width: min(100%, 960px);
+    width:
+        min(
+            100%,
+            1020px
+        );
 
-    margin: 0 auto;
+    margin:
+        0 auto;
 
 }
 
 
 /* ==========================================================================
-   INDICATOR CARD
+   10. INDICATOR CARD
 ========================================================================== */
-
 
 .scorecard-card {
 
-    position: relative;
+    position:
+        relative;
 
-    width: 100%;
+    width:
+        100%;
 
-    margin: 0;
+    margin:
+        0;
 
     padding:
+        clamp(32px, 4vw, 46px)
+        clamp(28px, 4.5vw, 48px);
 
-        clamp(28px, 4vw, 42px)
-
-        clamp(24px, 4vw, 42px);
+    overflow:
+        hidden;
 
     border:
-
         1px solid
+        var(--p02-border);
 
-        rgba(255, 255, 255, 0.10);
-
-    border-radius: 16px;
+    border-radius:
+        20px;
 
     background:
-
         linear-gradient(
-
             145deg,
-
-            rgba(255, 255, 255, 0.034),
-
-            rgba(255, 255, 255, 0.012)
-
+            rgba(16, 64, 111, 0.94),
+            rgba(9, 44, 82, 0.96)
         );
 
     box-shadow:
-
-        0 18px 48px
-
-        rgba(0, 0, 0, 0.14);
+        var(--p02-shadow);
 
     transition:
-
+        transform 180ms ease,
         border-color 180ms ease,
-
         box-shadow 180ms ease;
+
+}
+
+
+.scorecard-card::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        48px;
+
+    width:
+        82px;
+
+    height:
+        3px;
+
+    border-radius:
+        0 0 999px 999px;
+
+    background:
+        var(--p02-teal);
+
+    box-shadow:
+        0 0 18px
+        rgba(34, 199, 189, 0.22);
+
+}
+
+
+.scorecard-card::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        -90px;
+
+    right:
+        -90px;
+
+    width:
+        240px;
+
+    height:
+        240px;
+
+    border-radius:
+        50%;
+
+    pointer-events:
+        none;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(34, 199, 189, 0.055),
+            transparent 68%
+        );
 
 }
 
@@ -598,8 +856,7 @@
 .scorecard-card.is-answered {
 
     border-color:
-
-        rgba(20, 184, 166, 0.20);
+        rgba(34, 199, 189, 0.38);
 
 }
 
@@ -607,135 +864,152 @@
 .scorecard-card:focus-within {
 
     border-color:
+        rgba(34, 199, 189, 0.56);
 
-        rgba(20, 184, 166, 0.30);
+    box-shadow:
+        var(--p02-shadow),
+        0 0 0 1px
+        rgba(34, 199, 189, 0.08);
 
 }
 
 
 /* ==========================================================================
-   INDICATOR TOP
+   11. INDICATOR HEADER
 ========================================================================== */
-
 
 .scorecard-card-header {
 
-    display: grid;
+    position:
+        relative;
+
+    z-index:
+        1;
+
+    display:
+        grid;
 
     grid-template-columns:
-
         auto
-
         minmax(0, 1fr)
-
         auto;
 
-    align-items: start;
+    align-items:
+        center;
 
     gap:
+        20px;
 
-        18px;
+    width:
+        100%;
 
-    width: 100%;
-
-    margin-bottom: 26px;
+    margin-bottom:
+        30px;
 
 }
 
 
 /* ==========================================================================
-   INDICATOR NUMBER
+   12. INDICATOR NUMBER
 ========================================================================== */
-
 
 .scorecard-number {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    width: 38px;
+    width:
+        42px;
 
-    height: 38px;
+    height:
+        42px;
 
-    flex: 0 0 38px;
+    flex:
+        0 0 42px;
 
     border:
-
         1px solid
+        rgba(34, 199, 189, 0.44);
 
-        rgba(20, 184, 166, 0.24);
-
-    border-radius: 50%;
+    border-radius:
+        50%;
 
     background:
+        linear-gradient(
+            145deg,
+            rgba(34, 199, 189, 0.16),
+            rgba(34, 199, 189, 0.07)
+        );
 
-        rgba(20, 184, 166, 0.055);
+    box-shadow:
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.05);
 
     font-family:
-
         "Cinzel",
-
         Georgia,
-
         serif;
 
-    font-size: 0.66rem;
+    font-size:
+        0.68rem;
 
-    font-weight: 700;
+    font-weight:
+        800;
 
-    line-height: 1;
+    line-height:
+        1;
 
-    letter-spacing: 0.04em;
+    letter-spacing:
+        0.05em;
 
-    color: #14b8a6;
+    color:
+        var(--p02-teal);
 
 }
 
 
 /* ==========================================================================
-   INDICATOR TITLES
+   13. INDICATOR TITLES
 ========================================================================== */
-
 
 .scorecard-heading {
 
-    min-width: 0;
+    min-width:
+        0;
 
 }
 
 
 .scorecard-title-tamil {
 
-    margin: 0;
+    margin:
+        0;
 
     font-family:
-
         "Noto Sans Tamil",
-
         sans-serif;
 
     font-size:
-
         clamp(
-
-            1rem,
-
-            1.8vw,
-
-            1.18rem
-
+            1.10rem,
+            1.9vw,
+            1.28rem
         );
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    line-height: 1.55;
+    line-height:
+        1.55;
 
     color:
-
-        rgba(255, 255, 255, 0.92);
+        var(--p02-ivory);
 
 }
 
@@ -743,227 +1017,293 @@
 .scorecard-title-english {
 
     margin:
-
         5px
-
         0
-
         0;
 
     font-family:
-
         "Cinzel",
-
         Georgia,
-
         serif;
 
-    font-size: 0.66rem;
+    font-size:
+        0.66rem;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    line-height: 1.45;
+    line-height:
+        1.45;
 
-    letter-spacing: 0.08em;
+    letter-spacing:
+        0.10em;
 
-    text-transform: uppercase;
+    text-transform:
+        uppercase;
 
     color:
-
-        rgba(255, 255, 255, 0.38);
+        rgba(34, 199, 189, 0.78);
 
 }
 
 
 /* ==========================================================================
-   IDEAL BENCHMARK
+   14. IDEAL BENCHMARK
 ========================================================================== */
-
 
 .scorecard-ideal {
 
-    min-width: 128px;
+    min-width:
+        132px;
 
     padding:
-
-        8px
-
-        12px;
+        9px
+        13px;
 
     border:
-
         1px solid
+        var(--p02-gold-border);
 
-        rgba(255, 255, 255, 0.08);
+    border-radius:
+        10px;
 
-    border-radius: 8px;
-
-    text-align: right;
+    text-align:
+        right;
 
     background:
+        linear-gradient(
+            145deg,
+            rgba(216, 173, 88, 0.11),
+            rgba(216, 173, 88, 0.035)
+        );
 
-        rgba(255, 255, 255, 0.022);
+    box-shadow:
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.025);
 
 }
 
 
 .scorecard-ideal-label {
 
-    display: block;
+    display:
+        block;
 
-    margin-bottom: 3px;
+    margin-bottom:
+        3px;
 
     font-family:
-
         "Cinzel",
-
         Georgia,
-
         serif;
 
-    font-size: 0.50rem;
+    font-size:
+        0.50rem;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    line-height: 1.3;
+    line-height:
+        1.3;
 
-    letter-spacing: 0.10em;
+    letter-spacing:
+        0.12em;
+
+    text-transform:
+        uppercase;
 
     color:
-
-        rgba(255, 255, 255, 0.30);
+        rgba(232, 196, 114, 0.70);
 
 }
 
 
 .scorecard-ideal-value {
 
-    display: block;
+    display:
+        block;
 
     font-family:
-
         "Cinzel",
-
         Georgia,
-
         serif;
 
-    font-size: 0.74rem;
+    font-size:
+        0.76rem;
 
-    font-weight: 700;
+    font-weight:
+        800;
 
-    line-height: 1.4;
+    line-height:
+        1.4;
 
     color:
-
-        rgba(255, 255, 255, 0.66);
+        var(--p02-gold-bright);
 
 }
 
 
 /* ==========================================================================
-   FOUR OPTION GRID
+   15. FOUR OPTION GRID
 
    DESKTOP:
    4 columns
 
-   MOBILE:
+   TABLET / MOBILE:
    2 × 2
 
    SMALL MOBILE:
    1 × 4
 ========================================================================== */
 
-
 .scorecard-options {
 
-    display: grid;
+    position:
+        relative;
+
+    z-index:
+        1;
+
+    display:
+        grid;
 
     grid-template-columns:
-
         repeat(
-
             4,
-
             minmax(0, 1fr)
-
         );
 
-    gap: 12px;
+    gap:
+        14px;
 
-    width: 100%;
+    width:
+        100%;
 
 }
 
 
 /* ==========================================================================
-   OPTION BUTTON
+   16. PREMIUM OPTION BUTTON
 ========================================================================== */
-
 
 .scorecard-option {
 
-    position: relative;
+    position:
+        relative;
 
-    display: flex;
+    isolation:
+        isolate;
 
-    flex-direction: column;
+    display:
+        flex;
 
-    align-items: center;
+    flex-direction:
+        column;
 
-    justify-content: center;
+    align-items:
+        center;
 
-    gap: 9px;
+    justify-content:
+        center;
 
-    width: 100%;
+    gap:
+        11px;
 
-    min-width: 0;
+    width:
+        100%;
 
-    min-height: 104px;
+    min-width:
+        0;
 
-    margin: 0;
+    min-height:
+        132px;
+
+    margin:
+        0;
 
     padding:
+        19px
+        14px;
 
-        16px
-
-        12px;
-
-    overflow: hidden;
+    overflow:
+        hidden;
 
     border:
-
         1px solid
+        rgba(113, 177, 219, 0.30);
 
-        rgba(255, 255, 255, 0.10);
+    border-radius:
+        14px;
 
-    border-radius: 10px;
-
-    outline: none;
+    outline:
+        none;
 
     background:
+        linear-gradient(
+            155deg,
+            rgba(6, 31, 61, 0.92),
+            rgba(5, 26, 52, 0.96)
+        );
 
-        rgba(255, 255, 255, 0.022);
+    box-shadow:
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.035),
+        0 8px 22px
+        rgba(0, 8, 22, 0.13);
 
-    color: #ffffff;
+    color:
+        var(--p02-white);
 
-    text-align: center;
+    text-align:
+        center;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
     transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease,
+        box-shadow 180ms ease;
 
-        transform 160ms ease,
+    -webkit-appearance:
+        none;
 
-        border-color 160ms ease,
+    appearance:
+        none;
 
-        background 160ms ease,
+}
 
-        box-shadow 160ms ease;
 
-    -webkit-appearance: none;
+.scorecard-option::after {
 
-    appearance: none;
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        -1;
+
+    opacity:
+        0;
+
+    pointer-events:
+        none;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(34, 199, 189, 0.13),
+            transparent 68%
+        );
+
+    transition:
+        opacity 180ms ease;
 
 }
 
@@ -971,16 +1311,31 @@
 .scorecard-option:hover {
 
     transform:
-
-        translateY(-2px);
+        translateY(-4px);
 
     border-color:
-
-        rgba(20, 184, 166, 0.36);
+        rgba(34, 199, 189, 0.58);
 
     background:
+        linear-gradient(
+            155deg,
+            rgba(8, 44, 77, 0.98),
+            rgba(5, 31, 59, 0.98)
+        );
 
-        rgba(20, 184, 166, 0.04);
+    box-shadow:
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.05),
+        0 16px 32px
+        rgba(0, 8, 22, 0.22);
+
+}
+
+
+.scorecard-option:hover::after {
+
+    opacity:
+        1;
 
 }
 
@@ -988,51 +1343,46 @@
 .scorecard-option:focus-visible {
 
     border-color:
-
-        rgba(20, 184, 166, 0.68);
+        var(--p02-teal);
 
     box-shadow:
-
         0 0 0 3px
-
-        rgba(20, 184, 166, 0.10);
+        rgba(34, 199, 189, 0.16),
+        0 16px 32px
+        rgba(0, 8, 22, 0.20);
 
 }
 
 
 /* ==========================================================================
-   SELECTED OPTION
+   17. SELECTED OPTION
 ========================================================================== */
-
 
 .scorecard-option.is-selected,
 .scorecard-option[aria-pressed="true"] {
 
-    border-color:
+    transform:
+        translateY(-3px);
 
-        rgba(20, 184, 166, 0.82);
+    border-color:
+        var(--p02-teal);
 
     background:
-
         linear-gradient(
-
             145deg,
-
-            rgba(20, 184, 166, 0.14),
-
-            rgba(20, 184, 166, 0.065)
-
+            rgba(15, 143, 132, 0.34),
+            rgba(5, 42, 67, 0.98)
         );
 
     box-shadow:
-
         inset 0 0 0 1px
-
-        rgba(20, 184, 166, 0.10),
-
-        0 10px 24px
-
-        rgba(0, 0, 0, 0.12);
+        rgba(34, 199, 189, 0.16),
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.06),
+        0 16px 38px
+        rgba(0, 10, 24, 0.24),
+        0 0 28px
+        rgba(34, 199, 189, 0.07);
 
 }
 
@@ -1040,69 +1390,90 @@
 .scorecard-option.is-selected::before,
 .scorecard-option[aria-pressed="true"]::before {
 
-    content: "";
+    content:
+        "";
 
-    position: absolute;
+    position:
+        absolute;
 
-    top: 0;
+    top:
+        0;
 
-    left: 0;
+    left:
+        12%;
 
-    width: 100%;
+    width:
+        76%;
 
-    height: 3px;
+    height:
+        3px;
 
-    background: #14b8a6;
+    border-radius:
+        0 0 999px 999px;
+
+    background:
+        var(--p02-teal);
+
+    box-shadow:
+        0 0 14px
+        rgba(34, 199, 189, 0.35);
+
+}
+
+
+.scorecard-option.is-selected::after,
+.scorecard-option[aria-pressed="true"]::after {
+
+    opacity:
+        1;
 
 }
 
 
 /* ==========================================================================
-   OPTION RANGE
+   18. OPTION RANGE
 ========================================================================== */
-
 
 .option-range {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    min-height: 42px;
+    width:
+        100%;
 
-    width: 100%;
+    min-height:
+        44px;
 
-    overflow-wrap: anywhere;
+    overflow-wrap:
+        anywhere;
 
     font-family:
-
         Arial,
-
         "Noto Sans Tamil",
-
         sans-serif;
 
     font-size:
-
         clamp(
-
-            0.76rem,
-
-            1.1vw,
-
-            0.86rem
-
+            0.82rem,
+            1.15vw,
+            0.94rem
         );
 
-    font-weight: 600;
+    font-weight:
+        700;
 
-    line-height: 1.45;
+    line-height:
+        1.45;
 
     color:
-
-        rgba(255, 255, 255, 0.72);
+        rgba(247, 242, 233, 0.88);
 
 }
 
@@ -1111,67 +1482,68 @@
 .scorecard-option[aria-pressed="true"] .option-range {
 
     color:
-
-        rgba(255, 255, 255, 0.96);
+        var(--p02-white);
 
 }
 
 
 /* ==========================================================================
-   OPTION SCORE
-
-   IMPORTANT:
-   SCORE MUST BE VISUALLY STRONG.
+   19. OPTION SCORE MEDALLION
 ========================================================================== */
-
 
 .option-score {
 
-    display: inline-flex;
+    display:
+        inline-flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    min-width: 40px;
+    min-width:
+        42px;
 
-    height: 27px;
+    height:
+        30px;
 
     padding:
-
-        0
-
-        9px;
+        0 10px;
 
     border:
-
         1px solid
+        rgba(34, 199, 189, 0.40);
 
-        rgba(20, 184, 166, 0.24);
-
-    border-radius: 999px;
+    border-radius:
+        999px;
 
     background:
+        rgba(34, 199, 189, 0.09);
 
-        rgba(20, 184, 166, 0.055);
+    box-shadow:
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.03);
 
     font-family:
-
         "Cinzel",
-
         Georgia,
-
         serif;
 
-    font-size: 0.78rem;
+    font-size:
+        0.80rem;
 
-    font-weight: 900;
+    font-weight:
+        900;
 
-    line-height: 1;
+    line-height:
+        1;
 
-    letter-spacing: 0.04em;
+    letter-spacing:
+        0.04em;
 
-    color: #14b8a6;
+    color:
+        var(--p02-teal);
 
 }
 
@@ -1179,47 +1551,59 @@
 .scorecard-option.is-selected .option-score,
 .scorecard-option[aria-pressed="true"] .option-score {
 
-    border-color: #14b8a6;
+    border-color:
+        var(--p02-teal);
 
-    background: #14b8a6;
+    background:
+        var(--p02-teal);
 
-    color: #061412;
+    box-shadow:
+        0 6px 18px
+        rgba(34, 199, 189, 0.18);
+
+    color:
+        #042522;
 
 }
 
 
 /* ==========================================================================
-   SCORE STATUS
+   20. OPTION STATUS
 ========================================================================== */
-
 
 .option-status {
 
-    display: block;
+    display:
+        block;
 
-    width: 100%;
+    width:
+        100%;
 
-    min-height: 16px;
+    min-height:
+        17px;
 
     font-family:
-
         "Cinzel",
-
         Georgia,
-
         serif;
 
-    font-size: 0.49rem;
+    font-size:
+        0.51rem;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    line-height: 1.35;
+    line-height:
+        1.35;
 
-    letter-spacing: 0.06em;
+    letter-spacing:
+        0.075em;
+
+    text-transform:
+        uppercase;
 
     color:
-
-        rgba(255, 255, 255, 0.30);
+        var(--p02-text-faint);
 
 }
 
@@ -1228,32 +1612,103 @@
 .scorecard-option[aria-pressed="true"] .option-status {
 
     color:
-
-        rgba(255, 255, 255, 0.62);
+        rgba(247, 242, 233, 0.72);
 
 }
 
 
 /* ==========================================================================
-   CARD SCORE FEEDBACK
+   21. FOURTH / TARGET OPTION — SUBTLE IDEAL LANGUAGE
+
+   The target range is distinguished without making it look pre-selected.
 ========================================================================== */
 
+.scorecard-option:nth-child(4) {
+
+    border-color:
+        rgba(216, 173, 88, 0.34);
+
+}
+
+
+.scorecard-option:nth-child(4) .option-score {
+
+    border-color:
+        rgba(216, 173, 88, 0.46);
+
+    background:
+        rgba(216, 173, 88, 0.08);
+
+    color:
+        var(--p02-gold-bright);
+
+}
+
+
+.scorecard-option:nth-child(4):hover {
+
+    border-color:
+        rgba(232, 196, 114, 0.66);
+
+}
+
+
+.scorecard-option:nth-child(4).is-selected,
+.scorecard-option:nth-child(4)[aria-pressed="true"] {
+
+    border-color:
+        var(--p02-teal);
+
+}
+
+
+.scorecard-option:nth-child(4).is-selected .option-score,
+.scorecard-option:nth-child(4)[aria-pressed="true"] .option-score {
+
+    border-color:
+        var(--p02-teal);
+
+    background:
+        var(--p02-teal);
+
+    color:
+        #042522;
+
+}
+
+
+/* ==========================================================================
+   22. CARD SCORE FEEDBACK
+========================================================================== */
 
 .scorecard-selection {
 
-    display: flex;
+    position:
+        relative;
 
-    align-items: center;
+    z-index:
+        1;
 
-    justify-content: flex-end;
+    display:
+        flex;
 
-    gap: 8px;
+    align-items:
+        center;
 
-    min-height: 24px;
+    justify-content:
+        flex-end;
 
-    margin-top: 16px;
+    gap:
+        9px;
 
-    text-align: right;
+    min-height:
+        26px;
+
+    margin-top:
+        18px;
+
+    text-align:
+        right;
 
 }
 
@@ -1261,24 +1716,27 @@
 .scorecard-selection-label {
 
     font-family:
-
         "Cinzel",
-
         Georgia,
-
         serif;
 
-    font-size: 0.54rem;
+    font-size:
+        0.55rem;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    line-height: 1.4;
+    line-height:
+        1.4;
 
-    letter-spacing: 0.08em;
+    letter-spacing:
+        0.09em;
+
+    text-transform:
+        uppercase;
 
     color:
-
-        rgba(255, 255, 255, 0.28);
+        var(--p02-text-muted);
 
 }
 
@@ -1286,227 +1744,273 @@
 .scorecard-selection-score {
 
     font-family:
-
         "Cinzel",
-
         Georgia,
-
         serif;
 
-    font-size: 0.82rem;
+    font-size:
+        0.88rem;
 
-    font-weight: 900;
+    font-weight:
+        900;
 
-    line-height: 1;
+    line-height:
+        1;
 
-    color: #14b8a6;
+    color:
+        var(--p02-teal);
 
 }
 
 
 /* ==========================================================================
-   HOW YOUR SCORE WORKS
+   23. SCORE GUIDE
 ========================================================================== */
-
 
 .score-guide {
 
-    width: min(100%, 960px);
+    width:
+        min(
+            100%,
+            1020px
+        );
 
     margin:
-
-        clamp(34px, 5vw, 52px)
-
+        clamp(42px, 5vw, 58px)
         auto
-
         0;
 
     padding:
-
-        clamp(24px, 3vw, 32px);
+        clamp(28px, 3.5vw, 38px);
 
     border:
-
         1px solid
+        rgba(103, 173, 219, 0.22);
 
-        rgba(255, 255, 255, 0.08);
-
-    border-radius: 14px;
+    border-radius:
+        18px;
 
     background:
+        linear-gradient(
+            145deg,
+            rgba(10, 47, 86, 0.72),
+            rgba(7, 35, 67, 0.82)
+        );
 
-        rgba(255, 255, 255, 0.018);
+    box-shadow:
+        var(--p02-shadow-soft);
 
 }
 
 
+/* ==========================================================================
+   24. SCORE GUIDE HEADING
+========================================================================== */
+
 .score-guide-heading {
 
     margin:
-
         0
-
         0
+        25px;
 
-        20px;
-
-    text-align: center;
+    text-align:
+        center;
 
 }
 
 
 .score-guide-heading-tamil {
 
-    display: block;
+    display:
+        block;
 
     font-family:
-
         "Noto Sans Tamil",
-
         sans-serif;
 
-    font-size: 0.94rem;
+    font-size:
+        1rem;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    line-height: 1.5;
+    line-height:
+        1.55;
 
     color:
-
-        rgba(255, 255, 255, 0.76);
+        var(--p02-ivory);
 
 }
 
 
 .score-guide-heading-english {
 
-    display: block;
+    display:
+        block;
 
-    margin-top: 4px;
+    margin-top:
+        5px;
 
     font-family:
-
         "Cinzel",
-
         Georgia,
-
         serif;
 
-    font-size: 0.58rem;
+    font-size:
+        0.59rem;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    line-height: 1.4;
+    line-height:
+        1.4;
 
-    letter-spacing: 0.10em;
+    letter-spacing:
+        0.12em;
+
+    text-transform:
+        uppercase;
 
     color:
-
-        rgba(255, 255, 255, 0.32);
+        var(--p02-gold);
 
 }
 
 
 /* ==========================================================================
-   SCORE GUIDE — SAME FOUR-COLUMN ARCHITECTURE AS OPTIONS
+   25. SCORE GUIDE GRID
 ========================================================================== */
-
 
 .score-guide-grid {
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
-
         repeat(
-
             4,
-
             minmax(0, 1fr)
-
         );
 
-    gap: 12px;
+    gap:
+        13px;
 
 }
 
 
 .score-guide-item {
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    gap: 7px;
+    gap:
+        8px;
 
-    min-height: 88px;
+    min-height:
+        102px;
 
     padding:
-
-        13px
-
-        10px;
+        15px
+        11px;
 
     border:
-
         1px solid
+        rgba(103, 173, 219, 0.18);
 
-        rgba(255, 255, 255, 0.065);
+    border-radius:
+        12px;
 
-    border-radius: 9px;
-
-    text-align: center;
+    text-align:
+        center;
 
     background:
+        rgba(3, 25, 50, 0.44);
 
-        rgba(255, 255, 255, 0.016);
+}
+
+
+.score-guide-item:last-child {
+
+    border-color:
+        rgba(216, 173, 88, 0.30);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(216, 173, 88, 0.07),
+            rgba(3, 25, 50, 0.42)
+        );
 
 }
 
 
 .score-guide-score {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    width: 32px;
+    width:
+        34px;
 
-    height: 32px;
+    height:
+        34px;
 
     border:
-
         1px solid
+        rgba(34, 199, 189, 0.42);
 
-        rgba(20, 184, 166, 0.28);
-
-    border-radius: 50%;
+    border-radius:
+        50%;
 
     background:
-
-        rgba(20, 184, 166, 0.055);
+        rgba(34, 199, 189, 0.09);
 
     font-family:
-
         "Cinzel",
-
         Georgia,
-
         serif;
 
-    font-size: 0.78rem;
+    font-size:
+        0.80rem;
 
-    font-weight: 900;
+    font-weight:
+        900;
 
-    line-height: 1;
+    line-height:
+        1;
 
-    color: #14b8a6;
+    color:
+        var(--p02-teal);
+
+}
+
+
+.score-guide-item:last-child .score-guide-score {
+
+    border-color:
+        rgba(216, 173, 88, 0.48);
+
+    background:
+        rgba(216, 173, 88, 0.09);
+
+    color:
+        var(--p02-gold-bright);
 
 }
 
@@ -1514,20 +2018,20 @@
 .score-guide-status-tamil {
 
     font-family:
-
         "Noto Sans Tamil",
-
         sans-serif;
 
-    font-size: 0.72rem;
+    font-size:
+        0.74rem;
 
-    font-weight: 600;
+    font-weight:
+        600;
 
-    line-height: 1.45;
+    line-height:
+        1.45;
 
     color:
-
-        rgba(255, 255, 255, 0.66);
+        var(--p02-text-soft);
 
 }
 
@@ -1535,173 +2039,189 @@
 .score-guide-status-english {
 
     font-family:
-
         "Cinzel",
-
         Georgia,
-
         serif;
 
-    font-size: 0.48rem;
+    font-size:
+        0.49rem;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    line-height: 1.35;
+    line-height:
+        1.35;
 
-    letter-spacing: 0.05em;
+    letter-spacing:
+        0.06em;
+
+    text-transform:
+        uppercase;
 
     color:
-
-        rgba(255, 255, 255, 0.30);
+        var(--p02-text-faint);
 
 }
 
 
 /* ==========================================================================
-   VALIDATION MESSAGE
+   26. VALIDATION MESSAGE
 ========================================================================== */
-
 
 .dimension-message {
 
-    display: none;
+    display:
+        none;
 
-    width: min(100%, 960px);
+    width:
+        min(
+            100%,
+            1020px
+        );
 
     margin:
-
-        28px
-
+        30px
         auto
-
         0;
 
     padding:
-
-        13px
-
-        18px;
+        14px
+        19px;
 
     border:
-
         1px solid
+        rgba(255, 140, 140, 0.36);
 
-        rgba(255, 116, 116, 0.24);
-
-    border-radius: 8px;
+    border-radius:
+        10px;
 
     background:
-
-        rgba(255, 116, 116, 0.055);
+        rgba(255, 116, 116, 0.08);
 
     font-family:
-
         "Noto Sans Tamil",
-
         Arial,
-
         sans-serif;
 
-    font-size: 0.88rem;
+    font-size:
+        0.90rem;
 
-    font-weight: 600;
+    font-weight:
+        600;
 
-    line-height: 1.6;
+    line-height:
+        1.65;
 
-    text-align: center;
+    text-align:
+        center;
 
-    color: #ffb0b0;
+    color:
+        var(--p02-danger);
 
 }
 
 
 .dimension-message.is-visible {
 
-    display: block;
+    display:
+        block;
 
 }
 
 
 /* ==========================================================================
-   DIMENSION NAVIGATION
+   27. DIMENSION NAVIGATION
 ========================================================================== */
-
 
 .dimension-navigation {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: stretch;
+    align-items:
+        stretch;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    gap: 16px;
+    gap:
+        18px;
 
-    width: min(100%, 960px);
+    width:
+        min(
+            100%,
+            1020px
+        );
 
     margin:
-
-        clamp(42px, 6vw, 64px)
-
+        clamp(48px, 6vw, 70px)
         auto
-
         0;
 
 }
 
 
 /* ==========================================================================
-   SHARED NAVIGATION BUTTON
+   28. SHARED NAVIGATION BUTTON
 ========================================================================== */
-
 
 .dimension-button {
 
-    display: inline-flex;
+    display:
+        inline-flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    gap: 3px;
+    gap:
+        4px;
 
-    width: min(100%, 330px);
+    width:
+        min(
+            100%,
+            340px
+        );
 
-    min-height: 66px;
+    min-height:
+        68px;
 
-    margin: 0;
+    margin:
+        0;
 
     padding:
+        14px
+        25px;
 
-        13px
+    border-radius:
+        11px;
 
-        24px;
+    text-align:
+        center;
 
-    border-radius: 8px;
+    text-decoration:
+        none;
 
-    text-align: center;
-
-    text-decoration: none;
-
-    cursor: pointer;
+    cursor:
+        pointer;
 
     transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease,
+        box-shadow 180ms ease,
+        opacity 180ms ease;
 
-        transform 170ms ease,
+    -webkit-appearance:
+        none;
 
-        border-color 170ms ease,
-
-        background 170ms ease,
-
-        box-shadow 170ms ease,
-
-        opacity 170ms ease;
-
-    -webkit-appearance: none;
-
-    appearance: none;
+    appearance:
+        none;
 
 }
 
@@ -1709,30 +2229,24 @@
 .dimension-button-primary {
 
     border:
-
         1px solid
-
-        #0f8f84;
+        var(--p02-teal-deep);
 
     background:
-
         linear-gradient(
-
             135deg,
-
-            #11a99a,
-
-            #0f8f84
-
+            var(--p02-teal-strong),
+            var(--p02-teal-deep)
         );
 
     box-shadow:
+        0 14px 32px
+        rgba(15, 143, 132, 0.25),
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.12);
 
-        0 12px 28px
-
-        rgba(15, 143, 132, 0.20);
-
-    color: #ffffff;
+    color:
+        #ffffff;
 
 }
 
@@ -1740,14 +2254,18 @@
 .dimension-button-primary:hover {
 
     transform:
+        translateY(-3px);
 
-        translateY(-2px);
+    background:
+        linear-gradient(
+            135deg,
+            #22c7bd,
+            #10998e
+        );
 
     box-shadow:
-
-        0 16px 34px
-
-        rgba(15, 143, 132, 0.27);
+        0 18px 40px
+        rgba(15, 143, 132, 0.31);
 
 }
 
@@ -1755,18 +2273,14 @@
 .dimension-button-secondary {
 
     border:
-
         1px solid
-
-        rgba(255, 255, 255, 0.13);
+        rgba(103, 173, 219, 0.30);
 
     background:
-
-        rgba(255, 255, 255, 0.025);
+        rgba(7, 35, 67, 0.76);
 
     color:
-
-        rgba(255, 255, 255, 0.70);
+        var(--p02-text-soft);
 
 }
 
@@ -1774,16 +2288,13 @@
 .dimension-button-secondary:hover {
 
     transform:
-
-        translateY(-2px);
+        translateY(-3px);
 
     border-color:
-
-        rgba(20, 184, 166, 0.32);
+        rgba(34, 199, 189, 0.46);
 
     background:
-
-        rgba(20, 184, 166, 0.035);
+        rgba(10, 49, 91, 0.88);
 
 }
 
@@ -1791,122 +2302,131 @@
 .dimension-button:focus-visible {
 
     outline:
-
         3px solid
+        rgba(34, 199, 189, 0.28);
 
-        rgba(20, 184, 166, 0.28);
-
-    outline-offset: 4px;
+    outline-offset:
+        4px;
 
 }
 
 
 .dimension-button:disabled {
 
-    cursor: not-allowed;
+    cursor:
+        not-allowed;
 
-    opacity: 0.42;
+    opacity:
+        0.42;
 
-    transform: none;
+    transform:
+        none;
 
-    box-shadow: none;
+    box-shadow:
+        none;
 
 }
 
 
 .dimension-button-primary-text {
 
-    display: block;
+    display:
+        block;
 
     font-family:
-
         "Noto Sans Tamil",
-
         sans-serif;
 
-    font-size: 0.92rem;
+    font-size:
+        0.94rem;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    line-height: 1.4;
+    line-height:
+        1.4;
 
 }
 
 
 .dimension-button-secondary-text {
 
-    display: block;
+    display:
+        block;
 
     font-family:
-
         "Cinzel",
-
         Georgia,
-
         serif;
 
-    font-size: 0.58rem;
+    font-size:
+        0.59rem;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    line-height: 1.35;
+    line-height:
+        1.35;
 
-    letter-spacing: 0.07em;
+    letter-spacing:
+        0.08em;
 
-    opacity: 0.72;
+    opacity:
+        0.78;
 
 }
 
 
 /* ==========================================================================
-   COMPLETION SUMMARY
+   29. COMPLETION SUMMARY
 ========================================================================== */
-
 
 .dimension-completion {
 
-    width: min(100%, 960px);
+    width:
+        min(
+            100%,
+            1020px
+        );
 
     margin:
-
-        24px
-
+        26px
         auto
-
         0;
 
-    text-align: center;
+    text-align:
+        center;
 
 }
 
 
 .dimension-completion p {
 
-    margin: 0;
+    margin:
+        0;
 
     font-family:
-
         "Noto Sans Tamil",
-
         sans-serif;
 
-    font-size: 0.82rem;
+    font-size:
+        0.84rem;
 
-    font-weight: 500;
+    font-weight:
+        500;
 
-    line-height: 1.65;
+    line-height:
+        1.7;
 
     color:
-
-        rgba(255, 255, 255, 0.36);
+        var(--p02-text-muted);
 
 }
 
 
 /* ==========================================================================
-   TABLET
+   30. TABLET
 ========================================================================== */
-
 
 @media (max-width: 900px) {
 
@@ -1914,13 +2434,9 @@
     .page02-dimension-shell {
 
         width:
-
             min(
-
                 100%,
-
-                calc(100% - 36px)
-
+                calc(100% - 40px)
             );
 
     }
@@ -1929,13 +2445,9 @@
     .scorecard-options {
 
         grid-template-columns:
-
             repeat(
-
                 2,
-
                 minmax(0, 1fr)
-
             );
 
     }
@@ -1944,13 +2456,9 @@
     .score-guide-grid {
 
         grid-template-columns:
-
             repeat(
-
                 2,
-
                 minmax(0, 1fr)
-
             );
 
     }
@@ -1958,7 +2466,8 @@
 
     .scorecard-option {
 
-        min-height: 96px;
+        min-height:
+            118px;
 
     }
 
@@ -1967,54 +2476,55 @@
 
 
 /* ==========================================================================
-   MOBILE
+   31. MOBILE
 ========================================================================== */
-
 
 @media (max-width: 768px) {
 
 
     /* ----------------------------------------------------------------------
-       FULL WIDTH MOBILE RESET
-
-       Explicitly neutralises global section side padding.
+       FULL-WIDTH MOBILE RESET
     ---------------------------------------------------------------------- */
 
-
     .page02-dimension,
-
     .page02-dimension section {
 
-        width: 100%;
+        width:
+            100%;
 
-        max-width: 100%;
+        max-width:
+            100%;
 
-        margin-left: 0;
+        margin-left:
+            0;
 
-        margin-right: 0;
+        margin-right:
+            0;
 
-        padding-left: 0;
+        padding-left:
+            0;
 
-        padding-right: 0;
+        padding-right:
+            0;
 
     }
 
 
     .page02-dimension-shell {
 
-        width: 100%;
+        width:
+            100%;
 
-        max-width: 100%;
+        max-width:
+            100%;
 
-        margin: 0;
+        margin:
+            0;
 
         padding:
-
-            44px
-
+            46px
             16px
-
-            72px;
+            76px;
 
     }
 
@@ -2023,33 +2533,37 @@
        PROGRESS
     ---------------------------------------------------------------------- */
 
-
     .dimension-progress {
 
-        margin-bottom: 34px;
+        margin-bottom:
+            38px;
 
     }
 
 
     .dimension-progress-meta {
 
-        gap: 12px;
+        gap:
+            12px;
 
     }
 
 
     .dimension-progress-label {
 
-        font-size: 0.56rem;
+        font-size:
+            0.57rem;
 
-        letter-spacing: 0.10em;
+        letter-spacing:
+            0.11em;
 
     }
 
 
     .dimension-progress-number {
 
-        font-size: 0.64rem;
+        font-size:
+            0.65rem;
 
     }
 
@@ -2058,19 +2572,32 @@
        HEADER
     ---------------------------------------------------------------------- */
 
-
     .dimension-header {
 
-        margin-bottom: 36px;
+        margin-bottom:
+            40px;
+
+        padding:
+            0 6px;
+
+    }
+
+
+    .dimension-header::after {
+
+        margin-top:
+            28px;
 
     }
 
 
     .dimension-eyebrow {
 
-        font-size: 0.60rem;
+        font-size:
+            0.61rem;
 
-        letter-spacing: 0.13em;
+        letter-spacing:
+            0.14em;
 
     }
 
@@ -2078,15 +2605,10 @@
     .dimension-title-tamil {
 
         font-size:
-
             clamp(
-
-                1.65rem,
-
+                1.75rem,
                 7vw,
-
-                2.15rem
-
+                2.25rem
             );
 
     }
@@ -2094,33 +2616,37 @@
 
     .dimension-title-english {
 
-        font-size: 0.70rem;
+        font-size:
+            0.71rem;
 
-        letter-spacing: 0.10em;
+        letter-spacing:
+            0.11em;
 
     }
 
 
     .dimension-introduction {
 
-        margin-top: 20px;
+        margin-top:
+            21px;
 
-        font-size: 0.92rem;
+        font-size:
+            0.94rem;
 
-        line-height: 1.8;
+        line-height:
+            1.85;
 
     }
 
 
     .dimension-score-panel {
 
-        margin-top: 24px;
+        margin-top:
+            25px;
 
         padding:
-
-            11px
-
-            17px;
+            12px
+            18px;
 
     }
 
@@ -2129,10 +2655,10 @@
        CARD
     ---------------------------------------------------------------------- */
 
-
     .scorecard-list {
 
-        gap: 20px;
+        gap:
+            22px;
 
     }
 
@@ -2140,12 +2666,22 @@
     .scorecard-card {
 
         padding:
+            26px
+            19px;
 
-            24px
+        border-radius:
+            16px;
 
-            18px;
+    }
 
-        border-radius: 13px;
+
+    .scorecard-card::before {
+
+        left:
+            28px;
+
+        width:
+            68px;
 
     }
 
@@ -2153,41 +2689,47 @@
     .scorecard-card-header {
 
         grid-template-columns:
-
-            34px
-
+            36px
             minmax(0, 1fr);
 
-        gap: 13px;
+        gap:
+            14px;
 
-        margin-bottom: 22px;
+        margin-bottom:
+            24px;
 
     }
 
 
     .scorecard-number {
 
-        width: 34px;
+        width:
+            36px;
 
-        height: 34px;
+        height:
+            36px;
 
-        flex-basis: 34px;
+        flex-basis:
+            36px;
 
-        font-size: 0.60rem;
+        font-size:
+            0.61rem;
 
     }
 
 
     .scorecard-title-tamil {
 
-        font-size: 0.96rem;
+        font-size:
+            1rem;
 
     }
 
 
     .scorecard-title-english {
 
-        font-size: 0.58rem;
+        font-size:
+            0.59rem;
 
     }
 
@@ -2195,103 +2737,103 @@
     .scorecard-ideal {
 
         grid-column:
-
             2;
 
-        min-width: 0;
+        min-width:
+            0;
 
-        width: fit-content;
+        width:
+            fit-content;
 
-        margin-top: 2px;
+        margin-top:
+            3px;
 
         padding:
+            7px
+            10px;
 
-            6px
-
-            9px;
-
-        text-align: left;
+        text-align:
+            left;
 
     }
 
 
     /* ----------------------------------------------------------------------
        OPTIONS — 2 × 2
-
-       This is the primary mobile architecture.
     ---------------------------------------------------------------------- */
-
 
     .scorecard-options {
 
         grid-template-columns:
-
             repeat(
-
                 2,
-
                 minmax(0, 1fr)
-
             );
 
-        gap: 10px;
+        gap:
+            11px;
 
     }
 
 
     .scorecard-option {
 
-        min-height: 112px;
+        min-height:
+            122px;
 
         padding:
+            16px
+            11px;
 
-            14px
-
-            10px;
-
-        border-radius: 9px;
+        border-radius:
+            12px;
 
     }
 
 
     .option-range {
 
-        min-height: 44px;
+        min-height:
+            45px;
 
-        font-size: 0.78rem;
+        font-size:
+            0.80rem;
 
-        line-height: 1.45;
+        line-height:
+            1.45;
 
     }
 
 
     .option-score {
 
-        min-width: 38px;
+        min-width:
+            40px;
 
-        height: 26px;
+        height:
+            28px;
 
-        font-size: 0.74rem;
+        font-size:
+            0.76rem;
 
     }
 
 
     /* ----------------------------------------------------------------------
-       SCORE GUIDE — SAME 2 × 2 ARCHITECTURE
+       SCORE GUIDE
     ---------------------------------------------------------------------- */
-
 
     .score-guide {
 
-        margin-top: 30px;
+        margin-top:
+            34px;
 
         padding:
+            24px
+            17px;
 
-            22px
-
-            16px;
-
-        border-radius: 12px;
+        border-radius:
+            15px;
 
     }
 
@@ -2299,23 +2841,21 @@
     .score-guide-grid {
 
         grid-template-columns:
-
             repeat(
-
                 2,
-
                 minmax(0, 1fr)
-
             );
 
-        gap: 10px;
+        gap:
+            11px;
 
     }
 
 
     .score-guide-item {
 
-        min-height: 84px;
+        min-height:
+            90px;
 
     }
 
@@ -2324,27 +2864,33 @@
        NAVIGATION
     ---------------------------------------------------------------------- */
 
-
     .dimension-navigation {
 
-        flex-direction: column-reverse;
+        flex-direction:
+            column-reverse;
 
-        align-items: center;
+        align-items:
+            center;
 
-        gap: 12px;
+        gap:
+            13px;
 
-        margin-top: 40px;
+        margin-top:
+            44px;
 
     }
 
 
     .dimension-button {
 
-        width: 100%;
+        width:
+            100%;
 
-        max-width: 390px;
+        max-width:
+            400px;
 
-        min-height: 64px;
+        min-height:
+            66px;
 
     }
 
@@ -2353,9 +2899,8 @@
 
 
 /* ==========================================================================
-   SMALL MOBILE
+   32. SMALL MOBILE
 ========================================================================== */
-
 
 @media (max-width: 420px) {
 
@@ -2363,12 +2908,9 @@
     .page02-dimension-shell {
 
         padding:
-
-            38px
-
+            40px
             13px
-
-            64px;
+            68px;
 
     }
 
@@ -2376,96 +2918,125 @@
     .scorecard-card {
 
         padding:
-
-            22px
-
+            23px
             14px;
 
     }
 
 
+    .scorecard-card::before {
+
+        left:
+            20px;
+
+        width:
+            58px;
+
+    }
+
+
     /* ----------------------------------------------------------------------
-       VERY NARROW DEVICES
-
-       Change from 2 × 2 to one option per line so ranges never become
-       cramped or illegible.
+       VERY NARROW DEVICES — ONE OPTION PER ROW
     ---------------------------------------------------------------------- */
-
 
     .scorecard-options {
 
         grid-template-columns:
-
             minmax(0, 1fr);
 
-        gap: 9px;
+        gap:
+            10px;
 
     }
 
 
     .scorecard-option {
 
-        flex-direction: row;
+        display:
+            grid;
 
-        justify-content: space-between;
+        grid-template-columns:
+            minmax(0, 1fr)
+            auto;
 
-        gap: 12px;
+        grid-template-areas:
+            "range score"
+            "status score";
 
-        min-height: 68px;
+        align-items:
+            center;
+
+        justify-content:
+            initial;
+
+        gap:
+            4px 14px;
+
+        min-height:
+            76px;
 
         padding:
+            13px
+            15px;
 
-            12px
-
-            14px;
-
-        text-align: left;
+        text-align:
+            left;
 
     }
 
 
     .option-range {
 
-        justify-content: flex-start;
+        grid-area:
+            range;
 
-        min-height: 0;
+        justify-content:
+            flex-start;
 
-        text-align: left;
+        min-height:
+            0;
+
+        text-align:
+            left;
 
     }
 
 
     .option-score {
 
-        flex: 0 0 auto;
+        grid-area:
+            score;
+
+        flex:
+            0 0 auto;
 
     }
 
 
     .option-status {
 
-        display: none;
+        grid-area:
+            status;
+
+        min-height:
+            0;
+
+        text-align:
+            left;
 
     }
 
 
     /* ----------------------------------------------------------------------
-       SCORE GUIDE STAYS 2 × 2
-
-       These labels are short enough to remain readable.
+       SCORE GUIDE REMAINS 2 × 2
     ---------------------------------------------------------------------- */
-
 
     .score-guide-grid {
 
         grid-template-columns:
-
             repeat(
-
                 2,
-
                 minmax(0, 1fr)
-
             );
 
     }
@@ -2473,13 +3044,12 @@
 
     .score-guide-item {
 
-        min-height: 78px;
+        min-height:
+            82px;
 
         padding:
-
-            11px
-
-            7px;
+            12px
+            8px;
 
     }
 
@@ -2488,25 +3058,27 @@
 
 
 /* ==========================================================================
-   TOUCH DEVICE OPTIMIZATION
+   33. TOUCH DEVICE OPTIMIZATION
 ========================================================================== */
-
 
 @media (pointer: coarse) {
 
 
     .scorecard-option {
 
-        touch-action: manipulation;
+        touch-action:
+            manipulation;
 
     }
 
 
     .dimension-button {
 
-        min-height: 64px;
+        min-height:
+            66px;
 
-        touch-action: manipulation;
+        touch-action:
+            manipulation;
 
     }
 
@@ -2515,31 +3087,31 @@
 
 
 /* ==========================================================================
-   REDUCED MOTION
+   34. REDUCED MOTION
 ========================================================================== */
-
 
 @media (prefers-reduced-motion: reduce) {
 
 
     .dimension-progress-fill,
-
     .scorecard-card,
-
     .scorecard-option,
-
+    .scorecard-option::after,
     .dimension-button {
 
-        transition: none;
+        transition:
+            none;
 
     }
 
 
     .scorecard-option:hover,
-
+    .scorecard-option.is-selected,
+    .scorecard-option[aria-pressed="true"],
     .dimension-button:hover {
 
-        transform: none;
+        transform:
+            none;
 
     }
 
@@ -2548,27 +3120,39 @@
 
 
 /* ==========================================================================
-   PRINT
+   35. PRINT
 ========================================================================== */
-
 
 @media print {
 
 
+    .page02-dimension {
+
+        background:
+            #ffffff;
+
+        color:
+            #000000;
+
+    }
+
+
     .dimension-navigation {
 
-        display: none !important;
+        display:
+            none !important;
 
     }
 
 
     .scorecard-card,
-
     .score-guide {
 
-        box-shadow: none;
+        box-shadow:
+            none;
 
-        break-inside: avoid;
+        break-inside:
+            avoid;
 
     }
 
@@ -2579,33 +3163,52 @@
 /* ==========================================================================
    END
 
-   SHARED DIMENSION STACK:
+   CTM PATH™ MILLIONAIRES™
 
-   page02-data.js
-          ↓
-   page02-session.js
-          ↓
-   page02-scorecard.js
-          ↓
-   page02b.js / page02c.js / page02d.js / page02e.js / page02f.js
+   PAGE 02 SHARED DIMENSION VISUAL SYSTEM
+   VERSION 4.0
 
 
    VISUAL STACK:
 
    header.css
-          ↓
+        ↓
    responsive.css
-          ↓
+        ↓
    page02-shared.css
-          ↓
+        ↓
    page02b.css / page02c.css / page02d.css / page02e.css / page02f.css
-          ↓
+        ↓
    footer.css
 
 
-   NEXT FILE:
+   JAVASCRIPT STACK:
 
-   js/page02/page02-scorecard.js
+   page02-data.js
+        ↓
+   page02-session.js
+        ↓
+   page02-scorecard.js
+        ↓
+   page02b.js / page02c.js / page02d.js / page02e.js / page02f.js
+
+
+   DESIGN PRINCIPLE:
+
+   DARK NAVY
+        +
+   ELEVATED ROYAL BLUE
+        +
+   CTM TEAL
+        +
+   RESTRAINED CHAMPAGNE GOLD
+        +
+   SOFT IVORY
+
+
+   IMPORTANT:
+
+   Global header and footer remain outside this file.
 
 ========================================================================== */
 
