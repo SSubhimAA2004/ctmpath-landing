@@ -6,7 +6,7 @@
    css/page02/page02b.css
 
    VERSION:
-   3.0
+   4.0
 
    PAGE:
    PAGE 02B — DIMENSION 01 — WEALTH™
@@ -19,231 +19,511 @@
 
    PURPOSE:
 
-   ✓ Dimension 01 page identity
-   ✓ Wealth™-specific visual refinements
-   ✓ Page 02B spacing adjustments
-   ✓ Dimension 01 completion accent
+   ✓ Dimension 01 — Wealth™ identity
+   ✓ Wealth-specific accent treatment
+   ✓ Page 02B spacing refinement
+   ✓ Dimension 01 progress state
+   ✓ Completion-state refinement
+   ✓ Seamless premium dark-blue continuity
 
    SHARED SYSTEM OWNS:
 
+   ✗ Core page background
    ✗ Indicator cards
    ✗ Four-option architecture
-   ✗ Option selected states
-   ✗ Score badges
+   ✗ Range-option visual language
+   ✗ Selected states
+   ✗ Score medallions
    ✗ Live score panel
    ✗ Score guide
    ✗ Navigation buttons
-   ✗ Core responsive architecture
+   ✗ Responsive architecture
+
+   IMPORTANT:
+
+   This file deliberately remains lightweight.
+
+   Page 02B must inherit the global Page 02 dimension design system rather
+   than recreate it locally.
 
 ========================================================================== */
 
 
 /* ==========================================================================
-   PAGE 02B FOUNDATION
+   01. PAGE 02B FOUNDATION
 ========================================================================== */
-
 
 .page02b {
 
-    position: relative;
+    position:
+        relative;
+
+    isolation:
+        isolate;
+
+    width:
+        100%;
+
+    min-height:
+        100vh;
 
 }
 
 
 /* ==========================================================================
-   DIMENSION 01 HEADER
+   02. PREMIUM BACKGROUND CONTINUITY
+
+   Keeps Dimension 01 visually integrated with the global CTM dark-blue
+   environment and prevents any legacy black / charcoal Page 02B surface
+   from appearing over the shared foundation.
 ========================================================================== */
 
+.page02b.page02-dimension {
+
+    background:
+        radial-gradient(
+            circle at 50% 4%,
+            rgba(28, 94, 145, 0.16),
+            transparent 34%
+        ),
+        linear-gradient(
+            180deg,
+            #071f3d 0%,
+            #051a34 54%,
+            #071f3d 100%
+        );
+
+}
+
+
+/* ==========================================================================
+   03. PAGE SHELL
+
+   Shared system controls the master dimensions.
+   Page 02B only ensures the Wealth page remains centred.
+========================================================================== */
+
+.page02b .page02-dimension-shell {
+
+    position:
+        relative;
+
+    z-index:
+        1;
+
+    margin-left:
+        auto;
+
+    margin-right:
+        auto;
+
+}
+
+
+/* ==========================================================================
+   04. DIMENSION 01 PROGRESS
+
+   Page 02B is the first of five Millionaire Lifestyle dimensions.
+   The actual progress width may also be controlled dynamically by JS.
+   This rule provides the correct initial visual state.
+========================================================================== */
+
+.page02b .dimension-progress-fill {
+
+    width:
+        20%;
+
+}
+
+
+/* ==========================================================================
+   05. DIMENSION HEADER
+========================================================================== */
 
 .page02b .dimension-header {
 
-    position: relative;
+    position:
+        relative;
 
 }
 
 
 /* ==========================================================================
-   DIMENSION EYEBROW
-========================================================================== */
+   06. DIMENSION EYEBROW
 
+   Dimension number uses restrained champagne gold so it is clearly
+   differentiated from the teal interaction language.
+========================================================================== */
 
 .page02b .dimension-eyebrow {
 
     color:
-        rgba(255, 255, 255, 0.42);
+        var(
+            --p02-gold,
+            #d8ad58
+        );
 
 }
 
 
 /* ==========================================================================
-   WEALTH™ TITLE ACCENT
+   07. WEALTH™ ENGLISH TITLE
 
-   The shared system provides the typography.
-   Page 02B only preserves the Dimension 01 accent.
+   Teal identifies the active CTM dimension while Tamil remains the
+   principal ivory headline through the shared system.
 ========================================================================== */
-
 
 .page02b .dimension-title-english {
 
-    color: #14b8a6;
+    color:
+        var(
+            --p02-teal,
+            #22c7bd
+        );
 
 }
 
 
 /* ==========================================================================
-   INTRODUCTION WIDTH
-========================================================================== */
+   08. INTRODUCTION WIDTH
 
+   Wealth introduction is deliberately constrained for premium readability.
+========================================================================== */
 
 .page02b .dimension-introduction {
 
-    max-width: 680px;
+    max-width:
+        720px;
 
 }
 
 
 /* ==========================================================================
-   LIVE SCORE PANEL
+   09. LIVE SCORE PANEL
 ========================================================================== */
-
 
 .page02b .dimension-score-panel {
 
-    margin-top: 28px;
+    margin-top:
+        30px;
 
 }
 
 
 /* ==========================================================================
-   SCORECARD SECTION
+   10. SCORECARD SECTION
 ========================================================================== */
-
 
 .page02b .dimension-scorecard {
 
-    width: 100%;
+    position:
+        relative;
 
-    margin: 0;
+    width:
+        100%;
 
-    padding: 0;
+    margin:
+        0;
+
+    padding:
+        0;
 
 }
 
 
 /* ==========================================================================
-   FIRST INDICATOR
-
-   Gives the beginning of the dimension slightly stronger separation from
-   the header without altering the shared card architecture.
+   11. SCORECARD LIST
 ========================================================================== */
 
+.page02b .scorecard-list {
+
+    position:
+        relative;
+
+}
+
+
+/* ==========================================================================
+   12. FIRST WEALTH INDICATOR
+
+   Creates a deliberate transition from the dimension introduction into
+   the first financial indicator without altering shared card geometry.
+========================================================================== */
 
 .page02b .scorecard-card:first-child {
 
-    margin-top: 0;
+    margin-top:
+        0;
 
 }
 
 
 /* ==========================================================================
-   COMPLETION STATUS
+   13. WEALTH INDICATOR ACCENT
+
+   All Wealth cards retain teal as their active dimension accent.
 ========================================================================== */
 
+.page02b .scorecard-card::before {
+
+    background:
+        var(
+            --p02-teal,
+            #22c7bd
+        );
+
+    box-shadow:
+        0 0 18px
+        rgba(34, 199, 189, 0.22);
+
+}
+
+
+/* ==========================================================================
+   14. WEALTH SCORECARD NUMBER
+========================================================================== */
+
+.page02b .scorecard-number {
+
+    border-color:
+        rgba(34, 199, 189, 0.44);
+
+    color:
+        var(
+            --p02-teal,
+            #22c7bd
+        );
+
+}
+
+
+/* ==========================================================================
+   15. WEALTH ENGLISH INDICATOR TITLES
+========================================================================== */
+
+.page02b .scorecard-title-english {
+
+    color:
+        rgba(34, 199, 189, 0.80);
+
+}
+
+
+/* ==========================================================================
+   16. IDEAL WEALTH BENCHMARK
+
+   Wealth targets are expressed through restrained champagne gold.
+   The target is highlighted without making the ideal option look selected.
+========================================================================== */
+
+.page02b .scorecard-ideal {
+
+    border-color:
+        rgba(216, 173, 88, 0.42);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(216, 173, 88, 0.11),
+            rgba(216, 173, 88, 0.035)
+        );
+
+}
+
+
+.page02b .scorecard-ideal-label {
+
+    color:
+        rgba(232, 196, 114, 0.72);
+
+}
+
+
+.page02b .scorecard-ideal-value {
+
+    color:
+        var(
+            --p02-gold-bright,
+            #e8c472
+        );
+
+}
+
+
+/* ==========================================================================
+   17. RANGE OPTION REFINEMENT
+
+   The shared system owns the actual option architecture.
+   Page 02B only gives the Wealth ranges slightly stronger financial-card
+   definition against the dark-blue scorecard surface.
+========================================================================== */
+
+.page02b .scorecard-option {
+
+    backdrop-filter:
+        blur(2px);
+
+    -webkit-backdrop-filter:
+        blur(2px);
+
+}
+
+
+/* ==========================================================================
+   18. SELECTED WEALTH RANGE
+
+   Keeps the chosen financial band unmistakable.
+========================================================================== */
+
+.page02b .scorecard-option.is-selected,
+.page02b .scorecard-option[aria-pressed="true"] {
+
+    border-color:
+        var(
+            --p02-teal,
+            #22c7bd
+        );
+
+}
+
+
+/* ==========================================================================
+   19. TARGET / FOURTH RANGE
+
+   Champagne-gold signals the aspirational benchmark while the option is
+   unselected. Once selected, shared teal interaction language takes over.
+========================================================================== */
+
+.page02b .scorecard-option:nth-child(4):not(.is-selected):not(
+    [aria-pressed="true"]
+) {
+
+    border-color:
+        rgba(216, 173, 88, 0.38);
+
+}
+
+
+.page02b .scorecard-option:nth-child(4):not(.is-selected):not(
+    [aria-pressed="true"]
+) .option-score {
+
+    border-color:
+        rgba(216, 173, 88, 0.48);
+
+    background:
+        rgba(216, 173, 88, 0.085);
+
+    color:
+        var(
+            --p02-gold-bright,
+            #e8c472
+        );
+
+}
+
+
+/* ==========================================================================
+   20. COMPLETION STATUS
+========================================================================== */
 
 .page02b .dimension-completion {
 
-    margin-top: 24px;
+    margin-top:
+        28px;
 
 }
 
 
 /* ==========================================================================
-   COMPLETED DIMENSION STATE
+   21. COMPLETED DIMENSION STATE
 
-   page02-session.js / page02-scorecard.js may expose completion state
-   through data attributes. This rule is safe even when that optional
-   attribute is not present.
+   Supports either of the completion-state patterns already anticipated by
+   the Page 02 architecture.
 ========================================================================== */
-
 
 .page02b [data-dimension-complete][data-complete="true"] {
 
-    color: #14b8a6;
+    color:
+        var(
+            --p02-teal,
+            #22c7bd
+        );
+
+}
+
+
+.page02b .dimension-completion.is-complete {
+
+    color:
+        var(
+            --p02-teal,
+            #22c7bd
+        );
 
 }
 
 
 /* ==========================================================================
-   VALIDATION
+   22. VALIDATION
 ========================================================================== */
-
 
 .page02b .dimension-message {
 
-    max-width: 960px;
+    max-width:
+        1020px;
 
 }
 
 
 /* ==========================================================================
-   NAVIGATION
+   23. NAVIGATION
 
-   Button visual language remains entirely controlled by
-   page02-shared.css so the frozen teal CTA is identical across
-   Dimensions 01–05.
+   Shared Page 02 design system owns all button styling.
+   Page 02B only preserves the final breathing space.
 ========================================================================== */
-
 
 .page02b .dimension-navigation {
 
-    padding-bottom: 4px;
+    padding-bottom:
+        4px;
 
 }
 
 
 /* ==========================================================================
-   TABLET
+   24. PRIMARY NAVIGATION EMPHASIS
+
+   Dimension 01 → Dimension 02 is the principal forward journey action.
 ========================================================================== */
 
+.page02b .dimension-button-primary {
+
+    position:
+        relative;
+
+}
+
+
+/* ==========================================================================
+   25. TABLET
+========================================================================== */
 
 @media (max-width: 900px) {
 
 
     .page02b .dimension-introduction {
 
-        max-width: 620px;
-
-    }
-
-
-}
-
-
-/* ==========================================================================
-   MOBILE
-========================================================================== */
-
-
-@media (max-width: 768px) {
-
-
-    .page02b .dimension-header {
-
-        margin-bottom: 34px;
+        max-width:
+            660px;
 
     }
 
 
     .page02b .dimension-score-panel {
 
-        margin-top: 22px;
-
-    }
-
-
-    .page02b .dimension-completion {
-
-        margin-top: 20px;
+        margin-top:
+            28px;
 
     }
 
@@ -252,23 +532,48 @@
 
 
 /* ==========================================================================
-   SMALL MOBILE
+   26. MOBILE
 ========================================================================== */
 
-
-@media (max-width: 420px) {
+@media (max-width: 768px) {
 
 
     .page02b .dimension-header {
 
-        margin-bottom: 30px;
+        margin-bottom:
+            40px;
 
     }
 
 
     .page02b .dimension-introduction {
 
-        max-width: 100%;
+        max-width:
+            100%;
+
+    }
+
+
+    .page02b .dimension-score-panel {
+
+        margin-top:
+            24px;
+
+    }
+
+
+    .page02b .dimension-completion {
+
+        margin-top:
+            22px;
+
+    }
+
+
+    .page02b .dimension-navigation {
+
+        padding-bottom:
+            0;
 
     }
 
@@ -277,16 +582,74 @@
 
 
 /* ==========================================================================
-   PRINT
+   27. SMALL MOBILE
 ========================================================================== */
 
+@media (max-width: 420px) {
+
+
+    .page02b .dimension-header {
+
+        margin-bottom:
+            36px;
+
+    }
+
+
+    .page02b .dimension-introduction {
+
+        max-width:
+            100%;
+
+    }
+
+
+    .page02b .dimension-score-panel {
+
+        margin-top:
+            22px;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   28. REDUCED MOTION
+========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+
+    .page02b .scorecard-option {
+
+        backdrop-filter:
+            none;
+
+        -webkit-backdrop-filter:
+            none;
+
+    }
+
+
+}
+
+
+/* ==========================================================================
+   29. PRINT
+========================================================================== */
 
 @media print {
 
 
     .page02b {
 
-        min-height: auto;
+        min-height:
+            auto;
+
+        background:
+            #ffffff !important;
 
     }
 
@@ -297,36 +660,35 @@
 /* ==========================================================================
    END
 
-   PAGE 02B STACK:
+   CTM PATH™ MILLIONAIRES™
 
-   pages/page02b.html
-          ↓
-   css/page02/page02-shared.css
-          ↓
+   FILE:
    css/page02/page02b.css
 
-   JAVASCRIPT:
+   VERSION:
+   4.0
 
-   page02-data.js
-          ↓
-   page02-session.js
-          ↓
-   page02-scorecard.js
-          ↓
-   page02b.js
-
-
-   PAGE 02B RESPONSIBILITY:
-
+   PAGE:
    DIMENSION 01 — WEALTH™
-   INDICATORS 01–05
 
 
-   NEXT FILE:
+   VISUAL RESPONSIBILITY:
 
-   js/page02/page02c.js
+   page02-shared.css
+           ↓
+   Complete Millionaire Lifestyle Scorecard™ visual system
 
-   DIMENSION 02
+   page02b.css
+           ↓
+   Dimension 01 / Wealth™ identity only
+
+
+   IMPORTANT:
+
+   Page02A remains frozen.
+
+   Page02B does not recreate the global header or footer.
+   Those remain the responsibility of the global component system.
 
 ========================================================================== */
 
