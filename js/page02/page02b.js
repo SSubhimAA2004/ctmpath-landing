@@ -8,7 +8,7 @@
  * js/page02/page02b.js
  *
  * VERSION:
- * 3.0
+ * 3.1
  *
  * PAGE:
  * PAGE 02B — DIMENSION 01 — WEALTH™
@@ -20,7 +20,7 @@
  *
  * PURPOSE
  *
- * Controls only the navigation and lifecycle of Dimension 01.
+ * Controls the lifecycle and navigation of Dimension 01.
  *
  *      page02a.html
  *           ↓
@@ -35,6 +35,9 @@
  *
  * SHARED RESPONSIBILITIES DELEGATED TO:
  *
+ *      component-loader.js
+ *          → global header / footer lifecycle
+ *
  *      page02-data.js
  *          → indicator definitions / ranges
  *
@@ -48,12 +51,16 @@
  *
  * THIS FILE:
  *
+ *      ✓ loads global header + footer
  *      ✓ initializes Wealth™
  *      ✓ binds Previous
  *      ✓ binds Next
  *      ✓ validates all five Wealth™ indicators
  *      ✓ marks Wealth™ complete
+ *      ✓ sets Dimension 02 as current dimension
  *      ✓ navigates to Page 02C
+ *      ✓ restores saved Wealth™ state
+ *      ✓ provides keyboard navigation
  *
  * THIS FILE DOES NOT:
  *
@@ -62,6 +69,7 @@
  *      ✗ calculate scores
  *      ✗ render option cards
  *      ✗ call backend
+ *      ✗ contain header/footer markup
  *
  * =============================================================================
  */
@@ -101,16 +109,23 @@ const CONFIG = {
  *
  * page02b.html:
  *
+ *      #global-header
+ *      #global-footer
  *      #previousButton
  *      #nextButton
  *
  * Shared scorecard DOM is handled by page02-scorecard.js.
- *
  * =============================================================================
  */
 
 
 const DOM_IDS = {
+
+    globalHeader:
+        'global-header',
+
+    globalFooter:
+        'global-footer',
 
     previousButton:
         'previousButton',
@@ -128,6 +143,10 @@ const DOM_IDS = {
 
 
 let initialized =
+    false;
+
+
+let initializing =
     false;
 
 
@@ -176,7 +195,139 @@ function scrollToTop(){
 
 
 /* =============================================================================
- * VERIFY DEPENDENCIES
+ * GLOBAL COMPONENT MOUNT CONTRACT
+ * =============================================================================
+ */
+
+
+function verifyComponentMounts(){
+
+    const headerMount =
+        getElement(
+            DOM_IDS.globalHeader
+        );
+
+
+    const footerMount =
+        getElement(
+            DOM_IDS.globalFooter
+        );
+
+
+    if(!headerMount){
+
+        console.warn(
+            'CTM PATH™ Page 02B: #global-header mount not found.'
+        );
+
+    }
+
+
+    if(!footerMount){
+
+        console.warn(
+            'CTM PATH™ Page 02B: #global-footer mount not found.'
+        );
+
+    }
+
+
+    return (
+        !!headerMount &&
+        !!footerMount
+    );
+
+}
+
+
+/* =============================================================================
+ * GLOBAL COMPONENT LOADER
+ *
+ * Header/footer loading is intentionally NON-FATAL.
+ *
+ * Page 02B is a functional scorecard page. If the global component service
+ * fails because of a network, path or component error, the Wealth™ scorecard
+ * must still initialize and remain usable.
+ *
+ * component-loader.js owns:
+ *
+ *      • fetching header.html
+ *      • fetching footer.html
+ *      • injecting component markup
+ *      • loading component assets
+ *
+ * Page 02B owns only the lifecycle call.
+ * =============================================================================
+ */
+
+
+async function loadGlobalComponents(){
+
+    verifyComponentMounts();
+
+
+    if(
+        !window.CTM_COMPONENTS ||
+        typeof window.CTM_COMPONENTS.load !==
+            'function'
+    ){
+
+        console.warn(
+            'CTM PATH™ Page 02B: global component loader unavailable.'
+        );
+
+
+        return false;
+
+    }
+
+
+    try{
+
+        console.info(
+            'CTM PATH™ Page 02B: loading global components...'
+        );
+
+
+        const result =
+            await window.CTM_COMPONENTS.load();
+
+
+        console.info(
+            'CTM PATH™ Page 02B: global header and footer ready.',
+            result || null
+        );
+
+
+        return true;
+
+    }
+    catch(error){
+
+        console.error(
+            'CTM PATH™ Page 02B: global component loading failed.',
+            error
+        );
+
+
+        /*
+         * IMPORTANT:
+         *
+         * Do not throw.
+         *
+         * Header/footer failure must not prevent the scorecard from
+         * initializing.
+         */
+
+        return false;
+
+    }
+
+}
+
+
+/* =============================================================================
+ * VERIFY SCORECARD DEPENDENCIES
  * =============================================================================
  */
 
@@ -357,7 +508,6 @@ function setNavigationState(
  * Answers are already persisted immediately by Page02Session.
  *
  * Therefore returning to Page 02A does not require a separate save action.
- *
  * =============================================================================
  */
 
@@ -602,7 +752,6 @@ function bindNextButton(){
  * attempt to continue.
  *
  * This does not bypass validation.
- *
  * =============================================================================
  */
 
@@ -652,7 +801,6 @@ function bindKeyboardNavigation(){
  *
  * Page 02B does not need to recalculate anything.
  * We use the event only for page-level completion feedback.
- *
  * =============================================================================
  */
 
@@ -763,17 +911,47 @@ function initializeScorecard(){
 
 /* =============================================================================
  * INITIALIZE
+ *
+ * LIFECYCLE:
+ *
+ *      DOM READY
+ *          ↓
+ *      GLOBAL COMPONENTS
+ *          ↓
+ *      VERIFY SCORECARD DEPENDENCIES
+ *          ↓
+ *      VERIFY DIMENSION CONTRACT
+ *          ↓
+ *      INITIALIZE SCORECARD
+ *          ↓
+ *      BIND NAVIGATION / EVENTS
+ *          ↓
+ *      RESTORE SESSION STATE
+ *          ↓
+ *      SCROLL TO TOP
+ *          ↓
+ *      READY
+ *
+ * Global component failure is NON-FATAL.
+ * Scorecard dependency/dimension failures ARE fatal.
  * =============================================================================
  */
 
 
-function init(){
+async function init(){
 
-    if(initialized){
+    if(
+        initialized ||
+        initializing
+    ){
 
         return;
 
     }
+
+
+    initializing =
+        true;
 
 
     console.info(
@@ -781,115 +959,170 @@ function init(){
     );
 
 
-    /* -------------------------------------------------------------------------
-     * DEPENDENCIES
-     * -------------------------------------------------------------------------
-     */
+    try{
 
 
-    if(
-        !verifyDependencies()
-    ){
-
-        return;
-
-    }
-
-
-    /* -------------------------------------------------------------------------
-     * DIMENSION CONTRACT
-     * -------------------------------------------------------------------------
-     */
+        /* ---------------------------------------------------------------------
+         * GLOBAL HEADER + FOOTER
+         *
+         * NON-FATAL
+         * ---------------------------------------------------------------------
+         */
 
 
-    if(
-        !verifyDimension()
-    ){
-
-        return;
-
-    }
+        const componentsReady =
+            await loadGlobalComponents();
 
 
-    /* -------------------------------------------------------------------------
-     * SCORECARD
-     * -------------------------------------------------------------------------
-     */
+        if(!componentsReady){
+
+            console.warn(
+                'CTM PATH™ Page 02B continuing without confirmed global components.'
+            );
+
+        }
 
 
-    const scorecardReady =
-        initializeScorecard();
+        /* ---------------------------------------------------------------------
+         * SCORECARD DEPENDENCIES
+         * ---------------------------------------------------------------------
+         */
 
 
-    if(
-        !scorecardReady
-    ){
+        if(
+            !verifyDependencies()
+        ){
 
-        console.error(
-            'CTM PATH™ Page 02B scorecard initialization failed.'
+            return;
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * DIMENSION CONTRACT
+         * ---------------------------------------------------------------------
+         */
+
+
+        if(
+            !verifyDimension()
+        ){
+
+            return;
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * SCORECARD
+         * ---------------------------------------------------------------------
+         */
+
+
+        const scorecardReady =
+            initializeScorecard();
+
+
+        if(
+            !scorecardReady
+        ){
+
+            console.error(
+                'CTM PATH™ Page 02B scorecard initialization failed.'
+            );
+
+
+            return;
+
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * NAVIGATION
+         * ---------------------------------------------------------------------
+         */
+
+
+        bindPreviousButton();
+
+
+        bindNextButton();
+
+
+        bindKeyboardNavigation();
+
+
+        bindAnswerEvents();
+
+
+        /* ---------------------------------------------------------------------
+         * RESTORE
+         * ---------------------------------------------------------------------
+         */
+
+
+        restorePage();
+
+
+        /* ---------------------------------------------------------------------
+         * VIEWPORT
+         * ---------------------------------------------------------------------
+         */
+
+
+        scrollToTop();
+
+
+        /* ---------------------------------------------------------------------
+         * READY
+         * ---------------------------------------------------------------------
+         */
+
+
+        initialized =
+            true;
+
+
+        console.info(
+            'CTM PATH™ Page 02B ready.',
+            {
+
+                dimension:
+                    CONFIG.dimensionId,
+
+                globalComponents:
+                    componentsReady,
+
+                score:
+                    window.Page02Scorecard.getScore(),
+
+                progress:
+                    window.Page02Scorecard.getProgress()
+
+            }
         );
 
 
-        return;
+    }
+    catch(error){
+
+        /*
+         * This catch protects the page lifecycle from an unexpected
+         * initialization exception.
+         */
+
+        console.error(
+            'CTM PATH™ Page 02B initialization failed.',
+            error
+        );
 
     }
+    finally{
 
+        initializing =
+            false;
 
-    /* -------------------------------------------------------------------------
-     * NAVIGATION
-     * -------------------------------------------------------------------------
-     */
-
-
-    bindPreviousButton();
-
-
-    bindNextButton();
-
-
-    bindKeyboardNavigation();
-
-
-    bindAnswerEvents();
-
-
-    /* -------------------------------------------------------------------------
-     * RESTORE
-     * -------------------------------------------------------------------------
-     */
-
-
-    restorePage();
-
-
-    /* -------------------------------------------------------------------------
-     * VIEWPORT
-     * -------------------------------------------------------------------------
-     */
-
-
-    scrollToTop();
-
-
-    initialized =
-        true;
-
-
-    console.info(
-        'CTM PATH™ Page 02B ready.',
-        {
-
-            dimension:
-                CONFIG.dimensionId,
-
-            score:
-                window.Page02Scorecard.getScore(),
-
-            progress:
-                window.Page02Scorecard.getProgress()
-
-        }
-    );
+    }
 
 }
 
@@ -907,7 +1140,15 @@ if(
 
     document.addEventListener(
         'DOMContentLoaded',
-        init
+        function(){
+
+            init();
+
+        },
+        {
+            once:
+                true
+        }
     );
 
 }
@@ -923,9 +1164,11 @@ else{
  *
  * Useful during QA:
  *
+ *      Page02B.init()
  *      Page02B.getProgress()
  *      Page02B.goNext()
  *      Page02B.goPrevious()
+ *      Page02B.loadGlobalComponents()
  *
  * =============================================================================
  */
@@ -934,13 +1177,16 @@ else{
 window.Page02B = {
 
     version:
-        '3.0',
+        '3.1',
 
     dimensionId:
         CONFIG.dimensionId,
 
     init:
         init,
+
+    loadGlobalComponents:
+        loadGlobalComponents,
 
     goPrevious:
         goPrevious,
@@ -950,6 +1196,15 @@ window.Page02B = {
 
     getScore:
         function(){
+
+            if(
+                !window.Page02Scorecard
+            ){
+
+                return 0;
+
+            }
+
 
             return (
                 window.Page02Scorecard
@@ -961,6 +1216,15 @@ window.Page02B = {
     getProgress:
         function(){
 
+            if(
+                !window.Page02Scorecard
+            ){
+
+                return null;
+
+            }
+
+
             return (
                 window.Page02Scorecard
                     .getProgress()
@@ -971,10 +1235,26 @@ window.Page02B = {
     validate:
         function(){
 
+            if(
+                !window.Page02Scorecard
+            ){
+
+                return false;
+
+            }
+
+
             return (
                 window.Page02Scorecard
                     .validate()
             );
+
+        },
+
+    isInitialized:
+        function(){
+
+            return initialized;
 
         }
 
@@ -986,6 +1266,12 @@ window.Page02B = {
  *
  * PAGE 02B LOAD ORDER:
  *
+ *      component-loader.js
+ *             ↓
+ *      global.js
+ *             ↓
+ *      api.js
+ *             ↓
  *      page02-data.js
  *             ↓
  *      page02-session.js
@@ -993,6 +1279,23 @@ window.Page02B = {
  *      page02-scorecard.js
  *             ↓
  *      page02b.js
+ *
+ *
+ * PAGE INITIALIZATION:
+ *
+ *      DOM READY
+ *             ↓
+ *      CTM_COMPONENTS.load()
+ *             ↓
+ *      Header + Footer
+ *             ↓
+ *      Page02Scorecard.init("wealth")
+ *             ↓
+ *      Restore Wealth™ answers
+ *             ↓
+ *      Bind navigation
+ *             ↓
+ *      Page ready
  *
  *
  * JOURNEY:
@@ -1020,9 +1323,17 @@ window.Page02B = {
  *      page02c.html
  *
  *
- * NEXT FILE:
+ * NEXT:
  *
- *      pages/page02b.html
+ *      QA PAGE 02B
+ *
+ *      1. Confirm global header renders.
+ *      2. Confirm global footer renders.
+ *      3. Confirm all five Wealth™ cards render.
+ *      4. Confirm restored answers remain selected.
+ *      5. Confirm score remains /20.
+ *      6. Confirm incomplete scorecard blocks Next.
+ *      7. Confirm 5/5 permits Page 02C navigation.
  *
  * =============================================================================
  */
