@@ -1,1178 +1,442 @@
 
-/* ==========================================================================
-   CTM PATH™ MILLIONAIRES™
-
-   FILE:
-   css/page02/page02a.css
-
-   VERSION:
-   4.0
-
-   PAGE:
-   PAGE 02A — INTRODUCTION + ABOUT YOU™ KYC
-
-   PURPOSE:
-
-   ✓ Continuous premium dark-blue Page 02A canvas
-   ✓ Visually merges with canonical global header + footer
-   ✓ Scorecard introduction
-   ✓ Three-card KYC architecture
-   ✓ CARD 01 — YOUR DETAILS™
-   ✓ CARD 02 — YOUR LIFE™
-   ✓ CARD 03 — YOUR LOCATION™
-   ✓ Premium form controls
-   ✓ Premium segmented radio controls
-   ✓ Premium select controls
-   ✓ Final BEGIN MY SCORECARD™ conversion CTA
-   ✓ Desktop / tablet / mobile responsive behaviour
-   ✓ Accessible focus states
-   ✓ Error / success feedback
-   ✓ Touch-device support
-   ✓ Reduced-motion support
-
-   DOES NOT CONTROL:
-
-   ✗ Global header internals
-   ✗ Global footer internals
-   ✗ Dimension scorecards
-   ✗ Page 02B–02F
-   ✗ Backend registration
-   ✗ Page02Session
-
-   ========================================================================== */
-
-
-/* ==========================================================================
-   PAGE 02A DESIGN TOKENS
-   ========================================================================== */
+/**
+ * =============================================================================
+ * CTM PATH™ MILLIONAIRES™
+ * Guided Journey™
+ *
+ * Page 02A — KYC / Registration
+ * -----------------------------------------------------------------------------
+ * File    : css/page02/page02a.css
+ * Version : 4.1
+ *
+ * PURPOSE
+ * -----------------------------------------------------------------------------
+ *
+ * Premium Page02A presentation layer.
+ *
+ * Design principles:
+ *
+ *      • Deep CTM PATH™ dark-blue visual field
+ *      • Seamless relationship with global header/footer
+ *      • Three-card KYC architecture
+ *      • Strong Tamil-first hierarchy
+ *      • Gold English micro-labels
+ *      • Clearly visible form controls
+ *      • Thin premium light borders
+ *      • Restrained teal interaction states
+ *      • High readability
+ *      • Desktop-first responsive behaviour
+ *
+ * IMPORTANT
+ * -----------------------------------------------------------------------------
+ *
+ * This file is VISUAL ONLY.
+ *
+ * It does not alter:
+ *
+ *      • KYC field names
+ *      • Form submission
+ *      • Registration API
+ *      • Google Sheets persistence
+ *      • Session handling
+ *      • Page02B navigation
+ *
+ * =============================================================================
+ */
 
 
-.page02a-body {
-
-    --p02a-navy-deep:
-        #071a35;
-
-    --p02a-navy:
-        #081f40;
-
-    --p02a-navy-mid:
-        #0b294f;
-
-    --p02a-navy-card:
-        rgba(10, 31, 61, 0.88);
-
-    --p02a-navy-card-soft:
-        rgba(11, 37, 70, 0.72);
-
-    --p02a-teal:
-        #19b8aa;
-
-    --p02a-teal-bright:
-        #25c8b8;
-
-    --p02a-teal-dark:
-        #0f9388;
-
-    --p02a-gold:
-        #d2ad62;
-
-    --p02a-gold-soft:
-        rgba(210, 173, 98, 0.74);
-
-    --p02a-white:
-        #ffffff;
-
-    --p02a-ivory:
-        #f4f0e8;
-
-    --p02a-text:
-        rgba(255, 255, 255, 0.88);
-
-    --p02a-text-soft:
-        rgba(255, 255, 255, 0.64);
-
-    --p02a-text-muted:
-        rgba(255, 255, 255, 0.42);
-
-    --p02a-border:
-        rgba(255, 255, 255, 0.10);
-
-    --p02a-border-soft:
-        rgba(255, 255, 255, 0.065);
-
-    --p02a-teal-border:
-        rgba(25, 184, 170, 0.28);
-
-    --p02a-gold-border:
-        rgba(210, 173, 98, 0.26);
-
-    --p02a-shadow:
-        0 28px 80px rgba(0, 0, 0, 0.22);
-
-    --p02a-shadow-soft:
-        0 18px 50px rgba(0, 0, 0, 0.16);
-
-}
+/* =============================================================================
+ * PAGE TOKENS
+ * =============================================================================
+ */
 
 
-/* ==========================================================================
-   DOCUMENT / PAGE CANVAS
+:root {
 
-   The global header and footer remain independently owned.
+    --page02a-bg:
+        #071d3a;
 
-   Page 02A deliberately uses the same premium dark-blue family so there is
-   no visual black interruption between header → journey → footer.
-   ========================================================================== */
+    --page02a-bg-deep:
+        #06172f;
 
+    --page02a-surface:
+        rgba(12, 45, 82, 0.72);
 
-html {
+    --page02a-surface-soft:
+        rgba(11, 38, 70, 0.68);
 
-    background:
-        #071a35;
+    --page02a-control-bg:
+        rgba(3, 24, 50, 0.68);
+
+    --page02a-control-bg-hover:
+        rgba(5, 31, 61, 0.78);
+
+    --page02a-control-bg-focus:
+        rgba(5, 34, 65, 0.86);
+
+    --page02a-white:
+        #f7f8fb;
+
+    --page02a-text:
+        rgba(247, 248, 251, 0.96);
+
+    --page02a-text-soft:
+        rgba(247, 248, 251, 0.76);
+
+    --page02a-gold:
+        #d6ad55;
+
+    --page02a-teal:
+        #19b7ad;
+
+    --page02a-teal-soft:
+        rgba(25, 183, 173, 0.18);
+
+    --page02a-card-border:
+        rgba(255, 255, 255, 0.08);
+
+    /*
+     * IMPORTANT REFINEMENT
+     *
+     * Resting form borders are intentionally brighter than the
+     * surrounding card borders so every input remains immediately
+     * identifiable against the dark-blue field.
+     */
+    --page02a-input-border:
+        rgba(255, 255, 255, 0.34);
+
+    --page02a-input-border-hover:
+        rgba(255, 255, 255, 0.52);
+
+    --page02a-input-border-focus:
+        rgba(25, 183, 173, 0.88);
+
+    --page02a-error:
+        #ff9f9f;
+
+    --page02a-error-border:
+        rgba(255, 112, 112, 0.62);
+
+    --page02a-radius:
+        18px;
+
+    --page02a-control-radius:
+        10px;
 
 }
 
 
-body.page02a-body {
+/* =============================================================================
+ * PAGE ROOT
+ * =============================================================================
+ */
 
-    margin: 0;
 
-    padding: 0;
-
-    overflow-x: hidden;
+html,
+body {
 
     background:
-        linear-gradient(
-            180deg,
-            #071a35 0%,
-            #081f40 34%,
-            #081f40 70%,
-            #071a35 100%
-        );
+        var(--page02a-bg-deep);
+
+}
+
+
+body {
+
+    margin:
+        0;
 
     color:
-        var(--p02a-white);
+        var(--page02a-text);
 
 }
-
-
-/* ==========================================================================
-   PAGE FOUNDATION
-   ========================================================================== */
 
 
 .page02a {
 
-    position: relative;
+    position:
+        relative;
 
-    width: 100%;
+    width:
+        100%;
 
-    min-height: 100vh;
-
-    margin: 0;
-
-    padding: 0;
-
-    overflow-x: hidden;
-
-    isolation: isolate;
+    min-height:
+        100vh;
 
     background:
         linear-gradient(
             180deg,
-            rgba(7, 26, 53, 0.98) 0%,
-            rgba(8, 31, 64, 0.98) 24%,
-            rgba(8, 31, 64, 1) 76%,
-            rgba(7, 26, 53, 0.98) 100%
+            #071c38 0%,
+            #082346 46%,
+            #071d3a 100%
         );
+
+    color:
+        var(--page02a-text);
+
+    overflow:
+        hidden;
 
 }
 
 
-/* Soft premium depth without bright rays. */
+/* =============================================================================
+ * SUBTLE BACKGROUND DEPTH
+ * =============================================================================
+ */
 
 
 .page02a::before {
 
-    content: "";
+    content:
+        "";
 
-    position: absolute;
+    position:
+        absolute;
 
-    inset: 0;
+    top:
+        -220px;
 
-    z-index: -2;
+    left:
+        50%;
 
-    pointer-events: none;
+    width:
+        900px;
+
+    height:
+        600px;
+
+    transform:
+        translateX(-50%);
 
     background:
-
         radial-gradient(
-            circle at 50% 14%,
-            rgba(25, 184, 170, 0.055),
-            transparent 31%
-        ),
-
-        radial-gradient(
-            circle at 18% 58%,
-            rgba(44, 95, 165, 0.08),
-            transparent 34%
-        ),
-
-        radial-gradient(
-            circle at 84% 72%,
-            rgba(25, 184, 170, 0.035),
-            transparent 30%
+            circle,
+            rgba(25, 183, 173, 0.07) 0%,
+            rgba(25, 183, 173, 0.025) 35%,
+            transparent 72%
         );
+
+    pointer-events:
+        none;
 
 }
 
 
 .page02a::after {
 
-    content: "";
+    content:
+        "";
 
-    position: absolute;
+    position:
+        absolute;
 
-    inset: 0;
+    left:
+        50%;
 
-    z-index: -1;
-
-    pointer-events: none;
-
-    opacity: 0.26;
-
-    background-image:
-
-        linear-gradient(
-            rgba(255, 255, 255, 0.012) 1px,
-            transparent 1px
-        ),
-
-        linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 0.009) 1px,
-            transparent 1px
-        );
-
-    background-size:
-        72px 72px;
-
-    mask-image:
-        linear-gradient(
-            to bottom,
-            transparent,
-            #000 15%,
-            #000 85%,
-            transparent
-        );
-
-}
-
-
-.page02a .page02-screen {
-
-    position: relative;
-
-    width: 100%;
-
-    margin: 0;
-
-    padding-left: 0;
-
-    padding-right: 0;
-
-}
-
-
-.page02a .page02-screen[hidden] {
-
-    display: none !important;
-
-}
-
-
-.page02a .page02-shell {
+    bottom:
+        -320px;
 
     width:
-        min(
-            1180px,
-            calc(100% - 56px)
-        );
+        1000px;
 
-    margin:
-        0 auto;
-
-}
-
-
-/* ==========================================================================
-   INTRO SCREEN
-   ========================================================================== */
-
-
-.page02-intro-screen {
-
-    padding:
-
-        clamp(68px, 7vw, 108px)
-
-        0
-
-        clamp(82px, 8vw, 124px);
-
-}
-
-
-.page02-intro-screen .page02-shell {
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-}
-
-
-/* ==========================================================================
-   INTRO CARD
-   ========================================================================== */
-
-
-.scorecard-intro-card {
-
-    position: relative;
-
-    width:
-        min(
-            100%,
-            860px
-        );
-
-    margin:
-        0 auto;
-
-    padding:
-
-        clamp(48px, 5vw, 68px)
-
-        clamp(36px, 6vw, 80px)
-
-        clamp(50px, 5vw, 70px);
-
-    overflow: hidden;
-
-    text-align: center;
-
-    border:
-        1px solid
-        var(--p02a-border);
-
-    border-radius:
-        24px;
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(13, 43, 79, 0.82),
-            rgba(7, 27, 55, 0.72)
-        );
-
-    box-shadow:
-        var(--p02a-shadow);
-
-    backdrop-filter:
-        blur(12px);
-
-    -webkit-backdrop-filter:
-        blur(12px);
-
-}
-
-
-.scorecard-intro-card::before {
-
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-
-    left: 50%;
-
-    width: 112px;
-
-    height: 3px;
+    height:
+        700px;
 
     transform:
         translateX(-50%);
 
-    border-radius:
-        0 0 4px 4px;
-
     background:
-        linear-gradient(
-            90deg,
-            var(--p02a-teal-dark),
-            var(--p02a-teal-bright)
-        );
-
-}
-
-
-.scorecard-intro-card::after {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: -1;
-
-    pointer-events: none;
-
-    background:
-
         radial-gradient(
-            circle at 50% 0%,
-            rgba(25, 184, 170, 0.055),
-            transparent 34%
+            circle,
+            rgba(20, 74, 132, 0.14) 0%,
+            transparent 70%
         );
 
-}
-
-
-/* ==========================================================================
-   SHARED EYEBROW
-   ========================================================================== */
-
-
-.scorecard-eyebrow {
-
-    margin:
-        0 0 24px;
-
-    font-family:
-        "Cinzel",
-        Georgia,
-        serif;
-
-    font-size:
-        0.72rem;
-
-    font-weight:
-        700;
-
-    line-height:
-        1.4;
-
-    letter-spacing:
-        0.22em;
-
-    text-transform:
-        uppercase;
-
-    color:
-        var(--p02a-gold-soft);
+    pointer-events:
+        none;
 
 }
 
 
-/* ==========================================================================
-   INTRO TITLE
-   ========================================================================== */
+/* =============================================================================
+ * MAIN SHELL
+ * =============================================================================
+ */
 
 
-.scorecard-intro-title {
+.page02-shell {
 
-    max-width:
-        720px;
+    position:
+        relative;
 
-    margin:
-        0 auto 24px;
-
-    font-family:
-        "Noto Sans Tamil",
-        sans-serif;
-
-    font-size:
-        clamp(
-            2rem,
-            4vw,
-            3.2rem
-        );
-
-    font-weight:
-        800;
-
-    line-height:
-        1.48;
-
-    letter-spacing:
-        -0.025em;
-
-    color:
-        var(--p02a-white);
-
-    text-wrap:
-        balance;
-
-}
-
-
-/* ==========================================================================
-   INTRO ENGLISH
-   ========================================================================== */
-
-
-.scorecard-intro-english {
-
-    margin:
-        0 auto 38px;
-
-}
-
-
-.scorecard-intro-english p {
-
-    margin:
-        0;
-
-    font-family:
-        "Cinzel",
-        Georgia,
-        serif;
-
-    font-size:
-        clamp(
-            0.72rem,
-            1vw,
-            0.86rem
-        );
-
-    font-weight:
-        700;
-
-    line-height:
-        1.75;
-
-    letter-spacing:
-        0.13em;
-
-    color:
-        var(--p02a-teal-bright);
-
-}
-
-
-.scorecard-intro-english p + p {
-
-    margin-top:
-        2px;
-
-}
-
-
-/* ==========================================================================
-   INTRO COPY
-   ========================================================================== */
-
-
-.scorecard-intro-copy {
+    z-index:
+        1;
 
     width:
         min(
-            100%,
-            650px
+            1420px,
+            calc(100% - 48px)
         );
 
     margin:
         0 auto;
 
+    padding:
+        64px 0 88px;
+
 }
 
 
-.scorecard-intro-copy p {
+/* =============================================================================
+ * INTRO / SCORECARD INSTRUCTION
+ * =============================================================================
+ */
+
+
+.page02a-intro {
+
+    width:
+        min(1080px, 100%);
 
     margin:
-        0;
+        0 auto 56px;
 
-    font-family:
-        "Noto Sans Tamil",
-        sans-serif;
+    text-align:
+        center;
+
+}
+
+
+.page02a-intro::before {
+
+    content:
+        "";
+
+    display:
+        block;
+
+    width:
+        116px;
+
+    height:
+        3px;
+
+    margin:
+        0 auto 42px;
+
+    border-radius:
+        999px;
+
+    background:
+        var(--page02a-teal);
+
+}
+
+
+.page02a-eyebrow {
+
+    margin:
+        0 0 28px;
+
+    color:
+        var(--page02a-gold);
+
+    font-size:
+        0.88rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.18em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.page02a-title {
+
+    max-width:
+        980px;
+
+    margin:
+        0 auto;
+
+    color:
+        var(--page02a-white);
 
     font-size:
         clamp(
-            1rem,
-            1.55vw,
-            1.15rem
+            2.4rem,
+            4.4vw,
+            4.7rem
         );
 
     font-weight:
-        500;
+        700;
 
     line-height:
-        2;
-
-    color:
-        var(--p02a-text);
-
-}
-
-
-.scorecard-intro-copy p + p {
-
-    margin-top:
-        18px;
-
-}
-
-
-/* ==========================================================================
-   INTRO SUPPORT
-   ========================================================================== */
-
-
-.scorecard-intro-support {
-
-    width:
-        min(
-            100%,
-            620px
-        );
-
-    margin:
-        32px auto 0;
-
-    padding-top:
-        27px;
-
-    border-top:
-        1px solid
-        var(--p02a-border-soft);
-
-}
-
-
-.scorecard-intro-support p {
-
-    margin:
-        0;
-
-    font-family:
-        "Cinzel",
-        Georgia,
-        serif;
-
-    font-size:
-        0.74rem;
-
-    font-weight:
-        600;
-
-    line-height:
-        1.8;
+        1.28;
 
     letter-spacing:
-        0.08em;
-
-    color:
-        var(--p02a-gold-soft);
+        -0.025em;
 
 }
 
 
-.scorecard-intro-support p + p {
-
-    margin-top:
-        7px;
-
-    font-family:
-        Arial,
-        sans-serif;
-
-    font-size:
-        0.89rem;
-
-    font-weight:
-        400;
-
-    letter-spacing:
-        0;
-
-    color:
-        var(--p02a-text-muted);
-
-}
-
-
-/* ==========================================================================
-   CALCULATION NOTE
-   ========================================================================== */
-
-
-.scorecard-calculation-note {
-
-    width:
-        min(
-            100%,
-            620px
-        );
+.page02a-title-en {
 
     margin:
-        30px auto 0;
+        28px 0 0;
 
-    padding:
-        19px 24px;
-
-    border:
-        1px solid
-        var(--p02a-teal-border);
-
-    border-radius:
-        12px;
-
-    background:
-        rgba(25, 184, 170, 0.055);
-
-}
-
-
-.scorecard-calculation-note p {
-
-    margin:
-        0;
-
-    font-family:
-        "Noto Sans Tamil",
-        sans-serif;
+    color:
+        var(--page02a-teal);
 
     font-size:
         0.95rem;
 
     font-weight:
-        600;
-
-    line-height:
-        1.75;
-
-    color:
-        rgba(255, 255, 255, 0.80);
-
-}
-
-
-.scorecard-calculation-note span {
-
-    display:
-        block;
-
-    margin-top:
-        6px;
-
-    font-family:
-        "Cinzel",
-        Georgia,
-        serif;
-
-    font-size:
-        0.62rem;
-
-    font-weight:
         700;
 
     line-height:
-        1.6;
+        1.8;
 
     letter-spacing:
-        0.09em;
+        0.12em;
 
-    color:
-        var(--p02a-text-muted);
-
-}
-
-
-/* ==========================================================================
-   INTRO ACTION
-   ========================================================================== */
-
-
-.page02-intro-action {
-
-    display:
-        flex;
-
-    justify-content:
-        center;
-
-    width:
-        100%;
-
-    margin-top:
-        clamp(
-            36px,
-            5vw,
-            52px
-        );
+    text-transform:
+        uppercase;
 
 }
 
 
-/* ==========================================================================
-   PRIMARY CTA
-   ========================================================================== */
+.page02a-description {
 
-
-.page02-primary-button {
-
-    position:
-        relative;
-
-    display:
-        inline-flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    gap:
-        4px;
-
-    width:
-        min(
-            100%,
-            430px
-        );
-
-    min-height:
-        70px;
+    max-width:
+        920px;
 
     margin:
-        0;
-
-    padding:
-        15px 34px;
-
-    border:
-        1px solid
-        rgba(68, 223, 206, 0.14);
-
-    border-radius:
-        10px;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            #19b8aa,
-            #0f9187
-        );
-
-    box-shadow:
-
-        0 16px 36px
-        rgba(7, 18, 36, 0.28),
-
-        0 8px 28px
-        rgba(15, 145, 135, 0.20);
+        34px auto 0;
 
     color:
-        #ffffff;
-
-    text-align:
-        center;
-
-    text-decoration:
-        none;
-
-    cursor:
-        pointer;
-
-    transition:
-
-        transform 180ms ease,
-
-        box-shadow 180ms ease,
-
-        filter 180ms ease,
-
-        opacity 180ms ease;
-
-    -webkit-appearance:
-        none;
-
-    appearance:
-        none;
-
-}
-
-
-.page02-primary-button:hover {
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-
-        0 20px 44px
-        rgba(7, 18, 36, 0.34),
-
-        0 10px 34px
-        rgba(15, 145, 135, 0.27);
-
-    filter:
-        brightness(1.045);
-
-}
-
-
-.page02-primary-button:active {
-
-    transform:
-        translateY(0);
-
-}
-
-
-.page02-primary-button:focus-visible {
-
-    outline:
-        3px solid
-        rgba(37, 200, 184, 0.38);
-
-    outline-offset:
-        4px;
-
-}
-
-
-.page02-primary-button:disabled {
-
-    cursor:
-        wait;
-
-    opacity:
-        0.62;
-
-    transform:
-        none;
-
-    filter:
-        none;
-
-}
-
-
-.page02-primary-button .button-primary {
-
-    display:
-        block;
-
-    font-family:
-        "Noto Sans Tamil",
-        sans-serif;
+        var(--page02a-text-soft);
 
     font-size:
-        1rem;
-
-    font-weight:
-        700;
+        1.32rem;
 
     line-height:
-        1.45;
-
-    color:
-        #ffffff;
+        1.9;
 
 }
 
 
-.page02-primary-button .button-secondary {
-
-    display:
-        block;
-
-    font-family:
-        "Cinzel",
-        Georgia,
-        serif;
-
-    font-size:
-        0.67rem;
-
-    font-weight:
-        700;
-
-    line-height:
-        1.35;
-
-    letter-spacing:
-        0.10em;
-
-    color:
-        rgba(255, 255, 255, 0.84);
-
-}
-
-
-/* ==========================================================================
-   KYC SCREEN
-   ========================================================================== */
-
-
-.page02-kyc-screen {
-
-    padding:
-
-        clamp(64px, 7vw, 104px)
-
-        0
-
-        clamp(94px, 9vw, 140px);
-
-}
-
-
-/* ==========================================================================
-   KYC HEADING
-   ========================================================================== */
-
-
-.kyc-heading {
-
-    width:
-        min(
-            100%,
-            820px
-        );
-
-    margin:
-        0 auto
-        clamp(
-            42px,
-            5vw,
-            62px
-        );
-
-    text-align:
-        center;
-
-}
-
-
-.kyc-heading .scorecard-eyebrow {
-
-    margin-bottom:
-        16px;
-
-}
-
-
-.kyc-title {
-
-    margin:
-        0;
-
-    font-family:
-        "Cinzel",
-        Georgia,
-        serif;
-
-    font-size:
-        clamp(
-            2.05rem,
-            4vw,
-            3.15rem
-        );
-
-    font-weight:
-        700;
-
-    line-height:
-        1.25;
-
-    letter-spacing:
-        0.035em;
-
-    color:
-        var(--p02a-white);
-
-}
-
-
-.kyc-title-english {
-
-    margin:
-        15px 0 0;
-
-    font-family:
-        "Cinzel",
-        Georgia,
-        serif;
-
-    font-size:
-        clamp(
-            0.68rem,
-            1vw,
-            0.82rem
-        );
-
-    font-weight:
-        700;
-
-    line-height:
-        1.6;
-
-    letter-spacing:
-        0.13em;
-
-    color:
-        var(--p02a-teal-bright);
-
-}
-
-
-.kyc-introduction {
-
-    width:
-        min(
-            100%,
-            680px
-        );
-
-    margin:
-        25px auto 0;
-
-    font-family:
-        "Noto Sans Tamil",
-        sans-serif;
-
-    font-size:
-        1rem;
-
-    font-weight:
-        400;
-
-    line-height:
-        1.95;
-
-    color:
-        var(--p02a-text-soft);
-
-}
-
-
-/* ==========================================================================
-   NEW THREE-CARD FORM ARCHITECTURE
-   ========================================================================== */
+/* =============================================================================
+ * FORM
+ * =============================================================================
+ */
 
 
 .kyc-form-three-card {
@@ -1184,13 +448,10 @@ body.page02a-body {
         column;
 
     gap:
-        28px;
+        30px;
 
     width:
-        min(
-            100%,
-            1000px
-        );
+        100%;
 
     margin:
         0 auto;
@@ -1198,9 +459,10 @@ body.page02a-body {
 }
 
 
-/* ==========================================================================
-   KYC SECTION CARD
-   ========================================================================== */
+/* =============================================================================
+ * KYC CARDS
+ * =============================================================================
+ */
 
 
 .kyc-section-card {
@@ -1208,65 +470,34 @@ body.page02a-body {
     position:
         relative;
 
-    width:
-        100%;
-
-    margin:
-        0;
-
     padding:
-
-        clamp(
-            32px,
-            4vw,
-            46px
-        )
-
-        clamp(
-            28px,
-            4.5vw,
-            52px
-        )
-
-        clamp(
-            36px,
-            4vw,
-            48px
-        );
-
-    overflow:
-        hidden;
+        42px 46px 48px;
 
     border:
         1px solid
-        var(--p02a-border);
+        var(--page02a-card-border);
 
     border-radius:
-        20px;
+        var(--page02a-radius);
 
     background:
-
         linear-gradient(
-            145deg,
-            rgba(12, 42, 78, 0.88),
-            rgba(8, 29, 58, 0.78)
+            135deg,
+            rgba(13, 51, 91, 0.86) 0%,
+            rgba(8, 37, 72, 0.76) 100%
         );
 
     box-shadow:
-        var(--p02a-shadow-soft);
-
-    backdrop-filter:
-        blur(10px);
-
-    -webkit-backdrop-filter:
-        blur(10px);
+        0 20px 60px
+        rgba(0, 0, 0, 0.10);
 
 }
 
 
 .kyc-section-card::before {
 
-    content: "";
+    content:
+        "";
 
     position:
         absolute;
@@ -1275,205 +506,110 @@ body.page02a-body {
         0;
 
     left:
-        0;
+        46px;
 
     width:
-        100%;
+        76px;
 
     height:
-        1px;
+        2px;
 
     background:
-
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(25, 184, 170, 0.48),
-            rgba(210, 173, 98, 0.26),
-            transparent
-        );
+        var(--page02a-teal);
 
 }
 
 
-.kyc-section-card::after {
-
-    content: "";
-
-    position:
-        absolute;
-
-    top:
-        -120px;
-
-    right:
-        -100px;
-
-    width:
-        280px;
-
-    height:
-        280px;
-
-    pointer-events:
-        none;
-
-    border-radius:
-        50%;
-
-    background:
-        rgba(25, 184, 170, 0.025);
-
-    filter:
-        blur(4px);
-
-}
+/* =============================================================================
+ * CARD HEADER
+ * =============================================================================
+ */
 
 
-/* ==========================================================================
-   CARD HEADING
-   ========================================================================== */
-
-
-.kyc-card-heading {
-
-    position:
-        relative;
-
-    z-index:
-        1;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    gap:
-        18px;
+.kyc-card-header {
 
     margin:
-        0 0 32px;
-
-    padding:
-        0 0 22px;
-
-    border-bottom:
-        1px solid
-        var(--p02a-border-soft);
+        0 0 34px;
 
 }
 
 
 .kyc-card-number {
 
-    flex:
-        0 0 auto;
+    margin:
+        0 0 9px;
 
-    font-family:
-        "Cinzel",
-        Georgia,
-        serif;
+    color:
+        var(--page02a-teal);
 
     font-size:
-        0.62rem;
+        0.74rem;
 
     font-weight:
         700;
 
-    line-height:
-        1.3;
-
     letter-spacing:
-        0.15em;
+        0.18em;
 
-    color:
-        var(--p02a-teal-bright);
+    text-transform:
+        uppercase;
 
 }
 
 
 .kyc-card-title {
 
-    position:
-        relative;
-
     margin:
         0;
 
-    padding-left:
-        18px;
-
-    font-family:
-        "Cinzel",
-        Georgia,
-        serif;
+    color:
+        var(--page02a-white);
 
     font-size:
-        clamp(
-            1rem,
-            1.7vw,
-            1.25rem
-        );
+        1.45rem;
 
     font-weight:
         700;
 
     line-height:
-        1.4;
+        1.35;
 
-    letter-spacing:
-        0.09em;
+}
+
+
+.kyc-card-title-en {
+
+    display:
+        block;
+
+    margin-top:
+        7px;
 
     color:
-        var(--p02a-ivory);
+        var(--page02a-gold);
+
+    font-size:
+        0.75rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.13em;
+
+    text-transform:
+        uppercase;
 
 }
 
 
-.kyc-card-title::before {
-
-    content: "";
-
-    position:
-        absolute;
-
-    top:
-        50%;
-
-    left:
-        0;
-
-    width:
-        1px;
-
-    height:
-        24px;
-
-    transform:
-        translateY(-50%);
-
-    background:
-        var(--p02a-gold);
-
-    opacity:
-        0.58;
-
-}
-
-
-/* ==========================================================================
-   CARD FIELD GRID
-   ========================================================================== */
+/* =============================================================================
+ * CARD GRID
+ * =============================================================================
+ */
 
 
 .kyc-card-grid {
-
-    position:
-        relative;
-
-    z-index:
-        1;
 
     display:
         grid;
@@ -1484,14 +620,8 @@ body.page02a-body {
             minmax(0, 1fr)
         );
 
-    column-gap:
-        28px;
-
-    row-gap:
-        30px;
-
-    width:
-        100%;
+    gap:
+        34px 34px;
 
 }
 
@@ -1499,15 +629,6 @@ body.page02a-body {
 .kyc-field {
 
     min-width:
-        0;
-
-    margin:
-        0;
-
-    padding:
-        0;
-
-    border:
         0;
 
 }
@@ -1521,9 +642,10 @@ body.page02a-body {
 }
 
 
-/* ==========================================================================
-   LABELS
-   ========================================================================== */
+/* =============================================================================
+ * FIELD LABELS
+ * =============================================================================
+ */
 
 
 .kyc-label {
@@ -1532,125 +654,116 @@ body.page02a-body {
         block;
 
     margin:
-        0 0 10px;
-
-    padding:
-        0;
-
-    cursor:
-        pointer;
+        0 0 13px;
 
 }
 
 
-legend.kyc-label {
-
-    width:
-        100%;
-
-}
-
-
-.kyc-label-tamil {
+.kyc-label-ta {
 
     display:
         block;
 
-    font-family:
-        "Noto Sans Tamil",
-        sans-serif;
+    color:
+        var(--page02a-white);
 
     font-size:
-        0.93rem;
+        1.08rem;
 
     font-weight:
-        600;
+        650;
 
     line-height:
-        1.55;
-
-    color:
-        rgba(255, 255, 255, 0.88);
+        1.35;
 
 }
 
 
-.kyc-label-english {
+.kyc-label-en {
 
     display:
         block;
 
     margin-top:
-        4px;
+        5px;
 
-    font-family:
-        "Cinzel",
-        Georgia,
-        serif;
+    color:
+        var(--page02a-gold);
 
     font-size:
-        0.57rem;
+        0.70rem;
 
     font-weight:
         700;
 
     line-height:
-        1.45;
+        1.2;
 
     letter-spacing:
         0.10em;
 
-    color:
-        var(--p02a-gold-soft);
+    text-transform:
+        uppercase;
 
 }
 
 
-/* ==========================================================================
-   TEXT / NUMBER / EMAIL / TEL INPUTS
-   ========================================================================== */
+/* =============================================================================
+ * INPUTS + SELECTS
+ * =============================================================================
+ *
+ * KEY VISUAL REFINEMENT
+ *
+ * Every control receives:
+ *
+ *      • thin 1px light resting border
+ *      • stronger light border on hover
+ *      • teal border on focus
+ *      • restrained focus halo
+ *
+ * This makes controls clearly identifiable without turning the form
+ * into a bright outlined grid.
+ *
+ * =============================================================================
+ */
 
 
-.kyc-input {
+.kyc-input,
+.kyc-select {
 
     display:
         block;
 
+    box-sizing:
+        border-box;
+
     width:
         100%;
 
-    min-width:
-        0;
-
-    height:
-        58px;
-
-    margin:
-        0;
+    min-height:
+        64px;
 
     padding:
-        0 17px;
+        0 20px;
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.13);
+        var(--page02a-input-border);
 
     border-radius:
-        9px;
+        var(--page02a-control-radius);
 
     outline:
         none;
 
     background:
-        rgba(4, 20, 41, 0.48);
+        var(--page02a-control-bg);
 
     color:
-        var(--p02a-white);
+        var(--page02a-white);
 
     font-family:
-        "Noto Sans Tamil",
-        Arial,
-        sans-serif;
+        inherit;
 
     font-size:
         1rem;
@@ -1661,56 +774,44 @@ legend.kyc-label {
     line-height:
         1.4;
 
-    caret-color:
-        var(--p02a-teal-bright);
-
     box-shadow:
-        inset 0 1px 0
-        rgba(255, 255, 255, 0.018);
+        inset 0 0 0 1px
+        rgba(255, 255, 255, 0.015);
 
     transition:
-
         border-color 160ms ease,
-
-        background 160ms ease,
-
+        background-color 160ms ease,
         box-shadow 160ms ease;
 
-    -webkit-appearance:
-        none;
+}
 
-    appearance:
-        none;
+
+.kyc-input:hover,
+.kyc-select:hover {
+
+    border-color:
+        var(--page02a-input-border-hover);
+
+    background:
+        var(--page02a-control-bg-hover);
 
 }
 
 
-.kyc-input:hover {
+.kyc-input:focus,
+.kyc-input:focus-visible,
+.kyc-select:focus,
+.kyc-select:focus-visible {
 
     border-color:
-        rgba(255, 255, 255, 0.22);
+        var(--page02a-input-border-focus);
 
     background:
-        rgba(5, 23, 46, 0.58);
-
-}
-
-
-.kyc-input:focus {
-
-    border-color:
-        rgba(37, 200, 184, 0.76);
-
-    background:
-        rgba(6, 29, 55, 0.74);
+        var(--page02a-control-bg-focus);
 
     box-shadow:
-
         0 0 0 3px
-        rgba(25, 184, 170, 0.10),
-
-        inset 0 1px 0
-        rgba(255, 255, 255, 0.025);
+        var(--page02a-teal-soft);
 
 }
 
@@ -1718,17 +819,77 @@ legend.kyc-label {
 .kyc-input::placeholder {
 
     color:
-        rgba(255, 255, 255, 0.25);
+        rgba(247, 248, 251, 0.40);
+
+    opacity:
+        1;
 
 }
 
 
-/* ==========================================================================
-   NUMBER INPUT
-   ========================================================================== */
+/* =============================================================================
+ * AUTOFILL
+ * =============================================================================
+ */
+
+
+.kyc-input:-webkit-autofill,
+.kyc-input:-webkit-autofill:hover,
+.kyc-input:-webkit-autofill:focus {
+
+    -webkit-text-fill-color:
+        var(--page02a-white);
+
+    -webkit-box-shadow:
+        0 0 0 1000px
+        #082343
+        inset;
+
+    caret-color:
+        var(--page02a-white);
+
+    border:
+        1px solid
+        var(--page02a-input-border);
+
+}
+
+
+/* =============================================================================
+ * SELECT
+ * =============================================================================
+ */
+
+
+.kyc-select {
+
+    cursor:
+        pointer;
+
+}
+
+
+.kyc-select option {
+
+    background:
+        #071d3a;
+
+    color:
+        #ffffff;
+
+}
+
+
+/* =============================================================================
+ * NUMBER INPUT
+ * =============================================================================
+ */
 
 
 .kyc-input[type="number"] {
+
+    appearance:
+        textfield;
 
     -moz-appearance:
         textfield;
@@ -1748,79 +909,13 @@ legend.kyc-label {
 }
 
 
-/* ==========================================================================
-   SELECT CONTROLS
-   ========================================================================== */
+/* =============================================================================
+ * SEGMENTED CHOICE CONTROLS
+ * =============================================================================
+ */
 
 
-.kyc-select {
-
-    padding-right:
-        48px;
-
-    cursor:
-        pointer;
-
-    background-color:
-        rgba(4, 20, 41, 0.48);
-
-    background-image:
-
-        linear-gradient(
-            45deg,
-            transparent 50%,
-            rgba(255, 255, 255, 0.58) 50%
-        ),
-
-        linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.58) 50%,
-            transparent 50%
-        );
-
-    background-position:
-
-        calc(100% - 20px)
-        calc(50% - 2px),
-
-        calc(100% - 15px)
-        calc(50% - 2px);
-
-    background-size:
-        5px 5px,
-        5px 5px;
-
-    background-repeat:
-        no-repeat;
-
-}
-
-
-.kyc-select option {
-
-    background:
-        #0a2445;
-
-    color:
-        #ffffff;
-
-}
-
-
-/* ==========================================================================
-   RADIO / SEGMENTED CHOICE CONTROLS
-   ========================================================================== */
-
-
-.kyc-choice-field {
-
-    min-width:
-        0;
-
-}
-
-
-.kyc-choice-group {
+.kyc-choice {
 
     display:
         grid;
@@ -1831,28 +926,14 @@ legend.kyc-label {
             minmax(0, 1fr)
         );
 
-    gap:
-        8px;
-
     width:
         100%;
 
-}
+    min-height:
+        64px;
 
-
-.kyc-choice {
-
-    position:
-        relative;
-
-    display:
-        block;
-
-    min-width:
-        0;
-
-    cursor:
-        pointer;
+    border-radius:
+        var(--page02a-control-radius);
 
 }
 
@@ -1868,28 +949,25 @@ legend.kyc-label {
     height:
         1px;
 
-    margin:
-        -1px;
-
-    padding:
+    opacity:
         0;
 
-    overflow:
-        hidden;
+    pointer-events:
+        none;
 
-    clip:
-        rect(
-            0,
-            0,
-            0,
-            0
-        );
+}
 
-    white-space:
-        nowrap;
 
-    border:
+.kyc-choice label {
+
+    display:
+        flex;
+
+    min-width:
         0;
+
+    cursor:
+        pointer;
 
 }
 
@@ -1905,122 +983,147 @@ legend.kyc-label {
     justify-content:
         center;
 
+    box-sizing:
+        border-box;
+
     width:
         100%;
 
     min-height:
-        58px;
+        64px;
 
     padding:
-        10px 12px;
+        12px 18px;
 
-    border:
+    border-top:
         1px solid
-        rgba(255, 255, 255, 0.13);
+        var(--page02a-input-border);
 
-    border-radius:
-        9px;
+    border-bottom:
+        1px solid
+        var(--page02a-input-border);
+
+    border-left:
+        1px solid
+        var(--page02a-input-border);
 
     background:
-        rgba(4, 20, 41, 0.48);
+        var(--page02a-control-bg);
 
     color:
-        rgba(255, 255, 255, 0.72);
-
-    font-family:
-        "Noto Sans Tamil",
-        Arial,
-        sans-serif;
+        rgba(247, 248, 251, 0.76);
 
     font-size:
-        0.9rem;
+        0.98rem;
 
     font-weight:
-        600;
-
-    line-height:
-        1.35;
+        650;
 
     text-align:
         center;
 
-    user-select:
-        none;
-
     transition:
-
         border-color 160ms ease,
-
-        background 160ms ease,
-
+        background-color 160ms ease,
         color 160ms ease,
-
-        box-shadow 160ms ease,
-
-        transform 160ms ease;
+        box-shadow 160ms ease;
 
 }
 
 
-.kyc-choice:hover span {
+.kyc-choice label:first-child span {
+
+    border-radius:
+        var(--page02a-control-radius)
+        0
+        0
+        var(--page02a-control-radius);
+
+}
+
+
+.kyc-choice label:last-child span {
+
+    border-right:
+        1px solid
+        var(--page02a-input-border);
+
+    border-radius:
+        0
+        var(--page02a-control-radius)
+        var(--page02a-control-radius)
+        0;
+
+}
+
+
+.kyc-choice label:hover span {
 
     border-color:
-        rgba(25, 184, 170, 0.36);
+        var(--page02a-input-border-hover);
 
     background:
-        rgba(25, 184, 170, 0.055);
+        var(--page02a-control-bg-hover);
 
     color:
-        rgba(255, 255, 255, 0.90);
+        var(--page02a-white);
 
 }
 
 
 .kyc-choice input:checked + span {
 
+    position:
+        relative;
+
+    z-index:
+        1;
+
     border-color:
-        rgba(37, 200, 184, 0.72);
+        rgba(25, 183, 173, 0.76);
 
     background:
-
         linear-gradient(
             135deg,
-            rgba(25, 184, 170, 0.20),
-            rgba(15, 145, 135, 0.11)
+            rgba(16, 112, 128, 0.78),
+            rgba(13, 78, 105, 0.88)
         );
 
     color:
         #ffffff;
 
     box-shadow:
-
         inset 0 0 0 1px
-        rgba(37, 200, 184, 0.06),
-
-        0 0 0 2px
-        rgba(25, 184, 170, 0.055);
+        rgba(25, 183, 173, 0.16);
 
 }
 
 
 .kyc-choice input:focus-visible + span {
 
-    outline:
-        3px solid
-        rgba(37, 200, 184, 0.28);
+    position:
+        relative;
 
-    outline-offset:
-        3px;
+    z-index:
+        2;
+
+    border-color:
+        var(--page02a-input-border-focus);
+
+    box-shadow:
+        0 0 0 3px
+        var(--page02a-teal-soft);
 
 }
 
 
-/* Preferred language has only two choices. */
+/* =============================================================================
+ * TWO-OPTION SEGMENTED CONTROLS
+ * =============================================================================
+ */
 
 
-.kyc-choice-group:has(
-    input[name="preferredLanguage"]
-) {
+.kyc-choice-two {
 
     grid-template-columns:
         repeat(
@@ -2031,92 +1134,90 @@ legend.kyc-label {
 }
 
 
-/* ==========================================================================
-   AUTOFILL
-   ========================================================================== */
+/* =============================================================================
+ * VALIDATION STATES
+ * =============================================================================
+ */
 
 
-.kyc-input:-webkit-autofill,
-.kyc-input:-webkit-autofill:hover,
-.kyc-input:-webkit-autofill:focus {
-
-    -webkit-text-fill-color:
-        #ffffff;
-
-    -webkit-box-shadow:
-
-        0 0 0 1000px
-        #0a2445
-
-        inset;
-
-    caret-color:
-        var(--p02a-teal-bright);
-
-    transition:
-
-        background-color
-        9999s ease-in-out
-        0s;
-
-}
-
-
-/* ==========================================================================
-   VALID / INVALID SUPPORT
-
-   We deliberately avoid showing red borders before the visitor attempts
-   submission. page02a.js owns explicit error messaging.
-   ========================================================================== */
-
-
-.kyc-input[aria-invalid="true"] {
+.kyc-input[aria-invalid="true"],
+.kyc-select[aria-invalid="true"] {
 
     border-color:
-        rgba(255, 116, 116, 0.62);
+        var(--page02a-error-border);
 
     box-shadow:
-        0 0 0 3px
-        rgba(255, 116, 116, 0.075);
+        0 0 0 2px
+        rgba(255, 112, 112, 0.08);
 
 }
 
 
-/* ==========================================================================
-   FEEDBACK MESSAGES
-   ========================================================================== */
-
-
-.kyc-message {
-
-    width:
-        min(
-            100%,
-            1000px
-        );
+.kyc-field-error {
 
     margin:
-        4px auto 0;
+        8px 0 0;
 
-    padding:
-        16px 20px;
-
-    border-radius:
-        10px;
-
-    font-family:
-        "Noto Sans Tamil",
-        Arial,
-        sans-serif;
+    color:
+        var(--page02a-error);
 
     font-size:
-        0.92rem;
+        0.80rem;
 
     font-weight:
         600;
 
     line-height:
-        1.7;
+        1.45;
+
+}
+
+
+/* =============================================================================
+ * FORM STATUS / MESSAGE
+ * =============================================================================
+ */
+
+
+.page02a-status,
+.kyc-status {
+
+    display:
+        none;
+
+    width:
+        100%;
+
+    box-sizing:
+        border-box;
+
+    margin:
+        10px 0 0;
+
+    padding:
+        18px 24px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.12);
+
+    border-radius:
+        12px;
+
+    background:
+        rgba(5, 25, 50, 0.58);
+
+    color:
+        var(--page02a-text);
+
+    font-size:
+        0.95rem;
+
+    font-weight:
+        600;
+
+    line-height:
+        1.5;
 
     text-align:
         center;
@@ -2124,146 +1225,374 @@ legend.kyc-label {
 }
 
 
-.kyc-message[hidden] {
+.page02a-status.is-visible,
+.kyc-status.is-visible {
 
     display:
-        none !important;
+        block;
 
 }
 
 
-.kyc-error {
+.page02a-status.is-error,
+.kyc-status.is-error {
 
-    border:
-        1px solid
-        rgba(255, 116, 116, 0.30);
+    display:
+        block;
+
+    border-color:
+        rgba(255, 112, 112, 0.40);
 
     background:
-        rgba(108, 25, 35, 0.18);
+        rgba(96, 30, 42, 0.22);
 
     color:
-        #ffc0c0;
+        #ffc4c4;
 
 }
 
 
-.kyc-success {
+.page02a-status.is-success,
+.kyc-status.is-success {
 
-    border:
-        1px solid
-        rgba(37, 200, 184, 0.32);
+    display:
+        block;
+
+    border-color:
+        rgba(25, 183, 173, 0.38);
 
     background:
-        rgba(25, 184, 170, 0.085);
+        rgba(25, 183, 173, 0.10);
 
     color:
-        #9cebe2;
+        #d9fffb;
 
 }
 
 
-/* ==========================================================================
-   FINAL SCORECARD ACTION
-   ========================================================================== */
+/* =============================================================================
+ * CTA AREA
+ * =============================================================================
+ */
 
 
-.kyc-final-action {
+.page02a-cta-wrap {
 
     display:
         flex;
 
-    justify-content:
+    flex-direction:
+        column;
+
+    align-items:
         center;
 
     width:
         100%;
 
     margin:
-        clamp(
-            14px,
-            2vw,
-            22px
-        )
-        auto 0;
-
-    padding-top:
-        clamp(
-            18px,
-            2vw,
-            28px
-        );
+        52px auto 0;
 
 }
 
 
-.kyc-scorecard-button {
+.page02a-cta {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
 
     width:
         min(
-            100%,
-            520px
+            620px,
+            100%
         );
 
     min-height:
-        78px;
+        100px;
 
     padding:
-        16px 34px;
+        20px 30px;
+
+    border:
+        1px solid
+        rgba(25, 183, 173, 0.74);
 
     border-radius:
-        11px;
+        12px;
 
-    box-shadow:
-
-        0 22px 48px
-        rgba(0, 0, 0, 0.25),
-
-        0 12px 34px
-        rgba(15, 145, 135, 0.24);
-
-}
-
-
-.kyc-scorecard-button .button-primary {
-
-    font-size:
-        clamp(
-            1rem,
-            1.6vw,
-            1.13rem
+    background:
+        linear-gradient(
+            135deg,
+            #1bb9af,
+            #159c98
         );
 
+    color:
+        #ffffff;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 20px 46px
+        rgba(0, 0, 0, 0.24),
+        0 0 34px
+        rgba(25, 183, 173, 0.11);
+
+    transition:
+        transform 160ms ease,
+        box-shadow 160ms ease,
+        filter 160ms ease;
+
 }
 
 
-.kyc-scorecard-button .button-secondary {
+.page02a-cta:hover {
 
-    margin-top:
-        2px;
+    transform:
+        translateY(-2px);
+
+    filter:
+        brightness(1.04);
+
+    box-shadow:
+        0 24px 54px
+        rgba(0, 0, 0, 0.28),
+        0 0 42px
+        rgba(25, 183, 173, 0.16);
+
+}
+
+
+.page02a-cta:focus-visible {
+
+    outline:
+        2px solid
+        rgba(255, 255, 255, 0.88);
+
+    outline-offset:
+        4px;
+
+}
+
+
+.page02a-cta:active {
+
+    transform:
+        translateY(0);
+
+}
+
+
+.page02a-cta:disabled {
+
+    cursor:
+        wait;
+
+    opacity:
+        0.68;
+
+    transform:
+        none;
+
+}
+
+
+.page02a-cta-ta {
+
+    display:
+        block;
+
+    color:
+        #ffffff;
 
     font-size:
-        0.69rem;
+        1.24rem;
 
-    letter-spacing:
-        0.11em;
+    font-weight:
+        700;
+
+    line-height:
+        1.35;
+
+    text-align:
+        center;
 
 }
 
 
-/* ==========================================================================
-   TABLET — 1000
-   ========================================================================== */
+.page02a-cta-en {
+
+    display:
+        block;
+
+    margin-top:
+        6px;
+
+    color:
+        rgba(255, 255, 255, 0.92);
+
+    font-size:
+        0.78rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.08em;
+
+    line-height:
+        1.3;
+
+    text-align:
+        center;
+
+    text-transform:
+        uppercase;
+
+}
 
 
-@media (max-width: 1000px) {
+/* =============================================================================
+ * LOADING STATE
+ * =============================================================================
+ */
 
 
-    .page02a .page02-shell {
+.page02a-cta.is-loading {
+
+    pointer-events:
+        none;
+
+    opacity:
+        0.78;
+
+}
+
+
+.page02a-cta.is-loading::after {
+
+    content:
+        "";
+
+    width:
+        16px;
+
+    height:
+        16px;
+
+    margin-top:
+        10px;
+
+    border:
+        2px solid
+        rgba(255, 255, 255, 0.34);
+
+    border-top-color:
+        #ffffff;
+
+    border-radius:
+        50%;
+
+    animation:
+        page02a-spin 700ms linear infinite;
+
+}
+
+
+@keyframes page02a-spin {
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
+}
+
+
+/* =============================================================================
+ * SUPPORT FOR NATIVE INPUT / SELECT SELECTORS
+ * =============================================================================
+ *
+ * These selectors intentionally provide the same visual treatment if
+ * individual Page02A controls do not carry .kyc-input / .kyc-select.
+ *
+ * They are scoped strictly to Page02A.
+ *
+ * =============================================================================
+ */
+
+
+.page02a input[type="text"],
+.page02a input[type="tel"],
+.page02a input[type="email"],
+.page02a input[type="number"],
+.page02a input[type="search"],
+.page02a select {
+
+    box-sizing:
+        border-box;
+
+    border:
+        1px solid
+        var(--page02a-input-border);
+
+}
+
+
+.page02a input[type="text"]:hover,
+.page02a input[type="tel"]:hover,
+.page02a input[type="email"]:hover,
+.page02a input[type="number"]:hover,
+.page02a input[type="search"]:hover,
+.page02a select:hover {
+
+    border-color:
+        var(--page02a-input-border-hover);
+
+}
+
+
+.page02a input[type="text"]:focus,
+.page02a input[type="tel"]:focus,
+.page02a input[type="email"]:focus,
+.page02a input[type="number"]:focus,
+.page02a input[type="search"]:focus,
+.page02a select:focus {
+
+    border-color:
+        var(--page02a-input-border-focus);
+
+}
+
+
+/* =============================================================================
+ * RESPONSIVE — MEDIUM DESKTOP / TABLET LANDSCAPE
+ * =============================================================================
+ */
+
+
+@media (
+    max-width: 1180px
+) {
+
+    .page02-shell {
 
         width:
             min(
-                100%,
-                calc(100% - 40px)
+                100% - 36px,
+                1120px
             );
 
     }
@@ -2272,42 +1601,77 @@ legend.kyc-label {
     .kyc-section-card {
 
         padding:
-            36px 34px 40px;
+            38px 36px 42px;
 
     }
 
 
-    .kyc-card-grid {
+    .kyc-section-card::before {
 
-        column-gap:
-            22px;
+        left:
+            36px;
 
     }
-
 
 }
 
 
-/* ==========================================================================
-   TABLET — 820
-   ========================================================================== */
+/* =============================================================================
+ * RESPONSIVE — TABLET
+ * =============================================================================
+ */
 
 
-@media (max-width: 820px) {
+@media (
+    max-width: 860px
+) {
 
+    .page02-shell {
 
-    .scorecard-intro-card {
+        width:
+            min(
+                100% - 28px,
+                820px
+            );
 
         padding:
-            46px 40px 50px;
+            46px 0 70px;
 
     }
 
 
-    .kyc-form-three-card {
+    .page02a-intro {
 
-        gap:
-            24px;
+        margin-bottom:
+            42px;
+
+    }
+
+
+    .page02a-intro::before {
+
+        margin-bottom:
+            32px;
+
+    }
+
+
+    .page02a-title {
+
+        font-size:
+            clamp(
+                2.1rem,
+                7vw,
+                3.5rem
+            );
+
+    }
+
+
+    .page02a-description {
+
+        font-size:
+            1.12rem;
 
     }
 
@@ -2320,350 +1684,10 @@ legend.kyc-label {
     }
 
 
-    .kyc-card-grid {
+    .kyc-section-card::before {
 
-        column-gap:
-            20px;
-
-        row-gap:
-            26px;
-
-    }
-
-
-    .kyc-choice span {
-
-        padding-left:
-            8px;
-
-        padding-right:
-            8px;
-
-        font-size:
-            0.84rem;
-
-    }
-
-
-}
-
-
-/* ==========================================================================
-   MOBILE — 768
-
-   Critical full-width protection.
-   ========================================================================== */
-
-
-@media (max-width: 768px) {
-
-
-    .page02a,
-
-    .page02a section,
-
-    .page02a .page02-screen {
-
-        width:
-            100%;
-
-        max-width:
-            100%;
-
-        margin-left:
-            0;
-
-        margin-right:
-            0;
-
-    }
-
-
-    .page02a .page02-shell {
-
-        width:
-            100%;
-
-        max-width:
-            100%;
-
-        margin:
-            0;
-
-        padding:
-            0 18px;
-
-    }
-
-
-    /* ----------------------------------------------------------------------
-       INTRO
-       ---------------------------------------------------------------------- */
-
-
-    .page02-intro-screen {
-
-        padding-top:
-            50px;
-
-        padding-bottom:
-            76px;
-
-    }
-
-
-    .scorecard-intro-card {
-
-        width:
-            100%;
-
-        padding:
-            38px 22px 40px;
-
-        border-radius:
-            17px;
-
-    }
-
-
-    .scorecard-eyebrow {
-
-        margin-bottom:
-            18px;
-
-        font-size:
-            0.61rem;
-
-        letter-spacing:
-            0.16em;
-
-    }
-
-
-    .scorecard-intro-title {
-
-        margin-bottom:
-            20px;
-
-        font-size:
-            clamp(
-                1.7rem,
-                7vw,
-                2.15rem
-            );
-
-        line-height:
-            1.52;
-
-    }
-
-
-    .scorecard-intro-english {
-
-        margin-bottom:
+        left:
             28px;
-
-    }
-
-
-    .scorecard-intro-english p {
-
-        font-size:
-            0.65rem;
-
-        line-height:
-            1.7;
-
-        letter-spacing:
-            0.085em;
-
-    }
-
-
-    .scorecard-intro-copy p {
-
-        font-size:
-            0.95rem;
-
-        line-height:
-            1.9;
-
-    }
-
-
-    .scorecard-intro-copy p + p {
-
-        margin-top:
-            14px;
-
-    }
-
-
-    .scorecard-intro-support {
-
-        margin-top:
-            24px;
-
-        padding-top:
-            22px;
-
-    }
-
-
-    .scorecard-calculation-note {
-
-        margin-top:
-            24px;
-
-        padding:
-            16px 14px;
-
-    }
-
-
-    .page02-intro-action {
-
-        margin-top:
-            30px;
-
-    }
-
-
-    .page02-primary-button {
-
-        width:
-            100%;
-
-        max-width:
-            430px;
-
-        min-height:
-            65px;
-
-        padding:
-            14px 20px;
-
-    }
-
-
-    /* ----------------------------------------------------------------------
-       KYC
-       ---------------------------------------------------------------------- */
-
-
-    .page02-kyc-screen {
-
-        padding-top:
-            48px;
-
-        padding-bottom:
-            82px;
-
-    }
-
-
-    .kyc-heading {
-
-        margin-bottom:
-            34px;
-
-    }
-
-
-    .kyc-title {
-
-        font-size:
-            clamp(
-                1.9rem,
-                8vw,
-                2.5rem
-            );
-
-    }
-
-
-    .kyc-title-english {
-
-        font-size:
-            0.63rem;
-
-        letter-spacing:
-            0.10em;
-
-    }
-
-
-    .kyc-introduction {
-
-        margin-top:
-            20px;
-
-        font-size:
-            0.94rem;
-
-        line-height:
-            1.85;
-
-    }
-
-
-    .kyc-form-three-card {
-
-        gap:
-            20px;
-
-    }
-
-
-    .kyc-section-card {
-
-        width:
-            100%;
-
-        padding:
-            28px 20px 32px;
-
-        border-radius:
-            16px;
-
-    }
-
-
-    .kyc-card-heading {
-
-        gap:
-            12px;
-
-        margin-bottom:
-            26px;
-
-        padding-bottom:
-            18px;
-
-    }
-
-
-    .kyc-card-number {
-
-        font-size:
-            0.55rem;
-
-        letter-spacing:
-            0.11em;
-
-    }
-
-
-    .kyc-card-title {
-
-        padding-left:
-            12px;
-
-        font-size:
-            0.92rem;
-
-        letter-spacing:
-            0.065em;
 
     }
 
@@ -2671,13 +1695,10 @@ legend.kyc-label {
     .kyc-card-grid {
 
         grid-template-columns:
-            minmax(
-                0,
-                1fr
-            );
+            1fr;
 
-        row-gap:
-            24px;
+        gap:
+            28px;
 
     }
 
@@ -2689,126 +1710,104 @@ legend.kyc-label {
 
     }
 
-
-    .kyc-input {
-
-        height:
-            56px;
-
-        font-size:
-            16px;
-
-    }
-
-
-    .kyc-choice span {
-
-        min-height:
-            56px;
-
-        font-size:
-            0.86rem;
-
-    }
-
-
-    .kyc-final-action {
-
-        padding-top:
-            18px;
-
-    }
-
-
-    .kyc-scorecard-button {
-
-        width:
-            100%;
-
-        max-width:
-            520px;
-
-        min-height:
-            74px;
-
-    }
-
-
 }
 
 
-/* ==========================================================================
-   SMALL MOBILE — 520
-   ========================================================================== */
+/* =============================================================================
+ * RESPONSIVE — MOBILE
+ * =============================================================================
+ */
 
 
-@media (max-width: 520px) {
+@media (
+    max-width: 600px
+) {
 
+    .page02-shell {
 
-    .page02a .page02-shell {
-
-        padding-left:
-            14px;
-
-        padding-right:
-            14px;
-
-    }
-
-
-    .page02-intro-screen {
-
-        padding-top:
-            38px;
-
-        padding-bottom:
-            64px;
-
-    }
-
-
-    .scorecard-intro-card {
+        width:
+            calc(100% - 20px);
 
         padding:
-            34px 17px 36px;
-
-        border-radius:
-            14px;
+            34px 0 54px;
 
     }
 
 
-    .scorecard-intro-title {
+    .page02a-intro {
+
+        margin-bottom:
+            34px;
+
+    }
+
+
+    .page02a-intro::before {
+
+        width:
+            88px;
+
+        margin-bottom:
+            26px;
+
+    }
+
+
+    .page02a-eyebrow {
+
+        margin-bottom:
+            20px;
 
         font-size:
-            1.6rem;
+            0.72rem;
 
     }
 
 
-    .scorecard-intro-copy p {
+    .page02a-title {
 
         font-size:
-            0.9rem;
+            clamp(
+                1.85rem,
+                9vw,
+                2.75rem
+            );
+
+        line-height:
+            1.34;
 
     }
 
 
-    .scorecard-calculation-note {
+    .page02a-title-en {
 
-        padding:
-            14px 12px;
+        margin-top:
+            20px;
+
+        font-size:
+            0.76rem;
 
     }
 
 
-    .page02-kyc-screen {
+    .page02a-description {
 
-        padding-top:
-            38px;
+        margin-top:
+            24px;
 
-        padding-bottom:
-            68px;
+        font-size:
+            1rem;
+
+        line-height:
+            1.75;
+
+    }
+
+
+    .kyc-form-three-card {
+
+        gap:
+            22px;
 
     }
 
@@ -2816,7 +1815,7 @@ legend.kyc-label {
     .kyc-section-card {
 
         padding:
-            25px 16px 28px;
+            30px 20px 32px;
 
         border-radius:
             14px;
@@ -2824,107 +1823,57 @@ legend.kyc-label {
     }
 
 
-    .kyc-card-heading {
+    .kyc-section-card::before {
 
-        align-items:
-            flex-start;
+        left:
+            20px;
 
-        flex-direction:
-            column;
+        width:
+            60px;
 
-        gap:
-            7px;
+    }
+
+
+    .kyc-card-header {
+
+        margin-bottom:
+            28px;
 
     }
 
 
     .kyc-card-title {
 
-        padding-left:
-            0;
-
         font-size:
-            0.9rem;
+            1.25rem;
 
     }
 
 
-    .kyc-card-title::before {
-
-        display:
-            none;
-
-    }
-
-
-    .kyc-label-tamil {
-
-        font-size:
-            0.87rem;
-
-    }
-
-
-    .kyc-input {
-
-        height:
-            54px;
-
-    }
-
-
-    /*
-     * Keep 3-option controls usable on narrow screens.
-     */
-
-
-    .kyc-choice-group {
-
-        grid-template-columns:
-            1fr;
+    .kyc-card-grid {
 
         gap:
-            8px;
+            24px;
 
     }
 
 
-    .kyc-choice-group:has(
-        input[name="preferredLanguage"]
-    ) {
+    .kyc-label-ta {
 
-        grid-template-columns:
-            repeat(
-                2,
-                minmax(0, 1fr)
-            );
+        font-size:
+            1rem;
 
     }
 
 
-    .kyc-choice span {
+    .kyc-input,
+    .kyc-select {
 
         min-height:
-            52px;
+            58px;
 
-    }
-
-
-    .kyc-scorecard-button {
-
-        min-height:
-            72px;
-
-        padding-left:
-            16px;
-
-        padding-right:
-            16px;
-
-    }
-
-
-    .kyc-scorecard-button .button-primary {
+        padding:
+            0 16px;
 
         font-size:
             0.96rem;
@@ -2932,114 +1881,116 @@ legend.kyc-label {
     }
 
 
+    .kyc-choice {
+
+        min-height:
+            58px;
+
+    }
+
+
+    .kyc-choice span {
+
+        min-height:
+            58px;
+
+        padding:
+            10px 8px;
+
+        font-size:
+            0.90rem;
+
+    }
+
+
+    .page02a-cta-wrap {
+
+        margin-top:
+            38px;
+
+    }
+
+
+    .page02a-cta {
+
+        min-height:
+            88px;
+
+        padding:
+            18px 20px;
+
+    }
+
+
+    .page02a-cta-ta {
+
+        font-size:
+            1.08rem;
+
+    }
+
 }
 
 
-/* ==========================================================================
-   EXTRA SMALL MOBILE — 380
-   ========================================================================== */
+/* =============================================================================
+ * VERY SMALL MOBILE
+ * =============================================================================
+ */
 
 
-@media (max-width: 380px) {
-
-
-    .page02a .page02-shell {
-
-        padding-left:
-            11px;
-
-        padding-right:
-            11px;
-
-    }
-
-
-    .scorecard-intro-card {
-
-        padding-left:
-            14px;
-
-        padding-right:
-            14px;
-
-    }
-
+@media (
+    max-width: 390px
+) {
 
     .kyc-section-card {
 
         padding-left:
-            13px;
+            16px;
 
         padding-right:
-            13px;
+            16px;
 
     }
 
 
-    .kyc-choice-group:has(
-        input[name="preferredLanguage"]
-    ) {
+    .kyc-section-card::before {
 
-        grid-template-columns:
-            1fr;
-
-    }
-
-
-}
-
-
-/* ==========================================================================
-   TOUCH DEVICES
-   ========================================================================== */
-
-
-@media (pointer: coarse) {
-
-
-    .page02-primary-button {
-
-        min-height:
-            66px;
-
-        touch-action:
-            manipulation;
-
-    }
-
-
-    .kyc-input {
-
-        min-height:
-            54px;
+        left:
+            16px;
 
     }
 
 
     .kyc-choice span {
 
-        min-height:
-            54px;
+        padding-left:
+            5px;
+
+        padding-right:
+            5px;
+
+        font-size:
+            0.82rem;
 
     }
-
 
 }
 
 
-/* ==========================================================================
-   REDUCED MOTION
-   ========================================================================== */
+/* =============================================================================
+ * REDUCED MOTION
+ * =============================================================================
+ */
 
 
-@media (prefers-reduced-motion: reduce) {
-
-
-    .page02-primary-button,
+@media (
+    prefers-reduced-motion: reduce
+) {
 
     .kyc-input,
-
-    .kyc-choice span {
+    .kyc-select,
+    .kyc-choice span,
+    .page02a-cta {
 
         transition:
             none;
@@ -3047,144 +1998,18 @@ legend.kyc-label {
     }
 
 
-    .page02-primary-button:hover {
+    .page02a-cta.is-loading::after {
 
-        transform:
-            none;
+        animation-duration:
+            1.4s;
 
     }
-
 
 }
 
 
-/* ==========================================================================
-   HIGH CONTRAST / FORCED COLORS
-   ========================================================================== */
-
-
-@media (forced-colors: active) {
-
-
-    .scorecard-intro-card,
-
-    .kyc-section-card,
-
-    .kyc-input,
-
-    .kyc-choice span,
-
-    .kyc-message {
-
-        border:
-            1px solid
-            CanvasText;
-
-    }
-
-
-    .page02-primary-button {
-
-        border:
-            2px solid
-            ButtonText;
-
-    }
-
-
-}
-
-
-/* ==========================================================================
-   PRINT
-   ========================================================================== */
-
-
-@media print {
-
-
-    body.page02a-body,
-    .page02a {
-
-        background:
-            #ffffff !important;
-
-        color:
-            #000000 !important;
-
-    }
-
-
-    .page02-intro-action,
-
-    .kyc-final-action {
-
-        display:
-            none !important;
-
-    }
-
-
-    .scorecard-intro-card,
-
-    .kyc-section-card {
-
-        background:
-            #ffffff !important;
-
-        box-shadow:
-            none !important;
-
-        border:
-            1px solid
-            #cccccc !important;
-
-    }
-
-
-}
-
-
-/* ==========================================================================
-   END
-
-   PAGE 02A VISUAL CONTRACT
-
-   GLOBAL HEADER
-        ↓
-   CONTINUOUS DARK-BLUE PAGE CANVAS
-        ↓
-   INTRO
-        ↓
-   ABOUT YOU™
-        ↓
-   CARD 01 — YOUR DETAILS™
-        ↓
-   CARD 02 — YOUR LIFE™
-        ↓
-   CARD 03 — YOUR LOCATION™
-        ↓
-   BEGIN MY SCORECARD™
-        ↓
-   GLOBAL FOOTER
-
-
-   NEXT FUNCTIONAL FILE:
-
-   js/page02/page02a.js
-
-   REQUIRED NEXT WORK:
-
-   ✓ capture all expanded KYC fields
-   ✓ validate all fields
-   ✓ repair Page02Session readiness
-   ✓ build complete registration payload
-   ✓ CTM_API.register()
-   ✓ capture Google Sheets registration result
-   ✓ preserve client identity
-   ✓ preserve full KYC
-   ✓ activate "wealth"
-   ✓ navigate to page02b.html ONLY after successful registration
-
-   ========================================================================== */
+/* =============================================================================
+ * END OF FILE
+ * =============================================================================
+ */
 
