@@ -3,310 +3,339 @@
    CTM PATH™ MILLIONAIRES™
 
    FILE:
-   page04.css
+   css/page04.css
 
    PAGE:
-   KALA CHAKRA™ LIFE ALIGNMENT RESULT™
+   KALA CHAKRA™ LIFE ALIGNMENT™
 
    VERSION:
-   10.0
+   1.0
+
+
+   RESPONSIBILITIES:
+
+   ✓ Page 04 Layout
+   ✓ KALA CHAKRA™ Life Wheel Stage
+   ✓ Alignment Score
+   ✓ Life Level
+   ✓ Strongest Pillar
+   ✓ Growth Opportunity
+   ✓ 12 Pillar Breakdown
+   ✓ Page 05 Navigation
+   ✓ Responsive Behaviour
+
+   IMPORTANT:
+
+   Global Header / Footer are NOT styled here.
+   They remain controlled by the shared global frontend.
 
 ========================================================================== */
-
-
 
 
 
 /* ==========================================================================
-   PAGE FOUNDATION
+   PAGE TOKENS
 ========================================================================== */
 
+:root {
+
+    --page04-bg:
+        #06172d;
+
+    --page04-bg-deep:
+        #041326;
+
+    --page04-surface:
+        #08233a;
+
+    --page04-surface-soft:
+        #0a2942;
+
+    --page04-border:
+        rgba(28, 190, 184, 0.32);
+
+    --page04-border-soft:
+        rgba(255, 255, 255, 0.08);
+
+
+    --page04-text:
+        #f7f2e8;
+
+    --page04-text-soft:
+        #d7e0e7;
+
+    --page04-muted:
+        #92a5b5;
+
+
+    --page04-teal:
+        #18b8b1;
+
+    --page04-teal-dark:
+        #10938e;
+
+    --page04-teal-soft:
+        rgba(24, 184, 177, 0.12);
+
+
+    --page04-gold:
+        #d9ad52;
+
+    --page04-gold-soft:
+        rgba(217, 173, 82, 0.15);
+
+
+    --page04-red:
+        #e64f4f;
+
+    --page04-orange:
+        #ee922d;
+
+    --page04-green:
+        #2aad74;
+
+
+    --page04-radius:
+        26px;
+
+    --page04-radius-small:
+        16px;
+
+
+    --page04-shadow:
+        0 22px 60px rgba(0, 0, 0, 0.28);
+
+}
+
+
+
+/* ==========================================================================
+   PAGE ROOT
+========================================================================== */
 
 .page04 {
 
+    width: 100%;
 
-    min-height:
-
-        100vh;
-
+    min-height: 100vh;
 
     background:
-
-        #081426;
-
+        radial-gradient(
+            circle at 50% 15%,
+            rgba(24, 184, 177, 0.055),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            var(--page04-bg-deep) 0%,
+            var(--page04-bg) 48%,
+            var(--page04-bg-deep) 100%
+        );
 
     color:
-
-        #F8F5ED;
-
+        var(--page04-text);
 
     overflow:
-
         hidden;
 
-
 }
-
-
-
-.page04 * {
-
-
-    box-sizing:
-
-        border-box;
-
-
-}
-
-
-
-
-
 
 
 
 /* ==========================================================================
-   HERO SECTION
+   COMMON PAGE SECTION WIDTH
 ========================================================================== */
 
+.page04-hero-inner,
+.alignment-introduction-inner,
+.life-wheel-section-inner,
+.alignment-insights-section,
+.pillar-breakdown-section,
+.alignment-meaning-inner,
+.page04-transition-inner {
+
+    width:
+        min(1440px, calc(100% - 64px));
+
+    margin-left:
+        auto;
+
+    margin-right:
+        auto;
+
+}
+
+
+
+/* ==========================================================================
+   JOURNEY MARKER
+========================================================================== */
+
+.journey-marker {
+
+    width: 100%;
+
+    padding:
+        18px 32px 0;
+
+    box-sizing:
+        border-box;
+
+}
+
+
+.journey-marker p {
+
+    margin: 0;
+
+    text-align:
+        left;
+
+    font-size:
+        13px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.12em;
+
+    color:
+        var(--page04-gold);
+
+}
+
+
+
+/* ==========================================================================
+   HERO
+========================================================================== */
 
 .page04-hero {
 
-
-    text-align:
-
-        center;
-
+    position:
+        relative;
 
     padding:
-
-        70px 20px 80px;
-
+        86px 24px 78px;
 
 }
 
 
+.page04-hero-inner {
 
+    max-width:
+        1120px;
 
-
-
-
-.page04 .journey-marker {
-
-
-    display:
-
-        flex;
-
-
-    flex-direction:
-
-        column;
-
-
-    align-items:
-
+    text-align:
         center;
 
-
-    gap:
-
-        12px;
-
-
 }
 
 
+.page04-brand {
 
-
-
-
-
-.page04 .journey-label {
-
+    margin:
+        0 0 34px;
 
     color:
-
-        #23D4C8;
-
+        var(--page04-gold);
 
     font-size:
-
-        .75rem;
-
+        15px;
 
     font-weight:
-
-        800;
-
+        700;
 
     letter-spacing:
-
-        .35em;
-
+        0.18em;
 
 }
-
-
-
-
-
-
-.page04 .journey-number {
-
-
-    color:
-
-        #D8B45A;
-
-
-    font-size:
-
-        1.3rem;
-
-
-    font-weight:
-
-        900;
-
-
-    letter-spacing:
-
-        .25em;
-
-
-}
-
-
-
-
-
 
 
 .page04-title {
 
-
     margin:
+        0;
 
-        50px auto 40px;
-
-
-    max-width:
-
-        1000px;
-
+    color:
+        var(--page04-text);
 
     font-family:
-
-        "Cinzel",
+        Georgia,
+        "Times New Roman",
         serif;
 
-
     font-size:
-
-        clamp(
-
-            2.2rem,
-
-            5vw,
-
-            4.5rem
-
-        );
-
+        clamp(48px, 5.8vw, 88px);
 
     line-height:
-
-        1.35;
-
-
-    letter-spacing:
-
-        .08em;
-
-
-}
-
-
-
-
-
-
-
-.page04-tamil {
-
-
-    color:
-
-        #F8F5ED;
-
-
-    font-family:
-
-        "Noto Sans Tamil",
-        sans-serif;
-
-
-    font-size:
-
-        clamp(
-
-            2rem,
-
-            4vw,
-
-            3rem
-
-        );
-
-
-    line-height:
-
-        1.8;
-
-
-}
-
-
-
-
-
-.page04-english {
-
-
-    margin-top:
-
-        25px;
-
-
-    color:
-
-        #D8B45A;
-
-
-    font-size:
-
-        1.4rem;
-
+        1.18;
 
     font-weight:
-
-        700;
-
+        600;
 
     letter-spacing:
-
-        .12em;
-
+        0.055em;
 
 }
 
 
+.page04-title-tamil {
+
+    margin:
+        54px auto 0;
+
+    max-width:
+        720px;
+
+    color:
+        var(--page04-text);
+
+    font-size:
+        clamp(25px, 2.3vw, 36px);
+
+    line-height:
+        1.48;
+
+    font-weight:
+        700;
+
+    text-align:
+        center;
+
+}
 
 
+.page04-subtitle {
 
+    margin:
+        26px auto 0;
 
+    color:
+        var(--page04-text-soft);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        15px;
+
+    line-height:
+        1.5;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.06em;
+
+    text-align:
+        center;
+
+}
 
 
 
@@ -314,80 +343,194 @@
    INTRODUCTION
 ========================================================================== */
 
-
-.page04-introduction {
-
-
-    max-width:
-
-        850px;
-
-
-    margin:
-
-        0 auto;
-
+.alignment-introduction {
 
     padding:
+        42px 24px 88px;
 
-        40px 20px 80px;
+}
 
+
+.alignment-introduction-inner {
+
+    max-width:
+        950px;
 
     text-align:
-
         center;
 
-
 }
 
 
+.alignment-intro-tamil {
 
-
-
-.page04-introduction p {
-
+    margin:
+        0 auto;
 
     color:
-
-        #D8E1ED;
-
+        var(--page04-text);
 
     font-size:
-
-        1.2rem;
-
+        clamp(23px, 2vw, 31px);
 
     line-height:
+        1.65;
 
-        2;
+    font-weight:
+        600;
 
+    text-align:
+        center;
 
 }
 
 
+.alignment-intro-english {
 
+    margin:
+        28px auto 0;
 
-
-.page04-introduction .english {
-
-
-    margin-top:
-
-        30px;
-
+    max-width:
+        760px;
 
     color:
+        var(--page04-text-soft);
 
-        #B9C6D8;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
+    font-size:
+        17px;
+
+    line-height:
+        1.7;
+
+    text-align:
+        center;
 
 }
 
 
 
+/* ==========================================================================
+   COMMON SECTION HEADINGS
+========================================================================== */
+
+.section-heading,
+.alignment-insights-heading,
+.pillar-breakdown-heading {
+
+    text-align:
+        center;
+
+}
 
 
+.section-eyebrow {
 
+    margin:
+        0 0 14px;
+
+    color:
+        var(--page04-gold);
+
+    font-size:
+        14px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.16em;
+
+    text-align:
+        center;
+
+}
+
+
+.section-title {
+
+    margin:
+        0;
+
+    color:
+        var(--page04-text);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(34px, 4vw, 56px);
+
+    line-height:
+        1.2;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.055em;
+
+    text-align:
+        center;
+
+}
+
+
+.section-title-tamil {
+
+    margin:
+        24px auto 0;
+
+    color:
+        var(--page04-text);
+
+    font-size:
+        clamp(22px, 2vw, 30px);
+
+    line-height:
+        1.55;
+
+    font-weight:
+        600;
+
+    text-align:
+        center;
+
+}
+
+
+.section-description {
+
+    margin:
+        18px auto 0;
+
+    max-width:
+        760px;
+
+    color:
+        var(--page04-text-soft);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        16px;
+
+    line-height:
+        1.7;
+
+    text-align:
+        center;
+
+}
 
 
 
@@ -395,1534 +538,1314 @@
    LIFE WHEEL SECTION
 ========================================================================== */
 
-
 .life-wheel-section {
 
-
-    text-align:
-
-        center;
-
-
     padding:
+        92px 24px 96px;
 
-        60px 20px;
+    border-top:
+        1px solid var(--page04-border-soft);
 
+    border-bottom:
+        1px solid var(--page04-border-soft);
 
-}
-
-
-
-
-
-
-
-.life-wheel-section h2 {
-
-
-    font-family:
-
-        "Noto Sans Tamil",
-        sans-serif;
-
-
-    font-size:
-
-        clamp(
-
-            1.8rem,
-
-            3vw,
-
-            2.8rem
-
-        );
-
-
-    line-height:
-
-        1.8;
-
-
-    color:
-
-        #F8F5ED;
-
+    background:
+        rgba(2, 15, 30, 0.34);
 
 }
 
 
+.life-wheel-section-inner {
 
-
-
-
-
-.life-wheel-section span {
-
-
-    display:
-
-        block;
-
-
-    margin-top:
-
-        15px;
-
-
-    color:
-
-        #D8B45A;
-
-
-    font-size:
-
-        1.3rem;
-
-
-    font-weight:
-
-        700;
-
+    max-width:
+        1280px;
 
 }
-
-
-
-
-
-
 
 
 
 /* ==========================================================================
-   KALA CHAKRA WHEEL CONTAINER
+   LIFE WHEEL STAGE
 ========================================================================== */
 
-
-.kala-wheel-container {
-
-
-    width:
-
-        min(650px,80vw);
-
-
-    aspect-ratio:
-
-        1;
-
-
-    margin:
-
-        60px auto;
-
-
-    display:
-
-        flex;
-
-
-    align-items:
-
-        center;
-
-
-    justify-content:
-
-        center;
-
-
-}
-
-
-
-
-
-
-
-.kala-wheel {
-
-
-    width:
-
-        100%;
-
-
-    height:
-
-        100%;
-
-
-    border-radius:
-
-        50%;
-
-
-    background:
-
-
-        radial-gradient(
-
-            circle,
-
-            rgba(35,212,200,.18),
-
-            rgba(255,255,255,.03)
-
-        );
-
-
-    border:
-
-        2px solid rgba(35,212,200,.35);
-
-
-    box-shadow:
-
-
-        0 0 80px rgba(35,212,200,.15);
-
-
+.life-wheel-stage {
 
     position:
-
         relative;
 
-
-}
-
-/* ==========================================================================
-   ALIGNMENT SUMMARY
-========================================================================== */
-
-
-.alignment-summary {
-
-
     width:
+        min(900px, 100%);
 
-        min(1000px, calc(100% - 60px));
-
+    min-height:
+        760px;
 
     margin:
-
-        40px auto 100px;
-
+        72px auto 0;
 
     display:
+        flex;
 
-        grid;
+    align-items:
+        center;
 
+    justify-content:
+        center;
 
-    grid-template-columns:
-
-        repeat(2,1fr);
-
-
-    gap:
-
-        30px;
-
+    box-sizing:
+        border-box;
 
 }
 
 
+.life-wheel-stage::before {
 
+    content:
+        "";
 
+    position:
+        absolute;
 
+    width:
+        min(650px, 72vw);
 
-
-.score-card,
-.level-card {
-
-
-    padding:
-
-        45px 35px;
-
+    aspect-ratio:
+        1 / 1;
 
     border-radius:
-
-        32px;
-
-
-    text-align:
-
-        center;
-
+        50%;
 
     background:
-
-
-        linear-gradient(
-
-            145deg,
-
-            rgba(255,255,255,.06),
-
-            rgba(255,255,255,.025)
-
+        radial-gradient(
+            circle,
+            rgba(24, 184, 177, 0.11) 0%,
+            rgba(24, 184, 177, 0.04) 38%,
+            transparent 70%
         );
 
+    filter:
+        blur(5px);
 
-    border:
-
-        1px solid rgba(255,255,255,.12);
-
-
-}
-
-
-
-
-
-
-
-.score-card h3,
-.level-card h3 {
-
-
-    font-family:
-
-        "Noto Sans Tamil",
-        sans-serif;
-
-
-    font-size:
-
-        1.5rem;
-
-
-    line-height:
-
-        1.8;
-
-
-    color:
-
-        #F8F5ED;
-
+    pointer-events:
+        none;
 
 }
-
-
-
-
-
-
-
-.english-label {
-
-
-    display:
-
-        block;
-
-
-    margin:
-
-        20px 0;
-
-
-    color:
-
-        #B9C6D8;
-
-
-    font-size:
-
-        1rem;
-
-
-}
-
-
-
-
-
-
-
-#alignment-score {
-
-
-    display:
-
-        block;
-
-
-    margin-top:
-
-        25px;
-
-
-    color:
-
-        #23D4C8;
-
-
-    font-family:
-
-        "Cinzel",
-        serif;
-
-
-    font-size:
-
-        3.5rem;
-
-
-    font-weight:
-
-        900;
-
-
-}
-
-
-
-
-
-
-
-#alignment-percentage {
-
-
-    display:
-
-        inline-block;
-
-
-    margin-top:
-
-        15px;
-
-
-    color:
-
-        #D8B45A;
-
-
-    font-size:
-
-        2rem;
-
-
-    font-weight:
-
-        900;
-
-
-}
-
-
-
-
-
-
-
-.level-card span {
-
-
-    display:
-
-        block;
-
-
-    margin:
-
-        20px 0;
-
-
-    color:
-
-        #B9C6D8;
-
-
-}
-
-
-
-
-
-
-
-#life-level {
-
-
-    display:
-
-        block;
-
-
-    margin-top:
-
-        25px;
-
-
-    color:
-
-        #D8B45A;
-
-
-    font-size:
-
-        2.4rem;
-
-
-    font-family:
-
-        "Cinzel",
-        serif;
-
-
-}
-
-
-
-
-
-
 
 
 
 /* ==========================================================================
-   INSIGHT SECTION
+   DYNAMIC KALA CHAKRA™ CONTAINER
+
+   page04.js owns the internal SVG/canvas/DOM structure.
 ========================================================================== */
 
+.kala-chakra-wheel {
 
-.insight-section {
+    position:
+        relative;
 
+    z-index:
+        2;
 
     width:
+        min(760px, 90vw);
 
-        min(1200px, calc(100% - 96px));
-
+    aspect-ratio:
+        1 / 1;
 
     margin:
+        auto;
 
-        0 auto;
+    display:
+        flex;
 
-
-    padding:
-
-        60px 0 100px;
-
-
-    text-align:
-
+    align-items:
         center;
 
+    justify-content:
+        center;
 
 }
 
 
+.kala-chakra-wheel svg,
+.kala-chakra-wheel canvas {
 
+    display:
+        block;
 
+    width:
+        100%;
 
+    height:
+        100%;
 
-
-.insight-section h2 {
-
-
-    font-family:
-
-        "Noto Sans Tamil",
-        sans-serif;
-
-
-    font-size:
-
-        clamp(
-
-            2rem,
-
-            4vw,
-
-            3rem
-
-        );
-
-
-    line-height:
-
-        1.8;
-
+    overflow:
+        visible;
 
 }
-
-
-
-
-
-
-
-.insight-section > p {
-
-
-    color:
-
-        #D8B45A;
-
-
-    font-size:
-
-        1.3rem;
-
-
-    font-weight:
-
-        700;
-
-
-    letter-spacing:
-
-        .12em;
-
-
-}
-
-
-
-
-
-
 
 
 
 /* ==========================================================================
-   INSIGHT GRID
+   SVG SUPPORT
+
+   These classes are available for page04.js generated wheel elements.
 ========================================================================== */
 
+.kala-chakra-wheel .wheel-grid-circle {
 
-.insight-grid {
+    fill:
+        none;
 
+    stroke:
+        rgba(255, 255, 255, 0.12);
 
-    margin-top:
+    stroke-width:
+        1;
 
-        60px;
-
-
-    display:
-
-        grid;
-
-
-    grid-template-columns:
-
-        repeat(3,1fr);
+}
 
 
-    gap:
+.kala-chakra-wheel .wheel-spoke {
 
-        30px;
+    stroke:
+        rgba(255, 255, 255, 0.18);
 
+    stroke-width:
+        1;
+
+}
+
+
+.kala-chakra-wheel .wheel-score-area {
+
+    fill:
+        rgba(24, 184, 177, 0.24);
+
+    stroke:
+        var(--page04-teal);
+
+    stroke-width:
+        2.5;
+
+}
+
+
+.kala-chakra-wheel .wheel-score-point {
+
+    fill:
+        var(--page04-teal);
+
+    stroke:
+        var(--page04-text);
+
+    stroke-width:
+        1.5;
+
+}
+
+
+.kala-chakra-wheel .wheel-label {
+
+    fill:
+        var(--page04-text);
+
+    font-size:
+        13px;
+
+    font-weight:
+        600;
+
+}
+
+
+.kala-chakra-wheel .wheel-score-label {
+
+    fill:
+        var(--page04-gold);
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
 
 }
 
 
 
+/* ==========================================================================
+   ALIGNMENT SCORE
+========================================================================== */
+
+.alignment-score-section {
+
+    padding:
+        100px 24px 42px;
+
+}
 
 
+.alignment-score-card {
+
+    width:
+        min(720px, calc(100% - 32px));
+
+    margin:
+        0 auto;
+
+    padding:
+        56px 40px;
+
+    box-sizing:
+        border-box;
+
+    text-align:
+        center;
+
+    border:
+        1px solid var(--page04-border);
+
+    border-radius:
+        var(--page04-radius);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(10, 41, 66, 0.92),
+            rgba(6, 27, 48, 0.92)
+        );
+
+    box-shadow:
+        var(--page04-shadow);
+
+}
+
+
+.result-label {
+
+    margin:
+        0;
+
+    color:
+        var(--page04-gold);
+
+    font-size:
+        14px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.13em;
+
+    text-align:
+        center;
+
+}
+
+
+.result-label-tamil {
+
+    margin:
+        16px 0 0;
+
+    color:
+        var(--page04-text);
+
+    font-size:
+        21px;
+
+    line-height:
+        1.5;
+
+    font-weight:
+        600;
+
+    text-align:
+        center;
+
+}
+
+
+.alignment-score-display {
+
+    margin:
+        34px 0 0;
+
+    display:
+        flex;
+
+    align-items:
+        baseline;
+
+    justify-content:
+        center;
+
+    gap:
+        10px;
+
+}
+
+
+.alignment-score {
+
+    color:
+        var(--page04-teal);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(72px, 9vw, 118px);
+
+    line-height:
+        1;
+
+    font-weight:
+        600;
+
+}
+
+
+.alignment-score-maximum {
+
+    color:
+        var(--page04-muted);
+
+    font-size:
+        24px;
+
+    font-weight:
+        600;
+
+}
+
+
+.alignment-percentage-display {
+
+    margin-top:
+        20px;
+
+}
+
+
+.alignment-percentage {
+
+    color:
+        var(--page04-text);
+
+    font-size:
+        24px;
+
+    font-weight:
+        700;
+
+}
+
+
+
+/* ==========================================================================
+   LIFE LEVEL
+========================================================================== */
+
+.life-level-section {
+
+    padding:
+        28px 24px 96px;
+
+}
+
+
+.life-level-card {
+
+    width:
+        min(720px, calc(100% - 32px));
+
+    margin:
+        0 auto;
+
+    padding:
+        48px 42px;
+
+    box-sizing:
+        border-box;
+
+    text-align:
+        center;
+
+    border:
+        1px solid var(--page04-border-soft);
+
+    border-radius:
+        var(--page04-radius);
+
+    background:
+        rgba(8, 35, 58, 0.62);
+
+}
+
+
+.life-level {
+
+    margin:
+        28px auto 0;
+
+    color:
+        var(--page04-teal);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(30px, 4vw, 48px);
+
+    line-height:
+        1.3;
+
+    text-align:
+        center;
+
+}
+
+
+.life-level-description {
+
+    margin:
+        22px auto 0;
+
+    max-width:
+        580px;
+
+    color:
+        var(--page04-text-soft);
+
+    font-size:
+        17px;
+
+    line-height:
+        1.7;
+
+    text-align:
+        center;
+
+}
+
+
+
+/* ==========================================================================
+   ALIGNMENT INSIGHTS
+========================================================================== */
+
+.alignment-insights-section {
+
+    max-width:
+        1240px;
+
+    padding:
+        96px 24px;
+
+    box-sizing:
+        border-box;
+
+}
+
+
+.alignment-insights-grid {
+
+    margin-top:
+        58px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap:
+        28px;
+
+}
 
 
 .insight-card {
 
-
     padding:
+        46px 38px;
 
-        40px 30px;
-
-
-    min-height:
-
-        520px;
-
-
-    border-radius:
-
-        30px;
-
-
-    background:
-
-
-        linear-gradient(
-
-            145deg,
-
-            rgba(255,255,255,.06),
-
-            rgba(255,255,255,.025)
-
-        );
-
+    text-align:
+        center;
 
     border:
-
-        1px solid rgba(255,255,255,.10);
-
-
-    transition:
-
-        .35s ease;
-
-
-}
-
-
-
-
-
-
-
-.insight-card:hover {
-
-
-    transform:
-
-        translateY(-8px);
-
-
-    border-color:
-
-        rgba(35,212,200,.4);
-
-
-}
-
-
-
-
-
-
-
-.insight-icon {
-
-
-    width:
-
-        70px;
-
-
-    height:
-
-        70px;
-
-
-    margin:
-
-        0 auto 25px;
-
-
-    display:
-
-        flex;
-
-
-    justify-content:
-
-        center;
-
-
-    align-items:
-
-        center;
-
+        1px solid var(--page04-border);
 
     border-radius:
-
-        50%;
-
+        var(--page04-radius);
 
     background:
-
-        rgba(216,180,90,.12);
-
-
-    font-size:
-
-        2rem;
-
+        linear-gradient(
+            145deg,
+            rgba(10, 41, 66, 0.82),
+            rgba(6, 27, 48, 0.88)
+        );
 
 }
 
 
-
-
-
-
-
-.insight-card h3 {
-
-
-    color:
-
-        #F8F5ED;
-
-
-    font-family:
-
-        "Noto Sans Tamil",
-        sans-serif;
-
-
-    font-size:
-
-        1.5rem;
-
-
-    line-height:
-
-        1.8;
-
-
-}
-
-
-
-
-
-
-
-.insight-card span {
-
-
-    display:
-
-        block;
-
+.insight-number {
 
     margin:
-
-        15px 0;
-
+        0;
 
     color:
-
-        #23D4C8;
-
+        var(--page04-muted);
 
     font-size:
-
-        .95rem;
-
+        13px;
 
     font-weight:
-
         700;
 
+    letter-spacing:
+        0.14em;
 
 }
 
 
-
-
-
-
-
-.insight-card strong {
-
-
-    display:
-
-        block;
-
+.insight-label {
 
     margin:
-
-        20px 0;
-
+        20px 0 0;
 
     color:
-
-        #D8B45A;
-
+        var(--page04-gold);
 
     font-size:
+        13px;
 
-        1.3rem;
+    line-height:
+        1.5;
 
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.1em;
 
 }
 
 
+.insight-label-tamil {
+
+    margin:
+        13px 0 0;
+
+    color:
+        var(--page04-text-soft);
+
+    font-size:
+        18px;
+
+    line-height:
+        1.5;
+
+}
 
 
+.insight-pillar-name {
 
+    margin:
+        30px auto 0;
+
+    color:
+        var(--page04-text);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(27px, 3vw, 40px);
+
+    line-height:
+        1.3;
+
+}
 
 
 .insight-score {
 
+    margin:
+        20px 0 0;
 
     color:
-
-        #23D4C8;
-
+        var(--page04-teal);
 
     font-size:
-
-        1.6rem;
-
+        24px;
 
     font-weight:
-
-        900;
-
+        700;
 
 }
 
 
-
-
-
-
-
-.insight-card p {
-
-
-    margin-top:
-
-        25px;
-
-
-    color:
-
-        #C7D2E0;
-
-
-    line-height:
-
-        1.9;
-
-
-}
-
-
-
-
-
-
-
-.english-text {
-
-
-    color:
-
-        #AEBCCD !important;
-
-
-}
-
-/* ==========================================================================
-   PILLAR DETAILS SECTION
-========================================================================== */
-
-
-.pillar-details {
-
-
-    width:
-
-        min(900px, calc(100% - 60px));
-
+.insight-copy {
 
     margin:
-
-        0 auto;
-
-
-    padding:
-
-        40px 0 100px;
-
-
-    text-align:
-
-        center;
-
-
-}
-
-
-
-
-
-.pillar-toggle {
-
-
-    padding:
-
-        18px 40px;
-
-
-    border-radius:
-
-        999px;
-
-
-    border:
-
-        1px solid rgba(35,212,200,.45);
-
-
-    background:
-
-        rgba(35,212,200,.08);
-
-
-    color:
-
-        #23D4C8;
-
-
-    font-size:
-
-        1rem;
-
-
-    font-weight:
-
-        800;
-
-
-    letter-spacing:
-
-        .08em;
-
-
-    cursor:
-
-        pointer;
-
-
-    transition:
-
-        .35s ease;
-
-
-}
-
-
-
-
-
-.pillar-toggle:hover {
-
-
-    background:
-
-        rgba(35,212,200,.18);
-
-
-    transform:
-
-        translateY(-3px);
-
-
-}
-
-
-
-
-
-
-
-.pillar-score-list {
-
-
-    display:
-
-        none;
-
-
-    margin-top:
-
-        40px;
-
-
-    padding:
-
-        30px;
-
-
-    border-radius:
-
-        28px;
-
-
-    background:
-
-        rgba(255,255,255,.04);
-
-
-    border:
-
-        1px solid rgba(255,255,255,.10);
-
-
-}
-
-
-
-
-
-.pillar-score-list.active {
-
-
-    display:
-
-        block;
-
-
-}
-
-
-
-
-
-
-
-.pillar-row {
-
-
-    display:
-
-        flex;
-
-
-    justify-content:
-
-        space-between;
-
-
-    align-items:
-
-        center;
-
-
-    padding:
-
-        18px 10px;
-
-
-    border-bottom:
-
-        1px solid rgba(255,255,255,.08);
-
-
-    color:
-
-        #E7EDF5;
-
-
-    font-size:
-
-        1.05rem;
-
-
-}
-
-
-
-
-
-.pillar-row:last-child {
-
-
-    border-bottom:
-
-        none;
-
-
-}
-
-
-
-
-
-.pillar-row strong {
-
-
-    color:
-
-        #D8B45A;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   TRANSFORMATION INSIGHT
-========================================================================== */
-
-
-.transformation-insight {
-
+        24px auto 0;
 
     max-width:
-
-        850px;
-
-
-    margin:
-
-        0 auto;
-
-
-    padding:
-
-        60px 30px;
-
-
-    text-align:
-
-        center;
-
-
-}
-
-
-
-
-
-.transformation-insight h2 {
-
+        440px;
 
     color:
-
-        #F8F5ED;
-
-
-    font-family:
-
-        "Noto Sans Tamil",
-        sans-serif;
-
+        var(--page04-text-soft);
 
     font-size:
-
-        clamp(
-
-            1.7rem,
-
-            3vw,
-
-            2.5rem
-
-        );
-
+        16px;
 
     line-height:
-
-        1.9;
-
+        1.7;
 
 }
 
 
 
+/* ==========================================================================
+   12 PILLAR BREAKDOWN
+========================================================================== */
+
+.pillar-breakdown-section {
+
+    max-width:
+        1440px;
+
+    padding:
+        96px 24px;
+
+    box-sizing:
+        border-box;
+
+}
 
 
-.transformation-insight .english-text {
-
+.pillar-score-grid {
 
     margin-top:
-
-        30px;
-
-
-    color:
-
-        #B9C6D8;
-
-
-    font-size:
-
-        1.2rem;
-
-
-    line-height:
-
-        1.8;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   DIAGNOSIS CTA
-========================================================================== */
-
-
-.page04-action {
-
+        58px;
 
     display:
+        grid;
 
-        flex;
-
-
-    justify-content:
-
-        center;
-
-
-    padding:
-
-        50px 20px 100px;
-
-
-}
-
-
-
-
-
-
-
-.page04-action .journey-button {
-
-
-    display:
-
-        inline-flex;
-
-
-    flex-direction:
-
-        column;
-
-
-    align-items:
-
-        center;
-
-
-    justify-content:
-
-        center;
-
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
 
     gap:
-
-        12px;
-
-
-    min-width:
-
-        380px;
-
-
-    padding:
-
-        24px 50px;
-
-
-    border-radius:
-
-        999px;
-
-
-    border:
-
-        none;
-
-
-    background:
-
-        linear-gradient(
-
-            135deg,
-
-            #D8B45A,
-
-            #F2D88D
-
-        );
-
-
-    color:
-
-        #081426;
-
-
-    font-size:
-
-        1.05rem;
-
-
-    font-weight:
-
-        900;
-
-
-    cursor:
-
-        pointer;
-
-
-    transition:
-
-        .35s ease;
-
+        20px;
 
 }
-
-
-
-
-
-
-
-.page04-action .journey-button:hover {
-
-
-    transform:
-
-        translateY(-6px);
-
-
-    box-shadow:
-
-        0 30px 70px rgba(216,180,90,.35);
-
-
-}
-
-
-
-
-
-
-
-.page04-action small {
-
-
-    font-size:
-
-        .75rem;
-
-
-    letter-spacing:
-
-        .18em;
-
-
-}
-
-
-
-
-
-
 
 
 
 /* ==========================================================================
-   REFLECTION NOTE
+   DYNAMIC PILLAR CARDS
+
+   page04.js may generate any of these classes.
 ========================================================================== */
 
+.pillar-score-card {
 
-.page04-reflection {
-
-
-    width:
-
-        min(900px, calc(100% - 60px));
-
-
-    margin:
-
-        0 auto;
-
+    min-height:
+        190px;
 
     padding:
+        30px 26px;
 
-        0 0 100px;
+    box-sizing:
+        border-box;
 
+    display:
+        flex;
 
-}
+    flex-direction:
+        column;
 
-
-
-
-
-
-
-.page04-reflection .reflection-card {
-
-
-    padding:
-
-        40px;
-
-
-    border-radius:
-
-        30px;
-
-
-    text-align:
-
+    align-items:
         center;
 
+    justify-content:
+        center;
 
-    background:
-
-        rgba(255,255,255,.03);
-
+    text-align:
+        center;
 
     border:
+        1px solid var(--page04-border-soft);
 
-        1px solid rgba(255,255,255,.10);
+    border-radius:
+        var(--page04-radius-small);
 
+    background:
+        rgba(8, 35, 58, 0.62);
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
 
 }
 
 
+.pillar-score-card:hover {
+
+    transform:
+        translateY(-3px);
+
+    border-color:
+        var(--page04-border);
+
+    background:
+        rgba(10, 41, 66, 0.82);
+
+}
 
 
+.pillar-score-number {
 
-.page04-reflection p {
-
+    margin:
+        0;
 
     color:
-
-        #C7D2E0;
-
+        var(--page04-muted);
 
     font-size:
+        12px;
 
-        1.05rem;
+    font-weight:
+        700;
 
+    letter-spacing:
+        0.12em;
+
+}
+
+
+.pillar-score-name {
+
+    margin:
+        14px 0 0;
+
+    color:
+        var(--page04-text);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        18px;
 
     line-height:
+        1.45;
 
-        2;
+    font-weight:
+        600;
 
+}
+
+
+.pillar-score-value {
+
+    margin:
+        22px 0 0;
+
+    font-size:
+        30px;
+
+    line-height:
+        1;
+
+    font-weight:
+        700;
 
 }
 
 
 
+/* ==========================================================================
+   SCORE COLOUR SYSTEM
+
+   0–3  = Red
+   4–7  = Orange
+   8–10 = Green
+
+   Available for page04.js generated cards.
+========================================================================== */
+
+.pillar-score-card.score-low {
+
+    border-color:
+        rgba(230, 79, 79, 0.36);
+
+}
+
+
+.pillar-score-card.score-low
+.pillar-score-value {
+
+    color:
+        var(--page04-red);
+
+}
+
+
+.pillar-score-card.score-medium {
+
+    border-color:
+        rgba(238, 146, 45, 0.36);
+
+}
+
+
+.pillar-score-card.score-medium
+.pillar-score-value {
+
+    color:
+        var(--page04-orange);
+
+}
+
+
+.pillar-score-card.score-high {
+
+    border-color:
+        rgba(42, 173, 116, 0.38);
+
+}
+
+
+.pillar-score-card.score-high
+.pillar-score-value {
+
+    color:
+        var(--page04-green);
+
+}
 
 
 
+/* ==========================================================================
+   COMPLETE PICTURE / INTERPRETATION
+========================================================================== */
+
+.alignment-meaning-section {
+
+    padding:
+        100px 24px;
+
+    border-top:
+        1px solid var(--page04-border-soft);
+
+    border-bottom:
+        1px solid var(--page04-border-soft);
+
+    background:
+        rgba(3, 18, 34, 0.42);
+
+}
+
+
+.alignment-meaning-inner {
+
+    max-width:
+        940px;
+
+    text-align:
+        center;
+
+}
+
+
+.alignment-meaning-tamil {
+
+    margin:
+        28px auto 0;
+
+    color:
+        var(--page04-text);
+
+    font-size:
+        clamp(23px, 2vw, 30px);
+
+    line-height:
+        1.7;
+
+    font-weight:
+        600;
+
+    text-align:
+        center;
+
+}
+
+
+.alignment-meaning-english {
+
+    margin:
+        32px auto 0;
+
+    max-width:
+        780px;
+
+    color:
+        var(--page04-text-soft);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        17px;
+
+    line-height:
+        1.75;
+
+    text-align:
+        center;
+
+}
+
+
+
+/* ==========================================================================
+   PAGE 05 TRANSITION
+========================================================================== */
+
+.page04-transition {
+
+    padding:
+        100px 24px 120px;
+
+}
+
+
+.page04-transition-inner {
+
+    max-width:
+        880px;
+
+    text-align:
+        center;
+
+}
+
+
+.transition-tamil {
+
+    margin:
+        0 auto;
+
+    color:
+        var(--page04-text);
+
+    font-size:
+        clamp(23px, 2.2vw, 32px);
+
+    line-height:
+        1.65;
+
+    font-weight:
+        600;
+
+    text-align:
+        center;
+
+}
+
+
+.transition-english {
+
+    margin:
+        28px auto 0;
+
+    color:
+        var(--page04-text-soft);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        17px;
+
+    line-height:
+        1.7;
+
+    text-align:
+        center;
+
+}
+
+
+
+/* ==========================================================================
+   PRIMARY NAVIGATION BUTTON
+========================================================================== */
+
+.primary-navigation-button {
+
+    width:
+        min(620px, 100%);
+
+    min-height:
+        76px;
+
+    margin:
+        48px auto 0;
+
+    padding:
+        15px 28px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        5px;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.12);
+
+    border-radius:
+        15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--page04-teal),
+            var(--page04-teal-dark)
+        );
+
+    color:
+        #ffffff;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 16px 36px rgba(24, 184, 177, 0.18);
+
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        filter 180ms ease;
+
+}
+
+
+.primary-navigation-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 20px 44px rgba(24, 184, 177, 0.26);
+
+    filter:
+        brightness(1.05);
+
+}
+
+
+.primary-navigation-button:active {
+
+    transform:
+        translateY(0);
+
+}
+
+
+.primary-navigation-button:focus-visible {
+
+    outline:
+        3px solid rgba(24, 184, 177, 0.34);
+
+    outline-offset:
+        4px;
+
+}
+
+
+.button-tamil {
+
+    display:
+        block;
+
+    color:
+        #ffffff;
+
+    font-size:
+        19px;
+
+    line-height:
+        1.4;
+
+    font-weight:
+        700;
+
+    text-align:
+        center;
+
+}
+
+
+.button-english {
+
+    display:
+        block;
+
+    color:
+        rgba(255, 255, 255, 0.92);
+
+    font-size:
+        12px;
+
+    line-height:
+        1.4;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.07em;
+
+    text-align:
+        center;
+
+}
+
+
+
+/* ==========================================================================
+   SECONDARY NAVIGATION
+========================================================================== */
+
+.secondary-navigation-button {
+
+    min-height:
+        54px;
+
+    margin:
+        18px auto 0;
+
+    padding:
+        10px 22px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        4px;
+
+    border:
+        1px solid var(--page04-border-soft);
+
+    border-radius:
+        12px;
+
+    background:
+        transparent;
+
+    color:
+        var(--page04-text-soft);
+
+    cursor:
+        pointer;
+
+    font-size:
+        15px;
+
+    transition:
+        border-color 180ms ease,
+        color 180ms ease,
+        background 180ms ease;
+
+}
+
+
+.secondary-navigation-button span {
+
+    color:
+        var(--page04-muted);
+
+    font-size:
+        10px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.08em;
+
+}
+
+
+.secondary-navigation-button:hover {
+
+    border-color:
+        var(--page04-border);
+
+    color:
+        var(--page04-text);
+
+    background:
+        var(--page04-teal-soft);
+
+}
+
+
+
+/* ==========================================================================
+   GLOBAL TEXT ALIGNMENT SAFETY
+
+   Page 04 content only.
+   Does NOT touch global header/footer.
+========================================================================== */
+
+.page04 h1,
+.page04 h2,
+.page04 h3,
+.page04 p {
+
+    text-align:
+        center;
+
+}
 
 
 
@@ -1930,58 +1853,49 @@
    TABLET
 ========================================================================== */
 
-
-@media(max-width:1000px){
-
-
-
-.alignment-summary {
+@media
+(max-width: 1100px) {
 
 
-    grid-template-columns:
+    .page04-hero-inner,
+    .alignment-introduction-inner,
+    .life-wheel-section-inner,
+    .alignment-insights-section,
+    .pillar-breakdown-section,
+    .alignment-meaning-inner,
+    .page04-transition-inner {
 
-        1fr;
+        width:
+            min(100% - 40px, 1100px);
 
-
-}
-
-
-
-
-
-.insight-grid {
-
-
-    grid-template-columns:
-
-        1fr;
+    }
 
 
-}
+    .life-wheel-stage {
+
+        min-height:
+            680px;
+
+    }
 
 
+    .alignment-insights-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
 
 
+    .pillar-score-grid {
 
-.kala-wheel-container {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
 
-
-    width:
-
-        min(520px,85vw);
-
-
-}
-
+    }
 
 
 }
-
-
-
-
-
-
 
 
 
@@ -1989,169 +1903,306 @@
    MOBILE
 ========================================================================== */
 
-
-@media(max-width:700px){
-
-
-
-.page04-hero {
+@media
+(max-width: 720px) {
 
 
-    padding:
+    .journey-marker {
 
-        40px 15px 60px;
+        padding:
+            14px 18px 0;
+
+    }
+
+
+    .journey-marker p {
+
+        font-size:
+            11px;
+
+    }
+
+
+    .page04-hero {
+
+        padding:
+            60px 18px 56px;
+
+    }
+
+
+    .page04-title {
+
+        font-size:
+            clamp(38px, 12vw, 58px);
+
+        letter-spacing:
+            0.025em;
+
+    }
+
+
+    .page04-title-tamil {
+
+        margin-top:
+            38px;
+
+        font-size:
+            24px;
+
+    }
+
+
+    .alignment-introduction {
+
+        padding:
+            28px 18px 64px;
+
+    }
+
+
+    .life-wheel-section {
+
+        padding:
+            68px 14px;
+
+    }
+
+
+    .life-wheel-stage {
+
+        min-height:
+            auto;
+
+        margin-top:
+            52px;
+
+    }
+
+
+    .kala-chakra-wheel {
+
+        width:
+            94vw;
+
+    }
+
+
+    .alignment-score-section {
+
+        padding:
+            72px 14px 28px;
+
+    }
+
+
+    .alignment-score-card,
+    .life-level-card {
+
+        width:
+            100%;
+
+        padding:
+            40px 22px;
+
+        border-radius:
+            20px;
+
+    }
+
+
+    .life-level-section {
+
+        padding:
+            20px 14px 70px;
+
+    }
+
+
+    .alignment-insights-section,
+    .pillar-breakdown-section {
+
+        width:
+            100%;
+
+        padding:
+            72px 14px;
+
+    }
+
+
+    .alignment-insights-grid {
+
+        margin-top:
+            42px;
+
+        gap:
+            18px;
+
+    }
+
+
+    .insight-card {
+
+        padding:
+            38px 22px;
+
+        border-radius:
+            20px;
+
+    }
+
+
+    .pillar-score-grid {
+
+        grid-template-columns:
+            1fr;
+
+        margin-top:
+            42px;
+
+        gap:
+            14px;
+
+    }
+
+
+    .pillar-score-card {
+
+        min-height:
+            160px;
+
+    }
+
+
+    .alignment-meaning-section {
+
+        padding:
+            76px 18px;
+
+    }
+
+
+    .page04-transition {
+
+        padding:
+            76px 18px 90px;
+
+    }
+
+
+    .primary-navigation-button {
+
+        min-height:
+            72px;
+
+        margin-top:
+            38px;
+
+    }
 
 
 }
 
 
 
+/* ==========================================================================
+   SMALL MOBILE
+========================================================================== */
+
+@media
+(max-width: 420px) {
 
 
-.page04-title {
+    .page04-hero-inner,
+    .alignment-introduction-inner,
+    .life-wheel-section-inner,
+    .alignment-insights-section,
+    .pillar-breakdown-section,
+    .alignment-meaning-inner,
+    .page04-transition-inner {
+
+        width:
+            100%;
+
+    }
 
 
-    font-size:
+    .page04-title {
 
-        2rem;
+        font-size:
+            36px;
 
-
-}
-
-
+    }
 
 
+    .page04-title-tamil {
 
-.page04-tamil {
+        font-size:
+            22px;
 
-
-    font-size:
-
-        1.6rem;
-
-
-}
+    }
 
 
+    .section-title {
+
+        font-size:
+            31px;
+
+    }
 
 
+    .alignment-score {
 
-.alignment-summary {
+        font-size:
+            70px;
 
-
-    width:
-
-        calc(100% - 32px);
-
-
-}
+    }
 
 
+    .alignment-score-maximum {
+
+        font-size:
+            19px;
+
+    }
 
 
+    .button-tamil {
 
-#alignment-score {
+        font-size:
+            17px;
 
-
-    font-size:
-
-        2.7rem;
-
-
-}
-
-
-
-
-
-#life-level {
-
-
-    font-size:
-
-        1.8rem;
-
-
-}
-
-
-
-
-
-.insight-section {
-
-
-    width:
-
-        calc(100% - 32px);
+    }
 
 
 }
 
 
 
+/* ==========================================================================
+   REDUCED MOTION
+========================================================================== */
+
+@media
+(prefers-reduced-motion: reduce) {
 
 
-.insight-card {
+    .primary-navigation-button,
+    .secondary-navigation-button,
+    .pillar-score-card {
 
+        transition:
+            none;
 
-    min-height:
-
-        auto;
-
-
-}
-
-
-
-
-
-.page04-action .journey-button {
-
-
-    min-width:
-
-        100%;
+    }
 
 
 }
 
 
 
-
-
-.pillar-row {
-
-
-    flex-direction:
-
-        column;
-
-
-    gap:
-
-        10px;
-
-
-}
-
-
-
-
-
-.page04-reflection {
-
-
-    width:
-
-        calc(100% - 32px);
-
-
-}
-
-
-
-
-
-}
+/* ==========================================================================
+   END OF FILE
+========================================================================== */
 
