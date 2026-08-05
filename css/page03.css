@@ -1214,10 +1214,55 @@
 
 
 /* ==========================================================================
-   JOURNEY NAVIGATOR — TEAL CTA
+   FINAL ACTION
 ========================================================================== */
 
-.journey-button {
+.page03-action {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        100%;
+
+    padding:
+        40px 20px 100px;
+
+    text-align:
+        center;
+
+}
+
+
+/* ==========================================================================
+   JOURNEY NAVIGATOR — TEAL CTA
+
+   IMPORTANT:
+   The CTA is targeted through BOTH:
+   1. Existing reusable class: .journey-button
+   2. Existing Page03 JS contract: #show-alignment-button
+
+   This guarantees the actual navigation button receives the Page03 styling.
+========================================================================== */
+
+.page03 .journey-button,
+.page03 #show-alignment-button,
+#show-alignment-button {
+
+    appearance:
+        none;
+
+    -webkit-appearance:
+        none;
 
     display:
         inline-flex;
@@ -1232,70 +1277,94 @@
         center;
 
     gap:
-        10px;
+        8px;
+
+    width:
+        auto;
 
     min-width:
         360px;
 
-    padding:
-        22px 48px;
+    max-width:
+        100%;
 
-    border-radius:
-        999px;
+    min-height:
+        64px;
+
+    margin:
+        0 auto;
+
+    padding:
+        18px 42px;
 
     border:
-        1px solid rgba(35,212,200,.80);
+        1px solid #23D4C8 !important;
+
+    border-radius:
+        999px !important;
 
     background:
+        #23D4C8 !important;
+
+    background-image:
         linear-gradient(
             135deg,
-            #23D4C8,
-            #18AFA6
-        );
+            #23D4C8 0%,
+            #18AFA6 100%
+        ) !important;
 
     color:
-        #081426;
+        #061522 !important;
+
+    font-family:
+        inherit;
 
     font-size:
         1rem;
 
     font-weight:
-        900;
-
-    letter-spacing:
-        .08em;
+        800;
 
     line-height:
-        1.4;
+        1.35;
+
+    letter-spacing:
+        .04em;
 
     text-align:
         center;
+
+    text-decoration:
+        none;
 
     cursor:
         pointer;
 
-    transition:
-        all .35s ease;
-
     box-shadow:
-        0 14px 35px rgba(35,212,200,.16);
+        0 14px 36px rgba(35,212,200,.22);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        background .3s ease,
+        border-color .3s ease;
 
 }
 
 
-.journey-button small {
+/* ==========================================================================
+   CTA CHILDREN
 
-    display:
-        block;
+   Prevent nested spans / bilingual text from inheriting another global
+   button colour.
+========================================================================== */
 
-    font-size:
-        .72rem;
+.page03 .journey-button *,
+.page03 #show-alignment-button *,
+#show-alignment-button * {
 
-    letter-spacing:
-        .18em;
-
-    line-height:
-        1.5;
+    color:
+        #061522 !important;
 
     text-align:
         center;
@@ -1303,25 +1372,98 @@
 }
 
 
-.journey-button:hover {
+/* ==========================================================================
+   CTA SMALL / SECONDARY TEXT
+========================================================================== */
 
-    transform:
-        translateY(-5px);
+.page03 .journey-button small,
+.page03 #show-alignment-button small,
+#show-alignment-button small {
 
-    background:
-        linear-gradient(
-            135deg,
-            #2BE3D6,
-            #23D4C8
-        );
+    display:
+        block;
 
-    box-shadow:
-        0 30px 70px rgba(35,212,200,.35);
+    margin:
+        0;
+
+    color:
+        #061522 !important;
+
+    font-size:
+        .72rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.5;
+
+    letter-spacing:
+        .12em;
+
+    text-align:
+        center;
 
 }
 
 
-.journey-button:focus-visible {
+/* ==========================================================================
+   CTA HOVER
+========================================================================== */
+
+.page03 .journey-button:hover,
+.page03 #show-alignment-button:hover,
+#show-alignment-button:hover {
+
+    transform:
+        translateY(-4px);
+
+    border-color:
+        #32E5D9 !important;
+
+    background:
+        #32E5D9 !important;
+
+    background-image:
+        linear-gradient(
+            135deg,
+            #32E5D9 0%,
+            #23D4C8 100%
+        ) !important;
+
+    color:
+        #061522 !important;
+
+    box-shadow:
+        0 22px 50px rgba(35,212,200,.34);
+
+}
+
+
+/* ==========================================================================
+   CTA ACTIVE
+========================================================================== */
+
+.page03 .journey-button:active,
+.page03 #show-alignment-button:active,
+#show-alignment-button:active {
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 10px 24px rgba(35,212,200,.24);
+
+}
+
+
+/* ==========================================================================
+   CTA KEYBOARD FOCUS
+========================================================================== */
+
+.page03 .journey-button:focus-visible,
+.page03 #show-alignment-button:focus-visible,
+#show-alignment-button:focus-visible {
 
     outline:
         3px solid rgba(35,212,200,.50);
@@ -1331,6 +1473,20 @@
 
 }
 
+
+/* ==========================================================================
+   CTA VISITED STATE
+   Protects CTA if implemented as an <a>
+========================================================================== */
+
+.page03 a.journey-button:visited,
+.page03 a#show-alignment-button:visited,
+a#show-alignment-button:visited {
+
+    color:
+        #061522 !important;
+
+}
 
 /* ==========================================================================
    REFLECTION NOTE
