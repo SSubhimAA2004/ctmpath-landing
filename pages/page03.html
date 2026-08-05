@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html lang="ta">
+<html lang="en">
 
 <head>
 
@@ -12,1083 +12,1249 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <meta
-        name="description"
-        content="CTM PATH™ MILLIONAIRES™ — KALA CHAKRA™ LIFE ASSESSMENT™"
-    >
 
     <title>
         KALA CHAKRA™ LIFE ASSESSMENT™ | CTM PATH™ MILLIONAIRES™
     </title>
 
 
-    <!-- ======================================================
-         GOOGLE FONTS
-    ====================================================== -->
-
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
+    <meta
+        name="description"
+        content="CTM PATH™ KALA CHAKRA™ LIFE ASSESSMENT™ — See your life from a new perspective."
     >
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
+
+
+    <!-- ================================================================
+         CTM PATH™ PAGE 03
+         KALA CHAKRA™ LIFE ASSESSMENT™
+
+         FRONTEND VERSION:
+         10.0
+
+         PAGE CONTRACT:
+
+         CSS
+         ../css/page03.css
+
+         JAVASCRIPT
+         ../js/api.js
+         ../js/global.js
+         ../js/page03.js
+
+         IMPORTANT:
+         Page03 JavaScript expects:
+
+         .pillar-card
+         .score-selector
+         #show-alignment-button
+
+         These contracts must not be renamed.
+    ================================================================= -->
+
+
+
+    <!-- ================================================================
+         PAGE 03 STYLES
+    ================================================================= -->
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700;800&display=swap"
         rel="stylesheet"
+        href="../css/page03.css"
     >
 
-
-    <!-- ======================================================
-         PAGE 03 STYLESHEET
-    ====================================================== -->
-
-    <link
-        rel="stylesheet"
-        href="../css/pages/page03.css"
-    >
 
 </head>
+
 
 
 <body>
 
 
-<!-- ==========================================================================
-     CTM PATH™ MILLIONAIRES™
+    <!-- ================================================================
+         PAGE 03
+         KALA CHAKRA™ LIFE ASSESSMENT™
+    ================================================================= -->
 
-     PAGE:
-     page03.html
-
-     JOURNEY:
-     03 / 07
-
-     EXPERIENCE:
-     KALA CHAKRA™ LIFE ASSESSMENT™
-
-     VERSION:
-     10.0
-
-     PURPOSE:
-     Discover current life alignment across
-     12 essential life pillars.
-
-========================================================================== -->
+    <main
+        id="page03"
+        class="page03"
+    >
 
 
-<main class="page page03">
+
+        <!-- ============================================================
+             JOURNEY INDICATOR
+        ============================================================= -->
+
+        <section
+            class="journey-indicator"
+            aria-label="Journey progress"
+        >
+
+            <p>
+                JOURNEY 03 / 07
+            </p>
+
+        </section>
 
 
-    <div class="page03-container">
 
-
-        <!-- ======================================================
+        <!-- ============================================================
              HERO
-        ====================================================== -->
+        ============================================================= -->
 
-        <section class="page03-hero">
-
-
-            <div class="journey-marker">
-
-                <span class="journey-label">
-                    JOURNEY
-                </span>
-
-                <span class="journey-number">
-                    03 / 07
-                </span>
-
-            </div>
-
-
-            <h1 class="page03-title">
-
-                CTM PATH™
-
-                <br>
-
-                KALA CHAKRA™
-
-                <br>
-
-                LIFE ASSESSMENT™
-
-            </h1>
-
-
-            <h2 class="page03-tamil-title">
-
-                உங்கள் வாழ்க்கையை
-
-                <br>
-
-                ஒரு புதிய பார்வையில்
-
-                <br>
-
-                காண்போம்.
-
-            </h2>
-
-
-            <p class="page03-subtitle">
-
-                SEE YOUR LIFE
-
-                <br>
-
-                FROM A NEW PERSPECTIVE™
-
-            </p>
-
-
-        </section>
-
-
-
-        <!-- ======================================================
-             INTRODUCTION
-        ====================================================== -->
-
-        <section class="page03-introduction">
-
-
-            <h2>
-
-                வாழ்க்கை என்பது
-
-                <br>
-
-                ஒரு இலக்கு அல்ல.
-
-                <br>
-
-                பல முக்கிய பகுதிகளின்
-
-                <br>
-
-                சமநிலையாகும்.
-
-            </h2>
-
-
-            <p>
-
-                Life isn't defined by a single achievement.
-
-                <br>
-
-                It's shaped by the balance
-
-                <br>
-
-                between the areas that matter most.
-
-            </p>
-
-
-            <div class="reflection-question">
-
-                <h3>
-
-                    இன்று...
-
-                    <br>
-
-                    நீங்கள்
-
-                    <br>
-
-                    எங்கு நிற்கிறீர்கள்?
-
-                </h3>
-
-
-                <span>
-
-                    WHERE ARE YOU TODAY?
-
-                </span>
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- ======================================================
-             KALA CHAKRA™ INTRODUCTION
-        ====================================================== -->
-
-        <section class="page03-scoring">
-
-
-            <h2>
-
-                KALA CHAKRA™
-
-                <br>
-
-                THE 12 LIFE PILLARS™
-
-            </h2>
-
-
-            <p>
-
-                அடுத்துள்ள 12 வாழ்க்கைத் தூண்களில்,
-
-                <br>
-
-                உங்கள் தற்போதைய நிலையை
-
-                <br>
-
-                நேர்மையாக மதிப்பிடுங்கள்.
-
-            </p>
-
-
-            <p class="english-text">
-
-                Rate your life honestly
-
-                <br>
-
-                across these twelve essential pillars.
-
-            </p>
-
-
-
-            <!-- SCORE GUIDE -->
-
-            <div class="score-guide">
-
-
-                <div class="score-item">
-
-                    <strong>
-                        0
-                    </strong>
-
-                    <span>
-                        NOT SATISFIED AT ALL
-                    </span>
-
-                </div>
-
-
-                <div class="score-item">
-
-                    <strong>
-                        10
-                    </strong>
-
-                    <span>
-                        COMPLETELY SATISFIED
-                    </span>
-
-                </div>
-
-
-            </div>
-
-
-        </section>
-
-
-    </div>
-
-
-
-    <!-- ======================================================
-         12 LIFE PILLARS
-    ====================================================== -->
-
-    <section class="pillar-section">
-
-
-        <div class="pillar-grid">
-
-
-            <!-- ==================================================
-                 01 — PURPOSE
-            ================================================== -->
-
-            <article class="pillar-card">
-
-
-                <div class="pillar-icon">
-                    🎯
-                </div>
-
-
-                <h3>
-
-                    Purpose™
-
-                    <br>
-
-                    நோக்கம்™
-
-                </h3>
-
-
-                <p>
-
-                    என் வாழ்க்கைக்கு தெளிவான நோக்கமும் திசையும் உள்ளது.
-
-                    <br><br>
-
-                    I have a clear purpose and direction in life.
-
-                </p>
-
-
-                <div class="score-selector">
-
-                    Your Score
-
-                </div>
-
-
-            </article>
-
-
-
-            <!-- ==================================================
-                 02 — HEALTH
-            ================================================== -->
-
-            <article class="pillar-card">
-
-
-                <div class="pillar-icon">
-                    ❤️
-                </div>
-
-
-                <h3>
-
-                    Health™
-
-                    <br>
-
-                    ஆரோக்கியம்™
-
-                </h3>
-
-
-                <p>
-
-                    என் உடல் மற்றும் மன ஆரோக்கியத்தில்
-                    நான் திருப்தியாக இருக்கிறேன்.
-
-                    <br><br>
-
-                    I am satisfied with my physical
-                    and mental well-being.
-
-                </p>
-
-
-                <div class="score-selector">
-
-                    Your Score
-
-                </div>
-
-
-            </article>
-
-
-
-            <!-- ==================================================
-                 03 — RELATIONSHIPS
-            ================================================== -->
-
-            <article class="pillar-card">
-
-
-                <div class="pillar-icon">
-                    🤝
-                </div>
-
-
-                <h3>
-
-                    Relationships™
-
-                    <br>
-
-                    உறவுகள்™
-
-                </h3>
-
-
-                <p>
-
-                    என் முக்கியமான உறவுகள்
-                    அன்பும் புரிதலும் கொண்டவை.
-
-                    <br><br>
-
-                    My important relationships
-                    are filled with love and understanding.
-
-                </p>
-
-
-                <div class="score-selector">
-
-                    Your Score
-
-                </div>
-
-
-            </article>
-
-
-
-            <!-- ==================================================
-                 04 — CHARACTER & INTEGRITY
-            ================================================== -->
-
-            <article class="pillar-card">
-
-
-                <div class="pillar-icon">
-                    🛡️
-                </div>
-
-
-                <h3>
-
-                    Character &amp; Integrity™
-
-                    <br>
-
-                    குணநலம் &amp; நேர்மை™
-
-                </h3>
-
-
-                <p>
-
-                    நான் என் மதிப்புகளுடன்
-                    இணைந்து வாழ்கிறேன்.
-
-                    <br><br>
-
-                    I live with strong values
-                    and integrity.
-
-                </p>
-
-
-                <div class="score-selector">
-
-                    Your Score
-
-                </div>
-
-
-            </article>
-
-
-
-            <!-- ==================================================
-                 05 — LEARNING & MASTERY
-            ================================================== -->
-
-            <article class="pillar-card">
-
-
-                <div class="pillar-icon">
-                    📚
-                </div>
-
-
-                <h3>
-
-                    Learning &amp; Mastery™
-
-                    <br>
-
-                    கற்றல் &amp; திறமை™
-
-                </h3>
-
-
-                <p>
-
-                    நான் தொடர்ந்து கற்று
-                    வளர்ந்து கொண்டிருக்கிறேன்.
-
-                    <br><br>
-
-                    I continuously learn,
-                    improve and grow.
-
-                </p>
-
-
-                <div class="score-selector">
-
-                    Your Score
-
-                </div>
-
-
-            </article>
-
-
-
-            <!-- ==================================================
-                 06 — CAREER & CONTRIBUTION
-            ================================================== -->
-
-            <article class="pillar-card">
-
-
-                <div class="pillar-icon">
-                    🚀
-                </div>
-
-
-                <h3>
-
-                    Career &amp; Contribution™
-
-                    <br>
-
-                    தொழில் &amp; பங்களிப்பு™
-
-                </h3>
-
-
-                <p>
-
-                    என் வேலை அல்லது தொழில்
-                    அர்த்தமுள்ள பங்களிப்பை வழங்குகிறது.
-
-                    <br><br>
-
-                    My work creates
-                    meaningful contribution.
-
-                </p>
-
-
-                <div class="score-selector">
-
-                    Your Score
-
-                </div>
-
-
-            </article>
-
-
-
-            <!-- ==================================================
-                 07 — FINANCIAL FREEDOM
-            ================================================== -->
-
-            <article class="pillar-card">
-
-
-                <div class="pillar-icon">
-                    💰
-                </div>
-
-
-                <h3>
-
-                    Financial Freedom™
-
-                    <br>
-
-                    நிதி சுதந்திரம்™
-
-                </h3>
-
-
-                <p>
-
-                    எனது பண நிலைமை
-                    எனக்கு நம்பிக்கையை அளிக்கிறது.
-
-                    <br><br>
-
-                    My financial position
-                    gives me confidence.
-
-                </p>
-
-
-                <div class="score-selector">
-
-                    Your Score
-
-                </div>
-
-
-            </article>
-
-
-
-            <!-- ==================================================
-                 08 — TIME FREEDOM
-            ================================================== -->
-
-            <article class="pillar-card">
-
-
-                <div class="pillar-icon">
-                    ⏳
-                </div>
-
-
-                <h3>
-
-                    Time Freedom™
-
-                    <br>
-
-                    நேர சுதந்திரம்™
-
-                </h3>
-
-
-                <p>
-
-                    என் நேரத்தை
-                    நான் கட்டுப்படுத்துகிறேன்.
-
-                    <br><br>
-
-                    I have control
-                    over my time.
-
-                </p>
-
-
-                <div class="score-selector">
-
-                    Your Score
-
-                </div>
-
-
-            </article>
-
-
-
-            <!-- ==================================================
-                 09 — COMMUNITY & TRIBE
-            ================================================== -->
-
-            <article class="pillar-card">
-
-
-                <div class="pillar-icon">
-                    🌍
-                </div>
-
-
-                <h3>
-
-                    Community &amp; Tribe™
-
-                    <br>
-
-                    சமூக உறவு™
-
-                </h3>
-
-
-                <p>
-
-                    என்னை வளர்க்கும்
-                    நல்ல மனிதர்களால் நான் சூழப்பட்டுள்ளேன்.
-
-                    <br><br>
-
-                    I am surrounded by positive
-                    and supportive people.
-
-                </p>
-
-
-                <div class="score-selector">
-
-                    Your Score
-
-                </div>
-
-
-            </article>
-
-
-
-            <!-- ==================================================
-                 10 — SYSTEMS & PRODUCTIVITY
-            ================================================== -->
-
-            <article class="pillar-card">
-
-
-                <div class="pillar-icon">
-                    ⚙️
-                </div>
-
-
-                <h3>
-
-                    Systems &amp; Productivity™
-
-                    <br>
-
-                    அமைப்புகள் &amp; செயல்திறன்™
-
-                </h3>
-
-
-                <p>
-
-                    என் இலக்குகளை அடைய
-                    உதவும் அமைப்புகள் என்னிடம் உள்ளன.
-
-                    <br><br>
-
-                    I have systems and habits
-                    that help me make progress.
-
-                </p>
-
-
-                <div class="score-selector">
-
-                    Your Score
-
-                </div>
-
-
-            </article>
-
-
-
-            <!-- ==================================================
-                 11 — SERVICE & IMPACT
-            ================================================== -->
-
-            <article class="pillar-card">
-
-
-                <div class="pillar-icon">
-                    ❤️
-                </div>
-
-
-                <h3>
-
-                    Service &amp; Impact™
-
-                    <br>
-
-                    சேவை &amp; தாக்கம்™
-
-                </h3>
-
-
-                <p>
-
-                    மற்றவர்களின் வாழ்க்கையில்
-                    நல்ல மாற்றத்தை உருவாக்குகிறேன்.
-
-                    <br><br>
-
-                    I create meaningful positive
-                    impact in others' lives.
-
-                </p>
-
-
-                <div class="score-selector">
-
-                    Your Score
-
-                </div>
-
-
-            </article>
-
-
-
-            <!-- ==================================================
-                 12 — VISION & LEGACY
-            ================================================== -->
-
-            <article class="pillar-card">
-
-
-                <div class="pillar-icon">
-                    🌟
-                </div>
-
-
-                <h3>
-
-                    Vision &amp; Legacy™
-
-                    <br>
-
-                    பார்வை &amp; மரபு™
-
-                </h3>
-
-
-                <p>
-
-                    நான் உருவாக்க விரும்பும்
-                    எதிர்காலம் குறித்து தெளிவான பார்வை உள்ளது.
-
-                    <br><br>
-
-                    I have a clear vision
-                    for my future and legacy.
-
-                </p>
-
-
-                <div class="score-selector">
-
-                    Your Score
-
-                </div>
-
-
-            </article>
-
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- ======================================================
-         COMPLETION
-    ====================================================== -->
-
-    <section class="page03-completion">
-
-
-        <div class="completion-card">
-
-
-            <h2>
-
-                Almost There...
-
-            </h2>
-
-
-            <p class="tamil">
-
-                இன்னும் ஒரு படி...
-
-                <br>
-
-                உங்கள் வாழ்க்கையின்
-
-                <br>
-
-                12 முக்கிய பகுதிகளும்
-
-                <br>
-
-                இப்போது ஒரே பார்வையில்
-
-                <br>
-
-                உங்களுக்குத் தெரியவரும்.
-
-            </p>
-
-
-            <p class="english">
-
-                You're one step away
-
-                <br>
-
-                from seeing how the twelve
-
-                <br>
-
-                important areas of your life
-
-                <br>
-
-                align with one another.
-
-            </p>
-
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- ======================================================
-         FINAL ACTION
-    ====================================================== -->
-
-    <section class="page03-action">
-
-
-        <button
-            type="button"
-            class="journey-button"
-            id="show-alignment-button"
+        <section
+            class="page03-hero"
         >
 
 
-            <span>
-
-                என் KALA CHAKRA™
-
-                <br>
-
-                வாழ்க்கை சமநிலையை காண்பி
-
-            </span>
+            <div
+                class="page03-hero-inner"
+            >
 
 
-            <small>
-
-                SHOW MY LIFE ALIGNMENT™
-
-            </small>
-
-
-        </button>
-
-
-    </section>
+                <p
+                    class="page03-brand"
+                >
+                    CTM PATH™
+                </p>
 
 
 
-    <!-- ======================================================
-         REFLECTION NOTE
-    ====================================================== -->
-
-    <section class="page03-reflection">
-
-
-        <div class="reflection-card">
-
-
-            <p>
-
-                💡 சரியான அல்லது தவறான பதில்கள் எதுவும் இல்லை.
-
-                <br>
-
-                இந்த மதிப்பீடு உங்களை
-                மற்றவர்களுடன் ஒப்பிடுவதற்காக அல்ல;
-
-                <br>
-
-                உங்கள் தற்போதைய வாழ்க்கையை
-                உங்களுக்கே தெளிவாகக் காட்டுவதற்காக
-                உருவாக்கப்பட்டுள்ளது.
-
-            </p>
-
-
-            <p>
-
-                💡 There are no right or wrong answers.
-
-                <br>
-
-                This assessment isn't designed
-                to compare you with others—
-
-                <br>
-
-                it's designed to help you see
-                your own life with greater clarity.
-
-            </p>
-
-
-        </div>
-
-
-    </section>
-
-
-</main>
+                <h1
+                    class="page03-title"
+                >
+                    KALA CHAKRA™
+                    <br>
+                    LIFE ASSESSMENT™
+                </h1>
 
 
 
-<!-- ==========================================================================
-     APPLICATION SCRIPTS
-
-     IMPORTANT:
-     js/api.js is the existing shared CTM PATH™ API service.
-     page03.js owns Page 03 scoring and navigation.
-
-========================================================================== -->
+                <div
+                    class="page03-opening"
+                >
 
 
-<script src="../js/api.js"></script>
+                    <h2
+                        class="page03-opening-ta"
+                        lang="ta"
+                    >
+                        உங்கள் வாழ்க்கையை
+                        <br>
+                        ஒரு புதிய பார்வையில்
+                        <br>
+                        காண்போம்.
+                    </h2>
 
-<script src="../js/page03.js"></script>
+
+                    <p
+                        class="page03-opening-en"
+                    >
+                        SEE YOUR LIFE
+                        <br>
+                        FROM A NEW PERSPECTIVE™
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
 
 
 
-<!-- ==========================================================================
-     PAGE INITIALIZATION
-========================================================================== -->
+        <!-- ============================================================
+             PERSPECTIVE
+        ============================================================= -->
+
+        <section
+            class="page03-perspective"
+        >
 
 
-<script>
+            <div
+                class="page03-perspective-inner"
+            >
 
-    document.addEventListener(
 
-        "DOMContentLoaded",
+                <h2
+                    class="page03-perspective-ta"
+                    lang="ta"
+                >
+                    வாழ்க்கை என்பது
+                    <br>
+                    ஒரு இலக்கு அல்ல.
+                    <br>
+                    பல முக்கிய பகுதிகளின்
+                    <br>
+                    சமநிலையாகும்.
+                </h2>
 
-        function(){
 
-            if(
-                window.CTM_PAGE03 &&
-                typeof window.CTM_PAGE03.init === "function"
-            ){
 
-                window.CTM_PAGE03.init();
+                <p
+                    class="page03-perspective-en"
+                >
+                    Life isn't defined by a single achievement.
+                    <br>
+                    It's shaped by the balance
+                    <br>
+                    between the areas that matter most.
+                </p>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ============================================================
+             ASSESSMENT INTRODUCTION
+        ============================================================= -->
+
+        <section
+            class="assessment-intro"
+        >
+
+
+            <div
+                class="assessment-intro-inner"
+            >
+
+
+                <p
+                    class="assessment-eyebrow"
+                >
+                    KALA CHAKRA™
+                </p>
+
+
+
+                <h2
+                    class="assessment-intro-ta"
+                    lang="ta"
+                >
+                    உங்கள் வாழ்க்கையின்
+                    12 முக்கிய பகுதிகளை
+                    இப்போது பார்ப்போம்.
+                </h2>
+
+
+
+                <p
+                    class="assessment-intro-en"
+                >
+                    Explore the 12 essential areas
+                    that shape a well-lived life.
+                </p>
+
+
+
+                <p
+                    class="assessment-instruction-ta"
+                    lang="ta"
+                >
+                    ஒவ்வொரு பகுதியிலும்,
+                    உங்கள் தற்போதைய வாழ்க்கையை
+                    0 முதல் 10 வரை மதிப்பிடுங்கள்.
+                </p>
+
+
+
+                <p
+                    class="assessment-instruction-en"
+                >
+                    For each area, choose the score
+                    that best reflects your life today.
+                </p>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ============================================================
+             KALA CHAKRA™
+             12 LIFE PILLARS
+
+             IMPORTANT:
+             The order below MUST remain synchronized with
+             the PILLARS array in ../js/page03.js
+        ============================================================= -->
+
+        <section
+            class="kala-chakra-assessment"
+            aria-label="KALA CHAKRA Life Assessment"
+        >
+
+
+            <div
+                class="pillar-grid"
+            >
+
+
+
+                <!-- ====================================================
+                     01 — PURPOSE
+                ===================================================== -->
+
+                <article
+                    class="pillar-card"
+                    data-pillar-index="0"
+                >
+
+
+                    <div
+                        class="pillar-number"
+                    >
+                        01
+                    </div>
+
+
+                    <div
+                        class="pillar-content"
+                    >
+
+
+                        <h3
+                            class="pillar-title-ta"
+                            lang="ta"
+                        >
+                            நோக்கம்
+                        </h3>
+
+
+                        <p
+                            class="pillar-title-en"
+                        >
+                            PURPOSE
+                        </p>
+
+
+                        <p
+                            class="pillar-question-ta"
+                            lang="ta"
+                        >
+                            நான் ஏன் வாழ்கிறேன்,
+                            எதை நோக்கி செல்கிறேன்
+                            என்பதில் எனக்கு எவ்வளவு தெளிவு உள்ளது?
+                        </p>
+
+
+                        <p
+                            class="pillar-question-en"
+                        >
+                            How clear are you about
+                            why you live and where your life is heading?
+                        </p>
+
+
+                        <div
+                            class="score-selector"
+                            aria-label="Purpose score"
+                        ></div>
+
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- ====================================================
+                     02 — HEALTH
+                ===================================================== -->
+
+                <article
+                    class="pillar-card"
+                    data-pillar-index="1"
+                >
+
+
+                    <div
+                        class="pillar-number"
+                    >
+                        02
+                    </div>
+
+
+                    <div
+                        class="pillar-content"
+                    >
+
+
+                        <h3
+                            class="pillar-title-ta"
+                            lang="ta"
+                        >
+                            உடல்நலம்
+                        </h3>
+
+
+                        <p
+                            class="pillar-title-en"
+                        >
+                            HEALTH
+                        </p>
+
+
+                        <p
+                            class="pillar-question-ta"
+                            lang="ta"
+                        >
+                            என் உடல், ஆற்றல் மற்றும்
+                            அன்றாட நலனை நான் எவ்வளவு
+                            நன்றாக பராமரிக்கிறேன்?
+                        </p>
+
+
+                        <p
+                            class="pillar-question-en"
+                        >
+                            How well are you caring for
+                            your body, energy and everyday well-being?
+                        </p>
+
+
+                        <div
+                            class="score-selector"
+                            aria-label="Health score"
+                        ></div>
+
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- ====================================================
+                     03 — RELATIONSHIPS
+                ===================================================== -->
+
+                <article
+                    class="pillar-card"
+                    data-pillar-index="2"
+                >
+
+
+                    <div
+                        class="pillar-number"
+                    >
+                        03
+                    </div>
+
+
+                    <div
+                        class="pillar-content"
+                    >
+
+
+                        <h3
+                            class="pillar-title-ta"
+                            lang="ta"
+                        >
+                            உறவுகள்
+                        </h3>
+
+
+                        <p
+                            class="pillar-title-en"
+                        >
+                            RELATIONSHIPS
+                        </p>
+
+
+                        <p
+                            class="pillar-question-ta"
+                            lang="ta"
+                        >
+                            எனக்கு முக்கியமானவர்களுடன்
+                            என் உறவுகள் எவ்வளவு
+                            அன்பானதாகவும் வலிமையானதாகவும் உள்ளன?
+                        </p>
+
+
+                        <p
+                            class="pillar-question-en"
+                        >
+                            How strong and meaningful are
+                            your relationships with the people who matter most?
+                        </p>
+
+
+                        <div
+                            class="score-selector"
+                            aria-label="Relationships score"
+                        ></div>
+
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- ====================================================
+                     04 — CHARACTER & INTEGRITY
+                ===================================================== -->
+
+                <article
+                    class="pillar-card"
+                    data-pillar-index="3"
+                >
+
+
+                    <div
+                        class="pillar-number"
+                    >
+                        04
+                    </div>
+
+
+                    <div
+                        class="pillar-content"
+                    >
+
+
+                        <h3
+                            class="pillar-title-ta"
+                            lang="ta"
+                        >
+                            பண்பும் நேர்மையும்
+                        </h3>
+
+
+                        <p
+                            class="pillar-title-en"
+                        >
+                            CHARACTER &amp; INTEGRITY
+                        </p>
+
+
+                        <p
+                            class="pillar-question-ta"
+                            lang="ta"
+                        >
+                            என் மதிப்புகளுக்கு ஏற்ப
+                            நான் எவ்வளவு உண்மையாகவும்
+                            நேர்மையாகவும் வாழ்கிறேன்?
+                        </p>
+
+
+                        <p
+                            class="pillar-question-en"
+                        >
+                            How consistently do you live
+                            according to your values and principles?
+                        </p>
+
+
+                        <div
+                            class="score-selector"
+                            aria-label="Character and Integrity score"
+                        ></div>
+
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- ====================================================
+                     05 — LEARNING & MASTERY
+                ===================================================== -->
+
+                <article
+                    class="pillar-card"
+                    data-pillar-index="4"
+                >
+
+
+                    <div
+                        class="pillar-number"
+                    >
+                        05
+                    </div>
+
+
+                    <div
+                        class="pillar-content"
+                    >
+
+
+                        <h3
+                            class="pillar-title-ta"
+                            lang="ta"
+                        >
+                            கற்றலும் தேர்ச்சியும்
+                        </h3>
+
+
+                        <p
+                            class="pillar-title-en"
+                        >
+                            LEARNING &amp; MASTERY
+                        </p>
+
+
+                        <p
+                            class="pillar-question-ta"
+                            lang="ta"
+                        >
+                            நான் தொடர்ந்து கற்று,
+                            என் திறன்களையும் அறிவையும்
+                            எவ்வளவு வளர்த்துக் கொண்டிருக்கிறேன்?
+                        </p>
+
+
+                        <p
+                            class="pillar-question-en"
+                        >
+                            How consistently are you learning,
+                            improving and mastering valuable skills?
+                        </p>
+
+
+                        <div
+                            class="score-selector"
+                            aria-label="Learning and Mastery score"
+                        ></div>
+
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- ====================================================
+                     06 — CAREER & CONTRIBUTION
+                ===================================================== -->
+
+                <article
+                    class="pillar-card"
+                    data-pillar-index="5"
+                >
+
+
+                    <div
+                        class="pillar-number"
+                    >
+                        06
+                    </div>
+
+
+                    <div
+                        class="pillar-content"
+                    >
+
+
+                        <h3
+                            class="pillar-title-ta"
+                            lang="ta"
+                        >
+                            தொழிலும் பங்களிப்பும்
+                        </h3>
+
+
+                        <p
+                            class="pillar-title-en"
+                        >
+                            CAREER &amp; CONTRIBUTION
+                        </p>
+
+
+                        <p
+                            class="pillar-question-ta"
+                            lang="ta"
+                        >
+                            என் வேலை அல்லது தொழில்
+                            என் திறமைகளை வெளிப்படுத்தி,
+                            அர்த்தமுள்ள பங்களிப்பை உருவாக்குகிறதா?
+                        </p>
+
+
+                        <p
+                            class="pillar-question-en"
+                        >
+                            How well does your work allow you
+                            to use your abilities and make a meaningful contribution?
+                        </p>
+
+
+                        <div
+                            class="score-selector"
+                            aria-label="Career and Contribution score"
+                        ></div>
+
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- ====================================================
+                     07 — FINANCIAL FREEDOM
+                ===================================================== -->
+
+                <article
+                    class="pillar-card"
+                    data-pillar-index="6"
+                >
+
+
+                    <div
+                        class="pillar-number"
+                    >
+                        07
+                    </div>
+
+
+                    <div
+                        class="pillar-content"
+                    >
+
+
+                        <h3
+                            class="pillar-title-ta"
+                            lang="ta"
+                        >
+                            பொருளாதார சுதந்திரம்
+                        </h3>
+
+
+                        <p
+                            class="pillar-title-en"
+                        >
+                            FINANCIAL FREEDOM
+                        </p>
+
+
+                        <p
+                            class="pillar-question-ta"
+                            lang="ta"
+                        >
+                            என் பணநிலை எனக்கு
+                            பாதுகாப்பையும் தேர்வுகளையும்
+                            எதிர்கால சுதந்திரத்தையும் எவ்வளவு வழங்குகிறது?
+                        </p>
+
+
+                        <p
+                            class="pillar-question-en"
+                        >
+                            How much security, choice and
+                            future freedom does your financial life provide?
+                        </p>
+
+
+                        <div
+                            class="score-selector"
+                            aria-label="Financial Freedom score"
+                        ></div>
+
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- ====================================================
+                     08 — TIME FREEDOM
+                ===================================================== -->
+
+                <article
+                    class="pillar-card"
+                    data-pillar-index="7"
+                >
+
+
+                    <div
+                        class="pillar-number"
+                    >
+                        08
+                    </div>
+
+
+                    <div
+                        class="pillar-content"
+                    >
+
+
+                        <h3
+                            class="pillar-title-ta"
+                            lang="ta"
+                        >
+                            நேர சுதந்திரம்
+                        </h3>
+
+
+                        <p
+                            class="pillar-title-en"
+                        >
+                            TIME FREEDOM
+                        </p>
+
+
+                        <p
+                            class="pillar-question-ta"
+                            lang="ta"
+                        >
+                            என் நேரத்தை என் முன்னுரிமைகளுக்கு ஏற்ப
+                            பயன்படுத்தும் சுதந்திரம்
+                            எனக்கு எவ்வளவு உள்ளது?
+                        </p>
+
+
+                        <p
+                            class="pillar-question-en"
+                        >
+                            How much freedom do you have
+                            to use your time according to what matters most?
+                        </p>
+
+
+                        <div
+                            class="score-selector"
+                            aria-label="Time Freedom score"
+                        ></div>
+
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- ====================================================
+                     09 — COMMUNITY & TRIBE
+                ===================================================== -->
+
+                <article
+                    class="pillar-card"
+                    data-pillar-index="8"
+                >
+
+
+                    <div
+                        class="pillar-number"
+                    >
+                        09
+                    </div>
+
+
+                    <div
+                        class="pillar-content"
+                    >
+
+
+                        <h3
+                            class="pillar-title-ta"
+                            lang="ta"
+                        >
+                            சமூகமும் உறவுக்குழுவும்
+                        </h3>
+
+
+                        <p
+                            class="pillar-title-en"
+                        >
+                            COMMUNITY &amp; TRIBE
+                        </p>
+
+
+                        <p
+                            class="pillar-question-ta"
+                            lang="ta"
+                        >
+                            என்னை ஊக்குவிக்கும்,
+                            ஆதரிக்கும் மற்றும் வளர்ச்சிக்கு உதவும்
+                            மனிதர்கள் என்னைச் சுற்றி உள்ளனரா?
+                        </p>
+
+
+                        <p
+                            class="pillar-question-en"
+                        >
+                            Are you surrounded by people
+                            who support, challenge and strengthen your growth?
+                        </p>
+
+
+                        <div
+                            class="score-selector"
+                            aria-label="Community and Tribe score"
+                        ></div>
+
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- ====================================================
+                     10 — SYSTEMS & PRODUCTIVITY
+                ===================================================== -->
+
+                <article
+                    class="pillar-card"
+                    data-pillar-index="9"
+                >
+
+
+                    <div
+                        class="pillar-number"
+                    >
+                        10
+                    </div>
+
+
+                    <div
+                        class="pillar-content"
+                    >
+
+
+                        <h3
+                            class="pillar-title-ta"
+                            lang="ta"
+                        >
+                            அமைப்புகளும் செயல்திறனும்
+                        </h3>
+
+
+                        <p
+                            class="pillar-title-en"
+                        >
+                            SYSTEMS &amp; PRODUCTIVITY
+                        </p>
+
+
+                        <p
+                            class="pillar-question-ta"
+                            lang="ta"
+                        >
+                            என் முக்கிய செயல்களை
+                            ஒழுங்காகவும் தொடர்ந்து செய்யவும்
+                            உதவும் அமைப்புகள் என்னிடம் உள்ளனவா?
+                        </p>
+
+
+                        <p
+                            class="pillar-question-en"
+                        >
+                            How effectively do your routines and systems
+                            turn priorities into consistent action?
+                        </p>
+
+
+                        <div
+                            class="score-selector"
+                            aria-label="Systems and Productivity score"
+                        ></div>
+
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- ====================================================
+                     11 — SERVICE & IMPACT
+                ===================================================== -->
+
+                <article
+                    class="pillar-card"
+                    data-pillar-index="10"
+                >
+
+
+                    <div
+                        class="pillar-number"
+                    >
+                        11
+                    </div>
+
+
+                    <div
+                        class="pillar-content"
+                    >
+
+
+                        <h3
+                            class="pillar-title-ta"
+                            lang="ta"
+                        >
+                            சேவையும் தாக்கமும்
+                        </h3>
+
+
+                        <p
+                            class="pillar-title-en"
+                        >
+                            SERVICE &amp; IMPACT
+                        </p>
+
+
+                        <p
+                            class="pillar-question-ta"
+                            lang="ta"
+                        >
+                            என் வாழ்க்கை மற்றவர்களுக்கு
+                            பயனையும் நல்ல மாற்றத்தையும்
+                            எவ்வளவு உருவாக்குகிறது?
+                        </p>
+
+
+                        <p
+                            class="pillar-question-en"
+                        >
+                            How meaningfully is your life
+                            creating value and positive change for others?
+                        </p>
+
+
+                        <div
+                            class="score-selector"
+                            aria-label="Service and Impact score"
+                        ></div>
+
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- ====================================================
+                     12 — VISION & LEGACY
+                ===================================================== -->
+
+                <article
+                    class="pillar-card"
+                    data-pillar-index="11"
+                >
+
+
+                    <div
+                        class="pillar-number"
+                    >
+                        12
+                    </div>
+
+
+                    <div
+                        class="pillar-content"
+                    >
+
+
+                        <h3
+                            class="pillar-title-ta"
+                            lang="ta"
+                        >
+                            தொலைநோக்கும் மரபும்
+                        </h3>
+
+
+                        <p
+                            class="pillar-title-en"
+                        >
+                            VISION &amp; LEGACY
+                        </p>
+
+
+                        <p
+                            class="pillar-question-ta"
+                            lang="ta"
+                        >
+                            நான் உருவாக்க விரும்பும் எதிர்காலமும்,
+                            நான் விட்டுச் செல்ல விரும்பும் தடமும்
+                            எனக்கு எவ்வளவு தெளிவாக உள்ளது?
+                        </p>
+
+
+                        <p
+                            class="pillar-question-en"
+                        >
+                            How clear are you about
+                            the future you want to create and the legacy you want to leave?
+                        </p>
+
+
+                        <div
+                            class="score-selector"
+                            aria-label="Vision and Legacy score"
+                        ></div>
+
+
+                    </div>
+
+
+                </article>
+
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ============================================================
+             COMPLETION / TRANSITION
+        ============================================================= -->
+
+        <section
+            class="assessment-completion"
+        >
+
+
+            <div
+                class="assessment-completion-inner"
+            >
+
+
+                <p
+                    class="completion-ta"
+                    lang="ta"
+                >
+                    உங்கள் வாழ்க்கையின் ஒவ்வொரு பகுதியையும்
+                    தனித்தனியாக பார்த்துவிட்டீர்கள்.
+                    <br>
+                    இப்போது அவை அனைத்தும் சேர்ந்து
+                    என்ன சொல்லுகின்றன என்பதைப் பார்ப்போம்.
+                </p>
+
+
+
+                <p
+                    class="completion-en"
+                >
+                    You have now looked at each part of your life.
+                    <br>
+                    Next, see what the complete picture reveals.
+                </p>
+
+
+
+                <button
+                    id="show-alignment-button"
+                    class="primary-cta"
+                    type="button"
+                >
+
+                    <span
+                        class="cta-ta"
+                        lang="ta"
+                    >
+                        என் வாழ்க்கை சமநிலையை காண்க →
+                    </span>
+
+                    <span
+                        class="cta-en"
+                    >
+                        SEE MY LIFE ALIGNMENT
+                    </span>
+
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+
+
+    </main>
+
+
+
+    <!-- ================================================================
+         SHARED FRONTEND RUNTIME
+
+         Actual repository locations:
+
+         /js/api.js
+         /js/global.js
+
+         page03.html is inside /pages/,
+         therefore "../js/" is required.
+    ================================================================= -->
+
+    <script src="../js/api.js"></script>
+
+    <script src="../js/global.js"></script>
+
+
+
+    <!-- ================================================================
+         PAGE 03 CONTROLLER
+
+         DO NOT MOVE ABOVE SHARED RUNTIME.
+    ================================================================= -->
+
+    <script src="../js/page03.js"></script>
+
+
+
+    <!-- ================================================================
+         PAGE 03 INITIALIZATION
+
+         page03.js exposes:
+
+         window.CTM_PAGE03.init()
+    ================================================================= -->
+
+    <script>
+
+        document.addEventListener(
+
+            "DOMContentLoaded",
+
+            function(){
+
+                if(
+                    window.CTM_PAGE03 &&
+                    typeof window.CTM_PAGE03.init === "function"
+                ){
+
+                    window.CTM_PAGE03.init();
+
+                }
 
             }
 
-        }
+        );
 
-    );
-
-</script>
+    </script>
 
 
 </body>
