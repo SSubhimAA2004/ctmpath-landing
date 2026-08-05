@@ -14,12 +14,22 @@
 
     <meta
         name="description"
-        content="CTM PATH™ MILLIONAIRES™ — KALA CHAKRA™ Life Alignment™"
+        content="CTM PATH™ Millionaires™ — KALA CHAKRA™ Life Alignment™"
     >
 
     <title>
-        KALA CHAKRA™ LIFE ALIGNMENT™ | CTM PATH™ MILLIONAIRES™
+        KALA CHAKRA™ LIFE ALIGNMENT™ | CTM PATH™
     </title>
+
+
+    <!-- ================================================================
+         GLOBAL STYLES
+    ================================================================= -->
+
+    <link
+        rel="stylesheet"
+        href="../css/global.css"
+    >
 
 
     <!-- ================================================================
@@ -34,6 +44,7 @@
 </head>
 
 
+
 <body>
 
 
@@ -43,7 +54,7 @@
 
 <div
     id="global-header"
-    data-component="header"
+    class="global-component"
 ></div>
 
 
@@ -59,80 +70,77 @@
 >
 
 
-    <!-- ==============================================================
-         JOURNEY INDICATOR
-    =============================================================== -->
+    <!-- ================================================================
+         JOURNEY MARKER
+    ================================================================= -->
 
-    <div class="journey-indicator">
+    <section class="journey-marker">
 
-        JOURNEY 04 / 07
-
-    </div>
-
-
-
-    <!-- ==============================================================
-         HERO
-    =============================================================== -->
-
-    <section
-        class="page04-hero"
-        aria-labelledby="page04-title"
-    >
-
-        <div class="page04-hero-inner">
-
-
-            <div class="page04-brand">
-
-                CTM PATH™
-
-            </div>
-
-
-            <h1
-                id="page04-title"
-                class="page04-title"
-            >
-
-                <span>
-                    KALA CHAKRA™
-                </span>
-
-                <span>
-                    LIFE ALIGNMENT™
-                </span>
-
-            </h1>
-
-
-            <div class="page04-hero-tamil">
-
-                உங்கள் வாழ்க்கையின்<br>
-                முழுப் படத்தை<br>
-                இப்போது பாருங்கள்.
-
-            </div>
-
-
-            <div class="page04-hero-english">
-
-                SEE YOUR LIFE<br>
-                AS ONE COMPLETE PICTURE™
-
-            </div>
-
-        </div>
+        <p class="journey-marker-text">
+            JOURNEY 04 / 07
+        </p>
 
     </section>
 
 
 
-    <!-- ==============================================================
+    <!-- ================================================================
+         HERO
+    ================================================================= -->
+
+    <section class="page04-hero">
+
+
+        <div class="page04-hero-inner">
+
+
+            <p class="page04-brand">
+                CTM PATH™
+            </p>
+
+
+            <h1 class="page04-title">
+
+                KALA CHAKRA™ LIFE
+                <br>
+                ALIGNMENT™
+
+            </h1>
+
+
+            <h2 class="page04-title-tamil">
+
+                உங்கள் வாழ்க்கையின்
+                <br>
+                முழுப் படத்தை
+                <br>
+                இப்போது பாருங்கள்.
+
+            </h2>
+
+
+            <p class="page04-title-english">
+
+                SEE YOUR LIFE
+                <br>
+                AS ONE COMPLETE PICTURE™
+
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================================================================
          INTRODUCTION
-    =============================================================== -->
+    ================================================================= -->
 
     <section class="page04-introduction">
+
 
         <div class="page04-section-inner">
 
@@ -145,7 +153,7 @@
             </p>
 
 
-            <p class="page04-intro-tamil page04-intro-emphasis">
+            <p class="page04-intro-tamil">
 
                 இப்போது அவை அனைத்தும் ஒன்றாக
                 இணையும்போது உங்கள் வாழ்க்கை எப்படி
@@ -156,49 +164,45 @@
 
             <p class="page04-intro-english">
 
-                You have looked at each area of your life individually.<br>
-
+                You have looked at each area of your life individually.
+                <br>
                 Now see what happens when all twelve areas
                 come together as one life.
 
             </p>
 
+
         </div>
+
 
     </section>
 
 
 
-    <!-- ==============================================================
+    <!-- ================================================================
          LIFE WHEEL
-    =============================================================== -->
+    ================================================================= -->
 
     <section
+        id="life-wheel-section"
         class="life-wheel-section"
-        aria-labelledby="life-wheel-title"
     >
 
-        <div class="page04-section-inner">
+
+        <div class="page04-section-heading">
 
 
-            <div class="section-eyebrow">
-
+            <p class="section-eyebrow">
                 KALA CHAKRA™
+            </p>
 
-            </div>
 
-
-            <h2
-                id="life-wheel-title"
-                class="section-title"
-            >
-
+            <h2 class="section-title">
                 YOUR LIFE WHEEL™
-
             </h2>
 
 
-            <p class="section-subtitle-tamil">
+            <p class="section-title-tamil">
 
                 உங்கள் வாழ்க்கையின் 12 முக்கிய பகுதிகள் —
                 ஒரே பார்வையில்.
@@ -206,451 +210,427 @@
             </p>
 
 
-            <p class="section-subtitle-english">
+            <p class="section-title-english">
 
-                Your 12 life pillars — revealed as one complete picture.
+                Your 12 life pillars —
+                revealed as one complete picture.
 
             </p>
 
 
+        </div>
 
-            <!-- ======================================================
-                 ACTUAL KALA CHAKRA™ WHEEL
-                 page04.js renders the complete SVG here.
-            ======================================================= -->
 
-            <div
-                id="life-wheel-stage"
-                class="life-wheel-stage"
+
+        <!-- ============================================================
+             LIFE WHEEL RENDER TARGET
+
+             IMPORTANT:
+             page04.js owns the wheel rendering.
+             Do not place a static wheel image here.
+        ============================================================= -->
+
+        <div
+            id="life-wheel-container"
+            class="life-wheel-container"
+        >
+
+
+            <svg
+                id="life-wheel"
+                class="life-wheel"
+                viewBox="0 0 1000 1000"
+                role="img"
+                aria-labelledby="life-wheel-title life-wheel-description"
             >
 
-                <div
-                    id="life-wheel-container"
-                    class="life-wheel-container"
-                    role="img"
-                    aria-label="KALA CHAKRA Life Wheel showing the twelve life pillar scores"
-                ></div>
+                <title id="life-wheel-title">
+                    KALA CHAKRA™ Life Wheel
+                </title>
 
-            </div>
+                <desc id="life-wheel-description">
+                    A twelve-spoke life alignment wheel generated from
+                    the twelve assessment scores.
+                </desc>
 
+            </svg>
 
-
-            <!-- ======================================================
-                 WHEEL LEGEND
-            ======================================================= -->
-
-            <div
-                class="life-wheel-legend"
-                aria-label="Life Wheel score legend"
-            >
-
-                <div class="wheel-legend-item wheel-legend-priority">
-
-                    <span class="wheel-legend-dot"></span>
-
-                    <span>
-                        0–3
-                    </span>
-
-                    <span class="wheel-legend-label">
-                        PRIORITY
-                    </span>
-
-                </div>
-
-
-                <div class="wheel-legend-item wheel-legend-developing">
-
-                    <span class="wheel-legend-dot"></span>
-
-                    <span>
-                        4–7
-                    </span>
-
-                    <span class="wheel-legend-label">
-                        DEVELOPING
-                    </span>
-
-                </div>
-
-
-                <div class="wheel-legend-item wheel-legend-strong">
-
-                    <span class="wheel-legend-dot"></span>
-
-                    <span>
-                        8–10
-                    </span>
-
-                    <span class="wheel-legend-label">
-                        STRONG
-                    </span>
-
-                </div>
-
-            </div>
 
         </div>
+
+
+
+        <!-- ============================================================
+             SCORE LEGEND
+        ============================================================= -->
+
+        <div class="life-wheel-legend">
+
+
+            <div class="legend-item legend-priority">
+
+                <span class="legend-range">
+                    0–3
+                </span>
+
+                <span class="legend-label">
+                    PRIORITY
+                </span>
+
+            </div>
+
+
+            <div class="legend-item legend-developing">
+
+                <span class="legend-range">
+                    4–7
+                </span>
+
+                <span class="legend-label">
+                    DEVELOPING
+                </span>
+
+            </div>
+
+
+            <div class="legend-item legend-strong">
+
+                <span class="legend-range">
+                    8–10
+                </span>
+
+                <span class="legend-label">
+                    STRONG
+                </span>
+
+            </div>
+
+
+        </div>
+
 
     </section>
 
 
 
-    <!-- ==============================================================
-         ALIGNMENT SCORE
-    =============================================================== -->
+    <!-- ================================================================
+         LIFE ALIGNMENT SCORE
+    ================================================================= -->
 
     <section
+        id="alignment-score-section"
         class="alignment-score-section"
-        aria-labelledby="alignment-score-title"
     >
 
-        <div class="page04-section-inner">
+
+        <div class="page04-section-heading">
 
 
-            <div class="section-eyebrow">
-
+            <p class="section-eyebrow">
                 YOUR LIFE ALIGNMENT SCORE™
+            </p>
 
-            </div>
 
-
-            <h2
-                id="alignment-score-title"
-                class="alignment-score-tamil"
-            >
+            <h2 class="section-title-tamil">
 
                 உங்கள் வாழ்க்கை சமநிலை மதிப்பெண்
 
             </h2>
 
 
-
-            <div class="alignment-score-display">
-
-
-                <div class="alignment-score-main">
-
-                    <span
-                        id="alignment-total-score"
-                        class="alignment-total-score"
-                    >
-                        —
-                    </span>
-
-
-                    <span class="alignment-score-divider">
-                        /
-                    </span>
-
-
-                    <span
-                        id="alignment-maximum-score"
-                        class="alignment-maximum-score"
-                    >
-                        120
-                    </span>
-
-                </div>
-
-
-                <div
-                    id="alignment-percentage"
-                    class="alignment-percentage"
-                >
-
-                    —%
-
-                </div>
-
-            </div>
-
-
-
-            <!-- ======================================================
-                 CURRENT LIFE LEVEL
-            ======================================================= -->
-
-            <div class="current-life-level">
-
-
-                <div class="result-label">
-
-                    YOUR CURRENT LIFE LEVEL™
-
-                </div>
-
-
-                <div class="result-label-tamil">
-
-                    உங்கள் தற்போதைய வாழ்க்கை நிலை
-
-                </div>
-
-
-                <div
-                    id="current-life-level"
-                    class="current-life-level-value"
-                >
-
-                    —
-
-                </div>
-
-            </div>
-
         </div>
 
-    </section>
 
 
-
-    <!-- ==============================================================
-         KEY INSIGHTS
-    =============================================================== -->
-
-    <section
-        class="alignment-insights-section"
-        aria-labelledby="alignment-insights-title"
-    >
-
-        <div class="page04-section-inner">
+        <div class="alignment-score-display">
 
 
-            <div class="section-eyebrow">
+            <div class="alignment-total">
 
-                YOUR ALIGNMENT INSIGHTS™
+
+                <span
+                    id="alignment-total-score"
+                    class="alignment-total-number"
+                >
+                    0
+                </span>
+
+
+                <span class="alignment-total-max">
+                    / 120
+                </span>
+
 
             </div>
 
 
-            <h2
-                id="alignment-insights-title"
-                class="section-title section-title-small"
-            >
-
-                WHAT YOUR LIFE WHEEL REVEALS™
-
-            </h2>
-
-
-
-            <div class="alignment-insights-grid">
-
-
-                <!-- ==================================================
-                     STRONGEST AREA
-                =================================================== -->
-
-                <article class="alignment-insight-card strongest-area-card">
-
-
-                    <div class="insight-number">
-
-                        01
-
-                    </div>
-
-
-                    <div class="insight-label">
-
-                        YOUR STRONGEST AREA™
-
-                    </div>
-
-
-                    <div class="insight-label-tamil">
-
-                        உங்கள் மிக வலுவான பகுதி
-
-                    </div>
-
-
-                    <div
-                        id="strongest-pillar-name"
-                        class="insight-pillar-name"
-                    >
-
-                        —
-
-                    </div>
-
-
-                    <div class="insight-score">
-
-                        <span id="strongest-pillar-score">
-                            —
-                        </span>
-
-                        <span>
-                            / 10
-                        </span>
-
-                    </div>
-
-
-                    <p class="insight-description">
-
-                        This is currently one of the strongest
-                        foundations in your life.
-
-                    </p>
-
-                </article>
-
-
-
-                <!-- ==================================================
-                     GROWTH OPPORTUNITY
-                =================================================== -->
-
-                <article class="alignment-insight-card growth-area-card">
-
-
-                    <div class="insight-number">
-
-                        02
-
-                    </div>
-
-
-                    <div class="insight-label">
-
-                        YOUR GREATEST GROWTH OPPORTUNITY™
-
-                    </div>
-
-
-                    <div class="insight-label-tamil">
-
-                        உங்கள் அடுத்த வளர்ச்சி வாய்ப்பு
-
-                    </div>
-
-
-                    <div
-                        id="growth-pillar-name"
-                        class="insight-pillar-name"
-                    >
-
-                        —
-
-                    </div>
-
-
-                    <div class="insight-score">
-
-                        <span id="growth-pillar-score">
-                            —
-                        </span>
-
-                        <span>
-                            / 10
-                        </span>
-
-                    </div>
-
-
-                    <p class="insight-description">
-
-                        Strengthening this area may create
-                        meaningful improvement across the rest
-                        of your life.
-
-                    </p>
-
-                </article>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ==============================================================
-         12 LIFE PILLARS
-    =============================================================== -->
-
-    <section
-        class="pillar-results-section"
-        aria-labelledby="pillar-results-title"
-    >
-
-        <div class="page04-section-inner">
-
-
-            <div class="section-eyebrow">
-
-                KALA CHAKRA™
-
-            </div>
-
-
-            <h2
-                id="pillar-results-title"
-                class="section-title"
-            >
-
-                YOUR 12 LIFE PILLARS™
-
-            </h2>
-
-
-            <div class="section-subtitle-tamil">
-
-                உங்கள் 12 வாழ்க்கைப் பகுதிகள்
-
-            </div>
-
-
-            <div class="section-subtitle-english">
-
-                THE COMPLETE PICTURE™
-
-            </div>
-
-
-
-            <!-- ======================================================
-                 page04.js creates the 12 result cards here.
-            ======================================================= -->
 
             <div
-                id="pillar-results-grid"
-                class="pillar-results-grid"
-            ></div>
+                id="alignment-percentage"
+                class="alignment-percentage"
+            >
+                0%
+            </div>
+
+
+
+            <div class="alignment-level-block">
+
+
+                <p class="alignment-level-label">
+                    YOUR CURRENT LIFE LEVEL™
+                </p>
+
+
+                <p class="alignment-level-label-tamil">
+                    உங்கள் தற்போதைய வாழ்க்கை நிலை
+                </p>
+
+
+                <p
+                    id="alignment-level"
+                    class="alignment-level"
+                >
+                    —
+                </p>
+
+
+            </div>
+
 
         </div>
+
 
     </section>
 
 
 
-    <!-- ==============================================================
-         COMPLETE PICTURE
-    =============================================================== -->
+    <!-- ================================================================
+         ALIGNMENT INSIGHTS
+    ================================================================= -->
 
     <section
-        class="complete-picture-section"
-        aria-labelledby="complete-picture-title"
+        id="alignment-insights"
+        class="alignment-insights"
     >
 
-        <div class="page04-section-inner complete-picture-inner">
+
+        <div class="page04-section-heading">
 
 
-            <div class="section-eyebrow">
-
-                THE COMPLETE PICTURE™
-
-            </div>
+            <p class="section-eyebrow">
+                YOUR ALIGNMENT INSIGHTS™
+            </p>
 
 
-            <h2
-                id="complete-picture-title"
-                class="complete-picture-title-tamil"
+            <h2 class="section-title">
+                WHAT YOUR LIFE WHEEL REVEALS™
+            </h2>
+
+
+        </div>
+
+
+
+        <div class="alignment-insight-grid">
+
+
+            <!-- STRONGEST AREA -->
+
+            <article
+                class="alignment-insight-card strongest-area-card"
             >
+
+
+                <p class="insight-number">
+                    01
+                </p>
+
+
+                <p class="insight-eyebrow">
+                    YOUR STRONGEST AREA™
+                </p>
+
+
+                <p class="insight-eyebrow-tamil">
+                    உங்கள் மிக வலுவான பகுதி
+                </p>
+
+
+                <h3
+                    id="strongest-area-name"
+                    class="insight-area-name"
+                >
+                    —
+                </h3>
+
+
+                <div class="insight-score">
+
+
+                    <span
+                        id="strongest-area-score"
+                        class="insight-score-number"
+                    >
+                        —
+                    </span>
+
+
+                    <span class="insight-score-max">
+                        / 10
+                    </span>
+
+
+                </div>
+
+
+                <p class="insight-description">
+
+                    This is currently one of the strongest
+                    foundations in your life.
+
+                </p>
+
+
+            </article>
+
+
+
+            <!-- GROWTH OPPORTUNITY -->
+
+            <article
+                class="alignment-insight-card growth-area-card"
+            >
+
+
+                <p class="insight-number">
+                    02
+                </p>
+
+
+                <p class="insight-eyebrow">
+                    YOUR GREATEST GROWTH OPPORTUNITY™
+                </p>
+
+
+                <p class="insight-eyebrow-tamil">
+                    உங்கள் அடுத்த வளர்ச்சி வாய்ப்பு
+                </p>
+
+
+                <h3
+                    id="growth-area-name"
+                    class="insight-area-name"
+                >
+                    —
+                </h3>
+
+
+                <div class="insight-score">
+
+
+                    <span
+                        id="growth-area-score"
+                        class="insight-score-number"
+                    >
+                        —
+                    </span>
+
+
+                    <span class="insight-score-max">
+                        / 10
+                    </span>
+
+
+                </div>
+
+
+                <p class="insight-description">
+
+                    Strengthening this area may create meaningful
+                    improvement across the rest of your life.
+
+                </p>
+
+
+            </article>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================================================================
+         TWELVE LIFE PILLARS
+    ================================================================= -->
+
+    <section
+        id="life-pillars-section"
+        class="life-pillars-section"
+    >
+
+
+        <div class="page04-section-heading">
+
+
+            <p class="section-eyebrow">
+                KALA CHAKRA™
+            </p>
+
+
+            <h2 class="section-title">
+                YOUR 12 LIFE PILLARS™
+            </h2>
+
+
+            <p class="section-title-tamil">
+                உங்கள் 12 வாழ்க்கைப் பகுதிகள்
+            </p>
+
+
+            <p class="section-title-english">
+                THE COMPLETE PICTURE™
+            </p>
+
+
+        </div>
+
+
+
+        <!--
+            page04.js generates the twelve result cards
+            inside this container.
+        -->
+
+        <div
+            id="pillar-results"
+            class="pillar-results"
+        ></div>
+
+
+    </section>
+
+
+
+    <!-- ================================================================
+         COMPLETE PICTURE
+    ================================================================= -->
+
+    <section class="complete-picture-section">
+
+
+        <div class="complete-picture-inner">
+
+
+            <p class="section-eyebrow">
+                THE COMPLETE PICTURE™
+            </p>
+
+
+            <h2 class="complete-picture-tamil">
 
                 ஒரு நல்ல வாழ்க்கை என்பது
                 எல்லா பகுதிகளிலும் ஒரே அளவு
@@ -659,7 +639,7 @@
             </h2>
 
 
-            <p class="complete-picture-tamil">
+            <p class="complete-picture-tamil-secondary">
 
                 எந்த பகுதிகள் உங்களை முன்னேற்றுகின்றன —
                 எந்த பகுதிகள் உங்களை பின்னால் இழுக்கின்றன —
@@ -679,17 +659,19 @@
             <p class="complete-picture-english">
 
                 Transformation begins when you can clearly see
-                what is strengthening your life, what is limiting it,
-                and where your attention can create the greatest change.
+                what is strengthening your life,
+                what is limiting it,
+                and where your attention can create
+                the greatest change.
 
             </p>
 
 
 
-            <div class="complete-picture-closing">
+            <div class="complete-picture-transition">
 
 
-                <p class="complete-picture-closing-tamil">
+                <p class="transition-tamil">
 
                     இப்போது உங்கள் வாழ்க்கையின்
                     முழுப் படம் தெரிகிறது.
@@ -697,85 +679,75 @@
                 </p>
 
 
-                <p class="complete-picture-closing-tamil">
+                <p class="transition-tamil">
 
-                    அடுத்ததாக —<br>
-
+                    அடுத்ததாக —
+                    <br>
                     இந்த படம் உங்களைப் பற்றி
                     என்ன சொல்கிறது என்பதைப் பார்ப்போம்.
 
                 </p>
 
 
-                <p class="complete-picture-closing-english">
+                <p class="transition-english">
 
-                    You can now see the complete picture.<br>
-
+                    You can now see the complete picture.
+                    <br>
                     Next, discover what this pattern reveals
                     about your life.
 
                 </p>
 
+
             </div>
 
+
         </div>
+
 
     </section>
 
 
 
-    <!-- ==============================================================
+    <!-- ================================================================
          NAVIGATION
-    =============================================================== -->
+    ================================================================= -->
 
     <section class="page04-navigation">
+
 
         <div class="page04-navigation-inner">
 
 
             <button
-                id="personal-diagnosis-button"
+                id="diagnosis-button"
                 class="page04-primary-button"
                 type="button"
             >
 
-                <span class="button-tamil">
-
-                    என் தனிப்பட்ட வாழ்க்கை
-                    பகுப்பாய்வை காண்க →
-
-                </span>
-
-                <span class="button-english">
-
-                    SEE MY PERSONAL LIFE DIAGNOSIS →
-
-                </span>
+                என் தனிப்பட்ட வாழ்க்கை
+                பகுப்பாய்வை காண்க
+                →
+                SEE MY PERSONAL LIFE DIAGNOSIS
+                →
 
             </button>
 
 
 
             <a
+                class="page04-back-link"
                 href="page03.html"
-                class="page04-back-button"
             >
 
-                <span class="button-tamil">
-
-                    ← மதிப்பீட்டிற்குத் திரும்புக
-
-                </span>
-
-                <span class="button-english">
-
-                    BACK TO LIFE ASSESSMENT
-
-                </span>
+                ← மதிப்பீட்டிற்குத் திரும்புக
+                BACK TO LIFE ASSESSMENT
 
             </a>
 
+
         </div>
+
 
     </section>
 
@@ -790,29 +762,21 @@
 
 <div
     id="global-footer"
-    data-component="footer"
+    class="global-component"
 ></div>
 
 
 
 <!-- ==================================================================
-     SHARED FRONTEND DEPENDENCIES
-
-     These are the shared component files already used by the
-     Guided Journey frontend.
-
-     component-loader.js loads:
-         components/header.html
-         components/footer.html
-
+     SHARED FRONTEND JAVASCRIPT
 =================================================================== -->
 
-<script src="../components/component-loader.js"></script>
+<script src="../js/components.js"></script>
 
 
 
 <!-- ==================================================================
-     PAGE 04 SCRIPT
+     PAGE 04 JAVASCRIPT
 =================================================================== -->
 
 <script src="../js/page04.js"></script>
@@ -820,45 +784,96 @@
 
 
 <!-- ==================================================================
-     INITIALIZATION
+     GLOBAL COMPONENT LOADER + PAGE INITIALISATION
 =================================================================== -->
 
 <script>
 
-document.addEventListener(
+(function () {
 
-    "DOMContentLoaded",
-
-    function(){
+    "use strict";
 
 
-        /*
-         * --------------------------------------------------------------
-         * GLOBAL COMPONENTS
-         * --------------------------------------------------------------
-         */
+    /* --------------------------------------------------------------
+       LOAD SHARED HTML COMPONENT
+    -------------------------------------------------------------- */
 
-        if(
-            window.CTM_COMPONENTS &&
-            typeof window.CTM_COMPONENTS.init === "function"
-        ){
+    async function loadComponent(targetId, componentPath) {
 
-            window.CTM_COMPONENTS.init();
+        const target = document.getElementById(targetId);
 
+        if (!target) {
+            return;
         }
 
 
+        try {
+
+            const response = await fetch(componentPath);
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Unable to load component: " + componentPath
+                );
+
+            }
+
+
+            target.innerHTML = await response.text();
+
+
+        } catch (error) {
+
+            console.error(
+                "CTM PATH™ Component Load Error:",
+                error
+            );
+
+        }
+
+    }
+
+
+
+    /* --------------------------------------------------------------
+       INITIALISE PAGE
+    -------------------------------------------------------------- */
+
+    async function initialisePage04() {
+
 
         /*
-         * --------------------------------------------------------------
-         * PAGE 04
-         * --------------------------------------------------------------
+         * Load the same shared global shell used
+         * throughout the Guided Journey.
          */
 
-        if(
+        await Promise.all([
+
+            loadComponent(
+                "global-header",
+                "../components/header.html"
+            ),
+
+            loadComponent(
+                "global-footer",
+                "../components/footer.html"
+            )
+
+        ]);
+
+
+
+        /*
+         * Initialise Page 04 only after the DOM
+         * and shared components are available.
+         */
+
+        if (
             window.CTM_PAGE04 &&
             typeof window.CTM_PAGE04.init === "function"
-        ){
+        ) {
 
             window.CTM_PAGE04.init();
 
@@ -867,7 +882,27 @@ document.addEventListener(
 
     }
 
-);
+
+
+    /* --------------------------------------------------------------
+       DOM READY
+    -------------------------------------------------------------- */
+
+    if (document.readyState === "loading") {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            initialisePage04
+        );
+
+    } else {
+
+        initialisePage04();
+
+    }
+
+
+})();
 
 </script>
 
