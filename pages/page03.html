@@ -76,11 +76,11 @@
          GLOBAL HEADER
 
          Loaded by:
-         ../js/components-loader.js
+         ../js/component-loader.js
     ================================================================= -->
 
     <div
-        id="header-container"
+        id="global-header"
     ></div>
 
 
@@ -1305,32 +1305,25 @@
          GLOBAL FOOTER
 
          Loaded by:
-         ../js/components-loader.js
+         ../js/component-loader.js
     ================================================================= -->
 
     <div
-        id="footer-container"
+        id="global-footer"
     ></div>
 
 
 
     <!-- ================================================================
-         GLOBAL COMPONENT SYSTEM
-    ================================================================= -->
-
-    <script
-        src="../js/components-loader.js"
-    ></script>
-
-
-    <script
-        src="../js/header.js"
-    ></script>
-
-
-
-    <!-- ================================================================
          SHARED FRONTEND RUNTIME
+
+         LOAD ORDER:
+         1. API
+         2. Global runtime
+         3. Component loader
+         4. Page 03 controller
+         5. Initialize global shell
+         6. Initialize Page 03
     ================================================================= -->
 
     <script
@@ -1343,12 +1336,10 @@
     ></script>
 
 
+    <script
+        src="../js/component-loader.js"
+    ></script>
 
-    <!-- ================================================================
-         PAGE 03 CONTROLLER
-
-         EXISTING v10 CONTRACT
-    ================================================================= -->
 
     <script
         src="../js/page03.js"
@@ -1366,20 +1357,58 @@
 
             "DOMContentLoaded",
 
-            function(){
+            async function () {
 
 
-                if(
+                /*
+                 * ---------------------------------------------------------
+                 * GLOBAL SHELL
+                 * ---------------------------------------------------------
+                 *
+                 * Loads:
+                 *
+                 * /components/header.html
+                 * /components/footer.html
+                 *
+                 * component-loader.js also handles the shared component
+                 * styles/controllers required by the global shell.
+                 *
+                 * ---------------------------------------------------------
+                 */
+
+                if (
+
+                    window.CTM_COMPONENTS &&
+
+                    typeof window.CTM_COMPONENTS.load === "function"
+
+                ) {
+
+                    await window.CTM_COMPONENTS.load();
+
+                }
+
+
+
+                /*
+                 * ---------------------------------------------------------
+                 * PAGE 03
+                 * ---------------------------------------------------------
+                 *
+                 * Existing v10 Page 03 initialization contract.
+                 *
+                 * ---------------------------------------------------------
+                 */
+
+                if (
 
                     window.CTM_PAGE03 &&
 
                     typeof window.CTM_PAGE03.init === "function"
 
-                ){
-
+                ) {
 
                     window.CTM_PAGE03.init();
-
 
                 }
 
