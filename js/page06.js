@@ -9,7 +9,7 @@
    PERSONAL TRANSFORMATION PRESCRIPTION™
 
    VERSION:
-   1.1
+   1.2
 
    RESPONSIBILITIES:
 
@@ -22,6 +22,7 @@
    ✓ Generate PDF
    ✓ Email PDF to Registered Email Address
    ✓ Prevent Duplicate / Double-Click Delivery
+   ✓ Preserve Specific Backend Errors for QA
    ✓ Navigate to Page 07 only after successful delivery
 
    IMPORTANT:
@@ -1467,14 +1468,6 @@
         /*
          * --------------------------------------------------------------
          * 2. CHECK PREVIOUS CONFIRMED DELIVERY
-         *
-         * If this exact visitor has already received the report
-         * during this journey session:
-         *
-         * DO NOT regenerate.
-         * DO NOT resend.
-         *
-         * Simply continue to Page 07.
          * --------------------------------------------------------------
          */
 
@@ -1547,6 +1540,12 @@
             );
 
 
+            console.log(
+                "Page06 Delivery Identity:",
+                identity
+            );
+
+
             /*
              * ----------------------------------------------------------
              * 6. VALIDATE FRONTEND API CONTRACT
@@ -1582,10 +1581,13 @@
             /*
              * ----------------------------------------------------------
              * 8. GENERATE / PERSIST FROZEN 180-DAY ROADMAP
-             *
-             * Backend RoadmapEngine is system of record.
              * ----------------------------------------------------------
              */
+
+            console.log(
+                "Page06: Generating Transformation Prescription..."
+            );
+
 
             const roadmapResponse =
                 await window.CTM_API.generateRoadmap({
@@ -1596,9 +1598,16 @@
                 });
 
 
-            unwrapApiSuccess(
-                roadmapResponse,
-                "Transformation Prescription"
+            const roadmapResult =
+                unwrapApiSuccess(
+                    roadmapResponse,
+                    "Transformation Prescription"
+                );
+
+
+            console.log(
+                "Page06: Transformation Prescription generated.",
+                roadmapResult
             );
 
 
@@ -1607,6 +1616,11 @@
              * 9. GENERATE COMPLETE REPORT MODEL
              * ----------------------------------------------------------
              */
+
+            console.log(
+                "Page06: Generating Report..."
+            );
+
 
             const reportResponse =
                 await window.CTM_API.generateReport({
@@ -1636,11 +1650,22 @@
             }
 
 
+            console.log(
+                "Page06: Report model generated.",
+                reportModel
+            );
+
+
             /*
              * ----------------------------------------------------------
              * 10. GENERATE GOOGLE DOCUMENT + PDF
              * ----------------------------------------------------------
              */
+
+            console.log(
+                "Page06: Generating PDF Document..."
+            );
+
 
             const documentResponse =
                 await window.CTM_API.generateDocument(
@@ -1667,11 +1692,22 @@
             }
 
 
+            console.log(
+                "Page06: PDF Document generated.",
+                documentMetadata
+            );
+
+
             /*
              * ----------------------------------------------------------
              * 11. EMAIL PDF TO REGISTERED EMAIL ADDRESS
              * ----------------------------------------------------------
              */
+
+            console.log(
+                "Page06: Sending Report Email..."
+            );
+
 
             const emailResponse =
                 await window.CTM_API.sendEmail({
@@ -1699,6 +1735,12 @@
                     emailResponse,
                     "Report Email"
                 );
+
+
+            console.log(
+                "Page06: Report Email sent.",
+                emailResult
+            );
 
 
             /*
@@ -1761,8 +1803,6 @@
             /*
              * ----------------------------------------------------------
              * 13. MARK PAGE 06 COMPLETE
-             *
-             * ONLY AFTER EMAIL DELIVERY SUCCEEDS.
              * ----------------------------------------------------------
              */
 
@@ -1775,6 +1815,11 @@
              * ----------------------------------------------------------
              */
 
+            console.log(
+                "Page06: Final delivery complete. Navigating to Page07."
+            );
+
+
             window.location.href =
                 PAGE06_CONFIG.nextPage;
 
@@ -1786,14 +1831,6 @@
                 error
             );
 
-
-            /*
-             * Release PROCESSING lock after failure.
-             *
-             * This permits deliberate retry.
-             *
-             * A confirmed SENT lock is NEVER removed here.
-             */
 
             const failedDelivery =
                 loadDeliveryState();
@@ -1895,12 +1932,24 @@
        { success:true, data:{ data:{...} } }
 
        direct object
+
+       QA / DIAGNOSTIC BEHAVIOUR:
+
+       On backend failure this function deliberately preserves and exposes
+       the most specific backend error available instead of replacing it
+       with the generic WebApp message.
     ====================================================================== */
 
     function unwrapApiSuccess(
         response,
         label
     ) {
+
+        /*
+         * --------------------------------------------------------------
+         * 1. NO RESPONSE
+         * --------------------------------------------------------------
+         */
 
         if (
             response === undefined ||
@@ -1915,7 +1964,14 @@
         }
 
 
-        if (
+        /*
+         * --------------------------------------------------------------
+         * 2. DETECT BACKEND FAILURE
+         * --------------------------------------------------------------
+         */
+
+        const isFailure =
+
             response === false ||
 
             (
@@ -1926,48 +1982,111 @@
             (
                 typeof response === "object" &&
                 response.ok === false
-            )
-        ) {
+            );
 
-            const message =
+
+        if (isFailure) {
+
+            /*
+             * Preserve complete backend response in DevTools.
+             */
+
+            console.error(
+                "CTM PATH™ BACKEND FAILURE:",
+                label || "Backend request",
+                response
+            );
+
+
+            /*
+             * Specific backend error takes precedence over
+             * generic WebApp message.
+             */
+
+            const backendError =
 
                 response &&
                 typeof response === "object"
 
-                    ? (
+                    ? firstNonEmptyString(
 
-                        response.message ||
+                        typeof response.error === "string"
+                            ? response.error
+                            : "",
 
-                        response.error ||
 
-                        (
-                            response.data &&
-                            (
-                                response.data.message ||
-                                response.data.error
-                            )
-                        ) ||
+                        response.data &&
+                        typeof response.data === "object" &&
+                        typeof response.data.error === "string"
 
-                        null
+                            ? response.data.error
+                            : "",
+
+
+                        response.data &&
+                        typeof response.data === "object" &&
+                        typeof response.data.message === "string"
+
+                            ? response.data.message
+                            : "",
+
+
+                        typeof response.message === "string"
+                            ? response.message
+                            : ""
 
                     )
 
-                    : null;
+                    : "";
 
 
-            throw new Error(
+            /*
+             * Optional backend stack.
+             */
 
-                message ||
+            const backendStack =
+
+                response &&
+                typeof response === "object" &&
+                typeof response.stack === "string"
+
+                    ? response.stack.trim()
+
+                    : "";
+
+
+            let diagnosticMessage =
+
+                backendError ||
 
                 (
                     (label || "Backend request") +
                     " failed."
-                )
+                );
 
+
+            if (backendStack) {
+
+                diagnosticMessage +=
+
+                    "\n\nBACKEND STACK:\n" +
+                    backendStack;
+
+            }
+
+
+            throw new Error(
+                diagnosticMessage
             );
 
         }
 
+
+        /*
+         * --------------------------------------------------------------
+         * 3. SUCCESS RESPONSE NORMALIZATION
+         * --------------------------------------------------------------
+         */
 
         let value =
             response;
@@ -2205,16 +2324,6 @@
        MERGE IDENTITY FROM OBJECT
 
        Recursive but bounded.
-
-       Allows identity to be recovered from:
-
-       registration
-       person
-       client
-       data
-       journey
-       diagnosis
-       etc.
     ====================================================================== */
 
     function mergeIdentityFromObject(
@@ -2692,6 +2801,12 @@
                 ? error.message
 
                 : "Unable to prepare and email your CTM PATH™ report. Please try again.";
+
+
+        console.error(
+            "Page06 Delivery Error Detail:",
+            error
+        );
 
 
         window.alert(
