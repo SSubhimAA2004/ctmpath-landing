@@ -6,40 +6,36 @@
    page04.js
 
    PAGE:
-   KALA CHAKRA™ LIFE ALIGNMENT RESULT™
+   KALA CHAKRA™ LIFE ALIGNMENT™
 
    VERSION:
-   1.0
+   10.0
+
 
    RESPONSIBILITIES:
 
-   ✓ Read actual Page03 KALA CHAKRA™ scores
-   ✓ Validate all 12 Life Pillars
-   ✓ Calculate Life Alignment Score™
-   ✓ Calculate Life Alignment Percentage
-   ✓ Determine Current Life Level™
-   ✓ Determine Strongest Pillar™
-   ✓ Determine Greatest Growth Opportunity™
-   ✓ Generate dynamic 12-spoke KALA CHAKRA™ Life Wheel
-   ✓ Render score markers
-   ✓ Render dynamic score polygon
-   ✓ Render pillar labels
-   ✓ Render result insights
-   ✓ Render complete 12-pillar breakdown
-   ✓ Prepare Page05 transition
+   ✓ Read Page03 Life Assessment Scores
+   ✓ Validate 12 Pillar Scores
+   ✓ Calculate Life Alignment Score
+   ✓ Calculate Alignment Percentage
+   ✓ Identify Strongest Life Pillar
+   ✓ Identify Greatest Growth Opportunity
+   ✓ Render KALA CHAKRA™ 12-Spoke Life Wheel
+   ✓ Render Score-Based Red / Orange / Green Nodes
+   ✓ Render 12 Life Pillar Results
+   ✓ Prepare Page05 Transition
 
-   DATA SOURCE:
-
-   sessionStorage:
-   CTM_PAGE03_ALIGNMENT
 
 ========================================================================== */
 
 
-(function () {
+(function(){
 
 
 "use strict";
+
+
+
 
 
 /* ==========================================================================
@@ -49,189 +45,168 @@
 
 const PAGE04_CONFIG = {
 
-    sourceStorageKey:
+
+    assessmentStorageKey:
+
         "CTM_PAGE03_ALIGNMENT",
 
+
+
     resultStorageKey:
-        "CTM_PAGE04_RESULT",
+
+        "CTM_PAGE04_ALIGNMENT_RESULT",
+
+
 
     nextPage:
+
         "page05.html",
 
+
+
     previousPage:
+
         "page03.html",
 
+
+
     totalPillars:
+
         12,
 
-    maximumPillarScore:
-        10,
 
-    maximumTotalScore:
+
+    maximumScore:
+
         120,
 
-    wheelSize:
-        900,
 
-    wheelCenter:
-        450,
 
-    wheelRadius:
-        300,
+    maximumPillarScore:
 
-    innerRadius:
-        54,
+        10
 
-    ringCount:
-        5
+
 
 };
+
+
+
 
 
 /* ==========================================================================
    KALA CHAKRA™ PILLARS
 
    IMPORTANT:
-   Keys exactly match Page03.js.
+
+   These names intentionally match the exact keys used by page03.js.
+
 ========================================================================== */
 
 
 const PILLARS = [
 
+
     {
-        key: "Purpose",
         number: "01",
+        key: "Purpose",
         tamil: "நோக்கம்",
-        english: "PURPOSE™",
-        icon: "◎"
+        english: "PURPOSE"
     },
 
+
     {
-        key: "Health",
         number: "02",
+        key: "Health",
         tamil: "உடல்நலம்",
-        english: "HEALTH™",
-        icon: "♥"
+        english: "HEALTH"
     },
 
+
     {
-        key: "Relationships",
         number: "03",
+        key: "Relationships",
         tamil: "உறவுகள்",
-        english: "RELATIONSHIPS™",
-        icon: "●"
+        english: "RELATIONSHIPS"
     },
 
+
     {
-        key: "Character & Integrity",
         number: "04",
+        key: "Character & Integrity",
         tamil: "பண்பும் நேர்மையும்",
-        english: "CHARACTER & INTEGRITY™",
-        icon: "◆"
+        english: "CHARACTER & INTEGRITY"
     },
 
+
     {
-        key: "Learning & Mastery",
         number: "05",
+        key: "Learning & Mastery",
         tamil: "கற்றலும் தேர்ச்சியும்",
-        english: "LEARNING & MASTERY™",
-        icon: "▣"
+        english: "LEARNING & MASTERY"
     },
 
+
     {
-        key: "Career & Contribution",
         number: "06",
+        key: "Career & Contribution",
         tamil: "தொழிலும் பங்களிப்பும்",
-        english: "CAREER & CONTRIBUTION™",
-        icon: "■"
+        english: "CAREER & CONTRIBUTION"
     },
 
+
     {
-        key: "Financial Freedom",
         number: "07",
+        key: "Financial Freedom",
         tamil: "பொருளாதார சுதந்திரம்",
-        english: "FINANCIAL FREEDOM™",
-        icon: "₹"
+        english: "FINANCIAL FREEDOM"
     },
 
+
     {
-        key: "Time Freedom",
         number: "08",
+        key: "Time Freedom",
         tamil: "நேர சுதந்திரம்",
-        english: "TIME FREEDOM™",
-        icon: "◷"
+        english: "TIME FREEDOM"
     },
 
+
     {
-        key: "Community & Tribe",
         number: "09",
+        key: "Community & Tribe",
         tamil: "சமூகமும் உறவுக்குழுவும்",
-        english: "COMMUNITY & TRIBE™",
-        icon: "◎"
+        english: "COMMUNITY & TRIBE"
     },
 
+
     {
-        key: "Systems & Productivity",
         number: "10",
+        key: "Systems & Productivity",
         tamil: "அமைப்புகளும் செயல்திறனும்",
-        english: "SYSTEMS & PRODUCTIVITY™",
-        icon: "⚙"
+        english: "SYSTEMS & PRODUCTIVITY"
     },
 
+
     {
-        key: "Service & Impact",
         number: "11",
+        key: "Service & Impact",
         tamil: "சேவையும் தாக்கமும்",
-        english: "SERVICE & IMPACT™",
-        icon: "♥"
+        english: "SERVICE & IMPACT"
     },
 
+
     {
-        key: "Vision & Legacy",
         number: "12",
+        key: "Vision & Legacy",
         tamil: "தொலைநோக்கும் மரபும்",
-        english: "VISION & LEGACY™",
-        icon: "★"
+        english: "VISION & LEGACY"
     }
+
 
 ];
 
 
-/* ==========================================================================
-   COLOUR SYSTEM
 
-   Score meaning remains aligned with Page03:
-
-   0–3  = Needs Focus
-   4–7  = Developing
-   8–10 = Strong
-========================================================================== */
-
-
-const SCORE_COLOURS = {
-
-    needsFocus:
-        "#EF5350",
-
-    developing:
-        "#F4A12A",
-
-    strong:
-        "#2FB77D",
-
-    teal:
-        "#23D4C8",
-
-    gold:
-        "#D9A441",
-
-    ivory:
-        "#F5F1E8",
-
-    navy:
-        "#07182D"
-
-};
 
 
 /* ==========================================================================
@@ -239,9 +214,83 @@ const SCORE_COLOURS = {
 ========================================================================== */
 
 
-let page03Scores = {};
+let assessmentData = {};
 
-let resultData = null;
+
+let alignmentResult = {
+
+
+    totalScore: 0,
+
+    percentage: 0,
+
+    strongestPillar: null,
+
+    growthPillar: null,
+
+    lifeLevel: "",
+
+    pillars: []
+
+
+};
+
+
+
+
+
+/* ==========================================================================
+   SCORE COLOURS
+
+   0–3  = RED
+   4–7  = ORANGE
+   8–10 = GREEN
+
+========================================================================== */
+
+
+const SCORE_COLOURS = {
+
+
+    red:
+
+        "#E65050",
+
+
+    orange:
+
+        "#F29A2E",
+
+
+    green:
+
+        "#2FB378",
+
+
+    teal:
+
+        "#19C7C3",
+
+
+    grid:
+
+        "rgba(255,255,255,0.12)",
+
+
+    spoke:
+
+        "rgba(255,255,255,0.18)",
+
+
+    label:
+
+        "#F4F0E6"
+
+
+};
+
+
+
 
 
 /* ==========================================================================
@@ -249,107 +298,125 @@ let resultData = null;
 ========================================================================== */
 
 
-function initPage04() {
+function initPage04(){
 
 
     console.log(
+
         "CTM PATH™ MILLIONAIRES™ Page04 Loaded"
+
     );
 
 
-    page03Scores =
-        loadPage03Scores();
+
+    loadAssessment();
 
 
-    if (
-        !validateAssessment(
-            page03Scores
-        )
-    ) {
 
-        handleMissingAssessment();
+    calculateAlignment();
+
+
+
+    renderAlignmentScore();
+
+
+
+    renderInsights();
+
+
+
+    renderPillarResults();
+
+
+
+    renderLifeWheel();
+
+
+
+    bindNavigation();
+
+
+
+    saveAlignmentResult();
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   LOAD PAGE03 ASSESSMENT
+========================================================================== */
+
+
+function loadAssessment(){
+
+
+    const saved =
+
+        sessionStorage.getItem(
+
+            PAGE04_CONFIG.assessmentStorageKey
+
+        );
+
+
+
+    if(!saved){
+
+
+        console.warn(
+
+            "Page04: No Page03 assessment data found."
+
+        );
+
+
+        assessmentData = {};
+
 
         return;
 
-    }
-
-
-    resultData =
-        buildResult(
-            page03Scores
-        );
-
-
-    saveResult(
-        resultData
-    );
-
-
-    renderPage04(
-        resultData
-    );
-
-
-    bindPage04Navigation();
-
-
-    console.log(
-        "KALA CHAKRA™ Life Alignment Result:",
-        resultData
-    );
-
-
-}
-
-
-/* ==========================================================================
-   LOAD PAGE03 SCORES
-========================================================================== */
-
-
-function loadPage03Scores() {
-
-
-    const raw =
-        sessionStorage.getItem(
-            PAGE04_CONFIG.sourceStorageKey
-        );
-
-
-    if (!raw) {
-
-        return {};
 
     }
 
 
-    try {
+
+    try{
+
 
         const parsed =
-            JSON.parse(raw);
+
+            JSON.parse(saved);
 
 
-        if (
-            !parsed ||
-            typeof parsed !== "object"
-        ) {
 
-            return {};
+        assessmentData =
 
-        }
+            parsed && typeof parsed === "object"
 
+                ? parsed
 
-        return parsed;
+                : {};
+
 
     }
-    catch (error) {
+    catch(error){
+
 
         console.error(
-            "Unable to read Page03 assessment:",
+
+            "Page04: Unable to parse assessment data.",
+
             error
+
         );
 
-        return {};
+
+        assessmentData = {};
+
 
     }
 
@@ -357,197 +424,7 @@ function loadPage03Scores() {
 }
 
 
-/* ==========================================================================
-   VALIDATE ASSESSMENT
-========================================================================== */
 
-
-function validateAssessment(scores) {
-
-
-    if (
-        !scores ||
-        typeof scores !== "object"
-    ) {
-
-        return false;
-
-    }
-
-
-    return PILLARS.every(
-
-        function (pillar) {
-
-
-            if (
-                !Object.prototype.hasOwnProperty.call(
-                    scores,
-                    pillar.key
-                )
-            ) {
-
-                return false;
-
-            }
-
-
-            const value =
-                Number(
-                    scores[pillar.key]
-                );
-
-
-            return (
-                Number.isFinite(value) &&
-                value >= 0 &&
-                value <= 10
-            );
-
-
-        }
-
-    );
-
-
-}
-
-
-/* ==========================================================================
-   HANDLE MISSING / INCOMPLETE PAGE03 DATA
-========================================================================== */
-
-
-function handleMissingAssessment() {
-
-
-    console.warn(
-        "CTM PATH™ Page04: Complete Page03 assessment not found."
-    );
-
-
-    const wheel =
-        document.getElementById(
-            "kala-chakra-wheel"
-        );
-
-
-    if (wheel) {
-
-        wheel.innerHTML = `
-
-            <div class="page04-data-error">
-
-                <p class="ta">
-                    உங்கள் வாழ்க்கை மதிப்பீடு முழுமையாக கிடைக்கவில்லை.
-                </p>
-
-                <p class="en">
-                    Please complete all 12 areas of your Life Assessment.
-                </p>
-
-                <a
-                    href="${PAGE04_CONFIG.previousPage}"
-                    class="journey-button"
-                >
-                    ← COMPLETE MY LIFE ASSESSMENT
-                </a>
-
-            </div>
-
-        `;
-
-    }
-
-
-}
-
-
-/* ==========================================================================
-   BUILD COMPLETE RESULT
-========================================================================== */
-
-
-function buildResult(scores) {
-
-
-    const normalizedScores = {};
-
-
-    PILLARS.forEach(
-
-        function (pillar) {
-
-            normalizedScores[pillar.key] =
-                clampScore(
-                    scores[pillar.key]
-                );
-
-        }
-
-    );
-
-
-    const totalScore =
-        calculateTotalScore(
-            normalizedScores
-        );
-
-
-    const percentage =
-        calculatePercentage(
-            totalScore
-        );
-
-
-    const strongest =
-        findStrongestPillar(
-            normalizedScores
-        );
-
-
-    const growth =
-        findGrowthOpportunity(
-            normalizedScores
-        );
-
-
-    const lifeLevel =
-        determineLifeLevel(
-            percentage
-        );
-
-
-    return {
-
-        scores:
-            normalizedScores,
-
-        totalScore:
-            totalScore,
-
-        maximumScore:
-            PAGE04_CONFIG.maximumTotalScore,
-
-        percentage:
-            percentage,
-
-        strongestPillar:
-            strongest,
-
-        growthOpportunity:
-            growth,
-
-        lifeLevel:
-            lifeLevel,
-
-        generatedAt:
-            new Date().toISOString()
-
-    };
-
-
-}
 
 
 /* ==========================================================================
@@ -555,52 +432,655 @@ function buildResult(scores) {
 ========================================================================== */
 
 
-function clampScore(value) {
+function normalizeScore(value){
 
 
-    const number =
+    const score =
+
         Number(value);
 
 
-    if (!Number.isFinite(number)) {
+
+    if(!Number.isFinite(score)){
+
 
         return 0;
 
+
     }
 
 
-    return Math.max(
-        0,
-        Math.min(
-            PAGE04_CONFIG.maximumPillarScore,
-            number
+
+    return Math.min(
+
+        PAGE04_CONFIG.maximumPillarScore,
+
+        Math.max(
+
+            0,
+
+            score
+
         )
+
     );
 
 
 }
 
 
+
+
+
 /* ==========================================================================
-   TOTAL SCORE
+   CALCULATE ALIGNMENT
 ========================================================================== */
 
 
-function calculateTotalScore(scores) {
+function calculateAlignment(){
 
 
-    return PILLARS.reduce(
+    const pillarResults =
 
-        function (total, pillar) {
+        PILLARS.map(
 
-            return (
-                total +
-                scores[pillar.key]
+            function(pillar){
+
+
+                return {
+
+
+                    number:
+
+                        pillar.number,
+
+
+                    key:
+
+                        pillar.key,
+
+
+                    tamil:
+
+                        pillar.tamil,
+
+
+                    english:
+
+                        pillar.english,
+
+
+                    score:
+
+                        normalizeScore(
+
+                            assessmentData[pillar.key]
+
+                        )
+
+
+                };
+
+
+            }
+
+        );
+
+
+
+    const totalScore =
+
+        pillarResults.reduce(
+
+            function(total,pillar){
+
+
+                return total + pillar.score;
+
+
+            },
+
+            0
+
+        );
+
+
+
+    const percentage =
+
+        Math.round(
+
+            (
+
+                totalScore /
+
+                PAGE04_CONFIG.maximumScore
+
+            ) * 100
+
+        );
+
+
+
+    let strongestPillar =
+
+        pillarResults[0] || null;
+
+
+
+    let growthPillar =
+
+        pillarResults[0] || null;
+
+
+
+    pillarResults.forEach(
+
+        function(pillar){
+
+
+            /*
+             * First matching pillar wins ties.
+             */
+
+
+            if(
+
+                strongestPillar === null ||
+
+                pillar.score >
+
+                strongestPillar.score
+
+            ){
+
+
+                strongestPillar = pillar;
+
+
+            }
+
+
+
+            if(
+
+                growthPillar === null ||
+
+                pillar.score <
+
+                growthPillar.score
+
+            ){
+
+
+                growthPillar = pillar;
+
+
+            }
+
+
+        }
+
+    );
+
+
+
+    alignmentResult = {
+
+
+        totalScore:
+
+            totalScore,
+
+
+        percentage:
+
+            percentage,
+
+
+        strongestPillar:
+
+            strongestPillar,
+
+
+        growthPillar:
+
+            growthPillar,
+
+
+        lifeLevel:
+
+            determineLifeLevel(
+
+                percentage
+
+            ),
+
+
+        pillars:
+
+            pillarResults
+
+
+    };
+
+
+
+    console.log(
+
+        "KALA CHAKRA™ Alignment Result:",
+
+        alignmentResult
+
+    );
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   DETERMINE LIFE LEVEL
+========================================================================== */
+
+
+function determineLifeLevel(percentage){
+
+
+    if(percentage <= 30){
+
+
+        return "FOUNDATION";
+
+
+    }
+
+
+
+    if(percentage <= 50){
+
+
+        return "STABILISING";
+
+
+    }
+
+
+
+    if(percentage <= 70){
+
+
+        return "DEVELOPING";
+
+
+    }
+
+
+
+    if(percentage <= 85){
+
+
+        return "STRONG";
+
+
+    }
+
+
+
+    return "THRIVING";
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   SCORE BAND
+========================================================================== */
+
+
+function getScoreBand(score){
+
+
+    if(score <= 3){
+
+
+        return "priority";
+
+
+    }
+
+
+
+    if(score <= 7){
+
+
+        return "developing";
+
+
+    }
+
+
+
+    return "strong";
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   SCORE COLOUR
+========================================================================== */
+
+
+function getScoreColour(score){
+
+
+    if(score <= 3){
+
+
+        return SCORE_COLOURS.red;
+
+
+    }
+
+
+
+    if(score <= 7){
+
+
+        return SCORE_COLOURS.orange;
+
+
+    }
+
+
+
+    return SCORE_COLOURS.green;
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   RENDER ALIGNMENT SCORE
+========================================================================== */
+
+
+function renderAlignmentScore(){
+
+
+    setText(
+
+        "alignment-total-score",
+
+        alignmentResult.totalScore
+
+    );
+
+
+
+    setText(
+
+        "alignment-maximum-score",
+
+        PAGE04_CONFIG.maximumScore
+
+    );
+
+
+
+    setText(
+
+        "alignment-percentage",
+
+        alignmentResult.percentage + "%"
+
+    );
+
+
+
+    setText(
+
+        "current-life-level",
+
+        alignmentResult.lifeLevel
+
+    );
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   RENDER INSIGHTS
+========================================================================== */
+
+
+function renderInsights(){
+
+
+    const strongest =
+
+        alignmentResult.strongestPillar;
+
+
+
+    const growth =
+
+        alignmentResult.growthPillar;
+
+
+
+    if(strongest){
+
+
+        setText(
+
+            "strongest-pillar-name",
+
+            strongest.tamil +
+
+            " · " +
+
+            strongest.english
+
+        );
+
+
+
+        setText(
+
+            "strongest-pillar-score",
+
+            strongest.score
+
+        );
+
+
+    }
+
+
+
+    if(growth){
+
+
+        setText(
+
+            "growth-pillar-name",
+
+            growth.tamil +
+
+            " · " +
+
+            growth.english
+
+        );
+
+
+
+        setText(
+
+            "growth-pillar-score",
+
+            growth.score
+
+        );
+
+
+    }
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   RENDER 12 PILLAR RESULTS
+========================================================================== */
+
+
+function renderPillarResults(){
+
+
+    const grid =
+
+        document.getElementById(
+
+            "pillar-results-grid"
+
+        );
+
+
+
+    if(!grid){
+
+
+        return;
+
+
+    }
+
+
+
+    grid.innerHTML = "";
+
+
+
+    alignmentResult.pillars.forEach(
+
+        function(pillar){
+
+
+            const card =
+
+                document.createElement(
+
+                    "article"
+
+                );
+
+
+
+            const band =
+
+                getScoreBand(
+
+                    pillar.score
+
+                );
+
+
+
+            card.className =
+
+                "pillar-result-card " +
+
+                "pillar-result-" +
+
+                band;
+
+
+
+            card.dataset.score =
+
+                pillar.score;
+
+
+
+            card.innerHTML = `
+
+                <div class="pillar-result-number">
+
+                    ${pillar.number}
+
+                </div>
+
+
+                <div class="pillar-result-tamil">
+
+                    ${escapeHTML(pillar.tamil)}
+
+                </div>
+
+
+                <div class="pillar-result-english">
+
+                    ${escapeHTML(pillar.english)}
+
+                </div>
+
+
+                <div class="pillar-result-score">
+
+                    <span class="pillar-result-score-value">
+
+                        ${pillar.score}
+
+                    </span>
+
+                    <span class="pillar-result-score-max">
+
+                        / 10
+
+                    </span>
+
+                </div>
+
+
+                <div class="pillar-result-status">
+
+                    ${getScoreStatus(pillar.score)}
+
+                </div>
+
+            `;
+
+
+
+            grid.appendChild(
+
+                card
+
             );
 
-        },
 
-        0
+        }
 
     );
 
@@ -608,20 +1088,1267 @@ function calculateTotalScore(scores) {
 }
 
 
+
+
+
 /* ==========================================================================
-   PERCENTAGE
+   SCORE STATUS
 ========================================================================== */
 
 
-function calculatePercentage(totalScore) {
+function getScoreStatus(score){
 
 
-    return Math.round(
+    if(score <= 3){
+
+
+        return "PRIORITY";
+
+
+    }
+
+
+
+    if(score <= 7){
+
+
+        return "DEVELOPING";
+
+
+    }
+
+
+
+    return "STRONG";
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   RENDER KALA CHAKRA™ LIFE WHEEL
+========================================================================== */
+
+
+function renderLifeWheel(){
+
+
+    const container =
+
+        document.getElementById(
+
+            "life-wheel-container"
+
+        );
+
+
+
+    if(!container){
+
+
+        return;
+
+
+    }
+
+
+
+    container.innerHTML = "";
+
+
+
+    /*
+     * ------------------------------------------------------------------
+     * SVG COORDINATE SYSTEM
+     *
+     * The wheel itself occupies the central region.
+     * Additional space is deliberately reserved around it for labels.
+     * ------------------------------------------------------------------
+     */
+
+
+    const width = 1000;
+
+    const height = 1000;
+
+
+
+    const centerX = 500;
+
+    const centerY = 500;
+
+
+
+    const maximumRadius = 310;
+
+
+
+    /*
+     * A tiny inner radius prevents a zero score from collapsing
+     * directly into the mathematical centre.
+     *
+     * This is NOT a visible white centre circle.
+     */
+
+
+    const minimumRadius = 10;
+
+
+
+    const svgNS =
+
+        "http://www.w3.org/2000/svg";
+
+
+
+    const svg =
+
+        document.createElementNS(
+
+            svgNS,
+
+            "svg"
+
+        );
+
+
+
+    svg.setAttribute(
+
+        "viewBox",
+
+        `0 0 ${width} ${height}`
+
+    );
+
+
+
+    svg.setAttribute(
+
+        "class",
+
+        "life-wheel-svg"
+
+    );
+
+
+
+    svg.setAttribute(
+
+        "aria-hidden",
+
+        "true"
+
+    );
+
+
+
+    /*
+     * ------------------------------------------------------------------
+     * DEFINITIONS
+     * ------------------------------------------------------------------
+     */
+
+
+    const defs =
+
+        document.createElementNS(
+
+            svgNS,
+
+            "defs"
+
+        );
+
+
+
+    /*
+     * Soft polygon gradient.
+     */
+
+
+    const gradient =
+
+        document.createElementNS(
+
+            svgNS,
+
+            "radialGradient"
+
+        );
+
+
+
+    gradient.setAttribute(
+
+        "id",
+
+        "lifeWheelFill"
+
+    );
+
+
+
+    gradient.setAttribute(
+
+        "cx",
+
+        "50%"
+
+    );
+
+
+
+    gradient.setAttribute(
+
+        "cy",
+
+        "50%"
+
+    );
+
+
+
+    gradient.setAttribute(
+
+        "r",
+
+        "70%"
+
+    );
+
+
+
+    appendGradientStop(
+
+        gradient,
+
+        "0%",
+
+        "rgba(25,199,195,0.28)"
+
+    );
+
+
+
+    appendGradientStop(
+
+        gradient,
+
+        "65%",
+
+        "rgba(25,199,195,0.16)"
+
+    );
+
+
+
+    appendGradientStop(
+
+        gradient,
+
+        "100%",
+
+        "rgba(25,199,195,0.08)"
+
+    );
+
+
+
+    defs.appendChild(
+
+        gradient
+
+    );
+
+
+
+    /*
+     * Node glow.
+     */
+
+
+    const filter =
+
+        document.createElementNS(
+
+            svgNS,
+
+            "filter"
+
+        );
+
+
+
+    filter.setAttribute(
+
+        "id",
+
+        "scoreGlow"
+
+    );
+
+
+
+    filter.setAttribute(
+
+        "x",
+
+        "-100%"
+
+    );
+
+
+
+    filter.setAttribute(
+
+        "y",
+
+        "-100%"
+
+    );
+
+
+
+    filter.setAttribute(
+
+        "width",
+
+        "300%"
+
+    );
+
+
+
+    filter.setAttribute(
+
+        "height",
+
+        "300%"
+
+    );
+
+
+
+    const blur =
+
+        document.createElementNS(
+
+            svgNS,
+
+            "feGaussianBlur"
+
+        );
+
+
+
+    blur.setAttribute(
+
+        "stdDeviation",
+
+        "5"
+
+    );
+
+
+
+    blur.setAttribute(
+
+        "result",
+
+        "blur"
+
+    );
+
+
+
+    const merge =
+
+        document.createElementNS(
+
+            svgNS,
+
+            "feMerge"
+
+        );
+
+
+
+    const mergeBlur =
+
+        document.createElementNS(
+
+            svgNS,
+
+            "feMergeNode"
+
+        );
+
+
+
+    mergeBlur.setAttribute(
+
+        "in",
+
+        "blur"
+
+    );
+
+
+
+    const mergeSource =
+
+        document.createElementNS(
+
+            svgNS,
+
+            "feMergeNode"
+
+        );
+
+
+
+    mergeSource.setAttribute(
+
+        "in",
+
+        "SourceGraphic"
+
+    );
+
+
+
+    merge.appendChild(
+
+        mergeBlur
+
+    );
+
+
+
+    merge.appendChild(
+
+        mergeSource
+
+    );
+
+
+
+    filter.appendChild(
+
+        blur
+
+    );
+
+
+
+    filter.appendChild(
+
+        merge
+
+    );
+
+
+
+    defs.appendChild(
+
+        filter
+
+    );
+
+
+
+    svg.appendChild(
+
+        defs
+
+    );
+
+
+
+    /*
+     * ------------------------------------------------------------------
+     * SCALE RINGS
+     *
+     * These are deliberately subtle.
+     *
+     * They provide measurement context without producing a large
+     * white disc.
+     * ------------------------------------------------------------------
+     */
+
+
+    for(
+
+        let level = 1;
+
+        level <= 10;
+
+        level++
+
+    ){
+
+
+        const radius =
+
+            maximumRadius *
+
+            (
+
+                level /
+
+                PAGE04_CONFIG.maximumPillarScore
+
+            );
+
+
+
+        const ring =
+
+            document.createElementNS(
+
+                svgNS,
+
+                "circle"
+
+            );
+
+
+
+        ring.setAttribute(
+
+            "cx",
+
+            centerX
+
+        );
+
+
+
+        ring.setAttribute(
+
+            "cy",
+
+            centerY
+
+        );
+
+
+
+        ring.setAttribute(
+
+            "r",
+
+            radius
+
+        );
+
+
+
+        ring.setAttribute(
+
+            "fill",
+
+            "none"
+
+        );
+
+
+
+        ring.setAttribute(
+
+            "stroke",
+
+            level === 10
+
+                ? "rgba(255,255,255,0.20)"
+
+                : SCORE_COLOURS.grid
+
+        );
+
+
+
+        ring.setAttribute(
+
+            "stroke-width",
+
+            level === 10
+
+                ? "1.5"
+
+                : "1"
+
+        );
+
+
+
+        svg.appendChild(
+
+            ring
+
+        );
+
+
+    }
+
+
+
+    /*
+     * ------------------------------------------------------------------
+     * SPOKES
+     * ------------------------------------------------------------------
+     */
+
+
+    alignmentResult.pillars.forEach(
+
+        function(pillar,index){
+
+
+            const angle =
+
+                getPillarAngle(
+
+                    index
+
+                );
+
+
+
+            const outerPoint =
+
+                polarPoint(
+
+                    centerX,
+
+                    centerY,
+
+                    maximumRadius,
+
+                    angle
+
+                );
+
+
+
+            const spoke =
+
+                document.createElementNS(
+
+                    svgNS,
+
+                    "line"
+
+                );
+
+
+
+            spoke.setAttribute(
+
+                "x1",
+
+                centerX
+
+            );
+
+
+
+            spoke.setAttribute(
+
+                "y1",
+
+                centerY
+
+            );
+
+
+
+            spoke.setAttribute(
+
+                "x2",
+
+                outerPoint.x
+
+            );
+
+
+
+            spoke.setAttribute(
+
+                "y2",
+
+                outerPoint.y
+
+            );
+
+
+
+            spoke.setAttribute(
+
+                "stroke",
+
+                SCORE_COLOURS.spoke
+
+            );
+
+
+
+            spoke.setAttribute(
+
+                "stroke-width",
+
+                "1"
+
+            );
+
+
+
+            svg.appendChild(
+
+                spoke
+
+            );
+
+
+        }
+
+    );
+
+
+
+    /*
+     * ------------------------------------------------------------------
+     * SCORE POINTS
+     * ------------------------------------------------------------------
+     */
+
+
+    const scorePoints =
+
+        alignmentResult.pillars.map(
+
+            function(pillar,index){
+
+
+                const angle =
+
+                    getPillarAngle(
+
+                        index
+
+                    );
+
+
+
+                const radius =
+
+                    minimumRadius +
+
+                    (
+
+                        (
+
+                            maximumRadius -
+
+                            minimumRadius
+
+                        ) *
+
+                        (
+
+                            pillar.score /
+
+                            PAGE04_CONFIG.maximumPillarScore
+
+                        )
+
+                    );
+
+
+
+                return polarPoint(
+
+                    centerX,
+
+                    centerY,
+
+                    radius,
+
+                    angle
+
+                );
+
+
+            }
+
+        );
+
+
+
+    /*
+     * ------------------------------------------------------------------
+     * ACTUAL IRREGULAR LIFE POLYGON
+     *
+     * This is the central visual.
+     *
+     * There is intentionally NO perfect white score circle.
+     * ------------------------------------------------------------------
+     */
+
+
+    const polygon =
+
+        document.createElementNS(
+
+            svgNS,
+
+            "polygon"
+
+        );
+
+
+
+    polygon.setAttribute(
+
+        "points",
+
+        scorePoints
+
+            .map(
+
+                function(point){
+
+
+                    return (
+
+                        point.x +
+
+                        "," +
+
+                        point.y
+
+                    );
+
+
+                }
+
+            )
+
+            .join(" ")
+
+    );
+
+
+
+    polygon.setAttribute(
+
+        "fill",
+
+        "url(#lifeWheelFill)"
+
+    );
+
+
+
+    polygon.setAttribute(
+
+        "stroke",
+
+        SCORE_COLOURS.teal
+
+    );
+
+
+
+    polygon.setAttribute(
+
+        "stroke-width",
+
+        "4"
+
+    );
+
+
+
+    polygon.setAttribute(
+
+        "stroke-linejoin",
+
+        "round"
+
+    );
+
+
+
+    svg.appendChild(
+
+        polygon
+
+    );
+
+
+
+    /*
+     * ------------------------------------------------------------------
+     * SCORE NODES
+     *
+     * 0–3  RED
+     * 4–7  ORANGE
+     * 8–10 GREEN
+     * ------------------------------------------------------------------
+     */
+
+
+    alignmentResult.pillars.forEach(
+
+        function(pillar,index){
+
+
+            const point =
+
+                scorePoints[index];
+
+
+
+            const colour =
+
+                getScoreColour(
+
+                    pillar.score
+
+                );
+
+
+
+            /*
+             * Glow behind node.
+             */
+
+
+            const glowNode =
+
+                document.createElementNS(
+
+                    svgNS,
+
+                    "circle"
+
+                );
+
+
+
+            glowNode.setAttribute(
+
+                "cx",
+
+                point.x
+
+            );
+
+
+
+            glowNode.setAttribute(
+
+                "cy",
+
+                point.y
+
+            );
+
+
+
+            glowNode.setAttribute(
+
+                "r",
+
+                "15"
+
+            );
+
+
+
+            glowNode.setAttribute(
+
+                "fill",
+
+                colour
+
+            );
+
+
+
+            glowNode.setAttribute(
+
+                "opacity",
+
+                "0.28"
+
+            );
+
+
+
+            glowNode.setAttribute(
+
+                "filter",
+
+                "url(#scoreGlow)"
+
+            );
+
+
+
+            svg.appendChild(
+
+                glowNode
+
+            );
+
+
+
+            /*
+             * Actual node.
+             */
+
+
+            const node =
+
+                document.createElementNS(
+
+                    svgNS,
+
+                    "circle"
+
+                );
+
+
+
+            node.setAttribute(
+
+                "cx",
+
+                point.x
+
+            );
+
+
+
+            node.setAttribute(
+
+                "cy",
+
+                point.y
+
+            );
+
+
+
+            node.setAttribute(
+
+                "r",
+
+                "10"
+
+            );
+
+
+
+            node.setAttribute(
+
+                "fill",
+
+                colour
+
+            );
+
+
+
+            node.setAttribute(
+
+                "stroke",
+
+                "#F4F0E6"
+
+            );
+
+
+
+            node.setAttribute(
+
+                "stroke-width",
+
+                "2"
+
+            );
+
+
+
+            svg.appendChild(
+
+                node
+
+            );
+
+
+        }
+
+    );
+
+
+
+    /*
+     * ------------------------------------------------------------------
+     * PILLAR LABELS
+     * ------------------------------------------------------------------
+     */
+
+
+    alignmentResult.pillars.forEach(
+
+        function(pillar,index){
+
+
+            renderWheelLabel(
+
+                svg,
+
+                pillar,
+
+                index,
+
+                centerX,
+
+                centerY,
+
+                maximumRadius,
+
+                svgNS
+
+            );
+
+
+        }
+
+    );
+
+
+
+    /*
+     * ------------------------------------------------------------------
+     * CENTRE MARKER
+     *
+     * Small branded centre only.
+     * Not a white circle.
+     * ------------------------------------------------------------------
+     */
+
+
+    const centerDot =
+
+        document.createElementNS(
+
+            svgNS,
+
+            "circle"
+
+        );
+
+
+
+    centerDot.setAttribute(
+
+        "cx",
+
+        centerX
+
+    );
+
+
+
+    centerDot.setAttribute(
+
+        "cy",
+
+        centerY
+
+    );
+
+
+
+    centerDot.setAttribute(
+
+        "r",
+
+        "5"
+
+    );
+
+
+
+    centerDot.setAttribute(
+
+        "fill",
+
+        SCORE_COLOURS.teal
+
+    );
+
+
+
+    svg.appendChild(
+
+        centerDot
+
+    );
+
+
+
+    container.appendChild(
+
+        svg
+
+    );
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   PILLAR ANGLE
+
+   Pillar 01 starts at 12 o'clock.
+
+   12 pillars × 30° = 360°.
+
+========================================================================== */
+
+
+function getPillarAngle(index){
+
+
+    return (
+
+        -90 +
 
         (
-            totalScore /
-            PAGE04_CONFIG.maximumTotalScore
-        ) * 100
+
+            index *
+
+            (
+
+                360 /
+
+                PAGE04_CONFIG.totalPillars
+
+            )
+
+        )
 
     );
 
@@ -629,212 +2356,493 @@ function calculatePercentage(totalScore) {
 }
 
 
+
+
+
 /* ==========================================================================
-   STRONGEST PILLAR
+   POLAR COORDINATE
 ========================================================================== */
 
 
-function findStrongestPillar(scores) {
+function polarPoint(
+
+    centerX,
+
+    centerY,
+
+    radius,
+
+    angleDegrees
+
+){
 
 
-    let strongest =
-        PILLARS[0];
+    const angleRadians =
+
+        angleDegrees *
+
+        Math.PI /
+
+        180;
 
 
-    PILLARS.forEach(
 
-        function (pillar) {
+    return {
 
-            if (
-                scores[pillar.key] >
-                scores[strongest.key]
-            ) {
 
-                strongest =
-                    pillar;
+        x:
 
-            }
+            centerX +
 
-        }
+            (
+
+                radius *
+
+                Math.cos(
+
+                    angleRadians
+
+                )
+
+            ),
+
+
+        y:
+
+            centerY +
+
+            (
+
+                radius *
+
+                Math.sin(
+
+                    angleRadians
+
+                )
+
+            )
+
+
+    };
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   RENDER WHEEL LABEL
+========================================================================== */
+
+
+function renderWheelLabel(
+
+    svg,
+
+    pillar,
+
+    index,
+
+    centerX,
+
+    centerY,
+
+    maximumRadius,
+
+    svgNS
+
+){
+
+
+    const angle =
+
+        getPillarAngle(
+
+            index
+
+        );
+
+
+
+    const labelRadius =
+
+        maximumRadius + 115;
+
+
+
+    const point =
+
+        polarPoint(
+
+            centerX,
+
+            centerY,
+
+            labelRadius,
+
+            angle
+
+        );
+
+
+
+    /*
+     * Keep side labels visually aligned away from the wheel.
+     */
+
+
+    let anchor =
+
+        "middle";
+
+
+
+    const cosine =
+
+        Math.cos(
+
+            angle *
+
+            Math.PI /
+
+            180
+
+        );
+
+
+
+    if(cosine > 0.35){
+
+
+        anchor = "start";
+
+
+    }
+    else if(cosine < -0.35){
+
+
+        anchor = "end";
+
+
+    }
+
+
+
+    const group =
+
+        document.createElementNS(
+
+            svgNS,
+
+            "g"
+
+        );
+
+
+
+    group.setAttribute(
+
+        "class",
+
+        "life-wheel-label"
 
     );
 
 
-    return {
 
-        ...strongest,
-
-        score:
-            scores[strongest.key]
-
-    };
+    /*
+     * Number
+     */
 
 
-}
+    const number =
+
+        createSVGText(
+
+            svgNS,
+
+            point.x,
+
+            point.y - 30,
+
+            pillar.number,
+
+            "life-wheel-label-number",
+
+            anchor
+
+        );
 
 
-/* ==========================================================================
-   GREATEST GROWTH OPPORTUNITY
-========================================================================== */
+
+    /*
+     * English pillar name
+     */
 
 
-function findGrowthOpportunity(scores) {
+    const name =
+
+        createSVGText(
+
+            svgNS,
+
+            point.x,
+
+            point.y,
+
+            pillar.english,
+
+            "life-wheel-label-name",
+
+            anchor
+
+        );
 
 
-    let weakest =
-        PILLARS[0];
+
+    /*
+     * Score
+     */
 
 
-    PILLARS.forEach(
+    const score =
 
-        function (pillar) {
+        createSVGText(
 
-            if (
-                scores[pillar.key] <
-                scores[weakest.key]
-            ) {
+            svgNS,
 
-                weakest =
-                    pillar;
+            point.x,
 
-            }
+            point.y + 32,
 
-        }
+            pillar.score + " / 10",
+
+            "life-wheel-label-score",
+
+            anchor
+
+        );
+
+
+
+    score.setAttribute(
+
+        "fill",
+
+        getScoreColour(
+
+            pillar.score
+
+        )
 
     );
 
 
-    return {
 
-        ...weakest,
+    group.appendChild(
 
-        score:
-            scores[weakest.key]
+        number
 
-    };
+    );
+
+
+
+    group.appendChild(
+
+        name
+
+    );
+
+
+
+    group.appendChild(
+
+        score
+
+    );
+
+
+
+    svg.appendChild(
+
+        group
+
+    );
 
 
 }
+
+
+
 
 
 /* ==========================================================================
-   CURRENT LIFE LEVEL™
-
-   Frontend presentation classification.
-
-   This can later be replaced by the official backend classification
-   without changing the wheel architecture.
+   CREATE SVG TEXT
 ========================================================================== */
 
 
-function determineLifeLevel(percentage) {
+function createSVGText(
+
+    svgNS,
+
+    x,
+
+    y,
+
+    content,
+
+    className,
+
+    anchor
+
+){
 
 
-    if (percentage >= 90) {
+    const text =
 
-        return {
+        document.createElementNS(
 
-            key:
-                "exceptional",
+            svgNS,
 
-            tamil:
-                "அசாதாரண நிலை",
+            "text"
 
-            english:
-                "EXCEPTIONAL™"
-
-        };
-
-    }
+        );
 
 
-    if (percentage >= 80) {
 
-        return {
+    text.setAttribute(
 
-            key:
-                "leader",
+        "x",
 
-            tamil:
-                "தலைமை நிலை",
+        x
 
-            english:
-                "LEADER™"
-
-        };
-
-    }
+    );
 
 
-    if (percentage >= 70) {
 
-        return {
+    text.setAttribute(
 
-            key:
-                "builder",
+        "y",
 
-            tamil:
-                "உருவாக்கும் நிலை",
+        y
 
-            english:
-                "BUILDER™"
-
-        };
-
-    }
+    );
 
 
-    if (percentage >= 60) {
 
-        return {
+    text.setAttribute(
 
-            key:
-                "progressing",
+        "text-anchor",
 
-            tamil:
-                "முன்னேறும் நிலை",
+        anchor
 
-            english:
-                "PROGRESSING™"
-
-        };
-
-    }
+    );
 
 
-    if (percentage >= 40) {
 
-        return {
+    text.setAttribute(
 
-            key:
-                "awakening",
+        "class",
 
-            tamil:
-                "விழிப்புணர்வு நிலை",
+        className
 
-            english:
-                "AWAKENING™"
-
-        };
-
-    }
+    );
 
 
-    return {
 
-        key:
-            "foundation",
+    text.setAttribute(
 
-        tamil:
-            "அடித்தள நிலை",
+        "fill",
 
-        english:
-            "FOUNDATION™"
+        SCORE_COLOURS.label
 
-    };
+    );
+
+
+
+    text.textContent =
+
+        content;
+
+
+
+    return text;
 
 
 }
+
+
+
+
+
+/* ==========================================================================
+   GRADIENT STOP
+========================================================================== */
+
+
+function appendGradientStop(
+
+    gradient,
+
+    offset,
+
+    colour
+
+){
+
+
+    const svgNS =
+
+        "http://www.w3.org/2000/svg";
+
+
+
+    const stop =
+
+        document.createElementNS(
+
+            svgNS,
+
+            "stop"
+
+        );
+
+
+
+    stop.setAttribute(
+
+        "offset",
+
+        offset
+
+    );
+
+
+
+    stop.setAttribute(
+
+        "stop-color",
+
+        colour
+
+    );
+
+
+
+    gradient.appendChild(
+
+        stop
+
+    );
+
+
+}
+
+
+
 
 
 /* ==========================================================================
@@ -842,1327 +2850,45 @@ function determineLifeLevel(percentage) {
 ========================================================================== */
 
 
-function saveResult(result) {
+function saveAlignmentResult(){
 
 
-    sessionStorage.setItem(
-
-        PAGE04_CONFIG.resultStorageKey,
-
-        JSON.stringify(
-            result
-        )
-
-    );
+    try{
 
 
-}
+        sessionStorage.setItem(
 
+            PAGE04_CONFIG.resultStorageKey,
 
-/* ==========================================================================
-   RENDER COMPLETE PAGE
-========================================================================== */
+            JSON.stringify(
 
+                alignmentResult
 
-function renderPage04(result) {
+            )
 
-
-    renderLifeWheel(
-        result
-    );
-
-
-    renderAlignmentScore(
-        result
-    );
-
-
-    renderLifeLevel(
-        result
-    );
-
-
-    renderStrongestPillar(
-        result
-    );
-
-
-    renderGrowthOpportunity(
-        result
-    );
-
-
-    renderPillarBreakdown(
-        result
-    );
-
-
-}
-
-
-/* ==========================================================================
-   SVG HELPERS
-========================================================================== */
-
-
-const SVG_NS =
-    "http://www.w3.org/2000/svg";
-
-
-function createSVGElement(
-    tag,
-    attributes
-) {
-
-
-    const element =
-        document.createElementNS(
-            SVG_NS,
-            tag
         );
 
 
-    Object.keys(
-        attributes || {}
-    ).forEach(
-
-        function (key) {
-
-            element.setAttribute(
-                key,
-                attributes[key]
-            );
-
-        }
-
-    );
+    }
+    catch(error){
 
 
-    return element;
+        console.error(
 
+            "Page04: Unable to save alignment result.",
 
-}
+            error
 
-
-/* ==========================================================================
-   POLAR COORDINATES
-
-   Pillar 01 begins at 12 o'clock.
-   Remaining pillars move clockwise.
-========================================================================== */
-
-
-function polarPoint(
-    index,
-    radius
-) {
-
-
-    const angle =
-        (
-            (index * 360) /
-            PAGE04_CONFIG.totalPillars
-        ) - 90;
-
-
-    const radians =
-        angle *
-        Math.PI /
-        180;
-
-
-    return {
-
-        x:
-            PAGE04_CONFIG.wheelCenter +
-            radius *
-            Math.cos(radians),
-
-        y:
-            PAGE04_CONFIG.wheelCenter +
-            radius *
-            Math.sin(radians),
-
-        angle:
-            angle
-
-    };
-
-
-}
-
-
-/* ==========================================================================
-   SCORE → RADIUS
-========================================================================== */
-
-
-function scoreToRadius(score) {
-
-
-    const usableRadius =
-        PAGE04_CONFIG.wheelRadius -
-        PAGE04_CONFIG.innerRadius;
-
-
-    return (
-        PAGE04_CONFIG.innerRadius +
-        (
-            score /
-            PAGE04_CONFIG.maximumPillarScore
-        ) *
-        usableRadius
-    );
-
-
-}
-
-
-/* ==========================================================================
-   GENERATE KALA CHAKRA™ LIFE WHEEL
-========================================================================== */
-
-
-function renderLifeWheel(result) {
-
-
-    const host =
-        document.getElementById(
-            "kala-chakra-wheel"
         );
 
-
-    if (!host) {
-
-        console.warn(
-            "Page04: #kala-chakra-wheel not found."
-        );
-
-        return;
 
     }
 
 
-    host.innerHTML = "";
-
-
-    const svg =
-        createSVGElement(
-            "svg",
-            {
-                viewBox:
-                    "0 0 900 900",
-
-                role:
-                    "img",
-
-                "aria-label":
-                    "KALA CHAKRA Life Wheel showing twelve life pillar scores",
-
-                class:
-                    "kala-chakra-svg"
-            }
-        );
-
-
-    /* ----------------------------------------------------------------------
-       SVG DEFINITIONS
-    ---------------------------------------------------------------------- */
-
-
-    const defs =
-        createSVGElement(
-            "defs",
-            {}
-        );
-
-
-    const glow =
-        createSVGElement(
-            "filter",
-            {
-                id:
-                    "wheelGlow",
-
-                x:
-                    "-50%",
-
-                y:
-                    "-50%",
-
-                width:
-                    "200%",
-
-                height:
-                    "200%"
-            }
-        );
-
-
-    const blur =
-        createSVGElement(
-            "feGaussianBlur",
-            {
-                stdDeviation:
-                    "8",
-
-                result:
-                    "blur"
-            }
-        );
-
-
-    const merge =
-        createSVGElement(
-            "feMerge",
-            {}
-        );
-
-
-    const mergeBlur =
-        createSVGElement(
-            "feMergeNode",
-            {
-                in:
-                    "blur"
-            }
-        );
-
-
-    const mergeOriginal =
-        createSVGElement(
-            "feMergeNode",
-            {
-                in:
-                    "SourceGraphic"
-            }
-        );
-
-
-    merge.appendChild(
-        mergeBlur
-    );
-
-
-    merge.appendChild(
-        mergeOriginal
-    );
-
-
-    glow.appendChild(
-        blur
-    );
-
-
-    glow.appendChild(
-        merge
-    );
-
-
-    defs.appendChild(
-        glow
-    );
-
-
-    const polygonGradient =
-        createSVGElement(
-            "radialGradient",
-            {
-                id:
-                    "lifePolygonGradient",
-
-                cx:
-                    "50%",
-
-                cy:
-                    "50%",
-
-                r:
-                    "60%"
-            }
-        );
-
-
-    [
-        {
-            offset: "0%",
-            colour: "#23D4C8",
-            opacity: ".16"
-        },
-        {
-            offset: "60%",
-            colour: "#D9A441",
-            opacity: ".24"
-        },
-        {
-            offset: "100%",
-            colour: "#23D4C8",
-            opacity: ".30"
-        }
-    ].forEach(
-
-        function (stopData) {
-
-            const stop =
-                createSVGElement(
-                    "stop",
-                    {
-                        offset:
-                            stopData.offset,
-
-                        "stop-color":
-                            stopData.colour,
-
-                        "stop-opacity":
-                            stopData.opacity
-                    }
-                );
-
-
-            polygonGradient.appendChild(
-                stop
-            );
-
-        }
-
-    );
-
-
-    defs.appendChild(
-        polygonGradient
-    );
-
-
-    svg.appendChild(
-        defs
-    );
-
-
-    /* ----------------------------------------------------------------------
-       OUTER HALO
-    ---------------------------------------------------------------------- */
-
-
-    const halo =
-        createSVGElement(
-            "circle",
-            {
-                cx:
-                    PAGE04_CONFIG.wheelCenter,
-
-                cy:
-                    PAGE04_CONFIG.wheelCenter,
-
-                r:
-                    PAGE04_CONFIG.wheelRadius + 10,
-
-                class:
-                    "wheel-outer-halo"
-            }
-        );
-
-
-    svg.appendChild(
-        halo
-    );
-
-
-    /* ----------------------------------------------------------------------
-       CONCENTRIC SCORE RINGS
-       2 / 4 / 6 / 8 / 10
-    ---------------------------------------------------------------------- */
-
-
-    const ringScores =
-        [2, 4, 6, 8, 10];
-
-
-    ringScores.forEach(
-
-        function (ringScore) {
-
-
-            const radius =
-                scoreToRadius(
-                    ringScore
-                );
-
-
-            const points =
-                PILLARS.map(
-
-                    function (_, index) {
-
-                        const point =
-                            polarPoint(
-                                index,
-                                radius
-                            );
-
-
-                        return (
-                            point.x +
-                            "," +
-                            point.y
-                        );
-
-                    }
-
-                ).join(" ");
-
-
-            const ring =
-                createSVGElement(
-                    "polygon",
-                    {
-                        points:
-                            points,
-
-                        class:
-                            (
-                                ringScore === 10
-                                ? "wheel-ring wheel-ring-outer"
-                                : "wheel-ring"
-                            )
-                    }
-                );
-
-
-            svg.appendChild(
-                ring
-            );
-
-
-        }
-
-    );
-
-
-    /* ----------------------------------------------------------------------
-       12 SPOKES
-    ---------------------------------------------------------------------- */
-
-
-    PILLARS.forEach(
-
-        function (_, index) {
-
-
-            const outer =
-                polarPoint(
-                    index,
-                    PAGE04_CONFIG.wheelRadius
-                );
-
-
-            const spoke =
-                createSVGElement(
-                    "line",
-                    {
-                        x1:
-                            PAGE04_CONFIG.wheelCenter,
-
-                        y1:
-                            PAGE04_CONFIG.wheelCenter,
-
-                        x2:
-                            outer.x,
-
-                        y2:
-                            outer.y,
-
-                        class:
-                            "wheel-spoke"
-                    }
-                );
-
-
-            svg.appendChild(
-                spoke
-            );
-
-
-        }
-
-    );
-
-
-    /* ----------------------------------------------------------------------
-       SCORE RING LABELS
-    ---------------------------------------------------------------------- */
-
-
-    ringScores.forEach(
-
-        function (score) {
-
-
-            const radius =
-                scoreToRadius(
-                    score
-                );
-
-
-            const label =
-                createSVGElement(
-                    "text",
-                    {
-                        x:
-                            PAGE04_CONFIG.wheelCenter + 10,
-
-                        y:
-                            PAGE04_CONFIG.wheelCenter -
-                            radius +
-                            5,
-
-                        class:
-                            "wheel-scale-label"
-                    }
-                );
-
-
-            label.textContent =
-                score;
-
-
-            svg.appendChild(
-                label
-            );
-
-
-        }
-
-    );
-
-
-    /* ----------------------------------------------------------------------
-       ACTUAL LIFE SHAPE
-    ---------------------------------------------------------------------- */
-
-
-    const actualPoints =
-        PILLARS.map(
-
-            function (pillar, index) {
-
-
-                const score =
-                    result.scores[
-                        pillar.key
-                    ];
-
-
-                const radius =
-                    scoreToRadius(
-                        score
-                    );
-
-
-                const point =
-                    polarPoint(
-                        index,
-                        radius
-                    );
-
-
-                return (
-                    point.x +
-                    "," +
-                    point.y
-                );
-
-
-            }
-
-        ).join(" ");
-
-
-    const lifePolygon =
-        createSVGElement(
-            "polygon",
-            {
-                points:
-                    actualPoints,
-
-                class:
-                    "life-score-polygon",
-
-                fill:
-                    "url(#lifePolygonGradient)",
-
-                filter:
-                    "url(#wheelGlow)"
-            }
-        );
-
-
-    svg.appendChild(
-        lifePolygon
-    );
-
-
-    /* ----------------------------------------------------------------------
-       ACTUAL SCORE MARKERS
-    ---------------------------------------------------------------------- */
-
-
-    PILLARS.forEach(
-
-        function (pillar, index) {
-
-
-            const score =
-                result.scores[
-                    pillar.key
-                ];
-
-
-            const radius =
-                scoreToRadius(
-                    score
-                );
-
-
-            const point =
-                polarPoint(
-                    index,
-                    radius
-                );
-
-
-            const group =
-                createSVGElement(
-                    "g",
-                    {
-                        class:
-                            "wheel-score-marker-group"
-                    }
-                );
-
-
-            const marker =
-                createSVGElement(
-                    "circle",
-                    {
-                        cx:
-                            point.x,
-
-                        cy:
-                            point.y,
-
-                        r:
-                            "11",
-
-                        class:
-                            (
-                                "wheel-score-marker " +
-                                getScoreClass(score)
-                            )
-                    }
-                );
-
-
-            const title =
-                createSVGElement(
-                    "title",
-                    {}
-                );
-
-
-            title.textContent =
-                pillar.key +
-                ": " +
-                score +
-                " / 10";
-
-
-            marker.appendChild(
-                title
-            );
-
-
-            group.appendChild(
-                marker
-            );
-
-
-            svg.appendChild(
-                group
-            );
-
-
-        }
-
-    );
-
-
-    /* ----------------------------------------------------------------------
-       CENTRAL KALA CHAKRA HUB
-    ---------------------------------------------------------------------- */
-
-
-    const centerOuter =
-        createSVGElement(
-            "circle",
-            {
-                cx:
-                    PAGE04_CONFIG.wheelCenter,
-
-                cy:
-                    PAGE04_CONFIG.wheelCenter,
-
-                r:
-                    "58",
-
-                class:
-                    "wheel-center-outer"
-            }
-        );
-
-
-    svg.appendChild(
-        centerOuter
-    );
-
-
-    const centerInner =
-        createSVGElement(
-            "circle",
-            {
-                cx:
-                    PAGE04_CONFIG.wheelCenter,
-
-                cy:
-                    PAGE04_CONFIG.wheelCenter,
-
-                r:
-                    "46",
-
-                class:
-                    "wheel-center-inner"
-            }
-        );
-
-
-    svg.appendChild(
-        centerInner
-    );
-
-
-    const centerSymbol =
-        createSVGElement(
-            "text",
-            {
-                x:
-                    PAGE04_CONFIG.wheelCenter,
-
-                y:
-                    PAGE04_CONFIG.wheelCenter + 13,
-
-                class:
-                    "wheel-center-symbol",
-
-                "text-anchor":
-                    "middle"
-            }
-        );
-
-
-    centerSymbol.textContent =
-        "✦";
-
-
-    svg.appendChild(
-        centerSymbol
-    );
-
-
-    /* ----------------------------------------------------------------------
-       PILLAR LABELS AROUND WHEEL
-    ---------------------------------------------------------------------- */
-
-
-    PILLARS.forEach(
-
-        function (pillar, index) {
-
-
-            const labelRadius =
-                PAGE04_CONFIG.wheelRadius +
-                72;
-
-
-            const point =
-                polarPoint(
-                    index,
-                    labelRadius
-                );
-
-
-            const labelGroup =
-                createSVGElement(
-                    "g",
-                    {
-                        class:
-                            "wheel-pillar-label"
-                    }
-                );
-
-
-            const number =
-                createSVGElement(
-                    "text",
-                    {
-                        x:
-                            point.x,
-
-                        y:
-                            point.y - 16,
-
-                        "text-anchor":
-                            "middle",
-
-                        class:
-                            "wheel-pillar-number"
-                    }
-                );
-
-
-            number.textContent =
-                pillar.number;
-
-
-            const name =
-                createSVGElement(
-                    "text",
-                    {
-                        x:
-                            point.x,
-
-                        y:
-                            point.y + 7,
-
-                        "text-anchor":
-                            "middle",
-
-                        class:
-                            "wheel-pillar-name"
-                    }
-                );
-
-
-            name.textContent =
-                pillar.english;
-
-
-            const score =
-                createSVGElement(
-                    "text",
-                    {
-                        x:
-                            point.x,
-
-                        y:
-                            point.y + 30,
-
-                        "text-anchor":
-                            "middle",
-
-                        class:
-                            (
-                                "wheel-pillar-score " +
-                                getScoreClass(
-                                    result.scores[
-                                        pillar.key
-                                    ]
-                                )
-                            )
-                    }
-                );
-
-
-            score.textContent =
-                (
-                    result.scores[
-                        pillar.key
-                    ] +
-                    " / 10"
-                );
-
-
-            labelGroup.appendChild(
-                number
-            );
-
-
-            labelGroup.appendChild(
-                name
-            );
-
-
-            labelGroup.appendChild(
-                score
-            );
-
-
-            svg.appendChild(
-                labelGroup
-            );
-
-
-        }
-
-    );
-
-
-    host.appendChild(
-        svg
-    );
-
-
 }
 
 
-/* ==========================================================================
-   SCORE CLASS
-========================================================================== */
 
-
-function getScoreClass(score) {
-
-
-    if (score <= 3) {
-
-        return "score-needs-focus";
-
-    }
-
-
-    if (score <= 7) {
-
-        return "score-developing";
-
-    }
-
-
-    return "score-strong";
-
-
-}
-
-
-/* ==========================================================================
-   LIFE ALIGNMENT SCORE
-========================================================================== */
-
-
-function renderAlignmentScore(result) {
-
-
-    setText(
-        "life-alignment-score",
-        (
-            result.totalScore +
-            " / " +
-            result.maximumScore
-        )
-    );
-
-
-    setText(
-        "life-alignment-percentage",
-        result.percentage + "%"
-    );
-
-
-}
-
-
-/* ==========================================================================
-   CURRENT LIFE LEVEL
-========================================================================== */
-
-
-function renderLifeLevel(result) {
-
-
-    setText(
-        "life-level-tamil",
-        result.lifeLevel.tamil
-    );
-
-
-    setText(
-        "life-level-english",
-        result.lifeLevel.english
-    );
-
-
-}
-
-
-/* ==========================================================================
-   STRONGEST PILLAR
-========================================================================== */
-
-
-function renderStrongestPillar(result) {
-
-
-    const strongest =
-        result.strongestPillar;
-
-
-    setText(
-        "strongest-pillar-tamil",
-        strongest.tamil
-    );
-
-
-    setText(
-        "strongest-pillar-english",
-        strongest.english
-    );
-
-
-    setText(
-        "strongest-pillar-score",
-        strongest.score + " / 10"
-    );
-
-
-}
-
-
-/* ==========================================================================
-   GROWTH OPPORTUNITY
-========================================================================== */
-
-
-function renderGrowthOpportunity(result) {
-
-
-    const growth =
-        result.growthOpportunity;
-
-
-    setText(
-        "growth-pillar-tamil",
-        growth.tamil
-    );
-
-
-    setText(
-        "growth-pillar-english",
-        growth.english
-    );
-
-
-    setText(
-        "growth-pillar-score",
-        growth.score + " / 10"
-    );
-
-
-}
-
-
-/* ==========================================================================
-   COMPLETE 12-PILLAR BREAKDOWN
-========================================================================== */
-
-
-function renderPillarBreakdown(result) {
-
-
-    const host =
-        document.getElementById(
-            "pillar-score-list"
-        );
-
-
-    if (!host) {
-
-        return;
-
-    }
-
-
-    host.innerHTML = "";
-
-
-    PILLARS.forEach(
-
-        function (pillar) {
-
-
-            const score =
-                result.scores[
-                    pillar.key
-                ];
-
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-
-            item.className =
-                (
-                    "pillar-result-row " +
-                    getScoreClass(score)
-                );
-
-
-            const identity =
-                document.createElement(
-                    "div"
-                );
-
-
-            identity.className =
-                "pillar-result-identity";
-
-
-            const number =
-                document.createElement(
-                    "span"
-                );
-
-
-            number.className =
-                "pillar-result-number";
-
-
-            number.textContent =
-                pillar.number;
-
-
-            const names =
-                document.createElement(
-                    "div"
-                );
-
-
-            names.className =
-                "pillar-result-names";
-
-
-            const tamil =
-                document.createElement(
-                    "div"
-                );
-
-
-            tamil.className =
-                "pillar-result-tamil";
-
-
-            tamil.textContent =
-                pillar.tamil;
-
-
-            const english =
-                document.createElement(
-                    "div"
-                );
-
-
-            english.className =
-                "pillar-result-english";
-
-
-            english.textContent =
-                pillar.english;
-
-
-            names.appendChild(
-                tamil
-            );
-
-
-            names.appendChild(
-                english
-            );
-
-
-            identity.appendChild(
-                number
-            );
-
-
-            identity.appendChild(
-                names
-            );
-
-
-            const value =
-                document.createElement(
-                    "div"
-                );
-
-
-            value.className =
-                "pillar-result-score";
-
-
-            value.textContent =
-                score + " / 10";
-
-
-            item.appendChild(
-                identity
-            );
-
-
-            item.appendChild(
-                value
-            );
-
-
-            host.appendChild(
-                item
-            );
-
-
-        }
-
-    );
-
-
-}
-
-
-/* ==========================================================================
-   TEXT HELPER
-========================================================================== */
-
-
-function setText(
-    id,
-    value
-) {
-
-
-    const element =
-        document.getElementById(
-            id
-        );
-
-
-    if (!element) {
-
-        return;
-
-    }
-
-
-    element.textContent =
-        value;
-
-
-}
 
 
 /* ==========================================================================
@@ -2170,37 +2896,35 @@ function setText(
 ========================================================================== */
 
 
-function bindPage04Navigation() {
+function bindNavigation(){
 
 
-    const nextButton =
+    const diagnosisButton =
+
         document.getElementById(
-            "show-diagnosis-button"
+
+            "personal-diagnosis-button"
+
         );
 
 
-    if (nextButton) {
 
-        nextButton.addEventListener(
+    if(diagnosisButton){
+
+
+        diagnosisButton.addEventListener(
 
             "click",
 
-            function () {
+            function(){
 
 
-                if (!resultData) {
+                saveAlignmentResult();
 
-                    return;
-
-                }
-
-
-                saveResult(
-                    resultData
-                );
 
 
                 window.location.href =
+
                     PAGE04_CONFIG.nextPage;
 
 
@@ -2208,34 +2932,116 @@ function bindPage04Navigation() {
 
         );
 
-    }
-
-
-    const backButton =
-        document.getElementById(
-            "back-to-assessment-button"
-        );
-
-
-    if (backButton) {
-
-        backButton.addEventListener(
-
-            "click",
-
-            function () {
-
-                window.location.href =
-                    PAGE04_CONFIG.previousPage;
-
-            }
-
-        );
 
     }
 
 
 }
+
+
+
+
+
+/* ==========================================================================
+   SET TEXT
+========================================================================== */
+
+
+function setText(
+
+    elementId,
+
+    value
+
+){
+
+
+    const element =
+
+        document.getElementById(
+
+            elementId
+
+        );
+
+
+
+    if(!element){
+
+
+        return;
+
+
+    }
+
+
+
+    element.textContent =
+
+        value;
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   ESCAPE HTML
+========================================================================== */
+
+
+function escapeHTML(value){
+
+
+    return String(value)
+
+        .replace(
+
+            /&/g,
+
+            "&amp;"
+
+        )
+
+        .replace(
+
+            /</g,
+
+            "&lt;"
+
+        )
+
+        .replace(
+
+            />/g,
+
+            "&gt;"
+
+        )
+
+        .replace(
+
+            /"/g,
+
+            "&quot;"
+
+        )
+
+        .replace(
+
+            /'/g,
+
+            "&#039;"
+
+        );
+
+
+}
+
+
+
 
 
 /* ==========================================================================
@@ -2247,80 +3053,47 @@ window.CTM_PAGE04 = {
 
 
     init:
+
         initPage04,
 
 
-    getResult:
 
-        function () {
+    getAssessmentData:
 
-            return resultData;
+        function(){
+
+
+            return assessmentData;
+
+
+        },
+
+
+
+    getAlignmentResult:
+
+        function(){
+
+
+            return alignmentResult;
+
 
         },
 
-
-    getScores:
-
-        function () {
-
-            return (
-                resultData
-                    ? resultData.scores
-                    : {}
-            );
-
-        },
 
 
     redrawWheel:
 
-        function () {
+        function(){
 
-            if (resultData) {
 
-                renderLifeWheel(
-                    resultData
-                );
+            renderLifeWheel();
 
-            }
 
         }
 
 
 };
-
-
-/* ==========================================================================
-   AUTO INITIALIZATION
-
-   Supports Page04 directly without requiring another page-specific
-   bootstrap script.
-========================================================================== */
-
-
-if (
-    document.readyState === "loading"
-) {
-
-    document.addEventListener(
-
-        "DOMContentLoaded",
-
-        initPage04
-
-    );
-
-}
-else {
-
-    initPage04();
-
-}
-
-
-/* ==========================================================================
-   END OF FILE
-========================================================================== */
 
 
 })();
