@@ -9,72 +9,91 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>
-    KALA CHAKRA™ Life Alignment™ | CTM PATH™ Millionaires™
-  </title>
+  <meta
+    name="description"
+    content="KALA CHAKRA™ Life Alignment™ — See your life as one complete picture."
+  >
 
-  <!-- ======================================================
-       CTM PATH™ MILLIONAIRES™
-       PAGE 04 — KALA CHAKRA™ LIFE ALIGNMENT™
-       ====================================================== -->
+  <title>KALA CHAKRA™ Life Alignment™ | CTM PATH™</title>
 
-  <!-- GLOBAL STYLES — SAME SHELL USED BY PAGE 03 -->
-  <link rel="stylesheet" href="../css/global.css">
-  <link rel="stylesheet" href="../css/header.css">
-  <link rel="stylesheet" href="../css/footer.css">
+  <!-- =========================================================
+       GLOBAL FOUNDATION
+       Keep same loading order as Page 03
+  ========================================================== -->
+  <link rel="stylesheet" href="../css/foundation.css">
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/typography.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/animations.css">
 
   <!-- PAGE 04 ONLY -->
   <link rel="stylesheet" href="../css/page04.css">
 </head>
 
+
 <body class="page04">
 
-  <!-- ======================================================
+  <!-- =========================================================
        GLOBAL HEADER
-       ====================================================== -->
-
+       Loaded from components/header.html
+  ========================================================== -->
   <div id="global-header"></div>
 
 
-  <!-- ======================================================
+  <!-- =========================================================
        PAGE 04
-       ====================================================== -->
+       KALA CHAKRA™ LIFE ALIGNMENT™
+  ========================================================== -->
+  <main
+    id="page04"
+    class="page04-main"
+  >
 
-  <main id="page04-main">
 
-    <!-- ====================================================
+    <!-- =======================================================
          JOURNEY MARKER
-         ==================================================== -->
-
-    <section class="journey-marker">
-      <p>JOURNEY 04 / 07</p>
+    ======================================================== -->
+    <section class="page04-progress">
+      <p class="page04-progress-text">
+        JOURNEY 04 / 07
+      </p>
     </section>
 
 
-    <!-- ====================================================
-         HERO
-         ==================================================== -->
 
-    <section class="page04-hero">
+    <!-- =======================================================
+         HERO
+    ======================================================== -->
+    <section
+      class="page04-hero"
+      aria-labelledby="page04-title"
+    >
 
       <div class="page04-container">
 
-        <p class="eyebrow">
+        <p class="page04-eyebrow">
           CTM PATH™
         </p>
 
-        <h1>
+        <h1
+          id="page04-title"
+          class="page04-title"
+        >
           KALA CHAKRA™<br>
           LIFE ALIGNMENT™
         </h1>
 
-        <p class="hero-tamil">
+        <p
+          class="page04-hero-tamil"
+          lang="ta"
+        >
           உங்கள் வாழ்க்கையின்<br>
           முழுப் படத்தை<br>
           இப்போது பாருங்கள்.
         </p>
 
-        <p class="hero-english">
+        <p class="page04-hero-english">
           SEE YOUR LIFE<br>
           AS ONE COMPLETE PICTURE™
         </p>
@@ -84,29 +103,35 @@
     </section>
 
 
-    <!-- ====================================================
-         INTRODUCTION
-         ==================================================== -->
 
+    <!-- =======================================================
+         INTRODUCTION
+    ======================================================== -->
     <section class="page04-intro">
 
-      <div class="page04-container page04-narrow">
+      <div class="page04-container page04-container-narrow">
 
-        <p class="intro-tamil">
+        <p
+          class="page04-intro-tamil"
+          lang="ta"
+        >
           வாழ்க்கையின் ஒவ்வொரு பகுதியையும்
           தனித்தனியாக பார்த்தீர்கள்.
         </p>
 
-        <p class="intro-tamil">
+        <p
+          class="page04-intro-tamil"
+          lang="ta"
+        >
           இப்போது அவை அனைத்தும் ஒன்றாக இணையும்போது
           உங்கள் வாழ்க்கை எப்படி இருக்கிறது என்பதைப் பார்ப்போம்.
         </p>
 
-        <p class="intro-english">
+        <p class="page04-intro-english">
           You have looked at each area of your life individually.
         </p>
 
-        <p class="intro-english">
+        <p class="page04-intro-english">
           Now see what happens when all twelve areas
           come together as one life.
         </p>
@@ -116,94 +141,83 @@
     </section>
 
 
-    <!-- ====================================================
-         LIFE WHEEL
-         ==================================================== -->
 
+    <!-- =======================================================
+         LIFE WHEEL
+    ======================================================== -->
     <section
-      id="life-wheel-section"
-      class="life-wheel-section"
+      class="page04-wheel-section"
+      aria-labelledby="life-wheel-title"
     >
 
       <div class="page04-container">
 
-        <header class="section-heading">
+        <header class="page04-section-heading">
 
-          <p class="eyebrow">
+          <p class="page04-eyebrow">
             KALA CHAKRA™
           </p>
 
-          <h2>
+          <h2
+            id="life-wheel-title"
+            class="page04-section-title"
+          >
             YOUR LIFE WHEEL™
           </h2>
 
-          <p class="section-tamil">
+          <p
+            class="page04-section-tamil"
+            lang="ta"
+          >
             உங்கள் வாழ்க்கையின் 12 முக்கிய பகுதிகள் —
             ஒரே பார்வையில்.
           </p>
 
-          <p class="section-english">
+          <p class="page04-section-english">
             Your 12 life pillars — revealed as one complete picture.
           </p>
 
         </header>
 
 
-        <!-- ================================================
-             ACTUAL DYNAMIC LIFE WHEEL
-             ================================================ -->
+        <!--
+          IMPORTANT:
+          page04.js owns everything inside this element.
 
-        <div
-          id="life-wheel-wrapper"
-          class="life-wheel-wrapper"
-        >
+          Do NOT place an IMG here.
+          Do NOT create a white circular background.
+          Do NOT hard-code SVG geometry here.
 
-          <svg
-            id="life-wheel"
-            class="life-wheel"
-            viewBox="0 0 1000 1000"
+          JS renders the actual score-generated
+          imbalanced KALA CHAKRA™ wheel.
+        -->
+        <div class="page04-wheel-stage">
+
+          <div
+            id="lifeWheel"
+            class="page04-life-wheel"
             role="img"
-            aria-labelledby="life-wheel-title life-wheel-description"
-          >
-
-            <title id="life-wheel-title">
-              KALA CHAKRA™ Life Wheel™
-            </title>
-
-            <desc id="life-wheel-description">
-              A twelve-spoke life wheel generated from the
-              participant's twelve life assessment scores.
-            </desc>
-
-            <!-- JS BUILDS:
-                 concentric guides
-                 12 spokes
-                 actual score polygon
-                 coloured score points
-                 pillar labels
-                 scores
-            -->
-
-          </svg>
+            aria-label="KALA CHAKRA Life Wheel generated from your twelve life pillar scores"
+          ></div>
 
         </div>
 
 
-        <!-- ================================================
-             WHEEL LEGEND
-             ================================================ -->
+        <!-- SCORE COLOUR KEY -->
+        <div
+          class="page04-wheel-legend"
+          aria-label="Life pillar score legend"
+        >
 
-        <div class="wheel-legend">
-
-          <span class="legend-item legend-priority">
+          <span class="page04-legend-item is-priority">
             0–3 PRIORITY
           </span>
 
-          <span class="legend-item legend-developing">
+          <span class="page04-legend-item is-developing">
             4–7 DEVELOPING
           </span>
 
-          <span class="legend-item legend-strong">
+          <span class="page04-legend-item is-strong">
             8–10 STRONG
           </span>
 
@@ -214,50 +228,54 @@
     </section>
 
 
-    <!-- ====================================================
-         ALIGNMENT SCORE
-         ==================================================== -->
 
+    <!-- =======================================================
+         LIFE ALIGNMENT SUMMARY
+    ======================================================== -->
     <section
-      id="alignment-summary"
-      class="alignment-summary"
+      class="page04-summary"
+      aria-labelledby="alignment-score-heading"
     >
 
       <div class="page04-container">
 
-        <header class="section-heading">
+        <header class="page04-section-heading">
 
-          <p class="eyebrow">
+          <p class="page04-eyebrow">
             YOUR LIFE ALIGNMENT SCORE™
           </p>
 
-          <h2>
+          <h2
+            id="alignment-score-heading"
+            class="page04-summary-tamil"
+            lang="ta"
+          >
             உங்கள் வாழ்க்கை சமநிலை மதிப்பெண்
           </h2>
 
         </header>
 
 
-        <div class="alignment-score-grid">
+        <div class="page04-summary-grid">
+
 
           <!-- TOTAL SCORE -->
+          <article class="page04-metric-card">
 
-          <article class="alignment-score-card">
-
-            <p class="score-card-label">
+            <p class="page04-metric-label">
               TOTAL SCORE
             </p>
 
-            <div class="score-number-row">
+            <div class="page04-total-score">
 
               <span
-                id="total-score"
-                class="score-number"
+                id="totalScore"
+                class="page04-metric-value"
               >
-                0
+                —
               </span>
 
-              <span class="score-denominator">
+              <span class="page04-metric-unit">
                 / 120
               </span>
 
@@ -266,44 +284,48 @@
           </article>
 
 
-          <!-- PERCENTAGE -->
 
-          <article class="alignment-score-card">
+          <!-- ALIGNMENT -->
+          <article class="page04-metric-card">
 
-            <p class="score-card-label">
+            <p class="page04-metric-label">
               LIFE ALIGNMENT
             </p>
 
             <div
-              id="alignment-percentage"
-              class="alignment-percentage"
+              id="alignmentPercent"
+              class="page04-metric-value page04-alignment-value"
             >
-              0%
+              —%
             </div>
 
           </article>
 
 
+
           <!-- LIFE LEVEL -->
+          <article class="page04-metric-card">
 
-          <article class="alignment-score-card">
-
-            <p class="score-card-label">
+            <p class="page04-metric-label">
               YOUR CURRENT LIFE LEVEL™
             </p>
 
-            <p class="score-card-tamil">
+            <p
+              class="page04-metric-label-tamil"
+              lang="ta"
+            >
               உங்கள் தற்போதைய வாழ்க்கை நிலை
             </p>
 
             <div
-              id="alignment-level"
-              class="alignment-level"
+              id="lifeLevel"
+              class="page04-life-level"
             >
               —
             </div>
 
           </article>
+
 
         </div>
 
@@ -312,60 +334,72 @@
     </section>
 
 
-    <!-- ====================================================
-         ALIGNMENT INSIGHTS
-         ==================================================== -->
 
+    <!-- =======================================================
+         ALIGNMENT INSIGHTS
+    ======================================================== -->
     <section
-      id="alignment-insights"
-      class="alignment-insights"
+      class="page04-insights"
+      aria-labelledby="alignment-insights-title"
     >
 
       <div class="page04-container">
 
-        <header class="section-heading">
+        <header class="page04-section-heading">
 
-          <p class="eyebrow">
+          <p class="page04-eyebrow">
             YOUR ALIGNMENT INSIGHTS™
           </p>
 
-          <h2>
+          <h2
+            id="alignment-insights-title"
+            class="page04-section-title"
+          >
             WHAT YOUR LIFE WHEEL REVEALS™
           </h2>
 
         </header>
 
 
-        <div class="insight-grid">
+        <div class="page04-insight-grid">
+
 
           <!-- STRONGEST AREA -->
+          <article class="page04-insight-card is-strongest">
 
-          <article class="insight-card strongest-card">
-
-            <p class="insight-number">
+            <p class="page04-insight-number">
               01
             </p>
 
-            <p class="insight-label">
+            <p class="page04-insight-label">
               YOUR STRONGEST AREA™
             </p>
 
-            <p class="insight-label-tamil">
+            <p
+              class="page04-insight-label-tamil"
+              lang="ta"
+            >
               உங்கள் மிக வலுவான பகுதி
             </p>
 
-            <h3 id="strongest-pillar">
+            <h3
+              id="strongestPillar"
+              class="page04-insight-title"
+            >
               —
             </h3>
 
-            <div
-              id="strongest-score"
-              class="insight-score"
-            >
-              — / 10
+            <div class="page04-insight-score">
+
+              <span id="strongestScore">
+                —
+              </span>
+
+              <small>/10</small>
+
             </div>
 
-            <p class="insight-description">
+            <p class="page04-insight-copy">
               This is currently one of the strongest
               foundations in your life.
             </p>
@@ -373,40 +407,50 @@
           </article>
 
 
+
           <!-- GROWTH OPPORTUNITY -->
+          <article class="page04-insight-card is-growth">
 
-          <article class="insight-card growth-card">
-
-            <p class="insight-number">
+            <p class="page04-insight-number">
               02
             </p>
 
-            <p class="insight-label">
+            <p class="page04-insight-label">
               YOUR GREATEST GROWTH OPPORTUNITY™
             </p>
 
-            <p class="insight-label-tamil">
+            <p
+              class="page04-insight-label-tamil"
+              lang="ta"
+            >
               உங்கள் அடுத்த வளர்ச்சி வாய்ப்பு
             </p>
 
-            <h3 id="growth-pillar">
+            <h3
+              id="growthPillar"
+              class="page04-insight-title"
+            >
               —
             </h3>
 
-            <div
-              id="growth-score"
-              class="insight-score"
-            >
-              — / 10
+            <div class="page04-insight-score">
+
+              <span id="growthScore">
+                —
+              </span>
+
+              <small>/10</small>
+
             </div>
 
-            <p class="insight-description">
+            <p class="page04-insight-copy">
               Strengthening this area may create meaningful
               improvement across the rest of your life.
             </p>
 
           </article>
 
+
         </div>
 
       </div>
@@ -414,87 +458,74 @@
     </section>
 
 
-    <!-- ====================================================
-         ALL 12 LIFE PILLARS
-         IMPORTANT:
-         ALL TWELVE SCORE TARGETS ARE EXPLICITLY INCLUDED.
-         JS REPLACES "—" WITH THE ACTUAL PAGE 03 SCORE.
-         ==================================================== -->
 
+    <!-- =======================================================
+         ALL 12 LIFE PILLARS
+    ======================================================== -->
     <section
-      id="pillar-summary"
-      class="pillar-summary"
+      class="page04-pillars"
+      aria-labelledby="life-pillars-title"
     >
 
       <div class="page04-container">
 
-        <header class="section-heading">
+        <header class="page04-section-heading">
 
-          <p class="eyebrow">
+          <p class="page04-eyebrow">
             KALA CHAKRA™
           </p>
 
-          <h2>
+          <h2
+            id="life-pillars-title"
+            class="page04-section-title"
+          >
             YOUR 12 LIFE PILLARS™
           </h2>
 
-          <p class="section-tamil">
+          <p
+            class="page04-section-tamil"
+            lang="ta"
+          >
             உங்கள் 12 வாழ்க்கைப் பகுதிகள்
           </p>
 
-          <p class="section-english">
+          <p class="page04-section-english">
             THE COMPLETE PICTURE™
           </p>
 
         </header>
 
 
-        <div
-          id="pillar-grid"
-          class="pillar-grid"
-        >
+        <div class="page04-pillars-grid">
 
 
-          <!-- ==============================================
-               01 — PURPOSE
-               ============================================== -->
-
+          <!-- 01 PURPOSE -->
           <article
-            class="pillar-card"
+            class="page04-pillar-card"
             id="pillar-card-1"
-            data-pillar="purpose"
           >
 
-            <p class="pillar-number">
-              01
-            </p>
+            <p class="page04-pillar-number">01</p>
 
-            <h3 class="pillar-tamil">
+            <h3
+              class="page04-pillar-tamil"
+              lang="ta"
+            >
               நோக்கம்
             </h3>
 
-            <p class="pillar-english">
+            <p class="page04-pillar-english">
               PURPOSE
             </p>
 
-            <div class="pillar-score-row">
-
-              <span
-                id="pillar-score-1"
-                class="pillar-score"
-              >
-                —
-              </span>
-
-              <span class="pillar-score-max">
-                / 10
-              </span>
-
+            <div class="page04-pillar-score">
+              <span id="pillar-score-1">—</span>
+              <small>/10</small>
             </div>
 
             <p
               id="pillar-status-1"
-              class="pillar-status"
+              class="page04-pillar-status"
             >
               —
             </p>
@@ -502,46 +533,34 @@
           </article>
 
 
-          <!-- ==============================================
-               02 — HEALTH
-               ============================================== -->
 
+          <!-- 02 HEALTH -->
           <article
-            class="pillar-card"
+            class="page04-pillar-card"
             id="pillar-card-2"
-            data-pillar="health"
           >
 
-            <p class="pillar-number">
-              02
-            </p>
+            <p class="page04-pillar-number">02</p>
 
-            <h3 class="pillar-tamil">
+            <h3
+              class="page04-pillar-tamil"
+              lang="ta"
+            >
               உடல்நலம்
             </h3>
 
-            <p class="pillar-english">
+            <p class="page04-pillar-english">
               HEALTH
             </p>
 
-            <div class="pillar-score-row">
-
-              <span
-                id="pillar-score-2"
-                class="pillar-score"
-              >
-                —
-              </span>
-
-              <span class="pillar-score-max">
-                / 10
-              </span>
-
+            <div class="page04-pillar-score">
+              <span id="pillar-score-2">—</span>
+              <small>/10</small>
             </div>
 
             <p
               id="pillar-status-2"
-              class="pillar-status"
+              class="page04-pillar-status"
             >
               —
             </p>
@@ -549,46 +568,34 @@
           </article>
 
 
-          <!-- ==============================================
-               03 — RELATIONSHIPS
-               ============================================== -->
 
+          <!-- 03 RELATIONSHIPS -->
           <article
-            class="pillar-card"
+            class="page04-pillar-card"
             id="pillar-card-3"
-            data-pillar="relationships"
           >
 
-            <p class="pillar-number">
-              03
-            </p>
+            <p class="page04-pillar-number">03</p>
 
-            <h3 class="pillar-tamil">
+            <h3
+              class="page04-pillar-tamil"
+              lang="ta"
+            >
               உறவுகள்
             </h3>
 
-            <p class="pillar-english">
+            <p class="page04-pillar-english">
               RELATIONSHIPS
             </p>
 
-            <div class="pillar-score-row">
-
-              <span
-                id="pillar-score-3"
-                class="pillar-score"
-              >
-                —
-              </span>
-
-              <span class="pillar-score-max">
-                / 10
-              </span>
-
+            <div class="page04-pillar-score">
+              <span id="pillar-score-3">—</span>
+              <small>/10</small>
             </div>
 
             <p
               id="pillar-status-3"
-              class="pillar-status"
+              class="page04-pillar-status"
             >
               —
             </p>
@@ -596,46 +603,34 @@
           </article>
 
 
-          <!-- ==============================================
-               04 — CHARACTER & INTEGRITY
-               ============================================== -->
 
+          <!-- 04 CHARACTER & INTEGRITY -->
           <article
-            class="pillar-card"
+            class="page04-pillar-card"
             id="pillar-card-4"
-            data-pillar="character"
           >
 
-            <p class="pillar-number">
-              04
-            </p>
+            <p class="page04-pillar-number">04</p>
 
-            <h3 class="pillar-tamil">
+            <h3
+              class="page04-pillar-tamil"
+              lang="ta"
+            >
               பண்பும் நேர்மையும்
             </h3>
 
-            <p class="pillar-english">
+            <p class="page04-pillar-english">
               CHARACTER &amp; INTEGRITY
             </p>
 
-            <div class="pillar-score-row">
-
-              <span
-                id="pillar-score-4"
-                class="pillar-score"
-              >
-                —
-              </span>
-
-              <span class="pillar-score-max">
-                / 10
-              </span>
-
+            <div class="page04-pillar-score">
+              <span id="pillar-score-4">—</span>
+              <small>/10</small>
             </div>
 
             <p
               id="pillar-status-4"
-              class="pillar-status"
+              class="page04-pillar-status"
             >
               —
             </p>
@@ -643,46 +638,34 @@
           </article>
 
 
-          <!-- ==============================================
-               05 — LEARNING & MASTERY
-               ============================================== -->
 
+          <!-- 05 LEARNING & MASTERY -->
           <article
-            class="pillar-card"
+            class="page04-pillar-card"
             id="pillar-card-5"
-            data-pillar="learning"
           >
 
-            <p class="pillar-number">
-              05
-            </p>
+            <p class="page04-pillar-number">05</p>
 
-            <h3 class="pillar-tamil">
+            <h3
+              class="page04-pillar-tamil"
+              lang="ta"
+            >
               கற்றலும் தேர்ச்சியும்
             </h3>
 
-            <p class="pillar-english">
+            <p class="page04-pillar-english">
               LEARNING &amp; MASTERY
             </p>
 
-            <div class="pillar-score-row">
-
-              <span
-                id="pillar-score-5"
-                class="pillar-score"
-              >
-                —
-              </span>
-
-              <span class="pillar-score-max">
-                / 10
-              </span>
-
+            <div class="page04-pillar-score">
+              <span id="pillar-score-5">—</span>
+              <small>/10</small>
             </div>
 
             <p
               id="pillar-status-5"
-              class="pillar-status"
+              class="page04-pillar-status"
             >
               —
             </p>
@@ -690,46 +673,34 @@
           </article>
 
 
-          <!-- ==============================================
-               06 — CAREER & CONTRIBUTION
-               ============================================== -->
 
+          <!-- 06 CAREER & CONTRIBUTION -->
           <article
-            class="pillar-card"
+            class="page04-pillar-card"
             id="pillar-card-6"
-            data-pillar="career"
           >
 
-            <p class="pillar-number">
-              06
-            </p>
+            <p class="page04-pillar-number">06</p>
 
-            <h3 class="pillar-tamil">
+            <h3
+              class="page04-pillar-tamil"
+              lang="ta"
+            >
               தொழிலும் பங்களிப்பும்
             </h3>
 
-            <p class="pillar-english">
+            <p class="page04-pillar-english">
               CAREER &amp; CONTRIBUTION
             </p>
 
-            <div class="pillar-score-row">
-
-              <span
-                id="pillar-score-6"
-                class="pillar-score"
-              >
-                —
-              </span>
-
-              <span class="pillar-score-max">
-                / 10
-              </span>
-
+            <div class="page04-pillar-score">
+              <span id="pillar-score-6">—</span>
+              <small>/10</small>
             </div>
 
             <p
               id="pillar-status-6"
-              class="pillar-status"
+              class="page04-pillar-status"
             >
               —
             </p>
@@ -737,46 +708,34 @@
           </article>
 
 
-          <!-- ==============================================
-               07 — FINANCIAL FREEDOM
-               ============================================== -->
 
+          <!-- 07 FINANCIAL FREEDOM -->
           <article
-            class="pillar-card"
+            class="page04-pillar-card"
             id="pillar-card-7"
-            data-pillar="financial"
           >
 
-            <p class="pillar-number">
-              07
-            </p>
+            <p class="page04-pillar-number">07</p>
 
-            <h3 class="pillar-tamil">
+            <h3
+              class="page04-pillar-tamil"
+              lang="ta"
+            >
               பொருளாதார சுதந்திரம்
             </h3>
 
-            <p class="pillar-english">
+            <p class="page04-pillar-english">
               FINANCIAL FREEDOM
             </p>
 
-            <div class="pillar-score-row">
-
-              <span
-                id="pillar-score-7"
-                class="pillar-score"
-              >
-                —
-              </span>
-
-              <span class="pillar-score-max">
-                / 10
-              </span>
-
+            <div class="page04-pillar-score">
+              <span id="pillar-score-7">—</span>
+              <small>/10</small>
             </div>
 
             <p
               id="pillar-status-7"
-              class="pillar-status"
+              class="page04-pillar-status"
             >
               —
             </p>
@@ -784,46 +743,34 @@
           </article>
 
 
-          <!-- ==============================================
-               08 — TIME FREEDOM
-               ============================================== -->
 
+          <!-- 08 TIME FREEDOM -->
           <article
-            class="pillar-card"
+            class="page04-pillar-card"
             id="pillar-card-8"
-            data-pillar="time"
           >
 
-            <p class="pillar-number">
-              08
-            </p>
+            <p class="page04-pillar-number">08</p>
 
-            <h3 class="pillar-tamil">
+            <h3
+              class="page04-pillar-tamil"
+              lang="ta"
+            >
               நேர சுதந்திரம்
             </h3>
 
-            <p class="pillar-english">
+            <p class="page04-pillar-english">
               TIME FREEDOM
             </p>
 
-            <div class="pillar-score-row">
-
-              <span
-                id="pillar-score-8"
-                class="pillar-score"
-              >
-                —
-              </span>
-
-              <span class="pillar-score-max">
-                / 10
-              </span>
-
+            <div class="page04-pillar-score">
+              <span id="pillar-score-8">—</span>
+              <small>/10</small>
             </div>
 
             <p
               id="pillar-status-8"
-              class="pillar-status"
+              class="page04-pillar-status"
             >
               —
             </p>
@@ -831,46 +778,34 @@
           </article>
 
 
-          <!-- ==============================================
-               09 — COMMUNITY & TRIBE
-               ============================================== -->
 
+          <!-- 09 COMMUNITY & TRIBE -->
           <article
-            class="pillar-card"
+            class="page04-pillar-card"
             id="pillar-card-9"
-            data-pillar="community"
           >
 
-            <p class="pillar-number">
-              09
-            </p>
+            <p class="page04-pillar-number">09</p>
 
-            <h3 class="pillar-tamil">
+            <h3
+              class="page04-pillar-tamil"
+              lang="ta"
+            >
               சமூகமும் உறவுக்குழுவும்
             </h3>
 
-            <p class="pillar-english">
+            <p class="page04-pillar-english">
               COMMUNITY &amp; TRIBE
             </p>
 
-            <div class="pillar-score-row">
-
-              <span
-                id="pillar-score-9"
-                class="pillar-score"
-              >
-                —
-              </span>
-
-              <span class="pillar-score-max">
-                / 10
-              </span>
-
+            <div class="page04-pillar-score">
+              <span id="pillar-score-9">—</span>
+              <small>/10</small>
             </div>
 
             <p
               id="pillar-status-9"
-              class="pillar-status"
+              class="page04-pillar-status"
             >
               —
             </p>
@@ -878,46 +813,34 @@
           </article>
 
 
-          <!-- ==============================================
-               10 — SYSTEMS & PRODUCTIVITY
-               ============================================== -->
 
+          <!-- 10 SYSTEMS & PRODUCTIVITY -->
           <article
-            class="pillar-card"
+            class="page04-pillar-card"
             id="pillar-card-10"
-            data-pillar="systems"
           >
 
-            <p class="pillar-number">
-              10
-            </p>
+            <p class="page04-pillar-number">10</p>
 
-            <h3 class="pillar-tamil">
+            <h3
+              class="page04-pillar-tamil"
+              lang="ta"
+            >
               அமைப்புகளும் செயல்திறனும்
             </h3>
 
-            <p class="pillar-english">
+            <p class="page04-pillar-english">
               SYSTEMS &amp; PRODUCTIVITY
             </p>
 
-            <div class="pillar-score-row">
-
-              <span
-                id="pillar-score-10"
-                class="pillar-score"
-              >
-                —
-              </span>
-
-              <span class="pillar-score-max">
-                / 10
-              </span>
-
+            <div class="page04-pillar-score">
+              <span id="pillar-score-10">—</span>
+              <small>/10</small>
             </div>
 
             <p
               id="pillar-status-10"
-              class="pillar-status"
+              class="page04-pillar-status"
             >
               —
             </p>
@@ -925,46 +848,34 @@
           </article>
 
 
-          <!-- ==============================================
-               11 — SERVICE & IMPACT
-               ============================================== -->
 
+          <!-- 11 SERVICE & IMPACT -->
           <article
-            class="pillar-card"
+            class="page04-pillar-card"
             id="pillar-card-11"
-            data-pillar="service"
           >
 
-            <p class="pillar-number">
-              11
-            </p>
+            <p class="page04-pillar-number">11</p>
 
-            <h3 class="pillar-tamil">
+            <h3
+              class="page04-pillar-tamil"
+              lang="ta"
+            >
               சேவையும் தாக்கமும்
             </h3>
 
-            <p class="pillar-english">
+            <p class="page04-pillar-english">
               SERVICE &amp; IMPACT
             </p>
 
-            <div class="pillar-score-row">
-
-              <span
-                id="pillar-score-11"
-                class="pillar-score"
-              >
-                —
-              </span>
-
-              <span class="pillar-score-max">
-                / 10
-              </span>
-
+            <div class="page04-pillar-score">
+              <span id="pillar-score-11">—</span>
+              <small>/10</small>
             </div>
 
             <p
               id="pillar-status-11"
-              class="pillar-status"
+              class="page04-pillar-status"
             >
               —
             </p>
@@ -972,46 +883,34 @@
           </article>
 
 
-          <!-- ==============================================
-               12 — VISION & LEGACY
-               ============================================== -->
 
+          <!-- 12 VISION & LEGACY -->
           <article
-            class="pillar-card"
+            class="page04-pillar-card"
             id="pillar-card-12"
-            data-pillar="vision"
           >
 
-            <p class="pillar-number">
-              12
-            </p>
+            <p class="page04-pillar-number">12</p>
 
-            <h3 class="pillar-tamil">
+            <h3
+              class="page04-pillar-tamil"
+              lang="ta"
+            >
               தொலைநோக்கும் மரபும்
             </h3>
 
-            <p class="pillar-english">
+            <p class="page04-pillar-english">
               VISION &amp; LEGACY
             </p>
 
-            <div class="pillar-score-row">
-
-              <span
-                id="pillar-score-12"
-                class="pillar-score"
-              >
-                —
-              </span>
-
-              <span class="pillar-score-max">
-                / 10
-              </span>
-
+            <div class="page04-pillar-score">
+              <span id="pillar-score-12">—</span>
+              <small>/10</small>
             </div>
 
             <p
               id="pillar-status-12"
-              class="pillar-status"
+              class="page04-pillar-status"
             >
               —
             </p>
@@ -1020,147 +919,197 @@
 
 
         </div>
+
       </div>
 
     </section>
 
 
-    <!-- ====================================================
+
+    <!-- =======================================================
          COMPLETE PICTURE
-         ==================================================== -->
+    ======================================================== -->
+    <section class="page04-complete-picture">
 
-    <section class="complete-picture">
+      <div class="page04-container page04-container-narrow">
 
-      <div class="page04-container page04-narrow">
-
-        <p class="eyebrow">
+        <p class="page04-eyebrow">
           THE COMPLETE PICTURE™
         </p>
 
-        <h2 class="complete-picture-tamil">
-          ஒரு நல்ல வாழ்க்கை என்பது
-          எல்லா பகுதிகளிலும் ஒரே அளவு
-          மதிப்பெண் பெறுவது அல்ல.
+        <h2
+          class="page04-complete-title"
+          lang="ta"
+        >
+          ஒரு நல்ல வாழ்க்கை என்பது எல்லா பகுதிகளிலும்
+          ஒரே அளவு மதிப்பெண் பெறுவது அல்ல.
         </h2>
 
-        <p class="complete-picture-tamil-secondary">
+        <p
+          class="page04-complete-copy-tamil"
+          lang="ta"
+        >
           எந்த பகுதிகள் உங்களை முன்னேற்றுகின்றன —
           எந்த பகுதிகள் உங்களை பின்னால் இழுக்கின்றன —
           என்பதை தெளிவாக அறிதலே மாற்றத்தின் தொடக்கம்.
         </p>
 
-        <p class="complete-picture-english">
+        <p class="page04-complete-copy-english">
           A well-lived life does not require every area to be perfect.
         </p>
 
-        <p class="complete-picture-english">
+        <p class="page04-complete-copy-english">
           Transformation begins when you can clearly see what is
           strengthening your life, what is limiting it, and where
           your attention can create the greatest change.
         </p>
 
 
-        <div class="complete-picture-divider"></div>
+        <div class="page04-closing">
+
+          <p
+            class="page04-closing-tamil"
+            lang="ta"
+          >
+            இப்போது உங்கள் வாழ்க்கையின் முழுப் படம் தெரிகிறது.
+          </p>
+
+          <p
+            class="page04-closing-tamil"
+            lang="ta"
+          >
+            அடுத்ததாக —<br>
+            இந்த படம் உங்களைப் பற்றி என்ன சொல்கிறது
+            என்பதைப் பார்ப்போம்.
+          </p>
+
+          <p class="page04-closing-english">
+            You can now see the complete picture.<br>
+            Next, discover what this pattern reveals about your life.
+          </p>
+
+        </div>
 
 
-        <p class="next-step-tamil">
-          இப்போது உங்கள் வாழ்க்கையின் முழுப் படம் தெரிகிறது.
-        </p>
+        <!-- ===================================================
+             ACTIONS
+        ==================================================== -->
+        <div class="page04-actions">
 
-        <p class="next-step-tamil">
-          அடுத்ததாக —<br>
-          இந்த படம் உங்களைப் பற்றி என்ன சொல்கிறது
-          என்பதைப் பார்ப்போம்.
-        </p>
+          <a
+            href="./page05.html"
+            class="page04-primary-cta"
+          >
+            <span lang="ta">
+              என் தனிப்பட்ட வாழ்க்கை பகுப்பாய்வை காண்க
+            </span>
 
-        <p class="next-step-english">
-          You can now see the complete picture.
-        </p>
+            <span class="page04-cta-english">
+              SEE MY PERSONAL LIFE DIAGNOSIS →
+            </span>
+          </a>
 
-        <p class="next-step-english">
-          Next, discover what this pattern reveals about your life.
-        </p>
+
+          <a
+            href="./page03.html"
+            class="page04-back-link"
+          >
+            ← மதிப்பீட்டிற்குத் திரும்புக
+            <span>
+              BACK TO LIFE ASSESSMENT
+            </span>
+          </a>
+
+        </div>
 
       </div>
 
     </section>
 
 
-    <!-- ====================================================
-         NAVIGATION
-         ==================================================== -->
-
-    <nav
-      class="page-navigation"
-      aria-label="Journey navigation"
-    >
-
-      <a
-        href="./page05.html"
-        class="journey-button journey-button-primary"
-        id="continue-to-page05"
-      >
-        <span class="button-tamil">
-          என் தனிப்பட்ட வாழ்க்கை பகுப்பாய்வை காண்க
-        </span>
-
-        <span class="button-separator">
-          →
-        </span>
-
-        <span class="button-english">
-          SEE MY PERSONAL LIFE DIAGNOSIS
-        </span>
-
-        <span class="button-arrow">
-          →
-        </span>
-      </a>
-
-
-      <a
-        href="./page03.html"
-        class="journey-back-link"
-      >
-        ← மதிப்பீட்டிற்குத் திரும்புக
-        <span>BACK TO LIFE ASSESSMENT</span>
-      </a>
-
-    </nav>
-
-
   </main>
 
 
-  <!-- ======================================================
-       GLOBAL FOOTER
-       ====================================================== -->
 
+  <!-- =========================================================
+       GLOBAL FOOTER
+       Loaded from components/footer.html
+  ========================================================== -->
   <div id="global-footer"></div>
 
 
-  <!-- ======================================================
+
+  <!-- =========================================================
        GLOBAL COMPONENT LOADER
+
        IMPORTANT:
-       Keep this identical to the loader used by Page 03.
-       ====================================================== -->
+       Page04 is inside /pages/
+       Components therefore resolve through ../components/
+  ========================================================== -->
+  <script>
+    async function loadGlobalComponent(targetId, componentPath) {
+      const target = document.getElementById(targetId);
 
-  <script src="../js/components.js"></script>
+      if (!target) {
+        return;
+      }
+
+      try {
+        const response = await fetch(componentPath);
+
+        if (!response.ok) {
+          throw new Error(
+            `Unable to load ${componentPath}: ${response.status}`
+          );
+        }
+
+        target.innerHTML = await response.text();
+
+      } catch (error) {
+        console.error(
+          `[CTM PATH] Component loading error:`,
+          error
+        );
+      }
+    }
 
 
-  <!-- ======================================================
+    document.addEventListener("DOMContentLoaded", async () => {
+
+      await Promise.all([
+        loadGlobalComponent(
+          "global-header",
+          "../components/header.html"
+        ),
+
+        loadGlobalComponent(
+          "global-footer",
+          "../components/footer.html"
+        )
+      ]);
+
+      /*
+       * Allows page04.js or other scripts to know that
+       * the shared shell has finished loading.
+       */
+      document.dispatchEvent(
+        new CustomEvent("ctm:components-ready")
+      );
+
+    });
+  </script>
+
+
+
+  <!-- =========================================================
        PAGE 04 ENGINE
-       Reads the 12 Page 03 scores and renders:
-       - Life Wheel
-       - 12 score cards
-       - total /120
-       - percentage
-       - level
-       - strongest area
-       - growth opportunity
-       ====================================================== -->
+       Keep LAST so the DOM exists before wheel rendering.
+  ========================================================== -->
+  <script
+    src="../js/page04.js"
+    defer
+  ></script>
 
-  <script src="../js/page04.js"></script>
 
 </body>
 </html>
