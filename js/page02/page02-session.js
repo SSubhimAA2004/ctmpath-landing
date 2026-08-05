@@ -1,4 +1,5 @@
 
+
 /**
  * =============================================================================
  * CTM PATH™ MILLIONAIRES™
@@ -727,6 +728,72 @@ Page02Session.getClient = function(){
 
 
     return session.client;
+
+};
+
+
+/* =============================================================================
+ * GET CLIENT ID
+ * =============================================================================
+ */
+
+
+Page02Session.getClientId = function(){
+
+    const client =
+        Page02Session.getClient();
+
+
+    return (
+        client &&
+        (
+            client.clientId ||
+            client.peopleId
+        )
+    ) || '';
+
+};
+
+
+/* =============================================================================
+ * GET PEOPLE ID
+ * =============================================================================
+ */
+
+
+Page02Session.getPeopleId = function(){
+
+    const client =
+        Page02Session.getClient();
+
+
+    return (
+        client &&
+        (
+            client.peopleId ||
+            client.clientId
+        )
+    ) || '';
+
+};
+
+
+/* =============================================================================
+ * GET FULL NAME
+ * =============================================================================
+ */
+
+
+Page02Session.getFullName = function(){
+
+    const client =
+        Page02Session.getClient();
+
+
+    return (
+        client &&
+        client.fullName
+    ) || '';
 
 };
 
