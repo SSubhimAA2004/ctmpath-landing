@@ -6,6 +6,7 @@
    API SERVICE LAYER
 
    File:
+
    js/api.js
 
 
@@ -537,7 +538,7 @@ async function saveDiscovery(
 
     return request(
 
-        "saveDiscovery",
+        "saveMillionaireScorecard",
 
         data
 
