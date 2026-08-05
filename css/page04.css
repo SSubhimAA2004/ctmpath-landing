@@ -1,1993 +1,1423 @@
 
-/* ==========================================================================
+/* ============================================================
    CTM PATH™ MILLIONAIRES™
+   PAGE 04 — KALA CHAKRA™ LIFE ALIGNMENT™
+   css/page04.css
 
-   FILE:
-   page04.css
+   IMPORTANT
+   ------------------------------------------------------------
+   PAGE-SCOPED ONLY.
 
-   PAGE:
-   KALA CHAKRA™ LIFE ALIGNMENT™
-
-   VERSION:
-   10.1
-
-   SCOPE:
-   body.page04 ONLY
-
-   IMPORTANT:
-   ----------------------------------------------------------
-   This stylesheet intentionally DOES NOT style:
+   DO NOT style:
+   body
+   html
    #global-header
    #global-footer
+   header
+   footer
+   img
+   svg
 
-   The global header and footer must inherit ONLY from the
-   global component styles already used successfully on Page 03.
+   Global Header + Footer remain controlled by global CSS.
 
-   RESPONSIBILITIES:
-   ✓ Page 04 layout
-   ✓ Life Wheel presentation
-   ✓ Alignment score
-   ✓ Insight cards
-   ✓ 12 pillar cards
-   ✓ Navigation
-   ✓ Responsive behaviour
-
-   SCORE COLOURS:
-   0–3  = Red
-   4–7  = Orange
-   8–10 = Green
-   ========================================================================== */
+   SCORE SYSTEM
+   0–3  = PRIORITY   = RED
+   4–7  = DEVELOPING = ORANGE
+   8–10 = STRONG     = GREEN
+============================================================ */
 
 
-/* ==========================================================================
+/* ============================================================
    01. PAGE TOKENS
-   ========================================================================== */
+============================================================ */
 
-body.page04 {
+.page04-main {
+  --p04-bg: #06182d;
+  --p04-bg-deep: #041326;
+  --p04-bg-soft: #082039;
+  --p04-card: rgba(8, 35, 58, 0.82);
+  --p04-card-soft: rgba(9, 39, 64, 0.62);
 
-    --page04-bg:
-        #06172b;
+  --p04-white: #f7f3ea;
+  --p04-ivory: #eee9df;
+  --p04-muted: #b8c5cf;
 
-    --page04-bg-deep:
-        #041224;
+  --p04-gold: #d7a72f;
+  --p04-teal: #22c7c3;
 
-    --page04-panel:
-        #08243a;
+  --p04-red: #ef5350;
+  --p04-orange: #f5a623;
+  --p04-green: #18a86b;
 
-    --page04-panel-soft:
-        rgba(8, 36, 58, 0.72);
+  --p04-border: rgba(255, 255, 255, 0.08);
+  --p04-teal-border: rgba(34, 199, 195, 0.22);
 
-    --page04-ivory:
-        #f5f0e6;
+  --p04-max: 1320px;
+  --p04-narrow: 900px;
 
-    --page04-white:
-        #ffffff;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
 
-    --page04-muted:
-        #b9c6d4;
+  background:
+    radial-gradient(
+      circle at 50% 18%,
+      rgba(18, 55, 110, 0.16),
+      transparent 34%
+    ),
+    var(--p04-bg);
 
-    --page04-gold:
-        #d8a73c;
+  color: var(--p04-white);
 
-    --page04-teal:
-        #20c5c3;
-
-    --page04-teal-dark:
-        #078c8b;
-
-    --page04-red:
-        #ef5350;
-
-    --page04-orange:
-        #f39a2d;
-
-    --page04-green:
-        #24ad72;
-
-    --page04-border:
-        rgba(32, 197, 195, 0.20);
-
-    --page04-border-soft:
-        rgba(255, 255, 255, 0.08);
-
-    --page04-max:
-        1440px;
-
-    --page04-narrow:
-        920px;
-
-    margin:
-        0;
-
-    padding:
-        0;
-
-    background:
-        var(--page04-bg);
-
-    color:
-        var(--page04-ivory);
-
-    overflow-x:
-        hidden;
-
+  overflow: hidden;
 }
 
 
-/* ==========================================================================
-   02. PAGE 04 BOX MODEL
+/* ============================================================
+   02. BOX SIZING — PAGE ONLY
+============================================================ */
+
+.page04-main,
+.page04-main *,
+.page04-main *::before,
+.page04-main *::after {
+  box-sizing: border-box;
+}
+
+
+/* ============================================================
+   03. PAGE CONTAINERS
+============================================================ */
+
+.page04-main .page04-container {
+  width: min(calc(100% - 64px), var(--p04-max));
+  margin-inline: auto;
+}
+
+.page04-main .page04-container-narrow {
+  width: min(calc(100% - 64px), var(--p04-narrow));
+  margin-inline: auto;
+}
+
+
+/* ============================================================
+   04. GLOBAL PAGE TEXT ALIGNMENT
+============================================================ */
+
+.page04-main,
+.page04-main p,
+.page04-main h1,
+.page04-main h2,
+.page04-main h3,
+.page04-main div {
+  text-align: center;
+}
+
+
+/* ============================================================
+   05. JOURNEY MARKER
+============================================================ */
+
+.page04-main .page04-progress {
+  width: 100%;
+  padding: 18px 20px 0;
+}
+
+.page04-main .page04-progress-text {
+  margin: 0;
+
+  color: var(--p04-gold);
+
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+}
+
+
+/* ============================================================
+   06. HERO
+============================================================ */
+
+.page04-main .page04-hero {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  min-height: 520px;
+
+  padding: 70px 0 82px;
+}
+
+.page04-main .page04-hero::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: 0;
+
+  width: min(820px, 72%);
+  height: 1px;
+
+  transform: translateX(-50%);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(215, 167, 47, 0.35),
+      transparent
+    );
+}
+
+
+/* ============================================================
+   07. EYEBROW
+============================================================ */
+
+.page04-main .page04-eyebrow {
+  margin: 0 0 18px;
+
+  color: var(--p04-gold);
+
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+}
+
+
+/* ============================================================
+   08. HERO TITLE
+============================================================ */
+
+.page04-main .page04-title {
+  max-width: 1000px;
+
+  margin: 0 auto 30px;
+
+  color: var(--p04-white);
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: clamp(2.9rem, 5vw, 5rem);
+  font-weight: 700;
+
+  line-height: 1.05;
+
+  letter-spacing: 0.075em;
+
+  text-transform: uppercase;
+
+  text-wrap: balance;
+}
+
+
+/* ============================================================
+   09. HERO SUBTITLE
+============================================================ */
+
+.page04-main .page04-hero-tamil {
+  margin: 0 auto 13px;
+
+  color: var(--p04-white);
+
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  font-weight: 700;
+
+  line-height: 1.55;
+}
+
+.page04-main .page04-hero-english {
+  margin: 0 auto;
+
+  color: var(--p04-ivory);
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 0.76rem;
+  font-weight: 600;
+
+  line-height: 1.45;
+
+  letter-spacing: 0.06em;
+
+  text-transform: uppercase;
+}
+
+
+/* ============================================================
+   10. INTRODUCTION
+============================================================ */
+
+.page04-main .page04-intro {
+  padding: 62px 0 72px;
+}
+
+.page04-main .page04-intro-tamil {
+  margin: 0 auto 12px;
+
+  color: var(--p04-white);
+
+  font-size: clamp(1.05rem, 1.55vw, 1.3rem);
+  font-weight: 600;
+
+  line-height: 1.65;
+}
+
+.page04-main .page04-intro-english {
+  margin: 5px auto 0;
+
+  color: var(--p04-muted);
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 0.82rem;
+
+  line-height: 1.65;
+}
+
+
+/* ============================================================
+   11. COMMON SECTION HEADINGS
+============================================================ */
+
+.page04-main .page04-section-heading {
+  width: 100%;
+  max-width: 900px;
+
+  margin: 0 auto 52px;
+}
+
+.page04-main .page04-section-title {
+  margin: 0 auto 15px;
+
+  color: var(--p04-white);
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: clamp(2rem, 3vw, 3.15rem);
+  font-weight: 700;
+
+  line-height: 1.15;
+
+  letter-spacing: 0.035em;
+
+  text-transform: uppercase;
+}
+
+.page04-main .page04-section-tamil {
+  margin: 0 auto 8px;
+
+  color: var(--p04-white);
+
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-weight: 600;
+
+  line-height: 1.6;
+}
+
+.page04-main .page04-section-english {
+  margin: 0 auto;
+
+  color: var(--p04-muted);
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 0.78rem;
+
+  line-height: 1.55;
+}
+
+
+/* ============================================================
+   12. LIFE WHEEL SECTION
+============================================================ */
+
+.page04-main .page04-wheel-section {
+  position: relative;
+
+  padding: 80px 0 90px;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(20, 110, 120, 0.08),
+      transparent 42%
+    );
+}
+
+
+/* ============================================================
+   13. LIFE WHEEL STAGE
+
    IMPORTANT:
-   Scoped only to descendants of #page04-main.
-   Header/footer remain untouched.
-   ========================================================================== */
+   No white circle.
+   No background disc.
+   No forced SVG dimensions.
+   JS remains owner of wheel geometry.
+============================================================ */
 
-body.page04 #page04-main,
-body.page04 #page04-main *,
-body.page04 #page04-main *::before,
-body.page04 #page04-main *::after {
+.page04-main .page04-wheel-stage {
+  position: relative;
 
-    box-sizing:
-        border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  width: 100%;
+
+  min-height: 720px;
+
+  margin: 0 auto;
 }
 
+.page04-main .page04-life-wheel {
+  position: relative;
 
-/* ==========================================================================
-   03. MAIN PAGE
-   ========================================================================== */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-body.page04 #page04-main {
+  width: 100%;
+  max-width: 1120px;
 
-    width:
-        100%;
+  min-height: 680px;
 
-    margin:
-        0;
-
-    padding:
-        0;
-
-    background:
-        var(--page04-bg);
-
-    color:
-        var(--page04-ivory);
-
-    text-align:
-        center;
-
-}
-
-
-/* ==========================================================================
-   04. GLOBAL PAGE CONTAINERS
-   ========================================================================== */
-
-body.page04 #page04-main .page04-container {
-
-    width:
-        min(
-            calc(100% - 48px),
-            var(--page04-max)
-        );
-
-    margin-left:
-        auto;
-
-    margin-right:
-        auto;
-
-    text-align:
-        center;
-
-}
-
-
-body.page04 #page04-main .page04-narrow {
-
-    width:
-        min(
-            calc(100% - 48px),
-            var(--page04-narrow)
-        );
-
-}
-
-
-/* ==========================================================================
-   05. PAGE TEXT ALIGNMENT
-   ========================================================================== */
-
-body.page04 #page04-main h1,
-body.page04 #page04-main h2,
-body.page04 #page04-main h3,
-body.page04 #page04-main p,
-body.page04 #page04-main span {
-
-    text-align:
-        center;
-
-}
-
-
-/* ==========================================================================
-   06. JOURNEY MARKER
-   ========================================================================== */
-
-body.page04 #page04-main .journey-marker {
-
-    width:
-        100%;
-
-    margin:
-        0;
-
-    padding:
-        14px 24px;
-
-    background:
-        var(--page04-bg);
-
-    text-align:
-        center;
-
-}
-
-
-body.page04 #page04-main .journey-marker p {
-
-    margin:
-        0;
-
-    color:
-        var(--page04-gold);
-
-    font-size:
-        12px;
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        0.10em;
-
-}
-
-
-/* ==========================================================================
-   07. HERO
-   ========================================================================== */
-
-body.page04 #page04-main .page04-hero {
-
-    width:
-        100%;
-
-    padding:
-        64px 0 74px;
-
-    background:
-        var(--page04-bg);
-
-}
-
-
-body.page04 #page04-main .page04-hero .eyebrow {
-
-    margin:
-        0 0 26px;
-
-}
-
-
-body.page04 #page04-main .page04-hero h1 {
-
-    max-width:
-        1000px;
-
-    margin:
-        0 auto;
-
-    color:
-        var(--page04-ivory);
-
-    font-size:
-        clamp(42px, 5vw, 76px);
-
-    font-weight:
-        700;
-
-    line-height:
-        1.08;
-
-    letter-spacing:
-        0.06em;
-
-}
-
-
-body.page04 #page04-main .hero-tamil {
-
-    margin:
-        34px auto 0;
-
-    color:
-        var(--page04-ivory);
-
-    font-size:
-        clamp(20px, 2vw, 28px);
-
-    font-weight:
-        700;
-
-    line-height:
-        1.45;
-
-}
-
-
-body.page04 #page04-main .hero-english {
-
-    margin:
-        15px auto 0;
-
-    color:
-        var(--page04-ivory);
-
-    font-size:
-        13px;
-
-    font-weight:
-        700;
-
-    line-height:
-        1.35;
-
-}
-
-
-/* ==========================================================================
-   08. EYEBROWS
-   ========================================================================== */
-
-body.page04 #page04-main .eyebrow {
-
-    margin-top:
-        0;
-
-    color:
-        var(--page04-gold);
-
-    font-size:
-        12px;
-
-    font-weight:
-        700;
-
-    line-height:
-        1.4;
-
-    letter-spacing:
-        0.14em;
-
-    text-transform:
-        uppercase;
-
-}
-
-
-/* ==========================================================================
-   09. INTRODUCTION
-   ========================================================================== */
-
-body.page04 #page04-main .page04-intro {
-
-    padding:
-        44px 0 74px;
-
-}
-
-
-body.page04 #page04-main .intro-tamil {
-
-    max-width:
-        900px;
-
-    margin:
-        0 auto 12px;
-
-    color:
-        var(--page04-ivory);
-
-    font-size:
-        clamp(18px, 1.8vw, 25px);
-
-    font-weight:
-        600;
-
-    line-height:
-        1.55;
-
-}
-
-
-body.page04 #page04-main .intro-english {
-
-    max-width:
-        760px;
-
-    margin:
-        8px auto 0;
-
-    color:
-        var(--page04-muted);
-
-    font-size:
-        14px;
-
-    line-height:
-        1.65;
-
-}
-
-
-/* ==========================================================================
-   10. SECTION HEADINGS
-   ========================================================================== */
-
-body.page04 #page04-main .section-heading {
-
-    max-width:
-        980px;
-
-    margin:
-        0 auto 42px;
-
-    text-align:
-        center;
-
-}
-
-
-body.page04 #page04-main .section-heading h2 {
-
-    margin:
-        8px 0 16px;
-
-    color:
-        var(--page04-ivory);
-
-    font-size:
-        clamp(30px, 3vw, 46px);
-
-    font-weight:
-        700;
-
-    line-height:
-        1.15;
-
-    letter-spacing:
-        0.035em;
-
-}
-
-
-body.page04 #page04-main .section-tamil {
-
-    margin:
-        0 auto 8px;
-
-    color:
-        var(--page04-ivory);
-
-    font-size:
-        clamp(17px, 1.6vw, 22px);
-
-    font-weight:
-        600;
-
-    line-height:
-        1.5;
-
-}
-
-
-body.page04 #page04-main .section-english {
-
-    margin:
-        0 auto;
-
-    color:
-        var(--page04-muted);
-
-    font-size:
-        13px;
-
-    line-height:
-        1.5;
-
-}
-
-
-/* ==========================================================================
-   11. LIFE WHEEL SECTION
-
-   DO NOT replace the wheel with a white reference circle.
-   The generated score polygon remains the visual focus.
-   ========================================================================== */
-
-body.page04 #page04-main .life-wheel-section {
-
-    width:
-        100%;
-
-    padding:
-        70px 0 80px;
-
-    background:
-        var(--page04-bg-deep);
-
-}
-
-
-body.page04 #page04-main .life-wheel-wrapper {
-
-    position:
-        relative;
-
-    width:
-        min(100%, 1040px);
-
-    margin:
-        0 auto;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    overflow:
-        visible;
-
-    background:
-        transparent;
-
-}
-
-
-/* ==========================================================================
-   12. LIFE WHEEL SVG
-   Critical: preserve JS-generated SVG geometry.
-   ========================================================================== */
-
-body.page04 #page04-main #life-wheel {
-
-    display:
-        block;
-
-    width:
-        100%;
-
-    max-width:
-        1000px;
-
-    height:
-        auto;
-
-    margin:
-        0 auto;
-
-    overflow:
-        visible;
-
-    background:
-        transparent;
-
+  margin-inline: auto;
 }
 
 
 /*
-   SVG text should remain centred relative to its JS coordinates.
+   Only SVGs created INSIDE the Life Wheel may be responsive.
+   This cannot affect header/footer logos.
 */
 
-body.page04 #page04-main #life-wheel text {
+.page04-main .page04-life-wheel > svg {
+  display: block;
 
-    text-anchor:
-        middle;
+  width: 100%;
+  max-width: 1120px;
+
+  height: auto;
+
+  margin-inline: auto;
+
+  overflow: visible;
+}
+
+
+/* ============================================================
+   14. WHEEL LEGEND
+============================================================ */
+
+.page04-main .page04-wheel-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 12px 26px;
+
+  margin: 18px auto 0;
+}
+
+.page04-main .page04-legend-item {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+
+  padding-left: 14px;
+
+  font-size: 0.68rem;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+.page04-main .page04-legend-item::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 50%;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  transform: translateY(-50%);
+
+  background: currentColor;
+}
+
+.page04-main .page04-legend-item.is-priority {
+  color: var(--p04-red);
+}
+
+.page04-main .page04-legend-item.is-developing {
+  color: var(--p04-orange);
+}
+
+.page04-main .page04-legend-item.is-strong {
+  color: var(--p04-green);
+}
+
+
+/* ============================================================
+   15. ALIGNMENT SUMMARY
+============================================================ */
+
+.page04-main .page04-summary {
+  padding: 92px 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(4, 19, 38, 0.15),
+      rgba(4, 19, 38, 0.48)
+    );
+}
+
+.page04-main .page04-summary-tamil {
+  margin: 0;
+
+  color: var(--p04-white);
+
+  font-size: clamp(1.2rem, 2vw, 1.65rem);
+  font-weight: 700;
+
+  line-height: 1.55;
+}
+
+.page04-main .page04-summary-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 20px;
+
+  width: 100%;
+  max-width: 1060px;
+
+  margin: 0 auto;
+}
+
+
+/* ============================================================
+   16. METRIC CARDS
+============================================================ */
+
+.page04-main .page04-metric-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 210px;
+
+  padding: 32px 22px;
+
+  border: 1px solid var(--p04-teal-border);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(9, 39, 64, 0.9),
+      rgba(5, 28, 49, 0.72)
+    );
+}
+
+.page04-main .page04-metric-label {
+  margin: 0 0 12px;
+
+  color: var(--p04-gold);
+
+  font-size: 0.7rem;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+.page04-main .page04-metric-label-tamil {
+  margin: -4px 0 14px;
+
+  color: var(--p04-white);
+
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  line-height: 1.5;
+}
+
+.page04-main .page04-total-score {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+
+  gap: 7px;
+}
+
+.page04-main .page04-metric-value {
+  color: var(--p04-teal);
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: clamp(3.2rem, 5vw, 5rem);
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+.page04-main .page04-metric-unit {
+  color: var(--p04-ivory);
+
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.page04-main .page04-alignment-value {
+  color: var(--p04-gold);
+}
+
+.page04-main .page04-life-level {
+  color: var(--p04-white);
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-weight: 700;
+
+  line-height: 1.25;
+
+  text-transform: uppercase;
+}
+
+
+/* ============================================================
+   17. INSIGHTS
+============================================================ */
+
+.page04-main .page04-insights {
+  padding: 94px 0;
+}
+
+.page04-main .page04-insight-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 22px;
+
+  width: 100%;
+  max-width: 1050px;
+
+  margin: 0 auto;
+}
+
+
+/* ============================================================
+   18. INSIGHT CARDS
+============================================================ */
+
+.page04-main .page04-insight-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  min-height: 330px;
+
+  padding: 38px 34px;
+
+  border: 1px solid var(--p04-teal-border);
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(9, 39, 64, 0.9),
+      rgba(5, 28, 49, 0.74)
+    );
+}
+
+.page04-main .page04-insight-card.is-strongest {
+  border-color: rgba(24, 168, 107, 0.38);
+}
+
+.page04-main .page04-insight-card.is-growth {
+  border-color: rgba(239, 83, 80, 0.36);
+}
+
+.page04-main .page04-insight-number {
+  margin: 0 0 6px;
+
+  color: var(--p04-gold);
+
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.page04-main .page04-insight-label {
+  margin: 0 0 4px;
+
+  color: var(--p04-ivory);
+
+  font-size: 0.68rem;
+  font-weight: 700;
+
+  letter-spacing: 0.07em;
+
+  text-transform: uppercase;
+}
+
+.page04-main .page04-insight-label-tamil {
+  margin: 0 0 18px;
+
+  color: var(--p04-white);
+
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.page04-main .page04-insight-title {
+  margin: 0 auto 15px;
+
+  color: var(--p04-white);
+
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  font-weight: 700;
+
+  line-height: 1.45;
+}
+
+.page04-main .page04-insight-score {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+
+  gap: 4px;
+
+  margin-bottom: 16px;
+
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.page04-main .page04-insight-score span {
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.page04-main .page04-insight-score small {
+  color: var(--p04-ivory);
+
+  font-size: 0.75rem;
+}
+
+.page04-main .page04-insight-card.is-strongest
+.page04-insight-score span {
+  color: var(--p04-green);
+}
+
+.page04-main .page04-insight-card.is-growth
+.page04-insight-score span {
+  color: var(--p04-red);
+}
+
+.page04-main .page04-insight-copy {
+  max-width: 520px;
+
+  margin: auto auto 0;
+
+  color: var(--p04-muted);
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 0.82rem;
+
+  line-height: 1.65;
+}
+
+
+/* ============================================================
+   19. TWELVE PILLARS SECTION
+============================================================ */
+
+.page04-main .page04-pillars {
+  padding: 100px 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(5, 24, 45, 0.15),
+      rgba(5, 24, 45, 0.52)
+    );
+}
+
+.page04-main .page04-pillars-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 18px;
+
+  width: 100%;
+
+  margin: 0 auto;
+}
+
+
+/* ============================================================
+   20. PILLAR CARDS
+============================================================ */
+
+.page04-main .page04-pillar-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 220px;
+
+  padding: 28px 22px;
+
+  border: 1px solid var(--p04-border);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(9, 39, 64, 0.86),
+      rgba(6, 30, 52, 0.76)
+    );
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.page04-main .page04-pillar-card:hover {
+  transform: translateY(-3px);
+}
+
+.page04-main .page04-pillar-number {
+  margin: 0 0 9px;
+
+  color: var(--p04-gold);
+
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+}
+
+.page04-main .page04-pillar-tamil {
+  margin: 0 0 7px;
+
+  color: var(--p04-white);
+
+  font-size: 1.08rem;
+  font-weight: 700;
+
+  line-height: 1.45;
+}
+
+.page04-main .page04-pillar-english {
+  min-height: 30px;
+
+  margin: 0 0 16px;
+
+  color: var(--p04-muted);
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 0.7rem;
+
+  line-height: 1.4;
+
+  letter-spacing: 0.03em;
+
+  text-transform: uppercase;
+}
+
+.page04-main .page04-pillar-score {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+
+  gap: 3px;
+
+  margin: 0 0 8px;
+
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.page04-main .page04-pillar-score span {
+  color: var(--p04-white);
+
+  font-size: 2rem;
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+.page04-main .page04-pillar-score small {
+  color: var(--p04-muted);
+
+  font-size: 0.7rem;
+}
+
+.page04-main .page04-pillar-status {
+  margin: 0;
+
+  font-size: 0.64rem;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+
+/* ============================================================
+   21. SCORE STATES
+
+   JS can add:
+   .is-priority
+   .is-developing
+   .is-strong
+
+   to each .page04-pillar-card
+============================================================ */
+
+.page04-main .page04-pillar-card.is-priority {
+  border-color: rgba(239, 83, 80, 0.45);
+}
+
+.page04-main .page04-pillar-card.is-priority
+.page04-pillar-score span,
+.page04-main .page04-pillar-card.is-priority
+.page04-pillar-status {
+  color: var(--p04-red);
+}
+
+
+.page04-main .page04-pillar-card.is-developing {
+  border-color: rgba(245, 166, 35, 0.4);
+}
+
+.page04-main .page04-pillar-card.is-developing
+.page04-pillar-score span,
+.page04-main .page04-pillar-card.is-developing
+.page04-pillar-status {
+  color: var(--p04-orange);
+}
+
+
+.page04-main .page04-pillar-card.is-strong {
+  border-color: rgba(24, 168, 107, 0.42);
+}
+
+.page04-main .page04-pillar-card.is-strong
+.page04-pillar-score span,
+.page04-main .page04-pillar-card.is-strong
+.page04-pillar-status {
+  color: var(--p04-green);
+}
+
+
+/* ============================================================
+   22. COMPLETE PICTURE
+============================================================ */
+
+.page04-main .page04-complete-picture {
+  position: relative;
+
+  padding: 105px 0 115px;
+
+  background:
+    radial-gradient(
+      circle at center top,
+      rgba(18, 55, 110, 0.13),
+      transparent 48%
+    );
+}
+
+.page04-main .page04-complete-picture::before {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  top: 0;
+
+  width: min(850px, 74%);
+  height: 1px;
+
+  transform: translateX(-50%);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(215, 167, 47, 0.3),
+      transparent
+    );
+}
+
+.page04-main .page04-complete-title {
+  max-width: 900px;
+
+  margin: 0 auto 28px;
+
+  color: var(--p04-white);
+
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
+  font-weight: 700;
+
+  line-height: 1.6;
+
+  text-wrap: balance;
+}
+
+.page04-main .page04-complete-copy-tamil {
+  max-width: 840px;
+
+  margin: 0 auto 22px;
+
+  color: var(--p04-white);
+
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 500;
+
+  line-height: 1.75;
+}
+
+.page04-main .page04-complete-copy-english {
+  max-width: 800px;
+
+  margin: 7px auto;
+
+  color: var(--p04-muted);
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 0.82rem;
+
+  line-height: 1.7;
+}
+
+
+/* ============================================================
+   23. CLOSING MESSAGE
+============================================================ */
+
+.page04-main .page04-closing {
+  position: relative;
+
+  max-width: 850px;
+
+  margin: 56px auto 0;
+  padding-top: 52px;
+}
+
+.page04-main .page04-closing::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: 180px;
+  height: 1px;
+
+  transform: translateX(-50%);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(34, 199, 195, 0.5),
+      transparent
+    );
+}
+
+.page04-main .page04-closing-tamil {
+  margin: 0 auto 14px;
+
+  color: var(--p04-white);
+
+  font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+  font-weight: 600;
+
+  line-height: 1.65;
+}
+
+.page04-main .page04-closing-english {
+  margin: 18px auto 0;
+
+  color: var(--p04-muted);
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 0.8rem;
+
+  line-height: 1.65;
+}
+
+
+/* ============================================================
+   24. ACTIONS
+============================================================ */
+
+.page04-main .page04-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 18px;
+
+  margin-top: 54px;
+}
+
+.page04-main .page04-primary-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  min-width: min(100%, 500px);
+
+  padding: 17px 32px;
+
+  border: 1px solid rgba(34, 199, 195, 0.5);
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #18bcb8,
+      #24c9c5
+    );
+
+  color: #031726;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  line-height: 1.4;
+
+  text-decoration: none;
+
+  box-shadow:
+    0 12px 30px rgba(34, 199, 195, 0.14);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.page04-main .page04-primary-cta:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 16px 36px rgba(34, 199, 195, 0.2);
+}
+
+.page04-main .page04-cta-english {
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 0.7rem;
+
+  letter-spacing: 0.025em;
+
+  text-transform: uppercase;
+}
+
+.page04-main .page04-back-link {
+  color: var(--p04-muted);
+
+  font-size: 0.78rem;
+
+  line-height: 1.5;
+
+  text-decoration: underline;
+
+  text-underline-offset: 4px;
+}
+
+.page04-main .page04-back-link span {
+  margin-left: 4px;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 0.67rem;
+
+  text-transform: uppercase;
+}
+
+
+/* ============================================================
+   25. OPTIONAL JS SCORE UTILITY CLASSES
+
+   These can also be used by page04.js for wheel labels,
+   score values or dynamic text.
+============================================================ */
+
+.page04-main .score-priority {
+  color: var(--p04-red) !important;
+}
+
+.page04-main .score-developing {
+  color: var(--p04-orange) !important;
+}
+
+.page04-main .score-strong {
+  color: var(--p04-green) !important;
+}
+
+
+/* ============================================================
+   26. TABLET
+============================================================ */
+
+@media (max-width: 1024px) {
+
+  .page04-main .page04-container,
+  .page04-main .page04-container-narrow {
+    width: min(calc(100% - 44px), var(--p04-max));
+  }
+
+  .page04-main .page04-hero {
+    min-height: 470px;
+
+    padding-top: 60px;
+    padding-bottom: 70px;
+  }
+
+  .page04-main .page04-wheel-stage {
+    min-height: 620px;
+  }
+
+  .page04-main .page04-life-wheel {
+    min-height: 590px;
+  }
+
+  .page04-main .page04-summary-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .page04-main .page04-pillars-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
 }
 
 
-/*
-   Do NOT globally recolour SVG paths, polygons, circles or lines here.
+/* ============================================================
+   27. MOBILE / SMALL TABLET
+============================================================ */
 
-   page04.js controls:
-   ✓ red 0–3 points
-   ✓ orange 4–7 points
-   ✓ green 8–10 points
-   ✓ actual life polygon
-   ✓ spoke/grid geometry
+@media (max-width: 768px) {
 
-   This protects the excellent existing Life Wheel.
-*/
+  .page04-main .page04-container,
+  .page04-main .page04-container-narrow {
+    width: min(calc(100% - 30px), var(--p04-max));
+  }
 
+  .page04-main .page04-progress {
+    padding-top: 14px;
+  }
 
-/* ==========================================================================
-   13. LIFE WHEEL LEGEND
-   ========================================================================== */
+  .page04-main .page04-hero {
+    min-height: auto;
 
-body.page04 #page04-main .wheel-legend {
+    padding: 60px 0 68px;
+  }
 
-    display:
-        flex;
+  .page04-main .page04-title {
+    font-size: clamp(2.2rem, 10vw, 3.3rem);
 
-    flex-wrap:
-        wrap;
+    letter-spacing: 0.04em;
+  }
 
-    justify-content:
-        center;
+  .page04-main .page04-intro {
+    padding: 50px 0 58px;
+  }
 
-    align-items:
-        center;
+  .page04-main .page04-wheel-section {
+    padding: 64px 0 70px;
+  }
 
-    gap:
-        12px 28px;
+  .page04-main .page04-section-heading {
+    margin-bottom: 36px;
+  }
 
-    margin:
-        28px auto 0;
+  .page04-main .page04-wheel-stage {
+    min-height: 520px;
 
-}
+    overflow-x: auto;
+    overflow-y: visible;
+  }
 
+  .page04-main .page04-life-wheel {
+    min-width: 620px;
+    min-height: 500px;
+  }
 
-body.page04 #page04-main .legend-item {
+  .page04-main .page04-life-wheel > svg {
+    min-width: 620px;
+  }
 
-    font-size:
-        12px;
+  .page04-main .page04-summary {
+    padding: 70px 0;
+  }
 
-    font-weight:
-        800;
+  .page04-main .page04-summary-grid {
+    grid-template-columns: 1fr;
 
-    letter-spacing:
-        0.05em;
+    max-width: 540px;
+  }
 
-}
+  .page04-main .page04-metric-card {
+    min-height: 175px;
+  }
 
+  .page04-main .page04-insights {
+    padding: 72px 0;
+  }
 
-body.page04 #page04-main .legend-priority {
+  .page04-main .page04-insight-grid {
+    grid-template-columns: 1fr;
 
-    color:
-        var(--page04-red);
+    max-width: 580px;
+  }
 
-}
+  .page04-main .page04-insight-card {
+    min-height: 290px;
+  }
 
+  .page04-main .page04-pillars {
+    padding: 76px 0;
+  }
 
-body.page04 #page04-main .legend-developing {
+  .page04-main .page04-pillars-grid {
+    grid-template-columns: 1fr;
 
-    color:
-        var(--page04-orange);
+    max-width: 600px;
+  }
 
-}
+  .page04-main .page04-pillar-card {
+    min-height: 195px;
+  }
 
-
-body.page04 #page04-main .legend-strong {
-
-    color:
-        var(--page04-green);
-
-}
-
-
-/* ==========================================================================
-   14. ALIGNMENT SUMMARY
-   ========================================================================== */
-
-body.page04 #page04-main .alignment-summary {
-
-    padding:
-        82px 0;
-
-    background:
-        var(--page04-bg);
-
-}
-
-
-body.page04 #page04-main .alignment-score-grid {
-
-    width:
-        min(100%, 1100px);
-
-    margin:
-        0 auto;
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap:
-        22px;
+  .page04-main .page04-complete-picture {
+    padding: 78px 0 90px;
+  }
 
 }
 
 
-body.page04 #page04-main .alignment-score-card {
+/* ============================================================
+   28. SMALL MOBILE
+============================================================ */
 
-    min-height:
-        220px;
+@media (max-width: 480px) {
 
-    padding:
-        34px 24px;
+  .page04-main .page04-container,
+  .page04-main .page04-container-narrow {
+    width: min(calc(100% - 24px), var(--p04-max));
+  }
 
-    display:
-        flex;
+  .page04-main .page04-title {
+    font-size: 2.05rem;
 
-    flex-direction:
-        column;
+    line-height: 1.12;
 
-    align-items:
-        center;
+    letter-spacing: 0.025em;
+  }
 
-    justify-content:
-        center;
+  .page04-main .page04-hero-tamil {
+    font-size: 1.05rem;
+  }
 
-    background:
-        var(--page04-panel-soft);
+  .page04-main .page04-section-title {
+    font-size: 1.75rem;
+  }
 
-    border:
-        1px solid var(--page04-border);
+  .page04-main .page04-wheel-stage {
+    justify-content: flex-start;
 
-    border-radius:
-        24px;
+    min-height: 470px;
+  }
 
-    text-align:
-        center;
+  .page04-main .page04-life-wheel {
+    min-width: 580px;
+    min-height: 450px;
+  }
 
-}
+  .page04-main .page04-life-wheel > svg {
+    min-width: 580px;
+  }
 
+  .page04-main .page04-wheel-legend {
+    gap: 10px 15px;
+  }
 
-body.page04 #page04-main .score-card-label {
+  .page04-main .page04-metric-value {
+    font-size: 3.2rem;
+  }
 
-    margin:
-        0 0 18px;
+  .page04-main .page04-primary-cta {
+    width: 100%;
+    min-width: 0;
 
-    color:
-        var(--page04-gold);
-
-    font-size:
-        12px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        0.08em;
-
-}
-
-
-body.page04 #page04-main .score-card-tamil {
-
-    margin:
-        -7px 0 18px;
-
-    color:
-        var(--page04-muted);
-
-    font-size:
-        15px;
-
-    line-height:
-        1.5;
+    padding: 16px 20px;
+  }
 
 }
 
 
-body.page04 #page04-main .score-number-row {
-
-    display:
-        flex;
-
-    align-items:
-        baseline;
-
-    justify-content:
-        center;
-
-    gap:
-        8px;
-
-}
-
-
-body.page04 #page04-main .score-number {
-
-    color:
-        var(--page04-teal);
-
-    font-size:
-        clamp(54px, 6vw, 84px);
-
-    font-weight:
-        700;
-
-    line-height:
-        1;
-
-}
-
-
-body.page04 #page04-main .score-denominator {
-
-    color:
-        var(--page04-ivory);
-
-    font-size:
-        18px;
-
-    font-weight:
-        600;
-
-}
-
-
-body.page04 #page04-main .alignment-percentage {
-
-    color:
-        var(--page04-gold);
-
-    font-size:
-        clamp(48px, 5vw, 72px);
-
-    font-weight:
-        700;
-
-    line-height:
-        1;
-
-}
-
-
-body.page04 #page04-main .alignment-level {
-
-    color:
-        var(--page04-ivory);
-
-    font-size:
-        clamp(25px, 2.5vw, 38px);
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        0.04em;
-
-}
-
-
-/* ==========================================================================
-   15. ALIGNMENT INSIGHTS
-   ========================================================================== */
-
-body.page04 #page04-main .alignment-insights {
-
-    padding:
-        76px 0 88px;
-
-    background:
-        var(--page04-bg-deep);
-
-}
-
-
-body.page04 #page04-main .insight-grid {
-
-    width:
-        min(100%, 1120px);
-
-    margin:
-        0 auto;
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    gap:
-        24px;
-
-}
-
-
-body.page04 #page04-main .insight-card {
-
-    min-height:
-        330px;
-
-    padding:
-        42px 34px;
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    background:
-        var(--page04-panel);
-
-    border:
-        1px solid var(--page04-border);
-
-    border-radius:
-        24px;
-
-    text-align:
-        center;
-
-}
-
-
-body.page04 #page04-main .insight-number {
-
-    margin:
-        0 0 8px;
-
-    color:
-        var(--page04-gold);
-
-    font-size:
-        12px;
-
-    font-weight:
-        800;
-
-}
-
-
-body.page04 #page04-main .insight-label {
-
-    margin:
-        0 0 4px;
-
-    color:
-        var(--page04-ivory);
-
-    font-size:
-        12px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        0.06em;
-
-}
-
-
-body.page04 #page04-main .insight-label-tamil {
-
-    margin:
-        0 0 18px;
-
-    color:
-        var(--page04-muted);
-
-    font-size:
-        15px;
-
-}
-
-
-body.page04 #page04-main .insight-card h3 {
-
-    margin:
-        0 auto 14px;
-
-    color:
-        var(--page04-ivory);
-
-    font-size:
-        clamp(20px, 2vw, 29px);
-
-    line-height:
-        1.35;
-
-}
-
-
-body.page04 #page04-main .insight-score {
-
-    margin:
-        0 0 18px;
-
-    color:
-        var(--page04-teal);
-
-    font-size:
-        30px;
-
-    font-weight:
-        700;
-
-}
-
-
-body.page04 #page04-main .insight-description {
-
-    max-width:
-        580px;
-
-    margin:
-        0 auto;
-
-    color:
-        var(--page04-muted);
-
-    font-size:
-        14px;
-
-    line-height:
-        1.65;
-
-}
-
-
-/* ==========================================================================
-   16. TWELVE PILLAR SUMMARY
-   ========================================================================== */
-
-body.page04 #page04-main .pillar-summary {
-
-    padding:
-        86px 0 92px;
-
-    background:
-        var(--page04-bg);
-
-}
-
-
-body.page04 #page04-main .pillar-grid {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap:
-        20px;
-
-    width:
-        100%;
-
-    margin:
-        0 auto;
-
-}
-
-
-/* ==========================================================================
-   17. PILLAR CARDS
-   ========================================================================== */
-
-body.page04 #page04-main .pillar-card {
-
-    min-height:
-        245px;
-
-    padding:
-        30px 22px;
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    background:
-        var(--page04-panel);
-
-    border:
-        1px solid var(--page04-border);
-
-    border-radius:
-        20px;
-
-    text-align:
-        center;
-
-}
-
-
-body.page04 #page04-main .pillar-number {
-
-    margin:
-        0 0 10px;
-
-    color:
-        var(--page04-gold);
-
-    font-size:
-        12px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        0.08em;
-
-}
-
-
-body.page04 #page04-main .pillar-tamil {
-
-    margin:
-        0 auto 8px;
-
-    color:
-        var(--page04-ivory);
-
-    font-size:
-        clamp(18px, 1.5vw, 23px);
-
-    font-weight:
-        700;
-
-    line-height:
-        1.4;
-
-}
-
-
-body.page04 #page04-main .pillar-english {
-
-    margin:
-        0 auto 20px;
-
-    color:
-        var(--page04-muted);
-
-    font-size:
-        12px;
-
-    font-weight:
-        600;
-
-    line-height:
-        1.4;
-
-}
-
-
-body.page04 #page04-main .pillar-score-row {
-
-    display:
-        flex;
-
-    align-items:
-        baseline;
-
-    justify-content:
-        center;
-
-    gap:
-        4px;
-
-    margin:
-        0 auto 10px;
-
-}
-
-
-body.page04 #page04-main .pillar-score {
-
-    font-size:
-        34px;
-
-    font-weight:
-        700;
-
-    line-height:
-        1;
-
-}
-
-
-body.page04 #page04-main .pillar-score-max {
-
-    color:
-        var(--page04-muted);
-
-    font-size:
-        12px;
-
-    font-weight:
-        600;
-
-}
-
-
-body.page04 #page04-main .pillar-status {
-
-    margin:
-        0;
-
-    font-size:
-        11px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        0.08em;
-
-}
-
-
-/* ==========================================================================
-   18. SCORE STATES
-
-   JS may apply any of these state classes.
-   ========================================================================== */
-
-body.page04 #page04-main .pillar-card.priority,
-body.page04 #page04-main .pillar-card.score-priority {
-
-    border-color:
-        rgba(239, 83, 80, 0.48);
-
-}
-
-
-body.page04 #page04-main .pillar-card.priority .pillar-score,
-body.page04 #page04-main .pillar-card.priority .pillar-status,
-body.page04 #page04-main .pillar-card.score-priority .pillar-score,
-body.page04 #page04-main .pillar-card.score-priority .pillar-status {
-
-    color:
-        var(--page04-red);
-
-}
-
-
-body.page04 #page04-main .pillar-card.developing,
-body.page04 #page04-main .pillar-card.score-developing {
-
-    border-color:
-        rgba(243, 154, 45, 0.44);
-
-}
-
-
-body.page04 #page04-main .pillar-card.developing .pillar-score,
-body.page04 #page04-main .pillar-card.developing .pillar-status,
-body.page04 #page04-main .pillar-card.score-developing .pillar-score,
-body.page04 #page04-main .pillar-card.score-developing .pillar-status {
-
-    color:
-        var(--page04-orange);
-
-}
-
-
-body.page04 #page04-main .pillar-card.strong,
-body.page04 #page04-main .pillar-card.score-strong {
-
-    border-color:
-        rgba(36, 173, 114, 0.44);
-
-}
-
-
-body.page04 #page04-main .pillar-card.strong .pillar-score,
-body.page04 #page04-main .pillar-card.strong .pillar-status,
-body.page04 #page04-main .pillar-card.score-strong .pillar-score,
-body.page04 #page04-main .pillar-card.score-strong .pillar-status {
-
-    color:
-        var(--page04-green);
-
-}
-
-
-/* ==========================================================================
-   19. COMPLETE PICTURE
-   ========================================================================== */
-
-body.page04 #page04-main .complete-picture {
-
-    padding:
-        94px 0 72px;
-
-    background:
-        var(--page04-bg-deep);
-
-}
-
-
-body.page04 #page04-main .complete-picture-tamil {
-
-    max-width:
-        900px;
-
-    margin:
-        16px auto 20px;
-
-    color:
-        var(--page04-ivory);
-
-    font-size:
-        clamp(22px, 2.2vw, 32px);
-
-    font-weight:
-        700;
-
-    line-height:
-        1.5;
-
-}
-
-
-body.page04 #page04-main .complete-picture-tamil-secondary {
-
-    max-width:
-        900px;
-
-    margin:
-        0 auto 22px;
-
-    color:
-        var(--page04-ivory);
-
-    font-size:
-        clamp(17px, 1.6vw, 22px);
-
-    line-height:
-        1.6;
-
-}
-
-
-body.page04 #page04-main .complete-picture-english {
-
-    max-width:
-        800px;
-
-    margin:
-        8px auto;
-
-    color:
-        var(--page04-muted);
-
-    font-size:
-        14px;
-
-    line-height:
-        1.65;
-
-}
-
-
-body.page04 #page04-main .complete-picture-divider {
-
-    width:
-        min(100%, 720px);
-
-    height:
-        1px;
-
-    margin:
-        42px auto;
-
-    background:
-        var(--page04-border-soft);
-
-}
-
-
-body.page04 #page04-main .next-step-tamil {
-
-    max-width:
-        800px;
-
-    margin:
-        10px auto;
-
-    color:
-        var(--page04-ivory);
-
-    font-size:
-        clamp(18px, 1.8vw, 24px);
-
-    font-weight:
-        600;
-
-    line-height:
-        1.55;
-
-}
-
-
-body.page04 #page04-main .next-step-english {
-
-    max-width:
-        720px;
-
-    margin:
-        6px auto;
-
-    color:
-        var(--page04-muted);
-
-    font-size:
-        13px;
-
-    line-height:
-        1.6;
-
-}
-
-
-/* ==========================================================================
-   20. PAGE NAVIGATION
-   ========================================================================== */
-
-body.page04 #page04-main .page-navigation {
-
-    width:
-        100%;
-
-    padding:
-        20px 24px 82px;
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    gap:
-        18px;
-
-    background:
-        var(--page04-bg-deep);
-
-    text-align:
-        center;
-
-}
-
-
-/* ==========================================================================
-   21. PRIMARY CTA — TEAL
-   ========================================================================== */
-
-body.page04 #page04-main .journey-button,
-body.page04 #page04-main .journey-button-primary {
-
-    width:
-        min(100%, 680px);
-
-    min-height:
-        62px;
-
-    padding:
-        15px 28px;
-
-    display:
-        inline-flex;
-
-    flex-wrap:
-        wrap;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    gap:
-        7px;
-
-    border:
-        1px solid var(--page04-teal);
-
-    border-radius:
-        999px;
-
-    background:
-        var(--page04-teal);
-
-    color:
-        #ffffff;
-
-    text-decoration:
-        none;
-
-    font-size:
-        13px;
-
-    font-weight:
-        800;
-
-    line-height:
-        1.4;
-
-    text-align:
-        center;
-
-    box-shadow:
-        0 12px 32px rgba(32, 197, 195, 0.18);
-
-    transition:
-        transform 160ms ease,
-        background-color 160ms ease,
-        box-shadow 160ms ease;
-
-}
-
-
-body.page04 #page04-main .journey-button:hover,
-body.page04 #page04-main .journey-button-primary:hover {
-
-    background:
-        var(--page04-teal-dark);
-
-    border-color:
-        var(--page04-teal-dark);
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 16px 38px rgba(32, 197, 195, 0.25);
-
-}
-
-
-body.page04 #page04-main .journey-button:focus-visible,
-body.page04 #page04-main .journey-button-primary:focus-visible {
-
-    outline:
-        3px solid rgba(32, 197, 195, 0.35);
-
-    outline-offset:
-        4px;
-
-}
-
-
-body.page04 #page04-main .button-tamil,
-body.page04 #page04-main .button-english,
-body.page04 #page04-main .button-separator,
-body.page04 #page04-main .button-arrow {
-
-    color:
-        inherit;
-
-}
-
-
-/* ==========================================================================
-   22. BACK LINK
-   ========================================================================== */
-
-body.page04 #page04-main .journey-back-link {
-
-    display:
-        inline-block;
-
-    color:
-        var(--page04-muted);
-
-    font-size:
-        12px;
-
-    font-weight:
-        600;
-
-    line-height:
-        1.5;
-
-    text-align:
-        center;
-
-    text-decoration:
-        underline;
-
-    text-underline-offset:
-        4px;
-
-}
-
-
-body.page04 #page04-main .journey-back-link:hover {
-
-    color:
-        var(--page04-teal);
-
-}
-
-
-/* ==========================================================================
-   23. TABLET
-   ========================================================================== */
-
-@media (max-width: 1100px) {
-
-    body.page04 #page04-main .pillar-grid {
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-    }
-
-
-    body.page04 #page04-main .life-wheel-wrapper {
-
-        width:
-            min(100%, 900px);
-
-    }
-
-}
-
-
-/* ==========================================================================
-   24. SMALL TABLET
-   ========================================================================== */
-
-@media (max-width: 820px) {
-
-    body.page04 #page04-main .page04-container,
-    body.page04 #page04-main .page04-narrow {
-
-        width:
-            min(
-                calc(100% - 32px),
-                var(--page04-max)
-            );
-
-    }
-
-
-    body.page04 #page04-main .page04-hero {
-
-        padding:
-            52px 0 60px;
-
-    }
-
-
-    body.page04 #page04-main .alignment-score-grid {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
-    body.page04 #page04-main .insight-grid {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
-    body.page04 #page04-main .pillar-grid {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
-    body.page04 #page04-main .alignment-score-card {
-
-        min-height:
-            180px;
-
-    }
-
-
-    body.page04 #page04-main .insight-card {
-
-        min-height:
-            280px;
-
-    }
-
-
-    body.page04 #page04-main .pillar-card {
-
-        min-height:
-            220px;
-
-    }
-
-}
-
-
-/* ==========================================================================
-   25. MOBILE
-   ========================================================================== */
-
-@media (max-width: 600px) {
-
-    body.page04 #page04-main .journey-marker {
-
-        padding:
-            12px 16px;
-
-    }
-
-
-    body.page04 #page04-main .page04-container,
-    body.page04 #page04-main .page04-narrow {
-
-        width:
-            min(
-                calc(100% - 24px),
-                var(--page04-max)
-            );
-
-    }
-
-
-    body.page04 #page04-main .page04-hero {
-
-        padding:
-            44px 0 52px;
-
-    }
-
-
-    body.page04 #page04-main .page04-hero h1 {
-
-        font-size:
-            clamp(34px, 11vw, 48px);
-
-        letter-spacing:
-            0.035em;
-
-    }
-
-
-    body.page04 #page04-main .page04-intro {
-
-        padding:
-            36px 0 54px;
-
-    }
-
-
-    body.page04 #page04-main .life-wheel-section {
-
-        padding:
-            52px 0 60px;
-
-    }
-
-
-    body.page04 #page04-main .life-wheel-wrapper {
-
-        width:
-            100%;
-
-    }
-
-
-    body.page04 #page04-main #life-wheel {
-
-        width:
-            100%;
-
-        max-width:
-            100%;
-
-    }
-
-
-    body.page04 #page04-main .wheel-legend {
-
-        gap:
-            10px 18px;
-
-    }
-
-
-    body.page04 #page04-main .alignment-summary,
-    body.page04 #page04-main .alignment-insights,
-    body.page04 #page04-main .pillar-summary {
-
-        padding:
-            60px 0;
-
-    }
-
-
-    body.page04 #page04-main .complete-picture {
-
-        padding:
-            68px 0 54px;
-
-    }
-
-
-    body.page04 #page04-main .page-navigation {
-
-        padding:
-            18px 16px 60px;
-
-    }
-
-
-    body.page04 #page04-main .journey-button,
-    body.page04 #page04-main .journey-button-primary {
-
-        width:
-            100%;
-
-        min-height:
-            60px;
-
-        padding:
-            14px 20px;
-
-        font-size:
-            12px;
-
-    }
-
-}
-
-
-/* ==========================================================================
-   26. VERY SMALL MOBILE
-   ========================================================================== */
-
-@media (max-width: 420px) {
-
-    body.page04 #page04-main .page04-hero h1 {
-
-        font-size:
-            32px;
-
-    }
-
-
-    body.page04 #page04-main .hero-tamil {
-
-        font-size:
-            19px;
-
-    }
-
-
-    body.page04 #page04-main .pillar-card {
-
-        padding:
-            26px 16px;
-
-    }
-
-
-    body.page04 #page04-main .insight-card {
-
-        padding:
-            34px 20px;
-
-    }
-
-}
-
-
-/* ==========================================================================
-   27. REDUCED MOTION
-   ========================================================================== */
+/* ============================================================
+   29. REDUCED MOTION
+============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
 
-    body.page04 #page04-main .journey-button,
-    body.page04 #page04-main .journey-button-primary {
+  .page04-main .page04-pillar-card,
+  .page04-main .page04-primary-cta {
+    transition: none;
+  }
 
-        transition:
-            none;
-
-    }
-
-}
-
-
-/* ==========================================================================
-   28. PRINT / FUTURE DIAGNOSIS PDF PREPARATION
-
-   Keeps the Life Wheel clean if the browser-rendered version is later
-   captured for the diagnosis report.
-   ========================================================================== */
-
-@media print {
-
-    body.page04 #page04-main {
-
-        background:
-            var(--page04-bg);
-
-    }
-
-
-    body.page04 #page04-main .page-navigation {
-
-        display:
-            none;
-
-    }
-
-
-    body.page04 #page04-main .life-wheel-wrapper {
-
-        break-inside:
-            avoid;
-
-        page-break-inside:
-            avoid;
-
-    }
-
-
-    body.page04 #page04-main #life-wheel {
-
-        max-width:
-            900px;
-
-    }
+  .page04-main .page04-pillar-card:hover,
+  .page04-main .page04-primary-cta:hover {
+    transform: none;
+  }
 
 }
 
 
-/* ==========================================================================
-   29. GLOBAL COMPONENT PROTECTION
-
-   DELIBERATELY EMPTY.
-
-   DO NOT ADD:
-
-   body.page04 img { ... }
-   body.page04 header { ... }
-   body.page04 footer { ... }
-   body.page04 a { ... }
-   body.page04 * { ... }
-
-   Those broad selectors were capable of contaminating the dynamically
-   loaded global header/footer.
-
-   Page 04 styling ends at #page04-main.
-   ========================================================================== */
+/* ============================================================
+   END
+   PAGE 04 — KALA CHAKRA™ LIFE ALIGNMENT™
+============================================================ */
 
