@@ -9,14 +9,16 @@
    KALA CHAKRA™ LIFE ASSESSMENT™
 
    VERSION:
-   10.0
+   10.1
 
 
    RESPONSIBILITIES:
 
    ✓ Create Score Selectors
    ✓ Capture Life Pillar Scores
+   ✓ Apply Score Colour States
    ✓ Save Assessment Progress
+   ✓ Restore Assessment Progress
    ✓ Prepare Page04 Transition
 
 
@@ -59,6 +61,7 @@ const PAGE03_CONFIG = {
 
 
 };
+
 
 
 
@@ -120,12 +123,14 @@ const PILLARS = [
 
 
 
+
 /* ==========================================================================
    ASSESSMENT STATE
 ========================================================================== */
 
 
 let assessmentData = {};
+
 
 
 
@@ -170,6 +175,8 @@ function initPage03(){
 
 
 
+
+
 /* ==========================================================================
    CREATE SCORE SELECTORS
 ========================================================================== */
@@ -192,6 +199,7 @@ function createScoreSelectors(){
 
 
 
+
     cards.forEach(
 
         function(card,index){
@@ -206,6 +214,7 @@ function createScoreSelectors(){
                     ".score-selector"
 
                 );
+
 
 
 
@@ -235,9 +244,11 @@ function createScoreSelectors(){
 
 
 
+
             buttonsContainer.className =
 
                 "score-options";
+
 
 
 
@@ -270,9 +281,11 @@ function createScoreSelectors(){
 
 
 
+
                 button.type =
 
                     "button";
+
 
 
 
@@ -286,6 +299,7 @@ function createScoreSelectors(){
 
 
 
+
                 button.dataset.pillar =
 
                     PILLARS[index];
@@ -294,9 +308,11 @@ function createScoreSelectors(){
 
 
 
+
                 button.dataset.score =
 
                     score;
+
 
 
 
@@ -335,6 +351,7 @@ function createScoreSelectors(){
 
 
 
+
                 buttonsContainer.appendChild(
 
                     button
@@ -366,7 +383,154 @@ function createScoreSelectors(){
 }
 
 
- /* ==========================================================================
+
+
+
+
+
+
+
+/* ==========================================================================
+   SCORE COLOUR CLASSIFICATION
+========================================================================== */
+
+
+function getScoreClass(score){
+
+
+
+    const numericScore =
+
+        Number(score);
+
+
+
+
+
+    if(numericScore <= 3){
+
+
+        return "score-low";
+
+
+    }
+
+
+
+
+
+    if(numericScore <= 7){
+
+
+        return "score-mid";
+
+
+    }
+
+
+
+
+
+    return "score-high";
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   CLEAR SCORE STATE
+========================================================================== */
+
+
+function clearScoreState(button){
+
+
+
+    button.classList.remove(
+
+        "selected",
+
+        "score-low",
+
+        "score-mid",
+
+        "score-high"
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   APPLY SCORE STATE
+========================================================================== */
+
+
+function applyScoreState(
+
+    button,
+
+    score
+
+){
+
+
+
+    if(!button){
+
+        return;
+
+    }
+
+
+
+
+
+    clearScoreState(
+
+        button
+
+    );
+
+
+
+
+
+    button.classList.add(
+
+        "selected",
+
+        getScoreClass(score)
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
    SCORE SELECTION
 ========================================================================== */
 
@@ -387,6 +551,7 @@ function selectScore(
 
     /*
        Remove previous selection
+       and previous score colour.
     */
 
 
@@ -406,9 +571,9 @@ function selectScore(
         function(button){
 
 
-            button.classList.remove(
+            clearScoreState(
 
-                "selected"
+                button
 
             );
 
@@ -422,16 +587,25 @@ function selectScore(
 
 
 
+
     /*
        Highlight selected score
+       with correct colour state.
+
+       0–3  = Red
+       4–7  = Orange
+       8–10 = Green
     */
 
 
-    selectedButton.classList.add(
+    applyScoreState(
 
-        "selected"
+        selectedButton,
+
+        score
 
     );
+
 
 
 
@@ -455,6 +629,7 @@ function selectScore(
 
 
 
+
     /*
        Save score
     */
@@ -468,13 +643,19 @@ function selectScore(
 
 
 
+
+
     console.log(
 
         pillar,
 
         "Score:",
 
-        score
+        score,
+
+        "State:",
+
+        getScoreClass(score)
 
     );
 
@@ -521,6 +702,8 @@ function saveAssessment(){
 
 
 
+
+
 /* ==========================================================================
    RESTORE ASSESSMENT
 ========================================================================== */
@@ -543,6 +726,7 @@ function restoreAssessment(){
 
 
 
+
     if(!saved){
 
 
@@ -556,10 +740,43 @@ function restoreAssessment(){
 
 
 
-    assessmentData =
+    try{
 
 
-        JSON.parse(saved);
+
+        assessmentData =
+
+
+            JSON.parse(saved) || {};
+
+
+
+    }
+
+
+    catch(error){
+
+
+
+        console.error(
+
+            "CTM PATH™ Page03 restore failed:",
+
+            error
+
+        );
+
+
+
+        assessmentData = {};
+
+
+
+        return;
+
+
+    }
+
 
 
 
@@ -582,6 +799,7 @@ function restoreAssessment(){
 
 
 
+
     cards.forEach(
 
         function(card,index){
@@ -596,6 +814,7 @@ function restoreAssessment(){
 
 
 
+
             const score =
 
                 assessmentData[pillar];
@@ -604,13 +823,13 @@ function restoreAssessment(){
 
 
 
-            if(score === undefined){
 
+            if(score === undefined){
 
                 return;
 
-
             }
+
 
 
 
@@ -621,6 +840,7 @@ function restoreAssessment(){
                 "scored"
 
             );
+
 
 
 
@@ -639,13 +859,16 @@ function restoreAssessment(){
 
 
 
+
             if(button){
 
 
 
-                button.classList.add(
+                applyScoreState(
 
-                    "selected"
+                    button,
+
+                    score
 
                 );
 
@@ -694,6 +917,7 @@ function bindNavigation(){
 
 
 
+
     if(!button){
 
 
@@ -723,6 +947,7 @@ function bindNavigation(){
 
 
 
+
             const completed =
 
                 Object.keys(
@@ -730,6 +955,7 @@ function bindNavigation(){
                     assessmentData
 
                 ).length;
+
 
 
 
@@ -756,6 +982,7 @@ function bindNavigation(){
 
 
 
+
             /*
                Future backend connection:
 
@@ -764,6 +991,7 @@ function bindNavigation(){
                )
 
             */
+
 
 
 
@@ -784,6 +1012,8 @@ function bindNavigation(){
 
 
 }
+
+
 
 
 
@@ -818,6 +1048,7 @@ window.CTM_PAGE03 = {
 
 
 };
+
 
 
 
