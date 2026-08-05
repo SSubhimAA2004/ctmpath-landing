@@ -30,244 +30,63 @@
 
    Backend owns intelligence.
 
-
 ============================================================ */
 
 
 const CTM_API = (function(){
 
 
-"use strict";
+    "use strict";
 
 
 
 
-/* ============================================================
-   CONFIGURATION
-============================================================ */
+    /* ============================================================
+       CONFIGURATION
+    ============================================================ */
 
 
-const CONFIG = {
-
-
-    /*
-     * SAME-ORIGIN API ENDPOINT
-     *
-     * Browser
-     *      ↓
-     * /api
-     *      ↓
-     * functions/api.js
-     *      ↓
-     * Google Apps Script
-     *
-     *
-     * IMPORTANT:
-     *
-     * Do NOT place the Google Apps Script URL here.
-     *
-     * The Apps Script endpoint now exists only inside:
-     *
-     * functions/api.js
-     *
-     */
-
-
-    endpoint:
-
-
-    "/api",
-
-
-
-
-    version:
-
-
-    "v1"
-
-
-};
-
-
-
-
-
-
-
-
-/* ============================================================
-   GENERIC REQUEST HANDLER
-============================================================ */
-
-
-async function request(
-
-    action,
-
-    payload
-
-){
-
-
-    try {
-
-
+    const CONFIG = {
 
 
         /*
-         * Build standardized CTM PATH™ request.
-         */
-
-
-        const requestBody = {
-
-
-            action:
-
-
-                action,
-
-
-
-
-            version:
-
-
-                CONFIG.version,
-
-
-
-
-            payload:
-
-
-                payload || {}
-
-
-        };
-
-
-
-
-
-
-
-
-        /*
-         * Send request to the SAME-ORIGIN
-         * Cloudflare Pages Function.
+         * SAME-ORIGIN API ENDPOINT
          *
-         * This avoids direct browser communication
-         * with Google Apps Script.
-         */
-
-
-        const response = await fetch(
-
-
-            CONFIG.endpoint,
-
-
-            {
-
-
-                method:
-
-
-                    "POST",
-
-
-
-
-                headers:
-
-
-                    {
-
-
-                        "Content-Type":
-
-
-                            "application/json"
-
-
-                    },
-
-
-
-
-                body:
-
-
-                    JSON.stringify(
-
-                        requestBody
-
-                    ),
-
-
-
-
-                cache:
-
-
-                    "no-store"
-
-
-            }
-
-
-        );
-
-
-
-
-
-
-
-
-        /*
-         * Read response as text first.
+         * Browser
+         *      ↓
+         * /api
+         *      ↓
+         * functions/api.js
+         *      ↓
+         * Google Apps Script
          *
-         * This allows us to detect unexpected
-         * HTML or malformed proxy responses.
+         *
+         * IMPORTANT:
+         *
+         * Do NOT place the Google Apps Script URL here.
+         *
+         * The Apps Script endpoint now exists only inside:
+         *
+         * functions/api.js
+         *
          */
 
 
-        const responseText =
-
-            await response.text();
+        endpoint:
 
 
-
+            "/api",
 
 
 
 
-
-        /*
-         * Empty response protection.
-         */
+        version:
 
 
-        if (
-
-            !responseText ||
-
-            !responseText.trim()
-
-        ) {
+            "v1"
 
 
-            throw new Error(
-
-                "CTM PATH™ server returned an empty response."
-
-            );
-
-
-        }
+    };
 
 
 
@@ -276,80 +95,358 @@ async function request(
 
 
 
-        /*
-         * Parse JSON safely.
-         */
+    /* ============================================================
+       GENERIC REQUEST HANDLER
+    ============================================================ */
 
 
-        let result;
+    async function request(
+
+        action,
+
+        payload
+
+    ){
 
 
         try {
 
 
-            result = JSON.parse(
 
-                responseText
+
+            /*
+             * Build standardized CTM PATH™ request.
+             */
+
+
+            const requestBody = {
+
+
+                action:
+
+
+                    action,
+
+
+
+
+                version:
+
+
+                    CONFIG.version,
+
+
+
+
+                payload:
+
+
+                    payload || {}
+
+
+            };
+
+
+
+
+
+
+
+
+            /*
+             * Send request to the SAME-ORIGIN
+             * Cloudflare Pages Function.
+             *
+             * This avoids direct browser communication
+             * with Google Apps Script.
+             */
+
+
+            const response = await fetch(
+
+
+                CONFIG.endpoint,
+
+
+                {
+
+
+                    method:
+
+
+                        "POST",
+
+
+
+
+                    headers:
+
+
+                        {
+
+
+                            "Content-Type":
+
+
+                                "application/json"
+
+
+                        },
+
+
+
+
+                    body:
+
+
+                        JSON.stringify(
+
+                            requestBody
+
+                        ),
+
+
+
+
+                    cache:
+
+
+                        "no-store"
+
+
+                }
+
 
             );
+
+
+
+
+
+
+
+
+            /*
+             * Read response as text first.
+             *
+             * This allows us to detect unexpected
+             * HTML or malformed proxy responses.
+             */
+
+
+            const responseText =
+
+                await response.text();
+
+
+
+
+
+
+
+
+            /*
+             * Empty response protection.
+             */
+
+
+            if (
+
+                !responseText ||
+
+                !responseText.trim()
+
+            ) {
+
+
+                throw new Error(
+
+                    "CTM PATH™ server returned an empty response."
+
+                );
+
+
+            }
+
+
+
+
+
+
+
+
+            /*
+             * Parse JSON safely.
+             */
+
+
+            let result;
+
+
+            try {
+
+
+                result = JSON.parse(
+
+                    responseText
+
+                );
+
+
+            }
+
+
+            catch(parseError){
+
+
+                console.error(
+
+                    "CTM API Invalid JSON Response:",
+
+                    responseText
+
+                );
+
+
+
+
+                throw new Error(
+
+                    "CTM PATH™ server returned an invalid response."
+
+                );
+
+
+            }
+
+
+
+
+
+
+
+
+            /*
+             * HTTP-level failure.
+             *
+             * Preserve the backend response whenever possible.
+             */
+
+
+            if (
+
+                !response.ok
+
+            ) {
+
+
+                console.error(
+
+                    "CTM API HTTP Error:",
+
+                    response.status,
+
+                    result
+
+                );
+
+
+
+
+                return {
+
+
+                    success:
+
+
+                        false,
+
+
+
+
+                    status:
+
+
+                        response.status,
+
+
+
+
+                    error:
+
+
+                        result.error ||
+
+                        result.message ||
+
+                        "API request failed.",
+
+
+
+
+                    message:
+
+
+                        result.message ||
+
+                        "Unable to complete the CTM PATH™ request.",
+
+
+
+
+                    data:
+
+
+                        result
+
+
+                };
+
+
+            }
+
+
+
+
+
+
+
+
+            /*
+             * Successful HTTP response.
+             *
+             * Business-level success/failure remains
+             * owned by the Apps Script backend.
+             */
+
+
+            return result;
 
 
         }
 
 
-        catch(parseError){
+
+
+        catch(error){
+
+
 
 
             console.error(
 
-                "CTM API Invalid JSON Response:",
 
-                responseText
+                "CTM API Request Failed:",
+
+
+                error
+
 
             );
 
 
 
 
-            throw new Error(
-
-                "CTM PATH™ server returned an invalid response."
-
-            );
-
-
-        }
-
-
-
-
-
-
-
-
-        /*
-         * HTTP-level failure.
-         *
-         * Preserve the backend response whenever possible.
-         */
-
-
-        if (
-
-            !response.ok
-
-        ) {
-
-
-            console.error(
-
-                "CTM API HTTP Error:",
-
-                response.status,
-
-                result
-
-            );
 
 
 
@@ -365,22 +462,14 @@ async function request(
 
 
 
-                status:
-
-
-                    response.status,
-
-
-
-
                 error:
 
 
-                    result.error ||
+                    error && error.message
 
-                    result.message ||
+                        ? error.message
 
-                    "API request failed.",
+                        : String(error),
 
 
 
@@ -388,17 +477,7 @@ async function request(
                 message:
 
 
-                    result.message ||
-
-                    "Unable to complete the CTM PATH™ request.",
-
-
-
-
-                data:
-
-
-                    result
+                    "Unable to connect with CTM PATH™ server"
 
 
             };
@@ -407,145 +486,98 @@ async function request(
         }
 
 
-
-
-
-
-
-
-        /*
-         * Successful HTTP response.
-         *
-         * Business-level success/failure remains
-         * owned by the Apps Script backend.
-         */
-
-
-        return result;
-
-
     }
 
 
 
 
-    catch(error){
 
 
 
 
-        console.error(
+    /* ============================================================
+       PAGE 02
+       REGISTRATION + FINANCIAL DISCOVERY
+    ============================================================ */
 
 
-            "CTM API Request Failed:",
 
 
-            error
+    async function register(
 
+        data
+
+    ){
+
+
+        return request(
+
+            "register",
+
+            data
 
         );
 
 
+    }
 
 
 
 
 
 
-        return {
 
 
-            success:
+    async function saveDiscovery(
+
+        data
+
+    ){
 
 
-                false,
+        return request(
 
+            "saveMillionaireScorecard",
 
+            data
 
-
-            error:
-
-
-                error && error.message
-
-                    ? error.message
-
-                    : String(error),
-
-
-
-
-            message:
-
-
-                "Unable to connect with CTM PATH™ server"
-
-
-        };
+        );
 
 
     }
 
 
-}
 
 
 
 
 
 
-
-
-/* ============================================================
-   PAGE 02
-   REGISTRATION + FINANCIAL DISCOVERY
-============================================================ */
+    /* ============================================================
+       PAGE 03
+       KALA CHAKRA™ LIFE ASSESSMENT
+    ============================================================ */
 
 
 
 
-async function register(
-
-    data
-
-){
-
-
-    return request(
-
-        "register",
+    async function saveAssessment(
 
         data
 
-    );
+    ){
 
 
-}
+        return request(
+
+            "saveAssessment",
+
+            data
+
+        );
 
 
-
-
-
-
-
-
-async function saveDiscovery(
-
-    data
-
-){
-
-
-    return request(
-
-        "saveMillionaireScorecard",
-
-        data
-
-    );
-
-
-}
+    }
 
 
 
@@ -554,64 +586,31 @@ async function saveDiscovery(
 
 
 
-/* ============================================================
-   PAGE 03
-   KALA CHAKRA™ LIFE ASSESSMENT
-============================================================ */
+    /* ============================================================
+       PAGE 04
+       LIFE ALIGNMENT RESULT
+    ============================================================ */
 
 
 
 
-async function saveAssessment(
-
-    data
-
-){
-
-
-    return request(
-
-        "saveAssessment",
+    async function getAlignment(
 
         data
 
-    );
+    ){
 
 
-}
+        return request(
+
+            "getAlignment",
+
+            data
+
+        );
 
 
-
-
-
-
-
-
-/* ============================================================
-   PAGE 04
-   LIFE ALIGNMENT RESULT
-============================================================ */
-
-
-
-
-async function getAlignment(
-
-    data
-
-){
-
-
-    return request(
-
-        "getAlignment",
-
-        data
-
-    );
-
-
-}
+    }
 
 
 
@@ -620,64 +619,31 @@ async function getAlignment(
 
 
 
-/* ============================================================
-   PAGE 05
-   PERSONAL LIFE DIAGNOSIS™
-============================================================ */
+    /* ============================================================
+       PAGE 05
+       PERSONAL LIFE DIAGNOSIS™
+    ============================================================ */
 
 
 
 
-async function generateDiagnosis(
-
-    data
-
-){
-
-
-    return request(
-
-        "generateDiagnosis",
+    async function generateDiagnosis(
 
         data
 
-    );
+    ){
 
 
-}
+        return request(
+
+            "generateDiagnosis",
+
+            data
+
+        );
 
 
-
-
-
-
-
-
-/* ============================================================
-   PAGE 06
-   PERSONAL TRANSFORMATION PRESCRIPTION™
-============================================================ */
-
-
-
-
-async function generateRoadmap(
-
-    data
-
-){
-
-
-    return request(
-
-        "generateRoadmap",
-
-        data
-
-    );
-
-
-}
+    }
 
 
 
@@ -686,64 +652,31 @@ async function generateRoadmap(
 
 
 
-/* ============================================================
-   PAGE 07
-   REPORT GENERATION
-============================================================ */
+    /* ============================================================
+       PAGE 06
+       PERSONAL TRANSFORMATION PRESCRIPTION™
+    ============================================================ */
 
 
 
 
-async function generateReport(
-
-    data
-
-){
-
-
-    return request(
-
-        "generateReport",
+    async function generateRoadmap(
 
         data
 
-    );
+    ){
 
 
-}
+        return request(
+
+            "generateRoadmap",
+
+            data
+
+        );
 
 
-
-
-
-
-
-
-/* ============================================================
-   PAGE 07
-   DOCUMENT GENERATION
-============================================================ */
-
-
-
-
-async function generateDocument(
-
-    data
-
-){
-
-
-    return request(
-
-        "generateDocument",
-
-        data
-
-    );
-
-
-}
+    }
 
 
 
@@ -752,63 +685,47 @@ async function generateDocument(
 
 
 
-/* ============================================================
-   EMAIL DELIVERY
-============================================================ */
+    /* ============================================================
+       PAGE 06
+       FINAL GUIDED JOURNEY DELIVERY
+
+       Coordinates the backend-owned final workflow:
+
+       ✓ Generate / recover 180-Day Roadmap
+       ✓ Generate complete report
+       ✓ Generate Google Document
+       ✓ Generate PDF
+       ✓ Email PDF
+       ✓ Return final delivery metadata
+
+       IMPORTANT:
+
+       Frontend does NOT orchestrate these individual backend
+       operations.
+
+       JourneyOrchestrator.finalizeJourney() owns the workflow.
+    ============================================================ */
 
 
 
 
-async function sendEmail(
-
-    data
-
-){
-
-
-    return request(
-
-        "sendEmail",
+    async function finalizeJourney(
 
         data
 
-    );
+    ){
 
 
-}
+        return request(
+
+            "finalizeJourney",
+
+            data
+
+        );
 
 
-
-
-
-
-
-
-/* ============================================================
-   PAGE 07
-   DISCOVERY SESSION BOOKING
-============================================================ */
-
-
-
-
-async function bookDiscovery(
-
-    data
-
-){
-
-
-    return request(
-
-        "bookDiscovery",
-
-        data
-
-    );
-
-
-}
+    }
 
 
 
@@ -817,63 +734,31 @@ async function bookDiscovery(
 
 
 
-/* ============================================================
-   PAGE 07
-   JOURNEY SUMMARY
-============================================================ */
+    /* ============================================================
+       PAGE 07
+       REPORT GENERATION
+    ============================================================ */
 
 
 
 
-async function getJourneySummary(
-
-    data
-
-){
-
-
-    return request(
-
-        "getJourneySummary",
+    async function generateReport(
 
         data
 
-    );
+    ){
 
 
-}
+        return request(
+
+            "generateReport",
+
+            data
+
+        );
 
 
-
-
-
-
-
-
-/* ============================================================
-   QA / PREVIEW SERVICES
-============================================================ */
-
-
-
-
-async function previewReport(
-
-    data
-
-){
-
-
-    return request(
-
-        "previewReport",
-
-        data
-
-    );
-
-
-}
+    }
 
 
 
@@ -882,130 +767,302 @@ async function previewReport(
 
 
 
-async function previewRoadmap(
+    /* ============================================================
+       PAGE 07
+       DOCUMENT GENERATION
+    ============================================================ */
 
-    data
-
-){
 
 
-    return request(
 
-        "previewRoadmap",
+    async function generateDocument(
 
         data
 
-    );
+    ){
 
 
-}
+        return request(
 
+            "generateDocument",
 
+            data
 
+        );
 
 
+    }
 
 
 
-/* ============================================================
-   HEALTH CHECK
 
-   Used during deployment testing.
 
-   Flow:
 
-   Browser
-        ↓
-   /api
-        ↓
-   Cloudflare Function
-        ↓
-   Apps Script
-        ↓
-   JourneyOrchestrator.healthCheck()
 
-============================================================ */
 
+    /* ============================================================
+       EMAIL DELIVERY
+    ============================================================ */
 
 
 
-async function healthCheck(){
 
+    async function sendEmail(
 
-    return request(
+        data
 
-        "healthCheck",
+    ){
 
-        {}
 
-    );
+        return request(
 
+            "sendEmail",
 
-}
+            data
 
+        );
 
 
+    }
 
 
 
 
 
-/* ============================================================
-   PUBLIC API
-============================================================ */
 
 
 
+    /* ============================================================
+       PAGE 07
+       DISCOVERY SESSION BOOKING
+    ============================================================ */
 
-return {
 
 
-    register,
 
+    async function bookDiscovery(
 
-    saveDiscovery,
+        data
 
+    ){
 
-    saveAssessment,
 
+        return request(
 
-    getAlignment,
+            "bookDiscovery",
 
+            data
 
-    generateDiagnosis,
+        );
 
 
-    generateRoadmap,
+    }
 
 
-    generateReport,
 
 
-    generateDocument,
 
 
-    sendEmail,
 
 
-    bookDiscovery,
+    /* ============================================================
+       PAGE 07
+       JOURNEY SUMMARY
+    ============================================================ */
 
 
-    getJourneySummary,
 
 
-    previewReport,
+    async function getJourneySummary(
 
+        data
 
-    previewRoadmap,
+    ){
 
 
-    healthCheck
+        return request(
 
+            "getJourneySummary",
 
-};
+            data
+
+        );
+
+
+    }
+
+
+
+
+
+
+
+
+    /* ============================================================
+       QA / PREVIEW SERVICES
+    ============================================================ */
+
+
+
+
+    async function previewReport(
+
+        data
+
+    ){
+
+
+        return request(
+
+            "previewReport",
+
+            data
+
+        );
+
+
+    }
+
+
+
+
+
+
+
+
+    async function previewRoadmap(
+
+        data
+
+    ){
+
+
+        return request(
+
+            "previewRoadmap",
+
+            data
+
+        );
+
+
+    }
+
+
+
+
+
+
+
+
+    /* ============================================================
+       HEALTH CHECK
+
+       Used during deployment testing.
+
+       Flow:
+
+       Browser
+            ↓
+       /api
+            ↓
+       Cloudflare Function
+            ↓
+       Apps Script
+            ↓
+       JourneyOrchestrator.healthCheck()
+
+    ============================================================ */
+
+
+
+
+    async function healthCheck(){
+
+
+        return request(
+
+            "healthCheck",
+
+            {}
+
+        );
+
+
+    }
+
+
+
+
+
+
+
+
+    /* ============================================================
+       PUBLIC API
+    ============================================================ */
+
+
+
+
+    return {
+
+
+        register,
+
+
+        saveDiscovery,
+
+
+        saveAssessment,
+
+
+        getAlignment,
+
+
+        generateDiagnosis,
+
+
+        generateRoadmap,
+
+
+        finalizeJourney,
+
+
+        generateReport,
+
+
+        generateDocument,
+
+
+        sendEmail,
+
+
+        bookDiscovery,
+
+
+        getJourneySummary,
+
+
+        previewReport,
+
+
+        previewRoadmap,
+
+
+        healthCheck
+
+
+    };
 
 
 })();
+
+
+
+
+
+
 
 
 /* ============================================================
@@ -1015,13 +1072,19 @@ return {
 
        window.CTM_API
 
-   Explicit exposure guarantees that page02a.js and the other
-   Guided Journey™ controllers can access the shared API layer
-   through a stable browser-global contract.
+   Explicit exposure guarantees that Page controllers in the
+   Guided Journey™ can access the shared API layer through a
+   stable browser-global contract.
 ============================================================ */
 
 
 window.CTM_API = CTM_API;
+
+
+
+
+
+
 
 
 /* ============================================================
@@ -1030,13 +1093,34 @@ window.CTM_API = CTM_API;
 
 
 console.info(
+
     "CTM PATH™ API Service ready.",
+
     {
-        version: "v1",
-        endpoint: "/api",
-        register: (
-            typeof window.CTM_API.register === "function"
-        )
+
+        version:
+
+            "v1",
+
+        endpoint:
+
+            "/api",
+
+        register:
+
+            (
+                typeof window.CTM_API.register ===
+                "function"
+            ),
+
+        finalizeJourney:
+
+            (
+                typeof window.CTM_API.finalizeJourney ===
+                "function"
+            )
+
     }
+
 );
 
