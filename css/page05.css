@@ -1,632 +1,3751 @@
 
-/* ============================================================
+/* ==========================================================================
    CTM PATH™ MILLIONAIRES™
-   Guided Journey™
 
-   PAGE05
+   FILE:
+   page05.css
+
+   PAGE:
    PERSONAL LIFE DIAGNOSIS™
 
-   File:
-   css/page05.css
+   VERSION:
+   1.0
 
-   Responsibility:
-   Visual presentation only
+   PURPOSE:
+   Premium bilingual Personal Life Diagnosis™ report presentation.
 
-============================================================ */
+   DESIGN PRINCIPLES:
+
+   ✓ Tamil First — English Second
+   ✓ Premium Dark Executive Report
+   ✓ High Readability
+   ✓ Strong Visual Hierarchy
+   ✓ Restrained Gold + Teal Accents
+   ✓ Red / Orange / Green Diagnostic Language
+   ✓ Mobile Responsive
+   ✓ Global Header / Footer Untouched
+   ✓ PDF-Friendly Report Architecture
+
+========================================================================== */
 
 
+/* ==========================================================================
+   01. PAGE TOKENS
+========================================================================== */
 
-/* ============================================================
-   PAGE CONTAINER
-============================================================ */
+body.page05 {
 
+    --page05-bg:
+        #07111f;
 
-.page05-container {
+    --page05-bg-deep:
+        #040b14;
 
-    width: min(1200px, 92%);
+    --page05-surface:
+        #0b1828;
 
-    margin: 0 auto;
+    --page05-surface-soft:
+        #102033;
 
-    padding: 70px 0 100px;
+    --page05-surface-raised:
+        #14263b;
 
-    color: #F7F4EA;
+    --page05-border:
+        rgba(255,255,255,0.10);
+
+    --page05-border-strong:
+        rgba(255,255,255,0.16);
+
+    --page05-white:
+        #f8fafc;
+
+    --page05-ivory:
+        #f4efe4;
+
+    --page05-text:
+        #d9e2ec;
+
+    --page05-muted:
+        #91a1b4;
+
+    --page05-muted-soft:
+        #718096;
+
+    --page05-gold:
+        #d4b06a;
+
+    --page05-gold-soft:
+        rgba(212,176,106,0.12);
+
+    --page05-teal:
+        #18b7a0;
+
+    --page05-teal-soft:
+        rgba(24,183,160,0.12);
+
+    --page05-green:
+        #35b86b;
+
+    --page05-green-soft:
+        rgba(53,184,107,0.12);
+
+    --page05-orange:
+        #e49a3a;
+
+    --page05-orange-soft:
+        rgba(228,154,58,0.12);
+
+    --page05-red:
+        #df5b5b;
+
+    --page05-red-soft:
+        rgba(223,91,91,0.12);
+
+    --page05-shadow:
+        0 24px 70px rgba(0,0,0,0.24);
+
+    --page05-radius:
+        22px;
+
+    --page05-radius-small:
+        14px;
+
+    --page05-max-width:
+        1180px;
+
+    --page05-narrow-width:
+        880px;
 
 }
 
 
+/* ==========================================================================
+   02. PAGE ROOT
 
+   IMPORTANT:
+   Only Page 05 content is styled here.
+   Global header and footer remain controlled by their own CSS.
+========================================================================== */
 
+body.page05 {
 
-/* ============================================================
-   HEADER
-============================================================ */
-
-
-.diagnosis-header {
-
-    text-align: center;
-
-    max-width: 900px;
-
-    margin: 0 auto 60px;
-
-}
-
-
-
-.journey-label {
-
-    display: inline-block;
-
-    font-size: 14px;
-
-    letter-spacing: 3px;
-
-    color: #2ED1C4;
-
-    margin-bottom: 24px;
-
-}
-
-
-
-
-
-.diagnosis-header h1 {
-
-    font-size: clamp(36px,5vw,58px);
-
-    font-weight: 700;
-
-    line-height: 1.15;
-
-    margin-bottom: 14px;
-
-}
-
-
-
-
-
-.english-title {
-
-    font-size: 24px;
-
-    color: #C8A951;
-
-    margin-bottom: 30px;
-
-}
-
-
-
-
-
-.intro-text {
-
-    font-size: 18px;
-
-    line-height: 1.9;
-
-    color: rgba(247,244,234,0.78);
-
-}
-
-
-
-
-
-/* ============================================================
-   COMMON CARD STYLE
-============================================================ */
-
-
-.personal-insight-card,
-.diagnosis-card,
-.root-pattern-card,
-.professional-card,
-.journey-transition-card {
-
+    margin: 0;
 
     background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(20,73,96,0.20),
+            transparent 34%
+        ),
+        var(--page05-bg);
 
-    linear-gradient(
-        145deg,
-        rgba(255,255,255,0.06),
-        rgba(255,255,255,0.015)
-    );
-
-
-    border:
-
-    1px solid rgba(46,209,196,0.18);
-
-
-    border-radius: 28px;
-
-
-    padding: 42px;
-
-
-    backdrop-filter: blur(12px);
-
+    color:
+        var(--page05-text);
 
 }
 
 
+body.page05 .page05-main {
 
+    position:
+        relative;
 
-
-/* ============================================================
-   PRIMARY INSIGHT
-============================================================ */
-
-
-.personal-insight-card {
-
-    text-align:center;
-
-    margin-bottom:50px;
-
-}
-
-
-
-
-
-.card-icon {
-
-    font-size:42px;
-
-    color:#C8A951;
-
-    margin-bottom:20px;
-
-}
-
-
-
-
-
-.personal-insight-card h2,
-.root-pattern-card h2,
-.professional-card h2 {
-
-    font-size:32px;
-
-    margin-bottom:10px;
-
-}
-
-
-
-
-
-.personal-insight-card h3,
-.root-pattern-card h3,
-.professional-card h3 {
-
-    font-size:18px;
-
-    color:#2ED1C4;
-
-    font-weight:500;
-
-    margin-bottom:25px;
-
-}
-
-
-
-
-
-.personal-insight-card p {
-
-    max-width:850px;
-
-    margin:auto;
-
-    font-size:20px;
-
-    line-height:1.8;
-
-    color:#F7F4EA;
-
-}
-
-
-
-
-
-/* ============================================================
-   DIAGNOSIS GRID
-============================================================ */
-
-
-.diagnosis-grid {
-
-    display:grid;
-
-    grid-template-columns:
-
-    repeat(2,1fr);
-
-
-    gap:32px;
-
-    margin-bottom:50px;
-
-}
-
-
-
-
-
-.diagnosis-card {
-
-    min-height:360px;
-
-}
-
-
-
-
-
-.card-symbol {
-
-    font-size:36px;
-
-    color:#C8A951;
-
-    margin-bottom:20px;
-
-}
-
-
-
-
-
-.diagnosis-card h2 {
-
-    font-size:28px;
-
-    margin-bottom:8px;
-
-}
-
-
-
-
-
-.diagnosis-card h3 {
-
-    color:#2ED1C4;
-
-    font-size:18px;
-
-    margin-bottom:30px;
-
-}
-
-
-
-
-
-.diagnosis-card ul {
-
-    list-style:none;
-
-    padding:0;
-
-    margin:0;
-
-}
-
-
-
-
-
-.diagnosis-card li {
-
-    position:relative;
-
-    padding-left:28px;
-
-    margin-bottom:18px;
-
-    font-size:17px;
-
-    line-height:1.6;
-
-    color:rgba(247,244,234,0.85);
-
-}
-
-
-
-
-
-.diagnosis-card li::before {
-
-    content:"✓";
-
-    position:absolute;
-
-    left:0;
-
-    color:#2ED1C4;
-
-}
-
-
-
-
-
-/* ============================================================
-   ROOT PATTERNS
-============================================================ */
-
-
-.root-pattern-card {
-
-    margin-bottom:50px;
-
-}
-
-
-
-
-
-.section-heading {
-
-    text-align:center;
-
-    margin-bottom:35px;
-
-}
-
-
-
-
-
-.pattern-list {
-
-    display:grid;
-
-    gap:20px;
-
-}
-
-
-
-
-
-.pattern-item {
-
-    padding:22px;
-
-    border-radius:18px;
+    overflow:
+        hidden;
 
     background:
-
-    rgba(8,20,38,0.65);
-
-
-    border-left:
-
-    3px solid #C8A951;
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,0.01),
+            transparent 18%
+        );
 
 }
 
 
+body.page05 .page05-main *,
+body.page05 .page05-main *::before,
+body.page05 .page05-main *::after {
 
-
-
-/* ============================================================
-   PROFESSIONAL OBSERVATION
-============================================================ */
-
-
-.professional-card {
-
-    margin-bottom:50px;
+    box-sizing:
+        border-box;
 
 }
 
 
+/* ==========================================================================
+   03. CONTAINERS
+========================================================================== */
 
+body.page05 .page05-container {
 
+    width:
+        min(
+            calc(100% - 48px),
+            var(--page05-max-width)
+        );
 
-.professional-card p {
+    margin-left:
+        auto;
 
-    font-size:20px;
-
-    line-height:1.9;
-
-    color:rgba(247,244,234,0.9);
-
-}
-
-
-
-
-
-/* ============================================================
-   TRANSITION CTA
-============================================================ */
-
-
-.journey-transition-card {
-
-    text-align:center;
-
-    border-color:
-
-    rgba(200,169,81,0.35);
+    margin-right:
+        auto;
 
 }
 
 
+body.page05 .page05-container-narrow {
 
-
-
-.journey-transition-card h2 {
-
-    font-size:34px;
-
-    margin-bottom:20px;
+    max-width:
+        var(--page05-narrow-width);
 
 }
 
 
+/* ==========================================================================
+   04. JOURNEY PROGRESS
+========================================================================== */
 
-
-
-.journey-transition-card p {
-
-    font-size:18px;
-
-    color:rgba(247,244,234,0.75);
-
-    margin-bottom:35px;
-
-}
-
-
-
-
-
-.primary-btn {
-
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #2ED1C4,
-        #159C96
-    );
-
-
-    border:none;
-
-
-    color:#081426;
-
+body.page05 .page05-progress {
 
     padding:
+        28px 24px 0;
 
-    18px 42px;
-
-
-    border-radius:50px;
-
-
-    font-size:18px;
-
-
-    font-weight:700;
-
-
-    cursor:pointer;
-
-
-    transition:all .3s ease;
+    text-align:
+        center;
 
 }
 
 
+body.page05 .page05-progress-text {
 
+    display:
+        inline-flex;
 
+    align-items:
+        center;
 
-.primary-btn:hover {
+    justify-content:
+        center;
 
+    min-height:
+        32px;
 
-    transform:translateY(-3px);
+    margin:
+        0;
 
+    padding:
+        7px 16px;
 
-}
+    border:
+        1px solid rgba(212,176,106,0.30);
 
+    border-radius:
+        999px;
 
+    background:
+        rgba(212,176,106,0.06);
 
+    color:
+        var(--page05-gold);
 
+    font-size:
+        0.72rem;
 
-/* ============================================================
-   RESPONSIVE
-============================================================ */
+    font-weight:
+        700;
 
-
-@media(max-width:900px){
-
-
-    .page05-container {
-
-        padding-top:40px;
-
-    }
-
-
-
-    .diagnosis-grid {
-
-        grid-template-columns:1fr;
-
-    }
-
-
-
-    .personal-insight-card,
-    .diagnosis-card,
-    .root-pattern-card,
-    .professional-card,
-    .journey-transition-card {
-
-        padding:28px;
-
-    }
-
-
+    letter-spacing:
+        0.16em;
 
 }
 
 
+/* ==========================================================================
+   05. HERO
+========================================================================== */
 
+body.page05 .page05-hero {
 
+    position:
+        relative;
 
-@media(max-width:600px){
+    padding:
+        54px 0 64px;
 
-
-    .diagnosis-header h1 {
-
-        font-size:34px;
-
-    }
-
-
-    .english-title {
-
-        font-size:20px;
-
-    }
-
-
-    .personal-insight-card h2,
-    .root-pattern-card h2,
-    .professional-card h2 {
-
-        font-size:26px;
-
-    }
-
-
-    .primary-btn {
-
-        width:100%;
-
-        padding:16px;
-
-    }
-
+    text-align:
+        center;
 
 }
+
+
+body.page05 .page05-hero::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    bottom:
+        0;
+
+    width:
+        min(720px,70%);
+
+    height:
+        1px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(212,176,106,0.45),
+            transparent
+        );
+
+}
+
+
+body.page05 .page05-eyebrow {
+
+    margin:
+        0 0 10px;
+
+    color:
+        var(--page05-gold);
+
+    font-size:
+        0.78rem;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.18em;
+
+}
+
+
+body.page05 .page05-report-label {
+
+    margin:
+        0 0 30px;
+
+    color:
+        var(--page05-muted);
+
+    font-size:
+        0.78rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.15em;
+
+}
+
+
+body.page05 .page05-title {
+
+    margin:
+        0;
+
+    color:
+        var(--page05-white);
+
+    font-size:
+        clamp(2.25rem,5vw,4.5rem);
+
+    font-weight:
+        800;
+
+    line-height:
+        1.18;
+
+    letter-spacing:
+        -0.035em;
+
+}
+
+
+body.page05 .page05-title-english {
+
+    margin:
+        18px 0 0;
+
+    color:
+        var(--page05-gold);
+
+    font-size:
+        clamp(1.05rem,2vw,1.45rem);
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.08em;
+
+}
+
+
+body.page05 .page05-hero-tamil {
+
+    max-width:
+        720px;
+
+    margin:
+        32px auto 0;
+
+    color:
+        var(--page05-ivory);
+
+    font-size:
+        clamp(1.1rem,2vw,1.35rem);
+
+    font-weight:
+        600;
+
+    line-height:
+        1.8;
+
+}
+
+
+body.page05 .page05-hero-english {
+
+    max-width:
+        680px;
+
+    margin:
+        8px auto 0;
+
+    color:
+        var(--page05-muted);
+
+    font-size:
+        1rem;
+
+    line-height:
+        1.7;
+
+}
+
+
+body.page05 .page05-confidential-badge {
+
+    display:
+        inline-flex;
+
+    margin-top:
+        34px;
+
+    padding:
+        10px 18px;
+
+    border:
+        1px solid rgba(24,183,160,0.32);
+
+    border-radius:
+        999px;
+
+    background:
+        var(--page05-teal-soft);
+
+    color:
+        var(--page05-teal);
+
+    font-size:
+        0.7rem;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.12em;
+
+}
+
+
+/* ==========================================================================
+   06. OPENING
+========================================================================== */
+
+body.page05 .page05-opening {
+
+    padding:
+        70px 0;
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-opening p {
+
+    max-width:
+        780px;
+
+    margin-left:
+        auto;
+
+    margin-right:
+        auto;
+
+}
+
+
+body.page05 .page05-opening-tamil {
+
+    margin-top:
+        0;
+
+    margin-bottom:
+        14px;
+
+    color:
+        var(--page05-ivory);
+
+    font-size:
+        1.08rem;
+
+    line-height:
+        1.9;
+
+}
+
+
+body.page05 .page05-opening-english {
+
+    margin-top:
+        0;
+
+    margin-bottom:
+        12px;
+
+    color:
+        var(--page05-muted);
+
+    line-height:
+        1.75;
+
+}
+
+
+body.page05 .page05-opening-highlight {
+
+    color:
+        var(--page05-white);
+
+    font-weight:
+        650;
+
+}
+
+
+/* ==========================================================================
+   07. UNIVERSAL REPORT SECTION
+========================================================================== */
+
+body.page05 .page05-section {
+
+    position:
+        relative;
+
+    padding:
+        88px 0;
+
+    border-top:
+        1px solid rgba(255,255,255,0.055);
+
+}
+
+
+body.page05 .page05-section:nth-of-type(even) {
+
+    background:
+        rgba(255,255,255,0.012);
+
+}
+
+
+body.page05 .page05-section-heading {
+
+    max-width:
+        850px;
+
+    margin:
+        0 auto 46px;
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-section-number {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    margin:
+        0 auto 20px;
+
+    border:
+        1px solid rgba(212,176,106,0.28);
+
+    border-radius:
+        50%;
+
+    color:
+        var(--page05-gold);
+
+    font-size:
+        0.72rem;
+
+    font-weight:
+        800;
+
+}
+
+
+body.page05 .page05-section-tamil {
+
+    margin:
+        0 0 8px;
+
+    color:
+        var(--page05-ivory);
+
+    font-size:
+        clamp(1.15rem,2.2vw,1.5rem);
+
+    font-weight:
+        700;
+
+    line-height:
+        1.55;
+
+}
+
+
+body.page05 .page05-section-title {
+
+    margin:
+        0;
+
+    color:
+        var(--page05-gold);
+
+    font-size:
+        clamp(1.2rem,2.3vw,1.65rem);
+
+    font-weight:
+        800;
+
+    line-height:
+        1.35;
+
+    letter-spacing:
+        0.045em;
+
+}
+
+
+/* ==========================================================================
+   08. UNIVERSAL SECTION INTRO
+========================================================================== */
+
+body.page05 .page05-section-intro {
+
+    max-width:
+        800px;
+
+    margin:
+        -10px auto 42px;
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-section-intro p {
+
+    margin:
+        8px 0;
+
+    color:
+        var(--page05-muted);
+
+    line-height:
+        1.75;
+
+}
+
+
+body.page05 .page05-section-intro p[lang="ta"] {
+
+    color:
+        var(--page05-ivory);
+
+    font-size:
+        1.04rem;
+
+    line-height:
+        1.85;
+
+}
+
+
+body.page05 .page05-intro-highlight {
+
+    color:
+        var(--page05-white) !important;
+
+    font-weight:
+        650;
+
+}
+
+
+/* ==========================================================================
+   09. CURRENT STATUS
+========================================================================== */
+
+body.page05 .page05-status-card {
+
+    max-width:
+        900px;
+
+    margin:
+        0 auto;
+
+    padding:
+        clamp(28px,5vw,52px);
+
+    border:
+        1px solid rgba(212,176,106,0.22);
+
+    border-radius:
+        var(--page05-radius);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(212,176,106,0.07),
+            rgba(16,32,51,0.88)
+        );
+
+    box-shadow:
+        var(--page05-shadow);
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-status-intro-tamil {
+
+    margin:
+        0 auto;
+
+    max-width:
+        720px;
+
+    color:
+        var(--page05-ivory);
+
+    line-height:
+        1.85;
+
+}
+
+
+body.page05 .page05-status-intro-english {
+
+    max-width:
+        700px;
+
+    margin:
+        10px auto 0;
+
+    color:
+        var(--page05-muted);
+
+    line-height:
+        1.7;
+
+}
+
+
+body.page05 .page05-status-result {
+
+    margin:
+        36px 0;
+
+    padding:
+        28px 18px;
+
+    border-top:
+        1px solid var(--page05-border);
+
+    border-bottom:
+        1px solid var(--page05-border);
+
+}
+
+
+body.page05 .page05-status-title {
+
+    margin:
+        0;
+
+    color:
+        var(--page05-white);
+
+    font-size:
+        clamp(1.6rem,3vw,2.5rem);
+
+    line-height:
+        1.4;
+
+}
+
+
+body.page05 .page05-status-title-english {
+
+    margin:
+        8px 0 0;
+
+    color:
+        var(--page05-teal);
+
+    font-size:
+        clamp(1.35rem,3vw,2rem);
+
+    font-weight:
+        850;
+
+    letter-spacing:
+        0.035em;
+
+}
+
+
+body.page05 .page05-status-interpretation {
+
+    max-width:
+        720px;
+
+    margin:
+        0 auto;
+
+}
+
+
+body.page05 .page05-dynamic-copy {
+
+    margin:
+        8px 0;
+
+    color:
+        var(--page05-muted);
+
+    line-height:
+        1.8;
+
+}
+
+
+body.page05 .page05-dynamic-copy[lang="ta"] {
+
+    color:
+        var(--page05-ivory);
+
+}
+
+
+/* ==========================================================================
+   10. HIGHLIGHT QUOTES
+========================================================================== */
+
+body.page05 .page05-highlight-quote {
+
+    max-width:
+        760px;
+
+    margin:
+        38px auto 0;
+
+    padding:
+        24px 28px;
+
+    border:
+        1px solid rgba(24,183,160,0.22);
+
+    border-left:
+        3px solid var(--page05-teal);
+
+    border-radius:
+        var(--page05-radius-small);
+
+    background:
+        var(--page05-teal-soft);
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-highlight-quote p {
+
+    margin:
+        6px 0;
+
+    line-height:
+        1.75;
+
+}
+
+
+body.page05 .page05-highlight-quote p[lang="ta"] {
+
+    color:
+        var(--page05-ivory);
+
+    font-weight:
+        600;
+
+}
+
+
+body.page05 .page05-highlight-quote p:not([lang="ta"]) {
+
+    color:
+        var(--page05-muted);
+
+}
+
+
+body.page05 .page05-highlight-quote.is-positive {
+
+    border-color:
+        rgba(53,184,107,0.24);
+
+    border-left-color:
+        var(--page05-green);
+
+    background:
+        var(--page05-green-soft);
+
+}
+
+
+/* ==========================================================================
+   11. LIFE INTELLIGENCE SNAPSHOT
+========================================================================== */
+
+body.page05 .page05-snapshot-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(6,minmax(0,1fr));
+
+    gap:
+        18px;
+
+}
+
+
+body.page05 .page05-metric-card {
+
+    grid-column:
+        span 2;
+
+    min-height:
+        190px;
+
+    padding:
+        28px 22px;
+
+    border:
+        1px solid var(--page05-border);
+
+    border-radius:
+        var(--page05-radius-small);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.035),
+            rgba(255,255,255,0.012)
+        );
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-metric-card:nth-child(4),
+body.page05 .page05-metric-card:nth-child(5) {
+
+    grid-column:
+        span 3;
+
+}
+
+
+body.page05 .page05-metric-card.is-strong {
+
+    border-color:
+        rgba(53,184,107,0.28);
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--page05-green-soft),
+            rgba(255,255,255,0.01)
+        );
+
+}
+
+
+body.page05 .page05-metric-card.is-priority {
+
+    border-color:
+        rgba(223,91,91,0.28);
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--page05-red-soft),
+            rgba(255,255,255,0.01)
+        );
+
+}
+
+
+body.page05 .page05-metric-tamil {
+
+    margin:
+        0 0 5px;
+
+    color:
+        var(--page05-ivory);
+
+    font-size:
+        0.94rem;
+
+    font-weight:
+        650;
+
+}
+
+
+body.page05 .page05-metric-label {
+
+    margin:
+        0 0 20px;
+
+    color:
+        var(--page05-muted);
+
+    font-size:
+        0.67rem;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.08em;
+
+}
+
+
+body.page05 .page05-metric-value {
+
+    color:
+        var(--page05-white);
+
+    font-size:
+        clamp(1.8rem,4vw,2.8rem);
+
+    font-weight:
+        850;
+
+    line-height:
+        1;
+
+}
+
+
+body.page05 .page05-metric-value small,
+body.page05 .page05-metric-score small {
+
+    color:
+        var(--page05-muted);
+
+    font-size:
+        0.9rem;
+
+    font-weight:
+        600;
+
+}
+
+
+body.page05 .page05-metric-name {
+
+    color:
+        var(--page05-white);
+
+    font-size:
+        1.1rem;
+
+    font-weight:
+        800;
+
+    line-height:
+        1.4;
+
+}
+
+
+body.page05 .page05-metric-score {
+
+    margin-top:
+        10px;
+
+    color:
+        var(--page05-gold);
+
+    font-size:
+        1.55rem;
+
+    font-weight:
+        850;
+
+}
+
+
+/* ==========================================================================
+   12. FIVE DIMENSIONS
+========================================================================== */
+
+body.page05 .page05-dimensions-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(10,minmax(0,1fr));
+
+    gap:
+        18px;
+
+}
+
+
+body.page05 .page05-dimension-card {
+
+    grid-column:
+        span 2;
+
+    position:
+        relative;
+
+    padding:
+        30px 22px;
+
+    border:
+        1px solid var(--page05-border);
+
+    border-radius:
+        var(--page05-radius-small);
+
+    background:
+        var(--page05-surface);
+
+    text-align:
+        center;
+
+    overflow:
+        hidden;
+
+}
+
+
+body.page05 .page05-dimension-card::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        20%;
+
+    right:
+        20%;
+
+    height:
+        2px;
+
+    background:
+        var(--page05-teal);
+
+    opacity:
+        0.65;
+
+}
+
+
+body.page05 .page05-card-number {
+
+    margin:
+        0 0 20px;
+
+    color:
+        var(--page05-gold);
+
+    font-size:
+        0.7rem;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.1em;
+
+}
+
+
+body.page05 .page05-card-title-tamil {
+
+    margin:
+        0;
+
+    color:
+        var(--page05-ivory);
+
+    font-size:
+        1rem;
+
+    line-height:
+        1.55;
+
+}
+
+
+body.page05 .page05-card-title {
+
+    margin:
+        6px 0 0;
+
+    color:
+        var(--page05-muted);
+
+    font-size:
+        0.76rem;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.05em;
+
+}
+
+
+body.page05 .page05-dimension-score {
+
+    margin:
+        24px 0 16px;
+
+    color:
+        var(--page05-white);
+
+    font-size:
+        2rem;
+
+    font-weight:
+        850;
+
+}
+
+
+body.page05 .page05-dimension-meter {
+
+    width:
+        100%;
+
+    height:
+        7px;
+
+    margin:
+        0 0 22px;
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(255,255,255,0.07);
+
+    overflow:
+        hidden;
+
+}
+
+
+body.page05 .page05-dimension-meter-fill {
+
+    display:
+        block;
+
+    width:
+        0;
+
+    height:
+        100%;
+
+    border-radius:
+        inherit;
+
+    background:
+        var(--page05-teal);
+
+    transition:
+        width 700ms ease;
+
+}
+
+
+body.page05 .page05-card-copy {
+
+    margin:
+        7px 0;
+
+    color:
+        var(--page05-ivory);
+
+    font-size:
+        0.88rem;
+
+    line-height:
+        1.7;
+
+}
+
+
+body.page05 .page05-card-copy-english {
+
+    color:
+        var(--page05-muted);
+
+    font-size:
+        0.82rem;
+
+}
+
+
+/* ==========================================================================
+   13. DIAGNOSIS CARDS
+   Strengths + Opportunities
+========================================================================== */
+
+body.page05 .page05-diagnosis-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:
+        20px;
+
+}
+
+
+body.page05 .page05-diagnosis-card {
+
+    min-height:
+        240px;
+
+    padding:
+        30px;
+
+    border:
+        1px solid var(--page05-border);
+
+    border-radius:
+        var(--page05-radius);
+
+    background:
+        var(--page05-surface);
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-diagnosis-card.is-strength {
+
+    border-top:
+        3px solid var(--page05-green);
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--page05-green-soft),
+            var(--page05-surface) 45%
+        );
+
+}
+
+
+body.page05 .page05-diagnosis-card.is-opportunity {
+
+    border-top:
+        3px solid var(--page05-orange);
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--page05-orange-soft),
+            var(--page05-surface) 45%
+        );
+
+}
+
+
+/* JS-GENERATED CARD CONTENT */
+
+body.page05 .page05-diagnosis-card h3,
+body.page05 .page05-pattern-card h3,
+body.page05 .page05-cross-card h3,
+body.page05 .page05-priority-card h3 {
+
+    margin:
+        0 0 8px;
+
+    color:
+        var(--page05-white);
+
+    font-size:
+        1.12rem;
+
+    line-height:
+        1.45;
+
+}
+
+
+body.page05 .page05-diagnosis-card h4,
+body.page05 .page05-pattern-card h4,
+body.page05 .page05-cross-card h4,
+body.page05 .page05-priority-card h4 {
+
+    margin:
+        0 0 18px;
+
+    color:
+        var(--page05-gold);
+
+    font-size:
+        0.8rem;
+
+    line-height:
+        1.45;
+
+    letter-spacing:
+        0.04em;
+
+}
+
+
+body.page05 .page05-diagnosis-card p,
+body.page05 .page05-pattern-card p,
+body.page05 .page05-cross-card p,
+body.page05 .page05-priority-card p {
+
+    margin:
+        8px 0;
+
+    color:
+        var(--page05-muted);
+
+    line-height:
+        1.7;
+
+}
+
+
+body.page05 .page05-diagnosis-card p[lang="ta"],
+body.page05 .page05-pattern-card p[lang="ta"],
+body.page05 .page05-cross-card p[lang="ta"],
+body.page05 .page05-priority-card p[lang="ta"] {
+
+    color:
+        var(--page05-ivory);
+
+}
+
+
+/* ==========================================================================
+   14. PRIMARY INSIGHT
+========================================================================== */
+
+body.page05 .page05-primary-insight-section {
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(212,176,106,0.07),
+            transparent 60%
+        );
+
+}
+
+
+body.page05 .page05-primary-insight-card {
+
+    padding:
+        clamp(32px,6vw,64px);
+
+    border:
+        1px solid rgba(212,176,106,0.28);
+
+    border-radius:
+        var(--page05-radius);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(212,176,106,0.08),
+            rgba(11,24,40,0.95)
+        );
+
+    box-shadow:
+        var(--page05-shadow);
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-primary-intro {
+
+    max-width:
+        700px;
+
+    margin:
+        0 auto 30px;
+
+    color:
+        var(--page05-ivory);
+
+    line-height:
+        1.8;
+
+}
+
+
+body.page05 .page05-primary-title {
+
+    margin:
+        0;
+
+    color:
+        var(--page05-white);
+
+    font-size:
+        clamp(1.5rem,3.4vw,2.6rem);
+
+    line-height:
+        1.45;
+
+}
+
+
+body.page05 .page05-primary-title-english {
+
+    margin:
+        12px auto 0;
+
+    color:
+        var(--page05-gold);
+
+    font-size:
+        clamp(1.2rem,2.6vw,1.9rem);
+
+    font-weight:
+        850;
+
+    line-height:
+        1.45;
+
+}
+
+
+body.page05 .page05-primary-explanation {
+
+    max-width:
+        760px;
+
+    margin:
+        32px auto 0;
+
+    padding-top:
+        28px;
+
+    border-top:
+        1px solid var(--page05-border);
+
+}
+
+
+body.page05 .page05-primary-explanation p {
+
+    margin:
+        8px 0;
+
+    color:
+        var(--page05-muted);
+
+    line-height:
+        1.8;
+
+}
+
+
+body.page05 .page05-primary-explanation p[lang="ta"] {
+
+    color:
+        var(--page05-ivory);
+
+}
+
+
+body.page05 .page05-key-insight {
+
+    margin:
+        38px auto 0;
+
+    padding:
+        26px;
+
+    border:
+        1px solid rgba(24,183,160,0.28);
+
+    border-radius:
+        var(--page05-radius-small);
+
+    background:
+        var(--page05-teal-soft);
+
+}
+
+
+body.page05 .page05-key-insight-label {
+
+    margin:
+        0 0 14px;
+
+    color:
+        var(--page05-teal);
+
+    font-size:
+        0.72rem;
+
+    font-weight:
+        850;
+
+    letter-spacing:
+        0.12em;
+
+}
+
+
+body.page05 .page05-key-insight-tamil {
+
+    margin:
+        0;
+
+    color:
+        var(--page05-white);
+
+    font-size:
+        1.15rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.75;
+
+}
+
+
+body.page05 .page05-key-insight-english {
+
+    margin:
+        8px 0 0;
+
+    color:
+        var(--page05-text);
+
+    font-weight:
+        650;
+
+    line-height:
+        1.7;
+
+}
+
+
+/* ==========================================================================
+   15. ROOT PATTERNS
+========================================================================== */
+
+body.page05 .page05-pattern-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:
+        20px;
+
+}
+
+
+body.page05 .page05-pattern-card {
+
+    min-height:
+        250px;
+
+    padding:
+        30px;
+
+    border:
+        1px solid rgba(228,154,58,0.20);
+
+    border-top:
+        3px solid var(--page05-orange);
+
+    border-radius:
+        var(--page05-radius);
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--page05-orange-soft),
+            var(--page05-surface) 42%
+        );
+
+    text-align:
+        center;
+
+}
+
+
+/* ==========================================================================
+   16. CROSS-DIMENSION DIAGNOSIS
+========================================================================== */
+
+body.page05 .page05-cross-section {
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(24,183,160,0.025),
+            transparent
+        );
+
+}
+
+
+body.page05 .page05-cross-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:
+        20px;
+
+}
+
+
+body.page05 .page05-cross-card {
+
+    position:
+        relative;
+
+    min-height:
+        270px;
+
+    padding:
+        32px;
+
+    border:
+        1px solid rgba(24,183,160,0.22);
+
+    border-radius:
+        var(--page05-radius);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(24,183,160,0.08),
+            var(--page05-surface)
+        );
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-cross-card::before {
+
+    content:
+        "↕";
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        34px;
+
+    height:
+        34px;
+
+    margin:
+        0 auto 20px;
+
+    border:
+        1px solid rgba(24,183,160,0.30);
+
+    border-radius:
+        50%;
+
+    color:
+        var(--page05-teal);
+
+    font-size:
+        1rem;
+
+}
+
+
+/* ==========================================================================
+   17. LIFE PATTERN
+========================================================================== */
+
+body.page05 .page05-life-pattern-card {
+
+    padding:
+        clamp(30px,5vw,50px);
+
+    border:
+        1px solid var(--page05-border);
+
+    border-radius:
+        var(--page05-radius);
+
+    background:
+        var(--page05-surface);
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-life-pattern-card > p {
+
+    max-width:
+        720px;
+
+    margin:
+        10px auto;
+
+    color:
+        var(--page05-muted);
+
+    line-height:
+        1.8;
+
+}
+
+
+body.page05 .page05-life-pattern-card > p[lang="ta"] {
+
+    color:
+        var(--page05-ivory);
+
+}
+
+
+body.page05 .page05-life-pattern-highlight {
+
+    margin-top:
+        24px !important;
+
+    margin-bottom:
+        24px !important;
+
+    padding:
+        20px;
+
+    border-radius:
+        var(--page05-radius-small);
+
+    background:
+        var(--page05-gold-soft);
+
+    color:
+        var(--page05-white) !important;
+
+    font-weight:
+        700;
+
+}
+
+
+body.page05 .page05-dynamic-pattern {
+
+    margin-top:
+        32px;
+
+    padding-top:
+        28px;
+
+    border-top:
+        1px solid var(--page05-border);
+
+}
+
+
+body.page05 .page05-dynamic-pattern p {
+
+    margin:
+        8px 0;
+
+    color:
+        var(--page05-text);
+
+    line-height:
+        1.8;
+
+}
+
+
+/* ==========================================================================
+   18. LANGUAGE DIVIDER
+========================================================================== */
+
+body.page05 .page05-language-divider {
+
+    width:
+        80px;
+
+    height:
+        1px;
+
+    margin:
+        30px auto;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(212,176,106,0.65),
+            transparent
+        );
+
+}
+
+
+/* ==========================================================================
+   19. TRANSFORMATION LEVER
+========================================================================== */
+
+body.page05 .page05-lever-card {
+
+    padding:
+        clamp(30px,5vw,54px);
+
+    border:
+        1px solid rgba(24,183,160,0.26);
+
+    border-radius:
+        var(--page05-radius);
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--page05-teal-soft),
+            var(--page05-surface)
+        );
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-lever-card > p {
+
+    margin:
+        8px auto;
+
+    max-width:
+        700px;
+
+    color:
+        var(--page05-muted);
+
+    line-height:
+        1.75;
+
+}
+
+
+body.page05 .page05-lever-card > p[lang="ta"] {
+
+    color:
+        var(--page05-ivory);
+
+}
+
+
+body.page05 .page05-lever-result {
+
+    margin:
+        34px 0;
+
+    padding:
+        30px 20px;
+
+    border-top:
+        1px solid var(--page05-border);
+
+    border-bottom:
+        1px solid var(--page05-border);
+
+}
+
+
+body.page05 .page05-lever-label {
+
+    margin:
+        0 0 16px;
+
+    color:
+        var(--page05-teal);
+
+    font-size:
+        0.72rem;
+
+    font-weight:
+        850;
+
+    letter-spacing:
+        0.12em;
+
+}
+
+
+body.page05 .page05-lever-result h3 {
+
+    margin:
+        0;
+
+    color:
+        var(--page05-white);
+
+    font-size:
+        clamp(1.35rem,3vw,2rem);
+
+    line-height:
+        1.5;
+
+}
+
+
+body.page05 .page05-lever-title-english {
+
+    margin:
+        8px 0 0;
+
+    color:
+        var(--page05-gold);
+
+    font-size:
+        1.15rem;
+
+    font-weight:
+        800;
+
+}
+
+
+body.page05 .page05-lever-copy {
+
+    max-width:
+        720px;
+
+    margin:
+        0 auto;
+
+}
+
+
+body.page05 .page05-lever-copy p {
+
+    margin:
+        8px 0;
+
+    color:
+        var(--page05-muted);
+
+    line-height:
+        1.8;
+
+}
+
+
+body.page05 .page05-lever-copy p[lang="ta"] {
+
+    color:
+        var(--page05-ivory);
+
+}
+
+
+/* ==========================================================================
+   20. PRIORITY FOCUS
+========================================================================== */
+
+body.page05 .page05-priority-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:
+        20px;
+
+}
+
+
+body.page05 .page05-priority-card {
+
+    position:
+        relative;
+
+    min-height:
+        270px;
+
+    padding:
+        34px 28px;
+
+    border:
+        1px solid var(--page05-border);
+
+    border-radius:
+        var(--page05-radius);
+
+    background:
+        var(--page05-surface);
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-priority-card:nth-child(1) {
+
+    border-top:
+        3px solid var(--page05-red);
+
+}
+
+
+body.page05 .page05-priority-card:nth-child(2) {
+
+    border-top:
+        3px solid var(--page05-orange);
+
+}
+
+
+body.page05 .page05-priority-card:nth-child(3) {
+
+    border-top:
+        3px solid var(--page05-teal);
+
+}
+
+
+/* ==========================================================================
+   21. TRANSFORMATION HYPOTHESIS
+========================================================================== */
+
+body.page05 .page05-hypothesis-card {
+
+    padding:
+        clamp(30px,5vw,52px);
+
+    border:
+        1px solid rgba(212,176,106,0.24);
+
+    border-radius:
+        var(--page05-radius);
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--page05-gold-soft),
+            var(--page05-surface)
+        );
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-hypothesis-card > p {
+
+    max-width:
+        720px;
+
+    margin:
+        9px auto;
+
+    color:
+        var(--page05-muted);
+
+    line-height:
+        1.8;
+
+}
+
+
+body.page05 .page05-hypothesis-card > p[lang="ta"] {
+
+    color:
+        var(--page05-ivory);
+
+}
+
+
+body.page05 .page05-hypothesis-quote {
+
+    margin:
+        34px 0;
+
+    padding:
+        30px;
+
+    border:
+        0;
+
+    border-radius:
+        var(--page05-radius-small);
+
+    background:
+        rgba(0,0,0,0.18);
+
+}
+
+
+body.page05 .page05-hypothesis-quote p {
+
+    margin:
+        8px 0;
+
+    color:
+        var(--page05-white);
+
+    font-size:
+        clamp(1.05rem,2vw,1.3rem);
+
+    font-weight:
+        650;
+
+    line-height:
+        1.8;
+
+}
+
+
+/* ==========================================================================
+   22. GOOD NEWS
+========================================================================== */
+
+body.page05 .page05-good-news-section {
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(53,184,107,0.07),
+            transparent 60%
+        );
+
+}
+
+
+body.page05 .page05-good-news-card {
+
+    padding:
+        clamp(30px,5vw,52px);
+
+    border:
+        1px solid rgba(53,184,107,0.24);
+
+    border-radius:
+        var(--page05-radius);
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--page05-green-soft),
+            var(--page05-surface)
+        );
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-good-news-card > p {
+
+    max-width:
+        720px;
+
+    margin:
+        10px auto;
+
+    color:
+        var(--page05-muted);
+
+    line-height:
+        1.8;
+
+}
+
+
+body.page05 .page05-good-news-card > p[lang="ta"] {
+
+    color:
+        var(--page05-ivory);
+
+}
+
+
+body.page05 .page05-good-news-highlight {
+
+    max-width:
+        720px;
+
+    margin:
+        28px auto;
+
+    padding:
+        26px;
+
+    border:
+        1px solid rgba(53,184,107,0.25);
+
+    border-radius:
+        var(--page05-radius-small);
+
+    background:
+        rgba(53,184,107,0.08);
+
+}
+
+
+body.page05 .page05-good-news-highlight p {
+
+    margin:
+        8px 0;
+
+    color:
+        var(--page05-white);
+
+    font-weight:
+        700;
+
+    line-height:
+        1.75;
+
+}
+
+
+/* ==========================================================================
+   23. DIAGNOSIS SUMMARY
+========================================================================== */
+
+body.page05 .page05-summary-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:
+        18px;
+
+}
+
+
+body.page05 .page05-summary-card {
+
+    min-height:
+        180px;
+
+    padding:
+        28px 24px;
+
+    border:
+        1px solid var(--page05-border);
+
+    border-radius:
+        var(--page05-radius-small);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.035),
+            rgba(255,255,255,0.01)
+        );
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-summary-card > p:first-child {
+
+    margin:
+        0 0 4px;
+
+    color:
+        var(--page05-ivory);
+
+    font-size:
+        0.92rem;
+
+}
+
+
+body.page05 .page05-summary-label {
+
+    margin:
+        0 0 18px;
+
+    color:
+        var(--page05-muted);
+
+    font-size:
+        0.66rem;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.08em;
+
+}
+
+
+body.page05 .page05-summary-card h3 {
+
+    margin:
+        0;
+
+    color:
+        var(--page05-white);
+
+    font-size:
+        1.1rem;
+
+    line-height:
+        1.45;
+
+}
+
+
+/* ==========================================================================
+   24. TRANSITION TO PAGE 06
+========================================================================== */
+
+body.page05 .page05-transition-section {
+
+    padding-bottom:
+        110px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,0.01),
+            rgba(24,183,160,0.035)
+        );
+
+}
+
+
+body.page05 .page05-transition-copy {
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-transition-copy h3 {
+
+    margin:
+        0 0 24px;
+
+    color:
+        var(--page05-white);
+
+    font-size:
+        clamp(1.3rem,2.5vw,1.8rem);
+
+    line-height:
+        1.55;
+
+}
+
+
+body.page05 .page05-insight-list {
+
+    max-width:
+        590px;
+
+    margin:
+        0 auto 32px;
+
+    padding:
+        0;
+
+    list-style:
+        none;
+
+}
+
+
+body.page05 .page05-insight-list li {
+
+    position:
+        relative;
+
+    margin:
+        10px 0;
+
+    padding:
+        0 0 0 26px;
+
+    color:
+        var(--page05-text);
+
+    line-height:
+        1.65;
+
+    text-align:
+        left;
+
+}
+
+
+body.page05 .page05-insight-list li::before {
+
+    content:
+        "✓";
+
+    position:
+        absolute;
+
+    left:
+        0;
+
+    top:
+        0;
+
+    color:
+        var(--page05-teal);
+
+    font-weight:
+        850;
+
+}
+
+
+body.page05 .page05-transition-highlight {
+
+    max-width:
+        680px;
+
+    margin:
+        10px auto;
+
+    color:
+        var(--page05-white);
+
+    font-weight:
+        700;
+
+    line-height:
+        1.75;
+
+}
+
+
+/* ==========================================================================
+   25. NEXT QUESTION
+========================================================================== */
+
+body.page05 .page05-next-question {
+
+    margin:
+        58px auto;
+
+    padding:
+        42px 28px;
+
+    border-top:
+        1px solid var(--page05-border);
+
+    border-bottom:
+        1px solid var(--page05-border);
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-next-label {
+
+    margin:
+        0 0 8px;
+
+    color:
+        var(--page05-gold);
+
+    font-size:
+        0.74rem;
+
+    font-weight:
+        850;
+
+    letter-spacing:
+        0.1em;
+
+}
+
+
+body.page05 .page05-next-question h3 {
+
+    margin:
+        0 0 28px;
+
+    color:
+        var(--page05-white);
+
+    font-size:
+        clamp(1.35rem,3vw,2rem);
+
+    line-height:
+        1.55;
+
+}
+
+
+body.page05 .page05-next-question h3:last-child {
+
+    margin-bottom:
+        0;
+
+}
+
+
+/* ==========================================================================
+   26. PAGE 06 ROADMAP PREVIEW
+========================================================================== */
+
+body.page05 .page05-roadmap-preview {
+
+    padding:
+        clamp(32px,5vw,52px);
+
+    border:
+        1px solid rgba(212,176,106,0.24);
+
+    border-radius:
+        var(--page05-radius);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(212,176,106,0.08),
+            var(--page05-surface)
+        );
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-roadmap-marker {
+
+    margin:
+        0 0 22px;
+
+    color:
+        var(--page05-gold);
+
+    font-size:
+        0.7rem;
+
+    font-weight:
+        850;
+
+    letter-spacing:
+        0.12em;
+
+}
+
+
+body.page05 .page05-roadmap-preview h3 {
+
+    margin:
+        0;
+
+    color:
+        var(--page05-white);
+
+    font-size:
+        clamp(1.35rem,3vw,2rem);
+
+    line-height:
+        1.5;
+
+}
+
+
+body.page05 .page05-roadmap-title {
+
+    margin:
+        8px 0 26px;
+
+    color:
+        var(--page05-gold) !important;
+
+    font-weight:
+        850;
+
+    letter-spacing:
+        0.035em;
+
+}
+
+
+body.page05 .page05-roadmap-preview > p {
+
+    max-width:
+        700px;
+
+    margin:
+        8px auto;
+
+    color:
+        var(--page05-muted);
+
+    line-height:
+        1.8;
+
+}
+
+
+body.page05 .page05-roadmap-preview > p[lang="ta"] {
+
+    color:
+        var(--page05-ivory);
+
+}
+
+
+/* ==========================================================================
+   27. ACTIONS
+========================================================================== */
+
+body.page05 .page05-actions {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    gap:
+        22px;
+
+    margin-top:
+        42px;
+
+}
+
+
+body.page05 .page05-primary-cta {
+
+    display:
+        inline-flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-width:
+        min(100%,460px);
+
+    min-height:
+        72px;
+
+    padding:
+        15px 30px;
+
+    border:
+        1px solid rgba(24,183,160,0.55);
+
+    border-radius:
+        14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #159e8c,
+            var(--page05-teal)
+        );
+
+    box-shadow:
+        0 14px 36px rgba(24,183,160,0.18);
+
+    color:
+        #ffffff;
+
+    text-decoration:
+        none;
+
+    text-align:
+        center;
+
+    font-size:
+        1rem;
+
+    font-weight:
+        800;
+
+    line-height:
+        1.45;
+
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        filter 180ms ease;
+
+}
+
+
+body.page05 .page05-primary-cta:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 18px 44px rgba(24,183,160,0.25);
+
+    filter:
+        brightness(1.05);
+
+}
+
+
+body.page05 .page05-primary-cta:focus-visible {
+
+    outline:
+        3px solid rgba(24,183,160,0.32);
+
+    outline-offset:
+        4px;
+
+}
+
+
+body.page05 .page05-cta-english {
+
+    margin-top:
+        3px;
+
+    font-size:
+        0.72rem;
+
+    letter-spacing:
+        0.06em;
+
+    opacity:
+        0.88;
+
+}
+
+
+body.page05 .page05-back-link {
+
+    display:
+        inline-flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    color:
+        var(--page05-muted);
+
+    text-decoration:
+        none;
+
+    font-size:
+        0.9rem;
+
+    line-height:
+        1.5;
+
+    transition:
+        color 180ms ease;
+
+}
+
+
+body.page05 .page05-back-link span {
+
+    margin-top:
+        2px;
+
+    font-size:
+        0.67rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.07em;
+
+}
+
+
+body.page05 .page05-back-link:hover {
+
+    color:
+        var(--page05-teal);
+
+}
+
+
+/* ==========================================================================
+   28. FINAL REFLECTION
+========================================================================== */
+
+body.page05 .page05-final-reflection {
+
+    margin:
+        60px auto 0;
+
+    padding:
+        34px;
+
+    border:
+        1px solid var(--page05-border);
+
+    border-radius:
+        var(--page05-radius);
+
+    background:
+        rgba(255,255,255,0.018);
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-final-reflection p {
+
+    max-width:
+        700px;
+
+    margin:
+        7px auto;
+
+    color:
+        var(--page05-muted);
+
+    line-height:
+        1.75;
+
+}
+
+
+body.page05 .page05-final-reflection p[lang="ta"] {
+
+    color:
+        var(--page05-ivory);
+
+}
+
+
+/* ==========================================================================
+   29. REPORT SIGNATURE
+========================================================================== */
+
+body.page05 .page05-report-signature {
+
+    margin-top:
+        62px;
+
+    text-align:
+        center;
+
+}
+
+
+body.page05 .page05-signature-brand {
+
+    margin:
+        0;
+
+    color:
+        var(--page05-gold);
+
+    font-size:
+        0.78rem;
+
+    font-weight:
+        850;
+
+    letter-spacing:
+        0.14em;
+
+}
+
+
+body.page05 .page05-signature-report {
+
+    margin:
+        8px 0 0;
+
+    color:
+        var(--page05-white);
+
+    font-size:
+        1.05rem;
+
+    font-weight:
+        800;
+
+}
+
+
+body.page05 .page05-signature-line {
+
+    margin:
+        20px 0 0;
+
+    color:
+        var(--page05-text);
+
+    font-size:
+        0.9rem;
+
+}
+
+
+body.page05 .page05-signature-tagline {
+
+    margin:
+        5px 0 0;
+
+    color:
+        var(--page05-muted);
+
+    font-size:
+        0.78rem;
+
+    font-style:
+        italic;
+
+}
+
+
+/* ==========================================================================
+   30. DIAGNOSTIC STATE CLASSES
+
+   These are available for page05.js.
+
+   0–3  → Priority / Red
+   4–7  → Developing / Orange
+   8–10 → Strong / Green
+
+========================================================================== */
+
+body.page05 .page05-main .is-score-low,
+body.page05 .page05-main .is-priority {
+
+    --diagnostic-color:
+        var(--page05-red);
+
+    --diagnostic-bg:
+        var(--page05-red-soft);
+
+}
+
+
+body.page05 .page05-main .is-score-medium,
+body.page05 .page05-main .is-developing {
+
+    --diagnostic-color:
+        var(--page05-orange);
+
+    --diagnostic-bg:
+        var(--page05-orange-soft);
+
+}
+
+
+body.page05 .page05-main .is-score-high,
+body.page05 .page05-main .is-strong {
+
+    --diagnostic-color:
+        var(--page05-green);
+
+    --diagnostic-bg:
+        var(--page05-green-soft);
+
+}
+
+
+body.page05 .page05-main .diagnostic-state {
+
+    border-color:
+        var(--diagnostic-color);
+
+    background:
+        var(--diagnostic-bg);
+
+}
+
+
+body.page05 .page05-main .diagnostic-text {
+
+    color:
+        var(--diagnostic-color);
+
+}
+
+
+body.page05 .page05-main .diagnostic-meter {
+
+    background:
+        var(--diagnostic-color);
+
+}
+
+
+/* ==========================================================================
+   31. EMPTY / LOADING DYNAMIC STATES
+========================================================================== */
+
+body.page05 .page05-dynamic:empty::after {
+
+    content:
+        "—";
+
+    color:
+        var(--page05-muted-soft);
+
+}
+
+
+body.page05 .page05-diagnosis-card:empty,
+body.page05 .page05-pattern-card:empty,
+body.page05 .page05-cross-card:empty,
+body.page05 .page05-priority-card:empty {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+}
+
+
+body.page05 .page05-diagnosis-card:empty::after,
+body.page05 .page05-pattern-card:empty::after,
+body.page05 .page05-cross-card:empty::after,
+body.page05 .page05-priority-card:empty::after {
+
+    content:
+        "Preparing your personalised insight…";
+
+    color:
+        var(--page05-muted-soft);
+
+    font-size:
+        0.85rem;
+
+    line-height:
+        1.6;
+
+}
+
+
+/* ==========================================================================
+   32. TABLET
+========================================================================== */
+
+@media (max-width: 1024px) {
+
+    body.page05 .page05-snapshot-grid {
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+    }
+
+
+    body.page05 .page05-metric-card,
+    body.page05 .page05-metric-card:nth-child(4),
+    body.page05 .page05-metric-card:nth-child(5) {
+
+        grid-column:
+            span 1;
+
+    }
+
+
+    body.page05 .page05-metric-card:last-child {
+
+        grid-column:
+            1 / -1;
+
+    }
+
+
+    body.page05 .page05-dimensions-grid {
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+    }
+
+
+    body.page05 .page05-dimension-card {
+
+        grid-column:
+            span 1;
+
+    }
+
+
+    body.page05 .page05-dimension-card:last-child {
+
+        grid-column:
+            1 / -1;
+
+        max-width:
+            560px;
+
+        width:
+            100%;
+
+        justify-self:
+            center;
+
+    }
+
+
+    body.page05 .page05-diagnosis-grid,
+    body.page05 .page05-pattern-grid,
+    body.page05 .page05-cross-grid,
+    body.page05 .page05-priority-grid,
+    body.page05 .page05-summary-grid {
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+    }
+
+
+    body.page05 .page05-diagnosis-card:last-child,
+    body.page05 .page05-pattern-card:last-child,
+    body.page05 .page05-cross-card:last-child,
+    body.page05 .page05-priority-card:last-child {
+
+        grid-column:
+            1 / -1;
+
+        max-width:
+            580px;
+
+        width:
+            100%;
+
+        justify-self:
+            center;
+
+    }
+
+}
+
+
+/* ==========================================================================
+   33. MOBILE
+========================================================================== */
+
+@media (max-width: 720px) {
+
+    body.page05 .page05-container {
+
+        width:
+            min(
+                calc(100% - 28px),
+                var(--page05-max-width)
+            );
+
+    }
+
+
+    body.page05 .page05-progress {
+
+        padding-top:
+            20px;
+
+    }
+
+
+    body.page05 .page05-hero {
+
+        padding:
+            42px 0 52px;
+
+    }
+
+
+    body.page05 .page05-title {
+
+        font-size:
+            clamp(2rem,11vw,3rem);
+
+    }
+
+
+    body.page05 .page05-hero-tamil {
+
+        font-size:
+            1.03rem;
+
+    }
+
+
+    body.page05 .page05-opening {
+
+        padding:
+            54px 0;
+
+    }
+
+
+    body.page05 .page05-section {
+
+        padding:
+            64px 0;
+
+    }
+
+
+    body.page05 .page05-section-heading {
+
+        margin-bottom:
+            34px;
+
+    }
+
+
+    body.page05 .page05-section-number {
+
+        width:
+            38px;
+
+        height:
+            38px;
+
+    }
+
+
+    body.page05 .page05-status-card,
+    body.page05 .page05-primary-insight-card,
+    body.page05 .page05-life-pattern-card,
+    body.page05 .page05-lever-card,
+    body.page05 .page05-hypothesis-card,
+    body.page05 .page05-good-news-card,
+    body.page05 .page05-roadmap-preview,
+    body.page05 .page05-final-reflection {
+
+        border-radius:
+            16px;
+
+    }
+
+
+    body.page05 .page05-snapshot-grid,
+    body.page05 .page05-dimensions-grid,
+    body.page05 .page05-diagnosis-grid,
+    body.page05 .page05-pattern-grid,
+    body.page05 .page05-cross-grid,
+    body.page05 .page05-priority-grid,
+    body.page05 .page05-summary-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    body.page05 .page05-metric-card,
+    body.page05 .page05-metric-card:nth-child(4),
+    body.page05 .page05-metric-card:nth-child(5),
+    body.page05 .page05-metric-card:last-child,
+    body.page05 .page05-dimension-card,
+    body.page05 .page05-dimension-card:last-child,
+    body.page05 .page05-diagnosis-card:last-child,
+    body.page05 .page05-pattern-card:last-child,
+    body.page05 .page05-cross-card:last-child,
+    body.page05 .page05-priority-card:last-child {
+
+        grid-column:
+            auto;
+
+        max-width:
+            none;
+
+        width:
+            100%;
+
+    }
+
+
+    body.page05 .page05-metric-card {
+
+        min-height:
+            165px;
+
+    }
+
+
+    body.page05 .page05-dimension-card,
+    body.page05 .page05-diagnosis-card,
+    body.page05 .page05-pattern-card,
+    body.page05 .page05-cross-card,
+    body.page05 .page05-priority-card {
+
+        min-height:
+            auto;
+
+    }
+
+
+    body.page05 .page05-insight-list {
+
+        max-width:
+            100%;
+
+    }
+
+
+    body.page05 .page05-primary-cta {
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+    }
+
+}
+
+
+/* ==========================================================================
+   34. SMALL MOBILE
+========================================================================== */
+
+@media (max-width: 420px) {
+
+    body.page05 .page05-container {
+
+        width:
+            calc(100% - 22px);
+
+    }
+
+
+    body.page05 .page05-confidential-badge {
+
+        font-size:
+            0.62rem;
+
+        letter-spacing:
+            0.07em;
+
+    }
+
+
+    body.page05 .page05-status-card,
+    body.page05 .page05-primary-insight-card,
+    body.page05 .page05-life-pattern-card,
+    body.page05 .page05-lever-card,
+    body.page05 .page05-hypothesis-card,
+    body.page05 .page05-good-news-card,
+    body.page05 .page05-roadmap-preview,
+    body.page05 .page05-final-reflection {
+
+        padding-left:
+            20px;
+
+        padding-right:
+            20px;
+
+    }
+
+
+    body.page05 .page05-diagnosis-card,
+    body.page05 .page05-pattern-card,
+    body.page05 .page05-cross-card,
+    body.page05 .page05-priority-card {
+
+        padding:
+            26px 20px;
+
+    }
+
+}
+
+
+/* ==========================================================================
+   35. ACCESSIBILITY / REDUCED MOTION
+========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    body.page05 .page05-main *,
+    body.page05 .page05-main *::before,
+    body.page05 .page05-main *::after {
+
+        scroll-behavior:
+            auto !important;
+
+        transition-duration:
+            0.01ms !important;
+
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+    }
+
+}
+
+
+/* ==========================================================================
+   36. PRINT / FUTURE PDF-FRIENDLY PRESENTATION
+
+   This is NOT the final PDF generator.
+   It simply keeps the report structurally printable.
+========================================================================== */
+
+@media print {
+
+    body.page05 {
+
+        background:
+            #ffffff;
+
+        color:
+            #111827;
+
+    }
+
+
+    body.page05 .page05-main {
+
+        background:
+            #ffffff;
+
+    }
+
+
+    body.page05 .page05-progress {
+
+        display:
+            none;
+
+    }
+
+
+    body.page05 .page05-section {
+
+        break-inside:
+            avoid;
+
+        border-color:
+            #d9dee5;
+
+    }
+
+
+    body.page05 .page05-status-card,
+    body.page05 .page05-metric-card,
+    body.page05 .page05-dimension-card,
+    body.page05 .page05-diagnosis-card,
+    body.page05 .page05-primary-insight-card,
+    body.page05 .page05-pattern-card,
+    body.page05 .page05-cross-card,
+    body.page05 .page05-life-pattern-card,
+    body.page05 .page05-lever-card,
+    body.page05 .page05-priority-card,
+    body.page05 .page05-hypothesis-card,
+    body.page05 .page05-good-news-card,
+    body.page05 .page05-summary-card {
+
+        break-inside:
+            avoid;
+
+        box-shadow:
+            none;
+
+    }
+
+
+    body.page05 .page05-actions {
+
+        display:
+            none;
+
+    }
+
+}
+
+
+/* ==========================================================================
+   END
+   CTM PATH™ MILLIONAIRES™
+   PERSONAL LIFE DIAGNOSIS™
+   PAGE 05 CSS v1.0
+========================================================================== */
 
