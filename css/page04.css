@@ -1,1423 +1,2963 @@
 
-/* ============================================================
+/* ==========================================================================
    CTM PATH™ MILLIONAIRES™
-   PAGE 04 — KALA CHAKRA™ LIFE ALIGNMENT™
+
+   FILE:
    css/page04.css
 
-   IMPORTANT
-   ------------------------------------------------------------
-   PAGE-SCOPED ONLY.
+   PAGE:
+   KALA CHAKRA™ LIFE ALIGNMENT™
 
-   DO NOT style:
-   body
-   html
-   #global-header
-   #global-footer
-   header
-   footer
-   img
-   svg
+   VERSION:
+   10.2
 
-   Global Header + Footer remain controlled by global CSS.
+   PURPOSE:
+   Page 04 presentation only.
 
-   SCORE SYSTEM
-   0–3  = PRIORITY   = RED
-   4–7  = DEVELOPING = ORANGE
-   8–10 = STRONG     = GREEN
-============================================================ */
+   IMPORTANT:
+   ---------------------------------------------------------------
+   GLOBAL HEADER AND FOOTER ARE NOT STYLED IN THIS FILE.
+
+   header.css owns the global header.
+   footer.css owns the global footer.
+   component-loader.js loads both shared components.
+
+   THIS FILE OWNS ONLY:
+   .page04-main
+   and descendants of .page04-main
+
+   LIFE WHEEL:
+   page04.js remains the authority for wheel geometry and score data.
+
+   SCORE SYSTEM:
+   0–3  = RED
+   4–7  = ORANGE
+   8–10 = GREEN
+   ========================================================================== */
 
 
-/* ============================================================
-   01. PAGE TOKENS
-============================================================ */
+/* ==========================================================================
+   01. PAGE ROOT + DESIGN TOKENS
+   ========================================================================== */
 
 .page04-main {
-  --p04-bg: #06182d;
-  --p04-bg-deep: #041326;
-  --p04-bg-soft: #082039;
-  --p04-card: rgba(8, 35, 58, 0.82);
-  --p04-card-soft: rgba(9, 39, 64, 0.62);
 
-  --p04-white: #f7f3ea;
-  --p04-ivory: #eee9df;
-  --p04-muted: #b8c5cf;
+    --page04-bg:
+        #06182d;
 
-  --p04-gold: #d7a72f;
-  --p04-teal: #22c7c3;
+    --page04-bg-deep:
+        #041326;
 
-  --p04-red: #ef5350;
-  --p04-orange: #f5a623;
-  --p04-green: #18a86b;
+    --page04-bg-panel:
+        #08233a;
 
-  --p04-border: rgba(255, 255, 255, 0.08);
-  --p04-teal-border: rgba(34, 199, 195, 0.22);
+    --page04-bg-card:
+        rgba(8, 35, 58, 0.88);
 
-  --p04-max: 1320px;
-  --p04-narrow: 900px;
+    --page04-bg-card-soft:
+        rgba(8, 35, 58, 0.68);
 
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
 
-  background:
-    radial-gradient(
-      circle at 50% 18%,
-      rgba(18, 55, 110, 0.16),
-      transparent 34%
-    ),
-    var(--p04-bg);
+    --page04-white:
+        #f8f5ed;
 
-  color: var(--p04-white);
+    --page04-ivory:
+        #eee9df;
 
-  overflow: hidden;
+    --page04-muted:
+        #aebdca;
+
+
+    --page04-gold:
+        #d7a72f;
+
+    --page04-teal:
+        #22c7c3;
+
+    --page04-teal-dark:
+        #139f9c;
+
+
+    --page04-red:
+        #ef5350;
+
+    --page04-orange:
+        #f5a623;
+
+    --page04-green:
+        #20ad72;
+
+
+    --page04-border:
+        rgba(255, 255, 255, 0.08);
+
+    --page04-border-teal:
+        rgba(34, 199, 195, 0.22);
+
+
+    --page04-max:
+        1320px;
+
+    --page04-narrow:
+        900px;
+
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+    min-height:
+        100vh;
+
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+
+    background:
+        radial-gradient(
+            circle at 50% 16%,
+            rgba(18, 55, 110, 0.14),
+            transparent 35%
+        ),
+        var(--page04-bg);
+
+
+    color:
+        var(--page04-white);
+
+
+    overflow:
+        hidden;
+
 }
 
 
-/* ============================================================
-   02. BOX SIZING — PAGE ONLY
-============================================================ */
+/* ==========================================================================
+   02. PAGE-ONLY BOX MODEL
+
+   Deliberately starts at .page04-main.
+   Cannot touch global header/footer.
+   ========================================================================== */
 
 .page04-main,
 .page04-main *,
 .page04-main *::before,
 .page04-main *::after {
-  box-sizing: border-box;
+
+    box-sizing:
+        border-box;
+
 }
 
 
-/* ============================================================
-   03. PAGE CONTAINERS
-============================================================ */
+/* ==========================================================================
+   03. CONTAINERS
+   ========================================================================== */
 
 .page04-main .page04-container {
-  width: min(calc(100% - 64px), var(--p04-max));
-  margin-inline: auto;
+
+    width:
+        min(
+            calc(100% - 64px),
+            var(--page04-max)
+        );
+
+    margin-left:
+        auto;
+
+    margin-right:
+        auto;
+
 }
+
 
 .page04-main .page04-container-narrow {
-  width: min(calc(100% - 64px), var(--p04-narrow));
-  margin-inline: auto;
+
+    width:
+        min(
+            calc(100% - 64px),
+            var(--page04-narrow)
+        );
+
+    margin-left:
+        auto;
+
+    margin-right:
+        auto;
+
 }
 
 
-/* ============================================================
-   04. GLOBAL PAGE TEXT ALIGNMENT
-============================================================ */
+/* ==========================================================================
+   04. PAGE 04 TEXT ALIGNMENT
+   ========================================================================== */
 
-.page04-main,
+.page04-main {
+
+    text-align:
+        center;
+
+}
+
+
 .page04-main p,
 .page04-main h1,
 .page04-main h2,
-.page04-main h3,
-.page04-main div {
-  text-align: center;
+.page04-main h3 {
+
+    text-align:
+        center;
+
 }
 
 
-/* ============================================================
+/* ==========================================================================
    05. JOURNEY MARKER
-============================================================ */
+   ========================================================================== */
 
 .page04-main .page04-progress {
-  width: 100%;
-  padding: 18px 20px 0;
+
+    width:
+        100%;
+
+    padding:
+        18px 20px 0;
+
 }
+
 
 .page04-main .page04-progress-text {
-  margin: 0;
 
-  color: var(--p04-gold);
+    margin:
+        0;
 
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
 
-  text-transform: uppercase;
+    color:
+        var(--page04-gold);
+
+
+    font-size:
+        0.70rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.4;
+
+    letter-spacing:
+        0.16em;
+
+
+    text-transform:
+        uppercase;
+
 }
 
 
-/* ============================================================
+/* ==========================================================================
    06. HERO
-============================================================ */
+   ========================================================================== */
 
 .page04-main .page04-hero {
-  position: relative;
 
-  display: flex;
-  align-items: center;
+    position:
+        relative;
 
-  min-height: 520px;
 
-  padding: 70px 0 82px;
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+
+    min-height:
+        500px;
+
+
+    padding:
+        68px 0 82px;
+
 }
+
 
 .page04-main .page04-hero::after {
-  content: "";
 
-  position: absolute;
+    content:
+        "";
 
-  left: 50%;
-  bottom: 0;
 
-  width: min(820px, 72%);
-  height: 1px;
+    position:
+        absolute;
 
-  transform: translateX(-50%);
 
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(215, 167, 47, 0.35),
-      transparent
-    );
+    left:
+        50%;
+
+    bottom:
+        0;
+
+
+    width:
+        min(820px, 72%);
+
+    height:
+        1px;
+
+
+    transform:
+        translateX(-50%);
+
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(215, 167, 47, 0.34),
+            transparent
+        );
+
 }
 
 
-/* ============================================================
+/* ==========================================================================
    07. EYEBROW
-============================================================ */
+   ========================================================================== */
 
 .page04-main .page04-eyebrow {
-  margin: 0 0 18px;
 
-  color: var(--p04-gold);
+    margin:
+        0 0 18px;
 
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
 
-  text-transform: uppercase;
+    color:
+        var(--page04-gold);
+
+
+    font-size:
+        0.72rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.4;
+
+    letter-spacing:
+        0.18em;
+
+
+    text-transform:
+        uppercase;
+
 }
 
 
-/* ============================================================
+/* ==========================================================================
    08. HERO TITLE
-============================================================ */
+   ========================================================================== */
 
 .page04-main .page04-title {
-  max-width: 1000px;
 
-  margin: 0 auto 30px;
+    max-width:
+        1000px;
 
-  color: var(--p04-white);
 
-  font-family: Georgia, "Times New Roman", serif;
+    margin:
+        0 auto 30px;
 
-  font-size: clamp(2.9rem, 5vw, 5rem);
-  font-weight: 700;
 
-  line-height: 1.05;
+    color:
+        var(--page04-white);
 
-  letter-spacing: 0.075em;
 
-  text-transform: uppercase;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-  text-wrap: balance;
+
+    font-size:
+        clamp(
+            2.9rem,
+            5vw,
+            5rem
+        );
+
+
+    font-weight:
+        700;
+
+
+    line-height:
+        1.05;
+
+
+    letter-spacing:
+        0.075em;
+
+
+    text-transform:
+        uppercase;
+
 }
 
 
-/* ============================================================
-   09. HERO SUBTITLE
-============================================================ */
+/* ==========================================================================
+   09. HERO COPY
+   ========================================================================== */
 
 .page04-main .page04-hero-tamil {
-  margin: 0 auto 13px;
 
-  color: var(--p04-white);
+    margin:
+        0 auto 13px;
 
-  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
-  font-weight: 700;
 
-  line-height: 1.55;
+    color:
+        var(--page04-white);
+
+
+    font-size:
+        clamp(
+            1.15rem,
+            1.8vw,
+            1.45rem
+        );
+
+
+    font-weight:
+        700;
+
+
+    line-height:
+        1.55;
+
 }
+
 
 .page04-main .page04-hero-english {
-  margin: 0 auto;
 
-  color: var(--p04-ivory);
+    margin:
+        0 auto;
 
-  font-family: Georgia, "Times New Roman", serif;
 
-  font-size: 0.76rem;
-  font-weight: 600;
+    color:
+        var(--page04-ivory);
 
-  line-height: 1.45;
 
-  letter-spacing: 0.06em;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-  text-transform: uppercase;
+
+    font-size:
+        0.76rem;
+
+
+    font-weight:
+        600;
+
+
+    line-height:
+        1.45;
+
+
+    letter-spacing:
+        0.06em;
+
+
+    text-transform:
+        uppercase;
+
 }
 
 
-/* ============================================================
+/* ==========================================================================
    10. INTRODUCTION
-============================================================ */
+   ========================================================================== */
 
 .page04-main .page04-intro {
-  padding: 62px 0 72px;
+
+    padding:
+        62px 0 72px;
+
 }
+
 
 .page04-main .page04-intro-tamil {
-  margin: 0 auto 12px;
 
-  color: var(--p04-white);
+    margin:
+        0 auto 12px;
 
-  font-size: clamp(1.05rem, 1.55vw, 1.3rem);
-  font-weight: 600;
 
-  line-height: 1.65;
+    color:
+        var(--page04-white);
+
+
+    font-size:
+        clamp(
+            1.05rem,
+            1.55vw,
+            1.30rem
+        );
+
+
+    font-weight:
+        600;
+
+
+    line-height:
+        1.65;
+
 }
+
 
 .page04-main .page04-intro-english {
-  margin: 5px auto 0;
 
-  color: var(--p04-muted);
+    margin:
+        5px auto 0;
 
-  font-family: Georgia, "Times New Roman", serif;
 
-  font-size: 0.82rem;
+    color:
+        var(--page04-muted);
 
-  line-height: 1.65;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+
+    font-size:
+        0.82rem;
+
+
+    line-height:
+        1.65;
+
 }
 
 
-/* ============================================================
-   11. COMMON SECTION HEADINGS
-============================================================ */
+/* ==========================================================================
+   11. COMMON SECTION HEADING
+   ========================================================================== */
 
 .page04-main .page04-section-heading {
-  width: 100%;
-  max-width: 900px;
 
-  margin: 0 auto 52px;
+    width:
+        100%;
+
+
+    max-width:
+        900px;
+
+
+    margin:
+        0 auto 48px;
+
 }
+
 
 .page04-main .page04-section-title {
-  margin: 0 auto 15px;
 
-  color: var(--p04-white);
+    margin:
+        0 auto 15px;
 
-  font-family: Georgia, "Times New Roman", serif;
 
-  font-size: clamp(2rem, 3vw, 3.15rem);
-  font-weight: 700;
+    color:
+        var(--page04-white);
 
-  line-height: 1.15;
 
-  letter-spacing: 0.035em;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-  text-transform: uppercase;
+
+    font-size:
+        clamp(
+            2rem,
+            3vw,
+            3.15rem
+        );
+
+
+    font-weight:
+        700;
+
+
+    line-height:
+        1.15;
+
+
+    letter-spacing:
+        0.035em;
+
+
+    text-transform:
+        uppercase;
+
 }
+
 
 .page04-main .page04-section-tamil {
-  margin: 0 auto 8px;
 
-  color: var(--p04-white);
+    margin:
+        0 auto 8px;
 
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
-  font-weight: 600;
 
-  line-height: 1.6;
+    color:
+        var(--page04-white);
+
+
+    font-size:
+        clamp(
+            1rem,
+            1.5vw,
+            1.20rem
+        );
+
+
+    font-weight:
+        600;
+
+
+    line-height:
+        1.6;
+
 }
+
 
 .page04-main .page04-section-english {
-  margin: 0 auto;
 
-  color: var(--p04-muted);
+    margin:
+        0 auto;
 
-  font-family: Georgia, "Times New Roman", serif;
 
-  font-size: 0.78rem;
+    color:
+        var(--page04-muted);
 
-  line-height: 1.55;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+
+    font-size:
+        0.78rem;
+
+
+    line-height:
+        1.55;
+
 }
 
 
-/* ============================================================
+/* ==========================================================================
    12. LIFE WHEEL SECTION
-============================================================ */
+   ========================================================================== */
 
 .page04-main .page04-wheel-section {
-  position: relative;
 
-  padding: 80px 0 90px;
+    position:
+        relative;
 
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(20, 110, 120, 0.08),
-      transparent 42%
-    );
+
+    padding:
+        82px 0 90px;
+
+
+    background:
+        radial-gradient(
+            circle at 50% 55%,
+            rgba(21, 114, 124, 0.09),
+            transparent 44%
+        ),
+        var(--page04-bg-deep);
+
 }
 
 
-/* ============================================================
+/* ==========================================================================
    13. LIFE WHEEL STAGE
 
    IMPORTANT:
-   No white circle.
-   No background disc.
-   No forced SVG dimensions.
-   JS remains owner of wheel geometry.
-============================================================ */
+   No white perfect circle.
+   No replacement geometry.
+   No artificial wheel background.
+
+   page04.js owns the generated Life Wheel.
+   ========================================================================== */
 
 .page04-main .page04-wheel-stage {
-  position: relative;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    position:
+        relative;
 
-  width: 100%;
 
-  min-height: 720px;
+    display:
+        flex;
 
-  margin: 0 auto;
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+
+    width:
+        100%;
+
+
+    min-height:
+        720px;
+
+
+    margin:
+        0 auto;
+
+
+    padding:
+        10px 0;
+
+
+    overflow:
+        visible;
+
 }
 
+
+/* ==========================================================================
+   14. LIFE WHEEL MOUNT
+   ========================================================================== */
+
+.page04-main #lifeWheel,
 .page04-main .page04-life-wheel {
-  position: relative;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    position:
+        relative;
 
-  width: 100%;
-  max-width: 1120px;
 
-  min-height: 680px;
+    display:
+        flex;
 
-  margin-inline: auto;
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+
+    width:
+        100%;
+
+
+    max-width:
+        1120px;
+
+
+    min-height:
+        680px;
+
+
+    margin:
+        0 auto;
+
+
+    overflow:
+        visible;
+
+
+    background:
+        transparent;
+
 }
 
 
 /*
-   Only SVGs created INSIDE the Life Wheel may be responsive.
-   This cannot affect header/footer logos.
+   Only SVG generated inside #lifeWheel is affected.
+
+   Header/footer SVGs and logos remain completely untouched.
 */
 
+.page04-main #lifeWheel > svg,
 .page04-main .page04-life-wheel > svg {
-  display: block;
 
-  width: 100%;
-  max-width: 1120px;
+    display:
+        block;
 
-  height: auto;
 
-  margin-inline: auto;
+    width:
+        100%;
 
-  overflow: visible;
+
+    max-width:
+        1120px;
+
+
+    height:
+        auto;
+
+
+    margin:
+        0 auto;
+
+
+    overflow:
+        visible;
+
+
+    background:
+        transparent;
+
 }
 
 
-/* ============================================================
-   14. WHEEL LEGEND
-============================================================ */
+/*
+   DO NOT style:
+   polygon
+   path
+   circle
+   line
+   polyline
+
+   page04.js controls the actual wheel geometry,
+   score polygon and score colour states.
+*/
+
+
+/* ==========================================================================
+   15. WHEEL LEGEND
+   ========================================================================== */
 
 .page04-main .page04-wheel-legend {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
 
-  gap: 12px 26px;
+    display:
+        flex;
 
-  margin: 18px auto 0;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+
+    flex-wrap:
+        wrap;
+
+
+    gap:
+        12px 28px;
+
+
+    margin:
+        22px auto 0;
+
 }
+
 
 .page04-main .page04-legend-item {
-  position: relative;
 
-  display: inline-flex;
-  align-items: center;
+    position:
+        relative;
 
-  padding-left: 14px;
 
-  font-size: 0.68rem;
-  font-weight: 700;
+    display:
+        inline-flex;
 
-  letter-spacing: 0.08em;
 
-  text-transform: uppercase;
+    align-items:
+        center;
+
+
+    padding-left:
+        15px;
+
+
+    font-size:
+        0.68rem;
+
+
+    font-weight:
+        700;
+
+
+    letter-spacing:
+        0.08em;
+
+
+    text-transform:
+        uppercase;
+
 }
+
 
 .page04-main .page04-legend-item::before {
-  content: "";
 
-  position: absolute;
+    content:
+        "";
 
-  left: 0;
-  top: 50%;
 
-  width: 7px;
-  height: 7px;
+    position:
+        absolute;
 
-  border-radius: 50%;
 
-  transform: translateY(-50%);
+    left:
+        0;
 
-  background: currentColor;
+    top:
+        50%;
+
+
+    width:
+        7px;
+
+    height:
+        7px;
+
+
+    border-radius:
+        50%;
+
+
+    transform:
+        translateY(-50%);
+
+
+    background:
+        currentColor;
+
 }
+
 
 .page04-main .page04-legend-item.is-priority {
-  color: var(--p04-red);
+
+    color:
+        var(--page04-red);
+
 }
+
 
 .page04-main .page04-legend-item.is-developing {
-  color: var(--p04-orange);
+
+    color:
+        var(--page04-orange);
+
 }
+
 
 .page04-main .page04-legend-item.is-strong {
-  color: var(--p04-green);
+
+    color:
+        var(--page04-green);
+
 }
 
 
-/* ============================================================
-   15. ALIGNMENT SUMMARY
-============================================================ */
+/* ==========================================================================
+   16. LIFE ALIGNMENT SUMMARY
+   ========================================================================== */
 
 .page04-main .page04-summary {
-  padding: 92px 0;
 
-  background:
-    linear-gradient(
-      180deg,
-      rgba(4, 19, 38, 0.15),
-      rgba(4, 19, 38, 0.48)
-    );
+    padding:
+        92px 0;
+
+
+    background:
+        var(--page04-bg);
+
 }
+
 
 .page04-main .page04-summary-tamil {
-  margin: 0;
 
-  color: var(--p04-white);
+    margin:
+        0;
 
-  font-size: clamp(1.2rem, 2vw, 1.65rem);
-  font-weight: 700;
 
-  line-height: 1.55;
+    color:
+        var(--page04-white);
+
+
+    font-size:
+        clamp(
+            1.20rem,
+            2vw,
+            1.65rem
+        );
+
+
+    font-weight:
+        700;
+
+
+    line-height:
+        1.55;
+
 }
+
+
+/* ==========================================================================
+   17. SUMMARY GRID
+   ========================================================================== */
 
 .page04-main .page04-summary-grid {
-  display: grid;
 
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+    display:
+        grid;
 
-  gap: 20px;
 
-  width: 100%;
-  max-width: 1060px;
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
 
-  margin: 0 auto;
+
+    gap:
+        20px;
+
+
+    width:
+        100%;
+
+
+    max-width:
+        1060px;
+
+
+    margin:
+        0 auto;
+
 }
 
 
-/* ============================================================
-   16. METRIC CARDS
-============================================================ */
+/* ==========================================================================
+   18. METRIC CARDS
+   ========================================================================== */
 
 .page04-main .page04-metric-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 
-  min-height: 210px;
+    display:
+        flex;
 
-  padding: 32px 22px;
 
-  border: 1px solid var(--p04-teal-border);
-  border-radius: 18px;
+    flex-direction:
+        column;
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(9, 39, 64, 0.9),
-      rgba(5, 28, 49, 0.72)
-    );
+
+    align-items:
+        center;
+
+
+    justify-content:
+        center;
+
+
+    min-height:
+        210px;
+
+
+    padding:
+        32px 22px;
+
+
+    border:
+        1px solid var(--page04-border-teal);
+
+
+    border-radius:
+        18px;
+
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(9, 39, 64, 0.90),
+            rgba(5, 28, 49, 0.72)
+        );
+
 }
+
 
 .page04-main .page04-metric-label {
-  margin: 0 0 12px;
 
-  color: var(--p04-gold);
+    margin:
+        0 0 12px;
 
-  font-size: 0.7rem;
-  font-weight: 700;
 
-  letter-spacing: 0.1em;
+    color:
+        var(--page04-gold);
 
-  text-transform: uppercase;
+
+    font-size:
+        0.70rem;
+
+
+    font-weight:
+        700;
+
+
+    letter-spacing:
+        0.10em;
+
+
+    text-transform:
+        uppercase;
+
 }
+
 
 .page04-main .page04-metric-label-tamil {
-  margin: -4px 0 14px;
 
-  color: var(--p04-white);
+    margin:
+        -4px 0 14px;
 
-  font-size: 0.95rem;
-  font-weight: 600;
 
-  line-height: 1.5;
+    color:
+        var(--page04-white);
+
+
+    font-size:
+        0.95rem;
+
+
+    font-weight:
+        600;
+
+
+    line-height:
+        1.5;
+
 }
+
+
+/* ==========================================================================
+   19. TOTAL SCORE
+   ========================================================================== */
 
 .page04-main .page04-total-score {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
 
-  gap: 7px;
+    display:
+        flex;
+
+
+    align-items:
+        baseline;
+
+
+    justify-content:
+        center;
+
+
+    gap:
+        7px;
+
 }
+
 
 .page04-main .page04-metric-value {
-  color: var(--p04-teal);
 
-  font-family: Georgia, "Times New Roman", serif;
+    color:
+        var(--page04-teal);
 
-  font-size: clamp(3.2rem, 5vw, 5rem);
-  font-weight: 700;
 
-  line-height: 1;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+
+    font-size:
+        clamp(
+            3.2rem,
+            5vw,
+            5rem
+        );
+
+
+    font-weight:
+        700;
+
+
+    line-height:
+        1;
+
 }
+
 
 .page04-main .page04-metric-unit {
-  color: var(--p04-ivory);
 
-  font-size: 0.9rem;
-  font-weight: 600;
+    color:
+        var(--page04-ivory);
+
+
+    font-size:
+        0.90rem;
+
+
+    font-weight:
+        600;
+
 }
+
 
 .page04-main .page04-alignment-value {
-  color: var(--p04-gold);
+
+    color:
+        var(--page04-gold);
+
 }
+
 
 .page04-main .page04-life-level {
-  color: var(--p04-white);
 
-  font-family: Georgia, "Times New Roman", serif;
+    color:
+        var(--page04-white);
 
-  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
-  font-weight: 700;
 
-  line-height: 1.25;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
-  text-transform: uppercase;
+
+    font-size:
+        clamp(
+            1.5rem,
+            2.5vw,
+            2.25rem
+        );
+
+
+    font-weight:
+        700;
+
+
+    line-height:
+        1.25;
+
+
+    text-transform:
+        uppercase;
+
 }
 
 
-/* ============================================================
-   17. INSIGHTS
-============================================================ */
+/* ==========================================================================
+   20. ALIGNMENT INSIGHTS
+   ========================================================================== */
 
 .page04-main .page04-insights {
-  padding: 94px 0;
+
+    padding:
+        94px 0;
+
+
+    background:
+        var(--page04-bg-deep);
+
 }
+
 
 .page04-main .page04-insight-grid {
-  display: grid;
 
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+    display:
+        grid;
 
-  gap: 22px;
 
-  width: 100%;
-  max-width: 1050px;
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
 
-  margin: 0 auto;
+
+    gap:
+        22px;
+
+
+    width:
+        100%;
+
+
+    max-width:
+        1050px;
+
+
+    margin:
+        0 auto;
+
 }
 
 
-/* ============================================================
-   18. INSIGHT CARDS
-============================================================ */
+/* ==========================================================================
+   21. INSIGHT CARDS
+   ========================================================================== */
 
 .page04-main .page04-insight-card {
-  position: relative;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    position:
+        relative;
 
-  min-height: 330px;
 
-  padding: 38px 34px;
+    display:
+        flex;
 
-  border: 1px solid var(--p04-teal-border);
-  border-radius: 20px;
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(9, 39, 64, 0.9),
-      rgba(5, 28, 49, 0.74)
-    );
+    flex-direction:
+        column;
+
+
+    align-items:
+        center;
+
+
+    justify-content:
+        center;
+
+
+    min-height:
+        330px;
+
+
+    padding:
+        38px 34px;
+
+
+    border:
+        1px solid var(--page04-border-teal);
+
+
+    border-radius:
+        20px;
+
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(9, 39, 64, 0.90),
+            rgba(5, 28, 49, 0.74)
+        );
+
 }
+
 
 .page04-main .page04-insight-card.is-strongest {
-  border-color: rgba(24, 168, 107, 0.38);
+
+    border-color:
+        rgba(32, 173, 114, 0.38);
+
 }
+
 
 .page04-main .page04-insight-card.is-growth {
-  border-color: rgba(239, 83, 80, 0.36);
+
+    border-color:
+        rgba(239, 83, 80, 0.38);
+
 }
+
 
 .page04-main .page04-insight-number {
-  margin: 0 0 6px;
 
-  color: var(--p04-gold);
+    margin:
+        0 0 6px;
 
-  font-size: 0.75rem;
-  font-weight: 700;
+
+    color:
+        var(--page04-gold);
+
+
+    font-size:
+        0.75rem;
+
+
+    font-weight:
+        700;
+
 }
+
 
 .page04-main .page04-insight-label {
-  margin: 0 0 4px;
 
-  color: var(--p04-ivory);
+    margin:
+        0 0 4px;
 
-  font-size: 0.68rem;
-  font-weight: 700;
 
-  letter-spacing: 0.07em;
+    color:
+        var(--page04-ivory);
 
-  text-transform: uppercase;
+
+    font-size:
+        0.68rem;
+
+
+    font-weight:
+        700;
+
+
+    letter-spacing:
+        0.07em;
+
+
+    text-transform:
+        uppercase;
+
 }
+
 
 .page04-main .page04-insight-label-tamil {
-  margin: 0 0 18px;
 
-  color: var(--p04-white);
+    margin:
+        0 0 18px;
 
-  font-size: 0.95rem;
-  font-weight: 600;
+
+    color:
+        var(--page04-white);
+
+
+    font-size:
+        0.95rem;
+
+
+    font-weight:
+        600;
+
 }
+
 
 .page04-main .page04-insight-title {
-  margin: 0 auto 15px;
 
-  color: var(--p04-white);
+    margin:
+        0 auto 15px;
 
-  font-size: clamp(1.25rem, 2vw, 1.7rem);
-  font-weight: 700;
 
-  line-height: 1.45;
+    color:
+        var(--page04-white);
+
+
+    font-size:
+        clamp(
+            1.25rem,
+            2vw,
+            1.70rem
+        );
+
+
+    font-weight:
+        700;
+
+
+    line-height:
+        1.45;
+
 }
+
 
 .page04-main .page04-insight-score {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
 
-  gap: 4px;
+    display:
+        flex;
 
-  margin-bottom: 16px;
 
-  font-family: Georgia, "Times New Roman", serif;
+    align-items:
+        baseline;
+
+
+    justify-content:
+        center;
+
+
+    gap:
+        4px;
+
+
+    margin:
+        0 0 16px;
+
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
 }
+
 
 .page04-main .page04-insight-score span {
-  font-size: 2.2rem;
-  font-weight: 700;
+
+    font-size:
+        2.20rem;
+
+
+    font-weight:
+        700;
+
 }
+
 
 .page04-main .page04-insight-score small {
-  color: var(--p04-ivory);
 
-  font-size: 0.75rem;
+    color:
+        var(--page04-ivory);
+
+
+    font-size:
+        0.75rem;
+
 }
+
 
 .page04-main .page04-insight-card.is-strongest
 .page04-insight-score span {
-  color: var(--p04-green);
+
+    color:
+        var(--page04-green);
+
 }
+
 
 .page04-main .page04-insight-card.is-growth
 .page04-insight-score span {
-  color: var(--p04-red);
+
+    color:
+        var(--page04-red);
+
 }
+
 
 .page04-main .page04-insight-copy {
-  max-width: 520px;
 
-  margin: auto auto 0;
+    max-width:
+        520px;
 
-  color: var(--p04-muted);
 
-  font-family: Georgia, "Times New Roman", serif;
+    margin:
+        0 auto;
 
-  font-size: 0.82rem;
 
-  line-height: 1.65;
+    color:
+        var(--page04-muted);
+
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+
+    font-size:
+        0.82rem;
+
+
+    line-height:
+        1.65;
+
 }
 
 
-/* ============================================================
-   19. TWELVE PILLARS SECTION
-============================================================ */
+/* ==========================================================================
+   22. TWELVE LIFE PILLARS
+   ========================================================================== */
 
 .page04-main .page04-pillars {
-  padding: 100px 0;
 
-  background:
-    linear-gradient(
-      180deg,
-      rgba(5, 24, 45, 0.15),
-      rgba(5, 24, 45, 0.52)
-    );
+    padding:
+        100px 0;
+
+
+    background:
+        var(--page04-bg);
+
 }
+
 
 .page04-main .page04-pillars-grid {
-  display: grid;
 
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+    display:
+        grid;
 
-  gap: 18px;
 
-  width: 100%;
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
 
-  margin: 0 auto;
+
+    gap:
+        18px;
+
+
+    width:
+        100%;
+
+
+    margin:
+        0 auto;
+
 }
 
 
-/* ============================================================
-   20. PILLAR CARDS
-============================================================ */
+/* ==========================================================================
+   23. PILLAR CARDS
+   ========================================================================== */
 
 .page04-main .page04-pillar-card {
-  position: relative;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    position:
+        relative;
 
-  min-height: 220px;
 
-  padding: 28px 22px;
+    display:
+        flex;
 
-  border: 1px solid var(--p04-border);
-  border-radius: 18px;
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(9, 39, 64, 0.86),
-      rgba(6, 30, 52, 0.76)
-    );
+    flex-direction:
+        column;
 
-  transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
+
+    align-items:
+        center;
+
+
+    justify-content:
+        center;
+
+
+    min-height:
+        220px;
+
+
+    padding:
+        28px 22px;
+
+
+    border:
+        1px solid var(--page04-border);
+
+
+    border-radius:
+        18px;
+
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(9, 39, 64, 0.86),
+            rgba(6, 30, 52, 0.76)
+        );
+
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+
 }
+
 
 .page04-main .page04-pillar-card:hover {
-  transform: translateY(-3px);
+
+    transform:
+        translateY(-3px);
+
 }
+
+
+/* ==========================================================================
+   24. PILLAR TYPOGRAPHY
+   ========================================================================== */
 
 .page04-main .page04-pillar-number {
-  margin: 0 0 9px;
 
-  color: var(--p04-gold);
+    margin:
+        0 0 9px;
 
-  font-size: 0.72rem;
-  font-weight: 700;
 
-  letter-spacing: 0.08em;
+    color:
+        var(--page04-gold);
+
+
+    font-size:
+        0.72rem;
+
+
+    font-weight:
+        700;
+
+
+    letter-spacing:
+        0.08em;
+
 }
+
 
 .page04-main .page04-pillar-tamil {
-  margin: 0 0 7px;
 
-  color: var(--p04-white);
+    margin:
+        0 0 7px;
 
-  font-size: 1.08rem;
-  font-weight: 700;
 
-  line-height: 1.45;
+    color:
+        var(--page04-white);
+
+
+    font-size:
+        1.08rem;
+
+
+    font-weight:
+        700;
+
+
+    line-height:
+        1.45;
+
 }
+
 
 .page04-main .page04-pillar-english {
-  min-height: 30px;
 
-  margin: 0 0 16px;
+    min-height:
+        30px;
 
-  color: var(--p04-muted);
 
-  font-family: Georgia, "Times New Roman", serif;
+    margin:
+        0 0 16px;
 
-  font-size: 0.7rem;
 
-  line-height: 1.4;
+    color:
+        var(--page04-muted);
 
-  letter-spacing: 0.03em;
 
-  text-transform: uppercase;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+
+    font-size:
+        0.70rem;
+
+
+    line-height:
+        1.4;
+
+
+    letter-spacing:
+        0.03em;
+
+
+    text-transform:
+        uppercase;
+
 }
+
+
+/* ==========================================================================
+   25. PILLAR SCORE
+   ========================================================================== */
 
 .page04-main .page04-pillar-score {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
 
-  gap: 3px;
+    display:
+        flex;
 
-  margin: 0 0 8px;
 
-  font-family: Georgia, "Times New Roman", serif;
+    align-items:
+        baseline;
+
+
+    justify-content:
+        center;
+
+
+    gap:
+        3px;
+
+
+    margin:
+        0 0 8px;
+
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
 }
+
 
 .page04-main .page04-pillar-score span {
-  color: var(--p04-white);
 
-  font-size: 2rem;
-  font-weight: 700;
+    color:
+        var(--page04-white);
 
-  line-height: 1;
+
+    font-size:
+        2rem;
+
+
+    font-weight:
+        700;
+
+
+    line-height:
+        1;
+
 }
+
 
 .page04-main .page04-pillar-score small {
-  color: var(--p04-muted);
 
-  font-size: 0.7rem;
+    color:
+        var(--page04-muted);
+
+
+    font-size:
+        0.70rem;
+
 }
+
 
 .page04-main .page04-pillar-status {
-  margin: 0;
 
-  font-size: 0.64rem;
-  font-weight: 700;
+    margin:
+        0;
 
-  letter-spacing: 0.08em;
 
-  text-transform: uppercase;
+    font-size:
+        0.64rem;
+
+
+    font-weight:
+        700;
+
+
+    letter-spacing:
+        0.08em;
+
+
+    text-transform:
+        uppercase;
+
 }
 
 
-/* ============================================================
-   21. SCORE STATES
+/* ==========================================================================
+   26. PILLAR SCORE STATES
 
-   JS can add:
+   Supports:
    .is-priority
    .is-developing
    .is-strong
-
-   to each .page04-pillar-card
-============================================================ */
+   ========================================================================== */
 
 .page04-main .page04-pillar-card.is-priority {
-  border-color: rgba(239, 83, 80, 0.45);
+
+    border-color:
+        rgba(239, 83, 80, 0.48);
+
 }
+
 
 .page04-main .page04-pillar-card.is-priority
 .page04-pillar-score span,
 .page04-main .page04-pillar-card.is-priority
 .page04-pillar-status {
-  color: var(--p04-red);
+
+    color:
+        var(--page04-red);
+
 }
 
 
 .page04-main .page04-pillar-card.is-developing {
-  border-color: rgba(245, 166, 35, 0.4);
+
+    border-color:
+        rgba(245, 166, 35, 0.46);
+
 }
+
 
 .page04-main .page04-pillar-card.is-developing
 .page04-pillar-score span,
 .page04-main .page04-pillar-card.is-developing
 .page04-pillar-status {
-  color: var(--p04-orange);
+
+    color:
+        var(--page04-orange);
+
 }
 
 
 .page04-main .page04-pillar-card.is-strong {
-  border-color: rgba(24, 168, 107, 0.42);
+
+    border-color:
+        rgba(32, 173, 114, 0.46);
+
 }
+
 
 .page04-main .page04-pillar-card.is-strong
 .page04-pillar-score span,
 .page04-main .page04-pillar-card.is-strong
 .page04-pillar-status {
-  color: var(--p04-green);
+
+    color:
+        var(--page04-green);
+
 }
 
 
-/* ============================================================
-   22. COMPLETE PICTURE
-============================================================ */
-
-.page04-main .page04-complete-picture {
-  position: relative;
-
-  padding: 105px 0 115px;
-
-  background:
-    radial-gradient(
-      circle at center top,
-      rgba(18, 55, 110, 0.13),
-      transparent 48%
-    );
-}
-
-.page04-main .page04-complete-picture::before {
-  content: "";
-
-  position: absolute;
-
-  left: 50%;
-  top: 0;
-
-  width: min(850px, 74%);
-  height: 1px;
-
-  transform: translateX(-50%);
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(215, 167, 47, 0.3),
-      transparent
-    );
-}
-
-.page04-main .page04-complete-title {
-  max-width: 900px;
-
-  margin: 0 auto 28px;
-
-  color: var(--p04-white);
-
-  font-size: clamp(1.45rem, 2.4vw, 2rem);
-  font-weight: 700;
-
-  line-height: 1.6;
-
-  text-wrap: balance;
-}
-
-.page04-main .page04-complete-copy-tamil {
-  max-width: 840px;
-
-  margin: 0 auto 22px;
-
-  color: var(--p04-white);
-
-  font-size: clamp(1rem, 1.6vw, 1.2rem);
-  font-weight: 500;
-
-  line-height: 1.75;
-}
-
-.page04-main .page04-complete-copy-english {
-  max-width: 800px;
-
-  margin: 7px auto;
-
-  color: var(--p04-muted);
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: 0.82rem;
-
-  line-height: 1.7;
-}
-
-
-/* ============================================================
-   23. CLOSING MESSAGE
-============================================================ */
-
-.page04-main .page04-closing {
-  position: relative;
-
-  max-width: 850px;
-
-  margin: 56px auto 0;
-  padding-top: 52px;
-}
-
-.page04-main .page04-closing::before {
-  content: "";
-
-  position: absolute;
-
-  top: 0;
-  left: 50%;
-
-  width: 180px;
-  height: 1px;
-
-  transform: translateX(-50%);
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(34, 199, 195, 0.5),
-      transparent
-    );
-}
-
-.page04-main .page04-closing-tamil {
-  margin: 0 auto 14px;
-
-  color: var(--p04-white);
-
-  font-size: clamp(1.05rem, 1.7vw, 1.25rem);
-  font-weight: 600;
-
-  line-height: 1.65;
-}
-
-.page04-main .page04-closing-english {
-  margin: 18px auto 0;
-
-  color: var(--p04-muted);
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: 0.8rem;
-
-  line-height: 1.65;
-}
-
-
-/* ============================================================
-   24. ACTIONS
-============================================================ */
-
-.page04-main .page04-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  gap: 18px;
-
-  margin-top: 54px;
-}
-
-.page04-main .page04-primary-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-
-  gap: 7px;
-
-  min-width: min(100%, 500px);
-
-  padding: 17px 32px;
-
-  border: 1px solid rgba(34, 199, 195, 0.5);
-  border-radius: 999px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #18bcb8,
-      #24c9c5
-    );
-
-  color: #031726;
-
-  font-size: 0.9rem;
-  font-weight: 700;
-
-  line-height: 1.4;
-
-  text-decoration: none;
-
-  box-shadow:
-    0 12px 30px rgba(34, 199, 195, 0.14);
-
-  transition:
-    transform 180ms ease,
-    box-shadow 180ms ease;
-}
-
-.page04-main .page04-primary-cta:hover {
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 16px 36px rgba(34, 199, 195, 0.2);
-}
-
-.page04-main .page04-cta-english {
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: 0.7rem;
-
-  letter-spacing: 0.025em;
-
-  text-transform: uppercase;
-}
-
-.page04-main .page04-back-link {
-  color: var(--p04-muted);
-
-  font-size: 0.78rem;
-
-  line-height: 1.5;
-
-  text-decoration: underline;
-
-  text-underline-offset: 4px;
-}
-
-.page04-main .page04-back-link span {
-  margin-left: 4px;
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: 0.67rem;
-
-  text-transform: uppercase;
-}
-
-
-/* ============================================================
-   25. OPTIONAL JS SCORE UTILITY CLASSES
-
-   These can also be used by page04.js for wheel labels,
-   score values or dynamic text.
-============================================================ */
+/* ==========================================================================
+   27. ADDITIONAL JS SCORE CLASSES
+   ========================================================================== */
 
 .page04-main .score-priority {
-  color: var(--p04-red) !important;
+
+    color:
+        var(--page04-red) !important;
+
 }
+
 
 .page04-main .score-developing {
-  color: var(--p04-orange) !important;
+
+    color:
+        var(--page04-orange) !important;
+
 }
+
 
 .page04-main .score-strong {
-  color: var(--p04-green) !important;
+
+    color:
+        var(--page04-green) !important;
+
 }
 
 
-/* ============================================================
-   26. TABLET
-============================================================ */
+/* ==========================================================================
+   28. COMPLETE PICTURE
+   ========================================================================== */
+
+.page04-main .page04-complete-picture {
+
+    position:
+        relative;
+
+
+    padding:
+        105px 0 115px;
+
+
+    background:
+        var(--page04-bg-deep);
+
+}
+
+
+.page04-main .page04-complete-picture::before {
+
+    content:
+        "";
+
+
+    position:
+        absolute;
+
+
+    left:
+        50%;
+
+    top:
+        0;
+
+
+    width:
+        min(850px, 74%);
+
+    height:
+        1px;
+
+
+    transform:
+        translateX(-50%);
+
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(215, 167, 47, 0.30),
+            transparent
+        );
+
+}
+
+
+.page04-main .page04-complete-title {
+
+    max-width:
+        900px;
+
+
+    margin:
+        0 auto 28px;
+
+
+    color:
+        var(--page04-white);
+
+
+    font-size:
+        clamp(
+            1.45rem,
+            2.4vw,
+            2rem
+        );
+
+
+    font-weight:
+        700;
+
+
+    line-height:
+        1.6;
+
+}
+
+
+.page04-main .page04-complete-copy-tamil {
+
+    max-width:
+        840px;
+
+
+    margin:
+        0 auto 22px;
+
+
+    color:
+        var(--page04-white);
+
+
+    font-size:
+        clamp(
+            1rem,
+            1.6vw,
+            1.20rem
+        );
+
+
+    font-weight:
+        500;
+
+
+    line-height:
+        1.75;
+
+}
+
+
+.page04-main .page04-complete-copy-english {
+
+    max-width:
+        800px;
+
+
+    margin:
+        7px auto;
+
+
+    color:
+        var(--page04-muted);
+
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+
+    font-size:
+        0.82rem;
+
+
+    line-height:
+        1.7;
+
+}
+
+
+/* ==========================================================================
+   29. CLOSING MESSAGE
+   ========================================================================== */
+
+.page04-main .page04-closing {
+
+    position:
+        relative;
+
+
+    max-width:
+        850px;
+
+
+    margin:
+        56px auto 0;
+
+
+    padding-top:
+        52px;
+
+}
+
+
+.page04-main .page04-closing::before {
+
+    content:
+        "";
+
+
+    position:
+        absolute;
+
+
+    top:
+        0;
+
+    left:
+        50%;
+
+
+    width:
+        180px;
+
+    height:
+        1px;
+
+
+    transform:
+        translateX(-50%);
+
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(34, 199, 195, 0.50),
+            transparent
+        );
+
+}
+
+
+.page04-main .page04-closing-tamil {
+
+    margin:
+        0 auto 14px;
+
+
+    color:
+        var(--page04-white);
+
+
+    font-size:
+        clamp(
+            1.05rem,
+            1.7vw,
+            1.25rem
+        );
+
+
+    font-weight:
+        600;
+
+
+    line-height:
+        1.65;
+
+}
+
+
+.page04-main .page04-closing-english {
+
+    margin:
+        18px auto 0;
+
+
+    color:
+        var(--page04-muted);
+
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+
+    font-size:
+        0.80rem;
+
+
+    line-height:
+        1.65;
+
+}
+
+
+/* ==========================================================================
+   30. PAGE ACTIONS
+   ========================================================================== */
+
+.page04-main .page04-actions {
+
+    display:
+        flex;
+
+
+    flex-direction:
+        column;
+
+
+    align-items:
+        center;
+
+
+    justify-content:
+        center;
+
+
+    gap:
+        18px;
+
+
+    margin-top:
+        54px;
+
+}
+
+
+/* ==========================================================================
+   31. PRIMARY CTA — TEAL
+   ========================================================================== */
+
+.page04-main .page04-primary-cta {
+
+    display:
+        inline-flex;
+
+
+    align-items:
+        center;
+
+
+    justify-content:
+        center;
+
+
+    flex-wrap:
+        wrap;
+
+
+    gap:
+        7px;
+
+
+    width:
+        min(100%, 620px);
+
+
+    min-height:
+        62px;
+
+
+    padding:
+        16px 32px;
+
+
+    border:
+        1px solid var(--page04-teal);
+
+
+    border-radius:
+        999px;
+
+
+    background:
+        var(--page04-teal);
+
+
+    color:
+        #031726;
+
+
+    font-size:
+        0.90rem;
+
+
+    font-weight:
+        700;
+
+
+    line-height:
+        1.4;
+
+
+    text-decoration:
+        none;
+
+
+    box-shadow:
+        0 12px 30px
+        rgba(34, 199, 195, 0.16);
+
+
+    transition:
+        transform 180ms ease,
+        background-color 180ms ease,
+        box-shadow 180ms ease;
+
+}
+
+
+.page04-main .page04-primary-cta:hover {
+
+    background:
+        var(--page04-teal-dark);
+
+
+    border-color:
+        var(--page04-teal-dark);
+
+
+    transform:
+        translateY(-2px);
+
+
+    box-shadow:
+        0 16px 36px
+        rgba(34, 199, 195, 0.22);
+
+}
+
+
+.page04-main .page04-primary-cta:focus-visible {
+
+    outline:
+        3px solid
+        rgba(34, 199, 195, 0.34);
+
+
+    outline-offset:
+        4px;
+
+}
+
+
+.page04-main .page04-cta-english {
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+
+    font-size:
+        0.70rem;
+
+
+    letter-spacing:
+        0.025em;
+
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* ==========================================================================
+   32. BACK LINK
+   ========================================================================== */
+
+.page04-main .page04-back-link {
+
+    color:
+        var(--page04-muted);
+
+
+    font-size:
+        0.78rem;
+
+
+    line-height:
+        1.5;
+
+
+    text-decoration:
+        underline;
+
+
+    text-underline-offset:
+        4px;
+
+}
+
+
+.page04-main .page04-back-link:hover {
+
+    color:
+        var(--page04-teal);
+
+}
+
+
+.page04-main .page04-back-link span {
+
+    margin-left:
+        4px;
+
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+
+    font-size:
+        0.67rem;
+
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* ==========================================================================
+   33. TABLET
+   ========================================================================== */
 
 @media (max-width: 1024px) {
 
-  .page04-main .page04-container,
-  .page04-main .page04-container-narrow {
-    width: min(calc(100% - 44px), var(--p04-max));
-  }
+    .page04-main .page04-container,
+    .page04-main .page04-container-narrow {
 
-  .page04-main .page04-hero {
-    min-height: 470px;
+        width:
+            min(
+                calc(100% - 44px),
+                var(--page04-max)
+            );
 
-    padding-top: 60px;
-    padding-bottom: 70px;
-  }
+    }
 
-  .page04-main .page04-wheel-stage {
-    min-height: 620px;
-  }
 
-  .page04-main .page04-life-wheel {
-    min-height: 590px;
-  }
+    .page04-main .page04-hero {
 
-  .page04-main .page04-summary-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+        min-height:
+            460px;
 
-  .page04-main .page04-pillars-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+
+        padding:
+            60px 0 70px;
+
+    }
+
+
+    .page04-main .page04-wheel-stage {
+
+        min-height:
+            620px;
+
+    }
+
+
+    .page04-main #lifeWheel,
+    .page04-main .page04-life-wheel {
+
+        min-height:
+            590px;
+
+    }
+
+
+    .page04-main .page04-pillars-grid {
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+    }
 
 }
 
 
-/* ============================================================
-   27. MOBILE / SMALL TABLET
-============================================================ */
+/* ==========================================================================
+   34. SMALL TABLET / MOBILE
+   ========================================================================== */
 
 @media (max-width: 768px) {
 
-  .page04-main .page04-container,
-  .page04-main .page04-container-narrow {
-    width: min(calc(100% - 30px), var(--p04-max));
-  }
+    .page04-main .page04-container,
+    .page04-main .page04-container-narrow {
 
-  .page04-main .page04-progress {
-    padding-top: 14px;
-  }
+        width:
+            min(
+                calc(100% - 30px),
+                var(--page04-max)
+            );
 
-  .page04-main .page04-hero {
-    min-height: auto;
+    }
 
-    padding: 60px 0 68px;
-  }
 
-  .page04-main .page04-title {
-    font-size: clamp(2.2rem, 10vw, 3.3rem);
+    .page04-main .page04-progress {
 
-    letter-spacing: 0.04em;
-  }
+        padding-top:
+            14px;
 
-  .page04-main .page04-intro {
-    padding: 50px 0 58px;
-  }
+    }
 
-  .page04-main .page04-wheel-section {
-    padding: 64px 0 70px;
-  }
 
-  .page04-main .page04-section-heading {
-    margin-bottom: 36px;
-  }
+    .page04-main .page04-hero {
 
-  .page04-main .page04-wheel-stage {
-    min-height: 520px;
+        min-height:
+            auto;
 
-    overflow-x: auto;
-    overflow-y: visible;
-  }
 
-  .page04-main .page04-life-wheel {
-    min-width: 620px;
-    min-height: 500px;
-  }
+        padding:
+            58px 0 66px;
 
-  .page04-main .page04-life-wheel > svg {
-    min-width: 620px;
-  }
+    }
 
-  .page04-main .page04-summary {
-    padding: 70px 0;
-  }
 
-  .page04-main .page04-summary-grid {
-    grid-template-columns: 1fr;
+    .page04-main .page04-title {
 
-    max-width: 540px;
-  }
+        font-size:
+            clamp(
+                2.2rem,
+                10vw,
+                3.3rem
+            );
 
-  .page04-main .page04-metric-card {
-    min-height: 175px;
-  }
 
-  .page04-main .page04-insights {
-    padding: 72px 0;
-  }
+        letter-spacing:
+            0.04em;
 
-  .page04-main .page04-insight-grid {
-    grid-template-columns: 1fr;
+    }
 
-    max-width: 580px;
-  }
 
-  .page04-main .page04-insight-card {
-    min-height: 290px;
-  }
+    .page04-main .page04-intro {
 
-  .page04-main .page04-pillars {
-    padding: 76px 0;
-  }
+        padding:
+            50px 0 58px;
 
-  .page04-main .page04-pillars-grid {
-    grid-template-columns: 1fr;
+    }
 
-    max-width: 600px;
-  }
 
-  .page04-main .page04-pillar-card {
-    min-height: 195px;
-  }
+    .page04-main .page04-wheel-section {
 
-  .page04-main .page04-complete-picture {
-    padding: 78px 0 90px;
-  }
+        padding:
+            64px 0 70px;
+
+    }
+
+
+    .page04-main .page04-section-heading {
+
+        margin-bottom:
+            36px;
+
+    }
+
+
+    /*
+       Preserve wheel geometry.
+
+       Instead of shrinking/distorting the SVG,
+       allow horizontal overflow on smaller screens.
+    */
+
+    .page04-main .page04-wheel-stage {
+
+        justify-content:
+            flex-start;
+
+
+        min-height:
+            520px;
+
+
+        overflow-x:
+            auto;
+
+
+        overflow-y:
+            visible;
+
+
+        -webkit-overflow-scrolling:
+            touch;
+
+    }
+
+
+    .page04-main #lifeWheel,
+    .page04-main .page04-life-wheel {
+
+        min-width:
+            620px;
+
+
+        min-height:
+            500px;
+
+    }
+
+
+    .page04-main #lifeWheel > svg,
+    .page04-main .page04-life-wheel > svg {
+
+        min-width:
+            620px;
+
+    }
+
+
+    .page04-main .page04-summary {
+
+        padding:
+            70px 0;
+
+    }
+
+
+    .page04-main .page04-summary-grid {
+
+        grid-template-columns:
+            1fr;
+
+
+        max-width:
+            540px;
+
+    }
+
+
+    .page04-main .page04-metric-card {
+
+        min-height:
+            175px;
+
+    }
+
+
+    .page04-main .page04-insights {
+
+        padding:
+            72px 0;
+
+    }
+
+
+    .page04-main .page04-insight-grid {
+
+        grid-template-columns:
+            1fr;
+
+
+        max-width:
+            580px;
+
+    }
+
+
+    .page04-main .page04-insight-card {
+
+        min-height:
+            290px;
+
+    }
+
+
+    .page04-main .page04-pillars {
+
+        padding:
+            76px 0;
+
+    }
+
+
+    .page04-main .page04-pillars-grid {
+
+        grid-template-columns:
+            1fr;
+
+
+        max-width:
+            600px;
+
+
+        margin:
+            0 auto;
+
+    }
+
+
+    .page04-main .page04-pillar-card {
+
+        min-height:
+            195px;
+
+    }
+
+
+    .page04-main .page04-complete-picture {
+
+        padding:
+            78px 0 90px;
+
+    }
 
 }
 
 
-/* ============================================================
-   28. SMALL MOBILE
-============================================================ */
+/* ==========================================================================
+   35. SMALL MOBILE
+   ========================================================================== */
 
 @media (max-width: 480px) {
 
-  .page04-main .page04-container,
-  .page04-main .page04-container-narrow {
-    width: min(calc(100% - 24px), var(--p04-max));
-  }
+    .page04-main .page04-container,
+    .page04-main .page04-container-narrow {
 
-  .page04-main .page04-title {
-    font-size: 2.05rem;
+        width:
+            min(
+                calc(100% - 24px),
+                var(--page04-max)
+            );
 
-    line-height: 1.12;
+    }
 
-    letter-spacing: 0.025em;
-  }
 
-  .page04-main .page04-hero-tamil {
-    font-size: 1.05rem;
-  }
+    .page04-main .page04-title {
 
-  .page04-main .page04-section-title {
-    font-size: 1.75rem;
-  }
+        font-size:
+            2.05rem;
 
-  .page04-main .page04-wheel-stage {
-    justify-content: flex-start;
 
-    min-height: 470px;
-  }
+        line-height:
+            1.12;
 
-  .page04-main .page04-life-wheel {
-    min-width: 580px;
-    min-height: 450px;
-  }
 
-  .page04-main .page04-life-wheel > svg {
-    min-width: 580px;
-  }
+        letter-spacing:
+            0.025em;
 
-  .page04-main .page04-wheel-legend {
-    gap: 10px 15px;
-  }
+    }
 
-  .page04-main .page04-metric-value {
-    font-size: 3.2rem;
-  }
 
-  .page04-main .page04-primary-cta {
-    width: 100%;
-    min-width: 0;
+    .page04-main .page04-hero-tamil {
 
-    padding: 16px 20px;
-  }
+        font-size:
+            1.05rem;
+
+    }
+
+
+    .page04-main .page04-section-title {
+
+        font-size:
+            1.75rem;
+
+    }
+
+
+    .page04-main .page04-wheel-stage {
+
+        min-height:
+            470px;
+
+    }
+
+
+    .page04-main #lifeWheel,
+    .page04-main .page04-life-wheel {
+
+        min-width:
+            580px;
+
+
+        min-height:
+            450px;
+
+    }
+
+
+    .page04-main #lifeWheel > svg,
+    .page04-main .page04-life-wheel > svg {
+
+        min-width:
+            580px;
+
+    }
+
+
+    .page04-main .page04-wheel-legend {
+
+        gap:
+            10px 15px;
+
+    }
+
+
+    .page04-main .page04-metric-value {
+
+        font-size:
+            3.2rem;
+
+    }
+
+
+    .page04-main .page04-primary-cta {
+
+        width:
+            100%;
+
+
+        padding:
+            16px 20px;
+
+    }
 
 }
 
 
-/* ============================================================
-   29. REDUCED MOTION
-============================================================ */
+/* ==========================================================================
+   36. REDUCED MOTION
+   ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
 
-  .page04-main .page04-pillar-card,
-  .page04-main .page04-primary-cta {
-    transition: none;
-  }
+    .page04-main .page04-pillar-card,
+    .page04-main .page04-primary-cta {
 
-  .page04-main .page04-pillar-card:hover,
-  .page04-main .page04-primary-cta:hover {
-    transform: none;
-  }
+        transition:
+            none;
+
+    }
+
+
+    .page04-main .page04-pillar-card:hover,
+    .page04-main .page04-primary-cta:hover {
+
+        transform:
+            none;
+
+    }
 
 }
 
 
-/* ============================================================
-   END
-   PAGE 04 — KALA CHAKRA™ LIFE ALIGNMENT™
-============================================================ */
+/* ==========================================================================
+   37. PRINT / FUTURE DIAGNOSIS REPORT CAPTURE
+
+   Keeps the Life Wheel presentation clean for later export.
+   ========================================================================== */
+
+@media print {
+
+    .page04-main .page04-wheel-section {
+
+        break-inside:
+            avoid;
+
+
+        page-break-inside:
+            avoid;
+
+    }
+
+
+    .page04-main .page04-wheel-stage {
+
+        min-height:
+            auto;
+
+
+        overflow:
+            visible;
+
+    }
+
+
+    .page04-main #lifeWheel,
+    .page04-main .page04-life-wheel {
+
+        break-inside:
+            avoid;
+
+
+        page-break-inside:
+            avoid;
+
+    }
+
+
+    .page04-main .page04-actions {
+
+        display:
+            none;
+
+    }
+
+}
+
+
+/* ==========================================================================
+   38. GLOBAL SHELL PROTECTION
+
+   INTENTIONALLY NO RULES BELOW FOR:
+
+   body
+   header
+   footer
+   #global-header
+   #global-footer
+   .site-header
+   .site-footer
+   img
+   body img
+   body svg
+   a
+   button
+
+   header.css + footer.css own the shared shell.
+
+   Page04.css ends at the Page 04 boundary.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   END OF FILE
+   ========================================================================== */
 
