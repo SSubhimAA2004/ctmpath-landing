@@ -3,31 +3,30 @@
    CTM PATH™ MILLIONAIRES™
 
    FILE:
-   css/page04.css
+   page04.css
 
    PAGE:
    KALA CHAKRA™ LIFE ALIGNMENT™
 
    VERSION:
-   1.0
+   10.0
 
 
-   RESPONSIBILITIES:
+   DESIGN RESPONSIBILITIES:
 
-   ✓ Page 04 Layout
-   ✓ KALA CHAKRA™ Life Wheel Stage
-   ✓ Alignment Score
-   ✓ Life Level
-   ✓ Strongest Pillar
-   ✓ Growth Opportunity
-   ✓ 12 Pillar Breakdown
-   ✓ Page 05 Navigation
-   ✓ Responsive Behaviour
+   ✓ Premium Dark CTM PATH™ Visual Language
+   ✓ Centre-Aligned Page04 Presentation
+   ✓ Responsive 12-Spoke KALA CHAKRA™ Life Wheel
+   ✓ No White Wheel Disc
+   ✓ Dark Wheel Background
+   ✓ Subtle Measurement Rings + Spokes
+   ✓ Actual Irregular Life Polygon Emphasis
+   ✓ 0–3  Red
+   ✓ 4–7  Orange
+   ✓ 8–10 Green
+   ✓ Teal Primary Navigation
+   ✓ Responsive Desktop / Tablet / Mobile
 
-   IMPORTANT:
-
-   Global Header / Footer are NOT styled here.
-   They remain controlled by the shared global frontend.
 
 ========================================================================== */
 
@@ -37,146 +36,121 @@
    PAGE TOKENS
 ========================================================================== */
 
+
 :root {
 
     --page04-bg:
-        #06172d;
+        #071629;
 
     --page04-bg-deep:
-        #041326;
+        #05111f;
 
     --page04-surface:
-        #08233a;
+        #092237;
 
     --page04-surface-soft:
-        #0a2942;
+        rgba(9, 34, 55, 0.78);
 
     --page04-border:
-        rgba(28, 190, 184, 0.32);
+        rgba(25, 199, 195, 0.30);
 
     --page04-border-soft:
         rgba(255, 255, 255, 0.08);
 
 
-    --page04-text:
-        #f7f2e8;
+    --page04-ivory:
+        #f4f0e6;
 
-    --page04-text-soft:
-        #d7e0e7;
+    --page04-white:
+        #ffffff;
 
     --page04-muted:
-        #92a5b5;
+        #b9c4cf;
+
+    --page04-gold:
+        #d6aa4b;
 
 
     --page04-teal:
-        #18b8b1;
+        #19c7c3;
 
     --page04-teal-dark:
-        #10938e;
+        #0e9695;
 
     --page04-teal-soft:
-        rgba(24, 184, 177, 0.12);
-
-
-    --page04-gold:
-        #d9ad52;
-
-    --page04-gold-soft:
-        rgba(217, 173, 82, 0.15);
+        rgba(25, 199, 195, 0.12);
 
 
     --page04-red:
-        #e64f4f;
+        #e65050;
 
     --page04-orange:
-        #ee922d;
+        #f29a2e;
 
     --page04-green:
-        #2aad74;
+        #2fb378;
 
 
-    --page04-radius:
-        26px;
-
-    --page04-radius-small:
-        16px;
-
-
-    --page04-shadow:
-        0 22px 60px rgba(0, 0, 0, 0.28);
+    --page04-max-width:
+        1480px;
 
 }
 
 
 
 /* ==========================================================================
-   PAGE ROOT
+   PAGE FOUNDATION
 ========================================================================== */
+
+
+html {
+
+    scroll-behavior:
+        smooth;
+
+}
+
+
+body {
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+    background:
+        var(--page04-bg);
+
+    color:
+        var(--page04-ivory);
+
+}
+
 
 .page04 {
 
-    width: 100%;
+    width:
+        100%;
 
-    min-height: 100vh;
+    min-height:
+        100vh;
 
     background:
-        radial-gradient(
-            circle at 50% 15%,
-            rgba(24, 184, 177, 0.055),
-            transparent 30%
-        ),
-        linear-gradient(
-            180deg,
-            var(--page04-bg-deep) 0%,
-            var(--page04-bg) 48%,
-            var(--page04-bg-deep) 100%
-        );
+        var(--page04-bg);
 
     color:
-        var(--page04-text);
+        var(--page04-ivory);
 
-    overflow:
+    overflow-x:
         hidden;
 
 }
 
 
-
-/* ==========================================================================
-   COMMON PAGE SECTION WIDTH
-========================================================================== */
-
-.page04-hero-inner,
-.alignment-introduction-inner,
-.life-wheel-section-inner,
-.alignment-insights-section,
-.pillar-breakdown-section,
-.alignment-meaning-inner,
-.page04-transition-inner {
-
-    width:
-        min(1440px, calc(100% - 64px));
-
-    margin-left:
-        auto;
-
-    margin-right:
-        auto;
-
-}
-
-
-
-/* ==========================================================================
-   JOURNEY MARKER
-========================================================================== */
-
-.journey-marker {
-
-    width: 100%;
-
-    padding:
-        18px 32px 0;
+.page04 *,
+.page04 *::before,
+.page04 *::after {
 
     box-sizing:
         border-box;
@@ -184,24 +158,60 @@
 }
 
 
-.journey-marker p {
 
-    margin: 0;
+/* ==========================================================================
+   MAIN PAGE CONTAINER
+========================================================================== */
+
+
+.page04-main {
+
+    width:
+        min(
+            calc(100% - 48px),
+            var(--page04-max-width)
+        );
+
+    margin:
+        0 auto;
+
+    padding:
+        42px 0 80px;
+
+}
+
+
+
+/* ==========================================================================
+   JOURNEY INDICATOR
+========================================================================== */
+
+
+.page04 .journey-indicator {
+
+    width:
+        100%;
+
+    margin:
+        0 auto 54px;
 
     text-align:
-        left;
+        center;
+
+    color:
+        var(--page04-gold);
 
     font-size:
-        13px;
+        0.78rem;
 
     font-weight:
         700;
 
     letter-spacing:
-        0.12em;
+        0.14em;
 
-    color:
-        var(--page04-gold);
+    text-transform:
+        uppercase;
 
 }
 
@@ -211,21 +221,20 @@
    HERO
 ========================================================================== */
 
+
 .page04-hero {
 
-    position:
-        relative;
+    width:
+        min(
+            100%,
+            1100px
+        );
+
+    margin:
+        0 auto;
 
     padding:
-        86px 24px 78px;
-
-}
-
-
-.page04-hero-inner {
-
-    max-width:
-        1120px;
+        24px 24px 74px;
 
     text-align:
         center;
@@ -233,33 +242,43 @@
 }
 
 
-.page04-brand {
+.page04-hero .eyebrow,
+.page04-hero .brand-eyebrow {
 
     margin:
-        0 0 34px;
+        0 0 26px;
 
     color:
         var(--page04-gold);
 
+    text-align:
+        center;
+
     font-size:
-        15px;
+        0.82rem;
 
     font-weight:
         700;
 
     letter-spacing:
-        0.18em;
+        0.15em;
+
+    text-transform:
+        uppercase;
 
 }
 
 
-.page04-title {
+.page04-hero h1 {
 
     margin:
-        0;
+        0 auto;
 
     color:
-        var(--page04-text);
+        var(--page04-ivory);
+
+    text-align:
+        center;
 
     font-family:
         Georgia,
@@ -267,53 +286,67 @@
         serif;
 
     font-size:
-        clamp(48px, 5.8vw, 88px);
-
-    line-height:
-        1.18;
+        clamp(
+            2.5rem,
+            5.4vw,
+            5rem
+        );
 
     font-weight:
         600;
+
+    line-height:
+        1.08;
 
     letter-spacing:
         0.055em;
 
+    text-transform:
+        uppercase;
+
 }
 
 
-.page04-title-tamil {
-
-    margin:
-        54px auto 0;
+.page04-hero .hero-tamil {
 
     max-width:
-        720px;
+        760px;
 
-    color:
-        var(--page04-text);
-
-    font-size:
-        clamp(25px, 2.3vw, 36px);
-
-    line-height:
-        1.48;
-
-    font-weight:
-        700;
+    margin:
+        38px auto 0;
 
     text-align:
         center;
 
+    font-size:
+        clamp(
+            1.35rem,
+            2vw,
+            2rem
+        );
+
+    font-weight:
+        700;
+
+    line-height:
+        1.55;
+
 }
 
 
-.page04-subtitle {
+.page04-hero .hero-english {
+
+    max-width:
+        650px;
 
     margin:
-        26px auto 0;
+        15px auto 0;
+
+    text-align:
+        center;
 
     color:
-        var(--page04-text-soft);
+        var(--page04-muted);
 
     font-family:
         Georgia,
@@ -321,19 +354,14 @@
         serif;
 
     font-size:
-        15px;
+        clamp(
+            0.95rem,
+            1.2vw,
+            1.12rem
+        );
 
     line-height:
         1.5;
-
-    font-weight:
-        600;
-
-    letter-spacing:
-        0.06em;
-
-    text-align:
-        center;
 
 }
 
@@ -343,41 +371,20 @@
    INTRODUCTION
 ========================================================================== */
 
-.alignment-introduction {
 
-    padding:
-        42px 24px 88px;
+.page04-intro {
 
-}
-
-
-.alignment-introduction-inner {
-
-    max-width:
-        950px;
-
-    text-align:
-        center;
-
-}
-
-
-.alignment-intro-tamil {
+    width:
+        min(
+            100%,
+            1040px
+        );
 
     margin:
         0 auto;
 
-    color:
-        var(--page04-text);
-
-    font-size:
-        clamp(23px, 2vw, 31px);
-
-    line-height:
-        1.65;
-
-    font-weight:
-        600;
+    padding:
+        0 24px 64px;
 
     text-align:
         center;
@@ -385,16 +392,43 @@
 }
 
 
-.alignment-intro-english {
+.page04-intro .intro-tamil {
 
     margin:
-        28px auto 0;
+        0 auto;
+
+    text-align:
+        center;
+
+    font-size:
+        clamp(
+            1.15rem,
+            1.8vw,
+            1.55rem
+        );
+
+    font-weight:
+        600;
+
+    line-height:
+        1.7;
+
+}
+
+
+.page04-intro .intro-english {
 
     max-width:
         760px;
 
+    margin:
+        16px auto 0;
+
+    text-align:
+        center;
+
     color:
-        var(--page04-text-soft);
+        var(--page04-muted);
 
     font-family:
         Georgia,
@@ -402,25 +436,30 @@
         serif;
 
     font-size:
-        17px;
+        1rem;
 
     line-height:
-        1.7;
-
-    text-align:
-        center;
+        1.65;
 
 }
 
 
 
 /* ==========================================================================
-   COMMON SECTION HEADINGS
+   SECTION HEADERS
 ========================================================================== */
 
-.section-heading,
-.alignment-insights-heading,
-.pillar-breakdown-heading {
+
+.page04-section-header {
+
+    width:
+        min(
+            100%,
+            900px
+        );
+
+    margin:
+        0 auto 36px;
 
     text-align:
         center;
@@ -428,107 +467,93 @@
 }
 
 
-.section-eyebrow {
+.page04-section-header .section-eyebrow {
 
     margin:
-        0 0 14px;
+        0 0 12px;
 
     color:
         var(--page04-gold);
 
+    text-align:
+        center;
+
     font-size:
-        14px;
+        0.76rem;
 
     font-weight:
         700;
 
     letter-spacing:
-        0.16em;
+        0.14em;
 
-    text-align:
-        center;
+    text-transform:
+        uppercase;
 
 }
 
 
-.section-title {
+.page04-section-header h2 {
 
     margin:
         0;
 
-    color:
-        var(--page04-text);
+    text-align:
+        center;
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+    color:
+        var(--page04-ivory);
 
     font-size:
-        clamp(34px, 4vw, 56px);
+        clamp(
+            1.8rem,
+            3vw,
+            2.8rem
+        );
 
     line-height:
         1.2;
 
-    font-weight:
-        600;
-
-    letter-spacing:
-        0.055em;
-
-    text-align:
-        center;
-
 }
 
 
-.section-title-tamil {
-
-    margin:
-        24px auto 0;
-
-    color:
-        var(--page04-text);
-
-    font-size:
-        clamp(22px, 2vw, 30px);
-
-    line-height:
-        1.55;
-
-    font-weight:
-        600;
-
-    text-align:
-        center;
-
-}
-
-
-.section-description {
+.page04-section-header .section-tamil {
 
     margin:
         18px auto 0;
 
-    max-width:
-        760px;
-
-    color:
-        var(--page04-text-soft);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+    text-align:
+        center;
 
     font-size:
-        16px;
+        clamp(
+            1.05rem,
+            1.5vw,
+            1.35rem
+        );
 
     line-height:
-        1.7;
+        1.6;
+
+}
+
+
+.page04-section-header .section-english {
+
+    margin:
+        10px auto 0;
 
     text-align:
         center;
+
+    color:
+        var(--page04-muted);
+
+    font-size:
+        0.96rem;
+
+    line-height:
+        1.6;
 
 }
 
@@ -538,137 +563,113 @@
    LIFE WHEEL SECTION
 ========================================================================== */
 
+
 .life-wheel-section {
 
+    width:
+        100%;
+
+    margin:
+        0 auto;
+
     padding:
-        92px 24px 96px;
+        48px 0 72px;
 
-    border-top:
-        1px solid var(--page04-border-soft);
-
-    border-bottom:
-        1px solid var(--page04-border-soft);
-
-    background:
-        rgba(2, 15, 30, 0.34);
-
-}
-
-
-.life-wheel-section-inner {
-
-    max-width:
-        1280px;
+    text-align:
+        center;
 
 }
 
 
 
 /* ==========================================================================
-   LIFE WHEEL STAGE
+   LIFE WHEEL SHELL
+
+   IMPORTANT:
+   There is deliberately NO white circular background.
+
 ========================================================================== */
 
-.life-wheel-stage {
+
+.life-wheel-shell {
 
     position:
         relative;
 
     width:
-        min(900px, 100%);
-
-    min-height:
-        760px;
+        min(
+            100%,
+            1120px
+        );
 
     margin:
-        72px auto 0;
+        0 auto;
 
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    box-sizing:
-        border-box;
-
-}
-
-
-.life-wheel-stage::before {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    width:
-        min(650px, 72vw);
-
-    aspect-ratio:
-        1 / 1;
-
-    border-radius:
-        50%;
+    padding:
+        20px;
 
     background:
         radial-gradient(
-            circle,
-            rgba(24, 184, 177, 0.11) 0%,
-            rgba(24, 184, 177, 0.04) 38%,
-            transparent 70%
+            circle at center,
+            rgba(25, 199, 195, 0.075) 0%,
+            rgba(9, 34, 55, 0.45) 34%,
+            rgba(7, 22, 41, 0.92) 68%,
+            rgba(5, 17, 31, 0.98) 100%
         );
 
-    filter:
-        blur(5px);
+    border:
+        1px solid
+        var(--page04-border);
 
-    pointer-events:
-        none;
+    border-radius:
+        32px;
+
+    box-shadow:
+        0 28px 80px
+        rgba(0, 0, 0, 0.26);
+
+    overflow:
+        hidden;
 
 }
 
 
 
 /* ==========================================================================
-   DYNAMIC KALA CHAKRA™ CONTAINER
-
-   page04.js owns the internal SVG/canvas/DOM structure.
+   LIFE WHEEL CONTAINER
 ========================================================================== */
 
-.kala-chakra-wheel {
+
+#life-wheel-container {
 
     position:
         relative;
 
-    z-index:
-        2;
-
     width:
-        min(760px, 90vw);
+        100%;
+
+    max-width:
+        1000px;
 
     aspect-ratio:
         1 / 1;
 
     margin:
-        auto;
+        0 auto;
 
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
+    background:
+        transparent;
 
 }
 
 
-.kala-chakra-wheel svg,
-.kala-chakra-wheel canvas {
+
+/* ==========================================================================
+   SVG
+========================================================================== */
+
+
+.life-wheel-svg {
 
     display:
         block;
@@ -679,6 +680,9 @@
     height:
         100%;
 
+    margin:
+        0 auto;
+
     overflow:
         visible;
 
@@ -687,191 +691,496 @@
 
 
 /* ==========================================================================
-   SVG SUPPORT
-
-   These classes are available for page04.js generated wheel elements.
+   SVG LABELS
 ========================================================================== */
 
-.kala-chakra-wheel .wheel-grid-circle {
 
-    fill:
+.life-wheel-label {
+
+    pointer-events:
         none;
 
-    stroke:
-        rgba(255, 255, 255, 0.12);
-
-    stroke-width:
-        1;
-
 }
 
 
-.kala-chakra-wheel .wheel-spoke {
-
-    stroke:
-        rgba(255, 255, 255, 0.18);
-
-    stroke-width:
-        1;
-
-}
-
-
-.kala-chakra-wheel .wheel-score-area {
-
-    fill:
-        rgba(24, 184, 177, 0.24);
-
-    stroke:
-        var(--page04-teal);
-
-    stroke-width:
-        2.5;
-
-}
-
-
-.kala-chakra-wheel .wheel-score-point {
-
-    fill:
-        var(--page04-teal);
-
-    stroke:
-        var(--page04-text);
-
-    stroke-width:
-        1.5;
-
-}
-
-
-.kala-chakra-wheel .wheel-label {
-
-    fill:
-        var(--page04-text);
-
-    font-size:
-        13px;
-
-    font-weight:
-        600;
-
-}
-
-
-.kala-chakra-wheel .wheel-score-label {
+.life-wheel-label-number {
 
     fill:
         var(--page04-gold);
 
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
     font-size:
-        12px;
+        15px;
 
     font-weight:
         700;
+
+    letter-spacing:
+        0.08em;
+
+}
+
+
+.life-wheel-label-name {
+
+    fill:
+        var(--page04-ivory);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        17px;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.025em;
+
+}
+
+
+.life-wheel-label-score {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size:
+        17px;
+
+    font-weight:
+        800;
 
 }
 
 
 
 /* ==========================================================================
-   ALIGNMENT SCORE
+   ALIGNMENT SUMMARY
 ========================================================================== */
 
-.alignment-score-section {
 
-    padding:
-        100px 24px 42px;
-
-}
-
-
-.alignment-score-card {
+.alignment-summary {
 
     width:
-        min(720px, calc(100% - 32px));
+        min(
+            100%,
+            1100px
+        );
 
     margin:
-        0 auto;
+        0 auto 70px;
 
     padding:
-        56px 40px;
-
-    box-sizing:
-        border-box;
+        42px;
 
     text-align:
         center;
 
+    background:
+        var(--page04-surface-soft);
+
     border:
-        1px solid var(--page04-border);
+        1px solid
+        var(--page04-border);
 
     border-radius:
-        var(--page04-radius);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(10, 41, 66, 0.92),
-            rgba(6, 27, 48, 0.92)
-        );
-
-    box-shadow:
-        var(--page04-shadow);
+        28px;
 
 }
 
 
-.result-label {
+.alignment-summary-title {
 
     margin:
-        0;
+        0 0 12px;
 
     color:
         var(--page04-gold);
 
+    text-align:
+        center;
+
     font-size:
-        14px;
+        0.82rem;
 
     font-weight:
         700;
 
     letter-spacing:
-        0.13em;
+        0.12em;
 
-    text-align:
-        center;
+    text-transform:
+        uppercase;
 
 }
 
 
-.result-label-tamil {
+.alignment-summary-tamil {
 
     margin:
-        16px 0 0;
+        0 auto 28px;
 
-    color:
-        var(--page04-text);
+    text-align:
+        center;
 
     font-size:
-        21px;
-
-    line-height:
-        1.5;
+        1.15rem;
 
     font-weight:
         600;
 
+}
+
+
+
+/* ==========================================================================
+   TOTAL SCORE
+========================================================================== */
+
+
+.alignment-score-display {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        baseline;
+
+    gap:
+        7px;
+
+    margin:
+        0 auto;
+
     text-align:
         center;
 
 }
 
 
-.alignment-score-display {
+#alignment-total-score {
+
+    color:
+        var(--page04-teal);
+
+    font-size:
+        clamp(
+            3.5rem,
+            8vw,
+            6.5rem
+        );
+
+    font-weight:
+        800;
+
+    line-height:
+        1;
+
+}
+
+
+.alignment-score-divider {
+
+    color:
+        var(--page04-muted);
+
+    font-size:
+        1.5rem;
+
+}
+
+
+#alignment-maximum-score {
+
+    color:
+        var(--page04-muted);
+
+    font-size:
+        1.5rem;
+
+    font-weight:
+        600;
+
+}
+
+
+#alignment-percentage {
+
+    display:
+        block;
 
     margin:
-        34px 0 0;
+        18px auto 0;
+
+    color:
+        var(--page04-gold);
+
+    text-align:
+        center;
+
+    font-size:
+        clamp(
+            1.6rem,
+            3vw,
+            2.5rem
+        );
+
+    font-weight:
+        800;
+
+}
+
+
+
+/* ==========================================================================
+   CURRENT LIFE LEVEL
+========================================================================== */
+
+
+.life-level-block {
+
+    margin:
+        38px auto 0;
+
+    padding-top:
+        30px;
+
+    text-align:
+        center;
+
+    border-top:
+        1px solid
+        var(--page04-border-soft);
+
+}
+
+
+.life-level-label {
+
+    margin:
+        0 0 12px;
+
+    color:
+        var(--page04-muted);
+
+    text-align:
+        center;
+
+    font-size:
+        0.82rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.1em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+#current-life-level {
+
+    color:
+        var(--page04-ivory);
+
+    text-align:
+        center;
+
+    font-size:
+        clamp(
+            1.4rem,
+            2.5vw,
+            2rem
+        );
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.05em;
+
+}
+
+
+
+/* ==========================================================================
+   INSIGHT CARDS
+========================================================================== */
+
+
+.alignment-insights {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap:
+        24px;
+
+    width:
+        min(
+            100%,
+            1100px
+        );
+
+    margin:
+        0 auto 76px;
+
+}
+
+
+.alignment-insight-card {
+
+    min-height:
+        280px;
+
+    padding:
+        38px 32px;
+
+    text-align:
+        center;
+
+    background:
+        var(--page04-surface-soft);
+
+    border:
+        1px solid
+        var(--page04-border);
+
+    border-radius:
+        26px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+}
+
+
+.alignment-insight-number {
+
+    margin:
+        0 0 18px;
+
+    color:
+        var(--page04-gold);
+
+    text-align:
+        center;
+
+    font-size:
+        0.78rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.14em;
+
+}
+
+
+.alignment-insight-title {
+
+    margin:
+        0;
+
+    color:
+        var(--page04-ivory);
+
+    text-align:
+        center;
+
+    font-size:
+        1rem;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.05em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.alignment-insight-tamil {
+
+    margin:
+        10px 0 24px;
+
+    text-align:
+        center;
+
+    font-size:
+        1.05rem;
+
+    font-weight:
+        600;
+
+}
+
+
+#strongest-pillar-name,
+#growth-pillar-name {
+
+    margin:
+        0 auto;
+
+    color:
+        var(--page04-ivory);
+
+    text-align:
+        center;
+
+    font-size:
+        clamp(
+            1.25rem,
+            2vw,
+            1.7rem
+        );
+
+    font-weight:
+        700;
+
+    line-height:
+        1.4;
+
+}
+
+
+.insight-score {
 
     display:
         flex;
@@ -883,129 +1192,72 @@
         center;
 
     gap:
-        10px;
+        4px;
+
+    margin:
+        18px auto 0;
+
+    text-align:
+        center;
 
 }
 
 
-.alignment-score {
+#strongest-pillar-score {
 
     color:
-        var(--page04-teal);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+        var(--page04-green);
 
     font-size:
-        clamp(72px, 9vw, 118px);
-
-    line-height:
-        1;
+        2.25rem;
 
     font-weight:
-        600;
+        800;
 
 }
 
 
-.alignment-score-maximum {
+#growth-pillar-score {
+
+    color:
+        var(--page04-red);
+
+    font-size:
+        2.25rem;
+
+    font-weight:
+        800;
+
+}
+
+
+.insight-score-max {
 
     color:
         var(--page04-muted);
 
     font-size:
-        24px;
-
-    font-weight:
-        600;
-
-}
-
-
-.alignment-percentage-display {
-
-    margin-top:
-        20px;
-
-}
-
-
-.alignment-percentage {
-
-    color:
-        var(--page04-text);
-
-    font-size:
-        24px;
-
-    font-weight:
-        700;
+        1rem;
 
 }
 
 
 
 /* ==========================================================================
-   LIFE LEVEL
+   12 PILLARS SECTION
 ========================================================================== */
 
-.life-level-section {
 
-    padding:
-        28px 24px 96px;
-
-}
-
-
-.life-level-card {
+.pillar-results-section {
 
     width:
-        min(720px, calc(100% - 32px));
+        100%;
 
     margin:
         0 auto;
 
     padding:
-        48px 42px;
-
-    box-sizing:
-        border-box;
-
-    text-align:
-        center;
-
-    border:
-        1px solid var(--page04-border-soft);
-
-    border-radius:
-        var(--page04-radius);
-
-    background:
-        rgba(8, 35, 58, 0.62);
-
-}
-
-
-.life-level {
-
-    margin:
-        28px auto 0;
-
-    color:
-        var(--page04-teal);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(30px, 4vw, 48px);
-
-    line-height:
-        1.3;
+        10px 0 70px;
 
     text-align:
         center;
@@ -1013,261 +1265,45 @@
 }
 
 
-.life-level-description {
-
-    margin:
-        22px auto 0;
-
-    max-width:
-        580px;
-
-    color:
-        var(--page04-text-soft);
-
-    font-size:
-        17px;
-
-    line-height:
-        1.7;
-
-    text-align:
-        center;
-
-}
-
-
-
-/* ==========================================================================
-   ALIGNMENT INSIGHTS
-========================================================================== */
-
-.alignment-insights-section {
-
-    max-width:
-        1240px;
-
-    padding:
-        96px 24px;
-
-    box-sizing:
-        border-box;
-
-}
-
-
-.alignment-insights-grid {
-
-    margin-top:
-        58px;
+#pillar-results-grid {
 
     display:
         grid;
 
     grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    gap:
-        28px;
-
-}
-
-
-.insight-card {
-
-    padding:
-        46px 38px;
-
-    text-align:
-        center;
-
-    border:
-        1px solid var(--page04-border);
-
-    border-radius:
-        var(--page04-radius);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(10, 41, 66, 0.82),
-            rgba(6, 27, 48, 0.88)
+        repeat(
+            3,
+            minmax(0, 1fr)
         );
-
-}
-
-
-.insight-number {
-
-    margin:
-        0;
-
-    color:
-        var(--page04-muted);
-
-    font-size:
-        13px;
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        0.14em;
-
-}
-
-
-.insight-label {
-
-    margin:
-        20px 0 0;
-
-    color:
-        var(--page04-gold);
-
-    font-size:
-        13px;
-
-    line-height:
-        1.5;
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        0.1em;
-
-}
-
-
-.insight-label-tamil {
-
-    margin:
-        13px 0 0;
-
-    color:
-        var(--page04-text-soft);
-
-    font-size:
-        18px;
-
-    line-height:
-        1.5;
-
-}
-
-
-.insight-pillar-name {
-
-    margin:
-        30px auto 0;
-
-    color:
-        var(--page04-text);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(27px, 3vw, 40px);
-
-    line-height:
-        1.3;
-
-}
-
-
-.insight-score {
-
-    margin:
-        20px 0 0;
-
-    color:
-        var(--page04-teal);
-
-    font-size:
-        24px;
-
-    font-weight:
-        700;
-
-}
-
-
-.insight-copy {
-
-    margin:
-        24px auto 0;
-
-    max-width:
-        440px;
-
-    color:
-        var(--page04-text-soft);
-
-    font-size:
-        16px;
-
-    line-height:
-        1.7;
-
-}
-
-
-
-/* ==========================================================================
-   12 PILLAR BREAKDOWN
-========================================================================== */
-
-.pillar-breakdown-section {
-
-    max-width:
-        1440px;
-
-    padding:
-        96px 24px;
-
-    box-sizing:
-        border-box;
-
-}
-
-
-.pillar-score-grid {
-
-    margin-top:
-        58px;
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
 
     gap:
         20px;
 
+    width:
+        100%;
+
+    margin:
+        40px auto 0;
+
 }
 
 
 
 /* ==========================================================================
-   DYNAMIC PILLAR CARDS
-
-   page04.js may generate any of these classes.
+   PILLAR RESULT CARD
 ========================================================================== */
 
-.pillar-score-card {
+
+.pillar-result-card {
+
+    position:
+        relative;
 
     min-height:
-        190px;
+        235px;
 
     padding:
-        30px 26px;
-
-    box-sizing:
-        border-box;
+        30px 24px;
 
     display:
         flex;
@@ -1284,47 +1320,75 @@
     text-align:
         center;
 
+    background:
+        var(--page04-surface-soft);
+
     border:
-        1px solid var(--page04-border-soft);
+        1px solid
+        var(--page04-border-soft);
 
     border-radius:
-        var(--page04-radius-small);
-
-    background:
-        rgba(8, 35, 58, 0.62);
+        22px;
 
     transition:
         transform 180ms ease,
         border-color 180ms ease,
-        background 180ms ease;
+        box-shadow 180ms ease;
 
 }
 
 
-.pillar-score-card:hover {
+.pillar-result-card:hover {
 
     transform:
         translateY(-3px);
 
-    border-color:
-        var(--page04-border);
+}
 
-    background:
-        rgba(10, 41, 66, 0.82);
+
+.pillar-result-priority {
+
+    border-color:
+        rgba(230, 80, 80, 0.48);
 
 }
 
 
-.pillar-score-number {
+.pillar-result-developing {
+
+    border-color:
+        rgba(242, 154, 46, 0.48);
+
+}
+
+
+.pillar-result-strong {
+
+    border-color:
+        rgba(47, 179, 120, 0.48);
+
+}
+
+
+
+/* ==========================================================================
+   PILLAR RESULT TYPOGRAPHY
+========================================================================== */
+
+
+.pillar-result-number {
 
     margin:
-        0;
+        0 0 13px;
 
     color:
-        var(--page04-muted);
+        var(--page04-gold);
+
+    text-align:
+        center;
 
     font-size:
-        12px;
+        0.78rem;
 
     font-weight:
         700;
@@ -1335,13 +1399,36 @@
 }
 
 
-.pillar-score-name {
-
-    margin:
-        14px 0 0;
+.pillar-result-tamil {
 
     color:
-        var(--page04-text);
+        var(--page04-ivory);
+
+    text-align:
+        center;
+
+    font-size:
+        1.15rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.45;
+
+}
+
+
+.pillar-result-english {
+
+    margin:
+        8px 0 18px;
+
+    color:
+        var(--page04-muted);
+
+    text-align:
+        center;
 
     font-family:
         Georgia,
@@ -1349,55 +1436,92 @@
         serif;
 
     font-size:
-        18px;
+        0.82rem;
 
     line-height:
-        1.45;
-
-    font-weight:
-        600;
+        1.4;
 
 }
 
 
-.pillar-score-value {
+.pillar-result-score {
 
-    margin:
-        22px 0 0;
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        baseline;
+
+    gap:
+        4px;
+
+    text-align:
+        center;
+
+}
+
+
+.pillar-result-score-value {
 
     font-size:
-        30px;
-
-    line-height:
-        1;
+        2.15rem;
 
     font-weight:
-        700;
+        800;
+
+}
+
+
+.pillar-result-score-max {
+
+    color:
+        var(--page04-muted);
+
+    font-size:
+        0.95rem;
+
+}
+
+
+.pillar-result-status {
+
+    margin:
+        12px 0 0;
+
+    text-align:
+        center;
+
+    font-size:
+        0.72rem;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.11em;
 
 }
 
 
 
 /* ==========================================================================
-   SCORE COLOUR SYSTEM
+   RESULT COLOUR SYSTEM
 
-   0–3  = Red
-   4–7  = Orange
-   8–10 = Green
+   0–3  RED
+   4–7  ORANGE
+   8–10 GREEN
 
-   Available for page04.js generated cards.
 ========================================================================== */
 
-.pillar-score-card.score-low {
 
-    border-color:
-        rgba(230, 79, 79, 0.36);
+.pillar-result-priority
+.pillar-result-score-value,
 
-}
-
-
-.pillar-score-card.score-low
-.pillar-score-value {
+.pillar-result-priority
+.pillar-result-status {
 
     color:
         var(--page04-red);
@@ -1405,16 +1529,11 @@
 }
 
 
-.pillar-score-card.score-medium {
+.pillar-result-developing
+.pillar-result-score-value,
 
-    border-color:
-        rgba(238, 146, 45, 0.36);
-
-}
-
-
-.pillar-score-card.score-medium
-.pillar-score-value {
+.pillar-result-developing
+.pillar-result-status {
 
     color:
         var(--page04-orange);
@@ -1422,16 +1541,11 @@
 }
 
 
-.pillar-score-card.score-high {
+.pillar-result-strong
+.pillar-result-score-value,
 
-    border-color:
-        rgba(42, 173, 116, 0.38);
-
-}
-
-
-.pillar-score-card.score-high
-.pillar-score-value {
+.pillar-result-strong
+.pillar-result-status {
 
     color:
         var(--page04-green);
@@ -1441,128 +1555,23 @@
 
 
 /* ==========================================================================
-   COMPLETE PICTURE / INTERPRETATION
+   COMPLETE PICTURE / CLOSING
 ========================================================================== */
 
-.alignment-meaning-section {
 
-    padding:
-        100px 24px;
+.page04-closing {
 
-    border-top:
-        1px solid var(--page04-border-soft);
-
-    border-bottom:
-        1px solid var(--page04-border-soft);
-
-    background:
-        rgba(3, 18, 34, 0.42);
-
-}
-
-
-.alignment-meaning-inner {
-
-    max-width:
-        940px;
-
-    text-align:
-        center;
-
-}
-
-
-.alignment-meaning-tamil {
-
-    margin:
-        28px auto 0;
-
-    color:
-        var(--page04-text);
-
-    font-size:
-        clamp(23px, 2vw, 30px);
-
-    line-height:
-        1.7;
-
-    font-weight:
-        600;
-
-    text-align:
-        center;
-
-}
-
-
-.alignment-meaning-english {
-
-    margin:
-        32px auto 0;
-
-    max-width:
-        780px;
-
-    color:
-        var(--page04-text-soft);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        17px;
-
-    line-height:
-        1.75;
-
-    text-align:
-        center;
-
-}
-
-
-
-/* ==========================================================================
-   PAGE 05 TRANSITION
-========================================================================== */
-
-.page04-transition {
-
-    padding:
-        100px 24px 120px;
-
-}
-
-
-.page04-transition-inner {
-
-    max-width:
-        880px;
-
-    text-align:
-        center;
-
-}
-
-
-.transition-tamil {
+    width:
+        min(
+            100%,
+            980px
+        );
 
     margin:
         0 auto;
 
-    color:
-        var(--page04-text);
-
-    font-size:
-        clamp(23px, 2.2vw, 32px);
-
-    line-height:
-        1.65;
-
-    font-weight:
-        600;
+    padding:
+        42px 24px 54px;
 
     text-align:
         center;
@@ -1570,24 +1579,87 @@
 }
 
 
-.transition-english {
+.page04-closing .closing-tamil {
 
     margin:
-        28px auto 0;
+        0 auto;
 
-    color:
-        var(--page04-text-soft);
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+    text-align:
+        center;
 
     font-size:
-        17px;
+        clamp(
+            1.15rem,
+            1.8vw,
+            1.55rem
+        );
+
+    font-weight:
+        600;
 
     line-height:
         1.7;
+
+}
+
+
+.page04-closing .closing-english {
+
+    max-width:
+        780px;
+
+    margin:
+        18px auto 0;
+
+    text-align:
+        center;
+
+    color:
+        var(--page04-muted);
+
+    font-size:
+        0.98rem;
+
+    line-height:
+        1.65;
+
+}
+
+
+
+/* ==========================================================================
+   NAVIGATION
+========================================================================== */
+
+
+.page04-navigation {
+
+    width:
+        min(
+            100%,
+            920px
+        );
+
+    margin:
+        0 auto;
+
+    padding:
+        8px 24px 80px;
+
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    gap:
+        16px;
 
     text-align:
         center;
@@ -1597,28 +1669,28 @@
 
 
 /* ==========================================================================
-   PRIMARY NAVIGATION BUTTON
+   PRIMARY CTA — TEAL
+
+   Deliberately specific selectors are used so shared/global button
+   styling cannot override the Page04 CTA colour.
+
 ========================================================================== */
 
-.primary-navigation-button {
 
-    width:
-        min(620px, 100%);
+.page04-navigation
+#personal-diagnosis-button,
 
-    min-height:
-        76px;
+.page04
+#personal-diagnosis-button {
 
-    margin:
-        48px auto 0;
+    appearance:
+        none;
 
-    padding:
-        15px 28px;
+    -webkit-appearance:
+        none;
 
     display:
-        flex;
-
-    flex-direction:
-        column;
+        inline-flex;
 
     align-items:
         center;
@@ -1626,117 +1698,101 @@
     justify-content:
         center;
 
-    gap:
-        5px;
+    min-height:
+        56px;
 
-    border:
-        1px solid rgba(255, 255, 255, 0.12);
+    padding:
+        15px 30px;
 
-    border-radius:
-        15px;
+    margin:
+        0;
 
     background:
-        linear-gradient(
-            135deg,
-            var(--page04-teal),
-            var(--page04-teal-dark)
-        );
+        var(--page04-teal) !important;
+
+    background-color:
+        var(--page04-teal) !important;
 
     color:
-        #ffffff;
+        #031b24 !important;
+
+    border:
+        1px solid
+        var(--page04-teal) !important;
+
+    border-radius:
+        999px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(25, 199, 195, 0.18);
 
     cursor:
         pointer;
 
-    box-shadow:
-        0 16px 36px rgba(24, 184, 177, 0.18);
+    text-align:
+        center;
+
+    text-decoration:
+        none;
+
+    font-family:
+        inherit;
+
+    font-size:
+        0.95rem;
+
+    font-weight:
+        800;
+
+    line-height:
+        1.35;
 
     transition:
         transform 180ms ease,
         box-shadow 180ms ease,
-        filter 180ms ease;
+        background-color 180ms ease;
 
 }
 
 
-.primary-navigation-button:hover {
+.page04-navigation
+#personal-diagnosis-button:hover,
+
+.page04
+#personal-diagnosis-button:hover {
+
+    background:
+        #22d8d3 !important;
+
+    background-color:
+        #22d8d3 !important;
+
+    border-color:
+        #22d8d3 !important;
 
     transform:
         translateY(-2px);
 
     box-shadow:
-        0 20px 44px rgba(24, 184, 177, 0.26);
-
-    filter:
-        brightness(1.05);
+        0 14px 36px
+        rgba(25, 199, 195, 0.28);
 
 }
 
 
-.primary-navigation-button:active {
+.page04-navigation
+#personal-diagnosis-button:focus-visible,
 
-    transform:
-        translateY(0);
-
-}
-
-
-.primary-navigation-button:focus-visible {
+.page04
+#personal-diagnosis-button:focus-visible {
 
     outline:
-        3px solid rgba(24, 184, 177, 0.34);
+        3px solid
+        rgba(25, 199, 195, 0.30);
 
     outline-offset:
         4px;
-
-}
-
-
-.button-tamil {
-
-    display:
-        block;
-
-    color:
-        #ffffff;
-
-    font-size:
-        19px;
-
-    line-height:
-        1.4;
-
-    font-weight:
-        700;
-
-    text-align:
-        center;
-
-}
-
-
-.button-english {
-
-    display:
-        block;
-
-    color:
-        rgba(255, 255, 255, 0.92);
-
-    font-size:
-        12px;
-
-    line-height:
-        1.4;
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        0.07em;
-
-    text-align:
-        center;
 
 }
 
@@ -1746,22 +1802,18 @@
    SECONDARY NAVIGATION
 ========================================================================== */
 
-.secondary-navigation-button {
 
-    min-height:
-        54px;
+.page04-navigation
+.secondary-button,
 
-    margin:
-        18px auto 0;
+.page04-navigation
+.back-button {
 
-    padding:
-        10px 22px;
+    appearance:
+        none;
 
     display:
-        flex;
-
-    flex-direction:
-        column;
+        inline-flex;
 
     align-items:
         center;
@@ -1769,78 +1821,86 @@
     justify-content:
         center;
 
-    gap:
-        4px;
+    min-height:
+        54px;
 
-    border:
-        1px solid var(--page04-border-soft);
+    padding:
+        14px 26px;
 
-    border-radius:
-        12px;
+    color:
+        var(--page04-ivory);
 
     background:
         transparent;
 
-    color:
-        var(--page04-text-soft);
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.20);
+
+    border-radius:
+        999px;
 
     cursor:
         pointer;
 
+    text-align:
+        center;
+
+    text-decoration:
+        none;
+
     font-size:
-        15px;
+        0.9rem;
+
+    font-weight:
+        600;
 
     transition:
         border-color 180ms ease,
-        color 180ms ease,
-        background 180ms ease;
+        background-color 180ms ease;
 
 }
 
 
-.secondary-navigation-button span {
+.page04-navigation
+.secondary-button:hover,
 
-    color:
-        var(--page04-muted);
-
-    font-size:
-        10px;
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        0.08em;
-
-}
-
-
-.secondary-navigation-button:hover {
-
-    border-color:
-        var(--page04-border);
-
-    color:
-        var(--page04-text);
+.page04-navigation
+.back-button:hover {
 
     background:
-        var(--page04-teal-soft);
+        rgba(255, 255, 255, 0.05);
+
+    border-color:
+        rgba(255, 255, 255, 0.38);
 
 }
 
 
 
 /* ==========================================================================
-   GLOBAL TEXT ALIGNMENT SAFETY
+   GLOBAL CENTRE-ALIGNMENT SAFETY
 
-   Page 04 content only.
-   Does NOT touch global header/footer.
+   Keeps Page04 page copy centred without touching the global
+   header/footer components.
+
 ========================================================================== */
 
-.page04 h1,
-.page04 h2,
-.page04 h3,
-.page04 p {
+
+.page04-main section,
+.page04-main article,
+.page04-main header {
+
+    text-align:
+        center;
+
+}
+
+
+.page04-main h1,
+.page04-main h2,
+.page04-main h3,
+.page04-main p {
 
     text-align:
         center;
@@ -1853,44 +1913,57 @@
    TABLET
 ========================================================================== */
 
-@media
-(max-width: 1100px) {
+
+@media (
+    max-width: 1100px
+) {
 
 
-    .page04-hero-inner,
-    .alignment-introduction-inner,
-    .life-wheel-section-inner,
-    .alignment-insights-section,
-    .pillar-breakdown-section,
-    .alignment-meaning-inner,
-    .page04-transition-inner {
+    .page04-main {
 
         width:
-            min(100% - 40px, 1100px);
+            min(
+                calc(100% - 32px),
+                var(--page04-max-width)
+            );
 
     }
 
 
-    .life-wheel-stage {
+    .life-wheel-shell {
 
-        min-height:
-            680px;
+        width:
+            100%;
+
+        padding:
+            10px;
 
     }
 
 
-    .alignment-insights-grid {
+    #pillar-results-grid {
 
         grid-template-columns:
-            1fr;
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
 
     }
 
 
-    .pillar-score-grid {
+    .life-wheel-label-name {
 
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
+        font-size:
+            15px;
+
+    }
+
+
+    .life-wheel-label-score {
+
+        font-size:
+            15px;
 
     }
 
@@ -1903,22 +1976,27 @@
    MOBILE
 ========================================================================== */
 
-@media
-(max-width: 720px) {
+
+@media (
+    max-width: 760px
+) {
 
 
-    .journey-marker {
+    .page04-main {
 
-        padding:
-            14px 18px 0;
+        width:
+            calc(100% - 20px);
+
+        padding-top:
+            26px;
 
     }
 
 
-    .journey-marker p {
+    .page04 .journey-indicator {
 
-        font-size:
-            11px;
+        margin-bottom:
+            34px;
 
     }
 
@@ -1926,15 +2004,19 @@
     .page04-hero {
 
         padding:
-            60px 18px 56px;
+            16px 10px 52px;
 
     }
 
 
-    .page04-title {
+    .page04-hero h1 {
 
         font-size:
-            clamp(38px, 12vw, 58px);
+            clamp(
+                2rem,
+                10vw,
+                3.2rem
+            );
 
         letter-spacing:
             0.025em;
@@ -1942,21 +2024,10 @@
     }
 
 
-    .page04-title-tamil {
-
-        margin-top:
-            38px;
-
-        font-size:
-            24px;
-
-    }
-
-
-    .alignment-introduction {
+    .page04-intro {
 
         padding:
-            28px 18px 64px;
+            0 10px 48px;
 
     }
 
@@ -1964,46 +2035,15 @@
     .life-wheel-section {
 
         padding:
-            68px 14px;
+            28px 0 52px;
 
     }
 
 
-    .life-wheel-stage {
-
-        min-height:
-            auto;
-
-        margin-top:
-            52px;
-
-    }
-
-
-    .kala-chakra-wheel {
-
-        width:
-            94vw;
-
-    }
-
-
-    .alignment-score-section {
+    .life-wheel-shell {
 
         padding:
-            72px 14px 28px;
-
-    }
-
-
-    .alignment-score-card,
-    .life-level-card {
-
-        width:
-            100%;
-
-        padding:
-            40px 22px;
+            0;
 
         border-radius:
             20px;
@@ -2011,41 +2051,24 @@
     }
 
 
-    .life-level-section {
-
-        padding:
-            20px 14px 70px;
-
-    }
+    /*
+     * Labels are part of the SVG viewBox,
+     * so the complete 12-spoke wheel scales together.
+     */
 
 
-    .alignment-insights-section,
-    .pillar-breakdown-section {
+    #life-wheel-container {
 
-        width:
+        max-width:
             100%;
 
-        padding:
-            72px 14px;
-
     }
 
 
-    .alignment-insights-grid {
-
-        margin-top:
-            42px;
-
-        gap:
-            18px;
-
-    }
-
-
-    .insight-card {
+    .alignment-summary {
 
         padding:
-            38px 22px;
+            32px 20px;
 
         border-radius:
             20px;
@@ -2053,13 +2076,32 @@
     }
 
 
-    .pillar-score-grid {
+    .alignment-insights {
 
         grid-template-columns:
             1fr;
 
-        margin-top:
-            42px;
+        gap:
+            16px;
+
+    }
+
+
+    .alignment-insight-card {
+
+        min-height:
+            240px;
+
+        padding:
+            30px 20px;
+
+    }
+
+
+    #pillar-results-grid {
+
+        grid-template-columns:
+            1fr;
 
         gap:
             14px;
@@ -2067,37 +2109,39 @@
     }
 
 
-    .pillar-score-card {
+    .pillar-result-card {
 
         min-height:
-            160px;
+            210px;
 
     }
 
 
-    .alignment-meaning-section {
+    .page04-navigation {
+
+        flex-direction:
+            column;
 
         padding:
-            76px 18px;
+            8px 10px 60px;
 
     }
 
 
-    .page04-transition {
+    .page04-navigation
+    #personal-diagnosis-button,
 
-        padding:
-            76px 18px 90px;
+    .page04-navigation
+    .secondary-button,
 
-    }
+    .page04-navigation
+    .back-button {
 
+        width:
+            100%;
 
-    .primary-navigation-button {
-
-        min-height:
-            72px;
-
-        margin-top:
-            38px;
+        max-width:
+            520px;
 
     }
 
@@ -2110,68 +2154,48 @@
    SMALL MOBILE
 ========================================================================== */
 
-@media
-(max-width: 420px) {
+
+@media (
+    max-width: 480px
+) {
 
 
-    .page04-hero-inner,
-    .alignment-introduction-inner,
-    .life-wheel-section-inner,
-    .alignment-insights-section,
-    .pillar-breakdown-section,
-    .alignment-meaning-inner,
-    .page04-transition-inner {
+    .page04-main {
 
         width:
-            100%;
+            calc(100% - 14px);
 
     }
 
 
-    .page04-title {
+    .page04-hero .hero-tamil {
 
         font-size:
-            36px;
+            1.2rem;
 
     }
 
 
-    .page04-title-tamil {
+    .page04-section-header {
 
-        font-size:
-            22px;
-
-    }
-
-
-    .section-title {
-
-        font-size:
-            31px;
+        padding:
+            0 8px;
 
     }
 
 
-    .alignment-score {
+    .alignment-summary {
 
-        font-size:
-            70px;
-
-    }
-
-
-    .alignment-score-maximum {
-
-        font-size:
-            19px;
+        padding:
+            28px 14px;
 
     }
 
 
-    .button-tamil {
+    .pillar-result-card {
 
-        font-size:
-            17px;
+        padding:
+            26px 16px;
 
     }
 
@@ -2181,16 +2205,30 @@
 
 
 /* ==========================================================================
-   REDUCED MOTION
+   ACCESSIBILITY
 ========================================================================== */
 
-@media
-(prefers-reduced-motion: reduce) {
+
+@media (
+    prefers-reduced-motion: reduce
+) {
 
 
-    .primary-navigation-button,
-    .secondary-navigation-button,
-    .pillar-score-card {
+    html {
+
+        scroll-behavior:
+            auto;
+
+    }
+
+
+    .pillar-result-card,
+    .page04-navigation
+    #personal-diagnosis-button,
+    .page04-navigation
+    .secondary-button,
+    .page04-navigation
+    .back-button {
 
         transition:
             none;
@@ -2199,10 +2237,3 @@
 
 
 }
-
-
-
-/* ==========================================================================
-   END OF FILE
-========================================================================== */
-
