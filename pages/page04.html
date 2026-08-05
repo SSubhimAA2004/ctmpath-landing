@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +27,10 @@
   <link rel="stylesheet" href="../css/layout.css">
   <link rel="stylesheet" href="../css/responsive.css">
   <link rel="stylesheet" href="../css/animations.css">
+
+  <!-- GLOBAL COMPONENT STYLES -->
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/footer.css">
 
   <!-- PAGE 04 ONLY -->
   <link rel="stylesheet" href="../css/page04.css">
@@ -1040,75 +1045,36 @@
 
 
   <!-- =========================================================
-       GLOBAL COMPONENT LOADER
-
-       IMPORTANT:
-       Page04 is inside /pages/
-       Components therefore resolve through ../components/
+       PROVEN PAGE 03 GLOBAL SHELL CONTRACT
+       Shared components remain untouched.
   ========================================================== -->
+  <script src="../js/api.js"></script>
+  <script src="../js/global.js"></script>
+  <script src="../js/component-loader.js"></script>
+  <script src="../js/page04.js"></script>
+
   <script>
-    async function loadGlobalComponent(targetId, componentPath) {
-      const target = document.getElementById(targetId);
+    document.addEventListener(
+      "DOMContentLoaded",
+      async function () {
 
-      if (!target) {
-        return;
-      }
-
-      try {
-        const response = await fetch(componentPath);
-
-        if (!response.ok) {
-          throw new Error(
-            `Unable to load ${componentPath}: ${response.status}`
-          );
+        if (
+          window.CTM_COMPONENTS &&
+          typeof window.CTM_COMPONENTS.load === "function"
+        ) {
+          await window.CTM_COMPONENTS.load();
         }
 
-        target.innerHTML = await response.text();
+        if (
+          window.CTM_PAGE04 &&
+          typeof window.CTM_PAGE04.init === "function"
+        ) {
+          window.CTM_PAGE04.init();
+        }
 
-      } catch (error) {
-        console.error(
-          `[CTM PATH] Component loading error:`,
-          error
-        );
       }
-    }
-
-
-    document.addEventListener("DOMContentLoaded", async () => {
-
-      await Promise.all([
-        loadGlobalComponent(
-          "global-header",
-          "../components/header.html"
-        ),
-
-        loadGlobalComponent(
-          "global-footer",
-          "../components/footer.html"
-        )
-      ]);
-
-      /*
-       * Allows page04.js or other scripts to know that
-       * the shared shell has finished loading.
-       */
-      document.dispatchEvent(
-        new CustomEvent("ctm:components-ready")
-      );
-
-    });
+    );
   </script>
-
-
-
-  <!-- =========================================================
-       PAGE 04 ENGINE
-       Keep LAST so the DOM exists before wheel rendering.
-  ========================================================== -->
-  <script
-    src="../js/page04.js"
-    defer
-  ></script>
 
 
 </body>
