@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -199,7 +200,7 @@
         <div class="page04-wheel-stage">
 
           <div
-            id="lifeWheel"
+            id="life-wheel-container"
             class="page04-life-wheel"
             role="img"
             aria-label="KALA CHAKRA Life Wheel generated from your twelve life pillar scores"
@@ -274,14 +275,14 @@
             <div class="page04-total-score">
 
               <span
-                id="totalScore"
+                id="alignment-total-score"
                 class="page04-metric-value"
               >
                 —
               </span>
 
               <span class="page04-metric-unit">
-                / 120
+                / <span id="alignment-maximum-score">120</span>
               </span>
 
             </div>
@@ -298,7 +299,7 @@
             </p>
 
             <div
-              id="alignmentPercent"
+              id="alignment-percentage"
               class="page04-metric-value page04-alignment-value"
             >
               —%
@@ -323,7 +324,7 @@
             </p>
 
             <div
-              id="lifeLevel"
+              id="current-life-level"
               class="page04-life-level"
             >
               —
@@ -388,7 +389,7 @@
             </p>
 
             <h3
-              id="strongestPillar"
+              id="strongest-pillar-name"
               class="page04-insight-title"
             >
               —
@@ -396,7 +397,7 @@
 
             <div class="page04-insight-score">
 
-              <span id="strongestScore">
+              <span id="strongest-pillar-score">
                 —
               </span>
 
@@ -432,7 +433,7 @@
             </p>
 
             <h3
-              id="growthPillar"
+              id="growth-pillar-name"
               class="page04-insight-title"
             >
               —
@@ -440,7 +441,7 @@
 
             <div class="page04-insight-score">
 
-              <span id="growthScore">
+              <span id="growth-pillar-score">
                 —
               </span>
 
@@ -1003,6 +1004,7 @@
 
           <a
             href="./page05.html"
+            id="personal-diagnosis-button"
             class="page04-primary-cta"
           >
             <span lang="ta">
@@ -1070,6 +1072,111 @@
           typeof window.CTM_PAGE04.init === "function"
         ) {
           window.CTM_PAGE04.init();
+
+          /*
+           * ---------------------------------------------------------
+           * PAGE 04 STATIC PILLAR CARD BRIDGE
+           * ---------------------------------------------------------
+           * page04.js already calculates the complete alignment result.
+           * The current visual design uses 12 prebuilt pillar cards,
+           * so populate those existing cards without rebuilding them.
+           */
+
+          if (
+            typeof window.CTM_PAGE04.getAlignmentResult === "function"
+          ) {
+
+            const result =
+              window.CTM_PAGE04.getAlignmentResult();
+
+            if (
+              result &&
+              Array.isArray(result.pillars)
+            ) {
+
+              result.pillars.forEach(
+                function (pillar, index) {
+
+                  const number =
+                    index + 1;
+
+                  const scoreElement =
+                    document.getElementById(
+                      "pillar-score-" + number
+                    );
+
+                  const statusElement =
+                    document.getElementById(
+                      "pillar-status-" + number
+                    );
+
+                  const cardElement =
+                    document.getElementById(
+                      "pillar-card-" + number
+                    );
+
+                  const score =
+                    Number(pillar.score);
+
+                  let status =
+                    "PRIORITY";
+
+                  let stateClass =
+                    "is-priority";
+
+                  if (score >= 8) {
+
+                    status =
+                      "STRONG";
+
+                    stateClass =
+                      "is-strong";
+
+                  } else if (score >= 4) {
+
+                    status =
+                      "DEVELOPING";
+
+                    stateClass =
+                      "is-developing";
+
+                  }
+
+                  if (scoreElement) {
+
+                    scoreElement.textContent =
+                      score;
+
+                  }
+
+                  if (statusElement) {
+
+                    statusElement.textContent =
+                      status;
+
+                  }
+
+                  if (cardElement) {
+
+                    cardElement.classList.remove(
+                      "is-priority",
+                      "is-developing",
+                      "is-strong"
+                    );
+
+                    cardElement.classList.add(
+                      stateClass
+                    );
+
+                  }
+
+                }
+              );
+
+            }
+
+          }
+
         }
 
       }
