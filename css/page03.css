@@ -9,7 +9,7 @@
    KALA CHAKRA™ LIFE ASSESSMENT™
 
    VERSION:
-   10.0
+   10.1
 
 ========================================================================== */
 
@@ -542,6 +542,8 @@
 
 }
 
+
+
 /* ==========================================================================
    KALA CHAKRA™ INTRODUCTION
 ========================================================================== */
@@ -654,6 +656,54 @@
     color:
 
         #B9C6D8 !important;
+
+
+}
+
+
+
+/* ==========================================================================
+   INSTRUCTION ALIGNMENT
+========================================================================== */
+
+
+/*
+   Keep the complete instruction / scoring guidance block centred.
+*/
+
+
+.page03-scoring,
+.page03-scoring h2,
+.page03-scoring p,
+.assessment-intro,
+.assessment-intro-inner,
+.assessment-eyebrow,
+.assessment-intro-ta,
+.assessment-intro-en,
+.assessment-instruction-ta,
+.assessment-instruction-en {
+
+
+    text-align:
+
+        center;
+
+
+}
+
+
+.assessment-intro,
+.assessment-intro-inner {
+
+
+    margin-left:
+
+        auto;
+
+
+    margin-right:
+
+        auto;
 
 
 }
@@ -1090,6 +1140,8 @@
 
 }
 
+
+
 /* ==========================================================================
    SCORE SELECTOR
 ========================================================================== */
@@ -1246,27 +1298,127 @@
 
 
 
+/* ==========================================================================
+   SELECTED SCORE — COMMON STATE
+========================================================================== */
+
+
 .score-options button.selected {
-
-
-    background:
-
-        #23D4C8;
 
 
     color:
 
-        #081426;
+        #FFFFFF;
+
+
+    font-weight:
+
+        900;
+
+
+    transform:
+
+        translateY(-2px) scale(1.08);
+
+
+}
+
+
+
+/* ==========================================================================
+   SELECTED SCORE — 0 TO 3 — RED
+========================================================================== */
+
+
+.score-options button.selected.score-low {
+
+
+    background:
+
+        #D64545;
 
 
     border-color:
 
-        #23D4C8;
+        #D64545;
+
+
+    color:
+
+        #FFFFFF;
 
 
     box-shadow:
 
-        0 0 25px rgba(35,212,200,.35);
+        0 0 25px rgba(214,69,69,.40);
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   SELECTED SCORE — 4 TO 7 — ORANGE
+========================================================================== */
+
+
+.score-options button.selected.score-mid {
+
+
+    background:
+
+        #E58A2B;
+
+
+    border-color:
+
+        #E58A2B;
+
+
+    color:
+
+        #FFFFFF;
+
+
+    box-shadow:
+
+        0 0 25px rgba(229,138,43,.40);
+
+
+}
+
+
+
+
+
+/* ==========================================================================
+   SELECTED SCORE — 8 TO 10 — GREEN
+========================================================================== */
+
+
+.score-options button.selected.score-high {
+
+
+    background:
+
+        #2E9D63;
+
+
+    border-color:
+
+        #2E9D63;
+
+
+    color:
+
+        #FFFFFF;
+
+
+    box-shadow:
+
+        0 0 25px rgba(46,157,99,.40);
 
 
 }
@@ -1531,9 +1683,9 @@
 
             135deg,
 
-            #D8B45A,
+            #23D4C8,
 
-            #F0D78A
+            #18AFA6
 
         );
 
@@ -1603,7 +1755,7 @@
 
     box-shadow:
 
-        0 30px 70px rgba(216,180,90,.35);
+        0 30px 70px rgba(35,212,200,.35);
 
 
 }
