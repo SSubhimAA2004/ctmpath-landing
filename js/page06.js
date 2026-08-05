@@ -17,13 +17,35 @@
    ✓ Extract Primary Focus
    ✓ Personalise Page 06 Primary Focus Section
    ✓ Preserve 180-Day Prescription State
-   ✓ Generate Backend 180-Day Prescription
+   ✓ Generate Backend 180-Day Transformation Prescription™
+   ✓ Finalize Complete Guided Journey Through Backend Orchestrator
    ✓ Generate Complete Diagnosis + Prescription Report
    ✓ Generate PDF
    ✓ Email PDF to Registered Email Address
    ✓ Prevent Duplicate / Double-Click Delivery
-   ✓ Preserve Specific Backend Errors for QA
-   ✓ Navigate to Page 07 only after successful delivery
+   ✓ Navigate to Page 07 only after confirmed delivery
+
+   FINAL DELIVERY CONTRACT:
+
+   Page 06
+      ↓
+   generateRoadmap({ peopleId })
+      ↓
+   Backend retrieves persisted Page 05 diagnosis
+      ↓
+   Backend generates + persists 180-Day Prescription™
+      ↓
+   finalizeJourney({ peopleId })
+      ↓
+   ReportEngine
+      ↓
+   DocumentService
+      ↓
+   EmailService
+      ↓
+   Confirmed Email Delivery
+      ↓
+   Page 07
 
    IMPORTANT:
 
@@ -31,6 +53,9 @@
    ✗ Does NOT recalculate Page 03 Kala Chakra™ scores
    ✗ Does NOT rebuild Page 04 Life Wheel
    ✗ Does NOT rebuild Page 05 diagnosis
+   ✗ Does NOT generate report directly from frontend
+   ✗ Does NOT generate document directly from frontend
+   ✗ Does NOT send email directly from frontend
    ✗ Does NOT modify Global Header
    ✗ Does NOT modify Global Footer
 
@@ -67,12 +92,17 @@
          *
          * Prevents accidental duplicate:
          *
+         * roadmap generation
+         * +
+         * report generation
+         * +
          * PDF generation
          * +
          * email delivery
          *
          * during the same journey session.
          */
+
         deliveryStorageKey:
             "CTM_PAGE06_REPORT_DELIVERY"
 
@@ -144,6 +174,7 @@
             return;
         }
 
+
         console.log(
             "CTM PATH™ MILLIONAIRES™ Page06 Loaded"
         );
@@ -157,6 +188,7 @@
 
         const diagnosis =
             loadDiagnosisResult();
+
 
         page06State.diagnosis =
             diagnosis;
@@ -172,6 +204,7 @@
             extractPrimaryFocus(
                 diagnosis
             );
+
 
         page06State.primaryFocus =
             primaryFocus;
@@ -199,6 +232,7 @@
                 diagnosis,
                 primaryFocus
             );
+
 
         page06State.prescription =
             prescription;
@@ -232,6 +266,7 @@
 
         const existingDelivery =
             loadDeliveryState();
+
 
         if (
             existingDelivery &&
@@ -298,6 +333,7 @@
                 PAGE06_CONFIG.diagnosisStorageKey
             );
 
+
         if (sessionResult) {
             return sessionResult;
         }
@@ -313,6 +349,7 @@
                 localStorage,
                 PAGE06_CONFIG.diagnosisStorageKey
             );
+
 
         if (localResult) {
             return localResult;
@@ -354,6 +391,7 @@
                     key
                 );
 
+
             if (fromSession) {
                 return fromSession;
             }
@@ -365,6 +403,7 @@
                     key
                 );
 
+
             if (fromLocal) {
                 return fromLocal;
             }
@@ -375,6 +414,7 @@
         console.warn(
             "Page06: Frozen Page05 diagnosis result was not found."
         );
+
 
         return null;
 
@@ -394,7 +434,9 @@
             !storage ||
             !key
         ) {
+
             return null;
+
         }
 
 
@@ -404,6 +446,7 @@
                 storage.getItem(
                     key
                 );
+
 
             if (!raw) {
                 return null;
@@ -495,6 +538,7 @@
             normalizedPriority.source =
                 "page05-priority-focus";
 
+
             return normalizedPriority;
 
         }
@@ -538,6 +582,7 @@
             normalizedOpportunity.source =
                 "page05-growth-opportunity";
 
+
             return normalizedOpportunity;
 
         }
@@ -577,6 +622,7 @@
 
             normalizedPattern.source =
                 "page05-root-pattern";
+
 
             return normalizedPattern;
 
@@ -1383,6 +1429,7 @@
                 "Page06: Next button not found."
             );
 
+
             return;
 
         }
@@ -1416,23 +1463,27 @@
     /* ======================================================================
        HANDLE FINAL PAGE 06 DELIVERY + PAGE 07 TRANSITION
 
-       CONTRACT
+       FROZEN APPLICATION CONTRACT
 
        CLICK
           ↓
-       LOCK
+       IN-MEMORY LOCK
           ↓
-       SAVE PAGE 06 STATE
+       VALIDATE PEOPLE ID
           ↓
-       VALIDATE PEOPLE ID + EMAIL
+       SESSION DELIVERY LOCK
           ↓
-       GENERATE 180-DAY ROADMAP
+       GENERATE + PERSIST 180-DAY ROADMAP
           ↓
-       GENERATE REPORT MODEL
+       FINALIZE JOURNEY
           ↓
-       GENERATE GOOGLE DOC + PDF
+       BACKEND:
+           REPORT
+           DOCUMENT
+           PDF
+           EMAIL
           ↓
-       EMAIL PDF
+       VERIFY EMAIL DELIVERY
           ↓
        SAVE SENT CONFIRMATION
           ↓
@@ -1452,22 +1503,49 @@
 
         /*
          * --------------------------------------------------------------
-         * 1. IN-MEMORY DOUBLE CLICK PROTECTION
+         * 1. IN-MEMORY DOUBLE-CLICK PROTECTION
          * --------------------------------------------------------------
          */
 
         if (page06State.delivering) {
+
+            console.warn(
+                "Page06: Delivery already in progress."
+            );
+
+
             return;
+
         }
 
+
+        /*
+         * --------------------------------------------------------------
+         * 2. RESOLVE JOURNEY IDENTITY
+         * --------------------------------------------------------------
+         */
 
         const identity =
             resolveJourneyIdentity();
 
 
+        console.log(
+            "Page06 Delivery Identity:",
+            identity
+        );
+
+
         /*
          * --------------------------------------------------------------
-         * 2. CHECK PREVIOUS CONFIRMED DELIVERY
+         * 3. CHECK PREVIOUS CONFIRMED DELIVERY
+         *
+         * If this exact visitor already completed delivery:
+         *
+         * DO NOT regenerate roadmap.
+         * DO NOT regenerate PDF.
+         * DO NOT resend email.
+         *
+         * Simply continue to Page 07.
          * --------------------------------------------------------------
          */
 
@@ -1483,6 +1561,11 @@
                 identity
             )
         ) {
+
+            console.log(
+                "Page06: Existing confirmed delivery found. Skipping duplicate delivery."
+            );
+
 
             page06State.delivered =
                 true;
@@ -1502,7 +1585,7 @@
 
         /*
          * --------------------------------------------------------------
-         * 3. ACQUIRE IN-MEMORY LOCK
+         * 4. ACQUIRE IN-MEMORY LOCK
          * --------------------------------------------------------------
          */
 
@@ -1520,7 +1603,7 @@
 
             /*
              * ----------------------------------------------------------
-             * 4. PRESERVE LATEST PAGE 06 PRESCRIPTION
+             * 5. PRESERVE LATEST PAGE 06 PRESCRIPTION
              * ----------------------------------------------------------
              */
 
@@ -1531,7 +1614,11 @@
 
             /*
              * ----------------------------------------------------------
-             * 5. VALIDATE JOURNEY IDENTITY
+             * 6. VALIDATE JOURNEY IDENTITY
+             *
+             * Backend is authoritative for registered email delivery.
+             *
+             * Frontend requires only PeopleID for final orchestration.
              * ----------------------------------------------------------
              */
 
@@ -1540,15 +1627,9 @@
             );
 
 
-            console.log(
-                "Page06 Delivery Identity:",
-                identity
-            );
-
-
             /*
              * ----------------------------------------------------------
-             * 6. VALIDATE FRONTEND API CONTRACT
+             * 7. VALIDATE FINAL DELIVERY API CONTRACT
              * ----------------------------------------------------------
              */
 
@@ -1557,7 +1638,7 @@
 
             /*
              * ----------------------------------------------------------
-             * 7. ACQUIRE SESSION DELIVERY LOCK
+             * 8. ACQUIRE SESSION DELIVERY LOCK
              * ----------------------------------------------------------
              */
 
@@ -1570,7 +1651,10 @@
                     identity.peopleId,
 
                 email:
-                    identity.email,
+                    identity.email || "",
+
+                fullName:
+                    identity.fullName || "",
 
                 startedAt:
                     new Date().toISOString()
@@ -1580,7 +1664,21 @@
 
             /*
              * ----------------------------------------------------------
-             * 8. GENERATE / PERSIST FROZEN 180-DAY ROADMAP
+             * 9. GENERATE / PERSIST 180-DAY TRANSFORMATION PRESCRIPTION
+             *
+             * Frontend sends ONLY PeopleID.
+             *
+             * JourneyOrchestrator now:
+             *
+             *      peopleId
+             *          ↓
+             *      dbGetDiagnosis()
+             *          ↓
+             *      rehydrate diagnosis
+             *          ↓
+             *      RoadmapEngine.generate()
+             *
+             * RoadmapEngine remains the system of record.
              * ----------------------------------------------------------
              */
 
@@ -1598,6 +1696,12 @@
                 });
 
 
+            console.log(
+                "Page06 Roadmap Response:",
+                roadmapResponse
+            );
+
+
             const roadmapResult =
                 unwrapApiSuccess(
                     roadmapResponse,
@@ -1605,25 +1709,47 @@
                 );
 
 
+            if (
+                roadmapResult === undefined ||
+                roadmapResult === null
+            ) {
+
+                throw new Error(
+                    "CTM PATH™ Transformation Prescription was not returned by the backend."
+                );
+
+            }
+
+
             console.log(
-                "Page06: Transformation Prescription generated.",
-                roadmapResult
+                "Page06: Transformation Prescription generated successfully."
             );
 
 
             /*
              * ----------------------------------------------------------
-             * 9. GENERATE COMPLETE REPORT MODEL
+             * 10. FINALIZE GUIDED JOURNEY
+             *
+             * SINGLE BACKEND FINALIZATION ENDPOINT.
+             *
+             * Backend now owns:
+             *
+             *      ReportEngine.generate()
+             *      DocumentService.generate()
+             *      dbGetPeople()
+             *      EmailService
+             *
+             * Frontend MUST NOT duplicate these operations.
              * ----------------------------------------------------------
              */
 
             console.log(
-                "Page06: Generating Report..."
+                "Page06: Finalizing Guided Journey..."
             );
 
 
-            const reportResponse =
-                await window.CTM_API.generateReport({
+            const finalizationResponse =
+                await window.CTM_API.finalizeJourney({
 
                     peopleId:
                         identity.peopleId
@@ -1631,123 +1757,122 @@
                 });
 
 
-            const reportModel =
+            console.log(
+                "Page06 Finalization Response:",
+                finalizationResponse
+            );
+
+
+            const finalizationResult =
                 unwrapApiSuccess(
-                    reportResponse,
-                    "Report"
+                    finalizationResponse,
+                    "Guided Journey Finalization"
                 );
 
 
             if (
-                !reportModel ||
-                typeof reportModel !== "object"
+                !finalizationResult ||
+                typeof finalizationResult !== "object"
             ) {
 
                 throw new Error(
-                    "CTM PATH™ report model was not returned by the backend."
+                    "CTM PATH™ final delivery confirmation was not returned."
                 );
 
             }
 
 
-            console.log(
-                "Page06: Report model generated.",
-                reportModel
-            );
+            /*
+             * ----------------------------------------------------------
+             * 11. VERIFY FINALIZATION CONTRACT
+             *
+             * Navigation is permitted ONLY after backend confirms
+             * successful email delivery.
+             * ----------------------------------------------------------
+             */
+
+            const confirmation =
+                resolveFinalizationConfirmation(
+                    finalizationResult
+                );
+
+
+            if (!confirmation.journeyFinalized) {
+
+                throw new Error(
+                    "CTM PATH™ Guided Journey was not finalized."
+                );
+
+            }
+
+
+            if (!confirmation.reportGenerated) {
+
+                throw new Error(
+                    "CTM PATH™ report generation was not confirmed."
+                );
+
+            }
+
+
+            if (!confirmation.documentGenerated) {
+
+                throw new Error(
+                    "CTM PATH™ document generation was not confirmed."
+                );
+
+            }
+
+
+            if (!confirmation.pdfGenerated) {
+
+                throw new Error(
+                    "CTM PATH™ PDF generation was not confirmed."
+                );
+
+            }
+
+
+            if (!confirmation.emailSent) {
+
+                throw new Error(
+                    "CTM PATH™ report email delivery was not confirmed."
+                );
+
+            }
 
 
             /*
              * ----------------------------------------------------------
-             * 10. GENERATE GOOGLE DOCUMENT + PDF
+             * 12. BUILD LOCAL DELIVERY CONFIRMATION
              * ----------------------------------------------------------
              */
-
-            console.log(
-                "Page06: Generating PDF Document..."
-            );
-
-
-            const documentResponse =
-                await window.CTM_API.generateDocument(
-                    reportModel
-                );
-
 
             const documentMetadata =
-                unwrapApiSuccess(
-                    documentResponse,
-                    "PDF Document"
+                resolveDocumentMetadata(
+                    finalizationResult
                 );
 
 
-            if (
-                !documentMetadata ||
-                !documentMetadata.pdfId
-            ) {
+            const recipient =
+                firstNonEmptyString(
 
-                throw new Error(
-                    "CTM PATH™ PDF was not generated."
-                );
+                    confirmation.recipient,
 
-            }
+                    identity.email
 
-
-            console.log(
-                "Page06: PDF Document generated.",
-                documentMetadata
-            );
-
-
-            /*
-             * ----------------------------------------------------------
-             * 11. EMAIL PDF TO REGISTERED EMAIL ADDRESS
-             * ----------------------------------------------------------
-             */
-
-            console.log(
-                "Page06: Sending Report Email..."
-            );
-
-
-            const emailResponse =
-                await window.CTM_API.sendEmail({
-
-                    type:
-                        "REPORT",
-
-                    to:
-                        identity.email,
-
-                    name:
-                        identity.fullName || "",
-
-                    message:
-                        "Your personalized CTM PATH™ Personal Diagnosis and 180-Day Transformation Prescription™ are attached.",
-
-                    pdfId:
-                        documentMetadata.pdfId
-
-                });
-
-
-            const emailResult =
-                unwrapApiSuccess(
-                    emailResponse,
-                    "Report Email"
                 );
 
 
-            console.log(
-                "Page06: Report Email sent.",
-                emailResult
-            );
+            const fullName =
+                firstNonEmptyString(
 
+                    confirmation.fullName,
 
-            /*
-             * ----------------------------------------------------------
-             * 12. RECORD SUCCESS BEFORE NAVIGATION
-             * ----------------------------------------------------------
-             */
+                    identity.fullName
+
+                );
+
 
             const deliveryResult = {
 
@@ -1758,13 +1883,28 @@
                     identity.peopleId,
 
                 email:
-                    identity.email,
+                    recipient,
 
                 fullName:
-                    identity.fullName || "",
+                    fullName,
+
+                journeyFinalized:
+                    true,
+
+                reportGenerated:
+                    true,
+
+                documentGenerated:
+                    true,
+
+                pdfGenerated:
+                    true,
+
+                emailSent:
+                    true,
 
                 pdfId:
-                    documentMetadata.pdfId,
+                    documentMetadata.pdfId || null,
 
                 pdfUrl:
                     documentMetadata.pdfUrl || null,
@@ -1778,14 +1918,20 @@
                 fileName:
                     documentMetadata.fileName || null,
 
-                emailResult:
-                    emailResult || null,
+                backend:
+                    finalizationResult,
 
                 deliveredAt:
                     new Date().toISOString()
 
             };
 
+
+            /*
+             * ----------------------------------------------------------
+             * 13. RECORD SUCCESS BEFORE NAVIGATION
+             * ----------------------------------------------------------
+             */
 
             saveDeliveryState(
                 deliveryResult
@@ -1802,23 +1948,26 @@
 
             /*
              * ----------------------------------------------------------
-             * 13. MARK PAGE 06 COMPLETE
+             * 14. MARK PAGE 06 COMPLETE
+             *
+             * ONLY AFTER EMAIL DELIVERY SUCCEEDS.
              * ----------------------------------------------------------
              */
 
             markPageComplete();
 
 
-            /*
-             * ----------------------------------------------------------
-             * 14. NAVIGATE TO PAGE 07
-             * ----------------------------------------------------------
-             */
-
             console.log(
-                "Page06: Final delivery complete. Navigating to Page07."
+                "Page06: Report delivered successfully.",
+                deliveryResult
             );
 
+
+            /*
+             * ----------------------------------------------------------
+             * 15. NAVIGATE TO PAGE 07
+             * ----------------------------------------------------------
+             */
 
             window.location.href =
                 PAGE06_CONFIG.nextPage;
@@ -1831,6 +1980,16 @@
                 error
             );
 
+
+            /*
+             * ----------------------------------------------------------
+             * RELEASE PROCESSING LOCK AFTER FAILURE
+             *
+             * This permits deliberate retry.
+             *
+             * A confirmed SENT lock is NEVER removed here.
+             * ----------------------------------------------------------
+             */
 
             const failedDelivery =
                 loadDeliveryState();
@@ -1873,6 +2032,13 @@
 
     /* ======================================================================
        FINAL DELIVERY API VALIDATION
+
+       Page 06 now requires ONLY:
+
+       ✓ generateRoadmap
+       ✓ finalizeJourney
+
+       Report / Document / Email calls are backend-owned.
     ====================================================================== */
 
     function validateDeliveryApi() {
@@ -1893,11 +2059,7 @@
 
             "generateRoadmap",
 
-            "generateReport",
-
-            "generateDocument",
-
-            "sendEmail"
+            "finalizeJourney"
 
         ];
 
@@ -1925,7 +2087,7 @@
     /* ======================================================================
        API RESPONSE NORMALIZER
 
-       Supports contracts such as:
+       Supports:
 
        { success:true, data:{...} }
 
@@ -1933,23 +2095,13 @@
 
        direct object
 
-       QA / DIAGNOSTIC BEHAVIOUR:
-
-       On backend failure this function deliberately preserves and exposes
-       the most specific backend error available instead of replacing it
-       with the generic WebApp message.
+       Also extracts nested backend failure messages.
     ====================================================================== */
 
     function unwrapApiSuccess(
         response,
         label
     ) {
-
-        /*
-         * --------------------------------------------------------------
-         * 1. NO RESPONSE
-         * --------------------------------------------------------------
-         */
 
         if (
             response === undefined ||
@@ -1966,12 +2118,11 @@
 
         /*
          * --------------------------------------------------------------
-         * 2. DETECT BACKEND FAILURE
+         * EXPLICIT FAILURE
          * --------------------------------------------------------------
          */
 
-        const isFailure =
-
+        if (
             response === false ||
 
             (
@@ -1982,101 +2133,31 @@
             (
                 typeof response === "object" &&
                 response.ok === false
-            );
-
-
-        if (isFailure) {
-
-            /*
-             * Preserve complete backend response in DevTools.
-             */
+            )
+        ) {
 
             console.error(
                 "CTM PATH™ BACKEND FAILURE:",
-                label || "Backend request",
+                label,
                 response
             );
 
 
-            /*
-             * Specific backend error takes precedence over
-             * generic WebApp message.
-             */
-
-            const backendError =
-
-                response &&
-                typeof response === "object"
-
-                    ? firstNonEmptyString(
-
-                        typeof response.error === "string"
-                            ? response.error
-                            : "",
+            const message =
+                extractBackendErrorMessage(
+                    response
+                );
 
 
-                        response.data &&
-                        typeof response.data === "object" &&
-                        typeof response.data.error === "string"
+            throw new Error(
 
-                            ? response.data.error
-                            : "",
-
-
-                        response.data &&
-                        typeof response.data === "object" &&
-                        typeof response.data.message === "string"
-
-                            ? response.data.message
-                            : "",
-
-
-                        typeof response.message === "string"
-                            ? response.message
-                            : ""
-
-                    )
-
-                    : "";
-
-
-            /*
-             * Optional backend stack.
-             */
-
-            const backendStack =
-
-                response &&
-                typeof response === "object" &&
-                typeof response.stack === "string"
-
-                    ? response.stack.trim()
-
-                    : "";
-
-
-            let diagnosticMessage =
-
-                backendError ||
+                message ||
 
                 (
                     (label || "Backend request") +
                     " failed."
-                );
+                )
 
-
-            if (backendStack) {
-
-                diagnosticMessage +=
-
-                    "\n\nBACKEND STACK:\n" +
-                    backendStack;
-
-            }
-
-
-            throw new Error(
-                diagnosticMessage
             );
 
         }
@@ -2084,7 +2165,7 @@
 
         /*
          * --------------------------------------------------------------
-         * 3. SUCCESS RESPONSE NORMALIZATION
+         * UNWRAP DATA ENVELOPES
          * --------------------------------------------------------------
          */
 
@@ -2105,7 +2186,7 @@
             ) &&
             value.data !== undefined &&
             value.data !== null &&
-            depth < 4
+            depth < 5
         ) {
 
             value =
@@ -2117,6 +2198,414 @@
 
 
         return value;
+
+    }
+
+
+    /* ======================================================================
+       BACKEND ERROR MESSAGE EXTRACTION
+
+       Handles:
+
+       message: "..."
+       message: { message:"..." }
+       error: "..."
+       data: { message:"..." }
+       nested failure envelopes
+    ====================================================================== */
+
+    function extractBackendErrorMessage(
+        value
+    ) {
+
+        if (
+            value === undefined ||
+            value === null
+        ) {
+
+            return "";
+
+        }
+
+
+        if (
+            typeof value === "string"
+        ) {
+
+            return value.trim();
+
+        }
+
+
+        if (
+            value instanceof Error
+        ) {
+
+            return value.message || "";
+
+        }
+
+
+        if (
+            typeof value !== "object"
+        ) {
+
+            return String(
+                value
+            );
+
+        }
+
+
+        const candidates = [
+
+            value.error,
+
+            value.message,
+
+            value.reason,
+
+            value.detail,
+
+            value.description
+
+        ];
+
+
+        for (
+            let i = 0;
+            i < candidates.length;
+            i++
+        ) {
+
+            const candidate =
+                candidates[i];
+
+
+            if (
+                typeof candidate === "string" &&
+                candidate.trim() !== ""
+            ) {
+
+                return candidate.trim();
+
+            }
+
+
+            if (
+                candidate &&
+                typeof candidate === "object"
+            ) {
+
+                const nested =
+                    extractBackendErrorMessage(
+                        candidate
+                    );
+
+
+                if (nested) {
+                    return nested;
+                }
+
+            }
+
+        }
+
+
+        if (
+            value.data &&
+            typeof value.data === "object"
+        ) {
+
+            const nestedData =
+                extractBackendErrorMessage(
+                    value.data
+                );
+
+
+            if (nestedData) {
+                return nestedData;
+            }
+
+        }
+
+
+        return "";
+
+    }
+
+
+    /* ======================================================================
+       FINALIZATION CONFIRMATION RESOLVER
+
+       Backend finalization may be returned as:
+
+       {
+           journeyFinalized:true,
+           ...
+       }
+
+       or wrapped under:
+
+       {
+           data:{
+               journeyFinalized:true,
+               ...
+           }
+       }
+
+       unwrapApiSuccess() handles standard data envelopes, while this helper
+       protects against an additional application-level wrapper.
+    ====================================================================== */
+
+    function resolveFinalizationConfirmation(
+        result
+    ) {
+
+        if (
+            !result ||
+            typeof result !== "object"
+        ) {
+
+            return {
+
+                journeyFinalized:
+                    false,
+
+                reportGenerated:
+                    false,
+
+                documentGenerated:
+                    false,
+
+                pdfGenerated:
+                    false,
+
+                emailSent:
+                    false,
+
+                recipient:
+                    "",
+
+                fullName:
+                    ""
+
+            };
+
+        }
+
+
+        let source =
+            result;
+
+
+        /*
+         * Compatibility:
+         *
+         * {
+         *   result:{...}
+         * }
+         */
+
+        if (
+            source.result &&
+            typeof source.result === "object"
+        ) {
+
+            source =
+                source.result;
+
+        }
+
+
+        /*
+         * Compatibility:
+         *
+         * {
+         *   finalization:{...}
+         * }
+         */
+
+        if (
+            source.finalization &&
+            typeof source.finalization === "object"
+        ) {
+
+            source =
+                source.finalization;
+
+        }
+
+
+        return {
+
+            journeyFinalized:
+                source.journeyFinalized === true,
+
+            reportGenerated:
+                source.reportGenerated === true,
+
+            documentGenerated:
+                source.documentGenerated === true,
+
+            pdfGenerated:
+                source.pdfGenerated === true,
+
+            emailSent:
+                source.emailSent === true,
+
+            recipient:
+                firstNonEmptyString(
+
+                    source.recipient,
+
+                    source.email,
+
+                    source.emailAddress
+
+                ),
+
+            fullName:
+                firstNonEmptyString(
+
+                    source.fullName,
+
+                    source.name
+
+                )
+
+        };
+
+    }
+
+
+    /* ======================================================================
+       DOCUMENT METADATA RESOLVER
+    ====================================================================== */
+
+    function resolveDocumentMetadata(
+        result
+    ) {
+
+        if (
+            !result ||
+            typeof result !== "object"
+        ) {
+
+            return {};
+
+        }
+
+
+        let document =
+            null;
+
+
+        if (
+            result.document &&
+            typeof result.document === "object"
+        ) {
+
+            document =
+                result.document;
+
+        }
+
+
+        if (
+            !document &&
+            result.result &&
+            typeof result.result === "object" &&
+            result.result.document &&
+            typeof result.result.document === "object"
+        ) {
+
+            document =
+                result.result.document;
+
+        }
+
+
+        if (
+            !document &&
+            result.finalization &&
+            typeof result.finalization === "object" &&
+            result.finalization.document &&
+            typeof result.finalization.document === "object"
+        ) {
+
+            document =
+                result.finalization.document;
+
+        }
+
+
+        if (!document) {
+
+            document =
+                {};
+
+        }
+
+
+        return {
+
+            pdfId:
+                firstNonEmptyString(
+
+                    document.pdfId,
+
+                    document.PdfID,
+
+                    result.pdfId
+
+                ),
+
+            pdfUrl:
+                firstNonEmptyString(
+
+                    document.pdfUrl,
+
+                    document.PdfURL,
+
+                    result.pdfUrl
+
+                ),
+
+            documentId:
+                firstNonEmptyString(
+
+                    document.documentId,
+
+                    document.DocumentID,
+
+                    result.documentId
+
+                ),
+
+            documentUrl:
+                firstNonEmptyString(
+
+                    document.documentUrl,
+
+                    document.DocumentURL,
+
+                    result.documentUrl
+
+                ),
+
+            fileName:
+                firstNonEmptyString(
+
+                    document.fileName,
+
+                    document.FileName,
+
+                    result.fileName
+
+                )
+
+        };
 
     }
 
@@ -2315,6 +2804,30 @@
         }
 
 
+        /*
+         * --------------------------------------------------------------
+         * Normalize
+         * --------------------------------------------------------------
+         */
+
+        identity.peopleId =
+            typeof identity.peopleId === "string"
+                ? identity.peopleId.trim()
+                : String(identity.peopleId || "").trim();
+
+
+        identity.fullName =
+            typeof identity.fullName === "string"
+                ? identity.fullName.trim()
+                : String(identity.fullName || "").trim();
+
+
+        identity.email =
+            typeof identity.email === "string"
+                ? identity.email.trim()
+                : String(identity.email || "").trim();
+
+
         return identity;
 
     }
@@ -2324,6 +2837,16 @@
        MERGE IDENTITY FROM OBJECT
 
        Recursive but bounded.
+
+       Allows identity to be recovered from:
+
+       registration
+       person
+       client
+       data
+       journey
+       diagnosis
+       etc.
     ====================================================================== */
 
     function mergeIdentityFromObject(
@@ -2543,6 +3066,13 @@
 
     /* ======================================================================
        VALIDATE DELIVERY IDENTITY
+
+       IMPORTANT:
+
+       Only PeopleID is mandatory at frontend level.
+
+       Registered name + email are resolved authoritatively by the backend
+       through dbGetPeople(peopleId) during finalizeJourney().
     ====================================================================== */
 
     function validateDeliveryIdentity(
@@ -2559,41 +3089,6 @@
             );
 
         }
-
-
-        if (
-            !identity.email ||
-            !isValidEmail(
-                identity.email
-            )
-        ) {
-
-            throw new Error(
-                "Your registered email address could not be recovered. Please return to registration and confirm your email address."
-            );
-
-        }
-
-    }
-
-
-    /* ======================================================================
-       EMAIL VALIDATION
-    ====================================================================== */
-
-    function isValidEmail(
-        value
-    ) {
-
-        return (
-
-            typeof value === "string" &&
-
-            /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-                value.trim()
-            )
-
-        );
 
     }
 
@@ -2689,6 +3184,10 @@
         }
 
 
+        /*
+         * PeopleID is authoritative.
+         */
+
         if (
             delivery.peopleId &&
             identity.peopleId
@@ -2696,23 +3195,39 @@
 
             return (
 
-                String(delivery.peopleId) ===
-                String(identity.peopleId)
+                String(delivery.peopleId).trim() ===
+                String(identity.peopleId).trim()
 
             );
 
         }
 
 
-        return (
+        /*
+         * Compatibility fallback only.
+         */
 
+        if (
             delivery.email &&
-            identity.email &&
+            identity.email
+        ) {
 
-            String(delivery.email).toLowerCase() ===
-            String(identity.email).toLowerCase()
+            return (
 
-        );
+                String(delivery.email)
+                    .trim()
+                    .toLowerCase() ===
+
+                String(identity.email)
+                    .trim()
+                    .toLowerCase()
+
+            );
+
+        }
+
+
+        return false;
 
     }
 
@@ -2801,12 +3316,6 @@
                 ? error.message
 
                 : "Unable to prepare and email your CTM PATH™ report. Please try again.";
-
-
-        console.error(
-            "Page06 Delivery Error Detail:",
-            error
-        );
 
 
         window.alert(
@@ -2982,6 +3491,22 @@
             ) {
 
                 return value.trim();
+
+            }
+
+
+            /*
+             * IDs can occasionally be numeric.
+             */
+
+            if (
+                typeof value === "number" &&
+                Number.isFinite(value)
+            ) {
+
+                return String(
+                    value
+                );
 
             }
 
