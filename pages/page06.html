@@ -1,2336 +1,1190 @@
 
-<!DOCTYPE html>
+/**
+ * =====================================================================
+ * CTM PATH™ MILLIONAIRES™
+ * GUIDED JOURNEY™
+ *
+ * PAGE 06
+ * PERSONAL TRANSFORMATION PRESCRIPTION™
+ *
+ * FILE:
+ * js/page06.js
+ *
+ * VERSION:
+ * Launch-Safe Simplified v1.0
+ *
+ * PURPOSE:
+ * 1. Initialise Page 06.
+ * 2. Render available diagnosis / prescription information.
+ * 3. Bind the ACTUAL Page 06 navigator button.
+ * 4. Trigger the completion / mentorship email.
+ * 5. Continue to Page 07.
+ *
+ * IMPORTANT LAUNCH RULE:
+ * Page 06 navigation MUST NOT depend on:
+ *
+ * - PDF generation
+ * - Google Drive folders
+ * - DocumentService
+ * - report generation
+ * - report attachment
+ * - LifeAlignment persistence
+ * - Guided Journey finalisation
+ *
+ * Those systems may be restored / expanded after launch.
+ *
+ * PAGE 07 owns the final conversion CTA.
+ * =====================================================================
+ */
 
-<html lang="en">
+(function () {
 
-<head>
+    "use strict";
 
-    <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    /* =================================================================
+       CONFIGURATION
+       ================================================================= */
 
-    <title>
-        PERSONAL TRANSFORMATION PRESCRIPTION™ | CTM PATH™ MILLIONAIRES™
-    </title>
+    var CONFIG = {
 
-    <meta
-        name="description"
-        content="CTM PATH™ MILLIONAIRES™ Personal Transformation Prescription™ — Your personal 180-day transformation roadmap."
-    >
+        pageName: "PAGE 06",
 
+        nextPage: "./page07",
 
-    <!-- ================================================================
-         CTM PATH™ MILLIONAIRES™
-         GUIDED JOURNEY™
+        navigatorId: "page06-next-button",
 
-         PAGE 06
-         PERSONAL TRANSFORMATION PRESCRIPTION™
+        navigationDelayMs: 250,
 
-         PURPOSE:
-         Diagnosis → Prescription → 180-Day Execution Path
+        emailTimeoutMs: 8000
 
-         IMPORTANT:
-         Global Header / Footer remain shared components.
-         No backend responsibility belongs to this page.
-    ================================================================= -->
+    };
 
 
-    <!-- ================================================================
-         GLOBAL STYLES
-    ================================================================= -->
+    /* =================================================================
+       INTERNAL STATE
+       ================================================================= */
 
-    <link
-        rel="stylesheet"
-        href="../css/header.css"
-    >
+    var state = {
 
-    <link
-        rel="stylesheet"
-        href="../css/footer.css"
-    >
+        initialized: false,
 
+        navigatorBound: false,
 
-    <!-- ================================================================
-         PAGE 06 STYLES
-    ================================================================= -->
+        navigating: false,
 
-    <link
-        rel="stylesheet"
-        href="../css/page06.css"
-    >
+        emailAttempted: false,
 
-</head>
+        emailSucceeded: false
 
+    };
 
-<body>
 
+    /* =================================================================
+       LOGGING
+       ================================================================= */
 
-    <!-- ================================================================
-         GLOBAL HEADER
+    function log() {
 
-         Loaded by:
-         ../js/component-loader.js
-    ================================================================= -->
+        var args = Array.prototype.slice.call(arguments);
 
-    <div id="global-header"></div>
+        args.unshift("CTM PATH™ Page06:");
 
+        console.log.apply(console, args);
 
-    <!-- ================================================================
-         PAGE 06
-         PERSONAL TRANSFORMATION PRESCRIPTION™
-    ================================================================= -->
+    }
 
-    <main
-        id="page06"
-        class="page06"
-    >
 
+    function warn() {
 
-        <!-- ============================================================
-             JOURNEY INDICATOR
-        ============================================================= -->
+        var args = Array.prototype.slice.call(arguments);
 
-        <section
-            class="journey-indicator"
-            aria-label="Journey progress"
-        >
+        args.unshift("CTM PATH™ Page06:");
 
-            <p>
-                JOURNEY 06 / 07
-            </p>
-
-        </section>
-
-
-        <!-- ============================================================
-             HERO
-        ============================================================= -->
-
-        <section class="page06-hero">
-
-            <div class="page06-container page06-hero-inner">
-
-                <p class="page06-brand">
-                    CTM PATH™ MILLIONAIRES™
-                </p>
-
-                <p class="page06-eyebrow">
-                    PERSONAL TRANSFORMATION PRESCRIPTION™
-                </p>
-
-                <h1
-                    class="page06-title-ta"
-                    lang="ta"
-                >
-                    உங்கள் தனிப்பட்ட
-                    <br>
-                    180 நாள் வாழ்க்கை மாற்றப் பாதை
-                </h1>
-
-                <p class="page06-title-en">
-                    YOUR PERSONAL 180-DAY
-                    <br>
-                    TRANSFORMATION ROADMAP™
-                </p>
-
-                <div class="page06-hero-message">
-
-                    <h2
-                        class="page06-section-title-ta"
-                        lang="ta"
-                    >
-                        உங்கள் புதிய வாழ்க்கைப் பயணம்
-                        <br>
-                        இங்கிருந்து தொடங்குகிறது.
-                    </h2>
-
-                    <p class="page06-section-title-en">
-                        YOUR NEW CHAPTER BEGINS HERE™
-                    </p>
-
-                    <p
-                        class="page06-copy-ta"
-                        lang="ta"
-                    >
-                        ஒரு நல்ல மதிப்பீடு
-                        <strong>நீங்கள் இன்று எங்கே இருக்கிறீர்கள்</strong>
-                        என்பதைக் காட்டுகிறது.
-                    </p>
-
-                    <p
-                        class="page06-copy-ta"
-                        lang="ta"
-                    >
-                        ஒரு நல்ல Diagnosis
-                        <strong>
-                            உங்களை எது முன்னேற்றுகிறது,
-                            எது தடுத்து நிறுத்துகிறது
-                        </strong>
-                        என்பதைக் காட்டுகிறது.
-                    </p>
-
-                    <p
-                        class="page06-copy-ta"
-                        lang="ta"
-                    >
-                        ஒரு நல்ல Prescription
-                        <strong>
-                            இங்கிருந்து நீங்கள் என்ன செய்ய வேண்டும்
-                        </strong>
-                        என்பதைக் காட்டுகிறது.
-                    </p>
-
-                    <p class="page06-copy-en">
-                        A good assessment shows you where you are.
-                        A good diagnosis reveals what is helping or limiting you.
-                        A good prescription shows you what to do next.
-                    </p>
-
-                    <p
-                        class="page06-emphasis-ta"
-                        lang="ta"
-                    >
-                        இப்போது உங்களிடம் மூன்றும் இருக்கின்றன.
-                    </p>
-
-                    <p class="page06-emphasis-en">
-                        NOW YOU HAVE ALL THREE.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ============================================================
-             01 — PRIMARY FOCUS
-        ============================================================= -->
-
-        <section
-            id="primary-focus"
-            class="page06-section page06-primary-focus"
-        >
-
-            <div class="page06-container">
-
-                <p class="page06-section-number">
-                    01
-                </p>
-
-                <h2
-                    class="page06-section-title-ta"
-                    lang="ta"
-                >
-                    உங்கள் முதல் கவனம்
-                </h2>
-
-                <p class="page06-section-title-en">
-                    YOUR PRIMARY FOCUS™
-                </p>
-
-
-                <!-- Dynamic from CTM_PAGE05_DIAGNOSIS_RESULT -->
-
-                <article class="page06-focus-card">
-
-                    <p
-                        id="page06-primary-focus-ta"
-                        class="page06-focus-title-ta"
-                        lang="ta"
-                    >
-                        உங்கள் முக்கிய வளர்ச்சி முன்னுரிமை
-                    </p>
-
-                    <h3
-                        id="page06-primary-focus-en"
-                        class="page06-focus-title-en"
-                    >
-                        YOUR PRIMARY GROWTH PRIORITY
-                    </h3>
-
-                    <p
-                        id="page06-primary-focus-copy-ta"
-                        class="page06-copy-ta"
-                        lang="ta"
-                    >
-                        உங்கள் Diagnosis அடிப்படையில்,
-                        அடுத்த 180 நாட்களில் அதிக கவனம் செலுத்த வேண்டிய
-                        பகுதி இங்கே காட்டப்படும்.
-                    </p>
-
-                    <p
-                        id="page06-primary-focus-copy-en"
-                        class="page06-copy-en"
-                    >
-                        Based on your diagnosis, your highest-priority
-                        area for the next 180 days will appear here.
-                    </p>
-
-                </article>
-
-
-                <div class="page06-message-block">
-
-                    <p
-                        class="page06-copy-ta"
-                        lang="ta"
-                    >
-                        உங்கள் மதிப்பீடும் Diagnosis-உம்
-                        ஒரு முக்கியமான உண்மையை வெளிப்படுத்தியிருக்கின்றன.
-                    </p>
-
-                    <p
-                        class="page06-highlight-ta"
-                        lang="ta"
-                    >
-                        அடுத்த 180 நாட்களில் உங்கள் வாழ்க்கையின்
-                        எல்லாவற்றையும் ஒரே நேரத்தில் மாற்ற வேண்டியதில்லை.
-                    </p>
-
-                    <p
-                        class="page06-mantra-ta"
-                        lang="ta"
-                    >
-                        சரியான விஷயத்தை,
-                        <br>
-                        சரியான நேரத்தில்,
-                        <br>
-                        சரியான முறையில்,
-                        <br>
-                        தொடர்ந்து செய்வதே முக்கியம்.
-                    </p>
-
-                    <p class="page06-copy-en">
-                        You do not have to change everything in your life at once.
-                    </p>
-
-                    <p class="page06-mantra-en">
-                        FOCUS ON THE RIGHT THINGS,
-                        IN THE RIGHT SEQUENCE,
-                        AND PRACTISE THEM CONSISTENTLY.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ============================================================
-             02 — 180-DAY TRANSFORMATION PATH
-        ============================================================= -->
-
-        <section
-            id="transformation-path"
-            class="page06-section page06-transformation-path"
-        >
-
-            <div class="page06-container">
-
-                <p class="page06-section-number">
-                    02
-                </p>
-
-                <h2
-                    class="page06-section-title-ta"
-                    lang="ta"
-                >
-                    அடுத்த 180 நாட்கள்
-                </h2>
-
-                <p class="page06-section-title-en">
-                    YOUR 180-DAY TRANSFORMATION PATH™
-                </p>
-
-                <p
-                    class="page06-lead-ta"
-                    lang="ta"
-                >
-                    180 நாட்கள்.
-                    6 கட்டங்கள்.
-                    ஒரு முழுமையான வாழ்க்கையை நோக்கிய பயணம்.
-                </p>
-
-                <p class="page06-lead-en">
-                    180 DAYS. 6 STAGES. ONE INTEGRATED LIFE.
-                </p>
-
-
-                <div class="page06-phase-grid">
-
-
-                    <!-- PHASE 01 -->
-
-                    <article class="page06-phase-card">
-
-                        <p class="page06-phase-days">
-                            DAYS 01–30
-                        </p>
-
-                        <h3
-                            class="page06-card-title-ta"
-                            lang="ta"
-                        >
-                            அடித்தளம்™
-                        </h3>
-
-                        <p class="page06-card-title-en">
-                            FOUNDATION™
-                        </p>
-
-                        <p
-                            class="page06-copy-ta"
-                            lang="ta"
-                        >
-                            முதலில் உங்கள் வாழ்க்கையைத் தெளிவாகப் பாருங்கள்.
-                            உங்கள் நோக்கம், இலக்குகள், பணம், நேரம் மற்றும்
-                            பழக்கங்களை அளவிடத் தொடங்குங்கள்.
-                        </p>
-
-                        <p class="page06-copy-en">
-                            Clarify your direction. Define your goals.
-                            Track your money and time. Establish your daily rhythm.
-                        </p>
-
-                        <p class="page06-keywords">
-                            CLARITY • MEASUREMENT • DISCIPLINE
-                        </p>
-
-                    </article>
-
-
-                    <!-- PHASE 02 -->
-
-                    <article class="page06-phase-card">
-
-                        <p class="page06-phase-days">
-                            DAYS 31–60
-                        </p>
-
-                        <h3
-                            class="page06-card-title-ta"
-                            lang="ta"
-                        >
-                            நிலைத்தன்மை™
-                        </h3>
-
-                        <p class="page06-card-title-en">
-                            STABILITY™
-                        </p>
-
-                        <p
-                            class="page06-copy-ta"
-                            lang="ta"
-                        >
-                            தொடங்குவது மட்டும் வெற்றி அல்ல.
-                            தொடர்ந்து செய்வதுதான் மாற்றத்தை உருவாக்குகிறது.
-                            நல்ல நோக்கங்களை தினசரி நடைமுறைகளாக மாற்றுங்கள்.
-                        </p>
-
-                        <p class="page06-copy-en">
-                            Turn good intentions into repeatable behaviour.
-                            Build routines, consistency and accountability.
-                        </p>
-
-                        <p class="page06-keywords">
-                            RHYTHM • CONSISTENCY • ACCOUNTABILITY
-                        </p>
-
-                    </article>
-
-
-                    <!-- PHASE 03 -->
-
-                    <article class="page06-phase-card">
-
-                        <p class="page06-phase-days">
-                            DAYS 61–90
-                        </p>
-
-                        <h3
-                            class="page06-card-title-ta"
-                            lang="ta"
-                        >
-                            வளர்ச்சி™
-                        </h3>
-
-                        <p class="page06-card-title-en">
-                            GROWTH™
-                        </p>
-
-                        <p
-                            class="page06-copy-ta"
-                            lang="ta"
-                        >
-                            உங்கள் திறனையும் பொருளாதார மதிப்பையும் உயர்த்துங்கள்.
-                            வருமானத்தை உருவாக்கும் முக்கிய செயல்களில்
-                            திட்டமிட்ட கவனம் செலுத்துங்கள்.
-                        </p>
-
-                        <p class="page06-copy-en">
-                            Strengthen valuable skills, increase the value
-                            you create and focus on meaningful income-producing action.
-                        </p>
-
-                        <p class="page06-keywords">
-                            SKILLS • VALUE • INCOME
-                        </p>
-
-                    </article>
-
-
-                    <!-- PHASE 04 -->
-
-                    <article class="page06-phase-card">
-
-                        <p class="page06-phase-days">
-                            DAYS 91–120
-                        </p>
-
-                        <h3
-                            class="page06-card-title-ta"
-                            lang="ta"
-                        >
-                            அமைப்புகள்™
-                        </h3>
-
-                        <p class="page06-card-title-en">
-                            SYSTEMS™
-                        </p>
-
-                        <p
-                            class="page06-copy-ta"
-                            lang="ta"
-                        >
-                            எல்லாவற்றையும் நீங்களே தொடர்ந்து செய்வதை விட,
-                            உங்கள் முயற்சியை செயல்முறைகள், அமைப்புகள்,
-                            ஆதரவு மற்றும் சொத்துகளாக மாற்றத் தொடங்குங்கள்.
-                        </p>
-
-                        <p class="page06-copy-en">
-                            Begin converting repeated effort into processes,
-                            systems, support and assets.
-                        </p>
-
-                        <p class="page06-keywords">
-                            SYSTEMS • ASSETS • LEVERAGE
-                        </p>
-
-                    </article>
-
-
-                    <!-- PHASE 05 -->
-
-                    <article class="page06-phase-card">
-
-                        <p class="page06-phase-days">
-                            DAYS 121–150
-                        </p>
-
-                        <h3
-                            class="page06-card-title-ta"
-                            lang="ta"
-                        >
-                            சுதந்திரம்™
-                        </h3>
-
-                        <p class="page06-card-title-en">
-                            FREEDOM™
-                        </p>
-
-                        <p
-                            class="page06-copy-ta"
-                            lang="ta"
-                        >
-                            அதிக பணம் மட்டும் சுதந்திரம் அல்ல.
-                            உங்கள் நேரம், பணம் மற்றும் ஆற்றலை எப்படி
-                            பயன்படுத்த வேண்டும் என்பதைத் தேர்வு செய்யும்
-                            ஆற்றலை வளர்த்துக்கொள்ளுங்கள்.
-                        </p>
-
-                        <p class="page06-copy-en">
-                            Strengthen your ability to choose how you use
-                            your time, money and energy.
-                        </p>
-
-                        <p class="page06-keywords">
-                            TIME • MONEY • CHOICE
-                        </p>
-
-                    </article>
-
-
-                    <!-- PHASE 06 -->
-
-                    <article class="page06-phase-card">
-
-                        <p class="page06-phase-days">
-                            DAYS 151–180
-                        </p>
-
-                        <h3
-                            class="page06-card-title-ta"
-                            lang="ta"
-                        >
-                            பங்களிப்பும் மரபும்™
-                        </h3>
-
-                        <p class="page06-card-title-en">
-                            IMPACT &amp; LEGACY™
-                        </p>
-
-                        <p
-                            class="page06-copy-ta"
-                            lang="ta"
-                        >
-                            உங்கள் வெற்றி உங்களோடு முடிந்துவிடக்கூடாது.
-                            அது உங்கள் குடும்பம், தொழில், சமூகம் மற்றும்
-                            அடுத்த தலைமுறைக்கு மதிப்பை உருவாக்கட்டும்.
-                        </p>
-
-                        <p class="page06-copy-en">
-                            Let your growth create value beyond yourself—
-                            for family, work, community and future generations.
-                        </p>
-
-                        <p class="page06-keywords">
-                            LEADERSHIP • CONTRIBUTION • LEGACY
-                        </p>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ============================================================
-             03 — DEFINITE GOAL
-        ============================================================= -->
-
-        <section
-            id="definite-goal"
-            class="page06-section page06-definite-goal"
-        >
-
-            <div class="page06-container">
-
-                <p class="page06-section-number">
-                    03
-                </p>
-
-                <h2
-                    class="page06-section-title-ta"
-                    lang="ta"
-                >
-                    உங்கள் 180 நாள் இலக்கு
-                </h2>
-
-                <p class="page06-section-title-en">
-                    YOUR 180-DAY DEFINITE GOAL™
-                </p>
-
-
-                <div class="page06-message-block">
-
-                    <h3
-                        class="page06-subtitle-ta"
-                        lang="ta"
-                    >
-                        முதலில் — உங்கள் இலக்கைத் தெளிவாக வரையறுக்கவும்.
-                    </h3>
-
-                    <p class="page06-subtitle-en">
-                        FIRST — DEFINE YOUR GOAL CLEARLY.
-                    </p>
-
-                    <div class="page06-question-list">
-
-                        <p lang="ta">
-                            நீங்கள் எதை உருவாக்க விரும்புகிறீர்கள்?
-                        </p>
-
-                        <p lang="ta">
-                            எவ்வளவு வருமானம் உருவாக்க விரும்புகிறீர்கள்?
-                        </p>
-
-                        <p lang="ta">
-                            எத்தனை பேருக்கு சேவை செய்ய விரும்புகிறீர்கள்?
-                        </p>
-
-                        <p lang="ta">
-                            எந்த தேதிக்குள்?
-                        </p>
-
-                        <p lang="ta">
-                            அதை அடைய நீங்கள் எப்படிப்பட்ட மனிதராக வளர வேண்டும்?
-                        </p>
-
-                    </div>
-
-                    <p class="page06-copy-en">
-                        What do you want to create?
-                        How much do you want to earn?
-                        How many people do you want to serve?
-                        By what date?
-                        Who must you become to achieve it?
-                    </p>
-
-                    <p
-                        class="page06-highlight-ta"
-                        lang="ta"
-                    >
-                        உங்கள் இலக்கு அளவிடக்கூடியதாக இருக்க வேண்டும்.
-                        எழுதக்கூடியதாக இருக்க வேண்டும்.
-                        தினமும் நினைவூட்டக்கூடியதாக இருக்க வேண்டும்.
-                        செயலாக மாற்றக்கூடியதாக இருக்க வேண்டும்.
-                    </p>
-
-                    <p class="page06-highlight-en">
-                        YOUR GOAL SHOULD BE MEASURABLE,
-                        WRITABLE, REVIEWABLE AND ACTIONABLE.
-                    </p>
-
-                </div>
-
-
-                <!-- ====================================================
-                     GOALS DIARY
-                ===================================================== -->
-
-                <article class="page06-goals-diary">
-
-                    <h3
-                        class="page06-card-title-ta"
-                        lang="ta"
-                    >
-                        உங்கள் இலக்கு நாட்குறிப்பு™
-                    </h3>
-
-                    <p class="page06-card-title-en">
-                        YOUR GOALS DIARY™
-                    </p>
-
-                    <p
-                        class="page06-copy-ta"
-                        lang="ta"
-                    >
-                        உங்கள் இலக்கை மனதில் மட்டும் வைத்திருக்காதீர்கள்.
-                        அதை தினமும் உங்கள் Goals Diary™-ல் கையால் எழுதுங்கள்.
-                    </p>
-
-                    <p class="page06-copy-en">
-                        Don't keep your goal only in your mind.
-                        Write it by hand in your Goals Diary™ every day.
-                    </p>
-
-
-                    <div class="page06-369-grid">
-
-                        <div class="page06-369-card">
-
-                            <strong class="page06-369-number">
-                                3×
-                            </strong>
-
-                            <p lang="ta">
-                                காலை 6 மணிக்குள்
-                            </p>
-
-                            <span>
-                                BEFORE 6:00 AM
-                            </span>
-
-                        </div>
-
-
-                        <div class="page06-369-card">
-
-                            <strong class="page06-369-number">
-                                6×
-                            </strong>
-
-                            <p lang="ta">
-                                மதியம் 1 மணிக்குள்
-                            </p>
-
-                            <span>
-                                BEFORE 1:00 PM
-                            </span>
-
-                        </div>
-
-
-                        <div class="page06-369-card">
-
-                            <strong class="page06-369-number">
-                                9×
-                            </strong>
-
-                            <p lang="ta">
-                                இரவு 8 மணிக்குள்
-                            </p>
-
-                            <span>
-                                BEFORE 8:00 PM
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <p
-                        class="page06-mantra-ta"
-                        lang="ta"
-                    >
-                        3 • 6 • 9 — தினமும்.
-                    </p>
-
-                    <p class="page06-mantra-en">
-                        3 • 6 • 9 — EVERY DAY.
-                    </p>
-
-
-                    <div class="page06-action-question">
-
-                        <p
-                            class="page06-copy-ta"
-                            lang="ta"
-                        >
-                            இது வெறும் எழுதும் பயிற்சியாக இருக்கக்கூடாது.
-                            ஒவ்வொரு முறையும் எழுதும்போது உங்களையே கேளுங்கள்:
-                        </p>
-
-                        <blockquote lang="ta">
-                            “இன்று இந்த இலக்கை நோக்கி
-                            நான் செய்ய வேண்டிய மிக முக்கியமான செயல் என்ன?”
-                        </blockquote>
-
-                        <p class="page06-copy-en">
-                            This should never become writing without action.
-                            Each time you write your goal, ask:
-                        </p>
-
-                        <blockquote>
-                            “What is the most important action
-                            I must take today toward this goal?”
-                        </blockquote>
-
-                    </div>
-
-                </article>
-
-
-                <!-- ====================================================
-                     MODEL GOAL DECLARATION
-                ===================================================== -->
-
-                <article class="page06-goal-declaration">
-
-                    <p class="page06-eyebrow">
-                        MODEL
-                    </p>
-
-                    <h3
-                        class="page06-card-title-ta"
-                        lang="ta"
-                    >
-                        உங்கள் 180 நாள் இலக்கு அறிக்கை™
-                    </h3>
-
-                    <p class="page06-card-title-en">
-                        YOUR 180-DAY GOAL DECLARATION™
-                    </p>
-
-                    <p
-                        class="page06-goal-date-ta"
-                        lang="ta"
-                    >
-                        1 பிப்ரவரி 2027-க்குள்,
-                    </p>
-
-                    <p class="page06-goal-date-en">
-                        BY 1 FEBRUARY 2027,
-                    </p>
-
-                    <p
-                        class="page06-declaration-ta"
-                        lang="ta"
-                    >
-                        வாரத்திற்கு ₹30,000-க்கும் மேல் சம்பாதித்து,
-                        ஆயிரக்கணக்கான குடும்பங்களில் வளம் சேர்க்கும்
-                        1,020-க்கும் மேற்பட்ட தொழிலதிபர்களை
-                        உருவாக்கியதற்கும்;
-                    </p>
-
-                    <p
-                        class="page06-declaration-ta"
-                        lang="ta"
-                    >
-                        தெளிவான தினசரி சேவைத் திட்டம்,
-                        ஊக்கமளிக்கும் தலைமைப் பண்பு,
-                        உறுதியான நேர்மை மற்றும்
-                        தொடர்ச்சியான செயல்பாட்டின் மூலம்
-                        என் வணிகம் வாரத்திற்கு ₹6,30,000-க்கும் மேல்
-                        தொடர்ந்து ஈட்டுவதற்கும்;
-                    </p>
-
-                    <p
-                        class="page06-gratitude-ta"
-                        lang="ta"
-                    >
-                        நான் மனமார்ந்த நன்றியுடன் இருக்கிறேன்.
-                    </p>
-
-                    <p class="page06-declaration-en">
-                        I am deeply grateful to have developed more than
-                        1,020 entrepreneurs who earn over ₹30,000 per week
-                        and bring greater prosperity to thousands of families;
-                    </p>
-
-                    <p class="page06-declaration-en">
-                        and for my business consistently earning more than
-                        ₹6,30,000 per week through a clear daily service plan,
-                        inspiring leadership, unwavering integrity
-                        and consistent action.
-                    </p>
-
-                    <p class="page06-gratitude-en">
-                        I AM DEEPLY GRATEFUL.
-                    </p>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- ============================================================
-             04 — DAILY NON-NEGOTIABLES
-        ============================================================= -->
-
-        <section
-            id="daily-non-negotiables"
-            class="page06-section page06-non-negotiables"
-        >
-
-            <div class="page06-container">
-
-                <p class="page06-section-number">
-                    04
-                </p>
-
-                <h2
-                    class="page06-section-title-ta"
-                    lang="ta"
-                >
-                    தினசரி மாற்ற முடியாத ஒழுக்கங்கள்™
-                </h2>
-
-                <p class="page06-section-title-en">
-                    DAILY NON-NEGOTIABLES™
-                </p>
-
-                <p
-                    class="page06-lead-ta"
-                    lang="ta"
-                >
-                    இலக்கு மட்டும் போதாது.
-                    இலக்கைத் தாங்கும் வாழ்க்கை ஒழுக்கம் வேண்டும்.
-                </p>
-
-                <p class="page06-lead-en">
-                    A GOAL IS NOT ENOUGH.
-                    YOUR DAILY LIFE MUST BE CAPABLE OF CARRYING THAT GOAL.
-                </p>
-
-
-                <div class="page06-routine-grid">
-
-
-                    <article class="page06-routine-card">
-
-                        <p class="page06-routine-time">
-                            8:00 PM — 4:00 AM
-                        </p>
+        console.warn.apply(console, args);
 
-                        <h3 lang="ta">
-                            உறக்கம்™
-                        </h3>
+    }
 
-                        <p class="page06-card-title-en">
-                            SLEEP
-                        </p>
 
-                        <p lang="ta">
-                            உடலும் மனமும் மீண்டும் ஆற்றல் பெறுவதற்கான
-                            பாதுகாக்கப்பட்ட நேரம்.
-                        </p>
+    function error() {
 
-                        <p class="page06-copy-en">
-                            Protected time for physical and mental recovery.
-                        </p>
+        var args = Array.prototype.slice.call(arguments);
 
-                    </article>
+        args.unshift("CTM PATH™ Page06:");
 
+        console.error.apply(console, args);
 
-                    <article class="page06-routine-card">
+    }
 
-                        <p class="page06-routine-time">
-                            4:00 AM — 5:00 AM
-                        </p>
 
-                        <h3 lang="ta">
-                            தனிப்பட்ட கற்றல்™
-                        </h3>
+    /* =================================================================
+       SAFE JSON
+       ================================================================= */
 
-                        <p class="page06-card-title-en">
-                            PERSONAL LEARNING
-                        </p>
+    function safeParse(value) {
 
-                        <p lang="ta">
-                            அறிவு, திறன், தலைமை, பொருளாதாரம்,
-                            தொழில் மற்றும் தனிமனித வளர்ச்சிக்கான
-                            பாதுகாக்கப்பட்ட ஒரு மணி நேரம்.
-                        </p>
+        if (!value) {
+            return null;
+        }
 
-                        <p class="page06-copy-en">
-                            One protected hour to strengthen knowledge,
-                            skill, leadership and personal mastery.
-                        </p>
+        if (typeof value === "object") {
+            return value;
+        }
 
-                    </article>
+        try {
 
+            return JSON.parse(value);
 
-                    <article class="page06-routine-card">
+        } catch (err) {
 
-                        <p class="page06-routine-time">
-                            5:00 AM — 6:00 AM
-                        </p>
+            return null;
 
-                        <h3>
-                            ENERGY ZOOM SESSION™
-                        </h3>
+        }
 
-                        <p lang="ta">
-                            ஆற்றல், கவனம், உறுதி, குழு உணர்வு
-                            மற்றும் பொறுப்புணர்வுடன் நாளைத் தொடங்குங்கள்.
-                        </p>
+    }
 
-                        <p class="page06-copy-en">
-                            Begin the day with energy, focus,
-                            commitment, community and accountability.
-                        </p>
 
-                    </article>
+    /* =================================================================
+       STORAGE HELPERS
+       ================================================================= */
 
+    function getStorageValue(key) {
 
-                    <article class="page06-routine-card">
+        try {
 
-                        <p class="page06-routine-time">
-                            1 HOUR DAILY
-                        </p>
+            var value = sessionStorage.getItem(key);
 
-                        <h3 lang="ta">
-                            உடற்பயிற்சி™
-                        </h3>
+            if (value !== null) {
+                return value;
+            }
 
-                        <p class="page06-card-title-en">
-                            PHYSICAL EXERCISE
-                        </p>
+        } catch (err) {
 
-                        <p lang="ta">
-                            உங்கள் கனவுகளைச் சுமக்கக்கூடிய
-                            உடலை உருவாக்குங்கள்.
-                        </p>
+            // Ignore sessionStorage failures.
 
-                        <p class="page06-copy-en">
-                            Build a body capable of carrying your ambitions.
-                        </p>
+        }
 
-                    </article>
 
-                </div>
+        try {
 
-            </div>
+            return localStorage.getItem(key);
 
-        </section>
+        } catch (err) {
 
+            return null;
 
-        <!-- ============================================================
-             05 — DAILY SUCCESS RHYTHM
-        ============================================================= -->
+        }
 
-        <section
-            id="daily-success-rhythm"
-            class="page06-section page06-daily-rhythm"
-        >
+    }
 
-            <div class="page06-container">
 
-                <p class="page06-section-number">
-                    05
-                </p>
+    function getStoredObject(keys) {
 
-                <h2
-                    class="page06-section-title-ta"
-                    lang="ta"
-                >
-                    தினசரி வெற்றி ஒழுங்கு™
-                </h2>
+        var i;
 
-                <p class="page06-section-title-en">
-                    YOUR DAILY SUCCESS RHYTHM™
-                </p>
+        var value;
 
+        var parsed;
 
-                <div class="page06-timeline">
 
+        for (i = 0; i < keys.length; i += 1) {
 
-                    <article class="page06-timeline-item">
+            value = getStorageValue(keys[i]);
 
-                        <time>
-                            8:00 PM – 4:00 AM
-                        </time>
+            if (!value) {
+                continue;
+            }
 
-                        <p lang="ta">
-                            உறக்கம்
-                        </p>
+            parsed = safeParse(value);
 
-                        <span>
-                            SLEEP
-                        </span>
+            if (parsed) {
+                return parsed;
+            }
 
-                    </article>
+        }
 
 
-                    <article class="page06-timeline-item">
+        return null;
 
-                        <time>
-                            4:00 AM – 5:00 AM
-                        </time>
+    }
 
-                        <p lang="ta">
-                            தனிப்பட்ட கற்றல்
-                        </p>
 
-                        <span>
-                            PERSONAL LEARNING
-                        </span>
+    /* =================================================================
+       CURRENT PERSON / JOURNEY IDENTITY
+       ================================================================= */
 
-                    </article>
+    function getIdentity() {
 
+        var identity = {
 
-                    <article class="page06-timeline-item">
+            peopleId: "",
 
-                        <time>
-                            5:00 AM – 6:00 AM
-                        </time>
+            fullName: "",
 
-                        <p>
-                            Energy Zoom Session™
-                        </p>
+            email: "",
 
-                        <span>
-                            ENERGY • FOCUS • ACCOUNTABILITY
-                        </span>
+            mobile: ""
 
-                    </article>
+        };
 
 
-                    <article class="page06-timeline-item">
+        /*
+         * --------------------------------------------------------------
+         * GLOBAL RUNTIME
+         * --------------------------------------------------------------
+         */
 
-                        <time>
-                            BEFORE 6:00 AM
-                        </time>
+        try {
 
-                        <p lang="ta">
-                            இலக்கை 3 முறை எழுதுங்கள்
-                        </p>
+            if (window.CTM_GLOBAL) {
 
-                        <span>
-                            WRITE YOUR GOAL ×3
-                        </span>
+                identity.peopleId =
+                    window.CTM_GLOBAL.peopleId ||
+                    window.CTM_GLOBAL.PeopleID ||
+                    identity.peopleId;
 
-                    </article>
+                identity.fullName =
+                    window.CTM_GLOBAL.fullName ||
+                    window.CTM_GLOBAL.name ||
+                    identity.fullName;
 
+                identity.email =
+                    window.CTM_GLOBAL.email ||
+                    identity.email;
 
-                    <article class="page06-timeline-item">
-
-                        <time>
-                            DAILY
-                        </time>
-
-                        <p lang="ta">
-                            1 மணி நேர உடற்பயிற்சி
-                        </p>
-
-                        <span>
-                            1 HOUR PHYSICAL EXERCISE
-                        </span>
-
-                    </article>
-
-
-                    <article class="page06-timeline-item">
-
-                        <time>
-                            BEFORE 1:00 PM
-                        </time>
-
-                        <p lang="ta">
-                            இலக்கை மேலும் 6 முறை எழுதுங்கள்
-                        </p>
-
-                        <span>
-                            WRITE YOUR GOAL ×6
-                        </span>
-
-                    </article>
-
-
-                    <article class="page06-timeline-item">
-
-                        <time>
-                            BEFORE 8:00 PM
-                        </time>
-
-                        <p lang="ta">
-                            இலக்கை மேலும் 9 முறை எழுதுங்கள்
-                        </p>
-
-                        <span>
-                            WRITE YOUR GOAL ×9
-                        </span>
-
-                    </article>
-
-                </div>
-
-
-                <p
-                    class="page06-mantra-ta"
-                    lang="ta"
-                >
-                    கற்றல் + ஆற்றல் + உடல்நலம் + இலக்கு +
-                    சேவை + செயல் + சுயமதிப்பாய்வு
-                </p>
-
-                <p class="page06-mantra-en">
-                    LEARNING + ENERGY + HEALTH + GOAL +
-                    SERVICE + ACTION + REFLECTION
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- ============================================================
-             06 — WEEKLY GROWTH RHYTHM
-        ============================================================= -->
-
-        <section
-            id="weekly-growth-rhythm"
-            class="page06-section page06-weekly-rhythm"
-        >
-
-            <div class="page06-container">
-
-                <p class="page06-section-number">
-                    06
-                </p>
-
-                <h2
-                    class="page06-section-title-ta"
-                    lang="ta"
-                >
-                    வாராந்திர வளர்ச்சி ஒழுங்கு™
-                </h2>
-
-                <p class="page06-section-title-en">
-                    YOUR WEEKLY GROWTH RHYTHM™
-                </p>
-
-
-                <article class="page06-feature-card">
-
-                    <p
-                        class="page06-feature-time"
-                        lang="ta"
-                    >
-                        ஒவ்வொரு சனிக்கிழமையும்
-                        <br>
-                        பிற்பகல் 2:00 — 5:00
-                    </p>
-
-                    <p class="page06-feature-time-en">
-                        EVERY SATURDAY • 2:00 PM — 5:00 PM
-                    </p>
-
-                    <h3>
-                        LOCAL GROUP LEARNING™
-                    </h3>
-
-                    <ul class="page06-check-list">
-
-                        <li lang="ta">
-                            கற்றுக்கொள்ளுங்கள்
-                        </li>
-
-                        <li lang="ta">
-                            அனுபவங்களைப் பகிருங்கள்
-                        </li>
-
-                        <li lang="ta">
-                            கடந்த வாரத்தை மதிப்பாய்வு செய்யுங்கள்
-                        </li>
-
-                        <li lang="ta">
-                            வெற்றிகளைப் பகிருங்கள்
-                        </li>
-
-                        <li lang="ta">
-                            தடைகளுக்கு தீர்வு காணுங்கள்
-                        </li>
-
-                        <li lang="ta">
-                            அடுத்த வார இலக்குகளை உறுதி செய்யுங்கள்
-                        </li>
-
-                        <li lang="ta">
-                            ஒருவருக்கொருவர் பொறுப்புணர்வை உருவாக்குங்கள்
-                        </li>
-
-                    </ul>
-
-                    <p class="page06-copy-en">
-                        Learn, review, share, solve, plan
-                        and strengthen accountability together.
-                    </p>
-
-                </article>
-
-
-                <p
-                    class="page06-mantra-ta"
-                    lang="ta"
-                >
-                    தனியாக வேகமாக செல்லலாம்.
-                    <br>
-                    சரியான Tribe™ உடன் தொலைவாக செல்லலாம்.
-                </p>
-
-                <p class="page06-mantra-en">
-                    YOU MAY MOVE FAST ALONE.
-                    <br>
-                    THE RIGHT TRIBE™ CAN HELP YOU GO FURTHER.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- ============================================================
-             07 — MONTHLY MEGA LEARNING
-        ============================================================= -->
-
-        <section
-            id="monthly-learning"
-            class="page06-section page06-monthly-learning"
-        >
-
-            <div class="page06-container">
-
-                <p class="page06-section-number">
-                    07
-                </p>
-
-                <h2
-                    class="page06-section-title-ta"
-                    lang="ta"
-                >
-                    மாதாந்திர பெரிய கற்றல்™
-                </h2>
-
-                <p class="page06-section-title-en">
-                    YOUR MONTHLY MEGA LEARNING™
-                </p>
-
-
-                <article class="page06-feature-card">
-
-                    <p
-                        class="page06-feature-time"
-                        lang="ta"
-                    >
-                        ஒவ்வொரு மாதத்தின் கடைசி சனிக்கிழமை
-                    </p>
-
-                    <p class="page06-feature-time-en">
-                        THE LAST SATURDAY OF EVERY MONTH
-                    </p>
-
-                    <h3>
-                        MEGA LEARNING PROGRAM™
-                    </h3>
-
-                    <p
-                        class="page06-copy-ta"
-                        lang="ta"
-                    >
-                        மாதம் முழுவதும் செய்த செயல்களிலிருந்து
-                        ஒரு படி விலகி, பெரிய படத்தைப் பாருங்கள்.
-                    </p>
-
-
-                    <div class="page06-question-list">
-
-                        <p lang="ta">
-                            என்ன கற்றுக்கொண்டேன்?
-                        </p>
-
-                        <p lang="ta">
-                            என்ன மாறியது?
-                        </p>
-
-                        <p lang="ta">
-                            என்ன வளர்ந்தது?
-                        </p>
-
-                        <p lang="ta">
-                            எது இன்னும் தடுக்கிறது?
-                        </p>
-
-                        <p lang="ta">
-                            அடுத்த 30 நாட்களில் என்ன மாற்ற வேண்டும்?
-                        </p>
-
-                    </div>
-
-                    <p class="page06-copy-en">
-                        Review the month, deepen your learning,
-                        sharpen your strategy and enter the next
-                        30 days with renewed clarity.
-                    </p>
-
-                    <p class="page06-keywords">
-                        LEARN • REVIEW • REALIGN • RECOMMIT™
-                    </p>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- ============================================================
-             08 — CTM 180-DAY SUCCESS RHYTHM
-        ============================================================= -->
-
-        <section
-            id="success-rhythm"
-            class="page06-section page06-success-rhythm"
-        >
-
-            <div class="page06-container">
-
-                <p class="page06-section-number">
-                    08
-                </p>
-
-                <h2>
-                    CTM 180-DAY SUCCESS RHYTHM™
-                </h2>
-
-
-                <div class="page06-rhythm-flow">
-
-
-                    <article>
-
-                        <p
-                            class="page06-card-title-ta"
-                            lang="ta"
-                        >
-                            தினமும்
-                        </p>
-
-                        <h3>
-                            DAILY
-                        </h3>
-
-                        <p>
-                            3–6–9 Goal Writing™
-                        </p>
-
-                        <p>
-                            Sleep • Learning • Energy
-                        </p>
-
-                        <p>
-                            Physical Exercise
-                        </p>
-
-                        <p>
-                            Service &amp; Income Action
-                        </p>
-
-                        <p>
-                            Daily Reflection
-                        </p>
-
-                    </article>
-
-
-                    <div
-                        class="page06-flow-arrow"
-                        aria-hidden="true"
-                    >
-                        ↓
-                    </div>
-
-
-                    <article>
-
-                        <p
-                            class="page06-card-title-ta"
-                            lang="ta"
-                        >
-                            வாரந்தோறும்
-                        </p>
-
-                        <h3>
-                            WEEKLY
-                        </h3>
-
-                        <p>
-                            Saturday • 2 PM–5 PM
-                        </p>
-
-                        <p>
-                            Local Group Learning™
-                        </p>
-
-                        <p>
-                            Progress Review
-                        </p>
-
-                        <p>
-                            Accountability
-                        </p>
-
-                        <p>
-                            Next-Week Planning
-                        </p>
-
-                    </article>
-
-
-                    <div
-                        class="page06-flow-arrow"
-                        aria-hidden="true"
-                    >
-                        ↓
-                    </div>
-
-
-                    <article>
-
-                        <p
-                            class="page06-card-title-ta"
-                            lang="ta"
-                        >
-                            மாதந்தோறும்
-                        </p>
-
-                        <h3>
-                            MONTHLY
-                        </h3>
-
-                        <p>
-                            Last Saturday
-                        </p>
-
-                        <p>
-                            Mega Learning Program™
-                        </p>
-
-                        <p>
-                            30-Day Review
-                        </p>
-
-                        <p>
-                            Strategy Reset
-                        </p>
-
-                        <p>
-                            Next-Month Commitment
-                        </p>
-
-                    </article>
-
-
-                    <div
-                        class="page06-flow-arrow"
-                        aria-hidden="true"
-                    >
-                        ↓
-                    </div>
-
-
-                    <article class="page06-rhythm-final">
-
-                        <p
-                            class="page06-card-title-ta"
-                            lang="ta"
-                        >
-                            180 நாட்கள்
-                        </p>
-
-                        <h3>
-                            180 DAYS™
-                        </h3>
-
-                        <p
-                            class="page06-rhythm-equation"
-                            lang="ta"
-                        >
-                            இலக்கு → ஒழுக்கம் → செயல் →
-                            மதிப்பாய்வு → வளர்ச்சி → மாற்றம்
-                        </p>
-
-                        <p class="page06-rhythm-equation-en">
-                            GOAL → DISCIPLINE → ACTION →
-                            REVIEW → GROWTH → TRANSFORMATION
-                        </p>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ============================================================
-             09 — ONE IMPORTANT TRUTH
-        ============================================================= -->
-
-        <section
-            id="important-truth"
-            class="page06-section page06-important-truth"
-        >
-
-            <div class="page06-container">
-
-                <p class="page06-section-number">
-                    09
-                </p>
-
-                <h2
-                    class="page06-section-title-ta"
-                    lang="ta"
-                >
-                    ஒரு முக்கியமான உண்மை
-                </h2>
-
-                <p class="page06-section-title-en">
-                    ONE IMPORTANT TRUTH™
-                </p>
-
-                <p
-                    class="page06-statement-ta"
-                    lang="ta"
-                >
-                    வெற்றிக்கு ஆயிரம் ரகசியங்கள் தேவையில்லை.
-                </p>
-
-                <p class="page06-statement-en">
-                    SUCCESS DOES NOT REQUIRE A THOUSAND SECRETS.
-                </p>
-
-                <p
-                    class="page06-copy-ta"
-                    lang="ta"
-                >
-                    காலங்கள் மாறியிருக்கின்றன.
-                    நாடுகள் மாறியிருக்கின்றன.
-                    தொழில்கள் மாறியிருக்கின்றன.
-                    தொழில்நுட்பம் மாறியிருக்கிறது.
-                    வாழ்க்கை முறைகள் மாறியிருக்கின்றன.
-                </p>
-
-                <p
-                    class="page06-highlight-ta"
-                    lang="ta"
-                >
-                    ஆனால் நிறைவான வெற்றிகரமான வாழ்க்கையை உருவாக்கும்
-                    அடிப்படை நெறிகள் பெரிதாக மாறவில்லை.
-                </p>
-
-                <p class="page06-copy-en">
-                    Times have changed. Cultures have changed.
-                    Industries have changed. Technology has changed.
-                    But many enduring principles behind a successful
-                    and fulfilling life remain remarkably consistent.
-                </p>
-
-
-                <div class="page06-principles">
-
-                    <span lang="ta">
-                        தெளிவு
-                    </span>
-
-                    <span lang="ta">
-                        நோக்கம்
-                    </span>
-
-                    <span lang="ta">
-                        ஒழுக்கம்
-                    </span>
-
-                    <span lang="ta">
-                        தொடர்ச்சியான செயல்
-                    </span>
-
-                    <span lang="ta">
-                        கற்றல்
-                    </span>
-
-                    <span lang="ta">
-                        பொருளாதார அறிவு
-                    </span>
-
-                    <span lang="ta">
-                        உடல்நலம்
-                    </span>
-
-                    <span lang="ta">
-                        நல்ல உறவுகள்
-                    </span>
-
-                    <span lang="ta">
-                        சரியான மனிதர்கள்
-                    </span>
-
-                    <span lang="ta">
-                        பங்களிப்பு
-                    </span>
-
-                    <span lang="ta">
-                        அர்த்தமுள்ள வாழ்க்கை
-                    </span>
-
-                </div>
-
-                <p class="page06-keywords">
-                    CLARITY • PURPOSE • DISCIPLINE • CONSISTENCY •
-                    LEARNING • FINANCIAL WISDOM • HEALTH •
-                    RELATIONSHIPS • COMMUNITY • CONTRIBUTION • MEANING
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- ============================================================
-             10 — CTM PATH MILLIONAIRES
-        ============================================================= -->
-
-        <section
-            id="ctm-philosophy"
-            class="page06-section page06-philosophy"
-        >
-
-            <div class="page06-container">
-
-                <p class="page06-section-number">
-                    10
-                </p>
-
-                <p class="page06-eyebrow">
-                    CTM PATH MILLIONAIRES™
-                </p>
-
-                <h2
-                    class="page06-statement-ta"
-                    lang="ta"
-                >
-                    பணக்காரராக மாறுவது மட்டும் இலக்கு அல்ல.
-                    <br>
-                    முழுமையாக வாழ்வதே இலக்கு.
-                </h2>
-
-                <p class="page06-statement-en">
-                    THE GOAL IS NOT MERELY TO BECOME WEALTHY.
-                    <br>
-                    THE GOAL IS TO LIVE COMPLETELY.™
-                </p>
-
-
-                <div class="page06-philosophy-lines">
-
-                    <p lang="ta">
-                        பணம் உங்கள் சுதந்திரத்தை ஆதரிக்க வேண்டும்.
-                    </p>
-
-                    <p>
-                        MONEY SHOULD SUPPORT FREEDOM.
-                    </p>
-
-                    <p lang="ta">
-                        சுதந்திரம் உங்கள் உறவுகளை ஆதரிக்க வேண்டும்.
-                    </p>
-
-                    <p>
-                        FREEDOM SHOULD STRENGTHEN RELATIONSHIPS.
-                    </p>
-
-                    <p lang="ta">
-                        உடல்நலம் உங்கள் சாதனைகளை ஆதரிக்க வேண்டும்.
-                    </p>
-
-                    <p>
-                        HEALTH SHOULD SUPPORT ACHIEVEMENT.
-                    </p>
-
-                    <p lang="ta">
-                        அமைப்புகள் உங்கள் நேரத்தைப் பாதுகாக்க வேண்டும்.
-                    </p>
-
-                    <p>
-                        SYSTEMS SHOULD PROTECT TIME.
-                    </p>
-
-                    <p lang="ta">
-                        உங்கள் வளர்ச்சி உங்கள் பங்களிப்பை உயர்த்த வேண்டும்.
-                    </p>
-
-                    <p>
-                        GROWTH SHOULD DEEPEN CONTRIBUTION.
-                    </p>
-
-                    <p lang="ta">
-                        உங்கள் வெற்றி இறுதியில் அர்த்தமுள்ள,
-                        நிறைவான வாழ்க்கையை உருவாக்க வேண்டும்.
-                    </p>
-
-                    <p>
-                        SUCCESS SHOULD ULTIMATELY SUPPORT
-                        A MEANINGFUL, FULFILLING LIFE.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ============================================================
-             11 — WISDOM BEHIND THE PATH
-        ============================================================= -->
-
-        <section
-            id="wisdom"
-            class="page06-section page06-wisdom"
-        >
-
-            <div class="page06-container">
-
-                <p class="page06-section-number">
-                    11
-                </p>
-
-                <h2
-                    class="page06-section-title-ta"
-                    lang="ta"
-                >
-                    இந்தப் பாதையின் ஞானம்
-                </h2>
-
-                <p class="page06-section-title-en">
-                    THE WISDOM BEHIND THE PATH™
-                </p>
-
-                <p
-                    class="page06-statement-ta"
-                    lang="ta"
-                >
-                    இது இன்னொரு “வெற்றி Formula” அல்ல.
-                </p>
-
-                <p class="page06-statement-en">
-                    THIS IS NOT ANOTHER “SUCCESS FORMULA.”
-                </p>
-
-                <p
-                    class="page06-copy-ta"
-                    lang="ta"
-                >
-                    CTM PATH MILLIONAIRES™ ஒரு விரைவான பணக்காரர் திட்டமோ,
-                    உடனடி வெற்றிக்கான வாக்குறுதியோ அல்ல.
-                </p>
-
-                <p
-                    class="page06-copy-ta"
-                    lang="ta"
-                >
-                    காலங்களையும் கலாச்சாரங்களையும் கடந்து
-                    சாதனை, செழிப்பு, நல்ல பண்பு, உறவுகள்,
-                    சுதந்திரம், பங்களிப்பு மற்றும் நிறைவான வாழ்க்கையை
-                    உருவாக்கிய மனிதர்களின் வாழ்வில் மீண்டும் மீண்டும்
-                    காணப்படும் நிலைத்த நெறிகளின் சாரத்தை
-                    ஒரு நடைமுறை வாழ்க்கைப் பாதையாக இது ஒருங்கிணைக்கிறது.
-                </p>
-
-                <p class="page06-copy-en">
-                    CTM PATH MILLIONAIRES™ is not a get-rich-quick scheme
-                    or a promise of instant success.
-                </p>
-
-                <p class="page06-copy-en">
-                    It brings together the quintessence of enduring principles
-                    repeatedly seen across ages and cultures in lives marked by
-                    achievement, prosperity, character, relationships, freedom,
-                    contribution and fulfilment—and translates them into a
-                    practical path for everyday living.
-                </p>
-
-                <p
-                    class="page06-mantra-ta"
-                    lang="ta"
-                >
-                    ஞானம் → அமைப்பு → செயல் →
-                    மதிப்பாய்வு → வளர்ச்சி™
-                </p>
-
-                <p class="page06-mantra-en">
-                    WISDOM → SYSTEM → ACTION →
-                    REVIEW → GROWTH™
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- ============================================================
-             12 — KNOWING IS NOT ENOUGH
-        ============================================================= -->
-
-        <section
-            id="knowing"
-            class="page06-section page06-knowing"
-        >
-
-            <div class="page06-container">
-
-                <p class="page06-section-number">
-                    12
-                </p>
-
-                <h2
-                    class="page06-section-title-ta"
-                    lang="ta"
-                >
-                    தெரிந்திருப்பது மட்டும் போதாது
-                </h2>
-
-                <p class="page06-section-title-en">
-                    KNOWING IS NOT ENOUGH™
-                </p>
-
-                <p
-                    class="page06-copy-ta"
-                    lang="ta"
-                >
-                    ஒரு புத்தகம் உங்களுக்கு ஒரு நல்ல எண்ணத்தைத் தரலாம்.
-                    ஒரு பயிற்சி உங்களுக்கு புதிய அறிவைத் தரலாம்.
-                    ஒரு Roadmap உங்களுக்கு செல்ல வேண்டிய பாதையைக் காட்டலாம்.
-                </p>
-
-                <p
-                    class="page06-highlight-ta"
-                    lang="ta"
-                >
-                    ஆனால் பாதையைத் தெரிந்திருப்பதும்,
-                    அந்தப் பாதையில் தொடர்ந்து நடப்பதும் ஒன்றல்ல.
-                </p>
-
-                <p class="page06-copy-en">
-                    A book can give you an idea.
-                    Training can give you knowledge.
-                    A roadmap can show you the way.
-                </p>
-
-                <p class="page06-highlight-en">
-                    BUT KNOWING THE PATH AND CONSISTENTLY
-                    WALKING THE PATH ARE NOT THE SAME THING.
-                </p>
-
-
-                <div class="page06-support-grid">
-
-                    <article>
-                        <p lang="ta">
-                            அமைப்பு
-                        </p>
-                        <span>STRUCTURE</span>
-                    </article>
-
-                    <article>
-                        <p lang="ta">
-                            பயிற்சி
-                        </p>
-                        <span>PRACTICE</span>
-                    </article>
-
-                    <article>
-                        <p lang="ta">
-                            பொறுப்புணர்வு
-                        </p>
-                        <span>ACCOUNTABILITY</span>
-                    </article>
-
-                    <article>
-                        <p lang="ta">
-                            உறவுக்குழு
-                        </p>
-                        <span>COMMUNITY</span>
-                    </article>
-
-                    <article>
-                        <p lang="ta">
-                            பின்னூட்டம்
-                        </p>
-                        <span>FEEDBACK</span>
-                    </article>
-
-                    <article>
-                        <p lang="ta">
-                            வழிகாட்டுதல்
-                        </p>
-                        <span>GUIDANCE</span>
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ============================================================
-             13 — THE QUESTION CHANGES
-        ============================================================= -->
-
-        <section
-            id="next-question"
-            class="page06-section page06-next-question"
-        >
-
-            <div class="page06-container">
-
-                <p class="page06-section-number">
-                    13
-                </p>
-
-                <h2
-                    class="page06-section-title-ta"
-                    lang="ta"
-                >
-                    இங்கே உங்கள் கேள்வி மாறுகிறது.
-                </h2>
-
-                <p class="page06-section-title-en">
-                    HERE, THE QUESTION CHANGES.™
-                </p>
-
-
-                <div class="page06-question-progression">
-
-                    <article>
-
-                        <p lang="ta">
-                            “என் வாழ்க்கையின் தற்போதைய நிலை என்ன?”
-                        </p>
-
-                        <span>
-                            “WHERE AM I TODAY?”
-                        </span>
-
-                    </article>
-
-
-                    <div
-                        class="page06-flow-arrow"
-                        aria-hidden="true"
-                    >
-                        ↓
-                    </div>
-
-
-                    <article>
-
-                        <p lang="ta">
-                            “என்னை முன்னேற்றுவது எது?
-                            என்னைத் தடுத்து நிறுத்துவது எது?”
-                        </p>
-
-                        <span>
-                            “WHAT IS HELPING ME?
-                            WHAT IS HOLDING ME BACK?”
-                        </span>
-
-                    </article>
-
-
-                    <div
-                        class="page06-flow-arrow"
-                        aria-hidden="true"
-                    >
-                        ↓
-                    </div>
-
-
-                    <article class="page06-question-final">
-
-                        <p lang="ta">
-                            “இந்த 180 நாள் வாழ்க்கை மாற்றப் பாதையை
-                            நான் எப்படி வாழத் தொடங்குவது?”
-                        </p>
-
-                        <span>
-                            “HOW DO I BEGIN LIVING
-                            THIS 180-DAY TRANSFORMATION PATH?”
-                        </span>
-
-                    </article>
-
-                </div>
-
-
-                <div class="page06-ready-block">
-
-                    <p
-                        class="page06-copy-ta"
-                        lang="ta"
-                    >
-                        உங்களிடம் இப்போது Diagnosis இருக்கிறது.
-                        <br>
-                        உங்களிடம் Prescription இருக்கிறது.
-                        <br>
-                        உங்களிடம் 180 நாள் Roadmap இருக்கிறது.
-                    </p>
-
-                    <p
-                        class="page06-highlight-ta"
-                        lang="ta"
-                    >
-                        அடுத்ததாக உங்களுக்குத் தேவைப்படுவது—
-                        இந்தப் பாதையை நடைமுறை வாழ்க்கையாக
-                        மாற்றுவது எப்படி என்பதற்கான தெளிவு.
-                    </p>
-
-                    <p class="page06-copy-en">
-                        You now have your Diagnosis.
-                        <br>
-                        You have your Prescription.
-                        <br>
-                        You have your 180-Day Roadmap.
-                    </p>
-
-                    <p class="page06-highlight-en">
-                        THE NEXT QUESTION IS:
-                        HOW DO YOU TURN THIS PATH
-                        INTO YOUR EVERYDAY LIFE?
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ============================================================
-             COMPLETION / PAGE 07 TRANSITION
-
-             IMPORTANT:
-             No Calendly.
-             No Discovery Call.
-             No price.
-             No enrolment pitch.
-
-             Page 07 owns the final conversion.
-        ============================================================= -->
-
-        <section class="page06-completion">
-
-            <div class="page06-container page06-completion-inner">
-
-                <p
-                    class="page06-completion-ta"
-                    lang="ta"
-                >
-                    அதற்கான அடுத்த படி
-                    <br>
-                    இப்போது உங்களுக்காக காத்திருக்கிறது.
-                </p>
-
-                <p class="page06-completion-en">
-                    YOUR NEXT STEP IS READY.
-                </p>
-
-                <button
-                    id="page06-next-button"
-                    class="primary-cta"
-                    type="button"
-                >
-
-                    <span
-                        class="cta-ta"
-                        lang="ta"
-                    >
-                        என் அடுத்த படியைப் பார்க்கிறேன் →
-                    </span>
-
-                    <span class="cta-en">
-                        SEE MY NEXT STEP
-                    </span>
-
-                </button>
-
-            </div>
-
-        </section>
-
-
-    </main>
-
-
-    <!-- ================================================================
-         GLOBAL FOOTER
-
-         Loaded by:
-         ../js/component-loader.js
-    ================================================================= -->
-
-    <div id="global-footer"></div>
-
-
-    <!-- ================================================================
-         SHARED FRONTEND RUNTIME
-
-         PROVEN SHELL CONTRACT:
-         1. API
-         2. Global runtime
-         3. Component loader
-         4. Page 06 controller
-         5. Load global shell
-         6. Initialize Page 06
-    ================================================================= -->
-
-    <script
-        src="../js/api.js"
-    ></script>
-
-    <script
-        src="../js/global.js"
-    ></script>
-
-    <script
-        src="../js/component-loader.js"
-    ></script>
-
-    <script
-        src="../js/page06.js"
-    ></script>
-
-
-    <!-- ================================================================
-         PAGE 06 INITIALIZATION
-    ================================================================= -->
-
-    <script>
-
-        document.addEventListener(
-
-            "DOMContentLoaded",
-
-            async function () {
-
-
-                /*
-                 * ---------------------------------------------------------
-                 * GLOBAL SHELL
-                 * ---------------------------------------------------------
-                 *
-                 * Loads the existing shared:
-                 *
-                 * components/header.html
-                 * components/footer.html
-                 *
-                 * Header and footer remain untouched.
-                 * ---------------------------------------------------------
-                 */
-
-                if (
-
-                    window.CTM_COMPONENTS &&
-
-                    typeof window.CTM_COMPONENTS.load === "function"
-
-                ) {
-
-                    await window.CTM_COMPONENTS.load();
-
-                }
-
-
-                /*
-                 * ---------------------------------------------------------
-                 * PAGE 06
-                 * ---------------------------------------------------------
-                 */
-
-                if (
-
-                    window.CTM_PAGE06 &&
-
-                    typeof window.CTM_PAGE06.init === "function"
-
-                ) {
-
-                    window.CTM_PAGE06.init();
-
-                }
-
+                identity.mobile =
+                    window.CTM_GLOBAL.mobile ||
+                    window.CTM_GLOBAL.whatsapp ||
+                    identity.mobile;
 
             }
 
+        } catch (err) {
+
+            // Continue with storage fallbacks.
+
+        }
+
+
+        /*
+         * --------------------------------------------------------------
+         * COMMON STORAGE KEYS
+         * --------------------------------------------------------------
+         */
+
+        identity.peopleId =
+            identity.peopleId ||
+            getStorageValue("PeopleID") ||
+            getStorageValue("peopleId") ||
+            getStorageValue("CTM_PEOPLE_ID") ||
+            getStorageValue("ctmPeopleId") ||
+            "";
+
+
+        identity.fullName =
+            identity.fullName ||
+            getStorageValue("FullName") ||
+            getStorageValue("fullName") ||
+            getStorageValue("CTM_FULL_NAME") ||
+            "";
+
+
+        identity.email =
+            identity.email ||
+            getStorageValue("Email") ||
+            getStorageValue("email") ||
+            getStorageValue("CTM_EMAIL") ||
+            "";
+
+
+        identity.mobile =
+            identity.mobile ||
+            getStorageValue("Mobile") ||
+            getStorageValue("mobile") ||
+            getStorageValue("CTM_MOBILE") ||
+            "";
+
+
+        /*
+         * --------------------------------------------------------------
+         * REGISTRATION OBJECT FALLBACK
+         * --------------------------------------------------------------
+         */
+
+        var registration = getStoredObject([
+
+            "CTM_REGISTRATION",
+
+            "ctmRegistration",
+
+            "registration",
+
+            "CTM_PERSON",
+
+            "ctmPerson"
+
+        ]);
+
+
+        if (registration) {
+
+            identity.peopleId =
+                identity.peopleId ||
+                registration.PeopleID ||
+                registration.peopleId ||
+                registration.id ||
+                "";
+
+            identity.fullName =
+                identity.fullName ||
+                registration.FullName ||
+                registration.fullName ||
+                registration.name ||
+                "";
+
+            identity.email =
+                identity.email ||
+                registration.Email ||
+                registration.email ||
+                "";
+
+            identity.mobile =
+                identity.mobile ||
+                registration.Mobile ||
+                registration.mobile ||
+                registration.whatsapp ||
+                "";
+
+        }
+
+
+        return identity;
+
+    }
+
+
+    /* =================================================================
+       DIAGNOSIS RESULT
+       ================================================================= */
+
+    function getDiagnosisResult() {
+
+        /*
+         * Primary contract from Page 05.
+         */
+
+        if (
+            window.CTM_PAGE05_DIAGNOSIS_RESULT &&
+            typeof window.CTM_PAGE05_DIAGNOSIS_RESULT === "object"
+        ) {
+
+            return window.CTM_PAGE05_DIAGNOSIS_RESULT;
+
+        }
+
+
+        /*
+         * Storage fallback.
+         */
+
+        return getStoredObject([
+
+            "CTM_PAGE05_DIAGNOSIS_RESULT",
+
+            "ctmPage05DiagnosisResult",
+
+            "CTM_DIAGNOSIS_RESULT",
+
+            "ctmDiagnosisResult",
+
+            "diagnosisResult"
+
+        ]);
+
+    }
+
+
+    /* =================================================================
+       PRIMARY FOCUS EXTRACTION
+       ================================================================= */
+
+    function extractPrimaryFocus(diagnosis) {
+
+        if (!diagnosis) {
+            return null;
+        }
+
+
+        var source =
+            diagnosis.data ||
+            diagnosis.result ||
+            diagnosis.diagnosis ||
+            diagnosis;
+
+
+        var focus = {
+
+            titleTa: "",
+
+            titleEn: "",
+
+            copyTa: "",
+
+            copyEn: ""
+
+        };
+
+
+        /*
+         * --------------------------------------------------------------
+         * TITLE
+         * --------------------------------------------------------------
+         */
+
+        focus.titleTa =
+            source.primaryFocusTa ||
+            source.primaryFocusTA ||
+            source.primaryFocusTamil ||
+            source.greatestGrowthOpportunityTa ||
+            source.growthOpportunityTa ||
+            "";
+
+
+        focus.titleEn =
+            source.primaryFocusEn ||
+            source.primaryFocusEN ||
+            source.primaryFocus ||
+            source.greatestGrowthOpportunity ||
+            source.growthOpportunity ||
+            source.weakestPillar ||
+            "";
+
+
+        /*
+         * --------------------------------------------------------------
+         * COPY
+         * --------------------------------------------------------------
+         */
+
+        focus.copyTa =
+            source.primaryFocusCopyTa ||
+            source.primaryFocusDescriptionTa ||
+            source.prescriptionTa ||
+            source.recommendationTa ||
+            "";
+
+
+        focus.copyEn =
+            source.primaryFocusCopyEn ||
+            source.primaryFocusDescriptionEn ||
+            source.prescriptionEn ||
+            source.recommendationEn ||
+            "";
+
+
+        /*
+         * No usable information.
+         */
+
+        if (
+            !focus.titleTa &&
+            !focus.titleEn &&
+            !focus.copyTa &&
+            !focus.copyEn
+        ) {
+
+            return null;
+
+        }
+
+
+        return focus;
+
+    }
+
+
+    /* =================================================================
+       DOM TEXT HELPER
+       ================================================================= */
+
+    function setText(id, value) {
+
+        if (!value) {
+            return;
+        }
+
+
+        var element = document.getElementById(id);
+
+        if (!element) {
+            return;
+        }
+
+
+        element.textContent = value;
+
+    }
+
+
+    /* =================================================================
+       RENDER PRIMARY FOCUS
+       ================================================================= */
+
+    function renderPrimaryFocus() {
+
+        var diagnosis = getDiagnosisResult();
+
+        var focus = extractPrimaryFocus(diagnosis);
+
+
+        if (!focus) {
+
+            log(
+                "No dynamic primary-focus payload found. " +
+                "Using Page06 HTML fallback content."
+            );
+
+            return;
+
+        }
+
+
+        setText(
+            "page06-primary-focus-ta",
+            focus.titleTa
         );
 
-    </script>
+
+        setText(
+            "page06-primary-focus-en",
+            focus.titleEn
+        );
 
 
-</body>
+        setText(
+            "page06-primary-focus-copy-ta",
+            focus.copyTa
+        );
 
-</html>
+
+        setText(
+            "page06-primary-focus-copy-en",
+            focus.copyEn
+        );
+
+
+        log(
+            "Primary Focus:",
+            focus
+        );
+
+    }
+
+
+    /* =================================================================
+       API DISCOVERY
+       ================================================================= */
+
+    function getApi() {
+
+        return (
+
+            window.CTM_API ||
+
+            window.CTMApi ||
+
+            window.API ||
+
+            window.Api ||
+
+            null
+
+        );
+
+    }
+
+
+    /* =================================================================
+       PROMISE TIMEOUT
+       ================================================================= */
+
+    function withTimeout(promise, timeoutMs) {
+
+        return new Promise(function (resolve, reject) {
+
+            var settled = false;
+
+
+            var timer = window.setTimeout(function () {
+
+                if (settled) {
+                    return;
+                }
+
+                settled = true;
+
+                reject(
+                    new Error("Email request timed out.")
+                );
+
+            }, timeoutMs);
+
+
+            Promise.resolve(promise)
+
+                .then(function (result) {
+
+                    if (settled) {
+                        return;
+                    }
+
+                    settled = true;
+
+                    window.clearTimeout(timer);
+
+                    resolve(result);
+
+                })
+
+                .catch(function (err) {
+
+                    if (settled) {
+                        return;
+                    }
+
+                    settled = true;
+
+                    window.clearTimeout(timer);
+
+                    reject(err);
+
+                });
+
+        });
+
+    }
+
+
+    /* =================================================================
+       EMAIL PAYLOAD
+       ================================================================= */
+
+    function buildEmailPayload() {
+
+        var identity = getIdentity();
+
+
+        return {
+
+            PeopleID: identity.peopleId,
+
+            peopleId: identity.peopleId,
+
+            FullName: identity.fullName,
+
+            fullName: identity.fullName,
+
+            Email: identity.email,
+
+            email: identity.email,
+
+            Mobile: identity.mobile,
+
+            mobile: identity.mobile,
+
+            source: "PAGE06",
+
+            journeyStage: "PERSONAL_TRANSFORMATION_PRESCRIPTION_COMPLETED",
+
+            assessmentCompleted: true,
+
+            requestType: "COMPLETION_MENTORSHIP_EMAIL"
+
+        };
+
+    }
+
+
+    /* =================================================================
+       EMAIL RESPONSE VALIDATION
+       ================================================================= */
+
+    function emailResponseSucceeded(response) {
+
+        /*
+         * Undefined is allowed because some frontend API wrappers
+         * intentionally resolve without returning a response body.
+         */
+
+        if (response === undefined || response === null) {
+            return true;
+        }
+
+
+        if (response === true) {
+            return true;
+        }
+
+
+        if (typeof response !== "object") {
+            return true;
+        }
+
+
+        if (response.success === false) {
+            return false;
+        }
+
+
+        if (
+            typeof response.status === "string" &&
+            response.status.toUpperCase() === "FAILURE"
+        ) {
+
+            return false;
+
+        }
+
+
+        return true;
+
+    }
+
+
+    /* =================================================================
+       SEND COMPLETION EMAIL
+       ================================================================= */
+
+    async function sendCompletionEmail() {
+
+        state.emailAttempted = true;
+
+
+        var api = getApi();
+
+        var payload = buildEmailPayload();
+
+
+        log(
+            "Completion email payload:",
+            payload
+        );
+
+
+        if (!api) {
+
+            warn(
+                "API namespace unavailable. " +
+                "Continuing to Page07 without blocking navigation."
+            );
+
+            return false;
+
+        }
+
+
+        /*
+         * --------------------------------------------------------------
+         * LAUNCH-SAFE METHOD DISCOVERY
+         *
+         * We deliberately support a small set of likely public API
+         * method names so Page06 does not depend on one historical
+         * frontend naming convention.
+         * --------------------------------------------------------------
+         */
+
+        var candidates = [
+
+            "sendJourneyCompletionEmail",
+
+            "sendCompletionEmail",
+
+            "sendMentorshipInvitationEmail",
+
+            "sendMentorshipEmail",
+
+            "sendAssessmentCompletionEmail"
+
+        ];
+
+
+        var methodName = null;
+
+        var i;
+
+
+        for (i = 0; i < candidates.length; i += 1) {
+
+            if (typeof api[candidates[i]] === "function") {
+
+                methodName = candidates[i];
+
+                break;
+
+            }
+
+        }
+
+
+        if (!methodName) {
+
+            warn(
+                "No completion-email API method found. " +
+                "Continuing to Page07."
+            );
+
+            return false;
+
+        }
+
+
+        try {
+
+            log(
+                "Sending completion email via:",
+                methodName
+            );
+
+
+            var response = await withTimeout(
+
+                api[methodName](payload),
+
+                CONFIG.emailTimeoutMs
+
+            );
+
+
+            if (!emailResponseSucceeded(response)) {
+
+                warn(
+                    "Completion email returned failure:",
+                    response
+                );
+
+                return false;
+
+            }
+
+
+            state.emailSucceeded = true;
+
+
+            log(
+                "Completion email request completed successfully.",
+                response
+            );
+
+
+            return true;
+
+
+        } catch (err) {
+
+            error(
+                "Completion email failed:",
+                err
+            );
+
+
+            /*
+             * CRITICAL LAUNCH BEHAVIOUR:
+             *
+             * Email failure must NEVER trap the visitor on Page06.
+             */
+
+            return false;
+
+        }
+
+    }
+
+
+    /* =================================================================
+       BUTTON BUSY STATE
+       ================================================================= */
+
+    function setNavigatorBusy(button, busy) {
+
+        if (!button) {
+            return;
+        }
+
+
+        button.disabled = Boolean(busy);
+
+
+        if (busy) {
+
+            button.setAttribute(
+                "aria-busy",
+                "true"
+            );
+
+            button.classList.add(
+                "is-loading"
+            );
+
+        } else {
+
+            button.removeAttribute(
+                "aria-busy"
+            );
+
+            button.classList.remove(
+                "is-loading"
+            );
+
+        }
+
+    }
+
+
+    /* =================================================================
+       NAVIGATE TO PAGE 07
+       ================================================================= */
+
+    function goToPage07() {
+
+        log(
+            "Moving visitor to Page07."
+        );
+
+
+        window.setTimeout(function () {
+
+            window.location.href = CONFIG.nextPage;
+
+        }, CONFIG.navigationDelayMs);
+
+    }
+
+
+    /* =================================================================
+       NAVIGATOR CLICK
+       ================================================================= */
+
+    async function handleNavigatorClick(event) {
+
+        if (event) {
+
+            event.preventDefault();
+
+        }
+
+
+        if (state.navigating) {
+
+            return;
+
+        }
+
+
+        state.navigating = true;
+
+
+        var button =
+            document.getElementById(
+                CONFIG.navigatorId
+            );
+
+
+        setNavigatorBusy(
+            button,
+            true
+        );
+
+
+        log(
+            "Navigator clicked."
+        );
+
+
+        /*
+         * ==============================================================
+         * SIMPLIFIED LAUNCH FLOW
+         *
+         * 1. Attempt email.
+         * 2. Do NOT generate PDF.
+         * 3. Do NOT call DocumentService.
+         * 4. Do NOT finalise reports.
+         * 5. Do NOT block Page07 if email fails.
+         * 6. Continue to Page07.
+         * ==============================================================
+         */
+
+        try {
+
+            await sendCompletionEmail();
+
+        } catch (err) {
+
+            error(
+                "Unexpected email-flow error:",
+                err
+            );
+
+        }
+
+
+        goToPage07();
+
+    }
+
+
+    /* =================================================================
+       BIND NAVIGATOR
+       ================================================================= */
+
+    function bindNavigator() {
+
+        var button =
+            document.getElementById(
+                CONFIG.navigatorId
+            );
+
+
+        if (!button) {
+
+            warn(
+                "Navigator button not found:",
+                "#" + CONFIG.navigatorId
+            );
+
+            return false;
+
+        }
+
+
+        /*
+         * Avoid duplicate listeners if init() is accidentally called
+         * more than once.
+         */
+
+        if (
+            button.dataset &&
+            button.dataset.ctmPage06Bound === "true"
+        ) {
+
+            state.navigatorBound = true;
+
+            return true;
+
+        }
+
+
+        button.addEventListener(
+            "click",
+            handleNavigatorClick
+        );
+
+
+        if (button.dataset) {
+
+            button.dataset.ctmPage06Bound = "true";
+
+        }
+
+
+        state.navigatorBound = true;
+
+
+        log(
+            "Navigator bound successfully:",
+            "#" + CONFIG.navigatorId
+        );
+
+
+        return true;
+
+    }
+
+
+    /* =================================================================
+       INITIALISE
+       ================================================================= */
+
+    function init() {
+
+        /*
+         * The HTML may call init after the global component loader.
+         * Repeated calls are therefore made safe.
+         */
+
+        if (state.initialized) {
+
+            if (!state.navigatorBound) {
+                bindNavigator();
+            }
+
+            return;
+
+        }
+
+
+        state.initialized = true;
+
+
+        log(
+            "Simplified Launch Flow Ready"
+        );
+
+
+        /*
+         * Render dynamic information if Page05 supplied it.
+         * Static HTML remains the safe fallback.
+         */
+
+        try {
+
+            renderPrimaryFocus();
+
+        } catch (err) {
+
+            error(
+                "Primary-focus rendering failed:",
+                err
+            );
+
+        }
+
+
+        /*
+         * Bind the ACTUAL navigator defined by page06.html:
+         *
+         * #page06-next-button
+         */
+
+        bindNavigator();
+
+    }
+
+
+    /* =================================================================
+       PUBLIC NAMESPACE
+       ================================================================= */
+
+    window.CTM_PAGE06 = {
+
+        init: init,
+
+        bindNavigator: bindNavigator,
+
+        sendCompletionEmail: sendCompletionEmail,
+
+        getIdentity: getIdentity,
+
+        getDiagnosisResult: getDiagnosisResult,
+
+        state: state
+
+    };
+
+
+    log(
+        "Controller loaded."
+    );
+
+
+}());
+            
