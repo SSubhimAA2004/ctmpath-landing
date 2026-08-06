@@ -2900,12 +2900,11 @@
 
 @media (max-width: 680px) {
 
-
-    .page06 .page06-container {
-
-        width:
-            calc(100% - 28px);
-
+    .page06 {
+        width: 100vw;
+        max-width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
     }
 
 
