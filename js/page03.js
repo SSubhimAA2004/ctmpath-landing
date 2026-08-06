@@ -27,21 +27,21 @@
    BACKEND CONTRACT:
 
        {
-           peopleId: "CTM-XXXXXX",
-           pillarScores: {
-               "Purpose": 0-10,
-               "Health": 0-10,
-               "Relationships": 0-10,
-               "Character & Integrity": 0-10,
-               "Learning & Mastery": 0-10,
-               "Career & Contribution": 0-10,
-               "Financial Freedom": 0-10,
-               "Time Freedom": 0-10,
-               "Community & Tribe": 0-10,
-               "Systems & Productivity": 0-10,
-               "Service & Impact": 0-10,
-               "Vision & Legacy": 0-10
-           }
+            peopleId: "CTM-XXXXXX",
+            pillarScores: {
+                "Purpose": 0-10,
+                "Health": 0-10,
+                "Relationships": 0-10,
+                "Character & Integrity": 0-10,
+                "Learning & Mastery": 0-10,
+                "Career & Contribution": 0-10,
+                "Financial Freedom": 0-10,
+                "Time Freedom": 0-10,
+                "Community & Tribe": 0-10,
+                "Systems & Productivity": 0-10,
+                "Service & Impact": 0-10,
+                "Vision & Legacy": 0-10
+            }
        }
 
    IMPORTANT:
@@ -50,7 +50,7 @@
    Completion must create the canonical 04_LifeAssessment backend record
    before Page04 navigation is allowed.
 
-========================================================================== */
+   ========================================================================== */
 
 
 (function () {
@@ -60,7 +60,7 @@
 
     /* ======================================================================
        PAGE CONFIGURATION
-    ====================================================================== */
+       ====================================================================== */
 
 
     const PAGE03_CONFIG = {
@@ -99,7 +99,7 @@
        • frozen Page03 UI
        • Page04 PILLARS
        • 04_AssessmentEngine.gs
-    ====================================================================== */
+       ====================================================================== */
 
 
     const PILLARS = [
@@ -133,7 +133,7 @@
 
     /* ======================================================================
        PAGE STATE
-    ====================================================================== */
+       ====================================================================== */
 
 
     let assessmentData = {};
@@ -143,7 +143,7 @@
 
     /* ======================================================================
        INITIALIZE PAGE
-    ====================================================================== */
+       ====================================================================== */
 
 
     function initPage03() {
@@ -164,7 +164,7 @@
 
     /* ======================================================================
        CREATE SCORE SELECTORS
-    ====================================================================== */
+       ====================================================================== */
 
 
     function createScoreSelectors() {
@@ -306,7 +306,7 @@
 
     /* ======================================================================
        SCORE COLOUR CLASSIFICATION
-    ====================================================================== */
+       ====================================================================== */
 
 
     function getScoreClass(score) {
@@ -336,7 +336,7 @@
 
     /* ======================================================================
        CLEAR SCORE STATE
-    ====================================================================== */
+       ====================================================================== */
 
 
     function clearScoreState(button) {
@@ -366,7 +366,7 @@
 
     /* ======================================================================
        APPLY SCORE STATE
-    ====================================================================== */
+       ====================================================================== */
 
 
     function applyScoreState(
@@ -402,7 +402,7 @@
 
     /* ======================================================================
        SCORE SELECTION
-    ====================================================================== */
+       ====================================================================== */
 
 
     function selectScore(
@@ -523,7 +523,7 @@
        IMPORTANT:
        This supports Page03 restoration and Page04 rendering only.
        It is NOT the canonical backend Life Assessment record.
-    ====================================================================== */
+       ====================================================================== */
 
 
     function saveLocalProgress() {
@@ -552,7 +552,7 @@
 
     /* ======================================================================
        RESTORE ASSESSMENT
-    ====================================================================== */
+       ====================================================================== */
 
 
     function restoreAssessment() {
@@ -683,7 +683,7 @@
 
     /* ======================================================================
        NORMALIZE STORED ASSESSMENT
-    ====================================================================== */
+       ====================================================================== */
 
 
     function normalizeStoredAssessment(
@@ -758,7 +758,7 @@
 
     /* ======================================================================
        ASSESSMENT COMPLETION
-    ====================================================================== */
+       ====================================================================== */
 
 
     function isAssessmentComplete() {
@@ -826,7 +826,7 @@
        Page02Session is used first when available because it is the frozen
        Page02 journey-state contract. Scalar storage is the compatibility
        fallback.
-    ====================================================================== */
+       ====================================================================== */
 
 
     function resolvePeopleId() {
@@ -947,7 +947,7 @@
 
     /* ======================================================================
        EXTRACT PEOPLE ID FROM OBJECT
-    ====================================================================== */
+       ====================================================================== */
 
 
     function extractPeopleId(
@@ -1032,7 +1032,7 @@
 
     /* ======================================================================
        STORAGE HELPERS
-    ====================================================================== */
+       ====================================================================== */
 
 
     function readStorageString(
@@ -1196,7 +1196,7 @@
 
     /* ======================================================================
        BUILD CANONICAL BACKEND PAYLOAD
-    ====================================================================== */
+       ====================================================================== */
 
 
     function buildAssessmentPayload() {
@@ -1259,7 +1259,7 @@
 
     /* ======================================================================
        API RESOLUTION
-    ====================================================================== */
+       ====================================================================== */
 
 
     function getApi() {
@@ -1310,8 +1310,266 @@
 
 
     /* ======================================================================
+       BACKEND ERROR DIAGNOSTICS
+
+       Converts structured backend error values into readable messages.
+
+       IMPORTANT:
+       The backend may legitimately return:
+
+           error: "message"
+
+       or:
+
+           error: {
+               message: "message",
+               error: "...",
+               stack: "..."
+           }
+
+       Passing an object directly to new Error() produces "[object Object]".
+       This helper prevents that diagnostic information from being lost.
+       ====================================================================== */
+
+
+    function stringifyDiagnosticValue(
+        value
+    ) {
+
+        if (
+            value === undefined ||
+            value === null
+        ) {
+
+            return "";
+
+        }
+
+
+        if (
+            typeof value === "string"
+        ) {
+
+            return value.trim();
+
+        }
+
+
+        if (
+            typeof value === "number" ||
+            typeof value === "boolean"
+        ) {
+
+            return String(
+                value
+            );
+
+        }
+
+
+        if (
+            value instanceof Error
+        ) {
+
+            return (
+                value.message ||
+                String(
+                    value
+                )
+            );
+
+        }
+
+
+        if (
+            typeof value === "object"
+        ) {
+
+            /*
+             * Prefer human-readable fields before serializing the
+             * complete object.
+             */
+            const nestedMessage =
+                stringifyDiagnosticValue(
+                    value.message
+                );
+
+
+            if (nestedMessage) {
+
+                return nestedMessage;
+
+            }
+
+
+            const nestedError =
+                stringifyDiagnosticValue(
+                    value.error
+                );
+
+
+            if (nestedError) {
+
+                return nestedError;
+
+            }
+
+
+            const nestedDetails =
+                stringifyDiagnosticValue(
+                    value.details
+                );
+
+
+            if (nestedDetails) {
+
+                return nestedDetails;
+
+            }
+
+
+            try {
+
+                return JSON.stringify(
+                    value,
+                    null,
+                    2
+                );
+
+            }
+            catch (error) {
+
+                return String(
+                    value
+                );
+
+            }
+
+        }
+
+
+        return String(
+            value
+        );
+
+    }
+
+
+    function extractBackendErrorMessage(
+        response
+    ) {
+
+        if (
+            response === undefined ||
+            response === null
+        ) {
+
+            return "Life Assessment save returned no response.";
+
+        }
+
+
+        if (
+            response === false
+        ) {
+
+            return "Life Assessment could not be saved.";
+
+        }
+
+
+        if (
+            typeof response !== "object"
+        ) {
+
+            const scalarMessage =
+                stringifyDiagnosticValue(
+                    response
+                );
+
+
+            return (
+                scalarMessage ||
+                "Life Assessment could not be saved."
+            );
+
+        }
+
+
+        /*
+         * Search the common backend response locations in order.
+         */
+        const candidates = [
+
+            response.message,
+
+            response.error,
+
+            response.details,
+
+            response.data &&
+                response.data.message,
+
+            response.data &&
+                response.data.error,
+
+            response.data &&
+                response.data.details,
+
+            response.data &&
+                response.data.data &&
+                response.data.data.message,
+
+            response.data &&
+                response.data.data &&
+                response.data.data.error
+
+        ];
+
+
+        for (
+            let i = 0;
+            i < candidates.length;
+            i++
+        ) {
+
+            const message =
+                stringifyDiagnosticValue(
+                    candidates[i]
+                );
+
+
+            if (message) {
+
+                return message;
+
+            }
+
+        }
+
+
+        /*
+         * If the backend supplied no recognised message field,
+         * expose the complete response rather than reducing it to
+         * "[object Object]".
+         */
+        const serializedResponse =
+            stringifyDiagnosticValue(
+                response
+            );
+
+
+        return (
+            serializedResponse ||
+            "Life Assessment could not be saved."
+        );
+
+    }
+
+
+    /* ======================================================================
        BACKEND RESPONSE VALIDATION
-    ====================================================================== */
+       ====================================================================== */
 
 
     function validateBackendResponse(
@@ -1342,22 +1600,57 @@
             )
         ) {
 
+            /*
+             * Preserve the complete backend response in DevTools.
+             * This is deliberately logged before extracting the
+             * user-visible Error message.
+             */
+            console.error(
+                "CTM PATH™ Page03 backend rejection — RAW RESPONSE:",
+                response
+            );
+
+
+            let serializedResponse =
+                "";
+
+
+            try {
+
+                serializedResponse =
+                    JSON.stringify(
+                        response,
+                        null,
+                        2
+                    );
+
+            }
+            catch (serializationError) {
+
+                serializedResponse =
+                    String(
+                        response
+                    );
+
+            }
+
+
+            console.error(
+                "CTM PATH™ Page03 backend rejection — SERIALIZED RESPONSE:",
+                serializedResponse
+            );
+
+
             const message =
-                response &&
-                typeof response === "object"
-                    ? (
-                        response.message ||
-                        response.error ||
-                        (
-                            response.data &&
-                            (
-                                response.data.message ||
-                                response.data.error
-                            )
-                        ) ||
-                        "Life Assessment could not be saved."
-                    )
-                    : "Life Assessment could not be saved.";
+                extractBackendErrorMessage(
+                    response
+                );
+
+
+            console.error(
+                "CTM PATH™ Page03 backend rejection — EXTRACTED MESSAGE:",
+                message
+            );
 
 
             throw new Error(
@@ -1407,7 +1700,7 @@
 
     /* ======================================================================
        SAVE BACKEND RESULT
-    ====================================================================== */
+       ====================================================================== */
 
 
     function saveBackendResult(
@@ -1456,7 +1749,7 @@
 
     /* ======================================================================
        SUBMIT ASSESSMENT
-    ====================================================================== */
+       ====================================================================== */
 
 
     async function submitAssessment() {
@@ -1520,6 +1813,18 @@
                 );
 
 
+            /*
+             * QA DIAGNOSTIC:
+             *
+             * Preserve the exact value returned by api.js before
+             * validation or unwrapping occurs.
+             */
+            console.log(
+                "CTM PATH™ Page03 RAW saveAssessment response:",
+                rawResponse
+            );
+
+
             const result =
                 validateBackendResponse(
                     rawResponse
@@ -1554,6 +1859,23 @@
             );
 
 
+            /*
+             * QA DIAGNOSTIC:
+             *
+             * Log the resolved error message separately so DevTools
+             * exposes it even if the browser collapses the Error object.
+             */
+            console.error(
+                "CTM PATH™ Page03 resolved persistence error:",
+                error &&
+                error.message
+                    ? error.message
+                    : stringifyDiagnosticValue(
+                        error
+                    )
+            );
+
+
             showSubmissionError(
                 error
             );
@@ -1575,7 +1897,7 @@
 
     /* ======================================================================
        SUBMIT BUTTON STATE
-    ====================================================================== */
+       ====================================================================== */
 
 
     function setSubmitState(
@@ -1627,7 +1949,7 @@
 
        Uses existing page markup only.
        No HTML redesign is required.
-    ====================================================================== */
+       ====================================================================== */
 
 
     function showSubmissionError(
@@ -1637,8 +1959,12 @@
         const message =
             error &&
             error.message
-                ? error.message
-                : "Unable to save your Life Assessment. Please try again.";
+                ? stringifyDiagnosticValue(
+                    error.message
+                )
+                : stringifyDiagnosticValue(
+                    error
+                );
 
 
         /*
@@ -1646,7 +1972,8 @@
          * Do not navigate and do not silently swallow persistence failure.
          */
         window.alert(
-            message
+            message ||
+            "Unable to save your Life Assessment. Please try again."
         );
 
     }
@@ -1654,7 +1981,7 @@
 
     /* ======================================================================
        NAVIGATION TO PAGE 04
-    ====================================================================== */
+       ====================================================================== */
 
 
     function bindNavigation() {
@@ -1704,7 +2031,7 @@
 
     /* ======================================================================
        PUBLIC PAGE MODULE
-    ====================================================================== */
+       ====================================================================== */
 
 
     window.CTM_PAGE03 = {
