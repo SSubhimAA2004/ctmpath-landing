@@ -185,20 +185,57 @@
         0 0 30px rgba(32, 201, 195, 0.10);
 }
 
-
 /* =============================================================================
    02. RESET / PAGE FOUNDATION
    ============================================================================= */
 
 html {
-    scroll-behavior: smooth;
+    width:
+        100%;
+
+    max-width:
+        100%;
+
+    min-height:
+        100%;
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+    overflow-x:
+        hidden;
+
+    background:
+        #071f3d;
+
+    scroll-behavior:
+        smooth;
 }
 
 body.page02a-body {
-    margin: 0;
-    padding: 0;
+    width:
+        100%;
 
-    min-height: 100vh;
+    max-width:
+        100%;
+
+    min-height:
+        100vh;
+
+    min-height:
+        100dvh;
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+    overflow-x:
+        hidden;
 
     background:
         radial-gradient(
@@ -215,9 +252,6 @@ body.page02a-body {
     color:
         var(--p02-text);
 
-    overflow-x:
-        hidden;
-
     -webkit-font-smoothing:
         antialiased;
 
@@ -231,7 +265,6 @@ body.page02a-body {
     box-sizing:
         border-box;
 }
-
 
 /* =============================================================================
    03. PAGE ROOT
