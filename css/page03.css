@@ -26,6 +26,59 @@
 ========================================================================== */
 
 
+
+/* ==========================================================================
+   DOCUMENT CANVAS
+   Ensures Page03 remains full-bleed on mobile browsers.
+   Internal content gutters continue to be controlled by Page03 containers.
+========================================================================== */
+
+html,
+body {
+
+    width:
+        100%;
+
+    min-width:
+        100%;
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+    background:
+        #081426;
+
+    overflow-x:
+        hidden;
+
+}
+
+
+body {
+
+    min-height:
+        100vh;
+
+}
+
+
+@supports (min-height: 100dvh) {
+
+    body {
+
+        min-height:
+            100dvh;
+
+    }
+
+}
+
+
+
+
 /* ==========================================================================
    PAGE FOUNDATION
 ========================================================================== */
