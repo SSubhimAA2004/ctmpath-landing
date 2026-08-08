@@ -23,42 +23,16 @@
 
 
     <!-- ================================================================
-         GLOBAL FOUNDATION
-    ================================================================= -->
-
-    <link
-        rel="stylesheet"
-        href="../css/foundation/tokens.css"
-    >
-
-    <link
-        rel="stylesheet"
-        href="../css/foundation/base.css"
-    >
-
-    <link
-        rel="stylesheet"
-        href="../css/foundation/responsive.css"
-    >
-
-
-    <!-- ================================================================
-         GLOBAL COMPONENTS
-    ================================================================= -->
-
-    <link
-        rel="stylesheet"
-        href="../css/header.css"
-    >
-
-    <link
-        rel="stylesheet"
-        href="../css/footer.css"
-    >
-
-
-    <!-- ================================================================
          PAGE 02 SHARED DIMENSION SYSTEM
+         
+         Page 02B is intentionally self-contained.
+         
+         DO NOT ADD:
+         - global foundation CSS
+         - global header CSS
+         - global footer CSS
+         - global header component
+         - global footer component
     ================================================================= -->
 
     <link
@@ -69,8 +43,6 @@
 
     <!-- ================================================================
          PAGE 02B — DIMENSION 01 / WEALTH™
-         
-         This is the ONLY Page 02B-specific stylesheet.
     ================================================================= -->
 
     <link
@@ -82,16 +54,6 @@
 
 
 <body>
-
-
-    <!-- ================================================================
-         GLOBAL HEADER
-    ================================================================= -->
-
-    <div
-        id="global-header"
-        data-component="header"
-    ></div>
 
 
     <!-- ================================================================
@@ -121,6 +83,7 @@
                     <p class="dimension-progress-label">
                         MILLIONAIRE LIFESTYLE SCORECARD™
                     </p>
+
 
                     <p
                         id="dimensionProgressNumber"
@@ -155,14 +118,15 @@
 
             <header class="dimension-header">
 
+
                 <p class="dimension-eyebrow">
                     DIMENSION 01
                 </p>
 
 
                 <!--
-                    Populated by page02-scorecard.js
-                    using page02-data.js.
+                    Populated dynamically by page02-scorecard.js
+                    from page02-data.js.
                 -->
 
                 <h1
@@ -178,14 +142,21 @@
 
 
                 <p class="dimension-introduction">
+
                     உங்கள் தற்போதைய வாழ்க்கை நிலைக்கு
                     மிகவும் பொருத்தமான ஒரு தேர்வை
                     ஒவ்வொரு அளவுகோலிலும் தேர்ந்தெடுக்கவும்.
+
                 </p>
 
 
                 <!-- ====================================================
                      LIVE DIMENSION SCORE
+                     
+                     This remains visible while answering.
+                     
+                     The progressive six-card journey summary is
+                     rendered separately near the bottom by page02b.js.
                 ===================================================== -->
 
                 <div
@@ -207,6 +178,7 @@
                             0
                         </span>
 
+
                         <span
                             id="dimensionScoreTotal"
                             class="dimension-score-total"
@@ -224,8 +196,10 @@
             <!-- ========================================================
                  SCORECARD
                  
-                 Indicator markup is NOT hardcoded here.
-
+                 IMPORTANT:
+                 
+                 No indicator markup is hardcoded here.
+                 
                  page02-scorecard.js reads Dimension 01 from
                  page02-data.js and renders Indicators 01–05
                  into #scorecardList.
@@ -275,7 +249,8 @@
             <!-- ========================================================
                  HOW YOUR SCORE WORKS
                  
-                 page02-scorecard.js renders the complete guide.
+                 The complete four-level guide is rendered dynamically
+                 by page02-scorecard.js.
             ========================================================= -->
 
             <aside
@@ -300,6 +275,8 @@
 
             <!-- ========================================================
                  NAVIGATION
+                 
+                 page02b.js controls navigation and validation.
             ========================================================= -->
 
             <nav
@@ -322,6 +299,7 @@
                         ← முந்தையது
                     </span>
 
+
                     <span class="dimension-button-secondary-text">
                         BACK TO YOUR DETAILS
                     </span>
@@ -332,8 +310,8 @@
                 <!-- ====================================================
                      NEXT
                      
-                     page02b.js validates all five indicators before
-                     allowing navigation to Dimension 02.
+                     page02b.js will not navigate until all five
+                     indicators have been answered.
                 ===================================================== -->
 
                 <button
@@ -345,6 +323,7 @@
                     <span class="dimension-button-primary-text">
                         அடுத்த பரிமாணம் →
                     </span>
+
 
                     <span class="dimension-button-secondary-text">
                         CONTINUE TO DIMENSION 02
@@ -361,43 +340,18 @@
 
 
     <!-- ================================================================
-         GLOBAL FOOTER
-    ================================================================= -->
-
-    <div
-        id="global-footer"
-        data-component="footer"
-    ></div>
-
-
-    <!-- ================================================================
-         GLOBAL JAVASCRIPT
-    ================================================================= -->
-
-    <script src="../js/component-loader.js"></script>
-
-    <script src="../js/global.js"></script>
-
-    <script src="../js/api.js"></script>
-
-
-    <!-- ================================================================
          PAGE 02 JAVASCRIPT
          
-         LOAD ORDER:
+         IMPORTANT LOAD ORDER
          
          1. page02-data.js
-            Frozen indicators + range definitions
-
          2. page02-session.js
-            Shared journey state + answer persistence
-
          3. page02-scorecard.js
-            Shared renderer + scoring + validation
-
          4. page02b.js
-            Dimension 01 navigation + progressive scoreboard
+         
+         No global component loader is required by this page.
     ================================================================= -->
+
 
     <script src="../js/page02/page02-data.js"></script>
 
