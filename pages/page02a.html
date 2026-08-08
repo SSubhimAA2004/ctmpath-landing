@@ -5,26 +5,57 @@
 
 <head>
 
+    <!-- ==========================================================
+         CTM PATH™ MILLIONAIRES™
+
+         PAGE 02A
+         REGISTRATION / ABOUT YOU
+
+         VERSION:
+         6.0 — LOW COGNITIVE LOAD
+
+         IMPORTANT:
+         This page preserves the existing JavaScript contract.
+
+         NO:
+         - Global footer
+         - Long-form explanations
+         - Repeated bilingual copy
+         - "Scorecard" language during registration
+
+         RETAINED:
+         - Existing field IDs
+         - Existing field names
+         - Existing form
+         - Existing validation hooks
+         - Existing API contract
+         - Existing navigation contract
+    ========================================================== -->
+
+
     <meta charset="UTF-8">
+
 
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
 
+
     <meta
         name="description"
-        content="CTM PATH™ MILLIONAIRES™ — Millionaire Lifestyle Scorecard™"
+        content="CTM PATH™ MILLIONAIRES™ — Your Journey Begins With You."
     >
 
+
     <title>
-        CTM PATH™ MILLIONAIRES™ — Lifestyle Scorecard™
+        CTM PATH™ MILLIONAIRES™ — About You
     </title>
 
 
-    <!-- =====================================================================
+    <!-- ==========================================================
          GLOBAL FOUNDATION
-    ====================================================================== -->
+    ========================================================== -->
 
     <link
         rel="stylesheet"
@@ -42,24 +73,19 @@
     >
 
 
-    <!-- =====================================================================
-         GLOBAL COMPONENTS
-    ====================================================================== -->
+    <!-- ==========================================================
+         GLOBAL HEADER
+    ========================================================== -->
 
     <link
         rel="stylesheet"
         href="../css/header.css"
     >
 
-    <link
-        rel="stylesheet"
-        href="../css/footer.css"
-    >
 
-
-    <!-- =====================================================================
-         PAGE 02
-    ====================================================================== -->
+    <!-- ==========================================================
+         PAGE 02 FOUNDATION
+    ========================================================== -->
 
     <link
         rel="stylesheet"
@@ -77,10 +103,9 @@
 <body class="page02a-body">
 
 
-<!-- =========================================================================
+<!-- ==========================================================
      GLOBAL HEADER
-============================================================================ -->
-
+========================================================== -->
 
 <div
     id="global-header"
@@ -89,10 +114,9 @@
 
 
 
-<!-- =========================================================================
+<!-- ==========================================================
      PAGE 02A
-============================================================================ -->
-
+========================================================== -->
 
 <main
     id="page02a"
@@ -100,11 +124,14 @@
 >
 
 
-    <!-- =====================================================================
+    <!-- ======================================================
          SCREEN 01
-         SCORECARD INTRODUCTION
-    ====================================================================== -->
+         MINIMAL INTRODUCTION
 
+         Existing JS contract retained:
+         #introScreen
+         #beginButton
+    ======================================================= -->
 
     <section
         id="introScreen"
@@ -112,84 +139,57 @@
         aria-labelledby="scorecardIntroTitle"
     >
 
-
         <div class="page02-shell">
 
 
             <div class="scorecard-intro-card">
 
 
+                <!-- ------------------------------------------
+                     SMALL PROGRESS LABEL
+                ------------------------------------------- -->
+
                 <div class="scorecard-eyebrow">
-                    SCORECARD INSTRUCTION
+                    01 / 07
                 </div>
 
+
+                <!-- ------------------------------------------
+                     MAIN MESSAGE
+                ------------------------------------------- -->
 
                 <h1
                     id="scorecardIntroTitle"
                     class="scorecard-intro-title"
                 >
-
-                    இது ஒரு தேர்வு அல்ல.<br>
-
-                    இது உங்கள் வாழ்க்கையின்<br>
-
-                    இன்றைய படம்.
-
+                    உங்களிடமிருந்து
+                    <br>
+                    தொடங்கலாம்.
                 </h1>
 
+
+                <!-- ------------------------------------------
+                     ENGLISH SUPPORT
+                ------------------------------------------- -->
 
                 <div class="scorecard-intro-english">
 
                     <p>
-                        THIS IS NOT A TEST.
-                    </p>
-
-                    <p>
-                        IT'S A PICTURE OF WHERE YOU ARE TODAY.
+                        LET'S BEGIN WITH YOU.
                     </p>
 
                 </div>
 
+
+                <!-- ------------------------------------------
+                     ONE SIMPLE REASSURANCE
+                ------------------------------------------- -->
 
                 <div class="scorecard-intro-copy">
 
                     <p>
-                        ஒவ்வொரு கேள்விக்கும் உங்கள் தற்போதைய உண்மை
-                        நிலையை மட்டுமே பதிவு செய்யுங்கள்.
+                        சில அடிப்படை தகவல்கள் மட்டும்.
                     </p>
-
-                    <p>
-                        நீங்கள் இருக்க விரும்பும் நிலையை அல்ல —
-                        நீங்கள் இன்று இருக்கும் நிலையை.
-                    </p>
-
-                </div>
-
-
-                <div class="scorecard-intro-support">
-
-                    <p>
-                        ENTER YOUR REALITY TODAY.
-                    </p>
-
-                    <p>
-                        Not where you hope to be. Where you are now.
-                    </p>
-
-                </div>
-
-
-                <div class="scorecard-calculation-note">
-
-                    <p>
-                        உங்கள் மதிப்பெண் மற்றும் சதவீதம்
-                        தானாக கணக்கிடப்படும்.
-                    </p>
-
-                    <span>
-                        YOUR SCORE AND GAP WILL BE
-                        CALCULATED AUTOMATICALLY.
-                    </span>
 
                 </div>
 
@@ -197,8 +197,11 @@
             </div>
 
 
-            <div class="page02-intro-action">
+            <!-- ----------------------------------------------
+                 BEGIN
+            ----------------------------------------------- -->
 
+            <div class="page02-intro-action">
 
                 <button
                     id="beginButton"
@@ -207,7 +210,7 @@
                 >
 
                     <span class="button-primary">
-                        தொடங்கலாம்.
+                        தொடங்கலாம் →
                     </span>
 
                     <span class="button-secondary">
@@ -216,25 +219,27 @@
 
                 </button>
 
-
             </div>
 
 
         </div>
 
-
     </section>
 
 
 
-    <!-- =====================================================================
+    <!-- ======================================================
          SCREEN 02
-         ABOUT YOU™ / KYC
+         ABOUT YOU™
 
          Initially hidden.
-         page02a.js reveals this screen after LET'S BEGIN.
-    ====================================================================== -->
 
+         page02a.js reveals this screen after
+         #beginButton is activated.
+
+         EXISTING ID RETAINED:
+         #kycScreen
+    ======================================================= -->
 
     <section
         id="kycScreen"
@@ -244,20 +249,36 @@
         hidden
     >
 
-
         <div class="page02-shell">
 
 
-            <!-- =============================================================
-                 KYC HEADING
-            ============================================================== -->
+            <!-- =================================================
+                 JOURNEY POSITION
+            ================================================== -->
 
+            <div class="kyc-progress">
+
+                <span class="kyc-progress-number">
+                    01 / 07
+                </span>
+
+                <span class="kyc-progress-label">
+                    உங்களைப் பற்றி
+                </span>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 KYC HEADING
+            ================================================== -->
 
             <header class="kyc-heading">
 
 
                 <div class="scorecard-eyebrow">
-                    BEFORE WE BEGIN
+                    LET'S BEGIN WITH YOU
                 </div>
 
 
@@ -265,21 +286,17 @@
                     id="kycTitle"
                     class="kyc-title"
                 >
-                    ABOUT YOU™
+                    உங்களைப் பற்றி
                 </h1>
 
 
                 <p class="kyc-title-english">
-                    YOUR DETAILS. YOUR LIFE. YOUR JOURNEY.
+                    ABOUT YOU
                 </p>
 
 
                 <p class="kyc-introduction">
-
-                    உங்கள் Millionaire Lifestyle Scorecard™
-                    பயணத்தை உங்களுக்காக உருவாக்க,
-                    கீழே உள்ள விவரங்களை பதிவு செய்யுங்கள்.
-
+                    சில அடிப்படை தகவல்கள் மட்டும்.
                 </p>
 
 
@@ -287,10 +304,12 @@
 
 
 
-            <!-- =============================================================
+            <!-- =================================================
                  KYC FORM
-            ============================================================== -->
 
+                 IMPORTANT:
+                 Existing form ID retained.
+            ================================================== -->
 
             <form
                 id="kycForm"
@@ -299,10 +318,10 @@
             >
 
 
-                <!-- =========================================================
-                     CARD 01 — YOUR DETAILS™
-                ========================================================== -->
-
+                <!-- =================================================
+                     CARD 01
+                     ABOUT YOU
+                ================================================== -->
 
                 <section
                     class="kyc-card kyc-section-card"
@@ -314,7 +333,7 @@
 
 
                         <div class="kyc-card-number">
-                            CARD 01
+                            01
                         </div>
 
 
@@ -322,8 +341,13 @@
                             id="kycDetailsTitle"
                             class="kyc-card-title"
                         >
-                            YOUR DETAILS™
+                            உங்களைப் பற்றி
                         </h2>
+
+
+                        <p class="kyc-card-subtitle">
+                            ABOUT YOU
+                        </p>
 
 
                     </header>
@@ -333,11 +357,11 @@
                     <div class="kyc-card-grid">
 
 
-                        <!-- FULL NAME -->
-
+                        <!-- =====================================
+                             FULL NAME
+                        ====================================== -->
 
                         <div class="kyc-field kyc-field-full">
-
 
                             <label
                                 for="fullName"
@@ -349,7 +373,7 @@
                                 </span>
 
                                 <span class="kyc-label-english">
-                                    FULL NAME
+                                    NAME
                                 </span>
 
                             </label>
@@ -365,16 +389,15 @@
                                 required
                             >
 
-
                         </div>
 
 
 
-                        <!-- MOBILE NUMBER -->
-
+                        <!-- =====================================
+                             MOBILE
+                        ====================================== -->
 
                         <div class="kyc-field">
-
 
                             <label
                                 for="mobile"
@@ -386,7 +409,7 @@
                                 </span>
 
                                 <span class="kyc-label-english">
-                                    MOBILE NUMBER
+                                    WHATSAPP / MOBILE
                                 </span>
 
                             </label>
@@ -403,16 +426,15 @@
                                 required
                             >
 
-
                         </div>
 
 
 
-                        <!-- EMAIL ADDRESS -->
-
+                        <!-- =====================================
+                             EMAIL
+                        ====================================== -->
 
                         <div class="kyc-field">
-
 
                             <label
                                 for="email"
@@ -420,11 +442,11 @@
                             >
 
                                 <span class="kyc-label-tamil">
-                                    மின்னஞ்சல் முகவரி
+                                    மின்னஞ்சல்
                                 </span>
 
                                 <span class="kyc-label-english">
-                                    EMAIL ADDRESS
+                                    EMAIL
                                 </span>
 
                             </label>
@@ -441,16 +463,15 @@
                                 required
                             >
 
-
                         </div>
 
 
 
-                        <!-- AGE -->
-
+                        <!-- =====================================
+                             AGE
+                        ====================================== -->
 
                         <div class="kyc-field">
-
 
                             <label
                                 for="age"
@@ -480,18 +501,17 @@
                                 required
                             >
 
-
                         </div>
 
 
 
-                        <!-- GENDER -->
-
+                        <!-- =====================================
+                             GENDER
+                        ====================================== -->
 
                         <fieldset
                             class="kyc-field kyc-choice-field"
                         >
-
 
                             <legend class="kyc-label">
 
@@ -515,7 +535,6 @@
 
                                 <label class="kyc-choice">
 
-
                                     <input
                                         type="radio"
                                         name="gender"
@@ -523,17 +542,14 @@
                                         required
                                     >
 
-
                                     <span>
                                         Male
                                     </span>
-
 
                                 </label>
 
 
                                 <label class="kyc-choice">
-
 
                                     <input
                                         type="radio"
@@ -542,17 +558,14 @@
                                         required
                                     >
 
-
                                     <span>
                                         Female
                                     </span>
-
 
                                 </label>
 
 
                                 <label class="kyc-choice">
-
 
                                     <input
                                         type="radio"
@@ -561,32 +574,28 @@
                                         required
                                     >
 
-
                                     <span>
                                         Other
                                     </span>
-
 
                                 </label>
 
 
                             </div>
 
-
                         </fieldset>
 
 
                     </div>
 
-
                 </section>
 
 
 
-                <!-- =========================================================
-                     CARD 02 — YOUR LIFE™
-                ========================================================== -->
-
+                <!-- =================================================
+                     CARD 02
+                     YOUR LIFE
+                ================================================== -->
 
                 <section
                     class="kyc-card kyc-section-card"
@@ -598,7 +607,7 @@
 
 
                         <div class="kyc-card-number">
-                            CARD 02
+                            02
                         </div>
 
 
@@ -606,8 +615,13 @@
                             id="kycLifeTitle"
                             class="kyc-card-title"
                         >
-                            YOUR LIFE™
+                            உங்கள் வாழ்க்கை
                         </h2>
+
+
+                        <p class="kyc-card-subtitle">
+                            YOUR LIFE
+                        </p>
 
 
                     </header>
@@ -617,11 +631,11 @@
                     <div class="kyc-card-grid">
 
 
-                        <!-- OCCUPATION -->
-
+                        <!-- =====================================
+                             OCCUPATION
+                        ====================================== -->
 
                         <div class="kyc-field">
-
 
                             <label
                                 for="occupation"
@@ -649,16 +663,15 @@
                                 required
                             >
 
-
                         </div>
 
 
 
-                        <!-- EMPLOYER / BUSINESS -->
-
+                        <!-- =====================================
+                             EMPLOYER / BUSINESS
+                        ====================================== -->
 
                         <div class="kyc-field">
-
 
                             <label
                                 for="employerBusiness"
@@ -686,18 +699,17 @@
                                 required
                             >
 
-
                         </div>
 
 
 
-                        <!-- MARITAL STATUS -->
-
+                        <!-- =====================================
+                             MARITAL STATUS
+                        ====================================== -->
 
                         <fieldset
                             class="kyc-field kyc-choice-field"
                         >
-
 
                             <legend class="kyc-label">
 
@@ -721,7 +733,6 @@
 
                                 <label class="kyc-choice">
 
-
                                     <input
                                         type="radio"
                                         name="maritalStatus"
@@ -729,17 +740,14 @@
                                         required
                                     >
 
-
                                     <span>
                                         Single
                                     </span>
-
 
                                 </label>
 
 
                                 <label class="kyc-choice">
-
 
                                     <input
                                         type="radio"
@@ -748,17 +756,14 @@
                                         required
                                     >
 
-
                                     <span>
                                         Married
                                     </span>
-
 
                                 </label>
 
 
                                 <label class="kyc-choice">
-
 
                                     <input
                                         type="radio"
@@ -767,27 +772,24 @@
                                         required
                                     >
 
-
                                     <span>
                                         Other
                                     </span>
-
 
                                 </label>
 
 
                             </div>
 
-
                         </fieldset>
 
 
 
-                        <!-- DEPENDENTS -->
-
+                        <!-- =====================================
+                             DEPENDENTS
+                        ====================================== -->
 
                         <div class="kyc-field">
-
 
                             <label
                                 for="dependents"
@@ -862,21 +864,19 @@
 
                             </select>
 
-
                         </div>
 
 
                     </div>
 
-
                 </section>
 
 
 
-                <!-- =========================================================
-                     CARD 03 — YOUR LOCATION™
-                ========================================================== -->
-
+                <!-- =================================================
+                     CARD 03
+                     WHERE YOU LIVE
+                ================================================== -->
 
                 <section
                     class="kyc-card kyc-section-card"
@@ -888,7 +888,7 @@
 
 
                         <div class="kyc-card-number">
-                            CARD 03
+                            03
                         </div>
 
 
@@ -896,8 +896,13 @@
                             id="kycLocationTitle"
                             class="kyc-card-title"
                         >
-                            YOUR LOCATION™
+                            நீங்கள் வசிக்கும் இடம்
                         </h2>
+
+
+                        <p class="kyc-card-subtitle">
+                            WHERE YOU LIVE
+                        </p>
 
 
                     </header>
@@ -907,11 +912,11 @@
                     <div class="kyc-card-grid">
 
 
-                        <!-- CITY -->
-
+                        <!-- =====================================
+                             CITY
+                        ====================================== -->
 
                         <div class="kyc-field">
-
 
                             <label
                                 for="city"
@@ -939,16 +944,15 @@
                                 required
                             >
 
-
                         </div>
 
 
 
-                        <!-- DISTRICT -->
-
+                        <!-- =====================================
+                             DISTRICT
+                        ====================================== -->
 
                         <div class="kyc-field">
-
 
                             <label
                                 for="district"
@@ -975,16 +979,15 @@
                                 required
                             >
 
-
                         </div>
 
 
 
-                        <!-- STATE -->
-
+                        <!-- =====================================
+                             STATE
+                        ====================================== -->
 
                         <div class="kyc-field">
-
 
                             <label
                                 for="state"
@@ -1012,16 +1015,15 @@
                                 required
                             >
 
-
                         </div>
 
 
 
-                        <!-- COUNTRY -->
-
+                        <!-- =====================================
+                             COUNTRY
+                        ====================================== -->
 
                         <div class="kyc-field">
-
 
                             <label
                                 for="country"
@@ -1059,16 +1061,15 @@
 
                             </select>
 
-
                         </div>
 
 
 
-                        <!-- PINCODE -->
-
+                        <!-- =====================================
+                             PINCODE
+                        ====================================== -->
 
                         <div class="kyc-field">
-
 
                             <label
                                 for="pincode"
@@ -1098,18 +1099,17 @@
                                 required
                             >
 
-
                         </div>
 
 
 
-                        <!-- PREFERRED LANGUAGE -->
-
+                        <!-- =====================================
+                             PREFERRED LANGUAGE
+                        ====================================== -->
 
                         <fieldset
                             class="kyc-field kyc-choice-field"
                         >
-
 
                             <legend class="kyc-label">
 
@@ -1118,7 +1118,7 @@
                                 </span>
 
                                 <span class="kyc-label-english">
-                                    PREFERRED LANGUAGE
+                                    LANGUAGE
                                 </span>
 
                             </legend>
@@ -1133,7 +1133,6 @@
 
                                 <label class="kyc-choice">
 
-
                                     <input
                                         type="radio"
                                         name="preferredLanguage"
@@ -1141,17 +1140,14 @@
                                         required
                                     >
 
-
                                     <span>
                                         தமிழ்
                                     </span>
-
 
                                 </label>
 
 
                                 <label class="kyc-choice">
-
 
                                     <input
                                         type="radio"
@@ -1160,27 +1156,27 @@
                                         required
                                     >
 
-
                                     <span>
                                         English
                                     </span>
-
 
                                 </label>
 
 
                             </div>
 
-
                         </fieldset>
 
 
 
-                        <!-- SOURCE -->
+                        <!-- =====================================
+                             SOURCE
 
+                             Existing field retained because
+                             backend registration expects it.
+                        ====================================== -->
 
                         <div class="kyc-field kyc-field-full">
-
 
                             <label
                                 for="source"
@@ -1188,11 +1184,11 @@
                             >
 
                                 <span class="kyc-label-tamil">
-                                    CTM PATH MILLIONAIRES பற்றி எப்படி அறிந்தீர்கள்?
+                                    CTM PATH™ பற்றி எப்படி அறிந்தீர்கள்?
                                 </span>
 
                                 <span class="kyc-label-english">
-                                    HOW DID YOU HEAR ABOUT CTM PATH MILLIONAIRES?
+                                    HOW DID YOU HEAR ABOUT US?
                                 </span>
 
                             </label>
@@ -1251,23 +1247,20 @@
 
                             </select>
 
-
                         </div>
 
 
                     </div>
 
-
                 </section>
 
 
 
-                <!-- =========================================================
+                <!-- =================================================
                      FORM FEEDBACK
 
-                     page02a.js owns the content.
-                ========================================================== -->
-
+                     IDs RETAINED
+                ================================================== -->
 
                 <div
                     id="kycError"
@@ -1288,25 +1281,13 @@
 
 
 
-                <!-- =========================================================
-                     FINAL CTA
+                <!-- =================================================
+                     FINAL ACTION
 
-                     IMPORTANT BACKEND EVENT
+                     Existing ID retained.
 
-                     page02a.js must:
-
-                     1. Validate every mandatory field
-                     2. Build complete KYC payload
-                     3. Call CTM_API.register()
-                     4. Wait for backend success
-                     5. Preserve returned client identity
-                     6. Preserve complete KYC
-                     7. Set Dimension 01 = wealth
-                     8. Navigate to page02b.html
-
-                     NEVER navigate before successful registration.
-                ========================================================== -->
-
+                     Backend contract unchanged.
+                ================================================== -->
 
                 <div class="kyc-action kyc-final-action">
 
@@ -1317,16 +1298,13 @@
                         type="submit"
                     >
 
-
                         <span class="button-primary">
-                            என் Scorecard™-ஐ தொடங்குகிறேன்
+                            தொடரலாம் →
                         </span>
-
 
                         <span class="button-secondary">
-                            BEGIN MY SCORECARD™
+                            CONTINUE
                         </span>
-
 
                     </button>
 
@@ -1339,7 +1317,6 @@
 
         </div>
 
-
     </section>
 
 
@@ -1347,50 +1324,31 @@
 
 
 
-<!-- =========================================================================
-     GLOBAL FOOTER
-============================================================================ -->
+<!-- ==========================================================
+     NO GLOBAL FOOTER
 
+     INTENTIONALLY REMOVED FROM PAGE 02A.
 
-<div
-    id="global-footer"
-    data-component="footer"
-></div>
+     The prospect remains inside the guided journey.
+========================================================== -->
 
 
 
-<!-- =========================================================================
+<!-- ==========================================================
      JAVASCRIPT CONTRACT
 
-     ORDER IS INTENTIONAL.
-
-     component-loader
-         ↓
-     explicit global component initialization
-         ↓
-     global
-         ↓
-     API
-         ↓
-     Page02Data
-         ↓
-     Page02Session
-         ↓
-     Page02A controller
-============================================================================ -->
+     ORDER PRESERVED FROM ORIGINAL FILE.
+========================================================== -->
 
 
 <script src="../js/component-loader.js"></script>
 
 
+<!-- ==========================================================
+     GLOBAL HEADER ONLY
 
-<!-- =========================================================================
-     LOAD GLOBAL HEADER + FOOTER
-
-     component-loader.js intentionally does not auto-run.
-     Page 02A requires both global components.
-============================================================================ -->
-
+     Footer is intentionally NOT loaded.
+========================================================== -->
 
 <script>
 
@@ -1427,7 +1385,7 @@
                         ) {
 
                             console.info(
-                                "CTM PATH™ Page 02A: global header and footer ready."
+                                "CTM PATH™ Page 02A: global header ready."
                             );
 
                         }
@@ -1435,7 +1393,7 @@
                         else {
 
                             console.warn(
-                                "CTM PATH™ Page 02A: global components loaded with errors.",
+                                "CTM PATH™ Page 02A: global header loaded with errors.",
                                 result
                             );
 
@@ -1484,59 +1442,55 @@
 
 
 
-<!-- =========================================================================
+<!-- ==========================================================
      GLOBAL JOURNEY FOUNDATION
-============================================================================ -->
-
+========================================================== -->
 
 <script src="../js/global.js"></script>
 
 
 
-<!-- =========================================================================
+<!-- ==========================================================
      API
 
-     Must expose:
+     MUST EXPOSE:
 
-         window.CTM_API
-         CTM_API.register()
-============================================================================ -->
-
+     window.CTM_API
+     CTM_API.register()
+========================================================== -->
 
 <script src="../js/api.js"></script>
 
 
 
-<!-- =========================================================================
+<!-- ==========================================================
      PAGE 02 DATA
 
-     Must expose:
+     MUST EXPOSE:
 
-         window.Page02Data
-============================================================================ -->
-
+     window.Page02Data
+========================================================== -->
 
 <script src="../js/page02/page02-data.js"></script>
 
 
 
-<!-- =========================================================================
+<!-- ==========================================================
      PAGE 02 SESSION
 
-     Must expose:
+     MUST EXPOSE:
 
-         window.Page02Session
-============================================================================ -->
-
+     window.Page02Session
+========================================================== -->
 
 <script src="../js/page02/page02-session.js"></script>
 
 
 
-<!-- =========================================================================
+<!-- ==========================================================
      PAGE 02A CONTROLLER
 
-     NEW KYC DOM CONTRACT
+     EXISTING DOM CONTRACT RETAINED
 
      TEXT / SELECT FIELDS:
 
@@ -1571,11 +1525,18 @@
          #kycError
          #kycSuccess
 
-     DESTINATION AFTER SUCCESS:
+     INTRO:
+
+         #introScreen
+         #beginButton
+
+     DESTINATION:
 
          page02b.html
-============================================================================ -->
 
+     IMPORTANT:
+     Registration logic is NOT changed here.
+========================================================== -->
 
 <script src="../js/page02/page02a.js"></script>
 
