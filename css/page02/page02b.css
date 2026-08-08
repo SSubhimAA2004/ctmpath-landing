@@ -6,42 +6,30 @@
    css/page02/page02b.css
 
    VERSION:
-   6.0 — MIDNIGHT LAVENDER / JOURNEY SCORE EDITION
+   6.0 — ROYAL VIOLET WEALTH EXPERIENCE™
 
    PAGE:
    PAGE 02B — DIMENSION 01 — WEALTH™
 
-   STATUS:
-   PAGE-SPECIFIC PRESENTATION
-
-   DEPENDS ON:
-   css/page02/page02-shared.css
-
-   RESPONSIBILITY:
-   ✓ Dimension 01 — Wealth™ identity
-   ✓ Midnight-lavender luxury visual language
-   ✓ Wealth-specific accent treatment
-   ✓ Strong text contrast
-   ✓ Premium financial-dashboard atmosphere
-   ✓ Dimension progress
-   ✓ Selected-state refinement
-   ✓ Aspirational benchmark refinement
-   ✓ Completion-state refinement
-   ✓ JOURNEY SCORE presentation
-   ✓ Responsive preservation
-   ✓ Reduced-motion support
-   ✓ Print support
+   VISUAL DIRECTION:
+   AQUMON-INSPIRED FINANCIAL LUXURY
+   + CTM PATH™ IDENTITY
+   + MIDNIGHT VIOLET
+   + ROYAL VIOLET
+   + LUXURY LAVENDER
+   + CHAMPAGNE GOLD
+   + CTM TEAL
 
    IMPORTANT:
-   This file changes PRESENTATION ONLY.
+   PRESENTATION ONLY.
 
-   It does NOT alter:
+   This file does NOT alter:
+   - question data
    - scoring
    - answer mapping
    - session state
-   - navigation logic
-   - question data
-   - shared Page 02 architecture
+   - navigation
+   - Page 02 shared architecture
    - HTML structure
 ========================================================================== */
 
@@ -52,90 +40,91 @@
 
 .page02b {
 
-    --wealth-bg-0:
-        #100B1F;
+    /* ---------------------------------------------------------------
+       CORE PALETTE
+    --------------------------------------------------------------- */
 
-    --wealth-bg-1:
-        #17102B;
+    --wealth-page-bg:
+        #120B24;
 
-    --wealth-bg-2:
-        #21163A;
+    --wealth-main-violet:
+        #380088;
 
-    --wealth-bg-3:
-        #2C1D49;
+    --wealth-deep-purple:
+        #4B1690;
 
+    --wealth-violet-night:
+        #21143A;
 
     --wealth-lavender:
-        #B9A7FF;
+        #A88CFF;
 
-    --wealth-lavender-soft:
-        #D9D0FF;
-
-    --wealth-lavender-bright:
-        #E9E3FF;
-
-
-    --wealth-violet:
-        #7C5CFF;
-
-    --wealth-violet-soft:
-        rgba(124, 92, 255, 0.18);
-
-    --wealth-violet-line:
-        rgba(185, 167, 255, 0.30);
-
-
-    --wealth-teal:
-        #20D6CF;
-
-    --wealth-teal-soft:
-        rgba(32, 214, 207, 0.14);
-
-    --wealth-teal-line:
-        rgba(32, 214, 207, 0.42);
-
-
-    --wealth-gold:
-        #D6B56A;
-
-    --wealth-gold-bright:
-        #E7C77C;
-
-    --wealth-gold-soft:
-        rgba(214, 181, 106, 0.12);
-
+    --wealth-lilac:
+        #C8B8FF;
 
     --wealth-ivory:
-        #F7F4FF;
+        #F7F3EA;
 
-    --wealth-white:
-        #FFFFFF;
+    --wealth-soft-white:
+        #D9D0E8;
 
+    --wealth-gold:
+        #D6A84F;
 
-    --wealth-muted:
-        rgba(232, 226, 248, 0.68);
-
-    --wealth-muted-soft:
-        rgba(232, 226, 248, 0.48);
-
+    --wealth-teal:
+        #16C7C1;
 
     --wealth-border:
-        rgba(214, 201, 255, 0.12);
-
-    --wealth-border-strong:
-        rgba(185, 167, 255, 0.24);
+        #4B3A68;
 
 
-    --wealth-surface:
-        rgba(255, 255, 255, 0.035);
+    /* ---------------------------------------------------------------
+       DERIVED TRANSPARENT COLOURS
+    --------------------------------------------------------------- */
 
-    --wealth-surface-strong:
-        rgba(255, 255, 255, 0.065);
+    --wealth-violet-soft:
+        rgba(56, 0, 136, 0.18);
 
+    --wealth-violet-medium:
+        rgba(56, 0, 136, 0.34);
+
+    --wealth-lavender-soft:
+        rgba(168, 140, 255, 0.12);
+
+    --wealth-lavender-medium:
+        rgba(168, 140, 255, 0.28);
+
+    --wealth-lilac-soft:
+        rgba(200, 184, 255, 0.10);
+
+    --wealth-gold-soft:
+        rgba(214, 168, 79, 0.12);
+
+    --wealth-gold-medium:
+        rgba(214, 168, 79, 0.30);
+
+    --wealth-teal-soft:
+        rgba(22, 199, 193, 0.12);
+
+    --wealth-teal-medium:
+        rgba(22, 199, 193, 0.30);
+
+    --wealth-white-soft:
+        rgba(247, 243, 234, 0.055);
+
+    --wealth-white-faint:
+        rgba(247, 243, 234, 0.025);
 
     --wealth-shadow:
-        0 24px 70px rgba(4, 2, 14, 0.34);
+        0 28px 80px rgba(4, 1, 16, 0.48);
 
+    --wealth-shadow-soft:
+        0 16px 44px rgba(4, 1, 16, 0.32);
+
+
+    /* ---------------------------------------------------------------
+       PAGE FOUNDATION
+    --------------------------------------------------------------- */
 
     position:
         relative;
@@ -148,11 +137,19 @@
 
     min-height:
         100vh;
+
+    color:
+        var(--wealth-ivory);
 }
 
 
 /* ==========================================================================
-   02. PREMIUM MIDNIGHT-LAVENDER BACKGROUND
+   02. PAGE BACKGROUND
+
+   This is intentionally NOT pastel lavender.
+
+   The experience begins in Midnight Violet and progressively opens
+   toward Royal Violet / Luxury Lavender.
 ========================================================================== */
 
 .page02b.page02-dimension {
@@ -160,33 +157,32 @@
     background:
 
         radial-gradient(
-            circle at 50% 3%,
-            rgba(124, 92, 255, 0.20),
-            transparent 30%
+            ellipse 70% 35% at 50% 4%,
+            rgba(56, 0, 136, 0.48),
+            transparent 70%
         ),
 
         radial-gradient(
-            circle at 12% 28%,
-            rgba(185, 167, 255, 0.075),
-            transparent 24%
+            ellipse 42% 28% at 15% 32%,
+            rgba(168, 140, 255, 0.10),
+            transparent 72%
         ),
 
         radial-gradient(
-            circle at 88% 72%,
-            rgba(124, 92, 255, 0.075),
-            transparent 28%
+            ellipse 42% 28% at 88% 68%,
+            rgba(75, 22, 144, 0.16),
+            transparent 72%
         ),
 
         linear-gradient(
             180deg,
-            var(--wealth-bg-0) 0%,
-            var(--wealth-bg-1) 34%,
-            var(--wealth-bg-2) 68%,
-            var(--wealth-bg-1) 100%
+            #120B24 0%,
+            #160B2E 24%,
+            #21143A 52%,
+            #180C30 78%,
+            #120B24 100%
         );
 
-    color:
-        var(--wealth-ivory);
 }
 
 
@@ -214,21 +210,22 @@
     background:
 
         radial-gradient(
-            ellipse at 50% 16%,
-            rgba(185, 167, 255, 0.085),
-            transparent 35%
+            ellipse at 50% 17%,
+            rgba(200, 184, 255, 0.08),
+            transparent 34%
         ),
 
         radial-gradient(
-            ellipse at 50% 58%,
-            rgba(124, 92, 255, 0.045),
-            transparent 42%
+            ellipse at 50% 52%,
+            rgba(56, 0, 136, 0.08),
+            transparent 44%
         );
+
 }
 
 
 /* ==========================================================================
-   04. SUBTLE VIOLET EDGE LIGHT
+   04. VIOLET EDGE LIGHT
 ========================================================================== */
 
 .page02b.page02-dimension::after {
@@ -249,10 +246,11 @@
         none;
 
     border-top:
-        1px solid rgba(185, 167, 255, 0.10);
+        1px solid rgba(200, 184, 255, 0.08);
 
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.018);
+
 }
 
 
@@ -273,6 +271,7 @@
 
     margin-right:
         auto;
+
 }
 
 
@@ -281,46 +280,59 @@
 ========================================================================== */
 
 .page02b .dimension-progress {
+
     position:
         relative;
+
 }
 
+
+/* Label */
 
 .page02b .dimension-progress-label {
 
     color:
-        var(--wealth-lavender);
+        var(--wealth-lilac);
 
     letter-spacing:
         0.16em;
+
 }
 
+
+/* Number */
 
 .page02b .dimension-progress-number {
 
     color:
-        var(--wealth-gold-bright);
+        var(--wealth-gold);
 
     font-variant-numeric:
         tabular-nums;
 
     text-shadow:
-        0 0 18px rgba(231, 199, 124, 0.12);
+        0 0 18px rgba(214, 168, 79, 0.16);
+
 }
 
+
+/* Track */
 
 .page02b .dimension-progress-track {
 
     background:
-        rgba(255, 255, 255, 0.075);
+        rgba(247, 243, 234, 0.055);
 
     border:
-        1px solid rgba(185, 167, 255, 0.10);
+        1px solid rgba(75, 58, 104, 0.78);
 
     box-shadow:
-        inset 0 1px 2px rgba(0, 0, 0, 0.22);
+        inset 0 1px 3px rgba(0, 0, 0, 0.35);
+
 }
 
+
+/* Active progress */
 
 .page02b .dimension-progress-fill {
 
@@ -331,38 +343,46 @@
 
         linear-gradient(
             90deg,
-            var(--wealth-violet),
+            var(--wealth-main-violet),
             var(--wealth-lavender),
             var(--wealth-teal)
         );
 
     box-shadow:
-        0 0 14px rgba(185, 167, 255, 0.28);
+        0 0 18px rgba(168, 140, 255, 0.34);
+
 }
 
 
 /* ==========================================================================
-   07. DIMENSION HEADER
+   07. DIMENSION HERO
 ========================================================================== */
 
 .page02b .dimension-header {
+
     position:
         relative;
+
 }
 
+
+/* Dimension number */
 
 .page02b .dimension-eyebrow {
 
     color:
-        var(--wealth-gold-bright);
+        var(--wealth-gold);
 
     letter-spacing:
         0.18em;
 
     text-shadow:
-        0 0 16px rgba(231, 199, 124, 0.10);
+        0 0 18px rgba(214, 168, 79, 0.14);
+
 }
 
+
+/* Tamil title */
 
 .page02b .dimension-title-tamil {
 
@@ -370,9 +390,12 @@
         var(--wealth-ivory);
 
     text-shadow:
-        0 8px 34px rgba(0, 0, 0, 0.28);
+        0 10px 36px rgba(0, 0, 0, 0.38);
+
 }
 
+
+/* English title */
 
 .page02b .dimension-title-english {
 
@@ -383,9 +406,12 @@
         0.16em;
 
     text-shadow:
-        0 0 20px rgba(185, 167, 255, 0.14);
+        0 0 22px rgba(168, 140, 255, 0.18);
+
 }
 
+
+/* Introduction */
 
 .page02b .dimension-introduction {
 
@@ -393,71 +419,177 @@
         720px;
 
     color:
-        var(--wealth-muted);
+        var(--wealth-soft-white);
 
     line-height:
         1.85;
+
 }
 
 
 /* ==========================================================================
    08. LIVE DIMENSION SCORE
+
+   This is the score visible while answering the five Wealth indicators.
 ========================================================================== */
 
 .page02b .dimension-score-panel {
 
-    margin-top:
-        30px;
+    position:
+        relative;
 
-    color:
-        var(--wealth-ivory);
+    display:
+        inline-flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-width:
+        170px;
+
+    min-height:
+        170px;
+
+    margin-top:
+        34px;
+
+    padding:
+        28px;
+
+    border:
+        1px solid var(--wealth-border);
+
+    border-radius:
+        50%;
 
     background:
 
         radial-gradient(
-            circle at 30% 20%,
-            rgba(185, 167, 255, 0.09),
-            transparent 55%
-        ),
-
-        rgba(255, 255, 255, 0.025);
-
-    border:
-        1px solid rgba(185, 167, 255, 0.15);
+            circle at 35% 28%,
+            rgba(168, 140, 255, 0.18),
+            rgba(56, 0, 136, 0.18) 44%,
+            rgba(18, 11, 36, 0.96) 78%
+        );
 
     box-shadow:
-        0 18px 48px rgba(4, 2, 14, 0.26);
+        0 20px 60px rgba(4, 1, 16, 0.42),
+        inset 0 0 0 1px rgba(200, 184, 255, 0.035);
 
-    backdrop-filter:
-        blur(12px);
-
-    -webkit-backdrop-filter:
-        blur(12px);
 }
 
+
+/* Small luminous ring */
+
+.page02b .dimension-score-panel::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        -7px;
+
+    border:
+        1px solid rgba(168, 140, 255, 0.14);
+
+    border-radius:
+        50%;
+
+    pointer-events:
+        none;
+
+}
+
+
+/* Score label */
+
+.page02b .dimension-score-label {
+
+    color:
+        var(--wealth-lilac);
+
+    font-size:
+        0.60rem;
+
+    letter-spacing:
+        0.16em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* Score value */
+
+.page02b .dimension-score-value {
+
+    display:
+        flex;
+
+    align-items:
+        baseline;
+
+    gap:
+        5px;
+
+    margin-top:
+        6px;
+
+}
+
+
+/* Current */
 
 .page02b .dimension-score-current {
 
     color:
-        var(--wealth-lavender-bright);
+        var(--wealth-ivory);
 
-    text-shadow:
-        0 0 22px rgba(185, 167, 255, 0.30);
+    font-size:
+        clamp(2.5rem, 5vw, 4rem);
+
+    font-weight:
+        700;
+
+    line-height:
+        1;
 
     font-variant-numeric:
         tabular-nums;
+
+    text-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.35);
+
 }
 
+
+/* Total */
 
 .page02b .dimension-score-total {
 
     color:
-        var(--wealth-muted);
+        var(--wealth-lavender);
+
+    font-size:
+        0.95rem;
+
+    font-variant-numeric:
+        tabular-nums;
+
 }
 
 
 /* ==========================================================================
-   09. SCORECARD SECTION
+   09. SCORECARD CONTAINER
 ========================================================================== */
 
 .page02b .dimension-scorecard {
@@ -473,979 +605,70 @@
 
     padding:
         0;
-}
 
-
-.page02b .scorecard-list {
-    position:
-        relative;
 }
 
 
 /* ==========================================================================
-   10. WEALTH CARD SURFACE
-========================================================================== */
-
-.page02b .scorecard-card {
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(255, 255, 255, 0.055),
-            rgba(255, 255, 255, 0.020)
-        );
-
-    border-color:
-        var(--wealth-border);
-
-    box-shadow:
-        var(--wealth-shadow);
-
-    backdrop-filter:
-        blur(10px);
-
-    -webkit-backdrop-filter:
-        blur(10px);
-
-    transition:
-
-        border-color 220ms ease,
-        box-shadow 220ms ease,
-        transform 220ms ease,
-        background 220ms ease;
-}
-
-
-.page02b .scorecard-card::before {
-
-    background:
-
-        linear-gradient(
-            180deg,
-            var(--wealth-lavender),
-            var(--wealth-violet)
-        );
-
-    box-shadow:
-        0 0 18px rgba(185, 167, 255, 0.28);
-}
-
-
-.page02b .scorecard-card:first-child {
-    margin-top:
-        0;
-}
-
-
-@media (hover: hover) {
-
-    .page02b .scorecard-card:hover {
-
-        border-color:
-            var(--wealth-border-strong);
-
-        box-shadow:
-
-            0 28px 80px rgba(4, 2, 14, 0.42),
-
-            0 0 0 1px
-            rgba(185, 167, 255, 0.035);
-    }
-}
-
-
-/* ==========================================================================
-   11. SCORECARD NUMBER
-========================================================================== */
-
-.page02b .scorecard-number {
-
-    border-color:
-        rgba(185, 167, 255, 0.38);
-
-    color:
-        var(--wealth-lavender);
-
-    background:
-        rgba(124, 92, 255, 0.075);
-
-    box-shadow:
-        inset 0 0 0 1px
-        rgba(255, 255, 255, 0.018);
-}
-
-
-/* ==========================================================================
-   12. INDICATOR TITLES
-========================================================================== */
-
-.page02b .scorecard-title {
-
-    color:
-        var(--wealth-ivory);
-}
-
-
-.page02b .scorecard-title-english {
-
-    color:
-        var(--wealth-lavender);
-
-    opacity:
-        0.92;
-
-    letter-spacing:
-        0.10em;
-}
-
-
-/* ==========================================================================
-   13. IDEAL WEALTH BENCHMARK
-========================================================================== */
-
-.page02b .scorecard-ideal {
-
-    border-color:
-        rgba(214, 181, 106, 0.42);
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(214, 181, 106, 0.115),
-            rgba(214, 181, 106, 0.030)
-        );
-
-    box-shadow:
-        inset 0 1px 0
-        rgba(255, 255, 255, 0.018);
-}
-
-
-.page02b .scorecard-ideal-label {
-
-    color:
-        rgba(231, 199, 124, 0.78);
-}
-
-
-.page02b .scorecard-ideal-value {
-
-    color:
-        var(--wealth-gold-bright);
-
-    text-shadow:
-        0 0 18px rgba(231, 199, 124, 0.10);
-}
-
-
-/* ==========================================================================
-   14. RANGE OPTIONS
-========================================================================== */
-
-.page02b .scorecard-option {
-
-    background:
-        rgba(255, 255, 255, 0.028);
-
-    border-color:
-        rgba(185, 167, 255, 0.13);
-
-    color:
-        var(--wealth-ivory);
-
-    backdrop-filter:
-        blur(4px);
-
-    -webkit-backdrop-filter:
-        blur(4px);
-
-    transition:
-
-        background 180ms ease,
-        border-color 180ms ease,
-        box-shadow 180ms ease,
-        transform 180ms ease;
-}
-
-
-.page02b .scorecard-option .option-label,
-.page02b .scorecard-option .option-text {
-
-    color:
-        var(--wealth-ivory);
-}
-
-
-.page02b .scorecard-option small,
-.page02b .scorecard-option .option-subtitle,
-.page02b .scorecard-option .option-description {
-
-    color:
-        var(--wealth-muted-soft);
-}
-
-
-@media (hover: hover) {
-
-    .page02b .scorecard-option:hover {
-
-        border-color:
-            rgba(185, 167, 255, 0.34);
-
-        background:
-            rgba(185, 167, 255, 0.055);
-
-        box-shadow:
-            0 12px 30px rgba(4, 2, 14, 0.22);
-    }
-}
-
-
-/* ==========================================================================
-   15. SELECTED WEALTH RANGE
-========================================================================== */
-
-.page02b .scorecard-option.is-selected,
-.page02b .scorecard-option[aria-pressed="true"] {
-
-    border-color:
-        var(--wealth-teal);
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(32, 214, 207, 0.15),
-            rgba(32, 214, 207, 0.055)
-        );
-
-    box-shadow:
-
-        0 0 0 1px
-        rgba(32, 214, 207, 0.08),
-
-        0 12px 34px
-        rgba(32, 214, 207, 0.10);
-}
-
-
-.page02b .scorecard-option.is-selected .option-label,
-.page02b .scorecard-option.is-selected .option-text,
-.page02b .scorecard-option[aria-pressed="true"] .option-label,
-.page02b .scorecard-option[aria-pressed="true"] .option-text {
-
-    color:
-        var(--wealth-white);
-}
-
-
-/* ==========================================================================
-   16. FOURTH / TARGET OPTION
-========================================================================== */
-
-.page02b .scorecard-option:nth-child(4):not(.is-selected):not(
-    [aria-pressed="true"]
-) {
-
-    border-color:
-        rgba(214, 181, 106, 0.38);
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(214, 181, 106, 0.065),
-            rgba(214, 181, 106, 0.020)
-        );
-}
-
-
-.page02b .scorecard-option:nth-child(4):not(.is-selected):not(
-    [aria-pressed="true"]
-) .option-score {
-
-    border-color:
-        rgba(214, 181, 106, 0.48);
-
-    background:
-        rgba(214, 181, 106, 0.085);
-
-    color:
-        var(--wealth-gold-bright);
-}
-
-
-/* ==========================================================================
-   17. OPTION SCORE MARKER
-========================================================================== */
-
-.page02b .option-score {
-
-    border-color:
-        rgba(185, 167, 255, 0.24);
-
-    color:
-        var(--wealth-lavender);
-
-    background:
-        rgba(124, 92, 255, 0.055);
-}
-
-
-.page02b .scorecard-option.is-selected .option-score,
-.page02b .scorecard-option[aria-pressed="true"] .option-score {
-
-    border-color:
-        rgba(32, 214, 207, 0.54);
-
-    background:
-        rgba(32, 214, 207, 0.11);
-
-    color:
-        var(--wealth-teal);
-}
-
-
-/* ==========================================================================
-   18. COMPLETION STATUS
-========================================================================== */
-
-.page02b .dimension-completion {
-
-    margin-top:
-        30px;
-
-    color:
-        var(--wealth-muted);
-}
-
-
-.page02b .dimension-completion.is-complete {
-
-    color:
-        var(--wealth-teal);
-
-    text-shadow:
-        0 0 18px rgba(32, 214, 207, 0.12);
-}
-
-
-.page02b [data-dimension-complete][data-complete="true"] {
-
-    color:
-        var(--wealth-teal);
-}
-
-
-/* ==========================================================================
-   19. SCORE GUIDE
-========================================================================== */
-
-.page02b .score-guide,
-.page02b .dimension-score-guide,
-.page02b .scorecard-guide {
-
-    color:
-        var(--wealth-muted);
-
-    border-color:
-        rgba(185, 167, 255, 0.12);
-
-    background:
-        rgba(255, 255, 255, 0.025);
-}
-
-
-.page02b .score-guide strong,
-.page02b .dimension-score-guide strong,
-.page02b .scorecard-guide strong {
-
-    color:
-        var(--wealth-lavender-soft);
-}
-
-
-/* ==========================================================================
-   20. VALIDATION
-========================================================================== */
-
-.page02b .dimension-message {
-
-    max-width:
-        1020px;
-
-    color:
-        var(--wealth-muted);
-}
-
-
-/* ==========================================================================
-   21. JOURNEY SCORE — MASTER CONTAINER
+   10. QUESTION CARD
 
    IMPORTANT:
+   The live renderer creates:
 
-   The Journey Score is generated dynamically by the existing Page 02
-   runtime. This styling deliberately targets the dynamic content area
-   immediately following the dimension completion block.
+       .scorecard-question
 
-   No score values are hardcoded.
+   not .scorecard-card.
 ========================================================================== */
 
-.page02b .dimension-completion ~ div:not(
-    #dimensionMessage
-) {
+.page02b .scorecard-question {
 
     position:
         relative;
 
-    width:
-        100%;
+    overflow:
+        hidden;
 
-    max-width:
-        1020px;
-
-    margin-left:
-        auto;
-
-    margin-right:
-        auto;
-
-    margin-top:
-        42px;
-
-    margin-bottom:
-        42px;
+    margin:
+        0 0 26px;
 
     padding:
-        34px;
+        30px;
 
     border:
-        1px solid
-        rgba(185, 167, 255, 0.16);
+        1px solid rgba(75, 58, 104, 0.82);
 
     border-radius:
-        24px;
+        20px;
 
     background:
 
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(185, 167, 255, 0.11),
-            transparent 42%
-        ),
-
         linear-gradient(
             145deg,
-            rgba(255, 255, 255, 0.055),
-            rgba(124, 92, 255, 0.025)
+            rgba(75, 22, 144, 0.22),
+            rgba(33, 20, 58, 0.92) 48%,
+            rgba(18, 11, 36, 0.94)
         );
 
     box-shadow:
-
-        0 28px 80px
-        rgba(4, 2, 14, 0.34),
-
-        inset 0 1px 0
-        rgba(255, 255, 255, 0.035);
+        var(--wealth-shadow-soft);
 
     backdrop-filter:
-        blur(14px);
+        blur(12px);
 
     -webkit-backdrop-filter:
-        blur(14px);
-
-    color:
-        var(--wealth-ivory);
-}
-
-
-/* ==========================================================================
-   22. JOURNEY SCORE HEADING
-========================================================================== */
-
-.page02b .dimension-completion ~ div:not(
-    #dimensionMessage
-) > :first-child {
-
-    margin-top:
-        0;
-}
-
-
-/*
-   Dynamic journey summary headings.
-   These selectors intentionally cover the naming patterns already used
-   across the Page 02 implementation.
-*/
-
-.page02b .journey-score-title,
-.page02b .journey-summary-title,
-.page02b .score-summary-title,
-.page02b .journey-result-title,
-.page02b [data-journey-title] {
-
-    color:
-        var(--wealth-lavender-bright);
-
-    font-size:
-        0.76rem;
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        0.18em;
-
-    text-transform:
-        uppercase;
-
-    text-align:
-        center;
-
-    margin:
-        0 0 10px;
-
-    text-shadow:
-        0 0 20px
-        rgba(185, 167, 255, 0.16);
-}
-
-
-.page02b .journey-score-subtitle,
-.page02b .journey-summary-subtitle,
-.page02b [data-journey-subtitle] {
-
-    color:
-        var(--wealth-muted);
-
-    text-align:
-        center;
-
-    font-size:
-        0.82rem;
-
-    margin-bottom:
-        26px;
-}
-
-
-/* ==========================================================================
-   23. GRAND TOTAL — HERO SCORE
-========================================================================== */
-
-.page02b .journey-score-total,
-.page02b .grand-total,
-.page02b .journey-grand-total,
-.page02b .score-summary-total,
-.page02b [data-grand-total] {
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    min-height:
-        150px;
-
-    margin:
-        10px auto 32px;
-
-    padding:
-        22px 28px;
-
-    border:
-        1px solid
-        rgba(185, 167, 255, 0.22);
-
-    border-radius:
-        22px;
-
-    background:
-
-        radial-gradient(
-            circle at 50% 20%,
-            rgba(185, 167, 255, 0.16),
-            rgba(124, 92, 255, 0.045) 48%,
-            rgba(0, 0, 0, 0.10) 100%
-        );
-
-    box-shadow:
-
-        0 20px 60px
-        rgba(4, 2, 14, 0.30),
-
-        inset 0 1px 0
-        rgba(255, 255, 255, 0.035);
-}
-
-
-.page02b .grand-total-label,
-.page02b .journey-score-total-label,
-.page02b .score-summary-total-label {
-
-    color:
-        var(--wealth-gold-bright);
-
-    font-size:
-        0.68rem;
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        0.20em;
-
-    text-transform:
-        uppercase;
-
-    margin-bottom:
-        8px;
-}
-
-
-.page02b .grand-total-value,
-.page02b .journey-score-total-value,
-.page02b .score-summary-total-value {
-
-    color:
-        var(--wealth-white);
-
-    font-size:
-        clamp(2.8rem, 6vw, 4.6rem);
-
-    font-weight:
-        700;
-
-    line-height:
-        0.95;
-
-    font-variant-numeric:
-        tabular-nums;
-
-    letter-spacing:
-        -0.04em;
-
-    text-shadow:
-
-        0 0 30px
-        rgba(185, 167, 255, 0.22),
-
-        0 10px 35px
-        rgba(0, 0, 0, 0.30);
-}
-
-
-.page02b .grand-total-value::after,
-.page02b .journey-score-total-value::after {
-
-    color:
-        var(--wealth-muted);
-
-    font-size:
-        0.95rem;
-
-    letter-spacing:
-        0.08em;
-}
-
-
-/* ==========================================================================
-   24. PROGRESSIVE DIMENSION SCORE GRID
-
-   Five dimensions + one grand total.
-========================================================================== */
-
-.page02b .journey-score-grid,
-.page02b .journey-summary-grid,
-.page02b .dimension-score-summary,
-.page02b .score-summary-grid,
-.page02b [data-journey-dimensions] {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(6, minmax(0, 1fr));
-
-    gap:
-        10px;
-
-    width:
-        100%;
-
-    margin:
-        24px 0 0;
-}
-
-
-/* Individual score card */
-
-.page02b .journey-score-grid > *,
-.page02b .journey-summary-grid > *,
-.page02b .dimension-score-summary > *,
-.page02b .score-summary-grid > *,
-.page02b [data-journey-dimensions] > * {
-
-    position:
-        relative;
-
-    min-width:
-        0;
-
-    min-height:
-        132px;
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    text-align:
-        center;
-
-    padding:
-        16px 10px;
-
-    border:
-        1px solid
-        rgba(185, 167, 255, 0.11);
-
-    border-radius:
-        14px;
-
-    background:
-
-        linear-gradient(
-            180deg,
-            rgba(255, 255, 255, 0.045),
-            rgba(255, 255, 255, 0.018)
-        );
-
-    box-shadow:
-        inset 0 1px 0
-        rgba(255, 255, 255, 0.025);
+        blur(12px);
 
     transition:
-        border-color 180ms ease,
-        background 180ms ease,
-        transform 180ms ease;
+        border-color 220ms ease,
+        box-shadow 220ms ease,
+        transform 220ms ease;
+
 }
 
 
-@media (hover: hover) {
+/* Premium top accent */
 
-    .page02b .journey-score-grid > *:hover,
-    .page02b .journey-summary-grid > *:hover,
-    .page02b .dimension-score-summary > *:hover,
-    .page02b .score-summary-grid > *:hover {
-
-        transform:
-            translateY(-2px);
-
-        border-color:
-            rgba(185, 167, 255, 0.24);
-
-        background:
-
-            linear-gradient(
-                180deg,
-                rgba(185, 167, 255, 0.07),
-                rgba(255, 255, 255, 0.025)
-            );
-    }
-}
-
-
-/* ==========================================================================
-   25. DIMENSION CARD NUMBER
-========================================================================== */
-
-.page02b .journey-score-grid .dimension-number,
-.page02b .journey-summary-grid .dimension-number,
-.page02b .dimension-score-summary .dimension-number,
-.page02b .score-summary-grid .dimension-number {
-
-    width:
-        28px;
-
-    height:
-        28px;
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    margin-bottom:
-        8px;
-
-    border:
-        1px solid
-        rgba(185, 167, 255, 0.28);
-
-    border-radius:
-        50%;
-
-    color:
-        var(--wealth-lavender);
-
-    background:
-        rgba(124, 92, 255, 0.06);
-
-    font-size:
-        0.65rem;
-
-    font-weight:
-        700;
-
-    font-variant-numeric:
-        tabular-nums;
-}
-
-
-/* ==========================================================================
-   26. DIMENSION CARD LABEL
-========================================================================== */
-
-.page02b .journey-score-grid .dimension-name,
-.page02b .journey-summary-grid .dimension-name,
-.page02b .dimension-score-summary .dimension-name,
-.page02b .score-summary-grid .dimension-name {
-
-    color:
-        var(--wealth-ivory);
-
-    font-size:
-        0.70rem;
-
-    line-height:
-        1.35;
-
-    font-weight:
-        600;
-
-    max-width:
-        130px;
-}
-
-
-/* ==========================================================================
-   27. DIMENSION CARD SCORE
-========================================================================== */
-
-.page02b .journey-score-grid .dimension-score,
-.page02b .journey-summary-grid .dimension-score,
-.page02b .dimension-score-summary .dimension-score,
-.page02b .score-summary-grid .dimension-score {
-
-    margin-top:
-        8px;
-
-    color:
-        var(--wealth-lavender-bright);
-
-    font-size:
-        1.35rem;
-
-    line-height:
-        1;
-
-    font-weight:
-        700;
-
-    font-variant-numeric:
-        tabular-nums;
-
-    text-shadow:
-        0 0 16px
-        rgba(185, 167, 255, 0.14);
-}
-
-
-/* ==========================================================================
-   28. DIMENSION CARD STATUS
-========================================================================== */
-
-.page02b .journey-score-grid .dimension-status,
-.page02b .journey-summary-grid .dimension-status,
-.page02b .dimension-score-summary .dimension-status,
-.page02b .score-summary-grid .dimension-status {
-
-    margin-top:
-        8px;
-
-    color:
-        var(--wealth-muted-soft);
-
-    font-size:
-        0.55rem;
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        0.10em;
-
-    text-transform:
-        uppercase;
-}
-
-
-/* ==========================================================================
-   29. CURRENT / ACTIVE DIMENSION
-========================================================================== */
-
-.page02b .journey-score-grid .is-current,
-.page02b .journey-score-grid .current,
-.page02b .journey-summary-grid .is-current,
-.page02b .journey-summary-grid .current,
-.page02b .dimension-score-summary .is-current,
-.page02b .dimension-score-summary .current {
-
-    border-color:
-        rgba(32, 214, 207, 0.48);
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(32, 214, 207, 0.105),
-            rgba(32, 214, 207, 0.025)
-        );
-
-    box-shadow:
-
-        0 0 0 1px
-        rgba(32, 214, 207, 0.06),
-
-        0 14px 36px
-        rgba(32, 214, 207, 0.08);
-}
-
-
-.page02b .journey-score-grid .is-current::before,
-.page02b .journey-summary-grid .is-current::before,
-.page02b .dimension-score-summary .is-current::before {
+.page02b .scorecard-question::before {
 
     content:
         "";
@@ -1457,303 +680,1047 @@
         0;
 
     left:
-        18%;
-
-    right:
-        18%;
-
-    height:
-        2px;
-
-    border-radius:
-        0 0 3px 3px;
-
-    background:
-        var(--wealth-teal);
-
-    box-shadow:
-        0 0 14px
-        rgba(32, 214, 207, 0.45);
-}
-
-
-/* ==========================================================================
-   30. COMPLETED DIMENSION
-========================================================================== */
-
-.page02b .journey-score-grid .is-complete,
-.page02b .journey-score-grid .complete,
-.page02b .journey-summary-grid .is-complete,
-.page02b .journey-summary-grid .complete,
-.page02b .dimension-score-summary .is-complete,
-.page02b .dimension-score-summary .complete {
-
-    border-color:
-        rgba(185, 167, 255, 0.20);
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(185, 167, 255, 0.065),
-            rgba(255, 255, 255, 0.018)
-        );
-}
-
-
-/* ==========================================================================
-   31. NOT STARTED DIMENSION
-========================================================================== */
-
-.page02b .journey-score-grid .is-not-started,
-.page02b .journey-score-grid .not-started,
-.page02b .journey-summary-grid .is-not-started,
-.page02b .journey-summary-grid .not-started,
-.page02b .dimension-score-summary .is-not-started,
-.page02b .dimension-score-summary .not-started {
-
-    opacity:
-        0.72;
-
-    border-color:
-        rgba(255, 255, 255, 0.075);
-
-    background:
-        rgba(0, 0, 0, 0.08);
-}
-
-
-.page02b .journey-score-grid .is-not-started .dimension-score,
-.page02b .journey-summary-grid .is-not-started .dimension-score,
-.page02b .dimension-score-summary .is-not-started .dimension-score {
-
-    color:
-        var(--wealth-muted-soft);
-}
-
-
-/* ==========================================================================
-   32. GRAND TOTAL CARD IN SIX-COLUMN GRID
-
-   If the runtime renders the grand total as the final grid item,
-   it receives a stronger visual treatment.
-========================================================================== */
-
-.page02b .journey-score-grid > :last-child,
-.page02b .journey-summary-grid > :last-child,
-.page02b .dimension-score-summary > :last-child,
-.page02b .score-summary-grid > :last-child {
-
-    border-color:
-        rgba(214, 181, 106, 0.30);
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(214, 181, 106, 0.085),
-            rgba(214, 181, 106, 0.018)
-        );
-
-    box-shadow:
-
-        0 10px 32px
-        rgba(214, 181, 106, 0.05),
-
-        inset 0 1px 0
-        rgba(255, 255, 255, 0.025);
-}
-
-
-.page02b .journey-score-grid > :last-child .dimension-score,
-.page02b .journey-summary-grid > :last-child .dimension-score,
-.page02b .dimension-score-summary > :last-child .dimension-score,
-.page02b .score-summary-grid > :last-child .dimension-score {
-
-    color:
-        var(--wealth-gold-bright);
-
-    text-shadow:
-        0 0 18px
-        rgba(231, 199, 124, 0.14);
-}
-
-
-/* ==========================================================================
-   33. GENERIC DYNAMIC SCORE VALUES
-
-   Covers alternate renderer naming conventions without changing markup.
-========================================================================== */
-
-.page02b .journey-score-value,
-.page02b .journey-summary-value,
-.page02b .score-summary-value,
-.page02b .total-score-value,
-.page02b [data-score-value] {
-
-    color:
-        var(--wealth-lavender-bright);
-
-    font-variant-numeric:
-        tabular-nums;
-}
-
-
-/* ==========================================================================
-   34. GRAND TOTAL INLINE PRESENTATION
-
-   Covers the current runtime's simple text-based summary if its renderer
-   does not yet expose the richer class names.
-========================================================================== */
-
-.page02b .dimension-completion ~ div:not(
-    #dimensionMessage
-) p {
-
-    color:
-        var(--wealth-muted);
-
-    line-height:
-        1.65;
-}
-
-
-.page02b .dimension-completion ~ div:not(
-    #dimensionMessage
-) strong {
-
-    color:
-        var(--wealth-ivory);
-}
-
-
-/* ==========================================================================
-   35. SCORE GUIDE / JOURNEY SEPARATOR
-========================================================================== */
-
-.page02b .dimension-completion ~ div:not(
-    #dimensionMessage
-)::before {
-
-    content:
-        "";
-
-    display:
-        block;
+        42px;
 
     width:
         72px;
 
     height:
-        2px;
-
-    margin:
-        0 auto 26px;
+        3px;
 
     border-radius:
-        999px;
+        0 0 5px 5px;
 
     background:
 
         linear-gradient(
             90deg,
-            transparent,
             var(--wealth-lavender),
-            var(--wealth-teal),
-            transparent
+            var(--wealth-main-violet)
         );
 
     box-shadow:
-        0 0 16px
-        rgba(185, 167, 255, 0.24);
+        0 0 18px rgba(168, 140, 255, 0.32);
+
+}
+
+
+/* Hover */
+
+@media (hover: hover) {
+
+    .page02b .scorecard-question:hover {
+
+        border-color:
+            rgba(168, 140, 255, 0.34);
+
+        box-shadow:
+            0 30px 82px rgba(4, 1, 16, 0.48),
+            0 0 0 1px rgba(168, 140, 255, 0.035);
+
+    }
+
 }
 
 
 /* ==========================================================================
-   36. NAVIGATION
+   11. QUESTION HEADING
+========================================================================== */
+
+.page02b .scorecard-question__heading {
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    justify-content:
+        space-between;
+
+    gap:
+        24px;
+
+    margin-bottom:
+        24px;
+
+}
+
+
+/* Identity */
+
+.page02b .scorecard-question__identity {
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        15px;
+
+}
+
+
+/* Number */
+
+.page02b .scorecard-question__number {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    flex:
+        0 0 auto;
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    border:
+        1px solid rgba(168, 140, 255, 0.34);
+
+    border-radius:
+        50%;
+
+    color:
+        var(--wealth-lavender);
+
+    background:
+        rgba(56, 0, 136, 0.20);
+
+    font-size:
+        0.70rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.08em;
+
+}
+
+
+/* Tamil question */
+
+.page02b .scorecard-question__tamil {
+
+    margin:
+        0;
+
+    color:
+        var(--wealth-ivory);
+
+    font-size:
+        clamp(1.05rem, 1.5vw, 1.30rem);
+
+    font-weight:
+        600;
+
+    line-height:
+        1.35;
+
+}
+
+
+/* English question */
+
+.page02b .scorecard-question__english {
+
+    margin:
+        5px 0 0;
+
+    color:
+        var(--wealth-lavender);
+
+    font-size:
+        0.68rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.12em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* ==========================================================================
+   12. IDEAL BENCHMARK
+========================================================================== */
+
+.page02b .scorecard-question__ideal {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        flex-end;
+
+    flex:
+        0 0 auto;
+
+    min-width:
+        105px;
+
+    padding:
+        10px 13px;
+
+    border:
+        1px solid rgba(214, 168, 79, 0.30);
+
+    border-radius:
+        10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(214, 168, 79, 0.11),
+            rgba(214, 168, 79, 0.035)
+        );
+
+}
+
+
+/* Ideal label */
+
+.page02b .scorecard-question__ideal-label {
+
+    color:
+        rgba(214, 168, 79, 0.72);
+
+    font-size:
+        0.54rem;
+
+    letter-spacing:
+        0.14em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* Ideal value */
+
+.page02b .scorecard-question__ideal-value {
+
+    margin-top:
+        3px;
+
+    color:
+        var(--wealth-gold);
+
+    font-size:
+        0.78rem;
+
+    font-weight:
+        700;
+
+}
+
+
+/* ==========================================================================
+   13. OPTIONS GRID
+
+   Actual JS architecture:
+       .score-options
+       .score-option
+========================================================================== */
+
+.page02b .score-options {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap:
+        12px;
+
+}
+
+
+/* ==========================================================================
+   14. OPTION BUTTON
+========================================================================== */
+
+.page02b .score-option {
+
+    position:
+        relative;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-height:
+        126px;
+
+    padding:
+        17px 14px;
+
+    border:
+        1px solid rgba(75, 58, 104, 0.72);
+
+    border-radius:
+        13px;
+
+    color:
+        var(--wealth-ivory);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(247, 243, 234, 0.045),
+            rgba(247, 243, 234, 0.018)
+        );
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.018);
+
+    cursor:
+        pointer;
+
+    text-align:
+        center;
+
+    transition:
+        transform 180ms ease,
+        background 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+
+}
+
+
+/* Option hover */
+
+@media (hover: hover) {
+
+    .page02b .score-option:hover {
+
+        transform:
+            translateY(-2px);
+
+        border-color:
+            rgba(168, 140, 255, 0.44);
+
+        background:
+
+            linear-gradient(
+                145deg,
+                rgba(168, 140, 255, 0.095),
+                rgba(56, 0, 136, 0.13)
+            );
+
+        box-shadow:
+            0 12px 30px rgba(4, 1, 16, 0.26);
+
+    }
+
+}
+
+
+/* ==========================================================================
+   15. OPTION SCORE MEDALLION
+========================================================================== */
+
+.page02b .score-option__score {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        32px;
+
+    height:
+        32px;
+
+    margin-bottom:
+        9px;
+
+    border:
+        1px solid rgba(168, 140, 255, 0.28);
+
+    border-radius:
+        50%;
+
+    color:
+        var(--wealth-lilac);
+
+    background:
+        rgba(56, 0, 136, 0.16);
+
+    font-size:
+        0.72rem;
+
+    font-weight:
+        700;
+
+}
+
+
+/* ==========================================================================
+   16. OPTION BODY
+========================================================================== */
+
+.page02b .score-option__body {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    width:
+        100%;
+
+}
+
+
+/* Range */
+
+.page02b .score-option__range {
+
+    color:
+        var(--wealth-ivory);
+
+    font-size:
+        0.75rem;
+
+    font-weight:
+        600;
+
+    line-height:
+        1.45;
+
+}
+
+
+/* Status */
+
+.page02b .score-option__status {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    margin-top:
+        8px;
+
+}
+
+
+/* Tamil status */
+
+.page02b .score-option__status-tamil {
+
+    color:
+        var(--wealth-soft-white);
+
+    font-size:
+        0.58rem;
+
+}
+
+
+/* English status */
+
+.page02b .score-option__status-english {
+
+    margin-top:
+        2px;
+
+    color:
+        var(--wealth-lavender);
+
+    font-size:
+        0.50rem;
+
+    letter-spacing:
+        0.08em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* ==========================================================================
+   17. SELECTED OPTION
+
+   CTM Teal = action / selected / progress.
+
+   Gold is NOT used for selection.
+========================================================================== */
+
+.page02b .score-option.is-selected,
+.page02b .score-option[aria-pressed="true"] {
+
+    border-color:
+        var(--wealth-teal);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(22, 199, 193, 0.20),
+            rgba(22, 199, 193, 0.055)
+        );
+
+    box-shadow:
+
+        0 0 0 1px rgba(22, 199, 193, 0.12),
+
+        0 16px 40px rgba(22, 199, 193, 0.12),
+
+        inset 0 1px 0 rgba(255, 255, 255, 0.035);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* Selected score */
+
+.page02b .score-option.is-selected .score-option__score,
+.page02b .score-option[aria-pressed="true"] .score-option__score {
+
+    border-color:
+        rgba(22, 199, 193, 0.65);
+
+    color:
+        var(--wealth-teal);
+
+    background:
+        rgba(22, 199, 193, 0.13);
+
+    box-shadow:
+        0 0 18px rgba(22, 199, 193, 0.12);
+
+}
+
+
+/* Selected range */
+
+.page02b .score-option.is-selected .score-option__range,
+.page02b .score-option[aria-pressed="true"] .score-option__range {
+
+    color:
+        var(--wealth-ivory);
+
+}
+
+
+/* Selected status */
+
+.page02b .score-option.is-selected .score-option__status-tamil,
+.page02b .score-option[aria-pressed="true"] .score-option__status-tamil {
+
+    color:
+        var(--wealth-ivory);
+
+}
+
+
+.page02b .score-option.is-selected .score-option__status-english,
+.page02b .score-option[aria-pressed="true"] .score-option__status-english {
+
+    color:
+        var(--wealth-teal);
+
+}
+
+
+/* ==========================================================================
+   18. FOURTH / TARGET OPTION
+
+   The target option carries a subtle Champagne Gold identity when idle.
+========================================================================== */
+
+.page02b .score-option:nth-child(4):not(.is-selected):not(
+    [aria-pressed="true"]
+) {
+
+    border-color:
+        rgba(214, 168, 79, 0.34);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(214, 168, 79, 0.075),
+            rgba(214, 168, 79, 0.018)
+        );
+
+}
+
+
+.page02b .score-option:nth-child(4):not(.is-selected):not(
+    [aria-pressed="true"]
+) .score-option__score {
+
+    border-color:
+        rgba(214, 168, 79, 0.44);
+
+    color:
+        var(--wealth-gold);
+
+    background:
+        rgba(214, 168, 79, 0.09);
+
+}
+
+
+/* ==========================================================================
+   19. COMPLETION STATUS
+========================================================================== */
+
+.page02b .dimension-completion {
+
+    margin-top:
+        28px;
+
+    color:
+        var(--wealth-soft-white);
+
+    text-align:
+        center;
+
+}
+
+
+.page02b .dimension-completion.is-complete,
+.page02b [data-dimension-complete][data-complete="true"] {
+
+    color:
+        var(--wealth-teal);
+
+    text-shadow:
+        0 0 18px rgba(22, 199, 193, 0.16);
+
+}
+
+
+/* ==========================================================================
+   20. SCORE GUIDE
+========================================================================== */
+
+.page02b .score-guide,
+.page02b .dimension-score-guide,
+.page02b .scorecard-guide {
+
+    margin-top:
+        32px;
+
+    padding:
+        24px;
+
+    border:
+        1px solid rgba(75, 58, 104, 0.70);
+
+    border-radius:
+        16px;
+
+    color:
+        var(--wealth-soft-white);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(75, 22, 144, 0.13),
+            rgba(33, 20, 58, 0.56)
+        );
+
+    box-shadow:
+        var(--wealth-shadow-soft);
+
+}
+
+
+.page02b .score-guide strong,
+.page02b .dimension-score-guide strong,
+.page02b .scorecard-guide strong {
+
+    color:
+        var(--wealth-lilac);
+
+}
+
+
+/* Score guide items */
+
+.page02b .score-guide-item {
+
+    border-color:
+        rgba(75, 58, 104, 0.70);
+
+    background:
+        rgba(247, 243, 234, 0.025);
+
+}
+
+
+/* ==========================================================================
+   21. SCORECARD LIVE SCORE
+========================================================================== */
+
+.page02b .scorecard-question__score {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        flex-end;
+
+    gap:
+        7px;
+
+    margin-top:
+        17px;
+
+    padding-top:
+        13px;
+
+    border-top:
+        1px solid rgba(75, 58, 104, 0.48);
+
+}
+
+
+/* Label */
+
+.page02b .scorecard-question__score-label {
+
+    color:
+        var(--wealth-soft-white);
+
+    font-size:
+        0.52rem;
+
+    letter-spacing:
+        0.12em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* Score value */
+
+.page02b .scorecard-question__score-value {
+
+    color:
+        var(--wealth-lavender);
+
+    font-size:
+        1.05rem;
+
+    font-variant-numeric:
+        tabular-nums;
+
+}
+
+
+/* Max */
+
+.page02b .scorecard-question__score-max {
+
+    color:
+        rgba(217, 208, 232, 0.52);
+
+    font-size:
+        0.65rem;
+
+}
+
+
+/* Status */
+
+.page02b .scorecard-question__score-status {
+
+    margin-left:
+        5px;
+
+    color:
+        var(--wealth-teal);
+
+    font-size:
+        0.52rem;
+
+    letter-spacing:
+        0.08em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* ==========================================================================
+   22. ANSWERED QUESTION CARD
+========================================================================== */
+
+.page02b .scorecard-question:has(
+    .scorecard-question__score.is-answered
+) {
+
+    border-color:
+        rgba(22, 199, 193, 0.20);
+
+}
+
+
+/* ==========================================================================
+   23. VALIDATION MESSAGE
+========================================================================== */
+
+.page02b .dimension-message {
+
+    max-width:
+        900px;
+
+    margin:
+        20px auto;
+
+    padding:
+        14px 18px;
+
+    border:
+        1px solid rgba(214, 168, 79, 0.34);
+
+    border-radius:
+        10px;
+
+    color:
+        var(--wealth-ivory);
+
+    background:
+        rgba(214, 168, 79, 0.08);
+
+}
+
+
+/* ==========================================================================
+   24. NAVIGATION
 ========================================================================== */
 
 .page02b .dimension-navigation {
 
-    padding-bottom:
-        4px;
+    padding-top:
+        38px;
 
-    margin-top:
-        32px;
+    padding-bottom:
+        8px;
+
 }
 
+
+/* Secondary button */
+
+.page02b .dimension-button-secondary {
+
+    border-color:
+        rgba(75, 58, 104, 0.85);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(75, 22, 144, 0.22),
+            rgba(33, 20, 58, 0.72)
+        );
+
+    color:
+        var(--wealth-ivory);
+
+    box-shadow:
+        var(--wealth-shadow-soft);
+
+}
+
+
+/* Primary button */
 
 .page02b .dimension-button-primary {
 
     position:
         relative;
 
+    overflow:
+        hidden;
+
     border-color:
-        rgba(185, 167, 255, 0.18);
+        rgba(22, 199, 193, 0.38);
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #16C7C1,
+            #10AFA9
+        );
+
+    color:
+        #FFFFFF;
 
     box-shadow:
-        0 12px 36px rgba(4, 2, 14, 0.26);
+        0 16px 42px rgba(22, 199, 193, 0.18);
+
+}
+
+
+/* Primary hover */
+
+@media (hover: hover) {
+
+    .page02b .dimension-button-primary:hover {
+
+        box-shadow:
+            0 20px 52px rgba(22, 199, 193, 0.25);
+
+    }
+
 }
 
 
 /* ==========================================================================
-   37. PRIMARY BUTTON LAVENDER EDGE
+   25. GENERIC LEGACY SELECTORS
+
+   Retained intentionally so the page remains compatible with any shared
+   Page 02 components still using the older names.
 ========================================================================== */
 
-.page02b .dimension-button-primary::before {
+.page02b .scorecard-card {
 
-    content:
-        "";
+    background:
 
-    position:
-        absolute;
+        linear-gradient(
+            145deg,
+            rgba(75, 22, 144, 0.20),
+            rgba(33, 20, 58, 0.90)
+        );
 
-    inset:
-        -1px;
+    border-color:
+        rgba(75, 58, 104, 0.82);
 
-    border-radius:
-        inherit;
+    box-shadow:
+        var(--wealth-shadow-soft);
 
-    pointer-events:
-        none;
+}
 
-    border:
-        1px solid
-        rgba(185, 167, 255, 0.16);
+
+.page02b .scorecard-option {
+
+    background:
+        rgba(247, 243, 234, 0.025);
+
+    border-color:
+        rgba(75, 58, 104, 0.72);
+
+    color:
+        var(--wealth-ivory);
+
+}
+
+
+.page02b .scorecard-option.is-selected,
+.page02b .scorecard-option[aria-pressed="true"] {
+
+    border-color:
+        var(--wealth-teal);
+
+    background:
+        rgba(22, 199, 193, 0.12);
+
 }
 
 
 /* ==========================================================================
-   38. ACCESSIBILITY / FOCUS
+   26. ACCESSIBILITY
 ========================================================================== */
 
+.page02b .score-option:focus-visible,
 .page02b .scorecard-option:focus-visible,
 .page02b button:focus-visible,
 .page02b a:focus-visible {
 
     outline:
-        2px solid
-        var(--wealth-lavender-bright);
+        2px solid var(--wealth-lavender);
 
     outline-offset:
         3px;
 
     box-shadow:
-        0 0 0 5px
-        rgba(185, 167, 255, 0.14);
+        0 0 0 5px rgba(168, 140, 255, 0.14);
+
 }
 
 
 /* ==========================================================================
-   39. TABLET
+   27. TABLET
 ========================================================================== */
 
 @media (max-width: 900px) {
 
-    .page02b .dimension-introduction {
+    .page02b .scorecard-question {
 
-        max-width:
-            660px;
+        padding:
+            25px;
+
+    }
+
+
+    .page02b .score-options {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
     }
 
 
@@ -1761,39 +1728,14 @@
 
         margin-top:
             28px;
+
     }
 
-
-    .page02b .scorecard-card {
-
-        box-shadow:
-            0 18px 54px
-            rgba(4, 2, 14, 0.30);
-    }
-
-
-    .page02b .dimension-completion ~ div:not(
-        #dimensionMessage
-    ) {
-
-        padding:
-            28px;
-    }
-
-
-    .page02b .journey-score-grid,
-    .page02b .journey-summary-grid,
-    .page02b .dimension-score-summary,
-    .page02b .score-summary-grid {
-
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr));
-    }
 }
 
 
 /* ==========================================================================
-   40. MOBILE
+   28. MOBILE
 ========================================================================== */
 
 @media (max-width: 768px) {
@@ -1801,7 +1743,8 @@
     .page02b .dimension-header {
 
         margin-bottom:
-            40px;
+            38px;
+
     }
 
 
@@ -1812,13 +1755,73 @@
 
         line-height:
             1.72;
+
+    }
+
+
+    .page02b .scorecard-question {
+
+        padding:
+            22px 18px;
+
+        border-radius:
+            16px;
+
+    }
+
+
+    .page02b .scorecard-question__heading {
+
+        flex-direction:
+            column;
+
+        gap:
+            16px;
+
+    }
+
+
+    .page02b .scorecard-question__ideal {
+
+        align-items:
+            flex-start;
+
+        width:
+            fit-content;
+
+    }
+
+
+    .page02b .score-options {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap:
+            10px;
+
+    }
+
+
+    .page02b .score-option {
+
+        min-height:
+            112px;
+
+        padding:
+            14px 10px;
+
     }
 
 
     .page02b .dimension-score-panel {
 
-        margin-top:
-            24px;
+        min-width:
+            150px;
+
+        min-height:
+            150px;
+
     }
 
 
@@ -1826,6 +1829,7 @@
 
         margin-top:
             22px;
+
     }
 
 
@@ -1833,201 +1837,113 @@
 
         padding-bottom:
             0;
+
     }
 
-
-    .page02b .scorecard-card {
-
-        backdrop-filter:
-            blur(6px);
-
-        -webkit-backdrop-filter:
-            blur(6px);
-    }
-
-
-    .page02b .scorecard-option {
-
-        backdrop-filter:
-            blur(3px);
-
-        -webkit-backdrop-filter:
-            blur(3px);
-    }
-
-
-    .page02b .dimension-completion ~ div:not(
-        #dimensionMessage
-    ) {
-
-        margin-top:
-            34px;
-
-        padding:
-            22px 16px;
-
-        border-radius:
-            20px;
-    }
-
-
-    .page02b .journey-score-grid,
-    .page02b .journey-summary-grid,
-    .page02b .dimension-score-summary,
-    .page02b .score-summary-grid {
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap:
-            9px;
-    }
-
-
-    .page02b .journey-score-grid > *,
-    .page02b .journey-summary-grid > *,
-    .page02b .dimension-score-summary > *,
-    .page02b .score-summary-grid > * {
-
-        min-height:
-            116px;
-
-        padding:
-            14px 8px;
-    }
-
-
-    .page02b .grand-total-value,
-    .page02b .journey-score-total-value,
-    .page02b .score-summary-total-value {
-
-        font-size:
-            3rem;
-    }
 }
 
 
 /* ==========================================================================
-   41. SMALL MOBILE
+   29. SMALL MOBILE
 ========================================================================== */
 
 @media (max-width: 420px) {
 
-    .page02b .dimension-header {
+    .page02b .scorecard-question {
 
-        margin-bottom:
-            36px;
+        padding:
+            20px 14px;
+
     }
 
 
-    .page02b .dimension-introduction {
+    .page02b .scorecard-question__number {
 
-        max-width:
-            100%;
+        width:
+            38px;
+
+        height:
+            38px;
+
+    }
+
+
+    .page02b .score-options {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            9px;
+
+    }
+
+
+    .page02b .score-option {
+
+        flex-direction:
+            row;
+
+        justify-content:
+            flex-start;
+
+        min-height:
+            76px;
+
+        padding:
+            12px 14px;
+
+        text-align:
+            left;
+
+    }
+
+
+    .page02b .score-option__score {
+
+        flex:
+            0 0 auto;
+
+        margin:
+            0 12px 0 0;
+
+    }
+
+
+    .page02b .score-option__body {
+
+        align-items:
+            flex-start;
+
+    }
+
+
+    .page02b .score-option__status {
+
+        align-items:
+            flex-start;
+
     }
 
 
     .page02b .dimension-score-panel {
 
-        margin-top:
-            22px;
-    }
-
-
-    .page02b .scorecard-card {
-
-        box-shadow:
-            0 14px 38px
-            rgba(4, 2, 14, 0.26);
-    }
-
-
-    .page02b .dimension-completion ~ div:not(
-        #dimensionMessage
-    ) {
-
-        padding:
-            20px 12px;
-
-        border-radius:
-            18px;
-    }
-
-
-    .page02b .journey-score-grid,
-    .page02b .journey-summary-grid,
-    .page02b .dimension-score-summary,
-    .page02b .score-summary-grid {
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap:
-            7px;
-    }
-
-
-    .page02b .journey-score-grid > *,
-    .page02b .journey-summary-grid > *,
-    .page02b .dimension-score-summary > *,
-    .page02b .score-summary-grid > * {
+        min-width:
+            140px;
 
         min-height:
-            104px;
+            140px;
 
-        padding:
-            12px 6px;
     }
 
-
-    .page02b .journey-score-grid .dimension-name,
-    .page02b .journey-summary-grid .dimension-name,
-    .page02b .dimension-score-summary .dimension-name,
-    .page02b .score-summary-grid .dimension-name {
-
-        font-size:
-            0.62rem;
-    }
-
-
-    .page02b .journey-score-grid .dimension-score,
-    .page02b .journey-summary-grid .dimension-score,
-    .page02b .dimension-score-summary .dimension-score,
-    .page02b .score-summary-grid .dimension-score {
-
-        font-size:
-            1.15rem;
-    }
 }
 
 
 /* ==========================================================================
-   42. REDUCED MOTION
+   30. REDUCED MOTION
 ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
-
-    .page02b .scorecard-card,
-    .page02b .scorecard-option,
-    .page02b .journey-score-grid > *,
-    .page02b .journey-summary-grid > *,
-    .page02b .dimension-score-summary > *,
-    .page02b .score-summary-grid > * {
-
-        transition:
-            none;
-    }
-
-
-    .page02b .scorecard-option {
-
-        backdrop-filter:
-            none;
-
-        -webkit-backdrop-filter:
-            none;
-    }
-
 
     .page02b *,
     .page02b *::before,
@@ -2035,12 +1951,27 @@
 
         scroll-behavior:
             auto !important;
+
+        transition:
+            none !important;
+
     }
+
+
+    .page02b .score-option:hover,
+    .page02b .score-option.is-selected,
+    .page02b .scorecard-option:hover {
+
+        transform:
+            none;
+
+    }
+
 }
 
 
 /* ==========================================================================
-   43. PRINT
+   31. PRINT
 ========================================================================== */
 
 @media print {
@@ -2051,98 +1982,144 @@
             auto;
 
         background:
-            #ffffff !important;
+            #FFFFFF !important;
 
         color:
             #111111 !important;
+
     }
 
 
-    .page02b .scorecard-card,
-    .page02b .dimension-completion ~ div:not(
-        #dimensionMessage
-    ) {
+    .page02b .scorecard-question {
 
         background:
-            #ffffff !important;
+            #FFFFFF !important;
 
         border:
-            1px solid #cccccc !important;
+            1px solid #CCCCCC !important;
 
         box-shadow:
             none !important;
 
         color:
             #111111 !important;
+
+        break-inside:
+            avoid;
+
+    }
+
+
+    .page02b .score-option {
+
+        background:
+            #FFFFFF !important;
+
+        border:
+            1px solid #CCCCCC !important;
+
+        color:
+            #111111 !important;
+
+    }
+
+
+    .page02b .dimension-navigation {
+
+        display:
+            none !important;
+
     }
 
 
     .page02b .dimension-title-tamil,
-    .page02b .scorecard-title,
-    .page02b .scorecard-option .option-label,
-    .page02b .scorecard-option .option-text,
-    .page02b .grand-total-value,
-    .page02b .journey-score-total-value {
+    .page02b .scorecard-question__tamil,
+    .page02b .score-option__range {
 
         color:
             #111111 !important;
+
     }
+
 }
 
 
 /* ==========================================================================
-   44. ARCHITECTURE NOTE
+   32. ARCHITECTURE NOTE
 
-   page02-shared.css
+   DATA
+       page02-data.js
+              ↓
+   SESSION
+       page02-session.js
+              ↓
+   SCORECARD
+       page02-scorecard.js
+              ↓
+   PAGE CONTROLLER
+       page02b.js
+              ↓
+   PRESENTATION
+       page02b.css
+
+   THIS FILE:
+       ✓ changes visual language
+       ✓ styles the actual dynamically-rendered question cards
+       ✓ styles the actual .score-option renderer
+       ✓ styles Wealth-specific benchmarks
+       ✓ styles live dimension score
+       ✓ styles progress
+       ✓ styles navigation
+       ✓ preserves responsive behaviour
+
+   THIS FILE DOES NOT:
+       ✗ change scoring
+       ✗ change answer mapping
+       ✗ change question data
+       ✗ change navigation
+       ✗ create HTML
+       ✗ create the six-dimension journey summary
+========================================================================== */
+
+
+/* ==========================================================================
+   FINAL CTM PATH™ WEALTH LANGUAGE
+
+       #120B24
            ↓
-   Common Millionaire Lifestyle Scorecard™ architecture
-
-   page02b.css
+       #380088
            ↓
-   Dimension 01 — Wealth™
-   Midnight-lavender luxury
-   Progressive journey score presentation
-
-   HTML
+       #4B1690
            ↓
-   Structure
-
-   page02-scorecard.js
+       #21143A
            ↓
-   Rendering / scoring / persistence
-
-   page02b.js
+       #A88CFF
            ↓
-   Dimension 01 navigation
+       #C8B8FF
+           ↓
+       #F7F3EA
+           ↓
+       #D6A84F
+           ↓
+       #16C7C1
 
-   NO scoring logic is recreated here.
-   NO navigation logic is recreated here.
-   NO footer logic is introduced here.
+   MIDNIGHT
+       = foundation
 
-   VISUAL DIRECTION:
+   ROYAL VIOLET
+       = wealth environment
 
-       MIDNIGHT
-          ↓
-       LAVENDER
-          ↓
-       VIOLET
-          ↓
-       TEAL INTERACTION
-          ↓
-       CHAMPAGNE GOLD ASPIRATION
-          ↓
-       GRAND TOTAL
+   LAVENDER
+       = intelligence / aspiration
 
-   EXPERIENCE:
+   IVORY
+       = clarity
 
-       ANSWER
-          ↓
-       SEE DIMENSION SCORE
-          ↓
-       SEE JOURNEY PROGRESS
-          ↓
-       SEE GRAND TOTAL
-          ↓
-       MOVE TO NEXT DIMENSION
+   CHAMPAGNE GOLD
+       = millionaire benchmark
+
+   CTM TEAL
+       = action / progress / selection
 
 ========================================================================== */
+
