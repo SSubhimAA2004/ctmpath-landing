@@ -8,7 +8,7 @@
  * js/page02/page02b.js
  *
  * VERSION:
- * 4.0
+ * 4.0 — PROGRESSIVE DIMENSION SCOREBOARD
  *
  * PAGE:
  * PAGE 02B — DIMENSION 01 — WEALTH™
@@ -20,13 +20,12 @@
  *
  * PURPOSE
  *
- * Controls the lifecycle and navigation of Dimension 01 — Wealth™.
- *
- * JOURNEY:
+ * Controls the lifecycle and navigation of Dimension 01.
  *
  *      page02a.html
  *           ↓
- *      PAGE 02B
+ *      page02b.html
+ *           ↓
  *      WEALTH™
  *      Indicators 01–05
  *           ↓
@@ -34,1996 +33,2230 @@
  *
  * =============================================================================
  *
- * ARCHITECTURE
+ * SHARED RESPONSIBILITIES DELEGATED TO:
  *
  *      component-loader.js
- *          ↓
+ *          → global header / footer lifecycle
+ *
  *      page02-data.js
- *          ↓
+ *          → indicator definitions / ranges / dimensions
+ *
  *      page02-session.js
- *          ↓
+ *          → answer persistence / scoring / journey state
+ *
  *      page02-scorecard.js
- *          ↓
- *      page02b.js
+ *          → rendering / selection / validation / live dimension score
  *
  * =============================================================================
  *
- * THIS FILE OWNS:
+ * THIS FILE:
  *
- *      ✓ Page 02B lifecycle
- *      ✓ Global component lifecycle call
- *      ✓ Wealth™ dependency verification
- *      ✓ Previous navigation
- *      ✓ Next navigation
- *      ✓ Five-indicator completion gate
- *      ✓ Dimension completion hand-off
- *      ✓ Dimension transition
- *      ✓ Saved-state restoration
- *      ✓ Keyboard navigation
- *      ✓ Page-level accessibility state
- *      ✓ Navigation locking
- *      ✓ QA / diagnostic API
+ *      ✓ loads global header + footer
+ *      ✓ initializes Wealth™
+ *      ✓ binds Previous
+ *      ✓ binds Next
+ *      ✓ validates all five Wealth™ indicators
+ *      ✓ marks Wealth™ complete
+ *      ✓ sets Dimension 02 as current dimension
+ *      ✓ navigates to Page 02C
+ *      ✓ restores saved Wealth™ state
+ *      ✓ provides keyboard navigation
+ *      ✓ moves the dimension score to the bottom
+ *      ✓ creates the progressive six-column scorecard
+ *      ✓ updates progressive dimension scores after every answer
+ *      ✓ updates the progressive Grand Total /100
  *
- * THIS FILE DOES NOT OWN:
+ * THIS FILE DOES NOT:
  *
- *      ✗ Questions
- *      ✗ Indicator definitions
- *      ✗ Range definitions
- *      ✗ Answer scoring
- *      ✗ Score calculations
- *      ✗ Option-card rendering
- *      ✗ Session persistence
- *      ✗ Backend calls
- *      ✗ Header markup
- *      ✗ Footer markup
+ *      ✗ contain questions
+ *      ✗ contain range definitions
+ *      ✗ recreate scoring logic
+ *      ✗ render answer options
+ *      ✗ call backend
+ *      ✗ contain header/footer markup
  *
  * =============================================================================
  */
 
 'use strict';
 
-
 (function(window, document){
 
-    /* =========================================================================
-       01. CONFIGURATION
-       ========================================================================= */
+/* =============================================================================
+ * CONFIGURATION
+ * =============================================================================
+ */
 
-    const CONFIG = {
+const CONFIG = {
 
-        version:
-            '4.0',
+    dimensionId:
+        'wealth',
 
-        dimensionId:
-            'wealth',
+    previousPage:
+        'page02a.html',
 
-        previousPage:
-            'page02a.html',
+    nextPage:
+        'page02c.html',
 
-        nextPage:
-            'page02c.html',
+    nextDimensionId:
+        'incomeCashFlow',
 
-        nextDimensionId:
-            'incomeCashFlow',
+    dimensionMaximum:
+        20,
 
-        expectedIndicators:
-            5,
+    totalMaximum:
+        100,
 
-        keyboardShortcut:
-            'Enter'
-
-    };
-
-
-    /* =========================================================================
-       02. DOM CONTRACT
-       ========================================================================= */
-
-    const DOM_IDS = {
-
-        page:
-            'page02b',
-
-        globalHeader:
-            'global-header',
-
-        globalFooter:
-            'global-footer',
-
-        previousButton:
-            'previousButton',
-
-        nextButton:
-            'nextButton',
-
-        completion:
-            'dimensionCompletion',
-
-        message:
-            'dimensionMessage'
-
-    };
+    dimensionCount:
+        5
+};
 
 
-    /* =========================================================================
-       03. INTERNAL STATE
-       ========================================================================= */
+/* =============================================================================
+ * DOM CONTRACT
+ * =============================================================================
+ */
 
-    let initialized =
-        false;
+const DOM_IDS = {
 
-    let initializing =
-        false;
+    globalHeader:
+        'global-header',
 
-    let navigating =
-        false;
+    globalFooter:
+        'global-footer',
 
-    let answerListenerBound =
-        false;
+    previousButton:
+        'previousButton',
 
-    let keyboardListenerBound =
-        false;
+    nextButton:
+        'nextButton',
 
-    let previousListenerBound =
-        false;
+    dimensionScorePanel:
+        'dimensionScorePanel',
 
-    let nextListenerBound =
-        false;
+    dimensionScoreCurrent:
+        'dimensionScoreCurrent',
+
+    dimensionScoreTotal:
+        'dimensionScoreTotal',
+
+    dimensionNavigation:
+        'dimensionNavigation'
+};
 
 
-    /* =========================================================================
-       04. DOM HELPERS
-       ========================================================================= */
+/* =============================================================================
+ * STATE
+ * =============================================================================
+ */
 
-    function getElement(id){
+let initialized =
+    false;
 
-        if(!id){
+let initializing =
+    false;
 
-            return null;
+let navigating =
+    false;
 
-        }
 
-        return (
-            document.getElementById(id) ||
-            null
+/* =============================================================================
+ * DOM HELPER
+ * =============================================================================
+ */
+
+function getElement(id){
+
+    return (
+        document.getElementById(id) ||
+        null
+    );
+}
+
+
+/* =============================================================================
+ * SCROLL TO TOP
+ * =============================================================================
+ */
+
+function scrollToTop(){
+
+    window.scrollTo({
+
+        top:
+            0,
+
+        left:
+            0,
+
+        behavior:
+            'auto'
+    });
+}
+
+
+/* =============================================================================
+ * GLOBAL COMPONENT MOUNT CONTRACT
+ * =============================================================================
+ */
+
+function verifyComponentMounts(){
+
+    const headerMount =
+        getElement(
+            DOM_IDS.globalHeader
         );
 
+    const footerMount =
+        getElement(
+            DOM_IDS.globalFooter
+        );
+
+
+    if(!headerMount){
+
+        console.warn(
+            'CTM PATH™ Page 02B: #global-header mount not found.'
+        );
     }
 
 
-    function getPageRoot(){
+    if(!footerMount){
 
-        return (
-            getElement(DOM_IDS.page) ||
-            document.querySelector('.page02b') ||
-            document.querySelector('[data-page="page02b"]') ||
-            document.body
+        console.warn(
+            'CTM PATH™ Page 02B: #global-footer mount not found.'
         );
-
     }
 
 
-    /* =========================================================================
-       05. PAGE ACCESSIBILITY STATE
-       ========================================================================= */
-
-    function setPageState(state){
-
-        const page =
-            getPageRoot();
-
-        if(!page){
-
-            return;
-
-        }
-
-        page.setAttribute(
-            'data-page-state',
-            state
-        );
-
-    }
+    return (
+        !!headerMount &&
+        !!footerMount
+    );
+}
 
 
-    function setCompletionState(
-        complete
+/* =============================================================================
+ * GLOBAL COMPONENT LOADER
+ *
+ * Header/footer loading is intentionally NON-FATAL.
+ * =============================================================================
+ */
+
+async function loadGlobalComponents(){
+
+    verifyComponentMounts();
+
+
+    if(
+        !window.CTM_COMPONENTS ||
+        typeof window.CTM_COMPONENTS.load !==
+            'function'
     ){
 
-        const page =
-            getPageRoot();
-
-        if(page){
-
-            page.setAttribute(
-                'data-dimension-complete',
-                complete
-                    ? 'true'
-                    : 'false'
-            );
-
-        }
-
-        const completion =
-            getElement(
-                DOM_IDS.completion
-            );
-
-        if(completion){
-
-            completion.setAttribute(
-                'data-complete',
-                complete
-                    ? 'true'
-                    : 'false'
-            );
-
-            completion.classList.toggle(
-                'is-complete',
-                complete
-            );
-
-        }
-
-    }
-
-
-    /* =========================================================================
-       06. SCROLL MANAGEMENT
-       ========================================================================= */
-
-    function scrollToTop(){
-
-        window.scrollTo({
-
-            top:
-                0,
-
-            left:
-                0,
-
-            behavior:
-                'auto'
-
-        });
-
-    }
-
-
-    function focusPageTop(){
-
-        const page =
-            getPageRoot();
-
-        if(!page){
-
-            return;
-
-        }
-
-        /*
-         * Do not force a visible focus ring.
-         * This is purely an accessibility / keyboard-navigation aid.
-         */
-
-        if(
-            !page.hasAttribute('tabindex')
-        ){
-
-            page.setAttribute(
-                'tabindex',
-                '-1'
-            );
-
-        }
-
-        try{
-
-            page.focus({
-                preventScroll:
-                    true
-            });
-
-        }
-        catch(error){
-
-            /*
-             * Older browsers may not support preventScroll.
-             */
-
-            try{
-
-                page.focus();
-
-            }
-            catch(ignore){
-
-                /* Intentionally ignored. */
-
-            }
-
-        }
-
-    }
-
-
-    /* =========================================================================
-       07. GLOBAL COMPONENT MOUNT VERIFICATION
-       ========================================================================= */
-
-    function verifyComponentMounts(){
-
-        const headerMount =
-            getElement(
-                DOM_IDS.globalHeader
-            );
-
-        const footerMount =
-            getElement(
-                DOM_IDS.globalFooter
-            );
-
-
-        if(!headerMount){
-
-            console.warn(
-                'CTM PATH™ Page 02B: #global-header mount not found.'
-            );
-
-        }
-
-
-        if(!footerMount){
-
-            console.warn(
-                'CTM PATH™ Page 02B: #global-footer mount not found.'
-            );
-
-        }
-
-
-        return (
-            !!headerMount &&
-            !!footerMount
+        console.warn(
+            'CTM PATH™ Page 02B: global component loader unavailable.'
         );
 
+        return false;
     }
 
 
-    /* =========================================================================
-       08. GLOBAL COMPONENT LOADER
-       =========================================================================
-       
-       Header/footer loading is NON-FATAL.
+    try{
 
-       Page 02B must remain usable even if the global component service
-       encounters a loading failure.
-       ========================================================================= */
-
-    async function loadGlobalComponents(){
-
-        verifyComponentMounts();
-
-
-        if(
-            !window.CTM_COMPONENTS ||
-            typeof window.CTM_COMPONENTS.load !==
-                'function'
-        ){
-
-            console.warn(
-                'CTM PATH™ Page 02B: global component loader unavailable.'
-            );
-
-            return false;
-
-        }
-
-
-        try{
-
-            console.info(
-                'CTM PATH™ Page 02B: loading global components...'
-            );
-
-
-            const result =
-                await window.CTM_COMPONENTS.load();
-
-
-            console.info(
-                'CTM PATH™ Page 02B: global components ready.',
-                result || null
-            );
-
-
-            return true;
-
-        }
-        catch(error){
-
-            console.error(
-                'CTM PATH™ Page 02B: global component loading failed.',
-                error
-            );
-
-
-            /*
-             * IMPORTANT:
-             *
-             * Component failure must not destroy the assessment.
-             */
-
-            return false;
-
-        }
-
-    }
-
-
-    /* =========================================================================
-       09. DEPENDENCY VERIFICATION
-       ========================================================================= */
-
-    function verifyDependencies(){
-
-        const missing =
-            [];
-
-
-        if(
-            !window.Page02Data
-        ){
-
-            missing.push(
-                'Page02Data'
-            );
-
-        }
-
-
-        if(
-            !window.Page02Session
-        ){
-
-            missing.push(
-                'Page02Session'
-            );
-
-        }
-
-
-        if(
-            !window.Page02Scorecard
-        ){
-
-            missing.push(
-                'Page02Scorecard'
-            );
-
-        }
-
-
-        if(
-            missing.length
-        ){
-
-            console.error(
-                'CTM PATH™ Page 02B missing dependencies:',
-                missing
-            );
-
-
-            setPageState(
-                'dependency-error'
-            );
-
-
-            return false;
-
-        }
-
-
-        return true;
-
-    }
-
-
-    /* =========================================================================
-       10. DIMENSION CONTRACT VERIFICATION
-       ========================================================================= */
-
-    function getDimension(){
-
-        if(
-            !window.Page02Data ||
-            typeof window.Page02Data.getDimensionById !==
-                'function'
-        ){
-
-            return null;
-
-        }
-
-
-        return (
-            window.Page02Data.getDimensionById(
-                CONFIG.dimensionId
-            ) ||
-            null
-        );
-
-    }
-
-
-    function verifyDimension(){
-
-        const dimension =
-            getDimension();
-
-
-        if(!dimension){
-
-            console.error(
-                'CTM PATH™ Page 02B could not find Wealth™ dimension.'
-            );
-
-
-            setPageState(
-                'dimension-error'
-            );
-
-
-            return false;
-
-        }
-
-
-        if(
-            !Array.isArray(
-                dimension.indicators
-            )
-        ){
-
-            console.error(
-                'CTM PATH™ Page 02B Wealth™ indicators are not an array.',
-                dimension
-            );
-
-
-            setPageState(
-                'dimension-error'
-            );
-
-
-            return false;
-
-        }
-
-
-        if(
-            dimension.indicators.length !==
-            CONFIG.expectedIndicators
-        ){
-
-            console.error(
-                'CTM PATH™ Page 02B expected exactly five Wealth™ indicators.',
-                {
-                    expected:
-                        CONFIG.expectedIndicators,
-
-                    received:
-                        dimension.indicators.length,
-
-                    dimension:
-                        dimension
-                }
-            );
-
-
-            setPageState(
-                'dimension-error'
-            );
-
-
-            return false;
-
-        }
-
-
-        return true;
-
-    }
-
-
-    /* =========================================================================
-       11. SCORECARD API VERIFICATION
-       ========================================================================= */
-
-    function verifyScorecardAPI(){
-
-        const requiredMethods = [
-
-            'init',
-            'restore',
-            'requireComplete',
-            'complete',
-            'getScore',
-            'getProgress',
-            'validate'
-
-        ];
-
-
-        const missing =
-            requiredMethods.filter(
-                function(method){
-
-                    return (
-                        typeof window.Page02Scorecard[method] !==
-                        'function'
-                    );
-
-                }
-            );
-
-
-        if(
-            missing.length
-        ){
-
-            console.error(
-                'CTM PATH™ Page 02B incomplete Page02Scorecard API:',
-                missing
-            );
-
-
-            setPageState(
-                'scorecard-api-error'
-            );
-
-
-            return false;
-
-        }
-
-
-        return true;
-
-    }
-
-
-    /* =========================================================================
-       12. NAVIGATION STATE
-       ========================================================================= */
-
-    function setNavigationState(
-        active
-    ){
-
-        navigating =
-            !!active;
-
-
-        const previousButton =
-            getElement(
-                DOM_IDS.previousButton
-            );
-
-        const nextButton =
-            getElement(
-                DOM_IDS.nextButton
-            );
-
-
-        if(previousButton){
-
-            previousButton.disabled =
-                !!active;
-
-            previousButton.setAttribute(
-                'aria-busy',
-                active
-                    ? 'true'
-                    : 'false'
-            );
-
-        }
-
-
-        if(nextButton){
-
-            nextButton.disabled =
-                !!active;
-
-            nextButton.setAttribute(
-                'aria-busy',
-                active
-                    ? 'true'
-                    : 'false'
-            );
-
-        }
-
-
-        const page =
-            getPageRoot();
-
-        if(page){
-
-            page.setAttribute(
-                'aria-busy',
-                active
-                    ? 'true'
-                    : 'false'
-            );
-
-        }
-
-    }
-
-
-    /* =========================================================================
-       13. PREVIOUS NAVIGATION
-       ========================================================================= */
-
-    function goPrevious(
-        event
-    ){
-
-        if(event){
-
-            event.preventDefault();
-
-        }
-
-
-        if(navigating){
-
-            return;
-
-        }
-
-
-        setNavigationState(
-            true
+        console.info(
+            'CTM PATH™ Page 02B: loading global components...'
         );
 
 
-        setPageState(
-            'leaving-previous'
-        );
+        const result =
+            await window.CTM_COMPONENTS.load();
 
 
         console.info(
-            'CTM PATH™ Page 02B → Page 02A'
+            'CTM PATH™ Page 02B: global header and footer ready.',
+            result || null
         );
 
 
-        window.location.href =
-            CONFIG.previousPage;
+        return true;
 
+    }
+    catch(error){
+
+        console.error(
+            'CTM PATH™ Page 02B: global component loading failed.',
+            error
+        );
+
+
+        return false;
+    }
+}
+
+
+/* =============================================================================
+ * VERIFY SCORECARD DEPENDENCIES
+ * =============================================================================
+ */
+
+function verifyDependencies(){
+
+    const missing =
+        [];
+
+
+    if(
+        !window.Page02Data
+    ){
+
+        missing.push(
+            'Page02Data'
+        );
     }
 
 
-    /* =========================================================================
-       14. VALIDATION FEEDBACK
-       ========================================================================= */
+    if(
+        !window.Page02Session
+    ){
 
-    function getProgress(){
+        missing.push(
+            'Page02Session'
+        );
+    }
+
+
+    if(
+        !window.Page02Scorecard
+    ){
+
+        missing.push(
+            'Page02Scorecard'
+        );
+    }
+
+
+    if(
+        missing.length
+    ){
+
+        console.error(
+            'CTM PATH™ Page 02B missing dependencies:',
+            missing
+        );
+
+        return false;
+    }
+
+
+    return true;
+}
+
+
+/* =============================================================================
+ * VERIFY DIMENSION
+ * =============================================================================
+ */
+
+function verifyDimension(){
+
+    const dimension =
+        window.Page02Data.getDimensionById(
+            CONFIG.dimensionId
+        );
+
+
+    if(
+        !dimension
+    ){
+
+        console.error(
+            'CTM PATH™ Page 02B could not find Wealth™ dimension.'
+        );
+
+        return false;
+    }
+
+
+    if(
+        !Array.isArray(
+            dimension.indicators
+        ) ||
+        dimension.indicators.length !== 5
+    ){
+
+        console.error(
+            'CTM PATH™ Page 02B expected exactly five Wealth™ indicators.',
+            dimension
+        );
+
+        return false;
+    }
+
+
+    return true;
+}
+
+
+/* =============================================================================
+ * GET ALL DIMENSIONS
+ *
+ * Canonical source:
+ *
+ *      page02-data.js
+ *
+ * No dimension definitions are duplicated here.
+ * =============================================================================
+ */
+
+function getAllDimensions(){
+
+    if(
+        !window.Page02Data
+    ){
+
+        return [];
+    }
+
+
+    if(
+        Array.isArray(
+            window.Page02Data.DIMENSIONS
+        )
+    ){
+
+        return (
+            window.Page02Data.DIMENSIONS
+        );
+    }
+
+
+    if(
+        typeof window.Page02Data.getDimensions ===
+            'function'
+    ){
+
+        const dimensions =
+            window.Page02Data.getDimensions();
+
 
         if(
-            !window.Page02Scorecard ||
-            typeof window.Page02Scorecard.getProgress !==
-                'function'
+            Array.isArray(dimensions)
         ){
 
-            return null;
-
+            return dimensions;
         }
-
-
-        try{
-
-            return (
-                window.Page02Scorecard.getProgress() ||
-                null
-            );
-
-        }
-        catch(error){
-
-            console.error(
-                'CTM PATH™ Page 02B could not read progress.',
-                error
-            );
-
-            return null;
-
-        }
-
     }
 
 
-    function announceValidationFailure(){
-
-        const progress =
-            getProgress();
+    return [];
+}
 
 
-        const message =
-            getElement(
-                DOM_IDS.message
+/* =============================================================================
+ * GET DIMENSION SCORE
+ *
+ * Delegates actual score calculation to Page02Session.
+ * =============================================================================
+ */
+
+function getDimensionScore(
+    dimensionId
+){
+
+    if(
+        !window.Page02Session ||
+        typeof window.Page02Session.getDimensionScore !==
+            'function'
+    ){
+
+        return 0;
+    }
+
+
+    const score =
+        Number(
+            window.Page02Session.getDimensionScore(
+                dimensionId
+            )
+        );
+
+
+    if(
+        !Number.isFinite(score)
+    ){
+
+        return 0;
+    }
+
+
+    return Math.max(
+        0,
+        Math.min(
+            CONFIG.dimensionMaximum,
+            score
+        )
+    );
+}
+
+
+/* =============================================================================
+ * GET PROGRESSIVE TOTAL
+ *
+ * Grand Total is simply the sum of the five dimension scores.
+ *
+ * No new scoring model is introduced.
+ * =============================================================================
+ */
+
+function getProgressiveTotal(){
+
+    const dimensions =
+        getAllDimensions();
+
+
+    if(
+        !dimensions.length
+    ){
+
+        return 0;
+    }
+
+
+    return dimensions.reduce(
+
+        function(
+            total,
+            dimension
+        ){
+
+            return (
+                total +
+                getDimensionScore(
+                    dimension.id
+                )
             );
 
+        },
 
-        if(!message){
-
-            return;
-
-        }
+        0
+    );
+}
 
 
-        let text =
-            'Please complete all five Wealth™ indicators before continuing.';
+/* =============================================================================
+ * GET DIMENSION ANSWERED COUNT
+ *
+ * Used only for progressive display.
+ * =============================================================================
+ */
+
+function getDimensionAnsweredCount(
+    dimensionId
+){
+
+    if(
+        window.Page02Session &&
+        typeof window.Page02Session.getDimensionProgress ===
+            'function'
+    ){
+
+        const progress =
+            window.Page02Session.getDimensionProgress(
+                dimensionId
+            );
 
 
         if(
             progress &&
-            Number.isFinite(progress.answered) &&
-            Number.isFinite(progress.total)
+            Number.isFinite(
+                Number(progress.answered)
+            )
         ){
 
-            text =
-                'Please complete all ' +
-                progress.total +
-                ' Wealth™ indicators. ' +
-                progress.answered +
-                ' of ' +
-                progress.total +
-                ' completed.';
-
+            return Number(
+                progress.answered
+            );
         }
-
-
-        message.textContent =
-            text;
-
-
-        message.setAttribute(
-            'role',
-            'alert'
-        );
-
-
-        message.classList.add(
-            'is-visible'
-        );
-
     }
 
 
-    /* =========================================================================
-       15. NEXT NAVIGATION
-       =========================================================================
-       
-       CRITICAL SEQUENCE:
-       
-           1. Validate 5 / 5
-           2. Complete Wealth™
-           3. Set Dimension 02
-           4. Navigate to Page 02C
-       ========================================================================= */
+    const dimension =
+        window.Page02Data &&
+        typeof window.Page02Data.getDimensionById ===
+            'function'
+            ? window.Page02Data.getDimensionById(
+                dimensionId
+            )
+            : null;
 
-    function goNext(
-        event
+
+    if(
+        !dimension ||
+        !Array.isArray(
+            dimension.indicators
+        )
     ){
 
-        if(event){
+        return 0;
+    }
+
+
+    if(
+        !window.Page02Session ||
+        typeof window.Page02Session.getAnswer !==
+            'function'
+    ){
+
+        return 0;
+    }
+
+
+    return dimension.indicators.reduce(
+
+        function(
+            count,
+            indicator
+        ){
+
+            return (
+                count +
+                (
+                    window.Page02Session.getAnswer(
+                        indicator.id
+                    )
+                        ? 1
+                        : 0
+                )
+            );
+
+        },
+
+        0
+    );
+}
+
+
+/* =============================================================================
+ * NORMALIZE DIMENSION NAME
+ * =============================================================================
+ */
+
+function getDimensionEnglish(
+    dimension
+){
+
+    if(
+        dimension &&
+        dimension.english
+    ){
+
+        return String(
+            dimension.english
+        );
+    }
+
+
+    if(
+        dimension &&
+        dimension.titleEnglish
+    ){
+
+        return String(
+            dimension.titleEnglish
+        );
+    }
+
+
+    if(
+        dimension &&
+        dimension.name
+    ){
+
+        return String(
+            dimension.name
+        );
+    }
+
+
+    return 'Dimension';
+}
+
+
+/* =============================================================================
+ * NORMALIZE DIMENSION TAMIL
+ * =============================================================================
+ */
+
+function getDimensionTamil(
+    dimension
+){
+
+    if(
+        dimension &&
+        dimension.tamil
+    ){
+
+        return String(
+            dimension.tamil
+        );
+    }
+
+
+    if(
+        dimension &&
+        dimension.titleTamil
+    ){
+
+        return String(
+            dimension.titleTamil
+        );
+    }
+
+
+    return '';
+}
+
+
+/* =============================================================================
+ * FIND EXISTING SCORE PANEL
+ * =============================================================================
+ */
+
+function getDimensionScorePanel(){
+
+    return document.querySelector(
+        '.page02b .dimension-score-panel'
+    );
+}
+
+
+/* =============================================================================
+ * FIND NAVIGATION
+ * =============================================================================
+ */
+
+function getDimensionNavigation(){
+
+    return document.querySelector(
+        '.page02b .dimension-navigation'
+    );
+}
+
+
+/* =============================================================================
+ * RELOCATE LIVE DIMENSION SCORE
+ *
+ * Existing HTML contains the score panel inside the header.
+ *
+ * The requested presentation is:
+ *
+ *      QUESTIONS
+ *          ↓
+ *      PROGRESSIVE SCOREBOARD
+ *          ↓
+ *      NAVIGATION
+ *
+ * Therefore the existing score panel is moved without changing its
+ * markup or its scoring behaviour.
+ * =============================================================================
+ */
+
+function relocateDimensionScore(){
+
+    const scorePanel =
+        getDimensionScorePanel();
+
+    const navigation =
+        getDimensionNavigation();
+
+
+    if(
+        !scorePanel ||
+        !navigation
+    ){
+
+        return false;
+    }
+
+
+    navigation.parentNode.insertBefore(
+        scorePanel,
+        navigation
+    );
+
+
+    scorePanel.classList.add(
+        'page02b-bottom-dimension-score'
+    );
+
+
+    return true;
+}
+
+
+/* =============================================================================
+ * CREATE PROGRESSIVE SCOREBOARD
+ *
+ * Six columns:
+ *
+ *      01 Wealth™
+ *      02 Income & Cash Flow™
+ *      03 Assets™
+ *      04 Lifestyle & Freedom™
+ *      05 Protection & Contribution™
+ *      GRAND TOTAL
+ *
+ * Future dimensions display:
+ *
+ *      — / 20
+ *
+ * Answered dimensions display:
+ *
+ *      score / 20
+ *
+ * Grand Total:
+ *
+ *      total / 100
+ *
+ * =============================================================================
+ */
+
+function createProgressiveScoreboard(){
+
+    let board =
+        document.getElementById(
+            'page02ProgressiveScoreboard'
+        );
+
+
+    if(board){
+
+        return board;
+    }
+
+
+    const navigation =
+        getDimensionNavigation();
+
+
+    if(
+        !navigation
+    ){
+
+        return null;
+    }
+
+
+    board =
+        document.createElement(
+            'section'
+        );
+
+
+    board.id =
+        'page02ProgressiveScoreboard';
+
+
+    board.className =
+        'page02b-progressive-scoreboard';
+
+
+    board.setAttribute(
+        'aria-label',
+        'Progressive Millionaire Lifestyle Scorecard'
+    );
+
+
+    board.innerHTML = `
+
+        <div class="page02b-progressive-scoreboard-header">
+
+            <div class="page02b-progressive-scoreboard-heading">
+
+                <span class="page02b-progressive-scoreboard-kicker">
+                    YOUR JOURNEY SO FAR™
+                </span>
+
+                <span class="page02b-progressive-scoreboard-title">
+                    Millionaire Lifestyle Score
+                </span>
+
+            </div>
+
+            <div
+                class="page02b-progressive-scoreboard-total"
+                aria-live="polite"
+            >
+
+                <span class="page02b-progressive-total-label">
+                    GRAND TOTAL
+                </span>
+
+                <span class="page02b-progressive-total-value">
+                    <strong id="page02ProgressiveGrandTotal">0</strong>
+                    <span>/ 100</span>
+                </span>
+
+            </div>
+
+        </div>
+
+        <div
+            id="page02ProgressiveColumns"
+            class="page02b-progressive-columns"
+        ></div>
+
+    `;
+
+
+    navigation.parentNode.insertBefore(
+        board,
+        navigation
+    );
+
+
+    return board;
+}
+
+
+/* =============================================================================
+ * RENDER PROGRESSIVE SCOREBOARD
+ * =============================================================================
+ */
+
+function renderProgressiveScoreboard(){
+
+    const board =
+        createProgressiveScoreboard();
+
+
+    if(
+        !board
+    ){
+
+        return false;
+    }
+
+
+    const dimensions =
+        getAllDimensions();
+
+
+    const columns =
+        document.getElementById(
+            'page02ProgressiveColumns'
+        );
+
+
+    const grandTotal =
+        document.getElementById(
+            'page02ProgressiveGrandTotal'
+        );
+
+
+    if(
+        !columns
+    ){
+
+        return false;
+    }
+
+
+    columns.innerHTML =
+        '';
+
+
+    let progressiveTotal =
+        0;
+
+
+    dimensions
+        .slice(
+            0,
+            CONFIG.dimensionCount
+        )
+        .forEach(
+
+            function(
+                dimension,
+                index
+            ){
+
+                const score =
+                    getDimensionScore(
+                        dimension.id
+                    );
+
+
+                const answered =
+                    getDimensionAnsweredCount(
+                        dimension.id
+                    );
+
+
+                const isCurrent =
+                    dimension.id ===
+                    CONFIG.dimensionId;
+
+
+                const isAnswered =
+                    answered > 0;
+
+
+                const isComplete =
+                    answered >= 5;
+
+
+                if(isAnswered){
+
+                    progressiveTotal +=
+                        score;
+                }
+
+
+                const column =
+                    document.createElement(
+                        'article'
+                    );
+
+
+                column.className =
+                    'page02b-progressive-column';
+
+
+                if(isCurrent){
+
+                    column.classList.add(
+                        'is-current'
+                    );
+                }
+
+
+                if(isAnswered){
+
+                    column.classList.add(
+                        'is-started'
+                    );
+                }
+
+
+                if(isComplete){
+
+                    column.classList.add(
+                        'is-complete'
+                    );
+                }
+
+
+                const number =
+                    String(
+                        index + 1
+                    ).padStart(
+                        2,
+                        '0'
+                    );
+
+
+                const tamil =
+                    getDimensionTamil(
+                        dimension
+                    );
+
+
+                const english =
+                    getDimensionEnglish(
+                        dimension
+                    );
+
+
+                const displayScore =
+                    isAnswered
+                        ? String(score)
+                        : '—';
+
+
+                const progressLabel =
+                    isComplete
+                        ? 'COMPLETE'
+                        : (
+                            isAnswered
+                                ? `${answered} / 5`
+                                : 'NOT STARTED'
+                        );
+
+
+                column.innerHTML = `
+
+                    <div class="page02b-progressive-column-number">
+                        ${number}
+                    </div>
+
+                    <div class="page02b-progressive-column-name">
+
+                        ${
+                            tamil
+                                ? `<span class="page02b-progressive-column-tamil">${escapeHtml(tamil)}</span>`
+                                : ''
+                        }
+
+                        <span class="page02b-progressive-column-english">
+                            ${escapeHtml(english)}
+                        </span>
+
+                    </div>
+
+                    <div class="page02b-progressive-column-score">
+
+                        <strong>
+                            ${displayScore}
+                        </strong>
+
+                        <span>
+                            / 20
+                        </span>
+
+                    </div>
+
+                    <div class="page02b-progressive-column-progress">
+                        ${progressLabel}
+                    </div>
+
+                `;
+
+
+                columns.appendChild(
+                    column
+                );
+
+            }
+        );
+
+
+    /*
+     * Grand total must represent the progressive score only.
+     *
+     * Since future dimensions are unanswered they contribute zero.
+     */
+
+    if(grandTotal){
+
+        grandTotal.textContent =
+            String(
+                progressiveTotal
+            );
+    }
+
+
+    board.dataset.total =
+        String(
+            progressiveTotal
+        );
+
+
+    return true;
+}
+
+
+/* =============================================================================
+ * HTML ESCAPE
+ *
+ * Dimension names originate from the canonical data layer.
+ * This keeps dynamic insertion safe.
+ * =============================================================================
+ */
+
+function escapeHtml(
+    value
+){
+
+    return String(
+        value
+    )
+        .replace(
+            /&/g,
+            '&amp;'
+        )
+        .replace(
+            /</g,
+            '&lt;'
+        )
+        .replace(
+            />/g,
+            '&gt;'
+        )
+        .replace(
+            /"/g,
+            '&quot;'
+        )
+        .replace(
+            /'/g,
+            '&#039;'
+        );
+}
+
+
+/* =============================================================================
+ * UPDATE LIVE DIMENSION SCORE
+ *
+ * The actual score is still owned by Page02Scorecard.
+ *
+ * This controller only refreshes the display.
+ * =============================================================================
+ */
+
+function updateBottomDimensionScore(){
+
+    if(
+        !window.Page02Scorecard
+    ){
+
+        return;
+    }
+
+
+    const score =
+        Number(
+            window.Page02Scorecard.getScore()
+        );
+
+
+    const current =
+        getElement(
+            DOM_IDS.dimensionScoreCurrent
+        );
+
+
+    const total =
+        getElement(
+            DOM_IDS.dimensionScoreTotal
+        );
+
+
+    if(current){
+
+        current.textContent =
+            Number.isFinite(score)
+                ? String(score)
+                : '0';
+    }
+
+
+    if(total){
+
+        total.textContent =
+            '/ 20';
+    }
+}
+
+
+/* =============================================================================
+ * REFRESH SCORE DISPLAY
+ *
+ * Called:
+ *
+ *      • after initialization
+ *      • after answer selection
+ *      • after restore
+ * =============================================================================
+ */
+
+function refreshProgressiveScoreDisplay(){
+
+    updateBottomDimensionScore();
+
+    renderProgressiveScoreboard();
+}
+
+
+/* =============================================================================
+ * NAVIGATION LOCK
+ * =============================================================================
+ */
+
+function setNavigationState(
+    active
+){
+
+    navigating =
+        active;
+
+
+    const previousButton =
+        getElement(
+            DOM_IDS.previousButton
+        );
+
+
+    const nextButton =
+        getElement(
+            DOM_IDS.nextButton
+        );
+
+
+    if(previousButton){
+
+        previousButton.disabled =
+            active;
+
+        previousButton.setAttribute(
+            'aria-busy',
+            active
+                ? 'true'
+                : 'false'
+        );
+    }
+
+
+    if(nextButton){
+
+        nextButton.disabled =
+            active;
+
+        nextButton.setAttribute(
+            'aria-busy',
+            active
+                ? 'true'
+                : 'false'
+        );
+    }
+}
+
+
+/* =============================================================================
+ * PREVIOUS
+ *
+ * Answers are already persisted by Page02Session.
+ * =============================================================================
+ */
+
+function goPrevious(
+    event
+){
+
+    if(event){
+
+        event.preventDefault();
+    }
+
+
+    if(navigating){
+
+        return;
+    }
+
+
+    setNavigationState(
+        true
+    );
+
+
+    window.location.href =
+        CONFIG.previousPage;
+}
+
+
+/* =============================================================================
+ * NEXT
+ *
+ * Critical sequence:
+ *
+ *      1. Validate all five Wealth™ indicators
+ *      2. Mark Wealth™ complete
+ *      3. Set Dimension 02 as current
+ *      4. Navigate to Page 02C
+ *
+ * =============================================================================
+ */
+
+function goNext(
+    event
+){
+
+    if(event){
+
+        event.preventDefault();
+    }
+
+
+    if(navigating){
+
+        return;
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * VALIDATE
+     * -------------------------------------------------------------------------
+     */
+
+    const valid =
+        window.Page02Scorecard.requireComplete();
+
+
+    if(
+        !valid
+    ){
+
+        refreshProgressiveScoreDisplay();
+
+        return;
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * FINAL WEALTH SCORE REFRESH
+     * -------------------------------------------------------------------------
+     */
+
+    refreshProgressiveScoreDisplay();
+
+
+    /* -------------------------------------------------------------------------
+     * COMPLETE DIMENSION
+     * -------------------------------------------------------------------------
+     */
+
+    const completed =
+        window.Page02Scorecard.complete();
+
+
+    if(
+        !completed
+    ){
+
+        console.error(
+            'CTM PATH™ Page 02B could not complete Wealth™.'
+        );
+
+        return;
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * SET NEXT DIMENSION
+     * -------------------------------------------------------------------------
+     */
+
+    const nextDimensionSet =
+        window.Page02Session.setCurrentDimension(
+            CONFIG.nextDimensionId
+        );
+
+
+    if(
+        !nextDimensionSet
+    ){
+
+        console.error(
+            'CTM PATH™ Page 02B could not set next dimension:',
+            CONFIG.nextDimensionId
+        );
+
+        return;
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * NAVIGATE
+     * -------------------------------------------------------------------------
+     */
+
+    setNavigationState(
+        true
+    );
+
+
+    console.info(
+        'CTM PATH™ Wealth™ complete:',
+        {
+
+            score:
+                window.Page02Scorecard.getScore(),
+
+            progressiveTotal:
+                getProgressiveTotal(),
+
+            progress:
+                window.Page02Scorecard.getProgress(),
+
+            next:
+                CONFIG.nextDimensionId
+        }
+    );
+
+
+    window.location.href =
+        CONFIG.nextPage;
+}
+
+
+/* =============================================================================
+ * BIND PREVIOUS BUTTON
+ * =============================================================================
+ */
+
+function bindPreviousButton(){
+
+    const button =
+        getElement(
+            DOM_IDS.previousButton
+        );
+
+
+    if(!button){
+
+        console.warn(
+            'CTM PATH™ Page 02B: #previousButton not found.'
+        );
+
+        return;
+    }
+
+
+    button.addEventListener(
+        'click',
+        goPrevious
+    );
+}
+
+
+/* =============================================================================
+ * BIND NEXT BUTTON
+ * =============================================================================
+ */
+
+function bindNextButton(){
+
+    const button =
+        getElement(
+            DOM_IDS.nextButton
+        );
+
+
+    if(!button){
+
+        console.error(
+            'CTM PATH™ Page 02B: #nextButton not found.'
+        );
+
+        return;
+    }
+
+
+    button.addEventListener(
+        'click',
+        goNext
+    );
+}
+
+
+/* =============================================================================
+ * KEYBOARD SUPPORT
+ *
+ * Ctrl/Cmd + Enter:
+ * attempt to continue.
+ *
+ * Validation is never bypassed.
+ * =============================================================================
+ */
+
+function bindKeyboardNavigation(){
+
+    document.addEventListener(
+        'keydown',
+        function(event){
+
+            if(
+                event.key !== 'Enter'
+            ){
+
+                return;
+            }
+
+
+            if(
+                !event.ctrlKey &&
+                !event.metaKey
+            ){
+
+                return;
+            }
+
 
             event.preventDefault();
 
+
+            goNext();
+        }
+    );
+}
+
+
+/* =============================================================================
+ * ANSWER EVENT
+ *
+ * Shared engine emits:
+ *
+ *      ctm:page02-answer
+ *
+ * Page02B uses this event only to refresh its page-level progressive display.
+ *
+ * The shared scorecard remains the scoring source of truth.
+ * =============================================================================
+ */
+
+function bindAnswerEvents(){
+
+    document.addEventListener(
+        'ctm:page02-answer',
+        function(event){
+
+            if(
+                !event.detail ||
+                event.detail.dimensionId !==
+                    CONFIG.dimensionId
+            ){
+
+                return;
+            }
+
+
+            refreshProgressiveScoreDisplay();
+
+
+            const progress =
+                event.detail.progress;
+
+
+            if(
+                progress &&
+                progress.complete
+            ){
+
+                console.info(
+                    'CTM PATH™ Wealth™: all five indicators answered.',
+                    {
+
+                        score:
+                            progress.score,
+
+                        maximumScore:
+                            progress.maximumScore,
+
+                        progressiveTotal:
+                            getProgressiveTotal()
+                    }
+                );
+            }
+        }
+    );
+}
+
+
+/* =============================================================================
+ * RESTORE PAGE STATE
+ * =============================================================================
+ */
+
+function restorePage(){
+
+    const restored =
+        window.Page02Scorecard.restore();
+
+
+    if(!restored){
+
+        console.warn(
+            'CTM PATH™ Page 02B: scorecard restore returned false.'
+        );
+    }
+
+
+    refreshProgressiveScoreDisplay();
+
+
+    const progress =
+        window.Page02Scorecard.getProgress();
+
+
+    console.info(
+        'CTM PATH™ Page 02B restored:',
+        {
+
+            answered:
+                progress
+                    ? progress.answered
+                    : 0,
+
+            total:
+                progress
+                    ? progress.total
+                    : 0,
+
+            score:
+                progress
+                    ? progress.score
+                    : 0,
+
+            maximumScore:
+                progress
+                    ? progress.maximumScore
+                    : CONFIG.dimensionMaximum,
+
+            progressiveTotal:
+                getProgressiveTotal()
+        }
+    );
+}
+
+
+/* =============================================================================
+ * INITIALIZE SCORECARD
+ * =============================================================================
+ */
+
+function initializeScorecard(){
+
+    return (
+        window.Page02Scorecard.init({
+
+            dimensionId:
+                CONFIG.dimensionId
+        })
+    );
+}
+
+
+/* =============================================================================
+ * INITIALIZE SCOREBOARD LAYOUT
+ * =============================================================================
+ */
+
+function initializeScoreboardLayout(){
+
+    /*
+     * Move the existing dimension score below the scorecard.
+     */
+
+    relocateDimensionScore();
+
+
+    /*
+     * Create the six-column progressive scoreboard immediately above
+     * the navigation controls.
+     */
+
+    createProgressiveScoreboard();
+
+
+    /*
+     * Render initial state.
+     */
+
+    refreshProgressiveScoreDisplay();
+}
+
+
+/* =============================================================================
+ * INITIALIZE
+ *
+ * LIFECYCLE:
+ *
+ *      DOM READY
+ *          ↓
+ *      GLOBAL COMPONENTS
+ *          ↓
+ *      VERIFY SCORECARD DEPENDENCIES
+ *          ↓
+ *      VERIFY DIMENSION CONTRACT
+ *          ↓
+ *      INITIALIZE SCORECARD
+ *          ↓
+ *      MOVE SCORE PANEL
+ *          ↓
+ *      CREATE PROGRESSIVE SCOREBOARD
+ *          ↓
+ *      BIND NAVIGATION / EVENTS
+ *          ↓
+ *      RESTORE SESSION STATE
+ *          ↓
+ *      SCROLL TO TOP
+ *          ↓
+ *      READY
+ *
+ * =============================================================================
+ */
+
+async function init(){
+
+    if(
+        initialized ||
+        initializing
+    ){
+
+        return;
+    }
+
+
+    initializing =
+        true;
+
+
+    console.info(
+        'CTM PATH™ Page 02B initializing — Wealth™...'
+    );
+
+
+    try{
+
+        /* ---------------------------------------------------------------------
+         * GLOBAL HEADER + FOOTER
+         *
+         * NON-FATAL
+         * ---------------------------------------------------------------------
+         */
+
+        const componentsReady =
+            await loadGlobalComponents();
+
+
+        if(!componentsReady){
+
+            console.warn(
+                'CTM PATH™ Page 02B continuing without confirmed global components.'
+            );
         }
 
 
-        if(navigating){
+        /* ---------------------------------------------------------------------
+         * SCORECARD DEPENDENCIES
+         * ---------------------------------------------------------------------
+         */
+
+        if(
+            !verifyDependencies()
+        ){
 
             return;
-
         }
+
+
+        /* ---------------------------------------------------------------------
+         * DIMENSION CONTRACT
+         * ---------------------------------------------------------------------
+         */
+
+        if(
+            !verifyDimension()
+        ){
+
+            return;
+        }
+
+
+        /* ---------------------------------------------------------------------
+         * SCORECARD
+         * ---------------------------------------------------------------------
+         */
+
+        const scorecardReady =
+            initializeScorecard();
 
 
         if(
-            !window.Page02Scorecard
+            !scorecardReady
         ){
 
             console.error(
-                'CTM PATH™ Page 02B cannot continue: scorecard unavailable.'
+                'CTM PATH™ Page 02B scorecard initialization failed.'
             );
 
             return;
-
         }
 
 
         /* ---------------------------------------------------------------------
-           VALIDATE
-           --------------------------------------------------------------------- */
+         * SCOREBOARD LAYOUT
+         * ---------------------------------------------------------------------
+         */
 
-        let valid =
-            false;
-
-
-        try{
-
-            valid =
-                !!window.Page02Scorecard.requireComplete();
-
-        }
-        catch(error){
-
-            console.error(
-                'CTM PATH™ Page 02B validation failed.',
-                error
-            );
-
-
-            return;
-
-        }
-
-
-        if(!valid){
-
-            announceValidationFailure();
-
-            setCompletionState(
-                false
-            );
-
-            setPageState(
-                'incomplete'
-            );
-
-
-            return;
-
-        }
+        initializeScoreboardLayout();
 
 
         /* ---------------------------------------------------------------------
-           COMPLETE DIMENSION
-           --------------------------------------------------------------------- */
+         * NAVIGATION
+         * ---------------------------------------------------------------------
+         */
 
-        let completed =
-            false;
+        bindPreviousButton();
 
+        bindNextButton();
 
-        try{
+        bindKeyboardNavigation();
 
-            completed =
-                !!window.Page02Scorecard.complete();
-
-        }
-        catch(error){
-
-            console.error(
-                'CTM PATH™ Page 02B could not complete Wealth™.',
-                error
-            );
-
-
-            return;
-
-        }
-
-
-        if(!completed){
-
-            console.error(
-                'CTM PATH™ Page 02B completion returned false.'
-            );
-
-
-            setPageState(
-                'completion-error'
-            );
-
-
-            return;
-
-        }
-
-
-        setCompletionState(
-            true
-        );
+        bindAnswerEvents();
 
 
         /* ---------------------------------------------------------------------
-           SET NEXT DIMENSION
-           --------------------------------------------------------------------- */
+         * RESTORE
+         * ---------------------------------------------------------------------
+         */
 
-        let nextDimensionSet =
-            false;
-
-
-        try{
-
-            nextDimensionSet =
-                !!window.Page02Session.setCurrentDimension(
-                    CONFIG.nextDimensionId
-                );
-
-        }
-        catch(error){
-
-            console.error(
-                'CTM PATH™ Page 02B could not set next dimension.',
-                error
-            );
-
-
-            return;
-
-        }
-
-
-        if(!nextDimensionSet){
-
-            console.error(
-                'CTM PATH™ Page 02B could not set next dimension:',
-                CONFIG.nextDimensionId
-            );
-
-
-            setPageState(
-                'transition-error'
-            );
-
-
-            return;
-
-        }
+        restorePage();
 
 
         /* ---------------------------------------------------------------------
-           NAVIGATE
-           --------------------------------------------------------------------- */
+         * FINAL SCOREBOARD REFRESH
+         * ---------------------------------------------------------------------
+         */
 
-        setNavigationState(
-            true
-        );
-
-
-        setPageState(
-            'leaving-next'
-        );
+        refreshProgressiveScoreDisplay();
 
 
-        const score =
-            getScore();
+        /* ---------------------------------------------------------------------
+         * VIEWPORT
+         * ---------------------------------------------------------------------
+         */
+
+        scrollToTop();
 
 
-        const progress =
-            getProgress();
+        /* ---------------------------------------------------------------------
+         * READY
+         * ---------------------------------------------------------------------
+         */
+
+        initialized =
+            true;
 
 
         console.info(
-            'CTM PATH™ Wealth™ complete.',
+            'CTM PATH™ Page 02B ready.',
             {
 
                 dimension:
                     CONFIG.dimensionId,
 
+                globalComponents:
+                    componentsReady,
+
                 score:
-                    score,
+                    window.Page02Scorecard.getScore(),
+
+                progressiveTotal:
+                    getProgressiveTotal(),
 
                 progress:
-                    progress,
-
-                nextDimension:
-                    CONFIG.nextDimensionId,
-
-                nextPage:
-                    CONFIG.nextPage
-
+                    window.Page02Scorecard.getProgress()
             }
         );
 
-
-        window.location.href =
-            CONFIG.nextPage;
-
     }
+    catch(error){
 
-
-    /* =========================================================================
-       16. PREVIOUS BUTTON BINDING
-       ========================================================================= */
-
-    function bindPreviousButton(){
-
-        if(previousListenerBound){
-
-            return;
-
-        }
-
-
-        const button =
-            getElement(
-                DOM_IDS.previousButton
-            );
-
-
-        if(!button){
-
-            console.warn(
-                'CTM PATH™ Page 02B: #previousButton not found.'
-            );
-
-
-            return;
-
-        }
-
-
-        button.addEventListener(
-            'click',
-            goPrevious
+        console.error(
+            'CTM PATH™ Page 02B initialization failed.',
+            error
         );
 
-
-        previousListenerBound =
-            true;
-
     }
-
-
-    /* =========================================================================
-       17. NEXT BUTTON BINDING
-       ========================================================================= */
-
-    function bindNextButton(){
-
-        if(nextListenerBound){
-
-            return;
-
-        }
-
-
-        const button =
-            getElement(
-                DOM_IDS.nextButton
-            );
-
-
-        if(!button){
-
-            console.error(
-                'CTM PATH™ Page 02B: #nextButton not found.'
-            );
-
-
-            return;
-
-        }
-
-
-        button.addEventListener(
-            'click',
-            goNext
-        );
-
-
-        nextListenerBound =
-            true;
-
-    }
-
-
-    /* =========================================================================
-       18. KEYBOARD NAVIGATION
-       
-       Ctrl/Cmd + Enter → Next
-       
-       Validation is NEVER bypassed.
-       ========================================================================= */
-
-    function bindKeyboardNavigation(){
-
-        if(keyboardListenerBound){
-
-            return;
-
-        }
-
-
-        document.addEventListener(
-            'keydown',
-            function(event){
-
-                if(
-                    event.key !==
-                    CONFIG.keyboardShortcut
-                ){
-
-                    return;
-
-                }
-
-
-                if(
-                    !event.ctrlKey &&
-                    !event.metaKey
-                ){
-
-                    return;
-
-                }
-
-
-                /*
-                 * Do not interfere with text-entry controls.
-                 */
-
-                const target =
-                    event.target;
-
-
-                if(
-                    target &&
-                    (
-                        target.tagName === 'INPUT' ||
-                        target.tagName === 'TEXTAREA' ||
-                        target.tagName === 'SELECT'
-                    )
-                ){
-
-                    return;
-
-                }
-
-
-                event.preventDefault();
-
-
-                goNext();
-
-            }
-        );
-
-
-        keyboardListenerBound =
-            true;
-
-    }
-
-
-    /* =========================================================================
-       19. ANSWER EVENT
-       =========================================================================
-       
-       Page02Scorecard owns scoring.
-       
-       Page02B only observes progress so it can update page-level completion
-       presentation.
-       ========================================================================= */
-
-    function bindAnswerEvents(){
-
-        if(answerListenerBound){
-
-            return;
-
-        }
-
-
-        document.addEventListener(
-            'ctm:page02-answer',
-            function(event){
-
-                const detail =
-                    event &&
-                    event.detail
-                        ? event.detail
-                        : null;
-
-
-                if(!detail){
-
-                    return;
-
-                }
-
-
-                if(
-                    detail.dimensionId !==
-                    CONFIG.dimensionId
-                ){
-
-                    return;
-
-                }
-
-
-                const progress =
-                    detail.progress ||
-                    getProgress();
-
-
-                if(!progress){
-
-                    return;
-
-                }
-
-
-                const complete =
-                    !!progress.complete;
-
-
-                setCompletionState(
-                    complete
-                );
-
-
-                if(complete){
-
-                    setPageState(
-                        'complete'
-                    );
-
-
-                    console.info(
-                        'CTM PATH™ Wealth™: 5 / 5 indicators answered.',
-                        {
-
-                            score:
-                                progress.score,
-
-                            maximumScore:
-                                progress.maximumScore
-
-                        }
-                    );
-
-                }
-                else{
-
-                    setPageState(
-                        'in-progress'
-                    );
-
-                }
-
-            }
-        );
-
-
-        answerListenerBound =
-            true;
-
-    }
-
-
-    /* =========================================================================
-       20. SCORECARD INITIALIZATION
-       ========================================================================= */
-
-    function initializeScorecard(){
-
-        try{
-
-            return !!window.Page02Scorecard.init({
-
-                dimensionId:
-                    CONFIG.dimensionId
-
-            });
-
-        }
-        catch(error){
-
-            console.error(
-                'CTM PATH™ Page 02B scorecard initialization exception.',
-                error
-            );
-
-
-            return false;
-
-        }
-
-    }
-
-
-    /* =========================================================================
-       21. RESTORE PAGE STATE
-       ========================================================================= */
-
-    function restorePage(){
-
-        try{
-
-            window.Page02Scorecard.restore();
-
-        }
-        catch(error){
-
-            console.error(
-                'CTM PATH™ Page 02B restore failed.',
-                error
-            );
-
-
-            setPageState(
-                'restore-error'
-            );
-
-
-            return false;
-
-        }
-
-
-        const progress =
-            getProgress();
-
-
-        if(progress){
-
-            setCompletionState(
-                !!progress.complete
-            );
-
-
-            setPageState(
-                progress.complete
-                    ? 'complete'
-                    : progress.answered > 0
-                        ? 'in-progress'
-                        : 'ready'
-            );
-
-
-            console.info(
-                'CTM PATH™ Page 02B restored.',
-                {
-
-                    dimension:
-                        CONFIG.dimensionId,
-
-                    answered:
-                        progress.answered,
-
-                    total:
-                        progress.total,
-
-                    score:
-                        progress.score,
-
-                    maximumScore:
-                        progress.maximumScore,
-
-                    complete:
-                        !!progress.complete
-
-                }
-            );
-
-        }
-
-
-        return true;
-
-    }
-
-
-    /* =========================================================================
-       22. INITIALIZATION CONTRACT
-       ========================================================================= */
-
-    async function init(){
-
-        if(
-            initialized ||
-            initializing
-        ){
-
-            return;
-
-        }
-
+    finally{
 
         initializing =
-            true;
-
-
-        setPageState(
-            'initializing'
-        );
-
-
-        console.info(
-            'CTM PATH™ Page 02B initializing — Wealth™...'
-        );
-
-
-        try{
-
-            /* -----------------------------------------------------------------
-               GLOBAL COMPONENTS
-
-               NON-FATAL
-               ----------------------------------------------------------------- */
-
-            const componentsReady =
-                await loadGlobalComponents();
-
-
-            if(!componentsReady){
-
-                console.warn(
-                    'CTM PATH™ Page 02B continuing without confirmed global components.'
-                );
-
-            }
-
-
-            /* -----------------------------------------------------------------
-               DEPENDENCIES
-               ----------------------------------------------------------------- */
-
-            if(
-                !verifyDependencies()
-            ){
-
-                return;
-
-            }
-
-
-            if(
-                !verifyScorecardAPI()
-            ){
-
-                return;
-
-            }
-
-
-            /* -----------------------------------------------------------------
-               DIMENSION CONTRACT
-               ----------------------------------------------------------------- */
-
-            if(
-                !verifyDimension()
-            ){
-
-                return;
-
-            }
-
-
-            /* -----------------------------------------------------------------
-               SCORECARD
-               ----------------------------------------------------------------- */
-
-            const scorecardReady =
-                initializeScorecard();
-
-
-            if(!scorecardReady){
-
-                console.error(
-                    'CTM PATH™ Page 02B scorecard initialization failed.'
-                );
-
-
-                setPageState(
-                    'scorecard-error'
-                );
-
-
-                return;
-
-            }
-
-
-            /* -----------------------------------------------------------------
-               NAVIGATION
-               ----------------------------------------------------------------- */
-
-            bindPreviousButton();
-
-            bindNextButton();
-
-            bindKeyboardNavigation();
-
-            bindAnswerEvents();
-
-
-            /* -----------------------------------------------------------------
-               RESTORE
-               ----------------------------------------------------------------- */
-
-            if(
-                !restorePage()
-            ){
-
-                return;
-
-            }
-
-
-            /* -----------------------------------------------------------------
-               VIEWPORT
-               ----------------------------------------------------------------- */
-
-            scrollToTop();
-
-
-            /*
-             * Focus is intentionally deferred until after the browser has
-             * painted the restored page.
-             */
-
-            window.requestAnimationFrame(
-                function(){
-
-                    focusPageTop();
-
-                }
-            );
-
-
-            /* -----------------------------------------------------------------
-               READY
-               ----------------------------------------------------------------- */
-
-            initialized =
-                true;
-
-
-            setPageState(
-                'ready'
-            );
-
-
-            console.info(
-                'CTM PATH™ Page 02B ready.',
-                {
-
-                    version:
-                        CONFIG.version,
-
-                    dimension:
-                        CONFIG.dimensionId,
-
-                    globalComponents:
-                        componentsReady,
-
-                    score:
-                        getScore(),
-
-                    progress:
-                        getProgress()
-
-                }
-            );
-
-        }
-        catch(error){
-
-            console.error(
-                'CTM PATH™ Page 02B initialization failed.',
-                error
-            );
-
-
-            setPageState(
-                'initialization-error'
-            );
-
-        }
-        finally{
-
-            initializing =
-                false;
-
-        }
-
+            false;
     }
+}
 
 
-    /* =========================================================================
-       23. PUBLIC SCORE API
-       ========================================================================= */
+/* =============================================================================
+ * DOM READY
+ * =============================================================================
+ */
 
-    function getScore(){
+if(
+    document.readyState ===
+    'loading'
+){
 
-        if(
-            !window.Page02Scorecard ||
-            typeof window.Page02Scorecard.getScore !==
-                'function'
-        ){
+    document.addEventListener(
+        'DOMContentLoaded',
+        function(){
 
-            return 0;
+            init();
 
+        },
+        {
+            once:
+                true
         }
+    );
+
+}
+else{
+
+    init();
+}
 
 
-        try{
+/* =============================================================================
+ * PUBLIC CONTROLLER
+ *
+ * Useful during QA:
+ *
+ *      Page02B.init()
+ *      Page02B.getProgress()
+ *      Page02B.getProgressiveTotal()
+ *      Page02B.getDimensionScores()
+ *      Page02B.goNext()
+ *      Page02B.goPrevious()
+ *      Page02B.loadGlobalComponents()
+ *
+ * =============================================================================
+ */
+
+window.Page02B = {
+
+    version:
+        '4.0',
+
+    dimensionId:
+        CONFIG.dimensionId,
+
+    init:
+        init,
+
+    loadGlobalComponents:
+        loadGlobalComponents,
+
+    goPrevious:
+        goPrevious,
+
+    goNext:
+        goNext,
+
+
+    getScore:
+        function(){
+
+            if(
+                !window.Page02Scorecard
+            ){
+
+                return 0;
+            }
+
 
             return (
-                window.Page02Scorecard.getScore() ||
-                0
+                window.Page02Scorecard
+                    .getScore()
             );
+        },
 
-        }
-        catch(error){
 
-            console.error(
-                'CTM PATH™ Page 02B getScore failed.',
-                error
-            );
+    getProgress:
+        function(){
 
+            if(
+                !window.Page02Scorecard
+            ){
 
-            return 0;
-
-        }
-
-    }
-
-
-    /* =========================================================================
-       24. PUBLIC PROGRESS API
-       ========================================================================= */
-
-    function publicGetProgress(){
-
-        return getProgress();
-
-    }
-
-
-    /* =========================================================================
-       25. PUBLIC VALIDATION API
-       ========================================================================= */
-
-    function validate(){
-
-        if(
-            !window.Page02Scorecard ||
-            typeof window.Page02Scorecard.validate !==
-                'function'
-        ){
-
-            return false;
-
-        }
-
-
-        try{
-
-            return !!window.Page02Scorecard.validate();
-
-        }
-        catch(error){
-
-            console.error(
-                'CTM PATH™ Page 02B validation API failed.',
-                error
-            );
-
-
-            return false;
-
-        }
-
-    }
-
-
-    /* =========================================================================
-       26. PUBLIC RESET / QA STATE
-       ========================================================================= */
-
-    function getState(){
-
-        const progress =
-            getProgress();
-
-
-        return {
-
-            version:
-                CONFIG.version,
-
-            dimensionId:
-                CONFIG.dimensionId,
-
-            nextDimensionId:
-                CONFIG.nextDimensionId,
-
-            previousPage:
-                CONFIG.previousPage,
-
-            nextPage:
-                CONFIG.nextPage,
-
-            initialized:
-                initialized,
-
-            initializing:
-                initializing,
-
-            navigating:
-                navigating,
-
-            progress:
-                progress,
-
-            score:
-                getScore()
-
-        };
-
-    }
-
-
-    /* =========================================================================
-       27. DOM READY
-       ========================================================================= */
-
-    function boot(){
-
-        init();
-
-    }
-
-
-    if(
-        document.readyState ===
-        'loading'
-    ){
-
-        document.addEventListener(
-            'DOMContentLoaded',
-            boot,
-            {
-                once:
-                    true
-            }
-        );
-
-    }
-    else{
-
-        boot();
-
-    }
-
-
-    /* =========================================================================
-       28. PUBLIC CONTROLLER
-       
-       Available during QA:
-       
-           Page02B.init()
-           Page02B.goNext()
-           Page02B.goPrevious()
-           Page02B.getScore()
-           Page02B.getProgress()
-           Page02B.validate()
-           Page02B.getState()
-           Page02B.loadGlobalComponents()
-       ========================================================================= */
-
-    window.Page02B = {
-
-        version:
-            CONFIG.version,
-
-        dimensionId:
-            CONFIG.dimensionId,
-
-        nextDimensionId:
-            CONFIG.nextDimensionId,
-
-        init:
-            init,
-
-        loadGlobalComponents:
-            loadGlobalComponents,
-
-        goPrevious:
-            goPrevious,
-
-        goNext:
-            goNext,
-
-        getScore:
-            getScore,
-
-        getProgress:
-            publicGetProgress,
-
-        validate:
-            validate,
-
-        getState:
-            getState,
-
-        isInitialized:
-            function(){
-
-                return initialized;
-
-            },
-
-        isInitializing:
-            function(){
-
-                return initializing;
-
-            },
-
-        isNavigating:
-            function(){
-
-                return navigating;
-
+                return null;
             }
 
-    };
+
+            return (
+                window.Page02Scorecard
+                    .getProgress()
+            );
+        },
 
 
-    /* =========================================================================
-       END
-       
-       CTM PATH™ MILLIONAIRES™
-       
-       PAGE 02B — WEALTH™
-       
-       RESPONSIBILITY CHAIN:
-       
-           component-loader.js
-                  ↓
-           page02-data.js
-                  ↓
-           page02-session.js
-                  ↓
-           page02-scorecard.js
-                  ↓
-           page02b.js
-       
-       PAGE 02B JOURNEY:
-       
-           page02a.html
-                  ↓
-           WEALTH™
-           5 INDICATORS
-                  ↓
-           5 / 5 COMPLETE
-                  ↓
-           complete("wealth")
-                  ↓
-           setCurrentDimension("incomeCashFlow")
-                  ↓
-           page02c.html
-       
-       IMPORTANT:
-       
-       The controller never calculates scores.
-       The controller never renders questions.
-       The controller never owns answer persistence.
-       
-       The scorecard engine remains the single source of truth.
-       
-       ========================================================================= */
+    getProgressiveTotal:
+        function(){
+
+            return (
+                getProgressiveTotal()
+            );
+        },
+
+
+    getDimensionScores:
+        function(){
+
+            return (
+                getAllDimensions()
+                    .slice(
+                        0,
+                        CONFIG.dimensionCount
+                    )
+                    .map(
+                        function(dimension){
+
+                            return {
+
+                                dimensionId:
+                                    dimension.id,
+
+                                tamil:
+                                    getDimensionTamil(
+                                        dimension
+                                    ),
+
+                                english:
+                                    getDimensionEnglish(
+                                        dimension
+                                    ),
+
+                                score:
+                                    getDimensionScore(
+                                        dimension.id
+                                    ),
+
+                                maximumScore:
+                                    CONFIG.dimensionMaximum,
+
+                                answered:
+                                    getDimensionAnsweredCount(
+                                        dimension.id
+                                    ),
+
+                                complete:
+                                    getDimensionAnsweredCount(
+                                        dimension.id
+                                    ) >= 5
+                            };
+                        }
+                    )
+            );
+        },
+
+
+    refreshScoreboard:
+        function(){
+
+            refreshProgressiveScoreDisplay();
+
+            return true;
+        },
+
+
+    validate:
+        function(){
+
+            if(
+                !window.Page02Scorecard
+            ){
+
+                return false;
+            }
+
+
+            return (
+                window.Page02Scorecard
+                    .validate()
+            );
+        },
+
+
+    isInitialized:
+        function(){
+
+            return initialized;
+        }
+
+};
+
+
+/* =============================================================================
+ * END
+ *
+ * PAGE 02B LOAD ORDER:
+ *
+ *      component-loader.js
+ *             ↓
+ *      global.js
+ *             ↓
+ *      api.js
+ *             ↓
+ *      page02-data.js
+ *             ↓
+ *      page02-session.js
+ *             ↓
+ *      page02-scorecard.js
+ *             ↓
+ *      page02b.js
+ *
+ *
+ * PAGE INITIALIZATION:
+ *
+ *      DOM READY
+ *             ↓
+ *      CTM_COMPONENTS.load()
+ *             ↓
+ *      Page02Scorecard.init("wealth")
+ *             ↓
+ *      Move live score panel
+ *             ↓
+ *      Create progressive six-column scoreboard
+ *             ↓
+ *      Restore Wealth™ answers
+ *             ↓
+ *      Refresh progressive scores
+ *             ↓
+ *      Bind navigation
+ *             ↓
+ *      Page ready
+ *
+ *
+ * PROGRESSIVE SCOREBOARD:
+ *
+ *      DIMENSION 01        /20
+ *      DIMENSION 02        /20
+ *      DIMENSION 03        /20
+ *      DIMENSION 04        /20
+ *      DIMENSION 05        /20
+ *      GRAND TOTAL         /100
+ *
+ *
+ * PAGE 02B:
+ *
+ *      Wealth™ score
+ *             ↓
+ *      Progressive Grand Total
+ *
+ * PAGE 02C:
+ *
+ *      Wealth™
+ *             +
+ *      Income & Cash Flow™
+ *             ↓
+ *      Progressive Grand Total
+ *
+ * PAGE 02D:
+ *
+ *      Wealth™
+ *             +
+ *      Income & Cash Flow™
+ *             +
+ *      Assets™
+ *             ↓
+ *      Progressive Grand Total
+ *
+ * PAGE 02E:
+ *
+ *      First four dimensions
+ *             ↓
+ *      Progressive Grand Total
+ *
+ * PAGE 02F:
+ *
+ *      All five dimensions
+ *             ↓
+ *      FINAL SCORE /100
+ *
+ * =============================================================================
+ */
 
 })(window, document);
 
