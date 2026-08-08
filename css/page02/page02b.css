@@ -32,6 +32,7 @@
 
    IMPORTANT:
    This file changes PRESENTATION ONLY.
+
    It does not alter:
    - HTML structure
    - question data
@@ -143,8 +144,11 @@
 /* ==========================================================================
    02. PREMIUM MIDNIGHT-LAVENDER BACKGROUND
 
+   Lavender establishes the atmosphere.
+   Violet establishes depth.
    The page remains dark and sophisticated.
-   Lavender is atmospheric rather than pastel.
+
+   This is intentionally NOT pastel lavender.
 ========================================================================== */
 
 .page02b.page02-dimension {
@@ -185,7 +189,8 @@
 /* ==========================================================================
    03. ATMOSPHERIC LIGHT
 
-   Extremely restrained. The goal is luxury depth, not visual noise.
+   Extremely restrained.
+   The purpose is depth, not decoration.
 ========================================================================== */
 
 .page02b.page02-dimension::before {
@@ -223,8 +228,6 @@
 
 /* ==========================================================================
    04. SUBTLE VIOLET EDGE LIGHT
-
-   Gives the long page a premium dimensional edge without changing layout.
 ========================================================================== */
 
 .page02b.page02-dimension::after {
@@ -254,8 +257,6 @@
 
 /* ==========================================================================
    05. PAGE SHELL
-
-   Shared system controls master dimensions.
 ========================================================================== */
 
 .page02b .page02-dimension-shell {
@@ -417,9 +418,6 @@
 
 /* ==========================================================================
    08. LIVE SCORE PANEL
-
-   Lavender establishes the wealth/intelligence atmosphere.
-   Teal remains the interaction signal.
 ========================================================================== */
 
 .page02b .dimension-score-panel {
@@ -465,15 +463,11 @@
 
 /* ==========================================================================
    11. WEALTH CARD SURFACE
-
-   The shared card architecture remains untouched.
-   This only gives the Wealth cards a violet-black luxury surface.
 ========================================================================== */
 
 .page02b .scorecard-card {
 
     background:
-
         linear-gradient(
             145deg,
             rgba(255, 255, 255, 0.055),
@@ -500,8 +494,6 @@
 }
 
 
-/* First card transition */
-
 .page02b .scorecard-card:first-child {
 
     margin-top:
@@ -509,7 +501,7 @@
 }
 
 
-/* Violet top/side identity accent */
+/* Wealth identity accent */
 
 .page02b .scorecard-card::before {
 
@@ -588,8 +580,9 @@
 /* ==========================================================================
    14. IDEAL WEALTH BENCHMARK
 
-   Gold means aspiration.
-   It does NOT mean selected.
+   Gold = aspiration.
+   Teal = interaction.
+   These meanings remain deliberately separate.
 ========================================================================== */
 
 .page02b .scorecard-ideal {
@@ -628,8 +621,6 @@
 
 /* ==========================================================================
    15. RANGE OPTIONS
-
-   Shared Page 02 controls the actual answer architecture.
 ========================================================================== */
 
 .page02b .scorecard-option {
@@ -657,7 +648,7 @@
 }
 
 
-/* Option text hierarchy */
+/* Option hierarchy */
 
 .page02b .scorecard-option .option-label,
 .page02b .scorecard-option .option-text {
@@ -667,7 +658,7 @@
 }
 
 
-/* Small explanatory text */
+/* Supporting option text */
 
 .page02b .scorecard-option small,
 .page02b .scorecard-option .option-subtitle,
@@ -699,7 +690,7 @@
 /* ==========================================================================
    16. SELECTED WEALTH RANGE
 
-   Teal remains the unmistakable interaction/selection language.
+   Teal remains the unmistakable interaction language.
 ========================================================================== */
 
 .page02b .scorecard-option.is-selected,
@@ -709,7 +700,6 @@
         var(--wealth-teal);
 
     background:
-
         linear-gradient(
             145deg,
             rgba(32, 214, 207, 0.15),
@@ -717,7 +707,6 @@
         );
 
     box-shadow:
-
         0 0 0 1px rgba(32, 214, 207, 0.08),
         0 12px 34px rgba(32, 214, 207, 0.10);
 }
@@ -738,7 +727,7 @@
 /* ==========================================================================
    17. TARGET / FOURTH RANGE
 
-   The fourth answer is aspirational gold when not selected.
+   Fourth option carries restrained champagne-gold aspiration.
 ========================================================================== */
 
 .page02b .scorecard-option:nth-child(4):not(.is-selected):not(
@@ -774,8 +763,6 @@
 
 /* ==========================================================================
    18. OPTION SCORE / MARKER
-
-   Gives the numeric answer marker a premium jewel-like treatment.
 ========================================================================== */
 
 .page02b .option-score {
@@ -854,9 +841,6 @@
 
 /* ==========================================================================
    21. NAVIGATION
-
-   Shared Page 02 system owns the button geometry.
-   Page 02B supplies the premium Wealth visual emphasis.
 ========================================================================== */
 
 .page02b .dimension-navigation {
@@ -883,9 +867,6 @@
 
 /* ==========================================================================
    22. SCORE GUIDE / SUPPORTING PANELS
-
-   These selectors are intentionally conservative.
-   They enhance contrast if the shared system exposes these classes.
 ========================================================================== */
 
 .page02b .score-guide,
@@ -914,9 +895,6 @@
 
 /* ==========================================================================
    23. LIVE SCORE / SCORE MEDALLION SUPPORT
-
-   The shared system remains responsible for the actual score component.
-   These selectors only reinforce the Wealth colour language where available.
 ========================================================================== */
 
 .page02b .score-medallion,
@@ -983,7 +961,6 @@
         box-shadow:
             0 18px 54px rgba(4, 2, 14, 0.30);
     }
-
 }
 
 
@@ -1049,7 +1026,6 @@
         -webkit-backdrop-filter:
             blur(3px);
     }
-
 }
 
 
@@ -1085,7 +1061,6 @@
         box-shadow:
             0 14px 38px rgba(4, 2, 14, 0.26);
     }
-
 }
 
 
@@ -1120,7 +1095,6 @@
         scroll-behavior:
             auto !important;
     }
-
 }
 
 
@@ -1167,7 +1141,6 @@
         color:
             #111111 !important;
     }
-
 }
 
 
@@ -1209,16 +1182,18 @@
        CHAMPAGNE-GOLD ASPIRATION
 
    The result should feel like:
+
        premium wealth intelligence
-       + personal transformation
-       + financial sophistication
+       +
+       personal transformation
+       +
+       financial sophistication
 
    NOT:
+
        generic purple
        pastel wellness
        gaming UI
        cryptocurrency dashboard
-
 ========================================================================== */
-
 
