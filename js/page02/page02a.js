@@ -8,7 +8,7 @@
  * js/page02/page02a.js
  *
  * VERSION:
- * 4.0
+ * 5.0
  *
  * PAGE:
  * PAGE 02A — INTRODUCTION + ABOUT YOU™ KYC
@@ -16,6 +16,7 @@
  * =============================================================================
  *
  * PURPOSE
+ * =============================================================================
  *
  * Controls Page 02A only:
  *
@@ -32,7 +33,25 @@
  *
  * =============================================================================
  *
- * IMPORTANT TRANSACTION
+ * ENGINEERING PRINCIPLES
+ * =============================================================================
+ *
+ *      1. DOM contract remains explicit.
+ *      2. Page 02A owns presentation state only.
+ *      3. Page02Session owns journey state.
+ *      4. CTM_API owns backend communication.
+ *      5. No backend identity is invented client-side.
+ *      6. No navigation occurs after failed registration.
+ *      7. Existing KYC is restored whenever available.
+ *      8. "0" is a valid dependents value.
+ *      9. Submit is idempotent while a request is active.
+ *     10. All user-facing errors are actionable.
+ *     11. Existing JavaScript contracts are preserved.
+ *
+ * =============================================================================
+ *
+ * CRITICAL TRANSACTION
+ * =============================================================================
  *
  * BEGIN MY SCORECARD™
  *
@@ -62,14 +81,19 @@
 
 
     /* =========================================================================
-     * CONSTANTS
+     * 01. PAGE CONSTANTS
      * ========================================================================= */
-
 
     const PAGE02A = {
 
         version:
-            '4.0',
+            '5.0',
+
+        page:
+            2,
+
+        pageCode:
+            '02A',
 
         nextPage:
             'page02b.html',
@@ -77,16 +101,21 @@
         firstDimension:
             'wealth',
 
+        journey:
+            'Millionaire Lifestyle Scorecard™',
+
         submitting:
+            false,
+
+        initialized:
             false
 
     };
 
 
     /* =========================================================================
-     * DOM REFERENCES
+     * 02. DOM REFERENCES
      * ========================================================================= */
-
 
     const DOM = {
 
@@ -115,9 +144,11 @@
 
 
     /* =========================================================================
-     * REQUIRED FIELD DEFINITIONS
+     * 03. REQUIRED FIELD DEFINITIONS
+     * =========================================================================
+     *
+     * 13 standard fields + 3 radio groups = 16 KYC fields.
      * ========================================================================= */
-
 
     const FIELD_IDS = [
 
@@ -151,9 +182,8 @@
 
 
     /* =========================================================================
-     * UTILITY — SAFE STRING
+     * 04. UTILITY — SAFE STRING
      * ========================================================================= */
-
 
     function cleanString(value) {
 
@@ -173,11 +203,17 @@
 
 
     /* =========================================================================
-     * UTILITY — GET ELEMENT
+     * 05. UTILITY — SAFE ELEMENT
      * ========================================================================= */
 
-
     function getElement(id) {
+
+        if (!id) {
+
+            return null;
+
+        }
+
 
         return document.getElementById(id);
 
@@ -185,9 +221,8 @@
 
 
     /* =========================================================================
-     * CACHE DOM
+     * 06. DOM CACHE
      * ========================================================================= */
-
 
     function cacheDom() {
 
@@ -222,13 +257,15 @@
 
 
     /* =========================================================================
-     * DOM CONTRACT CHECK
+     * 07. DOM CONTRACT VALIDATION
      * ========================================================================= */
-
 
     function validateDomContract() {
 
-        const required = {
+        const missing = [];
+
+
+        const requiredDom = {
 
             introScreen:
                 DOM.introScreen,
@@ -254,15 +291,10 @@
         };
 
 
-        const missing = [];
-
-
-        Object.keys(required).forEach(
+        Object.keys(requiredDom).forEach(
             function (key) {
 
-                if (
-                    !required[key]
-                ) {
+                if (!requiredDom[key]) {
 
                     missing.push(key);
 
@@ -275,9 +307,7 @@
         FIELD_IDS.forEach(
             function (id) {
 
-                if (
-                    !getElement(id)
-                ) {
+                if (!getElement(id)) {
 
                     missing.push(id);
 
@@ -292,9 +322,7 @@
 
                 if (
                     !document.querySelector(
-                        'input[name="' +
-                        name +
-                        '"]'
+                        'input[name="' + name + '"]'
                     )
                 ) {
 
@@ -306,15 +334,12 @@
         );
 
 
-        if (
-            missing.length
-        ) {
+        if (missing.length) {
 
             console.error(
                 'CTM PATH™ Page 02A DOM contract failure:',
                 missing
             );
-
 
             return false;
 
@@ -327,9 +352,8 @@
 
 
     /* =========================================================================
-     * SESSION AVAILABILITY
+     * 08. SESSION API
      * ========================================================================= */
-
 
     function hasSessionApi() {
 
@@ -352,9 +376,8 @@
 
 
     /* =========================================================================
-     * API AVAILABILITY
+     * 09. REGISTRATION API
      * ========================================================================= */
-
 
     function hasRegistrationApi() {
 
@@ -371,15 +394,12 @@
 
 
     /* =========================================================================
-     * FEEDBACK
+     * 10. FEEDBACK — CLEAR
      * ========================================================================= */
-
 
     function clearFeedback() {
 
-        if (
-            DOM.error
-        ) {
+        if (DOM.error) {
 
             DOM.error.textContent =
                 '';
@@ -390,9 +410,7 @@
         }
 
 
-        if (
-            DOM.success
-        ) {
+        if (DOM.success) {
 
             DOM.success.textContent =
                 '';
@@ -405,29 +423,37 @@
     }
 
 
+    /* =========================================================================
+     * 11. FEEDBACK — ERROR
+     * ========================================================================= */
+
     function showError(message) {
 
-        if (
-            !DOM.error
-        ) {
-
-            return;
-
-        }
-
-
-        DOM.error.textContent =
+        const finalMessage =
             cleanString(message) ||
             'Unable to continue. Please check your details and try again.';
 
 
-        DOM.error.hidden =
-            false;
+        if (DOM.error) {
+
+            DOM.error.textContent =
+                finalMessage;
+
+            DOM.error.hidden =
+                false;
+
+            DOM.error.setAttribute(
+                'role',
+                'alert'
+            );
+
+        }
 
 
-        if (
-            DOM.success
-        ) {
+        if (DOM.success) {
+
+            DOM.success.textContent =
+                '';
 
             DOM.success.hidden =
                 true;
@@ -435,33 +461,21 @@
         }
 
 
-        try {
-
-            DOM.error.scrollIntoView({
-
-                behavior:
-                    'smooth',
-
-                block:
-                    'center'
-
-            });
-
-        }
-        catch (error) {
-
-            /* Non-critical UI enhancement. */
-
-        }
+        scrollToElement(
+            DOM.error,
+            'center'
+        );
 
     }
 
 
+    /* =========================================================================
+     * 12. FEEDBACK — SUCCESS
+     * ========================================================================= */
+
     function showSuccess(message) {
 
-        if (
-            !DOM.success
-        ) {
+        if (!DOM.success) {
 
             return;
 
@@ -475,10 +489,16 @@
         DOM.success.hidden =
             false;
 
+        DOM.success.setAttribute(
+            'role',
+            'status'
+        );
 
-        if (
-            DOM.error
-        ) {
+
+        if (DOM.error) {
+
+            DOM.error.textContent =
+                '';
 
             DOM.error.hidden =
                 true;
@@ -489,15 +509,52 @@
 
 
     /* =========================================================================
-     * SCREEN CONTROL
+     * 13. SCROLL HELPER
      * ========================================================================= */
 
+    function scrollToElement(
+        element,
+        block
+    ) {
+
+        if (!element) {
+
+            return;
+
+        }
+
+
+        try {
+
+            element.scrollIntoView({
+
+                behavior:
+                    'smooth',
+
+                block:
+                    block || 'center'
+
+            });
+
+        }
+        catch (error) {
+
+            /*
+             * Non-critical enhancement.
+             */
+
+        }
+
+    }
+
+
+    /* =========================================================================
+     * 14. SCREEN — INTRO
+     * ========================================================================= */
 
     function showIntro() {
 
-        if (
-            DOM.introScreen
-        ) {
+        if (DOM.introScreen) {
 
             DOM.introScreen.hidden =
                 false;
@@ -510,9 +567,7 @@
         }
 
 
-        if (
-            DOM.kycScreen
-        ) {
+        if (DOM.kycScreen) {
 
             DOM.kycScreen.hidden =
                 true;
@@ -524,14 +579,19 @@
 
         }
 
+
+        clearFeedback();
+
     }
 
 
+    /* =========================================================================
+     * 15. SCREEN — KYC
+     * ========================================================================= */
+
     function showKyc() {
 
-        if (
-            DOM.introScreen
-        ) {
+        if (DOM.introScreen) {
 
             DOM.introScreen.hidden =
                 true;
@@ -544,9 +604,7 @@
         }
 
 
-        if (
-            DOM.kycScreen
-        ) {
+        if (DOM.kycScreen) {
 
             DOM.kycScreen.hidden =
                 false;
@@ -582,9 +640,8 @@
 
 
     /* =========================================================================
-     * GET RADIO VALUE
+     * 16. RADIO — READ
      * ========================================================================= */
-
 
     function getRadioValue(name) {
 
@@ -604,22 +661,19 @@
 
 
     /* =========================================================================
-     * SET RADIO VALUE
+     * 17. RADIO — WRITE
      * ========================================================================= */
-
 
     function setRadioValue(
         name,
         value
     ) {
 
-        value =
+        const normalizedValue =
             cleanString(value);
 
 
-        if (
-            !value
-        ) {
+        if (!normalizedValue) {
 
             return;
 
@@ -639,7 +693,7 @@
 
                 option.checked =
                     cleanString(option.value) ===
-                    value;
+                    normalizedValue;
 
             }
         );
@@ -648,9 +702,8 @@
 
 
     /* =========================================================================
-     * READ KYC
+     * 18. KYC — READ
      * ========================================================================= */
-
 
     function readKyc() {
 
@@ -742,9 +795,8 @@
 
 
     /* =========================================================================
-     * WRITE KYC
+     * 19. KYC — WRITE
      * ========================================================================= */
-
 
     function writeKyc(kyc) {
 
@@ -765,9 +817,7 @@
                     getElement(id);
 
 
-                if (
-                    !element
-                ) {
+                if (!element) {
 
                     return;
 
@@ -811,9 +861,8 @@
 
 
     /* =========================================================================
-     * RESTORE EXISTING KYC
+     * 20. KYC — RESTORE FROM SESSION
      * ========================================================================= */
-
 
     function restoreKyc() {
 
@@ -830,13 +879,20 @@
 
         try {
 
-            const kyc =
+            const storedKyc =
                 window.Page02Session.getKyc();
 
 
-            writeKyc(
-                kyc
-            );
+            if (
+                storedKyc &&
+                typeof storedKyc === 'object'
+            ) {
+
+                writeKyc(
+                    storedKyc
+                );
+
+            }
 
         }
         catch (error) {
@@ -852,27 +908,38 @@
 
 
     /* =========================================================================
-     * VALIDATION HELPERS
+     * 21. INVALID STATE — MARK
      * ========================================================================= */
-
 
     function markInvalid(element) {
 
-        if (
-            element
-        ) {
+        if (!element) {
 
-            element.setAttribute(
-                'aria-invalid',
-                'true'
-            );
+            return;
 
         }
+
+
+        element.setAttribute(
+            'aria-invalid',
+            'true'
+        );
 
     }
 
 
+    /* =========================================================================
+     * 22. INVALID STATE — CLEAR
+     * ========================================================================= */
+
     function clearInvalidState() {
+
+        if (!DOM.kycForm) {
+
+            return;
+
+        }
+
 
         const invalid =
             DOM.kycForm.querySelectorAll(
@@ -893,11 +960,13 @@
     }
 
 
+    /* =========================================================================
+     * 23. FOCUS FIELD
+     * ========================================================================= */
+
     function focusField(element) {
 
-        if (
-            !element
-        ) {
+        if (!element) {
 
             return;
 
@@ -916,81 +985,88 @@
         }
         catch (error) {
 
-            element.focus();
+            try {
+
+                element.focus();
+
+            }
+            catch (focusError) {
+
+                /* Non-critical. */
+
+            }
 
         }
 
 
-        try {
-
-            element.scrollIntoView({
-
-                behavior:
-                    'smooth',
-
-                block:
-                    'center'
-
-            });
-
-        }
-        catch (error) {
-
-            /* Non-critical. */
-
-        }
+        scrollToElement(
+            element,
+            'center'
+        );
 
     }
 
 
     /* =========================================================================
-     * VALIDATE KYC
+     * 24. VALIDATION RESULT
      * ========================================================================= */
 
+    function invalidResult(
+        element,
+        message
+    ) {
 
-    function validateKyc(kyc) {
+        markInvalid(
+            element
+        );
 
-        clearInvalidState();
+
+        return {
+
+            valid:
+                false,
+
+            element:
+                element,
+
+            message:
+                message
+
+        };
+
+    }
 
 
-        /* ---------------------------------------------------------------------
-         * FULL NAME
-         * ------------------------------------------------------------------ */
+    /* =========================================================================
+     * 25. VALIDATE — NAME
+     * ========================================================================= */
 
+    function validateFullName(kyc) {
 
         if (
             kyc.fullName.length < 2
         ) {
 
-            const element =
-                getElement('fullName');
-
-
-            markInvalid(element);
-
-
-            return {
-
-                valid:
-                    false,
-
-                element:
-                    element,
-
-                message:
-                    'Please enter your full name.'
-
-            };
+            return invalidResult(
+                getElement('fullName'),
+                'Please enter your full name.'
+            );
 
         }
 
 
-        /* ---------------------------------------------------------------------
-         * MOBILE
-         * ------------------------------------------------------------------ */
+        return null;
+
+    }
 
 
-        const mobileDigits =
+    /* =========================================================================
+     * 26. VALIDATE — MOBILE
+     * ========================================================================= */
+
+    function validateMobile(kyc) {
+
+        const digits =
             kyc.mobile.replace(
                 /\D/g,
                 ''
@@ -998,75 +1074,57 @@
 
 
         if (
-            mobileDigits.length < 10 ||
-            mobileDigits.length > 15
+            digits.length < 10 ||
+            digits.length > 15
         ) {
 
-            const element =
-                getElement('mobile');
-
-
-            markInvalid(element);
-
-
-            return {
-
-                valid:
-                    false,
-
-                element:
-                    element,
-
-                message:
-                    'Please enter a valid mobile number.'
-
-            };
+            return invalidResult(
+                getElement('mobile'),
+                'Please enter a valid mobile number.'
+            );
 
         }
 
 
-        /* ---------------------------------------------------------------------
-         * EMAIL
-         * ------------------------------------------------------------------ */
+        return null;
+
+    }
 
 
-        const emailPattern =
+    /* =========================================================================
+     * 27. VALIDATE — EMAIL
+     * ========================================================================= */
+
+    function validateEmail(kyc) {
+
+        const pattern =
             /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
         if (
-            !emailPattern.test(
+            !pattern.test(
                 kyc.email
             )
         ) {
 
-            const element =
-                getElement('email');
-
-
-            markInvalid(element);
-
-
-            return {
-
-                valid:
-                    false,
-
-                element:
-                    element,
-
-                message:
-                    'Please enter a valid email address.'
-
-            };
+            return invalidResult(
+                getElement('email'),
+                'Please enter a valid email address.'
+            );
 
         }
 
 
-        /* ---------------------------------------------------------------------
-         * AGE
-         * ------------------------------------------------------------------ */
+        return null;
 
+    }
+
+
+    /* =========================================================================
+     * 28. VALIDATE — AGE
+     * ========================================================================= */
+
+    function validateAge(kyc) {
 
         const age =
             Number(
@@ -1080,443 +1138,401 @@
             age > 100
         ) {
 
-            const element =
-                getElement('age');
-
-
-            markInvalid(element);
-
-
-            return {
-
-                valid:
-                    false,
-
-                element:
-                    element,
-
-                message:
-                    'Please enter a valid age between 18 and 100.'
-
-            };
+            return invalidResult(
+                getElement('age'),
+                'Please enter a valid age between 18 and 100.'
+            );
 
         }
 
 
-        /* ---------------------------------------------------------------------
-         * GENDER
-         * ------------------------------------------------------------------ */
+        return null;
+
+    }
 
 
-        if (
-            !kyc.gender
-        ) {
+    /* =========================================================================
+     * 29. VALIDATE — GENDER
+     * ========================================================================= */
 
-            const element =
-                document.querySelector(
-                    'input[name="gender"]'
-                );
+    function validateGender(kyc) {
 
+        if (kyc.gender) {
 
-            return {
-
-                valid:
-                    false,
-
-                element:
-                    element,
-
-                message:
-                    'Please select your gender.'
-
-            };
+            return null;
 
         }
 
 
-        /* ---------------------------------------------------------------------
-         * OCCUPATION
-         * ------------------------------------------------------------------ */
+        return invalidResult(
+            document.querySelector(
+                'input[name="gender"]'
+            ),
+            'Please select your gender.'
+        );
 
+    }
+
+
+    /* =========================================================================
+     * 30. VALIDATE — OCCUPATION
+     * ========================================================================= */
+
+    function validateOccupation(kyc) {
 
         if (
             kyc.occupation.length < 2
         ) {
 
-            const element =
-                getElement('occupation');
-
-
-            markInvalid(element);
-
-
-            return {
-
-                valid:
-                    false,
-
-                element:
-                    element,
-
-                message:
-                    'Please enter your occupation.'
-
-            };
+            return invalidResult(
+                getElement('occupation'),
+                'Please enter your occupation.'
+            );
 
         }
 
 
-        /* ---------------------------------------------------------------------
-         * EMPLOYER / BUSINESS
-         * ------------------------------------------------------------------ */
+        return null;
 
+    }
+
+
+    /* =========================================================================
+     * 31. VALIDATE — EMPLOYER / BUSINESS
+     * ========================================================================= */
+
+    function validateEmployerBusiness(kyc) {
 
         if (
             kyc.employerBusiness.length < 2
         ) {
 
-            const element =
-                getElement('employerBusiness');
-
-
-            markInvalid(element);
-
-
-            return {
-
-                valid:
-                    false,
-
-                element:
-                    element,
-
-                message:
-                    'Please enter your employer or business.'
-
-            };
+            return invalidResult(
+                getElement('employerBusiness'),
+                'Please enter your employer or business.'
+            );
 
         }
 
 
-        /* ---------------------------------------------------------------------
-         * MARITAL STATUS
-         * ------------------------------------------------------------------ */
+        return null;
+
+    }
 
 
-        if (
-            !kyc.maritalStatus
-        ) {
+    /* =========================================================================
+     * 32. VALIDATE — MARITAL STATUS
+     * ========================================================================= */
 
-            const element =
-                document.querySelector(
-                    'input[name="maritalStatus"]'
-                );
+    function validateMaritalStatus(kyc) {
 
+        if (kyc.maritalStatus) {
 
-            return {
-
-                valid:
-                    false,
-
-                element:
-                    element,
-
-                message:
-                    'Please select your marital status.'
-
-            };
+            return null;
 
         }
 
 
-        /* ---------------------------------------------------------------------
-         * DEPENDENTS
-         *
-         * IMPORTANT:
-         * "0" is a valid mandatory selection.
-         * ------------------------------------------------------------------ */
+        return invalidResult(
+            document.querySelector(
+                'input[name="maritalStatus"]'
+            ),
+            'Please select your marital status.'
+        );
 
+    }
+
+
+    /* =========================================================================
+     * 33. VALIDATE — DEPENDENTS
+     * =========================================================================
+     *
+     * IMPORTANT:
+     *
+     * "0" is valid.
+     * Therefore this must never use:
+     *
+     *      if (!kyc.dependents)
+     *
+     * ========================================================================= */
+
+    function validateDependents(kyc) {
 
         if (
             kyc.dependents === ''
         ) {
 
-            const element =
-                getElement('dependents');
-
-
-            markInvalid(element);
-
-
-            return {
-
-                valid:
-                    false,
-
-                element:
-                    element,
-
-                message:
-                    'Please select the number of dependents.'
-
-            };
+            return invalidResult(
+                getElement('dependents'),
+                'Please select the number of dependents.'
+            );
 
         }
 
 
-        /* ---------------------------------------------------------------------
-         * CITY
-         * ------------------------------------------------------------------ */
+        return null;
 
+    }
+
+
+    /* =========================================================================
+     * 34. VALIDATE — CITY
+     * ========================================================================= */
+
+    function validateCity(kyc) {
 
         if (
             kyc.city.length < 2
         ) {
 
-            const element =
-                getElement('city');
-
-
-            markInvalid(element);
-
-
-            return {
-
-                valid:
-                    false,
-
-                element:
-                    element,
-
-                message:
-                    'Please enter your city.'
-
-            };
+            return invalidResult(
+                getElement('city'),
+                'Please enter your city.'
+            );
 
         }
 
 
-        /* ---------------------------------------------------------------------
-         * DISTRICT
-         * ------------------------------------------------------------------ */
+        return null;
 
+    }
+
+
+    /* =========================================================================
+     * 35. VALIDATE — DISTRICT
+     * ========================================================================= */
+
+    function validateDistrict(kyc) {
 
         if (
             kyc.district.length < 2
         ) {
 
-            const element =
-                getElement('district');
-
-
-            markInvalid(element);
-
-
-            return {
-
-                valid:
-                    false,
-
-                element:
-                    element,
-
-                message:
-                    'Please enter your district.'
-
-            };
+            return invalidResult(
+                getElement('district'),
+                'Please enter your district.'
+            );
 
         }
 
 
-        /* ---------------------------------------------------------------------
-         * STATE
-         * ------------------------------------------------------------------ */
+        return null;
 
+    }
+
+
+    /* =========================================================================
+     * 36. VALIDATE — STATE
+     * ========================================================================= */
+
+    function validateState(kyc) {
 
         if (
             kyc.state.length < 2
         ) {
 
-            const element =
-                getElement('state');
-
-
-            markInvalid(element);
-
-
-            return {
-
-                valid:
-                    false,
-
-                element:
-                    element,
-
-                message:
-                    'Please enter your state.'
-
-            };
+            return invalidResult(
+                getElement('state'),
+                'Please enter your state.'
+            );
 
         }
 
 
-        /* ---------------------------------------------------------------------
-         * COUNTRY
-         * ------------------------------------------------------------------ */
+        return null;
 
+    }
+
+
+    /* =========================================================================
+     * 37. VALIDATE — COUNTRY
+     * ========================================================================= */
+
+    function validateCountry(kyc) {
 
         if (
             !kyc.country
         ) {
 
-            const element =
-                getElement('country');
-
-
-            markInvalid(element);
-
-
-            return {
-
-                valid:
-                    false,
-
-                element:
-                    element,
-
-                message:
-                    'Please select your country.'
-
-            };
+            return invalidResult(
+                getElement('country'),
+                'Please select your country.'
+            );
 
         }
 
 
-        /* ---------------------------------------------------------------------
-         * PINCODE
-         *
-         * Current Page 02A country selector defaults to India.
-         * India therefore requires a six-digit pincode.
-         * ------------------------------------------------------------------ */
+        return null;
+
+    }
+
+
+    /* =========================================================================
+     * 38. VALIDATE — PINCODE
+     * ========================================================================= */
+
+    function validatePincode(kyc) {
+
+        const country =
+            cleanString(
+                kyc.country
+            );
 
 
         if (
-            kyc.country === 'India' &&
-            !/^[0-9]{6}$/.test(
-                kyc.pincode
-            )
+            country === 'India'
         ) {
 
-            const element =
-                getElement('pincode');
+            if (
+                !/^[0-9]{6}$/.test(
+                    kyc.pincode
+                )
+            ) {
 
-
-            markInvalid(element);
-
-
-            return {
-
-                valid:
-                    false,
-
-                element:
-                    element,
-
-                message:
+                return invalidResult(
+                    getElement('pincode'),
                     'Please enter a valid 6-digit pincode.'
+                );
 
-            };
+            }
+
+
+            return null;
 
         }
 
 
         if (
-            kyc.country !== 'India' &&
             !kyc.pincode
         ) {
 
-            const element =
-                getElement('pincode');
-
-
-            markInvalid(element);
-
-
-            return {
-
-                valid:
-                    false,
-
-                element:
-                    element,
-
-                message:
-                    'Please enter your postal code.'
-
-            };
+            return invalidResult(
+                getElement('pincode'),
+                'Please enter your postal code.'
+            );
 
         }
 
 
-        /* ---------------------------------------------------------------------
-         * PREFERRED LANGUAGE
-         * ------------------------------------------------------------------ */
+        return null;
 
+    }
+
+
+    /* =========================================================================
+     * 39. VALIDATE — LANGUAGE
+     * ========================================================================= */
+
+    function validatePreferredLanguage(kyc) {
 
         if (
-            !kyc.preferredLanguage
+            kyc.preferredLanguage
         ) {
 
-            const element =
-                document.querySelector(
-                    'input[name="preferredLanguage"]'
+            return null;
+
+        }
+
+
+        return invalidResult(
+            document.querySelector(
+                'input[name="preferredLanguage"]'
+            ),
+            'Please select your preferred language.'
+        );
+
+    }
+
+
+    /* =========================================================================
+     * 40. VALIDATE — SOURCE
+     * ========================================================================= */
+
+    function validateSource(kyc) {
+
+        if (
+            kyc.source
+        ) {
+
+            return null;
+
+        }
+
+
+        return invalidResult(
+            getElement('source'),
+            'Please tell us how you heard about CTM PATH MILLIONAIRES.'
+        );
+
+    }
+
+
+    /* =========================================================================
+     * 41. VALIDATE KYC
+     * ========================================================================= */
+
+    function validateKyc(kyc) {
+
+        clearInvalidState();
+
+
+        const validators = [
+
+            validateFullName,
+
+            validateMobile,
+
+            validateEmail,
+
+            validateAge,
+
+            validateGender,
+
+            validateOccupation,
+
+            validateEmployerBusiness,
+
+            validateMaritalStatus,
+
+            validateDependents,
+
+            validateCity,
+
+            validateDistrict,
+
+            validateState,
+
+            validateCountry,
+
+            validatePincode,
+
+            validatePreferredLanguage,
+
+            validateSource
+
+        ];
+
+
+        for (
+            let index = 0;
+            index < validators.length;
+            index += 1
+        ) {
+
+            const result =
+                validators[index](
+                    kyc
                 );
 
 
-            return {
+            if (
+                result &&
+                !result.valid
+            ) {
 
-                valid:
-                    false,
+                return result;
 
-                element:
-                    element,
-
-                message:
-                    'Please select your preferred language.'
-
-            };
-
-        }
-
-
-        /* ---------------------------------------------------------------------
-         * SOURCE
-         * ------------------------------------------------------------------ */
-
-
-        if (
-            !kyc.source
-        ) {
-
-            const element =
-                getElement('source');
-
-
-            markInvalid(element);
-
-
-            return {
-
-                valid:
-                    false,
-
-                element:
-                    element,
-
-                message:
-                    'Please tell us how you heard about CTM PATH MILLIONAIRES.'
-
-            };
+            }
 
         }
 
@@ -1538,9 +1554,8 @@
 
 
     /* =========================================================================
-     * NORMALIZE MOBILE FOR BACKEND
+     * 42. MOBILE NORMALIZATION
      * ========================================================================= */
-
 
     function normalizeMobile(value) {
 
@@ -1554,108 +1569,8 @@
 
 
     /* =========================================================================
-     * BUILD REGISTRATION PAYLOAD
-     *
-     * IMPORTANT
-     *
-     * The expanded KYC fields are included here.
-     *
-     * api.js / backend must subsequently be verified to ensure these fields
-     * are forwarded to Google Apps Script and written to Google Sheets.
+     * 43. DEVICE TYPE
      * ========================================================================= */
-
-
-    function buildRegistrationPayload(kyc) {
-
-        return {
-
-            /* -----------------------------------------------------------------
-             * CANONICAL CORE REGISTRATION FIELDS
-             * ----------------------------------------------------------------- */
-
-            fullName:
-                kyc.fullName,
-
-            mobile:
-                normalizeMobile(
-                    kyc.mobile
-                ),
-
-            email:
-                kyc.email,
-
-            city:
-                kyc.city,
-
-            district:
-                kyc.district,
-
-            state:
-                kyc.state,
-
-            pincode:
-                kyc.pincode,
-
-            source:
-                kyc.source,
-
-
-            /* -----------------------------------------------------------------
-             * EXPANDED PAGE 02A KYC
-             * ----------------------------------------------------------------- */
-
-            age:
-                Number(
-                    kyc.age
-                ),
-
-            gender:
-                kyc.gender,
-
-            occupation:
-                kyc.occupation,
-
-            employerBusiness:
-                kyc.employerBusiness,
-
-            maritalStatus:
-                kyc.maritalStatus,
-
-            dependents:
-                kyc.dependents,
-
-            country:
-                kyc.country,
-
-            preferredLanguage:
-                kyc.preferredLanguage,
-
-
-            /* -----------------------------------------------------------------
-             * JOURNEY METADATA
-             * ----------------------------------------------------------------- */
-
-            language:
-                kyc.preferredLanguage,
-
-            page:
-                2,
-
-            journey:
-                'Millionaire Lifestyle Scorecard™',
-
-            device:
-                getDeviceType()
-
-        };
-
-    }
-
-
-    /* =========================================================================
-     * DEVICE TYPE
-     * ========================================================================= */
-
 
     function getDeviceType() {
 
@@ -1689,11 +1604,112 @@
 
 
     /* =========================================================================
-     * SUBMIT STATE
+     * 44. BUILD REGISTRATION PAYLOAD
      * ========================================================================= */
 
+    function buildRegistrationPayload(kyc) {
 
-    function setSubmitting(isSubmitting) {
+        return {
+
+            /*
+             * -----------------------------------------------------------------
+             * CANONICAL REGISTRATION FIELDS
+             * -----------------------------------------------------------------
+             */
+
+            fullName:
+                kyc.fullName,
+
+            mobile:
+                normalizeMobile(
+                    kyc.mobile
+                ),
+
+            email:
+                kyc.email,
+
+            city:
+                kyc.city,
+
+            district:
+                kyc.district,
+
+            state:
+                kyc.state,
+
+            pincode:
+                kyc.pincode,
+
+            source:
+                kyc.source,
+
+
+            /*
+             * -----------------------------------------------------------------
+             * EXPANDED PAGE 02A KYC
+             * -----------------------------------------------------------------
+             */
+
+            age:
+                Number(
+                    kyc.age
+                ),
+
+            gender:
+                kyc.gender,
+
+            occupation:
+                kyc.occupation,
+
+            employerBusiness:
+                kyc.employerBusiness,
+
+            maritalStatus:
+                kyc.maritalStatus,
+
+            dependents:
+                kyc.dependents,
+
+            country:
+                kyc.country,
+
+            preferredLanguage:
+                kyc.preferredLanguage,
+
+
+            /*
+             * -----------------------------------------------------------------
+             * JOURNEY METADATA
+             * -----------------------------------------------------------------
+             */
+
+            language:
+                kyc.preferredLanguage,
+
+            page:
+                PAGE02A.page,
+
+            pageCode:
+                PAGE02A.pageCode,
+
+            journey:
+                PAGE02A.journey,
+
+            device:
+                getDeviceType()
+
+        };
+
+    }
+
+
+    /* =========================================================================
+     * 45. SUBMIT STATE
+     * ========================================================================= */
+
+    function setSubmitting(
+        isSubmitting
+    ) {
 
         PAGE02A.submitting =
             Boolean(
@@ -1701,9 +1717,7 @@
             );
 
 
-        if (
-            !DOM.submitButton
-        ) {
+        if (!DOM.submitButton) {
 
             return;
 
@@ -1738,9 +1752,7 @@
             PAGE02A.submitting
         ) {
 
-            if (
-                primary
-            ) {
+            if (primary) {
 
                 primary.textContent =
                     'பதிவு செய்கிறோம்...';
@@ -1748,36 +1760,31 @@
             }
 
 
-            if (
-                secondary
-            ) {
+            if (secondary) {
 
                 secondary.textContent =
                     'CREATING YOUR SCORECARD...';
 
             }
 
+
+            return;
+
         }
-        else {
-
-            if (
-                primary
-            ) {
-
-                primary.textContent =
-                    'என் Scorecard™-ஐ தொடங்குகிறேன்';
-
-            }
 
 
-            if (
-                secondary
-            ) {
+        if (primary) {
 
-                secondary.textContent =
-                    'BEGIN MY SCORECARD™';
+            primary.textContent =
+                'என் Scorecard™-ஐ தொடங்குகிறேன்';
 
-            }
+        }
+
+
+        if (secondary) {
+
+            secondary.textContent =
+                'BEGIN MY SCORECARD™';
 
         }
 
@@ -1785,9 +1792,8 @@
 
 
     /* =========================================================================
-     * API RESPONSE HELPERS
+     * 46. RESPONSE — FIRST VALUE
      * ========================================================================= */
-
 
     function firstValue() {
 
@@ -1819,6 +1825,10 @@
     }
 
 
+    /* =========================================================================
+     * 47. RESPONSE — DATA
+     * ========================================================================= */
+
     function getResponseData(response) {
 
         if (
@@ -1843,17 +1853,28 @@
         }
 
 
-        return (
+        if (
             response &&
             typeof response === 'object'
-        )
-            ? response
-            : {};
+        ) {
+
+            return response;
+
+        }
+
+
+        return {};
 
     }
 
 
-    function responseIndicatesFailure(response) {
+    /* =========================================================================
+     * 48. RESPONSE — FAILURE DETECTION
+     * ========================================================================= */
+
+    function responseIndicatesFailure(
+        response
+    ) {
 
         if (
             response === false ||
@@ -1906,7 +1927,13 @@
     }
 
 
-    function getResponseError(response) {
+    /* =========================================================================
+     * 49. RESPONSE — ERROR
+     * ========================================================================= */
+
+    function getResponseError(
+        response
+    ) {
 
         const data =
             getResponseData(
@@ -1938,12 +1965,8 @@
 
 
     /* =========================================================================
-     * EXTRACT REGISTERED CLIENT
-     *
-     * Tolerates the common backend response shapes while still requiring
-     * an actual backend-generated identity before Page 02B navigation.
+     * 50. RESPONSE — EXTRACT CLIENT
      * ========================================================================= */
-
 
     function extractClient(
         response,
@@ -1962,7 +1985,9 @@
                 data.client &&
                 typeof data.client === 'object'
             )
+
                 ? data.client
+
                 : {};
 
 
@@ -1973,7 +1998,9 @@
                 response.client &&
                 typeof response.client === 'object'
             )
+
                 ? response.client
+
                 : {};
 
 
@@ -2045,12 +2072,16 @@
 
             peopleId:
                 peopleId
-                    ? cleanString(peopleId)
+                    ? cleanString(
+                        peopleId
+                    )
                     : null,
 
             clientId:
                 clientId
-                    ? cleanString(clientId)
+                    ? cleanString(
+                        clientId
+                    )
                     : null,
 
             fullName:
@@ -2064,19 +2095,25 @@
 
 
     /* =========================================================================
-     * VERIFY REGISTERED IDENTITY
+     * 51. BACKEND IDENTITY VALIDATION
      * ========================================================================= */
 
-
-    function hasBackendIdentity(client) {
+    function hasBackendIdentity(
+        client
+    ) {
 
         return Boolean(
 
             client &&
 
             (
-                client.peopleId ||
-                client.clientId
+                cleanString(
+                    client.peopleId
+                ) ||
+
+                cleanString(
+                    client.clientId
+                )
             )
 
         );
@@ -2085,11 +2122,12 @@
 
 
     /* =========================================================================
-     * REGISTER CLIENT
+     * 52. REGISTER CLIENT
      * ========================================================================= */
 
-
-    async function registerClient(payload) {
+    async function registerClient(
+        payload
+    ) {
 
         if (
             !hasRegistrationApi()
@@ -2100,17 +2138,6 @@
             );
 
         }
-
-
-        /*
-         * Promise.resolve() supports both:
-         *
-         *      CTM_API.register() → Promise
-         *
-         * and
-         *
-         *      CTM_API.register() → immediate value
-         */
 
 
         return await Promise.resolve(
@@ -2125,11 +2152,12 @@
 
 
     /* =========================================================================
-     * PRESERVE KYC
+     * 53. PRESERVE KYC
      * ========================================================================= */
 
-
-    function preserveKyc(kyc) {
+    function preserveKyc(
+        kyc
+    ) {
 
         if (
             !hasSessionApi()
@@ -2150,11 +2178,12 @@
 
 
     /* =========================================================================
-     * PRESERVE REGISTERED CLIENT
+     * 54. PRESERVE CLIENT IDENTITY
      * ========================================================================= */
 
-
-    function preserveClient(client) {
+    function preserveClient(
+        client
+    ) {
 
         if (
             !hasSessionApi()
@@ -2180,19 +2209,12 @@
 
         });
 
-
-        /*
-         * Page02Session.setClient() itself determines registered status
-         * from peopleId/clientId and preserves the legacy identity keys.
-         */
-
     }
 
 
     /* =========================================================================
-     * ACTIVATE DIMENSION 01
+     * 55. ACTIVATE FIRST DIMENSION
      * ========================================================================= */
-
 
     function activateFirstDimension() {
 
@@ -2228,56 +2250,92 @@
 
 
     /* =========================================================================
-     * NAVIGATE TO PAGE 02B
+     * 56. NAVIGATE TO PAGE 02B
      * ========================================================================= */
-
 
     function goToPage02b() {
 
-        window.location.href =
-            PAGE02A.nextPage;
+        window.location.assign(
+            PAGE02A.nextPage
+        );
 
     }
 
 
     /* =========================================================================
-     * BEGIN BUTTON
+     * 57. BEGIN BUTTON
      * ========================================================================= */
 
+    function handleBeginClick(
+        event
+    ) {
 
-    function handleBeginClick(event) {
-
-        if (
-            event
-        ) {
+        if (event) {
 
             event.preventDefault();
 
         }
 
 
-        showKyc();
+        if (
+            PAGE02A.submitting
+        ) {
 
+            return;
 
-        /*
-         * Restore after screen reveal so browsers can correctly focus
-         * controls if necessary.
-         */
+        }
 
 
         restoreKyc();
+
+        showKyc();
+
+
+        const firstField =
+            getElement('fullName');
+
+
+        if (firstField) {
+
+            window.setTimeout(
+                function () {
+
+                    try {
+
+                        firstField.focus({
+                            preventScroll:
+                                true
+                        });
+
+                    }
+                    catch (error) {
+
+                        /* Non-critical. */
+
+                    }
+
+                },
+                220
+            );
+
+        }
 
     }
 
 
     /* =========================================================================
-     * KYC SUBMIT
+     * 58. KYC SUBMIT
      * ========================================================================= */
 
+    async function handleKycSubmit(
+        event
+    ) {
 
-    async function handleKycSubmit(event) {
+        if (event) {
 
-        event.preventDefault();
+            event.preventDefault();
+
+        }
 
 
         if (
@@ -2292,10 +2350,11 @@
         clearFeedback();
 
 
-        /* ---------------------------------------------------------------------
-         * CHECK SHARED SESSION
-         * ------------------------------------------------------------------ */
-
+        /*
+         * ---------------------------------------------------------------------
+         * SESSION DEPENDENCY
+         * ---------------------------------------------------------------------
+         */
 
         if (
             !hasSessionApi()
@@ -2317,10 +2376,11 @@
         }
 
 
-        /* ---------------------------------------------------------------------
-         * CHECK REGISTRATION API
-         * ------------------------------------------------------------------ */
-
+        /*
+         * ---------------------------------------------------------------------
+         * REGISTRATION DEPENDENCY
+         * ---------------------------------------------------------------------
+         */
 
         if (
             !hasRegistrationApi()
@@ -2342,19 +2402,21 @@
         }
 
 
-        /* ---------------------------------------------------------------------
-         * READ
-         * ------------------------------------------------------------------ */
-
+        /*
+         * ---------------------------------------------------------------------
+         * READ KYC
+         * ---------------------------------------------------------------------
+         */
 
         const kyc =
             readKyc();
 
 
-        /* ---------------------------------------------------------------------
+        /*
+         * ---------------------------------------------------------------------
          * VALIDATE
-         * ------------------------------------------------------------------ */
-
+         * ---------------------------------------------------------------------
+         */
 
         const validation =
             validateKyc(
@@ -2381,13 +2443,15 @@
         }
 
 
-        /* ---------------------------------------------------------------------
-         * PRESERVE BEFORE NETWORK REQUEST
+        /*
+         * ---------------------------------------------------------------------
+         * PRESERVE KYC BEFORE NETWORK REQUEST
+         * ---------------------------------------------------------------------
          *
-         * This prevents loss of completed form data if the backend request
-         * fails. It does NOT mark the client registered.
-         * ------------------------------------------------------------------ */
-
+         * This protects completed form data if the registration request fails.
+         *
+         * It does NOT mark the client as registered.
+         */
 
         try {
 
@@ -2414,10 +2478,11 @@
         }
 
 
-        /* ---------------------------------------------------------------------
-         * BUILD BACKEND PAYLOAD
-         * ------------------------------------------------------------------ */
-
+        /*
+         * ---------------------------------------------------------------------
+         * BUILD PAYLOAD
+         * ---------------------------------------------------------------------
+         */
 
         const payload =
             buildRegistrationPayload(
@@ -2425,10 +2490,11 @@
             );
 
 
-        /* ---------------------------------------------------------------------
-         * REGISTER
-         * ------------------------------------------------------------------ */
-
+        /*
+         * ---------------------------------------------------------------------
+         * START TRANSACTION
+         * ---------------------------------------------------------------------
+         */
 
         setSubmitting(
             true
@@ -2449,10 +2515,11 @@
             );
 
 
-            /* -----------------------------------------------------------------
-             * EXPLICIT BACKEND FAILURE
-             * -------------------------------------------------------------- */
-
+            /*
+             * -----------------------------------------------------------------
+             * EXPLICIT FAILURE
+             * -----------------------------------------------------------------
+             */
 
             if (
                 responseIndicatesFailure(
@@ -2473,10 +2540,11 @@
             }
 
 
-            /* -----------------------------------------------------------------
+            /*
+             * -----------------------------------------------------------------
              * EXTRACT BACKEND IDENTITY
-             * -------------------------------------------------------------- */
-
+             * -----------------------------------------------------------------
+             */
 
             const client =
                 extractClient(
@@ -2485,13 +2553,15 @@
                 );
 
 
-            /* -----------------------------------------------------------------
-             * REQUIRE ACTUAL BACKEND ID
+            /*
+             * -----------------------------------------------------------------
+             * HARD SAFETY GATE
+             * -----------------------------------------------------------------
              *
-             * This is the safety gate preventing Page 02B from opening merely
-             * because an HTTP/API call returned something truthy.
-             * -------------------------------------------------------------- */
-
+             * A successful API call alone is NOT enough.
+             *
+             * Page 02B requires a real backend-generated identity.
+             */
 
             if (
                 !hasBackendIdentity(
@@ -2512,59 +2582,69 @@
             }
 
 
-            /* -----------------------------------------------------------------
+            /*
+             * -----------------------------------------------------------------
              * PRESERVE REGISTERED IDENTITY
-             * -------------------------------------------------------------- */
-
+             * -----------------------------------------------------------------
+             */
 
             preserveClient(
                 client
             );
 
 
-            /* -----------------------------------------------------------------
-             * PRESERVE KYC AGAIN
-             *
-             * Ensures final normalized KYC and registered identity coexist in
-             * the same Page02Session before navigation.
-             * -------------------------------------------------------------- */
-
+            /*
+             * -----------------------------------------------------------------
+             * PRESERVE FINAL KYC
+             * -----------------------------------------------------------------
+             */
 
             preserveKyc(
                 kyc
             );
 
 
-            /* -----------------------------------------------------------------
+            /*
+             * -----------------------------------------------------------------
              * ACTIVATE DIMENSION 01
-             * -------------------------------------------------------------- */
-
+             * -----------------------------------------------------------------
+             */
 
             activateFirstDimension();
 
 
-            /* -----------------------------------------------------------------
+            /*
+             * -----------------------------------------------------------------
              * FINAL SESSION VERIFICATION
-             * -------------------------------------------------------------- */
-
+             * -----------------------------------------------------------------
+             */
 
             if (
                 typeof window.Page02Session.hasRegisteredClient ===
-                    'function' &&
-                !window.Page02Session.hasRegisteredClient()
+                    'function'
             ) {
 
-                throw new Error(
-                    'Registered client identity could not be preserved.'
-                );
+                const registered =
+                    window.Page02Session
+                        .hasRegisteredClient();
+
+
+                if (!registered) {
+
+                    throw new Error(
+                        'Registered client identity could not be preserved.'
+                    );
+
+                }
 
             }
 
 
-            /* -----------------------------------------------------------------
+            /*
+             * -----------------------------------------------------------------
              * SUCCESS
-             * -------------------------------------------------------------- */
-
+             * -----------------------------------------------------------------
+             */
 
             showSuccess(
                 'Your details have been registered. Opening your Scorecard™...'
@@ -2572,11 +2652,13 @@
 
 
             /*
-             * Short delay lets the success state render and guarantees the
-             * sessionStorage writes have completed before the next document
-             * starts loading.
+             * -----------------------------------------------------------------
+             * NAVIGATION
+             * -----------------------------------------------------------------
+             *
+             * Give the browser a short moment to render the success state and
+             * complete sessionStorage writes.
              */
-
 
             window.setTimeout(
                 function () {
@@ -2584,7 +2666,7 @@
                     goToPage02b();
 
                 },
-                260
+                300
             );
 
         }
@@ -2618,19 +2700,22 @@
 
 
     /* =========================================================================
-     * LIVE FIELD CLEANUP
+     * 59. LIVE FIELD CLEANUP
      * ========================================================================= */
 
-
-    function handleFieldInput(event) {
+    function handleFieldInput(
+        event
+    ) {
 
         const target =
+            event &&
             event.target;
 
 
         if (
             target &&
-            target.hasAttribute &&
+            typeof target.removeAttribute ===
+                'function' &&
             target.hasAttribute(
                 'aria-invalid'
             )
@@ -2657,9 +2742,8 @@
 
 
     /* =========================================================================
-     * MOBILE INPUT NORMALIZATION
+     * 60. MOBILE INPUT NORMALIZATION
      * ========================================================================= */
-
 
     function normalizeMobileInput() {
 
@@ -2667,26 +2751,11 @@
             getElement('mobile');
 
 
-        if (
-            !element
-        ) {
+        if (!element) {
 
             return;
 
         }
-
-
-        /*
-         * Keep:
-         *
-         *      digits
-         *      spaces
-         *      +
-         *      -
-         *      parentheses
-         *
-         * Backend normalization happens at submission.
-         */
 
 
         element.value =
@@ -2699,24 +2768,21 @@
 
 
     /* =========================================================================
-     * PINCODE INPUT NORMALIZATION
+     * 61. PINCODE INPUT NORMALIZATION
      * ========================================================================= */
-
 
     function normalizePincodeInput() {
 
-        const country =
-            cleanString(
-                getElement('country').value
-            );
+        const countryElement =
+            getElement('country');
 
 
-        const element =
+        const pincodeElement =
             getElement('pincode');
 
 
         if (
-            !element
+            !pincodeElement
         ) {
 
             return;
@@ -2724,12 +2790,19 @@
         }
 
 
+        const country =
+            cleanString(
+                countryElement &&
+                countryElement.value
+            );
+
+
         if (
             country === 'India'
         ) {
 
-            element.value =
-                element.value
+            pincodeElement.value =
+                pincodeElement.value
                     .replace(
                         /\D/g,
                         ''
@@ -2745,43 +2818,117 @@
 
 
     /* =========================================================================
-     * EVENT BINDING
+     * 62. AGE INPUT NORMALIZATION
      * ========================================================================= */
 
+    function normalizeAgeInput() {
+
+        const element =
+            getElement('age');
+
+
+        if (!element) {
+
+            return;
+
+        }
+
+
+        const value =
+            element.value
+                .replace(
+                    /\D/g,
+                    ''
+                );
+
+
+        element.value =
+            value.slice(
+                0,
+                3
+            );
+
+    }
+
+
+    /* =========================================================================
+     * 63. DEPENDENTS INPUT NORMALIZATION
+     * ========================================================================= */
+
+    function normalizeDependentsInput() {
+
+        const element =
+            getElement('dependents');
+
+
+        if (!element) {
+
+            return;
+
+        }
+
+
+        element.value =
+            element.value
+                .replace(
+                    /\D/g,
+                    ''
+                )
+                .slice(
+                    0,
+                    2
+                );
+
+    }
+
+
+    /* =========================================================================
+     * 64. EVENT BINDING — SAFE
+     * ========================================================================= */
 
     function bindEvents() {
 
-        DOM.beginButton.addEventListener(
-            'click',
-            handleBeginClick
-        );
+        if (
+            DOM.beginButton
+        ) {
+
+            DOM.beginButton.addEventListener(
+                'click',
+                handleBeginClick
+            );
+
+        }
 
 
-        DOM.kycForm.addEventListener(
-            'submit',
-            handleKycSubmit
-        );
+        if (
+            DOM.kycForm
+        ) {
+
+            DOM.kycForm.addEventListener(
+                'submit',
+                handleKycSubmit
+            );
 
 
-        DOM.kycForm.addEventListener(
-            'input',
-            handleFieldInput
-        );
+            DOM.kycForm.addEventListener(
+                'input',
+                handleFieldInput
+            );
 
 
-        DOM.kycForm.addEventListener(
-            'change',
-            handleFieldInput
-        );
+            DOM.kycForm.addEventListener(
+                'change',
+                handleFieldInput
+            );
+
+        }
 
 
         const mobile =
             getElement('mobile');
 
 
-        if (
-            mobile
-        ) {
+        if (mobile) {
 
             mobile.addEventListener(
                 'input',
@@ -2795,9 +2942,7 @@
             getElement('pincode');
 
 
-        if (
-            pincode
-        ) {
+        if (pincode) {
 
             pincode.addEventListener(
                 'input',
@@ -2811,9 +2956,7 @@
             getElement('country');
 
 
-        if (
-            country
-        ) {
+        if (country) {
 
             country.addEventListener(
                 'change',
@@ -2822,13 +2965,40 @@
 
         }
 
+
+        const age =
+            getElement('age');
+
+
+        if (age) {
+
+            age.addEventListener(
+                'input',
+                normalizeAgeInput
+            );
+
+        }
+
+
+        const dependents =
+            getElement('dependents');
+
+
+        if (dependents) {
+
+            dependents.addEventListener(
+                'input',
+                normalizeDependentsInput
+            );
+
+        }
+
     }
 
 
     /* =========================================================================
-     * RESTORE JOURNEY STATE
+     * 65. RESTORE JOURNEY STATE
      * ========================================================================= */
-
 
     function restoreJourneyState() {
 
@@ -2837,14 +3007,12 @@
         ) {
 
             /*
-             * Do not kill Page 02A during initialization.
+             * The intro remains usable.
              *
-             * The visitor can still see the intro. Submission will perform
-             * the strict dependency check and display a useful error.
+             * The strict session dependency is checked again at submit time.
              */
 
-
-            console.error(
+            console.warn(
                 'CTM PATH™ Page 02A initialized without Page02Session.'
             );
 
@@ -2861,13 +3029,10 @@
 
 
         /*
-         * If a registered client already exists, the visitor may have returned
-         * to Page 02A using browser navigation.
+         * Do not automatically redirect a returning visitor.
          *
-         * We intentionally DO NOT auto-forward them. Page 02A remains stable
-         * and their KYC is restored.
+         * Page 02A remains a stable entry point.
          */
-
 
         showIntro();
 
@@ -2875,11 +3040,50 @@
 
 
     /* =========================================================================
-     * INITIALIZE
+     * 66. RESET SUBMIT STATE ON PAGE RESTORE
      * ========================================================================= */
 
+    function restoreSubmitState() {
+
+        PAGE02A.submitting =
+            false;
+
+
+        if (
+            DOM.submitButton
+        ) {
+
+            DOM.submitButton.disabled =
+                false;
+
+            DOM.submitButton.setAttribute(
+                'aria-busy',
+                'false'
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================================
+     * 67. INITIALIZE
+     * ========================================================================= */
 
     function initialize() {
+
+        if (
+            PAGE02A.initialized
+        ) {
+
+            return;
+
+        }
+
+
+        PAGE02A.initialized =
+            true;
+
 
         cacheDom();
 
@@ -2888,9 +3092,15 @@
             !validateDomContract()
         ) {
 
+            PAGE02A.initialized =
+                false;
+
             return;
 
         }
+
+
+        restoreSubmitState();
 
 
         bindEvents();
@@ -2905,6 +3115,9 @@
 
                 version:
                     PAGE02A.version,
+
+                page:
+                    PAGE02A.pageCode,
 
                 session:
                     hasSessionApi(),
@@ -2925,9 +3138,35 @@
 
 
     /* =========================================================================
-     * DOM READY
+     * 68. BROWSER PAGE SHOW
      * ========================================================================= */
 
+    window.addEventListener(
+        'pageshow',
+        function () {
+
+            if (
+                DOM.submitButton &&
+                PAGE02A.submitting
+            ) {
+
+                /*
+                 * Browser back/forward cache can restore a disabled button.
+                 */
+
+                setSubmitting(
+                    false
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================================
+     * 69. DOM READY
+     * ========================================================================= */
 
     if (
         document.readyState ===
@@ -2952,16 +3191,26 @@
 
 
     /* =========================================================================
-     * OPTIONAL DEBUG EXPOSURE
+     * 70. PUBLIC QA / DEBUG API
+     * =========================================================================
      *
-     * Useful during Page 02A QA.
+     * This does not expose backend credentials or mutate application state.
+     * It provides controlled inspection of Page 02A during QA.
      * ========================================================================= */
-
 
     window.Page02A = {
 
         version:
             PAGE02A.version,
+
+        page:
+            PAGE02A.pageCode,
+
+        nextPage:
+            PAGE02A.nextPage,
+
+        firstDimension:
+            PAGE02A.firstDimension,
 
         readKyc:
             readKyc,
@@ -2994,7 +3243,13 @@
             showIntro,
 
         showKyc:
-            showKyc
+            showKyc,
+
+        restoreKyc:
+            restoreKyc,
+
+        getDeviceType:
+            getDeviceType
 
     };
 
