@@ -325,7 +325,6 @@ function setNavigationState(
         previousButton.disabled =
             active;
 
-
         previousButton.setAttribute(
             'aria-busy',
             active
@@ -340,7 +339,6 @@ function setNavigationState(
 
         nextButton.disabled =
             active;
-
 
         nextButton.setAttribute(
             'aria-busy',
