@@ -5,166 +5,208 @@
  * Guided Journey™
  *
  * PAGE 02A — ABOUT YOU™ / KYC
- * Premium Presentation Layer
- * ---------------------------------------------------------------------------
- * File    : css/page02/page02a.css
- * Version : 5.0
  *
+ * PREMIUM GLOBAL PRESENTATION SYSTEM
+ * Version : 6.0
+ *
+ * -----------------------------------------------------------------------------
  * PURPOSE
- * ---------------------------------------------------------------------------
+ * -----------------------------------------------------------------------------
+ *
  * Premium visual treatment for:
  *
- *   • Scorecard instruction screen
- *   • ABOUT YOU™ introduction
- *   • CARD 01 — YOUR DETAILS™
- *   • CARD 02 — YOUR LIFE™
- *   • CARD 03 — YOUR LOCATION™
- *   • Segmented choice controls
+ *   • Page 02A introduction
+ *   • ABOUT YOU™
+ *   • KYC registration
+ *   • YOUR DETAILS
+ *   • YOUR LIFE
+ *   • YOUR LOCATION
+ *   • Choice controls
  *   • Input / select fields
  *   • Primary CTAs
  *   • Validation / status messages
- *   • Desktop / tablet / mobile responsiveness
+ *   • Desktop / tablet / mobile
  *
+ * -----------------------------------------------------------------------------
  * IMPORTANT
- * ---------------------------------------------------------------------------
- * Presentation only.
+ * -----------------------------------------------------------------------------
+ *
+ * PRESENTATION ONLY.
+ *
  * No application logic.
  * No JavaScript behaviour.
  * No backend changes.
+ *
+ * Existing DOM IDs and JavaScript contracts are preserved.
+ *
  * =============================================================================
  */
 
 
 /* =============================================================================
-   01. PAGE TOKENS
+   01. PREMIUM PAGE TOKENS
    ============================================================================= */
 
 :root {
 
     /* -------------------------------------------------------------------------
-       PAGE BACKGROUNDS
+       CORE BACKGROUND SYSTEM
        ------------------------------------------------------------------------- */
 
     --p02-bg:
-        #071f3d;
+        #06182d;
 
     --p02-bg-deep:
-        #051a33;
+        #031120;
+
+    --p02-bg-mid:
+        #08223d;
 
     --p02-bg-field:
-        #062443;
+        #071d34;
 
     --p02-bg-field-hover:
-        #082a4c;
+        #0a2945;
 
     --p02-bg-card:
-        #0d3a67;
+        #0b2b4b;
 
     --p02-bg-card-deep:
-        #0a3159;
+        #08233f;
 
 
     /* -------------------------------------------------------------------------
-       BRAND COLOURS
+       PRIMARY BRAND — TEAL
        ------------------------------------------------------------------------- */
 
     --p02-teal:
-        #20c9c3;
+        #22d3c5;
+
+    --p02-teal-bright:
+        #36e6d7;
 
     --p02-teal-strong:
-        #18b7b1;
+        #14b8ad;
 
     --p02-teal-deep:
-        #0c8f8b;
+        #087f7a;
 
     --p02-teal-soft:
-        rgba(32, 201, 195, 0.16);
+        rgba(34, 211, 197, 0.10);
+
+    --p02-teal-soft-strong:
+        rgba(34, 211, 197, 0.17);
 
     --p02-teal-border:
-        rgba(32, 201, 195, 0.48);
+        rgba(34, 211, 197, 0.42);
 
     --p02-teal-border-soft:
-        rgba(32, 201, 195, 0.28);
+        rgba(34, 211, 197, 0.20);
 
 
     /* -------------------------------------------------------------------------
-       GOLD
+       PREMIUM GOLD
        ------------------------------------------------------------------------- */
 
     --p02-gold:
-        #d8ae59;
+        #cba75d;
 
     --p02-gold-bright:
-        #e6bf6c;
+        #e4c477;
 
     --p02-gold-soft:
-        rgba(216, 174, 89, 0.20);
+        rgba(228, 196, 119, 0.10);
 
     --p02-gold-border:
-        rgba(216, 174, 89, 0.38);
+        rgba(228, 196, 119, 0.30);
 
 
     /* -------------------------------------------------------------------------
-       TEXT
+       TEXT HIERARCHY
        ------------------------------------------------------------------------- */
-
-    --p02-ivory:
-        #f7f3e9;
 
     --p02-white:
         #ffffff;
 
+    --p02-ivory:
+        #f8f4e9;
+
     --p02-text:
-        #eef4fa;
+        #edf4f8;
 
     --p02-text-soft:
-        #c8d5e2;
+        #c7d6e2;
 
     --p02-text-muted:
-        #93a9bd;
+        #8fa6b8;
 
     --p02-blue-grey:
-        #afc1d1;
+        #a9bdcd;
 
 
     /* -------------------------------------------------------------------------
-       FEEDBACK
+       FORM TEXT
+       ------------------------------------------------------------------------- */
+
+    --p02-input-text:
+        #f7fbfd;
+
+    --p02-input-placeholder:
+        #71899d;
+
+
+    /* -------------------------------------------------------------------------
+       STATUS
        ------------------------------------------------------------------------- */
 
     --p02-danger:
-        #ff8d8d;
+        #ff9292;
 
     --p02-danger-bg:
-        rgba(122, 35, 48, 0.20);
+        rgba(155, 39, 55, 0.14);
 
     --p02-danger-border:
-        rgba(255, 141, 141, 0.36);
+        rgba(255, 146, 146, 0.38);
 
     --p02-success:
-        #6fe0c4;
+        #72e4c8;
 
     --p02-success-bg:
-        rgba(27, 124, 105, 0.18);
+        rgba(37, 145, 119, 0.13);
+
+    --p02-success-border:
+        rgba(114, 228, 200, 0.30);
 
 
     /* -------------------------------------------------------------------------
-       STRUCTURE
+       LAYOUT
        ------------------------------------------------------------------------- */
 
     --p02-page-width:
-        1320px;
+        1240px;
 
     --p02-reading-width:
-        900px;
+        760px;
 
     --p02-card-radius:
-        24px;
+        22px;
 
     --p02-field-radius:
-        12px;
+        11px;
 
     --p02-button-radius:
-        14px;
+        13px;
+
+
+    /* -------------------------------------------------------------------------
+       BORDERS
+       ------------------------------------------------------------------------- */
+
+    --p02-border:
+        rgba(145, 184, 211, 0.16);
+
+    --p02-border-strong:
+        rgba(145, 184, 211, 0.26);
 
 
     /* -------------------------------------------------------------------------
@@ -172,24 +214,38 @@
        ------------------------------------------------------------------------- */
 
     --p02-card-shadow:
-        0 24px 70px rgba(0, 10, 26, 0.22);
+        0 26px 80px rgba(0, 5, 16, 0.34);
+
+    --p02-card-shadow-hover:
+        0 32px 90px rgba(0, 5, 16, 0.42);
 
     --p02-field-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.025);
 
     --p02-focus-shadow:
-        0 0 0 4px rgba(32, 201, 195, 0.11);
+        0 0 0 4px rgba(34, 211, 197, 0.11);
 
     --p02-button-shadow:
-        0 18px 44px rgba(0, 0, 0, 0.24),
-        0 0 30px rgba(32, 201, 195, 0.10);
+        0 16px 38px rgba(0, 0, 0, 0.28),
+        0 0 30px rgba(34, 211, 197, 0.08);
+
+
+    /* -------------------------------------------------------------------------
+       TRANSITIONS
+       ------------------------------------------------------------------------- */
+
+    --p02-transition:
+        180ms cubic-bezier(0.2, 0.65, 0.3, 1);
+
 }
+
 
 /* =============================================================================
    02. RESET / PAGE FOUNDATION
    ============================================================================= */
 
 html {
+
     width:
         100%;
 
@@ -209,13 +265,15 @@ html {
         hidden;
 
     background:
-        #071f3d;
+        var(--p02-bg-deep);
 
     scroll-behavior:
         smooth;
 }
 
+
 body.page02a-body {
+
     width:
         100%;
 
@@ -238,11 +296,19 @@ body.page02a-body {
         hidden;
 
     background:
+
         radial-gradient(
-            circle at 50% 14%,
-            rgba(20, 80, 126, 0.16) 0,
-            rgba(7, 31, 61, 0) 34%
+            circle at 50% 0%,
+            rgba(19, 81, 111, 0.22) 0%,
+            rgba(19, 81, 111, 0) 34%
         ),
+
+        radial-gradient(
+            circle at 90% 45%,
+            rgba(34, 211, 197, 0.035) 0%,
+            rgba(34, 211, 197, 0) 28%
+        ),
+
         linear-gradient(
             180deg,
             var(--p02-bg) 0%,
@@ -259,18 +325,32 @@ body.page02a-body {
         optimizeLegibility;
 }
 
+
 .page02a-body *,
 .page02a-body *::before,
 .page02a-body *::after {
+
     box-sizing:
         border-box;
 }
+
+
+.page02a-body button,
+.page02a-body input,
+.page02a-body select,
+.page02a-body textarea {
+
+    font:
+        inherit;
+}
+
 
 /* =============================================================================
    03. PAGE ROOT
    ============================================================================= */
 
 .page02a {
+
     width:
         100%;
 
@@ -284,10 +364,12 @@ body.page02a-body {
         var(--p02-text);
 }
 
+
 .page02-shell {
+
     width:
         min(
-            calc(100% - 64px),
+            calc(100% - 56px),
             var(--p02-page-width)
         );
 
@@ -295,39 +377,68 @@ body.page02a-body {
         0 auto;
 }
 
+
 .page02-screen {
+
     width:
         100%;
 }
 
+
 .page02-screen[hidden] {
+
     display:
         none !important;
 }
 
 
 /* =============================================================================
-   04. SCORECARD INSTRUCTION SCREEN
+   04. INTRO SCREEN
    ============================================================================= */
 
+.page02-intro-screen {
+
+    min-height:
+        calc(100vh - 80px);
+
+    min-height:
+        calc(100dvh - 80px);
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        64px 0 80px;
+}
+
+
 .scorecard-intro-card {
+
     width:
         min(
-            calc(100% - 64px),
-            var(--p02-page-width)
+            100%,
+            900px
         );
 
     margin:
         0 auto;
 
     padding:
-        76px 64px 82px;
+        40px 30px 0;
 
     text-align:
         center;
 }
 
+
 .scorecard-intro-card > * {
+
     margin-left:
         auto;
 
@@ -336,25 +447,50 @@ body.page02a-body {
 }
 
 
-/* -----------------------------------------------------------------------------
-   EYEBROW
-   ----------------------------------------------------------------------------- */
+/* =============================================================================
+   05. INTRO EYEBROW
+   ============================================================================= */
 
 .scorecard-eyebrow {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-height:
+        30px;
+
     margin:
-        0 auto 28px;
+        0 auto 26px;
+
+    padding:
+        6px 13px;
+
+    border:
+        1px solid var(--p02-gold-border);
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(228, 196, 119, 0.055);
 
     color:
         var(--p02-gold-bright);
 
     font-size:
-        0.92rem;
+        0.72rem;
 
     font-weight:
-        700;
+        800;
 
     line-height:
-        1.4;
+        1;
 
     letter-spacing:
         0.16em;
@@ -367,13 +503,14 @@ body.page02a-body {
 }
 
 
-/* -----------------------------------------------------------------------------
-   MAIN TAMIL STATEMENT
-   ----------------------------------------------------------------------------- */
+/* =============================================================================
+   06. INTRO TITLE
+   ============================================================================= */
 
 .scorecard-intro-title {
+
     max-width:
-        820px;
+        780px;
 
     margin:
         0 auto 22px;
@@ -383,53 +520,57 @@ body.page02a-body {
 
     font-size:
         clamp(
-            2.15rem,
-            4vw,
-            3.65rem
+            2.5rem,
+            5vw,
+            4.35rem
         );
 
     font-weight:
-        700;
+        750;
 
     line-height:
-        1.32;
+        1.24;
 
     letter-spacing:
-        -0.025em;
+        -0.035em;
 
     text-align:
         center;
 
     text-wrap:
         balance;
+
+    text-shadow:
+        0 2px 28px rgba(0, 0, 0, 0.18);
 }
 
 
-/* -----------------------------------------------------------------------------
-   ENGLISH SUPPORT
-   ----------------------------------------------------------------------------- */
+/* =============================================================================
+   07. INTRO ENGLISH
+   ============================================================================= */
 
 .scorecard-intro-english {
+
     max-width:
-        760px;
+        720px;
 
     margin:
-        0 auto 36px;
+        0 auto;
 
     color:
         var(--p02-teal);
 
     font-size:
-        0.96rem;
+        0.86rem;
 
     font-weight:
-        700;
+        800;
 
     line-height:
-        1.75;
+        1.6;
 
     letter-spacing:
-        0.075em;
+        0.14em;
 
     text-transform:
         uppercase;
@@ -439,131 +580,141 @@ body.page02a-body {
 }
 
 
-/* -----------------------------------------------------------------------------
-   GUIDANCE COPY
-   ----------------------------------------------------------------------------- */
+.scorecard-intro-english p {
+
+    margin:
+        0;
+}
+
+
+/* =============================================================================
+   08. INTRO COPY
+   ============================================================================= */
 
 .scorecard-intro-copy {
+
     max-width:
         var(--p02-reading-width);
 
     margin:
-        0 auto;
+        25px auto 0;
 
     color:
         var(--p02-text-soft);
 
     font-size:
         clamp(
-            1.08rem,
-            1.6vw,
-            1.30rem
+            1.05rem,
+            1.5vw,
+            1.22rem
         );
 
     font-weight:
         400;
 
     line-height:
-        1.95;
+        1.85;
 
     text-align:
         center;
 }
+
 
 .scorecard-intro-copy p {
+
     margin:
-        0 0 13px;
-
-    text-align:
-        center;
-}
-
-.scorecard-intro-copy p:last-child {
-    margin-bottom:
         0;
 }
 
 
-/* -----------------------------------------------------------------------------
-   SUPPORT / ENGLISH EXPLANATION
-   ----------------------------------------------------------------------------- */
+/* =============================================================================
+   09. LEGACY INTRO ELEMENTS
+   =============================================================================
+
+   Kept visually quiet so older markup does not create noise.
+   They can safely remain in the HTML while the new page copy is used.
+   ============================================================================= */
 
 .scorecard-intro-support {
+
     max-width:
-        780px;
+        700px;
 
     margin:
-        28px auto 0;
+        22px auto 0;
 
     color:
-        var(--p02-blue-grey);
+        var(--p02-text-muted);
 
     font-size:
-        0.98rem;
+        0.86rem;
 
     line-height:
-        1.75;
+        1.7;
 
     text-align:
         center;
 }
 
 
-/* -----------------------------------------------------------------------------
-   CALCULATION NOTE
-   ----------------------------------------------------------------------------- */
-
-.scorecard-calculation-note {
-    position:
-        relative;
-
-    max-width:
-        820px;
+.scorecard-intro-support p {
 
     margin:
-        36px auto 0;
+        4px 0;
+}
+
+
+.scorecard-calculation-note {
+
+    max-width:
+        700px;
+
+    margin:
+        30px auto 0;
 
     padding:
-        23px 28px;
+        17px 22px;
 
     border:
         1px solid var(--p02-gold-border);
 
     border-radius:
-        14px;
+        12px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(216, 174, 89, 0.07),
-            rgba(32, 201, 195, 0.035)
+            rgba(228, 196, 119, 0.065),
+            rgba(34, 211, 197, 0.025)
         );
 
     color:
         var(--p02-gold-bright);
 
     font-size:
-        0.94rem;
-
-    font-weight:
-        700;
+        0.84rem;
 
     line-height:
-        1.65;
-
-    letter-spacing:
-        0.055em;
+        1.6;
 
     text-align:
         center;
 }
 
 
+.scorecard-calculation-note p {
+
+    margin:
+        0;
+}
+
+
 /* =============================================================================
-   05. INTRO CTA
+   10. INTRO CTA
    ============================================================================= */
 
 .page02-intro-action {
+
     display:
         flex;
 
@@ -577,39 +728,50 @@ body.page02a-body {
         100%;
 
     margin:
-        44px auto 0;
+        38px auto 0;
 
     text-align:
         center;
 }
 
+
 .page02-primary-button {
+
+    position:
+        relative;
+
     display:
         inline-flex;
 
     flex-direction:
         column;
 
-    justify-content:
-        center;
-
     align-items:
         center;
 
-    gap:
-        5px;
+    justify-content:
+        center;
 
-    min-width:
-        320px;
+    gap:
+        3px;
+
+    width:
+        min(
+            100%,
+            360px
+        );
 
     min-height:
-        64px;
+        66px;
 
     padding:
-        15px 34px;
+        13px 28px;
+
+    overflow:
+        hidden;
 
     border:
-        1px solid rgba(255, 255, 255, 0.10);
+        1px solid rgba(255, 255, 255, 0.13);
 
     border-radius:
         var(--p02-button-radius);
@@ -617,8 +779,8 @@ body.page02a-body {
     background:
         linear-gradient(
             135deg,
-            #20c9c3 0%,
-            #17aaa6 100%
+            #22d3c5 0%,
+            #10aaa3 100%
         );
 
     box-shadow:
@@ -631,13 +793,13 @@ body.page02a-body {
         inherit;
 
     font-size:
-        1.05rem;
+        1rem;
 
     font-weight:
         800;
 
     line-height:
-        1.35;
+        1.25;
 
     letter-spacing:
         0.01em;
@@ -655,34 +817,82 @@ body.page02a-body {
         none;
 
     transition:
-        transform 180ms ease,
-        box-shadow 180ms ease,
-        background 180ms ease,
-        border-color 180ms ease;
+        transform var(--p02-transition),
+        box-shadow var(--p02-transition),
+        background var(--p02-transition);
 }
 
+
+.page02-primary-button::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        -120%;
+
+    width:
+        70%;
+
+    height:
+        100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,0.16),
+            transparent
+        );
+
+    transform:
+        skewX(-20deg);
+
+    transition:
+        left 500ms ease;
+}
+
+
 .page02-primary-button:hover {
+
     transform:
         translateY(-2px);
 
     background:
         linear-gradient(
             135deg,
-            #28d4cd 0%,
-            #18b6b0 100%
+            #36e6d7 0%,
+            #15b9b1 100%
         );
 
     box-shadow:
-        0 22px 50px rgba(0, 0, 0, 0.28),
-        0 0 36px rgba(32, 201, 195, 0.16);
+        0 22px 50px rgba(0, 0, 0, 0.30),
+        0 0 34px rgba(34, 211, 197, 0.14);
 }
 
+
+.page02-primary-button:hover::before {
+
+    left:
+        145%;
+}
+
+
 .page02-primary-button:active {
+
     transform:
         translateY(0);
 }
 
+
 .page02-primary-button:focus-visible {
+
     outline:
         2px solid var(--p02-ivory);
 
@@ -690,9 +900,11 @@ body.page02a-body {
         4px;
 }
 
+
 .page02-primary-button:disabled {
+
     opacity:
-        0.58;
+        0.55;
 
     cursor:
         not-allowed;
@@ -705,38 +917,129 @@ body.page02a-body {
 }
 
 
-/* =============================================================================
-   06. KYC SCREEN
-   ============================================================================= */
+.button-primary {
 
-.page02-kyc-screen {
-    width:
-        100%;
+    color:
+        #ffffff;
 
-    padding:
-        72px 0 92px;
+    font-weight:
+        800;
+}
+
+
+.button-secondary {
+
+    color:
+        rgba(255,255,255,0.70);
+
+    font-size:
+        0.66rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.12em;
+
+    text-transform:
+        uppercase;
 }
 
 
 /* =============================================================================
-   07. ABOUT YOU™ HEADING
+   11. KYC SCREEN
    ============================================================================= */
 
-.kyc-heading {
+.page02-kyc-screen {
+
     width:
-        min(
-            calc(100% - 64px),
-            var(--p02-page-width)
-        );
+        100%;
+
+    padding:
+        58px 0 100px;
+}
+
+
+/* =============================================================================
+   12. KYC PROGRESS
+   ============================================================================= */
+
+.kyc-progress {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        10px;
 
     margin:
-        0 auto 50px;
+        0 auto 28px;
+
+    color:
+        var(--p02-text-muted);
+
+    font-size:
+        0.72rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.12em;
+
+    text-transform:
+        uppercase;
 
     text-align:
         center;
 }
 
+
+.kyc-progress-number {
+
+    color:
+        var(--p02-teal);
+
+    font-weight:
+        800;
+}
+
+
+.kyc-progress-label {
+
+    color:
+        var(--p02-text-muted);
+}
+
+
+/* =============================================================================
+   13. KYC HEADING
+   ============================================================================= */
+
+.kyc-heading {
+
+    width:
+        min(
+            100%,
+            900px
+        );
+
+    margin:
+        0 auto 46px;
+
+    text-align:
+        center;
+}
+
+
 .kyc-heading > * {
+
     margin-left:
         auto;
 
@@ -747,7 +1050,9 @@ body.page02a-body {
         center;
 }
 
+
 .kyc-heading::after {
+
     content:
         "";
 
@@ -755,13 +1060,13 @@ body.page02a-body {
         block;
 
     width:
-        82px;
+        68px;
 
     height:
         2px;
 
     margin:
-        30px auto 0;
+        25px auto 0;
 
     border-radius:
         999px;
@@ -776,86 +1081,58 @@ body.page02a-body {
 }
 
 
-/* -----------------------------------------------------------------------------
-   BEFORE WE BEGIN
-   ----------------------------------------------------------------------------- */
-
-.kyc-heading .scorecard-eyebrow,
-.kyc-heading-eyebrow {
-    margin-bottom:
-        17px;
-
-    color:
-        var(--p02-gold-bright);
-
-    font-size:
-        0.88rem;
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        0.17em;
-
-    text-transform:
-        uppercase;
-}
-
-
-/* -----------------------------------------------------------------------------
-   ABOUT YOU
-   ----------------------------------------------------------------------------- */
+/* =============================================================================
+   14. KYC TITLE
+   ============================================================================= */
 
 .kyc-title {
+
     margin:
-        0 auto 14px;
+        0 auto 10px;
 
     color:
         var(--p02-ivory);
 
     font-size:
         clamp(
-            2.25rem,
-            4vw,
-            3.45rem
+            2.35rem,
+            4.5vw,
+            3.65rem
         );
 
     font-weight:
-        700;
+        750;
 
     line-height:
         1.15;
 
     letter-spacing:
-        -0.025em;
+        -0.035em;
 
     text-align:
         center;
 }
 
 
-/* -----------------------------------------------------------------------------
-   ENGLISH TAGLINE
-   ----------------------------------------------------------------------------- */
-
 .kyc-title-english {
+
     margin:
-        0 auto 22px;
+        0 auto 18px;
 
     color:
         var(--p02-teal);
 
     font-size:
-        0.96rem;
+        0.78rem;
 
     font-weight:
-        700;
+        800;
 
     line-height:
         1.5;
 
     letter-spacing:
-        0.10em;
+        0.16em;
 
     text-transform:
         uppercase;
@@ -865,13 +1142,10 @@ body.page02a-body {
 }
 
 
-/* -----------------------------------------------------------------------------
-   INTRODUCTION
-   ----------------------------------------------------------------------------- */
-
 .kyc-introduction {
+
     max-width:
-        940px;
+        620px;
 
     margin:
         0 auto;
@@ -880,25 +1154,13 @@ body.page02a-body {
         var(--p02-text-soft);
 
     font-size:
-        clamp(
-            1.04rem,
-            1.5vw,
-            1.22rem
-        );
+        1.03rem;
 
     font-weight:
         400;
 
     line-height:
-        1.85;
-
-    text-align:
-        center;
-}
-
-.kyc-introduction p {
-    margin:
-        0;
+        1.75;
 
     text-align:
         center;
@@ -906,15 +1168,13 @@ body.page02a-body {
 
 
 /* =============================================================================
-   08. THREE-CARD FORM CONTAINER
+   15. FORM
    ============================================================================= */
 
 .kyc-form-three-card {
+
     width:
-        min(
-            calc(100% - 64px),
-            var(--p02-page-width)
-        );
+        100%;
 
     margin:
         0 auto;
@@ -922,10 +1182,11 @@ body.page02a-body {
 
 
 /* =============================================================================
-   09. KYC CARDS
+   16. KYC CARD
    ============================================================================= */
 
 .kyc-card {
+
     position:
         relative;
 
@@ -933,32 +1194,56 @@ body.page02a-body {
         100%;
 
     margin:
-        0 0 34px;
+        0 0 26px;
 
     padding:
-        48px 52px 54px;
+        40px 46px 46px;
 
     overflow:
         hidden;
 
     border:
-        1px solid rgba(94, 151, 194, 0.22);
+        1px solid var(--p02-border);
 
     border-radius:
         var(--p02-card-radius);
 
     background:
+
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(34, 211, 197, 0.035),
+            transparent 28%
+        ),
+
         linear-gradient(
             145deg,
-            rgba(16, 63, 108, 0.97) 0%,
-            rgba(10, 52, 91, 0.98) 100%
+            rgba(12, 46, 77, 0.98),
+            rgba(7, 32, 56, 0.98)
         );
 
     box-shadow:
         var(--p02-card-shadow);
+
+    transition:
+        border-color var(--p02-transition),
+        box-shadow var(--p02-transition),
+        transform var(--p02-transition);
 }
 
+
+.kyc-card:hover {
+
+    border-color:
+        rgba(145, 184, 211, 0.23);
+
+    box-shadow:
+        var(--p02-card-shadow-hover);
+}
+
+
 .kyc-card::before {
+
     content:
         "";
 
@@ -969,50 +1254,94 @@ body.page02a-body {
         0;
 
     left:
-        52px;
+        46px;
 
     width:
-        86px;
+        72px;
 
     height:
         3px;
 
     border-radius:
-        0 0 4px 4px;
+        0 0 5px 5px;
 
     background:
         var(--p02-teal);
 
     box-shadow:
-        0 0 16px rgba(32, 201, 195, 0.22);
+        0 0 18px rgba(34, 211, 197, 0.18);
 }
 
+
+.kyc-card::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    right:
+        0;
+
+    width:
+        180px;
+
+    height:
+        180px;
+
+    pointer-events:
+        none;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(34, 211, 197, 0.035),
+            transparent 70%
+        );
+}
+
+
 .kyc-card:last-child {
+
     margin-bottom:
         0;
 }
 
 
 /* =============================================================================
-   10. CARD HEADINGS
+   17. CARD HEADING
    ============================================================================= */
 
-.kyc-card-number,
-.kyc-card-eyebrow {
-    display:
-        block;
+.kyc-card-heading {
+
+    position:
+        relative;
+
+    z-index:
+        1;
 
     margin:
-        0 0 13px;
+        0 0 32px;
+}
+
+
+.kyc-card-number {
+
+    margin:
+        0 0 8px;
 
     color:
         var(--p02-teal);
 
     font-size:
-        0.82rem;
+        0.70rem;
 
     font-weight:
-        800;
+        850;
 
     line-height:
         1.4;
@@ -1024,36 +1353,70 @@ body.page02a-body {
         uppercase;
 }
 
+
 .kyc-card-title {
+
     margin:
-        0 0 38px;
+        0;
 
     color:
         var(--p02-ivory);
 
     font-size:
         clamp(
-            1.70rem,
-            2.5vw,
-            2.20rem
+            1.55rem,
+            2.3vw,
+            2rem
         );
 
     font-weight:
-        700;
+        750;
 
     line-height:
-        1.18;
+        1.2;
 
     letter-spacing:
-        -0.018em;
+        -0.02em;
+}
+
+
+.kyc-card-subtitle {
+
+    margin:
+        7px 0 0;
+
+    color:
+        var(--p02-gold-bright);
+
+    font-size:
+        0.68rem;
+
+    font-weight:
+        750;
+
+    line-height:
+        1.4;
+
+    letter-spacing:
+        0.12em;
+
+    text-transform:
+        uppercase;
 }
 
 
 /* =============================================================================
-   11. FORM GRID
+   18. FORM GRID
    ============================================================================= */
 
 .kyc-card-grid {
+
+    position:
+        relative;
+
+    z-index:
+        1;
+
     display:
         grid;
 
@@ -1064,41 +1427,52 @@ body.page02a-body {
         );
 
     column-gap:
-        34px;
+        30px;
 
     row-gap:
-        28px;
+        25px;
 
     width:
         100%;
 }
 
+
 .kyc-field {
+
     min-width:
         0;
+
+    margin:
+        0;
 }
+
 
 .kyc-field-full,
 .kyc-field--full,
 .kyc-field.full-width,
 .kyc-field[data-full-width="true"] {
+
     grid-column:
         1 / -1;
 }
 
 
 /* =============================================================================
-   12. FIELD LABELS
+   19. FIELD LABELS
    ============================================================================= */
 
-.kyc-field label,
-.kyc-field-label,
-.kyc-field legend {
+.kyc-field > label,
+.kyc-field > legend,
+.kyc-label {
+
     display:
         block;
 
+    width:
+        100%;
+
     margin:
-        0 0 10px;
+        0 0 9px;
 
     padding:
         0;
@@ -1110,7 +1484,7 @@ body.page02a-body {
         var(--p02-ivory);
 
     font-size:
-        1.02rem;
+        0.94rem;
 
     font-weight:
         650;
@@ -1120,34 +1494,17 @@ body.page02a-body {
 }
 
 
-/* -----------------------------------------------------------------------------
-   TAMIL LABEL
-   ----------------------------------------------------------------------------- */
-
-.kyc-label-tamil,
-.field-label-tamil {
-    display:
-        inline;
+.kyc-label-tamil {
 
     color:
         var(--p02-ivory);
-
-    font-size:
-        1.05em;
 
     font-weight:
         700;
 }
 
 
-/* -----------------------------------------------------------------------------
-   ENGLISH LABEL
-   ----------------------------------------------------------------------------- */
-
-.kyc-label-english,
-.field-label-english {
-    display:
-        inline;
+.kyc-label-english {
 
     margin-left:
         6px;
@@ -1156,13 +1513,13 @@ body.page02a-body {
         var(--p02-gold-bright);
 
     font-size:
-        0.74em;
+        0.67em;
 
     font-weight:
-        750;
+        800;
 
     letter-spacing:
-        0.07em;
+        0.075em;
 
     text-transform:
         uppercase;
@@ -1170,9 +1527,10 @@ body.page02a-body {
 
 
 /* =============================================================================
-   13. TEXT INPUTS / EMAIL / TEL / NUMBER
+   20. INPUTS / SELECTS
    ============================================================================= */
 
+.kyc-input,
 .kyc-field input[type="text"],
 .kyc-field input[type="email"],
 .kyc-field input[type="tel"],
@@ -1187,16 +1545,16 @@ body.page02a-body {
         100%;
 
     min-height:
-        58px;
+        56px;
 
     margin:
         0;
 
     padding:
-        14px 17px;
+        14px 16px;
 
     border:
-        1px solid rgba(74, 172, 177, 0.44);
+        1px solid rgba(117, 172, 194, 0.28);
 
     border-radius:
         var(--p02-field-radius);
@@ -1207,15 +1565,15 @@ body.page02a-body {
     background:
         linear-gradient(
             180deg,
-            rgba(5, 34, 65, 0.98),
-            rgba(5, 31, 59, 0.98)
+            rgba(4, 25, 44, 0.98),
+            rgba(3, 20, 36, 0.98)
         );
 
     box-shadow:
         var(--p02-field-shadow);
 
     color:
-        var(--p02-white);
+        var(--p02-input-text);
 
     font-family:
         inherit;
@@ -1233,50 +1591,64 @@ body.page02a-body {
         var(--p02-teal);
 
     transition:
-        border-color 170ms ease,
-        background 170ms ease,
-        box-shadow 170ms ease,
-        transform 170ms ease;
+        border-color var(--p02-transition),
+        background var(--p02-transition),
+        box-shadow var(--p02-transition),
+        transform var(--p02-transition);
 }
 
+
+.kyc-input:hover,
 .kyc-field input:hover,
 .kyc-field textarea:hover,
 .kyc-field select:hover {
+
     border-color:
-        rgba(32, 201, 195, 0.64);
+        rgba(34, 211, 197, 0.43);
 
     background:
-        var(--p02-bg-field-hover);
+        linear-gradient(
+            180deg,
+            rgba(6, 32, 54, 0.99),
+            rgba(4, 26, 45, 0.99)
+        );
 }
 
+
+.kyc-input:focus,
 .kyc-field input:focus,
 .kyc-field textarea:focus,
 .kyc-field select:focus {
+
     border-color:
         var(--p02-teal);
 
     background:
-        #072947;
+        #06243d;
 
     box-shadow:
         var(--p02-focus-shadow),
-        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        inset 0 1px 0 rgba(255,255,255,0.035);
 }
+
 
 .kyc-field input::placeholder,
 .kyc-field textarea::placeholder {
+
     color:
-        rgba(184, 201, 216, 0.58);
+        var(--p02-input-placeholder);
 
     opacity:
         1;
 }
 
+
 .kyc-field input:disabled,
 .kyc-field textarea:disabled,
 .kyc-field select:disabled {
+
     opacity:
-        0.62;
+        0.55;
 
     cursor:
         not-allowed;
@@ -1284,15 +1656,17 @@ body.page02a-body {
 
 
 /* =============================================================================
-   14. SELECT CONTROLS
+   21. SELECT
    ============================================================================= */
 
+.kyc-select,
 .kyc-field select {
+
     padding-right:
-        48px;
+        46px;
 
     color:
-        var(--p02-white);
+        var(--p02-input-text);
 
     cursor:
         pointer;
@@ -1304,28 +1678,33 @@ body.page02a-body {
         none;
 
     background-image:
+
         linear-gradient(
             45deg,
             transparent 50%,
             var(--p02-teal) 50%
         ),
+
         linear-gradient(
             135deg,
             var(--p02-teal) 50%,
             transparent 50%
         ),
+
         linear-gradient(
             180deg,
-            rgba(5, 34, 65, 0.98),
-            rgba(5, 31, 59, 0.98)
+            rgba(4, 25, 44, 0.98),
+            rgba(3, 20, 36, 0.98)
         );
 
     background-position:
-        calc(100% - 20px) 25px,
-        calc(100% - 14px) 25px,
+
+        calc(100% - 19px) 24px,
+        calc(100% - 13px) 24px,
         0 0;
 
     background-size:
+
         6px 6px,
         6px 6px,
         100% 100%;
@@ -1334,7 +1713,9 @@ body.page02a-body {
         no-repeat;
 }
 
+
 .kyc-field select option {
+
     background:
         var(--p02-bg-deep);
 
@@ -1344,23 +1725,11 @@ body.page02a-body {
 
 
 /* =============================================================================
-   15. TEXTAREA
+   22. FIELDSET
    ============================================================================= */
 
-.kyc-field textarea {
-    min-height:
-        120px;
+.kyc-choice-field {
 
-    resize:
-        vertical;
-}
-
-
-/* =============================================================================
-   16. FIELDSET RESET
-   ============================================================================= */
-
-.kyc-field fieldset {
     min-width:
         0;
 
@@ -1375,9 +1744,218 @@ body.page02a-body {
 }
 
 
+.kyc-choice-field legend {
+
+    width:
+        100%;
+
+    margin:
+        0 0 9px;
+}
+
+
 /* =============================================================================
-   17. SEGMENTED CONTROLS
-   Gender / Marital Status / Preferred Language
+   23. ACTUAL PAGE 02A CHOICE CONTROLS
+   =============================================================================
+
+   IMPORTANT:
+   The current page02a.html uses:
+
+       .kyc-choice-group
+           .kyc-choice
+               input[type="radio"]
+               span
+
+   These selectors are therefore deliberately explicit.
+   ============================================================================= */
+
+.kyc-choice-group {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(
+                110px,
+                1fr
+            )
+        );
+
+    width:
+        100%;
+
+    min-height:
+        56px;
+
+    overflow:
+        hidden;
+
+    border:
+        1px solid rgba(117, 172, 194, 0.28);
+
+    border-radius:
+        var(--p02-field-radius);
+
+    background:
+        rgba(3, 20, 36, 0.92);
+}
+
+
+.kyc-choice {
+
+    position:
+        relative;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-width:
+        0;
+
+    min-height:
+        56px;
+
+    margin:
+        0;
+
+    padding:
+        10px 12px;
+
+    border-right:
+        1px solid rgba(117, 172, 194, 0.14);
+
+    background:
+        transparent;
+
+    color:
+        var(--p02-text-soft);
+
+    font-size:
+        0.91rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.25;
+
+    text-align:
+        center;
+
+    cursor:
+        pointer;
+
+    user-select:
+        none;
+
+    transition:
+        background var(--p02-transition),
+        color var(--p02-transition),
+        box-shadow var(--p02-transition);
+}
+
+
+.kyc-choice:last-child {
+
+    border-right:
+        0;
+}
+
+
+.kyc-choice:hover {
+
+    background:
+        rgba(34, 211, 197, 0.07);
+
+    color:
+        var(--p02-white);
+}
+
+
+.kyc-choice span {
+
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    color:
+        inherit;
+}
+
+
+.kyc-choice input[type="radio"] {
+
+    position:
+        absolute;
+
+    width:
+        1px;
+
+    height:
+        1px;
+
+    margin:
+        -1px;
+
+    padding:
+        0;
+
+    overflow:
+        hidden;
+
+    clip:
+        rect(0 0 0 0);
+
+    clip-path:
+        inset(50%);
+
+    white-space:
+        nowrap;
+
+    border:
+        0;
+}
+
+
+.kyc-choice:has(input[type="radio"]:checked) {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34, 211, 197, 0.25),
+            rgba(8, 127, 122, 0.20)
+        );
+
+    box-shadow:
+        inset 0 0 0 1px rgba(34, 211, 197, 0.34);
+
+    color:
+        var(--p02-white);
+}
+
+
+.kyc-choice:has(input[type="radio"]:focus-visible) {
+
+    outline:
+        2px solid var(--p02-teal);
+
+    outline-offset:
+        -3px;
+}
+
+
+/* =============================================================================
+   24. GENERIC CHOICE FALLBACKS
    ============================================================================= */
 
 .kyc-segmented-control,
@@ -1399,25 +1977,21 @@ body.page02a-body {
         100%;
 
     min-height:
-        58px;
+        56px;
 
     overflow:
         hidden;
 
     border:
-        1px solid rgba(74, 172, 177, 0.44);
+        1px solid rgba(117, 172, 194, 0.28);
 
     border-radius:
         var(--p02-field-radius);
 
     background:
-        rgba(5, 34, 65, 0.96);
+        rgba(3, 20, 36, 0.92);
 }
 
-
-/* -----------------------------------------------------------------------------
-   SEGMENT LABEL
-   ----------------------------------------------------------------------------- */
 
 .kyc-segmented-control label,
 .segmented-control label,
@@ -1431,26 +2005,23 @@ body.page02a-body {
     display:
         flex;
 
-    justify-content:
-        center;
-
     align-items:
         center;
 
-    min-width:
-        0;
+    justify-content:
+        center;
 
     min-height:
-        58px;
+        56px;
 
     margin:
         0;
 
     padding:
-        12px 16px;
+        10px 14px;
 
     border-right:
-        1px solid rgba(74, 172, 177, 0.20);
+        1px solid rgba(117, 172, 194, 0.14);
 
     background:
         transparent;
@@ -1459,7 +2030,7 @@ body.page02a-body {
         var(--p02-text-soft);
 
     font-size:
-        0.98rem;
+        0.91rem;
 
     font-weight:
         700;
@@ -1477,24 +2048,35 @@ body.page02a-body {
         none;
 
     transition:
-        background 170ms ease,
-        color 170ms ease,
-        box-shadow 170ms ease;
+        background var(--p02-transition),
+        color var(--p02-transition);
 }
+
 
 .kyc-segmented-control label:last-child,
 .segmented-control label:last-child,
 .kyc-options label:last-child,
 .radio-group label:last-child,
 .choice-group label:last-child {
+
     border-right:
         0;
 }
 
 
-/* -----------------------------------------------------------------------------
-   HIDE NATIVE RADIO
-   ----------------------------------------------------------------------------- */
+.kyc-segmented-control label:hover,
+.segmented-control label:hover,
+.kyc-options label:hover,
+.radio-group label:hover,
+.choice-group label:hover {
+
+    background:
+        rgba(34, 211, 197, 0.07);
+
+    color:
+        var(--p02-white);
+}
+
 
 .kyc-segmented-control input[type="radio"],
 .segmented-control input[type="radio"],
@@ -1534,28 +2116,6 @@ body.page02a-body {
 }
 
 
-/* -----------------------------------------------------------------------------
-   HOVER
-   ----------------------------------------------------------------------------- */
-
-.kyc-segmented-control label:hover,
-.segmented-control label:hover,
-.kyc-options label:hover,
-.radio-group label:hover,
-.choice-group label:hover {
-
-    background:
-        rgba(32, 201, 195, 0.08);
-
-    color:
-        var(--p02-white);
-}
-
-
-/* -----------------------------------------------------------------------------
-   CHECKED — INPUT INSIDE LABEL
-   ----------------------------------------------------------------------------- */
-
 .kyc-segmented-control label:has(input[type="radio"]:checked),
 .segmented-control label:has(input[type="radio"]:checked),
 .kyc-options label:has(input[type="radio"]:checked),
@@ -1565,64 +2125,20 @@ body.page02a-body {
     background:
         linear-gradient(
             135deg,
-            rgba(32, 201, 195, 0.28),
-            rgba(15, 127, 137, 0.28)
+            rgba(34, 211, 197, 0.25),
+            rgba(8, 127, 122, 0.20)
         );
 
     box-shadow:
-        inset 0 0 0 1px rgba(32, 201, 195, 0.34);
+        inset 0 0 0 1px rgba(34, 211, 197, 0.34);
 
     color:
         var(--p02-white);
-}
-
-
-/* -----------------------------------------------------------------------------
-   CHECKED — INPUT + LABEL DOM
-   ----------------------------------------------------------------------------- */
-
-.kyc-segmented-control input[type="radio"]:checked + label,
-.segmented-control input[type="radio"]:checked + label,
-.kyc-options input[type="radio"]:checked + label,
-.radio-group input[type="radio"]:checked + label,
-.choice-group input[type="radio"]:checked + label {
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(32, 201, 195, 0.28),
-            rgba(15, 127, 137, 0.28)
-        );
-
-    box-shadow:
-        inset 0 0 0 1px rgba(32, 201, 195, 0.34);
-
-    color:
-        var(--p02-white);
-}
-
-
-/* -----------------------------------------------------------------------------
-   KEYBOARD FOCUS
-   ----------------------------------------------------------------------------- */
-
-.kyc-segmented-control label:has(input[type="radio"]:focus-visible),
-.segmented-control label:has(input[type="radio"]:focus-visible),
-.kyc-options label:has(input[type="radio"]:focus-visible),
-.radio-group label:has(input[type="radio"]:focus-visible),
-.choice-group label:has(input[type="radio"]:focus-visible) {
-
-    outline:
-        2px solid var(--p02-teal);
-
-    outline-offset:
-        -3px;
 }
 
 
 /* =============================================================================
-   18. FALLBACK FOR DIRECT RADIO DOM
-   Prevent radios from becoming giant input rectangles
+   25. NATIVE RADIO FALLBACK
    ============================================================================= */
 
 .kyc-field > input[type="radio"],
@@ -1644,7 +2160,7 @@ body.page02a-body {
         0;
 
     border:
-        1px solid var(--p02-teal-border);
+        0;
 
     border-radius:
         50%;
@@ -1661,23 +2177,24 @@ body.page02a-body {
 
 
 /* =============================================================================
-   19. HELP / MICROCOPY
+   26. HELP / MICROCOPY
    ============================================================================= */
 
 .kyc-help,
 .field-help,
 .kyc-field-note {
+
     display:
         block;
 
     margin:
-        8px 0 0;
+        7px 0 0;
 
     color:
         var(--p02-text-muted);
 
     font-size:
-        0.82rem;
+        0.78rem;
 
     font-weight:
         500;
@@ -1688,7 +2205,7 @@ body.page02a-body {
 
 
 /* =============================================================================
-   20. VALIDATION
+   27. VALIDATION
    ============================================================================= */
 
 .kyc-field.is-invalid input,
@@ -1699,14 +2216,16 @@ body.page02a-body {
 .kyc-field textarea[aria-invalid="true"] {
 
     border-color:
-        rgba(255, 141, 141, 0.72);
+        var(--p02-danger-border);
 
     box-shadow:
-        0 0 0 3px rgba(255, 141, 141, 0.08);
+        0 0 0 3px rgba(255, 146, 146, 0.07);
 }
+
 
 .kyc-error,
 .field-error {
+
     display:
         block;
 
@@ -1717,7 +2236,7 @@ body.page02a-body {
         var(--p02-danger);
 
     font-size:
-        0.84rem;
+        0.82rem;
 
     font-weight:
         650;
@@ -1728,39 +2247,25 @@ body.page02a-body {
 
 
 /* =============================================================================
-   21. STATUS / API MESSAGE
+   28. FEEDBACK CONTAINERS
    ============================================================================= */
 
-.page02-status,
-.kyc-status,
-.registration-status {
+.kyc-message {
 
     width:
-        min(
-            calc(100% - 64px),
-            var(--p02-page-width)
-        );
+        100%;
 
     margin:
-        30px auto 0;
+        24px auto 0;
 
     padding:
-        17px 22px;
-
-    border:
-        1px solid var(--p02-teal-border-soft);
+        16px 20px;
 
     border-radius:
         12px;
 
-    background:
-        rgba(32, 201, 195, 0.07);
-
-    color:
-        var(--p02-text-soft);
-
     font-size:
-        0.94rem;
+        0.88rem;
 
     font-weight:
         600;
@@ -1772,12 +2277,91 @@ body.page02a-body {
         center;
 }
 
+
+.kyc-message[hidden] {
+
+    display:
+        none !important;
+}
+
+
+.kyc-error {
+
+    border:
+        1px solid var(--p02-danger-border);
+
+    background:
+        var(--p02-danger-bg);
+
+    color:
+        #ffc4c4;
+}
+
+
+.kyc-success {
+
+    border:
+        1px solid var(--p02-success-border);
+
+    background:
+        var(--p02-success-bg);
+
+    color:
+        var(--p02-success);
+}
+
+
+/* =============================================================================
+   29. GENERIC STATUS FALLBACKS
+   ============================================================================= */
+
+.page02-status,
+.kyc-status,
+.registration-status {
+
+    width:
+        100%;
+
+    margin:
+        24px auto 0;
+
+    padding:
+        16px 20px;
+
+    border:
+        1px solid var(--p02-teal-border-soft);
+
+    border-radius:
+        12px;
+
+    background:
+        rgba(34, 211, 197, 0.055);
+
+    color:
+        var(--p02-text-soft);
+
+    font-size:
+        0.88rem;
+
+    font-weight:
+        600;
+
+    line-height:
+        1.55;
+
+    text-align:
+        center;
+}
+
+
 .page02-status:empty,
 .kyc-status:empty,
 .registration-status:empty {
+
     display:
         none;
 }
+
 
 .page02-status.is-error,
 .kyc-status.is-error,
@@ -1790,15 +2374,16 @@ body.page02a-body {
         var(--p02-danger-bg);
 
     color:
-        #ffc1c1;
+        #ffc4c4;
 }
+
 
 .page02-status.is-success,
 .kyc-status.is-success,
 .registration-status.is-success {
 
     border-color:
-        rgba(111, 224, 196, 0.32);
+        var(--p02-success-border);
 
     background:
         var(--p02-success-bg);
@@ -1809,9 +2394,10 @@ body.page02a-body {
 
 
 /* =============================================================================
-   22. FINAL CTA AREA
+   30. FINAL CTA
    ============================================================================= */
 
+.kyc-action,
 .kyc-form-action,
 .page02-form-action,
 .page02-kyc-action {
@@ -1826,18 +2412,17 @@ body.page02a-body {
         center;
 
     width:
-        min(
-            calc(100% - 64px),
-            var(--p02-page-width)
-        );
+        100%;
 
     margin:
-        58px auto 0;
+        40px auto 0;
 
     text-align:
         center;
 }
 
+
+.kyc-action .page02-primary-button,
 .kyc-form-action .page02-primary-button,
 .page02-form-action .page02-primary-button,
 .page02-kyc-action .page02-primary-button {
@@ -1845,23 +2430,33 @@ body.page02a-body {
     width:
         min(
             100%,
-            500px
+            440px
         );
 
     min-height:
-        72px;
-
-    padding:
-        16px 34px;
-
-    font-size:
-        1.08rem;
+        68px;
 }
 
 
 /* =============================================================================
-   23. COMMON BUTTON FALLBACKS
-   Ensures existing Page 02A CTA IDs/classes never render as browser defaults.
+   31. KYC SUBMIT BUTTON
+   ============================================================================= */
+
+#kycSubmitButton {
+
+    width:
+        min(
+            100%,
+            440px
+        );
+
+    min-height:
+        68px;
+}
+
+
+/* =============================================================================
+   32. COMMON BUTTON FALLBACKS
    ============================================================================= */
 
 #beginButton,
@@ -1869,35 +2464,37 @@ body.page02a-body {
 #beginScorecard,
 #continueButton,
 #submitKycButton,
-#kycSubmitButton,
 #registrationSubmitButton {
 
     display:
-        flex;
-
-    justify-content:
-        center;
+        inline-flex;
 
     align-items:
         center;
 
+    justify-content:
+        center;
+
+    flex-direction:
+        column;
+
     width:
         min(
             100%,
-            500px
+            440px
         );
 
     min-height:
-        68px;
+        66px;
 
     margin:
-        50px auto 0;
+        38px auto 0;
 
     padding:
-        15px 30px;
+        13px 28px;
 
     border:
-        1px solid rgba(255, 255, 255, 0.10);
+        1px solid rgba(255,255,255,0.13);
 
     border-radius:
         var(--p02-button-radius);
@@ -1905,8 +2502,8 @@ body.page02a-body {
     background:
         linear-gradient(
             135deg,
-            #20c9c3 0%,
-            #17aaa6 100%
+            #22d3c5,
+            #10aaa3
         );
 
     box-shadow:
@@ -1919,13 +2516,13 @@ body.page02a-body {
         inherit;
 
     font-size:
-        1.03rem;
+        1rem;
 
     font-weight:
         800;
 
     line-height:
-        1.35;
+        1.25;
 
     text-align:
         center;
@@ -1940,10 +2537,11 @@ body.page02a-body {
         none;
 
     transition:
-        transform 180ms ease,
-        box-shadow 180ms ease,
-        background 180ms ease;
+        transform var(--p02-transition),
+        box-shadow var(--p02-transition),
+        background var(--p02-transition);
 }
+
 
 #beginButton:hover,
 #beginScorecardButton:hover,
@@ -1959,60 +2557,46 @@ body.page02a-body {
     background:
         linear-gradient(
             135deg,
-            #29d5cf 0%,
-            #19b8b2 100%
+            #36e6d7,
+            #15b9b1
         );
 
     box-shadow:
-        0 22px 50px rgba(0, 0, 0, 0.28),
-        0 0 38px rgba(32, 201, 195, 0.16);
+        0 22px 50px rgba(0,0,0,0.30),
+        0 0 34px rgba(34,211,197,0.14);
+}
+
+
+#beginButton:focus-visible,
+#beginScorecardButton:focus-visible,
+#beginScorecard:focus-visible,
+#continueButton:focus-visible,
+#submitKycButton:focus-visible,
+#kycSubmitButton:focus-visible,
+#registrationSubmitButton:focus-visible {
+
+    outline:
+        2px solid var(--p02-ivory);
+
+    outline-offset:
+        4px;
 }
 
 
 /* =============================================================================
-   24. FORCE CENTRING OF PAGE-SPECIFIC INTRODUCTORY CONTENT
-   ============================================================================= */
-
-.page02a .scorecard-intro-card,
-.page02a .scorecard-intro-card *,
-.page02a .kyc-heading,
-.page02a .kyc-heading * {
-
-    text-align:
-        center;
-}
-
-.page02a .scorecard-intro-card ul,
-.page02a .scorecard-intro-card ol {
-
-    width:
-        fit-content;
-
-    max-width:
-        820px;
-
-    margin-left:
-        auto;
-
-    margin-right:
-        auto;
-
-    text-align:
-        left;
-}
-
-
-/* =============================================================================
-   25. CARD CONTENT ALIGNMENT
-   Forms intentionally remain left-aligned for scanning efficiency.
+   33. FORM ALIGNMENT
    ============================================================================= */
 
 .page02a .kyc-card,
 .page02a .kyc-card * {
+
     text-align:
         left;
 }
 
+
+.page02a .kyc-choice,
+.page02a .kyc-choice *,
 .page02a .kyc-segmented-control label,
 .page02a .segmented-control label,
 .page02a .kyc-options label,
@@ -2023,12 +2607,12 @@ body.page02a-body {
         center;
 }
 
+
+.page02a .kyc-action,
+.page02a .kyc-action *,
 .page02a .kyc-form-action,
 .page02a .page02-form-action,
-.page02a .page02-kyc-action,
-.page02a .kyc-form-action *,
-.page02a .page02-form-action *,
-.page02a .page02-kyc-action * {
+.page02a .page02-kyc-action {
 
     text-align:
         center;
@@ -2036,80 +2620,96 @@ body.page02a-body {
 
 
 /* =============================================================================
-   26. PREMIUM FIELD GROUP SPACING
+   34. PREMIUM CARD SEPARATION
    ============================================================================= */
 
-.kyc-field + .kyc-field {
+.kyc-card + .kyc-card {
+
     position:
         relative;
 }
 
-.kyc-card-grid > .kyc-field {
-    align-self:
-        start;
+
+.kyc-card + .kyc-card::before {
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--p02-gold),
+            var(--p02-teal)
+        );
+
+    opacity:
+        0.82;
 }
 
 
 /* =============================================================================
-   27. DESKTOP REFINEMENTS
+   35. DESKTOP
    ============================================================================= */
 
 @media (min-width: 1100px) {
 
-    .scorecard-intro-card {
+    .page02-intro-screen {
+
         padding-top:
-            82px;
+            72px;
 
         padding-bottom:
             88px;
     }
 
-    .page02-kyc-screen {
+
+    .scorecard-intro-card {
+
         padding-top:
-            78px;
+            48px;
     }
 
-    .kyc-heading {
-        margin-bottom:
-            54px;
+
+    .page02-kyc-screen {
+
+        padding-top:
+            62px;
+
+        padding-bottom:
+            110px;
     }
+
 
     .kyc-card {
+
         padding:
-            52px 58px 58px;
+            44px 50px 50px;
     }
+
 
     .kyc-card::before {
+
         left:
-            58px;
+            50px;
     }
+
 
     .kyc-card-grid {
+
         column-gap:
-            38px;
+            34px;
 
         row-gap:
-            30px;
+            27px;
     }
+
 }
 
 
 /* =============================================================================
-   28. TABLET
+   36. TABLET
    ============================================================================= */
 
 @media (max-width: 1099px) {
 
-    .page02-shell,
-    .scorecard-intro-card,
-    .kyc-heading,
-    .kyc-form-three-card,
-    .page02-status,
-    .kyc-status,
-    .registration-status,
-    .kyc-form-action,
-    .page02-form-action,
-    .page02-kyc-action {
+    .page02-shell {
 
         width:
             min(
@@ -2118,58 +2718,50 @@ body.page02a-body {
             );
     }
 
+
     .scorecard-intro-card {
+
         padding:
-            64px 36px 70px;
+            44px 20px 0;
     }
 
-    .page02-kyc-screen {
-        padding:
-            64px 0 80px;
-    }
 
     .kyc-card {
+
         padding:
-            44px 40px 48px;
+            38px 34px 42px;
     }
+
 
     .kyc-card::before {
+
         left:
-            40px;
+            34px;
     }
+
 
     .kyc-card-grid {
+
         column-gap:
-            26px;
+            24px;
 
         row-gap:
-            26px;
+            24px;
     }
+
 }
 
 
 /* =============================================================================
-   29. MOBILE / SMALL TABLET
+   37. MOBILE
    ============================================================================= */
 
 @media (max-width: 760px) {
 
-    .page02-shell,
-    .scorecard-intro-card,
-    .kyc-heading,
-    .kyc-form-three-card,
-    .page02-status,
-    .kyc-status,
-    .registration-status,
-    .kyc-form-action,
-    .page02-form-action,
-    .page02-kyc-action {
+    .page02-shell {
 
         width:
-            min(
-                calc(100% - 28px),
-                var(--p02-page-width)
-            );
+            calc(100% - 28px);
     }
 
 
@@ -2177,136 +2769,65 @@ body.page02a-body {
        INTRO
        ------------------------------------------------------------------------- */
 
-    .scorecard-intro-card {
+    .page02-intro-screen {
+
+        min-height:
+            calc(100dvh - 64px);
+
         padding:
-            52px 8px 60px;
+            42px 0 58px;
     }
 
+
+    .scorecard-intro-card {
+
+        padding:
+            22px 0 0;
+    }
+
+
     .scorecard-eyebrow {
+
         margin-bottom:
-            22px;
+            20px;
 
         font-size:
-            0.78rem;
+            0.67rem;
 
         letter-spacing:
             0.12em;
     }
 
-    .scorecard-intro-title {
-        max-width:
-            100%;
 
-        margin-bottom:
-            18px;
+    .scorecard-intro-title {
 
         font-size:
             clamp(
-                1.85rem,
-                9vw,
-                2.55rem
+                2.05rem,
+                10vw,
+                3rem
             );
 
         line-height:
-            1.38;
+            1.32;
     }
+
 
     .scorecard-intro-english {
-        margin-bottom:
-            28px;
 
         font-size:
-            0.80rem;
-
-        line-height:
-            1.65;
-    }
-
-    .scorecard-intro-copy {
-        font-size:
-            1.03rem;
-
-        line-height:
-            1.82;
-    }
-
-    .scorecard-intro-support {
-        margin-top:
-            22px;
-
-        font-size:
-            0.90rem;
-    }
-
-    .scorecard-calculation-note {
-        margin-top:
-            28px;
-
-        padding:
-            19px 18px;
-
-        font-size:
-            0.84rem;
-    }
-
-    .page02-intro-action {
-        margin-top:
-            34px;
-    }
-
-    .page02-primary-button {
-        width:
-            min(
-                100%,
-                360px
-            );
-
-        min-width:
-            0;
-
-        min-height:
-            62px;
-
-        padding:
-            14px 22px;
-
-        font-size:
-            0.98rem;
-    }
-
-
-    /* -------------------------------------------------------------------------
-       ABOUT YOU
-       ------------------------------------------------------------------------- */
-
-    .page02-kyc-screen {
-        padding:
-            52px 0 68px;
-    }
-
-    .kyc-heading {
-        margin-bottom:
-            38px;
-    }
-
-    .kyc-title {
-        font-size:
-            clamp(
-                2rem,
-                10vw,
-                2.75rem
-            );
-    }
-
-    .kyc-title-english {
-        font-size:
-            0.82rem;
+            0.72rem;
 
         letter-spacing:
-            0.075em;
+            0.10em;
     }
 
-    .kyc-introduction {
+
+    .scorecard-intro-copy {
+
+        margin-top:
+            20px;
+
         font-size:
             1rem;
 
@@ -2315,60 +2836,179 @@ body.page02a-body {
     }
 
 
+    .scorecard-intro-support {
+
+        font-size:
+            0.82rem;
+    }
+
+
+    .scorecard-calculation-note {
+
+        margin-top:
+            24px;
+
+        padding:
+            15px 16px;
+
+        font-size:
+            0.78rem;
+    }
+
+
+    .page02-intro-action {
+
+        margin-top:
+            32px;
+    }
+
+
+    .page02-primary-button {
+
+        width:
+            100%;
+
+        max-width:
+            380px;
+
+        min-height:
+            62px;
+    }
+
+
+    /* -------------------------------------------------------------------------
+       KYC
+       ------------------------------------------------------------------------- */
+
+    .page02-kyc-screen {
+
+        padding:
+            42px 0 72px;
+    }
+
+
+    .kyc-progress {
+
+        margin-bottom:
+            23px;
+
+        font-size:
+            0.65rem;
+    }
+
+
+    .kyc-heading {
+
+        margin-bottom:
+            34px;
+    }
+
+
+    .kyc-title {
+
+        font-size:
+            clamp(
+                2rem,
+                10vw,
+                2.85rem
+            );
+    }
+
+
+    .kyc-title-english {
+
+        font-size:
+            0.70rem;
+
+        letter-spacing:
+            0.12em;
+    }
+
+
+    .kyc-introduction {
+
+        font-size:
+            0.96rem;
+
+        line-height:
+            1.7;
+    }
+
+
     /* -------------------------------------------------------------------------
        CARDS
        ------------------------------------------------------------------------- */
 
     .kyc-card {
+
         margin-bottom:
-            24px;
+            20px;
 
         padding:
-            38px 22px 40px;
+            32px 20px 36px;
 
         border-radius:
-            19px;
+            18px;
     }
+
 
     .kyc-card::before {
+
         left:
-            22px;
+            20px;
 
         width:
-            72px;
+            62px;
     }
 
-    .kyc-card-number,
-    .kyc-card-eyebrow {
-        font-size:
-            0.75rem;
+
+    .kyc-card-heading {
+
+        margin-bottom:
+            27px;
     }
+
+
+    .kyc-card-number {
+
+        font-size:
+            0.66rem;
+    }
+
 
     .kyc-card-title {
-        margin-bottom:
-            30px;
 
         font-size:
-            1.65rem;
+            1.52rem;
+    }
+
+
+    .kyc-card-subtitle {
+
+        font-size:
+            0.62rem;
     }
 
 
     /* -------------------------------------------------------------------------
-       SINGLE-COLUMN FORM
+       SINGLE COLUMN
        ------------------------------------------------------------------------- */
 
     .kyc-card-grid {
+
         grid-template-columns:
             1fr;
 
         row-gap:
-            24px;
+            21px;
     }
+
 
     .kyc-field-full,
     .kyc-field--full,
     .kyc-field.full-width,
     .kyc-field[data-full-width="true"] {
+
         grid-column:
             auto;
     }
@@ -2378,16 +3018,19 @@ body.page02a-body {
        FIELDS
        ------------------------------------------------------------------------- */
 
-    .kyc-field label,
-    .kyc-field-label,
-    .kyc-field legend {
+    .kyc-field > label,
+    .kyc-field > legend,
+    .kyc-label {
+
         margin-bottom:
-            9px;
+            8px;
 
         font-size:
-            0.98rem;
+            0.90rem;
     }
 
+
+    .kyc-input,
     .kyc-field input[type="text"],
     .kyc-field input[type="email"],
     .kyc-field input[type="tel"],
@@ -2402,7 +3045,7 @@ body.page02a-body {
             56px;
 
         padding:
-            13px 15px;
+            13px 14px;
 
         font-size:
             16px;
@@ -2410,147 +3053,180 @@ body.page02a-body {
 
 
     /* -------------------------------------------------------------------------
-       SEGMENTS
+       CHOICE GROUP
        ------------------------------------------------------------------------- */
 
-    .kyc-segmented-control,
-    .segmented-control,
-    .kyc-options,
-    .radio-group,
-    .choice-group {
+    .kyc-choice-group {
 
-        min-height:
-            56px;
+        grid-template-columns:
+            repeat(
+                auto-fit,
+                minmax(
+                    90px,
+                    1fr
+                )
+            );
     }
 
-    .kyc-segmented-control label,
-    .segmented-control label,
-    .kyc-options label,
-    .radio-group label,
-    .choice-group label {
+
+    .kyc-choice {
 
         min-height:
-            56px;
+            54px;
 
         padding:
-            10px 8px;
+            9px 6px;
 
         font-size:
-            0.90rem;
+            0.82rem;
     }
 
 
     /* -------------------------------------------------------------------------
-       FINAL CTA
+       CTA
        ------------------------------------------------------------------------- */
 
+    .kyc-action,
     .kyc-form-action,
     .page02-form-action,
     .page02-kyc-action {
+
         margin-top:
-            42px;
+            34px;
     }
 
+
+    .kyc-action .page02-primary-button,
     .kyc-form-action .page02-primary-button,
     .page02-form-action .page02-primary-button,
     .page02-kyc-action .page02-primary-button,
-    #beginButton,
-    #beginScorecardButton,
-    #beginScorecard,
-    #continueButton,
-    #submitKycButton,
-    #kycSubmitButton,
-    #registrationSubmitButton {
+    #kycSubmitButton {
 
         width:
             100%;
 
+        max-width:
+            none;
+
         min-height:
             64px;
-
-        margin-left:
-            auto;
-
-        margin-right:
-            auto;
-
-        padding:
-            14px 18px;
-
-        font-size:
-            0.96rem;
     }
+
 }
 
 
 /* =============================================================================
-   30. VERY SMALL SCREENS
+   38. SMALL MOBILE
    ============================================================================= */
 
 @media (max-width: 420px) {
 
-    .scorecard-intro-card,
-    .kyc-heading,
-    .kyc-form-three-card,
-    .page02-status,
-    .kyc-status,
-    .registration-status,
-    .kyc-form-action,
-    .page02-form-action,
-    .page02-kyc-action {
+    .page02-shell {
 
         width:
             calc(100% - 20px);
     }
 
+
     .scorecard-intro-title {
+
         font-size:
-            1.78rem;
+            1.92rem;
     }
+
+
+    .scorecard-intro-copy {
+
+        font-size:
+            0.96rem;
+    }
+
+
+    .kyc-title {
+
+        font-size:
+            1.92rem;
+    }
+
 
     .kyc-card {
-        padding:
-            34px 17px 36px;
-    }
 
-    .kyc-card::before {
-        left:
+        padding:
+            30px 16px 34px;
+
+        border-radius:
             17px;
     }
 
+
+    .kyc-card::before {
+
+        left:
+            16px;
+    }
+
+
     .kyc-card-title {
-        font-size:
-            1.52rem;
-    }
-
-    .kyc-segmented-control label,
-    .segmented-control label,
-    .kyc-options label,
-    .radio-group label,
-    .choice-group label {
-
-        padding-left:
-            5px;
-
-        padding-right:
-            5px;
 
         font-size:
-            0.82rem;
+            1.43rem;
     }
+
+
+    .kyc-choice {
+
+        padding:
+            9px 4px;
+
+        font-size:
+            0.78rem;
+    }
+
+
+    .kyc-label-english {
+
+        display:
+            block;
+
+        margin:
+            2px 0 0;
+
+        font-size:
+            0.62em;
+    }
+
 }
 
 
 /* =============================================================================
-   31. ACCESSIBILITY — REDUCED MOTION
+   39. ACCESSIBILITY
+   ============================================================================= */
+
+.page02a button:focus-visible,
+.page02a input:focus-visible,
+.page02a select:focus-visible,
+.page02a textarea:focus-visible {
+
+    outline:
+        2px solid var(--p02-teal);
+
+    outline-offset:
+        3px;
+}
+
+
+/* =============================================================================
+   40. REDUCED MOTION
    ============================================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
     html {
+
         scroll-behavior:
             auto;
     }
+
 
     .page02a *,
     .page02a *::before,
@@ -2568,29 +3244,12 @@ body.page02a-body {
         animation-iteration-count:
             1 !important;
     }
+
 }
 
 
 /* =============================================================================
-   32. HIGH-CONTRAST / KEYBOARD ACCESSIBILITY
-   ============================================================================= */
-
-.page02a button:focus-visible,
-.page02a input:focus-visible,
-.page02a select:focus-visible,
-.page02a textarea:focus-visible {
-
-    outline:
-        2px solid var(--p02-teal);
-
-    outline-offset:
-        3px;
-}
-
-
-/* =============================================================================
-   33. AUTOFILL
-   Prevent Chrome autofill from destroying premium dark field styling.
+   41. AUTOFILL
    ============================================================================= */
 
 .page02a input:-webkit-autofill,
@@ -2617,12 +3276,13 @@ body.page02a-body {
 
 
 /* =============================================================================
-   34. SELECTION
+   42. TEXT SELECTION
    ============================================================================= */
 
 .page02a ::selection {
+
     background:
-        rgba(32, 201, 195, 0.30);
+        rgba(34, 211, 197, 0.28);
 
     color:
         #ffffff;
@@ -2630,22 +3290,11 @@ body.page02a-body {
 
 
 /* =============================================================================
-   35. FINAL PAGE-SPECIFIC SAFETY
-   Prevent generic global styles from stretching controls or overriding CTAs.
+   43. IMAGE SAFETY
    ============================================================================= */
 
-.page02a input[type="radio"],
-.page02a input[type="checkbox"] {
-    min-height:
-        initial;
-}
-
-.page02a button {
-    font-family:
-        inherit;
-}
-
 .page02a img {
+
     max-width:
         100%;
 
@@ -2655,8 +3304,93 @@ body.page02a-body {
 
 
 /* =============================================================================
+   44. RADIO / CHECKBOX SAFETY
+   ============================================================================= */
+
+.page02a input[type="radio"],
+.page02a input[type="checkbox"] {
+
+    min-height:
+        initial;
+}
+
+
+/* =============================================================================
+   45. BUTTON SAFETY
+   ============================================================================= */
+
+.page02a button {
+
+    font-family:
+        inherit;
+}
+
+
+/* =============================================================================
+   46. PREMIUM DARK SCROLLBAR
+   ============================================================================= */
+
+.page02a-body::-webkit-scrollbar {
+
+    width:
+        9px;
+}
+
+
+.page02a-body::-webkit-scrollbar-track {
+
+    background:
+        var(--p02-bg-deep);
+}
+
+
+.page02a-body::-webkit-scrollbar-thumb {
+
+    border:
+        2px solid var(--p02-bg-deep);
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(117, 172, 194, 0.28);
+}
+
+
+.page02a-body::-webkit-scrollbar-thumb:hover {
+
+    background:
+        rgba(34, 211, 197, 0.42);
+}
+
+
+/* =============================================================================
+   47. FINAL PRESENTATION SAFETY
+   ============================================================================= */
+
+.page02a {
+
+    isolation:
+        isolate;
+}
+
+
+.page02a .kyc-card,
+.page02a .kyc-heading,
+.page02a .kyc-progress,
+.page02a .page02-intro-action {
+
+    position:
+        relative;
+
+    z-index:
+        1;
+}
+
+
+/* =============================================================================
    END OF FILE
    CTM PATH™ MILLIONAIRES™
-   Page 02A Premium Presentation v5.0
+   PAGE 02A — GLOBAL PREMIUM PRESENTATION v6.0
    ============================================================================= */
 
