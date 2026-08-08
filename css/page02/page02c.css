@@ -20,18 +20,20 @@
    PURPOSE:
    ✓ Dimension 02 — Income & Cash Flow™ identity
    ✓ Premium midnight-lavender visual language
-   ✓ Income & Cash Flow-specific accent treatment
-   ✓ Stronger text contrast
+   ✓ Income-specific presentation
+   ✓ Strong text contrast
    ✓ Premium financial-dashboard atmosphere
    ✓ Dimension 02 progress state
    ✓ Selected-state refinement
    ✓ Aspirational benchmark refinement
    ✓ Completion-state refinement
+   ✓ Progressive Millionaire Lifestyle Scoreboard™
    ✓ Responsive preservation
    ✓ Reduced-motion and print support
 
    IMPORTANT:
    This file changes PRESENTATION ONLY.
+
    It does not alter:
    - HTML structure
    - question data
@@ -51,79 +53,79 @@
 
 .page02c {
 
-    --wealth-bg-0:
+    --income-bg-0:
         #100B1F;
 
-    --wealth-bg-1:
+    --income-bg-1:
         #17102B;
 
-    --wealth-bg-2:
+    --income-bg-2:
         #21163A;
 
-    --wealth-bg-3:
+    --income-bg-3:
         #2C1D49;
 
-    --wealth-lavender:
+    --income-lavender:
         #B9A7FF;
 
-    --wealth-lavender-soft:
+    --income-lavender-soft:
         #D9D0FF;
 
-    --wealth-lavender-bright:
+    --income-lavender-bright:
         #E9E3FF;
 
-    --wealth-violet:
+    --income-violet:
         #7C5CFF;
 
-    --wealth-violet-soft:
+    --income-violet-soft:
         rgba(124, 92, 255, 0.18);
 
-    --wealth-violet-line:
+    --income-violet-line:
         rgba(185, 167, 255, 0.30);
 
-    --wealth-teal:
+    --income-teal:
         #20D6CF;
 
-    --wealth-teal-soft:
+    --income-teal-soft:
         rgba(32, 214, 207, 0.14);
 
-    --wealth-teal-line:
+    --income-teal-line:
         rgba(32, 214, 207, 0.42);
 
-    --wealth-gold:
+    --income-gold:
         #D6B56A;
 
-    --wealth-gold-bright:
+    --income-gold-bright:
         #E7C77C;
 
-    --wealth-gold-soft:
+    --income-gold-soft:
         rgba(214, 181, 106, 0.12);
 
-    --wealth-ivory:
+    --income-ivory:
         #F7F4FF;
 
-    --wealth-white:
+    --income-white:
         #FFFFFF;
 
-    --wealth-muted:
+    --income-muted:
         rgba(232, 226, 248, 0.68);
 
-    --wealth-muted-soft:
+    --income-muted-soft:
         rgba(232, 226, 248, 0.48);
 
-    --wealth-border:
+    --income-border:
         rgba(214, 201, 255, 0.12);
 
-    --wealth-border-strong:
+    --income-border-strong:
         rgba(185, 167, 255, 0.24);
 
-    --wealth-surface:
+    --income-surface:
         rgba(255, 255, 255, 0.035);
 
-    --wealth-surface-strong:
+    --income-surface-strong:
         rgba(255, 255, 255, 0.065);
 
-    --wealth-shadow:
+    --income-shadow:
         0 24px 70px rgba(4, 2, 14, 0.34);
 
     position:
@@ -142,9 +144,6 @@
 
 /* ==========================================================================
    02. PREMIUM MIDNIGHT-LAVENDER BACKGROUND
-
-   The page remains dark and sophisticated.
-   Lavender is atmospheric rather than pastel.
 ========================================================================== */
 
 .page02c.page02-dimension {
@@ -171,21 +170,19 @@
 
         linear-gradient(
             180deg,
-            var(--wealth-bg-0) 0%,
-            var(--wealth-bg-1) 34%,
-            var(--wealth-bg-2) 68%,
-            var(--wealth-bg-1) 100%
+            var(--income-bg-0) 0%,
+            var(--income-bg-1) 34%,
+            var(--income-bg-2) 68%,
+            var(--income-bg-1) 100%
         );
 
     color:
-        var(--wealth-ivory);
+        var(--income-ivory);
 }
 
 
 /* ==========================================================================
    03. ATMOSPHERIC LIGHT
-
-   Extremely restrained. The goal is luxury depth, not visual noise.
 ========================================================================== */
 
 .page02c.page02-dimension::before {
@@ -223,8 +220,6 @@
 
 /* ==========================================================================
    04. SUBTLE VIOLET EDGE LIGHT
-
-   Gives the long page a premium dimensional edge without changing layout.
 ========================================================================== */
 
 .page02c.page02-dimension::after {
@@ -254,8 +249,6 @@
 
 /* ==========================================================================
    05. PAGE SHELL
-
-   Shared system controls master dimensions.
 ========================================================================== */
 
 .page02c .page02-dimension-shell {
@@ -285,24 +278,20 @@
 }
 
 
-/* Progress label */
-
 .page02c .dimension-progress-label {
 
     color:
-        var(--wealth-lavender);
+        var(--income-lavender);
 
     letter-spacing:
         0.16em;
 }
 
 
-/* Progress number */
-
 .page02c .dimension-progress-number {
 
     color:
-        var(--wealth-gold-bright);
+        var(--income-gold-bright);
 
     font-variant-numeric:
         tabular-nums;
@@ -311,8 +300,6 @@
         0 0 18px rgba(231, 199, 124, 0.12);
 }
 
-
-/* Progress track */
 
 .page02c .dimension-progress-track {
 
@@ -327,7 +314,12 @@
 }
 
 
-/* Initial Dimension 02 state = 2 / 5 */
+/*
+   PAGE 02C = DIMENSION 02 / 05
+
+   The shared controller owns the actual progress value.
+   This width is only a visual fallback before JS updates it.
+*/
 
 .page02c .dimension-progress-fill {
 
@@ -337,9 +329,9 @@
     background:
         linear-gradient(
             90deg,
-            var(--wealth-violet),
-            var(--wealth-lavender),
-            var(--wealth-teal)
+            var(--income-violet),
+            var(--income-lavender),
+            var(--income-teal)
         );
 
     box-shadow:
@@ -358,12 +350,10 @@
 }
 
 
-/* Dimension number */
-
 .page02c .dimension-eyebrow {
 
     color:
-        var(--wealth-gold-bright);
+        var(--income-gold-bright);
 
     letter-spacing:
         0.18em;
@@ -373,24 +363,20 @@
 }
 
 
-/* Tamil principal heading */
-
 .page02c .dimension-title-tamil {
 
     color:
-        var(--wealth-ivory);
+        var(--income-ivory);
 
     text-shadow:
         0 8px 34px rgba(0, 0, 0, 0.28);
 }
 
 
-/* English supporting identity */
-
 .page02c .dimension-title-english {
 
     color:
-        var(--wealth-lavender);
+        var(--income-lavender);
 
     letter-spacing:
         0.16em;
@@ -400,15 +386,13 @@
 }
 
 
-/* Introduction */
-
 .page02c .dimension-introduction {
 
     max-width:
         720px;
 
     color:
-        var(--wealth-muted);
+        var(--income-muted);
 
     line-height:
         1.85;
@@ -417,9 +401,6 @@
 
 /* ==========================================================================
    08. LIVE SCORE PANEL
-
-   Lavender establishes the income/cash-flow intelligence atmosphere.
-   Teal remains the interaction signal.
 ========================================================================== */
 
 .page02c .dimension-score-panel {
@@ -428,7 +409,7 @@
         30px;
 
     color:
-        var(--wealth-ivory);
+        var(--income-ivory);
 }
 
 
@@ -465,9 +446,6 @@
 
 /* ==========================================================================
    11. INCOME & CASH FLOW CARD SURFACE
-
-   The shared card architecture remains untouched.
-   This only gives the cards a violet-black luxury surface.
 ========================================================================== */
 
 .page02c .scorecard-card {
@@ -481,10 +459,10 @@
         );
 
     border-color:
-        var(--wealth-border);
+        var(--income-border);
 
     box-shadow:
-        var(--wealth-shadow);
+        var(--income-shadow);
 
     backdrop-filter:
         blur(10px);
@@ -500,8 +478,6 @@
 }
 
 
-/* First card transition */
-
 .page02c .scorecard-card:first-child {
 
     margin-top:
@@ -509,15 +485,14 @@
 }
 
 
-/* Violet top/side identity accent */
-
 .page02c .scorecard-card::before {
 
     background:
+
         linear-gradient(
             180deg,
-            var(--wealth-lavender),
-            var(--wealth-violet)
+            var(--income-lavender),
+            var(--income-violet)
         );
 
     box-shadow:
@@ -525,20 +500,17 @@
 }
 
 
-/* Hover only on capable devices */
-
 @media (hover: hover) {
 
     .page02c .scorecard-card:hover {
 
         border-color:
-            var(--wealth-border-strong);
+            var(--income-border-strong);
 
         box-shadow:
             0 28px 80px rgba(4, 2, 14, 0.42),
             0 0 0 1px rgba(185, 167, 255, 0.035);
     }
-
 }
 
 
@@ -552,7 +524,7 @@
         rgba(185, 167, 255, 0.38);
 
     color:
-        var(--wealth-lavender);
+        var(--income-lavender);
 
     background:
         rgba(124, 92, 255, 0.075);
@@ -569,14 +541,14 @@
 .page02c .scorecard-title {
 
     color:
-        var(--wealth-ivory);
+        var(--income-ivory);
 }
 
 
 .page02c .scorecard-title-english {
 
     color:
-        var(--wealth-lavender);
+        var(--income-lavender);
 
     opacity:
         0.92;
@@ -587,10 +559,7 @@
 
 
 /* ==========================================================================
-   14. IDEAL BENCHMARK
-
-   Gold means aspiration.
-   It does NOT mean selected.
+   14. IDEAL INCOME BENCHMARK
 ========================================================================== */
 
 .page02c .scorecard-ideal {
@@ -599,6 +568,7 @@
         rgba(214, 181, 106, 0.42);
 
     background:
+
         linear-gradient(
             145deg,
             rgba(214, 181, 106, 0.115),
@@ -620,7 +590,7 @@
 .page02c .scorecard-ideal-value {
 
     color:
-        var(--wealth-gold-bright);
+        var(--income-gold-bright);
 
     text-shadow:
         0 0 18px rgba(231, 199, 124, 0.10);
@@ -629,8 +599,6 @@
 
 /* ==========================================================================
    15. RANGE OPTIONS
-
-   Shared Page 02 controls the actual answer architecture.
 ========================================================================== */
 
 .page02c .scorecard-option {
@@ -642,7 +610,7 @@
         rgba(185, 167, 255, 0.13);
 
     color:
-        var(--wealth-ivory);
+        var(--income-ivory);
 
     backdrop-filter:
         blur(4px);
@@ -658,28 +626,22 @@
 }
 
 
-/* Option text hierarchy */
-
 .page02c .scorecard-option .option-label,
 .page02c .scorecard-option .option-text {
 
     color:
-        var(--wealth-ivory);
+        var(--income-ivory);
 }
 
-
-/* Small explanatory text */
 
 .page02c .scorecard-option small,
 .page02c .scorecard-option .option-subtitle,
 .page02c .scorecard-option .option-description {
 
     color:
-        var(--wealth-muted-soft);
+        var(--income-muted-soft);
 }
 
-
-/* Hover */
 
 @media (hover: hover) {
 
@@ -694,21 +656,18 @@
         box-shadow:
             0 12px 30px rgba(4, 2, 14, 0.22);
     }
-
 }
 
 
 /* ==========================================================================
-   16. SELECTED RANGE
-
-   Teal remains the unmistakable interaction/selection language.
+   16. SELECTED INCOME RANGE
 ========================================================================== */
 
 .page02c .scorecard-option.is-selected,
 .page02c .scorecard-option[aria-pressed="true"] {
 
     border-color:
-        var(--wealth-teal);
+        var(--income-teal);
 
     background:
 
@@ -725,22 +684,18 @@
 }
 
 
-/* Selected option text */
-
 .page02c .scorecard-option.is-selected .option-label,
 .page02c .scorecard-option.is-selected .option-text,
 .page02c .scorecard-option[aria-pressed="true"] .option-label,
 .page02c .scorecard-option[aria-pressed="true"] .option-text {
 
     color:
-        var(--wealth-white);
+        var(--income-white);
 }
 
 
 /* ==========================================================================
    17. TARGET / FOURTH RANGE
-
-   The fourth answer is aspirational gold when not selected.
 ========================================================================== */
 
 .page02c .scorecard-option:nth-child(4):not(.is-selected):not(
@@ -751,6 +706,7 @@
         rgba(214, 181, 106, 0.38);
 
     background:
+
         linear-gradient(
             145deg,
             rgba(214, 181, 106, 0.065),
@@ -770,14 +726,12 @@
         rgba(214, 181, 106, 0.085);
 
     color:
-        var(--wealth-gold-bright);
+        var(--income-gold-bright);
 }
 
 
 /* ==========================================================================
    18. OPTION SCORE / MARKER
-
-   Gives the numeric answer marker a premium jewel-like treatment.
 ========================================================================== */
 
 .page02c .option-score {
@@ -786,14 +740,12 @@
         rgba(185, 167, 255, 0.24);
 
     color:
-        var(--wealth-lavender);
+        var(--income-lavender);
 
     background:
         rgba(124, 92, 255, 0.055);
 }
 
-
-/* Selected marker */
 
 .page02c .scorecard-option.is-selected .option-score,
 .page02c .scorecard-option[aria-pressed="true"] .option-score {
@@ -805,7 +757,7 @@
         rgba(32, 214, 207, 0.11);
 
     color:
-        var(--wealth-teal);
+        var(--income-teal);
 }
 
 
@@ -819,21 +771,21 @@
         28px;
 
     color:
-        var(--wealth-muted);
+        var(--income-muted);
 }
 
 
 .page02c [data-dimension-complete][data-complete="true"] {
 
     color:
-        var(--wealth-teal);
+        var(--income-teal);
 }
 
 
 .page02c .dimension-completion.is-complete {
 
     color:
-        var(--wealth-teal);
+        var(--income-teal);
 
     text-shadow:
         0 0 18px rgba(32, 214, 207, 0.12);
@@ -850,15 +802,12 @@
         1020px;
 
     color:
-        var(--wealth-muted);
+        var(--income-muted);
 }
 
 
 /* ==========================================================================
    21. NAVIGATION
-
-   Shared Page 02 system owns the button geometry.
-   Page 02C supplies the premium visual emphasis.
 ========================================================================== */
 
 .page02c .dimension-navigation {
@@ -867,8 +816,6 @@
         4px;
 }
 
-
-/* Primary CTA */
 
 .page02c .dimension-button-primary {
 
@@ -885,9 +832,6 @@
 
 /* ==========================================================================
    22. SCORE GUIDE / SUPPORTING PANELS
-
-   These selectors are intentionally conservative.
-   They enhance contrast if the shared system exposes these classes.
 ========================================================================== */
 
 .page02c .score-guide,
@@ -895,7 +839,7 @@
 .page02c .scorecard-guide {
 
     color:
-        var(--wealth-muted);
+        var(--income-muted);
 
     border-color:
         rgba(185, 167, 255, 0.12);
@@ -910,15 +854,12 @@
 .page02c .scorecard-guide strong {
 
     color:
-        var(--wealth-lavender-soft);
+        var(--income-lavender-soft);
 }
 
 
 /* ==========================================================================
    23. LIVE SCORE / SCORE MEDALLION SUPPORT
-
-   The shared system remains responsible for the actual score component.
-   These selectors only reinforce the Income & Cash Flow colour language.
 ========================================================================== */
 
 .page02c .score-medallion,
@@ -929,6 +870,7 @@
         rgba(185, 167, 255, 0.22);
 
     background:
+
         radial-gradient(
             circle at 35% 28%,
             rgba(185, 167, 255, 0.10),
@@ -950,7 +892,7 @@
 .page02c a:focus-visible {
 
     outline:
-        2px solid var(--wealth-lavender-bright);
+        2px solid var(--income-lavender-bright);
 
     outline-offset:
         3px;
@@ -961,17 +903,45 @@
 
 
 /* ==========================================================================
-   12A. PROGRESSIVE MILLIONAIRE LIFESTYLE SCOREBOARD
-
-   page02c.js creates this scoreboard dynamically after the five
-   dimension questions are rendered.
+   25. PROGRESSIVE MILLIONAIRE LIFESTYLE SCOREBOARD™
 
    IMPORTANT:
-   The five dimensions are the five columns.
-   GRAND TOTAL is intentionally kept in the scoreboard header.
-   Therefore the desktop grid is FIVE columns — never six.
+
+   page02c.js uses the same scoreboard markup architecture established
+   and frozen on Page 02B.
+
+   Therefore the selectors below intentionally target:
+
+       .page02b-progressive-*
+
+   while remaining scoped inside:
+
+       .page02c
+
+   This allows Page 02C to consume the same scoreboard controller markup
+   without duplicating or changing the controller architecture.
+
+   FIVE DIMENSIONS:
+       01 Wealth™
+       02 Income & Cash Flow™
+       03 Assets™
+       04 Lifestyle & Freedom™
+       05 Protection & Contribution™
+
+   GRAND TOTAL:
+       / 100
+
+   IMPORTANT:
+   Grand Total is displayed in the scoreboard header.
+   Therefore the dimension area contains FIVE columns.
 ========================================================================== */
 
+
+/* --------------------------------------------------------------------------
+   SCOREBOARD
+-------------------------------------------------------------------------- */
+
+.page02c #page02ProgressiveScoreboard,
 .page02c .page02b-progressive-scoreboard {
 
     position:
@@ -993,6 +963,7 @@
         28px;
 
     background:
+
         linear-gradient(
             145deg,
             rgba(30, 20, 58, 0.96),
@@ -1029,6 +1000,7 @@
         1px solid rgba(168, 140, 255, 0.12);
 
     background:
+
         linear-gradient(
             135deg,
             rgba(24, 15, 48, 0.96),
@@ -1059,7 +1031,7 @@
         block;
 
     color:
-        #b9a7ef;
+        #B9A7EF;
 
     font-size:
         12px;
@@ -1084,7 +1056,7 @@
         block;
 
     color:
-        #f4f0ff;
+        #F4F0FF;
 
     font-size:
         clamp(22px, 2vw, 30px);
@@ -1115,6 +1087,7 @@
         18px;
 
     background:
+
         linear-gradient(
             145deg,
             rgba(216, 173, 88, 0.09),
@@ -1173,7 +1146,7 @@
 .page02c .page02b-progressive-total-value strong {
 
     color:
-        #e8c472;
+        #E8C472;
 
     font-family:
         Georgia,
@@ -1226,6 +1199,7 @@
         1px solid rgba(168, 140, 255, 0.10);
 
     background:
+
         linear-gradient(
             180deg,
             rgba(55, 40, 96, 0.24),
@@ -1246,11 +1220,14 @@
 }
 
 
-/* CURRENT DIMENSION */
+/* --------------------------------------------------------------------------
+   CURRENT DIMENSION
+-------------------------------------------------------------------------- */
 
 .page02c .page02b-progressive-column.is-current {
 
     background:
+
         linear-gradient(
             180deg,
             rgba(79, 57, 136, 0.38),
@@ -1258,15 +1235,18 @@
         );
 
     box-shadow:
-        inset 0 -3px 0 #22c7bd;
+        inset 0 -3px 0 #22C7BD;
 }
 
 
-/* STARTED DIMENSION */
+/* --------------------------------------------------------------------------
+   STARTED DIMENSION
+-------------------------------------------------------------------------- */
 
 .page02c .page02b-progressive-column.is-started {
 
     background:
+
         linear-gradient(
             180deg,
             rgba(54, 41, 96, 0.34),
@@ -1275,7 +1255,9 @@
 }
 
 
-/* COMPLETED DIMENSION */
+/* --------------------------------------------------------------------------
+   COMPLETED DIMENSION
+-------------------------------------------------------------------------- */
 
 .page02c .page02b-progressive-column.is-complete {
 
@@ -1284,7 +1266,9 @@
 }
 
 
-/* DIMENSION NUMBER */
+/* --------------------------------------------------------------------------
+   DIMENSION NUMBER
+-------------------------------------------------------------------------- */
 
 .page02c .page02b-progressive-column-number {
 
@@ -1292,7 +1276,7 @@
         13px;
 
     color:
-        #9d8bd5;
+        #9D8BD5;
 
     font-family:
         Georgia,
@@ -1310,20 +1294,19 @@
 }
 
 
-/* CURRENT / COMPLETED NUMBER */
-
 .page02c .page02b-progressive-column.is-current
 .page02b-progressive-column-number,
-
 .page02c .page02b-progressive-column.is-complete
 .page02b-progressive-column-number {
 
     color:
-        #d8ad58;
+        #D8AD58;
 }
 
 
-/* DIMENSION NAME */
+/* --------------------------------------------------------------------------
+   DIMENSION NAME
+-------------------------------------------------------------------------- */
 
 .page02c .page02b-progressive-column-name {
 
@@ -1347,7 +1330,7 @@
         block;
 
     color:
-        #f4f0ff;
+        #F4F0FF;
 
     font-family:
         Georgia,
@@ -1372,7 +1355,7 @@
         block;
 
     color:
-        #b9a7ef;
+        #B9A7EF;
 
     font-family:
         Georgia,
@@ -1393,7 +1376,9 @@
 }
 
 
-/* SCORE */
+/* --------------------------------------------------------------------------
+   SCORE
+-------------------------------------------------------------------------- */
 
 .page02c .page02b-progressive-column-score {
 
@@ -1422,7 +1407,7 @@
 .page02c .page02b-progressive-column-score strong {
 
     color:
-        #e8c472;
+        #E8C472;
 
     font-size:
         30px;
@@ -1442,7 +1427,9 @@
 }
 
 
-/* PROGRESS LABEL */
+/* --------------------------------------------------------------------------
+   PROGRESS LABEL
+-------------------------------------------------------------------------- */
 
 .page02c .page02b-progressive-column-progress {
 
@@ -1473,7 +1460,7 @@
 .page02b-progressive-column-progress {
 
     color:
-        #22c7bd;
+        #22C7BD;
 }
 
 
@@ -1481,23 +1468,68 @@
 .page02b-progressive-column-progress {
 
     color:
-        #22c7bd;
+        #22C7BD;
+}
+
+
+/* --------------------------------------------------------------------------
+   GRAND TOTAL COLUMN / GOLD EMPHASIS
+
+   Kept for compatibility with earlier scoreboard markup versions.
+-------------------------------------------------------------------------- */
+
+.page02c .page02b-progressive-column:last-child
+.page02b-progressive-column-name {
+
+    min-height:
+        50px;
+}
+
+
+.page02c .page02b-progressive-column:last-child
+.page02b-progressive-column-english {
+
+    color:
+        rgba(231, 199, 124, 0.78);
+}
+
+
+.page02c .page02b-progressive-column:last-child
+.page02b-progressive-column-score strong {
+
+    color:
+        var(--income-gold-bright);
+
+    font-size:
+        30px;
+}
+
+
+@media (hover: hover) {
+
+    .page02c .page02b-progressive-column:hover {
+
+        background:
+            rgba(185, 167, 255, 0.045);
+    }
 }
 
 
 /* ==========================================================================
-   12B. SCOREBOARD + BOTTOM SCORE RELATIONSHIP
+   26. SCOREBOARD + BOTTOM SCORE RELATIONSHIP
 ========================================================================== */
 
 .page02c .page02b-progressive-scoreboard
-+ .page02b-bottom-dimension-score {
++ .page02c-bottom-dimension-score,
+.page02c #page02ProgressiveScoreboard
++ .page02c-bottom-dimension-score {
 
     margin-top:
         26px;
 }
 
 
-.page02c .page02b-bottom-dimension-score {
+.page02c .page02c-bottom-dimension-score {
 
     position:
         relative;
@@ -1505,7 +1537,7 @@
 
 
 /* ==========================================================================
-   12C. SCOREBOARD TABLET
+   27. SCOREBOARD TABLET
 ========================================================================== */
 
 @media (max-width: 1000px) {
@@ -1536,22 +1568,21 @@
         border-top:
             1px solid rgba(168, 140, 255, 0.10);
     }
-
 }
 
 
 /* ==========================================================================
-   12D. SCOREBOARD MOBILE
+   28. SCOREBOARD MOBILE
 
-   Explicitly redeclares every structural property here so that the
-   scoreboard cannot inherit an incompatible desktop grid/flex rule from
-   page02-shared.css.
+   Explicitly redeclares structural properties so the scoreboard cannot
+   inherit an incompatible desktop grid/flex rule from page02-shared.css.
 
    ONE CARD PER ROW.
 ========================================================================== */
 
 @media (max-width: 768px) {
 
+    .page02c #page02ProgressiveScoreboard,
     .page02c .page02b-progressive-scoreboard {
 
         display:
@@ -1709,6 +1740,7 @@
             1px solid rgba(168, 140, 255, 0.10);
 
         background:
+
             linear-gradient(
                 135deg,
                 rgba(45, 32, 82, 0.42),
@@ -1819,7 +1851,8 @@
     .page02c .page02b-progressive-column.is-current {
 
         box-shadow:
-            inset 4px 0 0 #22c7bd,
+
+            inset 4px 0 0 #22C7BD,
             inset 0 -1px 0 rgba(168, 140, 255, 0.10);
     }
 
@@ -1827,23 +1860,23 @@
     .page02c .page02b-progressive-column.is-complete {
 
         box-shadow:
+
             inset 4px 0 0 rgba(34, 199, 189, 0.78),
             inset 0 -1px 0 rgba(168, 140, 255, 0.10);
     }
 
 
     .page02c .page02b-progressive-scoreboard
-    + .page02b-bottom-dimension-score {
+    + .page02c-bottom-dimension-score {
 
         margin-top:
             20px;
     }
-
 }
 
 
 /* ==========================================================================
-   12E. SMALL MOBILE
+   29. SMALL MOBILE
 ========================================================================== */
 
 @media (max-width: 420px) {
@@ -1901,12 +1934,11 @@
         font-size:
             24px;
     }
-
 }
 
 
 /* ==========================================================================
-   25. TABLET
+   30. TABLET
 ========================================================================== */
 
 @media (max-width: 900px) {
@@ -1930,12 +1962,11 @@
         box-shadow:
             0 18px 54px rgba(4, 2, 14, 0.30);
     }
-
 }
 
 
 /* ==========================================================================
-   26. MOBILE
+   31. MOBILE
 ========================================================================== */
 
 @media (max-width: 768px) {
@@ -1996,12 +2027,11 @@
         -webkit-backdrop-filter:
             blur(3px);
     }
-
 }
 
 
 /* ==========================================================================
-   27. SMALL MOBILE
+   32. SMALL MOBILE
 ========================================================================== */
 
 @media (max-width: 420px) {
@@ -2032,12 +2062,11 @@
         box-shadow:
             0 14px 38px rgba(4, 2, 14, 0.26);
     }
-
 }
 
 
 /* ==========================================================================
-   28. REDUCED MOTION
+   33. REDUCED MOTION
 ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
@@ -2067,12 +2096,11 @@
         scroll-behavior:
             auto !important;
     }
-
 }
 
 
 /* ==========================================================================
-   29. PRINT
+   34. PRINT
 ========================================================================== */
 
 @media print {
@@ -2083,7 +2111,7 @@
             auto;
 
         background:
-            #ffffff !important;
+            #FFFFFF !important;
 
         color:
             #111111 !important;
@@ -2093,10 +2121,10 @@
     .page02c .scorecard-card {
 
         background:
-            #ffffff !important;
+            #FFFFFF !important;
 
         border:
-            1px solid #cccccc !important;
+            1px solid #CCCCCC !important;
 
         box-shadow:
             none !important;
@@ -2115,11 +2143,50 @@
             #111111 !important;
     }
 
+
+    .page02c #page02ProgressiveScoreboard,
+    .page02c .page02b-progressive-scoreboard {
+
+        background:
+            #FFFFFF !important;
+
+        border:
+            1px solid #CCCCCC !important;
+
+        box-shadow:
+            none !important;
+
+        color:
+            #111111 !important;
+    }
+
+
+    .page02c .page02b-progressive-scoreboard-header,
+    .page02c .page02b-progressive-column {
+
+        background:
+            #FFFFFF !important;
+    }
+
+
+    .page02c .page02b-progressive-scoreboard-title,
+    .page02c .page02b-progressive-column-tamil {
+
+        color:
+            #111111 !important;
+    }
+
+
+    .page02c .page02b-progressive-column-english {
+
+        color:
+            #444444 !important;
+    }
 }
 
 
 /* ==========================================================================
-   30. FINAL ARCHITECTURE NOTE
+   35. FINAL ARCHITECTURE NOTE
 
    page02-shared.css
            ↓
@@ -2129,6 +2196,7 @@
            ↓
    Dimension 02 / Income & Cash Flow™ identity
    Midnight-lavender luxury presentation
+   Progressive Millionaire Lifestyle Scoreboard™
 
    HTML
            ↓
@@ -2137,6 +2205,7 @@
    page02c.js
            ↓
    Navigation / scorecard controller integration
+   Progressive journey score integration
 
    NO scoring logic is recreated here.
    NO navigation logic is recreated here.
@@ -2156,15 +2225,16 @@
        CHAMPAGNE-GOLD ASPIRATION
 
    The result should feel like:
+
        premium wealth intelligence
        + personal transformation
        + financial sophistication
 
    NOT:
+
        generic purple
        pastel wellness
        gaming UI
        cryptocurrency dashboard
-
 ========================================================================== */
 
