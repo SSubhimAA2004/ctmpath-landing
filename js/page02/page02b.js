@@ -8,7 +8,7 @@
  * js/page02/page02b.js
  *
  * VERSION:
- * 4.0 — PROGRESSIVE DIMENSION SCOREBOARD
+ * 4.1 — CLEAN PROGRESSIVE DIMENSION SCOREBOARD
  *
  * PAGE:
  * PAGE 02B — DIMENSION 01 — WEALTH™
@@ -33,10 +33,7 @@
  *
  * =============================================================================
  *
- * SHARED RESPONSIBILITIES DELEGATED TO:
- *
- *      component-loader.js
- *          → global header / footer lifecycle
+ * SHARED RESPONSIBILITIES
  *
  *      page02-data.js
  *          → indicator definitions / ranges / dimensions
@@ -51,7 +48,6 @@
  *
  * THIS FILE:
  *
- *      ✓ loads global header + footer
  *      ✓ initializes Wealth™
  *      ✓ binds Previous
  *      ✓ binds Next
@@ -62,7 +58,7 @@
  *      ✓ restores saved Wealth™ state
  *      ✓ provides keyboard navigation
  *      ✓ moves the dimension score to the bottom
- *      ✓ creates the progressive six-column scorecard
+ *      ✓ creates the progressive six-column scoreboard
  *      ✓ updates progressive dimension scores after every answer
  *      ✓ updates the progressive Grand Total /100
  *
@@ -73,7 +69,7 @@
  *      ✗ recreate scoring logic
  *      ✗ render answer options
  *      ✗ call backend
- *      ✗ contain header/footer markup
+ *      ✗ load global header/footer components
  *
  * =============================================================================
  */
@@ -108,6 +104,9 @@ const CONFIG = {
         100,
 
     dimensionCount:
+        5,
+
+    indicatorCount:
         5
 };
 
@@ -118,12 +117,6 @@ const CONFIG = {
  */
 
 const DOM_IDS = {
-
-    globalHeader:
-        'global-header',
-
-    globalFooter:
-        'global-footer',
 
     previousButton:
         'previousButton',
@@ -141,7 +134,16 @@ const DOM_IDS = {
         'dimensionScoreTotal',
 
     dimensionNavigation:
-        'dimensionNavigation'
+        'dimensionNavigation',
+
+    progressiveScoreboard:
+        'page02ProgressiveScoreboard',
+
+    progressiveColumns:
+        'page02ProgressiveColumns',
+
+    progressiveGrandTotal:
+        'page02ProgressiveGrandTotal'
 };
 
 
@@ -192,106 +194,6 @@ function scrollToTop(){
         behavior:
             'auto'
     });
-}
-
-
-/* =============================================================================
- * GLOBAL COMPONENT MOUNT CONTRACT
- * =============================================================================
- */
-
-function verifyComponentMounts(){
-
-    const headerMount =
-        getElement(
-            DOM_IDS.globalHeader
-        );
-
-    const footerMount =
-        getElement(
-            DOM_IDS.globalFooter
-        );
-
-
-    if(!headerMount){
-
-        console.warn(
-            'CTM PATH™ Page 02B: #global-header mount not found.'
-        );
-    }
-
-
-    if(!footerMount){
-
-        console.warn(
-            'CTM PATH™ Page 02B: #global-footer mount not found.'
-        );
-    }
-
-
-    return (
-        !!headerMount &&
-        !!footerMount
-    );
-}
-
-
-/* =============================================================================
- * GLOBAL COMPONENT LOADER
- *
- * Header/footer loading is intentionally NON-FATAL.
- * =============================================================================
- */
-
-async function loadGlobalComponents(){
-
-    verifyComponentMounts();
-
-
-    if(
-        !window.CTM_COMPONENTS ||
-        typeof window.CTM_COMPONENTS.load !==
-            'function'
-    ){
-
-        console.warn(
-            'CTM PATH™ Page 02B: global component loader unavailable.'
-        );
-
-        return false;
-    }
-
-
-    try{
-
-        console.info(
-            'CTM PATH™ Page 02B: loading global components...'
-        );
-
-
-        const result =
-            await window.CTM_COMPONENTS.load();
-
-
-        console.info(
-            'CTM PATH™ Page 02B: global header and footer ready.',
-            result || null
-        );
-
-
-        return true;
-
-    }
-    catch(error){
-
-        console.error(
-            'CTM PATH™ Page 02B: global component loading failed.',
-            error
-        );
-
-
-        return false;
-    }
 }
 
 
@@ -382,7 +284,8 @@ function verifyDimension(){
         !Array.isArray(
             dimension.indicators
         ) ||
-        dimension.indicators.length !== 5
+        dimension.indicators.length !==
+            CONFIG.indicatorCount
     ){
 
         console.error(
@@ -441,7 +344,9 @@ function getAllDimensions(){
 
 
         if(
-            Array.isArray(dimensions)
+            Array.isArray(
+                dimensions
+            )
         ){
 
             return dimensions;
@@ -456,7 +361,7 @@ function getAllDimensions(){
 /* =============================================================================
  * GET DIMENSION SCORE
  *
- * Delegates actual score calculation to Page02Session.
+ * Actual score calculation remains owned by Page02Session.
  * =============================================================================
  */
 
@@ -501,53 +406,12 @@ function getDimensionScore(
 
 
 /* =============================================================================
- * GET PROGRESSIVE TOTAL
- *
- * Grand Total is simply the sum of the five dimension scores.
- *
- * No new scoring model is introduced.
- * =============================================================================
- */
-
-function getProgressiveTotal(){
-
-    const dimensions =
-        getAllDimensions();
-
-
-    if(
-        !dimensions.length
-    ){
-
-        return 0;
-    }
-
-
-    return dimensions.reduce(
-
-        function(
-            total,
-            dimension
-        ){
-
-            return (
-                total +
-                getDimensionScore(
-                    dimension.id
-                )
-            );
-
-        },
-
-        0
-    );
-}
-
-
-/* =============================================================================
  * GET DIMENSION ANSWERED COUNT
  *
  * Used only for progressive display.
+ *
+ * A dimension contributes to the progressive Grand Total only when at least
+ * one indicator has been answered.
  * =============================================================================
  */
 
@@ -570,7 +434,9 @@ function getDimensionAnsweredCount(
         if(
             progress &&
             Number.isFinite(
-                Number(progress.answered)
+                Number(
+                    progress.answered
+                )
             )
         ){
 
@@ -585,9 +451,11 @@ function getDimensionAnsweredCount(
         window.Page02Data &&
         typeof window.Page02Data.getDimensionById ===
             'function'
+
             ? window.Page02Data.getDimensionById(
                 dimensionId
             )
+
             : null;
 
 
@@ -638,7 +506,82 @@ function getDimensionAnsweredCount(
 
 
 /* =============================================================================
- * NORMALIZE DIMENSION NAME
+ * GET PROGRESSIVE TOTAL
+ *
+ * IMPORTANT:
+ *
+ * The progressive Grand Total is NOT the raw sum of every stored dimension.
+ *
+ * Only dimensions that have actually been started contribute.
+ *
+ * Therefore:
+ *
+ *      answered dimension
+ *          → score contributes
+ *
+ *      unanswered dimension
+ *          → contributes zero
+ *
+ * This keeps the programmatic total consistent with the visible scoreboard.
+ * =============================================================================
+ */
+
+function getProgressiveTotal(){
+
+    const dimensions =
+        getAllDimensions();
+
+
+    if(
+        !dimensions.length
+    ){
+
+        return 0;
+    }
+
+
+    return dimensions
+        .slice(
+            0,
+            CONFIG.dimensionCount
+        )
+        .reduce(
+
+            function(
+                total,
+                dimension
+            ){
+
+                const answered =
+                    getDimensionAnsweredCount(
+                        dimension.id
+                    );
+
+
+                if(
+                    answered <= 0
+                ){
+
+                    return total;
+                }
+
+
+                return (
+                    total +
+                    getDimensionScore(
+                        dimension.id
+                    )
+                );
+
+            },
+
+            0
+        );
+}
+
+
+/* =============================================================================
+ * NORMALIZE DIMENSION NAME — ENGLISH
  * =============================================================================
  */
 
@@ -684,7 +627,7 @@ function getDimensionEnglish(
 
 
 /* =============================================================================
- * NORMALIZE DIMENSION TAMIL
+ * NORMALIZE DIMENSION NAME — TAMIL
  * =============================================================================
  */
 
@@ -719,6 +662,47 @@ function getDimensionTamil(
 
 
 /* =============================================================================
+ * HTML ESCAPE
+ *
+ * Dimension names originate from the canonical data layer.
+ * Dynamic insertion is escaped before entering innerHTML.
+ * =============================================================================
+ */
+
+function escapeHtml(
+    value
+){
+
+    return String(
+        value === undefined ||
+        value === null
+            ? ''
+            : value
+    )
+        .replace(
+            /&/g,
+            '&amp;'
+        )
+        .replace(
+            /</g,
+            '&lt;'
+        )
+        .replace(
+            />/g,
+            '&gt;'
+        )
+        .replace(
+            /"/g,
+            '&quot;'
+        )
+        .replace(
+            /'/g,
+            '&#039;'
+        );
+}
+
+
+/* =============================================================================
  * FIND EXISTING SCORE PANEL
  * =============================================================================
  */
@@ -747,18 +731,20 @@ function getDimensionNavigation(){
 /* =============================================================================
  * RELOCATE LIVE DIMENSION SCORE
  *
- * Existing HTML contains the score panel inside the header.
+ * Existing HTML contains the live dimension score.
  *
- * The requested presentation is:
+ * Requested presentation:
  *
  *      QUESTIONS
+ *          ↓
+ *      LIVE DIMENSION SCORE
  *          ↓
  *      PROGRESSIVE SCOREBOARD
  *          ↓
  *      NAVIGATION
  *
- * Therefore the existing score panel is moved without changing its
- * markup or its scoring behaviour.
+ * The score panel itself is not recreated.
+ * Only its position is changed.
  * =============================================================================
  */
 
@@ -798,7 +784,7 @@ function relocateDimensionScore(){
 /* =============================================================================
  * CREATE PROGRESSIVE SCOREBOARD
  *
- * Six columns:
+ * Six cards:
  *
  *      01 Wealth™
  *      02 Income & Cash Flow™
@@ -807,30 +793,33 @@ function relocateDimensionScore(){
  *      05 Protection & Contribution™
  *      GRAND TOTAL
  *
- * Future dimensions display:
+ * Future dimensions:
  *
  *      — / 20
  *
- * Answered dimensions display:
+ * Answered dimensions:
  *
  *      score / 20
  *
  * Grand Total:
  *
- *      total / 100
+ *      progressive total / 100
  *
+ * This is the ONLY page-level progressive scoreboard.
  * =============================================================================
  */
 
 function createProgressiveScoreboard(){
 
     let board =
-        document.getElementById(
-            'page02ProgressiveScoreboard'
+        getElement(
+            DOM_IDS.progressiveScoreboard
         );
 
 
-    if(board){
+    if(
+        board
+    ){
 
         return board;
     }
@@ -841,8 +830,13 @@ function createProgressiveScoreboard(){
 
 
     if(
-        !navigation
+        !navigation ||
+        !navigation.parentNode
     ){
+
+        console.warn(
+            'CTM PATH™ Page 02B: dimension navigation not found; progressive scoreboard cannot be mounted.'
+        );
 
         return null;
     }
@@ -855,7 +849,7 @@ function createProgressiveScoreboard(){
 
 
     board.id =
-        'page02ProgressiveScoreboard';
+        DOM_IDS.progressiveScoreboard;
 
 
     board.className =
@@ -894,8 +888,17 @@ function createProgressiveScoreboard(){
                 </span>
 
                 <span class="page02b-progressive-total-value">
-                    <strong id="page02ProgressiveGrandTotal">0</strong>
-                    <span>/ 100</span>
+
+                    <strong
+                        id="${DOM_IDS.progressiveGrandTotal}"
+                    >
+                        0
+                    </strong>
+
+                    <span>
+                        / 100
+                    </span>
+
                 </span>
 
             </div>
@@ -903,7 +906,7 @@ function createProgressiveScoreboard(){
         </div>
 
         <div
-            id="page02ProgressiveColumns"
+            id="${DOM_IDS.progressiveColumns}"
             class="page02b-progressive-columns"
         ></div>
 
@@ -944,14 +947,14 @@ function renderProgressiveScoreboard(){
 
 
     const columns =
-        document.getElementById(
-            'page02ProgressiveColumns'
+        getElement(
+            DOM_IDS.progressiveColumns
         );
 
 
     const grandTotal =
-        document.getElementById(
-            'page02ProgressiveGrandTotal'
+        getElement(
+            DOM_IDS.progressiveGrandTotal
         );
 
 
@@ -1005,10 +1008,18 @@ function renderProgressiveScoreboard(){
 
 
                 const isComplete =
-                    answered >= 5;
+                    answered >=
+                    CONFIG.indicatorCount;
 
 
-                if(isAnswered){
+                /*
+                 * Only started dimensions contribute to the progressive
+                 * Grand Total.
+                 */
+
+                if(
+                    isAnswered
+                ){
 
                     progressiveTotal +=
                         score;
@@ -1025,7 +1036,9 @@ function renderProgressiveScoreboard(){
                     'page02b-progressive-column';
 
 
-                if(isCurrent){
+                if(
+                    isCurrent
+                ){
 
                     column.classList.add(
                         'is-current'
@@ -1033,7 +1046,9 @@ function renderProgressiveScoreboard(){
                 }
 
 
-                if(isAnswered){
+                if(
+                    isAnswered
+                ){
 
                     column.classList.add(
                         'is-started'
@@ -1041,7 +1056,9 @@ function renderProgressiveScoreboard(){
                 }
 
 
-                if(isComplete){
+                if(
+                    isComplete
+                ){
 
                     column.classList.add(
                         'is-complete'
@@ -1078,35 +1095,53 @@ function renderProgressiveScoreboard(){
 
                 const progressLabel =
                     isComplete
+
                         ? 'COMPLETE'
+
                         : (
                             isAnswered
-                                ? `${answered} / 5`
+                                ? `${answered} / ${CONFIG.indicatorCount}`
                                 : 'NOT STARTED'
                         );
 
 
                 column.innerHTML = `
 
-                    <div class="page02b-progressive-column-number">
+                    <div
+                        class="page02b-progressive-column-number"
+                    >
                         ${number}
                     </div>
 
-                    <div class="page02b-progressive-column-name">
+                    <div
+                        class="page02b-progressive-column-name"
+                    >
 
                         ${
                             tamil
-                                ? `<span class="page02b-progressive-column-tamil">${escapeHtml(tamil)}</span>`
+
+                                ? `
+                                    <span
+                                        class="page02b-progressive-column-tamil"
+                                    >
+                                        ${escapeHtml(tamil)}
+                                    </span>
+                                  `
+
                                 : ''
                         }
 
-                        <span class="page02b-progressive-column-english">
+                        <span
+                            class="page02b-progressive-column-english"
+                        >
                             ${escapeHtml(english)}
                         </span>
 
                     </div>
 
-                    <div class="page02b-progressive-column-score">
+                    <div
+                        class="page02b-progressive-column-score"
+                    >
 
                         <strong>
                             ${displayScore}
@@ -1118,7 +1153,9 @@ function renderProgressiveScoreboard(){
 
                     </div>
 
-                    <div class="page02b-progressive-column-progress">
+                    <div
+                        class="page02b-progressive-column-progress"
+                    >
                         ${progressLabel}
                     </div>
 
@@ -1133,17 +1170,16 @@ function renderProgressiveScoreboard(){
         );
 
 
-    /*
-     * Grand total must represent the progressive score only.
-     *
-     * Since future dimensions are unanswered they contribute zero.
-     */
-
-    if(grandTotal){
+    if(
+        grandTotal
+    ){
 
         grandTotal.textContent =
             String(
-                progressiveTotal
+                Math.min(
+                    CONFIG.totalMaximum,
+                    progressiveTotal
+                )
             );
     }
 
@@ -1159,49 +1195,11 @@ function renderProgressiveScoreboard(){
 
 
 /* =============================================================================
- * HTML ESCAPE
- *
- * Dimension names originate from the canonical data layer.
- * This keeps dynamic insertion safe.
- * =============================================================================
- */
-
-function escapeHtml(
-    value
-){
-
-    return String(
-        value
-    )
-        .replace(
-            /&/g,
-            '&amp;'
-        )
-        .replace(
-            /</g,
-            '&lt;'
-        )
-        .replace(
-            />/g,
-            '&gt;'
-        )
-        .replace(
-            /"/g,
-            '&quot;'
-        )
-        .replace(
-            /'/g,
-            '&#039;'
-        );
-}
-
-
-/* =============================================================================
  * UPDATE LIVE DIMENSION SCORE
  *
- * The actual score is still owned by Page02Scorecard.
+ * The actual score remains owned by Page02Scorecard.
  *
- * This controller only refreshes the display.
+ * This function only updates the existing visual score panel.
  * =============================================================================
  */
 
@@ -1233,7 +1231,9 @@ function updateBottomDimensionScore(){
         );
 
 
-    if(current){
+    if(
+        current
+    ){
 
         current.textContent =
             Number.isFinite(score)
@@ -1242,7 +1242,9 @@ function updateBottomDimensionScore(){
     }
 
 
-    if(total){
+    if(
+        total
+    ){
 
         total.textContent =
             '/ 20';
@@ -1258,6 +1260,7 @@ function updateBottomDimensionScore(){
  *      • after initialization
  *      • after answer selection
  *      • after restore
+ *      • before navigation
  * =============================================================================
  */
 
@@ -1294,10 +1297,13 @@ function setNavigationState(
         );
 
 
-    if(previousButton){
+    if(
+        previousButton
+    ){
 
         previousButton.disabled =
             active;
+
 
         previousButton.setAttribute(
             'aria-busy',
@@ -1308,10 +1314,13 @@ function setNavigationState(
     }
 
 
-    if(nextButton){
+    if(
+        nextButton
+    ){
 
         nextButton.disabled =
             active;
+
 
         nextButton.setAttribute(
             'aria-busy',
@@ -1334,13 +1343,17 @@ function goPrevious(
     event
 ){
 
-    if(event){
+    if(
+        event
+    ){
 
         event.preventDefault();
     }
 
 
-    if(navigating){
+    if(
+        navigating
+    ){
 
         return;
     }
@@ -1362,9 +1375,10 @@ function goPrevious(
  * Critical sequence:
  *
  *      1. Validate all five Wealth™ indicators
- *      2. Mark Wealth™ complete
- *      3. Set Dimension 02 as current
- *      4. Navigate to Page 02C
+ *      2. Refresh final display
+ *      3. Mark Wealth™ complete
+ *      4. Set Dimension 02 as current
+ *      5. Navigate to Page 02C
  *
  * =============================================================================
  */
@@ -1373,19 +1387,24 @@ function goNext(
     event
 ){
 
-    if(event){
+    if(
+        event
+    ){
 
         event.preventDefault();
     }
 
 
-    if(navigating){
+    if(
+        navigating
+    ){
 
         return;
     }
 
 
-    /* -------------------------------------------------------------------------
+    /*
+     * -------------------------------------------------------------------------
      * VALIDATE
      * -------------------------------------------------------------------------
      */
@@ -1404,15 +1423,17 @@ function goNext(
     }
 
 
-    /* -------------------------------------------------------------------------
-     * FINAL WEALTH SCORE REFRESH
+    /*
+     * -------------------------------------------------------------------------
+     * FINAL SCORE REFRESH
      * -------------------------------------------------------------------------
      */
 
     refreshProgressiveScoreDisplay();
 
 
-    /* -------------------------------------------------------------------------
+    /*
+     * -------------------------------------------------------------------------
      * COMPLETE DIMENSION
      * -------------------------------------------------------------------------
      */
@@ -1433,7 +1454,8 @@ function goNext(
     }
 
 
-    /* -------------------------------------------------------------------------
+    /*
+     * -------------------------------------------------------------------------
      * SET NEXT DIMENSION
      * -------------------------------------------------------------------------
      */
@@ -1457,7 +1479,8 @@ function goNext(
     }
 
 
-    /* -------------------------------------------------------------------------
+    /*
+     * -------------------------------------------------------------------------
      * NAVIGATE
      * -------------------------------------------------------------------------
      */
@@ -1504,7 +1527,9 @@ function bindPreviousButton(){
         );
 
 
-    if(!button){
+    if(
+        !button
+    ){
 
         console.warn(
             'CTM PATH™ Page 02B: #previousButton not found.'
@@ -1534,7 +1559,9 @@ function bindNextButton(){
         );
 
 
-    if(!button){
+    if(
+        !button
+    ){
 
         console.error(
             'CTM PATH™ Page 02B: #nextButton not found.'
@@ -1568,7 +1595,8 @@ function bindKeyboardNavigation(){
         function(event){
 
             if(
-                event.key !== 'Enter'
+                event.key !==
+                    'Enter'
             ){
 
                 return;
@@ -1600,9 +1628,9 @@ function bindKeyboardNavigation(){
  *
  *      ctm:page02-answer
  *
- * Page02B uses this event only to refresh its page-level progressive display.
+ * Page02B uses this event only to refresh its page-level display.
  *
- * The shared scorecard remains the scoring source of truth.
+ * Page02Scorecard remains the scoring source of truth.
  * =============================================================================
  */
 
@@ -1665,7 +1693,9 @@ function restorePage(){
         window.Page02Scorecard.restore();
 
 
-    if(!restored){
+    if(
+        !restored
+    ){
 
         console.warn(
             'CTM PATH™ Page 02B: scorecard restore returned false.'
@@ -1736,7 +1766,7 @@ function initializeScorecard(){
 function initializeScoreboardLayout(){
 
     /*
-     * Move the existing dimension score below the scorecard.
+     * Move the existing dimension score below the questions.
      */
 
     relocateDimensionScore();
@@ -1765,8 +1795,6 @@ function initializeScoreboardLayout(){
  *
  *      DOM READY
  *          ↓
- *      GLOBAL COMPONENTS
- *          ↓
  *      VERIFY SCORECARD DEPENDENCIES
  *          ↓
  *      VERIFY DIMENSION CONTRACT
@@ -1781,6 +1809,8 @@ function initializeScoreboardLayout(){
  *          ↓
  *      RESTORE SESSION STATE
  *          ↓
+ *      FINAL SCOREBOARD REFRESH
+ *          ↓
  *      SCROLL TO TOP
  *          ↓
  *      READY
@@ -1788,7 +1818,7 @@ function initializeScoreboardLayout(){
  * =============================================================================
  */
 
-async function init(){
+function init(){
 
     if(
         initialized ||
@@ -1810,26 +1840,8 @@ async function init(){
 
     try{
 
-        /* ---------------------------------------------------------------------
-         * GLOBAL HEADER + FOOTER
-         *
-         * NON-FATAL
+        /*
          * ---------------------------------------------------------------------
-         */
-
-        const componentsReady =
-            await loadGlobalComponents();
-
-
-        if(!componentsReady){
-
-            console.warn(
-                'CTM PATH™ Page 02B continuing without confirmed global components.'
-            );
-        }
-
-
-        /* ---------------------------------------------------------------------
          * SCORECARD DEPENDENCIES
          * ---------------------------------------------------------------------
          */
@@ -1842,7 +1854,8 @@ async function init(){
         }
 
 
-        /* ---------------------------------------------------------------------
+        /*
+         * ---------------------------------------------------------------------
          * DIMENSION CONTRACT
          * ---------------------------------------------------------------------
          */
@@ -1855,7 +1868,8 @@ async function init(){
         }
 
 
-        /* ---------------------------------------------------------------------
+        /*
+         * ---------------------------------------------------------------------
          * SCORECARD
          * ---------------------------------------------------------------------
          */
@@ -1876,7 +1890,8 @@ async function init(){
         }
 
 
-        /* ---------------------------------------------------------------------
+        /*
+         * ---------------------------------------------------------------------
          * SCOREBOARD LAYOUT
          * ---------------------------------------------------------------------
          */
@@ -1884,7 +1899,8 @@ async function init(){
         initializeScoreboardLayout();
 
 
-        /* ---------------------------------------------------------------------
+        /*
+         * ---------------------------------------------------------------------
          * NAVIGATION
          * ---------------------------------------------------------------------
          */
@@ -1898,7 +1914,8 @@ async function init(){
         bindAnswerEvents();
 
 
-        /* ---------------------------------------------------------------------
+        /*
+         * ---------------------------------------------------------------------
          * RESTORE
          * ---------------------------------------------------------------------
          */
@@ -1906,7 +1923,8 @@ async function init(){
         restorePage();
 
 
-        /* ---------------------------------------------------------------------
+        /*
+         * ---------------------------------------------------------------------
          * FINAL SCOREBOARD REFRESH
          * ---------------------------------------------------------------------
          */
@@ -1914,7 +1932,8 @@ async function init(){
         refreshProgressiveScoreDisplay();
 
 
-        /* ---------------------------------------------------------------------
+        /*
+         * ---------------------------------------------------------------------
          * VIEWPORT
          * ---------------------------------------------------------------------
          */
@@ -1922,7 +1941,8 @@ async function init(){
         scrollToTop();
 
 
-        /* ---------------------------------------------------------------------
+        /*
+         * ---------------------------------------------------------------------
          * READY
          * ---------------------------------------------------------------------
          */
@@ -1939,7 +1959,7 @@ async function init(){
                     CONFIG.dimensionId,
 
                 globalComponents:
-                    componentsReady,
+                    false,
 
                 score:
                     window.Page02Scorecard.getScore(),
@@ -1976,7 +1996,7 @@ async function init(){
 
 if(
     document.readyState ===
-    'loading'
+        'loading'
 ){
 
     document.addEventListener(
@@ -2010,7 +2030,7 @@ else{
  *      Page02B.getDimensionScores()
  *      Page02B.goNext()
  *      Page02B.goPrevious()
- *      Page02B.loadGlobalComponents()
+ *      Page02B.refreshScoreboard()
  *
  * =============================================================================
  */
@@ -2018,16 +2038,13 @@ else{
 window.Page02B = {
 
     version:
-        '4.0',
+        '4.1',
 
     dimensionId:
         CONFIG.dimensionId,
 
     init:
         init,
-
-    loadGlobalComponents:
-        loadGlobalComponents,
 
     goPrevious:
         goPrevious,
@@ -2093,6 +2110,12 @@ window.Page02B = {
                     .map(
                         function(dimension){
 
+                            const answered =
+                                getDimensionAnsweredCount(
+                                    dimension.id
+                                );
+
+
                             return {
 
                                 dimensionId:
@@ -2117,15 +2140,13 @@ window.Page02B = {
                                     CONFIG.dimensionMaximum,
 
                                 answered:
-                                    getDimensionAnsweredCount(
-                                        dimension.id
-                                    ),
+                                    answered,
 
                                 complete:
-                                    getDimensionAnsweredCount(
-                                        dimension.id
-                                    ) >= 5
+                                    answered >=
+                                    CONFIG.indicatorCount
                             };
+
                         }
                     )
             );
@@ -2167,96 +2188,6 @@ window.Page02B = {
 
 };
 
-
-/* =============================================================================
- * END
- *
- * PAGE 02B LOAD ORDER:
- *
- *      component-loader.js
- *             ↓
- *      global.js
- *             ↓
- *      api.js
- *             ↓
- *      page02-data.js
- *             ↓
- *      page02-session.js
- *             ↓
- *      page02-scorecard.js
- *             ↓
- *      page02b.js
- *
- *
- * PAGE INITIALIZATION:
- *
- *      DOM READY
- *             ↓
- *      CTM_COMPONENTS.load()
- *             ↓
- *      Page02Scorecard.init("wealth")
- *             ↓
- *      Move live score panel
- *             ↓
- *      Create progressive six-column scoreboard
- *             ↓
- *      Restore Wealth™ answers
- *             ↓
- *      Refresh progressive scores
- *             ↓
- *      Bind navigation
- *             ↓
- *      Page ready
- *
- *
- * PROGRESSIVE SCOREBOARD:
- *
- *      DIMENSION 01        /20
- *      DIMENSION 02        /20
- *      DIMENSION 03        /20
- *      DIMENSION 04        /20
- *      DIMENSION 05        /20
- *      GRAND TOTAL         /100
- *
- *
- * PAGE 02B:
- *
- *      Wealth™ score
- *             ↓
- *      Progressive Grand Total
- *
- * PAGE 02C:
- *
- *      Wealth™
- *             +
- *      Income & Cash Flow™
- *             ↓
- *      Progressive Grand Total
- *
- * PAGE 02D:
- *
- *      Wealth™
- *             +
- *      Income & Cash Flow™
- *             +
- *      Assets™
- *             ↓
- *      Progressive Grand Total
- *
- * PAGE 02E:
- *
- *      First four dimensions
- *             ↓
- *      Progressive Grand Total
- *
- * PAGE 02F:
- *
- *      All five dimensions
- *             ↓
- *      FINAL SCORE /100
- *
- * =============================================================================
- */
 
 })(window, document);
 
