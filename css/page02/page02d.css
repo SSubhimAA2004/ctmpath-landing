@@ -6,68 +6,56 @@
    css/page02/page02d.css
 
    VERSION:
-   6.0 — DIMENSION 03 / ASSETS™
-   FROZEN SCOREBOARD ALIGNMENT
+   6.0 — DIMENSION 03 / SHARED PROGRESSIVE SCOREBOARD
 
    PAGE:
    PAGE 02D — DIMENSION 03 — ASSETS™
 
-   ARCHITECTURE:
+   STATUS:
+   PAGE-SPECIFIC PRESENTATION — FROZEN ARCHITECTURE
 
-       page02-data.js
-              ↓
-       page02-session.js
-              ↓
-       page02-scorecard.js
-              ↓
-       page02d.js
-              ↓
-       page02d.css
+   DEPENDS ON:
+   css/page02/page02-shared.css
+
+   PURPOSE:
+
+   ✓ Dimension 03 — Assets™ identity
+   ✓ Premium midnight-lavender / deep-violet atmosphere
+   ✓ Strong Tamil-first contrast
+   ✓ CTM teal interaction language
+   ✓ Restrained champagne-gold aspiration language
+   ✓ Dimension 03 progress state
+   ✓ Indicator/card surface refinement
+   ✓ Selected-state refinement
+   ✓ Completion-state refinement
+   ✓ Progressive Millionaire Lifestyle Scoreboard™
+   ✓ Shared Page 02 scoreboard contract
+   ✓ Responsive preservation
+   ✓ Reduced-motion support
+   ✓ Print support
 
    IMPORTANT:
 
-   This stylesheet changes PRESENTATION ONLY.
+   This file changes PRESENTATION ONLY.
 
-   It does NOT change:
-   - indicator definitions
-   - scoring
-   - answer mapping
-   - session state
-   - navigation
-   - page02-scorecard.js
-   - page02-data.js
+   It does NOT alter:
 
-   PAGE 02D VISUAL IDENTITY:
+   ✗ HTML structure
+   ✗ indicator data
+   ✗ scoring
+   ✗ answer mapping
+   ✗ session state
+   ✗ navigation logic
+   ✗ shared Page 02 architecture
 
-       MIDNIGHT
-           ↓
-       LAVENDER
-           ↓
-       VIOLET
-           ↓
-       TEAL INTERACTION
-           ↓
-       CHAMPAGNE GOLD
+   The shared Page 02 system remains the functional source of truth.
 
-   SCOREBOARD CONTRACT:
-
-       PAGE 02B
-           ↓
-       page02b-progressive-*
-           ↑
-       PAGE 02C
-           ↑
-       PAGE 02D
-
-   The page02b-progressive-* namespace is intentionally retained.
-   It is the frozen Progressive Millionaire Lifestyle Scoreboard™
-   component contract.
-========================================================================== */
+   ========================================================================== */
 
 
 /* ==========================================================================
    01. PAGE 02D VISUAL TOKENS
-========================================================================== */
+   ========================================================================== */
 
 .page02d {
 
@@ -171,8 +159,8 @@
 
 
 /* ==========================================================================
-   02. PREMIUM MIDNIGHT / VIOLET BACKGROUND
-========================================================================== */
+   02. PREMIUM MIDNIGHT BACKGROUND
+   ========================================================================== */
 
 .page02d.page02-dimension {
 
@@ -211,7 +199,7 @@
 
 /* ==========================================================================
    03. ATMOSPHERIC LIGHT
-========================================================================== */
+   ========================================================================== */
 
 .page02d.page02-dimension::before {
 
@@ -248,7 +236,7 @@
 
 /* ==========================================================================
    04. SUBTLE EDGE LIGHT
-========================================================================== */
+   ========================================================================== */
 
 .page02d.page02-dimension::after {
 
@@ -276,8 +264,15 @@
 
 
 /* ==========================================================================
-   05. PAGE SHELL
-========================================================================== */
+   05. PAGE FOUNDATION
+   ========================================================================== */
+
+.page02d {
+
+    position:
+        relative;
+}
+
 
 .page02d .page02-dimension-shell {
 
@@ -297,7 +292,7 @@
 
 /* ==========================================================================
    06. JOURNEY PROGRESS
-========================================================================== */
+   ========================================================================== */
 
 .page02d .dimension-progress {
 
@@ -345,8 +340,7 @@
 /*
    Dimension 03 = 3 / 5 = 60%.
 
-   This is only a visual fallback.
-   JavaScript owns the actual progress state.
+   JavaScript may subsequently update this value.
 */
 
 .page02d .dimension-progress-fill {
@@ -370,7 +364,7 @@
 
 /* ==========================================================================
    07. DIMENSION HEADER
-========================================================================== */
+   ========================================================================== */
 
 .page02d .dimension-header {
 
@@ -430,7 +424,7 @@
 
 /* ==========================================================================
    08. LIVE DIMENSION SCORE
-========================================================================== */
+   ========================================================================== */
 
 .page02d .dimension-score-panel {
 
@@ -469,9 +463,20 @@
 }
 
 
+/*
+   JS relocates this panel immediately below the progressive scoreboard.
+*/
+
+.page02d .page02d-bottom-dimension-score {
+
+    position:
+        relative;
+}
+
+
 /* ==========================================================================
    09. SCORECARD SECTION
-========================================================================== */
+   ========================================================================== */
 
 .page02d .dimension-scorecard {
 
@@ -495,10 +500,6 @@
         relative;
 }
 
-
-/* ==========================================================================
-   10. SCORECARD CARD SURFACE
-========================================================================== */
 
 .page02d .scorecard-card {
 
@@ -564,15 +565,19 @@
 
             0 28px 80px rgba(4, 2, 14, 0.42),
 
-            0 0 0 1px
-                rgba(185, 167, 255, 0.035);
+            0 0 0 1px rgba(
+                185,
+                167,
+                255,
+                0.035
+            );
     }
 }
 
 
 /* ==========================================================================
-   11. SCORECARD NUMBER
-========================================================================== */
+   10. SCORECARD NUMBER
+   ========================================================================== */
 
 .page02d .scorecard-number {
 
@@ -586,14 +591,18 @@
         rgba(124, 92, 255, 0.075);
 
     box-shadow:
-        inset 0 0 0 1px
-            rgba(255, 255, 255, 0.018);
+        inset 0 0 0 1px rgba(
+            255,
+            255,
+            255,
+            0.018
+        );
 }
 
 
 /* ==========================================================================
-   12. INDICATOR TITLES
-========================================================================== */
+   11. INDICATOR TITLES
+   ========================================================================== */
 
 .page02d .scorecard-title {
 
@@ -616,8 +625,8 @@
 
 
 /* ==========================================================================
-   13. IDEAL / TARGET BENCHMARK
-========================================================================== */
+   12. IDEAL / TARGET BENCHMARK
+   ========================================================================== */
 
 .page02d .scorecard-ideal {
 
@@ -633,8 +642,12 @@
         );
 
     box-shadow:
-        inset 0 1px 0
-            rgba(255, 255, 255, 0.018);
+        inset 0 1px 0 rgba(
+            255,
+            255,
+            255,
+            0.018
+        );
 }
 
 
@@ -656,8 +669,8 @@
 
 
 /* ==========================================================================
-   14. RANGE OPTIONS
-========================================================================== */
+   13. RANGE OPTIONS
+   ========================================================================== */
 
 .page02d .scorecard-option {
 
@@ -713,18 +726,19 @@
             rgba(185, 167, 255, 0.055);
 
         box-shadow:
-            0 12px 30px rgba(4, 2, 14, 0.22);
+            0 12px 30px rgba(
+                4,
+                2,
+                14,
+                0.22
+            );
     }
 }
 
 
 /* ==========================================================================
-   15. SELECTED OPTION
-
-   CTM TEAL = INTERACTION
-
-   Gold is never used to represent selection.
-========================================================================== */
+   14. SELECTED OPTION
+   ========================================================================== */
 
 .page02d .scorecard-option.is-selected,
 .page02d .scorecard-option[aria-pressed="true"] {
@@ -742,11 +756,19 @@
 
     box-shadow:
 
-        0 0 0 1px
-            rgba(32, 214, 207, 0.08),
+        0 0 0 1px rgba(
+            32,
+            214,
+            207,
+            0.08
+        ),
 
-        0 12px 34px
-            rgba(32, 214, 207, 0.10);
+        0 12px 34px rgba(
+            32,
+            214,
+            207,
+            0.10
+        );
 }
 
 
@@ -761,8 +783,8 @@
 
 
 /* ==========================================================================
-   16. FOURTH / TARGET OPTION
-========================================================================== */
+   15. FOURTH / TARGET OPTION
+   ========================================================================== */
 
 .page02d .scorecard-option:nth-child(4):not(.is-selected):not(
     [aria-pressed="true"]
@@ -797,8 +819,8 @@
 
 
 /* ==========================================================================
-   17. OPTION SCORE MARKER
-========================================================================== */
+   16. OPTION SCORE MARKER
+   ========================================================================== */
 
 .page02d .option-score {
 
@@ -828,8 +850,8 @@
 
 
 /* ==========================================================================
-   18. COMPLETION STATUS
-========================================================================== */
+   17. COMPLETION STATUS
+   ========================================================================== */
 
 .page02d .dimension-completion {
 
@@ -854,13 +876,18 @@
         var(--d03-teal);
 
     text-shadow:
-        0 0 18px rgba(32, 214, 207, 0.12);
+        0 0 18px rgba(
+            32,
+            214,
+            207,
+            0.12
+        );
 }
 
 
 /* ==========================================================================
-   19. VALIDATION MESSAGE
-========================================================================== */
+   18. VALIDATION MESSAGE
+   ========================================================================== */
 
 .page02d .dimension-message {
 
@@ -873,8 +900,8 @@
 
 
 /* ==========================================================================
-   20. NAVIGATION
-========================================================================== */
+   19. NAVIGATION
+   ========================================================================== */
 
 .page02d .dimension-navigation {
 
@@ -892,13 +919,18 @@
         rgba(185, 167, 255, 0.18);
 
     box-shadow:
-        0 12px 36px rgba(4, 2, 14, 0.26);
+        0 12px 36px rgba(
+            4,
+            2,
+            14,
+            0.26
+        );
 }
 
 
 /* ==========================================================================
-   21. SCORE GUIDE / SUPPORTING PANELS
-========================================================================== */
+   20. SCORE GUIDE / SUPPORTING PANELS
+   ========================================================================== */
 
 .page02d .score-guide,
 .page02d .dimension-score-guide,
@@ -925,8 +957,8 @@
 
 
 /* ==========================================================================
-   22. LIVE SCORE / SCORE MEDALLION
-========================================================================== */
+   21. LIVE SCORE / SCORE MEDALLION
+   ========================================================================== */
 
 .page02d .score-medallion,
 .page02d .dimension-score-medallion,
@@ -945,13 +977,18 @@
         );
 
     box-shadow:
-        0 18px 46px rgba(4, 2, 14, 0.28);
+        0 18px 46px rgba(
+            4,
+            2,
+            14,
+            0.28
+        );
 }
 
 
 /* ==========================================================================
-   23. ACCESSIBILITY / FOCUS
-========================================================================== */
+   22. ACCESSIBILITY / FOCUS
+   ========================================================================== */
 
 .page02d .scorecard-option:focus-visible,
 .page02d button:focus-visible,
@@ -964,100 +1001,103 @@
         3px;
 
     box-shadow:
-        0 0 0 5px
-            rgba(185, 167, 255, 0.14);
+        0 0 0 5px rgba(
+            185,
+            167,
+            255,
+            0.14
+        );
 }
 
 
 /* ==========================================================================
-   24. PROGRESSIVE MILLIONAIRE LIFESTYLE SCOREBOARD™
-
-   FROZEN COMPONENT CONTRACT
+   23. PROGRESSIVE MILLIONAIRE LIFESTYLE SCOREBOARD™
 
    IMPORTANT:
 
-   The canonical class namespace is:
+   Page 02D MUST use the frozen shared Page 02B scoreboard namespace.
 
-       page02b-progressive-*
+   Canonical classes:
 
-   This is intentional.
+       page02b-progressive-scoreboard
+       page02b-progressive-scoreboard-header
+       page02b-progressive-scoreboard-heading
+       page02b-progressive-scoreboard-kicker
+       page02b-progressive-scoreboard-title
+       page02b-progressive-scoreboard-total
+       page02b-progressive-total-label
+       page02b-progressive-total-value
+       page02b-progressive-columns
+       page02b-progressive-column
+       page02b-progressive-column-number
+       page02b-progressive-column-name
+       page02b-progressive-column-tamil
+       page02b-progressive-column-english
+       page02b-progressive-column-score
+       page02b-progressive-column-progress
 
-   Page 02C already uses this exact namespace.
-   Page 02D must visually join the same component family.
+   DO NOT create a page02d-progressive-* component.
 
-   The selectors below also temporarily recognize the old
-   page02d-progressive-* namespace so an intermediate page02d.js
-   deployment does not become visually unstyled.
+   The scoreboard is a shared journey component.
 
-   Once page02d.js is normalized, the page02d-progressive-* fallback
-   selectors may remain harmlessly or be removed later.
-========================================================================== */
+   ========================================================================== */
 
 
-/* --------------------------------------------------------------------------
-   24A. SCOREBOARD OUTER SHELL
--------------------------------------------------------------------------- */
+/* ==========================================================================
+   23A. SCOREBOARD SHELL
+   ========================================================================== */
 
-.page02d #page02ProgressiveScoreboard,
-.page02d .page02b-progressive-scoreboard,
-.page02d .page02d-progressive-scoreboard {
-
-    width:
-        min(1180px, calc(100% - 48px));
-
-    margin:
-        34px auto 28px;
-
-    padding:
-        0;
+.page02d .page02b-progressive-scoreboard {
 
     position:
         relative;
+
+    width:
+        100%;
+
+    margin:
+        52px 0 0;
 
     overflow:
         hidden;
 
     border:
-        1px solid rgba(185, 167, 255, 0.16);
+        1px solid rgba(
+            168,
+            140,
+            255,
+            0.20
+        );
 
     border-radius:
-        22px;
+        28px;
 
     background:
 
         linear-gradient(
             145deg,
-            rgba(255, 255, 255, 0.055),
-            rgba(255, 255, 255, 0.018) 58%,
-            rgba(124, 92, 255, 0.035)
+            rgba(30, 20, 58, 0.96),
+            rgba(17, 12, 39, 0.98)
         );
 
     box-shadow:
-
-        0 24px 70px
-            rgba(4, 2, 14, 0.34),
-
-        inset 0 1px 0
-            rgba(255, 255, 255, 0.025);
-
-    backdrop-filter:
-        blur(14px);
-
-    -webkit-backdrop-filter:
-        blur(14px);
+        0 22px 60px rgba(
+            0,
+            0,
+            0,
+            0.24
+        );
 
     color:
         var(--d03-ivory);
 }
 
 
-/* --------------------------------------------------------------------------
-   24B. TOP GRADIENT ACCENT
--------------------------------------------------------------------------- */
+/*
+   Premium Dimension 03 top accent.
+*/
 
-.page02d #page02ProgressiveScoreboard::before,
-.page02d .page02b-progressive-scoreboard::before,
-.page02d .page02d-progressive-scoreboard::before {
+.page02d .page02b-progressive-scoreboard::before {
 
     content:
         "";
@@ -1065,13 +1105,13 @@
     position:
         absolute;
 
+    top:
+        0;
+
     left:
         0;
 
     right:
-        0;
-
-    top:
         0;
 
     height:
@@ -1085,15 +1125,17 @@
             var(--d03-lavender),
             var(--d03-teal)
         );
+
+    pointer-events:
+        none;
 }
 
 
-/* --------------------------------------------------------------------------
-   24C. SCOREBOARD HEADER
--------------------------------------------------------------------------- */
+/* ==========================================================================
+   23B. SCOREBOARD HEADER
+   ========================================================================== */
 
-.page02d .page02b-progressive-scoreboard-header,
-.page02d .page02d-progressive-scoreboard-header {
+.page02d .page02b-progressive-scoreboard-header {
 
     display:
         flex;
@@ -1111,7 +1153,12 @@
         30px 34px;
 
     border-bottom:
-        1px solid rgba(168, 140, 255, 0.12);
+        1px solid rgba(
+            168,
+            140,
+            255,
+            0.12
+        );
 
     background:
 
@@ -1123,12 +1170,7 @@
 }
 
 
-/* --------------------------------------------------------------------------
-   24D. SCOREBOARD HEADING
--------------------------------------------------------------------------- */
-
-.page02d .page02b-progressive-scoreboard-heading,
-.page02d .page02d-progressive-scoreboard-heading {
+.page02d .page02b-progressive-scoreboard-heading {
 
     display:
         flex;
@@ -1144,8 +1186,7 @@
 }
 
 
-.page02d .page02b-progressive-scoreboard-kicker,
-.page02d .page02d-progressive-scoreboard-kicker {
+.page02d .page02b-progressive-scoreboard-kicker {
 
     display:
         block;
@@ -1170,8 +1211,7 @@
 }
 
 
-.page02d .page02b-progressive-scoreboard-title,
-.page02d .page02d-progressive-scoreboard-title {
+.page02d .page02b-progressive-scoreboard-title {
 
     display:
         block;
@@ -1190,12 +1230,11 @@
 }
 
 
-/* --------------------------------------------------------------------------
-   24E. GRAND TOTAL CARD
--------------------------------------------------------------------------- */
+/* ==========================================================================
+   23C. GRAND TOTAL
+   ========================================================================== */
 
-.page02d .page02b-progressive-scoreboard-total,
-.page02d .page02d-progressive-scoreboard-total {
+.page02d .page02b-progressive-scoreboard-total {
 
     flex:
         0 0 auto;
@@ -1207,7 +1246,12 @@
         15px 22px;
 
     border:
-        1px solid rgba(216, 173, 88, 0.22);
+        1px solid rgba(
+            216,
+            173,
+            88,
+            0.22
+        );
 
     border-radius:
         18px;
@@ -1225,8 +1269,7 @@
 }
 
 
-.page02d .page02b-progressive-total-label,
-.page02d .page02d-progressive-total-label {
+.page02d .page02b-progressive-total-label {
 
     display:
         block;
@@ -1235,184 +1278,12 @@
         4px;
 
     color:
-        rgba(232, 196, 114, 0.72);
-
-    font-size:
-        10px;
-
-    font-weight:
-        700;
-
-    line-height:
-        1.2;
-
-    letter-spacing:
-        0.16em;
-}
-
-
-.page02d .page02b-progressive-total-value,
-.page02d .page02d-progressive-total-value {
-
-    display:
-        flex;
-
-    align-items:
-        baseline;
-
-    justify-content:
-        flex-end;
-
-    gap:
-        5px;
-
-    color:
-        var(--d03-gold-bright);
-
-    font-variant-numeric:
-        tabular-nums;
-}
-
-
-.page02d .page02b-progressive-total-value strong,
-.page02d .page02d-progressive-total-value strong {
-
-    color:
-        #F4D78B;
-
-    font-size:
-        32px;
-
-    font-weight:
-        700;
-
-    line-height:
-        1;
-}
-
-
-.page02d .page02b-progressive-total-value span,
-.page02d .page02d-progressive-total-value span {
-
-    color:
-        rgba(232, 196, 114, 0.62);
-
-    font-size:
-        12px;
-
-    font-weight:
-        600;
-}
-
-
-/* ==========================================================================
-   25. SCOREBOARD DIMENSION COLUMNS
-
-   DESKTOP
-
-       01
-       02
-       03
-       04
-       05
-
-   Five coherent cards across the scoreboard.
-========================================================================== */
-
-.page02d .page02b-progressive-columns,
-.page02d .page02d-progressive-columns {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(5, minmax(0, 1fr));
-
-    width:
-        100%;
-
-    gap:
-        0;
-
-    margin:
-        0;
-
-    padding:
-        0;
-}
-
-
-/* --------------------------------------------------------------------------
-   25A. INDIVIDUAL DIMENSION CARD
--------------------------------------------------------------------------- */
-
-.page02d .page02b-progressive-column,
-.page02d .page02d-progressive-column {
-
-    position:
-        relative;
-
-    min-width:
-        0;
-
-    min-height:
-        164px;
-
-    padding:
-        22px 20px 21px;
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    justify-content:
-        space-between;
-
-    gap:
-        14px;
-
-    border:
-        0;
-
-    border-right:
-        1px solid rgba(168, 140, 255, 0.10);
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(45, 32, 82, 0.34),
-            rgba(24, 17, 50, 0.22)
+        rgba(
+            232,
+            196,
+            114,
+            0.72
         );
-
-    box-sizing:
-        border-box;
-
-    transition:
-        background 180ms ease,
-        box-shadow 180ms ease;
-}
-
-
-.page02d .page02b-progressive-column:last-child,
-.page02d .page02d-progressive-column:last-child {
-
-    border-right:
-        0;
-}
-
-
-/* --------------------------------------------------------------------------
-   25B. DIMENSION NUMBER
--------------------------------------------------------------------------- */
-
-.page02d .page02b-progressive-column-number,
-.page02d .page02d-progressive-column-number {
-
-    color:
-        rgba(185, 167, 255, 0.56);
 
     font-size:
         11px;
@@ -1420,23 +1291,230 @@
     font-weight:
         700;
 
-    line-height:
-        1;
-
     letter-spacing:
-        0.12em;
+        0.14em;
 
-    font-variant-numeric:
-        tabular-nums;
+    text-transform:
+        uppercase;
 }
 
 
-/* --------------------------------------------------------------------------
-   25C. DIMENSION NAME
--------------------------------------------------------------------------- */
+.page02d .page02b-progressive-total-value {
 
-.page02d .page02b-progressive-column-name,
-.page02d .page02d-progressive-column-name {
+    display:
+        inline-flex;
+
+    align-items:
+        baseline;
+
+    gap:
+        5px;
+
+    color:
+        rgba(
+            244,
+            240,
+            255,
+            0.58
+        );
+
+    font-size:
+        14px;
+}
+
+
+.page02d .page02b-progressive-total-value strong {
+
+    color:
+        #E8C472;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        36px;
+
+    font-weight:
+        700;
+
+    line-height:
+        1;
+}
+
+
+/* ==========================================================================
+   23D. FIVE DIMENSION COLUMNS
+
+   Desktop:
+       5 columns
+
+   GRAND TOTAL remains in the header.
+
+   Therefore:
+       NEVER six columns.
+   ========================================================================== */
+
+.page02d .page02b-progressive-columns {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            5,
+            minmax(
+                0,
+                1fr
+            )
+        );
+
+    width:
+        100%;
+}
+
+
+.page02d .page02b-progressive-column {
+
+    position:
+        relative;
+
+    min-width:
+        0;
+
+    min-height:
+        238px;
+
+    padding:
+        24px 20px 25px;
+
+    border-right:
+        1px solid rgba(
+            168,
+            140,
+            255,
+            0.10
+        );
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(55, 40, 96, 0.24),
+            rgba(27, 20, 58, 0.16)
+        );
+
+    transition:
+
+        background 180ms ease,
+        border-color 180ms ease,
+        transform 180ms ease;
+}
+
+
+.page02d .page02b-progressive-column:last-child {
+
+    border-right:
+        0;
+}
+
+
+/* ==========================================================================
+   23E. CURRENT DIMENSION
+   ========================================================================== */
+
+.page02d .page02b-progressive-column.is-current {
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(79, 57, 136, 0.38),
+            rgba(35, 24, 73, 0.30)
+        );
+
+    box-shadow:
+        inset 0 -3px 0 var(--d03-teal);
+}
+
+
+/* ==========================================================================
+   23F. STARTED DIMENSION
+   ========================================================================== */
+
+.page02d .page02b-progressive-column.is-started {
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(54, 41, 96, 0.34),
+            rgba(28, 20, 59, 0.22)
+        );
+}
+
+
+/* ==========================================================================
+   23G. COMPLETED DIMENSION
+   ========================================================================== */
+
+.page02d .page02b-progressive-column.is-complete {
+
+    box-shadow:
+        inset 0 -3px 0 rgba(
+            34,
+            199,
+            189,
+            0.72
+        );
+}
+
+
+/* ==========================================================================
+   23H. DIMENSION NUMBER
+   ========================================================================== */
+
+.page02d .page02b-progressive-column-number {
+
+    margin-bottom:
+        13px;
+
+    color:
+        #9D8BD5;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.12em;
+}
+
+
+.page02d .page02b-progressive-column.is-current
+.page02b-progressive-column-number,
+
+.page02d .page02b-progressive-column.is-complete
+.page02b-progressive-column-number {
+
+    color:
+        #D8AD58;
+}
+
+
+/* ==========================================================================
+   23I. DIMENSION NAME
+   ========================================================================== */
+
+.page02d .page02b-progressive-column-name {
 
     display:
         flex;
@@ -1445,74 +1523,70 @@
         column;
 
     gap:
-        4px;
-
-    min-width:
-        0;
+        5px;
 
     min-height:
-        50px;
+        76px;
 }
 
 
-.page02d .page02b-progressive-column-tamil,
-.page02d .page02d-progressive-column-tamil {
+.page02d .page02b-progressive-column-tamil {
 
     display:
         block;
 
     color:
-        var(--d03-lavender-soft);
+        #F4F0FF;
+
+    font-family:
+        Georgia,
+        "Noto Sans Tamil",
+        "Nirmala UI",
+        serif;
 
     font-size:
-        17px;
+        19px;
 
     font-weight:
-        600;
+        700;
 
     line-height:
-        1.3;
-
-    overflow-wrap:
-        anywhere;
+        1.35;
 }
 
 
-.page02d .page02b-progressive-column-english,
-.page02d .page02d-progressive-column-english {
+.page02d .page02b-progressive-column-english {
 
     display:
         block;
 
     color:
-        rgba(232, 226, 248, 0.58);
+        #B9A7EF;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size:
-        10px;
+        12px;
 
     font-weight:
-        600;
+        700;
 
     line-height:
         1.25;
 
     letter-spacing:
-        0.06em;
-
-    text-transform:
-        uppercase;
-
-    overflow-wrap:
-        anywhere;
+        0.04em;
 }
 
 
-/* --------------------------------------------------------------------------
-   25D. DIMENSION SCORE
--------------------------------------------------------------------------- */
+/* ==========================================================================
+   23J. DIMENSION SCORE
+   ========================================================================== */
 
-.page02d .page02b-progressive-column-score,
-.page02d .page02d-progressive-column-score {
+.page02d .page02b-progressive-column-score {
 
     display:
         flex;
@@ -1521,193 +1595,104 @@
         baseline;
 
     gap:
-        4px;
+        5px;
 
     margin-top:
-        auto;
+        13px;
 
-    white-space:
-        nowrap;
+    color:
+        rgba(
+            244,
+            240,
+            255,
+            0.48
+        );
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 }
 
 
-.page02d .page02b-progressive-column-score strong,
-.page02d .page02d-progressive-column-score strong {
+.page02d .page02b-progressive-column-score strong {
 
     color:
-        var(--d03-ivory);
+        #E8C472;
 
     font-size:
-        27px;
+        30px;
 
     font-weight:
         700;
 
     line-height:
         1;
-
-    font-variant-numeric:
-        tabular-nums;
 }
 
 
-.page02d .page02b-progressive-column-score span,
-.page02d .page02d-progressive-column-score span {
+.page02d .page02b-progressive-column-score span {
+
+    font-size:
+        12px;
+}
+
+
+/* ==========================================================================
+   23K. PROGRESS LABEL
+   ========================================================================== */
+
+.page02d .page02b-progressive-column-progress {
+
+    margin-top:
+        14px;
 
     color:
-        rgba(232, 226, 248, 0.44);
+        rgba(
+            244,
+            240,
+            255,
+            0.44
+        );
 
     font-size:
         10px;
 
     font-weight:
-        600;
-}
-
-
-/* --------------------------------------------------------------------------
-   25E. PROGRESS / STATUS
--------------------------------------------------------------------------- */
-
-.page02d .page02b-progressive-column-progress,
-.page02d .page02d-progressive-column-progress {
-
-    color:
-        rgba(232, 226, 248, 0.46);
-
-    font-size:
-        9px;
-
-    font-weight:
         700;
-
-    line-height:
-        1.2;
 
     letter-spacing:
         0.10em;
+
+    line-height:
+        1.3;
 
     text-transform:
         uppercase;
 }
 
 
-/* ==========================================================================
-   26. SCOREBOARD STATES
-========================================================================== */
-
-
-/* CURRENT DIMENSION */
-
-.page02d .page02b-progressive-column.is-current,
-.page02d .page02d-progressive-column.is-current {
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(124, 92, 255, 0.16),
-            rgba(32, 214, 207, 0.035)
-        );
-
-    box-shadow:
-        inset 4px 0 0 var(--d03-teal);
-}
-
-
-.page02d .page02b-progressive-column.is-current
-.page02b-progressive-column-number,
-.page02d .page02d-progressive-column.is-current
-.page02d-progressive-column-number {
-
-    color:
-        var(--d03-teal);
-}
-
-
-.page02d .page02b-progressive-column.is-current
-.page02b-progressive-column-progress,
-.page02d .page02d-progressive-column.is-current
-.page02d-progressive-column-progress {
-
-    color:
-        var(--d03-teal);
-}
-
-
-/* STARTED DIMENSION */
-
-.page02d .page02b-progressive-column.is-started,
-.page02d .page02d-progressive-column.is-started {
-
-    background:
-
-        linear-gradient(
-            145deg,
-            rgba(124, 92, 255, 0.095),
-            rgba(255, 255, 255, 0.020)
-        );
-}
-
-
-/* COMPLETED DIMENSION */
-
-.page02d .page02b-progressive-column.is-complete,
-.page02d .page02d-progressive-column.is-complete {
-
-    box-shadow:
-        inset 4px 0 0
-            rgba(34, 199, 189, 0.78);
-}
-
-
 .page02d .page02b-progressive-column.is-complete
-.page02b-progressive-column-progress,
-.page02d .page02d-progressive-column.is-complete
-.page02d-progressive-column-progress {
+.page02b-progressive-column-progress {
 
     color:
-        var(--d03-teal);
+        #22C7BD;
 }
 
 
-/* --------------------------------------------------------------------------
-   26A. SCOREBOARD HOVER
--------------------------------------------------------------------------- */
+.page02d .page02b-progressive-column.is-current
+.page02b-progressive-column-progress {
 
-@media (hover: hover) {
-
-    .page02d .page02b-progressive-column:hover,
-    .page02d .page02d-progressive-column:hover {
-
-        background:
-            rgba(185, 167, 255, 0.045);
-    }
+    color:
+        #22C7BD;
 }
 
 
 /* ==========================================================================
-   27. SCOREBOARD + LIVE DIMENSION SCORE
-
-   The controller relocates the live score immediately after the
-   progressive scoreboard.
-
-   This creates:
-
-       PROGRESSIVE SCOREBOARD
-                ↓
-       LIVE DIMENSION SCORE
-                ↓
-       NAVIGATION
-========================================================================== */
+   23L. SCOREBOARD → LIVE SCORE RELATIONSHIP
+   ========================================================================== */
 
 .page02d .page02b-progressive-scoreboard
-+ .page02d-bottom-dimension-score,
-
-.page02d #page02ProgressiveScoreboard
-+ .page02d-bottom-dimension-score,
-
-.page02d .page02d-progressive-scoreboard
 + .page02d-bottom-dimension-score {
 
     margin-top:
@@ -1715,95 +1700,128 @@
 }
 
 
-.page02d .page02d-bottom-dimension-score {
-
-    position:
-        relative;
-
-    width:
-        100%;
-
-    box-sizing:
-        border-box;
-}
-
-
 /* ==========================================================================
-   28. TABLET SCOREBOARD
-
-   3 + 2 layout.
-
-   Avoid horizontal compression of five columns.
-========================================================================== */
+   24. TABLET SCOREBOARD
+   ========================================================================== */
 
 @media (max-width: 1000px) {
 
-    .page02d .page02b-progressive-scoreboard-header,
-    .page02d .page02d-progressive-scoreboard-header {
+    .page02d .page02b-progressive-scoreboard-header {
 
         padding:
             26px 28px;
     }
 
 
-    .page02d .page02b-progressive-columns,
-    .page02d .page02d-progressive-columns {
+    .page02d .page02b-progressive-columns {
 
         grid-template-columns:
-            repeat(3, minmax(0, 1fr));
+            repeat(
+                3,
+                minmax(
+                    0,
+                    1fr
+                )
+            );
     }
 
 
-    .page02d .page02b-progressive-column:nth-child(3),
-    .page02d .page02d-progressive-column:nth-child(3) {
+    .page02d .page02b-progressive-column:nth-child(3) {
 
         border-right:
             0;
     }
 
 
-    .page02d .page02b-progressive-column:nth-child(n + 4),
-    .page02d .page02d-progressive-column:nth-child(n + 4) {
+    .page02d .page02b-progressive-column:nth-child(n + 4) {
 
         border-top:
-            1px solid rgba(168, 140, 255, 0.10);
+            1px solid rgba(
+                168,
+                140,
+                255,
+                0.10
+            );
     }
 
 
-    .page02d .page02b-progressive-column:nth-child(4),
-    .page02d .page02d-progressive-column:nth-child(4) {
+    .page02d .dimension-introduction {
 
-        border-right:
-            1px solid rgba(168, 140, 255, 0.10);
+        max-width:
+            660px;
     }
 
 
-    .page02d #page02ProgressiveScoreboard,
-    .page02d .page02b-progressive-scoreboard,
-    .page02d .page02d-progressive-scoreboard {
+    .page02d .dimension-score-panel {
 
-        width:
-            min(100% - 32px, 900px);
+        margin-top:
+            28px;
+    }
+
+
+    .page02d .scorecard-card {
+
+        box-shadow:
+            0 18px 54px rgba(
+                4,
+                2,
+                14,
+                0.30
+            );
     }
 }
 
 
 /* ==========================================================================
-   29. MOBILE SCOREBOARD
+   25. MOBILE SCOREBOARD
 
    ONE CARD PER ROW.
 
-   This explicitly redeclares the structural properties so the scoreboard
-   cannot inherit an incompatible desktop grid/flex rule.
-
-   This follows the frozen 02B / 02C principle.
-========================================================================== */
+   Explicitly redeclares structural properties to prevent inherited
+   desktop grid/flex conflicts from page02-shared.css.
+   ========================================================================== */
 
 @media (max-width: 768px) {
 
-    .page02d #page02ProgressiveScoreboard,
-    .page02d .page02b-progressive-scoreboard,
-    .page02d .page02d-progressive-scoreboard {
+    .page02d .dimension-header {
+
+        margin-bottom:
+            40px;
+    }
+
+
+    .page02d .dimension-introduction {
+
+        max-width:
+            100%;
+
+        line-height:
+            1.72;
+    }
+
+
+    .page02d .dimension-score-panel {
+
+        margin-top:
+            24px;
+    }
+
+
+    .page02d .dimension-completion {
+
+        margin-top:
+            22px;
+    }
+
+
+    .page02d .dimension-navigation {
+
+        padding-bottom:
+            0;
+    }
+
+
+    .page02d .page02b-progressive-scoreboard {
 
         display:
             block !important;
@@ -1822,8 +1840,7 @@
     }
 
 
-    .page02d .page02b-progressive-scoreboard-header,
-    .page02d .page02d-progressive-scoreboard-header {
+    .page02d .page02b-progressive-scoreboard-header {
 
         display:
             flex !important;
@@ -1845,16 +1862,14 @@
     }
 
 
-    .page02d .page02b-progressive-scoreboard-heading,
-    .page02d .page02d-progressive-scoreboard-heading {
+    .page02d .page02b-progressive-scoreboard-heading {
 
         width:
             100%;
     }
 
 
-    .page02d .page02b-progressive-scoreboard-kicker,
-    .page02d .page02d-progressive-scoreboard-kicker {
+    .page02d .page02b-progressive-scoreboard-kicker {
 
         font-size:
             10px;
@@ -1864,8 +1879,7 @@
     }
 
 
-    .page02d .page02b-progressive-scoreboard-title,
-    .page02d .page02d-progressive-scoreboard-title {
+    .page02d .page02b-progressive-scoreboard-title {
 
         font-size:
             21px;
@@ -1875,8 +1889,7 @@
     }
 
 
-    .page02d .page02b-progressive-scoreboard-total,
-    .page02d .page02d-progressive-scoreboard-total {
+    .page02d .page02b-progressive-scoreboard-total {
 
         width:
             100%;
@@ -1898,38 +1911,30 @@
     }
 
 
-    .page02d .page02b-progressive-total-label,
-    .page02d .page02d-progressive-total-label {
+    .page02d .page02b-progressive-total-label {
 
         font-size:
             9px;
     }
 
 
-    .page02d .page02b-progressive-total-value,
-    .page02d .page02d-progressive-total-value {
-
-        justify-content:
-            flex-start;
-    }
-
-
-    .page02d .page02b-progressive-total-value strong,
-    .page02d .page02d-progressive-total-value strong {
+    .page02d .page02b-progressive-total-value strong {
 
         font-size:
             30px;
     }
 
 
-    .page02d .page02b-progressive-columns,
-    .page02d .page02d-progressive-columns {
+    .page02d .page02b-progressive-columns {
 
         display:
             grid !important;
 
         grid-template-columns:
-            minmax(0, 1fr) !important;
+            minmax(
+                0,
+                1fr
+            ) !important;
 
         width:
             100% !important;
@@ -1939,8 +1944,7 @@
     }
 
 
-    .page02d .page02b-progressive-column,
-    .page02d .page02d-progressive-column {
+    .page02d .page02b-progressive-column {
 
         display:
             grid !important;
@@ -1951,6 +1955,7 @@
         grid-template-areas:
 
             "number name score"
+
             "number progress progress";
 
         align-items:
@@ -1975,8 +1980,12 @@
             0 !important;
 
         border-bottom:
-            1px solid
-                rgba(168, 140, 255, 0.10);
+            1px solid rgba(
+                168,
+                140,
+                255,
+                0.10
+            );
 
         background:
 
@@ -1988,16 +1997,14 @@
     }
 
 
-    .page02d .page02b-progressive-column:last-child,
-    .page02d .page02d-progressive-column:last-child {
+    .page02d .page02b-progressive-column:last-child {
 
         border-bottom:
             0 !important;
     }
 
 
-    .page02d .page02b-progressive-column-number,
-    .page02d .page02d-progressive-column-number {
+    .page02d .page02b-progressive-column-number {
 
         grid-area:
             number;
@@ -2013,8 +2020,7 @@
     }
 
 
-    .page02d .page02b-progressive-column-name,
-    .page02d .page02d-progressive-column-name {
+    .page02d .page02b-progressive-column-name {
 
         grid-area:
             name;
@@ -2027,8 +2033,7 @@
     }
 
 
-    .page02d .page02b-progressive-column-tamil,
-    .page02d .page02d-progressive-column-tamil {
+    .page02d .page02b-progressive-column-tamil {
 
         font-size:
             17px;
@@ -2038,8 +2043,7 @@
     }
 
 
-    .page02d .page02b-progressive-column-english,
-    .page02d .page02d-progressive-column-english {
+    .page02d .page02b-progressive-column-english {
 
         font-size:
             10px;
@@ -2049,8 +2053,7 @@
     }
 
 
-    .page02d .page02b-progressive-column-score,
-    .page02d .page02d-progressive-column-score {
+    .page02d .page02b-progressive-column-score {
 
         grid-area:
             score;
@@ -2066,24 +2069,21 @@
     }
 
 
-    .page02d .page02b-progressive-column-score strong,
-    .page02d .page02d-progressive-column-score strong {
+    .page02d .page02b-progressive-column-score strong {
 
         font-size:
             26px;
     }
 
 
-    .page02d .page02b-progressive-column-score span,
-    .page02d .page02d-progressive-column-score span {
+    .page02d .page02b-progressive-column-score span {
 
         font-size:
             10px;
     }
 
 
-    .page02d .page02b-progressive-column-progress,
-    .page02d .page02d-progressive-column-progress {
+    .page02d .page02b-progressive-column-progress {
 
         grid-area:
             progress;
@@ -2096,78 +2096,46 @@
     }
 
 
-    .page02d .page02b-progressive-column.is-current,
-    .page02d .page02d-progressive-column.is-current {
+    .page02d .page02b-progressive-column.is-current {
 
         box-shadow:
 
-            inset 4px 0 0
-                var(--d03-teal),
+            inset 4px 0 0 #22C7BD,
 
-            inset 0 -1px 0
-                rgba(168, 140, 255, 0.10);
+            inset 0 -1px 0 rgba(
+                168,
+                140,
+                255,
+                0.10
+            );
     }
 
 
-    .page02d .page02b-progressive-column.is-complete,
-    .page02d .page02d-progressive-column.is-complete {
+    .page02d .page02b-progressive-column.is-complete {
 
         box-shadow:
 
-            inset 4px 0 0
-                rgba(34, 199, 189, 0.78),
+            inset 4px 0 0 rgba(
+                34,
+                199,
+                189,
+                0.78
+            ),
 
-            inset 0 -1px 0
-                rgba(168, 140, 255, 0.10);
+            inset 0 -1px 0 rgba(
+                168,
+                140,
+                255,
+                0.10
+            );
     }
 
 
     .page02d .page02b-progressive-scoreboard
-    + .page02d-bottom-dimension-score,
-
-    .page02d #page02ProgressiveScoreboard
-    + .page02d-bottom-dimension-score,
-
-    .page02d .page02d-progressive-scoreboard
     + .page02d-bottom-dimension-score {
 
         margin-top:
             20px;
-    }
-
-
-    .page02d .dimension-header {
-
-        margin-bottom:
-            34px;
-    }
-
-
-    .page02d .dimension-introduction {
-
-        max-width:
-            100%;
-    }
-
-
-    .page02d .dimension-score-panel {
-
-        margin-top:
-            22px;
-    }
-
-
-    .page02d .dimension-completion {
-
-        margin-top:
-            20px;
-    }
-
-
-    .page02d .dimension-navigation {
-
-        padding-bottom:
-            0;
     }
 
 
@@ -2193,15 +2161,15 @@
 
 
 /* ==========================================================================
-   30. SMALL MOBILE
-========================================================================== */
+   26. SMALL MOBILE
+   ========================================================================== */
 
 @media (max-width: 420px) {
 
     .page02d .dimension-header {
 
         margin-bottom:
-            30px;
+            36px;
     }
 
 
@@ -2215,13 +2183,11 @@
     .page02d .dimension-score-panel {
 
         margin-top:
-            20px;
+            22px;
     }
 
 
-    .page02d #page02ProgressiveScoreboard,
-    .page02d .page02b-progressive-scoreboard,
-    .page02d .page02d-progressive-scoreboard {
+    .page02d .page02b-progressive-scoreboard {
 
         margin-top:
             26px;
@@ -2231,24 +2197,21 @@
     }
 
 
-    .page02d .page02b-progressive-scoreboard-header,
-    .page02d .page02d-progressive-scoreboard-header {
+    .page02d .page02b-progressive-scoreboard-header {
 
         padding:
-            19px 16px;
+            19px 16px !important;
     }
 
 
-    .page02d .page02b-progressive-scoreboard-title,
-    .page02d .page02d-progressive-scoreboard-title {
+    .page02d .page02b-progressive-scoreboard-title {
 
         font-size:
             19px;
     }
 
 
-    .page02d .page02b-progressive-column,
-    .page02d .page02d-progressive-column {
+    .page02d .page02b-progressive-column {
 
         grid-template-columns:
             34px minmax(0, 1fr) auto;
@@ -2258,41 +2221,43 @@
     }
 
 
-    .page02d .page02b-progressive-column-tamil,
-    .page02d .page02d-progressive-column-tamil {
+    .page02d .page02b-progressive-column-tamil {
 
         font-size:
             16px;
     }
 
 
-    .page02d .page02b-progressive-column-english,
-    .page02d .page02d-progressive-column-english {
+    .page02d .page02b-progressive-column-english {
 
         font-size:
             9px;
     }
 
 
-    .page02d .page02b-progressive-column-score strong,
-    .page02d .page02d-progressive-column-score strong {
+    .page02d .page02b-progressive-column-score strong {
 
         font-size:
             24px;
     }
 
 
-    .page02d .scorecard-option {
+    .page02d .scorecard-card {
 
-        min-width:
-            0;
+        box-shadow:
+            0 14px 38px rgba(
+                4,
+                2,
+                14,
+                0.26
+            );
     }
 }
 
 
 /* ==========================================================================
-   31. TOUCH DEVICE OPTIMIZATION
-========================================================================== */
+   27. TOUCH DEVICE OPTIMIZATION
+   ========================================================================== */
 
 @media (pointer: coarse) {
 
@@ -2315,18 +2280,16 @@
 
 
 /* ==========================================================================
-   32. REDUCED MOTION
-========================================================================== */
+   28. REDUCED MOTION
+   ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
 
-    .page02d .dimension-progress-fill,
     .page02d .scorecard-card,
     .page02d .scorecard-option,
     .page02d .scorecard-option::after,
     .page02d .dimension-button,
-    .page02d .page02b-progressive-column,
-    .page02d .page02d-progressive-column {
+    .page02d .page02b-progressive-column {
 
         transition:
             none !important;
@@ -2341,12 +2304,31 @@
         transform:
             none;
     }
+
+
+    .page02d .scorecard-option {
+
+        backdrop-filter:
+            none;
+
+        -webkit-backdrop-filter:
+            none;
+    }
+
+
+    .page02d *,
+    .page02d *::before,
+    .page02d *::after {
+
+        scroll-behavior:
+            auto !important;
+    }
 }
 
 
 /* ==========================================================================
-   33. PRINT
-========================================================================== */
+   29. PRINT
+   ========================================================================== */
 
 @media print {
 
@@ -2370,34 +2352,7 @@
     }
 
 
-    .page02d .scorecard-card,
-    .page02d .score-guide,
-    .page02d #page02ProgressiveScoreboard,
-    .page02d .page02b-progressive-scoreboard,
-    .page02d .page02d-progressive-scoreboard {
-
-        box-shadow:
-            none !important;
-
-        break-inside:
-            avoid;
-    }
-
-
-    .page02d .dimension-title-tamil,
-    .page02d .scorecard-title,
-    .page02d .scorecard-option {
-
-        color:
-            #111111 !important;
-    }
-
-
-    .page02d .scorecard-card,
-    .page02d .scorecard-option,
-    .page02d #page02ProgressiveScoreboard,
-    .page02d .page02b-progressive-scoreboard,
-    .page02d .page02d-progressive-scoreboard {
+    .page02d .scorecard-card {
 
         background:
             #FFFFFF !important;
@@ -2407,23 +2362,60 @@
 
         box-shadow:
             none !important;
+
+        color:
+            #111111 !important;
     }
 
 
-    .page02d .page02b-progressive-scoreboard-header,
-    .page02d .page02b-progressive-column,
-    .page02d .page02d-progressive-scoreboard-header,
-    .page02d .page02d-progressive-column {
+    .page02d .page02b-progressive-scoreboard {
 
         background:
             #FFFFFF !important;
+
+        border:
+            1px solid #CCCCCC !important;
+
+        box-shadow:
+            none !important;
+
+        color:
+            #111111 !important;
     }
 
 
+    .page02d .page02b-progressive-scoreboard-header {
+
+        background:
+            #FFFFFF !important;
+
+        border-bottom:
+            1px solid #CCCCCC !important;
+    }
+
+
+    .page02d .page02b-progressive-column {
+
+        background:
+            #FFFFFF !important;
+
+        border-color:
+            #CCCCCC !important;
+
+        color:
+            #111111 !important;
+
+        box-shadow:
+            none !important;
+    }
+
+
+    .page02d .dimension-title-tamil,
+    .page02d .scorecard-title,
+    .page02d .scorecard-option .option-label,
+    .page02d .scorecard-option .option-text,
     .page02d .page02b-progressive-scoreboard-title,
-    .page02d .page02b-progressive-column-tamil,
-    .page02d .page02d-progressive-scoreboard-title,
-    .page02d .page02d-progressive-column-tamil {
+    .page02d .page02b-progressive-column-tamil {
 
         color:
             #111111 !important;
@@ -2431,7 +2423,8 @@
 
 
     .page02d .page02b-progressive-column-english,
-    .page02d .page02d-progressive-column-english {
+    .page02d .page02b-progressive-column-progress,
+    .page02d .page02b-progressive-total-label {
 
         color:
             #444444 !important;
@@ -2440,84 +2433,82 @@
 
 
 /* ==========================================================================
-   34. FINAL ARCHITECTURE CONTRACT
+   30. FINAL ARCHITECTURE
 
-   SHARED:
+   page02-shared.css
+           ↓
+   Shared Millionaire Lifestyle Scorecard™ visual system
+           ↓
+   page02d.css
+           ↓
+   Dimension 03 — Assets™ identity
+           +
+   Shared progressive scoreboard styling
+           ↓
+   page02d.js
+           ↓
+   Progressive scoreboard lifecycle / navigation
 
-       page02-shared.css
-              ↓
-       common Page 02 geometry
-              ↓
-       common scorecard system
+   SCOREBOARD CONTRACT:
 
-   DATA:
+       page02b-progressive-scoreboard
+       page02b-progressive-scoreboard-header
+       page02b-progressive-scoreboard-heading
+       page02b-progressive-scoreboard-kicker
+       page02b-progressive-scoreboard-title
+       page02b-progressive-scoreboard-total
+       page02b-progressive-total-label
+       page02b-progressive-total-value
+       page02b-progressive-columns
+       page02b-progressive-column
+       page02b-progressive-column-number
+       page02b-progressive-column-name
+       page02b-progressive-column-tamil
+       page02b-progressive-column-english
+       page02b-progressive-column-score
+       page02b-progressive-column-progress
 
-       page02-data.js
-              ↓
-       canonical indicators + ranges
+   DIMENSIONS:
 
-   SESSION:
+       01  WEALTH™
+       02  INCOME & CASH FLOW™
+       03  ASSETS™
+       04  LIFESTYLE & FREEDOM™
+       05  PROTECTION & CONTRIBUTION™
 
-       page02-session.js
-              ↓
-       journey state + persistence
+   EACH:
 
-   SCORECARD:
+       5 indicators
+       20 maximum
 
-       page02-scorecard.js
-              ↓
-       rendering + selection + scoring + validation
+   TOTAL:
 
-   PAGE CONTROLLER:
-
-       page02d.js
-              ↓
-       lifecycle + navigation + scoreboard integration
-
-   PRESENTATION:
-
-       page02d.css
-              ↓
-       Dimension 03 identity
-
-   SCOREBOARD:
-
-       page02b-progressive-*
-              ↓
-       shared frozen visual contract
+       100
 
    PAGE 02D:
 
-       DIMENSION 03
-       ASSETS™
-       INDICATORS 11–15
+       dimensionId:
+           assets
 
-   PAGE PROGRESS:
+       previous:
+           page02c.html
 
-       3 / 5
-       60%
+       next:
+           page02e.html
 
-   NEXT:
+       previousDimension:
+           incomeCashFlow
 
-       page02e.html
+       nextDimension:
+           lifestyleFreedom
 
-   THIS FILE DOES NOT:
+   NO SCORING LOGIC IS CREATED HERE.
 
-       ✗ calculate scores
-       ✗ change answer mapping
-       ✗ alter indicator data
-       ✗ alter session state
-       ✗ navigate pages
-       ✗ create HTML
-       ✗ load global header
-       ✗ load global footer
-========================================================================== */
+   NO DATA IS CREATED HERE.
 
+   NO NAVIGATION LOGIC IS CREATED HERE.
 
-/* ==========================================================================
-   END
-   CTM PATH™ MILLIONAIRES™
-   PAGE 02D — DIMENSION 03 — ASSETS™
-   VERSION 6.0
-========================================================================== */
+   NO GLOBAL HEADER/FOOTER LOGIC IS CREATED HERE.
+
+   ========================================================================== */
 
