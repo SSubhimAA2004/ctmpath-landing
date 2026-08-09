@@ -571,7 +571,6 @@
 
             0 0 0 1px rgba(185, 167, 255, 0.035);
     }
-
 }
 
 
@@ -725,7 +724,6 @@
         box-shadow:
             0 12px 30px rgba(4, 2, 14, 0.22);
     }
-
 }
 
 
@@ -1082,11 +1080,13 @@
             660px;
     }
 
+
     .page02d .dimension-score-panel {
 
         margin-top:
             28px;
     }
+
 
     .page02d #page02ProgressiveScoreboard,
     .page02d .page02d-progressive-scoreboard {
@@ -1382,5 +1382,4 @@
    PAGE 02D — DIMENSION 03 — ASSETS™
    VERSION 5.0
 ========================================================================== */
-
 
