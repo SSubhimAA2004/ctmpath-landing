@@ -68,18 +68,14 @@
  * =============================================================================
  */
 
-
 'use strict';
 
-
 (function(window, document){
-
 
 /* =============================================================================
  * CONFIGURATION
  * =============================================================================
  */
-
 
 const CONFIG = {
 
@@ -106,7 +102,6 @@ const CONFIG = {
  * =============================================================================
  */
 
-
 const DOM_IDS = {
 
     previousButton:
@@ -123,7 +118,6 @@ const DOM_IDS = {
  * =============================================================================
  */
 
-
 let initialized =
     false;
 
@@ -136,7 +130,6 @@ let navigating =
  * DOM HELPER
  * =============================================================================
  */
-
 
 function getElement(id){
 
@@ -152,7 +145,6 @@ function getElement(id){
  * SCROLL TO TOP
  * =============================================================================
  */
-
 
 function scrollToTop(){
 
@@ -176,7 +168,6 @@ function scrollToTop(){
  * VERIFY DEPENDENCIES
  * =============================================================================
  */
-
 
 function verifyDependencies(){
 
@@ -241,7 +232,6 @@ function verifyDependencies(){
  * VERIFY DIMENSION CONTRACT
  * =============================================================================
  */
-
 
 function verifyDimension(){
 
@@ -316,7 +306,6 @@ function verifyDimension(){
  * =============================================================================
  */
 
-
 function setNavigationState(
     active
 ){
@@ -378,7 +367,6 @@ function setNavigationState(
  * Page02Session. No explicit save is required here.
  * =============================================================================
  */
-
 
 function goPrevious(
     event
@@ -451,7 +439,6 @@ function goPrevious(
  *
  * =============================================================================
  */
-
 
 function goNext(
     event
@@ -584,7 +571,7 @@ function goNext(
     /* -------------------------------------------------------------------------
      * NAVIGATE
      * -------------------------------------------------------------------------
-     */
+ */
 
 
     window.location.href =
@@ -597,7 +584,6 @@ function goNext(
  * BIND PREVIOUS BUTTON
  * =============================================================================
  */
-
 
 function bindPreviousButton(){
 
@@ -634,7 +620,6 @@ function bindPreviousButton(){
  * BIND NEXT BUTTON
  * =============================================================================
  */
-
 
 function bindNextButton(){
 
@@ -679,7 +664,6 @@ function bindNextButton(){
  * Validation remains mandatory.
  * =============================================================================
  */
-
 
 function bindKeyboardNavigation(){
 
@@ -728,7 +712,6 @@ function bindKeyboardNavigation(){
  * The event is useful only for page-level QA/completion awareness.
  * =============================================================================
  */
-
 
 function bindAnswerEvents(){
 
@@ -801,7 +784,6 @@ function bindAnswerEvents(){
  * =============================================================================
  */
 
-
 function restorePage(){
 
     const restored =
@@ -853,7 +835,6 @@ function restorePage(){
  * =============================================================================
  */
 
-
 function initializeScorecard(){
 
     return (
@@ -872,7 +853,6 @@ function initializeScorecard(){
  * INITIALIZE
  * =============================================================================
  */
-
 
 function init(){
 
@@ -950,12 +930,9 @@ function init(){
 
     bindPreviousButton();
 
-
     bindNextButton();
 
-
     bindKeyboardNavigation();
-
 
     bindAnswerEvents();
 
@@ -1035,7 +1012,6 @@ else{
  * PUBLIC CONTROLLER
  * =============================================================================
  */
-
 
 window.Page02D = {
 
