@@ -6,19 +6,13 @@
    css/page02/page02e.css
 
    VERSION:
-   4.0
+   6.0 — DIMENSION 04 / PROGRESSIVE SCOREBOARD
 
    PAGE:
-   PAGE 02E — DIMENSION 04
-
-   DIMENSION:
-   LIFESTYLE & FREEDOM™
-
-   INDICATORS:
-   16–20
+   PAGE 02E — DIMENSION 04 — LIFESTYLE & FREEDOM™
 
    STATUS:
-   PAGE-SPECIFIC PRESENTATION
+   PAGE-SPECIFIC PRESENTATION — FROZEN ARCHITECTURE
 
    DEPENDS ON:
    css/page02/page02-shared.css
@@ -26,43 +20,269 @@
    CONTROLLER:
    js/page02/page02e.js
 
+   DATA:
+   js/page02/page02-data.js
+
+   SESSION:
+   js/page02/page02-session.js
+
+   SCORECARD:
+   js/page02/page02-scorecard.js
+
    ==========================================================================
 
-   ARCHITECTURE
+   PURPOSE:
 
-   page02-shared.css owns:
+       ✓ Dimension 04 — Lifestyle & Freedom™ identity
+       ✓ Premium midnight-lavender / deep-violet atmosphere
+       ✓ Strong Tamil-first contrast
+       ✓ CTM teal interaction language
+       ✓ Restrained champagne-gold aspiration language
+       ✓ Dimension 04 progress state
+       ✓ Indicator/card surface refinement
+       ✓ Selected-state refinement
+       ✓ Completion-state refinement
+       ✓ Progressive Millionaire Lifestyle Scoreboard™
+       ✓ Five-dimension journey continuity
+       ✓ Responsive preservation
+       ✓ Reduced-motion support
+       ✓ Print support
 
-       ✓ page foundation
-       ✓ design tokens
-       ✓ journey progress
-       ✓ dimension header architecture
-       ✓ typography
-       ✓ scorecard cards
-       ✓ four-option architecture
-       ✓ selected states
-       ✓ score badges
-       ✓ live score panel
-       ✓ score guide
-       ✓ shared navigation
-       ✓ responsive architecture
-       ✓ touch accessibility
-       ✓ reduced motion
-       ✓ print safety
+   IMPORTANT:
 
-   page02e.css owns ONLY:
+   This file changes PRESENTATION ONLY.
 
-       ✓ Dimension 04 identity
-       ✓ Dimension 04 spacing refinements
-       ✓ Dimension 04 completion emphasis
-       ✓ Dimension 04-specific layout adjustments
+   It does NOT alter:
 
-   DO NOT redefine shared visual primitives here.
+       ✗ HTML structure
+       ✗ indicator data
+       ✗ scoring
+       ✗ answer mapping
+       ✗ session state
+       ✗ navigation logic
+       ✗ shared Page 02 architecture
+
+   The shared Page 02 system remains the functional source of truth.
 
    ========================================================================== */
 
 
 /* ==========================================================================
-   01. PAGE 02E FOUNDATION
+   01. PAGE 02E VISUAL TOKENS
+   ========================================================================== */
+
+.page02e {
+
+    --d04-bg-0:
+        #100B1F;
+
+    --d04-bg-1:
+        #17102B;
+
+    --d04-bg-2:
+        #21163A;
+
+    --d04-bg-3:
+        #2C1D49;
+
+
+    --d04-lavender:
+        #B9A7FF;
+
+    --d04-lavender-soft:
+        #D9D0FF;
+
+    --d04-lavender-bright:
+        #E9E3FF;
+
+
+    --d04-violet:
+        #7C5CFF;
+
+    --d04-violet-soft:
+        rgba(124, 92, 255, 0.18);
+
+    --d04-violet-line:
+        rgba(185, 167, 255, 0.30);
+
+
+    --d04-teal:
+        #20D6CF;
+
+    --d04-teal-soft:
+        rgba(32, 214, 207, 0.14);
+
+    --d04-teal-line:
+        rgba(32, 214, 207, 0.42);
+
+
+    --d04-gold:
+        #D6B56A;
+
+    --d04-gold-bright:
+        #E7C77C;
+
+    --d04-gold-soft:
+        rgba(214, 181, 106, 0.12);
+
+
+    --d04-ivory:
+        #F7F4FF;
+
+    --d04-white:
+        #FFFFFF;
+
+
+    --d04-muted:
+        rgba(232, 226, 248, 0.72);
+
+    --d04-muted-soft:
+        rgba(232, 226, 248, 0.50);
+
+
+    --d04-border:
+        rgba(214, 201, 255, 0.12);
+
+    --d04-border-strong:
+        rgba(185, 167, 255, 0.26);
+
+
+    --d04-surface:
+        rgba(255, 255, 255, 0.035);
+
+    --d04-surface-strong:
+        rgba(255, 255, 255, 0.065);
+
+
+    --d04-shadow:
+        0 24px 70px rgba(4, 2, 14, 0.34);
+
+
+    position:
+        relative;
+
+    isolation:
+        isolate;
+
+    width:
+        100%;
+
+    min-height:
+        100vh;
+
+}
+
+
+/* ==========================================================================
+   02. PREMIUM MIDNIGHT BACKGROUND
+   ========================================================================== */
+
+.page02e.page02-dimension {
+
+    background:
+
+        radial-gradient(
+            circle at 50% 3%,
+            rgba(124, 92, 255, 0.20),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 12% 28%,
+            rgba(185, 167, 255, 0.075),
+            transparent 24%
+        ),
+
+        radial-gradient(
+            circle at 88% 72%,
+            rgba(124, 92, 255, 0.075),
+            transparent 28%
+        ),
+
+        linear-gradient(
+            180deg,
+            var(--d04-bg-0) 0%,
+            var(--d04-bg-1) 34%,
+            var(--d04-bg-2) 68%,
+            var(--d04-bg-1) 100%
+        );
+
+    color:
+        var(--d04-ivory);
+
+}
+
+
+/* ==========================================================================
+   03. ATMOSPHERIC LIGHT
+   ========================================================================== */
+
+.page02e.page02-dimension::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        -2;
+
+    pointer-events:
+        none;
+
+    background:
+
+        radial-gradient(
+            ellipse at 50% 16%,
+            rgba(185, 167, 255, 0.085),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 50% 58%,
+            rgba(124, 92, 255, 0.045),
+            transparent 42%
+        );
+
+}
+
+
+/* ==========================================================================
+   04. SUBTLE EDGE LIGHT
+   ========================================================================== */
+
+.page02e.page02-dimension::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        -1;
+
+    pointer-events:
+        none;
+
+    border-top:
+        1px solid rgba(185, 167, 255, 0.10);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.018);
+
+}
+
+
+/* ==========================================================================
+   05. PAGE FOUNDATION
    ========================================================================== */
 
 .page02e {
@@ -73,14 +293,102 @@
 }
 
 
+.page02e .page02-dimension-shell {
+
+    position:
+        relative;
+
+    z-index:
+        1;
+
+    margin-left:
+        auto;
+
+    margin-right:
+        auto;
+
+}
+
+
 /* ==========================================================================
-   02. DIMENSION 04 HEADER
-   ==========================================================================
+   06. JOURNEY PROGRESS
+   ========================================================================== */
 
-   The shared stylesheet owns the complete header composition.
+.page02e .dimension-progress {
 
-   Page 02E only adds a small identity hook so the page remains independently
-   addressable without changing the global dimension architecture.
+    position:
+        relative;
+
+}
+
+
+.page02e .dimension-progress-label {
+
+    color:
+        var(--d04-lavender);
+
+    letter-spacing:
+        0.16em;
+
+}
+
+
+.page02e .dimension-progress-number {
+
+    color:
+        var(--d04-gold-bright);
+
+    font-variant-numeric:
+        tabular-nums;
+
+    text-shadow:
+        0 0 18px rgba(231, 199, 124, 0.12);
+
+}
+
+
+.page02e .dimension-progress-track {
+
+    background:
+        rgba(255, 255, 255, 0.075);
+
+    border:
+        1px solid rgba(185, 167, 255, 0.10);
+
+    box-shadow:
+        inset 0 1px 2px rgba(0, 0, 0, 0.22);
+
+}
+
+
+/*
+   Dimension 04 = 4 / 5 = 80%.
+
+   JavaScript may subsequently update this value.
+*/
+
+.page02e .dimension-progress-fill {
+
+    width:
+        80%;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            var(--d04-violet),
+            var(--d04-lavender),
+            var(--d04-teal)
+        );
+
+    box-shadow:
+        0 0 14px rgba(185, 167, 255, 0.28);
+
+}
+
+
+/* ==========================================================================
+   07. DIMENSION HEADER
    ========================================================================== */
 
 .page02e .dimension-header {
@@ -91,86 +399,125 @@
 }
 
 
-/* ==========================================================================
-   03. DIMENSION EYEBROW
-   ==========================================================================
-
-   Dimension 04 remains visually subordinate to the primary Tamil title.
-
-   Use the shared gold token rather than introducing a new colour.
-   ========================================================================== */
-
 .page02e .dimension-eyebrow {
 
     color:
-        var(--p02-gold);
+        var(--d04-gold-bright);
+
+    letter-spacing:
+        0.18em;
+
+    text-shadow:
+        0 0 16px rgba(231, 199, 124, 0.10);
 
 }
 
 
-/* ==========================================================================
-   04. DIMENSION TITLE ACCENT
-   ==========================================================================
+.page02e .dimension-title-tamil {
 
-   The English dimension title uses the canonical shared teal.
+    color:
+        var(--d04-ivory);
 
-   IMPORTANT:
-   Do not hard-code an alternative teal value here.
-   ========================================================================== */
+    text-shadow:
+        0 8px 34px rgba(0, 0, 0, 0.28);
+
+}
+
 
 .page02e .dimension-title-english {
 
     color:
-        var(--p02-teal);
+        var(--d04-lavender);
+
+    letter-spacing:
+        0.16em;
+
+    text-shadow:
+        0 0 20px rgba(185, 167, 255, 0.14);
 
 }
 
-
-/* ==========================================================================
-   05. DIMENSION INTRODUCTION
-   ==========================================================================
-
-   Dimension 04 introduction is intentionally slightly narrower than the
-   shared maximum to preserve a calm, premium reading width.
-   ========================================================================== */
 
 .page02e .dimension-introduction {
 
     max-width:
-        680px;
+        720px;
+
+    color:
+        var(--d04-muted);
+
+    line-height:
+        1.85;
 
 }
 
 
 /* ==========================================================================
-   06. LIVE DIMENSION SCORE
-   ==========================================================================
-
-   The score panel itself is owned by page02-shared.css.
-
-   Page 02E only controls the vertical relationship between the introduction
-   and the live score.
-
-   NOTE:
-
-   page02e.js / page02-scorecard.js may relocate this panel lower in the page
-   during initialization. Therefore this margin must remain safe in either
-   position.
+   08. LIVE DIMENSION SCORE
    ========================================================================== */
 
 .page02e .dimension-score-panel {
 
     margin-top:
-        28px;
+        30px;
+
+    color:
+        var(--d04-ivory);
+
+}
+
+
+.page02e .dimension-score-label {
+
+    color:
+        var(--d04-muted);
+
+    letter-spacing:
+        0.10em;
+
+}
+
+
+.page02e .dimension-score-current {
+
+    color:
+        var(--d04-teal);
+
+    text-shadow:
+        0 0 20px rgba(32, 214, 207, 0.14);
+
+}
+
+
+.page02e .dimension-score-total {
+
+    color:
+        var(--d04-muted-soft);
+
+}
+
+
+/*
+   page02e.js relocates this panel immediately below
+   the progressive scoreboard.
+*/
+
+.page02e .page02e-bottom-dimension-score {
+
+    position:
+        relative;
 
 }
 
 
 /* ==========================================================================
-   07. SCORECARD SECTION
+   09. SCORECARD SECTION
    ========================================================================== */
 
 .page02e .dimension-scorecard {
+
+    position:
+        relative;
 
     width:
         100%;
@@ -184,20 +531,42 @@
 }
 
 
-/* ==========================================================================
-   08. SCORECARD LIST
-   ==========================================================================
-
-   The shared stylesheet owns card architecture.
-
-   This page only ensures the first dynamically rendered indicator does not
-   acquire an unintended additional top offset.
-   ========================================================================== */
-
 .page02e .scorecard-list {
 
-    margin-top:
-        0;
+    position:
+        relative;
+
+}
+
+
+.page02e .scorecard-card {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.055),
+            rgba(255, 255, 255, 0.020)
+        );
+
+    border-color:
+        var(--d04-border);
+
+    box-shadow:
+        var(--d04-shadow);
+
+    backdrop-filter:
+        blur(10px);
+
+    -webkit-backdrop-filter:
+        blur(10px);
+
+    transition:
+
+        border-color 220ms ease,
+        box-shadow 220ms ease,
+        transform 220ms ease,
+        background 220ms ease;
 
 }
 
@@ -210,185 +579,392 @@
 }
 
 
+.page02e .scorecard-card::before {
+
+    background:
+
+        linear-gradient(
+            180deg,
+            var(--d04-lavender),
+            var(--d04-violet)
+        );
+
+    box-shadow:
+        0 0 18px rgba(185, 167, 255, 0.28);
+
+}
+
+
+@media (hover: hover) {
+
+    .page02e .scorecard-card:hover {
+
+        border-color:
+            var(--d04-border-strong);
+
+        box-shadow:
+
+            0 28px 80px rgba(4, 2, 14, 0.42),
+
+            0 0 0 1px rgba(
+                185,
+                167,
+                255,
+                0.035
+            );
+
+    }
+
+}
+
+
 /* ==========================================================================
-   09. DIMENSION COMPLETION STATUS
-   ==========================================================================
+   10. SCORECARD NUMBER
+   ========================================================================== */
 
-   The completion block is intentionally subtle.
+.page02e .scorecard-number {
 
-   It should communicate progress without competing with:
+    border-color:
+        rgba(185, 167, 255, 0.38);
 
-       • the live dimension score
-       • the progressive scoreboard
-       • the navigation CTA
+    color:
+        var(--d04-lavender);
+
+    background:
+        rgba(124, 92, 255, 0.075);
+
+    box-shadow:
+        inset 0 0 0 1px rgba(
+            255,
+            255,
+            255,
+            0.018
+        );
+
+}
+
+
+/* ==========================================================================
+   11. INDICATOR TITLES
+   ========================================================================== */
+
+.page02e .scorecard-title {
+
+    color:
+        var(--d04-ivory);
+
+}
+
+
+.page02e .scorecard-title-english {
+
+    color:
+        var(--d04-lavender);
+
+    opacity:
+        0.92;
+
+    letter-spacing:
+        0.10em;
+
+}
+
+
+/* ==========================================================================
+   12. IDEAL / TARGET BENCHMARK
+   ========================================================================== */
+
+.page02e .scorecard-ideal {
+
+    border-color:
+        rgba(214, 181, 106, 0.42);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(214, 181, 106, 0.115),
+            rgba(214, 181, 106, 0.030)
+        );
+
+    box-shadow:
+        inset 0 1px 0 rgba(
+            255,
+            255,
+            255,
+            0.018
+        );
+
+}
+
+
+.page02e .scorecard-ideal-label {
+
+    color:
+        rgba(231, 199, 124, 0.78);
+
+}
+
+
+.page02e .scorecard-ideal-value {
+
+    color:
+        var(--d04-gold-bright);
+
+    text-shadow:
+        0 0 18px rgba(231, 199, 124, 0.10);
+
+}
+
+
+/* ==========================================================================
+   13. RANGE OPTIONS
+   ========================================================================== */
+
+.page02e .scorecard-option {
+
+    background:
+        rgba(255, 255, 255, 0.028);
+
+    border-color:
+        rgba(185, 167, 255, 0.13);
+
+    color:
+        var(--d04-ivory);
+
+    backdrop-filter:
+        blur(4px);
+
+    -webkit-backdrop-filter:
+        blur(4px);
+
+    transition:
+
+        background 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+
+}
+
+
+.page02e .scorecard-option .option-label,
+.page02e .scorecard-option .option-text {
+
+    color:
+        var(--d04-ivory);
+
+}
+
+
+.page02e .scorecard-option small,
+.page02e .scorecard-option .option-subtitle,
+.page02e .scorecard-option .option-description {
+
+    color:
+        var(--d04-muted-soft);
+
+}
+
+
+@media (hover: hover) {
+
+    .page02e .scorecard-option:hover {
+
+        border-color:
+            rgba(185, 167, 255, 0.34);
+
+        background:
+            rgba(185, 167, 255, 0.055);
+
+        box-shadow:
+            0 12px 30px rgba(
+                4,
+                2,
+                14,
+                0.22
+            );
+
+    }
+
+}
+
+
+/* ==========================================================================
+   14. SELECTED OPTION
+   ========================================================================== */
+
+.page02e .scorecard-option.is-selected,
+.page02e .scorecard-option[aria-pressed="true"] {
+
+    border-color:
+        var(--d04-teal);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(32, 214, 207, 0.15),
+            rgba(32, 214, 207, 0.055)
+        );
+
+    box-shadow:
+
+        0 0 0 1px rgba(
+            32,
+            214,
+            207,
+            0.08
+        ),
+
+        0 12px 34px rgba(
+            32,
+            214,
+            207,
+            0.10
+        );
+
+}
+
+
+.page02e .scorecard-option.is-selected .option-label,
+.page02e .scorecard-option.is-selected .option-text,
+.page02e .scorecard-option[aria-pressed="true"] .option-label,
+.page02e .scorecard-option[aria-pressed="true"] .option-text {
+
+    color:
+        var(--d04-white);
+
+}
+
+
+/* ==========================================================================
+   15. FOURTH / TARGET OPTION
+   ========================================================================== */
+
+.page02e .scorecard-option:nth-child(4):not(.is-selected):not(
+    [aria-pressed="true"]
+) {
+
+    border-color:
+        rgba(214, 181, 106, 0.38);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(214, 181, 106, 0.065),
+            rgba(214, 181, 106, 0.020)
+        );
+
+}
+
+
+.page02e .scorecard-option:nth-child(4):not(.is-selected):not(
+    [aria-pressed="true"]
+) .option-score {
+
+    border-color:
+        rgba(214, 181, 106, 0.48);
+
+    background:
+        rgba(214, 181, 106, 0.085);
+
+    color:
+        var(--d04-gold-bright);
+
+}
+
+
+/* ==========================================================================
+   16. OPTION SCORE MARKER
+   ========================================================================== */
+
+.page02e .option-score {
+
+    border-color:
+        rgba(185, 167, 255, 0.24);
+
+    color:
+        var(--d04-lavender);
+
+    background:
+        rgba(124, 92, 255, 0.055);
+
+}
+
+
+.page02e .scorecard-option.is-selected .option-score,
+.page02e .scorecard-option[aria-pressed="true"] .option-score {
+
+    border-color:
+        rgba(32, 214, 207, 0.54);
+
+    background:
+        rgba(32, 214, 207, 0.11);
+
+    color:
+        var(--d04-teal);
+
+}
+
+
+/* ==========================================================================
+   17. COMPLETION STATUS
    ========================================================================== */
 
 .page02e .dimension-completion {
 
     margin-top:
-        26px;
-
-    text-align:
-        center;
-
-}
-
-
-/* ==========================================================================
-   10. COMPLETION TEXT
-   ========================================================================== */
-
-.page02e .dimension-completion p {
-
-    margin:
-        0;
-
-    font-family:
-        "Cinzel",
-        Georgia,
-        serif;
-
-    font-size:
-        0.66rem;
-
-    font-weight:
-        700;
-
-    line-height:
-        1.5;
-
-    letter-spacing:
-        0.10em;
-
-    text-transform:
-        uppercase;
+        28px;
 
     color:
-        var(--p02-text-muted);
+        var(--d04-muted);
 
 }
 
-
-/* ==========================================================================
-   11. COMPLETION COUNT
-   ==========================================================================
-
-   Supports:
-
-       <span data-dimension-answered>0</span>
-       /
-       <span data-dimension-total>5</span>
-   ========================================================================== */
-
-.page02e .dimension-completion [data-dimension-answered],
-.page02e .dimension-completion [data-dimension-total] {
-
-    color:
-        var(--p02-text-soft);
-
-}
-
-
-/* ==========================================================================
-   12. COMPLETED DIMENSION STATE
-   ==========================================================================
-
-   Any completion marker explicitly marked:
-
-       data-complete="true"
-
-   receives the canonical CTM teal emphasis.
-
-   No new colour is introduced.
-   ========================================================================== */
 
 .page02e [data-dimension-complete][data-complete="true"] {
 
     color:
-        var(--p02-teal);
+        var(--d04-teal);
+
+}
+
+
+.page02e .dimension-completion.is-complete {
+
+    color:
+        var(--d04-teal);
+
+    text-shadow:
+        0 0 18px rgba(
+            32,
+            214,
+            207,
+            0.12
+        );
 
 }
 
 
 /* ==========================================================================
-   13. SCORE GUIDE POSITION
-   ==========================================================================
-
-   page02-shared.css owns the score-guide architecture.
-
-   Page 02E only establishes the preferred breathing space between the
-   completion state and the score guide when both are present.
-   ========================================================================== */
-
-.page02e .score-guide {
-
-    margin-top:
-        34px;
-
-}
-
-
-/* ==========================================================================
-   14. VALIDATION MESSAGE
-   ==========================================================================
-
-   Validation is generated by page02-scorecard.js.
-
-   Keep the message visually contained within the same reading width as
-   the scorecard system.
+   18. VALIDATION MESSAGE
    ========================================================================== */
 
 .page02e .dimension-message {
 
-    width:
-        min(
-            100%,
-            960px
-        );
-
     max-width:
-        960px;
+        1020px;
 
-    margin-left:
-        auto;
-
-    margin-right:
-        auto;
+    color:
+        var(--d04-muted);
 
 }
 
 
 /* ==========================================================================
-   15. VALIDATION MESSAGE — HIDDEN STATE
-   ========================================================================== */
-
-.page02e .dimension-message[hidden] {
-
-    display:
-        none;
-
-}
-
-
-/* ==========================================================================
-   16. NAVIGATION
-   ==========================================================================
-
-   IMPORTANT:
-
-   Navigation button colours, typography, states and responsive behavior
-   belong exclusively to page02-shared.css.
-
-   This file must NOT redefine:
-
-       • primary button colour
-       • secondary button colour
-       • hover states
-       • selected states
-       • button shadows
-       • button dimensions
-
-   The shared system is the single source of truth.
+   19. NAVIGATION
    ========================================================================== */
 
 .page02e .dimension-navigation {
@@ -399,47 +975,479 @@
 }
 
 
-/* ==========================================================================
-   17. PAGE 02E NAVIGATION RHYTHM
-   ==========================================================================
+.page02e .dimension-button-primary {
 
-   The shared navigation controls its main layout.
+    position:
+        relative;
 
-   This small page-specific adjustment ensures sufficient breathing room
-   after the progressive scoreboard when the scoreboard is mounted
-   dynamically by the controller.
-   ========================================================================== */
+    border-color:
+        rgba(185, 167, 255, 0.18);
 
-.page02e .page02b-progressive-scoreboard
-    + .dimension-navigation {
-
-    margin-top:
-        34px;
+    box-shadow:
+        0 12px 36px rgba(
+            4,
+            2,
+            14,
+            0.26
+        );
 
 }
 
 
 /* ==========================================================================
-   18. PROGRESSIVE SCOREBOARD CONTINUITY
-   ==========================================================================
-
-   page02e.js may mount the shared progressive scoreboard immediately before
-   navigation.
-
-   The scoreboard itself belongs to the shared Page 02 architecture.
-
-   Therefore this page only controls spacing.
-
-   The shared scoreboard class namespace remains:
-
-       page02b-progressive-*
-
-   This is intentional and must not be renamed to:
-
-       page02e-progressive-*
+   20. SCORE GUIDE / SUPPORTING PANELS
    ========================================================================== */
 
-.page02e .page02b-progressive-scoreboard {
+.page02e .score-guide,
+.page02e .dimension-score-guide,
+.page02e .scorecard-guide {
+
+    color:
+        var(--d04-muted);
+
+    border-color:
+        rgba(185, 167, 255, 0.12);
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+}
+
+
+.page02e .score-guide strong,
+.page02e .dimension-score-guide strong,
+.page02e .scorecard-guide strong {
+
+    color:
+        var(--d04-lavender-soft);
+
+}
+
+
+/* ==========================================================================
+   21. LIVE SCORE / SCORE MEDALLION
+   ========================================================================== */
+
+.page02e .score-medallion,
+.page02e .dimension-score-medallion,
+.page02e .scorecard-score {
+
+    border-color:
+        rgba(185, 167, 255, 0.22);
+
+    background:
+
+        radial-gradient(
+            circle at 35% 28%,
+            rgba(185, 167, 255, 0.10),
+            rgba(124, 92, 255, 0.025) 55%,
+            rgba(0, 0, 0, 0.12)
+        );
+
+    box-shadow:
+        0 18px 46px rgba(
+            4,
+            2,
+            14,
+            0.28
+        );
+
+}
+
+
+/* ==========================================================================
+   22. ACCESSIBILITY / FOCUS
+   ========================================================================== */
+
+.page02e .scorecard-option:focus-visible,
+.page02e button:focus-visible,
+.page02e a:focus-visible {
+
+    outline:
+        2px solid var(--d04-lavender-bright);
+
+    outline-offset:
+        3px;
+
+    box-shadow:
+        0 0 0 5px rgba(
+            185,
+            167,
+            255,
+            0.14
+        );
+
+}
+
+
+/* ==========================================================================
+   23. PROGRESSIVE MILLIONAIRE LIFESTYLE SCOREBOARD™
+
+   IMPORTANT:
+
+   Page 02E uses the scoreboard namespace created by page02e.js.
+
+   Canonical classes:
+
+       page02e-progressive-scoreboard
+       page02e-progressive-scoreboard-header
+       page02e-progressive-scoreboard-heading
+       page02e-progressive-scoreboard-kicker
+       page02e-progressive-scoreboard-title
+       page02e-progressive-scoreboard-total
+       page02e-progressive-total-label
+       page02e-progressive-total-value
+       page02e-progressive-columns
+       page02e-progressive-column
+       page02e-progressive-column-number
+       page02e-progressive-column-name
+       page02e-progressive-column-tamil
+       page02e-progressive-column-english
+       page02e-progressive-column-score
+       page02e-progressive-column-progress
+
+   The visual contract remains aligned with Page 02D.
+
+   ========================================================================== */
+
+
+/* ==========================================================================
+   23A. SCOREBOARD SHELL
+   ========================================================================== */
+
+.page02e .page02e-progressive-scoreboard {
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+    margin:
+        52px 0 0;
+
+    overflow:
+        hidden;
+
+    border:
+        1px solid rgba(
+            168,
+            140,
+            255,
+            0.20
+        );
+
+    border-radius:
+        28px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(30, 20, 58, 0.96),
+            rgba(17, 12, 39, 0.98)
+        );
+
+    box-shadow:
+        0 22px 60px rgba(
+            0,
+            0,
+            0,
+            0.24
+        );
+
+    color:
+        var(--d04-ivory);
+
+}
+
+
+/*
+   Premium Dimension 04 top accent.
+*/
+
+.page02e .page02e-progressive-scoreboard::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        0;
+
+    right:
+        0;
+
+    height:
+        2px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            var(--d04-violet),
+            var(--d04-lavender),
+            var(--d04-teal)
+        );
+
+    pointer-events:
+        none;
+
+}
+
+
+/* ==========================================================================
+   23B. SCOREBOARD HEADER
+   ========================================================================== */
+
+.page02e .page02e-progressive-scoreboard-header {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        32px;
+
+    padding:
+        30px 34px;
+
+    border-bottom:
+        1px solid rgba(
+            168,
+            140,
+            255,
+            0.12
+        );
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(24, 15, 48, 0.96),
+            rgba(18, 11, 36, 0.92)
+        );
+
+}
+
+
+.page02e .page02e-progressive-scoreboard-heading {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        7px;
+
+    min-width:
+        0;
+
+}
+
+
+.page02e .page02e-progressive-scoreboard-kicker {
+
+    display:
+        block;
+
+    color:
+        #B9A7EF;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.2;
+
+    letter-spacing:
+        0.18em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.page02e .page02e-progressive-scoreboard-title {
+
+    display:
+        block;
+
+    color:
+        #F4F0FF;
+
+    font-size:
+        clamp(22px, 2vw, 30px);
+
+    font-weight:
+        700;
+
+    line-height:
+        1.2;
+
+}
+
+
+/* ==========================================================================
+   23C. GRAND TOTAL
+   ========================================================================== */
+
+.page02e .page02e-progressive-scoreboard-total {
+
+    flex:
+        0 0 auto;
+
+    min-width:
+        176px;
+
+    padding:
+        15px 22px;
+
+    border:
+        1px solid rgba(
+            216,
+            173,
+            88,
+            0.22
+        );
+
+    border-radius:
+        18px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(216, 173, 88, 0.09),
+            rgba(216, 173, 88, 0.025)
+        );
+
+    text-align:
+        right;
+
+}
+
+
+.page02e .page02e-progressive-total-label {
+
+    display:
+        block;
+
+    margin-bottom:
+        4px;
+
+    color:
+        rgba(
+            232,
+            196,
+            114,
+            0.72
+        );
+
+    font-size:
+        11px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.14em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.page02e .page02e-progressive-total-value {
+
+    display:
+        inline-flex;
+
+    align-items:
+        baseline;
+
+    gap:
+        5px;
+
+    color:
+        rgba(
+            244,
+            240,
+            255,
+            0.58
+        );
+
+    font-size:
+        14px;
+
+}
+
+
+.page02e .page02e-progressive-total-value strong {
+
+    color:
+        #E8C472;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        36px;
+
+    font-weight:
+        700;
+
+    line-height:
+        1;
+
+}
+
+
+/* ==========================================================================
+   23D. FIVE DIMENSION COLUMNS
+
+   Desktop:
+       5 columns
+
+   Grand Total:
+       remains in the header.
+
+   Therefore:
+       NEVER six columns.
+   ========================================================================== */
+
+.page02e .page02e-progressive-columns {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            5,
+            minmax(
+                0,
+                1fr
+            )
+        );
 
     width:
         100%;
@@ -447,81 +1455,459 @@
 }
 
 
+.page02e .page02e-progressive-column {
+
+    position:
+        relative;
+
+    min-width:
+        0;
+
+    min-height:
+        238px;
+
+    padding:
+        24px 20px 25px;
+
+    border-right:
+        1px solid rgba(
+            168,
+            140,
+            255,
+            0.10
+        );
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(55, 40, 96, 0.24),
+            rgba(27, 20, 58, 0.16)
+        );
+
+    transition:
+
+        background 180ms ease,
+        border-color 180ms ease,
+        transform 180ms ease;
+
+}
+
+
+.page02e .page02e-progressive-column:last-child {
+
+    border-right:
+        0;
+
+}
+
+
 /* ==========================================================================
-   19. DIMENSION 04 — ANSWERED CARD EMPHASIS
-   ==========================================================================
-
-   The shared scorecard already owns the answered state.
-
-   This page-specific rule provides only a restrained secondary emphasis
-   for the completed Dimension 04 journey state.
-
-   It deliberately does NOT override the shared card border.
+   23E. CURRENT DIMENSION
    ========================================================================== */
 
-.page02e.is-dimension-complete
-    .scorecard-card {
+.page02e .page02e-progressive-column.is-current {
 
-    opacity:
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(79, 57, 136, 0.38),
+            rgba(35, 24, 73, 0.30)
+        );
+
+    box-shadow:
+        inset 0 -3px 0 var(--d04-teal);
+
+}
+
+
+/* ==========================================================================
+   23F. STARTED DIMENSION
+   ========================================================================== */
+
+.page02e .page02e-progressive-column.is-started {
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(54, 41, 96, 0.34),
+            rgba(28, 20, 59, 0.22)
+        );
+
+}
+
+
+/* ==========================================================================
+   23G. COMPLETED DIMENSION
+   ========================================================================== */
+
+.page02e .page02e-progressive-column.is-complete {
+
+    box-shadow:
+        inset 0 -3px 0 rgba(
+            34,
+            199,
+            189,
+            0.72
+        );
+
+}
+
+
+/* ==========================================================================
+   23H. DIMENSION NUMBER
+   ========================================================================== */
+
+.page02e .page02e-progressive-column-number {
+
+    margin-bottom:
+        13px;
+
+    color:
+        #9D8BD5;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.12em;
+
+}
+
+
+.page02e .page02e-progressive-column.is-current
+.page02e-progressive-column-number,
+
+.page02e .page02e-progressive-column.is-complete
+.page02e-progressive-column-number {
+
+    color:
+        #D8AD58;
+
+}
+
+
+/* ==========================================================================
+   23I. DIMENSION NAME
+   ========================================================================== */
+
+.page02e .page02e-progressive-column-name {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        5px;
+
+    min-height:
+        76px;
+
+}
+
+
+.page02e .page02e-progressive-column-tamil {
+
+    display:
+        block;
+
+    color:
+        #F4F0FF;
+
+    font-family:
+        Georgia,
+        "Noto Sans Tamil",
+        "Nirmala UI",
+        serif;
+
+    font-size:
+        19px;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.35;
+
+}
+
+
+.page02e .page02e-progressive-column-english {
+
+    display:
+        block;
+
+    color:
+        #B9A7EF;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.25;
+
+    letter-spacing:
+        0.04em;
+
+}
+
+
+/* ==========================================================================
+   23J. DIMENSION SCORE
+   ========================================================================== */
+
+.page02e .page02e-progressive-column-score {
+
+    display:
+        flex;
+
+    align-items:
+        baseline;
+
+    gap:
+        5px;
+
+    margin-top:
+        13px;
+
+    color:
+        rgba(
+            244,
+            240,
+            255,
+            0.48
+        );
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+}
+
+
+.page02e .page02e-progressive-column-score strong {
+
+    color:
+        #E8C472;
+
+    font-size:
+        30px;
+
+    font-weight:
+        700;
+
+    line-height:
         1;
 
 }
 
 
-/* ==========================================================================
-   20. DIMENSION 04 — CURRENT PAGE MARKER
-   ==========================================================================
+.page02e .page02e-progressive-column-score span {
 
-   If page02e.js or another page coordinator marks the page as current,
-   maintain full visual presence.
-
-   No additional decorative colour is introduced.
-   ========================================================================== */
-
-.page02e.is-current {
-
-    position:
-        relative;
+    font-size:
+        12px;
 
 }
 
 
 /* ==========================================================================
-   21. TABLET
+   23K. PROGRESS LABEL
    ========================================================================== */
 
-@media (max-width: 900px) {
+.page02e .page02e-progressive-column-progress {
+
+    margin-top:
+        14px;
+
+    color:
+        rgba(
+            244,
+            240,
+            255,
+            0.44
+        );
+
+    font-size:
+        10px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.10em;
+
+    line-height:
+        1.3;
+
+    text-transform:
+        uppercase;
+
+}
 
 
-    /* ----------------------------------------------------------------------
-       INTRODUCTION
-    ---------------------------------------------------------------------- */
+.page02e .page02e-progressive-column.is-complete
+.page02e-progressive-column-progress {
+
+    color:
+        #22C7BD;
+
+}
+
+
+.page02e .page02e-progressive-column.is-current
+.page02e-progressive-column-progress {
+
+    color:
+        #22C7BD;
+
+}
+
+
+/* ==========================================================================
+   23L. SCOREBOARD → LIVE SCORE RELATIONSHIP
+   ========================================================================== */
+
+.page02e .page02e-progressive-scoreboard
++ .page02e-bottom-dimension-score {
+
+    margin-top:
+        26px;
+
+}
+
+
+/* ==========================================================================
+   24. TABLET SCOREBOARD
+   ========================================================================== */
+
+@media (max-width: 1000px) {
+
+    .page02e .page02e-progressive-scoreboard-header {
+
+        padding:
+            26px 28px;
+
+    }
+
+
+    .page02e .page02e-progressive-columns {
+
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(
+                    0,
+                    1fr
+                )
+            );
+
+    }
+
+
+    .page02e .page02e-progressive-column:nth-child(3) {
+
+        border-right:
+            0;
+
+    }
+
+
+    .page02e .page02e-progressive-column:nth-child(n + 4) {
+
+        border-top:
+            1px solid rgba(
+                168,
+                140,
+                255,
+                0.10
+            );
+
+    }
+
 
     .page02e .dimension-introduction {
 
         max-width:
-            620px;
+            660px;
 
     }
 
 
-    /* ----------------------------------------------------------------------
-       SCORECARD
-    ---------------------------------------------------------------------- */
+    .page02e .dimension-score-panel {
 
-    .page02e .dimension-scorecard {
+        margin-top:
+            28px;
 
-        width:
+    }
+
+
+    .page02e .scorecard-card {
+
+        box-shadow:
+            0 18px 54px rgba(
+                4,
+                2,
+                14,
+                0.30
+            );
+
+    }
+
+}
+
+
+/* ==========================================================================
+   25. MOBILE SCOREBOARD
+
+   ONE CARD PER ROW.
+
+   Explicitly redeclares structural properties to prevent inherited
+   desktop grid/flex conflicts.
+   ========================================================================== */
+
+@media (max-width: 768px) {
+
+    .page02e .dimension-header {
+
+        margin-bottom:
+            40px;
+
+    }
+
+
+    .page02e .dimension-introduction {
+
+        max-width:
             100%;
 
+        line-height:
+            1.72;
+
     }
 
 
-    /* ----------------------------------------------------------------------
-       COMPLETION
-    ---------------------------------------------------------------------- */
-
-    .page02e .dimension-completion {
+    .page02e .dimension-score-panel {
 
         margin-top:
             24px;
@@ -529,31 +1915,407 @@
     }
 
 
-}
+    .page02e .dimension-completion {
 
-
-/* ==========================================================================
-   22. MOBILE
-   ========================================================================== */
-
-@media (max-width: 768px) {
-
-
-    /* ----------------------------------------------------------------------
-       HEADER
-    ---------------------------------------------------------------------- */
-
-    .page02e .dimension-header {
-
-        margin-bottom:
-            34px;
+        margin-top:
+            22px;
 
     }
 
 
-    /* ----------------------------------------------------------------------
-       LIVE SCORE
-    ---------------------------------------------------------------------- */
+    .page02e .dimension-navigation {
+
+        padding-bottom:
+            0;
+
+    }
+
+
+    .page02e .page02e-progressive-scoreboard {
+
+        display:
+            block !important;
+
+        width:
+            100% !important;
+
+        margin-top:
+            32px;
+
+        border-radius:
+            22px;
+
+        overflow:
+            hidden;
+
+    }
+
+
+    .page02e .page02e-progressive-scoreboard-header {
+
+        display:
+            flex !important;
+
+        flex-direction:
+            column !important;
+
+        align-items:
+            stretch !important;
+
+        justify-content:
+            flex-start !important;
+
+        gap:
+            18px;
+
+        padding:
+            22px 20px !important;
+
+    }
+
+
+    .page02e .page02e-progressive-scoreboard-heading {
+
+        width:
+            100%;
+
+    }
+
+
+    .page02e .page02e-progressive-scoreboard-kicker {
+
+        font-size:
+            10px;
+
+        letter-spacing:
+            0.14em;
+
+    }
+
+
+    .page02e .page02e-progressive-scoreboard-title {
+
+        font-size:
+            21px;
+
+        line-height:
+            1.25;
+
+    }
+
+
+    .page02e .page02e-progressive-scoreboard-total {
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+        padding:
+            13px 16px;
+
+        border-radius:
+            15px;
+
+        text-align:
+            left;
+
+        box-sizing:
+            border-box;
+
+    }
+
+
+    .page02e .page02e-progressive-total-label {
+
+        font-size:
+            9px;
+
+    }
+
+
+    .page02e .page02e-progressive-total-value strong {
+
+        font-size:
+            30px;
+
+    }
+
+
+    .page02e .page02e-progressive-columns {
+
+        display:
+            grid !important;
+
+        grid-template-columns:
+            minmax(
+                0,
+                1fr
+            ) !important;
+
+        width:
+            100% !important;
+
+        gap:
+            0;
+
+    }
+
+
+    .page02e .page02e-progressive-column {
+
+        display:
+            grid !important;
+
+        grid-template-columns:
+            42px minmax(0, 1fr) auto;
+
+        grid-template-areas:
+
+            "number name score"
+
+            "number progress progress";
+
+        align-items:
+            center;
+
+        width:
+            100% !important;
+
+        min-width:
+            0 !important;
+
+        min-height:
+            0;
+
+        box-sizing:
+            border-box;
+
+        padding:
+            18px 18px 19px !important;
+
+        border-right:
+            0 !important;
+
+        border-bottom:
+            1px solid rgba(
+                168,
+                140,
+                255,
+                0.10
+            );
+
+        background:
+
+            linear-gradient(
+                135deg,
+                rgba(45, 32, 82, 0.42),
+                rgba(24, 17, 50, 0.28)
+            );
+
+    }
+
+
+    .page02e .page02e-progressive-column:last-child {
+
+        border-bottom:
+            0 !important;
+
+    }
+
+
+    .page02e .page02e-progressive-column-number {
+
+        grid-area:
+            number;
+
+        align-self:
+            start;
+
+        margin:
+            2px 0 0;
+
+        font-size:
+            11px;
+
+    }
+
+
+    .page02e .page02e-progressive-column-name {
+
+        grid-area:
+            name;
+
+        min-height:
+            0;
+
+        padding-right:
+            10px;
+
+    }
+
+
+    .page02e .page02e-progressive-column-tamil {
+
+        font-size:
+            17px;
+
+        line-height:
+            1.3;
+
+    }
+
+
+    .page02e .page02e-progressive-column-english {
+
+        font-size:
+            10px;
+
+        line-height:
+            1.25;
+
+    }
+
+
+    .page02e .page02e-progressive-column-score {
+
+        grid-area:
+            score;
+
+        justify-self:
+            end;
+
+        margin:
+            0;
+
+        white-space:
+            nowrap;
+
+    }
+
+
+    .page02e .page02e-progressive-column-score strong {
+
+        font-size:
+            26px;
+
+    }
+
+
+    .page02e .page02e-progressive-column-score span {
+
+        font-size:
+            10px;
+
+    }
+
+
+    .page02e .page02e-progressive-column-progress {
+
+        grid-area:
+            progress;
+
+        margin:
+            7px 0 0;
+
+        font-size:
+            9px;
+
+    }
+
+
+    .page02e .page02e-progressive-column.is-current {
+
+        box-shadow:
+
+            inset 4px 0 0 #22C7BD,
+
+            inset 0 -1px 0 rgba(
+                168,
+                140,
+                255,
+                0.10
+            );
+
+    }
+
+
+    .page02e .page02e-progressive-column.is-complete {
+
+        box-shadow:
+
+            inset 4px 0 0 rgba(
+                34,
+                199,
+                189,
+                0.78
+            ),
+
+            inset 0 -1px 0 rgba(
+                168,
+                140,
+                255,
+                0.10
+            );
+
+    }
+
+
+    .page02e .page02e-progressive-scoreboard
+    + .page02e-bottom-dimension-score {
+
+        margin-top:
+            20px;
+
+    }
+
+
+    .page02e .scorecard-card {
+
+        backdrop-filter:
+            blur(6px);
+
+        -webkit-backdrop-filter:
+            blur(6px);
+
+    }
+
+
+    .page02e .scorecard-option {
+
+        backdrop-filter:
+            blur(3px);
+
+        -webkit-backdrop-filter:
+            blur(3px);
+
+    }
+
+}
+
+
+/* ==========================================================================
+   26. SMALL MOBILE
+   ========================================================================== */
+
+@media (max-width: 420px) {
+
+    .page02e .dimension-header {
+
+        margin-bottom:
+            36px;
+
+    }
+
+
+    .page02e .dimension-introduction {
+
+        max-width:
+            100%;
+
+    }
+
 
     .page02e .dimension-score-panel {
 
@@ -563,258 +2325,354 @@
     }
 
 
-    /* ----------------------------------------------------------------------
-       INTRODUCTION
-    ---------------------------------------------------------------------- */
-
-    .page02e .dimension-introduction {
-
-        max-width:
-            100%;
-
-    }
-
-
-    /* ----------------------------------------------------------------------
-       COMPLETION
-    ---------------------------------------------------------------------- */
-
-    .page02e .dimension-completion {
+    .page02e .page02e-progressive-scoreboard {
 
         margin-top:
-            20px;
+            26px;
 
-    }
-
-
-    /* ----------------------------------------------------------------------
-       SCORE GUIDE
-    ---------------------------------------------------------------------- */
-
-    .page02e .score-guide {
-
-        margin-top:
-            28px;
-
-    }
-
-
-    /* ----------------------------------------------------------------------
-       PROGRESSIVE SCOREBOARD → NAVIGATION
-    ---------------------------------------------------------------------- */
-
-    .page02e .page02b-progressive-scoreboard
-        + .dimension-navigation {
-
-        margin-top:
-            30px;
-
-    }
-
-
-}
-
-
-/* ==========================================================================
-   23. SMALL MOBILE
-   ========================================================================== */
-
-@media (max-width: 420px) {
-
-
-    /* ----------------------------------------------------------------------
-       HEADER
-    ---------------------------------------------------------------------- */
-
-    .page02e .dimension-header {
-
-        margin-bottom:
-            30px;
-
-    }
-
-
-    /* ----------------------------------------------------------------------
-       INTRODUCTION
-    ---------------------------------------------------------------------- */
-
-    .page02e .dimension-introduction {
-
-        max-width:
-            100%;
-
-    }
-
-
-    /* ----------------------------------------------------------------------
-       LIVE SCORE
-    ---------------------------------------------------------------------- */
-
-    .page02e .dimension-score-panel {
-
-        margin-top:
-            20px;
-
-    }
-
-
-    /* ----------------------------------------------------------------------
-       COMPLETION
-    ---------------------------------------------------------------------- */
-
-    .page02e .dimension-completion {
-
-        margin-top:
+        border-radius:
             18px;
 
     }
 
 
-    /* ----------------------------------------------------------------------
-       COMPLETION TEXT
-    ---------------------------------------------------------------------- */
+    .page02e .page02e-progressive-scoreboard-header {
 
-    .page02e .dimension-completion p {
-
-        font-size:
-            0.60rem;
-
-        letter-spacing:
-            0.08em;
+        padding:
+            19px 16px !important;
 
     }
 
 
-    /* ----------------------------------------------------------------------
-       SCORE GUIDE
-    ---------------------------------------------------------------------- */
+    .page02e .page02e-progressive-scoreboard-title {
 
-    .page02e .score-guide {
+        font-size:
+            19px;
 
-        margin-top:
+    }
+
+
+    .page02e .page02e-progressive-column {
+
+        grid-template-columns:
+            34px minmax(0, 1fr) auto;
+
+        padding:
+            16px 14px 17px !important;
+
+    }
+
+
+    .page02e .page02e-progressive-column-tamil {
+
+        font-size:
+            16px;
+
+    }
+
+
+    .page02e .page02e-progressive-column-english {
+
+        font-size:
+            9px;
+
+    }
+
+
+    .page02e .page02e-progressive-column-score strong {
+
+        font-size:
             24px;
 
     }
 
 
+    .page02e .scorecard-card {
+
+        box-shadow:
+            0 14px 38px rgba(
+                4,
+                2,
+                14,
+                0.26
+            );
+
+    }
+
 }
 
 
 /* ==========================================================================
-   24. TOUCH DEVICES
-   ==========================================================================
-
-   No button/card interaction rules are duplicated here.
-
-   Touch behavior remains owned by page02-shared.css.
+   27. TOUCH DEVICE OPTIMIZATION
    ========================================================================== */
 
 @media (pointer: coarse) {
 
+    .page02e .scorecard-option {
 
-    .page02e .dimension-navigation {
-
-        padding-bottom:
-            6px;
+        touch-action:
+            manipulation;
 
     }
 
+
+    .page02e .dimension-button {
+
+        min-height:
+            64px;
+
+        touch-action:
+            manipulation;
+
+    }
 
 }
 
 
 /* ==========================================================================
-   25. REDUCED MOTION
-   ==========================================================================
-
-   Animation ownership remains with page02-shared.css.
-
-   Page 02E introduces no independent animation.
+   28. REDUCED MOTION
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
 
-
-    .page02e .page02b-progressive-scoreboard
-        + .dimension-navigation {
+    .page02e .scorecard-card,
+    .page02e .scorecard-option,
+    .page02e .scorecard-option::after,
+    .page02e .dimension-button,
+    .page02e .page02e-progressive-column {
 
         transition:
+            none !important;
+
+    }
+
+
+    .page02e .scorecard-option:hover,
+    .page02e .scorecard-option.is-selected,
+    .page02e .scorecard-option[aria-pressed="true"],
+    .page02e .dimension-button:hover {
+
+        transform:
             none;
 
     }
 
 
+    .page02e .scorecard-option {
+
+        backdrop-filter:
+            none;
+
+        -webkit-backdrop-filter:
+            none;
+
+    }
+
+
+    .page02e *,
+    .page02e *::before,
+    .page02e *::after {
+
+        scroll-behavior:
+            auto !important;
+
+    }
+
 }
 
 
 /* ==========================================================================
-   26. PRINT
+   29. PRINT
    ========================================================================== */
 
 @media print {
-
 
     .page02e {
 
         min-height:
             auto;
 
-    }
-
-
-    .page02e .dimension-message {
+        background:
+            #FFFFFF !important;
 
         color:
-            #000000;
+            #111111 !important;
 
     }
 
 
-    .page02e .dimension-completion {
+    .page02e .dimension-navigation {
 
-        break-inside:
-            avoid;
+        display:
+            none !important;
 
     }
 
+
+    .page02e .scorecard-card {
+
+        background:
+            #FFFFFF !important;
+
+        border:
+            1px solid #CCCCCC !important;
+
+        box-shadow:
+            none !important;
+
+        color:
+            #111111 !important;
+
+    }
+
+
+    .page02e .page02e-progressive-scoreboard {
+
+        background:
+            #FFFFFF !important;
+
+        border:
+            1px solid #CCCCCC !important;
+
+        box-shadow:
+            none !important;
+
+        color:
+            #111111 !important;
+
+    }
+
+
+    .page02e .page02e-progressive-scoreboard-header {
+
+        background:
+            #FFFFFF !important;
+
+        border-bottom:
+            1px solid #CCCCCC !important;
+
+    }
+
+
+    .page02e .page02e-progressive-column {
+
+        background:
+            #FFFFFF !important;
+
+        border-color:
+            #CCCCCC !important;
+
+        color:
+            #111111 !important;
+
+        box-shadow:
+            none !important;
+
+    }
+
+
+    .page02e .dimension-title-tamil,
+    .page02e .scorecard-title,
+    .page02e .scorecard-option .option-label,
+    .page02e .scorecard-option .option-text,
+    .page02e .page02e-progressive-scoreboard-title,
+    .page02e .page02e-progressive-column-tamil {
+
+        color:
+            #111111 !important;
+
+    }
+
+
+    .page02e .page02e-progressive-column-english,
+    .page02e .page02e-progressive-column-progress,
+    .page02e .page02e-progressive-total-label {
+
+        color:
+            #444444 !important;
+
+    }
 
 }
 
 
 /* ==========================================================================
-   END OF PAGE 02E CSS
+   30. FINAL ARCHITECTURE
 
-   PAGE:
-       02E
+   page02-shared.css
+           ↓
+   Shared Millionaire Lifestyle Scorecard™ visual system
+           ↓
+   page02e.css
+           ↓
+   Dimension 04 — Lifestyle & Freedom™ identity
+           +
+   Progressive scoreboard presentation
+           ↓
+   page02e.js
+           ↓
+   Progressive scoreboard lifecycle / navigation
 
-   DIMENSION:
-       04 — LIFESTYLE & FREEDOM™
+   SCOREBOARD CONTRACT:
 
-   INDICATORS:
-       16–20
+       page02e-progressive-scoreboard
+       page02e-progressive-scoreboard-header
+       page02e-progressive-scoreboard-heading
+       page02e-progressive-scoreboard-kicker
+       page02e-progressive-scoreboard-title
+       page02e-progressive-scoreboard-total
+       page02e-progressive-total-label
+       page02e-progressive-total-value
+       page02e-progressive-columns
+       page02e-progressive-column
+       page02e-progressive-column-number
+       page02e-progressive-column-name
+       page02e-progressive-column-tamil
+       page02e-progressive-column-english
+       page02e-progressive-column-score
+       page02e-progressive-column-progress
 
-   PREVIOUS:
-       page02d.html
-       Dimension 03 — Assets™
+   DIMENSIONS:
 
-   NEXT:
-       page02f.html
-       Dimension 05 — Protection & Contribution™
+       01  WEALTH™
+       02  INCOME & CASH FLOW™
+       03  ASSETS™
+       04  LIFESTYLE & FREEDOM™
+       05  PROTECTION & CONTRIBUTION™
 
-   SHARED FOUNDATION:
-       page02-shared.css
+   EACH:
 
-   CONTROLLER:
-       page02e.js
+       5 indicators
+       20 maximum
 
-   DATA:
-       page02-data.js
+   TOTAL:
 
-   SESSION:
-       page02-session.js
+       100
 
-   SCORECARD:
-       page02-scorecard.js
+   PAGE 02E:
+
+       dimensionId:
+           lifestyleFreedom
+
+       previous:
+           page02d.html
+
+       next:
+           page02f.html
+
+       previousDimension:
+           assets
+
+       nextDimension:
+           protectionContribution
+
+   NO SCORING LOGIC IS CREATED HERE.
+
+   NO DATA IS CREATED HERE.
+
+   NO NAVIGATION LOGIC IS CREATED HERE.
+
+   NO GLOBAL HEADER/FOOTER LOGIC IS CREATED HERE.
 
    ========================================================================== */
 
