@@ -8,13 +8,13 @@
  * js/page02/page02d.js
  *
  * VERSION:
- * 4.0 — PROGRESSIVE DIMENSION SCOREBOARD
+ * 5.0 — CANONICAL PROGRESSIVE DIMENSION SCOREBOARD
  *
  * PAGE:
  * PAGE 02D — DIMENSION 03 — ASSETS™
  *
  * STATUS:
- * PAGE CONTROLLER
+ * PAGE CONTROLLER — FROZEN ARCHITECTURE
  *
  * =============================================================================
  *
@@ -22,6 +22,7 @@
  *
  * Controls the lifecycle, progressive score presentation and navigation
  * of Dimension 03.
+ *
  *
  *      page02c.html
  *           ↓
@@ -58,7 +59,7 @@
  *      ✓ initializes Dimension 03
  *      ✓ restores saved answers
  *      ✓ moves the live score below the scorecard
- *      ✓ creates progressive six-column score summary
+ *      ✓ creates the canonical progressive score summary
  *      ✓ displays all five dimension scores
  *      ✓ displays Grand Total /100
  *      ✓ refreshes scoreboard after every answer
@@ -78,6 +79,20 @@
  *      ✗ recreate scoring logic
  *      ✗ call backend
  *      ✗ save final discovery payload
+ *
+ * =============================================================================
+ *
+ * SCOREBOARD CONTRACT
+ *
+ *      page02b-progressive-scoreboard
+ *              ↓
+ *      page02b-progressive-scoreboard-header
+ *              ↓
+ *      page02b-progressive-columns
+ *              ↓
+ *      page02b-progressive-column
+ *
+ * This namespace is intentionally shared across Page 02.
  *
  * =============================================================================
  */
@@ -117,8 +132,10 @@ const CONFIG = {
         100,
 
     dimensionCount:
-        5
+        5,
 
+    indicatorCount:
+        5
 };
 
 
@@ -161,7 +178,6 @@ const DOM_IDS = {
 
     progressiveGrandTotal:
         'page02ProgressiveGrandTotal'
-
 };
 
 
@@ -191,7 +207,6 @@ function getElement(id){
         document.getElementById(id) ||
         null
     );
-
 }
 
 
@@ -212,9 +227,7 @@ function scrollToTop(){
 
         behavior:
             'auto'
-
     });
-
 }
 
 
@@ -241,7 +254,6 @@ function verifyComponentMounts(){
         console.warn(
             'CTM PATH™ Page 02D: #global-header mount not found.'
         );
-
     }
 
 
@@ -250,7 +262,6 @@ function verifyComponentMounts(){
         console.warn(
             'CTM PATH™ Page 02D: #global-footer mount not found.'
         );
-
     }
 
 
@@ -258,14 +269,15 @@ function verifyComponentMounts(){
         !!headerMount &&
         !!footerMount
     );
-
 }
 
 
 /* =============================================================================
  * GLOBAL COMPONENT LOADER
  *
- * Header/footer loading is intentionally NON-FATAL.
+ * Header/footer loading remains NON-FATAL.
+ *
+ * The page controller does not own global component markup.
  * =============================================================================
  */
 
@@ -285,7 +297,6 @@ async function loadGlobalComponents(){
         );
 
         return false;
-
     }
 
 
@@ -301,7 +312,7 @@ async function loadGlobalComponents(){
 
 
         console.info(
-            'CTM PATH™ Page 02D: global header and footer ready.',
+            'CTM PATH™ Page 02D: global components ready.',
             result || null
         );
 
@@ -318,9 +329,7 @@ async function loadGlobalComponents(){
 
 
         return false;
-
     }
-
 }
 
 
@@ -342,7 +351,6 @@ function verifyDependencies(){
         missing.push(
             'Page02Data'
         );
-
     }
 
 
@@ -353,7 +361,6 @@ function verifyDependencies(){
         missing.push(
             'Page02Session'
         );
-
     }
 
 
@@ -364,7 +371,6 @@ function verifyDependencies(){
         missing.push(
             'Page02Scorecard'
         );
-
     }
 
 
@@ -379,12 +385,10 @@ function verifyDependencies(){
 
 
         return false;
-
     }
 
 
     return true;
-
 }
 
 
@@ -412,7 +416,6 @@ function verifyDimension(){
 
 
         return false;
-
     }
 
 
@@ -429,17 +432,18 @@ function verifyDimension(){
 
 
         return false;
-
     }
 
 
     if(
-        dimension.indicators.length !== 5
+        dimension.indicators.length !==
+        CONFIG.indicatorCount
     ){
 
         console.error(
             'CTM PATH™ Page 02D expected exactly five indicators.',
             {
+
                 dimensionId:
                     CONFIG.dimensionId,
 
@@ -450,12 +454,10 @@ function verifyDimension(){
 
 
         return false;
-
     }
 
 
     return true;
-
 }
 
 
@@ -477,7 +479,6 @@ function getAllDimensions(){
     ){
 
         return [];
-
     }
 
 
@@ -490,7 +491,6 @@ function getAllDimensions(){
         return (
             window.Page02Data.DIMENSIONS
         );
-
     }
 
 
@@ -504,18 +504,17 @@ function getAllDimensions(){
 
 
         if(
-            Array.isArray(dimensions)
+            Array.isArray(
+                dimensions
+            )
         ){
 
             return dimensions;
-
         }
-
     }
 
 
     return [];
-
 }
 
 
@@ -537,7 +536,6 @@ function getDimensionScore(
     ){
 
         return 0;
-
     }
 
 
@@ -554,25 +552,27 @@ function getDimensionScore(
     ){
 
         return 0;
-
     }
 
 
     return Math.max(
+
         0,
+
         Math.min(
+
             CONFIG.dimensionMaximum,
+
             score
         )
     );
-
 }
 
 
 /* =============================================================================
  * GET PROGRESSIVE GRAND TOTAL
  *
- * The Grand Total is the sum of all five dimension scores.
+ * The Grand Total is the sum of the five dimension scores.
  *
  * No new scoring model is introduced.
  * =============================================================================
@@ -589,7 +589,6 @@ function getProgressiveTotal(){
     ){
 
         return 0;
-
     }
 
 
@@ -600,31 +599,37 @@ function getProgressiveTotal(){
                 CONFIG.dimensionCount
             )
             .reduce(
+
                 function(
                     runningTotal,
                     dimension
                 ){
 
                     return (
+
                         runningTotal +
+
                         getDimensionScore(
                             dimension.id
                         )
                     );
-
                 },
+
                 0
             );
 
 
     return Math.max(
+
         0,
+
         Math.min(
+
             CONFIG.totalMaximum,
+
             total
         )
     );
-
 }
 
 
@@ -658,12 +663,20 @@ function getDimensionAnsweredCount(
             )
         ){
 
-            return Number(
-                progress.answered
+            return Math.max(
+
+                0,
+
+                Math.min(
+
+                    CONFIG.indicatorCount,
+
+                    Number(
+                        progress.answered
+                    )
+                )
             );
-
         }
-
     }
 
 
@@ -671,9 +684,11 @@ function getDimensionAnsweredCount(
         window.Page02Data &&
         typeof window.Page02Data.getDimensionById ===
             'function'
+
             ? window.Page02Data.getDimensionById(
                 dimensionId
             )
+
             : null;
 
 
@@ -685,7 +700,6 @@ function getDimensionAnsweredCount(
     ){
 
         return 0;
-
     }
 
 
@@ -696,7 +710,6 @@ function getDimensionAnsweredCount(
     ){
 
         return 0;
-
     }
 
 
@@ -708,7 +721,9 @@ function getDimensionAnsweredCount(
         ){
 
             return (
+
                 count +
+
                 (
                     window.Page02Session.getAnswer(
                         indicator.id
@@ -717,13 +732,10 @@ function getDimensionAnsweredCount(
                         : 0
                 )
             );
-
         },
 
         0
-
     );
-
 }
 
 
@@ -744,7 +756,6 @@ function getDimensionEnglish(
         return String(
             dimension.english
         );
-
     }
 
 
@@ -756,7 +767,6 @@ function getDimensionEnglish(
         return String(
             dimension.titleEnglish
         );
-
     }
 
 
@@ -768,12 +778,10 @@ function getDimensionEnglish(
         return String(
             dimension.name
         );
-
     }
 
 
     return 'Dimension';
-
 }
 
 
@@ -794,7 +802,6 @@ function getDimensionTamil(
         return String(
             dimension.tamil
         );
-
     }
 
 
@@ -806,12 +813,10 @@ function getDimensionTamil(
         return String(
             dimension.titleTamil
         );
-
     }
 
 
     return '';
-
 }
 
 
@@ -825,7 +830,6 @@ function getDimensionScorePanel(){
     return document.querySelector(
         '.page02d .dimension-score-panel'
     );
-
 }
 
 
@@ -839,7 +843,6 @@ function getDimensionNavigation(){
     return document.querySelector(
         '.page02d .dimension-navigation'
     );
-
 }
 
 
@@ -858,8 +861,8 @@ function getDimensionNavigation(){
  *          ↓
  *      NAVIGATION
  *
- * The existing score panel is moved without changing its markup
- * or its scoring behaviour.
+ * Existing markup is moved.
+ * Scoring behaviour is untouched.
  * =============================================================================
  */
 
@@ -878,7 +881,6 @@ function relocateDimensionScore(){
     ){
 
         return false;
-
     }
 
 
@@ -894,33 +896,42 @@ function relocateDimensionScore(){
 
 
     return true;
-
 }
 
 
 /* =============================================================================
  * CREATE PROGRESSIVE SCOREBOARD
  *
- * Six columns:
+ * CANONICAL COMPONENT CONTRACT:
+ *
+ *      page02b-progressive-scoreboard
+ *      page02b-progressive-scoreboard-header
+ *      page02b-progressive-scoreboard-heading
+ *      page02b-progressive-scoreboard-kicker
+ *      page02b-progressive-scoreboard-title
+ *      page02b-progressive-scoreboard-total
+ *      page02b-progressive-total-label
+ *      page02b-progressive-total-value
+ *      page02b-progressive-columns
+ *      page02b-progressive-column
+ *      page02b-progressive-column-number
+ *      page02b-progressive-column-name
+ *      page02b-progressive-column-tamil
+ *      page02b-progressive-column-english
+ *      page02b-progressive-column-score
+ *      page02b-progressive-column-progress
+ *
+ * Five dimensions:
  *
  *      01 Wealth™
  *      02 Income & Cash Flow™
  *      03 Assets™
  *      04 Lifestyle & Freedom™
  *      05 Protection & Contribution™
- *      GRAND TOTAL
- *
- * Future dimensions:
- *
- *      — / 20
- *
- * Answered dimensions:
- *
- *      score / 20
  *
  * Grand Total:
  *
- *      total / 100
+ *      /100
  *
  * =============================================================================
  */
@@ -933,10 +944,11 @@ function createProgressiveScoreboard(){
         );
 
 
-    if(board){
+    if(
+        board
+    ){
 
         return board;
-
     }
 
 
@@ -954,7 +966,6 @@ function createProgressiveScoreboard(){
 
 
         return null;
-
     }
 
 
@@ -968,8 +979,13 @@ function createProgressiveScoreboard(){
         DOM_IDS.progressiveScoreboard;
 
 
+    /*
+     * IMPORTANT:
+     *
+     * Canonical Page 02 scoreboard namespace.
+     */
     board.className =
-        'page02d-progressive-scoreboard';
+        'page02b-progressive-scoreboard';
 
 
     board.setAttribute(
@@ -980,15 +996,15 @@ function createProgressiveScoreboard(){
 
     board.innerHTML = `
 
-        <div class="page02d-progressive-scoreboard-header">
+        <div class="page02b-progressive-scoreboard-header">
 
-            <div class="page02d-progressive-scoreboard-heading">
+            <div class="page02b-progressive-scoreboard-heading">
 
-                <span class="page02d-progressive-scoreboard-kicker">
+                <span class="page02b-progressive-scoreboard-kicker">
                     YOUR JOURNEY SO FAR™
                 </span>
 
-                <span class="page02d-progressive-scoreboard-title">
+                <span class="page02b-progressive-scoreboard-title">
                     Millionaire Lifestyle Score
                 </span>
 
@@ -996,15 +1012,15 @@ function createProgressiveScoreboard(){
 
 
             <div
-                class="page02d-progressive-scoreboard-total"
+                class="page02b-progressive-scoreboard-total"
                 aria-live="polite"
             >
 
-                <span class="page02d-progressive-total-label">
+                <span class="page02b-progressive-total-label">
                     GRAND TOTAL
                 </span>
 
-                <span class="page02d-progressive-total-value">
+                <span class="page02b-progressive-total-value">
 
                     <strong id="page02ProgressiveGrandTotal">
                         0
@@ -1023,7 +1039,7 @@ function createProgressiveScoreboard(){
 
         <div
             id="page02ProgressiveColumns"
-            class="page02d-progressive-columns"
+            class="page02b-progressive-columns"
         ></div>
 
     `;
@@ -1036,7 +1052,6 @@ function createProgressiveScoreboard(){
 
 
     return board;
-
 }
 
 
@@ -1052,27 +1067,31 @@ function escapeHtml(
     return String(
         value
     )
+
         .replace(
             /&/g,
             '&amp;'
         )
+
         .replace(
             /</g,
             '&lt;'
         )
+
         .replace(
             />/g,
             '&gt;'
         )
+
         .replace(
             /"/g,
             '&quot;'
         )
+
         .replace(
             /'/g,
             '&#039;'
         );
-
 }
 
 
@@ -1092,7 +1111,6 @@ function renderProgressiveScoreboard(){
     ){
 
         return false;
-
     }
 
 
@@ -1121,7 +1139,6 @@ function renderProgressiveScoreboard(){
     ){
 
         return false;
-
     }
 
 
@@ -1162,16 +1179,20 @@ function renderProgressiveScoreboard(){
 
 
             const isComplete =
-                answered >= 5;
+                answered >=
+                CONFIG.indicatorCount;
 
 
+            /*
+             * Only answered dimensions contribute to the displayed
+             * progressive total.
+             */
             if(
                 isAnswered
             ){
 
                 progressiveTotal +=
                     score;
-
             }
 
 
@@ -1181,8 +1202,11 @@ function renderProgressiveScoreboard(){
                 );
 
 
+            /*
+             * CANONICAL CLASS.
+             */
             column.className =
-                'page02d-progressive-column';
+                'page02b-progressive-column';
 
 
             if(
@@ -1192,7 +1216,6 @@ function renderProgressiveScoreboard(){
                 column.classList.add(
                     'is-current'
                 );
-
             }
 
 
@@ -1203,7 +1226,6 @@ function renderProgressiveScoreboard(){
                 column.classList.add(
                     'is-started'
                 );
-
             }
 
 
@@ -1214,17 +1236,17 @@ function renderProgressiveScoreboard(){
                 column.classList.add(
                     'is-complete'
                 );
-
             }
 
 
             const number =
                 String(
                     index + 1
-                ).padStart(
-                    2,
-                    '0'
-                );
+                )
+                    .padStart(
+                        2,
+                        '0'
+                    );
 
 
             const tamil =
@@ -1241,48 +1263,57 @@ function renderProgressiveScoreboard(){
 
             const displayScore =
                 isAnswered
-                    ? String(score)
+                    ? String(
+                        score
+                    )
                     : '—';
 
 
             const progressLabel =
                 isComplete
+
                     ? 'COMPLETE'
+
                     : (
+
                         isAnswered
+
                             ? `${answered} / 5`
+
                             : 'NOT STARTED'
                     );
 
 
             column.innerHTML = `
 
-                <div class="page02d-progressive-column-number">
+                <div class="page02b-progressive-column-number">
                     ${number}
                 </div>
 
 
-                <div class="page02d-progressive-column-name">
+                <div class="page02b-progressive-column-name">
 
                     ${
                         tamil
+
                             ? `
-                                <span class="page02d-progressive-column-tamil">
+                                <span class="page02b-progressive-column-tamil">
                                     ${escapeHtml(tamil)}
                                 </span>
                               `
+
                             : ''
                     }
 
 
-                    <span class="page02d-progressive-column-english">
+                    <span class="page02b-progressive-column-english">
                         ${escapeHtml(english)}
                     </span>
 
                 </div>
 
 
-                <div class="page02d-progressive-column-score">
+                <div class="page02b-progressive-column-score">
 
                     <strong>
                         ${displayScore}
@@ -1295,7 +1326,7 @@ function renderProgressiveScoreboard(){
                 </div>
 
 
-                <div class="page02d-progressive-column-progress">
+                <div class="page02b-progressive-column-progress">
                     ${progressLabel}
                 </div>
 
@@ -1307,7 +1338,6 @@ function renderProgressiveScoreboard(){
             );
 
         }
-
     );
 
 
@@ -1319,7 +1349,6 @@ function renderProgressiveScoreboard(){
             String(
                 progressiveTotal
             );
-
     }
 
 
@@ -1333,16 +1362,32 @@ function renderProgressiveScoreboard(){
         CONFIG.dimensionId;
 
 
-    return true;
+    board.dataset.completed =
+        dimensions
+            .filter(
+                function(dimension){
 
+                    return (
+                        getDimensionAnsweredCount(
+                            dimension.id
+                        ) >=
+                        CONFIG.indicatorCount
+                    );
+                }
+            )
+            .length;
+
+
+    return true;
 }
 
 
 /* =============================================================================
  * UPDATE LIVE DIMENSION SCORE
  *
- * The actual score remains owned by Page02Scorecard.
- * This function only refreshes the presentation.
+ * Actual score remains owned by Page02Scorecard.
+ *
+ * This function only updates presentation.
  * =============================================================================
  */
 
@@ -1353,7 +1398,6 @@ function updateBottomDimensionScore(){
     ){
 
         return;
-
     }
 
 
@@ -1380,10 +1424,16 @@ function updateBottomDimensionScore(){
     ){
 
         current.textContent =
-            Number.isFinite(score)
-                ? String(score)
-                : '0';
 
+            Number.isFinite(
+                score
+            )
+
+                ? String(
+                    score
+                )
+
+                : '0';
     }
 
 
@@ -1393,9 +1443,7 @@ function updateBottomDimensionScore(){
 
         total.textContent =
             '/ 20';
-
     }
-
 }
 
 
@@ -1408,6 +1456,7 @@ function updateBottomDimensionScore(){
  *      • after answer selection
  *      • after restore
  *      • before navigation
+ *      • after completion
  *
  * =============================================================================
  */
@@ -1417,7 +1466,6 @@ function refreshProgressiveScoreDisplay(){
     updateBottomDimensionScore();
 
     renderProgressiveScoreboard();
-
 }
 
 
@@ -1458,11 +1506,11 @@ function setNavigationState(
 
         previousButton.setAttribute(
             'aria-busy',
+
             navigating
                 ? 'true'
                 : 'false'
         );
-
     }
 
 
@@ -1476,13 +1524,12 @@ function setNavigationState(
 
         nextButton.setAttribute(
             'aria-busy',
+
             navigating
                 ? 'true'
                 : 'false'
         );
-
     }
-
 }
 
 
@@ -1497,10 +1544,11 @@ function goPrevious(
     event
 ){
 
-    if(event){
+    if(
+        event
+    ){
 
         event.preventDefault();
-
     }
 
 
@@ -1509,7 +1557,21 @@ function goPrevious(
     ){
 
         return;
+    }
 
+
+    if(
+        !window.Page02Session ||
+        typeof window.Page02Session.setCurrentDimension !==
+            'function'
+    ){
+
+        console.error(
+            'CTM PATH™ Page 02D: Page02Session.setCurrentDimension unavailable.'
+        );
+
+
+        return;
     }
 
 
@@ -1527,7 +1589,6 @@ function goPrevious(
             'CTM PATH™ Page 02D could not set previous dimension:',
             CONFIG.previousDimensionId
         );
-
     }
 
 
@@ -1539,6 +1600,7 @@ function goPrevious(
     console.info(
         'CTM PATH™ Page 02D navigating previous:',
         {
+
             currentDimension:
                 CONFIG.dimensionId,
 
@@ -1553,7 +1615,6 @@ function goPrevious(
 
     window.location.href =
         CONFIG.previousPage;
-
 }
 
 
@@ -1576,10 +1637,11 @@ function goNext(
     event
 ){
 
-    if(event){
+    if(
+        event
+    ){
 
         event.preventDefault();
-
     }
 
 
@@ -1588,7 +1650,19 @@ function goNext(
     ){
 
         return;
+    }
 
+
+    if(
+        !window.Page02Scorecard
+    ){
+
+        console.error(
+            'CTM PATH™ Page 02D: Page02Scorecard unavailable.'
+        );
+
+
+        return;
     }
 
 
@@ -1598,7 +1672,12 @@ function goNext(
      */
 
     const valid =
-        window.Page02Scorecard.requireComplete();
+        typeof window.Page02Scorecard.requireComplete ===
+            'function'
+
+            ? window.Page02Scorecard.requireComplete()
+
+            : false;
 
 
     if(
@@ -1608,7 +1687,6 @@ function goNext(
         refreshProgressiveScoreDisplay();
 
         return;
-
     }
 
 
@@ -1623,10 +1701,16 @@ function goNext(
     /* -------------------------------------------------------------------------
      * COMPLETE DIMENSION
      * -------------------------------------------------------------------------
-     */
+ */
 
     const completed =
-        window.Page02Scorecard.complete();
+
+        typeof window.Page02Scorecard.complete ===
+            'function'
+
+            ? window.Page02Scorecard.complete()
+
+            : false;
 
 
     if(
@@ -1639,7 +1723,6 @@ function goNext(
 
 
         return;
-
     }
 
 
@@ -1655,6 +1738,21 @@ function goNext(
      * SET NEXT DIMENSION
      * -------------------------------------------------------------------------
      */
+
+    if(
+        !window.Page02Session ||
+        typeof window.Page02Session.setCurrentDimension !==
+            'function'
+    ){
+
+        console.error(
+            'CTM PATH™ Page 02D: Page02Session.setCurrentDimension unavailable.'
+        );
+
+
+        return;
+    }
+
 
     const nextDimensionSet =
         window.Page02Session.setCurrentDimension(
@@ -1673,7 +1771,6 @@ function goNext(
 
 
         return;
-
     }
 
 
@@ -1713,7 +1810,6 @@ function goNext(
 
             nextPage:
                 CONFIG.nextPage
-
         }
     );
 
@@ -1725,7 +1821,6 @@ function goNext(
 
     window.location.href =
         CONFIG.nextPage;
-
 }
 
 
@@ -1752,7 +1847,18 @@ function bindPreviousButton(){
 
 
         return false;
+    }
 
+
+    /*
+     * Prevent duplicate listeners if init() is called manually during QA.
+     */
+    if(
+        button.dataset.page02dBound ===
+        'true'
+    ){
+
+        return true;
     }
 
 
@@ -1762,8 +1868,11 @@ function bindPreviousButton(){
     );
 
 
-    return true;
+    button.dataset.page02dBound =
+        'true';
 
+
+    return true;
 }
 
 
@@ -1790,7 +1899,18 @@ function bindNextButton(){
 
 
         return false;
+    }
 
+
+    /*
+     * Prevent duplicate listeners if init() is called manually during QA.
+     */
+    if(
+        button.dataset.page02dBound ===
+        'true'
+    ){
+
+        return true;
     }
 
 
@@ -1800,8 +1920,11 @@ function bindNextButton(){
     );
 
 
-    return true;
+    button.dataset.page02dBound =
+        'true';
 
+
+    return true;
 }
 
 
@@ -1820,6 +1943,15 @@ function bindNextButton(){
 
 function bindKeyboardNavigation(){
 
+    if(
+        document.documentElement.dataset.page02dKeyboardBound ===
+        'true'
+    ){
+
+        return;
+    }
+
+
     document.addEventListener(
 
         'keydown',
@@ -1832,7 +1964,6 @@ function bindKeyboardNavigation(){
             ){
 
                 return;
-
             }
 
 
@@ -1842,7 +1973,6 @@ function bindKeyboardNavigation(){
             ){
 
                 return;
-
             }
 
 
@@ -1850,11 +1980,12 @@ function bindKeyboardNavigation(){
 
 
             goNext();
-
         }
-
     );
 
+
+    document.documentElement.dataset.page02dKeyboardBound =
+        'true';
 }
 
 
@@ -1867,7 +1998,7 @@ function bindKeyboardNavigation(){
  *
  * The shared scorecard remains the scoring source of truth.
  *
- * This controller only refreshes:
+ * This controller refreshes:
  *
  *      ✓ live Dimension 03 score
  *      ✓ progressive five-dimension scoreboard
@@ -1877,6 +2008,15 @@ function bindKeyboardNavigation(){
  */
 
 function bindAnswerEvents(){
+
+    if(
+        document.documentElement.dataset.page02dAnswerBound ===
+        'true'
+    ){
+
+        return;
+    }
+
 
     document.addEventListener(
 
@@ -1889,7 +2029,6 @@ function bindAnswerEvents(){
             ){
 
                 return;
-
             }
 
 
@@ -1899,7 +2038,6 @@ function bindAnswerEvents(){
             ){
 
                 return;
-
             }
 
 
@@ -1930,16 +2068,15 @@ function bindAnswerEvents(){
 
                         progressiveTotal:
                             getProgressiveTotal()
-
                     }
                 );
-
             }
-
         }
-
     );
 
+
+    document.documentElement.dataset.page02dAnswerBound =
+        'true';
 }
 
 
@@ -1959,6 +2096,21 @@ function bindAnswerEvents(){
 
 function restorePage(){
 
+    if(
+        !window.Page02Scorecard ||
+        typeof window.Page02Scorecard.restore !==
+            'function'
+    ){
+
+        console.warn(
+            'CTM PATH™ Page 02D scorecard restore unavailable.'
+        );
+
+
+        return false;
+    }
+
+
     const restored =
         window.Page02Scorecard.restore();
 
@@ -1970,7 +2122,6 @@ function restorePage(){
         console.warn(
             'CTM PATH™ Page 02D scorecard restore returned false.'
         );
-
     }
 
 
@@ -1978,7 +2129,12 @@ function restorePage(){
 
 
     const progress =
-        window.Page02Scorecard.getProgress();
+        typeof window.Page02Scorecard.getProgress ===
+            'function'
+
+            ? window.Page02Scorecard.getProgress()
+
+            : null;
 
 
     console.info(
@@ -2012,10 +2168,13 @@ function restorePage(){
 
             progressiveTotal:
                 getProgressiveTotal()
-
         }
     );
 
+
+    return Boolean(
+        restored
+    );
 }
 
 
@@ -2026,15 +2185,23 @@ function restorePage(){
 
 function initializeScorecard(){
 
+    if(
+        !window.Page02Scorecard ||
+        typeof window.Page02Scorecard.init !==
+            'function'
+    ){
+
+        return false;
+    }
+
+
     return (
         window.Page02Scorecard.init({
 
             dimensionId:
                 CONFIG.dimensionId
-
         })
     );
-
 }
 
 
@@ -2054,7 +2221,7 @@ function initializeScoreboardLayout(){
 
 
     /*
-     * Create the progressive six-column scoreboard.
+     * Create the canonical progressive scoreboard.
      */
 
     createProgressiveScoreboard();
@@ -2065,7 +2232,6 @@ function initializeScoreboardLayout(){
      */
 
     refreshProgressiveScoreDisplay();
-
 }
 
 
@@ -2109,7 +2275,6 @@ async function init(){
     ){
 
         return;
-
     }
 
 
@@ -2126,7 +2291,7 @@ async function init(){
 
 
         /* ---------------------------------------------------------------------
-         * GLOBAL HEADER + FOOTER
+         * GLOBAL COMPONENTS
          *
          * NON-FATAL
          * ---------------------------------------------------------------------
@@ -2143,7 +2308,6 @@ async function init(){
             console.warn(
                 'CTM PATH™ Page 02D continuing without confirmed global components.'
             );
-
         }
 
 
@@ -2157,7 +2321,6 @@ async function init(){
         ){
 
             return;
-
         }
 
 
@@ -2171,7 +2334,6 @@ async function init(){
         ){
 
             return;
-
         }
 
 
@@ -2194,7 +2356,6 @@ async function init(){
 
 
             return;
-
         }
 
 
@@ -2271,7 +2432,6 @@ async function init(){
 
                 progress:
                     window.Page02Scorecard.getProgress()
-
             }
         );
 
@@ -2283,15 +2443,12 @@ async function init(){
             'CTM PATH™ Page 02D initialization failed.',
             error
         );
-
     }
     finally{
 
         initializing =
             false;
-
     }
-
 }
 
 
@@ -2312,21 +2469,18 @@ if(
         function(){
 
             init();
-
         },
 
         {
             once:
                 true
         }
-
     );
 
 }
 else{
 
     init();
-
 }
 
 
@@ -2350,7 +2504,7 @@ else{
 window.Page02D = {
 
     version:
-        '4.0',
+        '5.0',
 
     dimensionId:
         CONFIG.dimensionId,
@@ -2376,7 +2530,6 @@ window.Page02D = {
             ){
 
                 return 0;
-
             }
 
 
@@ -2384,7 +2537,6 @@ window.Page02D = {
                 window.Page02Scorecard
                     .getScore()
             );
-
         },
 
 
@@ -2396,7 +2548,6 @@ window.Page02D = {
             ){
 
                 return null;
-
             }
 
 
@@ -2404,7 +2555,6 @@ window.Page02D = {
                 window.Page02Scorecard
                     .getProgress()
             );
-
         },
 
 
@@ -2414,7 +2564,6 @@ window.Page02D = {
             return (
                 getProgressiveTotal()
             );
-
         },
 
 
@@ -2422,11 +2571,14 @@ window.Page02D = {
         function(){
 
             return (
+
                 getAllDimensions()
+
                     .slice(
                         0,
                         CONFIG.dimensionCount
                     )
+
                     .map(
 
                         function(
@@ -2466,15 +2618,12 @@ window.Page02D = {
                                     answered,
 
                                 complete:
-                                    answered >= 5
-
+                                    answered >=
+                                    CONFIG.indicatorCount
                             };
-
                         }
-
                     )
             );
-
         },
 
 
@@ -2484,7 +2633,6 @@ window.Page02D = {
             refreshProgressiveScoreDisplay();
 
             return true;
-
         },
 
 
@@ -2496,7 +2644,15 @@ window.Page02D = {
             ){
 
                 return false;
+            }
 
+
+            if(
+                typeof window.Page02Scorecard.validate !==
+                    'function'
+            ){
+
+                return false;
             }
 
 
@@ -2504,7 +2660,6 @@ window.Page02D = {
                 window.Page02Scorecard
                     .validate()
             );
-
         },
 
 
@@ -2512,9 +2667,7 @@ window.Page02D = {
         function(){
 
             return initialized;
-
         }
-
 };
 
 
@@ -2582,5 +2735,5 @@ window.Page02D = {
  * =============================================================================
  */
 
-
 })(window, document);
+
