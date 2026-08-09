@@ -2092,3 +2092,1216 @@ function getClientId(){
 }
 
  
+/* =============================================================================
+ * BUILD DISCOVERY PAYLOAD
+ *
+ * IMPORTANT:
+ *
+ * This is the final frontend handoff object.
+ *
+ * It contains:
+ *
+ *      clientId
+ *      KYC
+ *      25 answers
+ *      five dimension results
+ *      total score /100
+ *
+ * CTM_API.saveDiscovery() remains the backend integration boundary.
+ * =============================================================================
+ */
+
+
+function buildDiscoveryPayload(){
+
+    const validation =
+        validateCompleteScorecard();
+
+
+    if(
+        !validation.valid
+    ){
+
+        return null;
+
+    }
+
+
+    const answers =
+        getAllAnswers();
+
+
+    const dimensions =
+        getDimensionResults();
+
+
+    const kyc =
+        getKyc();
+
+
+    return {
+
+        clientId:
+            getClientId(),
+
+        kyc:
+            kyc,
+
+        assessmentType:
+            'MILLIONAIRE_LIFESTYLE_SCORECARD',
+
+        assessmentVersion:
+            '3.0',
+
+        indicatorCount:
+            CONFIG.expectedIndicators,
+
+        dimensionCount:
+            CONFIG.expectedDimensions,
+
+        answers:
+            answers,
+
+        dimensions:
+            dimensions,
+
+        totalScore:
+            validation.totalScore,
+
+        maximumScore:
+            CONFIG.maximumTotalScore,
+
+        percentage:
+            validation.percentage,
+
+        completedAt:
+            new Date().toISOString()
+
+    };
+
+}
+
+
+/* =============================================================================
+ * SAVE RESULT LOCALLY
+ *
+ * Page 03 can use this as an immediate frontend result source while the
+ * backend remains the permanent system of record.
+ * =============================================================================
+ */
+
+
+function saveResultLocally(
+    payload,
+    response
+){
+
+    const result = {
+
+        clientId:
+            payload.clientId,
+
+        totalScore:
+            payload.totalScore,
+
+        maximumScore:
+            payload.maximumScore,
+
+        percentage:
+            payload.percentage,
+
+        dimensions:
+            payload.dimensions,
+
+        answers:
+            payload.answers,
+
+        completedAt:
+            payload.completedAt,
+
+        backend:
+            response || null
+
+    };
+
+
+    try{
+
+        sessionStorage.setItem(
+            'ctm_page02_result',
+            JSON.stringify(
+                result
+            )
+        );
+
+    }
+    catch(error){
+
+        console.warn(
+            'CTM PATH™ could not store Page 02 result in sessionStorage.',
+            error
+        );
+
+    }
+
+
+    if(
+        typeof window.Page02Session.setResult ===
+        'function'
+    ){
+
+        window.Page02Session.setResult(
+            result
+        );
+
+    }
+
+
+    return result;
+
+}
+
+
+/* =============================================================================
+ * MARK JOURNEY COMPLETE
+ * =============================================================================
+ */
+
+
+function markJourneyComplete(){
+
+    if(
+        typeof window.Page02Session.completeScorecard ===
+        'function'
+    ){
+
+        window.Page02Session.completeScorecard();
+
+    }
+
+
+    if(
+        typeof window.Page02Session.setCompleted ===
+        'function'
+    ){
+
+        window.Page02Session.setCompleted(
+            true
+        );
+
+    }
+
+}
+
+
+/* =============================================================================
+ * NORMALIZE BACKEND RESPONSE
+ * =============================================================================
+ */
+
+
+function normalizeBackendResponse(
+    response
+){
+
+    if(
+        response === undefined ||
+        response === null
+    ){
+
+        return {
+
+            success:
+                true,
+
+            data:
+                response
+
+        };
+
+    }
+
+
+    if(
+        response === false
+    ){
+
+        return {
+
+            success:
+                false,
+
+            data:
+                response
+
+        };
+
+    }
+
+
+    if(
+        typeof response ===
+        'object'
+    ){
+
+        if(
+            response.success ===
+            false
+        ){
+
+            return {
+
+                success:
+                    false,
+
+                data:
+                    response
+
+            };
+
+        }
+
+
+        if(
+            response.ok ===
+            false
+        ){
+
+            return {
+
+                success:
+                    false,
+
+                data:
+                    response
+
+            };
+
+        }
+
+    }
+
+
+    return {
+
+        success:
+            true,
+
+        data:
+            response
+
+    };
+
+}
+
+
+/* =============================================================================
+ * SAVE DISCOVERY
+ *
+ * Supports the existing CTM_API.saveDiscovery() integration without
+ * moving backend responsibilities into this page controller.
+ * =============================================================================
+ */
+
+
+async function saveDiscovery(
+    payload
+){
+
+    if(
+        !window.CTM_API ||
+        typeof window.CTM_API.saveDiscovery !==
+            'function'
+    ){
+
+        throw new Error(
+            'CTM_API.saveDiscovery() is unavailable.'
+        );
+
+    }
+
+
+    const response =
+        await window.CTM_API.saveDiscovery(
+            payload
+        );
+
+
+    const normalized =
+        normalizeBackendResponse(
+            response
+        );
+
+
+    if(
+        !normalized.success
+    ){
+
+        const backendMessage =
+            (
+                normalized.data &&
+                (
+                    normalized.data.message ||
+                    normalized.data.error
+                )
+            ) ||
+            'Discovery save failed.';
+
+
+        throw new Error(
+            backendMessage
+        );
+
+    }
+
+
+    return normalized.data;
+
+}
+
+
+/* =============================================================================
+ * NAVIGATE TO RESULT
+ * =============================================================================
+ */
+
+
+function navigateToResult(){
+
+    setNavigationState(
+        true
+    );
+
+
+    window.location.href =
+        CONFIG.nextPage;
+
+}
+
+
+/* =============================================================================
+ * FINAL SUBMIT
+ * =============================================================================
+ */
+
+
+async function submitScorecard(
+    event
+){
+
+    if(event){
+
+        event.preventDefault();
+
+    }
+
+
+    if(
+        submitting ||
+        navigating
+    ){
+
+        return;
+
+    }
+
+
+    hideError();
+
+    refreshProgressiveScoreDisplay();
+
+
+    /* -------------------------------------------------------------------------
+     * 1. VALIDATE DIMENSION 05
+     * -------------------------------------------------------------------------
+     */
+
+
+    const dimensionValid =
+        window.Page02Scorecard.requireComplete();
+
+
+    if(
+        !dimensionValid
+    ){
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * 2. COMPLETE DIMENSION 05
+     * -------------------------------------------------------------------------
+     */
+
+
+    const dimensionCompleted =
+        window.Page02Scorecard.complete();
+
+
+    refreshProgressiveScoreDisplay();
+
+
+    if(
+        !dimensionCompleted
+    ){
+
+        showError(
+            'இறுதி பரிமாணத்தை நிறைவு செய்ய முடியவில்லை. மீண்டும் முயற்சிக்கவும்.'
+        );
+
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * 3. VALIDATE ALL 25 INDICATORS
+     * -------------------------------------------------------------------------
+     */
+
+
+    const validation =
+        validateCompleteScorecard();
+
+
+    if(
+        !validation.valid
+    ){
+
+        console.error(
+            'CTM PATH™ final scorecard validation failed:',
+            validation
+        );
+
+
+        if(
+            validation.reason ===
+            'missing-answers'
+        ){
+
+            showError(
+                '25 அளவுகோல்களிலும் பதில் அளித்த பிறகே உங்கள் இறுதி முடிவைக் கணக்கிட முடியும்.'
+            );
+
+        }
+        else{
+
+            showError(
+                'உங்கள் மதிப்பெண்களை சரிபார்க்க முடியவில்லை. முந்தைய பரிமாணங்களை மீண்டும் சரிபார்க்கவும்.'
+            );
+
+        }
+
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * 4. BUILD FINAL PAYLOAD
+     * -------------------------------------------------------------------------
+     */
+
+
+    const payload =
+        buildDiscoveryPayload();
+
+
+    if(
+        !payload
+    ){
+
+        showError(
+            'உங்கள் Scorecard தரவை உருவாக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.'
+        );
+
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * 5. REQUIRE CLIENT ID
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        !payload.clientId
+    ){
+
+        console.error(
+            'CTM PATH™ final discovery payload has no clientId.',
+            payload
+        );
+
+
+        showError(
+            'உங்கள் பதிவு தகவலை கண்டுபிடிக்க முடியவில்லை. தயவுசெய்து KYC பகுதியிலிருந்து மீண்டும் தொடங்கவும்.'
+        );
+
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * 6. SUBMIT
+     * -------------------------------------------------------------------------
+     */
+
+
+    setSubmittingState(
+        true
+    );
+
+
+    try{
+
+
+        console.info(
+            'CTM PATH™ submitting final Millionaire Lifestyle Scorecard:',
+            {
+
+                clientId:
+                    payload.clientId,
+
+                indicators:
+                    payload.answers.length,
+
+                totalScore:
+                    payload.totalScore,
+
+                maximumScore:
+                    payload.maximumScore,
+
+                percentage:
+                    payload.percentage
+
+            }
+        );
+
+
+        const response =
+            await saveDiscovery(
+                payload
+            );
+
+
+        /* ---------------------------------------------------------------------
+         * 7. STORE RESULT FOR PAGE 03
+         * ---------------------------------------------------------------------
+         */
+
+
+        saveResultLocally(
+            payload,
+            response
+        );
+
+
+        /* ---------------------------------------------------------------------
+         * 8. MARK SCORECARD COMPLETE
+         * ---------------------------------------------------------------------
+         */
+
+
+        markJourneyComplete();
+
+
+        console.info(
+            'CTM PATH™ Millionaire Lifestyle Scorecard complete.',
+            {
+
+                clientId:
+                    payload.clientId,
+
+                score:
+                    payload.totalScore,
+
+                maximumScore:
+                    payload.maximumScore,
+
+                percentage:
+                    payload.percentage,
+
+                dimensions:
+                    payload.dimensions
+
+            }
+        );
+
+
+        /* ---------------------------------------------------------------------
+         * 9. RESULT PAGE
+         * ---------------------------------------------------------------------
+         */
+
+
+        navigateToResult();
+
+
+    }
+    catch(error){
+
+
+        console.error(
+            'CTM PATH™ final discovery submission failed:',
+            error
+        );
+
+
+        setSubmittingState(
+            false
+        );
+
+
+        showError(
+            'உங்கள் முடிவை சேமிக்க முடியவில்லை. உங்கள் பதில்கள் பாதுகாப்பாக உள்ளன. மீண்டும் முயற்சிக்கவும்.'
+        );
+
+
+    }
+
+}
+
+
+/* =============================================================================
+ * BIND PREVIOUS BUTTON
+ * =============================================================================
+ */
+
+
+function bindPreviousButton(){
+
+    const button =
+        getElement(
+            DOM_IDS.previousButton
+        );
+
+
+    if(!button){
+
+        console.warn(
+            'CTM PATH™ Page 02F: #previousButton not found.'
+        );
+
+
+        return false;
+
+    }
+
+
+    button.addEventListener(
+        'click',
+        goPrevious
+    );
+
+
+    return true;
+
+}
+
+
+/* =============================================================================
+ * BIND FINAL BUTTON
+ * =============================================================================
+ */
+
+
+function bindNextButton(){
+
+    const button =
+        getElement(
+            DOM_IDS.nextButton
+        );
+
+
+    if(!button){
+
+        console.error(
+            'CTM PATH™ Page 02F: #nextButton not found.'
+        );
+
+
+        return false;
+
+    }
+
+
+    button.addEventListener(
+        'click',
+        submitScorecard
+    );
+
+
+    return true;
+
+}
+
+
+/* =============================================================================
+ * KEYBOARD SUPPORT
+ * =============================================================================
+ */
+
+
+function bindKeyboardNavigation(){
+
+    document.addEventListener(
+        'keydown',
+        function(event){
+
+            if(
+                event.key !==
+                'Enter'
+            ){
+
+                return;
+
+            }
+
+
+            if(
+                !event.ctrlKey &&
+                !event.metaKey
+            ){
+
+                return;
+
+            }
+
+
+            event.preventDefault();
+
+
+            submitScorecard();
+
+        }
+    );
+
+}
+
+
+/* =============================================================================
+ * ANSWER EVENTS
+ * =============================================================================
+ */
+
+
+function bindAnswerEvents(){
+
+    document.addEventListener(
+        'ctm:page02-answer',
+        function(event){
+
+            if(
+                !event.detail ||
+                event.detail.dimensionId !==
+                    CONFIG.dimensionId
+            ){
+
+                return;
+
+            }
+
+
+            refreshProgressiveScoreDisplay();
+
+
+            const progress =
+                event.detail.progress;
+
+
+            if(
+                progress &&
+                progress.complete
+            ){
+
+                console.info(
+                    'CTM PATH™ Dimension 05: all five indicators answered.',
+                    {
+
+                        score:
+                            progress.score,
+
+                        maximumScore:
+                            progress.maximumScore
+
+                    }
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =============================================================================
+ * INITIALIZE SCORECARD
+ * =============================================================================
+ */
+
+
+function initializeScorecard(){
+
+    return (
+        window.Page02Scorecard.init({
+
+            dimensionId:
+                CONFIG.dimensionId
+
+        })
+    );
+
+}
+
+
+/* =============================================================================
+ * RESTORE PAGE
+ * =============================================================================
+ */
+
+
+function restorePage(){
+
+    window.Page02Scorecard.restore();
+
+
+    const progress =
+        window.Page02Scorecard.getProgress();
+
+
+    console.info(
+        'CTM PATH™ Page 02F restored:',
+        {
+
+            answered:
+                progress.answered,
+
+            total:
+                progress.total,
+
+            score:
+                progress.score,
+
+            maximumScore:
+                progress.maximumScore
+
+        }
+    );
+
+}
+
+
+/* =============================================================================
+ * INITIALIZE
+ * =============================================================================
+ */
+
+
+function init(){
+
+    if(initialized){
+
+        return;
+
+    }
+
+
+    console.info(
+        'CTM PATH™ Page 02F initializing — Final Dimension...'
+    );
+
+
+    /* -------------------------------------------------------------------------
+     * DEPENDENCIES
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        !verifyDependencies()
+    ){
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * DIMENSION CONTRACT
+     * -------------------------------------------------------------------------
+     */
+
+
+    if(
+        !verifyDimension()
+    ){
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * SCORECARD
+     * -------------------------------------------------------------------------
+     */
+
+
+    const scorecardReady =
+        initializeScorecard();
+
+
+    if(
+        !scorecardReady
+    ){
+
+        console.error(
+            'CTM PATH™ Page 02F scorecard initialization failed.'
+        );
+
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------------------------------
+     * CONTROLS
+     * -------------------------------------------------------------------------
+     */
+
+
+    bindPreviousButton();
+
+
+    bindNextButton();
+
+
+    bindKeyboardNavigation();
+
+
+    bindAnswerEvents();
+
+
+    /* -------------------------------------------------------------------------
+     * RESTORE
+     * -------------------------------------------------------------------------
+     */
+
+
+    restorePage();
+
+
+    /* -------------------------------------------------------------------------
+     * PROGRESSIVE SCOREBOARD
+     * -------------------------------------------------------------------------
+     */
+
+    relocateDimensionScore();
+
+    refreshProgressiveScoreDisplay();
+
+
+    /* -------------------------------------------------------------------------
+     * VIEWPORT
+     * -------------------------------------------------------------------------
+     */
+
+
+    scrollToTop();
+
+
+    /* -------------------------------------------------------------------------
+     * READY
+     * -------------------------------------------------------------------------
+     */
+
+
+    initialized =
+        true;
+
+
+    console.info(
+        'CTM PATH™ Page 02F ready.',
+        {
+
+            dimension:
+                CONFIG.dimensionId,
+
+            dimensionScore:
+                window.Page02Scorecard.getScore(),
+
+            dimensionProgress:
+                window.Page02Scorecard.getProgress(),
+
+            totalProgress:
+                getAllAnswers().length +
+                ' / ' +
+                CONFIG.expectedIndicators
+
+        }
+    );
+
+}
+
+
+/* =============================================================================
+ * DOM READY
+ * =============================================================================
+ */
+
+
+if(
+    document.readyState ===
+    'loading'
+){
+
+    document.addEventListener(
+        'DOMContentLoaded',
+        init
+    );
+
+}
+else{
+
+    init();
+
+}
+
+
+/* =============================================================================
+ * PUBLIC CONTROLLER
+ * =============================================================================
+ */
+
+
+window.Page02F = {
+
+    version:
+        '4.0',
+
+    dimensionId:
+        CONFIG.dimensionId,
+
+    init:
+        init,
+
+    goPrevious:
+        goPrevious,
+
+    submit:
+        submitScorecard,
+
+    validateDimension:
+        function(){
+
+            return (
+                window.Page02Scorecard.validate()
+            );
+
+        },
+
+    validateScorecard:
+        validateCompleteScorecard,
+
+    getAnswers:
+        getAllAnswers,
+
+    getDimensions:
+        getDimensionResults,
+
+    buildPayload:
+        buildDiscoveryPayload,
+
+    getScore:
+        function(){
+
+            const validation =
+                validateCompleteScorecard();
+
+
+            return (
+                validation.totalScore ||
+                0
+            );
+
+        }
+
+};
+
+
+/* =============================================================================
+ * END
+ *
+ * FINAL PAGE 02 FLOW:
+ *
+ *      PAGE 02A
+ *      KYC
+ *          ↓
+ *
+ *      PAGE 02B
+ *      DIMENSION 01
+ *      INDICATORS 01–05
+ *          ↓
+ *
+ *      PAGE 02C
+ *      DIMENSION 02
+ *      INDICATORS 06–10
+ *          ↓
+ *
+ *      PAGE 02D
+ *      DIMENSION 03
+ *      INDICATORS 11–15
+ *          ↓
+ *
+ *      PAGE 02E
+ *      DIMENSION 04
+ *      INDICATORS 16–20
+ *          ↓
+ *
+ *      PAGE 02F
+ *      DIMENSION 05
+ *      INDICATORS 21–25
+ *          ↓
+ *
+ *      VALIDATE 25 / 25
+ *          ↓
+ *
+ *      TOTAL SCORE
+ *      25–100
+ *          ↓
+ *
+ *      BUILD DISCOVERY PAYLOAD
+ *          ↓
+ *
+ *      CTM_API.saveDiscovery()
+ *          ↓
+ *
+ *      STORE RESULT
+ *          ↓
+ *
+ *      PAGE 03
+ *
+ *
+ * NEXT FILE:
+ *
+ *      pages/page02f.html
+ *
+ * =============================================================================
+ */
+
+
+})(window, document);
+
+
