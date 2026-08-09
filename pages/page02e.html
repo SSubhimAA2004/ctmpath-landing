@@ -68,7 +68,7 @@
 
 
     <!-- =====================================================================
-         PAGE 02E
+         PAGE 02E — DIMENSION 04
     ====================================================================== -->
 
     <link
@@ -86,7 +86,6 @@
      GLOBAL HEADER
 ============================================================================ -->
 
-
 <div
     id="global-header"
     data-component="header"
@@ -97,9 +96,9 @@
 <!-- =========================================================================
      PAGE 02E
      DIMENSION 04
+     LIFESTYLE & FREEDOM™
      INDICATORS 16–20
 ============================================================================ -->
-
 
 <main
     id="page02e"
@@ -113,7 +112,6 @@
         <!-- =================================================================
              JOURNEY PROGRESS
         ================================================================== -->
-
 
         <div
             class="dimension-progress"
@@ -146,7 +144,6 @@
 
             <div class="dimension-progress-track">
 
-
                 <span
                     id="dimensionProgressFill"
                     class="dimension-progress-fill"
@@ -156,7 +153,6 @@
                     aria-valuemax="100"
                     aria-valuenow="80"
                 ></span>
-
 
             </div>
 
@@ -169,7 +165,6 @@
              DIMENSION HEADER
         ================================================================== -->
 
-
         <header class="dimension-header">
 
 
@@ -181,13 +176,16 @@
 
 
             <!--
-                Dimension title is populated from page02-data.js
-                by page02-scorecard.js.
+                Dimension title is populated dynamically from:
 
-                CONFIG dimensionId:
-                lifestyleFreedom
+                    page02-data.js
+                    ↓
+                    page02-scorecard.js
+
+                Dimension ID:
+
+                    lifestyleFreedom
             -->
-
 
             <h1
                 id="dimensionTitleTamil"
@@ -213,8 +211,13 @@
 
             <!-- =============================================================
                  LIVE DIMENSION SCORE
-            ============================================================== -->
 
+                 The shared scorecard engine owns the actual score.
+
+                 This panel is intentionally kept in the HTML because the
+                 page controller may relocate it beneath the questions and
+                 progressive scoreboard.
+            ============================================================== -->
 
             <div
                 class="dimension-score-panel"
@@ -265,15 +268,18 @@
         <!-- =================================================================
              SCORECARD
 
-             No indicator data is duplicated in this file.
+             Indicator definitions are NOT duplicated here.
 
-             page02-scorecard.js reads:
+             page02-scorecard.js receives:
 
                  dimensionId = "lifestyleFreedom"
 
-             from page02-data.js and renders Indicators 16–20 here.
-        ================================================================== -->
+             from page02e.js and renders:
 
+                 Indicators 16–20
+
+             from page02-data.js.
+        ================================================================== -->
 
         <section
             class="dimension-scorecard"
@@ -294,7 +300,6 @@
         <!-- =================================================================
              ANSWER PROGRESS
         ================================================================== -->
-
 
         <div
             class="dimension-completion"
@@ -339,7 +344,6 @@
              Indicators 16–20.
         ================================================================== -->
 
-
         <aside
             id="scoreGuide"
             class="score-guide"
@@ -358,7 +362,6 @@
                  ✓ viewport moves to first unanswered indicator
         ================================================================== -->
 
-
         <div
             id="dimensionMessage"
             class="dimension-message"
@@ -373,7 +376,6 @@
              NAVIGATION
         ================================================================== -->
 
-
         <nav
             class="dimension-navigation"
             aria-label="Scorecard navigation"
@@ -383,7 +385,6 @@
             <!-- =============================================================
                  PREVIOUS
             ============================================================== -->
-
 
             <button
                 id="previousButton"
@@ -416,14 +417,13 @@
             <!-- =============================================================
                  NEXT
 
-                 page02e.js:
+                 page02e.js is responsible for:
 
-                 1. validates Indicators 16–20
-                 2. completes "lifestyleFreedom"
-                 3. sets "protectionContribution"
-                 4. navigates to page02f.html
+                 1. validating Indicators 16–20
+                 2. completing lifestyleFreedom
+                 3. setting protectionContribution
+                 4. navigating to page02f.html
             ============================================================== -->
-
 
             <button
                 id="nextButton"
@@ -437,7 +437,7 @@
 
                 <span class="dimension-button-primary-text">
 
-                    இறுதி பரிமாணம் →
+                    அடுத்த பரிமாணம் →
 
                 </span>
 
@@ -464,8 +464,9 @@
 
 <!-- =========================================================================
      GLOBAL FOOTER
-============================================================================ -->
 
+     Footer remains component-based and is loaded by component-loader.js.
+============================================================================ -->
 
 <div
     id="global-footer"
@@ -477,7 +478,6 @@
 <!-- =========================================================================
      GLOBAL JAVASCRIPT
 ============================================================================ -->
-
 
 <script src="../js/component-loader.js"></script>
 
@@ -504,7 +504,6 @@
      4. page02e.js
         Dimension 04 controller
 ============================================================================ -->
-
 
 <script src="../js/page02/page02-data.js"></script>
 
