@@ -33,9 +33,9 @@
 
          IMPORTANT:
          ---------------------------------------------------------------
-         Header is loaded through the frozen global component system.
+         The brand header is integrated directly into Page 07.
 
-         Footer intentionally NOT included.
+         Footer intentionally NOT included; Page 07 is self-contained.
 
          ================================================================ -->
 
@@ -72,6 +72,314 @@
     >
 
 
+
+    <!-- ================================================================
+         PAGE 07 INTEGRATED BRAND SHELL
+
+         The existing page07.css remains the content stylesheet.
+         These rules only create the Page 07-owned brand header and
+         make the complete experience one continuous dark-green field.
+    ================================================================ -->
+
+    <style>
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            background: #041313;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .page07 {
+            --p07-bg: #071b1b;
+            --p07-bg-deep: #041313;
+            --p07-teal: #21c7b7;
+            --p07-teal-soft: #7de3d9;
+            --p07-gold: #d7b56d;
+            --p07-gold-soft: #ead39f;
+            --p07-white: #f5f2e9;
+            --p07-muted: #a8b0aa;
+
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(33, 199, 183, 0.105),
+                    transparent 34rem
+                ),
+                linear-gradient(
+                    180deg,
+                    #071b1b 0%,
+                    #041313 100%
+                );
+        }
+
+        /* ==============================================================
+           INTEGRATED BRAND HEADER
+        ============================================================== */
+
+        .page07-integrated-header {
+            position: relative;
+            z-index: 20;
+
+            width: 100%;
+            padding: 32px 48px 24px;
+
+            border-bottom:
+                1px solid rgba(215, 181, 109, 0.13);
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(7, 27, 27, 0.98) 0%,
+                    rgba(7, 27, 27, 0.90) 68%,
+                    rgba(7, 27, 27, 0.00) 100%
+                );
+        }
+
+        .page07-integrated-header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            width: min(1240px, calc(100% - 20px));
+            margin: 0 auto;
+        }
+
+        .page07-brand {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-align: left;
+        }
+
+        .page07-brand-logo,
+        .page07-brand-logo img {
+            width: 72px;
+            height: 72px;
+        }
+
+        .page07-brand-logo {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page07-brand-logo img {
+            display: block;
+            object-fit: contain;
+        }
+
+        .page07-brand-copy {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .page07-brand-name {
+            margin: 0;
+
+            color: var(--p07-white);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: clamp(1.7rem, 3vw, 2.65rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: 0.07em;
+        }
+
+        .page07-brand-millionaires {
+            margin-top: 8px;
+
+            color: var(--p07-gold);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: clamp(0.72rem, 1.2vw, 0.94rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: 0.22em;
+        }
+
+        .page07-brand-guided {
+            margin-top: 10px;
+
+            color: var(--p07-teal);
+
+            font-size: 0.76rem;
+            font-weight: 850;
+            line-height: 1;
+            letter-spacing: 0.24em;
+        }
+
+        .page07-brand-signature {
+            margin-top: 9px;
+
+            color: #b8b4a9;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        /* ==============================================================
+           JOURNEY 07 / 07
+        ============================================================== */
+
+        .page07-journey-status {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+
+            min-width: 150px;
+            text-align: right;
+        }
+
+        .page07-journey-label {
+            margin-bottom: 7px;
+
+            color: var(--p07-muted);
+
+            font-size: 0.63rem;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: 0.18em;
+        }
+
+        .page07-journey-counter {
+            color: var(--p07-gold);
+
+            font-size: 0.86rem;
+            font-weight: 850;
+            line-height: 1;
+            letter-spacing: 0.16em;
+        }
+
+        .page07-journey-line {
+            width: 110px;
+            height: 2px;
+            margin-top: 10px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--p07-teal),
+                    var(--p07-gold)
+                );
+        }
+
+        /* ==============================================================
+           SEAMLESS TRANSITION INTO PAGE 07 INTRO
+
+           The old global header created a hard navy-to-green break.
+           The intro now visually begins inside the same green atmosphere.
+        ============================================================== */
+
+        .page07-main {
+            position: relative;
+            z-index: 1;
+
+            margin-top: 0;
+
+            background: transparent;
+        }
+
+        .page07-intro {
+            position: relative;
+
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(33, 199, 183, 0.075),
+                    transparent 30rem
+                ),
+                transparent !important;
+        }
+
+        /* ==============================================================
+           MOBILE
+        ============================================================== */
+
+        @media (max-width: 680px) {
+
+            .page07-integrated-header {
+                padding: 24px 18px 20px;
+            }
+
+            .page07-integrated-header-inner {
+                width: 100%;
+                align-items: flex-start;
+            }
+
+            .page07-brand {
+                gap: 12px;
+            }
+
+            .page07-brand-logo,
+            .page07-brand-logo img {
+                width: 50px;
+                height: 50px;
+            }
+
+            .page07-brand-name {
+                font-size: 1.25rem;
+            }
+
+            .page07-brand-millionaires {
+                font-size: 0.56rem;
+                letter-spacing: 0.16em;
+            }
+
+            .page07-brand-guided {
+                font-size: 0.54rem;
+                letter-spacing: 0.17em;
+            }
+
+            .page07-brand-signature {
+                font-size: 0.55rem;
+            }
+
+            .page07-journey-status {
+                min-width: auto;
+            }
+
+            .page07-journey-label {
+                font-size: 0.50rem;
+            }
+
+            .page07-journey-counter {
+                font-size: 0.68rem;
+            }
+
+            .page07-journey-line {
+                width: 70px;
+            }
+        }
+
+    </style>
+
 </head>
 
 
@@ -86,24 +394,7 @@
         id="page07"
         class="page07"
     >
-
-
-        <!-- ============================================================
-             GLOBAL HEADER
-             
-             Header is intentionally loaded by:
-                 component-loader.js
-
-             No duplicate header markup here.
-        ============================================================ -->
-
-        <div
-            id="global-header"
-            class="page07-global-header"
-        ></div>
-
-
-        <!-- ============================================================
+<!-- ============================================================
              MAIN CONTENT
         ============================================================ -->
 
@@ -995,77 +1286,29 @@
     <script
         src="/js/global.js"
     ></script>
-
-
-    <!-- ================================================================
-         COMPONENT LOADER
-         
-         Loads:
-             /components/header.html
-
-         Footer is intentionally NOT present in this page.
-    ================================================================ -->
-
-    <script
-        src="/js/component-loader.js"
-    ></script>
-
-
-    <!-- ================================================================
+<!-- ================================================================
          PAGE 07 CONTROLLER
     ================================================================ -->
 
     <script
         src="/js/page07.js"
     ></script>
-
-
     <!-- ================================================================
          PAGE 07 INITIALISATION
+
+         The global component loader is no longer required here.
+         Page 07 owns its brand shell and initializes its own controller.
     ================================================================ -->
 
     <script>
 
         document.addEventListener(
             "DOMContentLoaded",
-            async function () {
-
-                /*
-                 * Load the frozen global header.
-                 *
-                 * The Page 07 controller is initialized only after
-                 * the shared component layer is available.
-                 */
-
-                if (
-                    window.CTM_COMPONENTS &&
-                    typeof window.CTM_COMPONENTS.loadHeaderOnly ===
-                    "function"
-                ) {
-
-                    await window.CTM_COMPONENTS.loadHeaderOnly();
-
-                }
-
-                else if (
-                    window.CTM_COMPONENTS &&
-                    typeof window.CTM_COMPONENTS.load ===
-                    "function"
-                ) {
-
-                    await window.CTM_COMPONENTS.load();
-
-                }
-
-
-                /*
-                 * Page07.js may expose an explicit initializer.
-                 */
+            function () {
 
                 if (
                     window.CTM_PAGE07 &&
-                    typeof window.CTM_PAGE07.init ===
-                    "function"
+                    typeof window.CTM_PAGE07.init === "function"
                 ) {
 
                     window.CTM_PAGE07.init();
@@ -1079,7 +1322,6 @@
         );
 
     </script>
-
 
 </body>
 
