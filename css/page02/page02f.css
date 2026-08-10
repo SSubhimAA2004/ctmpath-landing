@@ -1,4 +1,5 @@
 
+
 /* ==========================================================================
    CTM PATH™ MILLIONAIRES™
 
@@ -6,7 +7,7 @@
    css/page02/page02f.css
 
    VERSION:
-   6.0 — DIMENSION 05 / FINAL DIMENSION
+   6.1 — DIMENSION 05 / FINAL DIMENSION → PAGE 02G
 
    PAGE:
    PAGE 02F — DIMENSION 05 — PROTECTION & CONTRIBUTION™
@@ -2768,6 +2769,29 @@
 
 
 /* ==========================================================================
+   33A. PAGE 02G NAVIGATION CONTRACT
+
+   Navigation itself is owned by page02f.js.
+
+   This stylesheet intentionally does not assign:
+       • href values
+       • window.location values
+       • routing behavior
+       • backend behavior
+
+   The final Page 02F CTA is presented as the gateway to:
+
+       page02g.html
+       LIFE GAP ANALYSIS™
+
+   ========================================================================== */
+
+.page02f .dimension-button-final {
+    position:
+        relative;
+}
+
+/* ==========================================================================
    34. FINAL ARCHITECTURE
 
    page02-shared.css
@@ -2836,7 +2860,7 @@
            page02e.html
 
        next:
-           page03.html
+           page02g.html
 
        previousDimension:
            lifestyleFreedom
