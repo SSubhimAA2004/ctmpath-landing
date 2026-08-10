@@ -9,74 +9,39 @@
    KALA CHAKRA™ LIFE ASSESSMENT™
 
    VERSION:
-   10.2
+   11.0
 
    PURPOSE:
 
-   ✓ Preserve Page03 v10 visual language
-   ✓ Centre-align all Page03 content
-   ✓ Centre-align assessment instructions
-   ✓ Preserve 3-column assessment grid
+   ✓ Preserve Page03 visual language
+   ✓ Header only
+   ✓ No global footer
+   ✓ 12 Life Pillars in ONE vertical column
+   ✓ Score scale in SECOND column
+   ✓ Pillar / Score two-column presentation
+   ✓ Preserve existing .pillar-card DOM contract
+   ✓ Preserve existing .score-selector DOM contract
+   ✓ Preserve existing page03.js logic
    ✓ Selected score 0–3 = Red
    ✓ Selected score 4–7 = Orange
    ✓ Selected score 8–10 = Green
-   ✓ Teal Journey Navigator CTA
    ✓ Preserve responsive behaviour
 
+   IMPORTANT:
+
+   THIS FILE CHANGES PRESENTATION ONLY.
+
+   page03.js remains responsible for:
+
+   ✓ score generation
+   ✓ score selection
+   ✓ score validation
+   ✓ score persistence
+   ✓ score restoration
+   ✓ score colour classification
+   ✓ assessment completion
+   ✓ Page04 navigation
 ========================================================================== */
-
-
-
-/* ==========================================================================
-   DOCUMENT CANVAS
-   Ensures Page03 remains full-bleed on mobile browsers.
-   Internal content gutters continue to be controlled by Page03 containers.
-========================================================================== */
-
-html,
-body {
-
-    width:
-        100%;
-
-    min-width:
-        100%;
-
-    margin:
-        0;
-
-    padding:
-        0;
-
-    background:
-        #081426;
-
-    overflow-x:
-        hidden;
-
-}
-
-
-body {
-
-    min-height:
-        100vh;
-
-}
-
-
-@supports (min-height: 100dvh) {
-
-    body {
-
-        min-height:
-            100dvh;
-
-    }
-
-}
-
-
 
 
 /* ==========================================================================
@@ -99,7 +64,6 @@ body {
 
     text-align:
         center;
-
 }
 
 
@@ -107,7 +71,6 @@ body {
 
     box-sizing:
         border-box;
-
 }
 
 
@@ -119,33 +82,52 @@ body {
 .page03 section,
 .page03 article,
 .page03 header,
-.page03 footer,
 .page03 div {
 
     text-align:
         center;
-
 }
 
 
 /* ==========================================================================
-   CONTAINER
+   JOURNEY INDICATOR
 ========================================================================== */
 
-.page03-container {
+.journey-indicator {
 
     width:
-        min(1200px, calc(100% - 96px));
+        100%;
+
+    padding:
+        12px 20px 4px;
+
+    text-align:
+        center;
+}
+
+
+.journey-indicator p {
 
     margin:
         0 auto;
 
-    padding:
-        80px 0 120px;
+    color:
+        #D8B45A;
+
+    font-size:
+        .58rem;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .22em;
+
+    line-height:
+        1.4;
 
     text-align:
         center;
-
 }
 
 
@@ -155,715 +137,200 @@ body {
 
 .page03-hero {
 
-    text-align:
-        center;
+    width:
+        100%;
 
     padding:
-        60px 20px 80px;
-
-}
-
-
-.journey-marker {
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    gap:
-        12px;
+        48px 24px 68px;
 
     text-align:
         center;
-
 }
 
 
-.journey-label {
+.page03-hero-inner {
 
-    color:
-        #23D4C8;
-
-    font-size:
-        .75rem;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        .35em;
-
-    text-align:
-        center;
-
-}
-
-
-.journey-number {
-
-    color:
-        #D8B45A;
-
-    font-size:
-        1.3rem;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        .25em;
-
-    text-align:
-        center;
-
-}
-
-
-.page03-title {
-
-    margin:
-        50px auto 40px;
-
-    max-width:
-        1000px;
-
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size:
-        clamp(
-            2.4rem,
-            5vw,
-            4.5rem
+    width:
+        min(
+            100%,
+            1100px
         );
-
-    line-height:
-        1.35;
-
-    letter-spacing:
-        .08em;
-
-    color:
-        #F8F5ED;
-
-    text-align:
-        center;
-
-}
-
-
-.page03-tamil-title {
-
-    margin:
-        0 auto 30px;
-
-    max-width:
-        900px;
-
-    font-family:
-        "Noto Sans Tamil",
-        sans-serif;
-
-    font-size:
-        clamp(
-            1.8rem,
-            3vw,
-            2.8rem
-        );
-
-    line-height:
-        1.8;
-
-    color:
-        #F8F5ED;
-
-    text-align:
-        center;
-
-}
-
-
-.page03-subtitle {
-
-    margin-left:
-        auto;
-
-    margin-right:
-        auto;
-
-    color:
-        #D8B45A;
-
-    font-size:
-        1.3rem;
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        .18em;
-
-    line-height:
-        1.8;
-
-    text-align:
-        center;
-
-}
-
-
-/* ==========================================================================
-   INTRODUCTION
-========================================================================== */
-
-.page03-introduction {
-
-    max-width:
-        850px;
 
     margin:
         0 auto;
 
     text-align:
         center;
-
-    padding:
-        50px 20px;
-
 }
 
 
-.page03-introduction h2 {
-
-    margin-left:
-        auto;
-
-    margin-right:
-        auto;
-
-    font-family:
-        "Noto Sans Tamil",
-        sans-serif;
-
-    font-size:
-        clamp(
-            1.8rem,
-            3vw,
-            2.6rem
-        );
-
-    line-height:
-        1.9;
-
-    color:
-        #F8F5ED;
-
-    text-align:
-        center;
-
-}
-
-
-.page03-introduction p {
-
-    max-width:
-        760px;
+.page03-brand {
 
     margin:
-        30px auto 0;
-
-    color:
-        #B9C6D8;
-
-    font-size:
-        1.2rem;
-
-    line-height:
-        1.9;
-
-    text-align:
-        center;
-
-}
-
-
-/* ==========================================================================
-   REFLECTION QUESTION
-========================================================================== */
-
-.reflection-question {
-
-    margin:
-        60px auto 0;
-
-    padding:
-        42px;
-
-    max-width:
-        500px;
-
-    border-radius:
-        30px;
-
-    background:
-        rgba(255,255,255,.035);
-
-    border:
-        1px solid rgba(255,255,255,.10);
-
-    text-align:
-        center;
-
-}
-
-
-.reflection-question h3 {
-
-    margin-left:
-        auto;
-
-    margin-right:
-        auto;
-
-    color:
-        #F8F5ED;
-
-    font-size:
-        2rem;
-
-    line-height:
-        1.6;
-
-    text-align:
-        center;
-
-}
-
-
-.reflection-question span {
-
-    display:
-        block;
-
-    margin:
-        20px auto 0;
+        0 auto 22px;
 
     color:
         #23D4C8;
 
     font-size:
-        1.4rem;
+        .68rem;
 
     font-weight:
-        700;
-
-    text-align:
-        center;
-
-}
-
-
-/* ==========================================================================
-   KALA CHAKRA™ INTRODUCTION
-========================================================================== */
-
-.page03-scoring {
-
-    max-width:
-        900px;
-
-    margin:
-        60px auto;
-
-    text-align:
-        center;
-
-    padding:
-        50px 30px;
-
-}
-
-
-.page03-scoring h2 {
-
-    margin-left:
-        auto;
-
-    margin-right:
-        auto;
-
-    font-family:
-        "Cinzel",
-        serif;
-
-    color:
-        #D8B45A;
-
-    font-size:
-        clamp(
-            1.8rem,
-            3vw,
-            2.8rem
-        );
+        800;
 
     letter-spacing:
-        .12em;
+        .30em;
 
     line-height:
         1.5;
 
     text-align:
         center;
-
 }
 
 
-.page03-scoring p {
+.page03-title {
 
     max-width:
-        820px;
+        1000px;
 
     margin:
-        30px auto;
+        0 auto 34px;
 
     color:
-        #E2E7EF;
+        #F8F5ED;
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
 
     font-size:
-        1.15rem;
+        clamp(
+            2.2rem,
+            5vw,
+            4rem
+        );
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        .07em;
+
+    line-height:
+        1.35;
+
+    text-align:
+        center;
+}
+
+
+.page03-opening {
+
+    width:
+        min(
+            100%,
+            760px
+        );
+
+    margin:
+        0 auto;
+
+    text-align:
+        center;
+}
+
+
+.page03-opening-ta {
+
+    margin:
+        0 auto 18px;
+
+    color:
+        #F8F5ED;
+
+    font-family:
+        "Noto Sans Tamil",
+        sans-serif;
+
+    font-size:
+        clamp(
+            1.15rem,
+            2vw,
+            1.55rem
+        );
+
+    font-weight:
+        600;
 
     line-height:
         1.9;
 
     text-align:
         center;
-
 }
 
 
-.english-text {
-
-    color:
-        #B9C6D8 !important;
-
-    text-align:
-        center;
-
-}
-
-
-/* ==========================================================================
-   INSTRUCTION ALIGNMENT
-
-   Explicit selectors are retained because Page03 HTML may use these
-   contracts independently of .page03-scoring.
-========================================================================== */
-
-.page03-scoring,
-.page03-scoring h2,
-.page03-scoring p,
-.assessment-intro,
-.assessment-intro-inner,
-.assessment-eyebrow,
-.assessment-intro-ta,
-.assessment-intro-en,
-.assessment-instruction-ta,
-.assessment-instruction-en {
-
-    text-align:
-        center;
-
-}
-
-
-.assessment-intro,
-.assessment-intro-inner {
-
-    margin-left:
-        auto;
-
-    margin-right:
-        auto;
-
-}
-
-
-.assessment-eyebrow,
-.assessment-intro-ta,
-.assessment-intro-en,
-.assessment-instruction-ta,
-.assessment-instruction-en {
-
-    margin-left:
-        auto;
-
-    margin-right:
-        auto;
-
-}
-
-
-/* ==========================================================================
-   SCORE GUIDE
-========================================================================== */
-
-.score-guide {
-
-    display:
-        flex;
-
-    justify-content:
-        center;
-
-    align-items:
-        stretch;
-
-    gap:
-        40px;
+.page03-opening-en {
 
     margin:
-        50px auto 0;
-
-    text-align:
-        center;
-
-}
-
-
-.score-item {
-
-    min-width:
-        220px;
-
-    padding:
-        30px;
-
-    border-radius:
-        24px;
-
-    background:
-        rgba(255,255,255,.035);
-
-    border:
-        1px solid rgba(255,255,255,.10);
-
-    text-align:
-        center;
-
-}
-
-
-.score-item strong {
-
-    display:
-        block;
+        0 auto;
 
     color:
-        #D8B45A;
+        #9EADBF;
 
     font-size:
-        3rem;
+        .78rem;
 
-    font-family:
-        "Cinzel",
-        serif;
+    font-weight:
+        600;
 
-    text-align:
-        center;
-
-}
-
-
-.score-item span {
-
-    display:
-        block;
-
-    margin:
-        12px auto 0;
-
-    color:
-        #C8D3E2;
-
-    font-size:
-        .95rem;
+    letter-spacing:
+        .14em;
 
     line-height:
-        1.6;
+        1.8;
 
     text-align:
         center;
-
 }
 
 
 /* ==========================================================================
-   PILLAR SECTION
+   PERSPECTIVE
 ========================================================================== */
 
-.pillar-section {
-
-    width:
-        min(1200px, calc(100% - 96px));
-
-    margin:
-        0 auto;
-
-    padding:
-        80px 0;
-
-    text-align:
-        center;
-
-}
-
-
-/* ==========================================================================
-   PILLAR GRID
-========================================================================== */
-
-.pillar-grid {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap:
-        28px;
+.page03-perspective {
 
     width:
         100%;
 
-    margin:
-        0 auto;
+    padding:
+        18px 24px 70px;
 
     text-align:
         center;
-
 }
 
 
-/* ==========================================================================
-   PILLAR CARD
-========================================================================== */
+.page03-perspective-inner {
 
-.pillar-card {
-
-    position:
-        relative;
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-
-    justify-content:
-        flex-start;
-
-    text-align:
-        center;
-
-    min-height:
-        420px;
-
-    padding:
-        36px 26px;
-
-    border-radius:
-        28px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.06),
-            rgba(255,255,255,.025)
+    width:
+        min(
+            100%,
+            760px
         );
 
-    border:
-        1px solid rgba(255,255,255,.10);
-
-    transition:
-        .35s ease;
-
-}
-
-
-.pillar-card:hover {
-
-    transform:
-        translateY(-8px);
-
-    border-color:
-        rgba(35,212,200,.45);
-
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.25);
-
-}
-
-
-/* ==========================================================================
-   ICON
-========================================================================== */
-
-.pillar-icon {
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    width:
-        70px;
-
-    height:
-        70px;
-
     margin:
-        0 auto 24px;
-
-    border-radius:
-        50%;
-
-    background:
-        rgba(216,180,90,.12);
-
-    font-size:
-        2rem;
+        0 auto;
 
     text-align:
         center;
-
 }
 
 
-/* ==========================================================================
-   CARD TYPOGRAPHY
-========================================================================== */
-
-.pillar-card h3 {
-
-    width:
-        100%;
+.page03-perspective-ta {
 
     margin:
         0 auto 20px;
@@ -872,108 +339,846 @@ body {
         #F8F5ED;
 
     font-family:
-        "Cinzel",
-        serif;
+        "Noto Sans Tamil",
+        sans-serif;
 
     font-size:
-        1.25rem;
+        clamp(
+            1.15rem,
+            2vw,
+            1.45rem
+        );
+
+    font-weight:
+        600;
 
     line-height:
-        1.6;
+        1.9;
 
     text-align:
         center;
-
 }
 
 
-.pillar-card p {
+.page03-perspective-en {
 
-    width:
-        100%;
-
-    flex-grow:
-        1;
-
-    margin-left:
-        auto;
-
-    margin-right:
-        auto;
+    margin:
+        0 auto;
 
     color:
-        #C7D2E0;
+        #9EADBF;
 
     font-size:
-        .98rem;
+        .86rem;
 
     line-height:
         1.8;
 
     text-align:
         center;
-
 }
 
 
 /* ==========================================================================
-   SCORE SELECTOR
+   ASSESSMENT INTRODUCTION
 ========================================================================== */
 
-.score-selector {
-
-    margin:
-        28px auto 0;
+.assessment-intro {
 
     width:
         100%;
+
+    padding:
+        18px 24px 54px;
+
+    text-align:
+        center;
+}
+
+
+.assessment-intro-inner {
+
+    width:
+        min(
+            100%,
+            850px
+        );
+
+    margin:
+        0 auto;
+
+    text-align:
+        center;
+}
+
+
+.assessment-eyebrow {
+
+    margin:
+        0 auto 16px;
+
+    color:
+        #23D4C8;
+
+    font-size:
+        .65rem;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .24em;
+
+    line-height:
+        1.5;
+
+    text-align:
+        center;
+}
+
+
+.assessment-intro-ta {
+
+    margin:
+        0 auto 14px;
+
+    color:
+        #F8F5ED;
+
+    font-family:
+        "Noto Sans Tamil",
+        sans-serif;
+
+    font-size:
+        clamp(
+            1.15rem,
+            2vw,
+            1.45rem
+        );
+
+    font-weight:
+        600;
+
+    line-height:
+        1.9;
+
+    text-align:
+        center;
+}
+
+
+.assessment-intro-en {
+
+    margin:
+        0 auto 24px;
+
+    color:
+        #9EADBF;
+
+    font-size:
+        .88rem;
+
+    line-height:
+        1.8;
+
+    text-align:
+        center;
+}
+
+
+.assessment-instruction-ta {
+
+    margin:
+        0 auto 8px;
+
+    color:
+        #D8B45A;
+
+    font-family:
+        "Noto Sans Tamil",
+        sans-serif;
+
+    font-size:
+        .95rem;
+
+    font-weight:
+        600;
+
+    line-height:
+        1.8;
+
+    text-align:
+        center;
+}
+
+
+.assessment-instruction-en {
+
+    margin:
+        0 auto;
+
+    color:
+        #9EADBF;
+
+    font-size:
+        .78rem;
+
+    line-height:
+        1.7;
+
+    text-align:
+        center;
+}
+
+
+/* ==========================================================================
+   KALA CHAKRA™ ASSESSMENT
+========================================================================== */
+
+.kala-chakra-assessment {
+
+    width:
+        min(
+            1400px,
+            calc(100% - 80px)
+        );
+
+    margin:
+        0 auto;
+
+    padding:
+        20px 0 50px;
+
+    text-align:
+        center;
+}
+
+
+/* ==========================================================================
+   COLUMN HEADINGS
+
+   COLUMN 01:
+   PILLAR
+
+   COLUMN 02:
+   SCORE
+========================================================================== */
+
+.assessment-column-headings {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        minmax(
+            0,
+            1.65fr
+        )
+        minmax(
+            460px,
+            1fr
+        );
+
+    width:
+        100%;
+
+    margin:
+        0 auto;
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    border-bottom:
+        0;
+
+    border-radius:
+        20px 20px 0 0;
+
+    background:
+        rgba(255,255,255,.035);
+
+    overflow:
+        hidden;
+}
+
+
+.assessment-column-heading {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-height:
+        58px;
+
+    padding:
+        14px 24px;
 
     color:
         #D8B45A;
 
     font-size:
-        .85rem;
+        .72rem;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        .22em;
+
+    line-height:
+        1.5;
+
+    text-transform:
+        uppercase;
+
+    text-align:
+        center;
+}
+
+
+.assessment-column-heading + .assessment-column-heading {
+
+    border-left:
+        1px solid
+        rgba(255,255,255,.10);
+}
+
+
+/* ==========================================================================
+   PILLAR GRID
+
+   IMPORTANT:
+
+   This is now ONE vertical list.
+
+   Each .pillar-card itself contains TWO columns:
+
+       COLUMN 01 → PILLAR
+       COLUMN 02 → SCORE
+
+   Therefore:
+
+       12 pillar rows
+       ×
+       2 columns
+
+   NOT:
+
+       3-column cards
+       NOT:
+       2-column card grid
+========================================================================== */
+
+.pillar-grid {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    width:
+        100%;
+
+    margin:
+        0 auto;
+
+    text-align:
+        center;
+}
+
+
+/* ==========================================================================
+   PILLAR CARD — TWO COLUMN ROW
+========================================================================== */
+
+.pillar-card {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        minmax(
+            0,
+            1.65fr
+        )
+        minmax(
+            460px,
+            1fr
+        );
+
+    width:
+        100%;
+
+    min-height:
+        205px;
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    border-top:
+        0;
+
+    border-radius:
+        0;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.018)
+        );
+
+    overflow:
+        hidden;
+
+    transition:
+        background
+        .30s
+        ease,
+        border-color
+        .30s
+        ease,
+        box-shadow
+        .30s
+        ease;
+
+    text-align:
+        center;
+}
+
+
+.pillar-card:last-child {
+
+    border-radius:
+        0 0 20px 20px;
+}
+
+
+.pillar-card:hover {
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(35,212,200,.055),
+            rgba(255,255,255,.025)
+        );
+
+    border-color:
+        rgba(35,212,200,.32);
+
+    box-shadow:
+        0
+        18px
+        45px
+        rgba(0,0,0,.16);
+
+    position:
+        relative;
+
+    z-index:
+        2;
+}
+
+
+/* ==========================================================================
+   PILLAR COLUMN
+========================================================================== */
+
+.pillar-content {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        70px
+        minmax(
+            0,
+            1fr
+        );
+
+    align-items:
+        center;
+
+    gap:
+        24px;
+
+    min-width:
+        0;
+
+    padding:
+        30px 38px;
+
+    border-right:
+        1px solid
+        rgba(255,255,255,.10);
+
+    text-align:
+        left;
+}
+
+
+/* ==========================================================================
+   PILLAR NUMBER
+========================================================================== */
+
+.pillar-number {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        52px;
+
+    height:
+        52px;
+
+    flex:
+        0 0 52px;
+
+    border:
+        1px solid
+        rgba(216,180,90,.45);
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(216,180,90,.08);
+
+    color:
+        #D8B45A;
+
+    font-size:
+        .72rem;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        .08em;
+
+    line-height:
+        1;
+
+    text-align:
+        center;
+}
+
+
+/* ==========================================================================
+   PILLAR COPY
+========================================================================== */
+
+.pillar-copy {
+
+    min-width:
+        0;
+
+    text-align:
+        left;
+}
+
+
+/* ==========================================================================
+   PILLAR TITLE — TAMIL
+========================================================================== */
+
+.pillar-title-ta {
+
+    width:
+        100%;
+
+    margin:
+        0 0 3px;
+
+    color:
+        #F8F5ED;
+
+    font-family:
+        "Noto Sans Tamil",
+        sans-serif;
+
+    font-size:
+        clamp(
+            1rem,
+            1.4vw,
+            1.25rem
+        );
+
+    font-weight:
+        700;
+
+    line-height:
+        1.65;
+
+    text-align:
+        left;
+}
+
+
+/* ==========================================================================
+   PILLAR TITLE — ENGLISH
+========================================================================== */
+
+.pillar-title-en {
+
+    width:
+        100%;
+
+    margin:
+        0 0 14px;
+
+    color:
+        #23D4C8;
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        .68rem;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .15em;
+
+    line-height:
+        1.5;
+
+    text-align:
+        left;
+}
+
+
+/* ==========================================================================
+   PILLAR QUESTION — TAMIL
+========================================================================== */
+
+.pillar-question-ta {
+
+    width:
+        100%;
+
+    margin:
+        0 0 8px;
+
+    color:
+        #E8ECF2;
+
+    font-family:
+        "Noto Sans Tamil",
+        sans-serif;
+
+    font-size:
+        .86rem;
+
+    font-weight:
+        500;
+
+    line-height:
+        1.8;
+
+    text-align:
+        left;
+}
+
+
+/* ==========================================================================
+   PILLAR QUESTION — ENGLISH
+========================================================================== */
+
+.pillar-question-en {
+
+    width:
+        100%;
+
+    margin:
+        0;
+
+    color:
+        #9EADBF;
+
+    font-size:
+        .74rem;
+
+    font-weight:
+        400;
+
+    line-height:
+        1.65;
+
+    text-align:
+        left;
+}
+
+
+/* ==========================================================================
+   SCORE COLUMN
+========================================================================== */
+
+.score-panel {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-width:
+        0;
+
+    padding:
+        28px 32px;
+
+    text-align:
+        center;
+}
+
+
+/* ==========================================================================
+   SCORE LABEL
+========================================================================== */
+
+.score-label {
+
+    margin:
+        0 auto 13px;
+
+    color:
+        #D8B45A;
+
+    font-size:
+        .62rem;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        .22em;
+
+    line-height:
+        1.4;
+
+    text-align:
+        center;
+}
+
+
+/* ==========================================================================
+   SCORE SELECTOR
+
+   page03.js finds this exact class.
+
+   DO NOT CHANGE THE CLASS NAME.
+========================================================================== */
+
+.score-selector {
+
+    width:
+        100%;
+
+    margin:
+        0 auto;
+
+    color:
+        #D8B45A;
+
+    font-size:
+        .76rem;
 
     font-weight:
         700;
 
     letter-spacing:
-        .08em;
+        .06em;
 
     text-align:
         center;
-
 }
 
+
+/* ==========================================================================
+   SCORE OPTIONS
+
+   page03.js dynamically creates:
+
+       .score-options
+
+   containing:
+
+       0 1 2 3 4 5 6 7 8 9 10
+========================================================================== */
 
 .score-options {
 
     display:
-        flex;
+        grid;
 
-    justify-content:
-        center;
+    grid-template-columns:
+        repeat(
+            11,
+            minmax(
+                0,
+                1fr
+            )
+        );
 
     align-items:
         center;
 
-    flex-wrap:
-        wrap;
+    justify-items:
+        center;
 
     gap:
-        8px;
-
-    margin:
-        16px auto 0;
+        7px;
 
     width:
         100%;
 
+    max-width:
+        500px;
+
+    margin:
+        0 auto;
+
     text-align:
         center;
-
 }
 
+
+/* ==========================================================================
+   SCORE BUTTON
+========================================================================== */
 
 .score-options button {
 
@@ -995,20 +1200,24 @@ body {
     padding:
         0;
 
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
     border-radius:
         50%;
 
-    border:
-        1px solid rgba(255,255,255,.18);
-
     background:
-        rgba(255,255,255,.04);
+        rgba(255,255,255,.035);
 
     color:
         #DCE5F2;
 
     font-size:
-        .85rem;
+        .74rem;
+
+    font-weight:
+        600;
 
     line-height:
         1;
@@ -1020,8 +1229,21 @@ body {
         pointer;
 
     transition:
-        all .3s ease;
-
+        transform
+        .25s
+        ease,
+        border-color
+        .25s
+        ease,
+        background
+        .25s
+        ease,
+        color
+        .25s
+        ease,
+        box-shadow
+        .25s
+        ease;
 }
 
 
@@ -1030,17 +1252,19 @@ body {
     border-color:
         #23D4C8;
 
+    background:
+        rgba(35,212,200,.06);
+
     color:
         #23D4C8;
 
     transform:
         translateY(-3px);
-
 }
 
 
 /* ==========================================================================
-   SELECTED SCORE — COMMON STATE
+   SELECTED SCORE — COMMON
 ========================================================================== */
 
 .score-options button.selected {
@@ -1053,7 +1277,6 @@ body {
 
     transform:
         translateY(-2px) scale(1.08);
-
 }
 
 
@@ -1073,8 +1296,10 @@ body {
         #FFFFFF;
 
     box-shadow:
-        0 0 25px rgba(214,69,69,.40);
-
+        0
+        0
+        24px
+        rgba(214,69,69,.40);
 }
 
 
@@ -1094,8 +1319,10 @@ body {
         #FFFFFF;
 
     box-shadow:
-        0 0 25px rgba(229,138,43,.40);
-
+        0
+        0
+        24px
+        rgba(229,138,43,.40);
 }
 
 
@@ -1115,207 +1342,116 @@ body {
         #FFFFFF;
 
     box-shadow:
-        0 0 25px rgba(46,157,99,.40);
-
+        0
+        0
+        24px
+        rgba(46,157,99,.40);
 }
 
 
 /* ==========================================================================
-   SELECTED PILLAR CARD STATE
+   COMPLETED PILLAR STATE
+
+   page03.js adds .scored to the selected pillar.
 ========================================================================== */
 
 .pillar-card.scored {
 
     border-color:
-        rgba(35,212,200,.65);
+        rgba(35,212,200,.38);
 
     background:
         linear-gradient(
             145deg,
-            rgba(35,212,200,.10),
-            rgba(255,255,255,.04)
+            rgba(35,212,200,.07),
+            rgba(255,255,255,.022)
         );
-
 }
 
 
 /* ==========================================================================
-   COMPLETION MESSAGE
+   COMPLETION
 ========================================================================== */
 
-.page03-completion {
+.assessment-completion {
+
+    width:
+        100%;
 
     padding:
-        80px 20px;
+        78px 24px 90px;
 
     text-align:
         center;
-
 }
 
 
-.completion-card {
+.assessment-completion-inner {
 
-    max-width:
-        760px;
+    width:
+        min(
+            100%,
+            850px
+        );
 
     margin:
         0 auto;
 
-    padding:
-        50px;
-
-    border-radius:
-        32px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(216,180,90,.08),
-            rgba(255,255,255,.035)
-        );
-
-    border:
-        1px solid rgba(255,255,255,.12);
-
     text-align:
         center;
-
 }
 
 
-.completion-card h2 {
+.completion-ta {
 
-    margin-left:
-        auto;
-
-    margin-right:
-        auto;
-
-    color:
-        #D8B45A;
-
-    font-family:
-        "Cinzel",
-        serif;
-
-    font-size:
-        2rem;
-
-    text-align:
-        center;
-
-}
-
-
-.completion-card p {
-
-    margin-left:
-        auto;
-
-    margin-right:
-        auto;
+    margin:
+        0 auto 14px;
 
     color:
         #F8F5ED;
 
+    font-family:
+        "Noto Sans Tamil",
+        sans-serif;
+
     font-size:
-        1.2rem;
+        1rem;
+
+    font-weight:
+        500;
 
     line-height:
         1.9;
 
     text-align:
         center;
-
 }
 
 
-.completion-card .english {
+.completion-en {
+
+    margin:
+        0 auto 30px;
 
     color:
-        #B9C6D8;
+        #9EADBF;
+
+    font-size:
+        .82rem;
+
+    line-height:
+        1.8;
 
     text-align:
         center;
-
 }
 
 
 /* ==========================================================================
-   FINAL ACTION
+   PRIMARY CTA
 ========================================================================== */
 
-.page03-action {
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    padding:
-        40px 20px 100px;
-
-    text-align:
-        center;
-
-}
-
-
-/* ==========================================================================
-   FINAL ACTION
-========================================================================== */
-
-.page03-action {
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    width:
-        100%;
-
-    padding:
-        40px 20px 100px;
-
-    text-align:
-        center;
-
-}
-
-
-/* ==========================================================================
-   JOURNEY NAVIGATOR — TEAL CTA
-
-   IMPORTANT:
-   The CTA is targeted through BOTH:
-   1. Existing reusable class: .journey-button
-   2. Existing Page03 JS contract: #show-alignment-button
-
-   This guarantees the actual navigation button receives the Page03 styling.
-========================================================================== */
-
-.page03 .journey-button,
-.page03 #show-alignment-button,
-#show-alignment-button {
-
-    appearance:
-        none;
-
-    -webkit-appearance:
-        none;
+.primary-cta {
 
     display:
         inline-flex;
@@ -1330,277 +1466,232 @@ body {
         center;
 
     gap:
-        8px;
-
-    width:
-        auto;
+        5px;
 
     min-width:
-        360px;
-
-    max-width:
-        100%;
-
-    min-height:
-        64px;
-
-    margin:
-        0 auto;
+        300px;
 
     padding:
-        18px 42px;
+        18px 36px;
 
     border:
-        1px solid #23D4C8 !important;
+        1px solid
+        rgba(35,212,200,.80);
 
     border-radius:
-        999px !important;
+        999px;
 
     background:
-        #23D4C8 !important;
-
-    background-image:
         linear-gradient(
             135deg,
-            #23D4C8 0%,
-            #18AFA6 100%
-        ) !important;
+            #23D4C8,
+            #18AFA6
+        );
 
     color:
-        #061522 !important;
-
-    font-family:
-        inherit;
+        #081426;
 
     font-size:
-        1rem;
+        .86rem;
 
     font-weight:
-        800;
-
-    line-height:
-        1.35;
+        900;
 
     letter-spacing:
-        .04em;
+        .06em;
 
-    text-align:
-        center;
-
-    text-decoration:
-        none;
+    line-height:
+        1.5;
 
     cursor:
         pointer;
 
     box-shadow:
-        0 14px 36px rgba(35,212,200,.22);
+        0
+        14px
+        35px
+        rgba(35,212,200,.16);
 
     transition:
-        transform .3s ease,
-        box-shadow .3s ease,
-        background .3s ease,
-        border-color .3s ease;
-
+        transform
+        .30s
+        ease,
+        box-shadow
+        .30s
+        ease,
+        background
+        .30s
+        ease;
 }
 
 
-/* ==========================================================================
-   CTA CHILDREN
-
-   Prevent nested spans / bilingual text from inheriting another global
-   button colour.
-========================================================================== */
-
-.page03 .journey-button *,
-.page03 #show-alignment-button *,
-#show-alignment-button * {
-
-    color:
-        #061522 !important;
-
-    text-align:
-        center;
-
-}
-
-
-/* ==========================================================================
-   CTA SMALL / SECONDARY TEXT
-========================================================================== */
-
-.page03 .journey-button small,
-.page03 #show-alignment-button small,
-#show-alignment-button small {
-
-    display:
-        block;
-
-    margin:
-        0;
-
-    color:
-        #061522 !important;
-
-    font-size:
-        .72rem;
-
-    font-weight:
-        700;
-
-    line-height:
-        1.5;
-
-    letter-spacing:
-        .12em;
-
-    text-align:
-        center;
-
-}
-
-
-/* ==========================================================================
-   CTA HOVER
-========================================================================== */
-
-.page03 .journey-button:hover,
-.page03 #show-alignment-button:hover,
-#show-alignment-button:hover {
+.primary-cta:hover {
 
     transform:
         translateY(-4px);
 
-    border-color:
-        #32E5D9 !important;
-
     background:
-        #32E5D9 !important;
-
-    background-image:
         linear-gradient(
             135deg,
-            #32E5D9 0%,
-            #23D4C8 100%
-        ) !important;
-
-    color:
-        #061522 !important;
+            #2BE3D6,
+            #23D4C8
+        );
 
     box-shadow:
-        0 22px 50px rgba(35,212,200,.34);
+        0
+        25px
+        60px
+        rgba(35,212,200,.30);
+}
 
+
+.cta-ta {
+
+    font-family:
+        "Noto Sans Tamil",
+        sans-serif;
+
+    font-size:
+        .88rem;
+
+    line-height:
+        1.7;
+
+    text-align:
+        center;
+}
+
+
+.cta-en {
+
+    font-size:
+        .68rem;
+
+    letter-spacing:
+        .15em;
+
+    line-height:
+        1.5;
+
+    text-align:
+        center;
 }
 
 
 /* ==========================================================================
-   CTA ACTIVE
+   FOOTER SAFETY
+
+   page03.html has NO #global-footer.
+
+   This defensive rule guarantees that if a footer container is
+   accidentally introduced later, it remains invisible on Page03.
 ========================================================================== */
 
-.page03 .journey-button:active,
-.page03 #show-alignment-button:active,
-#show-alignment-button:active {
+#global-footer {
 
-    transform:
-        translateY(-1px);
-
-    box-shadow:
-        0 10px 24px rgba(35,212,200,.24);
-
+    display:
+        none !important;
 }
 
 
 /* ==========================================================================
-   CTA KEYBOARD FOCUS
+   ACCESSIBILITY
 ========================================================================== */
 
-.page03 .journey-button:focus-visible,
-.page03 #show-alignment-button:focus-visible,
-#show-alignment-button:focus-visible {
+.score-options button:focus-visible {
 
     outline:
-        3px solid rgba(35,212,200,.50);
+        3px solid
+        rgba(35,212,200,.55);
+
+    outline-offset:
+        3px;
+}
+
+
+.primary-cta:focus-visible {
+
+    outline:
+        3px solid
+        rgba(35,212,200,.55);
 
     outline-offset:
         5px;
-
 }
 
 
 /* ==========================================================================
-   CTA VISITED STATE
-   Protects CTA if implemented as an <a>
+   LARGE TABLET / SMALL DESKTOP
 ========================================================================== */
 
-.page03 a.journey-button:visited,
-.page03 a#show-alignment-button:visited,
-a#show-alignment-button:visited {
+@media(max-width:1150px){
 
-    color:
-        #061522 !important;
+    .kala-chakra-assessment {
 
-}
+        width:
+            min(
+                100%,
+                calc(100% - 48px)
+            );
 
-/* ==========================================================================
-   REFLECTION NOTE
-========================================================================== */
-
-.page03-reflection {
-
-    max-width:
-        900px;
-
-    margin:
-        0 auto;
-
-    padding:
-        0 20px 100px;
-
-    text-align:
-        center;
-
-}
+    }
 
 
-.reflection-card {
+    .assessment-column-headings,
+    .pillar-card {
 
-    padding:
-        40px;
+        grid-template-columns:
+            minmax(
+                0,
+                1.4fr
+            )
+            minmax(
+                390px,
+                1fr
+            );
 
-    border-radius:
-        28px;
-
-    background:
-        rgba(255,255,255,.03);
-
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    text-align:
-        center;
-
-}
+    }
 
 
-.reflection-card p {
+    .pillar-content {
 
-    margin-left:
-        auto;
+        gap:
+            18px;
 
-    margin-right:
-        auto;
+        padding:
+            28px 28px;
 
-    color:
-        #C7D2E0;
+    }
 
-    line-height:
-        1.9;
 
-    font-size:
-        1rem;
+    .score-panel {
 
-    text-align:
-        center;
+        padding:
+            26px 22px;
+
+    }
+
+
+    .score-options {
+
+        gap:
+            5px;
+
+    }
+
+
+    .score-options button {
+
+        width:
+            31px;
+
+        height:
+            31px;
+
+        font-size:
+            .70rem;
+
+    }
 
 }
 
@@ -1609,144 +1700,84 @@ a#show-alignment-button:visited {
    TABLET
 ========================================================================== */
 
-@media(max-width:1000px){
+@media(max-width:900px){
 
-
-    .page03-container {
-
-        width:
-            min(100% - 56px, 1200px);
-
-    }
-
-
-    .pillar-section {
-
-        width:
-            calc(100% - 56px);
-
-    }
-
-
-    .pillar-grid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-    }
-
-
-    .score-guide {
-
-        flex-direction:
-            column;
-
-        align-items:
-            center;
-
-    }
-
-
-    .score-item {
-
-        width:
-            min(100%, 500px);
-
-    }
-
-}
-
-
-/* ==========================================================================
-   MOBILE
-========================================================================== */
-
-@media(max-width:700px){
-
-
-    .page03-container {
+    .kala-chakra-assessment {
 
         width:
             calc(100% - 32px);
 
-        padding:
-            50px 0 80px;
-
     }
 
 
-    .page03-hero {
-
-        padding:
-            40px 15px 60px;
-
-    }
-
-
-    .page03-title {
-
-        font-size:
-            2.1rem;
-
-        letter-spacing:
-            .05em;
-
-    }
-
-
-    .page03-tamil-title {
-
-        font-size:
-            1.5rem;
-
-    }
-
-
-    .page03-introduction {
-
-        padding:
-            40px 16px;
-
-    }
-
-
-    .page03-scoring {
-
-        margin:
-            40px auto;
-
-        padding:
-            40px 16px;
-
-    }
-
-
-    .pillar-section {
-
-        width:
-            calc(100% - 32px);
-
-        padding:
-            50px 0;
-
-    }
-
-
-    .pillar-grid {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
+    .assessment-column-headings,
     .pillar-card {
 
-        min-height:
-            auto;
+        grid-template-columns:
+            minmax(
+                0,
+                1.25fr
+            )
+            minmax(
+                330px,
+                1fr
+            );
+
+    }
+
+
+    .pillar-content {
+
+        grid-template-columns:
+            54px
+            minmax(
+                0,
+                1fr
+            );
+
+        gap:
+            15px;
 
         padding:
-            30px 20px;
+            26px 22px;
+
+    }
+
+
+    .pillar-number {
+
+        width:
+            44px;
+
+        height:
+            44px;
+
+        flex-basis:
+            44px;
+
+    }
+
+
+    .pillar-question-ta {
+
+        font-size:
+            .82rem;
+
+    }
+
+
+    .pillar-question-en {
+
+        font-size:
+            .70rem;
+
+    }
+
+
+    .score-panel {
+
+        padding:
+            22px 18px;
 
     }
 
@@ -1754,7 +1785,7 @@ a#show-alignment-button:visited {
     .score-options {
 
         gap:
-            7px;
+            4px;
 
     }
 
@@ -1762,31 +1793,312 @@ a#show-alignment-button:visited {
     .score-options button {
 
         width:
-            32px;
+            29px;
 
         height:
-            32px;
+            29px;
+
+        font-size:
+            .66rem;
 
     }
 
+}
 
-    .completion-card {
+
+/* ==========================================================================
+   SMALL TABLET / MOBILE TRANSITION
+
+   At this point the two-column desktop/tablet presentation becomes
+   stacked because 11 score buttons need sufficient horizontal space.
+========================================================================== */
+
+@media(max-width:700px){
+
+    .journey-indicator {
 
         padding:
-            32px 20px;
+            10px 16px 2px;
 
     }
 
 
-    .page03-action {
+    .page03-hero {
 
         padding:
-            30px 16px 70px;
+            38px 16px 52px;
 
     }
 
 
-    .journey-button {
+    .page03-title {
+
+        font-size:
+            2rem;
+
+        letter-spacing:
+            .045em;
+
+    }
+
+
+    .page03-opening-ta {
+
+        font-size:
+            1.05rem;
+
+    }
+
+
+    .page03-opening-en {
+
+        font-size:
+            .68rem;
+
+    }
+
+
+    .page03-perspective {
+
+        padding:
+            10px 16px 52px;
+
+    }
+
+
+    .page03-perspective-ta {
+
+        font-size:
+            1.05rem;
+
+    }
+
+
+    .assessment-intro {
+
+        padding:
+            10px 16px 42px;
+
+    }
+
+
+    .assessment-intro-ta {
+
+        font-size:
+            1.05rem;
+
+    }
+
+
+    .assessment-instruction-ta {
+
+        font-size:
+            .86rem;
+
+    }
+
+
+    .kala-chakra-assessment {
+
+        width:
+            calc(100% - 20px);
+
+        padding:
+            10px 0 35px;
+
+    }
+
+
+    .assessment-column-headings {
+
+        grid-template-columns:
+            1fr;
+
+        border-radius:
+            16px 16px 0 0;
+
+    }
+
+
+    .assessment-column-heading {
+
+        min-height:
+            48px;
+
+    }
+
+
+    .score-heading {
+
+        display:
+            none;
+
+    }
+
+
+    .assessment-column-heading.pillar-heading {
+
+        justify-content:
+            flex-start;
+
+        padding-left:
+            20px;
+
+        text-align:
+            left;
+
+    }
+
+
+    .pillar-card {
+
+        grid-template-columns:
+            1fr;
+
+        min-height:
+            auto;
+
+    }
+
+
+    .pillar-card:last-child {
+
+        border-radius:
+            0 0 16px 16px;
+
+    }
+
+
+    .pillar-content {
+
+        grid-template-columns:
+            48px
+            minmax(
+                0,
+                1fr
+            );
+
+        gap:
+            14px;
+
+        padding:
+            24px 18px;
+
+        border-right:
+            0;
+
+        border-bottom:
+            1px solid
+            rgba(255,255,255,.08);
+
+    }
+
+
+    .pillar-number {
+
+        width:
+            42px;
+
+        height:
+            42px;
+
+        flex-basis:
+            42px;
+
+    }
+
+
+    .pillar-title-ta {
+
+        font-size:
+            1rem;
+
+    }
+
+
+    .pillar-title-en {
+
+        font-size:
+            .62rem;
+
+        margin-bottom:
+            10px;
+
+    }
+
+
+    .pillar-question-ta {
+
+        font-size:
+            .80rem;
+
+        line-height:
+            1.75;
+
+    }
+
+
+    .pillar-question-en {
+
+        font-size:
+            .68rem;
+
+        line-height:
+            1.6;
+
+    }
+
+
+    .score-panel {
+
+        padding:
+            20px 14px 24px;
+
+    }
+
+
+    .score-label {
+
+        margin-bottom:
+            12px;
+
+    }
+
+
+    .score-options {
+
+        max-width:
+            100%;
+
+        gap:
+            5px;
+
+    }
+
+
+    .score-options button {
+
+        width:
+            29px;
+
+        height:
+            29px;
+
+        font-size:
+            .65rem;
+
+    }
+
+
+    .assessment-completion {
+
+        padding:
+            58px 16px 70px;
+
+    }
+
+
+    .primary-cta {
 
         width:
             100%;
@@ -1794,16 +2106,126 @@ a#show-alignment-button:visited {
         min-width:
             0;
 
-        padding:
-            20px;
+    }
+
+}
+
+
+/* ==========================================================================
+   VERY SMALL MOBILE
+========================================================================== */
+
+@media(max-width:430px){
+
+    .page03-title {
+
+        font-size:
+            1.65rem;
 
     }
 
 
-    .reflection-card {
+    .pillar-content {
+
+        grid-template-columns:
+            40px
+            minmax(
+                0,
+                1fr
+            );
+
+        gap:
+            10px;
 
         padding:
-            28px 20px;
+            20px 14px;
+
+    }
+
+
+    .pillar-number {
+
+        width:
+            36px;
+
+        height:
+            36px;
+
+        flex-basis:
+            36px;
+
+        font-size:
+            .64rem;
+
+    }
+
+
+    .pillar-title-ta {
+
+        font-size:
+            .92rem;
+
+    }
+
+
+    .pillar-title-en {
+
+        font-size:
+            .57rem;
+
+    }
+
+
+    .pillar-question-ta {
+
+        font-size:
+            .74rem;
+
+    }
+
+
+    .pillar-question-en {
+
+        font-size:
+            .63rem;
+
+    }
+
+
+    .score-panel {
+
+        padding:
+            18px 8px 22px;
+
+    }
+
+
+    .score-options {
+
+        gap:
+            3px;
+
+    }
+
+
+    .score-options button {
+
+        width:
+            27px;
+
+        height:
+            27px;
+
+        font-size:
+            .60rem;
+
+    }
+
+
+    .primary-cta {
+
+        padding:
+            16px 20px;
 
     }
 
