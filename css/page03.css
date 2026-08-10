@@ -91,8 +91,23 @@ body {
 
 .page03 {
 
+    width:
+        100% !important;
+
+    max-width:
+        none !important;
+
+    min-width:
+        100% !important;
+
     min-height:
         100vh;
+
+    margin:
+        0 !important;
+
+    padding:
+        0;
 
     background:
         #081426;
@@ -112,6 +127,47 @@ body {
 
     box-sizing:
         border-box;
+}
+
+
+/* ==========================================================================
+   PAGE03 FULL-BLEED CONTAINER
+
+   The white mobile side strips are not caused by the internal sections.
+   They occur when a global main/container rule constrains #page03.
+
+   Page03 must occupy the complete viewport width.
+========================================================================== */
+
+#page03.page03 {
+
+    display:
+        block;
+
+    width:
+        100vw !important;
+
+    max-width:
+        100vw !important;
+
+    min-width:
+        100vw !important;
+
+    margin:
+        0 !important;
+
+    padding-left:
+        0;
+
+    padding-right:
+        0;
+
+    border-left:
+        0 !important;
+
+    border-right:
+        0 !important;
+
 }
 
 
@@ -2271,5 +2327,6 @@ body {
     }
 
 }
+
 
 
