@@ -12,17 +12,14 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-
     <title>
         KALA CHAKRA™ LIFE ASSESSMENT™ | CTM PATH™ MILLIONAIRES™
     </title>
-
 
     <meta
         name="description"
         content="CTM PATH™ KALA CHAKRA™ LIFE ASSESSMENT™ — See your life from a new perspective."
     >
-
 
 
     <!-- ================================================================
@@ -33,25 +30,21 @@
          KALA CHAKRA™ LIFE ASSESSMENT™
 
          VERSION:
-         10.0
+         11.0 — TWO-COLUMN ASSESSMENT PRESENTATION
     ================================================================= -->
 
 
-
     <!-- ================================================================
-         GLOBAL STYLES
+         GLOBAL HEADER STYLES
+
+         FOOTER STYLES REMOVED
+         PAGE 03 NOW USES HEADER ONLY
     ================================================================= -->
 
     <link
         rel="stylesheet"
         href="../css/header.css"
     >
-
-    <link
-        rel="stylesheet"
-        href="../css/footer.css"
-    >
-
 
 
     <!-- ================================================================
@@ -63,13 +56,10 @@
         href="../css/page03.css"
     >
 
-
 </head>
 
 
-
 <body>
-
 
 
     <!-- ================================================================
@@ -84,7 +74,6 @@
     ></div>
 
 
-
     <!-- ================================================================
          PAGE 03
          KALA CHAKRA™ LIFE ASSESSMENT™
@@ -94,7 +83,6 @@
         id="page03"
         class="page03"
     >
-
 
 
         <!-- ============================================================
@@ -113,7 +101,6 @@
         </section>
 
 
-
         <!-- ============================================================
              HERO
         ============================================================= -->
@@ -121,7 +108,6 @@
         <section
             class="page03-hero"
         >
-
 
             <div
                 class="page03-hero-inner"
@@ -135,7 +121,6 @@
                 </p>
 
 
-
                 <h1
                     class="page03-title"
                 >
@@ -143,7 +128,6 @@
                     <br>
                     LIFE ASSESSMENT™
                 </h1>
-
 
 
                 <div
@@ -163,7 +147,6 @@
                     </h2>
 
 
-
                     <p
                         class="page03-opening-en"
                     >
@@ -178,9 +161,7 @@
 
             </div>
 
-
         </section>
-
 
 
         <!-- ============================================================
@@ -190,7 +171,6 @@
         <section
             class="page03-perspective"
         >
-
 
             <div
                 class="page03-perspective-inner"
@@ -211,7 +191,6 @@
                 </h2>
 
 
-
                 <p
                     class="page03-perspective-en"
                 >
@@ -225,9 +204,7 @@
 
             </div>
 
-
         </section>
-
 
 
         <!-- ============================================================
@@ -237,7 +214,6 @@
         <section
             class="assessment-intro"
         >
-
 
             <div
                 class="assessment-intro-inner"
@@ -251,7 +227,6 @@
                 </p>
 
 
-
                 <h2
                     class="assessment-intro-ta"
                     lang="ta"
@@ -262,14 +237,12 @@
                 </h2>
 
 
-
                 <p
                     class="assessment-intro-en"
                 >
                     Explore the 12 essential areas
                     that shape a well-lived life.
                 </p>
-
 
 
                 <p
@@ -282,7 +255,6 @@
                 </p>
 
 
-
                 <p
                     class="assessment-instruction-en"
                 >
@@ -293,9 +265,7 @@
 
             </div>
 
-
         </section>
-
 
 
         <!-- ============================================================
@@ -327,10 +297,51 @@
         >
 
 
+            <!-- ========================================================
+                 TWO-COLUMN HEADERS
+            ========================================================= -->
+
+            <div
+                class="assessment-column-headings"
+                aria-hidden="true"
+            >
+
+                <div
+                    class="assessment-column-heading pillar-heading"
+                >
+                    <span>
+                        Pillar
+                    </span>
+                </div>
+
+
+                <div
+                    class="assessment-column-heading score-heading"
+                >
+                    <span>
+                        Score
+                    </span>
+                </div>
+
+            </div>
+
+
+            <!-- ========================================================
+                 PILLAR ROWS
+
+                 COLUMN 01:
+                 PILLAR
+
+                 COLUMN 02:
+                 SCORE
+
+                 The .score-selector hook is intentionally preserved
+                 because page03.js creates the scoring controls there.
+            ========================================================= -->
+
             <div
                 class="pillar-grid"
             >
-
 
 
                 <!-- ====================================================
@@ -343,55 +354,67 @@
                     data-pillar-index="0"
                 >
 
-
-                    <div
-                        class="pillar-number"
-                    >
-                        01
-                    </div>
-
-
-
                     <div
                         class="pillar-content"
                     >
 
-
-                        <h3
-                            class="pillar-title-ta"
-                            lang="ta"
+                        <div
+                            class="pillar-number"
                         >
-                            நோக்கம்
-                        </h3>
+                            01
+                        </div>
 
 
-
-                        <p
-                            class="pillar-title-en"
+                        <div
+                            class="pillar-copy"
                         >
-                            PURPOSE
-                        </p>
+
+                            <h3
+                                class="pillar-title-ta"
+                                lang="ta"
+                            >
+                                நோக்கம்
+                            </h3>
 
 
+                            <p
+                                class="pillar-title-en"
+                            >
+                                PURPOSE
+                            </p>
 
-                        <p
-                            class="pillar-question-ta"
-                            lang="ta"
+
+                            <p
+                                class="pillar-question-ta"
+                                lang="ta"
+                            >
+                                நான் ஏன் வாழ்கிறேன்,
+                                எதை நோக்கி செல்கிறேன்
+                                என்பதில் எனக்கு எவ்வளவு தெளிவு உள்ளது?
+                            </p>
+
+
+                            <p
+                                class="pillar-question-en"
+                            >
+                                How clear are you about
+                                why you live and where your life is heading?
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="score-panel"
+                    >
+
+                        <div
+                            class="score-label"
                         >
-                            நான் ஏன் வாழ்கிறேன்,
-                            எதை நோக்கி செல்கிறேன்
-                            என்பதில் எனக்கு எவ்வளவு தெளிவு உள்ளது?
-                        </p>
-
-
-
-                        <p
-                            class="pillar-question-en"
-                        >
-                            How clear are you about
-                            why you live and where your life is heading?
-                        </p>
-
+                            SCORE
+                        </div>
 
 
                         <div
@@ -399,12 +422,9 @@
                             aria-label="Purpose score"
                         ></div>
 
-
                     </div>
 
-
                 </article>
-
 
 
                 <!-- ====================================================
@@ -417,55 +437,67 @@
                     data-pillar-index="1"
                 >
 
-
-                    <div
-                        class="pillar-number"
-                    >
-                        02
-                    </div>
-
-
-
                     <div
                         class="pillar-content"
                     >
 
-
-                        <h3
-                            class="pillar-title-ta"
-                            lang="ta"
+                        <div
+                            class="pillar-number"
                         >
-                            உடல்நலம்
-                        </h3>
+                            02
+                        </div>
 
 
-
-                        <p
-                            class="pillar-title-en"
+                        <div
+                            class="pillar-copy"
                         >
-                            HEALTH
-                        </p>
+
+                            <h3
+                                class="pillar-title-ta"
+                                lang="ta"
+                            >
+                                உடல்நலம்
+                            </h3>
 
 
+                            <p
+                                class="pillar-title-en"
+                            >
+                                HEALTH
+                            </p>
 
-                        <p
-                            class="pillar-question-ta"
-                            lang="ta"
+
+                            <p
+                                class="pillar-question-ta"
+                                lang="ta"
+                            >
+                                என் உடல், ஆற்றல் மற்றும்
+                                அன்றாட நலனை நான் எவ்வளவு
+                                நன்றாக பராமரிக்கிறேன்?
+                            </p>
+
+
+                            <p
+                                class="pillar-question-en"
+                            >
+                                How well are you caring for
+                                your body, energy and everyday well-being?
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="score-panel"
+                    >
+
+                        <div
+                            class="score-label"
                         >
-                            என் உடல், ஆற்றல் மற்றும்
-                            அன்றாட நலனை நான் எவ்வளவு
-                            நன்றாக பராமரிக்கிறேன்?
-                        </p>
-
-
-
-                        <p
-                            class="pillar-question-en"
-                        >
-                            How well are you caring for
-                            your body, energy and everyday well-being?
-                        </p>
-
+                            SCORE
+                        </div>
 
 
                         <div
@@ -473,12 +505,9 @@
                             aria-label="Health score"
                         ></div>
 
-
                     </div>
 
-
                 </article>
-
 
 
                 <!-- ====================================================
@@ -491,55 +520,67 @@
                     data-pillar-index="2"
                 >
 
-
-                    <div
-                        class="pillar-number"
-                    >
-                        03
-                    </div>
-
-
-
                     <div
                         class="pillar-content"
                     >
 
-
-                        <h3
-                            class="pillar-title-ta"
-                            lang="ta"
+                        <div
+                            class="pillar-number"
                         >
-                            உறவுகள்
-                        </h3>
+                            03
+                        </div>
 
 
-
-                        <p
-                            class="pillar-title-en"
+                        <div
+                            class="pillar-copy"
                         >
-                            RELATIONSHIPS
-                        </p>
+
+                            <h3
+                                class="pillar-title-ta"
+                                lang="ta"
+                            >
+                                உறவுகள்
+                            </h3>
 
 
+                            <p
+                                class="pillar-title-en"
+                            >
+                                RELATIONSHIPS
+                            </p>
 
-                        <p
-                            class="pillar-question-ta"
-                            lang="ta"
+
+                            <p
+                                class="pillar-question-ta"
+                                lang="ta"
+                            >
+                                எனக்கு முக்கியமானவர்களுடன்
+                                என் உறவுகள் எவ்வளவு
+                                அன்பானதாகவும் வலிமையானதாகவும் உள்ளன?
+                            </p>
+
+
+                            <p
+                                class="pillar-question-en"
+                            >
+                                How strong and meaningful are
+                                your relationships with the people who matter most?
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="score-panel"
+                    >
+
+                        <div
+                            class="score-label"
                         >
-                            எனக்கு முக்கியமானவர்களுடன்
-                            என் உறவுகள் எவ்வளவு
-                            அன்பானதாகவும் வலிமையானதாகவும் உள்ளன?
-                        </p>
-
-
-
-                        <p
-                            class="pillar-question-en"
-                        >
-                            How strong and meaningful are
-                            your relationships with the people who matter most?
-                        </p>
-
+                            SCORE
+                        </div>
 
 
                         <div
@@ -547,12 +588,9 @@
                             aria-label="Relationships score"
                         ></div>
 
-
                     </div>
 
-
                 </article>
-
 
 
                 <!-- ====================================================
@@ -565,55 +603,67 @@
                     data-pillar-index="3"
                 >
 
-
-                    <div
-                        class="pillar-number"
-                    >
-                        04
-                    </div>
-
-
-
                     <div
                         class="pillar-content"
                     >
 
-
-                        <h3
-                            class="pillar-title-ta"
-                            lang="ta"
+                        <div
+                            class="pillar-number"
                         >
-                            பண்பும் நேர்மையும்
-                        </h3>
+                            04
+                        </div>
 
 
-
-                        <p
-                            class="pillar-title-en"
+                        <div
+                            class="pillar-copy"
                         >
-                            CHARACTER &amp; INTEGRITY
-                        </p>
+
+                            <h3
+                                class="pillar-title-ta"
+                                lang="ta"
+                            >
+                                பண்பும் நேர்மையும்
+                            </h3>
 
 
+                            <p
+                                class="pillar-title-en"
+                            >
+                                CHARACTER &amp; INTEGRITY
+                            </p>
 
-                        <p
-                            class="pillar-question-ta"
-                            lang="ta"
+
+                            <p
+                                class="pillar-question-ta"
+                                lang="ta"
+                            >
+                                என் மதிப்புகளுக்கு ஏற்ப
+                                நான் எவ்வளவு உண்மையாகவும்
+                                நேர்மையாகவும் வாழ்கிறேன்?
+                            </p>
+
+
+                            <p
+                                class="pillar-question-en"
+                            >
+                                How consistently do you live
+                                according to your values and principles?
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="score-panel"
+                    >
+
+                        <div
+                            class="score-label"
                         >
-                            என் மதிப்புகளுக்கு ஏற்ப
-                            நான் எவ்வளவு உண்மையாகவும்
-                            நேர்மையாகவும் வாழ்கிறேன்?
-                        </p>
-
-
-
-                        <p
-                            class="pillar-question-en"
-                        >
-                            How consistently do you live
-                            according to your values and principles?
-                        </p>
-
+                            SCORE
+                        </div>
 
 
                         <div
@@ -621,12 +671,9 @@
                             aria-label="Character and Integrity score"
                         ></div>
 
-
                     </div>
 
-
                 </article>
-
 
 
                 <!-- ====================================================
@@ -639,55 +686,67 @@
                     data-pillar-index="4"
                 >
 
-
-                    <div
-                        class="pillar-number"
-                    >
-                        05
-                    </div>
-
-
-
                     <div
                         class="pillar-content"
                     >
 
-
-                        <h3
-                            class="pillar-title-ta"
-                            lang="ta"
+                        <div
+                            class="pillar-number"
                         >
-                            கற்றலும் தேர்ச்சியும்
-                        </h3>
+                            05
+                        </div>
 
 
-
-                        <p
-                            class="pillar-title-en"
+                        <div
+                            class="pillar-copy"
                         >
-                            LEARNING &amp; MASTERY
-                        </p>
+
+                            <h3
+                                class="pillar-title-ta"
+                                lang="ta"
+                            >
+                                கற்றலும் தேர்ச்சியும்
+                            </h3>
 
 
+                            <p
+                                class="pillar-title-en"
+                            >
+                                LEARNING &amp; MASTERY
+                            </p>
 
-                        <p
-                            class="pillar-question-ta"
-                            lang="ta"
+
+                            <p
+                                class="pillar-question-ta"
+                                lang="ta"
+                            >
+                                நான் தொடர்ந்து கற்று,
+                                என் திறன்களையும் அறிவையும்
+                                எவ்வளவு வளர்த்துக் கொண்டிருக்கிறேன்?
+                            </p>
+
+
+                            <p
+                                class="pillar-question-en"
+                            >
+                                How consistently are you learning,
+                                improving and mastering valuable skills?
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="score-panel"
+                    >
+
+                        <div
+                            class="score-label"
                         >
-                            நான் தொடர்ந்து கற்று,
-                            என் திறன்களையும் அறிவையும்
-                            எவ்வளவு வளர்த்துக் கொண்டிருக்கிறேன்?
-                        </p>
-
-
-
-                        <p
-                            class="pillar-question-en"
-                        >
-                            How consistently are you learning,
-                            improving and mastering valuable skills?
-                        </p>
-
+                            SCORE
+                        </div>
 
 
                         <div
@@ -695,12 +754,9 @@
                             aria-label="Learning and Mastery score"
                         ></div>
 
-
                     </div>
 
-
                 </article>
-
 
 
                 <!-- ====================================================
@@ -713,55 +769,67 @@
                     data-pillar-index="5"
                 >
 
-
-                    <div
-                        class="pillar-number"
-                    >
-                        06
-                    </div>
-
-
-
                     <div
                         class="pillar-content"
                     >
 
-
-                        <h3
-                            class="pillar-title-ta"
-                            lang="ta"
+                        <div
+                            class="pillar-number"
                         >
-                            தொழிலும் பங்களிப்பும்
-                        </h3>
+                            06
+                        </div>
 
 
-
-                        <p
-                            class="pillar-title-en"
+                        <div
+                            class="pillar-copy"
                         >
-                            CAREER &amp; CONTRIBUTION
-                        </p>
+
+                            <h3
+                                class="pillar-title-ta"
+                                lang="ta"
+                            >
+                                தொழிலும் பங்களிப்பும்
+                            </h3>
 
 
+                            <p
+                                class="pillar-title-en"
+                            >
+                                CAREER &amp; CONTRIBUTION
+                            </p>
 
-                        <p
-                            class="pillar-question-ta"
-                            lang="ta"
+
+                            <p
+                                class="pillar-question-ta"
+                                lang="ta"
+                            >
+                                என் வேலை அல்லது தொழில்
+                                என் திறமைகளை வெளிப்படுத்தி,
+                                அர்த்தமுள்ள பங்களிப்பை உருவாக்குகிறதா?
+                            </p>
+
+
+                            <p
+                                class="pillar-question-en"
+                            >
+                                How well does your work allow you
+                                to use your abilities and make a meaningful contribution?
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="score-panel"
+                    >
+
+                        <div
+                            class="score-label"
                         >
-                            என் வேலை அல்லது தொழில்
-                            என் திறமைகளை வெளிப்படுத்தி,
-                            அர்த்தமுள்ள பங்களிப்பை உருவாக்குகிறதா?
-                        </p>
-
-
-
-                        <p
-                            class="pillar-question-en"
-                        >
-                            How well does your work allow you
-                            to use your abilities and make a meaningful contribution?
-                        </p>
-
+                            SCORE
+                        </div>
 
 
                         <div
@@ -769,12 +837,9 @@
                             aria-label="Career and Contribution score"
                         ></div>
 
-
                     </div>
 
-
                 </article>
-
 
 
                 <!-- ====================================================
@@ -787,55 +852,67 @@
                     data-pillar-index="6"
                 >
 
-
-                    <div
-                        class="pillar-number"
-                    >
-                        07
-                    </div>
-
-
-
                     <div
                         class="pillar-content"
                     >
 
-
-                        <h3
-                            class="pillar-title-ta"
-                            lang="ta"
+                        <div
+                            class="pillar-number"
                         >
-                            பொருளாதார சுதந்திரம்
-                        </h3>
+                            07
+                        </div>
 
 
-
-                        <p
-                            class="pillar-title-en"
+                        <div
+                            class="pillar-copy"
                         >
-                            FINANCIAL FREEDOM
-                        </p>
+
+                            <h3
+                                class="pillar-title-ta"
+                                lang="ta"
+                            >
+                                பொருளாதார சுதந்திரம்
+                            </h3>
 
 
+                            <p
+                                class="pillar-title-en"
+                            >
+                                FINANCIAL FREEDOM
+                            </p>
 
-                        <p
-                            class="pillar-question-ta"
-                            lang="ta"
+
+                            <p
+                                class="pillar-question-ta"
+                                lang="ta"
+                            >
+                                என் பணநிலை எனக்கு
+                                பாதுகாப்பையும் தேர்வுகளையும்
+                                எதிர்கால சுதந்திரத்தையும் எவ்வளவு வழங்குகிறது?
+                            </p>
+
+
+                            <p
+                                class="pillar-question-en"
+                            >
+                                How much security, choice and
+                                future freedom does your financial life provide?
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="score-panel"
+                    >
+
+                        <div
+                            class="score-label"
                         >
-                            என் பணநிலை எனக்கு
-                            பாதுகாப்பையும் தேர்வுகளையும்
-                            எதிர்கால சுதந்திரத்தையும் எவ்வளவு வழங்குகிறது?
-                        </p>
-
-
-
-                        <p
-                            class="pillar-question-en"
-                        >
-                            How much security, choice and
-                            future freedom does your financial life provide?
-                        </p>
-
+                            SCORE
+                        </div>
 
 
                         <div
@@ -843,12 +920,9 @@
                             aria-label="Financial Freedom score"
                         ></div>
 
-
                     </div>
 
-
                 </article>
-
 
 
                 <!-- ====================================================
@@ -861,55 +935,67 @@
                     data-pillar-index="7"
                 >
 
-
-                    <div
-                        class="pillar-number"
-                    >
-                        08
-                    </div>
-
-
-
                     <div
                         class="pillar-content"
                     >
 
-
-                        <h3
-                            class="pillar-title-ta"
-                            lang="ta"
+                        <div
+                            class="pillar-number"
                         >
-                            நேர சுதந்திரம்
-                        </h3>
+                            08
+                        </div>
 
 
-
-                        <p
-                            class="pillar-title-en"
+                        <div
+                            class="pillar-copy"
                         >
-                            TIME FREEDOM
-                        </p>
+
+                            <h3
+                                class="pillar-title-ta"
+                                lang="ta"
+                            >
+                                நேர சுதந்திரம்
+                            </h3>
 
 
+                            <p
+                                class="pillar-title-en"
+                            >
+                                TIME FREEDOM
+                            </p>
 
-                        <p
-                            class="pillar-question-ta"
-                            lang="ta"
+
+                            <p
+                                class="pillar-question-ta"
+                                lang="ta"
+                            >
+                                என் நேரத்தை என் முன்னுரிமைகளுக்கு ஏற்ப
+                                பயன்படுத்தும் சுதந்திரம்
+                                எனக்கு எவ்வளவு உள்ளது?
+                            </p>
+
+
+                            <p
+                                class="pillar-question-en"
+                            >
+                                How much freedom do you have
+                                to use your time according to what matters most?
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="score-panel"
+                    >
+
+                        <div
+                            class="score-label"
                         >
-                            என் நேரத்தை என் முன்னுரிமைகளுக்கு ஏற்ப
-                            பயன்படுத்தும் சுதந்திரம்
-                            எனக்கு எவ்வளவு உள்ளது?
-                        </p>
-
-
-
-                        <p
-                            class="pillar-question-en"
-                        >
-                            How much freedom do you have
-                            to use your time according to what matters most?
-                        </p>
-
+                            SCORE
+                        </div>
 
 
                         <div
@@ -917,12 +1003,9 @@
                             aria-label="Time Freedom score"
                         ></div>
 
-
                     </div>
 
-
                 </article>
-
 
 
                 <!-- ====================================================
@@ -935,55 +1018,67 @@
                     data-pillar-index="8"
                 >
 
-
-                    <div
-                        class="pillar-number"
-                    >
-                        09
-                    </div>
-
-
-
                     <div
                         class="pillar-content"
                     >
 
-
-                        <h3
-                            class="pillar-title-ta"
-                            lang="ta"
+                        <div
+                            class="pillar-number"
                         >
-                            சமூகமும் உறவுக்குழுவும்
-                        </h3>
+                            09
+                        </div>
 
 
-
-                        <p
-                            class="pillar-title-en"
+                        <div
+                            class="pillar-copy"
                         >
-                            COMMUNITY &amp; TRIBE
-                        </p>
+
+                            <h3
+                                class="pillar-title-ta"
+                                lang="ta"
+                            >
+                                சமூகமும் உறவுக்குழுவும்
+                            </h3>
 
 
+                            <p
+                                class="pillar-title-en"
+                            >
+                                COMMUNITY &amp; TRIBE
+                            </p>
 
-                        <p
-                            class="pillar-question-ta"
-                            lang="ta"
+
+                            <p
+                                class="pillar-question-ta"
+                                lang="ta"
+                            >
+                                என்னை ஊக்குவிக்கும்,
+                                ஆதரிக்கும் மற்றும் வளர்ச்சிக்கு உதவும்
+                                மனிதர்கள் என்னைச் சுற்றி உள்ளனரா?
+                            </p>
+
+
+                            <p
+                                class="pillar-question-en"
+                            >
+                                Are you surrounded by people
+                                who support, challenge and strengthen your growth?
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="score-panel"
+                    >
+
+                        <div
+                            class="score-label"
                         >
-                            என்னை ஊக்குவிக்கும்,
-                            ஆதரிக்கும் மற்றும் வளர்ச்சிக்கு உதவும்
-                            மனிதர்கள் என்னைச் சுற்றி உள்ளனரா?
-                        </p>
-
-
-
-                        <p
-                            class="pillar-question-en"
-                        >
-                            Are you surrounded by people
-                            who support, challenge and strengthen your growth?
-                        </p>
-
+                            SCORE
+                        </div>
 
 
                         <div
@@ -991,12 +1086,9 @@
                             aria-label="Community and Tribe score"
                         ></div>
 
-
                     </div>
 
-
                 </article>
-
 
 
                 <!-- ====================================================
@@ -1009,55 +1101,67 @@
                     data-pillar-index="9"
                 >
 
-
-                    <div
-                        class="pillar-number"
-                    >
-                        10
-                    </div>
-
-
-
                     <div
                         class="pillar-content"
                     >
 
-
-                        <h3
-                            class="pillar-title-ta"
-                            lang="ta"
+                        <div
+                            class="pillar-number"
                         >
-                            அமைப்புகளும் செயல்திறனும்
-                        </h3>
+                            10
+                        </div>
 
 
-
-                        <p
-                            class="pillar-title-en"
+                        <div
+                            class="pillar-copy"
                         >
-                            SYSTEMS &amp; PRODUCTIVITY
-                        </p>
+
+                            <h3
+                                class="pillar-title-ta"
+                                lang="ta"
+                            >
+                                அமைப்புகளும் செயல்திறனும்
+                            </h3>
 
 
+                            <p
+                                class="pillar-title-en"
+                            >
+                                SYSTEMS &amp; PRODUCTIVITY
+                            </p>
 
-                        <p
-                            class="pillar-question-ta"
-                            lang="ta"
+
+                            <p
+                                class="pillar-question-ta"
+                                lang="ta"
+                            >
+                                என் முக்கிய செயல்களை
+                                ஒழுங்காகவும் தொடர்ந்து செய்யவும்
+                                உதவும் அமைப்புகள் என்னிடம் உள்ளனவா?
+                            </p>
+
+
+                            <p
+                                class="pillar-question-en"
+                            >
+                                How effectively do your routines and systems
+                                turn priorities into consistent action?
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="score-panel"
+                    >
+
+                        <div
+                            class="score-label"
                         >
-                            என் முக்கிய செயல்களை
-                            ஒழுங்காகவும் தொடர்ந்து செய்யவும்
-                            உதவும் அமைப்புகள் என்னிடம் உள்ளனவா?
-                        </p>
-
-
-
-                        <p
-                            class="pillar-question-en"
-                        >
-                            How effectively do your routines and systems
-                            turn priorities into consistent action?
-                        </p>
-
+                            SCORE
+                        </div>
 
 
                         <div
@@ -1065,12 +1169,9 @@
                             aria-label="Systems and Productivity score"
                         ></div>
 
-
                     </div>
 
-
                 </article>
-
 
 
                 <!-- ====================================================
@@ -1083,55 +1184,67 @@
                     data-pillar-index="10"
                 >
 
-
-                    <div
-                        class="pillar-number"
-                    >
-                        11
-                    </div>
-
-
-
                     <div
                         class="pillar-content"
                     >
 
-
-                        <h3
-                            class="pillar-title-ta"
-                            lang="ta"
+                        <div
+                            class="pillar-number"
                         >
-                            சேவையும் தாக்கமும்
-                        </h3>
+                            11
+                        </div>
 
 
-
-                        <p
-                            class="pillar-title-en"
+                        <div
+                            class="pillar-copy"
                         >
-                            SERVICE &amp; IMPACT
-                        </p>
+
+                            <h3
+                                class="pillar-title-ta"
+                                lang="ta"
+                            >
+                                சேவையும் தாக்கமும்
+                            </h3>
 
 
+                            <p
+                                class="pillar-title-en"
+                            >
+                                SERVICE &amp; IMPACT
+                            </p>
 
-                        <p
-                            class="pillar-question-ta"
-                            lang="ta"
+
+                            <p
+                                class="pillar-question-ta"
+                                lang="ta"
+                            >
+                                என் வாழ்க்கை மற்றவர்களுக்கு
+                                பயனையும் நல்ல மாற்றத்தையும்
+                                எவ்வளவு உருவாக்குகிறது?
+                            </p>
+
+
+                            <p
+                                class="pillar-question-en"
+                            >
+                                How meaningfully is your life
+                                creating value and positive change for others?
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="score-panel"
+                    >
+
+                        <div
+                            class="score-label"
                         >
-                            என் வாழ்க்கை மற்றவர்களுக்கு
-                            பயனையும் நல்ல மாற்றத்தையும்
-                            எவ்வளவு உருவாக்குகிறது?
-                        </p>
-
-
-
-                        <p
-                            class="pillar-question-en"
-                        >
-                            How meaningfully is your life
-                            creating value and positive change for others?
-                        </p>
-
+                            SCORE
+                        </div>
 
 
                         <div
@@ -1139,12 +1252,9 @@
                             aria-label="Service and Impact score"
                         ></div>
 
-
                     </div>
 
-
                 </article>
-
 
 
                 <!-- ====================================================
@@ -1157,55 +1267,67 @@
                     data-pillar-index="11"
                 >
 
-
-                    <div
-                        class="pillar-number"
-                    >
-                        12
-                    </div>
-
-
-
                     <div
                         class="pillar-content"
                     >
 
-
-                        <h3
-                            class="pillar-title-ta"
-                            lang="ta"
+                        <div
+                            class="pillar-number"
                         >
-                            தொலைநோக்கும் மரபும்
-                        </h3>
+                            12
+                        </div>
 
 
-
-                        <p
-                            class="pillar-title-en"
+                        <div
+                            class="pillar-copy"
                         >
-                            VISION &amp; LEGACY
-                        </p>
+
+                            <h3
+                                class="pillar-title-ta"
+                                lang="ta"
+                            >
+                                தொலைநோக்கும் மரபும்
+                            </h3>
 
 
+                            <p
+                                class="pillar-title-en"
+                            >
+                                VISION &amp; LEGACY
+                            </p>
 
-                        <p
-                            class="pillar-question-ta"
-                            lang="ta"
+
+                            <p
+                                class="pillar-question-ta"
+                                lang="ta"
+                            >
+                                நான் உருவாக்க விரும்பும் எதிர்காலமும்,
+                                நான் விட்டுச் செல்ல விரும்பும் தடமும்
+                                எனக்கு எவ்வளவு தெளிவாக உள்ளது?
+                            </p>
+
+
+                            <p
+                                class="pillar-question-en"
+                            >
+                                How clear are you about
+                                the future you want to create and the legacy you want to leave?
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="score-panel"
+                    >
+
+                        <div
+                            class="score-label"
                         >
-                            நான் உருவாக்க விரும்பும் எதிர்காலமும்,
-                            நான் விட்டுச் செல்ல விரும்பும் தடமும்
-                            எனக்கு எவ்வளவு தெளிவாக உள்ளது?
-                        </p>
-
-
-
-                        <p
-                            class="pillar-question-en"
-                        >
-                            How clear are you about
-                            the future you want to create and the legacy you want to leave?
-                        </p>
-
+                            SCORE
+                        </div>
 
 
                         <div
@@ -1213,19 +1335,14 @@
                             aria-label="Vision and Legacy score"
                         ></div>
 
-
                     </div>
-
 
                 </article>
 
 
-
             </div>
 
-
         </section>
-
 
 
         <!-- ============================================================
@@ -1235,7 +1352,6 @@
         <section
             class="assessment-completion"
         >
-
 
             <div
                 class="assessment-completion-inner"
@@ -1254,7 +1370,6 @@
                 </p>
 
 
-
                 <p
                     class="completion-en"
                 >
@@ -1264,13 +1379,11 @@
                 </p>
 
 
-
                 <button
                     id="show-alignment-button"
                     class="primary-cta"
                     type="button"
                 >
-
 
                     <span
                         class="cta-ta"
@@ -1286,38 +1399,30 @@
                         SEE MY LIFE ALIGNMENT
                     </span>
 
-
                 </button>
 
 
             </div>
 
-
         </section>
-
 
 
     </main>
 
 
-
     <!-- ================================================================
-         GLOBAL FOOTER
+         NO GLOBAL FOOTER
 
-         Loaded by:
-         ../js/component-loader.js
+         Page 03 intentionally ends after the assessment.
+         Header only.
     ================================================================= -->
-
-    <div
-        id="global-footer"
-    ></div>
-
 
 
     <!-- ================================================================
          SHARED FRONTEND RUNTIME
 
          LOAD ORDER:
+
          1. API
          2. Global runtime
          3. Component loader
@@ -1346,7 +1451,6 @@
     ></script>
 
 
-
     <!-- ================================================================
          PAGE 03 INITIALIZATION
     ================================================================= -->
@@ -1354,34 +1458,31 @@
     <script>
 
         document.addEventListener(
-
             "DOMContentLoaded",
-
             async function () {
 
 
                 /*
                  * ---------------------------------------------------------
-                 * GLOBAL SHELL
+                 * GLOBAL HEADER
                  * ---------------------------------------------------------
                  *
-                 * Loads:
+                 * The component loader still loads the shared header.
                  *
-                 * /components/header.html
-                 * /components/footer.html
+                 * There is intentionally NO #global-footer mount.
                  *
-                 * component-loader.js also handles the shared component
-                 * styles/controllers required by the global shell.
+                 * Therefore:
+                 *
+                 * HEADER  → YES
+                 * FOOTER  → NO
                  *
                  * ---------------------------------------------------------
                  */
 
+
                 if (
-
                     window.CTM_COMPONENTS &&
-
                     typeof window.CTM_COMPONENTS.load === "function"
-
                 ) {
 
                     await window.CTM_COMPONENTS.load();
@@ -1389,23 +1490,21 @@
                 }
 
 
-
                 /*
                  * ---------------------------------------------------------
                  * PAGE 03
                  * ---------------------------------------------------------
                  *
-                 * Existing v10 Page 03 initialization contract.
+                 * Existing Page 03 controller contract.
                  *
+                 * Logic remains untouched.
                  * ---------------------------------------------------------
                  */
 
+
                 if (
-
                     window.CTM_PAGE03 &&
-
                     typeof window.CTM_PAGE03.init === "function"
-
                 ) {
 
                     window.CTM_PAGE03.init();
@@ -1414,11 +1513,9 @@
 
 
             }
-
         );
 
     </script>
-
 
 
 </body>
