@@ -8,7 +8,7 @@
  * js/page02/page02f.js
  *
  * VERSION:
- * 4.1 — PROGRESSIVE DIMENSION SCOREBOARD → PAGE 02G
+ * 4.2 — PROGRESSIVE DIMENSION SCOREBOARD → PAGE 02G — LEGACY NAVIGATION GUARD
  *
  * PAGE:
  * PAGE 02F — DIMENSION 05
@@ -332,6 +332,121 @@ function verifyDimension(){
 
     return true;
 
+}
+
+
+/* =============================================================================
+ * LEGACY PAGE 03 NAVIGATION GUARD
+ * =============================================================================
+ *
+ * Page 02F is the terminal page of the Millionaire Lifestyle Scorecard.
+ * The active architecture continues to Page 02G — Life Gap Analysis™.
+ *
+ * Older Page 02 code may still expose:
+ *
+ *      window.Page02.goToPage03()
+ *      window.Page02.getPage03URL()
+ *
+ * Those legacy functions are NOT allowed to send Page 02F to page03.html.
+ * When Page 02F is active, any legacy Page 03 navigation request is redirected
+ * through the single Page 02F → Page 02G gateway below.
+ *
+ * This guard does not change scoring, answer persistence, or CTM_API.
+ * It only removes the obsolete Page 03 route from the final-dimension page.
+ * =============================================================================
+ */
+
+
+function installLegacyNavigationGuard(){
+
+    if(
+        !window.Page02
+    ){
+
+        console.info(
+            'CTM PATH™ Page 02F: no legacy Page02 namespace detected; navigation guard not required.'
+        );
+
+        return false;
+
+    }
+
+
+    const legacyPage02 =
+        window.Page02;
+
+
+    if(
+        legacyPage02.__page02FNavigationGuardInstalled === true
+    ){
+
+        return true;
+
+    }
+
+
+    const legacyGoToPage03 =
+        typeof legacyPage02.goToPage03 ===
+        'function'
+            ? legacyPage02.goToPage03
+            : null;
+
+
+    const legacyGetPage03URL =
+        typeof legacyPage02.getPage03URL ===
+        'function'
+            ? legacyPage02.getPage03URL
+            : null;
+
+
+    legacyPage02.__page02FNavigationGuardInstalled =
+        true;
+
+
+    legacyPage02.getPage03URL =
+        function(){
+
+            console.warn(
+                'CTM PATH™ Page 02F blocked legacy Page 03 URL request. Using Page 02G.'
+            );
+
+            return CONFIG.nextPage;
+
+        };
+
+
+    legacyPage02.goToPage03 =
+        function(){
+
+            console.warn(
+                'CTM PATH™ Page 02F blocked legacy Page 03 navigation. Redirecting to Page 02G.'
+            );
+
+            navigateToPage02G();
+
+            return true;
+
+        };
+
+
+    console.info(
+        'CTM PATH™ Page 02F legacy navigation guard installed.',
+        {
+            legacyPage03URL:
+                legacyGetPage03URL
+                    ? legacyGetPage03URL.call(legacyPage02)
+                    : null,
+
+            enforcedDestination:
+                CONFIG.nextPage,
+
+            legacyHandlerReplaced:
+                Boolean(legacyGoToPage03)
+        }
+    );
+
+
+    return true;
 }
 
 
@@ -1484,6 +1599,7 @@ function getDimensionNavigation(){
  * =============================================================================
  */
 
+
 function relocateDimensionScore(){
 
     const scorePanel =
@@ -2090,6 +2206,7 @@ function getClientId(){
     );
 
 }
+
  
 /* =============================================================================
  * BUILD DISCOVERY PAYLOAD
@@ -2269,15 +2386,15 @@ function saveResultLocally(
 
 function markJourneyComplete(){
 
-    if(
-        typeof window.Page02Session.completeScorecard ===
-        'function'
-    ){
-
-        window.Page02Session.completeScorecard();
-
-    }
-
+    /*
+     * IMPORTANT:
+     *
+     * Page02Session is the shared state foundation. It must not be asked to
+     * execute a legacy Page 02 transaction here. Older implementations may
+     * expose completeScorecard(), and that method can own obsolete Page 03
+     * navigation. Page 02F already owns the final transaction and the only
+     * permitted destination is Page 02G.
+     */
 
     if(
         typeof window.Page02Session.setCompleted ===
@@ -3052,6 +3169,15 @@ function init(){
 
 
     /* -------------------------------------------------------------------------
+     * LEGACY NAVIGATION GUARD
+     * -------------------------------------------------------------------------
+     */
+
+
+    installLegacyNavigationGuard();
+
+
+    /* -------------------------------------------------------------------------
      * SCORECARD
      * -------------------------------------------------------------------------
      */
@@ -3188,7 +3314,7 @@ else{
 window.Page02F = {
 
     version:
-        '4.0',
+        '4.2',
 
     dimensionId:
         CONFIG.dimensionId,
