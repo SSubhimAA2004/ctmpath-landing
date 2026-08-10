@@ -8,7 +8,7 @@
  * js/page02/page02a.js
  *
  * VERSION:
- * 5.0
+ * 5.1 — CLEAN KYC ENTRY CONTROLLER
  *
  * PAGE:
  * PAGE 02A — INTRODUCTION + ABOUT YOU™ KYC
@@ -33,41 +33,71 @@
  *
  * =============================================================================
  *
+ * ARCHITECTURE
+ * =============================================================================
+ *
+ *      page02a.html
+ *             │
+ *             ├── page02-data.js
+ *             ├── page02-session.js
+ *             ├── api.js
+ *             └── page02a.js
+ *
+ *                         │
+ *                         ▼
+ *
+ *                  Page02Session
+ *                         │
+ *                         ▼
+ *                  CTM_API.register()
+ *                         │
+ *                         ▼
+ *                  Backend-generated identity
+ *                         │
+ *                         ▼
+ *                  Dimension 01 = wealth
+ *                         │
+ *                         ▼
+ *                    page02b.html
+ *
+ * =============================================================================
+ *
  * ENGINEERING PRINCIPLES
  * =============================================================================
  *
- *      1. DOM contract remains explicit.
- *      2. Page 02A owns presentation state only.
- *      3. Page02Session owns journey state.
- *      4. CTM_API owns backend communication.
- *      5. No backend identity is invented client-side.
- *      6. No navigation occurs after failed registration.
- *      7. Existing KYC is restored whenever available.
- *      8. "0" is a valid dependents value.
- *      9. Submit is idempotent while a request is active.
- *     10. All user-facing errors are actionable.
- *     11. Existing JavaScript contracts are preserved.
+ *      1. Page 02A owns presentation state only.
+ *      2. Page02Session owns journey state.
+ *      3. CTM_API owns backend communication.
+ *      4. No backend identity is invented client-side.
+ *      5. No navigation occurs after failed registration.
+ *      6. Existing KYC is restored whenever available.
+ *      7. "0" is a valid dependents value.
+ *      8. Submit is idempotent while a request is active.
+ *      9. All user-facing errors are actionable.
+ *     10. Existing JavaScript contracts are preserved.
+ *     11. No dependency on component-loader.js.
+ *     12. No dependency on global header/footer runtime.
  *
  * =============================================================================
  *
  * CRITICAL TRANSACTION
  * =============================================================================
  *
- * BEGIN MY SCORECARD™
+ *      BEGIN MY SCORECARD™
  *
- *      Validate KYC
- *          ↓
- *      Preserve KYC locally
- *          ↓
- *      CTM_API.register()
- *          ↓
- *      Confirm backend registration
- *          ↓
- *      Preserve returned client identity
- *          ↓
- *      Set current dimension = wealth
- *          ↓
- *      Navigate to page02b.html
+ *          Validate KYC
+ *              ↓
+ *          Preserve KYC locally
+ *              ↓
+ *          CTM_API.register()
+ *              ↓
+ *          Confirm backend registration
+ *              ↓
+ *          Preserve returned client identity
+ *              ↓
+ *          Set current dimension = wealth
+ *              ↓
+ *          Navigate to page02b.html
  *
  * NEVER navigate to Page 02B if backend registration fails.
  *
@@ -87,7 +117,7 @@
     const PAGE02A = {
 
         version:
-            '5.0',
+            '5.1',
 
         page:
             2,
@@ -182,7 +212,7 @@
 
 
     /* =========================================================================
-     * 04. UTILITY — SAFE STRING
+     * 04. SAFE STRING
      * ========================================================================= */
 
     function cleanString(value) {
@@ -203,7 +233,7 @@
 
 
     /* =========================================================================
-     * 05. UTILITY — SAFE ELEMENT
+     * 05. SAFE ELEMENT
      * ========================================================================= */
 
     function getElement(id) {
@@ -407,6 +437,10 @@
             DOM.error.hidden =
                 true;
 
+            DOM.error.removeAttribute(
+                'role'
+            );
+
         }
 
 
@@ -417,6 +451,10 @@
 
             DOM.success.hidden =
                 true;
+
+            DOM.success.removeAttribute(
+                'role'
+            );
 
         }
 
@@ -484,7 +522,6 @@
 
         DOM.success.textContent =
             cleanString(message);
-
 
         DOM.success.hidden =
             false;
@@ -626,6 +663,9 @@
                 window.scrollTo({
 
                     top:
+                        0,
+
+                    left:
                         0,
 
                     behavior:
@@ -992,7 +1032,9 @@
             }
             catch (focusError) {
 
-                /* Non-critical. */
+                /*
+                 * Non-critical.
+                 */
 
             }
 
@@ -1008,7 +1050,7 @@
 
 
     /* =========================================================================
-     * 24. VALIDATION RESULT
+     * 24. INVALID RESULT
      * ========================================================================= */
 
     function invalidResult(
@@ -1247,10 +1289,9 @@
      * 33. VALIDATE — DEPENDENTS
      * =========================================================================
      *
-     * IMPORTANT:
-     *
      * "0" is valid.
-     * Therefore this must never use:
+     *
+     * Never use:
      *
      *      if (!kyc.dependents)
      *
@@ -2250,7 +2291,69 @@
 
 
     /* =========================================================================
-     * 56. NAVIGATE TO PAGE 02B
+     * 56. VERIFY REGISTERED SESSION
+     * ========================================================================= */
+
+    function verifyRegisteredSession() {
+
+        if (
+            !window.Page02Session
+        ) {
+
+            return false;
+
+        }
+
+
+        if (
+            typeof window.Page02Session.hasRegisteredClient ===
+                'function'
+        ) {
+
+            return Boolean(
+                window.Page02Session.hasRegisteredClient()
+            );
+
+        }
+
+
+        if (
+            typeof window.Page02Session.getClient ===
+                'function'
+        ) {
+
+            const client =
+                window.Page02Session.getClient();
+
+
+            return Boolean(
+                client &&
+                (
+                    cleanString(
+                        client.peopleId
+                    ) ||
+
+                    cleanString(
+                        client.clientId
+                    )
+                )
+            );
+
+        }
+
+
+        /*
+         * The current Page02Session contract normally provides one of the
+         * methods above. If neither exists, do not invent a client identity.
+         */
+
+        return false;
+
+    }
+
+
+    /* =========================================================================
+     * 57. NAVIGATE TO PAGE 02B
      * ========================================================================= */
 
     function goToPage02b() {
@@ -2263,7 +2366,7 @@
 
 
     /* =========================================================================
-     * 57. BEGIN BUTTON
+     * 58. BEGIN BUTTON
      * ========================================================================= */
 
     function handleBeginClick(
@@ -2310,7 +2413,9 @@
                     }
                     catch (error) {
 
-                        /* Non-critical. */
+                        /*
+                         * Non-critical.
+                         */
 
                     }
 
@@ -2324,7 +2429,7 @@
 
 
     /* =========================================================================
-     * 58. KYC SUBMIT
+     * 59. KYC SUBMIT
      * ========================================================================= */
 
     async function handleKycSubmit(
@@ -2448,9 +2553,9 @@
          * PRESERVE KYC BEFORE NETWORK REQUEST
          * ---------------------------------------------------------------------
          *
-         * This protects completed form data if the registration request fails.
+         * Protect completed form data if registration fails.
          *
-         * It does NOT mark the client as registered.
+         * This does NOT mark the client as registered.
          */
 
         try {
@@ -2620,22 +2725,12 @@
              */
 
             if (
-                typeof window.Page02Session.hasRegisteredClient ===
-                    'function'
+                !verifyRegisteredSession()
             ) {
 
-                const registered =
-                    window.Page02Session
-                        .hasRegisteredClient();
-
-
-                if (!registered) {
-
-                    throw new Error(
-                        'Registered client identity could not be preserved.'
-                    );
-
-                }
+                throw new Error(
+                    'Registered client identity could not be preserved.'
+                );
 
             }
 
@@ -2700,7 +2795,7 @@
 
 
     /* =========================================================================
-     * 59. LIVE FIELD CLEANUP
+     * 60. LIVE FIELD CLEANUP
      * ========================================================================= */
 
     function handleFieldInput(
@@ -2742,7 +2837,7 @@
 
 
     /* =========================================================================
-     * 60. MOBILE INPUT NORMALIZATION
+     * 61. MOBILE INPUT NORMALIZATION
      * ========================================================================= */
 
     function normalizeMobileInput() {
@@ -2768,7 +2863,7 @@
 
 
     /* =========================================================================
-     * 61. PINCODE INPUT NORMALIZATION
+     * 62. PINCODE INPUT NORMALIZATION
      * ========================================================================= */
 
     function normalizePincodeInput() {
@@ -2781,9 +2876,7 @@
             getElement('pincode');
 
 
-        if (
-            !pincodeElement
-        ) {
+        if (!pincodeElement) {
 
             return;
 
@@ -2818,7 +2911,7 @@
 
 
     /* =========================================================================
-     * 62. AGE INPUT NORMALIZATION
+     * 63. AGE INPUT NORMALIZATION
      * ========================================================================= */
 
     function normalizeAgeInput() {
@@ -2852,7 +2945,7 @@
 
 
     /* =========================================================================
-     * 63. DEPENDENTS INPUT NORMALIZATION
+     * 64. DEPENDENTS INPUT NORMALIZATION
      * ========================================================================= */
 
     function normalizeDependentsInput() {
@@ -2883,7 +2976,7 @@
 
 
     /* =========================================================================
-     * 64. EVENT BINDING — SAFE
+     * 65. EVENT BINDING
      * ========================================================================= */
 
     function bindEvents() {
@@ -2997,7 +3090,7 @@
 
 
     /* =========================================================================
-     * 65. RESTORE JOURNEY STATE
+     * 66. RESTORE JOURNEY STATE
      * ========================================================================= */
 
     function restoreJourneyState() {
@@ -3007,9 +3100,9 @@
         ) {
 
             /*
-             * The intro remains usable.
+             * Intro remains usable.
              *
-             * The strict session dependency is checked again at submit time.
+             * Strict session dependency is checked again at submit time.
              */
 
             console.warn(
@@ -3040,7 +3133,7 @@
 
 
     /* =========================================================================
-     * 66. RESET SUBMIT STATE ON PAGE RESTORE
+     * 67. RESET SUBMIT STATE ON PAGE RESTORE
      * ========================================================================= */
 
     function restoreSubmitState() {
@@ -3067,7 +3160,7 @@
 
 
     /* =========================================================================
-     * 67. INITIALIZE
+     * 68. INITIALIZE
      * ========================================================================= */
 
     function initialize() {
@@ -3079,10 +3172,6 @@
             return;
 
         }
-
-
-        PAGE02A.initialized =
-            true;
 
 
         cacheDom();
@@ -3107,6 +3196,10 @@
 
 
         restoreJourneyState();
+
+
+        PAGE02A.initialized =
+            true;
 
 
         console.info(
@@ -3138,7 +3231,7 @@
 
 
     /* =========================================================================
-     * 68. BROWSER PAGE SHOW
+     * 69. BROWSER PAGE SHOW
      * ========================================================================= */
 
     window.addEventListener(
@@ -3165,7 +3258,7 @@
 
 
     /* =========================================================================
-     * 69. DOM READY
+     * 70. DOM READY
      * ========================================================================= */
 
     if (
@@ -3191,11 +3284,13 @@
 
 
     /* =========================================================================
-     * 70. PUBLIC QA / DEBUG API
+     * 71. PUBLIC QA / DEBUG API
      * =========================================================================
      *
-     * This does not expose backend credentials or mutate application state.
-     * It provides controlled inspection of Page 02A during QA.
+     * Safe inspection only.
+     *
+     * No backend credentials are exposed.
+     * No client identity is fabricated.
      * ========================================================================= */
 
     window.Page02A = {
@@ -3249,7 +3344,21 @@
             restoreKyc,
 
         getDeviceType:
-            getDeviceType
+            getDeviceType,
+
+        isSubmitting:
+            function () {
+
+                return PAGE02A.submitting;
+
+            },
+
+        isInitialized:
+            function () {
+
+                return PAGE02A.initialized;
+
+            }
 
     };
 
