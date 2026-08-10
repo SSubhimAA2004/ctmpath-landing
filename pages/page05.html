@@ -22,7 +22,14 @@
   </title>
 
 
-  
+  <!-- =========================================================
+       GLOBAL FOUNDATION
+  ========================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="../css/foundation.css"
+  >
 
 <!-- =========================================================
        PAGE 05
@@ -439,6 +446,276 @@
         }
 
     </style>
+
+
+  <!-- =========================================================
+       PAGE 05 — MOBILE / NARROW SCREEN FINAL OVERRIDES
+       These rules are intentionally page-local so Page 05 does
+       not depend on legacy responsive stylesheets.
+  ========================================================== -->
+  <style id="page05-mobile-final">
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    .page05-main,
+    .page05-main * {
+      box-sizing: border-box;
+      min-width: 0;
+    }
+
+    .page05-container,
+    .page05-container-narrow {
+      width: min(1200px, calc(100% - 2rem));
+      max-width: calc(100% - 2rem);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ---------------------------------------------------------
+       MOBILE BRAND HEADER
+    --------------------------------------------------------- */
+
+    @media (max-width: 768px) {
+      .page05-brand-header {
+        padding: 20px 14px 18px;
+      }
+
+      .page05-brand-header-inner {
+        width: 100%;
+        max-width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        gap: 14px;
+      }
+
+      .page05-brand-identity {
+        width: 100%;
+        max-width: 100%;
+        gap: 12px;
+      }
+
+      .page05-brand-logo,
+      .page05-brand-logo img {
+        width: 52px;
+        height: 52px;
+      }
+
+      .page05-brand-copy {
+        min-width: 0;
+        max-width: calc(100% - 64px);
+      }
+
+      .page05-brand-name {
+        font-size: 1.15rem;
+        line-height: 1;
+        letter-spacing: 0.055em;
+        white-space: nowrap;
+      }
+
+      .page05-brand-millionaires {
+        font-size: 0.62rem;
+        letter-spacing: 0.18em;
+        white-space: nowrap;
+      }
+
+      .page05-brand-tagline,
+      .page05-brand-signature {
+        max-width: 100%;
+        font-size: 0.62rem;
+        line-height: 1.35;
+        white-space: normal;
+      }
+
+      .page05-brand-progress {
+        width: 100%;
+        min-width: 0;
+        align-items: flex-end;
+        text-align: right;
+      }
+
+      .page05-brand-progress-line {
+        width: 100px;
+        max-width: 35%;
+      }
+
+      /* -------------------------------------------------------
+         HERO
+      ------------------------------------------------------- */
+
+      .page05-hero {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        padding: 3.4rem 0 4rem;
+      }
+
+      .page05-hero .page05-container,
+      .page05-hero .page05-container-narrow {
+        width: calc(100% - 2rem);
+        max-width: calc(100% - 2rem);
+      }
+
+      .page05-title {
+        width: 100%;
+        max-width: 100%;
+        margin: 1.25rem auto 0;
+        font-size: clamp(1.75rem, 8.5vw, 2.8rem);
+        line-height: 1.22;
+        letter-spacing: -0.01em;
+        text-wrap: balance;
+        overflow-wrap: normal;
+        word-break: normal;
+      }
+
+      .page05-title span {
+        display: block;
+        max-width: 100%;
+        white-space: nowrap;
+      }
+
+      .page05-title-english {
+        max-width: 100%;
+        font-size: clamp(0.62rem, 2.5vw, 0.82rem);
+        line-height: 1.45;
+        letter-spacing: 0.055em;
+        overflow-wrap: anywhere;
+      }
+
+      /* -------------------------------------------------------
+         GAP / REMAINING PAGE CONTENT
+      ------------------------------------------------------- */
+
+      .page05-gap-section,
+      .page05-section {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+      }
+
+      .page05-gap-container {
+        width: calc(100% - 2rem);
+        max-width: calc(100% - 2rem);
+      }
+
+      .page05-visual-heading,
+      .page05-section-title,
+      .page05-section-tamil,
+      .page05-section-subtitle {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+      }
+
+      .page05-gap-visual {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .page05-gap-end,
+      .page05-gap-bridge,
+      .page05-gap-track {
+        min-width: 0;
+        max-width: 100%;
+      }
+
+      .page05-gap-end-tamil,
+      .page05-gap-end-english,
+      .page05-gap-distance-label,
+      .page05-gap-value {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+      }
+
+      /* Any Page 05 card/grid must stay inside the viewport. */
+      .page05-main [class*="grid"],
+      .page05-main [class*="card"],
+      .page05-main [class*="visual"],
+      .page05-main [class*="panel"] {
+        min-width: 0;
+        max-width: 100%;
+      }
+
+      .page05-main img,
+      .page05-main svg {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .page05-container,
+      .page05-container-narrow,
+      .page05-gap-container {
+        width: calc(100% - 1.4rem);
+        max-width: calc(100% - 1.4rem);
+      }
+
+      .page05-brand-header {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .page05-brand-header-inner {
+        gap: 12px;
+      }
+
+      .page05-brand-logo,
+      .page05-brand-logo img {
+        width: 48px;
+        height: 48px;
+      }
+
+      .page05-brand-copy {
+        max-width: calc(100% - 60px);
+      }
+
+      .page05-brand-name {
+        font-size: 1.02rem;
+      }
+
+      .page05-brand-millionaires {
+        font-size: 0.56rem;
+      }
+
+      .page05-brand-tagline,
+      .page05-brand-signature {
+        font-size: 0.57rem;
+      }
+
+      .page05-title {
+        font-size: 1.82rem;
+        line-height: 1.24;
+      }
+
+      .page05-title span {
+        font-size: 1.82rem;
+      }
+
+      .page05-title-english {
+        font-size: 0.59rem;
+        letter-spacing: 0.045em;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .page05-title,
+      .page05-title span {
+        font-size: 1.68rem;
+      }
+
+      .page05-title-english {
+        font-size: 0.55rem;
+      }
+
+      .page05-brand-name {
+        font-size: 0.94rem;
+      }
+    }
+  </style>
 
 </head>
 
