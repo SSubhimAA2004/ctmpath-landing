@@ -3,390 +3,394 @@
    CTM PATH™ MILLIONAIRES™
 
    FILE:
-   js/page05.js
+       page05.js
 
    PAGE:
-   PERSONAL LIFE DIAGNOSIS™
+       PAGE 05 — PERSONAL LIFE DIAGNOSIS™
 
    VERSION:
-   2.0
+       2.0
+
+   PURPOSE:
+       Convert Page 02 Financial Confidence Discovery™
+       + Page 04 KALA CHAKRA™ Life Alignment™
+
+       into a coherent Personal Life Diagnosis™.
 
    RESPONSIBILITIES:
 
-   ✓ Read frozen Page 02 result
-   ✓ Read frozen Page 04 Life Alignment result
-   ✓ Build Page 05 Personal Life Diagnosis™
-   ✓ Preserve existing Page 05 visual diagnosis
-   ✓ Render all existing diagnosis sections
-   ✓ Persist frontend diagnosis state
-   ✓ Build backend-compatible assessment payload
-   ✓ Generate + persist backend Personal Diagnosis
-   ✓ Prevent Page 06 transition until backend persistence succeeds
-   ✓ Prevent duplicate diagnosis generation during same Page 05 session
-   ✓ Preserve existing Page 06 navigation target
+       ✓ Read Page 02 result
+       ✓ Read Page 04 alignment result
+       ✓ Validate required data
+       ✓ Determine current life status
+       ✓ Identify strongest life pillars
+       ✓ Identify greatest growth opportunities
+       ✓ Analyse five financial/lifestyle dimensions
+       ✓ Generate primary insight
+       ✓ Generate root patterns
+       ✓ Generate cross-connections
+       ✓ Generate transformation lever
+       ✓ Generate priority sequence
+       ✓ Generate transformation hypothesis
+       ✓ Render all Page 05 dynamic content
+       ✓ Save diagnosis for Page 06
+       ✓ Expose CTM_PAGE05 public API
+
+   DATA CONTRACT:
+
+       Page 02:
+           ctm_page02_result
+
+       Page 04:
+           CTM_PAGE04_ALIGNMENT_RESULT
+
+       Page 05:
+           CTM_PAGE05_DIAGNOSIS_RESULT
 
    IMPORTANT:
 
-   ✗ Does NOT recalculate Page 02 assessment
-   ✗ Does NOT recalculate Page 03 Kala Chakra™ assessment
-   ✗ Does NOT rebuild Page 04 Life Wheel
-   ✗ Does NOT modify Global Header
-   ✗ Does NOT modify Global Footer
-   ✗ Does NOT modify Page 05 HTML
-   ✗ Does NOT modify Page 05 CSS
+       Page 05 does NOT recalculate the Page 04 Life Alignment score.
+       Page 04 remains the scoring authority.
 
-========================================================================== */
+   ========================================================================== */
 
-(function (w, d) {
+
+/* ==========================================================================
+   01. GLOBAL IIFE
+   ========================================================================== */
+
+(function (window, document) {
 
     "use strict";
 
 
     /* ======================================================================
-       PAGE CONFIGURATION
-    ====================================================================== */
+       02. CONFIGURATION
+       ====================================================================== */
 
     const CONFIG = {
 
-        pageName:
-            "PERSONAL LIFE DIAGNOSIS™",
+        version:
+            "2.0",
 
-        nextPage:
-            "./page06.html",
+        storage: {
 
-        page02StorageKey:
-            "ctm_page02_result",
+            page02:
+                "ctm_page02_result",
 
-        page04StorageKey:
-            "CTM_PAGE04_ALIGNMENT_RESULT",
+            page04:
+                "CTM_PAGE04_ALIGNMENT_RESULT",
 
-        diagnosisStorageKey:
-            "CTM_PAGE05_DIAGNOSIS_RESULT",
+            page05:
+                "CTM_PAGE05_DIAGNOSIS_RESULT"
 
-        backendPersistenceKey:
-            "CTM_PAGE05_BACKEND_DIAGNOSIS",
+        },
 
-        roadmapButtonId:
-            "show-roadmap-button"
+        expected: {
 
-    };
+            dimensions:
+                5,
 
+            pillars:
+                12,
 
-    /* ======================================================================
-       LIFE LEVEL COPY
-    ====================================================================== */
+            maximumLifeScore:
+                120
 
-    const LEVEL = {
-
-        FOUNDATION: [
-
-            "அடித்தளம் அமைக்கும் நிலை",
-
-            "FOUNDATION",
-
-            "உங்கள் வாழ்க்கையின் சில முக்கிய பகுதிகள் இன்னும் உறுதியான அடித்தளத்தை நாடுகின்றன. முதலில் மிக முக்கியமான பகுதிகளில் நிலைத்தன்மையை உருவாக்குவது அதிக பயன் தரும்.",
-
-            "Several important areas still need a stronger foundation. Stability in a few high-impact areas should come first."
-
-        ],
-
-
-        STABILISING: [
-
-            "நிலைப்படுத்தும் நிலை",
-
-            "STABILISING",
-
-            "சில பகுதிகள் செயல்படுகின்றன; சில பகுதிகள் இன்னும் நிலைத்தன்மையைத் தேடுகின்றன. சிதறிய முயற்சிகளை ஒழுங்கான அமைப்புகளாக மாற்றுவது அடுத்த கட்டம்.",
-
-            "Some areas are working while others still need stability. Turn scattered effort into reliable systems."
-
-        ],
-
-
-        DEVELOPING: [
-
-            "வளரும் நிலை",
-
-            "DEVELOPING",
-
-            "உங்கள் வாழ்க்கையில் முன்னேற்றம் உள்ளது; ஆனால் வளர்ச்சி எல்லா பகுதிகளிலும் ஒரே வேகத்தில் இல்லை. வலிமையான பகுதிகளைப் பயன்படுத்தி பின்தங்கிய பகுதிகளை உயர்த்துங்கள்.",
-
-            "There is clear progress, but growth is uneven. Use stronger areas to lift those that have not yet caught up."
-
-        ],
-
-
-        STRONG: [
-
-            "வலுவான நிலை",
-
-            "STRONG",
-
-            "பல முக்கிய பகுதிகள் வலுவாக இயங்குகின்றன. சில முக்கிய இடங்களில் துல்லியமான மேம்பாடு அதிக விளைவை உருவாக்கும்.",
-
-            "Many important areas are strong. Precise improvement in a few leverage points may create the greatest value."
-
-        ],
-
-
-        THRIVING: [
-
-            "செழித்து முன்னேறும் நிலை",
-
-            "THRIVING",
-
-            "பெரும்பாலான பகுதிகள் உயர்ந்த ஒத்திசைவில் இயங்குகின்றன. உங்கள் வலிமைகளை நீடித்த சுதந்திரம், தாக்கம் மற்றும் பங்களிப்பாக மாற்றுவது அடுத்த கட்டம்.",
-
-            "Most areas are highly aligned. Convert strength into sustained freedom, impact and contribution."
-
-        ]
+        }
 
     };
 
 
     /* ======================================================================
-       PAGE 02 DIMENSION NAMES
-    ====================================================================== */
+       03. LIFE LEVEL DEFINITIONS
+
+       These thresholds remain aligned with Page 04.
+       ====================================================================== */
+
+    const LIFE_LEVELS = {
+
+        FOUNDATION: {
+
+            tamil:
+                "அடித்தளம் அமைக்கும் நிலை",
+
+            english:
+                "FOUNDATION",
+
+            copyTamil:
+                "உங்கள் வாழ்க்கையின் சில முக்கிய பகுதிகள் இன்னும் உறுதியான அடித்தளத்தை நாடுகின்றன. முதலில் மிக முக்கியமான பகுதிகளில் நிலைத்தன்மையை உருவாக்குவது அதிக பயன் தரும்.",
+
+            copyEnglish:
+                "Several important areas still need a stronger foundation. Stability in a few high-impact areas should come first."
+
+        },
+
+
+        STABILISING: {
+
+            tamil:
+                "நிலைப்படுத்தும் நிலை",
+
+            english:
+                "STABILISING",
+
+            copyTamil:
+                "சில பகுதிகள் செயல்படுகின்றன; சில பகுதிகள் இன்னும் நிலைத்தன்மையைத் தேடுகின்றன. சிதறிய முயற்சிகளை ஒழுங்கான அமைப்புகளாக மாற்றுவது அடுத்த கட்டம்.",
+
+            copyEnglish:
+                "Some areas are working while others still need stability. Turn scattered effort into reliable systems."
+
+        },
+
+
+        DEVELOPING: {
+
+            tamil:
+                "வளரும் நிலை",
+
+            english:
+                "DEVELOPING",
+
+            copyTamil:
+                "உங்கள் வாழ்க்கையில் முன்னேற்றம் உள்ளது; ஆனால் வளர்ச்சி எல்லா பகுதிகளிலும் ஒரே வேகத்தில் இல்லை. வலிமையான பகுதிகளைப் பயன்படுத்தி பின்தங்கிய பகுதிகளை உயர்த்துங்கள்.",
+
+            copyEnglish:
+                "There is clear progress, but growth is uneven. Use stronger areas to lift those that have not yet caught up."
+
+        },
+
+
+        STRONG: {
+
+            tamil:
+                "வலுவான நிலை",
+
+            english:
+                "STRONG",
+
+            copyTamil:
+                "பல முக்கிய பகுதிகள் வலுவாக இயங்குகின்றன. சில முக்கிய இடங்களில் துல்லியமான மேம்பாடு அதிக விளைவை உருவாக்கும்.",
+
+            copyEnglish:
+                "Many important areas are strong. Precise improvement in a few leverage points may create the greatest value."
+
+        },
+
+
+        THRIVING: {
+
+            tamil:
+                "செழித்து முன்னேறும் நிலை",
+
+            english:
+                "THRIVING",
+
+            copyTamil:
+                "பெரும்பாலான பகுதிகள் உயர்ந்த ஒத்திசைவில் இயங்குகின்றன. உங்கள் வலிமைகளை நீடித்த சுதந்திரம், தாக்கம் மற்றும் பங்களிப்பாக மாற்றுவது அடுத்த கட்டம்.",
+
+            copyEnglish:
+                "Most areas are highly aligned. Convert strength into sustained freedom, impact and contribution."
+
+        }
+
+    };
+
+
+    /* ======================================================================
+       04. PAGE 02 DIMENSION DEFINITIONS
+
+       These names are used only when the Page 02 payload does not already
+       provide display names.
+       ====================================================================== */
 
     const DIMENSION_NAMES = {
 
-        wealth: [
+        wealth: {
 
-            "செல்வ அடித்தளம்",
+            tamil:
+                "செல்வ அடித்தளம்",
 
-            "WEALTH"
+            english:
+                "WEALTH"
 
-        ],
+        },
 
+        incomeCashFlow: {
 
-        incomeCashFlow: [
+            tamil:
+                "வருமானம் & பணப்புழக்கம்",
 
-            "வருமானம் & பணப்புழக்கம்",
+            english:
+                "INCOME & CASH FLOW"
 
-            "INCOME & CASH FLOW"
+        },
 
-        ],
+        assets: {
 
+            tamil:
+                "சொத்துகள்",
 
-        assets: [
+            english:
+                "ASSETS"
 
-            "சொத்துகள்",
+        },
 
-            "ASSETS"
+        lifestyleFreedom: {
 
-        ],
+            tamil:
+                "வாழ்க்கைமுறை & சுதந்திரம்",
 
+            english:
+                "LIFESTYLE & FREEDOM"
 
-        lifestyleFreedom: [
+        },
 
-            "வாழ்க்கைமுறை & சுதந்திரம்",
+        protectionContribution: {
 
-            "LIFESTYLE & FREEDOM"
+            tamil:
+                "பாதுகாப்பு & பங்களிப்பு",
 
-        ],
+            english:
+                "PROTECTION & CONTRIBUTION"
 
-
-        protectionContribution: [
-
-            "பாதுகாப்பு & பங்களிப்பு",
-
-            "PROTECTION & CONTRIBUTION"
-
-        ]
-
-    };
-
-
-    /* ======================================================================
-       PAGE STATE
-    ====================================================================== */
-
-    const state = {
-
-        initialized:
-            false,
-
-        input:
-            null,
-
-        diagnosis:
-            null,
-
-        backendPayload:
-            null,
-
-        backendResponse:
-            null,
-
-        persisting:
-            false,
-
-        persisted:
-            false,
-
-        persistencePromise:
-            null,
-
-        navigationBound:
-            false
+        }
 
     };
 
 
     /* ======================================================================
-       DOM HELPERS
-    ====================================================================== */
+       05. DOM HELPERS
+       ====================================================================== */
 
-    function el(id) {
+    function getElement(id) {
 
-        return d.getElementById(
-            id
-        );
+        return document.getElementById(id);
 
     }
 
 
-    function txt(
-        id,
-        value
-    ) {
+    function setText(id, value) {
 
         const element =
-            el(id);
-
+            getElement(id);
 
         if (!element) {
+
             return;
+
+        }
+
+
+        if (
+            value === undefined ||
+            value === null ||
+            value === ""
+        ) {
+
+            element.textContent =
+                "—";
+
+            return;
+
         }
 
 
         element.textContent =
+            String(value);
 
-            (
-                value === undefined ||
-                value === null ||
-                value === ""
-            )
+    }
 
-                ? "—"
 
+    function setHTML(id, value) {
+
+        const element =
+            getElement(id);
+
+        if (!element) {
+
+            return;
+
+        }
+
+
+        element.innerHTML =
+            value === undefined ||
+            value === null
+                ? ""
                 : String(value);
 
     }
 
 
+    function setWidth(id, percentage) {
+
+        const element =
+            getElement(id);
+
+        if (!element) {
+
+            return;
+
+        }
+
+
+        const safePercentage =
+            Math.max(
+                0,
+                Math.min(
+                    100,
+                    Number(percentage) || 0
+                )
+            );
+
+
+        element.style.width =
+            safePercentage + "%";
+
+    }
+
+
     /* ======================================================================
-       VALUE HELPERS
-    ====================================================================== */
+       06. DATA HELPERS
+       ====================================================================== */
 
-    function num(value) {
+    function toNumber(value) {
 
-        value =
+        const number =
             Number(value);
 
-
-        return Number.isFinite(value)
-
-            ? value
-
+        return Number.isFinite(number)
+            ? number
             : 0;
 
     }
 
 
-    function esc(value) {
-
-        return String(
-            value ?? ""
-        )
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-    }
-
-
-    function firstNonEmptyString() {
-
-        for (
-            let i = 0;
-            i < arguments.length;
-            i++
-        ) {
-
-            const value =
-                arguments[i];
-
-
-            if (
-                typeof value === "string" &&
-                value.trim() !== ""
-            ) {
-
-                return value.trim();
-
-            }
-
-        }
-
-
-        return "";
-
-    }
-
-
-    /* ======================================================================
-       STORAGE
-    ====================================================================== */
-
-    function read(key) {
+    function readStorage(key) {
 
         try {
 
-            const value =
-                sessionStorage.getItem(
-                    key
-                );
+            const raw =
+                sessionStorage.getItem(key);
+
+            if (!raw) {
+
+                return null;
+
+            }
 
 
-            return value
-
-                ? JSON.parse(value)
-
-                : null;
+            return JSON.parse(raw);
 
         }
         catch (error) {
 
-            console.warn(
-                "Page05: Unable to read storage:",
+            console.error(
+                "CTM PATH™ Page05 storage read failed:",
                 key,
                 error
             );
-
 
             return null;
 
@@ -395,23 +399,14 @@
     }
 
 
-    function save(
-        key,
-        value
-    ) {
+    function saveStorage(key, value) {
 
         try {
 
             sessionStorage.setItem(
-
                 key,
-
-                JSON.stringify(
-                    value
-                )
-
+                JSON.stringify(value)
             );
-
 
             return true;
 
@@ -419,11 +414,10 @@
         catch (error) {
 
             console.error(
-                "Page05: Unable to save storage:",
+                "CTM PATH™ Page05 storage write failed:",
                 key,
                 error
             );
-
 
             return false;
 
@@ -432,79 +426,23 @@
     }
 
 
-    function readStorageString(
-        key
-    ) {
+    function cloneArray(value) {
 
-        try {
-
-            const value =
-                sessionStorage.getItem(
-                    key
-                );
-
-
-            if (
-                typeof value === "string" &&
-                value.trim() !== ""
-            ) {
-
-                return value.trim();
-
-            }
-
-        }
-        catch (error) {
-
-            /*
-             * Storage recovery is best-effort only.
-             */
-
-        }
-
-
-        return "";
+        return Array.isArray(value)
+            ? value.slice()
+            : [];
 
     }
 
 
-    /* ======================================================================
-       SORT
-    ====================================================================== */
+    function sortDescending(array, property) {
 
-    function sort(
-        array,
-        key,
-        descending
-    ) {
-
-        return (
-            array || []
-        )
-
-        .slice()
-
-        .sort(
-            function (
-                x,
-                y
-            ) {
+        return cloneArray(array).sort(
+            function (a, b) {
 
                 return (
-
-                    (
-                        descending
-                            ? -1
-                            : 1
-                    )
-
-                    *
-
-                    (
-                        num(x[key]) -
-                        num(y[key])
-                    )
-
+                    toNumber(b[property]) -
+                    toNumber(a[property])
                 );
 
             }
@@ -513,117 +451,140 @@
     }
 
 
-    /* ======================================================================
-       PILLAR LABEL HELPERS
-    ====================================================================== */
+    function sortAscending(array, property) {
 
-    function pillarEnglish(
-        pillar
-    ) {
+        return cloneArray(array).sort(
+            function (a, b) {
 
-        return pillar
+                return (
+                    toNumber(a[property]) -
+                    toNumber(b[property])
+                );
 
-            ? (
-                pillar.english ||
-                pillar.key ||
-                pillar.pillar ||
-                "—"
-            )
-
-            : "—";
+            }
+        );
 
     }
 
 
-    function pillarTamil(
-        pillar
-    ) {
+    function pillarEnglish(pillar) {
 
-        return pillar
+        if (!pillar) {
 
-            ? (
-                pillar.tamil ||
-                pillar.key ||
-                pillar.pillar ||
-                "—"
-            )
+            return "—";
 
-            : "—";
+        }
+
+
+        return (
+            pillar.english ||
+            pillar.key ||
+            "—"
+        );
 
     }
 
 
-    /* ======================================================================
-       DIMENSION HELPERS
-    ====================================================================== */
+    function pillarTamil(pillar) {
 
-    function dimensionNames(
-        dimension
-    ) {
+        if (!pillar) {
 
-        const names =
+            return "—";
 
+        }
+
+
+        return (
+            pillar.tamil ||
+            pillar.key ||
+            "—"
+        );
+
+    }
+
+
+    function getDimensionNames(dimension) {
+
+        if (!dimension) {
+
+            return {
+
+                tamil:
+                    "—",
+
+                english:
+                    "—"
+
+            };
+
+        }
+
+
+        const fallback =
             DIMENSION_NAMES[
                 dimension.dimensionId
-            ]
-
-            ||
-
-            [
-                dimension.tamil || "",
-                dimension.english ||
-                dimension.dimensionId ||
-                "DIMENSION"
-            ];
+            ] || null;
 
 
         return {
 
-            ta:
+            tamil:
                 dimension.tamil ||
-                names[0],
+                (
+                    fallback
+                        ? fallback.tamil
+                        : dimension.dimensionId
+                ) ||
+                "—",
 
-            en:
+            english:
                 dimension.english ||
-                names[1]
+                (
+                    fallback
+                        ? fallback.english
+                        : dimension.dimensionId
+                ) ||
+                "—"
 
         };
 
     }
 
 
-    function dimensionCopy(
+    /* ======================================================================
+       07. DIMENSION INTERPRETATION
+       ====================================================================== */
+
+    function getDimensionInterpretation(
         dimension
     ) {
 
         const names =
-            dimensionNames(
+            getDimensionNames(
                 dimension
             );
 
 
         const percentage =
-            num(
+            toNumber(
                 dimension.percentage
             );
 
 
-        if (
-            percentage < 50
-        ) {
+        if (percentage < 50) {
 
             return {
 
-                ta:
-                    names.ta,
+                tamil:
+                    names.tamil,
 
-                en:
-                    names.en,
+                english:
+                    names.english,
 
-                cta:
+                copyTamil:
                     "இந்தப் பகுதி தற்போது அதிக கவனத்தை தேடுகிறது. தனிப்பட்ட முயற்சியை விட தெளிவான அமைப்பு மற்றும் தொடர்ச்சியான முன்னேற்றம் முக்கியம்.",
 
-                cen:
+                copyEnglish:
                     "This area currently needs focused attention. A reliable system and consistent progress matter more than simply adding effort."
 
             };
@@ -631,22 +592,20 @@
         }
 
 
-        if (
-            percentage < 75
-        ) {
+        if (percentage < 75) {
 
             return {
 
-                ta:
-                    names.ta,
+                tamil:
+                    names.tamil,
 
-                en:
-                    names.en,
+                english:
+                    names.english,
 
-                cta:
+                copyTamil:
                     "இந்தப் பகுதி வளர்ந்து வருகிறது. ஏற்கனவே உள்ள முன்னேற்றத்தை தொடர்ச்சியான அமைப்பாக மாற்றுவது அடுத்த வாய்ப்பு.",
 
-                cen:
+                copyEnglish:
                     "This area is developing. The next opportunity is to turn existing progress into a consistent system."
 
             };
@@ -656,16 +615,16 @@
 
         return {
 
-            ta:
-                names.ta,
+            tamil:
+                names.tamil,
 
-            en:
-                names.en,
+            english:
+                names.english,
 
-            cta:
+            copyTamil:
                 "இந்தப் பகுதி உங்கள் தற்போதைய வலிமைகளில் ஒன்றாக உள்ளது. இதை பின்தங்கிய பகுதிகளுக்கு ஆதரவாக பயன்படுத்தலாம்.",
 
-            cen:
+            copyEnglish:
                 "This is one of your current strengths. Use it deliberately to support areas that are still developing."
 
         };
@@ -674,138 +633,36 @@
 
 
     /* ======================================================================
-       CARD RENDERER
-    ====================================================================== */
+       08. LOAD INPUT DATA
+       ====================================================================== */
 
-    function card(
-        id,
-        item,
-        index
-    ) {
-
-        const element =
-            el(id);
-
-
-        if (!element) {
-            return;
-        }
-
-
-        const score =
-
-            item.maximumScore
-
-                ? (
-
-                    '<div class="page05-diagnosis-score">' +
-
-                    esc(
-                        item.score
-                    ) +
-
-                    " / " +
-
-                    esc(
-                        item.maximumScore
-                    ) +
-
-                    (
-                        item.percentage !== undefined
-
-                            ? (
-                                " · " +
-                                esc(
-                                    item.percentage
-                                ) +
-                                "%"
-                            )
-
-                            : ""
-                    ) +
-
-                    "</div>"
-
-                )
-
-                : "";
-
-
-        element.innerHTML =
-
-            '<p class="page05-card-number">' +
-
-            String(
-                index + 1
-            ).padStart(
-                2,
-                "0"
-            ) +
-
-            "</p>" +
-
-            '<h3 class="page05-card-title-tamil" lang="ta">' +
-
-            esc(
-                item.tamil
-            ) +
-
-            "</h3>" +
-
-            '<p class="page05-card-title">' +
-
-            esc(
-                item.english
-            ) +
-
-            "</p>" +
-
-            score +
-
-            '<p class="page05-card-copy" lang="ta">' +
-
-            esc(
-                item.copyTa
-            ) +
-
-            "</p>" +
-
-            '<p class="page05-card-copy page05-card-copy-english">' +
-
-            esc(
-                item.copyEn
-            ) +
-
-            "</p>";
-
-    }
-
-
-    /* ======================================================================
-       LOAD FROZEN PAGE 02 + PAGE 04 INPUTS
-    ====================================================================== */
-
-    function load() {
+    function loadInputs() {
 
         const page02 =
-            read(
-                CONFIG.page02StorageKey
+            readStorage(
+                CONFIG.storage.page02
             );
 
 
         const page04 =
-            read(
-                CONFIG.page04StorageKey
+            readStorage(
+                CONFIG.storage.page04
             );
 
 
-        if (
-            !page02 ||
-            !page04
-        ) {
+        if (!page02) {
 
             throw new Error(
-                "Page02/Page04 result missing"
+                "Page 02 result is missing."
+            );
+
+        }
+
+
+        if (!page04) {
+
+            throw new Error(
+                "Page 04 alignment result is missing."
             );
 
         }
@@ -814,12 +671,23 @@
         if (
             !Array.isArray(
                 page02.dimensions
-            ) ||
-            page02.dimensions.length !== 5
+            )
         ) {
 
             throw new Error(
-                "Expected five Page02 dimensions"
+                "Page 02 dimensions are missing."
+            );
+
+        }
+
+
+        if (
+            page02.dimensions.length !==
+            CONFIG.expected.dimensions
+        ) {
+
+            throw new Error(
+                "Page 02 must contain exactly five dimensions."
             );
 
         }
@@ -828,70 +696,89 @@
         if (
             !Array.isArray(
                 page04.pillars
-            ) ||
-            page04.pillars.length !== 12
+            )
         ) {
 
             throw new Error(
-                "Expected twelve Page04 pillars"
+                "Page 04 pillar results are missing."
             );
 
         }
 
 
+        if (
+            page04.pillars.length !==
+            CONFIG.expected.pillars
+        ) {
+
+            throw new Error(
+                "Page 04 must contain exactly twelve pillars."
+            );
+
+        }
+
+
+        const dimensions =
+            page02.dimensions.map(
+                function (dimension) {
+
+                    return {
+
+                        ...dimension,
+
+                        score:
+                            toNumber(
+                                dimension.score
+                            ),
+
+                        maximumScore:
+                            toNumber(
+                                dimension.maximumScore
+                            ),
+
+                        percentage:
+                            toNumber(
+                                dimension.percentage
+                            )
+
+                    };
+
+                }
+            );
+
+
+        const pillars =
+            page04.pillars.map(
+                function (pillar) {
+
+                    return {
+
+                        ...pillar,
+
+                        score:
+                            toNumber(
+                                pillar.score
+                            )
+
+                    };
+
+                }
+            );
+
+
         return {
 
-            p2:
+            page02:
                 page02,
 
-            p4:
+            page04:
                 page04,
 
-            dims:
-                page02.dimensions.map(
-                    function (dimension) {
-
-                        return {
-
-                            ...dimension,
-
-                            score:
-                                num(
-                                    dimension.score
-                                ),
-
-                            maximumScore:
-                                num(
-                                    dimension.maximumScore
-                                ),
-
-                            percentage:
-                                num(
-                                    dimension.percentage
-                                )
-
-                        };
-
-                    }
-                ),
+            dimensions:
+                dimensions,
 
             pillars:
-                page04.pillars.map(
-                    function (pillar) {
-
-                        return {
-
-                            ...pillar,
-
-                            score:
-                                num(
-                                    pillar.score
-                                )
-
-                        };
-
-                    }
-                )
+                pillars
 
         };
 
@@ -899,106 +786,104 @@
 
 
     /* ======================================================================
-       BUILD PAGE 05 VISUAL DIAGNOSIS
+       09. LIFE LEVEL
+       ====================================================================== */
 
-       THIS IS THE EXISTING PAGE 05 DIAGNOSIS LOGIC.
-
-       DO NOT replace it with backend copy.
-
-       Backend diagnosis persistence is a separate responsibility.
-    ====================================================================== */
-
-    function build(
-        input
+    function resolveLifeLevel(
+        page04
     ) {
 
-        const page04 =
-            input.p4;
+        const supplied =
+            String(
+                page04.lifeLevel ||
+                ""
+            ).toUpperCase();
 
 
-        const pillars =
-            input.pillars;
-
-
-        const dimensions =
-            input.dims;
-
-
-        const highPillars =
-            sort(
-                pillars,
-                "score",
-                true
-            );
-
-
-        const lowPillars =
-            sort(
-                pillars,
-                "score",
-                false
-            );
-
-
-        const highDimensions =
-            sort(
-                dimensions,
-                "percentage",
-                true
-            );
-
-
-        const lowDimensions =
-            sort(
-                dimensions,
-                "percentage",
-                false
-            );
-
-
-        const strongest =
-
-            page04.strongestPillar ||
-
-            highPillars[0];
-
-
-        const growth =
-
-            page04.growthPillar ||
-
-            lowPillars[0];
-
-
-        const level =
-
-            LEVEL[
-                String(
-                    page04.lifeLevel ||
-                    "DEVELOPING"
-                ).toUpperCase()
+        if (
+            LIFE_LEVELS[
+                supplied
             ]
+        ) {
 
-            ||
+            return LIFE_LEVELS[
+                supplied
+            ];
 
-            LEVEL.DEVELOPING;
+        }
 
 
-        const strengths =
+        const percentage =
+            toNumber(
+                page04.percentage
+            );
 
-            [
-                highPillars[0],
-                highPillars[1]
-            ]
 
-            .filter(
-                Boolean
-            )
+        if (percentage <= 30) {
 
-            .map(
+            return LIFE_LEVELS.FOUNDATION;
+
+        }
+
+
+        if (percentage <= 50) {
+
+            return LIFE_LEVELS.STABILISING;
+
+        }
+
+
+        if (percentage <= 70) {
+
+            return LIFE_LEVELS.DEVELOPING;
+
+        }
+
+
+        if (percentage <= 85) {
+
+            return LIFE_LEVELS.STRONG;
+
+        }
+
+
+        return LIFE_LEVELS.THRIVING;
+
+    }
+
+
+    /* ======================================================================
+       10. BUILD STRENGTH CARDS
+       ====================================================================== */
+
+    function buildStrengths(
+        pillars,
+        dimensions
+    ) {
+
+        const strongestPillars =
+            sortDescending(
+                pillars,
+                "score"
+            );
+
+
+        const strongestDimensions =
+            sortDescending(
+                dimensions,
+                "percentage"
+            );
+
+
+        const strengths = [];
+
+
+        strongestPillars
+            .slice(0, 2)
+            .forEach(
                 function (pillar) {
 
-                    return {
+                    strengths.push({
 
                         tamil:
                             pillarTamil(
@@ -1016,71 +901,100 @@
                         maximumScore:
                             10,
 
-                        copyTa:
+                        copyTamil:
                             "இந்த வாழ்க்கைப் பகுதி உங்கள் வலிமையான வளங்களில் ஒன்றாக உள்ளது. இதை வளர்ச்சி பகுதிகளுக்கு ஆதரவாக பயன்படுத்துங்கள்.",
 
-                        copyEn:
+                        copyEnglish:
                             "This life area is one of your strongest resources. Use it deliberately to support developing areas."
 
-                    };
+                    });
 
                 }
             );
 
 
         if (
-            highDimensions[0]
+            strongestDimensions.length
         ) {
 
-            const copy =
-                dimensionCopy(
-                    highDimensions[0]
+            const dimension =
+                strongestDimensions[0];
+
+
+            const interpretation =
+                getDimensionInterpretation(
+                    dimension
                 );
 
 
             strengths.push({
 
                 tamil:
-                    copy.ta,
+                    interpretation.tamil,
 
                 english:
-                    copy.en,
+                    interpretation.english,
 
                 score:
-                    highDimensions[0].score,
+                    dimension.score,
 
                 maximumScore:
-                    highDimensions[0].maximumScore,
+                    dimension.maximumScore,
 
                 percentage:
-                    highDimensions[0].percentage,
+                    dimension.percentage,
 
-                copyTa:
-                    copy.cta,
+                copyTamil:
+                    interpretation.copyTamil,
 
-                copyEn:
-                    copy.cen
+                copyEnglish:
+                    interpretation.copyEnglish
 
             });
 
         }
 
 
-        const opportunities =
+        return strengths.slice(
+            0,
+            3
+        );
 
-            [
-                lowPillars[0],
-                lowPillars[1]
-            ]
+    }
 
-            .filter(
-                Boolean
-            )
 
-            .map(
+    /* ======================================================================
+       11. BUILD OPPORTUNITIES
+       ====================================================================== */
+
+    function buildOpportunities(
+        pillars,
+        dimensions
+    ) {
+
+        const weakestPillars =
+            sortAscending(
+                pillars,
+                "score"
+            );
+
+
+        const weakestDimensions =
+            sortAscending(
+                dimensions,
+                "percentage"
+            );
+
+
+        const opportunities = [];
+
+
+        weakestPillars
+            .slice(0, 2)
+            .forEach(
                 function (pillar) {
 
-                    return {
+                    opportunities.push({
 
                         tamil:
                             pillarTamil(
@@ -1098,83 +1012,102 @@
                         maximumScore:
                             10,
 
-                        copyTa:
+                        copyTamil:
                             "குறைந்த மதிப்பெண் தோல்வி அல்ல. இங்கு செய்யப்படும் திட்டமிட்ட முன்னேற்றம் உங்கள் மொத்த வாழ்க்கை சமநிலையை உயர்த்தக்கூடும்.",
 
-                        copyEn:
+                        copyEnglish:
                             "A lower score is not a verdict. Focused progress here may materially improve overall life alignment."
 
-                    };
+                    });
 
                 }
             );
 
 
         if (
-            lowDimensions[0]
+            weakestDimensions.length
         ) {
 
-            const copy =
-                dimensionCopy(
-                    lowDimensions[0]
+            const dimension =
+                weakestDimensions[0];
+
+
+            const interpretation =
+                getDimensionInterpretation(
+                    dimension
                 );
 
 
             opportunities.push({
 
                 tamil:
-                    copy.ta,
+                    interpretation.tamil,
 
                 english:
-                    copy.en,
+                    interpretation.english,
 
                 score:
-                    lowDimensions[0].score,
+                    dimension.score,
 
                 maximumScore:
-                    lowDimensions[0].maximumScore,
+                    dimension.maximumScore,
 
                 percentage:
-                    lowDimensions[0].percentage,
+                    dimension.percentage,
 
-                copyTa:
-                    copy.cta,
+                copyTamil:
+                    interpretation.copyTamil,
 
-                copyEn:
-                    copy.cen
+                copyEnglish:
+                    interpretation.copyEnglish
 
             });
 
         }
 
 
+        return opportunities.slice(
+            0,
+            3
+        );
+
+    }
+
+
+    /* ======================================================================
+       12. PRIMARY INSIGHT
+       ====================================================================== */
+
+    function buildPrimaryInsight(
+        page04,
+        strongestPillar,
+        growthPillar,
+        strongestDimension,
+        weakestDimension
+    ) {
+
+        const lifeAlignment =
+            toNumber(
+                page04.percentage
+            );
+
+
         const pillarSpread =
-
-            num(
-                strongest?.score
-            )
-
-            -
-
-            num(
-                growth?.score
+            toNumber(
+                strongestPillar?.score
+            ) -
+            toNumber(
+                growthPillar?.score
             );
 
 
         const dimensionSpread =
-
-            num(
-                highDimensions[0]?.percentage
-            )
-
-            -
-
-            num(
-                lowDimensions[0]?.percentage
+            toNumber(
+                strongestDimension?.percentage
+            ) -
+            toNumber(
+                weakestDimension?.percentage
             );
-
-
-        let primary;
 
 
         if (
@@ -1182,68 +1115,121 @@
             dimensionSpread >= 35
         ) {
 
-            primary = [
+            return {
 
-                "உங்கள் வளர்ச்சி வலுவாக இருக்கிறது — ஆனால் சமமாக இல்லை.",
+                tamil:
+                    "உங்கள் வளர்ச்சி வலுவாக இருக்கிறது — ஆனால் சமமாக இல்லை.",
 
-                "YOUR GROWTH IS REAL — BUT UNEVEN.",
+                english:
+                    "YOUR GROWTH IS REAL — BUT UNEVEN.",
 
-                "சில பகுதிகள் மிகவும் வலுவாக இருக்கின்றன; சில பகுதிகள் அந்த வளர்ச்சியின் வேகத்தை இன்னும் எட்டவில்லை.",
+                copyTamil:
+                    "சில பகுதிகள் மிகவும் வலுவாக இருக்கின்றன; சில பகுதிகள் அந்த வளர்ச்சியின் வேகத்தை இன்னும் எட்டவில்லை.",
 
-                "Some parts of your life are strong while others have not yet caught up.",
+                copyEnglish:
+                    "Some parts of your life are strong while others have not yet caught up.",
 
-                "ஏற்கனவே உள்ள வலிமையை பின்தங்கிய பகுதிகளுடன் இணைக்க வேண்டும்.",
+                keyTamil:
+                    "ஏற்கனவே உள்ள வலிமையை பின்தங்கிய பகுதிகளுடன் இணைக்க வேண்டும்.",
 
-                "Connect the strength you already have to the areas that are lagging."
+                keyEnglish:
+                    "Connect the strength you already have to the areas that are lagging."
 
-            ];
+            };
 
         }
-        else if (
-            num(
-                page04.percentage
-            ) < 51
+
+
+        if (
+            lifeAlignment < 51
         ) {
 
-            primary = [
+            return {
 
-                "உங்களுக்கு இன்னும் அதிக முயற்சி மட்டும் தேவையில்லை — வலுவான அடித்தளம் தேவை.",
+                tamil:
+                    "உங்களுக்கு இன்னும் அதிக முயற்சி மட்டும் தேவையில்லை — வலுவான அடித்தளம் தேவை.",
 
-                "YOU MAY NOT NEED MORE EFFORT — YOU NEED A STRONGER FOUNDATION.",
+                english:
+                    "YOU MAY NOT NEED MORE EFFORT — YOU NEED A STRONGER FOUNDATION.",
 
-                "பல பகுதிகளில் முயற்சியைப் பரப்புவதற்கு முன், அடிப்படை நிலைத்தன்மையை உருவாக்கும் பகுதிகளை வலுப்படுத்துங்கள்.",
+                copyTamil:
+                    "பல பகுதிகளில் முயற்சியைப் பரப்புவதற்கு முன், அடிப்படை நிலைத்தன்மையை உருவாக்கும் பகுதிகளை வலுப்படுத்துங்கள்.",
 
-                "Before spreading effort widely, strengthen the areas that create foundational stability.",
+                copyEnglish:
+                    "Before spreading effort widely, strengthen the areas that create foundational stability.",
 
-                "நிலைத்தன்மை உருவானால், முன்னேற்றம் எளிதாகிறது.",
+                keyTamil:
+                    "நிலைத்தன்மை உருவானால், முன்னேற்றம் எளிதாகிறது.",
 
-                "When stability improves, progress becomes easier to sustain."
+                keyEnglish:
+                    "When stability improves, progress becomes easier to sustain."
 
-            ];
+            };
 
         }
-        else {
 
-            primary = [
 
+        return {
+
+            tamil:
                 "உங்கள் அடுத்த நிலை பெரிய மாற்றத்தில் இல்லை — சரியான முன்னுரிமையில் உள்ளது.",
 
+            english:
                 "YOUR NEXT LEVEL IS ABOUT THE RIGHT PRIORITY.",
 
+            copyTamil:
                 "உங்கள் வாழ்க்கையில் ஏற்கனவே பல செயல்படும் வளங்கள் உள்ளன. அதிக தாக்கத்தை உருவாக்கும் பகுதிகளை சரியான வரிசையில் மேம்படுத்துங்கள்.",
 
+            copyEnglish:
                 "You already have several functioning resources. Improve the highest-impact areas in the right sequence.",
 
+            keyTamil:
                 "சரியான வரிசை, அதிக முயற்சியை விட சக்திவாய்ந்ததாக இருக்கலாம்.",
 
+            keyEnglish:
                 "The right sequence can be more powerful than simply adding more effort."
 
-            ];
+        };
 
-        }
+    }
 
 
-        const roots = [
+    /* ======================================================================
+       13. ROOT PATTERN ANALYSIS
+       ====================================================================== */
+
+    function buildRootPatterns(
+        strongestPillar,
+        growthPillar,
+        strongestDimension,
+        weakestDimension
+    ) {
+
+        const strongestPillarTamil =
+            pillarTamil(
+                strongestPillar
+            );
+
+
+        const weakestPillarTamil =
+            pillarTamil(
+                growthPillar
+            );
+
+
+        const strongestDimensionNames =
+            getDimensionNames(
+                strongestDimension
+            );
+
+
+        const weakestDimensionNames =
+            getDimensionNames(
+                weakestDimension
+            );
+
+
+        return [
 
             {
 
@@ -1253,11 +1239,20 @@
                 english:
                     "UNEVEN DEVELOPMENT",
 
-                copyTa:
-                    `${pillarTamil(lowPillars[0])} மற்றும் ${pillarTamil(lowPillars[1])} ஆகிய பகுதிகள் உங்கள் வலிமையான பகுதிகளின் வேகத்தை இன்னும் எட்டாமல் இருக்கலாம்.`,
+                copyTamil:
+                    `${weakestPillarTamil} மற்றும் ${pillarTamil(
+                        weakestDimension
+                            ? {
+                                tamil:
+                                    weakestDimensionNames.tamil,
+                                english:
+                                    weakestDimensionNames.english
+                              }
+                            : growthPillar
+                    )} ஆகிய பகுதிகள் உங்கள் வலிமையான பகுதிகளின் வேகத்தை இன்னும் எட்டாமல் இருக்கலாம்.`,
 
-                copyEn:
-                    `${pillarEnglish(lowPillars[0])} and ${pillarEnglish(lowPillars[1])} may not yet have caught up with the stronger parts of your life.`
+                copyEnglish:
+                    `${pillarEnglish(growthPillar)} and ${weakestDimensionNames.english} may not yet have caught up with the stronger parts of your life.`
 
             },
 
@@ -1270,10 +1265,10 @@
                 english:
                     "STRENGTH NOT YET CONVERTED INTO LEVERAGE",
 
-                copyTa:
+                copyTamil:
                     "ஒரு பகுதியில் உள்ள வலிமை மற்றொரு பகுதியில் தானாக முன்னேற்றத்தை உருவாக்காது. அதை திட்டமிட்டு இணைக்க வேண்டும்.",
 
-                copyEn:
+                copyEnglish:
                     "Strength in one area does not automatically improve another. It needs to be deliberately converted into leverage."
 
             },
@@ -1287,18 +1282,26 @@
                 english:
                     "SYSTEMS MAY NEED TO CATCH UP WITH EFFORT",
 
-                copyTa:
-                    `${dimensionNames(lowDimensions[0] || {}).ta} பகுதியில் காணப்படும் இடைவெளி அதிக முயற்சியை விட நம்பகமான அமைப்பு தேவைப்படுவதைச் சுட்டிக்காட்டலாம்.`,
+                copyTamil:
+                    `${weakestDimensionNames.tamil} பகுதியில் காணப்படும் இடைவெளி அதிக முயற்சியை விட நம்பகமான அமைப்பு தேவைப்படுவதைச் சுட்டிக்காட்டலாம்.`,
 
-                copyEn:
-                    `The gap in ${dimensionNames(lowDimensions[0] || {}).en} may indicate a need for a more reliable system rather than simply more effort.`
+                copyEnglish:
+                    `The gap in ${weakestDimensionNames.english} may indicate a need for a more reliable system rather than simply more effort.`
 
             }
 
         ];
 
+    }
 
-        const crossConnections = [
+
+    /* ======================================================================
+       14. CROSS-CONNECTION ANALYSIS
+       ====================================================================== */
+
+    function buildCrossConnections() {
+
+        return [
 
             {
 
@@ -1308,10 +1311,10 @@
                 english:
                     "INCOME → FINANCIAL FREEDOM",
 
-                copyTa:
+                copyTamil:
                     "வருமானம் உயர்வது மட்டும் பொருளாதார சுதந்திரத்தை உறுதி செய்யாது. பணப்புழக்கம், சொத்து உருவாக்கம் மற்றும் நீண்டகால கட்டமைப்பு ஒன்றாக செயல்பட வேண்டும்.",
 
-                copyEn:
+                copyEnglish:
                     "Higher income alone does not guarantee financial freedom. Cash flow, asset creation and long-term structure need to work together."
 
             },
@@ -1325,10 +1328,10 @@
                 english:
                     "ASSETS → TIME FREEDOM",
 
-                copyTa:
+                copyTamil:
                     "சொத்துகள் மற்றும் அமைப்புகள் வளரும்போது, உங்கள் நேரத்தின் மீது அதிக கட்டுப்பாடு உருவாகலாம்.",
 
-                copyEn:
+                copyEnglish:
                     "As assets and systems strengthen, greater control over time can emerge."
 
             },
@@ -1342,39 +1345,142 @@
                 english:
                     "LIFESTYLE FREEDOM → CONTRIBUTION",
 
-                copyTa:
+                copyTamil:
                     "நேரம், பணம் மற்றும் தேர்வு சுதந்திரம் அதிகரிக்கும்போது, பங்களிப்பை அதிக நோக்கத்துடன் வடிவமைக்க முடியும்.",
 
-                copyEn:
+                copyEnglish:
                     "As freedom of time, money and choice increases, contribution can be shaped with greater intention."
 
             }
 
         ];
 
+    }
 
-        const transformationLever = {
+
+    /* ======================================================================
+       15. LIFE PATTERN
+       ====================================================================== */
+
+    function buildLifePattern(
+        strongestPillar,
+        growthPillar,
+        strongestDimension,
+        weakestDimension
+    ) {
+
+        const strongestDimensionNames =
+            getDimensionNames(
+                strongestDimension
+            );
+
+
+        const weakestDimensionNames =
+            getDimensionNames(
+                weakestDimension
+            );
+
+
+        return {
 
             tamil:
-                pillarTamil(
-                    growth
-                ),
+                `உங்கள் தற்போதைய பெரிய படம்: ${pillarTamil(
+                    strongestPillar
+                )} உங்கள் முன்னேற்றத்தை ஆதரிக்கிறது; ${pillarTamil(
+                    growthPillar
+                )} அதிக கவனத்தை நாடுகிறது. ${strongestDimensionNames.tamil} வலிமையை ${weakestDimensionNames.tamil} முன்னேற்றத்துடன் இணைத்தால் மொத்த சமநிலை உயரக்கூடும்.`,
 
             english:
-                pillarEnglish(
-                    growth
-                ),
-
-            copyTa:
-                `${pillarTamil(growth)} தற்போது அதிக வளர்ச்சி இடம் கொண்ட பகுதியாகத் தெரிகிறது. இதனை ${dimensionNames(lowDimensions[0] || {}).ta} பகுதியில் செய்யும் நடைமுறை மாற்றங்களுடன் இணைத்தால் பல பகுதிகளில் முன்னேற்றம் உருவாகலாம்.`,
-
-            copyEn:
-                `${pillarEnglish(growth)} currently shows the greatest room for growth. Linking it with practical improvement in ${dimensionNames(lowDimensions[0] || {}).en} may create progress across several connected areas.`
+                `Your current pattern shows ${pillarEnglish(
+                    strongestPillar
+                )} pulling you forward while ${pillarEnglish(
+                    growthPillar
+                )} needs focused attention. Connecting the strength of ${strongestDimensionNames.english} to the development of ${weakestDimensionNames.english} may improve overall alignment.`
 
         };
 
+    }
 
-        const priorities = [
+
+    /* ======================================================================
+       16. TRANSFORMATION LEVER
+       ====================================================================== */
+
+    function buildTransformationLever(
+        growthPillar,
+        weakestDimension
+    ) {
+
+        const pillarTa =
+            pillarTamil(
+                growthPillar
+            );
+
+
+        const pillarEn =
+            pillarEnglish(
+                growthPillar
+            );
+
+
+        const dimensionNames =
+            getDimensionNames(
+                weakestDimension
+            );
+
+
+        return {
+
+            tamil:
+                pillarTa,
+
+            english:
+                pillarEn,
+
+            copyTamil:
+                `${pillarTa} தற்போது அதிக வளர்ச்சி இடம் கொண்ட பகுதியாகத் தெரிகிறது. இதனை ${dimensionNames.tamil} பகுதியில் செய்யும் நடைமுறை மாற்றங்களுடன் இணைத்தால் பல பகுதிகளில் முன்னேற்றம் உருவாகலாம்.`,
+
+            copyEnglish:
+                `${pillarEn} currently shows the greatest room for growth. Linking it with practical improvement in ${dimensionNames.english} may create progress across several connected areas.`
+
+        };
+
+    }
+
+
+    /* ======================================================================
+       17. PRIORITIES
+       ====================================================================== */
+
+    function buildPriorities(
+        pillars,
+        weakestDimension
+    ) {
+
+        const weakest =
+            sortAscending(
+                pillars,
+                "score"
+            );
+
+
+        const first =
+            weakest[0] ||
+            null;
+
+
+        const second =
+            weakest[1] ||
+            null;
+
+
+        const dimensionNames =
+            getDimensionNames(
+                weakestDimension
+            );
+
+
+        return [
 
             {
 
@@ -1382,19 +1488,15 @@
                     "01",
 
                 tamil:
-                    pillarTamil(
-                        lowPillars[0]
-                    ),
+                    pillarTamil(first),
 
                 english:
-                    pillarEnglish(
-                        lowPillars[0]
-                    ),
+                    pillarEnglish(first),
 
-                copyTa:
+                copyTamil:
                     "முதலில் இந்த வாழ்க்கைப் பகுதியில் ஒரு தெளிவான, அளவிடக்கூடிய முன்னேற்றத்தை உருவாக்குங்கள்.",
 
-                copyEn:
+                copyEnglish:
                     "Create one clear, measurable improvement in this life area first."
 
             },
@@ -1406,19 +1508,15 @@
                     "02",
 
                 tamil:
-                    dimensionNames(
-                        lowDimensions[0] || {}
-                    ).ta,
+                    dimensionNames.tamil,
 
                 english:
-                    dimensionNames(
-                        lowDimensions[0] || {}
-                    ).en,
+                    dimensionNames.english,
 
-                copyTa:
+                copyTamil:
                     "இந்தப் பரிமாணத்தில் தனிப்பட்ட முயற்சியை நம்பகமான அமைப்பாக மாற்றுங்கள்.",
 
-                copyEn:
+                copyEnglish:
                     "Turn repeated personal effort in this dimension into a reliable system."
 
             },
@@ -1430,59 +1528,249 @@
                     "03",
 
                 tamil:
-                    pillarTamil(
-                        lowPillars[1]
-                    ),
+                    pillarTamil(second),
 
                 english:
-                    pillarEnglish(
-                        lowPillars[1]
-                    ),
+                    pillarEnglish(second),
 
-                copyTa:
+                copyTamil:
                     "முதல் இரண்டு முன்னுரிமைகள் நிலைபெற்ற பிறகு இந்தப் பகுதியை வலுப்படுத்துங்கள்.",
 
-                copyEn:
+                copyEnglish:
                     "Once the first two priorities become stable, strengthen this area next."
 
             }
 
         ];
 
+    }
+
+
+    /* ======================================================================
+       18. TRANSFORMATION HYPOTHESIS
+       ====================================================================== */
+
+    function buildHypothesis(
+        priorities,
+        strongestPillar
+    ) {
+
+        const priorityOne =
+            priorities[0] ||
+            {};
+
+        const priorityTwo =
+            priorities[1] ||
+            {};
+
+
+        return {
+
+            tamil:
+                `நீங்கள் ${priorityOne.tamil} பகுதியில் முன்னேற்றத்தை உருவாக்கி, ${priorityTwo.tamil} பகுதியில் நம்பகமான அமைப்பை கட்டி, ${pillarTamil(
+                    strongestPillar
+                )} வலிமையை ஆதரவாக பயன்படுத்தினால், உங்கள் மொத்த வாழ்க்கை சமநிலை குறிப்பிடத்தக்க அளவில் உயரக்கூடும்.`,
+
+            english:
+                `If you create focused progress in ${priorityOne.english}, build a reliable system around ${priorityTwo.english}, and use your strength in ${pillarEnglish(
+                    strongestPillar
+                )} to support that change, your overall life alignment may improve meaningfully.`
+
+        };
+
+    }
+
+
+    /* ======================================================================
+       19. BUILD COMPLETE DIAGNOSIS
+       ====================================================================== */
+
+    function buildDiagnosis(
+        input
+    ) {
+
+        const page04 =
+            input.page04;
+
+
+        const pillars =
+            input.pillars;
+
+
+        const dimensions =
+            input.dimensions;
+
+
+        const strongestPillars =
+            sortDescending(
+                pillars,
+                "score"
+            );
+
+
+        const weakestPillars =
+            sortAscending(
+                pillars,
+                "score"
+            );
+
+
+        const strongestDimensions =
+            sortDescending(
+                dimensions,
+                "percentage"
+            );
+
+
+        const weakestDimensions =
+            sortAscending(
+                dimensions,
+                "percentage"
+            );
+
+
+        const strongestPillar =
+            page04.strongestPillar ||
+            strongestPillars[0] ||
+            null;
+
+
+        const growthPillar =
+            page04.growthPillar ||
+            weakestPillars[0] ||
+            null;
+
+
+        const strongestDimension =
+            strongestDimensions[0] ||
+            null;
+
+
+        const weakestDimension =
+            weakestDimensions[0] ||
+            null;
+
+
+        const lifeLevel =
+            resolveLifeLevel(
+                page04
+            );
+
+
+        const strengths =
+            buildStrengths(
+                pillars,
+                dimensions
+            );
+
+
+        const opportunities =
+            buildOpportunities(
+                pillars,
+                dimensions
+            );
+
+
+        const primaryInsight =
+            buildPrimaryInsight(
+                page04,
+                strongestPillar,
+                growthPillar,
+                strongestDimension,
+                weakestDimension
+            );
+
+
+        const rootPatterns =
+            buildRootPatterns(
+                strongestPillar,
+                growthPillar,
+                strongestDimension,
+                weakestDimension
+            );
+
+
+        const crossConnections =
+            buildCrossConnections();
+
+
+        const lifePattern =
+            buildLifePattern(
+                strongestPillar,
+                growthPillar,
+                strongestDimension,
+                weakestDimension
+            );
+
+
+        const transformationLever =
+            buildTransformationLever(
+                growthPillar,
+                weakestDimension
+            );
+
+
+        const priorities =
+            buildPriorities(
+                pillars,
+                weakestDimension
+            );
+
+
+        const hypothesis =
+            buildHypothesis(
+                priorities,
+                strongestPillar
+            );
+
 
         return {
 
             version:
-                "1.0",
+                CONFIG.version,
 
             generatedAt:
                 new Date().toISOString(),
 
 
+            source: {
+
+                page02:
+                    CONFIG.storage.page02,
+
+                page04:
+                    CONFIG.storage.page04
+
+            },
+
+
             snapshot: {
 
                 totalLifeScore:
-                    num(
+                    toNumber(
                         page04.totalScore
                     ),
 
                 maximumLifeScore:
-                    120,
+                    toNumber(
+                        page04.maximumScore
+                    ) ||
+                    CONFIG.expected.maximumLifeScore,
 
                 lifeAlignment:
-                    num(
+                    toNumber(
                         page04.percentage
                     ),
 
                 lifeLevel:
                     page04.lifeLevel ||
-                    "DEVELOPING",
+                    lifeLevel.english,
 
                 strongestPillar:
-                    strongest,
+                    strongestPillar,
 
                 growthPillar:
-                    growth
+                    growthPillar
 
             },
 
@@ -1490,16 +1778,16 @@
             currentStatus: {
 
                 tamil:
-                    level[0],
+                    lifeLevel.tamil,
 
                 english:
-                    level[1],
+                    lifeLevel.english,
 
-                copyTa:
-                    level[2],
+                copyTamil:
+                    lifeLevel.copyTamil,
 
-                copyEn:
-                    level[3]
+                copyEnglish:
+                    lifeLevel.copyEnglish
 
             },
 
@@ -1508,8 +1796,8 @@
                 dimensions.map(
                     function (dimension) {
 
-                        const copy =
-                            dimensionCopy(
+                        const interpretation =
+                            getDimensionInterpretation(
                                 dimension
                             );
 
@@ -1519,16 +1807,16 @@
                             ...dimension,
 
                             displayTamil:
-                                copy.ta,
+                                interpretation.tamil,
 
                             displayEnglish:
-                                copy.en,
+                                interpretation.english,
 
-                            copyTa:
-                                copy.cta,
+                            copyTamil:
+                                interpretation.copyTamil,
 
-                            copyEn:
-                                copy.cen
+                            copyEnglish:
+                                interpretation.copyEnglish
 
                         };
 
@@ -1537,59 +1825,27 @@
 
 
             strengths:
-                strengths.slice(
-                    0,
-                    3
-                ),
+                strengths,
 
 
             opportunities:
-                opportunities.slice(
-                    0,
-                    3
-                ),
+                opportunities,
 
 
-            primaryInsight: {
-
-                tamil:
-                    primary[0],
-
-                english:
-                    primary[1],
-
-                copyTa:
-                    primary[2],
-
-                copyEn:
-                    primary[3],
-
-                keyTa:
-                    primary[4],
-
-                keyEn:
-                    primary[5]
-
-            },
+            primaryInsight:
+                primaryInsight,
 
 
             rootPatterns:
-                roots,
+                rootPatterns,
 
 
             crossConnections:
                 crossConnections,
 
 
-            lifePattern: {
-
-                tamil:
-                    `உங்கள் தற்போதைய பெரிய படம்: ${pillarTamil(strongest)} உங்கள் முன்னேற்றத்தை ஆதரிக்கிறது; ${pillarTamil(growth)} அதிக கவனத்தை நாடுகிறது. ${dimensionNames(highDimensions[0] || {}).ta} வலிமையை ${dimensionNames(lowDimensions[0] || {}).ta} முன்னேற்றத்துடன் இணைத்தால் மொத்த சமநிலை உயரக்கூடும்.`,
-
-                english:
-                    `Your current pattern shows ${pillarEnglish(strongest)} pulling you forward while ${pillarEnglish(growth)} needs focused attention. Connecting the strength of ${dimensionNames(highDimensions[0] || {}).en} to the development of ${dimensionNames(lowDimensions[0] || {}).en} may improve overall alignment.`
-
-            },
+            lifePattern:
+                lifePattern,
 
 
             transformationLever:
@@ -1600,15 +1856,8 @@
                 priorities,
 
 
-            hypothesis: {
-
-                tamil:
-                    `நீங்கள் ${priorities[0].tamil} பகுதியில் முன்னேற்றத்தை உருவாக்கி, ${priorities[1].tamil} பகுதியில் நம்பகமான அமைப்பை கட்டி, ${pillarTamil(strongest)} வலிமையை ஆதரவாக பயன்படுத்தினால், உங்கள் மொத்த வாழ்க்கை சமநிலை குறிப்பிடத்தக்க அளவில் உயரக்கூடும்.`,
-
-                english:
-                    `If you create focused progress in ${priorities[0].english}, build a reliable system around ${priorities[1].english}, and use your strength in ${pillarEnglish(strongest)} to support that change, your overall life alignment may improve meaningfully.`
-
-            }
+            hypothesis:
+                hypothesis
 
         };
 
@@ -1616,68 +1865,168 @@
 
 
     /* ======================================================================
-       RENDER PAGE 05
+       20. CARD RENDERER
+       ====================================================================== */
 
-       EXISTING VISUAL CONTRACT PRESERVED.
-    ====================================================================== */
+    function renderDiagnosisCard(
+        id,
+        item,
+        index
+    ) {
 
-    function render(
-        result
+        const card =
+            getElement(id);
+
+
+        if (!card) {
+
+            return;
+
+        }
+
+
+        const number =
+            item.number ||
+            String(
+                index + 1
+            ).padStart(
+                2,
+                "0"
+            );
+
+
+        let scoreMarkup =
+            "";
+
+
+        if (
+            item.maximumScore !==
+                undefined &&
+            item.maximumScore !==
+                null
+        ) {
+
+            scoreMarkup =
+
+                `<div class="page05-diagnosis-score">
+                    ${item.score ?? "—"} / ${item.maximumScore}
+                    ${
+                        item.percentage !== undefined
+                            ? ` · ${item.percentage}%`
+                            : ""
+                    }
+                </div>`;
+
+        }
+
+
+        card.innerHTML = `
+
+            <p class="page05-card-number">
+                ${number}
+            </p>
+
+            <h3
+                class="page05-card-title-tamil"
+                lang="ta"
+            >
+                ${item.tamil || "—"}
+            </h3>
+
+            <p class="page05-card-title">
+                ${item.english || "—"}
+            </p>
+
+            ${scoreMarkup}
+
+            <p
+                class="page05-card-copy"
+                lang="ta"
+            >
+                ${item.copyTamil || "—"}
+            </p>
+
+            <p class="page05-card-copy page05-card-copy-english">
+                ${item.copyEnglish || "—"}
+            </p>
+
+        `;
+
+    }
+
+
+    /* ======================================================================
+       21. RENDER CURRENT STATUS
+       ====================================================================== */
+
+    function renderCurrentStatus(
+        diagnosis
+    ) {
+
+        const status =
+            diagnosis.currentStatus;
+
+
+        setText(
+            "diagnosis-current-status-tamil",
+            status.tamil
+        );
+
+
+        setText(
+            "diagnosis-current-status",
+            status.english
+        );
+
+
+        setText(
+            "diagnosis-current-status-copy-tamil",
+            status.copyTamil
+        );
+
+
+        setText(
+            "diagnosis-current-status-copy",
+            status.copyEnglish
+        );
+
+    }
+
+
+    /* ======================================================================
+       22. RENDER SNAPSHOT
+       ====================================================================== */
+
+    function renderSnapshot(
+        diagnosis
     ) {
 
         const snapshot =
-            result.snapshot;
+            diagnosis.snapshot;
 
 
-        const currentStatus =
-            result.currentStatus;
-
-
-        txt(
-            "diagnosis-current-status-tamil",
-            currentStatus.tamil
-        );
-
-
-        txt(
-            "diagnosis-current-status",
-            currentStatus.english
-        );
-
-
-        txt(
-            "diagnosis-current-status-copy-tamil",
-            currentStatus.copyTa
-        );
-
-
-        txt(
-            "diagnosis-current-status-copy",
-            currentStatus.copyEn
-        );
-
-
-        txt(
+        setText(
             "diagnosis-life-alignment",
             snapshot.lifeAlignment + "%"
         );
 
 
-        txt(
+        setText(
             "diagnosis-total-score",
             snapshot.totalLifeScore
         );
 
 
-        txt(
+        setText(
             "diagnosis-life-level",
             String(
-                snapshot.lifeLevel
+                snapshot.lifeLevel ||
+                "DEVELOPING"
             ).toUpperCase()
         );
 
 
-        txt(
+        setText(
             "diagnosis-strongest-pillar",
             pillarEnglish(
                 snapshot.strongestPillar
@@ -1685,13 +2034,15 @@
         );
 
 
-        txt(
+        setText(
             "diagnosis-strongest-score",
-            snapshot.strongestPillar?.score
+            snapshot.strongestPillar
+                ? snapshot.strongestPillar.score
+                : "—"
         );
 
 
-        txt(
+        setText(
             "diagnosis-growth-pillar",
             pillarEnglish(
                 snapshot.growthPillar
@@ -1699,1467 +2050,589 @@
         );
 
 
-        txt(
+        setText(
             "diagnosis-growth-score",
-            snapshot.growthPillar?.score
+            snapshot.growthPillar
+                ? snapshot.growthPillar.score
+                : "—"
         );
 
-
-        result.dimensions.forEach(
-            function (
-                dimension,
-                index
-            ) {
-
-                const number =
-                    index + 1;
+    }
 
 
-                txt(
-                    "diagnosis-dimension-tamil-" +
-                    number,
+    /* ======================================================================
+       23. RENDER FIVE DIMENSIONS
+       ====================================================================== */
 
-                    dimension.displayTamil
-                );
+    function renderDimensions(
+        diagnosis
+    ) {
 
+        diagnosis.dimensions
+            .forEach(
+                function (
+                    dimension,
+                    index
+                ) {
 
-                txt(
-                    "diagnosis-dimension-name-" +
-                    number,
-
-                    dimension.displayEnglish
-                );
-
-
-                txt(
-                    "diagnosis-dimension-score-" +
-                    number,
-
-                    `${dimension.score} / ${dimension.maximumScore} · ${dimension.percentage}%`
-                );
+                    const number =
+                        index + 1;
 
 
-                const meter =
-                    el(
-                        "diagnosis-dimension-meter-" +
-                        number
+                    setText(
+                        "diagnosis-dimension-tamil-" +
+                        number,
+                        dimension.displayTamil
                     );
 
 
-                if (meter) {
+                    setText(
+                        "diagnosis-dimension-name-" +
+                        number,
+                        dimension.displayEnglish
+                    );
 
-                    meter.style.width =
 
-                        Math.max(
+                    setText(
+                        "diagnosis-dimension-score-" +
+                        number,
+                        `${dimension.score} / ${dimension.maximumScore} · ${dimension.percentage}%`
+                    );
 
-                            0,
 
-                            Math.min(
-                                100,
-                                dimension.percentage
-                            )
+                    setWidth(
+                        "diagnosis-dimension-meter-" +
+                        number,
+                        dimension.percentage
+                    );
 
-                        )
 
-                        + "%";
+                    setText(
+                        "diagnosis-dimension-copy-tamil-" +
+                        number,
+                        dimension.copyTamil
+                    );
+
+
+                    setText(
+                        "diagnosis-dimension-copy-" +
+                        number,
+                        dimension.copyEnglish
+                    );
+
+
+                    const card =
+                        getElement(
+                            "diagnosis-dimension-card-" +
+                            number
+                        );
+
+
+                    if (!card) {
+
+                        return;
+
+                    }
+
+
+                    card.classList.remove(
+                        "is-low",
+                        "is-medium",
+                        "is-high"
+                    );
+
+
+                    if (
+                        dimension.percentage <
+                        50
+                    ) {
+
+                        card.classList.add(
+                            "is-low"
+                        );
+
+                    }
+                    else if (
+                        dimension.percentage <
+                        75
+                    ) {
+
+                        card.classList.add(
+                            "is-medium"
+                        );
+
+                    }
+                    else {
+
+                        card.classList.add(
+                            "is-high"
+                        );
+
+                    }
 
                 }
+            );
+
+    }
 
 
-                txt(
-                    "diagnosis-dimension-copy-tamil-" +
-                    number,
+    /* ======================================================================
+       24. RENDER STRENGTHS
+       ====================================================================== */
 
-                    dimension.copyTa
-                );
+    function renderStrengths(
+        diagnosis
+    ) {
 
-
-                txt(
-                    "diagnosis-dimension-copy-" +
-                    number,
-
-                    dimension.copyEn
-                );
-
-            }
-        );
-
-
-        result.strengths.forEach(
-            function (
-                item,
-                index
-            ) {
-
-                card(
-
-                    "diagnosis-strength-" +
-                    (index + 1),
-
+        diagnosis.strengths
+            .forEach(
+                function (
                     item,
-
                     index
+                ) {
 
-                );
+                    renderDiagnosisCard(
+                        "diagnosis-strength-" +
+                        (index + 1),
+                        item,
+                        index
+                    );
 
-            }
-        );
+                }
+            );
+
+    }
 
 
-        result.opportunities.forEach(
-            function (
-                item,
-                index
-            ) {
+    /* ======================================================================
+       25. RENDER OPPORTUNITIES
+       ====================================================================== */
 
-                card(
+    function renderOpportunities(
+        diagnosis
+    ) {
 
-                    "diagnosis-opportunity-" +
-                    (index + 1),
-
+        diagnosis.opportunities
+            .forEach(
+                function (
                     item,
-
                     index
+                ) {
 
-                );
+                    renderDiagnosisCard(
+                        "diagnosis-opportunity-" +
+                        (index + 1),
+                        item,
+                        index
+                    );
 
-            }
-        );
+                }
+            );
+
+    }
 
 
-        const primary =
-            result.primaryInsight;
+    /* ======================================================================
+       26. RENDER PRIMARY INSIGHT
+       ====================================================================== */
+
+    function renderPrimaryInsight(
+        diagnosis
+    ) {
+
+        const insight =
+            diagnosis.primaryInsight;
 
 
-        txt(
+        setText(
             "diagnosis-primary-insight-tamil",
-            primary.tamil
+            insight.tamil
         );
 
 
-        txt(
+        setText(
             "diagnosis-primary-insight",
-            primary.english
+            insight.english
         );
 
 
-        txt(
+        setText(
             "diagnosis-primary-copy-tamil",
-            primary.copyTa
+            insight.copyTamil
         );
 
 
-        txt(
+        setText(
             "diagnosis-primary-copy",
-            primary.copyEn
+            insight.copyEnglish
         );
 
 
-        txt(
+        setText(
             "diagnosis-key-insight-tamil",
-            primary.keyTa
+            insight.keyTamil
         );
 
 
-        txt(
+        setText(
             "diagnosis-key-insight",
-            primary.keyEn
+            insight.keyEnglish
         );
 
+    }
 
-        result.rootPatterns.forEach(
-            function (
-                item,
-                index
-            ) {
 
-                card(
+    /* ======================================================================
+       27. RENDER ROOT PATTERNS
+       ====================================================================== */
 
-                    "diagnosis-root-pattern-" +
-                    (index + 1),
+    function renderRootPatterns(
+        diagnosis
+    ) {
 
+        diagnosis.rootPatterns
+            .forEach(
+                function (
                     item,
-
                     index
+                ) {
 
-                );
+                    renderDiagnosisCard(
+                        "diagnosis-root-pattern-" +
+                        (index + 1),
+                        item,
+                        index
+                    );
 
-            }
-        );
+                }
+            );
+
+    }
 
 
-        result.crossConnections.forEach(
-            function (
-                item,
-                index
-            ) {
+    /* ======================================================================
+       28. RENDER CROSS CONNECTIONS
+       ====================================================================== */
 
-                card(
+    function renderCrossConnections(
+        diagnosis
+    ) {
 
-                    "diagnosis-cross-" +
-                    (index + 1),
-
+        diagnosis.crossConnections
+            .forEach(
+                function (
                     item,
-
                     index
+                ) {
 
-                );
+                    renderDiagnosisCard(
+                        "diagnosis-cross-" +
+                        (index + 1),
+                        item,
+                        index
+                    );
 
-            }
-        );
+                }
+            );
+
+    }
 
 
-        txt(
+    /* ======================================================================
+       29. RENDER LIFE PATTERN
+       ====================================================================== */
+
+    function renderLifePattern(
+        diagnosis
+    ) {
+
+        setText(
             "diagnosis-life-pattern-tamil",
-            result.lifePattern.tamil
+            diagnosis.lifePattern.tamil
         );
 
 
-        txt(
+        setText(
             "diagnosis-life-pattern",
-            result.lifePattern.english
+            diagnosis.lifePattern.english
         );
 
+    }
+
+
+    /* ======================================================================
+       30. RENDER TRANSFORMATION LEVER
+       ====================================================================== */
+
+    function renderTransformationLever(
+        diagnosis
+    ) {
 
         const lever =
-            result.transformationLever;
+            diagnosis.transformationLever;
 
 
-        txt(
+        setText(
             "diagnosis-transformation-lever-tamil",
             lever.tamil
         );
 
 
-        txt(
+        setText(
             "diagnosis-transformation-lever",
             lever.english
         );
 
 
-        txt(
+        setText(
             "diagnosis-transformation-lever-copy-tamil",
-            lever.copyTa
+            lever.copyTamil
         );
 
 
-        txt(
+        setText(
             "diagnosis-transformation-lever-copy",
-            lever.copyEn
-        );
-
-
-        result.priorities.forEach(
-            function (
-                item,
-                index
-            ) {
-
-                card(
-
-                    "diagnosis-priority-" +
-                    (index + 1),
-
-                    item,
-
-                    index
-
-                );
-
-            }
-        );
-
-
-        txt(
-            "diagnosis-hypothesis-tamil",
-            result.hypothesis.tamil
-        );
-
-
-        txt(
-            "diagnosis-hypothesis",
-            result.hypothesis.english
-        );
-
-
-        txt(
-            "diagnosis-summary-status",
-            currentStatus.english
-        );
-
-
-        txt(
-            "diagnosis-summary-strength",
-            result.strengths[0]?.english
-        );
-
-
-        txt(
-            "diagnosis-summary-opportunity",
-            result.opportunities[0]?.english
-        );
-
-
-        txt(
-            "diagnosis-summary-pattern",
-            result.rootPatterns[0]?.english
-        );
-
-
-        txt(
-            "diagnosis-summary-insight",
-            primary.english
-        );
-
-
-        txt(
-            "diagnosis-summary-priority",
-            result.priorities[0]?.english
+            lever.copyEnglish
         );
 
     }
 
 
     /* ======================================================================
-       RESOLVE PEOPLE ID
+       31. RENDER PRIORITIES
+       ====================================================================== */
 
-       Page 02 remains preferred source.
-
-       Compatibility recovery is READ ONLY.
-    ====================================================================== */
-
-    function resolvePeopleId(
-        input
+    function renderPriorities(
+        diagnosis
     ) {
 
-        const page02 =
-
-            input &&
-            input.p2
-
-                ? input.p2
-
-                : {};
-
-
-        const candidates = [
-
-            page02.peopleId,
-
-            page02.PeopleID,
-
-            page02.peopleID,
-
-            page02.clientId,
-
-            page02.ClientID,
-
-            page02.registration?.peopleId,
-
-            page02.registration?.PeopleID,
-
-            page02.registration?.clientId,
-
-            page02.person?.peopleId,
-
-            page02.person?.PeopleID,
-
-            page02.data?.peopleId,
-
-            page02.data?.PeopleID,
-
-            readStorageString(
-                "ctm_people_id"
-            ),
-
-            readStorageString(
-                "peopleId"
-            ),
-
-            readStorageString(
-                "PeopleID"
-            ),
-
-            readStorageString(
-                "ctm_client_id"
-            )
-
-        ];
-
-
-        for (
-            let i = 0;
-            i < candidates.length;
-            i++
-        ) {
-
-            const value =
-                candidates[i];
-
-
-            if (
-                value !== undefined &&
-                value !== null &&
-                String(value).trim() !== ""
-            ) {
-
-                return String(
-                    value
-                ).trim();
-
-            }
-
-        }
-
-
-        /*
-         * Bounded recursive recovery from Page 02.
-         */
-
-        const visited =
-            [];
-
-
-        function walk(
-            value,
-            depth
-        ) {
-
-            if (
-                !value ||
-                typeof value !== "object" ||
-                depth > 5 ||
-                visited.indexOf(value) !== -1
-            ) {
-
-                return "";
-
-            }
-
-
-            visited.push(
-                value
-            );
-
-
-            const direct =
-                firstNonEmptyString(
-
-                    value.peopleId,
-
-                    value.PeopleID,
-
-                    value.peopleID,
-
-                    value.clientId,
-
-                    value.ClientID
-
-                );
-
-
-            if (direct) {
-                return direct;
-            }
-
-
-            const keys =
-                Object.keys(
-                    value
-                );
-
-
-            for (
-                let i = 0;
-                i < keys.length;
-                i++
-            ) {
-
-                const child =
-                    value[
-                        keys[i]
-                    ];
-
-
-                if (
-                    child &&
-                    typeof child === "object"
+        diagnosis.priorities
+            .forEach(
+                function (
+                    item,
+                    index
                 ) {
 
-                    const found =
-                        walk(
-                            child,
-                            depth + 1
-                        );
-
-
-                    if (found) {
-                        return found;
-                    }
-
-                }
-
-            }
-
-
-            return "";
-
-        }
-
-
-        return walk(
-            page02,
-            0
-        );
-
-    }
-
-
-    /* ======================================================================
-       BACKEND PILLAR KEY
-
-       DiagnosisEngine expects:
-
-           assessment.pillarScores
-
-       as an object:
-
-           {
-               PURPOSE: 7,
-               HEALTH: 8,
-               ...
-           }
-
-       We preserve the pillar's existing canonical key whenever available.
-    ====================================================================== */
-
-    function getBackendPillarKey(
-        pillar,
-        index
-    ) {
-
-        const key =
-            firstNonEmptyString(
-
-                pillar.key,
-
-                pillar.pillarKey,
-
-                pillar.pillarId,
-
-                pillar.id,
-
-                pillar.code,
-
-                pillar.english,
-
-                pillar.name
-
-            );
-
-
-        if (key) {
-            return key;
-        }
-
-
-        return (
-            "PILLAR_" +
-            String(
-                index + 1
-            ).padStart(
-                2,
-                "0"
-            )
-        );
-
-    }
-
-
-    /* ======================================================================
-       BUILD BACKEND ASSESSMENT PAYLOAD
-
-       DiagnosisEngine requires:
-
-           assessment.peopleId
-           assessment.pillarScores
-           assessment.summary.level
-           assessment.summary.readinessIndex
-
-       Page 04 is the frozen source of truth for the 12 pillar scores.
-    ====================================================================== */
-
-    function buildBackendAssessment(
-        input
-    ) {
-
-        if (
-            !input ||
-            !input.p4 ||
-            !Array.isArray(
-                input.pillars
-            )
-        ) {
-
-            throw new Error(
-                "Page05: Cannot build backend diagnosis payload because Page04 assessment data is unavailable."
-            );
-
-        }
-
-
-        const peopleId =
-            resolvePeopleId(
-                input
-            );
-
-
-        if (!peopleId) {
-
-            throw new Error(
-                "Page05: CTM PATH™ People ID could not be recovered."
-            );
-
-        }
-
-
-        if (
-            input.pillars.length !== 12
-        ) {
-
-            throw new Error(
-                "Page05: Exactly twelve Kala Chakra™ pillar scores are required for backend diagnosis."
-            );
-
-        }
-
-
-        const pillarScores = {};
-
-
-        input.pillars.forEach(
-            function (
-                pillar,
-                index
-            ) {
-
-                const key =
-                    getBackendPillarKey(
-                        pillar,
+                    renderDiagnosisCard(
+                        "diagnosis-priority-" +
+                        (index + 1),
+                        item,
                         index
                     );
 
-
-                pillarScores[key] =
-                    num(
-                        pillar.score
-                    );
-
-            }
-        );
-
-
-        const page04 =
-            input.p4;
-
-
-        const totalScore =
-            num(
-                page04.totalScore
-            );
-
-
-        const percentage =
-            num(
-                page04.percentage
-            );
-
-
-        const readinessIndex =
-
-            page04.readinessIndex !== undefined
-
-                ? num(
-                    page04.readinessIndex
-                )
-
-                : (
-                    percentage > 0
-                        ? percentage / 100
-                        : totalScore / 120
-                );
-
-
-        const level =
-            firstNonEmptyString(
-
-                page04.lifeLevel,
-
-                page04.level,
-
-                page04.summary?.level
-
-            )
-
-            ||
-
-            "DEVELOPING";
-
-
-        return {
-
-            peopleId:
-                peopleId,
-
-            pillarScores:
-                pillarScores,
-
-            summary: {
-
-                level:
-                    level,
-
-                readinessIndex:
-                    readinessIndex
-
-            },
-
-            totalScore:
-                totalScore,
-
-            maximumScore:
-                120,
-
-            percentage:
-                percentage
-
-        };
-
-    }
-
-
-    /* ======================================================================
-       API RESPONSE ERROR MESSAGE
-    ====================================================================== */
-
-    function extractApiErrorMessage(
-        response
-    ) {
-
-        if (
-            !response ||
-            typeof response !== "object"
-        ) {
-
-            return "";
-
-        }
-
-
-        const message =
-            response.message;
-
-
-        if (
-            typeof message === "string" &&
-            message.trim() !== ""
-        ) {
-
-            return message.trim();
-
-        }
-
-
-        if (
-            message &&
-            typeof message === "object"
-        ) {
-
-            const nested =
-                firstNonEmptyString(
-
-                    message.message,
-
-                    message.error
-
-                );
-
-
-            if (nested) {
-                return nested;
-            }
-
-        }
-
-
-        if (
-            typeof response.error === "string" &&
-            response.error.trim() !== ""
-        ) {
-
-            return response.error.trim();
-
-        }
-
-
-        if (
-            response.data &&
-            typeof response.data === "object"
-        ) {
-
-            return extractApiErrorMessage(
-                response.data
-            );
-
-        }
-
-
-        return "";
-
-    }
-
-
-    /* ======================================================================
-       VALIDATE BACKEND RESPONSE
-    ====================================================================== */
-
-    function validateBackendResponse(
-        response
-    ) {
-
-        if (
-            response === undefined ||
-            response === null
-        ) {
-
-            throw new Error(
-                "CTM PATH™ diagnosis service returned no response."
-            );
-
-        }
-
-
-        if (
-            response === false
-        ) {
-
-            throw new Error(
-                "CTM PATH™ diagnosis could not be saved."
-            );
-
-        }
-
-
-        if (
-            typeof response === "object"
-        ) {
-
-            if (
-                response.success === false ||
-                response.ok === false ||
-                String(
-                    response.status || ""
-                ).toUpperCase() === "FAILURE"
-            ) {
-
-                throw new Error(
-
-                    extractApiErrorMessage(
-                        response
-                    )
-
-                    ||
-
-                    "CTM PATH™ Personal Diagnosis could not be saved."
-
-                );
-
-            }
-
-        }
-
-
-        return response;
-
-    }
-
-
-    /* ======================================================================
-       CHECK EXISTING BACKEND PERSISTENCE
-
-       Prevents duplicate generation when Page 05 is re-initialized during
-       the same browser journey.
-
-       The lock is People-ID specific.
-    ====================================================================== */
-
-    function recoverExistingPersistence(
-        peopleId
-    ) {
-
-        const existing =
-            read(
-                CONFIG.backendPersistenceKey
-            );
-
-
-        if (
-            !existing ||
-            existing.status !== "SAVED"
-        ) {
-
-            return false;
-
-        }
-
-
-        if (
-            !existing.peopleId ||
-            !peopleId
-        ) {
-
-            return false;
-
-        }
-
-
-        if (
-            String(
-                existing.peopleId
-            ) !==
-            String(
-                peopleId
-            )
-        ) {
-
-            return false;
-
-        }
-
-
-        state.persisted =
-            true;
-
-
-        state.backendResponse =
-            existing.response || null;
-
-
-        return true;
-
-    }
-
-
-    /* ======================================================================
-       PERSIST BACKEND PERSONAL DIAGNOSIS
-
-       Flow:
-
-       Page04 frozen 12 pillar scores
-              ↓
-       buildBackendAssessment()
-              ↓
-       CTM_API.generateDiagnosis()
-              ↓
-       JourneyOrchestrator.generateDiagnosis()
-              ↓
-       DiagnosisEngine.generate()
-              ↓
-       Diagnosis.save()
-              ↓
-       dbSaveDiagnosis()
-              ↓
-       06_PersonalDiagnosis
-
-    ====================================================================== */
-
-    async function persistBackendDiagnosis() {
-
-        /*
-         * Already confirmed during this runtime.
-         */
-
-        if (
-            state.persisted
-        ) {
-
-            return state.backendResponse;
-
-        }
-
-
-        /*
-         * Existing request already running.
-         */
-
-        if (
-            state.persistencePromise
-        ) {
-
-            return state.persistencePromise;
-
-        }
-
-
-        state.persistencePromise =
-            (async function () {
-
-                state.persisting =
-                    true;
-
-
-                try {
-
-                    if (
-                        !w.CTM_API ||
-                        typeof w.CTM_API !== "object"
-                    ) {
-
-                        throw new Error(
-                            "CTM PATH™ API service is unavailable."
-                        );
-
-                    }
-
-
-                    if (
-                        typeof w.CTM_API.generateDiagnosis !==
-                        "function"
-                    ) {
-
-                        throw new Error(
-                            "CTM PATH™ API method unavailable: generateDiagnosis"
-                        );
-
-                    }
-
-
-                    const payload =
-                        buildBackendAssessment(
-                            state.input
-                        );
-
-
-                    state.backendPayload =
-                        payload;
-
-
-                    /*
-                     * If this exact People ID has already been
-                     * successfully persisted during this Page 05
-                     * journey, do not create another diagnosis row.
-                     */
-
-                    if (
-                        recoverExistingPersistence(
-                            payload.peopleId
-                        )
-                    ) {
-
-                        console.info(
-                            "Page05: Backend Personal Diagnosis already persisted.",
-                            {
-                                peopleId:
-                                    payload.peopleId
-                            }
-                        );
-
-
-                        return state.backendResponse;
-
-                    }
-
-
-                    console.info(
-                        "Page05: Persisting backend Personal Diagnosis...",
-                        {
-                            peopleId:
-                                payload.peopleId,
-
-                            pillarCount:
-                                Object.keys(
-                                    payload.pillarScores
-                                ).length
-                        }
-                    );
-
-
-                    const response =
-                        await w.CTM_API.generateDiagnosis(
-                            payload
-                        );
-
-
-                    console.info(
-                        "Page05 Diagnosis Response:",
-                        response
-                    );
-
-
-                    validateBackendResponse(
-                        response
-                    );
-
-
-                    state.backendResponse =
-                        response;
-
-
-                    state.persisted =
-                        true;
-
-
-                    save(
-
-                        CONFIG.backendPersistenceKey,
-
-                        {
-
-                            status:
-                                "SAVED",
-
-                            peopleId:
-                                payload.peopleId,
-
-                            savedAt:
-                                new Date().toISOString(),
-
-                            response:
-                                response
-
-                        }
-
-                    );
-
-
-                    console.info(
-                        "CTM PATH™ Page05 backend diagnosis persisted.",
-                        {
-                            peopleId:
-                                payload.peopleId
-                        }
-                    );
-
-
-                    return response;
-
                 }
-                catch (error) {
-
-                    state.persisted =
-                        false;
-
-
-                    console.error(
-                        "CTM PATH™ Page05 backend diagnosis persistence failed.",
-                        error
-                    );
-
-
-                    throw error;
-
-                }
-                finally {
-
-                    state.persisting =
-                        false;
-
-
-                    /*
-                     * If persistence failed, allow a deliberate retry.
-                     */
-
-                    if (
-                        !state.persisted
-                    ) {
-
-                        state.persistencePromise =
-                            null;
-
-                    }
-
-                }
-
-            })();
-
-
-        return state.persistencePromise;
+            );
 
     }
 
 
     /* ======================================================================
-       ROADMAP BUTTON BUSY STATE
-    ====================================================================== */
+       32. RENDER HYPOTHESIS
+       ====================================================================== */
 
-    function setRoadmapButtonBusy(
-        busy
+    function renderHypothesis(
+        diagnosis
     ) {
 
-        const button =
-            el(
-                CONFIG.roadmapButtonId
-            );
-
-
-        if (!button) {
-            return;
-        }
-
-
-        if (
-            !button.dataset.page05OriginalHtml
-        ) {
-
-            button.dataset.page05OriginalHtml =
-                button.innerHTML;
-
-        }
-
-
-        button.setAttribute(
-            "aria-busy",
-            busy
-                ? "true"
-                : "false"
+        setText(
+            "diagnosis-hypothesis-tamil",
+            diagnosis.hypothesis.tamil
         );
 
 
-        if (busy) {
-
-            button.style.pointerEvents =
-                "none";
-
-
-            button.setAttribute(
-                "aria-disabled",
-                "true"
-            );
-
-
-            button.innerHTML =
-
-                '<span lang="ta">' +
-                'உங்கள் தனிப்பட்ட வழிகாட்டல் தயாராகிறது...' +
-                '</span>' +
-
-                '<span>' +
-                'PREPARING YOUR NEXT STEP...' +
-                '</span>';
-
-        }
-        else {
-
-            button.style.pointerEvents =
-                "";
-
-
-            button.removeAttribute(
-                "aria-disabled"
-            );
-
-
-            if (
-                button.dataset.page05OriginalHtml
-            ) {
-
-                button.innerHTML =
-                    button.dataset.page05OriginalHtml;
-
-            }
-
-        }
+        setText(
+            "diagnosis-hypothesis",
+            diagnosis.hypothesis.english
+        );
 
     }
 
 
     /* ======================================================================
-       PERSISTENCE ERROR
-    ====================================================================== */
+       33. RENDER ONE-VIEW SUMMARY
+       ====================================================================== */
 
-    function showPersistenceError(
-        error
+    function renderSummary(
+        diagnosis
     ) {
 
-        const message =
-
-            error &&
-            error.message
-
-                ? error.message
-
-                : "Unable to save your Personal Life Diagnosis™.";
+        setText(
+            "diagnosis-summary-status",
+            diagnosis.currentStatus.english
+        );
 
 
-        window.alert(
+        setText(
+            "diagnosis-summary-strength",
+            diagnosis.strengths[0]
+                ? diagnosis.strengths[0].english
+                : "—"
+        );
 
-            "உங்கள் தனிப்பட்ட வாழ்க்கை ஆய்வை இப்போது சேமிக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.\n\n" +
 
-            "We could not save your Personal Life Diagnosis™ yet. Please try again.\n\n" +
+        setText(
+            "diagnosis-summary-opportunity",
+            diagnosis.opportunities[0]
+                ? diagnosis.opportunities[0].english
+                : "—"
+        );
 
-            message
 
+        setText(
+            "diagnosis-summary-pattern",
+            diagnosis.rootPatterns[0]
+                ? diagnosis.rootPatterns[0].english
+                : "—"
+        );
+
+
+        setText(
+            "diagnosis-summary-insight",
+            diagnosis.primaryInsight.english
+        );
+
+
+        setText(
+            "diagnosis-summary-priority",
+            diagnosis.priorities[0]
+                ? diagnosis.priorities[0].english
+                : "—"
         );
 
     }
 
 
     /* ======================================================================
-       PAGE 05 → PAGE 06 NAVIGATION GATE
+       34. RENDER ALL
+       ====================================================================== */
 
-       Page 06 MUST NOT open until backend diagnosis persistence succeeds.
-    ====================================================================== */
-
-    async function handleRoadmapNavigation(
-        event
+    function renderDiagnosis(
+        diagnosis
     ) {
 
-        if (event) {
-
-            event.preventDefault();
-
-        }
-
-
-        /*
-         * Already persisted:
-         * navigate immediately.
-         */
-
-        if (
-            state.persisted
-        ) {
-
-            window.location.href =
-                CONFIG.nextPage;
-
-
-            return;
-
-        }
-
-
-        setRoadmapButtonBusy(
-            true
+        renderCurrentStatus(
+            diagnosis
         );
 
 
-        try {
-
-            await persistBackendDiagnosis();
-
-
-            if (
-                !state.persisted
-            ) {
-
-                throw new Error(
-                    "CTM PATH™ Personal Diagnosis persistence was not confirmed."
-                );
-
-            }
+        renderSnapshot(
+            diagnosis
+        );
 
 
-            window.location.href =
-                CONFIG.nextPage;
-
-        }
-        catch (error) {
-
-            console.error(
-                "Page05: Page06 transition blocked because backend diagnosis was not saved.",
-                error
-            );
+        renderDimensions(
+            diagnosis
+        );
 
 
-            setRoadmapButtonBusy(
-                false
-            );
+        renderStrengths(
+            diagnosis
+        );
 
 
-            showPersistenceError(
-                error
-            );
+        renderOpportunities(
+            diagnosis
+        );
 
-        }
+
+        renderPrimaryInsight(
+            diagnosis
+        );
+
+
+        renderRootPatterns(
+            diagnosis
+        );
+
+
+        renderCrossConnections(
+            diagnosis
+        );
+
+
+        renderLifePattern(
+            diagnosis
+        );
+
+
+        renderTransformationLever(
+            diagnosis
+        );
+
+
+        renderPriorities(
+            diagnosis
+        );
+
+
+        renderHypothesis(
+            diagnosis
+        );
+
+
+        renderSummary(
+            diagnosis
+        );
 
     }
 
 
     /* ======================================================================
-       BIND ROADMAP NAVIGATION
-    ====================================================================== */
+       35. ERROR STATE
+       ====================================================================== */
 
-    function bindNavigation() {
+    function renderErrorState(
+        message
+    ) {
 
-        if (
-            state.navigationBound
-        ) {
-
-            return;
-
-        }
-
-
-        const button =
-            el(
-                CONFIG.roadmapButtonId
-            );
-
-
-        if (!button) {
-
-            console.warn(
-                "Page05: Roadmap button not found."
-            );
-
-
-            return;
-
-        }
-
-
-        if (
-            button.dataset.page05Bound === "true"
-        ) {
-
-            state.navigationBound =
-                true;
-
-
-            return;
-
-        }
-
-
-        button.dataset.page05Bound =
-            "true";
-
-
-        button.addEventListener(
-            "click",
-            handleRoadmapNavigation
+        setText(
+            "diagnosis-current-status-tamil",
+            "முந்தைய மதிப்பீட்டு தரவு கிடைக்கவில்லை"
         );
 
 
-        state.navigationBound =
-            true;
+        setText(
+            "diagnosis-current-status",
+            "ASSESSMENT DATA UNAVAILABLE"
+        );
+
+
+        setText(
+            "diagnosis-current-status-copy-tamil",
+            "Page 02 மற்றும் Page 04 மதிப்பீட்டு முடிவுகள் தேவை."
+        );
+
+
+        setText(
+            "diagnosis-current-status-copy",
+            message ||
+            "Page 02 and Page 04 results are required. Please complete the previous assessment steps."
+        );
 
     }
 
 
     /* ======================================================================
-       INITIALIZE PAGE 05
+       36. INITIAL PAGE STATE
+       ====================================================================== */
 
-       Important:
+    const state = {
 
-       Rendering is immediate.
+        initialized:
+            false,
 
-       Backend persistence begins after the visual diagnosis is ready.
+        input:
+            null,
 
-       If it is still running when the visitor clicks the CTA,
-       the CTA waits for the same promise instead of generating twice.
-    ====================================================================== */
+        diagnosis:
+            null
+
+    };
+
+
+    /* ======================================================================
+       37. INITIALISE PAGE 05
+       ====================================================================== */
 
     function init() {
 
@@ -3174,154 +2647,40 @@
 
         try {
 
-            /*
-             * ----------------------------------------------------------
-             * 1. LOAD FROZEN INPUTS
-             * ----------------------------------------------------------
-             */
+            console.info(
+                "CTM PATH™ Page05 — Personal Life Diagnosis™ starting."
+            );
+
 
             state.input =
-                load();
+                loadInputs();
 
-
-            /*
-             * ----------------------------------------------------------
-             * 2. BUILD EXISTING PAGE 05 VISUAL DIAGNOSIS
-             * ----------------------------------------------------------
-             */
 
             state.diagnosis =
-                build(
+                buildDiagnosis(
                     state.input
                 );
 
 
-            /*
-             * ----------------------------------------------------------
-             * 3. RENDER EXISTING PAGE 05
-             * ----------------------------------------------------------
-             */
-
-            render(
+            renderDiagnosis(
                 state.diagnosis
             );
 
 
-            /*
-             * ----------------------------------------------------------
-             * 4. SAVE FRONTEND DIAGNOSIS CONTRACT
-             *
-             * Page 06 reads this exact key.
-             * ----------------------------------------------------------
-             */
-
-            save(
-
-                CONFIG.diagnosisStorageKey,
-
+            saveStorage(
+                CONFIG.storage.page05,
                 state.diagnosis
-
             );
 
-
-            /*
-             * Public runtime copy.
-             */
-
-            w.CTM_PAGE05_DIAGNOSIS_RESULT =
-                state.diagnosis;
-
-
-            /*
-             * ----------------------------------------------------------
-             * 5. BUILD BACKEND PAYLOAD
-             *
-             * This validates People ID + 12 pillar scores early.
-             * ----------------------------------------------------------
-             */
-
-            state.backendPayload =
-                buildBackendAssessment(
-                    state.input
-                );
-
-
-            /*
-             * ----------------------------------------------------------
-             * 6. RECOVER EXISTING BACKEND SAVE CONFIRMATION
-             * ----------------------------------------------------------
-             */
-
-            recoverExistingPersistence(
-                state.backendPayload.peopleId
-            );
-
-
-            /*
-             * ----------------------------------------------------------
-             * 7. BIND PAGE 06 NAVIGATION GATE
-             * ----------------------------------------------------------
-             */
-
-            bindNavigation();
-
-
-            /*
-             * ----------------------------------------------------------
-             * 8. MARK FRONTEND INITIALIZED
-             * ----------------------------------------------------------
-             */
 
             state.initialized =
                 true;
 
 
             console.info(
-                "CTM PATH™ Page05 ready.",
+                "CTM PATH™ Page05 — Personal Life Diagnosis™ ready.",
                 state.diagnosis
             );
-
-
-            console.info(
-                "Page05 Backend Diagnosis Payload:",
-                state.backendPayload
-            );
-
-
-            /*
-             * ----------------------------------------------------------
-             * 9. START BACKEND PERSISTENCE
-             *
-             * Do not block rendering.
-             *
-             * Navigation WILL block if this has not completed.
-             * ----------------------------------------------------------
-             */
-
-            if (
-                !state.persisted
-            ) {
-
-                persistBackendDiagnosis()
-                    .catch(
-                        function (error) {
-
-                            /*
-                             * Do not interrupt diagnosis reading.
-                             *
-                             * The CTA will retry and surface the
-                             * error if persistence is still unavailable.
-                             */
-
-                            console.warn(
-                                "Page05: Initial backend diagnosis persistence attempt did not complete.",
-                                error
-                            );
-
-                        }
-                    );
-
-            }
 
 
             return state.diagnosis;
@@ -3330,26 +2689,13 @@
         catch (error) {
 
             console.error(
-                "CTM PATH™ Page05 failed.",
+                "CTM PATH™ Page05 failed:",
                 error
             );
 
 
-            txt(
-                "diagnosis-current-status-tamil",
-                "முந்தைய மதிப்பீட்டு தரவு கிடைக்கவில்லை"
-            );
-
-
-            txt(
-                "diagnosis-current-status",
-                "ASSESSMENT DATA UNAVAILABLE"
-            );
-
-
-            txt(
-                "diagnosis-current-status-copy",
-                "Page 02 and Page 04 results are required. Please complete the previous assessment steps."
+            renderErrorState(
+                error.message
             );
 
 
@@ -3361,45 +2707,18 @@
 
 
     /* ======================================================================
-       REBUILD
-
-       Rebuilds frontend Page 05 diagnosis only.
-
-       A confirmed backend persistence lock for the same People ID
-       remains intact to prevent duplicate diagnosis rows.
-    ====================================================================== */
+       38. REBUILD
+       ====================================================================== */
 
     function rebuild() {
 
         state.initialized =
             false;
 
-
         state.input =
             null;
 
-
         state.diagnosis =
-            null;
-
-
-        state.backendPayload =
-            null;
-
-
-        state.backendResponse =
-            null;
-
-
-        state.persisting =
-            false;
-
-
-        state.persisted =
-            false;
-
-
-        state.persistencePromise =
             null;
 
 
@@ -3409,19 +2728,20 @@
 
 
     /* ======================================================================
-       PUBLIC PAGE MODULE
-    ====================================================================== */
+       39. PUBLIC API
+       ====================================================================== */
 
-    w.CTM_PAGE05 =
+    window.CTM_PAGE05 =
         Object.freeze({
 
             version:
-                "2.0",
-
+                CONFIG.version,
 
             init:
                 init,
 
+            rebuild:
+                rebuild,
 
             getDiagnosis:
                 function () {
@@ -3430,7 +2750,6 @@
 
                 },
 
-
             getInputs:
                 function () {
 
@@ -3438,63 +2757,26 @@
 
                 },
 
-
             getStoredDiagnosis:
                 function () {
 
-                    return read(
-                        CONFIG.diagnosisStorageKey
+                    return readStorage(
+                        CONFIG.storage.page05
                     );
 
                 },
 
-
-            getBackendPayload:
-                function () {
-
-                    return state.backendPayload;
-
-                },
-
-
-            getBackendResponse:
-                function () {
-
-                    return state.backendResponse;
-
-                },
-
-
-            isBackendPersisted:
-                function () {
-
-                    return state.persisted;
-
-                },
-
-
-            persistBackendDiagnosis:
-                persistBackendDiagnosis,
-
-
-            rebuild:
-                rebuild,
-
-
             storageKeys:
                 Object.freeze({
 
-                    p2:
-                        CONFIG.page02StorageKey,
+                    page02:
+                        CONFIG.storage.page02,
 
-                    p4:
-                        CONFIG.page04StorageKey,
+                    page04:
+                        CONFIG.storage.page04,
 
-                    out:
-                        CONFIG.diagnosisStorageKey,
-
-                    backend:
-                        CONFIG.backendPersistenceKey
+                    page05:
+                        CONFIG.storage.page05
 
                 })
 
@@ -3502,4 +2784,10 @@
 
 
 })(window, document);
+
+
+/* ==========================================================================
+   END OF FILE
+   ==========================================================================
+*/
 
