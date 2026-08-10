@@ -1,4 +1,5 @@
 
+
 /* ==========================================================================
    CTM PATH™ MILLIONAIRES™
 
@@ -42,6 +43,46 @@
    ✓ assessment completion
    ✓ Page04 navigation
 ========================================================================== */
+
+
+/* ==========================================================================
+   GLOBAL VIEWPORT RESET
+
+   Page03 is rendered as a full-bleed mobile page.
+   This removes the browser's default body margin, which otherwise creates
+   the visible white strip around the entire page on mobile devices.
+========================================================================== */
+
+html,
+body {
+
+    width:
+        100%;
+
+    min-width:
+        100%;
+
+    min-height:
+        100%;
+
+    margin:
+        0 !important;
+
+    padding:
+        0 !important;
+
+    background:
+        #081426;
+
+}
+
+
+body {
+
+    overflow-x:
+        hidden;
+
+}
 
 
 /* ==========================================================================
@@ -2230,4 +2271,5 @@
     }
 
 }
+
 
