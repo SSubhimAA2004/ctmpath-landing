@@ -20,17 +20,9 @@
         content="CTM PATH™ MILLIONAIRES™ — Master Money, People, Time and Tasks to build a life that works for you."
     >
 
-    <!-- ================================================================
-         FROZEN GLOBAL HEADER
-    ================================================================= -->
-
-    <link
-        rel="stylesheet"
-        href="../css/header.css"
-    >
 
     <!-- ================================================================
-         PAGE 06 STYLES
+         PAGE 06 STYLESHEET
     ================================================================= -->
 
     <link
@@ -38,238 +30,945 @@
         href="../css/page06.css"
     >
 
-    <!-- ================================================================
-         PAGE 06 VISUAL FALLBACK / STRUCTURE STYLES
 
-         These styles are intentionally scoped to Page 06 only.
-         They do not modify the frozen global header or global styles.
+    <!-- ================================================================
+         PAGE 06 INTEGRATED BRAND SHELL
+
+         IMPORTANT:
+
+         The global header is intentionally NOT loaded here.
+
+         Page 06 now owns its complete visual shell so the brand identity
+         flows directly into the Page 06 background.
+
+         page06.js v3.0 remains untouched.
     ================================================================= -->
 
     <style>
 
-        .page06-four-forces {
-            position: relative;
-            padding: 110px 0 120px;
-            overflow: hidden;
+        /* ==============================================================
+           PAGE 06 ROOT OVERRIDES
+        ============================================================== */
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            background: #041313;
         }
 
-        .page06-four-forces::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
+
+        body {
+            overflow-x: hidden;
+        }
+
+
+        .page06,
+        .page06 *,
+        .page06 *::before,
+        .page06 *::after {
+            box-sizing: border-box;
+        }
+
+
+        .page06 {
+            --page06-bg:
+                #071b1b;
+
+            --page06-bg-deep:
+                #041313;
+
+            --page06-teal:
+                #21c7b7;
+
+            --page06-teal-bright:
+                #18ad9f;
+
+            --page06-teal-dark:
+                #087d74;
+
+            --page06-teal-soft:
+                #7de3d9;
+
+            --page06-gold:
+                #d7b56d;
+
+            --page06-gold-soft:
+                #ead39f;
+
+            --page06-white:
+                #f5f2e9;
+
+            --page06-text:
+                #dddcd4;
+
+            --page06-muted:
+                #a8b0aa;
+
+            --page06-red:
+                #e16b68;
+
+            position:
+                relative;
+
+            width:
+                100%;
+
+            min-height:
+                100vh;
+
+            overflow:
+                hidden;
+
+            color:
+                var(--page06-text);
+
             background:
                 radial-gradient(
-                    circle at 78% 42%,
-                    rgba(33, 199, 183, 0.11),
-                    transparent 28rem
+                    circle at 50% 0%,
+                    rgba(33, 199, 183, 0.12),
+                    transparent 34rem
+                ),
+                linear-gradient(
+                    180deg,
+                    #071b1b 0%,
+                    #041313 100%
+                );
+
+            text-align:
+                center;
+        }
+
+
+        /* ==============================================================
+           INTEGRATED BRAND HEADER
+        ============================================================== */
+
+        .page06-brand-header {
+            position:
+                relative;
+
+            z-index:
+                20;
+
+            width:
+                100%;
+
+            padding:
+                34px 48px 26px;
+
+            border-bottom:
+                1px solid rgba(215, 181, 109, 0.14);
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(7, 27, 27, 0.98) 0%,
+                    rgba(7, 27, 27, 0.88) 65%,
+                    rgba(7, 27, 27, 0.00) 100%
+                );
+        }
+
+
+        .page06-brand-header-inner {
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            width:
+                min(1240px, calc(100% - 20px));
+
+            margin:
+                0 auto;
+        }
+
+
+        /* ==============================================================
+           BRAND IDENTITY
+        ============================================================== */
+
+        .page06-brand-identity {
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                20px;
+
+            text-align:
+                left;
+        }
+
+
+        .page06-brand-logo {
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            flex:
+                0 0 auto;
+
+            width:
+                72px;
+
+            height:
+                72px;
+        }
+
+
+        .page06-brand-logo img {
+            display:
+                block;
+
+            width:
+                72px;
+
+            height:
+                72px;
+
+            object-fit:
+                contain;
+        }
+
+
+        .page06-brand-copy {
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                flex-start;
+        }
+
+
+        .page06-brand-name {
+            margin:
+                0;
+
+            color:
+                var(--page06-white);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                clamp(1.7rem, 3vw, 2.65rem);
+
+            font-weight:
+                800;
+
+            line-height:
+                1;
+
+            letter-spacing:
+                0.07em;
+        }
+
+
+        .page06-brand-millionaires {
+            margin:
+                8px 0 0;
+
+            color:
+                var(--page06-gold);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                clamp(0.72rem, 1.2vw, 0.94rem);
+
+            font-weight:
+                800;
+
+            line-height:
+                1;
+
+            letter-spacing:
+                0.22em;
+        }
+
+
+        .page06-brand-guided {
+            margin:
+                10px 0 0;
+
+            color:
+                var(--page06-teal);
+
+            font-size:
+                0.76rem;
+
+            font-weight:
+                850;
+
+            line-height:
+                1;
+
+            letter-spacing:
+                0.24em;
+        }
+
+
+        .page06-brand-signature {
+            margin:
+                9px 0 0;
+
+            color:
+                #b8b4a9;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                0.72rem;
+
+            font-weight:
+                700;
+
+            letter-spacing:
+                0.04em;
+        }
+
+
+        /* ==============================================================
+           INTEGRATED JOURNEY COUNTER
+        ============================================================== */
+
+        .page06-brand-progress {
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                flex-end;
+
+            justify-content:
+                center;
+
+            min-width:
+                150px;
+
+            text-align:
+                right;
+        }
+
+
+        .page06-brand-progress-label {
+            margin:
+                0 0 7px;
+
+            color:
+                var(--page06-muted);
+
+            font-size:
+                0.63rem;
+
+            font-weight:
+                800;
+
+            line-height:
+                1;
+
+            letter-spacing:
+                0.18em;
+        }
+
+
+        .page06-brand-progress-number {
+            margin:
+                0;
+
+            color:
+                var(--page06-gold);
+
+            font-size:
+                0.86rem;
+
+            font-weight:
+                850;
+
+            line-height:
+                1;
+
+            letter-spacing:
+                0.16em;
+        }
+
+
+        .page06-brand-progress-line {
+            width:
+                110px;
+
+            height:
+                2px;
+
+            margin:
+                10px 0 0;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--page06-teal),
+                    var(--page06-gold)
+                );
+        }
+
+
+        /* ==============================================================
+           JOURNEY INDICATOR
+        ============================================================== */
+
+        .page06 .journey-indicator {
+            display:
+                none;
+        }
+
+
+        /* ==============================================================
+           FOUR FORCES HERO
+        ============================================================== */
+
+        .page06-four-forces {
+            position:
+                relative;
+
+            padding:
+                78px 0 120px;
+
+            overflow:
+                hidden;
+
+            background:
+                radial-gradient(
+                    circle at 72% 45%,
+                    rgba(33, 199, 183, 0.10),
+                    transparent 30rem
                 ),
                 radial-gradient(
-                    circle at 18% 72%,
-                    rgba(215, 181, 109, 0.08),
+                    circle at 20% 70%,
+                    rgba(215, 181, 109, 0.07),
                     transparent 24rem
                 );
         }
 
+
+        .page06-four-forces::before {
+            content:
+                "";
+
+            position:
+                absolute;
+
+            top:
+                0;
+
+            left:
+                50%;
+
+            width:
+                900px;
+
+            height:
+                500px;
+
+            transform:
+                translateX(-50%);
+
+            pointer-events:
+                none;
+
+            background:
+                radial-gradient(
+                    ellipse at center,
+                    rgba(33, 199, 183, 0.07),
+                    transparent 68%
+                );
+        }
+
+
         .page06-four-forces-inner {
-            position: relative;
-            z-index: 1;
-            display: grid;
+            position:
+                relative;
+
+            z-index:
+                1;
+
+            display:
+                grid;
+
             grid-template-columns:
                 minmax(320px, 0.82fr)
                 minmax(520px, 1.18fr);
-            gap: 70px;
-            align-items: center;
+
+            gap:
+                70px;
+
+            align-items:
+                center;
+
+            width:
+                min(1180px, calc(100% - 48px));
+
+            margin:
+                0 auto;
         }
+
 
         .page06-four-forces-copy {
-            text-align: left;
+            text-align:
+                left;
         }
+
 
         .page06-four-forces-eyebrow {
-            margin: 0 0 24px;
-            color: #d7b56d;
-            font-size: 0.78rem;
-            font-weight: 800;
-            letter-spacing: 0.24em;
-            text-transform: uppercase;
+            margin:
+                0 0 24px;
+
+            color:
+                var(--page06-gold);
+
+            font-size:
+                0.78rem;
+
+            font-weight:
+                850;
+
+            letter-spacing:
+                0.24em;
+
+            text-transform:
+                uppercase;
         }
+
 
         .page06-four-forces-title {
-            margin: 0;
-            color: #f5f2e9;
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(3.5rem, 6.4vw, 7rem);
-            font-weight: 800;
-            line-height: 0.91;
-            letter-spacing: -0.045em;
+            margin:
+                0;
+
+            color:
+                var(--page06-white);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                clamp(3.4rem, 6.2vw, 6.8rem);
+
+            font-weight:
+                800;
+
+            line-height:
+                0.91;
+
+            letter-spacing:
+                -0.045em;
         }
+
 
         .page06-four-forces-title span {
-            display: block;
+            display:
+                block;
         }
+
 
         .page06-four-forces-title .accent {
-            color: #ead39f;
+            color:
+                var(--page06-gold-soft);
         }
+
 
         .page06-four-forces-subtitle {
-            margin: 34px 0 0;
-            color: #dddcd4;
-            font-size: clamp(1.15rem, 1.8vw, 1.45rem);
-            font-weight: 650;
-            line-height: 1.7;
+            margin:
+                34px 0 0;
+
+            color:
+                var(--page06-text);
+
+            font-size:
+                clamp(1.05rem, 1.8vw, 1.4rem);
+
+            font-weight:
+                650;
+
+            line-height:
+                1.7;
         }
+
 
         .page06-four-forces-subtitle-en {
-            margin: 10px 0 0;
-            color: #7de3d9;
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 0.16em;
+            margin:
+                10px 0 0;
+
+            color:
+                var(--page06-teal-soft);
+
+            font-size:
+                0.74rem;
+
+            font-weight:
+                850;
+
+            letter-spacing:
+                0.16em;
         }
+
 
         .page06-force-line {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 30px;
+            display:
+                flex;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                10px;
+
+            margin:
+                30px 0 0;
         }
+
 
         .page06-force-word {
-            color: #ead39f;
-            font-size: 0.78rem;
-            font-weight: 850;
-            letter-spacing: 0.14em;
+            color:
+                var(--page06-gold-soft);
+
+            font-size:
+                0.77rem;
+
+            font-weight:
+                850;
+
+            letter-spacing:
+                0.14em;
         }
+
 
         .page06-force-dot {
-            color: #21c7b7;
-            font-weight: 900;
+            color:
+                var(--page06-teal);
+
+            font-weight:
+                900;
         }
+
+
+        /* ==============================================================
+           FOUR FORCES WHEEL
+        ============================================================== */
 
         .page06-force-wheel {
-            position: relative;
-            width: min(620px, 100%);
-            aspect-ratio: 1;
-            margin: 0 auto;
+            position:
+                relative;
+
+            width:
+                min(620px, 100%);
+
+            aspect-ratio:
+                1;
+
+            margin:
+                0 auto;
         }
 
+
         .page06-force-wheel::before {
-            content: "";
-            position: absolute;
-            inset: 8%;
-            border: 1px solid rgba(215, 181, 109, 0.18);
-            border-radius: 50%;
+            content:
+                "";
+
+            position:
+                absolute;
+
+            inset:
+                8%;
+
+            border:
+                1px solid rgba(215, 181, 109, 0.18);
+
+            border-radius:
+                50%;
+
             box-shadow:
                 0 0 0 28px rgba(33, 199, 183, 0.025),
                 0 0 0 58px rgba(215, 181, 109, 0.018);
         }
 
+
         .page06-force-wheel::after {
-            content: "";
-            position: absolute;
-            inset: 18%;
-            border: 1px solid rgba(33, 199, 183, 0.10);
-            border-radius: 50%;
+            content:
+                "";
+
+            position:
+                absolute;
+
+            inset:
+                18%;
+
+            border:
+                1px solid rgba(33, 199, 183, 0.10);
+
+            border-radius:
+                50%;
         }
 
+
+        .page06-force-connector {
+            position:
+                absolute;
+
+            inset:
+                25%;
+
+            z-index:
+                1;
+
+            border:
+                1px dashed rgba(215, 181, 109, 0.20);
+
+            border-radius:
+                50%;
+        }
+
+
         .page06-force-node {
-            position: absolute;
-            width: 30%;
-            aspect-ratio: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 50%;
+            position:
+                absolute;
+
+            width:
+                30%;
+
+            aspect-ratio:
+                1;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            border-radius:
+                50%;
+
             background:
                 radial-gradient(
                     circle at 35% 30%,
                     rgba(255, 255, 255, 0.08),
                     transparent 58%
                 ),
-                rgba(4, 19, 19, 0.90);
+                rgba(4, 19, 19, 0.92);
+
             box-shadow:
                 0 18px 45px rgba(0, 0, 0, 0.32);
-            z-index: 4;
+
+            z-index:
+                4;
         }
+
 
         .page06-force-node.money {
-            top: 1%;
-            left: 35%;
-            border-color: rgba(215, 181, 109, 0.30);
+            top:
+                1%;
+
+            left:
+                35%;
+
+            border-color:
+                rgba(215, 181, 109, 0.30);
         }
+
 
         .page06-force-node.people {
-            top: 35%;
-            right: 1%;
-            border-color: rgba(33, 199, 183, 0.25);
+            top:
+                35%;
+
+            right:
+                1%;
+
+            border-color:
+                rgba(33, 199, 183, 0.25);
         }
+
 
         .page06-force-node.time {
-            bottom: 1%;
-            left: 35%;
-            border-color: rgba(215, 181, 109, 0.25);
+            bottom:
+                1%;
+
+            left:
+                35%;
+
+            border-color:
+                rgba(215, 181, 109, 0.25);
         }
+
 
         .page06-force-node.tasks {
-            top: 35%;
-            left: 1%;
-            border-color: rgba(33, 199, 183, 0.25);
+            top:
+                35%;
+
+            left:
+                1%;
+
+            border-color:
+                rgba(33, 199, 183, 0.25);
         }
 
+
         .page06-force-icon {
-            display: grid;
-            width: 52px;
-            height: 52px;
-            place-items: center;
-            margin-bottom: 12px;
-            border: 1px solid rgba(215, 181, 109, 0.35);
-            border-radius: 50%;
-            color: #ead39f;
-            font-size: 1.45rem;
-            font-weight: 800;
-            background: rgba(215, 181, 109, 0.06);
+            display:
+                grid;
+
+            width:
+                52px;
+
+            height:
+                52px;
+
+            place-items:
+                center;
+
+            margin:
+                0 0 12px;
+
+            border:
+                1px solid rgba(215, 181, 109, 0.35);
+
+            border-radius:
+                50%;
+
+            color:
+                var(--page06-gold-soft);
+
+            font-size:
+                1.35rem;
+
+            font-weight:
+                850;
+
+            background:
+                rgba(215, 181, 109, 0.06);
         }
+
 
         .page06-force-node.people .page06-force-icon,
         .page06-force-node.tasks .page06-force-icon {
-            color: #7de3d9;
-            border-color: rgba(33, 199, 183, 0.32);
-            background: rgba(33, 199, 183, 0.06);
+            color:
+                var(--page06-teal-soft);
+
+            border-color:
+                rgba(33, 199, 183, 0.32);
+
+            background:
+                rgba(33, 199, 183, 0.06);
         }
+
 
         .page06-force-node-title {
-            margin: 0;
-            color: #f5f2e9;
-            font-size: 0.92rem;
-            font-weight: 850;
-            letter-spacing: 0.14em;
+            margin:
+                0;
+
+            color:
+                var(--page06-white);
+
+            font-size:
+                0.9rem;
+
+            font-weight:
+                850;
+
+            letter-spacing:
+                0.14em;
         }
+
 
         .page06-force-node-ta {
-            margin: 5px 0 0;
-            color: #a8b0aa;
-            font-size: 0.78rem;
-            font-weight: 600;
+            margin:
+                5px 0 0;
+
+            color:
+                var(--page06-muted);
+
+            font-size:
+                0.76rem;
+
+            font-weight:
+                600;
         }
 
+
         .page06-force-core {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            z-index: 6;
-            width: 39%;
-            aspect-ratio: 1;
-            transform: translate(-50%, -50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(215, 181, 109, 0.68);
-            border-radius: 50%;
+            position:
+                absolute;
+
+            top:
+                50%;
+
+            left:
+                50%;
+
+            z-index:
+                6;
+
+            width:
+                39%;
+
+            aspect-ratio:
+                1;
+
+            transform:
+                translate(-50%, -50%);
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid rgba(215, 181, 109, 0.68);
+
+            border-radius:
+                50%;
+
             background:
                 radial-gradient(
                     circle at 50% 35%,
@@ -277,377 +976,1300 @@
                     transparent 58%
                 ),
                 #071b1b;
+
             box-shadow:
                 0 0 0 10px rgba(215, 181, 109, 0.035),
                 0 0 45px rgba(33, 199, 183, 0.10),
                 0 24px 65px rgba(0, 0, 0, 0.42);
-            text-align: center;
+
+            text-align:
+                center;
         }
+
 
         .page06-force-core-crown {
-            margin-bottom: 13px;
-            color: #d7b56d;
-            font-size: 1.5rem;
+            margin:
+                0 0 12px;
+
+            color:
+                var(--page06-gold);
+
+            font-size:
+                1.45rem;
         }
+
 
         .page06-force-core-brand {
-            margin: 0;
-            color: #f5f2e9;
-            font-size: 0.68rem;
-            font-weight: 850;
-            letter-spacing: 0.25em;
+            margin:
+                0;
+
+            color:
+                var(--page06-white);
+
+            font-size:
+                0.67rem;
+
+            font-weight:
+                850;
+
+            letter-spacing:
+                0.24em;
         }
+
 
         .page06-force-core-title {
-            margin: 9px 0 0;
-            color: #ead39f;
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(1.25rem, 2.4vw, 2rem);
-            font-weight: 800;
-            line-height: 1.02;
+            margin:
+                9px 0 0;
+
+            color:
+                var(--page06-gold-soft);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                clamp(1.2rem, 2.4vw, 2rem);
+
+            font-weight:
+                800;
+
+            line-height:
+                1.02;
         }
+
 
         .page06-force-core-subtitle {
-            margin: 14px 0 0;
-            color: #7de3d9;
-            font-size: 0.56rem;
-            font-weight: 800;
-            letter-spacing: 0.15em;
-            line-height: 1.65;
+            margin:
+                14px 0 0;
+
+            color:
+                var(--page06-teal-soft);
+
+            font-size:
+                0.55rem;
+
+            font-weight:
+                850;
+
+            letter-spacing:
+                0.14em;
+
+            line-height:
+                1.65;
         }
 
-        .page06-force-connector {
-            position: absolute;
-            inset: 25%;
-            z-index: 1;
-            border: 1px dashed rgba(215, 181, 109, 0.20);
-            border-radius: 50%;
-            animation: page06Orbit 24s linear infinite;
-        }
 
-        @keyframes page06Orbit {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
+        /* ==============================================================
+           PAIN OF IMBALANCE
+        ============================================================== */
 
         .page06-pain {
-            position: relative;
-            padding: 100px 0;
+            position:
+                relative;
+
+            padding:
+                105px 0;
+
+            border-top:
+                1px solid rgba(255, 255, 255, 0.055);
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.055);
+
             background:
                 linear-gradient(
                     180deg,
-                    rgba(4, 19, 19, 0.72),
-                    rgba(7, 27, 27, 0.98)
+                    rgba(4, 19, 19, 0.70),
+                    rgba(7, 27, 27, 0.96)
                 );
-            border-top: 1px solid rgba(255,255,255,0.06);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
+
 
         .page06-pain-header {
-            max-width: 760px;
-            margin: 0 auto 55px;
-            text-align: center;
+            width:
+                min(900px, calc(100% - 48px));
+
+            margin:
+                0 auto 58px;
+
+            text-align:
+                center;
         }
 
-        .page06-pain-title {
-            margin: 0;
-            color: #f5f2e9;
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(2rem, 4vw, 3.6rem);
-            line-height: 1.05;
-        }
 
         .page06-pain-title-ta {
-            margin: 0 0 10px;
-            color: #ead39f;
-            font-size: clamp(1.3rem, 2.4vw, 1.8rem);
-            font-weight: 800;
+            margin:
+                0 0 10px;
+
+            color:
+                var(--page06-gold-soft);
+
+            font-size:
+                clamp(1.25rem, 2.4vw, 1.8rem);
+
+            font-weight:
+                800;
+
+            line-height:
+                1.6;
         }
+
+
+        .page06-pain-title {
+            margin:
+                0;
+
+            color:
+                var(--page06-white);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                clamp(2rem, 4vw, 3.6rem);
+
+            line-height:
+                1.05;
+        }
+
 
         .page06-pain-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 18px;
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap:
+                18px;
+
+            width:
+                min(1480px, calc(100% - 96px));
+
+            margin:
+                0 auto;
         }
+
 
         .page06-pain-card {
-            min-height: 220px;
-            padding: 28px 22px;
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 20px;
-            background: rgba(255,255,255,0.025);
-            text-align: center;
+            position:
+                relative;
+
+            min-height:
+                220px;
+
+            padding:
+                34px 24px 30px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.075);
+
+            border-radius:
+                20px;
+
+            background:
+                rgba(255, 255, 255, 0.022);
+
+            text-align:
+                center;
         }
+
+
+        .page06-pain-card::before {
+            content:
+                "";
+
+            position:
+                absolute;
+
+            top:
+                0;
+
+            left:
+                0;
+
+            right:
+                0;
+
+            height:
+                2px;
+
+            border-radius:
+                20px 20px 0 0;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--page06-gold),
+                    var(--page06-teal)
+                );
+        }
+
 
         .page06-pain-icon {
-            display: grid;
-            width: 52px;
-            height: 52px;
-            margin: 0 auto 20px;
-            place-items: center;
-            border: 1px solid rgba(215,181,109,0.30);
-            border-radius: 50%;
-            color: #ead39f;
-            font-size: 1.3rem;
+            display:
+                grid;
+
+            width:
+                52px;
+
+            height:
+                52px;
+
+            margin:
+                0 auto 22px;
+
+            place-items:
+                center;
+
+            border:
+                1px solid rgba(215, 181, 109, 0.28);
+
+            border-radius:
+                50%;
+
+            color:
+                var(--page06-gold-soft);
+
+            font-size:
+                1.25rem;
         }
+
 
         .page06-pain-ta {
-            margin: 0 0 9px;
-            color: #f5f2e9;
-            font-size: 1.05rem;
-            font-weight: 800;
-            line-height: 1.55;
+            margin:
+                0 0 10px;
+
+            color:
+                var(--page06-white);
+
+            font-size:
+                1rem;
+
+            font-weight:
+                800;
+
+            line-height:
+                1.55;
         }
+
 
         .page06-pain-en {
-            margin: 0;
-            color: #a8b0aa;
-            font-size: 0.82rem;
-            line-height: 1.65;
+            margin:
+                0;
+
+            color:
+                var(--page06-muted);
+
+            font-size:
+                0.82rem;
+
+            line-height:
+                1.65;
         }
+
 
         .page06-pain-truth {
-            margin: 45px auto 0;
-            color: #e16b68;
-            font-size: clamp(1rem, 1.7vw, 1.25rem);
-            font-weight: 750;
-            text-align: center;
+            width:
+                min(900px, calc(100% - 48px));
+
+            margin:
+                48px auto 0;
+
+            color:
+                var(--page06-red);
+
+            font-size:
+                clamp(1rem, 1.7vw, 1.28rem);
+
+            font-weight:
+                800;
+
+            line-height:
+                1.7;
+
+            text-align:
+                center;
         }
+
 
         .page06-pain-truth-en {
-            margin: 8px 0 0;
-            color: #a8b0aa;
-            font-size: 0.7rem;
-            font-weight: 800;
-            letter-spacing: 0.13em;
-            text-align: center;
+            margin:
+                8px 0 0;
+
+            color:
+                var(--page06-muted);
+
+            font-size:
+                0.69rem;
+
+            font-weight:
+                850;
+
+            letter-spacing:
+                0.13em;
+
+            text-align:
+                center;
         }
+
+
+        /* ==============================================================
+           PATH TO FREEDOM
+        ============================================================== */
 
         .page06-path {
-            padding: 110px 0;
+            position:
+                relative;
+
+            padding:
+                110px 0;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.055);
         }
+
 
         .page06-path-header {
-            max-width: 760px;
-            margin: 0 auto 55px;
-            text-align: center;
+            width:
+                min(900px, calc(100% - 48px));
+
+            margin:
+                0 auto 58px;
+
+            text-align:
+                center;
         }
+
 
         .page06-path-title-ta {
-            margin: 0 0 9px;
-            color: #f5f2e9;
-            font-size: clamp(1.4rem, 2.5vw, 2rem);
-            font-weight: 800;
+            margin:
+                0 0 9px;
+
+            color:
+                var(--page06-white);
+
+            font-size:
+                clamp(1.4rem, 2.5vw, 2rem);
+
+            font-weight:
+                800;
+
+            line-height:
+                1.5;
         }
+
 
         .page06-path-title-en {
-            margin: 0;
-            color: #d7b56d;
-            font-size: 0.78rem;
-            font-weight: 850;
-            letter-spacing: 0.16em;
+            margin:
+                0;
+
+            color:
+                var(--page06-gold);
+
+            font-size:
+                0.78rem;
+
+            font-weight:
+                850;
+
+            letter-spacing:
+                0.16em;
         }
+
 
         .page06-path-grid {
-            display: grid;
-            grid-template-columns: repeat(6, minmax(0, 1fr));
-            gap: 12px;
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(6, minmax(0, 1fr));
+
+            gap:
+                12px;
+
+            width:
+                min(1480px, calc(100% - 96px));
+
+            margin:
+                0 auto;
         }
+
 
         .page06-path-card {
-            position: relative;
-            min-height: 230px;
-            padding: 25px 16px;
-            border: 1px solid rgba(255,255,255,0.075);
-            border-radius: 18px;
-            background: rgba(255,255,255,0.025);
-            text-align: center;
+            position:
+                relative;
+
+            min-height:
+                245px;
+
+            padding:
+                25px 16px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.07);
+
+            border-radius:
+                18px;
+
+            background:
+                rgba(255, 255, 255, 0.022);
+
+            text-align:
+                center;
         }
+
 
         .page06-path-number {
-            color: #d7b56d;
-            font-size: 0.66rem;
-            font-weight: 850;
-            letter-spacing: 0.12em;
+            color:
+                var(--page06-gold);
+
+            font-size:
+                0.66rem;
+
+            font-weight:
+                850;
+
+            letter-spacing:
+                0.12em;
         }
+
 
         .page06-path-icon {
-            display: grid;
-            width: 48px;
-            height: 48px;
-            margin: 18px auto;
-            place-items: center;
-            border: 1px solid rgba(33,199,183,0.25);
-            border-radius: 50%;
-            color: #7de3d9;
-            font-size: 1.2rem;
+            display:
+                grid;
+
+            width:
+                48px;
+
+            height:
+                48px;
+
+            margin:
+                18px auto;
+
+            place-items:
+                center;
+
+            border:
+                1px solid rgba(33, 199, 183, 0.25);
+
+            border-radius:
+                50%;
+
+            color:
+                var(--page06-teal-soft);
+
+            font-size:
+                1.15rem;
         }
+
 
         .page06-path-card h3 {
-            margin: 0 0 8px;
-            color: #f5f2e9;
-            font-size: 0.82rem;
-            font-weight: 850;
-            letter-spacing: 0.08em;
+            margin:
+                0 0 9px;
+
+            color:
+                var(--page06-white);
+
+            font-size:
+                0.79rem;
+
+            font-weight:
+                850;
+
+            line-height:
+                1.35;
+
+            letter-spacing:
+                0.08em;
         }
+
 
         .page06-path-card p {
-            margin: 0;
-            color: #a8b0aa;
-            font-size: 0.75rem;
-            line-height: 1.65;
+            margin:
+                0;
+
+            color:
+                var(--page06-muted);
+
+            font-size:
+                0.74rem;
+
+            line-height:
+                1.65;
         }
+
 
         .page06-path-card strong {
-            display: block;
-            margin-top: 16px;
-            color: #ead39f;
-            font-size: 0.68rem;
-            letter-spacing: 0.08em;
+            display:
+                block;
+
+            margin:
+                17px 0 0;
+
+            color:
+                var(--page06-gold-soft);
+
+            font-size:
+                0.67rem;
+
+            letter-spacing:
+                0.08em;
         }
+
+
+        /* ==============================================================
+           180-DAY TRANSFORMATION
+        ============================================================== */
+
+        .page06-transformation {
+            position:
+                relative;
+
+            padding:
+                110px 0;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.055);
+
+            background:
+                rgba(255, 255, 255, 0.012);
+        }
+
+
+        .page06-transformation-header {
+            width:
+                min(900px, calc(100% - 48px));
+
+            margin:
+                0 auto 58px;
+
+            text-align:
+                center;
+        }
+
+
+        .page06-transformation-title-ta {
+            margin:
+                0 0 9px;
+
+            color:
+                var(--page06-white);
+
+            font-size:
+                clamp(1.45rem, 2.7vw, 2.15rem);
+
+            font-weight:
+                800;
+
+            line-height:
+                1.5;
+        }
+
+
+        .page06-transformation-title-en {
+            margin:
+                0;
+
+            color:
+                var(--page06-gold);
+
+            font-size:
+                0.78rem;
+
+            font-weight:
+                850;
+
+            letter-spacing:
+                0.16em;
+        }
+
+
+        .page06-transformation-grid {
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(6, minmax(0, 1fr));
+
+            gap:
+                12px;
+
+            width:
+                min(1480px, calc(100% - 96px));
+
+            margin:
+                0 auto;
+        }
+
+
+        .page06-transformation-card {
+            min-height:
+                265px;
+
+            padding:
+                28px 18px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.07);
+
+            border-radius:
+                18px;
+
+            background:
+                rgba(255, 255, 255, 0.022);
+
+            text-align:
+                center;
+        }
+
+
+        .page06-transformation-month {
+            color:
+                var(--page06-gold);
+
+            font-size:
+                0.65rem;
+
+            font-weight:
+                850;
+
+            letter-spacing:
+                0.12em;
+        }
+
+
+        .page06-transformation-icon {
+            display:
+                grid;
+
+            width:
+                48px;
+
+            height:
+                48px;
+
+            margin:
+                18px auto;
+
+            place-items:
+                center;
+
+            border:
+                1px solid rgba(33, 199, 183, 0.24);
+
+            border-radius:
+                50%;
+
+            color:
+                var(--page06-teal-soft);
+
+            font-size:
+                1.1rem;
+        }
+
+
+        .page06-transformation-card h3 {
+            margin:
+                0 0 10px;
+
+            color:
+                var(--page06-white);
+
+            font-size:
+                0.78rem;
+
+            font-weight:
+                850;
+
+            line-height:
+                1.4;
+
+            letter-spacing:
+                0.06em;
+        }
+
+
+        .page06-transformation-card p {
+            margin:
+                0;
+
+            color:
+                var(--page06-muted);
+
+            font-size:
+                0.75rem;
+
+            line-height:
+                1.7;
+        }
+
+
+        /* ==============================================================
+           FINAL TRANSITION
+        ============================================================== */
 
         .page06-final {
-            position: relative;
-            padding: 120px 0 130px;
-            border-top: 1px solid rgba(255,255,255,0.06);
+            position:
+                relative;
+
+            padding:
+                125px 0 135px;
+
             background:
                 radial-gradient(
-                    circle at 50% 50%,
-                    rgba(33,199,183,0.12),
-                    transparent 30rem
+                    circle at 50% 40%,
+                    rgba(33, 199, 183, 0.11),
+                    transparent 31rem
                 ),
                 #041313;
-            text-align: center;
+
+            text-align:
+                center;
         }
+
 
         .page06-final-title-ta {
-            margin: 0 0 12px;
-            color: #f5f2e9;
-            font-size: clamp(1.7rem, 3.5vw, 2.7rem);
-            font-weight: 800;
+            width:
+                min(1300px, calc(100% - 48px));
+
+            margin:
+                0 auto 12px;
+
+            color:
+                var(--page06-white);
+
+            font-size:
+                clamp(1.7rem, 3.5vw, 2.8rem);
+
+            font-weight:
+                800;
+
+            line-height:
+                1.55;
         }
+
 
         .page06-final-title-en {
-            margin: 0 0 38px;
-            color: #d7b56d;
-            font-size: 0.78rem;
-            font-weight: 850;
-            letter-spacing: 0.16em;
+            margin:
+                0 0 38px;
+
+            color:
+                var(--page06-gold);
+
+            font-size:
+                0.78rem;
+
+            font-weight:
+                850;
+
+            letter-spacing:
+                0.16em;
         }
+
 
         .page06-final-statement {
-            max-width: 700px;
-            margin: 0 auto 38px;
-            color: #dddcd4;
-            font-size: clamp(1.05rem, 1.8vw, 1.3rem);
-            line-height: 1.8;
+            width:
+                min(850px, calc(100% - 48px));
+
+            margin:
+                0 auto 40px;
+
+            color:
+                var(--page06-text);
+
+            font-size:
+                clamp(1.05rem, 1.8vw, 1.3rem);
+
+            line-height:
+                1.85;
         }
+
 
         .page06-final-statement strong {
-            color: #f5f2e9;
+            color:
+                var(--page06-white);
         }
+
 
         .page06-final-force-line {
-            margin: 0 0 38px;
-            color: #7de3d9;
-            font-size: 0.75rem;
-            font-weight: 850;
-            letter-spacing: 0.17em;
+            margin:
+                0 0 40px;
+
+            color:
+                var(--page06-teal-soft);
+
+            font-size:
+                0.75rem;
+
+            font-weight:
+                850;
+
+            line-height:
+                1.8;
+
+            letter-spacing:
+                0.17em;
         }
 
-        .page06 .primary-cta {
-            min-width: 300px;
+
+        /* ==============================================================
+           PAGE 06 NAVIGATOR
+
+           IMPORTANT:
+
+           page06.js v3.0 disables this button while the completion
+           email is being attempted.
+
+           Browser default disabled styling MUST NOT turn it grey.
+
+           Therefore both normal and disabled/loading states are
+           explicitly locked to the CTM teal treatment.
+        ============================================================== */
+
+        .page06 .primary-cta,
+        .page06 .primary-cta:visited {
+            display:
+                inline-flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                4px;
+
+            min-width:
+                300px;
+
+            min-height:
+                68px;
+
+            padding:
+                15px 30px;
+
+            border:
+                1px solid rgba(125, 227, 217, 0.55) !important;
+
+            border-radius:
+                12px;
+
+            outline:
+                none;
+
+            color:
+                #ffffff !important;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #119c90 0%,
+                    #087d74 100%
+                ) !important;
+
+            box-shadow:
+                0 12px 30px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12);
+
+            cursor:
+                pointer;
+
+            opacity:
+                1 !important;
+
+            filter:
+                none !important;
+
+            transition:
+                transform 160ms ease,
+                box-shadow 160ms ease,
+                background 160ms ease;
         }
 
-        @media (max-width: 1000px) {
+
+        .page06 .primary-cta:hover {
+            transform:
+                translateY(-2px);
+
+            color:
+                #ffffff !important;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #18ad9f 0%,
+                    #0a8d82 100%
+                ) !important;
+
+            box-shadow:
+                0 16px 34px rgba(0, 0, 0, 0.30),
+                0 0 24px rgba(33, 199, 183, 0.10);
+        }
+
+
+        .page06 .primary-cta:active {
+            transform:
+                translateY(0);
+        }
+
+
+        .page06 .primary-cta:focus-visible {
+            outline:
+                3px solid rgba(125, 227, 217, 0.45);
+
+            outline-offset:
+                4px;
+        }
+
+
+        /* ==============================================================
+           CRITICAL FIX:
+
+           page06.js v3.0 executes:
+
+               button.disabled = true;
+
+           During the completion-email attempt.
+
+           Keep the button TEAL rather than allowing the browser's
+           disabled-button grey treatment.
+        ============================================================== */
+
+        .page06 .primary-cta:disabled,
+        .page06 .primary-cta[disabled],
+        .page06 .primary-cta.is-loading {
+            color:
+                #ffffff !important;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #119c90 0%,
+                    #087d74 100%
+                ) !important;
+
+            border-color:
+                rgba(125, 227, 217, 0.55) !important;
+
+            opacity:
+                1 !important;
+
+            filter:
+                none !important;
+
+            cursor:
+                wait;
+
+            box-shadow:
+                0 12px 30px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+
+
+        .page06 .primary-cta .cta-ta {
+            color:
+                #ffffff !important;
+
+            font-size:
+                1rem;
+
+            font-weight:
+                800;
+
+            line-height:
+                1.35;
+        }
+
+
+        .page06 .primary-cta .cta-en {
+            color:
+                rgba(255, 255, 255, 0.82) !important;
+
+            font-size:
+                0.62rem;
+
+            font-weight:
+                850;
+
+            line-height:
+                1.3;
+
+            letter-spacing:
+                0.09em;
+        }
+
+
+        /* ==============================================================
+           RESPONSIVE — TABLET
+        ============================================================== */
+
+        @media (max-width: 1100px) {
 
             .page06-four-forces-inner {
-                grid-template-columns: 1fr;
-                gap: 55px;
+                grid-template-columns:
+                    1fr;
+
+                gap:
+                    60px;
             }
+
 
             .page06-four-forces-copy {
-                text-align: center;
+                text-align:
+                    center;
             }
+
 
             .page06-force-line {
-                justify-content: center;
+                justify-content:
+                    center;
             }
+
 
             .page06-pain-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                width:
+                    min(900px, calc(100% - 48px));
             }
 
-            .page06-path-grid {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
+
+            .page06-path-grid,
+            .page06-transformation-grid {
+                grid-template-columns:
+                    repeat(3, minmax(0, 1fr));
+
+                width:
+                    min(900px, calc(100% - 48px));
             }
 
         }
+
+
+        /* ==============================================================
+           RESPONSIVE — MOBILE
+        ============================================================== */
 
         @media (max-width: 680px) {
 
-            .page06-four-forces {
-                padding: 70px 0 80px;
+            .page06-brand-header {
+                padding:
+                    24px 18px 20px;
             }
+
+
+            .page06-brand-header-inner {
+                align-items:
+                    flex-start;
+            }
+
+
+            .page06-brand-identity {
+                gap:
+                    12px;
+            }
+
+
+            .page06-brand-logo,
+            .page06-brand-logo img {
+                width:
+                    50px;
+
+                height:
+                    50px;
+            }
+
+
+            .page06-brand-name {
+                font-size:
+                    1.25rem;
+            }
+
+
+            .page06-brand-millionaires {
+                font-size:
+                    0.56rem;
+
+                letter-spacing:
+                    0.16em;
+            }
+
+
+            .page06-brand-guided {
+                font-size:
+                    0.54rem;
+
+                letter-spacing:
+                    0.17em;
+            }
+
+
+            .page06-brand-signature {
+                font-size:
+                    0.55rem;
+            }
+
+
+            .page06-brand-progress {
+                min-width:
+                    auto;
+            }
+
+
+            .page06-brand-progress-label {
+                font-size:
+                    0.5rem;
+            }
+
+
+            .page06-brand-progress-number {
+                font-size:
+                    0.68rem;
+            }
+
+
+            .page06-brand-progress-line {
+                width:
+                    70px;
+            }
+
+
+            .page06-four-forces {
+                padding:
+                    60px 0 80px;
+            }
+
 
             .page06-four-forces-inner {
-                grid-template-columns: 1fr;
+                width:
+                    calc(100% - 28px);
             }
+
 
             .page06-four-forces-title {
-                font-size: clamp(3rem, 15vw, 5rem);
+                font-size:
+                    clamp(3rem, 15vw, 5rem);
             }
+
 
             .page06-force-wheel {
-                width: min(500px, 100%);
+                width:
+                    min(500px, 100%);
             }
+
 
             .page06-force-node {
-                width: 34%;
+                width:
+                    34%;
             }
+
 
             .page06-force-core {
-                width: 43%;
+                width:
+                    43%;
             }
+
 
             .page06-force-icon {
-                width: 42px;
-                height: 42px;
-                margin-bottom: 7px;
-                font-size: 1rem;
+                width:
+                    42px;
+
+                height:
+                    42px;
+
+                margin-bottom:
+                    7px;
+
+                font-size:
+                    1rem;
             }
+
 
             .page06-force-node-title {
-                font-size: 0.68rem;
+                font-size:
+                    0.68rem;
             }
+
 
             .page06-force-node-ta {
-                font-size: 0.62rem;
+                font-size:
+                    0.61rem;
             }
 
-            .page06-pain {
-                padding: 75px 0;
+
+            .page06-pain,
+            .page06-path,
+            .page06-transformation {
+                padding:
+                    78px 0;
             }
+
 
             .page06-pain-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
+
+                width:
+                    calc(100% - 28px);
             }
 
-            .page06-path {
-                padding: 80px 0;
+
+            .page06-path-grid,
+            .page06-transformation-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                width:
+                    calc(100% - 28px);
             }
 
-            .page06-path-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
 
             .page06-final {
-                padding: 85px 0 100px;
+                padding:
+                    85px 0 100px;
+            }
+
+
+            .page06 .primary-cta {
+                width:
+                    calc(100% - 28px);
+
+                min-width:
+                    0;
+
+                max-width:
+                    420px;
+            }
+
+        }
+
+
+        /* ==============================================================
+           REDUCED MOTION
+        ============================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .page06 .primary-cta {
+                transition:
+                    none;
+            }
+
+
+            .page06 .primary-cta:hover {
+                transform:
+                    none;
             }
 
         }
@@ -659,16 +2281,9 @@
 
 <body>
 
-    <!-- ================================================================
-         FROZEN GLOBAL HEADER
-    ================================================================= -->
-
-    <div id="global-header"></div>
-
 
     <!-- ================================================================
-         PAGE 06
-         THE FOUR FORCES™
+         PAGE 06 — COMPLETE INTEGRATED EXPERIENCE
     ================================================================= -->
 
     <main
@@ -676,20 +2291,91 @@
         class="page06"
     >
 
+
         <!-- ============================================================
-             JOURNEY INDICATOR
+             INTEGRATED BRAND HEADER
+
+             This replaces the old global header.
+
+             It is deliberately INSIDE Page 06 so the background,
+             typography and visual atmosphere continue seamlessly.
         ============================================================= -->
 
-        <section
-            class="journey-indicator"
-            aria-label="Journey progress"
+        <header
+            class="page06-brand-header"
+            role="banner"
         >
 
-            <p>
-                JOURNEY 06 / 07
-            </p>
+            <div class="page06-brand-header-inner">
 
-        </section>
+
+                <!-- ====================================================
+                     BRAND IDENTITY
+                ===================================================== -->
+
+                <div class="page06-brand-identity">
+
+                    <div class="page06-brand-logo">
+
+                        <img
+                            src="../assets/logo/CTM_Mark.svg"
+                            alt="CTM PATH™ Millionaires™"
+                            loading="eager"
+                        >
+
+                    </div>
+
+
+                    <div class="page06-brand-copy">
+
+                        <div class="page06-brand-name">
+                            CTM PATH™
+                        </div>
+
+                        <div class="page06-brand-millionaires">
+                            MILLIONAIRES™
+                        </div>
+
+                        <div class="page06-brand-guided">
+                            GUIDED JOURNEY™
+                        </div>
+
+                        <div class="page06-brand-signature">
+                            Every Dream Has A Path™
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ====================================================
+                     JOURNEY STATUS
+                ===================================================== -->
+
+                <div
+                    class="page06-brand-progress"
+                    aria-label="Current journey progress"
+                >
+
+                    <span class="page06-brand-progress-label">
+                        JOURNEY
+                    </span>
+
+                    <span class="page06-brand-progress-number">
+                        06 / 07
+                    </span>
+
+                    <span
+                        class="page06-brand-progress-line"
+                        aria-hidden="true"
+                    ></span>
+
+                </div>
+
+            </div>
+
+        </header>
 
 
         <!-- ============================================================
@@ -698,13 +2384,19 @@
 
         <section class="page06-four-forces">
 
-            <div class="page06-container page06-four-forces-inner">
+            <div class="page06-four-forces-inner">
+
+
+                <!-- ====================================================
+                     HERO COPY
+                ===================================================== -->
 
                 <div class="page06-four-forces-copy">
 
                     <p class="page06-four-forces-eyebrow">
                         THE FOUR FORCES™
                     </p>
+
 
                     <h1 class="page06-four-forces-title">
 
@@ -722,23 +2414,31 @@
 
                     </h1>
 
-                    <p class="page06-four-forces-subtitle">
+
+                    <p
+                        class="page06-four-forces-subtitle"
+                        lang="ta"
+                    >
                         பணம் • மனிதர்கள் • நேரம் • பணிகள்
                     </p>
+
 
                     <p class="page06-four-forces-subtitle-en">
                         MONEY • PEOPLE • TIME • TASKS
                     </p>
 
-                    <p class="page06-four-forces-subtitle">
 
+                    <p
+                        class="page06-four-forces-subtitle"
+                        lang="ta"
+                    >
                         இந்த நான்கு சக்திகளையும்
                         <br>
                         நீங்கள் கட்டுப்படுத்தத் தொடங்கினால்,
                         <br>
                         வாழ்க்கை உங்கள் கட்டுப்பாட்டில் வரும்.
-
                     </p>
+
 
                     <div class="page06-force-line">
 
@@ -919,142 +2619,139 @@
 
         <section class="page06-pain">
 
-            <div class="page06-container">
-
-                <div class="page06-pain-header">
-
-                    <p
-                        class="page06-pain-title-ta"
-                        lang="ta"
-                    >
-                        நான்கு சக்திகளும் சமநிலையில் இல்லாதபோது...
-                    </p>
-
-                    <h2 class="page06-pain-title">
-                        THE PAIN OF IMBALANCE
-                    </h2>
-
-                </div>
-
-
-                <div class="page06-pain-grid">
-
-                    <!-- MONEY -->
-
-                    <article class="page06-pain-card">
-
-                        <div class="page06-pain-icon">
-                            ₹
-                        </div>
-
-                        <p
-                            class="page06-pain-ta"
-                            lang="ta"
-                        >
-                            பணம் போதவில்லை.
-                        </p>
-
-                        <p class="page06-pain-en">
-                            Money controls
-                            <br>
-                            your choices.
-                        </p>
-
-                    </article>
-
-
-                    <!-- PEOPLE -->
-
-                    <article class="page06-pain-card">
-
-                        <div class="page06-pain-icon">
-                            ●●
-                        </div>
-
-                        <p
-                            class="page06-pain-ta"
-                            lang="ta"
-                        >
-                            எல்லாவற்றையும்
-                            <br>
-                            நீங்களே செய்கிறீர்கள்.
-                        </p>
-
-                        <p class="page06-pain-en">
-                            You cannot
-                            <br>
-                            grow alone.
-                        </p>
-
-                    </article>
-
-
-                    <!-- TIME -->
-
-                    <article class="page06-pain-card">
-
-                        <div class="page06-pain-icon">
-                            ◷
-                        </div>
-
-                        <p
-                            class="page06-pain-ta"
-                            lang="ta"
-                        >
-                            நேரம் எப்போதும்
-                            <br>
-                            குறைவு.
-                        </p>
-
-                        <p class="page06-pain-en">
-                            Busy is
-                            <br>
-                            not freedom.
-                        </p>
-
-                    </article>
-
-
-                    <!-- TASKS -->
-
-                    <article class="page06-pain-card">
-
-                        <div class="page06-pain-icon">
-                            ✓
-                        </div>
-
-                        <p
-                            class="page06-pain-ta"
-                            lang="ta"
-                        >
-                            வேலை
-                            <br>
-                            முடிவதில்லை.
-                        </p>
-
-                        <p class="page06-pain-en">
-                            Your business
-                            <br>
-                            depends on you.
-                        </p>
-
-                    </article>
-
-                </div>
-
+            <div class="page06-pain-header">
 
                 <p
-                    class="page06-pain-truth"
+                    class="page06-pain-title-ta"
                     lang="ta"
                 >
-                    இதுதான் உங்கள் வாழ்க்கையை சோர்வடையச் செய்கிறது.
+                    நான்கு சக்திகளும் சமநிலையில் இல்லாதபோது...
                 </p>
 
-                <p class="page06-pain-truth-en">
-                    THIS IS WHAT KEEPS YOU TRAPPED.
-                </p>
+                <h2 class="page06-pain-title">
+                    THE PAIN OF IMBALANCE
+                </h2>
 
             </div>
+
+
+            <div class="page06-pain-grid">
+
+
+                <!-- MONEY -->
+
+                <article class="page06-pain-card">
+
+                    <div class="page06-pain-icon">
+                        ₹
+                    </div>
+
+                    <p
+                        class="page06-pain-ta"
+                        lang="ta"
+                    >
+                        பணம் போதவில்லை.
+                    </p>
+
+                    <p class="page06-pain-en">
+                        Money controls
+                        <br>
+                        your choices.
+                    </p>
+
+                </article>
+
+
+                <!-- PEOPLE -->
+
+                <article class="page06-pain-card">
+
+                    <div class="page06-pain-icon">
+                        ●●
+                    </div>
+
+                    <p
+                        class="page06-pain-ta"
+                        lang="ta"
+                    >
+                        எல்லாவற்றையும்
+                        <br>
+                        நீங்களே செய்கிறீர்கள்.
+                    </p>
+
+                    <p class="page06-pain-en">
+                        You cannot
+                        <br>
+                        grow alone.
+                    </p>
+
+                </article>
+
+
+                <!-- TIME -->
+
+                <article class="page06-pain-card">
+
+                    <div class="page06-pain-icon">
+                        ◷
+                    </div>
+
+                    <p
+                        class="page06-pain-ta"
+                        lang="ta"
+                    >
+                        நேரம் எப்போதும்
+                        <br>
+                        குறைவு.
+                    </p>
+
+                    <p class="page06-pain-en">
+                        Busy is
+                        <br>
+                        not freedom.
+                    </p>
+
+                </article>
+
+
+                <!-- TASKS -->
+
+                <article class="page06-pain-card">
+
+                    <div class="page06-pain-icon">
+                        ✓
+                    </div>
+
+                    <p
+                        class="page06-pain-ta"
+                        lang="ta"
+                    >
+                        வேலை
+                        <br>
+                        முடிவதில்லை.
+                    </p>
+
+                    <p class="page06-pain-en">
+                        Your business
+                        <br>
+                        depends on you.
+                    </p>
+
+                </article>
+
+            </div>
+
+
+            <p
+                class="page06-pain-truth"
+                lang="ta"
+            >
+                இதுதான் உங்கள் வாழ்க்கையை சோர்வடையச் செய்கிறது.
+            </p>
+
+            <p class="page06-pain-truth-en">
+                THIS IS WHAT KEEPS YOU TRAPPED.
+            </p>
 
         </section>
 
@@ -1065,212 +2762,209 @@
 
         <section class="page06-path">
 
-            <div class="page06-container">
+            <div class="page06-path-header">
 
-                <div class="page06-path-header">
+                <p
+                    class="page06-path-title-ta"
+                    lang="ta"
+                >
+                    சுதந்திரத்திற்கான பாதை
+                </p>
 
-                    <p
-                        class="page06-path-title-ta"
-                        lang="ta"
-                    >
-                        சுதந்திரத்திற்கான பாதை
+                <p class="page06-path-title-en">
+                    THE PATH TO FREEDOM
+                </p>
+
+            </div>
+
+
+            <div class="page06-path-grid">
+
+
+                <!-- 01 MONEY -->
+
+                <article class="page06-path-card">
+
+                    <span class="page06-path-number">
+                        01
+                    </span>
+
+                    <div class="page06-path-icon">
+                        ₹
+                    </div>
+
+                    <h3>
+                        MONEY
+                    </h3>
+
+                    <p lang="ta">
+                        சம்பாதி
+                        <br>
+                        நிர்வகி
+                        <br>
+                        பெருக்கு
                     </p>
 
-                    <p class="page06-path-title-en">
-                        THE PATH TO FREEDOM
+                    <strong>
+                        CAPACITY
+                    </strong>
+
+                </article>
+
+
+                <!-- 02 PEOPLE -->
+
+                <article class="page06-path-card">
+
+                    <span class="page06-path-number">
+                        02
+                    </span>
+
+                    <div class="page06-path-icon">
+                        ●●
+                    </div>
+
+                    <h3>
+                        PEOPLE
+                    </h3>
+
+                    <p lang="ta">
+                        இணை
+                        <br>
+                        பகிர்
+                        <br>
+                        வழிநடத்து
                     </p>
 
-                </div>
+                    <strong>
+                        LEVERAGE
+                    </strong>
+
+                </article>
 
 
-                <div class="page06-path-grid">
+                <!-- 03 TIME -->
 
-                    <!-- 01 -->
+                <article class="page06-path-card">
 
-                    <article class="page06-path-card">
+                    <span class="page06-path-number">
+                        03
+                    </span>
 
-                        <span class="page06-path-number">
-                            01
-                        </span>
+                    <div class="page06-path-icon">
+                        ◷
+                    </div>
 
-                        <div class="page06-path-icon">
-                            ₹
-                        </div>
+                    <h3>
+                        TIME
+                    </h3>
 
-                        <h3>
-                            MONEY
-                        </h3>
+                    <p lang="ta">
+                        முன்னுரிமை
+                        <br>
+                        பாதுகாத்து
+                        <br>
+                        மீட்டெடு
+                    </p>
 
-                        <p lang="ta">
-                            சம்பாதி
-                            <br>
-                            நிர்வகி
-                            <br>
-                            பெருக்கு
-                        </p>
+                    <strong>
+                        FREEDOM
+                    </strong>
 
-                        <strong>
-                            CAPACITY
-                        </strong>
-
-                    </article>
+                </article>
 
 
-                    <!-- 02 -->
+                <!-- 04 TASKS -->
 
-                    <article class="page06-path-card">
+                <article class="page06-path-card">
 
-                        <span class="page06-path-number">
-                            02
-                        </span>
+                    <span class="page06-path-number">
+                        04
+                    </span>
 
-                        <div class="page06-path-icon">
-                            ●●
-                        </div>
+                    <div class="page06-path-icon">
+                        ✓
+                    </div>
 
-                        <h3>
-                            PEOPLE
-                        </h3>
+                    <h3>
+                        TASKS
+                    </h3>
 
-                        <p lang="ta">
-                            இணை
-                            <br>
-                            பகிர்
-                            <br>
-                            வழிநடத்து
-                        </p>
+                    <p lang="ta">
+                        செய்
+                        <br>
+                        ஒப்படை
+                        <br>
+                        அமைப்பாக்கு
+                    </p>
 
-                        <strong>
-                            LEVERAGE
-                        </strong>
+                    <strong>
+                        SYSTEMS
+                    </strong>
 
-                    </article>
-
-
-                    <!-- 03 -->
-
-                    <article class="page06-path-card">
-
-                        <span class="page06-path-number">
-                            03
-                        </span>
-
-                        <div class="page06-path-icon">
-                            ◷
-                        </div>
-
-                        <h3>
-                            TIME
-                        </h3>
-
-                        <p lang="ta">
-                            முன்னுரிமை
-                            <br>
-                            பாதுகாத்து
-                            <br>
-                            மீட்டெடு
-                        </p>
-
-                        <strong>
-                            FREEDOM
-                        </strong>
-
-                    </article>
+                </article>
 
 
-                    <!-- 04 -->
+                <!-- 05 MULTIPLY -->
 
-                    <article class="page06-path-card">
+                <article class="page06-path-card">
 
-                        <span class="page06-path-number">
-                            04
-                        </span>
+                    <span class="page06-path-number">
+                        05
+                    </span>
 
-                        <div class="page06-path-icon">
-                            ✓
-                        </div>
+                    <div class="page06-path-icon">
+                        ↗
+                    </div>
 
-                        <h3>
-                            TASKS
-                        </h3>
+                    <h3>
+                        MULTIPLY
+                    </h3>
 
-                        <p lang="ta">
-                            செய்
-                            <br>
-                            ஒப்படை
-                            <br>
-                            அமைப்பாக்கு
-                        </p>
+                    <p lang="ta">
+                        மதிப்பை உருவாக்கு
+                        <br>
+                        வருமானத்தை பெருக்கு
+                        <br>
+                        தாக்கத்தை உயர்த்து
+                    </p>
 
-                        <strong>
-                            SYSTEMS
-                        </strong>
+                    <strong>
+                        SCALE
+                    </strong>
 
-                    </article>
-
-
-                    <!-- 05 -->
-
-                    <article class="page06-path-card">
-
-                        <span class="page06-path-number">
-                            05
-                        </span>
-
-                        <div class="page06-path-icon">
-                            ↗
-                        </div>
-
-                        <h3>
-                            MULTIPLY
-                        </h3>
-
-                        <p lang="ta">
-                            மதிப்பை உருவாக்கு
-                            <br>
-                            வருமானத்தை பெருக்கு
-                            <br>
-                            தாக்கத்தை உயர்த்து
-                        </p>
-
-                        <strong>
-                            SCALE
-                        </strong>
-
-                    </article>
+                </article>
 
 
-                    <!-- 06 -->
+                <!-- 06 LIFESTYLE -->
 
-                    <article class="page06-path-card">
+                <article class="page06-path-card">
 
-                        <span class="page06-path-number">
-                            06
-                        </span>
+                    <span class="page06-path-number">
+                        06
+                    </span>
 
-                        <div class="page06-path-icon">
-                            ♛
-                        </div>
+                    <div class="page06-path-icon">
+                        ♛
+                    </div>
 
-                        <h3>
-                            LIFESTYLE
-                        </h3>
+                    <h3>
+                        LIFESTYLE
+                    </h3>
 
-                        <p lang="ta">
-                            சுதந்திரம்
-                            <br>
-                            செழிப்பு
-                            <br>
-                            நோக்கம்
-                        </p>
+                    <p lang="ta">
+                        சுதந்திரம்
+                        <br>
+                        செழிப்பு
+                        <br>
+                        நோக்கம்
+                    </p>
 
-                        <strong>
-                            LEGACY
-                        </strong>
+                    <strong>
+                        LEGACY
+                    </strong>
 
-                    </article>
-
-                </div>
+                </article>
 
             </div>
 
@@ -1281,172 +2975,183 @@
              180-DAY TRANSFORMATION
         ============================================================= -->
 
-        <section class="page06-path">
+        <section class="page06-transformation">
 
-            <div class="page06-container">
+            <div class="page06-transformation-header">
 
-                <div class="page06-path-header">
+                <p
+                    class="page06-transformation-title-ta"
+                    lang="ta"
+                >
+                    180 நாள் மாற்றப் பயணம்
+                </p>
 
-                    <p
-                        class="page06-path-title-ta"
-                        lang="ta"
-                    >
-                        180 நாள் மாற்றப் பயணம்
+                <p class="page06-transformation-title-en">
+                    THE 180-DAY TRANSFORMATION™
+                </p>
+
+            </div>
+
+
+            <div class="page06-transformation-grid">
+
+
+                <!-- MONTH 1 -->
+
+                <article class="page06-transformation-card">
+
+                    <span class="page06-transformation-month">
+                        MONTH 1
+                    </span>
+
+                    <div class="page06-transformation-icon">
+                        ₹
+                    </div>
+
+                    <h3>
+                        FIX THE MONEY
+                    </h3>
+
+                    <p>
+                        Build financial
+                        <br>
+                        clarity and control.
                     </p>
 
-                    <p class="page06-path-title-en">
-                        THE 180-DAY TRANSFORMATION™
+                </article>
+
+
+                <!-- MONTH 2 -->
+
+                <article class="page06-transformation-card">
+
+                    <span class="page06-transformation-month">
+                        MONTH 2
+                    </span>
+
+                    <div class="page06-transformation-icon">
+                        ●●
+                    </div>
+
+                    <h3>
+                        BUILD THE PEOPLE
+                    </h3>
+
+                    <p>
+                        Find, delegate
+                        <br>
+                        and build your tribe.
                     </p>
 
-                </div>
+                </article>
 
 
-                <div class="page06-path-grid">
+                <!-- MONTH 3 -->
 
-                    <article class="page06-path-card">
+                <article class="page06-transformation-card">
 
-                        <span class="page06-path-number">
-                            MONTH 1
-                        </span>
+                    <span class="page06-transformation-month">
+                        MONTH 3
+                    </span>
 
-                        <div class="page06-path-icon">
-                            ₹
-                        </div>
+                    <div class="page06-transformation-icon">
+                        ◷
+                    </div>
 
-                        <h3>
-                            FIX THE MONEY
-                        </h3>
+                    <h3>
+                        RECLAIM THE TIME
+                    </h3>
 
-                        <p>
-                            Build financial
-                            <br>
-                            clarity and control.
-                        </p>
+                    <p>
+                        Prioritise, protect
+                        <br>
+                        and free your time.
+                    </p>
 
-                    </article>
-
-
-                    <article class="page06-path-card">
-
-                        <span class="page06-path-number">
-                            MONTH 2
-                        </span>
-
-                        <div class="page06-path-icon">
-                            ●●
-                        </div>
-
-                        <h3>
-                            BUILD THE PEOPLE
-                        </h3>
-
-                        <p>
-                            Find, delegate
-                            <br>
-                            and build your tribe.
-                        </p>
-
-                    </article>
+                </article>
 
 
-                    <article class="page06-path-card">
+                <!-- MONTH 4 -->
 
-                        <span class="page06-path-number">
-                            MONTH 3
-                        </span>
+                <article class="page06-transformation-card">
 
-                        <div class="page06-path-icon">
-                            ◷
-                        </div>
+                    <span class="page06-transformation-month">
+                        MONTH 4
+                    </span>
 
-                        <h3>
-                            RECLAIM THE TIME
-                        </h3>
+                    <div class="page06-transformation-icon">
+                        ✓
+                    </div>
 
-                        <p>
-                            Prioritise, protect
-                            <br>
-                            and free your time.
-                        </p>
+                    <h3>
+                        SYSTEMISE TASKS
+                    </h3>
 
-                    </article>
+                    <p>
+                        Simplify, delegate
+                        <br>
+                        and automate.
+                    </p>
 
-
-                    <article class="page06-path-card">
-
-                        <span class="page06-path-number">
-                            MONTH 4
-                        </span>
-
-                        <div class="page06-path-icon">
-                            ✓
-                        </div>
-
-                        <h3>
-                            SYSTEMISE TASKS
-                        </h3>
-
-                        <p>
-                            Simplify, delegate
-                            <br>
-                            and automate.
-                        </p>
-
-                    </article>
+                </article>
 
 
-                    <article class="page06-path-card">
+                <!-- MONTHS 5–6 -->
 
-                        <span class="page06-path-number">
-                            MONTHS 5–6
-                        </span>
+                <article class="page06-transformation-card">
 
-                        <div class="page06-path-icon">
-                            ↗
-                        </div>
+                    <span class="page06-transformation-month">
+                        MONTHS 5–6
+                    </span>
 
-                        <h3>
-                            MULTIPLY THE MACHINE
-                        </h3>
+                    <div class="page06-transformation-icon">
+                        ↗
+                    </div>
 
-                        <p>
-                            Scale systems,
-                            <br>
-                            grow income,
-                            <br>
-                            create impact.
-                        </p>
+                    <h3>
+                        MULTIPLY THE MACHINE
+                    </h3>
 
-                    </article>
+                    <p>
+                        Scale systems,
+                        <br>
+                        grow income,
+                        <br>
+                        create impact.
+                    </p>
+
+                </article>
 
 
-                    <article class="page06-path-card">
+                <!-- DESTINATION -->
 
-                        <span class="page06-path-number">
-                            DESTINATION
-                        </span>
+                <article class="page06-transformation-card">
 
-                        <div class="page06-path-icon">
-                            ♛
-                        </div>
+                    <span class="page06-transformation-month">
+                        DESTINATION
+                    </span>
 
-                        <h3>
-                            MILLIONAIRE LIFESTYLE™
-                        </h3>
+                    <div class="page06-transformation-icon">
+                        ♛
+                    </div>
 
-                        <p>
-                            Freedom.
-                            <br>
-                            Wealth.
-                            <br>
-                            Purpose.
-                            <br>
-                            Impact.
-                        </p>
+                    <h3>
+                        MILLIONAIRE
+                        <br>
+                        LIFESTYLE™
+                    </h3>
 
-                    </article>
+                    <p>
+                        Freedom.
+                        <br>
+                        Wealth.
+                        <br>
+                        Purpose.
+                        <br>
+                        Impact.
+                    </p>
 
-                </div>
+                </article>
 
             </div>
 
@@ -1459,74 +3164,87 @@
 
         <section class="page06-final">
 
-            <div class="page06-container">
+            <p
+                class="page06-final-title-ta"
+                lang="ta"
+            >
+                இன்று நீங்கள் பணத்திற்காக நேரத்தை விற்கலாம்.
+            </p>
 
-                <p
-                    class="page06-final-title-ta"
-                    lang="ta"
-                >
-                    இன்று நீங்கள் பணத்திற்காக நேரத்தை விற்கலாம்.
-                </p>
 
-                <p class="page06-final-title-en">
-                    TODAY, YOU MAY BE TRADING YOUR TIME FOR MONEY.
-                </p>
+            <p class="page06-final-title-en">
+                TODAY, YOU MAY BE TRADING YOUR TIME FOR MONEY.
+            </p>
 
-                <p class="page06-final-statement">
 
-                    அல்லது...
+            <p
+                class="page06-final-statement"
+                lang="ta"
+            >
 
-                    <br>
+                அல்லது...
 
-                    <strong>
-                        நாளை உங்கள் பணம்,
-                        மனிதர்கள்,
-                        நேரம்,
-                        அமைப்புகள்
-                        உங்களுக்காக வேலை செய்யலாம்.
-                    </strong>
+                <br><br>
 
-                    <br><br>
+                <strong>
+                    நாளை உங்கள் பணம்,
+                    மனிதர்கள்,
+                    நேரம்,
+                    அமைப்புகள்
+                    உங்களுக்காக வேலை செய்யலாம்.
+                </strong>
 
+                <br><br>
+
+                <span lang="en">
                     Or you can build a life where
                     money, people, time and systems
                     work for you.
+                </span>
 
-                </p>
-
-                <p class="page06-final-force-line">
-                    MASTER THE FOUR FORCES™
-                    <br>
-                    MONEY • PEOPLE • TIME • TASKS
-                </p>
+            </p>
 
 
-                <!-- ====================================================
-                     CRITICAL NAVIGATOR
-                     ID REQUIRED BY js/page06.js v3.0
-                ===================================================== -->
+            <p class="page06-final-force-line">
 
-                <button
-                    id="page06-next-button"
-                    class="primary-cta"
-                    type="button"
-                    aria-label="See my next step"
+                MASTER THE FOUR FORCES™
+
+                <br>
+
+                MONEY • PEOPLE • TIME • TASKS
+
+            </p>
+
+
+            <!-- ========================================================
+                 PAGE 06 NAVIGATOR
+
+                 CRITICAL CONTRACT:
+
+                 id="page06-next-button"
+
+                 This exact ID is required by page06.js v3.0.
+            ========================================================= -->
+
+            <button
+                id="page06-next-button"
+                class="primary-cta"
+                type="button"
+                aria-label="See my next step"
+            >
+
+                <span
+                    class="cta-ta"
+                    lang="ta"
                 >
+                    என் அடுத்த படியைப் பார்க்கிறேன் →
+                </span>
 
-                    <span
-                        class="cta-ta"
-                        lang="ta"
-                    >
-                        என் அடுத்த படியைப் பார்க்கிறேன் →
-                    </span>
+                <span class="cta-en">
+                    SEE MY NEXT STEP
+                </span>
 
-                    <span class="cta-en">
-                        SEE MY NEXT STEP
-                    </span>
-
-                </button>
-
-            </div>
+            </button>
 
         </section>
 
@@ -1534,14 +3252,19 @@
 
 
     <!-- ================================================================
-         SHARED FRONTEND RUNTIME
+         RUNTIME
 
-         API
-         GLOBAL RUNTIME
-         COMPONENT LOADER
-         PAGE 06 CONTROLLER
+         IMPORTANT:
 
-         NO GLOBAL FOOTER
+         No component-loader.
+
+         No global header injection.
+
+         No global footer injection.
+
+         Page 06 owns its own visual shell.
+
+         page06.js v3.0 remains untouched.
     ================================================================= -->
 
     <script
@@ -1553,34 +3276,19 @@
     ></script>
 
     <script
-        src="../js/component-loader.js"
-    ></script>
-
-    <script
         src="../js/page06.js"
     ></script>
 
 
     <!-- ================================================================
          PAGE 06 INITIALIZATION
-
-         page06.js v3.0 is left untouched.
     ================================================================= -->
 
     <script>
 
         document.addEventListener(
             "DOMContentLoaded",
-            async function () {
-
-                if (
-                    window.CTM_COMPONENTS &&
-                    typeof window.CTM_COMPONENTS.load === "function"
-                ) {
-
-                    await window.CTM_COMPONENTS.load();
-
-                }
+            function () {
 
                 if (
                     window.CTM_PAGE06 &&
