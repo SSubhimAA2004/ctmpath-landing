@@ -1,70 +1,53 @@
 
 /* ==========================================================================
    CTM PATH™ MILLIONAIRES™
-   GUIDED JOURNEY™
 
    FILE:
-   page06.js
+   js/page06.js
 
    PAGE:
-   06 — THE FOUR FORCES™
+   06 — PERSONAL TRANSFORMATION PRESCRIPTION™
 
    VERSION:
-   3.0 — FOUR FORCES VISUAL PAGE
+   3.0 — FIXED PAGE 06 → PAGE 07 NAVIGATION
 
    PURPOSE:
    --------------------------------------------------------------------------
-   1. Initialise Page 06.
-   2. Preserve the existing visitor / journey identity architecture.
-   3. Preserve the Page 06 completion-email architecture.
-   4. Prevent duplicate completion-email delivery.
-   5. Mark Page 06 complete only after confirmed email success.
-   6. Navigate ONLY to page07.html after successful completion.
+   Page 06 is the final transformation / prescription page.
+
+   FINAL FLOW:
+
+       PAGE 06
+          ↓
+       SEE MY NEXT STEP
+          ↓
+       Attempt JOURNEY_COMPLETED email
+          ↓
+       Preserve journey state
+          ↓
+       PAGE 07
 
    IMPORTANT:
-   --------------------------------------------------------------------------
-   Page 06 is now primarily a visual / educational page.
 
-   It does NOT:
-   ✗ Recalculate Page 02
-   ✗ Recalculate Page 03
-   ✗ Rebuild Page 04
-   ✗ Rebuild Page 05
-   ✗ Generate a roadmap
-   ✗ Generate a report
-   ✗ Generate a Google Doc
-   ✗ Generate a PDF
-   ✗ Call DocumentService
-   ✗ Call finalizeJourney()
-   ✗ Own email marketing copy
-   ✗ Modify the global header
-   ✗ Load or modify the global footer
+   ✓ Page 06 does NOT generate the report
+   ✓ Page 06 does NOT generate PDF
+   ✓ Page 06 does NOT call DocumentService
+   ✓ Page 06 does NOT call ReportEngine
+   ✓ Page 06 does NOT call finalizeJourney()
+   ✓ Page 06 does NOT block navigation because email fails
+   ✓ Page 07 is always reachable from the navigator
 
-   EMAIL:
-   --------------------------------------------------------------------------
-   The backend EmailService owns the fixed JOURNEY_COMPLETED email.
+   NAVIGATION CONTRACT:
 
-   Frontend sends only:
+       Current live route:
+           /pages/page06
 
-       {
-           type: "JOURNEY_COMPLETED",
-           to: registeredEmail,
-           name: registeredName
-       }
-
-   NAVIGATION:
-   --------------------------------------------------------------------------
-   Page 06
-       ↓
-   confirmed completion email
-       ↓
-   mark Page 06 complete
-       ↓
-   page07.html
+       Next live route:
+           /pages/page07
 
    ========================================================================== */
 
-(function () {
+(function (window, document) {
 
     "use strict";
 
@@ -76,22 +59,36 @@
     const CONFIG = {
 
         pageName:
-            "THE FOUR FORCES™",
+            "PERSONAL TRANSFORMATION PRESCRIPTION™",
 
+        /*
+         * IMPORTANT:
+         *
+         * The live application uses clean page routes.
+         *
+         * Do NOT use:
+         *
+         *     page07.html
+         *
+         * because the deployed application is currently operating as:
+         *
+         *     /pages/page06
+         *
+         * and Page 07 is:
+         *
+         *     /pages/page07
+         */
         nextPage:
-            "page07.html",
+            "/pages/page07",
+
+        navigatorId:
+            "page06-next-button",
 
         journeyStorageKey:
             "CTM_GUIDED_JOURNEY_STATE",
 
         deliveryStorageKey:
             "CTM_PAGE06_EMAIL_DELIVERY",
-
-        prescriptionStorageKey:
-            "CTM_PAGE06_PRESCRIPTION",
-
-        navigatorId:
-            "page06-next-button",
 
         peopleStorageKeys: [
 
@@ -115,7 +112,15 @@
             "CTM_PAGE01_REGISTRATION",
             "CTM_PAGE01_DATA"
 
-        ]
+        ],
+
+        /*
+         * Maximum time allowed for the optional completion-email attempt.
+         *
+         * Navigation MUST NOT remain blocked indefinitely.
+         */
+        emailTimeoutMs:
+            5000
 
     };
 
@@ -129,30 +134,45 @@
         initialized:
             false,
 
-        sending:
+        navigating:
             false,
 
-        sent:
+        emailAttempted:
+            false,
+
+        emailSucceeded:
             false,
 
         navigator:
-            null,
-
-        prescription:
             null
 
     };
 
 
     /* ======================================================================
-       INITIALISE
+       INITIALIZE
        ====================================================================== */
 
     function init() {
 
-        if (state.initialized) {
+        if (
+            state.initialized
+        ) {
 
-            bindNavigator();
+            /*
+             * If the component loader injected the navigator after the
+             * first initialization attempt, try binding again.
+             */
+            if (
+                !state.navigator ||
+                !document.documentElement.contains(
+                    state.navigator
+                )
+            ) {
+
+                bindNavigator();
+
+            }
 
             return;
 
@@ -163,25 +183,12 @@
             true;
 
 
-        /*
-         * The visual Page 06 does not require
-         * any dynamic rendering.
-         *
-         * We only preserve the existing journey
-         * state architecture.
-         */
-
-        state.prescription =
-            buildPage06Prescription();
-
-
-        savePrescription(
-            state.prescription
+        console.log(
+            "CTM PATH™ Page06 v3.0 initialized."
         );
 
 
         bindNavigator();
-
 
         exposeRuntime();
 
@@ -189,27 +196,179 @@
 
 
     /* ======================================================================
-       NAVIGATOR
+       FIND THE ACTUAL PAGE 06 NAVIGATOR
        ====================================================================== */
 
-    function bindNavigator() {
+    function findNavigator() {
 
-        const button =
+        /*
+         * PRIMARY CONTRACT
+         *
+         * This is the actual button ID present in page06.html.
+         */
+        const exact =
             document.getElementById(
                 CONFIG.navigatorId
             );
 
 
-        if (!button) {
+        if (
+            exact
+        ) {
 
-            /*
-             * Page06 HTML is expected to contain
-             * #page06-next-button.
-             *
-             * Do not generate noisy warnings here.
-             * The page is allowed to initialise
-             * before the DOM is completely available.
-             */
+            return exact;
+
+        }
+
+
+        /*
+         * Compatibility selectors.
+         *
+         * These allow the controller to survive a future harmless
+         * markup variation without affecting the current contract.
+         */
+
+        const selectors = [
+
+            "[data-page06-next]",
+            "[data-next-page]",
+
+            "#page06Next",
+            "#page06-next",
+
+            "#nextPage",
+            "#next-page",
+
+            "#nextButton",
+            "#next-button",
+
+            "#continueButton",
+            "#continue-button",
+
+            ".page06-next",
+            ".navigator-next",
+            ".journey-next"
+
+        ];
+
+
+        for (
+            let i = 0;
+            i < selectors.length;
+            i++
+        ) {
+
+            const element =
+                document.querySelector(
+                    selectors[i]
+                );
+
+
+            if (
+                element
+            ) {
+
+                return element;
+
+            }
+
+        }
+
+
+        /*
+         * Final fallback:
+         *
+         * The screenshot shows the visible navigator button.
+         *
+         * Search buttons for the actual Page 06 CTA text.
+         */
+
+        const buttons =
+            document.querySelectorAll(
+                "button"
+            );
+
+
+        for (
+            let i = 0;
+            i < buttons.length;
+            i++
+        ) {
+
+            const button =
+                buttons[i];
+
+
+            const text =
+                String(
+                    button.textContent || ""
+                )
+                    .replace(
+                        /\s+/g,
+                        " "
+                    )
+                    .trim()
+                    .toLowerCase();
+
+
+            if (
+                text.indexOf(
+                    "see my next step"
+                ) !== -1
+            ) {
+
+                return button;
+
+            }
+
+
+            if (
+                text.indexOf(
+                    "show me the path"
+                ) !== -1
+            ) {
+
+                return button;
+
+            }
+
+
+            if (
+                text.indexOf(
+                    "அடுத்த படியை"
+                ) !== -1
+            ) {
+
+                return button;
+
+            }
+
+        }
+
+
+        return null;
+
+    }
+
+
+    /* ======================================================================
+       BIND NAVIGATOR
+       ====================================================================== */
+
+    function bindNavigator() {
+
+        const navigator =
+            findNavigator();
+
+
+        if (
+            !navigator
+        ) {
+
+            console.warn(
+                "Page06: Navigator #page06-next-button not found yet."
+            );
+
 
             return false;
 
@@ -217,16 +376,16 @@
 
 
         state.navigator =
-            button;
+            navigator;
 
 
         /*
-         * Prevent duplicate listeners.
+         * Prevent duplicate event listeners.
          */
 
         if (
-            button.dataset &&
-            button.dataset.ctmPage06Bound === "true"
+            navigator.dataset &&
+            navigator.dataset.ctmPage06NavigationBound === "true"
         ) {
 
             return true;
@@ -234,18 +393,37 @@
         }
 
 
-        if (button.dataset) {
+        /*
+         * Mark as bound.
+         */
 
-            button.dataset.ctmPage06Bound =
+        if (
+            navigator.dataset
+        ) {
+
+            navigator.dataset.ctmPage06NavigationBound =
                 "true";
 
         }
 
 
-        button.addEventListener(
+        /*
+         * Capture phase is intentional.
+         *
+         * It allows this controller to take ownership of the CTA
+         * even if another generic navigation listener is attached.
+         */
+
+        navigator.addEventListener(
             "click",
-            handleNext,
+            handleNavigatorClick,
             true
+        );
+
+
+        console.log(
+            "Page06: Navigator successfully bound:",
+            navigator
         );
 
 
@@ -255,14 +433,23 @@
 
 
     /* ======================================================================
-       MAIN NAVIGATION FLOW
+       NAVIGATOR CLICK
        ====================================================================== */
 
-    async function handleNext(event) {
+    async function handleNavigatorClick(
+        event
+    ) {
 
-        if (event) {
+        /*
+         * Take complete control of this click.
+         */
+
+        if (
+            event
+        ) {
 
             event.preventDefault();
+
             event.stopPropagation();
 
 
@@ -279,21 +466,45 @@
 
 
         /*
-         * --------------------------------------------------------------
-         * DOUBLE-CLICK PROTECTION
-         * --------------------------------------------------------------
+         * Prevent double-clicks.
          */
 
-        if (state.sending) {
+        if (
+            state.navigating
+        ) {
 
             return;
 
         }
 
 
+        state.navigating =
+            true;
+
+
+        const button =
+            state.navigator ||
+            document.getElementById(
+                CONFIG.navigatorId
+            );
+
+
+        setButtonBusy(
+            button,
+            true
+        );
+
+
+        console.log(
+            "Page06: Navigator clicked."
+        );
+
+
         /*
          * --------------------------------------------------------------
-         * RESOLVE REGISTERED VISITOR
+         * STEP 1
+         *
+         * Resolve identity.
          * --------------------------------------------------------------
          */
 
@@ -301,324 +512,622 @@
             resolveIdentity();
 
 
-        /*
-         * --------------------------------------------------------------
-         * EMAIL IS REQUIRED
-         * --------------------------------------------------------------
-         */
-
-        if (!identity.email) {
-
-            showError(
-                "Your registered email address could not be recovered."
-            );
-
-            return;
-
-        }
-
-
-        /*
-         * --------------------------------------------------------------
-         * CHECK PREVIOUS CONFIRMED DELIVERY
-         *
-         * If this visitor already received the
-         * JOURNEY_COMPLETED email, do not send it again.
-         * --------------------------------------------------------------
-         */
-
-        const previousDelivery =
-            loadDeliveryState();
-
-
-        if (
-            previousDelivery &&
-            previousDelivery.status === "SENT" &&
-            sameIdentity(
-                previousDelivery,
-                identity
-            )
-        ) {
-
-            state.sent =
-                true;
-
-
-            markPageComplete();
-
-
-            goToPage07();
-
-
-            return;
-
-        }
-
-
-        /*
-         * --------------------------------------------------------------
-         * API VALIDATION
-         * --------------------------------------------------------------
-         */
-
-        if (
-            !window.CTM_API ||
-            typeof window.CTM_API !== "object"
-        ) {
-
-            showError(
-                "CTM PATH™ service is temporarily unavailable."
-            );
-
-            return;
-
-        }
-
-
-        if (
-            typeof window.CTM_API.sendEmail !==
-            "function"
-        ) {
-
-            showError(
-                "CTM PATH™ email service is temporarily unavailable."
-            );
-
-            return;
-
-        }
-
-
-        /*
-         * --------------------------------------------------------------
-         * ACQUIRE IN-MEMORY LOCK
-         * --------------------------------------------------------------
-         */
-
-        state.sending =
-            true;
-
-
-        setButtonBusy(
-            true
+        console.log(
+            "Page06: Resolved identity:",
+            identity
         );
 
 
+        /*
+         * --------------------------------------------------------------
+         * STEP 2
+         *
+         * Attempt completion email.
+         *
+         * CRITICAL:
+         *
+         * Email is now NON-BLOCKING.
+         *
+         * Even if:
+         *
+         *   • email is missing
+         *   • API is unavailable
+         *   • API throws
+         *   • API times out
+         *   • backend returns an error
+         *
+         * the visitor STILL proceeds to Page 07.
+         * --------------------------------------------------------------
+         */
+
         try {
 
-            /*
-             * ----------------------------------------------------------
-             * SAVE PROCESSING STATE
-             * ----------------------------------------------------------
-             */
-
-            saveDeliveryState({
-
-                status:
-                    "PROCESSING",
-
-                type:
-                    "JOURNEY_COMPLETED",
-
-                peopleId:
-                    identity.peopleId || "",
-
-                email:
-                    identity.email,
-
-                fullName:
-                    identity.fullName || "",
-
-                startedAt:
-                    new Date().toISOString()
-
-            });
-
-
-            /*
-             * ----------------------------------------------------------
-             * SEND FIXED COMPLETION EMAIL
-             *
-             * No email copy lives in this file.
-             *
-             * The backend EmailService receives the type
-             * JOURNEY_COMPLETED and owns the actual message.
-             * ----------------------------------------------------------
-             */
-
-            const response =
-                await window.CTM_API.sendEmail({
-
-                    type:
-                        "JOURNEY_COMPLETED",
-
-                    to:
-                        identity.email,
-
-                    name:
-                        identity.fullName || ""
-
-                });
-
-
-            /*
-             * ----------------------------------------------------------
-             * NORMALISE RESPONSE
-             * ----------------------------------------------------------
-             */
-
-            const result =
-                unwrapResponse(
-                    response
-                );
-
-
-            /*
-             * ----------------------------------------------------------
-             * CONFIRM SUCCESS
-             * ----------------------------------------------------------
-             */
-
-            verifyEmailSuccess(
-                result
+            await attemptCompletionEmail(
+                identity
             );
-
-
-            /*
-             * ----------------------------------------------------------
-             * SAVE CONFIRMED DELIVERY
-             * ----------------------------------------------------------
-             */
-
-            const delivery = {
-
-                status:
-                    "SENT",
-
-                type:
-                    "JOURNEY_COMPLETED",
-
-                peopleId:
-                    identity.peopleId || "",
-
-                email:
-                    firstString(
-
-                        result &&
-                        result.recipient,
-
-                        result &&
-                        result.email,
-
-                        result &&
-                        result.to,
-
-                        identity.email
-
-                    ),
-
-                fullName:
-                    identity.fullName || "",
-
-                emailSent:
-                    true,
-
-                deliveredAt:
-                    new Date().toISOString()
-
-            };
-
-
-            saveDeliveryState(
-                delivery
-            );
-
-
-            window.CTM_PAGE06_EMAIL_DELIVERY =
-                delivery;
-
-
-            state.sent =
-                true;
-
-
-            /*
-             * ----------------------------------------------------------
-             * MARK PAGE 06 COMPLETE
-             * ----------------------------------------------------------
-             */
-
-            markPageComplete();
-
-
-            /*
-             * ----------------------------------------------------------
-             * PAGE 07
-             * ----------------------------------------------------------
-             */
-
-            goToPage07();
 
         }
 
         catch (error) {
 
-            /*
-             * Remove the temporary PROCESSING state
-             * so the visitor can retry.
-             */
-
-            const currentDelivery =
-                loadDeliveryState();
-
-
-            if (
-                currentDelivery &&
-                currentDelivery.status === "PROCESSING" &&
-                sameIdentity(
-                    currentDelivery,
-                    identity
-                )
-            ) {
-
-                clearDeliveryState();
-
-            }
-
-
-            state.sending =
-                false;
-
-
-            setButtonBusy(
-                false
-            );
-
-
-            showError(
-                extractErrorMessage(
-                    error
-                )
+            console.warn(
+                "Page06: Completion email attempt failed. Continuing to Page07.",
+                error
             );
 
         }
+
+
+        /*
+         * --------------------------------------------------------------
+         * STEP 3
+         *
+         * Mark Page 06 complete.
+         * --------------------------------------------------------------
+         */
+
+        markPageComplete();
+
+
+        /*
+         * --------------------------------------------------------------
+         * STEP 4
+         *
+         * Navigate.
+         *
+         * THIS IS THE CRITICAL FIX.
+         * --------------------------------------------------------------
+         */
+
+        navigateToPage07();
 
     }
 
 
     /* ======================================================================
-       IDENTITY RESOLUTION
+       ATTEMPT COMPLETION EMAIL
+       ====================================================================== */
+
+    async function attemptCompletionEmail(
+        identity
+    ) {
+
+        state.emailAttempted =
+            true;
+
+
+        /*
+         * No email available:
+         *
+         * Do not block Page 07.
+         */
+
+        if (
+            !identity.email
+        ) {
+
+            console.warn(
+                "Page06: No registered email recovered. Skipping email."
+            );
+
+
+            return false;
+
+        }
+
+
+        /*
+         * API unavailable:
+         *
+         * Do not block Page 07.
+         */
+
+        if (
+            !window.CTM_API ||
+            typeof window.CTM_API.sendEmail !==
+            "function"
+        ) {
+
+            console.warn(
+                "Page06: CTM_API.sendEmail unavailable. Skipping email."
+            );
+
+
+            return false;
+
+        }
+
+
+        /*
+         * Check whether this visitor has already received
+         * the completion email.
+         */
+
+        const previous =
+            loadDeliveryState();
+
+
+        if (
+            previous &&
+            previous.status === "SENT" &&
+            sameIdentity(
+                previous,
+                identity
+            )
+        ) {
+
+            console.log(
+                "Page06: JOURNEY_COMPLETED email already sent."
+            );
+
+
+            state.emailSucceeded =
+                true;
+
+
+            return true;
+
+        }
+
+
+        /*
+         * Save processing state.
+         */
+
+        saveDeliveryState({
+
+            status:
+                "PROCESSING",
+
+            type:
+                "JOURNEY_COMPLETED",
+
+            peopleId:
+                identity.peopleId || "",
+
+            email:
+                identity.email,
+
+            fullName:
+                identity.fullName || "",
+
+            startedAt:
+                new Date().toISOString()
+
+        });
+
+
+        /*
+         * Execute the backend request with a timeout.
+         */
+
+        let response;
+
+
+        try {
+
+            response =
+                await withTimeout(
+                    window.CTM_API.sendEmail({
+
+                        type:
+                            "JOURNEY_COMPLETED",
+
+                        to:
+                            identity.email,
+
+                        name:
+                            identity.fullName || ""
+
+                    }),
+                    CONFIG.emailTimeoutMs
+                );
+
+        }
+
+        catch (error) {
+
+            clearDeliveryState();
+
+
+            throw error;
+
+        }
+
+
+        console.log(
+            "Page06: Completion email response:",
+            response
+        );
+
+
+        /*
+         * Normalize the response.
+         */
+
+        const result =
+            unwrapResponse(
+                response
+            );
+
+
+        /*
+         * Verify if backend positively confirmed delivery.
+         */
+
+        if (
+            !emailResponseSucceeded(
+                result
+            )
+        ) {
+
+            clearDeliveryState();
+
+
+            console.warn(
+                "Page06: Email was not confirmed by backend."
+            );
+
+
+            return false;
+
+        }
+
+
+        /*
+         * Save confirmed delivery.
+         */
+
+        const delivery = {
+
+            status:
+                "SENT",
+
+            type:
+                "JOURNEY_COMPLETED",
+
+            peopleId:
+                identity.peopleId || "",
+
+            email:
+                firstString(
+
+                    result &&
+                    result.recipient,
+
+                    result &&
+                    result.email,
+
+                    result &&
+                    result.to,
+
+                    identity.email
+
+                ),
+
+            fullName:
+                identity.fullName || "",
+
+            emailSent:
+                true,
+
+            deliveredAt:
+                new Date().toISOString()
+
+        };
+
+
+        saveDeliveryState(
+            delivery
+        );
+
+
+        window.CTM_PAGE06_EMAIL_DELIVERY =
+            delivery;
+
+
+        state.emailSucceeded =
+            true;
+
+
+        console.log(
+            "Page06: JOURNEY_COMPLETED email confirmed."
+        );
+
+
+        return true;
+
+    }
+
+
+    /* ======================================================================
+       WITH TIMEOUT
+       ====================================================================== */
+
+    function withTimeout(
+        promise,
+        timeoutMs
+    ) {
+
+        return new Promise(
+            function (
+                resolve,
+                reject
+            ) {
+
+                let settled =
+                    false;
+
+
+                const timer =
+                    window.setTimeout(
+                        function () {
+
+                            if (
+                                settled
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            settled =
+                                true;
+
+
+                            reject(
+                                new Error(
+                                    "Completion email request timed out."
+                                )
+                            );
+
+                        },
+                        timeoutMs
+                    );
+
+
+                Promise.resolve(
+                    promise
+                )
+                    .then(
+                        function (
+                            value
+                        ) {
+
+                            if (
+                                settled
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            settled =
+                                true;
+
+
+                            window.clearTimeout(
+                                timer
+                            );
+
+
+                            resolve(
+                                value
+                            );
+
+                        }
+                    )
+                    .catch(
+                        function (
+                            error
+                        ) {
+
+                            if (
+                                settled
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            settled =
+                                true;
+
+
+                            window.clearTimeout(
+                                timer
+                            );
+
+
+                            reject(
+                                error
+                            );
+
+                        }
+                    );
+
+            }
+        );
+
+    }
+
+
+    /* ======================================================================
+       NORMALIZE API RESPONSE
+       ====================================================================== */
+
+    function unwrapResponse(
+        response
+    ) {
+
+        if (
+            response ===
+            null ||
+            response ===
+            undefined
+        ) {
+
+            return null;
+
+        }
+
+
+        if (
+            typeof response ===
+            "string"
+        ) {
+
+            try {
+
+                return JSON.parse(
+                    response
+                );
+
+            }
+
+            catch (error) {
+
+                return {
+
+                    message:
+                        response
+
+                };
+
+            }
+
+        }
+
+
+        if (
+            response.data &&
+            typeof response.data ===
+            "object"
+        ) {
+
+            return response.data;
+
+        }
+
+
+        return response;
+
+    }
+
+
+    /* ======================================================================
+       EMAIL SUCCESS CHECK
+       ====================================================================== */
+
+    function emailResponseSucceeded(
+        result
+    ) {
+
+        if (
+            !result ||
+            typeof result !==
+            "object"
+        ) {
+
+            return false;
+
+        }
+
+
+        if (
+            result.success ===
+            false
+        ) {
+
+            return false;
+
+        }
+
+
+        if (
+            result.emailSent ===
+            false
+        ) {
+
+            return false;
+
+        }
+
+
+        if (
+            result.sent ===
+            false
+        ) {
+
+            return false;
+
+        }
+
+
+        if (
+            String(
+                result.status ||
+                ""
+            ).toUpperCase() ===
+            "FAILURE"
+        ) {
+
+            return false;
+
+        }
+
+
+        if (
+            String(
+                result.status ||
+                ""
+            ).toUpperCase() ===
+            "ERROR"
+        ) {
+
+            return false;
+
+        }
+
+
+        /*
+         * Explicit affirmative confirmation.
+         */
+
+        return (
+
+            result.success === true ||
+
+            result.emailSent === true ||
+
+            result.sent === true ||
+
+            String(
+                result.status ||
+                ""
+            ).toUpperCase() ===
+            "SUCCESS"
+
+        );
+
+    }
+
+
+    /* ======================================================================
+       RESOLVE VISITOR IDENTITY
        ====================================================================== */
 
     function resolveIdentity() {
 
-        const candidates = [];
+        const candidates =
+            [];
 
 
         /*
-         * --------------------------------------------------------------
-         * GLOBAL RUNTIME OBJECTS
-         * --------------------------------------------------------------
+         * Global runtime objects.
          */
 
         pushCandidate(
@@ -626,30 +1135,36 @@
             window.CTM_PERSON
         );
 
+
         pushCandidate(
             candidates,
             window.CTM_PEOPLE
         );
+
 
         pushCandidate(
             candidates,
             window.CTM_REGISTRATION
         );
 
+
         pushCandidate(
             candidates,
             window.CTM_USER
         );
+
 
         pushCandidate(
             candidates,
             window.CTM_VISITOR
         );
 
+
         pushCandidate(
             candidates,
             window.CTM_PROFILE
         );
+
 
         pushCandidate(
             candidates,
@@ -658,9 +1173,7 @@
 
 
         /*
-         * --------------------------------------------------------------
-         * JOURNEY STATE
-         * --------------------------------------------------------------
+         * Journey state.
          */
 
         const journey =
@@ -675,42 +1188,51 @@
         );
 
 
-        if (journey) {
+        if (
+            journey
+        ) {
 
             pushCandidate(
                 candidates,
                 journey.person
             );
 
+
             pushCandidate(
                 candidates,
                 journey.people
             );
+
 
             pushCandidate(
                 candidates,
                 journey.registration
             );
 
+
             pushCandidate(
                 candidates,
                 journey.identity
             );
+
 
             pushCandidate(
                 candidates,
                 journey.user
             );
 
+
             pushCandidate(
                 candidates,
                 journey.visitor
             );
 
+
             pushCandidate(
                 candidates,
                 journey.profile
             );
+
 
             pushCandidate(
                 candidates,
@@ -721,13 +1243,13 @@
 
 
         /*
-         * --------------------------------------------------------------
-         * KNOWN REGISTRATION STORAGE
-         * --------------------------------------------------------------
+         * Known registration storage keys.
          */
 
         CONFIG.peopleStorageKeys.forEach(
-            function (key) {
+            function (
+                key
+            ) {
 
                 pushCandidate(
                     candidates,
@@ -740,45 +1262,50 @@
         );
 
 
-        /*
-         * --------------------------------------------------------------
-         * SEARCH CANDIDATES
-         * --------------------------------------------------------------
-         */
-
         let peopleId =
             "";
 
+
         let email =
             "";
+
 
         let fullName =
             "";
 
 
+        /*
+         * Search candidates.
+         */
+
         for (
             let i = 0;
             i < candidates.length;
-            i += 1
+            i++
         ) {
 
             const candidate =
                 candidates[i];
 
 
-            if (!candidate) {
+            if (
+                !candidate
+            ) {
 
                 continue;
 
             }
 
 
-            if (!peopleId) {
+            if (
+                !peopleId
+            ) {
 
                 peopleId =
                     findValueDeep(
                         candidate,
                         [
+
                             "PeopleID",
                             "peopleId",
                             "peopleID",
@@ -786,41 +1313,50 @@
                             "personID",
                             "clientId",
                             "clientID"
+
                         ]
                     );
 
             }
 
 
-            if (!email) {
+            if (
+                !email
+            ) {
 
                 email =
                     findValueDeep(
                         candidate,
                         [
+
                             "Email",
                             "email",
                             "emailAddress",
                             "EmailAddress",
                             "registeredEmail"
+
                         ]
                     );
 
             }
 
 
-            if (!fullName) {
+            if (
+                !fullName
+            ) {
 
                 fullName =
                     findValueDeep(
                         candidate,
                         [
+
                             "FullName",
                             "fullName",
                             "Name",
                             "name",
                             "visitorName",
                             "registeredName"
+
                         ]
                     );
 
@@ -841,9 +1377,7 @@
 
 
         /*
-         * --------------------------------------------------------------
-         * FINAL STORAGE RECOVERY
-         * --------------------------------------------------------------
+         * Browser storage recovery.
          */
 
         if (
@@ -856,7 +1390,9 @@
                 scanBrowserStorage();
 
 
-            if (!peopleId) {
+            if (
+                !peopleId
+            ) {
 
                 peopleId =
                     scanned.peopleId;
@@ -864,7 +1400,9 @@
             }
 
 
-            if (!email) {
+            if (
+                !email
+            ) {
 
                 email =
                     scanned.email;
@@ -872,7 +1410,9 @@
             }
 
 
-            if (!fullName) {
+            if (
+                !fullName
+            ) {
 
                 fullName =
                     scanned.fullName;
@@ -905,7 +1445,7 @@
 
 
     /* ======================================================================
-       BROWSER STORAGE RECOVERY
+       STORAGE SCANNER
        ====================================================================== */
 
     function scanBrowserStorage() {
@@ -949,12 +1489,18 @@
     }
 
 
+    /* ======================================================================
+       SCAN STORAGE AREA
+       ====================================================================== */
+
     function scanStorageArea(
         storage,
         result
     ) {
 
-        if (!storage) {
+        if (
+            !storage
+        ) {
 
             return;
 
@@ -966,14 +1512,18 @@
             for (
                 let i = 0;
                 i < storage.length;
-                i += 1
+                i++
             ) {
 
                 const key =
-                    storage.key(i);
+                    storage.key(
+                        i
+                    );
 
 
-                if (!key) {
+                if (
+                    !key
+                ) {
 
                     continue;
 
@@ -986,15 +1536,16 @@
                     );
 
 
-                if (!raw) {
+                if (
+                    !raw
+                ) {
 
                     continue;
 
                 }
 
 
-                let value =
-                    null;
+                let value;
 
 
                 try {
@@ -1015,7 +1566,8 @@
 
                 if (
                     !value ||
-                    typeof value !== "object"
+                    typeof value !==
+                    "object"
                 ) {
 
                     continue;
@@ -1023,53 +1575,61 @@
                 }
 
 
-                if (!result.peopleId) {
+                if (
+                    !result.peopleId
+                ) {
 
                     result.peopleId =
                         findValueDeep(
                             value,
                             [
+
                                 "PeopleID",
                                 "peopleId",
                                 "peopleID",
                                 "personId",
-                                "clientId",
-                                "clientID"
+                                "clientId"
+
                             ]
                         );
 
                 }
 
 
-                if (!result.email) {
+                if (
+                    !result.email
+                ) {
 
                     result.email =
                         findValueDeep(
                             value,
                             [
+
                                 "Email",
                                 "email",
                                 "emailAddress",
-                                "EmailAddress",
                                 "registeredEmail"
+
                             ]
                         );
 
                 }
 
 
-                if (!result.fullName) {
+                if (
+                    !result.fullName
+                ) {
 
                     result.fullName =
                         findValueDeep(
                             value,
                             [
+
                                 "FullName",
                                 "fullName",
                                 "Name",
-                                "name",
-                                "visitorName",
-                                "registeredName"
+                                "name"
+
                             ]
                         );
 
@@ -1092,9 +1652,10 @@
 
         catch (error) {
 
-            /*
-             * Storage access failure is non-fatal.
-             */
+            console.warn(
+                "Page06: Browser storage scan unavailable.",
+                error
+            );
 
         }
 
@@ -1112,7 +1673,8 @@
 
         if (
             !source ||
-            typeof source !== "object"
+            typeof source !==
+            "object"
         ) {
 
             return "";
@@ -1121,13 +1683,13 @@
 
 
         /*
-         * Direct property lookup.
+         * Direct keys first.
          */
 
         for (
             let i = 0;
             i < keys.length;
-            i += 1
+            i++
         ) {
 
             const key =
@@ -1146,9 +1708,12 @@
 
 
                 if (
-                    value !== null &&
-                    value !== undefined &&
-                    String(value).trim() !== ""
+                    value !==
+                    null &&
+                    value !==
+                    undefined &&
+                    String(value).trim() !==
+                    ""
                 ) {
 
                     return String(
@@ -1163,7 +1728,7 @@
 
 
         /*
-         * Recursive lookup.
+         * Recursive search.
          */
 
         const sourceKeys =
@@ -1175,7 +1740,7 @@
         for (
             let i = 0;
             i < sourceKeys.length;
-            i += 1
+            i++
         ) {
 
             const value =
@@ -1186,7 +1751,8 @@
 
             if (
                 value &&
-                typeof value === "object"
+                typeof value ===
+                "object"
             ) {
 
                 const found =
@@ -1196,7 +1762,9 @@
                     );
 
 
-                if (found) {
+                if (
+                    found
+                ) {
 
                     return found;
 
@@ -1223,7 +1791,8 @@
 
         if (
             value &&
-            typeof value === "object"
+            typeof value ===
+            "object"
         ) {
 
             candidates.push(
@@ -1231,154 +1800,6 @@
             );
 
         }
-
-    }
-
-
-    /* ======================================================================
-       PAGE 06 PRESCRIPTION STATE
-       ====================================================================== */
-
-    function buildPage06Prescription() {
-
-        const diagnosis =
-            readStorageObject(
-                "CTM_PAGE05_DIAGNOSIS_RESULT"
-            );
-
-
-        return {
-
-            version:
-                "3.0",
-
-            page:
-                6,
-
-            pageName:
-                CONFIG.pageName,
-
-            concept:
-                "FOUR_FORCES",
-
-            forces: [
-
-                {
-                    id:
-                        "money",
-
-                    title:
-                        "MONEY",
-
-                    purpose:
-                        "Create financial capacity."
-
-                },
-
-                {
-                    id:
-                        "people",
-
-                    title:
-                        "PEOPLE",
-
-                    purpose:
-                        "Create leverage through people."
-
-                },
-
-                {
-                    id:
-                        "time",
-
-                    title:
-                        "TIME",
-
-                    purpose:
-                        "Protect freedom and focus."
-
-                },
-
-                {
-                    id:
-                        "tasks",
-
-                    title:
-                        "TASKS",
-
-                    purpose:
-                        "Turn effort into systems."
-
-                }
-
-            ],
-
-            diagnosisSource:
-                diagnosis || null,
-
-            createdAt:
-                new Date().toISOString()
-
-        };
-
-    }
-
-
-    function savePrescription(
-        prescription
-    ) {
-
-        if (!prescription) {
-
-            return;
-
-        }
-
-
-        const serialized =
-            JSON.stringify(
-                prescription
-            );
-
-
-        try {
-
-            window.sessionStorage.setItem(
-                CONFIG.prescriptionStorageKey,
-                serialized
-            );
-
-        }
-
-        catch (error) {
-
-            /*
-             * Non-blocking.
-             */
-
-        }
-
-
-        try {
-
-            window.localStorage.setItem(
-                CONFIG.prescriptionStorageKey,
-                serialized
-            );
-
-        }
-
-        catch (error) {
-
-            /*
-             * Non-blocking.
-             */
-
-        }
-
-
-        window.CTM_PAGE06_PRESCRIPTION =
-            prescription;
 
     }
 
@@ -1413,9 +1834,10 @@
 
         catch (error) {
 
-            /*
-             * Non-blocking.
-             */
+            console.warn(
+                "Page06: Unable to save email delivery state.",
+                error
+            );
 
         }
 
@@ -1434,9 +1856,10 @@
 
         catch (error) {
 
-            /*
-             * Non-blocking.
-             */
+            console.warn(
+                "Page06: Unable to clear delivery state.",
+                error
+            );
 
         }
 
@@ -1504,7 +1927,7 @@
             deliveryEmail &&
             identityEmail &&
             deliveryEmail ===
-                identityEmail
+            identityEmail
 
         );
 
@@ -1517,56 +1940,47 @@
 
     function markPageComplete() {
 
-        let journey =
-            readStorageObject(
-                CONFIG.journeyStorageKey
-            );
-
-
-        if (!journey) {
-
-            journey = {};
-
-        }
-
-
-        /*
-         * Preserve all existing journey data.
-         */
-
-        journey.page06Completed =
-            true;
-
-
-        journey.page06CompletedAt =
-            new Date().toISOString();
-
-
-        journey.currentPage =
-            7;
-
-
-        journey.lastCompletedPage =
-            Math.max(
-
-                Number(
-                    journey.lastCompletedPage || 0
-                ),
-
-                6
-
-            );
-
-
-        journey.lastUpdatedAt =
-            new Date().toISOString();
-
-
-        /*
-         * Persist to localStorage.
-         */
-
         try {
+
+            const journey =
+                readStorageObject(
+                    CONFIG.journeyStorageKey
+                ) || {};
+
+
+            /*
+             * Preserve all existing journey information.
+             */
+
+            journey.page06Completed =
+                true;
+
+
+            journey.page06CompletedAt =
+                new Date().toISOString();
+
+
+            journey.currentPage =
+                7;
+
+
+            journey.currentPageName =
+                "CONTINUE YOUR GUIDED JOURNEY™";
+
+
+            journey.lastCompletedPage =
+                Math.max(
+                    Number(
+                        journey.lastCompletedPage ||
+                        0
+                    ),
+                    6
+                );
+
+
+            /*
+             * Persist locally.
+             */
 
             window.localStorage.setItem(
                 CONFIG.journeyStorageKey,
@@ -1575,28 +1989,33 @@
                 )
             );
 
-        }
-
-        catch (error) {
 
             /*
-             * Non-blocking.
+             * Persist in session too.
              */
 
-        }
+            try {
+
+                window.sessionStorage.setItem(
+                    CONFIG.journeyStorageKey,
+                    JSON.stringify(
+                        journey
+                    )
+                );
+
+            }
+
+            catch (sessionError) {
+
+                /*
+                 * Non-blocking.
+                 */
+
+            }
 
 
-        /*
-         * Keep sessionStorage aligned.
-         */
-
-        try {
-
-            window.sessionStorage.setItem(
-                CONFIG.journeyStorageKey,
-                JSON.stringify(
-                    journey
-                )
+            console.log(
+                "Page06: Journey state marked complete."
             );
 
         }
@@ -1604,8 +2023,13 @@
         catch (error) {
 
             /*
-             * Non-blocking.
+             * Navigation must never be blocked by a storage problem.
              */
+
+            console.warn(
+                "Page06: Could not persist completion state.",
+                error
+            );
 
         }
 
@@ -1613,20 +2037,44 @@
 
 
     /* ======================================================================
-       PAGE 07 NAVIGATION
+       THE CRITICAL PAGE 07 NAVIGATION
        ====================================================================== */
 
-    function goToPage07() {
+    function navigateToPage07() {
+
+        console.log(
+            "================================================"
+        );
+
+
+        console.log(
+            "CTM PATH™"
+        );
+
+
+        console.log(
+            "PAGE 06 → PAGE 07"
+        );
+
+
+        console.log(
+            "Destination:",
+            CONFIG.nextPage
+        );
+
+
+        console.log(
+            "================================================"
+        );
+
 
         /*
-         * Explicit destination.
-         *
-         * Page 06 has exactly one possible
-         * forward destination.
+         * Use the clean deployed route.
          */
 
-        window.location.href =
-            CONFIG.nextPage;
+        window.location.assign(
+            CONFIG.nextPage
+        );
 
     }
 
@@ -1636,27 +2084,28 @@
        ====================================================================== */
 
     function setButtonBusy(
+        button,
         busy
     ) {
 
-        const button =
-            state.navigator;
-
-
-        if (!button) {
+        if (
+            !button
+        ) {
 
             return;
 
         }
 
 
-        if (busy) {
+        if (
+            busy
+        ) {
 
             if (
-                !button.dataset.originalHtml
+                !button.dataset.originalText
             ) {
 
-                button.dataset.originalHtml =
+                button.dataset.originalText =
                     button.innerHTML;
 
             }
@@ -1684,391 +2133,78 @@
             }
 
 
+            button.classList.add(
+                "is-loading"
+            );
+
+
+            /*
+             * Keep the button visually alive while the email request
+             * is attempted.
+             */
+
             button.innerHTML =
                 [
-                    '<span class="cta-ta">',
-                    "உங்கள் அடுத்த படி தயாராகிறது…",
-                    "</span>",
-                    '<span class="cta-en">',
-                    "PREPARING YOUR NEXT STEP…",
+                    '<span class="page06-email-status">',
+                    '<span>உங்கள் அடுத்த படி தயாராகிறது...</span>',
+                    '<span>PREPARING YOUR NEXT STEP...</span>',
                     "</span>"
                 ].join("");
 
-            return;
-
         }
 
+        else {
 
-        button.removeAttribute(
-            "aria-busy"
-        );
-
-
-        button.removeAttribute(
-            "aria-disabled"
-        );
-
-
-        if (
-            "disabled" in button
-        ) {
-
-            button.disabled =
-                false;
-
-        }
-
-
-        if (
-            button.dataset.originalHtml
-        ) {
-
-            button.innerHTML =
-                button.dataset.originalHtml;
-
-        }
-
-    }
-
-
-    /* ======================================================================
-       API RESPONSE NORMALISER
-       ====================================================================== */
-
-    function unwrapResponse(
-        response
-    ) {
-
-        if (
-            response === null ||
-            response === undefined
-        ) {
-
-            throw new Error(
-                "The CTM PATH™ email service returned no response."
+            button.removeAttribute(
+                "aria-busy"
             );
 
-        }
 
-
-        /*
-         * String response.
-         */
-
-        if (
-            typeof response === "string"
-        ) {
-
-            try {
-
-                response =
-                    JSON.parse(
-                        response
-                    );
-
-            }
-
-            catch (error) {
-
-                throw new Error(
-                    response
-                );
-
-            }
-
-        }
-
-
-        /*
-         * Explicit failure.
-         */
-
-        if (
-            response &&
-            response.success === false
-        ) {
-
-            throw new Error(
-                extractErrorMessage(
-                    response
-                )
+            button.removeAttribute(
+                "aria-disabled"
             );
 
-        }
 
-
-        if (
-            response &&
-            response.status &&
-            String(
-                response.status
-            ).toUpperCase() === "FAILURE"
-        ) {
-
-            throw new Error(
-                extractErrorMessage(
-                    response
-                )
+            button.classList.remove(
+                "is-loading"
             );
-
-        }
-
-
-        if (
-            response &&
-            response.status &&
-            String(
-                response.status
-            ).toUpperCase() === "ERROR"
-        ) {
-
-            throw new Error(
-                extractErrorMessage(
-                    response
-                )
-            );
-
-        }
-
-
-        /*
-         * Standard API wrapper.
-         */
-
-        if (
-            response &&
-            response.data &&
-            typeof response.data === "object"
-        ) {
-
-            return response.data;
-
-        }
-
-
-        return response;
-
-    }
-
-
-    /* ======================================================================
-       VERIFY EMAIL SUCCESS
-       ====================================================================== */
-
-    function verifyEmailSuccess(
-        result
-    ) {
-
-        if (
-            !result ||
-            typeof result !== "object"
-        ) {
-
-            throw new Error(
-                "CTM PATH™ completion email delivery was not confirmed."
-            );
-
-        }
-
-
-        /*
-         * Explicit negative responses.
-         */
-
-        if (
-            result.success === false
-        ) {
-
-            throw new Error(
-                extractErrorMessage(
-                    result
-                )
-            );
-
-        }
-
-
-        if (
-            result.emailSent === false
-        ) {
-
-            throw new Error(
-                extractErrorMessage(
-                    result
-                )
-            );
-
-        }
-
-
-        if (
-            result.sent === false
-        ) {
-
-            throw new Error(
-                extractErrorMessage(
-                    result
-                )
-            );
-
-        }
-
-
-        /*
-         * Require an affirmative signal.
-         */
-
-        const confirmed =
-
-            result.success === true ||
-
-            result.emailSent === true ||
-
-            result.sent === true ||
-
-            String(
-                result.status || ""
-            ).toUpperCase() === "SUCCESS";
-
-
-        if (!confirmed) {
-
-            throw new Error(
-                "CTM PATH™ completion email delivery was not confirmed."
-            );
-
-        }
-
-    }
-
-
-    /* ======================================================================
-       ERROR HANDLING
-       ====================================================================== */
-
-    function showError(
-        message
-    ) {
-
-        const finalMessage =
-            normalizeString(
-                message
-            ) ||
-            "Unable to continue. Please try again.";
-
-
-        window.alert(
-
-            "உங்கள் அடுத்த படியைத் திறக்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்.\n\n" +
-            "We could not continue to your next step yet. Please try again.\n\n" +
-            finalMessage
-
-        );
-
-    }
-
-
-    function extractErrorMessage(
-        value
-    ) {
-
-        if (!value) {
-
-            return (
-                "Unable to send the CTM PATH™ completion email."
-            );
-
-        }
-
-
-        if (
-            typeof value === "string"
-        ) {
-
-            return value;
-
-        }
-
-
-        if (
-            value instanceof Error &&
-            value.message
-        ) {
-
-            return value.message;
-
-        }
-
-
-        const candidates = [
-
-            value.message,
-            value.error,
-            value.errorMessage,
-            value.reason,
-            value.details
-
-        ];
-
-
-        for (
-            let i = 0;
-            i < candidates.length;
-            i += 1
-        ) {
-
-            const candidate =
-                candidates[i];
 
 
             if (
-                typeof candidate === "string" &&
-                candidate.trim()
+                "disabled" in button
             ) {
 
-                return candidate.trim();
+                button.disabled =
+                    false;
 
             }
 
 
             if (
-                candidate &&
-                typeof candidate === "object"
+                button.dataset.originalText
             ) {
 
-                const nested =
-                    extractErrorMessage(
-                        candidate
-                    );
-
-
-                if (nested) {
-
-                    return nested;
-
-                }
+                button.innerHTML =
+                    button.dataset.originalText;
 
             }
 
         }
 
-
-        return (
-            "Unable to send the CTM PATH™ completion email."
-        );
-
     }
 
 
     /* ======================================================================
-       STORAGE READER
+       READ STORAGE OBJECT
        ====================================================================== */
 
     function readStorageObject(
         key
     ) {
 
-        if (!key) {
+        if (
+            !key
+        ) {
 
             return null;
 
@@ -2087,7 +2223,9 @@
                 );
 
 
-            if (raw) {
+            if (
+                raw
+            ) {
 
                 const parsed =
                     parseJson(
@@ -2095,7 +2233,9 @@
                     );
 
 
-                if (parsed) {
+                if (
+                    parsed
+                ) {
 
                     return parsed;
 
@@ -2126,7 +2266,9 @@
                 );
 
 
-            if (raw) {
+            if (
+                raw
+            ) {
 
                 return parseJson(
                     raw
@@ -2158,7 +2300,9 @@
         value
     ) {
 
-        if (!value) {
+        if (
+            !value
+        ) {
 
             return null;
 
@@ -2166,7 +2310,8 @@
 
 
         if (
-            typeof value === "object"
+            typeof value ===
+            "object"
         ) {
 
             return value;
@@ -2200,8 +2345,10 @@
     ) {
 
         if (
-            value === null ||
-            value === undefined
+            value ===
+            null ||
+            value ===
+            undefined
         ) {
 
             return "";
@@ -2221,7 +2368,7 @@
         for (
             let i = 0;
             i < arguments.length;
-            i += 1
+            i++
         ) {
 
             const value =
@@ -2230,7 +2377,9 @@
                 );
 
 
-            if (value) {
+            if (
+                value
+            ) {
 
                 return value;
 
@@ -2256,7 +2405,7 @@
                 "3.0",
 
             mode:
-                "FOUR_FORCES_VISUAL_PAGE",
+                "FIXED_PAGE07_NAVIGATION",
 
             init:
                 init,
@@ -2275,34 +2424,37 @@
 
                 },
 
-            getPrescription:
-                function () {
-
-                    return state.prescription;
-
-                },
-
             clearDelivery:
                 function () {
 
                     clearDeliveryState();
 
-                    state.sent =
+
+                    state.emailSucceeded =
                         false;
+
+
+                    state.emailAttempted =
+                        false;
+
+
+                    console.log(
+                        "Page06: Email delivery lock cleared."
+                    );
 
                 },
 
             send:
                 function () {
 
-                    return handleNext();
+                    return handleNavigatorClick();
 
                 },
 
             goToPage07:
                 function () {
 
-                    goToPage07();
+                    navigateToPage07();
 
                 }
 
@@ -2339,28 +2491,131 @@
 
 
     /* ======================================================================
-       POST-LOAD RECOVERY
+       COMPONENT LOADER COMPATIBILITY
        ====================================================================== */
 
     window.addEventListener(
         "load",
         function () {
 
-            bindNavigator();
+            if (
+                !state.navigator ||
+                !document.documentElement.contains(
+                    state.navigator
+                )
+            ) {
+
+                bindNavigator();
+
+            }
 
         }
     );
 
+
+    /*
+     * The component loader may inject shared elements after DOMContentLoaded.
+     */
 
     document.addEventListener(
         "ctm:components-ready",
         function () {
 
-            bindNavigator();
+            if (
+                !state.navigator ||
+                !document.documentElement.contains(
+                    state.navigator
+                )
+            ) {
+
+                bindNavigator();
+
+            }
 
         }
     );
 
 
-})();
+    /* ======================================================================
+       FINAL FALLBACK
+       ======================================================================
 
+       If another script replaces the Page 06 navigator after the normal
+       lifecycle events, this observer reconnects the controller.
+
+       It is intentionally lightweight and disconnects itself once the
+       actual navigator has been found.
+
+       ====================================================================== */
+
+    try {
+
+        const observer =
+            new MutationObserver(
+                function () {
+
+                    if (
+                        state.navigator &&
+                        document.documentElement.contains(
+                            state.navigator
+                        )
+                    ) {
+
+                        observer.disconnect();
+
+                        return;
+
+                    }
+
+
+                    if (
+                        bindNavigator()
+                    ) {
+
+                        observer.disconnect();
+
+                    }
+
+                }
+            );
+
+
+        observer.observe(
+            document.body,
+            {
+                childList:
+                    true,
+
+                subtree:
+                    true
+            }
+        );
+
+
+        window.setTimeout(
+            function () {
+
+                observer.disconnect();
+
+            },
+            10000
+        );
+
+    }
+
+    catch (error) {
+
+        console.warn(
+            "Page06: MutationObserver unavailable.",
+            error
+        );
+
+    }
+
+
+})(window, document);
+
+
+/* ==========================================================================
+   END OF js/page06.js
+   ========================================================================== */
