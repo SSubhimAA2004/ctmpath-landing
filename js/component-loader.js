@@ -3,7 +3,7 @@
    CTM PATH™ MILLIONAIRES™
 
    File      : component-loader.js
-   Version   : 3.2
+   Version   : 3.3
    Status    : PRODUCTION
 
    Architecture:
@@ -21,12 +21,14 @@
    Responsibilities:
 
    ✓ Load Global Header
-   ✓ Load Global Footer
+   ✓ Load Global Footer when required
    ✓ Inject Shared Components
    ✓ Load Component Stylesheets
    ✓ Load Header Controller
    ✓ Resolve component paths from site root
+   ✓ Normalize injected asset paths
    ✓ Support Page 01–07 consistently
+   ✓ Allow Page 06 to run header-only
 
    Does NOT:
 
@@ -37,7 +39,6 @@
    ✗ Contain assessment logic
 
    ========================================================================== */
-
 
 (function () {
 
@@ -64,7 +65,6 @@
            /pages/page07.html
 
        ====================================================================== */
-
 
     const COMPONENT_PATH = {
 
@@ -97,15 +97,266 @@
 
 
     /* ======================================================================
-       LOAD STYLESHEET
+       PAGE DETECTION
        ====================================================================== */
 
+    function getCurrentPage() {
+
+        const pathname =
+            window.location.pathname
+                .replace(/\/+$/, "")
+                .toLowerCase();
+
+        if (
+            pathname === "/pages/page06" ||
+            pathname === "/pages/page06.html"
+        ) {
+            return "page06";
+        }
+
+        if (
+            pathname === "/pages/page05" ||
+            pathname === "/pages/page05.html"
+        ) {
+            return "page05";
+        }
+
+        if (
+            pathname === "/pages/page04" ||
+            pathname === "/pages/page04.html"
+        ) {
+            return "page04";
+        }
+
+        if (
+            pathname === "/pages/page03" ||
+            pathname === "/pages/page03.html"
+        ) {
+            return "page03";
+        }
+
+        if (
+            pathname === "/pages/page02" ||
+            pathname === "/pages/page02.html"
+        ) {
+            return "page02";
+        }
+
+        if (
+            pathname === "/pages/page07" ||
+            pathname === "/pages/page07.html"
+        ) {
+            return "page07";
+        }
+
+        if (
+            pathname === "/" ||
+            pathname === "/index.html"
+        ) {
+            return "index";
+        }
+
+        return "";
+
+    }
+
+
+    /* ======================================================================
+       PAGE FOOTER POLICY
+       ======================================================================
+
+       Page 06 is intentionally header-only.
+
+       The frozen header remains untouched.
+
+       The loader controls whether the footer is requested.
+
+       ====================================================================== */
+
+    function shouldLoadFooter() {
+
+        const page =
+            getCurrentPage();
+
+        /*
+         * PAGE 06
+         *
+         * The Four Forces™ page is intentionally footer-free.
+         */
+
+        if (page === "page06") {
+            return false;
+        }
+
+
+        /*
+         * All other pages retain the historical loader behaviour.
+         */
+
+        return true;
+
+    }
+
+
+    /* ======================================================================
+       NORMALIZE COMPONENT ASSET PATHS
+       ======================================================================
+
+       IMPORTANT:
+
+       header.html is frozen.
+
+       If header.html contains:
+
+           assets/logo/CTM_Mark.svg
+
+       and the component is injected into:
+
+           /pages/page06
+
+       the browser may resolve that relative asset against the page path.
+
+       We therefore normalize component-injected asset references to:
+
+           /assets/logo/CTM_Mark.svg
+
+       without modifying header.html itself.
+
+       ====================================================================== */
+
+    function normalizeComponentAssets(container) {
+
+        if (!container) {
+            return;
+        }
+
+
+        /*
+         * SRC ATTRIBUTES
+         */
+
+        const srcElements =
+            container.querySelectorAll(
+                "[src]"
+            );
+
+
+        srcElements.forEach(
+            function (element) {
+
+                const value =
+                    element.getAttribute("src");
+
+
+                if (!value) {
+                    return;
+                }
+
+
+                /*
+                 * Ignore:
+                 *
+                 * /absolute/path
+                 * https://...
+                 * http://...
+                 * //
+                 * data:...
+                 * blob:...
+                 * #...
+                 */
+
+                if (
+                    value.startsWith("/") ||
+                    value.startsWith("//") ||
+                    value.startsWith("http://") ||
+                    value.startsWith("https://") ||
+                    value.startsWith("data:") ||
+                    value.startsWith("blob:") ||
+                    value.startsWith("#")
+                ) {
+                    return;
+                }
+
+
+                if (
+                    value.startsWith("assets/")
+                ) {
+
+                    element.setAttribute(
+                        "src",
+                        "/" + value
+                    );
+
+                }
+
+            }
+        );
+
+
+        /*
+         * HREF ATTRIBUTES
+         *
+         * This also protects component-level stylesheet,
+         * icon and link references if they are ever added
+         * to the frozen component.
+         */
+
+        const hrefElements =
+            container.querySelectorAll(
+                "[href]"
+            );
+
+
+        hrefElements.forEach(
+            function (element) {
+
+                const value =
+                    element.getAttribute("href");
+
+
+                if (!value) {
+                    return;
+                }
+
+
+                if (
+                    value.startsWith("/") ||
+                    value.startsWith("//") ||
+                    value.startsWith("http://") ||
+                    value.startsWith("https://") ||
+                    value.startsWith("data:") ||
+                    value.startsWith("blob:") ||
+                    value.startsWith("#")
+                ) {
+                    return;
+                }
+
+
+                if (
+                    value.startsWith("assets/")
+                ) {
+
+                    element.setAttribute(
+                        "href",
+                        "/" + value
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ======================================================================
+       LOAD STYLESHEET
+       ====================================================================== */
 
     function loadStyle(file) {
 
         return new Promise(
             function (resolve, reject) {
-
 
                 /*
                  * Prevent duplicate stylesheet loading.
@@ -219,7 +470,6 @@
        LOAD HTML COMPONENT
        ====================================================================== */
 
-
     async function loadComponent(
         selector,
         file
@@ -233,10 +483,12 @@
 
         if (!container) {
 
-            console.warn(
-                "CTM Component container missing:",
-                selector
-            );
+            /*
+             * Missing component containers are expected on
+             * pages that deliberately do not use that component.
+             *
+             * Do not treat this as a fatal application error.
+             */
 
             return false;
 
@@ -275,6 +527,16 @@
                 html;
 
 
+            /*
+             * Normalize component asset references AFTER
+             * injection and BEFORE the component controller runs.
+             */
+
+            normalizeComponentAssets(
+                container
+            );
+
+
             console.log(
                 "CTM Component loaded:",
                 file
@@ -306,12 +568,10 @@
        LOAD JAVASCRIPT CONTROLLER
        ====================================================================== */
 
-
     function loadScript(file) {
 
         return new Promise(
             function (resolve, reject) {
-
 
                 /*
                  * Prevent duplicate loading.
@@ -419,11 +679,9 @@
        LOAD HEADER
        ====================================================================== */
 
-
     async function loadHeader() {
 
         try {
-
 
             /*
              * STEP 1
@@ -492,19 +750,26 @@
        LOAD FOOTER
        ====================================================================== */
 
-
     async function loadFooter() {
 
         try {
+
+            /*
+             * Do not even request footer resources when the
+             * current page is intentionally footer-free.
+             */
+
+            if (!shouldLoadFooter()) {
+
+                return true;
+
+            }
 
 
             /*
              * STEP 1
              *
              * Load canonical footer stylesheet.
-             *
-             * This ensures Page 01–07 all receive
-             * exactly the same footer styling.
              */
 
             await loadStyle(
@@ -525,9 +790,14 @@
                 );
 
 
+            /*
+             * If a page intentionally has no footer container,
+             * the absence is not considered a component failure.
+             */
+
             if (!loaded) {
 
-                return false;
+                return true;
 
             }
 
@@ -556,12 +826,15 @@
        LOAD GLOBAL COMPONENTS
        ====================================================================== */
 
-
     async function loadGlobalComponents() {
 
         console.log(
             "CTM PATH™ Global Component Loader starting..."
         );
+
+
+        const page =
+            getCurrentPage();
 
 
         /*
@@ -574,6 +847,8 @@
 
         /*
          * FOOTER
+         *
+         * Page 06 automatically bypasses footer loading.
          */
 
         const footerLoaded =
@@ -586,11 +861,17 @@
 
         const result = {
 
+            page:
+                page,
+
             header:
                 headerLoaded,
 
             footer:
                 footerLoaded,
+
+            footerRequired:
+                shouldLoadFooter(),
 
             success:
                 headerLoaded &&
@@ -624,6 +905,59 @@
 
 
     /* ======================================================================
+       HEADER-ONLY LOADER
+       ======================================================================
+
+       Explicit API for pages that intentionally require only the
+       global header.
+
+       Page 06 uses this architecture conceptually.
+
+       ====================================================================== */
+
+    async function loadHeaderOnly() {
+
+        console.log(
+            "CTM PATH™ Header-Only Loader starting..."
+        );
+
+
+        const headerLoaded =
+            await loadHeader();
+
+
+        const result = {
+
+            page:
+                getCurrentPage(),
+
+            header:
+                headerLoaded,
+
+            footer:
+                false,
+
+            success:
+                headerLoaded
+
+        };
+
+
+        if (result.success) {
+
+            console.log(
+                "CTM PATH™ Header-Only Components Ready."
+            );
+
+        }
+
+
+        return result;
+
+    }
+
+
+    /* ======================================================================
        OPTIONAL AUTO INITIALIZATION
        ======================================================================
 
@@ -631,26 +965,21 @@
 
            CTM_COMPONENTS.load()
 
-       to load BOTH:
+       to load the canonical global components.
 
-           Header
-           Footer
+       Page 06 may call:
 
+           CTM_COMPONENTS.loadHeaderOnly()
 
-       Page 01 may call:
-
-           CTM_COMPONENTS.loadFooter()
-
-       when its existing Page-01 header must remain untouched.
-
+       when the page intentionally requires no footer.
 
        This loader deliberately does NOT automatically execute itself.
 
        This prevents:
 
-           • duplicate component injection
-           • duplicate controller execution
-           • accidental Page-01 header replacement
+       • duplicate component injection
+       • duplicate controller execution
+       • accidental Page-01 header replacement
 
        ====================================================================== */
 
@@ -659,17 +988,19 @@
        PUBLIC API
        ====================================================================== */
 
-
     window.CTM_COMPONENTS = {
 
         version:
-            "3.2",
+            "3.3",
 
         load:
             loadGlobalComponents,
 
         loadHeader:
             loadHeader,
+
+        loadHeaderOnly:
+            loadHeaderOnly,
 
         loadFooter:
             loadFooter
