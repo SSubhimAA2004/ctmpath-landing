@@ -1,2623 +1,1603 @@
 
-/* ==========================================================================
-   CTM PATH™ MILLIONAIRES™
+<!DOCTYPE html>
+<html lang="ta">
 
-   FILE:
-   js/page06.js
+<head>
 
-   PAGE:
-   06 — PERSONAL TRANSFORMATION PRESCRIPTION™
+    <meta charset="UTF-8">
 
-   VERSION:
-   3.0 — FIXED PAGE 06 → PAGE 07 NAVIGATION
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-   PURPOSE:
-   --------------------------------------------------------------------------
-   Page 06 is the final transformation / prescription page.
+    <title>
+        The Four Forces™ | CTM PATH™ MILLIONAIRES™
+    </title>
 
-   FINAL FLOW:
+    <meta
+        name="description"
+        content="CTM PATH™ MILLIONAIRES™ — Master Money, People, Time and Tasks to build a life that works for you."
+    >
 
-       PAGE 06
-          ↓
-       SEE MY NEXT STEP
-          ↓
-       Attempt JOURNEY_COMPLETED email
-          ↓
-       Preserve journey state
-          ↓
-       PAGE 07
+    <!-- ================================================================
+         FROZEN GLOBAL HEADER
+    ================================================================= -->
 
-   IMPORTANT:
+    <link
+        rel="stylesheet"
+        href="../css/header.css"
+    >
 
-   ✓ Page 06 does NOT generate the report
-   ✓ Page 06 does NOT generate PDF
-   ✓ Page 06 does NOT call DocumentService
-   ✓ Page 06 does NOT call ReportEngine
-   ✓ Page 06 does NOT call finalizeJourney()
-   ✓ Page 06 does NOT block navigation because email fails
-   ✓ Page 07 is always reachable from the navigator
+    <!-- ================================================================
+         PAGE 06 STYLES
+    ================================================================= -->
 
-   NAVIGATION CONTRACT:
+    <link
+        rel="stylesheet"
+        href="../css/page06.css"
+    >
 
-       Current live route:
-           /pages/page06
+    <!-- ================================================================
+         PAGE 06 VISUAL FALLBACK / STRUCTURE STYLES
 
-       Next live route:
-           /pages/page07
+         These styles are intentionally scoped to Page 06 only.
+         They do not modify the frozen global header or global styles.
+    ================================================================= -->
 
-   ========================================================================== */
+    <style>
 
-(function (window, document) {
-
-    "use strict";
-
-
-    /* ======================================================================
-       CONFIGURATION
-       ====================================================================== */
-
-    const CONFIG = {
-
-        pageName:
-            "PERSONAL TRANSFORMATION PRESCRIPTION™",
-
-        /*
-         * IMPORTANT:
-         *
-         * The live application uses clean page routes.
-         *
-         * Do NOT use:
-         *
-         *     page07.html
-         *
-         * because the deployed application is currently operating as:
-         *
-         *     /pages/page06
-         *
-         * and Page 07 is:
-         *
-         *     /pages/page07
-         */
-        nextPage:
-            "/pages/page07",
-
-        navigatorId:
-            "page06-next-button",
-
-        journeyStorageKey:
-            "CTM_GUIDED_JOURNEY_STATE",
-
-        deliveryStorageKey:
-            "CTM_PAGE06_EMAIL_DELIVERY",
-
-        peopleStorageKeys: [
-
-            "CTM_PERSON",
-            "CTM_PEOPLE",
-
-            "CTM_REGISTRATION",
-            "CTM_REGISTRATION_DATA",
-
-            "CTM_USER",
-            "CTM_USER_DATA",
-
-            "CTM_VISITOR",
-            "CTM_VISITOR_DATA",
-
-            "CTM_PROFILE",
-            "CTM_PROFILE_DATA",
-
-            "CTM_JOURNEY_IDENTITY",
-
-            "CTM_PAGE01_REGISTRATION",
-            "CTM_PAGE01_DATA"
-
-        ],
-
-        /*
-         * Maximum time allowed for the optional completion-email attempt.
-         *
-         * Navigation MUST NOT remain blocked indefinitely.
-         */
-        emailTimeoutMs:
-            5000
-
-    };
-
-
-    /* ======================================================================
-       STATE
-       ====================================================================== */
-
-    const state = {
-
-        initialized:
-            false,
-
-        navigating:
-            false,
-
-        emailAttempted:
-            false,
-
-        emailSucceeded:
-            false,
-
-        navigator:
-            null
-
-    };
-
-
-    /* ======================================================================
-       INITIALIZE
-       ====================================================================== */
-
-    function init() {
-
-        if (
-            state.initialized
-        ) {
-
-            /*
-             * If the component loader injected the navigator after the
-             * first initialization attempt, try binding again.
-             */
-            if (
-                !state.navigator ||
-                !document.documentElement.contains(
-                    state.navigator
-                )
-            ) {
-
-                bindNavigator();
-
-            }
-
-            return;
-
+        .page06-four-forces {
+            position: relative;
+            padding: 110px 0 120px;
+            overflow: hidden;
         }
 
-
-        state.initialized =
-            true;
-
-
-        console.log(
-            "CTM PATH™ Page06 v3.0 initialized."
-        );
-
-
-        bindNavigator();
-
-        exposeRuntime();
-
-    }
-
-
-    /* ======================================================================
-       FIND THE ACTUAL PAGE 06 NAVIGATOR
-       ====================================================================== */
-
-    function findNavigator() {
-
-        /*
-         * PRIMARY CONTRACT
-         *
-         * This is the actual button ID present in page06.html.
-         */
-        const exact =
-            document.getElementById(
-                CONFIG.navigatorId
-            );
-
-
-        if (
-            exact
-        ) {
-
-            return exact;
-
-        }
-
-
-        /*
-         * Compatibility selectors.
-         *
-         * These allow the controller to survive a future harmless
-         * markup variation without affecting the current contract.
-         */
-
-        const selectors = [
-
-            "[data-page06-next]",
-            "[data-next-page]",
-
-            "#page06Next",
-            "#page06-next",
-
-            "#nextPage",
-            "#next-page",
-
-            "#nextButton",
-            "#next-button",
-
-            "#continueButton",
-            "#continue-button",
-
-            ".page06-next",
-            ".navigator-next",
-            ".journey-next"
-
-        ];
-
-
-        for (
-            let i = 0;
-            i < selectors.length;
-            i++
-        ) {
-
-            const element =
-                document.querySelector(
-                    selectors[i]
-                );
-
-
-            if (
-                element
-            ) {
-
-                return element;
-
-            }
-
-        }
-
-
-        /*
-         * Final fallback:
-         *
-         * The screenshot shows the visible navigator button.
-         *
-         * Search buttons for the actual Page 06 CTA text.
-         */
-
-        const buttons =
-            document.querySelectorAll(
-                "button"
-            );
-
-
-        for (
-            let i = 0;
-            i < buttons.length;
-            i++
-        ) {
-
-            const button =
-                buttons[i];
-
-
-            const text =
-                String(
-                    button.textContent || ""
-                )
-                    .replace(
-                        /\s+/g,
-                        " "
-                    )
-                    .trim()
-                    .toLowerCase();
-
-
-            if (
-                text.indexOf(
-                    "see my next step"
-                ) !== -1
-            ) {
-
-                return button;
-
-            }
-
-
-            if (
-                text.indexOf(
-                    "show me the path"
-                ) !== -1
-            ) {
-
-                return button;
-
-            }
-
-
-            if (
-                text.indexOf(
-                    "அடுத்த படியை"
-                ) !== -1
-            ) {
-
-                return button;
-
-            }
-
-        }
-
-
-        return null;
-
-    }
-
-
-    /* ======================================================================
-       BIND NAVIGATOR
-       ====================================================================== */
-
-    function bindNavigator() {
-
-        const navigator =
-            findNavigator();
-
-
-        if (
-            !navigator
-        ) {
-
-            console.warn(
-                "Page06: Navigator #page06-next-button not found yet."
-            );
-
-
-            return false;
-
-        }
-
-
-        state.navigator =
-            navigator;
-
-
-        /*
-         * Prevent duplicate event listeners.
-         */
-
-        if (
-            navigator.dataset &&
-            navigator.dataset.ctmPage06NavigationBound === "true"
-        ) {
-
-            return true;
-
-        }
-
-
-        /*
-         * Mark as bound.
-         */
-
-        if (
-            navigator.dataset
-        ) {
-
-            navigator.dataset.ctmPage06NavigationBound =
-                "true";
-
-        }
-
-
-        /*
-         * Capture phase is intentional.
-         *
-         * It allows this controller to take ownership of the CTA
-         * even if another generic navigation listener is attached.
-         */
-
-        navigator.addEventListener(
-            "click",
-            handleNavigatorClick,
-            true
-        );
-
-
-        console.log(
-            "Page06: Navigator successfully bound:",
-            navigator
-        );
-
-
-        return true;
-
-    }
-
-
-    /* ======================================================================
-       NAVIGATOR CLICK
-       ====================================================================== */
-
-    async function handleNavigatorClick(
-        event
-    ) {
-
-        /*
-         * Take complete control of this click.
-         */
-
-        if (
-            event
-        ) {
-
-            event.preventDefault();
-
-            event.stopPropagation();
-
-
-            if (
-                typeof event.stopImmediatePropagation ===
-                "function"
-            ) {
-
-                event.stopImmediatePropagation();
-
-            }
-
-        }
-
-
-        /*
-         * Prevent double-clicks.
-         */
-
-        if (
-            state.navigating
-        ) {
-
-            return;
-
-        }
-
-
-        state.navigating =
-            true;
-
-
-        const button =
-            state.navigator ||
-            document.getElementById(
-                CONFIG.navigatorId
-            );
-
-
-        setButtonBusy(
-            button,
-            true
-        );
-
-
-        console.log(
-            "Page06: Navigator clicked."
-        );
-
-
-        /*
-         * --------------------------------------------------------------
-         * STEP 1
-         *
-         * Resolve identity.
-         * --------------------------------------------------------------
-         */
-
-        const identity =
-            resolveIdentity();
-
-
-        console.log(
-            "Page06: Resolved identity:",
-            identity
-        );
-
-
-        /*
-         * --------------------------------------------------------------
-         * STEP 2
-         *
-         * Attempt completion email.
-         *
-         * CRITICAL:
-         *
-         * Email is now NON-BLOCKING.
-         *
-         * Even if:
-         *
-         *   • email is missing
-         *   • API is unavailable
-         *   • API throws
-         *   • API times out
-         *   • backend returns an error
-         *
-         * the visitor STILL proceeds to Page 07.
-         * --------------------------------------------------------------
-         */
-
-        try {
-
-            await attemptCompletionEmail(
-                identity
-            );
-
-        }
-
-        catch (error) {
-
-            console.warn(
-                "Page06: Completion email attempt failed. Continuing to Page07.",
-                error
-            );
-
-        }
-
-
-        /*
-         * --------------------------------------------------------------
-         * STEP 3
-         *
-         * Mark Page 06 complete.
-         * --------------------------------------------------------------
-         */
-
-        markPageComplete();
-
-
-        /*
-         * --------------------------------------------------------------
-         * STEP 4
-         *
-         * Navigate.
-         *
-         * THIS IS THE CRITICAL FIX.
-         * --------------------------------------------------------------
-         */
-
-        navigateToPage07();
-
-    }
-
-
-    /* ======================================================================
-       ATTEMPT COMPLETION EMAIL
-       ====================================================================== */
-
-    async function attemptCompletionEmail(
-        identity
-    ) {
-
-        state.emailAttempted =
-            true;
-
-
-        /*
-         * No email available:
-         *
-         * Do not block Page 07.
-         */
-
-        if (
-            !identity.email
-        ) {
-
-            console.warn(
-                "Page06: No registered email recovered. Skipping email."
-            );
-
-
-            return false;
-
-        }
-
-
-        /*
-         * API unavailable:
-         *
-         * Do not block Page 07.
-         */
-
-        if (
-            !window.CTM_API ||
-            typeof window.CTM_API.sendEmail !==
-            "function"
-        ) {
-
-            console.warn(
-                "Page06: CTM_API.sendEmail unavailable. Skipping email."
-            );
-
-
-            return false;
-
-        }
-
-
-        /*
-         * Check whether this visitor has already received
-         * the completion email.
-         */
-
-        const previous =
-            loadDeliveryState();
-
-
-        if (
-            previous &&
-            previous.status === "SENT" &&
-            sameIdentity(
-                previous,
-                identity
-            )
-        ) {
-
-            console.log(
-                "Page06: JOURNEY_COMPLETED email already sent."
-            );
-
-
-            state.emailSucceeded =
-                true;
-
-
-            return true;
-
-        }
-
-
-        /*
-         * Save processing state.
-         */
-
-        saveDeliveryState({
-
-            status:
-                "PROCESSING",
-
-            type:
-                "JOURNEY_COMPLETED",
-
-            peopleId:
-                identity.peopleId || "",
-
-            email:
-                identity.email,
-
-            fullName:
-                identity.fullName || "",
-
-            startedAt:
-                new Date().toISOString()
-
-        });
-
-
-        /*
-         * Execute the backend request with a timeout.
-         */
-
-        let response;
-
-
-        try {
-
-            response =
-                await withTimeout(
-                    window.CTM_API.sendEmail({
-
-                        type:
-                            "JOURNEY_COMPLETED",
-
-                        to:
-                            identity.email,
-
-                        name:
-                            identity.fullName || ""
-
-                    }),
-                    CONFIG.emailTimeoutMs
-                );
-
-        }
-
-        catch (error) {
-
-            clearDeliveryState();
-
-
-            throw error;
-
-        }
-
-
-        console.log(
-            "Page06: Completion email response:",
-            response
-        );
-
-
-        /*
-         * Normalize the response.
-         */
-
-        const result =
-            unwrapResponse(
-                response
-            );
-
-
-        /*
-         * Verify if backend positively confirmed delivery.
-         */
-
-        if (
-            !emailResponseSucceeded(
-                result
-            )
-        ) {
-
-            clearDeliveryState();
-
-
-            console.warn(
-                "Page06: Email was not confirmed by backend."
-            );
-
-
-            return false;
-
-        }
-
-
-        /*
-         * Save confirmed delivery.
-         */
-
-        const delivery = {
-
-            status:
-                "SENT",
-
-            type:
-                "JOURNEY_COMPLETED",
-
-            peopleId:
-                identity.peopleId || "",
-
-            email:
-                firstString(
-
-                    result &&
-                    result.recipient,
-
-                    result &&
-                    result.email,
-
-                    result &&
-                    result.to,
-
-                    identity.email
-
+        .page06-four-forces::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(
+                    circle at 78% 42%,
+                    rgba(33, 199, 183, 0.11),
+                    transparent 28rem
                 ),
-
-            fullName:
-                identity.fullName || "",
-
-            emailSent:
-                true,
-
-            deliveredAt:
-                new Date().toISOString()
-
-        };
-
-
-        saveDeliveryState(
-            delivery
-        );
-
-
-        window.CTM_PAGE06_EMAIL_DELIVERY =
-            delivery;
-
-
-        state.emailSucceeded =
-            true;
-
-
-        console.log(
-            "Page06: JOURNEY_COMPLETED email confirmed."
-        );
-
-
-        return true;
-
-    }
-
-
-    /* ======================================================================
-       WITH TIMEOUT
-       ====================================================================== */
-
-    function withTimeout(
-        promise,
-        timeoutMs
-    ) {
-
-        return new Promise(
-            function (
-                resolve,
-                reject
-            ) {
-
-                let settled =
-                    false;
-
-
-                const timer =
-                    window.setTimeout(
-                        function () {
-
-                            if (
-                                settled
-                            ) {
-
-                                return;
-
-                            }
-
-
-                            settled =
-                                true;
-
-
-                            reject(
-                                new Error(
-                                    "Completion email request timed out."
-                                )
-                            );
-
-                        },
-                        timeoutMs
-                    );
-
-
-                Promise.resolve(
-                    promise
-                )
-                    .then(
-                        function (
-                            value
-                        ) {
-
-                            if (
-                                settled
-                            ) {
-
-                                return;
-
-                            }
-
-
-                            settled =
-                                true;
-
-
-                            window.clearTimeout(
-                                timer
-                            );
-
-
-                            resolve(
-                                value
-                            );
-
-                        }
-                    )
-                    .catch(
-                        function (
-                            error
-                        ) {
-
-                            if (
-                                settled
-                            ) {
-
-                                return;
-
-                            }
-
-
-                            settled =
-                                true;
-
-
-                            window.clearTimeout(
-                                timer
-                            );
-
-
-                            reject(
-                                error
-                            );
-
-                        }
-                    );
-
-            }
-        );
-
-    }
-
-
-    /* ======================================================================
-       NORMALIZE API RESPONSE
-       ====================================================================== */
-
-    function unwrapResponse(
-        response
-    ) {
-
-        if (
-            response ===
-            null ||
-            response ===
-            undefined
-        ) {
-
-            return null;
-
-        }
-
-
-        if (
-            typeof response ===
-            "string"
-        ) {
-
-            try {
-
-                return JSON.parse(
-                    response
+                radial-gradient(
+                    circle at 18% 72%,
+                    rgba(215, 181, 109, 0.08),
+                    transparent 24rem
                 );
-
-            }
-
-            catch (error) {
-
-                return {
-
-                    message:
-                        response
-
-                };
-
-            }
-
         }
 
-
-        if (
-            response.data &&
-            typeof response.data ===
-            "object"
-        ) {
-
-            return response.data;
-
+        .page06-four-forces-inner {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns:
+                minmax(320px, 0.82fr)
+                minmax(520px, 1.18fr);
+            gap: 70px;
+            align-items: center;
         }
 
-
-        return response;
-
-    }
-
-
-    /* ======================================================================
-       EMAIL SUCCESS CHECK
-       ====================================================================== */
-
-    function emailResponseSucceeded(
-        result
-    ) {
-
-        if (
-            !result ||
-            typeof result !==
-            "object"
-        ) {
-
-            return false;
-
+        .page06-four-forces-copy {
+            text-align: left;
         }
 
-
-        if (
-            result.success ===
-            false
-        ) {
-
-            return false;
-
+        .page06-four-forces-eyebrow {
+            margin: 0 0 24px;
+            color: #d7b56d;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
         }
 
-
-        if (
-            result.emailSent ===
-            false
-        ) {
-
-            return false;
-
+        .page06-four-forces-title {
+            margin: 0;
+            color: #f5f2e9;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(3.5rem, 6.4vw, 7rem);
+            font-weight: 800;
+            line-height: 0.91;
+            letter-spacing: -0.045em;
         }
 
-
-        if (
-            result.sent ===
-            false
-        ) {
-
-            return false;
-
+        .page06-four-forces-title span {
+            display: block;
         }
 
-
-        if (
-            String(
-                result.status ||
-                ""
-            ).toUpperCase() ===
-            "FAILURE"
-        ) {
-
-            return false;
-
+        .page06-four-forces-title .accent {
+            color: #ead39f;
         }
 
-
-        if (
-            String(
-                result.status ||
-                ""
-            ).toUpperCase() ===
-            "ERROR"
-        ) {
-
-            return false;
-
+        .page06-four-forces-subtitle {
+            margin: 34px 0 0;
+            color: #dddcd4;
+            font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+            font-weight: 650;
+            line-height: 1.7;
         }
 
-
-        /*
-         * Explicit affirmative confirmation.
-         */
-
-        return (
-
-            result.success === true ||
-
-            result.emailSent === true ||
-
-            result.sent === true ||
-
-            String(
-                result.status ||
-                ""
-            ).toUpperCase() ===
-            "SUCCESS"
-
-        );
-
-    }
-
-
-    /* ======================================================================
-       RESOLVE VISITOR IDENTITY
-       ====================================================================== */
-
-    function resolveIdentity() {
-
-        const candidates =
-            [];
-
-
-        /*
-         * Global runtime objects.
-         */
-
-        pushCandidate(
-            candidates,
-            window.CTM_PERSON
-        );
-
-
-        pushCandidate(
-            candidates,
-            window.CTM_PEOPLE
-        );
-
-
-        pushCandidate(
-            candidates,
-            window.CTM_REGISTRATION
-        );
-
-
-        pushCandidate(
-            candidates,
-            window.CTM_USER
-        );
-
-
-        pushCandidate(
-            candidates,
-            window.CTM_VISITOR
-        );
-
-
-        pushCandidate(
-            candidates,
-            window.CTM_PROFILE
-        );
-
-
-        pushCandidate(
-            candidates,
-            window.CTM_JOURNEY_IDENTITY
-        );
-
-
-        /*
-         * Journey state.
-         */
-
-        const journey =
-            readStorageObject(
-                CONFIG.journeyStorageKey
-            );
-
-
-        pushCandidate(
-            candidates,
-            journey
-        );
-
-
-        if (
-            journey
-        ) {
-
-            pushCandidate(
-                candidates,
-                journey.person
-            );
-
-
-            pushCandidate(
-                candidates,
-                journey.people
-            );
-
-
-            pushCandidate(
-                candidates,
-                journey.registration
-            );
-
-
-            pushCandidate(
-                candidates,
-                journey.identity
-            );
-
-
-            pushCandidate(
-                candidates,
-                journey.user
-            );
-
-
-            pushCandidate(
-                candidates,
-                journey.visitor
-            );
-
-
-            pushCandidate(
-                candidates,
-                journey.profile
-            );
-
-
-            pushCandidate(
-                candidates,
-                journey.data
-            );
-
+        .page06-four-forces-subtitle-en {
+            margin: 10px 0 0;
+            color: #7de3d9;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.16em;
         }
 
-
-        /*
-         * Known registration storage keys.
-         */
-
-        CONFIG.peopleStorageKeys.forEach(
-            function (
-                key
-            ) {
-
-                pushCandidate(
-                    candidates,
-                    readStorageObject(
-                        key
-                    )
-                );
-
-            }
-        );
-
-
-        let peopleId =
-            "";
-
-
-        let email =
-            "";
-
-
-        let fullName =
-            "";
-
-
-        /*
-         * Search candidates.
-         */
-
-        for (
-            let i = 0;
-            i < candidates.length;
-            i++
-        ) {
-
-            const candidate =
-                candidates[i];
-
-
-            if (
-                !candidate
-            ) {
-
-                continue;
-
-            }
-
-
-            if (
-                !peopleId
-            ) {
-
-                peopleId =
-                    findValueDeep(
-                        candidate,
-                        [
-
-                            "PeopleID",
-                            "peopleId",
-                            "peopleID",
-                            "personId",
-                            "personID",
-                            "clientId",
-                            "clientID"
-
-                        ]
-                    );
-
-            }
-
-
-            if (
-                !email
-            ) {
-
-                email =
-                    findValueDeep(
-                        candidate,
-                        [
-
-                            "Email",
-                            "email",
-                            "emailAddress",
-                            "EmailAddress",
-                            "registeredEmail"
-
-                        ]
-                    );
-
-            }
-
-
-            if (
-                !fullName
-            ) {
-
-                fullName =
-                    findValueDeep(
-                        candidate,
-                        [
-
-                            "FullName",
-                            "fullName",
-                            "Name",
-                            "name",
-                            "visitorName",
-                            "registeredName"
-
-                        ]
-                    );
-
-            }
-
-
-            if (
-                peopleId &&
-                email &&
-                fullName
-            ) {
-
-                break;
-
-            }
-
+        .page06-force-line {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
         }
 
-
-        /*
-         * Browser storage recovery.
-         */
-
-        if (
-            !peopleId ||
-            !email ||
-            !fullName
-        ) {
-
-            const scanned =
-                scanBrowserStorage();
-
-
-            if (
-                !peopleId
-            ) {
-
-                peopleId =
-                    scanned.peopleId;
-
-            }
-
-
-            if (
-                !email
-            ) {
-
-                email =
-                    scanned.email;
-
-            }
-
-
-            if (
-                !fullName
-            ) {
-
-                fullName =
-                    scanned.fullName;
-
-            }
-
+        .page06-force-word {
+            color: #ead39f;
+            font-size: 0.78rem;
+            font-weight: 850;
+            letter-spacing: 0.14em;
         }
 
+        .page06-force-dot {
+            color: #21c7b7;
+            font-weight: 900;
+        }
 
-        return {
+        .page06-force-wheel {
+            position: relative;
+            width: min(620px, 100%);
+            aspect-ratio: 1;
+            margin: 0 auto;
+        }
 
-            peopleId:
-                normalizeString(
-                    peopleId
+        .page06-force-wheel::before {
+            content: "";
+            position: absolute;
+            inset: 8%;
+            border: 1px solid rgba(215, 181, 109, 0.18);
+            border-radius: 50%;
+            box-shadow:
+                0 0 0 28px rgba(33, 199, 183, 0.025),
+                0 0 0 58px rgba(215, 181, 109, 0.018);
+        }
+
+        .page06-force-wheel::after {
+            content: "";
+            position: absolute;
+            inset: 18%;
+            border: 1px solid rgba(33, 199, 183, 0.10);
+            border-radius: 50%;
+        }
+
+        .page06-force-node {
+            position: absolute;
+            width: 30%;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    rgba(255, 255, 255, 0.08),
+                    transparent 58%
                 ),
+                rgba(4, 19, 19, 0.90);
+            box-shadow:
+                0 18px 45px rgba(0, 0, 0, 0.32);
+            z-index: 4;
+        }
 
-            email:
-                normalizeString(
-                    email
+        .page06-force-node.money {
+            top: 1%;
+            left: 35%;
+            border-color: rgba(215, 181, 109, 0.30);
+        }
+
+        .page06-force-node.people {
+            top: 35%;
+            right: 1%;
+            border-color: rgba(33, 199, 183, 0.25);
+        }
+
+        .page06-force-node.time {
+            bottom: 1%;
+            left: 35%;
+            border-color: rgba(215, 181, 109, 0.25);
+        }
+
+        .page06-force-node.tasks {
+            top: 35%;
+            left: 1%;
+            border-color: rgba(33, 199, 183, 0.25);
+        }
+
+        .page06-force-icon {
+            display: grid;
+            width: 52px;
+            height: 52px;
+            place-items: center;
+            margin-bottom: 12px;
+            border: 1px solid rgba(215, 181, 109, 0.35);
+            border-radius: 50%;
+            color: #ead39f;
+            font-size: 1.45rem;
+            font-weight: 800;
+            background: rgba(215, 181, 109, 0.06);
+        }
+
+        .page06-force-node.people .page06-force-icon,
+        .page06-force-node.tasks .page06-force-icon {
+            color: #7de3d9;
+            border-color: rgba(33, 199, 183, 0.32);
+            background: rgba(33, 199, 183, 0.06);
+        }
+
+        .page06-force-node-title {
+            margin: 0;
+            color: #f5f2e9;
+            font-size: 0.92rem;
+            font-weight: 850;
+            letter-spacing: 0.14em;
+        }
+
+        .page06-force-node-ta {
+            margin: 5px 0 0;
+            color: #a8b0aa;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .page06-force-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 6;
+            width: 39%;
+            aspect-ratio: 1;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(215, 181, 109, 0.68);
+            border-radius: 50%;
+            background:
+                radial-gradient(
+                    circle at 50% 35%,
+                    rgba(33, 199, 183, 0.12),
+                    transparent 58%
                 ),
-
-            fullName:
-                normalizeString(
-                    fullName
-                )
-
-        };
-
-    }
-
-
-    /* ======================================================================
-       STORAGE SCANNER
-       ====================================================================== */
-
-    function scanBrowserStorage() {
-
-        const result = {
-
-            peopleId:
-                "",
-
-            email:
-                "",
-
-            fullName:
-                ""
-
-        };
-
-
-        scanStorageArea(
-            window.localStorage,
-            result
-        );
-
-
-        if (
-            !result.peopleId ||
-            !result.email ||
-            !result.fullName
-        ) {
-
-            scanStorageArea(
-                window.sessionStorage,
-                result
-            );
-
+                #071b1b;
+            box-shadow:
+                0 0 0 10px rgba(215, 181, 109, 0.035),
+                0 0 45px rgba(33, 199, 183, 0.10),
+                0 24px 65px rgba(0, 0, 0, 0.42);
+            text-align: center;
         }
 
-
-        return result;
-
-    }
-
-
-    /* ======================================================================
-       SCAN STORAGE AREA
-       ====================================================================== */
-
-    function scanStorageArea(
-        storage,
-        result
-    ) {
-
-        if (
-            !storage
-        ) {
-
-            return;
-
+        .page06-force-core-crown {
+            margin-bottom: 13px;
+            color: #d7b56d;
+            font-size: 1.5rem;
         }
 
+        .page06-force-core-brand {
+            margin: 0;
+            color: #f5f2e9;
+            font-size: 0.68rem;
+            font-weight: 850;
+            letter-spacing: 0.25em;
+        }
 
-        try {
+        .page06-force-core-title {
+            margin: 9px 0 0;
+            color: #ead39f;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(1.25rem, 2.4vw, 2rem);
+            font-weight: 800;
+            line-height: 1.02;
+        }
 
-            for (
-                let i = 0;
-                i < storage.length;
-                i++
-            ) {
+        .page06-force-core-subtitle {
+            margin: 14px 0 0;
+            color: #7de3d9;
+            font-size: 0.56rem;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            line-height: 1.65;
+        }
 
-                const key =
-                    storage.key(
-                        i
-                    );
+        .page06-force-connector {
+            position: absolute;
+            inset: 25%;
+            z-index: 1;
+            border: 1px dashed rgba(215, 181, 109, 0.20);
+            border-radius: 50%;
+            animation: page06Orbit 24s linear infinite;
+        }
 
-
-                if (
-                    !key
-                ) {
-
-                    continue;
-
-                }
-
-
-                const raw =
-                    storage.getItem(
-                        key
-                    );
-
-
-                if (
-                    !raw
-                ) {
-
-                    continue;
-
-                }
-
-
-                let value;
-
-
-                try {
-
-                    value =
-                        JSON.parse(
-                            raw
-                        );
-
-                }
-
-                catch (error) {
-
-                    continue;
-
-                }
-
-
-                if (
-                    !value ||
-                    typeof value !==
-                    "object"
-                ) {
-
-                    continue;
-
-                }
-
-
-                if (
-                    !result.peopleId
-                ) {
-
-                    result.peopleId =
-                        findValueDeep(
-                            value,
-                            [
-
-                                "PeopleID",
-                                "peopleId",
-                                "peopleID",
-                                "personId",
-                                "clientId"
-
-                            ]
-                        );
-
-                }
-
-
-                if (
-                    !result.email
-                ) {
-
-                    result.email =
-                        findValueDeep(
-                            value,
-                            [
-
-                                "Email",
-                                "email",
-                                "emailAddress",
-                                "registeredEmail"
-
-                            ]
-                        );
-
-                }
-
-
-                if (
-                    !result.fullName
-                ) {
-
-                    result.fullName =
-                        findValueDeep(
-                            value,
-                            [
-
-                                "FullName",
-                                "fullName",
-                                "Name",
-                                "name"
-
-                            ]
-                        );
-
-                }
-
-
-                if (
-                    result.peopleId &&
-                    result.email &&
-                    result.fullName
-                ) {
-
-                    return;
-
-                }
-
+        @keyframes page06Orbit {
+            from {
+                transform: rotate(0deg);
             }
 
-        }
-
-        catch (error) {
-
-            console.warn(
-                "Page06: Browser storage scan unavailable.",
-                error
-            );
-
-        }
-
-    }
-
-
-    /* ======================================================================
-       DEEP VALUE FINDER
-       ====================================================================== */
-
-    function findValueDeep(
-        source,
-        keys
-    ) {
-
-        if (
-            !source ||
-            typeof source !==
-            "object"
-        ) {
-
-            return "";
-
-        }
-
-
-        /*
-         * Direct keys first.
-         */
-
-        for (
-            let i = 0;
-            i < keys.length;
-            i++
-        ) {
-
-            const key =
-                keys[i];
-
-
-            if (
-                Object.prototype.hasOwnProperty.call(
-                    source,
-                    key
-                )
-            ) {
-
-                const value =
-                    source[key];
-
-
-                if (
-                    value !==
-                    null &&
-                    value !==
-                    undefined &&
-                    String(value).trim() !==
-                    ""
-                ) {
-
-                    return String(
-                        value
-                    ).trim();
-
-                }
-
+            to {
+                transform: rotate(360deg);
             }
-
         }
 
-
-        /*
-         * Recursive search.
-         */
-
-        const sourceKeys =
-            Object.keys(
-                source
-            );
-
-
-        for (
-            let i = 0;
-            i < sourceKeys.length;
-            i++
-        ) {
-
-            const value =
-                source[
-                    sourceKeys[i]
-                ];
-
-
-            if (
-                value &&
-                typeof value ===
-                "object"
-            ) {
-
-                const found =
-                    findValueDeep(
-                        value,
-                        keys
-                    );
-
-
-                if (
-                    found
-                ) {
-
-                    return found;
-
-                }
-
-            }
-
-        }
-
-
-        return "";
-
-    }
-
-
-    /* ======================================================================
-       CANDIDATE HELPER
-       ====================================================================== */
-
-    function pushCandidate(
-        candidates,
-        value
-    ) {
-
-        if (
-            value &&
-            typeof value ===
-            "object"
-        ) {
-
-            candidates.push(
-                value
-            );
-
-        }
-
-    }
-
-
-    /* ======================================================================
-       DELIVERY STATE
-       ====================================================================== */
-
-    function loadDeliveryState() {
-
-        return readStorageObject(
-            CONFIG.deliveryStorageKey
-        );
-
-    }
-
-
-    function saveDeliveryState(
-        value
-    ) {
-
-        try {
-
-            window.sessionStorage.setItem(
-                CONFIG.deliveryStorageKey,
-                JSON.stringify(
-                    value
-                )
-            );
-
-        }
-
-        catch (error) {
-
-            console.warn(
-                "Page06: Unable to save email delivery state.",
-                error
-            );
-
-        }
-
-    }
-
-
-    function clearDeliveryState() {
-
-        try {
-
-            window.sessionStorage.removeItem(
-                CONFIG.deliveryStorageKey
-            );
-
-        }
-
-        catch (error) {
-
-            console.warn(
-                "Page06: Unable to clear delivery state.",
-                error
-            );
-
-        }
-
-    }
-
-
-    /* ======================================================================
-       SAME VISITOR CHECK
-       ====================================================================== */
-
-    function sameIdentity(
-        delivery,
-        identity
-    ) {
-
-        if (
-            !delivery ||
-            !identity
-        ) {
-
-            return false;
-
-        }
-
-
-        const deliveryPeopleId =
-            normalizeString(
-                delivery.peopleId
-            );
-
-
-        const identityPeopleId =
-            normalizeString(
-                identity.peopleId
-            );
-
-
-        if (
-            deliveryPeopleId &&
-            identityPeopleId
-        ) {
-
-            return (
-                deliveryPeopleId ===
-                identityPeopleId
-            );
-
-        }
-
-
-        const deliveryEmail =
-            normalizeString(
-                delivery.email
-            ).toLowerCase();
-
-
-        const identityEmail =
-            normalizeString(
-                identity.email
-            ).toLowerCase();
-
-
-        return Boolean(
-
-            deliveryEmail &&
-            identityEmail &&
-            deliveryEmail ===
-            identityEmail
-
-        );
-
-    }
-
-
-    /* ======================================================================
-       MARK PAGE 06 COMPLETE
-       ====================================================================== */
-
-    function markPageComplete() {
-
-        try {
-
-            const journey =
-                readStorageObject(
-                    CONFIG.journeyStorageKey
-                ) || {};
-
-
-            /*
-             * Preserve all existing journey information.
-             */
-
-            journey.page06Completed =
-                true;
-
-
-            journey.page06CompletedAt =
-                new Date().toISOString();
-
-
-            journey.currentPage =
-                7;
-
-
-            journey.currentPageName =
-                "CONTINUE YOUR GUIDED JOURNEY™";
-
-
-            journey.lastCompletedPage =
-                Math.max(
-                    Number(
-                        journey.lastCompletedPage ||
-                        0
-                    ),
-                    6
+        .page06-pain {
+            position: relative;
+            padding: 100px 0;
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(4, 19, 19, 0.72),
+                    rgba(7, 27, 27, 0.98)
                 );
-
-
-            /*
-             * Persist locally.
-             */
-
-            window.localStorage.setItem(
-                CONFIG.journeyStorageKey,
-                JSON.stringify(
-                    journey
-                )
-            );
-
-
-            /*
-             * Persist in session too.
-             */
-
-            try {
-
-                window.sessionStorage.setItem(
-                    CONFIG.journeyStorageKey,
-                    JSON.stringify(
-                        journey
-                    )
-                );
-
-            }
-
-            catch (sessionError) {
-
-                /*
-                 * Non-blocking.
-                 */
-
-            }
-
-
-            console.log(
-                "Page06: Journey state marked complete."
-            );
-
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
 
-        catch (error) {
-
-            /*
-             * Navigation must never be blocked by a storage problem.
-             */
-
-            console.warn(
-                "Page06: Could not persist completion state.",
-                error
-            );
-
+        .page06-pain-header {
+            max-width: 760px;
+            margin: 0 auto 55px;
+            text-align: center;
         }
 
-    }
-
-
-    /* ======================================================================
-       THE CRITICAL PAGE 07 NAVIGATION
-       ====================================================================== */
-
-    function navigateToPage07() {
-
-        console.log(
-            "================================================"
-        );
-
-
-        console.log(
-            "CTM PATH™"
-        );
-
-
-        console.log(
-            "PAGE 06 → PAGE 07"
-        );
-
-
-        console.log(
-            "Destination:",
-            CONFIG.nextPage
-        );
-
-
-        console.log(
-            "================================================"
-        );
-
-
-        /*
-         * Use the clean deployed route.
-         */
-
-        window.location.assign(
-            CONFIG.nextPage
-        );
-
-    }
-
-
-    /* ======================================================================
-       BUTTON BUSY STATE
-       ====================================================================== */
-
-    function setButtonBusy(
-        button,
-        busy
-    ) {
-
-        if (
-            !button
-        ) {
-
-            return;
-
+        .page06-pain-title {
+            margin: 0;
+            color: #f5f2e9;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(2rem, 4vw, 3.6rem);
+            line-height: 1.05;
         }
 
+        .page06-pain-title-ta {
+            margin: 0 0 10px;
+            color: #ead39f;
+            font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+            font-weight: 800;
+        }
 
-        if (
-            busy
-        ) {
+        .page06-pain-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+        }
 
-            if (
-                !button.dataset.originalText
-            ) {
+        .page06-pain-card {
+            min-height: 220px;
+            padding: 28px 22px;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            background: rgba(255,255,255,0.025);
+            text-align: center;
+        }
 
-                button.dataset.originalText =
-                    button.innerHTML;
+        .page06-pain-icon {
+            display: grid;
+            width: 52px;
+            height: 52px;
+            margin: 0 auto 20px;
+            place-items: center;
+            border: 1px solid rgba(215,181,109,0.30);
+            border-radius: 50%;
+            color: #ead39f;
+            font-size: 1.3rem;
+        }
 
+        .page06-pain-ta {
+            margin: 0 0 9px;
+            color: #f5f2e9;
+            font-size: 1.05rem;
+            font-weight: 800;
+            line-height: 1.55;
+        }
+
+        .page06-pain-en {
+            margin: 0;
+            color: #a8b0aa;
+            font-size: 0.82rem;
+            line-height: 1.65;
+        }
+
+        .page06-pain-truth {
+            margin: 45px auto 0;
+            color: #e16b68;
+            font-size: clamp(1rem, 1.7vw, 1.25rem);
+            font-weight: 750;
+            text-align: center;
+        }
+
+        .page06-pain-truth-en {
+            margin: 8px 0 0;
+            color: #a8b0aa;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.13em;
+            text-align: center;
+        }
+
+        .page06-path {
+            padding: 110px 0;
+        }
+
+        .page06-path-header {
+            max-width: 760px;
+            margin: 0 auto 55px;
+            text-align: center;
+        }
+
+        .page06-path-title-ta {
+            margin: 0 0 9px;
+            color: #f5f2e9;
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            font-weight: 800;
+        }
+
+        .page06-path-title-en {
+            margin: 0;
+            color: #d7b56d;
+            font-size: 0.78rem;
+            font-weight: 850;
+            letter-spacing: 0.16em;
+        }
+
+        .page06-path-grid {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .page06-path-card {
+            position: relative;
+            min-height: 230px;
+            padding: 25px 16px;
+            border: 1px solid rgba(255,255,255,0.075);
+            border-radius: 18px;
+            background: rgba(255,255,255,0.025);
+            text-align: center;
+        }
+
+        .page06-path-number {
+            color: #d7b56d;
+            font-size: 0.66rem;
+            font-weight: 850;
+            letter-spacing: 0.12em;
+        }
+
+        .page06-path-icon {
+            display: grid;
+            width: 48px;
+            height: 48px;
+            margin: 18px auto;
+            place-items: center;
+            border: 1px solid rgba(33,199,183,0.25);
+            border-radius: 50%;
+            color: #7de3d9;
+            font-size: 1.2rem;
+        }
+
+        .page06-path-card h3 {
+            margin: 0 0 8px;
+            color: #f5f2e9;
+            font-size: 0.82rem;
+            font-weight: 850;
+            letter-spacing: 0.08em;
+        }
+
+        .page06-path-card p {
+            margin: 0;
+            color: #a8b0aa;
+            font-size: 0.75rem;
+            line-height: 1.65;
+        }
+
+        .page06-path-card strong {
+            display: block;
+            margin-top: 16px;
+            color: #ead39f;
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+        }
+
+        .page06-final {
+            position: relative;
+            padding: 120px 0 130px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            background:
+                radial-gradient(
+                    circle at 50% 50%,
+                    rgba(33,199,183,0.12),
+                    transparent 30rem
+                ),
+                #041313;
+            text-align: center;
+        }
+
+        .page06-final-title-ta {
+            margin: 0 0 12px;
+            color: #f5f2e9;
+            font-size: clamp(1.7rem, 3.5vw, 2.7rem);
+            font-weight: 800;
+        }
+
+        .page06-final-title-en {
+            margin: 0 0 38px;
+            color: #d7b56d;
+            font-size: 0.78rem;
+            font-weight: 850;
+            letter-spacing: 0.16em;
+        }
+
+        .page06-final-statement {
+            max-width: 700px;
+            margin: 0 auto 38px;
+            color: #dddcd4;
+            font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+            line-height: 1.8;
+        }
+
+        .page06-final-statement strong {
+            color: #f5f2e9;
+        }
+
+        .page06-final-force-line {
+            margin: 0 0 38px;
+            color: #7de3d9;
+            font-size: 0.75rem;
+            font-weight: 850;
+            letter-spacing: 0.17em;
+        }
+
+        .page06 .primary-cta {
+            min-width: 300px;
+        }
+
+        @media (max-width: 1000px) {
+
+            .page06-four-forces-inner {
+                grid-template-columns: 1fr;
+                gap: 55px;
             }
 
-
-            button.setAttribute(
-                "aria-busy",
-                "true"
-            );
-
-
-            button.setAttribute(
-                "aria-disabled",
-                "true"
-            );
-
-
-            if (
-                "disabled" in button
-            ) {
-
-                button.disabled =
-                    true;
-
+            .page06-four-forces-copy {
+                text-align: center;
             }
 
-
-            button.classList.add(
-                "is-loading"
-            );
-
-
-            /*
-             * Keep the button visually alive while the email request
-             * is attempted.
-             */
-
-            button.innerHTML =
-                [
-                    '<span class="page06-email-status">',
-                    '<span>உங்கள் அடுத்த படி தயாராகிறது...</span>',
-                    '<span>PREPARING YOUR NEXT STEP...</span>',
-                    "</span>"
-                ].join("");
-
-        }
-
-        else {
-
-            button.removeAttribute(
-                "aria-busy"
-            );
-
-
-            button.removeAttribute(
-                "aria-disabled"
-            );
-
-
-            button.classList.remove(
-                "is-loading"
-            );
-
-
-            if (
-                "disabled" in button
-            ) {
-
-                button.disabled =
-                    false;
-
+            .page06-force-line {
+                justify-content: center;
             }
 
-
-            if (
-                button.dataset.originalText
-            ) {
-
-                button.innerHTML =
-                    button.dataset.originalText;
-
+            .page06-pain-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
-        }
-
-    }
-
-
-    /* ======================================================================
-       READ STORAGE OBJECT
-       ====================================================================== */
-
-    function readStorageObject(
-        key
-    ) {
-
-        if (
-            !key
-        ) {
-
-            return null;
-
-        }
-
-
-        /*
-         * localStorage first.
-         */
-
-        try {
-
-            const raw =
-                window.localStorage.getItem(
-                    key
-                );
-
-
-            if (
-                raw
-            ) {
-
-                const parsed =
-                    parseJson(
-                        raw
-                    );
-
-
-                if (
-                    parsed
-                ) {
-
-                    return parsed;
-
-                }
-
+            .page06-path-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
             }
 
         }
 
-        catch (error) {
+        @media (max-width: 680px) {
 
-            /*
-             * Continue to sessionStorage.
-             */
+            .page06-four-forces {
+                padding: 70px 0 80px;
+            }
 
-        }
+            .page06-four-forces-inner {
+                grid-template-columns: 1fr;
+            }
 
+            .page06-four-forces-title {
+                font-size: clamp(3rem, 15vw, 5rem);
+            }
 
-        /*
-         * sessionStorage.
-         */
+            .page06-force-wheel {
+                width: min(500px, 100%);
+            }
 
-        try {
+            .page06-force-node {
+                width: 34%;
+            }
 
-            const raw =
-                window.sessionStorage.getItem(
-                    key
-                );
+            .page06-force-core {
+                width: 43%;
+            }
 
+            .page06-force-icon {
+                width: 42px;
+                height: 42px;
+                margin-bottom: 7px;
+                font-size: 1rem;
+            }
 
-            if (
-                raw
-            ) {
+            .page06-force-node-title {
+                font-size: 0.68rem;
+            }
 
-                return parseJson(
-                    raw
-                );
+            .page06-force-node-ta {
+                font-size: 0.62rem;
+            }
 
+            .page06-pain {
+                padding: 75px 0;
+            }
+
+            .page06-pain-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page06-path {
+                padding: 80px 0;
+            }
+
+            .page06-path-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .page06-final {
+                padding: 85px 0 100px;
             }
 
         }
 
-        catch (error) {
+    </style>
 
-            /*
-             * Non-blocking.
-             */
+</head>
 
-        }
 
+<body>
 
-        return null;
+    <!-- ================================================================
+         FROZEN GLOBAL HEADER
+    ================================================================= -->
 
-    }
+    <div id="global-header"></div>
 
 
-    /* ======================================================================
-       JSON PARSER
-       ====================================================================== */
+    <!-- ================================================================
+         PAGE 06
+         THE FOUR FORCES™
+    ================================================================= -->
 
-    function parseJson(
-        value
-    ) {
+    <main
+        id="page06"
+        class="page06"
+    >
 
-        if (
-            !value
-        ) {
+        <!-- ============================================================
+             JOURNEY INDICATOR
+        ============================================================= -->
 
-            return null;
+        <section
+            class="journey-indicator"
+            aria-label="Journey progress"
+        >
 
-        }
+            <p>
+                JOURNEY 06 / 07
+            </p>
 
+        </section>
 
-        if (
-            typeof value ===
-            "object"
-        ) {
 
-            return value;
+        <!-- ============================================================
+             HERO — THE FOUR FORCES
+        ============================================================= -->
 
-        }
+        <section class="page06-four-forces">
 
+            <div class="page06-container page06-four-forces-inner">
 
-        try {
+                <div class="page06-four-forces-copy">
 
-            return JSON.parse(
-                value
-            );
+                    <p class="page06-four-forces-eyebrow">
+                        THE FOUR FORCES™
+                    </p>
 
-        }
+                    <h1 class="page06-four-forces-title">
 
-        catch (error) {
+                        <span>
+                            WHO
+                        </span>
 
-            return null;
+                        <span>
+                            CONTROLS
+                        </span>
 
-        }
+                        <span class="accent">
+                            YOUR LIFE?
+                        </span>
 
-    }
+                    </h1>
 
+                    <p class="page06-four-forces-subtitle">
+                        பணம் • மனிதர்கள் • நேரம் • பணிகள்
+                    </p>
 
-    /* ======================================================================
-       STRING HELPERS
-       ====================================================================== */
+                    <p class="page06-four-forces-subtitle-en">
+                        MONEY • PEOPLE • TIME • TASKS
+                    </p>
 
-    function normalizeString(
-        value
-    ) {
+                    <p class="page06-four-forces-subtitle">
 
-        if (
-            value ===
-            null ||
-            value ===
-            undefined
-        ) {
+                        இந்த நான்கு சக்திகளையும்
+                        <br>
+                        நீங்கள் கட்டுப்படுத்தத் தொடங்கினால்,
+                        <br>
+                        வாழ்க்கை உங்கள் கட்டுப்பாட்டில் வரும்.
 
-            return "";
+                    </p>
 
-        }
+                    <div class="page06-force-line">
 
+                        <span class="page06-force-word">
+                            MONEY
+                        </span>
 
-        return String(
-            value
-        ).trim();
+                        <span class="page06-force-dot">
+                            •
+                        </span>
 
-    }
+                        <span class="page06-force-word">
+                            PEOPLE
+                        </span>
 
+                        <span class="page06-force-dot">
+                            •
+                        </span>
 
-    function firstString() {
+                        <span class="page06-force-word">
+                            TIME
+                        </span>
 
-        for (
-            let i = 0;
-            i < arguments.length;
-            i++
-        ) {
+                        <span class="page06-force-dot">
+                            •
+                        </span>
 
-            const value =
-                normalizeString(
-                    arguments[i]
-                );
+                        <span class="page06-force-word">
+                            TASKS
+                        </span>
 
+                    </div>
 
-            if (
-                value
-            ) {
+                </div>
 
-                return value;
 
-            }
+                <!-- ====================================================
+                     FOUR FORCES WHEEL
+                ===================================================== -->
 
-        }
+                <div
+                    class="page06-force-wheel"
+                    aria-label="The Four Forces"
+                >
 
+                    <div
+                        class="page06-force-connector"
+                        aria-hidden="true"
+                    ></div>
 
-        return "";
 
-    }
+                    <!-- MONEY -->
 
+                    <article class="page06-force-node money">
 
-    /* ======================================================================
-       PUBLIC RUNTIME
-       ====================================================================== */
+                        <div class="page06-force-icon">
+                            ₹
+                        </div>
 
-    function exposeRuntime() {
+                        <p class="page06-force-node-title">
+                            MONEY
+                        </p>
 
-        window.CTM_PAGE06 = {
+                        <p
+                            class="page06-force-node-ta"
+                            lang="ta"
+                        >
+                            பணம்
+                        </p>
 
-            version:
-                "3.0",
+                    </article>
 
-            mode:
-                "FIXED_PAGE07_NAVIGATION",
 
-            init:
-                init,
+                    <!-- PEOPLE -->
 
-            getIdentity:
-                function () {
+                    <article class="page06-force-node people">
 
-                    return resolveIdentity();
+                        <div class="page06-force-icon">
+                            ●●
+                        </div>
 
-                },
+                        <p class="page06-force-node-title">
+                            PEOPLE
+                        </p>
 
-            getDelivery:
-                function () {
+                        <p
+                            class="page06-force-node-ta"
+                            lang="ta"
+                        >
+                            மனிதர்கள்
+                        </p>
 
-                    return loadDeliveryState();
+                    </article>
 
-                },
 
-            clearDelivery:
-                function () {
+                    <!-- TIME -->
 
-                    clearDeliveryState();
+                    <article class="page06-force-node time">
 
+                        <div class="page06-force-icon">
+                            ◷
+                        </div>
 
-                    state.emailSucceeded =
-                        false;
+                        <p class="page06-force-node-title">
+                            TIME
+                        </p>
 
+                        <p
+                            class="page06-force-node-ta"
+                            lang="ta"
+                        >
+                            நேரம்
+                        </p>
 
-                    state.emailAttempted =
-                        false;
+                    </article>
 
 
-                    console.log(
-                        "Page06: Email delivery lock cleared."
-                    );
+                    <!-- TASKS -->
 
-                },
+                    <article class="page06-force-node tasks">
 
-            send:
-                function () {
+                        <div class="page06-force-icon">
+                            ✓
+                        </div>
 
-                    return handleNavigatorClick();
+                        <p class="page06-force-node-title">
+                            TASKS
+                        </p>
 
-                },
+                        <p
+                            class="page06-force-node-ta"
+                            lang="ta"
+                        >
+                            பணிகள்
+                        </p>
 
-            goToPage07:
-                function () {
+                    </article>
 
-                    navigateToPage07();
 
-                }
+                    <!-- CORE -->
 
-        };
+                    <div class="page06-force-core">
 
-    }
+                        <div class="page06-force-core-crown">
+                            ♛
+                        </div>
 
+                        <p class="page06-force-core-brand">
+                            CTM PATH™
+                        </p>
 
-    /* ======================================================================
-       DOM READY
-       ====================================================================== */
+                        <h2 class="page06-force-core-title">
+                            MILLIONAIRE
+                            <br>
+                            LIFESTYLE™
+                        </h2>
 
-    if (
-        document.readyState ===
-        "loading"
-    ) {
+                        <p class="page06-force-core-subtitle">
+                            MASTER THE FOUR FORCES
+                            <br>
+                            BUILD THE SYSTEMS
+                            <br>
+                            LIVE BY DESIGN
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ============================================================
+             THE PAIN OF IMBALANCE
+        ============================================================= -->
+
+        <section class="page06-pain">
+
+            <div class="page06-container">
+
+                <div class="page06-pain-header">
+
+                    <p
+                        class="page06-pain-title-ta"
+                        lang="ta"
+                    >
+                        நான்கு சக்திகளும் சமநிலையில் இல்லாதபோது...
+                    </p>
+
+                    <h2 class="page06-pain-title">
+                        THE PAIN OF IMBALANCE
+                    </h2>
+
+                </div>
+
+
+                <div class="page06-pain-grid">
+
+                    <!-- MONEY -->
+
+                    <article class="page06-pain-card">
+
+                        <div class="page06-pain-icon">
+                            ₹
+                        </div>
+
+                        <p
+                            class="page06-pain-ta"
+                            lang="ta"
+                        >
+                            பணம் போதவில்லை.
+                        </p>
+
+                        <p class="page06-pain-en">
+                            Money controls
+                            <br>
+                            your choices.
+                        </p>
+
+                    </article>
+
+
+                    <!-- PEOPLE -->
+
+                    <article class="page06-pain-card">
+
+                        <div class="page06-pain-icon">
+                            ●●
+                        </div>
+
+                        <p
+                            class="page06-pain-ta"
+                            lang="ta"
+                        >
+                            எல்லாவற்றையும்
+                            <br>
+                            நீங்களே செய்கிறீர்கள்.
+                        </p>
+
+                        <p class="page06-pain-en">
+                            You cannot
+                            <br>
+                            grow alone.
+                        </p>
+
+                    </article>
+
+
+                    <!-- TIME -->
+
+                    <article class="page06-pain-card">
+
+                        <div class="page06-pain-icon">
+                            ◷
+                        </div>
+
+                        <p
+                            class="page06-pain-ta"
+                            lang="ta"
+                        >
+                            நேரம் எப்போதும்
+                            <br>
+                            குறைவு.
+                        </p>
+
+                        <p class="page06-pain-en">
+                            Busy is
+                            <br>
+                            not freedom.
+                        </p>
+
+                    </article>
+
+
+                    <!-- TASKS -->
+
+                    <article class="page06-pain-card">
+
+                        <div class="page06-pain-icon">
+                            ✓
+                        </div>
+
+                        <p
+                            class="page06-pain-ta"
+                            lang="ta"
+                        >
+                            வேலை
+                            <br>
+                            முடிவதில்லை.
+                        </p>
+
+                        <p class="page06-pain-en">
+                            Your business
+                            <br>
+                            depends on you.
+                        </p>
+
+                    </article>
+
+                </div>
+
+
+                <p
+                    class="page06-pain-truth"
+                    lang="ta"
+                >
+                    இதுதான் உங்கள் வாழ்க்கையை சோர்வடையச் செய்கிறது.
+                </p>
+
+                <p class="page06-pain-truth-en">
+                    THIS IS WHAT KEEPS YOU TRAPPED.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ============================================================
+             THE PATH TO FREEDOM
+        ============================================================= -->
+
+        <section class="page06-path">
+
+            <div class="page06-container">
+
+                <div class="page06-path-header">
+
+                    <p
+                        class="page06-path-title-ta"
+                        lang="ta"
+                    >
+                        சுதந்திரத்திற்கான பாதை
+                    </p>
+
+                    <p class="page06-path-title-en">
+                        THE PATH TO FREEDOM
+                    </p>
+
+                </div>
+
+
+                <div class="page06-path-grid">
+
+                    <!-- 01 -->
+
+                    <article class="page06-path-card">
+
+                        <span class="page06-path-number">
+                            01
+                        </span>
+
+                        <div class="page06-path-icon">
+                            ₹
+                        </div>
+
+                        <h3>
+                            MONEY
+                        </h3>
+
+                        <p lang="ta">
+                            சம்பாதி
+                            <br>
+                            நிர்வகி
+                            <br>
+                            பெருக்கு
+                        </p>
+
+                        <strong>
+                            CAPACITY
+                        </strong>
+
+                    </article>
+
+
+                    <!-- 02 -->
+
+                    <article class="page06-path-card">
+
+                        <span class="page06-path-number">
+                            02
+                        </span>
+
+                        <div class="page06-path-icon">
+                            ●●
+                        </div>
+
+                        <h3>
+                            PEOPLE
+                        </h3>
+
+                        <p lang="ta">
+                            இணை
+                            <br>
+                            பகிர்
+                            <br>
+                            வழிநடத்து
+                        </p>
+
+                        <strong>
+                            LEVERAGE
+                        </strong>
+
+                    </article>
+
+
+                    <!-- 03 -->
+
+                    <article class="page06-path-card">
+
+                        <span class="page06-path-number">
+                            03
+                        </span>
+
+                        <div class="page06-path-icon">
+                            ◷
+                        </div>
+
+                        <h3>
+                            TIME
+                        </h3>
+
+                        <p lang="ta">
+                            முன்னுரிமை
+                            <br>
+                            பாதுகாத்து
+                            <br>
+                            மீட்டெடு
+                        </p>
+
+                        <strong>
+                            FREEDOM
+                        </strong>
+
+                    </article>
+
+
+                    <!-- 04 -->
+
+                    <article class="page06-path-card">
+
+                        <span class="page06-path-number">
+                            04
+                        </span>
+
+                        <div class="page06-path-icon">
+                            ✓
+                        </div>
+
+                        <h3>
+                            TASKS
+                        </h3>
+
+                        <p lang="ta">
+                            செய்
+                            <br>
+                            ஒப்படை
+                            <br>
+                            அமைப்பாக்கு
+                        </p>
+
+                        <strong>
+                            SYSTEMS
+                        </strong>
+
+                    </article>
+
+
+                    <!-- 05 -->
+
+                    <article class="page06-path-card">
+
+                        <span class="page06-path-number">
+                            05
+                        </span>
+
+                        <div class="page06-path-icon">
+                            ↗
+                        </div>
+
+                        <h3>
+                            MULTIPLY
+                        </h3>
+
+                        <p lang="ta">
+                            மதிப்பை உருவாக்கு
+                            <br>
+                            வருமானத்தை பெருக்கு
+                            <br>
+                            தாக்கத்தை உயர்த்து
+                        </p>
+
+                        <strong>
+                            SCALE
+                        </strong>
+
+                    </article>
+
+
+                    <!-- 06 -->
+
+                    <article class="page06-path-card">
+
+                        <span class="page06-path-number">
+                            06
+                        </span>
+
+                        <div class="page06-path-icon">
+                            ♛
+                        </div>
+
+                        <h3>
+                            LIFESTYLE
+                        </h3>
+
+                        <p lang="ta">
+                            சுதந்திரம்
+                            <br>
+                            செழிப்பு
+                            <br>
+                            நோக்கம்
+                        </p>
+
+                        <strong>
+                            LEGACY
+                        </strong>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ============================================================
+             180-DAY TRANSFORMATION
+        ============================================================= -->
+
+        <section class="page06-path">
+
+            <div class="page06-container">
+
+                <div class="page06-path-header">
+
+                    <p
+                        class="page06-path-title-ta"
+                        lang="ta"
+                    >
+                        180 நாள் மாற்றப் பயணம்
+                    </p>
+
+                    <p class="page06-path-title-en">
+                        THE 180-DAY TRANSFORMATION™
+                    </p>
+
+                </div>
+
+
+                <div class="page06-path-grid">
+
+                    <article class="page06-path-card">
+
+                        <span class="page06-path-number">
+                            MONTH 1
+                        </span>
+
+                        <div class="page06-path-icon">
+                            ₹
+                        </div>
+
+                        <h3>
+                            FIX THE MONEY
+                        </h3>
+
+                        <p>
+                            Build financial
+                            <br>
+                            clarity and control.
+                        </p>
+
+                    </article>
+
+
+                    <article class="page06-path-card">
+
+                        <span class="page06-path-number">
+                            MONTH 2
+                        </span>
+
+                        <div class="page06-path-icon">
+                            ●●
+                        </div>
+
+                        <h3>
+                            BUILD THE PEOPLE
+                        </h3>
+
+                        <p>
+                            Find, delegate
+                            <br>
+                            and build your tribe.
+                        </p>
+
+                    </article>
+
+
+                    <article class="page06-path-card">
+
+                        <span class="page06-path-number">
+                            MONTH 3
+                        </span>
+
+                        <div class="page06-path-icon">
+                            ◷
+                        </div>
+
+                        <h3>
+                            RECLAIM THE TIME
+                        </h3>
+
+                        <p>
+                            Prioritise, protect
+                            <br>
+                            and free your time.
+                        </p>
+
+                    </article>
+
+
+                    <article class="page06-path-card">
+
+                        <span class="page06-path-number">
+                            MONTH 4
+                        </span>
+
+                        <div class="page06-path-icon">
+                            ✓
+                        </div>
+
+                        <h3>
+                            SYSTEMISE TASKS
+                        </h3>
+
+                        <p>
+                            Simplify, delegate
+                            <br>
+                            and automate.
+                        </p>
+
+                    </article>
+
+
+                    <article class="page06-path-card">
+
+                        <span class="page06-path-number">
+                            MONTHS 5–6
+                        </span>
+
+                        <div class="page06-path-icon">
+                            ↗
+                        </div>
+
+                        <h3>
+                            MULTIPLY THE MACHINE
+                        </h3>
+
+                        <p>
+                            Scale systems,
+                            <br>
+                            grow income,
+                            <br>
+                            create impact.
+                        </p>
+
+                    </article>
+
+
+                    <article class="page06-path-card">
+
+                        <span class="page06-path-number">
+                            DESTINATION
+                        </span>
+
+                        <div class="page06-path-icon">
+                            ♛
+                        </div>
+
+                        <h3>
+                            MILLIONAIRE LIFESTYLE™
+                        </h3>
+
+                        <p>
+                            Freedom.
+                            <br>
+                            Wealth.
+                            <br>
+                            Purpose.
+                            <br>
+                            Impact.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ============================================================
+             FINAL TRANSITION
+        ============================================================= -->
+
+        <section class="page06-final">
+
+            <div class="page06-container">
+
+                <p
+                    class="page06-final-title-ta"
+                    lang="ta"
+                >
+                    இன்று நீங்கள் பணத்திற்காக நேரத்தை விற்கலாம்.
+                </p>
+
+                <p class="page06-final-title-en">
+                    TODAY, YOU MAY BE TRADING YOUR TIME FOR MONEY.
+                </p>
+
+                <p class="page06-final-statement">
+
+                    அல்லது...
+
+                    <br>
+
+                    <strong>
+                        நாளை உங்கள் பணம்,
+                        மனிதர்கள்,
+                        நேரம்,
+                        அமைப்புகள்
+                        உங்களுக்காக வேலை செய்யலாம்.
+                    </strong>
+
+                    <br><br>
+
+                    Or you can build a life where
+                    money, people, time and systems
+                    work for you.
+
+                </p>
+
+                <p class="page06-final-force-line">
+                    MASTER THE FOUR FORCES™
+                    <br>
+                    MONEY • PEOPLE • TIME • TASKS
+                </p>
+
+
+                <!-- ====================================================
+                     CRITICAL NAVIGATOR
+                     ID REQUIRED BY js/page06.js v3.0
+                ===================================================== -->
+
+                <button
+                    id="page06-next-button"
+                    class="primary-cta"
+                    type="button"
+                    aria-label="See my next step"
+                >
+
+                    <span
+                        class="cta-ta"
+                        lang="ta"
+                    >
+                        என் அடுத்த படியைப் பார்க்கிறேன் →
+                    </span>
+
+                    <span class="cta-en">
+                        SEE MY NEXT STEP
+                    </span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================================================================
+         SHARED FRONTEND RUNTIME
+
+         API
+         GLOBAL RUNTIME
+         COMPONENT LOADER
+         PAGE 06 CONTROLLER
+
+         NO GLOBAL FOOTER
+    ================================================================= -->
+
+    <script
+        src="../js/api.js"
+    ></script>
+
+    <script
+        src="../js/global.js"
+    ></script>
+
+    <script
+        src="../js/component-loader.js"
+    ></script>
+
+    <script
+        src="../js/page06.js"
+    ></script>
+
+
+    <!-- ================================================================
+         PAGE 06 INITIALIZATION
+
+         page06.js v3.0 is left untouched.
+    ================================================================= -->
+
+    <script>
 
         document.addEventListener(
             "DOMContentLoaded",
-            init,
-            {
-                once:
-                    true
-            }
-        );
+            async function () {
 
-    }
+                if (
+                    window.CTM_COMPONENTS &&
+                    typeof window.CTM_COMPONENTS.load === "function"
+                ) {
 
-    else {
-
-        init();
-
-    }
-
-
-    /* ======================================================================
-       COMPONENT LOADER COMPATIBILITY
-       ====================================================================== */
-
-    window.addEventListener(
-        "load",
-        function () {
-
-            if (
-                !state.navigator ||
-                !document.documentElement.contains(
-                    state.navigator
-                )
-            ) {
-
-                bindNavigator();
-
-            }
-
-        }
-    );
-
-
-    /*
-     * The component loader may inject shared elements after DOMContentLoaded.
-     */
-
-    document.addEventListener(
-        "ctm:components-ready",
-        function () {
-
-            if (
-                !state.navigator ||
-                !document.documentElement.contains(
-                    state.navigator
-                )
-            ) {
-
-                bindNavigator();
-
-            }
-
-        }
-    );
-
-
-    /* ======================================================================
-       FINAL FALLBACK
-       ======================================================================
-
-       If another script replaces the Page 06 navigator after the normal
-       lifecycle events, this observer reconnects the controller.
-
-       It is intentionally lightweight and disconnects itself once the
-       actual navigator has been found.
-
-       ====================================================================== */
-
-    try {
-
-        const observer =
-            new MutationObserver(
-                function () {
-
-                    if (
-                        state.navigator &&
-                        document.documentElement.contains(
-                            state.navigator
-                        )
-                    ) {
-
-                        observer.disconnect();
-
-                        return;
-
-                    }
-
-
-                    if (
-                        bindNavigator()
-                    ) {
-
-                        observer.disconnect();
-
-                    }
+                    await window.CTM_COMPONENTS.load();
 
                 }
-            );
 
+                if (
+                    window.CTM_PAGE06 &&
+                    typeof window.CTM_PAGE06.init === "function"
+                ) {
 
-        observer.observe(
-            document.body,
-            {
-                childList:
-                    true,
+                    window.CTM_PAGE06.init();
 
-                subtree:
-                    true
+                }
+
             }
         );
 
-
-        window.setTimeout(
-            function () {
-
-                observer.disconnect();
-
-            },
-            10000
-        );
-
-    }
-
-    catch (error) {
-
-        console.warn(
-            "Page06: MutationObserver unavailable.",
-            error
-        );
-
-    }
+    </script>
 
 
-})(window, document);
+</body>
 
+</html>
 
-/* ==========================================================================
-   END OF js/page06.js
-   ========================================================================== */
-
-                
