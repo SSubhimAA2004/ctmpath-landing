@@ -8,7 +8,7 @@
  * js/page02/page02f.js
  *
  * VERSION:
- * 4.0 — PROGRESSIVE DIMENSION SCOREBOARD
+ * 4.1 — PROGRESSIVE DIMENSION SCOREBOARD → PAGE 02G
  *
  * PAGE:
  * PAGE 02F — DIMENSION 05
@@ -37,7 +37,7 @@
  *           ↓
  *      CTM_API.saveDiscovery()
  *           ↓
- *      Result / Next Journey Stage
+ *      PAGE 02G — LIFE GAP ANALYSIS™
  *
  * =============================================================================
  *
@@ -73,7 +73,7 @@
  *      ✓ prevents duplicate submission
  *      ✓ handles backend success / failure
  *      ✓ stores completion state
- *      ✓ navigates to result stage
+ *      ✓ navigates to Page 02G — Life Gap Analysis™
  *
  * =============================================================================
  */
@@ -106,7 +106,7 @@ const CONFIG = {
      * Change ONLY this value if the result page has a different filename.
      */
     nextPage:
-        'page03.html',
+        'page02g.html',
 
     expectedIndicators:
         25,
@@ -462,7 +462,7 @@ function setSubmittingState(
         if(primaryText){
 
             primaryText.textContent =
-                'என் முடிவைக் காண்க →';
+                'என் வாழ்க்கை இடைவெளியைக் காண்க →';
 
         }
 
@@ -470,7 +470,7 @@ function setSubmittingState(
         if(secondaryText){
 
             secondaryText.textContent =
-                'VIEW MY RESULT';
+                'VIEW MY LIFE GAP ANALYSIS';
 
         }
 
@@ -2090,7 +2090,6 @@ function getClientId(){
     );
 
 }
-
  
 /* =============================================================================
  * BUILD DISCOVERY PAYLOAD
@@ -2466,7 +2465,7 @@ async function saveDiscovery(
  */
 
 
-function navigateToResult(){
+function navigateToPage02G(){
 
     setNavigationState(
         true
@@ -2695,7 +2694,7 @@ async function submitScorecard(
 
 
         /* ---------------------------------------------------------------------
-         * 7. STORE RESULT FOR PAGE 03
+         * 7. STORE RESULT FOR PAGE 02G
          * ---------------------------------------------------------------------
          */
 
@@ -2739,12 +2738,12 @@ async function submitScorecard(
 
 
         /* ---------------------------------------------------------------------
-         * 9. RESULT PAGE
+         * 9. PAGE 02G — LIFE GAP ANALYSIS
          * ---------------------------------------------------------------------
          */
 
 
-        navigateToResult();
+        navigateToPage02G();
 
 
     }
@@ -3291,17 +3290,17 @@ window.Page02F = {
  *      STORE RESULT
  *          ↓
  *
- *      PAGE 03
+ *      PAGE 02G
+ *      LIFE GAP ANALYSIS™
  *
  *
  * NEXT FILE:
  *
- *      pages/page02f.html
+ *      pages/page02g.html
  *
  * =============================================================================
  */
 
 
 })(window, document);
-
 
