@@ -1,6 +1,5 @@
 
 <!DOCTYPE html>
-
 <html lang="ta">
 
 <head>
@@ -10,68 +9,68 @@
          GUIDED JOURNEY™
 
          PAGE 02G
-         YOUR LIFE GAP ANALYSIS™
-
-         PURPOSE:
-         ----------------------------------------------------------
-         Visual interpretation of the completed 25-indicator
-         Millionaire Lifestyle Scorecard™.
-
-         ARCHITECTURE:
-         ----------------------------------------------------------
-         Page 02A
-             ↓
-         Page 02B — Wealth™
-             ↓
-         Page 02C — Income & Cash Flow™
-             ↓
-         Page 02D — Assets™
-             ↓
-         Page 02E — Lifestyle & Freedom™
-             ↓
-         Page 02F — Protection & Contribution™
-             ↓
-         Page 02G — LIFE GAP ANALYSIS™
-
-         IMPORTANT:
-         ----------------------------------------------------------
-         This page is READ-ONLY.
-
-         It does NOT:
-         - change answers
-         - change scoring
-         - modify Page02Session
-         - modify Page02Data
-         - submit backend data
-         - alter Page 02F
-
-         It only visualizes the completed scorecard.
+         LIFE GAP ANALYSIS™
 
          VERSION:
-         1.0
+         1.0 — PREMIUM RESULT EXPERIENCE
+
+         PURPOSE:
+         Present the completed 25-indicator Millionaire Lifestyle
+         Scorecard as a professional Life Gap Analysis.
+
+         IMPORTANT:
+         - Page 02G is presentation only.
+         - No scoring is performed here.
+         - No answers are hard-coded here.
+         - No dimension scores are hard-coded here.
+         - Canonical Page 02 data/session remains authoritative.
+         - Page 03 is reached only through the explicit CTA.
     ========================================================== -->
 
 
     <meta charset="UTF-8">
-
 
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
 
-
     <meta
         name="description"
-        content="CTM PATH™ MILLIONAIRES™ — Your Life Gap Analysis™"
+        content="CTM PATH™ MILLIONAIRES™ — Your Life Gap Analysis™ — See the gap between your ideal millionaire lifestyle and your current reality."
     >
 
+    <meta
+        name="theme-color"
+        content="#06171D"
+    >
 
     <title>
         CTM PATH™ MILLIONAIRES™ — Your Life Gap Analysis™
     </title>
 
 
+    <!-- ==========================================================
+         PAGE 02 SHARED VISUAL SYSTEM
+
+         Page 02G does NOT use:
+         - css/foundation/
+         - global foundation directory
+         - unrelated application CSS
+
+         It uses the existing Page 02 shared stylesheet plus its
+         own independent Page 02G stylesheet.
+    ========================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/page02/page02-shared.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/page02/page02g.css"
+    >
 
 
     <!-- ==========================================================
@@ -83,3253 +82,6 @@
         href="../css/header.css"
     >
 
-
-    <!-- ==========================================================
-         PAGE 02 SHARED FOUNDATION
-    ========================================================== -->
-
-    <link
-        rel="stylesheet"
-        href="../css/page02/page02-shared.css"
-    >
-
-
-    <!-- ==========================================================
-         PAGE 02G
-         PAGE-SPECIFIC DESIGN
-         INLINE FOR FIRST DESIGN APPROVAL
-    ========================================================== -->
-
-    <style>
-
-        /* ==========================================================
-           PAGE 02G ROOT
-        ========================================================== */
-
-        .page02g-body {
-
-            margin: 0;
-
-            background:
-                radial-gradient(
-                    circle at 50% 0%,
-                    rgba(20, 184, 166, 0.075),
-                    transparent 32%
-                ),
-                linear-gradient(
-                    180deg,
-                    #020b12 0%,
-                    #04131d 42%,
-                    #020910 100%
-                );
-
-            color:
-                #f4f1e8;
-
-            min-height:
-                100vh;
-
-            overflow-x:
-                hidden;
-
-        }
-
-
-        .page02g {
-
-            position:
-                relative;
-
-            min-height:
-                100vh;
-
-            isolation:
-                isolate;
-
-        }
-
-
-        /* ==========================================================
-           ATMOSPHERE
-        ========================================================== */
-
-        .page02g::before {
-
-            content:
-                "";
-
-            position:
-                fixed;
-
-            inset:
-                0;
-
-            pointer-events:
-                none;
-
-            z-index:
-                -3;
-
-            background:
-
-                radial-gradient(
-                    circle at 12% 18%,
-                    rgba(20, 184, 166, 0.06),
-                    transparent 25%
-                ),
-
-                radial-gradient(
-                    circle at 88% 22%,
-                    rgba(217, 164, 65, 0.055),
-                    transparent 28%
-                ),
-
-                radial-gradient(
-                    circle at 50% 100%,
-                    rgba(168, 140, 255, 0.035),
-                    transparent 35%
-                );
-
-        }
-
-
-        .page02g::after {
-
-            content:
-                "";
-
-            position:
-                fixed;
-
-            inset:
-                0;
-
-            pointer-events:
-                none;
-
-            z-index:
-                -2;
-
-            opacity:
-                0.12;
-
-            background-image:
-
-                linear-gradient(
-                    rgba(255,255,255,0.018) 1px,
-                    transparent 1px
-                ),
-
-                linear-gradient(
-                    90deg,
-                    rgba(255,255,255,0.014) 1px,
-                    transparent 1px
-                );
-
-            background-size:
-                72px 72px;
-
-            mask-image:
-                linear-gradient(
-                    to bottom,
-                    black,
-                    transparent 78%
-                );
-
-        }
-
-
-        /* ==========================================================
-           MASTER SHELL
-        ========================================================== */
-
-        .page02g-shell {
-
-            width:
-                min(
-                    1440px,
-                    calc(100% - 48px)
-                );
-
-            margin:
-                0 auto;
-
-            padding:
-                34px 0 90px;
-
-        }
-
-
-        /* ==========================================================
-           JOURNEY HEADER
-        ========================================================== */
-
-        .page02g-journey-header {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                1fr auto 1fr;
-
-            align-items:
-                center;
-
-            gap:
-                24px;
-
-            margin-bottom:
-                34px;
-
-        }
-
-
-        .page02g-brand {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                12px;
-
-        }
-
-
-        .page02g-brand-mark {
-
-            width:
-                42px;
-
-            height:
-                42px;
-
-            border:
-                1px solid rgba(
-                    217,
-                    164,
-                    65,
-                    0.45
-                );
-
-            border-radius:
-                50%;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            color:
-                #d9a441;
-
-            font-size:
-                18px;
-
-            box-shadow:
-                0 0 28px rgba(
-                    217,
-                    164,
-                    65,
-                    0.08
-                );
-
-        }
-
-
-        .page02g-brand-copy {
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            gap:
-                2px;
-
-        }
-
-
-        .page02g-brand-name {
-
-            margin:
-                0;
-
-            color:
-                #d9a441;
-
-            font-size:
-                0.78rem;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                0.14em;
-
-        }
-
-
-        .page02g-brand-subtitle {
-
-            margin:
-                0;
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.42
-                );
-
-            font-size:
-                0.55rem;
-
-            letter-spacing:
-                0.14em;
-
-        }
-
-
-        .page02g-header-title {
-
-            text-align:
-                center;
-
-        }
-
-
-        .page02g-header-title h1 {
-
-            margin:
-                0;
-
-            font-size:
-                clamp(
-                    1.15rem,
-                    2vw,
-                    1.65rem
-                );
-
-            font-weight:
-                700;
-
-            letter-spacing:
-                0.08em;
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.92
-                );
-
-        }
-
-
-        .page02g-header-title p {
-
-            margin:
-                7px 0 0;
-
-            color:
-                #14b8a6;
-
-            font-size:
-                0.62rem;
-
-            font-weight:
-                700;
-
-            letter-spacing:
-                0.18em;
-
-        }
-
-
-        .page02g-progress {
-
-            justify-self:
-                end;
-
-            width:
-                min(
-                    240px,
-                    100%
-                );
-
-        }
-
-
-        .page02g-progress-meta {
-
-            display:
-                flex;
-
-            justify-content:
-                space-between;
-
-            gap:
-                12px;
-
-            margin-bottom:
-                9px;
-
-        }
-
-
-        .page02g-progress-label {
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.40
-                );
-
-            font-size:
-                0.55rem;
-
-            font-weight:
-                700;
-
-            letter-spacing:
-                0.14em;
-
-        }
-
-
-        .page02g-progress-number {
-
-            color:
-                #14b8a6;
-
-            font-size:
-                0.65rem;
-
-            font-weight:
-                800;
-
-        }
-
-
-        .page02g-progress-track {
-
-            height:
-                4px;
-
-            overflow:
-                hidden;
-
-            border-radius:
-                999px;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.08
-                );
-
-        }
-
-
-        .page02g-progress-fill {
-
-            height:
-                100%;
-
-            width:
-                100%;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #14b8a6,
-                    #d9a441
-                );
-
-            border-radius:
-                inherit;
-
-        }
-
-
-        /* ==========================================================
-           HERO
-        ========================================================== */
-
-        .page02g-hero {
-
-            position:
-                relative;
-
-            overflow:
-                hidden;
-
-            border:
-                1px solid rgba(
-                    217,
-                    164,
-                    65,
-                    0.25
-                );
-
-            border-radius:
-                20px;
-
-            background:
-
-                radial-gradient(
-                    circle at 82% 42%,
-                    rgba(
-                        217,
-                        164,
-                        65,
-                        0.10
-                    ),
-                    transparent 27%
-                ),
-
-                linear-gradient(
-                    135deg,
-                    rgba(
-                        5,
-                        27,
-                        39,
-                        0.97
-                    ),
-                    rgba(
-                        2,
-                        13,
-                        22,
-                        0.99
-                    )
-                );
-
-            padding:
-                clamp(
-                    28px,
-                    4vw,
-                    54px
-                );
-
-            box-shadow:
-                0 30px 80px rgba(
-                    0,
-                    0,
-                    0,
-                    0.30
-                );
-
-        }
-
-
-        .page02g-hero::before {
-
-            content:
-                "";
-
-            position:
-                absolute;
-
-            width:
-                520px;
-
-            height:
-                520px;
-
-            right:
-                -180px;
-
-            top:
-                -230px;
-
-            border:
-                1px solid rgba(
-                    217,
-                    164,
-                    65,
-                    0.08
-                );
-
-            border-radius:
-                50%;
-
-            box-shadow:
-
-                0 0 0 80px rgba(
-                    217,
-                    164,
-                    65,
-                    0.015
-                ),
-
-                0 0 0 160px rgba(
-                    217,
-                    164,
-                    65,
-                    0.012
-                );
-
-            pointer-events:
-                none;
-
-        }
-
-
-        .page02g-hero-content {
-
-            position:
-                relative;
-
-            z-index:
-                1;
-
-            max-width:
-                880px;
-
-        }
-
-
-        .page02g-eyebrow {
-
-            margin:
-                0 0 14px;
-
-            color:
-                #d9a441;
-
-            font-size:
-                0.62rem;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                0.22em;
-
-            text-transform:
-                uppercase;
-
-        }
-
-
-        .page02g-hero-title {
-
-            margin:
-                0;
-
-            font-size:
-                clamp(
-                    2rem,
-                    4.2vw,
-                    4rem
-                );
-
-            line-height:
-                1.10;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                -0.025em;
-
-        }
-
-
-        .page02g-hero-title span {
-
-            display:
-                block;
-
-            color:
-                #d9a441;
-
-        }
-
-
-        .page02g-hero-english {
-
-            margin:
-                15px 0 0;
-
-            color:
-                #14b8a6;
-
-            font-size:
-                clamp(
-                    0.72rem,
-                    1vw,
-                    0.95rem
-                );
-
-            font-weight:
-                700;
-
-            letter-spacing:
-                0.12em;
-
-        }
-
-
-        .page02g-hero-copy {
-
-            max-width:
-                780px;
-
-            margin:
-                18px 0 0;
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.62
-                );
-
-            font-size:
-                0.92rem;
-
-            line-height:
-                1.75;
-
-        }
-
-
-        /* ==========================================================
-           HERO SCORE
-        ========================================================== */
-
-        .page02g-hero-score {
-
-            position:
-                absolute;
-
-            right:
-                clamp(
-                    24px,
-                    5vw,
-                    68px
-                );
-
-            top:
-                50%;
-
-            transform:
-                translateY(-50%);
-
-            width:
-                180px;
-
-            height:
-                180px;
-
-            border:
-                1px solid rgba(
-                    20,
-                    184,
-                    166,
-                    0.28
-                );
-
-            border-radius:
-                50%;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            background:
-                rgba(
-                    2,
-                    15,
-                    24,
-                    0.86
-                );
-
-            box-shadow:
-                0 0 50px rgba(
-                    20,
-                    184,
-                    166,
-                    0.08
-                );
-
-        }
-
-
-        .page02g-hero-score::before {
-
-            content:
-                "";
-
-            position:
-                absolute;
-
-            inset:
-                12px;
-
-            border:
-                4px solid rgba(
-                    217,
-                    164,
-                    65,
-                    0.16
-                );
-
-            border-top-color:
-                #14b8a6;
-
-            border-right-color:
-                #14b8a6;
-
-            border-radius:
-                50%;
-
-        }
-
-
-        .page02g-score-inner {
-
-            position:
-                relative;
-
-            text-align:
-                center;
-
-            z-index:
-                2;
-
-        }
-
-
-        .page02g-score-number {
-
-            display:
-                block;
-
-            font-size:
-                2.65rem;
-
-            line-height:
-                1;
-
-            font-weight:
-                800;
-
-            color:
-                #14b8a6;
-
-        }
-
-
-        .page02g-score-total {
-
-            display:
-                block;
-
-            margin-top:
-                5px;
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.48
-                );
-
-            font-size:
-                0.68rem;
-
-            letter-spacing:
-                0.12em;
-
-        }
-
-
-        .page02g-score-caption {
-
-            display:
-                block;
-
-            margin-top:
-                10px;
-
-            color:
-                #d9a441;
-
-            font-size:
-                0.52rem;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                0.13em;
-
-        }
-
-
-        /* ==========================================================
-           SUMMARY STRIP
-        ========================================================== */
-
-        .page02g-summary-grid {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(
-                    4,
-                    1fr
-                );
-
-            gap:
-                12px;
-
-            margin-top:
-                16px;
-
-        }
-
-
-        .page02g-summary-card {
-
-            min-height:
-                112px;
-
-            padding:
-                18px;
-
-            border:
-                1px solid rgba(
-                    255,
-                    255,
-                    255,
-                    0.10
-                );
-
-            border-radius:
-                14px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(
-                        7,
-                        30,
-                        43,
-                        0.92
-                    ),
-                    rgba(
-                        3,
-                        17,
-                        27,
-                        0.92
-                    )
-                );
-
-        }
-
-
-        .page02g-summary-label {
-
-            display:
-                block;
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.40
-                );
-
-            font-size:
-                0.56rem;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                0.13em;
-
-            text-transform:
-                uppercase;
-
-        }
-
-
-        .page02g-summary-value {
-
-            display:
-                block;
-
-            margin-top:
-                12px;
-
-            color:
-                #f4f1e8;
-
-            font-size:
-                1.65rem;
-
-            line-height:
-                1;
-
-            font-weight:
-                800;
-
-        }
-
-
-        .page02g-summary-value.teal {
-
-            color:
-                #14b8a6;
-
-        }
-
-
-        .page02g-summary-value.gold {
-
-            color:
-                #d9a441;
-
-        }
-
-
-        .page02g-summary-value.gap {
-
-            color:
-                #ef6b73;
-
-        }
-
-
-        .page02g-summary-sub {
-
-            display:
-                block;
-
-            margin-top:
-                7px;
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.42
-                );
-
-            font-size:
-                0.58rem;
-
-        }
-
-
-        /* ==========================================================
-           LEGEND
-        ========================================================== */
-
-        .page02g-legend {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            flex-wrap:
-                wrap;
-
-            gap:
-                24px;
-
-            margin:
-                26px 0 18px;
-
-            padding:
-                13px 18px;
-
-            border:
-                1px solid rgba(
-                    255,
-                    255,
-                    255,
-                    0.07
-                );
-
-            border-radius:
-                10px;
-
-            background:
-                rgba(
-                    3,
-                    16,
-                    25,
-                    0.60
-                );
-
-        }
-
-
-        .page02g-legend-item {
-
-            display:
-                inline-flex;
-
-            align-items:
-                center;
-
-            gap:
-                8px;
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.58
-                );
-
-            font-size:
-                0.60rem;
-
-            font-weight:
-                700;
-
-            letter-spacing:
-                0.07em;
-
-        }
-
-
-        .page02g-legend-dot {
-
-            width:
-                9px;
-
-            height:
-                9px;
-
-            border-radius:
-                50%;
-
-        }
-
-
-        .page02g-legend-current {
-
-            background:
-                #14b8a6;
-
-        }
-
-
-        .page02g-legend-ideal {
-
-            background:
-                #d9a441;
-
-        }
-
-
-        .page02g-legend-gap {
-
-            background:
-                #ef6b73;
-
-        }
-
-
-        /* ==========================================================
-           DIMENSION OVERVIEW
-        ========================================================== */
-
-        .page02g-section-heading {
-
-            margin:
-                36px 0 16px;
-
-        }
-
-
-        .page02g-section-heading h2 {
-
-            margin:
-                0;
-
-            color:
-                #f4f1e8;
-
-            font-size:
-                clamp(
-                    1.25rem,
-                    2vw,
-                    1.8rem
-                );
-
-            font-weight:
-                750;
-
-        }
-
-
-        .page02g-section-heading p {
-
-            margin:
-                6px 0 0;
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.40
-                );
-
-            font-size:
-                0.68rem;
-
-            letter-spacing:
-                0.12em;
-
-            text-transform:
-                uppercase;
-
-        }
-
-
-        .page02g-dimensions {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(
-                    5,
-                    1fr
-                );
-
-            gap:
-                12px;
-
-        }
-
-
-        .page02g-dimension-card {
-
-            position:
-                relative;
-
-            overflow:
-                hidden;
-
-            padding:
-                20px;
-
-            min-height:
-                170px;
-
-            border:
-                1px solid rgba(
-                    255,
-                    255,
-                    255,
-                    0.10
-                );
-
-            border-radius:
-                16px;
-
-            background:
-                linear-gradient(
-                    150deg,
-                    rgba(
-                        7,
-                        32,
-                        45,
-                        0.94
-                    ),
-                    rgba(
-                        3,
-                        17,
-                        27,
-                        0.94
-                    )
-                );
-
-        }
-
-
-        .page02g-dimension-number {
-
-            display:
-                inline-flex;
-
-            width:
-                30px;
-
-            height:
-                30px;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            border:
-                1px solid rgba(
-                    20,
-                    184,
-                    166,
-                    0.35
-                );
-
-            border-radius:
-                8px;
-
-            color:
-                #14b8a6;
-
-            font-size:
-                0.62rem;
-
-            font-weight:
-                800;
-
-        }
-
-
-        .page02g-dimension-tamil {
-
-            margin:
-                15px 0 0;
-
-            font-size:
-                1.05rem;
-
-            font-weight:
-                750;
-
-        }
-
-
-        .page02g-dimension-english {
-
-            margin:
-                4px 0 0;
-
-            color:
-                #d9a441;
-
-            font-size:
-                0.55rem;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                0.10em;
-
-        }
-
-
-        .page02g-dimension-score-row {
-
-            display:
-                flex;
-
-            align-items:
-                flex-end;
-
-            justify-content:
-                space-between;
-
-            gap:
-                10px;
-
-            margin-top:
-                22px;
-
-        }
-
-
-        .page02g-dimension-score {
-
-            color:
-                #14b8a6;
-
-            font-size:
-                1.65rem;
-
-            font-weight:
-                800;
-
-            line-height:
-                1;
-
-        }
-
-
-        .page02g-dimension-score span {
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.35
-                );
-
-            font-size:
-                0.65rem;
-
-            font-weight:
-                600;
-
-        }
-
-
-        .page02g-dimension-gap {
-
-            text-align:
-                right;
-
-            color:
-                #ef6b73;
-
-            font-size:
-                0.68rem;
-
-            font-weight:
-                800;
-
-        }
-
-
-        .page02g-dimension-gap span {
-
-            display:
-                block;
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.38
-                );
-
-            font-size:
-                0.52rem;
-
-            letter-spacing:
-                0.10em;
-
-        }
-
-
-        .page02g-dimension-track {
-
-            position:
-                relative;
-
-            height:
-                5px;
-
-            margin-top:
-                14px;
-
-            border-radius:
-                999px;
-
-            overflow:
-                hidden;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.08
-                );
-
-        }
-
-
-        .page02g-dimension-fill {
-
-            height:
-                100%;
-
-            border-radius:
-                inherit;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #14b8a6,
-                    #1fd1c0
-                );
-
-        }
-
-
-        /* ==========================================================
-           GAP OVERVIEW VISUAL
-        ========================================================== */
-
-        .page02g-gap-overview {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                minmax(
-                    0,
-                    1.35fr
-                )
-                minmax(
-                    300px,
-                    0.65fr
-                );
-
-            gap:
-                16px;
-
-            margin-top:
-                18px;
-
-        }
-
-
-        .page02g-gap-panel {
-
-            border:
-                1px solid rgba(
-                    255,
-                    255,
-                    255,
-                    0.09
-                );
-
-            border-radius:
-                16px;
-
-            background:
-                rgba(
-                    4,
-                    22,
-                    32,
-                    0.88
-                );
-
-            padding:
-                26px;
-
-        }
-
-
-        .page02g-gap-panel-title {
-
-            margin:
-                0 0 22px;
-
-            font-size:
-                0.68rem;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                0.14em;
-
-            color:
-                #d9a441;
-
-        }
-
-
-        .page02g-bar-row {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                190px
-                minmax(
-                    0,
-                    1fr
-                )
-                70px;
-
-            align-items:
-                center;
-
-            gap:
-                14px;
-
-            margin-bottom:
-                18px;
-
-        }
-
-
-        .page02g-bar-label {
-
-            min-width:
-                0;
-
-        }
-
-
-        .page02g-bar-label-tamil {
-
-            display:
-                block;
-
-            font-size:
-                0.80rem;
-
-            font-weight:
-                700;
-
-        }
-
-
-        .page02g-bar-label-english {
-
-            display:
-                block;
-
-            margin-top:
-                3px;
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.35
-                );
-
-            font-size:
-                0.50rem;
-
-            letter-spacing:
-                0.06em;
-
-        }
-
-
-        .page02g-bar-track {
-
-            position:
-                relative;
-
-            height:
-                22px;
-
-            overflow:
-                hidden;
-
-            border-radius:
-                6px;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.055
-                );
-
-        }
-
-
-        .page02g-bar-ideal {
-
-            position:
-                absolute;
-
-            inset:
-                0;
-
-            width:
-                100%;
-
-            background:
-                rgba(
-                    217,
-                    164,
-                    65,
-                    0.18
-                );
-
-            border:
-                1px dashed rgba(
-                    217,
-                    164,
-                    65,
-                    0.40
-                );
-
-            border-radius:
-                6px;
-
-        }
-
-
-        .page02g-bar-current {
-
-            position:
-                absolute;
-
-            left:
-                0;
-
-            top:
-                0;
-
-            bottom:
-                0;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #0d8e82,
-                    #14b8a6
-                );
-
-            border-radius:
-                6px;
-
-            z-index:
-                2;
-
-        }
-
-
-        .page02g-bar-value {
-
-            text-align:
-                right;
-
-            color:
-                #14b8a6;
-
-            font-size:
-                0.80rem;
-
-            font-weight:
-                800;
-
-        }
-
-
-        /* ==========================================================
-           GAP SCORE RING
-        ========================================================== */
-
-        .page02g-gap-score-panel {
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            text-align:
-                center;
-
-        }
-
-
-        .page02g-gap-ring {
-
-            width:
-                190px;
-
-            height:
-                190px;
-
-            border-radius:
-                50%;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            background:
-                conic-gradient(
-                    #ef6b73 var(--gap),
-                    rgba(
-                        255,
-                        255,
-                        255,
-                        0.06
-                    ) var(--gap)
-                );
-
-            position:
-                relative;
-
-        }
-
-
-        .page02g-gap-ring::before {
-
-            content:
-                "";
-
-            position:
-                absolute;
-
-            inset:
-                15px;
-
-            border-radius:
-                50%;
-
-            background:
-                #04131d;
-
-            border:
-                1px solid rgba(
-                    255,
-                    255,
-                    255,
-                    0.08
-                );
-
-        }
-
-
-        .page02g-gap-ring-content {
-
-            position:
-                relative;
-
-            z-index:
-                2;
-
-        }
-
-
-        .page02g-gap-ring-number {
-
-            display:
-                block;
-
-            color:
-                #ef6b73;
-
-            font-size:
-                2.6rem;
-
-            font-weight:
-                800;
-
-            line-height:
-                1;
-
-        }
-
-
-        .page02g-gap-ring-label {
-
-            display:
-                block;
-
-            margin-top:
-                7px;
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.44
-                );
-
-            font-size:
-                0.55rem;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                0.13em;
-
-        }
-
-
-        .page02g-gap-message {
-
-            margin:
-                22px 0 0;
-
-            max-width:
-                260px;
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.62
-                );
-
-            font-size:
-                0.76rem;
-
-            line-height:
-                1.65;
-
-        }
-
-
-        /* ==========================================================
-           25 INDICATOR GAP MATRIX
-        ========================================================== */
-
-        .page02g-matrix {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(
-                    5,
-                    minmax(
-                        0,
-                        1fr
-                    )
-                );
-
-            gap:
-                12px;
-
-            margin-top:
-                18px;
-
-        }
-
-
-        .page02g-matrix-dimension {
-
-            overflow:
-                hidden;
-
-            border:
-                1px solid rgba(
-                    255,
-                    255,
-                    255,
-                    0.09
-                );
-
-            border-radius:
-                16px;
-
-            background:
-                linear-gradient(
-                    180deg,
-                    rgba(
-                        7,
-                        31,
-                        43,
-                        0.96
-                    ),
-                    rgba(
-                        3,
-                        17,
-                        27,
-                        0.96
-                    )
-                );
-
-        }
-
-
-        .page02g-matrix-header {
-
-            padding:
-                17px 15px;
-
-            border-bottom:
-                1px solid rgba(
-                    255,
-                    255,
-                    255,
-                    0.07
-                );
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.018
-                );
-
-        }
-
-
-        .page02g-matrix-number {
-
-            color:
-                #14b8a6;
-
-            font-size:
-                0.55rem;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                0.12em;
-
-        }
-
-
-        .page02g-matrix-tamil {
-
-            margin:
-                8px 0 0;
-
-            font-size:
-                0.90rem;
-
-            font-weight:
-                750;
-
-        }
-
-
-        .page02g-matrix-english {
-
-            margin:
-                4px 0 0;
-
-            color:
-                #d9a441;
-
-            font-size:
-                0.48rem;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                0.08em;
-
-        }
-
-
-        .page02g-indicator {
-
-            padding:
-                15px;
-
-            border-bottom:
-                1px solid rgba(
-                    255,
-                    255,
-                    255,
-                    0.055
-                );
-
-        }
-
-
-        .page02g-indicator:last-child {
-
-            border-bottom:
-                0;
-
-        }
-
-
-        .page02g-indicator-number {
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.30
-                );
-
-            font-size:
-                0.48rem;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                0.08em;
-
-        }
-
-
-        .page02g-indicator-title {
-
-            margin:
-                6px 0 0;
-
-            font-size:
-                0.68rem;
-
-            line-height:
-                1.35;
-
-            font-weight:
-                700;
-
-        }
-
-
-        .page02g-indicator-current {
-
-            margin-top:
-                9px;
-
-            padding:
-                8px 9px;
-
-            border:
-                1px solid rgba(
-                    20,
-                    184,
-                    166,
-                    0.18
-                );
-
-            border-radius:
-                7px;
-
-            background:
-                rgba(
-                    20,
-                    184,
-                    166,
-                    0.045
-                );
-
-        }
-
-
-        .page02g-small-label {
-
-            display:
-                block;
-
-            margin-bottom:
-                3px;
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.32
-                );
-
-            font-size:
-                0.43rem;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                0.08em;
-
-        }
-
-
-        .page02g-current-value {
-
-            color:
-                #14b8a6;
-
-            font-size:
-                0.62rem;
-
-            font-weight:
-                700;
-
-            line-height:
-                1.35;
-
-            word-break:
-                break-word;
-
-        }
-
-
-        .page02g-indicator-ideal {
-
-            margin-top:
-                7px;
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.48
-                );
-
-            font-size:
-                0.50rem;
-
-            line-height:
-                1.35;
-
-        }
-
-
-        .page02g-indicator-ideal strong {
-
-            color:
-                #d9a441;
-
-        }
-
-
-        .page02g-indicator-score {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                7px;
-
-            margin-top:
-                11px;
-
-        }
-
-
-        .page02g-score-bar {
-
-            flex:
-                1;
-
-            height:
-                5px;
-
-            overflow:
-                hidden;
-
-            border-radius:
-                999px;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.07
-                );
-
-        }
-
-
-        .page02g-score-bar-fill {
-
-            height:
-                100%;
-
-            border-radius:
-                inherit;
-
-            background:
-                #14b8a6;
-
-        }
-
-
-        .page02g-indicator-score-value {
-
-            color:
-                #14b8a6;
-
-            font-size:
-                0.55rem;
-
-            font-weight:
-                800;
-
-            white-space:
-                nowrap;
-
-        }
-
-
-        .page02g-indicator-gap {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                space-between;
-
-            margin-top:
-                8px;
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.35
-                );
-
-            font-size:
-                0.46rem;
-
-        }
-
-
-        .page02g-indicator-gap strong {
-
-            color:
-                #ef6b73;
-
-            font-size:
-                0.56rem;
-
-        }
-
-
-        /* ==========================================================
-           JOURNEY MESSAGE
-        ========================================================== */
-
-        .page02g-message-panel {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                1fr
-                1.3fr
-                1fr;
-
-            gap:
-                1px;
-
-            margin-top:
-                24px;
-
-            overflow:
-                hidden;
-
-            border:
-                1px solid rgba(
-                    255,
-                    255,
-                    255,
-                    0.08
-                );
-
-            border-radius:
-                16px;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    0.07
-                );
-
-        }
-
-
-        .page02g-message-block {
-
-            padding:
-                25px;
-
-            background:
-                rgba(
-                    4,
-                    22,
-                    32,
-                    0.95
-                );
-
-        }
-
-
-        .page02g-message-icon {
-
-            width:
-                38px;
-
-            height:
-                38px;
-
-            border:
-                1px solid rgba(
-                    217,
-                    164,
-                    65,
-                    0.25
-                );
-
-            border-radius:
-                50%;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            color:
-                #d9a441;
-
-            margin-bottom:
-                14px;
-
-        }
-
-
-        .page02g-message-title {
-
-            margin:
-                0;
-
-            color:
-                #f4f1e8;
-
-            font-size:
-                0.82rem;
-
-            font-weight:
-                800;
-
-        }
-
-
-        .page02g-message-copy {
-
-            margin:
-                7px 0 0;
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.48
-                );
-
-            font-size:
-                0.66rem;
-
-            line-height:
-                1.6;
-
-        }
-
-
-        .page02g-message-center {
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            text-align:
-                center;
-
-            border-left:
-                1px solid rgba(
-                    255,
-                    255,
-                    255,
-                    0.07
-                );
-
-            border-right:
-                1px solid rgba(
-                    255,
-                    255,
-                    255,
-                    0.07
-                );
-
-        }
-
-
-        .page02g-message-center-tamil {
-
-            margin:
-                0;
-
-            color:
-                #14b8a6;
-
-            font-size:
-                1rem;
-
-            font-weight:
-                750;
-
-        }
-
-
-        .page02g-message-center-english {
-
-            margin:
-                6px 0 0;
-
-            color:
-                #d9a441;
-
-            font-size:
-                0.57rem;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                0.12em;
-
-        }
-
-
-        /* ==========================================================
-           CTA
-        ========================================================== */
-
-        .page02g-navigation {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            margin-top:
-                28px;
-
-        }
-
-
-        .page02g-cta {
-
-            display:
-                inline-flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            gap:
-                18px;
-
-            min-width:
-                min(
-                    420px,
-                    100%
-                );
-
-            padding:
-                17px 28px;
-
-            border:
-                1px solid rgba(
-                    217,
-                    164,
-                    65,
-                    0.55
-                );
-
-            border-radius:
-                10px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #d9a441,
-                    #b98222
-                );
-
-            color:
-                #071018;
-
-            text-decoration:
-                none;
-
-            font-size:
-                0.72rem;
-
-            font-weight:
-                900;
-
-            letter-spacing:
-                0.10em;
-
-            box-shadow:
-                0 18px 42px rgba(
-                    217,
-                    164,
-                    65,
-                    0.14
-                );
-
-            transition:
-                transform 180ms ease,
-                box-shadow 180ms ease;
-
-        }
-
-
-        .page02g-cta:hover {
-
-            transform:
-                translateY(-2px);
-
-            box-shadow:
-                0 22px 50px rgba(
-                    217,
-                    164,
-                    65,
-                    0.22
-                );
-
-        }
-
-
-        .page02g-cta-primary {
-
-            display:
-                block;
-
-        }
-
-
-        .page02g-cta-secondary {
-
-            display:
-                block;
-
-            margin-top:
-                4px;
-
-            font-size:
-                0.48rem;
-
-            letter-spacing:
-                0.14em;
-
-            opacity:
-                0.72;
-
-        }
-
-
-        .page02g-cta-arrow {
-
-            font-size:
-                1.15rem;
-
-        }
-
-
-        /* ==========================================================
-           FOOTER JOURNEY INDICATOR
-        ========================================================== */
-
-        .page02g-journey-map {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            flex-wrap:
-                wrap;
-
-            gap:
-                10px;
-
-            margin-top:
-                34px;
-
-        }
-
-
-        .page02g-journey-step {
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.28
-                );
-
-            font-size:
-                0.48rem;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                0.12em;
-
-        }
-
-
-        .page02g-journey-step.active {
-
-            color:
-                #d9a441;
-
-        }
-
-
-        .page02g-journey-separator {
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.16
-                );
-
-            font-size:
-                0.55rem;
-
-        }
-
-
-        /* ==========================================================
-           EMPTY / INCOMPLETE STATE
-        ========================================================== */
-
-        .page02g-empty {
-
-            display:
-                none;
-
-            max-width:
-                680px;
-
-            margin:
-                80px auto;
-
-            padding:
-                50px;
-
-            text-align:
-                center;
-
-            border:
-                1px solid rgba(
-                    239,
-                    107,
-                    115,
-                    0.22
-                );
-
-            border-radius:
-                18px;
-
-            background:
-                rgba(
-                    8,
-                    27,
-                    38,
-                    0.90
-                );
-
-        }
-
-
-        .page02g-empty h2 {
-
-            margin:
-                0;
-
-            color:
-                #f4f1e8;
-
-        }
-
-
-        .page02g-empty p {
-
-            margin:
-                12px 0 0;
-
-            color:
-                rgba(
-                    244,
-                    241,
-                    232,
-                    0.50
-                );
-
-            line-height:
-                1.7;
-
-        }
-
-
-        /* ==========================================================
-           TABLET
-        ========================================================== */
-
-        @media (max-width: 1180px) {
-
-            .page02g-dimensions {
-
-                grid-template-columns:
-                    repeat(
-                        3,
-                        1fr
-                    );
-
-            }
-
-
-            .page02g-matrix {
-
-                grid-template-columns:
-                    repeat(
-                        3,
-                        1fr
-                    );
-
-            }
-
-
-            .page02g-hero-score {
-
-                position:
-                    relative;
-
-                right:
-                    auto;
-
-                top:
-                    auto;
-
-                transform:
-                    none;
-
-                margin:
-                    30px auto 0;
-
-            }
-
-        }
-
-
-        /* ==========================================================
-           TABLET / MOBILE
-        ========================================================== */
-
-        @media (max-width: 900px) {
-
-            .page02g-journey-header {
-
-                grid-template-columns:
-                    1fr;
-
-                text-align:
-                    center;
-
-            }
-
-
-            .page02g-brand {
-
-                justify-content:
-                    center;
-
-            }
-
-
-            .page02g-progress {
-
-                justify-self:
-                    center;
-
-                width:
-                    min(
-                        420px,
-                        100%
-                    );
-
-            }
-
-
-            .page02g-summary-grid {
-
-                grid-template-columns:
-                    repeat(
-                        2,
-                        1fr
-                    );
-
-            }
-
-
-            .page02g-gap-overview {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .page02g-message-panel {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .page02g-message-center {
-
-                border-left:
-                    0;
-
-                border-right:
-                    0;
-
-                border-top:
-                    1px solid rgba(
-                        255,
-                        255,
-                        255,
-                        0.07
-                    );
-
-                border-bottom:
-                    1px solid rgba(
-                        255,
-                        255,
-                        255,
-                        0.07
-                    );
-
-            }
-
-        }
-
-
-        /* ==========================================================
-           MOBILE
-        ========================================================== */
-
-        @media (max-width: 768px) {
-
-            .page02g-shell {
-
-                width:
-                    min(
-                        100% - 28px,
-                        700px
-                    );
-
-                padding:
-                    22px 0 60px;
-
-            }
-
-
-            .page02g-hero {
-
-                padding:
-                    26px 22px;
-
-                border-radius:
-                    16px;
-
-            }
-
-
-            .page02g-hero-title {
-
-                font-size:
-                    2rem;
-
-            }
-
-
-            .page02g-summary-grid {
-
-                grid-template-columns:
-                    1fr 1fr;
-
-            }
-
-
-            .page02g-dimensions {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .page02g-matrix {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .page02g-bar-row {
-
-                grid-template-columns:
-                    1fr;
-
-                gap:
-                    7px;
-
-                margin-bottom:
-                    20px;
-
-            }
-
-
-            .page02g-bar-value {
-
-                text-align:
-                    left;
-
-            }
-
-
-            .page02g-gap-panel {
-
-                padding:
-                    20px;
-
-            }
-
-
-            .page02g-legend {
-
-                gap:
-                    12px;
-
-                justify-content:
-                    flex-start;
-
-            }
-
-        }
-
-
-        /* ==========================================================
-           SMALL MOBILE
-        ========================================================== */
-
-        @media (max-width: 420px) {
-
-            .page02g-shell {
-
-                width:
-                    calc(
-                        100% - 20px
-                    );
-
-            }
-
-
-            .page02g-summary-grid {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .page02g-summary-card {
-
-                min-height:
-                    auto;
-
-            }
-
-
-            .page02g-hero-score {
-
-                width:
-                    150px;
-
-                height:
-                    150px;
-
-            }
-
-
-            .page02g-score-number {
-
-                font-size:
-                    2.15rem;
-
-            }
-
-
-            .page02g-cta {
-
-                min-width:
-                    0;
-
-                width:
-                    100%;
-
-            }
-
-        }
-
-
-        /* ==========================================================
-           PRINT
-        ========================================================== */
-
-        @media print {
-
-            .page02g-body {
-
-                background:
-                    #ffffff;
-
-                color:
-                    #111111;
-
-            }
-
-
-            .page02g::before,
-            .page02g::after {
-
-                display:
-                    none;
-
-            }
-
-
-            .page02g-hero,
-            .page02g-summary-card,
-            .page02g-dimension-card,
-            .page02g-gap-panel,
-            .page02g-matrix-dimension,
-            .page02g-message-block {
-
-                box-shadow:
-                    none;
-
-            }
-
-
-            .page02g-cta {
-
-                display:
-                    none;
-
-            }
-
-        }
-
-
-        /* ==========================================================
-           REDUCED MOTION
-        ========================================================== */
-
-        @media (prefers-reduced-motion: reduce) {
-
-            .page02g-cta {
-
-                transition:
-                    none;
-
-            }
-
-        }
-
-    </style>
-
 </head>
 
 
@@ -3338,6 +90,10 @@
 
     <!-- ==========================================================
          GLOBAL HEADER
+         
+         The existing component loader may populate this mount.
+         Page 02G itself does not depend on the header for scoring,
+         result calculation or navigation.
     ========================================================== -->
 
     <div
@@ -3348,6 +104,7 @@
 
     <!-- ==========================================================
          PAGE 02G
+         LIFE GAP ANALYSIS™
     ========================================================== -->
 
     <main
@@ -3356,24 +113,39 @@
     >
 
 
+        <!-- ======================================================
+             PAGE SHELL
+        ======================================================= -->
+
         <div class="page02g-shell">
 
 
-            <!-- ======================================================
+            <!-- ==================================================
                  JOURNEY HEADER
-            ======================================================= -->
+            =================================================== -->
 
-            <header class="page02g-journey-header">
+            <header
+                class="page02g-header"
+                aria-labelledby="page02gTitle"
+            >
 
 
-                <div class="page02g-brand">
+                <!-- ----------------------------------------------
+                     BRAND / PAGE IDENTITY
+                ----------------------------------------------- -->
+
+                <div class="page02g-header-identity">
+
 
                     <div
                         class="page02g-brand-mark"
                         aria-hidden="true"
                     >
-                        ✦
+                        <span class="page02g-brand-mark-inner">
+                            ✦
+                        </span>
                     </div>
+
 
                     <div class="page02g-brand-copy">
 
@@ -3390,44 +162,29 @@
                 </div>
 
 
-                <div class="page02g-header-title">
+                <!-- ----------------------------------------------
+                     JOURNEY STATUS
+                ----------------------------------------------- -->
 
-                    <h1>
-                        YOUR LIFE GAP ANALYSIS™
-                    </h1>
+                <div
+                    class="page02g-journey-status"
+                    aria-label="Journey completion"
+                >
 
-                    <p>
-                        SUMMARY GAP OVERVIEW
+                    <p class="page02g-status-label">
+                        YOUR JOURNEY
                     </p>
 
-                </div>
+                    <strong
+                        id="page02gJourneyProgress"
+                        class="page02g-status-value"
+                    >
+                        25 / 25
+                    </strong>
 
-
-                <div class="page02g-progress">
-
-                    <div class="page02g-progress-meta">
-
-                        <span class="page02g-progress-label">
-                            YOUR JOURNEY
-                        </span>
-
-                        <span
-                            id="journeyProgressNumber"
-                            class="page02g-progress-number"
-                        >
-                            25 / 25
-                        </span>
-
-                    </div>
-
-                    <div class="page02g-progress-track">
-
-                        <div
-                            id="journeyProgressFill"
-                            class="page02g-progress-fill"
-                        ></div>
-
-                    </div>
+                    <span class="page02g-status-complete">
+                        COMPLETE
+                    </span>
 
                 </div>
 
@@ -3435,337 +192,671 @@
             </header>
 
 
-
-            <!-- ======================================================
-                 HERO
-            ======================================================= -->
+            <!-- ==================================================
+                 JOURNEY PROGRESS
+            =================================================== -->
 
             <section
-                class="page02g-hero"
-                aria-labelledby="lifeGapTitle"
+                class="page02g-progress"
+                aria-label="Millionaire Lifestyle Scorecard progress"
             >
 
 
-                <div class="page02g-hero-content">
+                <div class="page02g-progress-topline">
+
+                    <div>
+
+                        <span class="page02g-progress-kicker">
+                            YOUR JOURNEY PROGRESS
+                        </span>
+
+                        <span class="page02g-progress-caption">
+                            5 DIMENSIONS · 25 INDICATORS
+                        </span>
+
+                    </div>
 
 
-                    <p class="page02g-eyebrow">
-                        CTM PATH™ MILLIONAIRES™
+                    <strong
+                        id="page02gProgressText"
+                        class="page02g-progress-total"
+                    >
+                        25 / 25
+                    </strong>
+
+                </div>
+
+
+                <div
+                    class="page02g-progress-track"
+                    role="progressbar"
+                    aria-label="Scorecard completion"
+                    aria-valuemin="0"
+                    aria-valuemax="25"
+                    aria-valuenow="25"
+                >
+
+                    <span
+                        id="page02gProgressFill"
+                        class="page02g-progress-fill"
+                    ></span>
+
+                </div>
+
+
+                <div
+                    class="page02g-step-track"
+                    aria-label="Five completed dimensions"
+                >
+
+                    <div
+                        class="page02g-step is-complete"
+                        data-dimension-step="1"
+                    >
+                        <span>01</span>
+                    </div>
+
+                    <div
+                        class="page02g-step-line is-complete"
+                    ></div>
+
+
+                    <div
+                        class="page02g-step is-complete"
+                        data-dimension-step="2"
+                    >
+                        <span>02</span>
+                    </div>
+
+                    <div
+                        class="page02g-step-line is-complete"
+                    ></div>
+
+
+                    <div
+                        class="page02g-step is-complete"
+                        data-dimension-step="3"
+                    >
+                        <span>03</span>
+                    </div>
+
+                    <div
+                        class="page02g-step-line is-complete"
+                    ></div>
+
+
+                    <div
+                        class="page02g-step is-complete"
+                        data-dimension-step="4"
+                    >
+                        <span>04</span>
+                    </div>
+
+                    <div
+                        class="page02g-step-line is-complete"
+                    ></div>
+
+
+                    <div
+                        class="page02g-step is-complete is-current"
+                        data-dimension-step="5"
+                    >
+                        <span>05</span>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================================================
+                 PAGE INTRODUCTION
+            =================================================== -->
+
+            <section
+                class="page02g-introduction"
+                aria-labelledby="page02gTitle"
+            >
+
+
+                <div class="page02g-page-badge">
+
+                    <span class="page02g-page-badge-label">
+                        PAGE 02G
+                    </span>
+
+                    <span class="page02g-page-badge-status">
+                        FINAL ANALYSIS
+                    </span>
+
+                </div>
+
+
+                <p class="page02g-eyebrow">
+                    CTM PATH™ MILLIONAIRES™
+                </p>
+
+
+                <h1
+                    id="page02gTitle"
+                    class="page02g-title"
+                >
+
+                    <span class="page02g-title-line">
+                        உங்கள் கனவு வாழ்க்கைக்கும்
+                    </span>
+
+                    <span class="page02g-title-accent">
+                        உங்கள் தற்போதைய வாழ்க்கைக்கும்
+                    </span>
+
+                    <span class="page02g-title-line">
+                        இடையிலான இடைவெளி
+                    </span>
+
+                </h1>
+
+
+                <p class="page02g-title-english">
+                    YOUR LIFE GAP ANALYSIS™
+                </p>
+
+
+                <p class="page02g-title-tagline">
+                    SEE THE GAP. CLOSE THE GAP. BECOME THE LEGEND.
+                </p>
+
+
+                <div class="page02g-introduction-copy">
+
+                    <p class="page02g-introduction-tamil">
+                        உங்கள் 25 பதில்களையும் ஒரே பார்வையில்
+                        பார்க்கலாம். உங்கள் கனவு வாழ்க்கைக்கும்
+                        தற்போதைய வாழ்க்கைக்கும் இடையில் எங்கு
+                        இடைவெளி உள்ளது என்பதை இப்போது தெளிவாக
+                        காணலாம்.
+                    </p>
+
+                    <p class="page02g-introduction-english">
+                        See all 25 answers as one complete picture.
+                        Discover where the greatest gaps exist between
+                        your ideal millionaire lifestyle and your current reality.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================================================
+                 OVERALL RESULT HERO
+            =================================================== -->
+
+            <section
+                id="page02gOverallResult"
+                class="page02g-overall-result"
+                aria-labelledby="page02gOverallTitle"
+            >
+
+
+                <div class="page02g-overall-copy">
+
+
+                    <p class="page02g-section-kicker">
+                        YOUR CURRENT REALITY
                     </p>
 
 
                     <h2
-                        id="lifeGapTitle"
-                        class="page02g-hero-title"
+                        id="page02gOverallTitle"
+                        class="page02g-overall-title"
                     >
-
-                        உங்கள் கனவு வாழ்க்கைக்கும்
-                        <span>
-                            உங்கள் தற்போதைய வாழ்க்கைக்கும்
-                        </span>
-                        இடையிலான இடைவெளி
-
+                        உங்கள் தற்போதைய நிலை
                     </h2>
 
 
-                    <p class="page02g-hero-english">
-                        THE GAP BETWEEN YOUR IDEAL MILLIONAIRE LIFE AND YOUR CURRENT REALITY
+                    <p class="page02g-overall-subtitle">
+                        YOUR MILLIONAIRE LIFESTYLE SCORE™
                     </p>
 
 
-                    <p class="page02g-hero-copy">
+                    <p class="page02g-overall-description">
+                        உங்கள் 25 வாழ்க்கை அளவுகோல்களின்
+                        அடிப்படையில் உங்கள் தற்போதைய நிலை.
+                    </p>
 
-                        உங்கள் 25 பதில்களையும் ஒரே பார்வையில் பார்க்கலாம்.
-                        நீங்கள் இன்று எங்கே இருக்கிறீர்கள்,
-                        நீங்கள் எங்கே செல்ல விரும்புகிறீர்கள்,
-                        அந்த இரண்டிற்கும் இடையில் எவ்வளவு இடைவெளி உள்ளது
-                        என்பதை இந்தப் படம் காட்டுகிறது.
 
+                    <p class="page02g-overall-description-english">
+                        Your current position across all 25
+                        Millionaire Lifestyle indicators.
                     </p>
 
 
                 </div>
 
 
+                <!-- ----------------------------------------------
+                     SCORE
+                ----------------------------------------------- -->
+
                 <div
-                    id="heroScore"
-                    class="page02g-hero-score"
-                    aria-label="Overall score"
+                    class="page02g-score-hero"
+                    aria-live="polite"
                 >
 
-                    <div class="page02g-score-inner">
 
-                        <span
-                            id="heroScoreNumber"
-                            class="page02g-score-number"
+                    <div class="page02g-score-label">
+                        MILLIONAIRE LIFESTYLE SCORE™
+                    </div>
+
+
+                    <div class="page02g-score-value">
+
+                        <strong
+                            id="page02gScore"
                         >
                             0
-                        </span>
+                        </strong>
 
-                        <span class="page02g-score-total">
+                        <span>
                             / 100
                         </span>
 
-                        <span class="page02g-score-caption">
+                    </div>
+
+
+                    <div class="page02g-score-percentage">
+
+                        <strong
+                            id="page02gPercentage"
+                        >
+                            0%
+                        </strong>
+
+                        <span>
                             CURRENT REALITY
                         </span>
 
                     </div>
 
+
                 </div>
 
 
-            </section>
+                <!-- ----------------------------------------------
+                     GAP
+                ----------------------------------------------- -->
+
+                <div class="page02g-gap-hero">
 
 
-
-            <!-- ======================================================
-                 SUMMARY
-            ======================================================= -->
-
-            <section
-                class="page02g-summary-grid"
-                aria-label="Overall score summary"
-            >
-
-
-                <article class="page02g-summary-card">
-
-                    <span class="page02g-summary-label">
-                        Total Score
-                    </span>
-
-                    <span
-                        id="summaryTotalScore"
-                        class="page02g-summary-value teal"
-                    >
-                        0 / 100
-                    </span>
-
-                    <span class="page02g-summary-sub">
-                        உங்கள் தற்போதைய நிலை
-                    </span>
-
-                </article>
-
-
-                <article class="page02g-summary-card">
-
-                    <span class="page02g-summary-label">
-                        Readiness
-                    </span>
-
-                    <span
-                        id="summaryReadiness"
-                        class="page02g-summary-value teal"
-                    >
-                        0%
-                    </span>
-
-                    <span class="page02g-summary-sub">
-                        CURRENT REALITY / IDEAL
-                    </span>
-
-                </article>
-
-
-                <article class="page02g-summary-card">
-
-                    <span class="page02g-summary-label">
-                        Gap Remaining
-                    </span>
-
-                    <span
-                        id="summaryGap"
-                        class="page02g-summary-value gap"
-                    >
-                        100 / 100
-                    </span>
-
-                    <span class="page02g-summary-sub">
-                        இன்னும் நிரப்ப வேண்டிய இடைவெளி
-                    </span>
-
-                </article>
-
-
-                <article class="page02g-summary-card">
-
-                    <span class="page02g-summary-label">
-                        Questions Answered
-                    </span>
-
-                    <span
-                        id="summaryAnswered"
-                        class="page02g-summary-value gold"
-                    >
-                        0 / 25
-                    </span>
-
-                    <span class="page02g-summary-sub">
-                        COMPLETE SCORECARD
-                    </span>
-
-                </article>
-
-
-            </section>
-
-
-
-            <!-- ======================================================
-                 LEGEND
-            ======================================================= -->
-
-            <div
-                class="page02g-legend"
-                aria-label="Gap analysis legend"
-            >
-
-                <span class="page02g-legend-item">
-
-                    <span
-                        class="
-                            page02g-legend-dot
-                            page02g-legend-current
-                        "
-                    ></span>
-
-                    உங்கள் தற்போதைய நிலை
-                    / CURRENT REALITY
-
-                </span>
-
-
-                <span class="page02g-legend-item">
-
-                    <span
-                        class="
-                            page02g-legend-dot
-                            page02g-legend-ideal
-                        "
-                    ></span>
-
-                    உங்கள் இலக்கு
-                    / IDEAL MILLIONAIRE LIFE
-
-                </span>
-
-
-                <span class="page02g-legend-item">
-
-                    <span
-                        class="
-                            page02g-legend-dot
-                            page02g-legend-gap
-                        "
-                    ></span>
-
-                    இடைவெளி
-                    / THE GAP
-
-                </span>
-
-            </div>
-
-
-
-            <!-- ======================================================
-                 FIVE DIMENSIONS
-            ======================================================= -->
-
-            <section
-                aria-labelledby="dimensionsTitle"
-            >
-
-
-                <div class="page02g-section-heading">
-
-                    <h2 id="dimensionsTitle">
-                        ஐந்து பரிமாணங்களில் உங்கள் நிலை
-                    </h2>
-
-                    <p>
-                        YOUR CURRENT REALITY ACROSS THE FIVE DIMENSIONS
+                    <p class="page02g-gap-label">
+                        GAP TO CLOSE
                     </p>
 
+
+                    <strong
+                        id="page02gGap"
+                        class="page02g-gap-value"
+                    >
+                        0%
+                    </strong>
+
+
+                    <p class="page02g-gap-tamil">
+                        வளர வேண்டிய இடைவெளி
+                    </p>
+
+
+                    <p class="page02g-gap-english">
+                        DISTANCE BETWEEN YOUR CURRENT REALITY
+                        AND YOUR IDEAL LIFESTYLE
+                    </p>
+
+
                 </div>
 
 
+            </section>
+
+
+            <!-- ==================================================
+                 SUMMARY METRICS
+            =================================================== -->
+
+            <section
+                class="page02g-summary-metrics"
+                aria-label="Life gap summary"
+            >
+
+
+                <article class="page02g-summary-card">
+
+                    <span class="page02g-summary-label">
+                        CURRENT SCORE
+                    </span>
+
+                    <strong
+                        id="page02gSummaryScore"
+                        class="page02g-summary-value"
+                    >
+                        0 / 100
+                    </strong>
+
+                    <span class="page02g-summary-caption">
+                        உங்கள் தற்போதைய மதிப்பெண்
+                    </span>
+
+                </article>
+
+
+                <article class="page02g-summary-card">
+
+                    <span class="page02g-summary-label">
+                        CURRENT REALITY
+                    </span>
+
+                    <strong
+                        id="page02gSummaryPercentage"
+                        class="page02g-summary-value"
+                    >
+                        0%
+                    </strong>
+
+                    <span class="page02g-summary-caption">
+                        YOUR PRESENT POSITION
+                    </span>
+
+                </article>
+
+
+                <article class="page02g-summary-card page02g-summary-card-gap">
+
+                    <span class="page02g-summary-label">
+                        GAP TO CLOSE
+                    </span>
+
+                    <strong
+                        id="page02gSummaryGap"
+                        class="page02g-summary-value"
+                    >
+                        0%
+                    </strong>
+
+                    <span class="page02g-summary-caption">
+                        உங்கள் வளர்ச்சி இடைவெளி
+                    </span>
+
+                </article>
+
+
+                <article class="page02g-summary-card">
+
+                    <span class="page02g-summary-label">
+                        INDICATORS
+                    </span>
+
+                    <strong
+                        id="page02gSummaryIndicators"
+                        class="page02g-summary-value"
+                    >
+                        25 / 25
+                    </strong>
+
+                    <span class="page02g-summary-caption">
+                        FULLY ASSESSED
+                    </span>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- ==================================================
+                 GAP LEGEND
+            =================================================== -->
+
+            <section
+                class="page02g-gap-legend"
+                aria-label="Life gap explanation"
+            >
+
+
+                <div class="page02g-legend-item">
+
+                    <span
+                        class="page02g-legend-dot page02g-legend-dot-current"
+                        aria-hidden="true"
+                    ></span>
+
+                    <div>
+
+                        <strong>
+                            YOUR CURRENT REALITY
+                        </strong>
+
+                        <span>
+                            நீங்கள் இன்று இருக்கும் நிலை
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="page02g-legend-item">
+
+                    <span
+                        class="page02g-legend-dot page02g-legend-dot-ideal"
+                        aria-hidden="true"
+                    ></span>
+
+                    <div>
+
+                        <strong>
+                            IDEAL MILLIONAIRE LIFESTYLE
+                        </strong>
+
+                        <span>
+                            நீங்கள் உருவாக்க விரும்பும் நிலை
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="page02g-legend-item">
+
+                    <span
+                        class="page02g-legend-dot page02g-legend-dot-gap"
+                        aria-hidden="true"
+                    ></span>
+
+                    <div>
+
+                        <strong>
+                            GAP TO CLOSE
+                        </strong>
+
+                        <span>
+                            இன்னும் வளர வேண்டிய பகுதி
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- ==================================================
+                 FIVE DIMENSIONS
+            =================================================== -->
+
+            <section
+                id="page02gDimensions"
+                class="page02g-dimensions-section"
+                aria-labelledby="page02gDimensionsTitle"
+            >
+
+
+                <header class="page02g-section-header">
+
+                    <div>
+
+                        <p class="page02g-section-kicker">
+                            THE FIVE DIMENSIONS
+                        </p>
+
+                        <h2
+                            id="page02gDimensionsTitle"
+                            class="page02g-section-title"
+                        >
+                            உங்கள் வாழ்க்கையின் ஐந்து பரிமாணங்கள்
+                        </h2>
+
+                        <p class="page02g-section-subtitle">
+                            THE FIVE DIMENSIONS OF YOUR MILLIONAIRE LIFESTYLE
+                        </p>
+
+                    </div>
+
+
+                    <div class="page02g-section-total">
+
+                        <span>
+                            TOTAL
+                        </span>
+
+                        <strong
+                            id="page02gDimensionTotal"
+                        >
+                            0 / 100
+                        </strong>
+
+                    </div>
+
+                </header>
+
+
+                <!-- ==================================================
+                     DYNAMIC DIMENSION GRID
+
+                     page02g.js populates this container from the
+                     canonical Page02 result.
+
+                     NO dimension scores are hard-coded.
+                =================================================== -->
+
                 <div
-                    id="dimensionOverview"
-                    class="page02g-dimensions"
+                    id="page02gDimensionGrid"
+                    class="page02g-dimension-grid"
+                    aria-live="polite"
                 ></div>
 
 
             </section>
 
 
-
-            <!-- ======================================================
-                 GAP OVERVIEW
-            ======================================================= -->
+            <!-- ==================================================
+                 DIMENSION GAP ANALYSIS
+            =================================================== -->
 
             <section
-                aria-labelledby="gapOverviewTitle"
+                id="page02gGapAnalysis"
+                class="page02g-gap-analysis"
+                aria-labelledby="page02gGapAnalysisTitle"
             >
 
 
-                <div class="page02g-section-heading">
+                <header class="page02g-section-header">
 
-                    <h2 id="gapOverviewTitle">
-                        இடைவெளியைப் பாருங்கள்
-                    </h2>
+                    <div>
 
-                    <p>
-                        SEE THE GAP BETWEEN CURRENT REALITY AND IDEAL
-                    </p>
+                        <p class="page02g-section-kicker">
+                            YOUR LIFE GAP
+                        </p>
 
-                </div>
+                        <h2
+                            id="page02gGapAnalysisTitle"
+                            class="page02g-section-title"
+                        >
+                            இடைவெளியைப் பார்ப்போம்
+                        </h2>
 
-
-                <div class="page02g-gap-overview">
-
-
-                    <div class="page02g-gap-panel">
-
-
-                        <h3 class="page02g-gap-panel-title">
-                            IDEAL MILLIONAIRE LIFE™ VS CURRENT REALITY
-                        </h3>
-
-
-                        <div id="dimensionBars"></div>
-
+                        <p class="page02g-section-subtitle">
+                            SEE THE GAP BETWEEN YOUR CURRENT REALITY AND YOUR IDEAL
+                        </p>
 
                     </div>
 
+                </header>
 
+
+                <div class="page02g-gap-analysis-layout">
+
+
+                    <!-- ----------------------------------------------
+                         DIMENSION BARS
+                    ----------------------------------------------- -->
 
                     <div
-                        class="
-                            page02g-gap-panel
-                            page02g-gap-score-panel
-                        "
+                        id="page02gDimensionBars"
+                        class="page02g-dimension-bars"
+                        aria-label="Five dimension gap comparison"
+                    ></div>
+
+
+                    <!-- ----------------------------------------------
+                         GAP RING
+                    ----------------------------------------------- -->
+
+                    <div
+                        class="page02g-gap-ring-card"
+                        aria-live="polite"
                     >
 
-                        <div
-                            id="gapRing"
-                            class="page02g-gap-ring"
-                            style="--gap: 100%;"
-                        >
 
-                            <div class="page02g-gap-ring-content">
+                        <div class="page02g-ring">
 
-                                <span
-                                    id="gapRingNumber"
-                                    class="page02g-gap-ring-number"
+                            <svg
+                                class="page02g-ring-svg"
+                                viewBox="0 0 180 180"
+                                aria-hidden="true"
+                            >
+
+                                <circle
+                                    class="page02g-ring-track"
+                                    cx="90"
+                                    cy="90"
+                                    r="72"
+                                ></circle>
+
+                                <circle
+                                    id="page02gRingProgress"
+                                    class="page02g-ring-progress"
+                                    cx="90"
+                                    cy="90"
+                                    r="72"
+                                    pathLength="100"
+                                ></circle>
+
+                            </svg>
+
+
+                            <div class="page02g-ring-content">
+
+                                <strong
+                                    id="page02gRingPercentage"
                                 >
-                                    100%
-                                </span>
+                                    0%
+                                </strong>
 
-                                <span class="page02g-gap-ring-label">
-                                    GAP TO CLOSE
+                                <span>
+                                    CURRENT
                                 </span>
 
                             </div>
@@ -3773,14 +864,17 @@
                         </div>
 
 
-                        <p
-                            id="gapMessage"
-                            class="page02g-gap-message"
-                        >
-                            உங்கள் தற்போதைய நிலையும்
-                            உங்கள் இலக்கு வாழ்க்கையும் இடையே
-                            உள்ள இடைவெளியைப் பாருங்கள்.
-                        </p>
+                        <div class="page02g-ring-copy">
+
+                            <p class="page02g-ring-copy-tamil">
+                                உங்கள் தற்போதைய நிலை
+                            </p>
+
+                            <p class="page02g-ring-copy-english">
+                                YOUR CURRENT LIFESTYLE POSITION
+                            </p>
+
+                        </div>
 
 
                     </div>
@@ -3792,106 +886,227 @@
             </section>
 
 
-
-            <!-- ======================================================
-                 ALL 25 INDICATORS
-            ======================================================= -->
+            <!-- ==================================================
+                 STRONGEST / GROWTH DIMENSION
+            =================================================== -->
 
             <section
-                aria-labelledby="matrixTitle"
+                class="page02g-insight-grid"
+                aria-label="Life gap insights"
             >
 
 
-                <div class="page02g-section-heading">
+                <article
+                    id="page02gStrengthCard"
+                    class="page02g-insight-card page02g-insight-card-strength"
+                >
 
-                    <h2 id="matrixTitle">
-                        25 அளவுகோல்களின் முழுமையான வாழ்க்கைப் படம்
-                    </h2>
+                    <div class="page02g-insight-icon">
+                        +
+                    </div>
 
-                    <p>
-                        ALL 25 INDICATORS — CURRENT REALITY • IDEAL • GAP
-                    </p>
+                    <div class="page02g-insight-content">
 
-                </div>
+                        <p class="page02g-insight-kicker">
+                            YOUR STRONGEST DIMENSION
+                        </p>
 
+                        <h3
+                            id="page02gStrongestTamil"
+                            class="page02g-insight-title-tamil"
+                        >
+                            —
+                        </h3>
+
+                        <p
+                            id="page02gStrongestEnglish"
+                            class="page02g-insight-title-english"
+                        >
+                            —
+                        </p>
+
+                        <p
+                            id="page02gStrongestScore"
+                            class="page02g-insight-score"
+                        >
+                            —
+                        </p>
+
+                        <p class="page02g-insight-description">
+                            இது உங்கள் தற்போதைய வாழ்க்கையின்
+                            ஒப்பீட்டளவில் வலிமையான பகுதி.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <article
+                    id="page02gGrowthCard"
+                    class="page02g-insight-card page02g-insight-card-growth"
+                >
+
+                    <div class="page02g-insight-icon">
+                        ↑
+                    </div>
+
+                    <div class="page02g-insight-content">
+
+                        <p class="page02g-insight-kicker">
+                            YOUR GREATEST OPPORTUNITY
+                        </p>
+
+                        <h3
+                            id="page02gGrowthTamil"
+                            class="page02g-insight-title-tamil"
+                        >
+                            —
+                        </h3>
+
+                        <p
+                            id="page02gGrowthEnglish"
+                            class="page02g-insight-title-english"
+                        >
+                            —
+                        </p>
+
+                        <p
+                            id="page02gGrowthScore"
+                            class="page02g-insight-score"
+                        >
+                            —
+                        </p>
+
+                        <p class="page02g-insight-description">
+                            இங்கே உள்ள இடைவெளி உங்கள் அடுத்த
+                            முக்கியமான வளர்ச்சி வாய்ப்பாக இருக்கலாம்.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- ==================================================
+                 25 INDICATORS
+            =================================================== -->
+
+            <section
+                id="page02gIndicators"
+                class="page02g-indicators-section"
+                aria-labelledby="page02gIndicatorsTitle"
+            >
+
+
+                <header class="page02g-section-header">
+
+                    <div>
+
+                        <p class="page02g-section-kicker">
+                            THE COMPLETE SCORECARD
+                        </p>
+
+                        <h2
+                            id="page02gIndicatorsTitle"
+                            class="page02g-section-title"
+                        >
+                            25 அளவுகோல்களில் உங்கள் வாழ்க்கைப் படம்
+                        </h2>
+
+                        <p class="page02g-section-subtitle">
+                            YOUR COMPLETE 25-INDICATOR LIFESTYLE SCORECARD
+                        </p>
+
+                    </div>
+
+
+                    <div class="page02g-section-total">
+
+                        <span>
+                            ASSESSED
+                        </span>
+
+                        <strong
+                            id="page02gIndicatorCount"
+                        >
+                            25 / 25
+                        </strong>
+
+                    </div>
+
+                </header>
+
+
+                <!-- ==================================================
+                     DYNAMIC INDICATOR GRID
+
+                     Five columns on large screens.
+                     Each dimension owns five indicators.
+
+                     page02g.js populates this container using the
+                     canonical Page02 result.
+                =================================================== -->
 
                 <div
-                    id="indicatorMatrix"
-                    class="page02g-matrix"
+                    id="page02gIndicatorGrid"
+                    class="page02g-indicator-grid"
+                    aria-live="polite"
                 ></div>
 
 
             </section>
 
 
-
-            <!-- ======================================================
-                 JOURNEY MESSAGE
-            ======================================================= -->
+            <!-- ==================================================
+                 INTERPRETATION
+            =================================================== -->
 
             <section
-                class="page02g-message-panel"
-                aria-label="Life gap message"
+                class="page02g-interpretation"
+                aria-labelledby="page02gInterpretationTitle"
             >
 
 
-                <div class="page02g-message-block">
-
-                    <div
-                        class="page02g-message-icon"
-                        aria-hidden="true"
-                    >
-                        ◇
-                    </div>
-
-                    <h3 class="page02g-message-title">
-                        இந்த இடைவெளி தோல்வி அல்ல.
-                    </h3>
-
-                    <p class="page02g-message-copy">
-                        இது நீங்கள் இன்று எங்கே இருக்கிறீர்கள்
-                        என்பதை தெளிவாக காட்டும் ஒரு வரைபடம்.
-                    </p>
-
+                <div class="page02g-interpretation-mark">
+                    ✦
                 </div>
 
 
-                <div
-                    class="
-                        page02g-message-block
-                        page02g-message-center
-                    "
-                >
+                <div class="page02g-interpretation-content">
 
-                    <p class="page02g-message-center-tamil">
-                        இடைவெளியைப் பாருங்கள்.
-                        புரிந்துகொள்ளுங்கள்.
-                        நிரப்பத் தொடங்குங்கள்.
+                    <p class="page02g-section-kicker">
+                        WHAT THIS MEANS
                     </p>
 
-                    <p class="page02g-message-center-english">
-                        SEE THE GAP. UNDERSTAND THE GAP. CLOSE THE GAP.
-                    </p>
-
-                </div>
-
-
-                <div class="page02g-message-block">
-
-                    <div
-                        class="page02g-message-icon"
-                        aria-hidden="true"
+                    <h2
+                        id="page02gInterpretationTitle"
+                        class="page02g-interpretation-title"
                     >
-                        ★
-                    </div>
+                        இடைவெளி என்பது தோல்வி அல்ல.
+                        அது உங்கள் அடுத்த பாதை.
+                    </h2>
 
-                    <h3 class="page02g-message-title">
-                        உங்கள் கனவு வாழ்க்கை முன்னால் உள்ளது.
-                    </h3>
+                    <p class="page02g-interpretation-title-english">
+                        THE GAP IS NOT FAILURE.
+                        IT IS YOUR NEXT PATH.
+                    </p>
 
-                    <p class="page02g-message-copy">
-                        அடுத்த கட்டத்தில் உங்கள் வாழ்க்கையின்
-                        12 முக்கிய பரிமாணங்களைப் பார்க்கலாம்.
+                    <p class="page02g-interpretation-body">
+                        இந்த மதிப்பெண் உங்களை மதிப்பிடுவதற்காக அல்ல.
+                        நீங்கள் இன்று எங்கே இருக்கிறீர்கள் என்பதை
+                        தெளிவாகப் பார்க்கவும், நீங்கள் உருவாக்க
+                        விரும்பும் வாழ்க்கையை நோக்கி அடுத்த படியை
+                        தேர்ந்தெடுக்கவும் இது உதவுகிறது.
+                    </p>
+
+                    <p class="page02g-interpretation-body-english">
+                        This score is not a judgement.
+                        It is a clear picture of where you are today
+                        so you can decide where to grow next.
                     </p>
 
                 </div>
@@ -3900,1618 +1115,177 @@
             </section>
 
 
+            <!-- ==================================================
+                 FINAL CTA
+            =================================================== -->
 
-            <!-- ======================================================
-                 CTA
-            ======================================================= -->
-
-            <nav
-                class="page02g-navigation"
-                aria-label="Next journey stage"
+            <section
+                class="page02g-next-section"
+                aria-labelledby="page02gNextTitle"
             >
 
-                <a
-                    id="page02gContinueButton"
-                    class="page02g-cta"
-                    href="page03.html"
-                >
 
-                    <span>
+                <div class="page02g-next-card">
 
-                        <span class="page02g-cta-primary">
-                            அடுத்த கட்டத்திற்கு செல்லலாம் →
+
+                    <p class="page02g-next-kicker">
+                        YOUR NEXT JOURNEY
+                    </p>
+
+
+                    <h2
+                        id="page02gNextTitle"
+                        class="page02g-next-title"
+                    >
+                        உங்கள் வாழ்க்கையை இன்னும் ஆழமாகப் பார்ப்போம்.
+                    </h2>
+
+
+                    <p class="page02g-next-title-english">
+                        NOW LET'S SEE YOUR LIFE THROUGH THE
+                        KALA CHAKRA™.
+                    </p>
+
+
+                    <p class="page02g-next-copy">
+                        உங்கள் Millionaire Lifestyle™ நிலையைப் பார்த்தோம்.
+                        அடுத்து உங்கள் வாழ்க்கையின் 12 முக்கிய
+                        பரிமாணங்களையும் பார்க்கலாம்.
+                    </p>
+
+
+                    <p class="page02g-next-copy-english">
+                        You've seen your Millionaire Lifestyle position.
+                        Now explore the 12 dimensions of a well-lived life
+                        through KALA CHAKRA™.
+                    </p>
+
+
+                    <button
+                        id="page02gContinueButton"
+                        class="page02g-continue-button"
+                        type="button"
+                    >
+
+                        <span class="page02g-button-primary">
+                            KALA CHAKRA™ செல்லலாம் →
                         </span>
 
-                        <span class="page02g-cta-secondary">
+                        <span class="page02g-button-secondary">
                             CONTINUE TO KALA CHAKRA™
                         </span>
 
-                    </span>
+                    </button>
 
 
-                    <span
-                        class="page02g-cta-arrow"
-                        aria-hidden="true"
-                    >
-                        →
-                    </span>
+                </div>
 
-                </a>
-
-            </nav>
-
-
-
-            <!-- ======================================================
-                 JOURNEY MAP
-            ======================================================= -->
-
-            <div
-                class="page02g-journey-map"
-                aria-label="Journey progress"
-            >
-
-                <span class="page02g-journey-step">
-                    02A
-                </span>
-
-                <span class="page02g-journey-separator">
-                    •
-                </span>
-
-                <span class="page02g-journey-step">
-                    02B
-                </span>
-
-                <span class="page02g-journey-separator">
-                    •
-                </span>
-
-                <span class="page02g-journey-step">
-                    02C
-                </span>
-
-                <span class="page02g-journey-separator">
-                    •
-                </span>
-
-                <span class="page02g-journey-step">
-                    02D
-                </span>
-
-                <span class="page02g-journey-separator">
-                    •
-                </span>
-
-                <span class="page02g-journey-step">
-                    02E
-                </span>
-
-                <span class="page02g-journey-separator">
-                    •
-                </span>
-
-                <span class="page02g-journey-step">
-                    02F
-                </span>
-
-                <span class="page02g-journey-separator">
-                    →
-                </span>
-
-                <span class="page02g-journey-step active">
-                    02G
-                </span>
-
-                <span class="page02g-journey-separator">
-                    •
-                </span>
-
-                <span class="page02g-journey-step">
-                    KALA CHAKRA™
-                </span>
-
-            </div>
-
-
-
-            <!-- ======================================================
-                 EMPTY / INCOMPLETE STATE
-            ======================================================= -->
-
-            <section
-                id="incompleteState"
-                class="page02g-empty"
-            >
-
-                <h2>
-                    உங்கள் Scorecard இன்னும் முழுமையாகவில்லை.
-                </h2>
-
-                <p>
-                    25 கேள்விகளும் முடிந்த பிறகு
-                    இந்த வாழ்க்கை இடைவெளி பகுப்பாய்வு
-                    முழுமையாக உருவாகும்.
-                </p>
 
             </section>
+
+
+            <!-- ==================================================
+                 FOOTER NOTE
+            =================================================== -->
+
+            <footer class="page02g-footer-note">
+
+                <p>
+                    CTM PATH™ MILLIONAIRES™
+                </p>
+
+                <span>
+                    YOUR LIFE. YOUR PATH. YOUR NEXT LEVEL.
+                </span>
+
+            </footer>
 
 
         </div>
 
+
     </main>
 
+
+    <!-- ==========================================================
+         PAGE 02 DATA LAYER
+
+         Canonical:
+         - dimensions
+         - indicators
+         - ideal/target definitions
+         - scoring structure
+
+         Page 02G does not modify this data.
+    ========================================================== -->
+
+    <script
+        src="../js/page02/page02-data.js"
+    ></script>
+
+
+    <!-- ==========================================================
+         PAGE 02 SESSION LAYER
+
+         Canonical:
+         - answers
+         - saved result
+         - journey state
+         - client identity
+    ========================================================== -->
+
+    <script
+        src="../js/page02/page02-session.js"
+    ></script>
+
+
+    <!-- ==========================================================
+         API LAYER
+
+         Loaded for compatibility with the existing Page 02
+         architecture and saved-discovery state.
+    ========================================================== -->
+
+    <script
+        src="../js/api.js"
+    ></script>
 
 
     <!-- ==========================================================
          GLOBAL COMPONENT LOADER
+
+         Header component only.
     ========================================================== -->
 
-    <script src="../js/component-loader.js"></script>
-
-
-    <script>
-
-        (function () {
-
-            'use strict';
-
-
-            function initializeGlobalComponents() {
-
-                if (
-                    !window.CTM_COMPONENTS ||
-                    typeof window.CTM_COMPONENTS.load !== 'function'
-                ) {
-
-                    console.error(
-                        'CTM PATH™ Page 02G: global component loader unavailable.'
-                    );
-
-                    return;
-
-                }
-
-
-                window.CTM_COMPONENTS
-                    .load()
-                    .then(
-                        function (result) {
-
-                            if (
-                                result &&
-                                result.success
-                            ) {
-
-                                console.info(
-                                    'CTM PATH™ Page 02G: global header ready.'
-                                );
-
-                            }
-
-                        }
-                    )
-                    .catch(
-                        function (error) {
-
-                            console.error(
-                                'CTM PATH™ Page 02G: global component initialization failed.',
-                                error
-                            );
-
-                        }
-                    );
-
-            }
-
-
-            if (
-                document.readyState === 'loading'
-            ) {
-
-                document.addEventListener(
-                    'DOMContentLoaded',
-                    initializeGlobalComponents,
-                    {
-                        once: true
-                    }
-                );
-
-            }
-            else {
-
-                initializeGlobalComponents();
-
-            }
-
-        })();
-
-    </script>
-
+    <script
+        src="../js/component-loader.js"
+    ></script>
 
 
     <!-- ==========================================================
-         GLOBAL JOURNEY FOUNDATION
+         GLOBAL HEADER SCRIPT
     ========================================================== -->
 
-    <script src="../js/global.js"></script>
-
-
-
-    <!-- ==========================================================
-         PAGE 02 DATA
-         REQUIRED:
-         window.Page02Data
-    ========================================================== -->
-
-    <script src="../js/page02/page02-data.js"></script>
-
-
-
-    <!-- ==========================================================
-         PAGE 02 SESSION
-         REQUIRED:
-         window.Page02Session
-    ========================================================== -->
-
-    <script src="../js/page02/page02-session.js"></script>
-
+    <script
+        src="../js/header.js"
+    ></script>
 
 
     <!-- ==========================================================
          PAGE 02G CONTROLLER
+
+         Owns:
+         - result recovery
+         - presentation
+         - dimension rendering
+         - 25-indicator rendering
+         - gap visualization
+         - explicit Page 03 CTA
     ========================================================== -->
 
-    <script>
-
-        (function (window, document) {
-
-            'use strict';
-
-
-            /* ======================================================
-               CONFIGURATION
-            ======================================================= */
-
-            const CONFIG = {
-
-                page:
-                    '02G',
-
-                expectedIndicators:
-                    25,
-
-                maximumScore:
-                    100,
-
-                maximumDimensionScore:
-                    20,
-
-                maximumIndicatorScore:
-                    4,
-
-                nextPage:
-                    'page03.html'
-
-            };
-
-
-            /* ======================================================
-               DOM
-            ======================================================= */
-
-            const DOM = {
-
-                heroScoreNumber:
-                    document.getElementById(
-                        'heroScoreNumber'
-                    ),
-
-                summaryTotalScore:
-                    document.getElementById(
-                        'summaryTotalScore'
-                    ),
-
-                summaryReadiness:
-                    document.getElementById(
-                        'summaryReadiness'
-                    ),
-
-                summaryGap:
-                    document.getElementById(
-                        'summaryGap'
-                    ),
-
-                summaryAnswered:
-                    document.getElementById(
-                        'summaryAnswered'
-                    ),
-
-                journeyProgressNumber:
-                    document.getElementById(
-                        'journeyProgressNumber'
-                    ),
-
-                journeyProgressFill:
-                    document.getElementById(
-                        'journeyProgressFill'
-                    ),
-
-                dimensionOverview:
-                    document.getElementById(
-                        'dimensionOverview'
-                    ),
-
-                dimensionBars:
-                    document.getElementById(
-                        'dimensionBars'
-                    ),
-
-                indicatorMatrix:
-                    document.getElementById(
-                        'indicatorMatrix'
-                    ),
-
-                gapRing:
-                    document.getElementById(
-                        'gapRing'
-                    ),
-
-                gapRingNumber:
-                    document.getElementById(
-                        'gapRingNumber'
-                    ),
-
-                gapMessage:
-                    document.getElementById(
-                        'gapMessage'
-                    ),
-
-                incompleteState:
-                    document.getElementById(
-                        'incompleteState'
-                    ),
-
-                continueButton:
-                    document.getElementById(
-                        'page02gContinueButton'
-                    )
-
-            };
-
-
-            /* ======================================================
-               SAFE NUMBER
-            ======================================================= */
-
-            function safeNumber(value) {
-
-                const number =
-                    Number(value);
-
-                return Number.isFinite(number)
-                    ? number
-                    : 0;
-
-            }
-
-
-            /* ======================================================
-               ESCAPE HTML
-            ======================================================= */
-
-            function escapeHtml(value) {
-
-                if (
-                    value === null ||
-                    value === undefined
-                ) {
-
-                    return '';
-
-                }
-
-
-                return String(value)
-                    .replace(
-                        /&/g,
-                        '&amp;'
-                    )
-                    .replace(
-                        /</g,
-                        '&lt;'
-                    )
-                    .replace(
-                        />/g,
-                        '&gt;'
-                    )
-                    .replace(
-                        /"/g,
-                        '&quot;'
-                    )
-                    .replace(
-                        /'/g,
-                        '&#039;'
-                    );
-
-            }
-
-
-            /* ======================================================
-               GET SESSION
-            ======================================================= */
-
-            function getSession() {
-
-                if (
-                    !window.Page02Session
-                ) {
-
-                    return null;
-
-                }
-
-
-                if (
-                    typeof window.Page02Session.load !==
-                    'function'
-                ) {
-
-                    return null;
-
-                }
-
-
-                try {
-
-                    return (
-                        window.Page02Session.load()
-                    );
-
-                }
-                catch (error) {
-
-                    console.error(
-                        'CTM PATH™ Page 02G: unable to load Page02Session.',
-                        error
-                    );
-
-                    return null;
-
-                }
-
-            }
-
-
-            /* ======================================================
-               GET DIMENSIONS
-            ======================================================= */
-
-            function getDimensions() {
-
-                if (
-                    !window.Page02Data ||
-                    !Array.isArray(
-                        window.Page02Data.DIMENSIONS
-                    )
-                ) {
-
-                    return [];
-
-                }
-
-
-                return (
-                    window.Page02Data.DIMENSIONS
-                );
-
-            }
-
-
-            /* ======================================================
-               GET ANSWERS
-            ======================================================= */
-
-            function getAnswers(session) {
-
-                if (
-                    session &&
-                    session.answers &&
-                    typeof session.answers === 'object'
-                ) {
-
-                    return session.answers;
-
-                }
-
-
-                if (
-                    window.Page02Session &&
-                    typeof window.Page02Session.getAnswers ===
-                    'function'
-                ) {
-
-                    try {
-
-                        return (
-                            window.Page02Session.getAnswers() ||
-                            {}
-                        );
-
-                    }
-                    catch (error) {
-
-                        console.warn(
-                            'CTM PATH™ Page 02G: unable to read answers.',
-                            error
-                        );
-
-                    }
-
-                }
-
-
-                return {};
-
-            }
-
-
-            /* ======================================================
-               CALCULATE DIMENSION RESULT
-            ======================================================= */
-
-            function calculateDimension(
-                dimension,
-                answers
-            ) {
-
-                let score = 0;
-
-                let answered = 0;
-
-
-                const indicators =
-                    Array.isArray(
-                        dimension.indicators
-                    )
-                        ? dimension.indicators
-                        : [];
-
-
-                indicators.forEach(
-                    function (indicator) {
-
-                        const answer =
-                            answers[
-                                indicator.id
-                            ];
-
-
-                        if (
-                            answer
-                        ) {
-
-                            answered += 1;
-
-                            score += safeNumber(
-                                answer.score
-                            );
-
-                        }
-
-                    }
-                );
-
-
-                return {
-
-                    score:
-                        score,
-
-                    maximumScore:
-                        CONFIG.maximumDimensionScore,
-
-                    answered:
-                        answered,
-
-                    total:
-                        indicators.length,
-
-                    percent:
-                        Math.round(
-                            (
-                                score /
-                                CONFIG.maximumDimensionScore
-                            ) *
-                            100
-                        )
-
-                };
-
-            }
-
-
-            /* ======================================================
-               CALCULATE OVERALL
-            ======================================================= */
-
-            function calculateOverall(
-                dimensions,
-                answers,
-                session
-            ) {
-
-                let totalScore = 0;
-
-                let answered = 0;
-
-
-                dimensions.forEach(
-                    function (dimension) {
-
-                        const result =
-                            calculateDimension(
-                                dimension,
-                                answers
-                            );
-
-
-                        totalScore +=
-                            result.score;
-
-                        answered +=
-                            result.answered;
-
-                    }
-                );
-
-
-                if (
-                    session &&
-                    Number.isFinite(
-                        Number(
-                            session.totalScore
-                        )
-                    )
-                ) {
-
-                    totalScore =
-                        safeNumber(
-                            session.totalScore
-                        );
-
-                }
-
-
-                if (
-                    session &&
-                    Number.isFinite(
-                        Number(
-                            session.completedIndicatorCount
-                        )
-                    )
-                ) {
-
-                    answered =
-                        safeNumber(
-                            session.completedIndicatorCount
-                        );
-
-                }
-
-
-                const readiness =
-                    Math.round(
-                        (
-                            totalScore /
-                            CONFIG.maximumScore
-                        ) *
-                        100
-                    );
-
-
-                const gap =
-                    Math.max(
-                        0,
-                        CONFIG.maximumScore -
-                        totalScore
-                    );
-
-
-                return {
-
-                    totalScore:
-                        totalScore,
-
-                    answered:
-                        answered,
-
-                    readiness:
-                        readiness,
-
-                    gap:
-                        gap
-
-                };
-
-            }
-
-
-            /* ======================================================
-               RENDER SUMMARY
-            ======================================================= */
-
-            function renderSummary(
-                overall
-            ) {
-
-                DOM.heroScoreNumber.textContent =
-                    String(
-                        overall.totalScore
-                    );
-
-
-                DOM.summaryTotalScore.textContent =
-                    overall.totalScore +
-                    ' / ' +
-                    CONFIG.maximumScore;
-
-
-                DOM.summaryReadiness.textContent =
-                    overall.readiness +
-                    '%';
-
-
-                DOM.summaryGap.textContent =
-                    overall.gap +
-                    ' / ' +
-                    CONFIG.maximumScore;
-
-
-                DOM.summaryAnswered.textContent =
-                    overall.answered +
-                    ' / ' +
-                    CONFIG.expectedIndicators;
-
-
-                DOM.journeyProgressNumber.textContent =
-                    overall.answered +
-                    ' / ' +
-                    CONFIG.expectedIndicators;
-
-
-                DOM.journeyProgressFill.style.width =
-                    Math.min(
-                        100,
-                        overall.readiness
-                    ) +
-                    '%';
-
-            }
-
-
-            /* ======================================================
-               RENDER DIMENSION OVERVIEW
-            ======================================================= */
-
-            function renderDimensionOverview(
-                dimensions,
-                answers
-            ) {
-
-                DOM.dimensionOverview.innerHTML =
-                    '';
-
-
-                dimensions.forEach(
-                    function (dimension) {
-
-                        const result =
-                            calculateDimension(
-                                dimension,
-                                answers
-                            );
-
-
-                        const gap =
-                            CONFIG.maximumDimensionScore -
-                            result.score;
-
-
-                        const card =
-                            document.createElement(
-                                'article'
-                            );
-
-
-                        card.className =
-                            'page02g-dimension-card';
-
-
-                        card.innerHTML = `
-
-                            <span
-                                class="page02g-dimension-number"
-                            >
-                                ${escapeHtml(
-                                    dimension.number
-                                )}
-                            </span>
-
-                            <h3
-                                class="page02g-dimension-tamil"
-                            >
-                                ${escapeHtml(
-                                    dimension.tamil
-                                )}
-                            </h3>
-
-                            <p
-                                class="page02g-dimension-english"
-                            >
-                                ${escapeHtml(
-                                    dimension.english
-                                )}
-                            </p>
-
-                            <div
-                                class="page02g-dimension-score-row"
-                            >
-
-                                <div
-                                    class="page02g-dimension-score"
-                                >
-                                    ${result.score}
-                                    <span>
-                                        / 20
-                                    </span>
-                                </div>
-
-                                <div
-                                    class="page02g-dimension-gap"
-                                >
-                                    ${gap}
-                                    <span>
-                                        GAP
-                                    </span>
-                                </div>
-
-                            </div>
-
-                            <div
-                                class="page02g-dimension-track"
-                            >
-
-                                <div
-                                    class="page02g-dimension-fill"
-                                    style="
-                                        width:
-                                        ${Math.min(
-                                            100,
-                                            result.percent
-                                        )}%;
-                                    "
-                                ></div>
-
-                            </div>
-
-                        `;
-
-
-                        DOM.dimensionOverview.appendChild(
-                            card
-                        );
-
-                    }
-                );
-
-            }
-
-
-            /* ======================================================
-               RENDER DIMENSION BARS
-            ======================================================= */
-
-            function renderDimensionBars(
-                dimensions,
-                answers
-            ) {
-
-                DOM.dimensionBars.innerHTML =
-                    '';
-
-
-                dimensions.forEach(
-                    function (dimension) {
-
-                        const result =
-                            calculateDimension(
-                                dimension,
-                                answers
-                            );
-
-
-                        const currentWidth =
-                            Math.max(
-                                0,
-                                Math.min(
-                                    100,
-                                    result.percent
-                                )
-                            );
-
-
-                        const row =
-                            document.createElement(
-                                'div'
-                            );
-
-
-                        row.className =
-                            'page02g-bar-row';
-
-
-                        row.innerHTML = `
-
-                            <div
-                                class="page02g-bar-label"
-                            >
-
-                                <span
-                                    class="page02g-bar-label-tamil"
-                                >
-                                    ${escapeHtml(
-                                        dimension.tamil
-                                    )}
-                                </span>
-
-                                <span
-                                    class="page02g-bar-label-english"
-                                >
-                                    ${escapeHtml(
-                                        dimension.english
-                                    )}
-                                </span>
-
-                            </div>
-
-
-                            <div
-                                class="page02g-bar-track"
-                            >
-
-                                <div
-                                    class="page02g-bar-ideal"
-                                ></div>
-
-                                <div
-                                    class="page02g-bar-current"
-                                    style="
-                                        width:
-                                        ${currentWidth}%;
-                                    "
-                                ></div>
-
-                            </div>
-
-
-                            <div
-                                class="page02g-bar-value"
-                            >
-                                ${result.score}/20
-                            </div>
-
-                        `;
-
-
-                        DOM.dimensionBars.appendChild(
-                            row
-                        );
-
-                    }
-                );
-
-            }
-
-
-            /* ======================================================
-               RENDER GAP RING
-            ======================================================= */
-
-            function renderGapRing(
-                overall
-            ) {
-
-                const gapPercent =
-                    Math.max(
-                        0,
-                        Math.min(
-                            100,
-                            overall.gap
-                        )
-                    );
-
-
-                DOM.gapRing.style.setProperty(
-                    '--gap',
-                    gapPercent + '%'
-                );
-
-
-                DOM.gapRingNumber.textContent =
-                    gapPercent +
-                    '%';
-
-
-                if (
-                    gapPercent === 0
-                ) {
-
-                    DOM.gapMessage.textContent =
-                        'உங்கள் இலக்கு வாழ்க்கை benchmark-ஐ நீங்கள் அடைந்துள்ளீர்கள்.';
-
-
-                }
-                else {
-
-                    DOM.gapMessage.textContent =
-                        'உங்கள் தற்போதைய நிலைக்கும் உங்கள் இலக்கு வாழ்க்கைக்கும் இடையில் ' +
-                        gapPercent +
-                        '% இடைவெளி உள்ளது. ' +
-                        'இந்த இடைவெளி அடுத்த கட்ட வளர்ச்சிக்கான உங்கள் திசையை காட்டுகிறது.';
-
-                }
-
-            }
-
-
-            /* ======================================================
-               FIND ANSWER
-            ======================================================= */
-
-            function getIndicatorAnswer(
-                indicator,
-                answers
-            ) {
-
-                return (
-                    answers[
-                        indicator.id
-                    ] ||
-                    null
-                );
-
-            }
-
-
-            /* ======================================================
-               RENDER INDICATOR
-            ======================================================= */
-
-            function renderIndicator(
-                indicator,
-                answers
-            ) {
-
-                const answer =
-                    getIndicatorAnswer(
-                        indicator,
-                        answers
-                    );
-
-
-                const score =
-                    answer
-                        ? safeNumber(
-                            answer.score
-                        )
-                        : 0;
-
-
-                const gap =
-                    Math.max(
-                        0,
-                        CONFIG.maximumIndicatorScore -
-                        score
-                    );
-
-
-                const scoreWidth =
-                    Math.max(
-                        0,
-                        Math.min(
-                            100,
-                            (
-                                score /
-                                CONFIG.maximumIndicatorScore
-                            ) *
-                            100
-                        )
-                    );
-
-
-                const currentLabel =
-                    answer
-                        ? answer.label
-                        : 'பதில் அளிக்கப்படவில்லை';
-
-
-                const ideal =
-                    indicator.ideal ||
-                    '—';
-
-
-                return `
-
-                    <article
-                        class="page02g-indicator"
-                    >
-
-                        <div
-                            class="page02g-indicator-number"
-                        >
-                            ${String(
-                                indicator.number
-                            ).padStart(
-                                2,
-                                '0'
-                            )}
-                        </div>
-
-
-                        <h4
-                            class="page02g-indicator-title"
-                        >
-                            ${escapeHtml(
-                                indicator.tamil
-                            )}
-
-                            <br>
-
-                            <span
-                                style="
-                                    color:
-                                    rgba(
-                                        244,
-                                        241,
-                                        232,
-                                        0.42
-                                    );
-                                    font-size:
-                                    0.48rem;
-                                    letter-spacing:
-                                    0.05em;
-                                "
-                            >
-                                ${escapeHtml(
-                                    indicator.english
-                                )}
-                            </span>
-
-                        </h4>
-
-
-                        <div
-                            class="
-                                page02g-indicator-current
-                            "
-                        >
-
-                            <span
-                                class="
-                                    page02g-small-label
-                                "
-                            >
-                                YOUR CURRENT REALITY
-                            </span>
-
-                            <span
-                                class="
-                                    page02g-current-value
-                                "
-                            >
-                                ${escapeHtml(
-                                    currentLabel
-                                )}
-                            </span>
-
-                        </div>
-
-
-                        <div
-                            class="
-                                page02g-indicator-ideal
-                            "
-                        >
-
-                            IDEAL:
-
-                            <strong>
-                                ${escapeHtml(
-                                    ideal
-                                )}
-                            </strong>
-
-                        </div>
-
-
-                        <div
-                            class="
-                                page02g-indicator-score
-                            "
-                        >
-
-                            <div
-                                class="
-                                    page02g-score-bar
-                                "
-                            >
-
-                                <div
-                                    class="
-                                        page02g-score-bar-fill
-                                    "
-                                    style="
-                                        width:
-                                        ${scoreWidth}%;
-                                    "
-                                ></div>
-
-                            </div>
-
-
-                            <span
-                                class="
-                                    page02g-indicator-score-value
-                                "
-                            >
-                                ${score} / 4
-                            </span>
-
-                        </div>
-
-
-                        <div
-                            class="
-                                page02g-indicator-gap
-                            "
-                        >
-
-                            <span>
-                                GAP REMAINING
-                            </span>
-
-                            <strong>
-                                ${gap}
-                            </strong>
-
-                        </div>
-
-                    </article>
-
-                `;
-
-            }
-
-
-            /* ======================================================
-               RENDER MATRIX
-            ======================================================= */
-
-            function renderIndicatorMatrix(
-                dimensions,
-                answers
-            ) {
-
-                DOM.indicatorMatrix.innerHTML =
-                    '';
-
-
-                dimensions.forEach(
-                    function (dimension) {
-
-                        const column =
-                            document.createElement(
-                                'section'
-                            );
-
-
-                        column.className =
-                            'page02g-matrix-dimension';
-
-
-                        const indicators =
-                            Array.isArray(
-                                dimension.indicators
-                            )
-                                ? dimension.indicators
-                                : [];
-
-
-                        let indicatorsHtml =
-                            '';
-
-
-                        indicators.forEach(
-                            function (indicator) {
-
-                                indicatorsHtml +=
-                                    renderIndicator(
-                                        indicator,
-                                        answers
-                                    );
-
-                            }
-                        );
-
-
-                        column.innerHTML = `
-
-                            <header
-                                class="
-                                    page02g-matrix-header
-                                "
-                            >
-
-                                <div
-                                    class="
-                                        page02g-matrix-number
-                                    "
-                                >
-                                    DIMENSION
-                                    ${escapeHtml(
-                                        dimension.number
-                                    )}
-                                </div>
-
-
-                                <h3
-                                    class="
-                                        page02g-matrix-tamil
-                                    "
-                                >
-                                    ${escapeHtml(
-                                        dimension.tamil
-                                    )}
-                                </h3>
-
-
-                                <p
-                                    class="
-                                        page02g-matrix-english
-                                    "
-                                >
-                                    ${escapeHtml(
-                                        dimension.english
-                                    )}
-                                </p>
-
-                            </header>
-
-
-                            <div>
-                                ${indicatorsHtml}
-                            </div>
-
-                        `;
-
-
-                        DOM.indicatorMatrix.appendChild(
-                            column
-                        );
-
-                    }
-                );
-
-            }
-
-
-            /* ======================================================
-               VERIFY COMPLETION
-            ======================================================= */
-
-            function verifyCompletion(
-                overall
-            ) {
-
-                if (
-                    overall.answered >=
-                    CONFIG.expectedIndicators
-                ) {
-
-                    DOM.incompleteState.style.display =
-                        'none';
-
-                    return true;
-
-                }
-
-
-                DOM.incompleteState.style.display =
-                    'block';
-
-
-                return false;
-
-            }
-
-
-            /* ======================================================
-               INITIALIZE
-            ======================================================= */
-
-            function initialize() {
-
-                console.info(
-                    'CTM PATH™ Page 02G initializing...'
-                );
-
-
-                if (
-                    !window.Page02Data
-                ) {
-
-                    console.error(
-                        'CTM PATH™ Page 02G: Page02Data unavailable.'
-                    );
-
-                    return;
-
-                }
-
-
-                if (
-                    !window.Page02Session
-                ) {
-
-                    console.error(
-                        'CTM PATH™ Page 02G: Page02Session unavailable.'
-                    );
-
-                    return;
-
-                }
-
-
-                const session =
-                    getSession();
-
-
-                const answers =
-                    getAnswers(
-                        session
-                    );
-
-
-                const dimensions =
-                    getDimensions();
-
-
-                if (
-                    !dimensions.length
-                ) {
-
-                    console.error(
-                        'CTM PATH™ Page 02G: Page02Data.DIMENSIONS is empty.'
-                    );
-
-                    return;
-
-                }
-
-
-                const overall =
-                    calculateOverall(
-                        dimensions,
-                        answers,
-                        session
-                    );
-
-
-                renderSummary(
-                    overall
-                );
-
-
-                renderDimensionOverview(
-                    dimensions,
-                    answers
-                );
-
-
-                renderDimensionBars(
-                    dimensions,
-                    answers
-                );
-
-
-                renderGapRing(
-                    overall
-                );
-
-
-                renderIndicatorMatrix(
-                    dimensions,
-                    answers
-                );
-
-
-                verifyCompletion(
-                    overall
-                );
-
-
-                console.info(
-                    'CTM PATH™ Page 02G ready.',
-                    {
-                        answered:
-                            overall.answered,
-
-                        total:
-                            CONFIG.expectedIndicators,
-
-                        score:
-                            overall.totalScore,
-
-                        maximumScore:
-                            CONFIG.maximumScore,
-
-                        gap:
-                            overall.gap,
-
-                        dimensions:
-                            dimensions.length
-
-                    }
-                );
-
-            }
-
-
-            /* ======================================================
-               DOM READY
-            ======================================================= */
-
-            if (
-                document.readyState ===
-                'loading'
-            ) {
-
-                document.addEventListener(
-                    'DOMContentLoaded',
-                    initialize,
-                    {
-                        once:
-                            true
-                    }
-                );
-
-            }
-            else {
-
-                initialize();
-
-            }
-
-
-            /* ======================================================
-               PUBLIC PAGE 02G API
-            ======================================================= */
-
-            window.Page02G = {
-
-                version:
-                    '1.0',
-
-                init:
-                    initialize
-
-            };
-
-
-        })(window, document);
-
-    </script>
+    <script
+        src="../js/page02/page02g.js"
+    ></script>
 
 
 </body>
