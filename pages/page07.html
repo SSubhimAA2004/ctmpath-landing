@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="ta">
 
@@ -49,7 +50,7 @@
 
     <meta
         name="theme-color"
-        content="#07151d"
+        content="#041313"
     >
 
     <meta
@@ -95,6 +96,13 @@
             overflow-x: hidden;
         }
 
+        .page07,
+        .page07 *,
+        .page07 *::before,
+        .page07 *::after {
+            box-sizing: border-box;
+        }
+
         .page07 {
             --p07-bg: #071b1b;
             --p07-bg-deep: #041313;
@@ -112,7 +120,7 @@
             background:
                 radial-gradient(
                     circle at 50% 0%,
-                    rgba(33, 199, 183, 0.105),
+                    rgba(33, 199, 183, 0.12),
                     transparent 34rem
                 ),
                 linear-gradient(
@@ -131,7 +139,7 @@
             z-index: 20;
 
             width: 100%;
-            padding: 32px 48px 24px;
+            padding: 34px 48px 26px;
 
             border-bottom:
                 1px solid rgba(215, 181, 109, 0.13);
@@ -140,7 +148,7 @@
                 linear-gradient(
                     180deg,
                     rgba(7, 27, 27, 0.98) 0%,
-                    rgba(7, 27, 27, 0.90) 68%,
+                    rgba(7, 27, 27, 0.88) 65%,
                     rgba(7, 27, 27, 0.00) 100%
                 );
         }
@@ -397,6 +405,95 @@
 <!-- ============================================================
              MAIN CONTENT
         ============================================================ -->
+
+        <!-- ============================================================
+             INTEGRATED BRAND HEADER
+
+             This replaces the old global header.
+
+             It is deliberately INSIDE Page 07 so the background,
+             typography and visual atmosphere continue seamlessly.
+        ============================================================= -->
+
+        <header
+            class="page07-integrated-header"
+            role="banner"
+        >
+
+            <div class="page07-integrated-header-inner">
+
+
+                <!-- ====================================================
+                     BRAND IDENTITY
+                ===================================================== -->
+
+                <div class="page07-brand">
+
+                    <div class="page07-brand-logo">
+
+                        <img
+                            src="../assets/logo/CTM_Mark.svg"
+                            alt="CTM PATH™ Millionaires™"
+                            loading="eager"
+                        >
+
+                    </div>
+
+
+                    <div class="page07-brand-copy">
+
+                        <div class="page07-brand-name">
+                            CTM PATH™
+                        </div>
+
+                        <div class="page07-brand-millionaires">
+                            MILLIONAIRES™
+                        </div>
+
+                        <div class="page07-brand-guided">
+                            GUIDED JOURNEY™
+                        </div>
+
+                        <div class="page07-brand-signature">
+                            Every Dream Has A Path™
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ====================================================
+                     JOURNEY STATUS
+                ===================================================== -->
+
+                <div
+                    class="page07-journey-status"
+                    aria-label="Current journey progress"
+                >
+
+                    <span class="page07-journey-label">
+                        JOURNEY
+                    </span>
+
+                    <span class="page07-journey-counter">
+                        07 / 07
+                    </span>
+
+                    <span
+                        class="page07-journey-line"
+                        aria-hidden="true"
+                    ></span>
+
+                </div>
+
+
+            </div>
+
+        </header>
+
+
+
 
         <main
             class="page07-main"
