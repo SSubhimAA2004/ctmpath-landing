@@ -8,7 +8,7 @@
  * js/page02/page02c.js
  *
  * VERSION:
- * 4.1 — PROGRESSIVE DIMENSION SCOREBOARD
+ * 4.2 — PROGRESSIVE DIMENSION SCOREBOARD — CLEAN COMPONENT-INDEPENDENT
  *
  * PAGE:
  * PAGE 02C — DIMENSION 02 — INCOME & CASH FLOW™
@@ -35,9 +35,6 @@
  * =============================================================================
  *
  * SHARED RESPONSIBILITIES DELEGATED TO:
- *
- *      component-loader.js
- *          → global header / footer lifecycle
  *
  *      page02-data.js
  *          → indicator definitions / ranges / dimensions
@@ -76,6 +73,7 @@
  *      ✗ render answer options
  *      ✗ call backend
  *      ✗ contain header/footer markup
+ *      ✗ depend on the global component loader
  *
  * =============================================================================
  */
@@ -120,12 +118,6 @@ const CONFIG = {
  */
 
 const DOM_IDS = {
-
-    globalHeader:
-        'global-header',
-
-    globalFooter:
-        'global-footer',
 
     previousButton:
         'previousButton',
@@ -203,108 +195,6 @@ function scrollToTop(){
         behavior:
             'auto'
     });
-}
-
-
-/* =============================================================================
- * GLOBAL COMPONENT MOUNT CONTRACT
- * =============================================================================
- */
-
-function verifyComponentMounts(){
-
-    const headerMount =
-        getElement(
-            DOM_IDS.globalHeader
-        );
-
-    const footerMount =
-        getElement(
-            DOM_IDS.globalFooter
-        );
-
-
-    if(!headerMount){
-
-        console.warn(
-            'CTM PATH™ Page 02C: #global-header mount not found.'
-        );
-    }
-
-
-    if(!footerMount){
-
-        console.warn(
-            'CTM PATH™ Page 02C: #global-footer mount not found.'
-        );
-    }
-
-
-    return (
-        !!headerMount &&
-        !!footerMount
-    );
-}
-
-
-/* =============================================================================
- * GLOBAL COMPONENT LOADER
- *
- * Header/footer loading is intentionally NON-FATAL.
- *
- * The scorecard must remain usable even if the global component service
- * encounters a loading or path error.
- * =============================================================================
- */
-
-async function loadGlobalComponents(){
-
-    verifyComponentMounts();
-
-
-    if(
-        !window.CTM_COMPONENTS ||
-        typeof window.CTM_COMPONENTS.load !==
-            'function'
-    ){
-
-        console.warn(
-            'CTM PATH™ Page 02C: global component loader unavailable.'
-        );
-
-        return false;
-    }
-
-
-    try{
-
-        console.info(
-            'CTM PATH™ Page 02C: loading global components...'
-        );
-
-
-        const result =
-            await window.CTM_COMPONENTS.load();
-
-
-        console.info(
-            'CTM PATH™ Page 02C: global header and footer ready.',
-            result || null
-        );
-
-
-        return true;
-    }
-    catch(error){
-
-        console.error(
-            'CTM PATH™ Page 02C: global component loading failed.',
-            error
-        );
-
-
-        return false;
-    }
 }
 
 
@@ -900,6 +790,7 @@ function createProgressiveScoreboard(){
      *
      * page02c.css intentionally scopes these classes under .page02c.
      */
+
     board.className =
         'page02b-progressive-scoreboard';
 
@@ -1081,6 +972,7 @@ function renderProgressiveScoreboard(){
                  * Only dimensions with actual answers contribute
                  * to the progressive Grand Total.
                  */
+
                 if(
                     isAnswered
                 ){
@@ -1099,6 +991,7 @@ function renderProgressiveScoreboard(){
                 /*
                  * Frozen scoreboard class architecture.
                  */
+
                 column.className =
                     'page02b-progressive-column';
 
@@ -1237,6 +1130,7 @@ function renderProgressiveScoreboard(){
      *
      * Unanswered dimensions contribute zero.
      */
+
     if(
         grandTotal
     ){
@@ -1928,8 +1822,6 @@ function initializeScoreboardLayout(){
  *
  *      DOM READY
  *          ↓
- *      GLOBAL COMPONENTS
- *          ↓
  *      VERIFY SCORECARD DEPENDENCIES
  *          ↓
  *      VERIFY DIMENSION CONTRACT
@@ -1950,7 +1842,7 @@ function initializeScoreboardLayout(){
  *          ↓
  *      READY
  *
- * Global component failure is NON-FATAL.
+ * Page 02C intentionally has no dependency on the global component loader.
  *
  * Scorecard dependency / dimension failures ARE fatal.
  * =============================================================================
@@ -1977,26 +1869,6 @@ async function init(){
 
 
     try{
-
-        /* ---------------------------------------------------------------------
-         * GLOBAL HEADER + FOOTER
-         *
-         * NON-FATAL
-         * ---------------------------------------------------------------------
-         */
-
-        const componentsReady =
-            await loadGlobalComponents();
-
-
-        if(
-            !componentsReady
-        ){
-
-            console.warn(
-                'CTM PATH™ Page 02C continuing without confirmed global components.'
-            );
-        }
 
 
         /* ---------------------------------------------------------------------
@@ -2108,9 +1980,6 @@ async function init(){
                 dimension:
                     CONFIG.dimensionId,
 
-                globalComponents:
-                    componentsReady,
-
                 score:
                     window.Page02Scorecard.getScore(),
 
@@ -2182,7 +2051,6 @@ else{
  *      Page02C.goNext()
  *      Page02C.goPrevious()
  *      Page02C.refreshScoreboard()
- *      Page02C.loadGlobalComponents()
  *
  * =============================================================================
  */
@@ -2190,16 +2058,13 @@ else{
 window.Page02C = {
 
     version:
-        '4.1',
+        '4.2',
 
     dimensionId:
         CONFIG.dimensionId,
 
     init:
         init,
-
-    loadGlobalComponents:
-        loadGlobalComponents,
 
     goPrevious:
         goPrevious,
@@ -2347,12 +2212,6 @@ window.Page02C = {
  *
  * PAGE 02C LOAD ORDER:
  *
- *      component-loader.js
- *             ↓
- *      global.js
- *             ↓
- *      api.js
- *             ↓
  *      page02-data.js
  *             ↓
  *      page02-session.js
@@ -2365,8 +2224,6 @@ window.Page02C = {
  * PAGE INITIALIZATION:
  *
  *      DOM READY
- *           ↓
- *      CTM_COMPONENTS.load()
  *           ↓
  *      Page02Scorecard.init("incomeCashFlow")
  *           ↓
