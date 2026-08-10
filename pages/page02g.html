@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="ta">
 
@@ -73,39 +74,332 @@
     >
 
 
-    <!-- ==========================================================
-         GLOBAL HEADER
-    ========================================================== -->
+    <style>
+        /* ==========================================================
+           PAGE 02G — INTEGRATED BRAND SHELL
+           SAME VISUAL LANGUAGE AS PAGE 06 / PAGE 07
+        ========================================================== */
 
-    <link
-        rel="stylesheet"
-        href="../css/header.css"
-    >
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            background: #041313;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .page02g,
+        .page02g *,
+        .page02g *::before,
+        .page02g *::after {
+            box-sizing: border-box;
+        }
+
+        .page02g-body {
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(33, 199, 183, 0.12),
+                    transparent 34rem
+                ),
+                linear-gradient(
+                    180deg,
+                    #071b1b 0%,
+                    #041313 100%
+                );
+        }
+
+        .page02g-integrated-header {
+            position: relative;
+            z-index: 20;
+            width: 100%;
+            padding: 34px 48px 26px;
+            border-bottom: 1px solid rgba(215, 181, 109, 0.14);
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(7, 27, 27, 0.98) 0%,
+                    rgba(7, 27, 27, 0.88) 65%,
+                    rgba(7, 27, 27, 0.00) 100%
+                );
+        }
+
+        .page02g-integrated-header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: min(1240px, calc(100% - 20px));
+            margin: 0 auto;
+        }
+
+        .page02g-brand-identity {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-align: left;
+        }
+
+        .page02g-brand-logo,
+        .page02g-brand-logo img {
+            width: 72px;
+            height: 72px;
+        }
+
+        .page02g-brand-logo {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page02g-brand-logo img {
+            display: block;
+            object-fit: contain;
+        }
+
+        .page02g-brand-copy {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .page02g-brand-name {
+            margin: 0;
+            color: #f5f2e9;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(1.7rem, 3vw, 2.65rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: 0.07em;
+        }
+
+        .page02g-brand-millionaires {
+            margin-top: 8px;
+            color: #d7b56d;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(0.72rem, 1.2vw, 0.94rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: 0.22em;
+        }
+
+        .page02g-brand-guided {
+            margin-top: 10px;
+            color: #21c7b7;
+            font-size: 0.76rem;
+            font-weight: 850;
+            line-height: 1;
+            letter-spacing: 0.24em;
+        }
+
+        .page02g-brand-signature {
+            margin-top: 9px;
+            color: #b8b4a9;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .page02g-brand-progress {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            min-width: 150px;
+            text-align: right;
+        }
+
+        .page02g-brand-progress-label {
+            margin: 0 0 7px;
+            color: #a8b0aa;
+            font-size: 0.63rem;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: 0.18em;
+        }
+
+        .page02g-brand-progress-number {
+            margin: 0;
+            color: #d7b56d;
+            font-size: 0.86rem;
+            font-weight: 850;
+            line-height: 1;
+            letter-spacing: 0.16em;
+        }
+
+        .page02g-brand-progress-line {
+            width: 110px;
+            height: 2px;
+            margin-top: 10px;
+            background: linear-gradient(
+                90deg,
+                #21c7b7,
+                #d7b56d
+            );
+        }
+
+        .page02g {
+            position: relative;
+            min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(33, 199, 183, 0.075),
+                    transparent 34rem
+                ),
+                linear-gradient(
+                    180deg,
+                    #071b1b 0%,
+                    #041313 100%
+                );
+        }
+
+        .page02g-shell {
+            position: relative;
+            background: transparent;
+        }
+
+        @media (max-width: 680px) {
+
+            .page02g-integrated-header {
+                padding: 24px 18px 20px;
+            }
+
+            .page02g-integrated-header-inner {
+                width: 100%;
+                align-items: flex-start;
+            }
+
+            .page02g-brand-identity {
+                gap: 12px;
+            }
+
+            .page02g-brand-logo,
+            .page02g-brand-logo img {
+                width: 50px;
+                height: 50px;
+            }
+
+            .page02g-brand-name {
+                font-size: 1.25rem;
+            }
+
+            .page02g-brand-millionaires {
+                font-size: 0.56rem;
+                letter-spacing: 0.16em;
+            }
+
+            .page02g-brand-guided {
+                font-size: 0.54rem;
+                letter-spacing: 0.17em;
+            }
+
+            .page02g-brand-signature {
+                font-size: 0.55rem;
+            }
+
+            .page02g-brand-progress {
+                min-width: auto;
+            }
+
+            .page02g-brand-progress-label {
+                font-size: 0.50rem;
+            }
+
+            .page02g-brand-progress-number {
+                font-size: 0.68rem;
+            }
+
+            .page02g-brand-progress-line {
+                width: 70px;
+            }
+        }
+    </style>
 
 </head>
 
 
 <body class="page02g-body">
-
-
-    <!-- ==========================================================
-         GLOBAL HEADER
-         
-         The existing component loader may populate this mount.
-         Page 02G itself does not depend on the header for scoring,
-         result calculation or navigation.
-    ========================================================== -->
-
-    <div
-        id="global-header"
-        data-component="header"
-    ></div>
-
-
-    <!-- ==========================================================
+<!-- ==========================================================
          PAGE 02G
          LIFE GAP ANALYSIS™
     ========================================================== -->
+
+    <!-- ============================================================
+         CTM PATH™ MILLIONAIRES™
+         INTEGRATED BRAND HEADER
+         Matched to Page 06 / Page 07
+    ============================================================= -->
+
+    <header
+        class="page02g-integrated-header"
+        role="banner"
+    >
+
+        <div class="page02g-integrated-header-inner">
+
+            <div class="page02g-brand-identity">
+
+                <div class="page02g-brand-logo">
+                    <img
+                        src="../assets/logo/CTM_Mark.svg"
+                        alt="CTM PATH™ Millionaires™"
+                        loading="eager"
+                    >
+                </div>
+
+                <div class="page02g-brand-copy">
+
+                    <div class="page02g-brand-name">
+                        CTM PATH™
+                    </div>
+
+                    <div class="page02g-brand-millionaires">
+                        MILLIONAIRES™
+                    </div>
+
+                    <div class="page02g-brand-guided">
+                        GUIDED JOURNEY™
+                    </div>
+
+                    <div class="page02g-brand-signature">
+                        Every Dream Has A Path™
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div
+                class="page02g-brand-progress"
+                aria-label="Current journey progress"
+            >
+
+                <span class="page02g-brand-progress-label">
+                    JOURNEY
+                </span>
+
+                <span class="page02g-brand-progress-number">
+                    02 / 07
+                </span>
+
+                <span
+                    class="page02g-brand-progress-line"
+                    aria-hidden="true"
+                ></span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
 
     <main
         id="page02g"
@@ -123,76 +417,7 @@
             <!-- ==================================================
                  JOURNEY HEADER
             =================================================== -->
-
-            <header
-                class="page02g-header"
-                aria-labelledby="page02gTitle"
-            >
-
-
-                <!-- ----------------------------------------------
-                     BRAND / PAGE IDENTITY
-                ----------------------------------------------- -->
-
-                <div class="page02g-header-identity">
-
-
-                    <div
-                        class="page02g-brand-mark"
-                        aria-hidden="true"
-                    >
-                        <span class="page02g-brand-mark-inner">
-                            ✦
-                        </span>
-                    </div>
-
-
-                    <div class="page02g-brand-copy">
-
-                        <p class="page02g-brand-name">
-                            CTM PATH™ MILLIONAIRES™
-                        </p>
-
-                        <p class="page02g-brand-subtitle">
-                            MIDDLE CLASS → MILLIONAIRE LIFESTYLE SCORECARD™
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <!-- ----------------------------------------------
-                     JOURNEY STATUS
-                ----------------------------------------------- -->
-
-                <div
-                    class="page02g-journey-status"
-                    aria-label="Journey completion"
-                >
-
-                    <p class="page02g-status-label">
-                        YOUR JOURNEY
-                    </p>
-
-                    <strong
-                        id="page02gJourneyProgress"
-                        class="page02g-status-value"
-                    >
-                        25 / 25
-                    </strong>
-
-                    <span class="page02g-status-complete">
-                        COMPLETE
-                    </span>
-
-                </div>
-
-
-            </header>
-
-
-            <!-- ==================================================
+<!-- ==================================================
                  JOURNEY PROGRESS
             =================================================== -->
 
@@ -1256,22 +1481,10 @@
 
          Header component only.
     ========================================================== -->
-
-    <script
-        src="../js/component-loader.js"
-    ></script>
-
-
-    <!-- ==========================================================
+<!-- ==========================================================
          GLOBAL HEADER SCRIPT
     ========================================================== -->
-
-    <script
-        src="../js/header.js"
-    ></script>
-
-
-    <!-- ==========================================================
+<!-- ==========================================================
          PAGE 02G CONTROLLER
 
          Owns:
