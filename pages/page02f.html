@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 
 <html lang="ta">
@@ -14,11 +15,11 @@
 
     <meta
         name="description"
-        content="CTM PATH™ Millionaires™ — Millionaire Lifestyle Scorecard™ — Dimension 05 & Final Result"
+        content="CTM PATH™ Millionaires™ — Millionaire Lifestyle Scorecard™ — Dimension 05 → Life Gap Analysis™"
     >
 
     <title>
-        CTM PATH™ MILLIONAIRES™ — Dimension 05
+        CTM PATH™ MILLIONAIRES™ — Dimension 05 → Life Gap Analysis™
     </title>
 
 
@@ -474,15 +475,14 @@
 
             </button>
 
-
-            <!-- =============================================================
-                 FINAL RESULT CTA
+             <!-- =============================================================
+                 PAGE 02G — LIFE GAP ANALYSIS™
 
                  IMPORTANT:
 
-                 This button does NOT immediately navigate to Page 03.
+                 This is the completion gateway from Page 02F.
 
-                 The updated Page 02F controller will:
+                 The Page 02F controller will:
 
                      1. Validate Indicators 21–25
                      2. Complete Dimension 05
@@ -490,11 +490,10 @@
                      4. Calculate the total score
                      5. Build the discovery payload
                      6. Save through CTM_API.saveDiscovery()
-                     7. Store the result
-                     8. Reveal #page02Results
-                     9. Scroll to the result section
+                     7. Store the completed result
+                     8. Navigate directly to page02g.html
 
-                 The result section then contains the actual Page 03 CTA.
+                 Page 02G owns the Life Gap Analysis™ presentation.
             ============================================================== -->
 
             <button
@@ -510,14 +509,14 @@
 
                 <span class="dimension-button-primary-text">
 
-                    என் முடிவைக் காண்க →
+                    என் வாழ்க்கை இடைவெளியைக் காண்க →
 
                 </span>
 
 
                 <span class="dimension-button-secondary-text">
 
-                    VIEW MY RESULT
+                    VIEW MY LIFE GAP ANALYSIS
 
                 </span>
 
@@ -562,9 +561,9 @@
              
              IMPORTANT ARCHITECTURE
 
-             This section belongs to PAGE 02F.
+             This legacy inline result section is retained for markup compatibility.
 
-             It is NOT page02g.
+             The active result presentation belongs to PAGE 02G.
 
              It remains hidden until:
 
@@ -573,8 +572,8 @@
                  • Final score is calculated
                  • Discovery payload is saved
              
-             Then page02f.js reveals this section and scrolls the user
-             smoothly to it.
+             The active Page 02F controller now saves the result and
+             navigates directly to page02g.html.
         ================================================================== -->
 
         <section
@@ -1263,7 +1262,7 @@
 
                     <span class="dimension-button-secondary-text">
 
-                        CONTINUE TO KALA CHAKRA™
+                        CONTINUE TO LIFE GAP ANALYSIS™
 
                     </span>
 
